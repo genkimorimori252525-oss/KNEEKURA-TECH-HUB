@@ -26,6 +26,27 @@ Evidence must point to a first-class `source_snapshot` record. A snapshot belong
 
 The service rejects Evidence when its snapshot belongs to a different Source.
 
+## Exact Evidence locator invariant
+
+Evidence locators must contain enough information to re-find the exact observed material instead of merely naming a Source.
+
+Examples enforced in v1:
+
+- `source_lines`: path, line start/end, and content hash
+- `symbol`: symbol name
+- `stable_url`: URL
+- `document_section`: section or URL
+- `issue_comment`: comment ID or URL
+- `experiment_artifact`: artifact ID, content hash, or URL
+
+A reversed line range is rejected.
+
+## Claim provenance invariant
+
+At Claim creation time, the record's `created_by` actor must exactly match the actor performing the curation operation. This prevents an AI/tool from writing a Claim that falsely records a human as its creator.
+
+The actual operation is also recorded through a curation event using the current policy version.
+
 ## Claim lifecycle
 
 ```text
