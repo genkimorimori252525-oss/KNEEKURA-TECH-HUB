@@ -26,8 +26,6 @@ class PostgresRepository:
 
     @classmethod
     def connect(cls, dsn: str) -> "PostgresRepository":
-        # Reads should not leave an implicit transaction open. Every write is
-        # already wrapped by put() in an explicit transaction.
         return cls(psycopg.connect(dsn, autocommit=True))
 
     def close(self) -> None:
@@ -70,21 +68,27 @@ class PostgresRepository:
             table = self._TABLE_BY_TYPE.get(item_type)
             if table is None:
                 continue
-            ids = [
-                row[0]
-                for row in self.connection.execute(f"SELECT id FROM {table} ORDER BY id").fetchall()
-            ]
-            for record_id in ids:
+            for (record_id,) in self.connection.execute(
+                f"SELECT id FROM {table} ORDER BY id"
+            ).fetchall():
                 record = self.get(record_id)
                 if record is not None:
                     records.append(record)
         return records
 
     def _executemany(self, query: str, rows: list[tuple[Any, ...]]) -> None:
-        if not rows:
-            return
-        with self.connection.cursor() as cursor:
-            cursor.executemany(query, rows)
+        if rows:
+            with self.connection.cursor() as cursor:
+                cursor.executemany(query, rows)
+
+    @staticmethod
+    def _iso(value: Any) -> str | None:
+        return value.isoformat() if value is not None else None
+
+    def _column(self, query: str, record_id: str) -> list[Any]:
+        return [row[0] for row in self.connection.execute(query, (record_id,)).fetchall()]
+
+    # ---- writes ---------------------------------------------------------
 
     def _put_entity(self, record: Record, *, replace: bool) -> None:
         if replace:
@@ -191,10 +195,8 @@ class PostgresRepository:
             self.connection.execute(
                 """
                 INSERT INTO source_snapshot(
-                    source_id, revision, tree_hash, content_hash, swhid,
-                    captured_at, metadata, id
-                )
-                VALUES (%s,%s,%s,%s,%s,%s,%s,%s)
+                    source_id, revision, tree_hash, content_hash, swhid, captured_at, metadata, id
+                ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)
                 """,
                 params,
             )
@@ -228,8 +230,12 @@ class PostgresRepository:
             )
 
     def _put_claim(self, record: Record, *, replace: bool) -> None:
+        relation = record.get("relation") or {}
         params = (
-            record["entity_id"],
+            record.get("entity_id"),
+            relation.get("source_entity_id"),
+            relation.get("relation_type"),
+            relation.get("target_entity_id"),
             record["claim_type"],
             record["statement"],
             record["maturity"],
@@ -250,11 +256,12 @@ class PostgresRepository:
             self.connection.execute(
                 """
                 UPDATE claim
-                SET entity_id=%s, claim_type=%s, statement=%s, maturity=%s,
-                    scope=%s, applicability=%s, confidence=%s, reasoning_basis=%s,
-                    alternative_interpretations=%s, first_observed=%s, last_verified=%s,
-                    verification_due_at=%s, superseded_by=%s, created_by=%s,
-                    policy_version=%s
+                SET entity_id=%s,
+                    relation_source_entity_id=%s, relation_type=%s, relation_target_entity_id=%s,
+                    claim_type=%s, statement=%s, maturity=%s, scope=%s, applicability=%s,
+                    confidence=%s, reasoning_basis=%s, alternative_interpretations=%s,
+                    first_observed=%s, last_verified=%s, verification_due_at=%s,
+                    superseded_by=%s, created_by=%s, policy_version=%s
                 WHERE id=%s
                 """,
                 params,
@@ -264,12 +271,11 @@ class PostgresRepository:
             self.connection.execute(
                 """
                 INSERT INTO claim(
-                    entity_id, claim_type, statement, maturity, scope, applicability,
-                    confidence, reasoning_basis, alternative_interpretations,
-                    first_observed, last_verified, verification_due_at, superseded_by,
-                    created_by, policy_version, id
-                )
-                VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+                    entity_id, relation_source_entity_id, relation_type, relation_target_entity_id,
+                    claim_type, statement, maturity, scope, applicability, confidence,
+                    reasoning_basis, alternative_interpretations, first_observed, last_verified,
+                    verification_due_at, superseded_by, created_by, policy_version, id
+                ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
                 """,
                 params,
             )
@@ -309,14 +315,8 @@ class PostgresRepository:
                 params,
             )
         self._executemany(
-            """
-            INSERT INTO staged_observation_evidence(observation_id, evidence_id)
-            VALUES (%s,%s)
-            """,
-            [
-                (record["id"], evidence_id)
-                for evidence_id in record.get("evidence_candidate_ids", [])
-            ],
+            "INSERT INTO staged_observation_evidence(observation_id, evidence_id) VALUES (%s,%s)",
+            [(record["id"], evidence_id) for evidence_id in record.get("evidence_candidate_ids", [])],
         )
 
     def _put_event(self, record: Record, *, replace: bool) -> None:
@@ -325,10 +325,8 @@ class PostgresRepository:
         self.connection.execute(
             """
             INSERT INTO curation_event(
-                operation, actor, subject_ids, reason, policy_version,
-                occurred_at, reversible, id
-            )
-            VALUES (%s,%s,%s,%s,%s,%s,%s,%s)
+                operation, actor, subject_ids, reason, policy_version, occurred_at, reversible, id
+            ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)
             """,
             (
                 record["operation"],
@@ -342,6 +340,8 @@ class PostgresRepository:
             ),
         )
 
+    # ---- reads ----------------------------------------------------------
+
     def _get_entity(self, record_id: str) -> Record | None:
         row = self.connection.execute(
             """
@@ -352,12 +352,6 @@ class PostgresRepository:
         ).fetchone()
         if row is None:
             return None
-        aliases = self._column(
-            "SELECT alias FROM entity_alias WHERE entity_id=%s ORDER BY alias", record_id
-        )
-        kinds = self._column(
-            "SELECT kind FROM entity_kind WHERE entity_id=%s ORDER BY kind", record_id
-        )
         relations = self.connection.execute(
             """
             SELECT relation_type, target_entity_id
@@ -370,8 +364,12 @@ class PostgresRepository:
             "record_type": "knowledge_entity",
             "id": record_id,
             "canonical_name": row[0],
-            "aliases": aliases,
-            "kinds": kinds,
+            "aliases": self._column(
+                "SELECT alias FROM entity_alias WHERE entity_id=%s ORDER BY alias", record_id
+            ),
+            "kinds": self._column(
+                "SELECT kind FROM entity_kind WHERE entity_id=%s ORDER BY kind", record_id
+            ),
             "abstraction_level": row[1],
             "identity_state": row[2],
             "relations": [{"type": item[0], "target": item[1]} for item in relations],
@@ -441,40 +439,49 @@ class PostgresRepository:
     def _get_claim(self, record_id: str) -> Record | None:
         row = self.connection.execute(
             """
-            SELECT entity_id, claim_type, statement, maturity, scope, applicability,
-                   confidence, reasoning_basis, alternative_interpretations,
-                   first_observed, last_verified, verification_due_at, superseded_by,
-                   created_by, policy_version
+            SELECT entity_id, relation_source_entity_id, relation_type, relation_target_entity_id,
+                   claim_type, statement, maturity, scope, applicability, confidence,
+                   reasoning_basis, alternative_interpretations, first_observed, last_verified,
+                   verification_due_at, superseded_by, created_by, policy_version
             FROM claim WHERE id=%s
             """,
             (record_id,),
         ).fetchone()
         if row is None:
             return None
+
         record: Record = {
             "record_type": "claim",
             "id": record_id,
-            "entity_id": row[0],
-            "claim_type": row[1],
-            "statement": row[2],
-            "maturity": row[3],
+            "claim_type": row[4],
+            "statement": row[5],
+            "maturity": row[6],
             "evidence_ids": self._column(
                 "SELECT evidence_id FROM claim_evidence WHERE claim_id=%s ORDER BY evidence_id",
                 record_id,
             ),
-            "scope": row[4],
-            "applicability": row[5],
-            "reasoning_basis": row[7],
-            "alternative_interpretations": row[8],
-            "created_by": row[13],
-            "policy_version": row[14],
+            "scope": row[7],
+            "applicability": row[8],
+            "reasoning_basis": row[10],
+            "alternative_interpretations": row[11],
+            "created_by": row[16],
+            "policy_version": row[17],
         }
+        if row[0] is not None:
+            record["entity_id"] = row[0]
+        else:
+            record["relation"] = {
+                "source_entity_id": row[1],
+                "relation_type": row[2],
+                "target_entity_id": row[3],
+            }
+
         optional = {
-            "confidence": row[6],
-            "first_observed": row[9].isoformat() if row[9] else None,
-            "last_verified": row[10].isoformat() if row[10] else None,
-            "verification_due_at": row[11].isoformat() if row[11] else None,
-            "superseded_by": row[12],
+            "confidence": row[9],
+            "first_observed": self._iso(row[12]),
+            "last_verified": self._iso(row[13]),
+            "verification_due_at": self._iso(row[14]),
+            "superseded_by": row[15],
         }
         record.update({key: value for key, value in optional.items() if value is not None})
         return record
@@ -527,6 +534,3 @@ class PostgresRepository:
             "occurred_at": row[5].isoformat(),
             "reversible": row[6],
         }
-
-    def _column(self, query: str, record_id: str) -> list[Any]:
-        return [row[0] for row in self.connection.execute(query, (record_id,)).fetchall()]
