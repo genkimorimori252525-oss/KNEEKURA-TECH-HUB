@@ -47,6 +47,11 @@ def _git_blob_sha(content: bytes) -> str:
     return sha1(header + content).hexdigest()  # noqa: S324 - Git object identity, not security
 
 
+def _storage_key(execution_id: str) -> str:
+    """Derive an opaque filesystem-safe key from the logical execution ID."""
+    return "ax-" + sha256(execution_id.encode("utf-8")).hexdigest()
+
+
 def _source(repository: RecordRepository, source_id: str) -> Record:
     record = repository.get(source_id)
     if record is None or record.get("record_type") != "source":
@@ -180,8 +185,8 @@ def execute_authorized_acquisition(
     """Retrieve exactly one currently-effective authorization into a private local store.
 
     Successful retrieval is recorded separately from authorization and does not mutate the
-    Source or create a SourceSnapshot. Any file failure or post-fetch authorization invalidation
-    discards temporary content and records a FAILED execution instead.
+    Source or create a SourceSnapshot. Any file failure, provenance race, or post-fetch
+    authorization invalidation discards temporary content and records a FAILED execution.
     """
 
     if actor.get("actor_type") not in {"tool", "system"}:
@@ -277,7 +282,7 @@ def execute_authorized_acquisition(
                 )
                 repository.put(record)
                 return deepcopy(record)
-            except Exception as exc:  # convert untrusted fetcher failure into governed result
+            except Exception:  # convert untrusted fetcher failure into governed result
                 file_results.append(
                     {
                         "path": path,
@@ -327,9 +332,35 @@ def execute_authorized_acquisition(
             )
             repository.put(record)
             return deepcopy(record)
+        if postflight["authorization"] != authorization:
+            shutil.rmtree(temp_dir, ignore_errors=True)
+            record = _failure_record(
+                execution_id=execution_id,
+                authorization=authorization,
+                file_results=file_results,
+                error_code="AUTHORIZATION_CHANGED_DURING_EXECUTION",
+                actor=actor,
+                policy_version=policy_version,
+                authorization_effective_after=False,
+            )
+            repository.put(record)
+            return deepcopy(record)
+        if postflight["source"] != source:
+            shutil.rmtree(temp_dir, ignore_errors=True)
+            record = _failure_record(
+                execution_id=execution_id,
+                authorization=authorization,
+                file_results=file_results,
+                error_code="SOURCE_CHANGED_DURING_EXECUTION",
+                actor=actor,
+                policy_version=policy_version,
+                authorization_effective_after=False,
+            )
+            repository.put(record)
+            return deepcopy(record)
 
         manifest_sha = _manifest_sha256(authorization, file_results)
-        storage_key = execution_id.replace(":", "_")
+        storage_key = _storage_key(execution_id)
         final_dir = storage_root / storage_key
         if final_dir.exists():
             raise AcquisitionExecutionError(f"storage destination already exists: {storage_key}")
@@ -417,11 +448,14 @@ def fetch_github_file(
         raise FileFetchError("NOT_A_FILE", "authorized path did not resolve to a file")
     if payload.get("encoding") != "base64" or not isinstance(payload.get("content"), str):
         raise FileFetchError("CONTENT_NOT_INLINE", "file content was not available inline")
+    if payload.get("path") not in (None, path):
+        raise FileFetchError("PATH_MISMATCH", "GitHub response path differs from authorized path")
     provider_sha = payload.get("sha")
     if not isinstance(provider_sha, str) or len(provider_sha) != 40:
         raise FileFetchError("INVALID_BLOB_SHA", "GitHub response lacks a full blob SHA")
     try:
-        content = base64.b64decode(payload["content"], validate=False)
+        compact_base64 = "".join(payload["content"].split())
+        content = base64.b64decode(compact_base64, validate=True)
     except (ValueError, TypeError) as exc:
         raise FileFetchError("INVALID_BASE64", "GitHub file content was not valid base64") from exc
     return {"content": content, "git_blob_sha": provider_sha}
