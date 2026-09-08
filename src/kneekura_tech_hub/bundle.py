@@ -54,6 +54,26 @@ def _dependencies(record: Record) -> set[str]:
     return dependencies
 
 
+def _creation_actor(record: Record, reviewer_actor: Record) -> Record:
+    """Select the actor that actually created a record.
+
+    Canonical identity/source acquisition is performed by the explicit bundle
+    reviewer. Candidate claims retain their own creator identity so AI-created
+    candidates are not rewritten as human-authored provenance.
+    """
+
+    if record.get("record_type") == "claim":
+        creator = record.get("created_by")
+        if not isinstance(creator, dict):
+            raise BundleValidationError("claim created_by must be an actor object")
+        if creator.get("actor_type") == "human" and creator != reviewer_actor:
+            raise BundleValidationError(
+                "human-created claim actor must match the bundle reviewer"
+            )
+        return creator
+    return reviewer_actor
+
+
 def preflight_bundle(
     bundle: Bundle,
     *,
@@ -143,23 +163,39 @@ def ingest_bundle(
     *,
     actor: Record,
 ) -> list[str]:
-    """Preflight and ingest a curated bundle through the governed service layer."""
+    """Preflight and ingest a curated bundle through the governed service layer.
+
+    ``actor`` is the human reviewer/acquisition actor for canonical identities and
+    source records. Candidate claims retain their declared creator identity.
+    """
+
+    if actor.get("actor_type") != "human":
+        raise BundleValidationError("prototype bundle reviewer must be a human actor")
 
     ordered = preflight_bundle(bundle, repository=engine.repository)
     stored: list[str] = []
 
     for record in ordered:
         record_type = record["record_type"]
+        creation_actor = _creation_actor(record, actor)
         if record_type == "source":
-            engine.register_source(record, actor=actor)
+            engine.register_source(record, actor=creation_actor)
         elif record_type == "source_snapshot":
-            engine.register_source_snapshot(record, actor=actor)
+            engine.register_source_snapshot(record, actor=creation_actor)
         elif record_type == "evidence":
-            engine.register_evidence(record, actor=actor)
+            engine.register_evidence(record, actor=creation_actor)
         elif record_type == "knowledge_entity":
-            engine.create_entity(record, actor=actor, reason=f"bundle {bundle['bundle_id']}")
+            engine.create_entity(
+                record,
+                actor=creation_actor,
+                reason=f"bundle {bundle['bundle_id']}",
+            )
         elif record_type == "claim":
-            engine.create_claim(record, actor=actor, reason=f"bundle {bundle['bundle_id']}")
+            engine.create_claim(
+                record,
+                actor=creation_actor,
+                reason=f"bundle {bundle['bundle_id']}",
+            )
         elif record_type == "staged_observation":
             engine.stage_observation(record)
         else:
