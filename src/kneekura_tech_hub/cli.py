@@ -14,6 +14,7 @@ from .explanation import ExplanationError, explain_claim
 from .postgres_repository import PostgresRepository
 from .projection import ProjectionError, project_relations
 from .queries import QueryError, problems_solved_by, requirements_for, solutions_for_problem
+from .review import ReviewError, review_claim, review_claims
 from .service import CurationEngine, CurationError
 from .validator import HubValidationError, validate_record
 
@@ -179,6 +180,24 @@ def main() -> int:
     explain_parser.add_argument("claim_id")
     _add_database_argument(explain_parser)
 
+    review_parser = subparsers.add_parser(
+        "review-claim",
+        help="show a non-scalar evidence/review profile for one Claim",
+    )
+    review_parser.add_argument("claim_id")
+    _add_database_argument(review_parser)
+
+    review_all_parser = subparsers.add_parser(
+        "review-claims",
+        help="show derived evidence/review profiles for Claims",
+    )
+    review_all_parser.add_argument(
+        "--needs-review",
+        action="store_true",
+        help="return only Claims matching explicit review conditions",
+    )
+    _add_database_argument(review_all_parser)
+
     transition_parser = subparsers.add_parser(
         "transition-claim", help="move a claim through the governed maturity lifecycle"
     )
@@ -281,9 +300,13 @@ def main() -> int:
                 result = requirements_for(repo, args.entity_id, view=args.view)
             elif args.command == "explain-claim":
                 result = explain_claim(repo, args.claim_id)
+            elif args.command == "review-claim":
+                result = review_claim(repo, args.claim_id)
+            elif args.command == "review-claims":
+                result = review_claims(repo, needs_review_only=args.needs_review)
             else:
                 result = None
-        except (ProjectionError, QueryError, ExplanationError) as exc:
+        except (ProjectionError, QueryError, ExplanationError, ReviewError) as exc:
             print(f"REJECTED QUERY: {exc}")
             return 1
         if result is not None:
