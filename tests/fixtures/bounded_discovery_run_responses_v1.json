@@ -1,0 +1,65 @@
+{
+  "pages": [
+    {
+      "query": "incremental analysis",
+      "page": 1,
+      "payload": {
+        "total_count": 3,
+        "incomplete_results": false,
+        "items": [
+          {
+            "id": 1,
+            "full_name": "example/alpha",
+            "html_url": "https://github.com/example/alpha",
+            "private": false,
+            "visibility": "public",
+            "stargazers_count": 4
+          },
+          {
+            "id": 2,
+            "full_name": "example/shared",
+            "html_url": "https://github.com/example/shared",
+            "private": false,
+            "visibility": "public",
+            "stargazers_count": 5
+          }
+        ]
+      }
+    },
+    {
+      "query": "incremental analysis",
+      "page": 2,
+      "payload": {
+        "total_count": 3,
+        "incomplete_results": false,
+        "items": []
+      }
+    },
+    {
+      "query": "incremental parsing",
+      "page": 1,
+      "payload": {
+        "total_count": 2,
+        "incomplete_results": false,
+        "items": [
+          {
+            "id": 3,
+            "full_name": "example/shared",
+            "html_url": "https://github.com/example/shared",
+            "private": false,
+            "visibility": "public",
+            "stargazers_count": 6
+          },
+          {
+            "id": 4,
+            "full_name": "example/beta",
+            "html_url": "https://github.com/example/beta",
+            "private": false,
+            "visibility": "public",
+            "stargazers_count": 2
+          }
+        ]
+      }
+    }
+  ]
+}
