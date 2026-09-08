@@ -66,7 +66,7 @@ def _ingest(engine: CurationEngine, record: dict[str, Any], actor: dict[str, Any
     elif record_type == "claim":
         engine.create_claim(record, actor=actor, reason="CLI ingestion")
     elif record_type == "staged_observation":
-        engine.stage_observation(record)
+        engine.stage_observation(record, actor=actor)
     else:
         raise CurationError(f"record_type cannot be ingested directly: {record_type!r}")
 
