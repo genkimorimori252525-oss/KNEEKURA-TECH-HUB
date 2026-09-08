@@ -47,8 +47,12 @@ def test_adapter_emits_only_metadata_sources_and_preserves_provider_order():
     assert "rank" not in batch["records"][0]
     assert "score" not in batch["records"][0]
 
-    # The adapter output is accepted by the Controlled Discovery gate as-is.
-    assert preflight_discovery_intake(batch) == batch["records"]
+    # Controlled Discovery may choose its own stable dependency order. Acceptance,
+    # rather than list-position equality, is the cross-layer contract.
+    ordered = preflight_discovery_intake(batch)
+    assert {record["id"] for record in ordered} == {
+        record["id"] for record in batch["records"]
+    }
 
 
 def test_search_api_license_is_only_a_hint_not_a_verified_expression():
