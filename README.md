@@ -24,6 +24,8 @@ Source → SourceSnapshot → Evidence → Claim → Knowledge Entity
                                           ↓
                                   Relation Projection
                                           ↓
+                         Problem-oriented Query Layer
+                                          ↓
                                   Application & Research
 ```
 
@@ -36,6 +38,8 @@ Relationships between Knowledge Entities are also evidence-backed Claims. A Clai
 `created_by` remains authorship provenance. An AI-created Candidate Claim can later be human-reviewed and promoted without rewriting its creator identity; the human transition is recorded separately in the curation-event trail.
 
 Relation graph views are rebuilt from Claims. They are never stored as a second canonical graph. Projection preserves the asserted endpoint IDs and also resolves current canonical identities through human-approved entity-merge redirects.
+
+Problem-oriented queries are deliberately conservative. They read only explicit evidence-backed relation claims such as `solves` and `requires`; they do not infer solutions from popularity, text similarity, `related_to`, or an AI guess made during query execution.
 
 ## Current implementation
 
@@ -94,6 +98,20 @@ Relation graph views are rebuilt from Claims. They are never stored as a second 
 - real PostgreSQL + real OSS pilot verification across Candidate → Supported → Validated
 - read-only `kneekura-hub relations` CLI
 
+### Problem Query v1
+
+- first-class Problem Knowledge Entities using `kinds: ["problem"]`
+- explicit semantic contract: `solution --solves→ problem`
+- `solves` relation creation fails closed when the target is not a Problem entity
+- read-time semantic validation repeats the same invariant to catch corrupted or legacy data
+- `solutions_for_problem`, `problems_solved_by`, and `requirements_for` read APIs
+- `validated`, `research`, `challenged`, and `history` maturity views reused from Relation Projection
+- no query-time invention from `related_to`, text similarity, tags, or repository popularity
+- additive real-Salsa problem overlay: `pilots/incremental-computation-problems-v1.json`
+- Candidate results remain research-only until the normal human `VALIDATED` transition
+- read-only `solutions`, `solved-problems`, and `requirements` CLI commands
+- real PostgreSQL + real OSS pilot verification
+
 Mass crawling and automated knowledge promotion are intentionally not enabled yet.
 
 ## Quick start
@@ -132,10 +150,11 @@ Atomically ingest the base pilot with a human reviewer identity while preserving
 kneekura-hub ingest-bundle pilots/incremental-computation-v1.json --actor-id prototype-reviewer
 ```
 
-Then add the Relation Claim overlay without rewriting the base pilot:
+Then add the Relation Claim and Problem Query overlays without rewriting the base pilot:
 
 ```bash
 kneekura-hub ingest-bundle pilots/incremental-computation-relations-v1.json --actor-id prototype-reviewer
+kneekura-hub ingest-bundle pilots/incremental-computation-problems-v1.json --actor-id prototype-reviewer
 ```
 
 Query projected relations without writing a graph copy:
@@ -157,6 +176,30 @@ kneekura-hub relations \
 kneekura-hub relations \
   --view history \
   --relation-type narrower_than
+```
+
+Query explicit problem/solution knowledge:
+
+```bash
+# trusted solutions only
+kneekura-hub solutions \
+  ke:problem:repeated-recomputation-after-input-change \
+  --view validated
+
+# include research candidates
+kneekura-hub solutions \
+  ke:problem:repeated-recomputation-after-input-change \
+  --view research
+
+# Problems one entity explicitly claims to solve
+kneekura-hub solved-problems \
+  ke:query-based-incremental-computation \
+  --view research
+
+# explicit requirements / prerequisites
+kneekura-hub requirements \
+  ke:query-based-incremental-computation \
+  --view research
 ```
 
 Store and retrieve records:
@@ -182,6 +225,7 @@ kneekura-hub merge-entities ke:survivor ke:duplicate --reason 'same concept' --a
 - `docs/architecture/CURATION-ENGINE-v1.md`
 - `docs/architecture/RELATION-PROVENANCE-v1.md`
 - `docs/architecture/RELATION-PROJECTION-v1.md`
+- `docs/architecture/PROBLEM-QUERY-v1.md`
 - `docs/pilots/INCREMENTAL-COMPUTATION-v1.md`
 - `governance/CONSTITUTION.md`
 - `governance/policy-v1.json`
@@ -194,6 +238,7 @@ kneekura-hub merge-entities ke:survivor ke:duplicate --reason 'same concept' --a
 - Phase 1: **usable curation core implemented**
 - Phase 2: **first real OSS curated pilot implemented**
 - Relation Provenance v1: **implemented and merged**
-- Relation Projection v1: **implementation and real-pilot verification in progress**
-- Next pressure: **problem-oriented evidence-aware queries built on the projection layer**
+- Relation Projection v1: **implemented and merged**
+- Problem Query v1: **implemented; real-pilot verification passing**
+- Next pressure: **Evidence Explanation — Claim → Evidence → SourceSnapshot → Source provenance walk**
 - Mass discovery: **not enabled yet**
