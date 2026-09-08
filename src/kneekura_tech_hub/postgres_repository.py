@@ -296,6 +296,10 @@ class PostgresRepository:
                 """,
                 params,
             )
+            self.connection.execute(
+                "DELETE FROM staged_observation_evidence WHERE observation_id=%s",
+                (record["id"],),
+            )
         else:
             self.connection.execute(
                 """
@@ -304,6 +308,16 @@ class PostgresRepository:
                 """,
                 params,
             )
+        self._executemany(
+            """
+            INSERT INTO staged_observation_evidence(observation_id, evidence_id)
+            VALUES (%s,%s)
+            """,
+            [
+                (record["id"], evidence_id)
+                for evidence_id in record.get("evidence_candidate_ids", [])
+            ],
+        )
 
     def _put_event(self, record: Record, *, replace: bool) -> None:
         if replace:
@@ -479,6 +493,13 @@ class PostgresRepository:
             "record_type": "staged_observation",
             "id": record_id,
             "source_id": row[0],
+            "evidence_candidate_ids": self._column(
+                """
+                SELECT evidence_id FROM staged_observation_evidence
+                WHERE observation_id=%s ORDER BY evidence_id
+                """,
+                record_id,
+            ),
             "summary": row[1],
             "candidate_names": row[2],
             "status": row[3],
