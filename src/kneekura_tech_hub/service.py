@@ -24,6 +24,18 @@ def _event_id() -> str:
     return f"ce:{uuid4()}"
 
 
+def _claim_subject_key(claim: Record) -> tuple[str, ...]:
+    if "entity_id" in claim:
+        return ("entity", claim["entity_id"])
+    relation = claim["relation"]
+    return (
+        "relation",
+        relation["source_entity_id"],
+        relation["relation_type"],
+        relation["target_entity_id"],
+    )
+
+
 class CurationEngine:
     """Policy-aware orchestration layer for curated Hub records."""
 
@@ -112,8 +124,11 @@ class CurationEngine:
         self._require_actor_match(claim.get("created_by"), actor, "claim created_by")
         if claim.get("maturity") != "CANDIDATE":
             raise CurationError("new claims must start at CANDIDATE")
-        self._require_existing(claim["entity_id"], "knowledge_entity")
-        self._require_evidence_exists(claim.get("evidence_ids", []))
+        self._require_claim_subject_exists(claim)
+        evidence_ids = claim.get("evidence_ids", [])
+        if "relation" in claim and not evidence_ids:
+            raise CurationError("relation claims require at least one evidence_id")
+        self._require_evidence_exists(evidence_ids)
         validate_record(claim)
         self.repository.put(claim)
         self._append_event("CLAIM_CREATE", actor, [claim["id"]], reason=reason)
@@ -138,8 +153,8 @@ class CurationEngine:
             if not superseded_by:
                 raise CurationError("SUPERSEDED requires superseded_by")
             successor = self._require_existing(superseded_by, "claim")
-            if successor["entity_id"] != claim["entity_id"]:
-                raise CurationError("superseding claim must describe the same knowledge entity")
+            if _claim_subject_key(successor) != _claim_subject_key(claim):
+                raise CurationError("superseding claim must describe the same claim subject")
             claim["superseded_by"] = superseded_by
         claim["maturity"] = target_maturity
         if target_maturity == "VALIDATED":
@@ -209,6 +224,21 @@ class CurationEngine:
         for relation in entity.get("relations", []):
             target = relation["target"]
             self._require_existing(target, "knowledge_entity")
+
+    def _require_claim_subject_exists(self, claim: Record) -> None:
+        if "entity_id" in claim:
+            self._require_existing(claim["entity_id"], "knowledge_entity")
+            return
+
+        relation = claim.get("relation")
+        if not isinstance(relation, dict):
+            raise CurationError("claim requires exactly one entity or relation subject")
+        source_id = relation["source_entity_id"]
+        target_id = relation["target_entity_id"]
+        if source_id == target_id:
+            raise CurationError("relation claim endpoints must be different entities")
+        self._require_existing(source_id, "knowledge_entity")
+        self._require_existing(target_id, "knowledge_entity")
 
     def _require_evidence_exists(self, evidence_ids: list[str]) -> None:
         for evidence_id in evidence_ids:
