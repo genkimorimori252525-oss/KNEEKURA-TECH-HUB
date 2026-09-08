@@ -28,6 +28,17 @@ def load_review_decision_schema(schema_path: Path | None = None) -> dict[str, An
     return json.loads(schema_path.read_text(encoding="utf-8"))
 
 
+def load_source_selection_decision_schema(schema_path: Path | None = None) -> dict[str, Any]:
+    if schema_path is None:
+        schema_path = (
+            Path(__file__).resolve().parents[2]
+            / "schemas"
+            / "v1"
+            / "source-selection-decision.schema.json"
+        )
+    return json.loads(schema_path.read_text(encoding="utf-8"))
+
+
 def load_policy(policy_path: Path | None = None) -> dict[str, Any]:
     if policy_path is None:
         policy_path = Path(__file__).resolve().parents[2] / "governance" / "policy-v1.json"
@@ -123,6 +134,13 @@ def _policy_errors(record: dict[str, Any], policy: dict[str, Any]) -> list[str]:
         if record.get("supersedes_decision_id") == record.get("id"):
             errors.append("review decision cannot supersede itself")
 
+    if record_type == "source_selection_decision":
+        actor_type = (record.get("created_by") or {}).get("actor_type")
+        if actor_type != "human":
+            errors.append("source selection decisions require a human creator")
+        if record.get("supersedes_decision_id") == record.get("id"):
+            errors.append("source selection decision cannot supersede itself")
+
     if record_type == "curation_event":
         actor_type = (record.get("actor") or {}).get("actor_type")
         operation = record.get("operation")
@@ -138,8 +156,11 @@ def validate_record(
     schema_path: Path | None = None,
     policy_path: Path | None = None,
 ) -> None:
-    if record.get("record_type") == "review_decision":
+    record_type = record.get("record_type")
+    if record_type == "review_decision":
         schema = load_review_decision_schema(schema_path)
+    elif record_type == "source_selection_decision":
+        schema = load_source_selection_decision_schema(schema_path)
     else:
         schema = load_schema(schema_path)
     validator = Draft202012Validator(schema)
