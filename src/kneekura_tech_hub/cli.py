@@ -9,6 +9,7 @@ from typing import Any
 import psycopg
 
 from .bundle import BundleValidationError, ingest_bundle, preflight_bundle
+from .comparison import ComparisonError, compare_claim, comparison_groups
 from .database import apply_foundation_migration
 from .explanation import ExplanationError, explain_claim
 from .postgres_repository import PostgresRepository
@@ -198,6 +199,29 @@ def main() -> int:
     )
     _add_database_argument(review_all_parser)
 
+    compare_parser = subparsers.add_parser(
+        "compare-claim",
+        help="compare all Claims with the exact same stored subject",
+    )
+    compare_parser.add_argument("claim_id")
+    _add_database_argument(compare_parser)
+
+    compare_all_parser = subparsers.add_parser(
+        "compare-claims",
+        help="show exact-subject Claim comparison groups",
+    )
+    compare_all_parser.add_argument(
+        "--multiple-only",
+        action="store_true",
+        help="return only subjects with more than one Claim",
+    )
+    compare_all_parser.add_argument(
+        "--needs-review",
+        action="store_true",
+        help="return only groups matching explicit review conditions",
+    )
+    _add_database_argument(compare_all_parser)
+
     transition_parser = subparsers.add_parser(
         "transition-claim", help="move a claim through the governed maturity lifecycle"
     )
@@ -304,9 +328,23 @@ def main() -> int:
                 result = review_claim(repo, args.claim_id)
             elif args.command == "review-claims":
                 result = review_claims(repo, needs_review_only=args.needs_review)
+            elif args.command == "compare-claim":
+                result = compare_claim(repo, args.claim_id)
+            elif args.command == "compare-claims":
+                result = comparison_groups(
+                    repo,
+                    multiple_only=args.multiple_only,
+                    needs_review_only=args.needs_review,
+                )
             else:
                 result = None
-        except (ProjectionError, QueryError, ExplanationError, ReviewError) as exc:
+        except (
+            ProjectionError,
+            QueryError,
+            ExplanationError,
+            ReviewError,
+            ComparisonError,
+        ) as exc:
             print(f"REJECTED QUERY: {exc}")
             return 1
         if result is not None:
