@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import json
 import os
+from pathlib import Path
 
 import psycopg
 import pytest
@@ -16,9 +18,10 @@ pytestmark = pytest.mark.skipif(not DSN, reason="KTHUB_TEST_DATABASE_URL is not 
 
 HUMAN = {"actor_type": "human", "actor_id": "reviewer"}
 AI = {"actor_type": "ai", "actor_id": "extractor", "version": "test"}
+PILOT_REVIEWER = {"actor_type": "human", "actor_id": "prototype-reviewer"}
 
 
-def _bundle(*, claim_creator: dict) -> dict:
+def _bundle(*, claim_creator: dict, entity_state: str = "CANONICAL") -> dict:
     return {
         "bundle_version": "1.0",
         "bundle_id": "bundle:atomic",
@@ -46,7 +49,7 @@ def _bundle(*, claim_creator: dict) -> dict:
                 "aliases": [],
                 "kinds": ["technique"],
                 "abstraction_level": "L1",
-                "identity_state": "CANONICAL",
+                "identity_state": entity_state,
                 "relations": [],
             },
             {
@@ -102,9 +105,13 @@ def test_outer_transaction_rolls_back_partial_bundle_on_governance_failure(
 ):
     engine = CurationEngine(repository)
 
-    with pytest.raises(CurationError, match="acting identity"):
+    with pytest.raises(CurationError, match="cannot start as MERGED"):
         with repository.connection.transaction():
-            ingest_bundle(engine, _bundle(claim_creator=AI), actor=HUMAN)
+            ingest_bundle(
+                engine,
+                _bundle(claim_creator=AI, entity_state="MERGED"),
+                actor=HUMAN,
+            )
 
     assert repository.get("src:atomic") is None
     assert repository.get("ss:atomic") is None
@@ -113,11 +120,40 @@ def test_outer_transaction_rolls_back_partial_bundle_on_governance_failure(
     assert repository.get("cl:atomic") is None
 
 
-def test_outer_transaction_commits_valid_bundle(repository: PostgresRepository):
+def test_outer_transaction_commits_ai_candidate_without_rewriting_creator(
+    repository: PostgresRepository,
+):
     engine = CurationEngine(repository)
 
     with repository.connection.transaction():
-        stored = ingest_bundle(engine, _bundle(claim_creator=HUMAN), actor=HUMAN)
+        stored = ingest_bundle(engine, _bundle(claim_creator=AI), actor=HUMAN)
 
     assert len(stored) == 5
-    assert repository.get("cl:atomic") is not None
+    claim = repository.get("cl:atomic")
+    assert claim is not None
+    assert claim["created_by"] == AI
+    assert claim["maturity"] == "CANDIDATE"
+
+
+def test_real_incremental_computation_pilot_round_trips_through_postgres(
+    repository: PostgresRepository,
+):
+    pilot = json.loads(
+        Path("pilots/incremental-computation-v1.json").read_text(encoding="utf-8")
+    )
+    engine = CurationEngine(repository)
+
+    with repository.connection.transaction():
+        stored = ingest_bundle(engine, pilot, actor=PILOT_REVIEWER)
+
+    assert len(stored) == 18
+    assert len(repository.list("source")) == 3
+    assert len(repository.list("source_snapshot")) == 3
+    assert len(repository.list("evidence")) == 5
+    assert len(repository.list("knowledge_entity")) == 3
+
+    claims = repository.list("claim")
+    assert len(claims) == 4
+    assert {claim["maturity"] for claim in claims} == {"CANDIDATE"}
+    assert {claim["created_by"]["actor_type"] for claim in claims} == {"ai"}
+    assert repository.get("cl:rust-analyzer:salsa-hir-database:33a84d20") is not None
