@@ -11,6 +11,7 @@ import psycopg
 from .bundle import BundleValidationError, ingest_bundle, preflight_bundle
 from .database import apply_foundation_migration
 from .postgres_repository import PostgresRepository
+from .projection import ProjectionError, project_relations
 from .service import CurationEngine, CurationError
 from .validator import HubValidationError, validate_record
 
@@ -133,6 +134,24 @@ def main() -> int:
     )
     _add_database_argument(list_parser)
 
+    relations_parser = subparsers.add_parser(
+        "relations",
+        help="project evidence-backed Relation Claims into a disposable read view",
+    )
+    relations_parser.add_argument(
+        "--view",
+        choices=["validated", "research", "challenged", "history"],
+        default="validated",
+    )
+    relations_parser.add_argument("--entity-id")
+    relations_parser.add_argument("--relation-type")
+    relations_parser.add_argument(
+        "--direction",
+        choices=["any", "out", "in"],
+        default="any",
+    )
+    _add_database_argument(relations_parser)
+
     transition_parser = subparsers.add_parser(
         "transition-claim",
         help="move a claim through the governed maturity lifecycle",
@@ -200,8 +219,6 @@ def main() -> int:
         if args.command == "ingest-bundle":
             try:
                 bundle = _load_json(args.bundle)
-                # One outer transaction makes the bundle all-or-nothing. The
-                # repository's per-record transactions become nested savepoints.
                 with repo.connection.transaction():
                     stored = ingest_bundle(engine, bundle, actor=_actor(args))
             except (BundleValidationError, HubValidationError, CurationError, ValueError) as exc:
@@ -221,6 +238,21 @@ def main() -> int:
         if args.command == "list":
             records = engine.list(args.record_type)
             print(json.dumps(records, ensure_ascii=False, indent=2))
+            return 0
+
+        if args.command == "relations":
+            try:
+                edges = project_relations(
+                    repo,
+                    view=args.view,
+                    entity_id=args.entity_id,
+                    relation_type=args.relation_type,
+                    direction=args.direction,
+                )
+            except ProjectionError as exc:
+                print(f"REJECTED QUERY: {exc}")
+                return 1
+            print(json.dumps(edges, ensure_ascii=False, indent=2))
             return 0
 
         if args.command == "transition-claim":
