@@ -32,6 +32,8 @@ Source → SourceSnapshot → Evidence → Claim → Knowledge Entity
                                           ↓
                                   Claim Comparison
                                           ↓
+                              Human Review Decision
+                                          ↓
                                   Application & Research
 ```
 
@@ -52,6 +54,8 @@ Evidence Explanation reconstructs the stored `Claim → Evidence → SourceSnaps
 Evidence Review turns that provenance into a non-scalar review profile. It exposes distinct Source/Snapshot counts, Evidence roles and locator types, maturity, confidence, and verification freshness separately rather than compressing them into one universal quality score.
 
 Claim Comparison groups Claims that have the exact same stored subject and presents their Claims and Evidence Review profiles side by side. Different statements are reported as different, not automatically labeled contradictions; the Hub does not choose a winner.
+
+Human Review Decision records a human judgment about two Claims as a separate append-only governance record. It never rewrites either Claim, never merges Evidence, and never converts a Decision into an automatic lifecycle transition.
 
 ## Current implementation
 
@@ -162,6 +166,22 @@ Claim Comparison groups Claims that have the exact same stored subject and prese
 - exact historical grouping deliberately does not cross entity-merge redirects in v1
 - real PostgreSQL Salsa acceptance keeps two competing `solves` Candidate Claims side by side
 - read-only `compare-claim` and `compare-claims` CLI commands
+
+### Human Review Decision v1
+
+- first-class `review_decision` governance records with IDs beginning `rd:`
+- Decision vocabulary: `CONTRADICTS`, `COMPATIBLE`, `QUALIFIES`, `DUPLICATE`, `SUPERSEDES`, `UNRESOLVED`
+- human-only creation gate; AI/tool/system actors cannot write canonical Decisions
+- source and target Claims must be distinct and share the same exact stored subject
+- Decision direction is preserved for directional judgments such as `QUALIFIES` and `SUPERSEDES`
+- Decision creation never changes Claim maturity, `superseded_by`, Evidence, or authorship
+- corrections are append-only through `supersedes_decision_id`; old Decisions remain queryable
+- one direct successor per Decision prevents ambiguous branching active judgments
+- normalized PostgreSQL persistence via `0004_human_review_decision.sql`
+- separate `schemas/v1/review-decision.schema.json` governance extension
+- active/history read views plus Claim Comparison + Decision context
+- real Salsa acceptance proves `UNRESOLVED → COMPATIBLE` Decision correction while both Claims remain unchanged
+- `decide-claims`, `review-decisions`, and `decision-context` CLI commands
 
 Mass crawling and automated knowledge promotion are intentionally not enabled yet.
 
@@ -279,6 +299,21 @@ kneekura-hub compare-claims --multiple-only
 kneekura-hub compare-claims --needs-review
 ```
 
+Record a human judgment without mutating either Claim:
+
+```bash
+kneekura-hub decide-claims \
+  cl:source \
+  cl:target \
+  UNRESOLVED \
+  --reason 'statement difference alone is not enough' \
+  --actor-id reviewer
+
+kneekura-hub review-decisions --claim-id cl:source
+kneekura-hub review-decisions --active
+kneekura-hub decision-context cl:source
+```
+
 Store and retrieve records:
 
 ```bash
@@ -286,6 +321,7 @@ kneekura-hub ingest path/to/source.json --actor-id reviewer
 kneekura-hub ingest path/to/snapshot.json --actor-id reviewer
 kneekura-hub get src:example
 kneekura-hub list --type claim
+kneekura-hub list --type review_decision
 ```
 
 Govern a claim or merge canonical identities:
@@ -306,10 +342,12 @@ kneekura-hub merge-entities ke:survivor ke:duplicate --reason 'same concept' --a
 - `docs/architecture/EVIDENCE-EXPLANATION-v1.md`
 - `docs/architecture/EVIDENCE-REVIEW-v1.md`
 - `docs/architecture/CLAIM-COMPARISON-v1.md`
+- `docs/architecture/HUMAN-REVIEW-DECISION-v1.md`
 - `docs/pilots/INCREMENTAL-COMPUTATION-v1.md`
 - `governance/CONSTITUTION.md`
 - `governance/policy-v1.json`
 - `schemas/v1/hub.schema.json`
+- `schemas/v1/review-decision.schema.json`
 
 ## Status
 
@@ -322,6 +360,7 @@ kneekura-hub merge-entities ke:survivor ke:duplicate --reason 'same concept' --a
 - Problem Query v1: **implemented and merged**
 - Evidence Explanation v1: **implemented and merged**
 - Evidence Review v1: **implemented and merged**
-- Claim Comparison v1: **implemented; verification in progress**
-- Next pressure: **explicit human contradiction annotations or resolved-identity comparison views**
+- Claim Comparison v1: **implemented and merged**
+- Human Review Decision v1: **implemented; verification in progress**
+- Next pressure: **controlled Discovery ingestion or explicit resolved-identity comparison view**
 - Mass discovery: **not enabled yet**
