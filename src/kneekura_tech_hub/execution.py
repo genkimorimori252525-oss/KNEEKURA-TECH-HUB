@@ -42,9 +42,21 @@ def _now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
-def _git_blob_sha(content: bytes) -> str:
+def git_blob_sha(content: bytes) -> str:
+    """Return the canonical Git blob identity for exact file bytes."""
     header = f"blob {len(content)}\0".encode("ascii")
     return sha1(header + content).hexdigest()  # noqa: S324 - Git object identity, not security
+
+
+def record_fingerprint_sha256(record: Record) -> str:
+    """Fingerprint a full Hub record using deterministic canonical JSON."""
+    encoded = json.dumps(
+        record,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    return sha256(encoded).hexdigest()
 
 
 def _storage_key(execution_id: str) -> str:
@@ -126,6 +138,8 @@ def _failure_record(
     actor: Record,
     policy_version: str,
     authorization_effective_after: bool,
+    source_fingerprint_sha256: str,
+    authorization_fingerprint_sha256: str,
 ) -> Record:
     record: Record = {
         "record_type": "source_acquisition_execution",
@@ -143,12 +157,15 @@ def _failure_record(
         "policy_version": policy_version,
         "executed_at": _now(),
         "authorization_effective_after": authorization_effective_after,
+        "source_fingerprint_sha256": source_fingerprint_sha256,
+        "authorization_fingerprint_sha256": authorization_fingerprint_sha256,
     }
     validate_record(record)
     return record
 
 
-def _manifest_sha256(authorization: Record, file_results: list[Record]) -> str:
+def execution_manifest_sha256(authorization: Record, file_results: list[Record]) -> str:
+    """Return the deterministic integrity handle for one selected-files execution."""
     material = {
         "authorization_id": authorization["id"],
         "source_id": authorization["source_id"],
@@ -202,6 +219,8 @@ def execute_authorized_acquisition(
         )
     authorization = status["authorization"]
     source = status["source"]
+    source_fingerprint = record_fingerprint_sha256(source)
+    authorization_fingerprint = record_fingerprint_sha256(authorization)
 
     if _already_succeeded(repository, authorization_id):
         raise AcquisitionExecutionError("authorization already has a successful execution")
@@ -227,7 +246,7 @@ def execute_authorized_acquisition(
                 if total_bytes > MAX_TOTAL_BYTES:
                     raise FileFetchError("TOTAL_TOO_LARGE", "execution exceeds total byte limit")
 
-                computed_blob_sha = _git_blob_sha(content)
+                computed_blob_sha = git_blob_sha(content)
                 if not isinstance(provider_blob_sha, str) or provider_blob_sha != computed_blob_sha:
                     raise FileFetchError(
                         "GIT_BLOB_MISMATCH",
@@ -279,6 +298,8 @@ def execute_authorized_acquisition(
                     actor=actor,
                     policy_version=policy_version,
                     authorization_effective_after=effective_after,
+                    source_fingerprint_sha256=source_fingerprint,
+                    authorization_fingerprint_sha256=authorization_fingerprint,
                 )
                 repository.put(record)
                 return deepcopy(record)
@@ -314,6 +335,8 @@ def execute_authorized_acquisition(
                     actor=actor,
                     policy_version=policy_version,
                     authorization_effective_after=effective_after,
+                    source_fingerprint_sha256=source_fingerprint,
+                    authorization_fingerprint_sha256=authorization_fingerprint,
                 )
                 repository.put(record)
                 return deepcopy(record)
@@ -329,6 +352,8 @@ def execute_authorized_acquisition(
                 actor=actor,
                 policy_version=policy_version,
                 authorization_effective_after=False,
+                source_fingerprint_sha256=source_fingerprint,
+                authorization_fingerprint_sha256=authorization_fingerprint,
             )
             repository.put(record)
             return deepcopy(record)
@@ -341,7 +366,9 @@ def execute_authorized_acquisition(
                 error_code="AUTHORIZATION_CHANGED_DURING_EXECUTION",
                 actor=actor,
                 policy_version=policy_version,
-                authorization_effective_after=False,
+                authorization_effective_after=postflight["effective"],
+                source_fingerprint_sha256=source_fingerprint,
+                authorization_fingerprint_sha256=authorization_fingerprint,
             )
             repository.put(record)
             return deepcopy(record)
@@ -354,12 +381,14 @@ def execute_authorized_acquisition(
                 error_code="SOURCE_CHANGED_DURING_EXECUTION",
                 actor=actor,
                 policy_version=policy_version,
-                authorization_effective_after=False,
+                authorization_effective_after=postflight["effective"],
+                source_fingerprint_sha256=source_fingerprint,
+                authorization_fingerprint_sha256=authorization_fingerprint,
             )
             repository.put(record)
             return deepcopy(record)
 
-        manifest_sha = _manifest_sha256(authorization, file_results)
+        manifest_sha = execution_manifest_sha256(authorization, file_results)
         storage_key = _storage_key(execution_id)
         final_dir = storage_root / storage_key
         if final_dir.exists():
@@ -382,6 +411,8 @@ def execute_authorized_acquisition(
             "policy_version": policy_version,
             "executed_at": _now(),
             "authorization_effective_after": True,
+            "source_fingerprint_sha256": source_fingerprint,
+            "authorization_fingerprint_sha256": authorization_fingerprint,
         }
         validate_record(record)
         try:
