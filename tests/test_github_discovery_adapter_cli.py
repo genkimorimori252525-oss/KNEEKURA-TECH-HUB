@@ -24,6 +24,10 @@ def test_offline_cli_writes_controlled_discovery_batch(monkeypatch, tmp_path, ca
             str(FIXTURE),
             "--output",
             str(output),
+            "--sort",
+            "stars",
+            "--order",
+            "desc",
             "--actor-type",
             "tool",
             "--actor-id",
@@ -42,6 +46,8 @@ def test_offline_cli_writes_controlled_discovery_batch(monkeypatch, tmp_path, ca
     assert all(item["record_type"] == "source" for item in batch["records"])
     assert all(item["acquisition"]["level"] == "metadata-only" for item in batch["records"])
     assert all(item["license"]["state"] == "REVIEW_REQUIRED" for item in batch["records"])
+    assert batch["scope"]["filters"]["api_sort"] == "stars"
+    assert batch["scope"]["filters"]["api_order"] == "desc"
     assert "WROTE" in capsys.readouterr().out
 
 
