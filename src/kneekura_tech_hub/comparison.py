@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from collections import defaultdict
 from copy import deepcopy
-from typing import Any
 
 from .repository import Record, RecordRepository
 from .review import review_claim
@@ -77,6 +76,13 @@ def compare_subject_claims(
     claim_types = {claim["claim_type"] for claim in matching}
     maturities = {claim["maturity"] for claim in matching}
 
+    has_candidate = any(claim["maturity"] == "CANDIDATE" for claim in matching)
+    has_challenged = any(claim["maturity"] == "CHALLENGED" for claim in matching)
+    has_refuting = any("HAS_REFUTING_EVIDENCE" in profile["flags"] for profile in profiles)
+    verification_due = any(
+        profile["verification"]["freshness"] == "DUE" for profile in profiles
+    )
+
     flags: list[str] = []
     if len(matching) > 1:
         flags.append("MULTIPLE_CLAIMS")
@@ -88,22 +94,25 @@ def compare_subject_claims(
         flags.append("EPISTEMIC_TYPES_DIFFER")
     if len(maturities) > 1:
         flags.append("MATURITIES_DIFFER")
-    if any(claim["maturity"] == "CHALLENGED" for claim in matching):
+    if has_candidate:
+        flags.append("HAS_CANDIDATE_CLAIM")
+    if has_challenged:
         flags.append("HAS_CHALLENGED_CLAIM")
-    if any("HAS_REFUTING_EVIDENCE" in profile["flags"] for profile in profiles):
+    if has_refuting:
         flags.append("HAS_REFUTING_EVIDENCE")
+    if verification_due:
+        flags.append("VERIFICATION_DUE")
     if any(claim["maturity"] == "SUPERSEDED" for claim in matching):
         flags.append("HAS_SUPERSEDED_CLAIM")
     if any(claim["maturity"] == "REJECTED" for claim in matching):
         flags.append("HAS_REJECTED_CLAIM")
 
-    needs_review = any(
-        flag in flags
-        for flag in (
-            "MULTIPLE_ACTIVE_CLAIMS",
-            "HAS_CHALLENGED_CLAIM",
-            "HAS_REFUTING_EVIDENCE",
-        )
+    needs_review = (
+        len(active) > 1
+        or has_candidate
+        or has_challenged
+        or has_refuting
+        or verification_due
     )
 
     return {
