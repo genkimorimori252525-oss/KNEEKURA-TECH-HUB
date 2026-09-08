@@ -26,7 +26,9 @@ Application & Research
 
 `SourceSnapshot` is a first-class immutable evidence anchor. AI and scanners first produce `staged_observation` records; they cannot directly merge canonical entities or promote claims to `VALIDATED`.
 
-A staged observation must be backed by Evidence candidates that all resolve to exactly one SourceSnapshot. This keeps discovery observations pinned to the exact source revision that produced them.
+A staged observation must be backed by Evidence candidates that all resolve to exactly one SourceSnapshot. Those Observation ↔ Evidence links are persisted in PostgreSQL so the source-revision provenance survives reload.
+
+Direct non-empty `KnowledgeEntity.relations` writes are temporarily rejected until relation provenance has a first-class evidence/maturity model.
 
 ## Current implementation
 
@@ -36,7 +38,7 @@ A staged observation must be backed by Evidence candidates that all resolve to e
 - machine-readable governance policy v1.0
 - JSON Schema for core record types
 - first-class immutable `source_snapshot` records
-- PostgreSQL normalized persistence and migration
+- PostgreSQL normalized persistence and ordered migrations
 
 ### Phase 1 — Curation Engine
 
@@ -57,6 +59,8 @@ A staged observation must be backed by Evidence candidates that all resolve to e
 - first real OSS pilot using pinned Tree-sitter, Salsa, and rust-analyzer revisions
 - 3 real Sources / 3 SourceSnapshots / 5 Evidence records / 3 Knowledge Entities / 4 AI-created Candidate Claims
 - staged observations forced through Evidence to one immutable SourceSnapshot
+- staged observation Evidence links persisted by migration `0002_staged_observation_evidence.sql`
+- unproven canonical relation edges quarantined until relation provenance is implemented
 
 Mass crawling and automated knowledge promotion are intentionally not enabled yet.
 
