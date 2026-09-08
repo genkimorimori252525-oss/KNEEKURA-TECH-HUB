@@ -71,7 +71,7 @@ def _policy_errors(record: dict[str, Any], policy: dict[str, Any]) -> list[str]:
 
     if record_type == "knowledge_entity" and record.get("relations"):
         errors.append(
-            "direct canonical relation writes are disabled until relation provenance is implemented"
+            "direct canonical relation writes are disabled; use evidence-backed relation claims"
         )
 
     if record_type == "claim":
@@ -79,9 +79,16 @@ def _policy_errors(record: dict[str, Any], policy: dict[str, Any]) -> list[str]:
         maturity = record.get("maturity")
         actor_type = (record.get("created_by") or {}).get("actor_type")
         evidence_ids = record.get("evidence_ids") or []
+        relation = record.get("relation")
 
         if claim_type in policy["required_evidence_for_claim_types"] and not evidence_ids:
             errors.append(f"{claim_type} requires at least one evidence_id")
+        if relation is not None and not evidence_ids:
+            errors.append("relation claims require at least one evidence_id")
+        if isinstance(relation, dict) and (
+            relation.get("source_entity_id") == relation.get("target_entity_id")
+        ):
+            errors.append("relation claim endpoints must be different entities")
         if actor_type == "ai" and maturity == "VALIDATED" and not policy["ai_may_promote_to_validated"]:
             errors.append("AI-created claims cannot be VALIDATED under policy v1")
 
