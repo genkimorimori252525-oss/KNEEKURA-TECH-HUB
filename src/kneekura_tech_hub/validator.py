@@ -52,6 +52,19 @@ def load_source_acquisition_authorization_schema(
     return json.loads(schema_path.read_text(encoding="utf-8"))
 
 
+def load_source_acquisition_execution_schema(
+    schema_path: Path | None = None,
+) -> dict[str, Any]:
+    if schema_path is None:
+        schema_path = (
+            Path(__file__).resolve().parents[2]
+            / "schemas"
+            / "v1"
+            / "source-acquisition-execution.schema.json"
+        )
+    return json.loads(schema_path.read_text(encoding="utf-8"))
+
+
 def load_policy(policy_path: Path | None = None) -> dict[str, Any]:
     if policy_path is None:
         policy_path = Path(__file__).resolve().parents[2] / "governance" / "policy-v1.json"
@@ -161,6 +174,14 @@ def _policy_errors(record: dict[str, Any], policy: dict[str, Any]) -> list[str]:
         if record.get("supersedes_authorization_id") == record.get("id"):
             errors.append("source acquisition authorization cannot supersede itself")
 
+    if record_type == "source_acquisition_execution":
+        status = record.get("status")
+        file_results = record.get("file_results") or []
+        if status == "SUCCEEDED" and any(item.get("status") != "FETCHED" for item in file_results):
+            errors.append("SUCCEEDED acquisition execution cannot contain failed file results")
+        if status == "FAILED" and not record.get("error_code"):
+            errors.append("FAILED acquisition execution requires error_code")
+
     if record_type == "curation_event":
         actor_type = (record.get("actor") or {}).get("actor_type")
         operation = record.get("operation")
@@ -183,6 +204,8 @@ def validate_record(
         schema = load_source_selection_decision_schema(schema_path)
     elif record_type == "source_acquisition_authorization":
         schema = load_source_acquisition_authorization_schema(schema_path)
+    elif record_type == "source_acquisition_execution":
+        schema = load_source_acquisition_execution_schema(schema_path)
     else:
         schema = load_schema(schema_path)
     validator = Draft202012Validator(schema)
