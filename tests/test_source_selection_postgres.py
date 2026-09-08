@@ -78,11 +78,8 @@ def test_postgres_selection_round_trip_preserves_metadata_only_source():
         assert repository.get("src:github:example:selection-postgres")["acquisition"] == {
             "level": "metadata-only"
         }
-        assert [item["id"] for item in selected_for_review(repository)] == [] if False else [
-            "sd:postgres:first"
-        ]
         selected = selected_for_review(repository)
-        assert selected[0]["decision"]["id"] == "sd:postgres:first"
+        assert [item["decision"]["id"] for item in selected] == ["sd:postgres:first"]
         assert selected[0]["source"] == before
 
         second = engine.create_from_fields(
