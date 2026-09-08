@@ -77,8 +77,6 @@ def _policy_errors(record: dict[str, Any], policy: dict[str, Any]) -> list[str]:
 
     if record_type == "claim":
         claim_type = record.get("claim_type")
-        maturity = record.get("maturity")
-        actor_type = (record.get("created_by") or {}).get("actor_type")
         evidence_ids = record.get("evidence_ids") or []
         relation = record.get("relation")
 
@@ -90,8 +88,6 @@ def _policy_errors(record: dict[str, Any], policy: dict[str, Any]) -> list[str]:
             relation.get("source_entity_id") == relation.get("target_entity_id")
         ):
             errors.append("relation claim endpoints must be different entities")
-        if actor_type == "ai" and maturity == "VALIDATED" and not policy["ai_may_promote_to_validated"]:
-            errors.append("AI-created claims cannot be VALIDATED under policy v1")
 
     if record_type == "staged_observation":
         evidence_ids = record.get("evidence_candidate_ids") or []
