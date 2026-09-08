@@ -69,6 +69,11 @@ def _policy_errors(record: dict[str, Any], policy: dict[str, Any]) -> list[str]:
     errors: list[str] = []
     record_type = record.get("record_type")
 
+    if record_type == "knowledge_entity" and record.get("relations"):
+        errors.append(
+            "direct canonical relation writes are disabled until relation provenance is implemented"
+        )
+
     if record_type == "claim":
         claim_type = record.get("claim_type")
         maturity = record.get("maturity")
