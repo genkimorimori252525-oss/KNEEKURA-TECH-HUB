@@ -18,6 +18,11 @@ from .decision import (
     decision_context_for_claim,
     review_decision_history,
 )
+from .discovery import (
+    DiscoveryIntakeError,
+    ingest_discovery_intake,
+    preflight_discovery_intake,
+)
 from .explanation import ExplanationError, explain_claim
 from .postgres_repository import PostgresRepository
 from .projection import ProjectionError, project_relations
@@ -116,6 +121,12 @@ def main() -> int:
     )
     bundle_check_parser.add_argument("bundle", type=Path)
 
+    discovery_check_parser = subparsers.add_parser(
+        "discovery-check",
+        help="preflight a self-contained controlled GitHub discovery batch without writes",
+    )
+    discovery_check_parser.add_argument("batch", type=Path)
+
     init_parser = subparsers.add_parser("init-db", help="apply PostgreSQL migrations")
     _add_database_argument(init_parser)
 
@@ -130,6 +141,14 @@ def main() -> int:
     bundle_ingest_parser.add_argument("bundle", type=Path)
     _add_database_argument(bundle_ingest_parser)
     _add_actor_arguments(bundle_ingest_parser)
+
+    discovery_ingest_parser = subparsers.add_parser(
+        "discovery-ingest",
+        help="atomically ingest only Source/Snapshot/Evidence/NEW Observation discovery records",
+    )
+    discovery_ingest_parser.add_argument("batch", type=Path)
+    _add_database_argument(discovery_ingest_parser)
+    _add_actor_arguments(discovery_ingest_parser)
 
     get_parser = subparsers.add_parser("get", help="retrieve one record by immutable ID")
     get_parser.add_argument("record_id")
@@ -311,6 +330,16 @@ def main() -> int:
         print(f"BUNDLE VALID {bundle['bundle_id']} records={len(ordered)}")
         return 0
 
+    if args.command == "discovery-check":
+        try:
+            batch = _load_json(args.batch)
+            ordered = preflight_discovery_intake(batch)
+        except (DiscoveryIntakeError, HubValidationError, ValueError) as exc:
+            print(f"INVALID DISCOVERY: {exc}")
+            return 1
+        print(f"DISCOVERY VALID {batch['batch_id']} records={len(ordered)}")
+        return 0
+
     repo = _open_repository(_dsn(args))
     try:
         if args.command == "init-db":
@@ -339,6 +368,17 @@ def main() -> int:
                 print(f"REJECTED BUNDLE: {exc}")
                 return 1
             print(f"STORED BUNDLE {bundle['bundle_id']} records={len(stored)}")
+            return 0
+
+        if args.command == "discovery-ingest":
+            try:
+                batch = _load_json(args.batch)
+                with repo.connection.transaction():
+                    receipt = ingest_discovery_intake(engine, batch, actor=_actor(args))
+            except (DiscoveryIntakeError, HubValidationError, CurationError, ValueError) as exc:
+                print(f"REJECTED DISCOVERY: {exc}")
+                return 1
+            print(json.dumps(receipt, ensure_ascii=False, indent=2))
             return 0
 
         if args.command == "get":
