@@ -150,28 +150,28 @@ def test_existing_record_cannot_be_redefined():
         preflight_bundle(bundle(), repository=repository)
 
 
-def test_cyclic_entity_dependencies_are_rejected():
+def test_unproven_entity_relations_are_rejected_during_preflight():
     source = records()[-1]
-    a = {
+    parent = {
         "record_type": "knowledge_entity",
-        "id": "ke:a",
-        "canonical_name": "A",
+        "id": "ke:parent",
+        "canonical_name": "Parent",
         "aliases": [],
         "kinds": ["technique"],
         "abstraction_level": "L1",
         "identity_state": "CANONICAL",
-        "relations": [{"type": "related_to", "target": "ke:b"}],
+        "relations": [],
     }
-    b = {
+    child = {
         "record_type": "knowledge_entity",
-        "id": "ke:b",
-        "canonical_name": "B",
+        "id": "ke:child",
+        "canonical_name": "Child",
         "aliases": [],
         "kinds": ["technique"],
         "abstraction_level": "L1",
         "identity_state": "CANONICAL",
-        "relations": [{"type": "related_to", "target": "ke:a"}],
+        "relations": [{"type": "derived_from", "target": "ke:parent"}],
     }
 
-    with pytest.raises(BundleValidationError, match="cyclic record dependencies"):
-        preflight_bundle(bundle([source, a, b]))
+    with pytest.raises(BundleValidationError, match="relation provenance"):
+        preflight_bundle(bundle([source, parent, child]))
