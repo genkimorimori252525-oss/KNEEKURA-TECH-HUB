@@ -71,7 +71,8 @@ def _policy_errors(record: dict[str, Any], policy: dict[str, Any]) -> list[str]:
 
     if record_type == "knowledge_entity" and record.get("relations"):
         errors.append(
-            "direct canonical relation writes are disabled; use evidence-backed relation claims"
+            "direct canonical relation writes are disabled by relation provenance policy; "
+            "use evidence-backed relation claims"
         )
 
     if record_type == "claim":
