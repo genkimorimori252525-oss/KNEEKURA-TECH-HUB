@@ -27,10 +27,11 @@ vendor these repositories in this pilot.
 - `ke:query-based-incremental-computation`
 - `ke:incremental-parsing`
 
-The pilot deliberately leaves their canonical relation graph empty. The current
-entity-relation representation does not yet carry first-class provenance or
-claim maturity, so encoding taxonomy edges here would make a curator judgment
-look more authoritative than the underlying evidence warrants.
+The pilot deliberately leaves their canonical relation graph empty. Relation
+provenance does not yet have a first-class assertion model, so direct non-empty
+`KnowledgeEntity.relations` writes are now rejected by policy. This prevents an
+unsupported taxonomy judgment from appearing as canonical knowledge while the
+next relation model is being designed.
 
 ## Claims introduced
 
@@ -65,28 +66,33 @@ Those require comparison, experiment, or explicit curator judgment records.
 - AI-created Candidate Claims without human-provenance rewriting;
 - dependency-safe bundle ingestion;
 - all-or-nothing PostgreSQL transaction behavior;
+- staged observation provenance surviving PostgreSQL reload;
 - ability to discover data-model weaknesses before mass collection.
 
 ## Design pressure exposed by the pilot
 
 ### Resolved during this pilot
 
-**Staged observation snapshot pinning** is now enforced without adding a new
-snapshot column. A staged observation must reference at least one Evidence
-candidate, all referenced Evidence must belong to the observation Source, and
-the candidates must resolve to exactly one `SourceSnapshot`. The observation's
-`created_by` actor must also match the actor that stages it.
+**Staged observation snapshot pinning** is enforced without duplicating snapshot
+identity on the observation. A staged observation must reference at least one
+Evidence candidate, all referenced Evidence must belong to the observation
+Source, and the candidates must resolve to exactly one `SourceSnapshot`. The
+observation's `created_by` actor must match the actor that stages it.
 
-This keeps the discovery plane tied to immutable source state while reusing the
-existing Evidence model.
+Migration `0002_staged_observation_evidence.sql` persists these Observation ↔
+Evidence links, so the provenance chain survives PostgreSQL reload instead of
+existing only during validation.
+
+**Unproven canonical relations are quarantined.** Until relation provenance has
+a first-class model, direct non-empty Knowledge Entity relation writes are
+rejected. This is the temporary safe rule that allows the curated prototype to
+continue without silently treating taxonomy guesses as facts.
 
 ### Still open
 
-**Relation provenance** remains intentionally unresolved. Knowledge Entity
-relation edges currently do not carry the same evidence/maturity model as
-Claims. Until that is designed and tested, this pilot avoids unsupported
-canonical taxonomy edges.
+**Relation provenance** remains the next design task. A relation needs its own
+identity/provenance/evidence/maturity path (or an equivalent evidence-backed
+representation) before canonical graph edges can be safely materialized.
 
-Mass ingestion should not begin until relation provenance has at least a safe
-prototype path or an explicit rule that keeps unproven relations out of the
-canonical graph.
+Mass discovery is still intentionally disabled; the next slice should solve and
+adversarially test relation assertions before scaling the canonical graph.
