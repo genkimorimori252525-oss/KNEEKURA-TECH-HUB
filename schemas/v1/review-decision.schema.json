@@ -44,14 +44,5 @@
     "decided_at": {"type": "string", "format": "date-time"},
     "supersedes_decision_id": {"type": ["string", "null"], "pattern": "^rd:"}
   },
-  "allOf": [
-    {
-      "not": {
-        "properties": {
-          "source_claim_id": {"const": {"$data": "1/target_claim_id"}}
-        }
-      }
-    }
-  ],
   "additionalProperties": false
 }
