@@ -1,0 +1,50 @@
+{
+  "bundle_version": "1.0",
+  "bundle_id": "bundle:pilot:incremental-computation:relations:v1",
+  "title": "Incremental computation relation-provenance overlay",
+  "purpose": "Exercise evidence-backed relation claims without rewriting the immutable Phase 2 base pilot. This overlay expects the base incremental-computation-v1 bundle to already be present.",
+  "domains": [
+    "incremental-computation",
+    "knowledge-graph",
+    "relation-provenance"
+  ],
+  "records": [
+    {
+      "record_type": "claim",
+      "id": "cl:salsa:query-incremental:narrower-than:incremental:e021c01d",
+      "relation": {
+        "source_entity_id": "ke:query-based-incremental-computation",
+        "relation_type": "narrower_than",
+        "target_entity_id": "ke:incremental-computation"
+      },
+      "claim_type": "INFERENCE",
+      "statement": "Within this pilot taxonomy, query-based incremental computation can be interpreted as a specialization of incremental computation.",
+      "maturity": "CANDIDATE",
+      "evidence_ids": [
+        "ev:salsa:readme:incrementalized-computation:e021c01d",
+        "ev:salsa:readme:query-model:e021c01d"
+      ],
+      "scope": {
+        "source_snapshot_id": "ss:github:salsa-rs:salsa:e021c01d",
+        "taxonomy_context": "KNEEKURA TECH HUB incremental-computation pilot"
+      },
+      "applicability": {
+        "context": "Taxonomy interpretation only; not a universal classification claim"
+      },
+      "confidence": "MEDIUM",
+      "reasoning_basis": [
+        "ev:salsa:readme:incrementalized-computation:e021c01d",
+        "ev:salsa:readme:query-model:e021c01d"
+      ],
+      "alternative_interpretations": [
+        "The concepts may be better represented as related_to rather than narrower_than after broader cross-source comparison."
+      ],
+      "created_by": {
+        "actor_type": "ai",
+        "actor_id": "jolly",
+        "version": "gpt-5.6-sol"
+      },
+      "policy_version": "1.0.0"
+    }
+  ]
+}

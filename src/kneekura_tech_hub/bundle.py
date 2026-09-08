@@ -40,7 +40,13 @@ def _dependencies(record: Record) -> set[str]:
     elif record_type == "evidence":
         dependencies.update([record["source_id"], record["source_snapshot_id"]])
     elif record_type == "claim":
-        dependencies.add(record["entity_id"])
+        if "entity_id" in record:
+            dependencies.add(record["entity_id"])
+        else:
+            relation = record["relation"]
+            dependencies.update(
+                [relation["source_entity_id"], relation["target_entity_id"]]
+            )
         dependencies.update(record.get("evidence_ids", []))
     elif record_type == "staged_observation":
         dependencies.add(record["source_id"])
