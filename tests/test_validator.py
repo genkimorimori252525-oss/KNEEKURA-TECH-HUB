@@ -37,6 +37,20 @@ def test_ai_cannot_validate_claim():
         validate_record(record)
 
 
+def test_staged_observation_requires_evidence_candidate():
+    record = {
+        "record_type": "staged_observation",
+        "id": "obs:test",
+        "source_id": "src:test",
+        "summary": "Possible incremental invalidation pattern",
+        "candidate_names": ["Incremental invalidation"],
+        "status": "NEW",
+        "created_by": {"actor_type": "ai", "version": "test-model"},
+    }
+    with pytest.raises(HubValidationError, match="evidence_candidate_id"):
+        validate_record(record)
+
+
 def test_unknown_license_blocks_full_source():
     record = {
         "record_type": "source",

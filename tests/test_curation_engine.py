@@ -43,18 +43,23 @@ def entity(entity_id: str = "ke:incremental") -> dict:
     }
 
 
-def evidence(evidence_id: str = "ev:1") -> dict:
+def evidence(
+    evidence_id: str = "ev:1",
+    *,
+    source_id: str = "src:repo",
+    snapshot_id: str = "ss:repo-commit",
+) -> dict:
     return {
         "record_type": "evidence",
         "id": evidence_id,
-        "source_id": "src:repo",
-        "source_snapshot_id": "ss:repo-commit",
+        "source_id": source_id,
+        "source_snapshot_id": snapshot_id,
         "locator": {
             "type": "source_lines",
             "path": "src/cache.rs",
             "line_start": 10,
             "line_end": 20,
-            "content_hash": "sha256:test",
+            "content_hash": f"sha256:{evidence_id}",
         },
         "roles": ["SUPPORTS"],
     }
@@ -71,6 +76,19 @@ def claim(claim_id: str = "cl:1", *, maturity: str = "CANDIDATE") -> dict:
         "evidence_ids": ["ev:1"],
         "created_by": HUMAN,
         "policy_version": "1.0.0",
+    }
+
+
+def observation(*evidence_ids: str, created_by: dict = AI) -> dict:
+    return {
+        "record_type": "staged_observation",
+        "id": "obs:1",
+        "source_id": "src:repo",
+        "evidence_candidate_ids": list(evidence_ids),
+        "summary": "Possible incremental invalidation pattern",
+        "candidate_names": ["Incremental invalidation"],
+        "status": "NEW",
+        "created_by": created_by,
     }
 
 
@@ -156,20 +174,46 @@ def test_relation_target_must_exist():
         engine.create_entity(item, actor=HUMAN)
 
 
-def test_staged_observation_stays_outside_curated_claims():
-    engine = CurationEngine(MemoryRepository())
-    engine.register_source(source(), actor=HUMAN)
-    observation = {
-        "record_type": "staged_observation",
-        "id": "obs:1",
-        "source_id": "src:repo",
-        "summary": "Possible incremental invalidation pattern",
-        "candidate_names": ["Incremental invalidation"],
-        "status": "NEW",
-        "created_by": AI,
-    }
+def test_staged_observation_stays_outside_curated_claims_and_is_snapshot_pinned():
+    engine = seeded_engine()
 
-    engine.stage_observation(observation)
+    stored = engine.stage_observation(observation("ev:1"), actor=AI)
 
+    assert stored["evidence_candidate_ids"] == ["ev:1"]
     assert len(engine.list("staged_observation")) == 1
     assert engine.list("claim") == []
+
+
+def test_staged_observation_creator_must_match_actor():
+    engine = seeded_engine()
+
+    with pytest.raises(CurationError, match="observation created_by"):
+        engine.stage_observation(observation("ev:1", created_by=AI), actor=HUMAN)
+
+
+def test_staged_observation_rejects_evidence_from_another_source():
+    engine = seeded_engine()
+    engine.register_source(source("src:other"), actor=HUMAN)
+    engine.register_source_snapshot(
+        snapshot("ss:other", source_id="src:other"),
+        actor=HUMAN,
+    )
+    engine.register_evidence(
+        evidence("ev:other", source_id="src:other", snapshot_id="ss:other"),
+        actor=HUMAN,
+    )
+
+    with pytest.raises(CurationError, match="does not belong to observation source"):
+        engine.stage_observation(observation("ev:other"), actor=AI)
+
+
+def test_staged_observation_rejects_multiple_snapshots():
+    engine = seeded_engine()
+    engine.register_source_snapshot(snapshot("ss:second"), actor=HUMAN)
+    engine.register_evidence(
+        evidence("ev:second", snapshot_id="ss:second"),
+        actor=HUMAN,
+    )
+
+    with pytest.raises(CurationError, match="exactly one source snapshot"):
+        engine.stage_observation(observation("ev:1", "ev:second"), actor=AI)

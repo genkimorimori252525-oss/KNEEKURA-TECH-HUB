@@ -79,15 +79,30 @@ class CurationEngine:
     def create_entity(self, entity: Record, *, actor: Record, reason: str | None = None) -> Record:
         self._require_type(entity, "knowledge_entity")
         self._require_human(actor, "canonical entity creation")
+        if entity.get("identity_state") in {"MERGED", "RETIRED"}:
+            raise CurationError("new entities cannot start as MERGED or RETIRED")
         self._require_entity_targets_exist(entity)
         validate_record(entity)
         self.repository.put(entity)
         self._append_event("ENTITY_CREATE", actor, [entity["id"]], reason=reason)
         return deepcopy(entity)
 
-    def stage_observation(self, observation: Record) -> Record:
+    def stage_observation(self, observation: Record, *, actor: Record) -> Record:
         self._require_type(observation, "staged_observation")
-        self._require_existing(observation["source_id"], "source")
+        self._require_actor_match(observation.get("created_by"), actor, "observation created_by")
+        source = self._require_existing(observation["source_id"], "source")
+
+        evidence_ids = observation.get("evidence_candidate_ids") or []
+        snapshots: set[str] = set()
+        for evidence_id in evidence_ids:
+            evidence = self._require_existing(evidence_id, "evidence")
+            if evidence["source_id"] != source["id"]:
+                raise CurationError("observation evidence does not belong to observation source")
+            snapshots.add(evidence["source_snapshot_id"])
+
+        if len(snapshots) != 1:
+            raise CurationError("staged observation must resolve to exactly one source snapshot")
+
         validate_record(observation)
         self.repository.put(observation)
         return deepcopy(observation)
@@ -95,6 +110,8 @@ class CurationEngine:
     def create_claim(self, claim: Record, *, actor: Record, reason: str | None = None) -> Record:
         self._require_type(claim, "claim")
         self._require_actor_match(claim.get("created_by"), actor, "claim created_by")
+        if claim.get("maturity") != "CANDIDATE":
+            raise CurationError("new claims must start at CANDIDATE")
         self._require_existing(claim["entity_id"], "knowledge_entity")
         self._require_evidence_exists(claim.get("evidence_ids", []))
         validate_record(claim)

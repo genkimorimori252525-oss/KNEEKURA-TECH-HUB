@@ -26,23 +26,43 @@ Application & Research
 
 `SourceSnapshot` is a first-class immutable evidence anchor. AI and scanners first produce `staged_observation` records; they cannot directly merge canonical entities or promote claims to `VALIDATED`.
 
+A staged observation must be backed by Evidence candidates that all resolve to exactly one SourceSnapshot. Those Observation ↔ Evidence links are persisted in PostgreSQL so the source-revision provenance survives reload.
+
+Direct non-empty `KnowledgeEntity.relations` writes are temporarily rejected until relation provenance has a first-class evidence/maturity model.
+
 ## Current implementation
 
-The first implementation slice now covers **Phase 0 and the usable Phase 1 curation core**:
+### Phase 0 — Constitution & Schema
 
 - Constitution v1.0
 - machine-readable governance policy v1.0
 - JSON Schema for core record types
 - first-class immutable `source_snapshot` records
-- PostgreSQL normalized persistence and migration
+- PostgreSQL normalized persistence and ordered migrations
+
+### Phase 1 — Curation Engine
+
 - policy-aware `CurationEngine`
 - human-gated entity creation / merge
 - governed claim maturity transitions
 - append-only curation events
+- provenance checks for claims and staged observations
 - CLI for DB initialization, ingest, get, list, claim transitions, and entity merges
 - regression tests and real PostgreSQL integration tests in GitHub Actions
 
-Mass crawling and automated knowledge promotion are intentionally not part of this slice.
+### Phase 2 — Curated Prototype underway
+
+- curated prototype bundle format
+- dependency-safe bundle preflight
+- all-or-nothing PostgreSQL bundle ingestion
+- mixed human/AI provenance without rewriting AI Candidate Claims as human-created
+- first real OSS pilot using pinned Tree-sitter, Salsa, and rust-analyzer revisions
+- 3 real Sources / 3 SourceSnapshots / 5 Evidence records / 3 Knowledge Entities / 4 AI-created Candidate Claims
+- staged observations forced through Evidence to one immutable SourceSnapshot
+- staged observation Evidence links persisted by migration `0002_staged_observation_evidence.sql`
+- unproven canonical relation edges quarantined until relation provenance is implemented
+
+Mass crawling and automated knowledge promotion are intentionally not enabled yet.
 
 ## Quick start
 
@@ -61,11 +81,23 @@ kneekura-hub-validate path/to/record.json
 kneekura-hub validate path/to/record.json
 ```
 
+Preflight the real curated pilot bundle without writing anything:
+
+```bash
+kneekura-hub bundle-check pilots/incremental-computation-v1.json
+```
+
 Initialize PostgreSQL:
 
 ```bash
 export KTHUB_DATABASE_URL='postgresql://user:pass@localhost:5432/kneekura'
 kneekura-hub init-db
+```
+
+Atomically ingest the pilot with a human reviewer identity while preserving the AI creators recorded on Candidate Claims:
+
+```bash
+kneekura-hub ingest-bundle pilots/incremental-computation-v1.json --actor-id prototype-reviewer
 ```
 
 Store and retrieve records:
@@ -88,6 +120,7 @@ kneekura-hub merge-entities ke:survivor ke:duplicate --reason 'same concept' --a
 
 - `docs/architecture/BASELINE-v1.md`
 - `docs/architecture/CURATION-ENGINE-v1.md`
+- `docs/pilots/INCREMENTAL-COMPUTATION-v1.md`
 - `governance/CONSTITUTION.md`
 - `governance/policy-v1.json`
 - `schemas/v1/hub.schema.json`
@@ -97,5 +130,6 @@ kneekura-hub merge-entities ke:survivor ke:duplicate --reason 'same concept' --a
 - Design baseline: **v1.0 confirmed**
 - Phase 0: **implemented**
 - Phase 1: **usable curation core implemented**
-- Phase 2: **curated prototype next**
+- Phase 2: **curated prototype active; first real OSS pilot passing PostgreSQL integration**
+- Next design pressure: **relation provenance before canonical taxonomy scaling**
 - Mass discovery: **not enabled yet**

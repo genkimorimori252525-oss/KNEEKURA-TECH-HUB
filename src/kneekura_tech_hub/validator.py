@@ -69,6 +69,11 @@ def _policy_errors(record: dict[str, Any], policy: dict[str, Any]) -> list[str]:
     errors: list[str] = []
     record_type = record.get("record_type")
 
+    if record_type == "knowledge_entity" and record.get("relations"):
+        errors.append(
+            "direct canonical relation writes are disabled until relation provenance is implemented"
+        )
+
     if record_type == "claim":
         claim_type = record.get("claim_type")
         maturity = record.get("maturity")
@@ -79,6 +84,11 @@ def _policy_errors(record: dict[str, Any], policy: dict[str, Any]) -> list[str]:
             errors.append(f"{claim_type} requires at least one evidence_id")
         if actor_type == "ai" and maturity == "VALIDATED" and not policy["ai_may_promote_to_validated"]:
             errors.append("AI-created claims cannot be VALIDATED under policy v1")
+
+    if record_type == "staged_observation":
+        evidence_ids = record.get("evidence_candidate_ids") or []
+        if not evidence_ids:
+            errors.append("staged observations require at least one evidence_candidate_id")
 
     if record_type == "evidence":
         errors.extend(_evidence_locator_errors(record))

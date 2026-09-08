@@ -1,0 +1,328 @@
+{
+  "bundle_version": "1.0",
+  "bundle_id": "bundle:pilot:incremental-computation:v1",
+  "title": "Incremental computation pilot — Tree-sitter, Salsa, rust-analyzer",
+  "purpose": "Exercise the curated core with real, commit-pinned OSS evidence while keeping author claims separate from direct code observations. All claims in this pilot are AI-created CANDIDATE records and require later human promotion before VALIDATED status.",
+  "domains": [
+    "incremental-computation",
+    "parsing",
+    "static-analysis",
+    "developer-tools"
+  ],
+  "records": [
+    {
+      "record_type": "source",
+      "id": "src:github:tree-sitter:tree-sitter",
+      "kind": "repository",
+      "origin": {
+        "provider": "github",
+        "repository": "tree-sitter/tree-sitter",
+        "url": "https://github.com/tree-sitter/tree-sitter",
+        "default_branch": "master"
+      },
+      "acquisition": {
+        "level": "metadata-only"
+      },
+      "license": {
+        "state": "KNOWN",
+        "declared_expression": "MIT",
+        "handling_policy": "REFERENCE_ONLY"
+      }
+    },
+    {
+      "record_type": "source_snapshot",
+      "id": "ss:github:tree-sitter:tree-sitter:8351896b",
+      "source_id": "src:github:tree-sitter:tree-sitter",
+      "revision": "8351896bea2e3359ed2fd893ffb051e9f9ebc69b",
+      "tree_hash": "7f791602019b8923b5891db8f5ed0f59bed43fdb",
+      "captured_at": "2026-09-08T18:34:00Z",
+      "metadata": {
+        "branch": "master",
+        "upstream_commit_url": "https://github.com/tree-sitter/tree-sitter/commit/8351896bea2e3359ed2fd893ffb051e9f9ebc69b"
+      }
+    },
+    {
+      "record_type": "source",
+      "id": "src:github:salsa-rs:salsa",
+      "kind": "repository",
+      "origin": {
+        "provider": "github",
+        "repository": "salsa-rs/salsa",
+        "url": "https://github.com/salsa-rs/salsa",
+        "default_branch": "master"
+      },
+      "acquisition": {
+        "level": "metadata-only"
+      },
+      "license": {
+        "state": "KNOWN",
+        "declared_expression": "Apache-2.0 OR MIT",
+        "handling_policy": "REFERENCE_ONLY"
+      }
+    },
+    {
+      "record_type": "source_snapshot",
+      "id": "ss:github:salsa-rs:salsa:e021c01d",
+      "source_id": "src:github:salsa-rs:salsa",
+      "revision": "e021c01d4939408c89c9325ad2426660117a8b32",
+      "tree_hash": "a433b0650cc383131004fa13d1b21ba3893bca41",
+      "captured_at": "2026-09-08T18:34:00Z",
+      "metadata": {
+        "branch": "master",
+        "upstream_commit_url": "https://github.com/salsa-rs/salsa/commit/e021c01d4939408c89c9325ad2426660117a8b32"
+      }
+    },
+    {
+      "record_type": "source",
+      "id": "src:github:rust-lang:rust-analyzer",
+      "kind": "repository",
+      "origin": {
+        "provider": "github",
+        "repository": "rust-lang/rust-analyzer",
+        "url": "https://github.com/rust-lang/rust-analyzer",
+        "default_branch": "master"
+      },
+      "acquisition": {
+        "level": "metadata-only"
+      },
+      "license": {
+        "state": "KNOWN",
+        "declared_expression": "MIT OR Apache-2.0",
+        "handling_policy": "REFERENCE_ONLY"
+      }
+    },
+    {
+      "record_type": "source_snapshot",
+      "id": "ss:github:rust-lang:rust-analyzer:33a84d20",
+      "source_id": "src:github:rust-lang:rust-analyzer",
+      "revision": "33a84d20e5fe310a43bae1dab7ad41121a7214fc",
+      "tree_hash": "c9e3e79da23f050c8e21a2e5ce46cf52f62e0fb2",
+      "captured_at": "2026-09-08T18:34:00Z",
+      "metadata": {
+        "branch": "master",
+        "upstream_commit_url": "https://github.com/rust-lang/rust-analyzer/commit/33a84d20e5fe310a43bae1dab7ad41121a7214fc"
+      }
+    },
+    {
+      "record_type": "knowledge_entity",
+      "id": "ke:incremental-computation",
+      "canonical_name": "Incremental Computation",
+      "aliases": [
+        "Incrementalized Computation"
+      ],
+      "kinds": [
+        "technique"
+      ],
+      "abstraction_level": "L1",
+      "identity_state": "CANONICAL",
+      "relations": []
+    },
+    {
+      "record_type": "knowledge_entity",
+      "id": "ke:query-based-incremental-computation",
+      "canonical_name": "Query-based Incremental Computation",
+      "aliases": [
+        "Incremental Query System"
+      ],
+      "kinds": [
+        "technique",
+        "architecture"
+      ],
+      "abstraction_level": "L1",
+      "identity_state": "CANONICAL",
+      "relations": []
+    },
+    {
+      "record_type": "knowledge_entity",
+      "id": "ke:incremental-parsing",
+      "canonical_name": "Incremental Parsing",
+      "aliases": [],
+      "kinds": [
+        "technique",
+        "parsing"
+      ],
+      "abstraction_level": "L1",
+      "identity_state": "CANONICAL",
+      "relations": []
+    },
+    {
+      "record_type": "evidence",
+      "id": "ev:tree-sitter:readme:incremental-parsing:8351896b",
+      "source_id": "src:github:tree-sitter:tree-sitter",
+      "source_snapshot_id": "ss:github:tree-sitter:tree-sitter:8351896b",
+      "locator": {
+        "type": "source_lines",
+        "path": "README.md",
+        "line_start": 7,
+        "line_end": 12,
+        "content_hash": "git-blob:b347c880c2aa27f05a205994b159ac31512ee68b"
+      },
+      "roles": [
+        "SUPPORTS"
+      ],
+      "observed_at": "2026-09-08T18:34:00Z"
+    },
+    {
+      "record_type": "evidence",
+      "id": "ev:salsa:readme:incrementalized-computation:e021c01d",
+      "source_id": "src:github:salsa-rs:salsa",
+      "source_snapshot_id": "ss:github:salsa-rs:salsa:e021c01d",
+      "locator": {
+        "type": "source_lines",
+        "path": "README.md",
+        "line_start": 8,
+        "line_end": 8,
+        "content_hash": "git-blob:1e4afef11f4e66f16573457b220ec19d495fa742"
+      },
+      "roles": [
+        "SUPPORTS"
+      ],
+      "observed_at": "2026-09-08T18:34:00Z"
+    },
+    {
+      "record_type": "evidence",
+      "id": "ev:salsa:readme:query-model:e021c01d",
+      "source_id": "src:github:salsa-rs:salsa",
+      "source_snapshot_id": "ss:github:salsa-rs:salsa:e021c01d",
+      "locator": {
+        "type": "source_lines",
+        "path": "README.md",
+        "line_start": 19,
+        "line_end": 31,
+        "content_hash": "git-blob:1e4afef11f4e66f16573457b220ec19d495fa742"
+      },
+      "roles": [
+        "SUPPORTS"
+      ],
+      "observed_at": "2026-09-08T18:34:00Z"
+    },
+    {
+      "record_type": "evidence",
+      "id": "ev:rust-analyzer:hir-db:doc:33a84d20",
+      "source_id": "src:github:rust-lang:rust-analyzer",
+      "source_snapshot_id": "ss:github:rust-lang:rust-analyzer:33a84d20",
+      "locator": {
+        "type": "source_lines",
+        "path": "crates/hir-ty/src/db.rs",
+        "line_start": 1,
+        "line_end": 2,
+        "content_hash": "git-blob:76c33d3cae7b2c62e8948a2323506d8789a4ec7c"
+      },
+      "roles": [
+        "SUPPORTS"
+      ],
+      "observed_at": "2026-09-08T18:34:00Z"
+    },
+    {
+      "record_type": "evidence",
+      "id": "ev:rust-analyzer:hir-db:salsa-annotation:33a84d20",
+      "source_id": "src:github:rust-lang:rust-analyzer",
+      "source_snapshot_id": "ss:github:rust-lang:rust-analyzer:33a84d20",
+      "locator": {
+        "type": "source_lines",
+        "path": "crates/hir-ty/src/db.rs",
+        "line_start": 45,
+        "line_end": 46,
+        "content_hash": "git-blob:76c33d3cae7b2c62e8948a2323506d8789a4ec7c"
+      },
+      "roles": [
+        "SUPPORTS"
+      ],
+      "observed_at": "2026-09-08T18:34:00Z"
+    },
+    {
+      "record_type": "claim",
+      "id": "cl:salsa:incremental-computation:e021c01d",
+      "entity_id": "ke:incremental-computation",
+      "claim_type": "AUTHOR_CLAIM",
+      "statement": "At the pinned revision, Salsa describes itself as a generic framework for on-demand, incrementalized computation.",
+      "maturity": "CANDIDATE",
+      "evidence_ids": [
+        "ev:salsa:readme:incrementalized-computation:e021c01d"
+      ],
+      "scope": {
+        "source_snapshot_id": "ss:github:salsa-rs:salsa:e021c01d"
+      },
+      "applicability": {
+        "context": "Salsa project self-description"
+      },
+      "created_by": {
+        "actor_type": "ai",
+        "actor_id": "jolly",
+        "version": "gpt-5.6-sol"
+      },
+      "policy_version": "1.0.0"
+    },
+    {
+      "record_type": "claim",
+      "id": "cl:salsa:query-based-incremental-computation:e021c01d",
+      "entity_id": "ke:query-based-incremental-computation",
+      "claim_type": "AUTHOR_CLAIM",
+      "statement": "Salsa describes its key idea as defining programs as queries whose results are memoized and selectively reused or recomputed after input changes.",
+      "maturity": "CANDIDATE",
+      "evidence_ids": [
+        "ev:salsa:readme:query-model:e021c01d"
+      ],
+      "scope": {
+        "source_snapshot_id": "ss:github:salsa-rs:salsa:e021c01d"
+      },
+      "applicability": {
+        "context": "Salsa query model"
+      },
+      "created_by": {
+        "actor_type": "ai",
+        "actor_id": "jolly",
+        "version": "gpt-5.6-sol"
+      },
+      "policy_version": "1.0.0"
+    },
+    {
+      "record_type": "claim",
+      "id": "cl:tree-sitter:incremental-parsing:8351896b",
+      "entity_id": "ke:incremental-parsing",
+      "claim_type": "AUTHOR_CLAIM",
+      "statement": "Tree-sitter describes itself as an incremental parsing library that builds a concrete syntax tree and efficiently updates it as the source file is edited.",
+      "maturity": "CANDIDATE",
+      "evidence_ids": [
+        "ev:tree-sitter:readme:incremental-parsing:8351896b"
+      ],
+      "scope": {
+        "source_snapshot_id": "ss:github:tree-sitter:tree-sitter:8351896b"
+      },
+      "applicability": {
+        "context": "Tree-sitter project self-description"
+      },
+      "created_by": {
+        "actor_type": "ai",
+        "actor_id": "jolly",
+        "version": "gpt-5.6-sol"
+      },
+      "policy_version": "1.0.0"
+    },
+    {
+      "record_type": "claim",
+      "id": "cl:rust-analyzer:salsa-hir-database:33a84d20",
+      "entity_id": "ke:query-based-incremental-computation",
+      "claim_type": "DIRECT_OBSERVATION",
+      "statement": "At the pinned rust-analyzer revision, HirDatabase is documented as a Salsa database for type-inference-related queries and is annotated with #[salsa::db].",
+      "maturity": "CANDIDATE",
+      "evidence_ids": [
+        "ev:rust-analyzer:hir-db:doc:33a84d20",
+        "ev:rust-analyzer:hir-db:salsa-annotation:33a84d20"
+      ],
+      "scope": {
+        "source_snapshot_id": "ss:github:rust-lang:rust-analyzer:33a84d20",
+        "path": "crates/hir-ty/src/db.rs"
+      },
+      "applicability": {
+        "context": "rust-analyzer HIR type-inference database"
+      },
+      "created_by": {
+        "actor_type": "ai",
+        "actor_id": "jolly",
+        "version": "gpt-5.6-sol"
+      },
+      "policy_version": "1.0.0"
+    }
+  ]
+}
