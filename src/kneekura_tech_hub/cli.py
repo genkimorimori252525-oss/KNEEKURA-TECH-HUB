@@ -10,6 +10,7 @@ import psycopg
 
 from .bundle import BundleValidationError, ingest_bundle, preflight_bundle
 from .database import apply_foundation_migration
+from .explanation import ExplanationError, explain_claim
 from .postgres_repository import PostgresRepository
 from .projection import ProjectionError, project_relations
 from .queries import QueryError, problems_solved_by, requirements_for, solutions_for_problem
@@ -171,6 +172,13 @@ def main() -> int:
     _add_view_argument(requirements_parser)
     _add_database_argument(requirements_parser)
 
+    explain_parser = subparsers.add_parser(
+        "explain-claim",
+        help="rebuild Claim -> Evidence -> SourceSnapshot -> Source provenance",
+    )
+    explain_parser.add_argument("claim_id")
+    _add_database_argument(explain_parser)
+
     transition_parser = subparsers.add_parser(
         "transition-claim", help="move a claim through the governed maturity lifecycle"
     )
@@ -271,9 +279,11 @@ def main() -> int:
                 result = problems_solved_by(repo, args.entity_id, view=args.view)
             elif args.command == "requirements":
                 result = requirements_for(repo, args.entity_id, view=args.view)
+            elif args.command == "explain-claim":
+                result = explain_claim(repo, args.claim_id)
             else:
                 result = None
-        except (ProjectionError, QueryError) as exc:
+        except (ProjectionError, QueryError, ExplanationError) as exc:
             print(f"REJECTED QUERY: {exc}")
             return 1
         if result is not None:
