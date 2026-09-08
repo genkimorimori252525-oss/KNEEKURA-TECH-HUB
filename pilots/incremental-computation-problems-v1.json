@@ -1,0 +1,111 @@
+{
+  "bundle_version": "1.0",
+  "bundle_id": "bundle:pilot:incremental-computation:problems:v1",
+  "title": "Incremental computation problem-oriented query overlay",
+  "purpose": "Exercise Problem-centered and requirement queries using the pinned Salsa Evidence already present in the base incremental-computation pilot.",
+  "domains": [
+    "incremental-computation",
+    "problem-navigation",
+    "requirements"
+  ],
+  "records": [
+    {
+      "record_type": "knowledge_entity",
+      "id": "ke:problem:repeated-recomputation-after-input-change",
+      "canonical_name": "Repeated recomputation after input changes",
+      "aliases": [
+        "Repeated recomputation of unchanged derived results"
+      ],
+      "kinds": [
+        "problem"
+      ],
+      "abstraction_level": "L1",
+      "identity_state": "CANONICAL",
+      "relations": []
+    },
+    {
+      "record_type": "knowledge_entity",
+      "id": "ke:memoization",
+      "canonical_name": "Memoization",
+      "aliases": [],
+      "kinds": [
+        "technique"
+      ],
+      "abstraction_level": "L1",
+      "identity_state": "CANONICAL",
+      "relations": []
+    },
+    {
+      "record_type": "claim",
+      "id": "cl:salsa:query-incremental:solves:repeated-recomputation:e021c01d",
+      "relation": {
+        "source_entity_id": "ke:query-based-incremental-computation",
+        "relation_type": "solves",
+        "target_entity_id": "ke:problem:repeated-recomputation-after-input-change"
+      },
+      "claim_type": "INFERENCE",
+      "statement": "Within Salsa-style query systems, memoized query results and selective recomputation address repeated recomputation of derived results after inputs change.",
+      "maturity": "CANDIDATE",
+      "evidence_ids": [
+        "ev:salsa:readme:incrementalized-computation:e021c01d",
+        "ev:salsa:readme:query-model:e021c01d"
+      ],
+      "scope": {
+        "source_snapshot_id": "ss:github:salsa-rs:salsa:e021c01d",
+        "context": "Salsa-style query-based incremental computation"
+      },
+      "applicability": {
+        "constraint": "This does not claim that every incremental-computation design solves every form of recomputation."
+      },
+      "confidence": "MEDIUM",
+      "reasoning_basis": [
+        "ev:salsa:readme:incrementalized-computation:e021c01d",
+        "ev:salsa:readme:query-model:e021c01d"
+      ],
+      "alternative_interpretations": [
+        "The relation may be better described as mitigates rather than solves if the vocabulary is expanded later."
+      ],
+      "created_by": {
+        "actor_type": "ai",
+        "actor_id": "jolly",
+        "version": "gpt-5.6-sol"
+      },
+      "policy_version": "1.0.0"
+    },
+    {
+      "record_type": "claim",
+      "id": "cl:salsa:query-incremental:requires:memoization:e021c01d",
+      "relation": {
+        "source_entity_id": "ke:query-based-incremental-computation",
+        "relation_type": "requires",
+        "target_entity_id": "ke:memoization"
+      },
+      "claim_type": "INFERENCE",
+      "statement": "The Salsa-style query model described by the pinned source relies on memoized query results as part of its incremental recomputation mechanism.",
+      "maturity": "CANDIDATE",
+      "evidence_ids": [
+        "ev:salsa:readme:query-model:e021c01d"
+      ],
+      "scope": {
+        "source_snapshot_id": "ss:github:salsa-rs:salsa:e021c01d",
+        "context": "Salsa-style query model"
+      },
+      "applicability": {
+        "constraint": "This is scoped to the Salsa-style mechanism and is not yet a universal requirement claim for every incremental-computation architecture."
+      },
+      "confidence": "MEDIUM",
+      "reasoning_basis": [
+        "ev:salsa:readme:query-model:e021c01d"
+      ],
+      "alternative_interpretations": [
+        "Memoization may be better modeled as an implementation technique or component rather than a universal prerequisite of query-based incremental computation."
+      ],
+      "created_by": {
+        "actor_type": "ai",
+        "actor_id": "jolly",
+        "version": "gpt-5.6-sol"
+      },
+      "policy_version": "1.0.0"
+    }
+  ]
+}

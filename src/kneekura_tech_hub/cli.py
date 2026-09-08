@@ -12,6 +12,7 @@ from .bundle import BundleValidationError, ingest_bundle, preflight_bundle
 from .database import apply_foundation_migration
 from .postgres_repository import PostgresRepository
 from .projection import ProjectionError, project_relations
+from .queries import QueryError, problems_solved_by, requirements_for, solutions_for_problem
 from .service import CurationEngine, CurationError
 from .validator import HubValidationError, validate_record
 
@@ -50,6 +51,14 @@ def _add_actor_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--actor-version")
 
 
+def _add_view_argument(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument(
+        "--view",
+        choices=["validated", "research", "challenged", "history"],
+        default="validated",
+    )
+
+
 def _open_repository(dsn: str) -> PostgresRepository:
     return PostgresRepository.connect(dsn)
 
@@ -76,7 +85,6 @@ def validate_main() -> int:
     parser = argparse.ArgumentParser(description="Validate a KNEEKURA TECH HUB v1 JSON record")
     parser.add_argument("record", type=Path)
     args = parser.parse_args()
-
     try:
         validate_record(_load_json(args.record))
     except HubValidationError as exc:
@@ -98,7 +106,7 @@ def main() -> int:
     )
     bundle_check_parser.add_argument("bundle", type=Path)
 
-    init_parser = subparsers.add_parser("init-db", help="apply the foundation PostgreSQL migration")
+    init_parser = subparsers.add_parser("init-db", help="apply PostgreSQL migrations")
     _add_database_argument(init_parser)
 
     ingest_parser = subparsers.add_parser("ingest", help="validate and store one record")
@@ -107,8 +115,7 @@ def main() -> int:
     _add_actor_arguments(ingest_parser)
 
     bundle_ingest_parser = subparsers.add_parser(
-        "ingest-bundle",
-        help="preflight and atomically store a curated prototype bundle",
+        "ingest-bundle", help="preflight and atomically store a curated prototype bundle"
     )
     bundle_ingest_parser.add_argument("bundle", type=Path)
     _add_database_argument(bundle_ingest_parser)
@@ -135,26 +142,37 @@ def main() -> int:
     _add_database_argument(list_parser)
 
     relations_parser = subparsers.add_parser(
-        "relations",
-        help="project evidence-backed Relation Claims into a disposable read view",
+        "relations", help="project evidence-backed Relation Claims into a read view"
     )
-    relations_parser.add_argument(
-        "--view",
-        choices=["validated", "research", "challenged", "history"],
-        default="validated",
-    )
+    _add_view_argument(relations_parser)
     relations_parser.add_argument("--entity-id")
     relations_parser.add_argument("--relation-type")
-    relations_parser.add_argument(
-        "--direction",
-        choices=["any", "out", "in"],
-        default="any",
-    )
+    relations_parser.add_argument("--direction", choices=["any", "out", "in"], default="any")
     _add_database_argument(relations_parser)
 
+    solutions_parser = subparsers.add_parser(
+        "solutions", help="find entities with explicit solves Claims for one Problem"
+    )
+    solutions_parser.add_argument("problem_id")
+    _add_view_argument(solutions_parser)
+    _add_database_argument(solutions_parser)
+
+    solved_parser = subparsers.add_parser(
+        "solved-problems", help="find Problems explicitly solved by one entity"
+    )
+    solved_parser.add_argument("entity_id")
+    _add_view_argument(solved_parser)
+    _add_database_argument(solved_parser)
+
+    requirements_parser = subparsers.add_parser(
+        "requirements", help="find explicit requires Claims for one entity"
+    )
+    requirements_parser.add_argument("entity_id")
+    _add_view_argument(requirements_parser)
+    _add_database_argument(requirements_parser)
+
     transition_parser = subparsers.add_parser(
-        "transition-claim",
-        help="move a claim through the governed maturity lifecycle",
+        "transition-claim", help="move a claim through the governed maturity lifecycle"
     )
     transition_parser.add_argument("claim_id")
     transition_parser.add_argument(
@@ -167,8 +185,7 @@ def main() -> int:
     _add_actor_arguments(transition_parser)
 
     merge_parser = subparsers.add_parser(
-        "merge-entities",
-        help="human-approved canonical entity merge with redirect preservation",
+        "merge-entities", help="human-approved canonical entity merge with redirect preservation"
     )
     merge_parser.add_argument("survivor_id")
     merge_parser.add_argument("merged_id")
@@ -236,23 +253,31 @@ def main() -> int:
             return 0
 
         if args.command == "list":
-            records = engine.list(args.record_type)
-            print(json.dumps(records, ensure_ascii=False, indent=2))
+            print(json.dumps(engine.list(args.record_type), ensure_ascii=False, indent=2))
             return 0
 
-        if args.command == "relations":
-            try:
-                edges = project_relations(
+        try:
+            if args.command == "relations":
+                result = project_relations(
                     repo,
                     view=args.view,
                     entity_id=args.entity_id,
                     relation_type=args.relation_type,
                     direction=args.direction,
                 )
-            except ProjectionError as exc:
-                print(f"REJECTED QUERY: {exc}")
-                return 1
-            print(json.dumps(edges, ensure_ascii=False, indent=2))
+            elif args.command == "solutions":
+                result = solutions_for_problem(repo, args.problem_id, view=args.view)
+            elif args.command == "solved-problems":
+                result = problems_solved_by(repo, args.entity_id, view=args.view)
+            elif args.command == "requirements":
+                result = requirements_for(repo, args.entity_id, view=args.view)
+            else:
+                result = None
+        except (ProjectionError, QueryError) as exc:
+            print(f"REJECTED QUERY: {exc}")
+            return 1
+        if result is not None:
+            print(json.dumps(result, ensure_ascii=False, indent=2))
             return 0
 
         if args.command == "transition-claim":
