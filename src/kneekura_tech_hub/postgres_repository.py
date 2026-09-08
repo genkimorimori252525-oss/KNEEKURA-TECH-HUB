@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Callable
 
 import psycopg
 from psycopg.types.json import Jsonb
@@ -26,14 +26,15 @@ class PostgresRepository:
 
     @classmethod
     def connect(cls, dsn: str) -> "PostgresRepository":
-        return cls(psycopg.connect(dsn))
+        # Reads should not leave an implicit transaction open. Every write is
+        # already wrapped by put() in an explicit transaction.
+        return cls(psycopg.connect(dsn, autocommit=True))
 
     def close(self) -> None:
         self.connection.close()
 
     def get(self, record_id: str) -> Record | None:
-        prefix = record_id.split(":", 1)[0]
-        getter = {
+        getter: Callable[[str], Record | None] | None = {
             "ke": self._get_entity,
             "src": self._get_source,
             "ss": self._get_snapshot,
@@ -41,7 +42,7 @@ class PostgresRepository:
             "cl": self._get_claim,
             "obs": self._get_observation,
             "ce": self._get_event,
-        }.get(prefix)
+        }.get(record_id.split(":", 1)[0])
         return getter(record_id) if getter else None
 
     def put(self, record: Record, *, replace: bool = False) -> None:
@@ -120,13 +121,14 @@ class PostgresRepository:
                     record.get("redirect_to"),
                 ),
             )
+
         self._executemany(
             "INSERT INTO entity_alias(entity_id, alias) VALUES (%s,%s)",
-            [(record["id"], value) for value in record.get("aliases", [])],
+            [(record["id"], alias) for alias in record.get("aliases", [])],
         )
         self._executemany(
             "INSERT INTO entity_kind(entity_id, kind) VALUES (%s,%s)",
-            [(record["id"], value) for value in record.get("kinds", [])],
+            [(record["id"], kind) for kind in record.get("kinds", [])],
         )
         self._executemany(
             """
