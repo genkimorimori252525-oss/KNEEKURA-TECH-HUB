@@ -19,24 +19,28 @@ Discovery & Collection Layer
       ↓
 Curation Gate
       ↓
-Source → Evidence → Claim → Knowledge Entity
+Source → SourceSnapshot → Evidence → Claim → Knowledge Entity
       ↓
 Application & Research
 ```
 
-AI and scanners first produce `staged_observation` records. They cannot directly merge canonical entities or promote claims to `VALIDATED`.
+`SourceSnapshot` is a first-class immutable evidence anchor. AI and scanners first produce `staged_observation` records; they cannot directly merge canonical entities or promote claims to `VALIDATED`.
 
 ## Current implementation
 
-The first implementation slice covers **Phase 0 and the Phase 1 foundation**:
+The first implementation slice now covers **Phase 0 and the usable Phase 1 curation core**:
 
 - Constitution v1.0
 - machine-readable governance policy v1.0
 - JSON Schema for core record types
-- PostgreSQL foundation migration
-- Python validation library and CLI
-- regression tests for critical safety rules
-- GitHub Actions test workflow
+- first-class immutable `source_snapshot` records
+- PostgreSQL normalized persistence and migration
+- policy-aware `CurationEngine`
+- human-gated entity creation / merge
+- governed claim maturity transitions
+- append-only curation events
+- CLI for DB initialization, ingest, get, list, claim transitions, and entity merges
+- regression tests and real PostgreSQL integration tests in GitHub Actions
 
 Mass crawling and automated knowledge promotion are intentionally not part of this slice.
 
@@ -53,11 +57,37 @@ Validate a JSON record:
 
 ```bash
 kneekura-hub-validate path/to/record.json
+# or
+kneekura-hub validate path/to/record.json
+```
+
+Initialize PostgreSQL:
+
+```bash
+export KTHUB_DATABASE_URL='postgresql://user:pass@localhost:5432/kneekura'
+kneekura-hub init-db
+```
+
+Store and retrieve records:
+
+```bash
+kneekura-hub ingest path/to/source.json --actor-id reviewer
+kneekura-hub ingest path/to/snapshot.json --actor-id reviewer
+kneekura-hub get src:example
+kneekura-hub list --type claim
+```
+
+Govern a claim or merge canonical identities:
+
+```bash
+kneekura-hub transition-claim cl:example SUPPORTED --reason 'evidence reviewed' --actor-id reviewer
+kneekura-hub merge-entities ke:survivor ke:duplicate --reason 'same concept' --actor-id reviewer
 ```
 
 ## Documents
 
 - `docs/architecture/BASELINE-v1.md`
+- `docs/architecture/CURATION-ENGINE-v1.md`
 - `governance/CONSTITUTION.md`
 - `governance/policy-v1.json`
 - `schemas/v1/hub.schema.json`
@@ -65,6 +95,7 @@ kneekura-hub-validate path/to/record.json
 ## Status
 
 - Design baseline: **v1.0 confirmed**
-- Phase 0: **foundation implemented**
-- Phase 1: **curation core foundation underway**
+- Phase 0: **implemented**
+- Phase 1: **usable curation core implemented**
+- Phase 2: **curated prototype next**
 - Mass discovery: **not enabled yet**
