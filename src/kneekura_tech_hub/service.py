@@ -53,10 +53,25 @@ class CurationEngine:
         self._append_event("SOURCE_ACQUIRE", actor, [source["id"]], reason=None)
         return deepcopy(source)
 
+    def register_source_snapshot(self, snapshot: Record, *, actor: Record) -> Record:
+        self._require_type(snapshot, "source_snapshot")
+        self._require_existing(snapshot["source_id"], "source")
+        validate_record(snapshot)
+        self.repository.put(snapshot)
+        self._append_event(
+            "SOURCE_ACQUIRE",
+            actor,
+            [snapshot["source_id"], snapshot["id"]],
+            reason="immutable source snapshot pinned",
+        )
+        return deepcopy(snapshot)
+
     def register_evidence(self, evidence: Record, *, actor: Record) -> Record:
         self._require_type(evidence, "evidence")
-        if self.repository.get(evidence["source_id"]) is None:
-            raise CurationError(f"unknown source: {evidence['source_id']}")
+        source = self._require_existing(evidence["source_id"], "source")
+        snapshot = self._require_existing(evidence["source_snapshot_id"], "source_snapshot")
+        if snapshot["source_id"] != source["id"]:
+            raise CurationError("evidence snapshot does not belong to evidence source")
         validate_record(evidence)
         self.repository.put(evidence)
         return deepcopy(evidence)
@@ -72,16 +87,14 @@ class CurationEngine:
 
     def stage_observation(self, observation: Record) -> Record:
         self._require_type(observation, "staged_observation")
-        if self.repository.get(observation["source_id"]) is None:
-            raise CurationError(f"unknown source: {observation['source_id']}")
+        self._require_existing(observation["source_id"], "source")
         validate_record(observation)
         self.repository.put(observation)
         return deepcopy(observation)
 
     def create_claim(self, claim: Record, *, actor: Record, reason: str | None = None) -> Record:
         self._require_type(claim, "claim")
-        if self.repository.get(claim["entity_id"]) is None:
-            raise CurationError(f"unknown knowledge entity: {claim['entity_id']}")
+        self._require_existing(claim["entity_id"], "knowledge_entity")
         self._require_evidence_exists(claim.get("evidence_ids", []))
         validate_record(claim)
         self.repository.put(claim)
@@ -177,8 +190,7 @@ class CurationEngine:
     def _require_entity_targets_exist(self, entity: Record) -> None:
         for relation in entity.get("relations", []):
             target = relation["target"]
-            if self.repository.get(target) is None:
-                raise CurationError(f"unknown relation target: {target}")
+            self._require_existing(target, "knowledge_entity")
 
     def _require_evidence_exists(self, evidence_ids: list[str]) -> None:
         for evidence_id in evidence_ids:
