@@ -11,6 +11,7 @@ from uuid import uuid4
 
 from .authorization import authorization_effectiveness
 from .execution import (
+    AcquisitionExecutionError,
     acquisition_execution_history,
     execution_manifest_sha256,
     git_blob_sha,
@@ -111,11 +112,13 @@ def verify_execution_store(
             "execution predates required Source/Authorization provenance fingerprints"
         )
 
-    # Ensure the execution itself is coherent with current persisted relationships.
-    history = acquisition_execution_history(
-        repository,
-        authorization_id=execution["authorization_id"],
-    )
+    try:
+        history = acquisition_execution_history(
+            repository,
+            authorization_id=execution["authorization_id"],
+        )
+    except AcquisitionExecutionError as exc:
+        raise VerifiedAcquisitionCommitError(str(exc)) from exc
     if not any(item["id"] == execution_id for item in history):
         raise VerifiedAcquisitionCommitError("execution is not present in validated execution history")
 
@@ -301,8 +304,19 @@ def commit_verified_acquisition(
     }
     validate_record(event)
 
-    # Verification and transaction are deliberately separate. The repository locks and repeats
-    # provenance/effectiveness checks before making any canonical write.
+    def prewrite_check() -> None:
+        latest = verify_execution_store(repository, execution_id, storage_root=storage_root)
+        if latest["execution"] != execution:
+            raise VerifiedAcquisitionCommitError("Execution changed during commit preparation")
+        if latest["source"] != source:
+            raise VerifiedAcquisitionCommitError("Source changed during commit preparation")
+        if latest["authorization"] != authorization:
+            raise VerifiedAcquisitionCommitError("Authorization changed during commit preparation")
+        if latest["manifest_sha256"] != verified["manifest_sha256"]:
+            raise VerifiedAcquisitionCommitError("execution store manifest changed during commit preparation")
+        if latest["verified_file_results"] != verified["verified_file_results"]:
+            raise VerifiedAcquisitionCommitError("execution store bytes changed during commit preparation")
+
     try:
         stored_commit, stored_snapshot, stored_source = atomic(
             expected_source=source,
@@ -312,6 +326,7 @@ def commit_verified_acquisition(
             snapshot=snapshot,
             commit_record=commit_record,
             event=event,
+            prewrite_check=prewrite_check,
         )
     except (ValueError, RuntimeError) as exc:
         raise VerifiedAcquisitionCommitError(str(exc)) from exc
