@@ -18,6 +18,7 @@ class PostgresRepository:
         "evidence": "evidence",
         "claim": "claim",
         "staged_observation": "staged_observation",
+        "review_decision": "review_decision",
         "curation_event": "curation_event",
     }
 
@@ -39,6 +40,7 @@ class PostgresRepository:
             "ev": self._get_evidence,
             "cl": self._get_claim,
             "obs": self._get_observation,
+            "rd": self._get_review_decision,
             "ce": self._get_event,
         }.get(record_id.split(":", 1)[0])
         return getter(record_id) if getter else None
@@ -51,6 +53,7 @@ class PostgresRepository:
             "evidence": self._put_evidence,
             "claim": self._put_claim,
             "staged_observation": self._put_observation,
+            "review_decision": self._put_review_decision,
             "curation_event": self._put_event,
         }.get(record["record_type"])
         if handler is None:
@@ -319,6 +322,29 @@ class PostgresRepository:
             [(record["id"], evidence_id) for evidence_id in record.get("evidence_candidate_ids", [])],
         )
 
+    def _put_review_decision(self, record: Record, *, replace: bool) -> None:
+        if replace:
+            raise ValueError("review decisions are append-only")
+        self.connection.execute(
+            """
+            INSERT INTO review_decision(
+                source_claim_id, target_claim_id, decision, rationale, created_by,
+                policy_version, decided_at, supersedes_decision_id, id
+            ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)
+            """,
+            (
+                record["source_claim_id"],
+                record["target_claim_id"],
+                record["decision"],
+                record["rationale"],
+                Jsonb(record["created_by"]),
+                record["policy_version"],
+                record["decided_at"],
+                record.get("supersedes_decision_id"),
+                record["id"],
+            ),
+        )
+
     def _put_event(self, record: Record, *, replace: bool) -> None:
         if replace:
             raise ValueError("curation events are append-only")
@@ -512,6 +538,32 @@ class PostgresRepository:
             "status": row[3],
             "created_by": row[4],
         }
+
+    def _get_review_decision(self, record_id: str) -> Record | None:
+        row = self.connection.execute(
+            """
+            SELECT source_claim_id, target_claim_id, decision, rationale, created_by,
+                   policy_version, decided_at, supersedes_decision_id
+            FROM review_decision WHERE id=%s
+            """,
+            (record_id,),
+        ).fetchone()
+        if row is None:
+            return None
+        record: Record = {
+            "record_type": "review_decision",
+            "id": record_id,
+            "source_claim_id": row[0],
+            "target_claim_id": row[1],
+            "decision": row[2],
+            "rationale": row[3],
+            "created_by": row[4],
+            "policy_version": row[5],
+            "decided_at": row[6].isoformat(),
+        }
+        if row[7] is not None:
+            record["supersedes_decision_id"] = row[7]
+        return record
 
     def _get_event(self, record_id: str) -> Record | None:
         row = self.connection.execute(
