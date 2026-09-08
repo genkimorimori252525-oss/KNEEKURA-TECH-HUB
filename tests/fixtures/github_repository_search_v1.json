@@ -1,0 +1,73 @@
+{
+  "total_count": 3,
+  "incomplete_results": false,
+  "items": [
+    {
+      "id": 1,
+      "node_id": "R_one",
+      "full_name": "example/small-but-relevant",
+      "html_url": "https://github.com/example/small-but-relevant",
+      "default_branch": "main",
+      "description": "Small repository returned first by the provider.",
+      "language": "Rust",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "visibility": "public",
+      "stargazers_count": 7,
+      "forks_count": 1,
+      "open_issues_count": 0,
+      "pushed_at": "2026-09-08T00:00:00Z",
+      "updated_at": "2026-09-08T00:00:00Z",
+      "topics": ["incremental"],
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit"
+      }
+    },
+    {
+      "id": 2,
+      "node_id": "R_two",
+      "full_name": "Example/Huge-Star-Repo",
+      "html_url": "https://github.com/Example/Huge-Star-Repo",
+      "default_branch": "master",
+      "description": "Large-star repository returned second by the provider.",
+      "language": "TypeScript",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "visibility": "public",
+      "stargazers_count": 900000,
+      "forks_count": 50000,
+      "open_issues_count": 100,
+      "pushed_at": "2026-09-08T00:00:00Z",
+      "updated_at": "2026-09-08T00:00:00Z",
+      "topics": ["analysis"],
+      "license": {
+        "key": "other",
+        "name": "Other",
+        "spdx_id": "NOASSERTION",
+        "url": null
+      }
+    },
+    {
+      "id": 3,
+      "node_id": "R_three",
+      "full_name": "example/HUGE-STAR-REPO",
+      "html_url": "https://github.com/example/HUGE-STAR-REPO",
+      "default_branch": "master",
+      "description": "Case-variant duplicate of the same logical GitHub repository.",
+      "language": "TypeScript",
+      "fork": false,
+      "archived": false,
+      "disabled": false,
+      "visibility": "public",
+      "stargazers_count": 900001,
+      "forks_count": 50001,
+      "open_issues_count": 101,
+      "topics": []
+    }
+  ]
+}
