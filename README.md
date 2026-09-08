@@ -30,6 +30,8 @@ Source → SourceSnapshot → Evidence → Claim → Knowledge Entity
                                           ↓
                                   Evidence Review
                                           ↓
+                                  Claim Comparison
+                                          ↓
                                   Application & Research
 ```
 
@@ -48,6 +50,8 @@ Problem-oriented queries are deliberately conservative. They read only explicit 
 Evidence Explanation reconstructs the stored `Claim → Evidence → SourceSnapshot → Source` chain. It does not generate a new justification, promote a Claim, or silently repair broken provenance.
 
 Evidence Review turns that provenance into a non-scalar review profile. It exposes distinct Source/Snapshot counts, Evidence roles and locator types, maturity, confidence, and verification freshness separately rather than compressing them into one universal quality score.
+
+Claim Comparison groups Claims that have the exact same stored subject and presents their Claims and Evidence Review profiles side by side. Different statements are reported as different, not automatically labeled contradictions; the Hub does not choose a winner.
 
 ## Current implementation
 
@@ -145,6 +149,19 @@ Evidence Review turns that provenance into a non-scalar review profile. It expos
 - explicit `--needs-review` queue uses conditions rather than an opaque ranking algorithm
 - real Salsa Claim keeps the same Evidence profile across CANDIDATE → VALIDATED while maturity/verification state changes
 - read-only `review-claim` and `review-claims` CLI commands
+
+### Claim Comparison v1
+
+- exact stored Claim subjects are used as comparison keys
+- relation type is part of the subject, so `solves` and `requires` are never mixed
+- multiple Claims remain separate records with separate Evidence Review profiles
+- `STATEMENTS_DIFFER` reports textual difference without inventing a contradiction verdict
+- exposes differences in epistemic type and maturity plus Candidate/Challenged/refuting/due-review signals
+- SUPERSEDED and REJECTED Claims remain visible but are not counted as active
+- no winner, majority vote, preferred Claim, or truth score is generated
+- exact historical grouping deliberately does not cross entity-merge redirects in v1
+- real PostgreSQL Salsa acceptance keeps two competing `solves` Candidate Claims side by side
+- read-only `compare-claim` and `compare-claims` CLI commands
 
 Mass crawling and automated knowledge promotion are intentionally not enabled yet.
 
@@ -252,6 +269,16 @@ kneekura-hub review-claim \
 kneekura-hub review-claims --needs-review
 ```
 
+Compare Claims sharing one exact stored subject without choosing a winner:
+
+```bash
+kneekura-hub compare-claim \
+  cl:salsa:query-incremental:solves:repeated-recomputation:e021c01d
+
+kneekura-hub compare-claims --multiple-only
+kneekura-hub compare-claims --needs-review
+```
+
 Store and retrieve records:
 
 ```bash
@@ -278,6 +305,7 @@ kneekura-hub merge-entities ke:survivor ke:duplicate --reason 'same concept' --a
 - `docs/architecture/PROBLEM-QUERY-v1.md`
 - `docs/architecture/EVIDENCE-EXPLANATION-v1.md`
 - `docs/architecture/EVIDENCE-REVIEW-v1.md`
+- `docs/architecture/CLAIM-COMPARISON-v1.md`
 - `docs/pilots/INCREMENTAL-COMPUTATION-v1.md`
 - `governance/CONSTITUTION.md`
 - `governance/policy-v1.json`
@@ -293,6 +321,7 @@ kneekura-hub merge-entities ke:survivor ke:duplicate --reason 'same concept' --a
 - Relation Projection v1: **implemented and merged**
 - Problem Query v1: **implemented and merged**
 - Evidence Explanation v1: **implemented and merged**
-- Evidence Review v1: **implemented; verification in progress**
-- Next pressure: **competing / contradictory Claim review without automatically choosing a winner**
+- Evidence Review v1: **implemented and merged**
+- Claim Comparison v1: **implemented; verification in progress**
+- Next pressure: **explicit human contradiction annotations or resolved-identity comparison views**
 - Mass discovery: **not enabled yet**
