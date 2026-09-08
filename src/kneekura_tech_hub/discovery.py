@@ -22,6 +22,7 @@ _BLOCKED_CANONICAL_TYPES = {
     "review_decision",
     "curation_event",
 }
+_RESTRICTED_DISCOVERY_LICENSE_STATES = {"UNKNOWN", "CONFLICT", "REVIEW_REQUIRED"}
 
 
 class DiscoveryIntakeError(ValueError):
@@ -87,6 +88,19 @@ def _validate_source_identity(source: Record) -> str:
     return repository
 
 
+def _validate_discovery_license(source: Record) -> None:
+    license_state = (source.get("license") or {}).get("state")
+    acquisition = (source.get("acquisition") or {}).get("level")
+    if (
+        license_state in _RESTRICTED_DISCOVERY_LICENSE_STATES
+        and acquisition != "metadata-only"
+    ):
+        raise DiscoveryIntakeError(
+            f"discovery Source {source.get('id')} with license state {license_state} "
+            "is limited to metadata-only acquisition"
+        )
+
+
 def _snapshot_prefix_for_source(source_id: str) -> str:
     return "ss:" + source_id.removeprefix("src:") + ":"
 
@@ -144,6 +158,7 @@ def _validate_existing_github_source_uniqueness(
 
 
 def _require_acquired_source(source: Record, *, dependent_id: str) -> None:
+    _validate_discovery_license(source)
     acquisition = (source.get("acquisition") or {}).get("level")
     if acquisition == "metadata-only":
         raise DiscoveryIntakeError(
@@ -197,30 +212,37 @@ def preflight_discovery_intake(
             errors.append(f"discovery attempts to redefine existing record: {record_id}")
             continue
 
-        if record_type == "source":
-            try:
+        try:
+            if record_type == "source":
                 _validate_source_identity(record)
+                _validate_discovery_license(record)
                 _validate_existing_github_source_uniqueness(record, repository)
-            except DiscoveryIntakeError as exc:
-                errors.append(f"records[{index}]: {exc}")
-                continue
-        elif record_type == "staged_observation":
-            if record.get("status") != "NEW":
-                errors.append(
-                    f"records[{index}]: discovery observations must enter with status NEW"
-                )
-                continue
-            candidate_names = record.get("candidate_names") or []
-            if not candidate_names:
-                errors.append(
-                    f"records[{index}]: discovery observations require candidate_names"
-                )
-                continue
-            if record.get("created_by") != discovered_by:
-                errors.append(
-                    f"records[{index}]: observation created_by must match discovered_by"
-                )
-                continue
+            elif record_type == "source_snapshot":
+                _parse_time(record.get("captured_at"), field=f"{record_id}.captured_at")
+            elif record_type == "evidence":
+                observed_at = record.get("observed_at")
+                if observed_at is not None:
+                    _parse_time(observed_at, field=f"{record_id}.observed_at")
+            elif record_type == "staged_observation":
+                if record.get("status") != "NEW":
+                    errors.append(
+                        f"records[{index}]: discovery observations must enter with status NEW"
+                    )
+                    continue
+                candidate_names = record.get("candidate_names") or []
+                if not candidate_names:
+                    errors.append(
+                        f"records[{index}]: discovery observations require candidate_names"
+                    )
+                    continue
+                if record.get("created_by") != discovered_by:
+                    errors.append(
+                        f"records[{index}]: observation created_by must match discovered_by"
+                    )
+                    continue
+        except DiscoveryIntakeError as exc:
+            errors.append(f"records[{index}]: {exc}")
+            continue
 
         by_id[record_id] = record
 
