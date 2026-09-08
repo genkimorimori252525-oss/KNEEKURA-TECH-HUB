@@ -13,6 +13,10 @@ from .discovery import DiscoveryIntakeError, github_source_id, preflight_discove
 from .repository import Record
 
 
+_ALLOWED_SORTS = {"stars", "forks", "help-wanted-issues", "updated"}
+_ALLOWED_ORDERS = {"asc", "desc"}
+
+
 class GitHubDiscoveryAdapterError(ValueError):
     """Raised when GitHub discovery metadata cannot be converted safely."""
 
@@ -42,6 +46,13 @@ def _actor(actor: Record) -> Record:
     if extra:
         raise GitHubDiscoveryAdapterError(f"unsupported actor fields: {extra!r}")
     return dict(actor)
+
+
+def _validate_sort_order(search_sort: str | None, search_order: str | None) -> None:
+    if search_sort is not None and search_sort not in _ALLOWED_SORTS:
+        raise GitHubDiscoveryAdapterError(f"unsupported GitHub search sort: {search_sort!r}")
+    if search_order is not None and search_order not in _ALLOWED_ORDERS:
+        raise GitHubDiscoveryAdapterError(f"unsupported GitHub search order: {search_order!r}")
 
 
 def _repository_name(item: dict[str, Any]) -> str:
@@ -132,9 +143,21 @@ def _metadata_source(item: dict[str, Any]) -> Record:
     }
 
 
-def _batch_id(query: str, source_ids: list[str], page: int) -> str:
+def _batch_id(
+    query: str,
+    source_ids: list[str],
+    page: int,
+    search_sort: str | None,
+    search_order: str | None,
+) -> str:
     material = json.dumps(
-        {"query": query, "page": page, "source_ids": source_ids},
+        {
+            "query": query,
+            "page": page,
+            "sort": search_sort,
+            "order": search_order,
+            "source_ids": source_ids,
+        },
         ensure_ascii=False,
         sort_keys=True,
         separators=(",", ":"),
@@ -151,13 +174,16 @@ def build_metadata_discovery_batch(
     discovered_at: str | None = None,
     page: int = 1,
     max_records: int = 1000,
+    search_sort: str | None = None,
+    search_order: str | None = None,
 ) -> dict[str, Any]:
     """Convert GitHub repository-search items into a metadata-only discovery batch.
 
     Provider ordering is preserved. Stars, forks, language and license fields remain metadata;
     none of them is converted into a quality judgment or canonical knowledge record. Non-public
     repositories are omitted from this OSS discovery adapter even when an authenticated GitHub
-    token could see them.
+    token could see them. API sort/order are retained as discovery provenance rather than
+    interpreted as a quality score.
     """
 
     if not isinstance(query, str) or not query.strip():
@@ -166,6 +192,7 @@ def build_metadata_discovery_batch(
         raise GitHubDiscoveryAdapterError("page must be a positive integer")
     if not isinstance(max_records, int) or not 1 <= max_records <= 1000:
         raise GitHubDiscoveryAdapterError("max_records must be between 1 and 1000")
+    _validate_sort_order(search_sort, search_order)
 
     actor = _actor(discovered_by)
     timestamp = _parse_time(discovered_at or _now())
@@ -200,7 +227,9 @@ def build_metadata_discovery_batch(
     source_ids = [record["id"] for record in records]
     batch: dict[str, Any] = {
         "intake_version": "1.0",
-        "batch_id": _batch_id(query.strip(), source_ids, page),
+        "batch_id": _batch_id(
+            query.strip(), source_ids, page, search_sort, search_order
+        ),
         "discovered_by": actor,
         "discovered_at": timestamp,
         "scope": {
@@ -214,6 +243,8 @@ def build_metadata_discovery_batch(
                 "metadata_only": True,
                 "public_only": True,
                 "page": page,
+                "api_sort": search_sort,
+                "api_order": search_order,
                 "input_item_count": len(items),
                 "output_source_count": len(records),
                 "duplicate_source_count": duplicate_count,
@@ -250,10 +281,7 @@ def fetch_repository_search_page(
         raise GitHubDiscoveryAdapterError("per_page must be between 1 and 100")
     if not isinstance(page, int) or page < 1:
         raise GitHubDiscoveryAdapterError("page must be a positive integer")
-    if sort is not None and sort not in {"stars", "forks", "help-wanted-issues", "updated"}:
-        raise GitHubDiscoveryAdapterError(f"unsupported GitHub search sort: {sort!r}")
-    if order is not None and order not in {"asc", "desc"}:
-        raise GitHubDiscoveryAdapterError(f"unsupported GitHub search order: {order!r}")
+    _validate_sort_order(sort, order)
 
     params: dict[str, Any] = {"q": query.strip(), "per_page": per_page, "page": page}
     if sort is not None:
