@@ -172,3 +172,55 @@ def test_review_decision_schema_and_policy_reject_nonhuman_or_same_claim():
     same["target_claim_id"] = "cl:a"
     with pytest.raises(HubValidationError, match="different"):
         validate_record(same)
+
+
+def test_decision_timestamp_must_be_timezone_aware():
+    repo = _repo()
+    record = {
+        "record_type": "review_decision",
+        "id": "rd:naive",
+        "source_claim_id": "cl:a",
+        "target_claim_id": "cl:b",
+        "decision": "UNRESOLVED",
+        "rationale": "Naive timestamps cannot establish an audit chronology.",
+        "created_by": HUMAN,
+        "policy_version": "1.0.0",
+        "decided_at": "2026-09-09T00:00:00",
+    }
+    with pytest.raises(DecisionError, match="include timezone"):
+        HumanReviewDecisionEngine(repo).create(record, actor=HUMAN)
+
+
+def test_decision_history_orders_by_real_instant_not_iso_text():
+    repo = _repo()
+    repo.put(
+        {
+            "record_type": "review_decision",
+            "id": "rd:later-text-earlier-time",
+            "source_claim_id": "cl:a",
+            "target_claim_id": "cl:b",
+            "decision": "UNRESOLVED",
+            "rationale": "Earlier instant expressed with a positive timezone offset.",
+            "created_by": HUMAN,
+            "policy_version": "1.0.0",
+            "decided_at": "2026-09-09T09:00:00+09:00",
+        }
+    )
+    repo.put(
+        {
+            "record_type": "review_decision",
+            "id": "rd:earlier-text-later-time",
+            "source_claim_id": "cl:a",
+            "target_claim_id": "cl:b",
+            "decision": "COMPATIBLE",
+            "rationale": "Later instant expressed in UTC.",
+            "created_by": HUMAN,
+            "policy_version": "1.0.0",
+            "decided_at": "2026-09-09T00:30:00+00:00",
+        }
+    )
+
+    assert [item["id"] for item in review_decision_history(repo)] == [
+        "rd:later-text-earlier-time",
+        "rd:earlier-text-later-time",
+    ]
