@@ -1,0 +1,15 @@
+{
+  "policy_version": "1.0.0",
+  "automatic_entity_merge": false,
+  "ai_may_promote_to_validated": false,
+  "ai_may_hard_delete_canonical_knowledge": false,
+  "global_quality_score_allowed": false,
+  "unknown_evidence_counts_as_independent": false,
+  "source_acquisition_default": "metadata-only",
+  "license_unknown_max_acquisition": "metadata-only",
+  "required_evidence_for_claim_types": [
+    "DIRECT_OBSERVATION",
+    "AUTHOR_CLAIM",
+    "EXPERIMENT_RESULT"
+  ]
+}
