@@ -58,6 +58,7 @@ def _selection(repository: RecordRepository, selection_id: str) -> Record:
             f"expected source_selection_decision for {selection_id}, "
             f"got {record.get('record_type')!r}"
         )
+    validate_record(record)
     return record
 
 
@@ -96,6 +97,8 @@ def _validate_paths(paths: object) -> list[str]:
             raise AcquisitionAuthorizationError(
                 "allowed_paths must not contain empty, dot, or parent traversal segments"
             )
+        if any(part.lower() == ".git" for part in parts):
+            raise AcquisitionAuthorizationError("allowed_paths must not target repository control data")
         normalized.append(path)
     return normalized
 
@@ -111,10 +114,18 @@ def _validate_revision(source: Record, revision: object) -> str:
     return revision
 
 
-def _validate_license_for_authorization(source: Record) -> None:
+def _license_is_resolved(source: Record) -> bool:
     license_record = source.get("license") or {}
     expression = license_record.get("declared_expression")
-    if license_record.get("state") != "KNOWN" or not isinstance(expression, str) or not expression.strip():
+    return (
+        license_record.get("state") == "KNOWN"
+        and isinstance(expression, str)
+        and bool(expression.strip())
+    )
+
+
+def _validate_license_for_authorization(source: Record) -> None:
+    if not _license_is_resolved(source):
         raise AcquisitionAuthorizationError(
             "AUTHORIZE requires license.state=KNOWN with a declared license expression"
         )
@@ -183,22 +194,67 @@ def active_acquisition_authorizations(
     return active
 
 
-def authorized_acquisition_requests(repository: RecordRepository) -> list[Record]:
-    """Read-only active AUTHORIZE records paired with their unchanged Source.
+def authorization_effectiveness(
+    repository: RecordRepository,
+    authorization_id: str,
+) -> Record:
+    """Evaluate whether an active AUTHORIZE remains safe to consume *now*.
 
-    This is an authorization view, not an execution queue. Reading it never fetches a file.
+    Historical authorization is not permanent authority. Current Source depth, license state,
+    and Source selection are rechecked so stale grants fail closed before a future executor can
+    consume them.
+    """
+
+    authorization = _authorization(repository, authorization_id)
+    _validate_stored_authorization(repository, authorization)
+    source = _source(repository, authorization["source_id"])
+    blockers: list[str] = []
+
+    active = active_acquisition_authorizations(repository, source_id=source["id"])
+    if len(active) != 1 or active[0]["id"] != authorization["id"]:
+        blockers.append("NOT_ACTIVE_AUTHORIZATION")
+    if authorization["decision"] != "AUTHORIZE":
+        blockers.append("NOT_AUTHORIZE_DECISION")
+    if (source.get("acquisition") or {}).get("level") != "metadata-only":
+        blockers.append("SOURCE_NO_LONGER_METADATA_ONLY")
+    if not _license_is_resolved(source):
+        blockers.append("LICENSE_NO_LONGER_RESOLVED")
+
+    selections = active_source_selection_decisions(repository, source_id=source["id"])
+    if (
+        len(selections) != 1
+        or selections[0]["id"] != authorization["selection_decision_id"]
+        or selections[0]["decision"] != "SELECT_FOR_REVIEW"
+    ):
+        blockers.append("SELECTION_NO_LONGER_CURRENT")
+
+    return {
+        "authorization": deepcopy(authorization),
+        "source": deepcopy(source),
+        "effective": not blockers,
+        "blockers": blockers,
+    }
+
+
+def authorized_acquisition_requests(repository: RecordRepository) -> list[Record]:
+    """Read-only view of currently effective AUTHORIZE records.
+
+    The view rechecks live prerequisites and never fetches a file. Stale authorizations remain
+    in history but disappear from this effective-authority view until a new valid grant exists.
     """
 
     result: list[Record] = []
     for authorization in active_acquisition_authorizations(repository):
         if authorization["decision"] != "AUTHORIZE":
             continue
-        result.append(
-            {
-                "authorization": deepcopy(authorization),
-                "source": deepcopy(_source(repository, authorization["source_id"])),
-            }
-        )
+        status = authorization_effectiveness(repository, authorization["id"])
+        if status["effective"]:
+            result.append(
+                {
+                    "authorization": status["authorization"],
+                    "source": status["source"],
+                }
+            )
     return result
 
 
