@@ -21,8 +21,10 @@ Curation Gate
       ↓
 Source → SourceSnapshot → Evidence → Claim → Knowledge Entity
                                   └→ Relation Claim
-      ↓
-Application & Research
+                                          ↓
+                                  Relation Projection
+                                          ↓
+                                  Application & Research
 ```
 
 `SourceSnapshot` is a first-class immutable evidence anchor. AI and scanners first produce `staged_observation` records; they cannot directly merge canonical entities or perform a `VALIDATED` promotion.
@@ -32,6 +34,8 @@ A staged observation must be backed by Evidence candidates that all resolve to e
 Relationships between Knowledge Entities are also evidence-backed Claims. A Claim has exactly one subject: either one `entity_id`, or a `relation` consisting of source entity, relation type, and target entity. Direct non-empty `KnowledgeEntity.relations` writes remain rejected so an unproven taxonomy guess cannot become canonical graph truth.
 
 `created_by` remains authorship provenance. An AI-created Candidate Claim can later be human-reviewed and promoted without rewriting its creator identity; the human transition is recorded separately in the curation-event trail.
+
+Relation graph views are rebuilt from Claims. They are never stored as a second canonical graph. Projection preserves the asserted endpoint IDs and also resolves current canonical identities through human-approved entity-merge redirects.
 
 ## Current implementation
 
@@ -76,7 +80,19 @@ Relationships between Knowledge Entities are also evidence-backed Claims. A Clai
 - Relation Claim PostgreSQL round-trip tests
 - supersession requires the same subject, a distinct successor, and successor maturity of at least `SUPPORTED`
 - additive real-OSS relation overlay: `pilots/incremental-computation-relations-v1.json`
-- validated relations remain Claims; future graph views will be derived projections rather than a duplicate canonical store
+- validated relations remain Claims rather than being copied into a duplicate canonical edge store
+
+### Relation Projection v1
+
+- rebuildable relation read model derived from Claim records
+- `validated`, `research`, `challenged`, and `history` views
+- one projected edge per Claim; competing assertions are not silently collapsed
+- filters by entity, direction, and relation type
+- merged entity IDs resolve to the current canonical survivor for querying
+- asserted relation endpoints remain visible unchanged for provenance
+- redirect-cycle and missing-entity corruption fails closed
+- real PostgreSQL + real OSS pilot verification across Candidate → Supported → Validated
+- read-only `kneekura-hub relations` CLI
 
 Mass crawling and automated knowledge promotion are intentionally not enabled yet.
 
@@ -122,6 +138,27 @@ Then add the Relation Claim overlay without rewriting the base pilot:
 kneekura-hub ingest-bundle pilots/incremental-computation-relations-v1.json --actor-id prototype-reviewer
 ```
 
+Query projected relations without writing a graph copy:
+
+```bash
+# trusted relationships only
+kneekura-hub relations --view validated
+
+# include Candidate, Supported, Validated, and Challenged research assertions
+kneekura-hub relations --view research
+
+# outgoing research relations for one entity
+kneekura-hub relations \
+  --view research \
+  --entity-id ke:incremental-computation \
+  --direction out
+
+# full audit history of one relation type
+kneekura-hub relations \
+  --view history \
+  --relation-type narrower_than
+```
+
 Store and retrieve records:
 
 ```bash
@@ -144,6 +181,7 @@ kneekura-hub merge-entities ke:survivor ke:duplicate --reason 'same concept' --a
 - `docs/architecture/BASELINE-v1.md`
 - `docs/architecture/CURATION-ENGINE-v1.md`
 - `docs/architecture/RELATION-PROVENANCE-v1.md`
+- `docs/architecture/RELATION-PROJECTION-v1.md`
 - `docs/pilots/INCREMENTAL-COMPUTATION-v1.md`
 - `governance/CONSTITUTION.md`
 - `governance/policy-v1.json`
@@ -155,6 +193,7 @@ kneekura-hub merge-entities ke:survivor ke:duplicate --reason 'same concept' --a
 - Phase 0: **implemented**
 - Phase 1: **usable curation core implemented**
 - Phase 2: **first real OSS curated pilot implemented**
-- Relation Provenance v1: **implementation and real-pilot verification in progress**
-- Next design pressure after Relation Provenance: **derived relation projection/query layer**
+- Relation Provenance v1: **implemented and merged**
+- Relation Projection v1: **implementation and real-pilot verification in progress**
+- Next pressure: **problem-oriented evidence-aware queries built on the projection layer**
 - Mass discovery: **not enabled yet**
