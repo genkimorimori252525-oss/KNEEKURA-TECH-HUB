@@ -3,44 +3,148 @@
   "$id": "https://kneekura.local/schemas/v1/hub.schema.json",
   "title": "KNEEKURA TECH HUB v1 Record",
   "oneOf": [
-    {"$ref": "#/$defs/knowledge_entity"},
-    {"$ref": "#/$defs/claim"},
-    {"$ref": "#/$defs/evidence"},
-    {"$ref": "#/$defs/source"},
-    {"$ref": "#/$defs/staged_observation"},
-    {"$ref": "#/$defs/curation_event"}
+    {
+      "$ref": "#/$defs/knowledge_entity"
+    },
+    {
+      "$ref": "#/$defs/claim"
+    },
+    {
+      "$ref": "#/$defs/evidence"
+    },
+    {
+      "$ref": "#/$defs/source"
+    },
+    {
+      "$ref": "#/$defs/source_snapshot"
+    },
+    {
+      "$ref": "#/$defs/staged_observation"
+    },
+    {
+      "$ref": "#/$defs/curation_event"
+    }
   ],
   "$defs": {
     "actor": {
       "type": "object",
-      "required": ["actor_type"],
+      "required": [
+        "actor_type"
+      ],
       "properties": {
-        "actor_type": {"enum": ["human", "ai", "tool", "system"]},
-        "actor_id": {"type": ["string", "null"]},
-        "version": {"type": ["string", "null"]}
+        "actor_type": {
+          "enum": [
+            "human",
+            "ai",
+            "tool",
+            "system"
+          ]
+        },
+        "actor_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
       },
       "additionalProperties": false
     },
     "knowledge_entity": {
       "type": "object",
-      "required": ["record_type", "id", "canonical_name", "kinds", "abstraction_level", "identity_state"],
+      "required": [
+        "record_type",
+        "id",
+        "canonical_name",
+        "kinds",
+        "abstraction_level",
+        "identity_state"
+      ],
       "properties": {
-        "record_type": {"const": "knowledge_entity"},
-        "id": {"type": "string", "pattern": "^ke:"},
-        "canonical_name": {"type": "string", "minLength": 1},
-        "aliases": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
-        "kinds": {"type": "array", "minItems": 1, "items": {"type": "string"}, "uniqueItems": true},
-        "abstraction_level": {"enum": ["L0", "L1", "L2", "L3", "L4"]},
-        "identity_state": {"enum": ["PROPOSED", "CANONICAL", "MERGED", "RETIRED"]},
-        "redirect_to": {"type": ["string", "null"], "pattern": "^ke:"},
+        "record_type": {
+          "const": "knowledge_entity"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^ke:"
+        },
+        "canonical_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "kinds": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "abstraction_level": {
+          "enum": [
+            "L0",
+            "L1",
+            "L2",
+            "L3",
+            "L4"
+          ]
+        },
+        "identity_state": {
+          "enum": [
+            "PROPOSED",
+            "CANONICAL",
+            "MERGED",
+            "RETIRED"
+          ]
+        },
+        "redirect_to": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^ke:"
+        },
         "relations": {
           "type": "array",
           "items": {
             "type": "object",
-            "required": ["type", "target"],
+            "required": [
+              "type",
+              "target"
+            ],
             "properties": {
-              "type": {"enum": ["broader_than", "narrower_than", "related_to", "solves", "requires", "enables", "implements", "derived_from", "inspired_by", "conflicts_with", "tradeoff_with", "supersedes"]},
-              "target": {"type": "string", "pattern": "^ke:"}
+              "type": {
+                "enum": [
+                  "broader_than",
+                  "narrower_than",
+                  "related_to",
+                  "solves",
+                  "requires",
+                  "enables",
+                  "implements",
+                  "derived_from",
+                  "inspired_by",
+                  "conflicts_with",
+                  "tradeoff_with",
+                  "supersedes"
+                ]
+              },
+              "target": {
+                "type": "string",
+                "pattern": "^ke:"
+              }
             },
             "additionalProperties": false
           }
@@ -50,118 +154,546 @@
     },
     "claim": {
       "type": "object",
-      "required": ["record_type", "id", "entity_id", "claim_type", "statement", "maturity", "evidence_ids", "created_by", "policy_version"],
+      "required": [
+        "record_type",
+        "id",
+        "entity_id",
+        "claim_type",
+        "statement",
+        "maturity",
+        "evidence_ids",
+        "created_by",
+        "policy_version"
+      ],
       "properties": {
-        "record_type": {"const": "claim"},
-        "id": {"type": "string", "pattern": "^cl:"},
-        "entity_id": {"type": "string", "pattern": "^ke:"},
-        "claim_type": {"enum": ["DIRECT_OBSERVATION", "AUTHOR_CLAIM", "INFERENCE", "EXPERIMENT_RESULT", "JUDGMENT"]},
-        "statement": {"type": "string", "minLength": 1},
-        "maturity": {"enum": ["CANDIDATE", "SUPPORTED", "VALIDATED", "CHALLENGED", "SUPERSEDED", "REJECTED"]},
-        "evidence_ids": {"type": "array", "items": {"type": "string", "pattern": "^ev:"}, "uniqueItems": true},
-        "scope": {"type": "object", "additionalProperties": true},
-        "applicability": {"type": "object", "additionalProperties": true},
-        "confidence": {"enum": ["LOW", "MEDIUM", "HIGH", "UNKNOWN"]},
-        "reasoning_basis": {"type": "array", "items": {"type": "string"}},
-        "alternative_interpretations": {"type": "array", "items": {"type": "string"}},
-        "first_observed": {"type": ["string", "null"], "format": "date-time"},
-        "last_verified": {"type": ["string", "null"], "format": "date-time"},
-        "verification_due_at": {"type": ["string", "null"], "format": "date-time"},
-        "superseded_by": {"type": ["string", "null"], "pattern": "^cl:"},
-        "created_by": {"$ref": "#/$defs/actor"},
-        "policy_version": {"type": "string"}
+        "record_type": {
+          "const": "claim"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^cl:"
+        },
+        "entity_id": {
+          "type": "string",
+          "pattern": "^ke:"
+        },
+        "claim_type": {
+          "enum": [
+            "DIRECT_OBSERVATION",
+            "AUTHOR_CLAIM",
+            "INFERENCE",
+            "EXPERIMENT_RESULT",
+            "JUDGMENT"
+          ]
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "maturity": {
+          "enum": [
+            "CANDIDATE",
+            "SUPPORTED",
+            "VALIDATED",
+            "CHALLENGED",
+            "SUPERSEDED",
+            "REJECTED"
+          ]
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^ev:"
+          },
+          "uniqueItems": true
+        },
+        "scope": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "applicability": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "confidence": {
+          "enum": [
+            "LOW",
+            "MEDIUM",
+            "HIGH",
+            "UNKNOWN"
+          ]
+        },
+        "reasoning_basis": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "alternative_interpretations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "first_observed": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "last_verified": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "verification_due_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "superseded_by": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^cl:"
+        },
+        "created_by": {
+          "$ref": "#/$defs/actor"
+        },
+        "policy_version": {
+          "type": "string"
+        }
       },
       "allOf": [
         {
-          "if": {"properties": {"claim_type": {"const": "INFERENCE"}}},
-          "then": {"required": ["reasoning_basis", "confidence"]}
+          "if": {
+            "properties": {
+              "claim_type": {
+                "const": "INFERENCE"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "reasoning_basis",
+              "confidence"
+            ]
+          }
         }
       ],
       "additionalProperties": false
     },
     "evidence": {
       "type": "object",
-      "required": ["record_type", "id", "source_id", "locator", "roles"],
+      "required": [
+        "record_type",
+        "id",
+        "source_id",
+        "source_snapshot_id",
+        "locator",
+        "roles"
+      ],
       "properties": {
-        "record_type": {"const": "evidence"},
-        "id": {"type": "string", "pattern": "^ev:"},
-        "source_id": {"type": "string", "pattern": "^src:"},
-        "source_snapshot_id": {"type": ["string", "null"], "pattern": "^ss:"},
+        "record_type": {
+          "const": "evidence"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^ev:"
+        },
+        "source_id": {
+          "type": "string",
+          "pattern": "^src:"
+        },
+        "source_snapshot_id": {
+          "type": "string",
+          "pattern": "^ss:"
+        },
         "locator": {
           "type": "object",
-          "required": ["type"],
+          "required": [
+            "type"
+          ],
           "properties": {
-            "type": {"enum": ["source_lines", "symbol", "document_section", "issue_comment", "experiment_artifact", "stable_url"]},
-            "path": {"type": ["string", "null"]},
-            "line_start": {"type": ["integer", "null"], "minimum": 1},
-            "line_end": {"type": ["integer", "null"], "minimum": 1},
-            "symbol": {"type": ["string", "null"]},
-            "url": {"type": ["string", "null"]},
-            "content_hash": {"type": ["string", "null"]}
+            "type": {
+              "enum": [
+                "source_lines",
+                "symbol",
+                "document_section",
+                "issue_comment",
+                "experiment_artifact",
+                "stable_url"
+              ]
+            },
+            "path": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "line_start": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 1
+            },
+            "line_end": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 1
+            },
+            "symbol": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "url": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "content_hash": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
           },
           "additionalProperties": true
         },
-        "roles": {"type": "array", "minItems": 1, "items": {"enum": ["SUPPORTS", "REFUTES", "QUALIFIES"]}, "uniqueItems": true},
-        "observed_at": {"type": ["string", "null"], "format": "date-time"}
+        "roles": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "enum": [
+              "SUPPORTS",
+              "REFUTES",
+              "QUALIFIES"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "observed_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
       },
       "additionalProperties": false
     },
     "source": {
       "type": "object",
-      "required": ["record_type", "id", "kind", "origin", "acquisition", "license"],
+      "required": [
+        "record_type",
+        "id",
+        "kind",
+        "origin",
+        "acquisition",
+        "license"
+      ],
       "properties": {
-        "record_type": {"const": "source"},
-        "id": {"type": "string", "pattern": "^src:"},
-        "kind": {"enum": ["repository", "paper", "rfc", "standard", "issue", "pull_request", "discussion", "blog", "benchmark", "postmortem", "experiment"]},
-        "origin": {"type": "object", "minProperties": 1, "additionalProperties": true},
-        "snapshot": {"type": ["object", "null"], "additionalProperties": true},
+        "record_type": {
+          "const": "source"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^src:"
+        },
+        "kind": {
+          "enum": [
+            "repository",
+            "paper",
+            "rfc",
+            "standard",
+            "issue",
+            "pull_request",
+            "discussion",
+            "blog",
+            "benchmark",
+            "postmortem",
+            "experiment"
+          ]
+        },
+        "origin": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": true
+        },
         "acquisition": {
           "type": "object",
-          "required": ["level"],
-          "properties": {"level": {"enum": ["metadata-only", "snapshot", "selected-files", "full-source"]}},
+          "required": [
+            "level"
+          ],
+          "properties": {
+            "level": {
+              "enum": [
+                "metadata-only",
+                "snapshot",
+                "selected-files",
+                "full-source"
+              ]
+            }
+          },
           "additionalProperties": false
         },
         "license": {
           "type": "object",
-          "required": ["state"],
+          "required": [
+            "state"
+          ],
           "properties": {
-            "state": {"enum": ["KNOWN", "UNKNOWN", "CONFLICT", "REVIEW_REQUIRED"]},
-            "declared_expression": {"type": ["string", "null"]},
-            "handling_policy": {"type": ["string", "null"]}
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "CONFLICT",
+                "REVIEW_REQUIRED"
+              ]
+            },
+            "declared_expression": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "handling_policy": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
           },
           "additionalProperties": true
         }
       },
       "additionalProperties": false
     },
+    "source_snapshot": {
+      "type": "object",
+      "required": [
+        "record_type",
+        "id",
+        "source_id",
+        "captured_at"
+      ],
+      "properties": {
+        "record_type": {
+          "const": "source_snapshot"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^ss:"
+        },
+        "source_id": {
+          "type": "string",
+          "pattern": "^src:"
+        },
+        "revision": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "tree_hash": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "content_hash": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "swhid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "captured_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "anyOf": [
+        {
+          "required": [
+            "revision"
+          ],
+          "properties": {
+            "revision": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        {
+          "required": [
+            "tree_hash"
+          ],
+          "properties": {
+            "tree_hash": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        {
+          "required": [
+            "content_hash"
+          ],
+          "properties": {
+            "content_hash": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        {
+          "required": [
+            "swhid"
+          ],
+          "properties": {
+            "swhid": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      ],
+      "additionalProperties": false
+    },
     "staged_observation": {
       "type": "object",
-      "required": ["record_type", "id", "source_id", "summary", "created_by", "status"],
+      "required": [
+        "record_type",
+        "id",
+        "source_id",
+        "summary",
+        "created_by",
+        "status"
+      ],
       "properties": {
-        "record_type": {"const": "staged_observation"},
-        "id": {"type": "string", "pattern": "^obs:"},
-        "source_id": {"type": "string", "pattern": "^src:"},
-        "evidence_candidate_ids": {"type": "array", "items": {"type": "string", "pattern": "^ev:"}},
-        "summary": {"type": "string", "minLength": 1},
-        "candidate_names": {"type": "array", "items": {"type": "string"}},
-        "status": {"enum": ["NEW", "TRIAGED", "PROMOTED", "REJECTED", "EXPIRED"]},
-        "created_by": {"$ref": "#/$defs/actor"}
+        "record_type": {
+          "const": "staged_observation"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^obs:"
+        },
+        "source_id": {
+          "type": "string",
+          "pattern": "^src:"
+        },
+        "evidence_candidate_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^ev:"
+          }
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "candidate_names": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "enum": [
+            "NEW",
+            "TRIAGED",
+            "PROMOTED",
+            "REJECTED",
+            "EXPIRED"
+          ]
+        },
+        "created_by": {
+          "$ref": "#/$defs/actor"
+        }
       },
       "additionalProperties": false
     },
     "curation_event": {
       "type": "object",
-      "required": ["record_type", "id", "operation", "actor", "policy_version", "occurred_at"],
+      "required": [
+        "record_type",
+        "id",
+        "operation",
+        "actor",
+        "policy_version",
+        "occurred_at"
+      ],
       "properties": {
-        "record_type": {"const": "curation_event"},
-        "id": {"type": "string", "pattern": "^ce:"},
-        "operation": {"enum": ["ENTITY_CREATE", "ENTITY_MERGE", "ENTITY_RETIRE", "CLAIM_CREATE", "CLAIM_PROMOTE", "CLAIM_CHALLENGE", "CLAIM_SUPERSEDE", "CLAIM_REJECT", "SOURCE_ACQUIRE", "POLICY_CHANGE"]},
-        "actor": {"$ref": "#/$defs/actor"},
-        "subject_ids": {"type": "array", "items": {"type": "string"}},
-        "reason": {"type": ["string", "null"]},
-        "policy_version": {"type": "string"},
-        "occurred_at": {"type": "string", "format": "date-time"},
-        "reversible": {"type": "boolean"}
+        "record_type": {
+          "const": "curation_event"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^ce:"
+        },
+        "operation": {
+          "enum": [
+            "ENTITY_CREATE",
+            "ENTITY_MERGE",
+            "ENTITY_RETIRE",
+            "CLAIM_CREATE",
+            "CLAIM_PROMOTE",
+            "CLAIM_CHALLENGE",
+            "CLAIM_SUPERSEDE",
+            "CLAIM_REJECT",
+            "SOURCE_ACQUIRE",
+            "POLICY_CHANGE"
+          ]
+        },
+        "actor": {
+          "$ref": "#/$defs/actor"
+        },
+        "subject_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "policy_version": {
+          "type": "string"
+        },
+        "occurred_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "reversible": {
+          "type": "boolean"
+        }
       },
       "additionalProperties": false
     }
