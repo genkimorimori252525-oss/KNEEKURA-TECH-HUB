@@ -1,0 +1,153 @@
+{
+  "intake_version": "1.0",
+  "batch_id": "discovery:pilot:incremental-techniques:v1",
+  "discovered_by": {
+    "actor_type": "ai",
+    "actor_id": "jolly",
+    "version": "gpt-5.6-sol"
+  },
+  "discovered_at": "2026-09-09T00:00:00Z",
+  "scope": {
+    "provider": "github",
+    "query": "incremental parsing and incremental computation architecture",
+    "selection_basis": "Pinned real-OSS acceptance set reused from the curated incremental-computation research pilot",
+    "filters": {
+      "repository_only": true,
+      "pinned_revision_required": true
+    }
+  },
+  "records": [
+    {
+      "record_type": "staged_observation",
+      "id": "obs:discovery:tree-sitter:incremental-parsing:8351896b",
+      "source_id": "src:github:tree-sitter:tree-sitter",
+      "evidence_candidate_ids": [
+        "ev:discovery:tree-sitter:readme:incremental-parsing:8351896b"
+      ],
+      "summary": "The pinned Tree-sitter README contains material that may be relevant to an Incremental Parsing technique candidate.",
+      "candidate_names": [
+        "Incremental Parsing"
+      ],
+      "status": "NEW",
+      "created_by": {
+        "actor_type": "ai",
+        "actor_id": "jolly",
+        "version": "gpt-5.6-sol"
+      }
+    },
+    {
+      "record_type": "evidence",
+      "id": "ev:discovery:tree-sitter:readme:incremental-parsing:8351896b",
+      "source_id": "src:github:tree-sitter:tree-sitter",
+      "source_snapshot_id": "ss:github:tree-sitter:tree-sitter:8351896b",
+      "locator": {
+        "type": "source_lines",
+        "path": "README.md",
+        "line_start": 7,
+        "line_end": 12,
+        "content_hash": "git-blob:b347c880c2aa27f05a205994b159ac31512ee68b"
+      },
+      "roles": [
+        "SUPPORTS"
+      ],
+      "observed_at": "2026-09-08T18:34:00Z"
+    },
+    {
+      "record_type": "source_snapshot",
+      "id": "ss:github:tree-sitter:tree-sitter:8351896b",
+      "source_id": "src:github:tree-sitter:tree-sitter",
+      "revision": "8351896bea2e3359ed2fd893ffb051e9f9ebc69b",
+      "tree_hash": "7f791602019b8923b5891db8f5ed0f59bed43fdb",
+      "captured_at": "2026-09-08T18:34:00Z",
+      "metadata": {
+        "branch": "master",
+        "upstream_commit_url": "https://github.com/tree-sitter/tree-sitter/commit/8351896bea2e3359ed2fd893ffb051e9f9ebc69b"
+      }
+    },
+    {
+      "record_type": "source",
+      "id": "src:github:tree-sitter:tree-sitter",
+      "kind": "repository",
+      "origin": {
+        "provider": "github",
+        "repository": "tree-sitter/tree-sitter",
+        "url": "https://github.com/tree-sitter/tree-sitter",
+        "default_branch": "master"
+      },
+      "acquisition": {
+        "level": "selected-files"
+      },
+      "license": {
+        "state": "KNOWN",
+        "declared_expression": "MIT",
+        "handling_policy": "REFERENCE_ONLY"
+      }
+    },
+    {
+      "record_type": "staged_observation",
+      "id": "obs:discovery:salsa:query-model:e021c01d",
+      "source_id": "src:github:salsa-rs:salsa",
+      "evidence_candidate_ids": [
+        "ev:discovery:salsa:readme:query-model:e021c01d"
+      ],
+      "summary": "The pinned Salsa README contains material that may be relevant to a Query-based Incremental Computation architecture candidate.",
+      "candidate_names": [
+        "Query-based Incremental Computation"
+      ],
+      "status": "NEW",
+      "created_by": {
+        "actor_type": "ai",
+        "actor_id": "jolly",
+        "version": "gpt-5.6-sol"
+      }
+    },
+    {
+      "record_type": "evidence",
+      "id": "ev:discovery:salsa:readme:query-model:e021c01d",
+      "source_id": "src:github:salsa-rs:salsa",
+      "source_snapshot_id": "ss:github:salsa-rs:salsa:e021c01d",
+      "locator": {
+        "type": "source_lines",
+        "path": "README.md",
+        "line_start": 19,
+        "line_end": 31,
+        "content_hash": "git-blob:1e4afef11f4e66f16573457b220ec19d495fa742"
+      },
+      "roles": [
+        "SUPPORTS"
+      ],
+      "observed_at": "2026-09-08T18:34:00Z"
+    },
+    {
+      "record_type": "source_snapshot",
+      "id": "ss:github:salsa-rs:salsa:e021c01d",
+      "source_id": "src:github:salsa-rs:salsa",
+      "revision": "e021c01d4939408c89c9325ad2426660117a8b32",
+      "tree_hash": "a433b0650cc383131004fa13d1b21ba3893bca41",
+      "captured_at": "2026-09-08T18:34:00Z",
+      "metadata": {
+        "branch": "master",
+        "upstream_commit_url": "https://github.com/salsa-rs/salsa/commit/e021c01d4939408c89c9325ad2426660117a8b32"
+      }
+    },
+    {
+      "record_type": "source",
+      "id": "src:github:salsa-rs:salsa",
+      "kind": "repository",
+      "origin": {
+        "provider": "github",
+        "repository": "salsa-rs/salsa",
+        "url": "https://github.com/salsa-rs/salsa",
+        "default_branch": "master"
+      },
+      "acquisition": {
+        "level": "selected-files"
+      },
+      "license": {
+        "state": "KNOWN",
+        "declared_expression": "Apache-2.0 OR MIT",
+        "handling_policy": "REFERENCE_ONLY"
+      }
+    }
+  ]
+}
