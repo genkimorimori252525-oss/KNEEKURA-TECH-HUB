@@ -19,6 +19,17 @@ def source(source_id: str = "src:repo") -> dict:
     }
 
 
+def snapshot(snapshot_id: str = "ss:repo-commit", *, source_id: str = "src:repo") -> dict:
+    return {
+        "record_type": "source_snapshot",
+        "id": snapshot_id,
+        "source_id": source_id,
+        "revision": "0123456789abcdef",
+        "captured_at": "2026-09-09T00:00:00+00:00",
+        "metadata": {},
+    }
+
+
 def entity(entity_id: str = "ke:incremental") -> dict:
     return {
         "record_type": "knowledge_entity",
@@ -37,6 +48,7 @@ def evidence(evidence_id: str = "ev:1") -> dict:
         "record_type": "evidence",
         "id": evidence_id,
         "source_id": "src:repo",
+        "source_snapshot_id": "ss:repo-commit",
         "locator": {
             "type": "source_lines",
             "path": "src/cache.rs",
@@ -65,6 +77,7 @@ def claim(claim_id: str = "cl:1", *, maturity: str = "CANDIDATE") -> dict:
 def seeded_engine() -> CurationEngine:
     engine = CurationEngine(MemoryRepository())
     engine.register_source(source(), actor=HUMAN)
+    engine.register_source_snapshot(snapshot(), actor=HUMAN)
     engine.create_entity(entity(), actor=HUMAN)
     engine.register_evidence(evidence(), actor=HUMAN)
     return engine
@@ -83,6 +96,16 @@ def test_ai_cannot_create_canonical_entity():
     engine = CurationEngine(MemoryRepository())
     with pytest.raises(CurationError, match="requires a human actor"):
         engine.create_entity(entity(), actor=AI)
+
+
+def test_evidence_requires_snapshot_from_same_source():
+    engine = CurationEngine(MemoryRepository())
+    engine.register_source(source(), actor=HUMAN)
+    engine.register_source(source("src:other"), actor=HUMAN)
+    engine.register_source_snapshot(snapshot(source_id="src:other"), actor=HUMAN)
+
+    with pytest.raises(CurationError, match="does not belong"):
+        engine.register_evidence(evidence(), actor=HUMAN)
 
 
 def test_claim_transition_requires_human_for_validated():
@@ -129,7 +152,7 @@ def test_relation_target_must_exist():
     item = entity()
     item["relations"] = [{"type": "requires", "target": "ke:missing"}]
 
-    with pytest.raises(CurationError, match="unknown relation target"):
+    with pytest.raises(CurationError, match="unknown record: ke:missing"):
         engine.create_entity(item, actor=HUMAN)
 
 
