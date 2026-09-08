@@ -33,8 +33,9 @@ class ExecutionPostgresRepository(AuthorizationPostgresRepository):
                 INSERT INTO source_acquisition_execution(
                     authorization_id, source_id, revision, requested_paths, status,
                     file_results, manifest_sha256, storage_key, error_code, executed_by,
-                    policy_version, executed_at, authorization_effective_after, id
-                ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+                    policy_version, executed_at, authorization_effective_after,
+                    source_fingerprint_sha256, authorization_fingerprint_sha256, id
+                ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
                 """,
                 (
                     record["authorization_id"],
@@ -50,6 +51,8 @@ class ExecutionPostgresRepository(AuthorizationPostgresRepository):
                     record["policy_version"],
                     record["executed_at"],
                     record["authorization_effective_after"],
+                    record.get("source_fingerprint_sha256"),
+                    record.get("authorization_fingerprint_sha256"),
                     record["id"],
                 ),
             )
@@ -77,7 +80,8 @@ class ExecutionPostgresRepository(AuthorizationPostgresRepository):
             """
             SELECT authorization_id, source_id, revision, requested_paths, status,
                    file_results, manifest_sha256, storage_key, error_code, executed_by,
-                   policy_version, executed_at, authorization_effective_after
+                   policy_version, executed_at, authorization_effective_after,
+                   source_fingerprint_sha256, authorization_fingerprint_sha256
             FROM source_acquisition_execution WHERE id=%s
             """,
             (record_id,),
@@ -101,4 +105,8 @@ class ExecutionPostgresRepository(AuthorizationPostgresRepository):
             "executed_at": row[11].isoformat(),
             "authorization_effective_after": row[12],
         }
+        if row[13] is not None:
+            record["source_fingerprint_sha256"] = row[13]
+        if row[14] is not None:
+            record["authorization_fingerprint_sha256"] = row[14]
         return record
