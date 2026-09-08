@@ -21,12 +21,30 @@ CREATE TABLE source_acquisition_execution (
         jsonb_typeof(requested_paths) = 'array' AND jsonb_array_length(requested_paths) BETWEEN 1 AND 32
     ),
     CONSTRAINT source_acquisition_execution_file_results CHECK (
-        jsonb_typeof(file_results) = 'array' AND jsonb_array_length(file_results) <= 32
+        jsonb_typeof(file_results) = 'array'
+        AND jsonb_array_length(file_results) = jsonb_array_length(requested_paths)
+    ),
+    CONSTRAINT source_acquisition_execution_actor CHECK (
+        executed_by->>'actor_type' IN ('tool', 'system')
+    ),
+    CONSTRAINT source_acquisition_execution_storage_key CHECK (
+        storage_key IS NULL OR storage_key ~ '^ax-[0-9a-f]{64}$'
     ),
     CONSTRAINT source_acquisition_execution_success_fields CHECK (
-        (status = 'SUCCEEDED' AND manifest_sha256 IS NOT NULL AND storage_key IS NOT NULL AND error_code IS NULL)
+        (
+            status = 'SUCCEEDED'
+            AND manifest_sha256 IS NOT NULL
+            AND storage_key IS NOT NULL
+            AND error_code IS NULL
+            AND authorization_effective_after = TRUE
+        )
         OR
-        (status = 'FAILED' AND manifest_sha256 IS NULL AND storage_key IS NULL AND error_code IS NOT NULL)
+        (
+            status = 'FAILED'
+            AND manifest_sha256 IS NULL
+            AND storage_key IS NULL
+            AND error_code IS NOT NULL
+        )
     )
 );
 
