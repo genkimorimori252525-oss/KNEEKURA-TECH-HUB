@@ -46,15 +46,21 @@ CREATE TABLE IF NOT EXISTS source_snapshot (
     id TEXT PRIMARY KEY CHECK (id LIKE 'ss:%'),
     source_id TEXT NOT NULL REFERENCES source(id),
     revision TEXT,
+    tree_hash TEXT,
     content_hash TEXT,
+    swhid TEXT,
     captured_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-    metadata JSONB NOT NULL DEFAULT '{}'::jsonb
+    metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+    CHECK (
+        revision IS NOT NULL OR tree_hash IS NOT NULL OR
+        content_hash IS NOT NULL OR swhid IS NOT NULL
+    )
 );
 
 CREATE TABLE IF NOT EXISTS evidence (
     id TEXT PRIMARY KEY CHECK (id LIKE 'ev:%'),
     source_id TEXT NOT NULL REFERENCES source(id),
-    source_snapshot_id TEXT REFERENCES source_snapshot(id),
+    source_snapshot_id TEXT NOT NULL REFERENCES source_snapshot(id),
     locator JSONB NOT NULL,
     roles TEXT[] NOT NULL,
     observed_at TIMESTAMPTZ NOT NULL DEFAULT now()
@@ -118,6 +124,7 @@ CREATE INDEX IF NOT EXISTS idx_claim_entity ON claim(entity_id);
 CREATE INDEX IF NOT EXISTS idx_claim_maturity ON claim(maturity);
 CREATE INDEX IF NOT EXISTS idx_claim_last_verified ON claim(last_verified);
 CREATE INDEX IF NOT EXISTS idx_source_kind ON source(kind);
+CREATE INDEX IF NOT EXISTS idx_source_snapshot_source ON source_snapshot(source_id);
 CREATE INDEX IF NOT EXISTS idx_staged_observation_status ON staged_observation(status);
 
 COMMIT;
