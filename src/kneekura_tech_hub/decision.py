@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections import Counter
 from copy import deepcopy
 from datetime import datetime, timezone
-from typing import Any
+from uuid import uuid4
 
 from .comparison import claim_subject_key, compare_claim
 from .repository import Record, RecordRepository
@@ -100,17 +100,17 @@ class HumanReviewDecisionEngine:
     def create_from_fields(
         self,
         *,
-        decision_id: str,
         source_claim_id: str,
         target_claim_id: str,
         decision: str,
         rationale: str,
         actor: Record,
+        decision_id: str | None = None,
         supersedes_decision_id: str | None = None,
     ) -> Record:
         record: Record = {
             "record_type": "review_decision",
-            "id": decision_id,
+            "id": decision_id or f"rd:{uuid4()}",
             "source_claim_id": source_claim_id,
             "target_claim_id": target_claim_id,
             "decision": decision,
@@ -166,20 +166,14 @@ def active_review_decisions(
 
 def decision_context_for_claim(repository: RecordRepository, claim_id: str) -> Record:
     comparison = compare_claim(repository, claim_id)
-    group_claim_ids = {
-        item["claim"]["id"]
-        for item in comparison["claims"]
-    }
+    group_claim_ids = {item["claim"]["id"] for item in comparison["claims"]}
     history = [
         record
         for record in review_decision_history(repository)
         if record["source_claim_id"] in group_claim_ids
         and record["target_claim_id"] in group_claim_ids
     ]
-    active_ids = {
-        record["id"]
-        for record in active_review_decisions(repository)
-    }
+    active_ids = {record["id"] for record in active_review_decisions(repository)}
     active = [record for record in history if record["id"] in active_ids]
     return {
         "comparison": comparison,
