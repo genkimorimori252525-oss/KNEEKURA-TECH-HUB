@@ -18,6 +18,19 @@ def _now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
+def _decision_time(record: Record) -> datetime:
+    raw = record.get("decided_at")
+    if not isinstance(raw, str) or not raw:
+        raise DecisionError(f"review decision has invalid decided_at: {record.get('id')}")
+    try:
+        parsed = datetime.fromisoformat(raw.replace("Z", "+00:00"))
+    except ValueError as exc:
+        raise DecisionError(f"review decision has invalid decided_at: {record.get('id')}") from exc
+    if parsed.tzinfo is None or parsed.utcoffset() is None:
+        raise DecisionError(f"review decision decided_at must include timezone: {record.get('id')}")
+    return parsed.astimezone(timezone.utc)
+
+
 def _claim(repository: RecordRepository, claim_id: str) -> Record:
     record = repository.get(claim_id)
     if record is None:
@@ -46,6 +59,7 @@ def _validate_stored_decision(repository: RecordRepository, record: Record) -> N
     if record.get("record_type") != "review_decision":
         raise DecisionError(f"expected review_decision, got {record.get('record_type')!r}")
     validate_record(record)
+    _decision_time(record)
     source = _claim(repository, record["source_claim_id"])
     target = _claim(repository, record["target_claim_id"])
     if claim_subject_key(source) != claim_subject_key(target):
@@ -94,6 +108,7 @@ class HumanReviewDecisionEngine:
                     raise DecisionError("review decision already has a superseding successor")
 
         validate_record(record)
+        _decision_time(record)
         self.repository.put(record)
         return deepcopy(record)
 
@@ -142,7 +157,7 @@ def review_decision_history(
             for record in records
             if claim_id in {record["source_claim_id"], record["target_claim_id"]}
         ]
-    return sorted(records, key=lambda item: (item["decided_at"], item["id"]))
+    return sorted(records, key=lambda item: (_decision_time(item), item["id"]))
 
 
 def active_review_decisions(
