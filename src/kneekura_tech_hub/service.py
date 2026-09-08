@@ -79,6 +79,8 @@ class CurationEngine:
     def create_entity(self, entity: Record, *, actor: Record, reason: str | None = None) -> Record:
         self._require_type(entity, "knowledge_entity")
         self._require_human(actor, "canonical entity creation")
+        if entity.get("identity_state") in {"MERGED", "RETIRED"}:
+            raise CurationError("new entities cannot start as MERGED or RETIRED")
         self._require_entity_targets_exist(entity)
         validate_record(entity)
         self.repository.put(entity)
@@ -95,6 +97,8 @@ class CurationEngine:
     def create_claim(self, claim: Record, *, actor: Record, reason: str | None = None) -> Record:
         self._require_type(claim, "claim")
         self._require_actor_match(claim.get("created_by"), actor, "claim created_by")
+        if claim.get("maturity") != "CANDIDATE":
+            raise CurationError("new claims must start at CANDIDATE")
         self._require_existing(claim["entity_id"], "knowledge_entity")
         self._require_evidence_exists(claim.get("evidence_ids", []))
         validate_record(claim)
