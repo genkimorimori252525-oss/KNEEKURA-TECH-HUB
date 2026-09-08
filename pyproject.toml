@@ -24,6 +24,7 @@ dev = [
 kneekura-hub = "kneekura_tech_hub.cli:main"
 kneekura-hub-validate = "kneekura_tech_hub.cli:validate_main"
 kneekura-github-discover = "kneekura_tech_hub.github_cli:main"
+kneekura-discovery-run = "kneekura_tech_hub.discovery_run_cli:main"
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
