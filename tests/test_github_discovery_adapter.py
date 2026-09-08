@@ -43,6 +43,7 @@ def test_adapter_emits_only_metadata_sources_and_preserves_provider_order():
     assert batch["records"][0]["origin"]["stargazers_count"] == 7
     assert batch["records"][1]["origin"]["stargazers_count"] == 900000
     assert batch["scope"]["filters"]["duplicate_source_count"] == 1
+    assert batch["scope"]["filters"]["public_only"] is True
     assert "rank" not in batch["records"][0]
     assert "score" not in batch["records"][0]
 
@@ -67,6 +68,42 @@ def test_search_api_license_is_only_a_hint_not_a_verified_expression():
     }
 
 
+def test_authenticated_private_or_internal_results_are_not_persisted_as_oss_sources():
+    payload = _payload()
+    payload["items"].insert(
+        1,
+        {
+            "id": 99,
+            "full_name": "example/private-research",
+            "html_url": "https://github.com/example/private-research",
+            "private": True,
+            "visibility": "private",
+            "stargazers_count": 9999999,
+        },
+    )
+    payload["items"].insert(
+        2,
+        {
+            "id": 100,
+            "full_name": "example/internal-research",
+            "html_url": "https://github.com/example/internal-research",
+            "private": False,
+            "visibility": "internal",
+        },
+    )
+
+    batch = build_metadata_discovery_batch(
+        payload,
+        query="incremental analysis",
+        discovered_by=ACTOR,
+        discovered_at="2026-09-09T06:00:00Z",
+    )
+
+    assert batch["scope"]["filters"]["skipped_nonpublic_count"] == 2
+    assert all("private-research" not in record["id"] for record in batch["records"])
+    assert all("internal-research" not in record["id"] for record in batch["records"])
+
+
 def test_batch_id_is_stable_for_same_query_page_and_provider_order():
     kwargs = {
         "query": "incremental analysis",
@@ -80,7 +117,7 @@ def test_batch_id_is_stable_for_same_query_page_and_provider_order():
 
 
 def test_adapter_rejects_empty_results_and_malformed_repository_identity():
-    with pytest.raises(GitHubDiscoveryAdapterError, match="no usable repositories"):
+    with pytest.raises(GitHubDiscoveryAdapterError, match="no usable public repositories"):
         build_metadata_discovery_batch(
             {"total_count": 0, "items": []},
             query="incremental analysis",
