@@ -150,3 +150,5 @@ def test_unknown_view_and_direction_are_rejected():
         project_relations(repository, view="wrong")  # type: ignore[arg-type]
     with pytest.raises(ProjectionError, match="unknown relation direction"):
         project_relations(repository, direction="sideways")  # type: ignore[arg-type]
+    with pytest.raises(ProjectionError, match="require entity_id"):
+        project_relations(repository, direction="out")
