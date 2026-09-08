@@ -73,6 +73,13 @@ def _license_hint(item: dict[str, Any]) -> dict[str, str | None] | None:
     return hint
 
 
+def _is_nonpublic(item: dict[str, Any]) -> bool:
+    if item.get("private") is True:
+        return True
+    visibility = item.get("visibility")
+    return isinstance(visibility, str) and visibility.lower() != "public"
+
+
 def _metadata_source(item: dict[str, Any]) -> Record:
     repository = _repository_name(item)
     html_url = item.get("html_url")
@@ -145,10 +152,12 @@ def build_metadata_discovery_batch(
     page: int = 1,
     max_records: int = 1000,
 ) -> dict[str, Any]:
-    """Convert one or more GitHub search items into a metadata-only discovery batch.
+    """Convert GitHub repository-search items into a metadata-only discovery batch.
 
     Provider ordering is preserved. Stars, forks, language and license fields remain metadata;
-    none of them is converted into a quality judgment or canonical knowledge record.
+    none of them is converted into a quality judgment or canonical knowledge record. Non-public
+    repositories are omitted from this OSS discovery adapter even when an authenticated GitHub
+    token could see them.
     """
 
     if not isinstance(query, str) or not query.strip():
@@ -167,9 +176,13 @@ def build_metadata_discovery_batch(
     records: list[Record] = []
     seen: set[str] = set()
     duplicate_count = 0
+    skipped_nonpublic_count = 0
     for raw in items:
         if not isinstance(raw, dict):
             raise GitHubDiscoveryAdapterError("GitHub search items must be objects")
+        if _is_nonpublic(raw):
+            skipped_nonpublic_count += 1
+            continue
         source = _metadata_source(raw)
         if source["id"] in seen:
             duplicate_count += 1
@@ -180,7 +193,9 @@ def build_metadata_discovery_batch(
             break
 
     if not records:
-        raise GitHubDiscoveryAdapterError("GitHub search response produced no usable repositories")
+        raise GitHubDiscoveryAdapterError(
+            "GitHub search response produced no usable public repositories"
+        )
 
     source_ids = [record["id"] for record in records]
     batch: dict[str, Any] = {
@@ -197,10 +212,12 @@ def build_metadata_discovery_batch(
             "filters": {
                 "adapter": "github-discovery-adapter-v1",
                 "metadata_only": True,
+                "public_only": True,
                 "page": page,
                 "input_item_count": len(items),
                 "output_source_count": len(records),
                 "duplicate_source_count": duplicate_count,
+                "skipped_nonpublic_count": skipped_nonpublic_count,
                 "api_total_count": search_payload.get("total_count"),
                 "api_incomplete_results": search_payload.get("incomplete_results"),
             },
