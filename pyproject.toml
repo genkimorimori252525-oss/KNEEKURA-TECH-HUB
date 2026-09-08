@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "kneekura-tech-hub"
+version = "0.1.0"
+description = "Evidence-backed technology discovery and curation core for KNEEKURA TECH HUB"
+requires-python = ">=3.11"
+dependencies = [
+  "jsonschema>=4.23,<5",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.3,<9",
+]
+
+[project.scripts]
+kneekura-hub-validate = "kneekura_tech_hub.cli:main"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
