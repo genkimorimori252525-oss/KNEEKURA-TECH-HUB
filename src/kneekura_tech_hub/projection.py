@@ -48,11 +48,7 @@ def resolve_entity_id(repository: RecordRepository, entity_id: str) -> str:
         current = redirect
 
 
-def _matches_entity(
-    relation: Record,
-    entity_id: str | None,
-    direction: Direction,
-) -> bool:
+def _matches_entity(relation: Record, entity_id: str | None, direction: Direction) -> bool:
     if entity_id is None:
         return True
     if direction == "out":
@@ -82,6 +78,8 @@ def project_relations(
         raise ProjectionError(f"unknown relation view: {view}")
     if direction not in {"any", "out", "in"}:
         raise ProjectionError(f"unknown relation direction: {direction}")
+    if direction != "any" and entity_id is None:
+        raise ProjectionError("directional relation queries require entity_id")
 
     query_entity = resolve_entity_id(repository, entity_id) if entity_id else None
     allowed_maturities = RELATION_VIEWS[view]
