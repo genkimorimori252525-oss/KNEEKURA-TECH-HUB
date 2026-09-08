@@ -14,11 +14,12 @@ def apply_foundation_migration(
     connection: psycopg.Connection[Any],
     migration_path: Path | None = None,
 ) -> None:
-    """Apply the idempotent foundation migration using simple statements."""
+    """Apply the idempotent foundation migration in one explicit transaction."""
     path = migration_path or default_migration_path()
     sql = path.read_text(encoding="utf-8")
-    for statement in sql.split(";"):
-        statement = statement.strip()
-        if not statement or statement in {"BEGIN", "COMMIT"}:
-            continue
-        connection.execute(statement)
+    with connection.transaction():
+        for statement in sql.split(";"):
+            statement = statement.strip()
+            if not statement or statement in {"BEGIN", "COMMIT"}:
+                continue
+            connection.execute(statement)
