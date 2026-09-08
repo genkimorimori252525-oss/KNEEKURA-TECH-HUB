@@ -62,6 +62,8 @@ def main() -> int:
             discovered_at=args.discovered_at,
             page=args.page,
             max_records=args.max_records,
+            search_sort=args.sort,
+            search_order=args.order,
         )
     except GitHubDiscoveryAdapterError as exc:
         print(f"REJECTED GITHUB DISCOVERY: {exc}")
