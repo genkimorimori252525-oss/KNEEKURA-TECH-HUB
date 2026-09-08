@@ -17,6 +17,17 @@ def load_schema(schema_path: Path | None = None) -> dict[str, Any]:
     return json.loads(schema_path.read_text(encoding="utf-8"))
 
 
+def load_review_decision_schema(schema_path: Path | None = None) -> dict[str, Any]:
+    if schema_path is None:
+        schema_path = (
+            Path(__file__).resolve().parents[2]
+            / "schemas"
+            / "v1"
+            / "review-decision.schema.json"
+        )
+    return json.loads(schema_path.read_text(encoding="utf-8"))
+
+
 def load_policy(policy_path: Path | None = None) -> dict[str, Any]:
     if policy_path is None:
         policy_path = Path(__file__).resolve().parents[2] / "governance" / "policy-v1.json"
@@ -103,6 +114,15 @@ def _policy_errors(record: dict[str, Any], policy: dict[str, Any]) -> list[str]:
         if license_state == "UNKNOWN" and acquisition_level != policy["license_unknown_max_acquisition"]:
             errors.append("UNKNOWN license sources are limited to metadata-only acquisition")
 
+    if record_type == "review_decision":
+        if record.get("source_claim_id") == record.get("target_claim_id"):
+            errors.append("review decision source and target Claims must be different")
+        actor_type = (record.get("created_by") or {}).get("actor_type")
+        if actor_type != "human":
+            errors.append("review decisions require a human creator")
+        if record.get("supersedes_decision_id") == record.get("id"):
+            errors.append("review decision cannot supersede itself")
+
     if record_type == "curation_event":
         actor_type = (record.get("actor") or {}).get("actor_type")
         operation = record.get("operation")
@@ -118,7 +138,10 @@ def validate_record(
     schema_path: Path | None = None,
     policy_path: Path | None = None,
 ) -> None:
-    schema = load_schema(schema_path)
+    if record.get("record_type") == "review_decision":
+        schema = load_review_decision_schema(schema_path)
+    else:
+        schema = load_schema(schema_path)
     validator = Draft202012Validator(schema)
     schema_errors = sorted(validator.iter_errors(record), key=lambda error: list(error.path))
 

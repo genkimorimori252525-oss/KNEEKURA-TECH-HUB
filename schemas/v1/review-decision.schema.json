@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kneekura.local/schemas/v1/review-decision.schema.json",
+  "title": "KNEEKURA TECH HUB v1 Human Review Decision",
+  "type": "object",
+  "required": [
+    "record_type",
+    "id",
+    "source_claim_id",
+    "target_claim_id",
+    "decision",
+    "rationale",
+    "created_by",
+    "policy_version",
+    "decided_at"
+  ],
+  "properties": {
+    "record_type": {"const": "review_decision"},
+    "id": {"type": "string", "pattern": "^rd:"},
+    "source_claim_id": {"type": "string", "pattern": "^cl:"},
+    "target_claim_id": {"type": "string", "pattern": "^cl:"},
+    "decision": {
+      "enum": [
+        "CONTRADICTS",
+        "COMPATIBLE",
+        "QUALIFIES",
+        "DUPLICATE",
+        "SUPERSEDES",
+        "UNRESOLVED"
+      ]
+    },
+    "rationale": {"type": "string", "minLength": 1},
+    "created_by": {
+      "type": "object",
+      "required": ["actor_type"],
+      "properties": {
+        "actor_type": {"const": "human"},
+        "actor_id": {"type": ["string", "null"]},
+        "version": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "policy_version": {"type": "string", "minLength": 1},
+    "decided_at": {"type": "string", "format": "date-time"},
+    "supersedes_decision_id": {"type": ["string", "null"], "pattern": "^rd:"}
+  },
+  "additionalProperties": false
+}
