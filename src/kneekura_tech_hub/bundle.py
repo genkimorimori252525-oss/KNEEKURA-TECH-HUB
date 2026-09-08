@@ -58,17 +58,18 @@ def _creation_actor(record: Record, reviewer_actor: Record) -> Record:
     """Select the actor that actually created a record.
 
     Canonical identity/source acquisition is performed by the explicit bundle
-    reviewer. Candidate claims retain their own creator identity so AI-created
-    candidates are not rewritten as human-authored provenance.
+    reviewer. Candidate claims and staged observations retain their own creator
+    identity so AI-created discovery/claim records are not rewritten as human
+    provenance.
     """
 
-    if record.get("record_type") == "claim":
+    if record.get("record_type") in {"claim", "staged_observation"}:
         creator = record.get("created_by")
         if not isinstance(creator, dict):
-            raise BundleValidationError("claim created_by must be an actor object")
+            raise BundleValidationError("created_by must be an actor object")
         if creator.get("actor_type") == "human" and creator != reviewer_actor:
             raise BundleValidationError(
-                "human-created claim actor must match the bundle reviewer"
+                "human-created record actor must match the bundle reviewer"
             )
         return creator
     return reviewer_actor
@@ -166,7 +167,8 @@ def ingest_bundle(
     """Preflight and ingest a curated bundle through the governed service layer.
 
     ``actor`` is the human reviewer/acquisition actor for canonical identities and
-    source records. Candidate claims retain their declared creator identity.
+    source records. Candidate claims and staged observations retain their declared
+    creator identity.
     """
 
     if actor.get("actor_type") != "human":
@@ -197,7 +199,7 @@ def ingest_bundle(
                 reason=f"bundle {bundle['bundle_id']}",
             )
         elif record_type == "staged_observation":
-            engine.stage_observation(record)
+            engine.stage_observation(record, actor=creation_actor)
         else:
             raise BundleValidationError(
                 f"record_type cannot be ingested from prototype bundle: {record_type}"
