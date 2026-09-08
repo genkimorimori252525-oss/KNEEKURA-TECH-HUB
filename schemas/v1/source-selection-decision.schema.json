@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kneekura.local/schemas/v1/source-selection-decision.schema.json",
+  "title": "KNEEKURA TECH HUB v1 Source Selection Decision",
+  "type": "object",
+  "required": [
+    "record_type",
+    "id",
+    "source_id",
+    "decision",
+    "rationale",
+    "created_by",
+    "policy_version",
+    "decided_at"
+  ],
+  "properties": {
+    "record_type": {"const": "source_selection_decision"},
+    "id": {"type": "string", "pattern": "^sd:"},
+    "source_id": {"type": "string", "pattern": "^src:"},
+    "decision": {
+      "enum": [
+        "SELECT_FOR_REVIEW",
+        "DEFER",
+        "REJECT_FOR_REVIEW"
+      ]
+    },
+    "rationale": {"type": "string", "minLength": 1},
+    "created_by": {
+      "type": "object",
+      "required": ["actor_type"],
+      "properties": {
+        "actor_type": {"const": "human"},
+        "actor_id": {"type": ["string", "null"]},
+        "version": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "policy_version": {"type": "string", "minLength": 1},
+    "decided_at": {"type": "string", "format": "date-time"},
+    "supersedes_decision_id": {"type": ["string", "null"], "pattern": "^sd:"}
+  },
+  "additionalProperties": false
+}
