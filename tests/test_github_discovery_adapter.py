@@ -68,7 +68,7 @@ def test_search_api_license_is_only_a_hint_not_a_verified_expression():
     }
 
 
-def test_authenticated_private_or_internal_results_are_not_persisted_as_oss_sources():
+def test_nonpublic_or_unknown_visibility_results_are_not_persisted_as_oss_sources():
     payload = _payload()
     payload["items"].insert(
         1,
@@ -91,6 +91,14 @@ def test_authenticated_private_or_internal_results_are_not_persisted_as_oss_sour
             "visibility": "internal",
         },
     )
+    payload["items"].insert(
+        3,
+        {
+            "id": 101,
+            "full_name": "example/visibility-unknown",
+            "html_url": "https://github.com/example/visibility-unknown",
+        },
+    )
 
     batch = build_metadata_discovery_batch(
         payload,
@@ -99,9 +107,10 @@ def test_authenticated_private_or_internal_results_are_not_persisted_as_oss_sour
         discovered_at="2026-09-09T06:00:00Z",
     )
 
-    assert batch["scope"]["filters"]["skipped_nonpublic_count"] == 2
+    assert batch["scope"]["filters"]["skipped_nonpublic_count"] == 3
     assert all("private-research" not in record["id"] for record in batch["records"])
     assert all("internal-research" not in record["id"] for record in batch["records"])
+    assert all("visibility-unknown" not in record["id"] for record in batch["records"])
 
 
 def test_search_sort_and_order_are_preserved_as_provenance_not_quality():
@@ -159,6 +168,7 @@ def test_adapter_rejects_empty_results_and_malformed_repository_identity():
         {
             "full_name": "not-owner-name",
             "html_url": "https://github.com/not-owner-name",
+            "visibility": "public",
         }
     ]
     with pytest.raises(GitHubDiscoveryAdapterError, match="invalid GitHub full_name"):
