@@ -26,6 +26,8 @@ Source → SourceSnapshot → Evidence → Claim → Knowledge Entity
                                           ↓
                          Problem-oriented Query Layer
                                           ↓
+                               Evidence Explanation
+                                          ↓
                                   Application & Research
 ```
 
@@ -40,6 +42,8 @@ Relationships between Knowledge Entities are also evidence-backed Claims. A Clai
 Relation graph views are rebuilt from Claims. They are never stored as a second canonical graph. Projection preserves the asserted endpoint IDs and also resolves current canonical identities through human-approved entity-merge redirects.
 
 Problem-oriented queries are deliberately conservative. They read only explicit evidence-backed relation claims such as `solves` and `requires`; they do not infer solutions from popularity, text similarity, `related_to`, or an AI guess made during query execution.
+
+Evidence Explanation reconstructs the stored `Claim → Evidence → SourceSnapshot → Source` chain. It does not generate a new justification, promote a Claim, or silently repair broken provenance.
 
 ## Current implementation
 
@@ -111,6 +115,18 @@ Problem-oriented queries are deliberately conservative. They read only explicit 
 - Candidate results remain research-only until the normal human `VALIDATED` transition
 - read-only `solutions`, `solved-problems`, and `requirements` CLI commands
 - real PostgreSQL + real OSS pilot verification
+
+### Evidence Explanation v1
+
+- exact `Claim → Evidence → SourceSnapshot → Source` provenance reconstruction
+- preserves Claim Evidence ordering
+- returns full underlying provenance records instead of a lossy summary
+- `explain_relation_result` resolves projected/problem-query results through their immutable Claim ID
+- missing or wrong-type provenance records fail closed
+- SourceSnapshot/Source mismatches fail closed
+- explanation is read-only and does not change Claim maturity
+- real Salsa solution result resolves to pinned revision `e021c01d4939408c89c9325ad2426660117a8b32`
+- read-only `kneekura-hub explain-claim` CLI
 
 Mass crawling and automated knowledge promotion are intentionally not enabled yet.
 
@@ -202,6 +218,13 @@ kneekura-hub requirements \
   --view research
 ```
 
+Explain why one Claim or query result exists by walking its stored provenance:
+
+```bash
+kneekura-hub explain-claim \
+  cl:salsa:query-incremental:solves:repeated-recomputation:e021c01d
+```
+
 Store and retrieve records:
 
 ```bash
@@ -226,6 +249,7 @@ kneekura-hub merge-entities ke:survivor ke:duplicate --reason 'same concept' --a
 - `docs/architecture/RELATION-PROVENANCE-v1.md`
 - `docs/architecture/RELATION-PROJECTION-v1.md`
 - `docs/architecture/PROBLEM-QUERY-v1.md`
+- `docs/architecture/EVIDENCE-EXPLANATION-v1.md`
 - `docs/pilots/INCREMENTAL-COMPUTATION-v1.md`
 - `governance/CONSTITUTION.md`
 - `governance/policy-v1.json`
@@ -239,6 +263,7 @@ kneekura-hub merge-entities ke:survivor ke:duplicate --reason 'same concept' --a
 - Phase 2: **first real OSS curated pilot implemented**
 - Relation Provenance v1: **implemented and merged**
 - Relation Projection v1: **implemented and merged**
-- Problem Query v1: **implemented; real-pilot verification passing**
-- Next pressure: **Evidence Explanation — Claim → Evidence → SourceSnapshot → Source provenance walk**
+- Problem Query v1: **implemented and merged**
+- Evidence Explanation v1: **implemented; verification in progress**
+- Next pressure: **derived evidence-strength / review view without mutating Claims**
 - Mass discovery: **not enabled yet**
