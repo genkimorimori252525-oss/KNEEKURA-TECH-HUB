@@ -8,13 +8,14 @@ from typing import Any
 
 import psycopg
 
+from .bundle import BundleValidationError, ingest_bundle, preflight_bundle
 from .database import apply_foundation_migration
 from .postgres_repository import PostgresRepository
 from .service import CurationEngine, CurationError
 from .validator import HubValidationError, validate_record
 
 
-def _load_record(path: Path) -> dict[str, Any]:
+def _load_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
@@ -49,8 +50,7 @@ def _add_actor_arguments(parser: argparse.ArgumentParser) -> None:
 
 
 def _open_repository(dsn: str) -> PostgresRepository:
-    # Read operations must not leave a long-lived implicit transaction open.
-    return PostgresRepository(psycopg.connect(dsn, autocommit=True))
+    return PostgresRepository.connect(dsn)
 
 
 def _ingest(engine: CurationEngine, record: dict[str, Any], actor: dict[str, Any]) -> None:
@@ -77,7 +77,7 @@ def validate_main() -> int:
     args = parser.parse_args()
 
     try:
-        validate_record(_load_record(args.record))
+        validate_record(_load_json(args.record))
     except HubValidationError as exc:
         print(f"INVALID: {exc}")
         return 1
@@ -92,6 +92,11 @@ def main() -> int:
     validate_parser = subparsers.add_parser("validate", help="validate one JSON record")
     validate_parser.add_argument("record", type=Path)
 
+    bundle_check_parser = subparsers.add_parser(
+        "bundle-check", help="preflight a self-contained curated prototype bundle"
+    )
+    bundle_check_parser.add_argument("bundle", type=Path)
+
     init_parser = subparsers.add_parser("init-db", help="apply the foundation PostgreSQL migration")
     _add_database_argument(init_parser)
 
@@ -99,6 +104,14 @@ def main() -> int:
     ingest_parser.add_argument("record", type=Path)
     _add_database_argument(ingest_parser)
     _add_actor_arguments(ingest_parser)
+
+    bundle_ingest_parser = subparsers.add_parser(
+        "ingest-bundle",
+        help="preflight and atomically store a curated prototype bundle",
+    )
+    bundle_ingest_parser.add_argument("bundle", type=Path)
+    _add_database_argument(bundle_ingest_parser)
+    _add_actor_arguments(bundle_ingest_parser)
 
     get_parser = subparsers.add_parser("get", help="retrieve one record by immutable ID")
     get_parser.add_argument("record_id")
@@ -148,11 +161,21 @@ def main() -> int:
 
     if args.command == "validate":
         try:
-            validate_record(_load_record(args.record))
+            validate_record(_load_json(args.record))
         except HubValidationError as exc:
             print(f"INVALID: {exc}")
             return 1
         print("VALID")
+        return 0
+
+    if args.command == "bundle-check":
+        try:
+            bundle = _load_json(args.bundle)
+            ordered = preflight_bundle(bundle)
+        except (BundleValidationError, HubValidationError, ValueError) as exc:
+            print(f"INVALID BUNDLE: {exc}")
+            return 1
+        print(f"BUNDLE VALID {bundle['bundle_id']} records={len(ordered)}")
         return 0
 
     repo = _open_repository(_dsn(args))
@@ -166,12 +189,25 @@ def main() -> int:
 
         if args.command == "ingest":
             try:
-                record = _load_record(args.record)
+                record = _load_json(args.record)
                 _ingest(engine, record, _actor(args))
             except (HubValidationError, CurationError, ValueError) as exc:
                 print(f"REJECTED: {exc}")
                 return 1
             print(f"STORED {record['id']}")
+            return 0
+
+        if args.command == "ingest-bundle":
+            try:
+                bundle = _load_json(args.bundle)
+                # One outer transaction makes the bundle all-or-nothing. The
+                # repository's per-record transactions become nested savepoints.
+                with repo.connection.transaction():
+                    stored = ingest_bundle(engine, bundle, actor=_actor(args))
+            except (BundleValidationError, HubValidationError, CurationError, ValueError) as exc:
+                print(f"REJECTED BUNDLE: {exc}")
+                return 1
+            print(f"STORED BUNDLE {bundle['bundle_id']} records={len(stored)}")
             return 0
 
         if args.command == "get":
