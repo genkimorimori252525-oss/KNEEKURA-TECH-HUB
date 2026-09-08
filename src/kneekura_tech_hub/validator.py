@@ -23,6 +23,48 @@ def load_policy(policy_path: Path | None = None) -> dict[str, Any]:
     return json.loads(policy_path.read_text(encoding="utf-8"))
 
 
+def _missing(locator: dict[str, Any], *fields: str) -> list[str]:
+    return [field for field in fields if locator.get(field) in (None, "")]
+
+
+def _evidence_locator_errors(record: dict[str, Any]) -> list[str]:
+    locator = record.get("locator") or {}
+    locator_type = locator.get("type")
+    errors: list[str] = []
+
+    requirements = {
+        "source_lines": ("path", "line_start", "line_end", "content_hash"),
+        "symbol": ("symbol",),
+        "stable_url": ("url",),
+    }
+    required = requirements.get(locator_type, ())
+    missing = _missing(locator, *required)
+    if missing:
+        errors.append(f"{locator_type} locator requires: {', '.join(missing)}")
+
+    if locator_type == "document_section" and not (
+        locator.get("section") or locator.get("url")
+    ):
+        errors.append("document_section locator requires section or url")
+
+    if locator_type == "issue_comment" and not (
+        locator.get("comment_id") or locator.get("url")
+    ):
+        errors.append("issue_comment locator requires comment_id or url")
+
+    if locator_type == "experiment_artifact" and not (
+        locator.get("artifact_id") or locator.get("content_hash") or locator.get("url")
+    ):
+        errors.append("experiment_artifact locator requires artifact_id, content_hash, or url")
+
+    line_start = locator.get("line_start")
+    line_end = locator.get("line_end")
+    if isinstance(line_start, int) and isinstance(line_end, int) and line_end < line_start:
+        errors.append("locator line_end must be greater than or equal to line_start")
+
+    return errors
+
+
 def _policy_errors(record: dict[str, Any], policy: dict[str, Any]) -> list[str]:
     errors: list[str] = []
     record_type = record.get("record_type")
@@ -37,6 +79,9 @@ def _policy_errors(record: dict[str, Any], policy: dict[str, Any]) -> list[str]:
             errors.append(f"{claim_type} requires at least one evidence_id")
         if actor_type == "ai" and maturity == "VALIDATED" and not policy["ai_may_promote_to_validated"]:
             errors.append("AI-created claims cannot be VALIDATED under policy v1")
+
+    if record_type == "evidence":
+        errors.extend(_evidence_locator_errors(record))
 
     if record_type == "source":
         license_state = (record.get("license") or {}).get("state")
