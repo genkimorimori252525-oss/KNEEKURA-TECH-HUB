@@ -309,6 +309,7 @@ def preflight_discovery_intake(
                 expected_type="source",
             )
             _validate_source_identity(source)
+            _require_acquired_source(source, dependent_id=record["id"])
             evidence_ids = record.get("evidence_candidate_ids") or []
             snapshots: set[str] = set()
             for evidence_id in evidence_ids:
