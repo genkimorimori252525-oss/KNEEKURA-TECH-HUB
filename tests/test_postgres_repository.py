@@ -1,11 +1,11 @@
 from __future__ import annotations
 
 import os
-from pathlib import Path
 
 import psycopg
 import pytest
 
+from kneekura_tech_hub.database import apply_foundation_migration
 from kneekura_tech_hub.postgres_repository import PostgresRepository
 from kneekura_tech_hub.service import CurationEngine
 
@@ -16,20 +16,11 @@ pytestmark = pytest.mark.skipif(not DSN, reason="KTHUB_TEST_DATABASE_URL is not 
 HUMAN = {"actor_type": "human", "actor_id": "integration-reviewer"}
 
 
-def _apply_migration(connection: psycopg.Connection) -> None:
-    sql = Path("migrations/0001_foundation.sql").read_text(encoding="utf-8")
-    for statement in sql.split(";"):
-        statement = statement.strip()
-        if not statement or statement in {"BEGIN", "COMMIT"}:
-            continue
-        connection.execute(statement)
-
-
 @pytest.fixture
 def repository() -> PostgresRepository:
     assert DSN is not None
     connection = psycopg.connect(DSN, autocommit=True)
-    _apply_migration(connection)
+    apply_foundation_migration(connection)
     connection.execute(
         """
         TRUNCATE TABLE
