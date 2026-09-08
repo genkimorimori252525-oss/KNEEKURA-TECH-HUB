@@ -67,7 +67,15 @@
     },
     "policy_version": {"type": "string", "minLength": 1},
     "executed_at": {"type": "string", "format": "date-time"},
-    "authorization_effective_after": {"type": "boolean"}
+    "authorization_effective_after": {"type": "boolean"},
+    "source_fingerprint_sha256": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "authorization_fingerprint_sha256": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9a-f]{64}$"
+    }
   },
   "additionalProperties": false
 }
