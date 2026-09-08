@@ -94,6 +94,7 @@ class CurationEngine:
 
     def create_claim(self, claim: Record, *, actor: Record, reason: str | None = None) -> Record:
         self._require_type(claim, "claim")
+        self._require_actor_match(claim.get("created_by"), actor, "claim created_by")
         self._require_existing(claim["entity_id"], "knowledge_entity")
         self._require_evidence_exists(claim.get("evidence_ids", []))
         validate_record(claim)
@@ -202,6 +203,11 @@ class CurationEngine:
             raise CurationError(f"unknown record: {record_id}")
         self._require_type(record, expected_type)
         return record
+
+    @staticmethod
+    def _require_actor_match(record_actor: Record | None, actor: Record, field: str) -> None:
+        if record_actor != actor:
+            raise CurationError(f"{field} must match the acting identity")
 
     @staticmethod
     def _require_type(record: Record, expected_type: str) -> None:
