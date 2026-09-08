@@ -52,6 +52,19 @@ def load_source_acquisition_authorization_schema(
     return json.loads(schema_path.read_text(encoding="utf-8"))
 
 
+def load_source_acquisition_execution_schema(
+    schema_path: Path | None = None,
+) -> dict[str, Any]:
+    if schema_path is None:
+        schema_path = (
+            Path(__file__).resolve().parents[2]
+            / "schemas"
+            / "v1"
+            / "source-acquisition-execution.schema.json"
+        )
+    return json.loads(schema_path.read_text(encoding="utf-8"))
+
+
 def load_policy(policy_path: Path | None = None) -> dict[str, Any]:
     if policy_path is None:
         policy_path = Path(__file__).resolve().parents[2] / "governance" / "policy-v1.json"
@@ -96,6 +109,65 @@ def _evidence_locator_errors(record: dict[str, Any]) -> list[str]:
     line_end = locator.get("line_end")
     if isinstance(line_start, int) and isinstance(line_end, int) and line_end < line_start:
         errors.append("locator line_end must be greater than or equal to line_start")
+
+    return errors
+
+
+def _execution_errors(record: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    status = record.get("status")
+    requested_paths = record.get("requested_paths") or []
+    file_results = record.get("file_results") or []
+    actor_type = (record.get("executed_by") or {}).get("actor_type")
+
+    if actor_type not in {"tool", "system"}:
+        errors.append("acquisition executions require a tool or system actor")
+    if len(file_results) != len(requested_paths):
+        errors.append("acquisition execution file_results must cover every requested path")
+    elif [item.get("path") for item in file_results] != requested_paths:
+        errors.append("acquisition execution file_results must preserve requested path order")
+
+    for item in file_results:
+        item_status = item.get("status")
+        if item_status == "FETCHED":
+            if not isinstance(item.get("byte_count"), int):
+                errors.append("FETCHED file result requires byte_count")
+            if not item.get("sha256") or not item.get("git_blob_sha"):
+                errors.append("FETCHED file result requires sha256 and git_blob_sha")
+            if item.get("error_code") is not None:
+                errors.append("FETCHED file result cannot contain error_code")
+        elif item_status == "FAILED":
+            if any(item.get(field) is not None for field in ("byte_count", "sha256", "git_blob_sha")):
+                errors.append("FAILED file result cannot contain fetched hashes or byte_count")
+            if not item.get("error_code"):
+                errors.append("FAILED file result requires error_code")
+
+    if status == "SUCCEEDED":
+        if any(item.get("status") != "FETCHED" for item in file_results):
+            errors.append("SUCCEEDED acquisition execution cannot contain failed file results")
+        if not record.get("manifest_sha256"):
+            errors.append("SUCCEEDED acquisition execution requires manifest_sha256")
+        if not record.get("storage_key"):
+            errors.append("SUCCEEDED acquisition execution requires storage_key")
+        if record.get("error_code") is not None:
+            errors.append("SUCCEEDED acquisition execution cannot contain error_code")
+        if record.get("authorization_effective_after") is not True:
+            errors.append("SUCCEEDED acquisition execution requires effective authorization after fetch")
+    elif status == "FAILED":
+        if not record.get("error_code"):
+            errors.append("FAILED acquisition execution requires error_code")
+        if record.get("manifest_sha256") is not None or record.get("storage_key") is not None:
+            errors.append("FAILED acquisition execution cannot publish manifest or storage_key")
+        if (
+            record.get("error_code")
+            in {
+                "AUTHORIZATION_BECAME_INEFFECTIVE",
+                "AUTHORIZATION_CHANGED_DURING_EXECUTION",
+                "SOURCE_CHANGED_DURING_EXECUTION",
+            }
+            and record.get("authorization_effective_after") is not False
+        ):
+            errors.append("provenance-race execution failures must mark authorization ineffective")
 
     return errors
 
@@ -161,6 +233,9 @@ def _policy_errors(record: dict[str, Any], policy: dict[str, Any]) -> list[str]:
         if record.get("supersedes_authorization_id") == record.get("id"):
             errors.append("source acquisition authorization cannot supersede itself")
 
+    if record_type == "source_acquisition_execution":
+        errors.extend(_execution_errors(record))
+
     if record_type == "curation_event":
         actor_type = (record.get("actor") or {}).get("actor_type")
         operation = record.get("operation")
@@ -183,6 +258,8 @@ def validate_record(
         schema = load_source_selection_decision_schema(schema_path)
     elif record_type == "source_acquisition_authorization":
         schema = load_source_acquisition_authorization_schema(schema_path)
+    elif record_type == "source_acquisition_execution":
+        schema = load_source_acquisition_execution_schema(schema_path)
     else:
         schema = load_schema(schema_path)
     validator = Draft202012Validator(schema)

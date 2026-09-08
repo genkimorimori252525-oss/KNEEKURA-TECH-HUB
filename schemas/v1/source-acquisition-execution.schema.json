@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kneekura.local/schemas/v1/source-acquisition-execution.schema.json",
+  "title": "KNEEKURA TECH HUB v1 Source Acquisition Execution",
+  "type": "object",
+  "required": [
+    "record_type",
+    "id",
+    "authorization_id",
+    "source_id",
+    "revision",
+    "requested_paths",
+    "status",
+    "file_results",
+    "executed_by",
+    "policy_version",
+    "executed_at",
+    "authorization_effective_after"
+  ],
+  "properties": {
+    "record_type": {"const": "source_acquisition_execution"},
+    "id": {"type": "string", "pattern": "^ax:"},
+    "authorization_id": {"type": "string", "pattern": "^aa:"},
+    "source_id": {"type": "string", "pattern": "^src:"},
+    "revision": {"type": "string", "minLength": 1},
+    "requested_paths": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 32,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "status": {"enum": ["SUCCEEDED", "FAILED"]},
+    "file_results": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 32,
+      "items": {
+        "type": "object",
+        "required": ["path", "status"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "status": {"enum": ["FETCHED", "FAILED"]},
+          "byte_count": {"type": ["integer", "null"], "minimum": 0},
+          "sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+          "git_blob_sha": {"type": ["string", "null"], "pattern": "^[0-9a-f]{40}$"},
+          "error_code": {"type": ["string", "null"], "minLength": 1}
+        },
+        "additionalProperties": false
+      }
+    },
+    "manifest_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "storage_key": {
+      "type": ["string", "null"],
+      "pattern": "^ax-[0-9a-f]{64}$"
+    },
+    "error_code": {"type": ["string", "null"], "minLength": 1},
+    "executed_by": {
+      "type": "object",
+      "required": ["actor_type"],
+      "properties": {
+        "actor_type": {"enum": ["tool", "system"]},
+        "actor_id": {"type": ["string", "null"]},
+        "version": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "policy_version": {"type": "string", "minLength": 1},
+    "executed_at": {"type": "string", "format": "date-time"},
+    "authorization_effective_after": {"type": "boolean"}
+  },
+  "additionalProperties": false
+}
