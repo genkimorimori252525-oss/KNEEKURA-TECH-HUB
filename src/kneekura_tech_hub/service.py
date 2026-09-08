@@ -242,7 +242,9 @@ class CurationEngine:
         if source_id == target_id:
             raise CurationError("relation claim endpoints must be different entities")
         self._require_existing(source_id, "knowledge_entity")
-        self._require_existing(target_id, "knowledge_entity")
+        target = self._require_existing(target_id, "knowledge_entity")
+        if relation["relation_type"] == "solves" and "problem" not in target.get("kinds", []):
+            raise CurationError("solves relation target must be classified as a problem")
 
     def _require_evidence_exists(self, evidence_ids: list[str]) -> None:
         for evidence_id in evidence_ids:
