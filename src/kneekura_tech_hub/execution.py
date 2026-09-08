@@ -366,7 +366,7 @@ def execute_authorized_acquisition(
                 error_code="AUTHORIZATION_CHANGED_DURING_EXECUTION",
                 actor=actor,
                 policy_version=policy_version,
-                authorization_effective_after=postflight["effective"],
+                authorization_effective_after=False,
                 source_fingerprint_sha256=source_fingerprint,
                 authorization_fingerprint_sha256=authorization_fingerprint,
             )
@@ -381,7 +381,7 @@ def execute_authorized_acquisition(
                 error_code="SOURCE_CHANGED_DURING_EXECUTION",
                 actor=actor,
                 policy_version=policy_version,
-                authorization_effective_after=postflight["effective"],
+                authorization_effective_after=False,
                 source_fingerprint_sha256=source_fingerprint,
                 authorization_fingerprint_sha256=authorization_fingerprint,
             )
