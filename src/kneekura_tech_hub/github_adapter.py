@@ -88,7 +88,10 @@ def _is_nonpublic(item: dict[str, Any]) -> bool:
     if item.get("private") is True:
         return True
     visibility = item.get("visibility")
-    return isinstance(visibility, str) and visibility.lower() != "public"
+    if isinstance(visibility, str):
+        return visibility.lower() != "public"
+    # OSS discovery fails closed when public visibility is not established.
+    return item.get("private") is not False
 
 
 def _metadata_source(item: dict[str, Any]) -> Record:
@@ -227,9 +230,7 @@ def build_metadata_discovery_batch(
     source_ids = [record["id"] for record in records]
     batch: dict[str, Any] = {
         "intake_version": "1.0",
-        "batch_id": _batch_id(
-            query.strip(), source_ids, page, search_sort, search_order
-        ),
+        "batch_id": _batch_id(query.strip(), source_ids, page, search_sort, search_order),
         "discovered_by": actor,
         "discovered_at": timestamp,
         "scope": {
