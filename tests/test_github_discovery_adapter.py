@@ -104,12 +104,42 @@ def test_authenticated_private_or_internal_results_are_not_persisted_as_oss_sour
     assert all("internal-research" not in record["id"] for record in batch["records"])
 
 
+def test_search_sort_and_order_are_preserved_as_provenance_not_quality():
+    unsorted = build_metadata_discovery_batch(
+        _payload(),
+        query="incremental analysis",
+        discovered_by=ACTOR,
+        discovered_at="2026-09-09T06:00:00Z",
+    )
+    sorted_batch = build_metadata_discovery_batch(
+        _payload(),
+        query="incremental analysis",
+        discovered_by=ACTOR,
+        discovered_at="2026-09-09T06:00:00Z",
+        search_sort="stars",
+        search_order="desc",
+    )
+
+    filters = sorted_batch["scope"]["filters"]
+    assert filters["api_sort"] == "stars"
+    assert filters["api_order"] == "desc"
+    assert sorted_batch["batch_id"] != unsorted["batch_id"]
+    assert [record["id"] for record in sorted_batch["records"]] == [
+        "src:github:example:small-but-relevant",
+        "src:github:example:huge-star-repo",
+    ]
+    assert "score" not in sorted_batch
+    assert "rank" not in sorted_batch
+
+
 def test_batch_id_is_stable_for_same_query_page_and_provider_order():
     kwargs = {
         "query": "incremental analysis",
         "discovered_by": ACTOR,
         "discovered_at": "2026-09-09T06:00:00Z",
         "page": 2,
+        "search_sort": "updated",
+        "search_order": "asc",
     }
     first = build_metadata_discovery_batch(_payload(), **kwargs)
     second = build_metadata_discovery_batch(deepcopy(_payload()), **kwargs)
