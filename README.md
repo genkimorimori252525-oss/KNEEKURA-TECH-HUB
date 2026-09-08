@@ -20,15 +20,18 @@ Discovery & Collection Layer
 Curation Gate
       ↓
 Source → SourceSnapshot → Evidence → Claim → Knowledge Entity
+                                  └→ Relation Claim
       ↓
 Application & Research
 ```
 
-`SourceSnapshot` is a first-class immutable evidence anchor. AI and scanners first produce `staged_observation` records; they cannot directly merge canonical entities or promote claims to `VALIDATED`.
+`SourceSnapshot` is a first-class immutable evidence anchor. AI and scanners first produce `staged_observation` records; they cannot directly merge canonical entities or perform a `VALIDATED` promotion.
 
 A staged observation must be backed by Evidence candidates that all resolve to exactly one SourceSnapshot. Those Observation ↔ Evidence links are persisted in PostgreSQL so the source-revision provenance survives reload.
 
-Direct non-empty `KnowledgeEntity.relations` writes are temporarily rejected until relation provenance has a first-class evidence/maturity model.
+Relationships between Knowledge Entities are also evidence-backed Claims. A Claim has exactly one subject: either one `entity_id`, or a `relation` consisting of source entity, relation type, and target entity. Direct non-empty `KnowledgeEntity.relations` writes remain rejected so an unproven taxonomy guess cannot become canonical graph truth.
+
+`created_by` remains authorship provenance. An AI-created Candidate Claim can later be human-reviewed and promoted without rewriting its creator identity; the human transition is recorded separately in the curation-event trail.
 
 ## Current implementation
 
@@ -38,19 +41,21 @@ Direct non-empty `KnowledgeEntity.relations` writes are temporarily rejected unt
 - machine-readable governance policy v1.0
 - JSON Schema for core record types
 - first-class immutable `source_snapshot` records
-- PostgreSQL normalized persistence and ordered migrations
+- PostgreSQL normalized persistence
+- tracked ordered migrations with SHA-256 drift detection
 
 ### Phase 1 — Curation Engine
 
 - policy-aware `CurationEngine`
 - human-gated entity creation / merge
 - governed claim maturity transitions
+- human-only `VALIDATED` transition
 - append-only curation events
 - provenance checks for claims and staged observations
 - CLI for DB initialization, ingest, get, list, claim transitions, and entity merges
 - regression tests and real PostgreSQL integration tests in GitHub Actions
 
-### Phase 2 — Curated Prototype underway
+### Phase 2 — Curated Prototype
 
 - curated prototype bundle format
 - dependency-safe bundle preflight
@@ -60,7 +65,18 @@ Direct non-empty `KnowledgeEntity.relations` writes are temporarily rejected unt
 - 3 real Sources / 3 SourceSnapshots / 5 Evidence records / 3 Knowledge Entities / 4 AI-created Candidate Claims
 - staged observations forced through Evidence to one immutable SourceSnapshot
 - staged observation Evidence links persisted by migration `0002_staged_observation_evidence.sql`
-- unproven canonical relation edges quarantined until relation provenance is implemented
+
+### Relation Provenance v1
+
+- entity-subject and relation-subject Claims share one lifecycle
+- normalized PostgreSQL Relation Claim persistence via `0003_relation_claim_subject.sql`
+- existing/distinct relation endpoint checks
+- Evidence required for Relation Claims
+- direct canonical relation writes quarantined
+- Relation Claim PostgreSQL round-trip tests
+- supersession requires the same subject, a distinct successor, and successor maturity of at least `SUPPORTED`
+- additive real-OSS relation overlay: `pilots/incremental-computation-relations-v1.json`
+- validated relations remain Claims; future graph views will be derived projections rather than a duplicate canonical store
 
 Mass crawling and automated knowledge promotion are intentionally not enabled yet.
 
@@ -94,10 +110,16 @@ export KTHUB_DATABASE_URL='postgresql://user:pass@localhost:5432/kneekura'
 kneekura-hub init-db
 ```
 
-Atomically ingest the pilot with a human reviewer identity while preserving the AI creators recorded on Candidate Claims:
+Atomically ingest the base pilot with a human reviewer identity while preserving the AI creators recorded on Candidate Claims:
 
 ```bash
 kneekura-hub ingest-bundle pilots/incremental-computation-v1.json --actor-id prototype-reviewer
+```
+
+Then add the Relation Claim overlay without rewriting the base pilot:
+
+```bash
+kneekura-hub ingest-bundle pilots/incremental-computation-relations-v1.json --actor-id prototype-reviewer
 ```
 
 Store and retrieve records:
@@ -113,6 +135,7 @@ Govern a claim or merge canonical identities:
 
 ```bash
 kneekura-hub transition-claim cl:example SUPPORTED --reason 'evidence reviewed' --actor-id reviewer
+kneekura-hub transition-claim cl:example VALIDATED --reason 'human verification complete' --actor-id reviewer
 kneekura-hub merge-entities ke:survivor ke:duplicate --reason 'same concept' --actor-id reviewer
 ```
 
@@ -120,6 +143,7 @@ kneekura-hub merge-entities ke:survivor ke:duplicate --reason 'same concept' --a
 
 - `docs/architecture/BASELINE-v1.md`
 - `docs/architecture/CURATION-ENGINE-v1.md`
+- `docs/architecture/RELATION-PROVENANCE-v1.md`
 - `docs/pilots/INCREMENTAL-COMPUTATION-v1.md`
 - `governance/CONSTITUTION.md`
 - `governance/policy-v1.json`
@@ -130,6 +154,7 @@ kneekura-hub merge-entities ke:survivor ke:duplicate --reason 'same concept' --a
 - Design baseline: **v1.0 confirmed**
 - Phase 0: **implemented**
 - Phase 1: **usable curation core implemented**
-- Phase 2: **curated prototype active; first real OSS pilot passing PostgreSQL integration**
-- Next design pressure: **relation provenance before canonical taxonomy scaling**
+- Phase 2: **first real OSS curated pilot implemented**
+- Relation Provenance v1: **implementation and real-pilot verification in progress**
+- Next design pressure after Relation Provenance: **derived relation projection/query layer**
 - Mass discovery: **not enabled yet**
