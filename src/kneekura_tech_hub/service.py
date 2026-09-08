@@ -86,6 +86,12 @@ class CurationEngine:
             raise CurationError("evidence snapshot does not belong to evidence source")
         validate_record(evidence)
         self.repository.put(evidence)
+        self._append_event(
+            "SOURCE_ACQUIRE",
+            actor,
+            [evidence["source_id"], evidence["source_snapshot_id"], evidence["id"]],
+            reason="evidence registered from pinned source snapshot",
+        )
         return deepcopy(evidence)
 
     def create_entity(self, entity: Record, *, actor: Record, reason: str | None = None) -> Record:
