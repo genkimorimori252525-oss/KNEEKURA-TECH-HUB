@@ -2,141 +2,115 @@
 
 ## Purpose
 
-KNEEKURA TECH HUB now has two deliberately separate upstream gates:
+KNEEKURA TECH HUB deliberately separates three operations:
+
+1. **Selection** — a Source is worth deeper investigation.
+2. **Authorization** — an exact bounded upstream scope may be acquired.
+3. **Execution** — material was actually retrieved.
+
+Acquisition Authorization v1 implements only step 2.
 
 ```text
 GitHub discovery
       ↓
 metadata-only Source
       ↓
-Human Source Selection
-```
-
-Selection answers:
-
-> Is this Source worth deeper manual investigation?
-
-It must not answer:
-
-> What exact upstream material may the system retrieve?
-
-Acquisition Authorization v1 adds that second governance decision without performing retrieval.
-
-```text
-metadata-only Source
-      ↓
 active human SELECT_FOR_REVIEW
       ↓
-license/provenance checks
+license + provenance checks
       ↓
 Human Acquisition Authorization
       ↓
-exact revision + exact file list
+exact commit + exact file list
       ↓
 (no retrieval; no Source mutation)
 ```
 
-## Core separation
-
-The Hub treats these as three different operations:
-
-1. **Selection** — worth investigating.
-2. **Authorization** — exact bounded material may be acquired.
-3. **Execution** — material was actually retrieved.
-
-v1 implements only step 2.
-
-Therefore:
+The central invariant is:
 
 ```text
-AUTHORIZE
-   ≠
-retrieved
+AUTHORIZE ≠ RETRIEVED
 ```
 
-and after authorization:
+After authorization, the Source still remains:
 
 ```text
-source.acquisition.level == metadata-only
+source.acquisition.level = metadata-only
 ```
 
-still holds.
-
-A cross-layer regression test proves that Controlled Discovery continues to reject SourceSnapshot creation on the authorized-but-still-metadata-only Source.
+A cross-layer regression proves that Controlled Discovery still rejects SourceSnapshot creation on an authorized-but-not-executed metadata-only Source.
 
 ## v1 scope: selected files only
 
-Authorization v1 does not support `full-source`.
+v1 never authorizes `full-source`.
 
-Every authorization is fixed to:
+Every grant is fixed to:
 
 ```text
 acquisition_level = selected-files
 ```
 
-and contains an explicit allowlist of 1–32 repository-relative paths.
+with an explicit allowlist of 1–32 repository-relative file paths.
 
-This makes authorization bounded and reviewable rather than a general permission to explore a repository.
+There is no directory wildcard, recursive repository permission, or implicit permission for neighboring files.
 
-## Immutable revision requirement
+## Immutable revision boundary
 
 For GitHub Sources, `revision` must be an exact lowercase 40-hex commit SHA.
 
-Rejected examples include:
+Moving or ambiguous references are rejected, including:
 
 - `main`
 - `master`
 - `latest`
-- tags used as moving aliases
 - abbreviated SHAs
 - uppercase/non-canonical SHA text
 
-An authorization should continue to identify the same upstream content years later.
+The authorization must identify the same upstream revision years later.
 
 ## Path boundary
 
-`allowed_paths` is an exact unique list, capped at 32 entries.
+`allowed_paths` is an exact unique list capped at 32 entries.
 
 v1 rejects:
 
 - absolute paths;
 - Windows-style backslash paths;
 - drive/URI-like colon paths;
-- empty segments;
+- empty path segments;
 - `.` segments;
-- `..` traversal segments.
+- `..` traversal segments;
+- repository control data such as `.git/...`.
 
-Authorization does not mean "anything reachable from this directory". Each path is one explicitly reviewed repository-relative target.
+Each path is a specific review target, not a capability to explore arbitrary repository content.
 
 ## Human authority
 
 Canonical acquisition authorization is human-only in v1.
 
-The acting identity must exactly match `created_by`.
+The acting identity must exactly equal `created_by`.
 
-AI, crawler, and tool actors may discover metadata and later help prepare suggestions, but they cannot grant canonical acquisition authority.
+AI, crawlers, and tools may discover Sources or prepare suggestions, but they cannot grant canonical acquisition authority.
 
 ## AUTHORIZE prerequisites
 
-An `AUTHORIZE` record requires all of the following at decision time.
+A new `AUTHORIZE` record requires all gates below at decision time.
 
-### 1. Source still metadata-only
+### Source depth
 
-The Source must not already be at a deeper acquisition level.
+The Source must still be `metadata-only`.
 
-### 2. Current selection
+### Current selection
 
-The referenced `selection_decision_id` must be the one current active decision for the same Source and must equal:
+The referenced `selection_decision_id` must be the one current active decision for the same Source and must be:
 
 ```text
 SELECT_FOR_REVIEW
 ```
 
-A historical selection is insufficient.
+A historical selection is insufficient. `DEFER` and `REJECT_FOR_REVIEW` block new authorization.
 
-`DEFER` and `REJECT_FOR_REVIEW` block new authorization.
-
-### 3. Resolved license metadata
+### Resolved declared license
 
 The Source must have:
 
@@ -144,41 +118,75 @@ The Source must have:
 license.state = KNOWN
 ```
 
-and a non-empty `declared_expression`.
+plus a non-empty `declared_expression`.
 
-A GitHub Search API license hint is not enough.
+A GitHub Search API license hint is never enough. `UNKNOWN`, `CONFLICT`, `REVIEW_REQUIRED`, or `KNOWN` without an actual declared expression cannot grant deeper acquisition authority.
 
-`UNKNOWN`, `CONFLICT`, `REVIEW_REQUIRED`, or `KNOWN` without an actual declared expression cannot authorize deeper acquisition.
+### Exact bounded scope
 
-### 4. Exact bounded scope
+The authorization must contain:
 
-The authorization contains:
-
-- one immutable revision;
 - `selected-files` acquisition level;
+- one immutable revision;
 - 1–32 explicit safe relative paths.
+
+## Historical grant is not permanent authority
+
+An authorization record is immutable historical evidence that authority was validly granted **at that time**. It is not an eternal capability.
+
+Before a future executor can consume an AUTHORIZE record, the Hub re-evaluates whether that grant is still **effective now**.
+
+`authorization_effectiveness` fails closed when any current prerequisite has changed. Current blockers include:
+
+- the record is no longer the active authorization;
+- the active decision is not `AUTHORIZE`;
+- the Source is no longer metadata-only;
+- the Source license is no longer resolved as `KNOWN` with a declared expression;
+- the referenced `SELECT_FOR_REVIEW` is no longer the current active selection.
+
+Therefore this sequence is safe:
+
+```text
+AUTHORIZE valid at T1
+      ↓
+selection changes to DEFER at T2
+      ↓
+historical AUTHORIZE remains auditable
+      ↓
+effective authority becomes false immediately
+```
+
+The same applies if licensing becomes unresolved.
+
+This distinction prevents knowledge/governance laundering from the statement:
+
+> "This was once authorized"
+
+into the stronger and potentially false statement:
+
+> "This is authorized now."
+
+`authorized_acquisition_requests` exposes only currently effective AUTHORIZE records. It remains read-only and performs no retrieval.
 
 ## Append-only authorization history
 
 `source_acquisition_authorization` records use `aa:` IDs and are append-only.
 
-A Source may have only one active authorization decision.
+A Source may have only one active authorization decision in the append-only chain.
 
-Changing the authorized scope requires a new `AUTHORIZE` record that explicitly supersedes the current active record.
-
-The old authorization remains in history.
+Changing scope requires a new `AUTHORIZE` that explicitly supersedes the current active record. The previous record remains in history.
 
 This avoids mutable permission objects whose historical meaning cannot be reconstructed.
 
 ## Revocation
 
-Revocation is represented by another append-only authorization record:
+Revocation is another append-only record:
 
 ```text
 REVOKE
 ```
 
-A REVOKE must supersede the currently active AUTHORIZE and copy its exact scope:
+A REVOKE must supersede the current active AUTHORIZE and repeat its exact scope:
 
 - Source;
 - selection decision reference;
@@ -186,26 +194,24 @@ A REVOKE must supersede the currently active AUTHORIZE and copy its exact scope:
 - revision;
 - allowed paths.
 
-The scope is repeated intentionally so the revocation identifies exactly what authority it cancels.
+Repeating the scope makes the cancelled authority explicit.
 
-### Fail-safe revocation
+### Fail-safe asymmetry
 
-REVOKE does **not** require the original selection to remain active and does **not** require the Source's license metadata to remain favorable.
+REVOKE does **not** require the old selection to remain active and does **not** require current license metadata to remain favorable.
 
-This is intentional.
+If selection changes to `DEFER` or licensing becomes questionable, the effective grant is already fail-closed, but an operator can still append an explicit REVOKE for durable audit history.
 
-If new information changes the selection to `DEFER`, or licensing metadata becomes questionable, an operator must still be able to cancel an outstanding authorization immediately.
-
-The safety rule is asymmetric:
+The rule is intentionally asymmetric:
 
 ```text
 Granting authority requires all gates.
-Removing authority must remain easy.
+Invalidating/removing authority must remain easy.
 ```
 
 ## No execution side effects
 
-Creating either AUTHORIZE or REVOKE does not:
+Creating AUTHORIZE or REVOKE does not:
 
 - mutate Source acquisition level;
 - create a SourceSnapshot;
@@ -213,31 +219,31 @@ Creating either AUTHORIZE or REVOKE does not:
 - fetch README;
 - fetch source files;
 - clone a repository;
-- execute code;
+- execute repository code;
 - install dependencies;
 - create Claims or Knowledge Entities.
 
-`authorized_acquisition_requests` is a read view only. It is not an executor.
+Authorization and execution remain separate systems.
 
 ## Persistence
 
-Migration `0006_source_acquisition_authorization.sql` creates normalized append-only storage with:
+Migration `0006_source_acquisition_authorization.sql` adds append-only PostgreSQL persistence with:
 
 - Source foreign key;
 - Source selection decision foreign key;
-- decision constraint (`AUTHORIZE` / `REVOKE`);
+- `AUTHORIZE` / `REVOKE` decision constraint;
 - fixed `selected-files` acquisition level;
 - explicit revision;
-- JSON path allowlist limited to 1–32 entries;
+- JSON allowlist constrained to 1–32 paths;
 - rationale;
 - human actor provenance;
 - one direct successor per old authorization.
 
-`AuthorizationPostgresRepository` extends `SelectionPostgresRepository` and handles only the new `aa:` record family. Existing core record persistence remains untouched.
+`AuthorizationPostgresRepository` extends `SelectionPostgresRepository` only for the `aa:` record family. Existing core record persistence is not rewritten.
 
 ## CLI
 
-Authorize an exact scope without retrieving it:
+Authorize exact files without retrieving them:
 
 ```bash
 kneekura-acquisition-auth authorize \
@@ -258,7 +264,7 @@ kneekura-acquisition-auth revoke aa:authorization \
   --actor-id reviewer
 ```
 
-Read authorization state:
+Read state:
 
 ```bash
 kneekura-acquisition-auth history --source-id src:github:owner:repo
@@ -266,7 +272,7 @@ kneekura-acquisition-auth active --source-id src:github:owner:repo
 kneekura-acquisition-auth authorized
 ```
 
-`authorized` displays active AUTHORIZE records paired with the current unchanged Source. It performs no retrieval.
+`active` means active in the append-only authorization chain. `authorized` is stricter: it exposes only active AUTHORIZE records whose current selection/license/Source prerequisites are still effective.
 
 ## Security posture
 
@@ -276,12 +282,13 @@ Acquisition Authorization v1 is deliberately conservative:
 - selected-files only;
 - immutable GitHub commit SHA;
 - maximum 32 exact paths;
-- no traversal paths;
-- active human selection required;
+- path traversal/control-data rejection;
+- current human selection required;
 - resolved declared license required;
+- stale prerequisites invalidate effective authority;
 - append-only changes;
 - explicit revocation;
-- one active decision per Source;
+- one active authorization chain per Source;
 - no acquisition execution.
 
 ## Non-goals
@@ -296,16 +303,16 @@ v1 does not:
 - let popularity authorize access;
 - let repeated discovery authorize access;
 - let AI grant canonical authority;
-- automatically select which files are useful;
+- automatically select useful files;
 - execute repository code.
 
 ## Next pressure
 
 The next safe slice is **Authorized Acquisition Execution v1**.
 
-That layer should consume exactly one active AUTHORIZE record, retrieve only its pinned revision and allowlisted paths, verify returned content against the requested revision/path, and record what actually happened separately from the authorization.
+That layer should consume exactly one currently effective AUTHORIZE record, retrieve only its pinned revision and allowlisted paths, verify returned content against the requested revision/path, and record what actually happened separately from the authorization.
 
-A safe execution record should make it possible to answer independently:
+A safe execution record should independently answer:
 
 ```text
 Who selected this Source?
@@ -313,7 +320,7 @@ Who authorized acquisition?
 What exact immutable scope was authorized?
 Which files were actually retrieved?
 What hashes did they have?
-Did execution fully match the authorization?
+Did execution fully match authorization?
 ```
 
-Execution must never silently broaden an authorization when a requested file is missing or when repository layout changed.
+Execution must never silently broaden an authorization when a file is missing, a revision cannot be proven, or repository layout differs from expectation.
