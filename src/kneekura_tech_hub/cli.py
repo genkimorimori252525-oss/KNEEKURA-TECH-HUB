@@ -6,6 +6,8 @@ import os
 from pathlib import Path
 from typing import Any
 
+import psycopg
+
 from .database import apply_foundation_migration
 from .postgres_repository import PostgresRepository
 from .service import CurationEngine, CurationError
@@ -44,6 +46,11 @@ def _add_actor_arguments(parser: argparse.ArgumentParser) -> None:
     )
     parser.add_argument("--actor-id")
     parser.add_argument("--actor-version")
+
+
+def _open_repository(dsn: str) -> PostgresRepository:
+    # Read operations must not leave a long-lived implicit transaction open.
+    return PostgresRepository(psycopg.connect(dsn, autocommit=True))
 
 
 def _ingest(engine: CurationEngine, record: dict[str, Any], actor: dict[str, Any]) -> None:
@@ -113,6 +120,30 @@ def main() -> int:
     )
     _add_database_argument(list_parser)
 
+    transition_parser = subparsers.add_parser(
+        "transition-claim",
+        help="move a claim through the governed maturity lifecycle",
+    )
+    transition_parser.add_argument("claim_id")
+    transition_parser.add_argument(
+        "target_maturity",
+        choices=["SUPPORTED", "VALIDATED", "CHALLENGED", "SUPERSEDED", "REJECTED"],
+    )
+    transition_parser.add_argument("--reason", required=True)
+    transition_parser.add_argument("--superseded-by")
+    _add_database_argument(transition_parser)
+    _add_actor_arguments(transition_parser)
+
+    merge_parser = subparsers.add_parser(
+        "merge-entities",
+        help="human-approved canonical entity merge with redirect preservation",
+    )
+    merge_parser.add_argument("survivor_id")
+    merge_parser.add_argument("merged_id")
+    merge_parser.add_argument("--reason", required=True)
+    _add_database_argument(merge_parser)
+    _add_actor_arguments(merge_parser)
+
     args = parser.parse_args()
 
     if args.command == "validate":
@@ -124,7 +155,7 @@ def main() -> int:
         print("VALID")
         return 0
 
-    repo = PostgresRepository.connect(_dsn(args))
+    repo = _open_repository(_dsn(args))
     try:
         if args.command == "init-db":
             apply_foundation_migration(repo.connection)
@@ -154,6 +185,35 @@ def main() -> int:
         if args.command == "list":
             records = engine.list(args.record_type)
             print(json.dumps(records, ensure_ascii=False, indent=2))
+            return 0
+
+        if args.command == "transition-claim":
+            try:
+                updated = engine.transition_claim(
+                    args.claim_id,
+                    args.target_maturity,
+                    actor=_actor(args),
+                    reason=args.reason,
+                    superseded_by=args.superseded_by,
+                )
+            except (HubValidationError, CurationError, ValueError) as exc:
+                print(f"REJECTED: {exc}")
+                return 1
+            print(json.dumps(updated, ensure_ascii=False, indent=2))
+            return 0
+
+        if args.command == "merge-entities":
+            try:
+                _, merged = engine.merge_entities(
+                    args.survivor_id,
+                    args.merged_id,
+                    actor=_actor(args),
+                    reason=args.reason,
+                )
+            except (HubValidationError, CurationError, ValueError) as exc:
+                print(f"REJECTED: {exc}")
+                return 1
+            print(json.dumps(merged, ensure_ascii=False, indent=2))
             return 0
     finally:
         repo.close()
