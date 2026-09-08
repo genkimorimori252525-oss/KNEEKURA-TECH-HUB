@@ -6,9 +6,10 @@ from kneekura_tech_hub.service import CurationEngine
 
 
 HUMAN = {"actor_type": "human", "actor_id": "prototype-reviewer"}
+AI = {"actor_type": "ai", "actor_id": "prototype-extractor", "version": "test"}
 
 
-def records() -> list[dict]:
+def records(*, claim_actor: dict | None = None) -> list[dict]:
     source = {
         "record_type": "source",
         "id": "src:bundle",
@@ -56,7 +57,7 @@ def records() -> list[dict]:
         "statement": "The pinned source contains an invalidation path.",
         "maturity": "CANDIDATE",
         "evidence_ids": ["ev:bundle"],
-        "created_by": HUMAN,
+        "created_by": claim_actor or HUMAN,
         "policy_version": "1.0.0",
     }
     return [claim, evidence, entity, snapshot, source]
@@ -92,6 +93,37 @@ def test_bundle_ingests_through_governed_curation_engine():
     assert set(stored) == {"src:bundle", "ss:bundle", "ke:bundle", "ev:bundle", "cl:bundle"}
     assert engine.get("cl:bundle")["maturity"] == "CANDIDATE"
     assert len(engine.list("curation_event")) >= 4
+
+
+def test_ai_created_candidate_claim_keeps_ai_provenance_under_human_review():
+    repository = MemoryRepository()
+    engine = CurationEngine(repository)
+    pilot = bundle(records(claim_actor=AI))
+
+    ingest_bundle(engine, pilot, actor=HUMAN)
+
+    stored = engine.get("cl:bundle")
+    assert stored is not None
+    assert stored["created_by"] == AI
+    claim_events = [
+        event for event in engine.list("curation_event") if event["operation"] == "CLAIM_CREATE"
+    ]
+    assert claim_events[-1]["actor"] == AI
+
+
+def test_human_created_claim_must_match_bundle_reviewer():
+    other_human = {"actor_type": "human", "actor_id": "someone-else"}
+    engine = CurationEngine(MemoryRepository())
+
+    with pytest.raises(BundleValidationError, match="must match the bundle reviewer"):
+        ingest_bundle(engine, bundle(records(claim_actor=other_human)), actor=HUMAN)
+
+
+def test_non_human_bundle_reviewer_is_rejected():
+    engine = CurationEngine(MemoryRepository())
+
+    with pytest.raises(BundleValidationError, match="reviewer must be a human actor"):
+        ingest_bundle(engine, bundle(records(claim_actor=AI)), actor=AI)
 
 
 def test_duplicate_bundle_ids_are_rejected():
