@@ -49,10 +49,14 @@ def apply_foundation_migration(
     connection: psycopg.Connection[Any],
     migration_path: Path | None = None,
 ) -> None:
-    """Apply only the original foundation migration.
+    """Compatibility initializer used by the Phase 1 CLI/tests.
 
-    Kept for backwards compatibility with callers that explicitly need 0001.
-    New initialization paths should use :func:`apply_migrations`.
+    With no explicit path it now brings the database to the latest known schema,
+    so existing callers automatically receive follow-up migrations. Supplying an
+    explicit path preserves the old single-file behavior for focused tests.
     """
 
-    _apply_sql_file(connection, migration_path or default_migration_path())
+    if migration_path is not None:
+        _apply_sql_file(connection, migration_path)
+        return
+    apply_migrations(connection)
