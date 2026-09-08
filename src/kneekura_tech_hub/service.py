@@ -152,9 +152,13 @@ class CurationEngine:
         if target_maturity == "SUPERSEDED":
             if not superseded_by:
                 raise CurationError("SUPERSEDED requires superseded_by")
+            if superseded_by == claim_id:
+                raise CurationError("a claim cannot supersede itself")
             successor = self._require_existing(superseded_by, "claim")
             if _claim_subject_key(successor) != _claim_subject_key(claim):
                 raise CurationError("superseding claim must describe the same claim subject")
+            if successor["maturity"] not in {"SUPPORTED", "VALIDATED"}:
+                raise CurationError("superseding claim must be at least SUPPORTED")
             claim["superseded_by"] = superseded_by
         claim["maturity"] = target_maturity
         if target_maturity == "VALIDATED":
