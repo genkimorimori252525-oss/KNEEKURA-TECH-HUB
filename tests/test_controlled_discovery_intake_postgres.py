@@ -86,9 +86,14 @@ def test_real_postgres_discovery_intake_never_creates_canonical_knowledge():
             if any(subject_id.startswith("ev:") for subject_id in event["subject_ids"])
         ]
         assert len(evidence_event_subjects) == 2
-        assert {subject_id for subjects in evidence_event_subjects for subject_id in subjects if subject_id.startswith("ev:")} == {
-            "ev:github:burntsushi:ripgrep:readme:search",
-            "ev:github:sharkdp:fd:readme:features",
+        assert {
+            subject_id
+            for subjects in evidence_event_subjects
+            for subject_id in subjects
+            if subject_id.startswith("ev:")
+        } == {
+            "ev:discovery:tree-sitter:readme:incremental-parsing:8351896b",
+            "ev:discovery:salsa:readme:query-model:e021c01d",
         }
     finally:
         connection.close()
