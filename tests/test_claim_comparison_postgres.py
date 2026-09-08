@@ -82,7 +82,7 @@ def test_real_salsa_competing_claims_are_exposed_without_automatic_winner():
 
         assert group["claim_count"] == 2
         assert group["active_claim_count"] == 2
-        assert group["active_claim_ids"] == [ORIGINAL, SECOND]
+        assert group["active_claim_ids"] == sorted([ORIGINAL, SECOND])
         assert group["subject"] == {
             "kind": "relation",
             "source_entity_id": "ke:query-based-incremental-computation",
