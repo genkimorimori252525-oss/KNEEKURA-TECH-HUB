@@ -1,0 +1,26 @@
+{
+  "run_version": "1.0",
+  "discovered_by": {
+    "actor_type": "tool",
+    "actor_id": "bounded-run-fixture",
+    "version": "1.0"
+  },
+  "discovered_at": "2026-09-09T06:30:00+09:00",
+  "max_unique_sources": 10,
+  "queries": [
+    {
+      "query_id": "query:incremental",
+      "query": "incremental analysis",
+      "page_count": 2,
+      "per_page": 100
+    },
+    {
+      "query_id": "query:parsing",
+      "query": "incremental parsing",
+      "page_count": 1,
+      "per_page": 100,
+      "sort": "updated",
+      "order": "desc"
+    }
+  ]
+}
