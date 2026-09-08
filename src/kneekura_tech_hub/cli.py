@@ -11,6 +11,13 @@ import psycopg
 from .bundle import BundleValidationError, ingest_bundle, preflight_bundle
 from .comparison import ComparisonError, compare_claim, comparison_groups
 from .database import apply_foundation_migration
+from .decision import (
+    DecisionError,
+    HumanReviewDecisionEngine,
+    active_review_decisions,
+    decision_context_for_claim,
+    review_decision_history,
+)
 from .explanation import ExplanationError, explain_claim
 from .postgres_repository import PostgresRepository
 from .projection import ProjectionError, project_relations
@@ -139,6 +146,7 @@ def main() -> int:
             "evidence",
             "claim",
             "staged_observation",
+            "review_decision",
             "curation_event",
         ],
     )
@@ -221,6 +229,44 @@ def main() -> int:
         help="return only groups matching explicit review conditions",
     )
     _add_database_argument(compare_all_parser)
+
+    decide_parser = subparsers.add_parser(
+        "decide-claims",
+        help="record a human decision about two Claims with the same exact subject",
+    )
+    decide_parser.add_argument("source_claim_id")
+    decide_parser.add_argument("target_claim_id")
+    decide_parser.add_argument(
+        "decision",
+        choices=[
+            "CONTRADICTS",
+            "COMPATIBLE",
+            "QUALIFIES",
+            "DUPLICATE",
+            "SUPERSEDES",
+            "UNRESOLVED",
+        ],
+    )
+    decide_parser.add_argument("--reason", required=True)
+    decide_parser.add_argument("--decision-id")
+    decide_parser.add_argument("--supersedes-decision-id")
+    _add_database_argument(decide_parser)
+    _add_actor_arguments(decide_parser)
+
+    decisions_parser = subparsers.add_parser(
+        "review-decisions",
+        help="show append-only human review decision history",
+    )
+    decisions_parser.add_argument("--claim-id")
+    decisions_parser.add_argument("--active", action="store_true")
+    _add_database_argument(decisions_parser)
+
+    context_parser = subparsers.add_parser(
+        "decision-context",
+        help="show Claim comparison together with human decision history",
+    )
+    context_parser.add_argument("claim_id")
+    _add_database_argument(context_parser)
 
     transition_parser = subparsers.add_parser(
         "transition-claim", help="move a claim through the governed maturity lifecycle"
@@ -307,6 +353,23 @@ def main() -> int:
             print(json.dumps(engine.list(args.record_type), ensure_ascii=False, indent=2))
             return 0
 
+        if args.command == "decide-claims":
+            try:
+                result = HumanReviewDecisionEngine(repo).create_from_fields(
+                    source_claim_id=args.source_claim_id,
+                    target_claim_id=args.target_claim_id,
+                    decision=args.decision,
+                    rationale=args.reason,
+                    actor=_actor(args),
+                    decision_id=args.decision_id,
+                    supersedes_decision_id=args.supersedes_decision_id,
+                )
+            except (HubValidationError, DecisionError, ValueError) as exc:
+                print(f"REJECTED DECISION: {exc}")
+                return 1
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            return 0
+
         try:
             if args.command == "relations":
                 result = project_relations(
@@ -336,6 +399,13 @@ def main() -> int:
                     multiple_only=args.multiple_only,
                     needs_review_only=args.needs_review,
                 )
+            elif args.command == "review-decisions":
+                if args.active:
+                    result = active_review_decisions(repo, claim_id=args.claim_id)
+                else:
+                    result = review_decision_history(repo, claim_id=args.claim_id)
+            elif args.command == "decision-context":
+                result = decision_context_for_claim(repo, args.claim_id)
             else:
                 result = None
         except (
@@ -344,6 +414,7 @@ def main() -> int:
             ExplanationError,
             ReviewError,
             ComparisonError,
+            DecisionError,
         ) as exc:
             print(f"REJECTED QUERY: {exc}")
             return 1
