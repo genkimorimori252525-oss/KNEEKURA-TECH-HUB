@@ -77,8 +77,19 @@ def test_real_postgres_discovery_intake_never_creates_canonical_knowledge():
         assert repository.list("review_decision") == []
 
         events = repository.list("curation_event")
-        assert len(events) == 4
+        assert len(events) == 6
         assert all(event["operation"] == "SOURCE_ACQUIRE" for event in events)
+        assert all(event["actor"] == batch["discovered_by"] for event in events)
+        evidence_event_subjects = [
+            event["subject_ids"]
+            for event in events
+            if any(subject_id.startswith("ev:") for subject_id in event["subject_ids"])
+        ]
+        assert len(evidence_event_subjects) == 2
+        assert {subject_id for subjects in evidence_event_subjects for subject_id in subjects if subject_id.startswith("ev:")} == {
+            "ev:github:burntsushi:ripgrep:readme:search",
+            "ev:github:sharkdp:fd:readme:features",
+        }
     finally:
         connection.close()
 
