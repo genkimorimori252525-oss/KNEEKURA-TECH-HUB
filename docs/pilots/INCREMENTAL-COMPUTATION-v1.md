@@ -67,11 +67,26 @@ Those require comparison, experiment, or explicit curator judgment records.
 - all-or-nothing PostgreSQL transaction behavior;
 - ability to discover data-model weaknesses before mass collection.
 
-## Known design pressure exposed by the pilot
+## Design pressure exposed by the pilot
 
-Two areas should be exercised next rather than guessed at now:
+### Resolved during this pilot
 
-1. **Relation provenance** — Knowledge Entity relation edges currently do not have the same evidence/maturity model as Claims.
-2. **Staged observation snapshot pinning** — discovery observations should ultimately be tied to the exact SourceSnapshot from which they were extracted.
+**Staged observation snapshot pinning** is now enforced without adding a new
+snapshot column. A staged observation must reference at least one Evidence
+candidate, all referenced Evidence must belong to the observation Source, and
+the candidates must resolve to exactly one `SourceSnapshot`. The observation's
+`created_by` actor must also match the actor that stages it.
 
-Neither issue should be hidden by adding unsupported relation edges or by mass-ingesting data before the model is tested further.
+This keeps the discovery plane tied to immutable source state while reusing the
+existing Evidence model.
+
+### Still open
+
+**Relation provenance** remains intentionally unresolved. Knowledge Entity
+relation edges currently do not carry the same evidence/maturity model as
+Claims. Until that is designed and tested, this pilot avoids unsupported
+canonical taxonomy edges.
+
+Mass ingestion should not begin until relation provenance has at least a safe
+prototype path or an explicit rule that keeps unproven relations out of the
+canonical graph.
