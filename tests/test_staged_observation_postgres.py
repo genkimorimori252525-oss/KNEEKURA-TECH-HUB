@@ -22,7 +22,7 @@ def repository() -> PostgresRepository:
     assert DSN is not None
     connection = psycopg.connect(DSN, autocommit=True)
     applied = apply_migrations(connection)
-    assert applied[-1].name == "0002_staged_observation_evidence.sql"
+    assert "0002_staged_observation_evidence.sql" in {path.name for path in applied}
     connection.execute(
         """
         TRUNCATE TABLE
