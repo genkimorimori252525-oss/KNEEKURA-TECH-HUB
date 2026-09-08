@@ -19,7 +19,7 @@ def test_direct_observation_requires_evidence():
         validate_record(record)
 
 
-def test_ai_cannot_validate_claim():
+def test_ai_authorship_does_not_invalidate_human_validated_record():
     record = {
         "record_type": "claim",
         "id": "cl:test",
@@ -33,8 +33,10 @@ def test_ai_cannot_validate_claim():
         "created_by": {"actor_type": "ai", "version": "test-model"},
         "policy_version": "1.0.0",
     }
-    with pytest.raises(HubValidationError, match="cannot be VALIDATED"):
-        validate_record(record)
+
+    # created_by is provenance, not the actor who performed the maturity
+    # transition. CurationEngine separately requires a human actor for VALIDATED.
+    validate_record(record)
 
 
 def test_staged_observation_requires_evidence_candidate():
