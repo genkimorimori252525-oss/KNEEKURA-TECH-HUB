@@ -80,6 +80,11 @@ def _policy_errors(record: dict[str, Any], policy: dict[str, Any]) -> list[str]:
         if actor_type == "ai" and maturity == "VALIDATED" and not policy["ai_may_promote_to_validated"]:
             errors.append("AI-created claims cannot be VALIDATED under policy v1")
 
+    if record_type == "staged_observation":
+        evidence_ids = record.get("evidence_candidate_ids") or []
+        if not evidence_ids:
+            errors.append("staged observations require at least one evidence_candidate_id")
+
     if record_type == "evidence":
         errors.extend(_evidence_locator_errors(record))
 
