@@ -28,6 +28,8 @@ Source → SourceSnapshot → Evidence → Claim → Knowledge Entity
                                           ↓
                                Evidence Explanation
                                           ↓
+                                  Evidence Review
+                                          ↓
                                   Application & Research
 ```
 
@@ -44,6 +46,8 @@ Relation graph views are rebuilt from Claims. They are never stored as a second 
 Problem-oriented queries are deliberately conservative. They read only explicit evidence-backed relation claims such as `solves` and `requires`; they do not infer solutions from popularity, text similarity, `related_to`, or an AI guess made during query execution.
 
 Evidence Explanation reconstructs the stored `Claim → Evidence → SourceSnapshot → Source` chain. It does not generate a new justification, promote a Claim, or silently repair broken provenance.
+
+Evidence Review turns that provenance into a non-scalar review profile. It exposes distinct Source/Snapshot counts, Evidence roles and locator types, maturity, confidence, and verification freshness separately rather than compressing them into one universal quality score.
 
 ## Current implementation
 
@@ -127,6 +131,20 @@ Evidence Explanation reconstructs the stored `Claim → Evidence → SourceSnaps
 - explanation is read-only and does not change Claim maturity
 - real Salsa solution result resolves to pinned revision `e021c01d4939408c89c9325ad2426660117a8b32`
 - read-only `kneekura-hub explain-claim` CLI
+
+### Evidence Review v1
+
+- derived read-only review profile built from Evidence Explanation
+- intentionally no single `score`, `strength`, or universal quality scalar
+- reports Evidence count, distinct Source count, and distinct Snapshot count separately
+- `distinct_source_count` does not claim that Sources are independent corroboration
+- exposes `SUPPORTS`, `REFUTES`, and `QUALIFIES` counts and Sources by role
+- exposes Evidence locator-type counts without declaring one locator universally superior
+- verification freshness states: `NEVER_VERIFIED`, `NO_DUE_DATE`, `NOT_DUE`, and `DUE`
+- descriptive flags keep refutation, qualification, single-source, multi-snapshot, and due-review signals visible
+- explicit `--needs-review` queue uses conditions rather than an opaque ranking algorithm
+- real Salsa Claim keeps the same Evidence profile across CANDIDATE → VALIDATED while maturity/verification state changes
+- read-only `review-claim` and `review-claims` CLI commands
 
 Mass crawling and automated knowledge promotion are intentionally not enabled yet.
 
@@ -225,6 +243,15 @@ kneekura-hub explain-claim \
   cl:salsa:query-incremental:solves:repeated-recomputation:e021c01d
 ```
 
+Inspect review signals without calculating a universal score:
+
+```bash
+kneekura-hub review-claim \
+  cl:salsa:query-incremental:solves:repeated-recomputation:e021c01d
+
+kneekura-hub review-claims --needs-review
+```
+
 Store and retrieve records:
 
 ```bash
@@ -250,6 +277,7 @@ kneekura-hub merge-entities ke:survivor ke:duplicate --reason 'same concept' --a
 - `docs/architecture/RELATION-PROJECTION-v1.md`
 - `docs/architecture/PROBLEM-QUERY-v1.md`
 - `docs/architecture/EVIDENCE-EXPLANATION-v1.md`
+- `docs/architecture/EVIDENCE-REVIEW-v1.md`
 - `docs/pilots/INCREMENTAL-COMPUTATION-v1.md`
 - `governance/CONSTITUTION.md`
 - `governance/policy-v1.json`
@@ -264,6 +292,7 @@ kneekura-hub merge-entities ke:survivor ke:duplicate --reason 'same concept' --a
 - Relation Provenance v1: **implemented and merged**
 - Relation Projection v1: **implemented and merged**
 - Problem Query v1: **implemented and merged**
-- Evidence Explanation v1: **implemented; verification in progress**
-- Next pressure: **derived evidence-strength / review view without mutating Claims**
+- Evidence Explanation v1: **implemented and merged**
+- Evidence Review v1: **implemented; verification in progress**
+- Next pressure: **competing / contradictory Claim review without automatically choosing a winner**
 - Mass discovery: **not enabled yet**
