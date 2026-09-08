@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from copy import deepcopy
+from datetime import datetime
 from hashlib import sha256
 from typing import Any, Callable
 
@@ -31,6 +32,18 @@ def _fingerprint(value: Any) -> str:
         separators=(",", ":"),
     ).encode("utf-8")
     return "sha256:" + sha256(encoded).hexdigest()
+
+
+def _parse_time(value: Any) -> str:
+    if not isinstance(value, str):
+        raise DiscoveryRunError("discovered_at is required")
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError as exc:
+        raise DiscoveryRunError("discovered_at must be a timezone-aware ISO timestamp") from exc
+    if parsed.tzinfo is None or parsed.utcoffset() is None:
+        raise DiscoveryRunError("discovered_at must include a timezone")
+    return parsed.isoformat()
 
 
 def _validate_actor(actor: Record) -> Record:
@@ -107,9 +120,7 @@ def execute_bounded_discovery_run(
     if spec.get("run_version") != "1.0":
         raise DiscoveryRunError("run_version must be 1.0")
     actor = _validate_actor(spec.get("discovered_by") or {})
-    discovered_at = spec.get("discovered_at")
-    if not isinstance(discovered_at, str):
-        raise DiscoveryRunError("discovered_at is required")
+    discovered_at = _parse_time(spec.get("discovered_at"))
 
     raw_queries = spec.get("queries")
     if not isinstance(raw_queries, list) or not raw_queries:
@@ -152,6 +163,32 @@ def execute_bounded_discovery_run(
                     query_spec["sort"],
                     query_spec["order"],
                 )
+            except GitHubDiscoveryAdapterError as exc:
+                raise DiscoveryRunError(
+                    f"query {query_spec['query_id']} page {page} failed: {exc}"
+                ) from exc
+
+            items = payload.get("items") if isinstance(payload, dict) else None
+            if not isinstance(items, list):
+                raise DiscoveryRunError(
+                    f"query {query_spec['query_id']} page {page} returned no items array"
+                )
+            if not items:
+                page_receipts.append(
+                    {
+                        "query_id": query_spec["query_id"],
+                        "page": page,
+                        "page_batch_id": None,
+                        "page_source_count": 0,
+                        "new_unique_source_count": 0,
+                        "api_total_count": payload.get("total_count"),
+                        "api_incomplete_results": payload.get("incomplete_results"),
+                        "empty": True,
+                    }
+                )
+                break
+
+            try:
                 page_batch = build_metadata_discovery_batch(
                     payload,
                     query=query_spec["query"],
@@ -208,6 +245,7 @@ def execute_bounded_discovery_run(
                     "api_incomplete_results": page_batch["scope"]["filters"].get(
                         "api_incomplete_results"
                     ),
+                    "empty": False,
                 }
             )
 
