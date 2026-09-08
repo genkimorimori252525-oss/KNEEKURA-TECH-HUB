@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Callable
 from uuid import uuid4
 
 import psycopg
@@ -88,8 +88,9 @@ class VerifiedCommitPostgresRepository(ExecutionPostgresRepository):
         snapshot: Record,
         commit_record: Record,
         event: Record,
+        prewrite_check: Callable[[], None],
     ) -> tuple[Record, Record, Record]:
-        """Lock live authority and atomically publish Snapshot + Source depth + audit record."""
+        """Lock live authority, reverify bytes, then publish all canonical records atomically."""
 
         source_id = expected_source["id"]
         authorization_id = expected_authorization["id"]
@@ -151,6 +152,10 @@ class VerifiedCommitPostgresRepository(ExecutionPostgresRepository):
                 raise ValueError("verified acquisition commit requires metadata-only Source")
             if current_execution.get("status") != "SUCCEEDED":
                 raise ValueError("verified acquisition commit requires SUCCEEDED execution")
+
+            # Close the filesystem verification -> DB commit race as far as the local model can:
+            # after authority rows are locked, re-read and re-hash the store again before writes.
+            prewrite_check()
 
             if self.connection.execute(
                 "SELECT 1 FROM source_snapshot WHERE id=%s",
