@@ -261,7 +261,7 @@ def test_snapshot_without_verified_commit_is_rejected(tmp_path: Path):
 def test_current_source_metadata_may_evolve_without_invalidating_historical_snapshot(tmp_path: Path):
     repository, snapshot, _execution, _authorization, _contents = _fixture(tmp_path)
     changed = repository.get(SOURCE_ID)
-    changed["origin"]["note"] = "current metadata changed after the historical commit"
+    changed["origin"]["description"] = "current metadata changed after the historical commit"
     repository.put(changed, replace=True)
 
     verified = verify_committed_selected_file_snapshot(
