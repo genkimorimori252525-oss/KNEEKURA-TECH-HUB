@@ -38,7 +38,8 @@ class MemoryRepository:
     SourceSnapshot and Evidence records are immutable provenance anchors. Their
     identity can never be reused to point at different captured material or a
     different locator/role interpretation; corrections require new record IDs.
-    Curation events are append-only audit records and cannot be replaced.
+    Curation events and committed governance/provenance history are append-only
+    audit records and cannot be replaced.
 
     A Source keeps a stable identity while allowing discovery freshness metadata,
     license state, and acquisition depth to evolve. Repointing a ``src:*`` ID to
@@ -64,7 +65,17 @@ class MemoryRepository:
         "evidence_ids",
         "policy_version",
     )
-    _IMMUTABLE_PROVENANCE_TYPES = {"source_snapshot", "evidence", "curation_event"}
+    _IMMUTABLE_PROVENANCE_TYPES = {
+        "source_snapshot",
+        "evidence",
+        "curation_event",
+        "review_decision",
+        "source_selection_decision",
+        "source_acquisition_authorization",
+        "source_acquisition_execution",
+        "source_acquisition_commit",
+        "observation_triage_decision",
+    }
     _SOURCE_VOLATILE_ORIGIN_KEYS = frozenset(
         {
             "default_branch",
