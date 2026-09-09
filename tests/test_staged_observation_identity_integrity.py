@@ -7,7 +7,7 @@ import pytest
 
 from kneekura_tech_hub.database import apply_migrations
 from kneekura_tech_hub.observation_triage import transition_observation
-from kneekura_tech_hub.postgres_repository import PostgresRepository
+from kneekura_tech_hub.observation_triage_postgres import ObservationTriagePostgresRepository
 from kneekura_tech_hub.repository import MemoryRepository
 from kneekura_tech_hub.service import CurationEngine
 
@@ -121,7 +121,7 @@ def test_postgres_rejects_payload_and_evidence_identity_substitution_but_allows_
         apply_migrations(setup)
         setup.execute("TRUNCATE TABLE source, knowledge_entity RESTART IDENTITY CASCADE")
 
-    repository = PostgresRepository.connect(DSN)
+    repository = ObservationTriagePostgresRepository.connect(DSN)
     try:
         _seed(repository)
         original = repository.get(OBSERVATION_ID)
