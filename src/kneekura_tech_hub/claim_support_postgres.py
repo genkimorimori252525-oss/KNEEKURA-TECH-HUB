@@ -84,6 +84,14 @@ class ClaimSupportPostgresRepository(ObservationTriagePostgresRepository):
         if row is None:
             raise ValueError(f"missing claim: {claim_id}")
 
+    def arm_support_review(self, claim_id: str, decided_at: str) -> None:
+        result = self.connection.execute(
+            "UPDATE claim SET pending_support_reviewed_at=%s WHERE id=%s",
+            (decided_at, claim_id),
+        )
+        if result.rowcount != 1:
+            raise ValueError(f"missing claim: {claim_id}")
+
     def _list_claim_support_decisions(self) -> list[Record]:
         records: list[Record] = []
         for (record_id,) in self.connection.execute(
