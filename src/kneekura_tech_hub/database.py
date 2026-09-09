@@ -36,6 +36,18 @@ def _dollar_quote_tag(sql: str, index: int) -> str | None:
     return sql[index : end + 1]
 
 
+def _is_escape_string_prefix(sql: str, quote_index: int) -> bool:
+    """Return whether ``quote_index`` begins a PostgreSQL E'...' string."""
+
+    prefix_index = quote_index - 1
+    if prefix_index < 0 or sql[prefix_index] not in {"E", "e"}:
+        return False
+    if prefix_index == 0:
+        return True
+    previous = sql[prefix_index - 1]
+    return not (previous.isalnum() or previous in {"_", "$"})
+
+
 def _statements(sql: str) -> list[str]:
     """Split PostgreSQL migration text on top-level semicolons only.
 
@@ -51,6 +63,7 @@ def _statements(sql: str) -> list[str]:
     index = 0
     length = len(sql)
     single_quote = False
+    single_quote_backslash_escapes = False
     double_quote = False
     dollar_quote: str | None = None
     block_comment_depth = 0
@@ -105,10 +118,8 @@ def _statements(sql: str) -> list[str]:
                     index += 2
                     continue
                 single_quote = False
-            elif character == "\\" and following:
-                # Conservative support for PostgreSQL E'...' strings. Treating
-                # the escaped byte as part of the literal is also safe for the
-                # splitter when standard_conforming_strings is enabled.
+                single_quote_backslash_escapes = False
+            elif character == "\\" and following and single_quote_backslash_escapes:
                 current.append(following)
                 index += 2
                 continue
@@ -136,6 +147,7 @@ def _statements(sql: str) -> list[str]:
             continue
         if character == "'":
             single_quote = True
+            single_quote_backslash_escapes = _is_escape_string_prefix(sql, index)
             current.append(character)
             index += 1
             continue
