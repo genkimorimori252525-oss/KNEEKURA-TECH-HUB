@@ -186,7 +186,7 @@ def test_memory_failed_transaction_restores_records_and_depth() -> None:
         with repository.transaction():
             claim = repository.get(CLAIM_ID)
             assert claim is not None
-            claim["statement"] = "temporary mutation"
+            claim["verification_due_at"] = "2026-09-10T00:00:00Z"
             repository.put(claim, replace=True)
             raise RuntimeError("synthetic rollback")
 
