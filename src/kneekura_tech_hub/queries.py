@@ -1,8 +1,10 @@
 from __future__ import annotations
 
+from collections.abc import Mapping
 from copy import deepcopy
+from typing import Any
 
-from .projection import RelationView, project_relations, resolve_entity_id
+from .projection import ProjectionError, RelationView, project_relations, resolve_entity_id
 from .repository import Record, RecordRepository
 
 
@@ -11,7 +13,10 @@ class QueryError(ValueError):
 
 
 def _entity(repository: RecordRepository, entity_id: str) -> Record:
-    resolved = resolve_entity_id(repository, entity_id)
+    try:
+        resolved = resolve_entity_id(repository, entity_id)
+    except ProjectionError as exc:
+        raise QueryError(str(exc)) from exc
     entity = repository.get(resolved)
     if entity is None or entity.get("record_type") != "knowledge_entity":
         raise QueryError(f"unknown knowledge entity: {resolved}")
@@ -31,6 +36,102 @@ def _summary(entity: Record) -> Record:
 def _require_problem(entity: Record) -> None:
     if "problem" not in entity.get("kinds", []):
         raise QueryError(f"entity is not classified as a problem: {entity['id']}")
+
+
+def _normalize_context(context: Mapping[str, Any] | None) -> dict[str, Any]:
+    if context is None:
+        return {}
+    if not isinstance(context, Mapping):
+        raise QueryError("context must be a mapping")
+    normalized = dict(context)
+    if any(not isinstance(key, str) for key in normalized):
+        raise QueryError("context keys must be strings")
+    return deepcopy(normalized)
+
+
+def _exact_value_equal(left: object, right: object) -> bool:
+    """Compare JSON-shaped values without Python's bool/int equality coercion."""
+
+    if type(left) is not type(right):
+        return False
+    if isinstance(left, dict):
+        assert isinstance(right, dict)
+        if left.keys() != right.keys():
+            return False
+        return all(_exact_value_equal(left[key], right[key]) for key in left)
+    if isinstance(left, list):
+        assert isinstance(right, list)
+        return len(left) == len(right) and all(
+            _exact_value_equal(left_item, right_item)
+            for left_item, right_item in zip(left, right, strict=True)
+        )
+    return left == right
+
+
+def _applicability_matches(applicability: object, context: Mapping[str, Any]) -> bool:
+    if not isinstance(applicability, Mapping):
+        return False
+    return all(
+        key in applicability and _exact_value_equal(applicability[key], value)
+        for key, value in context.items()
+    )
+
+
+def contextual_claims_for_entity(
+    repository: RecordRepository,
+    entity_id: str,
+    *,
+    context: Mapping[str, Any] | None = None,
+) -> Record:
+    """Return trusted entity Claims matching explicit applicability context.
+
+    This query deliberately performs no ranking, fuzzy matching, popularity weighting,
+    semantic guessing, or fallback. A supplied context is an exact subset constraint on
+    the immutable ``applicability`` mapping of VALIDATED entity Claims.
+    """
+
+    entity = _entity(repository, entity_id)
+    normalized_context = _normalize_context(context)
+
+    validated = [
+        claim
+        for claim in repository.list("claim")
+        if claim.get("entity_id") == entity["id"]
+        and not claim.get("relation")
+        and claim.get("maturity") == "VALIDATED"
+    ]
+    validated.sort(key=lambda claim: claim["id"])
+
+    if normalized_context:
+        matches = [
+            claim
+            for claim in validated
+            if _applicability_matches(claim.get("applicability", {}), normalized_context)
+        ]
+        if not matches:
+            resolution = "NO_MATCH"
+        elif len(matches) == 1:
+            resolution = "ONE_MATCH"
+        else:
+            resolution = "MULTIPLE_MATCHES"
+    else:
+        matches = list(validated)
+        if not matches:
+            resolution = "NO_VALIDATED_CLAIMS"
+        elif len(matches) == 1:
+            resolution = "ONE_MATCH"
+        else:
+            resolution = "CONTEXT_REQUIRED"
+
+    return {
+        "subject": _summary(entity),
+        "context": normalized_context,
+        "resolution": resolution,
+        "validated_claim_count": len(validated),
+        "candidate_count": len(matches),
+        "candidate_claim_ids": [claim["id"] for claim in matches],
+        "claims": [deepcopy(claim) for claim in matches],
+    }
 
 
 def solutions_for_problem(
