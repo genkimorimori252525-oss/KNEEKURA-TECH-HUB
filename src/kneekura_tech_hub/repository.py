@@ -50,6 +50,11 @@ class MemoryRepository:
     rewritten under the same ``ke:*`` identity. The only supported lifecycle
     mutation in v1 is a canonical entity becoming MERGED with a redirect to a
     different canonical entity.
+
+    A StagedObservation also keeps a stable extracted payload. Its source,
+    summary, candidate names, Evidence candidates, and creator are immutable;
+    only the governed Triage lifecycle status may change under the same ``obs:*``
+    identity.
     """
 
     _CLAIM_EPISTEMIC_FIELDS = (
@@ -64,6 +69,13 @@ class MemoryRepository:
         "alternative_interpretations",
         "evidence_ids",
         "policy_version",
+    )
+    _OBSERVATION_PAYLOAD_FIELDS = (
+        "source_id",
+        "summary",
+        "candidate_names",
+        "evidence_candidate_ids",
+        "created_by",
     )
     _IMMUTABLE_PROVENANCE_TYPES = {
         "source_snapshot",
@@ -163,6 +175,7 @@ class MemoryRepository:
 
         self._guard_source_identity_mutation(current, record)
         self._guard_knowledge_entity_identity_mutation(current, record)
+        self._guard_staged_observation_payload_mutation(current, record)
         self._guard_reviewed_claim_content_mutation(current, record)
         transition = self._protected_disposition_transition(current, record)
         before = deepcopy(current) if current is not None else None
@@ -269,6 +282,28 @@ class MemoryRepository:
         raise ValueError(
             f"invalid knowledge_entity identity transition: {before_state} -> {after_state}"
         )
+
+    @classmethod
+    def _guard_staged_observation_payload_mutation(
+        cls,
+        current: Record | None,
+        updated: Record,
+    ) -> None:
+        if (
+            current is None
+            or current.get("record_type") != "staged_observation"
+            or updated.get("record_type") != "staged_observation"
+        ):
+            return
+        changed = any(
+            current.get(field) != updated.get(field)
+            for field in cls._OBSERVATION_PAYLOAD_FIELDS
+        )
+        if changed:
+            raise ValueError(
+                "staged observation payload is immutable; "
+                f"create a new Observation ID for changed extraction content: {updated['id']}"
+            )
 
     @classmethod
     def _guard_reviewed_claim_content_mutation(
