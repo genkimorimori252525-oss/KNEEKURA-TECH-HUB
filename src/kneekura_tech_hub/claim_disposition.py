@@ -63,6 +63,15 @@ def _transactional_repository(repository: RecordRepository):
     if connection is not None and callable(lock):
         return connection.transaction, lock
 
+    repository_transaction = getattr(repository, "transaction", None)
+    if callable(repository_transaction):
+        def memory_lock(claim_id: str) -> None:
+            record = repository.get(claim_id)
+            if record is None or record.get("record_type") != "claim":
+                raise ValueError(f"missing claim: {claim_id}")
+
+        return repository_transaction, memory_lock
+
     records = getattr(repository, "_records", None)
     if isinstance(records, dict):
         @contextmanager
