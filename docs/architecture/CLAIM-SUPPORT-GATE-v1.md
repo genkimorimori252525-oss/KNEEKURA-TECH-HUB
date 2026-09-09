@@ -86,6 +86,21 @@ This blocks direct repository/SQL maturity mutation from bypassing the review re
 
 The Support Gate locks the Claim row with `FOR UPDATE`, writes the decision, performs the existing Claim transition, and commits both with the existing `CLAIM_PROMOTE` curation event atomically.
 
+## Evidence-profile binding
+
+Migration `0012_claim_support_evidence_integrity.sql` independently re-derives the deterministic evidence profile from `claim_evidence` and `evidence` before a support decision can be inserted.
+
+The database requires the decision's:
+
+- complete `evidence_ids` set;
+- `SUPPORTS`, `REFUTES`, and `QUALIFIES` partitions;
+- distinct Source IDs;
+- distinct SourceSnapshot IDs
+
+to match the actual records attached to the Claim. A direct SQL caller therefore cannot satisfy the support pairing rule by inventing unrelated Evidence IDs or falsifying their roles/source provenance.
+
+The database also requires `counterevidence_note` and `qualification_note` when the actual Evidence roles contain `REFUTES` or `QUALIFIES` respectively. Human interpretation itself remains in the domain layer; the database only protects deterministic integrity facts.
+
 ## CLI
 
 Read-only context:
