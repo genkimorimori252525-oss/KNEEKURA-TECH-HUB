@@ -10,7 +10,10 @@ import pytest
 from kneekura_tech_hub.authorization import AcquisitionAuthorizationEngine
 from kneekura_tech_hub.database import apply_migrations
 from kneekura_tech_hub.execution import execute_authorized_acquisition
-from kneekura_tech_hub.selected_file_extraction import ingest_selected_file_extraction
+from kneekura_tech_hub.selected_file_extraction import (
+    check_selected_file_extraction,
+    ingest_selected_file_extraction,
+)
 from kneekura_tech_hub.selection import SourceSelectionEngine
 from kneekura_tech_hub.service import CurationEngine
 from kneekura_tech_hub.verified_commit import commit_verified_acquisition
@@ -177,6 +180,51 @@ def test_postgres_extraction_roundtrip_is_idempotent_and_stops_before_claims(tmp
         assert second["reused_observation_count"] == 2
         assert len(repository.list("evidence")) == 3
         assert len(repository.list("staged_observation")) == 2
+    finally:
+        connection.close()
+
+
+def test_reextraction_preserves_existing_observation_lifecycle_status(tmp_path: Path):
+    assert DSN is not None
+    connection = psycopg.connect(DSN, autocommit=True)
+    try:
+        apply_migrations(connection)
+        _truncate(connection)
+        repository = VerifiedCommitPostgresRepository(connection)
+        commit = _setup(repository, tmp_path)
+        engine = CurationEngine(repository)
+        proposal = _proposal(commit["snapshot_id"])
+
+        first = ingest_selected_file_extraction(
+            engine,
+            proposal,
+            storage_root=tmp_path,
+            actor=AI,
+        )
+        observation_id = first["observation_ids"][0]
+        observation = repository.get(observation_id)
+        assert observation is not None
+        observation["status"] = "TRIAGED"
+        repository.put(observation, replace=True)
+
+        checked = check_selected_file_extraction(
+            repository,
+            proposal,
+            storage_root=tmp_path,
+            actor=AI,
+        )
+        assert observation_id in checked["reused_observation_ids"]
+        assert repository.get(observation_id)["status"] == "TRIAGED"
+
+        second = ingest_selected_file_extraction(
+            engine,
+            proposal,
+            storage_root=tmp_path,
+            actor=AI,
+        )
+        assert second["new_observation_count"] == 0
+        assert second["reused_observation_count"] == 2
+        assert repository.get(observation_id)["status"] == "TRIAGED"
     finally:
         connection.close()
 
