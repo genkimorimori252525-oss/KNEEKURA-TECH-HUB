@@ -6,6 +6,7 @@ import os
 
 import psycopg
 
+from .claim_resupport import promote_challenged_to_supported
 from .claim_support import (
     ClaimSupportError,
     claim_support_context,
@@ -31,13 +32,13 @@ def _render(value) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Human-gated review boundary for CANDIDATE -> SUPPORTED Claims"
+        description="Human-gated review boundary for Claim -> SUPPORTED transitions"
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     context = subparsers.add_parser(
         "context",
-        help="show one Candidate Claim with Evidence Review and competing-Claim context",
+        help="show one Claim with Evidence Review and competing-Claim context",
     )
     context.add_argument("claim_id")
 
@@ -49,7 +50,7 @@ def main() -> int:
 
     promote = subparsers.add_parser(
         "promote",
-        help="perform one governed CANDIDATE -> SUPPORTED promotion",
+        help="perform one governed CANDIDATE/CHALLENGED -> SUPPORTED review",
     )
     promote.add_argument("claim_id")
     promote.add_argument("--reason", required=True)
@@ -79,19 +80,28 @@ def main() -> int:
             actor = {"actor_type": "human", "actor_id": args.actor_id}
             if args.actor_version is not None:
                 actor["version"] = args.actor_version
-            result = promote_candidate_to_supported(
-                repository,
-                args.claim_id,
-                actor=actor,
-                reason=args.reason,
-                independence_assessment=args.independence_assessment,
-                independence_note=args.independence_note,
-                counterevidence_note=args.counterevidence_note,
-                qualification_note=args.qualification_note,
-                competition_note=args.competition_note,
-                decision_id=args.decision_id,
-                policy_version=args.policy_version,
-            )
+            claim = repository.get(args.claim_id)
+            if claim is None or claim.get("record_type") != "claim":
+                raise ClaimSupportError(f"missing claim: {args.claim_id}")
+            kwargs = {
+                "actor": actor,
+                "reason": args.reason,
+                "independence_assessment": args.independence_assessment,
+                "independence_note": args.independence_note,
+                "counterevidence_note": args.counterevidence_note,
+                "qualification_note": args.qualification_note,
+                "competition_note": args.competition_note,
+                "decision_id": args.decision_id,
+                "policy_version": args.policy_version,
+            }
+            if claim["maturity"] == "CANDIDATE":
+                result = promote_candidate_to_supported(repository, args.claim_id, **kwargs)
+            elif claim["maturity"] == "CHALLENGED":
+                result = promote_challenged_to_supported(repository, args.claim_id, **kwargs)
+            else:
+                raise ClaimSupportError(
+                    "claim support promote requires CANDIDATE or CHALLENGED maturity"
+                )
         _render(result)
         return 0
     except (ClaimSupportError, ValueError, psycopg.Error) as exc:

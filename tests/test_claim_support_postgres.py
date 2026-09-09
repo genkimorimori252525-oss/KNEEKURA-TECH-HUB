@@ -26,6 +26,7 @@ def _truncate(connection) -> None:
     connection.execute(
         """
         TRUNCATE TABLE
+            claim_validation_decision,
             claim_support_decision,
             observation_triage_decision,
             source_acquisition_commit,
@@ -136,7 +137,7 @@ def test_direct_repository_candidate_to_supported_is_rejected_by_database(reposi
     bypass = repository.get(CLAIM_ID)
     assert bypass is not None
     bypass["maturity"] = "SUPPORTED"
-    with pytest.raises(psycopg.Error, match="requires matching claim support decision"):
+    with pytest.raises(psycopg.Error, match="requires a fresh claim support decision"):
         repository.put(bypass, replace=True)
     assert repository.get(CLAIM_ID)["maturity"] == "CANDIDATE"
     assert repository.list("claim_support_decision") == []
@@ -264,7 +265,7 @@ def test_decision_without_applied_supported_state_is_rejected(repository) -> Non
         "policy_version": "1.0.0",
         "decided_at": "2026-09-09T00:00:00Z",
     }
-    with pytest.raises(psycopg.Error, match="requires SUPPORTED maturity"):
+    with pytest.raises(psycopg.Error, match="requires matching SUPPORTED state"):
         repository.put(decision)
     assert repository.get("csd:orphan") is None
 

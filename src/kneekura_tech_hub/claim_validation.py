@@ -183,10 +183,11 @@ def validate_claim(
             )
 
         support_decisions = claim_support_history(repository, claim_id=claim_id)
-        if len(support_decisions) != 1:
+        if not support_decisions:
             raise ClaimValidationError(
-                "VALIDATED promotion requires exactly one prior Claim support decision"
+                "VALIDATED promotion requires prior Claim support history"
             )
+        latest_support_decision = support_decisions[-1]
 
         evidence = _evidence_snapshot(repository, claim)
         review = review_claim(repository, claim_id)
@@ -221,7 +222,7 @@ def validate_claim(
             "record_type": "claim_validation_decision",
             "id": decision_id or f"cvd:{uuid4()}",
             "claim_id": claim_id,
-            "support_decision_id": support_decisions[0]["id"],
+            "support_decision_id": latest_support_decision["id"],
             "from_maturity": current,
             "to_maturity": "VALIDATED",
             "reason": reason.strip(),
