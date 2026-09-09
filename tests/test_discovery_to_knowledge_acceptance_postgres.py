@@ -12,6 +12,8 @@ from kneekura_tech_hub.authorization import (
     AcquisitionAuthorizationEngine,
     AcquisitionAuthorizationError,
 )
+from kneekura_tech_hub.claim_support import claim_support_history
+from kneekura_tech_hub.claim_validation import claim_validation_history
 from kneekura_tech_hub.database import apply_migrations
 from kneekura_tech_hub.discovery import ingest_discovery_intake
 from kneekura_tech_hub.execution import execute_authorized_acquisition
@@ -271,7 +273,7 @@ def test_discovery_to_validated_knowledge_requires_every_governed_boundary(tmp_p
             reason="Human reviewed the pinned Evidence supporting this narrow statement.",
         )
         assert supported["maturity"] == "SUPPORTED"
-        assert len(repository.list("claim_support_decision")) == 1
+        assert len(claim_support_history(repository, claim_id=CLAIM_ID)) == 1
 
         validated = engine.transition_claim(
             CLAIM_ID,
@@ -288,7 +290,7 @@ def test_discovery_to_validated_knowledge_requires_every_governed_boundary(tmp_p
             },
         )
         assert validated["maturity"] == "VALIDATED"
-        assert len(repository.list("claim_validation_decision")) == 1
+        assert len(claim_validation_history(repository, claim_id=CLAIM_ID)) == 1
 
         # 9. The final reviewed Claim still reconstructs all the way back to the
         # exact discovered Source and immutable Snapshot; popularity never enters the chain.
