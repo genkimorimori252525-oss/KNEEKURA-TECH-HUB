@@ -10,8 +10,8 @@ import psycopg
 from .database import apply_migrations
 from .selected_file_extraction import (
     SelectedFileExtractionError,
+    check_selected_file_extraction,
     ingest_selected_file_extraction,
-    prepare_selected_file_extraction,
     verify_committed_selected_file_snapshot,
 )
 from .service import CurationEngine
@@ -59,7 +59,10 @@ def main() -> int:
     snapshot_check.add_argument("--storage-root", required=True)
 
     for name, help_text in (
-        ("check", "validate an untrusted extraction proposal without writing records"),
+        (
+            "check",
+            "validate an untrusted extraction proposal and deterministic-ID conflicts without writing",
+        ),
         ("ingest", "validate and ingest Evidence + NEW StagedObservations"),
     ):
         command = subparsers.add_parser(name, help=help_text)
@@ -101,13 +104,13 @@ def main() -> int:
         proposal = _load_proposal(args.proposal)
         actor = _actor(args)
         if args.command == "check":
-            prepared = prepare_selected_file_extraction(
+            checked = check_selected_file_extraction(
                 repository,
                 proposal,
                 storage_root=Path(args.storage_root),
                 actor=actor,
             )
-            _render(prepared)
+            _render(checked)
         else:
             receipt = ingest_selected_file_extraction(
                 CurationEngine(repository),
