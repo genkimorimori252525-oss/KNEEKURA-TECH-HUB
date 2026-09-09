@@ -1,5 +1,6 @@
 import pytest
 
+from kneekura_tech_hub.claim_disposition import dispose_claim
 from kneekura_tech_hub.repository import MemoryRepository
 from kneekura_tech_hub.service import CurationEngine, CurationError
 
@@ -173,8 +174,16 @@ def test_supersede_requires_same_subject_distinct_mature_successor():
             "cl:old", "SUPERSEDED", actor=HUMAN, reason="wrong subject", superseded_by="cl:other"
         )
 
-    superseded = engine.transition_claim(
-        "cl:old", "SUPERSEDED", actor=HUMAN, reason="better formulation", superseded_by="cl:new"
+    result = dispose_claim(
+        engine.repository,
+        "cl:old",
+        "SUPERSEDED",
+        actor=HUMAN,
+        reason="better formulation",
+        successor_claim_id="cl:new",
+        competition_note="The supported successor is the intended replacement.",
+        decision_id="cdd:relation:supersede",
     )
+    superseded = result["claim"]
     assert superseded["maturity"] == "SUPERSEDED"
     assert superseded["superseded_by"] == "cl:new"
