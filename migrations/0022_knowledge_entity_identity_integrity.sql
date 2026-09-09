@@ -134,6 +134,11 @@ DEFERRABLE INITIALLY DEFERRED
 FOR EACH ROW
 EXECUTE FUNCTION kthub_assert_entity_identity_anchor();
 
+CREATE TRIGGER trg_knowledge_entity_identity_anchor_immutable
+BEFORE UPDATE OR DELETE ON knowledge_entity_identity_anchor
+FOR EACH ROW
+EXECUTE FUNCTION kthub_reject_provenance_anchor_mutation();
+
 CREATE FUNCTION kthub_guard_entity_identity_state()
 RETURNS TRIGGER
 LANGUAGE plpgsql
