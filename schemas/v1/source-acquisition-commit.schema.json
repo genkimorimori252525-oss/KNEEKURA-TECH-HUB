@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kneekura.local/schemas/v1/source-acquisition-commit.schema.json",
+  "title": "KNEEKURA TECH HUB v1 Verified Acquisition Commit",
+  "type": "object",
+  "required": [
+    "record_type",
+    "id",
+    "execution_id",
+    "authorization_id",
+    "source_id",
+    "snapshot_id",
+    "revision",
+    "acquisition_level",
+    "manifest_sha256",
+    "source_fingerprint_sha256",
+    "authorization_fingerprint_sha256",
+    "committed_by",
+    "policy_version",
+    "committed_at"
+  ],
+  "properties": {
+    "record_type": {"const": "source_acquisition_commit"},
+    "id": {"type": "string", "pattern": "^vc:"},
+    "execution_id": {"type": "string", "pattern": "^ax:"},
+    "authorization_id": {"type": "string", "pattern": "^aa:"},
+    "source_id": {"type": "string", "pattern": "^src:"},
+    "snapshot_id": {"type": "string", "pattern": "^ss:"},
+    "revision": {"type": "string", "minLength": 1},
+    "acquisition_level": {"const": "selected-files"},
+    "manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "source_fingerprint_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "authorization_fingerprint_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "committed_by": {
+      "type": "object",
+      "required": ["actor_type"],
+      "properties": {
+        "actor_type": {"enum": ["tool", "system"]},
+        "actor_id": {"type": ["string", "null"]},
+        "version": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "policy_version": {"type": "string", "minLength": 1},
+    "committed_at": {"type": "string", "format": "date-time"}
+  },
+  "additionalProperties": false
+}

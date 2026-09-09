@@ -65,6 +65,19 @@ def load_source_acquisition_execution_schema(
     return json.loads(schema_path.read_text(encoding="utf-8"))
 
 
+def load_source_acquisition_commit_schema(
+    schema_path: Path | None = None,
+) -> dict[str, Any]:
+    if schema_path is None:
+        schema_path = (
+            Path(__file__).resolve().parents[2]
+            / "schemas"
+            / "v1"
+            / "source-acquisition-commit.schema.json"
+        )
+    return json.loads(schema_path.read_text(encoding="utf-8"))
+
+
 def load_policy(policy_path: Path | None = None) -> dict[str, Any]:
     if policy_path is None:
         policy_path = Path(__file__).resolve().parents[2] / "governance" / "policy-v1.json"
@@ -159,15 +172,10 @@ def _execution_errors(record: dict[str, Any]) -> list[str]:
         if record.get("manifest_sha256") is not None or record.get("storage_key") is not None:
             errors.append("FAILED acquisition execution cannot publish manifest or storage_key")
         if (
-            record.get("error_code")
-            in {
-                "AUTHORIZATION_BECAME_INEFFECTIVE",
-                "AUTHORIZATION_CHANGED_DURING_EXECUTION",
-                "SOURCE_CHANGED_DURING_EXECUTION",
-            }
+            record.get("error_code") == "AUTHORIZATION_BECAME_INEFFECTIVE"
             and record.get("authorization_effective_after") is not False
         ):
-            errors.append("provenance-race execution failures must mark authorization ineffective")
+            errors.append("ineffective-authorization execution failure must mark authorization ineffective")
 
     return errors
 
@@ -236,6 +244,11 @@ def _policy_errors(record: dict[str, Any], policy: dict[str, Any]) -> list[str]:
     if record_type == "source_acquisition_execution":
         errors.extend(_execution_errors(record))
 
+    if record_type == "source_acquisition_commit":
+        actor_type = (record.get("committed_by") or {}).get("actor_type")
+        if actor_type not in {"tool", "system"}:
+            errors.append("verified acquisition commits require a tool or system actor")
+
     if record_type == "curation_event":
         actor_type = (record.get("actor") or {}).get("actor_type")
         operation = record.get("operation")
@@ -260,6 +273,8 @@ def validate_record(
         schema = load_source_acquisition_authorization_schema(schema_path)
     elif record_type == "source_acquisition_execution":
         schema = load_source_acquisition_execution_schema(schema_path)
+    elif record_type == "source_acquisition_commit":
+        schema = load_source_acquisition_commit_schema(schema_path)
     else:
         schema = load_schema(schema_path)
     validator = Draft202012Validator(schema)
