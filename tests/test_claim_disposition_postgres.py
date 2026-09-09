@@ -127,7 +127,10 @@ def _support(repository, claim_id=CLAIM_ID):
         "SUPPORTED",
         actor=HUMAN,
         reason="support review",
-        support_review={"decision_id": f"csd:{claim_id}:support"},
+        support_review={
+            "decision_id": f"csd:{claim_id}:support",
+            "competition_note": "Any active exact-subject competitors were explicitly reviewed.",
+        },
     )
 
 
@@ -232,7 +235,7 @@ def test_ai_can_challenge_validated_but_cannot_terminally_reject_afterward(repos
 
 
 def test_human_supersession_requires_supported_same_subject_successor(repository) -> None:
-    engine = _seed(repository)
+    _seed(repository)
     _support(repository)
     _validate(repository)
     _seed(repository, claim_id=SUCCESSOR_ID)
