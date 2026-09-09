@@ -76,27 +76,27 @@ def _authorization(repository: RecordRepository, authorization_id: str) -> Recor
     return record
 
 
-def _authorization_snapshot_ids(
+def _authorization_commit_ids(
     repository: RecordRepository,
     authorization_id: str,
 ) -> list[str]:
-    """Return immutable Snapshots that prove this exact grant was already committed."""
+    """Return verified commits that prove this exact human grant was consumed."""
 
-    snapshot_ids: list[str] = []
-    for snapshot in repository.list("source_snapshot"):
-        if snapshot.get("record_type") != "source_snapshot":
-            continue
-        metadata = snapshot.get("metadata") or {}
-        if metadata.get("authorization_id") == authorization_id:
-            snapshot_ids.append(snapshot["id"])
-    return sorted(snapshot_ids)
+    commit_ids: list[str] = []
+    for commit in repository.list("source_acquisition_commit"):
+        if (
+            commit.get("record_type") == "source_acquisition_commit"
+            and commit.get("authorization_id") == authorization_id
+        ):
+            commit_ids.append(commit["id"])
+    return sorted(commit_ids)
 
 
 def _is_governed_refresh_authorization(
     repository: RecordRepository,
     authorization: Record,
 ) -> bool:
-    """A selected-files refresh must explicitly replace a grant that produced a Snapshot."""
+    """A selected-files refresh must explicitly replace a grant with a verified commit."""
 
     predecessor_id = authorization.get("supersedes_authorization_id")
     if not isinstance(predecessor_id, str):
@@ -106,7 +106,7 @@ def _is_governed_refresh_authorization(
     return (
         previous.get("decision") == "AUTHORIZE"
         and previous.get("source_id") == authorization.get("source_id")
-        and bool(_authorization_snapshot_ids(repository, predecessor_id))
+        and bool(_authorization_commit_ids(repository, predecessor_id))
     )
 
 
@@ -235,8 +235,8 @@ def authorization_effectiveness(
     """Evaluate whether an active AUTHORIZE remains safe to consume *now*.
 
     Historical authorization is not permanent authority. A grant becomes consumed when its
-    immutable SourceSnapshot exists. A Source already at ``selected-files`` may be refreshed only
-    through a fresh human grant that explicitly supersedes a previously committed AUTHORIZE.
+    append-only Verified Acquisition Commit exists. A Source already at ``selected-files`` may be
+    refreshed only through a fresh human grant that explicitly supersedes a committed AUTHORIZE.
     """
 
     authorization = _authorization(repository, authorization_id)
@@ -249,7 +249,7 @@ def authorization_effectiveness(
         blockers.append("NOT_ACTIVE_AUTHORIZATION")
     if authorization["decision"] != "AUTHORIZE":
         blockers.append("NOT_AUTHORIZE_DECISION")
-    if _authorization_snapshot_ids(repository, authorization["id"]):
+    if _authorization_commit_ids(repository, authorization["id"]):
         blockers.append("AUTHORIZATION_ALREADY_COMMITTED")
 
     source_level = (source.get("acquisition") or {}).get("level")
@@ -309,8 +309,8 @@ class AcquisitionAuthorizationEngine:
 
     Initial AUTHORIZE requires metadata-only Source state. A Source already promoted to
     selected-files may receive a fresh refresh grant only by explicitly superseding the active
-    AUTHORIZE that already produced an immutable SourceSnapshot. REVOKE remains available even if
-    selection/license state later changes. No operation here performs retrieval.
+    AUTHORIZE that already has an append-only Verified Acquisition Commit. REVOKE remains available
+    even if selection/license state later changes. No operation here performs retrieval.
     """
 
     def __init__(self, repository: RecordRepository, *, policy_version: str = "1.0.0") -> None:
@@ -396,9 +396,9 @@ class AcquisitionAuthorizationEngine:
                     raise AcquisitionAuthorizationError(
                         "selected-files refresh requires explicit supersession of the active AUTHORIZE"
                     )
-                if not _authorization_snapshot_ids(self.repository, previous["id"]):
+                if not _authorization_commit_ids(self.repository, previous["id"]):
                     raise AcquisitionAuthorizationError(
-                        "selected-files refresh requires the superseded AUTHORIZE to have a committed SourceSnapshot"
+                        "selected-files refresh requires the superseded AUTHORIZE to have a verified acquisition commit"
                     )
             else:
                 raise AcquisitionAuthorizationError(
