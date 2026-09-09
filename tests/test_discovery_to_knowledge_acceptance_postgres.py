@@ -95,7 +95,9 @@ def test_discovery_to_validated_knowledge_requires_every_governed_boundary(tmp_p
                 batch,
                 actor=DISCOVERY_TOOL,
             )
-        assert discovery_result["stored_count"] == 2
+        assert discovery_result["counts"] == {"source": 2}
+        assert set(discovery_result["stored_ids"]) == {SOURCE_ID, UNSELECTED_SOURCE_ID}
+        assert discovery_result["canonical_knowledge_writes"] == 0
         source = repository.get(SOURCE_ID)
         assert source is not None
         assert source["acquisition"] == {"level": "metadata-only"}
