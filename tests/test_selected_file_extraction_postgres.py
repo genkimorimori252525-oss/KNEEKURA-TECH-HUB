@@ -10,6 +10,8 @@ import pytest
 from kneekura_tech_hub.authorization import AcquisitionAuthorizationEngine
 from kneekura_tech_hub.database import apply_migrations
 from kneekura_tech_hub.execution import execute_authorized_acquisition
+from kneekura_tech_hub.observation_triage import transition_observation
+from kneekura_tech_hub.observation_triage_postgres import ObservationTriagePostgresRepository
 from kneekura_tech_hub.selected_file_extraction import (
     check_selected_file_extraction,
     ingest_selected_file_extraction,
@@ -39,6 +41,7 @@ def _truncate(connection) -> None:
     connection.execute(
         """
         TRUNCATE TABLE
+            observation_triage_decision,
             source_acquisition_commit,
             source_acquisition_execution,
             source_acquisition_authorization,
@@ -190,7 +193,7 @@ def test_reextraction_preserves_existing_observation_lifecycle_status(tmp_path: 
     try:
         apply_migrations(connection)
         _truncate(connection)
-        repository = VerifiedCommitPostgresRepository(connection)
+        repository = ObservationTriagePostgresRepository(connection)
         commit = _setup(repository, tmp_path)
         engine = CurationEngine(repository)
         proposal = _proposal(commit["snapshot_id"])
@@ -202,10 +205,14 @@ def test_reextraction_preserves_existing_observation_lifecycle_status(tmp_path: 
             actor=AI,
         )
         observation_id = first["observation_ids"][0]
-        observation = repository.get(observation_id)
-        assert observation is not None
-        observation["status"] = "TRIAGED"
-        repository.put(observation, replace=True)
+        transition_observation(
+            repository,
+            observation_id,
+            "MARK_TRIAGED",
+            reason="Regression fixture advances through the governed triage lifecycle.",
+            actor=HUMAN,
+            decision_id="otd:selected-file-extraction-regression",
+        )
 
         checked = check_selected_file_extraction(
             repository,
