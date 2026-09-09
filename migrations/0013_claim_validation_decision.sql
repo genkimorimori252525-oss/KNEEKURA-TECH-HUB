@@ -58,6 +58,9 @@ CREATE TABLE claim_validation_decision (
     )
 );
 
+CREATE UNIQUE INDEX idx_claim_validation_decision_verification_once
+    ON claim_validation_decision(claim_id, validated_at);
+
 CREATE INDEX idx_claim_validation_decision_claim
     ON claim_validation_decision(claim_id, validated_at, id);
 
