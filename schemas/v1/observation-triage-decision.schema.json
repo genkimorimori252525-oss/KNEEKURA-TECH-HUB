@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kneekura.local/schemas/v1/observation-triage-decision.schema.json",
+  "title": "KNEEKURA TECH HUB v1 Observation Triage Decision",
+  "type": "object",
+  "required": [
+    "record_type",
+    "id",
+    "observation_id",
+    "action",
+    "from_status",
+    "to_status",
+    "reason",
+    "created_by",
+    "policy_version",
+    "decided_at"
+  ],
+  "properties": {
+    "record_type": {"const": "observation_triage_decision"},
+    "id": {"type": "string", "pattern": "^otd:"},
+    "observation_id": {"type": "string", "pattern": "^obs:"},
+    "action": {
+      "enum": ["MARK_TRIAGED", "REJECT", "EXPIRE", "PROMOTE_TO_CLAIM_CANDIDATE"]
+    },
+    "from_status": {"enum": ["NEW", "TRIAGED"]},
+    "to_status": {"enum": ["TRIAGED", "PROMOTED", "REJECTED", "EXPIRED"]},
+    "reason": {"type": "string", "minLength": 1, "maxLength": 4000},
+    "created_by": {
+      "type": "object",
+      "required": ["actor_type"],
+      "properties": {
+        "actor_type": {"enum": ["human", "tool", "system"]},
+        "actor_id": {"type": ["string", "null"]},
+        "version": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "resulting_claim_id": {"type": ["string", "null"], "pattern": "^cl:"},
+    "policy_version": {"type": "string", "minLength": 1},
+    "decided_at": {"type": "string", "format": "date-time"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"action": {"const": "MARK_TRIAGED"}}},
+      "then": {
+        "properties": {"from_status": {"const": "NEW"}, "to_status": {"const": "TRIAGED"}},
+        "not": {"required": ["resulting_claim_id"]}
+      }
+    },
+    {
+      "if": {"properties": {"action": {"const": "REJECT"}}},
+      "then": {
+        "properties": {"to_status": {"const": "REJECTED"}},
+        "not": {"required": ["resulting_claim_id"]}
+      }
+    },
+    {
+      "if": {"properties": {"action": {"const": "EXPIRE"}}},
+      "then": {
+        "properties": {"to_status": {"const": "EXPIRED"}},
+        "not": {"required": ["resulting_claim_id"]}
+      }
+    },
+    {
+      "if": {"properties": {"action": {"const": "PROMOTE_TO_CLAIM_CANDIDATE"}}},
+      "then": {
+        "properties": {"from_status": {"const": "TRIAGED"}, "to_status": {"const": "PROMOTED"}},
+        "required": ["resulting_claim_id"]
+      }
+    }
+  ],
+  "additionalProperties": false
+}
