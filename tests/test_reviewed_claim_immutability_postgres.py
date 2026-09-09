@@ -192,12 +192,12 @@ def test_postgres_created_by_is_immutable_even_for_candidate(repository) -> None
     assert repository.get(CLAIM_ID)["created_by"] == AI
 
 
-def test_postgres_content_cannot_change_while_leaving_candidate(repository) -> None:
+def test_postgres_content_cannot_change_in_update_that_leaves_candidate(repository) -> None:
     _seed(repository)
     with pytest.raises(psycopg.Error, match="epistemic content is immutable"):
         repository.connection.execute(
-            "UPDATE claim SET statement=%s, maturity='SUPPORTED' WHERE id=%s",
-            ("Changed during promotion.", CLAIM_ID),
+            "UPDATE claim SET statement=%s, maturity='REJECTED' WHERE id=%s",
+            ("Changed while leaving Candidate.", CLAIM_ID),
         )
 
     stored = repository.get(CLAIM_ID)
