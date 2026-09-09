@@ -116,8 +116,13 @@ def test_missing_referenced_evidence_fails_closed():
 def test_snapshot_source_mismatch_fails_closed():
     repository = seeded_repository()
     repository.put(source("src:other"))
-    broken_snapshot = snapshot(source_id="src:other")
-    repository.put(broken_snapshot, replace=True)
+    repository.put(snapshot("ss:other", source_id="src:other"))
+    repository.put(evidence("ev:mismatch", 30, snapshot_id="ss:other"))
+    broken = repository.get("cl:test")
+    assert broken is not None
+    broken["evidence_ids"] = ["ev:mismatch"]
+    broken["reasoning_basis"] = ["ev:mismatch"]
+    repository.put(broken, replace=True)
 
     with pytest.raises(ExplanationError, match="different source"):
         explain_claim(repository, "cl:test")

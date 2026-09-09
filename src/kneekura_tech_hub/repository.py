@@ -34,6 +34,10 @@ class MemoryRepository:
     A Claim's epistemic content is editable only while it remains CANDIDATE.
     Once human review starts, the reviewed payload is immutable and corrections
     must be represented by a new Claim.
+
+    SourceSnapshot and Evidence records are immutable provenance anchors. Their
+    identity can never be reused to point at different captured material or a
+    different locator/role interpretation; corrections require new record IDs.
     """
 
     _CLAIM_EPISTEMIC_FIELDS = (
@@ -49,6 +53,7 @@ class MemoryRepository:
         "evidence_ids",
         "policy_version",
     )
+    _IMMUTABLE_PROVENANCE_TYPES = {"source_snapshot", "evidence"}
 
     def __init__(self) -> None:
         self._records: dict[str, Record] = {}
@@ -105,6 +110,15 @@ class MemoryRepository:
 
         if current is not None and not replace:
             raise DuplicateRecordError(f"record already exists: {record_id}")
+
+        if (
+            current is not None
+            and replace
+            and current.get("record_type") in self._IMMUTABLE_PROVENANCE_TYPES
+        ):
+            raise ValueError(
+                f"{current['record_type']} is immutable; create a new record ID: {record_id}"
+            )
 
         self._guard_reviewed_claim_content_mutation(current, record)
         transition = self._protected_disposition_transition(current, record)
