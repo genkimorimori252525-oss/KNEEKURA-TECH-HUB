@@ -244,7 +244,6 @@ def promote_candidate_to_supported(
                 "SUPPORTED",
                 actor=actor,
                 reason=reason,
-                support_decision_id=decision["id"],
             )
         except CurationError as exc:
             raise ClaimSupportError(str(exc)) from exc
