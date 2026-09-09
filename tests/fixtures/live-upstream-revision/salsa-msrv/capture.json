@@ -1,0 +1,32 @@
+{
+  "capture_version": "1.0",
+  "captured_at": "2026-09-10T04:58:00+09:00",
+  "source": {
+    "provider": "github",
+    "repository": "salsa-rs/salsa",
+    "source_id": "src:github:salsa-rs:salsa",
+    "path": "Cargo.toml",
+    "license_expression": "Apache-2.0 OR MIT"
+  },
+  "before": {
+    "revision": "81496d19d42c9d6f4bab876d1f2ac9941ec8992f",
+    "tree_sha": "5a45c8c185f728d03fdcaf39b842bf28360c7860",
+    "blob_sha": "cfbd80759370cfa2a7739f3edcc071aebfb94ca1",
+    "byte_count": 3763,
+    "line": 149,
+    "line_text": "rust-version = \"1.85\"",
+    "commit_url": "https://github.com/salsa-rs/salsa/commit/81496d19d42c9d6f4bab876d1f2ac9941ec8992f"
+  },
+  "after": {
+    "revision": "e2304b4342cb10ed453f0f464bdad83f7d159c56",
+    "parent_revision": "81496d19d42c9d6f4bab876d1f2ac9941ec8992f",
+    "tree_sha": "4bce6a41e07f4413f859a3ad08f2c3e8485bf028",
+    "blob_sha": "477682f80c520c588a2bb4cfbba2f3a479c56414",
+    "byte_count": 3763,
+    "line": 149,
+    "line_text": "rust-version = \"1.88\"",
+    "commit_message": "bump MSRV to 1.88 (#1283)",
+    "commit_url": "https://github.com/salsa-rs/salsa/commit/e2304b4342cb10ed453f0f464bdad83f7d159c56"
+  },
+  "capture_note": "Captured from live public GitHub commit/tree/file endpoints. Cargo.toml changed only the workspace rust-version line for this file between the two pinned revisions; the frozen before file plus the recorded one-line transformation reproduces the after blob exactly."
+}
