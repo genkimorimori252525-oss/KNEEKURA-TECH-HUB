@@ -131,7 +131,7 @@ def test_claim_transition_requires_human_for_validated():
     engine.create_claim(claim(), actor=HUMAN)
     engine.transition_claim("cl:1", "SUPPORTED", actor=HUMAN, reason="evidence anchored")
 
-    with pytest.raises(CurationError, match="requires a human actor"):
+    with pytest.raises(CurationError, match="requires a human"):
         engine.transition_claim("cl:1", "VALIDATED", actor=AI, reason="model says so")
 
 

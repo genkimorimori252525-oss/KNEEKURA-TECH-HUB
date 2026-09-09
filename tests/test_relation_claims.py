@@ -137,7 +137,15 @@ def test_supersede_requires_same_subject_distinct_mature_successor():
             "competition_note": "The successor is an alternative formulation kept for supersession testing."
         },
     )
-    engine.transition_claim("cl:old", "VALIDATED", actor=HUMAN, reason="verified")
+    engine.transition_claim(
+        "cl:old",
+        "VALIDATED",
+        actor=HUMAN,
+        reason="verified",
+        validation_review={
+            "competition_note": "The successor is an intentional competing formulation in this fixture."
+        },
+    )
 
     with pytest.raises(CurationError, match="cannot supersede itself"):
         engine.transition_claim(

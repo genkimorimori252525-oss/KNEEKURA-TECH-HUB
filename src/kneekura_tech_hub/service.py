@@ -151,12 +151,30 @@ class CurationEngine:
         reason: str,
         superseded_by: str | None = None,
         support_review: Record | None = None,
+        validation_review: Record | None = None,
         _support_gate_applied: bool = False,
+        _validation_gate_applied: bool = False,
+        _validation_timestamp: str | None = None,
     ) -> Record:
         claim = self._require_existing(claim_id, "claim")
         current = claim["maturity"]
         if target_maturity not in self._CLAIM_TRANSITIONS[current]:
             raise CurationError(f"invalid claim transition: {current} -> {target_maturity}")
+
+        if validation_review is not None and not (
+            current in {"SUPPORTED", "CHALLENGED"} and target_maturity == "VALIDATED"
+        ):
+            raise CurationError(
+                "validation_review is only valid for SUPPORTED/CHALLENGED -> VALIDATED"
+            )
+        if _validation_timestamp is not None and not _validation_gate_applied:
+            raise CurationError("validation timestamp is internal to the Validation Gate")
+        if _validation_gate_applied and not (
+            current in {"SUPPORTED", "CHALLENGED"} and target_maturity == "VALIDATED"
+        ):
+            raise CurationError(
+                "internal validation gate marker is only valid for VALIDATED promotion"
+            )
 
         if current == "CANDIDATE" and target_maturity == "SUPPORTED" and not _support_gate_applied:
             review = support_review or {}
@@ -211,6 +229,65 @@ class CurationEngine:
             if decisions[0].get("reviewed_by") != actor:
                 raise CurationError("claim support decision reviewer must match transition actor")
 
+        if (
+            current in {"SUPPORTED", "CHALLENGED"}
+            and target_maturity == "VALIDATED"
+            and not _validation_gate_applied
+        ):
+            review = validation_review or {}
+            allowed = {
+                "validation_basis",
+                "validation_note",
+                "independence_assessment",
+                "independence_note",
+                "counterevidence_note",
+                "qualification_note",
+                "competition_note",
+                "decision_id",
+            }
+            extra = set(review) - allowed
+            if extra:
+                raise CurationError(f"unsupported claim validation review fields: {sorted(extra)!r}")
+            try:
+                from .claim_validation import ClaimValidationError, validate_claim
+
+                result = validate_claim(
+                    self.repository,
+                    claim_id,
+                    actor=actor,
+                    reason=reason,
+                    validation_basis=review.get("validation_basis", "EVIDENCE_REVIEW"),
+                    validation_note=review.get("validation_note", reason),
+                    independence_assessment=review.get("independence_assessment", "NOT_ASSESSED"),
+                    independence_note=review.get("independence_note"),
+                    counterevidence_note=review.get("counterevidence_note"),
+                    qualification_note=review.get("qualification_note"),
+                    competition_note=review.get("competition_note"),
+                    decision_id=review.get("decision_id"),
+                    policy_version=self.policy_version,
+                )
+            except ClaimValidationError as exc:
+                raise CurationError(str(exc)) from exc
+            return deepcopy(result["claim"])
+
+        if current in {"SUPPORTED", "CHALLENGED"} and target_maturity == "VALIDATED":
+            if not _validation_timestamp:
+                raise CurationError("internal VALIDATED transition requires validation timestamp")
+            decisions = [
+                decision
+                for decision in self.repository.list("claim_validation_decision")
+                if decision.get("claim_id") == claim_id
+                and decision.get("from_maturity") == current
+                and decision.get("to_maturity") == "VALIDATED"
+                and decision.get("validated_at") == _validation_timestamp
+            ]
+            if len(decisions) != 1:
+                raise CurationError(
+                    "internal VALIDATED transition requires exactly one matching validation decision"
+                )
+            if decisions[0].get("validated_by") != actor:
+                raise CurationError("claim validation decision reviewer must match transition actor")
+
         if target_maturity == "VALIDATED":
             self._require_human(actor, "VALIDATED promotion")
         if target_maturity == "SUPERSEDED":
@@ -226,7 +303,7 @@ class CurationEngine:
             claim["superseded_by"] = superseded_by
         claim["maturity"] = target_maturity
         if target_maturity == "VALIDATED":
-            claim["last_verified"] = _now()
+            claim["last_verified"] = _validation_timestamp or _now()
         validate_record(claim)
         self.repository.put(claim, replace=True)
         operation = {
