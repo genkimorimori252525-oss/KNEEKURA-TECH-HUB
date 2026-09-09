@@ -59,8 +59,6 @@ def _support_repository(repository: RecordRepository) -> RecordRepository:
     connection = getattr(repository, "connection", None)
     lock = getattr(repository, "lock_claim_for_support", None)
     if connection is not None and not callable(lock):
-        # Local import avoids a module cycle: the PostgreSQL adapter validates
-        # support decisions using this module.
         from .claim_support_postgres import ClaimSupportPostgresRepository
 
         return ClaimSupportPostgresRepository(connection)
@@ -273,6 +271,13 @@ def promote_candidate_to_supported(
 
         validate_claim_support_decision(decision)
         repository.put(decision)
+
+        arm = getattr(repository, "arm_support_review", None)
+        if callable(arm):
+            try:
+                arm(claim_id, decision["decided_at"])
+            except ValueError as exc:
+                raise ClaimSupportError(str(exc)) from exc
 
         try:
             supported = CurationEngine(repository, policy_version=policy_version).transition_claim(
