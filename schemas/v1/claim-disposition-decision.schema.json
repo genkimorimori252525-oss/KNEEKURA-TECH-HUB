@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kneekura.local/schemas/v1/claim-disposition-decision.schema.json",
+  "title": "KNEEKURA Claim Disposition Decision v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_type",
+    "id",
+    "claim_id",
+    "from_maturity",
+    "to_maturity",
+    "reason",
+    "decided_by",
+    "evidence_ids",
+    "supporting_evidence_ids",
+    "refuting_evidence_ids",
+    "qualifying_evidence_ids",
+    "distinct_source_ids",
+    "distinct_snapshot_ids",
+    "review_flags",
+    "competing_active_claim_ids",
+    "policy_version",
+    "decided_at"
+  ],
+  "properties": {
+    "record_type": {"const": "claim_disposition_decision"},
+    "id": {"type": "string", "pattern": "^cdd:"},
+    "claim_id": {"type": "string", "pattern": "^cl:"},
+    "from_maturity": {"enum": ["SUPPORTED", "VALIDATED", "CHALLENGED"]},
+    "to_maturity": {"enum": ["REJECTED", "SUPERSEDED"]},
+    "successor_claim_id": {"type": "string", "pattern": "^cl:"},
+    "reason": {"type": "string", "minLength": 1, "maxLength": 4000},
+    "decided_by": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["actor_type", "actor_id"],
+      "properties": {
+        "actor_type": {"const": "human"},
+        "actor_id": {"type": "string", "minLength": 1, "maxLength": 240},
+        "version": {"type": "string", "minLength": 1, "maxLength": 120}
+      }
+    },
+    "evidence_ids": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^ev:"},
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "supporting_evidence_ids": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^ev:"},
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "refuting_evidence_ids": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^ev:"},
+      "uniqueItems": true
+    },
+    "qualifying_evidence_ids": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^ev:"},
+      "uniqueItems": true
+    },
+    "distinct_source_ids": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^src:"},
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "distinct_snapshot_ids": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^ss:"},
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "review_flags": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1, "maxLength": 120},
+      "uniqueItems": true
+    },
+    "competing_active_claim_ids": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^cl:"},
+      "uniqueItems": true
+    },
+    "competition_note": {"type": "string", "minLength": 1, "maxLength": 4000},
+    "policy_version": {"type": "string", "minLength": 1, "maxLength": 120},
+    "decided_at": {"type": "string", "format": "date-time"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"to_maturity": {"const": "SUPERSEDED"}}},
+      "then": {"required": ["successor_claim_id"]}
+    },
+    {
+      "if": {"properties": {"to_maturity": {"const": "REJECTED"}}},
+      "then": {"not": {"required": ["successor_claim_id"]}}
+    }
+  ]
+}
