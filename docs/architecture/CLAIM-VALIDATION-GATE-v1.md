@@ -106,6 +106,8 @@ Each validation or revalidation creates a new `claim_validation_decision` with a
 
 The Claim's `last_verified` must equal that decision's `validated_at` exactly. Therefore an old validation decision cannot be reused to satisfy a later revalidation.
 
+A unique `(claim_id, validated_at)` database index enforces one validation decision per verification timestamp while still permitting later revalidation decisions with new timestamps.
+
 Historical validation decisions remain visible after a challenge or later revalidation.
 
 ## Transactional pairing
@@ -124,6 +126,17 @@ Migration `0014_claim_validation_evidence_integrity.sql` independently re-derive
 A direct SQL caller cannot satisfy the pairing rule by inventing unrelated Evidence IDs, falsifying Evidence roles, or substituting Source/SourceSnapshot provenance.
 
 The database also requires acknowledgement notes when the actual Evidence roles contain `REFUTES` or `QUALIFIES`.
+
+## Decision audit integrity
+
+Migration `0015_claim_decision_audit_integrity.sql` closes two shared audit gaps for both the Support Gate and Validation Gate:
+
+1. it re-derives active competing Claim IDs using the same **exact stored subject** definition as Claim Comparison and rejects a decision that hides or invents competitors;
+2. it rejects direct SQL `UPDATE` or `DELETE` on `claim_support_decision` and `claim_validation_decision`.
+
+Therefore a successful promotion decision cannot later be erased or rewritten to change reviewer metadata, Evidence provenance, acknowledgement notes, or the recorded competition snapshot.
+
+The competition check remains structural only. It does not infer semantic contradiction, choose a winner, or compare statement meaning.
 
 Human identity authentication and semantic interpretation remain domain/application responsibilities; PostgreSQL protects deterministic state integrity rather than pretending that a JSON actor field proves a real person's identity.
 
