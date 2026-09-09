@@ -30,7 +30,25 @@ class MemoryRepository:
     Protected terminal Claim *transitions* preserve the same decision/state
     pairing as PostgreSQL. Prebuilt read fixtures may still contain historical
     terminal Claims without replaying their original decision transaction.
+
+    A Claim's epistemic content is editable only while it remains CANDIDATE.
+    Once human review starts, the reviewed payload is immutable and corrections
+    must be represented by a new Claim.
     """
+
+    _CLAIM_EPISTEMIC_FIELDS = (
+        "entity_id",
+        "relation",
+        "claim_type",
+        "statement",
+        "scope",
+        "applicability",
+        "confidence",
+        "reasoning_basis",
+        "alternative_interpretations",
+        "evidence_ids",
+        "policy_version",
+    )
 
     def __init__(self) -> None:
         self._records: dict[str, Record] = {}
@@ -88,6 +106,7 @@ class MemoryRepository:
         if current is not None and not replace:
             raise DuplicateRecordError(f"record already exists: {record_id}")
 
+        self._guard_reviewed_claim_content_mutation(current, record)
         transition = self._protected_disposition_transition(current, record)
         before = deepcopy(current) if current is not None else None
         self._records[record_id] = deepcopy(record)
@@ -113,6 +132,35 @@ class MemoryRepository:
         if record_type is not None:
             records = [record for record in records if record.get("record_type") == record_type]
         return [deepcopy(record) for record in records]
+
+    @classmethod
+    def _guard_reviewed_claim_content_mutation(
+        cls,
+        current: Record | None,
+        updated: Record,
+    ) -> None:
+        if (
+            current is None
+            or current.get("record_type") != "claim"
+            or updated.get("record_type") != "claim"
+        ):
+            return
+
+        if current.get("created_by") != updated.get("created_by"):
+            raise ValueError(f"claim created_by is immutable: {updated['id']}")
+
+        changed = any(
+            current.get(field) != updated.get(field)
+            for field in cls._CLAIM_EPISTEMIC_FIELDS
+        )
+        if changed and not (
+            current.get("maturity") == "CANDIDATE"
+            and updated.get("maturity") == "CANDIDATE"
+        ):
+            raise ValueError(
+                "reviewed Claim epistemic content is immutable; "
+                f"create a new Claim for revisions: {updated['id']}"
+            )
 
     @staticmethod
     def _protected_disposition_transition(
