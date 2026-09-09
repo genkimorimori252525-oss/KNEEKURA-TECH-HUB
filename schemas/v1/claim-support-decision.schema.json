@@ -28,7 +28,7 @@
     "record_type": {"const": "claim_support_decision"},
     "id": {"type": "string", "pattern": "^csd:"},
     "claim_id": {"type": "string", "pattern": "^cl:"},
-    "from_maturity": {"const": "CANDIDATE"},
+    "from_maturity": {"enum": ["CANDIDATE", "CHALLENGED"]},
     "to_maturity": {"const": "SUPPORTED"},
     "reason": {"type": "string", "minLength": 1, "maxLength": 4000},
     "reviewed_by": {
