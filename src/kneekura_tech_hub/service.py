@@ -153,6 +153,8 @@ class CurationEngine:
         support_review: Record | None = None,
         validation_review: Record | None = None,
         _support_gate_applied: bool = False,
+        _resupport_gate_applied: bool = False,
+        _resupport_timestamp: str | None = None,
         _validation_gate_applied: bool = False,
         _validation_timestamp: str | None = None,
     ) -> Record:
@@ -174,6 +176,14 @@ class CurationEngine:
         ):
             raise CurationError(
                 "internal validation gate marker is only valid for VALIDATED promotion"
+            )
+        if _resupport_timestamp is not None and not _resupport_gate_applied:
+            raise CurationError("resupport timestamp is internal to the Resupport Gate")
+        if _resupport_gate_applied and not (
+            current == "CHALLENGED" and target_maturity == "SUPPORTED"
+        ):
+            raise CurationError(
+                "internal resupport gate marker is only valid for CHALLENGED -> SUPPORTED"
             )
 
         if current == "CANDIDATE" and target_maturity == "SUPPORTED" and not _support_gate_applied:
@@ -209,10 +219,45 @@ class CurationEngine:
                 raise CurationError(str(exc)) from exc
             return deepcopy(result["claim"])
 
+        if current == "CHALLENGED" and target_maturity == "SUPPORTED" and not _resupport_gate_applied:
+            review = support_review or {}
+            allowed = {
+                "independence_assessment",
+                "independence_note",
+                "counterevidence_note",
+                "qualification_note",
+                "competition_note",
+                "decision_id",
+            }
+            extra = set(review) - allowed
+            if extra:
+                raise CurationError(f"unsupported claim resupport review fields: {sorted(extra)!r}")
+            try:
+                from .claim_resupport import ClaimResupportError, promote_challenged_to_supported
+
+                result = promote_challenged_to_supported(
+                    self.repository,
+                    claim_id,
+                    actor=actor,
+                    reason=reason,
+                    independence_assessment=review.get("independence_assessment", "NOT_ASSESSED"),
+                    independence_note=review.get("independence_note"),
+                    counterevidence_note=review.get("counterevidence_note"),
+                    qualification_note=review.get("qualification_note"),
+                    competition_note=review.get("competition_note"),
+                    decision_id=review.get("decision_id"),
+                    policy_version=self.policy_version,
+                )
+            except ClaimResupportError as exc:
+                raise CurationError(str(exc)) from exc
+            return deepcopy(result["claim"])
+
         if support_review is not None and not (
-            current == "CANDIDATE" and target_maturity == "SUPPORTED"
+            current in {"CANDIDATE", "CHALLENGED"} and target_maturity == "SUPPORTED"
         ):
-            raise CurationError("support_review is only valid for CANDIDATE -> SUPPORTED")
+            raise CurationError(
+                "support_review is only valid for CANDIDATE/CHALLENGED -> SUPPORTED"
+            )
 
         if current == "CANDIDATE" and target_maturity == "SUPPORTED" and _support_gate_applied:
             decisions = [
@@ -228,6 +273,25 @@ class CurationEngine:
                 )
             if decisions[0].get("reviewed_by") != actor:
                 raise CurationError("claim support decision reviewer must match transition actor")
+
+        if current == "CHALLENGED" and target_maturity == "SUPPORTED":
+            self._require_human(actor, "CHALLENGED -> SUPPORTED resupport")
+            if not _resupport_timestamp:
+                raise CurationError("internal CHALLENGED -> SUPPORTED requires resupport timestamp")
+            decisions = [
+                decision
+                for decision in self.repository.list("claim_resupport_decision")
+                if decision.get("claim_id") == claim_id
+                and decision.get("from_maturity") == "CHALLENGED"
+                and decision.get("to_maturity") == "SUPPORTED"
+                and decision.get("decided_at") == _resupport_timestamp
+            ]
+            if len(decisions) != 1:
+                raise CurationError(
+                    "internal CHALLENGED -> SUPPORTED requires exactly one matching resupport decision"
+                )
+            if decisions[0].get("reviewed_by") != actor:
+                raise CurationError("claim resupport decision reviewer must match transition actor")
 
         if (
             current in {"SUPPORTED", "CHALLENGED"}
