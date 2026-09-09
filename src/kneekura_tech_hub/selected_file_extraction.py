@@ -102,7 +102,9 @@ def verify_committed_selected_file_snapshot(
     if metadata.get("acquisition_level") != "selected-files":
         raise SelectedFileExtractionError("Snapshot is not a selected-files acquisition Snapshot")
     if metadata.get("content_hash_kind") != "selected-files-manifest-sha256":
-        raise SelectedFileExtractionError("Snapshot content hash kind is not selected-files manifest SHA-256")
+        raise SelectedFileExtractionError(
+            "Snapshot content hash kind is not selected-files manifest SHA-256"
+        )
     if (source.get("acquisition") or {}).get("level") not in {"selected-files", "full-source"}:
         raise SelectedFileExtractionError(
             "Source no longer represents at least the committed selected-files acquisition depth"
@@ -137,7 +139,9 @@ def verify_committed_selected_file_snapshot(
         == execution.get("revision")
         == authorization.get("revision")
     ):
-        raise SelectedFileExtractionError("Snapshot/commit/execution/authorization revision mismatch")
+        raise SelectedFileExtractionError(
+            "Snapshot/commit/execution/authorization revision mismatch"
+        )
     if execution.get("requested_paths") != authorization.get("allowed_paths"):
         raise SelectedFileExtractionError("Execution paths differ from historical Authorization")
 
@@ -162,7 +166,9 @@ def verify_committed_selected_file_snapshot(
         == commit.get("authorization_fingerprint_sha256")
         == metadata.get("authorization_fingerprint_sha256")
     ):
-        raise SelectedFileExtractionError("Authorization provenance fingerprint chain is inconsistent")
+        raise SelectedFileExtractionError(
+            "Authorization provenance fingerprint chain is inconsistent"
+        )
     if record_fingerprint_sha256(authorization) != execution.get(
         "authorization_fingerprint_sha256"
     ):
@@ -170,11 +176,17 @@ def verify_committed_selected_file_snapshot(
 
     expected_results = metadata.get("selected_files")
     if not isinstance(expected_results, list) or expected_results != execution.get("file_results"):
-        raise SelectedFileExtractionError("Snapshot selected_files differ from committed execution results")
+        raise SelectedFileExtractionError(
+            "Snapshot selected_files differ from committed execution results"
+        )
     if [item.get("path") for item in expected_results] != execution.get("requested_paths"):
-        raise SelectedFileExtractionError("Snapshot selected_files do not preserve exact requested path order")
+        raise SelectedFileExtractionError(
+            "Snapshot selected_files do not preserve exact requested path order"
+        )
     if any(item.get("status") != "FETCHED" for item in expected_results):
-        raise SelectedFileExtractionError("selected-file Snapshot contains a non-FETCHED file result")
+        raise SelectedFileExtractionError(
+            "selected-file Snapshot contains a non-FETCHED file result"
+        )
 
     storage_key = metadata.get("storage_key")
     if storage_key != execution.get("storage_key") or not isinstance(storage_key, str):
@@ -218,7 +230,9 @@ def verify_committed_selected_file_snapshot(
 
     recalculated_manifest = execution_manifest_sha256(authorization, verified_results)
     if recalculated_manifest != manifest:
-        raise SelectedFileExtractionError("committed Snapshot manifest does not match re-verified bytes")
+        raise SelectedFileExtractionError(
+            "committed Snapshot manifest does not match re-verified bytes"
+        )
 
     return {
         "source": deepcopy(source),
@@ -365,7 +379,9 @@ def prepare_selected_file_extraction(
             validate_record(evidence)
             existing_candidate = evidence_by_id.get(evidence_id)
             if existing_candidate is not None and existing_candidate != evidence:
-                raise SelectedFileExtractionError(f"generated conflicting Evidence identity: {evidence_id}")
+                raise SelectedFileExtractionError(
+                    f"generated conflicting Evidence identity: {evidence_id}"
+                )
             evidence_by_id[evidence_id] = evidence
             evidence_ids.append(evidence_id)
 
@@ -412,6 +428,22 @@ def _same_evidence(existing: Record, proposed: Record) -> bool:
     return comparable == proposed
 
 
+def _same_observation(existing: Record, proposed: Record) -> bool:
+    """Compare stable Observation identity/provenance without lifecycle state.
+
+    Re-extraction must never reset a previously triaged/rejected/promoted/expired
+    observation back to NEW merely because the deterministic proposal was seen again.
+    """
+
+    if existing.get("record_type") != "staged_observation":
+        return False
+    current = deepcopy(existing)
+    expected = deepcopy(proposed)
+    current.pop("status", None)
+    expected.pop("status", None)
+    return current == expected
+
+
 def _preflight_existing_records(
     repository: RecordRepository,
     prepared: dict[str, Any],
@@ -432,12 +464,36 @@ def _preflight_existing_records(
         existing = repository.get(observation["id"])
         if existing is None:
             continue
-        if existing != observation:
+        if not _same_observation(existing, observation):
             raise SelectedFileExtractionError(
                 f"existing record conflicts with deterministic Observation identity: {observation['id']}"
             )
         reused_observations.add(observation["id"])
     return reused_evidence, reused_observations
+
+
+def check_selected_file_extraction(
+    repository: RecordRepository,
+    proposal: dict[str, Any],
+    *,
+    storage_root: Path,
+    actor: Record,
+    schema_path: Path | None = None,
+) -> dict[str, Any]:
+    """Read-only proposal check including deterministic-ID reuse/conflict checks."""
+
+    prepared = prepare_selected_file_extraction(
+        repository,
+        proposal,
+        storage_root=storage_root,
+        actor=actor,
+        schema_path=schema_path,
+    )
+    reused_evidence, reused_observations = _preflight_existing_records(repository, prepared)
+    result = deepcopy(prepared)
+    result["reused_evidence_ids"] = sorted(reused_evidence)
+    result["reused_observation_ids"] = sorted(reused_observations)
+    return result
 
 
 def _lock_postgres_provenance(repository: Any, prepared: dict[str, Any]) -> None:
@@ -447,9 +503,14 @@ def _lock_postgres_provenance(repository: Any, prepared: dict[str, Any]) -> None
     snapshot_id = prepared["snapshot_id"]
     snapshot = repository.get(snapshot_id)
     if snapshot is None:
-        raise SelectedFileExtractionError(f"Snapshot disappeared before extraction ingest: {snapshot_id}")
+        raise SelectedFileExtractionError(
+            f"Snapshot disappeared before extraction ingest: {snapshot_id}"
+        )
     commit = _commit_for_snapshot(repository, snapshot_id)
-    connection.execute("SELECT id FROM source_snapshot WHERE id=%s FOR SHARE", (snapshot_id,)).fetchone()
+    connection.execute(
+        "SELECT id FROM source_snapshot WHERE id=%s FOR SHARE",
+        (snapshot_id,),
+    ).fetchone()
     connection.execute(
         "SELECT id FROM source_acquisition_commit WHERE id=%s FOR SHARE",
         (commit["id"],),
