@@ -33,6 +33,7 @@ kneekura-selected-file-extract = "kneekura_tech_hub.selected_file_extraction_cli
 kneekura-observation-triage = "kneekura_tech_hub.observation_triage_cli:main"
 kneekura-claim-support = "kneekura_tech_hub.claim_support_cli:main"
 kneekura-claim-validation = "kneekura_tech_hub.claim_validation_cli:main"
+kneekura-claim-disposition = "kneekura_tech_hub.claim_disposition_cli:main"
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
