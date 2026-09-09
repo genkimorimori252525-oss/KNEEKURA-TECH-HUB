@@ -267,3 +267,53 @@ def test_decision_without_applied_supported_state_is_rejected(repository) -> Non
     with pytest.raises(psycopg.Error, match="requires SUPPORTED maturity"):
         repository.put(decision)
     assert repository.get("csd:orphan") is None
+
+
+def test_database_rejects_forged_support_decision_evidence_profile(repository) -> None:
+    _seed(repository)
+    base = {
+        "record_type": "claim_support_decision",
+        "claim_id": CLAIM_ID,
+        "from_maturity": "CANDIDATE",
+        "to_maturity": "SUPPORTED",
+        "reason": "direct SQL bypass attempt",
+        "reviewed_by": HUMAN,
+        "evidence_ids": [EVIDENCE_ID],
+        "supporting_evidence_ids": [EVIDENCE_ID],
+        "refuting_evidence_ids": [],
+        "qualifying_evidence_ids": [],
+        "distinct_source_ids": [SOURCE_ID],
+        "distinct_snapshot_ids": [SNAPSHOT_ID],
+        "review_flags": ["SINGLE_SOURCE"],
+        "competing_active_claim_ids": [],
+        "independence_assessment": "NOT_ASSESSED",
+        "policy_version": "1.0.0",
+        "decided_at": "2026-09-09T00:00:00Z",
+    }
+
+    forged_profiles = [
+        ("csd:forged:evidence", {"evidence_ids": ["ev:forged"]}, "evidence_ids do not match"),
+        (
+            "csd:forged:roles",
+            {"refuting_evidence_ids": [EVIDENCE_ID]},
+            "refuting_evidence_ids do not match",
+        ),
+        (
+            "csd:forged:source",
+            {"distinct_source_ids": ["src:forged"]},
+            "distinct_source_ids do not match",
+        ),
+        (
+            "csd:forged:snapshot",
+            {"distinct_snapshot_ids": ["ss:forged"]},
+            "distinct_snapshot_ids do not match",
+        ),
+    ]
+
+    for decision_id, mutation, message in forged_profiles:
+        decision = {**base, "id": decision_id, **mutation}
+        with pytest.raises(psycopg.Error, match=message):
+            repository.put(decision)
+        assert repository.get(decision_id) is None
+
+    assert repository.get(CLAIM_ID)["maturity"] == "CANDIDATE"
