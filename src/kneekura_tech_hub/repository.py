@@ -40,6 +40,10 @@ class MemoryRepository:
     different locator/role interpretation; corrections require new record IDs.
     Curation events are append-only audit records and cannot be replaced.
 
+    A Source keeps a stable identity while allowing discovery freshness metadata,
+    license state, and acquisition depth to evolve. Repointing a ``src:*`` ID to
+    another provider object or source kind is forbidden.
+
     A Knowledge Entity's concept payload is immutable after creation. Canonical
     name, aliases, kinds, abstraction level, and direct relations cannot be
     rewritten under the same ``ke:*`` identity. The only supported lifecycle
@@ -61,6 +65,25 @@ class MemoryRepository:
         "policy_version",
     )
     _IMMUTABLE_PROVENANCE_TYPES = {"source_snapshot", "evidence", "curation_event"}
+    _SOURCE_VOLATILE_ORIGIN_KEYS = frozenset(
+        {
+            "default_branch",
+            "description",
+            "language",
+            "fork",
+            "archived",
+            "disabled",
+            "visibility",
+            "stargazers_count",
+            "forks_count",
+            "open_issues_count",
+            "pushed_at",
+            "updated_at",
+            "topics",
+            "github_license_hint",
+            "discovery_hits",
+        }
+    )
 
     def __init__(self) -> None:
         self._records: dict[str, Record] = {}
@@ -127,6 +150,7 @@ class MemoryRepository:
                 f"{current['record_type']} is immutable; create a new record ID: {record_id}"
             )
 
+        self._guard_source_identity_mutation(current, record)
         self._guard_knowledge_entity_identity_mutation(current, record)
         self._guard_reviewed_claim_content_mutation(current, record)
         transition = self._protected_disposition_transition(current, record)
@@ -154,6 +178,31 @@ class MemoryRepository:
         if record_type is not None:
             records = [record for record in records if record.get("record_type") == record_type]
         return [deepcopy(record) for record in records]
+
+    @classmethod
+    def _source_identity_payload(cls, record: Record) -> dict[str, Any]:
+        origin = deepcopy(record.get("origin", {}))
+        for key in cls._SOURCE_VOLATILE_ORIGIN_KEYS:
+            origin.pop(key, None)
+        return {
+            "kind": record.get("kind"),
+            "origin": origin,
+        }
+
+    @classmethod
+    def _guard_source_identity_mutation(
+        cls,
+        current: Record | None,
+        updated: Record,
+    ) -> None:
+        if (
+            current is None
+            or current.get("record_type") != "source"
+            or updated.get("record_type") != "source"
+        ):
+            return
+        if cls._source_identity_payload(current) != cls._source_identity_payload(updated):
+            raise ValueError(f"source identity is immutable: {updated['id']}")
 
     @staticmethod
     def _entity_identity_payload(record: Record) -> dict[str, Any]:
