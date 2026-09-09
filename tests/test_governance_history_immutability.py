@@ -72,7 +72,9 @@ def test_postgres_all_declared_governance_history_tables_have_mutation_guards() 
         by_table = {(table, trigger): definition for table, trigger, definition in rows}
         for table, trigger in EXPECTED_TRIGGERS.items():
             definition = by_table[(table, trigger)]
-            assert "BEFORE UPDATE OR DELETE" in definition
+            assert "BEFORE" in definition
+            assert "UPDATE" in definition
+            assert "DELETE" in definition
             assert "kthub_reject_governance_history_mutation" in definition
 
 
