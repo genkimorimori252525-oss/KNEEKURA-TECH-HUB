@@ -154,8 +154,10 @@ def test_context_rejects_cross_source_evidence_corruption() -> None:
     )
     corrupted = _observation("obs:triage:corrupt")
     repository.put(corrupted)
-    corrupted["source_id"] = "src:other"
-    repository.put(corrupted, replace=True)
+
+    # Manufacture an impossible persisted state without weakening the supported
+    # repository API. StagedObservation identity is immutable in production.
+    repository._records[corrupted["id"]]["source_id"] = "src:other"
 
     with pytest.raises(ObservationTriageError, match="Source mismatch"):
         observation_context(repository, corrupted["id"])
