@@ -6,6 +6,7 @@ from typing import Any, Protocol
 
 
 Record = dict[str, Any]
+DispositionTransition = tuple[str, str, str, str | None]
 
 
 class RecordRepository(Protocol):
@@ -26,15 +27,16 @@ class DuplicateRecordError(ValueError):
 class MemoryRepository:
     """Small in-memory repository used by the curation domain layer and tests.
 
-    The in-memory backend preserves the same protected Claim-disposition boundary
-    as PostgreSQL. A terminal transition of reviewed knowledge and its human
-    disposition decision must become valid together inside one transaction.
+    Protected terminal Claim *transitions* preserve the same decision/state
+    pairing as PostgreSQL. Prebuilt read fixtures may still contain historical
+    terminal Claims without replaying their original decision transaction.
     """
 
     def __init__(self) -> None:
         self._records: dict[str, Record] = {}
         self._transaction_depth = 0
         self._transaction_snapshot: dict[str, Record] | None = None
+        self._pending_disposition_transitions: list[DispositionTransition] = []
 
     def get(self, record_id: str) -> Record | None:
         record = self._records.get(record_id)
@@ -45,11 +47,14 @@ class MemoryRepository:
         outermost = self._transaction_depth == 0
         if outermost:
             self._transaction_snapshot = deepcopy(self._records)
+            self._pending_disposition_transitions = []
         self._transaction_depth += 1
         try:
             yield
             if outermost:
-                self._validate_disposition_pairing()
+                for transition in self._pending_disposition_transitions:
+                    self._validate_disposition_transition(transition)
+                self._validate_disposition_decisions_applied()
         except Exception:
             if outermost and self._transaction_snapshot is not None:
                 self._records.clear()
@@ -59,6 +64,7 @@ class MemoryRepository:
             self._transaction_depth -= 1
             if outermost:
                 self._transaction_snapshot = None
+                self._pending_disposition_transitions = []
 
     def put(self, record: Record, *, replace: bool = False) -> None:
         record_id = record["id"]
@@ -82,23 +88,69 @@ class MemoryRepository:
         if current is not None and not replace:
             raise DuplicateRecordError(f"record already exists: {record_id}")
 
+        transition = self._protected_disposition_transition(current, record)
         before = deepcopy(current) if current is not None else None
         self._records[record_id] = deepcopy(record)
-        if self._transaction_depth == 0:
-            try:
-                self._validate_disposition_pairing()
-            except Exception:
-                if before is None:
-                    self._records.pop(record_id, None)
-                else:
-                    self._records[record_id] = before
-                raise
+
+        if self._transaction_depth > 0:
+            if transition is not None:
+                self._pending_disposition_transitions.append(transition)
+            return
+
+        try:
+            if transition is not None:
+                self._validate_disposition_transition(transition)
+            self._validate_disposition_decisions_applied()
+        except Exception:
+            if before is None:
+                self._records.pop(record_id, None)
+            else:
+                self._records[record_id] = before
+            raise
 
     def list(self, record_type: str | None = None) -> list[Record]:
         records = self._records.values()
         if record_type is not None:
             records = [record for record in records if record.get("record_type") == record_type]
         return [deepcopy(record) for record in records]
+
+    @staticmethod
+    def _protected_disposition_transition(
+        current: Record | None,
+        updated: Record,
+    ) -> DispositionTransition | None:
+        if (
+            current is None
+            or current.get("record_type") != "claim"
+            or updated.get("record_type") != "claim"
+        ):
+            return None
+        before = current.get("maturity")
+        after = updated.get("maturity")
+        protected = (
+            before in {"SUPPORTED", "CHALLENGED"} and after == "REJECTED"
+        ) or (
+            before in {"VALIDATED", "CHALLENGED"} and after == "SUPERSEDED"
+        )
+        if not protected:
+            return None
+        return (updated["id"], before, after, updated.get("superseded_by"))
+
+    def _validate_disposition_transition(self, transition: DispositionTransition) -> None:
+        claim_id, from_maturity, to_maturity, successor_claim_id = transition
+        matches = [
+            record
+            for record in self._records.values()
+            if record.get("record_type") == "claim_disposition_decision"
+            and record.get("claim_id") == claim_id
+            and record.get("from_maturity") == from_maturity
+            and record.get("to_maturity") == to_maturity
+            and record.get("successor_claim_id") == successor_claim_id
+        ]
+        if len(matches) != 1:
+            raise ValueError(
+                f"claim {from_maturity} -> {to_maturity} requires matching human disposition decision: {claim_id}"
+            )
 
     def _validate_disposition_decision_insert(self, decision: Record) -> None:
         from .claim_disposition import validate_claim_disposition_decision
@@ -157,15 +209,15 @@ class MemoryRepository:
             if successor.get("maturity") not in {"SUPPORTED", "VALIDATED"}:
                 raise ValueError("successor Claim must be at least SUPPORTED")
 
-    def _validate_disposition_pairing(self) -> None:
-        decisions_by_claim: dict[str, Record] = {}
+    def _validate_disposition_decisions_applied(self) -> None:
+        seen_claim_ids: set[str] = set()
         for record in self._records.values():
             if record.get("record_type") != "claim_disposition_decision":
                 continue
             claim_id = record["claim_id"]
-            if claim_id in decisions_by_claim:
+            if claim_id in seen_claim_ids:
                 raise ValueError(f"claim has multiple disposition decisions: {claim_id}")
-            decisions_by_claim[claim_id] = record
+            seen_claim_ids.add(claim_id)
 
             claim = self._records.get(claim_id)
             if claim is None or claim.get("record_type") != "claim":
@@ -180,27 +232,3 @@ class MemoryRepository:
                 raise ValueError(
                     f"claim disposition successor does not match terminal Claim state: {claim_id}"
                 )
-
-        for claim in self._records.values():
-            if claim.get("record_type") != "claim":
-                continue
-            claim_id = claim["id"]
-            decision = decisions_by_claim.get(claim_id)
-            maturity = claim.get("maturity")
-            if maturity == "SUPERSEDED" and decision is None:
-                raise ValueError(
-                    f"SUPERSEDED Claim requires matching human disposition decision: {claim_id}"
-                )
-            if maturity == "REJECTED" and decision is None:
-                # Candidate cleanup remains deliberately lightweight. A rejected
-                # Claim that was never human-supported has no support lineage.
-                support_history = [
-                    record
-                    for record in self._records.values()
-                    if record.get("record_type") == "claim_support_decision"
-                    and record.get("claim_id") == claim_id
-                ]
-                if support_history:
-                    raise ValueError(
-                        f"reviewed REJECTED Claim requires matching human disposition decision: {claim_id}"
-                    )
