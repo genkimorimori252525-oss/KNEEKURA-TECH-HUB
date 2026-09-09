@@ -30,6 +30,7 @@ kneekura-acquisition-auth = "kneekura_tech_hub.authorization_cli:main"
 kneekura-acquisition-exec = "kneekura_tech_hub.execution_cli:main"
 kneekura-acquisition-commit = "kneekura_tech_hub.verified_commit_cli:main"
 kneekura-selected-file-extract = "kneekura_tech_hub.selected_file_extraction_cli:main"
+kneekura-observation-triage = "kneekura_tech_hub.observation_triage_cli:main"
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
