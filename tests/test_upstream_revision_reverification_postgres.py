@@ -64,7 +64,6 @@ def _truncate(connection) -> None:
         TRUNCATE TABLE
             claim_disposition_decision,
             claim_validation_decision,
-            claim_resupport_decision,
             claim_support_decision,
             observation_triage_decision,
             source_acquisition_commit,
@@ -259,8 +258,6 @@ def test_new_upstream_revision_preserves_history_and_requires_fresh_human_author
         last_verified_v1 = validated_v1["last_verified"]
         explanation_v1_before = explain_claim(repository, CLAIM_V1)
 
-        # Fresh upstream content requires a new human grant. The old immutable selection remains
-        # the review intent, while the new Authorization supersedes the already-consumed v1 grant.
         authorization_v2 = AcquisitionAuthorizationEngine(repository).authorize_from_fields(
             source_id=SOURCE_ID,
             selection_decision_id=selection["id"],
@@ -315,7 +312,6 @@ def test_new_upstream_revision_preserves_history_and_requires_fresh_human_author
             reason="AI proposes the newer current-use Claim without rewriting the reviewed v1 Claim.",
         )
 
-        # Merely discovering v2 does not erase or silently demote historical reviewed knowledge.
         assert repository.get(CLAIM_V1)["maturity"] == "VALIDATED"
         comparison = compare_claim(repository, CLAIM_V1)
         assert comparison["active_claim_ids"] == sorted([CLAIM_V1, CLAIM_V2])
@@ -337,9 +333,7 @@ def test_new_upstream_revision_preserves_history_and_requires_fresh_human_author
             actor=HUMAN,
             reason="Human reviews the newer Snapshot while preserving the older active Claim.",
             support_review={
-                "competition_note": (
-                    f"{CLAIM_V1} is the still-active Claim supported by the older v1 Snapshot."
-                ),
+                "competition_note": f"{CLAIM_V1} is the still-active Claim supported by the older v1 Snapshot.",
                 "decision_id": "csd:upstream-refresh:v2",
             },
         )
@@ -365,9 +359,7 @@ def test_new_upstream_revision_preserves_history_and_requires_fresh_human_author
             validation_review={
                 "validation_basis": "EVIDENCE_REVIEW",
                 "validation_note": "The pinned v2 README line directly states the new default.",
-                "competition_note": (
-                    f"{CLAIM_V1} remains historical reviewed knowledge from v1 and will be dispositioned separately."
-                ),
+                "competition_note": f"{CLAIM_V1} remains historical reviewed knowledge from v1 and will be dispositioned separately.",
                 "decision_id": "cvd:upstream-refresh:v2",
             },
         )
@@ -407,9 +399,7 @@ def test_new_upstream_revision_preserves_history_and_requires_fresh_human_author
             actor=HUMAN,
             reason="Human confirms v2 replaced the old current-use default while preserving v1 history.",
             successor_claim_id=CLAIM_V2,
-            competition_note=(
-                f"{CLAIM_V2} is VALIDATED from the newer Snapshot and describes the same exact subject."
-            ),
+            competition_note=f"{CLAIM_V2} is VALIDATED from the newer Snapshot and describes the same exact subject.",
             decision_id="cdd:upstream-refresh:v1-to-v2",
         )
         assert disposed["claim"]["maturity"] == "SUPERSEDED"
