@@ -48,17 +48,33 @@ def _repository() -> tuple[MemoryRepository, dict]:
 
 
 def _mark_committed(repository: MemoryRepository, authorization_id: str, revision: str, suffix: str) -> None:
+    snapshot_id = f"ss:refresh-unit:{suffix}"
     repository.put(
         {
             "record_type": "source_snapshot",
-            "id": f"ss:refresh-unit:{suffix}",
+            "id": snapshot_id,
             "source_id": SOURCE_ID,
             "revision": revision,
             "captured_at": "2026-09-10T00:00:00Z",
-            "metadata": {
-                "acquisition_level": "selected-files",
-                "authorization_id": authorization_id,
-            },
+            "metadata": {"acquisition_level": "selected-files"},
+        }
+    )
+    repository.put(
+        {
+            "record_type": "source_acquisition_commit",
+            "id": f"vc:refresh-unit:{suffix}",
+            "execution_id": f"ax:refresh-unit:{suffix}",
+            "authorization_id": authorization_id,
+            "source_id": SOURCE_ID,
+            "snapshot_id": snapshot_id,
+            "revision": revision,
+            "acquisition_level": "selected-files",
+            "manifest_sha256": "a" * 64,
+            "source_fingerprint_sha256": "b" * 64,
+            "authorization_fingerprint_sha256": "c" * 64,
+            "committed_by": {"actor_type": "tool", "actor_id": "refresh-unit-commit", "version": "v1"},
+            "policy_version": "1.0.0",
+            "committed_at": "2026-09-10T00:00:00Z",
         }
     )
     source = repository.get(SOURCE_ID)
@@ -105,7 +121,7 @@ def test_committed_initial_grant_is_consumed_but_can_be_explicitly_superseded_fo
     assert consumed_refresh["blockers"] == ["AUTHORIZATION_ALREADY_COMMITTED"]
 
 
-def test_selected_files_refresh_requires_proof_that_predecessor_was_committed() -> None:
+def test_selected_files_refresh_requires_verified_commit_proof_for_predecessor() -> None:
     repository, selection = _repository()
     engine = AcquisitionAuthorizationEngine(repository)
     first = engine.authorize_from_fields(
@@ -123,13 +139,13 @@ def test_selected_files_refresh_requires_proof_that_predecessor_was_committed() 
     source["acquisition"] = {"level": "selected-files"}
     repository.put(source, replace=True)
 
-    with pytest.raises(AcquisitionAuthorizationError, match="committed SourceSnapshot"):
+    with pytest.raises(AcquisitionAuthorizationError, match="verified acquisition commit"):
         engine.authorize_from_fields(
             source_id=SOURCE_ID,
             selection_decision_id=selection["id"],
             revision=REV2,
             allowed_paths=["README.md"],
-            rationale="Must fail without immutable proof that the predecessor was consumed.",
+            rationale="Must fail without append-only proof that the predecessor was consumed.",
             actor=HUMAN,
             authorization_id="aa:refresh-unit:forbidden",
             supersedes_authorization_id=first["id"],
