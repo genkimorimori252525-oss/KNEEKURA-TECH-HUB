@@ -48,17 +48,17 @@ class MemoryRepository:
         self._transaction_depth += 1
         try:
             yield
-            self._transaction_depth -= 1
             if outermost:
                 self._validate_disposition_pairing()
-                self._transaction_snapshot = None
         except Exception:
-            self._transaction_depth -= 1
             if outermost and self._transaction_snapshot is not None:
                 self._records.clear()
                 self._records.update(self._transaction_snapshot)
-                self._transaction_snapshot = None
             raise
+        finally:
+            self._transaction_depth -= 1
+            if outermost:
+                self._transaction_snapshot = None
 
     def put(self, record: Record, *, replace: bool = False) -> None:
         record_id = record["id"]
