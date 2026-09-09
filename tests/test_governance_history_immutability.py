@@ -89,13 +89,12 @@ def test_postgres_selection_decision_cannot_be_rewritten_or_deleted_directly() -
         )
         connection.execute(
             """
-            INSERT INTO source(id, kind, origin, acquisition, license)
-            VALUES (%s, 'repository', %s, %s, %s)
+            INSERT INTO source(id, kind, origin, license, acquisition_level)
+            VALUES (%s, 'repository', %s, %s, 'metadata-only')
             """,
             (
                 source_id,
                 Jsonb({"provider": "fixture", "repository": "example/history"}),
-                Jsonb({"level": "metadata-only"}),
                 Jsonb({"state": "KNOWN", "declared_expression": "MIT"}),
             ),
         )
