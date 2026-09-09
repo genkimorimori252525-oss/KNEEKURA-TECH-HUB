@@ -34,6 +34,15 @@ def test_splitter_preserves_semicolons_in_single_and_double_quoted_text() -> Non
     ]
 
 
+def test_splitter_treats_backslash_as_quote_escape_only_in_e_strings() -> None:
+    sql = r"SELECT E'escaped\';still literal'; SELECT 'ordinary\'; SELECT 2;"
+    assert _statements(sql) == [
+        r"SELECT E'escaped\';still literal'",
+        r"SELECT 'ordinary\'",
+        "SELECT 2",
+    ]
+
+
 def test_splitter_preserves_plpgsql_dollar_quoted_function_body() -> None:
     sql = """
     CREATE FUNCTION fixture() RETURNS TRIGGER
