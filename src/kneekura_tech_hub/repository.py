@@ -39,6 +39,12 @@ class MemoryRepository:
     identity can never be reused to point at different captured material or a
     different locator/role interpretation; corrections require new record IDs.
     Curation events are append-only audit records and cannot be replaced.
+
+    A Knowledge Entity's concept payload is immutable after creation. Canonical
+    name, aliases, kinds, abstraction level, and direct relations cannot be
+    rewritten under the same ``ke:*`` identity. The only supported lifecycle
+    mutation in v1 is a canonical entity becoming MERGED with a redirect to a
+    different canonical entity.
     """
 
     _CLAIM_EPISTEMIC_FIELDS = (
@@ -121,6 +127,7 @@ class MemoryRepository:
                 f"{current['record_type']} is immutable; create a new record ID: {record_id}"
             )
 
+        self._guard_knowledge_entity_identity_mutation(current, record)
         self._guard_reviewed_claim_content_mutation(current, record)
         transition = self._protected_disposition_transition(current, record)
         before = deepcopy(current) if current is not None else None
@@ -147,6 +154,61 @@ class MemoryRepository:
         if record_type is not None:
             records = [record for record in records if record.get("record_type") == record_type]
         return [deepcopy(record) for record in records]
+
+    @staticmethod
+    def _entity_identity_payload(record: Record) -> dict[str, Any]:
+        relations = sorted(
+            (
+                {"type": relation["type"], "target": relation["target"]}
+                for relation in record.get("relations", [])
+            ),
+            key=lambda item: (item["type"], item["target"]),
+        )
+        return {
+            "canonical_name": record.get("canonical_name"),
+            "aliases": sorted(record.get("aliases", [])),
+            "kinds": sorted(record.get("kinds", [])),
+            "abstraction_level": record.get("abstraction_level"),
+            "relations": relations,
+        }
+
+    @classmethod
+    def _guard_knowledge_entity_identity_mutation(
+        cls,
+        current: Record | None,
+        updated: Record,
+    ) -> None:
+        if (
+            current is None
+            or current.get("record_type") != "knowledge_entity"
+            or updated.get("record_type") != "knowledge_entity"
+        ):
+            return
+
+        if cls._entity_identity_payload(current) != cls._entity_identity_payload(updated):
+            raise ValueError(
+                "knowledge_entity concept payload is immutable; "
+                f"create a new entity ID or use governed merge: {updated['id']}"
+            )
+
+        before_state = current.get("identity_state")
+        after_state = updated.get("identity_state")
+        before_redirect = current.get("redirect_to")
+        after_redirect = updated.get("redirect_to")
+        if before_state == after_state and before_redirect == after_redirect:
+            return
+        if (
+            before_state == "CANONICAL"
+            and before_redirect is None
+            and after_state == "MERGED"
+            and isinstance(after_redirect, str)
+            and after_redirect.startswith("ke:")
+            and after_redirect != updated.get("id")
+        ):
+            return
+        raise ValueError(
+            f"invalid knowledge_entity identity transition: {before_state} -> {after_state}"
+        )
 
     @classmethod
     def _guard_reviewed_claim_content_mutation(
