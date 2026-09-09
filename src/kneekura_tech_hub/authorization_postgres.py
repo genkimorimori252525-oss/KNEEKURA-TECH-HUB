@@ -55,6 +55,8 @@ class AuthorizationPostgresRepository(SelectionPostgresRepository):
     def list(self, record_type: str | None = None) -> list[Record]:
         if record_type == "source_acquisition_authorization":
             return self._list_acquisition_authorizations()
+        if record_type == "source_acquisition_commit":
+            return self._list_acquisition_commit_authority_refs()
         records = super().list(record_type)
         if record_type is None:
             records.extend(self._list_acquisition_authorizations())
@@ -69,6 +71,20 @@ class AuthorizationPostgresRepository(SelectionPostgresRepository):
             if record is not None:
                 records.append(record)
         return records
+
+    def _list_acquisition_commit_authority_refs(self) -> list[Record]:
+        """Expose only the immutable fields Authorization needs to prove grant consumption."""
+
+        return [
+            {
+                "record_type": "source_acquisition_commit",
+                "id": record_id,
+                "authorization_id": authorization_id,
+            }
+            for record_id, authorization_id in self.connection.execute(
+                "SELECT id, authorization_id FROM source_acquisition_commit ORDER BY id"
+            ).fetchall()
+        ]
 
     def _get_acquisition_authorization(self, record_id: str) -> Record | None:
         row = self.connection.execute(
