@@ -89,7 +89,7 @@ def test_discovery_to_validated_knowledge_requires_every_governed_boundary(tmp_p
             discovered_by=DISCOVERY_TOOL,
             discovered_at="2026-09-09T06:00:00Z",
         )
-        with repository.transaction():
+        with repository.connection.transaction():
             discovery_result = ingest_discovery_intake(
                 engine,
                 batch,
