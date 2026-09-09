@@ -150,11 +150,67 @@ class CurationEngine:
         actor: Record,
         reason: str,
         superseded_by: str | None = None,
+        support_review: Record | None = None,
+        _support_gate_applied: bool = False,
     ) -> Record:
         claim = self._require_existing(claim_id, "claim")
         current = claim["maturity"]
         if target_maturity not in self._CLAIM_TRANSITIONS[current]:
             raise CurationError(f"invalid claim transition: {current} -> {target_maturity}")
+
+        if current == "CANDIDATE" and target_maturity == "SUPPORTED" and not _support_gate_applied:
+            review = support_review or {}
+            allowed = {
+                "independence_assessment",
+                "independence_note",
+                "counterevidence_note",
+                "qualification_note",
+                "competition_note",
+                "decision_id",
+            }
+            extra = set(review) - allowed
+            if extra:
+                raise CurationError(f"unsupported claim support review fields: {sorted(extra)!r}")
+            try:
+                from .claim_support import ClaimSupportError, promote_candidate_to_supported
+
+                result = promote_candidate_to_supported(
+                    self.repository,
+                    claim_id,
+                    actor=actor,
+                    reason=reason,
+                    independence_assessment=review.get("independence_assessment", "NOT_ASSESSED"),
+                    independence_note=review.get("independence_note"),
+                    counterevidence_note=review.get("counterevidence_note"),
+                    qualification_note=review.get("qualification_note"),
+                    competition_note=review.get("competition_note"),
+                    decision_id=review.get("decision_id"),
+                    policy_version=self.policy_version,
+                )
+            except ClaimSupportError as exc:
+                raise CurationError(str(exc)) from exc
+            return deepcopy(result["claim"])
+
+        if support_review is not None and not (
+            current == "CANDIDATE" and target_maturity == "SUPPORTED"
+        ):
+            raise CurationError("support_review is only valid for CANDIDATE -> SUPPORTED")
+
+        if current == "CANDIDATE" and target_maturity == "SUPPORTED" and _support_gate_applied:
+            decisions = [
+                decision
+                for decision in self.repository.list("claim_support_decision")
+                if decision.get("claim_id") == claim_id
+                and decision.get("from_maturity") == "CANDIDATE"
+                and decision.get("to_maturity") == "SUPPORTED"
+            ]
+            if len(decisions) != 1:
+                raise CurationError(
+                    "internal CANDIDATE -> SUPPORTED transition requires exactly one support decision"
+                )
+            if decisions[0].get("reviewed_by") != actor:
+                raise CurationError("claim support decision reviewer must match transition actor")
+
         if target_maturity == "VALIDATED":
             self._require_human(actor, "VALIDATED promotion")
         if target_maturity == "SUPERSEDED":
