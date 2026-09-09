@@ -128,7 +128,15 @@ def test_supersede_requires_same_subject_distinct_mature_successor():
     engine.create_claim(original, actor=AI)
     engine.create_claim(successor, actor=AI)
     engine.create_claim(other_subject, actor=AI)
-    engine.transition_claim("cl:old", "SUPPORTED", actor=HUMAN, reason="reviewed")
+    engine.transition_claim(
+        "cl:old",
+        "SUPPORTED",
+        actor=HUMAN,
+        reason="reviewed",
+        support_review={
+            "competition_note": "The successor is an alternative formulation kept for supersession testing."
+        },
+    )
     engine.transition_claim("cl:old", "VALIDATED", actor=HUMAN, reason="verified")
 
     with pytest.raises(CurationError, match="cannot supersede itself"):
@@ -141,7 +149,15 @@ def test_supersede_requires_same_subject_distinct_mature_successor():
             "cl:old", "SUPERSEDED", actor=HUMAN, reason="too early", superseded_by="cl:new"
         )
 
-    engine.transition_claim("cl:new", "SUPPORTED", actor=HUMAN, reason="reviewed successor")
+    engine.transition_claim(
+        "cl:new",
+        "SUPPORTED",
+        actor=HUMAN,
+        reason="reviewed successor",
+        support_review={
+            "competition_note": "The validated prior Claim is being compared as the supersession predecessor."
+        },
+    )
     engine.transition_claim("cl:other", "SUPPORTED", actor=HUMAN, reason="reviewed alternate")
 
     with pytest.raises(CurationError, match="same claim subject"):
