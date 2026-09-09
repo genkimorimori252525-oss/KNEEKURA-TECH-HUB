@@ -255,7 +255,7 @@ def test_source_provenance_change_midflight_fails_even_if_authority_still_effect
         content = contents[path]
         if path == "src/lib.rs":
             changed = deepcopy(repository.get(SOURCE_ID))
-            changed["origin"]["repository"] = "example/replaced-origin"
+            changed["origin"]["description"] = "updated during acquisition"
             repository.put(changed, replace=True)
         return {"content": content, "git_blob_sha": _blob_sha(content)}
 

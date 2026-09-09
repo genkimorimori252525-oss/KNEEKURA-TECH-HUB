@@ -147,7 +147,7 @@ def test_symlink_is_rejected(tmp_path: Path):
 def test_source_change_after_success_is_detected_by_execution_fingerprint(tmp_path: Path):
     repository, _selection, _authorization, execution, _contents = _successful_execution(tmp_path)
     changed = deepcopy(repository.get(SOURCE_ID))
-    changed["origin"]["repository"] = "example/changed-after-fetch"
+    changed["origin"]["description"] = "changed after fetch"
     repository.put(changed, replace=True)
 
     with pytest.raises(VerifiedAcquisitionCommitError, match="Source fingerprint differs"):
