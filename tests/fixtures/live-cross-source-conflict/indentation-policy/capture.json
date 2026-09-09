@@ -1,0 +1,37 @@
+{
+  "capture_version": "1.0",
+  "theme": "source-code indentation character policy",
+  "sources": [
+    {
+      "id": "src:github:golang:go",
+      "repository": "golang/go",
+      "default_branch": "master",
+      "stargazers_count": 137991,
+      "revision": "5d12b248d5520ff5adafeb9be9acc2148399ca49",
+      "tree_sha": "73a4ee55f515fa641e4edc21ab89e6d4ead693a4",
+      "path": "src/cmd/gofmt/doc.go",
+      "git_blob_sha": "8ac9c6a931711df3c65b58611d77fc000578175d",
+      "excerpt_file": "go-gofmt.txt",
+      "excerpt_sha256": "1b6acdfebbb4377de71f53730bdc55eb18e23b7929b56894e5ca42cf141ec0b2",
+      "license_state": "KNOWN",
+      "declared_expression": "BSD-3-Clause",
+      "observed_statement": "Gofmt uses tabs for indentation and blanks for alignment."
+    },
+    {
+      "id": "src:github:python:peps",
+      "repository": "python/peps",
+      "default_branch": "main",
+      "stargazers_count": 5003,
+      "revision": "3b6032df5a42825474e00b75a4b1a8e9c7af459b",
+      "tree_sha": "ece03897c8329d793b51ec7b07bb583ae537533f",
+      "path": "peps/pep-0008.rst",
+      "git_blob_sha": "d14c9e97b120daecadcd4afe742af69ddc07a34c",
+      "excerpt_file": "python-pep8.txt",
+      "excerpt_sha256": "11d29eb25ea8bf5009bbbea1287d1158f9eabfb5f5d10e2fa05f2a72492f7e5c",
+      "license_state": "REVIEW_REQUIRED",
+      "declared_expression": null,
+      "observed_statement": "PEP 8 prefers spaces for indentation, retaining tabs only for consistency with already tab-indented code."
+    }
+  ],
+  "provenance_note": "Commit, tree, blob, repository metadata, and source text were observed from live GitHub before freezing this acceptance fixture. Repository popularity is metadata only and carries no epistemic authority."
+}
