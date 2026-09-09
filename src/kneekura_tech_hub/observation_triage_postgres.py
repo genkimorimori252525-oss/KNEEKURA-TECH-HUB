@@ -8,6 +8,27 @@ from .repository import DuplicateRecordError, Record
 from .verified_commit_postgres import VerifiedCommitPostgresRepository
 
 
+def _canonicalize_claim_defaults(record: Record) -> None:
+    """Align valid Claim writes with the normalized PostgreSQL read shape.
+
+    ``PostgresRepository._get_claim`` always materializes empty scope,
+    applicability and alternative-interpretation containers. It also materializes
+    an empty reasoning basis for non-INFERENCE claims. Triage promotion performs a
+    strict write/read round-trip, so the write-side record must use that same
+    canonical shape rather than treating omitted and empty fields as different.
+
+    INFERENCE is deliberately excluded from the reasoning-basis default: its
+    schema requires an explicit reasoning basis and confidence, and this helper
+    must never manufacture the field needed to satisfy that epistemic gate.
+    """
+
+    record.setdefault("scope", {})
+    record.setdefault("applicability", {})
+    record.setdefault("alternative_interpretations", [])
+    if record.get("claim_type") != "INFERENCE":
+        record.setdefault("reasoning_basis", [])
+
+
 class ObservationTriagePostgresRepository(VerifiedCommitPostgresRepository):
     """PostgreSQL extension for append-only observation triage decisions."""
 
@@ -21,6 +42,13 @@ class ObservationTriagePostgresRepository(VerifiedCommitPostgresRepository):
         return super().get(record_id)
 
     def put(self, record: Record, *, replace: bool = False) -> None:
+        if record.get("record_type") == "claim":
+            # CurationEngine validates the semantic record before this persistence
+            # boundary. Normalizing optional containers here keeps the mutable
+            # record and its durable round-trip representation identical.
+            _canonicalize_claim_defaults(record)
+            super().put(record, replace=replace)
+            return
         if record.get("record_type") != "observation_triage_decision":
             super().put(record, replace=replace)
             return
