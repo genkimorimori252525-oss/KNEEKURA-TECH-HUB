@@ -3,6 +3,7 @@ from __future__ import annotations
 import psycopg
 from psycopg.types.json import Jsonb
 
+from .observation_triage import validate_observation_triage_decision
 from .repository import DuplicateRecordError, Record
 from .verified_commit_postgres import VerifiedCommitPostgresRepository
 
@@ -25,6 +26,7 @@ class ObservationTriagePostgresRepository(VerifiedCommitPostgresRepository):
             return
         if replace:
             raise ValueError("observation triage decisions are append-only")
+        validate_observation_triage_decision(record)
         with self.connection.transaction():
             if self.get(record["id"]) is not None:
                 raise DuplicateRecordError(f"record already exists: {record['id']}")
@@ -100,4 +102,5 @@ class ObservationTriagePostgresRepository(VerifiedCommitPostgresRepository):
         }
         if row[6] is not None:
             record["resulting_claim_id"] = row[6]
+        validate_observation_triage_decision(record)
         return record
