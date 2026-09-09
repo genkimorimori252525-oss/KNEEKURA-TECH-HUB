@@ -76,6 +76,40 @@ def _authorization(repository: RecordRepository, authorization_id: str) -> Recor
     return record
 
 
+def _authorization_commit_ids(
+    repository: RecordRepository,
+    authorization_id: str,
+) -> list[str]:
+    """Return verified commits that prove this exact human grant was consumed."""
+
+    commit_ids: list[str] = []
+    for commit in repository.list("source_acquisition_commit"):
+        if (
+            commit.get("record_type") == "source_acquisition_commit"
+            and commit.get("authorization_id") == authorization_id
+        ):
+            commit_ids.append(commit["id"])
+    return sorted(commit_ids)
+
+
+def _is_governed_refresh_authorization(
+    repository: RecordRepository,
+    authorization: Record,
+) -> bool:
+    """A selected-files refresh must explicitly replace a grant with a verified commit."""
+
+    predecessor_id = authorization.get("supersedes_authorization_id")
+    if not isinstance(predecessor_id, str):
+        return False
+    previous = _authorization(repository, predecessor_id)
+    _validate_stored_authorization(repository, previous)
+    return (
+        previous.get("decision") == "AUTHORIZE"
+        and previous.get("source_id") == authorization.get("source_id")
+        and bool(_authorization_commit_ids(repository, predecessor_id))
+    )
+
+
 def _validate_paths(paths: object) -> list[str]:
     if not isinstance(paths, list) or not 1 <= len(paths) <= 32:
         raise AcquisitionAuthorizationError("allowed_paths must contain between 1 and 32 paths")
@@ -200,9 +234,9 @@ def authorization_effectiveness(
 ) -> Record:
     """Evaluate whether an active AUTHORIZE remains safe to consume *now*.
 
-    Historical authorization is not permanent authority. Current Source depth, license state,
-    and Source selection are rechecked so stale grants fail closed before a future executor can
-    consume them.
+    Historical authorization is not permanent authority. A grant becomes consumed when its
+    append-only Verified Acquisition Commit exists. A Source already at ``selected-files`` may be
+    refreshed only through a fresh human grant that explicitly supersedes a committed AUTHORIZE.
     """
 
     authorization = _authorization(repository, authorization_id)
@@ -215,8 +249,20 @@ def authorization_effectiveness(
         blockers.append("NOT_ACTIVE_AUTHORIZATION")
     if authorization["decision"] != "AUTHORIZE":
         blockers.append("NOT_AUTHORIZE_DECISION")
-    if (source.get("acquisition") or {}).get("level") != "metadata-only":
+    if _authorization_commit_ids(repository, authorization["id"]):
+        blockers.append("AUTHORIZATION_ALREADY_COMMITTED")
+
+    source_level = (source.get("acquisition") or {}).get("level")
+    if source_level == "metadata-only":
+        pass
+    elif source_level == "selected-files" and _is_governed_refresh_authorization(
+        repository,
+        authorization,
+    ):
+        pass
+    else:
         blockers.append("SOURCE_NO_LONGER_METADATA_ONLY")
+
     if not _license_is_resolved(source):
         blockers.append("LICENSE_NO_LONGER_RESOLVED")
 
@@ -239,8 +285,8 @@ def authorization_effectiveness(
 def authorized_acquisition_requests(repository: RecordRepository) -> list[Record]:
     """Read-only view of currently effective AUTHORIZE records.
 
-    The view rechecks live prerequisites and never fetches a file. Stale authorizations remain
-    in history but disappear from this effective-authority view until a new valid grant exists.
+    The view rechecks live prerequisites and never fetches a file. Stale or already-consumed
+    authorizations remain in history but disappear from this effective-authority view.
     """
 
     result: list[Record] = []
@@ -261,9 +307,10 @@ def authorized_acquisition_requests(repository: RecordRepository) -> list[Record
 class AcquisitionAuthorizationEngine:
     """Human-gated authorization for an exact, bounded selected-file acquisition scope.
 
-    AUTHORIZE requires a current human SELECT_FOR_REVIEW and resolved license metadata.
-    REVOKE remains available even if selection/license state later changes. Neither operation
-    mutates Source.acquisition or performs retrieval.
+    Initial AUTHORIZE requires metadata-only Source state. A Source already promoted to
+    selected-files may receive a fresh refresh grant only by explicitly superseding the active
+    AUTHORIZE that already has an append-only Verified Acquisition Commit. REVOKE remains available
+    even if selection/license state later changes. No operation here performs retrieval.
     """
 
     def __init__(self, repository: RecordRepository, *, policy_version: str = "1.0.0") -> None:
@@ -302,10 +349,6 @@ class AcquisitionAuthorizationEngine:
         decision = record.get("decision")
 
         if decision == "AUTHORIZE":
-            if (source.get("acquisition") or {}).get("level") != "metadata-only":
-                raise AcquisitionAuthorizationError(
-                    "AUTHORIZE v1 applies only while the Source remains metadata-only"
-                )
             _validate_license_for_authorization(source)
 
             active_selections = active_source_selection_decisions(
@@ -336,6 +379,7 @@ class AcquisitionAuthorizationEngine:
                     "supersedes_authorization_id must reference the active authorization"
                 )
 
+            previous: Record | None = None
             if predecessor_id is not None:
                 previous = _authorization(self.repository, predecessor_id)
                 _validate_stored_authorization(self.repository, previous)
@@ -343,6 +387,23 @@ class AcquisitionAuthorizationEngine:
                     raise AcquisitionAuthorizationError(
                         "superseding authorization must concern the same Source"
                     )
+
+            source_level = (source.get("acquisition") or {}).get("level")
+            if source_level == "metadata-only":
+                pass
+            elif source_level == "selected-files":
+                if previous is None or previous.get("decision") != "AUTHORIZE":
+                    raise AcquisitionAuthorizationError(
+                        "selected-files refresh requires explicit supersession of the active AUTHORIZE"
+                    )
+                if not _authorization_commit_ids(self.repository, previous["id"]):
+                    raise AcquisitionAuthorizationError(
+                        "selected-files refresh requires the superseded AUTHORIZE to have a verified acquisition commit"
+                    )
+            else:
+                raise AcquisitionAuthorizationError(
+                    "AUTHORIZE supports only metadata-only intake or governed selected-files refresh"
+                )
 
         elif decision == "REVOKE":
             if predecessor_id is None:

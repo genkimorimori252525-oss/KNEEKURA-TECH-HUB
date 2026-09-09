@@ -95,6 +95,7 @@ class VerifiedCommitPostgresRepository(ExecutionPostgresRepository):
         source_id = expected_source["id"]
         authorization_id = expected_authorization["id"]
         execution_id = expected_execution["id"]
+        expected_source_level = (expected_source.get("acquisition") or {}).get("level")
 
         with self.connection.transaction():
             if self.connection.execute(
@@ -148,8 +149,10 @@ class VerifiedCommitPostgresRepository(ExecutionPostgresRepository):
                     "Authorization is no longer effective at commit: "
                     + ",".join(effectiveness["blockers"])
                 )
-            if (current_source.get("acquisition") or {}).get("level") != "metadata-only":
-                raise ValueError("verified acquisition commit requires metadata-only Source")
+            if expected_source_level not in {"metadata-only", "selected-files"}:
+                raise ValueError(
+                    "verified acquisition commit requires metadata-only intake or governed selected-files refresh"
+                )
             if current_execution.get("status") != "SUCCEEDED":
                 raise ValueError("verified acquisition commit requires SUCCEEDED execution")
 
@@ -185,9 +188,9 @@ class VerifiedCommitPostgresRepository(ExecutionPostgresRepository):
                 """
                 UPDATE source
                 SET acquisition_level='selected-files', last_checked=%s
-                WHERE id=%s AND acquisition_level='metadata-only'
+                WHERE id=%s AND acquisition_level=%s
                 """,
-                (commit_record["committed_at"], source_id),
+                (commit_record["committed_at"], source_id, expected_source_level),
             )
             if cursor.rowcount != 1:
                 raise ValueError("Source acquisition level changed during verified commit")

@@ -142,8 +142,11 @@ def verify_execution_store(
         raise VerifiedAcquisitionCommitError(
             "Authorization is no longer effective: " + ",".join(effectiveness["blockers"])
         )
-    if (source.get("acquisition") or {}).get("level") != "metadata-only":
-        raise VerifiedAcquisitionCommitError("verified commit requires Source to remain metadata-only")
+    source_level = (source.get("acquisition") or {}).get("level")
+    if source_level not in {"metadata-only", "selected-files"}:
+        raise VerifiedAcquisitionCommitError(
+            "verified commit requires metadata-only intake or governed selected-files refresh"
+        )
     if execution["revision"] != authorization["revision"]:
         raise VerifiedAcquisitionCommitError("execution revision differs from Authorization")
     if execution["requested_paths"] != authorization["allowed_paths"]:
