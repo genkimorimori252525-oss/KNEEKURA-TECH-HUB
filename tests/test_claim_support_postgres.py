@@ -106,6 +106,8 @@ def _seed(repository: ClaimSupportPostgresRepository, *, roles=None) -> Curation
             "statement": "The fixture demonstrates a candidate support gate.",
             "maturity": "CANDIDATE",
             "evidence_ids": [EVIDENCE_ID],
+            "confidence": "MEDIUM",
+            "reasoning_basis": [EVIDENCE_ID],
             "created_by": HUMAN,
             "policy_version": "1.0.0",
         },
