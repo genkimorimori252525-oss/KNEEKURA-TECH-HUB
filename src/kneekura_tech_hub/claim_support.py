@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from contextlib import contextmanager
 from copy import deepcopy
 from datetime import datetime, timezone
 import json
@@ -54,14 +55,46 @@ def _claim(repository: RecordRepository, claim_id: str) -> Record:
     return record
 
 
+def _support_repository(repository: RecordRepository) -> RecordRepository:
+    connection = getattr(repository, "connection", None)
+    lock = getattr(repository, "lock_claim_for_support", None)
+    if connection is not None and not callable(lock):
+        # Local import avoids a module cycle: the PostgreSQL adapter validates
+        # support decisions using this module.
+        from .claim_support_postgres import ClaimSupportPostgresRepository
+
+        return ClaimSupportPostgresRepository(connection)
+    return repository
+
+
 def _transactional_repository(repository: RecordRepository):
     connection = getattr(repository, "connection", None)
     lock = getattr(repository, "lock_claim_for_support", None)
-    if connection is None or not callable(lock):
-        raise ClaimSupportError(
-            "claim support writes require transactional PostgreSQL support repository"
-        )
-    return connection, lock
+    if connection is not None and callable(lock):
+        return connection.transaction, lock
+
+    records = getattr(repository, "_records", None)
+    if isinstance(records, dict):
+        @contextmanager
+        def memory_transaction():
+            before = deepcopy(records)
+            try:
+                yield
+            except Exception:
+                records.clear()
+                records.update(before)
+                raise
+
+        def memory_lock(claim_id: str) -> None:
+            record = repository.get(claim_id)
+            if record is None or record.get("record_type") != "claim":
+                raise ValueError(f"missing claim: {claim_id}")
+
+        return memory_transaction, memory_lock
+
+    raise ClaimSupportError(
+        "claim support writes require PostgreSQL or MemoryRepository transaction support"
+    )
 
 
 def claim_support_history(
@@ -69,6 +102,7 @@ def claim_support_history(
     *,
     claim_id: str | None = None,
 ) -> list[Record]:
+    repository = _support_repository(repository)
     if claim_id is not None:
         _claim(repository, claim_id)
     records = repository.list("claim_support_decision")
@@ -84,6 +118,7 @@ def claim_support_history(
 
 
 def claim_support_context(repository: RecordRepository, claim_id: str) -> dict[str, Any]:
+    repository = _support_repository(repository)
     claim = _claim(repository, claim_id)
     review = review_claim(repository, claim_id)
     comparison = compare_claim(repository, claim_id)
@@ -170,8 +205,9 @@ def promote_candidate_to_supported(
     ):
         raise ClaimSupportError("HUMAN_REVIEWED independence requires independence_note")
 
-    connection, lock = _transactional_repository(repository)
-    with connection.transaction():
+    repository = _support_repository(repository)
+    transaction_factory, lock = _transactional_repository(repository)
+    with transaction_factory():
         try:
             lock(claim_id)
         except ValueError as exc:
@@ -244,6 +280,7 @@ def promote_candidate_to_supported(
                 "SUPPORTED",
                 actor=actor,
                 reason=reason,
+                _support_gate_applied=True,
             )
         except CurationError as exc:
             raise ClaimSupportError(str(exc)) from exc
