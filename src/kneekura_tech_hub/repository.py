@@ -38,6 +38,7 @@ class MemoryRepository:
     SourceSnapshot and Evidence records are immutable provenance anchors. Their
     identity can never be reused to point at different captured material or a
     different locator/role interpretation; corrections require new record IDs.
+    Curation events are append-only audit records and cannot be replaced.
     """
 
     _CLAIM_EPISTEMIC_FIELDS = (
@@ -53,7 +54,7 @@ class MemoryRepository:
         "evidence_ids",
         "policy_version",
     )
-    _IMMUTABLE_PROVENANCE_TYPES = {"source_snapshot", "evidence"}
+    _IMMUTABLE_PROVENANCE_TYPES = {"source_snapshot", "evidence", "curation_event"}
 
     def __init__(self) -> None:
         self._records: dict[str, Record] = {}
