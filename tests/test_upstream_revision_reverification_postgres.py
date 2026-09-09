@@ -11,6 +11,7 @@ from kneekura_tech_hub.authorization import (
     AcquisitionAuthorizationEngine,
     authorization_effectiveness,
 )
+from kneekura_tech_hub.authorization_postgres import AuthorizationPostgresRepository
 from kneekura_tech_hub.claim_disposition import (
     ClaimDispositionError,
     claim_disposition_history,
@@ -198,6 +199,7 @@ def test_new_upstream_revision_preserves_history_and_requires_fresh_human_author
         assert repository.get(SOURCE_ID)["acquisition"] == {"level": "selected-files"}
         first_effectiveness = authorization_effectiveness(repository, AUTH_V1)
         assert first_effectiveness["effective"] is False
+        assert "AUTHORIZATION_ALREADY_COMMITTED" in first_effectiveness["blockers"]
         assert "SOURCE_NO_LONGER_METADATA_ONLY" in first_effectiveness["blockers"]
 
         evidence_v1 = _extract(
@@ -258,7 +260,10 @@ def test_new_upstream_revision_preserves_history_and_requires_fresh_human_author
         last_verified_v1 = validated_v1["last_verified"]
         explanation_v1_before = explain_claim(repository, CLAIM_V1)
 
-        authorization_v2 = AcquisitionAuthorizationEngine(repository).authorize_from_fields(
+        # Exercise the same repository depth used by the human Authorization CLI. It sees only
+        # the minimal Verified Commit authority projection needed to prove A1 was consumed.
+        authorization_repository = AuthorizationPostgresRepository(connection)
+        authorization_v2 = AcquisitionAuthorizationEngine(authorization_repository).authorize_from_fields(
             source_id=SOURCE_ID,
             selection_decision_id=selection["id"],
             revision=REV_V2,
@@ -268,7 +273,7 @@ def test_new_upstream_revision_preserves_history_and_requires_fresh_human_author
             authorization_id=AUTH_V2,
             supersedes_authorization_id=AUTH_V1,
         )
-        assert authorization_effectiveness(repository, AUTH_V2)["effective"] is True
+        assert authorization_effectiveness(authorization_repository, AUTH_V2)["effective"] is True
 
         commit_v2, snapshot_v2 = _execute_and_commit(
             repository,
@@ -286,7 +291,7 @@ def test_new_upstream_revision_preserves_history_and_requires_fresh_human_author
 
         consumed_v2 = authorization_effectiveness(repository, AUTH_V2)
         assert consumed_v2["effective"] is False
-        assert "AUTHORIZATION_ALREADY_COMMITTED" in consumed_v2["blockers"]
+        assert consumed_v2["blockers"] == ["AUTHORIZATION_ALREADY_COMMITTED"]
 
         evidence_v2 = _extract(
             engine,
