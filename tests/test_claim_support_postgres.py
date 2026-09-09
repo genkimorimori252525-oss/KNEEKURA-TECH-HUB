@@ -128,14 +128,32 @@ def repository():
         repo.close()
 
 
-def test_direct_candidate_to_supported_is_rejected_by_database(repository) -> None:
-    engine = _seed(repository)
+def test_direct_repository_candidate_to_supported_is_rejected_by_database(repository) -> None:
+    _seed(repository)
     before_events = len(repository.list("curation_event"))
+    bypass = repository.get(CLAIM_ID)
+    assert bypass is not None
+    bypass["maturity"] = "SUPPORTED"
     with pytest.raises(psycopg.Error, match="requires matching claim support decision"):
-        engine.transition_claim(CLAIM_ID, "SUPPORTED", actor=HUMAN, reason="bypass")
+        repository.put(bypass, replace=True)
     assert repository.get(CLAIM_ID)["maturity"] == "CANDIDATE"
     assert repository.list("claim_support_decision") == []
     assert len(repository.list("curation_event")) == before_events
+
+
+def test_public_transition_routes_through_support_gate(repository) -> None:
+    engine = _seed(repository)
+    supported = engine.transition_claim(
+        CLAIM_ID,
+        "SUPPORTED",
+        actor=HUMAN,
+        reason="public API review",
+    )
+    assert supported["maturity"] == "SUPPORTED"
+    decisions = repository.list("claim_support_decision")
+    assert len(decisions) == 1
+    assert decisions[0]["claim_id"] == CLAIM_ID
+    assert decisions[0]["independence_assessment"] == "NOT_ASSESSED"
 
 
 def test_support_gate_promotes_with_auditable_non_scalar_review(repository) -> None:
