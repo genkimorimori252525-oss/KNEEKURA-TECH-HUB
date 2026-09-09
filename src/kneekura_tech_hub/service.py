@@ -108,6 +108,8 @@ class CurationEngine:
     def stage_observation(self, observation: Record, *, actor: Record) -> Record:
         self._require_type(observation, "staged_observation")
         self._require_actor_match(observation.get("created_by"), actor, "observation created_by")
+        if observation.get("status") != "NEW":
+            raise CurationError("new staged observations must start at NEW")
         source = self._require_existing(observation["source_id"], "source")
 
         evidence_ids = observation.get("evidence_candidate_ids") or []
