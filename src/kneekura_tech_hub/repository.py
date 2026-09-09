@@ -38,6 +38,10 @@ class MemoryRepository:
     SourceSnapshot and Evidence records are immutable provenance anchors. Their
     identity can never be reused to point at different captured material or a
     different locator/role interpretation; corrections require new record IDs.
+
+    Governance/audit records that are defined as append-only remain append-only
+    in memory as well as PostgreSQL. Corrections are represented by successor
+    decisions or new events, never replacement of historical rows.
     """
 
     _CLAIM_EPISTEMIC_FIELDS = (
@@ -54,6 +58,15 @@ class MemoryRepository:
         "policy_version",
     )
     _IMMUTABLE_PROVENANCE_TYPES = {"source_snapshot", "evidence"}
+    _APPEND_ONLY_HISTORY_TYPES = {
+        "curation_event",
+        "review_decision",
+        "source_selection_decision",
+        "source_acquisition_authorization",
+        "source_acquisition_execution",
+        "source_acquisition_commit",
+        "observation_triage_decision",
+    }
 
     def __init__(self) -> None:
         self._records: dict[str, Record] = {}
@@ -118,6 +131,15 @@ class MemoryRepository:
         ):
             raise ValueError(
                 f"{current['record_type']} is immutable; create a new record ID: {record_id}"
+            )
+
+        if (
+            current is not None
+            and replace
+            and current.get("record_type") in self._APPEND_ONLY_HISTORY_TYPES
+        ):
+            raise ValueError(
+                f"{current['record_type']} is append-only; replacement is forbidden: {record_id}"
             )
 
         self._guard_reviewed_claim_content_mutation(current, record)
