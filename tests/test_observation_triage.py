@@ -142,12 +142,20 @@ def test_triage_queue_excludes_terminal_statuses_and_reconstructs_provenance() -
 
 def test_context_rejects_cross_source_evidence_corruption() -> None:
     repository = _seed_repository()
+    repository.put(
+        {
+            "record_type": "source",
+            "id": "src:other",
+            "kind": "repository",
+            "origin": {"provider": "fixture", "repository": "example/other"},
+            "acquisition": {"level": "selected-files"},
+            "license": {"state": "KNOWN", "declared_expression": "MIT"},
+        }
+    )
     corrupted = _observation("obs:triage:corrupt")
     repository.put(corrupted)
-    evidence = repository.get(EVIDENCE_ID)
-    assert evidence is not None
-    evidence["source_id"] = "src:other"
-    repository.put(evidence, replace=True)
+    corrupted["source_id"] = "src:other"
+    repository.put(corrupted, replace=True)
 
     with pytest.raises(ObservationTriageError, match="Source mismatch"):
         observation_context(repository, corrupted["id"])
