@@ -36,6 +36,7 @@ def _claim(
             "domain": "source-code",
             "ecosystem": ecosystem,
             "authority": authority,
+            "typed_marker": True,
         },
         "evidence_ids": [],
         "created_by": {"actor_type": "ai", "actor_id": "context-query-fixture", "version": "v1"},
@@ -129,6 +130,15 @@ def test_context_matching_is_exact_subset_matching_not_semantic_guessing() -> No
     assert impossible_mix["resolution"] == "NO_MATCH"
     assert impossible_mix["candidate_claim_ids"] == []
 
+    # Exact JSON-shaped comparison must not inherit Python's True == 1 behavior.
+    boolean_marker = contextual_claims_for_entity(repository, ENTITY_ID, context={"typed_marker": True})
+    assert boolean_marker["resolution"] == "MULTIPLE_MATCHES"
+    assert boolean_marker["candidate_claim_ids"] == sorted([GO_CLAIM, PY_CLAIM])
+
+    integer_marker = contextual_claims_for_entity(repository, ENTITY_ID, context={"typed_marker": 1})
+    assert integer_marker["resolution"] == "NO_MATCH"
+    assert integer_marker["candidate_claim_ids"] == []
+
     # Research-only Claims are never promoted into trusted guidance by this query.
     rust = contextual_claims_for_entity(repository, ENTITY_ID, context={"ecosystem": "Rust"})
     assert rust["resolution"] == "NO_MATCH"
@@ -162,5 +172,8 @@ def test_query_is_read_only_and_fails_closed_for_unknown_subject_or_bad_context(
 
     with pytest.raises(QueryError, match="context must be a mapping"):
         contextual_claims_for_entity(repository, ENTITY_ID, context=["Go"])  # type: ignore[arg-type]
+
+    with pytest.raises(QueryError, match="context keys must be strings"):
+        contextual_claims_for_entity(repository, ENTITY_ID, context={1: "Go"})  # type: ignore[dict-item]
 
     assert repository.list() == before
