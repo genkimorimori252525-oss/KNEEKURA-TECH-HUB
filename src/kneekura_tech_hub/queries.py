@@ -4,7 +4,7 @@ from collections.abc import Mapping
 from copy import deepcopy
 from typing import Any
 
-from .projection import RelationView, project_relations, resolve_entity_id
+from .projection import ProjectionError, RelationView, project_relations, resolve_entity_id
 from .repository import Record, RecordRepository
 
 
@@ -13,7 +13,10 @@ class QueryError(ValueError):
 
 
 def _entity(repository: RecordRepository, entity_id: str) -> Record:
-    resolved = resolve_entity_id(repository, entity_id)
+    try:
+        resolved = resolve_entity_id(repository, entity_id)
+    except ProjectionError as exc:
+        raise QueryError(str(exc)) from exc
     entity = repository.get(resolved)
     if entity is None or entity.get("record_type") != "knowledge_entity":
         raise QueryError(f"unknown knowledge entity: {resolved}")
@@ -46,10 +49,32 @@ def _normalize_context(context: Mapping[str, Any] | None) -> dict[str, Any]:
     return deepcopy(normalized)
 
 
+def _exact_value_equal(left: object, right: object) -> bool:
+    """Compare JSON-shaped values without Python's bool/int equality coercion."""
+
+    if type(left) is not type(right):
+        return False
+    if isinstance(left, dict):
+        assert isinstance(right, dict)
+        if left.keys() != right.keys():
+            return False
+        return all(_exact_value_equal(left[key], right[key]) for key in left)
+    if isinstance(left, list):
+        assert isinstance(right, list)
+        return len(left) == len(right) and all(
+            _exact_value_equal(left_item, right_item)
+            for left_item, right_item in zip(left, right, strict=True)
+        )
+    return left == right
+
+
 def _applicability_matches(applicability: object, context: Mapping[str, Any]) -> bool:
     if not isinstance(applicability, Mapping):
         return False
-    return all(key in applicability and applicability[key] == value for key, value in context.items())
+    return all(
+        key in applicability and _exact_value_equal(applicability[key], value)
+        for key, value in context.items()
+    )
 
 
 def contextual_claims_for_entity(
