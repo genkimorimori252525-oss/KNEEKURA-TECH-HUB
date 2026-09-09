@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+from collections.abc import Mapping
 from copy import deepcopy
+from typing import Any
 
 from .projection import RelationView, project_relations, resolve_entity_id
 from .repository import Record, RecordRepository
@@ -31,6 +33,80 @@ def _summary(entity: Record) -> Record:
 def _require_problem(entity: Record) -> None:
     if "problem" not in entity.get("kinds", []):
         raise QueryError(f"entity is not classified as a problem: {entity['id']}")
+
+
+def _normalize_context(context: Mapping[str, Any] | None) -> dict[str, Any]:
+    if context is None:
+        return {}
+    if not isinstance(context, Mapping):
+        raise QueryError("context must be a mapping")
+    normalized = dict(context)
+    if any(not isinstance(key, str) for key in normalized):
+        raise QueryError("context keys must be strings")
+    return deepcopy(normalized)
+
+
+def _applicability_matches(applicability: object, context: Mapping[str, Any]) -> bool:
+    if not isinstance(applicability, Mapping):
+        return False
+    return all(key in applicability and applicability[key] == value for key, value in context.items())
+
+
+def contextual_claims_for_entity(
+    repository: RecordRepository,
+    entity_id: str,
+    *,
+    context: Mapping[str, Any] | None = None,
+) -> Record:
+    """Return trusted entity Claims matching explicit applicability context.
+
+    This query deliberately performs no ranking, fuzzy matching, popularity weighting,
+    semantic guessing, or fallback. A supplied context is an exact subset constraint on
+    the immutable ``applicability`` mapping of VALIDATED entity Claims.
+    """
+
+    entity = _entity(repository, entity_id)
+    normalized_context = _normalize_context(context)
+
+    validated = [
+        claim
+        for claim in repository.list("claim")
+        if claim.get("entity_id") == entity["id"]
+        and not claim.get("relation")
+        and claim.get("maturity") == "VALIDATED"
+    ]
+    validated.sort(key=lambda claim: claim["id"])
+
+    if normalized_context:
+        matches = [
+            claim
+            for claim in validated
+            if _applicability_matches(claim.get("applicability", {}), normalized_context)
+        ]
+        if not matches:
+            resolution = "NO_MATCH"
+        elif len(matches) == 1:
+            resolution = "ONE_MATCH"
+        else:
+            resolution = "MULTIPLE_MATCHES"
+    else:
+        matches = list(validated)
+        if not matches:
+            resolution = "NO_VALIDATED_CLAIMS"
+        elif len(matches) == 1:
+            resolution = "ONE_MATCH"
+        else:
+            resolution = "CONTEXT_REQUIRED"
+
+    return {
+        "subject": _summary(entity),
+        "context": normalized_context,
+        "resolution": resolution,
+        "validated_claim_count": len(validated),
+        "candidate_count": len(matches),
+        "candidate_claim_ids": [claim["id"] for claim in matches],
+        "claims": [deepcopy(claim) for claim in matches],
+    }
 
 
 def solutions_for_problem(
