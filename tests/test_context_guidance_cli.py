@@ -25,6 +25,9 @@ class _Repository(MemoryRepository):
         super().__init__()
         self.connection = _Connection()
 
+    def close(self) -> None:
+        self.connection.close()
+
 
 def _seed(*, broken_go_snapshot: bool = False) -> _Repository:
     repository = _Repository()
