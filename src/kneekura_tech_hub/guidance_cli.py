@@ -14,11 +14,28 @@ def _open_repository(dsn: str) -> PostgresRepository:
     return PostgresRepository.connect(dsn)
 
 
+def _reject_duplicate_object_pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError(f"duplicate context key: {key}")
+        result[key] = value
+    return result
+
+
+def _reject_non_finite_number(value: str) -> None:
+    raise ValueError(f"non-finite JSON number: {value}")
+
+
 def _parse_context(raw: str | None) -> dict[str, Any] | None:
     if raw is None:
         return None
     try:
-        value = json.loads(raw)
+        value = json.loads(
+            raw,
+            object_pairs_hook=_reject_duplicate_object_pairs,
+            parse_constant=_reject_non_finite_number,
+        )
     except json.JSONDecodeError as exc:
         raise ValueError(f"context must be valid JSON: {exc.msg}") from exc
     if not isinstance(value, dict):
