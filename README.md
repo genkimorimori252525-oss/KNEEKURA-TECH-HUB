@@ -183,7 +183,7 @@ Human Review Decision records a human judgment about two Claims as a separate ap
 - real Salsa acceptance proves `UNRESOLVED → COMPATIBLE` Decision correction while both Claims remain unchanged
 - `decide-claims`, `review-decisions`, and `decision-context` CLI commands
 
-Mass crawling and automated knowledge promotion are intentionally not enabled yet.
+Mass crawling and automated knowledge promotion are intentionally not enabled.
 
 ## Quick start
 
@@ -343,6 +343,7 @@ kneekura-hub merge-entities ke:survivor ke:duplicate --reason 'same concept' --a
 - `docs/architecture/EVIDENCE-REVIEW-v1.md`
 - `docs/architecture/CLAIM-COMPARISON-v1.md`
 - `docs/architecture/HUMAN-REVIEW-DECISION-v1.md`
+- `docs/architecture/CORE-FEATURE-FREEZE-v1.md`
 - `docs/pilots/INCREMENTAL-COMPUTATION-v1.md`
 - `governance/CONSTITUTION.md`
 - `governance/policy-v1.json`
@@ -361,6 +362,14 @@ kneekura-hub merge-entities ke:survivor ke:duplicate --reason 'same concept' --a
 - Evidence Explanation v1: **implemented and merged**
 - Evidence Review v1: **implemented and merged**
 - Claim Comparison v1: **implemented and merged**
-- Human Review Decision v1: **implemented; verification in progress**
-- Next pressure: **controlled Discovery ingestion or explicit resolved-identity comparison view**
-- Mass discovery: **not enabled yet**
+- Human Review Decision v1: **implemented and merged**
+- Discovery-to-Knowledge acceptance: **proven**
+- Cross-source knowledge and conflict acceptance: **proven**
+- Governed repeated upstream revision / re-verification: **proven**
+- Real commit-pinned upstream revision trial: **proven**
+- Real cross-source design-divergence trial: **proven**
+- Exact context-aware retrieval and provenance explanation: **proven**
+- Read-only contextual guidance CLI: **implemented and proven against PostgreSQL**
+- Core v1 posture: **FEATURE FROZEN**
+- Next pressure: **none by default — reopen only for a reproduced defect, unmet original-purpose workflow, concrete operational failure, integrity/governance weakness, or breaking upstream/platform change**
+- Mass discovery: **intentionally not enabled by the frozen v1 core**
