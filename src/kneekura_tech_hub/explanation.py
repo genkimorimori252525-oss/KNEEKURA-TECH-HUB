@@ -1,7 +1,10 @@
 from __future__ import annotations
 
+from collections.abc import Mapping
 from copy import deepcopy
+from typing import Any
 
+from .queries import contextual_claims_for_entity
 from .repository import Record, RecordRepository
 
 
@@ -60,6 +63,55 @@ def explain_claim(repository: RecordRepository, claim_id: str) -> Record:
         "evidence_count": len(chains),
         "evidence_chains": chains,
     }
+
+
+def explain_contextual_guidance(
+    repository: RecordRepository,
+    entity_id: str,
+    *,
+    context: Mapping[str, Any] | None = None,
+) -> Record:
+    """Return context-filtered trusted Claims together with exact provenance chains.
+
+    Context selection remains wholly delegated to ``contextual_claims_for_entity``;
+    this function adds no ranking, fallback, scoring, or winner selection. Every
+    candidate is independently reconstructed through ``explain_claim``. If a Claim
+    changes between context selection and explanation, the operation fails closed
+    rather than returning stale trusted guidance.
+    """
+
+    query_result = contextual_claims_for_entity(
+        repository,
+        entity_id,
+        context=context,
+    )
+    candidate_ids = query_result.get("candidate_claim_ids")
+    claims = query_result.get("claims")
+    if not isinstance(candidate_ids, list) or not isinstance(claims, list):
+        raise ExplanationError("contextual query returned an invalid candidate shape")
+    if len(candidate_ids) != len(claims):
+        raise ExplanationError("contextual query candidate IDs and Claims differ in length")
+
+    explanations: list[Record] = []
+    for candidate_id, selected_claim in zip(candidate_ids, claims, strict=True):
+        if not isinstance(candidate_id, str) or not candidate_id:
+            raise ExplanationError("contextual query returned an invalid candidate Claim ID")
+        if not isinstance(selected_claim, dict) or selected_claim.get("id") != candidate_id:
+            raise ExplanationError(
+                f"contextual query candidate Claim does not match its ID: {candidate_id}"
+            )
+
+        explanation = explain_claim(repository, candidate_id)
+        if explanation["claim"] != selected_claim:
+            raise ExplanationError(
+                f"contextual guidance Claim changed during explanation: {candidate_id}"
+            )
+        explanations.append(explanation)
+
+    result = deepcopy(query_result)
+    result["explanation_count"] = len(explanations)
+    result["claim_explanations"] = explanations
+    return result
 
 
 def explain_relation_result(repository: RecordRepository, result: Record) -> Record:
