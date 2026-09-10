@@ -186,3 +186,120 @@ A future human review could test these independently against actual KNEEKURA pre
 `STAGING_ONLY`
 
 No Knowledge Entity, Claim maturity transition, canonical relation, recommendation winner, or automatic adoption decision was created by this harvest cycle.
+
+---
+
+# Cycle 11 append — 2026-09-10
+
+Status: **STAGING / NON-CANONICAL**
+
+This append is discovery material only. Star counts below were used to prioritize inspection, not as evidence of correctness. Cycle 01-10 topics and Draft PR summaries were checked first; the findings below were selected as non-duplicate technique families. No Knowledge Entity or validated/canonical claim is created here.
+
+## C11-01 — Work-stealing DFS stack to reduce traversal working-set memory
+
+**Repository:** `BurntSushi/ripgrep`
+
+**Discovery metadata at capture:** 68,146 GitHub stars; repository metadata reports Unlicense.
+
+**Pinned revision:** `3fce3b5bb0236da2df6d99672afb8a719642eca7`
+
+**Evidence:**
+
+- path: `crates/ignore/src/walk.rs`
+- section: parallel walker `Worker` and its work-stealing `stack`
+- source URL: `https://github.com/BurntSushi/ripgrep/blob/3fce3b5bb0236da2df6d99672afb8a719642eca7/crates/ignore/src/walk.rs`
+
+### Observed technique
+
+The parallel directory walker deliberately uses a **work-stealing stack** rather than a channel. The implementation comment states that the stack preserves depth-first traversal, which substantially reduces peak memory by keeping fewer file paths and fewer gitignore matchers resident at once. Parallelism is retained through work stealing rather than by abandoning locality and queueing a broad frontier.
+
+### Why it may be useful
+
+Large repository scans can consume surprising memory when breadth-first or producer-heavy traversal discovers a huge frontier faster than consumers process it. A depth-first local stack with stealing can preserve parallel work while constraining the active working set.
+
+Possible KNEEKURA applications include repository crawling, recursive evidence collection, asset discovery, and Code Police scans where directory-local state is expensive and exact event ordering is not semantically significant.
+
+### Limitations / applicability
+
+- Depth-first traversal can change latency distribution: files in other branches may be discovered later than with breadth-first traversal.
+- Work stealing adds synchronization and implementation complexity; on small trees a simple serial walk may be better.
+- The memory advantage depends on directory topology and per-directory state. It must be benchmarked on KNEEKURA repositories rather than assumed.
+- This is unsuitable where strict global traversal order is part of the contract.
+
+**Confidence:** high that ripgrep intentionally uses this structure for working-set reduction; KNEEKURA benefit is unmeasured.
+
+## C11-02 — Separate concurrency budgets for independent workload classes
+
+**Repository:** `hashicorp/terraform`
+
+**Discovery metadata at capture:** 49,631 GitHub stars. GitHub repository metadata reports license `NOASSERTION`; source handling should therefore remain locator/summary based unless independently authorized.
+
+**Pinned revision:** `91d26c7ab817693a710a35639cf7995369d42986`
+
+**Evidence:**
+
+- path: `internal/terraform/eval_context.go`
+- section: `EvalContext.PolicySemaphore()` contract
+- source URL: `https://github.com/hashicorp/terraform/blob/91d26c7ab817693a710a35639cf7995369d42986/internal/terraform/eval_context.go`
+
+### Observed technique
+
+Terraform exposes a **policy-evaluation semaphore separate from the provider-operation semaphore**. The contract explicitly says the separation exists so policy evaluations do not consume provider parallelism slots.
+
+The reusable idea is not the specific semaphore implementation, but **concurrency-domain isolation**: workloads with different latency, failure, or importance characteristics receive independent admission budgets instead of competing under one global limit.
+
+### Why it may be useful
+
+A single global worker cap can allow a slow auxiliary class to occupy every slot needed by a critical class. KNEEKURA could potentially separate budgets for, for example, interactive command handling, evidence acquisition, model inference, background indexing, or policy/audit work while still enforcing a higher parent machine ceiling separately.
+
+### Limitations / applicability
+
+- Too many independent pools can strand capacity and reduce utilization.
+- Separate semaphores do not by themselves prevent total RAM/VRAM/CPU exhaustion; they should coexist with global resource ceilings where needed.
+- Capacity ratios are workload-specific and can create starvation if misconfigured.
+- Terraform's exact policy/provider split reflects Terraform's architecture and should not be copied literally.
+
+**Confidence:** high for the isolation intent; the right KNEEKURA workload classes and budgets are unknown pending measurement.
+
+## C11-03 — Generation-based live worker replacement with fail-safe reconfiguration
+
+**Repository:** `nginx/nginx`
+
+**Discovery metadata at capture:** 31,616 GitHub stars; BSD-2-Clause license.
+
+**Pinned revision:** `df5269cc425f4cb1288fb8ca9f7e22166103feee`
+
+**Evidence:**
+
+- path: `src/os/unix/ngx_process_cycle.c`
+- section: `ngx_master_process_cycle`, `ngx_reconfigure` branch
+- source URL: `https://github.com/nginx/nginx/blob/df5269cc425f4cb1288fb8ca9f7e22166103feee/src/os/unix/ngx_process_cycle.c`
+
+### Observed technique
+
+On reconfiguration, the master first attempts to initialize a new cycle. If that initialization fails, it restores/continues with the prior cycle instead of destroying the working generation. If initialization succeeds, it starts the new worker generation, gives the new processes a short opportunity to start, and only then signals the old workers to shut down gracefully.
+
+The reusable pattern is **prepare new generation → fail closed to old generation if preparation fails → activate new generation → drain old generation**, rather than mutating a live worker set in place.
+
+### Why it may be useful
+
+This can reduce interruption and partial-state failure when restarting long-lived components. Potential KNEEKURA applications include replacing local model workers, Minecraft observation hosts, browser/command bridges, plugin hosts, or other services where a new generation can be health-checked before the old generation is retired.
+
+### Limitations / applicability
+
+- NGINX's fixed short startup pause is implementation-specific; KNEEKURA should prefer an explicit readiness predicate where available rather than copying a time delay.
+- Running old and new generations concurrently temporarily increases resource use and may be impossible for large GPU models.
+- In-flight ownership, sockets/ports, file locks, and external side effects need explicit handoff semantics.
+- Graceful draining does not guarantee zero-loss behavior unless the protocol itself supports transfer/retry of in-flight work.
+
+**Confidence:** high for the NGINX process-generation pattern; direct applicability varies sharply by worker type and resource footprint.
+
+## Cycle 11 synthesis (research hypothesis only)
+
+The three findings point to three different places where system shape can control failure pressure without adding a large framework: use locality-preserving traversal to limit working set, isolate concurrency classes so auxiliary work cannot monopolize critical capacity, and replace live workers by generation rather than destructive in-place mutation. They are independent candidates and should be tested separately.
+
+## Cycle 11 promotion status
+
+`STAGING_ONLY`
+
+No `VALIDATED` claim, canonical Knowledge Entity, canonical relation, implementation mandate, or automatic adoption decision was created by Cycle 11.
