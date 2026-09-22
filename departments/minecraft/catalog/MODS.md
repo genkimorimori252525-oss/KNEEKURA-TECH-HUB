@@ -1,14 +1,19 @@
-# Minecraft Mod Analysis Catalog
+# Minecraft Technology Analysis Catalog
 
-**Canonical compatibility:** Minecraft **1.20.1** + **Forge**
+**Adaptation anchor:** Minecraft **1.20.1 + Forge**
 
-| Mod | Source Snapshot | Overall status | AI | Rendering / Textures | Worldgen | Network | Performance |
-|---|---|---|---|---|---|---|---|
-| [The Twilight Forest](../mods/twilight-forest/README.md) | NOT_PINNED | QUEUED | NOT_ANALYZED | NOT_ANALYZED | NOT_ANALYZED | NOT_ANALYZED | NOT_ANALYZED |
+**Discovery frontier:** latest useful upstream implementation, regardless of Forge / NeoForge / Fabric when technically relevant.
+
+| Queue | Target | Kind | ANCHOR — 1.20.1 Forge | FRONTIER — latest useful upstream | Overall |
+|---:|---|---|---|---|---|
+| 1 | [The Twilight Forest](../mods/twilight-forest/README.md) | content/gameplay Mod | NOT_PINNED | NOT_PINNED | QUEUED |
+| 2 | [Sinytra Connector](../mods/sinytra-connector/README.md) | loader compatibility / translation layer | branch 1.20.1 identified; NOT_PINNED | branch 26.1.x; 26.1.2 primary upstream; NOT_PINNED | QUEUED |
 
 ## Rules
 
-- One row = one exact 1.20.1 Forge Mod target.
-- Do not mix results from Fabric, NeoForge, or another Minecraft version into the same row.
-- `NOT_PINNED` means the exact release/tag/commit/JAR hash has not yet been fixed and technical conclusions must not be treated as reproducible.
-- Detailed evidence belongs under each Mod directory; this file remains the fast cross-Mod overview.
+- One target may have multiple independently pinned version/loader tracks.
+- ANCHOR evidence and FRONTIER evidence must never be silently mixed.
+- Preserve native 1.20.1 Forge code when it exists.
+- Preserve and analyze newer upstream code too.
+- If no native 1.20.1 Forge implementation exists, create an explicit backport/adaptation analysis instead of discarding the target.
+- NOT_PINNED means the exact immutable snapshot is not fixed enough for reproducible technical claims.
