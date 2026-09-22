@@ -15,11 +15,12 @@
       "minecraft_version": "1.20.1",
       "loader": "Forge",
       "source_snapshot": {
-        "status": "IN_PROGRESS",
+        "status": "PINNED",
         "repository": "TeamTwilight/twilightforest",
         "branch": "1.20.1",
         "release": "4.3.2508",
-        "commit": "a7dd8f13c653e137f977f5ffaa870fcb20fc1625"
+        "commit": "a7dd8f13c653e137f977f5ffaa870fcb20fc1625",
+        "jar_sha256": "0bdc89263616d1b35c32ef82c5e9c14cbd20368e2fe8b468c72a28320be7a778"
       },
       "facets": {
         "architecture": "MAPPED",
@@ -83,6 +84,7 @@
     "CUSTOM-DATA-PORTABILITY.md",
     "CUSTOM-DATA-PORTABILITY.json",
     "ANCHOR-JAR-PROVENANCE.md",
+    "ANCHOR-JAR-EVIDENCE.json",
     "RUNTIME-EVIDENCE-SPEC.md",
     "tools/verify_anchor_jar.py",
     "AI-PORTABILITY.md",
@@ -93,7 +95,7 @@
     "tools/build_render_asset_graph.py"
   ],
   "notes": [
-    "ANCHOR commit is the strongest public-source candidate found for CurseForge 4.3.2508; exact distributed-binary identity remains unproven.",
+    "ANCHOR distributed JAR 4.3.2508 is pinned at SHA-256 0bdc89263616d1b35c32ef82c5e9c14cbd20368e2fe8b468c72a28320be7a778; all 6,156 comparable source resources exactly match commit a7dd8f13 with zero mismatches or missing paths. Compiled-class identity remains a separate proof boundary.",
     "Upstream issue #2345 records a developer statement that a later source fix apparently was not uploaded to CurseForge, so distributed JAR and later public source remain separate evidence.",
     "FRONTIER TFStructures declares 25 keys; 21 are bootstrapped/generated in the pinned snapshot, while quest_island, druid_grove, floating_ruins and world_tree are declaration-only.",
     "FRONTIER entity rendering v1 complete: all 81 EntityType registrations have renderer/model/layer/asset-selection strategy classified; global block/item JSON-model graph remains separate pending work.",
@@ -101,7 +103,6 @@
     "FRONTIER custom data graph complete: all 290 generated twilight/* records are tied to immutable blob SHAs and mapped to loading mode, codec boundary and primary runtime consumers.",
     "ANCHOR entity rendering source map is complete for 82 registrations / 67 local renderer classes, including the 24-entity JAPPA presentation switch and multipart renderer switches.",
     "Custom-data portability mapped: ANCHOR has 21 canonical twilight/* records across 4 families plus 12 legacy stalactite records; FRONTIER has 290 records across 14 families. Stable, schema-adapted, refactored and newly data-driven systems have explicit 1.20.1 strategies.",
-    "ANCHOR JAR verifier prepared: once file 5468648 is reachable, it records SHA-256/SHA-1/metadata and computes exact Git-blob resource correspondence against the pinned a7dd8f13 source inventory.",
     "Runtime evidence specification prepared for startup, worldgen, structures, eight bosses, multipart stress, rendering, networking and reload profiling; no measured performance claim is promoted yet.",
     "AI portability v1 complete: 132 AI/entity Java paths compared across tracks (111 changed / 15 added / 6 identical / 0 removed); all 53 FRONTIER non-boss inheritance/imperative cases and all 43 custom Goal lifecycles are cataloged.",
     "Compatibility feature matrix v1 complete: ANCHOR has 29 compatibility-related Java files; FRONTIER has 106, with ACTIVE Curios/Jade/JEI and DISABLED TOP/EMI/REI knowledge kept distinct.",
