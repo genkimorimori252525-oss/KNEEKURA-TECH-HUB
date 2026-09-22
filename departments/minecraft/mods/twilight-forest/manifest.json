@@ -72,10 +72,14 @@
     "VERSION-PORTABILITY.md",
     "LICENSE-PROVENANCE.md",
     "ASM-PATCHES.md",
-    "PERFORMANCE.md"
+    "PERFORMANCE.md",
+    "MOB-AI-CATALOG.json",
+    "STRUCTURES.md",
+    "STRUCTURE-CATALOG.json"
   ],
   "notes": [
     "ANCHOR commit is the strongest public-source candidate found for CurseForge 4.3.2508; exact distributed-binary identity remains unproven.",
-    "Upstream issue #2345 records a developer statement that a later source fix apparently was not uploaded to CurseForge, so distributed JAR and later public source remain separate evidence."
+    "Upstream issue #2345 records a developer statement that a later source fix apparently was not uploaded to CurseForge, so distributed JAR and later public source remain separate evidence.",
+    "FRONTIER TFStructures declares 25 keys; 21 are bootstrapped/generated in the pinned snapshot, while quest_island, druid_grove, floating_ruins and world_tree are declaration-only."
   ]
 }
