@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0.0",
+  "source_snapshot": "TeamTwilight/twilightforest@793c4d4c7b0a2892f702cbb9a8d751fbe7218828",
+  "registration": "src/main/java/twilightforest/events/RegistrationEvents.java",
+  "protocol_version": "1.0.0",
+  "optional": true,
+  "counts": {
+    "server_to_client": 21,
+    "client_to_server": 6,
+    "bidirectional": 2,
+    "total": 29
+  },
+  "server_to_client": [
+    "AreaProtectionPacket",
+    "CreateMovingCicadaSoundPacket",
+    "EnforceProgressionStatusPacket",
+    "MagicMapPacket",
+    "MazeMapPacket",
+    "MissingAdvancementToastPacket",
+    "MovePlayerPacket",
+    "ParticlePacket",
+    "SpawnCharmPacket",
+    "SpawnFallenLeafFromPacket",
+    "StructureProtectionPacket",
+    "SyncUncraftingTableConfigPacket",
+    "UpdateTFMultipartPacket",
+    "UpdateThrownPacket",
+    "LifedrainParticlePacket",
+    "UpdateDeathTimePacket",
+    "TFBossBarPacket.AddTFBossBarPacket",
+    "TFBossBarPacket.UpdateTFBossBarStylePacket",
+    "SetMasonJarItemPacket",
+    "SyncQuestsPacket",
+    "TravellersWingsStatePacket"
+  ],
+  "client_to_server": [
+    "PerformDoubleJumpPacket",
+    "SwapHotbarPacket",
+    "PerformSidestepPacket",
+    "CycleMapSlotPacket",
+    "UncraftingGuiPacket",
+    "WipeOreMeterPacket"
+  ],
+  "bidirectional": [
+    "GogglesZoomPacket",
+    "GradualGlidePacket"
+  ]
+}
