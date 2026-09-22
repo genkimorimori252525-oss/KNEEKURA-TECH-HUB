@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.1.0",
+  "target_id": "twilight-forest",
+  "display_name": "The Twilight Forest",
+  "target_kind": "content/gameplay Mod",
+  "adaptation_anchor": {
+    "minecraft_version": "1.20.1",
+    "loader": "Forge"
+  },
+  "overall_status": "IN_PROGRESS",
+  "tracks": [
+    {
+      "track_id": "anchor-1.20.1-forge-4.3.2508-source-candidate",
+      "role": "ANCHOR",
+      "minecraft_version": "1.20.1",
+      "loader": "Forge",
+      "source_snapshot": {
+        "status": "IN_PROGRESS",
+        "repository": "TeamTwilight/twilightforest",
+        "branch": "1.20.1",
+        "release": "4.3.2508",
+        "commit": "a7dd8f13c653e137f977f5ffaa870fcb20fc1625"
+      },
+      "facets": {
+        "architecture": "MAPPED",
+        "ai": "MAPPED",
+        "worldgen": "MAPPED",
+        "networking": "MAPPED",
+        "rendering_assets": "INVENTORIED",
+        "data_assets": "INVENTORIED",
+        "performance": "NOT_ANALYZED",
+        "compatibility": "MAPPED",
+        "version_portability": "MAPPED",
+        "license_provenance": "MAPPED"
+      }
+    },
+    {
+      "track_id": "frontier-26.1.2-neoforge-latest",
+      "role": "FRONTIER",
+      "minecraft_version": "26.1.2",
+      "loader": "NeoForge",
+      "source_snapshot": {
+        "status": "PINNED",
+        "repository": "TeamTwilight/twilightforest",
+        "branch": "latest",
+        "commit": "793c4d4c7b0a2892f702cbb9a8d751fbe7218828"
+      },
+      "facets": {
+        "architecture": "MAPPED",
+        "ai": "MAPPED",
+        "worldgen": "MAPPED",
+        "networking": "MAPPED",
+        "rendering_assets": "INVENTORIED",
+        "data_assets": "INVENTORIED",
+        "performance": "NOT_ANALYZED",
+        "compatibility": "MAPPED",
+        "version_portability": "MAPPED",
+        "license_provenance": "MAPPED"
+      }
+    }
+  ],
+  "analysis_paths": [
+    "inventory/anchor-a7dd8f13-files.json",
+    "inventory/frontier-793c4d4c-files.json",
+    "OVERVIEW.md",
+    "CODE-MAP.md",
+    "AI-BEHAVIOR.md",
+    "WORLDGEN.md",
+    "NETWORKING.md",
+    "VERSION-PORTABILITY.md",
+    "LICENSE-PROVENANCE.md"
+  ],
+  "notes": [
+    "ANCHOR commit is the strongest public-source candidate found for CurseForge 4.3.2508 because it is the final public 1.20.1 commit before the file upload and matches the release note's Discord URL change; exact binary-to-source identity is not yet proven.",
+    "Upstream developer stated in issue #2345 that a later fix existed but apparently was never uploaded to CurseForge, so distributed 4.3.2508 and later public source must remain separate evidence."
+  ]
+}

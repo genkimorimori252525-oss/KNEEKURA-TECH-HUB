@@ -3,41 +3,35 @@
 ## Queue
 
 - Priority: **1**
-- Target: The Twilight Forest
+- Upstream: `TeamTwilight/twilightforest`
 - Kind: content/gameplay Mod
-- Status: **QUEUED**
+- Status: **IN_PROGRESS**
 
-## Required tracks
+## Tracks
 
-### ANCHOR
-- Minecraft: **1.20.1**
-- Loader: **Forge**
-- Source Snapshot: **NOT_PINNED**
+### ANCHOR — Minecraft 1.20.1 + Forge
 
-### FRONTIER
-- Target: latest useful upstream release/branch at analysis time
-- Minecraft / Loader: **NOT_PINNED**
-- Source Snapshot: **NOT_PINNED**
+- Distributed target: `4.3.2508`
+- Public-source candidate pinned: `a7dd8f13c653e137f977f5ffaa870fcb20fc1625`
+- Full public-source tree inventory: **complete**
+- Exact distributed-JAR ↔ source identity: **not yet proven**
 
-Both tracks must remain separate. VERSION-PORTABILITY.md will explain which newer implementation ideas can be reconstructed safely for 1.20.1 Forge.
+### FRONTIER — Minecraft 26.1.2 + NeoForge
 
-## Planned full analysis
+- Commit pinned: `793c4d4c7b0a2892f702cbb9a8d751fbe7218828`
+- Full tree inventory: **complete**
 
-- bootstrap / loader registration / lifecycle
-- entity and boss AI
-- navigation / targeting / state machines
-- progression systems
-- dimensions / biomes / structures / world generation
-- blocks / items / block entities
-- networking and synchronization
-- rendering / models / animation
-- textures, atlases, sprites, UV references
-- particles / shaders / special render paths
-- sounds / music
-- recipes / loot / tags / advancements / language
-- compatibility / integrations / patch surfaces
-- performance-sensitive code
-- cross-version portability
-- license and provenance
+## Current analysis coverage
 
-Exact ANCHOR and FRONTIER SourceSnapshots must be pinned separately before reproducible implementation claims are accepted.
+- bootstrap / registries: mapped
+- major boss architecture: first-pass mapped
+- networking: mapped
+- worldgen architecture: mapped
+- rendering/model/asset files: inventoried, detailed dependency mapping pending
+- data assets: inventoried
+- performance: pending
+- full mob AI catalog: pending
+- full structure catalog: pending
+- texture ↔ model ↔ renderer map: pending
+
+See the sibling Markdown reports and `inventory/` manifests for evidence-backed progress.
