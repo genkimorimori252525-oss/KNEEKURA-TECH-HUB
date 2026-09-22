@@ -7,7 +7,7 @@ This directory stores exhaustive path-level inventories derived from immutable u
 - Repository: `TeamTwilight/twilightforest`
 - Commit: `a7dd8f13c653e137f977f5ffaa870fcb20fc1625`
 - Role: Minecraft 1.20.1 / Forge release-source candidate for CurseForge 4.3.2508
-- Evidence: CurseForge file 5468648 was uploaded 2024-06-24 18:35 UTC; this is the final commit on the public 1.20.1 branch before that upload (2024-06-24 17:58 UTC), and its Discord URL change matches the 4.3.2508 release note.
+- Evidence: CurseForge file 5468648 is dated 2024-06-24. Public commit `a7dd8f13c653e137f977f5ffaa870fcb20fc1625` is also dated 2024-06-24, remains on the 1.20.1 line, and its Discord-URL change matches a 4.3.2508 release-note item. This makes it the strongest public source candidate identified so far, but the exact distributed-JAR ↔ source identity is still unproven.
 - Status: source pinned; exact binary-to-source identity remains to be proven by JAR hash/build metadata.
 
 Counts:
