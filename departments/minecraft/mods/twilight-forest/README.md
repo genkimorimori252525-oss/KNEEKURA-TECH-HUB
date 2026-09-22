@@ -39,12 +39,12 @@
 - version portability: first-pass mapped
 - performance: hot-path/caching hypotheses inventoried; reproducible runtime evidence spec prepared, measurements pending
 - full FRONTIER mob AI catalog: mapped for all 53 non-boss classes, including inherited/imperative semantics\n- ANCHOR↔FRONTIER AI portability: mapped for 132 AI/entity Java paths; principal boss refactors classified\n- compatibility feature evolution: mapped for Curios/Jade/JEI/TOP/EMI/REI with ACTIVE vs DISABLED state
-- full FRONTIER structure catalog: mapped (25 declared keys / 21 active generated / 4 declared-only / 19 own Structure Sets)\n- global block/item render graph: extractor implemented for 528 blockstates + 1,773 models + 663 item definitions + texture/atlas resolution; LAB full-checkout execution requested
+- full FRONTIER structure catalog: mapped (25 declared keys / 21 active generated / 4 declared-only / 19 own Structure Sets)\n- global block/item render graph: **complete for both pinned tracks**; full-checkout FRONTIER + ANCHOR graphs and cross-track portability comparison generated on self-hosted runner `Jolly-TechHub` (run `35767314089`)
 
 See the sibling reports and `inventory/` manifests for evidence-backed progress.
 
 ## Remaining high-priority work
 
-- materialize and integrate the full block/item render graph from the LAB run
 - runtime performance and compatibility measurements
+- review the bounded unresolved local render references (FRONTIER 17 / ANCHOR 15) when a consuming backport needs those exact paths; they are retained explicitly in the generated graphs rather than silently resolved
 - optional class-level reproducible-build comparison if compiled-code identity is ever required
