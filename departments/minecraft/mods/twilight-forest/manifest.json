@@ -84,7 +84,13 @@
     "CUSTOM-DATA-PORTABILITY.json",
     "ANCHOR-JAR-PROVENANCE.md",
     "RUNTIME-EVIDENCE-SPEC.md",
-    "tools/verify_anchor_jar.py"
+    "tools/verify_anchor_jar.py",
+    "AI-PORTABILITY.md",
+    "AI-PORTABILITY-MATRIX.json",
+    "COMPATIBILITY-MATRIX.md",
+    "COMPATIBILITY-MATRIX.json",
+    "RENDER-ASSET-GRAPH-SPEC.md",
+    "tools/build_render_asset_graph.py"
   ],
   "notes": [
     "ANCHOR commit is the strongest public-source candidate found for CurseForge 4.3.2508; exact distributed-binary identity remains unproven.",
@@ -96,6 +102,9 @@
     "ANCHOR entity rendering source map is complete for 82 registrations / 67 local renderer classes, including the 24-entity JAPPA presentation switch and multipart renderer switches.",
     "Custom-data portability mapped: ANCHOR has 21 canonical twilight/* records across 4 families plus 12 legacy stalactite records; FRONTIER has 290 records across 14 families. Stable, schema-adapted, refactored and newly data-driven systems have explicit 1.20.1 strategies.",
     "ANCHOR JAR verifier prepared: once file 5468648 is reachable, it records SHA-256/SHA-1/metadata and computes exact Git-blob resource correspondence against the pinned a7dd8f13 source inventory.",
-    "Runtime evidence specification prepared for startup, worldgen, structures, eight bosses, multipart stress, rendering, networking and reload profiling; no measured performance claim is promoted yet."
+    "Runtime evidence specification prepared for startup, worldgen, structures, eight bosses, multipart stress, rendering, networking and reload profiling; no measured performance claim is promoted yet.",
+    "AI portability v1 complete: 132 AI/entity Java paths compared across tracks (111 changed / 15 added / 6 identical / 0 removed); all 53 FRONTIER non-boss inheritance/imperative cases and all 43 custom Goal lifecycles are cataloged.",
+    "Compatibility feature matrix v1 complete: ANCHOR has 29 compatibility-related Java files; FRONTIER has 106, with ACTIVE Curios/Jade/JEI and DISABLED TOP/EMI/REI knowledge kept distinct.",
+    "Global render-asset extractor implemented for 528 blockstates, 1,773 models, 663 modern item definitions, atlas data and 1,159 textures; full-checkout graph execution remains pending."
   ]
 }
