@@ -6,11 +6,11 @@
     "minecraft": "26.1.2",
     "loader": "NeoForge"
   },
-  "scope": "Direct GoalSelector/TargetSelector registrations for non-boss hostile/allied/passive entity classes under entity/monster and entity/passive.",
+  "scope": "Direct GoalSelector/TargetSelector registrations plus resolved inheritance/imperative behavior for all non-boss hostile/allied/passive entity classes under entity/monster and entity/passive.",
   "caveats": [
-    "This is a direct-registration catalog, not a claim that it captures every behavior.",
-    "Inherited vanilla/custom goals, imperative tick/aiStep logic, nested anonymous Goal subclasses, sensors and non-Goal state machines require separate semantic analysis.",
-    "Bosses are cataloged separately in BOSS-AI-MATRIX.json."
+    "Direct registrations were machine-cataloged and then inheritance/imperative false negatives were manually reviewed.",
+    "Vanilla parent internals are referenced semantically rather than copied into this repository.",
+    "Bosses remain cataloged separately in BOSS-AI-MATRIX.json."
   ],
   "counts": {
     "monster_classes": 42,
@@ -121,7 +121,12 @@
       "direct_goal_registrations": [],
       "direct_target_registrations": [],
       "direct_control_assignments": [],
-      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative."
+      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative.",
+      "inheritance_resolution": {
+        "mode": "custom_parent_inheritance",
+        "resolved_from": "GiantMiner",
+        "summary": "Inherits GiantMiner goals: Float, melee, random stroll, look, HurtByTarget and player targeting; class specializes giant equipment/stats rather than scheduler composition."
+      }
     },
     {
       "class_name": "BaseIceMob",
@@ -131,7 +136,12 @@
       "direct_goal_registrations": [],
       "direct_target_registrations": [],
       "direct_control_assignments": [],
-      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative."
+      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative.",
+      "inheritance_resolution": {
+        "mode": "abstract_base",
+        "resolved_from": "Monster",
+        "summary": "Abstract shared ice-mob behavior base; does not define a complete Goal set itself. Concrete subclasses provide their own scheduler composition."
+      }
     },
     {
       "class_name": "BlockChainGoblin",
@@ -258,7 +268,12 @@
       "direct_goal_registrations": [],
       "direct_target_registrations": [],
       "direct_control_assignments": [],
-      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative."
+      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative.",
+      "inheritance_resolution": {
+        "mode": "custom_parent_inheritance",
+        "resolved_from": "CarminiteGhastguard",
+        "summary": "Inherits GhastguardHomedFlightGoal, GhastguardRandomFlyGoal, GhastLookGoal, GhastguardAttackGoal and player target selection from CarminiteGhastguard."
+      }
     },
     {
       "class_name": "CarminiteGolem",
@@ -616,7 +631,12 @@
       "direct_goal_registrations": [],
       "direct_target_registrations": [],
       "direct_control_assignments": [],
-      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative."
+      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative.",
+      "inheritance_resolution": {
+        "mode": "vanilla_parent_inheritance_plus_spawn_behavior",
+        "resolved_from": "Spider",
+        "summary": "Inherits vanilla Spider goals. finalizeSpawn additionally creates a SkeletonDruid jockey and mounts it on the deepest current rider."
+      }
     },
     {
       "class_name": "Kobold",
@@ -806,7 +826,12 @@
       "direct_goal_registrations": [],
       "direct_target_registrations": [],
       "direct_control_assignments": [],
-      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative."
+      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative.",
+      "inheritance_resolution": {
+        "mode": "vanilla_parent_inheritance",
+        "resolved_from": "Slime",
+        "summary": "Inherits vanilla Slime movement/target behavior; class mainly specializes spawning/stats/presentation."
+      }
     },
     {
       "class_name": "Minotaur",
@@ -859,7 +884,12 @@
       "direct_goal_registrations": [],
       "direct_target_registrations": [],
       "direct_control_assignments": [],
-      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative."
+      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative.",
+      "inheritance_resolution": {
+        "mode": "custom_parent_inheritance",
+        "resolved_from": "HostileWolf",
+        "summary": "Inherits HostileWolf Float/Leap/Melee/Stroll/look and hostile target selection including players, prey animals, baby turtles and skeletons."
+      }
     },
     {
       "class_name": "MosquitoSwarm",
@@ -1008,17 +1038,41 @@
       "direct_goal_registrations": [],
       "direct_target_registrations": [],
       "direct_control_assignments": [],
-      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative."
+      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative.",
+      "inheritance_resolution": {
+        "mode": "imperative_ai_step",
+        "resolved_from": "none",
+        "summary": "No complete Goal scheduler. Every 10 ticks while dormant it checks for a nearby player looking toward it; once triggered, RISING_TICKS advances, client particles/sounds present emergence, and at 130 ticks the entity converts into a vanilla Zombie while preserving health/yaw."
+      }
     },
     {
       "class_name": "SkeletonDruid",
       "source_path": "src/main/java/twilightforest/entity/monster/SkeletonDruid.java",
       "parent_class": "AbstractSkeleton",
       "kind": "hostile",
-      "direct_goal_registrations": [],
-      "direct_target_registrations": [],
+      "direct_goal_registrations": [
+        {
+          "priority": "inherited",
+          "goal": "AbstractSkeleton.registerGoals()"
+        },
+        {
+          "priority": 4,
+          "goal": "RangedAttackGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": "inherited",
+          "goal": "AbstractSkeleton target goals"
+        }
+      ],
       "direct_control_assignments": [],
-      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative."
+      "inheritance_note": "Resolved manually: calls super.registerGoals(), adds RangedAttackGoal, and reassesses ranged/melee behavior from held weapon.",
+      "inheritance_resolution": {
+        "mode": "vanilla_parent_plus_direct_goal",
+        "resolved_from": "AbstractSkeleton",
+        "summary": "Calls super.registerGoals(), then adds its own RangedAttackGoal at priority 4. reassessWeaponGoal removes/re-adds it when holding a HoeItem, otherwise delegates weapon-goal selection back to AbstractSkeleton."
+      }
     },
     {
       "class_name": "SlimeBeetle",
@@ -1168,7 +1222,12 @@
       "direct_goal_registrations": [],
       "direct_target_registrations": [],
       "direct_control_assignments": [],
-      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative."
+      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative.",
+      "inheritance_resolution": {
+        "mode": "custom_parent_inheritance",
+        "resolved_from": "SwarmSpider",
+        "summary": "Inherits SwarmSpider's modified Spider scheduler: inherited Spider goals with melee/player-target replacement. Also retains SwarmSpider jockey lifecycle while specializing broodling behavior."
+      }
     },
     {
       "class_name": "TowerwoodBorer",
@@ -1448,7 +1507,12 @@
       "direct_goal_registrations": [],
       "direct_target_registrations": [],
       "direct_control_assignments": [],
-      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative."
+      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative.",
+      "inheritance_resolution": {
+        "mode": "vanilla_parent_inheritance",
+        "resolved_from": "Sheep",
+        "summary": "Inherits Sheep goals; class specializes breeding/color/spawn and presentation behavior."
+      }
     },
     {
       "class_name": "Bird",
@@ -1458,7 +1522,12 @@
       "direct_goal_registrations": [],
       "direct_target_registrations": [],
       "direct_control_assignments": [],
-      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative."
+      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative.",
+      "inheritance_resolution": {
+        "mode": "abstract_imperative_movement_base",
+        "resolved_from": "Animal",
+        "summary": "Abstract bird base does not define goals; aiStep handles flap intensity and slows falling. Concrete subclasses such as FlyingBird provide scheduler composition."
+      }
     },
     {
       "class_name": "Boar",
@@ -1736,7 +1805,12 @@
       "direct_goal_registrations": [],
       "direct_target_registrations": [],
       "direct_control_assignments": [],
-      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative."
+      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative.",
+      "inheritance_resolution": {
+        "mode": "custom_parent_inheritance",
+        "resolved_from": "FlyingBird",
+        "summary": "Inherits FlyingBird Float/Panic/Tempt/Stroll/Look goals and custom airborne movement logic."
+      }
     },
     {
       "class_name": "Squirrel",
@@ -1814,5 +1888,24 @@
       "direct_target_registrations": [],
       "direct_control_assignments": []
     }
-  ]
+  ],
+  "inheritance_review": {
+    "status": "COMPLETE_FOR_DIRECTLY_CATALOGED_53_CLASSES",
+    "reviewed_no_direct_candidates": [
+      "ArmoredGiant",
+      "BaseIceMob",
+      "CarminiteGhastling",
+      "KingSpider",
+      "MazeSlime",
+      "MistWolf",
+      "RisingZombie",
+      "SkeletonDruid",
+      "TowerBroodling",
+      "Bighorn",
+      "Bird",
+      "Raven"
+    ],
+    "corrected_false_negative": "SkeletonDruid",
+    "imperative_exception": "RisingZombie"
+  }
 }
