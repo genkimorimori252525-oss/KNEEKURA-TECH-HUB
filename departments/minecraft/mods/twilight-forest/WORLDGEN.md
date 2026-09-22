@@ -143,3 +143,45 @@ A safer migration path:
 6. only then consider deeper vanilla-generator integration.
 
 The reusable technology is **separation of terrain policy from the chunk generator**, not a particular modern API call.
+
+## FRONTIER dimension pipeline
+
+The generated dimension data proves the current dimension is layered on the vanilla noise generator:
+
+```text
+twilightforest:twilight_forest
+        ↓
+generator: minecraft:noise
+        ↓
+biome_source: twilightforest:twilight_biomes
+        ↓
+terrain_data: twilightforest:biome_grid
+        ↓
+settings: twilightforest:twilight_noise_gen
+        ↓
+final_density / preliminary_surface_level
+        = twilightforest:forested_terrain
+```
+
+### Dimension properties observed
+
+- dimension type height/logical height: **288**
+- min Y: **-32**
+- coordinate scale: **0.125**
+- fixed time: enabled
+- skylight: enabled
+- custom NeoForge skybox: `twilightforest:renderer`
+- custom weather: `twilightforest:weather`
+
+### Noise settings observed
+
+- noise height: **256**
+- min Y: **-32**
+- sea level: **0**
+- aquifers: disabled
+- ore veins: disabled
+- final density: `twilightforest:forested_terrain`
+
+`TFBiomeProvider` is a custom `BiomeSource` backed by datapack registry `BIOME_TERRAIN_DATA`, so biome selection and terrain-density policy are connected through data instead of living only inside one chunk-generator implementation.
+
+Machine-readable copy: `WORLDGEN-PIPELINE.json`.
