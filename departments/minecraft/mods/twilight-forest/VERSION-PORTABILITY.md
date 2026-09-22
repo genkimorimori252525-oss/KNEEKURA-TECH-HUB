@@ -51,3 +51,32 @@ FRONTIER has more renderer classes and newer custom model/pipeline/special-rende
 ## Source-distribution warning
 
 The public 1.20.1 source history and distributed 4.3.2508 must remain distinct evidence. Upstream issue #2345 includes a developer statement that a fix already existed but apparently had not been uploaded to CurseForge. Therefore later branch state cannot be assumed to equal the distributed JAR.
+
+## Custom data portability
+
+The custom-data delta is now mapped in `CUSTOM-DATA-PORTABILITY.md` and `CUSTOM-DATA-PORTABILITY.json`.
+
+Key result:
+
+- ANCHOR canonical custom namespace: **21 records / 4 families**;
+- FRONTIER: **290 records / 14 families**;
+- ANCHOR also has **12 legacy stalactite records** outside the later `twilight/` namespace.
+
+Portability classes:
+
+- **directly portable:** biome layer stack, wood palettes;
+- **small schema adaptation:** restrictions;
+- **codec extension:** magic paintings;
+- **architectural refactor:** stalactite/speleothem data;
+- **new isolated data systems:** quests, bird/rabbit variants;
+- **new structure authoring systems:** template definitions and marker handlers;
+- **worldgen policy backport:** biome terrain data and chunk blanket processors;
+- **subsystem rewrite:** Traveller gear modifiers.
+
+The most important rule is that FRONTIER JSON is not itself the technology. The reusable technology is the split:
+
+```text
+typed codec → authored data → registry/reload boundary → small runtime consumer
+```
+
+For 1.20.1 Forge, preserve that separation while implementing ANCHOR-compatible codecs and hooks.
