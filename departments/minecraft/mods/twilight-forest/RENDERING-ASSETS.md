@@ -241,3 +241,35 @@ Evidence batches:
 - `inventory/renderers-batch-04.json`
 
 This closes the first-pass **Entity → Renderer → Model/Layer → asset-selection strategy** map. It does not yet close the separate global block/item JSON-model graph.
+
+
+## Global block/item graph extractor
+
+The remaining data-driven render graph now has an implemented extractor:
+
+- `tools/build_render_asset_graph.py`
+- specification: `RENDER-ASSET-GRAPH-SPEC.md`
+
+The pinned FRONTIER inventory contains:
+
+- 528 blockstate JSON files;
+- 1,773 model JSON files;
+- 663 modern item-definition JSON files;
+- 1 Twilight Forest atlas JSON;
+- 1,159 texture PNG files.
+
+The extractor walks:
+
+```text
+blockstate / item definition
+        ↓
+model
+        ↓
+parent model
+        ↓
+texture / atlas resource
+```
+
+and records SHA-256, local reference resolution, unresolved Twilight Forest references, duplicate logical assets, parse failures and model-parent cycles.
+
+Execution against the full local checkout is still pending; therefore the global block/item graph is not yet marked complete.
