@@ -1,0 +1,208 @@
+name: Twilight Forest Runtime Evidence R1
+
+on:
+  push:
+    branches:
+      - jolly/minecraft-tech-department-2026-09-22
+    paths:
+      - '.github/twilight-runtime-r1-request.txt'
+
+permissions:
+  contents: write
+
+env:
+  FRONTIER_SHA: 793c4d4c7b0a2892f702cbb9a8d751fbe7218828
+  ANCHOR_SHA: a7dd8f13c653e137f977f5ffaa870fcb20fc1625
+  TF_EVIDENCE_DIR: departments/minecraft/mods/twilight-forest
+  WORLD_SEED: '20260923'
+  VIEW_DISTANCE: '10'
+  SIMULATION_DISTANCE: '10'
+
+concurrency:
+  group: twilight-runtime-r1
+  cancel-in-progress: false
+
+jobs:
+  r1-startup:
+    runs-on: [self-hosted, Windows, X64]
+    timeout-minutes: 90
+    defaults:
+      run:
+        shell: powershell
+
+    steps:
+      - name: Checkout TECH HUB branch
+        uses: actions/checkout@v4
+        with:
+          ref: jolly/minecraft-tech-department-2026-09-22
+          fetch-depth: 1
+          clean: true
+          persist-credentials: true
+
+      - name: Record exact TECH HUB input
+        run: |
+          $techHubInput = (git rev-parse HEAD).Trim()
+          $probeHash = (Get-FileHash "$env:TF_EVIDENCE_DIR/tools/run_runtime_r1.py" -Algorithm SHA256).Hash.ToLower()
+          "TECH_HUB_INPUT_SHA=$techHubInput" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          "RUNTIME_PROBE_SHA256=$probeHash" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          Write-Host "TECH HUB input: $techHubInput"
+          Write-Host "Runtime probe SHA-256: $probeHash"
+
+      - name: Checkout pinned Twilight Forest ANCHOR source
+        uses: actions/checkout@v4
+        with:
+          repository: TeamTwilight/twilightforest
+          ref: a7dd8f13c653e137f977f5ffaa870fcb20fc1625
+          path: local-artifacts/twilightforest-anchor
+          fetch-depth: 1
+          clean: true
+          persist-credentials: false
+
+      - name: Checkout pinned Twilight Forest FRONTIER source
+        uses: actions/checkout@v4
+        with:
+          repository: TeamTwilight/twilightforest
+          ref: 793c4d4c7b0a2892f702cbb9a8d751fbe7218828
+          path: local-artifacts/twilightforest-frontier
+          fetch-depth: 1
+          clean: true
+          persist-credentials: false
+
+      - name: Verify upstream snapshots
+        run: |
+          $anchor = (git -C local-artifacts/twilightforest-anchor rev-parse HEAD).Trim()
+          $frontier = (git -C local-artifacts/twilightforest-frontier rev-parse HEAD).Trim()
+          if ($anchor -ne $env:ANCHOR_SHA) { throw "Unexpected ANCHOR commit: $anchor" }
+          if ($frontier -ne $env:FRONTIER_SHA) { throw "Unexpected FRONTIER commit: $frontier" }
+          Write-Host "Pinned ANCHOR verified: $anchor"
+          Write-Host "Pinned FRONTIER verified: $frontier"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Compile-check runtime probe
+        run: python -m py_compile "$env:TF_EVIDENCE_DIR/tools/run_runtime_r1.py"
+
+      - name: Set up Java 17 for ANCHOR
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Measure ANCHOR R1 startup
+        continue-on-error: true
+        run: |
+          $out = "$env:TF_EVIDENCE_DIR/runtime/anchor/$env:GITHUB_RUN_ID"
+          python "$env:TF_EVIDENCE_DIR/tools/run_runtime_r1.py" --track anchor --repo-dir local-artifacts/twilightforest-anchor --source-commit $env:ANCHOR_SHA --minecraft-version 1.20.1 --loader-name Forge --loader-version 47.1.70 --output-dir $out --timeout-seconds 2400 --shutdown-seconds 90 --world-seed $env:WORLD_SEED --view-distance $env:VIEW_DISTANCE --simulation-distance $env:SIMULATION_DISTANCE
+
+      - name: Set up Java 25 for FRONTIER
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+
+      - name: Measure FRONTIER R1 startup
+        continue-on-error: true
+        run: |
+          $out = "$env:TF_EVIDENCE_DIR/runtime/frontier/$env:GITHUB_RUN_ID"
+          python "$env:TF_EVIDENCE_DIR/tools/run_runtime_r1.py" --track frontier --repo-dir local-artifacts/twilightforest-frontier --source-commit $env:FRONTIER_SHA --minecraft-version 26.1.2 --loader-name NeoForge --loader-version 26.1.2.102 --output-dir $out --timeout-seconds 2400 --shutdown-seconds 90 --world-seed $env:WORLD_SEED --view-distance $env:VIEW_DISTANCE --simulation-distance $env:SIMULATION_DISTANCE
+
+      - name: Write compact R1 receipt
+        if: always()
+        run: |
+          @'
+          import json
+          import os
+          from pathlib import Path
+
+          root = Path(os.environ["TF_EVIDENCE_DIR"])
+          run_id = os.environ["GITHUB_RUN_ID"]
+          tracks = {}
+          for track in ("anchor", "frontier"):
+              out = root / "runtime" / track / run_id
+              metrics_path = out / "metrics.json"
+              metrics = json.loads(metrics_path.read_text(encoding="utf-8")) if metrics_path.exists() else None
+              tracks[track] = {
+                  "path": out.as_posix(),
+                  "startup_success": metrics.get("startup_success") if metrics else False,
+                  "startup_ready_elapsed_seconds": metrics.get("startup_ready_elapsed_seconds") if metrics else None,
+                  "shutdown_method": metrics.get("shutdown_method") if metrics else None,
+              }
+          receipt = {
+              "record_version": "1.0",
+              "scenario_id": "R1",
+              "status": "R1_EXECUTED",
+              "repository": os.environ["GITHUB_REPOSITORY"],
+              "branch": os.environ["GITHUB_REF_NAME"],
+              "run_id": int(run_id),
+              "runner_name": os.environ.get("RUNNER_NAME"),
+              "runner_os": os.environ.get("RUNNER_OS"),
+              "runner_arch": os.environ.get("RUNNER_ARCH"),
+              "tech_hub_input_sha": os.environ["TECH_HUB_INPUT_SHA"],
+              "runtime_probe_sha256": os.environ["RUNTIME_PROBE_SHA256"],
+              "sources": {
+                  "anchor": os.environ["ANCHOR_SHA"],
+                  "frontier": os.environ["FRONTIER_SHA"],
+              },
+              "tracks": tracks,
+              "boundaries": {
+                  "scenario": "R1 dedicated-server startup only",
+                  "r2_through_r9_measured": False,
+                  "client_rendering_measured": False,
+                  "overall_performance_score": False,
+                  "main_merged": False,
+              },
+          }
+          (root / "RUNTIME-R1-LATEST.json").write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
+          print(json.dumps(receipt, indent=2))
+          '@ | python -
+
+      - name: Upload raw R1 evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: twilight-runtime-r1
+          if-no-files-found: warn
+          retention-days: 14
+          path: |
+            departments/minecraft/mods/twilight-forest/runtime/anchor/*/logs/**
+            departments/minecraft/mods/twilight-forest/runtime/anchor/*/profiler/**
+            departments/minecraft/mods/twilight-forest/runtime/frontier/*/logs/**
+            departments/minecraft/mods/twilight-forest/runtime/frontier/*/profiler/**
+
+      - name: Commit compact R1 evidence
+        if: always()
+        run: |
+          git config user.name "KNEEKURA Minecraft Tech"
+          git config user.email "actions@users.noreply.github.com"
+          $root = "$env:TF_EVIDENCE_DIR/runtime"
+          foreach ($track in @('anchor', 'frontier')) {
+            $dir = "$root/$track/$env:GITHUB_RUN_ID"
+            foreach ($name in @('environment.json', 'scenario.json', 'metrics.json', 'manifest.json', 'evidence-summary.md')) {
+              $path = "$dir/$name"
+              if (Test-Path $path) { git add -- $path }
+            }
+          }
+          git add -- "$env:TF_EVIDENCE_DIR/RUNTIME-R1-LATEST.json"
+          if (git diff --cached --quiet) {
+            Write-Host "No compact R1 evidence changes."
+            exit 0
+          }
+          git commit -m "Twilight Forest: record runtime R1 startup evidence"
+          git push origin HEAD:jolly/minecraft-tech-department-2026-09-22
+
+      - name: Enforce both R1 startup probes succeeded
+        if: always()
+        run: |
+          @'
+          import json
+          import os
+          from pathlib import Path
+          receipt = json.loads((Path(os.environ["TF_EVIDENCE_DIR"]) / "RUNTIME-R1-LATEST.json").read_text(encoding="utf-8"))
+          failed = [track for track, data in receipt["tracks"].items() if not data["startup_success"]]
+          if failed:
+              raise SystemExit("R1 startup did not reach ready state for: " + ", ".join(failed))
+          print("R1 startup succeeded for both tracks")
+          '@ | python -
