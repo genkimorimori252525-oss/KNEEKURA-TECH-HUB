@@ -113,3 +113,27 @@ FRONTIER also patches vanilla server entity synchronization with ASM:
 It injects a Twilight Forest multipart hook into `ServerEntity.sendDirtyEntityData`.
 
 This confirms multipart boss synchronization is not just an ordinary custom packet concern; part of it depends on a vanilla synchronization interception point.
+
+## Exact FRONTIER payload inventory
+
+At snapshot `793c4d4c…`, `RegistrationEvents.setupPackets` registers **29 payloads**:
+
+- **21 server → client**
+- **6 client → server**
+- **2 bidirectional**
+
+### Server → client (21)
+
+`AreaProtectionPacket`, `CreateMovingCicadaSoundPacket`, `EnforceProgressionStatusPacket`, `MagicMapPacket`, `MazeMapPacket`, `MissingAdvancementToastPacket`, `MovePlayerPacket`, `ParticlePacket`, `SpawnCharmPacket`, `SpawnFallenLeafFromPacket`, `StructureProtectionPacket`, `SyncUncraftingTableConfigPacket`, `UpdateTFMultipartPacket`, `UpdateThrownPacket`, `LifedrainParticlePacket`, `UpdateDeathTimePacket`, `TFBossBarPacket.AddTFBossBarPacket`, `TFBossBarPacket.UpdateTFBossBarStylePacket`, `SetMasonJarItemPacket`, `SyncQuestsPacket`, `TravellersWingsStatePacket`.
+
+### Client → server (6)
+
+`PerformDoubleJumpPacket`, `SwapHotbarPacket`, `PerformSidestepPacket`, `CycleMapSlotPacket`, `UncraftingGuiPacket`, `WipeOreMeterPacket`.
+
+### Bidirectional (2)
+
+`GogglesZoomPacket`, `GradualGlidePacket`.
+
+Machine-readable copy: `PACKET-MAP.json`.
+
+The direction split makes the authority boundary visible: most world/progression/boss/presentation state originates server-side, while the client sends narrow action/UI intent.
