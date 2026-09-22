@@ -1,0 +1,45 @@
+{
+  "evidence_version": "1.1",
+  "target": "The Twilight Forest",
+  "distributed_release": "4.3.2508",
+  "curseforge_project_id": "227639",
+  "curseforge_file_id": "5468648",
+  "source_candidate_commit": "a7dd8f13c653e137f977f5ffaa870fcb20fc1625",
+  "acquisition": {
+    "method": "CurseMaven",
+    "artifact_coordinate": "curse.maven:the-twilight-forest-227639:5468648",
+    "workflow_run_id": 35742278246,
+    "workflow_repository": "genkimorimori252525-oss/KNEEKURA-LAB",
+    "workflow_artifact_id": 10700441057,
+    "workflow_artifact_digest": "sha256:8091b0b35835c890876a3cce118a33df52d3f08369dd151c13657679f2449ed5"
+  },
+  "binary": {
+    "filename": "twilightforest-1.20.1-4.3.2508-universal.jar",
+    "size": 23332091,
+    "sha256": "0bdc89263616d1b35c32ef82c5e9c14cbd20368e2fe8b468c72a28320be7a778",
+    "sha1": "fa3b506a45d3e9c465551cd533fd50c899496e9f",
+    "zip_entry_count": 7752,
+    "class_entry_count": 1570,
+    "resource_entry_count": 6182,
+    "manifest_implementation_version": "4.3.2508",
+    "manifest_implementation_timestamp": "2024-06-24T18:00:24+0000",
+    "forge_loader_range": "[47,)",
+    "forge_dependency_range": "[47.1.0,)",
+    "minecraft_dependency_range": "[1.20.1,)"
+  },
+  "resource_correspondence": {
+    "expected_source_resource_paths": 6156,
+    "compared_paths_present_in_both": 6156,
+    "exact_git_blob_matches": 6156,
+    "git_blob_mismatches": 0,
+    "match_ratio_on_compared_paths": 1,
+    "source_paths_missing_from_jar_count": 0
+  },
+  "identity_conclusion": "RESOURCE_CORRESPONDENCE_STRONG",
+  "identity_limit": "Exact resource equality and metadata chronology do not alone prove compiled-class identity after Java compilation, remapping, and reobfuscation.",
+  "runner": {
+    "name": "Jolly-KNEEKURA-Once-20260902-205107",
+    "os": "Windows",
+    "arch": "X64"
+  }
+}
