@@ -1,0 +1,234 @@
+{
+  "matrix_version": "1.0",
+  "target": "The Twilight Forest",
+  "anchor": {
+    "repository": "TeamTwilight/twilightforest",
+    "commit": "a7dd8f13c653e137f977f5ffaa870fcb20fc1625",
+    "minecraft": "1.20.1",
+    "loader": "Forge"
+  },
+  "frontier": {
+    "repository": "TeamTwilight/twilightforest",
+    "commit": "793c4d4c7b0a2892f702cbb9a8d751fbe7218828",
+    "minecraft": "26.1.2",
+    "loader": "NeoForge"
+  },
+  "path_delta": {
+    "scope": "src/main/java/twilightforest/entity/{ai,monster,passive,boss}/**/*.java",
+    "total_paths": 132,
+    "unchanged": 6,
+    "changed": 111,
+    "added": 15,
+    "removed": 0,
+    "changed_by_area": {
+      "ai": 39,
+      "monster": 42,
+      "passive": 12,
+      "boss": 18
+    },
+    "added_by_area": {
+      "ai": 4,
+      "monster": 0,
+      "passive": 7,
+      "boss": 4
+    },
+    "unchanged_by_area": {
+      "ai": 4,
+      "monster": 1,
+      "passive": 0,
+      "boss": 1
+    },
+    "notable_added": [
+      "src/main/java/twilightforest/entity/ai/goal/RandomLookAroundIfBoredGoal.java",
+      "src/main/java/twilightforest/entity/ai/goal/UrGhastAttackGoal.java",
+      "src/main/java/twilightforest/entity/ai/goal/UrGhastLookGoal.java",
+      "src/main/java/twilightforest/entity/boss/BaseTFBoss.java",
+      "src/main/java/twilightforest/entity/boss/bar/ClientTFBossBar.java",
+      "src/main/java/twilightforest/entity/boss/bar/ServerTFBossBar.java",
+      "src/main/java/twilightforest/entity/passive/DwarfRabbitVariant.java",
+      "src/main/java/twilightforest/entity/passive/TinyBirdVariant.java",
+      "src/main/java/twilightforest/entity/passive/quest/QuestReloadListener.java",
+      "src/main/java/twilightforest/entity/passive/quest/ram/QuestingRamContext.java",
+      "src/main/java/twilightforest/entity/passive/quest/ram/QuestingRamCurrentContext.java"
+    ]
+  },
+  "catalog_status": {
+    "frontier_non_boss_entity_classes": 53,
+    "frontier_custom_goal_classes": 43,
+    "inheritance_imperative_review": "COMPLETE_FOR_DIRECTLY_CATALOGED_53_CLASSES"
+  },
+  "principal_bosses": [
+    {
+      "boss": "Naga",
+      "anchor_blob": "7745f72ff28047c5123d24f596dc9060f208212d",
+      "frontier_blob": "e30e1371af2bdd140bf368601adc71596469abfa",
+      "anchor_base": "Monster + EnforcedHomePoint + IBossLootBuffer",
+      "frontier_base": "BaseTFBoss",
+      "goal_delta": {
+        "added": [],
+        "removed": []
+      },
+      "preserved": [
+        "multipart body",
+        "health-driven segment count",
+        "arena/home constraint",
+        "NagaMovementPattern",
+        "NagaSmashGoal"
+      ],
+      "structural_change": "Boss/home/loot infrastructure is centralized into BaseTFBoss while encounter scheduler remains materially recognizable.",
+      "backport_class": "HIGH_CONCEPT_LOW_RISK"
+    },
+    {
+      "boss": "Lich",
+      "anchor_blob": "39175ff88fce291ef80a9640bc91180b8551b25d",
+      "frontier_blob": "070bae826b6862ddb1cac7a440ed4db76fa83734",
+      "anchor_base": "Monster + EnforcedHomePoint + IBossLootBuffer",
+      "frontier_base": "BaseTFBoss",
+      "goal_delta": {
+        "added": [
+          "RandomLookAroundIfBoredGoal"
+        ],
+        "removed": []
+      },
+      "preserved": [
+        "phase-gated LichShadowsGoal",
+        "LichMinionsGoal",
+        "phase-3 melee",
+        "shield/minion encounter state"
+      ],
+      "structural_change": "Common boss infrastructure moves to BaseTFBoss; synchronized presentation/teleport state is revised and an idle-look policy is added.",
+      "backport_class": "HIGH_CONCEPT_MEDIUM_VALIDATION"
+    },
+    {
+      "boss": "Hydra",
+      "anchor_blob": "e4c67000ed516e36c9be4b359cadc492e79cc672",
+      "frontier_blob": "93c9aa82d3333a3bc5d475043f74e4af2d07d420",
+      "anchor_base": "Mob + Enemy + EnforcedHomePoint",
+      "frontier_base": "BaseTFBoss",
+      "goal_delta": {
+        "added": [],
+        "removed": []
+      },
+      "preserved": [
+        "multipart architecture",
+        "head-container local state machines",
+        "body coordinator"
+      ],
+      "structural_change": "Hydra keeps its non-Goal coordinator design while shared boss/home infrastructure is centralized.",
+      "backport_class": "HIGH_CONCEPT_LOW_RISK"
+    },
+    {
+      "boss": "UrGhast",
+      "anchor_blob": "6378c66135778575d85a21a30f47d5e655deef25",
+      "frontier_blob": "b3e0adad4b546e82087ec42443bc6f546eea0962",
+      "anchor_base": "CarminiteGhastguard + IBossLootBuffer",
+      "frontier_base": "BaseTFBoss",
+      "goal_delta": {
+        "added": [
+          "UrGhastAttackGoal",
+          "UrGhastLookGoal"
+        ],
+        "removed": []
+      },
+      "preserved": [
+        "UrGhastFlightGoal",
+        "tantrum state",
+        "damageUntilNextPhase budget"
+      ],
+      "structural_change": "The boss is decoupled from CarminiteGhastguard inheritance; attack and look behavior become explicit Ur-Ghast-specific Goals and attack presentation state is synchronized directly.",
+      "backport_class": "VERY_HIGH_VALUE_REFACTOR"
+    },
+    {
+      "boss": "SnowQueen",
+      "anchor_blob": "da795248e6f8a27dcce64e56a56d24e4fb77fef9",
+      "frontier_blob": "4ab76655c39b9f944ca6612ac398f6a6e5257c9c",
+      "anchor_base": "Monster + IBreathAttacker + EnforcedHomePoint",
+      "frontier_base": "BaseTFBoss + IBreathAttacker",
+      "goal_delta": {
+        "added": [],
+        "removed": []
+      },
+      "preserved": [
+        "Phase enum",
+        "HoverSummonGoal",
+        "HoverThenDropGoal",
+        "HoverBeamGoal",
+        "multipart ice shields"
+      ],
+      "structural_change": "Encounter phase model is preserved while common boss/home infrastructure moves to BaseTFBoss.",
+      "backport_class": "HIGH_CONCEPT_LOW_RISK"
+    },
+    {
+      "boss": "AlphaYeti",
+      "anchor_blob": "73e42e714cf83756ecc1f7204e372e4ba15cd9a9",
+      "frontier_blob": "c058c2521e795450935f81f642135850af7817d6",
+      "anchor_base": "Monster + RangedAttackMob + IHostileMount + EnforcedHomePoint",
+      "frontier_base": "BaseTFBoss + RangedAttackMob + IHostileMount",
+      "goal_delta": {
+        "added": [],
+        "removed": []
+      },
+      "preserved": [
+        "YetiRampageGoal",
+        "YetiTiredGoal",
+        "ranged attack",
+        "ThrowRiderGoal",
+        "rampage→tired recovery model"
+      ],
+      "structural_change": "Encounter scheduler is stable; common boss/home state is centralized and synced rampage/tired flags use modern boolean entity data.",
+      "backport_class": "HIGH_CONCEPT_LOW_RISK"
+    },
+    {
+      "boss": "KnightPhantom",
+      "anchor_blob": "621ed9eb5d2b2e5eee64dffe221a2cb4800b88b8",
+      "frontier_blob": "9568efbfc7ed4ebb151905c04606bc74eb460b84",
+      "anchor_base": "FlyingMob + Enemy + EnforcedHomePoint",
+      "frontier_base": "BaseTFBoss",
+      "goal_delta": {
+        "added": [],
+        "removed": []
+      },
+      "preserved": [
+        "Formation enum",
+        "PhantomUpdateFormationAndMoveGoal",
+        "PhantomAttackStartGoal",
+        "PhantomThrowWeaponGoal",
+        "PhantomWatchAndAttackGoal"
+      ],
+      "structural_change": "Formation controller remains; boss lifecycle/group presentation is centralized and a synced IT_IS_OVER state is added.",
+      "backport_class": "HIGH_CONCEPT_MEDIUM_VALIDATION"
+    },
+    {
+      "boss": "Minoshroom",
+      "anchor_blob": "3ad6b6f47f0dcae7226406c73237d0d2772e2f07",
+      "frontier_blob": "c74fe6b7e56ecded49dde145976e0249cea853a5",
+      "anchor_base": "Minotaur + EnforcedHomePoint",
+      "frontier_base": "BaseTFBoss + ITFCharger",
+      "goal_delta": {
+        "added": [
+          "ChargeAttackGoal",
+          "FloatGoal",
+          "HurtByTargetGoal",
+          "LookAtPlayerGoal",
+          "MeleeAttackGoal",
+          "RandomLookAroundGoal",
+          "WaterAvoidingRandomStrollGoal"
+        ],
+        "removed": []
+      },
+      "preserved": [
+        "GroundAttackGoal",
+        "ground-smash synchronized state"
+      ],
+      "structural_change": "Inherited Minotaur scheduler is replaced by explicit composition on BaseTFBoss; charging becomes an explicit interface/synchronized state.",
+      "backport_class": "VERY_HIGH_VALUE_REFACTOR"
+    }
+  ],
+  "portability_principles": [
+    "Preserve encounter semantics before porting class hierarchy.",
+    "BaseTFBoss-style shared infrastructure can be recreated on 1.20.1 without copying modern NeoForge APIs.",
+    "Prefer explicit Goal composition over inheriting a whole unrelated mob merely to obtain behavior.",
+    "Keep phase/FSM/group-controller state server-authoritative and synchronize only presentation-relevant state.",
+    "For unchanged Goal sets, treat API rewrites as platform adaptation rather than gameplay redesign until contrary evidence is found."
+  ]
+}
