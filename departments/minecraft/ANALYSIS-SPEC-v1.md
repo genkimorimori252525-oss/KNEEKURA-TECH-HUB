@@ -1,189 +1,81 @@
-# Minecraft Whole-Mod Analysis Specification v1
+# Minecraft Whole-Target Analysis Specification v1.1
 
-## 1. Compatibility contract
+## 1. Compatibility contract — dual track
 
-Canonical department data MUST target:
+Every target should define:
+- ANCHOR: Minecraft 1.20.1 + Forge adaptation target
+- FRONTIER: latest useful upstream implementation
+- optional COMPARATIVE tracks when an intermediate version or loader transition materially explains the technology
 
-- Minecraft `1.20.1`
-- Loader `Forge`
+If native 1.20.1 Forge code exists, analyze it as ANCHOR. If it does not, ANCHOR remains the destination environment for an explicit backport design.
 
-A result from another version/loader may be attached only as comparative evidence and must carry an explicit compatibility mismatch flag.
+Never merge evidence across tracks. A FRONTIER statement is not automatically valid on ANCHOR.
 
-## 2. Source lock
+## 2. Track-specific SourceSnapshot
 
-Before analysis, pin the exact inspected artifact:
+Pin for each track: role, Minecraft version, loader, repository, branch/release/tag/commit, artifact identity, hashes when available, license locator, and dependency versions.
 
-- upstream repository
-- release/tag/commit when available
-- downloadable artifact identity
-- JAR SHA-256
-- source archive SHA-256 when used
-- license identifier/text locator
-- dependency versions
+## 3. Full-tree acquisition
 
-No analysis is considered reproducible without a Source Snapshot.
+- obtain the full upstream source tree locally when available
+- inventory the whole tree before interpretation
+- do not limit whole analysis to search hits or a few classes
+- keep raw worktrees/JARs/decompiled trees outside Git by default
+- commit derived inventories, hashes, maps, deltas, and evidence locators
 
-## 3. Archive inventory
+## 4. Required analysis surfaces
 
-Create a complete path inventory before interpretation.
+- loader entrypoints / registries / events / config
+- client-server boundaries / networking / persistence
+- AI / goals / brain / navigation / combat / state machines
+- dimensions / biomes / structures / worldgen / progression
+- renderer / models / animation / textures / atlas / UV / shaders / particles / sound
+- recipes / loot / tags / advancements / data registries
+- Mixins / Access Transformers / Access Wideners / Class Tweakers / reflection / coremods
+- mappings / remapping / classloading / bytecode transformations
+- dependencies / integrations / optional compatibility
+- tick cost / startup cost / caches / allocation / async / synchronization
 
-Classify at minimum:
+## 5. Loader bridge / transformation systems
 
-- Java/classes
-- mixins / access transformers
-- META-INF / mods.toml
-- assets/<namespace>/textures
-- models / blockstates
-- animations
-- shaders
-- particles
-- sounds
-- lang
-- data/<namespace>
-- recipes / loot tables / tags / advancements
-- worldgen / structures / dimensions
-- data generators / generated resources
+For targets such as Sinytra Connector additionally map:
 
-For binary assets, record path, size, SHA-256, type, and relevant dimensions/metadata without requiring the binary itself to be committed.
+- foreign-loader mod discovery
+- metadata and dependency translation
+- namespace/mapping remap pipeline
+- JAR and bytecode transformation pipeline
+- Mixin compatibility and method patching
+- Access Widener / Class Tweaker conversion
+- Fabric API replacement/emulation boundary
+- classloader/module interactions
+- nested JAR handling
+- transformed-artifact cache lifecycle
+- plugin/extension APIs
+- incompatibility detection and fallback
 
-## 4. Code architecture map
+## 6. Version portability
 
-Map:
+For each reusable technique record:
 
-- Forge entrypoints
-- DeferredRegister / registries
-- event subscribers
-- capability usage
-- config
-- networking channels and packet directions
-- client-only vs common/server boundaries
-- persistence / NBT / saved data
-- commands
-- data generation
-- integration hooks
+- invariant concept
+- ANCHOR implementation
+- FRONTIER implementation
+- changed Minecraft API
+- changed loader API
+- changed mappings/namespaces
+- dependencies introduced/removed
+- direct backport feasibility
+- rewrite requirements
+- semantic risks
 
-Produce path-level evidence for each important statement.
+The objective is to recover the technique and reconstruct it correctly for 1.20.1 Forge, not to copy/paste incompatible source.
 
-## 5. AI and behavior map
+## 7. Provenance
 
-For every entity with non-trivial behavior, inspect:
+Every substantive finding should use a stable locator where possible: repository + commit + path/lines, JAR hash + internal path, asset hash + path, or generated manifest record. AI summaries are not primary evidence.
 
-- vanilla Goal / TargetGoal composition
-- Brain / Sensor / Memory usage
-- navigation/pathfinding class
-- target selection
-- combat decisions
-- cooldowns/timers
-- phase/state changes
-- boss state machines
-- environmental reactions
-- cooperative/group behavior
-- server authority and client visualization split
-- persistence across save/reload
+## 8. Completion states
 
-Represent complex behavior as a state/transition table or graph. Do not infer behavior solely from class names.
+Facet states: NOT_ANALYZED / INVENTORIED / MAPPED / EVIDENCE_BACKED / NOT_APPLICABLE.
 
-## 6. World systems
-
-Inspect:
-
-- dimensions
-- portals
-- biomes
-- structures
-- configured/placed features
-- processors/templates
-- spawn rules
-- chunk/world lifecycle hooks
-- progression gates tied to world state
-
-## 7. Rendering and assets
-
-Create explicit dependency mappings such as:
-
-`entity -> renderer -> model/layer -> texture(s) -> animation/pose source`
-
-and
-
-`block/item -> model -> texture(s)`
-
-Inventory:
-
-- textures and resolution
-- atlas/sprite usage
-- UV/model references
-- animated textures
-- emissive/special render paths
-- custom RenderType/shader use
-- particles
-- entity/model animation code
-- sounds/music and their triggers
-
-## 8. Data-driven systems
-
-Map JSON/data assets back to the code or gameplay systems that consume them:
-
-- recipes
-- loot tables
-- tags
-- advancements
-- damage types
-- worldgen data
-- language keys
-- custom codecs/data registries
-
-## 9. Performance and lifecycle
-
-Look for:
-
-- per-tick work
-- scans over entities/blocks/chunks
-- allocation-heavy loops
-- caches
-- async work
-- synchronization
-- client/server duplicate computation
-- resource reload listeners
-- event handlers with broad frequency
-
-Performance notes are hypotheses until measured or directly supported by evidence.
-
-## 10. Compatibility and patch surface
-
-Record:
-
-- hard dependencies
-- optional dependencies
-- integrations
-- Mixins
-- Access Transformers
-- reflection
-- replaced vanilla behavior
-- event priority/cancellation assumptions
-
-## 11. Provenance discipline
-
-Every substantive finding should point to a stable locator when possible:
-
-- repository + commit + path + line/range
-- JAR hash + internal path
-- asset hash + internal path
-- generated manifest record
-
-AI summaries are not primary evidence.
-
-## 12. Repository boundary
-
-By default, do not commit raw third-party JARs, full decompiled trees, or complete copied asset sets. Keep those in ignored local artifacts and commit derived inventories/mappings/analysis. If a specific upstream license clearly permits redistribution, that still does not make copying mandatory.
-
-## 13. Completion states
-
-Facet status vocabulary:
-
-- `NOT_ANALYZED`
-- `INVENTORIED`
-- `MAPPED`
-- `EVIDENCE_BACKED`
-- `NOT_APPLICABLE`
-
-A Mod is `COMPLETE` only when all required facets are either `EVIDENCE_BACKED` or `NOT_APPLICABLE`, and the Source Snapshot is pinned.
+A target is COMPLETE only when required tracks are pinned or explicitly unavailable, required facets are evidence-backed or not applicable, and ANCHOR↔FRONTIER portability is recorded.
