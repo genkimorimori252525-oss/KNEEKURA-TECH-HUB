@@ -185,3 +185,62 @@ A boss should compose only the pieces it needs.
 - compare ANCHOR behavior against FRONTIER;
 - separate server-authoritative behavior from client-only animation;
 - identify AI patterns added/removed between tracks.
+
+## Verified transition matrix v1
+
+The following transitions were read from concrete Goal/state-machine classes rather than inferred from class names.
+
+| Boss | Controller | Verified transition / trigger |
+|---|---|---|
+| Naga | `NagaMovementPattern` | `CIRCLE → INTIMIDATE → CHARGE/STUNLESS_CHARGE → CIRCLE`; if the target is above the Naga during INTIMIDATE, route through `CRUMBLE`; `DAZE` returns to CIRCLE |
+| Lich | derived phase + phase-gated Goals | Phase 1 while shadow clone or shield > 0; Phase 2 while minions remain/to-summon; Phase 3 otherwise |
+| Hydra | body coordinator + `HydraHeadContainer.State` per head | bite, flame and mortar each have beginning/active/ending chains followed by cooldown; head lifecycle includes `DYING → DEAD` and `BORN → ROAR_START → ROAR_RAWR → IDLE` |
+| Snow Queen | synced `Phase` enum | `SUMMON → DROP` when summons are exhausted and minions are gone; `DROP → BEAM` after 2–4 successful drops; `BEAM → SUMMON` after its beaming damage budget |
+| Alpha Yeti | Goal + synced rampage/tired flags | valid damage enables rampage; rampage runs for 180 ticks; ending it enters a 100-tick non-interruptible tired/recovery Goal |
+| Ur-Ghast | damage budget + Goal gating | successful damage drains `damageUntilNextPhase`; reaching zero toggles tantrum; normal attack Goal is disabled in tantrum and incoming damage is divided by 10 |
+| Knight Phantom | shared `Formation` + leader broadcast | selected knight can enter `ATTACK_PLAYER_START → ATTACK_PLAYER_ATTACK → WAITING_FOR_LEADER`, then adopts leader state or attacks again |
+| Minoshroom | ordinary Goals + synced action flags | ground slam charges 30–59 ticks; charge Goal winds up 15–44 ticks before path-charging |
+
+### Naga timing
+
+`NagaMovementPattern` owns `CIRCLE`, `INTIMIDATE`, `CRUMBLE`, `CHARGE`, `STUNLESS_CHARGE`, and `DAZE`.
+
+- DAZE lasts 60–99 ticks.
+- CRUMBLE lasts 20–39 ticks.
+- INTIMIDATE adds 15–24 ticks.
+- Special “stunless” charge probability is derived from missing health plus local difficulty and clamped to at most 0.5.
+- More than 15 damage during a current stun forces CIRCLE.
+
+### Lich phase derivation
+
+```text
+shadow clone OR shield > 0
+        -> Phase 1
+else minions-to-summon > 0 OR live minions > 0
+        -> Phase 2
+else
+        -> Phase 3
+```
+
+This is reconstructible encounter state rather than a fragile free-running phase timer.
+
+### Hydra head state machine
+
+```text
+BITE_BEGINNING(40) -> BITE_READY(80) -> BITING(7) -> BITE_ENDING(40)
+FLAME_BEGINNING(40) -> FLAMING(100) -> FLAME_ENDING(30)
+MORTAR_BEGINNING(40) -> MORTAR_SHOOTING(25) -> MORTAR_ENDING(30)
+                              ↓
+                    ATTACK_COOLDOWN(80)
+                              ↓
+                            IDLE
+
+DYING(70) -> DEAD
+BORN(20) -> ROAR_START(10) -> ROAR_RAWR(50) -> IDLE
+```
+
+### Knight Phantom formation durations
+
+`HOVER=90`; small circular formations `=90`; large circular and directional charge formations `=180`; `WAITING_FOR_LEADER=10`; both player-attack stages `=50`.
+
+Machine-readable copy: `BOSS-AI-MATRIX.json`.
