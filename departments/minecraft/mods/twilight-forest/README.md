@@ -1,18 +1,29 @@
 # The Twilight Forest — Analysis Workspace
 
-## Target
+## Queue
 
-- Mod: The Twilight Forest
+- Priority: **1**
+- Target: The Twilight Forest
+- Kind: content/gameplay Mod
+- Status: **QUEUED**
+
+## Required tracks
+
+### ANCHOR
 - Minecraft: **1.20.1**
 - Loader: **Forge**
-- Status: **QUEUED**
 - Source Snapshot: **NOT_PINNED**
 
-This directory is the first Minecraft Technology Department target.
+### FRONTIER
+- Target: latest useful upstream release/branch at analysis time
+- Minecraft / Loader: **NOT_PINNED**
+- Source Snapshot: **NOT_PINNED**
+
+Both tracks must remain separate. VERSION-PORTABILITY.md will explain which newer implementation ideas can be reconstructed safely for 1.20.1 Forge.
 
 ## Planned full analysis
 
-- bootstrap / Forge registration / lifecycle
+- bootstrap / loader registration / lifecycle
 - entity and boss AI
 - navigation / targeting / state machines
 - progression systems
@@ -26,8 +37,7 @@ This directory is the first Minecraft Technology Department target.
 - recipes / loot / tags / advancements / language
 - compatibility / integrations / patch surfaces
 - performance-sensitive code
+- cross-version portability
 - license and provenance
 
-## Gate before technical claims
-
-The exact Minecraft 1.20.1 Forge release and inspectable source/artifact must first be pinned with stable provenance and hashes. Until then, this workspace is only a registered analysis target and contains no claim that a specific implementation detail has been verified.
+Exact ANCHOR and FRONTIER SourceSnapshots must be pinned separately before reproducible implementation claims are accepted.
