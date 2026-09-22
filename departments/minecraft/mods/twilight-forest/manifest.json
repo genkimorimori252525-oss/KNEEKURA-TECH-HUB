@@ -52,8 +52,8 @@
         "networking": "MAPPED",
         "rendering_assets": "MAPPED",
         "data_assets": "INVENTORIED",
-        "transformation": "INVENTORIED",
-        "performance": "NOT_ANALYZED",
+        "transformation": "MAPPED",
+        "performance": "INVENTORIED",
         "compatibility": "MAPPED",
         "version_portability": "MAPPED",
         "license_provenance": "MAPPED"
@@ -70,7 +70,9 @@
     "NETWORKING.md",
     "RENDERING-ASSETS.md",
     "VERSION-PORTABILITY.md",
-    "LICENSE-PROVENANCE.md"
+    "LICENSE-PROVENANCE.md",
+    "ASM-PATCHES.md",
+    "PERFORMANCE.md"
   ],
   "notes": [
     "ANCHOR commit is the strongest public-source candidate found for CurseForge 4.3.2508; exact distributed-binary identity remains unproven.",

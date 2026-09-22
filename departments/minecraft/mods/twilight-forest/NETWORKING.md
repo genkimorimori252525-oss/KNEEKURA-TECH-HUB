@@ -1,49 +1,115 @@
 # Twilight Forest — Networking Map
 
-## ANCHOR
+Status: **FRONTIER registration/direction mapped; ANCHOR comparison mapped**
 
-1.20.1 uses Forge `SimpleChannel` in `TFPacketHandler`.
+## ANCHOR — Forge 1.20.1
 
-- protocol string: `"2"`;
-- packet IDs are sequential integers;
-- codecs/handlers are registered in one central `init()` method;
-- 18 messages are explicitly registered there.
+The 1.20.1 line uses Forge `SimpleChannel` through `TFPacketHandler`.
 
-The entrypoint calls `TFPacketHandler.init()` during common setup.
+Characteristics:
 
-## FRONTIER
+- central channel;
+- protocol string;
+- sequential numeric message IDs;
+- centralized registration;
+- packet handling wired during common setup.
 
-Networking moves to NeoForge payload registration via `RegisterPayloadHandlersEvent`.
+This works, but message direction/ownership is less visible at the type-registration boundary.
 
-`RegistrationEvents.setupPackets` creates an optional versioned payload registrar (`1.0.0`) and explicitly declares direction:
+## FRONTIER — NeoForge payload model
 
-- play-to-client;
-- play-to-server;
-- bidirectional.
+Evidence:
 
-The network package contains 30 Java files in the pinned FRONTIER tree.
+- `src/main/java/twilightforest/events/RegistrationEvents.java`
+- blob `40c87d293513059666fd71ae077cb169c44be52c`
 
-Notable newer payload surfaces include:
+`setupPackets` creates:
 
-- movement/double-jump/sidestep;
-- map-slot cycling and goggles zoom;
-- gradual glide;
-- charm spawning;
-- lifedrain particles;
-- boss-bar synchronization;
-- quest synchronization;
-- traveller-wing state;
-- mason-jar item state;
+```text
+PayloadRegistrar
+namespace: twilightforest
+version: 1.0.0
+optional: true
+```
+
+Each payload explicitly declares direction:
+
+- `playToClient`
+- `playToServer`
+- `playBidirectional`
+
+Each registration couples:
+
+```text
+TYPE
+STREAM_CODEC
+handler
+direction
+```
+
+## Mapped FRONTIER directions
+
+### Server → Client
+
+Examples include:
+
+- area/structure protection;
+- progression state;
+- magic/maze maps;
+- advancement toast;
+- forced player movement;
+- particles;
+- charm/fallen-leaf visuals;
+- uncrafting config sync;
+- multipart entity updates;
+- thrown-entity state;
+- lifedrain effects;
+- boss-bar state;
+- mason-jar state;
+- quests;
+- traveller wings.
+
+### Client → Server
+
+Examples include:
+
+- double jump;
+- sidestep;
+- hotbar swap;
+- map-slot cycling;
+- uncrafting GUI actions;
 - ore-meter reset.
 
-## Portability lesson
+### Bidirectional
 
-The reusable part is **not** the NeoForge payload API itself. It is:
+Observed:
 
-- explicit packet ownership;
-- explicit direction;
-- typed payload/codec pairs;
-- small handler-per-message classes;
-- versioned protocol boundary.
+- goggles zoom;
+- gradual glide.
 
-A 1.20.1 Forge backport can preserve those semantics on top of `SimpleChannel`, even if the registration API stays old.
+## Design lesson
+
+The important upgrade is not “NeoForge payload API” itself.
+
+The transferable contract is:
+
+```text
+message type
++ codec
++ explicit direction
++ narrow handler
++ protocol version
+```
+
+A 1.20.1 Forge implementation can preserve this on top of `SimpleChannel` by wrapping registration in typed helpers and testing direction explicitly.
+
+## Multipart networking dependency
+
+FRONTIER also patches vanilla server entity synchronization with ASM:
+
+- `SendDirtyEntityDataTransformer`
+- blob `7ec8bfd1d124ec6745747091332d9b9e53b6845e`
+
+It injects a Twilight Forest multipart hook into `ServerEntity.sendDirtyEntityData`.
+
+This confirms multipart boss synchronization is not just an ordinary custom packet concern; part of it depends on a vanilla synchronization interception point.
