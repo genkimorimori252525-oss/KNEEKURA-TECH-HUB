@@ -50,8 +50,9 @@
         "ai": "MAPPED",
         "worldgen": "MAPPED",
         "networking": "MAPPED",
-        "rendering_assets": "INVENTORIED",
+        "rendering_assets": "MAPPED",
         "data_assets": "INVENTORIED",
+        "transformation": "INVENTORIED",
         "performance": "NOT_ANALYZED",
         "compatibility": "MAPPED",
         "version_portability": "MAPPED",
@@ -67,11 +68,12 @@
     "AI-BEHAVIOR.md",
     "WORLDGEN.md",
     "NETWORKING.md",
+    "RENDERING-ASSETS.md",
     "VERSION-PORTABILITY.md",
     "LICENSE-PROVENANCE.md"
   ],
   "notes": [
-    "ANCHOR commit is the strongest public-source candidate found for CurseForge 4.3.2508 because it is the final public 1.20.1 commit before the file upload and matches the release note's Discord URL change; exact binary-to-source identity is not yet proven.",
-    "Upstream developer stated in issue #2345 that a later fix existed but apparently was never uploaded to CurseForge, so distributed 4.3.2508 and later public source must remain separate evidence."
+    "ANCHOR commit is the strongest public-source candidate found for CurseForge 4.3.2508; exact distributed-binary identity remains unproven.",
+    "Upstream issue #2345 records a developer statement that a later source fix apparently was not uploaded to CurseForge, so distributed JAR and later public source remain separate evidence."
   ]
 }

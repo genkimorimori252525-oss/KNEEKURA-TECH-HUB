@@ -24,14 +24,15 @@
 ## Current analysis coverage
 
 - bootstrap / registries: mapped
-- major boss architecture: first-pass mapped
+- major boss architecture: mapped
 - networking: mapped
 - worldgen architecture: mapped
-- rendering/model/asset files: inventoried, detailed dependency mapping pending
+- rendering/model/client architecture: mapped
+- texture/model files: fully inventoried; complete dependency table pending
 - data assets: inventoried
+- version portability: first-pass mapped
 - performance: pending
 - full mob AI catalog: pending
 - full structure catalog: pending
-- texture ↔ model ↔ renderer map: pending
 
-See the sibling Markdown reports and `inventory/` manifests for evidence-backed progress.
+See the sibling reports and `inventory/` manifests for evidence-backed progress.
