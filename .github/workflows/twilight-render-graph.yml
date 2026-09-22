@@ -14,10 +14,15 @@ concurrency:
   group: twilight-render-graph
   cancel-in-progress: false
 
+env:
+  FRONTIER_SHA: 793c4d4c7b0a2892f702cbb9a8d751fbe7218828
+  ANCHOR_SHA: a7dd8f13c653e137f977f5ffaa870fcb20fc1625
+  TF_EVIDENCE_DIR: departments/minecraft/mods/twilight-forest
+
 jobs:
   build-graph:
     runs-on: [self-hosted, Windows, X64]
-    timeout-minutes: 45
+    timeout-minutes: 60
     defaults:
       run:
         shell: powershell
@@ -31,6 +36,18 @@ jobs:
           clean: true
           persist-credentials: true
 
+      - name: Record exact TECH HUB inputs
+        run: |
+          $techHubInput = (git rev-parse HEAD).Trim()
+          $extractorHash = (Get-FileHash "$env:TF_EVIDENCE_DIR/tools/build_render_asset_graph.py" -Algorithm SHA256).Hash.ToLower()
+          $comparatorHash = (Get-FileHash "$env:TF_EVIDENCE_DIR/tools/compare_render_asset_graphs.py" -Algorithm SHA256).Hash.ToLower()
+          "TECH_HUB_INPUT_SHA=$techHubInput" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          "EXTRACTOR_SHA256=$extractorHash" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          "COMPARATOR_SHA256=$comparatorHash" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          Write-Host "TECH HUB input: $techHubInput"
+          Write-Host "Extractor SHA-256: $extractorHash"
+          Write-Host "Comparator SHA-256: $comparatorHash"
+
       - name: Checkout pinned Twilight Forest FRONTIER source
         uses: actions/checkout@v4
         with:
@@ -41,56 +58,176 @@ jobs:
           clean: true
           persist-credentials: false
 
-      - name: Verify upstream snapshot
+      - name: Checkout pinned Twilight Forest ANCHOR source
+        uses: actions/checkout@v4
+        with:
+          repository: TeamTwilight/twilightforest
+          ref: a7dd8f13c653e137f977f5ffaa870fcb20fc1625
+          path: local-artifacts/twilightforest-anchor
+          fetch-depth: 1
+          clean: true
+          persist-credentials: false
+
+      - name: Verify upstream snapshots
         run: |
-          $sha = (git -C local-artifacts/twilightforest-frontier rev-parse HEAD).Trim()
-          if ($sha -ne '793c4d4c7b0a2892f702cbb9a8d751fbe7218828') {
-            throw "Unexpected Twilight Forest commit: $sha"
+          $frontier = (git -C local-artifacts/twilightforest-frontier rev-parse HEAD).Trim()
+          $anchor = (git -C local-artifacts/twilightforest-anchor rev-parse HEAD).Trim()
+          if ($frontier -ne $env:FRONTIER_SHA) {
+            throw "Unexpected FRONTIER commit: $frontier"
           }
-          Write-Host "Pinned upstream commit verified: $sha"
+          if ($anchor -ne $env:ANCHOR_SHA) {
+            throw "Unexpected ANCHOR commit: $anchor"
+          }
+          Write-Host "Pinned FRONTIER verified: $frontier"
+          Write-Host "Pinned ANCHOR verified: $anchor"
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
-      - name: Build complete block and item render graph
-        run: |
-          python departments/minecraft/mods/twilight-forest/tools/build_render_asset_graph.py `
-            local-artifacts/twilightforest-frontier `
-            --source-commit 793c4d4c7b0a2892f702cbb9a8d751fbe7218828 `
-            --output departments/minecraft/mods/twilight-forest/BLOCK-ITEM-RENDER-GRAPH.json `
-            --summary-output departments/minecraft/mods/twilight-forest/BLOCK-ITEM-RENDER-GRAPH.md
+      - name: Install test dependency
+        run: python -m pip install pytest
 
-      - name: Validate generated graph
+      - name: Test render graph tools
+        run: |
+          python -m pytest -q `
+            tests/test_twilight_forest_render_asset_graph_tool.py `
+            tests/test_twilight_forest_render_asset_graph_comparison.py
+
+      - name: Build FRONTIER block and item render graph
+        run: |
+          python "$env:TF_EVIDENCE_DIR/tools/build_render_asset_graph.py" `
+            local-artifacts/twilightforest-frontier `
+            --source-commit $env:FRONTIER_SHA `
+            --output "$env:TF_EVIDENCE_DIR/BLOCK-ITEM-RENDER-GRAPH.json" `
+            --summary-output "$env:TF_EVIDENCE_DIR/BLOCK-ITEM-RENDER-GRAPH.md"
+
+      - name: Build ANCHOR block and item render graph
+        run: |
+          python "$env:TF_EVIDENCE_DIR/tools/build_render_asset_graph.py" `
+            local-artifacts/twilightforest-anchor `
+            --source-commit $env:ANCHOR_SHA `
+            --output "$env:TF_EVIDENCE_DIR/ANCHOR-BLOCK-ITEM-RENDER-GRAPH.json" `
+            --summary-output "$env:TF_EVIDENCE_DIR/ANCHOR-BLOCK-ITEM-RENDER-GRAPH.md"
+
+      - name: Compare ANCHOR and FRONTIER graphs
+        run: |
+          python "$env:TF_EVIDENCE_DIR/tools/compare_render_asset_graphs.py" `
+            --anchor "$env:TF_EVIDENCE_DIR/ANCHOR-BLOCK-ITEM-RENDER-GRAPH.json" `
+            --frontier "$env:TF_EVIDENCE_DIR/BLOCK-ITEM-RENDER-GRAPH.json" `
+            --expected-anchor-commit $env:ANCHOR_SHA `
+            --expected-frontier-commit $env:FRONTIER_SHA `
+            --output "$env:TF_EVIDENCE_DIR/BLOCK-ITEM-RENDER-COMPARISON.json" `
+            --summary-output "$env:TF_EVIDENCE_DIR/BLOCK-ITEM-RENDER-COMPARISON.md"
+
+      - name: Validate generated evidence and write receipt
         run: |
           @'
+          import hashlib
           import json
+          import os
           from pathlib import Path
 
-          path = Path("departments/minecraft/mods/twilight-forest/BLOCK-ITEM-RENDER-GRAPH.json")
-          graph = json.loads(path.read_text(encoding="utf-8"))
-          assert graph["source_commit"] == "793c4d4c7b0a2892f702cbb9a8d751fbe7218828"
-          counts = graph["counts"]
-          assert counts["blockstate"] == 528, counts
-          assert counts["model"] == 1773, counts
-          assert counts["item_definition"] == 663, counts
-          assert counts["atlas"] == 1, counts
-          assert counts["texture"] == 1159, counts
-          assert counts["nodes"] > 4000, counts
-          assert counts["edges"] > 0, counts
-          print(json.dumps(counts, indent=2))
+          root = Path(os.environ["TF_EVIDENCE_DIR"])
+          frontier_path = root / "BLOCK-ITEM-RENDER-GRAPH.json"
+          anchor_path = root / "ANCHOR-BLOCK-ITEM-RENDER-GRAPH.json"
+          comparison_path = root / "BLOCK-ITEM-RENDER-COMPARISON.json"
+
+          frontier = json.loads(frontier_path.read_text(encoding="utf-8"))
+          anchor = json.loads(anchor_path.read_text(encoding="utf-8"))
+          comparison = json.loads(comparison_path.read_text(encoding="utf-8"))
+
+          assert frontier["source_commit"] == os.environ["FRONTIER_SHA"]
+          assert anchor["source_commit"] == os.environ["ANCHOR_SHA"]
+          expected_frontier = {
+              "blockstate": 528,
+              "model": 1773,
+              "item_definition": 663,
+              "atlas": 1,
+              "texture": 1159,
+          }
+          for key, value in expected_frontier.items():
+              assert frontier["counts"].get(key, 0) == value, (key, frontier["counts"])
+          assert comparison["anchor"]["source_commit"] == os.environ["ANCHOR_SHA"]
+          assert comparison["frontier"]["source_commit"] == os.environ["FRONTIER_SHA"]
+
+          def sha256(path):
+              return hashlib.sha256(path.read_bytes()).hexdigest()
+
+          receipt = {
+              "record_version": "1.0",
+              "status": "FULL_CHECKOUT_RENDER_GRAPHS_GENERATED",
+              "repository": os.environ["GITHUB_REPOSITORY"],
+              "branch": os.environ["GITHUB_REF_NAME"],
+              "event_sha": os.environ["GITHUB_SHA"],
+              "tech_hub_input_sha": os.environ["TECH_HUB_INPUT_SHA"],
+              "run_id": int(os.environ["GITHUB_RUN_ID"]),
+              "runner_name": os.environ.get("RUNNER_NAME"),
+              "runner_os": os.environ.get("RUNNER_OS"),
+              "runner_arch": os.environ.get("RUNNER_ARCH"),
+              "tools": {
+                  "extractor_sha256": os.environ["EXTRACTOR_SHA256"],
+                  "comparator_sha256": os.environ["COMPARATOR_SHA256"],
+              },
+              "sources": {
+                  "anchor": os.environ["ANCHOR_SHA"],
+                  "frontier": os.environ["FRONTIER_SHA"],
+              },
+              "outputs": {
+                  "frontier_graph": {
+                      "path": frontier_path.as_posix(),
+                      "sha256": sha256(frontier_path),
+                      "counts": frontier["counts"],
+                      "model_parent_cycles": len(frontier["model_parent_cycles"]),
+                  },
+                  "anchor_graph": {
+                      "path": anchor_path.as_posix(),
+                      "sha256": sha256(anchor_path),
+                      "counts": anchor["counts"],
+                      "model_parent_cycles": len(anchor["model_parent_cycles"]),
+                  },
+                  "comparison": {
+                      "path": comparison_path.as_posix(),
+                      "sha256": sha256(comparison_path),
+                      "reference_edges": {
+                          key: comparison["reference_edges"][key]
+                          for key in ("shared_count", "anchor_only_count", "frontier_only_count")
+                      },
+                      "unresolved_local_refs": {
+                          key: comparison["unresolved_local_refs"][key]
+                          for key in ("shared_count", "anchor_only_count", "frontier_only_count")
+                      },
+                  },
+              },
+              "boundaries": {
+                  "raw_third_party_assets_committed": False,
+                  "minecraft_launched": False,
+                  "performance_measured": False,
+                  "main_merged": False,
+              },
+          }
+          (root / "RENDER-GRAPH-FULL-CHECKOUT-EVIDENCE.json").write_text(
+              json.dumps(receipt, indent=2, ensure_ascii=False) + "\n",
+              encoding="utf-8",
+          )
+          print(json.dumps(receipt["outputs"], indent=2))
           '@ | python -
 
       - name: Commit generated evidence
         run: |
           git config user.name "KNEEKURA Minecraft Tech"
           git config user.email "actions@users.noreply.github.com"
-          git add departments/minecraft/mods/twilight-forest/BLOCK-ITEM-RENDER-GRAPH.json
-          git add departments/minecraft/mods/twilight-forest/BLOCK-ITEM-RENDER-GRAPH.md
+          git add "$env:TF_EVIDENCE_DIR/BLOCK-ITEM-RENDER-GRAPH.json"
+          git add "$env:TF_EVIDENCE_DIR/BLOCK-ITEM-RENDER-GRAPH.md"
+          git add "$env:TF_EVIDENCE_DIR/ANCHOR-BLOCK-ITEM-RENDER-GRAPH.json"
+          git add "$env:TF_EVIDENCE_DIR/ANCHOR-BLOCK-ITEM-RENDER-GRAPH.md"
+          git add "$env:TF_EVIDENCE_DIR/BLOCK-ITEM-RENDER-COMPARISON.json"
+          git add "$env:TF_EVIDENCE_DIR/BLOCK-ITEM-RENDER-COMPARISON.md"
+          git add "$env:TF_EVIDENCE_DIR/RENDER-GRAPH-FULL-CHECKOUT-EVIDENCE.json"
           if (git diff --cached --quiet) {
             Write-Host "No render graph changes."
             exit 0
           }
-          git commit -m "Twilight Forest: materialize complete block item render graph"
+          git commit -m "Twilight Forest: materialize anchor render graph and portability"
           git push origin HEAD:jolly/minecraft-tech-department-2026-09-22
