@@ -81,7 +81,10 @@
     "COMPATIBILITY.md",
     "CUSTOM-DATA-GRAPH.json",
     "CUSTOM-DATA-PORTABILITY.md",
-    "CUSTOM-DATA-PORTABILITY.json"
+    "CUSTOM-DATA-PORTABILITY.json",
+    "ANCHOR-JAR-PROVENANCE.md",
+    "RUNTIME-EVIDENCE-SPEC.md",
+    "tools/verify_anchor_jar.py"
   ],
   "notes": [
     "ANCHOR commit is the strongest public-source candidate found for CurseForge 4.3.2508; exact distributed-binary identity remains unproven.",
@@ -91,6 +94,8 @@
     "Compatibility boundary mapped as normal API hooks + Access Transformers + dedicated ASM processors + Mod-specific adapters; active and disabled compat trees are kept distinct.",
     "FRONTIER custom data graph complete: all 290 generated twilight/* records are tied to immutable blob SHAs and mapped to loading mode, codec boundary and primary runtime consumers.",
     "ANCHOR entity rendering source map is complete for 82 registrations / 67 local renderer classes, including the 24-entity JAPPA presentation switch and multipart renderer switches.",
-    "Custom-data portability mapped: ANCHOR has 21 canonical twilight/* records across 4 families plus 12 legacy stalactite records; FRONTIER has 290 records across 14 families. Stable, schema-adapted, refactored and newly data-driven systems have explicit 1.20.1 strategies."
+    "Custom-data portability mapped: ANCHOR has 21 canonical twilight/* records across 4 families plus 12 legacy stalactite records; FRONTIER has 290 records across 14 families. Stable, schema-adapted, refactored and newly data-driven systems have explicit 1.20.1 strategies.",
+    "ANCHOR JAR verifier prepared: once file 5468648 is reachable, it records SHA-256/SHA-1/metadata and computes exact Git-blob resource correspondence against the pinned a7dd8f13 source inventory.",
+    "Runtime evidence specification prepared for startup, worldgen, structures, eight bosses, multipart stress, rendering, networking and reload profiling; no measured performance claim is promoted yet."
   ]
 }
