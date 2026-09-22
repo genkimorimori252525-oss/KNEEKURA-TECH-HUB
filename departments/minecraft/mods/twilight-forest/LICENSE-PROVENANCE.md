@@ -4,9 +4,9 @@ Upstream repository: `TeamTwilight/twilightforest`.
 
 The upstream README distinguishes content classes:
 
-- code: governed by repository `LICENSE` unless otherwise stated;
-- non-code/non-sound/non-structure assets: governed by `ASSET_LICENSE`;
-- sounds and structure assets: described by upstream as **All Rights Reserved** in the current README.
+- code: repository `LICENSE`, whose header grants **GNU LGPL 2.1 or later** unless otherwise stated;
+- non-code/non-sound/non-structure assets: `ASSET_LICENSE`, **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)**;
+- sounds under `assets/twilightforest/sounds` and structure assets under `data/twilightforest/structure`: described by the current upstream README as **All Rights Reserved**.
 
 For KNEEKURA TECH HUB this reinforces the derived-analysis policy:
 
