@@ -88,3 +88,7 @@ When local runtime testing begins, capture separately:
 9. heap allocation during worldgen and rendering.
 
 Do not promote any “fast/slow” claim before measurements are attached to machine/environment evidence.
+
+## Executable evidence contract
+
+`RUNTIME-EVIDENCE-SPEC.md` now defines the fixed runtime scenarios, environment envelope, output layout, and proof boundary for future ANCHOR/FRONTIER measurements. Static hot-path notes remain hypotheses until those runs exist.
