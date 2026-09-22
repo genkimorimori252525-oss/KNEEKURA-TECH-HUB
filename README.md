@@ -10,6 +10,16 @@ Private technology research infrastructure for discovering large amounts of engi
 2. **Evidence-backed Technology Encyclopedia** — curated claims with traceable evidence.
 3. **Design Research Laboratory** — comparison, experiments, and KNEEKURA application hypotheses.
 
+## Minecraft Technology Department
+
+A dedicated private research lane for Minecraft mod engineering has been established under `departments/minecraft/`.
+
+**Compatibility baseline is fixed to Minecraft 1.20.1 + Minecraft Forge.** Other Minecraft versions, Fabric, or NeoForge may be inspected only as comparative evidence and must not be mixed into the canonical 1.20.1 Forge catalog.
+
+The department is designed for whole-mod analysis: code architecture, entity/boss AI, pathfinding, state machines, registries/events, networking, dimensions/world generation, rendering, models, animations, textures, particles, sounds, data assets, compatibility, and performance. Raw JARs, decompiled trees, and full third-party asset copies remain local-only by default; the repository stores provenance, inventories, hashes, mappings, and derived analysis.
+
+First registered target: **The Twilight Forest**.
+
 ## Architecture
 
 ```text
