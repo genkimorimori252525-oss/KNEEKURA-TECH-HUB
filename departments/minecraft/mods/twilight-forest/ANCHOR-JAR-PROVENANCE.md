@@ -1,99 +1,76 @@
 # Twilight Forest 4.3.2508 — Distributed JAR Provenance
 
-Status: **artifact identity located; binary hash still pending execution in a network-capable/local environment**
+Status: **distributed binary pinned; resource correspondence strongly proven; compiled-class identity kept as a separate proof boundary**
 
-## Official distributed target
+## Distributed artifact
 
-CurseForge identifies the ANCHOR artifact as:
-
-- project ID: `227639`
+- CurseForge project ID: `227639`
 - file ID: `5468648`
 - release: `4.3.2508`
 - filename: `twilightforest-1.20.1-4.3.2508-universal.jar`
-- Minecraft: `1.20.1`
-- loader metadata: Forge / NeoForge
-- uploaded: 2024-06-24
-- reported size: 22.3 MB
-- Curse Maven coordinate: `curse.maven:the-twilight-forest-227639:5468648`
+- exact size: **23,332,091 bytes**
+- SHA-256: `0bdc89263616d1b35c32ef82c5e9c14cbd20368e2fe8b468c72a28320be7a778`
+- SHA-1: `fa3b506a45d3e9c465551cd533fd50c899496e9f`
+- ZIP entries: **7,752**
+- class entries: **1,570**
+- non-class/resource entries: **6,182**
 
-Official page:
+The manifest inside the actual distributed JAR records:
 
-`https://www.curseforge.com/minecraft/mc-mods/the-twilight-forest/files/5468648`
+- implementation version: `4.3.2508`
+- implementation timestamp: `2024-06-24T18:00:24+0000`
+- specification vendor: `TeamTwilight`
+
+`META-INF/mods.toml` records Forge loader `[47,)`, Forge dependency `[47.1.0,)`, and Minecraft dependency `[1.20.1,)`.
 
 ## Public-source candidate
 
-Pinned candidate:
+Pinned source commit:
 
 `TeamTwilight/twilightforest@a7dd8f13c653e137f977f5ffaa870fcb20fc1625`
 
-Why it is the strongest public-source candidate currently known:
+The candidate commit timestamp is 2024-06-24 17:58:45 UTC, immediately before the JAR manifest build timestamp, and its Discord URL change matches a 4.3.2508 release-note change.
 
-1. it is on the public 1.20.1 line;
-2. its timestamp is immediately before the 4.3.2508 upload window;
-3. its commit changes the Discord URL to `https://discord.experiment115.com/`;
-4. the 4.3.2508 release notes explicitly list that Discord URL fix.
+## Executed resource correspondence proof
 
-This is strong chronology/content evidence, not proof that the distributed bytecode was built from exactly this commit.
+The verifier ran on the KNEEKURA-LAB Windows/X64 self-hosted runner in workflow run `35742278246`.
 
-## Why binary and source stay separate
-
-Upstream issue #2345 later recorded a developer statement that a Japanese translation fix already existed in source but apparently had not been uploaded to CurseForge. Therefore:
-
-```text
-public 1.20.1 source history
-        ≠ automatically
-distributed 4.3.2508 JAR contents
-```
-
-The Hub intentionally keeps those evidence tracks separate.
-
-## Automated verifier
-
-Run:
-
-```powershell
-python departments/minecraft/mods/twilight-forest/tools/verify_anchor_jar.py
-```
-
-or supply a local JAR:
-
-```powershell
-python departments/minecraft/mods/twilight-forest/tools/verify_anchor_jar.py --jar "C:\path\to\twilightforest-1.20.1-4.3.2508-universal.jar"
-```
-
-The verifier records:
-
-- JAR SHA-256 and SHA-1;
-- exact byte size;
-- ZIP/class/resource counts;
-- `META-INF/MANIFEST.MF`;
-- `META-INF/mods.toml`;
-- `pack.mcmeta`;
-- resource-by-resource correspondence against the pinned source candidate.
-
-### Resource correspondence technique
-
-The TECH HUB already stores the source candidate's complete Git tree including each Git blob SHA.
-
-For each resource in the JAR, the verifier calculates the Git object hash:
+It compared every eligible `src/main/resources/` and `src/generated/resources/` source resource against JAR bytes using Git's exact blob identity:
 
 ```text
 SHA1("blob " + byte_length + NUL + raw_bytes)
 ```
 
-and compares it directly with the source-candidate blob SHA.
+Result:
 
-This can prove exact byte correspondence for resource files **without cloning the upstream source again**.
+- expected source resource paths: **6,156**
+- paths present in both source and JAR: **6,156**
+- exact Git-blob matches: **6,156**
+- mismatches: **0**
+- source paths missing from JAR: **0**
+- match ratio: **1.000000**
+
+Machine-readable record: `ANCHOR-JAR-EVIDENCE.json`.
+
+Conclusion: **RESOURCE_CORRESPONDENCE_STRONG**.
 
 ## Proof boundary
 
-Even a 100% resource match does not automatically prove compiled class identity because Java compilation, remapping/reobfuscation and build inputs transform source into bytecode.
+This result proves the distributed artifact identity and exact correspondence of the compared resources to commit `a7dd8f13…`.
 
-The final provenance record must therefore distinguish:
+It does **not** by itself prove that every compiled class was produced from that exact source commit, because the Java build path includes compilation, mappings/remapping and reobfuscation. A reproducible build / class-semantic comparison would be a separate experiment if that stronger claim is ever needed.
 
-- **binary identity** — SHA-256 of the actual distributed JAR;
-- **resource correspondence** — exact source↔JAR byte matches;
-- **metadata correspondence** — manifest/mod metadata;
-- **compiled-code identity** — separate evidence if ever required.
+Therefore the Hub records both facts without conflating them:
 
-Until the verifier is executed against the distributed file, ANCHOR remains `IN_PROGRESS`.
+```text
+distributed JAR identity       = pinned
+resource correspondence       = 100% exact for 6,156 paths
+metadata/chronology           = strongly consistent
+compiled-class identity       = not independently proven
+```
+
+## Later source divergence warning
+
+Upstream issue #2345 later records a developer statement that a Japanese translation fix existed in source but apparently was not uploaded to CurseForge. Later 1.20.1 branch state must therefore not be substituted for the pinned distributed artifact.
+
+The ANCHOR track uses the exact JAR hash plus the pinned `a7dd8f13…` source snapshot and keeps later source changes as separate evidence.
