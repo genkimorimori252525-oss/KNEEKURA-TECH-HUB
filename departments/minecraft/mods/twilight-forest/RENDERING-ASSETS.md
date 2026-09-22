@@ -177,9 +177,28 @@ On 1.20.1 Forge this should be recreated with the older renderer API rather than
 
 ## Remaining rendering work
 
-- generate complete entity → renderer → model layer → model → texture table;
+- extend the completed major-boss table to every normal/passive/projectile entity;
 - map block/item JSON model → texture references;
 - map particle providers → textures;
 - inspect shader/render pipeline code;
 - compare ANCHOR model/render architecture;
 - identify asset additions/removals by hash across tracks.
+
+## Major-boss render dependency table
+
+All eight principal progression bosses now have direct FRONTIER renderer/model-layer/texture mappings.
+
+| Boss | Renderer | Model / layer | Primary texture(s) |
+|---|---|---|---|
+| Naga | `NagaRenderer` | `NagaModel` / `TFModelLayers.NAGA` | `nagahead.png`, `nagahead_charging.png`, `nagahead_dazed.png` |
+| Lich | `LichRenderer` | `LichModel` / `LICH` | `twilightlich64.png`, eye layer `twilightlich64_eyes.png` |
+| Hydra | `HydraRenderer` | `HydraModel` / `HYDRA` | `hydra4.png` |
+| Ur-Ghast | `UrGhastRenderer` | `UrGhastModel` / `UR_GHAST` | `towerboss.png`, `towerboss_openeyes.png`, `towerboss_fire.png` |
+| Snow Queen | `SnowQueenRenderer` | `SnowQueenModel` / `SNOW_QUEEN` | `snowqueen.png` |
+| Alpha Yeti | `AlphaYetiRenderer` | `AlphaYetiModel` / `ALPHA_YETI` | `yetialpha.png` |
+| Knight Phantom | `KnightPhantomRenderer` | `KnightPhantomModel` / `KNIGHT_PHANTOM` | `phantomskeleton.png` + armor layer |
+| Minoshroom | `MinoshroomRenderer` | `MinoshroomModel` / `MINOSHROOM` | `minoshroomtaur.png` + dynamic brown-mushroom block-model layer |
+
+Machine-readable copy: `BOSS-RENDER-MAP.json`.
+
+This reinforces a recurring pattern: authoritative encounter state is projected into render state and then into model/texture choice; presentation does not drive combat state.
