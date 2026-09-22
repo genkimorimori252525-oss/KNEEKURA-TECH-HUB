@@ -1,6 +1,6 @@
 # Twilight Forest — Rendering / Models / Assets
 
-Status: **FRONTIER client rendering architecture mapped; full asset dependency graph in progress**
+Status: **FRONTIER + ANCHOR client rendering architecture and global block/item asset graphs mapped**
 
 Source snapshot: `TeamTwilight/twilightforest@793c4d4c7b0a2892f702cbb9a8d751fbe7218828`.
 
@@ -178,7 +178,7 @@ On 1.20.1 Forge this should be recreated with the older renderer API rather than
 ## Remaining rendering work
 
 - **DONE (v1):** all 81 registered entity renderers are resolved in `ENTITY-RENDER-DEPENDENCIES.json`; 66 Twilight Forest renderer classes were inspected in four evidence batches and renderer inheritance is followed.
-- map block/item JSON model → texture references (entity-side block/item delegation is classified; global block/item asset graph remains pending);
+- **DONE:** map global block/item JSON model → parent/model/texture/atlas references for pinned FRONTIER and ANCHOR snapshots;
 - map particle providers → textures;
 - inspect shader/render pipeline code;
 - compare ANCHOR model/render architecture;
@@ -240,7 +240,7 @@ Evidence batches:
 - `inventory/renderers-batch-03.json`
 - `inventory/renderers-batch-04.json`
 
-This closes the first-pass **Entity → Renderer → Model/Layer → asset-selection strategy** map. It does not yet close the separate global block/item JSON-model graph.
+This closes the first-pass **Entity → Renderer → Model/Layer → asset-selection strategy** map. The separate global block/item JSON-model graph is now also materialized for both pinned tracks.
 
 
 ## Global block/item graph extractor
@@ -272,4 +272,4 @@ texture / atlas resource
 
 and records SHA-256, local reference resolution, unresolved Twilight Forest references, duplicate logical assets, parse failures and model-parent cycles.
 
-Execution against the full local checkout is still pending; therefore the global block/item graph is not yet marked complete.
+Full-checkout execution completed on GitHub Actions run `35767314089` using self-hosted Windows/x64 runner `Jolly-TechHub`. FRONTIER produced 4,124 nodes / 7,174 edges with 17 unresolved local refs; ANCHOR produced 3,774 nodes / 8,591 edges with 15 unresolved local refs. Both have 0 duplicate logical paths, 0 parse errors, and 0 model-parent cycles. Cross-track results are stored in `BLOCK-ITEM-RENDER-COMPARISON.json` / `.md`, and the exact run/tool/source identities are recorded in `RENDER-GRAPH-FULL-CHECKOUT-EVIDENCE.json`.
