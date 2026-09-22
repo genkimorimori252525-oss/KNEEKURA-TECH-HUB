@@ -1,0 +1,366 @@
+{
+  "catalog_version": "1.0",
+  "source_snapshot": {
+    "repository": "TeamTwilight/twilightforest",
+    "commit": "793c4d4c7b0a2892f702cbb9a8d751fbe7218828",
+    "minecraft": "26.1.2",
+    "loader": "NeoForge"
+  },
+  "scope": "All 43 Java classes directly under twilightforest/entity/ai/goal in the pinned FRONTIER snapshot.",
+  "methodology": "Read class lifecycle methods (especially canUse, canContinueToUse, start, stop, tick) and record derived semantics without copying full source.",
+  "counts": {
+    "custom_goal_classes": 43
+  },
+  "design_findings": [
+    "Goals are small behavioral policies composed by entity priority rather than one monolithic AI controller.",
+    "Activation conditions frequently combine semantic state (phase/home/tantrum/tired), physical preconditions (range/ground/LOS), cooldowns and random gates.",
+    "Presentation-visible action flags such as breathing, charging, panicked, rampaging and tired are synchronized from authoritative Goal lifecycle.",
+    "Complex encounters layer explicit state machines or group controllers on top of the same Goal scheduler."
+  ],
+  "goals": [
+    {
+      "name": "AlwaysWatchTargetGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/AlwaysWatchTargetGoal.java",
+      "blob_sha": "32a86ce7f94d99992d4b9e1997d59872f95f9900",
+      "category": "look",
+      "activation_semantics": "target exists",
+      "lifecycle_and_effect": "target is looked at every tick with wide yaw/pitch limits"
+    },
+    {
+      "name": "AttemptToGoHomeGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/AttemptToGoHomeGoal.java",
+      "blob_sha": "61a986542855baea124a6284bed6290338e17fff",
+      "category": "home_constraint",
+      "activation_semantics": "restriction point exists and mob is outside home area",
+      "lifecycle_and_effect": "select a random reachable point biased toward home; continue until navigation completes"
+    },
+    {
+      "name": "AvoidAnyEntityGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/AvoidAnyEntityGoal.java",
+      "blob_sha": "362c7864d8a5cfc8de2d3a2d9023607fc3e2e082",
+      "category": "avoidance",
+      "activation_semantics": "matching entity found in inflated area and a path farther from it can be created",
+      "lifecycle_and_effect": "navigate away; switch between near/far speed by distance; clear avoided target on stop"
+    },
+    {
+      "name": "BreathAttackGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/BreathAttackGoal.java",
+      "blob_sha": "0de96b67168428495578dfa7cb8f7b2eb45c85ba",
+      "category": "ranged_sustained",
+      "activation_semantics": "recent attacker is alive/non-creative, within breath range, visible, and random chance passes",
+      "lifecycle_and_effect": "set breathing sync flag; track/look at stored eye position; after initial delay damage head-look target until duration/LOS/range ends"
+    },
+    {
+      "name": "ChargeAttackGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/ChargeAttackGoal.java",
+      "blob_sha": "d98908403e3d258dbf2f452ffe317ac09f8ce21b",
+      "category": "charge",
+      "activation_semantics": "target exists in configured distance band, charger is grounded, has LOS, and random frequency passes",
+      "lifecycle_and_effect": "15-44 tick windup then navigate to charge point; optional block breaking; apply one attack when in range; clear sprint/charging on stop"
+    },
+    {
+      "name": "CubeCenterOnSymbolGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/CubeCenterOnSymbolGoal.java",
+      "blob_sha": "02d13a6f8be82fee9302dddf3e8dbccffaf44e40",
+      "category": "positioning",
+      "activation_semantics": "navigation is idle and cube is close to its symbol",
+      "lifecycle_and_effect": "MoveControl inches toward exact symbol center until sufficiently centered/course invalid"
+    },
+    {
+      "name": "CubeMoveToRedstoneSymbolsGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/CubeMoveToRedstoneSymbolsGoal.java",
+      "blob_sha": "dbb5adff42fe5ad69627d86393122a75addb761a",
+      "category": "environment_seek",
+      "activation_semantics": "1/20 random gate and a redstone symbol is found",
+      "lifecycle_and_effect": "navigate to discovered symbol until navigation completes"
+    },
+    {
+      "name": "FlockToSameKindGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/FlockToSameKindGoal.java",
+      "blob_sha": "6186ec84dc5f8afc0b992644568f31356cc42153",
+      "category": "social_flocking",
+      "activation_semantics": "1/40 gate, nearby same-class flock <=5, centroid not already close; pacified bread-holding Kobold excluded",
+      "lifecycle_and_effect": "move toward flock centroid every 10 ticks; stop when too near/too far or position cleared"
+    },
+    {
+      "name": "GhastguardAttackGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/GhastguardAttackGoal.java",
+      "blob_sha": "fa671000147fc99c8eae51acf1c8dd25f57ff700",
+      "category": "ranged_timed",
+      "activation_semantics": "target exists and ghast.shouldAttack(target)",
+      "lifecycle_and_effect": "if target is within 64 blocks squared-range and visible: warn at tick10, fire at tick20, then enter -40 cooldown; synced charging after tick10"
+    },
+    {
+      "name": "GhastguardHomedFlightGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/GhastguardHomedFlightGoal.java",
+      "blob_sha": "a278f93f37be4cb75f0449a880133408af647f4a",
+      "category": "home_flight",
+      "activation_semantics": "ghast is outside home and current wanted movement is absent/invalid-distance",
+      "lifecycle_and_effect": "one-shot MoveControl command; bias movement toward restriction point when far and directly home when nearer"
+    },
+    {
+      "name": "GhastguardRandomFlyGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/GhastguardRandomFlyGoal.java",
+      "blob_sha": "c509b0fa8b0fa86e4d67c3b164d04352c4d49b7e",
+      "category": "random_flight",
+      "activation_semantics": "no target and current wanted movement is absent or too near/far",
+      "lifecycle_and_effect": "one-shot random MoveControl destination using wander factor"
+    },
+    {
+      "name": "GroundAttackGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/GroundAttackGoal.java",
+      "blob_sha": "d0315963beeaad44f1c512ae677514435c57a6bf",
+      "category": "area_slam",
+      "activation_semantics": "cooldown elapsed, target in configured range, attacker grounded; LOS changes random trigger probability",
+      "lifecycle_and_effect": "set 200-399 tick cooldown and 30-59 tick charge; hold movement/look at target; on expiry slam grounded players in large AABB and knock/damage them"
+    },
+    {
+      "name": "HeavySpearAttackGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/HeavySpearAttackGoal.java",
+      "blob_sha": "8878fe40391ce27a919b82509a17ad41345e6948",
+      "category": "rider_spear",
+      "activation_semantics": "UpperGoblinKnight heavy-spear timer is active and living target exists",
+      "lifecycle_and_effect": "at timer==25 invoke heavy spear impact"
+    },
+    {
+      "name": "HoverBaseGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/HoverBaseGoal.java",
+      "blob_sha": "2bb5e2d2cec2d25c638c12a26e8262a6ba0b38e4",
+      "category": "hover_base",
+      "activation_semantics": "abstract base",
+      "lifecycle_and_effect": "on start choose a hover position relative to current target"
+    },
+    {
+      "name": "HoverBeamGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/HoverBeamGoal.java",
+      "blob_sha": "4ff14c935d7de8059d7625b78b7273372e63f28d",
+      "category": "snow_queen_phase",
+      "activation_semantics": "target alive and Snow Queen phase is BEAM",
+      "lifecycle_and_effect": "seek hover point, then beam while descending toward beamY; synchronized breathing flag; stop at seek/beam limits or phase/target loss"
+    },
+    {
+      "name": "HoverSummonGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/HoverSummonGoal.java",
+      "blob_sha": "ace226d75655819754e46dfece9f34da642608f5",
+      "category": "snow_queen_phase",
+      "activation_semantics": "target alive, visible, and phase is SUMMON",
+      "lifecycle_and_effect": "fly between hover positions; when close check/summon minion then select a new hover spot"
+    },
+    {
+      "name": "HoverThenDropGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/HoverThenDropGoal.java",
+      "blob_sha": "5ba733a7501b50808fe25deb5938f7387fe01f6d",
+      "category": "snow_queen_phase",
+      "activation_semantics": "target alive and phase is DROP",
+      "lifecycle_and_effect": "seek/hover then descend, destroying blocks around boss while dropping; increment successfulDrops when drop duration completes"
+    },
+    {
+      "name": "LichAbsorbMinionsGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/LichAbsorbMinionsGoal.java",
+      "blob_sha": "a40fa3423118f955419dfd7731383822ebabc363",
+      "category": "lich_recovery",
+      "activation_semantics": "Lich below half health and owns at least one minion",
+      "lifecycle_and_effect": "enter scepter timing; after delay consume first owned minion, heal by minion health, create trail/effects, set pop cooldown 40"
+    },
+    {
+      "name": "LichMinionsGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/LichMinionsGoal.java",
+      "blob_sha": "a816e4d99ee057ab25ec5c8e9643c2809d293935",
+      "category": "lich_phase2",
+      "activation_semantics": "Lich phase==2 and not shadow clone",
+      "lifecycle_and_effect": "equip zombie scepter; periodically spawn minions; strafe with LOS; melee close, alternate bolt/bomb at range, otherwise teleport; governed by attack cooldown"
+    },
+    {
+      "name": "LichPopMobsGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/LichPopMobsGoal.java",
+      "blob_sha": "53b4cd19ea7719d63300d93ba6bdd058669c1c56",
+      "category": "lich_recovery",
+      "activation_semantics": "non-clone Lich damaged, pop cooldown zero, visible tagged poppable mob nearby",
+      "lifecycle_and_effect": "after scepter delay consume one visible tagged mob, heal 2, emit effects, set pop cooldown 40"
+    },
+    {
+      "name": "LichShadowsGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/LichShadowsGoal.java",
+      "blob_sha": "b028cab3934bcf4fe9551a766e01eed1af1fb6e0",
+      "category": "lich_phase1",
+      "activation_semantics": "phase==1, tickCount>20, target exists",
+      "lifecycle_and_effect": "main Lich synchronizes clone cooldown/invisibility; teleports at cooldown60 and attacks at cooldown0 with clones; clone validates master; stop despawns clones"
+    },
+    {
+      "name": "NagaMovementPattern",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/NagaMovementPattern.java",
+      "blob_sha": "1cebe886ac59c5199642c6a2e17451bb223f05eb",
+      "category": "naga_state_machine",
+      "activation_semantics": "target exists and both target/Naga are inside home arena",
+      "lifecycle_and_effect": "FSM CIRCLE/INTIMIDATE/CRUMBLE/CHARGE/STUNLESS_CHARGE/DAZE controls navigation, charging/dazed flags and terrain crumble; detailed timings in BOSS-AI-MATRIX.json"
+    },
+    {
+      "name": "NagaSmashGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/NagaSmashGoal.java",
+      "blob_sha": "d6216ce80d1dcbcb64a60c840de8f312a44b026c",
+      "category": "terrain_interaction",
+      "activation_semantics": "horizontal collision and entity griefing allowed",
+      "lifecycle_and_effect": "one-shot destroy leaves and, under Naga policy, other destroyable blocks around collision box"
+    },
+    {
+      "name": "PanicOnFlockDeathGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/PanicOnFlockDeathGoal.java",
+      "blob_sha": "ae1953b99c1ad50601e5e76d3cca953f14284376",
+      "category": "social_panic",
+      "activation_semantics": "existing flee timer or dead same-class neighbor within 4x2x4; random flee point available",
+      "lifecycle_and_effect": "40 tick panic navigation; Kobold panicked animation flag on start/clear on stop; timer decrements"
+    },
+    {
+      "name": "PhantomAttackStartGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/PhantomAttackStartGoal.java",
+      "blob_sha": "c438ce9e97d9f575d5dbe5c9886a90fa66cf95a6",
+      "category": "formation_attack",
+      "activation_semantics": "target exists and formation ATTACK_PLAYER_START",
+      "lifecycle_and_effect": "continuously set charge position to target previous position if within home, otherwise restriction point"
+    },
+    {
+      "name": "PhantomThrowWeaponGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/PhantomThrowWeaponGoal.java",
+      "blob_sha": "bc60bdb477e04c38368e737fc761bc3710e86217",
+      "category": "formation_attack",
+      "activation_semantics": "target exists and formation ATTACK_PLAYER_ATTACK",
+      "lifecycle_and_effect": "every 4 formation ticks throw axe or picks depending on knight equipment"
+    },
+    {
+      "name": "PhantomUpdateFormationAndMoveGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/PhantomUpdateFormationAndMoveGoal.java",
+      "blob_sha": "e61134e4ae17ee1b308a1b62e214baf14f121d06",
+      "category": "formation_controller",
+      "activation_semantics": "always active",
+      "lifecycle_and_effect": "advance formation clock, switch at duration, compute formation destination, command MoveControl at speed 2 when charging else 1; periodically toggles noPhysics"
+    },
+    {
+      "name": "PhantomWatchAndAttackGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/PhantomWatchAndAttackGoal.java",
+      "blob_sha": "870ae58edcbb0aa7afd0d9649d0b9610ecca812e",
+      "category": "formation_combat",
+      "activation_semantics": "target exists",
+      "lifecycle_and_effect": "look at target; melee on LOS/in-range with 20 tick attack delay; shield guard alternates long guard/cooldown behavior outside weapon-throw stage"
+    },
+    {
+      "name": "QuestRamEatWoolGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/QuestRamEatWoolGoal.java",
+      "blob_sha": "9bfb5726f61b46d2ec71f855970b67de6353cc08",
+      "category": "quest_resource_seek",
+      "activation_semantics": "visible alive tempting item on ground/water within 16 blocks; choose nearest",
+      "lifecycle_and_effect": "navigate/look at item; within distance squared 6.25 call tryAccept and consume item when accepted"
+    },
+    {
+      "name": "RandomLookAroundIfBoredGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/RandomLookAroundIfBoredGoal.java",
+      "blob_sha": "c7a14b9d7ec479dba151164bfe263c09a4e4a12b",
+      "category": "idle_look",
+      "activation_semantics": "no target and 2% random gate",
+      "lifecycle_and_effect": "look toward random horizontal direction for 20-39 ticks; stop continuing if target appears"
+    },
+    {
+      "name": "RedcapBaseGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/RedcapBaseGoal.java",
+      "blob_sha": "d8ba88edd0da626fd197dec4d351b856329a54c9",
+      "category": "redcap_base",
+      "activation_semantics": "abstract helper",
+      "lifecycle_and_effect": "shared Redcap tactical helper layer; concrete light/plant/shy Goals hold activation policy"
+    },
+    {
+      "name": "RedcapLightTNTGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/RedcapLightTNTGoal.java",
+      "blob_sha": "9bf8031c5ff9203540df24ac462e45948fa1144b",
+      "category": "tnt_tactics",
+      "activation_semantics": "griefing allowed, local delay elapsed, block TNT found within 8",
+      "lifecycle_and_effect": "equip flint, approach TNT, ignite/remove block within 2.4 distance; restore pick and 20 tick delay on stop"
+    },
+    {
+      "name": "RedcapPlantTNTGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/RedcapPlantTNTGoal.java",
+      "blob_sha": "aced8c51c68a345f55b565deb7cdfbdb08b8dcbf",
+      "category": "tnt_tactics",
+      "activation_semantics": "target exists within distance squared25, Redcap has TNT, target is not looking, griefing allowed, no lit TNT nearby and no existing TNT within5",
+      "lifecycle_and_effect": "equip/place one TNT at own position then restore pick"
+    },
+    {
+      "name": "RedcapShyGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/RedcapShyGoal.java",
+      "blob_sha": "59a541cb29a7c49f9ab51786dec6827917d3e22c",
+      "category": "tnt_tactics",
+      "activation_semantics": "Redcap shy; target in configured min/max distance and looking at Redcap",
+      "lifecycle_and_effect": "navigate to circle point around target while maintaining look; continues only while shy, target looking, distance band valid and path active"
+    },
+    {
+      "name": "RiderSpearAttackGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/RiderSpearAttackGoal.java",
+      "blob_sha": "15239deafee6538fb92612f24fc62155fafec168",
+      "category": "mounted_combat",
+      "activation_semantics": "LowerGoblinKnight carries UpperGoblinKnight passenger; target alive; passenger heavy-spear timer active",
+      "lifecycle_and_effect": "lower rider-side Goal gates behavior to upper knight's spear timing"
+    },
+    {
+      "name": "SimplifiedAttackGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/SimplifiedAttackGoal.java",
+      "blob_sha": "5e15cd1150f4f7ca2f08e9ef68489e59a0edd5fb",
+      "category": "simple_melee",
+      "activation_semantics": "target exists and already within melee range",
+      "lifecycle_and_effect": "attack timer starts at zero; repeatedly checks/executes attack without pathfinding-oriented MeleeAttackGoal machinery"
+    },
+    {
+      "name": "ThrowRiderGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/ThrowRiderGoal.java",
+      "blob_sha": "de76a941f596681167d512ec7481090edfc2481f",
+      "category": "hostile_mount",
+      "activation_semantics": "mob has no passenger; valid non-boss target; target throw cooldown<=0; parent melee goal can start",
+      "lifecycle_and_effect": "10-39 tick hold timer and 80-119 tick chase timeout; when ending with passenger, dismount/throw forward+up; player throw state synchronized with MovePlayerPacket"
+    },
+    {
+      "name": "ThrowSpikeBlockGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/ThrowSpikeBlockGoal.java",
+      "blob_sha": "ace14c67d52ed3a8b1a31f6665ee0e4067a4c777",
+      "category": "ranged_chain",
+      "activation_semantics": "target exists within distance squared42, cooldown<=0, attacker alive/LOS and 1/56 random gate",
+      "lifecycle_and_effect": "set throwing state and 100-199 tick cooldown; continue while chain move length >0"
+    },
+    {
+      "name": "UrGhastAttackGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/UrGhastAttackGoal.java",
+      "blob_sha": "eb6102b6dc2e565fce9c03cfb5fd672658382383",
+      "category": "urghast_attack",
+      "activation_semantics": "target exists and boss is not in tantrum",
+      "lifecycle_and_effect": "within 64-block squared-range and LOS: warn tick10, fire tick20, then -40 cooldown; charging sync after tick10"
+    },
+    {
+      "name": "UrGhastFlightGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/UrGhastFlightGoal.java",
+      "blob_sha": "a886e8875aa65fb5e07e7f9f626497d911c1d144",
+      "category": "urghast_flight",
+      "activation_semantics": "custom flight path can be created and current wanted move is absent/invalid-distance",
+      "lifecycle_and_effect": "move through path points; when a cycle wraps during trap logic, check/spawn ghasts at traps; set noPhysics false at cruising movement"
+    },
+    {
+      "name": "UrGhastLookGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/UrGhastLookGoal.java",
+      "blob_sha": "2ac17ca907075e245b6fc2512e047e088e3df844",
+      "category": "urghast_look",
+      "activation_semantics": "always active",
+      "lifecycle_and_effect": "without target orient body to velocity; with target inside distance squared4096 orient to target"
+    },
+    {
+      "name": "YetiRampageGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/YetiRampageGoal.java",
+      "blob_sha": "675ecd0c2a898fb0a451ea698f868bfa8b136ad5",
+      "category": "alpha_yeti_phase",
+      "activation_semantics": "target exists and canRampage; internal timeout counts down until <=0",
+      "lifecycle_and_effect": "set rampaging for configured duration; repeatedly jump, destroy blocks, create falling blocks/targeted hazards and ice bombs; stop resets timeout and enters tired state"
+    },
+    {
+      "name": "YetiTiredGoal",
+      "source_path": "src/main/java/twilightforest/entity/ai/goal/YetiTiredGoal.java",
+      "blob_sha": "c4db6ab87beda03184583b7914a00e9fc0f24144",
+      "category": "alpha_yeti_recovery",
+      "activation_semantics": "Yeti tired flag set",
+      "lifecycle_and_effect": "run until tiredDuration; pant every 10 ticks; stop clears tired flag"
+    }
+  ]
+}
