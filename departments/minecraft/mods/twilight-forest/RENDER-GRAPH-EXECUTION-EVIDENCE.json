@@ -1,0 +1,111 @@
+{
+  "record_version": "1.0",
+  "record_date_jst": "2026-09-23",
+  "status": "FULL_CHECKOUT_EXECUTION_PENDING",
+  "repository": "genkimorimori252525-oss/KNEEKURA-TECH-HUB",
+  "branch": "jolly/minecraft-tech-department-2026-09-22",
+  "pull_request": 71,
+  "base_head": "ad9571163d1de8f929258c52cb2c8458fcbb04cd",
+  "workflow_id": "5da9a9419ce446009ec15240b9f02694",
+  "upstream": {
+    "repository": "TeamTwilight/twilightforest",
+    "frontier_commit": "793c4d4c7b0a2892f702cbb9a8d751fbe7218828",
+    "anchor_commit": "a7dd8f13c653e137f977f5ffaa870fcb20fc1625"
+  },
+  "expected_frontier_inventory_from_existing_spec_not_measured_here": {
+    "blockstate": 528,
+    "model": 1773,
+    "item_definition": 663,
+    "atlas": 1,
+    "texture": 1159
+  },
+  "execution_environment_evidence": {
+    "actions_run_id": 35741797862,
+    "actions_run_status": "queued",
+    "actions_run_conclusion": null,
+    "actions_run_head_sha": "87cb15aa8951dc9d935a36267452b05e218dec3a",
+    "actions_job_id": 106793165992,
+    "actions_job_status": "queued",
+    "actions_job_steps": null,
+    "required_runner_labels": [
+      "self-hosted",
+      "Windows",
+      "X64"
+    ],
+    "repository_runners_endpoint": "/repos/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runners",
+    "repository_runners_total_count": 0,
+    "repository_runners": [],
+    "runner_query_request_id": "tf-render-readiness-runners-final-20260923",
+    "run_query_request_id": "tf-render-readiness-run-final-20260923",
+    "remote_workspace_execution": "Safety check blocked; not repeated or bypassed.",
+    "assistant_sandbox_upstream_fetch": "Failed: could not resolve github.com; no upstream full checkout obtained."
+  },
+  "verification": {
+    "python_version": "3.13.5",
+    "scope": "Selected-file harness only; synthetic fixtures, not full repository or upstream checkout.",
+    "original_selected_files_verified_by_git_blob_sha1": true,
+    "original_test_count": 2,
+    "original_failures": 2,
+    "root_cause": "Test loader did not register module in sys.modules while dataclasses resolved postponed annotations.",
+    "production_change": "One-line Markdown backtick escaping correction only; extraction semantics unchanged.",
+    "markdown_regression_red_result": "1 failed, 2 passed before production summary correction.",
+    "final_focused_test_count": 12,
+    "checks": [
+      {
+        "name": "focused_fixture_tests",
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_twilight_forest_render_asset_graph_tool.py"
+        ],
+        "exit_code": 0,
+        "output": "............                                                             [100%]\n12 passed in 0.78s\n"
+      },
+      {
+        "name": "syntax_warning_gate",
+        "command": [
+          "python",
+          "-W",
+          "error",
+          "-m",
+          "py_compile",
+          "departments/minecraft/mods/twilight-forest/tools/build_render_asset_graph.py",
+          "tests/test_twilight_forest_render_asset_graph_tool.py"
+        ],
+        "exit_code": 0,
+        "output": ""
+      }
+    ],
+    "full_repository_suite": "NOT_RUN",
+    "workflow_python_3_12": "NOT_RUN",
+    "github_ci_success": "NOT_CLAIMED",
+    "review": "Same-assistant diff and contract review, not independent review."
+  },
+  "changed_code_files": [
+    {
+      "path": "departments/minecraft/mods/twilight-forest/tools/build_render_asset_graph.py",
+      "git_blob_sha1": "416e09996236102877c10c85dc042995268c8be5",
+      "sha256": "a75ce43a799be5215fb1d3304902459c1794d6c5f32b6830244a899013f001a7",
+      "size_bytes": 10400
+    },
+    {
+      "path": "tests/test_twilight_forest_render_asset_graph_tool.py",
+      "git_blob_sha1": "9583c6581ff0a5183e91ba6023593475ded9b055",
+      "sha256": "f94479b8d85078ade1f49df440ecab80055ad4641cd852900d6749607425f65d",
+      "size_bytes": 9727
+    }
+  ],
+  "completion_boundaries": {
+    "frontier_full_graph_generated": false,
+    "anchor_full_graph_generated": false,
+    "comparative_graph_generated": false,
+    "runtime_evidence_measured": false,
+    "jar_resource_match_reverified": false,
+    "main_merged": false,
+    "runner_registered_or_permissions_changed": false,
+    "new_actions_run_dispatched": false
+  },
+  "next_action": "Provide an authorized matching execution environment; inspect the existing queued run before considering another request. Verify exact TECH HUB/tool and upstream SHAs, run both pinned full trees, review diagnostics and publish separate graphs plus comparison. Do not promote fixture evidence to full-tree completion."
+}

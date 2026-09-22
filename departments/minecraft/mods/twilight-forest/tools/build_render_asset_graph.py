@@ -274,7 +274,7 @@ def summary_markdown(graph: dict[str, Any]) -> str:
     lines = [
         "# Twilight Forest Render Asset Graph — Generated Summary",
         "",
-        f"- source commit: \`{graph.get('source_commit') or 'UNSPECIFIED'}\`",
+        f"- source commit: `{graph.get('source_commit') or 'UNSPECIFIED'}`",
         f"- blockstates: **{counts.get('blockstate', 0)}**",
         f"- models: **{counts.get('model', 0)}**",
         f"- item definitions: **{counts.get('item_definition', 0)}**",
