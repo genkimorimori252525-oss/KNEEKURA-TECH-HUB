@@ -217,11 +217,25 @@ These are largely version-independent:
 - disabled/historical adapters kept as evidence;
 - exact loader/version contract in metadata.
 
-## 11. Remaining compatibility work
+## 11. Integration feature matrix — complete v1
 
-For complete ANCHOR/FRONTIER equivalence:
+`COMPATIBILITY-MATRIX.md` and `COMPATIBILITY-MATRIX.json` now record the exact lifecycle/features for Curios, Jade, JEI, The One Probe, EMI, REI and Cosmetic Armor across ANCHOR/FRONTIER.
 
-1. exact integration feature matrix per JEI/Curios/Jade/REI/EMI/TOP;
-2. AT semantic diff, not only file diff;
-3. ASM equivalent/absence matrix for 1.20.1;
-4. runtime tests with common Mod combinations.
+Key result:
+
+- ANCHOR compatibility-related Java: 29 files;
+- FRONTIER compatibility-related Java: 106 files;
+- Curios/Jade/JEI remain ACTIVE;
+- TOP moves from ACTIVE to DISABLED;
+- EMI and REI are preserved as substantial DISABLED adapters;
+- FRONTIER introduces viewer-neutral `RecipeViewer*` helpers between gameplay data and concrete viewer APIs.
+
+## 12. Remaining compatibility work
+
+For deeper equivalence:
+
+1. AT semantic diff, not only file diff;
+2. ASM equivalent/absence matrix for 1.20.1;
+3. runtime tests with common Mod combinations.
+
+The broad integration feature matrix is no longer pending.
