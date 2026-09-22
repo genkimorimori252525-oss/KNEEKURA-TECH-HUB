@@ -1,0 +1,192 @@
+{
+  "matrix_version": "1.0",
+  "target": "The Twilight Forest",
+  "anchor": {
+    "commit": "a7dd8f13c653e137f977f5ffaa870fcb20fc1625",
+    "minecraft": "1.20.1",
+    "loader": "Forge"
+  },
+  "frontier": {
+    "commit": "793c4d4c7b0a2892f702cbb9a8d751fbe7218828",
+    "minecraft": "26.1.2",
+    "loader": "NeoForge"
+  },
+  "inventory_counts": {
+    "anchor_compat_java": 29,
+    "frontier_compat_java_total": 106,
+    "frontier_active_named_families": {
+      "curios": 8,
+      "jade": 6,
+      "jei": 30,
+      "common": 2,
+      "recipe_viewer_shared": 3
+    },
+    "frontier_disabled_named_families": {
+      "emi": 21,
+      "rei": 26,
+      "top": 4,
+      "cosmetic_armor": 1
+    }
+  },
+  "integrations": [
+    {
+      "id": "curios",
+      "anchor_status": "ACTIVE",
+      "frontier_status": "ACTIVE",
+      "anchor_java_files": 8,
+      "frontier_java_files": 8,
+      "anchor_features": [
+        "capability setup",
+        "equip/use policy",
+        "keep-curios logic",
+        "curio render layers/renderers",
+        "trophy/skull/cicada equipped checks"
+      ],
+      "frontier_features": [
+        "capability registration",
+        "equip/use policy",
+        "keep-curios logic",
+        "curio render layers/renderers",
+        "generic equipped/visible checks",
+        "find-and-consume curio",
+        "custom render data"
+      ],
+      "portability": "HIGH",
+      "finding": "Stable integration boundary; API details evolved but the optional-capability/render-adapter architecture persists."
+    },
+    {
+      "id": "jade",
+      "anchor_status": "ACTIVE",
+      "frontier_status": "ACTIVE",
+      "anchor_java_files": 3,
+      "frontier_java_files": 6,
+      "anchor_features": [
+        "Quest Ram wool provider"
+      ],
+      "frontier_features": [
+        "Quest Ram wool provider",
+        "Drying Rack data provider",
+        "Drying Rack component provider",
+        "Chiseled Bookshelf spawn provider"
+      ],
+      "portability": "HIGH",
+      "finding": "Small provider-adapter pattern scales cleanly as more gameplay systems become data-visible."
+    },
+    {
+      "id": "jei",
+      "anchor_status": "ACTIVE",
+      "frontier_status": "ACTIVE",
+      "anchor_java_files": 12,
+      "frontier_java_files": 30,
+      "anchor_features": [
+        "Crumble Horn category",
+        "Transformation Powder category",
+        "Uncrafting category",
+        "ingredients",
+        "catalysts",
+        "transfer handler",
+        "GUI click area",
+        "entity/item render helpers"
+      ],
+      "frontier_features": [
+        "Crumble Horn",
+        "Transformation Powder",
+        "Uncrafting",
+        "Drying",
+        "Ominous Fire",
+        "recipe catalysts",
+        "transfer handlers",
+        "item subtypes",
+        "vanilla category extensions",
+        "Casket repair/subtype",
+        "Traveller gear modifier/merge extensions",
+        "entity/item render helpers"
+      ],
+      "portability": "HIGH_CONCEPT_MEDIUM_API",
+      "finding": "The recipe-viewer surface expands substantially, but FRONTIER also introduces viewer-neutral RecipeViewer* helpers, reducing JEI-specific gameplay coupling."
+    },
+    {
+      "id": "the_one_probe",
+      "anchor_status": "ACTIVE",
+      "frontier_status": "DISABLED",
+      "anchor_java_files": 3,
+      "frontier_java_files": 4,
+      "anchor_features": [
+        "Quest Ram wool element/provider"
+      ],
+      "frontier_features": [
+        "historical/dormant Quest Ram and bookshelf providers retained under disabled source"
+      ],
+      "portability": "HISTORICAL_REFERENCE",
+      "finding": "Source presence is not equivalent to active support. FRONTIER intentionally preserves adapter knowledge while removing it from the active source set."
+    },
+    {
+      "id": "emi",
+      "anchor_status": "ABSENT_IN_COMPAT_TREE",
+      "frontier_status": "DISABLED",
+      "anchor_java_files": 0,
+      "frontier_java_files": 21,
+      "frontier_features": [
+        "Crumble Horn",
+        "Drying",
+        "Emperor's Cloth",
+        "Moonworm Queen",
+        "No-template smithing",
+        "Ominous Fire",
+        "Scepter repair",
+        "Transformation Powder",
+        "Traveller Gear grindstone/modifier",
+        "Uncrafting",
+        "custom entity/block/item widgets"
+      ],
+      "portability": "HISTORICAL_REFERENCE",
+      "finding": "A large dormant adapter demonstrates how the viewer-neutral recipe concepts map onto EMI without making EMI a current runtime dependency."
+    },
+    {
+      "id": "rei",
+      "anchor_status": "ABSENT_IN_COMPAT_TREE",
+      "frontier_status": "DISABLED",
+      "anchor_java_files": 0,
+      "frontier_java_files": 26,
+      "frontier_features": [
+        "client/server plugins",
+        "Crumble Horn",
+        "Drying",
+        "Ominous Fire",
+        "Transformation Powder",
+        "Uncrafting",
+        "entity entry definitions/comparators",
+        "Traveller Gear recipe filler",
+        "hide-item filtering"
+      ],
+      "portability": "HISTORICAL_REFERENCE",
+      "finding": "Dormant REI code preserves a second concrete mapping of the same canonical gameplay/recipe concepts."
+    },
+    {
+      "id": "cosmetic_armor",
+      "anchor_status": "ABSENT_IN_COMPAT_TREE",
+      "frontier_status": "DISABLED",
+      "anchor_java_files": 0,
+      "frontier_java_files": 1,
+      "frontier_features": [
+        "historical adapter"
+      ],
+      "portability": "LOW_PRIORITY_REFERENCE"
+    }
+  ],
+  "architectural_findings": [
+    "Optional integrations are kept in dedicated compat packages rather than spread throughout gameplay code.",
+    "FRONTIER introduces viewer-neutral RecipeViewerConstants/RecipeViewerRecipes/RecipeViewerSync before concrete viewer adapters.",
+    "Disabled adapters are retained as migration knowledge but are not counted as supported integrations.",
+    "Curios remains structurally stable across tracks despite loader/API evolution.",
+    "Jade grows through provider composition rather than invasive gameplay coupling.",
+    "JEI evolves from a small category plugin into a broad presentation adapter while canonical gameplay recipes remain outside JEI."
+  ],
+  "backport_rules": [
+    "Backport canonical gameplay representation first; add viewer adapters second.",
+    "Treat disabled FRONTIER integrations as design evidence, not runtime support claims.",
+    "Use loader presence gates for optional capabilities/render hooks.",
+    "Keep adapter lifecycle states explicit: ACTIVE, DISABLED, HISTORICAL, PLANNED.",
+    "Do not copy NeoForge viewer APIs into Forge 1.20.1; preserve the integration boundary and rewrite API glue."
+  ]
+}
