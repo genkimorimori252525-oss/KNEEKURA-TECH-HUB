@@ -30,10 +30,19 @@
 - rendering/model/client architecture: mapped
 - all 8 principal boss renderer/model/texture dependencies: mapped
 - texture/model files: fully inventoried; all 81 EntityType renderer/model/layer/asset-selection dependencies mapped
-- data assets: inventoried
+- data assets: mapped at family/system-consumer level
+- compatibility/platform boundary: mapped (normal APIs / AT / ASM / Mod adapters)
 - version portability: first-pass mapped
 - performance: hot-path/caching hypotheses inventoried; runtime measurement pending
 - full FRONTIER direct mob Goal/Target catalog: mapped (53 non-boss classes); inherited/imperative semantics still under review
 - full FRONTIER structure catalog: mapped (25 declared keys / 21 active generated / 4 declared-only / 19 own Structure Sets)
 
 See the sibling reports and `inventory/` manifests for evidence-backed progress.
+
+## Remaining high-priority work
+
+- prove/hash exact 4.3.2508 distributed JAR against ANCHOR source candidate
+- resolve inherited/imperative behavior for non-boss mob AI
+- map ANCHOR entity rendering/assets beyond inventory level
+- record-level custom data codec/consumer graph
+- runtime performance and compatibility measurements
