@@ -29,7 +29,7 @@
 - worldgen architecture: mapped, including dimension/noise pipeline
 - rendering/model/client architecture: mapped
 - all 8 principal boss renderer/model/texture dependencies: mapped
-- texture/model files: fully inventoried; whole-entity dependency table pending
+- texture/model files: fully inventoried; all 81 EntityType renderer/model/layer/asset-selection dependencies mapped
 - data assets: inventoried
 - version portability: first-pass mapped
 - performance: hot-path/caching hypotheses inventoried; runtime measurement pending
