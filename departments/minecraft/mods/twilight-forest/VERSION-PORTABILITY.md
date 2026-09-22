@@ -50,7 +50,7 @@ FRONTIER has more renderer classes and newer custom model/pipeline/special-rende
 
 ## Source-distribution warning
 
-The public 1.20.1 source history and distributed 4.3.2508 must remain distinct evidence. Upstream issue #2345 includes a developer statement that a fix already existed but apparently had not been uploaded to CurseForge. Therefore later branch state cannot be assumed to equal the distributed JAR.
+The distributed 4.3.2508 JAR is now pinned by SHA-256 and shows exact byte correspondence with commit `a7dd8f13…` for all 6,156 comparable resource paths (zero mismatches, zero missing). That is strong source-distribution evidence, but compiled-class identity remains a separate build/reobfuscation proof boundary. Upstream issue #2345 still matters: later public 1.20.1 source state cannot be substituted for the pinned JAR because later fixes were not necessarily uploaded.
 
 ## Custom data portability
 
