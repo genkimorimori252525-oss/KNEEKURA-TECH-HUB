@@ -1,0 +1,96 @@
+name: Twilight Forest Render Graph
+
+on:
+  push:
+    branches:
+      - jolly/minecraft-tech-department-2026-09-22
+    paths:
+      - '.github/twilight-render-graph-request.txt'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: twilight-render-graph
+  cancel-in-progress: false
+
+jobs:
+  build-graph:
+    runs-on: [self-hosted, Windows, X64]
+    timeout-minutes: 45
+    defaults:
+      run:
+        shell: powershell
+
+    steps:
+      - name: Checkout TECH HUB branch
+        uses: actions/checkout@v4
+        with:
+          ref: jolly/minecraft-tech-department-2026-09-22
+          fetch-depth: 1
+          clean: true
+          persist-credentials: true
+
+      - name: Checkout pinned Twilight Forest FRONTIER source
+        uses: actions/checkout@v4
+        with:
+          repository: TeamTwilight/twilightforest
+          ref: 793c4d4c7b0a2892f702cbb9a8d751fbe7218828
+          path: local-artifacts/twilightforest-frontier
+          fetch-depth: 1
+          clean: true
+          persist-credentials: false
+
+      - name: Verify upstream snapshot
+        run: |
+          $sha = (git -C local-artifacts/twilightforest-frontier rev-parse HEAD).Trim()
+          if ($sha -ne '793c4d4c7b0a2892f702cbb9a8d751fbe7218828') {
+            throw "Unexpected Twilight Forest commit: $sha"
+          }
+          Write-Host "Pinned upstream commit verified: $sha"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Build complete block and item render graph
+        run: |
+          python departments/minecraft/mods/twilight-forest/tools/build_render_asset_graph.py `
+            local-artifacts/twilightforest-frontier `
+            --source-commit 793c4d4c7b0a2892f702cbb9a8d751fbe7218828 `
+            --output departments/minecraft/mods/twilight-forest/BLOCK-ITEM-RENDER-GRAPH.json `
+            --summary-output departments/minecraft/mods/twilight-forest/BLOCK-ITEM-RENDER-GRAPH.md
+
+      - name: Validate generated graph
+        run: |
+          @'
+          import json
+          from pathlib import Path
+
+          path = Path("departments/minecraft/mods/twilight-forest/BLOCK-ITEM-RENDER-GRAPH.json")
+          graph = json.loads(path.read_text(encoding="utf-8"))
+          assert graph["source_commit"] == "793c4d4c7b0a2892f702cbb9a8d751fbe7218828"
+          counts = graph["counts"]
+          assert counts["blockstate"] == 528, counts
+          assert counts["model"] == 1773, counts
+          assert counts["item_definition"] == 663, counts
+          assert counts["atlas"] == 1, counts
+          assert counts["texture"] == 1159, counts
+          assert counts["nodes"] > 4000, counts
+          assert counts["edges"] > 0, counts
+          print(json.dumps(counts, indent=2))
+          '@ | python -
+
+      - name: Commit generated evidence
+        run: |
+          git config user.name "KNEEKURA Minecraft Tech"
+          git config user.email "actions@users.noreply.github.com"
+          git add departments/minecraft/mods/twilight-forest/BLOCK-ITEM-RENDER-GRAPH.json
+          git add departments/minecraft/mods/twilight-forest/BLOCK-ITEM-RENDER-GRAPH.md
+          if (git diff --cached --quiet) {
+            Write-Host "No render graph changes."
+            exit 0
+          }
+          git commit -m "Twilight Forest: materialize complete block item render graph"
+          git push origin HEAD:jolly/minecraft-tech-department-2026-09-22
