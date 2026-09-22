@@ -1,5 +1,5 @@
 {
-  "catalog_version": "2.0",
+  "catalog_version": "2.1",
   "source_snapshot": {
     "repository": "TeamTwilight/twilightforest",
     "commit": "793c4d4c7b0a2892f702cbb9a8d751fbe7218828",
@@ -18,7 +18,8 @@
       "ThrownItemRenderer"
     ],
     "inheritance": "Twilight Forest renderer inheritance is followed recursively when the superclass is another resolved renderer class.",
-    "limitation": "Literal PNG references and model-layer/class references are extracted from source. Dynamic variant, atlas, block-state, item-stack, and external Minecraft texture resolution is explicitly marked instead of guessed."
+    "limitation": "Literal PNG references and model-layer/class references are extracted from source. Dynamic variant, atlas, block-state, item-stack, and external Minecraft texture resolution is explicitly marked instead of guessed.",
+    "semantic_followup": "All 19 registrations lacking renderer-literal PNGs were inspected/classified by their actual asset source: variant registry, atlas, RenderType, player skin, item model, block-state model, Noop, or external Minecraft renderer."
   },
   "summary": {
     "count": 81,
@@ -29,7 +30,9 @@
     "with_literal_texture": 62,
     "dynamic_or_external_texture": 19,
     "with_model_layers": 56,
-    "with_model_classes": 59
+    "with_model_classes": 59,
+    "semantically_resolved_dynamic_or_external": 19,
+    "all_registration_asset_strategy_classified": 81
   },
   "dependencies": [
     {
@@ -60,7 +63,11 @@
         "PigRenderState",
         "createRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "BIGHORN_SHEEP",
@@ -91,7 +98,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "DEER",
@@ -120,7 +131,11 @@
         "LivingEntityRenderState",
         "createRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "REDCAP",
@@ -149,7 +164,11 @@
         "HumanoidRenderState",
         "createRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "SKELETON_DRUID",
@@ -179,7 +198,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "HOSTILE_WOLF",
@@ -206,7 +229,14 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+      "texture_resolution_status": "SEMANTICALLY_RESOLVED",
+      "semantic_texture_resolution": {
+        "kind": "VANILLA_WOLF_VARIANT_ASSET",
+        "detail": "HostileWolf.getTexture() reads synchronized WolfVariant AssetInfo; baby/adult and angry/wild choose the runtime texture.",
+        "evidence": [
+          "src/main/java/twilightforest/entity/monster/HostileWolf.java@2645f65d825c68dc54ae689292263b3570900c59"
+        ]
+      }
     },
     {
       "entity_key": "WRAITH",
@@ -234,7 +264,11 @@
         "HumanoidRenderState",
         "createRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "HYDRA",
@@ -263,7 +297,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "LICH",
@@ -294,7 +332,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "PENGUIN",
@@ -325,7 +367,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "LICH_MINION",
@@ -346,7 +392,14 @@
       "render_states": [
         "ZombieRenderState"
       ],
-      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+      "texture_resolution_status": "SEMANTICALLY_RESOLVED",
+      "semantic_texture_resolution": {
+        "kind": "INHERITED_VANILLA_ZOMBIE_RENDERER",
+        "detail": "LichMinionRenderer extends Minecraft ZombieRenderer and only overrides model tint.",
+        "evidence": [
+          "src/main/java/twilightforest/client/renderer/entity/LichMinionRenderer.java@701b583a7495efaf13710dd90a7e65cc8cdcb9a1"
+        ]
+      }
     },
     {
       "entity_key": "LOYAL_ZOMBIE",
@@ -376,7 +429,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "TINY_BIRD",
@@ -403,7 +460,15 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+      "texture_resolution_status": "SEMANTICALLY_RESOLVED",
+      "semantic_texture_resolution": {
+        "kind": "DATAPACK_VARIANT_TEXTURE",
+        "detail": "TinyBirdRenderer copies entity.getVariant().value().texture() into render state. TinyBirdVariant stores the texture Identifier in a datapack registry record.",
+        "evidence": [
+          "src/main/java/twilightforest/client/renderer/entity/TinyBirdRenderer.java@628a28395313984ba3d4c914f3bf6278955a5e6b",
+          "src/main/java/twilightforest/entity/passive/TinyBirdVariant.java@155c120b3e3486afa36adae1db5e68f9fa30106a"
+        ]
+      }
     },
     {
       "entity_key": "SQUIRREL",
@@ -431,7 +496,11 @@
         "LivingEntityRenderState",
         "createRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "DWARF_RABBIT",
@@ -459,7 +528,15 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+      "texture_resolution_status": "SEMANTICALLY_RESOLVED",
+      "semantic_texture_resolution": {
+        "kind": "DATAPACK_VARIANT_TEXTURE",
+        "detail": "BunnyRenderer uses DwarfRabbit variant texture; DwarfRabbitVariant is a datapack registry record with a texture Identifier and biome eligibility.",
+        "evidence": [
+          "src/main/java/twilightforest/client/renderer/entity/BunnyRenderer.java@47abecee17e01e777fb0240ef979ef550577db21",
+          "src/main/java/twilightforest/entity/passive/DwarfRabbitVariant.java@0f48c459999e22f545ab5a6aa545c390296c179f"
+        ]
+      }
     },
     {
       "entity_key": "RAVEN",
@@ -489,7 +566,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "QUEST_RAM",
@@ -521,7 +602,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "KOBOLD",
@@ -550,7 +635,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "BOGGARD",
@@ -566,7 +655,11 @@
         "kobold.png"
       ],
       "render_states": [],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "MOSQUITO_SWARM",
@@ -594,7 +687,11 @@
         "LivingEntityRenderState",
         "createRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "DEATH_TOME",
@@ -623,7 +720,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "MINOTAUR",
@@ -651,7 +752,11 @@
         "HumanoidRenderState",
         "createRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "MINOSHROOM",
@@ -683,7 +788,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "FIRE_BEETLE",
@@ -711,7 +820,11 @@
         "LivingEntityRenderState",
         "createRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "SLIME_BEETLE",
@@ -741,7 +854,11 @@
         "LivingEntityRenderState",
         "createRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "PINCH_BEETLE",
@@ -770,7 +887,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "MIST_WOLF",
@@ -799,7 +920,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "CARMINITE_GHASTLING",
@@ -830,7 +955,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "CARMINITE_GOLEM",
@@ -859,7 +988,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "TOWERWOOD_BORER",
@@ -887,7 +1020,11 @@
         "LivingEntityRenderState",
         "createRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "CARMINITE_GHASTGUARD",
@@ -924,7 +1061,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "UR_GHAST",
@@ -955,7 +1096,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "BLOCKCHAIN_GOBLIN",
@@ -992,7 +1137,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "UPPER_GOBLIN_KNIGHT",
@@ -1021,7 +1170,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "LOWER_GOBLIN_KNIGHT",
@@ -1050,7 +1203,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "HELMET_CRAB",
@@ -1080,7 +1237,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "KNIGHT_PHANTOM",
@@ -1110,7 +1271,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "NAGA",
@@ -1141,7 +1306,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "SWARM_SPIDER",
@@ -1164,7 +1333,11 @@
       "render_states": [
         "LivingEntityRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "KING_SPIDER",
@@ -1187,7 +1360,11 @@
       "render_states": [
         "LivingEntityRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "CARMINITE_BROODLING",
@@ -1210,7 +1387,11 @@
       "render_states": [
         "LivingEntityRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "HEDGE_SPIDER",
@@ -1233,7 +1414,11 @@
       "render_states": [
         "LivingEntityRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "REDCAP_SAPPER",
@@ -1269,7 +1454,11 @@
         "HumanoidRenderState",
         "createRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "MAZE_SLIME",
@@ -1301,7 +1490,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "YETI",
@@ -1330,7 +1523,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "PROTECTION_BOX",
@@ -1353,14 +1550,27 @@
         "boxModel",
         "submitModel"
       ],
-      "textures": [],
+      "textures": [
+        "protectionbox.png"
+      ],
       "render_states": [
         "CameraRenderState",
         "ProtectionBoxRenderState",
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+      "texture_resolution_status": "SEMANTICALLY_RESOLVED",
+      "semantic_texture_resolution": {
+        "kind": "CUSTOM_RENDER_TYPE_TEXTURE",
+        "detail": "ProtectionBoxRenderer submits through TFRenderTypes.PROTECTION_BOX. That RenderType binds twilightforest model texture protectionbox.png and applies a scrolling TextureTransform.",
+        "resolved_assets": [
+          "protectionbox.png"
+        ],
+        "evidence": [
+          "src/main/java/twilightforest/client/renderer/entity/ProtectionBoxRenderer.java@d06ed3a572409dc792c930d00a9dcd067d8d830a",
+          "src/main/java/twilightforest/client/renderer/TFRenderTypes.java@7281e1acaedf0e2dc39dd8db3b7680d7f726c871"
+        ]
+      }
     },
     {
       "entity_key": "MAGIC_PAINTING",
@@ -1377,14 +1587,27 @@
       ],
       "model_layers": [],
       "model_classes": [],
-      "textures": [],
+      "textures": [
+        "textures/atlas/magic_paintings.png"
+      ],
       "render_states": [
         "CameraRenderState",
         "MagicPaintingRenderState",
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+      "texture_resolution_status": "SEMANTICALLY_RESOLVED",
+      "semantic_texture_resolution": {
+        "kind": "CUSTOM_TEXTURE_ATLAS_VARIANT_LAYERS",
+        "detail": "Renderer uses a dedicated magic-painting atlas; back texture and layer sprites are selected from MagicPaintingVariant data, including parallax/opacity behavior.",
+        "resolved_assets": [
+          "textures/atlas/magic_paintings.png"
+        ],
+        "evidence": [
+          "src/main/java/twilightforest/client/renderer/entity/MagicPaintingRenderer.java@06a2a084355023cf43df0191879503ec9b340db8",
+          "src/main/java/twilightforest/client/MagicPaintingAtlasInfo.java@196ba858d9e989cd9d4007ad7e5fcf337758512c"
+        ]
+      }
     },
     {
       "entity_key": "ALPHA_YETI",
@@ -1413,7 +1636,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "WINTER_WOLF",
@@ -1448,7 +1675,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "SNOW_GUARDIAN",
@@ -1477,7 +1708,11 @@
         "HumanoidRenderState",
         "createRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "STABLE_ICE_CORE",
@@ -1505,7 +1740,11 @@
         "LivingEntityRenderState",
         "createRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "UNSTABLE_ICE_CORE",
@@ -1534,7 +1773,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "SNOW_QUEEN",
@@ -1563,7 +1806,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "TROLL",
@@ -1592,7 +1839,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "GIANT_MINER",
@@ -1624,7 +1875,14 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+      "texture_resolution_status": "SEMANTICALLY_RESOLVED",
+      "semantic_texture_resolution": {
+        "kind": "RUNTIME_PLAYER_SKIN",
+        "detail": "TFGiantRenderer chooses a configured GameProfile skin, camera-player skin, or DefaultPlayerSkin; it also switches normal/slim player models at runtime.",
+        "evidence": [
+          "src/main/java/twilightforest/client/renderer/entity/TFGiantRenderer.java@b051453254e19f6a90ebf64baaf28f75fc985778"
+        ]
+      }
     },
     {
       "entity_key": "ARMORED_GIANT",
@@ -1656,7 +1914,14 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+      "texture_resolution_status": "SEMANTICALLY_RESOLVED",
+      "semantic_texture_resolution": {
+        "kind": "RUNTIME_PLAYER_SKIN",
+        "detail": "Same TFGiantRenderer pipeline as Giant Miner; texture is a runtime PlayerSkin rather than a Twilight Forest PNG.",
+        "evidence": [
+          "src/main/java/twilightforest/client/renderer/entity/TFGiantRenderer.java@b051453254e19f6a90ebf64baaf28f75fc985778"
+        ]
+      }
     },
     {
       "entity_key": "ICE_CRYSTAL",
@@ -1684,7 +1949,11 @@
         "LivingEntityRenderState",
         "createRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "CHAIN_BLOCK",
@@ -1718,7 +1987,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "CUBE_OF_ANNIHILATION",
@@ -1749,7 +2022,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "HARBINGER_CUBE",
@@ -1777,7 +2054,11 @@
         "LivingEntityRenderState",
         "createRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "ADHERENT",
@@ -1805,7 +2086,11 @@
         "HumanoidRenderState",
         "createRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "ROVING_CUBE",
@@ -1836,7 +2121,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "RISING_ZOMBIE",
@@ -1865,7 +2154,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "PLATEAU_BOSS",
@@ -1877,7 +2170,12 @@
       "model_classes": [],
       "textures": [],
       "render_states": [],
-      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+      "texture_resolution_status": "SEMANTICALLY_RESOLVED",
+      "semantic_texture_resolution": {
+        "kind": "NOOP_RENDERER",
+        "detail": "Uses Minecraft NoopRenderer; no entity texture/model is submitted by this registration.",
+        "evidence": []
+      }
     },
     {
       "entity_key": "NATURE_BOLT",
@@ -1889,7 +2187,12 @@
       "model_classes": [],
       "textures": [],
       "render_states": [],
-      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+      "texture_resolution_status": "SEMANTICALLY_RESOLVED",
+      "semantic_texture_resolution": {
+        "kind": "EXTERNAL_ITEM_MODEL_RENDERER",
+        "detail": "Minecraft ThrownItemRenderer resolves appearance through the entity ItemStack/item model, not a fixed entity texture.",
+        "evidence": []
+      }
     },
     {
       "entity_key": "LICH_BOLT",
@@ -1914,7 +2217,11 @@
         "EntityRenderState",
         "createRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "WAND_BOLT",
@@ -1939,7 +2246,11 @@
         "EntityRenderState",
         "createRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "LICH_BOMB",
@@ -1964,7 +2275,11 @@
         "EntityRenderState",
         "createRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "TOME_BOLT",
@@ -1976,7 +2291,12 @@
       "model_classes": [],
       "textures": [],
       "render_states": [],
-      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+      "texture_resolution_status": "SEMANTICALLY_RESOLVED",
+      "semantic_texture_resolution": {
+        "kind": "EXTERNAL_ITEM_MODEL_RENDERER",
+        "detail": "Minecraft ThrownItemRenderer resolves appearance through the entity ItemStack/item model, not a fixed entity texture.",
+        "evidence": []
+      }
     },
     {
       "entity_key": "HYDRA_MORTAR",
@@ -2008,7 +2328,11 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "SLIME_BLOB",
@@ -2020,7 +2344,12 @@
       "model_classes": [],
       "textures": [],
       "render_states": [],
-      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+      "texture_resolution_status": "SEMANTICALLY_RESOLVED",
+      "semantic_texture_resolution": {
+        "kind": "EXTERNAL_ITEM_MODEL_RENDERER",
+        "detail": "Minecraft ThrownItemRenderer resolves appearance through the entity ItemStack/item model, not a fixed entity texture.",
+        "evidence": []
+      }
     },
     {
       "entity_key": "MOONWORM_SHOT",
@@ -2053,7 +2382,11 @@
         "extractRenderState",
         "moonwormRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "CHARM_EFFECT",
@@ -2065,7 +2398,12 @@
       "model_classes": [],
       "textures": [],
       "render_states": [],
-      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+      "texture_resolution_status": "SEMANTICALLY_RESOLVED",
+      "semantic_texture_resolution": {
+        "kind": "EXTERNAL_ITEM_MODEL_RENDERER",
+        "detail": "Minecraft ThrownItemRenderer resolves appearance through the entity ItemStack/item model, not a fixed entity texture.",
+        "evidence": []
+      }
     },
     {
       "entity_key": "THROWN_WEP",
@@ -2089,7 +2427,14 @@
         "createRenderState",
         "extractRenderState"
       ],
-      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+      "texture_resolution_status": "SEMANTICALLY_RESOLVED",
+      "semantic_texture_resolution": {
+        "kind": "ITEM_MODEL_RESOLVER",
+        "detail": "ThrownWepRenderer calls ItemModelResolver.updateForNonLiving on entity.getItem(), then submits the resulting ItemStackRenderState.",
+        "evidence": [
+          "src/main/java/twilightforest/client/renderer/entity/ThrownWepRenderer.java@94ef9783d13af3a79a13e8d4280d620cfcefbf06"
+        ]
+      }
     },
     {
       "entity_key": "FALLING_ICE",
@@ -2114,7 +2459,14 @@
         "extractRenderState",
         "movingBlockRenderState"
       ],
-      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+      "texture_resolution_status": "SEMANTICALLY_RESOLVED",
+      "semantic_texture_resolution": {
+        "kind": "BLOCKSTATE_MODEL",
+        "detail": "FallingIceRenderer is a FallingBlockRenderer-style path; it submits MovingBlockRenderState from the entity BlockState.",
+        "evidence": [
+          "src/main/java/twilightforest/client/renderer/entity/FallingIceRenderer.java@fb1087f969a43eb0aaeb002bd91c1681b349b2d5"
+        ]
+      }
     },
     {
       "entity_key": "THROWN_ICE",
@@ -2139,7 +2491,14 @@
         "extractRenderState",
         "movingBlockRenderState"
       ],
-      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+      "texture_resolution_status": "SEMANTICALLY_RESOLVED",
+      "semantic_texture_resolution": {
+        "kind": "BLOCKSTATE_MODEL",
+        "detail": "ThrownIceRenderer submits MovingBlockRenderState sourced from IceBomb.getBlockState().",
+        "evidence": [
+          "src/main/java/twilightforest/client/renderer/entity/ThrownIceRenderer.java@199730fbf84c6807f110b02a54f6dc62b52e1c7a"
+        ]
+      }
     },
     {
       "entity_key": "THROWN_BLOCK",
@@ -2164,7 +2523,14 @@
         "extractRenderState",
         "movingBlockRenderState"
       ],
-      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+      "texture_resolution_status": "SEMANTICALLY_RESOLVED",
+      "semantic_texture_resolution": {
+        "kind": "BLOCKSTATE_MODEL",
+        "detail": "ThrownBlockRenderer submits MovingBlockRenderState sourced from the thrown entity BlockState.",
+        "evidence": [
+          "src/main/java/twilightforest/client/renderer/entity/ThrownBlockRenderer.java@3e84ddffb91c433124fedc1ca42854fdde775149"
+        ]
+      }
     },
     {
       "entity_key": "ICE_SNOWBALL",
@@ -2176,7 +2542,12 @@
       "model_classes": [],
       "textures": [],
       "render_states": [],
-      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+      "texture_resolution_status": "SEMANTICALLY_RESOLVED",
+      "semantic_texture_resolution": {
+        "kind": "EXTERNAL_ITEM_MODEL_RENDERER",
+        "detail": "Minecraft ThrownItemRenderer resolves appearance through the entity ItemStack/item model, not a fixed entity texture.",
+        "evidence": []
+      }
     },
     {
       "entity_key": "SLIDER",
@@ -2201,7 +2572,14 @@
         "extractRenderState",
         "movingBlockRenderState"
       ],
-      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+      "texture_resolution_status": "SEMANTICALLY_RESOLVED",
+      "semantic_texture_resolution": {
+        "kind": "BLOCKSTATE_MODEL",
+        "detail": "SlideBlockRenderer submits the moving BlockState model and adds rotation based on pillar axis.",
+        "evidence": [
+          "src/main/java/twilightforest/client/renderer/entity/SlideBlockRenderer.java@e8a7969a5e61bbcdb71adcc093fd3c91fdd5d431"
+        ]
+      }
     },
     {
       "entity_key": "SEEKER_ARROW",
@@ -2225,7 +2603,11 @@
         "ArrowRenderState",
         "createRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     },
     {
       "entity_key": "ICE_ARROW",
@@ -2249,7 +2631,11 @@
         "ArrowRenderState",
         "createRenderState"
       ],
-      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL",
+      "semantic_texture_resolution": {
+        "kind": "LITERAL_OR_INHERITED_RENDERER_ASSET",
+        "detail": "Model/texture dependencies resolve from the registration and/or the resolved Twilight Forest renderer source chain."
+      }
     }
   ]
 }
