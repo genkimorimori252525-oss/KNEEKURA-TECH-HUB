@@ -14,7 +14,7 @@ Status: **IN_PROGRESS**
 - Java: 17
 - Full tree inventory: 7,467 files / 1,265 Java / 4,986 JSON / 906 PNG / 137 OGG / 65 NBT
 
-The source candidate is not asserted to be byte-for-byte the source of the distributed JAR. CurseForge file 5468648 and commit `a7dd8f13…` are both dated 2024-06-24, and the commit's Discord-URL change matches a 4.3.2508 release-note item. That is strong provenance evidence, but binary identity still needs a distributed-JAR hash/build check.
+The distributed CurseForge/CurseMaven JAR is now pinned at SHA-256 `0bdc89263616d1b35c32ef82c5e9c14cbd20368e2fe8b468c72a28320be7a778` (23,332,091 bytes). Its manifest reports implementation version `4.3.2508` and build timestamp `2024-06-24T18:00:24+0000`. Against public-source candidate `a7dd8f13…`, **all 6,156 comparable resource paths match exact Git blob bytes**, with zero mismatches and zero source-resource omissions. This establishes strong resource/metadata correspondence; it does not independently prove compiled `.class` identity after compilation, mapping and reobfuscation.
 
 ### FRONTIER — Minecraft 26.1.2 + NeoForge
 
