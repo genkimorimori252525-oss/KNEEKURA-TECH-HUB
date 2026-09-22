@@ -177,8 +177,8 @@ On 1.20.1 Forge this should be recreated with the older renderer API rather than
 
 ## Remaining rendering work
 
-- extend the completed major-boss table to every normal/passive/projectile entity;
-- map block/item JSON model → texture references;
+- **DONE (v1):** all 81 registered entity renderers are resolved in `ENTITY-RENDER-DEPENDENCIES.json`; 66 Twilight Forest renderer classes were inspected in four evidence batches and renderer inheritance is followed.
+- map block/item JSON model → texture references (entity-side block/item delegation is classified; global block/item asset graph remains pending);
 - map particle providers → textures;
 - inspect shader/render pipeline code;
 - compare ANCHOR model/render architecture;
@@ -208,3 +208,36 @@ This reinforces a recurring pattern: authoritative encounter state is projected 
 The pinned FRONTIER client registers **81** entity renderers. Every registration is captured in `ENTITY-RENDER-REGISTRY.json`.
 
 This first registry pass is exhaustive for registration wiring. Inline registrations already expose model/layer/texture arguments; class-reference renderers are being resolved separately to model layers and texture dependencies.
+
+## Complete 81-entity dependency map
+
+The full FRONTIER registration surface is now resolved in `ENTITY-RENDER-DEPENDENCIES.json`.
+
+- 81 EntityType registrations classified;
+- 66 distinct Twilight Forest renderer source classes inspected;
+- 74 registrations resolve through Twilight Forest renderer source (shared classes included);
+- 1 registration is inline-only;
+- 6 registrations use Minecraft generic renderers;
+- 62 registrations expose literal/direct-or-inherited texture references during the source extraction pass;
+- the remaining 19 have all been semantically classified rather than left unknown.
+
+Those 19 use one of these mechanisms:
+
+- vanilla WolfVariant assets;
+- datapack-driven Tiny Bird / Dwarf Rabbit variants;
+- a custom RenderType texture (Protection Box);
+- the dedicated Magic Painting texture atlas;
+- runtime player skins (Giants);
+- Minecraft NoopRenderer;
+- item-model rendering;
+- BlockState/moving-block rendering;
+- inherited vanilla Zombie rendering.
+
+Evidence batches:
+
+- `inventory/renderers-batch-01.json`
+- `inventory/renderers-batch-02.json`
+- `inventory/renderers-batch-03.json`
+- `inventory/renderers-batch-04.json`
+
+This closes the first-pass **Entity → Renderer → Model/Layer → asset-selection strategy** map. It does not yet close the separate global block/item JSON-model graph.
