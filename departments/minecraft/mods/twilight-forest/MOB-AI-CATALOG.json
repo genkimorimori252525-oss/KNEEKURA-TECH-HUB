@@ -1,0 +1,1818 @@
+{
+  "catalog_version": "1.0",
+  "source_snapshot": {
+    "repository": "TeamTwilight/twilightforest",
+    "commit": "793c4d4c7b0a2892f702cbb9a8d751fbe7218828",
+    "minecraft": "26.1.2",
+    "loader": "NeoForge"
+  },
+  "scope": "Direct GoalSelector/TargetSelector registrations for non-boss hostile/allied/passive entity classes under entity/monster and entity/passive.",
+  "caveats": [
+    "This is a direct-registration catalog, not a claim that it captures every behavior.",
+    "Inherited vanilla/custom goals, imperative tick/aiStep logic, nested anonymous Goal subclasses, sensors and non-Goal state machines require separate semantic analysis.",
+    "Bosses are cataloged separately in BOSS-AI-MATRIX.json."
+  ],
+  "counts": {
+    "monster_classes": 42,
+    "passive_classes": 11,
+    "total_classes": 53
+  },
+  "notable_composition_patterns": [
+    {
+      "pattern": "social_flock_and_resource",
+      "examples": [
+        "Kobold:PanicOnFlockDeathGoal",
+        "Kobold:SeekBreadGoal",
+        "Kobold:RunAwayWhileHoldingBreadGoal",
+        "Kobold:FlockToSameKindGoal"
+      ]
+    },
+    {
+      "pattern": "explosive_tactical_behavior",
+      "examples": [
+        "Redcap:RedcapShyGoal",
+        "Redcap:RedcapLightTNTGoal",
+        "RedcapSapper:RedcapPlantTNTGoal"
+      ]
+    },
+    {
+      "pattern": "home_bounded_flight",
+      "examples": [
+        "CarminiteGhastguard:GhastguardHomedFlightGoal",
+        "Wraith:MoveTowardsHomeGoal"
+      ]
+    },
+    {
+      "pattern": "charge_action_reuse",
+      "examples": [
+        "Boggard:ChargeAttackGoal",
+        "Minotaur:ChargeAttackGoal",
+        "PinchBeetle:ChargeAttackGoal"
+      ]
+    },
+    {
+      "pattern": "breath_action_reuse",
+      "examples": [
+        "FireBeetle:BreathAttackGoal",
+        "WinterWolf:BreathAttackGoal"
+      ]
+    },
+    {
+      "pattern": "rider_or_mount_interaction",
+      "examples": [
+        "LowerGoblinKnight:RiderSpearAttackGoal",
+        "Yeti:ThrowRiderGoal"
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "class_name": "Adherent",
+      "source_path": "src/main/java/twilightforest/entity/monster/Adherent.java",
+      "parent_class": "Monster",
+      "kind": "hostile",
+      "direct_goal_registrations": [
+        {
+          "priority": 1,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "RestrictSunGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "FleeSunGoal"
+        },
+        {
+          "priority": 4,
+          "goal": "RangedAttackGoal"
+        },
+        {
+          "priority": 5,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        },
+        {
+          "priority": 6,
+          "goal": "LookAtPlayerGoal"
+        },
+        {
+          "priority": 6,
+          "goal": "RandomLookAroundGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": 1,
+          "goal": "HurtByTargetGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "NearestAttackableTargetGoal"
+        }
+      ],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "ArmoredGiant",
+      "source_path": "src/main/java/twilightforest/entity/monster/ArmoredGiant.java",
+      "parent_class": "GiantMiner",
+      "kind": "hostile",
+      "direct_goal_registrations": [],
+      "direct_target_registrations": [],
+      "direct_control_assignments": [],
+      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative."
+    },
+    {
+      "class_name": "BaseIceMob",
+      "source_path": "src/main/java/twilightforest/entity/monster/BaseIceMob.java",
+      "parent_class": "Monster",
+      "kind": "abstract_hostile",
+      "direct_goal_registrations": [],
+      "direct_target_registrations": [],
+      "direct_control_assignments": [],
+      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative."
+    },
+    {
+      "class_name": "BlockChainGoblin",
+      "source_path": "src/main/java/twilightforest/entity/monster/BlockChainGoblin.java",
+      "parent_class": "Monster",
+      "kind": "hostile",
+      "direct_goal_registrations": [
+        {
+          "priority": 0,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 1,
+          "goal": "AvoidAnyEntityGoal"
+        },
+        {
+          "priority": 4,
+          "goal": "ThrowSpikeBlockGoal"
+        },
+        {
+          "priority": 5,
+          "goal": "MeleeAttackGoal"
+        },
+        {
+          "priority": 6,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        },
+        {
+          "priority": 7,
+          "goal": "LookAtPlayerGoal"
+        },
+        {
+          "priority": 7,
+          "goal": "RandomLookAroundGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": 1,
+          "goal": "HurtByTargetGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "NearestAttackableTargetGoal"
+        }
+      ],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "Boggard",
+      "source_path": "src/main/java/twilightforest/entity/monster/Boggard.java",
+      "parent_class": "Monster",
+      "kind": "hostile",
+      "direct_goal_registrations": [
+        {
+          "priority": 0,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "ChargeAttackGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "MeleeAttackGoal"
+        },
+        {
+          "priority": 6,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        },
+        {
+          "priority": 7,
+          "goal": "LookAtPlayerGoal"
+        },
+        {
+          "priority": 7,
+          "goal": "RandomLookAroundGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": 1,
+          "goal": "HurtByTargetGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "NearestAttackableTargetGoal"
+        }
+      ],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "CarminiteGhastguard",
+      "source_path": "src/main/java/twilightforest/entity/monster/CarminiteGhastguard.java",
+      "parent_class": "Ghast",
+      "kind": "hostile",
+      "direct_goal_registrations": [
+        {
+          "priority": 5,
+          "goal": "GhastguardHomedFlightGoal"
+        },
+        {
+          "priority": 5,
+          "goal": "GhastguardRandomFlyGoal"
+        },
+        {
+          "priority": 7,
+          "goal": "Ghast.GhastLookGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": 1,
+          "goal": "NearestAttackableTargetGoal"
+        }
+      ],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "CarminiteGhastling",
+      "source_path": "src/main/java/twilightforest/entity/monster/CarminiteGhastling.java",
+      "parent_class": "CarminiteGhastguard",
+      "kind": "hostile",
+      "direct_goal_registrations": [],
+      "direct_target_registrations": [],
+      "direct_control_assignments": [],
+      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative."
+    },
+    {
+      "class_name": "CarminiteGolem",
+      "source_path": "src/main/java/twilightforest/entity/monster/CarminiteGolem.java",
+      "parent_class": "Monster",
+      "kind": "hostile",
+      "direct_goal_registrations": [
+        {
+          "priority": 1,
+          "goal": "MeleeAttackGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "LookAtPlayerGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "RandomLookAroundGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": 1,
+          "goal": "HurtByTargetGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "NearestAttackableTargetGoal"
+        }
+      ],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "DeathTome",
+      "source_path": "src/main/java/twilightforest/entity/monster/DeathTome.java",
+      "parent_class": "Monster",
+      "kind": "hostile",
+      "direct_goal_registrations": [
+        {
+          "priority": 0,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 4,
+          "goal": "RangedAttackGoal"
+        },
+        {
+          "priority": 5,
+          "goal": "WaterAvoidingRandomFlyingGoal"
+        },
+        {
+          "priority": 6,
+          "goal": "LookAtPlayerGoal"
+        },
+        {
+          "priority": 6,
+          "goal": "RandomLookAroundGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": 1,
+          "goal": "HurtByTargetGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "NearestAttackableTargetGoal"
+        }
+      ],
+      "direct_control_assignments": [
+        {
+          "kind": "moveControl",
+          "type": "FlyingMoveControl"
+        }
+      ]
+    },
+    {
+      "class_name": "FireBeetle",
+      "source_path": "src/main/java/twilightforest/entity/monster/FireBeetle.java",
+      "parent_class": "Monster",
+      "kind": "hostile",
+      "direct_goal_registrations": [
+        {
+          "priority": 0,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "BreathAttackGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "MeleeAttackGoal"
+        },
+        {
+          "priority": 6,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": 1,
+          "goal": "HurtByTargetGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "NearestAttackableTargetGoal"
+        }
+      ],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "GiantMiner",
+      "source_path": "src/main/java/twilightforest/entity/monster/GiantMiner.java",
+      "parent_class": "Monster",
+      "kind": "hostile",
+      "direct_goal_registrations": [
+        {
+          "priority": 1,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 4,
+          "goal": "MeleeAttackGoal"
+        },
+        {
+          "priority": 5,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        },
+        {
+          "priority": 6,
+          "goal": "LookAtPlayerGoal"
+        },
+        {
+          "priority": 6,
+          "goal": "RandomLookAroundGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": 1,
+          "goal": "HurtByTargetGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "NearestAttackableTargetGoal"
+        }
+      ],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "HarbingerCube",
+      "source_path": "src/main/java/twilightforest/entity/monster/HarbingerCube.java",
+      "parent_class": "Monster",
+      "kind": "hostile",
+      "direct_goal_registrations": [
+        {
+          "priority": 1,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 1,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "LookAtPlayerGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "RandomLookAroundGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": 1,
+          "goal": "HurtByTargetGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "NearestAttackableTargetGoal"
+        }
+      ],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "HedgeSpider",
+      "source_path": "src/main/java/twilightforest/entity/monster/HedgeSpider.java",
+      "parent_class": "Spider",
+      "kind": "hostile",
+      "direct_goal_registrations": [
+        {
+          "priority": 4,
+          "goal": "MeleeAttackGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": 2,
+          "goal": "NearestAttackableTargetGoal"
+        }
+      ],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "HelmetCrab",
+      "source_path": "src/main/java/twilightforest/entity/monster/HelmetCrab.java",
+      "parent_class": "Monster",
+      "kind": "hostile",
+      "direct_goal_registrations": [
+        {
+          "priority": 0,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 1,
+          "goal": "AlwaysWatchTargetGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "LeapAtTargetGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "MeleeAttackGoal"
+        },
+        {
+          "priority": 6,
+          "goal": "RandomStrollGoal"
+        },
+        {
+          "priority": 7,
+          "goal": "LookAtPlayerGoal"
+        },
+        {
+          "priority": 7,
+          "goal": "RandomLookAroundGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": 1,
+          "goal": "HurtByTargetGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "NearestAttackableTargetGoal"
+        }
+      ],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "HostileWolf",
+      "source_path": "src/main/java/twilightforest/entity/monster/HostileWolf.java",
+      "parent_class": "Monster",
+      "kind": "hostile",
+      "direct_goal_registrations": [
+        {
+          "priority": 1,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "LeapGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "MeleeAttackGoal"
+        },
+        {
+          "priority": 4,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        },
+        {
+          "priority": 5,
+          "goal": "LookAtPlayerGoal"
+        },
+        {
+          "priority": 5,
+          "goal": "RandomLookAroundGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": 1,
+          "goal": "HurtByTargetGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "NearestAttackableTargetGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "NearestAttackableTargetGoal"
+        },
+        {
+          "priority": 4,
+          "goal": "NearestAttackableTargetGoal"
+        },
+        {
+          "priority": 5,
+          "goal": "NearestAttackableTargetGoal"
+        }
+      ],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "IceCrystal",
+      "source_path": "src/main/java/twilightforest/entity/monster/IceCrystal.java",
+      "parent_class": "BaseIceMob",
+      "kind": "hostile",
+      "direct_goal_registrations": [
+        {
+          "priority": 0,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 1,
+          "goal": "MeleeAttackGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "LookAtPlayerGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "RandomLookAroundGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": 1,
+          "goal": "HurtByTargetGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "NearestAttackableTargetGoal"
+        }
+      ],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "KingSpider",
+      "source_path": "src/main/java/twilightforest/entity/monster/KingSpider.java",
+      "parent_class": "Spider",
+      "kind": "hostile",
+      "direct_goal_registrations": [],
+      "direct_target_registrations": [],
+      "direct_control_assignments": [],
+      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative."
+    },
+    {
+      "class_name": "Kobold",
+      "source_path": "src/main/java/twilightforest/entity/monster/Kobold.java",
+      "parent_class": "Monster",
+      "kind": "hostile",
+      "direct_goal_registrations": [
+        {
+          "priority": 0,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 1,
+          "goal": "PanicOnFlockDeathGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "SeekBreadGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "RunAwayWhileHoldingBreadGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "LeapAtTargetGoal"
+        },
+        {
+          "priority": 4,
+          "goal": "MeleeAttackGoal"
+        },
+        {
+          "priority": 5,
+          "goal": "FlockToSameKindGoal"
+        },
+        {
+          "priority": 6,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        },
+        {
+          "priority": 7,
+          "goal": "LookAtPlayerGoal"
+        },
+        {
+          "priority": 7,
+          "goal": "RandomLookAroundGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": 1,
+          "goal": "HurtByTargetGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "KoboldAttackPlayerTarget"
+        }
+      ],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "LichMinion",
+      "source_path": "src/main/java/twilightforest/entity/monster/LichMinion.java",
+      "parent_class": "Zombie",
+      "kind": "hostile",
+      "direct_goal_registrations": [
+        {
+          "priority": 2,
+          "goal": "ZombieAttackGoal"
+        },
+        {
+          "priority": 7,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": 1,
+          "goal": "HurtByTargetGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "NearestAttackableTargetGoal"
+        }
+      ],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "LowerGoblinKnight",
+      "source_path": "src/main/java/twilightforest/entity/monster/LowerGoblinKnight.java",
+      "parent_class": "Monster",
+      "kind": "hostile",
+      "direct_goal_registrations": [
+        {
+          "priority": 0,
+          "goal": "RiderSpearAttackGoal"
+        },
+        {
+          "priority": 1,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "MeleeAttackGoal"
+        },
+        {
+          "priority": 6,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        },
+        {
+          "priority": 7,
+          "goal": "LookAtPlayerGoal"
+        },
+        {
+          "priority": 7,
+          "goal": "RandomLookAroundGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": 1,
+          "goal": "HurtByTargetGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "NearestAttackableTargetGoal"
+        }
+      ],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "LoyalZombie",
+      "source_path": "src/main/java/twilightforest/entity/monster/LoyalZombie.java",
+      "parent_class": "TamableAnimal",
+      "kind": "allied",
+      "direct_goal_registrations": [
+        {
+          "priority": 1,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 4,
+          "goal": "MeleeAttackGoal"
+        },
+        {
+          "priority": 5,
+          "goal": "FollowOwnerGoal"
+        },
+        {
+          "priority": 7,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        },
+        {
+          "priority": 9,
+          "goal": "LookAtPlayerGoal"
+        },
+        {
+          "priority": 9,
+          "goal": "RandomLookAroundGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": 1,
+          "goal": "OwnerHurtByTargetGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "OwnerHurtTargetGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "HurtByTargetGoal"
+        },
+        {
+          "priority": 4,
+          "goal": "NearestAttackableTargetGoal"
+        }
+      ],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "MazeSlime",
+      "source_path": "src/main/java/twilightforest/entity/monster/MazeSlime.java",
+      "parent_class": "Slime",
+      "kind": "hostile",
+      "direct_goal_registrations": [],
+      "direct_target_registrations": [],
+      "direct_control_assignments": [],
+      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative."
+    },
+    {
+      "class_name": "Minotaur",
+      "source_path": "src/main/java/twilightforest/entity/monster/Minotaur.java",
+      "parent_class": "Monster",
+      "kind": "hostile",
+      "direct_goal_registrations": [
+        {
+          "priority": 0,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "ChargeAttackGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "MeleeAttackGoal"
+        },
+        {
+          "priority": 6,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        },
+        {
+          "priority": 7,
+          "goal": "LookAtPlayerGoal"
+        },
+        {
+          "priority": 7,
+          "goal": "RandomLookAroundGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": 1,
+          "goal": "HurtByTargetGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "NearestAttackableTargetGoal"
+        }
+      ],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "MistWolf",
+      "source_path": "src/main/java/twilightforest/entity/monster/MistWolf.java",
+      "parent_class": "HostileWolf",
+      "kind": "hostile",
+      "direct_goal_registrations": [],
+      "direct_target_registrations": [],
+      "direct_control_assignments": [],
+      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative."
+    },
+    {
+      "class_name": "MosquitoSwarm",
+      "source_path": "src/main/java/twilightforest/entity/monster/MosquitoSwarm.java",
+      "parent_class": "Monster",
+      "kind": "hostile",
+      "direct_goal_registrations": [
+        {
+          "priority": 0,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "MeleeAttackGoal"
+        },
+        {
+          "priority": 6,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": 1,
+          "goal": "HurtByTargetGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "NearestAttackableTargetGoal"
+        }
+      ],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "PinchBeetle",
+      "source_path": "src/main/java/twilightforest/entity/monster/PinchBeetle.java",
+      "parent_class": "Monster",
+      "kind": "hostile",
+      "direct_goal_registrations": [
+        {
+          "priority": 0,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "ChargeAttackGoal"
+        },
+        {
+          "priority": 4,
+          "goal": "MeleeAttackGoal"
+        },
+        {
+          "priority": 6,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        },
+        {
+          "priority": 7,
+          "goal": "LookAtPlayerGoal"
+        },
+        {
+          "priority": 8,
+          "goal": "RandomLookAroundGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": 1,
+          "goal": "HurtByTargetGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "NearestAttackableTargetGoal"
+        }
+      ],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "Redcap",
+      "source_path": "src/main/java/twilightforest/entity/monster/Redcap.java",
+      "parent_class": "Monster",
+      "kind": "hostile",
+      "direct_goal_registrations": [
+        {
+          "priority": 0,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 1,
+          "goal": "AvoidAnyEntityGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "RedcapShyGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "RedcapLightTNTGoal"
+        },
+        {
+          "priority": 5,
+          "goal": "MeleeAttackGoal"
+        },
+        {
+          "priority": 6,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        },
+        {
+          "priority": 7,
+          "goal": "LookAtPlayerGoal"
+        },
+        {
+          "priority": 7,
+          "goal": "RandomLookAroundGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": 1,
+          "goal": "HurtByTargetGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "NearestAttackableTargetGoal"
+        }
+      ],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "RedcapSapper",
+      "source_path": "src/main/java/twilightforest/entity/monster/RedcapSapper.java",
+      "parent_class": "Redcap",
+      "kind": "hostile",
+      "direct_goal_registrations": [
+        {
+          "priority": 4,
+          "goal": "RedcapPlantTNTGoal"
+        }
+      ],
+      "direct_target_registrations": [],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "RisingZombie",
+      "source_path": "src/main/java/twilightforest/entity/monster/RisingZombie.java",
+      "parent_class": "Monster",
+      "kind": "hostile",
+      "direct_goal_registrations": [],
+      "direct_target_registrations": [],
+      "direct_control_assignments": [],
+      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative."
+    },
+    {
+      "class_name": "SkeletonDruid",
+      "source_path": "src/main/java/twilightforest/entity/monster/SkeletonDruid.java",
+      "parent_class": "AbstractSkeleton",
+      "kind": "hostile",
+      "direct_goal_registrations": [],
+      "direct_target_registrations": [],
+      "direct_control_assignments": [],
+      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative."
+    },
+    {
+      "class_name": "SlimeBeetle",
+      "source_path": "src/main/java/twilightforest/entity/monster/SlimeBeetle.java",
+      "parent_class": "Monster",
+      "kind": "hostile",
+      "direct_goal_registrations": [
+        {
+          "priority": 0,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "AvoidEntityGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "RangedAttackGoal"
+        },
+        {
+          "priority": 6,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        },
+        {
+          "priority": 7,
+          "goal": "LookAtPlayerGoal"
+        },
+        {
+          "priority": 8,
+          "goal": "RandomLookAroundGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": 1,
+          "goal": "HurtByTargetGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "NearestAttackableTargetGoal"
+        }
+      ],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "SnowGuardian",
+      "source_path": "src/main/java/twilightforest/entity/monster/SnowGuardian.java",
+      "parent_class": "BaseIceMob",
+      "kind": "hostile",
+      "direct_goal_registrations": [
+        {
+          "priority": 0,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 1,
+          "goal": "MeleeAttackGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "LookAtPlayerGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "RandomLookAroundGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": 1,
+          "goal": "HurtByTargetGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "NearestAttackableTargetGoal"
+        }
+      ],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "StableIceCore",
+      "source_path": "src/main/java/twilightforest/entity/monster/StableIceCore.java",
+      "parent_class": "BaseIceMob",
+      "kind": "hostile",
+      "direct_goal_registrations": [
+        {
+          "priority": 0,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 1,
+          "goal": "RangedAttackGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "LookAtPlayerGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "RandomLookAroundGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": 1,
+          "goal": "HurtByTargetGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "NearestAttackableTargetGoal"
+        }
+      ],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "SwarmSpider",
+      "source_path": "src/main/java/twilightforest/entity/monster/SwarmSpider.java",
+      "parent_class": "Spider",
+      "kind": "hostile",
+      "direct_goal_registrations": [
+        {
+          "priority": 4,
+          "goal": "MeleeAttackGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": 2,
+          "goal": "NearestAttackableTargetGoal"
+        }
+      ],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "TowerBroodling",
+      "source_path": "src/main/java/twilightforest/entity/monster/TowerBroodling.java",
+      "parent_class": "SwarmSpider",
+      "kind": "hostile",
+      "direct_goal_registrations": [],
+      "direct_target_registrations": [],
+      "direct_control_assignments": [],
+      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative."
+    },
+    {
+      "class_name": "TowerwoodBorer",
+      "source_path": "src/main/java/twilightforest/entity/monster/TowerwoodBorer.java",
+      "parent_class": "Monster",
+      "kind": "hostile",
+      "direct_goal_registrations": [
+        {
+          "priority": 1,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 1,
+          "goal": "ClimbOnTopOfPowderSnowGoal"
+        },
+        {
+          "priority": 4,
+          "goal": "MeleeAttackGoal"
+        },
+        {
+          "priority": 5,
+          "goal": "HideInTowerwoodGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": 2,
+          "goal": "NearestAttackableTargetGoal"
+        }
+      ],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "Troll",
+      "source_path": "src/main/java/twilightforest/entity/monster/Troll.java",
+      "parent_class": "Monster",
+      "kind": "hostile",
+      "direct_goal_registrations": [
+        {
+          "priority": 1,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "RestrictSunGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "FleeSunGoal"
+        },
+        {
+          "priority": 5,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        },
+        {
+          "priority": 6,
+          "goal": "LookAtPlayerGoal"
+        },
+        {
+          "priority": 6,
+          "goal": "RandomLookAroundGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": 1,
+          "goal": "HurtByTargetGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "NearestAttackableTargetGoal"
+        }
+      ],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "UnstableIceCore",
+      "source_path": "src/main/java/twilightforest/entity/monster/UnstableIceCore.java",
+      "parent_class": "BaseIceMob",
+      "kind": "hostile",
+      "direct_goal_registrations": [
+        {
+          "priority": 0,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 1,
+          "goal": "MeleeAttackGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "LookAtPlayerGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "RandomLookAroundGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": 1,
+          "goal": "HurtByTargetGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "NearestAttackableTargetGoal"
+        }
+      ],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "UpperGoblinKnight",
+      "source_path": "src/main/java/twilightforest/entity/monster/UpperGoblinKnight.java",
+      "parent_class": "Monster",
+      "kind": "hostile",
+      "direct_goal_registrations": [
+        {
+          "priority": 0,
+          "goal": "HeavySpearAttackGoal"
+        },
+        {
+          "priority": 1,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "MeleeAttackGoal"
+        },
+        {
+          "priority": 6,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        },
+        {
+          "priority": 7,
+          "goal": "LookAtPlayerGoal"
+        },
+        {
+          "priority": 7,
+          "goal": "RandomLookAroundGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": 1,
+          "goal": "HurtByTargetGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "NearestAttackableTargetGoal"
+        }
+      ],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "WinterWolf",
+      "source_path": "src/main/java/twilightforest/entity/monster/WinterWolf.java",
+      "parent_class": "HostileWolf",
+      "kind": "hostile",
+      "direct_goal_registrations": [
+        {
+          "priority": 0,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "BreathAttackGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "MeleeAttackGoal"
+        },
+        {
+          "priority": 6,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": 1,
+          "goal": "HurtByTargetGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "NearestAttackableTargetGoal"
+        }
+      ],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "Wraith",
+      "source_path": "src/main/java/twilightforest/entity/monster/Wraith.java",
+      "parent_class": "Mob",
+      "kind": "hostile",
+      "direct_goal_registrations": [
+        {
+          "priority": 2,
+          "goal": "MoveTowardsHomeGoal"
+        },
+        {
+          "priority": 4,
+          "goal": "SimplifiedAttackGoal"
+        },
+        {
+          "priority": 5,
+          "goal": "FlyTowardsTargetGoal"
+        },
+        {
+          "priority": 6,
+          "goal": "RandomFloatAroundGoal"
+        },
+        {
+          "priority": 7,
+          "goal": "LookAroundGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": 1,
+          "goal": "NearestAttackableTargetGoal"
+        }
+      ],
+      "direct_control_assignments": [
+        {
+          "kind": "moveControl",
+          "type": "NoClipMoveControl"
+        }
+      ]
+    },
+    {
+      "class_name": "Yeti",
+      "source_path": "src/main/java/twilightforest/entity/monster/Yeti.java",
+      "parent_class": "Monster",
+      "kind": "hostile",
+      "direct_goal_registrations": [
+        {
+          "priority": 0,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 1,
+          "goal": "ThrowRiderGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "LookAtPlayerGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "RandomLookAroundGoal"
+        }
+      ],
+      "direct_target_registrations": [
+        {
+          "priority": 1,
+          "goal": "HurtByTargetGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "NearestAttackableTargetGoal"
+        }
+      ],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "Bighorn",
+      "source_path": "src/main/java/twilightforest/entity/passive/Bighorn.java",
+      "parent_class": "Sheep",
+      "kind": "passive",
+      "direct_goal_registrations": [],
+      "direct_target_registrations": [],
+      "direct_control_assignments": [],
+      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative."
+    },
+    {
+      "class_name": "Bird",
+      "source_path": "src/main/java/twilightforest/entity/passive/Bird.java",
+      "parent_class": "Animal",
+      "kind": "abstract_passive",
+      "direct_goal_registrations": [],
+      "direct_target_registrations": [],
+      "direct_control_assignments": [],
+      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative."
+    },
+    {
+      "class_name": "Boar",
+      "source_path": "src/main/java/twilightforest/entity/passive/Boar.java",
+      "parent_class": "Animal",
+      "kind": "passive",
+      "direct_goal_registrations": [
+        {
+          "priority": 0,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 1,
+          "goal": "PanicGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "BreedGoal"
+        },
+        {
+          "priority": 4,
+          "goal": "TemptGoal"
+        },
+        {
+          "priority": 4,
+          "goal": "TemptGoal"
+        },
+        {
+          "priority": 5,
+          "goal": "FollowParentGoal"
+        },
+        {
+          "priority": 6,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        },
+        {
+          "priority": 7,
+          "goal": "LookAtPlayerGoal"
+        },
+        {
+          "priority": 8,
+          "goal": "RandomLookAroundGoal"
+        }
+      ],
+      "direct_target_registrations": [],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "Deer",
+      "source_path": "src/main/java/twilightforest/entity/passive/Deer.java",
+      "parent_class": "Animal",
+      "kind": "passive",
+      "direct_goal_registrations": [
+        {
+          "priority": 0,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 1,
+          "goal": "PanicGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "BreedGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "TemptGoal"
+        },
+        {
+          "priority": 4,
+          "goal": "FollowParentGoal"
+        },
+        {
+          "priority": 4,
+          "goal": "AvoidEntityGoal"
+        },
+        {
+          "priority": 5,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        },
+        {
+          "priority": 6,
+          "goal": "LookAtPlayerGoal"
+        },
+        {
+          "priority": 7,
+          "goal": "RandomLookAroundGoal"
+        }
+      ],
+      "direct_target_registrations": [],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "DwarfRabbit",
+      "source_path": "src/main/java/twilightforest/entity/passive/DwarfRabbit.java",
+      "parent_class": "Animal",
+      "kind": "passive",
+      "direct_goal_registrations": [
+        {
+          "priority": 0,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 1,
+          "goal": "PanicGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "BreedGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "TemptGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "AvoidEntityGoal"
+        },
+        {
+          "priority": 4,
+          "goal": "AvoidEntityGoal"
+        },
+        {
+          "priority": 4,
+          "goal": "AvoidEntityGoal"
+        },
+        {
+          "priority": 4,
+          "goal": "AvoidEntityGoal"
+        },
+        {
+          "priority": 4,
+          "goal": "AvoidEntityGoal"
+        },
+        {
+          "priority": 5,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        },
+        {
+          "priority": 6,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        },
+        {
+          "priority": 7,
+          "goal": "LookAtPlayerGoal"
+        },
+        {
+          "priority": 8,
+          "goal": "RandomLookAroundGoal"
+        }
+      ],
+      "direct_target_registrations": [],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "FlyingBird",
+      "source_path": "src/main/java/twilightforest/entity/passive/FlyingBird.java",
+      "parent_class": "Bird",
+      "kind": "abstract_passive",
+      "direct_goal_registrations": [
+        {
+          "priority": 0,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 0,
+          "goal": "PanicGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "TemptGoal"
+        },
+        {
+          "priority": 5,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        },
+        {
+          "priority": 6,
+          "goal": "LookAtPlayerGoal"
+        },
+        {
+          "priority": 7,
+          "goal": "RandomLookAroundGoal"
+        }
+      ],
+      "direct_target_registrations": [],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "Penguin",
+      "source_path": "src/main/java/twilightforest/entity/passive/Penguin.java",
+      "parent_class": "Bird",
+      "kind": "passive",
+      "direct_goal_registrations": [
+        {
+          "priority": 0,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 1,
+          "goal": "PanicGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "BreedGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "TemptGoal"
+        },
+        {
+          "priority": 4,
+          "goal": "FollowParentGoal"
+        },
+        {
+          "priority": 5,
+          "goal": "RandomStrollGoal"
+        },
+        {
+          "priority": 6,
+          "goal": "LookAtPlayerGoal"
+        },
+        {
+          "priority": 7,
+          "goal": "LookAtPlayerGoal"
+        },
+        {
+          "priority": 8,
+          "goal": "RandomLookAroundGoal"
+        }
+      ],
+      "direct_target_registrations": [],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "QuestRam",
+      "source_path": "src/main/java/twilightforest/entity/passive/QuestRam.java",
+      "parent_class": "Animal",
+      "kind": "passive_quest",
+      "direct_goal_registrations": [
+        {
+          "priority": 0,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 1,
+          "goal": "PanicGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "QuestRamEatWoolGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "TemptGoal"
+        },
+        {
+          "priority": 5,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        },
+        {
+          "priority": 6,
+          "goal": "RandomLookAroundGoal"
+        }
+      ],
+      "direct_target_registrations": [],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "Raven",
+      "source_path": "src/main/java/twilightforest/entity/passive/Raven.java",
+      "parent_class": "FlyingBird",
+      "kind": "passive",
+      "direct_goal_registrations": [],
+      "direct_target_registrations": [],
+      "direct_control_assignments": [],
+      "inheritance_note": "No direct Goal/Target registration captured in this class; behavior may be inherited or imperative."
+    },
+    {
+      "class_name": "Squirrel",
+      "source_path": "src/main/java/twilightforest/entity/passive/Squirrel.java",
+      "parent_class": "Animal",
+      "kind": "passive",
+      "direct_goal_registrations": [
+        {
+          "priority": 0,
+          "goal": "FloatGoal"
+        },
+        {
+          "priority": 1,
+          "goal": "PanicGoal"
+        },
+        {
+          "priority": 2,
+          "goal": "TemptGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "AvoidEntityGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "AvoidEntityGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "AvoidEntityGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "AvoidEntityGoal"
+        },
+        {
+          "priority": 3,
+          "goal": "AvoidEntityGoal"
+        },
+        {
+          "priority": 5,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        },
+        {
+          "priority": 6,
+          "goal": "WaterAvoidingRandomStrollGoal"
+        },
+        {
+          "priority": 7,
+          "goal": "LookAtPlayerGoal"
+        },
+        {
+          "priority": 8,
+          "goal": "RandomLookAroundGoal"
+        }
+      ],
+      "direct_target_registrations": [],
+      "direct_control_assignments": []
+    },
+    {
+      "class_name": "TinyBird",
+      "source_path": "src/main/java/twilightforest/entity/passive/TinyBird.java",
+      "parent_class": "FlyingBird",
+      "kind": "passive",
+      "direct_goal_registrations": [
+        {
+          "priority": 4,
+          "goal": "AvoidEntityGoal"
+        },
+        {
+          "priority": 4,
+          "goal": "AvoidEntityGoal"
+        }
+      ],
+      "direct_target_registrations": [],
+      "direct_control_assignments": []
+    }
+  ]
+}
