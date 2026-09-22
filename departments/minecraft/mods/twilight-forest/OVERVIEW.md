@@ -14,7 +14,7 @@ Status: **IN_PROGRESS**
 - Java: 17
 - Full tree inventory: 7,467 files / 1,265 Java / 4,986 JSON / 906 PNG / 137 OGG / 65 NBT
 
-The source candidate is not asserted to be byte-for-byte the source of the distributed JAR. It is the last public 1.20.1 commit found before the 4.3.2508 CurseForge upload and its Discord-URL change matches that release's change. Binary identity still needs a JAR hash/build check.
+The source candidate is not asserted to be byte-for-byte the source of the distributed JAR. CurseForge file 5468648 and commit `a7dd8f13…` are both dated 2024-06-24, and the commit's Discord-URL change matches a 4.3.2508 release-note item. That is strong provenance evidence, but binary identity still needs a distributed-JAR hash/build check.
 
 ### FRONTIER — Minecraft 26.1.2 + NeoForge
 
