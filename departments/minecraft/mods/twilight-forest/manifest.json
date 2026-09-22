@@ -26,7 +26,7 @@
         "ai": "MAPPED",
         "worldgen": "MAPPED",
         "networking": "MAPPED",
-        "rendering_assets": "INVENTORIED",
+        "rendering_assets": "MAPPED",
         "data_assets": "INVENTORIED",
         "performance": "NOT_ANALYZED",
         "compatibility": "MAPPED",
@@ -78,14 +78,16 @@
     "STRUCTURE-CATALOG.json",
     "ENTITY-RENDER-DEPENDENCIES.json",
     "DATA-ASSETS.md",
-    "COMPATIBILITY.md"
+    "COMPATIBILITY.md",
+    "CUSTOM-DATA-GRAPH.json"
   ],
   "notes": [
     "ANCHOR commit is the strongest public-source candidate found for CurseForge 4.3.2508; exact distributed-binary identity remains unproven.",
     "Upstream issue #2345 records a developer statement that a later source fix apparently was not uploaded to CurseForge, so distributed JAR and later public source remain separate evidence.",
     "FRONTIER TFStructures declares 25 keys; 21 are bootstrapped/generated in the pinned snapshot, while quest_island, druid_grove, floating_ruins and world_tree are declaration-only.",
     "FRONTIER entity rendering v1 complete: all 81 EntityType registrations have renderer/model/layer/asset-selection strategy classified; global block/item JSON-model graph remains separate pending work.",
-    "FRONTIER data architecture mapped: generated gameplay data, generated client assets, hand-authored assets, structure templates and 290 custom twilight/* registry records are separated and connected at family level.",
-    "Compatibility boundary mapped as normal API hooks + Access Transformers + dedicated ASM processors + Mod-specific adapters; active and disabled compat trees are kept distinct."
+    "Compatibility boundary mapped as normal API hooks + Access Transformers + dedicated ASM processors + Mod-specific adapters; active and disabled compat trees are kept distinct.",
+    "FRONTIER custom data graph complete: all 290 generated twilight/* records are tied to immutable blob SHAs and mapped to loading mode, codec boundary and primary runtime consumers.",
+    "ANCHOR entity rendering source map is complete for 82 registrations / 67 local renderer classes, including the 24-entity JAPPA presentation switch and multipart renderer switches."
   ]
 }
