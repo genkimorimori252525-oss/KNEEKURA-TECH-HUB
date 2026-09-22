@@ -180,7 +180,7 @@ A boss should compose only the pieces it needs.
 
 ## FRONTIER normal-mob composition catalog v1
 
-Machine-readable catalog: `MOB-AI-CATALOG.json`.
+Machine-readable catalogs: `MOB-AI-CATALOG.json` and `CUSTOM-GOAL-CATALOG.json`.
 
 The first whole-tree pass covers **53 non-boss entity classes** under `entity/monster` and `entity/passive`:
 
@@ -202,7 +202,7 @@ This confirms that Twilight Forest uses Goal composition as a reusable behavior 
 
 ## Remaining AI work
 
-- inspect every custom Goal's internal activation/continue/stop semantics;
+- custom Goal lifecycle semantics: mapped for all 43 FRONTIER classes; deeper helper-algorithm review remains for selected complex Goals;
 - resolve inherited/imperative behavior for classes with no direct Goal registration;
 - compare ANCHOR behavior against FRONTIER;
 - separate server-authoritative behavior from client-only animation;
