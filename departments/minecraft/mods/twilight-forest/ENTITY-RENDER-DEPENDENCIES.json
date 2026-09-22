@@ -1,0 +1,2255 @@
+{
+  "catalog_version": "2.0",
+  "source_snapshot": {
+    "repository": "TeamTwilight/twilightforest",
+    "commit": "793c4d4c7b0a2892f702cbb9a8d751fbe7218828",
+    "minecraft": "26.1.2",
+    "loader": "NeoForge"
+  },
+  "registration_evidence": {
+    "path": "src/main/java/twilightforest/client/event/ClientRegistrationEvents.java",
+    "blob_sha": "41aa907d9c07bc9258aa91382443da87d6e66eb7"
+  },
+  "methodology": {
+    "registration_count": 81,
+    "renderer_sources_resolved": 66,
+    "external_minecraft_renderer_classes": [
+      "NoopRenderer",
+      "ThrownItemRenderer"
+    ],
+    "inheritance": "Twilight Forest renderer inheritance is followed recursively when the superclass is another resolved renderer class.",
+    "limitation": "Literal PNG references and model-layer/class references are extracted from source. Dynamic variant, atlas, block-state, item-stack, and external Minecraft texture resolution is explicitly marked instead of guessed."
+  },
+  "summary": {
+    "count": 81,
+    "source_resolved": 74,
+    "inline_resolved": 1,
+    "external_minecraft": 6,
+    "partial": 0,
+    "with_literal_texture": 62,
+    "dynamic_or_external_texture": 19,
+    "with_model_layers": 56,
+    "with_model_classes": 59
+  },
+  "dependencies": [
+    {
+      "entity_key": "BOAR",
+      "registration": "BoarRenderer::new",
+      "renderer_class": "BoarRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "BoarRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/BoarRenderer.java",
+          "blob_sha": "6ddc755237ec3c5b0ed3288b0fbbaaa29bd87d32",
+          "superclass": "AgeableMobRenderer<Boar, PigRenderState, PigModel>"
+        }
+      ],
+      "model_layers": [
+        "BOAR",
+        "BOAR_BABY"
+      ],
+      "model_classes": [
+        "BoarModel",
+        "PigModel"
+      ],
+      "textures": [
+        "wildboar.png"
+      ],
+      "render_states": [
+        "PigRenderState",
+        "createRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "BIGHORN_SHEEP",
+      "registration": "BighornRenderer::new",
+      "renderer_class": "BighornRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "BighornRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/BighornRenderer.java",
+          "blob_sha": "acb0918de401092ee9fc27dba0914e185795363a",
+          "superclass": "AgeableMobRenderer<Bighorn, SheepRenderState, SheepModel>"
+        }
+      ],
+      "model_layers": [
+        "BIGHORN_SHEEP",
+        "BIGHORN_SHEEP_BABY"
+      ],
+      "model_classes": [
+        "BighornModel",
+        "SheepModel"
+      ],
+      "textures": [
+        "bighorn.png"
+      ],
+      "render_states": [
+        "SheepRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "DEER",
+      "registration": "DeerRenderer::new",
+      "renderer_class": "DeerRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "DeerRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/DeerRenderer.java",
+          "blob_sha": "fca198e53f0949b877b14603dfc30aed1aabb9ad",
+          "superclass": "AgeableMobRenderer<Deer, LivingEntityRenderState, DeerModel>"
+        }
+      ],
+      "model_layers": [
+        "DEER",
+        "DEER_BABY"
+      ],
+      "model_classes": [
+        "DeerModel"
+      ],
+      "textures": [
+        "wilddeer.png"
+      ],
+      "render_states": [
+        "LivingEntityRenderState",
+        "createRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "REDCAP",
+      "registration": "RedcapRenderer::new",
+      "renderer_class": "RedcapRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "RedcapRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/RedcapRenderer.java",
+          "blob_sha": "75c4d5922d71b2d022e8d793687e4d651d240718",
+          "superclass": "HumanoidMobRenderer<Redcap, HumanoidRenderState, RedcapModel>"
+        }
+      ],
+      "model_layers": [
+        "REDCAP",
+        "REDCAP_ARMOR"
+      ],
+      "model_classes": [
+        "RedcapModel"
+      ],
+      "textures": [
+        "redcap.png"
+      ],
+      "render_states": [
+        "HumanoidRenderState",
+        "createRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "SKELETON_DRUID",
+      "registration": "SkeletonDruidRenderer::new",
+      "renderer_class": "SkeletonDruidRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "SkeletonDruidRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/SkeletonDruidRenderer.java",
+          "blob_sha": "52030196f44b93923dff94834a25c6c2e74a4c73",
+          "superclass": "HumanoidMobRenderer<SkeletonDruid, SkeletonRenderState, SkeletonDruidModel>"
+        }
+      ],
+      "model_layers": [
+        "SKELETON_DRUID",
+        "SKELETON_DRUID_BABY"
+      ],
+      "model_classes": [
+        "SkeletonDruidModel"
+      ],
+      "textures": [
+        "skeletondruid.png"
+      ],
+      "render_states": [
+        "SkeletonRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "HOSTILE_WOLF",
+      "registration": "HostileWolfRenderer::new",
+      "renderer_class": "HostileWolfRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "HostileWolfRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/HostileWolfRenderer.java",
+          "blob_sha": "ac96479f88212dbdcf5a962e0adaf1bfc1707364",
+          "superclass": "MobRenderer<HostileWolf, WolfRenderState, HostileWolfModel<WolfRenderState>>"
+        }
+      ],
+      "model_layers": [
+        "HOSTILE_WOLF"
+      ],
+      "model_classes": [
+        "HostileWolfModel"
+      ],
+      "textures": [],
+      "render_states": [
+        "WolfRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+    },
+    {
+      "entity_key": "WRAITH",
+      "registration": "WraithRenderer::new",
+      "renderer_class": "WraithRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "WraithRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/WraithRenderer.java",
+          "blob_sha": "b978538b0972c2554cf43e4eafe4a4f8e4e08599",
+          "superclass": "HumanoidMobRenderer<Wraith, HumanoidRenderState, WraithModel>"
+        }
+      ],
+      "model_layers": [
+        "WRAITH"
+      ],
+      "model_classes": [
+        "WraithModel"
+      ],
+      "textures": [
+        "ghost.png"
+      ],
+      "render_states": [
+        "HumanoidRenderState",
+        "createRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "HYDRA",
+      "registration": "HydraRenderer::new",
+      "renderer_class": "HydraRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "HydraRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/HydraRenderer.java",
+          "blob_sha": "d85966eae8c7b121b61d54cc80dcee994d1a0e37",
+          "superclass": "MobRenderer<Hydra, HydraRenderState, HydraModel>"
+        }
+      ],
+      "model_layers": [
+        "HYDRA"
+      ],
+      "model_classes": [
+        "HydraModel"
+      ],
+      "textures": [
+        "hydra4.png"
+      ],
+      "render_states": [
+        "HydraRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "LICH",
+      "registration": "LichRenderer::new",
+      "renderer_class": "LichRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "LichRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/LichRenderer.java",
+          "blob_sha": "755abde65b4c8530bb64e0544aef2c7417184647",
+          "superclass": "HumanoidMobRenderer<Lich, LichRenderState, LichModel>"
+        }
+      ],
+      "model_layers": [
+        "LICH"
+      ],
+      "model_classes": [
+        "LichModel"
+      ],
+      "textures": [
+        "twilightlich64.png",
+        "twilightlich64_eyes.png"
+      ],
+      "render_states": [
+        "CameraRenderState",
+        "LichRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "PENGUIN",
+      "registration": "m -> new BirdRenderer<>(m, new PenguinModel(m.bakeLayer(TFModelLayers.PENGUIN)), new PenguinModel(m.bakeLayer(TFModelLayers.PENGUIN_BABY)), 0.375F, \"penguin.png\")",
+      "renderer_class": "BirdRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "BirdRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/BirdRenderer.java",
+          "blob_sha": "6d9cd56a0289910b07c94cfd5fbc97964d2c94da",
+          "superclass": "AgeableMobRenderer<T, BirdRenderState, M>"
+        }
+      ],
+      "model_layers": [
+        "PENGUIN",
+        "PENGUIN_BABY"
+      ],
+      "model_classes": [
+        "PenguinModel",
+        "babyModel"
+      ],
+      "textures": [
+        "penguin.png"
+      ],
+      "render_states": [
+        "BirdRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "LICH_MINION",
+      "registration": "LichMinionRenderer::new",
+      "renderer_class": "LichMinionRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "LichMinionRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/LichMinionRenderer.java",
+          "blob_sha": "701b583a7495efaf13710dd90a7e65cc8cdcb9a1",
+          "superclass": "ZombieRenderer"
+        }
+      ],
+      "model_layers": [],
+      "model_classes": [],
+      "textures": [],
+      "render_states": [
+        "ZombieRenderState"
+      ],
+      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+    },
+    {
+      "entity_key": "LOYAL_ZOMBIE",
+      "registration": "LoyalZombieRenderer::new",
+      "renderer_class": "LoyalZombieRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "LoyalZombieRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/LoyalZombieRenderer.java",
+          "blob_sha": "0a13cb8982a447d7360fd3e9ee84c8eb6134a7ad",
+          "superclass": "HumanoidMobRenderer<LoyalZombie, ZombieRenderState, AbstractZombieModel<ZombieRenderState>>"
+        }
+      ],
+      "model_layers": [
+        "LOYAL_ZOMBIE"
+      ],
+      "model_classes": [
+        "AbstractZombieModel",
+        "ZombieModel"
+      ],
+      "textures": [
+        "textures/entity/zombie/zombie.png"
+      ],
+      "render_states": [
+        "ZombieRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "TINY_BIRD",
+      "registration": "TinyBirdRenderer::new",
+      "renderer_class": "TinyBirdRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "TinyBirdRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/TinyBirdRenderer.java",
+          "blob_sha": "628a28395313984ba3d4c914f3bf6278955a5e6b",
+          "superclass": "MobRenderer<TinyBird, TinyBirdRenderState, TinyBirdModel>"
+        }
+      ],
+      "model_layers": [
+        "TINY_BIRD"
+      ],
+      "model_classes": [
+        "TinyBirdModel"
+      ],
+      "textures": [],
+      "render_states": [
+        "TinyBirdRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+    },
+    {
+      "entity_key": "SQUIRREL",
+      "registration": "SquirrelRenderer::new",
+      "renderer_class": "SquirrelRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "SquirrelRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/SquirrelRenderer.java",
+          "blob_sha": "a9bbcbe5bb09a556f424835f82fa9d485d48a648",
+          "superclass": "MobRenderer<Squirrel, LivingEntityRenderState, SquirrelModel>"
+        }
+      ],
+      "model_layers": [
+        "SQUIRREL"
+      ],
+      "model_classes": [
+        "SquirrelModel"
+      ],
+      "textures": [
+        "squirrel2.png"
+      ],
+      "render_states": [
+        "LivingEntityRenderState",
+        "createRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "DWARF_RABBIT",
+      "registration": "BunnyRenderer::new",
+      "renderer_class": "BunnyRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "BunnyRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/BunnyRenderer.java",
+          "blob_sha": "47abecee17e01e777fb0240ef979ef550577db21",
+          "superclass": "AgeableMobRenderer<DwarfRabbit, DwarfRabbitRenderState, BunnyModel>"
+        }
+      ],
+      "model_layers": [
+        "BUNNY",
+        "BUNNY_BABY"
+      ],
+      "model_classes": [
+        "BunnyModel"
+      ],
+      "textures": [],
+      "render_states": [
+        "DwarfRabbitRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+    },
+    {
+      "entity_key": "RAVEN",
+      "registration": "m -> new BirdRenderer<>(m, new RavenModel(m.bakeLayer(TFModelLayers.RAVEN)), 0.3F, \"raven.png\")",
+      "renderer_class": "BirdRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "BirdRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/BirdRenderer.java",
+          "blob_sha": "6d9cd56a0289910b07c94cfd5fbc97964d2c94da",
+          "superclass": "AgeableMobRenderer<T, BirdRenderState, M>"
+        }
+      ],
+      "model_layers": [
+        "RAVEN"
+      ],
+      "model_classes": [
+        "RavenModel",
+        "babyModel"
+      ],
+      "textures": [
+        "raven.png"
+      ],
+      "render_states": [
+        "BirdRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "QUEST_RAM",
+      "registration": "QuestRamRenderer::new",
+      "renderer_class": "QuestRamRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "QuestRamRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/QuestRamRenderer.java",
+          "blob_sha": "5a3192bd3756001ffa100da3567e6598d0b486ef",
+          "superclass": "MobRenderer<QuestRam, QuestingRamRenderState, QuestRamModel>"
+        }
+      ],
+      "model_layers": [
+        "QUEST_RAM"
+      ],
+      "model_classes": [
+        "QuestRamModel",
+        "getParentModel",
+        "submitModel"
+      ],
+      "textures": [
+        "questram.png",
+        "questram_lines.png"
+      ],
+      "render_states": [
+        "QuestingRamRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "KOBOLD",
+      "registration": "KoboldRenderer::new",
+      "renderer_class": "KoboldRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "KoboldRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/KoboldRenderer.java",
+          "blob_sha": "9559a490921ac919c27352a19ab139ddfb05e4ea",
+          "superclass": "HumanoidMobRenderer<Kobold, KoboldRenderState, KoboldModel>"
+        }
+      ],
+      "model_layers": [
+        "KOBOLD"
+      ],
+      "model_classes": [
+        "KoboldModel"
+      ],
+      "textures": [
+        "kobold.png"
+      ],
+      "render_states": [
+        "KoboldRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "BOGGARD",
+      "registration": "m -> new RenderTFBiped<>(m, new BipedModel<>(0), 0.625F, \"kobold.png\")",
+      "renderer_class": null,
+      "resolution_status": "INLINE_RESOLVED",
+      "renderer_source_chain": [],
+      "model_layers": [],
+      "model_classes": [
+        "BipedModel"
+      ],
+      "textures": [
+        "kobold.png"
+      ],
+      "render_states": [],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "MOSQUITO_SWARM",
+      "registration": "MosquitoSwarmRenderer::new",
+      "renderer_class": "MosquitoSwarmRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "MosquitoSwarmRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/MosquitoSwarmRenderer.java",
+          "blob_sha": "2307c9ec923f45b33703e4c8219dcc00ab261af1",
+          "superclass": "MobRenderer<MosquitoSwarm, LivingEntityRenderState, MosquitoSwarmModel>"
+        }
+      ],
+      "model_layers": [
+        "MOSQUITO_SWARM"
+      ],
+      "model_classes": [
+        "MosquitoSwarmModel"
+      ],
+      "textures": [
+        "mosquitoswarm.png"
+      ],
+      "render_states": [
+        "LivingEntityRenderState",
+        "createRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "DEATH_TOME",
+      "registration": "DeathTomeRenderer::new",
+      "renderer_class": "DeathTomeRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "DeathTomeRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/DeathTomeRenderer.java",
+          "blob_sha": "824022eb894449b5beaab7aecdf3a049c72c5b1d",
+          "superclass": "MobRenderer<DeathTome, DeathTomeRenderState, DeathTomeModel>"
+        }
+      ],
+      "model_layers": [
+        "DEATH_TOME"
+      ],
+      "model_classes": [
+        "DeathTomeModel"
+      ],
+      "textures": [
+        "textures/entity/enchantment/enchanting_table_book.png"
+      ],
+      "render_states": [
+        "DeathTomeRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "MINOTAUR",
+      "registration": "MinotaurRenderer::new",
+      "renderer_class": "MinotaurRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "MinotaurRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/MinotaurRenderer.java",
+          "blob_sha": "1ee4abf70267e35449e87b87036c99b44b50f813",
+          "superclass": "HumanoidMobRenderer<Minotaur, HumanoidRenderState, MinotaurModel>"
+        }
+      ],
+      "model_layers": [
+        "MINOTAUR"
+      ],
+      "model_classes": [
+        "MinotaurModel"
+      ],
+      "textures": [
+        "minotaur.png"
+      ],
+      "render_states": [
+        "HumanoidRenderState",
+        "createRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "MINOSHROOM",
+      "registration": "MinoshroomRenderer::new",
+      "renderer_class": "MinoshroomRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "MinoshroomRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/MinoshroomRenderer.java",
+          "blob_sha": "f7ce7dbb440971bec59b51deca18ea6ef6f4a5e3",
+          "superclass": "HumanoidMobRenderer<Minoshroom, MinoshroomRenderState, MinoshroomModel>"
+        }
+      ],
+      "model_layers": [
+        "MINOSHROOM"
+      ],
+      "model_classes": [
+        "MinoshroomModel",
+        "getParentModel",
+        "mushroomModel"
+      ],
+      "textures": [
+        "minoshroomtaur.png"
+      ],
+      "render_states": [
+        "BlockModelRenderState",
+        "MinoshroomRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "FIRE_BEETLE",
+      "registration": "FireBeetleRenderer::new",
+      "renderer_class": "FireBeetleRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "FireBeetleRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/FireBeetleRenderer.java",
+          "blob_sha": "2932f10edbd73b8460b157694c70742e60142e17",
+          "superclass": "MobRenderer<FireBeetle, LivingEntityRenderState, FireBeetleModel>"
+        }
+      ],
+      "model_layers": [
+        "FIRE_BEETLE"
+      ],
+      "model_classes": [
+        "FireBeetleModel"
+      ],
+      "textures": [
+        "firebeetle.png"
+      ],
+      "render_states": [
+        "LivingEntityRenderState",
+        "createRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "SLIME_BEETLE",
+      "registration": "SlimeBeetleRenderer::new",
+      "renderer_class": "SlimeBeetleRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "SlimeBeetleRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/SlimeBeetleRenderer.java",
+          "blob_sha": "1c1902f00b670add8114ec5725e8c7c277b8cc5f",
+          "superclass": "MobRenderer<SlimeBeetle, LivingEntityRenderState, SlimeBeetleModel>"
+        }
+      ],
+      "model_layers": [
+        "SLIME_BEETLE",
+        "SLIME_BEETLE_TAIL"
+      ],
+      "model_classes": [
+        "SlimeBeetleModel",
+        "submitModel"
+      ],
+      "textures": [
+        "slimebeetle.png"
+      ],
+      "render_states": [
+        "LivingEntityRenderState",
+        "createRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "PINCH_BEETLE",
+      "registration": "PinchBeetleRenderer::new",
+      "renderer_class": "PinchBeetleRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "PinchBeetleRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/PinchBeetleRenderer.java",
+          "blob_sha": "f56c25d928cf186dc2b4071ba7cf53e52d3be2cf",
+          "superclass": "MobRenderer<PinchBeetle, PinchBeetleRenderState, PinchBeetleModel>"
+        }
+      ],
+      "model_layers": [
+        "PINCH_BEETLE"
+      ],
+      "model_classes": [
+        "PinchBeetleModel"
+      ],
+      "textures": [
+        "pinchbeetle.png"
+      ],
+      "render_states": [
+        "PinchBeetleRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "MIST_WOLF",
+      "registration": "MistWolfRenderer::new",
+      "renderer_class": "MistWolfRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "MistWolfRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/MistWolfRenderer.java",
+          "blob_sha": "40ac9cd277e97038bd2f725ee908f5b6d76916cb",
+          "superclass": "MobRenderer<MistWolf, MistWolfRenderState, MistWolfModel>"
+        }
+      ],
+      "model_layers": [
+        "HOSTILE_WOLF"
+      ],
+      "model_classes": [
+        "MistWolfModel"
+      ],
+      "textures": [
+        "mistwolf.png"
+      ],
+      "render_states": [
+        "MistWolfRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "CARMINITE_GHASTLING",
+      "registration": "m -> new TFGhastRenderer<>(m, new TFGhastModel<>(m.bakeLayer(TFModelLayers.CARMINITE_GHASTLING)), 0.625F)",
+      "renderer_class": "TFGhastRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "TFGhastRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/TFGhastRenderer.java",
+          "blob_sha": "8b313abf50140030d8c159b11753b8218ff36e66",
+          "superclass": "MobRenderer<T, TFGhastRenderState, M>"
+        }
+      ],
+      "model_layers": [
+        "CARMINITE_GHASTLING"
+      ],
+      "model_classes": [
+        "TFGhastModel"
+      ],
+      "textures": [
+        "towerghast.png",
+        "towerghast_fire.png",
+        "towerghast_openeyes.png"
+      ],
+      "render_states": [
+        "TFGhastRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "CARMINITE_GOLEM",
+      "registration": "CarminiteGolemRenderer::new",
+      "renderer_class": "CarminiteGolemRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "CarminiteGolemRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/CarminiteGolemRenderer.java",
+          "blob_sha": "eeab1aa9653b5ac208cc4bd2621972d5412c33c5",
+          "superclass": "MobRenderer<CarminiteGolem, IronGolemRenderState, CarminiteGolemModel>"
+        }
+      ],
+      "model_layers": [
+        "CARMINITE_GOLEM"
+      ],
+      "model_classes": [
+        "CarminiteGolemModel"
+      ],
+      "textures": [
+        "carminitegolem.png"
+      ],
+      "render_states": [
+        "IronGolemRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "TOWERWOOD_BORER",
+      "registration": "TowerwoodBorerRenderer::new",
+      "renderer_class": "TowerwoodBorerRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "TowerwoodBorerRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/TowerwoodBorerRenderer.java",
+          "blob_sha": "f2bb88d3580c0e73fac6d2716714deeb31eb7195",
+          "superclass": "MobRenderer<TowerwoodBorer, LivingEntityRenderState, SilverfishModel>"
+        }
+      ],
+      "model_layers": [
+        "TOWERWOOD_BORER"
+      ],
+      "model_classes": [
+        "SilverfishModel"
+      ],
+      "textures": [
+        "towertermite.png"
+      ],
+      "render_states": [
+        "LivingEntityRenderState",
+        "createRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "CARMINITE_GHASTGUARD",
+      "registration": "CarminiteGhastRenderer::new",
+      "renderer_class": "CarminiteGhastRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "TFGhastRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/TFGhastRenderer.java",
+          "blob_sha": "8b313abf50140030d8c159b11753b8218ff36e66",
+          "superclass": "MobRenderer<T, TFGhastRenderState, M>"
+        },
+        {
+          "renderer_class": "CarminiteGhastRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/CarminiteGhastRenderer.java",
+          "blob_sha": "057b503c57aa2c781f12a85653318aeec8e2ff00",
+          "superclass": "TFGhastRenderer<CarminiteGhastguard, TFGhastModel<TFGhastRenderState>>"
+        }
+      ],
+      "model_layers": [
+        "CARMINITE_GHASTGUARD"
+      ],
+      "model_classes": [
+        "TFGhastModel"
+      ],
+      "textures": [
+        "towerghast.png",
+        "towerghast_fire.png",
+        "towerghast_openeyes.png"
+      ],
+      "render_states": [
+        "TFGhastRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "UR_GHAST",
+      "registration": "UrGhastRenderer::new",
+      "renderer_class": "UrGhastRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "UrGhastRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/UrGhastRenderer.java",
+          "blob_sha": "3dde977c1a131e5d3e835b75ddd81bc82c90891b",
+          "superclass": "MobRenderer<UrGhast, TFGhastRenderState, UrGhastModel>"
+        }
+      ],
+      "model_layers": [
+        "UR_GHAST"
+      ],
+      "model_classes": [
+        "UrGhastModel"
+      ],
+      "textures": [
+        "towerboss.png",
+        "towerboss_fire.png",
+        "towerboss_openeyes.png"
+      ],
+      "render_states": [
+        "TFGhastRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "BLOCKCHAIN_GOBLIN",
+      "registration": "BlockChainGoblinRenderer::new",
+      "renderer_class": "BlockChainGoblinRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "BlockChainGoblinRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/BlockChainGoblinRenderer.java",
+          "blob_sha": "abce68a56b59edb8750bfc63dae6a59f73ecf90a",
+          "superclass": "HumanoidMobRenderer<BlockChainGoblin, BlockChainGoblinRenderState, BlockChainGoblinModel>"
+        }
+      ],
+      "model_layers": [
+        "BLOCKCHAIN_GOBLIN",
+        "CHAIN",
+        "CHAIN_BLOCK"
+      ],
+      "model_classes": [
+        "BlockChainGoblinModel",
+        "ChainModel",
+        "SpikeBlockModel",
+        "chainModel",
+        "submitModel"
+      ],
+      "textures": [
+        "block_and_chain.png",
+        "blockgoblin.png"
+      ],
+      "render_states": [
+        "BlockChainGoblinRenderState",
+        "CameraRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "UPPER_GOBLIN_KNIGHT",
+      "registration": "UpperGoblinKnightRenderer::new",
+      "renderer_class": "UpperGoblinKnightRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "UpperGoblinKnightRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/UpperGoblinKnightRenderer.java",
+          "blob_sha": "7ef5b1e2d4a731c0a7d4ed47e21cc633882a48d1",
+          "superclass": "HumanoidMobRenderer<UpperGoblinKnight, UpperGoblinKnightRenderState, UpperGoblinKnightModel>"
+        }
+      ],
+      "model_layers": [
+        "UPPER_GOBLIN_KNIGHT"
+      ],
+      "model_classes": [
+        "UpperGoblinKnightModel"
+      ],
+      "textures": [
+        "doublegoblin.png"
+      ],
+      "render_states": [
+        "UpperGoblinKnightRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "LOWER_GOBLIN_KNIGHT",
+      "registration": "LowerGoblinKnightRenderer::new",
+      "renderer_class": "LowerGoblinKnightRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "LowerGoblinKnightRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/LowerGoblinKnightRenderer.java",
+          "blob_sha": "96fb2a0adcef593d2fba68f895956ba44a4d07cb",
+          "superclass": "MobRenderer<LowerGoblinKnight, LowerGoblinKnightRenderState, LowerGoblinKnightModel>"
+        }
+      ],
+      "model_layers": [
+        "LOWER_GOBLIN_KNIGHT"
+      ],
+      "model_classes": [
+        "LowerGoblinKnightModel"
+      ],
+      "textures": [
+        "doublegoblin.png"
+      ],
+      "render_states": [
+        "LowerGoblinKnightRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "HELMET_CRAB",
+      "registration": "HelmetCrabRenderer::new",
+      "renderer_class": "HelmetCrabRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "HelmetCrabRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/HelmetCrabRenderer.java",
+          "blob_sha": "a8741d598d247d2406d42a857fe7c58e71199991",
+          "superclass": "MobRenderer<HelmetCrab, HelmetCrabRenderState, HelmetCrabModel>"
+        }
+      ],
+      "model_layers": [
+        "HELMET_CRAB"
+      ],
+      "model_classes": [
+        "HelmetCrabModel"
+      ],
+      "textures": [
+        "helmetcrab.png",
+        "helmetcrabblue.png"
+      ],
+      "render_states": [
+        "HelmetCrabRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "KNIGHT_PHANTOM",
+      "registration": "KnightPhantomRenderer::new",
+      "renderer_class": "KnightPhantomRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "KnightPhantomRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/KnightPhantomRenderer.java",
+          "blob_sha": "8510ee52a32a0ce296e611f77015319fc6a1234d",
+          "superclass": "HumanoidMobRenderer<KnightPhantom, KnightPhantomRenderState, KnightPhantomModel>"
+        }
+      ],
+      "model_layers": [
+        "KNIGHT_PHANTOM"
+      ],
+      "model_classes": [
+        "KnightPhantomModel"
+      ],
+      "textures": [
+        "phantomskeleton.png"
+      ],
+      "render_states": [
+        "CameraRenderState",
+        "KnightPhantomRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "NAGA",
+      "registration": "NagaRenderer::new",
+      "renderer_class": "NagaRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "NagaRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/NagaRenderer.java",
+          "blob_sha": "6c9742bd26e6563848e5a6ad2b559366b52c0314",
+          "superclass": "MobRenderer<Naga, NagaRenderState, NagaModel<NagaRenderState>>"
+        }
+      ],
+      "model_layers": [
+        "NAGA"
+      ],
+      "model_classes": [
+        "NagaModel"
+      ],
+      "textures": [
+        "nagahead.png",
+        "nagahead_charging.png",
+        "nagahead_dazed.png"
+      ],
+      "render_states": [
+        "NagaRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "SWARM_SPIDER",
+      "registration": "m -> new TFSpiderRenderer<>(m, 0.25F, \"swarmspider.png\", 0.5F)",
+      "renderer_class": "TFSpiderRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "TFSpiderRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/TFSpiderRenderer.java",
+          "blob_sha": "50c5e71387bd1e84d6ff03723aa35c4bf41d039a",
+          "superclass": "SpiderRenderer<T>"
+        }
+      ],
+      "model_layers": [],
+      "model_classes": [],
+      "textures": [
+        "swarmspider.png"
+      ],
+      "render_states": [
+        "LivingEntityRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "KING_SPIDER",
+      "registration": "m -> new TFSpiderRenderer<>(m, 1.25F, \"kingspider.png\", 1.9F)",
+      "renderer_class": "TFSpiderRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "TFSpiderRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/TFSpiderRenderer.java",
+          "blob_sha": "50c5e71387bd1e84d6ff03723aa35c4bf41d039a",
+          "superclass": "SpiderRenderer<T>"
+        }
+      ],
+      "model_layers": [],
+      "model_classes": [],
+      "textures": [
+        "kingspider.png"
+      ],
+      "render_states": [
+        "LivingEntityRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "CARMINITE_BROODLING",
+      "registration": "m -> new TFSpiderRenderer<>(m, 0.6F, \"towerbroodling.png\", 0.7F)",
+      "renderer_class": "TFSpiderRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "TFSpiderRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/TFSpiderRenderer.java",
+          "blob_sha": "50c5e71387bd1e84d6ff03723aa35c4bf41d039a",
+          "superclass": "SpiderRenderer<T>"
+        }
+      ],
+      "model_layers": [],
+      "model_classes": [],
+      "textures": [
+        "towerbroodling.png"
+      ],
+      "render_states": [
+        "LivingEntityRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "HEDGE_SPIDER",
+      "registration": "m -> new TFSpiderRenderer<>(m, 0.8F, \"hedgespider.png\", 1.0F)",
+      "renderer_class": "TFSpiderRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "TFSpiderRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/TFSpiderRenderer.java",
+          "blob_sha": "50c5e71387bd1e84d6ff03723aa35c4bf41d039a",
+          "superclass": "SpiderRenderer<T>"
+        }
+      ],
+      "model_layers": [],
+      "model_classes": [],
+      "textures": [
+        "hedgespider.png"
+      ],
+      "render_states": [
+        "LivingEntityRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "REDCAP_SAPPER",
+      "registration": "RedcapSapperRenderer::new",
+      "renderer_class": "RedcapSapperRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "RedcapRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/RedcapRenderer.java",
+          "blob_sha": "75c4d5922d71b2d022e8d793687e4d651d240718",
+          "superclass": "HumanoidMobRenderer<Redcap, HumanoidRenderState, RedcapModel>"
+        },
+        {
+          "renderer_class": "RedcapSapperRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/RedcapSapperRenderer.java",
+          "blob_sha": "50f809106cfe02a0f19bb8533987dea23360394e",
+          "superclass": "RedcapRenderer"
+        }
+      ],
+      "model_layers": [
+        "REDCAP",
+        "REDCAP_ARMOR"
+      ],
+      "model_classes": [
+        "RedcapModel"
+      ],
+      "textures": [
+        "redcap.png",
+        "redcapsapper.png"
+      ],
+      "render_states": [
+        "HumanoidRenderState",
+        "createRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "MAZE_SLIME",
+      "registration": "MazeSlimeRenderer::new",
+      "renderer_class": "MazeSlimeRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "MazeSlimeRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/MazeSlimeRenderer.java",
+          "blob_sha": "16917b46637136b7a98ead0c7f619ff265a1bcb4",
+          "superclass": "MobRenderer<MazeSlime, SlimeRenderState, SlimeModel>"
+        }
+      ],
+      "model_layers": [
+        "MAZE_SLIME",
+        "MAZE_SLIME_OUTER"
+      ],
+      "model_classes": [
+        "SlimeModel",
+        "submitModel"
+      ],
+      "textures": [
+        "mazeslime.png"
+      ],
+      "render_states": [
+        "CameraRenderState",
+        "SlimeRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "YETI",
+      "registration": "YetiRenderer::new",
+      "renderer_class": "YetiRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "YetiRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/YetiRenderer.java",
+          "blob_sha": "8284f01b7013b9788a5c99d83e88cd4c06885835",
+          "superclass": "HumanoidMobRenderer<Yeti, YetiRenderState, YetiModel>"
+        }
+      ],
+      "model_layers": [
+        "YETI"
+      ],
+      "model_classes": [
+        "YetiModel"
+      ],
+      "textures": [
+        "yeti2.png"
+      ],
+      "render_states": [
+        "YetiRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "PROTECTION_BOX",
+      "registration": "ProtectionBoxRenderer::new",
+      "renderer_class": "ProtectionBoxRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "ProtectionBoxRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/ProtectionBoxRenderer.java",
+          "blob_sha": "d06ed3a572409dc792c930d00a9dcd067d8d830a",
+          "superclass": "EntityRenderer<ProtectionBox, ProtectionBoxRenderState>"
+        }
+      ],
+      "model_layers": [
+        "PROTECTION_BOX"
+      ],
+      "model_classes": [
+        "ProtectionBoxModel",
+        "boxModel",
+        "submitModel"
+      ],
+      "textures": [],
+      "render_states": [
+        "CameraRenderState",
+        "ProtectionBoxRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+    },
+    {
+      "entity_key": "MAGIC_PAINTING",
+      "registration": "MagicPaintingRenderer::new",
+      "renderer_class": "MagicPaintingRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "MagicPaintingRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/MagicPaintingRenderer.java",
+          "blob_sha": "06a2a084355023cf43df0191879503ec9b340db8",
+          "superclass": "EntityRenderer<MagicPainting, MagicPaintingRenderState>"
+        }
+      ],
+      "model_layers": [],
+      "model_classes": [],
+      "textures": [],
+      "render_states": [
+        "CameraRenderState",
+        "MagicPaintingRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+    },
+    {
+      "entity_key": "ALPHA_YETI",
+      "registration": "AlphaYetiRenderer::new",
+      "renderer_class": "AlphaYetiRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "AlphaYetiRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/AlphaYetiRenderer.java",
+          "blob_sha": "a0f00b0211b01f9d8395c69df08326cb84f70e7c",
+          "superclass": "HumanoidMobRenderer<AlphaYeti, AlphaYetiRenderState, AlphaYetiModel>"
+        }
+      ],
+      "model_layers": [
+        "ALPHA_YETI"
+      ],
+      "model_classes": [
+        "AlphaYetiModel"
+      ],
+      "textures": [
+        "yetialpha.png"
+      ],
+      "render_states": [
+        "AlphaYetiRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "WINTER_WOLF",
+      "registration": "WinterWolfRenderer::new",
+      "renderer_class": "WinterWolfRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "HostileWolfRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/HostileWolfRenderer.java",
+          "blob_sha": "ac96479f88212dbdcf5a962e0adaf1bfc1707364",
+          "superclass": "MobRenderer<HostileWolf, WolfRenderState, HostileWolfModel<WolfRenderState>>"
+        },
+        {
+          "renderer_class": "WinterWolfRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/WinterWolfRenderer.java",
+          "blob_sha": "6ed7045ac27d9be78c2f2abffb4bac8a24359ee9",
+          "superclass": "HostileWolfRenderer"
+        }
+      ],
+      "model_layers": [
+        "HOSTILE_WOLF"
+      ],
+      "model_classes": [
+        "HostileWolfModel"
+      ],
+      "textures": [
+        "winterwolf.png"
+      ],
+      "render_states": [
+        "WolfRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "SNOW_GUARDIAN",
+      "registration": "SnowGuardianRenderer::new",
+      "renderer_class": "SnowGuardianRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "SnowGuardianRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/SnowGuardianRenderer.java",
+          "blob_sha": "de7d277b094202f5dbee4ddc509bb119bf7eab9f",
+          "superclass": "HumanoidMobRenderer<SnowGuardian, HumanoidRenderState, NoopModel<HumanoidRenderState>>"
+        }
+      ],
+      "model_layers": [
+        "NOOP"
+      ],
+      "model_classes": [
+        "HumanoidModel",
+        "NoopModel"
+      ],
+      "textures": [
+        "textures/entity/zombie/zombie.png"
+      ],
+      "render_states": [
+        "HumanoidRenderState",
+        "createRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "STABLE_ICE_CORE",
+      "registration": "StableIceCoreRenderer::new",
+      "renderer_class": "StableIceCoreRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "StableIceCoreRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/StableIceCoreRenderer.java",
+          "blob_sha": "7bd182d32038143b6e3eaeaf8f7a74ebc65fbde0",
+          "superclass": "MobRenderer<StableIceCore, LivingEntityRenderState, StableIceCoreModel>"
+        }
+      ],
+      "model_layers": [
+        "STABLE_ICE_CORE"
+      ],
+      "model_classes": [
+        "StableIceCoreModel"
+      ],
+      "textures": [
+        "iceshooter.png"
+      ],
+      "render_states": [
+        "LivingEntityRenderState",
+        "createRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "UNSTABLE_ICE_CORE",
+      "registration": "UnstableIceCoreRenderer::new",
+      "renderer_class": "UnstableIceCoreRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "UnstableIceCoreRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/UnstableIceCoreRenderer.java",
+          "blob_sha": "1f6ae0b394ef63150951599da95442cdf8965360",
+          "superclass": "MobRenderer<UnstableIceCore, LivingEntityRenderState, UnstableIceCoreModel>"
+        }
+      ],
+      "model_layers": [
+        "UNSTABLE_ICE_CORE"
+      ],
+      "model_classes": [
+        "UnstableIceCoreModel"
+      ],
+      "textures": [
+        "iceexploder.png"
+      ],
+      "render_states": [
+        "LivingEntityRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "SNOW_QUEEN",
+      "registration": "SnowQueenRenderer::new",
+      "renderer_class": "SnowQueenRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "SnowQueenRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/SnowQueenRenderer.java",
+          "blob_sha": "876cfe1e598cafbf4ed7cda4c26318f876bcfd58",
+          "superclass": "HumanoidMobRenderer<SnowQueen, SnowQueenRenderState, SnowQueenModel>"
+        }
+      ],
+      "model_layers": [
+        "SNOW_QUEEN"
+      ],
+      "model_classes": [
+        "SnowQueenModel"
+      ],
+      "textures": [
+        "snowqueen.png"
+      ],
+      "render_states": [
+        "SnowQueenRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "TROLL",
+      "registration": "TrollRenderer::new",
+      "renderer_class": "TrollRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "TrollRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/TrollRenderer.java",
+          "blob_sha": "09c104377153cab41e4839ff18e8f93ccb8c53e6",
+          "superclass": "HumanoidMobRenderer<Troll, TrollRenderState, TrollModel>"
+        }
+      ],
+      "model_layers": [
+        "TROLL"
+      ],
+      "model_classes": [
+        "TrollModel"
+      ],
+      "textures": [
+        "troll.png"
+      ],
+      "render_states": [
+        "TrollRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "GIANT_MINER",
+      "registration": "TFGiantRenderer::new",
+      "renderer_class": "TFGiantRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "TFGiantRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/TFGiantRenderer.java",
+          "blob_sha": "b051453254e19f6a90ebf64baaf28f75fc985778",
+          "superclass": "HumanoidMobRenderer<T, GiantRenderState, GiantModel>"
+        }
+      ],
+      "model_layers": [],
+      "model_classes": [
+        "ArmedModel",
+        "GiantModel",
+        "getModel",
+        "getParentModel",
+        "normalModel",
+        "slimModel"
+      ],
+      "textures": [],
+      "render_states": [
+        "ArmedEntityRenderState",
+        "GiantRenderState",
+        "ItemStackRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+    },
+    {
+      "entity_key": "ARMORED_GIANT",
+      "registration": "TFGiantRenderer::new",
+      "renderer_class": "TFGiantRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "TFGiantRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/TFGiantRenderer.java",
+          "blob_sha": "b051453254e19f6a90ebf64baaf28f75fc985778",
+          "superclass": "HumanoidMobRenderer<T, GiantRenderState, GiantModel>"
+        }
+      ],
+      "model_layers": [],
+      "model_classes": [
+        "ArmedModel",
+        "GiantModel",
+        "getModel",
+        "getParentModel",
+        "normalModel",
+        "slimModel"
+      ],
+      "textures": [],
+      "render_states": [
+        "ArmedEntityRenderState",
+        "GiantRenderState",
+        "ItemStackRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+    },
+    {
+      "entity_key": "ICE_CRYSTAL",
+      "registration": "IceCrystalRenderer::new",
+      "renderer_class": "IceCrystalRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "IceCrystalRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/IceCrystalRenderer.java",
+          "blob_sha": "ae6549eb3e586edcdb4be1d16b1b6bc3cf7465cc",
+          "superclass": "MobRenderer<IceCrystal, LivingEntityRenderState, IceCrystalModel>"
+        }
+      ],
+      "model_layers": [
+        "ICE_CRYSTAL"
+      ],
+      "model_classes": [
+        "IceCrystalModel"
+      ],
+      "textures": [
+        "icecrystal.png"
+      ],
+      "render_states": [
+        "LivingEntityRenderState",
+        "createRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "CHAIN_BLOCK",
+      "registration": "BlockChainRenderer::new",
+      "renderer_class": "BlockChainRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "BlockChainRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/BlockChainRenderer.java",
+          "blob_sha": "c2033451b31094125defcc4549a60880112d5a41",
+          "superclass": "EntityRenderer<ChainBlock, ChainBlockRenderState>"
+        }
+      ],
+      "model_layers": [
+        "CHAIN",
+        "CHAIN_BLOCK"
+      ],
+      "model_classes": [
+        "ChainModel",
+        "SpikeBlockModel",
+        "chainModel",
+        "submitModel"
+      ],
+      "textures": [
+        "block_and_chain.png"
+      ],
+      "render_states": [
+        "CameraRenderState",
+        "ChainBlockRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "CUBE_OF_ANNIHILATION",
+      "registration": "CubeOfAnnihilationRenderer::new",
+      "renderer_class": "CubeOfAnnihilationRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "CubeOfAnnihilationRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/CubeOfAnnihilationRenderer.java",
+          "blob_sha": "0ecd563ef7d41fa126aec7c4a562fe1bb470af5c",
+          "superclass": "EntityRenderer<CubeOfAnnihilation, CubeOfAnnihilationRenderState>"
+        }
+      ],
+      "model_layers": [
+        "CUBE_OF_ANNIHILATION"
+      ],
+      "model_classes": [
+        "CubeOfAnnihilationModel",
+        "submitModel"
+      ],
+      "textures": [
+        "cubeofannihilation.png"
+      ],
+      "render_states": [
+        "CameraRenderState",
+        "CubeOfAnnihilationRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "HARBINGER_CUBE",
+      "registration": "HarbingerCubeRenderer::new",
+      "renderer_class": "HarbingerCubeRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "HarbingerCubeRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/HarbingerCubeRenderer.java",
+          "blob_sha": "99f937d89b5c07def03c74d054002428c4de0391",
+          "superclass": "MobRenderer<HarbingerCube, LivingEntityRenderState, HarbingerCubeModel<LivingEntityRenderState>>"
+        }
+      ],
+      "model_layers": [
+        "HARBINGER_CUBE"
+      ],
+      "model_classes": [
+        "HarbingerCubeModel"
+      ],
+      "textures": [
+        "apocalypse2.png"
+      ],
+      "render_states": [
+        "LivingEntityRenderState",
+        "createRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "ADHERENT",
+      "registration": "AdherentRenderer::new",
+      "renderer_class": "AdherentRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "AdherentRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/AdherentRenderer.java",
+          "blob_sha": "bf25587ba853a71108ef818dc45c2254dbd09c93",
+          "superclass": "HumanoidMobRenderer<Adherent, HumanoidRenderState, AdherentModel>"
+        }
+      ],
+      "model_layers": [
+        "ADHERENT"
+      ],
+      "model_classes": [
+        "AdherentModel"
+      ],
+      "textures": [
+        "adherent.png"
+      ],
+      "render_states": [
+        "HumanoidRenderState",
+        "createRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "ROVING_CUBE",
+      "registration": "RovingCubeRenderer::new",
+      "renderer_class": "RovingCubeRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "RovingCubeRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/RovingCubeRenderer.java",
+          "blob_sha": "2f20aeeb352ee16a9c513f2163860543eb4d6a2e",
+          "superclass": "EntityRenderer<RovingCube, CubeOfAnnihilationRenderState>"
+        }
+      ],
+      "model_layers": [
+        "CUBE_OF_ANNIHILATION"
+      ],
+      "model_classes": [
+        "CubeOfAnnihilationModel",
+        "submitModel"
+      ],
+      "textures": [
+        "cubeofannihilation.png"
+      ],
+      "render_states": [
+        "CameraRenderState",
+        "CubeOfAnnihilationRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "RISING_ZOMBIE",
+      "registration": "RisingZombieRenderer::new",
+      "renderer_class": "RisingZombieRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "RisingZombieRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/RisingZombieRenderer.java",
+          "blob_sha": "315d9f9a4796409964adf5e643d27eef724347ce",
+          "superclass": "HumanoidMobRenderer<RisingZombie, RisingZombieRenderState, RisingZombieModel>"
+        }
+      ],
+      "model_layers": [
+        "RISING_ZOMBIE"
+      ],
+      "model_classes": [
+        "RisingZombieModel"
+      ],
+      "textures": [
+        "textures/entity/zombie/zombie.png"
+      ],
+      "render_states": [
+        "RisingZombieRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "PLATEAU_BOSS",
+      "registration": "NoopRenderer::new",
+      "renderer_class": "NoopRenderer",
+      "resolution_status": "EXTERNAL_MINECRAFT_RENDERER",
+      "renderer_source_chain": [],
+      "model_layers": [],
+      "model_classes": [],
+      "textures": [],
+      "render_states": [],
+      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+    },
+    {
+      "entity_key": "NATURE_BOLT",
+      "registration": "ThrownItemRenderer::new",
+      "renderer_class": "ThrownItemRenderer",
+      "resolution_status": "EXTERNAL_MINECRAFT_RENDERER",
+      "renderer_source_chain": [],
+      "model_layers": [],
+      "model_classes": [],
+      "textures": [],
+      "render_states": [],
+      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+    },
+    {
+      "entity_key": "LICH_BOLT",
+      "registration": "c -> new CustomProjectileTextureRenderer(c, TwilightForestMod.prefix(\"textures/particle/twilight_orb.png\"), 1.0F, true, false)",
+      "renderer_class": "CustomProjectileTextureRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "CustomProjectileTextureRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/CustomProjectileTextureRenderer.java",
+          "blob_sha": "f46fe1826cc4fa6294e5623218a00da54de001de",
+          "superclass": "EntityRenderer<TFThrowable, EntityRenderState>"
+        }
+      ],
+      "model_layers": [],
+      "model_classes": [],
+      "textures": [
+        "textures/particle/twilight_orb.png"
+      ],
+      "render_states": [
+        "CameraRenderState",
+        "EntityRenderState",
+        "createRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "WAND_BOLT",
+      "registration": "c -> new CustomProjectileTextureRenderer(c, TwilightForestMod.prefix(\"textures/particle/twilight_orb.png\"), 1.0F, true, false)",
+      "renderer_class": "CustomProjectileTextureRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "CustomProjectileTextureRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/CustomProjectileTextureRenderer.java",
+          "blob_sha": "f46fe1826cc4fa6294e5623218a00da54de001de",
+          "superclass": "EntityRenderer<TFThrowable, EntityRenderState>"
+        }
+      ],
+      "model_layers": [],
+      "model_classes": [],
+      "textures": [
+        "textures/particle/twilight_orb.png"
+      ],
+      "render_states": [
+        "CameraRenderState",
+        "EntityRenderState",
+        "createRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "LICH_BOMB",
+      "registration": "c -> new CustomProjectileTextureRenderer(c, Identifier.withDefaultNamespace(\"textures/item/magma_cream.png\"), 1.0F, true, true)",
+      "renderer_class": "CustomProjectileTextureRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "CustomProjectileTextureRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/CustomProjectileTextureRenderer.java",
+          "blob_sha": "f46fe1826cc4fa6294e5623218a00da54de001de",
+          "superclass": "EntityRenderer<TFThrowable, EntityRenderState>"
+        }
+      ],
+      "model_layers": [],
+      "model_classes": [],
+      "textures": [
+        "textures/item/magma_cream.png"
+      ],
+      "render_states": [
+        "CameraRenderState",
+        "EntityRenderState",
+        "createRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "TOME_BOLT",
+      "registration": "ThrownItemRenderer::new",
+      "renderer_class": "ThrownItemRenderer",
+      "resolution_status": "EXTERNAL_MINECRAFT_RENDERER",
+      "renderer_source_chain": [],
+      "model_layers": [],
+      "model_classes": [],
+      "textures": [],
+      "render_states": [],
+      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+    },
+    {
+      "entity_key": "HYDRA_MORTAR",
+      "registration": "HydraMortarRenderer::new",
+      "renderer_class": "HydraMortarRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "HydraMortarRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/HydraMortarRenderer.java",
+          "blob_sha": "6e573cf976586dd9f3aae6992f26fbfd39632700",
+          "superclass": "EntityRenderer<HydraMortar, HydraMortarRenderState>"
+        }
+      ],
+      "model_layers": [
+        "HYDRA_MORTAR"
+      ],
+      "model_classes": [
+        "HydraMortarModel",
+        "mortarModel",
+        "submitModel"
+      ],
+      "textures": [
+        "hydramortar.png"
+      ],
+      "render_states": [
+        "CameraRenderState",
+        "HydraMortarRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "SLIME_BLOB",
+      "registration": "ThrownItemRenderer::new",
+      "renderer_class": "ThrownItemRenderer",
+      "resolution_status": "EXTERNAL_MINECRAFT_RENDERER",
+      "renderer_source_chain": [],
+      "model_layers": [],
+      "model_classes": [],
+      "textures": [],
+      "render_states": [],
+      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+    },
+    {
+      "entity_key": "MOONWORM_SHOT",
+      "registration": "MoonwormShotRenderer::new",
+      "renderer_class": "MoonwormShotRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "MoonwormShotRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/MoonwormShotRenderer.java",
+          "blob_sha": "e2721a9bf89754482e6f19dd6b174ef97dec92f7",
+          "superclass": "EntityRenderer<MoonwormShot, MoonwormShotRenderState>"
+        }
+      ],
+      "model_layers": [
+        "MOONWORM"
+      ],
+      "model_classes": [
+        "MoonwormModel",
+        "submitModel"
+      ],
+      "textures": [
+        "moonworm.png"
+      ],
+      "render_states": [
+        "CameraRenderState",
+        "MoonwormRenderState",
+        "MoonwormShotRenderState",
+        "createRenderState",
+        "extractRenderState",
+        "moonwormRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "CHARM_EFFECT",
+      "registration": "ThrownItemRenderer::new",
+      "renderer_class": "ThrownItemRenderer",
+      "resolution_status": "EXTERNAL_MINECRAFT_RENDERER",
+      "renderer_source_chain": [],
+      "model_layers": [],
+      "model_classes": [],
+      "textures": [],
+      "render_states": [],
+      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+    },
+    {
+      "entity_key": "THROWN_WEP",
+      "registration": "ThrownWepRenderer::new",
+      "renderer_class": "ThrownWepRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "ThrownWepRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/ThrownWepRenderer.java",
+          "blob_sha": "94ef9783d13af3a79a13e8d4280d620cfcefbf06",
+          "superclass": "EntityRenderer<ThrownWep, ThrownWepRenderState>"
+        }
+      ],
+      "model_layers": [],
+      "model_classes": [],
+      "textures": [],
+      "render_states": [
+        "CameraRenderState",
+        "ThrownWepRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+    },
+    {
+      "entity_key": "FALLING_ICE",
+      "registration": "FallingIceRenderer::new",
+      "renderer_class": "FallingIceRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "FallingIceRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/FallingIceRenderer.java",
+          "blob_sha": "fb1087f969a43eb0aaeb002bd91c1681b349b2d5",
+          "superclass": "EntityRenderer<FallingIce, FallingBlockRenderState>"
+        }
+      ],
+      "model_layers": [],
+      "model_classes": [],
+      "textures": [],
+      "render_states": [
+        "CameraRenderState",
+        "FallingBlockRenderState",
+        "createRenderState",
+        "extractRenderState",
+        "movingBlockRenderState"
+      ],
+      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+    },
+    {
+      "entity_key": "THROWN_ICE",
+      "registration": "ThrownIceRenderer::new",
+      "renderer_class": "ThrownIceRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "ThrownIceRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/ThrownIceRenderer.java",
+          "blob_sha": "199730fbf84c6807f110b02a54f6dc62b52e1c7a",
+          "superclass": "EntityRenderer<IceBomb, FallingBlockRenderState>"
+        }
+      ],
+      "model_layers": [],
+      "model_classes": [],
+      "textures": [],
+      "render_states": [
+        "CameraRenderState",
+        "FallingBlockRenderState",
+        "createRenderState",
+        "extractRenderState",
+        "movingBlockRenderState"
+      ],
+      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+    },
+    {
+      "entity_key": "THROWN_BLOCK",
+      "registration": "ThrownBlockRenderer::new",
+      "renderer_class": "ThrownBlockRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "ThrownBlockRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/ThrownBlockRenderer.java",
+          "blob_sha": "3e84ddffb91c433124fedc1ca42854fdde775149",
+          "superclass": "EntityRenderer<ThrownBlock, FallingBlockRenderState>"
+        }
+      ],
+      "model_layers": [],
+      "model_classes": [],
+      "textures": [],
+      "render_states": [
+        "CameraRenderState",
+        "FallingBlockRenderState",
+        "createRenderState",
+        "extractRenderState",
+        "movingBlockRenderState"
+      ],
+      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+    },
+    {
+      "entity_key": "ICE_SNOWBALL",
+      "registration": "ThrownItemRenderer::new",
+      "renderer_class": "ThrownItemRenderer",
+      "resolution_status": "EXTERNAL_MINECRAFT_RENDERER",
+      "renderer_source_chain": [],
+      "model_layers": [],
+      "model_classes": [],
+      "textures": [],
+      "render_states": [],
+      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+    },
+    {
+      "entity_key": "SLIDER",
+      "registration": "SlideBlockRenderer::new",
+      "renderer_class": "SlideBlockRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "SlideBlockRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/SlideBlockRenderer.java",
+          "blob_sha": "e8a7969a5e61bbcdb71adcc093fd3c91fdd5d431",
+          "superclass": "EntityRenderer<SlideBlock, FallingBlockRenderState>"
+        }
+      ],
+      "model_layers": [],
+      "model_classes": [],
+      "textures": [],
+      "render_states": [
+        "CameraRenderState",
+        "FallingBlockRenderState",
+        "createRenderState",
+        "extractRenderState",
+        "movingBlockRenderState"
+      ],
+      "texture_resolution_status": "DYNAMIC_ATLAS_BLOCK_ITEM_OR_EXTERNAL"
+    },
+    {
+      "entity_key": "SEEKER_ARROW",
+      "registration": "DefaultArrowRenderer::new",
+      "renderer_class": "DefaultArrowRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "DefaultArrowRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/DefaultArrowRenderer.java",
+          "blob_sha": "4b4f74e07606fe059881f022c348ae1900a3a57b",
+          "superclass": "ArrowRenderer<T, ArrowRenderState>"
+        }
+      ],
+      "model_layers": [],
+      "model_classes": [],
+      "textures": [
+        "textures/entity/projectiles/arrow.png"
+      ],
+      "render_states": [
+        "ArrowRenderState",
+        "createRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    },
+    {
+      "entity_key": "ICE_ARROW",
+      "registration": "DefaultArrowRenderer::new",
+      "renderer_class": "DefaultArrowRenderer",
+      "resolution_status": "SOURCE_RESOLVED",
+      "renderer_source_chain": [
+        {
+          "renderer_class": "DefaultArrowRenderer",
+          "path": "src/main/java/twilightforest/client/renderer/entity/DefaultArrowRenderer.java",
+          "blob_sha": "4b4f74e07606fe059881f022c348ae1900a3a57b",
+          "superclass": "ArrowRenderer<T, ArrowRenderState>"
+        }
+      ],
+      "model_layers": [],
+      "model_classes": [],
+      "textures": [
+        "textures/entity/projectiles/arrow.png"
+      ],
+      "render_states": [
+        "ArrowRenderState",
+        "createRenderState"
+      ],
+      "texture_resolution_status": "DIRECT_OR_INHERITED_LITERAL"
+    }
+  ]
+}
