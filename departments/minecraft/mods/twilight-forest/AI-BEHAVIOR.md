@@ -266,3 +266,17 @@ BORN(20) -> ROAR_START(10) -> ROAR_RAWR(50) -> IDLE
 `HOVER=90`; small circular formations `=90`; large circular and directional charge formations `=180`; `WAITING_FOR_LEADER=10`; both player-attack stages `=50`.
 
 Machine-readable copy: `BOSS-AI-MATRIX.json`.
+
+## Non-boss inheritance review
+
+The 53-class non-boss catalog has now been manually reviewed for classes that appeared to have no direct Goal/Target registrations.
+
+Resolved patterns include:
+
+- custom-parent inheritance: ArmoredGiant→GiantMiner, CarminiteGhastling→CarminiteGhastguard, MistWolf→HostileWolf, TowerBroodling→SwarmSpider, Raven→FlyingBird;
+- vanilla-parent inheritance: KingSpider→Spider, MazeSlime→Slime, Bighorn→Sheep;
+- abstract behavior bases: BaseIceMob and Bird;
+- corrected extraction false-negative: SkeletonDruid calls AbstractSkeleton registration then adds its own RangedAttackGoal;
+- imperative exception: RisingZombie uses aiStep instead of a normal combat Goal scheduler, waking when observed and converting to a vanilla Zombie after its 130-tick emergence.
+
+See `MOB-AI-CATALOG.json` for the per-class resolution.
