@@ -213,7 +213,7 @@ generated models/blockstates/items
   → client model baking / renderer layer
 ```
 
-A future record-level graph can connect each individual data file to its exact codec/consumer class. The family-level architecture is now mapped.
+`CUSTOM-DATA-GRAPH.json` now connects **all 290 custom `twilight/*` records** to their family, immutable upstream blob SHA, loading mode, decoding codec(s), and primary runtime consumer class(es). It also distinguishes datapack registries from JSON reload-listener datasets, which is essential for backporting.
 
 ## 9. ANCHOR portability
 
@@ -226,10 +226,30 @@ Backport rule:
 - regenerate data using ANCHOR-compatible serializers;
 - do not copy FRONTIER JSON blindly when Minecraft registry schemas changed.
 
-## 10. Remaining data work
+## 10. Record-level graph status
+
+`CUSTOM-DATA-GRAPH.json` covers 14 custom families / 290 records:
+
+- 205 template definitions;
+- 24 Traveller modifiers;
+- 19 stalactite/speleothem records;
+- 9 restrictions;
+- 8 wood palettes;
+- 6 structure speleothem settings;
+- 5 magic paintings;
+- 4 tiny-bird variants;
+- 3 dwarf-rabbit variants;
+- 2 biome-layer stacks;
+- 2 chunk blanket processors;
+- 1 biome terrain dataset;
+- 1 quest dataset;
+- 1 template-marker handler list.
+
+Each record retains its source path and Git blob SHA. Family metadata records whether it is decoded through a datapack registry or a reload listener, the codec boundary, and primary consumer classes.
+
+## 11. Remaining data work
 
 For whole-target completion:
 
-1. exact record → codec/consumer graph for custom `twilight/*` registries;
-2. ANCHOR↔FRONTIER schema delta for important worldgen/custom data;
-3. distributed 4.3.2508 JAR resource hash comparison.
+1. ANCHOR↔FRONTIER schema delta for important worldgen/custom data;
+2. distributed 4.3.2508 JAR resource hash comparison.
