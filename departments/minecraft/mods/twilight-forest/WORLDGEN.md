@@ -63,31 +63,14 @@ Evidence:
 - `src/main/java/twilightforest/init/TFStructures.java`
 - blob `c9ab851b0118c1775c3b1d2362de4a9c5180530d`
 
-Registered structures include classic progression landmarks such as:
+The pinned FRONTIER snapshot declares **25** structure ResourceKeys, but declaration and active generation are kept separate:
 
-- Naga courtyard
-- Lich tower
-- labyrinth
-- Hydra lair
-- Knight stronghold
-- Dark Tower
-- Yeti cave
-- Aurora palace
-- Troll cave
-- Final Castle
+- **21** keys are actually bootstrapped and have generated `worldgen/structure` JSON;
+- **4** — `quest_island`, `druid_grove`, `floating_ruins`, and `world_tree` — are declaration-only in this snapshot and are not counted as active structures;
+- **19** active structures/structure families have their own generated Structure Set;
+- `mushroom_tower` is active/generated but has no own generated Structure Set file in this snapshot.
 
-and newer/general structures such as:
-
-- hollow trees
-- fallen trunks
-- camps
-- mushroom towers
-- quest island
-- druid grove
-- floating ruins
-- world tree
-
-This demonstrates that “boss arena / progression landmark” and “ambient world structure” are both modeled through the same broader structure system.
+This avoids treating a future/historical registry key as evidence that content currently enters world generation.
 
 ## ASM integration with vanilla noise generation
 
@@ -185,3 +168,16 @@ final_density / preliminary_surface_level
 `TFBiomeProvider` is a custom `BiomeSource` backed by datapack registry `BIOME_TERRAIN_DATA`, so biome selection and terrain-density policy are connected through data instead of living only inside one chunk-generator implementation.
 
 Machine-readable copy: `WORLDGEN-PIPELINE.json`.
+
+## Full FRONTIER structure catalog
+
+See `STRUCTURES.md` and machine-readable `STRUCTURE-CATALOG.json`.
+
+Two placement families are now explicitly mapped:
+
+- **`twilightforest:landmark_grid`** for the landmark/progression lattice;
+- **`twilightforest:avoid_landmark_grid`** for ambient structures such as camps, fallen trunks and hollow trees, with spacing/frequency/exclusion rules that keep them from interfering with landmarks.
+
+Underground progression structures such as Labyrinth, Knight Stronghold and Troll Cave use `underground_structures` plus `bury`. Giant House uses `top_layer_modification`; most others use `surface_structures`.
+
+This strengthens the portable design lesson: **gameplay-significant geography and ambient decoration should have separate placement policies even when both use Minecraft's Structure system.**
