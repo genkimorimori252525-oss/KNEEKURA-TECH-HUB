@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0.0",
+  "source_snapshot": "TeamTwilight/twilightforest@793c4d4c7b0a2892f702cbb9a8d751fbe7218828",
+  "dimension": "twilightforest:twilight_forest",
+  "dimension_type": "twilightforest:twilight_forest_type",
+  "generator": {
+    "type": "minecraft:noise",
+    "biome_source": {
+      "type": "twilightforest:twilight_biomes",
+      "terrain_data": "twilightforest:biome_grid"
+    },
+    "settings": "twilightforest:twilight_noise_gen"
+  },
+  "dimension_properties": {
+    "height": 288,
+    "logical_height": 288,
+    "min_y": -32,
+    "coordinate_scale": 0.125,
+    "has_fixed_time": true,
+    "has_skylight": true,
+    "custom_skybox": "twilightforest:renderer",
+    "custom_weather_effects": "twilightforest:weather"
+  },
+  "noise_settings": {
+    "height": 256,
+    "min_y": -32,
+    "sea_level": 0,
+    "aquifers_enabled": false,
+    "ore_veins_enabled": false,
+    "final_density": "twilightforest:forested_terrain",
+    "preliminary_surface_level": "twilightforest:forested_terrain"
+  },
+  "code_components": [
+    "TFBiomeProvider",
+    "BiomeDensitySource",
+    "TerrainDensityRouter",
+    "NoiseDensityRouter",
+    "CustomTerrainBeardifier",
+    "TFDensityFunctions"
+  ],
+  "cache_contract": "TerrainDensityRouter and NoiseDensityRouter use 16x16 chunk-local X/Z caches; Y is intentionally omitted from the cache key."
+}
