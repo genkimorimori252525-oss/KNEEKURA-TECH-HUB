@@ -1,6 +1,6 @@
 # Twilight Forest — AI / Boss Behavior Map
 
-Status: **major FRONTIER bosses mapped; direct Goal/Target composition cataloged across normal hostile/allied/passive mobs**
+Status: **FRONTIER AI catalog complete for the defined scope; ANCHOR↔FRONTIER portability v1 mapped**
 
 Source snapshot: `TeamTwilight/twilightforest@793c4d4c7b0a2892f702cbb9a8d751fbe7218828`.
 
@@ -280,3 +280,26 @@ Resolved patterns include:
 - imperative exception: RisingZombie uses aiStep instead of a normal combat Goal scheduler, waking when observed and converting to a vanilla Zombie after its 130-tick emergence.
 
 See `MOB-AI-CATALOG.json` for the per-class resolution.
+
+
+## ANCHOR ↔ FRONTIER portability v1
+
+The AI portability pass is now recorded in `AI-PORTABILITY.md` and `AI-PORTABILITY-MATRIX.json`.
+
+Path-level comparison across `entity/ai`, `entity/monster`, `entity/passive`, and `entity/boss` found:
+
+- 132 unique Java paths;
+- 111 changed;
+- 15 added;
+- 6 byte-identical;
+- 0 removed.
+
+All 53 non-boss FRONTIER classes have direct Goal composition plus inheritance/imperative false-negative review completed, and all 43 custom `entity/ai/goal` classes have lifecycle semantics cataloged.
+
+The strongest cross-version refactor is behavior-by-composition:
+
+- Ur-Ghast moves from `CarminiteGhastguard` inheritance to `BaseTFBoss` + explicit flight/attack/look Goals.
+- Minoshroom moves from `Minotaur` inheritance to `BaseTFBoss` + explicit charge/melee/target composition.
+- the other principal bosses largely retain encounter control semantics while common home/bossbar/lifecycle infrastructure moves into `BaseTFBoss`.
+
+Remaining AI work is no longer broad cataloging. It is selective deep review and runtime validation where a specific KNEEKURA backport needs it.
