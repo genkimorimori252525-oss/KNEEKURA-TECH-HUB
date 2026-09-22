@@ -104,6 +104,13 @@ def gpu_record():
     }
 
 
+def build_gradle_command(repo, gradle_task):
+    return [
+        "cmd.exe", "/d", "/s", "/c", str(repo / "gradlew.bat"),
+        gradle_task, "--no-daemon", "--console=plain",
+    ]
+
+
 def kill_tree(proc):
     if proc.poll() is not None:
         return "already_exited"
@@ -132,6 +139,7 @@ def main():
     ap.add_argument("--minecraft-version", required=True)
     ap.add_argument("--loader-name", required=True)
     ap.add_argument("--loader-version", required=True)
+    ap.add_argument("--gradle-task", default="runServer")
     ap.add_argument("--output-dir", type=Path, required=True)
     ap.add_argument("--timeout-seconds", type=int, default=2400)
     ap.add_argument("--shutdown-seconds", type=int, default=90)
@@ -220,10 +228,7 @@ def main():
     (out / "environment.json").write_text(json.dumps(environment, indent=2) + "\n", encoding="utf-8")
     (out / "scenario.json").write_text(json.dumps(scenario, indent=2) + "\n", encoding="utf-8")
 
-    command = [
-        "cmd.exe", "/d", "/s", "/c", str(repo / "gradlew.bat"),
-        "runServer", "--no-daemon", "--console=plain",
-    ]
+    command = build_gradle_command(repo, args.gradle_task)
     ready_re = re.compile(r'Done \([0-9.]+s\)!.*(?:help|For help)', re.I)
     construct_re = re.compile(r'\bCONSTRUCT\b|constructing mod|mod construction', re.I)
     load_re = re.compile(r'Preparing level|Loaded \d+ advancements|loading complete|server started', re.I)

@@ -25,7 +25,7 @@ concurrency:
 jobs:
   r1-startup:
     runs-on: [self-hosted, Windows, X64]
-    timeout-minutes: 90
+    timeout-minutes: 180
     defaults:
       run:
         shell: powershell
@@ -91,11 +91,25 @@ jobs:
           distribution: temurin
           java-version: '17'
 
+      - name: Warm ANCHOR Gradle wrapper
+        run: |
+          Push-Location local-artifacts/twilightforest-anchor
+          try {
+            for ($attempt = 1; $attempt -le 3; $attempt++) {
+              .\gradlew.bat --version
+              if ($LASTEXITCODE -eq 0) { break }
+              if ($attempt -eq 3) { throw "ANCHOR Gradle wrapper failed after 3 attempts" }
+              Start-Sleep -Seconds (10 * $attempt)
+            }
+          } finally {
+            Pop-Location
+          }
+
       - name: Measure ANCHOR R1 startup
         continue-on-error: true
         run: |
           $out = "$env:TF_EVIDENCE_DIR/runtime/anchor/$env:GITHUB_RUN_ID"
-          python "$env:TF_EVIDENCE_DIR/tools/run_runtime_r1.py" --track anchor --repo-dir local-artifacts/twilightforest-anchor --source-commit $env:ANCHOR_SHA --minecraft-version 1.20.1 --loader-name Forge --loader-version 47.1.70 --output-dir $out --timeout-seconds 2400 --shutdown-seconds 90 --world-seed $env:WORLD_SEED --view-distance $env:VIEW_DISTANCE --simulation-distance $env:SIMULATION_DISTANCE
+          python "$env:TF_EVIDENCE_DIR/tools/run_runtime_r1.py" --track anchor --repo-dir local-artifacts/twilightforest-anchor --source-commit $env:ANCHOR_SHA --minecraft-version 1.20.1 --loader-name Forge --loader-version 47.1.70 --gradle-task "Minecraft_Server_1.20.1" --output-dir $out --timeout-seconds 2400 --shutdown-seconds 90 --world-seed $env:WORLD_SEED --view-distance $env:VIEW_DISTANCE --simulation-distance $env:SIMULATION_DISTANCE
 
       - name: Set up Java 25 for FRONTIER
         uses: actions/setup-java@v4
@@ -103,11 +117,25 @@ jobs:
           distribution: temurin
           java-version: '25'
 
+      - name: Warm FRONTIER Gradle wrapper
+        run: |
+          Push-Location local-artifacts/twilightforest-frontier
+          try {
+            for ($attempt = 1; $attempt -le 3; $attempt++) {
+              .\gradlew.bat --version
+              if ($LASTEXITCODE -eq 0) { break }
+              if ($attempt -eq 3) { throw "FRONTIER Gradle wrapper failed after 3 attempts" }
+              Start-Sleep -Seconds (10 * $attempt)
+            }
+          } finally {
+            Pop-Location
+          }
+
       - name: Measure FRONTIER R1 startup
         continue-on-error: true
         run: |
           $out = "$env:TF_EVIDENCE_DIR/runtime/frontier/$env:GITHUB_RUN_ID"
-          python "$env:TF_EVIDENCE_DIR/tools/run_runtime_r1.py" --track frontier --repo-dir local-artifacts/twilightforest-frontier --source-commit $env:FRONTIER_SHA --minecraft-version 26.1.2 --loader-name NeoForge --loader-version 26.1.2.102 --output-dir $out --timeout-seconds 2400 --shutdown-seconds 90 --world-seed $env:WORLD_SEED --view-distance $env:VIEW_DISTANCE --simulation-distance $env:SIMULATION_DISTANCE
+          python "$env:TF_EVIDENCE_DIR/tools/run_runtime_r1.py" --track frontier --repo-dir local-artifacts/twilightforest-frontier --source-commit $env:FRONTIER_SHA --minecraft-version 26.1.2 --loader-name NeoForge --loader-version 26.1.2.102 --gradle-task "runServer" --output-dir $out --timeout-seconds 2400 --shutdown-seconds 90 --world-seed $env:WORLD_SEED --view-distance $env:VIEW_DISTANCE --simulation-distance $env:SIMULATION_DISTANCE
 
       - name: Write compact R1 receipt
         if: always()
