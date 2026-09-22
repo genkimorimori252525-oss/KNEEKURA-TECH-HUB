@@ -32,8 +32,8 @@
 - texture/model files: fully inventoried; whole-entity dependency table pending
 - data assets: inventoried
 - version portability: first-pass mapped
-- performance: pending
-- full mob AI catalog: pending
-- full structure catalog: pending
+- performance: hot-path/caching hypotheses inventoried; runtime measurement pending
+- full FRONTIER direct mob Goal/Target catalog: mapped (53 non-boss classes); inherited/imperative semantics still under review
+- full FRONTIER structure catalog: mapped (25 declared keys / 21 active generated / 4 declared-only / 19 own Structure Sets)
 
 See the sibling reports and `inventory/` manifests for evidence-backed progress.
