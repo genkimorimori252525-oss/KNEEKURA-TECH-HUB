@@ -1,75 +1,85 @@
 # Twilight Forest 描画グラフ — 実行状況と検証記録
 
-記録日: 2026-09-23 JST。状態: **FULL_CHECKOUT_EXECUTION_PENDING**。
+記録更新: 2026-09-23 JST。状態: **FULL_CHECKOUT_RENDER_GRAPHS_GENERATED / STATIC GRAPH PHASE COMPLETE**。
 
-**FRONTIER / ANCHOR の本番描画グラフと両者の差分は、まだ生成していない。**
-この記録は抽出器の確認用テスト修正と実行条件の確認であり、静的解析全体の完了報告ではない。
+## 完了した本番実行
 
-## 対象と再開位置
+GitHub Actions run `35767314089`（Twilight Forest Render Graph run #2）は、self-hosted Windows/x64 runner `Jolly-TechHub` 上で **success** となった。
 
-- TECH HUB: `genkimorimori252525-oss/KNEEKURA-TECH-HUB`、PR #71。
-- 作業ブランチ: `jolly/minecraft-tech-department-2026-09-22`。
-- 確認した開始 head: `ad9571163d1de8f929258c52cb2c8458fcbb04cd`。
-- FRONTIER: `TeamTwilight/twilightforest@793c4d4c7b0a2892f702cbb9a8d751fbe7218828`。
-- ANCHOR: `TeamTwilight/twilightforest@a7dd8f13c653e137f977f5ffaa870fcb20fc1625`。
+固定した入力:
 
-既存仕様の FRONTIER 期待件数は blockstate 528、model 1,773、item definition 663、atlas 1、texture 1,159。
-**これは以前の索引に基づく期待値であり、今回の全件抽出で測定した値ではない。**
-ANCHOR JAR の既存照合結果も今回再検証したものではない。
+- TECH HUB event/input SHA: `1349626e24065b228b8ff2aa9576410affde0b71`
+- FRONTIER: `TeamTwilight/twilightforest@793c4d4c7b0a2892f702cbb9a8d751fbe7218828`
+- ANCHOR: `TeamTwilight/twilightforest@a7dd8f13c653e137f977f5ffaa870fcb20fc1625`
+- extractor SHA-256: `3f54cceacde6e7e22560fa75347537d8974437a338be611da3308d7f3446cf87`
+- comparator SHA-256: `d7b6d9354b46269bc05a373880f29c65dad6344fad412737160813b92550c684`
 
-## 本番実行が進まない具体的な条件
+run は両 upstream checkout、snapshot 検証、抽出器テスト、FRONTIER graph、ANCHOR graph、cross-track comparison、証拠 receipt、成果物 commit まで全工程を成功させた。
 
-既存の GitHub Actions run `35741797862`（Twilight Forest Render Graph）は `queued`、conclusion は null。
-job `106793165992`（build-graph）も queued、steps は null だった。
-イベントの head は `87cb15aa8951dc9d935a36267452b05e218dec3a`。
+## 生成結果
 
-この workflow は `[self-hosted, Windows, X64]` を要求する。
-リポジトリの runner 一覧 API を再確認した結果は **total_count=0、runners=[]**。
-したがって、このリポジトリで要求を満たす runner の登録が確認できず、ジョブは開始していない。
-これは他の通常 test workflow の失敗原因まで確定したという意味ではない。
+### FRONTIER
 
-別途、接続された作業環境の実行ツールは安全確認で拒否されたため、再試行・迂回していない。
-アシスタント側の隔離環境からの公開 upstream 取得も名前解決に失敗し、full checkout は取得できなかった。
-重複ジョブの投入、runner の登録、権限変更、他プロジェクトの実行基盤への接続は行っていない。
+- blockstate: **528**
+- model: **1,773**
+- item definition: **663**
+- atlas: **1**
+- texture: **1,159**
+- nodes: **4,124**
+- dependency edges: **7,174**
+- unresolved local refs: **17**
+- duplicate logical paths: **0**
+- parse errors: **0**
+- model parent cycles: **0**
+- graph SHA-256: `14492da8f1c329070f58e9a60676da2faa1794dc8e901a5efddcb86e618d2f78`
 
-## 今回修正したもの
+### ANCHOR
 
-既存の抽出器とテストの2ファイルだけを、GitHub の固定 head から読み取った内容で隔離環境に再現した。
-編集前のバイト列は次の Git blob SHA-1 と一致した。
+- blockstate: **453**
+- model: **2,416**
+- item definition: **0**
+- atlas: **0**
+- texture: **905**
+- nodes: **3,774**
+- dependency edges: **8,591**
+- unresolved local refs: **15**
+- duplicate logical paths: **0**
+- parse errors: **0**
+- model parent cycles: **0**
+- graph SHA-256: `67ad0ead2c799a85ae8ebfa207783f8d13a98f861fa4f55d457009b89d92d1b7`
 
-| ファイル | 編集前の Git blob SHA-1 |
-|---|---|
-| `tools/build_render_asset_graph.py` | `b18f242bc9ccad16d86da12bb6523f32ea27e066` |
-| `tests/test_twilight_forest_render_asset_graph_tool.py` | `52d9d77028c620695101037e7275c555c7f812bb` |
+## ANCHOR ↔ FRONTIER portability
 
-元のテスト2件は Python 3.13.5 で両方とも失敗した。
-原因はテスト用の動的 import が `sys.modules` にモジュールを登録せず、dataclass が遅延評価された型注釈を調べる段階で落ちることだった。
-テスト読込時だけ登録し、終了後は元の登録状態に戻すよう修正した。抽出器の CLI 自体がこの理由で失敗したという主張ではない。
+共有参照 edge は **2,131**、ANCHOR-only は **6,460**、FRONTIER-only は **5,043**。
 
-抽出器本体の変更は、生成 Markdown の source commit を囲むバッククォートの不要なエスケープを除いた1行だけ。
-この不具合を検出するテストの失敗（1 failed / 2 passed）を確認してから修正した。
-**描画グラフの抽出ロジックは変更していない。**
+主要 asset kind の差分:
 
-## 検証結果と限界
+| kind | ANCHOR | FRONTIER | shared | identical | changed | ANCHOR-only | FRONTIER-only |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| atlas | 0 | 1 | 0 | 0 | 0 | 0 | 1 |
+| blockstate | 453 | 528 | 451 | 0 | 451 | 2 | 77 |
+| item_definition | 0 | 663 | 0 | 0 | 0 | 0 | 663 |
+| model | 2,416 | 1,773 | 773 | 56 | 717 | 1,643 | 1,000 |
+| texture | 905 | 1,159 | 599 | 563 | 36 | 306 | 560 |
 
-修正後の確認用テストは **12 passed**。構文検査も warnings-as-errors で終了コード0。
-実行コマンドとファイルハッシュは `RENDER-GRAPH-EXECUTION-EVIDENCE.json` に記録した。
+未解決 local refs は shared 1 / ANCHOR-only 14 / FRONTIER-only 16。これらは黙って「解決済み」とせず、canonical JSON に診断として残している。
 
-確認対象は、モデル・親・テクスチャ参照、欠落参照、入れ子の item definition、atlas の参照記録、重複資産、JSON破損、親モデル循環、外部参照・テクスチャ変数の区別、ハッシュ・サイズ・反復結果、5種の資産を含む CLI 出力、テスト読込の隔離、Markdown 表示。
+## 正本成果物
 
-これは **合成 fixture を使った選択ファイルの検証**であり、full checkout に対する解析ではない。
-atlas のテストは参照文字列の保持を確認するもので、全 atlas の展開・解決を実証するものではない。
-リポジトリ全体のテスト、workflow が指定する Python 3.12、GitHub CI 成功、Minecraft 実機動作は未検証。
-レビューも同一アシスタントによる差分確認であり、独立したレビューではない。
+- `BLOCK-ITEM-RENDER-GRAPH.json` / `.md` — FRONTIER
+- `ANCHOR-BLOCK-ITEM-RENDER-GRAPH.json` / `.md` — ANCHOR
+- `BLOCK-ITEM-RENDER-COMPARISON.json` / `.md` — cross-track portability
+- `RENDER-GRAPH-FULL-CHECKOUT-EVIDENCE.json` — 実行・ツール・source・hash receipt
 
-## 次の作業
+生成成果物は derived evidence のみで、raw third-party assets は TECH HUB に保存していない。
 
-必要なのは、対象リポジトリに対して承認された、固定ソース全体を取得・実行できる環境。
-まず既存の queued run を確認し、無条件に重複実行を追加しない。
-現在の workflow は FRONTIER のみを処理し、TECH HUB はブランチ名で checkout するため、再開時は run のイベント SHA だけでなく実際の TECH HUB head と抽出器のハッシュも記録する。
+## 境界
 
-実行環境が整ったら、FRONTIER 全件抽出、件数・ハッシュ・未解決参照・重複・破損・循環の確認、ANCHOR の同様の抽出、両トラックの描画差分、成果物の統合の順で進める。
-両ソースの証拠を混同せず、未解決参照を黙って解決済みにしない。
+この完了は **静的なBlock/Item描画依存グラフ**についてのもの。
 
-これが済むまでは描画グラフを完了扱いにせず、Runtime Evidence に進んだとも記録しない。
-今回、Minecraft 起動・性能計測・raw third-party asset の保存・main への merge は行っていない。
+- Minecraft はこの run では起動していない。
+- runtime performance はまだ測定していない。
+- compiled class identity は証明していない。
+- main へ merge していない。
+
+したがって、次の正式フェーズは `RUNTIME-EVIDENCE-SPEC.md` に基づく **Runtime Evidence 実機計測**。静的解析結果と実測値を混同しない。
