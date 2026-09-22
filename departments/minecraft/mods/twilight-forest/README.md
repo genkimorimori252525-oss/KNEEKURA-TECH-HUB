@@ -24,11 +24,12 @@
 ## Current analysis coverage
 
 - bootstrap / registries: mapped
-- major boss architecture: mapped
-- networking: mapped
-- worldgen architecture: mapped
+- major boss architecture + explicit transition matrix: mapped
+- networking: mapped, including exact 29-payload FRONTIER direction map
+- worldgen architecture: mapped, including dimension/noise pipeline
 - rendering/model/client architecture: mapped
-- texture/model files: fully inventoried; complete dependency table pending
+- all 8 principal boss renderer/model/texture dependencies: mapped
+- texture/model files: fully inventoried; whole-entity dependency table pending
 - data assets: inventoried
 - version portability: first-pass mapped
 - performance: pending
