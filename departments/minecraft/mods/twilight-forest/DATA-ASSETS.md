@@ -251,5 +251,6 @@ Each record retains its source path and Git blob SHA. Family metadata records wh
 
 For whole-target completion:
 
-1. ANCHOR↔FRONTIER schema delta for important worldgen/custom data;
-2. distributed 4.3.2508 JAR resource hash comparison.
+1. distributed 4.3.2508 JAR resource hash comparison.
+
+The ANCHOR↔FRONTIER custom-data schema/architecture delta is now mapped in `CUSTOM-DATA-PORTABILITY.md`.
