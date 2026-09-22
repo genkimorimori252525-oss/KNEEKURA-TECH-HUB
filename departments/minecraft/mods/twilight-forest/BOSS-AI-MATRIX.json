@@ -1,0 +1,203 @@
+{
+  "schema_version": "1.0.0",
+  "source_snapshot": "TeamTwilight/twilightforest@793c4d4c7b0a2892f702cbb9a8d751fbe7218828",
+  "bosses": [
+    {
+      "boss": "Naga",
+      "controller": [
+        "GoalSelector",
+        "NagaMovementPattern",
+        "multipart body"
+      ],
+      "states": [
+        "CIRCLE",
+        "INTIMIDATE",
+        "CRUMBLE",
+        "CHARGE",
+        "STUNLESS_CHARGE",
+        "DAZE"
+      ],
+      "transitions": [
+        "CIRCLE->INTIMIDATE",
+        "INTIMIDATE->CRUMBLE when target is above; otherwise CHARGE/STUNLESS_CHARGE",
+        "CRUMBLE->CHARGE/STUNLESS_CHARGE",
+        "CHARGE/STUNLESS_CHARGE/DAZE->CIRCLE"
+      ],
+      "evidence": [
+        "src/main/java/twilightforest/entity/boss/Naga.java@e30e1371af2bdd140bf368601adc71596469abfa",
+        "src/main/java/twilightforest/entity/ai/goal/NagaMovementPattern.java@1cebe886ac59c5199642c6a2e17451bb223f05eb"
+      ]
+    },
+    {
+      "boss": "Lich",
+      "controller": [
+        "GoalSelector",
+        "derived encounter phase"
+      ],
+      "states": [
+        "PHASE_1_SHIELD_SHADOWS",
+        "PHASE_2_MINIONS",
+        "PHASE_3_MELEE"
+      ],
+      "transitions": [
+        "phase1 if shadow clone or shieldStrength>0",
+        "else phase2 if minionsToSummon>0 or live minions>0",
+        "else phase3"
+      ],
+      "evidence": [
+        "src/main/java/twilightforest/entity/boss/Lich.java@070bae826b6862ddb1cac7a440ed4db76fa83734",
+        "src/main/java/twilightforest/entity/ai/goal/LichShadowsGoal.java@b028cab3934bcf4fe9551a766e01eed1af1fb6e0",
+        "src/main/java/twilightforest/entity/ai/goal/LichMinionsGoal.java@a816e4d99ee057ab25ec5c8e9643c2809d293935"
+      ]
+    },
+    {
+      "boss": "Hydra",
+      "controller": [
+        "Hydra body coordinator",
+        "HydraHeadContainer per-head state machine"
+      ],
+      "states": [
+        "IDLE",
+        "BITE_BEGINNING",
+        "BITE_READY",
+        "BITING",
+        "BITE_ENDING",
+        "FLAME_BEGINNING",
+        "FLAMING",
+        "FLAME_ENDING",
+        "MORTAR_BEGINNING",
+        "MORTAR_SHOOTING",
+        "MORTAR_ENDING",
+        "ATTACK_COOLDOWN",
+        "DYING",
+        "DEAD",
+        "BORN",
+        "ROAR_START",
+        "ROAR_RAWR"
+      ],
+      "evidence": [
+        "src/main/java/twilightforest/entity/boss/Hydra.java@93c9aa82d3333a3bc5d475043f74e4af2d07d420",
+        "src/main/java/twilightforest/entity/boss/HydraHeadContainer.java@9ae85ee35800d8776d8d07d6d27773db140dfd1f"
+      ]
+    },
+    {
+      "boss": "Snow Queen",
+      "controller": [
+        "synced Phase",
+        "phase-specific hover Goals"
+      ],
+      "states": [
+        "SUMMON",
+        "DROP",
+        "BEAM"
+      ],
+      "transitions": [
+        "SUMMON->DROP when summon budget=0 and minion count=0",
+        "DROP->BEAM after 2-4 successful drops",
+        "BEAM->SUMMON after MAX_DAMAGE_WHILE_BEAMING"
+      ],
+      "evidence": [
+        "src/main/java/twilightforest/entity/boss/SnowQueen.java@4ab76655c39b9f944ca6612ac398f6a6e5257c9c",
+        "src/main/java/twilightforest/entity/ai/goal/HoverSummonGoal.java@ace226d75655819754e46dfece9f34da642608f5",
+        "src/main/java/twilightforest/entity/ai/goal/HoverThenDropGoal.java@5ba733a7501b50808fe25deb5938f7387fe01f6d",
+        "src/main/java/twilightforest/entity/ai/goal/HoverBeamGoal.java@4ff14c935d7de8059d7625b78b7273372e63f28d"
+      ]
+    },
+    {
+      "boss": "Alpha Yeti",
+      "controller": [
+        "GoalSelector",
+        "synced rampage/tired flags"
+      ],
+      "states": [
+        "NORMAL",
+        "RAMPAGE",
+        "TIRED"
+      ],
+      "transitions": [
+        "valid damage enables rampage eligibility",
+        "rampage lasts 180 ticks",
+        "RAMPAGE->TIRED on Goal stop",
+        "TIRED clears after 100 ticks"
+      ],
+      "evidence": [
+        "src/main/java/twilightforest/entity/boss/AlphaYeti.java@c058c2521e795450935f81f642135850af7817d6",
+        "src/main/java/twilightforest/entity/ai/goal/YetiRampageGoal.java@675ecd0c2a898fb0a451ea698f868bfa8b136ad5",
+        "src/main/java/twilightforest/entity/ai/goal/YetiTiredGoal.java@c4db6ab87beda03184583b7914a00e9fc0f24144"
+      ]
+    },
+    {
+      "boss": "Ur-Ghast",
+      "controller": [
+        "GoalSelector",
+        "damage-budget tantrum toggle",
+        "trap coordinator"
+      ],
+      "states": [
+        "NORMAL",
+        "TANTRUM"
+      ],
+      "transitions": [
+        "damageUntilNextPhase<=0 toggles state",
+        "reset budget to 18 after toggle"
+      ],
+      "evidence": [
+        "src/main/java/twilightforest/entity/boss/UrGhast.java@b3e0adad4b546e82087ec42443bc6f546eea0962",
+        "src/main/java/twilightforest/entity/ai/goal/UrGhastAttackGoal.java@eb6102b6dc2e565fce9c03cfb5fd672658382383",
+        "src/main/java/twilightforest/entity/ai/goal/UrGhastFlightGoal.java@a886e8875aa65fb5e07e7f9f626497d911c1d144"
+      ]
+    },
+    {
+      "boss": "Knight Phantom",
+      "controller": [
+        "shared Formation",
+        "leader broadcast",
+        "formation-specific Goals"
+      ],
+      "states": [
+        "HOVER",
+        "LARGE_CLOCKWISE",
+        "SMALL_CLOCKWISE",
+        "LARGE_ANTICLOCKWISE",
+        "SMALL_ANTICLOCKWISE",
+        "CHARGE_PLUSX",
+        "CHARGE_MINUSX",
+        "CHARGE_PLUSZ",
+        "CHARGE_MINUSZ",
+        "WAITING_FOR_LEADER",
+        "ATTACK_PLAYER_START",
+        "ATTACK_PLAYER_ATTACK"
+      ],
+      "transitions": [
+        "ATTACK_PLAYER_START->ATTACK_PLAYER_ATTACK",
+        "ATTACK_PLAYER_ATTACK->WAITING_FOR_LEADER",
+        "WAITING_FOR_LEADER->leader formation or ATTACK_PLAYER_START"
+      ],
+      "evidence": [
+        "src/main/java/twilightforest/entity/boss/KnightPhantom.java@9568efbfc7ed4ebb151905c04606bc74eb460b84",
+        "src/main/java/twilightforest/entity/ai/goal/PhantomUpdateFormationAndMoveGoal.java@e61134e4ae17ee1b308a1b62e214baf14f121d06"
+      ]
+    },
+    {
+      "boss": "Minoshroom",
+      "controller": [
+        "GoalSelector",
+        "synced action flags"
+      ],
+      "states": [
+        "MELEE",
+        "GROUND_ATTACK_CHARGE",
+        "CHARGE"
+      ],
+      "transitions": [
+        "ground attack charges 30-59 ticks then slam",
+        "charge winds up 15-44 ticks then path-charges"
+      ],
+      "evidence": [
+        "src/main/java/twilightforest/entity/boss/Minoshroom.java@c74fe6b7e56ecded49dde145976e0249cea853a5",
+        "src/main/java/twilightforest/entity/ai/goal/GroundAttackGoal.java@d0315963beeaad44f1c512ae677514435c57a6bf",
+        "src/main/java/twilightforest/entity/ai/goal/ChargeAttackGoal.java@d98908403e3d258dbf2f452ffe317ac09f8ce21b"
+      ]
+    }
+  ]
+}
