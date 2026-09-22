@@ -1,0 +1,113 @@
+{
+  "catalog_version": "1.0",
+  "source_snapshot": {
+    "repository": "TeamTwilight/twilightforest",
+    "commit": "a7dd8f13c653e137f977f5ffaa870fcb20fc1625",
+    "minecraft": "1.20.1",
+    "loader": "Forge",
+    "release_source_candidate": "4.3.2508"
+  },
+  "batch": 5,
+  "range": [
+    60,
+    66
+  ],
+  "count": 7,
+  "records": [
+    {
+      "class_name": "TinyBirdRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/TinyBirdRenderer.java",
+      "blob_sha": "9d8b075110358539e6139d9280f88d854834e80d",
+      "superclass": "BirdRenderer",
+      "literal_pngs": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "model_classes": [],
+      "notable_resource_paths": []
+    },
+    {
+      "class_name": "TwilightBoatRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/TwilightBoatRenderer.java",
+      "blob_sha": "284766d9afaf3ad576deb53f68a04cbb689e1395",
+      "superclass": "EntityRenderer",
+      "literal_pngs": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "model_classes": [
+        "ChestBoatModel",
+        "BoatModel"
+      ],
+      "notable_resource_paths": [
+        "textures/entity/chest_boat/",
+        "textures/entity/boat/"
+      ]
+    },
+    {
+      "class_name": "UnstableIceCoreRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/UnstableIceCoreRenderer.java",
+      "blob_sha": "a20686a84ed2b0b7c5d8e6aeaefef611e3da363e",
+      "superclass": "UnstableIceCore",
+      "literal_pngs": [
+        "iceexploder.png"
+      ],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "model_classes": [],
+      "notable_resource_paths": []
+    },
+    {
+      "class_name": "UpperGoblinKnightRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/UpperGoblinKnightRenderer.java",
+      "blob_sha": "2accccc4affe50a14732edff3e05c20399f957fe",
+      "superclass": "TFBipedRenderer",
+      "literal_pngs": [
+        "doublegoblin.png"
+      ],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "model_classes": [],
+      "notable_resource_paths": []
+    },
+    {
+      "class_name": "UrGhastRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/UrGhastRenderer.java",
+      "blob_sha": "f79be67e2f3c5342eef894b809e65258d50b772e",
+      "superclass": "CarminiteGhastRenderer",
+      "literal_pngs": [
+        "towerboss.png",
+        "towerboss_openeyes.png",
+        "towerboss_fire.png"
+      ],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "model_classes": [],
+      "notable_resource_paths": []
+    },
+    {
+      "class_name": "WinterWolfRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/WinterWolfRenderer.java",
+      "blob_sha": "5cc1cab57c5a8d06b973eea8baa2fc1ef277d3a9",
+      "superclass": "HostileWolfRenderer",
+      "literal_pngs": [
+        "winterwolf.png"
+      ],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "model_classes": [],
+      "notable_resource_paths": []
+    },
+    {
+      "class_name": "WraithRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/WraithRenderer.java",
+      "blob_sha": "34981ee8baedf908da7af2b96dea7b781496f32f",
+      "superclass": "HumanoidMobRenderer",
+      "literal_pngs": [
+        "ghost.png"
+      ],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "model_classes": [],
+      "notable_resource_paths": []
+    }
+  ]
+}
