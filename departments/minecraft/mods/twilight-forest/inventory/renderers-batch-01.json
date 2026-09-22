@@ -1,0 +1,318 @@
+{
+  "batch": 1,
+  "source_snapshot": "793c4d4c7b0a2892f702cbb9a8d751fbe7218828",
+  "count": 16,
+  "rows": [
+    {
+      "renderer_class": "BoarRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/BoarRenderer.java",
+      "blob_sha": "6ddc755237ec3c5b0ed3288b0fbbaaa29bd87d32",
+      "model_layers": [
+        "BOAR",
+        "BOAR_BABY"
+      ],
+      "model_classes": [
+        "BoarModel",
+        "PigModel"
+      ],
+      "textures": [
+        "wildboar.png"
+      ],
+      "render_states": [
+        "PigRenderState",
+        "createRenderState"
+      ],
+      "superclass": "AgeableMobRenderer<Boar, PigRenderState, PigModel>"
+    },
+    {
+      "renderer_class": "BighornRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/BighornRenderer.java",
+      "blob_sha": "acb0918de401092ee9fc27dba0914e185795363a",
+      "model_layers": [
+        "BIGHORN_SHEEP",
+        "BIGHORN_SHEEP_BABY"
+      ],
+      "model_classes": [
+        "BighornModel",
+        "SheepModel"
+      ],
+      "textures": [
+        "bighorn.png"
+      ],
+      "render_states": [
+        "SheepRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "superclass": "AgeableMobRenderer<Bighorn, SheepRenderState, SheepModel>"
+    },
+    {
+      "renderer_class": "DeerRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/DeerRenderer.java",
+      "blob_sha": "fca198e53f0949b877b14603dfc30aed1aabb9ad",
+      "model_layers": [
+        "DEER",
+        "DEER_BABY"
+      ],
+      "model_classes": [
+        "DeerModel"
+      ],
+      "textures": [
+        "wilddeer.png"
+      ],
+      "render_states": [
+        "LivingEntityRenderState",
+        "createRenderState"
+      ],
+      "superclass": "AgeableMobRenderer<Deer, LivingEntityRenderState, DeerModel>"
+    },
+    {
+      "renderer_class": "RedcapRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/RedcapRenderer.java",
+      "blob_sha": "75c4d5922d71b2d022e8d793687e4d651d240718",
+      "model_layers": [
+        "REDCAP",
+        "REDCAP_ARMOR"
+      ],
+      "model_classes": [
+        "RedcapModel"
+      ],
+      "textures": [
+        "redcap.png"
+      ],
+      "render_states": [
+        "HumanoidRenderState",
+        "createRenderState"
+      ],
+      "superclass": "HumanoidMobRenderer<Redcap, HumanoidRenderState, RedcapModel>"
+    },
+    {
+      "renderer_class": "SkeletonDruidRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/SkeletonDruidRenderer.java",
+      "blob_sha": "52030196f44b93923dff94834a25c6c2e74a4c73",
+      "model_layers": [
+        "SKELETON_DRUID",
+        "SKELETON_DRUID_BABY"
+      ],
+      "model_classes": [
+        "SkeletonDruidModel"
+      ],
+      "textures": [
+        "skeletondruid.png"
+      ],
+      "render_states": [
+        "SkeletonRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "superclass": "HumanoidMobRenderer<SkeletonDruid, SkeletonRenderState, SkeletonDruidModel>"
+    },
+    {
+      "renderer_class": "HostileWolfRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/HostileWolfRenderer.java",
+      "blob_sha": "ac96479f88212dbdcf5a962e0adaf1bfc1707364",
+      "model_layers": [
+        "HOSTILE_WOLF"
+      ],
+      "model_classes": [
+        "HostileWolfModel"
+      ],
+      "textures": [],
+      "render_states": [
+        "WolfRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "superclass": "MobRenderer<HostileWolf, WolfRenderState, HostileWolfModel<WolfRenderState>>"
+    },
+    {
+      "renderer_class": "WraithRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/WraithRenderer.java",
+      "blob_sha": "b978538b0972c2554cf43e4eafe4a4f8e4e08599",
+      "model_layers": [
+        "WRAITH"
+      ],
+      "model_classes": [
+        "WraithModel"
+      ],
+      "textures": [
+        "ghost.png"
+      ],
+      "render_states": [
+        "HumanoidRenderState",
+        "createRenderState"
+      ],
+      "superclass": "HumanoidMobRenderer<Wraith, HumanoidRenderState, WraithModel>"
+    },
+    {
+      "renderer_class": "HydraRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/HydraRenderer.java",
+      "blob_sha": "d85966eae8c7b121b61d54cc80dcee994d1a0e37",
+      "model_layers": [
+        "HYDRA"
+      ],
+      "model_classes": [
+        "HydraModel"
+      ],
+      "textures": [
+        "hydra4.png"
+      ],
+      "render_states": [
+        "HydraRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "superclass": "MobRenderer<Hydra, HydraRenderState, HydraModel>"
+    },
+    {
+      "renderer_class": "LichRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/LichRenderer.java",
+      "blob_sha": "755abde65b4c8530bb64e0544aef2c7417184647",
+      "model_layers": [
+        "LICH"
+      ],
+      "model_classes": [
+        "LichModel"
+      ],
+      "textures": [
+        "twilightlich64.png",
+        "twilightlich64_eyes.png"
+      ],
+      "render_states": [
+        "CameraRenderState",
+        "LichRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "superclass": "HumanoidMobRenderer<Lich, LichRenderState, LichModel>"
+    },
+    {
+      "renderer_class": "BirdRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/BirdRenderer.java",
+      "blob_sha": "6d9cd56a0289910b07c94cfd5fbc97964d2c94da",
+      "model_layers": [],
+      "model_classes": [
+        "babyModel"
+      ],
+      "textures": [],
+      "render_states": [
+        "BirdRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "superclass": "AgeableMobRenderer<T, BirdRenderState, M>"
+    },
+    {
+      "renderer_class": "LichMinionRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/LichMinionRenderer.java",
+      "blob_sha": "701b583a7495efaf13710dd90a7e65cc8cdcb9a1",
+      "model_layers": [],
+      "model_classes": [],
+      "textures": [],
+      "render_states": [
+        "ZombieRenderState"
+      ],
+      "superclass": "ZombieRenderer"
+    },
+    {
+      "renderer_class": "LoyalZombieRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/LoyalZombieRenderer.java",
+      "blob_sha": "0a13cb8982a447d7360fd3e9ee84c8eb6134a7ad",
+      "model_layers": [
+        "LOYAL_ZOMBIE"
+      ],
+      "model_classes": [
+        "AbstractZombieModel",
+        "ZombieModel"
+      ],
+      "textures": [
+        "textures/entity/zombie/zombie.png"
+      ],
+      "render_states": [
+        "ZombieRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "superclass": "HumanoidMobRenderer<LoyalZombie, ZombieRenderState, AbstractZombieModel<ZombieRenderState>>"
+    },
+    {
+      "renderer_class": "TinyBirdRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/TinyBirdRenderer.java",
+      "blob_sha": "628a28395313984ba3d4c914f3bf6278955a5e6b",
+      "model_layers": [
+        "TINY_BIRD"
+      ],
+      "model_classes": [
+        "TinyBirdModel"
+      ],
+      "textures": [],
+      "render_states": [
+        "TinyBirdRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "superclass": "MobRenderer<TinyBird, TinyBirdRenderState, TinyBirdModel>"
+    },
+    {
+      "renderer_class": "SquirrelRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/SquirrelRenderer.java",
+      "blob_sha": "a9bbcbe5bb09a556f424835f82fa9d485d48a648",
+      "model_layers": [
+        "SQUIRREL"
+      ],
+      "model_classes": [
+        "SquirrelModel"
+      ],
+      "textures": [
+        "squirrel2.png"
+      ],
+      "render_states": [
+        "LivingEntityRenderState",
+        "createRenderState"
+      ],
+      "superclass": "MobRenderer<Squirrel, LivingEntityRenderState, SquirrelModel>"
+    },
+    {
+      "renderer_class": "BunnyRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/BunnyRenderer.java",
+      "blob_sha": "47abecee17e01e777fb0240ef979ef550577db21",
+      "model_layers": [
+        "BUNNY",
+        "BUNNY_BABY"
+      ],
+      "model_classes": [
+        "BunnyModel"
+      ],
+      "textures": [],
+      "render_states": [
+        "DwarfRabbitRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "superclass": "AgeableMobRenderer<DwarfRabbit, DwarfRabbitRenderState, BunnyModel>"
+    },
+    {
+      "renderer_class": "QuestRamRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/QuestRamRenderer.java",
+      "blob_sha": "5a3192bd3756001ffa100da3567e6598d0b486ef",
+      "model_layers": [
+        "QUEST_RAM"
+      ],
+      "model_classes": [
+        "QuestRamModel",
+        "getParentModel",
+        "submitModel"
+      ],
+      "textures": [
+        "questram.png",
+        "questram_lines.png"
+      ],
+      "render_states": [
+        "QuestingRamRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "superclass": "MobRenderer<QuestRam, QuestingRamRenderState, QuestRamModel>"
+    }
+  ]
+}
