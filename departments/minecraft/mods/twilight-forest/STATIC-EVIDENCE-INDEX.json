@@ -1,0 +1,46 @@
+{
+  "evidence_index_version": "1.0",
+  "target": "The Twilight Forest",
+  "snapshots": {
+    "anchor": "a7dd8f13c653e137f977f5ffaa870fcb20fc1625",
+    "frontier": "793c4d4c7b0a2892f702cbb9a8d751fbe7218828"
+  },
+  "artifacts": {
+    "architecture": "ARCHITECTURE-EVIDENCE.json",
+    "ai": [
+      "BOSS-AI-MATRIX.json",
+      "MOB-AI-CATALOG.json",
+      "AI-PORTABILITY-MATRIX.json"
+    ],
+    "networking": [
+      "NETWORK-EVIDENCE.json",
+      "PACKET-MAP.json"
+    ],
+    "worldgen": [
+      "WORLDGEN-EVIDENCE.json",
+      "WORLDGEN-PIPELINE.json",
+      "STRUCTURE-CATALOG.json"
+    ],
+    "rendering": [
+      "ENTITY-RENDER-DEPENDENCIES.json",
+      "ANCHOR-ENTITY-RENDER-DEPENDENCIES.json",
+      "BOSS-RENDER-MAP.json"
+    ],
+    "data": [
+      "DATA-ASSET-CATALOG.json",
+      "CUSTOM-DATA-GRAPH.json",
+      "CUSTOM-DATA-PORTABILITY.json"
+    ],
+    "compatibility": [
+      "COMPATIBILITY-EVIDENCE.json",
+      "COMPATIBILITY-MATRIX.json",
+      "ACCESS-TRANSFORMER-PORTABILITY.json"
+    ],
+    "transformation": [
+      "ASM-PATCHES.md",
+      "ACCESS-TRANSFORMER-PORTABILITY.json"
+    ],
+    "license": "LICENSE-EVIDENCE.json",
+    "anchor_binary": "ANCHOR-JAR-EVIDENCE.json"
+  }
+}
