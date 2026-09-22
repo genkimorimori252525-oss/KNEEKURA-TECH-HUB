@@ -35,5 +35,9 @@ def test_r1_workflow_has_retry_and_sufficient_job_budget():
     assert "timeout-minutes: 180" in workflow
     assert "Warm ANCHOR Gradle wrapper" in workflow
     assert "Warm FRONTIER Gradle wrapper" in workflow
+    assert "Set up Java 21 for FRONTIER toolchain" in workflow
+    assert "FRONTIER_JAVA21_HOME=$env:JAVA_HOME" in workflow
+    assert "org.gradle.java.installations.paths=$env:FRONTIER_JAVA21_HOME" in workflow
+    assert "org.gradle.java.installations.auto-download=false" in workflow
     assert '--gradle-task "Minecraft_Server_1.20.1"' in workflow
     assert '--gradle-task "runServer"' in workflow
