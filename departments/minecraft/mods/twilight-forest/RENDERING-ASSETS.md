@@ -202,3 +202,9 @@ All eight principal progression bosses now have direct FRONTIER renderer/model-l
 Machine-readable copy: `BOSS-RENDER-MAP.json`.
 
 This reinforces a recurring pattern: authoritative encounter state is projected into render state and then into model/texture choice; presentation does not drive combat state.
+
+## Complete EntityType → Renderer registration surface
+
+The pinned FRONTIER client registers **81** entity renderers. Every registration is captured in `ENTITY-RENDER-REGISTRY.json`.
+
+This first registry pass is exhaustive for registration wiring. Inline registrations already expose model/layer/texture arguments; class-reference renderers are being resolved separately to model layers and texture dependencies.
