@@ -1,0 +1,121 @@
+{
+  "version": "1.0",
+  "target": "The Twilight Forest",
+  "anchor": {
+    "commit": "a7dd8f13c653e137f977f5ffaa870fcb20fc1625",
+    "minecraft": "1.20.1",
+    "loader": "Forge",
+    "custom_namespace_records": 21,
+    "legacy_stalactite_records": 12
+  },
+  "frontier": {
+    "commit": "793c4d4c7b0a2892f702cbb9a8d751fbe7218828",
+    "minecraft": "26.1.2",
+    "loader": "NeoForge",
+    "custom_namespace_records": 290
+  },
+  "families": {
+    "biome_layer_stack": {
+      "anchor": 2,
+      "frontier": 2,
+      "shared": 2,
+      "classification": "DIRECTLY_PORTABLE",
+      "evidence": "random_forest_biomes.json blob identical across snapshots",
+      "strategy": "retain ANCHOR codec/runtime; no modern API transplant required"
+    },
+    "wood_palettes": {
+      "anchor": 8,
+      "frontier": 8,
+      "shared": 8,
+      "classification": "DIRECTLY_PORTABLE",
+      "evidence": "twilight_oak.json blob identical; codec field set unchanged",
+      "strategy": "reuse ANCHOR WoodPalette codec/processor"
+    },
+    "restrictions": {
+      "anchor": 9,
+      "frontier": 9,
+      "shared": 9,
+      "classification": "SMALL_SCHEMA_ADAPTATION",
+      "evidence": "same record IDs/core fields; ItemStack -> ItemStackTemplate serialization change",
+      "strategy": "translate FRONTIER data into ANCHOR ItemStack codec representation"
+    },
+    "magic_paintings": {
+      "anchor": 2,
+      "frontier": 5,
+      "shared": 2,
+      "classification": "CODEC_EXTENSION_REQUIRED",
+      "evidence": "FRONTIER adds title/author/back_texture/local_lighting and richer opacity triggers/ranges",
+      "strategy": "extend ANCHOR codec with defaults before importing new records"
+    },
+    "stalactites": {
+      "anchor_legacy": 12,
+      "frontier": 19,
+      "classification": "ARCHITECTURAL_REFACTOR",
+      "evidence": "old top-level reload dataset becomes richer twilight/stalactites plus separate structure_speleothem_settings",
+      "strategy": "port variety/placement separation using ANCHOR-compatible reload/config classes"
+    },
+    "structure_speleothem_settings": {
+      "anchor": 0,
+      "frontier": 6,
+      "classification": "NEW_POLICY_LAYER",
+      "strategy": "add second placement-policy codec/config behind ANCHOR structure generation"
+    },
+    "biome_terrain_data": {
+      "anchor": 0,
+      "frontier": 1,
+      "classification": "WORLDGEN_CONCEPT_REWRITE",
+      "strategy": "feed data-selected terrain policy into ChunkGeneratorTwilight abstraction; do not copy modern DensityFunction API"
+    },
+    "chunk_blanket_processors": {
+      "anchor": 0,
+      "frontier": 2,
+      "classification": "HOOK_PLUS_CODEC_BACKPORT",
+      "strategy": "add ANCHOR post-surface processor boundary then decode processor records"
+    },
+    "dwarf_rabbit_variant": {
+      "anchor": 0,
+      "frontier": 3,
+      "classification": "ISOLATED_BACKPORT",
+      "strategy": "add ANCHOR-compatible data registry/reload + synced variant identity"
+    },
+    "tiny_bird_variant": {
+      "anchor": 0,
+      "frontier": 4,
+      "classification": "ISOLATED_BACKPORT",
+      "strategy": "add ANCHOR-compatible data registry/reload + synced variant identity"
+    },
+    "quests": {
+      "anchor": 0,
+      "frontier": 1,
+      "classification": "RELOAD_LISTENER_BACKPORT",
+      "strategy": "port QuestingRamContext codec and reload listener separately from loader APIs"
+    },
+    "template_definition": {
+      "anchor": 0,
+      "frontier": 205,
+      "classification": "HIGH_VALUE_STRUCTURE_BACKPORT",
+      "strategy": "port weighted template definition loader/sampling independent of modern registry APIs"
+    },
+    "template_marker_handler_list": {
+      "anchor": 0,
+      "frontier": 1,
+      "classification": "STRUCTURE_HOOK_BACKPORT",
+      "strategy": "port handler dispatch/list abstraction and bind to ANCHOR template marker callbacks"
+    },
+    "travellers_modifiers": {
+      "anchor": 0,
+      "frontier": 24,
+      "classification": "SUBSYSTEM_REWRITE",
+      "strategy": "first define 1.20.1 gear/component storage boundary, then port polymorphic modifier codec concept"
+    }
+  },
+  "recommended_order": [
+    "stable_existing",
+    "magic_painting_codec_extension",
+    "isolated_variants_and_quests",
+    "speleothem_refactor",
+    "template_authoring",
+    "worldgen_policy",
+    "travellers_modifier_subsystem"
+  ]
+}
