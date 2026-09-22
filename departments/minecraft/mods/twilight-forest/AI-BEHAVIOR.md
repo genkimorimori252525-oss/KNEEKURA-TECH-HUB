@@ -1,6 +1,6 @@
 # Twilight Forest — AI / Boss Behavior Map
 
-Status: **major FRONTIER bosses mapped; full mob catalog still in progress**
+Status: **major FRONTIER bosses mapped; direct Goal/Target composition cataloged across normal hostile/allied/passive mobs**
 
 Source snapshot: `TeamTwilight/twilightforest@793c4d4c7b0a2892f702cbb9a8d751fbe7218828`.
 
@@ -178,10 +178,32 @@ Prefer composable units:
 
 A boss should compose only the pieces it needs.
 
+## FRONTIER normal-mob composition catalog v1
+
+Machine-readable catalog: `MOB-AI-CATALOG.json`.
+
+The first whole-tree pass covers **53 non-boss entity classes** under `entity/monster` and `entity/passive`:
+
+- 42 hostile/allied/abstract monster-side classes;
+- 11 passive/abstract passive classes.
+
+The catalog intentionally distinguishes **direct Goal/Target registration** from inheritance. A class with no direct registration is not labeled as having “no AI”; it may inherit vanilla/custom Goals or use imperative `tick/aiStep` logic.
+
+Notable reusable compositions found in the direct registrations:
+
+- **Kobold social behavior** — panic when flock members die, seek bread, run away while carrying bread, and flock with same-kind entities are separate Goals.
+- **Redcap tactical explosives** — shyness, TNT lighting, and Sapper TNT planting are composable Goals.
+- **Home-bounded flight** — Carminite Ghastguard and Wraith use distinct movement Goals around home/arena constraints.
+- **Charge reuse** — Boggard, Minotaur, and Pinch Beetle share the charge-action pattern.
+- **Breath reuse** — Fire Beetle and Winter Wolf share a breath-attack abstraction.
+- **Mounted/rider interaction** — Lower Goblin Knight and Yeti expose rider-specific attack/throw behavior.
+
+This confirms that Twilight Forest uses Goal composition as a reusable behavior library well beyond boss encounters.
+
 ## Remaining AI work
 
-- inventory every custom Goal and activation/stop condition;
-- map normal hostile/passive mob AI;
+- inspect every custom Goal's internal activation/continue/stop semantics;
+- resolve inherited/imperative behavior for classes with no direct Goal registration;
 - compare ANCHOR behavior against FRONTIER;
 - separate server-authoritative behavior from client-only animation;
 - identify AI patterns added/removed between tracks.
