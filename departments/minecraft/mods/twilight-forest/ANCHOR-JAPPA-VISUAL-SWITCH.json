@@ -1,0 +1,847 @@
+{
+  "catalog_version": "1.0",
+  "source_snapshot": {
+    "repository": "TeamTwilight/twilightforest",
+    "commit": "a7dd8f13c653e137f977f5ffaa870fcb20fc1625",
+    "minecraft": "1.20.1",
+    "loader": "Forge",
+    "release_source_candidate": "4.3.2508"
+  },
+  "selector_evidence": {
+    "path": "src/main/java/twilightforest/client/JappaPackReloadListener.java",
+    "blob_sha": "5539498443881de626f48fb85b08ee2caa9e7639"
+  },
+  "registration_evidence": {
+    "path": "src/main/java/twilightforest/client/TFClientSetup.java",
+    "blob_sha": "2e7012197d2c4e85d3fd2d6f16d7408649300e92"
+  },
+  "mechanism": {
+    "marker_resource": "twilightforest:jappa_models.marker",
+    "detection": "Active client resource packs are scanned for the marker.",
+    "reload_behavior": "Cached on resource reload/client setup; entity renderer registration uses an uncached supplier because of reload ordering.",
+    "simulation_effect": "Presentation selection only; no simulation switch is performed by this listener."
+  },
+  "entity_type_switch_count": 24,
+  "entity_types": [
+    "BOAR",
+    "BIGHORN_SHEEP",
+    "DEER",
+    "REDCAP",
+    "HYDRA",
+    "TINY_BIRD",
+    "SQUIRREL",
+    "RAVEN",
+    "QUEST_RAM",
+    "KOBOLD",
+    "MINOTAUR",
+    "MINOSHROOM",
+    "FIRE_BEETLE",
+    "SLIME_BEETLE",
+    "PINCH_BEETLE",
+    "UR_GHAST",
+    "BLOCKCHAIN_GOBLIN",
+    "UPPER_GOBLIN_KNIGHT",
+    "LOWER_GOBLIN_KNIGHT",
+    "HELMET_CRAB",
+    "NAGA",
+    "REDCAP_SAPPER",
+    "SNOW_QUEEN",
+    "TROLL"
+  ],
+  "multipart_switches": [
+    {
+      "key": "HydraHead.RENDERER",
+      "source_line": 217,
+      "registration": "renderers.put(HydraHead.RENDERER, new LazyLoadedValue<>(() -> !jappa.getAsBoolean() ? new HydraHeadRenderer(context) : new NewHydraHeadRenderer(context)));",
+      "jappa_switch": true
+    },
+    {
+      "key": "HydraNeck.RENDERER",
+      "source_line": 218,
+      "registration": "renderers.put(HydraNeck.RENDERER, new LazyLoadedValue<>(() -> !jappa.getAsBoolean() ? new HydraNeckRenderer(context) : new NewHydraNeckRenderer(context)));",
+      "jappa_switch": true
+    },
+    {
+      "key": "NagaSegment.RENDERER",
+      "source_line": 220,
+      "registration": "renderers.put(NagaSegment.RENDERER, new LazyLoadedValue<>(() -> !jappa.getAsBoolean() ? new NagaSegmentRenderer<>(context) : new NewNagaSegmentRenderer<>(context)));",
+      "jappa_switch": true
+    }
+  ],
+  "model_layer_registry": {
+    "path": "src/main/java/twilightforest/client/model/TFModelLayers.java",
+    "blob_sha": "30d8b23f2eb2ed817479301f2e0630cbb21f5e79",
+    "total_constants": 128,
+    "new_parallel_constants": 32,
+    "constants": [
+      {
+        "constant": "ARCTIC_ARMOR_INNER",
+        "resource": "arctic_armor",
+        "layer": "inner",
+        "new_parallel": false
+      },
+      {
+        "constant": "ARCTIC_ARMOR_OUTER",
+        "resource": "arctic_armor",
+        "layer": "outer",
+        "new_parallel": false
+      },
+      {
+        "constant": "FIERY_ARMOR_INNER",
+        "resource": "fiery_armor",
+        "layer": "inner",
+        "new_parallel": false
+      },
+      {
+        "constant": "FIERY_ARMOR_OUTER",
+        "resource": "fiery_armor",
+        "layer": "outer",
+        "new_parallel": false
+      },
+      {
+        "constant": "KNIGHTMETAL_ARMOR_INNER",
+        "resource": "knightmetal_armor",
+        "layer": "inner",
+        "new_parallel": false
+      },
+      {
+        "constant": "KNIGHTMETAL_ARMOR_OUTER",
+        "resource": "knightmetal_armor",
+        "layer": "outer",
+        "new_parallel": false
+      },
+      {
+        "constant": "PHANTOM_ARMOR_INNER",
+        "resource": "phantom_armor",
+        "layer": "inner",
+        "new_parallel": false
+      },
+      {
+        "constant": "PHANTOM_ARMOR_OUTER",
+        "resource": "phantom_armor",
+        "layer": "outer",
+        "new_parallel": false
+      },
+      {
+        "constant": "YETI_ARMOR_INNER",
+        "resource": "yeti_armor",
+        "layer": "inner",
+        "new_parallel": false
+      },
+      {
+        "constant": "YETI_ARMOR_OUTER",
+        "resource": "yeti_armor",
+        "layer": "outer",
+        "new_parallel": false
+      },
+      {
+        "constant": "ALPHA_YETI_TROPHY",
+        "resource": "alpha_yeti_trophy",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "HYDRA_TROPHY",
+        "resource": "hydra_trophy",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "KNIGHT_PHANTOM_TROPHY",
+        "resource": "knight_phantom_trophy",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "LICH_TROPHY",
+        "resource": "lich_trophy",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "MINOSHROOM_TROPHY",
+        "resource": "minoshroom_trophy",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "NAGA_TROPHY",
+        "resource": "naga_trophy",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "QUEST_RAM_TROPHY",
+        "resource": "quest_ram_trophy",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "SNOW_QUEEN_TROPHY",
+        "resource": "snow_queen_trophy",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "UR_GHAST_TROPHY",
+        "resource": "ur_ghast_trophy",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "NEW_HYDRA_TROPHY",
+        "resource": "new_hydra_trophy",
+        "layer": "main",
+        "new_parallel": true
+      },
+      {
+        "constant": "NEW_MINOSHROOM_TROPHY",
+        "resource": "new_minoshroom_trophy",
+        "layer": "main",
+        "new_parallel": true
+      },
+      {
+        "constant": "NEW_QUEST_RAM_TROPHY",
+        "resource": "new_quest_ram_trophy",
+        "layer": "main",
+        "new_parallel": true
+      },
+      {
+        "constant": "NEW_SNOW_QUEEN_TROPHY",
+        "resource": "new_snow_queen_trophy",
+        "layer": "main",
+        "new_parallel": true
+      },
+      {
+        "constant": "NEW_UR_GHAST_TROPHY",
+        "resource": "new_ur_ghast_trophy",
+        "layer": "main",
+        "new_parallel": true
+      },
+      {
+        "constant": "ADHERENT",
+        "resource": "adherent",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "ALPHA_YETI",
+        "resource": "alpha_yeti",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "ARMORED_GIANT",
+        "resource": "armored_giant",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "BIGHORN_SHEEP",
+        "resource": "bighorn_sheep",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "BIGHORN_SHEEP_FUR",
+        "resource": "bighorn_sheep",
+        "layer": "fur",
+        "new_parallel": false
+      },
+      {
+        "constant": "BLOCKCHAIN_GOBLIN",
+        "resource": "blockchain_goblin",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "BOAR",
+        "resource": "boar",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "BUNNY",
+        "resource": "bunny",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "CARMINITE_BROODLING",
+        "resource": "carminite_broodling",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "CARMINITE_GHASTGUARD",
+        "resource": "carminite_ghastguard",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "CARMINITE_GHASTLING",
+        "resource": "carminite_ghastling",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "CARMINITE_GOLEM",
+        "resource": "carminite_golem",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "CHAIN",
+        "resource": "chain",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "DEATH_TOME",
+        "resource": "death_tome",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "DEER",
+        "resource": "deer",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "FIRE_BEETLE",
+        "resource": "fire_beetle",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "GIANT_MINER",
+        "resource": "giant_miner",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "HARBINGER_CUBE",
+        "resource": "harbinger_cube",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "HEDGE_SPIDER",
+        "resource": "hedge_spider",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "HELMET_CRAB",
+        "resource": "helmet_crab",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "HOSTILE_WOLF",
+        "resource": "hostile_wolf",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "HYDRA",
+        "resource": "hydra",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "HYDRA_HEAD",
+        "resource": "hydra_head",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "HYDRA_NECK",
+        "resource": "hydra_neck",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "ICE_CRYSTAL",
+        "resource": "ice_crystal",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "KING_SPIDER",
+        "resource": "king_spider",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "KNIGHT_PHANTOM",
+        "resource": "knight_phantom",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "KOBOLD",
+        "resource": "kobold",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "LICH",
+        "resource": "lich",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "LICH_MINION",
+        "resource": "lich_minion",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "LOWER_GOBLIN_KNIGHT",
+        "resource": "lower_goblin_knight",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "LOYAL_ZOMBIE",
+        "resource": "loyal_zombie",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "MAZE_SLIME",
+        "resource": "maze_slime",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "MAZE_SLIME_OUTER",
+        "resource": "maze_slime",
+        "layer": "outer",
+        "new_parallel": false
+      },
+      {
+        "constant": "MINOSHROOM",
+        "resource": "minoshroom",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "MINOTAUR",
+        "resource": "minotaur",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "MIST_WOLF",
+        "resource": "mist_wolf",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "MOSQUITO_SWARM",
+        "resource": "mosquito_swarm",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "NAGA",
+        "resource": "naga",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "NAGA_BODY",
+        "resource": "naga_body",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "NOOP",
+        "resource": "noop",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "PENGUIN",
+        "resource": "penguin",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "PINCH_BEETLE",
+        "resource": "pinch_beetle",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "QUEST_RAM",
+        "resource": "quest_ram",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "RAVEN",
+        "resource": "raven",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "REDCAP",
+        "resource": "redcap",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "REDCAP_ARMOR_OUTER",
+        "resource": "redcap",
+        "layer": "outer",
+        "new_parallel": false
+      },
+      {
+        "constant": "REDCAP_ARMOR_INNER",
+        "resource": "redcap",
+        "layer": "inner",
+        "new_parallel": false
+      },
+      {
+        "constant": "RISING_ZOMBIE",
+        "resource": "rising_zombie",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "ROVING_CUBE",
+        "resource": "roving_cube",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "SKELETON_DRUID",
+        "resource": "skeleton_druid",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "SLIME_BEETLE",
+        "resource": "slime_beetle",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "SLIME_BEETLE_TAIL",
+        "resource": "slime_beetle",
+        "layer": "tail",
+        "new_parallel": false
+      },
+      {
+        "constant": "SNOW_QUEEN",
+        "resource": "snow_queen",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "SQUIRREL",
+        "resource": "squirrel",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "STABLE_ICE_CORE",
+        "resource": "stable_ice_core",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "SWARM_SPIDER",
+        "resource": "swarm_spider",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "TINY_BIRD",
+        "resource": "tiny_bird",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "TOWERWOOD_BORER",
+        "resource": "towerwood_borer",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "TROLL",
+        "resource": "troll",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "UNSTABLE_ICE_CORE",
+        "resource": "unstable_ice_core",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "UPPER_GOBLIN_KNIGHT",
+        "resource": "upper_goblin_knight",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "UR_GHAST",
+        "resource": "ur_ghast",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "WINTER_WOLF",
+        "resource": "winter_wolf",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "WRAITH",
+        "resource": "wraith",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "YETI",
+        "resource": "yeti",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "NEW_BIGHORN_SHEEP",
+        "resource": "new_bighorn_sheep",
+        "layer": "main",
+        "new_parallel": true
+      },
+      {
+        "constant": "NEW_BLOCKCHAIN_GOBLIN",
+        "resource": "new_blockchain_goblin",
+        "layer": "main",
+        "new_parallel": true
+      },
+      {
+        "constant": "NEW_BOAR",
+        "resource": "new_boar",
+        "layer": "main",
+        "new_parallel": true
+      },
+      {
+        "constant": "NEW_DEER",
+        "resource": "new_deer",
+        "layer": "main",
+        "new_parallel": true
+      },
+      {
+        "constant": "NEW_FIRE_BEETLE",
+        "resource": "new_fire_beetle",
+        "layer": "main",
+        "new_parallel": true
+      },
+      {
+        "constant": "NEW_HELMET_CRAB",
+        "resource": "new_helmet_crab",
+        "layer": "main",
+        "new_parallel": true
+      },
+      {
+        "constant": "NEW_HYDRA",
+        "resource": "new_hydra",
+        "layer": "main",
+        "new_parallel": true
+      },
+      {
+        "constant": "NEW_HYDRA_HEAD",
+        "resource": "new_hydra_head",
+        "layer": "main",
+        "new_parallel": true
+      },
+      {
+        "constant": "NEW_HYDRA_NECK",
+        "resource": "new_hydra_neck",
+        "layer": "main",
+        "new_parallel": true
+      },
+      {
+        "constant": "NEW_KOBOLD",
+        "resource": "new_kobold",
+        "layer": "main",
+        "new_parallel": true
+      },
+      {
+        "constant": "NEW_LOWER_GOBLIN_KNIGHT",
+        "resource": "new_lower_goblin_knight",
+        "layer": "main",
+        "new_parallel": true
+      },
+      {
+        "constant": "NEW_MINOSHROOM",
+        "resource": "new_minoshroom",
+        "layer": "main",
+        "new_parallel": true
+      },
+      {
+        "constant": "NEW_MINOTAUR",
+        "resource": "new_minotaur",
+        "layer": "main",
+        "new_parallel": true
+      },
+      {
+        "constant": "NEW_NAGA",
+        "resource": "new_naga",
+        "layer": "main",
+        "new_parallel": true
+      },
+      {
+        "constant": "NEW_NAGA_BODY",
+        "resource": "new_naga_body",
+        "layer": "main",
+        "new_parallel": true
+      },
+      {
+        "constant": "NEW_PINCH_BEETLE",
+        "resource": "new_pinch_beetle",
+        "layer": "main",
+        "new_parallel": true
+      },
+      {
+        "constant": "NEW_QUEST_RAM",
+        "resource": "new_quest_ram",
+        "layer": "main",
+        "new_parallel": true
+      },
+      {
+        "constant": "NEW_RAVEN",
+        "resource": "new_raven",
+        "layer": "main",
+        "new_parallel": true
+      },
+      {
+        "constant": "NEW_REDCAP",
+        "resource": "new_redcap",
+        "layer": "main",
+        "new_parallel": true
+      },
+      {
+        "constant": "NEW_SLIME_BEETLE",
+        "resource": "new_slime_beetle",
+        "layer": "main",
+        "new_parallel": true
+      },
+      {
+        "constant": "NEW_SLIME_BEETLE_TAIL",
+        "resource": "new_slime_beetle",
+        "layer": "tail",
+        "new_parallel": true
+      },
+      {
+        "constant": "NEW_SNOW_QUEEN",
+        "resource": "new_snow_queen",
+        "layer": "main",
+        "new_parallel": true
+      },
+      {
+        "constant": "NEW_SQUIRREL",
+        "resource": "new_squirrel",
+        "layer": "main",
+        "new_parallel": true
+      },
+      {
+        "constant": "NEW_TINY_BIRD",
+        "resource": "new_tiny_bird",
+        "layer": "main",
+        "new_parallel": true
+      },
+      {
+        "constant": "NEW_TROLL",
+        "resource": "new_troll",
+        "layer": "main",
+        "new_parallel": true
+      },
+      {
+        "constant": "NEW_UPPER_GOBLIN_KNIGHT",
+        "resource": "new_upper_goblin_knight",
+        "layer": "main",
+        "new_parallel": true
+      },
+      {
+        "constant": "NEW_UR_GHAST",
+        "resource": "new_ur_ghast",
+        "layer": "main",
+        "new_parallel": true
+      },
+      {
+        "constant": "CHAIN_BLOCK",
+        "resource": "chain_block",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "CUBE_OF_ANNIHILATION",
+        "resource": "cube_of_annihilation",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "PROTECTION_BOX",
+        "resource": "protection_box",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "HYDRA_MORTAR",
+        "resource": "hydra_mortar",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "CICADA",
+        "resource": "cicada",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "FIREFLY",
+        "resource": "firefly",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "KEEPSAKE_CASKET",
+        "resource": "keepsake_casket",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "MOONWORM",
+        "resource": "moonworm",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "RED_THREAD",
+        "resource": "red_thread",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "KNIGHTMETAL_SHIELD",
+        "resource": "knightmetal_shield",
+        "layer": "main",
+        "new_parallel": false
+      },
+      {
+        "constant": "CHARM_OF_LIFE",
+        "resource": "charm_of_life",
+        "layer": "main",
+        "new_parallel": false
+      }
+    ]
+  }
+}
