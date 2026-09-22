@@ -30,7 +30,7 @@
 - rendering/model/client architecture: mapped
 - all 8 principal boss renderer/model/texture dependencies: mapped
 - texture/model files: fully inventoried; all 81 EntityType renderer/model/layer/asset-selection dependencies mapped
-- data assets: mapped at family/system-consumer level
+- data assets: mapped to record level; all 290 custom `twilight/*` records linked to blob SHA + loader mode + codec + consumer
 - compatibility/platform boundary: mapped (normal APIs / AT / ASM / Mod adapters)
 - version portability: first-pass mapped
 - performance: hot-path/caching hypotheses inventoried; runtime measurement pending
@@ -42,6 +42,5 @@ See the sibling reports and `inventory/` manifests for evidence-backed progress.
 ## Remaining high-priority work
 
 - prove/hash exact 4.3.2508 distributed JAR against ANCHOR source candidate
-- map ANCHOR entity rendering/assets beyond inventory level
-- record-level custom data codec/consumer graph
+- ANCHOR↔FRONTIER custom-data/worldgen schema delta
 - runtime performance and compatibility measurements
