@@ -1,0 +1,29 @@
+{
+  "record_version": "1.0",
+  "scenario_id": "R1",
+  "track": "frontier",
+  "raw_artifacts": {
+    "logs/console.log": {
+      "sha256": "786f220da0fea90338ebf7070f78567a69d04bd08cef6913405ae7b57bce76f2",
+      "committed": false
+    }
+  },
+  "compact_files": {
+    "environment.json": {
+      "sha256": "86a4ac7a63cb774d2ca94a342af5a248d6d040e70fdfd214d6dd251cd57363e9",
+      "committed": true
+    },
+    "scenario.json": {
+      "sha256": "dffcd75f4b33cb3b4e11a3e0aabe6159b6a7f586fefe6afec948bbc7a2b752b2",
+      "committed": true
+    },
+    "metrics.json": {
+      "sha256": "8e355a4f2d7cf43019c3cfdfdebd355ce17ae862775682489d7b7cbd1869827e",
+      "committed": true
+    },
+    "evidence-summary.md": {
+      "sha256": "466c2673e128f3cab0bf82441081dea06b6e4cb0b57b8fda58a573d1c2394a24",
+      "committed": true
+    }
+  }
+}

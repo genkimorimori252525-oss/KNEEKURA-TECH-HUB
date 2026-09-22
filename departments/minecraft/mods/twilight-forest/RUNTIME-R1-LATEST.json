@@ -1,0 +1,38 @@
+{
+  "record_version": "1.0",
+  "scenario_id": "R1",
+  "status": "R1_EXECUTED",
+  "repository": "genkimorimori252525-oss/KNEEKURA-TECH-HUB",
+  "branch": "jolly/minecraft-tech-department-2026-09-22",
+  "run_id": 35775943705,
+  "runner_name": "Jolly-TechHub",
+  "runner_os": "Windows",
+  "runner_arch": "X64",
+  "tech_hub_input_sha": "54f6e358d5cc54748affbfc97af34e0a43bebfb1",
+  "runtime_probe_sha256": "77a3f4a9dd248c8124dbf23f7f4762b46ddebf2d07f06c5da40a0506299fced6",
+  "sources": {
+    "anchor": "a7dd8f13c653e137f977f5ffaa870fcb20fc1625",
+    "frontier": "793c4d4c7b0a2892f702cbb9a8d751fbe7218828"
+  },
+  "tracks": {
+    "anchor": {
+      "path": "departments/minecraft/mods/twilight-forest/runtime/anchor/35775943705",
+      "startup_success": false,
+      "startup_ready_elapsed_seconds": null,
+      "shutdown_method": "process_exit"
+    },
+    "frontier": {
+      "path": "departments/minecraft/mods/twilight-forest/runtime/frontier/35775943705",
+      "startup_success": false,
+      "startup_ready_elapsed_seconds": null,
+      "shutdown_method": "process_exit"
+    }
+  },
+  "boundaries": {
+    "scenario": "R1 dedicated-server startup only",
+    "r2_through_r9_measured": false,
+    "client_rendering_measured": false,
+    "overall_performance_score": false,
+    "main_merged": false
+  }
+}
