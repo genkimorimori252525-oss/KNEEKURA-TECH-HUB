@@ -4,25 +4,25 @@
   "status": "R1_EXECUTED",
   "repository": "genkimorimori252525-oss/KNEEKURA-TECH-HUB",
   "branch": "jolly/minecraft-tech-department-2026-09-22",
-  "run_id": 35775943705,
+  "run_id": 35787496245,
   "runner_name": "Jolly-TechHub",
   "runner_os": "Windows",
   "runner_arch": "X64",
-  "tech_hub_input_sha": "54f6e358d5cc54748affbfc97af34e0a43bebfb1",
-  "runtime_probe_sha256": "77a3f4a9dd248c8124dbf23f7f4762b46ddebf2d07f06c5da40a0506299fced6",
+  "tech_hub_input_sha": "f305218daa3f39bd1b75dd76ce146b9bd24bb4cb",
+  "runtime_probe_sha256": "31226eaa0f38485f5efc282c956cbe77c6c7a6efbe25142854bfec5931a741c8",
   "sources": {
     "anchor": "a7dd8f13c653e137f977f5ffaa870fcb20fc1625",
     "frontier": "793c4d4c7b0a2892f702cbb9a8d751fbe7218828"
   },
   "tracks": {
     "anchor": {
-      "path": "departments/minecraft/mods/twilight-forest/runtime/anchor/35775943705",
-      "startup_success": false,
-      "startup_ready_elapsed_seconds": null,
-      "shutdown_method": "process_exit"
+      "path": "departments/minecraft/mods/twilight-forest/runtime/anchor/35787496245",
+      "startup_success": true,
+      "startup_ready_elapsed_seconds": 1006.381189,
+      "shutdown_method": "forced_taskkill_tree"
     },
     "frontier": {
-      "path": "departments/minecraft/mods/twilight-forest/runtime/frontier/35775943705",
+      "path": "departments/minecraft/mods/twilight-forest/runtime/frontier/35787496245",
       "startup_success": false,
       "startup_ready_elapsed_seconds": null,
       "shutdown_method": "process_exit"
