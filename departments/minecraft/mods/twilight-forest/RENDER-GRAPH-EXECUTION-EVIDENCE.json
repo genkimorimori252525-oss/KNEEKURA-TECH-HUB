@@ -61,7 +61,7 @@
           "tests/test_twilight_forest_render_asset_graph_tool.py"
         ],
         "exit_code": 0,
-        "output": "............                                                             [100%]\n12 passed in 0.78s\n"
+        "output": "............                                                             [100%]\n12 passed in 0.86s\n"
       },
       {
         "name": "syntax_warning_gate",
@@ -81,20 +81,21 @@
     "full_repository_suite": "NOT_RUN",
     "workflow_python_3_12": "NOT_RUN",
     "github_ci_success": "NOT_CLAIMED",
-    "review": "Same-assistant diff and contract review, not independent review."
+    "review": "Same-assistant diff and contract review, not independent review.",
+    "published_byte_identity": "Connector removed one terminal newline from each file. Published code blobs matched the local bytes with that one newline removed; the exact published bytes were retested successfully."
   },
   "changed_code_files": [
     {
       "path": "departments/minecraft/mods/twilight-forest/tools/build_render_asset_graph.py",
-      "git_blob_sha1": "416e09996236102877c10c85dc042995268c8be5",
-      "sha256": "a75ce43a799be5215fb1d3304902459c1794d6c5f32b6830244a899013f001a7",
-      "size_bytes": 10400
+      "git_blob_sha1": "fef6de07bbc7a3fae28ba0ae72df69232604ce4b",
+      "sha256": "3f54cceacde6e7e22560fa75347537d8974437a338be611da3308d7f3446cf87",
+      "size_bytes": 10399
     },
     {
       "path": "tests/test_twilight_forest_render_asset_graph_tool.py",
-      "git_blob_sha1": "9583c6581ff0a5183e91ba6023593475ded9b055",
-      "sha256": "f94479b8d85078ade1f49df440ecab80055ad4641cd852900d6749607425f65d",
-      "size_bytes": 9727
+      "git_blob_sha1": "d5054ff3aa2f0b1eaa1c8c5acdaddd704c009ff2",
+      "sha256": "6e25380299a5bd5358c3b4e692b260dbb74fc071e3becfc9e838e605dab86e52",
+      "size_bytes": 9726
     }
   ],
   "completion_boundaries": {
@@ -107,5 +108,6 @@
     "runner_registered_or_permissions_changed": false,
     "new_actions_run_dispatched": false
   },
-  "next_action": "Provide an authorized matching execution environment; inspect the existing queued run before considering another request. Verify exact TECH HUB/tool and upstream SHAs, run both pinned full trees, review diagnostics and publish separate graphs plus comparison. Do not promote fixture evidence to full-tree completion."
+  "next_action": "Provide an authorized matching execution environment; inspect the existing queued run before considering another request. Verify exact TECH HUB/tool and upstream SHAs, run both pinned full trees, review diagnostics and publish separate graphs plus comparison. Do not promote fixture evidence to full-tree completion.",
+  "verified_code_commit": "1eaf3722aafb04572a4cf7ba820030040de2d8d3"
 }
