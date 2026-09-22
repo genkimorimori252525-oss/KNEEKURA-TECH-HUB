@@ -1,0 +1,1497 @@
+{
+  "catalog_version": "1.0",
+  "source_snapshot": {
+    "repository": "TeamTwilight/twilightforest",
+    "commit": "a7dd8f13c653e137f977f5ffaa870fcb20fc1625",
+    "minecraft": "1.20.1",
+    "loader": "Forge",
+    "release_source_candidate": "4.3.2508"
+  },
+  "evidence": {
+    "path": "src/main/java/twilightforest/client/TFClientSetup.java",
+    "blob_sha": "2e7012197d2c4e85d3fd2d6f16d7408649300e92"
+  },
+  "count": 82,
+  "frontier_comparison": {
+    "anchor_only": [
+      "BOAT",
+      "CHEST_BOAT"
+    ],
+    "frontier_only": [
+      "BOGGARD"
+    ]
+  },
+  "registrations": [
+    {
+      "entity_key": "BOAT",
+      "source_line": 121,
+      "registration": "m -> new TwilightBoatRenderer(m, false)",
+      "renderer_classes": [
+        "TwilightBoatRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "CHEST_BOAT",
+      "source_line": 122,
+      "registration": "m -> new TwilightBoatRenderer(m, true)",
+      "renderer_classes": [
+        "TwilightBoatRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "BOAR",
+      "source_line": 123,
+      "registration": "m -> !jappa.getAsBoolean() ? new BoarRenderer(m, new BoarModel<>(m.bakeLayer(TFModelLayers.NEW_BOAR))) : new NewBoarRenderer(m, new NewBoarModel<>(m.bakeLayer(TFModelLayers.BOAR)))",
+      "renderer_classes": [
+        "BoarRenderer",
+        "NewBoarRenderer"
+      ],
+      "model_classes": [
+        "BoarModel",
+        "NewBoarModel"
+      ],
+      "tf_model_layers": [
+        "NEW_BOAR",
+        "BOAR"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": true,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "BIGHORN_SHEEP",
+      "source_line": 124,
+      "registration": "m -> new BighornRenderer(m, new NewBighornModel<>(m.bakeLayer(!jappa.getAsBoolean() ? TFModelLayers.NEW_BIGHORN_SHEEP : TFModelLayers.BIGHORN_SHEEP)), new BighornFurLayer(m.bakeLayer(TFModelLayers.BIGHORN_SHEEP_FUR)), 0.7F)",
+      "renderer_classes": [
+        "BighornRenderer"
+      ],
+      "model_classes": [
+        "NewBighornModel"
+      ],
+      "tf_model_layers": [
+        "NEW_BIGHORN_SHEEP",
+        "BIGHORN_SHEEP",
+        "BIGHORN_SHEEP_FUR"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": true,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "DEER",
+      "source_line": 125,
+      "registration": "m -> new TFGenericMobRenderer<>(m, !jappa.getAsBoolean() ? new DeerModel(m.bakeLayer(TFModelLayers.NEW_DEER)) : new NewDeerModel(m.bakeLayer(TFModelLayers.DEER)), 0.7F, \"wilddeer.png\")",
+      "renderer_classes": [
+        "TFGenericMobRenderer"
+      ],
+      "model_classes": [
+        "DeerModel",
+        "NewDeerModel"
+      ],
+      "tf_model_layers": [
+        "NEW_DEER",
+        "DEER"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [
+        "wilddeer.png"
+      ],
+      "jappa_switch": true,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "REDCAP",
+      "source_line": 126,
+      "registration": "m -> new TFBipedRenderer<>(m, !jappa.getAsBoolean() ? new RedcapModel<>(m.bakeLayer(TFModelLayers.NEW_REDCAP)) : new NewRedcapModel<>(m.bakeLayer(TFModelLayers.REDCAP)), new NewRedcapModel<>(m.bakeLayer(TFModelLayers.REDCAP_ARMOR_INNER)), new NewRedcapModel<>(m.bakeLayer(TFModelLayers.REDCAP_ARMOR_OUTER)), 0.4F, \"redcap.png\")",
+      "renderer_classes": [
+        "TFBipedRenderer"
+      ],
+      "model_classes": [
+        "RedcapModel",
+        "NewRedcapModel"
+      ],
+      "tf_model_layers": [
+        "NEW_REDCAP",
+        "REDCAP",
+        "REDCAP_ARMOR_INNER",
+        "REDCAP_ARMOR_OUTER"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [
+        "redcap.png"
+      ],
+      "jappa_switch": true,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "SKELETON_DRUID",
+      "source_line": 127,
+      "registration": "m -> new TFBipedRenderer<>(m, new SkeletonDruidModel(m.bakeLayer(TFModelLayers.SKELETON_DRUID)), 0.5F, \"skeletondruid.png\")",
+      "renderer_classes": [
+        "TFBipedRenderer"
+      ],
+      "model_classes": [
+        "SkeletonDruidModel"
+      ],
+      "tf_model_layers": [
+        "SKELETON_DRUID"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [
+        "skeletondruid.png"
+      ],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "HOSTILE_WOLF",
+      "source_line": 128,
+      "registration": "HostileWolfRenderer::new",
+      "renderer_classes": [
+        "HostileWolfRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "WRAITH",
+      "source_line": 129,
+      "registration": "m -> new WraithRenderer(m, new WraithModel(m.bakeLayer(TFModelLayers.WRAITH)), 0.5F)",
+      "renderer_classes": [
+        "WraithRenderer"
+      ],
+      "model_classes": [
+        "WraithModel"
+      ],
+      "tf_model_layers": [
+        "WRAITH"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "HYDRA",
+      "source_line": 130,
+      "registration": "m -> !jappa.getAsBoolean() ? new HydraRenderer(m, new HydraModel(m.bakeLayer(TFModelLayers.NEW_HYDRA)), 4.0F) : new NewHydraRenderer(m, new NewHydraModel(m.bakeLayer(TFModelLayers.HYDRA)), 4.0F)",
+      "renderer_classes": [
+        "HydraRenderer",
+        "NewHydraRenderer"
+      ],
+      "model_classes": [
+        "HydraModel",
+        "NewHydraModel"
+      ],
+      "tf_model_layers": [
+        "NEW_HYDRA",
+        "HYDRA"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": true,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "LICH",
+      "source_line": 131,
+      "registration": "m -> new LichRenderer(m, new LichModel(m.bakeLayer(TFModelLayers.LICH)), 0.6F)",
+      "renderer_classes": [
+        "LichRenderer"
+      ],
+      "model_classes": [
+        "LichModel"
+      ],
+      "tf_model_layers": [
+        "LICH"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "PENGUIN",
+      "source_line": 132,
+      "registration": "m -> new BirdRenderer<>(m, new PenguinModel(m.bakeLayer(TFModelLayers.PENGUIN)), 0.375F, \"penguin.png\")",
+      "renderer_classes": [
+        "BirdRenderer"
+      ],
+      "model_classes": [
+        "PenguinModel"
+      ],
+      "tf_model_layers": [
+        "PENGUIN"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [
+        "penguin.png"
+      ],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "LICH_MINION",
+      "source_line": 133,
+      "registration": "m -> new TFBipedRenderer<>(m, new LichMinionModel(m.bakeLayer(TFModelLayers.LICH_MINION)), new LichMinionModel(m.bakeLayer(ModelLayers.ZOMBIE_INNER_ARMOR)), new LichMinionModel(m.bakeLayer(ModelLayers.ZOMBIE_OUTER_ARMOR)), 0.5F, \"textures/entity/zombie/zombie.png\")",
+      "renderer_classes": [
+        "TFBipedRenderer"
+      ],
+      "model_classes": [
+        "LichMinionModel"
+      ],
+      "tf_model_layers": [
+        "LICH_MINION"
+      ],
+      "minecraft_model_layers": [
+        "ZOMBIE_INNER_ARMOR",
+        "ZOMBIE_OUTER_ARMOR"
+      ],
+      "inline_textures": [
+        "textures/entity/zombie/zombie.png"
+      ],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "LOYAL_ZOMBIE",
+      "source_line": 134,
+      "registration": "m -> new TFBipedRenderer<>(m, new LoyalZombieModel(m.bakeLayer(TFModelLayers.LOYAL_ZOMBIE)), new LoyalZombieModel(m.bakeLayer(ModelLayers.ZOMBIE_INNER_ARMOR)), new LoyalZombieModel(m.bakeLayer(ModelLayers.ZOMBIE_OUTER_ARMOR)), 0.5F, \"textures/entity/zombie/zombie.png\")",
+      "renderer_classes": [
+        "TFBipedRenderer"
+      ],
+      "model_classes": [
+        "LoyalZombieModel"
+      ],
+      "tf_model_layers": [
+        "LOYAL_ZOMBIE"
+      ],
+      "minecraft_model_layers": [
+        "ZOMBIE_INNER_ARMOR",
+        "ZOMBIE_OUTER_ARMOR"
+      ],
+      "inline_textures": [
+        "textures/entity/zombie/zombie.png"
+      ],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "TINY_BIRD",
+      "source_line": 135,
+      "registration": "m -> !jappa.getAsBoolean() ? new TinyBirdRenderer(m, new TinyBirdModel(m.bakeLayer(TFModelLayers.NEW_TINY_BIRD)), 0.3F) : new NewTinyBirdRenderer(m, new NewTinyBirdModel(m.bakeLayer(TFModelLayers.TINY_BIRD)), 0.3F)",
+      "renderer_classes": [
+        "TinyBirdRenderer",
+        "NewTinyBirdRenderer"
+      ],
+      "model_classes": [
+        "TinyBirdModel",
+        "NewTinyBirdModel"
+      ],
+      "tf_model_layers": [
+        "NEW_TINY_BIRD",
+        "TINY_BIRD"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": true,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "SQUIRREL",
+      "source_line": 136,
+      "registration": "m -> new TFGenericMobRenderer<>(m, !jappa.getAsBoolean() ? new SquirrelModel(m.bakeLayer(TFModelLayers.NEW_SQUIRREL)) : new NewSquirrelModel(m.bakeLayer(TFModelLayers.SQUIRREL)), 0.3F, \"squirrel2.png\")",
+      "renderer_classes": [
+        "TFGenericMobRenderer"
+      ],
+      "model_classes": [
+        "SquirrelModel",
+        "NewSquirrelModel"
+      ],
+      "tf_model_layers": [
+        "NEW_SQUIRREL",
+        "SQUIRREL"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [
+        "squirrel2.png"
+      ],
+      "jappa_switch": true,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "DWARF_RABBIT",
+      "source_line": 137,
+      "registration": "m -> new BunnyRenderer(m, new BunnyModel(m.bakeLayer(TFModelLayers.BUNNY)), 0.3F)",
+      "renderer_classes": [
+        "BunnyRenderer"
+      ],
+      "model_classes": [
+        "BunnyModel"
+      ],
+      "tf_model_layers": [
+        "BUNNY"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "RAVEN",
+      "source_line": 138,
+      "registration": "m -> new BirdRenderer<>(m, !jappa.getAsBoolean() ? new RavenModel(m.bakeLayer(TFModelLayers.NEW_RAVEN)) : new NewRavenModel(m.bakeLayer(TFModelLayers.RAVEN)), 0.3F, \"raven.png\")",
+      "renderer_classes": [
+        "BirdRenderer"
+      ],
+      "model_classes": [
+        "RavenModel",
+        "NewRavenModel"
+      ],
+      "tf_model_layers": [
+        "NEW_RAVEN",
+        "RAVEN"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [
+        "raven.png"
+      ],
+      "jappa_switch": true,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "QUEST_RAM",
+      "source_line": 139,
+      "registration": "m -> !jappa.getAsBoolean() ? new QuestRamRenderer(m, new QuestRamModel(m.bakeLayer(TFModelLayers.NEW_QUEST_RAM))) : new NewQuestRamRenderer(m, new NewQuestRamModel(m.bakeLayer(TFModelLayers.QUEST_RAM)))",
+      "renderer_classes": [
+        "QuestRamRenderer",
+        "NewQuestRamRenderer"
+      ],
+      "model_classes": [
+        "QuestRamModel",
+        "NewQuestRamModel"
+      ],
+      "tf_model_layers": [
+        "NEW_QUEST_RAM",
+        "QUEST_RAM"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": true,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "KOBOLD",
+      "source_line": 140,
+      "registration": "m -> !jappa.getAsBoolean() ? new KoboldRenderer(m, new KoboldModel(m.bakeLayer(TFModelLayers.NEW_KOBOLD)), 0.4F, \"kobold.png\") : new NewKoboldRenderer(m, new NewKoboldModel(m.bakeLayer(TFModelLayers.KOBOLD)), 0.4F, \"kobold.png\")",
+      "renderer_classes": [
+        "KoboldRenderer",
+        "NewKoboldRenderer"
+      ],
+      "model_classes": [
+        "KoboldModel",
+        "NewKoboldModel"
+      ],
+      "tf_model_layers": [
+        "NEW_KOBOLD",
+        "KOBOLD"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [
+        "kobold.png"
+      ],
+      "jappa_switch": true,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "MOSQUITO_SWARM",
+      "source_line": 142,
+      "registration": "MosquitoSwarmRenderer::new",
+      "renderer_classes": [
+        "MosquitoSwarmRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "DEATH_TOME",
+      "source_line": 143,
+      "registration": "m -> new TFGenericMobRenderer<>(m, new DeathTomeModel(m.bakeLayer(TFModelLayers.DEATH_TOME)), 0.3F, \"textures/entity/enchanting_table_book.png\")",
+      "renderer_classes": [
+        "TFGenericMobRenderer"
+      ],
+      "model_classes": [
+        "DeathTomeModel"
+      ],
+      "tf_model_layers": [
+        "DEATH_TOME"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [
+        "textures/entity/enchanting_table_book.png"
+      ],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "MINOTAUR",
+      "source_line": 144,
+      "registration": "m -> new TFBipedRenderer<>(m, !jappa.getAsBoolean() ? new MinotaurModel(m.bakeLayer(TFModelLayers.NEW_MINOTAUR)) : new NewMinotaurModel(m.bakeLayer(TFModelLayers.MINOTAUR)), 0.625F, \"minotaur.png\")",
+      "renderer_classes": [
+        "TFBipedRenderer"
+      ],
+      "model_classes": [
+        "MinotaurModel",
+        "NewMinotaurModel"
+      ],
+      "tf_model_layers": [
+        "NEW_MINOTAUR",
+        "MINOTAUR"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [
+        "minotaur.png"
+      ],
+      "jappa_switch": true,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "MINOSHROOM",
+      "source_line": 145,
+      "registration": "m -> !jappa.getAsBoolean() ? new MinoshroomRenderer(m, new MinoshroomModel(m.bakeLayer(TFModelLayers.NEW_MINOSHROOM)), 0.625F) : new NewMinoshroomRenderer(m, new NewMinoshroomModel(m.bakeLayer(TFModelLayers.MINOSHROOM)), 0.625F)",
+      "renderer_classes": [
+        "MinoshroomRenderer",
+        "NewMinoshroomRenderer"
+      ],
+      "model_classes": [
+        "MinoshroomModel",
+        "NewMinoshroomModel"
+      ],
+      "tf_model_layers": [
+        "NEW_MINOSHROOM",
+        "MINOSHROOM"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": true,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "FIRE_BEETLE",
+      "source_line": 146,
+      "registration": "m -> new TFGenericMobRenderer<>(m, !jappa.getAsBoolean() ? new FireBeetleModel(m.bakeLayer(TFModelLayers.NEW_FIRE_BEETLE)) : new NewFireBeetleModel(m.bakeLayer(TFModelLayers.FIRE_BEETLE)), 0.8F, \"firebeetle.png\")",
+      "renderer_classes": [
+        "TFGenericMobRenderer"
+      ],
+      "model_classes": [
+        "FireBeetleModel",
+        "NewFireBeetleModel"
+      ],
+      "tf_model_layers": [
+        "NEW_FIRE_BEETLE",
+        "FIRE_BEETLE"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [
+        "firebeetle.png"
+      ],
+      "jappa_switch": true,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "SLIME_BEETLE",
+      "source_line": 147,
+      "registration": "m -> !jappa.getAsBoolean() ? new SlimeBeetleRenderer(m, new SlimeBeetleModel(m.bakeLayer(TFModelLayers.NEW_SLIME_BEETLE)), 0.6F) : new NewSlimeBeetleRenderer(m, new NewSlimeBeetleModel(m.bakeLayer(TFModelLayers.SLIME_BEETLE)), 0.6F)",
+      "renderer_classes": [
+        "SlimeBeetleRenderer",
+        "NewSlimeBeetleRenderer"
+      ],
+      "model_classes": [
+        "SlimeBeetleModel",
+        "NewSlimeBeetleModel"
+      ],
+      "tf_model_layers": [
+        "NEW_SLIME_BEETLE",
+        "SLIME_BEETLE"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": true,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "PINCH_BEETLE",
+      "source_line": 148,
+      "registration": "m -> new TFGenericMobRenderer<>(m, !jappa.getAsBoolean() ? new PinchBeetleModel(m.bakeLayer(TFModelLayers.NEW_PINCH_BEETLE)) : new NewPinchBeetleModel(m.bakeLayer(TFModelLayers.PINCH_BEETLE)), 0.6F, \"pinchbeetle.png\")",
+      "renderer_classes": [
+        "TFGenericMobRenderer"
+      ],
+      "model_classes": [
+        "PinchBeetleModel",
+        "NewPinchBeetleModel"
+      ],
+      "tf_model_layers": [
+        "NEW_PINCH_BEETLE",
+        "PINCH_BEETLE"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [
+        "pinchbeetle.png"
+      ],
+      "jappa_switch": true,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "MIST_WOLF",
+      "source_line": 149,
+      "registration": "MistWolfRenderer::new",
+      "renderer_classes": [
+        "MistWolfRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "CARMINITE_GHASTLING",
+      "source_line": 150,
+      "registration": "m -> new TFGhastRenderer<>(m, new TFGhastModel<>(m.bakeLayer(TFModelLayers.CARMINITE_GHASTLING)), 0.625F)",
+      "renderer_classes": [
+        "TFGhastRenderer"
+      ],
+      "model_classes": [
+        "TFGhastModel"
+      ],
+      "tf_model_layers": [
+        "CARMINITE_GHASTLING"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "CARMINITE_GOLEM",
+      "source_line": 151,
+      "registration": "m -> new CarminiteGolemRenderer<>(m, new CarminiteGolemModel<>(m.bakeLayer(TFModelLayers.CARMINITE_GOLEM)), 0.75F)",
+      "renderer_classes": [
+        "CarminiteGolemRenderer"
+      ],
+      "model_classes": [
+        "CarminiteGolemModel"
+      ],
+      "tf_model_layers": [
+        "CARMINITE_GOLEM"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "TOWERWOOD_BORER",
+      "source_line": 152,
+      "registration": "m -> new TFGenericMobRenderer<>(m, new SilverfishModel<>(m.bakeLayer(ModelLayers.SILVERFISH)), 0.3F, \"towertermite.png\")",
+      "renderer_classes": [
+        "TFGenericMobRenderer"
+      ],
+      "model_classes": [
+        "SilverfishModel"
+      ],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [
+        "SILVERFISH"
+      ],
+      "inline_textures": [
+        "towertermite.png"
+      ],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "CARMINITE_GHASTGUARD",
+      "source_line": 153,
+      "registration": "m -> new CarminiteGhastRenderer<>(m, new TFGhastModel<>(m.bakeLayer(TFModelLayers.CARMINITE_GHASTGUARD)), 3.0F)",
+      "renderer_classes": [
+        "CarminiteGhastRenderer"
+      ],
+      "model_classes": [
+        "TFGhastModel"
+      ],
+      "tf_model_layers": [
+        "CARMINITE_GHASTGUARD"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "UR_GHAST",
+      "source_line": 154,
+      "registration": "m -> !jappa.getAsBoolean() ? new UrGhastRenderer(m, new UrGhastModel(m.bakeLayer(TFModelLayers.NEW_UR_GHAST)), 8.0F, 24F) : new NewUrGhastRenderer(m, new NewUrGhastModel(m.bakeLayer(TFModelLayers.UR_GHAST)), 8.0F, 24F)",
+      "renderer_classes": [
+        "UrGhastRenderer",
+        "NewUrGhastRenderer"
+      ],
+      "model_classes": [
+        "UrGhastModel",
+        "NewUrGhastModel"
+      ],
+      "tf_model_layers": [
+        "NEW_UR_GHAST",
+        "UR_GHAST"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": true,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "BLOCKCHAIN_GOBLIN",
+      "source_line": 155,
+      "registration": "m -> !jappa.getAsBoolean() ? new BlockChainGoblinRenderer<>(m, new BlockChainGoblinModel<>(m.bakeLayer(TFModelLayers.NEW_BLOCKCHAIN_GOBLIN)), 0.4F) : new NewBlockChainGoblinRenderer<>(m, new NewBlockChainGoblinModel<>(m.bakeLayer(TFModelLayers.BLOCKCHAIN_GOBLIN)), 0.4F)",
+      "renderer_classes": [
+        "BlockChainGoblinRenderer",
+        "NewBlockChainGoblinRenderer"
+      ],
+      "model_classes": [
+        "BlockChainGoblinModel",
+        "NewBlockChainGoblinModel"
+      ],
+      "tf_model_layers": [
+        "NEW_BLOCKCHAIN_GOBLIN",
+        "BLOCKCHAIN_GOBLIN"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": true,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "UPPER_GOBLIN_KNIGHT",
+      "source_line": 156,
+      "registration": "m -> !jappa.getAsBoolean() ? new UpperGoblinKnightRenderer(m, new UpperGoblinKnightModel(m.bakeLayer(TFModelLayers.NEW_UPPER_GOBLIN_KNIGHT)), 0.625F) : new NewUpperGoblinKnightRenderer(m, new NewUpperGoblinKnightModel(m.bakeLayer(TFModelLayers.UPPER_GOBLIN_KNIGHT)), 0.625F)",
+      "renderer_classes": [
+        "UpperGoblinKnightRenderer",
+        "NewUpperGoblinKnightRenderer"
+      ],
+      "model_classes": [
+        "UpperGoblinKnightModel",
+        "NewUpperGoblinKnightModel"
+      ],
+      "tf_model_layers": [
+        "NEW_UPPER_GOBLIN_KNIGHT",
+        "UPPER_GOBLIN_KNIGHT"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": true,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "LOWER_GOBLIN_KNIGHT",
+      "source_line": 157,
+      "registration": "m -> new TFBipedRenderer<>(m, !jappa.getAsBoolean() ? new LowerGoblinKnightModel(m.bakeLayer(TFModelLayers.NEW_LOWER_GOBLIN_KNIGHT)) : new NewLowerGoblinKnightModel(m.bakeLayer(TFModelLayers.LOWER_GOBLIN_KNIGHT)), 0.625F, \"doublegoblin.png\")",
+      "renderer_classes": [
+        "TFBipedRenderer"
+      ],
+      "model_classes": [
+        "LowerGoblinKnightModel",
+        "NewLowerGoblinKnightModel"
+      ],
+      "tf_model_layers": [
+        "NEW_LOWER_GOBLIN_KNIGHT",
+        "LOWER_GOBLIN_KNIGHT"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [
+        "doublegoblin.png"
+      ],
+      "jappa_switch": true,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "HELMET_CRAB",
+      "source_line": 158,
+      "registration": "m -> new TFGenericMobRenderer<>(m, !jappa.getAsBoolean() ? new HelmetCrabModel(m.bakeLayer(TFModelLayers.NEW_HELMET_CRAB)) : new NewHelmetCrabModel(m.bakeLayer(TFModelLayers.HELMET_CRAB)), 0.625F, \"helmetcrab.png\")",
+      "renderer_classes": [
+        "TFGenericMobRenderer"
+      ],
+      "model_classes": [
+        "HelmetCrabModel",
+        "NewHelmetCrabModel"
+      ],
+      "tf_model_layers": [
+        "NEW_HELMET_CRAB",
+        "HELMET_CRAB"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [
+        "helmetcrab.png"
+      ],
+      "jappa_switch": true,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "KNIGHT_PHANTOM",
+      "source_line": 159,
+      "registration": "m -> new KnightPhantomRenderer(m, new KnightPhantomModel(m.bakeLayer(TFModelLayers.KNIGHT_PHANTOM)), 0.625F)",
+      "renderer_classes": [
+        "KnightPhantomRenderer"
+      ],
+      "model_classes": [
+        "KnightPhantomModel"
+      ],
+      "tf_model_layers": [
+        "KNIGHT_PHANTOM"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "NAGA",
+      "source_line": 160,
+      "registration": "m -> !jappa.getAsBoolean() ? new NagaRenderer<>(m, new NagaModel<>(m.bakeLayer(TFModelLayers.NEW_NAGA)), 1.45F) : new NewNagaRenderer<>(m, new NewNagaModel<>(m.bakeLayer(TFModelLayers.NAGA)), 1.45F)",
+      "renderer_classes": [
+        "NagaRenderer",
+        "NewNagaRenderer"
+      ],
+      "model_classes": [
+        "NagaModel",
+        "NewNagaModel"
+      ],
+      "tf_model_layers": [
+        "NEW_NAGA",
+        "NAGA"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": true,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "SWARM_SPIDER",
+      "source_line": 161,
+      "registration": "SwarmSpiderRenderer::new",
+      "renderer_classes": [
+        "SwarmSpiderRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "KING_SPIDER",
+      "source_line": 162,
+      "registration": "KingSpiderRenderer::new",
+      "renderer_classes": [
+        "KingSpiderRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "CARMINITE_BROODLING",
+      "source_line": 163,
+      "registration": "CarminiteBroodlingRenderer::new",
+      "renderer_classes": [
+        "CarminiteBroodlingRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "HEDGE_SPIDER",
+      "source_line": 164,
+      "registration": "HedgeSpiderRenderer::new",
+      "renderer_classes": [
+        "HedgeSpiderRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "REDCAP_SAPPER",
+      "source_line": 165,
+      "registration": "m -> new TFBipedRenderer<>(m, !jappa.getAsBoolean() ? new RedcapModel<>(m.bakeLayer(TFModelLayers.NEW_REDCAP)) : new NewRedcapModel<>(m.bakeLayer(TFModelLayers.REDCAP)), new NewRedcapModel<>(m.bakeLayer(TFModelLayers.REDCAP_ARMOR_INNER)), new NewRedcapModel<>(m.bakeLayer(TFModelLayers.REDCAP_ARMOR_OUTER)), 0.4F, \"redcapsapper.png\")",
+      "renderer_classes": [
+        "TFBipedRenderer"
+      ],
+      "model_classes": [
+        "RedcapModel",
+        "NewRedcapModel"
+      ],
+      "tf_model_layers": [
+        "NEW_REDCAP",
+        "REDCAP",
+        "REDCAP_ARMOR_INNER",
+        "REDCAP_ARMOR_OUTER"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [
+        "redcapsapper.png"
+      ],
+      "jappa_switch": true,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "MAZE_SLIME",
+      "source_line": 166,
+      "registration": "m -> new MazeSlimeRenderer(m, 0.625F)",
+      "renderer_classes": [
+        "MazeSlimeRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "YETI",
+      "source_line": 167,
+      "registration": "m -> new TFBipedRenderer<>(m, new YetiModel<>(m.bakeLayer(TFModelLayers.YETI)), 0.625F, \"yeti2.png\")",
+      "renderer_classes": [
+        "TFBipedRenderer"
+      ],
+      "model_classes": [
+        "YetiModel"
+      ],
+      "tf_model_layers": [
+        "YETI"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [
+        "yeti2.png"
+      ],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "PROTECTION_BOX",
+      "source_line": 168,
+      "registration": "ProtectionBoxRenderer::new",
+      "renderer_classes": [
+        "ProtectionBoxRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "MAGIC_PAINTING",
+      "source_line": 169,
+      "registration": "MagicPaintingRenderer::new",
+      "renderer_classes": [
+        "MagicPaintingRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "ALPHA_YETI",
+      "source_line": 170,
+      "registration": "m -> new TFBipedRenderer<>(m, new AlphaYetiModel(m.bakeLayer(TFModelLayers.ALPHA_YETI)), 1.75F, \"yetialpha.png\")",
+      "renderer_classes": [
+        "TFBipedRenderer"
+      ],
+      "model_classes": [
+        "AlphaYetiModel"
+      ],
+      "tf_model_layers": [
+        "ALPHA_YETI"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [
+        "yetialpha.png"
+      ],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "WINTER_WOLF",
+      "source_line": 171,
+      "registration": "WinterWolfRenderer::new",
+      "renderer_classes": [
+        "WinterWolfRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "SNOW_GUARDIAN",
+      "source_line": 172,
+      "registration": "m -> new SnowGuardianRenderer(m, new NoopModel<>(m.bakeLayer(TFModelLayers.NOOP)))",
+      "renderer_classes": [
+        "SnowGuardianRenderer"
+      ],
+      "model_classes": [
+        "NoopModel"
+      ],
+      "tf_model_layers": [
+        "NOOP"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "STABLE_ICE_CORE",
+      "source_line": 173,
+      "registration": "m -> new StableIceCoreRenderer(m, new StableIceCoreModel(m.bakeLayer(TFModelLayers.STABLE_ICE_CORE)))",
+      "renderer_classes": [
+        "StableIceCoreRenderer"
+      ],
+      "model_classes": [
+        "StableIceCoreModel"
+      ],
+      "tf_model_layers": [
+        "STABLE_ICE_CORE"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "UNSTABLE_ICE_CORE",
+      "source_line": 174,
+      "registration": "m -> new UnstableIceCoreRenderer<>(m, new UnstableIceCoreModel<>(m.bakeLayer(TFModelLayers.UNSTABLE_ICE_CORE)))",
+      "renderer_classes": [
+        "UnstableIceCoreRenderer"
+      ],
+      "model_classes": [
+        "UnstableIceCoreModel"
+      ],
+      "tf_model_layers": [
+        "UNSTABLE_ICE_CORE"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "SNOW_QUEEN",
+      "source_line": 175,
+      "registration": "m -> !jappa.getAsBoolean() ? new SnowQueenRenderer(m, new SnowQueenModel(m.bakeLayer(TFModelLayers.NEW_SNOW_QUEEN))) : new NewSnowQueenRenderer(m, new NewSnowQueenModel(m.bakeLayer(TFModelLayers.SNOW_QUEEN)))",
+      "renderer_classes": [
+        "SnowQueenRenderer",
+        "NewSnowQueenRenderer"
+      ],
+      "model_classes": [
+        "SnowQueenModel",
+        "NewSnowQueenModel"
+      ],
+      "tf_model_layers": [
+        "NEW_SNOW_QUEEN",
+        "SNOW_QUEEN"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": true,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "TROLL",
+      "source_line": 176,
+      "registration": "m -> new TFBipedRenderer<>(m, !jappa.getAsBoolean() ? new TrollModel(m.bakeLayer(TFModelLayers.NEW_TROLL)) : new NewTrollModel(m.bakeLayer(TFModelLayers.TROLL)), 0.625F, \"troll.png\")",
+      "renderer_classes": [
+        "TFBipedRenderer"
+      ],
+      "model_classes": [
+        "TrollModel",
+        "NewTrollModel"
+      ],
+      "tf_model_layers": [
+        "NEW_TROLL",
+        "TROLL"
+      ],
+      "minecraft_model_layers": [],
+      "inline_textures": [
+        "troll.png"
+      ],
+      "jappa_switch": true,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "GIANT_MINER",
+      "source_line": 177,
+      "registration": "TFGiantRenderer::new",
+      "renderer_classes": [
+        "TFGiantRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "ARMORED_GIANT",
+      "source_line": 178,
+      "registration": "TFGiantRenderer::new",
+      "renderer_classes": [
+        "TFGiantRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "ICE_CRYSTAL",
+      "source_line": 179,
+      "registration": "IceCrystalRenderer::new",
+      "renderer_classes": [
+        "IceCrystalRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "CHAIN_BLOCK",
+      "source_line": 180,
+      "registration": "BlockChainRenderer::new",
+      "renderer_classes": [
+        "BlockChainRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "CUBE_OF_ANNIHILATION",
+      "source_line": 181,
+      "registration": "CubeOfAnnihilationRenderer::new",
+      "renderer_classes": [
+        "CubeOfAnnihilationRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "HARBINGER_CUBE",
+      "source_line": 182,
+      "registration": "HarbingerCubeRenderer::new",
+      "renderer_classes": [
+        "HarbingerCubeRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "ADHERENT",
+      "source_line": 183,
+      "registration": "AdherentRenderer::new",
+      "renderer_classes": [
+        "AdherentRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "ROVING_CUBE",
+      "source_line": 184,
+      "registration": "RovingCubeRenderer::new",
+      "renderer_classes": [
+        "RovingCubeRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "RISING_ZOMBIE",
+      "source_line": 185,
+      "registration": "m -> new TFBipedRenderer<>(m, new RisingZombieModel(m.bakeLayer(TFModelLayers.RISING_ZOMBIE)), new RisingZombieModel(m.bakeLayer(ModelLayers.ZOMBIE_INNER_ARMOR)), new RisingZombieModel(m.bakeLayer(ModelLayers.ZOMBIE_OUTER_ARMOR)), 0.5F, \"textures/entity/zombie/zombie.png\")",
+      "renderer_classes": [
+        "TFBipedRenderer"
+      ],
+      "model_classes": [
+        "RisingZombieModel"
+      ],
+      "tf_model_layers": [
+        "RISING_ZOMBIE"
+      ],
+      "minecraft_model_layers": [
+        "ZOMBIE_INNER_ARMOR",
+        "ZOMBIE_OUTER_ARMOR"
+      ],
+      "inline_textures": [
+        "textures/entity/zombie/zombie.png"
+      ],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "PLATEAU_BOSS",
+      "source_line": 186,
+      "registration": "NoopRenderer::new",
+      "renderer_classes": [
+        "NoopRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "NATURE_BOLT",
+      "source_line": 189,
+      "registration": "ThrownItemRenderer::new",
+      "renderer_classes": [
+        "ThrownItemRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "LICH_BOLT",
+      "source_line": 190,
+      "registration": "c -> new CustomProjectileTextureRenderer(c, TwilightForestMod.prefix(\"textures/item/twilight_orb.png\"))",
+      "renderer_classes": [
+        "CustomProjectileTextureRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [
+        "textures/item/twilight_orb.png"
+      ],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "WAND_BOLT",
+      "source_line": 191,
+      "registration": "c -> new CustomProjectileTextureRenderer(c, TwilightForestMod.prefix(\"textures/item/twilight_orb.png\"))",
+      "renderer_classes": [
+        "CustomProjectileTextureRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [
+        "textures/item/twilight_orb.png"
+      ],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "TOME_BOLT",
+      "source_line": 192,
+      "registration": "ThrownItemRenderer::new",
+      "renderer_classes": [
+        "ThrownItemRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "HYDRA_MORTAR",
+      "source_line": 193,
+      "registration": "HydraMortarRenderer::new",
+      "renderer_classes": [
+        "HydraMortarRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "SLIME_BLOB",
+      "source_line": 194,
+      "registration": "ThrownItemRenderer::new",
+      "renderer_classes": [
+        "ThrownItemRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "MOONWORM_SHOT",
+      "source_line": 195,
+      "registration": "MoonwormShotRenderer::new",
+      "renderer_classes": [
+        "MoonwormShotRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "CHARM_EFFECT",
+      "source_line": 196,
+      "registration": "ThrownItemRenderer::new",
+      "renderer_classes": [
+        "ThrownItemRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "LICH_BOMB",
+      "source_line": 197,
+      "registration": "ThrownItemRenderer::new",
+      "renderer_classes": [
+        "ThrownItemRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "THROWN_WEP",
+      "source_line": 198,
+      "registration": "ThrownWepRenderer::new",
+      "renderer_classes": [
+        "ThrownWepRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "FALLING_ICE",
+      "source_line": 199,
+      "registration": "FallingIceRenderer::new",
+      "renderer_classes": [
+        "FallingIceRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "THROWN_ICE",
+      "source_line": 200,
+      "registration": "ThrownIceRenderer::new",
+      "renderer_classes": [
+        "ThrownIceRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "THROWN_BLOCK",
+      "source_line": 201,
+      "registration": "ThrownBlockRenderer::new",
+      "renderer_classes": [
+        "ThrownBlockRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "ICE_SNOWBALL",
+      "source_line": 202,
+      "registration": "ThrownItemRenderer::new",
+      "renderer_classes": [
+        "ThrownItemRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "SLIDER",
+      "source_line": 203,
+      "registration": "SlideBlockRenderer::new",
+      "renderer_classes": [
+        "SlideBlockRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "SEEKER_ARROW",
+      "source_line": 204,
+      "registration": "DefaultArrowRenderer::new",
+      "renderer_classes": [
+        "DefaultArrowRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    },
+    {
+      "entity_key": "ICE_ARROW",
+      "source_line": 205,
+      "registration": "DefaultArrowRenderer::new",
+      "renderer_classes": [
+        "DefaultArrowRenderer"
+      ],
+      "model_classes": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "inline_textures": [],
+      "jappa_switch": false,
+      "renderer_source_status": "PENDING_SOURCE_RESOLUTION"
+    }
+  ],
+  "multipart_renderers": [
+    {
+      "key": "TFPart.RENDERER",
+      "source_line": 216,
+      "registration": "renderers.put(TFPart.RENDERER, new LazyLoadedValue<>(() -> new NoopRenderer<>(context)));",
+      "jappa_switch": false
+    },
+    {
+      "key": "HydraHead.RENDERER",
+      "source_line": 217,
+      "registration": "renderers.put(HydraHead.RENDERER, new LazyLoadedValue<>(() -> !jappa.getAsBoolean() ? new HydraHeadRenderer(context) : new NewHydraHeadRenderer(context)));",
+      "jappa_switch": true
+    },
+    {
+      "key": "HydraNeck.RENDERER",
+      "source_line": 218,
+      "registration": "renderers.put(HydraNeck.RENDERER, new LazyLoadedValue<>(() -> !jappa.getAsBoolean() ? new HydraNeckRenderer(context) : new NewHydraNeckRenderer(context)));",
+      "jappa_switch": true
+    },
+    {
+      "key": "SnowQueenIceShield.RENDERER",
+      "source_line": 219,
+      "registration": "renderers.put(SnowQueenIceShield.RENDERER, new LazyLoadedValue<>(() -> new SnowQueenIceShieldLayer<>(context)));",
+      "jappa_switch": false
+    },
+    {
+      "key": "NagaSegment.RENDERER",
+      "source_line": 220,
+      "registration": "renderers.put(NagaSegment.RENDERER, new LazyLoadedValue<>(() -> !jappa.getAsBoolean() ? new NagaSegmentRenderer<>(context) : new NewNagaSegmentRenderer<>(context)));",
+      "jappa_switch": true
+    }
+  ]
+}
