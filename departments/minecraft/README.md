@@ -2,20 +2,42 @@
 
 KNEEKURA TECH HUB の Minecraft MOD 開発専用部門。
 
-## 固定対象環境
+## 互換性方針 — Anchor + Frontier
 
-**この部門の標準・正本対象は Minecraft 1.20.1 + Minecraft Forge。**
+この部門は **Minecraft 1.20.1 + Forge に固定しない**。
 
-- Minecraft: `1.20.1`
-- Mod Loader: `Forge`
-- Fabric / NeoForge / 他バージョン: 比較資料として参照は可能。ただし 1.20.1 Forge の正本分析へ混在させない。
-- 解析結果には必ず対象 Mod の release / tag / commit / JAR SHA-256 など、再現可能な Source Snapshot を付ける。
+原則として各対象を2本の独立トラックで保持する。
+
+1. **ANCHOR — Minecraft 1.20.1 + Forge**
+   - KNEEKURA が実際に利用・移植するときの基準環境。
+   - upstream に 1.20.1 Forge 実装がある場合は、その実装を丸ごと分析する。
+   - 存在しない場合でも、1.20.1 Forge を移植先仕様として残す。
+
+2. **FRONTIER — Latest useful upstream**
+   - upstream の最新版・現行主力版から最新技術を採取する。
+   - Forge / NeoForge / Fabric / その他ローダーを理由に除外しない。
+   - 最新版の仕組みを 1.20.1 に混ぜず、差分と移植条件を明示する。
+
+ANCHOR と FRONTIER は必ず別 SourceSnapshot にする。別バージョン・別ローダーの証拠を同じ実装事実として混同しない。
+
+これにより『1.20.1しか見ないため新技術を取り逃す』ことと、『最新版のコードが1.20.1でそのまま動くと思い込む』ことの両方を避ける。
+
+## 標準の移植成果
+
+FRONTIER で得た技術は VERSION-PORTABILITY.md で次へ分解する。
+
+- concept: バージョン非依存の考え方
+- implementation: upstream 固有実装
+- platform dependency: Minecraft / Forge / NeoForge / Fabric API 依存部
+- changed API surface: バージョン差で変わった API
+- backport strategy: 1.20.1 Forge での再実装方針
+- impossible / risky parts: そのまま移せない部分
 
 ## 目的
 
-既存 Mod を「遊び方」ではなく **実装技術の集合** として丸ごと分解し、KNEEKURA の Minecraft MOD 開発で再利用できる知識にする。
+既存 Mod / loader bridge / library / framework を『遊び方』ではなく **実装技術の集合** として丸ごと分解し、KNEEKURA の Minecraft MOD 開発で再利用できる知識にする。
 
-対象範囲は原則として以下をすべて含む。
+対象範囲:
 
 - Mod 起動構造、entrypoint、registries、events、capabilities
 - Entity / Mob / Boss AI
@@ -29,63 +51,50 @@ KNEEKURA TECH HUB の Minecraft MOD 開発専用部門。
 - particle / shader / post effect
 - sound / music
 - recipe / loot table / tag / advancement / language / config
-- Mixin / Access Transformer / core patch / reflection
+- Mixin / Access Transformer / Access Widener / Class Tweaker / core patch / reflection
+- mappings / remapping / classloading / bytecode transformation
+- loader/API compatibility layers and translation
 - dependencies / compatibility / optional integrations
 - performance-sensitive paths / caches / tick cost / allocation
 - test / debug / data generation / build tooling
 - license / provenance / redistribution constraints
+- cross-version / cross-loader portability
 
-## 保存原則
+## 完全取得と保存原則
 
-このリポジトリは private でも、第三者 Mod の原物置き場にはしない。
+丸ごと分析するときは、対象 SourceSnapshot の **full upstream source tree をローカルに取得して全体を走査してよい**。数個の検索結果だけを見て whole analysis 完了とはみなさない。
 
-**Git に残すもの**
-
+Git に残すもの:
 - exact source/release identity
+- track (ANCHOR / FRONTIER / COMPARATIVE)
 - file/path inventory
 - SHA-256 / dimensions / formats / namespaces
 - call graph / registry map / event map / feature map
 - texture ↔ model ↔ renderer ↔ entity 対応表
 - AI/state-machine の構造化分析
-- 設計パターン、制約、注意点
+- bytecode/loader translation pipeline map
+- version / loader delta
+- 1.20.1 Forge backport notes
 - evidence locator と派生分析
 
-**原則ローカルだけに置くもの**
-
+原則ローカルだけに置くもの:
 - Mod JAR
+- upstream full checkout の作業コピー
 - 展開済み JAR 全体
 - decompiled source tree
 - third-party texture/model/sound の完全コピー
 - 一時解析生成物
 
-ローカル生成物は `departments/minecraft/local-artifacts/` 配下を想定し、Git 追跡対象外とする。
+## 対象1個あたりの標準成果物
 
-## Mod 1個あたりの標準成果物
+README.md / manifest.json / OVERVIEW.md / CODE-MAP.md / AI-BEHAVIOR.md / WORLDGEN.md / NETWORKING.md / RENDERING-ASSETS.md / DATA-ASSETS.md / PERFORMANCE.md / COMPATIBILITY.md / VERSION-PORTABILITY.md / LICENSE-PROVENANCE.md
 
-```text
-mods/<mod-slug>/
-  README.md
-  manifest.json
-  OVERVIEW.md
-  CODE-MAP.md
-  AI-BEHAVIOR.md
-  WORLDGEN.md
-  NETWORKING.md
-  RENDERING-ASSETS.md
-  DATA-ASSETS.md
-  PERFORMANCE.md
-  COMPATIBILITY.md
-  LICENSE-PROVENANCE.md
-```
+## 分析キュー
 
-すべてのファイルを毎回無理に埋めるのではなく、存在しない領域は `NOT_APPLICABLE`、未調査は `NOT_ANALYZED` と明記する。
+1. **The Twilight Forest**
+2. **Sinytra Connector**
+3. 以降、Minecraft MOD 開発に再利用価値の高い対象
 
-## 一覧
+Sinytra Connector は 1.20.1 Forge 系と現行 NeoForge 系の両方を保持し、Fabric互換技術がどう進化したかを比較する重点対象とする。
 
-Mod 横断の一覧は `catalog/MODS.md` に置く。
-
-最初の正式ターゲットは **The Twilight Forest**。詳細分析は対象 1.20.1 Forge リリースと Source Snapshot を固定してから開始する。
-
-## 分析手順
-
-詳細は `ANALYSIS-SPEC-v1.md` を参照。
+対象横断の一覧は catalog/MODS.md。詳細手順は ANALYSIS-SPEC-v1.md。
