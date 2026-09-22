@@ -14,11 +14,11 @@ Private technology research infrastructure for discovering large amounts of engi
 
 A dedicated private research lane for Minecraft mod engineering has been established under `departments/minecraft/`.
 
-**Compatibility baseline is fixed to Minecraft 1.20.1 + Minecraft Forge.** Other Minecraft versions, Fabric, or NeoForge may be inspected only as comparative evidence and must not be mixed into the canonical 1.20.1 Forge catalog.
+Minecraft **1.20.1 + Forge remains the adaptation anchor, not the ceiling**. Each target should preserve a 1.20.1/Forge track when one exists while also acquiring and analyzing the latest useful upstream implementation. Version/loader tracks remain separate SourceSnapshots and are compared explicitly so newer techniques can be reconstructed for the 1.20.1 Forge environment without pretending that code is directly interchangeable.
 
-The department is designed for whole-mod analysis: code architecture, entity/boss AI, pathfinding, state machines, registries/events, networking, dimensions/world generation, rendering, models, animations, textures, particles, sounds, data assets, compatibility, and performance. Raw JARs, decompiled trees, and full third-party asset copies remain local-only by default; the repository stores provenance, inventories, hashes, mappings, and derived analysis.
+The department is designed for whole-target analysis: code architecture, entity/boss AI, pathfinding, state machines, registries/events, networking, dimensions/world generation, rendering, models, animations, textures, particles, sounds, data assets, compatibility, version portability, loader translation, and performance. Full upstream source trees may be checked out locally for complete analysis; raw JARs, decompiled trees, and full third-party asset copies remain local-only by default while the repository stores pinned provenance, inventories, hashes, mappings, cross-version deltas, and derived analysis.
 
-First registered target: **The Twilight Forest**.
+Analysis queue starts with **The Twilight Forest**, followed by **Sinytra Connector**.
 
 ## Architecture
 
