@@ -36,8 +36,8 @@
 - compatibility/platform boundary: mapped (normal APIs / AT / ASM / Mod adapters)
 - version portability: first-pass mapped
 - performance: hot-path/caching hypotheses inventoried; reproducible runtime evidence spec prepared, measurements pending
-- full FRONTIER mob AI catalog: mapped for all 53 non-boss classes, including inherited/imperative semantics
-- full FRONTIER structure catalog: mapped (25 declared keys / 21 active generated / 4 declared-only / 19 own Structure Sets)
+- full FRONTIER mob AI catalog: mapped for all 53 non-boss classes, including inherited/imperative semantics\n- ANCHOR↔FRONTIER AI portability: mapped for 132 AI/entity Java paths; principal boss refactors classified\n- compatibility feature evolution: mapped for Curios/Jade/JEI/TOP/EMI/REI with ACTIVE vs DISABLED state
+- full FRONTIER structure catalog: mapped (25 declared keys / 21 active generated / 4 declared-only / 19 own Structure Sets)\n- global block/item render graph: extractor implemented for 528 blockstates + 1,773 models + 663 item definitions + texture/atlas resolution; full-checkout execution pending
 
 See the sibling reports and `inventory/` manifests for evidence-backed progress.
 
