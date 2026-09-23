@@ -1,0 +1,220 @@
+name: Twilight Forest Runtime Evidence R2
+
+on:
+  push:
+    branches:
+      - jolly/minecraft-tech-department-2026-09-22
+    paths:
+      - '.github/twilight-runtime-r2-request.txt'
+
+permissions:
+  contents: write
+
+env:
+  FRONTIER_SHA: 793c4d4c7b0a2892f702cbb9a8d751fbe7218828
+  ANCHOR_SHA: a7dd8f13c653e137f977f5ffaa870fcb20fc1625
+  TF_EVIDENCE_DIR: departments/minecraft/mods/twilight-forest
+  WORLD_SEED: '20260923'
+  VIEW_DISTANCE: '10'
+  SIMULATION_DISTANCE: '10'
+
+concurrency:
+  group: twilight-runtime-r2
+  cancel-in-progress: false
+
+jobs:
+  r2-first-entry:
+    runs-on: [self-hosted, Windows, X64]
+    timeout-minutes: 180
+    defaults:
+      run:
+        shell: powershell
+
+    steps:
+      - name: Checkout TECH HUB branch
+        uses: actions/checkout@v4
+        with:
+          ref: jolly/minecraft-tech-department-2026-09-22
+          fetch-depth: 1
+          clean: true
+          persist-credentials: true
+
+      - name: Record exact TECH HUB input
+        run: |
+          $techHubInput = (git rev-parse HEAD).Trim()
+          $probeHash = (Get-FileHash "$env:TF_EVIDENCE_DIR/tools/run_runtime_r2.py" -Algorithm SHA256).Hash.ToLower()
+          "TECH_HUB_INPUT_SHA=$techHubInput" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          "RUNTIME_R2_PROBE_SHA256=$probeHash" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+      - name: Checkout pinned Twilight Forest ANCHOR source
+        uses: actions/checkout@v4
+        with:
+          repository: TeamTwilight/twilightforest
+          ref: a7dd8f13c653e137f977f5ffaa870fcb20fc1625
+          path: local-artifacts/twilightforest-anchor
+          fetch-depth: 1
+          clean: true
+          persist-credentials: false
+
+      - name: Checkout pinned Twilight Forest FRONTIER source
+        uses: actions/checkout@v4
+        with:
+          repository: TeamTwilight/twilightforest
+          ref: 793c4d4c7b0a2892f702cbb9a8d751fbe7218828
+          path: local-artifacts/twilightforest-frontier
+          fetch-depth: 1
+          clean: true
+          persist-credentials: false
+
+      - name: Verify upstream snapshots
+        run: |
+          $anchor = (git -C local-artifacts/twilightforest-anchor rev-parse HEAD).Trim()
+          $frontier = (git -C local-artifacts/twilightforest-frontier rev-parse HEAD).Trim()
+          if ($anchor -ne $env:ANCHOR_SHA) { throw "Unexpected ANCHOR commit: $anchor" }
+          if ($frontier -ne $env:FRONTIER_SHA) { throw "Unexpected FRONTIER commit: $frontier" }
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Compile-check R2 probe
+        run: python -m py_compile "$env:TF_EVIDENCE_DIR/tools/run_runtime_r2.py"
+
+      - name: Set up Java 17 for ANCHOR
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Warm ANCHOR Gradle wrapper
+        run: |
+          Push-Location local-artifacts/twilightforest-anchor
+          try { .\gradlew.bat --version } finally { Pop-Location }
+
+      - name: Measure ANCHOR R2 first entry
+        continue-on-error: true
+        run: |
+          $out = "$env:TF_EVIDENCE_DIR/runtime/anchor/$env:GITHUB_RUN_ID/r2"
+          python "$env:TF_EVIDENCE_DIR/tools/run_runtime_r2.py" --track anchor --repo-dir local-artifacts/twilightforest-anchor --source-commit $env:ANCHOR_SHA --minecraft-version 1.20.1 --loader-name Forge --loader-version 47.1.70 --gradle-task "Minecraft_Server_1.20.1" --output-dir $out --startup-timeout-seconds 2400 --entry-timeout-seconds 1800 --shutdown-seconds 90 --world-seed $env:WORLD_SEED --view-distance $env:VIEW_DISTANCE --simulation-distance $env:SIMULATION_DISTANCE
+
+      - name: Set up Java 21 for FRONTIER toolchain
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Record Java 21 toolchain path
+        run: |
+          "FRONTIER_JAVA21_HOME=$env:JAVA_HOME" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+      - name: Set up Java 25 for FRONTIER
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+
+      - name: Warm FRONTIER Gradle wrapper
+        run: |
+          $env:GRADLE_OPTS = "-Dorg.gradle.java.installations.paths=$env:FRONTIER_JAVA21_HOME -Dorg.gradle.java.installations.auto-download=false"
+          Push-Location local-artifacts/twilightforest-frontier
+          try { .\gradlew.bat --version } finally { Pop-Location }
+
+      - name: Measure FRONTIER R2 first entry
+        continue-on-error: true
+        run: |
+          $env:GRADLE_OPTS = "-Dorg.gradle.java.installations.paths=$env:FRONTIER_JAVA21_HOME -Dorg.gradle.java.installations.auto-download=false"
+          $out = "$env:TF_EVIDENCE_DIR/runtime/frontier/$env:GITHUB_RUN_ID/r2"
+          python "$env:TF_EVIDENCE_DIR/tools/run_runtime_r2.py" --track frontier --repo-dir local-artifacts/twilightforest-frontier --source-commit $env:FRONTIER_SHA --minecraft-version 26.1.2 --loader-name NeoForge --loader-version 26.1.2.102 --gradle-task "runServer" --output-dir $out --startup-timeout-seconds 2400 --entry-timeout-seconds 1800 --shutdown-seconds 90 --world-seed $env:WORLD_SEED --view-distance $env:VIEW_DISTANCE --simulation-distance $env:SIMULATION_DISTANCE
+
+      - name: Write compact R2 receipt
+        if: always()
+        run: |
+          @'
+          import json
+          import os
+          from pathlib import Path
+          root = Path(os.environ["TF_EVIDENCE_DIR"])
+          run_id = os.environ["GITHUB_RUN_ID"]
+          tracks = {}
+          for track in ("anchor", "frontier"):
+              out = root / "runtime" / track / run_id / "r2"
+              metrics_path = out / "metrics.json"
+              metrics = json.loads(metrics_path.read_text(encoding="utf-8")) if metrics_path.exists() else None
+              tracks[track] = {
+                  "path": out.as_posix(),
+                  "entry_success": metrics.get("entry_success") if metrics else False,
+                  "entry_command_elapsed_seconds": metrics.get("entry_command_elapsed_seconds") if metrics else None,
+                  "generated_twilight_chunk_count": metrics.get("generated_twilight_chunk_count") if metrics else None,
+              }
+          receipt = {
+              "record_version": "1.0",
+              "scenario_id": "R2",
+              "status": "R2_EXECUTED",
+              "repository": os.environ["GITHUB_REPOSITORY"],
+              "branch": os.environ["GITHUB_REF_NAME"],
+              "run_id": int(run_id),
+              "runner_name": os.environ.get("RUNNER_NAME"),
+              "runner_os": os.environ.get("RUNNER_OS"),
+              "runner_arch": os.environ.get("RUNNER_ARCH"),
+              "tech_hub_input_sha": os.environ["TECH_HUB_INPUT_SHA"],
+              "runtime_probe_sha256": os.environ["RUNTIME_R2_PROBE_SHA256"],
+              "sources": {"anchor": os.environ["ANCHOR_SHA"], "frontier": os.environ["FRONTIER_SHA"]},
+              "tracks": tracks,
+              "boundaries": {
+                  "scenario": "R2 deterministic first Twilight dimension entry only",
+                  "r1_reused_as_r2": False,
+                  "r3_through_r9_measured": False,
+                  "overall_performance_score": False,
+                  "main_merged": False,
+              },
+          }
+          (root / "RUNTIME-R2-LATEST.json").write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
+          print(json.dumps(receipt, indent=2))
+          '@ | python -
+
+      - name: Upload raw R2 evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: twilight-runtime-r2
+          if-no-files-found: warn
+          retention-days: 14
+          path: |
+            departments/minecraft/mods/twilight-forest/runtime/anchor/*/r2/logs/**
+            departments/minecraft/mods/twilight-forest/runtime/anchor/*/r2/profiler/**
+            departments/minecraft/mods/twilight-forest/runtime/anchor/*/r2/world-inspection.json
+            departments/minecraft/mods/twilight-forest/runtime/frontier/*/r2/logs/**
+            departments/minecraft/mods/twilight-forest/runtime/frontier/*/r2/profiler/**
+            departments/minecraft/mods/twilight-forest/runtime/frontier/*/r2/world-inspection.json
+
+      - name: Commit compact R2 evidence
+        if: always()
+        run: |
+          git config user.name "KNEEKURA Minecraft Tech"
+          git config user.email "actions@users.noreply.github.com"
+          foreach ($track in @('anchor', 'frontier')) {
+            $dir = "$env:TF_EVIDENCE_DIR/runtime/$track/$env:GITHUB_RUN_ID/r2"
+            foreach ($name in @('environment.json', 'scenario.json', 'metrics.json', 'manifest.json', 'evidence-summary.md')) {
+              $path = "$dir/$name"
+              if (Test-Path $path) { git add -- $path }
+            }
+          }
+          git add -- "$env:TF_EVIDENCE_DIR/RUNTIME-R2-LATEST.json"
+          if (git diff --cached --quiet) { exit 0 }
+          git commit -m "Twilight Forest: record runtime R2 entry evidence"
+          git push origin HEAD:jolly/minecraft-tech-department-2026-09-22
+
+      - name: Enforce both R2 entry probes succeeded
+        if: always()
+        run: |
+          @'
+          import json
+          import os
+          from pathlib import Path
+          receipt = json.loads((Path(os.environ["TF_EVIDENCE_DIR"]) / "RUNTIME-R2-LATEST.json").read_text(encoding="utf-8"))
+          failed = [track for track, data in receipt["tracks"].items() if not data["entry_success"]]
+          if failed:
+              raise SystemExit("R2 first entry did not complete for: " + ", ".join(failed))
+          print("R2 first entry succeeded for both tracks")
+          '@ | python -
