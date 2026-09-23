@@ -49,17 +49,23 @@ The probe creates a deterministic portal fixture at y=160 after the dedicated se
 
 The source world is freshly created for each R2 track. The Twilight dimension must have no pre-generated chunks before the probe entity enters.
 
-## Arrival detection
+## Headless control and arrival detection
 
-The probe records the monotonic timestamp immediately before the summon command is flushed to server stdin.
+The Gradle development-run wrapper does not reliably forward its stdin to the child Minecraft dedicated server. R2 therefore uses the server's built-in **RCON** interface bound to `127.0.0.1` with an ephemeral fixed local-only password.
 
-It then polls from server console with a dimension-scoped command equivalent to:
+After the dedicated-server ready marker:
 
-`execute in twilightforest:twilight_forest if entity @e[tag=kneekura_r2_probe,limit=1] run say KNEEKURA_R2_ARRIVED`
+1. establish authenticated localhost RCON within a bounded control timeout;
+2. construct the fixed portal fixture through RCON;
+3. verify both portal blocks through an `execute if block ... run seed` command;
+4. issue `debug start`;
+5. record the monotonic trigger timestamp immediately before summoning the probe pig;
+6. poll the Twilight dimension through RCON with:
+   `execute in twilightforest:twilight_forest if entity @e[tag=kneekura_r2_probe,limit=1] run data get entity @e[tag=kneekura_r2_probe,limit=1] Pos`.
 
-The first observed `KNEEKURA_R2_ARRIVED` log line is the server-side R2 arrival marker.
+The first response containing a parseable entity `Pos` list is the server-side R2 arrival marker and also supplies the measured arrival coordinates.
 
-After arrival, the probe records the entity position from the Twilight dimension, stops profiling, flushes the world save, removes the probe entity and shuts the server down.
+After arrival, the probe issues `debug stop`, `save-all flush`, removes the probe entity and requests `stop` through RCON. RCON connection, fixture setup, debug/trigger setup, entry polling and shutdown are all explicitly bounded; no post-ready stage may wait indefinitely.
 
 ## R2 primary metrics
 
@@ -93,7 +99,7 @@ R3, not R2, is responsible for controlled cold/warm per-chunk timing distributio
 
 ## Built-in profiler boundary
 
-The probe should issue `debug start` immediately before the portal-entry trigger and `debug stop` immediately after arrival.
+The probe issues `debug start` through localhost RCON immediately before the portal-entry trigger and `debug stop` through the same authenticated control channel immediately after arrival.
 
 Profiler output is retained as a raw workflow artifact. Compact evidence may promote only stable, unambiguous values such as profiler duration/tick count. It must not invent allocation bytes or per-tick distributions if the built-in profile does not expose them.
 
@@ -118,6 +124,8 @@ runtime/<track>/<run-id>/r2/
   manifest.json
   evidence-summary.md
   logs/
+    console.log
+    rcon-transcript.json
   profiler/
 ```
 

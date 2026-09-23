@@ -25,7 +25,7 @@ concurrency:
 jobs:
   r2-first-entry:
     runs-on: [self-hosted, Windows, X64]
-    timeout-minutes: 180
+    timeout-minutes: 210
     defaults:
       run:
         shell: powershell
@@ -96,7 +96,7 @@ jobs:
         continue-on-error: true
         run: |
           $out = "$env:TF_EVIDENCE_DIR/runtime/anchor/$env:GITHUB_RUN_ID/r2"
-          python "$env:TF_EVIDENCE_DIR/tools/run_runtime_r2.py" --track anchor --repo-dir local-artifacts/twilightforest-anchor --source-commit $env:ANCHOR_SHA --minecraft-version 1.20.1 --loader-name Forge --loader-version 47.1.70 --gradle-task "Minecraft_Server_1.20.1" --output-dir $out --startup-timeout-seconds 2400 --entry-timeout-seconds 1800 --shutdown-seconds 90 --world-seed $env:WORLD_SEED --view-distance $env:VIEW_DISTANCE --simulation-distance $env:SIMULATION_DISTANCE
+          python "$env:TF_EVIDENCE_DIR/tools/run_runtime_r2.py" --track anchor --repo-dir local-artifacts/twilightforest-anchor --source-commit $env:ANCHOR_SHA --minecraft-version 1.20.1 --loader-name Forge --loader-version 47.1.70 --gradle-task "Minecraft_Server_1.20.1" --output-dir $out --startup-timeout-seconds 2400 --control-timeout-seconds 120 --entry-timeout-seconds 1800 --shutdown-seconds 90 --world-seed $env:WORLD_SEED --view-distance $env:VIEW_DISTANCE --simulation-distance $env:SIMULATION_DISTANCE
 
       - name: Set up Java 21 for FRONTIER toolchain
         uses: actions/setup-java@v4
@@ -125,7 +125,7 @@ jobs:
         run: |
           $env:GRADLE_OPTS = "-Dorg.gradle.java.installations.paths=$env:FRONTIER_JAVA21_HOME -Dorg.gradle.java.installations.auto-download=false"
           $out = "$env:TF_EVIDENCE_DIR/runtime/frontier/$env:GITHUB_RUN_ID/r2"
-          python "$env:TF_EVIDENCE_DIR/tools/run_runtime_r2.py" --track frontier --repo-dir local-artifacts/twilightforest-frontier --source-commit $env:FRONTIER_SHA --minecraft-version 26.1.2 --loader-name NeoForge --loader-version 26.1.2.102 --gradle-task "runServer" --output-dir $out --startup-timeout-seconds 2400 --entry-timeout-seconds 1800 --shutdown-seconds 90 --world-seed $env:WORLD_SEED --view-distance $env:VIEW_DISTANCE --simulation-distance $env:SIMULATION_DISTANCE
+          python "$env:TF_EVIDENCE_DIR/tools/run_runtime_r2.py" --track frontier --repo-dir local-artifacts/twilightforest-frontier --source-commit $env:FRONTIER_SHA --minecraft-version 26.1.2 --loader-name NeoForge --loader-version 26.1.2.102 --gradle-task "runServer" --output-dir $out --startup-timeout-seconds 2400 --control-timeout-seconds 120 --entry-timeout-seconds 1800 --shutdown-seconds 90 --world-seed $env:WORLD_SEED --view-distance $env:VIEW_DISTANCE --simulation-distance $env:SIMULATION_DISTANCE
 
       - name: Write compact R2 receipt
         if: always()

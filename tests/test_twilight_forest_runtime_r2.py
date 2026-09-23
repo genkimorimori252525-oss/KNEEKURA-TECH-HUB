@@ -1,4 +1,5 @@
 import importlib.util
+import struct
 from pathlib import Path
 
 
@@ -18,11 +19,12 @@ def load_tool():
 def test_portal_fixture_is_fixed_and_uses_real_twilight_portal():
     mod = load_tool()
     commands = mod.build_portal_fixture_commands()
-    assert commands[-1] == "say KNEEKURA_R2_FIXTURE_READY"
     assert "fill 0 160 0 1 160 1 twilightforest:twilight_portal" in commands
     assert "fill -1 161 -1 2 161 2 minecraft:fern" in commands
     assert mod.TWILIGHT_DIMENSION == "twilightforest:twilight_forest"
     assert "kneekura_r2_probe" in mod.summon_probe_command()
+    assert "run seed" in mod.fixture_verify_command()
+    assert "data get entity" in mod.arrival_poll_command()
 
 
 def test_region_chunk_coordinates_reads_anvil_location_table(tmp_path: Path):
@@ -45,12 +47,25 @@ def test_keepup_warning_parser_is_bounded():
     assert mod.parse_keepup_warning("normal line") is None
 
 
-def test_r2_workflow_preserves_track_specific_java_and_tasks():
+def test_rcon_packet_is_little_endian_and_double_nul_terminated():
+    mod = load_tool()
+    packet = mod.build_rcon_packet(99, 3, "secret")
+    length = struct.unpack("<i", packet[:4])[0]
+    request_id, packet_type = struct.unpack("<ii", packet[4:12])
+    assert length == len(packet) - 4
+    assert request_id == 99
+    assert packet_type == 3
+    assert packet.endswith(b"secret\x00\x00")
+
+
+def test_r2_workflow_preserves_track_specific_java_tasks_and_bounds():
     workflow = WORKFLOW.read_text(encoding="utf-8")
     assert "Twilight Forest Runtime Evidence R2" in workflow
+    assert "timeout-minutes: 210" in workflow
     assert "Minecraft_Server_1.20.1" in workflow
-    assert 'java-version: \'21\'' in workflow
-    assert 'java-version: \'25\'' in workflow
+    assert "java-version: '21'" in workflow
+    assert "java-version: '25'" in workflow
     assert "org.gradle.java.installations.auto-download=false" in workflow
+    assert "--control-timeout-seconds 120" in workflow
     assert "run_runtime_r2.py" in workflow
     assert "RUNTIME-R2-LATEST.json" in workflow

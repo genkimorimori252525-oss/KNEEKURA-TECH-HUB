@@ -9,6 +9,8 @@ import platform
 import queue
 import re
 import shutil
+import socket
+import struct
 import subprocess
 import threading
 import time
@@ -16,10 +18,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 
-ARRIVAL_MARKER = "KNEEKURA_R2_ARRIVED"
-FIXTURE_MARKER = "KNEEKURA_R2_FIXTURE_READY"
-DEBUG_MARKER = "KNEEKURA_R2_DEBUG_READY"
 TWILIGHT_DIMENSION = "twilightforest:twilight_forest"
+RCON_PASSWORD = "kneekura-r2-local"
+RCON_DEFAULT_PORT = 25575
 
 
 def utc_now():
@@ -129,8 +130,14 @@ def build_portal_fixture_commands():
         "fill -1 161 -1 2 161 2 minecraft:fern",
         "fill 0 161 0 1 161 1 minecraft:air",
         "fill 0 160 0 1 160 1 twilightforest:twilight_portal",
-        f"say {FIXTURE_MARKER}",
     ]
+
+
+def fixture_verify_command():
+    return (
+        "execute if block 0 160 0 twilightforest:twilight_portal "
+        "if block 1 160 1 twilightforest:twilight_portal run seed"
+    )
 
 
 def summon_probe_command():
@@ -143,15 +150,13 @@ def summon_probe_command():
 def arrival_poll_command():
     return (
         f"execute in {TWILIGHT_DIMENSION} "
-        f"if entity @e[tag=kneekura_r2_probe,limit=1] run say {ARRIVAL_MARKER}"
-    )
-
-
-def position_query_command():
-    return (
-        f"execute in {TWILIGHT_DIMENSION} "
+        "if entity @e[tag=kneekura_r2_probe,limit=1] "
         "run data get entity @e[tag=kneekura_r2_probe,limit=1] Pos"
     )
+
+
+def kill_probe_command():
+    return f"execute in {TWILIGHT_DIMENSION} run kill @e[tag=kneekura_r2_probe]"
 
 
 def kill_tree(proc):
@@ -174,11 +179,6 @@ def reader(stream, q):
         q.put(None)
 
 
-def send_command(proc, command):
-    proc.stdin.write(command + "\n")
-    proc.stdin.flush()
-
-
 def parse_keepup_warning(line):
     m = re.search(
         r"Can't keep up!.*?Running\s+([0-9.]+)ms.*?([0-9]+)\s+ticks behind",
@@ -190,23 +190,23 @@ def parse_keepup_warning(line):
     return {"delay_ms": float(m.group(1)), "ticks_behind": int(m.group(2))}
 
 
-def parse_position(line):
+def parse_position(text):
     m = re.search(
         r"\[\s*(-?[0-9]+(?:\.[0-9]+)?)[dDfF]?\s*,\s*"
         r"(-?[0-9]+(?:\.[0-9]+)?)[dDfF]?\s*,\s*"
         r"(-?[0-9]+(?:\.[0-9]+)?)[dDfF]?\s*\]",
-        line,
+        text,
     )
     if not m:
         return None
     return [float(m.group(1)), float(m.group(2)), float(m.group(3))]
 
 
-def parse_debug_summary(line):
+def parse_debug_summary(text):
     m = re.search(
         r"(?:Stopped (?:the )?debug profiler after|Stopped profiling after)\s+"
         r"([0-9.]+)\s+seconds?.*?([0-9]+)\s+ticks?.*?\(([0-9.]+)\s+ticks per second\)",
-        line,
+        text,
         re.I,
     )
     if not m:
@@ -284,6 +284,105 @@ def copy_profiler_files(run_dir, profiler_dir):
     return copied
 
 
+def build_rcon_packet(request_id, packet_type, payload):
+    encoded = payload.encode("utf-8")
+    body = struct.pack("<ii", request_id, packet_type) + encoded + b"\x00\x00"
+    return struct.pack("<i", len(body)) + body
+
+
+def recv_exact(sock, length):
+    chunks = []
+    remaining = length
+    while remaining:
+        chunk = sock.recv(remaining)
+        if not chunk:
+            raise ConnectionError("RCON socket closed")
+        chunks.append(chunk)
+        remaining -= len(chunk)
+    return b"".join(chunks)
+
+
+def recv_rcon_packet(sock):
+    length = struct.unpack("<i", recv_exact(sock, 4))[0]
+    if length < 10 or length > 1024 * 1024:
+        raise ValueError(f"invalid RCON packet length: {length}")
+    body = recv_exact(sock, length)
+    request_id, packet_type = struct.unpack("<ii", body[:8])
+    payload = body[8:-2].decode("utf-8", errors="replace")
+    return request_id, packet_type, payload
+
+
+class RconClient:
+    def __init__(self, sock):
+        self.sock = sock
+        self.next_id = 100
+
+    @classmethod
+    def connect(cls, host, port, password, socket_timeout=15.0):
+        sock = socket.create_connection((host, port), timeout=socket_timeout)
+        sock.settimeout(socket_timeout)
+        client = cls(sock)
+        auth_id = 99
+        sock.sendall(build_rcon_packet(auth_id, 3, password))
+        for _ in range(3):
+            request_id, packet_type, payload = recv_rcon_packet(sock)
+            if request_id == -1:
+                sock.close()
+                raise PermissionError("RCON authentication failed")
+            if request_id == auth_id and packet_type == 2:
+                return client
+        sock.close()
+        raise RuntimeError("RCON authentication response not observed")
+
+    def command(self, command):
+        request_id = self.next_id
+        self.next_id += 1
+        self.sock.sendall(build_rcon_packet(request_id, 2, command))
+        for _ in range(4):
+            response_id, packet_type, payload = recv_rcon_packet(self.sock)
+            if response_id == request_id:
+                return payload
+        raise RuntimeError("RCON response id mismatch")
+
+    def close(self):
+        try:
+            self.sock.close()
+        except OSError:
+            pass
+
+
+def connect_rcon_with_retry(host, port, password, timeout_seconds, transcript):
+    deadline = time.perf_counter() + timeout_seconds
+    last_error = None
+    while time.perf_counter() < deadline:
+        try:
+            client = RconClient.connect(host, port, password)
+            transcript.append({"stage": "rcon_connect", "ok": True, "at_utc": utc_now()})
+            return client
+        except Exception as exc:
+            last_error = f"{type(exc).__name__}: {exc}"
+            time.sleep(1)
+    transcript.append({
+        "stage": "rcon_connect",
+        "ok": False,
+        "at_utc": utc_now(),
+        "error": last_error,
+    })
+    raise TimeoutError(f"RCON connection not established within {timeout_seconds}s: {last_error}")
+
+
+def run_rcon_command(client, transcript, stage, command):
+    started = time.perf_counter()
+    response = client.command(command)
+    transcript.append({
+        "stage": stage,
+        "command": command,
+        "response": response,
+        "elapsed_seconds": round(time.perf_counter() - started, 6),
+    })
+    return response
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--track", choices=["anchor", "frontier"], required=True)
@@ -295,8 +394,10 @@ def main():
     ap.add_argument("--gradle-task", required=True)
     ap.add_argument("--output-dir", type=Path, required=True)
     ap.add_argument("--startup-timeout-seconds", type=int, default=2400)
+    ap.add_argument("--control-timeout-seconds", type=int, default=120)
     ap.add_argument("--entry-timeout-seconds", type=int, default=1800)
     ap.add_argument("--shutdown-seconds", type=int, default=90)
+    ap.add_argument("--rcon-port", type=int, default=RCON_DEFAULT_PORT)
     ap.add_argument("--world-seed", default="20260923")
     ap.add_argument("--view-distance", type=int, default=10)
     ap.add_argument("--simulation-distance", type=int, default=10)
@@ -327,9 +428,13 @@ def main():
             f"level-seed={args.world_seed}",
             f"view-distance={args.view_distance}",
             f"simulation-distance={args.simulation_distance}",
+            "server-ip=127.0.0.1",
             "online-mode=false",
             "enable-query=false",
-            "enable-rcon=false",
+            "enable-rcon=true",
+            f"rcon.port={args.rcon_port}",
+            f"rcon.password={RCON_PASSWORD}",
+            "broadcast-rcon-to-ops=false",
             "spawn-protection=0",
             "difficulty=peaceful",
             "motd=Twilight Forest Runtime Evidence R2",
@@ -340,7 +445,7 @@ def main():
 
     java = capture(["java", "-version"])
     environment = {
-        "record_version": "1.0",
+        "record_version": "1.1",
         "captured_at_utc": utc_now(),
         "scenario": "R2-first-twilight-entry",
         "track": args.track,
@@ -368,6 +473,13 @@ def main():
             "simulation_distance": args.simulation_distance,
             "fresh_world_required": True,
         },
+        "control": {
+            "transport": "localhost_rcon",
+            "host": "127.0.0.1",
+            "port": args.rcon_port,
+            "password_committed": False,
+            "control_timeout_seconds": args.control_timeout_seconds,
+        },
         "profiler": {
             "tool": "vanilla debug command when available",
             "allocation_profiler": None,
@@ -375,12 +487,13 @@ def main():
         },
     }
     scenario = {
-        "record_version": "1.0",
+        "record_version": "1.1",
         "scenario_id": "R2",
         "name": "first_twilight_dimension_entry",
         "mode": "headless dedicated-server portal fixture",
         "track": args.track,
         "startup_timeout_seconds": args.startup_timeout_seconds,
+        "control_timeout_seconds": args.control_timeout_seconds,
         "entry_timeout_seconds": args.entry_timeout_seconds,
         "shutdown_seconds": args.shutdown_seconds,
         "world_seed": args.world_seed,
@@ -390,6 +503,8 @@ def main():
         "probe_entity_tag": "kneekura_r2_probe",
         "destination_dimension": TWILIGHT_DIMENSION,
         "fixture_commands": build_portal_fixture_commands(),
+        "fixture_verify_command": fixture_verify_command(),
+        "control_transport": "localhost_rcon",
         "boundary": "R2 only; R3-R9 and overall performance comparisons are not measured.",
     }
     (out / "environment.json").write_text(json.dumps(environment, indent=2) + "\n", encoding="utf-8")
@@ -408,7 +523,7 @@ def main():
     proc = subprocess.Popen(
         command,
         cwd=str(repo),
-        stdin=subprocess.PIPE,
+        stdin=subprocess.DEVNULL,
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
         text=True,
@@ -419,7 +534,10 @@ def main():
     q = queue.Queue()
     threading.Thread(target=reader, args=(proc.stdout, q), daemon=True).start()
 
+    transcript = []
+    rcon = None
     startup_ready_elapsed = None
+    rcon_connected_elapsed = None
     fixture_ready_elapsed = None
     debug_ready_elapsed = None
     trigger_perf = None
@@ -431,152 +549,250 @@ def main():
     debug_summary = None
     keepup_warnings = []
     structure_markers = []
-    position_query_sent_at = None
-    entry_timed_out = False
     startup_timed_out = False
+    control_timed_out = False
+    entry_timed_out = False
+    failure_stage = None
+    failure_reason = None
     stop_sent = False
     shutdown = "process_exit"
     output_closed = False
-    last_poll = 0.0
-    arrival_actions_at = None
     log_path = logs / "console.log"
 
-    with log_path.open("w", encoding="utf-8", newline="\n") as log:
+    def observe_line(line, elapsed):
+        nonlocal destination_prepare_start, destination_portal_ready, debug_summary
+        if trigger_perf is not None:
+            trigger_elapsed = max(0.0, time.perf_counter() - trigger_perf)
+            if destination_prepare_start is None and prepare_start_re.search(line):
+                destination_prepare_start = trigger_elapsed
+            if destination_portal_ready is None and portal_ready_re.search(line):
+                destination_portal_ready = trigger_elapsed
+            warning = parse_keepup_warning(line)
+            if warning:
+                warning["elapsed_seconds"] = round(trigger_elapsed, 6)
+                keepup_warnings.append(warning)
+            if len(structure_markers) < 100 and re.search(
+                r"(twilightforest.*(?:structure|landmark)|(?:structure|landmark).*twilightforest)",
+                line,
+                re.I,
+            ):
+                structure_markers.append({
+                    "elapsed_seconds": round(trigger_elapsed, 6),
+                    "line": line.strip()[:1000],
+                })
+        if debug_summary is None:
+            parsed = parse_debug_summary(line)
+            if parsed:
+                debug_summary = parsed
+
+    def drain_logs(log, block_timeout=0.0):
+        nonlocal output_closed
+        first = True
         while True:
-            now = time.perf_counter()
-            elapsed = now - process_start
+            try:
+                line = q.get(timeout=block_timeout if first else 0)
+            except queue.Empty:
+                return
+            first = False
+            if line is None:
+                output_closed = True
+                return
+            elapsed = time.perf_counter() - process_start
+            log.write(f"[+{elapsed:.3f}s] {line}")
+            log.flush()
+            observe_line(line, elapsed)
 
-            if startup_ready_elapsed is None and elapsed > args.startup_timeout_seconds:
+    with log_path.open("w", encoding="utf-8", newline="\n") as log:
+        # Stage 1: dedicated server ready.
+        while startup_ready_elapsed is None:
+            elapsed = time.perf_counter() - process_start
+            if elapsed > args.startup_timeout_seconds:
                 startup_timed_out = True
+                failure_stage = "startup"
+                failure_reason = f"server ready not observed within {args.startup_timeout_seconds}s"
                 shutdown = kill_tree(proc)
                 break
-            if trigger_perf is not None and arrival_elapsed is None and now - trigger_perf > args.entry_timeout_seconds:
-                entry_timed_out = True
-                shutdown = kill_tree(proc)
+            if proc.poll() is not None:
+                failure_stage = "startup"
+                failure_reason = f"server process exited before ready with code {proc.returncode}"
                 break
-
-            if trigger_perf is not None and arrival_elapsed is None and now - last_poll >= 0.5:
-                try:
-                    send_command(proc, arrival_poll_command())
-                    last_poll = now
-                except Exception:
-                    shutdown = "arrival_poll_pipe_failed"
-                    kill_tree(proc)
-                    break
-
-            if arrival_actions_at is not None and not stop_sent and now - arrival_actions_at >= 5.0:
-                try:
-                    send_command(proc, "stop")
-                    stop_sent = True
-                    shutdown = "graceful_stop_command"
-                except Exception:
-                    shutdown = "arrival_but_stop_pipe_failed"
-                    kill_tree(proc)
-                    break
-
             try:
                 line = q.get(timeout=0.25)
             except queue.Empty:
-                line = ""
-
+                continue
             if line is None:
                 output_closed = True
-            elif line:
-                log.write(f"[+{elapsed:.3f}s] {line}")
-                log.flush()
+                continue
+            log.write(f"[+{elapsed:.3f}s] {line}")
+            log.flush()
+            observe_line(line, elapsed)
+            if ready_re.search(line):
+                startup_ready_elapsed = elapsed
 
-                if startup_ready_elapsed is None and ready_re.search(line):
-                    startup_ready_elapsed = elapsed
-                    for cmd in build_portal_fixture_commands():
-                        send_command(proc, cmd)
+        # Stage 2: establish localhost RCON.
+        if startup_ready_elapsed is not None and failure_stage is None:
+            try:
+                rcon = connect_rcon_with_retry(
+                    "127.0.0.1",
+                    args.rcon_port,
+                    RCON_PASSWORD,
+                    args.control_timeout_seconds,
+                    transcript,
+                )
+                rcon_connected_elapsed = time.perf_counter() - process_start
+            except Exception as exc:
+                control_timed_out = isinstance(exc, TimeoutError)
+                failure_stage = "rcon_connect"
+                failure_reason = f"{type(exc).__name__}: {exc}"
 
-                if startup_ready_elapsed is not None and fixture_ready_elapsed is None and FIXTURE_MARKER in line:
-                    fixture_ready_elapsed = elapsed
-                    send_command(proc, "debug start")
-                    send_command(proc, f"say {DEBUG_MARKER}")
+        # Stage 3: construct and verify fixture.
+        if rcon is not None and failure_stage is None:
+            deadline = time.perf_counter() + args.control_timeout_seconds
+            try:
+                for command_text in build_portal_fixture_commands():
+                    if time.perf_counter() > deadline:
+                        raise TimeoutError("fixture setup deadline exceeded")
+                    run_rcon_command(rcon, transcript, "fixture", command_text)
+                    drain_logs(log)
+                verify = run_rcon_command(rcon, transcript, "fixture_verify", fixture_verify_command())
+                if "seed" not in verify.lower():
+                    raise RuntimeError(f"fixture verification did not return seed: {verify!r}")
+                fixture_ready_elapsed = time.perf_counter() - process_start
+            except Exception as exc:
+                control_timed_out = isinstance(exc, TimeoutError)
+                failure_stage = "fixture"
+                failure_reason = f"{type(exc).__name__}: {exc}"
 
-                if fixture_ready_elapsed is not None and debug_ready_elapsed is None and DEBUG_MARKER in line:
-                    debug_ready_elapsed = elapsed
-                    trigger_perf = time.perf_counter()
-                    last_poll = trigger_perf
-                    send_command(proc, summon_probe_command())
+        # Stage 4: start profiler and trigger real portal entry.
+        if rcon is not None and failure_stage is None:
+            try:
+                debug_response = run_rcon_command(rcon, transcript, "debug_start", "debug start")
+                debug_ready_elapsed = time.perf_counter() - process_start
+                trigger_perf = time.perf_counter()
+                run_rcon_command(rcon, transcript, "entry_trigger", summon_probe_command())
+                transcript.append({"stage": "debug_start_response", "response": debug_response})
+            except Exception as exc:
+                failure_stage = "debug_or_trigger"
+                failure_reason = f"{type(exc).__name__}: {exc}"
 
-                if trigger_perf is not None:
-                    trigger_elapsed = now - trigger_perf
-                    if destination_prepare_start is None and prepare_start_re.search(line):
-                        destination_prepare_start = trigger_elapsed
-                    if destination_portal_ready is None and portal_ready_re.search(line):
-                        destination_portal_ready = trigger_elapsed
-
-                    warning = parse_keepup_warning(line)
-                    if warning:
-                        warning["elapsed_seconds"] = trigger_elapsed
-                        keepup_warnings.append(warning)
-
-                    if len(structure_markers) < 100 and re.search(r"(twilightforest.*(?:structure|landmark)|(?:structure|landmark).*twilightforest)", line, re.I):
-                        structure_markers.append({
-                            "elapsed_seconds": round(trigger_elapsed, 6),
-                            "line": line.strip()[:1000],
-                        })
-
-                if trigger_perf is not None and arrival_elapsed is None and ARRIVAL_MARKER in line:
-                    arrival_elapsed = now - trigger_perf
-                    send_command(proc, position_query_command())
-                    position_query_sent_at = now
-                    send_command(proc, "debug stop")
-                    send_command(proc, "save-all flush")
-                    send_command(
-                        proc,
-                        f"execute in {TWILIGHT_DIMENSION} run kill @e[tag=kneekura_r2_probe]",
-                    )
-                    arrival_actions_at = now
-
-                if position_query_sent_at is not None and arrival_position is None and now - position_query_sent_at < 10:
-                    pos = parse_position(line)
-                    if pos is not None:
-                        arrival_position = pos
-                        arrival_position_raw = line.strip()[:1000]
-
-                if debug_summary is None:
-                    parsed = parse_debug_summary(line)
-                    if parsed:
-                        debug_summary = parsed
-
-            if proc.poll() is not None and output_closed:
-                break
-            if stop_sent and proc.poll() is None and arrival_actions_at is not None:
-                if now - arrival_actions_at > args.shutdown_seconds:
-                    shutdown = kill_tree(proc)
+        # Stage 5: poll actual entity presence in the Twilight dimension.
+        if rcon is not None and trigger_perf is not None and failure_stage is None:
+            deadline = trigger_perf + args.entry_timeout_seconds
+            while arrival_elapsed is None:
+                if time.perf_counter() > deadline:
+                    entry_timed_out = True
+                    failure_stage = "entry"
+                    failure_reason = f"Twilight arrival not observed within {args.entry_timeout_seconds}s"
                     break
+                if proc.poll() is not None:
+                    failure_stage = "entry"
+                    failure_reason = f"server process exited during entry with code {proc.returncode}"
+                    break
+                drain_logs(log)
+                try:
+                    response = run_rcon_command(rcon, transcript, "arrival_poll", arrival_poll_command())
+                except Exception as exc:
+                    failure_stage = "arrival_poll"
+                    failure_reason = f"{type(exc).__name__}: {exc}"
+                    break
+                pos = parse_position(response)
+                if pos is not None:
+                    arrival_elapsed = time.perf_counter() - trigger_perf
+                    arrival_position = pos
+                    arrival_position_raw = response[:1000]
+                    break
+                time.sleep(0.5)
 
-    try:
-        exit_code = proc.wait(timeout=5)
-    except subprocess.TimeoutExpired:
-        shutdown = kill_tree(proc)
-        exit_code = proc.wait(timeout=5)
+        # Stage 6: collect profiler/save evidence and stop.
+        if rcon is not None and arrival_elapsed is not None:
+            try:
+                response = run_rcon_command(rcon, transcript, "debug_stop", "debug stop")
+                parsed = parse_debug_summary(response)
+                if parsed:
+                    debug_summary = parsed
+            except Exception as exc:
+                transcript.append({"stage": "debug_stop", "error": f"{type(exc).__name__}: {exc}"})
+            try:
+                run_rcon_command(rcon, transcript, "save", "save-all flush")
+            except Exception as exc:
+                transcript.append({"stage": "save", "error": f"{type(exc).__name__}: {exc}"})
+            try:
+                run_rcon_command(rcon, transcript, "cleanup", kill_probe_command())
+            except Exception as exc:
+                transcript.append({"stage": "cleanup", "error": f"{type(exc).__name__}: {exc}"})
+            try:
+                run_rcon_command(rcon, transcript, "shutdown", "stop")
+                stop_sent = True
+                shutdown = "rcon_stop_command"
+            except Exception as exc:
+                # Minecraft may close RCON before replying to stop.
+                transcript.append({"stage": "shutdown", "error": f"{type(exc).__name__}: {exc}"})
+                stop_sent = True
+                shutdown = "rcon_stop_disconnect"
+
+        # Any failed stage still gets bounded shutdown.
+        if failure_stage is not None and proc.poll() is None:
+            if rcon is not None:
+                try:
+                    run_rcon_command(rcon, transcript, "failure_shutdown", "stop")
+                    stop_sent = True
+                    shutdown = "rcon_stop_after_failure"
+                except Exception as exc:
+                    transcript.append({"stage": "failure_shutdown", "error": f"{type(exc).__name__}: {exc}"})
+            deadline = time.perf_counter() + min(args.shutdown_seconds, 30)
+            while proc.poll() is None and time.perf_counter() < deadline:
+                drain_logs(log, 0.25)
+            if proc.poll() is None:
+                shutdown = kill_tree(proc)
+
+        # Successful stop is also bounded.
+        if arrival_elapsed is not None and proc.poll() is None:
+            deadline = time.perf_counter() + args.shutdown_seconds
+            while proc.poll() is None and time.perf_counter() < deadline:
+                drain_logs(log, 0.25)
+            if proc.poll() is None:
+                shutdown = kill_tree(proc)
+
+        if rcon is not None:
+            rcon.close()
+        try:
+            exit_code = proc.wait(timeout=5)
+        except subprocess.TimeoutExpired:
+            shutdown = kill_tree(proc)
+            exit_code = proc.wait(timeout=5)
+
+        # Drain remaining process output after exit/kill.
+        for _ in range(10000):
+            if output_closed:
+                break
+            before = output_closed
+            drain_logs(log, 0.01)
+            if output_closed or before == output_closed and q.empty():
+                break
 
     total = time.perf_counter() - process_start
+    transcript_path = logs / "rcon-transcript.json"
+    transcript_path.write_text(json.dumps(transcript, indent=2) + "\n", encoding="utf-8")
     profiler_files = copy_profiler_files(run_dir, profiler)
     world_inspection = inspect_twilight_regions(world_dir)
     world_inspection_path = out / "world-inspection.json"
     world_inspection_path.write_text(json.dumps(world_inspection, indent=2) + "\n", encoding="utf-8")
 
-    max_warning = None
-    if keepup_warnings:
-        max_warning = max(keepup_warnings, key=lambda x: x["delay_ms"])
-
-    success = arrival_elapsed is not None and not entry_timed_out and not startup_timed_out
+    max_warning = max(keepup_warnings, key=lambda x: x["delay_ms"]) if keepup_warnings else None
+    success = arrival_elapsed is not None and failure_stage is None
     destination_prepare_elapsed = None
     if destination_prepare_start is not None and destination_portal_ready is not None:
         destination_prepare_elapsed = max(0.0, destination_portal_ready - destination_prepare_start)
 
     metrics = {
-        "record_version": "1.0",
+        "record_version": "1.1",
         "scenario_id": "R2",
         "track": args.track,
         "process_start_utc": start_wall,
         "startup_ready_elapsed_seconds": round(startup_ready_elapsed, 6) if startup_ready_elapsed is not None else None,
+        "rcon_connected_elapsed_seconds": round(rcon_connected_elapsed, 6) if rcon_connected_elapsed is not None else None,
         "fixture_ready_elapsed_seconds": round(fixture_ready_elapsed, 6) if fixture_ready_elapsed is not None else None,
+        "debug_ready_elapsed_seconds": round(debug_ready_elapsed, 6) if debug_ready_elapsed is not None else None,
         "entry_success": success,
         "entry_command_elapsed_seconds": round(arrival_elapsed, 6) if arrival_elapsed is not None else None,
         "destination_prepare_start_elapsed_seconds": round(destination_prepare_start, 6) if destination_prepare_start is not None else None,
@@ -594,7 +810,10 @@ def main():
         "allocation_bytes": None,
         "allocation_note": "not measured; no unambiguous allocation profiler is enabled in R2",
         "startup_timed_out": startup_timed_out,
+        "control_timed_out": control_timed_out,
         "entry_timed_out": entry_timed_out,
+        "failure_stage": failure_stage,
+        "failure_reason": failure_reason,
         "process_exit_code": exit_code,
         "stop_command_sent": stop_sent,
         "shutdown_method": shutdown,
@@ -614,11 +833,14 @@ def main():
         f"- source commit: {actual}",
         f"- first Twilight entry observed: **{'yes' if success else 'no'}**",
         f"- trigger → Twilight arrival: **{f'{arrival_elapsed:.3f} s' if arrival_elapsed is not None else 'not observed'}**",
+        f"- failure stage: **{failure_stage or 'none'}**",
+        f"- failure reason: **{failure_reason or 'none'}**",
         f"- saved Twilight chunks after entry: **{world_inspection['saved_chunk_count']}**",
         f"- tick-spike warnings: **{len(keepup_warnings)}**",
         f"- process exit code: {exit_code}",
         f"- shutdown: {shutdown}",
         f"- raw console SHA-256: {sha256(log_path)}",
+        f"- RCON transcript SHA-256: {sha256(transcript_path)}",
         "",
         "R2 measures one deterministic headless first-entry fixture only. It does not establish R3-R9 results or an overall ANCHOR-vs-FRONTIER performance ranking.",
         "",
@@ -626,11 +848,12 @@ def main():
     (out / "evidence-summary.md").write_text(summary, encoding="utf-8")
 
     manifest = {
-        "record_version": "1.0",
+        "record_version": "1.1",
         "scenario_id": "R2",
         "track": args.track,
         "raw_artifacts": {
             "logs/console.log": {"sha256": sha256(log_path), "committed": False},
+            "logs/rcon-transcript.json": {"sha256": sha256(transcript_path), "committed": False},
             "world-inspection.json": {"sha256": sha256(world_inspection_path), "committed": False},
         },
         "compact_files": {},
