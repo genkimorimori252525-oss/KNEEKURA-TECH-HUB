@@ -121,28 +121,28 @@ def build_gradle_command(repo, gradle_task):
 
 def build_portal_fixture_commands():
     return [
-        "gamerule doMobSpawning false",
+        "forceload add 7 7 10 10",
         "difficulty peaceful",
         "time set day",
         "weather clear",
-        "fill -1 159 -1 2 159 2 minecraft:dirt",
-        "fill -1 160 -1 2 160 2 minecraft:dirt",
-        "fill -1 161 -1 2 161 2 minecraft:fern",
-        "fill 0 161 0 1 161 1 minecraft:air",
-        "fill 0 160 0 1 160 1 twilightforest:twilight_portal",
+        "fill 7 159 7 10 159 10 minecraft:dirt",
+        "fill 7 160 7 10 160 10 minecraft:dirt",
+        "fill 7 161 7 10 161 10 minecraft:fern",
+        "fill 8 161 8 9 161 9 minecraft:air",
+        "fill 8 160 8 9 160 9 twilightforest:twilight_portal",
     ]
 
 
 def fixture_verify_command():
     return (
-        "execute if block 0 160 0 twilightforest:twilight_portal "
-        "if block 1 160 1 twilightforest:twilight_portal run seed"
+        "execute if block 8 160 8 twilightforest:twilight_portal "
+        "if block 9 160 9 twilightforest:twilight_portal run seed"
     )
 
 
 def summon_probe_command():
     return (
-        'summon minecraft:pig 0.5 160.1 0.5 '
+        'summon minecraft:pig 8.5 160.1 8.5 '
         '{NoAI:1b,Invulnerable:1b,PersistenceRequired:1b,Tags:["kneekura_r2_probe"]}'
     )
 
@@ -150,6 +150,14 @@ def summon_probe_command():
 def arrival_poll_command():
     return (
         f"execute in {TWILIGHT_DIMENSION} "
+        "if entity @e[tag=kneekura_r2_probe,limit=1] "
+        "run data get entity @e[tag=kneekura_r2_probe,limit=1] Pos"
+    )
+
+
+def origin_poll_command():
+    return (
+        "execute in minecraft:overworld "
         "if entity @e[tag=kneekura_r2_probe,limit=1] "
         "run data get entity @e[tag=kneekura_r2_probe,limit=1] Pos"
     )
@@ -240,31 +248,61 @@ def region_chunk_coordinates(region_path):
 
 
 def inspect_twilight_regions(world_dir):
-    region_dirs = []
+    all_regions = []
     if world_dir.exists():
-        for p in world_dir.rglob("region"):
+        for p in sorted(world_dir.rglob("region")):
             if not p.is_dir():
                 continue
-            low = p.as_posix().lower()
-            if "twilightforest" in low and "twilight_forest" in low:
-                region_dirs.append(p)
-    chunks = set()
-    files = []
-    for region_dir in sorted(region_dirs):
-        for region in sorted(region_dir.glob("r.*.*.mca")):
-            coords = region_chunk_coordinates(region)
-            chunks.update((x, z) for x, z in coords)
-            files.append({
-                "path": region.relative_to(world_dir).as_posix(),
-                "sha256": sha256(region),
-                "chunk_count": len(coords),
+            rel = p.relative_to(world_dir).as_posix()
+            files = []
+            chunks = set()
+            for region in sorted(p.glob("r.*.*.mca")):
+                coords = region_chunk_coordinates(region)
+                chunks.update((x, z) for x, z in coords)
+                files.append({
+                    "path": region.relative_to(world_dir).as_posix(),
+                    "sha256": sha256(region),
+                    "chunk_count": len(coords),
+                })
+            all_regions.append({
+                "path": rel,
+                "chunk_count": len(chunks),
+                "chunks": [[x, z] for x, z in sorted(chunks)],
+                "files": files,
             })
-    ordered = sorted(chunks)
+
+    explicit = [
+        item for item in all_regions
+        if "twilightforest" in item["path"].lower()
+        and "twilight_forest" in item["path"].lower()
+    ]
+    vanilla_paths = {"region", "dim-1/region", "dim1/region"}
+    non_vanilla = [
+        item for item in all_regions
+        if item["path"].lower() not in vanilla_paths
+    ]
+
+    selected = None
+    classification = None
+    if len(explicit) == 1:
+        selected = explicit[0]
+        classification = "namespace_path"
+    elif len(explicit) > 1:
+        classification = "ambiguous_namespace_paths"
+    elif len(non_vanilla) == 1:
+        selected = non_vanilla[0]
+        classification = "single_non_vanilla_region_dir"
+    elif len(non_vanilla) > 1:
+        classification = "ambiguous_non_vanilla_region_dirs"
+    else:
+        classification = "no_custom_region_dir_found"
+
     return {
-        "region_dirs": [p.relative_to(world_dir).as_posix() for p in region_dirs],
-        "region_files": files,
-        "saved_chunk_count": len(ordered),
-        "saved_chunks": [[x, z] for x, z in ordered],
+        "classification": classification,
+        "selected_region_dir": selected["path"] if selected else None,
+        "all_region_dirs": all_regions,
+        "saved_chunk_count": selected["chunk_count"] if selected else None,
+        "saved_chunks": selected["chunks"] if selected else [],
     }
 
 
@@ -497,7 +535,7 @@ def main():
         "entry_timeout_seconds": args.entry_timeout_seconds,
         "shutdown_seconds": args.shutdown_seconds,
         "world_seed": args.world_seed,
-        "source_portal_origin": [0, 160, 0],
+        "source_portal_origin": [8, 160, 8],
         "source_portal_size": [2, 1, 2],
         "probe_entity": "minecraft:pig",
         "probe_entity_tag": "kneekura_r2_probe",
@@ -671,6 +709,7 @@ def main():
                 trigger_perf = time.perf_counter()
                 run_rcon_command(rcon, transcript, "entry_trigger", summon_probe_command())
                 transcript.append({"stage": "debug_start_response", "response": debug_response})
+                time.sleep(0.05)
             except Exception as exc:
                 failure_stage = "debug_or_trigger"
                 failure_reason = f"{type(exc).__name__}: {exc}"
@@ -697,6 +736,17 @@ def main():
                     break
                 pos = parse_position(response)
                 if pos is not None:
+                    origin_response = run_rcon_command(
+                        rcon, transcript, "origin_absence_poll", origin_poll_command()
+                    )
+                    origin_pos = parse_position(origin_response)
+                    if origin_pos is not None:
+                        failure_stage = "arrival_verification"
+                        failure_reason = (
+                            "probe selector resolved in both Twilight and Overworld; "
+                            "dimension-scoped arrival could not be proven"
+                        )
+                        break
                     arrival_elapsed = time.perf_counter() - trigger_perf
                     arrival_position = pos
                     arrival_position_raw = response[:1000]
@@ -835,7 +885,7 @@ def main():
         f"- trigger → Twilight arrival: **{f'{arrival_elapsed:.3f} s' if arrival_elapsed is not None else 'not observed'}**",
         f"- failure stage: **{failure_stage or 'none'}**",
         f"- failure reason: **{failure_reason or 'none'}**",
-        f"- saved Twilight chunks after entry: **{world_inspection['saved_chunk_count']}**",
+        f"- saved Twilight chunks after entry: **{world_inspection['saved_chunk_count'] if world_inspection['saved_chunk_count'] is not None else 'unresolved'}**",
         f"- tick-spike warnings: **{len(keepup_warnings)}**",
         f"- process exit code: {exit_code}",
         f"- shutdown: {shutdown}",

@@ -19,12 +19,14 @@ def load_tool():
 def test_portal_fixture_is_fixed_and_uses_real_twilight_portal():
     mod = load_tool()
     commands = mod.build_portal_fixture_commands()
-    assert "fill 0 160 0 1 160 1 twilightforest:twilight_portal" in commands
-    assert "fill -1 161 -1 2 161 2 minecraft:fern" in commands
+    assert commands[0] == "forceload add 7 7 10 10"
+    assert "fill 8 160 8 9 160 9 twilightforest:twilight_portal" in commands
+    assert "fill 7 161 7 10 161 10 minecraft:fern" in commands
     assert mod.TWILIGHT_DIMENSION == "twilightforest:twilight_forest"
     assert "kneekura_r2_probe" in mod.summon_probe_command()
     assert "run seed" in mod.fixture_verify_command()
     assert "data get entity" in mod.arrival_poll_command()
+    assert "minecraft:overworld" in mod.origin_poll_command()
 
 
 def test_region_chunk_coordinates_reads_anvil_location_table(tmp_path: Path):
@@ -69,3 +71,24 @@ def test_r2_workflow_preserves_track_specific_java_tasks_and_bounds():
     assert "--control-timeout-seconds 120" in workflow
     assert "run_runtime_r2.py" in workflow
     assert "RUNTIME-R2-LATEST.json" in workflow
+
+def test_world_region_inspection_uses_single_non_vanilla_fallback(tmp_path: Path):
+    mod = load_tool()
+    (tmp_path / "region").mkdir()
+    custom = tmp_path / "DIM7" / "region"
+    custom.mkdir(parents=True)
+    header = bytearray(4096)
+    header[0:4] = bytes([0, 0, 2, 1])
+    (custom / "r.0.0.mca").write_bytes(header)
+    result = mod.inspect_twilight_regions(tmp_path)
+    assert result["classification"] == "single_non_vanilla_region_dir"
+    assert result["selected_region_dir"] == "DIM7/region"
+    assert result["saved_chunk_count"] == 1
+
+
+def test_world_region_inspection_does_not_fake_zero_when_unresolved(tmp_path: Path):
+    mod = load_tool()
+    (tmp_path / "region").mkdir()
+    result = mod.inspect_twilight_regions(tmp_path)
+    assert result["classification"] == "no_custom_region_dir_found"
+    assert result["saved_chunk_count"] is None

@@ -9,7 +9,7 @@ R2 is a separate runtime scenario from R1. R1 startup timings must not be reused
 - ANCHOR: `a7dd8f13c653e137f977f5ffaa870fcb20fc1625`
 - FRONTIER: `793c4d4c7b0a2892f702cbb9a8d751fbe7218828`
 - fixed world seed: `20260923`
-- source portal origin: Overworld `(0, 160, 0)` 2x2 portal pool
+- source portal origin: Overworld `(8, 160, 8)` 2x2 portal pool
 - probe entity tag: `kneekura_r2_probe`
 
 ## Why the fixture is a server-side entity
@@ -38,12 +38,13 @@ This means the fixture preserves each generation's actual portal transition impl
 
 The probe creates a deterministic portal fixture at y=160 after the dedicated server reaches ready.
 
-1. Build a 4x4 dirt support floor at y=159.
-2. Build a 4x4 dirt layer at y=160.
-3. Put `minecraft:fern` around the perimeter at y=161.
-4. Clear the center 2x2 at y=161.
-5. Replace the center 2x2 at y=160 with `twilightforest:twilight_portal`.
-6. Summon one `minecraft:pig` with `NoAI:1b`, invulnerability, persistence and tag `kneekura_r2_probe` inside the portal.
+1. Force-load block range (7,7) through (10,10), wholly inside source chunk (0,0), for deterministic fixture construction.
+2. Build a 4x4 dirt support floor at y=159 over x/z 7..10.
+3. Build a 4x4 dirt layer at y=160 over x/z 7..10.
+4. Put `minecraft:fern` around that perimeter at y=161.
+5. Clear the center 2x2 at x/z 8..9, y=161.
+6. Replace the center 2x2 at x/z 8..9, y=160 with `twilightforest:twilight_portal`.
+7. Summon one `minecraft:pig` at (8.5,160.1,8.5) with `NoAI:1b`, invulnerability, persistence and tag `kneekura_r2_probe` inside the portal.
 
 `minecraft:dirt` is accepted by the portal-edge tag through `#minecraft:dirt`; `minecraft:fern` is explicitly accepted by both pinned portal-decoration tags.
 
@@ -63,7 +64,7 @@ After the dedicated-server ready marker:
 6. poll the Twilight dimension through RCON with:
    `execute in twilightforest:twilight_forest if entity @e[tag=kneekura_r2_probe,limit=1] run data get entity @e[tag=kneekura_r2_probe,limit=1] Pos`.
 
-The first response containing a parseable entity `Pos` list is the server-side R2 arrival marker and also supplies the measured arrival coordinates.
+A parseable Twilight-dimension `Pos` response is accepted only after an immediate second RCON query confirms the tagged probe is absent from `minecraft:overworld`. This two-sided check prevents a selector/control ambiguity from being mistaken for a dimension transition.
 
 After arrival, the probe issues `debug stop`, `save-all flush`, removes the probe entity and requests `stop` through RCON. RCON connection, fixture setup, debug/trigger setup, entry polling and shutdown are all explicitly bounded; no post-ready stage may wait indefinitely.
 
@@ -89,6 +90,8 @@ The teleporter's destination preparation forces/searches destination chunks as p
 
 Saved Twilight region files are inspected after shutdown:
 
+- all saved Anvil region directories are enumerated rather than assuming one folder layout;
+- the Twilight region directory is selected by explicit `twilightforest/twilight_forest` path when unique, otherwise by a single non-vanilla region-directory fallback; ambiguous or absent candidates produce a null-with-reason result rather than a fake zero;
 - the Anvil region location table is used to enumerate saved destination chunks;
 - chunk count/coordinates are derived without launching another Minecraft instance;
 - structure activity is reported only when an unambiguous structure identifier/start can be extracted from generated chunk evidence or source-emitted logs.
