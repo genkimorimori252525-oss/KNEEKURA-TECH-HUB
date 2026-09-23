@@ -1,0 +1,39 @@
+{
+  "record_version": "1.1",
+  "scenario_id": "R2",
+  "name": "first_twilight_dimension_entry",
+  "mode": "headless dedicated-server portal fixture",
+  "track": "frontier",
+  "startup_timeout_seconds": 2400,
+  "control_timeout_seconds": 120,
+  "entry_timeout_seconds": 1800,
+  "shutdown_seconds": 90,
+  "world_seed": "20260923",
+  "source_portal_origin": [
+    0,
+    160,
+    0
+  ],
+  "source_portal_size": [
+    2,
+    1,
+    2
+  ],
+  "probe_entity": "minecraft:pig",
+  "probe_entity_tag": "kneekura_r2_probe",
+  "destination_dimension": "twilightforest:twilight_forest",
+  "fixture_commands": [
+    "gamerule doMobSpawning false",
+    "difficulty peaceful",
+    "time set day",
+    "weather clear",
+    "fill -1 159 -1 2 159 2 minecraft:dirt",
+    "fill -1 160 -1 2 160 2 minecraft:dirt",
+    "fill -1 161 -1 2 161 2 minecraft:fern",
+    "fill 0 161 0 1 161 1 minecraft:air",
+    "fill 0 160 0 1 160 1 twilightforest:twilight_portal"
+  ],
+  "fixture_verify_command": "execute if block 0 160 0 twilightforest:twilight_portal if block 1 160 1 twilightforest:twilight_portal run seed",
+  "control_transport": "localhost_rcon",
+  "boundary": "R2 only; R3-R9 and overall performance comparisons are not measured."
+}

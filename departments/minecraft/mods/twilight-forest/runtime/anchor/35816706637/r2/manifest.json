@@ -1,0 +1,37 @@
+{
+  "record_version": "1.1",
+  "scenario_id": "R2",
+  "track": "anchor",
+  "raw_artifacts": {
+    "logs/console.log": {
+      "sha256": "b2cc22f1001f25e8d9f064151282d0b6e99c65ab2e2e7126c3d83c956eda9286",
+      "committed": false
+    },
+    "logs/rcon-transcript.json": {
+      "sha256": "9bc9707f3fe1d40cab5b650bcb0dfc972a358ebd837eeea002e096357c27169e",
+      "committed": false
+    },
+    "world-inspection.json": {
+      "sha256": "25be4068fafbe1583bb0186b3928d849b510d61411b58c3d50e09ea28409d725",
+      "committed": false
+    }
+  },
+  "compact_files": {
+    "environment.json": {
+      "sha256": "bf9795ba1e3c7c01e530c3902e79e03f3a9c1e94a63ea9956cf2943f3fa71a37",
+      "committed": true
+    },
+    "scenario.json": {
+      "sha256": "e1f8997b56805a20ad0ca3ddacba1735d0e57f61824a73a21308b31f954882a1",
+      "committed": true
+    },
+    "metrics.json": {
+      "sha256": "852b0d73f7e0aeb696bdb9e3e454f4ca2b40fb9fab984e3ecf1e6c50529f3f8e",
+      "committed": true
+    },
+    "evidence-summary.md": {
+      "sha256": "c26c7ae630e718aeb8d2ec84e5770745ea022cc127dece2ca628839816d62cd2",
+      "committed": true
+    }
+  }
+}
