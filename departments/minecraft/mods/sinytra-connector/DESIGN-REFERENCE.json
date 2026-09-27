@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "record_kind": "DESIGN_REFERENCE_NOT_SOURCE_SNAPSHOT",
+  "status": "QUEUED",
+  "upstream": "https://github.com/Sinytra/Connector",
+  "track": "ANCHOR",
+  "branch_hint": "1.20.1",
+  "design_reference_commit": "7f68ac02291fde986119a3f5cab85436bed5c350",
+  "minecraft": "1.20.1",
+  "loader": "forge",
+  "reference_build_forge": "47.4.6",
+  "reference_build_connector": "1.0.0-beta.50",
+  "binary_sha256": null,
+  "full_tree_acquisition": "NOT_RUN",
+  "full_analysis": "NOT_RUN",
+  "queue_after": "twilight-forest",
+  "design_source": "departments/minecraft/design/2026-09-28-mod-ai-environment/DESIGN.md",
+  "notes": [
+    "Reference values are design-time observations, not upgrades for the user workspace.",
+    "Keep FRONTIER and dependency projects in separate SourceSnapshots.",
+    "Existing README queue state remains unchanged."
+  ]
+}
