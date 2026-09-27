@@ -98,3 +98,9 @@ README.md / manifest.json / OVERVIEW.md / CODE-MAP.md / AI-BEHAVIOR.md / WORLDGE
 Sinytra Connector は 1.20.1 Forge 系と現行 NeoForge 系の両方を保持し、Fabric互換技術がどう進化したかを比較する重点対象とする。
 
 対象横断の一覧は catalog/MODS.md。詳細手順は ANALYSIS-SPEC-v1.md。
+
+## MOD制作AI環境の確定設計
+
+[2026-09-28 確定設計](design/2026-09-28-mod-ai-environment/DESIGN.md)は、Source Intelligence、全classpath、source/bytecode、Connector研究、実装例・失敗例、GameTestと実機観測を既存部門へ接続する設計。4巡の敵対的設計監査、採否記録、受け入れ仕様、参考原典を同じディレクトリに保持する。
+
+設計資料であり、新機能の実装・動作検証・既存解析キューの完了を意味しない。
