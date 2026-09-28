@@ -250,8 +250,17 @@ public final class ForgeObserver {
             // A timeout does not cancel/retry a possibly accepted game-thread mutation.
             return server.submit(()->{
                 JsonObject done=accepted.deepCopy();
-                try { int code=server.getCommands().performPrefixedCommand(server.createCommandSourceStack().withPermission(2),command); done.addProperty("command_result",code); done.addProperty("success",code>0); }
-                catch(Exception failure) { done.addProperty("success",false); done.addProperty("error",failure.getClass().getSimpleName()); }
+                try {
+                    BridgeTransport.CommandResult callbacks=new BridgeTransport.CommandResult();
+                    var source=server.createCommandSourceStack().withPermission(2)
+                        .withCallback((context,success,result)->callbacks.accept(success));
+                    int code=server.getCommands().performPrefixedCommand(source,command);
+                    done.addProperty("command_result",code);
+                    done.addProperty("outcome",callbacks.outcome());
+                    if (callbacks.outcome().equals("UNKNOWN")) done.add("success",JsonNull.INSTANCE);
+                    else done.addProperty("success",callbacks.outcome().equals("PASS"));
+                }
+                catch(Exception failure) { done.addProperty("outcome","FAIL"); done.addProperty("success",false); done.addProperty("error",failure.getClass().getSimpleName()); }
                 done.addProperty("completed",true); done.addProperty("server_tick",server.getTickCount()); operations.put(id,done); log("Registered command completed: "+commandId); return JSON.toJson(done);
             }).get(5,TimeUnit.SECONDS);
         }

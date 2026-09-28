@@ -1,0 +1,61 @@
+name: MOD AI live Forge GameTest
+
+on:
+  push:
+    branches: ["jolly/minecraft-mod-ai-impl-2026-09-28"]
+    paths:
+      - 'departments/minecraft/mod-ai/forge-observer/**'
+      - 'src/kneekura_tech_hub/minecraft/**'
+      - 'tools/ci/mod_ai_live.py'
+      - 'tools/ci/mod_ai_probe/**'
+      - '.github/workflows/mod-ai-live.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mod-ai-live-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  live-probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Prepare disposable exact Forge MDK
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p live-evidence "$RUNNER_TEMP/kneekura-live-mdk"
+          git rev-parse HEAD > live-evidence/hub-commit.txt
+          curl --fail --location --retry 2 --max-time 120 \
+            https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-47.4.6/forge-1.20.1-47.4.6-mdk.zip \
+            -o "$RUNNER_TEMP/kneekura-live-mdk.zip"
+          echo "1a1c045f235262ff617e285ea2156571ea93bfbe  $RUNNER_TEMP/kneekura-live-mdk.zip" | sha1sum --check
+          sha256sum "$RUNNER_TEMP/kneekura-live-mdk.zip" > live-evidence/mdk-sha256.txt
+          unzip -q "$RUNNER_TEMP/kneekura-live-mdk.zip" -d "$RUNNER_TEMP/kneekura-live-mdk"
+          rm -rf "$RUNNER_TEMP/kneekura-live-mdk/src"
+      - name: Real build, launch, observation, idempotent command and signed GameTest completion
+        env:
+          PYTHONPATH: ${{ github.workspace }}/src
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/ci/mod_ai_live.py --workspace "$RUNNER_TEMP/kneekura-live-mdk" --evidence "$GITHUB_WORKSPACE/live-evidence" 2>&1 | tee live-evidence/driver.txt
+      - name: Retain bounded non-secret evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mod-ai-live-${{ github.sha }}
+          path: live-evidence/
+          retention-days: 7

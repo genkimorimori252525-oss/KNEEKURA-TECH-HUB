@@ -173,7 +173,9 @@ def _exchange_live(store: Store,session_path: str,*,operation='observe',query=No
     if operation in ('observe','client'):
         result=verification.evaluate_observation(s['contract'],raw)
     elif operation in ('command','operation'):
-        result=verification.evaluate_operation_receipt(s['contract'],raw)
+        result=verification.evaluate_operation_receipt(s['contract'],raw,
+            expected_request_id=(query or {}).get('operation_id'),
+            expected_command_id=(query or {}).get('command_id'))
     else: result={'status':'OK','outcome':'NOT_RUN','results':raw.get('logs',[])}
     result.update(artifact_hash=h,handshake_hash=hello_hash,evidence_level='AUTHENTICATED_LIVE_OBSERVER',
                   note='Observation is not itself a passing behaviour/rendering assertion')

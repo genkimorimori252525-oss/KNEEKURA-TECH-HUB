@@ -167,15 +167,30 @@ def evaluate_observation(contract: dict, observation: dict) -> dict:
                    note='A captured observation is not itself a behavioral assertion pass')
 
 
-def evaluate_operation_receipt(contract: dict, receipt: dict) -> dict:
+def evaluate_operation_receipt(contract: dict, receipt: dict, *,
+                               expected_request_id: str | None = None,
+                               expected_command_id: str | None = None) -> dict:
+    """A completed command is a command result, never a behavior-test assertion."""
     errors = _identity_errors(contract, receipt)
-    if errors: return _result(contract, 'UNKNOWN', errors, status='STALE', retry_allowed=False)
-    if not receipt.get('request_id') or receipt.get('completed') is not True:
-        return _result(contract, 'UNKNOWN', ['Acceptance is not completion; reconcile before any retry'], retry_allowed=False)
+    if errors:
+        return _result(contract, 'UNKNOWN', errors, status='STALE', retry_allowed=False,
+                       assertion_domain='command_execution')
+    request_id = receipt.get('request_id')
+    if (not isinstance(request_id, str) or not request_id or receipt.get('completed') is not True
+            or ('accepted' in receipt and receipt['accepted'] is not True)):
+        errors.append('Acceptance is not completion; reconcile before any retry')
+    if expected_request_id is not None and request_id != expected_request_id:
+        errors.append('Receipt belongs to a different requested operation')
+    if expected_command_id is not None and receipt.get('command_id') != expected_command_id:
+        errors.append('Receipt belongs to a different registered command')
     outcome = receipt.get('outcome')
     if outcome not in ('PASS', 'FAIL'):
-        return _result(contract, 'UNKNOWN', ['Final operation outcome unavailable'], retry_allowed=False)
-    return _result(contract, outcome, [], retry_allowed=False)
+        errors.append('Final operation outcome unavailable')
+    if 'success' in receipt and (type(receipt['success']) is not bool
+                                 or receipt['success'] != (outcome == 'PASS')):
+        errors.append('Success flag contradicts the explicit final outcome')
+    return _result(contract, 'UNKNOWN' if errors else outcome, errors, retry_allowed=False,
+                   assertion_domain='command_execution')
 
 
 def validation_plan(kind: str, registry: dict, *, world: str | None = None) -> dict:

@@ -15,6 +15,15 @@ import javax.crypto.spec.SecretKeySpec;
 
 /** JDK17-only loopback transport. The handler owns game-thread scheduling. */
 public final class BridgeTransport implements AutoCloseable {
+    /** Brigadier's callback reports success independently of the integer result.
+     * Zero can be a successful query; absent callbacks remain unconfirmed. */
+    public static final class CommandResult {
+        private boolean observed;
+        private boolean failed;
+        public void accept(boolean success) { observed=true; failed |= !success; }
+        public String outcome() { return !observed ? "UNKNOWN" : failed ? "FAIL" : "PASS"; }
+    }
+
     public interface Handler { String handle(String path, String body, String nonce) throws Exception; }
     private static final Set<String> PATHS = Set.of("/v1/handshake", "/v1/observe", "/v1/logs", "/v1/client", "/v1/command", "/v1/operation");
     private final String token, run, epoch;
