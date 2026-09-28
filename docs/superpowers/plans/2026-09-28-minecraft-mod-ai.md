@@ -1,5 +1,10 @@
 # Minecraft MOD AI implementation plan
 
+> **Active continuation:** [unified asset/runtime implementation plan](2026-09-28-minecraft-mod-ai-unified.md).
+> The historical plan and its CI-off note below are preserved. PR #73's later
+> IMPLEMENTATION-STATUS allows standard hosted CI; the unified plan governs the
+> new asset/client work. Existing verified server code is reused, not reimplemented.
+
 Goal: implement the approved v1.4 contract as a small headless adapter outside the frozen knowledge core.
 Spec: departments/minecraft/design/2026-09-28-mod-ai-environment/DESIGN.md at upstream 0e773ccf509d2a24c6dca3830cef18f38334b2cd.
 
