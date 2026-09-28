@@ -76,6 +76,18 @@ Produces: same-run screenshot/state/log/input evidence, not a second runtime aut
 - [ ] Record failures/repairs through existing history. Preserve the research queue Twilight Forest -> Sinytra Connector; these investigations are not delegated to Vibecraft.
 - [ ] Close only the verified scope. Stop speculative feature growth; add future features only for a demonstrated failure or missing necessary task.
 
+## Local-agent handoff checkpoint — 2026-09-28
+
+Current detailed resume state is recorded in
+`departments/minecraft/mod-ai/LOCAL-AI-HANDOFF-2026-09-28.md`.
+
+The latest executable-code head reviewed there is
+`824a2365a0ac945620f26a15339b352ac0de35f6`. Its hosted run
+`36398566854` is intentionally/actually RED at the current TDD boundary:
+787 passed, 2 failed, with the remaining failures both pointing to the same missing
+pathless native `.bbmodel` capture contract. Resume there; do not skip the RED by
+weakening tests or enabling raw filesystem export.
+
 ## Current execution conditions
 
 Durable list_workflows returned an MCP 404; no duplicate workflow was created.
