@@ -103,6 +103,8 @@ class Fixture:
         assert action=='kneekura_asset'
         assert params['token']==self.token and params['request_hash']==self.request_hash
         seq=params['seq']; op=params['operation']; project='project-1'
+        if self.mode=='reject_native' and op=='capture' and params['arguments'].get('kind')=='native':
+            raise RuntimeError('fixture secret provider detail')
         if self.mode=='unknown' and op=='cube':
             completion='UNKNOWN'
         else:
@@ -215,6 +217,21 @@ def test_failure_is_fail_closed_no_retry_and_no_new_evidence(prepared,mode):
     if mode=='drop':
         cube=[r for r in server.requests if r.get('params',{}).get('operation')=='cube']
         assert len(cube)==1
+
+
+
+def test_provider_rejection_reports_safe_operation_stage_without_provider_detail(prepared):
+    store,h,config,plan=prepared
+    server=Fixture(h,config['token']); server.mode='reject_native'; port=server.start()
+    try:
+        with pytest.raises(ContractError) as caught:
+            api().run_session(store,registry(port),config,plan)
+    finally:
+        server.stop()
+    message=str(caught.value)
+    assert 'capture:native' in message
+    assert 'fixture secret provider detail' not in message
+
 
 
 def test_permission_and_private_config_are_checked_before_network(prepared):
