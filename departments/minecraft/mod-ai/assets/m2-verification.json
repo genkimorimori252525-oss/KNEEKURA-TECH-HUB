@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "baseline": "a4b195a0466ec59fb7e57a4eae1fff45e9f9603f",
+  "local_scope": "selected-file checkout; exact reused dependency Git blobs verified",
+  "pytest": {
+    "passed": 88,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "node": {
+    "passed": 27,
+    "failed": 0,
+    "skipped": 0,
+    "nested_in_pytest": true
+  },
+  "verification": {
+    "full_source_composition": "NOT_RUN",
+    "live_blockbench": "NOT_RUN",
+    "visual": "NOT_RUN",
+    "minecraft": "NOT_RUN",
+    "windows": "NOT_RUN",
+    "full_repository_local": "NOT_RUN"
+  },
+  "reviewer": "author self-review; no independent subagent",
+  "tested_files": {
+    "src/kneekura_tech_hub/minecraft/asset_artifacts.py": {
+      "sha256": "6f95f2bd25d63559b7407e60bf3387f96ca1b8bf878f9f982dd94cf4983df15b",
+      "git_blob": "ac683f7355a135555051240716659ae54c0f59a8",
+      "bytes": 18736
+    },
+    "src/kneekura_tech_hub/minecraft/asset_session.py": {
+      "sha256": "1369cbfb9df9f4a12008dc2efa995303f855bcfba061063b08541eb3047b1b97",
+      "git_blob": "79c945d8cc6fe3b3cad7ad584c9eddf905c67a0a",
+      "bytes": 16511
+    },
+    "src/kneekura_tech_hub/minecraft/blockbench_guard.js": {
+      "sha256": "fa256f28653cc542a6510baf6a4b8fc75240b41bce30f6f881c7b692ae423f30",
+      "git_blob": "f4917ff8da5eccac99ac5b6d70d86033c8ead6c0",
+      "bytes": 4188
+    },
+    "src/kneekura_tech_hub/minecraft/blockbench_host.js": {
+      "sha256": "fc0f7b1e2a24d8eedd263114ce58676091dd58dc2b7994bf3ab41d2560b1df5d",
+      "git_blob": "16a4a6c71df7a1150a530e54f9c3334c1cdec437",
+      "bytes": 4521
+    },
+    "tests/test_minecraft_asset_artifacts.py": {
+      "sha256": "f18e6af5fcec10d6dd31f9ab0beffc1acbd9d8178f0e35d0e63e2654b31ee26b",
+      "git_blob": "2cde5c96444686ccc7669e5d93dd9d6cee8880e7",
+      "bytes": 14161
+    },
+    "tests/test_minecraft_asset_session.py": {
+      "sha256": "2d9c9f6e4c137b176638d542489ee003fe4fb1e5145335f92ffb0306a5fa43c4",
+      "git_blob": "ef9c10a6d90589b700a792c820306a38f616ebff",
+      "bytes": 11952
+    },
+    "tests/fixtures/blockbench_guard.test.cjs": {
+      "sha256": "d459ec998ac1c467490baf0f9d2b3741d07b51a0636a3e6ba3533896e0f8fa33",
+      "git_blob": "4014a9f84e4695517086c94d995512251470c7c6",
+      "bytes": 7341
+    },
+    "departments/minecraft/mod-ai/assets/celestial-staff.blueprint.json": {
+      "sha256": "09a81815297dcb85078dd4a4b91a4d4de5c65a5a9ff1c5dc10b71cef996db518",
+      "git_blob": "3e0d2c2d681844c9d740682516d9e93e3d9135cd",
+      "bytes": 5468
+    }
+  },
+  "pytest_junit": {
+    "sha256": "e6509f5fe404d8914c0c1cfc54ee6a67704b79357983e163db369e7902988303"
+  },
+  "pytest_stdout": {
+    "sha256": "90a043e0cc81ac042664512c934a1643b35a811ffbcdeace408f5f209198658a"
+  },
+  "node_stdout": {
+    "sha256": "18b3fafe59cfad78746e6670e1cc559d2d9f6d65b2844a71a1d9da4c6c46a7d2"
+  }
+}

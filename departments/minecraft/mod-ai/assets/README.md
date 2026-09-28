@@ -1,13 +1,21 @@
-# Asset integration — first implementation slice
+# Asset integration — preparation and sealed pilot
 
-Status: **M1 IMPLEMENTED / LIVE BLOCKBENCH AND MINECRAFT NOT_RUN**.
+Status: **M1 IMPLEMENTED; M2 GUARDED-WRITER CODE / FIXTURE TESTS IMPLEMENTED;
+FULL-UPSTREAM COMPOSITION AND LIVE BLOCKBENCH / MINECRAFT NOT_RUN**.
+
+The [M2 writer checkpoint](M2-WRITER-2026-09-28.md) describes the opt-in
+`asset_session` CLI, sealed blueprint, provider-side dispatcher and export capture.
+The M1 `assets` preparation/probe CLI below remains unchanged and read-only toward
+the editor. The original upstream probe and the guarded M2 pilot must not be
+installed together in the same editor instance.
 See [integration design](../ASSET-INTEGRATION.md) and
 [unified implementation order](../../../../docs/superpowers/plans/2026-09-28-minecraft-mod-ai-unified.md).
 
 This is part of the existing Minecraft department, not a second application/core.
 The existing host AI remains the planner, coder and visual reviewer. This slice
-provides a strict asset-spec contract and a read-only sosadly bridge probe. It is
-not yet a model generator, a MCP server, a complete ModSpec ability compiler,
+provides a strict asset-spec contract and a read-only sosadly bridge probe.
+M2 adds a bounded, one-shot static-item pipeline from an AI-authored blueprint.
+It is not an autonomous natural-language model generator, a MCP server, or a complete ModSpec ability compiler,
 a client input driver, or a claim that Vibecraft can finish the environment.
 
 ## Use with the existing environment
@@ -77,10 +85,11 @@ in the private local CAS and are not automatically committed, uploaded or promot
 to canonical knowledge. The checked-in tests are local HTTP protocol fixtures,
 not live Blockbench proof. The source pin identifies reviewed upstream code only.
 
-Next is M2: enforce exclusive disposable editor-project identity, managed paths,
-no-overwrite, actual script/plugin-operation restrictions and uncertain-write
-handling before enabling geometry/texture/export commands. Then generate and
-review one staff, reuse existing Forge build/Observer, and add verified real
+M2 now has guarded-dispatch, no-overwrite, export consistency and uncertain-write
+handling code, exercised with local protocol/host fixtures. The next acceptance
+is full pinned-source composition and a real disposable editor run: generate,
+render, review and capture one staff. Do not mark M2's live gate complete from the
+fixture tests. After that reuse the existing Forge build/Observer and add verified real
 client input. Do not recreate the already verified server loop or introduce
 an independent agent/scheduler/database. The original real provider/Core and
 Twilight-first/Connector-next acceptance tasks are still on the unified roadmap.
