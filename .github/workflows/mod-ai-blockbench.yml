@@ -1,0 +1,101 @@
+name: MOD AI Blockbench desktop acceptance
+
+on:
+  push:
+    branches: ["jolly/minecraft-mod-ai-assets-2026-09-28"]
+    paths:
+      - 'src/kneekura_tech_hub/minecraft/asset_**'
+      - 'src/kneekura_tech_hub/minecraft/blockbench.py'
+      - 'tools/ci/mod_ai_blockbench_live.py'
+      - 'tools/ci/blockbench_cdp.mjs'
+      - 'tests/test_minecraft_blockbench_live_harness.py'
+      - '.github/workflows/mod-ai-blockbench.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mod-ai-blockbench-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  blockbench-live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install exact Blockbench desktop and Xvfb
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p blockbench-evidence
+          curl --fail --location --retry 2 --max-time 180 \
+            https://github.com/JannisX11/blockbench/releases/download/v5.2.1/Blockbench_5.2.1.deb \
+            -o "$RUNNER_TEMP/Blockbench_5.2.1.deb"
+          echo "d6329fd8db35a6e1ffb86c3f61b77ff193c6526418e6454e1cac863a0e384003  $RUNNER_TEMP/Blockbench_5.2.1.deb" | sha256sum --check
+          sudo apt-get update -qq
+          sudo apt-get install -y xvfb "$RUNNER_TEMP/Blockbench_5.2.1.deb"
+          sha256sum "$RUNNER_TEMP/Blockbench_5.2.1.deb" > blockbench-evidence/blockbench-deb.sha256
+      - name: Acquire exact reviewed sosadly plugin source
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 2 --max-time 120 \
+            https://raw.githubusercontent.com/sosadly/blockbench-mcp/028cdd76589de2e2cea51bfd79495b50a3c7d1d2/plugin/blockbench_mcp.js \
+            -o "$RUNNER_TEMP/blockbench_mcp.upstream.js"
+          python - <<'PY'
+          import hashlib, pathlib
+          p=pathlib.Path(__import__('os').environ['RUNNER_TEMP'])/'blockbench_mcp.upstream.js'
+          b=p.read_bytes()
+          blob=hashlib.sha1(b'blob '+str(len(b)).encode()+b'\0'+b).hexdigest()
+          assert blob=='898f811f15c0bb6cb7eed08f9d994ba3b0131e74', blob
+          (pathlib.Path('blockbench-evidence')/'sosadly-source.sha256').write_text(hashlib.sha256(b).hexdigest()+'\n')
+          PY
+      - name: Prepare isolated guarded package and fixture
+        env:
+          PYTHONPATH: ${{ github.workspace }}/src
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/ci/mod_ai_blockbench_live.py prepare \
+            --root "$RUNNER_TEMP/kneekura-blockbench-live" \
+            --plugin-source "$RUNNER_TEMP/blockbench_mcp.upstream.js" \
+            --evidence "$GITHUB_WORKSPACE/blockbench-evidence"
+      - name: Launch real Blockbench, load guarded plugin, and capture one staff session
+        env:
+          PYTHONPATH: ${{ github.workspace }}/src
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT="$RUNNER_TEMP/kneekura-blockbench-live"
+          export XDG_CONFIG_HOME="$(cat "$ROOT/xdg-path.txt")"
+          cleanup() {
+            if [[ -f "$ROOT/blockbench.pid" ]]; then
+              kill "$(cat "$ROOT/blockbench.pid")" 2>/dev/null || true
+            fi
+          }
+          trap cleanup EXIT
+          xvfb-run -a --server-args="-screen 0 1280x1024x24" \
+            blockbench --no-sandbox --disable-gpu --remote-debugging-port=9222 \
+            > "$GITHUB_WORKSPACE/blockbench-evidence/blockbench.log" 2>&1 &
+          echo $! > "$ROOT/blockbench.pid"
+          node tools/ci/blockbench_cdp.mjs --port 9222 \
+            --plugin "$(cat "$ROOT/plugin-path.txt")" \
+            --evidence "$GITHUB_WORKSPACE/blockbench-evidence/cdp.json"
+          python tools/ci/mod_ai_blockbench_live.py run \
+            --root "$ROOT" --evidence "$GITHUB_WORKSPACE/blockbench-evidence"
+      - name: Retain bounded non-secret Blockbench evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mod-ai-blockbench-${{ github.sha }}
+          path: blockbench-evidence/
+          retention-days: 7
