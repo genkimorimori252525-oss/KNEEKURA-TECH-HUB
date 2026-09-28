@@ -32,3 +32,17 @@ def test_probe_never_overwrites_existing_server_configuration(tmp_path):
     config.write_text('level-name=valuable\n')
     with pytest.raises(FileExistsError): m.prepare_probe_scenario(w)
     assert config.read_text()=='level-name=valuable\n'
+
+
+def test_probe_observes_its_exact_entity_not_ambient_mobs():
+    import re
+    import struct
+    import uuid
+    m=module()
+    assert callable(getattr(m, 'probe_entity_request', None)), 'Missing exact-entity probe selection'
+    command, query=m.probe_entity_request()
+    requested=uuid.UUID(query['entity_uuids'][0])
+    values=[int(v) for v in re.search(r'UUID:\[I;([^\]]+)\]',command)[1].split(',')]
+    assert uuid.UUID(bytes=struct.pack('>iiii',*values))==requested
+    assert query['dimension']=='minecraft:overworld' and query['limit']==1
+    assert command.startswith('summon minecraft:pig ') and 'NoGravity:1b' in command

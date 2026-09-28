@@ -14,6 +14,7 @@ import shutil
 import struct
 import subprocess
 import time
+import uuid
 
 from kneekura_tech_hub.minecraft import execution, index, runtime
 from kneekura_tech_hub.minecraft.contracts import prepare_contract
@@ -96,6 +97,18 @@ def prepare_probe_scenario(world: dict) -> dict:
             'expected_required':{'bridge':True},'purpose':'Bridge loop, not general MOD correctness'}
 
 
+def probe_entity_request() -> tuple[str, dict]:
+    """Bind this fixture's summon and observation to one exact UUID.
+
+    A generated world can contain many natural pigs; a capped all-entity page
+    cannot prove absence or count of the deliberately created test entity.
+    The scoreboard mutation separately proves duplicate-request idempotency.
+    """
+    entity=uuid.UUID('e52e0073-5ce9-4c43-8bfd-5d70f071de2b')
+    values=','.join(str(v) for v in struct.unpack('>iiii',entity.bytes))
+    command='summon minecraft:pig 0 80 0 {NoAI:1b,NoGravity:1b,UUID:[I;'+values+']}'
+    return command, {'limit':1,'dimension':'minecraft:overworld','entity_uuids':[str(entity)]}
+
 
 def run(root: Path, evidence: Path, repo: Path):
     root=root.resolve(); evidence=evidence.resolve(); evidence.mkdir(parents=True,exist_ok=True)
@@ -104,6 +117,7 @@ def run(root: Path, evidence: Path, repo: Path):
         raise RuntimeError('Only an explicitly supplied disposable RUNNER_TEMP MDK is accepted')
     configure(root,repo)
     store=Store(temp/'kneekura-live-cas')
+    pig_command,pig_query=probe_entity_request()
     registry={'workspace':str(root),'allow_gradle':True,'wrapper_sha256':file_hash(root/'gradlew'),
         'allowed_kinds':['compile','export','gametest'], 'build_outputs':['build/classes/java/main'],
         'build_artifact':'build/classes/java/main','runtime_config_files':[],
@@ -114,7 +128,7 @@ def run(root: Path, evidence: Path, repo: Path):
             'zero':'scoreboard players set probe kneekura 0',
             'increment':'scoreboard players add probe kneekura 1',
             'score':'scoreboard players get probe kneekura',
-            'pig':'summon minecraft:pig 0 80 0 {NoAI:1b,NoGravity:1b}',
+            'pig':pig_command,
             'finish':'setblock 0 80 1 minecraft:emerald_block'}}
     receipts=[]
     def record(label,result):
@@ -140,7 +154,7 @@ def run(root: Path, evidence: Path, repo: Path):
     shutil.copyfile(Path(world['directory'])/'server.properties', evidence/'server-input.properties')
     contract=prepare_contract(store,registry,index_id=snapshot,world=world['world'],scenario=scenario)['contract']
     session_path=Path(world['directory'])/'session.json'
-    live_errors=[]; summary={}
+    live_errors=[]; summary={}; command_evidence=[]
     with concurrent.futures.ThreadPoolExecutor(max_workers=1) as pool:
         future=pool.submit(execution.execute,store,registry,kind='gametest',request_id='probe-run',
                            world=world['world'],contract=contract,timeout=420)
@@ -151,23 +165,29 @@ def run(root: Path, evidence: Path, repo: Path):
                 if future.done(): raise RuntimeError('Game process completed before observer became ready')
                 if time.monotonic()>deadline: raise TimeoutError('No authenticated observer endpoint within budget')
                 time.sleep(0.2)
-            def observe():
-                result=runtime.observe_live(store,str(session_path),query={'limit':128})
+            def observe(query=None):
+                result=runtime.observe_live(store,str(session_path),query=query or {'limit':128})
                 assert result['status']=='OK' and result['evidence_level']=='AUTHENTICATED_LIVE_OBSERVER',result
                 return result
             initial=observe()
+            (evidence/'handshake.json').write_text(json.dumps(store.json(initial['handshake_hash']),indent=2))
             def command(key,identifier):
                 out=runtime.execute_registered_command(store,str(session_path),command_id=key,request_id=identifier)
                 assert out['outcome']=='PASS' and out['assertion_domain']=='command_execution',out
-                return out,store.json(out['artifact_hash'])
+                raw=store.json(out['artifact_hash'])
+                command_evidence.append(raw)
+                (evidence/'command-receipts.json').write_text(json.dumps(command_evidence,indent=2))
+                return out,raw
             command('objective','objective-1')
             _,zero=command('zero','zero-1'); assert zero['command_result']==0
             first,_=command('increment','increment-once'); repeated,_=command('increment','increment-once')
             assert first['artifact_hash']==repeated['artifact_hash']
             _,score=command('score','read-score'); assert score['command_result']==1
-            command('pig','pig-once'); command('pig','pig-once')
-            observation=observe(); data=store.json(observation['artifact_hash'])
-            pigs=[e for e in data['entities'] if e['type']=='minecraft:pig']
+            pig_first,_=command('pig','pig-once'); pig_repeat,_=command('pig','pig-once')
+            assert pig_first['artifact_hash']==pig_repeat['artifact_hash']
+            observation=observe(pig_query); data=store.json(observation['artifact_hash'])
+            (evidence/'entity-observation.json').write_text(json.dumps(data,indent=2))
+            pigs=[e for e in data['entities'] if e['type']=='minecraft:pig' and e['uuid']==pig_query['entity_uuids'][0]]
             assert len(pigs)==1 and not data['entities_truncated'],data
             s=runtime.load_session(session_path); url=json.loads(endpoint.read_text())['url']
             try: runtime.BridgeClient(url,'0'*64,contract).request('/v1/handshake')
