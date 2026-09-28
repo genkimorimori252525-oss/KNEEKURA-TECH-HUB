@@ -78,7 +78,12 @@ const expression = `(async () => {
     plugin_path: String(loaded.path || ''),
     bridge_port: bridge.port,
     server_running: !!bridge.server,
-    project_open: !!Project
+    project_open: !!Project,
+    project_count: (typeof ModelProject === 'undefined' || !ModelProject.all) ? null : ModelProject.all.length,
+    format_id: (typeof Format === 'undefined' || !Format) ? null : String(Format.id || ''),
+    cube_count: (typeof Cube === 'undefined' || !Cube.all) ? null : Cube.all.length,
+    texture_count: (typeof Texture === 'undefined' || !Texture.all) ? null : Texture.all.length,
+    installed_plugins: (Plugins.all || []).filter(p => p.installed && !p.disabled).map(p => String(p.id || ''))
   };
 })()`;
 const result = await send('Runtime.evaluate', {
