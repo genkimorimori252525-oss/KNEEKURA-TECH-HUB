@@ -1,0 +1,48 @@
+// Opt-in userdev adapter. It adds a separate source set, never modifies target MOD sources.
+// This callback is registered before project/plugin afterEvaluate callbacks generate runs.
+import org.gradle.api.tasks.JavaExec
+import org.gradle.jvm.toolchain.JavaLanguageVersion
+
+gradle.beforeProject { p ->
+    p.afterEvaluate {
+        def mc = p.extensions.findByName('minecraft')
+        if (mc == null || !p.hasProperty('kneekuraRunDirectory')) return
+        def runDir = p.file(p.property('kneekuraRunDirectory')).canonicalFile
+        def session = p.file(p.property('kneekuraSessionFile')).canonicalFile
+        if (!new File(runDir, '.kneekura-run.json').isFile() || session.parentFile != runDir)
+            throw new GradleException('KNEEKURA requires an owned fresh run directory and its session file')
+        if (!p.hasProperty('kneekuraObserverRoot')) throw new GradleException('Explicit observer source root required')
+        def observerRoot = p.file(p.property('kneekuraObserverRoot'))
+        def main = p.sourceSets.getByName('main')
+        def observer = p.sourceSets.maybeCreate('kneekuraObserver')
+        observer.java.srcDir(new File(observerRoot, 'src/main/java'))
+        observer.resources.srcDir(new File(observerRoot, 'src/main/resources'))
+        observer.compileClasspath += main.compileClasspath + main.output
+        observer.runtimeClasspath += main.runtimeClasspath + observer.output
+        p.tasks.named(observer.compileJavaTaskName) {
+            javaCompiler = p.javaToolchains.compilerFor { languageVersion = JavaLanguageVersion.of(17) }
+            options.encoding = 'UTF-8'
+        }
+        mc.runs.configureEach { run ->
+            if (run.name in ['gameTestServer', 'client']) {
+                workingDirectory runDir
+                property 'kneekura.session', session.absolutePath
+                mods { kneekura_observer { source observer } }
+            }
+        }
+        p.tasks.withType(JavaExec).configureEach { task ->
+            if (task.name in ['runGameTestServer','runClient']) {
+                dependsOn observer.classesTaskName
+                doFirst {
+                    workingDir runDir
+                    systemProperty 'kneekura.session', session.absolutePath
+                    // Explicit existing gameDir arguments must not escape to a production save.
+                    def original = new ArrayList(task.args)
+                    int pos = original.indexOf('--gameDir')
+                    if (pos >= 0 && pos + 1 < original.size()) original[pos+1] = runDir.absolutePath
+                    setArgs(original)
+                }
+            }
+        }
+    }
+}

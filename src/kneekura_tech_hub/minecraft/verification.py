@@ -153,7 +153,7 @@ def evaluate_observation(contract: dict, observation: dict) -> dict:
             if not _finite_vector(entity.get('position')) or not _finite_vector(entity.get('velocity')):
                 raise ValueError('Entity position/velocity missing or nonfinite')
             health = entity.get('health')
-            if not _finite_number(health):
+            if not (health is None and entity.get('health_applicable') is False) and not _finite_number(health):
                 raise ValueError('Entity health missing or nonfinite')
             if 'target_uuid' not in entity: raise ValueError('Target field missing (use null for no target)')
             if entity['target_uuid'] is not None: uuid.UUID(entity['target_uuid'])

@@ -281,6 +281,11 @@ def capture_profile(manifest: dict, base: Path, store: Store, *, limits: Limits 
     if m['track'] == 'ANCHOR' and m.get('java_major') != 17:
         warnings.append('ANCHOR game Java toolchain is not confirmed as 17')
     documents = []; roots = []; unresolved = []; exclusions = []
+    declared_unresolved = m.get('unresolved_dependencies', [])
+    if not isinstance(declared_unresolved, list):
+        raise ContractError('unresolved_dependencies must be an array')
+    for issue in declared_unresolved:
+        unresolved.append({'root_id': None, 'reasons': [issue], 'kind': 'dependency_resolution'})
     total_bytes = 0; total_files = 0
     for order, root in enumerate(m['roots']):
         errors: list[str] = []; excluded: list[str] = []
@@ -299,6 +304,8 @@ def capture_profile(manifest: dict, base: Path, store: Store, *, limits: Limits 
             # Preserve the whole archive, not just extracted entries. A directory
             # artifact is its exact captured inventory, with each file in the CAS.
             artifact_hash = store.put(artifact_bytes) if artifact_bytes is not None else store.put_json(hashes)
+            if root.get('resolved_sha256') and artifact_hash != valid_hash(root['resolved_sha256']):
+                raise IntegrityError('Resolved artifact drifted between import and capture')
             result['artifact_hash'] = artifact_hash
             for name, data in records:
                 suffix = PurePosixPath(name).suffix.lower()
