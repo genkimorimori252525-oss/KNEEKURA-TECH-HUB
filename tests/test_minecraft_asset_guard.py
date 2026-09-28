@@ -142,9 +142,9 @@ def test_recipe_fails_closed_on_patch_drift(mutation):
 
 
 def test_no_overwrite_publish_and_private_files(tmp_path):
-    m=api(); dest=tmp_path/'new'; files={'guarded-plugin.js':b'test secret','client-private.json':b'{}'}
+    m=api(); dest=tmp_path/'new'; files={'blockbench_mcp.js':b'test secret','client-private.json':b'{}'}
     m.write_private_bundle(dest,files)
-    assert (dest/'guarded-plugin.js').read_bytes()==b'test secret'
+    assert (dest/'blockbench_mcp.js').read_bytes()==b'test secret'
     before=tree(dest)
     with pytest.raises((ContractError,FileExistsError)): m.write_private_bundle(dest,files)
     assert tree(dest)==before
@@ -170,7 +170,7 @@ def test_private_bundle_filename_preserves_upstream_plugin_id(tmp_path):
 
 def test_private_bundle_rejects_symlink_parent(tmp_path):
     real=tmp_path/'real'; real.mkdir(); alias=tmp_path/'alias'; alias.symlink_to(real,target_is_directory=True)
-    with pytest.raises(ContractError): api().write_private_bundle(alias/'new',{'guarded-plugin.js':b'test','client-private.json':b'{}'})
+    with pytest.raises(ContractError): api().write_private_bundle(alias/'new',{'blockbench_mcp.js':b'test','client-private.json':b'{}'})
     assert not list(real.iterdir())
 
 
@@ -213,11 +213,11 @@ def test_partial_private_package_stays_visible_and_cannot_be_reused(tmp_path,mon
         return original(name,*args,**kwargs)
     with monkeypatch.context() as context:
         context.setattr(os,'open',fail_second)
-        with pytest.raises(OSError):m.write_private_bundle(dest,{'guarded-plugin.js':b'kept','client-private.json':b'{}'})
-    assert (dest/'guarded-plugin.js').read_bytes()==b'kept'
+        with pytest.raises(OSError):m.write_private_bundle(dest,{'blockbench_mcp.js':b'kept','client-private.json':b'{}'})
+    assert (dest/'blockbench_mcp.js').read_bytes()==b'kept'
     assert not (dest/'client-private.json').exists()
-    with pytest.raises(ContractError):m.write_private_bundle(dest,{'guarded-plugin.js':b'replace','client-private.json':b'{}'})
-    assert (dest/'guarded-plugin.js').read_bytes()==b'kept'
+    with pytest.raises(ContractError):m.write_private_bundle(dest,{'blockbench_mcp.js':b'replace','client-private.json':b'{}'})
+    assert (dest/'blockbench_mcp.js').read_bytes()==b'kept'
 
 
 def test_cli_rejects_unpinned_source_without_network_or_output_directory(prepared,tmp_path):
