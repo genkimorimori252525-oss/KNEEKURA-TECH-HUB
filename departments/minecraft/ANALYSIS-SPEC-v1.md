@@ -1,4 +1,4 @@
-# Minecraft Whole-Target Analysis Specification v1.1
+# Minecraft Whole-Target Analysis Specification v1.2
 
 ## 1. Compatibility contract — dual track
 
@@ -35,6 +35,7 @@ Pin for each track: role, Minecraft version, loader, repository, branch/release/
 - mappings / remapping / classloading / bytecode transformations
 - dependencies / integrations / optional compatibility
 - tick cost / startup cost / caches / allocation / async / synchronization
+- failure/repair history: Issues, PRs, fix commits and before/after code, causes, repair and scoped reusable lessons
 
 ## 5. Loader bridge / transformation systems
 
@@ -79,3 +80,13 @@ Every substantive finding should use a stable locator where possible: repository
 Facet states: NOT_ANALYZED / INVENTORIED / MAPPED / EVIDENCE_BACKED / NOT_APPLICABLE.
 
 A target is COMPLETE only when required tracks are pinned or explicitly unavailable, required facets are evidence-backed or not applicable, and ANCHOR↔FRONTIER portability is recorded.
+
+## 9. Failure/repair history — mandatory analysis facet
+
+Follow [FAILURE-REPAIR-HISTORY-v1.md](FAILURE-REPAIR-HISTORY-v1.md). For each analyzed track, publish `FAILURE-REPAIR-HISTORY.md` and a machine-readable `FAILURE-REPAIR-HISTORY.json` under that MOD's analysis directory. Read the selected upstream Issues/PRs, repair diffs and before/after source; do not substitute a count of closed Issues or a summary of current source.
+
+This is part of analyzing other MODs, not merely a recorder for future KNEEKURA development. Use the same record shape for our own MOD incidents, labelled OWN_DEVELOPMENT. No new scheduler, automatic crawler, separate knowledge database or automatic Claim promotion is implied.
+
+Define the history window, queries and relevant subsystems before the review. Record inspected, deferred and unavailable material. No useful supported cases is a legitimate bounded result; it is not evidence that the MOD has no bugs. Do not grow an unbounded all-history crawl just to satisfy this facet.
+
+Existing analysis results are not retroactively rewritten. Add this facet as NOT_ANALYZED until reviewed; preserve the previous completion/version record. A new whole-target completion claim must account for the facet, including explicit unavailable/no-supported-case findings and coverage evidence. Twilight Forest remains ahead of Connector in the analysis queue.
