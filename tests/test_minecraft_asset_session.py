@@ -184,7 +184,8 @@ def test_successful_session_captures_inline_artifacts_to_existing_cas(prepared):
         ('model',None),('native',None),('texture',None),('view','front'),('view','left'),('view','back')]
     for item in artifacts:
         raw=store.read(item['content_hash']); assert len(raw)==item['size_bytes']
-        if item['kind']!='model': assert raw.startswith(b'\x89PNG\r\n\x1a\n')
+        if item['kind'] in ('model','native'): assert json.loads(raw)
+        else: assert raw.startswith(b'\x89PNG\r\n\x1a\n')
     receipt=store.json(result['receipt_hash'])
     assert receipt['request_hash']==h and receipt['verification']==result['verification']
     assert config['token'] not in json.dumps(receipt)
