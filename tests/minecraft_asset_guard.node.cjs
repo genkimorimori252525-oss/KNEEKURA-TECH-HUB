@@ -179,7 +179,7 @@ test('capture view is allowlisted and binds the requested view',async()=>{
 });
 for(const bad of [
  {kind:'model',view:'front'}, {kind:'texture',view:'left'}, {kind:'view',view:null},
- {kind:'model',view:null,path:'../evil'}, {kind:'native',view:null}
+ {kind:'model',view:null,path:'../evil'}, {kind:'mesh',view:null}
 ]){
  test('capture rejects authority or malformed selector '+JSON.stringify(bad),async()=>{
   const f=fixture();await ready(f);await f.call(2,'cube',f.cube);const n=f.captures.length;
