@@ -1,0 +1,17 @@
+{
+  "workspace": "C:/mods/your-mod",
+  "allow_gradle": false,
+  "wrapper_sha256": "REPLACE_WITH_SHA256_OF_REGISTERED_GRADLEW_OR_GRADLEW_BAT",
+  "allowed_kinds": ["export", "compile", "unit"],
+  "resolve_sources": true,
+  "build_outputs": ["build/classes/java/main", "build/libs/your-mod.jar"],
+  "build_artifact": "build/classes/java/main",
+  "build_receipt_hash": "REPLACE_WITH_SUCCESSFUL_SAME_SOURCE_COMPILE_RECEIPT",
+  "runtime_config_files": [],
+  "world_templates": ["C:/Kneekura/templates/test"],
+  "remaining_launches": 1,
+  "launch_budget_id": "explicit-test-session-001",
+  "timeout_seconds": 300,
+  "max_log_bytes": 8388608,
+  "command_registry": {}
+}

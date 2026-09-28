@@ -1,51 +1,46 @@
-# Implementation checkpoint — 2026-09-28
+# Implementation checkpoint — 2026-09-28, hosted integration
 
-Status: **IN_PROGRESS / headless input-analysis and report-validation adapter implemented**.
+Status: **IN_PROGRESS — connected adapters published; actual Forge build, dependency export/import and source lookup verified**.
 Design: [v1.4](../design/2026-09-28-mod-ai-environment/DESIGN.md).
 Base: `0e773ccf509d2a24c6dca3830cef18f38334b2cd`, design PR #72.
-Implementation branch: `jolly/minecraft-mod-ai-impl-2026-09-28` (stacked on design branch; no main merge).
+Implementation: PR #73, `jolly/minecraft-mod-ai-impl-2026-09-28`; no main/prior PR merge.
 
-## Working in this change
+## Published implementation
 
-- Explicit local root capture; immutable source, resource, outer JAR and inventory blobs; ordered scope/namespace/stage/track metadata; unresolved-input coverage.
-- Snapshot-bound literal search and full paginated reads; raw bytes; explicit JDK disassembly preparation; exact owner/name/descriptor lookup; duplicate origins remain ambiguous.
-- Verified cached disassembly reuse; static references with incompleteness warnings; research-only retrieval of existing department documents.
-- Same-run normalized GameTest report checking, target/optional/unrelated result separation, observation identity/interval validation and no blind operation retry.
-- JSON CLI and documented caller-supplied existing-runner delegation boundary. No new canonical store, remote service or scheduler.
+- Explicit local capture, original source/resource/JAR bytes, immutable snapshot-bound search and full reads.
+- Actual ForgeGradle resolved-input export/import with exact artifacts/scopes/order/fingerprints, plus passive discovery.
+- Pinned provider adapters for Vineflower/tiny-remapper; Tiny/TSRG/ProGuard lookup and JVM descriptor identities.
+- JVM declaration/Mixin, AW/AT/metadata candidate inspection and bounded static relations, not dynamic compatibility verdicts.
+- Existing Core exact guidance bridge and NEW observation bundle export; no automatic canonical writes/promotions.
+- Registered local Gradle execution, fresh test world provisioning, compile receipts, run-contract preparation and authenticated observer protocol.
+- Forge observer, client capture source, GameTest reporter ledger and separate explicit mutation route.
+- Failure/repair history as a mandatory MOD-analysis facet, plus captured-record import/query. Unknown cause, author claim, inference and recorded experiment remain distinct. This is not an automatic GitHub crawler.
 
-## What remains — do not mark the product complete
+The executable/test/configuration portion of the previous connected delivery is now in GitHub (33 files across the observer and connected-code commits). Do not reapply the old ZIP or infer that all nine old delivery-only narrative files were copied verbatim; README/status were updated to reflect actual hosted evidence instead.
 
-1. Import actual resolved ForgeGradle/userdev inputs from a real 1.20.1 MOD workspace. The current manifest is an explicit capture input, not automatic Gradle resolution.
-2. Connect an existing decompiler/remapper provider and mapping/intervention metadata. This change does not translate names or infer Mixin compatibility; javap is disassembly, not Java decompilation.
-3. Attach existing Hub context-guidance/staging paths with their original provenance contracts. Current context is literal research retrieval, not canonical recommendations.
-4. Complete Connector research in the existing queue after Twilight Forest. The added reference is a design pointer, not an acquired SourceSnapshot or a completed analysis.
-5. Implement and compile the Forge 1.20.1 live observation adapter, authenticated session handshake, actual report producer, and existing runner wiring. The current CLI imports reports and intentionally cannot launch a game.
-6. Run the real MOD-editing acceptance loop and U01-U06/A01-A24 in their declared environments. Local fixture tests below are not these product acceptance tests.
+## Evidence actually obtained
 
-## Evidence and limits
+See [HOSTED-VERIFICATION-2026-09-28.md](HOSTED-VERIFICATION-2026-09-28.md).
 
-Local verification: **102 passed, 0 failed, 0 skipped**, plus Python compileall.
-Python 3.13.5, pytest 9.0.2, OpenJDK 21.0.11; Java fixtures compiled with `javac --release 17`.
-The repository declares pytest >=8.3,<9. This run used the preinstalled pytest 9.0.2, not the declared dependency environment.
-No pytest/JDK version compatibility beyond those observed is claimed.
+- Full pre-connection repository/real PostgreSQL suite: 471 passed, no skips/failures.
+- Full connected repository/real PostgreSQL suite: 567 passed, no skips/failures, 8 pre-existing invalid-escape warnings. Python3.12, pytest8 (declared range), JDK17.
+- Actual Forge1.20.1/47.4.6 MDK build: compileJava, jar and reobfJar succeeded. This is an isolated reference environment, not a user workspace upgrade.
+- Actual ForgeGradle export succeeded. Real importer captured 37,933 documents from 205 scoped artifact entries and found/read ForgeObserver source. Entries can repeat between compile/runtime scopes; they are not 205 distinct MODs. Capture coverage is retained rather than assumed complete.
+- New history tests were exercised RED→GREEN locally (16 history tests; 63 passed together with storage/mapping regressions). The current branch's Actions checks provide the later whole-repository result.
 
-The local workspace was a selected-file checkout with exact upstream pyproject and package initializer, NOT a full clone.
-The complete pre-existing Hub/PostgreSQL test suite, package build, actual Forge compile, Minecraft, GameTest and client/runtime behavior were **NOT_RUN**.
-Durable and remote workspace calls returned 429; container DNS could not resolve external package/repository hosts.
-No runner/CI/Actions dispatch, production-world change, prior PR merge or automatic canonical promotion was performed.
+The historical `verification/local-run.json` remains the earlier 102-test evidence; it is superseded for current status, not rewritten as if CI existed at that earlier time.
 
-`verification/local-run.json` records commands, scope, outcomes and tested file hashes. Full RED/GREEN logs are in the accompanying conversation artifact.
+## Remaining product acceptance — do not call the entire environment complete
 
-## Self-adversarial review
+1. Actual Vineflower and tiny-remapper provider execution, including relevant real MOD mappings/classpaths; protocol fixtures are not tool integration proof.
+2. New Core bridge/bundle end-to-end against actual Core schemas and applicable data. Passing the existing Core/PostgreSQL suite is necessary but not proof that this new caller path has been exercised with real research records.
+3. Launch a managed Forge/GameTest world and prove the live build/session/world handshake, report completion and observation path. The binding is now compiled, but a real game has not been launched in this checkpoint.
+4. Client screenshot/render/network assertions, production-MOD correctness and performance, and Windows-specific process behavior remain unverified. Server compile/transport tests cannot prove these.
+5. Actual one-MOD editing loop and U01-U06/A01-A24 acceptance. Do not convert library test counts into product acceptance counts.
+6. Execute the new failure/repair history facet for each target. No actual Twilight/Connector upstream bug cases have been claimed as newly analyzed in this checkpoint. Preserve Twilight-first/Connector-next ordering and existing snapshot anchors.
 
-This was same-assistant code review, not an independent agent review.
-Regression tests were added before fixes for lost outer-JAR/inventory blobs, cache-as-input recursion, existing symlink write escape, wrong-input cached disassembly,
-missing evidence, invalid filters, malformed identity, world/config/adapter mismatch, optional-mode drift, unreadable directory omission,
-JDK image changes and nonfinite/overflowing observations. Full references remain available despite preview limits.
-A missing original class does not hide a still-readable pinned disassembly; its availability is marked separately.
+Self-review follow-up to exercise in the live loop: the Java command receipt reports `success` while the pure imported-operation oracle consumes `outcome`. Until this protocol seam is tested and reconciled, successful mutations can remain UNKNOWN. Do not weaken idempotency/retry safeguards to mask this gap.
 
-## Resume without repeating work
+## Resume
 
-Read this checkpoint, the design, the Python module and its tests. Reuse this implementation branch; do not recreate the department or overwrite PR #71/#72.
-Start with the actual MOD workspace input importer/provider connection, then run a concrete MOD query/edit before expanding infrastructure.
-Keep CI off and use the already approved local verification route. Preserve NOT_RUN until real evidence exists.
+Use PR #73's current branch, not the older conversation patch. Read the Actions logs and latest commit before work. CI is now explicitly allowed on GitHub-hosted standard runners; do not follow the superseded 'keep CI off' instruction in the original checkpoint. Do not use the home self-hosted runner while this repository is public, merge prior PRs, or change repository visibility as part of this continuation.

@@ -1,118 +1,144 @@
-# Minecraft MOD AI — headless adapter
+# Minecraft MOD AI — connected headless adapters
 
-確定設計 v1.4 のうち、**取得済みローカル成果を読む基礎アダプター**を実装したもの。
-設計全体の完成版ではない。現在の範囲と残工程は [IMPLEMENTATION-STATUS.md](IMPLEMENTATION-STATUS.md)。
-Knowledge Core・既存DB・既存runner・既存MOD解析を変更しない。Python標準ライブラリのみを使用する。
+Minecraft 1.20.1 / Forge / Java 17を主対象とする、既存KNEEKURA TECH HUB内の解析・実行接続。
+Source/bytecode、実際のForgeGradle依存物、mapping、MOD介入候補、既存Knowledge Core、検証・観測を接続する。
+MODの設計・編集をする新しいAIや、別DB、別スケジューラは追加しない。
 
-## 実行
+現在は接続実装と実Forgeビルド・依存解決まで検証済み。実際のMinecraft/GameTest/描画を含む全体完成は未達。
+正確な実行環境・根拠・残工程は [IMPLEMENTATION-STATUS.md](IMPLEMENTATION-STATUS.md) と
+[HOSTED-VERIFICATION-2026-09-28.md](HOSTED-VERIFICATION-2026-09-28.md) を参照。
+従来の `verification/local-run.json` は最初の実装時の履歴であり、最新CIの結果ではない。
 
-KNEEKURA TECH HUB のルートで Python 3.11 以上を使う。既に editable install 済みなら PYTHONPATH の設定は不要。
+## 実行と信頼境界
+
+TECH HUBルートでPython 3.11以上を使用する。editable install済みならPYTHONPATH設定は不要。
 
 ```powershell
-# Windows / PowerShell、TECH HUB のルート
 $env:PYTHONPATH = (Join-Path $PWD 'src')
 python -m kneekura_tech_hub.minecraft --help
+python -m kneekura_tech_hub.minecraft --store C:/Kneekura/cache capabilities
 ```
 
-```sh
-# Linux/macOS、TECH HUB のルート
-export PYTHONPATH="$PWD/src"
-python -m kneekura_tech_hub.minecraft --help
+Linuxでは `export PYTHONPATH="$PWD/src"`。console entryは `kneekura-minecraft`。
+実行権限はユーザーが管理するregistryで明示する。MODのREADME、ログ、Issue本文から権限を取得しない。
+Gradleは対象プロジェクトのコードを実行するため、registryへの登録はsandbox化を意味しない。
+検索・参照はGradle、ネットワーク、逆コンパイラやMinecraftを自動実行しない。
+
+JSONの `status` は入力/取得状態、`outcome` は検証結果、`assertion_domain` は証明範囲。
+コマンドが存在すること、exit 0、観測JSONが返ったことだけでゲームの動作をPASSにしない。
+
+## 1. 実際のMOD開発環境を取り込む
+
+`profile discover --workspace C:/mods/reimu` はbuild設定の受動的確認だけで、依存解決はUNKNOWN。
+実際の依存物は [registry.example.json](registry.example.json) にworkspace、wrapper hash、許可操作を設定して取得する。
+
+```powershell
+(Get-FileHash C:/mods/reimu/gradlew.bat -Algorithm SHA256).Hash.ToLower()
+python -m kneekura_tech_hub.minecraft --store C:/Kneekura/cache profile resolve --registry C:/Kneekura/registry.json --request-id resolve-001 --physical-side server --javap C:/Java/jdk-17/bin/javap.exe
 ```
 
-`profile.example.json` を**調べたいMODのルートへコピー**し、実際の版・コミット・未コミット差分hash・依存物のパスを埋める。
-テンプレートの `null` は未解決であり、Forgeの版を勝手に47.4.6等へ補完しない。
-rootのパスはmanifestの置き場所からの相対パス、または絶対パス。登録していない依存は解析対象ではない。
-ForgeGradleが解決したJAR、sources、生成source、AT/AW、設定、リソースをそれぞれ追加する。
-Parchmentは注釈用のrootとし、実行namespaceには指定しない。
+実際のForgeGradleで `kneekuraExportInputs` を実行し、compile/runtime別の順序付き依存物、座標、hash、
+source/resource/output roots、設定とソースのfingerprint、Java toolchainを出力する。
+出力は `<workspace>/build/kneekura/resolved-inputs.json`。
+既存exportを読むだけなら `profile import --workspace ... --resolved ... --javap ...`。
+設定や依存hashが変わったexportは拒否する。ソースだけ変わった場合も旧classを最新ソースと同一と認めない。
+名前空間を解決できない他MODはUNKNOWNのまま残し、読める資料まで隠さない。
 
-```sh
-python -m kneekura_tech_hub.minecraft --store /path/to/cache profile prepare --manifest /path/to/mod/kneekura-profile.json --javap /path/to/jdk/bin/javap
+手動root登録も引き続き可能。`profile.example.json` の版・由来・scope・namespaceを埋め、
+`profile prepare --manifest /path/to/profile.json` で固定する。pathはmanifest位置からの相対パスか絶対パス。
+`--javap` を指定したときだけ実行用classを逆アセンブルする。ゲーム用Javaと解析JDKのidentityは別々に記録する。
+
+## 2. ソース・bytecode・名前・介入候補
+
+以下は `python -m kneekura_tech_hub.minecraft --store CACHE` の後へ渡す。
+
+```text
+search --index INDEX --query LivingEntity
+inspect --index INDEX --document DOCUMENT_ID --view source
+inspect --index INDEX --document CLASS_DOCUMENT_ID --view bytecode
+inspect --index INDEX --owner demo/Example --member attack --descriptor "(I)I"
+relations --index INDEX --owner demo/Example --depth 1
+interventions --index INDEX --owner net/minecraft/world/entity/LivingEntity
+mapping import --path mappings.tiny --format tiny
+mapping lookup --mapping MAPPING_RECORD_HASH --from-namespace intermediary --to-namespace mojmap --owner CLASS --member METHOD --descriptor "()V"
 ```
 
-`--javap` は任意。指定した場合だけ、そのJDKのツールで `.class` を逆アセンブルする。MODのクラスを実行しない。
-Minecraft用Java 17と解析ツール用JDKは別物として記録する。この実装を検証した解析JDKは21、fixtureのclass targetは17。
-`profile prepare` は登録済みローカル入力のcaptureのみ。Gradleの評価、依存download、Minecraftの起動は行わない。
+INDEX等は返された実IDに置き換える。同名class/overloadはowner・member・JVM descriptor・由来で区別する。
+`next_cursor` は同じsnapshot/条件にのみ再使用できる。previewで切った原文は捨てない。
+静的referencesは完全なcallgraphではない。reflection、動的dispatch、条件付きMixin/refmap等は未解決として残る。
+同じ対象に介入する候補があっても競合確定とはしない。`official` 等の別名はprofileごとに明示し、
+Parchmentはparameter/Javadoc注釈であって実行namespaceではない。
 
-返された `index_snapshot_id` と `document_id` を以後の問い合わせに使う。
+Vineflower/tiny-remapperは [provider.example.json](provider.example.json) へ実在するtool/JDKとSHA-256を登録し、
+明示的に `profile transform --index INDEX --root ROOT_ID --operation decompile --provider PROVIDER_JSON`。
+remapには `--mapping-hash RAW_MAPPING_TEXT_HASH --from-namespace ... --to-namespace ...` も必要。
+入力/出力/使用tool/classpath/mappingのhashを保持する。派生sourceは元sourceや実行時classとの一致証明ではない。
+これら外部providerの実機結合はまだ未検証。プロトコルfixtureの合格を実ツール成功に置き換えない。
 
-```sh
-python -m kneekura_tech_hub.minecraft --store /path/to/cache search --index INDEX_SHA256 --query LivingEntity
-python -m kneekura_tech_hub.minecraft --store /path/to/cache inspect --index INDEX_SHA256 --document DOCUMENT_ID --view source
-python -m kneekura_tech_hub.minecraft --store /path/to/cache inspect --index INDEX_SHA256 --document CLASS_DOCUMENT_ID --view bytecode
-python -m kneekura_tech_hub.minecraft --store /path/to/cache inspect --index INDEX_SHA256 --owner demo/Example --member attack --descriptor '(I)I'
-python -m kneekura_tech_hub.minecraft --store /path/to/cache context --index INDEX_SHA256 --query pathfinding --track all
+## 3. 知識・失敗履歴
+
+`context --index INDEX --query ...` は原典の研究用検索。`--entity ke:... --context-json '{...}'` を付けると、
+設定済みの `KTHUB_DATABASE_URL` にある既存Coreのexact guidanceを参照する。DB/provenanceが不調でも原文を返すが、
+別版の知識へ黙ってfallbackしない。全文のCore説明はCAS hashから `artifact read --hash HASH` で参照する。
+
+`knowledge stage --index INDEX --document DOCUMENT_ID --summary ... --actor-id ...` は既存Core用のレビュー候補bundleを作る。
+Source/Snapshot/Evidence/NEW観測の形で、一観測一snapshotを保つ。Claim作成/昇格やDBへの自動投入はしない。
+
+他MODのIssue→原因→修正diff→教訓を読む工程は、[Failure/Repair History](../FAILURE-REPAIR-HISTORY-v1.md) を参照。
+記録・検索用の入口は次の独立submoduleで、同じCASを使う。新しいDBではない。
+
+```text
+python -m kneekura_tech_hub.minecraft.history --store CACHE import --record FAILURE-REPAIR-HISTORY.json
+python -m kneekura_tech_hub.minecraft.history --store CACHE query --history HISTORY_HASH --query "target" --track ANCHOR
 ```
 
-`INDEX_SHA256` 等はプレースホルダー。descriptorは**実際のJVM descriptor**を使う。
-`official` のようなprovider固有名は `namespace_aliases` へ明示する。namespaceフィルターは名前変換ではない。
-結果の `next_cursor` があれば同じindex・同じ条件で `--cursor` を渡す。更新後の別indexや別queryへは流用できない。
-`inspect --owner` も `--limit` と `--cursor` でページングでき、同名classやoverloadは勝手に統合しない。
-memberのreferencesは先頭100件のpreviewで、全件は `full_reference_view` のbytecodeから読める。
+これから制作する自分たちのMODも同じ形式で記録する。原因不明、著者報告、分析者の推定、実験記録を分離する。
+IssueのcloseやPRのmergeを修正確認済みにしない。検索0件は記録済み範囲内の一致なしであり、不具合が存在しない証明ではない。
 
-## データの意味
+## 4. 明示的ビルド・テスト・観測
 
-| 項目 | 意味 |
-|---|---|
-| `CAPTURED_NOT_RUNTIME_VERIFIED` | 登録されたローカル入力を固定した。実行classpathや実ゲームとの一致は未証明。 |
-| `identity_status=UNKNOWN` | 版や入力が未解決。読めた資料は利用できるが、完全な環境固定を主張しない。 |
-| `source_binary_match=UNRESOLVED` | 隣にsources JARがあってもbinaryとの一致を自動認定しない。 |
-| `RESEARCH_ONLY` | 原典・派生解析の参照。canonical Claimを作成・昇格していない。 |
-| `PARTIAL` | 続きのページ、未解決入力、消失したartifact等がある。coverage/evidenceを読む。 |
-| `NOT_FOUND` | 宣言した検索範囲内で一致なし。意味的・動的な不在証明ではない。 |
-| `AMBIGUOUS` | 複数の由来/overloadが残る。実効ロードclassを推測で選ばない。 |
-| `STALE` | index/query/runの組合せが不一致。 |
-
-検索は文字列・path検索、symbolは準備済みbytecodeのexact lookupから始める。静的参照は完全なcallgraphではない。
-reflection、動的dispatch、callback、Mixin条件plugin、ロード後の変換は未解決と表示する。
-通常検索ではbuildscript scopeと別trackを除外する。必要な場合だけ `--scope buildscript` や `--track all` を指定する。
-既存の黄昏の森などの解析資料は `scope=research, role=analysis` のdirectory rootとして登録できる。
-異なるトラックの資料はroot側でも明示する。`context` は今のところresearch用の文字列検索で、Knowledge Coreのguidance連携ではない。
-
-## 保存・制限
-
-source、JAR、assetsはローカルCASへ保持する。**元JARそのものも保持**し、directoryの場合は元ファイルhashのinventoryを保存する。
-`profile.roots[].artifact_hash` は元JAR、元file、またはdirectory inventoryのblobへ解決する。
-Python APIでは `Store(cache_path).read(hash)` / `.json(hash)` で取得できる。
-CLIはdocumentの全文・bytecode・raw bytesをページで返す。要約に置き換えて元データを捨てない。
-
-デフォルトは50,000 files、1 file 16 MiB、展開合計512 MiB、root capture 300秒、bytecode準備500 classes。
-大きな対象は `Limits` または `--max-classes` を明示して調整する。超過を完全解析成功としない。
-ページ上限は通常20候補、source 32 KiB（最大64 KiB）。続きはcursorで取得する。
-準備済みJDK出力は入力classhashとJDK launcher/image/optionsで再利用する。読み取り操作は再生成しない。
-このバージョンは自動GCを持たない。`Store.pin` は参照保持用markerを記録するが、利用者による手動削除を防止するものではない。
-各プロセスのbytecode準備は逐次実行。プロセス間のjob数調整は既存実行基盤側で行う。
-storeは信頼できる利用者の管理領域に置き、credentialや本番saveを入力rootに登録しない。
-
-## 検証と観測
-
-```sh
-python -m kneekura_tech_hub.minecraft validate plan --registry /path/to/runner-registry.json --kind gametest --world /path/to/test-world
-python -m kneekura_tech_hub.minecraft validate report --contract /path/to/run-contract.json --report /path/to/gametest-report.json
-python -m kneekura_tech_hub.minecraft observe --contract /path/to/run-contract.json --report /path/to/observation.json
+```text
+validate run --registry REGISTRY --kind compile --request-id build-001
+validate run --registry REGISTRY --kind unit --request-id unit-001
+world prepare --registry REGISTRY --template REGISTERED_TEMPLATE --request-id world-001
+contract prepare --registry REGISTRY --index INDEX --world PREPARED_WORLD --scenario SCENARIO_JSON --output CONTRACT_JSON
+validate run --registry REGISTRY --kind gametest --request-id test-001 --world PREPARED_WORLD --contract CONTRACT_JSON
+observe --session SESSION_JSON --operation observe --query-json "{}"
 ```
 
-`validate plan` は既存runnerへ渡す計画だけを返す。workspace/test world/残り起動回数を確認するが、worldの作成・budget消費・起動はしない。
-`validate run` はこのCLIにrunnerが未接続のため **UNSUPPORTED / NOT_RUN**。
-Pythonの `delegate_run(plan, runner=...)` に既存の権限付きrunner adapterを接続できるが、接続先の認可・回数管理・実worldの選択はhostの責任。
+compileの実taskは`build`。成功receiptをregistryの `build_receipt_hash` に設定し、同じsource世代のindexと組み合わせる。
+userdevでは通常 `build_artifact=build/classes/java/main` を使い、reobf済みJARと開発時classを混同しない。
+world prepareは登録したtemplateを `.kneekura-runs` 下へ複写し、本番worldや既存テストworldを上書きしない。
+scenarioは `world_seed`（整数）、`assertion_domain`、`expected_tests`、任意の`expected_required`を持つ。
+起動にはregistryで許可したkindと明示的なlaunch budgetが必要。claimされたhashではなく実artifact/receiptを照合する。
+通常の `validate run` はsessionを作るため、先に同じ場所へ `session create` しない。
 
-reportのidentityは `verification.IDENTITY_FIELDS` を参照。profile/index/build/source/dirty/scenario/assertionのhashだけでなく、
-run/epoch、world/template/seed/config、side、adapter名と版を照合する。
-GameTest reportは `kind=gametest`、`completed`、`exit_code`、`detected_test_ids` / `executed_test_ids` と各count、
-`tests=[{id,status,required}]` を持つ。contractの `expected_tests` が空なら成功扱いしない。
-`expected_required={test_id: boolean}` を指定した場合はrequired/optionalモードの変更も拒否する。
-0件、欠落、optional対象失敗、タイムアウト、別runの結果をPASSにしない。対象外の失敗は別欄に残す。
+同一request IDの再送は再実行しない。完了不明のwriteを自動retryしない。
+`validate plan` と `validate run --plan` は旧来の既存runner委譲口で、adapter未接続ならNOT_RUNのまま。
+直接registry方式と混同しない。
 
-observeは**既存bridgeが出力したJSONを検査する取り込み口**であり、新しいForge観測MODやlive接続はまだない。
-entityのUUID/dimension、position/velocity/health/target_uuid、server tick/log sequence区間、必要時のclient frameを検査する。
-観測はatomicと呼ばず、観測JSON自体から行動assertionのPASSを作らない。
-すべてのreport評価は `IMPORTED_REPORT_NOT_LIVE_ATTESTATION`。入力producerの真正性や実際のMinecraft起動を、このmoduleだけでは証明しない。
+Forge observerは開発環境で明示session指定がある場合のみ有効。127.0.0.1上で認証し、run/epoch/build/world/configを照合する。
+コードは実Forge 1.20.1でコンパイル・reobfJarまで成功したが、**ゲーム起動後のhandshake/GameTest/描画はまだ未検証**。
+観測はatomicな世界状態とも行動assertionの合格とも呼ばない。命令は `validate operation --session ... --command-id ... --request-id ...`
+に分離し、registryの命令だけを許可する。観測ルートから命令を実行しない。
 
-## ローカルテスト（CI不要）
+既存JSONの `validate report` / `observe --contract ... --report ...` は残るが、常にimported evidenceでありlive attestationではない。
+実装上、GameTestは期待対象ID/実行件数/required flags/個別結果とrun identityを確認し、0件/欠落/optional対象失敗をPASSにしない。
+対象外失敗は別欄に残す。クライアント起動だけでは描画・同期・性能が正しいという結論は出さない。
 
-```sh
-python -m pytest tests/test_minecraft_storage.py tests/test_minecraft_index.py tests/test_minecraft_verification.py tests/test_minecraft_cli.py -q
+## 5. 保存・制限・テスト
+
+元JAR、source、resources、派生物をCASへ保持する。directoryはファイルhash一覧と各原文。
+`artifact read --hash HASH --view text|bytes`、Pythonの `Store.read` / `.json` で全文へ到達できる。
+自動GCはなく、pinはユーザーの手動削除までは防がない。credentialや本番saveを入力rootにしない。
+デフォルトcaptureは50,000 files、1 file16MiB、合計512MiB、300秒、bytecode準備500classes。
+超過はPARTIALであって全解析成功ではない。調整は `Limits` / `--max-classes` で明示する。
+
+```text
+python -m pip install -e ".[dev]"
+python -m pytest -q
 ```
 
-JDKがあれば実際のJava 17 target fixtureをコンパイルして解析する。JDKなしではそのfixtureはskipされる。
-このテストは実Minecraft、実MODの挙動、既存Hub全体の回帰テストの代わりではない。
+全体のPostgreSQL試験は `KTHUB_TEST_DATABASE_URL` を設定する。CIはGitHub-hosted Linux/Java17/PostgreSQL16で実行する。
+公開中のself-hosted実行は使っていない。CIなしでも同じPython/Gradleコマンドをローカルで使用できる。
+fixtureのテスト、実Forgeビルド、実ゲームの受け入れ試験はそれぞれ別の証拠として扱う。
