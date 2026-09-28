@@ -77,6 +77,26 @@ side="BOTH"
         subprocess.run(cmd,cwd=root,check=True,timeout=30,stdout=subprocess.DEVNULL)
 
 
+
+def prepare_probe_scenario(world: dict) -> dict:
+    """Forge1.20.1 Main uses server.properties, not vanilla test-server defaults.
+
+    These are fixture inputs, not a relaxation of the observer's runtime checks.
+    Main expands/normalizes server.properties on startup, so the original bytes
+    are retained as input evidence rather than claimed to be runtime-immutable.
+    """
+    directory=Path(world['directory']); target=Path(world['world'])
+    if target.parent != directory or target.name != 'gametestserver':
+        raise ValueError('Unexpected prepared fixture world')
+    with (directory/'server.properties').open('x',encoding='utf-8') as f:
+        f.write('level-seed=0\nlevel-name=gametestserver\nserver-ip=127.0.0.1\n'
+                'server-port=0\nenable-rcon=false\nenable-query=false\n')
+    # Forge's PrefixGameTestTemplate(false) changes the test ID as well as its template.
+    return {'world_seed':0,'assertion_domain':'server_behavior','expected_tests':['bridge'],
+            'expected_required':{'bridge':True},'purpose':'Bridge loop, not general MOD correctness'}
+
+
+
 def run(root: Path, evidence: Path, repo: Path):
     root=root.resolve(); evidence=evidence.resolve(); evidence.mkdir(parents=True,exist_ok=True)
     temp=Path(os.environ['RUNNER_TEMP']).resolve()
@@ -116,8 +136,8 @@ def run(root: Path, evidence: Path, repo: Path):
     assert index.search(store,snapshot,'class ProbeMod')['results']
     (root/'world-template').mkdir()
     world=execution.prepare_world(store,registry,template=str(root/'world-template'),request_id='probe-world')
-    scenario={'world_seed':0,'assertion_domain':'server_behavior','expected_tests':['probemod.bridge'],
-              'expected_required':{'probemod.bridge':True},'purpose':'Bridge loop, not general MOD correctness'}
+    scenario=prepare_probe_scenario(world)
+    shutil.copyfile(Path(world['directory'])/'server.properties', evidence/'server-input.properties')
     contract=prepare_contract(store,registry,index_id=snapshot,world=world['world'],scenario=scenario)['contract']
     session_path=Path(world['directory'])/'session.json'
     live_errors=[]; summary={}
@@ -177,9 +197,9 @@ def run(root: Path, evidence: Path, repo: Path):
     assert result['outcome']=='PASS',result
     assert report['completed'] and report['executed_count']==2 and report['detected_count']==2,report
     actual={t['id']:t for t in report['tests']}
-    assert actual['probemod.bridge']['status']=='PASS'
-    assert actual['probemod.knownbad']['status']=='FAIL' and not actual['probemod.knownbad']['required']
-    assert result['gametest']['unrelated_failures'][0]['id']=='probemod.knownbad'
+    assert actual['bridge']['status']=='PASS'
+    assert actual['knownbad']['status']=='FAIL' and not actual['knownbad']['required']
+    assert result['gametest']['unrelated_failures'][0]['id']=='knownbad'
     print('REAL_FORGE_LIVE_BRIDGE_AND_GAMETEST_PASS_WITH_PRESERVED_NEGATIVE_CONTROL',flush=True)
 
 
