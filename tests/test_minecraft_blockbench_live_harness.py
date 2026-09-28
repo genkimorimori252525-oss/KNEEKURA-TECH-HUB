@@ -78,6 +78,15 @@ def test_cdp_waits_for_blockbench_plugin_api_before_loading():
 
 
 
+
+def test_cdp_supports_safe_snapshot_mode_without_reloading_plugin():
+    text = CDP.read_text()
+    assert "--snapshot-only" in text
+    assert "snapshotState" in text
+    assert "if (snapshotOnly)" in text
+
+
+
 def test_cdp_loader_never_evaluates_asset_prompt_or_enables_raw_script_route():
     text = CDP.read_text()
     assert "loadFromFile" in text
