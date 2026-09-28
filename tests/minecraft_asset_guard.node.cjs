@@ -7,6 +7,7 @@ function fixture(overrides={}) {
     texture_size:[32,32],palette:['#d4af37','#864fc7'],allow_write:true};
   const state={active:null,projects:[],format:null,plugins:['blockbench_mcp'],cubes:0,textures:[],serverAlreadyRunning:false};
   const calls=[];
+  const captures=[];
   let clock=0;
   const host={state:()=>state,now:()=>clock, invoke:async(action,args)=>{
     calls.push({action,args:JSON.parse(JSON.stringify(args))});
@@ -15,13 +16,21 @@ function fixture(overrides={}) {
     if(action==='add_cube') {state.cubes++;return {uuid:'cube-'+state.cubes};}
     if(action==='check_model') return {issue_count:0};
     throw new Error('Unexpected raw action '+action);
+  },capture:async(kind,args)=>{
+    captures.push({kind,args:JSON.parse(JSON.stringify(args))});
+    if(kind==='model') return {kind:'model',mime:'application/json',encoding:'utf8',
+      content:'{"parent":"minecraft:item/handheld","textures":{"layer0":"kneekura:item/celestial_staff"}}'};
+    if(kind==='texture') return {kind:'texture',mime:'image/png',encoding:'base64',content:'iVBORw0KGgo='};
+    if(kind==='view') return {kind:'view',mime:'image/png',encoding:'base64',view:args.view,
+      looking_at:'fixture',model_right_on:'fixture',note:'fixture',content:'iVBORw0KGgo='};
+    throw new Error('Unexpected capture kind '+kind);
   },...overrides};
   const guard=createGuard(config,host);
   const call=(seq,operation,args={},project_uuid=state.active?.uuid||null)=>guard.dispatch('kneekura_asset',
     {token:config.token,request_hash:config.request_hash,seq,project_uuid,operation,arguments:args});
   const status=()=>guard.dispatch('kneekura_asset_status',{token:config.token,request_hash:config.request_hash});
   const cube={name:'handle',from:[7,0,7],to:[9,16,9],uv:[0,0,4,4]};
-  return {config,state,calls,host,guard,call,status,cube,setClock:n=>clock=n};
+  return {config,state,calls,captures,host,guard,call,status,cube,setClock:n=>clock=n};
 }
 async function ready(f){await f.call(0,'begin');await f.call(1,'texture',{fill:'#d4af37'});}
 
@@ -31,7 +40,7 @@ test('guard creates only a fixed-format disposable project and records exact seq
  assert.deepEqual(f.calls[0],{action:'new_project',args:{format:'java_block',name:'staff',texture_width:32,texture_height:32}});
  const s=await f.status();assert.equal(s.next_sequence,1);assert.equal(s.loaded_revision,'UNATTESTED');
 });
-for(const action of ['execute_script','install_plugin','uninstall_plugin','save_project','export_model','export_project','load_project','close_project','add_cube','new_project','constructor','__proto__']){
+for(const action of ['execute_script','install_plugin','uninstall_plugin','save_project','export_model','export_project','load_project','close_project','screenshot','screenshot_views','get_texture','add_cube','new_project','constructor','__proto__']){
  test('raw '+action+' cannot bypass guard',async()=>{const f=fixture();await assert.rejects(f.guard.dispatch(action,{}));assert.equal(f.calls.length,0);});
 }
 test('default/false permission cannot begin',async()=>{const f=fixture();f.config.allow_write=false;const g=createGuard(f.config,f.host);
@@ -134,4 +143,57 @@ test('timed out write remains UNKNOWN after late completion; no replay or new wr
  f.state.cubes++;complete({uuid:'late'});await Promise.resolve();
  await assert.rejects(f.call(2,'cube',f.cube));await assert.rejects(f.call(3,'cube',{...f.cube,name:'another'}));
  assert.equal((await f.status()).last_receipt.completion,'UNKNOWN');
+});
+
+
+test('capture model is pathless, bounded evidence and never a verification PASS',async()=>{
+ const f=fixture();await ready(f);await f.call(2,'cube',f.cube);
+ const r=await f.call(3,'capture',{kind:'model',view:null});
+ assert.equal(r.completion,'CONFIRMED');assert.equal(r.result.kind,'model');
+ assert.deepEqual(f.captures,[{kind:'model',args:{view:null}}]);
+ assert.equal('path' in f.captures[0].args,false);
+ assert.deepEqual(r.verification,{structural:'NOT_RUN',visual:'NOT_RUN',runtime:'NOT_RUN'});
+});
+test('capture texture returns inline PNG evidence without filesystem authority',async()=>{
+ const f=fixture();await ready(f);await f.call(2,'cube',f.cube);
+ const r=await f.call(3,'capture',{kind:'texture',view:null});
+ assert.equal(r.result.mime,'image/png');assert.equal(r.result.encoding,'base64');
+ assert.deepEqual(f.captures,[{kind:'texture',args:{view:null}}]);
+});
+test('capture view is allowlisted and binds the requested view',async()=>{
+ const f=fixture();await ready(f);await f.call(2,'cube',f.cube);
+ const r=await f.call(3,'capture',{kind:'view',view:'front'});
+ assert.equal(r.result.view,'front');assert.deepEqual(f.captures,[{kind:'view',args:{view:'front'}}]);
+ const n=f.captures.length;
+ await assert.rejects(f.call(4,'capture',{kind:'view',view:'custom'}));
+ assert.equal(f.captures.length,n);
+});
+for(const bad of [
+ {kind:'model',view:'front'}, {kind:'texture',view:'left'}, {kind:'view',view:null},
+ {kind:'model',view:null,path:'../evil'}, {kind:'native',view:null}
+]){
+ test('capture rejects authority or malformed selector '+JSON.stringify(bad),async()=>{
+  const f=fixture();await ready(f);await f.call(2,'cube',f.cube);const n=f.captures.length;
+  await assert.rejects(f.call(3,'capture',bad));assert.equal(f.captures.length,n);
+ });
+}
+test('capture requires completed texture and geometry before evidence',async()=>{
+ const f=fixture();await f.call(0,'begin');await f.call(1,'texture',{fill:'#d4af37'});
+ await assert.rejects(f.call(2,'capture',{kind:'model',view:null}));assert.equal(f.captures.length,0);
+});
+test('medium screenshot payload fits the bounded evidence channel',async()=>{
+ const image=Buffer.alloc(220000,7).toString('base64');
+ const f=fixture({capture:async(kind,args)=>({kind:'view',mime:'image/png',encoding:'base64',view:args.view,
+   looking_at:'fixture',model_right_on:'fixture',note:'fixture',content:image})});
+ await ready(f);await f.call(2,'cube',f.cube);
+ const r=await f.call(3,'capture',{kind:'view',view:'front'});
+ assert.equal(r.completion,'CONFIRMED');assert.equal(r.result.content.length,image.length);
+});
+test('oversized or malformed capture poisons session and is never retried',async()=>{
+ const f=fixture({capture:async()=>({kind:'view',mime:'image/png',encoding:'base64',view:'front',
+   looking_at:'fixture',model_right_on:'fixture',note:'fixture',content:'A'.repeat(700004)})});
+ await ready(f);await f.call(2,'cube',f.cube);
+ await assert.rejects(f.call(3,'capture',{kind:'view',view:'front'}),e=>e.code==='UNKNOWN');
+ assert.equal((await f.status()).state,'UNKNOWN');
+ await assert.rejects(f.call(3,'capture',{kind:'view',view:'front'}));
 });
