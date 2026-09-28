@@ -58,6 +58,19 @@ function send(method, params={}) {
 }
 
 await send('Runtime.enable');
+
+async function waitForPluginApi() {
+  for (let attempt = 0; attempt < 180; attempt++) {
+    const state = await send('Runtime.evaluate', {
+      expression: "typeof Plugin === 'function' && typeof Plugins === 'object'",
+      returnByValue: true
+    });
+    if (state.result && state.result.value === true) return;
+    await new Promise(r => setTimeout(r, 250));
+  }
+  throw new Error('Plugin API did not become ready');
+}
+await waitForPluginApi();
 const literal = JSON.stringify(pluginPath);
 const expression = `(async () => {
   if (typeof Plugin !== 'function' || typeof Plugins !== 'object') throw new Error('Plugin API unavailable');
