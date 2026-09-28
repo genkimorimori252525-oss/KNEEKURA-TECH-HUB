@@ -20,6 +20,8 @@ function fixture(overrides={}) {
     captures.push({kind,args:JSON.parse(JSON.stringify(args))});
     if(kind==='model') return {kind:'model',mime:'application/json',encoding:'utf8',
       content:'{"parent":"minecraft:item/handheld","textures":{"layer0":"kneekura:item/celestial_staff"}}'};
+    if(kind==='native') return {kind:'native',mime:'application/json',encoding:'utf8',
+      content:'{"meta":{"format_version":"4.10"},"name":"celestial_staff"}'};
     if(kind==='texture') return {kind:'texture',mime:'image/png',encoding:'base64',content:'iVBORw0KGgo='};
     if(kind==='view') return {kind:'view',mime:'image/png',encoding:'base64',view:args.view,
       looking_at:'fixture',model_right_on:'fixture',note:'fixture',content:'iVBORw0KGgo='};
@@ -154,6 +156,13 @@ test('capture model is pathless, bounded evidence and never a verification PASS'
  assert.equal('path' in f.captures[0].args,false);
  assert.deepEqual(r.verification,{structural:'NOT_RUN',visual:'NOT_RUN',runtime:'NOT_RUN'});
 });
+test('capture native returns inline bbmodel JSON without filesystem authority',async()=>{
+ const f=fixture();await ready(f);await f.call(2,'cube',f.cube);
+ const r=await f.call(3,'capture',{kind:'native',view:null});
+ assert.equal(r.result.kind,'native');assert.equal(r.result.encoding,'utf8');
+ assert.deepEqual(f.captures,[{kind:'native',args:{view:null}}]);
+});
+
 test('capture texture returns inline PNG evidence without filesystem authority',async()=>{
  const f=fixture();await ready(f);await f.call(2,'cube',f.cube);
  const r=await f.call(3,'capture',{kind:'texture',view:null});
