@@ -4,8 +4,10 @@ Minecraft 1.20.1 / Forge / Java 17を主対象とする、既存KNEEKURA TECH HU
 Source/bytecode、実際のForgeGradle依存物、mapping、MOD介入候補、既存Knowledge Core、検証・観測を接続する。
 MODの設計・編集をする新しいAIや、別DB、別スケジューラは追加しない。
 
-現在は接続実装と実Forgeビルド・依存解決まで検証済み。実際のMinecraft/GameTest/描画を含む全体完成は未達。
-正確な実行環境・根拠・残工程は [IMPLEMENTATION-STATUS.md](IMPLEMENTATION-STATUS.md) と
+現在は実Forgeビルド・依存解決に加え、**実サーバーの起動→認証付き観測→命令実行→GameTest完了まで検証済み**。
+検証用の小さなMODを使った接続試験であり、描画や実MOD制作の全受け入れ条件を含む全体完成は未達。
+最新の根拠は [LIVE-VERIFICATION-2026-09-28.md](LIVE-VERIFICATION-2026-09-28.md)、残工程は
+[IMPLEMENTATION-STATUS.md](IMPLEMENTATION-STATUS.md)、以前のビルド検証は
 [HOSTED-VERIFICATION-2026-09-28.md](HOSTED-VERIFICATION-2026-09-28.md) を参照。
 従来の `verification/local-run.json` は最初の実装時の履歴であり、最新CIの結果ではない。
 
@@ -113,18 +115,30 @@ scenarioは `world_seed`（整数）、`assertion_domain`、`expected_tests`、�
 起動にはregistryで許可したkindと明示的なlaunch budgetが必要。claimされたhashではなく実artifact/receiptを照合する。
 通常の `validate run` はsessionを作るため、先に同じ場所へ `session create` しない。
 
+空のtemplateから初回生成する場合、Forgeが実際に読むrun directoryの `server.properties` のseed/nameを明示する。
+通常のMain経由なので「GameTestならseed0、特定world名になる」と推測しない。Mainが設定ファイルへ既定値を書き足すため、
+初期入力ファイルと起動後の全設定がバイト単位で不変だともみなさない。実際に起動したworldのseed/pathは照合する。
+Forge1.20.1では `PrefixGameTestTemplate(false)` がテスト名のclass prefixも外す。期待IDは実登録名へ合わせる。
+
 同一request IDの再送は再実行しない。完了不明のwriteを自動retryしない。
 `validate plan` と `validate run --plan` は旧来の既存runner委譲口で、adapter未接続ならNOT_RUNのまま。
 直接registry方式と混同しない。
 
 Forge observerは開発環境で明示session指定がある場合のみ有効。127.0.0.1上で認証し、run/epoch/build/world/configを照合する。
-コードは実Forge 1.20.1でコンパイル・reobfJarまで成功したが、**ゲーム起動後のhandshake/GameTest/描画はまだ未検証**。
+**実サーバーのhandshake、個体観測、命令実行・重複防止、GameTest完了は検証済み。クライアント描画は未検証**。
+今回の試験ではruntime_config_filesは空で、全ての動的設定を照合できたという主張ではない。
 観測はatomicな世界状態とも行動assertionの合格とも呼ばない。命令は `validate operation --session ... --command-id ... --request-id ...`
 に分離し、registryの命令だけを許可する。観測ルートから命令を実行しない。
+命令はBrigadier callbackに基づく `outcome` を返す。戻り値0でも成功の場合があり、通知の欠落や矛盾はUNKNOWNになる。
+命令の成功は `command_execution` であって、MODの行動テストの合格ではない。
+
+個体を検証する場合はquery-jsonで `dimension` と `entity_uuids` を指定する。
+結果上限で切られた全体一覧を使って「対象がいない」「この種類は全部で1体」とは判断しない。
 
 既存JSONの `validate report` / `observe --contract ... --report ...` は残るが、常にimported evidenceでありlive attestationではない。
 実装上、GameTestは期待対象ID/実行件数/required flags/個別結果とrun identityを確認し、0件/欠落/optional対象失敗をPASSにしない。
-対象外失敗は別欄に残す。クライアント起動だけでは描画・同期・性能が正しいという結論は出さない。
+対象外失敗は別欄に残す。今回も成功対象1件と意図したoptional失敗1件を区別して保存した。
+クライアント起動だけでは描画・同期・性能が正しいという結論は出さない。
 
 ## 5. 保存・制限・テスト
 
