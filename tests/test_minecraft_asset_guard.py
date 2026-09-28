@@ -160,6 +160,14 @@ def test_private_bundle_rejects_unrecognized_filenames_before_mkdir(tmp_path,nam
     assert not dest.exists()
 
 
+def test_private_bundle_filename_preserves_upstream_plugin_id(tmp_path):
+    m=api(); dest=tmp_path/'new'
+    files={'blockbench_mcp.js':b'plugin source','client-private.json':b'{}'}
+    m.write_private_bundle(dest,files)
+    assert (dest/'blockbench_mcp.js').read_bytes()==b'plugin source'
+    assert not (dest/'guarded-plugin.js').exists()
+
+
 def test_private_bundle_rejects_symlink_parent(tmp_path):
     real=tmp_path/'real'; real.mkdir(); alias=tmp_path/'alias'; alias.symlink_to(real,target_is_directory=True)
     with pytest.raises(ContractError): api().write_private_bundle(alias/'new',{'guarded-plugin.js':b'test','client-private.json':b'{}'})
