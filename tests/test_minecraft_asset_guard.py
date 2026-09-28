@@ -121,6 +121,12 @@ def test_recipe_has_exact_dispatch_and_never_enables_raw_routes():
     assert 'kneekuraGuard.dispatch(action, params)' in assembled
     assert '96 * 1024 * 1024' not in assembled
     assert config['token'] in assembled
+    assert 'capture: async' in m.HOST_ADAPTER
+    assert "require('fs')" not in m.HOST_ADAPTER
+    assert 'writeFile' not in m.HOST_ADAPTER
+    assert 'export_model' not in m.HOST_ADAPTER
+    assert 'export_project' not in m.HOST_ADAPTER
+    assert 'save_project' not in m.HOST_ADAPTER
     syntax=subprocess.run(['node','--check','-'],input=assembled,text=True,capture_output=True)
     assert syntax.returncode==0,syntax.stderr
 
