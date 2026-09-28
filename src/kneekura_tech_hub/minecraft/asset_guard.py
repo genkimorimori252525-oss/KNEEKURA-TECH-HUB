@@ -410,8 +410,8 @@ def write_private_bundle(destination: Path, files: dict[str,bytes]) -> None:
     ACL setup and real Windows acceptance are separate operational prerequisites.
     This does not protect against a malicious same-user process controlling parents.
     """
-    allowed={'guarded-plugin.js','client-private.json','manifest.json'}
-    if (not isinstance(files,dict) or not {'guarded-plugin.js','client-private.json'}<=set(files)
+    allowed={'blockbench_mcp.js','client-private.json','manifest.json'}
+    if (not isinstance(files,dict) or not {'blockbench_mcp.js','client-private.json'}<=set(files)
             or not set(files)<=allowed or any(not isinstance(v,bytes) or len(v)>2*1024*1024 for v in files.values())):
         raise ContractError('Invalid private package file inventory')
     dest=Path(destination).absolute()
@@ -463,7 +463,7 @@ def prepare_guarded_package(store: Store, request_hash: str, *, upstream: bytes,
                   verification=dict(structural='NOT_RUN',visual='NOT_RUN',runtime='NOT_RUN'),
                   live_acceptance='NOT_RUN',source_binding='LOCAL_BUILD_NOT_LOADED_ATTESTATION')
     destination=Path(parent)/('blockbench-asset-'+str(uuid.uuid4()))
-    files={'guarded-plugin.js':plugin,'client-private.json':canonical(c),'manifest.json':canonical(manifest)}
+    files={'blockbench_mcp.js':plugin,'client-private.json':canonical(c),'manifest.json':canonical(manifest)}
     write_private_bundle(destination,files)
     h=store.put_json(manifest)
     store.pin(h,'asset-guard:'+request_hash); store.pin(request_hash,'asset-guard:'+h)
