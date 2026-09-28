@@ -1,5 +1,9 @@
 # Asset integration — preparation and sealed pilot
 
+> **INTEGRATION HOLD: this branch is a review-only candidate, not the active PR #74 implementation.**
+> Read [the concurrent-guard reconciliation checkpoint](CONCURRENT-GUARD-HOLD-2026-09-28.md) first.
+> Do not load the candidate plugin or merge both guard implementations.
+
 Status: **M1 IMPLEMENTED; M2 GUARDED-WRITER CODE / FIXTURE TESTS IMPLEMENTED;
 FULL-UPSTREAM COMPOSITION AND LIVE BLOCKBENCH / MINECRAFT NOT_RUN**.
 
