@@ -68,6 +68,16 @@ def test_workflow_is_standard_hosted_pinned_and_retains_evidence():
     assert 'retention-days: 7' in text
 
 
+
+def test_cdp_waits_for_blockbench_plugin_api_before_loading():
+    text = CDP.read_text()
+    assert "async function waitForPluginApi" in text
+    assert "Plugin API did not become ready" in text
+    assert "Runtime.evaluate" in text
+    assert "typeof Plugin === 'function' && typeof Plugins === 'object'" in text
+
+
+
 def test_cdp_loader_never_evaluates_asset_prompt_or_enables_raw_script_route():
     text = CDP.read_text()
     assert "loadFromFile" in text
