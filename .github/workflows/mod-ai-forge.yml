@@ -5,6 +5,7 @@ on:
     branches: ["jolly/minecraft-mod-ai-impl-2026-09-28"]
     paths:
       - 'departments/minecraft/mod-ai/forge-observer/**'
+      - 'src/kneekura_tech_hub/minecraft/**'
       - '.github/workflows/mod-ai-forge.yml'
 
 permissions:
@@ -26,6 +27,9 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - name: Prepare exact Forge reference MDK
         shell: bash
         run: |
@@ -38,7 +42,6 @@ jobs:
           echo "1a1c045f235262ff617e285ea2156571ea93bfbe  $RUNNER_TEMP/kthub-forge-mdk.zip" | sha1sum --check
           sha256sum "$RUNNER_TEMP/kthub-forge-mdk.zip" > forge-evidence/mdk-sha256.txt
           unzip -q "$RUNNER_TEMP/kthub-forge-mdk.zip" -d "$RUNNER_TEMP/kthub-forge-mdk"
-          # Only replace the disposable MDK example; never touch a user workspace.
           rm -rf "$RUNNER_TEMP/kthub-forge-mdk/src"
           cp -R departments/minecraft/mod-ai/forge-observer/src "$RUNNER_TEMP/kthub-forge-mdk/src"
           sed -i 's/^mod_id=.*/mod_id=kneekura_observer/' "$RUNNER_TEMP/kthub-forge-mdk/gradle.properties"
@@ -55,6 +58,54 @@ jobs:
           chmod +x gradlew
           ./gradlew --no-daemon --max-workers=2 -Dorg.gradle.jvmargs=-Xmx3G compileJava jar 2>&1 | tee "$GITHUB_WORKSPACE/forge-evidence/compile.txt"
           sha256sum build/libs/*.jar > "$GITHUB_WORKSPACE/forge-evidence/observer-jar.sha256"
+      - name: Export actual resolved ForgeGradle inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$RUNNER_TEMP/kthub-forge-mdk"
+          ./gradlew --no-daemon --max-workers=2 -Dorg.gradle.jvmargs=-Xmx3G \
+            -I "$GITHUB_WORKSPACE/src/kneekura_tech_hub/minecraft/resources/kneekura-inputs.init.gradle" \
+            kneekuraExportInputs -PkneekuraNamespace=mojmap \
+            -PkneekuraExport="$RUNNER_TEMP/kthub-resolved-inputs.json" \
+            2>&1 | tee "$GITHUB_WORKSPACE/forge-evidence/resolved-export.txt"
+      - name: Verify export and query captured real workspace
+        env:
+          PYTHONPATH: ${{ github.workspace }}/src
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          from kneekura_tech_hub.minecraft.workspace import import_resolved
+          from kneekura_tech_hub.minecraft.storage import Store, capture_profile
+          from kneekura_tech_hub.minecraft.index import prepare_index, search, inspect_document
+          temp = Path(os.environ['RUNNER_TEMP'])
+          root = temp / 'kthub-forge-mdk'
+          raw = (temp / 'kthub-resolved-inputs.json').read_bytes()
+          export = json.loads(raw)
+          manifest = import_resolved(export, root)
+          assert (manifest['minecraft'], manifest['loader_version'], manifest['java_major']) == ('1.20.1', '47.4.6', 17)
+          assert export['artifacts'], 'No actual resolved dependency artifacts'
+          assert any('net.minecraftforge:forge:' in str(x.get('coordinate')) for x in export['artifacts'])
+          store = Store(temp / 'kthub-integration-cas')
+          profile = capture_profile(manifest, root, store)
+          snapshot = prepare_index(profile, store)['index_snapshot_id']
+          result = search(store, snapshot, 'class ForgeObserver', limit=20)
+          assert result['results'], 'Actual Forge observer source is not searchable'
+          document = result['results'][0]['document_id']
+          text = inspect_document(store, snapshot, document)['results'][0]['text']
+          assert 'class ForgeObserver' in text
+          evidence = {'minecraft':'1.20.1', 'forge':'47.4.6', 'java_major':17,
+                      'export_sha256':hashlib.sha256(raw).hexdigest(),
+                      'resolved_artifacts':len(export['artifacts']),
+                      'resolution_unresolved':export['unresolved'],
+                      'index_snapshot_id':snapshot, 'documents':len(profile['documents']),
+                      'capture_coverage':profile['coverage'], 'source_lookup':'PASS',
+                      'runtime_execution':'NOT_RUN', 'cas_retained_in_public_artifact':False}
+          Path('forge-evidence/resolved-import.json').write_text(json.dumps(evidence, indent=2))
+          print('REAL_FORGE_RESOLVED_IMPORT_AND_SOURCE_LOOKUP_PASS', len(export['artifacts']), len(profile['documents']))
+          PY
       - name: Retain bounded integration evidence
         if: always()
         uses: actions/upload-artifact@v4
