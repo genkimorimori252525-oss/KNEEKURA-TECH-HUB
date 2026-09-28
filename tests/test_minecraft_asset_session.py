@@ -116,6 +116,9 @@ class Fixture:
             if kind=='model':
                 inner=dict(kind='model',mime='application/json',encoding='utf8',
                            content='{"parent":"minecraft:item/handheld","textures":{"layer0":"kneekura:item/celestial_staff"}}')
+            elif kind=='native':
+                inner=dict(kind='native',mime='application/json',encoding='utf8',
+                           content='{"meta":{"format_version":"4.10"},"name":"celestial_staff"}')
             elif kind=='texture':
                 content=base64.b64encode(PNG).decode()
                 if self.mode=='bad_png': content=base64.b64encode(b'not png').decode()
@@ -178,7 +181,7 @@ def test_successful_session_captures_inline_artifacts_to_existing_cas(prepared):
     assert result['verification']=={'structural':'NOT_RUN','visual':'NOT_RUN','runtime':'NOT_RUN'}
     artifacts=result['artifacts']
     assert [(a['kind'],a.get('view')) for a in artifacts]==[
-        ('model',None),('texture',None),('view','front'),('view','left'),('view','back')]
+        ('model',None),('native',None),('texture',None),('view','front'),('view','left'),('view','back')]
     for item in artifacts:
         raw=store.read(item['content_hash']); assert len(raw)==item['size_bytes']
         if item['kind']!='model': assert raw.startswith(b'\x89PNG\r\n\x1a\n')
@@ -188,7 +191,7 @@ def test_successful_session_captures_inline_artifacts_to_existing_cas(prepared):
     for p in store.root.rglob('*'):
         if p.is_file(): assert config['token'].encode() not in p.read_bytes()
     operations=[r.get('params',{}).get('operation') for r in server.requests if r.get('action')=='kneekura_asset']
-    assert operations==['begin','texture','cube','cube','inspect','capture','capture','capture','capture','capture']
+    assert operations==['begin','texture','cube','cube','inspect','capture','capture','capture','capture','capture','capture']
     def walk(value):
         if isinstance(value,dict):
             for k,v in value.items():
