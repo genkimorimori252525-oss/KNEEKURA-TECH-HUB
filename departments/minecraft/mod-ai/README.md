@@ -9,6 +9,7 @@ MODの設計・編集をする新しいAIや、別DB、別スケジューラは�
 最新の根拠は [LIVE-VERIFICATION-2026-09-28.md](LIVE-VERIFICATION-2026-09-28.md)、残工程は
 [IMPLEMENTATION-STATUS.md](IMPLEMENTATION-STATUS.md)、以前のビルド検証は
 [HOSTED-VERIFICATION-2026-09-28.md](HOSTED-VERIFICATION-2026-09-28.md) を参照。
+2026-09-28の設計思想・経緯・判断・到達点を一つにまとめた歴史記録は [history/2026-09-28-FOUNDATION-SESSION.md](history/2026-09-28-FOUNDATION-SESSION.md)。
 従来の `verification/local-run.json` は最初の実装時の履歴であり、最新CIの結果ではない。
 
 ## 実行と信頼境界
