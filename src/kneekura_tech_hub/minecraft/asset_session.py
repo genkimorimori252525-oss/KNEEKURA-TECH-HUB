@@ -262,10 +262,11 @@ def run_session(store: Store, registry: dict, private_config: dict, plan: dict) 
     if config['allow_write'] is not True:
         raise ContractError('Private guard configuration has writes disabled')
     request_hash = valid_hash(config['request_hash'])
-    p = validate_plan(store, request_hash, plan)
+    candidate = _detached(plan)
+    if not isinstance(candidate, dict) or candidate.get('request_hash') != request_hash:
+        raise ContractError('Private configuration and plan request hashes differ')
+    p = validate_plan(store, request_hash, candidate)
     request, _ = load_request(store, request_hash)
-    if p['request_hash'] != request_hash:
-        raise ContractError('Plan/request mismatch')
 
     initial = _status(_command(r, 'kneekura_asset_status',
                                {'token': config['token'], 'request_hash': request_hash}),
