@@ -217,15 +217,15 @@ def _receipt(value: Any, *, request_hash: str, seq: int, operation: str,
 def _capture_bytes(value: Any, kind: str, view: str | None) -> tuple[bytes, dict]:
     if not isinstance(value, dict) or value.get('kind') != kind:
         raise ContractError('Capture kind mismatch')
-    if kind == 'model':
+    if kind in ('model', 'native'):
         if (set(value) != {'kind','mime','encoding','content'}
                 or value.get('mime') != 'application/json' or value.get('encoding') != 'utf8'
                 or not isinstance(value.get('content'), str)):
-            raise ContractError('Model capture envelope is invalid')
+            raise ContractError('JSON capture envelope is invalid')
         raw = value['content'].encode('utf-8')
         parsed = decode_json(raw, max_bytes=512 * 1024)
         if not isinstance(parsed, dict):
-            raise ContractError('Model capture must be a JSON object')
+            raise ContractError('JSON capture must be an object')
         return raw, {}
     if kind == 'texture':
         expected = {'kind','mime','encoding','content'}
@@ -294,7 +294,7 @@ def run_session(store: Store, registry: dict, private_config: dict, plan: dict) 
     inspection = call('inspect', {})['result']
 
     captured: list[tuple[str, str | None, bytes, dict]] = []
-    for kind, view in [('model', None), ('texture', None)]:
+    for kind, view in [('model', None), ('native', None), ('texture', None)]:
         result = call('capture', {'kind': kind, 'view': view})['result']
         raw, meta = _capture_bytes(result, kind, view)
         captured.append((kind, view, raw, meta))
@@ -318,7 +318,7 @@ def run_session(store: Store, registry: dict, private_config: dict, plan: dict) 
     artifacts = []
     for kind, view, raw, meta in captured:
         content_hash = store.put(raw)
-        item = {'kind': kind, 'mime': 'application/json' if kind == 'model' else 'image/png',
+        item = {'kind': kind, 'mime': 'application/json' if kind in ('model', 'native') else 'image/png',
                 'content_hash': content_hash, 'size_bytes': len(raw)}
         if view is not None:
             item['view'] = view
