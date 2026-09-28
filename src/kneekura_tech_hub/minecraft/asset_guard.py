@@ -136,7 +136,7 @@ GUARD_FACTORY = r'''(function createKneekuraAssetGuard(input, host) {
     if (operation === 'capture') {
       keys(args, ['kind','view']);
       if (!textureUUID || cubeCount < 1) fail('CAPTURE_NOT_READY');
-      if (args.kind === 'model' || args.kind === 'texture') {
+      if (args.kind === 'model' || args.kind === 'native' || args.kind === 'texture') {
         if (args.view !== null) fail('INVALID_CAPTURE');
       } else if (args.kind === 'view') {
         if (!['front','left','right','back','top','bottom','front_right'].includes(args.view)) fail('INVALID_CAPTURE');
@@ -149,9 +149,9 @@ GUARD_FACTORY = r'''(function createKneekuraAssetGuard(input, host) {
   function captureResult(expected, value) {
     const bad = () => fail('INVALID_CAPTURE_RESULT');
     if (!value || typeof value !== 'object' || Array.isArray(value)) bad();
-    if (expected.kind === 'model') {
+    if (expected.kind === 'model' || expected.kind === 'native') {
       keys(value, ['kind','mime','encoding','content']);
-      if (value.kind !== 'model' || value.mime !== 'application/json' || value.encoding !== 'utf8' ||
+      if (value.kind !== expected.kind || value.mime !== 'application/json' || value.encoding !== 'utf8' ||
           typeof value.content !== 'string' || value.content.length < 2 || value.content.length > 524288) bad();
       let parsed;
       try { parsed = JSON.parse(value.content); } catch(e) { bad(); }
@@ -266,6 +266,13 @@ HOST_ADAPTER = r'''{
       const data = await Promise.resolve(Format.codec.compile());
       const content = typeof data === 'string' ? data : JSON.stringify(data);
       return {kind:'model', mime:'application/json', encoding:'utf8', content};
+    }
+    if (kind === 'native') {
+      if (typeof Codecs === 'undefined' || !Codecs || !Codecs.project || typeof Codecs.project.compile !== 'function')
+        throw new Error('Blockbench project codec is unavailable');
+      const data = await Promise.resolve(Codecs.project.compile({compressed:false, absolute_paths:false, raw:true}));
+      const content = typeof data === 'string' ? data : JSON.stringify(data);
+      return {kind:'native', mime:'application/json', encoding:'utf8', content};
     }
     if (kind === 'texture') {
       if (typeof Texture === 'undefined' || Texture.all.length !== 1 || typeof Texture.all[0].getDataURL !== 'function')
