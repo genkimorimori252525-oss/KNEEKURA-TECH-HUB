@@ -133,8 +133,46 @@ GUARD_FACTORY = r'''(function createKneekuraAssetGuard(input, host) {
       for (const side of ['north','south','east','west','up','down']) faces[side] = {uv:uv.slice(), texture:textureUUID};
       return ['add_cube',{name:args.name,from,to,autouv:0,box_uv:false,faces}];
     }
+    if (operation === 'capture') {
+      keys(args, ['kind','view']);
+      if (!textureUUID || cubeCount < 1) fail('CAPTURE_NOT_READY');
+      if (args.kind === 'model' || args.kind === 'texture') {
+        if (args.view !== null) fail('INVALID_CAPTURE');
+      } else if (args.kind === 'view') {
+        if (!['front','left','right','back','top','bottom','front_right'].includes(args.view)) fail('INVALID_CAPTURE');
+      } else fail('INVALID_CAPTURE');
+      return ['__capture', {kind:args.kind, view:args.view}];
+    }
     if (operation === 'inspect') { keys(args, []); return ['check_model', {}]; }
     fail('OPERATION_NOT_ALLOWED');
+  }
+  function captureResult(expected, value) {
+    const bad = () => fail('INVALID_CAPTURE_RESULT');
+    if (!value || typeof value !== 'object' || Array.isArray(value)) bad();
+    if (expected.kind === 'model') {
+      keys(value, ['kind','mime','encoding','content']);
+      if (value.kind !== 'model' || value.mime !== 'application/json' || value.encoding !== 'utf8' ||
+          typeof value.content !== 'string' || value.content.length < 2 || value.content.length > 524288) bad();
+      let parsed;
+      try { parsed = JSON.parse(value.content); } catch(e) { bad(); }
+      if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) bad();
+    } else if (expected.kind === 'texture') {
+      keys(value, ['kind','mime','encoding','content']);
+      if (value.kind !== 'texture' || value.mime !== 'image/png' || value.encoding !== 'base64') bad();
+      boundedBase64(value.content);
+    } else if (expected.kind === 'view') {
+      keys(value, ['kind','mime','encoding','view','looking_at','model_right_on','note','content']);
+      if (value.kind !== 'view' || value.mime !== 'image/png' || value.encoding !== 'base64' ||
+          value.view !== expected.view) bad();
+      for (const k of ['looking_at','model_right_on','note'])
+        if (typeof value[k] !== 'string' || value[k].length > 512) bad();
+      boundedBase64(value.content);
+    } else bad();
+    return value;
+    function boundedBase64(content) {
+      if (typeof content !== 'string' || !content.length || content.length > 700000 ||
+          content.length % 4 !== 0 || !/^[A-Za-z0-9+/]*={0,2}$/.test(content)) bad();
+    }
   }
   async function dispatch(action, p) {
     // No fallback to commands[action]: *all* original routes are closed here,
@@ -166,7 +204,9 @@ GUARD_FACTORY = r'''(function createKneekuraAssetGuard(input, host) {
       // A deadline cannot cancel editor-side side effects. Expiration poisons
       // this whole session; it never unlocks another write or triggers retry.
       const result = await Promise.race([
-        Promise.resolve(host.invoke(upstreamAction,args)),
+        Promise.resolve(operation === 'capture'
+          ? host.capture(args.kind, {view:args.view})
+          : host.invoke(upstreamAction,args)),
         new Promise((_,reject) => { timer=setTimeout(() => reject(new Error('deadline')),10000); })
       ]);
       if (operation === 'begin') {
@@ -180,8 +220,10 @@ GUARD_FACTORY = r'''(function createKneekuraAssetGuard(input, host) {
       const nextTexture = operation === 'texture' ? result && result.uuid : textureUUID;
       if (operation === 'texture' && (typeof nextTexture !== 'string' || !nextTexture)) poison();
       stateCheck(false, cubeCount+(operation==='cube'?1:0), nextTexture);
+      if (operation === 'capture') captureResult(args, result);
       const raw = JSON.stringify(result);
-      if (typeof raw !== 'string' || raw.length > 262144) poison();
+      const responseLimit = operation === 'capture' ? 786432 : 262144;
+      if (typeof raw !== 'string' || raw.length > responseLimit) poison();
       if (operation === 'texture') textureUUID=nextTexture;
       if (operation === 'cube') { cubeCount++; names.add(args.name); }
       last = {seq,operation,completion:'CONFIRMED',project_uuid:projectUUID,request_hash:config.request_hash,
@@ -216,6 +258,32 @@ HOST_ADAPTER = r'''{
   invoke: (action, args) => {
     if (!Object.prototype.hasOwnProperty.call(commands, action)) throw new Error('Missing reviewed action');
     return commands[action](args);
+  },
+  capture: async (kind, args) => {
+    if (kind === 'model') {
+      if (typeof Format === 'undefined' || !Format || !Format.codec || typeof Format.codec.compile !== 'function')
+        throw new Error('Current format has no reviewed compile path');
+      const data = await Promise.resolve(Format.codec.compile());
+      const content = typeof data === 'string' ? data : JSON.stringify(data);
+      return {kind:'model', mime:'application/json', encoding:'utf8', content};
+    }
+    if (kind === 'texture') {
+      if (typeof Texture === 'undefined' || Texture.all.length !== 1 || typeof Texture.all[0].getDataURL !== 'function')
+        throw new Error('Expected exactly one capturable texture');
+      const data = Texture.all[0].getDataURL();
+      if (typeof data !== 'string' || !data.startsWith('data:image/png;base64,'))
+        throw new Error('Texture capture is not PNG');
+      return {kind:'texture', mime:'image/png', encoding:'base64',
+        content:data.slice('data:image/png;base64,'.length)};
+    }
+    if (kind === 'view') {
+      const shot = await commands.screenshot({view:args.view,width:320,height:320,annotate:true,stamp:'KNEEKURA evidence'});
+      if (!shot || typeof shot.base64 !== 'string') throw new Error('Screenshot capture failed');
+      return {kind:'view', mime:'image/png', encoding:'base64', view:shot.view,
+        looking_at:String(shot.looking_at || ''), model_right_on:String(shot.model_right_on || ''),
+        note:String(shot.note || ''), content:shot.base64};
+    }
+    throw new Error('Unsupported reviewed capture kind');
   }
 }'''
 
