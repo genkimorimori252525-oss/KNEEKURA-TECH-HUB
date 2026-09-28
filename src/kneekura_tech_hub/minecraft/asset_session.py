@@ -279,9 +279,19 @@ def run_session(store: Store, registry: dict, private_config: dict, plan: dict) 
         nonlocal seq, project_uuid
         params = {'token': config['token'], 'request_hash': request_hash, 'seq': seq,
                   'project_uuid': project_uuid, 'operation': operation, 'arguments': arguments}
-        receipt = _receipt(_command(r, 'kneekura_asset', params),
-                           request_hash=request_hash, seq=seq, operation=operation,
-                           project_uuid=project_uuid)
+        label = operation
+        if operation == 'capture' and isinstance(arguments, dict):
+            kind = arguments.get('kind')
+            if isinstance(kind, str):
+                label = f'capture:{kind}'
+        try:
+            raw_receipt = _command(r, 'kneekura_asset', params)
+            receipt = _receipt(raw_receipt, request_hash=request_hash, seq=seq,
+                               operation=operation, project_uuid=project_uuid)
+        except ContractError:
+            # Keep provider text/stack private, but retain enough fixed vocabulary
+            # to identify which reviewed guard operation failed in live acceptance.
+            raise ContractError(f'Guarded operation {label} failed') from None
         if project_uuid is None:
             project_uuid = receipt['project_uuid']
         seq += 1
