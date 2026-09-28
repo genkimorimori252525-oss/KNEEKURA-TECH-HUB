@@ -51,8 +51,8 @@ def prepared(tmp_path):
     config = guard_config(store, request['request_hash'], allow_write=True)
     plan = dict(schema_version=1, request_hash=request['request_hash'], fill='#d4af37',
                 cubes=[
-                    dict(name='handle', from=[7,0,7], to=[9,16,9], uv=[0,0,4,4]),
-                    dict(name='head', from=[5,16,6], to=[11,20,10], uv=[4,0,12,8]),
+                    {'name':'handle','from':[7,0,7],'to':[9,16,9],'uv':[0,0,4,4]},
+                    {'name':'head','from':[5,16,6],'to':[11,20,10],'uv':[4,0,12,8]},
                 ])
     return store, request['request_hash'], config, plan
 
@@ -160,10 +160,10 @@ def test_plan_validation_is_exact_request_bound_and_read_only(prepared):
 
 
 @pytest.mark.parametrize('cube',[
-    dict(name='../bad',from=[0,0,0],to=[1,1,1],uv=[0,0,1,1]),
-    dict(name='bad',from=[0,0,0],to=[0,1,1],uv=[0,0,1,1]),
-    dict(name='bad',from=[-17,0,0],to=[1,1,1],uv=[0,0,1,1]),
-    dict(name='bad',from=[0,0,0],to=[1,1,1],uv=[0,0,99,1]),
+    {'name':'../bad','from':[0,0,0],'to':[1,1,1],'uv':[0,0,1,1]},
+    {'name':'bad','from':[0,0,0],'to':[0,1,1],'uv':[0,0,1,1]},
+    {'name':'bad','from':[-17,0,0],'to':[1,1,1],'uv':[0,0,1,1]},
+    {'name':'bad','from':[0,0,0],'to':[1,1,1],'uv':[0,0,99,1]},
 ])
 def test_bad_geometry_is_rejected_before_network_or_cas(prepared,cube):
     store,h,_,plan=prepared; bad={**plan,'cubes':[cube]}; before=files(store.root)
