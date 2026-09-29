@@ -90,3 +90,68 @@ This is part of analyzing other MODs, not merely a recorder for future KNEEKURA 
 Define the history window, queries and relevant subsystems before the review. Record inspected, deferred and unavailable material. No useful supported cases is a legitimate bounded result; it is not evidence that the MOD has no bugs. Do not grow an unbounded all-history crawl just to satisfy this facet.
 
 Existing analysis results are not retroactively rewritten. Add this facet as NOT_ANALYZED until reviewed; preserve the previous completion/version record. A new whole-target completion claim must account for the facet, including explicit unavailable/no-supported-case findings and coverage evidence. Twilight Forest remains ahead of Connector in the analysis queue.
+
+## 10. Player-facing behavioral reconnaissance — required discovery aid
+
+Whole-target MOD analysis should inspect suitable **player-facing behavioral sources** early,
+when they exist. Examples include the official wiki/manual, established community wikis,
+攻略サイト / gameplay guides, modpack documentation, forum posts, Reddit discussions and
+videos whose claims can be located precisely enough to review.
+
+Their role is **reconnaissance, not implementation authority**.
+
+Use them to discover:
+
+- player-visible features and subsystem names that source-tree structure alone may hide;
+- boss phases, special attacks, immunity windows and progression gates;
+- item/block effects, interaction conditions and uncommon state transitions;
+- biome/dimension/structure generation conditions and hidden rooms/mechanics;
+- compatibility symptoms, version-specific behavior, known bugs and practical workarounds;
+- terminology and concrete values that produce better Source/Bytecode/Issue/PR searches;
+- candidate links from player-observed symptoms to Failure / Repair History investigations.
+
+The default flow is:
+
+```text
+player-facing source
+        ↓
+behavior hint / research hypothesis
+        ↓
+track/version scoped search terms and Gameplay Feature Map
+        ↓
+Source + Bytecode + mappings
+        ↓
+Issue / PR / commit history when relevant
+        ↓
+real-game observation/test when needed
+        ↓
+evidence-backed engineering finding
+```
+
+Rules:
+
+1. **Do not copy a guide claim into implementation truth.** A guide/wiki/community statement
+   may seed a `CANDIDATE` / secondary report, but it does not by itself prove how the MOD is
+   implemented.
+2. **Bind the hint to a track/version and retrieval date when possible.** A guide written for
+   another Minecraft/MOD version must not silently become an ANCHOR claim.
+3. **Preserve disagreement.** If two guides disagree, record the disagreement as a search lead;
+   do not vote by popularity or choose a winner without stronger evidence.
+4. **Prefer exact behavioral clues over generic prose.** Names, thresholds, triggers, dimensions,
+   items, structures, symptoms and reproduction steps are useful because they can be traced into
+   code/history/runtime evidence.
+5. **Treat Reddit/forum/video material as community reports.** They may reveal rare behavior or
+   failures that official docs omit, but author confidence, likes/views and repetition are not
+   validation.
+6. **No suitable guide found is an acceptable result.** Record that the reconnaissance surface
+   was unavailable or unhelpful; do not invent player behavior to fill the gap.
+7. **Completion still depends on engineering evidence.** Player-facing reconnaissance improves
+   what the analyst looks for; it cannot by itself move a required facet to `EVIDENCE_BACKED`.
+8. **Do not let guides narrow the analysis universe permanently.** Full-tree inventory and the
+   required analysis surfaces remain authoritative, so undocumented mechanics can still be found.
+
+For large MODs, use the reconnaissance pass to sketch a lightweight **Gameplay Feature Map**
+before deep code interpretation (for example bosses, progression, structures, worldgen, items,
+rendering-visible mechanics and compatibility). The map is a navigation aid, not a second
+canonical knowledge graph.
+
