@@ -53,6 +53,13 @@ source/resource/output roots、設定とソースのfingerprint、Java toolchain
 
 ## 2. ソース・bytecode・名前・介入候補
 
+MOD全体解析を始めるときは、コードだけから入らず、利用できるなら公式Wiki/Manual、主要なcommunity Wiki、
+攻略サイト、modpack documentation、Reddit/forum、具体的な解説動画も**探索ヒントとして先に確認する**。
+ここからGameplay Feature Mapやbehavior hint（ボス形態、条件、隠し仕様、既知不具合、版差など）を作り、
+Source/bytecode/Issue/PR/実機で追う検索語へ変換する。攻略情報そのものを実装事実やPASSにはしない。
+別バージョンの記述、community report、相互に矛盾する記述はその由来を保ったまま仮説として扱う。
+規範は [ANALYSIS-SPEC-v1 §10](../ANALYSIS-SPEC-v1.md#10-player-facing-behavioral-reconnaissance--required-discovery-aid) を参照。
+
 以下は `python -m kneekura_tech_hub.minecraft --store CACHE` の後へ渡す。
 
 ```text
