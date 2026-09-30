@@ -149,10 +149,11 @@ public final class ForgeObserver {
     }
 
     // Called only by the reflectively installed physical-client listener.
-    void startReceiver(Path actualDirectory,Function<JsonObject,CompletableFuture<JsonObject>> capture) throws Exception {
+    void startReceiver(Path actualDirectory,Function<JsonObject,CompletableFuture<JsonObject>> capture,Callable<Void> beforeActivate) throws Exception {
         initialize(); require(role.equals("dedicated_client"),"Dedicated receiving role required");
         require(actualDirectory.toRealPath().equals(directory),"Actual client gameDirectory differs from prepared directory");
         marker();
+        beforeActivate.call();
         receiverCapture=capture; activate();
     }
     JsonObject receiverSession() throws Exception { return readSession(); }

@@ -1,0 +1,57 @@
+{
+  "status": "PARTIAL",
+  "history_hash": "66d7d6111849f64fc29bfd9a37274f71c64657d71892227b9982e69f187a8270",
+  "cases": 1,
+  "canonical_writes": 0,
+  "runtime_attestation": false,
+  "analysis_scope": {
+    "head_revision": "d9d19c55a08176b1c4b2142c147c7195692ceb4d",
+    "history_window": "Closed V5 staff batch on 2026-09-30, exact patched-bytecode lifecycle proof and final offline repair verification; no post-fix live execution",
+    "queries": [
+      "staff-v5-provisional-login-entity-binding",
+      "LoggingIn before final entity ID",
+      "signed invoker handshake REQUEST_REJECTED"
+    ],
+    "track": "ANCHOR"
+  },
+  "coverage": {
+    "deferred": [
+      "Pending same-scope post-fix live staff acceptance"
+    ],
+    "inspected_evidence_ids": [
+      "actual-forge-build-report",
+      "affected-observer-green",
+      "batch-closure-and-scope",
+      "build-client-compile",
+      "build-client-export",
+      "build-control-compile",
+      "build-control-export",
+      "build-server-compile",
+      "build-server-export",
+      "forge-hooks-disassembly",
+      "independent-review",
+      "initialization-red",
+      "invoker-handshake-rejections",
+      "lifecycle-green",
+      "lifecycle-red",
+      "lifecycle-tests-after",
+      "listener-disassembly",
+      "observer-after",
+      "observer-before",
+      "offline-verification-summary",
+      "original-process-outcomes",
+      "patched-bytecode-identity",
+      "receiver-owner-after",
+      "repair-inventory",
+      "repair-result",
+      "scope-inventory",
+      "server-control-readiness",
+      "server-player-joins"
+    ],
+    "status": "PARTIAL",
+    "unavailable": [
+      "Exact V5 provisional client entity IDs",
+      "Original V5 exception message or stack trace"
+    ]
+  }
+}

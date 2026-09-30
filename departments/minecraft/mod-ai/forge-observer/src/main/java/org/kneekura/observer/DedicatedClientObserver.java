@@ -6,6 +6,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.Connection;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import java.util.concurrent.CompletableFuture;
 
@@ -16,7 +17,9 @@ public final class DedicatedClientObserver {
     private final JsonObject policy;
     private final String selectedPlayer;
     private boolean attempted;
+    private boolean pendingLogin;
     private LocalPlayer boundPlayer;
+    private Object boundChannel;
     private int boundEntityId;
     private StaffPacketTrace packetTrace;
 
@@ -36,9 +39,26 @@ public final class DedicatedClientObserver {
             DedicatedSession.require(client.player==event.getPlayer() && client.level!=null && !client.hasSingleplayerServer(),"Receiving client requires its actual remote local player");
             DedicatedSession.require(event.getPlayer().getUUID().toString().equals(selectedPlayer),"Logged-in player differs from fixed selected UUID");
             scope(connection);
-            lifetime.bind(connection,connection.channel().id().asLongText(),selectedPlayer);boundPlayer=event.getPlayer();boundEntityId=boundPlayer.getId();
-            ClientProbe.install();owner.startReceiver(client.gameDirectory.toPath(),this::capture);
-            if(owner.hasVerifiedStaffTrace())packetTrace=StaffPacketTrace.install(connection,selectedPlayer,boundEntityId);
+            lifetime.bind(connection,connection.channel().id().asLongText(),selectedPlayer);boundPlayer=event.getPlayer();boundChannel=connection.channel();
+            // Forge fires LoggingIn before handleLogin assigns the server's entity ID.
+            pendingLogin=true;
+        } catch(Exception failure) {invalidate("Receiving client startup failed: "+failure.getClass().getSimpleName());}
+    }
+    @SubscribeEvent public void tick(TickEvent.ClientTickEvent event) {
+        if(!pendingLogin || event.phase!=TickEvent.Phase.END)return;
+        pendingLogin=false;
+        try {
+            Minecraft client=Minecraft.getInstance();
+            DedicatedSession.require(client.player!=null && client.player==boundPlayer && client.level!=null && !client.hasSingleplayerServer()
+                && client.getConnection()!=null,"Original login player is unavailable");
+            Connection connection=client.getConnection().getConnection();scope(connection);
+            DedicatedSession.require(connection.channel()==boundChannel,"Original login channel changed");
+            lifetime.check(connection,connection.channel().id().asLongText(),client.player.getUUID().toString());
+            boundEntityId=boundPlayer.getId();
+            ClientProbe.install();owner.startReceiver(client.gameDirectory.toPath(),this::capture,()->{
+                if(owner.hasVerifiedStaffTrace())packetTrace=StaffPacketTrace.install(connection,selectedPlayer,boundEntityId);
+                return null;
+            });
         } catch(Exception failure) {invalidate("Receiving client startup failed: "+failure.getClass().getSimpleName());}
     }
     @SubscribeEvent public void logout(ClientPlayerNetworkEvent.LoggingOut event) {
@@ -48,7 +68,7 @@ public final class DedicatedClientObserver {
     @SubscribeEvent public void clonePlayer(ClientPlayerNetworkEvent.Clone event) {
         if(attempted)invalidate("Receiving player was replaced; fixed no-respawn scenario invalidated");
     }
-    private void invalidate(String reason) {lifetime.invalidate();if(packetTrace!=null)packetTrace.close();owner.invalidateReceiver(reason);}
+    private void invalidate(String reason) {pendingLogin=false;lifetime.invalidate();if(packetTrace!=null)packetTrace.close();owner.invalidateReceiver(reason);}
     private JsonObject scope(Connection connection) {
         DedicatedSession.require(connection!=null && connection.channel()!=null && connection.channel().isActive(),"Client channel is not active");
         return DedicatedSession.connection(policy,selectedPlayer,true,connection.isConnected(),connection.isMemoryConnection(),
@@ -58,6 +78,7 @@ public final class DedicatedClientObserver {
         DedicatedSession.require(client.player!=null && client.player==boundPlayer && client.player.getId()==boundEntityId && client.level!=null && !client.hasSingleplayerServer()
             && client.getConnection()!=null,"Bound dedicated client player is unavailable");
         Connection connection=client.getConnection().getConnection();JsonObject result=scope(connection);
+        DedicatedSession.require(connection.channel()==boundChannel,"Bound dedicated client channel changed");
         lifetime.check(connection,connection.channel().id().asLongText(),client.player.getUUID().toString());return result;
     }
     private static JsonArray vector(double x,double y,double z) {JsonArray result=new JsonArray();result.add(x);result.add(y);result.add(z);return result;}

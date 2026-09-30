@@ -131,3 +131,14 @@ specific exception. The correction path is an exact-player fixture command,
 bounded authenticated error diagnostics, and fresh launch configuration with
 explicit heap limits and valid client settings. None of these offline repairs
 establishes dedicated synchronization or controls before a new authorized run.
+
+The subsequent V5 run joined both clients and obtained authenticated server and
+control-client readiness. Invoker handshakes were rejected before any setup
+command or staff gesture. The [login-lifecycle record](history/2026-09-30-login-lifecycle/FAILURE-REPAIR-HISTORY.md)
+separates those retained UNKNOWN results from the proven implementation defect:
+Forge dispatches `LoggingIn` before assigning the final server entity ID.
+The receiver now binds once after that assignment and initializes verified packet
+tracing before publication. All 184 affected tests and three actual Forge
+compile/export pairs passed. These offline results do not close the live gate;
+the prior histories, conditional Windows scope, unmeasured performance and U06
+UNKNOWN remain unchanged.

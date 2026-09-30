@@ -31,6 +31,14 @@ its game directory, selected player, connection and native process/window. Logou
 reconnect, player replacement or changed channel invalidates that epoch. It does
 not inherit server-side state as a substitute for client observations.
 
+Forge 1.20.1 fires `LoggingIn` before assigning the server-provided entity ID.
+The listener retains the original player, connection, channel and UUID, then
+revalidates them once at the first client `END` tick. Only then does it bind the
+final entity ID. Verified session/marker initialization precedes packet-trace
+installation, and both precede receiver publication. Cancellation, replacement
+or reconnection before that tick consumes the epoch; later ticks cannot revive it.
+An ID or channel change after binding also remains invalid.
+
 ## Target code and dependency bytes
 
 Dedicated contracts require `runtime_scope=TARGET_CODE_AND_DEPENDENCY_BYTES` and
