@@ -15,7 +15,7 @@ from pathlib import Path
 from .process import run_process
 from .storage import Store, ContractError, atomic_write, canonical, digest, key_for, valid_hash, _collect, Limits
 from .workspace import _workspace, file_hash, workspace_fingerprint, configuration_fingerprint, _inputs
-from .verification import evaluate_tests
+from .verification import evaluate_scenario_tests
 
 TASKS={'compile':'build','unit':'test','gametest':'runGameTestServer','client':'runClient','export':'kneekuraExportInputs'}
 
@@ -248,7 +248,7 @@ def execute(store: Store,registry: dict,*,kind: str,request_id: str,world=None,c
                 try:
                     report=read_signed_report(session,Path(marker['directory'])/'gametest-report.json')
                     report.update(completed=report.get('completed') is True and result['completed'],exit_code=result['exit_code'])
-                    gametest=evaluate_tests(contract,report); report_hashes.append(store.put_json(report))
+                    gametest=evaluate_scenario_tests(contract,report); report_hashes.append(store.put_json(report))
                     if after==source: outcome=gametest['outcome']; errors.extend(gametest['reasons'])
                 except (OSError,ValueError):
                     if after == source and result['completed']: outcome='NOT_RUN'

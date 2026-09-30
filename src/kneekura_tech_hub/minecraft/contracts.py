@@ -35,6 +35,9 @@ def prepare_contract(store: Store, registry: dict, *, index_id: str, world: str,
         raise ContractError('Server behaviour requires a nonempty distinct expected test ID set')
     if not isinstance(flags, dict) or any(k not in tests or type(v) is not bool for k, v in flags.items()):
         raise ContractError('Expected required flags must refer to selected tests')
+    controls = verification.validate_negative_controls(scenario.get('negative_controls', {}), tests)
+    if controls and domain != 'server_behavior':
+        raise ContractError('Negative GameTest controls require the server behavior domain')
     output = _file(root, registry.get('build_artifact'))
     if not output.exists(): raise ContractError('Expected build artifact unavailable')
     errors = []; exclusions = []
@@ -50,6 +53,8 @@ def prepare_contract(store: Store, registry: dict, *, index_id: str, world: str,
             or not any(o['content_hash'] == artifact for o in receipt.get('outputs', []))):
         raise ContractError('Expected successful same-source compile receipt is missing')
     assertions = {'assertion_domain': domain, 'expected_tests': tests, 'expected_required': flags}
+    if 'negative_controls' in scenario:
+        assertions['negative_controls'] = controls
     scenario_hash = store.put_json(scenario); assertion_hash = store.put_json(assertions)
     contract = dict(schema_version=1, run_id=str(uuid.uuid4()), session_epoch=str(uuid.uuid4()),
         profile_id=profile['profile_id'], index_snapshot_id=index_id, build_artifact_hash=artifact,

@@ -97,6 +97,14 @@ quarantined rather than retried.
 
 ## Current verified continuation — 2026-09-30
 
+Finish this current plan before selecting the
+[deferred usability improvements](../../../departments/minecraft/mod-ai/DEFERRED-IMPROVEMENTS-2026-09-30.md).
+That document records optional follow-on work; no proposed feature is implemented
+or substitutes for this plan's outstanding acceptance.
+The [current criterion reconciliation](../../../departments/minecraft/mod-ai/CURRENT-ACCEPTANCE-2026-09-30.md)
+maps completed offline fault coverage and bounded research outcomes separately
+from remaining live and platform acceptance.
+
 See `departments/minecraft/mod-ai/CONTINUATION-2026-09-30.md` for current
 implementation, real Blockbench/editor review/export evidence, Core/provider
 acceptance boundaries, and exact-head verification. The old native-capture RED

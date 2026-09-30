@@ -131,7 +131,7 @@ def dispatch(args: argparse.Namespace) -> dict:
             from .execution import execute
             return execute(store, read_json(args.registry), kind=args.kind, request_id=args.request_id,
                            world=args.world, contract=read_json(args.contract) if args.contract else None)
-        return verification.evaluate_tests(read_json(args.contract), read_json(args.report))
+        return verification.evaluate_scenario_tests(read_json(args.contract), read_json(args.report))
     if args.command == 'observe':
         if args.session:
             if args.contract or args.report: raise ContractError('Use a session or imported report, not both')

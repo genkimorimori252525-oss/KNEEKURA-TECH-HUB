@@ -13,7 +13,7 @@ import uuid
 from pathlib import Path
 from typing import Callable
 
-from .storage import ContractError, valid_hash
+from .storage import ContractError, valid_hash, key_for
 
 IDENTITY_FIELDS = ('schema_version', 'run_id', 'session_epoch', 'profile_id', 'index_snapshot_id',
                    'build_artifact_hash', 'source_revision', 'dirty_hash', 'scenario_hash',
@@ -120,6 +120,76 @@ def evaluate_tests(contract: dict, report: dict) -> dict:
     return observed_result('FAIL' if failures else 'PASS', reasons,
                    target_results=[by_id[t] for t in expected], unrelated_failures=unrelated,
                    process_exit_code=report['exit_code'], required_flags_compared=bool(expected_required))
+
+
+def validate_negative_controls(value: object, expected: list[str]) -> dict:
+    """Fixed known-bad tests are optional GameTests expected to fail, not targets."""
+    if (not isinstance(expected, list) or not isinstance(value, dict) or len(value) > 1000
+            or any(not isinstance(k, str) or not 1 <= len(k) <= 256
+                   or k in expected or v != 'FAIL' for k, v in value.items())):
+        raise ContractError('Negative controls must name distinct non-target tests expected to FAIL')
+    return dict(value)
+
+
+def evaluate_scenario_tests(contract: dict, report: dict) -> dict:
+    """Gate declared controls separately while retaining the target-only A22 verdict."""
+    target = evaluate_tests(contract, report)
+    assertions = {'assertion_domain': contract.get('assertion_domain'),
+                  'expected_tests': contract.get('expected_tests'),
+                  'expected_required': contract.get('expected_required', {})}
+    if 'negative_controls' in contract:
+        assertions['negative_controls'] = contract['negative_controls']
+    if key_for(assertions) != contract.get('assertion_hash'):
+        return dict(target, outcome='BLOCKED', status='ERROR', target_outcome=target['outcome'],
+                    assertion_binding='MISMATCH', negative_control_outcome='NOT_RUN',
+                    negative_control_results=[],
+                    reasons=[*target['reasons'], 'Assertions differ from the captured assertion hash'])
+    target = dict(target, assertion_binding='MATCH')
+    try:
+        controls = validate_negative_controls(contract.get('negative_controls', {}),
+                                              contract.get('expected_tests', []))
+    except ContractError as exc:
+        return dict(target, outcome='BLOCKED', status='ERROR', target_outcome=target['outcome'],
+                    negative_control_outcome='BLOCKED', negative_control_results=[],
+                    reasons=[*target['reasons'], str(exc)])
+    if not controls:
+        return target
+    out = dict(target, target_outcome=target['outcome'], negative_control_outcome='NOT_RUN',
+               negative_control_results=[])
+    # Only consume controls after the existing oracle has validated identity,
+    # completion, report shape/counts, selected IDs, modes and process metadata.
+    if 'target_results' not in target:
+        return out
+    by_id = {row['id']: row for row in report['tests']}
+    executed = set(report['executed_test_ids'])
+    reasons = []
+    control_outcomes = []
+    for name, expected in controls.items():
+        row = by_id.get(name)
+        actual = row['status'] if row else 'MISSING'
+        result = {'id': name, 'expected': expected, 'observed': actual}
+        if row is None or name not in executed or actual in ('SKIPPED', 'NOT_RUN'):
+            verdict = 'NOT_RUN'
+            reasons.append('Negative control was not executed: ' + name)
+        elif row['required'] is not False:
+            verdict = 'BLOCKED'
+            reasons.append('Negative control must remain optional: ' + name)
+        elif actual != expected:
+            verdict = 'FAIL'
+            reasons.append('Known-bad control unexpectedly passed: ' + name)
+        else:
+            verdict = 'PASS'
+        result['outcome'] = verdict
+        out['negative_control_results'].append(result)
+        control_outcomes.append(verdict)
+    priority = {'PASS': 0, 'NOT_RUN': 1, 'FAIL': 2, 'BLOCKED': 3}
+    control_outcome = max(control_outcomes, key=priority.__getitem__)
+    out.update(negative_control_outcome=control_outcome,
+               outcome=max((target['outcome'], control_outcome), key=priority.__getitem__),
+               reasons=[*target['reasons'], *reasons])
+    if control_outcome == 'BLOCKED': out['status'] = 'ERROR'
+    elif control_outcome == 'NOT_RUN': out['status'] = 'PARTIAL'
+    return out
 
 
 def _finite_number(value) -> bool:

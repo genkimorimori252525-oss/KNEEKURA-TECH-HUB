@@ -1,0 +1,381 @@
+{
+  "schema_version": 1,
+  "record_type": "current_acceptance_criterion_map",
+  "base_head": "1b198989eec6ab7f08dd33fe527d2accb9a76c29",
+  "historical_map": "acceptance-map-2026-09-30.json",
+  "historical_receipts_rewritten": false,
+  "scope": "Original criterion closure is distinct from whole-target runtime compatibility and whole-product completion",
+  "adversarial_cases": [
+    {
+      "id": "A01",
+      "criterion_scope": "OFFLINE_CONTRACT_REGRESSION",
+      "regression_nodes": [
+        "tests/test_minecraft_workspace.py::test_anchor_export_rejects_wrong_or_unpinned_environment",
+        "tests/test_minecraft_index.py::test_buildscript_and_frontier_not_silently_anchor"
+      ],
+      "execution_status": "PASS_SCOPED_REGRESSIONS",
+      "limits": [],
+      "executed_parameterized_cases": 5
+    },
+    {
+      "id": "A02",
+      "criterion_scope": "OFFLINE_CONTRACT_REGRESSION",
+      "regression_nodes": [
+        "tests/test_minecraft_storage.py::test_input_changes_invalidate_profile",
+        "tests/test_minecraft_workspace.py::test_source_and_resource_generation_changes_but_build_cache_does_not"
+      ],
+      "execution_status": "PASS_SCOPED_REGRESSIONS",
+      "limits": [],
+      "executed_parameterized_cases": 6
+    },
+    {
+      "id": "A03",
+      "criterion_scope": "OFFLINE_CONTRACT_REGRESSION",
+      "regression_nodes": [
+        "tests/test_minecraft_index.py::test_same_class_in_multiple_roots_is_ambiguous"
+      ],
+      "execution_status": "PASS_SCOPED_REGRESSIONS",
+      "limits": [],
+      "executed_parameterized_cases": 1
+    },
+    {
+      "id": "A04",
+      "criterion_scope": "OFFLINE_CONTRACT_REGRESSION",
+      "regression_nodes": [
+        "tests/test_minecraft_index.py::test_real_class_overloads_and_call_references",
+        "tests/test_minecraft_mappings.py::test_overloads_remain_ambiguous_without_descriptor",
+        "tests/test_minecraft_mappings.py::test_explicit_alias_is_scoped_not_global"
+      ],
+      "execution_status": "PASS_SCOPED_REGRESSIONS",
+      "limits": [],
+      "executed_parameterized_cases": 3
+    },
+    {
+      "id": "A05",
+      "criterion_scope": "OFFLINE_CONTRACT_REGRESSION",
+      "regression_nodes": [
+        "tests/test_minecraft_workspace.py::test_stale_source_is_visible_and_export_stale_config_rejected",
+        "tests/test_minecraft_completion_audit.py::test_runtime_rejects_old_index_even_with_fresh_build_receipt"
+      ],
+      "execution_status": "PASS_SCOPED_REGRESSIONS",
+      "limits": [],
+      "executed_parameterized_cases": 2
+    },
+    {
+      "id": "A06",
+      "criterion_scope": "OFFLINE_CONTRACT_REGRESSION",
+      "regression_nodes": [
+        "tests/test_minecraft_providers.py::test_external_provider_output_is_full_readable_and_has_exact_parents",
+        "tests/test_minecraft_adversarial_provenance.py::test_a06_disagreeing_source_jar_and_distribution_remain_readable_but_unmatched"
+      ],
+      "execution_status": "PASS_SCOPED_REGRESSIONS",
+      "limits": [
+        "Deliberate small Java17 source/class mismatch; no proof of every upstream MOD class equivalence"
+      ],
+      "executed_parameterized_cases": 2
+    },
+    {
+      "id": "A07",
+      "criterion_scope": "OFFLINE_CONTRACT_REGRESSION",
+      "regression_nodes": [
+        "tests/test_minecraft_interventions.py::test_metadata_aw_at_and_conditionals",
+        "tests/test_minecraft_interventions.py::test_real_classfile_annotations",
+        "tests/test_minecraft_adversarial_provenance.py::test_a07_changed_instruction_positions_keep_distinct_static_stage_locators"
+      ],
+      "execution_status": "PASS_SCOPED_REGRESSIONS",
+      "limits": [
+        "Real classfiles with a fixture-inserted instruction; no actual Forge/Mixin transform or loaded-memory attestation"
+      ],
+      "executed_parameterized_cases": 3
+    },
+    {
+      "id": "A08",
+      "criterion_scope": "OFFLINE_CONTRACT_REGRESSION",
+      "regression_nodes": [
+        "tests/test_minecraft_interventions.py::test_exact_owner_filter_does_not_claim_no_dynamic_injections",
+        "tests/test_minecraft_index.py::test_unprepared_bytecode_is_partial_not_absent"
+      ],
+      "execution_status": "PASS_SCOPED_REGRESSIONS",
+      "limits": [
+        "Actual dynamic callback resolution is deliberately not claimed"
+      ],
+      "executed_parameterized_cases": 2
+    },
+    {
+      "id": "A09",
+      "criterion_scope": "OFFLINE_CONTRACT_REGRESSION",
+      "regression_nodes": [
+        "tests/test_minecraft_interventions.py::test_metadata_aw_at_and_conditionals",
+        "tests/test_minecraft_adversarial_scale.py::test_a09_same_target_non_cancelling_injectors_remain_potential_candidates",
+        "tests/test_minecraft_adversarial_scale.py::test_a09_overload_and_incoming_relations_preserve_exact_targets_and_origins"
+      ],
+      "execution_status": "PASS_SCOPED_REGRESSIONS",
+      "limits": [
+        "Conditional compatible declarations; no runtime Mixin compatibility assertion"
+      ],
+      "executed_parameterized_cases": 3
+    },
+    {
+      "id": "A10",
+      "criterion_scope": "OFFLINE_CONTRACT_REGRESSION",
+      "regression_nodes": [
+        "tests/test_minecraft_providers.py::test_provider_failure_does_not_cache_partial_output",
+        "tests/test_minecraft_index.py::test_partial_inputs_never_report_not_found",
+        "tests/test_minecraft_adversarial_composition.py::test_failed_dependency_decompile_keeps_readable_originals_and_explicit_partial"
+      ],
+      "execution_status": "PASS_SCOPED_REGRESSIONS",
+      "limits": [
+        "Injected failed provider execution; literal text/path scope remains distinct from unresolved bytecode scope"
+      ],
+      "executed_parameterized_cases": 3
+    },
+    {
+      "id": "A11",
+      "criterion_scope": "OFFLINE_CONTRACT_REGRESSION",
+      "regression_nodes": [
+        "tests/test_minecraft_index.py::test_cursor_cannot_cross_snapshot_or_query"
+      ],
+      "execution_status": "PASS_SCOPED_REGRESSIONS",
+      "limits": [],
+      "executed_parameterized_cases": 1
+    },
+    {
+      "id": "A12",
+      "criterion_scope": "OFFLINE_CONTRACT_REGRESSION",
+      "regression_nodes": [
+        "tests/test_minecraft_core_bridge.py::test_staging_bundle_preserves_single_snapshot_per_observation_and_creator",
+        "tests/test_minecraft_core_bridge.py::test_valid_bundle_preserves_licenses_and_existing_human_review_gate",
+        "tests/test_curation_engine.py::test_staged_observation_rejects_multiple_snapshots"
+      ],
+      "execution_status": "PASS_SCOPED_REGRESSIONS",
+      "limits": [
+        "No production Core database population is claimed"
+      ],
+      "executed_parameterized_cases": 3
+    },
+    {
+      "id": "A13",
+      "criterion_scope": "OFFLINE_CONTRACT_REGRESSION",
+      "regression_nodes": [
+        "tests/test_minecraft_index.py::test_source_read_is_full_paged_and_immutable",
+        "tests/test_minecraft_storage.py::test_outer_jar_remains_addressable_after_original_is_deleted"
+      ],
+      "execution_status": "PASS_SCOPED_REGRESSIONS",
+      "limits": [],
+      "executed_parameterized_cases": 2
+    },
+    {
+      "id": "A14",
+      "criterion_scope": "OFFLINE_CONTRACT_REGRESSION",
+      "regression_nodes": [
+        "tests/test_minecraft_storage.py::test_pin_is_durable_and_original_stays_readable",
+        "tests/test_minecraft_index.py::test_missing_blob_does_not_hide_other_readable_results",
+        "tests/test_minecraft_storage.py::test_unreadable_directory_is_reported_in_coverage",
+        "tests/test_minecraft_adversarial_provenance.py::test_a14_injected_enospc_preserves_existing_pinned_evidence",
+        "tests/test_minecraft_adversarial_provenance.py::test_a14_interrupted_read_reports_unavailable_without_removing_pinned_evidence"
+      ],
+      "execution_status": "PASS_SCOPED_REGRESSIONS",
+      "limits": [
+        "Injected ENOSPC/EINTR; no physical disk fill and no automatic GC exists"
+      ],
+      "executed_parameterized_cases": 6
+    },
+    {
+      "id": "A15",
+      "criterion_scope": "OFFLINE_CONTRACT_REGRESSION",
+      "regression_nodes": [
+        "tests/test_minecraft_index.py::test_search_pagination_is_complete_and_snapshot_bound",
+        "tests/test_minecraft_interventions.py::test_pagination_and_wrong_cursor",
+        "tests/test_minecraft_index.py::test_reference_preview_is_bounded_without_losing_full_disassembly",
+        "tests/test_minecraft_adversarial_scale.py::test_a15_all_thousand_search_matches_are_reachable_once_with_bounded_pages",
+        "tests/test_minecraft_adversarial_scale.py::test_a15_large_compiled_relation_graph_pages_every_edge_once",
+        "tests/test_minecraft_adversarial_scale.py::test_a15_relation_depth_and_cursor_identity_are_preserved_at_scale"
+      ],
+      "execution_status": "PASS_SCOPED_REGRESSIONS",
+      "limits": [
+        "1000 literal search hits and 1025/1027 compiled hierarchy edges; no dynamic graph or performance claim"
+      ],
+      "executed_parameterized_cases": 8
+    },
+    {
+      "id": "A16",
+      "criterion_scope": "OFFLINE_CONTRACT_REGRESSION",
+      "regression_nodes": [
+        "tests/test_minecraft_storage.py::test_zip_paths_rejected_without_outside_write",
+        "tests/test_minecraft_providers.py::test_provider_output_zip_traversal_is_not_imported",
+        "tests/test_minecraft_providers.py::test_unregistered_provider_is_never_executed",
+        "tests/test_minecraft_adversarial_composition.py::test_passive_readme_and_log_instructions_never_gain_execution_authority"
+      ],
+      "execution_status": "PASS_SCOPED_REGRESSIONS",
+      "limits": [
+        "Retrieved prose remains task data, not an authorization source"
+      ],
+      "executed_parameterized_cases": 8
+    },
+    {
+      "id": "A17",
+      "criterion_scope": "OFFLINE_CONTRACT_REGRESSION",
+      "regression_nodes": [
+        "tests/test_minecraft_workspace.py::test_gradle_plan_requires_explicit_registered_workspace",
+        "tests/test_minecraft_workspace.py::test_passive_inventory_does_not_run_gradle",
+        "tests/test_minecraft_execution.py::test_tampered_wrapper_and_unapproved_dispatch_are_rejected"
+      ],
+      "execution_status": "PASS_SCOPED_REGRESSIONS",
+      "limits": [],
+      "executed_parameterized_cases": 3
+    },
+    {
+      "id": "A18",
+      "criterion_scope": "OFFLINE_CONTRACT_REGRESSION",
+      "regression_nodes": [
+        "tests/test_minecraft_verification.py::test_foreign_or_stale_report_never_passes",
+        "tests/test_minecraft_verification.py::test_observation_uses_epoch_uuid_and_nonatomic_interval"
+      ],
+      "execution_status": "PASS_SCOPED_REGRESSIONS",
+      "limits": [],
+      "executed_parameterized_cases": 9
+    },
+    {
+      "id": "A19",
+      "criterion_scope": "OFFLINE_CONTRACT_REGRESSION",
+      "regression_nodes": [
+        "tests/test_minecraft_verification.py::test_unknown_operation_completion_must_not_be_retried",
+        "tests/test_minecraft_execution.py::test_request_receipt_is_unknown_after_interruption_not_retried"
+      ],
+      "execution_status": "PASS_SCOPED_REGRESSIONS",
+      "limits": [],
+      "executed_parameterized_cases": 2
+    },
+    {
+      "id": "A20",
+      "criterion_scope": "OFFLINE_CONTRACT_REGRESSION",
+      "regression_nodes": [
+        "tests/test_minecraft_verification.py::test_observation_uses_epoch_uuid_and_nonatomic_interval",
+        "tests/test_minecraft_adversarial_provenance.py::test_a20_distinct_nonnull_tick_frame_and_log_intervals_remain_nonatomic"
+      ],
+      "execution_status": "PASS_SCOPED_REGRESSIONS",
+      "limits": [
+        "Imported non-atomic interval fixture; no synchronization latency claim"
+      ],
+      "executed_parameterized_cases": 2
+    },
+    {
+      "id": "A21",
+      "criterion_scope": "OFFLINE_CONTRACT_REGRESSION",
+      "regression_nodes": [
+        "tests/test_minecraft_verification.py::test_exit_zero_is_not_sufficient",
+        "tests/test_minecraft_verification.py::test_missing_expected_tests_not_success",
+        "tests/test_minecraft_verification.py::test_expected_required_mode_cannot_silently_change"
+      ],
+      "execution_status": "PASS_SCOPED_REGRESSIONS",
+      "limits": [],
+      "executed_parameterized_cases": 9
+    },
+    {
+      "id": "A22",
+      "criterion_scope": "OFFLINE_CONTRACT_REGRESSION",
+      "regression_nodes": [
+        "tests/test_minecraft_verification.py::test_unrelated_optional_failure_does_not_fail_target"
+      ],
+      "execution_status": "PASS_SCOPED_REGRESSIONS",
+      "limits": [],
+      "executed_parameterized_cases": 1
+    },
+    {
+      "id": "A23",
+      "criterion_scope": "OFFLINE_CONTRACT_REGRESSION",
+      "regression_nodes": [
+        "tests/test_minecraft_verification.py::test_report_requires_boolean_required_flag",
+        "tests/test_minecraft_verification.py::test_expected_required_mode_cannot_silently_change",
+        "tests/test_minecraft_scenario_controls.py::test_known_bad_control_is_required_for_scenario_acceptance",
+        "tests/test_minecraft_scenario_controls.py::test_negative_controls_never_bypass_report_validity",
+        "tests/test_minecraft_scenario_controls.py::test_negative_expectations_are_in_the_immutable_assertion_contract",
+        "tests/test_minecraft_scenario_controls.py::test_registered_execution_uses_scenario_control_gate"
+      ],
+      "execution_status": "PASS_SCOPED_REGRESSIONS",
+      "limits": [
+        "Fixed declared known-bad controls only; no general proof that arbitrary assertions are adequate"
+      ],
+      "executed_parameterized_cases": 16
+    },
+    {
+      "id": "A24",
+      "criterion_scope": "OFFLINE_CONTRACT_REGRESSION",
+      "regression_nodes": [
+        "tests/test_minecraft_verification.py::test_production_world_and_launch_budget_guard",
+        "tests/test_minecraft_verification.py::test_rendering_not_proven_by_gametest",
+        "tests/test_minecraft_execution.py::test_game_cannot_reuse_unowned_world"
+      ],
+      "execution_status": "PASS_SCOPED_REGRESSIONS",
+      "limits": [
+        "No client rendering or Windows input PASS is inferred"
+      ],
+      "executed_parameterized_cases": 3
+    }
+  ],
+  "research_tasks": [
+    {
+      "id": "U01",
+      "criterion_result": "SATISFIED_STATIC_INQUIRY",
+      "evidence": "twilight-static-2026-09-30/summary.json",
+      "runtime_verdict": "NOT_RUN"
+    },
+    {
+      "id": "U02",
+      "criterion_result": "SATISFIED_VERSION_BOUND_OPTIONS_AND_LOCATORS",
+      "evidence": "twilight-static-2026-09-30/summary.json",
+      "intervention_applied": false,
+      "runtime_verdict": "NOT_RUN"
+    },
+    {
+      "id": "U03",
+      "criterion_result": "SATISFIED_PACKET_SIDE_INQUIRY_WITH_EXPLICIT_LIMIT",
+      "evidence": "twilight-static-2026-09-30/summary.json",
+      "dedicated_synchronization": "NOT_RUN"
+    },
+    {
+      "id": "U04",
+      "criterion_result": "PARTIAL",
+      "evidence": "twilight-static-2026-09-30/summary.json",
+      "missing": "Same-run Hydra render/config/pose evidence",
+      "runtime_verdict": "NOT_RUN"
+    },
+    {
+      "id": "U05",
+      "criterion_result": "SATISFIED_RESOURCE_DISTRIBUTION_INQUIRY",
+      "evidence": "twilight-static-2026-09-30/summary.json",
+      "source_class_equivalence": "NOT_ESTABLISHED"
+    },
+    {
+      "id": "U06",
+      "criterion_result": "SATISFIED_BOUNDED_UNKNOWN_INVESTIGATION",
+      "evidence": "connector-static-2026-09-30/summary.json",
+      "compatibility_verdict": "UNKNOWN",
+      "missing": [
+        "Matching ANCHOR beta.50 binary",
+        "Exact declared dependency/config closure",
+        "Actual transform/runtime evidence"
+      ]
+    }
+  ],
+  "live_acceptance": "NOT_COMPLETED_BY_THIS_MAP",
+  "canonical_promotion": "NOT_PERFORMED",
+  "raw_private_evidence_published": false,
+  "verification": {
+    "record_type": "DERIVED_PUBLIC_TEST_SUMMARY",
+    "passed": 1065,
+    "failed": 0,
+    "skipped": 103,
+    "deselected": 1,
+    "skip_reason": "KTHUB_TEST_DATABASE_URL is not set",
+    "deselection": "tests/test_minecraft_asset_guard.py::test_private_parent_validation_allows_real_external_directory",
+    "deselection_reason": "An ambient parent Git checkout prevents the sandbox fixture from representing an external directory; hosted CI runs the unchanged fixture",
+    "python": "3.12.14",
+    "java": "Temurin 17.0.20.1+1",
+    "gson": "2.10",
+    "junit_original_sha256": "9b8872a4c67fd02bc1e1e5e7df6a60c434950ff9dafbedb61b714b622f516cd0",
+    "raw_junit_published": false,
+    "command": "python -m pytest -q --deselect tests/test_minecraft_asset_guard.py::test_private_parent_validation_allows_real_external_directory (Java17 and Gson configured)",
+    "hosted_exact_head": "PENDING_PUBLICATION"
+  }
+}

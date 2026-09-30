@@ -3,19 +3,23 @@ import importlib
 import uuid
 
 import pytest
+from kneekura_tech_hub.minecraft.storage import key_for
 
 
 def api(): return importlib.import_module('kneekura_tech_hub.minecraft.verification')
 
 
 def contract():
-    return {'schema_version': 1, 'run_id': str(uuid.uuid4()), 'session_epoch': str(uuid.uuid4()),
+    out = {'schema_version': 1, 'run_id': str(uuid.uuid4()), 'session_epoch': str(uuid.uuid4()),
             'profile_id': '1' * 64, 'index_snapshot_id': '2' * 64, 'build_artifact_hash': '3' * 64,
             'source_revision': 'a' * 40, 'dirty_hash': '4' * 64, 'scenario_hash': '5' * 64,
             'assertion_hash': '6' * 64, 'world_id': 'test-world', 'physical_side': 'server',
             'world_seed': 0, 'world_template_hash': '7' * 64, 'config_hash': '8' * 64,
             'adapter_id': 'test-fixture', 'adapter_version': '1.0.0',
             'logical_side': 'server', 'expected_tests': ['demo.attack'], 'assertion_domain': 'server_behavior'}
+    out['assertion_hash'] = key_for({'assertion_domain': out['assertion_domain'],
+                                    'expected_tests': out['expected_tests'], 'expected_required': {}})
+    return out
 
 
 def report(c):
