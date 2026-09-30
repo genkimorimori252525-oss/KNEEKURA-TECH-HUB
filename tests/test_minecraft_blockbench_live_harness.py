@@ -94,3 +94,49 @@ def test_cdp_loader_never_evaluates_asset_prompt_or_enables_raw_script_route():
     assert "execute_script" not in text
     assert "visual_brief" not in text
     assert "prompt" not in text.lower()
+
+
+def test_snapshot_state_is_read_only_and_excludes_private_fields():
+    import subprocess
+    script = f'''
+      const {{ snapshotState }} = await import({json.dumps(CDP.as_uri())});
+      globalThis.Blockbench = {{version:'5.2.1'}};
+      globalThis.Project = {{uuid:'project-1', name:'private name', save_path:'secret/path'}};
+      globalThis.ModelProject = {{all:[Project]}};
+      globalThis.Format = {{id:'java_block'}};
+      globalThis.Cube = {{all:[{{}}]}};
+      globalThis.Texture = {{all:[]}};
+      globalThis.Plugins = {{all:[{{id:'blockbench_mcp', installed:true}}]}};
+      globalThis.__BLOCKBENCH_MCP__ = {{port:8787, server:{{}}, token:'secret'}};
+      globalThis.open_dialog = 'project';
+      console.log(JSON.stringify(snapshotState()));
+    '''
+    completed = subprocess.run(['node', '--input-type=module', '-e', script],
+                               text=True, capture_output=True, timeout=5)
+    assert completed.returncode == 0, completed.stderr
+    result = json.loads(completed.stdout)
+    assert result['project_open'] is True and result['project_count'] == 1
+    assert result['format_id'] == 'java_block'
+    assert result['dialog_id'] == 'project'
+    assert result['installed_plugins'] == ['blockbench_mcp']
+    assert 'private' not in completed.stdout and 'secret' not in completed.stdout
+
+
+def test_snapshot_mode_needs_no_plugin_path():
+    import subprocess
+    script = f'''
+      const {{ parseArguments }} = await import({json.dumps(CDP.as_uri())});
+      console.log(JSON.stringify(parseArguments(['--snapshot-only','--port','9222','--evidence','out.json'])));
+    '''
+    completed = subprocess.run(['node', '--input-type=module', '-e', script],
+                               text=True, capture_output=True, timeout=5)
+    assert completed.returncode == 0, completed.stderr
+    result = json.loads(completed.stdout)
+    assert result['snapshotOnly'] is True and result['pluginPath'] is None
+
+
+def test_workflow_captures_failure_state_without_retrying_asset_session():
+    text = WORKFLOW.read_text()
+    assert '--snapshot-only' in text
+    assert 'post-session-state.json' in text
+    assert text.count('mod_ai_blockbench_live.py run') == 1
