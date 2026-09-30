@@ -1,5 +1,8 @@
 # Minecraft MOD AI — connected headless adapters
 
+> **Current AI handoff (2026-09-30):** [HANDOFF-2026-09-30.md](HANDOFF-2026-09-30.md)  
+> Read this before the historical 2026-09-28 handoff; it reflects the current PR #74 implementation/acceptance state.
+
 Minecraft 1.20.1 / Forge / Java 17を主対象とする、既存KNEEKURA TECH HUB内の解析・実行接続。
 Source/bytecode、実際のForgeGradle依存物、mapping、MOD介入候補、既存Knowledge Core、検証・観測を接続する。
 MODの設計・編集をする新しいAIや、別DB、別スケジューラは追加しない。
