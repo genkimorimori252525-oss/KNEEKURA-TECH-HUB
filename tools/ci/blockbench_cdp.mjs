@@ -13,6 +13,28 @@ export function parseArguments(argv) {
   return {port, snapshotOnly, pluginPath: snapshotOnly ? null : arg('--plugin'), evidencePath: arg('--evidence')};
 }
 
+// Blockbench's pinned desktop entry point is index.html. A WebGL failure can
+// open a second chrome://gpu page, which must never be mistaken for the editor.
+export function selectEditorTarget(targets) {
+  if (!Array.isArray(targets)) return undefined;
+  const matches = targets.filter(target => {
+    if (target.type !== 'page' || !target.webSocketDebuggerUrl) return false;
+    try {
+      const url = new URL(target.url);
+      return url.protocol === 'file:' && url.pathname.endsWith('/index.html');
+    } catch (_) { return false; }
+  });
+  return matches.length === 1 ? matches[0] : undefined;
+}
+
+export function rendererReady() {
+  if (!(typeof Plugin === 'function' && typeof Plugins === 'object') ||
+      typeof Blockbench === 'undefined' || Blockbench.setup_successful !== true ||
+      typeof Preview === 'undefined' || !Preview.selected || !Preview.selected.renderer) return false;
+  const context = Preview.selected.renderer.getContext();
+  return !!context && typeof context.isContextLost === 'function' && !context.isContextLost();
+}
+
 // This fixed read-only function runs in the renderer. Do not include project
 // names, paths, plugin configuration, private guard state, or document text.
 export function snapshotState() {
@@ -20,6 +42,7 @@ export function snapshotState() {
   const identifier = value => typeof value === 'string' && /^[a-zA-Z0-9_.-]{1,80}$/.test(value) ? value : null;
   return {
     blockbench_version: typeof Blockbench === 'undefined' ? null : identifier(Blockbench.version),
+    setup_successful: typeof Blockbench !== 'undefined' && Blockbench.setup_successful === true,
     bridge_port: bridge && Number.isInteger(bridge.port) ? bridge.port : null,
     server_running: !!(bridge && bridge.server),
     project_open: typeof Project !== 'undefined' && !!Project,
@@ -42,7 +65,7 @@ async function main() {
       const response = await fetch(`http://127.0.0.1:${port}/json`, {signal: AbortSignal.timeout(2000)});
       if (!response.ok) throw new Error('Debugger target query failed');
       const all = await response.json();
-      target = all.find(x => x.type === 'page' && x.webSocketDebuggerUrl);
+      target = selectEditorTarget(all);
       if (target) break;
     } catch (_) {}
     await new Promise(r => setTimeout(r, 500));
@@ -86,7 +109,7 @@ async function main() {
     async function waitForPluginApi() {
       for (let attempt = 0; attempt < 180; attempt++) {
         const state = await send('Runtime.evaluate', {
-          expression: "typeof Plugin === 'function' && typeof Plugins === 'object'",
+          expression: `(${rendererReady.toString()})()`,
           returnByValue: true
         });
         if (state.result && state.result.value === true) return;

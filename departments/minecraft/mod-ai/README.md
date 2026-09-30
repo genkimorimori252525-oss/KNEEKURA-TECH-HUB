@@ -91,8 +91,14 @@ remapには `--mapping-hash RAW_MAPPING_TEXT_HASH --from-namespace ... --to-name
 設定済みの `KTHUB_DATABASE_URL` にある既存Coreのexact guidanceを参照する。DB/provenanceが不調でも原文を返すが、
 別版の知識へ黙ってfallbackしない。全文のCore説明はCAS hashから `artifact read --hash HASH` で参照する。
 
-`knowledge stage --index INDEX --document DOCUMENT_ID --summary ... --actor-id ...` は既存Core用のレビュー候補bundleを作る。
+`knowledge stage --index INDEX --document DOCUMENT_ID --summary ... --actor-id ... --source-licenses reviewed-licenses.json` は既存Core用のレビュー候補bundleを作る。
 Source/Snapshot/Evidence/NEW観測の形で、一観測一snapshotを保つ。Claim作成/昇格やDBへの自動投入はしない。
+選択したdocumentの各root IDについて、人が確認したlicense metadataをJSONで明示する。
+例（自作MIT fixtureのみ）: `{"source_roots:0":{"state":"KNOWN","declared_expression":"MIT"}}`。
+実際の上流licenseをこの例から推測しない。root IDはcaptured profileを参照し、複数rootなら各々を指定する。
+UNKNOWN/未指定のlicenseはselected-files取得のCore規約を満たさないためfail closedとなる。
+実Coreのschema/policy preflightが通ってからCASへ保存し、既存Coreの人によるingestion gateは維持する。
+
 
 他MODのIssue→原因→修正diff→教訓を読む工程は、[Failure/Repair History](../FAILURE-REPAIR-HISTORY-v1.md) を参照。
 記録・検索用の入口は次の独立submoduleで、同じCASを使う。新しいDBではない。

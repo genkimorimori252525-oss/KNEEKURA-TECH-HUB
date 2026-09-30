@@ -5,9 +5,11 @@ format; it never calls ingestion or promotes a Claim on the caller's behalf.
 """
 from __future__ import annotations
 
+from copy import deepcopy
 from datetime import datetime, timezone
 import os
 
+from ..bundle import BundleValidationError, preflight_bundle
 from . import index
 from .storage import ContractError, Store, key_for
 
@@ -66,12 +68,19 @@ def context(store: Store, identifier: str, query: str, *, entity_id=None, extra_
 
 
 def stage_bundle(store: Store, identifier: str, document_ids: list[str], *, summary: str,
-                 actor: dict, captured_at: str | None=None, existing_repository=None):
+                 actor: dict, captured_at: str | None=None, existing_repository=None,
+                 source_licenses: dict | None=None):
     """Export Source/Snapshot/Evidence/NEW observations in the Core bundle format.
 
     Each observation belongs to exactly one captured root/snapshot. Its source is
     identified as a local artifact capture, never passed off as upstream author
     intent. Missing original bytes are an error, not synthetic evidence.
+
+    source_licenses maps captured root IDs to explicitly caller-reviewed Core
+    license metadata. Capturing bytes does not establish their license: missing,
+    unknown, conflicting or pending-review licenses cannot produce an ingestible
+    selected-files bundle. This input is preserved for the existing human Core
+    review; the bridge neither verifies legal authority nor grants it.
     """
     if not isinstance(summary,str) or not summary.strip() or len(summary)>16000:
         raise ContractError('A bounded, nonempty observation summary is required')
@@ -89,6 +98,16 @@ def stage_bundle(store: Store, identifier: str, document_ids: list[str], *, summ
     for doc_id in document_ids:
         if doc_id not in docs: raise ContractError('Document does not belong to this index: '+str(doc_id))
         d=docs[doc_id]; store.read(d['content_hash']); groups.setdefault(d['root_id'],[]).append(d)
+    if not isinstance(source_licenses,dict):
+        raise ContractError('Explicit reviewed source_licenses required for selected-file evidence')
+    licenses={}
+    for root_id in groups:
+        license=source_licenses.get(root_id)
+        if (not isinstance(license,dict) or license.get('state')!='KNOWN'
+                or not isinstance(license.get('declared_expression'),str)
+                or not license['declared_expression'].strip()):
+            raise ContractError('Reviewed KNOWN license with declared_expression required for root: '+root_id)
+        licenses[root_id]=deepcopy(license)
     records=[]; pins=[identifier]
     for root_id, selected in groups.items():
         root=roots[root_id]
@@ -98,7 +117,7 @@ def stage_bundle(store: Store, identifier: str, document_ids: list[str], *, summ
         source_id='src:minecraft:'+key_for(origin)
         snapshot_id='ss:minecraft:'+key_for({'source_id':source_id,'artifact_hash':root['artifact_hash']})
         source={'record_type':'source','id':source_id,'kind':'experiment','origin':origin,
-                'acquisition':{'level':'selected-files'},'license':{'state':'UNKNOWN'}}
+                'acquisition':{'level':'selected-files'},'license':licenses[root_id]}
         snapshot={'record_type':'source_snapshot','id':snapshot_id,'source_id':source_id,
                   'content_hash':root['artifact_hash'],'captured_at':when,
                   'metadata':{'index_snapshot_id':identifier,'root_id':root_id,
@@ -130,6 +149,10 @@ def stage_bundle(store: Store, identifier: str, document_ids: list[str], *, summ
     b={'bundle_version':'1.0','bundle_id':'bundle:minecraft:'+key_for(records),
        'title':'Minecraft captured-code observations','purpose':'Review only; no claims or identity promotion',
        'domains':['minecraft'],'records':records}
+    try:
+        preflight_bundle(b,repository=existing_repository)
+    except BundleValidationError as exc:
+        raise ContractError('Core bundle preflight failed: '+str(exc)) from exc
     artifact=store.put_json(b)
     for pin in pins+[artifact]: store.pin(pin,'stage:'+artifact)
     return {'status':'OK','bundle_hash':artifact,'records':len(records),'canonical_writes':0,

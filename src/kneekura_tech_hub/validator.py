@@ -1,87 +1,48 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from typing import Any
 
 from jsonschema import Draft202012Validator
 
+from ._resources import load_json_resource
 
 class HubValidationError(ValueError):
     """Raised when a Hub record violates schema or v1 governance rules."""
 
 
 def load_schema(schema_path: Path | None = None) -> dict[str, Any]:
-    if schema_path is None:
-        schema_path = Path(__file__).resolve().parents[2] / "schemas" / "v1" / "hub.schema.json"
-    return json.loads(schema_path.read_text(encoding="utf-8"))
+    return load_json_resource("schemas/v1/hub.schema.json", schema_path)
 
 
 def load_review_decision_schema(schema_path: Path | None = None) -> dict[str, Any]:
-    if schema_path is None:
-        schema_path = (
-            Path(__file__).resolve().parents[2]
-            / "schemas"
-            / "v1"
-            / "review-decision.schema.json"
-        )
-    return json.loads(schema_path.read_text(encoding="utf-8"))
+    return load_json_resource("schemas/v1/review-decision.schema.json", schema_path)
 
 
 def load_source_selection_decision_schema(schema_path: Path | None = None) -> dict[str, Any]:
-    if schema_path is None:
-        schema_path = (
-            Path(__file__).resolve().parents[2]
-            / "schemas"
-            / "v1"
-            / "source-selection-decision.schema.json"
-        )
-    return json.loads(schema_path.read_text(encoding="utf-8"))
+    return load_json_resource("schemas/v1/source-selection-decision.schema.json", schema_path)
 
 
 def load_source_acquisition_authorization_schema(
     schema_path: Path | None = None,
 ) -> dict[str, Any]:
-    if schema_path is None:
-        schema_path = (
-            Path(__file__).resolve().parents[2]
-            / "schemas"
-            / "v1"
-            / "source-acquisition-authorization.schema.json"
-        )
-    return json.loads(schema_path.read_text(encoding="utf-8"))
+    return load_json_resource("schemas/v1/source-acquisition-authorization.schema.json", schema_path)
 
 
 def load_source_acquisition_execution_schema(
     schema_path: Path | None = None,
 ) -> dict[str, Any]:
-    if schema_path is None:
-        schema_path = (
-            Path(__file__).resolve().parents[2]
-            / "schemas"
-            / "v1"
-            / "source-acquisition-execution.schema.json"
-        )
-    return json.loads(schema_path.read_text(encoding="utf-8"))
+    return load_json_resource("schemas/v1/source-acquisition-execution.schema.json", schema_path)
 
 
 def load_source_acquisition_commit_schema(
     schema_path: Path | None = None,
 ) -> dict[str, Any]:
-    if schema_path is None:
-        schema_path = (
-            Path(__file__).resolve().parents[2]
-            / "schemas"
-            / "v1"
-            / "source-acquisition-commit.schema.json"
-        )
-    return json.loads(schema_path.read_text(encoding="utf-8"))
+    return load_json_resource("schemas/v1/source-acquisition-commit.schema.json", schema_path)
 
 
 def load_policy(policy_path: Path | None = None) -> dict[str, Any]:
-    if policy_path is None:
-        policy_path = Path(__file__).resolve().parents[2] / "governance" / "policy-v1.json"
-    return json.loads(policy_path.read_text(encoding="utf-8"))
+    return load_json_resource("governance/policy-v1.json", policy_path)
 
 
 def _missing(locator: dict[str, Any], *fields: str) -> list[str]:

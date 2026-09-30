@@ -60,6 +60,7 @@ def add_commands(commands, profile):
     p.add_argument('--document', required=True, action='append')
     p.add_argument('--summary', required=True); p.add_argument('--actor-id', required=True)
     p.add_argument('--actor-type', choices=('ai', 'tool'), default='ai')
+    p.add_argument('--source-licenses', help='JSON file mapping captured root IDs to reviewed Core license metadata')
 
     w = commands.add_parser('world').add_subparsers(dest='action', required=True)
     p = w.add_parser('prepare'); p.add_argument('--registry', required=True)
@@ -152,7 +153,8 @@ def dispatch(args, store: Store, read_json, parse_json):
         return interventions.relations(store, args.index, depth=args.depth, **kw)
     if args.command == 'knowledge':
         return core_bridge.stage_bundle(store, args.index, args.document, summary=args.summary,
-            actor={'actor_type': args.actor_type, 'actor_id': args.actor_id})
+            actor={'actor_type': args.actor_type, 'actor_id': args.actor_id},
+            source_licenses=read_json(args.source_licenses) if args.source_licenses else None)
     if args.command == 'world':
         return execution.prepare_world(store, read_json(args.registry), template=args.template,
                                         request_id=args.request_id, world_name=args.world_name)

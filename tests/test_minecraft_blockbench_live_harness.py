@@ -140,3 +140,43 @@ def test_workflow_captures_failure_state_without_retrying_asset_session():
     assert '--snapshot-only' in text
     assert 'post-session-state.json' in text
     assert text.count('mod_ai_blockbench_live.py run') == 1
+
+
+def test_cdp_selects_editor_not_gpu_information_window():
+    import subprocess
+    script = f'''
+      const {{ selectEditorTarget }} = await import({json.dumps(CDP.as_uri())});
+      const editor={{type:'page',url:'file:///opt/Blockbench/resources/app.asar/index.html',webSocketDebuggerUrl:'ws://127.0.0.1:9222/devtools/page/editor'}};
+      const gpu={{type:'page',url:'chrome://gpu/',webSocketDebuggerUrl:'ws://127.0.0.1:9222/devtools/page/gpu'}};
+      console.log(JSON.stringify(selectEditorTarget([gpu, editor])));
+      if (selectEditorTarget([gpu]) !== undefined) process.exit(2);
+    '''
+    completed = subprocess.run(['node','--input-type=module','-e',script],text=True,capture_output=True,timeout=5)
+    assert completed.returncode == 0, completed.stderr
+    assert json.loads(completed.stdout)['url'].startswith('file:')
+
+
+def test_cdp_requires_complete_editor_setup_and_render_context():
+    import subprocess
+    script = f'''
+      const {{ rendererReady }} = await import({json.dumps(CDP.as_uri())});
+      globalThis.Plugin=function() {{}};
+      globalThis.Plugins={{}};
+      globalThis.Blockbench={{setup_successful:false}};
+      globalThis.Preview={{selected:{{renderer:{{getContext:()=>({{isContextLost:()=>false}})}}}}}};
+      if (rendererReady()) process.exit(2);
+      Blockbench.setup_successful=true;
+      if (!rendererReady()) process.exit(3);
+      Preview.selected.renderer.getContext=()=>({{isContextLost:()=>true}});
+      if (rendererReady()) process.exit(4);
+    '''
+    completed = subprocess.run(['node','--input-type=module','-e',script],text=True,capture_output=True,timeout=5)
+    assert completed.returncode == 0, completed.stderr
+
+
+def test_hosted_editor_uses_explicit_software_webgl():
+    text=WORKFLOW.read_text()
+    assert '--disable-gpu' not in text
+    assert '--use-angle=gl' in text
+    assert 'LIBGL_ALWAYS_SOFTWARE' in text
+    assert '--enable-unsafe-swiftshader' not in text

@@ -49,9 +49,22 @@ def test_cli_interventions_and_core_staging_keep_provenance(project,tmp_path):
     assert out['results']
     p,search=run_cli(cache,'search','--index',idx,'--query','class Mob')
     doc=search['results'][0]['document_id']
-    p,out=run_cli(cache,'knowledge','stage','--index',idx,'--document',doc,'--summary','Observed declaration','--actor-id','jolly')
+    stage_args=('knowledge','stage','--index',idx,'--document',doc,'--summary','Observed declaration','--actor-id','jolly')
+    p,out=run_cli(cache,*stage_args)
+    assert p.returncode != 0 and 'license' in str(out).lower()
+    # This file is a test-owned fixture; no real upstream license is inferred.
+    from kneekura_tech_hub.minecraft.storage import Store
+    from kneekura_tech_hub.minecraft.index import _load
+    store=Store(cache)
+    snapshot=_load(store,idx)
+    licenses=tmp_path/'reviewed-licenses.json'
+    licenses.write_text(json.dumps({root['id']:{'state':'KNOWN','declared_expression':'MIT'}
+                                    for root in snapshot['profile']['roots']}))
+    p,out=run_cli(cache,*stage_args,'--source-licenses',str(licenses))
     assert p.returncode==0,p.stderr
     assert out['canonical_writes']==0 and out['bundle_hash']
+    from kneekura_tech_hub.bundle import preflight_bundle
+    preflight_bundle(store.json(out['bundle_hash']))
     p,out=run_cli(cache,'context','--index',idx,'--query','Mob','--entity','ke:mob')
     assert p.returncode==0,p.stderr
     assert out['research']['results'] and out['governed']['status']=='UNAVAILABLE'

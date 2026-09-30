@@ -43,3 +43,5 @@ pythonpath = ["src"]
 # The Minecraft adapter uses the existing package; no extra service/database.
 [tool.hatch.build.targets.wheel.force-include]
 "departments/minecraft/mod-ai/forge-observer" = "kneekura_tech_hub/minecraft/resources/forge-observer"
+"schemas" = "kneekura_tech_hub/resources/schemas"
+"governance" = "kneekura_tech_hub/resources/governance"

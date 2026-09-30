@@ -72,6 +72,7 @@ jobs:
       - name: Launch real Blockbench, load guarded plugin, and capture one staff session
         env:
           PYTHONPATH: ${{ github.workspace }}/src
+          LIBGL_ALWAYS_SOFTWARE: '1'
         shell: bash
         run: |
           set -euo pipefail
@@ -84,7 +85,7 @@ jobs:
           }
           trap cleanup EXIT
           xvfb-run -a --server-args="-screen 0 1280x1024x24" \
-            blockbench --no-sandbox --disable-gpu --remote-debugging-port=9222 \
+            blockbench --no-sandbox --use-gl=angle --use-angle=gl --remote-debugging-port=9222 \
             > "$GITHUB_WORKSPACE/blockbench-evidence/blockbench.log" 2>&1 &
           echo $! > "$ROOT/blockbench.pid"
           node tools/ci/blockbench_cdp.mjs --port 9222 \
