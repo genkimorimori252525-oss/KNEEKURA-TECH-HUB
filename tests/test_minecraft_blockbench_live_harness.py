@@ -201,6 +201,7 @@ def test_staff_has_smaller_purple_star_with_clear_air_gaps_inside_halo():
 
 
 def test_live_harness_exports_a_separate_validated_resource_package(tmp_path,monkeypatch):
+    monkeypatch.setenv("RUNNER_TEMP",str(tmp_path))
     from test_minecraft_asset_session import prepared as fixture_setup
     from test_minecraft_asset_export import capture as capture_setup
     prepared=fixture_setup.__wrapped__(tmp_path)
@@ -243,3 +244,11 @@ def test_capture_evidence_retains_exact_reachable_bytes_only(tmp_path):
         raw=base64.b64decode(encoded,validate=True)
         assert digest(raw)==key and store.read(key)==raw
     assert 'UNRELATED_PRIVATE_BYTES' not in json.dumps(bundle)
+
+
+def test_runner_root_remains_confined_when_hosted_env_is_present(tmp_path,monkeypatch):
+    module=load_harness()
+    monkeypatch.setenv("RUNNER_TEMP",str(tmp_path))
+    assert module._runner_root(tmp_path/'fixture')==tmp_path/'fixture'
+    with pytest.raises(ValueError): module._runner_root(tmp_path)
+    with pytest.raises(ValueError): module._runner_root(tmp_path.parent/'outside')
