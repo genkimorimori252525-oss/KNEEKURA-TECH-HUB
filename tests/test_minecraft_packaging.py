@@ -15,7 +15,10 @@ def test_minecraft_entrypoint_and_observer_are_declared_in_wheel():
     assert include['departments/minecraft/mod-ai/forge-observer']=='kneekura_tech_hub/minecraft/resources/forge-observer'
     root=Path('departments/minecraft/mod-ai/forge-observer')
     assert (root/'src/main/resources/META-INF/mods.toml').is_file()
-    assert len(list(root.rglob('*.java')))==4
+    assert {path.name for path in root.rglob('*.java')} == {
+        'BridgeTransport.java', 'ClientProbe.java', 'ForgeObserver.java', 'RunLedger.java',
+        'LinuxClientIdentity.java', 'StaffStateQuery.java',
+    }
 
 
 def test_gradle_scripts_are_present_and_ci_is_not_a_dependency():

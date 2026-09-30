@@ -4,13 +4,16 @@ Minecraft 1.20.1 / Forge / Java 17を主対象とする、既存KNEEKURA TECH HU
 Source/bytecode、実際のForgeGradle依存物、mapping、MOD介入候補、既存Knowledge Core、検証・観測を接続する。
 MODの設計・編集をする新しいAIや、別DB、別スケジューラは追加しない。
 
-現在は実Forgeビルド・依存解決に加え、**実サーバーの起動→認証付き観測→命令実行→GameTest完了まで検証済み**。
-検証用の小さなMODを使った接続試験であり、描画や実MOD制作の全受け入れ条件を含む全体完成は未達。
-最新の根拠は [LIVE-VERIFICATION-2026-09-28.md](LIVE-VERIFICATION-2026-09-28.md)、残工程は
-[IMPLEMENTATION-STATUS.md](IMPLEMENTATION-STATUS.md)、以前のビルド検証は
-[HOSTED-VERIFICATION-2026-09-28.md](HOSTED-VERIFICATION-2026-09-28.md) を参照。
-2026-09-28の設計思想・経緯・判断・到達点を一つにまとめた歴史記録は [history/2026-09-28-FOUNDATION-SESSION.md](history/2026-09-28-FOUNDATION-SESSION.md)。
-従来の `verification/local-run.json` は最初の実装時の履歴であり、最新CIの結果ではない。
+2026-09-30の実装・検証状況は [CONTINUATION-2026-09-30.md](CONTINUATION-2026-09-30.md) を参照。
+実Blockbenchでの杖の生成・修正・export、実Forgeビルドと杖のserver GameTest、実MODを使うprovider/Core静的検証まで進んだ。
+client用save配置とLinux/X11の対象window限定input経路も実装したが、**Minecraft clientでの入力・描画・同期の受け入れは未完了**。
+Windows driver、実測performance、全U01–U06の完了も主張しない。実行権限やlaunch budgetをこの文書から得てはならない。
+
+操作手順は [NATIVE-INPUT.md](NATIVE-INPUT.md)、固定fixture/scenarioは [acceptance/README.md](acceptance/README.md)。
+[2026-09-28のlive検証](LIVE-VERIFICATION-2026-09-28.md)、[旧checkpoint](IMPLEMENTATION-STATUS.md)、
+[以前のbuild検証](HOSTED-VERIFICATION-2026-09-28.md) は、その時点の証拠として保持する。
+設計思想・経緯・判断は [foundation履歴](history/2026-09-28-FOUNDATION-SESSION.md)。
+過去の `verification/local-run.json` や旧checkpointを最新CIの結果として読み替えない。
 
 ## 実行と信頼境界
 

@@ -1,0 +1,760 @@
+{
+  "schema_version": 1,
+  "kind": "AUTHORED_ACCEPTANCE_INPUTS_NOT_EXECUTION",
+  "spec": "departments/minecraft/design/2026-09-28-mod-ai-environment/ACCEPTANCE.md",
+  "research_queue": [
+    "twilight-forest",
+    "sinytra-connector"
+  ],
+  "placeholder_policy": "Braced values must be resolved from actual captured records; no fake profile/index IDs",
+  "tasks": [
+    {
+      "id": "U01",
+      "title": "Bound Naga target/Goal changes to the ANCHOR inheritance chain",
+      "execution_status": "NOT_RUN",
+      "target_profile": {
+        "minecraft": "1.20.1",
+        "loader": "forge",
+        "loader_version": "47.4.6",
+        "java_major": 17,
+        "track": "ANCHOR"
+      },
+      "profile_id": null,
+      "index_snapshot_id": null,
+      "null_reasons": {
+        "profile_id": "Capture actual resolved workspace/dependency/config inputs before running this fixture",
+        "index_snapshot_id": "Prepare an immutable index from that captured profile; no sample ID is evidence"
+      },
+      "source": {
+        "repository": "TeamTwilight/twilightforest",
+        "commit": "a7dd8f13c653e137f977f5ffaa870fcb20fc1625",
+        "release": "4.3.2508",
+        "binary_sha256": "0bdc89263616d1b35c32ef82c5e9c14cbd20368e2fe8b468c72a28320be7a778",
+        "source_binary_identity": "RESOURCE_CORRESPONDENCE_ONLY; compiled-class equivalence not established"
+      },
+      "inputs": [
+        {
+          "path": "src/main/java/twilightforest/entity/boss/Naga.java",
+          "git_blob_sha1": "7745f72ff28047c5123d24f596dc9060f208212d",
+          "representation_stage": "original_source",
+          "descriptor": null,
+          "descriptor_status": "RESOLVE_FROM_CAPTURED_BYTECODE_IF_REQUIRED",
+          "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/entity/boss/Naga.java"
+        },
+        {
+          "path": "src/main/java/twilightforest/entity/ai/goal/NagaMovementPattern.java",
+          "git_blob_sha1": "5d0140f529bcdf52a04e3f507f2a0385c97cea4f",
+          "representation_stage": "original_source",
+          "descriptor": null,
+          "descriptor_status": "RESOLVE_FROM_CAPTURED_BYTECODE_IF_REQUIRED",
+          "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/entity/ai/goal/NagaMovementPattern.java"
+        }
+      ],
+      "steps": [
+        {
+          "kind": "prerequisite",
+          "instruction": "Acquire the pinned upstream bytes and exact target resolved dependencies into an authorized workspace; verify Git blob hashes and distribution JAR SHA-256; use existing profile import/prepare with explicit providers only"
+        },
+        {
+          "kind": "read_only_query",
+          "argv": [
+            "profile",
+            "inspect",
+            "--index",
+            "{index_snapshot_id}"
+          ]
+        },
+        {
+          "kind": "read_only_query",
+          "argv": [
+            "search",
+            "--index",
+            "{index_snapshot_id}",
+            "--query",
+            "NagaMovementPattern",
+            "--track",
+            "ANCHOR"
+          ]
+        },
+        {
+          "kind": "read_only_query",
+          "argv": [
+            "inspect",
+            "--index",
+            "{index_snapshot_id}",
+            "--owner",
+            "twilightforest/entity/boss/Naga",
+            "--namespace",
+            "mojmap",
+            "--track",
+            "ANCHOR"
+          ]
+        },
+        {
+          "kind": "read_only_query",
+          "argv": [
+            "relations",
+            "--index",
+            "{index_snapshot_id}",
+            "--owner",
+            "twilightforest/entity/boss/Naga",
+            "--depth",
+            "2",
+            "--namespace",
+            "mojmap",
+            "--track",
+            "ANCHOR"
+          ]
+        },
+        {
+          "kind": "review",
+          "instruction": "Follow every result locator through inspect --document, page until next_cursor is null, retain origin/stage/content hashes and coverage. Resolve member descriptors from captured bytecode before intervention; do not guess method names or ordinals."
+        }
+      ],
+      "assertions": [
+        "Return both pinned Naga and NagaMovementPattern source locators and server-side Goal/target relationship evidence",
+        "Follow inherited Monster/Mob/Goal definitions into separate Minecraft dependency roots with descriptors; unresolved edges remain coverage gaps",
+        "Any FRONTIER BaseTFBoss example is comparative only, never an ANCHOR parent or implementation"
+      ],
+      "blocked_on": [
+        "Pinned upstream bytes and exact resolved target profile have not been imported for this fixture",
+        "Exact Minecraft/Forge inherited bytecode and relation capture pending"
+      ],
+      "baseline": {
+        "method": "same task using grep/IDE/Gradle and existing Hub artifacts",
+        "profile_and_inputs_must_match": true,
+        "metrics": {
+          "locator_reach_rate": null,
+          "wrong_version_answers": null,
+          "repeat_investigations": null,
+          "bytes_read": null,
+          "cold_seconds": null,
+          "warm_seconds": null,
+          "memory_bytes": null,
+          "disk_bytes": null
+        },
+        "status": "NOT_MEASURED"
+      }
+    },
+    {
+      "id": "U02",
+      "title": "Investigate Hydra multipart damage interception before choosing Forge hook or Mixin",
+      "execution_status": "NOT_RUN",
+      "target_profile": {
+        "minecraft": "1.20.1",
+        "loader": "forge",
+        "loader_version": "47.4.6",
+        "java_major": 17,
+        "track": "ANCHOR"
+      },
+      "profile_id": null,
+      "index_snapshot_id": null,
+      "null_reasons": {
+        "profile_id": "Capture actual resolved workspace/dependency/config inputs before running this fixture",
+        "index_snapshot_id": "Prepare an immutable index from that captured profile; no sample ID is evidence"
+      },
+      "source": {
+        "repository": "TeamTwilight/twilightforest",
+        "commit": "a7dd8f13c653e137f977f5ffaa870fcb20fc1625",
+        "release": "4.3.2508",
+        "binary_sha256": "0bdc89263616d1b35c32ef82c5e9c14cbd20368e2fe8b468c72a28320be7a778",
+        "source_binary_identity": "RESOURCE_CORRESPONDENCE_ONLY; compiled-class equivalence not established"
+      },
+      "inputs": [
+        {
+          "path": "src/main/java/twilightforest/entity/boss/Hydra.java",
+          "git_blob_sha1": "e4c67000ed516e36c9be4b359cadc492e79cc672",
+          "representation_stage": "original_source",
+          "descriptor": null,
+          "descriptor_status": "RESOLVE_FROM_CAPTURED_BYTECODE_IF_REQUIRED",
+          "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/entity/boss/Hydra.java"
+        },
+        {
+          "path": "src/main/java/twilightforest/entity/boss/HydraHeadContainer.java",
+          "git_blob_sha1": "5c4299d6e2656638de0a8615fcf1265c6d5cd56f",
+          "representation_stage": "original_source",
+          "descriptor": null,
+          "descriptor_status": "RESOLVE_FROM_CAPTURED_BYTECODE_IF_REQUIRED",
+          "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/entity/boss/HydraHeadContainer.java"
+        }
+      ],
+      "steps": [
+        {
+          "kind": "prerequisite",
+          "instruction": "Acquire the pinned upstream bytes and exact target resolved dependencies into an authorized workspace; verify Git blob hashes and distribution JAR SHA-256; use existing profile import/prepare with explicit providers only"
+        },
+        {
+          "kind": "read_only_query",
+          "argv": [
+            "profile",
+            "inspect",
+            "--index",
+            "{index_snapshot_id}"
+          ]
+        },
+        {
+          "kind": "read_only_query",
+          "argv": [
+            "search",
+            "--index",
+            "{index_snapshot_id}",
+            "--query",
+            "HydraHeadContainer",
+            "--track",
+            "ANCHOR"
+          ]
+        },
+        {
+          "kind": "read_only_query",
+          "argv": [
+            "inspect",
+            "--index",
+            "{index_snapshot_id}",
+            "--owner",
+            "twilightforest/entity/boss/Hydra",
+            "--namespace",
+            "mojmap",
+            "--track",
+            "ANCHOR"
+          ]
+        },
+        {
+          "kind": "read_only_query",
+          "argv": [
+            "interventions",
+            "--index",
+            "{index_snapshot_id}",
+            "--owner",
+            "twilightforest/entity/boss/Hydra",
+            "--namespace",
+            "mojmap",
+            "--track",
+            "ANCHOR"
+          ]
+        },
+        {
+          "kind": "review",
+          "instruction": "Follow every result locator through inspect --document, page until next_cursor is null, retain origin/stage/content hashes and coverage. Resolve member descriptors from captured bytecode before intervention; do not guess method names or ordinals."
+        }
+      ],
+      "assertions": [
+        "Separate Hydra multipart damage origin from Forge event/patch entry points using the exact 47.4.6 dependency root",
+        "Return source plus original bytecode descriptors for candidate members; method names/ordinals remain unresolved until actual inspection",
+        "Do not recommend Mixin as necessary without checking the target-version public API/patch; never relabel original ordinal as post-transform"
+      ],
+      "blocked_on": [
+        "Pinned upstream bytes and exact resolved target profile have not been imported for this fixture",
+        "Exact Forge event/patch sources and original/transformed bytecode comparison pending"
+      ],
+      "baseline": {
+        "method": "same task using grep/IDE/Gradle and existing Hub artifacts",
+        "profile_and_inputs_must_match": true,
+        "metrics": {
+          "locator_reach_rate": null,
+          "wrong_version_answers": null,
+          "repeat_investigations": null,
+          "bytes_read": null,
+          "cold_seconds": null,
+          "warm_seconds": null,
+          "memory_bytes": null,
+          "disk_bytes": null
+        },
+        "status": "NOT_MEASURED"
+      }
+    },
+    {
+      "id": "U03",
+      "title": "Trace multipart entity synchronization from registration to receiving side",
+      "execution_status": "NOT_RUN",
+      "target_profile": {
+        "minecraft": "1.20.1",
+        "loader": "forge",
+        "loader_version": "47.4.6",
+        "java_major": 17,
+        "track": "ANCHOR"
+      },
+      "profile_id": null,
+      "index_snapshot_id": null,
+      "null_reasons": {
+        "profile_id": "Capture actual resolved workspace/dependency/config inputs before running this fixture",
+        "index_snapshot_id": "Prepare an immutable index from that captured profile; no sample ID is evidence"
+      },
+      "source": {
+        "repository": "TeamTwilight/twilightforest",
+        "commit": "a7dd8f13c653e137f977f5ffaa870fcb20fc1625",
+        "release": "4.3.2508",
+        "binary_sha256": "0bdc89263616d1b35c32ef82c5e9c14cbd20368e2fe8b468c72a28320be7a778",
+        "source_binary_identity": "RESOURCE_CORRESPONDENCE_ONLY; compiled-class equivalence not established"
+      },
+      "inputs": [
+        {
+          "path": "src/main/java/twilightforest/network/TFPacketHandler.java",
+          "git_blob_sha1": "7a2a44983eaf2fca0ad093d2e485f46e3d28dc75",
+          "representation_stage": "original_source",
+          "descriptor": null,
+          "descriptor_status": "RESOLVE_FROM_CAPTURED_BYTECODE_IF_REQUIRED",
+          "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/network/TFPacketHandler.java"
+        },
+        {
+          "path": "src/main/java/twilightforest/network/UpdateTFMultipartPacket.java",
+          "git_blob_sha1": "3a4b56f0c96333d21b8f094f096d08d875d00358",
+          "representation_stage": "original_source",
+          "descriptor": null,
+          "descriptor_status": "RESOLVE_FROM_CAPTURED_BYTECODE_IF_REQUIRED",
+          "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/network/UpdateTFMultipartPacket.java"
+        },
+        {
+          "path": "src/main/java/twilightforest/entity/boss/Hydra.java",
+          "git_blob_sha1": "e4c67000ed516e36c9be4b359cadc492e79cc672",
+          "representation_stage": "original_source",
+          "descriptor": null,
+          "descriptor_status": "RESOLVE_FROM_CAPTURED_BYTECODE_IF_REQUIRED",
+          "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/entity/boss/Hydra.java"
+        }
+      ],
+      "steps": [
+        {
+          "kind": "prerequisite",
+          "instruction": "Acquire the pinned upstream bytes and exact target resolved dependencies into an authorized workspace; verify Git blob hashes and distribution JAR SHA-256; use existing profile import/prepare with explicit providers only"
+        },
+        {
+          "kind": "read_only_query",
+          "argv": [
+            "profile",
+            "inspect",
+            "--index",
+            "{index_snapshot_id}"
+          ]
+        },
+        {
+          "kind": "read_only_query",
+          "argv": [
+            "search",
+            "--index",
+            "{index_snapshot_id}",
+            "--query",
+            "UpdateTFMultipartPacket",
+            "--track",
+            "ANCHOR"
+          ]
+        },
+        {
+          "kind": "read_only_query",
+          "argv": [
+            "inspect",
+            "--index",
+            "{index_snapshot_id}",
+            "--owner",
+            "twilightforest/network/UpdateTFMultipartPacket",
+            "--namespace",
+            "mojmap",
+            "--track",
+            "ANCHOR"
+          ]
+        },
+        {
+          "kind": "review",
+          "instruction": "Follow every result locator through inspect --document, page until next_cursor is null, retain origin/stage/content hashes and coverage. Resolve member descriptors from captured bytecode before intervention; do not guess method names or ordinals."
+        }
+      ],
+      "assertions": [
+        "Return pinned packet registration, encode/decode/handler and producer/consumer locators with missing relationships explicit",
+        "Record logical server producer, logical client consumer and physical client/dedicated server separately",
+        "Singleplayer or a dedicated-server GameTest cannot satisfy a two-process network synchronization assertion"
+      ],
+      "blocked_on": [
+        "Pinned upstream bytes and exact resolved target profile have not been imported for this fixture",
+        "Dedicated server plus receiving physical client and same-build/tick-frame evidence pending"
+      ],
+      "baseline": {
+        "method": "same task using grep/IDE/Gradle and existing Hub artifacts",
+        "profile_and_inputs_must_match": true,
+        "metrics": {
+          "locator_reach_rate": null,
+          "wrong_version_answers": null,
+          "repeat_investigations": null,
+          "bytes_read": null,
+          "cold_seconds": null,
+          "warm_seconds": null,
+          "memory_bytes": null,
+          "disk_bytes": null
+        },
+        "status": "NOT_MEASURED"
+      }
+    },
+    {
+      "id": "U04",
+      "title": "Trace Hydra pose/rendering through old and JAPPA model paths",
+      "execution_status": "NOT_RUN",
+      "target_profile": {
+        "minecraft": "1.20.1",
+        "loader": "forge",
+        "loader_version": "47.4.6",
+        "java_major": 17,
+        "track": "ANCHOR"
+      },
+      "profile_id": null,
+      "index_snapshot_id": null,
+      "null_reasons": {
+        "profile_id": "Capture actual resolved workspace/dependency/config inputs before running this fixture",
+        "index_snapshot_id": "Prepare an immutable index from that captured profile; no sample ID is evidence"
+      },
+      "source": {
+        "repository": "TeamTwilight/twilightforest",
+        "commit": "a7dd8f13c653e137f977f5ffaa870fcb20fc1625",
+        "release": "4.3.2508",
+        "binary_sha256": "0bdc89263616d1b35c32ef82c5e9c14cbd20368e2fe8b468c72a28320be7a778",
+        "source_binary_identity": "RESOURCE_CORRESPONDENCE_ONLY; compiled-class equivalence not established"
+      },
+      "inputs": [
+        {
+          "path": "src/main/java/twilightforest/client/TFClientSetup.java",
+          "git_blob_sha1": "2e7012197d2c4e85d3fd2d6f16d7408649300e92",
+          "representation_stage": "original_source",
+          "descriptor": null,
+          "descriptor_status": "RESOLVE_FROM_CAPTURED_BYTECODE_IF_REQUIRED",
+          "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/client/TFClientSetup.java"
+        },
+        {
+          "path": "src/main/java/twilightforest/client/renderer/entity/HydraRenderer.java",
+          "git_blob_sha1": "1ad130a2feaaa5eb994536e345e9f2470af9139d",
+          "representation_stage": "original_source",
+          "descriptor": null,
+          "descriptor_status": "RESOLVE_FROM_CAPTURED_BYTECODE_IF_REQUIRED",
+          "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/client/renderer/entity/HydraRenderer.java"
+        },
+        {
+          "path": "src/main/java/twilightforest/client/model/entity/HydraModel.java",
+          "git_blob_sha1": "e2b66f6df7baf824bff9b6fdaf35535d9b57f8e5",
+          "representation_stage": "original_source",
+          "descriptor": null,
+          "descriptor_status": "RESOLVE_FROM_CAPTURED_BYTECODE_IF_REQUIRED",
+          "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/client/model/entity/HydraModel.java"
+        },
+        {
+          "path": "src/main/java/twilightforest/client/renderer/entity/newmodels/NewHydraRenderer.java",
+          "git_blob_sha1": "7bcd6fee415d3f74253ac50bf770aa90ae7c938b",
+          "representation_stage": "original_source",
+          "descriptor": null,
+          "descriptor_status": "RESOLVE_FROM_CAPTURED_BYTECODE_IF_REQUIRED",
+          "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/client/renderer/entity/newmodels/NewHydraRenderer.java"
+        },
+        {
+          "path": "src/main/java/twilightforest/client/model/entity/newmodels/NewHydraModel.java",
+          "git_blob_sha1": "3e93b31d87f5ab8e982e497d52109035c5a97a77",
+          "representation_stage": "original_source",
+          "descriptor": null,
+          "descriptor_status": "RESOLVE_FROM_CAPTURED_BYTECODE_IF_REQUIRED",
+          "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/client/model/entity/newmodels/NewHydraModel.java"
+        },
+        {
+          "path": "src/main/resources/assets/twilightforest/textures/model/hydra4.png",
+          "git_blob_sha1": "45d8ab83ddbff6020e5c88f4d8de4ffff800540e",
+          "representation_stage": "original_source",
+          "descriptor": null,
+          "descriptor_status": "RESOLVE_FROM_CAPTURED_BYTECODE_IF_REQUIRED",
+          "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/assets/twilightforest/textures/model/hydra4.png"
+        }
+      ],
+      "steps": [
+        {
+          "kind": "prerequisite",
+          "instruction": "Acquire the pinned upstream bytes and exact target resolved dependencies into an authorized workspace; verify Git blob hashes and distribution JAR SHA-256; use existing profile import/prepare with explicit providers only"
+        },
+        {
+          "kind": "read_only_query",
+          "argv": [
+            "profile",
+            "inspect",
+            "--index",
+            "{index_snapshot_id}"
+          ]
+        },
+        {
+          "kind": "read_only_query",
+          "argv": [
+            "search",
+            "--index",
+            "{index_snapshot_id}",
+            "--query",
+            "HydraRenderer",
+            "--track",
+            "ANCHOR"
+          ]
+        },
+        {
+          "kind": "read_only_query",
+          "argv": [
+            "inspect",
+            "--index",
+            "{index_snapshot_id}",
+            "--owner",
+            "twilightforest/client/renderer/entity/HydraRenderer",
+            "--namespace",
+            "mojmap",
+            "--track",
+            "ANCHOR"
+          ]
+        },
+        {
+          "kind": "review",
+          "instruction": "Follow every result locator through inspect --document, page until next_cursor is null, retain origin/stage/content hashes and coverage. Resolve member descriptors from captured bytecode before intervention; do not guess method names or ordinals."
+        }
+      ],
+      "assertions": [
+        "Return registration, both relevant renderer/model choices and actual texture locator; preserve JAPPA selection conditions",
+        "Source relationships do not establish runtime pose, camera, missing-texture absence or successful model-layer registration",
+        "Require same-run client screenshot/frame/camera, selected configuration and server interval; GameTest-only evidence yields NOT_RUN rendering"
+      ],
+      "blocked_on": [
+        "Pinned upstream bytes and exact resolved target profile have not been imported for this fixture",
+        "Actual physical-client render evidence and config-specific old/JAPPA observations pending"
+      ],
+      "baseline": {
+        "method": "same task using grep/IDE/Gradle and existing Hub artifacts",
+        "profile_and_inputs_must_match": true,
+        "metrics": {
+          "locator_reach_rate": null,
+          "wrong_version_answers": null,
+          "repeat_investigations": null,
+          "bytes_read": null,
+          "cold_seconds": null,
+          "warm_seconds": null,
+          "memory_bytes": null,
+          "disk_bytes": null
+        },
+        "status": "NOT_MEASURED"
+      }
+    },
+    {
+      "id": "U05",
+      "title": "Follow liveroot registration and generated item/resource packaging before adding an item",
+      "execution_status": "NOT_RUN",
+      "target_profile": {
+        "minecraft": "1.20.1",
+        "loader": "forge",
+        "loader_version": "47.4.6",
+        "java_major": 17,
+        "track": "ANCHOR"
+      },
+      "profile_id": null,
+      "index_snapshot_id": null,
+      "null_reasons": {
+        "profile_id": "Capture actual resolved workspace/dependency/config inputs before running this fixture",
+        "index_snapshot_id": "Prepare an immutable index from that captured profile; no sample ID is evidence"
+      },
+      "source": {
+        "repository": "TeamTwilight/twilightforest",
+        "commit": "a7dd8f13c653e137f977f5ffaa870fcb20fc1625",
+        "release": "4.3.2508",
+        "binary_sha256": "0bdc89263616d1b35c32ef82c5e9c14cbd20368e2fe8b468c72a28320be7a778",
+        "source_binary_identity": "RESOURCE_CORRESPONDENCE_ONLY; compiled-class equivalence not established"
+      },
+      "inputs": [
+        {
+          "path": "src/main/java/twilightforest/init/TFItems.java",
+          "git_blob_sha1": "c7d83a7e8189df1740fb6ecb1fd64e2f244b890c",
+          "representation_stage": "original_source",
+          "descriptor": null,
+          "descriptor_status": "RESOLVE_FROM_CAPTURED_BYTECODE_IF_REQUIRED",
+          "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/init/TFItems.java"
+        },
+        {
+          "path": "src/generated/resources/assets/twilightforest/models/item/liveroot.json",
+          "git_blob_sha1": "bd28e4fa528aaa747a8d957b0a260843f4f50b00",
+          "representation_stage": "original_source",
+          "descriptor": null,
+          "descriptor_status": "RESOLVE_FROM_CAPTURED_BYTECODE_IF_REQUIRED",
+          "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/generated/resources/assets/twilightforest/models/item/liveroot.json"
+        },
+        {
+          "path": "src/main/resources/assets/twilightforest/textures/item/liveroot.png",
+          "git_blob_sha1": "5c4ea60cb912ea2e0af0c72875d45d2623bebc72",
+          "representation_stage": "original_source",
+          "descriptor": null,
+          "descriptor_status": "RESOLVE_FROM_CAPTURED_BYTECODE_IF_REQUIRED",
+          "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/assets/twilightforest/textures/item/liveroot.png"
+        },
+        {
+          "path": "src/generated/resources/data/twilightforest/loot_tables/blocks/liveroot_block.json",
+          "git_blob_sha1": "933b89892cdca810168f2436b3d8d9d08753c421",
+          "representation_stage": "original_source",
+          "descriptor": null,
+          "descriptor_status": "RESOLVE_FROM_CAPTURED_BYTECODE_IF_REQUIRED",
+          "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/generated/resources/data/twilightforest/loot_tables/blocks/liveroot_block.json"
+        }
+      ],
+      "steps": [
+        {
+          "kind": "prerequisite",
+          "instruction": "Acquire the pinned upstream bytes and exact target resolved dependencies into an authorized workspace; verify Git blob hashes and distribution JAR SHA-256; use existing profile import/prepare with explicit providers only"
+        },
+        {
+          "kind": "read_only_query",
+          "argv": [
+            "profile",
+            "inspect",
+            "--index",
+            "{index_snapshot_id}"
+          ]
+        },
+        {
+          "kind": "read_only_query",
+          "argv": [
+            "search",
+            "--index",
+            "{index_snapshot_id}",
+            "--query",
+            "liveroot",
+            "--track",
+            "ANCHOR"
+          ]
+        },
+        {
+          "kind": "read_only_query",
+          "argv": [
+            "inspect",
+            "--index",
+            "{index_snapshot_id}",
+            "--owner",
+            "twilightforest/init/TFItems",
+            "--namespace",
+            "mojmap",
+            "--track",
+            "ANCHOR"
+          ]
+        },
+        {
+          "kind": "review",
+          "instruction": "Follow every result locator through inspect --document, page until next_cursor is null, retain origin/stage/content hashes and coverage. Resolve member descriptors from captured bytecode before intervention; do not guess method names or ordinals."
+        }
+      ],
+      "assertions": [
+        "Return registry, generated item model, texture and related data locator, preserving generated versus main resource roots",
+        "Compare distribution JAR asset/data entries with captured source resource bytes; do not substitute Java source identity for distribution inclusion",
+        "The separate Celestial Staff pilot verifies its own build/package only, not all upstream task outcomes"
+      ],
+      "blocked_on": [
+        "Pinned upstream bytes and exact resolved target profile have not been imported for this fixture",
+        "Task-specific immutable source/distribution index query results pending"
+      ],
+      "baseline": {
+        "method": "same task using grep/IDE/Gradle and existing Hub artifacts",
+        "profile_and_inputs_must_match": true,
+        "metrics": {
+          "locator_reach_rate": null,
+          "wrong_version_answers": null,
+          "repeat_investigations": null,
+          "bytes_read": null,
+          "cold_seconds": null,
+          "warm_seconds": null,
+          "memory_bytes": null,
+          "disk_bytes": null
+        },
+        "status": "NOT_MEASURED"
+      }
+    },
+    {
+      "id": "U06",
+      "title": "Determine a named Fabric MOD compatibility on Connector ANCHOR without assuming FRONTIER success",
+      "execution_status": "NOT_RUN",
+      "target_profile": {
+        "minecraft": "1.20.1",
+        "loader": "forge",
+        "loader_version": "47.4.6",
+        "java_major": 17,
+        "track": "ANCHOR"
+      },
+      "profile_id": null,
+      "index_snapshot_id": null,
+      "null_reasons": {
+        "profile_id": "Capture actual resolved workspace/dependency/config inputs before running this fixture",
+        "index_snapshot_id": "Prepare an immutable index from that captured profile; no sample ID is evidence"
+      },
+      "source": {
+        "repository": "Sinytra/Connector",
+        "record_kind": "DESIGN_REFERENCE_NOT_SOURCE_SNAPSHOT",
+        "design_reference_commit": "7f68ac02291fde986119a3f5cab85436bed5c350",
+        "branch_hint": "1.20.1",
+        "version_hint": "1.0.0-beta.50",
+        "binary_sha256": null
+      },
+      "inputs": [
+        {
+          "path": "departments/minecraft/mods/sinytra-connector/DESIGN-REFERENCE.json",
+          "representation_stage": "design_reference",
+          "source_snapshot": false
+        }
+      ],
+      "candidate_fabric_mod": null,
+      "compatibility_verdict": "UNKNOWN",
+      "frontier_is_anchor_evidence": false,
+      "required_dependency_inputs": [
+        "Connector",
+        "Forgified Fabric API",
+        "candidate Fabric MOD",
+        "exact mappings"
+      ],
+      "steps": [
+        {
+          "kind": "prerequisite",
+          "instruction": "After Twilight Forest, name and pin the candidate Fabric MOD plus actual Connector/FFAPI JARs, exact mappings and dependencies. Design reference commit is not an acquired source snapshot."
+        },
+        {
+          "kind": "read_only_query",
+          "argv": [
+            "profile",
+            "inspect",
+            "--index",
+            "{index_snapshot_id}"
+          ]
+        },
+        {
+          "kind": "read_only_query",
+          "argv": [
+            "search",
+            "--index",
+            "{index_snapshot_id}",
+            "--query",
+            "fabric.mod.json",
+            "--track",
+            "ANCHOR"
+          ]
+        },
+        {
+          "kind": "review",
+          "instruction": "Inspect actual dependency declarations, mapping namespace transitions and original/remapped/transformed stages, preserving one SourceSnapshot per origin. Do not assume Launchpad from FRONTIER is an ANCHOR dependency."
+        },
+        {
+          "kind": "runtime_checkpoint",
+          "instruction": "Only after static prerequisites pass, use authorized registered disposable Forge target launches and report actual tested feature scope. Missing candidate/dependencies means UNKNOWN, not compatible."
+        }
+      ],
+      "assertions": [
+        "No compatibility PASS without the named candidate JAR hash and actual dependency closure",
+        "FRONTIER/NeoForge results are comparative only",
+        "Unknown transformed stage or unresolved dependency stays UNKNOWN/PARTIAL with a reason"
+      ],
+      "blocked_on": [
+        "Candidate Fabric MOD unspecified",
+        "Connector and Forgified Fabric API actual immutable snapshots/JAR hashes not acquired",
+        "Exact dependency closure, provider transforms and target run pending"
+      ],
+      "baseline": {
+        "method": "same task using grep/IDE/Gradle and existing Hub artifacts",
+        "profile_and_inputs_must_match": true,
+        "metrics": {
+          "locator_reach_rate": null,
+          "wrong_version_answers": null,
+          "repeat_investigations": null,
+          "bytes_read": null,
+          "cold_seconds": null,
+          "warm_seconds": null,
+          "memory_bytes": null,
+          "disk_bytes": null
+        },
+        "status": "NOT_MEASURED"
+      }
+    }
+  ]
+}

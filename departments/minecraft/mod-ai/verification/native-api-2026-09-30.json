@@ -1,0 +1,31 @@
+{
+  "scope": "OWNED_GLFW_WINDOW_NATIVE_API_ONLY",
+  "glfw_version": "3.4.0 Wayland X11 GLX Null EGL OSMesa monotonic shared",
+  "events": [
+    {
+      "window": "owned-target",
+      "button": 1,
+      "action": 1,
+      "mods": 0
+    },
+    {
+      "window": "owned-target",
+      "button": 1,
+      "action": 0,
+      "mods": 0
+    }
+  ],
+  "target_only": true,
+  "gameplay": "NOT_RUN",
+  "foreground_binding": "NOT_RUN",
+  "schema_version": 1,
+  "record_type": "derived_native_api_summary",
+  "exit_code": 0,
+  "max_seconds": 15,
+  "raw_result_sha256": "2975d8414b342791e38786bf36fd0e9daa91df9cbc75bff6d006ace9c05e43fb",
+  "limitations": [
+    "Owned hidden windows only; no foreground game identity or input route exercised",
+    "No physical pointer/device/focus mutation; target-addressed synthetic native events",
+    "Minecraft and Windows acceptance remain NOT_RUN"
+  ]
+}

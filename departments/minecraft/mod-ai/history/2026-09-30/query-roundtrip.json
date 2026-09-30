@@ -1,0 +1,61 @@
+{
+  "renderer": {
+    "request": {
+      "query": "WebGL",
+      "track": "ANCHOR",
+      "environment": {
+        "blockbench": "5.2.1"
+      }
+    },
+    "status": "OK",
+    "matched_case_ids": [
+      "M2-EDITOR-READY-WEBGL-20260930"
+    ],
+    "missing_evidence_ids": [],
+    "canonical_writes": 0,
+    "runtime_attestation": false
+  },
+  "staff": {
+    "request": {
+      "query": "purple",
+      "track": "ANCHOR",
+      "environment": {
+        "minecraft": "1.20.1",
+        "loader": "forge"
+      }
+    },
+    "status": "OK",
+    "matched_case_ids": [
+      "M2-STAFF-LEGACY-PALETTE-HALO-20260930"
+    ],
+    "missing_evidence_ids": [],
+    "canonical_writes": 0,
+    "runtime_attestation": false
+  },
+  "wrong-track": {
+    "request": {
+      "query": "purple",
+      "track": "FRONTIER",
+      "environment": {}
+    },
+    "status": "OK",
+    "matched_case_ids": [],
+    "missing_evidence_ids": [],
+    "canonical_writes": 0,
+    "runtime_attestation": false
+  },
+  "wrong-environment": {
+    "request": {
+      "query": "purple",
+      "track": "ANCHOR",
+      "environment": {
+        "blockbench": "5.2.0"
+      }
+    },
+    "status": "OK",
+    "matched_case_ids": [],
+    "missing_evidence_ids": [],
+    "canonical_writes": 0,
+    "runtime_attestation": false
+  }
+}

@@ -13,6 +13,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.level.storage.LevelResource;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -183,7 +185,39 @@ public final class ForgeObserver {
         record.addProperty("server_tick",server==null?0:server.getTickCount()); events.addLast(record); while(events.size()>256) events.removeFirst();
     }
     private JsonObject base() { JsonObject out=new JsonObject(); out.add("identity",identity.deepCopy()); return out; }
+    /** Read-only fixed-scenario fields, intentionally not a general NBT/inventory dump. */
+    private JsonObject staffState(Entity entity) {
+        JsonObject out=new JsonObject(); out.addProperty("schema_version",1);
+        out.addProperty("observation_side","logical_server");
+        if (!(entity instanceof Player player)) {
+            out.addProperty("applicable",false); out.addProperty("unavailable_reason","Selected entity is not a player");
+            return out;
+        }
+        out.addProperty("applicable",true);
+        var stack=player.getMainHandItem(); JsonObject hand=new JsonObject();
+        hand.addProperty("item",BuiltInRegistries.ITEM.getKey(stack.getItem()).toString());
+        hand.addProperty("count",stack.getCount()); hand.addProperty("damage",stack.getDamageValue()); out.add("main_hand",hand);
+        var effect=player.getEffect(MobEffects.GLOWING);
+        if (effect==null) out.add("glowing",JsonNull.INSTANCE);
+        else {
+            JsonObject glowing=new JsonObject(); glowing.addProperty("duration_ticks",effect.getDuration());
+            glowing.addProperty("amplifier",effect.getAmplifier()); out.add("glowing",glowing);
+        }
+        ResourceLocation staffId=new ResourceLocation("kneekura","celestial_staff"); JsonObject cooldown=new JsonObject();
+        cooldown.addProperty("item",staffId.toString()); boolean registered=BuiltInRegistries.ITEM.containsKey(staffId);
+        cooldown.addProperty("registered",registered);
+        if (registered) {
+            var item=BuiltInRegistries.ITEM.get(staffId);
+            cooldown.addProperty("active",player.getCooldowns().isOnCooldown(item));
+            cooldown.addProperty("fraction",player.getCooldowns().getCooldownPercent(item,0.0F));
+        } else {
+            cooldown.add("active",JsonNull.INSTANCE); cooldown.add("fraction",JsonNull.INSTANCE);
+            cooldown.addProperty("unavailable_reason","Celestial Staff item is not registered in this run");
+        }
+        out.add("staff_cooldown",cooldown); return out;
+    }
     private JsonObject capture(JsonObject query) {
+        boolean includeStaffState=StaffStateQuery.enabled(query);
         JsonObject out=base(); long tick=server.getTickCount(); out.addProperty("server_tick_start",tick); out.addProperty("log_sequence_start",sequence.get());
         int limit=query.has("limit")?query.get("limit").getAsInt():128; require(limit>=1 && limit<=256,"Entity limit out of bounds");
         Set<String> uuids=new HashSet<>(); if(query.has("entity_uuids")) for(JsonElement id:query.getAsJsonArray("entity_uuids")) uuids.add(UUID.fromString(id.getAsString()).toString());
@@ -202,6 +236,7 @@ public final class ForgeObserver {
                 row.addProperty("health_applicable",entity instanceof LivingEntity);
                 if(entity instanceof LivingEntity living) row.addProperty("health",living.getHealth()); else row.add("health",JsonNull.INSTANCE);
                 if(entity instanceof Mob mob && mob.getTarget()!=null) row.addProperty("target_uuid",mob.getTarget().getUUID().toString()); else row.add("target_uuid",JsonNull.INSTANCE);
+                if(includeStaffState) row.add("staff_state",staffState(entity));
                 entities.add(row);
             }
         }

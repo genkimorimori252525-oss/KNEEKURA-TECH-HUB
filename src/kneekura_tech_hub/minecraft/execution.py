@@ -57,42 +57,69 @@ def _tree(template):
     return rows
 
 
-def prepare_world(store: Store,registry: dict,*,template: str,request_id: str,world_name='gametestserver'):
+def _world_destination(directory,world_name,layout):
+    if layout not in ('server','client'):
+        raise ContractError('Explicit server or client world layout required')
+    if not isinstance(world_name,str) or not world_name.replace('_','').replace('-','').isalnum():
+        raise ContractError('Simple world directory name required')
+    directory=Path(directory)
+    parent=directory/'saves' if layout=='client' else directory
+    destination=parent/world_name
+    if any(p.is_symlink() for p in (directory,parent,destination)):
+        raise ContractError('Unsafe managed world path')
+    return destination
+
+
+def prepare_world(store: Store,registry: dict,*,template: str,request_id: str,
+                  world_name='gametestserver',layout='server'):
     root=_workspace(registry.get('workspace')); _request(request_id)
     src=Path(template)
     if src.is_symlink() or not src.is_dir() or str(src.resolve()) not in {str(Path(x).resolve()) for x in registry.get('world_templates',[])}:
         raise ContractError('World template is not registered')
-    if not isinstance(world_name,str) or not world_name.replace('_','').replace('-','').isalnum():
-        raise ContractError('Simple world directory name required')
     parent=root/'.kneekura-runs'
     if parent.is_symlink(): raise ContractError('Unsafe run root')
-    parent.mkdir(exist_ok=True)
     directory=parent/key_for({'workspace':str(root),'request_id':request_id})[:24]
-    if directory.exists(): raise ContractError('Test world already exists; never overwrite/reuse it')
+    if directory.exists() or directory.is_symlink(): raise ContractError('Test world already exists; never overwrite/reuse it')
+    # Validate only the intended managed path, before creating even the run root.
+    destination=_world_destination(directory,world_name,layout)
     before=_tree(src); template_hash=key_for(before)
-    directory.mkdir(mode=0o700); destination=directory/world_name
+    parent.mkdir(exist_ok=True); directory.mkdir(mode=0o700)
+    destination.parent.mkdir(exist_ok=True)
     shutil.copytree(src,destination,symlinks=False)
     if _tree(src)!=before or _tree(destination)!=before:
         raise ContractError('World template changed during copy; incomplete copy retained for inspection')
     marker={'schema_version':1,'workspace':str(root),'directory':str(directory),'world':str(destination),
             'world_id':directory.name,'world_template_hash':template_hash,'template':str(src.resolve()),
-            'request_id':request_id,'fresh':True}
+            'request_id':request_id,'fresh':True,'world_layout':layout}
     atomic_write(directory/'.kneekura-run.json',canonical(marker))
     h=store.put_json(marker); store.pin(h,'test-world:'+request_id)
     return dict(status='OK',**marker,marker_hash=h)
 
 
-def _owned_world(root,world):
+def _owned_world(root,world,*,layout=None):
     if not isinstance(world,str): raise ContractError('An explicitly prepared test world is required')
-    path=Path(world)
-    if path.is_symlink() or not path.is_dir() or not path.resolve().is_relative_to(root/'.kneekura-runs'):
+    path=Path(world); runs=root/'.kneekura-runs'
+    try: parts=path.relative_to(runs).parts
+    except ValueError: raise ContractError('Not a fresh managed test world') from None
+    if not (len(parts)==2 or len(parts)==3 and parts[1]=='saves') or '..' in parts:
         raise ContractError('Not a fresh managed test world')
-    marker_path=path.parent/'.kneekura-run.json'
+    directory=runs/parts[0]
+    if (runs.is_symlink() or directory.is_symlink() or path.parent.is_symlink() or
+        path.is_symlink() or not path.is_dir() or not path.resolve().is_relative_to(runs)):
+        raise ContractError('Not a fresh managed test world')
+    marker_path=directory/'.kneekura-run.json'
     if marker_path.is_symlink(): raise ContractError('Unsafe world marker')
     try: marker=json.loads(marker_path.read_bytes())
     except (OSError,ValueError): raise ContractError('Unowned test world') from None
+    if not isinstance(marker,dict): raise ContractError('Unowned test world')
+    # Older markers describe only the existing server layout. Never infer client
+    # ownership from a nested directory or silently migrate a prepared world.
+    actual_layout=marker.get('world_layout','server')
+    expected=_world_destination(directory,path.name,actual_layout)
+    if path!=expected or layout is not None and actual_layout!=layout:
+        raise ContractError('Prepared world layout does not match this launch')
     if (marker.get('workspace')!=str(root) or marker.get('world')!=str(path.resolve()) or
-        marker.get('directory')!=str(path.parent.resolve()) or marker.get('fresh') is not True):
+        marker.get('directory')!=str(directory.resolve()) or marker.get('fresh') is not True):
         raise ContractError('Wrong or already used test world marker')
     valid_hash(marker.get('world_template_hash'))
     if key_for(_tree(path))!=marker['world_template_hash']:
@@ -151,7 +178,7 @@ def execute(store: Store,registry: dict,*,kind: str,request_id: str,world=None,c
         argv=[str(wrapper),'--no-daemon','--console=plain']
         marker=None; session=None; marker_path=None
         if kind in ('gametest','client'):
-            marker,marker_path=_owned_world(root,world)
+            marker,marker_path=_owned_world(root,world,layout='client' if kind=='client' else 'server')
             budget=registry.get('remaining_launches'); budget_id=registry.get('launch_budget_id')
             if type(budget) is not int or budget<1 or not isinstance(budget_id,str) or not budget_id:
                 raise ContractError('No explicit game launch budget')
@@ -161,7 +188,9 @@ def execute(store: Store,registry: dict,*,kind: str,request_id: str,world=None,c
             if contract.get('dirty_hash')!=source or contract.get('world_id')!=marker['world_id'] or contract.get('world_template_hash')!=marker['world_template_hash']:
                 raise ContractError('Contract does not match current sources and prepared test world')
             from .runtime import create_session
-            session=create_session(store,dict(registry,world_directory_name=Path(marker['world']).name),contract,directory=Path(marker['directory']))
+            session=create_session(store,dict(registry,world_directory_name=Path(marker['world']).name,
+                                              world_layout=marker.get('world_layout','server')),
+                                   contract,directory=Path(marker['directory']))
             script=Path(__file__).with_name('resources')/'kneekura-run.init.gradle'
             observer=Path(__file__).with_name('resources')/'forge-observer'
             if not observer.is_dir(): observer=Path(__file__).resolve().parents[3]/'departments/minecraft/mod-ai/forge-observer'
@@ -228,7 +257,8 @@ def execute(store: Store,registry: dict,*,kind: str,request_id: str,world=None,c
                 outcome='NOT_RUN'; errors.append('Client launch alone proves no rendering/behaviour assertion; inspect captured observations')
         public={'schema_version':1,'status':'OK' if not errors else 'PARTIAL','outcome':outcome,'reasons':errors,
                 'request_id':request_id,'assertion_domain':{'compile':'compile_only','unit':'unit_tests','export':'input_resolution'}.get(kind,'server_behavior' if kind=='gametest' else 'client_observation'),
-                'tests_executed':sum(t['status']!='SKIPPED' for t in tests),'retry_allowed':False,
+                'tests_executed':(gametest or {}).get('tests_executed', 0) if kind=='gametest' else sum(t['status']!='SKIPPED' for t in tests),
+                'retry_allowed':False,
                 'replayed_execution':False,'log_hash':log_hash,'outputs':outputs,'gametest':gametest,
                 'evidence_level':'REGISTERED_LOCAL_EXECUTION_NOT_GENERAL_RUNTIME_PROOF'}
         receipt={'schema_version':1,'request':request,'source_generation':source,'source_generation_after':after,

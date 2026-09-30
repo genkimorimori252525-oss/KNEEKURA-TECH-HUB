@@ -1,6 +1,10 @@
 package org.kneekura.observer;
 
 import com.google.gson.JsonObject;
+import com.google.gson.JsonArray;
+import org.lwjgl.glfw.GLFW;
+import org.lwjgl.glfw.GLFWNativeX11;
+import org.lwjgl.system.Platform;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Screenshot;
 import net.minecraftforge.common.MinecraftForge;
@@ -25,6 +29,29 @@ public final class ClientProbe {
         Minecraft.getInstance().execute(()->{
             try {
                 Minecraft client=Minecraft.getInstance(); JsonObject out=new JsonObject(); out.addProperty("client_frame_start",FRAMES.get());
+                // This scope is covered by the existing response HMAC and run identity.
+                // Unsupported platforms retain screenshots but cannot bind native input.
+                JsonObject input=new JsonObject(); input.addProperty("platform","unsupported");
+                if(Platform.get()==Platform.LINUX) {
+                    try {
+                        long glfwWindow=client.getWindow().getWindow();
+                        long nativeWindow=GLFWNativeX11.glfwGetX11Window(glfwWindow);
+                        if(nativeWindow==0) throw new IllegalStateException("No X11 window");
+                        int[] width=new int[1],height=new int[1];
+                        GLFW.glfwGetWindowSize(glfwWindow,width,height);
+                        JsonArray size=new JsonArray(); size.add(width[0]); size.add(height[0]);
+                        input.addProperty("process_id",ProcessHandle.current().pid());
+                        input.addProperty("process_start",LinuxClientIdentity.processStart());
+                        input.addProperty("window_id",Long.toUnsignedString(nativeWindow));
+                        input.add("client_size",size);
+                        input.addProperty("cursor_mode",GLFW.glfwGetInputMode(glfwWindow,GLFW.GLFW_CURSOR)==GLFW.GLFW_CURSOR_DISABLED?"disabled":"other");
+                        input.addProperty("foreground",GLFW.glfwGetWindowAttrib(glfwWindow,GLFW.GLFW_FOCUSED)==GLFW.GLFW_TRUE);
+                        input.addProperty("platform","linux-x11");
+                    } catch(Exception | LinkageError unavailable) {
+                        input=new JsonObject(); input.addProperty("platform","unsupported");
+                    }
+                }
+                out.add("native_input",input);
                 out.addProperty("screen",client.screen==null?"none":client.screen.getClass().getName());
                 var camera=client.gameRenderer.getMainCamera(); JsonObject pose=new JsonObject();
                 pose.addProperty("x",camera.getPosition().x); pose.addProperty("y",camera.getPosition().y); pose.addProperty("z",camera.getPosition().z);

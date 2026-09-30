@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "execution_status": "NOT_RUN",
+  "purpose": "Fixed known-bad controls; fixture execution is not live acceptance",
+  "report_controls": [
+    {
+      "id": "missing_expected",
+      "expected_outcome": "NOT_RUN"
+    },
+    {
+      "id": "zero_tests",
+      "expected_outcome": "NOT_RUN"
+    },
+    {
+      "id": "required_flag",
+      "expected_outcome": "BLOCKED"
+    },
+    {
+      "id": "stale_epoch",
+      "expected_outcome": "BLOCKED"
+    },
+    {
+      "id": "target_failed",
+      "expected_outcome": "FAIL"
+    }
+  ],
+  "input_controls": [
+    {
+      "id": "wrong_focus",
+      "fault": "foreground=false",
+      "expected_outcome": "BLOCKED",
+      "expected_presses": 0
+    },
+    {
+      "id": "wrong_epoch",
+      "fault": "snapshot session_epoch differs",
+      "expected_outcome": "BLOCKED",
+      "expected_presses": 0
+    },
+    {
+      "id": "outside_viewport",
+      "fault": "position lies outside the bound client dimensions",
+      "expected_outcome": "BLOCKED",
+      "expected_presses": 0
+    },
+    {
+      "id": "press_unknown",
+      "fault": "native press completion throws after possible dispatch",
+      "expected_outcome": "UNKNOWN",
+      "expected_presses": 1
+    },
+    {
+      "id": "release_unknown",
+      "fault": "release completion throws",
+      "expected_outcome": "UNKNOWN",
+      "expected_presses": 1
+    }
+  ],
+  "client_evidence_controls": [
+    {
+      "id": "command_substitution",
+      "fault": "Set Glowing with effect command instead of physical press",
+      "expected_verdict": "BLOCKED"
+    },
+    {
+      "id": "direct_handler_substitution",
+      "fault": "Use GameTest Item.use as native input evidence",
+      "expected_verdict": "NOT_RUN"
+    },
+    {
+      "id": "stale_screenshot",
+      "fault": "Provide screenshot from a previous epoch/build",
+      "expected_verdict": "BLOCKED"
+    },
+    {
+      "id": "render_via_gametest",
+      "fault": "Provide server GameTest report for three view assertions",
+      "expected_verdict": "NOT_RUN"
+    },
+    {
+      "id": "late_sample",
+      "fault": "Only post-use observation occurs after effect has expired",
+      "expected_verdict": "NOT_RUN"
+    },
+    {
+      "id": "effect_refresh",
+      "fault": "Same helper/scenario observes increased duration during active cooldown",
+      "expected_verdict": "FAIL"
+    },
+    {
+      "id": "stack_changed",
+      "fault": "Staff count or damage differs from baseline",
+      "expected_verdict": "FAIL"
+    },
+    {
+      "id": "singleplayer_network",
+      "fault": "Singleplayer screenshot substituted for dedicated synchronization",
+      "expected_verdict": "NOT_RUN"
+    },
+    {
+      "id": "branch_mutation_unobserved",
+      "fault": "Server-side effect observation substituted for runtime client-branch instrumentation",
+      "expected_verdict": "NOT_RUN"
+    }
+  ]
+}

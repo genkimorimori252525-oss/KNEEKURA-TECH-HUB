@@ -149,3 +149,14 @@ def test_expected_required_mode_cannot_silently_change():
 def test_overflowing_number_is_invalid_observation_not_a_crash():
     c = contract(); o = observation(c); o['entities'][0]['position'][0] = 10**400
     assert api().evaluate_observation(c, o)['status'] == 'PARTIAL'
+
+
+@pytest.mark.parametrize('fault',['missing_target','required_mode','missing_exit'])
+def test_valid_observed_count_survives_non_success_target_decisions(fault):
+    c=contract();r=report(c)
+    if fault=='missing_target': c['expected_tests']=['different.target']
+    elif fault=='required_mode': c['expected_required']={'demo.attack':False}
+    else: r['exit_code']=None
+    result=api().evaluate_tests(c,r)
+    assert result['outcome'] in ('NOT_RUN','BLOCKED')
+    assert result['tests_executed']==1

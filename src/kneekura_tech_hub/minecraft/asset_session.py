@@ -200,8 +200,8 @@ def _status(value: Any, request_hash: str) -> dict:
     expected = {'guard_protocol','state','next_sequence','project_uuid','busy',
                 'request_hash','loaded_revision','last_receipt'}
     if (not isinstance(value, dict) or set(value) != expected
-            or value['guard_protocol'] != 1 or value['state'] != 'READY'
-            or value['next_sequence'] != 0 or value['project_uuid'] is not None
+            or type(value['guard_protocol']) is not int or value['guard_protocol'] != 1 or value['state'] != 'READY'
+            or type(value['next_sequence']) is not int or value['next_sequence'] != 0 or value['project_uuid'] is not None
             or value['busy'] is not False or value['request_hash'] != request_hash
             or value['loaded_revision'] != 'UNATTESTED' or value['last_receipt'] is not None):
         raise ContractError('Guarded editor is not a fresh unattested READY session')
@@ -214,7 +214,7 @@ def _receipt(value: Any, *, request_hash: str, seq: int, operation: str,
                 'assertion_domain','verification','result'}
     if not isinstance(value, dict) or set(value) != expected:
         raise ContractError('Guard operation receipt shape is invalid')
-    if (value['seq'] != seq or value['operation'] != operation
+    if (type(value['seq']) is not int or value['seq'] != seq or value['operation'] != operation
             or value['completion'] != 'CONFIRMED'
             or value['request_hash'] != request_hash
             or value['assertion_domain'] != 'asset_editor_operation'

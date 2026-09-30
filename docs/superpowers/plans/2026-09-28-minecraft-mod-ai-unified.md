@@ -48,35 +48,59 @@ Publish changed files only against the exact remote parent; the enclosing PR rec
 ### M2 — Disposable Blockbench writer and export
 Consumes: M1 request/spec/style/profile IDs and pinned provider selection.
 Produces: immutable AssetArtifact inventory with native source/export/reference hashes and bounded AssetObservation records.
-- [ ] Locate exact upstream commands and prove exclusive project identity, no script/plugin operations, path scope and overwrite protections; refuse mutation until those guards actually exist.
-- [ ] Test ambiguous completion and wrong-project cases before adding allowlisted model/texture calls. Never retry an uncertain write.
-- [ ] Generate ONE Celestial Staff in a disposable local editor project. Render required views; host AI reviews, repairs and records evidence, without accepting an upstream numeric score as truth.
-- [ ] Export Java item JSON + PNG + native bbmodel; verify geometry/texture references, UV/display constraints and captured byte hashes. Live Blockbench acceptance is distinct from protocol fixtures.
+- [x] Locate exact upstream commands and prove exclusive project identity, no script/plugin operations, path scope and overwrite protections; refuse mutation until those guards actually exist.
+- [x] Test ambiguous completion and wrong-project cases before adding allowlisted model/texture calls. Never retry an uncertain write.
+- [x] Generate ONE Celestial Staff in a disposable local editor project. Render required views; host AI reviews, repairs and records evidence, without accepting an upstream numeric score as truth.
+- [x] Export Java item JSON + PNG + native bbmodel; verify geometry/texture references, UV/display constraints and captured byte hashes. Live Blockbench acceptance is distinct from protocol fixtures.
 
 ### M3 — Existing research adapter acceptance and Forge integration
 Can prepare provider/Core fixtures during M2; required before complete-product acceptance, not a reason to block static item planning on all upstream research.
 Consumes: M2 captured artifacts, existing external providers/Core bridge and ProjectProfile.
 Produces: actual provider/Core evidence and same-generation Forge compile/packaging receipt.
-- [ ] Exercise existing Vineflower/tiny-remapper with explicit real pinned tool/JDK/mapping inputs; mark each unsupported/unrun capability accurately. Do not build replacements.
-- [ ] Exercise the existing new Core caller with real schemas/research records; retain human canonical gates.
-- [ ] Import staff into a registered disposable Forge 1.20.1 MOD workspace without overwrites; re-capture inputs after code/assets change and use existing build/export/contract preparation.
-- [ ] Verify packaged resource IDs and same-source receipts. Implement a small right-click ability with predeclared expectations using the existing coding AI, not a new agent service.
+- [x] Exercise existing Vineflower/tiny-remapper with explicit real pinned tool/JDK/mapping inputs; mark each unsupported/unrun capability accurately. Do not build replacements.
+- [x] Exercise the existing new Core caller with real schemas/research records; retain human canonical gates.
+- [x] Import staff into a registered disposable Forge 1.20.1 MOD workspace without overwrites; re-capture inputs after code/assets change and use existing build/export/contract preparation.
+- [x] Verify packaged resource IDs and same-source receipts. Implement a small right-click ability with predeclared expectations using the existing coding AI, not a new agent service.
+
+M3 progress detail: the unchanged pinned providers ran on actual staff-MOD
+classes, all 101 exact Forge classpath artifacts and official-input-derived
+mappings; decompiled output recompiled and remapped instructions matched a
+same-source ForgeGradle output. Core staged actual staff source records while
+preserving human canonical gates. Deployed Core and upstream Twilight/Connector
+acceptance are not inferred. The staff build/package and authenticated handler
+GameTests retain their exact separate generation hashes.
 
 ### M4 — Client observation and verified input
 Consumes: M3 build/run contract and existing `forge-observer/ClientProbe.java`.
 Produces: same-run screenshot/state/log/input evidence, not a second runtime authority.
 - [ ] Prove existing client capture on the target environment before creating more screenshot infrastructure.
 - [ ] Select the smallest verified input driver; Vibecraft and langyo are research inputs, not accepted dependencies. Validate source/API and Forge1.20.1/Java17/Windows fit first.
-- [ ] Require foreground target identity, scoped coordinates, key release, run/epoch correspondence and bounded operations. Keep actual right-click distinct from test commands.
+- [x] Require foreground target identity, scoped coordinates, key release, run/epoch correspondence and bounded operations. Keep actual right-click distinct from test commands.
 - [ ] Observe inventory/first-person/third-person display and actual use; evaluate server state, visuals and synchronization separately. Performance is unproven without a dedicated measurement.
 
+M4 progress detail: a concrete Linux/X11 right-button backend, authenticated
+process-start/window binding, session-owned replay/quarantine ledger, screenshot/
+log evidence route and explicit client save layout are implemented and fixture
+tested. The observer compiles against actual Forge/Java17. Live graphical client
+acceptance is pending; Windows input is unsupported, not silently treated as
+covered by Linux. Native/X server failure can leave release UNKNOWN and is
+quarantined rather than retried.
+
 ### M5 — One real MOD editing cycle and final acceptance
+- [x] Author pinned U01–U06 task inputs, A01–A24 fault recipes, fixed client/server assertions and negative controls without inventing execution results.
 - [ ] Execute investigate -> edit/assets -> build -> interact -> observe -> repair using fixed assertions and user launch budgets.
 - [ ] Exercise original U01-U06/A01-A24 plus the M1-M4 asset/input negatives; keep missing prerequisites NOT_RUN/BLOCKED.
-- [ ] Record failures/repairs through existing history. Preserve the research queue Twilight Forest -> Sinytra Connector; these investigations are not delegated to Vibecraft.
+- [x] Record failures/repairs through existing history. Preserve the research queue Twilight Forest -> Sinytra Connector; these investigations are not delegated to Vibecraft.
 - [ ] Close only the verified scope. Stop speculative feature growth; add future features only for a demonstrated failure or missing necessary task.
 
-## Local-agent handoff checkpoint — 2026-09-28
+## Current verified continuation — 2026-09-30
+
+See `departments/minecraft/mod-ai/CONTINUATION-2026-09-30.md` for current
+implementation, real Blockbench/editor review/export evidence, Core/provider
+acceptance boundaries, and exact-head verification. The old native-capture RED
+and selected-file-only environment described below are historical.
+
+## Historical local-agent handoff checkpoint — 2026-09-28
 
 Current detailed resume state is recorded in
 `departments/minecraft/mod-ai/LOCAL-AI-HANDOFF-2026-09-28.md`.
@@ -88,7 +112,7 @@ The latest executable-code head reviewed there is
 pathless native `.bbmodel` capture contract. Resume there; do not skip the RED by
 weakening tests or enabling raw filesystem export.
 
-## Current execution conditions
+## Historical execution conditions (superseded by continuation)
 
 Durable list_workflows returned an MCP 404; no duplicate workflow was created.
 Direct container git clone failed DNS, and archive retrieval was unavailable.

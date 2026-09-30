@@ -1,5 +1,10 @@
 # Local AI handoff — Minecraft MOD-AI asset/runtime integration
 
+> Historical handoff. The current executable/environment state is in
+> [the 2026-09-30 continuation](CONTINUATION-2026-09-30.md). The native-capture
+> RED below was resolved before that continuation; retain it as history, not
+> as the current resume task.
+
 Date: 2026-09-28  
 Repository: `genkimorimori252525-oss/KNEEKURA-TECH-HUB`  
 Draft PR: #74  

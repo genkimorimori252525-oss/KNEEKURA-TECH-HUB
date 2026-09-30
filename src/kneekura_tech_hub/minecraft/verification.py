@@ -95,24 +95,29 @@ def evaluate_tests(contract: dict, report: dict) -> dict:
         return _result(contract, 'NOT_RUN', ['Zero tests executed'])
     if not executed <= detected or not set(ids) <= detected:
         return _result(contract, 'BLOCKED', ['Executed/reported test was not detected'], status='ERROR')
+    def observed_result(outcome, reasons, **extra):
+        # ID/count structure is validated above. Preserve this observation even
+        # when target selection or exit metadata cannot establish acceptance.
+        return _result(contract, outcome, reasons, tests_executed=report['executed_count'], **extra)
+
     by_id = {t['id']: t for t in tests}
     missing = set(expected) - (detected & executed & set(ids))
     if missing:
-        return _result(contract, 'NOT_RUN', ['Expected tests missing: ' + ', '.join(sorted(missing))])
+        return observed_result('NOT_RUN', ['Expected tests missing: ' + ', '.join(sorted(missing))])
     if any(by_id[k]['required'] != v for k, v in expected_required.items()):
-        return _result(contract, 'BLOCKED', ['Required/optional mode changed for an expected test'], status='ERROR')
+        return observed_result('BLOCKED', ['Required/optional mode changed for an expected test'], status='ERROR')
     failures = [by_id[t] for t in expected if by_id[t].get('status') != 'PASS']
     unrelated = [t for t in tests if t['id'] not in expected and t.get('status') == 'FAIL']
     reasons = ['Target tests failed/skipped/not run'] if failures else []
     if type(report.get('exit_code')) is not int:
-        return _result(contract, 'BLOCKED', ['No completed process exit record'], status='ERROR')
+        return observed_result('BLOCKED', ['No completed process exit record'], status='ERROR')
     if report['exit_code'] != 0:
         # A failure outside the declared target set is preserved separately. An
         # otherwise unexplained process failure cannot become a clean success.
         if not unrelated and not failures:
-            return _result(contract, 'BLOCKED', ['Unexplained nonzero runner exit'])
+            return observed_result('BLOCKED', ['Unexplained nonzero runner exit'])
         reasons.append('Nonzero process exit is recorded separately from target assertion outcomes')
-    return _result(contract, 'FAIL' if failures else 'PASS', reasons,
+    return observed_result('FAIL' if failures else 'PASS', reasons,
                    target_results=[by_id[t] for t in expected], unrelated_failures=unrelated,
                    process_exit_code=report['exit_code'], required_flags_compared=bool(expected_required))
 

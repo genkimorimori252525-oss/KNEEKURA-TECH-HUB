@@ -1,4 +1,4 @@
-"""Run-bound M4 input safety boundary, with no installed/native input driver.
+"""Run-bound M4 input safety boundary, shared by fixture and registered native adapters.
 
 The injected backend is a trusted adapter, not input data. It must discover the
 actual game window, bind its identity to the existing authenticated observer,
@@ -6,8 +6,9 @@ and implement atomic target/foreground/viewport checks at dispatch. A snapshot
 check here alone cannot prevent an OS focus race. Every backend method must honor
 its absolute monotonic deadline; Python cannot interrupt a non-cooperative native
 call. The backend must reject pre-existing held controls and arrange a bounded
-fail-safe release if its process dies. Those obligations require live acceptance
-before this boundary can be connected to a real driver.
+fail-safe release if its process dies. The selected Linux/X11 production route
+lives in input_route/native_input.
+Driver implementation and fixture coverage do not constitute live acceptance.
 
 This module starts no game, sends no commands, creates no session authority, and
 never treats backend completion as actual right-click or game behavior evidence.
@@ -37,7 +38,9 @@ class InputBackend(Protocol):
     snapshot returns the existing observer identity, opaque target_id, foreground
     boolean and client_size in client-local pixels. press must atomically compare
     that scope again before mutation, including the run/epoch. It may acquire only
-    the requested control, and must return only after it was pressed. release
+    the requested control, and must return only after it was pressed. A driver may
+    own the full bounded gesture and release before returning. In that case release
+    confirms that same owned release, without injecting a second event. release
     releases only that operation's control, even if focus/epoch changed; it must
     never refocus or send a new press to another window. All methods raise when
     completion is uncertain. A real adapter needs its own live evidence for these

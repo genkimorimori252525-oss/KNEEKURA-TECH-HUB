@@ -153,3 +153,113 @@ def test_userdev_compiled_classes_can_identify_build_without_reobfuscated_jar(se
     reg['build_receipt_hash']=store.put_json(receipt)
     s=mod().create_session(store,reg,c,directory=directory)
     assert s['build_artifact_kind']=='directory' and s['class_probes']
+
+
+@pytest.mark.parametrize('layout,relative', [('server','proof-world'), ('client','saves/proof-world')])
+def test_session_world_binding_uses_explicit_save_layout(session,layout,relative):
+    store,c,reg,directory=session
+    reg.update(world_layout=layout,world_directory_name='proof-world')
+    c['physical_side']='client' if layout=='client' else 'server'
+    result=mod().create_session(store,reg,c,directory=directory)
+    cfg=json.loads(Path(result['path']).read_bytes())
+    assert Path(cfg['world'])==directory/relative
+    assert cfg['world_layout']==layout
+    assert Path(cfg['directory'])==directory
+
+
+@pytest.mark.parametrize('config', [
+    {'world_layout':'unknown'}, {'world_directory_name':'../production'},
+    {'world_directory_name':'saves/production'}, {'world_directory_name':'/production'},
+])
+def test_session_rejects_invalid_world_layout_or_name_before_writing(session,config):
+    store,c,reg,directory=session; reg.update(config)
+    with pytest.raises(ContractError): mod().create_session(store,reg,c,directory=directory)
+    assert not (directory/'session.json').exists()
+
+
+def test_session_rejects_client_saves_symlink(session):
+    store,c,reg,directory=session
+    target=directory/'other-saves'; target.mkdir()
+    (directory/'saves').symlink_to(target,target_is_directory=True)
+    reg.update(world_layout='client')
+    with pytest.raises(ContractError): mod().create_session(store,reg,c,directory=directory)
+    assert not (directory/'session.json').exists()
+
+
+@pytest.mark.parametrize('timeout,expected', [(1.0,'OK'), (0.01,'timeout'), (0.075,'timeout')])
+def test_live_observation_honors_explicit_transport_timeout(tmp_path,timeout,expected):
+    import http.server
+    import threading
+    runtime=mod(); c=contract(); token='a'*64; requests=[]
+    class Peer(http.server.BaseHTTPRequestHandler):
+        def do_GET(self): self.respond({'ready':True,'identity':report(c)['identity']})
+        def do_POST(self): self.respond(observation(c))
+        def respond(self,data):
+            requests.append((self.command,self.path))
+            time.sleep(0.05)
+            raw=canonical(data)
+            nonce=self.headers['X-Kneekura-Nonce']
+            signature=hmac.digest(token.encode(),(self.command+'\n'+self.path+'\n'+nonce+'\n').encode()+raw,'sha256').hex()
+            self.send_response(200); self.send_header('X-Kneekura-Signature',signature)
+            self.end_headers()
+            try: self.wfile.write(raw)
+            except (BrokenPipeError,ConnectionResetError): pass
+        def log_message(self,*args): pass
+    server=http.server.ThreadingHTTPServer(('127.0.0.1',0),Peer)
+    thread=threading.Thread(target=server.serve_forever,daemon=True); thread.start()
+    endpoint=tmp_path/'endpoint.json'; endpoint.write_text(json.dumps({'url':f'http://127.0.0.1:{server.server_port}'}))
+    session_path=tmp_path/'session.json'
+    session_path.write_bytes(canonical({'token':token,'contract':c,'endpoint_path':str(endpoint)})); session_path.chmod(0o600)
+    store=Store(tmp_path/'store')
+    try:
+        if expected=='timeout':
+            with pytest.raises(ContractError,match='interrupted|deadline expired'):
+                runtime.observe_live(store,str(session_path),timeout=timeout)
+            assert len(requests)<=2  # One handshake and at most one operation; no retries.
+            assert not list((store.root/'blobs').rglob('*'))
+        else:
+            out=runtime.observe_live(store,str(session_path),timeout=timeout)
+            assert out['status']=='OK' and out['evidence_level']=='AUTHENTICATED_LIVE_OBSERVER'
+    finally: server.shutdown(); server.server_close(); thread.join(timeout=2)
+
+
+@pytest.mark.parametrize('slow_stage', ['headers', 'body'])
+def test_live_bridge_total_deadline_stops_slow_stream_without_retry(slow_stage):
+    """Per-recv timeouts must not let one-byte drip streams overrun input budgets."""
+    import socketserver
+    import threading
+
+    seen = []
+    class Peer(socketserver.BaseRequestHandler):
+        def handle(self):
+            self.request.recv(16384)
+            seen.append(True)
+            payload = b'{}'
+            headers = b'HTTP/1.1 200 OK\r\nContent-Length: 32\r\nX-Slow: '
+            try:
+                self.request.sendall(headers)
+                if slow_stage == 'headers':
+                    for _ in range(30):
+                        self.request.sendall(b'x'); time.sleep(.02)
+                    self.request.sendall(b'\r\n\r\n'+payload)
+                else:
+                    self.request.sendall(b'x\r\n\r\n')
+                    # Keep each recv below the configured timeout for > total budget.
+                    for _ in range(32):
+                        self.request.sendall(b' '); time.sleep(.02)
+            except OSError:
+                pass
+    class Server(socketserver.ThreadingTCPServer):
+        allow_reuse_address = True
+        daemon_threads = True
+    with Server(('127.0.0.1', 0), Peer) as server:
+        thread = threading.Thread(target=server.serve_forever, daemon=True); thread.start()
+        client = mod().BridgeClient(f'http://127.0.0.1:{server.server_address[1]}', 'a'*64, contract(), timeout=.06)
+        started = time.monotonic()
+        try:
+            with pytest.raises(ContractError): client.request('/v1/observe')
+            elapsed = time.monotonic()-started
+            assert elapsed < .20, f'Observer stream exceeded total deadline: {elapsed}'
+            assert len(seen) == 1
+        finally:
+            server.shutdown(); thread.join(timeout=1)

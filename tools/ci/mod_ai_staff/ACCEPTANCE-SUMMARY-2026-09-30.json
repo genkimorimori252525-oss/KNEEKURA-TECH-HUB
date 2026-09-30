@@ -1,0 +1,298 @@
+{
+  "focused_tests": {
+    "command": "pytest -q tools/ci/mod_ai_staff/test_pilot.py",
+    "passed": 25
+  },
+  "gradle_provenance": {
+    "sha256": "a4b4158601f8636cdeeab09bd76afb640030bb5b144aafe261a5e8af027dc612",
+    "sha256_url": "https://services.gradle.org/distributions/gradle-8.8-bin.zip.sha256",
+    "url": "https://services.gradle.org/distributions/gradle-8.8-bin.zip"
+  },
+  "limitations": [
+    "The original report HMAC was verified locally with the private session token. This summary cannot independently reverify that signature.",
+    "No live HTTP handshake was sampled; this was authenticated file-report evidence.",
+    "Historical execution receipt top-level tests_executed was zero because it used unit-array length; the verified GameTest report contained five. The count propagation bug now has regression coverage; historical bytes are unchanged.",
+    "Client input, rendering, synchronization, performance and Windows remain NOT_RUN."
+  ],
+  "mdk_provenance": {
+    "example_src_omitted_on_extraction": true,
+    "sha1": "1a1c045f235262ff617e285ea2156571ea93bfbe",
+    "sha256": "87907a306cbbbcb8426d96f0d1df22dc1f404fd0a426679aae82c0d5d89c4efa",
+    "url": "https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-47.4.6/forge-1.20.1-47.4.6-mdk.zip"
+  },
+  "original_private_record_sha256": "f08f02123788143cd94e7eae4ad7c9901da2cd4d6188482984041467762af764",
+  "original_receipt_hashes": [
+    "0e608e7247710bb3edd189a664fd14abdf0b0681925666543bba2983d0eb3e50",
+    "0ed6dc76b31ca6e7d6a0e518f6b18543f1bed870684de9d6392c2242e34a3936",
+    "1729bdd503c2387430ec3cc3410674c44e59ba98f5e439ca27d3c0a036ab66d7",
+    "312a7293032ac1dec5c7d3c8ed98cf83feee6e253d7df2033a1c3e77116f5492",
+    "98501b3e7708e2c28608dd88b6e02235099977261a418164ec113fa917fbaa02",
+    "aeb92a095ab1e3d994e93c1eaff175d6d9e15e3bdcb9b8c981c660fabce515e7",
+    "e36b6e52adb0cbad30f1601d3b39c55d7ecfc5765b70458ce9039d5d1d1cd2f9"
+  ],
+  "original_signed_report_sha256": "c63232fcfe49a024899cd4d907ca23b248fddf9060d39d12ba575ac36b9b2995",
+  "packaged_jar_inventory": [
+    {
+      "path": "META-INF/MANIFEST.MF",
+      "sha256": "fdc3e933c8ca2d540d9a215c159de9c70fbebbedd7a13d3a5f85f42b9ec7b3ba",
+      "size_bytes": 295
+    },
+    {
+      "path": "META-INF/mods.toml",
+      "sha256": "ed0acefc98d93ab20fe899335b38144bf022631915c1696eff970183a89094b5",
+      "size_bytes": 381
+    },
+    {
+      "path": "assets/kneekura/lang/en_us.json",
+      "sha256": "b3b12d709220210d660b805da7f653ad14549d6d1fa4e2f14950e32d2a12b70c",
+      "size_bytes": 51
+    },
+    {
+      "path": "assets/kneekura/models/item/celestial_staff.json",
+      "sha256": "bb27c19a9c3077367157acc2a0a122a8d2e7006c44a7e4a185a543115c29e116",
+      "size_bytes": 5623
+    },
+    {
+      "path": "assets/kneekura/textures/item/celestial_staff.png",
+      "sha256": "c799d9220e7e31dc7a5110b09070ce5dd92499153744414015407f76d313c483",
+      "size_bytes": 150
+    },
+    {
+      "path": "data/kneekura/structures/empty.nbt",
+      "sha256": "a25b736aa9eea75038d47f6e705a36a2920b1ea6ce93bd4888f073c1c451133b",
+      "size_bytes": 128
+    },
+    {
+      "path": "org/kneekura/staff/CelestialStaffItem.class",
+      "sha256": "4775a750d981027d6e0e6e20d22f473e3897ef68f7a32207205ee4a3dea04dde",
+      "size_bytes": 2607
+    },
+    {
+      "path": "org/kneekura/staff/StaffGameTests$Fault.class",
+      "sha256": "bd2d5a355f6a1663bcba2ede47b3a127b7d913f6d28763c586dfcfefcd890206",
+      "size_bytes": 1269
+    },
+    {
+      "path": "org/kneekura/staff/StaffGameTests$TickableStaffPlayer.class",
+      "sha256": "36d30daa08026827a1f0875d0367b2d80fe727c4a2d86e078b26c7e5dfe45b98",
+      "size_bytes": 1383
+    },
+    {
+      "path": "org/kneekura/staff/StaffGameTests.class",
+      "sha256": "6b05c122fba6c2ea2c2969a9e3f060f527fb8592f8b08fa92ba070eb8be0b5d9",
+      "size_bytes": 7311
+    },
+    {
+      "path": "org/kneekura/staff/StaffMod.class",
+      "sha256": "d6fa09b45d4a67657c339c47f9ee6e7148f0a34ef753894ff94875893f0fc305",
+      "size_bytes": 2202
+    },
+    {
+      "path": "org/kneekura/staff/StaffUsePolicy$Decision.class",
+      "sha256": "889f7e050c3fd0d5103de8dcd163212c09911131e64404b0b052422fabb174bd",
+      "size_bytes": 1281
+    },
+    {
+      "path": "org/kneekura/staff/StaffUsePolicy.class",
+      "sha256": "68454cbdec9fd3012f9fcb23efa75e1fe64fef1517be9dff1c2445a7c700a1a1",
+      "size_bytes": 833
+    },
+    {
+      "path": "pack.mcmeta",
+      "sha256": "cd105e94cf7b312c64f5ca9dbcca3e9a3ab9d873b4d221a968a97d6a932eae9d",
+      "size_bytes": 66
+    }
+  ],
+  "publication_scope": "Derived summary only; original receipts, signed envelope, logs, machine paths and session secrets are retained locally and are not published. Hashes identify originals, not this summary. A checkout does not contain the raw evidence closure.",
+  "record_type": "derived_public_staff_acceptance_summary",
+  "schema_version": 1,
+  "summary": {
+    "assertion_scope": "Direct server Item.use and explicitly advanced real effect/cooldown subsystems",
+    "build": {
+      "assertion_domain": "compile_and_packaging_only",
+      "asset_resource_hashes": [
+        {
+          "path": "assets/kneekura/lang/en_us.json",
+          "sha256": "b3b12d709220210d660b805da7f653ad14549d6d1fa4e2f14950e32d2a12b70c",
+          "size_bytes": 51
+        },
+        {
+          "path": "assets/kneekura/models/item/celestial_staff.json",
+          "sha256": "bb27c19a9c3077367157acc2a0a122a8d2e7006c44a7e4a185a543115c29e116",
+          "size_bytes": 5623
+        },
+        {
+          "path": "assets/kneekura/textures/item/celestial_staff.png",
+          "sha256": "c799d9220e7e31dc7a5110b09070ce5dd92499153744414015407f76d313c483",
+          "size_bytes": 150
+        }
+      ],
+      "captured_asset": {
+        "asset_profile_id": "4ada06dd08d32dac3683a22f4e19a87a8aba9a2df0b87f9e819c8d0c24a019ac",
+        "capture_receipt_hash": "136e08825db23286e9b68840357333956f2dc4f48199d157ff2fb4e4f0e797ec",
+        "files": [
+          {
+            "content_hash": "bb27c19a9c3077367157acc2a0a122a8d2e7006c44a7e4a185a543115c29e116",
+            "kind": "model",
+            "path": "assets/kneekura/models/item/celestial_staff.json",
+            "size_bytes": 5623
+          },
+          {
+            "content_hash": "c799d9220e7e31dc7a5110b09070ce5dd92499153744414015407f76d313c483",
+            "kind": "texture",
+            "path": "assets/kneekura/textures/item/celestial_staff.png",
+            "size_bytes": 150
+          }
+        ],
+        "manifest_hash": "d2582d7e7d14e5db9a7c6f36774ed73728be1f12df30b02b9486751931877ae5",
+        "request_hash": "1ca8153b9e0f79f8ef1e3c82ed7dedc110fd76b09a14b169b3535f9e3528722e",
+        "source_model_hash": "fd34c3665766b69b3c560f2f22609b8519cb3f9b839b8ee39c1271b338a47de6"
+      },
+      "compile_receipt_hash": "0ed6dc76b31ca6e7d6a0e518f6b18543f1bed870684de9d6392c2242e34a3936",
+      "eula_written_by_build": false,
+      "export_receipt_hash": "1729bdd503c2387430ec3cc3410674c44e59ba98f5e439ca27d3c0a036ab66d7",
+      "handler_gametest": "NOT_RUN",
+      "index_snapshot_id": "4130dbc8dce4aa6bdb5f8740de35c2f534f68ed66ab1ff012eb456255f3c4194",
+      "jar_sha256": "15fd766e3249f7eb8e91ddd2767faaac5dec216fd69c4443360bdc4a272d83d6",
+      "java_major": 17,
+      "launches_during_build": 0,
+      "loader": "forge",
+      "loader_version": "47.4.6",
+      "minecraft": "1.20.1",
+      "outcome": "PASS",
+      "physical_right_click": "NOT_RUN",
+      "profile_id": "a59f9a5e667845d5d6e656be609b7b31fe7093e899bb61cb963ac99563437db4",
+      "rendering": "NOT_RUN",
+      "runtime_artifact_hash": "312a7293032ac1dec5c7d3c8ed98cf83feee6e253d7df2033a1c3e77116f5492",
+      "runtime_artifact_path": "build/classes/java/main",
+      "runtime_client_handler_mutation": "NOT_RUN",
+      "schema_version": 1,
+      "source_generation": "270bb001c9f63f77bc0b28a3a63b11ae2a08cfadd36f4db25b7a89194737d902",
+      "synchronization": "NOT_RUN"
+    },
+    "detected_count": 5,
+    "executed_count": 5,
+    "game_process_starts": 2,
+    "outcome": "PASS",
+    "performance": "NOT_RUN",
+    "physical_right_click": "NOT_RUN",
+    "preserved_nonpassing_receipts": {
+      "download_assets_not_run": "aeb92a095ab1e3d994e93c1eaff175d6d9e15e3bdcb9b8c981c660fabce515e7",
+      "wrong_namespace_blocked": "98501b3e7708e2c28608dd88b6e02235099977261a418164ec113fa917fbaa02"
+    },
+    "process_exit_code": 0,
+    "registered_gametest_operations": 3,
+    "rendering": "NOT_RUN",
+    "run_contract_hash": "0e608e7247710bb3edd189a664fd14abdf0b0681925666543bba2983d0eb3e50",
+    "run_id": "81abe335-6368-4474-a2b2-b2e5d8ee3a11",
+    "runtime_client_handler_mutation": "NOT_RUN",
+    "runtime_receipt_hash": "e36b6e52adb0cbad30f1601d3b39c55d7ecfc5765b70458ce9039d5d1d1cd2f9",
+    "schema_version": 1,
+    "session_epoch": "4bff0983-57d9-4a4e-8020-487743561cf6",
+    "signed_report_sha256": "1f292d95757229398dd0a1c854af77ab847237f6496b0af0af3101c30345b012",
+    "source_revision": "24f80d2e7bcb1e8c1247f13423688677d6152dad",
+    "synchronization": "NOT_RUN",
+    "tests": [
+      {
+        "error": "net.minecraft.gametest.framework.GameTestAssertException: Ability must not attempt damage, even when FakePlayer is invulnerable",
+        "id": "staff_damage_negative",
+        "required": false,
+        "status": "FAIL"
+      },
+      {
+        "error": "",
+        "id": "staff_expiry",
+        "required": true,
+        "status": "PASS"
+      },
+      {
+        "error": "",
+        "id": "staff_handler",
+        "required": true,
+        "status": "PASS"
+      },
+      {
+        "error": "net.minecraft.gametest.framework.GameTestAssertException: Repeated use must not refresh effect duration/amplifier, including in-place updates",
+        "id": "staff_refresh_negative",
+        "required": false,
+        "status": "FAIL"
+      },
+      {
+        "error": "net.minecraft.gametest.framework.GameTestAssertException: Cooldown must still be active at tick 99",
+        "id": "staff_short_cooldown_negative",
+        "required": false,
+        "status": "FAIL"
+      }
+    ]
+  },
+  "workspace_input_inventory": [
+    {
+      "path": "build.gradle",
+      "sha256": "f50947b2af27e834f58860360a084825951fe987d9dd8ea180e7eee261629d77"
+    },
+    {
+      "path": "gradle.properties",
+      "sha256": "61eb1c47ecb2fc0b8caf397c9475bc7f721a8f43455bc93b64171101709c40d2"
+    },
+    {
+      "path": "gradle/wrapper/gradle-wrapper.jar",
+      "sha256": "ed2c26eba7cfb93cc2b7785d05e534f07b5b48b5e7fc941921cd098628abca58"
+    },
+    {
+      "path": "gradle/wrapper/gradle-wrapper.properties",
+      "sha256": "0c0c22ccb8e653a13a7df19493b11fe5ce0f5fae7ee4835223d2d2ad028799da"
+    },
+    {
+      "path": "gradlew",
+      "sha256": "fb3cbfe6d066ee52bc07f62ed61ff77bde195384f52496c94280a83008d9f531"
+    },
+    {
+      "path": "gradlew.bat",
+      "sha256": "8e327fcb99d29ce0fe3ee2fec6e6a25de815a2df83a6a44a553dea89ffc92955"
+    },
+    {
+      "path": "settings.gradle",
+      "sha256": "21c8c1cfea9f78f7fed6d7ad325aafa24e0d1bd330a40719997c303d2217b830"
+    },
+    {
+      "path": "src/main/java/org/kneekura/staff/CelestialStaffItem.java",
+      "sha256": "4e190bf983d18946791a16f88f21eb48db037e7bdc9be8a0239af08137ab4b04"
+    },
+    {
+      "path": "src/main/java/org/kneekura/staff/StaffGameTests.java",
+      "sha256": "9901e3a30795d9b4523fd3fc5a38287d4b72632bf4bf6da391c9cf666e0a602f"
+    },
+    {
+      "path": "src/main/java/org/kneekura/staff/StaffMod.java",
+      "sha256": "ae6958c5f9b5e1315e24f3063b31fccfa1a3565c823c09ed53d88d26a86c304d"
+    },
+    {
+      "path": "src/main/java/org/kneekura/staff/StaffUsePolicy.java",
+      "sha256": "2c0c411ca9abe3625071fcc542137c17a213682cd803543254cf4e2e33c623dc"
+    },
+    {
+      "path": "src/main/resources/META-INF/mods.toml",
+      "sha256": "ed0acefc98d93ab20fe899335b38144bf022631915c1696eff970183a89094b5"
+    },
+    {
+      "path": "src/main/resources/assets/kneekura/lang/en_us.json",
+      "sha256": "b3b12d709220210d660b805da7f653ad14549d6d1fa4e2f14950e32d2a12b70c"
+    },
+    {
+      "path": "src/main/resources/assets/kneekura/models/item/celestial_staff.json",
+      "sha256": "bb27c19a9c3077367157acc2a0a122a8d2e7006c44a7e4a185a543115c29e116"
+    },
+    {
+      "path": "src/main/resources/assets/kneekura/textures/item/celestial_staff.png",
+      "sha256": "c799d9220e7e31dc7a5110b09070ce5dd92499153744414015407f76d313c483"
+    },
+    {
+      "path": "src/main/resources/data/kneekura/structures/empty.nbt",
+      "sha256": "a25b736aa9eea75038d47f6e705a36a2920b1ea6ce93bd4888f073c1c451133b"
+    },
+    {
+      "path": "src/main/resources/pack.mcmeta",
+      "sha256": "cd105e94cf7b312c64f5ca9dbcca3e9a3ab9d873b4d221a968a97d6a932eae9d"
+    }
+  ]
+}

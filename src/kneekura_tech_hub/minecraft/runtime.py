@@ -13,6 +13,9 @@ import json
 import os
 import re
 import secrets
+import socket
+import threading
+import time
 import uuid
 import zipfile
 from pathlib import Path
@@ -49,6 +52,10 @@ def create_session(store: Store,registry: dict,contract: dict,*,directory: Path)
     root=_workspace(registry.get('workspace')); directory=Path(directory)
     if directory.is_symlink() or not directory.is_dir() or not directory.resolve().is_relative_to(root):
         raise ContractError('Session directory must be inside the registered workspace')
+    from .execution import _world_destination
+    directory=directory.resolve()
+    world_layout=registry.get('world_layout','server')
+    world=_world_destination(directory,registry.get('world_directory_name','gametestserver'),world_layout)
     snapshot=index._load(store,contract['index_snapshot_id']); p=snapshot['profile']; m=p['manifest']
     if p['profile_id']!=contract['profile_id'] or m['minecraft']!='1.20.1' or m['loader']!='forge' or m.get('java_major')!=17:
         raise ContractError('Runtime requires the pinned Forge 1.20.1 / Java17 profile')
@@ -88,7 +95,7 @@ def create_session(store: Store,registry: dict,contract: dict,*,directory: Path)
              'expected_runtime':{'minecraft':m['minecraft'],'forge':m['loader_version'],'java_major':17},
              'build_artifact':str(artifact.resolve()),'build_artifact_kind':artifact_kind,'build_receipt_hash':registry['build_receipt_hash'],
              'class_probes':probes,'config_files':config,'command_registry':commands,
-             'directory':str(directory.resolve()),'world':str(directory/registry.get('world_directory_name','gametestserver')),
+             'directory':str(directory),'world':str(world),'world_layout':world_layout,
              'endpoint_path':str(directory/'endpoint.json'),'report_path':str(directory/'gametest-report.json')}
     path=directory/'session.json'
     try:
@@ -128,10 +135,22 @@ class BridgeClient:
         headers={'Authorization':'Bearer '+self.token,'Content-Type':'application/json',
                  'X-Kneekura-Run':self.contract['run_id'],'X-Kneekura-Epoch':self.contract['session_epoch'],
                  'X-Kneekura-Nonce':nonce}
+        deadline=time.monotonic()+self.timeout
         conn=http.client.HTTPConnection('127.0.0.1',self.port,timeout=self.timeout)
+        timer=None; response=None
         try:
+            conn.connect()  # Numeric loopback only; this request owns the socket.
+            sock=conn.sock
+            remaining=deadline-time.monotonic()
+            if remaining<=0: raise TimeoutError('Observer deadline expired')
+            def expire():
+                # Idle socket timeouts alone can be defeated by a byte drip.
+                try: sock.shutdown(socket.SHUT_RDWR)
+                except OSError: pass
+            timer=threading.Timer(remaining,expire); timer.daemon=True; timer.start()
             conn.request(method,path,body=raw,headers=headers)
             response=conn.getresponse(); payload=response.read(MAX_RESPONSE+1)
+            if time.monotonic()>=deadline: raise TimeoutError('Observer deadline expired')
             if len(payload)>MAX_RESPONSE: raise ContractError('Observer response exceeds budget')
             expected=hmac.digest(self.token.encode(),(method+'\n'+path+'\n'+nonce+'\n').encode()+payload,'sha256').hex()
             if not hmac.compare_digest(expected,response.getheader('X-Kneekura-Signature','')):
@@ -142,7 +161,11 @@ class BridgeClient:
             return value
         except (OSError,http.client.HTTPException):
             raise ContractError('Observer connection interrupted; operation completion is unknown, do not retry writes') from None
-        finally: conn.close()
+        finally:
+            if timer is not None:
+                timer.cancel(); timer.join()
+            if response is not None: response.close()
+            conn.close()
 
 
 def read_signed_report(session: dict,path: Path):
@@ -157,15 +180,19 @@ def read_signed_report(session: dict,path: Path):
     return report
 
 
-def _exchange_live(store: Store,session_path: str,*,operation='observe',query=None):
+def _exchange_live(store: Store,session_path: str,*,operation='observe',query=None,timeout=10):
     s=load_session(session_path); endpoint=Path(s['endpoint_path'])
     if endpoint.is_symlink() or endpoint.stat().st_size>65536: raise ContractError('Invalid observer endpoint file')
     e=json.loads(endpoint.read_bytes())
-    client=BridgeClient(e['url'],s['token'],s['contract'])
+    client=BridgeClient(e['url'],s['token'],s['contract'],timeout=timeout)
+    deadline=time.monotonic()+timeout
     hello=client.request('/v1/handshake')
     if hello.get('ready') is not True or verification._identity_errors(s['contract'],hello):
         raise ContractError('Live handshake did not verify the expected build/session/world')
     if operation not in ('observe','logs','client','command','operation'): raise ContractError('Unknown observer operation')
+    client.timeout=deadline-time.monotonic()
+    if client.timeout<=0:
+        raise ContractError('Observer deadline expired; do not retry writes')
     raw=client.request('/v1/'+operation,query or {})
     if verification._identity_errors(s['contract'],raw): raise ContractError('Observation belongs to another run')
     h=store.put_json(raw); hello_hash=store.put_json(hello)
@@ -182,10 +209,10 @@ def _exchange_live(store: Store,session_path: str,*,operation='observe',query=No
     return result
 
 
-def observe_live(store: Store, session_path: str, *, operation='observe', query=None):
+def observe_live(store: Store, session_path: str, *, operation='observe', query=None, timeout=10):
     if operation not in ('observe', 'logs', 'client', 'operation'):
         raise ContractError('Observe is a read-only operation surface')
-    return _exchange_live(store, session_path, operation=operation, query=query)
+    return _exchange_live(store, session_path, operation=operation, query=query, timeout=timeout)
 
 
 def execute_registered_command(store: Store, session_path: str, *, command_id: str, request_id: str):

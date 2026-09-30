@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "scope": "COMPILE_ONLY_NOT_CLIENT_ACCEPTANCE",
+  "target": {
+    "minecraft": "1.20.1",
+    "forge": "47.4.6",
+    "java_major": 17
+  },
+  "jdk_version": "17.0.20.1+1",
+  "gradle_version": "8.8",
+  "command": [
+    "./gradlew",
+    "--offline",
+    "--no-daemon",
+    "--console=plain",
+    "-I",
+    "{existing-run-init-script}",
+    "-PkneekuraRunDirectory={existing-owned-run-directory}",
+    "-PkneekuraSessionFile={existing-local-session-file}",
+    "-PkneekuraObserverRoot={repository-observer-source-root}",
+    "compileKneekuraObserverJava"
+  ],
+  "exit_code": 0,
+  "build_result": "BUILD SUCCESSFUL",
+  "elapsed_gradle_seconds": 13,
+  "tasks": [
+    "compileJava UP-TO-DATE",
+    "processResources UP-TO-DATE",
+    "classes UP-TO-DATE",
+    "compileKneekuraObserverJava"
+  ],
+  "game_tasks_executed": [],
+  "source_files": [
+    {
+      "path": "departments/minecraft/mod-ai/forge-observer/src/main/java/org/kneekura/observer/BridgeTransport.java",
+      "sha256": "ba76bffa8ef158795b60864f7bd7a13715e1da9a91a2ab8d603955a560e1bf37"
+    },
+    {
+      "path": "departments/minecraft/mod-ai/forge-observer/src/main/java/org/kneekura/observer/ClientProbe.java",
+      "sha256": "47f3e90cc2748342b7fe041a28a0c457705c6a817e8babf06f0d26091ec89b90"
+    },
+    {
+      "path": "departments/minecraft/mod-ai/forge-observer/src/main/java/org/kneekura/observer/ForgeObserver.java",
+      "sha256": "b76668e4434b60e01eff153801afd01351945e958a77d6aaedabb090adb79c64"
+    },
+    {
+      "path": "departments/minecraft/mod-ai/forge-observer/src/main/java/org/kneekura/observer/LinuxClientIdentity.java",
+      "sha256": "cf70959a501a58933c25e3b5e7202dfa1a1bc3dcbe4c581c896a5dd8a544651a"
+    },
+    {
+      "path": "departments/minecraft/mod-ai/forge-observer/src/main/java/org/kneekura/observer/RunLedger.java",
+      "sha256": "e0bebde0c8077f96704e54122d001b5e97ef35220f0c3f5964ff96a2ebea087d"
+    },
+    {
+      "path": "departments/minecraft/mod-ai/forge-observer/src/main/java/org/kneekura/observer/StaffStateQuery.java",
+      "sha256": "d446fb37446fc6e3944d1a922204b95ef1dec4729120170a86502194f8b1b3f9"
+    }
+  ],
+  "compiled_observer_classes": [
+    {
+      "path": "org/kneekura/observer/BridgeTransport$CommandResult.class",
+      "sha256": "c6757eecfc9afede4f716156a628f2e5f2c55a13f3a61d4239d9be2ed7c306b0"
+    },
+    {
+      "path": "org/kneekura/observer/BridgeTransport$Handler.class",
+      "sha256": "afa10e78967f7f843eb19b8795ab9c7155190223a7c4b603d3849bcd12af4076"
+    },
+    {
+      "path": "org/kneekura/observer/BridgeTransport.class",
+      "sha256": "1a6b23b1c4ac4319be16e5cb443e6be4944ef288d0562559c2b6ab8a18195273"
+    },
+    {
+      "path": "org/kneekura/observer/ClientProbe.class",
+      "sha256": "8eb745f7a66e832f29957d74855a2440f8c1af5dcdd2112af8e222644541667e"
+    },
+    {
+      "path": "org/kneekura/observer/ForgeObserver$1.class",
+      "sha256": "25aea8c994bc068624b37094fcb31cce62cd06233a53892d1ddcc2518c098bd8"
+    },
+    {
+      "path": "org/kneekura/observer/ForgeObserver.class",
+      "sha256": "05ad72bfbe65fd3ccd39c02edf9fc5a7d1a79e866c157a1f52cf1b6194935000"
+    },
+    {
+      "path": "org/kneekura/observer/LinuxClientIdentity.class",
+      "sha256": "e3ba546ea3a8475c078c8c15f18c7fd7ab9e1779cdf7ad36e179fd4dca446f63"
+    },
+    {
+      "path": "org/kneekura/observer/RunLedger.class",
+      "sha256": "b65c39a149a740ae7d062e9336bdd593929420972ae1d6eaf33f9680dcdcaf3d"
+    },
+    {
+      "path": "org/kneekura/observer/StaffStateQuery.class",
+      "sha256": "a3c96fd04cbedb901556312740c61c84616a43a3f454cc505e4378cf3dd40999"
+    }
+  ],
+  "run_init_sha256": "7fe553b58ab027eb0d5edb2331662938f2d6b95f2e7ca97d45e94cca78f2da62",
+  "pilot_source_generation_unchanged_from_prior_build": true,
+  "warnings": [],
+  "live_client_state": "NOT_RUN",
+  "native_driver_acceptance": "NOT_RUN",
+  "note": "Portable compile-only metadata refreshed after ClientProbe cursor-mode binding. Raw paths, sessions and log remain local. Existing staff build receipt was not rewritten. Native API-only GLFW evidence is recorded separately, not client acceptance.",
+  "raw_log_sha256": "47a805c2436c1227599e0f3a958c7ebffed86f341f7da0a8fe131db11a5cddf4",
+  "source_hashes_unchanged_during_verification": true,
+  "preserved_prior_compile_warnings": [
+    "ResourceLocation(String,String) constructor deprecated for removal in ForgeObserver.staffState",
+    "Existing ResourceLocation(String) constructor deprecated for removal in block observation"
+  ]
+}

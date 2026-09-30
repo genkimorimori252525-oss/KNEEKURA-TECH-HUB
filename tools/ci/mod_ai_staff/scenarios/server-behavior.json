@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "scenario_id": "celestial-staff-server-v1",
+  "assertion_domain": "server_behavior",
+  "world_seed": 0,
+  "expected_tests": [
+    "staff_handler",
+    "staff_expiry"
+  ],
+  "expected_required": {
+    "staff_handler": true,
+    "staff_expiry": true
+  },
+  "negative_controls": {
+    "staff_refresh_negative": "FAIL",
+    "staff_short_cooldown_negative": "FAIL",
+    "staff_damage_negative": "FAIL"
+  },
+  "fixed_assertions_file": "tools/ci/mod_ai_staff/assertions.json",
+  "invocation": "direct Item.use plus explicitly advanced real FakePlayer effect/cooldown subsystems",
+  "excluded_claims": [
+    "physical_right_click",
+    "rendering",
+    "synchronization",
+    "wall_clock_timing",
+    "performance"
+  ],
+  "execution_status": "NOT_RUN",
+  "status_note": "This reusable input does not replace the separately retained historical authenticated run result.",
+  "fixed_assertions_sha256": "bf04de39d90599619b5661afbe21f770738c8f0f9b7ad444f06272262db81791"
+}

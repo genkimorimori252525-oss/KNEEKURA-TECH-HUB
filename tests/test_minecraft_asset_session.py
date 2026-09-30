@@ -273,3 +273,25 @@ def test_bad_texture_regions_reject_before_network_or_cas(prepared, regions):
     with pytest.raises(ContractError):
         api().run_session(store, registry(9), config, {**plan, "texture_regions": regions})
     assert files(store.root) == before
+
+
+@pytest.mark.parametrize('field,value,operation,requests',[
+    ('guard_protocol',True,None,1),('guard_protocol',1.0,None,1),
+    ('next_sequence',False,None,1),('next_sequence',0.0,None,1),
+    ('seq',False,'begin',2),('seq',True,'texture',3),('seq',2.0,'cube',4),
+])
+def test_ambiguous_numeric_response_stops_before_next_write_or_cas(prepared,field,value,operation,requests):
+    store,h,config,plan=prepared;before=files(store.root)
+    server=Fixture(h,config['token']);original=server.result
+    def malformed(payload):
+        result=original(payload)
+        if (operation is None and payload['action']=='kneekura_asset_status') or (
+                operation is not None and payload.get('params',{}).get('operation')==operation):
+            result[field]=value
+        return result
+    server.result=malformed;port=server.start()
+    try:
+        with pytest.raises(ContractError): api().run_session(store,registry(port),config,plan)
+    finally: server.stop()
+    assert len(server.requests)==requests
+    assert files(store.root)==before

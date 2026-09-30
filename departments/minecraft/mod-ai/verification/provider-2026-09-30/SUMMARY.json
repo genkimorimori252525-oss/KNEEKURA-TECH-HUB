@@ -1,0 +1,30 @@
+{
+  "original_private_file_sha256": {
+    "decompile-cache-repeat.json": "a86eec174f1bf231ce674a0899c8dd2f75871d3fffdd70400843454ebde9c889",
+    "decompile-receipt.json": "b801ca6ad1fbf5e99671ed8048174033319ea317c0ddd625445aade950ac11fb",
+    "decompile-result.json": "4401fbbcd4fdf70f0b76cc0e4c8ad55258a28f9a358086905cdd80709b15adf4",
+    "decompile-stdout.txt": "aa2cd2423984bd0e76e66525107488425ef4d80b8a73402a5da2627a5635f53b",
+    "remap-cache-repeat.json": "f703e6988f3ab994c37792271fc1ae88339166dfe6803870ba8522405604e35f",
+    "remap-receipt.json": "274184908efc45457f8fa8ca5faa90a7169237ba792525cbd95c321cf39ca8df",
+    "remap-result.json": "2c85b2147cf4981cbded4b91b5a6309d5239ca695bb02c88792e59f989088923",
+    "remap-stdout.txt": "e7c295ac203679be8a83eec80da1beb9b900abbce1ff145c35db05b91b80c69d",
+    "sha256.json": "418413552b87328582de9a2d0dd040f899351aadf3339834010a6f67d516e541"
+  },
+  "publication_scope": "Only this derived summary and fixture source/mapping are public. Raw receipts/logs remain local; referenced hashes are not claims that those originals are included in the checkout.",
+  "record_type": "derived_public_provider_acceptance_summary",
+  "results": {
+    "decompile": "PASS",
+    "focused_tests_passed": 9,
+    "immutable_cache_repeat": "PASS",
+    "recompile_decompiled_java": "PASS",
+    "remap_field_and_methods": "PASS",
+    "remapped_smoke_execution": "PASS"
+  },
+  "schema_version": 1,
+  "scope": "Real pinned tool/JDK execution on a synthetic Java17 fixture; not actual MOD acceptance.",
+  "tools": {
+    "java": "17.0.20.1+1",
+    "tiny-remapper": "0.11.2",
+    "vineflower": "1.11.1"
+  }
+}

@@ -105,3 +105,18 @@ def test_all_operation_envelopes_have_the_declared_common_fields(tmp_path):
     assert p.returncode==0
     assert {'schema_version','request_id','profile_id','profile_hash','index_snapshot_id',
             'status','results','evidence','coverage','warnings','next_cursor'} <= set(out)
+
+
+def test_cli_explicit_client_world_layout_uses_run_saves(local,tmp_path):
+    store,reg,root=local
+    template=root/'templates/client'; template.mkdir(parents=True)
+    (template/'level.dat').write_bytes(b'fixture-world')
+    reg['world_templates']=[str(template)]
+    path=tmp_path/'reg.json'; path.write_text(json.dumps(reg))
+    p,out=run_cli(store.root,'world','prepare','--registry',str(path),'--template',str(template),
+                  '--request-id','client-world-cli','--world-name','proof-world','--layout','client')
+    assert p.returncode==0,p.stderr
+    assert out['world_layout']=='client'
+    assert Path(out['world'])==Path(out['directory'])/'saves/proof-world'
+    assert (Path(out['world'])/'level.dat').read_bytes()==b'fixture-world'
+    assert (Path(out['directory'])/'.kneekura-run.json').is_file()

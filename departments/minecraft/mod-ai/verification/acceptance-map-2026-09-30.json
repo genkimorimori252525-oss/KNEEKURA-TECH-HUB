@@ -1,0 +1,304 @@
+{
+  "schema_version": 1,
+  "scope": "Evidence map, not a declaration that all original acceptance is complete",
+  "hosted_tested_head": "9224c8709dc2f174ceb55f61866cd7a0b5f07166",
+  "hosted_run": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/36686657686",
+  "hosted_result": {
+    "passed": 943,
+    "failed": 0
+  },
+  "status_meaning": {
+    "FIXTURE_VERIFIED": "Named tests ran in the complete hosted suite; only their stated property is verified",
+    "PARTIAL": "Named tests cover part of the original case; listed actual prerequisites remain"
+  },
+  "adversarial_cases": [
+    {
+      "id": "A01",
+      "status": "FIXTURE_VERIFIED",
+      "test_nodes": [
+        "tests/test_minecraft_workspace.py::test_anchor_export_rejects_wrong_or_unpinned_environment",
+        "tests/test_minecraft_index.py::test_buildscript_and_frontier_not_silently_anchor"
+      ],
+      "limits": []
+    },
+    {
+      "id": "A02",
+      "status": "FIXTURE_VERIFIED",
+      "test_nodes": [
+        "tests/test_minecraft_storage.py::test_input_changes_invalidate_profile",
+        "tests/test_minecraft_workspace.py::test_source_and_resource_generation_changes_but_build_cache_does_not"
+      ],
+      "limits": []
+    },
+    {
+      "id": "A03",
+      "status": "FIXTURE_VERIFIED",
+      "test_nodes": [
+        "tests/test_minecraft_index.py::test_same_class_in_multiple_roots_is_ambiguous"
+      ],
+      "limits": []
+    },
+    {
+      "id": "A04",
+      "status": "FIXTURE_VERIFIED",
+      "test_nodes": [
+        "tests/test_minecraft_index.py::test_real_class_overloads_and_call_references",
+        "tests/test_minecraft_mappings.py::test_overloads_remain_ambiguous_without_descriptor",
+        "tests/test_minecraft_mappings.py::test_explicit_alias_is_scoped_not_global"
+      ],
+      "limits": []
+    },
+    {
+      "id": "A05",
+      "status": "FIXTURE_VERIFIED",
+      "test_nodes": [
+        "tests/test_minecraft_workspace.py::test_stale_source_is_visible_and_export_stale_config_rejected",
+        "tests/test_minecraft_completion_audit.py::test_runtime_rejects_old_index_even_with_fresh_build_receipt"
+      ],
+      "limits": [],
+      "live_pilot_supplement": "Observer rejected reobfuscated JAR class bytes against actual Mojmap userdev classes; corrected multi-output binding retained separate distribution JAR proof"
+    },
+    {
+      "id": "A06",
+      "status": "PARTIAL",
+      "test_nodes": [
+        "tests/test_minecraft_providers.py::test_external_provider_output_is_full_readable_and_has_exact_parents"
+      ],
+      "limits": [
+        "A real MOD source-JAR/binary mismatch fixture remains unrun"
+      ]
+    },
+    {
+      "id": "A07",
+      "status": "PARTIAL",
+      "test_nodes": [
+        "tests/test_minecraft_interventions.py::test_metadata_aw_at_and_conditionals",
+        "tests/test_minecraft_interventions.py::test_real_classfile_annotations"
+      ],
+      "limits": [
+        "Actual Forge/Mixin transformed-bytecode ordinal comparison remains unrun"
+      ]
+    },
+    {
+      "id": "A08",
+      "status": "FIXTURE_VERIFIED",
+      "test_nodes": [
+        "tests/test_minecraft_interventions.py::test_exact_owner_filter_does_not_claim_no_dynamic_injections",
+        "tests/test_minecraft_index.py::test_unprepared_bytecode_is_partial_not_absent"
+      ],
+      "limits": [
+        "Actual dynamic callback resolution is deliberately not claimed"
+      ]
+    },
+    {
+      "id": "A09",
+      "status": "FIXTURE_VERIFIED",
+      "test_nodes": [
+        "tests/test_minecraft_interventions.py::test_metadata_aw_at_and_conditionals"
+      ],
+      "limits": [
+        "Potential-intervention metadata is not a confirmed live conflict"
+      ]
+    },
+    {
+      "id": "A10",
+      "status": "FIXTURE_VERIFIED",
+      "test_nodes": [
+        "tests/test_minecraft_providers.py::test_provider_failure_does_not_cache_partial_output",
+        "tests/test_minecraft_index.py::test_partial_inputs_never_report_not_found"
+      ],
+      "limits": []
+    },
+    {
+      "id": "A11",
+      "status": "FIXTURE_VERIFIED",
+      "test_nodes": [
+        "tests/test_minecraft_index.py::test_cursor_cannot_cross_snapshot_or_query"
+      ],
+      "limits": []
+    },
+    {
+      "id": "A12",
+      "status": "FIXTURE_VERIFIED",
+      "test_nodes": [
+        "tests/test_minecraft_core_bridge.py::test_staging_bundle_preserves_single_snapshot_per_observation_and_creator",
+        "tests/test_minecraft_core_bridge.py::test_valid_bundle_preserves_licenses_and_existing_human_review_gate"
+      ],
+      "limits": [
+        "No production Core database population is claimed"
+      ]
+    },
+    {
+      "id": "A13",
+      "status": "FIXTURE_VERIFIED",
+      "test_nodes": [
+        "tests/test_minecraft_index.py::test_source_read_is_full_paged_and_immutable",
+        "tests/test_minecraft_storage.py::test_outer_jar_remains_addressable_after_original_is_deleted"
+      ],
+      "limits": []
+    },
+    {
+      "id": "A14",
+      "status": "PARTIAL",
+      "test_nodes": [
+        "tests/test_minecraft_storage.py::test_pin_is_durable_and_original_stays_readable",
+        "tests/test_minecraft_index.py::test_missing_blob_does_not_hide_other_readable_results",
+        "tests/test_minecraft_storage.py::test_unreadable_directory_is_reported_in_coverage"
+      ],
+      "limits": [
+        "No fresh physical disk-exhaustion experiment is claimed"
+      ]
+    },
+    {
+      "id": "A15",
+      "status": "FIXTURE_VERIFIED",
+      "test_nodes": [
+        "tests/test_minecraft_index.py::test_search_pagination_is_complete_and_snapshot_bound",
+        "tests/test_minecraft_interventions.py::test_pagination_and_wrong_cursor",
+        "tests/test_minecraft_index.py::test_reference_preview_is_bounded_without_losing_full_disassembly"
+      ],
+      "limits": []
+    },
+    {
+      "id": "A16",
+      "status": "FIXTURE_VERIFIED",
+      "test_nodes": [
+        "tests/test_minecraft_storage.py::test_zip_paths_rejected_without_outside_write",
+        "tests/test_minecraft_providers.py::test_provider_output_zip_traversal_is_not_imported",
+        "tests/test_minecraft_providers.py::test_unregistered_provider_is_never_executed"
+      ],
+      "limits": [
+        "Retrieved prose remains task data, not an authorization source"
+      ]
+    },
+    {
+      "id": "A17",
+      "status": "FIXTURE_VERIFIED",
+      "test_nodes": [
+        "tests/test_minecraft_workspace.py::test_gradle_plan_requires_explicit_registered_workspace",
+        "tests/test_minecraft_workspace.py::test_passive_inventory_does_not_run_gradle",
+        "tests/test_minecraft_execution.py::test_tampered_wrapper_and_unapproved_dispatch_are_rejected"
+      ],
+      "limits": []
+    },
+    {
+      "id": "A18",
+      "status": "FIXTURE_VERIFIED",
+      "test_nodes": [
+        "tests/test_minecraft_verification.py::test_foreign_or_stale_report_never_passes",
+        "tests/test_minecraft_verification.py::test_observation_uses_epoch_uuid_and_nonatomic_interval"
+      ],
+      "limits": []
+    },
+    {
+      "id": "A19",
+      "status": "FIXTURE_VERIFIED",
+      "test_nodes": [
+        "tests/test_minecraft_verification.py::test_unknown_operation_completion_must_not_be_retried",
+        "tests/test_minecraft_execution.py::test_request_receipt_is_unknown_after_interruption_not_retried"
+      ],
+      "limits": []
+    },
+    {
+      "id": "A20",
+      "status": "FIXTURE_VERIFIED",
+      "test_nodes": [
+        "tests/test_minecraft_verification.py::test_observation_uses_epoch_uuid_and_nonatomic_interval"
+      ],
+      "limits": [
+        "Live cross-frame client synchronization remains unrun"
+      ]
+    },
+    {
+      "id": "A21",
+      "status": "FIXTURE_VERIFIED",
+      "test_nodes": [
+        "tests/test_minecraft_verification.py::test_exit_zero_is_not_sufficient",
+        "tests/test_minecraft_verification.py::test_missing_expected_tests_not_success",
+        "tests/test_minecraft_verification.py::test_expected_required_mode_cannot_silently_change"
+      ],
+      "limits": []
+    },
+    {
+      "id": "A22",
+      "status": "FIXTURE_VERIFIED",
+      "test_nodes": [
+        "tests/test_minecraft_verification.py::test_unrelated_optional_failure_does_not_fail_target"
+      ],
+      "limits": [],
+      "live_pilot_supplement": "Signed report retains all three intentional optional failures separately from two required passes"
+    },
+    {
+      "id": "A23",
+      "status": "PARTIAL",
+      "test_nodes": [
+        "tests/test_minecraft_verification.py::test_report_requires_boolean_required_flag",
+        "tests/test_minecraft_verification.py::test_expected_required_mode_cannot_silently_change"
+      ],
+      "limits": [
+        "General helper-synthesized success or unrelated assertion-weakening cases are not automatically covered"
+      ],
+      "live_pilot_supplement": "Matched refresh, 99-tick cooldown and attempted-damage negative controls fail the same assertion helpers used by the real handler tests"
+    },
+    {
+      "id": "A24",
+      "status": "FIXTURE_VERIFIED",
+      "test_nodes": [
+        "tests/test_minecraft_verification.py::test_production_world_and_launch_budget_guard",
+        "tests/test_minecraft_verification.py::test_rendering_not_proven_by_gametest",
+        "tests/test_minecraft_execution.py::test_game_cannot_reuse_unowned_world"
+      ],
+      "limits": [
+        "No client rendering or Windows input PASS is inferred"
+      ]
+    }
+  ],
+  "user_tasks": [
+    {
+      "id": "U01",
+      "status": "NOT_RUN",
+      "reason": "No task-specific existing-MOD acceptance fixture was executed in this continuation"
+    },
+    {
+      "id": "U02",
+      "status": "NOT_RUN",
+      "reason": "No task-specific existing-MOD acceptance fixture was executed in this continuation"
+    },
+    {
+      "id": "U03",
+      "status": "NOT_RUN",
+      "reason": "No task-specific existing-MOD acceptance fixture was executed in this continuation"
+    },
+    {
+      "id": "U04",
+      "status": "NOT_RUN",
+      "reason": "No task-specific existing-MOD acceptance fixture was executed in this continuation"
+    },
+    {
+      "id": "U05",
+      "status": "PARTIAL",
+      "reason": "Actual staff resource addition and same-source packaging verified; handler/input results recorded separately"
+    },
+    {
+      "id": "U06",
+      "status": "NOT_RUN",
+      "reason": "No task-specific existing-MOD acceptance fixture was executed in this continuation"
+    }
+  ],
+  "server_pilot_evidence": {
+    "report_path": "tools/ci/mod_ai_staff/ACCEPTANCE-2026-09-30.json",
+    "run_id": "81abe335-6368-4474-a2b2-b2e5d8ee3a11",
+    "receipt_hash": "e36b6e52adb0cbad30f1601d3b39c55d7ecfc5765b70458ce9039d5d1d1cd2f9",
+    "scope": "Authenticated same-run signed file report; direct handler and manually advanced real effect/cooldown subsystems only",
+    "required_passes": [
+      "staff_handler",
+      "staff_expiry"
+    ],
+    "intentional_optional_failures": [
+      "staff_damage_negative",
+      "staff_refresh_negative",
+      "staff_short_cooldown_negative"
+    ],
+    "physical_right_click": "NOT_RUN"
+  }
+}

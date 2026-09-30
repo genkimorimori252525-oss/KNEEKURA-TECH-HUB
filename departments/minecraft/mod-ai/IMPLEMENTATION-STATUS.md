@@ -1,5 +1,9 @@
 # Implementation checkpoint — 2026-09-28, real live Forge integration
 
+> Historical checkpoint. Current implementation and explicitly separated acceptance
+> results are in [CONTINUATION-2026-09-30.md](CONTINUATION-2026-09-30.md).
+> The pending items below describe 2026-09-28, not the current resume order.
+
 Status: **IN_PROGRESS — the server-side build → source capture → authenticated observation/command → GameTest loop is verified; the entire MOD-making AI environment is not yet complete**.
 Design: [v1.4](../design/2026-09-28-mod-ai-environment/DESIGN.md).
 Base: `0e773ccf509d2a24c6dca3830cef18f38334b2cd`, design PR #72.
