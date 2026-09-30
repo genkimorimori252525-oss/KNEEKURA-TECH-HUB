@@ -1,6 +1,6 @@
 # KNEEKURA TECH HUB × LAB Experimental Runtime Bridge v1
 
-Status: **FUTURE / POST-COMPLETION DESIGN — DO NOT IMPLEMENT INSIDE THE CURRENT MOD-AI PLAN**  
+Status: **APPROVED FUTURE / POST-COMPLETION DESIGN — DO NOT IMPLEMENT INSIDE THE CURRENT MOD-AI PLAN**  
 Date: 2026-10-01  
 TECH HUB repository: `genkimorimori252525-oss/KNEEKURA-TECH-HUB`  
 LAB repository: `genkimorimori252525-oss/KNEEKURA-LAB`  
@@ -66,6 +66,34 @@ Failure / Repair History
 
 The long-term product is not "Minecraft recreated in a browser." Real Minecraft remains
 the authority for runtime, rendering, entity behavior, networking and interaction.
+
+### 1A. 2026-10-01 dual-presentation audit conclusion
+
+A light follow-up audit compared this bridge design with the current KNEEKURA-LAB main
+(`21959d439960d112d05c4c3ee44e54e353246d4e`) and TECH HUB bridge state
+(`56aab10509d8b55f560d50ac8984814eedf5ae80` before this update).
+
+The existing LAB design already establishes several boundaries that support a combined
+human/AI environment:
+
+- real Minecraft remains the authoritative visual/test environment;
+- the Human Workbench is presentation/control, not a second Minecraft renderer;
+- camera automation is already recognized as a possible experiment perturbation;
+- strict render preconditions separate TRACKED / IN_RENDER_RANGE / RENDER_ENTERED / YSM states;
+- Evidence Cut / snapshot-barrier concepts already exist for coherent observations;
+- raw Evidence and AI Finding/Hypothesis/Conclusion are separate;
+- the old live Web Viewer is not required as the primary real-Minecraft runtime view.
+
+The audit therefore rejects two tempting designs:
+
+1. **Two independent truth modes** — "Human Mode" and "AI Mode" with different runtime state.
+   This risks debugging one state while presenting another.
+2. **One compromised presentation for both audiences.** A screen optimized for dense AI
+   diagnostics is unnecessarily hostile to a human, while a beautiful human screen omits
+   machine-readable evidence the AI needs.
+
+The selected rule is **Dual Presentation, Single Truth**: one runtime/evidence truth,
+separate derived presentations for a human and for the AI.
 
 ---
 
@@ -684,6 +712,223 @@ labels; add a diagnostic channel only when a real visual-debugging case benefits
 
 ---
 
+## 11C. Dual Presentation, Single Truth
+
+Human and AI consumers may receive different presentations, but they must reference the same
+runtime truth.
+
+```text
+                  authoritative experiment truth
+            RunSnapshot + Experiment + Evidence Cut
+                            |
+                +-----------+-----------+
+                |                       |
+        Human Presentation        AI Presentation
+                |                       |
+        natural / interactive      explicit / diagnostic
+        readable / attractive      compact / machine-readable
+```
+
+There is no requirement that the human and AI look at the same layout, camera or overlay.
+There **is** a requirement that every presentation be bound to the same declared run,
+experiment generation, subject identities and evidence window.
+
+### Human presentation surfaces
+
+The default human experience should remain a normal, understandable Minecraft laboratory.
+
+Three presentation levels are allowed:
+
+1. **Human Normal View**
+   - ordinary Minecraft scene;
+   - natural/free/subject-follow camera chosen for human usability;
+   - minimal experiment status;
+   - no requirement to display AI-only diagnostic channels.
+
+2. **Human Debug View**
+   - opt-in overlays such as subject identity, target, path, collision, health, current
+     experiment, timeline marker and AI-flagged evidence;
+   - overlays are derived presentation, not raw evidence;
+   - turning an overlay on/off does not rewrite observations or assertions.
+
+3. **Human Evidence Review**
+   - inspect a retained capture, event, before/after pair or AI Finding;
+   - jump from an AI flag to the exact tick/window/view/evidence IDs that support it;
+   - review historical evidence without pretending it is current runtime state.
+
+The Human Workbench must not reimplement Minecraft/YSM rendering as a second authority.
+
+### AI presentation surface
+
+The AI receives the Visual Observation Packet defined above:
+
+- compact structured summary;
+- exact top-down schematic;
+- canonical Cardinal-4 contact sheet;
+- stable subject labels;
+- explicit visual checks;
+- selected timeline;
+- drill-down links;
+- optional ID/depth/collision/navigation diagnostic views.
+
+The AI presentation may be generated without being shown in the human UI.
+
+### Shared truth binding
+
+Every presentation record that participates in debugging must retain enough identity to prove
+what it represents:
+
+- `runSnapshotId`;
+- `experimentId` and experiment generation/request hash;
+- relevant `evidenceCut`;
+- Arena/arenaEpoch;
+- selected subject UUIDs;
+- camera/capture identity where visual;
+- raw source artifact hashes;
+- derived-presentation identity.
+
+If one of these identities changes during capture/review, do not silently combine the old and
+new presentation.
+
+### Raw scene versus presentation overlays
+
+KNEEKURA diagnostic overlays must not contaminate the raw visual evidence they explain.
+
+Prefer this derivation:
+
+```text
+Minecraft scene/render result
+        |
+        +--> RAW_SCENE_RGB
+        |       |
+        |       +--> AI crop/contact sheet
+        |       +--> AI annotation
+        |
+        +--> HUMAN_PRESENTED_FRAME (optional)
+                + Minecraft/HUD as intended
+                + KNEEKURA human overlays
+```
+
+`RAW_SCENE_RGB` is captured before KNEEKURA-specific human/AI annotation when technically
+possible.
+
+A screenshot of the exact human composite may also be retained when the bug concerns UI/HUD or
+when proving what the human actually saw, but it is a different artifact and must not replace
+the clean scene capture.
+
+### Human camera and AI camera coexistence
+
+The preferred implementation is a non-perturbing AI capture camera/render target that does not
+take control of the human's active gameplay camera.
+
+If the first real implementation cannot provide that safely, a bounded fallback may temporarily
+take camera control only under an explicit visual-capture barrier:
+
+1. record exact pre-capture human camera/presentation state;
+2. establish the experiment/evidence capture barrier;
+3. capture canonical AI views;
+4. restore the exact prior human camera state;
+5. record the capture as a perturbation.
+
+A capture that moves the actual client camera or changes tracking/render eligibility cannot be
+silently reused as evidence for a behavior assertion that the camera perturbation could affect.
+
+In such cases, separate the behavior experiment from the visual-observation experiment or mark
+the relevant assertion `INCONCLUSIVE`.
+
+### Presentation-only versus experiment-affecting interaction
+
+Human controls are classified before implementation.
+
+**Presentation-only examples:**
+- panel layout;
+- selecting a retained evidence item;
+- overlay visibility;
+- contact-sheet zoom;
+- timeline browsing of already captured evidence.
+
+These must not mutate Minecraft experiment state.
+
+**Observation-affecting examples:**
+- free camera movement that changes tracking/render range;
+- changing FOV when FOV matters to the visual check;
+- forcing a render view;
+- opening a Minecraft screen that pauses an integrated runtime.
+
+Record these as observation perturbations.
+
+**Experiment mutations:**
+- pause/slow-motion mechanisms;
+- teleporting subject/player;
+- changing blocks/entities;
+- changing time/weather/config;
+- issuing scenario actions.
+
+These go through the typed Control/Experiment action path and receive normal action receipts.
+They are never hidden as UI behavior.
+
+### AI-to-human evidence feedback
+
+The AI may surface findings back into the Human Workbench.
+
+A finding card should identify, as applicable:
+
+- finding/hypothesis ID;
+- experiment;
+- subject;
+- tick/frame/time window;
+- camera/view;
+- visual-check result;
+- evidence IDs;
+- epistemic status;
+- short explanation.
+
+Example:
+
+```text
+AI visual flag
+Experiment: homing-004
+Subject: A / Reimu
+View: EAST
+Window: tick 1842
+Check: VIS-01
+Result: YES
+Finding: possible right-foot ground penetration
+[open evidence]
+```
+
+Displaying a finding never promotes it to OBSERVED truth or changes experiment acceptance.
+
+### Quality priority
+
+When a trade-off genuinely cannot be avoided, use this order:
+
+1. **Evidence correctness and reproducibility**
+2. **AI diagnosability**
+3. **Human debugging usability**
+4. **Human visual polish**
+
+This does not mean human UX is unimportant. The architecture intentionally separates
+presentation so that Human usability can usually improve without weakening AI evidence.
+
+### Observation-cost / observer-effect budget
+
+Human and AI presentation must not silently make the target behavior less trustworthy.
+
+Measure and retain, where relevant:
+
+- screenshot/camera capture duration;
+- render-frame cost;
+- Probe queue/drop changes;
+- client/server tick impact;
+- capture frequency;
+- whether a capture barrier/pause/camera takeover occurred.
+
+Continuous high-cost AI diagnostic rendering is not the default. Human display may remain live,
+while expensive AI evidence channels are generated on explicit or event-triggered demand.
+
+---
+
 ## 12. Event-triggered visual capture
 
 Do not record four full-resolution views every tick.
@@ -954,7 +1199,7 @@ Implement one-client four-view capture with exact camera/capture identity.
 
 Start with explicit capture only.
 
-### X4 — Visual Evidence Compiler
+### X4 — Visual Evidence Compiler + dual presentation
 
 Add:
 
@@ -965,9 +1210,16 @@ Add:
 - explicit bounded visual-check records;
 - hierarchical original/crop/debug-view drill-down;
 - compact visual bundle;
-- raw/derived lineage.
+- raw/derived lineage;
+- Human Normal / Human Debug / Human Evidence Review presentation boundary;
+- AI presentation generation independent of whether it is shown to the human;
+- raw-scene versus human-composite artifact separation;
+- presentation/observation/mutation interaction classification.
 
-Run the initial KNEEKURA-specific visual-format benchmark before freezing the default packet.
+Prefer non-perturbing AI camera capture. If the real platform requires temporary camera takeover,
+implement the recorded capture-barrier fallback and prove exact restoration before using it.
+
+Run the initial KNEEKURA-specific visual-format benchmark before freezing the default AI packet.
 Start with RGB + labels + top-down schematic; diagnostic ID/depth/collision/path channels are
 added only when the benchmark or a real debugging task demonstrates value.
 
@@ -1041,6 +1293,17 @@ Acceptance requires at least:
 - raw images are independently addressable;
 - contact/annotated sheets derive from them;
 - no "same-frame" claim is made for sequential Snapshot Rig captures.
+
+### Dual human / AI presentation
+
+- Human and AI presentations resolve to the same RunSnapshot / experiment / evidence window;
+- human overlays cannot alter raw evidence;
+- raw scene and optional human-composite captures remain distinct;
+- presentation-only UI operations do not mutate experiment state;
+- camera/FOV/render changes that can affect observation are recorded as perturbations;
+- any experiment mutation initiated from the Human Workbench goes through the typed action path;
+- AI findings shown to the human remain Findings/Hypotheses with evidence references, not promoted Observations;
+- an AI evidence capture does not require the human to look at or manually provide screenshots.
 
 ### AI efficiency
 
@@ -1165,6 +1428,10 @@ its own evolution.
 The stage is complete when TECH HUB can hand one bounded, identity-bound experiment to LAB and
 receive enough structured + timeline + multi-view visual evidence for an AI to diagnose and
 verify one real MOD repair, with before/after proof and preserved uncertainty.
+
+The same accepted experiment must also be reviewable through a human-oriented presentation
+without changing the underlying evidence, and the AI must be able to generate its diagnostic
+packet without requiring the human to capture or curate screenshots manually.
 
 Stop there.
 
