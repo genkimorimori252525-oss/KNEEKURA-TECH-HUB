@@ -90,3 +90,17 @@ latter because those are the actual classes loaded in userdev; the observer
 class-hash guard must never be weakened to accept a namespace mismatch.
 A separately authorized launch must use existing `prepare_world`,
 `contracts.prepare_contract`, and registered execution with a bounded budget.
+
+## Exact-player creative setup
+
+[fixture_commands.py](fixture_commands.py) supplies only the two fixed synthetic
+player setup commands after validating their complete role/name/UUID identities.
+Minecraft 1.20.1 rejects a bare UUID in gamemode's player-only argument. The
+fixture uses `execute as <exact UUID> run gamemode creative @s`, retaining one
+exact source and a self-only player target. An absent or non-player UUID cannot
+broaden the selection. The builder performs no I/O and executes nothing.
+
+The regression harness exercises the actual cached Minecraft/Brigadier parser
+and reproduces the old rejection. Parsing success is not live command execution.
+Consume these definitions only when preparing a fresh registered scenario; old
+command registries, unknown outcomes and receipts remain immutable.

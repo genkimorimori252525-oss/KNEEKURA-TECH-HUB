@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "record_type": "DERIVED_PUBLIC_OFFLINE_REPAIR_SUMMARY",
+  "base_head": "a57ffb32adc6a0e1f0a5d06cf45d58c407fe1679",
+  "raw_evidence_published": false,
+  "original_runtime_outcomes_rewritten": false,
+  "runtime_after_repairs": "NOT_RUN",
+  "source_sha256": {
+    "departments/minecraft/mod-ai/forge-observer/src/main/java/org/kneekura/observer/BridgeTransport.java": "65d6a11d7cc6e70c6fe59d9b60bb75ba1ccab737899f20fdcffb80ba5217bcc4",
+    "src/kneekura_tech_hub/minecraft/runtime.py": "17d8724f7a74c7f801a57efee9ad04be840fbcffc17cbcae12727f8a6e5e219c",
+    "tests/test_minecraft_observer_errors.py": "964e6ddd30aaa007a33ef302f620b7c9e5ee5cad066214f422cf0c90a5ccdaac",
+    "tools/ci/mod_ai_staff/fixture_commands.py": "96dab9736a904de8bfc63679e2ccd5b5a18f23345d32ab71e4ae477867135e78",
+    "tools/ci/mod_ai_staff/test_fixture_commands.py": "b2335a25bcbd68bb9f799c79a6c3198becede07bad6364dad8ba5d4e8c6ace59",
+    "tools/ci/mod_ai_staff/testjava/org/kneekura/staff/FixtureCommandParserAssertions.java": "07db6d5ecafd8dd2c0c1d324023ea7e16795768b202cd404bdb9d6691d1462af"
+  },
+  "observer_diagnostics": {
+    "passed": 110,
+    "failed": 0,
+    "elapsed_seconds": 42.54,
+    "actual_java17_transport_compiled_and_executed": true,
+    "game_launched": false,
+    "log_sha256": "28d611e4b9ab73011ead08e8c7cf5bd326822600c0cb38dca1ca42fce65099f5",
+    "limits": [
+      "Allowlisted exception family only, not a proven root cause",
+      "Earlier invoker HTTP409 specific cause remains unknown",
+      "UNKNOWN/no-retry preserved"
+    ]
+  },
+  "fixed_player_commands": {
+    "independent_passed": 14,
+    "failed": 0,
+    "elapsed_seconds": 16.39,
+    "actual_minecraft_brigadier_parser_exercised": true,
+    "command_executed": false,
+    "server_or_world_started": false,
+    "log_sha256": "b6c7ca7adf1491a0cc1e114319ae8a17d5f05ba7ff6a5fc4b61aa00302361471",
+    "limits": [
+      "Parser success does not establish live command execution",
+      "Fresh registered scenario required; existing commands and outcomes remain immutable"
+    ]
+  },
+  "new_head_hosted_tests": "See exact-commit automatic run links in PR74; not substituted with prior-head results",
+  "interrupted_mixed_worktree_aggregate": "Not a final source verification; incomplete log retained privately without terminal count or attributed failure"
+}

@@ -53,7 +53,7 @@ its original raw-report hashes are references, not public raw receipts.
 | U01 | Naga/Goal/server-side inheritance and implementation-example locators | Full dynamic dispatch and whole-target dependency closure are unproven |
 | U02 | Version-bound Forge damage options, patch/API and exact member descriptors | No intervention was selected/applied; post-transform runtime positions are unproven |
 | U03 | Packet/side path traced, with dedicated success explicitly unclaimed | Dedicated synchronization is NOT_RUN |
-| U04 | Hydra renderer/model/texture route reached | Same-run Hydra render/config/pose evidence is still required |
+| U04 | Same-run default/no-JAPPA Hydra rendering links the static renderer/model/texture route to inspected frame/config/pose evidence | JAPPA runtime, source-class equivalence and every-pose correctness remain unproven; the launch timeout remains BLOCKED |
 | U05 | Registry, generated data/resources and distribution correspondence reached | Source-class equivalence is not established |
 | U06 | Bounded compatibility investigation produces a supported UNKNOWN | Exact beta.50 binary/dependencies and positive runtime compatibility remain absent |
 
@@ -62,7 +62,7 @@ and [split Connector results](verification/connector-static-2026-09-30/README.md
 remain the evidence. U01/U02/U05 need not manufacture a gameplay run to answer
 their source-oriented questions. U06's required conservative UNKNOWN is a valid
 investigation result, not a promise of compatibility. None of these distinctions
-closes the broader M4 live scenario or U04 rendering requirement.
+closes the broader M4 live scenario. The later [recovery review](RECOVERY-ACCEPTANCE-2026-09-30.md) closes U04's scoped default-configuration rendering gap; another Hydra run is not required for that original criterion.
 
 ## Runtime implementation and separate live acceptance
 
@@ -91,12 +91,12 @@ Hydra helper records the exact client entity, dispatcher renderer, default/JAPPA
 marker state, texture hash, pose and captured frame. Visibility still requires
 inspection of that frame. See [runtime contracts and limits](forge-observer/DEDICATED-OBSERVATION.md).
 
-The [bounded live batch](RUNTIME-BATCH-2026-09-30.md) ended without new staff-client
-or Hydra visual acceptance. Staff receiver preflight exposed an empty optional
-resource-root mismatch; both allowed Hydra startups exposed duplicate effective
-Forge game-directory arguments. Failures and cleanup are preserved. Both repairs now have independent offline verification, including the real
-Forge task action with process creation intercepted. Actual live verification of
-the final repairs still needs a separately authorized fresh live budget.
+The [first bounded live batch](RUNTIME-BATCH-2026-09-30.md) ended without new staff-client
+or Hydra visual acceptance. Its empty optional resource-root and duplicate Forge
+game-directory failures remain preserved. The subsequent recovery passed both
+receiver startup and Hydra startup using the repaired code; scoped Hydra rendering
+is reviewed below. Dedicated staff acceptance remains blocked by separate fixture
+setup and runtime failures. No prior receipt is rewritten.
 Historical occluded views, timeout receipts and the earlier manual handoff remain
 unchanged. This document itself grants no launch or network-setting authority.
 
@@ -112,3 +112,22 @@ part-addressed editing, comparable before/after views and bounded UV/texture/
 display adjustments, plus optional status/delivery clarity. It explicitly waits
 for current-plan completion and a demonstrated need. No proposed improvement
 has been implemented in this continuation.
+
+## Recovery result and remaining staff gate
+
+The second bounded batch ran at source checkpoint `a57ffb32`. Its independently
+reviewed [Hydra captures](RECOVERY-ACCEPTANCE-2026-09-30.md) establish scoped
+default/no-JAPPA rendering. Actual camera metadata corrects the initially named
+views; the full side silhouette is visible. The process timeout remains BLOCKED
+and is not rewritten as a successful launch. All game/Gradle/controller processes
+were independently confirmed closed before the original deadline.
+
+Dedicated staff acceptance is still NOT_RUN. Both clients joined, but the fixed
+creative-mode command rejected its bare UUID at the player-only parser. Equipment
+and native staff use therefore did not run. The control Gradle daemon disappeared;
+its exact cause is unknown. Cumulative post-run OOM counters show memory pressure
+without attributing that exit. Invoker pairing rejected HTTP409 without a retained
+specific exception. The correction path is an exact-player fixture command,
+bounded authenticated error diagnostics, and fresh launch configuration with
+explicit heap limits and valid client settings. None of these offline repairs
+establishes dedicated synchronization or controls before a new authorized run.

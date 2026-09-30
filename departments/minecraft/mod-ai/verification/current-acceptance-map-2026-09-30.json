@@ -335,10 +335,14 @@
     },
     {
       "id": "U04",
-      "criterion_result": "PARTIAL",
+      "criterion_result": "SATISFIED_SCOPED_DEFAULT_CONFIGURATION",
       "evidence": "twilight-static-2026-09-30/summary.json",
-      "missing": "Same-run Hydra render/config/pose evidence",
-      "runtime_verdict": "NOT_RUN"
+      "runtime_verdict": "PASS_SCOPED_VISUAL_REVIEW",
+      "runtime_evidence": "RECOVERY-ACCEPTANCE-2026-09-30.json",
+      "launch_verdict": "BLOCKED_TIMEOUT_PRESERVED",
+      "JAPPA_runtime": "NOT_RUN",
+      "source_class_equivalence": "NOT_ESTABLISHED",
+      "additional_hydra_run_required_for_original_scoped_criterion": false
     },
     {
       "id": "U05",
@@ -376,6 +380,17 @@
     "junit_original_sha256": "9b8872a4c67fd02bc1e1e5e7df6a60c434950ff9dafbedb61b714b622f516cd0",
     "raw_junit_published": false,
     "command": "python -m pytest -q --deselect tests/test_minecraft_asset_guard.py::test_private_parent_validation_allows_real_external_directory (Java17 and Gson configured)",
-    "hosted_exact_head": "PENDING_PUBLICATION"
-  }
+    "hosted_exact_head": {
+      "head": "3067acabeafcb7a382b2fd02b5d58c0e5d97481d",
+      "push_run": 36711808797,
+      "pr_run": 36711815251,
+      "passed_each": 1150,
+      "skipped_each": 19,
+      "warnings_each": 8,
+      "scope": "Original current-criterion regression checkpoint; subsequent source checks are reported separately"
+    }
+  },
+  "latest_runtime_checkpoint": "a57ffb32adc6a0e1f0a5d06cf45d58c407fe1679",
+  "overall_plan": "INCOMPLETE",
+  "staff_live_acceptance": "NOT_RUN"
 }

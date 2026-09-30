@@ -25,6 +25,28 @@ public final class BridgeTransport implements AutoCloseable {
     }
 
     public interface Handler { String handle(String path, String body, String nonce) throws Exception; }
+    private enum ErrorCategory { TIMEOUT, REQUEST_REJECTED, STATE_OR_IDENTITY_REJECTED, INTERNAL_ERROR }
+    /** Exception families only: never inspect message text or claim the underlying root cause. */
+    private static ErrorCategory category(Exception failure) {
+        Throwable current=failure;
+        for(int depth=0;depth<8;depth++) {
+            if(!(current instanceof java.util.concurrent.ExecutionException
+                    || current instanceof java.util.concurrent.CompletionException
+                    || current instanceof java.lang.reflect.InvocationTargetException))break;
+            if(current.getCause()==null)break;
+            current=current.getCause();
+        }
+        if(current instanceof java.util.concurrent.TimeoutException || current instanceof java.net.SocketTimeoutException)return ErrorCategory.TIMEOUT;
+        if(current instanceof IllegalArgumentException)return ErrorCategory.REQUEST_REJECTED;
+        if(current instanceof IllegalStateException)return ErrorCategory.STATE_OR_IDENTITY_REJECTED;
+        return ErrorCategory.INTERNAL_ERROR;
+    }
+    private static String errorBody(Exception failure) {
+        return "{\"schema_version\":1,\"kind\":\"observer-error\",\"http_status\":409,"
+            +"\"status\":\"ERROR\",\"outcome\":\"UNKNOWN\",\"retry_allowed\":false,"
+            +"\"category\":\""+category(failure).name()+"\","
+            +"\"diagnostic_scope\":\"ALLOWLISTED_EXCEPTION_CATEGORY_NOT_ROOT_CAUSE\"}";
+    }
     private static final Set<String> PATHS = Set.of("/v1/handshake", "/v1/observe", "/v1/logs", "/v1/client", "/v1/command", "/v1/operation");
     private final String token, run, epoch;
     private final Handler handler;
@@ -67,9 +89,9 @@ public final class BridgeTransport implements AutoCloseable {
             byte[] input=ex.getRequestBody().readNBytes(16385);
             if (input.length>16384) throw new IllegalArgumentException("Request too large");
             result=handler.handle(path,new String(input,StandardCharsets.UTF_8),nonce);
-            if (result.getBytes(StandardCharsets.UTF_8).length>16*1024*1024) throw new IllegalArgumentException("Response too large");
+            if (result.getBytes(StandardCharsets.UTF_8).length>16*1024*1024) throw new IOException("Response too large");
         } catch (Exception failure) {
-            status=409; result="{\"status\":\"ERROR\",\"outcome\":\"UNKNOWN\",\"retry_allowed\":false}";
+            status=409; result=errorBody(failure);
         }
         byte[] payload=result.getBytes(StandardCharsets.UTF_8);
         ex.getResponseHeaders().set("Content-Type","application/json; charset=utf-8");

@@ -134,3 +134,5 @@ Use a selected-file local checkout with Git blob verification for tests and GitH
 Git object APIs for an additive child branch. No full-checkout, PostgreSQL, live
 Blockbench/Minecraft, or Windows result may be claimed from this local environment.
 No independent reviewer/subagent is available; identify the review as author self-review.
+
+Current continuation: [recovery acceptance](../../../departments/minecraft/mod-ai/RECOVERY-ACCEPTANCE-2026-09-30.md) satisfies default/no-JAPPA U04 rendering. Dedicated staff M4 remains incomplete; deferred improvements are not started.

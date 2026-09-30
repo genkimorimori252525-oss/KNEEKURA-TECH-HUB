@@ -29,6 +29,75 @@ PATHS={'/v1/handshake','/v1/observe','/v1/logs','/v1/client','/v1/command','/v1/
 ADAPTER_ID='kneekura-forge-observer'
 ADAPTER_VERSION='1.0.0'
 MAX_RESPONSE=16*1024*1024
+MAX_ERROR_RESPONSE=1024
+ERROR_CATEGORIES={'TIMEOUT','REQUEST_REJECTED','STATE_OR_IDENTITY_REJECTED','INTERNAL_ERROR'}
+ERROR_SCOPE='ALLOWLISTED_EXCEPTION_CATEGORY_NOT_ROOT_CAUSE'
+
+
+class ObserverError(ContractError):
+    """A verified, bounded remote error; never a successful observation or retry grant."""
+    def __init__(self, error, *, payload, signature, nonce, method, path, request_hash):
+        self.category=error['category']; self.error=error; self.payload=payload
+        self.signature=signature; self.nonce=nonce; self.method=method; self.path=path
+        self.request_hash=request_hash; self.diagnostic_hash=None
+        self.diagnostic_status='NOT_RETAINED'
+        super().__init__('Observer rejected request (HTTP 409): '+self.category+
+                         '; exception category only; completion unknown; do not retry writes')
+
+
+def _observer_error(payload, http_status):
+    def unique(pairs):
+        value={}
+        for key,item in pairs:
+            if key in value: raise ValueError('duplicate')
+            value[key]=item
+        return value
+    try:
+        value=json.loads(payload,object_pairs_hook=unique)
+        fields={'schema_version','kind','http_status','status','outcome','retry_allowed','category','diagnostic_scope'}
+        if (http_status!=409 or not isinstance(value,dict) or set(value)!=fields
+                or type(value['schema_version']) is not int or value['schema_version']!=1
+                or value['kind']!='observer-error' or type(value['http_status']) is not int or value['http_status']!=409
+                or value['status']!='ERROR' or value['outcome']!='UNKNOWN' or value['retry_allowed'] is not False
+                or not isinstance(value['category'],str) or value['category'] not in ERROR_CATEGORIES
+                or value['diagnostic_scope']!=ERROR_SCOPE):
+            raise ValueError('shape')
+        return value
+    except (ValueError,TypeError,UnicodeError,RecursionError):
+        raise ContractError('Observer rejected request (HTTP '+str(http_status)+'); authenticated diagnostic unavailable or malformed') from None
+
+
+def _request_live(store, client, path, body=None, *, handshake=None, handshake_payload_hash=None):
+    try:
+        return client.request(path,body)
+    except ObserverError as error:
+        # Only the strict, HMAC-verified error body reaches this path. Expected
+        # identity is a local correlation, not an identity asserted by an error.
+        try:
+            expected={key:client.contract[key] for key in verification.identity_fields(client.contract)}
+            payload_hash=store.put(error.payload)
+            handshake_summary_hash=store.put_json({'kind':'validated-observer-handshake-summary',
+                'ready':True,'expected_identity':expected,'decoded_content_hash':key_for(handshake),
+                'raw_payload_retained':False}) if handshake is not None else None
+            record={'schema_version':1,'kind':'authenticated-observer-error','status':'ERROR','outcome':'UNKNOWN',
+                'retry_allowed':False,'evidence_level':'AUTHENTICATED_OBSERVER_ERROR_NOT_OBSERVATION',
+                'expected_identity':expected,'error':error.error,'http_status':409,
+                'request_method':error.method,'request_path':error.path,'request_body_hash':error.request_hash,
+                'request_nonce':error.nonce,'signature':error.signature,'payload_hash':payload_hash,
+                'handshake_summary_hash':handshake_summary_hash,
+                'handshake_response_payload_hash':valid_hash(handshake_payload_hash) if handshake is not None else None,
+                'authentication':'RESPONSE_HMAC_VERIFIED_FOR_REQUEST_NONCE'}
+            h=store.put_json(record)
+            for ref in (h,payload_hash,handshake_summary_hash):
+                if ref is not None:store.pin(ref,'observer-error:'+client.contract['run_id'])
+            error.diagnostic_hash=h;error.diagnostic_status='RETAINED'
+            error.args=(str(error)+'; diagnostic '+h,)
+        except (OSError,ContractError,KeyError,ValueError,TypeError):
+            # A storage failure must not expose filesystem messages or erase the
+            # known UNKNOWN/no-retry outcome of the authenticated remote error.
+            error.diagnostic_hash=None;error.diagnostic_status='UNAVAILABLE'
+            error.args=(str(error)+'; diagnostic retention unavailable',)
+        raise error from None
 
 
 def config_snapshot(registry: dict):
@@ -290,6 +359,7 @@ class BridgeClient:
             type(timeout) not in (int,float) or not 0<timeout<=30):
             raise ContractError('Only explicit literal loopback HTTP endpoints are supported')
         self.port,self.token,self.contract,self.timeout=port,token,contract,timeout
+        self.last_response_payload_hash=None
 
     def request(self,path: str,body: dict | None=None):
         if path not in PATHS: raise ContractError('Unknown observer operation')
@@ -314,15 +384,23 @@ class BridgeClient:
                 except OSError: pass
             timer=threading.Timer(remaining,expire); timer.daemon=True; timer.start()
             conn.request(method,path,body=raw,headers=headers)
-            response=conn.getresponse(); payload=response.read(MAX_RESPONSE+1)
+            response=conn.getresponse()
+            limit=MAX_RESPONSE if response.status==200 else MAX_ERROR_RESPONSE
+            payload=response.read(limit+1)
             if time.monotonic()>=deadline: raise TimeoutError('Observer deadline expired')
-            if len(payload)>MAX_RESPONSE: raise ContractError('Observer response exceeds budget')
+            if len(payload)>limit: raise ContractError('Observer response exceeds budget')
             expected=hmac.digest(self.token.encode(),(method+'\n'+path+'\n'+nonce+'\n').encode()+payload,'sha256').hex()
             if not hmac.compare_digest(expected,response.getheader('X-Kneekura-Signature','')):
                 raise ContractError('Unauthenticated or replayed observer response')
-            if response.status!=200: raise ContractError('Observer rejected request (HTTP '+str(response.status)+')')
+            if response.status!=200:
+                error=_observer_error(payload,response.status)
+                raise ObserverError(error,payload=payload,signature=response.getheader('X-Kneekura-Signature'),
+                    nonce=nonce,method=method,path=path,request_hash=digest(raw))
             value=json.loads(payload)
             if not isinstance(value,dict): raise ContractError('Observer response must be an object')
+            if value.get('kind')=='observer-error' or value.get('status')=='ERROR':
+                raise ContractError('Observer error used an unexpected successful HTTP status')
+            self.last_response_payload_hash=digest(payload)
             return value
         except (OSError,http.client.HTTPException):
             raise ContractError('Observer connection interrupted; operation completion is unknown, do not retry writes') from None
@@ -361,14 +439,15 @@ def _exchange_live(store: Store,session_path: str,*,operation='observe',query=No
     e=json.loads(endpoint.read_bytes())
     client=BridgeClient(e['url'],s['token'],s['contract'],timeout=timeout)
     deadline=time.monotonic()+timeout
-    hello=client.request('/v1/handshake')
+    hello=_request_live(store,client,'/v1/handshake')
+    hello_payload_hash=client.last_response_payload_hash
     if hello.get('ready') is not True or verification._identity_errors(s['contract'],hello):
         raise ContractError('Live handshake did not verify the expected build/session/world')
     if operation not in ('observe','logs','client','command','operation'): raise ContractError('Unknown observer operation')
     client.timeout=deadline-time.monotonic()
     if client.timeout<=0:
         raise ContractError('Observer deadline expired; do not retry writes')
-    raw=client.request('/v1/'+operation,query or {})
+    raw=_request_live(store,client,'/v1/'+operation,query or {},handshake=hello,handshake_payload_hash=hello_payload_hash)
     if verification._identity_errors(s['contract'],raw): raise ContractError('Observation belongs to another run')
     h=store.put_json(raw); hello_hash=store.put_json(hello)
     for item in (h,hello_hash): store.pin(item,'live:'+s['contract']['run_id'])

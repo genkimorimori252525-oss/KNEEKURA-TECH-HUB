@@ -99,3 +99,5 @@ unestablished. No canonical promotion or deployment occurred.
 
 A fresh live budget requires a separate bounded recovery decision. This record
 neither authorizes another launch nor marks the current plan complete.
+
+Subsequent recovery: [2026-09-30 acceptance review](RECOVERY-ACCEPTANCE-2026-09-30.md). Its scoped Hydra result does not rewrite the failures recorded in this first batch.
