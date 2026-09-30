@@ -3,6 +3,8 @@
 > **Current AI handoff (2026-09-30):** [HANDOFF-2026-09-30.md](HANDOFF-2026-09-30.md)  
 > Read this before the historical 2026-09-28 handoff; it reflects the current PR #74 implementation/acceptance state.
 
+> **Post-completion roadmap:** after the current MOD-AI scope, the planned sequence is AI Usability Layer → [TECH HUB × KNEEKURA-LAB Experimental Runtime Bridge](../../../docs/superpowers/specs/2026-10-01-minecraft-mod-ai-experimental-runtime-bridge-design.md). These are future stages and do not grant current runtime authority.
+>
 Minecraft 1.20.1 / Forge / Java 17を主対象とする、既存KNEEKURA TECH HUB内の解析・実行接続。
 Source/bytecode、実際のForgeGradle依存物、mapping、MOD介入候補、既存Knowledge Core、検証・観測を接続する。
 MODの設計・編集をする新しいAIや、別DB、別スケジューラは追加しない。
