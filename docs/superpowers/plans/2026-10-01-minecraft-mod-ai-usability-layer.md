@@ -705,3 +705,4 @@ After this usability layer and the current unified MOD-AI acceptance scope are c
 `docs/superpowers/specs/2026-10-01-minecraft-mod-ai-experimental-runtime-bridge-design.md`
 
 That successor is a separate future stage. It does not expand this plan or authorize LAB/Minecraft execution.
+
