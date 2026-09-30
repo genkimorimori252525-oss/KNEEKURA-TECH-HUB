@@ -57,7 +57,19 @@
     "forgegradle_equivalence": "NOT_CLAIMED"
   },
   "live_acceptance": "NOT_RUN_AT_THIS_CHECKPOINT",
-  "hosted_exact_head_checks": "PENDING_PUBLICATION",
+  "hosted_exact_head_checks": {
+    "head": "87d2086b4121167e5c3baa19da8963692b8e0450",
+    "push_run": 36723285026,
+    "pr_run": 36723294549,
+    "passed_each": 1585,
+    "skipped_each": 259,
+    "warnings_each": 8,
+    "outcome": "SUCCESS",
+    "pr_merge_sha": "d82261ba5e9fad55deb23af54cceffe7e907f153",
+    "detailed_skip_reasons": "NOT_RETRIEVED; cached adapter/Java tests also ran in the local aggregate",
+    "push_artifact_sha256": "266bbd66f3eacc726e45996c911b1d9183440116a77dfba24d866c18af1d27f3",
+    "pr_artifact_sha256": "c248f814bf0213d1c27354cb234a27f358b27ecf1f9505db02b34b2796da1597"
+  },
   "windows_native_input": "UNSUPPORTED",
   "performance": "NOT_MEASURED",
   "canonical_promotion": "NOT_PERFORMED"

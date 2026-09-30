@@ -106,6 +106,8 @@ or substitutes for this plan's outstanding acceptance.
 The [current criterion reconciliation](../../../departments/minecraft/mod-ai/CURRENT-ACCEPTANCE-2026-09-30.md)
 maps completed offline fault coverage and bounded research outcomes separately
 from remaining live and platform acceptance.
+The [bounded runtime batch](../../../departments/minecraft/mod-ai/RUNTIME-BATCH-2026-09-30.md)
+records the later preflight/startup failures, retained limits and verified cleanup.
 
 See `departments/minecraft/mod-ai/CONTINUATION-2026-09-30.md` for current
 implementation, real Blockbench/editor review/export evidence, Core/provider

@@ -19,9 +19,11 @@ port and bounded player UUIDs; each client selects exactly one UUID.
 Use `world prepare --layout server` for the server and `client-directory prepare`
 for receivers. `contract prepare` accepts exactly one of `--world` and
 `--run-directory`. Registered `validate run --kind server` launches `runServer`;
-`--kind client` launches `runClient`. The Gradle guard binds the actual server
-`--world` argument and game directory to the owned marker and rejects alternate
-universe/save roots. A rejected Gradle attempt can consume its explicit budget;
+`--kind client` launches `runClient`. The Gradle guard checks the final argument-provider boundary after Forge has
+expanded its RunConfig and configured JVM/environment/classpath state. It binds
+the actual server `--world` argument and game directory to the owned marker;
+relative `.` is accepted only in the exact owned working directory. Alternate
+universe/save roots, duplicates and option terminators are rejected. A rejected Gradle attempt can consume its explicit budget;
 it is never silently retried.
 
 The Java receiver starts from its client login lifecycle. It independently checks

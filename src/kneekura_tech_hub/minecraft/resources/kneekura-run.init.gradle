@@ -8,6 +8,7 @@ import groovy.json.JsonSlurper
 // Kept separate so fixture tests can execute the actual Groovy guard without Gradle or Minecraft.
 def kneekuraOwnedArguments = { List supplied, String taskName, String runDirectory, String worldName ->
     def original = supplied.collect { it.toString() }
+    if (original.contains('--')) throw new IllegalArgumentException('Option terminators are forbidden for an owned run')
     if (taskName == 'runServer') {
         if (worldName == null || !(worldName ==~ /[A-Za-z0-9_-]{1,128}/))
             throw new IllegalArgumentException('Bounded owned world name required')
@@ -44,6 +45,80 @@ def kneekuraOwnedArguments = { List supplied, String taskName, String runDirecto
         } else { original[pos] = '--gameDir'; original.add(pos + 1, runDirectory) }
     } else if (taskName == 'runClient') original.addAll(['--gameDir', runDirectory])
     return original
+}
+
+
+
+// Forge expands RunConfig args and configures JVM/environment/classpath inside
+// exec(), after doFirst. Validate at Gradle's final argument-provider boundary
+// without evaluating or replacing Forge's token map or inherited task action.
+def kneekuraApplyOwnedArguments = { task, String runDirectory, String worldName ->
+    def forgeType = task.getClass()
+    while (forgeType != null && forgeType.name != 'net.minecraftforge.gradle.common.util.runs.MinecraftRunTask')
+        forgeType = forgeType.superclass
+    if (forgeType != null) {
+        def run = task.runConfig.get()
+        def originalArgs = new ArrayList(task.args ?: [])
+        def originalProviders = new ArrayList(task.argumentProviders)
+        def originalEnvironment = new HashMap(run.environment)
+        def resolved = null
+        def rejected = null
+        def gate = [asArguments: {
+            if (rejected != null) throw rejected
+            if (resolved != null) return new ArrayList(resolved)
+            def installedProviders = new ArrayList(task.argumentProviders)
+            try {
+                // Original providers observe stock Forge setup and their own list.
+                task.argumentProviders.clear()
+                task.argumentProviders.addAll(originalProviders)
+                def supplied = []
+                originalProviders.each { provider ->
+                    provider.asArguments().each { supplied.add(it.toString()) }
+                }
+                def effective = new ArrayList(task.args ?: [])
+                effective.addAll(supplied)
+                kneekuraOwnedArguments(effective, task.name, runDirectory, worldName)
+                def owned = new File(runDirectory).canonicalFile
+                def actualWorkingDir = task.workingDir.canonicalFile
+                if (actualWorkingDir != owned)
+                    throw new IllegalArgumentException('Forge working directory differs from the owned run')
+                def position = effective.findIndexOf { it == '--gameDir' || it.startsWith('--gameDir=') }
+                if (position >= 0) {
+                    def arg = effective[position]
+                    def value = arg.startsWith('--gameDir=') ? arg.substring('--gameDir='.length()) : effective[position + 1]
+                    if (!value) throw new IllegalArgumentException('Empty game directory argument')
+                    def directory = new File(value)
+                    if (!directory.absolute) directory = new File(actualWorkingDir, value)
+                    if (directory.canonicalFile != owned)
+                        throw new IllegalArgumentException('Game directory escapes the owned run')
+                } else if (task.name == 'runClient') supplied.addAll(['--gameDir', runDirectory])
+                if (task.name == 'runServer' && !effective.any { it == '--world' || it.startsWith('--world=') })
+                    supplied.addAll(['--world', worldName])
+                resolved = new ArrayList(supplied)
+                return new ArrayList(resolved)
+            } catch (Throwable failure) {
+                rejected = failure
+                task.setArgs(originalArgs)
+                run.environment.clear()
+                run.environment.putAll(originalEnvironment)
+                throw failure
+            } finally {
+                task.argumentProviders.clear()
+                task.argumentProviders.addAll(rejected == null ? installedProviders : originalProviders)
+            }
+        }] as org.gradle.process.CommandLineArgumentProvider
+        task.argumentProviders.clear()
+        task.argumentProviders.add(gate)
+        return
+    }
+    // Plain JavaExec tasks have no late Forge setup; preserve the original route.
+    def effective = new ArrayList(task.args ?: [])
+    new ArrayList(task.argumentProviders).each { provider ->
+        provider.asArguments().each { argument -> effective.add(argument) }
+    }
+    def guarded = kneekuraOwnedArguments(effective, task.name, runDirectory, worldName)
+    task.setArgs(guarded)
+    task.argumentProviders.clear()
 }
 
 gradle.beforeProject { p ->
@@ -91,7 +166,7 @@ gradle.beforeProject { p ->
                                 || world.canonicalFile.parentFile != runDir || marker.world != world.canonicalPath)
                             throw new GradleException('Server world differs from the owned marker')
                     }
-                    setArgs(kneekuraOwnedArguments(new ArrayList(task.args), task.name, runDir.absolutePath, worldName))
+                    kneekuraApplyOwnedArguments(task, runDir.absolutePath, worldName)
                 }
             }
         }

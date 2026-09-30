@@ -6,6 +6,8 @@ loaded-class attestation. The broad imported profile is never rewritten here.
 from __future__ import annotations
 
 import json
+import os
+import stat
 from pathlib import Path
 
 from .storage import ContractError, Store, canonical, digest, key_for, valid_hash, capture_profile
@@ -159,6 +161,27 @@ class _RetainedCapture:
         return self.put(canonical(value))
 
 
+
+def _empty_optional_resource_directory(path: Path) -> bool:
+    """Only a proven directly empty real directory is byte-equivalent to absence."""
+    try:
+        before = path.lstat()
+        if stat.S_ISLNK(before.st_mode): raise ContractError('Optional resource root is a symlink')
+        if not stat.S_ISDIR(before.st_mode): return False
+        with os.scandir(path) as entries:
+            empty = next(entries, None) is None
+        after = path.lstat()
+        fields = ('st_dev', 'st_ino', 'st_mode', 'st_size', 'st_mtime_ns', 'st_ctime_ns')
+        if any(getattr(before, k) != getattr(after, k) for k in fields):
+            raise ContractError('Optional resource directory changed while checking emptiness')
+        return empty
+    except FileNotFoundError:
+        # A missing optional root is handled by the existing explicit absence path.
+        return False
+    except OSError as exc:
+        raise ContractError('Cannot prove optional resource directory is empty') from exc
+
+
 def _target_profile(store: Store, registry: dict, bundle: dict, *, physical_side: str,
                     retain: bool) -> dict:
     root, _, _, export = _export_authority(store, registry)
@@ -170,7 +193,9 @@ def _target_profile(store: Store, registry: dict, bundle: dict, *, physical_side
     for item in manifest['roots']:
         if item['id'].startswith('dependency:') and item['id'] not in target_roots: continue
         path = Path(item['path'])
-        if not path.exists():
+        if item['role'] == 'resources' and _empty_optional_resource_directory(path):
+            absent.append(item)
+        elif not path.exists():
             if item['role'] != 'resources':
                 raise ContractError('Mandatory target source/output/config input is absent')
             absent.append(item)

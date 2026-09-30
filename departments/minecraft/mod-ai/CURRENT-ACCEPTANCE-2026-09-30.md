@@ -91,10 +91,12 @@ Hydra helper records the exact client entity, dispatcher renderer, default/JAPPA
 marker state, texture hash, pose and captured frame. Visibility still requires
 inspection of that frame. See [runtime contracts and limits](forge-observer/DEDICATED-OBSERVATION.md).
 
-The next bounded live scenario is prepared for dedicated staff propagation,
-non-invoking control, actual client use/repeat/expiry and unobstructed display,
-followed by the default Hydra view. Its actual result must be recorded separately;
-preparation, compilation, offline fixtures and approval are not live acceptance.
+The [bounded live batch](RUNTIME-BATCH-2026-09-30.md) ended without new staff-client
+or Hydra visual acceptance. Staff receiver preflight exposed an empty optional
+resource-root mismatch; both allowed Hydra startups exposed duplicate effective
+Forge game-directory arguments. Failures and cleanup are preserved. Both repairs now have independent offline verification, including the real
+Forge task action with process creation intercepted. Actual live verification of
+the final repairs still needs a separately authorized fresh live budget.
 Historical occluded views, timeout receipts and the earlier manual handoff remain
 unchanged. This document itself grants no launch or network-setting authority.
 

@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "record_type": "derived_bounded_live_batch_summary",
+  "source_checkpoint": "87d2086b4121167e5c3baa19da8963692b8e0450",
+  "raw_receipts_published": false,
+  "summary_is_hash_identical_raw_evidence": false,
+  "versions": {
+    "forge": "47.4.6",
+    "java_major": 17,
+    "minecraft": "1.20.1"
+  },
+  "start_utc": "2026-09-30T13:43:24.052725+00:00",
+  "absolute_deadline_utc": "2026-09-30T14:08:24.052725+00:00",
+  "eula": [
+    {
+      "accepted_at_utc": "2026-09-30T13:42:24.536342+00:00",
+      "url": "https://www.minecraft.net/en-us/eula",
+      "scope": "Disposable loopback staff Forge server in approved grouped25-minute scenario",
+      "file_sha256": "ee27072e4a23e088522f740ddaab0c7c4145c186969e90a86254faa3a5ec5ce6"
+    }
+  ],
+  "staff_server": {
+    "receipt_hash": "686bf0e3585ada41206000a9ff6f041ff420fd6b0afa254267a5d904b04ac3c1",
+    "log_hash": "3b98ad44f559c72a4954426612522250434789d51475a203ccd8a765a0dc7ecd",
+    "outcome": "FAIL",
+    "process": {
+      "completed": true,
+      "elapsed_seconds": 868.9065321740018,
+      "execution_layer": "LOCAL_SUBPROCESS_NOT_GAME_ATTESTATION",
+      "exit_code": 1,
+      "output_bytes_observed": 106561,
+      "output_limited": false,
+      "timed_out": false
+    },
+    "run_id": "729e9917-c631-4658-a509-e00bec1bc980"
+  },
+  "staff_clients": {
+    "invoker": {
+      "jvm_launches": 0,
+      "rejected_preflight_attempts": 2
+    },
+    "control": {
+      "jvm_launches": 0,
+      "rejected_preflight_attempts": 2
+    },
+    "native_gestures": 0,
+    "cause": "Complete target revalidation encountered an empty optional generated-resource root after the referenced server Gradle launch; its captured original representation was absent",
+    "additional_recovery": "NOT_EXECUTED: exceeded original retry bound; proposed removal of empty prepared directories was also not performed"
+  },
+  "hydra_attempts": [
+    {
+      "receipt_hash": "89837352c404431cd8acb191e4dadb21d53dc7f542e3d0e5fb62e56a691d7c3a",
+      "log_hash": "95aebb52fd57a4224a219f30ae62b27bd43a99c5d06e9974eab8e2cad0464d51",
+      "outcome": "FAIL",
+      "process": {
+        "completed": true,
+        "elapsed_seconds": 40.680146668000816,
+        "execution_layer": "LOCAL_SUBPROCESS_NOT_GAME_ATTESTATION",
+        "exit_code": 1,
+        "output_bytes_observed": 5865,
+        "output_limited": false,
+        "timed_out": false
+      },
+      "run_id": "8a85aa14-44c0-4c51-9daa-e5dbb271c4b2"
+    },
+    {
+      "receipt_hash": "dc5683b97ae6e7fc17dc8876d00248217f6a94bba21a95a98aae5902943b4a20",
+      "log_hash": "12cdf45f5e19f7202b9c2b36ce8aff8b9981dfe6a1e2ef295e73aaef499b7a91",
+      "outcome": "FAIL",
+      "process": {
+        "completed": true,
+        "elapsed_seconds": 32.30469783799708,
+        "execution_layer": "LOCAL_SUBPROCESS_NOT_GAME_ATTESTATION",
+        "exit_code": 1,
+        "output_bytes_observed": 4354,
+        "output_limited": false,
+        "timed_out": false
+      },
+      "run_id": "a1361db3-01a9-4cfb-9081-23e7e85386d7"
+    }
+  ],
+  "hydra_failure": "Both game JVMs exited before a client window because the effective Forge launch arguments contained duplicate gameDir values",
+  "hydra_retry_tool_identity": {
+    "base_head": "87d2086b4121167e5c3baa19da8963692b8e0450",
+    "pending_repaired_source_sha256": {
+      "src/kneekura_tech_hub/minecraft/dependencies.py": "55489a97311ce5f310365efa48e53dbf17de8d7f8a2f41dacbcff567800d7582",
+      "src/kneekura_tech_hub/minecraft/execution.py": "9c5c921f11c5bc740f95fd1fdcc2c198e53a60f20ff1daf4988d577ef7ea1153",
+      "src/kneekura_tech_hub/minecraft/resources/kneekura-run.init.gradle": "b7d96af5a00302c3b30c3d2dd2c948643f114b3cfe027825673d253b08523550"
+    }
+  },
+  "cleanup": {
+    "server": "Exact session-bound JVM received SIGTERM after limited-permission registered stop could not complete; nonzero execution is preserved",
+    "retry_controller_closed_utc": "2026-09-30T14:06:30.727508+00:00",
+    "original_controller_closed_utc": "2026-09-30T14:07:59.870017+00:00",
+    "all_original_execution_threads_closed": true,
+    "independent_process_scan_utc": "2026-09-30T14:08:33.882362+00:00",
+    "owned_game_and_helper_processes_remaining": 0,
+    "original_cleanup_receipt_sha256": "580716fc97fd83baba840dc4df8e370731f7502330928605968fc041438ab18f",
+    "original_process_scan_sha256": "9bce0d278b8150951ae9b99d3eee7e19b1777ede8e1a39c39a2c6af96b2c43d9"
+  },
+  "acceptance": {
+    "dedicated_staff_synchronization": "NOT_RUN",
+    "non_invoking_player": "NOT_RUN",
+    "client_mutation_control": "NOT_RUN",
+    "new_item_views": "NOT_RUN",
+    "u04_hydra_visibility": "NOT_RUN",
+    "whole_plan": "INCOMPLETE"
+  },
+  "next_gate": "Offline source repair and independent actual Forge task tests are complete; live acceptance still needs a separately approved fresh bounded recovery and reviewed inactive operator entrypoint. This record authorizes no launch.",
+  "offline_repair": {
+    "production_source_sha256": {
+      "src/kneekura_tech_hub/minecraft/dependencies.py": "55489a97311ce5f310365efa48e53dbf17de8d7f8a2f41dacbcff567800d7582",
+      "src/kneekura_tech_hub/minecraft/resources/kneekura-run.init.gradle": "5b2b4f5244678280bc28246897e49c1ec5967dcc5be7050bd97b351ba04e5193"
+    },
+    "independent_actual_forge_task_tests": 35,
+    "independent_empty_optional_resource_tests": 82,
+    "runtime_after_final_repair": "NOT_RUN",
+    "aggregate": {
+      "passed": 1783,
+      "failed": 10,
+      "skipped": 103,
+      "deselected": 1,
+      "elapsed_seconds": 551.1,
+      "status": "FAILED_TEST_HARNESS_COMPILE_COLLISION",
+      "log_sha256": "b7cf1116a57178d952f026b226bb3d7890dde58e737bc19ff65540905ee1c4f4",
+      "junit_sha256": "8dfe2fcdcf4dee3538431ef54fe5c17bb28996fc5a8316fec11ced0b91601d20"
+    },
+    "corrected_affected_test_harness_rerun": {
+      "passed": 10,
+      "deselected": 24,
+      "elapsed_seconds": 75.09,
+      "production_bytes_unchanged": true,
+      "log_sha256": "28ace041a62042597b75f94d87d563d40fd9c4ecea7bdaab16e0026750e6fe61"
+    },
+    "failure_history_hash": "9ff2128604f3e552dd9f8fb99b3f43f70bbd02c4c49906b9b93ff8b76ba29147"
+  }
+}
