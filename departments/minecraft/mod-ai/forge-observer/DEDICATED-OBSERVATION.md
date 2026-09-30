@@ -68,6 +68,11 @@ screenshots and release status. A completed native event is not hardware-device
 attestation or proof that the game accepted a use action. Uncertain input is not
 replayed. Windows native input remains unsupported.
 
+This fixed staff native-input route requests one explicitly bound player in
+`minecraft:overworld` and sets `staff_state=true`. The actual `StaffStateQuery`
+guard requires that dimension; missing or changed dimensions are rejected.
+The route does not infer the player's dimension or follow a dimension change.
+
 ## Fixed staff fixture
 
 `tools/ci/mod_ai_staff/pilot.py` has an explicit `client_trace=True` preparation

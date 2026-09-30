@@ -19,6 +19,11 @@ by `input bind`. It denotes the gameplay crosshair, not an arbitrary UI click.
 GLFW's button handler does not move its cursor from event coordinates; inventory
 and UI clicking are therefore rejected by this driver.
 
+For the fixed dedicated staff fixture, authenticated input snapshots explicitly
+select the bound player in `minecraft:overworld`, with `limit=1` and
+`staff_state=true`. A changed dimension fails closed. This scope does not add
+generic dimension discovery; legacy, integrated and log queries are unchanged.
+
 The authenticated ClientProbe response binds the existing complete run identity
 to Java PID, exact Linux `/proc` process-start ticks, native X11 handle,
 foreground state, local dimensions, screen and cursor mode. The driver checks
@@ -85,7 +90,7 @@ the declared observations establish them.
 ## Checks and sources
 
 With project dependencies and JDK tools in PATH, run:
-`python -m pytest tests/test_minecraft_input_contract.py tests/test_minecraft_native_input.py tests/test_minecraft_input_route.py tests/test_minecraft_runtime.py tests/test_minecraft_connected_cli.py`
+`python -m pytest tests/test_minecraft_input_contract.py tests/test_minecraft_native_input.py tests/test_minecraft_input_route.py tests/test_minecraft_input_query_contract.py tests/test_minecraft_runtime.py tests/test_minecraft_connected_cli.py`
 
 Fixtures cover Java `/proc` matching, missing-display failure, exact
 window/NoEventMask structs, asynchronous pointer motion, slow-preflight expiry,

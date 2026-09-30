@@ -55,7 +55,11 @@ def _capture(store, registry, contract, deadline, *, operation='client'):
     if remaining <= 0: raise ContractError('Input observation deadline expired')
     query = {'screenshot':True} if operation == 'client' else {}
     if operation == 'client' and contract.get('session_role') == 'dedicated_client':
-        query.update(entity_uuids=[contract['player_uuid']], limit=1, staff_state=True)
+        # This dedicated native route serves the fixed overworld staff fixture.
+        # The real StaffStateQuery requires an explicit dimension; the receiver
+        # also rejects a changed dimension rather than following a player there.
+        query.update(entity_uuids=[contract['player_uuid']], dimension='minecraft:overworld',
+                     limit=1, staff_state=True)
     result = runtime.observe_live(store, registry['session_file'], operation=operation,
                    query=query, timeout=min(remaining, 5))
     if (result.get('evidence_level') != 'AUTHENTICATED_LIVE_OBSERVER'
