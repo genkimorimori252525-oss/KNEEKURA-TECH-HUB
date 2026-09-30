@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "record_type": "asset_visual_review",
+  "reviewer": {
+    "actor_type": "ai",
+    "actor_id": "dot"
+  },
+  "assertion_domain": "editor_visual_spec_review",
+  "tested_head": "a14f4ed7940236fc6c5493a0cb67835c878191a0",
+  "workflow_run": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/36685697463",
+  "artifact_id": 11083473496,
+  "artifact_zip_sha256": "aeb31a5e6023b7c66f8e8d041da5003a3091e2381364c12baf55d6732f0ff6b5",
+  "capture_receipt_hash": "e2c217ee8e28993f11fa6ab0a96d9623c3c5e900e97ad434153939c7b3911e74",
+  "request_hash": "d251270c0d0150b829a92d5d0aff33cd75e9ccc2cfe5f3dcc8754e96b085111f",
+  "views": [
+    {
+      "view": "front",
+      "content_hash": "91c988c09e7ed3936e3cc65de67ed7aa441263c97c3be56aee787b43a46cea5a"
+    },
+    {
+      "view": "left",
+      "content_hash": "c538d939e55ad0efd6a50694bec055aa40877b4ef64853265f164f685082880f"
+    },
+    {
+      "view": "back",
+      "content_hash": "310670f9b751cfa0f57b91b8c2bb054ee66082a06b130beaefe553ce5d9887e1"
+    }
+  ],
+  "checks": {
+    "staff_silhouette": "PASS",
+    "gold_halo_and_purple_accent": "PASS",
+    "visible_air_gap_around_star": "PASS",
+    "front_left_back_views_reviewed": "PASS"
+  },
+  "verdict": "PASS",
+  "scope": "Host AI directly inspected all three editor PNGs. The simple pixel-art staff has an open gold halo around a distinct purple four-point star. This does not establish inventory, first-person, third-person, or in-game legibility.",
+  "runtime": "NOT_RUN",
+  "loaded_revision": "UNATTESTED",
+  "prior_failed_review": {
+    "tested_head": "f5651fe5ebbaf4df9526f4644054705d74f0215f",
+    "capture_receipt_hash": "3bca5b9b397c1e9c46290d1f57e2df4d4a84f74b27d3487d13741a1b2032ecea",
+    "findings": [
+      "Latest Blockbench format 26.3 was not pinned to target 1.20.1",
+      "All-gold head hid halo gaps and omitted the required purple accent"
+    ],
+    "repairs": [
+      "Pinned per-project legacy Java format and explicit item transforms",
+      "Added bounded palette regions and separated smaller star geometry from open halo"
+    ]
+  }
+}

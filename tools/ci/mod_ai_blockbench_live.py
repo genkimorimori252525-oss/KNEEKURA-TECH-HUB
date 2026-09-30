@@ -8,6 +8,7 @@ through the authenticated guarded loopback protocol implemented in the product c
 from __future__ import annotations
 
 import argparse
+import base64
 import json
 import os
 from pathlib import Path
@@ -17,7 +18,7 @@ import sys
 from kneekura_tech_hub.minecraft.asset_contract import (
     PROVIDER_ID, PROVIDER_REVISION, prepare_request, provider_pin,
 )
-from kneekura_tech_hub.minecraft.asset_guard import prepare_guarded_package
+from kneekura_tech_hub.minecraft.asset_guard import load_request, prepare_guarded_package
 from kneekura_tech_hub.minecraft.asset_session import run_session
 from kneekura_tech_hub.minecraft.asset_export import materialize_asset
 from kneekura_tech_hub.minecraft.storage import Store, canonical, capture_profile, digest
@@ -220,6 +221,32 @@ def _copy_artifact(store: Store, item: dict, evidence: Path) -> str:
     return name
 
 
+def capture_evidence(store: Store, receipt_hash: str, export_hash: str) -> dict:
+    """Retain only this fixed fixture's exact non-secret CAS closure for import."""
+    receipt = store.json(receipt_hash)
+    request, _ = load_request(store, receipt["request_hash"])
+    exported = store.json(export_hash)
+    if exported.get("capture_receipt_hash") != receipt_hash:
+        raise ValueError("Export and capture evidence differ")
+    keys = {receipt_hash, export_hash, receipt["request_hash"], receipt["plan_hash"],
+            receipt["inspection_hash"], request["profile_record_hash"], request["spec_hash"],
+            request["style_hash"], *request["reference_hashes"],
+            *(a["content_hash"] for a in receipt["artifacts"]),
+            *(a["content_hash"] for a in exported["files"])}
+    if request.get("index_snapshot_id"):
+        keys.add(request["index_snapshot_id"])
+    objects = {}
+    size = 0
+    for key in sorted(keys):
+        raw = store.read(key)
+        size += len(raw)
+        if size > 8 * 1024 * 1024:
+            raise ValueError("Captured evidence closure exceeds budget")
+        objects[key] = base64.b64encode(raw).decode("ascii")
+    return {"schema_version": 1, "receipt_hash": receipt_hash,
+            "export_manifest_hash": export_hash, "encoding": "base64", "objects": objects}
+
+
 def run(root: Path, evidence: Path) -> dict:
     root = _runner_root(root)
     evidence.mkdir(parents=True, exist_ok=True)
@@ -264,6 +291,8 @@ def run(root: Path, evidence: Path) -> dict:
     exported = materialize_asset(store, result["receipt_hash"], parent=evidence)
     with (evidence / "export.json").open("x", encoding="utf-8") as stream:
         stream.write(json.dumps(exported, indent=2))
+    with (evidence / "capture-evidence.json").open("x", encoding="utf-8") as stream:
+        stream.write(json.dumps(capture_evidence(store, result["receipt_hash"], exported["manifest_hash"]), indent=2))
     return {**safe, "export": exported}
 
 

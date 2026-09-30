@@ -221,3 +221,25 @@ def test_live_harness_exports_a_separate_validated_resource_package(tmp_path,mon
     assert json.loads((evidence/'session.json').read_text())['verification']['structural']=='NOT_RUN'
     assert json.loads((evidence/'export.json').read_text())['manifest_hash']==output['export']['manifest_hash']
     assert Path(output['export']['directory']).is_relative_to(evidence)
+
+
+def test_capture_evidence_retains_exact_reachable_bytes_only(tmp_path):
+    import base64
+    from test_minecraft_asset_session import prepared as fixture_setup
+    from test_minecraft_asset_export import capture as capture_setup
+    from kneekura_tech_hub.minecraft.asset_export import materialize_asset
+    from kneekura_tech_hub.minecraft.storage import digest
+    prepared=fixture_setup.__wrapped__(tmp_path)
+    store,h,receipt=capture_setup.__wrapped__(prepared)
+    private=store.put(b'UNRELATED_PRIVATE_BYTES')
+    out=tmp_path/'export';out.mkdir()
+    exported=materialize_asset(store,h,parent=out)
+    module=load_harness()
+    bundle=module.capture_evidence(store,h,exported['manifest_hash'])
+    assert bundle['receipt_hash']==h
+    assert private not in bundle['objects']
+    assert h in bundle['objects'] and exported['manifest_hash'] in bundle['objects']
+    for key,encoded in bundle['objects'].items():
+        raw=base64.b64decode(encoded,validate=True)
+        assert digest(raw)==key and store.read(key)==raw
+    assert 'UNRELATED_PRIVATE_BYTES' not in json.dumps(bundle)
