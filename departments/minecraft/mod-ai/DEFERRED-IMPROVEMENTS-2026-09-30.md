@@ -1,7 +1,6 @@
 # Deferred MOD-AI usability improvements
 
-Status: **ASSET CANDIDATES 1–3 DEFERRED; SECONDARY FACADE IMPLEMENTED,
-ACCEPTANCE PENDING.**
+Status: **ASSET CANDIDATES 1–3 DEFERRED; BOUNDED SECONDARY FACADE CONCERNS COMPLETE.**
 
 Requested on 2026-09-30. The
 [original scoped plan](CURRENT-ACCEPTANCE-2026-09-30.md) is now complete for the
@@ -13,10 +12,10 @@ The approved [AI Usability Layer design](../../../docs/superpowers/specs/2026-10
 and [implementation/trial plan](../../../docs/superpowers/plans/2026-10-01-minecraft-mod-ai-usability-layer.md)
 own the secondary state/next-action and artifact-lineage concerns below.
 Their bounded implementation is documented in [TASK-CONTEXT.md](TASK-CONTEXT.md).
-Focused task/CLI and installed-layout packaging regressions pass locally;
-exact-head hosted CI and the actual AI trial still gate completion and secondary
-presentation acceptance. MCP remains undecided pending the trial; neither MCP
-nor the LAB runtime bridge is implemented here.
+The [actual trial and source-gate record](AI-USABILITY-ACCEPTANCE.md) close those
+bounded secondary concerns. Use [current PR](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/pull/74) checks for separate exact-head
+report-publication verification. MCP is NOT_NEEDED for the tested local coding harness; neither MCP nor the
+LAB runtime bridge is implemented here.
 
 Asset-editing Candidates 1–3 remain **DEFERRED** and are not authorized or
 implemented by that facade. Retaining a proposal does not activate it, launch
@@ -44,7 +43,7 @@ an exposed operation. The following proposals address that narrower limitation.
 | Intentional first-slice boundary | One static Java item; no GeckoLib or animation; fixed display policy | Preserve unless a later concrete task requires another format |
 | Original scoped acceptance | M4 views/synchronization and original U/A result kinds | Closed in the current acceptance record; keep Windows/performance/U06 and other declared limits explicit |
 | Optional asset-repair improvement | Change one retained part; compare the same view before/after; adjust bounded UV/texture/display fields | Consider only after the completion gate and a demonstrated need |
-| Secondary presentation improvement | Make task-scoped evidence/readiness and next action easier to read; retain artifact lineage | Implemented as a thin read-only facade; hosted CI and real AI usability acceptance remain pending |
+| Secondary presentation improvement | Make task-scoped evidence/readiness and next action easier to read; retain artifact lineage | Completed by the thin read-only facade and scoped trial; no general delivery guarantee |
 
 ## Completion gate
 
@@ -116,7 +115,7 @@ outside this proposal.
 
 ### Current state and next action
 
-**Bounded code implementation present; presentation acceptance pending.**
+**COMPLETE for the bounded task facade and tested harness.**
 `task prepare` derives exact target identity, compact evidence, separate
 capability surface/readiness/reason codes, and at most five fixed next-action
 recommendations. It uses existing registries, receipts and validators, with no
@@ -125,15 +124,16 @@ selects read-only reconciliation and suppresses new side-effecting advice;
 it never becomes a retry suggestion. Structural, visual and runtime evidence
 retain their original limited meanings.
 
-The focused four-file task/CLI suite passed **996 tests** and installed-layout
-packaging passed **5 tests** for this documentation checkpoint. These verify
-code behavior and packaging, not demonstrated AI usability. Exact-head hosted CI
-and the real task/fresh-agent-resume trial remain open before claiming this
-secondary presentation concern accepted.
+The final-source focused/packaging checks passed **1,072 tests**. Both source
+hosted runs passed **2,695 tests**, with **331 explicit cached-dependency skips**
+and **8 warnings** each. The actual task/fresh-agent-resume trial then demonstrated
+one correct policy edit and independent resume with the same 14 Java assertions
+passing. These close this narrow presentation concern; the acceptance record
+keeps code checks separate from trial measurements and later report-publication CI.
 
 ### Artifact lineage and delivery
 
-**Bounded lineage implementation present; presentation acceptance pending.**
+**COMPLETE for bounded lineage and the tested handoff/resume path.**
 The same facade returns existing profile/index/session/evidence references and
 hash-verified evidence pointers. It does not create a second artifact manifest,
 new canonical IDs, a download service or a package delivery claim. Use existing
@@ -144,9 +144,11 @@ A source PR is not a downloadable JAR; development-class runtime evidence is
 not an installed-distribution launch. The facade must not infer source/build
 or exercised-artifact equivalence beyond the retained checks. Public summaries
 exclude raw private receipts, tokens, private paths and endpoint selectors;
-a hash does not authorize sharing the artifact's contents. The actual AI trial
-still needs to establish whether this bounded lineage is useful for handoff and
-resume, rather than declaring all possible delivery concerns solved.
+a hash does not authorize sharing the artifact's contents. The actual trial
+verified resume from the retained request/context plus a handoff, without renewed
+command discovery/search. The handoff conveyed the edit outcome; the index stayed
+an immutable pre-edit snapshot. This closes the demonstrated lineage concern,
+not all possible artifact-delivery needs.
 
 ## Review and stop conditions
 
@@ -157,5 +159,5 @@ create another database, knowledge graph, run manager or canonical truth plane.
 
 Stop when the demonstrated repair/review task works. Drop features that do not
 earn their cost. Candidates 1–3 remain unimplemented; the separate bounded
-secondary facade implementation above does not close its pending acceptance
-gates or authorize further asset/runtime work.
+secondary acceptance above grants no further asset/runtime authority. The
+[current PR](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/pull/74) publication checks remain separate from the recorded source gate.

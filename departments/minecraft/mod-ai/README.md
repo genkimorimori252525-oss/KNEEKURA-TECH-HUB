@@ -6,14 +6,14 @@
   [CURRENT-ACCEPTANCE-2026-09-30.md](CURRENT-ACCEPTANCE-2026-09-30.md) and its
   [machine-readable map](verification/current-acceptance-map-2026-09-30.json) for
   the bounded Linux/X11 staff pilot and original U/A research/regression criteria
-- **AI Usability Layer: implementation available; acceptance still open.** Start
+- **AI Usability Layer: COMPLETE_SCOPED_AI_USABILITY.** Start
   with [TASK-CONTEXT.md](TASK-CONTEXT.md) for the read-only `task prepare` and
-  `task capabilities` interface. Exact-head hosted CI and the actual AI usability
-  trial still follow; code availability does not close that stage or its
-  secondary presentation acceptance
+  `task capabilities` interface. The [actual two-agent trial and source gate](AI-USABILITY-ACCEPTANCE.md)
+  close the thin facade and bounded state/next-action and lineage concerns. The
+  [current PR](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/pull/74) checks provide separate exact-head publication verification
 - The [design](../../../docs/superpowers/specs/2026-10-01-minecraft-mod-ai-usability-layer-design.md)
   and [implementation/trial plan](../../../docs/superpowers/plans/2026-10-01-minecraft-mod-ai-usability-layer.md)
-  define this thin facade. MCP remains undecided pending the trial. The
+  define this thin facade. MCP is NOT_NEEDED for the tested local coding harness. The
   [TECH HUB × KNEEKURA-LAB Experimental Runtime Bridge](../../../docs/superpowers/specs/2026-10-01-minecraft-mod-ai-experimental-runtime-bridge-design.md)
   is a separate future stage; neither MCP nor the LAB bridge is implemented here
 - Asset-editing Candidates 1–3 remain

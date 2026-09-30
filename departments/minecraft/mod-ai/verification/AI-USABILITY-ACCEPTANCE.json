@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "kind": "minecraft_ai_usability_acceptance",
+  "status": "PASS_SCOPED_TRIAL",
+  "recorded_at_utc": "2026-09-30T22:08:28Z",
+  "source_commit": "9941c9f7e6909bf11cd05d4237d9fe4cbfac1f7b",
+  "source_tree_sha": "0693882dd8663937f27a26da4791debdc7d8b832",
+  "task_request": {
+    "schema_version": 1,
+    "intent": "edit_code",
+    "goal": "In this disposable copy of the celestial-staff mod, add an explicit ability-enabled decision to its pure use policy. Add a three-boolean decide(clientSide, coolingDown, abilityEnabled) overload and DISABLED decision. A client always acknowledges; on the server, disabled takes precedence over cooldown. Keep the two-argument overload backward compatible by treating it as enabled. Do not alter the delivered repository staff or launch Minecraft.",
+    "constraints": [
+      "Keep Minecraft 1.20.1 / Forge 47.4.0 / Java 17 source target",
+      "Change only the pure use policy in this disposable project",
+      "Do not change the 60-tick glow or 100-tick cooldown constants",
+      "No external communication, network, Gradle, Minecraft, Blockbench or native input"
+    ],
+    "acceptance": [
+      "Java17 TrialAssertions compiles and passes all 14 assertions",
+      "All four old two-argument decisions are unchanged",
+      "Every client-side case returns CLIENT_ACK",
+      "Disabled server-side cases return DISABLED, including during cooldown"
+    ]
+  },
+  "task_request_hash": "4918617a6c59402d807089475d5d1b0c99a218c055d4066de78bf7f0e605f99c",
+  "target_scope": "Declared Minecraft 1.20.1 / Forge 47.4.0 / Java 17 source target; disposable copy of the existing staff pure policy, not a resolved Forge build or live game",
+  "source_origin_path": "tools/ci/mod_ai_staff/java/org/kneekura/staff/StaffUsePolicy.java",
+  "delivered_source_unchanged": true,
+  "acceptance": "Add enabled-aware three-argument policy, preserve client priority, disabled-server precedence, two-argument compatibility and 60/100 tick constants; 14 Java assertions pass",
+  "first_agent": {
+    "edit_attempts": 1,
+    "first_correct_edit_marker": "edit-start-1",
+    "first_correct_edit_verified": true,
+    "manually_discovered_commands": [
+      "search",
+      "context",
+      "inspect"
+    ],
+    "manually_discovered_command_count": 3,
+    "cli_calls_before_first_correct_edit": 8,
+    "help_calls_before_first_correct_edit": 4,
+    "retrieved_task_data_bytes_before_first_correct_edit": 18078,
+    "byte_measurement_includes": [
+      "recorded task-file reads",
+      "CLI stdout/stderr",
+      "expected pre-edit compiler diagnostics"
+    ],
+    "byte_measurement_excludes": [
+      "unmeasured setup/context input",
+      "tool protocol overhead",
+      "editing overhead"
+    ],
+    "token_count": null,
+    "invalid_or_unsafe_operations_observed": [],
+    "off_recorder_task_reads_reported": 0,
+    "baseline_test_exit_code": 1,
+    "baseline_test_result": "Expected six Java compile errors for missing overload/enum value",
+    "post_edit_test_exit_code": 0,
+    "post_edit_test_result": "PASS: 14 policy assertions; no Minecraft execution"
+  },
+  "fresh_agent_resume": {
+    "sufficient": true,
+    "starting_material": [
+      "retained TaskRequest",
+      "canonical TaskContext",
+      "first-agent handoff"
+    ],
+    "repeated_initial_cli_discovery_or_search": 0,
+    "cli_calls": 0,
+    "direct_identified_source_verification_reads": 1,
+    "recorded_read_and_test_output_bytes": 8531,
+    "test_exit_code": 0,
+    "test_result": "PASS: 14 policy assertions; no Minecraft execution",
+    "source_edits": 0,
+    "invalid_or_unsafe_operations_observed": [],
+    "off_recorder_task_reads_reported": 0,
+    "limit": "TaskContext alone does not retain the edit outcome; the handoff supplied it. The index remains the immutable pre-edit source snapshot."
+  },
+  "evidence": {
+    "profile_id": "d1c72448134c8479ef09776d5fa1c7758be338fc03d3dd5a31b201640eb01955",
+    "index_snapshot_id": "4aa48f54e122f4f12621035f6efa86fe0f89f7440022824aa400cdb1e7a0b195",
+    "document_id": "8dcd95be5bab06bd1a4b22644402b57006eb7b3693af3d66ecab477b0da16d9d",
+    "task_context_sha256": "302a0640b1d76b6ad13fb1463258646966a11433458f9535205a317677ed59d2",
+    "task_context_canonical_bytes": 3150,
+    "task_prepare_cli_stdout_bytes": 3755,
+    "source_before_sha256": "2c0c411ca9abe3625071fcc542137c17a213682cd803543254cf4e2e33c623dc",
+    "source_after_sha256": "4470424afb09e3168915e61dfaf9e0a7ec562760e26677d094e4e1a57afbaea6",
+    "handoff_sha256": "94735e3a945e4e53e0da75af2bd72347e44a3994fecde4d7a20c6b8695a50686",
+    "checker_source_sha256": "5a6424afb332a4c7cde374d771e226471d67720b55a37fc2d2378db63ea187d8",
+    "checker_stdout_sha256": "084c37e683bb66b54358b5dc32361e7038899d7943e9c7dce173d469ae7aba42",
+    "measurement_log_sha256": "db516095587bcb9b32a3c5012fc0601b66d503e82290f633307410547fcf3963",
+    "checker_and_recorder_unchanged": true,
+    "raw_private_paths_receipts_logs_published": false,
+    "recorded_output_pairs_verified": 24,
+    "recorded_output_hash_checks": 48
+  },
+  "verification": {
+    "local_python": "3.12.14",
+    "java": "Temurin 17.0.20.1+1",
+    "final_source_focused_and_packaging": {
+      "passed": 1072,
+      "failed": 0,
+      "skipped": 0,
+      "source_tree_sha": "0693882dd8663937f27a26da4791debdc7d8b832"
+    },
+    "earlier_local_aggregate": {
+      "local_commit": "86382cce1b285493e6ff03ccaddc589db763fac6",
+      "applies_before_final_identity_fix": true,
+      "passed": 2850,
+      "skipped": 104,
+      "failed": 1,
+      "known_failure": "test_private_parent_validation_allows_real_external_directory: injected Git ancestor in allowed temporary roots",
+      "skip_reasons": {
+        "KTHUB_TEST_DATABASE_URL unset": 103,
+        "Explicit cached MINECRAFT_FORGE_JAR required": 1
+      }
+    },
+    "hosted_source_gate": {
+      "head_sha": "9941c9f7e6909bf11cd05d4237d9fe4cbfac1f7b",
+      "case_count": 3026,
+      "passed": 2695,
+      "failed": 0,
+      "errors": 0,
+      "skip_reasons": {
+        "Explicit cached GSON_JAR required": 194,
+        "Explicit cached MINECRAFT_FORGE_JAR required for patched lifecycle ordering": 1,
+        "Explicit cached GROOVY_JAR and installed Java required; no downloads": 24,
+        "Explicit cached Groovy/Gradle and Java required; no downloads": 10,
+        "Explicit cached Gradle8.8/ForgeGradle6.0.54/srgutils and JDK required; no downloads": 35,
+        "Explicit already acquired GSON_JAR required; Java compile remains a separate gate": 19,
+        "Explicit cached Gson and Netty common/buffer/transport classpath required": 6,
+        "Explicit cached Gson required": 40,
+        "Explicit cached Forge classpath and Java17 JDK required": 1,
+        "Cached Forge 1.20.1-47.4.6 resolved export required; no download or launch fallback": 1
+      },
+      "artifact_sha256": "0cf259773d555e762adb097627c9b8528b065585b98a0234e56dc5a54f61f4e1",
+      "push_run_id": 36782327788,
+      "pr_run_id": 36782332457,
+      "push_url": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/36782327788",
+      "pr_url": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/36782332457",
+      "warnings": 8,
+      "python": "3.12.14",
+      "java": "Temurin 17.0.20.1+1",
+      "both_runs_succeeded": true,
+      "skip_reasons_source": "Verified push artifact for run 36782327788",
+      "footer_counts_independently_confirmed_for_both_runs": true
+    },
+    "final_report_commit_ci": {
+      "status": "VERIFY_SEPARATELY_ON_PUBLICATION_HEAD",
+      "scope": "Use the current PR checks for the exact published documentation/report head. This source-gate record attests only 9941c9f7e6909bf11cd05d4237d9fe4cbfac1f7b and does not attest its own future report commit.",
+      "pr_url": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/pull/74"
+    }
+  },
+  "observed_friction": [
+    "The first agent consulted four help outputs and used an extra context expansion between search and inspect; CLI/JSON still completed the task without assistance."
+  ],
+  "failure_history": "No new facade defect or unsafe operation arose in this actual trial; expected missing-feature RED is retained as trial evidence, not a gameplay/system failure claim.",
+  "mcp_decision": {
+    "status": "NOT_NEEDED",
+    "scope": "This actual local coding harness",
+    "reason": "CLI/JSON plus retained handoff completed the task and fresh-agent resumption; no unresolved transport limitation was observed."
+  },
+  "limitations": [
+    "One bounded two-agent trial, not a controlled before/after study or general usability score",
+    "Retrieved-byte measurement is not full model-context usage; tokens were not measured",
+    "Java policy acceptance only; no Forge integration, installed distribution, game launch or gameplay/performance claim",
+    "Windows/native-input, canonical promotion, Connector compatibility and other original scoped limits are unchanged",
+    "Asset-editing Candidates 1–3, MCP implementation and LAB bridge remain unimplemented/deferred"
+  ]
+}

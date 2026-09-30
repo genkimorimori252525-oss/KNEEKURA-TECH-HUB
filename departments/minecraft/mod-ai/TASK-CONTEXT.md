@@ -1,12 +1,13 @@
 # AI task context: compact preparation, explicit execution
 
-Status: **IMPLEMENTED INTERFACE; HOSTED CI AND REAL AI TRIAL PENDING.**
+Status: **COMPLETE_SCOPED_AI_USABILITY — SOURCE GATE AND ACTUAL TRIAL PASSED.**
 
 The [original scoped acceptance](CURRENT-ACCEPTANCE-2026-09-30.md) is closed.
-This successor's code/documentation does not close its separate
-[AI usability trial](../../../docs/superpowers/plans/2026-10-01-minecraft-mod-ai-usability-layer.md#post-implementation-real-ai-usability-acceptance-gate)
-or secondary presentation acceptance. MCP remains **UNDECIDED pending that trial**:
-no MCP server or KNEEKURA-LAB runtime bridge is implemented by this layer.
+The [actual AI trial and source-gate record](AI-USABILITY-ACCEPTANCE.md) now close
+this thin facade and its bounded secondary state/next-action and lineage concerns.
+MCP is **NOT_NEEDED for the tested local coding harness**; no MCP server or
+KNEEKURA-LAB runtime bridge is implemented. Use [current PR](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/pull/74) checks to verify the
+exact publication head; recorded source CI does not attest a later report commit.
 
 ## 1. Boundary and first command
 
@@ -307,7 +308,7 @@ until the needed bounded record is complete. Do not replace authoritative full
 records with previews, or send private artifact bodies to new recipients merely
 because a context contains their hashes.
 
-## 8. Verification and remaining gate
+## 8. Verification and scoped acceptance
 
 The focused gate is:
 
@@ -321,8 +322,14 @@ The packaging regression imports both new modules and exercises the Python and
 CLI facades from a materialized installed layout outside the source working
 directory, without needing a build-backend installation or network access.
 Full-suite failures and PostgreSQL/Java/desktop skips must be reported as observed,
-not relabeled as passes. Exact-head hosted CI remains the aggregate code gate.
-The actual AI trial must still establish command-discovery/context cost, unsafe
-attempts, evidence use and fresh-agent resume behavior. Only then decide whether
-CLI/JSON is adequate (`MCP: NOT_NEEDED`) or concrete transport friction warrants
-a separate bounded MCP design. No universal usability score is implied.
+not relabeled as passes. The [acceptance record](AI-USABILITY-ACCEPTANCE.md) retains
+final-source focused/packaging results (1,072 passed), source hosted results
+(2,695 passed, 331 cached-dependency skips, 8 warnings per successful run), and
+the actual two-agent source-policy trial. That trial measured 18,078 retrieved
+task-data bytes before one correct edit, a 3,150-byte canonical context, and
+14 Java assertions passing for both the first and fresh agent. The fresh agent
+resumed with retained context plus a handoff without repeating initial discovery.
+The immutable index remained pre-edit; no full-context token usage or universal
+usability score was measured. `MCP: NOT_NEEDED` is scoped to that actual harness.
+Use [current PR](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/pull/74) checks for the exact report-publication head; recorded source-gate
+CI does not attest a later commit or reopen the closed scoped trial.

@@ -1,10 +1,24 @@
 # Minecraft MOD-AI Usability Layer Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+Status: **COMPLETE_SCOPED_AI_USABILITY — SOURCE GATE AND ACTUAL TRIAL PASSED.**
+
+Tasks 1–6 and the actual scoped two-agent trial are complete. See the
+[acceptance record](../../../departments/minecraft/mod-ai/AI-USABILITY-ACCEPTANCE.md)
+and [machine-readable results](../../../departments/minecraft/mod-ai/verification/AI-USABILITY-ACCEPTANCE.json).
+Final source `9941c9f7e6909bf11cd05d4237d9fe4cbfac1f7b` passed both hosted gates
+(2,695 passed, 331 cached-dependency skips, 8 warnings per run); final-source
+focused/packaging checks passed 1,072 with no skips. The earlier full local
+aggregate's one injected-Git-ancestor failure remains recorded, not relabeled PASS.
+Use [current PR](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/pull/74) checks for the exact published documentation/report head; the
+source gate does not attest that later commit. Checklist completion
+below records the executed implementation/trial, not acceptance of skipped cases.
+Do not rerun closed stages merely because their original instructions are retained.
+
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. The checked steps below retain the completed implementation workflow.
 
 **Goal:** Add a thin, read-only-by-default AI task context and readiness facade over the existing Minecraft MOD-AI adapters so a coding agent can see the exact target, available evidence, blockers, and a few valid next operations without learning the entire internal command graph.
 
-**Architecture:** Keep all authority and execution in the existing Store/Profile/index/registry/session/Observer/asset/runtime modules. Add one compact context module for validated task inputs and lineage, one routing module for readiness and next-operation derivation, and a narrow `task` CLI namespace. Do not add a scheduler, persistent task state, autonomous planner, database, or MCP business layer; MCP remains a separate decision after the real usability trial.
+**Architecture:** Keep all authority and execution in the existing Store/Profile/index/registry/session/Observer/asset/runtime modules. Add one compact context module for validated task inputs and lineage, one routing module for readiness and next-operation derivation, and a narrow `task` CLI namespace. Do not add a scheduler, persistent task state, autonomous planner, database, or MCP business layer; MCP was separately evaluated after the actual trial and is NOT_NEEDED for the tested harness.
 
 **Tech Stack:** Python 3.11+, standard library, existing `kneekura_tech_hub.minecraft` modules and Store/CAS, pytest, existing JSON CLI.
 
@@ -68,7 +82,7 @@ Do not restructure unrelated existing modules.
   - `validate_task_request(value: dict) -> dict`
   - `load_task_inputs(store: Store, *, index_id: str | None = None, run_registry: dict | None = None, input_registry: dict | None = None, blockbench_registry: dict | None = None, session: dict | None = None, evidence_hashes: tuple[str, ...] = (), world: str | None = None, run_directory: str | None = None, core_configured: bool = False) -> dict`
 
-- [ ] **Step 1: Write failing TaskRequest contract tests**
+- [x] **Step 1: Write failing TaskRequest contract tests**
 
 Test these exact rules:
 
@@ -101,7 +115,7 @@ Pin these values:
 - `constraints` and `acceptance`: arrays of at most 32 nonempty strings, each max 1024 code points;
 - finite canonical JSON only.
 
-- [ ] **Step 2: Run TaskRequest tests and verify RED**
+- [x] **Step 2: Run TaskRequest tests and verify RED**
 
 Run:
 
@@ -109,17 +123,17 @@ Run:
 
 Expected: FAIL because `task_context` / `validate_task_request` does not exist.
 
-- [ ] **Step 3: Implement `validate_task_request(value: dict) -> dict`**
+- [x] **Step 3: Implement `validate_task_request(value: dict) -> dict`**
 
 Detach with existing canonical JSON rules. Do not interpret strings, expand environment variables, normalize paths, parse commands, or derive authority from text.
 
-- [ ] **Step 4: Run TaskRequest tests and verify GREEN**
+- [x] **Step 4: Run TaskRequest tests and verify GREEN**
 
 Run the same focused command.
 
 Expected: all selected tests PASS.
 
-- [ ] **Step 5: Write failing input-normalization tests**
+- [x] **Step 5: Write failing input-normalization tests**
 
 Cover:
 
@@ -134,7 +148,7 @@ Cover:
 
 Session input in module tests is already-loaded JSON. The CLI later uses `runtime.load_session` to enforce the existing private-file rules.
 
-- [ ] **Step 6: Run input-normalization tests and verify RED**
+- [x] **Step 6: Run input-normalization tests and verify RED**
 
 Run:
 
@@ -142,7 +156,7 @@ Run:
 
 Expected: FAIL because `load_task_inputs` is missing.
 
-- [ ] **Step 7: Implement `load_task_inputs(...)`**
+- [x] **Step 7: Implement `load_task_inputs(...)`**
 
 Requirements:
 
@@ -155,7 +169,7 @@ Requirements:
 - never write Store/CAS;
 - no process/network APIs.
 
-- [ ] **Step 8: Run the whole Task 1 test file**
+- [x] **Step 8: Run the whole Task 1 test file**
 
 Run:
 
@@ -163,7 +177,7 @@ Run:
 
 Expected: PASS.
 
-- [ ] **Step 9: Commit**
+- [x] **Step 9: Commit**
 
 ```bash
 git add src/kneekura_tech_hub/minecraft/task_context.py tests/test_minecraft_task_context.py
@@ -185,7 +199,7 @@ git commit -m "feat: add strict Minecraft task context inputs"
   - `summarize_evidence(store: Store, inputs: dict) -> dict`
   - `summarize_lineage(inputs: dict, evidence: dict) -> list[dict]`
 
-- [ ] **Step 1: Write failing target-summary tests**
+- [x] **Step 1: Write failing target-summary tests**
 
 For a valid index, assert exact target fields come from `snapshot["profile"]["manifest"]` / profile identity:
 
@@ -201,7 +215,7 @@ For a valid index, assert exact target fields come from `snapshot["profile"]["ma
 
 When no index exists, these fields are null with explicit `unknown_fields`; do not synthesize Forge 1.20.1 merely from the TaskRequest intent.
 
-- [ ] **Step 2: Run target tests and verify RED**
+- [x] **Step 2: Run target tests and verify RED**
 
 Run:
 
@@ -209,11 +223,11 @@ Run:
 
 Expected: FAIL because `summarize_target` is missing.
 
-- [ ] **Step 3: Implement `summarize_target(inputs: dict) -> dict`**
+- [x] **Step 3: Implement `summarize_target(inputs: dict) -> dict`**
 
 Use only captured index/profile values. Keep track identity explicit.
 
-- [ ] **Step 4: Write failing evidence/lineage tests**
+- [x] **Step 4: Write failing evidence/lineage tests**
 
 Use real-shaped small CAS records and assert:
 
@@ -224,7 +238,7 @@ Use real-shaped small CAS records and assert:
 - lineage reuses existing IDs/hashes and does not create new Store objects;
 - session token, `endpoint_path`, `report_path`, `directory`, `world`, `build_artifact`, absolute registry workspace paths and input display authority do not appear anywhere in serialized public summaries.
 
-- [ ] **Step 5: Run evidence/lineage tests and verify RED**
+- [x] **Step 5: Run evidence/lineage tests and verify RED**
 
 Run:
 
@@ -232,7 +246,7 @@ Run:
 
 Expected: FAIL because summary functions are missing.
 
-- [ ] **Step 6: Implement evidence and lineage summaries**
+- [x] **Step 6: Implement evidence and lineage summaries**
 
 Bounded rules:
 
@@ -242,7 +256,7 @@ Bounded rules:
 - keep lineage as a short ordered list of existing identity references, not a new persisted record;
 - no Store writes/pins.
 
-- [ ] **Step 7: Write and pass the context-size regression**
+- [x] **Step 7: Write and pass the context-size regression**
 
 Construct an index with thousands of document metadata rows plus a 1 MiB opaque evidence blob. Assert the serialized target/evidence/lineage summary remains below **64 KiB** and does not contain document bodies or opaque payload bytes.
 
@@ -252,7 +266,7 @@ Run:
 
 Expected: PASS.
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit**
 
 ```bash
 git add src/kneekura_tech_hub/minecraft/task_context.py tests/test_minecraft_task_context.py
@@ -292,7 +306,7 @@ Allowed values:
 - `surface`: `IMPLEMENTED` | `UNSUPPORTED`
 - `readiness`: `READY` | `NOT_CONFIGURED` | `BLOCKED` | `UNKNOWN`
 
-- [ ] **Step 1: Write the seven required routing-quality fixtures as failing tests**
+- [x] **Step 1: Write the seven required routing-quality fixtures as failing tests**
 
 Tests must include the spec's acceptance fixtures:
 
@@ -306,7 +320,7 @@ Tests must include the spec's acceptance fixtures:
 
 Also cover mappings/history detection from Task 2 evidence pointers.
 
-- [ ] **Step 2: Run capability tests and verify RED**
+- [x] **Step 2: Run capability tests and verify RED**
 
 Run:
 
@@ -314,7 +328,7 @@ Run:
 
 Expected: FAIL because `task_routing` is missing.
 
-- [ ] **Step 3: Implement capability evaluation conservatively**
+- [x] **Step 3: Implement capability evaluation conservatively**
 
 Rules:
 
@@ -337,11 +351,11 @@ Use the design reason codes where applicable:
 
 Add narrower codes only when a stable machine distinction is necessary; do not route by prose.
 
-- [ ] **Step 4: Add a no-side-effect capability test**
+- [x] **Step 4: Add a no-side-effect capability test**
 
 Monkeypatch/block process spawn and network connection APIs used elsewhere. Snapshot Store pins/blobs and registry launch counters before/after. Run `evaluate_capabilities`; assert no blocked function was called and no state changed.
 
-- [ ] **Step 5: Run Task 3 tests and full existing related regressions**
+- [x] **Step 5: Run Task 3 tests and full existing related regressions**
 
 Run:
 
@@ -349,7 +363,7 @@ Run:
 
 Expected: PASS.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add src/kneekura_tech_hub/minecraft/task_routing.py tests/test_minecraft_task_routing.py
@@ -401,7 +415,7 @@ required_inputs
 
 No shell command or path appears in an action.
 
-- [ ] **Step 1: Write failing next-action tests**
+- [x] **Step 1: Write failing next-action tests**
 
 Pin these cases:
 
@@ -414,7 +428,7 @@ Pin these cases:
 - no more than 5 actions;
 - equal alternatives may all be `primary: false`; the router must not invent a winner.
 
-- [ ] **Step 2: Run next-action tests and verify RED**
+- [x] **Step 2: Run next-action tests and verify RED**
 
 Run:
 
@@ -422,7 +436,7 @@ Run:
 
 Expected: FAIL because `derive_next_actions` is missing.
 
-- [ ] **Step 3: Implement `derive_next_actions(...)`**
+- [x] **Step 3: Implement `derive_next_actions(...)`**
 
 Use a small explicit rule table over TaskRequest intent + capability readiness. Do not build a general workflow DSL or recursive planner.
 
@@ -435,7 +449,7 @@ No action may contain:
 - token;
 - auto-retry flag.
 
-- [ ] **Step 4: Write failing complete-context tests**
+- [x] **Step 4: Write failing complete-context tests**
 
 Assert:
 
@@ -447,7 +461,7 @@ Assert:
 - no Store writes/pins;
 - stale/mismatched evidence fails closed rather than disappearing silently.
 
-- [ ] **Step 5: Run complete-context tests and verify RED**
+- [x] **Step 5: Run complete-context tests and verify RED**
 
 Run:
 
@@ -455,7 +469,7 @@ Run:
 
 Expected: FAIL because `prepare_task_context` is missing.
 
-- [ ] **Step 6: Implement `prepare_task_context(...)`**
+- [x] **Step 6: Implement `prepare_task_context(...)`**
 
 Compose only Tasks 1–4. Set top-level `status` to:
 
@@ -465,7 +479,7 @@ Compose only Tasks 1–4. Set top-level `status` to:
 
 Do not persist TaskContext by default.
 
-- [ ] **Step 7: Run Task 4 tests**
+- [x] **Step 7: Run Task 4 tests**
 
 Run:
 
@@ -473,7 +487,7 @@ Run:
 
 Expected: PASS.
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit**
 
 ```bash
 git add src/kneekura_tech_hub/minecraft/task_context.py src/kneekura_tech_hub/minecraft/task_routing.py tests/test_minecraft_task_context.py tests/test_minecraft_task_routing.py
@@ -511,7 +525,7 @@ Both task subcommands accept:
 --core-configured                      (explicit configuration-presence hint; no connection)
 ```
 
-- [ ] **Step 1: Write failing parser/help tests**
+- [x] **Step 1: Write failing parser/help tests**
 
 Assert:
 
@@ -520,7 +534,7 @@ Assert:
 - existing top-level commands still parse;
 - top-level static `capabilities` still exposes its prior operations list and now labels `capability_scope == "STATIC_SURFACE"`.
 
-- [ ] **Step 2: Run parser tests and verify RED**
+- [x] **Step 2: Run parser tests and verify RED**
 
 Run:
 
@@ -528,11 +542,11 @@ Run:
 
 Expected: FAIL because task subcommands are not registered.
 
-- [ ] **Step 3: Implement parser registration**
+- [x] **Step 3: Implement parser registration**
 
 Use existing `read_json` for TaskRequest/registries and `runtime.load_session(args.session)` for the private session path. Do not put session contents into CLI output.
 
-- [ ] **Step 4: Write failing dispatch/parity tests**
+- [x] **Step 4: Write failing dispatch/parity tests**
 
 For one fixture, call `prepare_task_context(...)` directly and `connected_cli.dispatch` via parsed args. Assert normalized results match.
 
@@ -554,17 +568,17 @@ Also assert:
 - task commands do not execute mocked Gradle/network/native-input functions;
 - CLI exit remains nonzero for existing ERROR/STALE/UNSUPPORTED/BLOCKED/UNKNOWN semantics and does not invent special retry behavior.
 
-- [ ] **Step 5: Run dispatch tests and verify RED**
+- [x] **Step 5: Run dispatch tests and verify RED**
 
 Run the same focused test files.
 
 Expected: FAIL until dispatch is wired.
 
-- [ ] **Step 6: Implement task dispatch and static-capability label**
+- [x] **Step 6: Implement task dispatch and static-capability label**
 
 Keep `context` unchanged; it remains research/Core context. Do not alias TaskContext to it.
 
-- [ ] **Step 7: Run CLI and related regression tests**
+- [x] **Step 7: Run CLI and related regression tests**
 
 Run:
 
@@ -572,7 +586,7 @@ Run:
 
 Expected: PASS.
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit**
 
 ```bash
 git add src/kneekura_tech_hub/minecraft/connected_cli.py tests/test_minecraft_connected_cli.py tests/test_minecraft_cli.py
@@ -593,7 +607,7 @@ git commit -m "feat: expose Minecraft AI task context CLI"
 - Consumes: stable CLI contract from Task 5.
 - Produces: operator/AI documentation only; no new runtime authority.
 
-- [ ] **Step 1: Write `TASK-CONTEXT.md`**
+- [x] **Step 1: Write `TASK-CONTEXT.md`**
 
 Document:
 
@@ -606,17 +620,17 @@ Document:
 - compact-first / expand-with-existing-`search`/`inspect`/`artifact read` flow;
 - code-edit, asset and compatibility-research happy-path examples;
 - explicit statement that `task prepare` never executes a next action;
-- MCP remains undecided.
+- MCP decision is recorded after the actual trial: NOT_NEEDED for the tested local coding harness.
 
 Do not include real tokens/private machine paths.
 
-- [ ] **Step 2: Link the README and deferred-improvement ownership**
+- [x] **Step 2: Link the README and deferred-improvement ownership**
 
 README links to `TASK-CONTEXT.md`.
 
 In `DEFERRED-IMPROVEMENTS-2026-09-30.md`, mark only the secondary state/next-action and artifact-lineage concerns as implemented by this layer **after** the tests below pass. Leave asset-editing Candidates 1–3 DEFERRED.
 
-- [ ] **Step 3: Run the focused task facade suite**
+- [x] **Step 3: Run the focused task facade suite**
 
 Run:
 
@@ -624,7 +638,7 @@ Run:
 
 Expected: PASS.
 
-- [ ] **Step 4: Run the complete repository suite**
+- [x] **Step 4: Run the complete repository suite**
 
 Run the repository's normal full command:
 
@@ -632,7 +646,7 @@ Run the repository's normal full command:
 
 Expected: zero unexpected failures. Environment-dependent PostgreSQL/Java/desktop skips must be reported exactly rather than relabeled as pass.
 
-- [ ] **Step 5: Run packaging/install regression if the current repository packaging suite does not already cover the new modules**
+- [x] **Step 5: Run packaging/install regression if the current repository packaging suite does not already cover the new modules**
 
 At minimum:
 
@@ -640,7 +654,7 @@ At minimum:
 
 Expected: PASS and built/installable package contains `task_context.py` and `task_routing.py` when the packaging test exposes file inventory.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add departments/minecraft/mod-ai/TASK-CONTEXT.md departments/minecraft/mod-ai/README.md departments/minecraft/mod-ai/DEFERRED-IMPROVEMENTS-2026-09-30.md
@@ -655,22 +669,27 @@ This is a product acceptance exercise, not another autonomous subsystem and not 
 
 After Tasks 1–6 are green and the original MOD-AI completion gate has been satisfied:
 
-- [ ] Pick one real MOD-making task with a fixed target and acceptance statement.
-- [ ] Give the coding AI the TaskRequest plus only the explicit authoritative references it actually has.
-- [ ] Start with `task prepare`; do not give the AI a hand-written map of internal adapters.
-- [ ] Record:
+- [x] Pick one real MOD-making task with a fixed target and acceptance statement.
+- [x] Give the coding AI the TaskRequest plus only the explicit authoritative references it actually has.
+- [x] Start with `task prepare`; do not give the AI a hand-written map of internal adapters.
+- [x] Record:
   - number of KNEEKURA commands the AI had to discover manually before the first correct edit;
   - approximate context bytes/tokens loaded before the first correct edit, using the harness's available measurement rather than invented precision;
   - every invalid/unsafe operation the AI attempted or proposed;
   - TaskContext and evidence references used for the successful path;
   - whether a second fresh AI can resume from the retained handoff/context without repeating initial investigation.
-- [ ] Save the minimized result to:
+- [x] Save the minimized result to:
   - `departments/minecraft/mod-ai/verification/AI-USABILITY-ACCEPTANCE.json`
   - `departments/minecraft/mod-ai/AI-USABILITY-ACCEPTANCE.md`
-- [ ] Preserve failures/friction in Failure / Repair History if they reveal a real system defect.
-- [ ] Do **not** compute a universal usability score.
+- [x] Assess failures/friction for Failure / Repair History: no new facade defect or unsafe operation arose. Expected missing-feature RED is retained in the trial record; no artificial failure history was created.
+- [x] Do **not** compute a universal usability score.
 
 ### MCP decision gate
+
+**DECIDED: MCP: NOT_NEEDED for the actual local coding harness.** CLI/JSON plus
+retained context and handoff completed the task and fresh-agent resume. No MCP
+implementation is added. The conditional alternatives below remain future
+constraints if a different harness demonstrates concrete transport friction.
 
 After that trial:
 
@@ -682,7 +701,7 @@ After that trial:
 
 ## Implementation preflight clarification (2026-09-30)
 
-The original scoped plan is closed; this approved successor is now in implementation.
+Historical preflight: the original scoped plan was closed before this approved successor began implementation.
 These narrow clarifications preserve the approved two-axis readiness and read-only design:
 unsupported Windows input is surface UNSUPPORTED/readiness BLOCKED; retained runtime
 sessions never prove current live readiness; Gradle readiness requires strict authorization
@@ -700,7 +719,7 @@ No new execution authority, endpoint probe, MCP, LAB bridge, or asset editing is
 
 ## Post-completion successor
 
-After this usability layer and the current unified MOD-AI acceptance scope are closed, the next architectural stage is the real-Minecraft experimental runtime bridge with KNEEKURA-LAB:
+This usability layer and the original scoped MOD-AI acceptance are now closed. The separately designed real-Minecraft experimental runtime bridge with KNEEKURA-LAB remains a deferred, unimplemented successor:
 
 `docs/superpowers/specs/2026-10-01-minecraft-mod-ai-experimental-runtime-bridge-design.md`
 

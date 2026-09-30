@@ -1,13 +1,18 @@
 # Minecraft MOD-AI usability layer — design
 
-Status: **IN IMPLEMENTATION — ORIGINAL SCOPED PLAN CLOSED**  
+Status: **COMPLETE_SCOPED_AI_USABILITY — SOURCE GATE AND ACTUAL TRIAL PASSED**
 Date: 2026-10-01  
 Repository: `genkimorimori252525-oss/KNEEKURA-TECH-HUB`  
 Current implementation line: Draft PR #74  
 Parent roadmap: `docs/superpowers/plans/2026-09-28-minecraft-mod-ai-unified.md`
 
 **Implementation plan:** `docs/superpowers/plans/2026-10-01-minecraft-mod-ai-usability-layer.md`  
-Implementation remains gated by Section 2; this link does not authorize starting early.
+The original Section 2 prerequisite was met. Tasks 1–6 and the scoped actual trial
+are complete; see [acceptance](../../../departments/minecraft/mod-ai/AI-USABILITY-ACCEPTANCE.md)
+and the [operating contract](../../../departments/minecraft/mod-ai/TASK-CONTEXT.md).
+MCP is NOT_NEEDED for the tested local coding harness. Use [current PR](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/pull/74) checks
+for separate exact-head report-publication verification; source CI does not
+attest that later commit. No new MCP, LAB or asset-editing implementation follows.
 
 ## 1. Purpose
 
@@ -43,7 +48,9 @@ The human should not need to understand the internal adapter topology for normal
 
 ## 2. Completion gate
 
-This design is **not part of the current PR #74 acceptance work**.
+This design is separate from the **original scoped MOD-AI acceptance work**.
+The prerequisite below was met before implementation; both scopes are now closed
+with their own evidence records.
 
 Implementation may start only after one of these is true:
 
@@ -53,7 +60,10 @@ Implementation may start only after one of these is true:
 
 An incomplete current acceptance item must not be renamed as a usability feature.
 
-## 3. Audit findings
+## 3. Historical pre-implementation audit findings
+
+The gaps below motivated this design and are preserved as historical findings;
+the task facade and scoped acceptance now address them.
 
 A light audit of the current branch found the following.
 
@@ -393,6 +403,10 @@ Do not add semantic embeddings merely to reduce context. Measure an actual task 
 
 ## 9. Optional transport facade
 
+Trial decision: **MCP: NOT_NEEDED for the actual local coding harness**. The rules
+below are conditional future constraints, not an open implementation checklist.
+CLI/JSON and retained handoff completed the edit and fresh-agent resume.
+
 Only after the CLI/TaskContext contract is stable, an MCP facade may be added.
 
 MCP is **transport only**:
@@ -500,6 +514,14 @@ excluding transport/request metadata.
 
 ### Real AI usability trial
 
+**COMPLETE for one disposable source-policy exercise.** The
+[recorded trial](../../../departments/minecraft/mod-ai/AI-USABILITY-ACCEPTANCE.md)
+retains three discovered commands, four help/eight CLI calls, 18,078 retrieved
+pre-edit task-data bytes, a 3,150-byte canonical context, one correct edit and
+fresh-agent resume without repeated command discovery/search. Both agents passed
+14 Java assertions. Tokens/full model-context usage were not measured; no
+before/after or gameplay claim is made. Original instructions follow for context.
+
 After the original MOD-AI plan is closed, run one real coding-agent task through the facade.
 
 Measure:
@@ -534,10 +556,10 @@ This follow-on does not build:
 
 `departments/minecraft/mod-ai/DEFERRED-IMPROVEMENTS-2026-09-30.md` remains valid.
 
-This design takes ownership of its secondary:
+This implemented design completes the bounded secondary concerns:
 
 - current state / next action;
-- artifact lineage / delivery clarity.
+- artifact lineage / handoff clarity, without a general artifact-delivery promise.
 
 Its asset-editing Candidates 1–3 remain separate and need their own demonstrated task before
 implementation.
@@ -546,6 +568,11 @@ If a future real MOD task reveals that recreate-from-spec is insufficient, selec
 asset-editing candidate then; do not implement it merely because this usability layer exists.
 
 ## 15. Stop condition
+
+**Reached for the tested harness and scoped trial.** Do not reopen the stage or
+start the separate LAB/asset candidates without a new justified task. The [current PR](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/pull/74)
+checks provide exact-head publication verification separately from this source/trial
+acceptance.
 
 This stage is complete when a coding AI can receive one compact authoritative TaskContext,
 identify the few valid next operations without reading the internal adapter map, expand only
