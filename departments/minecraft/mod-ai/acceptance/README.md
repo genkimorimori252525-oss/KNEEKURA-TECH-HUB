@@ -24,8 +24,9 @@ a demonstration that all source classes equal the shipped binary.
 - U04: Hydra old/JAPPA renderer/model selection and hydra4 texture, tied to
   future same-run visual observation
 - U05: liveroot registration, generated model/data and packaged texture
-- U06: Connector ANCHOR and the specific candidate Fabric MOD, still UNKNOWN
-  because candidate, dependency closure and acquired immutable inputs are absent
+- U06: Connector beta.50 source ANCHOR and pinned Clumps Fabric12.0.0.4; the
+  released beta.49/FFAPI stack is a separate COMPARATIVE profile. Compatibility
+  remains UNKNOWN because matching anchor binary/dependency and runtime proof are absent
 
 U06 preserves the Connector design-reference commit as a **design reference**,
 not an acquired snapshot. The queue remains Twilight Forest, then Connector.
@@ -92,3 +93,9 @@ actual U01–U05 static execution results are now in
 bytes, exact JVM selectors and fully followed locators; runtime/full-dependency
 acceptance remains partial. Namespace-correct SRG follow-ups are recorded
 separately from the original zero-hit Mojmap requests.
+
+The selected U06 candidate and split static bindings are recorded in
+`../verification/connector-static-2026-09-30/`. Every root/document matches its
+profile track; opposite-track queries return zero. The authored fixture's top-level
+null profile/index still refers to unresolved **complete runtime** inputs, not the
+separately acquired static snapshots. No earlier mixed-track snapshot is accepted.

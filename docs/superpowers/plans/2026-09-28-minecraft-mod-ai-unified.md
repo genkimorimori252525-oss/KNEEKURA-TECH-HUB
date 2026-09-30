@@ -73,7 +73,7 @@ GameTests retain their exact separate generation hashes.
 ### M4 — Client observation and verified input
 Consumes: M3 build/run contract and existing `forge-observer/ClientProbe.java`.
 Produces: same-run screenshot/state/log/input evidence, not a second runtime authority.
-- [ ] Prove existing client capture on the target environment before creating more screenshot infrastructure.
+- [x] Prove existing client capture on the target environment before creating more screenshot infrastructure.
 - [ ] Select the smallest verified input driver; Vibecraft and langyo are research inputs, not accepted dependencies. Validate source/API and Forge1.20.1/Java17/Windows fit first.
 - [x] Require foreground target identity, scoped coordinates, key release, run/epoch correspondence and bounded operations. Keep actual right-click distinct from test commands.
 - [ ] Observe inventory/first-person/third-person display and actual use; evaluate server state, visuals and synchronization separately. Performance is unproven without a dedicated measurement.
@@ -81,9 +81,11 @@ Produces: same-run screenshot/state/log/input evidence, not a second runtime aut
 M4 progress detail: a concrete Linux/X11 right-button backend, authenticated
 process-start/window binding, session-owned replay/quarantine ledger, screenshot/
 log evidence route and explicit client save layout are implemented and fixture
-tested. The observer compiles against actual Forge/Java17. Live graphical client
-acceptance is pending; Windows input is unsupported, not silently treated as
-covered by Linux. Native/X server failure can leave release UNKNOWN and is
+tested. The observer compiles against actual Forge/Java17. A bounded live Linux
+client pilot now verifies authenticated input/capture, Glowing/cooldown and
+inventory/first-person views. Third-person was occluded; remaining visual checks
+were handed to the user, with no further launch authorized. Windows input is
+unsupported, not silently treated as covered by Linux. Native/X server failure can leave release UNKNOWN and is
 quarantined rather than retried.
 
 ### M5 — One real MOD editing cycle and final acceptance

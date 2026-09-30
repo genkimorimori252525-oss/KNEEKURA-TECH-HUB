@@ -668,8 +668,8 @@
       "profile_id": null,
       "index_snapshot_id": null,
       "null_reasons": {
-        "profile_id": "Capture actual resolved workspace/dependency/config inputs before running this fixture",
-        "index_snapshot_id": "Prepare an immutable index from that captured profile; no sample ID is evidence"
+        "profile_id": "A complete target runtime profile is not available; separate source-only ANCHOR and released COMPARATIVE static bindings are in static_execution.profiles",
+        "index_snapshot_id": "No complete target runtime index; resolve static query placeholders from the explicitly matching static_execution profile instead"
       },
       "source": {
         "repository": "Sinytra/Connector",
@@ -686,7 +686,17 @@
           "source_snapshot": false
         }
       ],
-      "candidate_fabric_mod": null,
+      "candidate_fabric_mod": {
+        "repository": "jaredlll08/Clumps",
+        "source_commit": "d249b4d25478e6044b0951f01b729c17b5860456",
+        "version": "12.0.0.4",
+        "minecraft": "1.20.1",
+        "loader": "fabric",
+        "version_id": "hefSwtn6",
+        "sha256": "2eb70931dee86cef68c8538b8284c684225964632cd10e636ea938af6f66e6f7",
+        "track": "COMPARATIVE",
+        "selection": "Small real XP-orb merge/pickup fixture; native Forge alternative exists; no installation recommendation"
+      },
       "compatibility_verdict": "UNKNOWN",
       "frontier_is_anchor_evidence": false,
       "required_dependency_inputs": [
@@ -698,7 +708,7 @@
       "steps": [
         {
           "kind": "prerequisite",
-          "instruction": "After Twilight Forest, name and pin the candidate Fabric MOD plus actual Connector/FFAPI JARs, exact mappings and dependencies. Design reference commit is not an acquired source snapshot."
+          "instruction": "Use the selected Clumps Fabric12.0.0.4 pin. For static reads bind index_snapshot_id from static_execution.profiles.anchor and comparative_index_snapshot_id from static_execution.profiles.comparative. Do not substitute either for a resolved runtime profile."
         },
         {
           "kind": "read_only_query",
@@ -714,11 +724,11 @@
           "argv": [
             "search",
             "--index",
-            "{index_snapshot_id}",
+            "{comparative_index_snapshot_id}",
             "--query",
             "fabric.mod.json",
             "--track",
-            "ANCHOR"
+            "COMPARATIVE"
           ]
         },
         {
@@ -736,9 +746,9 @@
         "Unknown transformed stage or unresolved dependency stays UNKNOWN/PARTIAL with a reason"
       ],
       "blocked_on": [
-        "Candidate Fabric MOD unspecified",
-        "Connector and Forgified Fabric API actual immutable snapshots/JAR hashes not acquired",
-        "Exact dependency closure, provider transforms and target run pending"
+        "Exact beta.50 binary identity absent from captured official releases; beta.49 remains COMPARATIVE",
+        "Matching ANCHOR dependencies including declared FFAPI 0.92.0+1.11.5 are unresolved/unacquired",
+        "Runtime dependency/config/side/classloader closure, actual transformations and feature observations remain NOT_RUN"
       ],
       "baseline": {
         "method": "same task using grep/IDE/Gradle and existing Hub artifacts",
@@ -754,6 +764,65 @@
           "disk_bytes": null
         },
         "status": "NOT_MEASURED"
+      },
+      "static_execution": {
+        "status": "STATIC_RETRIEVAL_PASS_ACCEPTANCE_PARTIAL",
+        "report": "departments/minecraft/mod-ai/verification/connector-static-2026-09-30/summary.json",
+        "profiles": {
+          "anchor": {
+            "track": "ANCHOR",
+            "profile_id": "afd23ab348285bd2b3c2292d66ec72c7439c9f1b5bcd12110d858a846b8ed729",
+            "index_snapshot_id": "c375e7f9610f64672634232b48827794e9d9c70d974ffff3eb326e34fc3be8b0",
+            "status": "PARTIAL_SOURCE_ONLY_MISSING_BINARY_AND_DEPENDENCIES",
+            "scope": "Only the acquired Connector beta.50 source subset at commit 7f68ac02291fde986119a3f5cab85436bed5c350",
+            "missing": [
+              "Only the exact Connector beta.50 source subset at 7f68ac02291fde986119a3f5cab85436bed5c350 is captured in this ANCHOR profile",
+              "Matching beta.50 binary and resolved anchor build dependencies, including declared FFAPI 0.92.0+1.11.5, are unavailable or unacquired",
+              "No candidate, released beta.49 binary, alternative FFAPI, comparative mappings or runtime outputs are included",
+              "Source-declared Forge 47.4.6 and Java 17 are target settings, not observed resolved runtime facts"
+            ],
+            "counts": {
+              "roots": 1,
+              "selected_documents": 27,
+              "prepared_classes": 0,
+              "selected_class_failures": 0,
+              "query_groups": 9,
+              "query_pages": 9,
+              "fully_retrieved_documents": 27,
+              "document_pages": 27,
+              "all_query_locator_documents_followed": 11,
+              "repeat_index_cache_hits": 0
+            }
+          },
+          "comparative": {
+            "track": "COMPARATIVE",
+            "profile_id": "1b6f1c1154b31fd61c2192c1721104b000321ebbb96205a40cea42fd4a32a519",
+            "index_snapshot_id": "a2cb3581f47cea5c59f1fdecc38cda005d00351c516764e2af5db617346dcb20",
+            "status": "PARTIAL_RELEASED_STACK_STATIC_COMPARISON_NOT_RUNTIME",
+            "scope": "Connector beta.49 distribution, Fabric Clumps 12.0.0.4, FFAPI 0.92.6+1.11.15, selected Forge 47.4.6 context and separate candidate/FFAPI source; beta.50 source excluded",
+            "missing": [
+              "This COMPARATIVE profile contains Connector beta.49, Clumps Fabric 12.0.0.4, FFAPI 0.92.6+1.11.15 and selected exact Forge 47.4.6 context; beta.50 source is excluded",
+              "Original source candidates, original distribution and nested archives remain separate stages; source-to-binary class identity is not established",
+              "All nested archive hashes are captured, but actual selected host-loader dependency closure, classloader order, side/config and aliases were not executed",
+              "Only selected implementation classes were indexed; dynamic reflection, callbacks, ServiceLoader and full external implementations remain unresolved",
+              "No remapped/transformed candidate artifact, live game observation, canonical write or upstream build exists"
+            ],
+            "counts": {
+              "roots": 118,
+              "selected_documents": 394,
+              "prepared_classes": 74,
+              "selected_class_failures": 0,
+              "query_groups": 22,
+              "query_pages": 38,
+              "fully_retrieved_documents": 337,
+              "document_pages": 632,
+              "all_query_locator_documents_followed": 190,
+              "repeat_index_cache_hits": 74
+            }
+          }
+        },
+        "runtime_acceptance": "NOT_RUN",
+        "compatibility_verdict": "UNKNOWN"
       }
     }
   ]

@@ -61,7 +61,15 @@ def test_connector_unknowns_and_frontier_negative_are_preserved():
     assert task['source']['record_kind'] == 'DESIGN_REFERENCE_NOT_SOURCE_SNAPSHOT'
     assert task['source']['binary_sha256'] is None
     assert task['compatibility_verdict'] == 'UNKNOWN'
-    assert task['candidate_fabric_mod'] is None
+    candidate=task['candidate_fabric_mod']
+    assert candidate['repository']=='jaredlll08/Clumps'
+    assert candidate['version']=='12.0.0.4' and candidate['track']=='COMPARATIVE'
+    assert candidate['sha256']=='2eb70931dee86cef68c8538b8284c684225964632cd10e636ea938af6f66e6f7'
+    assert not any('unspecified' in reason for reason in task['blocked_on'])
+    profiles=task['static_execution']['profiles']
+    assert profiles['anchor']['track']=='ANCHOR'
+    assert profiles['comparative']['track']=='COMPARATIVE'
+    assert profiles['anchor']['profile_id']!=profiles['comparative']['profile_id']
     assert task['required_dependency_inputs'] == ['Connector', 'Forgified Fabric API', 'candidate Fabric MOD', 'exact mappings']
     assert task['frontier_is_anchor_evidence'] is False
     assert not any(item.get('git_blob_sha1') for item in task['inputs'])
@@ -78,7 +86,7 @@ def test_all_research_commands_are_existing_read_only_cli_routes():
             assert args.command in {'profile', 'search', 'inspect', 'relations', 'interventions', 'context'}
             if args.command == 'profile':
                 assert args.action == 'inspect'
-            assert '{index_snapshot_id}' in step['argv']
+            assert any(value in step['argv'] for value in ('{index_snapshot_id}','{comparative_index_snapshot_id}'))
 
 
 def test_every_adversarial_case_has_fault_oracle_and_existing_regression():
@@ -235,3 +243,17 @@ def test_scenario_is_captured_by_existing_contract_without_launch(session, name,
     assert c['expected_tests'] == scenario['expected_tests']
     assert c['expected_required'] == scenario['expected_required']
     assert not list(root.rglob('endpoint.json')) and not list(root.rglob('eula.txt'))
+
+
+def test_connector_static_evidence_never_tags_released_comparison_as_anchor():
+    data=load(ROOT/'departments/minecraft/mod-ai/verification/connector-static-2026-09-30/summary.json')
+    profiles=data['profiles']
+    assert profiles['anchor']['track']=='ANCHOR' and profiles['anchor']['counts']['prepared_classes']==0
+    assert profiles['anchor']['counts']['roots']==1
+    assert profiles['comparative']['track']=='COMPARATIVE' and profiles['comparative']['counts']['prepared_classes']==74
+    assert data['compatibility_verdict']=='UNKNOWN'
+    task=load(FIXTURES/'real-mod-tasks.json')['tasks'][5]
+    assert task['static_execution']['profiles']==profiles
+    query=next(s['argv'] for s in task['steps'] if 'argv' in s and 'fabric.mod.json' in s['argv'])
+    assert query[query.index('--track')+1]=='COMPARATIVE'
+    assert query[query.index('--index')+1]=='{comparative_index_snapshot_id}'

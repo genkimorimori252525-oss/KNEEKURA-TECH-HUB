@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "record_type": "derived_local_test_summary",
-  "scope": "Local final source, not exact remote-head CI or live Minecraft client acceptance",
+  "scope": "Final post-client metadata/fixture source checks; exact-head CI is separately recorded on PR74",
   "command": "PATH=<pinned-Java17>/bin:$PATH GSON_JAR=<cached-official-gson2.10.jar> python -m pytest -q -k \"not test_private_parent_validation_allows_real_external_directory\"",
-  "passed": 1006,
+  "passed": 1008,
   "skipped": 103,
   "deselected": 1,
   "skip_reasons": {
@@ -53,8 +53,17 @@
     "tools/ci/mod_ai_staff/java/org/kneekura/staff/StaffUsePolicy.java": "2c0c411ca9abe3625071fcc542137c17a213682cd803543254cf4e2e33c623dc",
     "tools/ci/mod_ai_staff/pilot.py": "de6c17d16c28f4ace25ae6ea318aca91c78c9b579a56e62b4407daf931550c23",
     "tools/ci/mod_ai_staff/test_pilot.py": "32fbd93a75cd60582325ef1c183ba8661cf653c42f3925f7edb32f7505696cb2",
-    "tools/ci/mod_ai_staff/testjava/org/kneekura/staff/PolicyAssertions.java": "582cdc9c31c3bb4f865fc4d09cf8c7a75090a45c818d33a1f2bf64b6016dca35"
+    "tools/ci/mod_ai_staff/testjava/org/kneekura/staff/PolicyAssertions.java": "582cdc9c31c3bb4f865fc4d09cf8c7a75090a45c818d33a1f2bf64b6016dca35",
+    "departments/minecraft/mod-ai/forge-observer/src/main/resources/pack.mcmeta": "511af549aeb1eacde3107fbad5e465529691b00daa2fa7ee8003946cf46b2235",
+    "tests/test_minecraft_packaging.py": "56cdad3b07730098ef32247cddb09b0fa1b73c5f6dc3b0257587d3167226773b",
+    "tests/test_minecraft_acceptance_scenarios.py": "3c875f1895e856b467db966d2cfcbd456e86e5590bd3a743bd6858d06e1fade0",
+    "departments/minecraft/mod-ai/acceptance/real-mod-tasks.json": "21c35b11768f56ef83447ed77d3d3c902f870960ce13d30639e64576b9eeebcd"
   },
   "raw_log_published": false,
-  "runtime_client_acceptance": "NOT_RUN"
+  "runtime_client_acceptance": "NOT_RUN",
+  "post_client_checks": [
+    "Observer pack.mcmeta source/installed-layout/actual wheel bytes",
+    "U06 candidate selection and isolated ANCHOR/COMPARATIVE fixture queries"
+  ],
+  "test_log_sha256": "58228c3825d7f50a884abfee9de9b80039921716e52609bb32f00d47509c20cb"
 }

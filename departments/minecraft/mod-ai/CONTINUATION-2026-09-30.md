@@ -3,7 +3,7 @@
 Status: **PARTIAL PRODUCT ACCEPTANCE.** M2 is exercised on actual Blockbench.
 M3 includes actual staff-MOD provider/Core inputs, the Forge build and signed
 server GameTests. M4 has a concrete Linux/X11 input path and client save-layout
-support; live client acceptance is still pending. M5 fixtures/scenarios are
+support; a bounded live client pilot has now exercised input/effects and selected views. M5 fixtures/scenarios are
 implemented and original U01–U05 have real-input static results; their wider
 real-MOD/client acceptance remains open.
 
@@ -11,8 +11,8 @@ real-MOD/client acceptance remains open.
 |---|---|---|
 | M2 | Complete for the one static Java-item slice | Actual Blockbench capture, structure/export and three-view editor review pass |
 | M3 | Provider/Core caller and staff import/build/handler paths implemented | Real staff bytecode/classpath/mapping derivation and Core staging pass; signed server tests pass; deployed Core/human canonical approval and upstream research remain distinct |
-| M4 | Client saves layout, authenticated PID/start/window binding, registered Linux/X11 right-button route and retained input evidence implemented | Python fixtures and actual Forge Java compilation pass; physical input/client rendering/sync and Windows remain unrun |
-| M5 | Real-MOD task catalog, A-case fault recipes, fixed client/server scenarios and existing history implemented | Direct-handler server cycle passes; client-inclusive cycle remains unrun; U01–U05 static checks are partial; U06 is undergoing separate Connector/candidate static checks |
+| M4 | Client saves layout, authenticated PID/start/window binding, registered Linux/X11 right-button route and retained input evidence implemented | Actual authenticated native input, Glowing/cooldown and inventory/first-person views observed; third-person inconclusive; sync/performance/Windows unrun |
+| M5 | Real-MOD task catalog, A-case fault recipes, fixed client/server scenarios and existing history implemented | Direct-handler server cycle passes; client-inclusive pilot exercised with honest timeout/visual limits; U01–U05 static checks are partial; U06 has split ANCHOR-source/COMPARATIVE-stack static results; runtime compatibility remains UNKNOWN |
 
 Linux/X11 is the concrete available platform for this slice, not a Windows
 compatibility claim. No native Windows backend or acceptance is claimed.
@@ -222,23 +222,25 @@ was used to obtain GREEN.
   provides its own PostgreSQL16 service. Missing local DB is not a reason to
   claim the full local suite passed
 
-Final source aggregate (Java17 plus cached official Gson): **1006 passed,
+Final source aggregate (Java17 plus cached official Gson): **1008 passed,
 103 skipped, 1 deselected**. Skips require the local PostgreSQL test environment;
 the single deselection is the sandbox directory fixture explained above.
 `verification/local-final-2026-09-30.json` records code hashes and the exact
 normalized command. Independent final review reports no unresolved critical or
-important code finding. Refreshed observer-only Forge compilation passed in13s,
-with no game tasks. The final actual-provider verifier again confirms all7 class
-and6 resource comparisons, all3 reflective policy smokes and review-only Core
-staging. These are local source checks; final published-head CI is still pending.
+important code finding. Refreshed observer-only Forge compilation passed in 13s,
+with no game tasks. The final actual-provider verifier again confirms all 7 class
+and 6 resource comparisons, all 3 reflective policy smokes and review-only Core
+staging. At published head `9fed1f50b6a269713a885d11216a16ce5a621dec`, both hosted
+test runs passed (1091 passed, 19 optional Gson skips), plus actual Blockbench.
+Final metadata/report follow-up has its own exact-head checks.
 
 ## Original U01–U05 real-input static slice
 
 `verification/twilight-static-2026-09-30/` records actual existing-adapter
 execution on pinned Twilight Forest1.20.1/4.3.2508: 49 verified source blobs,
-91 prepared MOD/dependency classes, 45 query groups over78 pages, 170 complete
-documents over320 pages, ten exact JVM selectors, and6156 exact packaged-resource
-matches with zero mismatches/missing paths. Focused regressions:105 passed.
+91 prepared MOD/dependency classes, 45 query groups over 78 pages, 170 complete
+documents over 320 pages, ten exact JVM selectors, and 6156 exact packaged-resource
+matches with zero mismatches/missing paths. Focused regressions: 105 passed.
 The literal authored Mojmap MOD-owner queries remain PARTIAL with zero binary
 hits; explicit SRG follow-ups reach the shipped classes. No namespace is silently
 relabeled. AI/inheritance, Forge damage hooks, coremod/network producer/consumer,
@@ -246,35 +248,54 @@ renderer/model/texture and generated-item/data paths are traceable. Full target
 dependency/config closure, source/binary class equivalence and behavior/render/
 network experiments remain open. These results do not close U01–U05 as a whole.
 
-## Open acceptance
+## U06 selected candidate and version isolation
 
-- Actual client acceptance of the implemented native input/window binding,
-  physical right-click, inventory/first-/third-person observation, synchronization
-  and dedicated performance evidence
-- Completion of original U01–U06 acceptance beyond the executed static slices; `verification/acceptance-map-2026-09-30.json`
-  maps all 24 A-cases to actual test nodes and explicitly marks partial cases.
-  Adapter tests are not substituted for missing MOD/client observations
-- Twilight Forest research remains before Sinytra Connector. Player-facing
-  reconnaissance is discovery/navigation only; implementation evidence and
-  exact version boundaries continue to govern conclusions
+Clumps Fabric1.20.1/12.0.0.4 is the small real XP-orb fixture. Connector beta.50
+source ANCHOR has one root/27 documents and no substituted release bytes. The
+released beta.49 + FFAPI0.92.6+1.11.15 + Clumps comparison has its own COMPARATIVE
+profile: 74 classes, 22 query groups and 337 complete readbacks. All 53 nested JAR
+identities are retained locally. Opposite-track queries return zero. The earlier
+mixed-track snapshot is superseded local-only, not accepted evidence.
+`verification/connector-static-2026-09-30/` keeps exact pins and limits. Matching
+beta.50 binary and declared FFAPI0.92.0+1.11.5 closure, actual transformations and
+runtime compatibility remain unresolved; the answer is UNKNOWN, not a silent
+upgrade or a request for the user to choose an implementation-detail fixture.
 
-Do not mark M4/M5 or the whole product complete from these partial results.
+## Bounded live client pilot and handoff
 
-## Next concrete client steps
+The registered Linux client actually loaded its prepared world and authenticated
+same-run PID/start/window/epoch. Two target-addressed native right-button gestures
+completed and released. The invoking player gained Glowing I and cooldown; across
+48 observed server ticks, duration fell 50→2 and cooldown fraction 0.90→0.42 without
+refresh, with health 20, count 1 and damage 0 unchanged. Later effect/cooldown expired.
+These are observed singleplayer results, not a dedicated-network or exact-wall-time
+claim. Inventory and first-person pixels were inspected; third-person was occluded.
 
-1. Use an explicitly authorized disposable graphical client environment with the
-   exact Minecraft1.20.1 / Forge47.4.6 / Java17 inputs and a bounded registered
-   launch budget. Prepare a fresh `--layout client` world; never use a user save.
-2. Capture the existing ClientProbe on that run and bind the implemented local
-   Linux/X11 input route to its authenticated process/window identity.
-3. Follow `tools/ci/mod_ai_staff/scenarios/client-observation.json`: one bounded
-   physical use, cooldown repeat, fixed before/after state and inventory/first-/
-   third-person views. Keep dispatch, behavior, visuals and synchronization as
-   separate verdicts. Unknown input is quarantined rather than automatically retried.
-4. Record any demonstrated failure/repair through existing history. Windows and
-   dedicated performance acceptance still need their own environments/scenarios.
+The first attempt ended before game startup on a transport prerequisite. The
+second process hit its reduced 540-second bound and was terminated (exit−9), within
+the original approved 15-minute window. No graceful completion is claimed. The
+window and matching client/helper processes were confirmed absent, and no active
+input marker remained. Original receipts retain their actual outcomes.
 
-A supported cloud Linux desktop has been verified to share the test workspace
-and an active X display. Client launch is pending its explicit scoped approval;
-no client success is inferred from desktop availability. The existing server
-approval/receipts remain bounded to their completed server tests.
+The live client also exposed missing observer `pack.mcmeta`. The minimal format 15
+metadata fix passed RED→GREEN packaging checks and actual wheel-byte verification.
+It was not retested in a further game launch. See the separate sanitized client
+acceptance report; raw images/logs/receipts and session credentials remain local.
+
+The user explicitly took over remaining visual checks. No additional client
+launch or visual-authorization request is part of this wrap-up.
+
+## Outstanding acceptance, retained without automatic expansion
+
+- Third-person/unobstructed visual confirmation and warning-free-startup recheck:
+  handed to the user
+- Dedicated-server/client synchronization, non-invoking-player effect control,
+  runtime client-mutation controls, performance and Windows native input remain
+  unverified or unsupported as stated
+- Full U01–U06 acceptance beyond the executed static slices remains open; U06
+  beta.50 binary/dependency and runtime identity remain UNKNOWN
+- Deployed Core and human canonical review are separate; no canonical write
+  occurred
+
+The implementation and its verified slices are retained in the draft PR. This
+report does not mark the whole product or every milestone acceptance complete.

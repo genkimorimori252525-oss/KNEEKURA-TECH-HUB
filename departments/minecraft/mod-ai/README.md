@@ -6,7 +6,7 @@ MODの設計・編集をする新しいAIや、別DB、別スケジューラは�
 
 2026-09-30の実装・検証状況は [CONTINUATION-2026-09-30.md](CONTINUATION-2026-09-30.md) を参照。
 実Blockbenchでの杖の生成・修正・export、実Forgeビルドと杖のserver GameTest、実MODを使うprovider/Core静的検証まで進んだ。
-client用save配置とLinux/X11の対象window限定input経路も実装したが、**Minecraft clientでの入力・描画・同期の受け入れは未完了**。
+client用save配置とLinux/X11の対象window限定inputを実装し、実clientの右クリック、効果・cooldown、inventory/一人称表示を限定的に確認した。**三人称の最終目視・同期等の全受け入れは未完了**。残りの目視はユーザーへ引き継いだ。
 Windows driver、実測performance、全U01–U06の完了も主張しない。実行権限やlaunch budgetをこの文書から得てはならない。
 
 操作手順は [NATIVE-INPUT.md](NATIVE-INPUT.md)、固定fixture/scenarioは [acceptance/README.md](acceptance/README.md)。
@@ -86,7 +86,7 @@ Vineflower/tiny-remapperは [provider.example.json](provider.example.json) へ�
 明示的に `profile transform --index INDEX --root ROOT_ID --operation decompile --provider PROVIDER_JSON`。
 remapには `--mapping-hash RAW_MAPPING_TEXT_HASH --from-namespace ... --to-namespace ...` も必要。
 入力/出力/使用tool/classpath/mappingのhashを保持する。派生sourceは元sourceや実行時classとの一致証明ではない。
-これら外部providerの実機結合はまだ未検証。プロトコルfixtureの合格を実ツール成功に置き換えない。
+固定した実ツール・実MOD・Forge classpath/mappingでの結合結果は continuation の実MOD検証を参照。静的変換の成功をruntime互換性へ置き換えない。
 
 ## 3. 知識・失敗履歴
 
@@ -142,7 +142,7 @@ Forge1.20.1では `PrefixGameTestTemplate(false)` がテスト名のclass prefix
 直接registry方式と混同しない。
 
 Forge observerは開発環境で明示session指定がある場合のみ有効。127.0.0.1上で認証し、run/epoch/build/world/configを照合する。
-**実サーバーのhandshake、個体観測、命令実行・重複防止、GameTest完了は検証済み。クライアント描画は未検証**。
+**実サーバーのhandshake、個体観測、命令実行・重複防止、GameTest完了に加え、限定した実client input/観測も検証済み**。表示の完了範囲と未確認事項は `tools/ci/mod_ai_staff/CLIENT-ACCEPTANCE-2026-09-30.md` を参照。
 今回の試験ではruntime_config_filesは空で、全ての動的設定を照合できたという主張ではない。
 観測はatomicな世界状態とも行動assertionの合格とも呼ばない。命令は `validate operation --session ... --command-id ... --request-id ...`
 に分離し、registryの命令だけを許可する。観測ルートから命令を実行しない。

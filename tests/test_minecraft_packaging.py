@@ -29,6 +29,15 @@ def test_gradle_scripts_are_present_and_ci_is_not_a_dependency():
     assert config['project']['dependencies']==['jsonschema>=4.23,<5']
 
 
+def test_observer_resource_pack_metadata_matches_minecraft_1_20_1():
+    """The separate dev observer pack needs the same format as the staff pilot."""
+    path=Path('departments/minecraft/mod-ai/forge-observer/src/main/resources/pack.mcmeta')
+    assert path.is_file(), 'Observer resource pack is missing pack.mcmeta'
+    pack=json.loads(path.read_text())['pack']
+    assert type(pack['pack_format']) is int and pack['pack_format']==15
+    assert isinstance(pack['description'],str) and pack['description'].strip()
+
+
 def test_installed_package_stages_against_packaged_core_schema_and_policy(tmp_path):
     """Materialize declared wheel content without a backend or network prerequisite."""
     repository=Path.cwd()
@@ -53,6 +62,10 @@ from kneekura_tech_hub.minecraft.storage import Store, capture_profile
 
 installed=Path(sys.argv[1]).resolve()
 assert Path(kneekura_tech_hub.__file__).is_relative_to(installed)
+observer_resources=Path(kneekura_tech_hub.__file__).parent/'minecraft/resources/forge-observer/src/main/resources'
+pack_path=observer_resources/'pack.mcmeta'
+assert pack_path.is_file(), 'Installed observer resource pack is missing pack.mcmeta'
+assert json.loads(pack_path.read_text())['pack']['pack_format']==15
 for loader in (validator.load_schema, validator.load_review_decision_schema,
                validator.load_source_selection_decision_schema,
                validator.load_source_acquisition_authorization_schema,
@@ -83,6 +96,9 @@ print(json.dumps({'status':result['status'],'canonical_writes':result['canonical
                           text=True,capture_output=True,timeout=30)
     assert result.returncode==0,result.stderr
     assert json.loads(result.stdout)=={'status':'OK','canonical_writes':0}
+    observer_pack=Path('src/main/resources/pack.mcmeta')
+    assert (installed/'kneekura_tech_hub/minecraft/resources/forge-observer'/observer_pack).read_bytes()==(
+        repository/'departments/minecraft/mod-ai/forge-observer'/observer_pack).read_bytes()
     for directory in ('schemas','governance'):
         for source in (repository/directory).rglob('*.json'):
             packaged=installed/'kneekura_tech_hub/resources'/source.relative_to(repository)
