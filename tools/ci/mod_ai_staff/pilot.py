@@ -25,6 +25,8 @@ TARGET = {'minecraft': '1.20.1', 'loader': 'forge', 'loader_version': '47.4.6', 
 ASSET_TARGET = dict(TARGET, track='ANCHOR')
 ASSET = 'kneekura:celestial_staff'
 JAR = 'build/libs/kneekura-1.0.0.jar'
+CLIENT_TRACE_SOURCE_SHA256 = '4e190bf983d18946791a16f88f21eb48db037e7bdc9be8a0239af08137ab4b04'
+CLIENT_TRACE_METADATA = 'src/main/resources/META-INF/kneekura-client-trace.json'
 
 
 def require(value, message):
@@ -39,7 +41,36 @@ def create_file(path: Path, data: bytes):
         stream.write(data); stream.flush(); os.fsync(stream.fileno())
 
 
-def configure(root: Path):
+def client_trace_sources(original: bytes):
+    """Transform one pinned fixture only; unknown source cannot acquire a trace identity."""
+    require(type(original) is bytes and digest(original) == CLIENT_TRACE_SOURCE_SHA256,
+            'Client trace source drift: exact pinned staff source required')
+    prefix, body = original.split(b'        ItemStack stack = player.getItemInHand(hand);\n', 1)
+    body, suffix = body.rsplit(b'    }\n}', 1)
+    for site, statement in (
+            ('effect', b'        player.addEffect(new MobEffectInstance(MobEffects.GLOWING, StaffUsePolicy.GLOW_TICKS, 0));\n'),
+            ('cooldown', b'        player.getCooldowns().addCooldown(this, StaffUsePolicy.COOLDOWN_TICKS);\n')):
+        require(body.count(statement) == 1, 'Client trace known mutation source site drift')
+        hook = ('        try { if (clientTrace != null) clientTrace.mutationAttempt("' + site + '"); } catch (Throwable ignored) {}\n').encode()
+        body = body.replace(statement, hook + statement)
+    instrumented = (prefix + b'        ItemStack stack = player.getItemInHand(hand);\n'
+        + b'        ClientUseTrace.Scope clientTrace = null;\n'
+        + b'        try { clientTrace = ClientUseTrace.begin(level, player, stack); } catch (Throwable ignored) {}\n'
+        + b'        try {\n' + body
+        + b'        } finally {\n'
+        + b'            try { if (clientTrace != null) clientTrace.close(); } catch (Throwable ignored) {}\n'
+        + b'        }\n    }\n}' + suffix)
+    helper = (HERE/'instrumentation/ClientUseTrace.java').read_bytes()
+    metadata = {'schema_version':1, 'enabled':True, 'kind':'exact_staff_client_use_trace',
+                'helper_class':'org.kneekura.staff.ClientUseTrace', 'known_mutation_sites':['effect','cooldown'],
+                'original_source_sha256':digest(original), 'instrumented_source_sha256':digest(instrumented),
+                'helper_source_sha256':digest(helper), 'runtime_assertion':'NOT_RUN'}
+    return instrumented, helper, metadata
+
+
+def configure(root: Path, *, client_trace: bool = False):
+    require(type(client_trace) is bool, 'client_trace must be a strict bool')
+    traced = client_trace_sources((HERE/'java/org/kneekura/staff/CelestialStaffItem.java').read_bytes()) if client_trace else None
     root = _check_parent(root)
     require((root/'gradle.properties').is_file() and not (root/'gradle.properties').is_symlink(),
             'Real MDK properties required; symlink inputs forbidden')
@@ -50,7 +81,12 @@ def configure(root: Path):
     require((root/'gradlew').is_file() and not (root/'gradlew').is_symlink(), 'Real MDK wrapper required')
     # The MDK must be extracted with its example src omitted, never deleted from an existing project.
     for source in sorted((HERE/'java').rglob('*.java')):
-        create_file(root/'src/main/java'/source.relative_to(HERE/'java'), source.read_bytes())
+        relative = source.relative_to(HERE/'java')
+        data = traced[0] if traced and relative.as_posix() == 'org/kneekura/staff/CelestialStaffItem.java' else source.read_bytes()
+        create_file(root/'src/main/java'/relative, data)
+    if traced:
+        create_file(root/'src/main/java/org/kneekura/staff/ClientUseTrace.java', traced[1])
+        create_file(root/CLIENT_TRACE_METADATA, canonical(traced[2]))
     resources = root/'src/main/resources'
     create_file(resources/'META-INF/mods.toml', b'''modLoader="javafml"
 loaderVersion="[47,48)"
@@ -92,7 +128,27 @@ side="BOTH"
         else: revised.append(line)
     revised += [key+'='+value for key,value in changes.items() if key not in seen]
     (root/'gradle.properties').write_text('\n'.join(revised)+'\n')
-    return {'status':'OK','outcome':'NOT_RUN','source_generation':workspace_fingerprint(root)}
+    result = {'status':'OK','outcome':'NOT_RUN','source_generation':workspace_fingerprint(root)}
+    if traced: result['client_trace'] = traced[2]
+    return result
+
+
+def validate_client_trace_sources(root: Path):
+    """Bind opt-in metadata to exact generated source; never infer opt-in from arbitrary code."""
+    marker = root/CLIENT_TRACE_METADATA
+    helper_path = root/'src/main/java/org/kneekura/staff/ClientUseTrace.java'
+    if not marker.exists() and not marker.is_symlink():
+        require(not helper_path.exists() and not helper_path.is_symlink(), 'Client trace helper has no verified metadata')
+        return None
+    require(marker.is_file() and not marker.is_symlink(), 'Client trace metadata must be a real file')
+    instrumented, helper, expected = client_trace_sources((HERE/'java/org/kneekura/staff/CelestialStaffItem.java').read_bytes())
+    require(marker.read_bytes() == canonical(expected), 'Client trace metadata differs from the exact source identities')
+    for path, content in ((root/'src/main/java/org/kneekura/staff/CelestialStaffItem.java', instrumented),
+                          (helper_path, helper)):
+        _check_parent(path.parent)
+        require(path.is_file() and not path.is_symlink() and path.read_bytes() == content,
+                'Client trace source differs from its recorded instrumented/helper identity')
+    return expected
 
 
 def _validated_export(store: Store, manifest_hash: str):
@@ -210,6 +266,7 @@ def build_only(root: Path, evidence: Path, jdk: Path, gradle_home: Path, *, requ
                asset_store: Store, asset_manifest_hash: str, registered: dict | None = None):
     root=root.resolve(); _check_parent(root)
     origin=validate_imported_resources(root,asset_store,asset_manifest_hash)
+    client_trace=validate_client_trace_sources(root)
     evidence.mkdir(parents=True,exist_ok=True)
     store=Store(evidence/'cas')
     if registered is None: registered=registry(root,jdk,gradle_home)
@@ -227,6 +284,7 @@ def build_only(root: Path, evidence: Path, jdk: Path, gradle_home: Path, *, requ
         print(phase,result.get('outcome'),flush=True)
         require(result.get('outcome')=='PASS', phase+' failed; inspect the retained receipt/log before retrying')
     require(validate_imported_resources(root,asset_store,asset_manifest_hash)==origin, 'Captured asset identity changed during build')
+    require(validate_client_trace_sources(root)==client_trace, 'Client trace identity changed during build')
     manifest=store.json(results['export']['outputs'][0]['manifest_hash'])
     require(all(manifest.get(k)==v for k,v in TARGET.items()), 'Resolved target differs from pinned pilot')
     require(manifest['dirty_hash']==source and workspace_fingerprint(root)==source, 'Inputs changed; recapture required')
@@ -241,6 +299,11 @@ def build_only(root: Path, evidence: Path, jdk: Path, gradle_home: Path, *, requ
         required={'org/kneekura/staff/StaffMod.class','org/kneekura/staff/CelestialStaffItem.class',
                   'assets/kneekura/models/item/celestial_staff.json','assets/kneekura/textures/item/celestial_staff.png'}
         require(required<=set(names), 'Staff class or resource missing from packaged JAR')
+        if client_trace:
+            require('org/kneekura/staff/ClientUseTrace.class' in names, 'Client trace helper missing from packaged JAR')
+            require('META-INF/kneekura-client-trace.json' in names and
+                    jar.read('META-INF/kneekura-client-trace.json') == canonical(client_trace),
+                    'Client trace packaged metadata differs from verified source identities')
         for entry in origin['files']:
             require(digest(jar.read(entry['path']))==entry['content_hash'],
                     'Packaged resource differs from original captured asset bytes')
@@ -257,23 +320,26 @@ def build_only(root: Path, evidence: Path, jdk: Path, gradle_home: Path, *, requ
              'asset_resource_hashes':[i for i in inventory if i['path'].startswith('assets/kneekura/')],
              'handler_gametest':'NOT_RUN','runtime_client_handler_mutation':'NOT_RUN','physical_right_click':'NOT_RUN','rendering':'NOT_RUN','synchronization':'NOT_RUN',
              'launches_during_build':0,'eula_written_by_build':False}
+    if client_trace: summary['client_trace'] = client_trace
     (evidence/'summary.json').write_bytes(canonical(summary)); return summary
 
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--workspace',type=Path,required=True); parser.add_argument('--configure',action='store_true')
+    parser.add_argument('--client-trace',action='store_true',help='Opt in to the separately identified read-only client use trace; requires --configure')
     parser.add_argument('--capture-bundle',type=Path)
     parser.add_argument('--asset-store',type=Path); parser.add_argument('--asset-manifest'); parser.add_argument('--asset-directory',type=Path)
     parser.add_argument('--evidence',type=Path); parser.add_argument('--jdk',type=Path); parser.add_argument('--gradle-home',type=Path)
     parser.add_argument('--request-prefix',default='staff-build-v1')
     args=parser.parse_args()
+    require(not args.client_trace or args.configure, '--client-trace requires fresh --configure')
     if args.capture_bundle:
         require(args.asset_store is not None, 'Explicit asset CAS destination required')
         hydrated=import_evidence_bundle(args.capture_bundle,Store(args.asset_store))
         if args.asset_manifest: require(args.asset_manifest==hydrated['export_manifest_hash'],'Explicit manifest differs from bundle')
         args.asset_manifest=hydrated['export_manifest_hash']
-    if args.configure: print(json.dumps(configure(args.workspace)))
+    if args.configure: print(json.dumps(configure(args.workspace,client_trace=args.client_trace)))
     if args.asset_manifest and args.asset_directory:
         result=import_asset(Store(args.asset_store),args.asset_manifest,args.asset_directory,args.workspace)
         print(json.dumps(result))

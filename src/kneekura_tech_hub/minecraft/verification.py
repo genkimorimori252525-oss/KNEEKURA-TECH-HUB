@@ -22,18 +22,127 @@ IDENTITY_FIELDS = ('schema_version', 'run_id', 'session_epoch', 'profile_id', 'i
 EVIDENCE_LEVEL = 'IMPORTED_REPORT_NOT_LIVE_ATTESTATION'
 
 
+V2_COMMON_FIELDS = ('schema_version', 'session_role', 'run_id', 'session_epoch', 'profile_id',
+                    'index_snapshot_id', 'build_artifact_hash', 'source_revision', 'dirty_hash',
+                    'scenario_hash', 'assertion_hash', 'config_hash', 'physical_side', 'logical_side',
+                    'adapter_id', 'adapter_version', 'connection_policy_hash',
+                    'runtime_scope', 'dependency_inventory_hash')
+V2_ROLE_FIELDS = {
+    'dedicated_server': ('world_id', 'world_template_hash', 'world_seed'),
+    'dedicated_client': ('run_directory_id', 'run_directory_template_hash', 'server_contract_hash', 'player_uuid'),
+}
+
+
+INTEGRATED_FIELDS = IDENTITY_FIELDS + ('session_role', 'runtime_scope', 'dependency_inventory_hash', 'target_selection_hash')
+INTEGRATED_FORBIDDEN = ('connection_policy', 'connection_policy_hash', 'server_contract', 'server_contract_hash',
+                        'player_uuid', 'run_directory_id', 'run_directory_template_hash')
+
+
+def identity_fields(contract: dict) -> tuple[str, ...]:
+    """Select identity authority by exact schema/role; v1 remains unchanged."""
+    if not isinstance(contract, dict) or type(contract.get('schema_version')) is not int:
+        raise ContractError('Contract schema_version must be an integer')
+    if contract['schema_version'] == 1:
+        if any(k in contract for k in ('session_role', 'connection_policy_hash', 'runtime_scope', 'dependency_inventory_hash', 'target_selection_hash', *V2_ROLE_FIELDS['dedicated_client'])):
+            raise ContractError('Dedicated role fields cannot use schema1 identity')
+        return IDENTITY_FIELDS
+    if contract['schema_version'] == 2 and isinstance(contract.get('session_role'), str) and contract['session_role'] in V2_ROLE_FIELDS:
+        return V2_COMMON_FIELDS + V2_ROLE_FIELDS[contract['session_role']]
+    if contract['schema_version'] == 3 and contract.get('session_role') == 'integrated_client':
+        return INTEGRATED_FIELDS
+    raise ContractError('Unsupported contract schema/role')
+
+
+def _canonical_uuid(value):
+    if not isinstance(value, str): raise ContractError('Canonical player UUID required')
+    try: normalized = str(uuid.UUID(value))
+    except ValueError: raise ContractError('Canonical player UUID required') from None
+    if value != normalized: raise ContractError('Canonical player UUID required')
+    return value
+
+
+def validate_connection_policy(value: object) -> dict:
+    if (not isinstance(value, dict) or set(value) != {'host', 'port', 'player_uuids'}
+            or value['host'] != '127.0.0.1' or type(value['port']) is not int
+            or not 1 <= value['port'] <= 65535 or not isinstance(value['player_uuids'], list)
+            or not 1 <= len(value['player_uuids']) <= 2):
+        raise ContractError('Explicit bounded literal-loopback connection policy required')
+    players = [_canonical_uuid(player) for player in value['player_uuids']]
+    if len(set(players)) != len(players): raise ContractError('Distinct selected player UUIDs required')
+    return {'host': '127.0.0.1', 'port': value['port'], 'player_uuids': players}
+
+
+def validate_connection(contract: dict, value: object) -> dict:
+    role = contract.get('session_role')
+    if type(contract.get('schema_version')) is not int or contract['schema_version'] != 2 or not isinstance(role, str) or role not in V2_ROLE_FIELDS:
+        raise ContractError('Dedicated contract required for connection validation')
+    policy = validate_connection_policy(contract.get('connection_policy'))
+    if key_for(policy) != contract.get('connection_policy_hash'):
+        raise ContractError('Connection policy differs from its captured hash')
+    if (not isinstance(value, dict) or set(value) != {'player_uuid', 'connected', 'memory', 'channel_id', 'local', 'remote'}
+            or value['connected'] is not True or value['memory'] is not False
+            or not isinstance(value['channel_id'], str) or not 1 <= len(value['channel_id']) <= 256):
+        raise ContractError('Current bounded non-memory player connection required')
+    player = _canonical_uuid(value['player_uuid'])
+    if player not in policy['player_uuids'] or role == 'dedicated_client' and player != contract.get('player_uuid'):
+        raise ContractError('Connection belongs to an unselected player')
+    endpoints = {}
+    for key in ('local', 'remote'):
+        endpoint = value[key]
+        if (not isinstance(endpoint, dict) or set(endpoint) != {'host', 'port'}
+                or endpoint['host'] != '127.0.0.1' or type(endpoint['port']) is not int
+                or not 1 <= endpoint['port'] <= 65535):
+            raise ContractError('Exact literal-loopback TCP endpoints required')
+        endpoints[key] = dict(endpoint)
+    server_end = 'remote' if role == 'dedicated_client' else 'local'
+    if endpoints[server_end]['port'] != policy['port']:
+        raise ContractError('Connection port differs from registered server policy')
+    return dict(value, **endpoints)
+
+
 def _identity_errors(contract: dict, report: dict) -> list[str]:
     actual = report.get('identity', {})
     if not isinstance(actual, dict): return ['Report identity is not an object']
+    try: fields = identity_fields(contract)
+    except ContractError as exc: return [str(exc)]
     errors = []
-    for key in IDENTITY_FIELDS:
+    for key in fields:
         value = contract.get(key)
         if value is None or value == '' or type(actual.get(key)) is not type(value) or actual.get(key) != value:
             errors.append(f'Identity missing/mismatch: {key}')
-    if type(contract.get('schema_version')) is not int or contract['schema_version'] != 1:
-        errors.append('Contract schema_version must be integer 1')
-    for key in ('profile_id', 'index_snapshot_id', 'build_artifact_hash', 'dirty_hash',
-                'scenario_hash', 'assertion_hash', 'world_template_hash', 'config_hash'):
+    v2 = contract['schema_version'] == 2
+    integrated = contract['schema_version'] == 3
+    role = contract.get('session_role')
+    if integrated:
+        if (contract.get('physical_side') != 'client' or contract.get('logical_side') != 'server'
+                or contract.get('runtime_scope') != 'TARGET_CODE_AND_DEPENDENCY_BYTES'
+                or any(k in contract or k in actual for k in INTEGRATED_FORBIDDEN)):
+            errors.append('Invalid integrated-client scope or foreign dedicated authority')
+    elif v2:
+        if 'target_selection_hash' in contract or 'target_selection_hash' in actual:
+            errors.append('Integrated target selection requires schema3')
+        if contract.get('runtime_scope') != 'TARGET_CODE_AND_DEPENDENCY_BYTES':
+            errors.append('Explicit target-code/dependency-byte runtime scope required')
+        forbidden = V2_ROLE_FIELDS['dedicated_server' if role == 'dedicated_client' else 'dedicated_client']
+        if any(key in contract or key in actual for key in forbidden):
+            errors.append('Foreign role identity fields are forbidden')
+        side = 'client' if role == 'dedicated_client' else 'server'
+        if contract.get('physical_side') != side or contract.get('logical_side') != side:
+            errors.append('Dedicated physical/logical side mismatch')
+        if 'connection_policy' in contract:
+            try:
+                policy = validate_connection_policy(contract['connection_policy'])
+                if key_for(policy) != contract.get('connection_policy_hash'):
+                    errors.append('Connection policy hash mismatch')
+                if role == 'dedicated_client' and contract.get('player_uuid') not in policy['player_uuids']:
+                    errors.append('Client player is outside connection policy')
+            except ContractError as exc: errors.append(str(exc))
+    elif any(key in actual for key in ('session_role', 'connection_policy_hash', 'runtime_scope', 'dependency_inventory_hash', 'target_selection_hash', *V2_ROLE_FIELDS['dedicated_client'])):
+        errors.append('Dedicated identity fields cannot be appended to schema1')
+    hashes = ['profile_id', 'index_snapshot_id', 'build_artifact_hash', 'dirty_hash', 'scenario_hash', 'assertion_hash', 'config_hash']
+    hashes += ['connection_policy_hash', 'dependency_inventory_hash'] if v2 else ['dependency_inventory_hash', 'target_selection_hash'] if integrated else []
+    hashes += ['run_directory_template_hash', 'server_contract_hash'] if role == 'dedicated_client' else ['world_template_hash']
+    for key in hashes:
         try: valid_hash(contract.get(key))
         except ContractError: errors.append(f'Unpinned identity: {key}')
     revision = contract.get('source_revision')
@@ -41,17 +150,29 @@ def _identity_errors(contract: dict, report: dict) -> list[str]:
         errors.append('Unpinned source_revision')
     for key in ('physical_side', 'logical_side'):
         if contract.get(key) not in ('client', 'server'): errors.append(f'Unresolved side: {key}')
-    seed = contract.get('world_seed')
-    if type(seed) is not int or not -(2**63) <= seed < 2**63:
-        errors.append('world_seed must be an exact signed 64-bit integer')
-    for key in ('run_id', 'session_epoch', 'world_id', 'adapter_id', 'adapter_version'):
+    if role == 'dedicated_client':
+        try: _canonical_uuid(contract.get('player_uuid'))
+        except ContractError as exc: errors.append(str(exc))
+    else:
+        seed = contract.get('world_seed')
+        if type(seed) is not int or not -(2**63) <= seed < 2**63:
+            errors.append('world_seed must be an exact signed 64-bit integer')
+    for key in ('run_id', 'session_epoch', 'adapter_id', 'adapter_version',
+                'run_directory_id' if role == 'dedicated_client' else 'world_id'):
         if not isinstance(contract.get(key), str) or not contract[key]:
             errors.append(f'Unresolved identity: {key}')
     return errors
 
 
 def _result(contract: dict, outcome: str, reasons: list[str], *, status: str = 'OK', **extra) -> dict:
-    return {'schema_version': 1, 'status': status, 'outcome': outcome, 'reasons': reasons,
+    scope = ({'runtime_scope': contract.get('runtime_scope'),
+              'dependency_inventory_hash': contract.get('dependency_inventory_hash'),
+              'target_coverage': 'TARGET_CODE',
+              'dependency_coverage': 'RESOLVED_BYTES_IDENTITY_ONLY',
+              'loaded_class_attestation': 'NOT_ESTABLISHED_BY_IDENTITY'}
+             if contract.get('schema_version') in (2,3) else {})
+    if contract.get('schema_version') == 3: scope['target_selection_hash'] = contract.get('target_selection_hash')
+    return {'schema_version': 1, 'status': status, 'outcome': outcome, 'reasons': reasons, **scope,
             'run_id': contract.get('run_id'), 'session_epoch': contract.get('session_epoch'),
             'profile_id': contract.get('profile_id'), 'index_snapshot_id': contract.get('index_snapshot_id'),
             'build_artifact_hash': contract.get('build_artifact_hash'),
@@ -206,7 +327,15 @@ def _finite_vector(value) -> bool:
 def evaluate_observation(contract: dict, observation: dict) -> dict:
     errors = _identity_errors(contract, observation)
     if errors: return _result(contract, 'BLOCKED', errors, status='STALE', atomic=False, results=[])
-    for name in ('server_tick', 'log_sequence'):
+    receiver = contract.get('session_role') == 'dedicated_client'
+    dedicated = contract.get('schema_version') == 2
+    required_intervals = ('client_tick', 'client_frame', 'log_sequence') if receiver else ('server_tick', 'log_sequence')
+    if receiver and (observation.get('observation_side') != 'logical_client'
+                     or observation.get('server_tick_start') is not None
+                     or observation.get('server_tick_end') is not None
+                     or observation.get('server_tick_scope') != 'NOT_LOCALLY_OBSERVED'):
+        errors.append('Receiving client cannot claim local server ticks or a server-side observation')
+    for name in required_intervals:
         start, end = observation.get(name + '_start'), observation.get(name + '_end')
         if type(start) is not int or type(end) is not int or start < 0 or end < start:
             errors.append(f'Missing/invalid {name} interval')
@@ -218,6 +347,11 @@ def evaluate_observation(contract: dict, observation: dict) -> dict:
         errors.append('No client rendering observation')
     entities = observation.get('entities')
     if not isinstance(entities, list): entities = []; errors.append('Entity list missing')
+    if receiver and len(entities) != 1: errors.append('Exactly one selected local player is required')
+    top_connection = None
+    if receiver:
+        try: top_connection = validate_connection(contract, observation.get('connection'))
+        except ContractError as exc: errors.append(str(exc))
     valid = []; seen = set()
     for entity in entities:
         try:
@@ -225,6 +359,11 @@ def evaluate_observation(contract: dict, observation: dict) -> dict:
             if not isinstance(identity[1], str) or not identity[1] or identity in seen:
                 raise ValueError('Duplicate/missing entity dimension identity')
             seen.add(identity)
+            if dedicated:
+                connected = validate_connection(contract, entity.get('connection'))
+                if connected['player_uuid'] != identity[0]: raise ValueError('Selected entity/connection UUID mismatch')
+                if receiver and (identity[0] != contract['player_uuid'] or connected != top_connection):
+                    raise ValueError('Receiving-client player or connection changed')
             if not _finite_vector(entity.get('position')) or not _finite_vector(entity.get('velocity')):
                 raise ValueError('Entity position/velocity missing or nonfinite')
             health = entity.get('health')
@@ -235,10 +374,12 @@ def evaluate_observation(contract: dict, observation: dict) -> dict:
             valid.append(entity)
         except (KeyError, ValueError, TypeError, AttributeError) as exc:
             errors.append(f'Invalid entity observation: {exc}')
+    extra = {'observation_side': 'logical_client', 'server_tick_scope': 'NOT_LOCALLY_OBSERVED'} if receiver else {}
     return _result(contract, 'NOT_RUN', errors, status='PARTIAL' if errors else 'OK',
-                   atomic=False, results=valid,
+                   atomic=False, results=valid, **extra,
                    observation_interval={k: observation.get(k) for k in ('server_tick_start', 'server_tick_end',
-                       'client_frame_start', 'client_frame_end', 'log_sequence_start', 'log_sequence_end')},
+                       'client_frame_start', 'client_frame_end', 'log_sequence_start', 'log_sequence_end',
+                       *(['client_tick_start', 'client_tick_end'] if receiver else []))},
                    note='A captured observation is not itself a behavioral assertion pass')
 
 
@@ -268,15 +409,35 @@ def evaluate_operation_receipt(contract: dict, receipt: dict, *,
                    assertion_domain='command_execution')
 
 
-def validation_plan(kind: str, registry: dict, *, world: str | None = None) -> dict:
+def validation_plan(kind: str, registry: dict, *, world: str | None = None, run_directory: str | None = None) -> dict:
     """Read a caller-supplied trusted registry; do not execute or change its budget."""
-    tasks = {'compile': 'build', 'unit': 'test', 'gametest': 'runGameTestServer', 'client': 'runClient'}
+    tasks = {'compile': 'build', 'unit': 'test', 'gametest': 'runGameTestServer', 'client': 'runClient', 'server': 'runServer'}
     if kind not in tasks: raise ContractError('Unknown validation kind')
     result = {'schema_version': 1, 'status': 'OK', 'outcome': 'NOT_RUN', 'kind': kind,
               'argv': None, 'reasons': [], 'delegated_to': 'registered_existing_runner'}
     workspace = registry.get('workspace')
     if not isinstance(workspace, str) or not Path(workspace).is_dir():
         return dict(result, outcome='BLOCKED', reasons=['Registered workspace unavailable'])
+    if (kind in ('gametest', 'client', 'server') and registry.get('runtime_role') is not None
+            or kind == 'server' or run_directory is not None):
+        from .runtime import dedicated_registry
+        from .execution import _registry, _owned_world, _owned_client_directory
+        try:
+            role, _ = dedicated_registry(registry)
+            root, _ = _registry(registry, kind)
+            if type(registry.get('remaining_launches')) is not int or registry['remaining_launches'] < 1:
+                raise ContractError('No remaining explicitly permitted game launches')
+            if kind == 'server' and role == 'dedicated_server' and run_directory is None:
+                _owned_world(root, world, layout='server')
+            elif kind == 'client' and role == 'integrated_client' and run_directory is None:
+                _owned_world(root, world, layout='client')
+            elif kind == 'client' and role == 'dedicated_client' and world is None:
+                _owned_client_directory(root, run_directory)
+            else: raise ContractError('Dedicated role/owned path differs from launch kind')
+        except (ContractError, OSError) as exc:
+            return dict(result, outcome='BLOCKED', reasons=[str(exc)])
+        wrapper = str(root / ('gradlew.bat' if os.name == 'nt' else 'gradlew'))
+        return dict(result, argv=[wrapper, tasks[kind]], workspace=str(root), world=world, run_directory=run_directory)
     if kind in ('gametest', 'client'):
         allowed = registry.get('test_worlds', [])
         budget = registry.get('remaining_launches')

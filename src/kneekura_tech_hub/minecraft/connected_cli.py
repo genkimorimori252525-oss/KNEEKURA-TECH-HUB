@@ -67,17 +67,26 @@ def add_commands(commands, profile):
     p.add_argument('--template', required=True); p.add_argument('--request-id', required=True)
     p.add_argument('--world-name', default='gametestserver')
     p.add_argument('--layout', choices=('server', 'client'), default='server')
+    directory = commands.add_parser('client-directory').add_subparsers(dest='action', required=True)
+    p = directory.add_parser('prepare'); p.add_argument('--registry', required=True)
+    p.add_argument('--template', required=True); p.add_argument('--request-id', required=True)
     s = commands.add_parser('session').add_subparsers(dest='action', required=True)
     p = s.add_parser('create'); p.add_argument('--registry', required=True)
     p.add_argument('--contract', required=True); p.add_argument('--directory', required=True)
     c = commands.add_parser('contract').add_subparsers(dest='action', required=True)
     p = c.add_parser('prepare'); p.add_argument('--registry', required=True)
-    p.add_argument('--index', required=True); p.add_argument('--world', required=True)
+    p.add_argument('--index', required=True)
+    owned = p.add_mutually_exclusive_group(required=True)
+    owned.add_argument('--world'); owned.add_argument('--run-directory')
     p.add_argument('--scenario', required=True); p.add_argument('--output')
     i = commands.add_parser('input').add_subparsers(dest='action', required=True)
     p = i.add_parser('bind'); p.add_argument('--registry', required=True)
     p = i.add_parser('dispatch'); p.add_argument('--registry', required=True)
     p.add_argument('--binding', required=True); p.add_argument('--request', required=True)
+    p = commands.add_parser('observe-pair')
+    p.add_argument('--server-session', required=True); p.add_argument('--client-session', required=True)
+    p.add_argument('--player-uuid', required=True); p.add_argument('--dimension', default='minecraft:overworld')
+    p.add_argument('--timeout', type=float, default=10); p.add_argument('--screenshot', action='store_true')
     commands.add_parser('capabilities')
 
 
@@ -163,6 +172,14 @@ def dispatch(args, store: Store, read_json, parse_json):
     if args.command == 'world':
         return execution.prepare_world(store, read_json(args.registry), template=args.template,
                                         request_id=args.request_id, world_name=args.world_name, layout=args.layout)
+    if args.command == 'client-directory':
+        return execution.prepare_client_directory(store, read_json(args.registry), template=args.template,
+                                                  request_id=args.request_id)
+    if args.command == 'observe-pair':
+        from .runtime_pair import observe_pair
+        return observe_pair(store, server_session=args.server_session, client_session=args.client_session,
+                            player_uuid=args.player_uuid, dimension=args.dimension,
+                            timeout=args.timeout, screenshot=args.screenshot)
     if args.command == 'session':
         session = runtime.create_session(store, read_json(args.registry), read_json(args.contract),
                                           directory=Path(args.directory))
@@ -174,7 +191,7 @@ def dispatch(args, store: Store, read_json, parse_json):
         from .contracts import prepare_contract
         from .storage import atomic_write, canonical
         result = prepare_contract(store, read_json(args.registry), index_id=args.index,
-                                  world=args.world, scenario=read_json(args.scenario))
+                                  world=args.world, run_directory=args.run_directory, scenario=read_json(args.scenario))
         if args.output: atomic_write(Path(args.output), canonical(result['contract']))
         return result
     if args.command == 'input':
@@ -185,7 +202,7 @@ def dispatch(args, store: Store, read_json, parse_json):
     if args.command == 'capabilities':
         return {'status': 'OK', 'adapter_version': runtime.ADAPTER_VERSION,
                 'operations': ['profile', 'search', 'inspect', 'mapping', 'interventions', 'relations',
-                               'context', 'knowledge', 'artifact', 'validate', 'world', 'contract', 'session', 'observe', 'input'],
+                               'context', 'knowledge', 'artifact', 'validate', 'world', 'client-directory', 'contract', 'session', 'observe', 'observe-pair', 'input'],
                 'execution_policy': 'EXPLICIT_REGISTERED_PROVIDERS_ONLY', 'ci_used': False,
                 'runtime_status': 'NOT_PROBED', 'core_status': 'OPTIONAL_EXISTING_CORE',
                 'note': 'Command availability is not evidence of installed tools or successful Forge integration'}

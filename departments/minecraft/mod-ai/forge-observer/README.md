@@ -13,3 +13,5 @@ Command outcomes use Brigadier success callbacks, not numerical result positivit
 An empty Forge test world needs explicit server.properties seed/name settings compatible with its contract; Main normalizes that file at startup. PrefixGameTestTemplate(false) in Forge1.20.1 affects exact test IDs as well as templates. A capped all-entity sample is not a complete world inventory: use exact entity UUID/dimension when asserting about one fixture entity.
 
 Client-thread screenshot scheduling, rendering/network correctness, Windows process behavior and general MOD performance remain unverified. See [live verification](../LIVE-VERIFICATION-2026-09-28.md) for precise evidence and [implementation status](../IMPLEMENTATION-STATUS.md) for the remaining product work.
+
+The schema-2 dedicated receiver and scoped dependency-byte contract are described in [dedicated observation](DEDICATED-OBSERVATION.md). That document distinguishes implementation/fixture checks from live acceptance; it does not replace the historical run above.

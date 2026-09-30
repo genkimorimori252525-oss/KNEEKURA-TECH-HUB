@@ -83,8 +83,10 @@ process-start/window binding, session-owned replay/quarantine ledger, screenshot
 log evidence route and explicit client save layout are implemented and fixture
 tested. The observer compiles against actual Forge/Java17. A bounded live Linux
 client pilot now verifies authenticated input/capture, Glowing/cooldown and
-inventory/first-person views. Third-person was occluded; remaining visual checks
-were handed to the user, with no further launch authorized. Windows input is
+inventory/first-person views. That historical third-person view was occluded. The subsequent continuation
+implements dedicated receiving-client contracts, independent state/packet
+evidence, fixed control/repeat/expiry checks and a scoped integrated Hydra route;
+its new bounded live results must be recorded separately. Windows input is
 unsupported, not silently treated as covered by Linux. Native/X server failure can leave release UNKNOWN and is
 quarantined rather than retried.
 

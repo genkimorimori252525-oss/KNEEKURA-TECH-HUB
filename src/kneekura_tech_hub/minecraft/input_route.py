@@ -16,7 +16,7 @@ import time
 
 from . import input_contract, native_input, runtime
 from .storage import ContractError, Store, atomic_write, canonical, digest, key_for, valid_hash
-from .verification import IDENTITY_FIELDS, _identity_errors
+from .verification import identity_fields, _identity_errors, validate_connection
 
 _REGISTRY_FIELDS = {'schema_version', 'backend', 'enabled', 'session_file', 'display',
                     'allowed_controls', 'timeout_seconds'}
@@ -53,8 +53,11 @@ def _registry(registry):
 def _capture(store, registry, contract, deadline, *, operation='client'):
     remaining = deadline-time.monotonic()
     if remaining <= 0: raise ContractError('Input observation deadline expired')
+    query = {'screenshot':True} if operation == 'client' else {}
+    if operation == 'client' and contract.get('session_role') == 'dedicated_client':
+        query.update(entity_uuids=[contract['player_uuid']], limit=1, staff_state=True)
     result = runtime.observe_live(store, registry['session_file'], operation=operation,
-                   query={'screenshot':True} if operation == 'client' else {}, timeout=min(remaining, 5))
+                   query=query, timeout=min(remaining, 5))
     if (result.get('evidence_level') != 'AUTHENTICATED_LIVE_OBSERVER'
             or result.get('status') != 'OK'):
         raise ContractError('Authenticated same-run observer capture required')
@@ -91,11 +94,15 @@ def bind(store: Store, registry: dict):
     native = native_input.native_exchange(registry['display'], target, deadline=deadline)
     if native != {'client_size':target['client_size'], 'foreground':True}:
         raise ContractError('Native target differs from authenticated observer scope')
-    identity = {k:contract[k] for k in IDENTITY_FIELDS}
-    target_id = 'x11:'+key_for({'identity':identity, 'native':target})
+    identity = {k:contract[k] for k in identity_fields(contract)}
+    scope = {'identity':identity, 'native':target}
+    if contract.get('session_role') == 'dedicated_client':
+        scope['connection'] = validate_connection(contract, raw.get('connection'))
+    target_id = 'x11:'+key_for(scope)
     record = {'schema_version':1, 'kind':'native-input-binding', 'backend':native_input.BACKEND_ID,
               'registry_hash':key_for(registry), 'identity':identity, 'target':target,
               'target_id':target_id, 'evidence':evidence}
+    if 'connection' in scope: record['connection'] = scope['connection']
     h = store.put_json(record); store.pin(h, 'input-binding:'+contract['run_id'])
     return {'status':'OK', 'outcome':'NOT_RUN', 'binding_hash':h, 'target_id':target_id,
             'identity':identity, 'backend':native_input.BACKEND_ID,
@@ -116,6 +123,10 @@ class LinuxX11Backend:
         # even though it cannot authorize input or establish success.
         self.observations.append(evidence)
         target = _target(raw)
+        if self.contract.get('session_role') == 'dedicated_client':
+            connection = validate_connection(self.contract, raw.get('connection'))
+            if connection != self.binding.get('connection'):
+                raise ContractError('Bound receiving-client connection changed')
         if target != self.binding['target']: raise ContractError('Bound native target changed')
         current = native_input.native_exchange(self.registry['display'], target, deadline=deadline)
         if current != {'client_size':target['client_size'], 'foreground':True}:

@@ -10,11 +10,10 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.level.storage.LevelResource;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -34,6 +33,7 @@ import java.security.MessageDigest;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.function.Function;
 
 /** Opt-in, development-only Forge 1.20.1 observer. Never include in a release MOD. */
 @Mod(ForgeObserver.MOD_ID)
@@ -47,54 +47,124 @@ public final class ForgeObserver {
     private MinecraftServer server;
     private BridgeTransport transport;
     private JsonObject session, identity;
-    private boolean ready=false;
+    private volatile boolean ready=false;
+    private boolean reporterInstalled=false;
+    private String role="legacy";
+    private DependencyInventory dependencyInventory;
+    private Function<JsonObject,CompletableFuture<JsonObject>> receiverCapture;
     private String token;
     private Path directory;
 
     public ForgeObserver() {
-        if (!FMLEnvironment.production && System.getProperty("kneekura.session")!=null)
+        if (!FMLEnvironment.production && System.getProperty("kneekura.session")!=null) {
             MinecraftForge.EVENT_BUS.register(this);
+            if(FMLEnvironment.dist==Dist.CLIENT) {
+                try {
+                    if(DedicatedSession.role(readSession().getAsJsonObject("contract")).equals("dedicated_client"))
+                        Class.forName("org.kneekura.observer.DedicatedClientObserver").getMethod("install",ForgeObserver.class).invoke(null,this);
+                } catch(Exception failure) {failed(failure);}
+            }
+        }
+    }
+
+    private JsonObject readSession() throws Exception {
+        Path file=Path.of(System.getProperty("kneekura.session")).toAbsolutePath().normalize();
+        require(!Files.isSymbolicLink(file) && Files.isRegularFile(file) && Files.size(file)<=4*1024*1024,"Invalid session file");
+        JsonObject value=JsonParser.parseString(Files.readString(file)).getAsJsonObject();
+        Path supplied=Path.of(value.get("directory").getAsString());
+        require(supplied.isAbsolute() && !Files.isSymbolicLink(supplied) && supplied.equals(supplied.toRealPath()),"Invalid canonical session directory");
+        require(file.equals(supplied.resolve("session.json")),"Wrong session directory/name");
+        return value;
+    }
+
+    private void initialize() throws Exception {
+        session=readSession(); directory=Path.of(session.get("directory").getAsString()).toRealPath();
+        token=session.get("token").getAsString(); identity=session.getAsJsonObject("contract").deepCopy();
+        role=DedicatedSession.role(identity); DedicatedSession.session(session,identity);
+        // Claim the epoch before any reporter/transport side effect, including failed startup.
+        Files.createFile(directory.resolve(".session-started"));
+        JsonObject expected=session.getAsJsonObject("expected_runtime");
+        require(expected.get("minecraft").getAsString().equals(SharedConstants.getCurrentVersion().getName()),"Minecraft version mismatch");
+        require(expected.get("forge").getAsString().equals(FMLLoader.versionInfo().forgeVersion()),"Forge version mismatch");
+        require(Runtime.version().feature()==17,"Observer requires game JVM17");
+        require(identity.get("adapter_id").getAsString().equals("kneekura-forge-observer") && identity.get("adapter_version").getAsString().equals("1.0.0"),"Observer version mismatch");
+        require(identity.get("physical_side").getAsString().equals(FMLEnvironment.dist==Dist.CLIENT?"client":"server"),"Physical side mismatch");
+        require(checkConfig().equals(identity.get("config_hash").getAsString()),"Configuration file mismatch");
+        verifyBuild();
+        dependencyInventory=DependencyInventory.verify(session,identity);
+        if(role.equals("integrated_client"))TargetDependency.verify(session,identity,dependencyInventory,getClass().getClassLoader());
+    }
+
+    private void activate() throws Exception {
+        transport=new BridgeTransport(token,identity.get("run_id").getAsString(),identity.get("session_epoch").getAsString(),this::request);
+        ready=true;
+        int port=transport.start();
+        JsonObject endpoint=new JsonObject();endpoint.addProperty("url","http://127.0.0.1:"+port);
+        endpoint.addProperty("session_epoch",identity.get("session_epoch").getAsString());
+        write(directory.resolve("endpoint.json"),JSON.toJson(endpoint));
+        log(role.equals("integrated_client")?
+            "Observer ready; marker class resources verified against marker compile receipt; selected dependency resources verified against separate archive bytes":
+            "Observer ready; target class resources verified against compile receipt");
+    }
+
+    private JsonObject marker() throws Exception {
+        Path path=directory.resolve(".kneekura-run.json");
+        require(!Files.isSymbolicLink(path) && Files.isRegularFile(path) && Files.size(path)<=65536,"Invalid owned directory marker");
+        JsonObject m=JsonParser.parseString(Files.readString(path)).getAsJsonObject();
+        DedicatedSession.marker(m,identity,directory.toString());
+        return m;
     }
 
     @SubscribeEvent public void started(ServerStartedEvent event) {
-        server=event.getServer();
+        ready=false;if(transport!=null)transport.close();server=event.getServer();
         try {
-            Path file=Path.of(System.getProperty("kneekura.session")).toAbsolutePath().normalize();
-            if (Files.isSymbolicLink(file) || Files.size(file)>4*1024*1024) throw new IOException("Invalid session file");
-            session=JsonParser.parseString(Files.readString(file)).getAsJsonObject();
-            directory=Path.of(session.get("directory").getAsString()).toRealPath();
-            if (!file.getParent().toRealPath().equals(directory)) throw new IOException("Wrong session directory");
-            // A restart cannot resurrect an old epoch or replay a queued command.
-            Files.createFile(directory.resolve(".session-started"));
-            token=session.get("token").getAsString();
-            identity=session.getAsJsonObject("contract").deepCopy();
-            JsonObject expected=session.getAsJsonObject("expected_runtime");
-            require(expected.get("minecraft").getAsString().equals(SharedConstants.getCurrentVersion().getName()),"Minecraft version mismatch");
-            require(expected.get("forge").getAsString().equals(FMLLoader.versionInfo().forgeVersion()),"Forge version mismatch");
-            require(Runtime.version().feature()==17,"Observer requires game JVM17");
-            require(identity.get("adapter_id").getAsString().equals("kneekura-forge-observer") && identity.get("adapter_version").getAsString().equals("1.0.0"),"Observer version mismatch");
-            String side=FMLEnvironment.dist==Dist.CLIENT?"client":"server";
-            require(identity.get("physical_side").getAsString().equals(side),"Physical side mismatch");
+            initialize();
+            require(!role.equals("dedicated_client"),"Receiving client cannot start an integrated server");
             require(identity.get("logical_side").getAsString().equals("server"),"Logical side mismatch");
             require(server.overworld().getSeed()==identity.get("world_seed").getAsLong(),"World seed mismatch");
             Path actualWorld=server.getWorldPath(LevelResource.ROOT).toRealPath();
             require(actualWorld.equals(Path.of(session.get("world").getAsString()).toRealPath()),"Not the prepared test world");
-            require(checkConfig().equals(identity.get("config_hash").getAsString()),"Configuration file mismatch");
-            verifyBuild();
-            if (FMLEnvironment.dist==Dist.CLIENT) Class.forName("org.kneekura.observer.ClientProbe").getMethod("install").invoke(null);
-            for (TestFunction test:GameTestRegistry.getAllTestFunctions()) ledger.detect(test.getTestName(),test.isRequired());
-            installReporter();
-            ready=true;
-            transport=new BridgeTransport(token,identity.get("run_id").getAsString(),identity.get("session_epoch").getAsString(),this::request);
-            int port=transport.start();
-            JsonObject endpoint=new JsonObject(); endpoint.addProperty("url","http://127.0.0.1:"+port);
-            endpoint.addProperty("session_epoch",identity.get("session_epoch").getAsString());
-            write(directory.resolve("endpoint.json"),JSON.toJson(endpoint));
-            log("Observer ready; target class resources verified against compile receipt");
-        } catch (Exception failure) {
-            ready=false;
-            org.slf4j.LoggerFactory.getLogger(MOD_ID).error("KNEEKURA observer not ready: {}",failure.toString());
-        }
+            if(role.equals("dedicated_server")) {
+                verifyServerEndpoint(); JsonObject m=marker();
+                require(Path.of(DedicatedSession.string(m,"world")).toRealPath().equals(actualWorld),"Server marker world mismatch");
+            }
+            if(role.equals("integrated_client")) {
+                require(!server.isDedicatedServer() && FMLEnvironment.dist==Dist.CLIENT,"Schema3 requires the owned integrated client world");
+                JsonObject m=marker();require(Path.of(DedicatedSession.string(m,"world")).toRealPath().equals(actualWorld),"Integrated marker world mismatch");
+                Class.forName("org.kneekura.observer.ClientProbe").getMethod("verifyDirectory",Path.class).invoke(null,directory);
+            }
+            if(FMLEnvironment.dist==Dist.CLIENT)Class.forName("org.kneekura.observer.ClientProbe").getMethod("install").invoke(null);
+            if(role.equals("legacy")) {
+                for(TestFunction test:GameTestRegistry.getAllTestFunctions())ledger.detect(test.getTestName(),test.isRequired());
+                installReporter(); reporterInstalled=true;
+            }
+            activate();
+        } catch(Exception failure) {failed(failure);}
+    }
+
+    private void verifyServerEndpoint() {
+        JsonObject policy=session.getAsJsonObject("connection_policy");
+        require(server!=null && server.isDedicatedServer(),"A real dedicated server is required");
+        require(server.getLocalIp().equals("127.0.0.1") && server.getPort()==DedicatedSession.integer(policy,"port",1,65535),"Server endpoint differs from fixed loopback policy");
+    }
+
+    // Called only by the reflectively installed physical-client listener.
+    void startReceiver(Path actualDirectory,Function<JsonObject,CompletableFuture<JsonObject>> capture) throws Exception {
+        initialize(); require(role.equals("dedicated_client"),"Dedicated receiving role required");
+        require(actualDirectory.toRealPath().equals(directory),"Actual client gameDirectory differs from prepared directory");
+        marker();
+        receiverCapture=capture; activate();
+    }
+    JsonObject receiverSession() throws Exception { return readSession(); }
+    JsonObject receiverBase() {return base();}
+    Path receiverDirectory() {return directory;}
+    long logSequence() {return sequence.get();}
+    boolean hasVerifiedStaffTrace() {return StaffTrace.enabled(session);}
+    JsonObject staffClientTrace() {return StaffTrace.capture(session);}
+    synchronized void invalidateReceiver(String reason) {ready=false;if(transport!=null)transport.close();log(reason);}
+    private void failed(Exception failure) {
+        ready=false;if(transport!=null)transport.close();
+        org.slf4j.LoggerFactory.getLogger(MOD_ID).error("KNEEKURA observer not ready: {}",failure.toString());
     }
 
     private static void require(boolean value,String message) { if (!value) throw new IllegalStateException(message); }
@@ -182,43 +252,21 @@ public final class ForgeObserver {
     }
     private synchronized void log(String text) {
         JsonObject record=new JsonObject(); record.addProperty("sequence",sequence.incrementAndGet()); record.addProperty("text",text);
-        record.addProperty("server_tick",server==null?0:server.getTickCount()); events.addLast(record); while(events.size()>256) events.removeFirst();
+        if(server==null)record.add("server_tick",JsonNull.INSTANCE);else record.addProperty("server_tick",server.getTickCount()); events.addLast(record); while(events.size()>256) events.removeFirst();
     }
     private JsonObject base() { JsonObject out=new JsonObject(); out.add("identity",identity.deepCopy()); return out; }
-    /** Read-only fixed-scenario fields, intentionally not a general NBT/inventory dump. */
-    private JsonObject staffState(Entity entity) {
-        JsonObject out=new JsonObject(); out.addProperty("schema_version",1);
-        out.addProperty("observation_side","logical_server");
-        if (!(entity instanceof Player player)) {
-            out.addProperty("applicable",false); out.addProperty("unavailable_reason","Selected entity is not a player");
-            return out;
-        }
-        out.addProperty("applicable",true);
-        var stack=player.getMainHandItem(); JsonObject hand=new JsonObject();
-        hand.addProperty("item",BuiltInRegistries.ITEM.getKey(stack.getItem()).toString());
-        hand.addProperty("count",stack.getCount()); hand.addProperty("damage",stack.getDamageValue()); out.add("main_hand",hand);
-        var effect=player.getEffect(MobEffects.GLOWING);
-        if (effect==null) out.add("glowing",JsonNull.INSTANCE);
-        else {
-            JsonObject glowing=new JsonObject(); glowing.addProperty("duration_ticks",effect.getDuration());
-            glowing.addProperty("amplifier",effect.getAmplifier()); out.add("glowing",glowing);
-        }
-        ResourceLocation staffId=new ResourceLocation("kneekura","celestial_staff"); JsonObject cooldown=new JsonObject();
-        cooldown.addProperty("item",staffId.toString()); boolean registered=BuiltInRegistries.ITEM.containsKey(staffId);
-        cooldown.addProperty("registered",registered);
-        if (registered) {
-            var item=BuiltInRegistries.ITEM.get(staffId);
-            cooldown.addProperty("active",player.getCooldowns().isOnCooldown(item));
-            cooldown.addProperty("fraction",player.getCooldowns().getCooldownPercent(item,0.0F));
-        } else {
-            cooldown.add("active",JsonNull.INSTANCE); cooldown.add("fraction",JsonNull.INSTANCE);
-            cooldown.addProperty("unavailable_reason","Celestial Staff item is not registered in this run");
-        }
-        out.add("staff_cooldown",cooldown); return out;
-    }
+    /** Read-only fixed-scenario fields, independent of any client capture. */
+    private JsonObject staffState(Entity entity) {return StaffStateCapture.capture(entity,"logical_server");}
     private JsonObject capture(JsonObject query) {
         boolean includeStaffState=StaffStateQuery.enabled(query);
-        JsonObject out=base(); long tick=server.getTickCount(); out.addProperty("server_tick_start",tick); out.addProperty("log_sequence_start",sequence.get());
+        if(role.equals("dedicated_server")) {
+            require(query.has("entity_uuids") && query.get("entity_uuids").isJsonArray() && query.getAsJsonArray("entity_uuids").size()==1,"Dedicated capture requires one explicit player");
+            String selected=query.getAsJsonArray("entity_uuids").get(0).getAsString();
+            DedicatedSession.selected(session.getAsJsonObject("connection_policy"),selected);
+            require(query.has("dimension"),"Dedicated capture requires explicit dimension");
+            DedicatedSession.query(query,selected,DedicatedSession.string(query,"dimension"));
+        }
+        JsonObject out=base(); if(role.equals("dedicated_server"))out.addProperty("observation_side","logical_server"); long tick=server.getTickCount(); out.addProperty("server_tick_start",tick); out.addProperty("log_sequence_start",sequence.get());
         int limit=query.has("limit")?query.get("limit").getAsInt():128; require(limit>=1 && limit<=256,"Entity limit out of bounds");
         Set<String> uuids=new HashSet<>(); if(query.has("entity_uuids")) for(JsonElement id:query.getAsJsonArray("entity_uuids")) uuids.add(UUID.fromString(id.getAsString()).toString());
         require(uuids.size()<=256,"Too many entity filters"); String dimension=query.has("dimension")?query.get("dimension").getAsString():null;
@@ -237,6 +285,13 @@ public final class ForgeObserver {
                 if(entity instanceof LivingEntity living) row.addProperty("health",living.getHealth()); else row.add("health",JsonNull.INSTANCE);
                 if(entity instanceof Mob mob && mob.getTarget()!=null) row.addProperty("target_uuid",mob.getTarget().getUUID().toString()); else row.add("target_uuid",JsonNull.INSTANCE);
                 if(includeStaffState) row.add("staff_state",staffState(entity));
+                if(role.equals("dedicated_server")) {
+                    require(entity instanceof ServerPlayer,"Dedicated selected entity must be a connected player");
+                    var connection=((ServerPlayer)entity).connection.connection; var channel=connection.channel();
+                    require(channel!=null && channel.isActive(),"Player channel is unavailable");
+                    row.add("connection",DedicatedSession.connection(session.getAsJsonObject("connection_policy"),entity.getUUID().toString(),false,
+                        connection.isConnected(),connection.isMemoryConnection(),channel.id().asLongText(),channel.localAddress(),channel.remoteAddress()));
+                }
                 entities.add(row);
             }
         }
@@ -258,13 +313,23 @@ public final class ForgeObserver {
         out.addProperty("config_observation","Explicit registered files, not every in-memory Forge config value"); return out;
     }
 
+    private void checkDependencyIdentity() throws Exception {
+        try { require(dependencyInventory!=null,"Dependencies have not been verified"); dependencyInventory.checkUnchanged(); }
+        catch(Exception changed) { ready=false; throw changed; }
+    }
+
     private String request(String path,String body,String nonce) throws Exception {
-        require(ready,"Observer not ready"); JsonObject query=JsonParser.parseString(body).getAsJsonObject();
+        require(ready,"Observer not ready"); checkDependencyIdentity();
+        JsonObject query=JsonParser.parseString(body).getAsJsonObject();
+        if(role.equals("dedicated_client")) return receiverRequest(path,query);
+        if(role.equals("dedicated_server"))verifyServerEndpoint();
         if(path.equals("/v1/handshake")) {
             JsonObject out=base(); out.addProperty("ready",ready); out.addProperty("minecraft",SharedConstants.getCurrentVersion().getName());
             out.addProperty("forge",FMLLoader.versionInfo().forgeVersion()); out.addProperty("java_major",Runtime.version().feature());
-            out.addProperty("class_identity_scope","Target resource bytes match build; post-transform memory is not attested");
-            out.add("capabilities",JSON.toJsonTree(List.of("entities","blocks","logs","registered_commands","gametest_report",FMLEnvironment.dist==Dist.CLIENT?"client_capture":"server_only")));
+            out.addProperty("class_identity_scope",role.equals("integrated_client")?
+                "Marker resource bytes match marker build; selected dependency resource bytes match its separate archive; post-transform memory is not attested":
+                "Target resource bytes match build; post-transform memory is not attested");
+            out.add("capabilities",JSON.toJsonTree(role.equals("dedicated_server")?List.of("entities","logs","registered_commands","dedicated_server"):List.of("entities","blocks","logs","registered_commands","gametest_report",FMLEnvironment.dist==Dist.CLIENT?"client_capture":"server_only")));
             return JSON.toJson(out);
         }
         require(checkConfig().equals(identity.get("config_hash").getAsString()),"Config changed during run");
@@ -307,17 +372,41 @@ public final class ForgeObserver {
         JsonObject out=server.submit(()->capture(query)).get(5,TimeUnit.SECONDS);
         if(path.equals("/v1/client")) {
             require(FMLEnvironment.dist==Dist.CLIENT,"Client renderer is unavailable on dedicated server");
-            @SuppressWarnings("unchecked") CompletableFuture<JsonObject> image=(CompletableFuture<JsonObject>)Class.forName("org.kneekura.observer.ClientProbe").getMethod("capture",Path.class,boolean.class).invoke(null,directory,query.has("screenshot") && query.get("screenshot").getAsBoolean());
+            boolean screenshot=query.has("screenshot") && query.get("screenshot").getAsBoolean();
+            Class<?> probe=Class.forName("org.kneekura.observer.ClientProbe");
+            Object pending=role.equals("integrated_client")?
+                probe.getMethod("capture",Path.class,boolean.class,JsonObject.class,JsonObject.class).invoke(null,directory,screenshot,session.deepCopy(),query.deepCopy()):
+                probe.getMethod("capture",Path.class,boolean.class).invoke(null,directory,screenshot);
+            @SuppressWarnings("unchecked") CompletableFuture<JsonObject> image=(CompletableFuture<JsonObject>)pending;
             JsonObject client=image.get(10,TimeUnit.SECONDS); for(var entry:client.entrySet()) out.add(entry.getKey(),entry.getValue());
             out.addProperty("server_tick_end",server.submit(()->server.getTickCount()).get(5,TimeUnit.SECONDS));
         }
         return JSON.toJson(out);
     }
 
+    private String receiverRequest(String path,JsonObject query) throws Exception {
+        require(Set.of("/v1/handshake","/v1/observe","/v1/client","/v1/logs").contains(path),"Receiving observer is read-only");
+        require(checkConfig().equals(identity.get("config_hash").getAsString()),"Config changed during run");
+        JsonObject current=receiverCapture.apply(path.equals("/v1/client") || path.equals("/v1/observe")?query:new JsonObject()).get(5,TimeUnit.SECONDS);
+        require(ready,"Receiving session was invalidated");
+        if(path.equals("/v1/handshake")) {
+            JsonObject out=base();out.addProperty("ready",true);out.addProperty("minecraft",SharedConstants.getCurrentVersion().getName());
+            out.addProperty("forge",FMLLoader.versionInfo().forgeVersion());out.addProperty("java_major",Runtime.version().feature());
+            out.addProperty("class_identity_scope","Target resource bytes match build; post-transform memory is not attested");
+            out.add("capabilities",JSON.toJsonTree(List.of("entities","logs","client_capture","dedicated_client")));
+            out.add("connection",current.get("connection").deepCopy());return JSON.toJson(out);
+        }
+        if(path.equals("/v1/logs")) {
+            JsonObject out=base();JsonArray records=new JsonArray();synchronized(this){for(JsonObject e:events)records.add(e.deepCopy());}
+            out.add("logs",records);out.addProperty("sequence_end",sequence.get());out.addProperty("retention",256);return JSON.toJson(out);
+        }
+        return JSON.toJson(current);
+    }
+
     @SubscribeEvent public void tick(TickEvent.ServerTickEvent event) {
         if(ready && event.phase==TickEvent.Phase.END && server.getTickCount()%200==0) log("Server tick "+server.getTickCount());
     }
     @SubscribeEvent public void stopping(ServerStoppingEvent event) {
-        if(identity!=null) saveReport(); ready=false; if(transport!=null) transport.close();
+        if(identity!=null && reporterInstalled) saveReport(); ready=false; if(transport!=null) transport.close();
     }
 }

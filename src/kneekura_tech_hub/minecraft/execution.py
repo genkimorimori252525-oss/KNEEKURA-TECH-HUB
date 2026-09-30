@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import shutil
 import time
 import xml.etree.ElementTree as ET
@@ -17,7 +18,7 @@ from .storage import Store, ContractError, atomic_write, canonical, digest, key_
 from .workspace import _workspace, file_hash, workspace_fingerprint, configuration_fingerprint, _inputs
 from .verification import evaluate_scenario_tests
 
-TASKS={'compile':'build','unit':'test','gametest':'runGameTestServer','client':'runClient','export':'kneekuraExportInputs'}
+TASKS={'compile':'build','unit':'test','gametest':'runGameTestServer','client':'runClient','server':'runServer','export':'kneekuraExportInputs'}
 
 
 def _file(root, value):
@@ -44,7 +45,8 @@ def _registry(registry,kind):
 
 def _tree(template):
     rows=[]; total=0
-    for base,dirs,files in os.walk(template,followlinks=False):
+    def unreadable(error): raise ContractError('Unreadable test template directory') from error
+    for base,dirs,files in os.walk(template,followlinks=False,onerror=unreadable):
         dirs.sort(); files.sort()
         for name in dirs+files:
             if (Path(base)/name).is_symlink(): raise ContractError('Symlinks are not supported in test world templates')
@@ -96,6 +98,68 @@ def prepare_world(store: Store,registry: dict,*,template: str,request_id: str,
     return dict(status='OK',**marker,marker_hash=h)
 
 
+_CLIENT_RESERVED = {'.kneekura-run.json', 'session.json', 'endpoint.json', '.session-started', '.input-attempts'}
+
+
+def prepare_client_directory(store: Store, registry: dict, *, template: str, request_id: str):
+    """Copy an explicitly registered local game directory; no world or connection is inferred."""
+    root = _workspace(registry.get('workspace')); _request(request_id)
+    source = Path(template)
+    if (source.is_symlink() or not source.is_dir()
+            or str(source.resolve()) not in {str(Path(x).resolve()) for x in registry.get('client_templates', [])}):
+        raise ContractError('Client directory template is not registered')
+    if any((source / name).exists() or (source / name).is_symlink() for name in _CLIENT_RESERVED):
+        raise ContractError('Client template must not contain runtime session authority')
+    before = _tree(source)
+    parent = root / '.kneekura-runs'
+    if parent.is_symlink(): raise ContractError('Unsafe run root')
+    directory = parent / key_for({'workspace': str(root), 'request_id': request_id})[:24]
+    if directory.exists() or directory.is_symlink():
+        raise ContractError('Client directory already exists; never overwrite/reuse it')
+    parent.mkdir(exist_ok=True); directory.mkdir(mode=0o700)
+    # Keep the run root private throughout copying, including empty template directories.
+    for base, dirs, files in os.walk(source, followlinks=False):
+        relative = Path(base).relative_to(source); destination = directory / relative
+        for name in dirs:
+            if (Path(base) / name).is_symlink(): raise ContractError('Unsafe client template directory')
+            (destination / name).mkdir(mode=0o700)
+        for name in files:
+            origin = Path(base) / name
+            if origin.is_symlink() or not origin.is_file(): raise ContractError('Unsafe client template file')
+            shutil.copyfile(origin, destination / name)
+    if _tree(source) != before or _tree(directory) != before:
+        raise ContractError('Client template changed during copy; incomplete copy retained for inspection')
+    marker = {'schema_version': 1, 'kind': 'client_run_directory', 'workspace': str(root),
+              'directory': str(directory), 'run_directory_id': directory.name,
+              'run_directory_template_hash': key_for(before), 'template': str(source.resolve()),
+              'request_id': request_id, 'fresh': True}
+    atomic_write(directory / '.kneekura-run.json', canonical(marker))
+    h = store.put_json(marker); store.pin(h, 'client-directory:' + request_id)
+    return dict(marker, status='OK', marker_hash=h)
+
+
+def _owned_client_directory(root, run_directory):
+    if not isinstance(run_directory, str): raise ContractError('Explicit prepared client directory required')
+    directory = Path(run_directory); parent = root / '.kneekura-runs'
+    if (directory.parent != parent or parent.is_symlink() or directory.is_symlink()
+            or not directory.is_dir() or directory != directory.resolve()):
+        raise ContractError('Not a fresh managed client directory')
+    marker_path = directory / '.kneekura-run.json'
+    if marker_path.is_symlink(): raise ContractError('Unsafe client directory marker')
+    try: marker = json.loads(marker_path.read_bytes())
+    except (OSError, ValueError): raise ContractError('Unowned client directory') from None
+    if (not isinstance(marker, dict) or marker.get('kind') != 'client_run_directory'
+            or marker.get('workspace') != str(root) or marker.get('directory') != str(directory)
+            or marker.get('run_directory_id') != directory.name or marker.get('fresh') is not True
+            or any(k in marker for k in ('world', 'world_id', 'world_template_hash', 'world_seed', 'world_layout'))):
+        raise ContractError('Wrong or already used client directory marker')
+    valid_hash(marker.get('run_directory_template_hash'))
+    contents = [row for row in _tree(directory) if row['path'] != '.kneekura-run.json']
+    if key_for(contents) != marker['run_directory_template_hash']:
+        raise ContractError('Prepared client directory changed before launch')
+    return marker, marker_path
+
+
 def _owned_world(root,world,*,layout=None):
     if not isinstance(world,str): raise ContractError('An explicitly prepared test world is required')
     path=Path(world); runs=root/'.kneekura-runs'
@@ -111,7 +175,7 @@ def _owned_world(root,world,*,layout=None):
     if marker_path.is_symlink(): raise ContractError('Unsafe world marker')
     try: marker=json.loads(marker_path.read_bytes())
     except (OSError,ValueError): raise ContractError('Unowned test world') from None
-    if not isinstance(marker,dict): raise ContractError('Unowned test world')
+    if not isinstance(marker,dict) or marker.get('kind') == 'client_run_directory': raise ContractError('Unowned test world')
     # Older markers describe only the existing server layout. Never infer client
     # ownership from a nested directory or silently migrate a prepared world.
     actual_layout=marker.get('world_layout','server')
@@ -146,16 +210,30 @@ def _unit_report(root,started_ns,store):
     return tests,errors,artifacts
 
 
-def execute(store: Store,registry: dict,*,kind: str,request_id: str,world=None,contract=None,
+def execute(store: Store,registry: dict,*,kind: str,request_id: str,world=None,run_directory=None,contract=None,
             runner=run_process,timeout=None):
     """Execute once. Registry is trusted user configuration, not ingested source data."""
     _request(request_id)
     if kind not in TASKS: raise ContractError('Unknown validation kind')
     root,wrapper=_registry(registry,kind)
+    from .runtime import dedicated_registry
+    role = None
+    if kind in ('gametest', 'client', 'server'):
+        if not isinstance(contract, dict): raise ContractError('Run-bound assertion contract required')
+        role, _ = dedicated_registry(registry, contract)
+        if ((kind == 'server' and role != 'dedicated_server')
+                or (kind == 'client' and role == 'dedicated_server')
+                or (kind == 'gametest' and role is not None)):
+            raise ContractError('Registered dedicated role does not match launch kind')
+    if run_directory is not None and not (kind == 'client' and role == 'dedicated_client'):
+        raise ContractError('Run directory requires an explicitly dedicated-client launch')
+    if role == 'dedicated_client' and (world is not None or run_directory is None):
+        raise ContractError('Receiving client requires a run directory, not a local world')
     source=workspace_fingerprint(root); config=configuration_fingerprint(root)
     request={'workspace':str(root),'kind':kind,'request_id':request_id,'registry_hash':key_for(registry),
              'source_generation':source,'configuration_fingerprint':config,'world':world,
              'contract_hash':key_for(contract) if contract else None}
+    if run_directory is not None: request['run_directory'] = run_directory
     path=store.root/'operations'/key_for({'workspace':str(root),'request_id':request_id})
     path.parent.mkdir(parents=True,exist_ok=True)
     if path.exists():
@@ -177,26 +255,37 @@ def execute(store: Store,registry: dict,*,kind: str,request_id: str,world=None,c
         _registry(registry, kind)  # Recheck executable identity under the lease.
         argv=[str(wrapper),'--no-daemon','--console=plain']
         marker=None; session=None; marker_path=None
-        if kind in ('gametest','client'):
-            marker,marker_path=_owned_world(root,world,layout='client' if kind=='client' else 'server')
+        if kind in ('gametest','client','server'):
+            if role == 'dedicated_client':
+                marker, marker_path = _owned_client_directory(root, run_directory)
+                identity_keys = ('run_directory_id', 'run_directory_template_hash')
+            else:
+                marker,marker_path=_owned_world(root,world,layout='client' if kind=='client' else 'server')
+                identity_keys = ('world_id', 'world_template_hash')
+                if kind == 'server' and not re.fullmatch(r'[A-Za-z0-9_-]{1,128}', Path(marker['world']).name):
+                    raise ContractError('Bounded owned server world name required')
             budget=registry.get('remaining_launches'); budget_id=registry.get('launch_budget_id')
             if type(budget) is not int or budget<1 or not isinstance(budget_id,str) or not budget_id:
                 raise ContractError('No explicit game launch budget')
             budgets=store.root/'launches'/key_for({'workspace':str(root),'budget':budget_id}); budgets.mkdir(parents=True,exist_ok=True)
             if len(list(budgets.glob('*.json')))>=budget: raise ContractError('Game launch budget exhausted')
             if not isinstance(contract,dict): raise ContractError('Run-bound assertion contract required')
-            if contract.get('dirty_hash')!=source or contract.get('world_id')!=marker['world_id'] or contract.get('world_template_hash')!=marker['world_template_hash']:
+            if contract.get('dirty_hash')!=source or any(contract.get(k)!=marker[k] for k in identity_keys):
                 raise ContractError('Contract does not match current sources and prepared test world')
             from .runtime import create_session
-            session=create_session(store,dict(registry,world_directory_name=Path(marker['world']).name,
-                                              world_layout=marker.get('world_layout','server')),
-                                   contract,directory=Path(marker['directory']))
+            session_registry = dict(registry)
+            if role != 'dedicated_client':
+                session_registry.update(world_directory_name=Path(marker['world']).name,
+                                        world_layout=marker.get('world_layout','server'))
+            session=create_session(store,session_registry,contract,directory=Path(marker['directory']))
             script=Path(__file__).with_name('resources')/'kneekura-run.init.gradle'
             observer=Path(__file__).with_name('resources')/'forge-observer'
             if not observer.is_dir(): observer=Path(__file__).resolve().parents[3]/'departments/minecraft/mod-ai/forge-observer'
             if not observer.is_dir(): raise ContractError('Packaged observer source root is unavailable')
             argv+=['-I',str(script),'-PkneekuraRunDirectory='+marker['directory'],
                    '-PkneekuraSessionFile='+str(session['path']),'-PkneekuraObserverRoot='+str(observer)]
+            if kind == 'server':
+                argv.append('-PkneekuraWorldDirectoryName=' + Path(marker['world']).name)
         if kind=='unit': argv+=['--rerun-tasks']
         if kind=='export':
             script=Path(__file__).with_name('resources')/'kneekura-inputs.init.gradle'
@@ -242,7 +331,7 @@ def execute(store: Store,registry: dict,*,kind: str,request_id: str,world=None,c
             elif any(t['status']=='FAIL' for t in tests): outcome='FAIL'
             elif not any(t['status']=='PASS' for t in tests): outcome='NOT_RUN'
         gametest=None
-        if kind in ('gametest','client'):
+        if kind in ('gametest','client','server'):
             if kind=='gametest' and session:
                 from .runtime import read_signed_report
                 try:
@@ -254,9 +343,10 @@ def execute(store: Store,registry: dict,*,kind: str,request_id: str,world=None,c
                     if after == source and result['completed']: outcome='NOT_RUN'
                     errors.append('No authenticated same-run GameTest completion report')
             else:
-                outcome='NOT_RUN'; errors.append('Client launch alone proves no rendering/behaviour assertion; inspect captured observations')
+                if role is None or (result['completed'] and result['exit_code']==0 and after==source): outcome='NOT_RUN'
+                errors.append('Launch alone proves no rendering/behaviour assertion; inspect captured observations')
         public={'schema_version':1,'status':'OK' if not errors else 'PARTIAL','outcome':outcome,'reasons':errors,
-                'request_id':request_id,'assertion_domain':{'compile':'compile_only','unit':'unit_tests','export':'input_resolution'}.get(kind,'server_behavior' if kind=='gametest' else 'client_observation'),
+                'request_id':request_id,'assertion_domain':{'compile':'compile_only','unit':'unit_tests','export':'input_resolution'}.get(kind,'server_behavior' if kind=='gametest' else 'server_observation' if kind=='server' else 'client_observation'),
                 'tests_executed':(gametest or {}).get('tests_executed', 0) if kind=='gametest' else sum(t['status']!='SKIPPED' for t in tests),
                 'retry_allowed':False,
                 'replayed_execution':False,'log_hash':log_hash,'outputs':outputs,'gametest':gametest,

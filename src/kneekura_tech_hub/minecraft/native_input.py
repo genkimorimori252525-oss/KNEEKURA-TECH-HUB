@@ -54,14 +54,21 @@ def process_start(pid):
         raise ContractError('Native process is unavailable or changed') from exc
 
 
-def validate_target(target):
+def validate_target_shape(target):
+    """Validate retained target fields without looking up a live/reused process ID."""
     if (not isinstance(target, dict) or set(target) != {'process_id', 'process_start', 'window_id', 'client_size'}
-            or not isinstance(target['window_id'], str) or not target['window_id'].isdecimal()
+            or type(target['process_id']) is not int or not 1 <= target['process_id'] < 2**31
+            or not isinstance(target['window_id'], str) or not re.fullmatch(r'[0-9]{1,10}',target['window_id'])
             or not 2 <= int(target['window_id']) < 2**32
-            or not isinstance(target['process_start'], str) or not target['process_start'].isdecimal()
+            or not isinstance(target['process_start'], str) or not re.fullmatch(r'[0-9]{1,20}',target['process_start'])
             or not isinstance(target['client_size'], list) or len(target['client_size']) != 2
             or any(type(n) is not int or not 1 <= n <= 32768 for n in target['client_size'])):
         raise ContractError('Complete native process/window/local viewport identity required')
+    return target
+
+
+def validate_target(target):
+    validate_target_shape(target)
     if process_start(target['process_id']) != target['process_start']:
         raise ContractError('Native process start identity changed')
     return target

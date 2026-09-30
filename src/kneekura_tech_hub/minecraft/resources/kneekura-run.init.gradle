@@ -2,6 +2,49 @@
 // This callback is registered before project/plugin afterEvaluate callbacks generate runs.
 import org.gradle.api.tasks.JavaExec
 import org.gradle.jvm.toolchain.JavaLanguageVersion
+import groovy.json.JsonSlurper
+
+// Pure argument guard: explicit alternate save roots are never accepted.
+// Kept separate so fixture tests can execute the actual Groovy guard without Gradle or Minecraft.
+def kneekuraOwnedArguments = { List supplied, String taskName, String runDirectory, String worldName ->
+    def original = supplied.collect { it.toString() }
+    if (taskName == 'runServer') {
+        if (worldName == null || !(worldName ==~ /[A-Za-z0-9_-]{1,128}/))
+            throw new IllegalArgumentException('Bounded owned world name required')
+        original.each { arg ->
+            def option = arg.tokenize('=')[0]
+            def bare = option.replaceFirst(/^-+/, '')
+            // JOptSimple supports abbreviations and short-option attached values.
+            if (arg.startsWith('-') && (arg.startsWith('-u') && !arg.startsWith('--')
+                    || 'universe'.startsWith(bare) || bare.startsWith('universe')))
+                throw new IllegalArgumentException('Explicit universe is forbidden for an owned server run')
+            if (arg.startsWith('-') && (arg.startsWith('-w') && !arg.startsWith('--')
+                    || 'world'.startsWith(bare) && bare != 'world'))
+                throw new IllegalArgumentException('Abbreviated world arguments are forbidden')
+        }
+        def positions = (0..<original.size()).findAll { original[it] == '--world' || original[it].startsWith('--world=') }
+        if (positions.size() > 1) throw new IllegalArgumentException('Duplicate world arguments')
+        if (positions) {
+            int pos = positions[0]
+            def arg = original[pos]
+            def actual = arg.startsWith('--world=') ? arg.substring('--world='.length()) :
+                         pos + 1 < original.size() ? original[pos + 1] : null
+            if (actual != worldName) throw new IllegalArgumentException('Conflicting or missing owned world argument')
+            if (arg.startsWith('--world=')) { original[pos] = '--world'; original.add(pos + 1, worldName) }
+        } else original.addAll(['--world', worldName])
+    }
+    def gamePositions = (0..<original.size()).findAll { original[it] == '--gameDir' || original[it].startsWith('--gameDir=') }
+    if (gamePositions.size() > 1) throw new IllegalArgumentException('Duplicate game directory arguments')
+    if (gamePositions) {
+        int pos = gamePositions[0]
+        if (original[pos] == '--gameDir') {
+            if (pos + 1 >= original.size() || original[pos + 1].startsWith('-'))
+                throw new IllegalArgumentException('Missing game directory argument')
+            original[pos + 1] = runDirectory
+        } else { original[pos] = '--gameDir'; original.add(pos + 1, runDirectory) }
+    } else if (taskName == 'runClient') original.addAll(['--gameDir', runDirectory])
+    return original
+}
 
 gradle.beforeProject { p ->
     p.afterEvaluate {
@@ -24,23 +67,31 @@ gradle.beforeProject { p ->
             options.encoding = 'UTF-8'
         }
         mc.runs.configureEach { run ->
-            if (run.name in ['gameTestServer', 'client']) {
+            if (run.name in ['gameTestServer', 'client', 'server']) {
                 workingDirectory runDir
                 property 'kneekura.session', session.absolutePath
                 mods { kneekura_observer { source observer } }
             }
         }
         p.tasks.withType(JavaExec).configureEach { task ->
-            if (task.name in ['runGameTestServer','runClient']) {
+            if (task.name in ['runGameTestServer','runClient','runServer']) {
                 dependsOn observer.classesTaskName
                 doFirst {
                     workingDir runDir
                     systemProperty 'kneekura.session', session.absolutePath
                     // Explicit existing gameDir arguments must not escape to a production save.
-                    def original = new ArrayList(task.args)
-                    int pos = original.indexOf('--gameDir')
-                    if (pos >= 0 && pos + 1 < original.size()) original[pos+1] = runDir.absolutePath
-                    setArgs(original)
+                    def worldName = null
+                    if (task.name == 'runServer') {
+                        if (!p.hasProperty('kneekuraWorldDirectoryName'))
+                            throw new GradleException('Explicit owned server world required')
+                        worldName = p.property('kneekuraWorldDirectoryName').toString()
+                        def marker = new JsonSlurper().parse(new File(runDir, '.kneekura-run.json'))
+                        def world = new File(runDir, worldName)
+                        if (marker.kind == 'client_run_directory' || marker.world_layout != 'server'
+                                || world.canonicalFile.parentFile != runDir || marker.world != world.canonicalPath)
+                            throw new GradleException('Server world differs from the owned marker')
+                    }
+                    setArgs(kneekuraOwnedArguments(new ArrayList(task.args), task.name, runDir.absolutePath, worldName))
                 }
             }
         }

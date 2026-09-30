@@ -40,6 +40,12 @@ The map records a derived summary and original report hash; the raw report is
 not published. Physical disk exhaustion, real Mixin transforms, dynamic graphs
 and gameplay synchronization are not inferred from these fixtures.
 
+A later runtime implementation aggregate passed **1,739 tests**, with the same
+103 PostgreSQL-dependent skips and one ambient-parent directory fixture excluded.
+The exact Forge observer compiled and independent review cleared the repaired
+contract/oracle boundaries. See the [derived preflight summary](verification/runtime-preflight-2026-09-30.json);
+its original raw-report hashes are references, not public raw receipts.
+
 ## Original research questions versus whole-target runtime proof
 
 | Task | Original criterion reached | Remaining distinct limit |
@@ -58,31 +64,44 @@ their source-oriented questions. U06's required conservative UNKNOWN is a valid
 investigation result, not a promise of compatibility. None of these distinctions
 closes the broader M4 live scenario or U04 rendering requirement.
 
-## Genuine remaining implementation and live work
+## Runtime implementation and separate live acceptance
 
-The current observer starts with a local ServerStartedEvent and captures server
-state before adding client pixels. A client joined to a dedicated server has no
-local server lifecycle. Authenticated receiving-client evidence therefore needs
-a bounded role/lifecycle extension to the existing observer and contracts; it
-cannot be claimed merely by running the existing integrated-client fixture.
+The dedicated receiving-client gap is implemented in the existing observer,
+Store and runner. Schema-2 contracts preserve separate server-world and
+client-directory identities, exact loopback socket/player pairing, independent
+client state and per-workspace locks. Authenticated pair capture remains
+non-atomic and does not itself establish gameplay synchronization.
 
-The required design must preserve separate server-world and client-directory
-identities, independent client-side state, exact build/epoch/config binding and
-the existing per-workspace lock. Pairing must be demonstrated on actual scoped
-connections. No second runtime service or database is needed. Implementation,
-compile/fixture checks and approved live acceptance remain separate gates.
+A distinct target-code profile and immutable ordered dependency-byte inventory
+retain all resolved compile/runtime archives without promoting the broad UNKNOWN
+profile. Complete target closure is rederived from registered export/compile
+receipts before contract/session acceptance. Startup checks actual archive bytes;
+subsequent metadata invalidation does not attest loaded/transformed instructions.
 
-Remaining live criteria include the staff's unobstructed third-person view,
-post-metadata-fix startup, dedicated propagation/non-invoking-player checks,
-client-branch-specific mutation evidence, and Hydra's U04 render observation.
-The previous 15-minute launch approval expired; this document grants no new
-launches or network/config changes. The user's manual visual handoff remains
-valid until they explicitly choose another bounded test.
+The opt-in fixed staff build adds exact-source client branch/mutator-site tracing
+and selected vanilla packet receipts. Default MOD sources remain unchanged.
+Fixed retained-record checkers cover first use, the non-invoking player, cooldown
+repeat and expiry. Native intermediate screenshots/state/traces participate in
+identity, chronology, immutable-history and remaining-tick checks. Fixture PASS
+is explicitly distinct from actual game acceptance.
+
+U04 has a separate schema-3 integrated-client route that binds the marker compile
+artifact and selected derived Twilight archive/probes independently. Its narrow
+Hydra helper records the exact client entity, dispatcher renderer, default/JAPPA
+marker state, texture hash, pose and captured frame. Visibility still requires
+inspection of that frame. See [runtime contracts and limits](forge-observer/DEDICATED-OBSERVATION.md).
+
+The next bounded live scenario is prepared for dedicated staff propagation,
+non-invoking control, actual client use/repeat/expiry and unobstructed display,
+followed by the default Hydra view. Its actual result must be recorded separately;
+preparation, compilation, offline fixtures and approval are not live acceptance.
+Historical occluded views, timeout receipts and the earlier manual handoff remain
+unchanged. This document itself grants no launch or network-setting authority.
 
 Windows input is unsupported and requires an authorized Windows executor for
-real acceptance. Performance measurements remain unmeasured, rather than a new
-unbounded benchmark project. Human canonical promotion and deployed Core writes
-are outside this implementation's authority.
+implementation/real acceptance. Performance measurements remain unmeasured,
+rather than a new unbounded benchmark project. Human canonical promotion and
+deployed Core writes are outside this implementation's authority.
 
 ## Follow-on work
 

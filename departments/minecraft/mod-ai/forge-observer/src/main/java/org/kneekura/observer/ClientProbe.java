@@ -19,12 +19,23 @@ import java.util.concurrent.atomic.AtomicLong;
 /** Loaded reflectively only on physical CLIENT; render work runs on its main thread. */
 public final class ClientProbe {
     private static final AtomicLong FRAMES=new AtomicLong();
+    private static final AtomicLong TICKS=new AtomicLong();
+    static long frames() {return FRAMES.get();}
+    static long ticks() {return TICKS.get();}
     private static boolean installed=false;
     public static synchronized void install() {
         if(installed) return; installed=true;
+        MinecraftForge.EVENT_BUS.addListener((TickEvent.ClientTickEvent e)->{if(e.phase==TickEvent.Phase.END) TICKS.incrementAndGet();});
         MinecraftForge.EVENT_BUS.addListener((TickEvent.RenderTickEvent e)->{if(e.phase==TickEvent.Phase.END) FRAMES.incrementAndGet();});
     }
+    public static void verifyDirectory(Path directory) throws Exception {
+        if(!Minecraft.getInstance().gameDirectory.toPath().toRealPath().equals(directory.toRealPath()))
+            throw new IllegalStateException("Actual client gameDirectory differs from owned integrated run");
+    }
     public static CompletableFuture<JsonObject> capture(Path directory,boolean screenshot) {
+        return capture(directory,screenshot,null,null);
+    }
+    public static CompletableFuture<JsonObject> capture(Path directory,boolean screenshot,JsonObject session,JsonObject query) {
         CompletableFuture<JsonObject> future=new CompletableFuture<>();
         Minecraft.getInstance().execute(()->{
             try {
@@ -65,7 +76,10 @@ public final class ClientProbe {
                         out.addProperty("width",image.getWidth()); out.addProperty("height",image.getHeight());
                     } finally {Files.deleteIfExists(imagePath);}
                 }
-                out.addProperty("client_frame_end",FRAMES.get()); out.addProperty("atomic",false); future.complete(out);
+                out.addProperty("client_frame_end",FRAMES.get()); out.addProperty("atomic",false);
+                if(session!=null && query!=null && DedicatedSession.role(session.getAsJsonObject("contract")).equals("integrated_client"))
+                    out.add("u04_hydra",U04HydraProbe.capture(client,session,query,out));
+                future.complete(out);
             } catch(Exception e) {future.completeExceptionally(e);}
         });
         return future;

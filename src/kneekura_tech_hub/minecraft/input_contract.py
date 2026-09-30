@@ -23,7 +23,7 @@ import time
 from typing import Callable, Protocol
 
 from .storage import ContractError, canonical
-from .verification import IDENTITY_FIELDS, _identity_errors
+from .verification import identity_fields, _identity_errors
 
 _REQUEST_FIELDS = {'schema_version', 'operation_id', 'identity', 'target_id',
                    'control', 'position', 'hold_ms'}
@@ -69,7 +69,7 @@ def _detached(value: dict) -> dict:
 
 
 def _identity(contract: dict, value: dict) -> None:
-    if not isinstance(value, dict) or set(value) != set(IDENTITY_FIELDS):
+    if not isinstance(value, dict) or set(value) != set(identity_fields(contract)):
         raise ContractError('Input requires the existing complete run identity only')
     errors = _identity_errors(contract, {'identity': value})
     if errors:

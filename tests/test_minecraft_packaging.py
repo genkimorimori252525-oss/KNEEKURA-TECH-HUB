@@ -18,6 +18,9 @@ def test_minecraft_entrypoint_and_observer_are_declared_in_wheel():
     assert {path.name for path in root.rglob('*.java')} == {
         'BridgeTransport.java', 'ClientProbe.java', 'ForgeObserver.java', 'RunLedger.java',
         'LinuxClientIdentity.java', 'StaffStateQuery.java',
+        'DedicatedClientObserver.java', 'DedicatedSession.java', 'StaffStateCapture.java',
+        'StaffPacketTrace.java', 'StaffTrace.java',
+        'DependencyInventory.java', 'TargetDependency.java', 'U04HydraProbe.java',
     }
 
 

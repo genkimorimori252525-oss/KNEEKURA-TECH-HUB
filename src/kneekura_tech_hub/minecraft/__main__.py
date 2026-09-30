@@ -66,13 +66,16 @@ def parser() -> argparse.ArgumentParser:
     inspect.add_argument('--scope'); inspect.add_argument('--track')
     validate = commands.add_parser('validate').add_subparsers(dest='action', required=True)
     plan = validate.add_parser('plan'); plan.add_argument('--registry', required=True)
-    plan.add_argument('--kind', choices=('compile', 'unit', 'gametest', 'client'), required=True)
-    plan.add_argument('--world')
+    plan.add_argument('--kind', choices=('compile', 'unit', 'gametest', 'client', 'server'), required=True)
+    owned = plan.add_mutually_exclusive_group()
+    owned.add_argument('--world'); owned.add_argument('--run-directory')
     run = validate.add_parser('run')
     target = run.add_mutually_exclusive_group(required=True)
     target.add_argument('--plan'); target.add_argument('--registry')
-    run.add_argument('--kind', choices=('compile', 'unit', 'gametest', 'client', 'export'))
-    run.add_argument('--request-id'); run.add_argument('--world'); run.add_argument('--contract')
+    run.add_argument('--kind', choices=('compile', 'unit', 'gametest', 'client', 'server', 'export'))
+    run.add_argument('--request-id'); run.add_argument('--contract')
+    owned = run.add_mutually_exclusive_group()
+    owned.add_argument('--world'); owned.add_argument('--run-directory')
     operation = validate.add_parser('operation')
     operation.add_argument('--session', required=True)
     operation.add_argument('--command-id', required=True)
@@ -124,13 +127,13 @@ def dispatch(args: argparse.Namespace) -> dict:
             from .runtime import execute_registered_command
             return execute_registered_command(store, args.session, command_id=args.command_id, request_id=args.request_id)
         if args.action == 'plan':
-            return verification.validation_plan(args.kind, read_json(args.registry), world=args.world)
+            return verification.validation_plan(args.kind, read_json(args.registry), world=args.world, run_directory=args.run_directory)
         if args.action == 'run':
             if args.plan: return verification.delegate_run(read_json(args.plan))
             if not args.kind or not args.request_id: raise ContractError('Registered run requires --kind and --request-id')
             from .execution import execute
             return execute(store, read_json(args.registry), kind=args.kind, request_id=args.request_id,
-                           world=args.world, contract=read_json(args.contract) if args.contract else None)
+                           world=args.world, run_directory=args.run_directory, contract=read_json(args.contract) if args.contract else None)
         return verification.evaluate_scenario_tests(read_json(args.contract), read_json(args.report))
     if args.command == 'observe':
         if args.session:
