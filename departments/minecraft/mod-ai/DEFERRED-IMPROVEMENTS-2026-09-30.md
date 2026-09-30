@@ -1,5 +1,9 @@
 # Deferred MOD-AI usability improvements
 
+> **AI-operability follow-on:** the broader post-completion TaskContext / capability-discovery / thin-facade design is recorded in
+> [2026-10-01-minecraft-mod-ai-usability-layer-design.md](../../../docs/superpowers/specs/2026-10-01-minecraft-mod-ai-usability-layer-design.md).
+> That design owns the secondary "current state / next action" and artifact-lineage concerns below; asset-editing Candidates 1–3 remain separate.
+
 Status: **DEFERRED — DO NOT IMPLEMENT BEFORE CURRENT-PLAN COMPLETION.**
 
 Requested on 2026-09-30. This records possible follow-on work; it does not
