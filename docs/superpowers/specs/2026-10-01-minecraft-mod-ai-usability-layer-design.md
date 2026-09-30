@@ -6,6 +6,9 @@ Repository: `genkimorimori252525-oss/KNEEKURA-TECH-HUB`
 Current implementation line: Draft PR #74  
 Parent roadmap: `docs/superpowers/plans/2026-09-28-minecraft-mod-ai-unified.md`
 
+**Implementation plan:** `docs/superpowers/plans/2026-10-01-minecraft-mod-ai-usability-layer.md`  
+Implementation remains gated by Section 2; this link does not authorize starting early.
+
 ## 1. Purpose
 
 KNEEKURA Minecraft MOD-AI already has many specialized capabilities: exact environment
