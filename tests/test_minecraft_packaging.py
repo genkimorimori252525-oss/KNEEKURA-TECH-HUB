@@ -53,18 +53,25 @@ def test_installed_package_stages_against_packaged_core_schema_and_policy(tmp_pa
         shutil.copytree(repository/source,installed/destination,dirs_exist_ok=True)
     outside=tmp_path/'unrelated-working-directory'; outside.mkdir()
     script=r'''
+import contextlib
+import io
 import json
 import sys
 from pathlib import Path
 import kneekura_tech_hub
 from kneekura_tech_hub import validator
 from kneekura_tech_hub.bundle import load_bundle_schema, preflight_bundle
+from kneekura_tech_hub.minecraft import task_context, task_routing
+from kneekura_tech_hub.minecraft.__main__ import main
 from kneekura_tech_hub.minecraft.core_bridge import stage_bundle
 from kneekura_tech_hub.minecraft.index import prepare_index
 from kneekura_tech_hub.minecraft.storage import Store, capture_profile
 
 installed=Path(sys.argv[1]).resolve()
 assert Path(kneekura_tech_hub.__file__).is_relative_to(installed)
+for module in (task_context, task_routing):
+    assert Path(module.__file__).is_relative_to(installed)
+    assert Path(module.__file__).is_file()
 observer_resources=Path(kneekura_tech_hub.__file__).parent/'minecraft/resources/forge-observer/src/main/resources'
 pack_path=observer_resources/'pack.mcmeta'
 assert pack_path.is_file(), 'Installed observer resource pack is missing pack.mcmeta'
@@ -87,6 +94,30 @@ manifest={'schema_version':1,'minecraft':'1.20.1','loader':'forge','loader_versi
                     'classloader':'unknown','track':'ANCHOR'}]}
 store=Store(root/'cas'); profile=capture_profile(manifest,root,store)
 index=prepare_index(profile,store)['index_snapshot_id']
+request={'schema_version':1,'intent':'edit_code','goal':'Inspect the captured attack field',
+         'constraints':[],'acceptance':['Keep the exact captured target']}
+context=task_context.prepare_task_context(store,request,index_id=index)
+assert context['status']=='OK'
+assert context['target']['index_snapshot_id']==index
+assert tuple(row['id'] for row in context['capabilities'])==task_routing.CAPABILITY_IDS
+assert context['next_actions'][0]['operation_id']=='research.search'
+request_file=root/'task.json'; request_file.write_text(json.dumps(request))
+for action in ('prepare','capabilities'):
+    output=io.StringIO()
+    with contextlib.redirect_stdout(output):
+        code=main(['--store',str(store.root),'task',action,'--request',str(request_file),
+                   '--index',index])
+    response=json.loads(output.getvalue())
+    assert code==0 and response['status']=='OK'
+    assert response['target']==context['target']
+    assert response['capabilities']==context['capabilities']
+    assert response['results']==[] and response['next_cursor'] is None
+    assert response['request_id']
+    if action=='prepare':
+        assert response['next_actions']==context['next_actions']
+        assert response['kind']=='minecraft_task_context'
+    else:
+        assert 'next_actions' not in response and 'task' not in response
 result=stage_bundle(store,index,[profile['documents'][0]['document_id']],
                     summary='Observed installed-package fixture',actor={'actor_type':'ai'},
                     source_licenses={'own':{'state':'KNOWN','declared_expression':'MIT'}})

@@ -1,17 +1,26 @@
 # Deferred MOD-AI usability improvements
 
-> **AI-operability follow-on:** the broader post-completion TaskContext / capability-discovery / thin-facade design is recorded in
-> [2026-10-01-minecraft-mod-ai-usability-layer-design.md](../../../docs/superpowers/specs/2026-10-01-minecraft-mod-ai-usability-layer-design.md).
-> That design owns the secondary "current state / next action" and artifact-lineage concerns below; asset-editing Candidates 1–3 remain separate.
+Status: **ASSET CANDIDATES 1–3 DEFERRED; SECONDARY FACADE IMPLEMENTED,
+ACCEPTANCE PENDING.**
 
-Status: **DEFERRED — DO NOT IMPLEMENT BEFORE CURRENT-PLAN COMPLETION.**
+Requested on 2026-09-30. The
+[original scoped plan](CURRENT-ACCEPTANCE-2026-09-30.md) is now complete for the
+bounded Linux/X11 staff pilot and original research/regression criteria.
+Historical pending gates in the [handoff](HANDOFF-2026-09-30.md) remain historical;
+they must not be presented as the current acceptance state or rewritten as PASS.
 
-Requested on 2026-09-30. This records possible follow-on work; it does not
-authorize starting it, close an acceptance gap, or enlarge the current plan.
-The [current handoff](HANDOFF-2026-09-30.md) and
-[unified implementation plan](../../../docs/superpowers/plans/2026-09-28-minecraft-mod-ai-unified.md)
-remain the execution priority. An unresolved requirement stays unresolved;
-renaming it a future improvement does not satisfy this gate.
+The approved [AI Usability Layer design](../../../docs/superpowers/specs/2026-10-01-minecraft-mod-ai-usability-layer-design.md)
+and [implementation/trial plan](../../../docs/superpowers/plans/2026-10-01-minecraft-mod-ai-usability-layer.md)
+own the secondary state/next-action and artifact-lineage concerns below.
+Their bounded implementation is documented in [TASK-CONTEXT.md](TASK-CONTEXT.md).
+Focused task/CLI and installed-layout packaging regressions pass locally;
+exact-head hosted CI and the actual AI trial still gate completion and secondary
+presentation acceptance. MCP remains undecided pending the trial; neither MCP
+nor the LAB runtime bridge is implemented here.
+
+Asset-editing Candidates 1–3 remain **DEFERRED** and are not authorized or
+implemented by that facade. Retaining a proposal does not activate it, launch
+anything, change permissions or enlarge the accepted scope.
 
 ## Purpose and existing scope
 
@@ -33,13 +42,13 @@ an exposed operation. The following proposals address that narrower limitation.
 | Category | Examples | Treatment |
 |---|---|---|
 | Intentional first-slice boundary | One static Java item; no GeckoLib or animation; fixed display policy | Preserve unless a later concrete task requires another format |
-| Existing planned acceptance | Remaining M4 views/synchronization, U/A fault cases, exact-version research limits | Finish through the current plan; do not count as new usability features |
+| Original scoped acceptance | M4 views/synchronization and original U/A result kinds | Closed in the current acceptance record; keep Windows/performance/U06 and other declared limits explicit |
 | Optional asset-repair improvement | Change one retained part; compare the same view before/after; adjust bounded UV/texture/display fields | Consider only after the completion gate and a demonstrated need |
-| Optional presentation improvement | Make current evidence status and next action easier to read; make artifact delivery easier to trace | Reuse existing receipts, IDs and output paths; avoid another state system |
+| Secondary presentation improvement | Make task-scoped evidence/readiness and next action easier to read; retain artifact lineage | Implemented as a thin read-only facade; hosted CI and real AI usability acceptance remain pending |
 
 ## Completion gate
 
-Before selecting any implementation below:
+Before selecting any asset Candidate 1–3 implementation below:
 
 1. Reconcile every unchecked current-plan item against its original acceptance
    criterion and exact executed evidence. Keep Windows, dedicated-client,
@@ -50,8 +59,9 @@ Before selecting any implementation below:
 3. Confirm that the user still wants the candidate improvement and identify
    the concrete editing/review task it will improve.
 
-Saving this document satisfies only the request to retain a deferred plan.
-No automatic scheduler, launch, implementation or later activation follows.
+The original scoped completion prerequisite is now met; the candidate-selection
+and demonstrated-need requirements remain. No automatic scheduler, launch,
+asset implementation or later activation follows from this document.
 
 ## Candidate 1: stable part-addressed edits
 
@@ -102,24 +112,41 @@ equivalence checks. In-game inventory/first-/third-person review remains its
 own acceptance. Arbitrary brushes, file/URL imports, plugins and scripts stay
 outside this proposal.
 
-## Secondary candidates
+## Secondary concerns owned by the AI Usability Layer
 
 ### Current state and next action
 
-If users cannot tell what is ready, blocked or next from the existing CLI and
-receipts, present a compact derived summary: current generation, separate
-structural/visual/runtime results, concrete blocker and one valid next action.
-Do not introduce a second state machine, scheduler or autonomous agent service.
-An UNKNOWN receipt must not become a retry suggestion.
+**Bounded code implementation present; presentation acceptance pending.**
+`task prepare` derives exact target identity, compact evidence, separate
+capability surface/readiness/reason codes, and at most five fixed next-action
+recommendations. It uses existing registries, receipts and validators, with no
+second state machine, scheduler or autonomous agent service. UNKNOWN completion
+selects read-only reconciliation and suppresses new side-effecting advice;
+it never becomes a retry suggestion. Structural, visual and runtime evidence
+retain their original limited meanings.
+
+The focused four-file task/CLI suite passed **996 tests** and installed-layout
+packaging passed **5 tests** for this documentation checkpoint. These verify
+code behavior and packaging, not demonstrated AI usability. Exact-head hosted CI
+and the real task/fresh-agent-resume trial remain open before claiming this
+secondary presentation concern accepted.
 
 ### Artifact lineage and delivery
 
-Reuse existing profile, request, generation, capture, export, build and receipt
-hashes. If delivery is confusing, provide one small manifest/readme stating the
-actual downloadable file, target versions, hash, source/build relation and
-which artifact was really exercised. A source PR is not a downloadable JAR;
-development-class runtime evidence is not an installed-distribution launch.
-Do not expose raw private receipts, tokens, internal paths or environment IDs.
+**Bounded lineage implementation present; presentation acceptance pending.**
+The same facade returns existing profile/index/session/evidence references and
+hash-verified evidence pointers. It does not create a second artifact manifest,
+new canonical IDs, a download service or a package delivery claim. Use existing
+`search`, `inspect` and `artifact read` to expand the needed evidence, with actual
+file delivery handled through the existing authorized workflow.
+
+A source PR is not a downloadable JAR; development-class runtime evidence is
+not an installed-distribution launch. The facade must not infer source/build
+or exercised-artifact equivalence beyond the retained checks. Public summaries
+exclude raw private receipts, tokens, private paths and endpoint selectors;
+a hash does not authorize sharing the artifact's contents. The actual AI trial
+still needs to establish whether this bounded lineage is useful for handoff and
+resume, rather than declaring all possible delivery concerns solved.
 
 ## Review and stop conditions
 
@@ -129,4 +156,6 @@ acceptance where necessary. Reuse Store, observer, runner and history. Do not
 create another database, knowledge graph, run manager or canonical truth plane.
 
 Stop when the demonstrated repair/review task works. Drop features that do not
-earn their cost. None of these candidates is implemented by this document.
+earn their cost. Candidates 1–3 remain unimplemented; the separate bounded
+secondary facade implementation above does not close its pending acceptance
+gates or authorize further asset/runtime work.

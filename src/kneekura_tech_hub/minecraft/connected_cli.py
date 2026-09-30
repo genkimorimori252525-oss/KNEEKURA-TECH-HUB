@@ -8,7 +8,7 @@ from __future__ import annotations
 import base64
 from pathlib import Path
 
-from . import core_bridge, execution, index, interventions, providers, runtime, workspace
+from . import core_bridge, execution, index, interventions, providers, runtime, task_context, workspace
 from .mappings import MappingTable
 from .storage import ContractError, Store, capture_profile, valid_hash
 
@@ -88,6 +88,22 @@ def add_commands(commands, profile):
     p.add_argument('--player-uuid', required=True); p.add_argument('--dimension', default='minecraft:overworld')
     p.add_argument('--timeout', type=float, default=10); p.add_argument('--screenshot', action='store_true')
     commands.add_parser('capabilities')
+    task = commands.add_parser('task', help='Read-only task readiness and next operations').add_subparsers(
+        dest='action', required=True)
+    for action in ('prepare', 'capabilities'):
+        p = task.add_parser(action, description='Read-only task readiness; does not execute or connect')
+        p.add_argument('--request', required=True, metavar='TASK_REQUEST_JSON')
+        p.add_argument('--index', metavar='INDEX_SNAPSHOT_ID')
+        p.add_argument('--run-registry', metavar='RUN_REGISTRY_JSON')
+        p.add_argument('--input-registry', metavar='INPUT_REGISTRY_JSON')
+        p.add_argument('--blockbench-registry', metavar='REGISTRY_JSON')
+        p.add_argument('--session', metavar='PRIVATE_SESSION_JSON')
+        p.add_argument('--evidence', action='append', default=[], metavar='SHA256',
+                       help='Captured evidence hash (repeatable, maximum 32)')
+        p.add_argument('--world', metavar='OWNED_WORLD_PATH', help='Readiness input only')
+        p.add_argument('--run-directory', metavar='OWNED_RUN_DIR', help='Readiness input only')
+        p.add_argument('--core-configured', action='store_true',
+                       help='Explicit configuration-presence hint; no connection')
 
 
 def prepare(store, manifest, root, args):
@@ -98,7 +114,32 @@ def prepare(store, manifest, root, args):
             'results': [result], 'coverage': profile['coverage'], 'warnings': profile['warnings']}
 
 
+def _read_task_file(reader, path, label):
+    # CLI errors are public JSON. File errors and duplicate-key messages may
+    # contain caller-private paths or text; keep existing loaders and hide those details.
+    try:
+        return reader(path)
+    except (OSError, ValueError, TypeError, KeyError, RecursionError):
+        raise ContractError(f'Unable to load task {label} input') from None
+
+
 def dispatch(args, store: Store, read_json, parse_json):
+    if args.command == 'task' and args.action in ('prepare', 'capabilities'):
+        result = task_context.prepare_task_context(store, _read_task_file(read_json, args.request, 'request'),
+            index_id=args.index,
+            run_registry=_read_task_file(read_json, args.run_registry, 'run-registry')
+                if args.run_registry is not None else None,
+            input_registry=_read_task_file(read_json, args.input_registry, 'input-registry')
+                if args.input_registry is not None else None,
+            blockbench_registry=_read_task_file(read_json, args.blockbench_registry, 'blockbench-registry')
+                if args.blockbench_registry is not None else None,
+            session=_read_task_file(runtime.load_session, args.session, 'session')
+                if args.session is not None else None,
+            evidence_hashes=tuple(args.evidence), world=args.world,
+            run_directory=args.run_directory, core_configured=args.core_configured)
+        if args.action == 'capabilities':
+            return {field: result[field] for field in ('schema_version', 'status', 'target', 'capabilities')}
+        return result
     if args.command == 'profile':
         if args.action == 'discover':
             manifest = workspace.discover_workspace(args.workspace, physical_side=args.physical_side)
@@ -201,6 +242,7 @@ def dispatch(args, store: Store, read_json, parse_json):
         return input_route.dispatch_registered(store, registry, args.binding, read_json(args.request))
     if args.command == 'capabilities':
         return {'status': 'OK', 'adapter_version': runtime.ADAPTER_VERSION,
+                'capability_scope': 'STATIC_SURFACE',
                 'operations': ['profile', 'search', 'inspect', 'mapping', 'interventions', 'relations',
                                'context', 'knowledge', 'artifact', 'validate', 'world', 'client-directory', 'contract', 'session', 'observe', 'observe-pair', 'input'],
                 'execution_policy': 'EXPLICIT_REGISTERED_PROVIDERS_ONLY', 'ci_used': False,

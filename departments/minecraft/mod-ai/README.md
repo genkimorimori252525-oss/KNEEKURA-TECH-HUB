@@ -1,22 +1,41 @@
 # Minecraft MOD AI — connected headless adapters
 
-> **Current AI handoff (2026-09-30):** [HANDOFF-2026-09-30.md](HANDOFF-2026-09-30.md)  
-> Read this before the historical 2026-09-28 handoff; it reflects the current PR #74 implementation/acceptance state.
+## Current status and AI entry point
 
-> **Post-completion roadmap:** after the current MOD-AI scope, the planned sequence is AI Usability Layer → [TECH HUB × KNEEKURA-LAB Experimental Runtime Bridge](../../../docs/superpowers/specs/2026-10-01-minecraft-mod-ai-experimental-runtime-bridge-design.md). These are future stages and do not grant current runtime authority.
->
+- **Original scope: COMPLETE_SCOPED_CURRENT_PLAN.** Read
+  [CURRENT-ACCEPTANCE-2026-09-30.md](CURRENT-ACCEPTANCE-2026-09-30.md) and its
+  [machine-readable map](verification/current-acceptance-map-2026-09-30.json) for
+  the bounded Linux/X11 staff pilot and original U/A research/regression criteria
+- **AI Usability Layer: implementation available; acceptance still open.** Start
+  with [TASK-CONTEXT.md](TASK-CONTEXT.md) for the read-only `task prepare` and
+  `task capabilities` interface. Exact-head hosted CI and the actual AI usability
+  trial still follow; code availability does not close that stage or its
+  secondary presentation acceptance
+- The [design](../../../docs/superpowers/specs/2026-10-01-minecraft-mod-ai-usability-layer-design.md)
+  and [implementation/trial plan](../../../docs/superpowers/plans/2026-10-01-minecraft-mod-ai-usability-layer.md)
+  define this thin facade. MCP remains undecided pending the trial. The
+  [TECH HUB × KNEEKURA-LAB Experimental Runtime Bridge](../../../docs/superpowers/specs/2026-10-01-minecraft-mod-ai-experimental-runtime-bridge-design.md)
+  is a separate future stage; neither MCP nor the LAB bridge is implemented here
+- Asset-editing Candidates 1–3 remain
+  [deferred](DEFERRED-IMPROVEMENTS-2026-09-30.md). No document or readiness flag
+  grants new execution authority
+
 Minecraft 1.20.1 / Forge / Java 17を主対象とする、既存KNEEKURA TECH HUB内の解析・実行接続。
 Source/bytecode、実際のForgeGradle依存物、mapping、MOD介入候補、既存Knowledge Core、検証・観測を接続する。
 MODの設計・編集をする新しいAIや、別DB、別スケジューラは追加しない。
 
-2026-09-30の実装・検証状況は [CONTINUATION-2026-09-30.md](CONTINUATION-2026-09-30.md) を参照。
-実Blockbenchでの杖の生成・修正・export、実Forgeビルドと杖のserver GameTest、実MODを使うprovider/Core静的検証まで進んだ。
-client用save配置とLinux/X11の対象window限定inputを実装し、実clientの右クリック、効果・cooldown、inventory/一人称表示を限定的に確認した。**三人称の最終目視・同期等の全受け入れは未完了**。残りの目視はユーザーへ引き継いだ。
-Windows driver、実測performance、全U01–U06の完了も主張しない。実行権限やlaunch budgetをこの文書から得てはならない。
+実Blockbenchの杖制作・修正・export、provider/Core静的検証、Forgeビルド、server GameTestに加え、
+[staff live acceptance](STAFF-LIVE-ACCEPTANCE-2026-09-30.md) のV6/V7で、宣言したLinux/X11範囲の
+input・同期・inventory/一人称/三人称表示を検証した。Windows input、performance、任意のMODや
+全描画姿勢への一般化、human canonical promotionはこの完了範囲に含めない。
+U06の結果は根拠付きUNKNOWNであり、Connector beta.50のruntime互換性をPASSにしない。
 
 操作手順は [NATIVE-INPUT.md](NATIVE-INPUT.md)、固定fixture/scenarioは [acceptance/README.md](acceptance/README.md)。
+[HANDOFF-2026-09-30.md](HANDOFF-2026-09-30.md) と
+[CONTINUATION-2026-09-30.md](CONTINUATION-2026-09-30.md) は経緯を残す以前のcheckpoint。
+そこにあるM4/M5未完了・三人称未確認等の記述を現在の未完了状態として扱わず、上記current acceptanceを参照する。
 [2026-09-28のlive検証](LIVE-VERIFICATION-2026-09-28.md)、[旧checkpoint](IMPLEMENTATION-STATUS.md)、
-[以前のbuild検証](HOSTED-VERIFICATION-2026-09-28.md) は、その時点の証拠として保持する。
+[以前のbuild検証](HOSTED-VERIFICATION-2026-09-28.md) も、その時点の証拠として保持する。
 設計思想・経緯・判断は [foundation履歴](history/2026-09-28-FOUNDATION-SESSION.md)。
 過去の `verification/local-run.json` や旧checkpointを最新CIの結果として読み替えない。
 
@@ -147,8 +166,8 @@ Forge1.20.1では `PrefixGameTestTemplate(false)` がテスト名のclass prefix
 直接registry方式と混同しない。
 
 Forge observerは開発環境で明示session指定がある場合のみ有効。127.0.0.1上で認証し、run/epoch/build/world/configを照合する。
-**実サーバーのhandshake、個体観測、命令実行・重複防止、GameTest完了に加え、限定した実client input/観測も検証済み**。表示の完了範囲と未確認事項は `tools/ci/mod_ai_staff/CLIENT-ACCEPTANCE-2026-09-30.md` を参照。
-今回の試験ではruntime_config_filesは空で、全ての動的設定を照合できたという主張ではない。
+**実サーバーのhandshake、個体観測、命令実行・重複防止、GameTestに加え、V6/V7の限定した実client input・同期・表示も検証済み**。現在の完了範囲と未確認事項は [current acceptance](CURRENT-ACCEPTANCE-2026-09-30.md) と [staff live acceptance](STAFF-LIVE-ACCEPTANCE-2026-09-30.md) を参照。
+以前の `tools/ci/mod_ai_staff/CLIENT-ACCEPTANCE-2026-09-30.md` は初期pilotの記録。各runの設定とidentityを個別に扱い、全ての動的設定を照合できたとは主張しない。
 観測はatomicな世界状態とも行動assertionの合格とも呼ばない。命令は `validate operation --session ... --command-id ... --request-id ...`
 に分離し、registryの命令だけを許可する。観測ルートから命令を実行しない。
 命令はBrigadier callbackに基づく `outcome` を返す。戻り値0でも成功の場合があり、通知の欠落や矛盾はUNKNOWNになる。

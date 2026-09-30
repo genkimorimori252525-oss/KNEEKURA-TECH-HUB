@@ -1,6 +1,6 @@
 # Minecraft MOD-AI usability layer — design
 
-Status: **FUTURE / DEFERRED UNTIL CURRENT UNIFIED PLAN IS CLOSED**  
+Status: **IN IMPLEMENTATION — ORIGINAL SCOPED PLAN CLOSED**  
 Date: 2026-10-01  
 Repository: `genkimorimori252525-oss/KNEEKURA-TECH-HUB`  
 Current implementation line: Draft PR #74  
@@ -80,7 +80,7 @@ There is currently no compact task-scoped response that answers, in one bounded 
 
 - what exact Minecraft/loader/Java/profile/index this task is bound to;
 - which evidence is already available;
-- which capabilities are READY, NOT_CONFIGURED, BLOCKED, UNSUPPORTED or UNKNOWN;
+- which capability surfaces are IMPLEMENTED/UNSUPPORTED, with READY, NOT_CONFIGURED, BLOCKED or UNKNOWN readiness;
 - why a capability is not ready;
 - which small set of operations is valid next;
 - which artifact/receipt IDs should be retained for later expansion.
@@ -485,8 +485,8 @@ Use at least these real-shaped fixtures:
 3. asset request with missing provider registry → asset mutation is NOT_CONFIGURED;
 4. build receipt + prepared world → GameTest preparation is valid;
 5. UNKNOWN input/run receipt → reconciliation is primary and replay is absent;
-6. Linux client session → Linux input may be READY;
-7. Windows target without backend → native input is UNSUPPORTED, not READY.
+6. Linux client session → validated local input prerequisites; current live readiness remains UNKNOWN without an endpoint probe;
+7. Windows target without backend → native input surface UNSUPPORTED, readiness BLOCKED with WINDOWS_INPUT_UNSUPPORTED.
 
 ### Context bounds
 

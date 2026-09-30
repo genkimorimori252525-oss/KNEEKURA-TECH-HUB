@@ -66,7 +66,7 @@ Do not restructure unrelated existing modules.
 - Consumes: `Store`, `index._load(store, index_id)`, `verification._identity_errors(...)`, `canonical(...)`, `key_for(...)`, `valid_hash(...)`.
 - Produces:
   - `validate_task_request(value: dict) -> dict`
-  - `load_task_inputs(store: Store, *, index_id: str | None = None, run_registry: dict | None = None, input_registry: dict | None = None, blockbench_registry: dict | None = None, session: dict | None = None, evidence_hashes: tuple[str, ...] = (), world: str | None = None, run_directory: str | None = None) -> dict`
+  - `load_task_inputs(store: Store, *, index_id: str | None = None, run_registry: dict | None = None, input_registry: dict | None = None, blockbench_registry: dict | None = None, session: dict | None = None, evidence_hashes: tuple[str, ...] = (), world: str | None = None, run_directory: str | None = None, core_configured: bool = False) -> dict`
 
 - [ ] **Step 1: Write failing TaskRequest contract tests**
 
@@ -146,7 +146,7 @@ Expected: FAIL because `load_task_inputs` is missing.
 
 Requirements:
 
-- use `index._load` for `index_id`;
+- use `index._load` for `index_id`, then independently recompute the embedded profile identity using the existing identity definition and reject a mismatch; `_load` alone does not verify it;
 - do not repair or prepare an index;
 - canonical-detach optional registries;
 - validate the supplied session's existing contract identity without contacting its endpoint;
@@ -268,9 +268,9 @@ git commit -m "feat: summarize Minecraft task evidence and lineage"
 - Create: `tests/test_minecraft_task_routing.py`
 
 **Interfaces:**
-- Consumes: Task 1 input bundle and Task 2 summaries; existing `verification.validation_plan(...)` for read-only registered-run planning where applicable.
+- Consumes: Task 1 input bundle and Task 2 summaries; existing `execution._registry(...)`, owned-world/client-directory checks and wrapper/identity validation for read-only registered-run prerequisites. `verification.validation_plan(...)` alone is insufficient because command presence does not prove authorization.
 - Produces:
-  - `evaluate_capabilities(request: dict, inputs: dict, evidence: dict) -> list[dict]`
+  - `evaluate_capabilities(store: Store, request: dict, inputs: dict, evidence: dict) -> list[dict]`
   - each capability record exactly: `{"id", "surface", "readiness", "reason_code", "missing", "evidence"}`
 
 Capability IDs, in stable order:
@@ -302,7 +302,7 @@ Tests must include the spec's acceptance fixtures:
 4. successful build receipt + registered prepared world/run inputs → `gametest` readiness follows read-only existing validation-plan checks;
 5. supplied UNKNOWN input/run receipt → affected runtime/input capability UNKNOWN / `SESSION_UNKNOWN_COMPLETION`;
 6. valid Linux client session + explicit enabled `linux-x11-send-event-v1` input registry → `native_input` may be READY only when all existing identity prerequisites are present;
-7. Windows/client target with no supported backend → `native_input` readiness UNSUPPORTED / `WINDOWS_INPUT_UNSUPPORTED`, never READY.
+7. Windows/client target with no supported backend → `native_input` surface UNSUPPORTED, readiness BLOCKED / `WINDOWS_INPUT_UNSUPPORTED`, never READY.
 
 Also cover mappings/history detection from Task 2 evidence pointers.
 
@@ -323,10 +323,10 @@ Rules:
 - bytecode readiness is UNKNOWN if the index has no prepared bytecode or unresolved coverage prevents the requested certainty;
 - mappings READY only with an explicitly supplied recognized mapping record;
 - history READY only with a recognized captured history record;
-- Core context is NOT_CONFIGURED when no Core configuration is present and UNKNOWN when configured but not probed; this read-only evaluator does not connect to PostgreSQL;
+- Core configuration is supplied only by the explicit strict boolean `core_configured` (CLI `--core-configured`), default false; never infer it from ambient environment or include DSNs/secrets. Core context is NOT_CONFIGURED when false and UNKNOWN when true but not probed; this read-only evaluator does not connect to PostgreSQL;
 - Blockbench is NOT_CONFIGURED without an explicit Blockbench registry, UNKNOWN when registered but no retained readiness evidence establishes the guarded provider state;
-- build/GameTest use existing read-only validation helpers rather than duplicating execution-policy rules;
-- observation/input require existing session/registry identities and never contact a live endpoint;
+- build/GameTest reuse strict read-only `execution._registry` authorization and wrapper validation, owned-path checks and exact index/source/build receipt identities rather than duplicating execution-policy rules; never infer READY from `validation_plan` argv alone;
+- observation/input require existing session/registry identities and never contact a live endpoint; passing local prerequisites yields UNKNOWN / `LIVE_STATE_NOT_PROBED`, not proof of current live readiness;
 - any inconsistent identity is BLOCKED or UNKNOWN, never silently downgraded to READY.
 
 Use the design reason codes where applicable:
@@ -370,7 +370,7 @@ git commit -m "feat: derive Minecraft task capability readiness"
 - Consumes: Tasks 1–3.
 - Produces:
   - `derive_next_actions(request: dict, inputs: dict, capabilities: list[dict]) -> list[dict]`
-  - `prepare_task_context(store: Store, request: dict, *, index_id: str | None = None, run_registry: dict | None = None, input_registry: dict | None = None, blockbench_registry: dict | None = None, session: dict | None = None, evidence_hashes: tuple[str, ...] = (), world: str | None = None, run_directory: str | None = None) -> dict`
+  - `prepare_task_context(store: Store, request: dict, *, index_id: str | None = None, run_registry: dict | None = None, input_registry: dict | None = None, blockbench_registry: dict | None = None, session: dict | None = None, evidence_hashes: tuple[str, ...] = (), world: str | None = None, run_directory: str | None = None, core_configured: bool = False) -> dict`
 
 TaskContext top-level fields:
 
@@ -508,6 +508,7 @@ Both task subcommands accept:
 --evidence SHA256                      (repeatable, max 32)
 --world OWNED_WORLD_PATH               (optional readiness input only)
 --run-directory OWNED_RUN_DIR          (optional readiness input only)
+--core-configured                      (explicit configuration-presence hint; no connection)
 ```
 
 - [ ] **Step 1: Write failing parser/help tests**
@@ -535,7 +536,7 @@ Use existing `read_json` for TaskRequest/registries and `runtime.load_session(ar
 
 For one fixture, call `prepare_task_context(...)` directly and `connected_cli.dispatch` via parsed args. Assert normalized results match.
 
-For `task capabilities`, return exactly:
+For `task capabilities`, the facade payload has exactly the following fields. The subprocess CLI retains its existing common response envelope unchanged:
 
 ```text
 schema_version
@@ -679,6 +680,16 @@ After that trial:
 
 ---
 
+## Implementation preflight clarification (2026-09-30)
+
+The original scoped plan is closed; this approved successor is now in implementation.
+These narrow clarifications preserve the approved two-axis readiness and read-only design:
+unsupported Windows input is surface UNSUPPORTED/readiness BLOCKED; retained runtime
+sessions never prove current live readiness; Gradle readiness requires strict authorization
+and owned-path checks; embedded profile IDs are recomputed; Core presence is an explicit
+boolean; CLI facade payloads retain the established subprocess envelope. Capability evaluation takes the existing Store explicitly for read-only verification of registry-referenced build receipts/artifacts; raw receipt bodies are never routed through public summaries.
+No new execution authority, endpoint probe, MCP, LAB bridge, or asset editing is added.
+
 ## Plan Self-Review Result
 
 - Spec coverage: TaskRequest, TaskContext target/evidence/capabilities/next-actions/lineage, CLI shape, compactness, error codes, security boundaries and real AI trial all have an owning task/gate.
@@ -694,4 +705,3 @@ After this usability layer and the current unified MOD-AI acceptance scope are c
 `docs/superpowers/specs/2026-10-01-minecraft-mod-ai-experimental-runtime-bridge-design.md`
 
 That successor is a separate future stage. It does not expand this plan or authorize LAB/Minecraft execution.
-
