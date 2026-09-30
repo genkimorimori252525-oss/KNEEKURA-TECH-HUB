@@ -4,7 +4,7 @@
   "base_head": "1b198989eec6ab7f08dd33fe527d2accb9a76c29",
   "historical_map": "acceptance-map-2026-09-30.json",
   "historical_receipts_rewritten": false,
-  "scope": "Original criterion closure is distinct from whole-target runtime compatibility and whole-product completion",
+  "scope": "Original Linux/X11 staff pilot and bounded U01\u2013U06/A01\u2013A24 criteria; not arbitrary-MOD or whole-platform acceptance",
   "adversarial_cases": [
     {
       "id": "A01",
@@ -331,7 +331,9 @@
       "id": "U03",
       "criterion_result": "SATISFIED_PACKET_SIDE_INQUIRY_WITH_EXPLICIT_LIMIT",
       "evidence": "twilight-static-2026-09-30/summary.json",
-      "dedicated_synchronization": "NOT_RUN"
+      "dedicated_synchronization": "NOT_RUN",
+      "separate_staff_fixture_evidence": "staff-live-acceptance-2026-09-30.json",
+      "upstream_dedicated_runtime_not_promoted": true
     },
     {
       "id": "U04",
@@ -362,7 +364,7 @@
       ]
     }
   ],
-  "live_acceptance": "NOT_COMPLETED_BY_THIS_MAP",
+  "live_acceptance": "PASS_DECLARED_LINUX_STAFF_SCOPE",
   "canonical_promotion": "NOT_PERFORMED",
   "raw_private_evidence_published": false,
   "verification": {
@@ -390,7 +392,38 @@
       "scope": "Original current-criterion regression checkpoint; subsequent source checks are reported separately"
     }
   },
-  "latest_runtime_checkpoint": "a57ffb32adc6a0e1f0a5d06cf45d58c407fe1679",
-  "overall_plan": "INCOMPLETE",
-  "staff_live_acceptance": "NOT_RUN"
+  "latest_runtime_checkpoint": "97edd36e4d3cc5c1f3c6959b6513dbe9584873c0",
+  "overall_plan": "COMPLETE_SCOPED_CURRENT_PLAN",
+  "staff_live_acceptance": "PASS_SCOPED_V6_BEHAVIOR_V7_VISUAL",
+  "staff_live_evidence": "staff-live-acceptance-2026-09-30.json",
+  "remaining_required_implementation_or_live_blockers": [],
+  "conditional_or_excluded_limits": {
+    "windows_native_input": "UNSUPPORTED_CONDITIONAL_IF_REQUIRED",
+    "performance": "UNMEASURED_NO_DEDICATED_MEASUREMENT_CLAIM",
+    "human_canonical_promotion": "NOT_AUTHORIZED_NOT_PERFORMED",
+    "positive_connector_beta50_compatibility": "UNKNOWN",
+    "whole_loaded_transformed_class_attestation": "NOT_ESTABLISHED",
+    "all_angle_geometry_quality": "NOT_ESTABLISHED",
+    "follow_on_features": "NOT_IMPLEMENTED_BY_THIS_CLOSURE"
+  },
+  "latest_hosted_verification": {
+    "head": "97edd36e4d3cc5c1f3c6959b6513dbe9584873c0",
+    "push_run": 36760284116,
+    "pr_run": 36760293077,
+    "pr_merge": "304d93e55a01051cff8e1508dc322451ac2b38c1",
+    "passed_each": 1641,
+    "skipped_each": 331,
+    "warnings_each": 8,
+    "failed_each": 0,
+    "errors_each": 0,
+    "skip_scope": "Explicit cached dependency/classpath prerequisites; affected local observer checks ran with no skips",
+    "local_affected_passed": 184,
+    "local_affected_skipped": 0,
+    "actual_forge_compile_export_roles": [
+      "server",
+      "control",
+      "client"
+    ],
+    "counts_overlap_not_additive": true
+  }
 }

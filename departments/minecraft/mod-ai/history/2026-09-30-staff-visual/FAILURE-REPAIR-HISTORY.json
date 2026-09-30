@@ -1,0 +1,1735 @@
+{
+  "format": "kneekura.failure-history.v1",
+  "repository": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB.git",
+  "recorded_at": "2026-09-30T19:32:08.390724+00:00",
+  "scope": {
+    "track": "ANCHOR",
+    "head_revision": "97edd36e4d3cc5c1f3c6959b6513dbe9584873c0",
+    "history_window": "V5 login failure, immutable offline repairs, closed V6 staff behavior review and separate closed V7 third-person active-Glowing visual continuation",
+    "queries": [
+      "staff-v5-provisional-login-entity-binding",
+      "LoggingIn before final entity ID",
+      "signed invoker handshake REQUEST_REJECTED",
+      "V6 scoped staff live repair verification",
+      "V7 third_person_view active Glowing visual PASS"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "inspected_evidence_ids": [
+      "actual-forge-build-report",
+      "affected-observer-green",
+      "batch-closure-and-scope",
+      "build-client-compile",
+      "build-client-export",
+      "build-control-compile",
+      "build-control-export",
+      "build-server-compile",
+      "build-server-export",
+      "composite-scoped-acceptance-summary",
+      "forge-hooks-disassembly",
+      "independent-review",
+      "initialization-red",
+      "invoker-handshake-rejections",
+      "lifecycle-green",
+      "lifecycle-red",
+      "lifecycle-tests-after",
+      "listener-disassembly",
+      "observer-after",
+      "observer-before",
+      "offline-verification-summary",
+      "original-process-outcomes",
+      "patched-bytecode-identity",
+      "receiver-owner-after",
+      "repair-inventory",
+      "repair-result",
+      "scope-inventory",
+      "server-control-readiness",
+      "server-player-joins",
+      "v6-authenticated-readiness",
+      "v6-closure-original-outcomes",
+      "v6-fixed-checker-results",
+      "v6-fixed-setup",
+      "v6-history-inventory",
+      "v6-hosted-verification-summary",
+      "v6-independent-actual-run-review",
+      "v6-minimized-acceptance-summary",
+      "v6-native-input-receipts",
+      "v6-retained-observation-pairs",
+      "v6-visual-capture-identities",
+      "v7-closure-and-original-process-outcomes",
+      "v7-history-inventory",
+      "v7-minimized-run-summary",
+      "v7-readiness-and-preserved-early-read",
+      "v7-single-native-and-own-checkers",
+      "v7-third-person-visual-review"
+    ],
+    "deferred": [],
+    "unavailable": [
+      "Exact V5 provisional client entity IDs",
+      "Original V5 exception message or stack trace"
+    ]
+  },
+  "scope_evidence": [
+    {
+      "id": "scope-inventory",
+      "role": "search_inventory",
+      "index_snapshot_id": "f08b459006529b050e66efff8627f6a142bda8ca70d967ba24d7b8f56dc5fab7",
+      "document_id": "8cb9306ce3fb74b1bfcbd42be13678100e306b40b1bca79d1108450c295c6237",
+      "content_sha256": "bcd9234b3dee5cfd90ca869b67cbd767b03c2a6491f8b8402d77deaf70df3ade",
+      "capture_kind": "MINIMIZED_DERIVED_SUMMARY",
+      "source_capture": {
+        "size_bytes": 3587,
+        "sha256": "bcd9234b3dee5cfd90ca869b67cbd767b03c2a6491f8b8402d77deaf70df3ade",
+        "snapshot_copied_at": "2026-09-30T18:25:20.504373+00:00"
+      }
+    },
+    {
+      "id": "repair-inventory",
+      "role": "search_inventory",
+      "index_snapshot_id": "81599a9fa3e6f2e1b00884c5fb50c9424d871da39fcbdb6aab9703ba49f62089",
+      "document_id": "77eeb07c261e066720e0c1606eaae147df3a1e5fcea6b51a99b629bc6ad216bf",
+      "content_sha256": "a0a761be8f7c160ae175bb370beef02849a04a328b1951e1c364b7d897746051",
+      "capture_kind": "MINIMIZED_DERIVED_SUMMARY",
+      "source_capture": {
+        "size_bytes": 1952,
+        "sha256": "a0a761be8f7c160ae175bb370beef02849a04a328b1951e1c364b7d897746051",
+        "snapshot_copied_at": "2026-09-30T18:33:48.768822+00:00"
+      }
+    },
+    {
+      "id": "v6-history-inventory",
+      "role": "search_inventory",
+      "index_snapshot_id": "c0a6cde925e2afcc0fdf59969f5518172bcdf44b1d86b7c1fef9f27c416ecb42",
+      "document_id": "82848e9b984cb0b531849efc71c2ee8466c03523ade0e902534ae14483c320d6",
+      "content_sha256": "4854b90dfc31c42ee109dc4901d5428ed4f69a02e5861ff5434859fbfa7eddf0",
+      "capture_kind": "MINIMIZED_DERIVED_SUMMARY",
+      "source_capture": {
+        "size_bytes": 9708,
+        "sha256": "4854b90dfc31c42ee109dc4901d5428ed4f69a02e5861ff5434859fbfa7eddf0",
+        "snapshot_copied_at": "2026-09-30T19:10:55.303358+00:00"
+      }
+    },
+    {
+      "id": "v7-history-inventory",
+      "role": "search_inventory",
+      "index_snapshot_id": "785ff0f3f34c2d9a27e1d31014797451c24a9dcde150ae3ea0401ebb625654e0",
+      "document_id": "8fd307035f0b74c9abce909668e7d2d3808e199d2b70ec2f39f95e2a40f17b0d",
+      "content_sha256": "54a8e681794dbdd50f6aab056c1429db70a6c741cab46711c4dd92fb217fce55",
+      "capture_kind": "MINIMIZED_DERIVED_SUMMARY",
+      "source_capture": {
+        "size_bytes": 7151,
+        "sha256": "54a8e681794dbdd50f6aab056c1429db70a6c741cab46711c4dd92fb217fce55",
+        "snapshot_copied_at": "2026-09-30T19:32:08.390724+00:00"
+      }
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "staff-v5-provisional-login-entity-binding",
+      "origin": "OWN_DEVELOPMENT",
+      "track": "ANCHOR",
+      "environment": {
+        "minecraft": "1.20.1",
+        "loader": "forge",
+        "loader_version": "47.4.6",
+        "java_major": 17,
+        "scope": "DEDICATED_CLIENT_OBSERVER"
+      },
+      "before_revision": "072dd1e56a0a5c64b2d6175813f418ffa453722f",
+      "after_revision": "97edd36e4d3cc5c1f3c6959b6513dbe9584873c0",
+      "affected_symbols": [
+        "DedicatedClientObserver.login",
+        "DedicatedClientObserver.current",
+        "StaffPacketTrace.install",
+        "ClientPacketListener.handleLogin",
+        "ForgeHooksClient.firePlayerLogin"
+      ],
+      "evidence": [
+        {
+          "id": "server-control-readiness",
+          "role": "experiment",
+          "index_snapshot_id": "f08b459006529b050e66efff8627f6a142bda8ca70d967ba24d7b8f56dc5fab7",
+          "document_id": "4abacbc0710072f5df60031a8542c5e3535475902a99ae378233e7bcfd732567",
+          "content_sha256": "bad7b7fb4adfe8b03e4b26a83a99d8a1920d225e875bb7245c0d1129a5929b33",
+          "capture_kind": "MINIMIZED_DERIVED_SUMMARY",
+          "source_capture": {
+            "size_bytes": 921,
+            "sha256": "bad7b7fb4adfe8b03e4b26a83a99d8a1920d225e875bb7245c0d1129a5929b33",
+            "snapshot_copied_at": "2026-09-30T18:25:20.504373+00:00"
+          }
+        },
+        {
+          "id": "invoker-handshake-rejections",
+          "role": "experiment",
+          "index_snapshot_id": "f08b459006529b050e66efff8627f6a142bda8ca70d967ba24d7b8f56dc5fab7",
+          "document_id": "13542dc99b304b1e2445efd853a93e3c1ff5c86d1dcafcc634474266092c44b9",
+          "content_sha256": "966da03134cb89c0be720b1938377dbe443af4fae16ad48bd21734fe4883c26b",
+          "capture_kind": "MINIMIZED_DERIVED_SUMMARY",
+          "source_capture": {
+            "size_bytes": 1227,
+            "sha256": "966da03134cb89c0be720b1938377dbe443af4fae16ad48bd21734fe4883c26b",
+            "snapshot_copied_at": "2026-09-30T18:25:20.504373+00:00"
+          }
+        },
+        {
+          "id": "original-process-outcomes",
+          "role": "experiment",
+          "index_snapshot_id": "f08b459006529b050e66efff8627f6a142bda8ca70d967ba24d7b8f56dc5fab7",
+          "document_id": "b81e91b55aa67acf1e4e487e1ef8471470a8e274c97babcf7557fe0d1d0746ac",
+          "content_sha256": "73aa2f05d404cf6114944bc71d9bbe6b236d350e8d80c269bae852b69ecffb0d",
+          "capture_kind": "MINIMIZED_DERIVED_SUMMARY",
+          "source_capture": {
+            "size_bytes": 1084,
+            "sha256": "73aa2f05d404cf6114944bc71d9bbe6b236d350e8d80c269bae852b69ecffb0d",
+            "snapshot_copied_at": "2026-09-30T18:25:20.504373+00:00"
+          }
+        },
+        {
+          "id": "server-player-joins",
+          "role": "log",
+          "index_snapshot_id": "f08b459006529b050e66efff8627f6a142bda8ca70d967ba24d7b8f56dc5fab7",
+          "document_id": "3df3b3bb8ae80a83ee6cdff4f4eb53fed19f845f5afe4b2c945cdd53c0aa3c95",
+          "content_sha256": "f8c6b6aa259f990ec5370d1504e022d57c3c28a43b87096d0a945319ba0bd4d4",
+          "capture_kind": "MINIMIZED_DERIVED_SUMMARY",
+          "source_capture": {
+            "size_bytes": 587,
+            "sha256": "f8c6b6aa259f990ec5370d1504e022d57c3c28a43b87096d0a945319ba0bd4d4",
+            "snapshot_copied_at": "2026-09-30T18:25:20.504373+00:00"
+          }
+        },
+        {
+          "id": "batch-closure-and-scope",
+          "role": "experiment",
+          "index_snapshot_id": "f08b459006529b050e66efff8627f6a142bda8ca70d967ba24d7b8f56dc5fab7",
+          "document_id": "c27e5422843719183d3e4ba21660121bd7e45c66efe5842c3d9f359bd2ed6797",
+          "content_sha256": "74116e1ca74b60fe3d7b8ee728b5eda44877cc6ed2994c32d92993c57c8c4d30",
+          "capture_kind": "MINIMIZED_DERIVED_SUMMARY",
+          "source_capture": {
+            "size_bytes": 1297,
+            "sha256": "74116e1ca74b60fe3d7b8ee728b5eda44877cc6ed2994c32d92993c57c8c4d30",
+            "snapshot_copied_at": "2026-09-30T18:25:20.504373+00:00"
+          }
+        },
+        {
+          "id": "observer-before",
+          "role": "before_code",
+          "index_snapshot_id": "f08b459006529b050e66efff8627f6a142bda8ca70d967ba24d7b8f56dc5fab7",
+          "document_id": "d41392d6fd6f767c9fae3d862cefee40125169a21eb1cffa5042cc9167b75261",
+          "content_sha256": "b3268eefc2a4d2caca0edfef1d30297f08aaf225b105aea091ef837d97caa7b2",
+          "capture_kind": "EXACT_SOURCE_BYTES",
+          "source_capture": {
+            "size_bytes": 8137,
+            "sha256": "b3268eefc2a4d2caca0edfef1d30297f08aaf225b105aea091ef837d97caa7b2",
+            "snapshot_copied_at": "2026-09-30T18:25:20.504373+00:00"
+          }
+        },
+        {
+          "id": "listener-disassembly",
+          "role": "experiment",
+          "index_snapshot_id": "f08b459006529b050e66efff8627f6a142bda8ca70d967ba24d7b8f56dc5fab7",
+          "document_id": "c54f8f265c98b594044f60217463ae99e54212cfa3d9b5c7caead9464aff0d58",
+          "content_sha256": "a3132c0695d6fa4fab19a9886c9423b921afabf65b979bf2e9ced4a3ef5dc005",
+          "capture_kind": "EXACT_OFFLINE_DISASSEMBLY_BYTES",
+          "source_capture": {
+            "size_bytes": 511674,
+            "sha256": "a3132c0695d6fa4fab19a9886c9423b921afabf65b979bf2e9ced4a3ef5dc005",
+            "snapshot_copied_at": "2026-09-30T18:25:20.504373+00:00"
+          }
+        },
+        {
+          "id": "forge-hooks-disassembly",
+          "role": "experiment",
+          "index_snapshot_id": "f08b459006529b050e66efff8627f6a142bda8ca70d967ba24d7b8f56dc5fab7",
+          "document_id": "d549dd54d5e3ca7d37d8fedeec910f4fdfdda77216c131d1e06da243d998043e",
+          "content_sha256": "6c504fb8ac6ea2384e7358a155a3eb32efb27a9bea7562a3a3188013e28e2c80",
+          "capture_kind": "EXACT_OFFLINE_DISASSEMBLY_BYTES",
+          "source_capture": {
+            "size_bytes": 183691,
+            "sha256": "6c504fb8ac6ea2384e7358a155a3eb32efb27a9bea7562a3a3188013e28e2c80",
+            "snapshot_copied_at": "2026-09-30T18:25:20.504373+00:00"
+          }
+        },
+        {
+          "id": "patched-bytecode-identity",
+          "role": "experiment",
+          "index_snapshot_id": "81599a9fa3e6f2e1b00884c5fb50c9424d871da39fcbdb6aab9703ba49f62089",
+          "document_id": "6644d472b668bef89f7ae7f70113bbe99a8bd6f28ebf0bae5e50a45a66af6e50",
+          "content_sha256": "50b50d2f22350c1a1015f7bfa727d0d529ab8747971b4e59d5c857dd21a9fc1b",
+          "capture_kind": "MINIMIZED_DERIVED_SUMMARY",
+          "source_capture": {
+            "size_bytes": 1064,
+            "sha256": "50b50d2f22350c1a1015f7bfa727d0d529ab8747971b4e59d5c857dd21a9fc1b",
+            "snapshot_copied_at": "2026-09-30T18:33:48.768822+00:00"
+          }
+        },
+        {
+          "id": "observer-after",
+          "role": "after_code",
+          "index_snapshot_id": "81599a9fa3e6f2e1b00884c5fb50c9424d871da39fcbdb6aab9703ba49f62089",
+          "document_id": "b58b0c3464c504395d7aa3afcb01cca2d5ef4302d1d052150487b9b3ca453ed9",
+          "content_sha256": "7996ad18d249179d464e2f8d73fab6ac51e5bd7b6213c4f20959016ef098f868",
+          "capture_kind": "EXACT_SOURCE_BYTES",
+          "source_capture": {
+            "size_bytes": 9506,
+            "sha256": "7996ad18d249179d464e2f8d73fab6ac51e5bd7b6213c4f20959016ef098f868",
+            "snapshot_copied_at": "2026-09-30T18:33:48.768822+00:00"
+          }
+        },
+        {
+          "id": "receiver-owner-after",
+          "role": "after_code",
+          "index_snapshot_id": "81599a9fa3e6f2e1b00884c5fb50c9424d871da39fcbdb6aab9703ba49f62089",
+          "document_id": "a70ac35d355a1f9f79d3ae10d35b2e474406f12165942078c84b149546e49a62",
+          "content_sha256": "0514df2080cfb0c9c8583054bd839f60e2aad6d1a73254af21ecead3c9577ef8",
+          "capture_kind": "EXACT_SOURCE_BYTES",
+          "source_capture": {
+            "size_bytes": 30285,
+            "sha256": "0514df2080cfb0c9c8583054bd839f60e2aad6d1a73254af21ecead3c9577ef8",
+            "snapshot_copied_at": "2026-09-30T18:33:48.768822+00:00"
+          }
+        },
+        {
+          "id": "lifecycle-tests-after",
+          "role": "after_code",
+          "index_snapshot_id": "81599a9fa3e6f2e1b00884c5fb50c9424d871da39fcbdb6aab9703ba49f62089",
+          "document_id": "694e146069d428e4ded03b1cef0ad6a707459d118e1c5a4a0cfa1d4c27395e6a",
+          "content_sha256": "091a6e8162c1d05f2e730b619afda88cbd938726ed280f44e84724ab19263961",
+          "capture_kind": "EXACT_SOURCE_BYTES",
+          "source_capture": {
+            "size_bytes": 21781,
+            "sha256": "091a6e8162c1d05f2e730b619afda88cbd938726ed280f44e84724ab19263961",
+            "snapshot_copied_at": "2026-09-30T18:33:48.768822+00:00"
+          }
+        },
+        {
+          "id": "build-client-compile",
+          "role": "experiment",
+          "index_snapshot_id": "81599a9fa3e6f2e1b00884c5fb50c9424d871da39fcbdb6aab9703ba49f62089",
+          "document_id": "34d5fa0e11946379908680bf3dd4ece8b7c4e66fed480603b6835f3ac6a7e326",
+          "content_sha256": "176cfb76fac7cade65eefa4093f548a0000217dbacaf0475a4c084a959e569cb",
+          "capture_kind": "EXACT_OFFLINE_BUILD_RECEIPT_BYTES",
+          "source_capture": {
+            "size_bytes": 2646,
+            "sha256": "176cfb76fac7cade65eefa4093f548a0000217dbacaf0475a4c084a959e569cb",
+            "snapshot_copied_at": "2026-09-30T18:33:48.768822+00:00"
+          }
+        },
+        {
+          "id": "build-client-export",
+          "role": "experiment",
+          "index_snapshot_id": "81599a9fa3e6f2e1b00884c5fb50c9424d871da39fcbdb6aab9703ba49f62089",
+          "document_id": "c0f321bb6abda226677a417a201115b0b00cc8fead2fe87330b6059d5e9eac87",
+          "content_sha256": "ec338455a3f33349ba217c4ea0083054f009282b502ba87234b46ef180aa3f22",
+          "capture_kind": "EXACT_OFFLINE_BUILD_RECEIPT_BYTES",
+          "source_capture": {
+            "size_bytes": 2383,
+            "sha256": "ec338455a3f33349ba217c4ea0083054f009282b502ba87234b46ef180aa3f22",
+            "snapshot_copied_at": "2026-09-30T18:33:48.768822+00:00"
+          }
+        },
+        {
+          "id": "build-control-compile",
+          "role": "experiment",
+          "index_snapshot_id": "81599a9fa3e6f2e1b00884c5fb50c9424d871da39fcbdb6aab9703ba49f62089",
+          "document_id": "92e8e4e76411020a5583382ed1adf31e15da7953f73d921602647581983b82c8",
+          "content_sha256": "15402bb7cc53f2c969d0a77c06897680f7b7713540975e25b03c31df3c2dfcf0",
+          "capture_kind": "EXACT_OFFLINE_BUILD_RECEIPT_BYTES",
+          "source_capture": {
+            "size_bytes": 2650,
+            "sha256": "15402bb7cc53f2c969d0a77c06897680f7b7713540975e25b03c31df3c2dfcf0",
+            "snapshot_copied_at": "2026-09-30T18:33:48.768822+00:00"
+          }
+        },
+        {
+          "id": "build-control-export",
+          "role": "experiment",
+          "index_snapshot_id": "81599a9fa3e6f2e1b00884c5fb50c9424d871da39fcbdb6aab9703ba49f62089",
+          "document_id": "44e1f3d7d7c737a21fff78f1b1d645bb2ad30cef1e5500f5e11a83ce257cd295",
+          "content_sha256": "1a9b10d5a44ae7691229e834f67e749b099e6a78f97592a3b578aad3dad826b7",
+          "capture_kind": "EXACT_OFFLINE_BUILD_RECEIPT_BYTES",
+          "source_capture": {
+            "size_bytes": 2391,
+            "sha256": "1a9b10d5a44ae7691229e834f67e749b099e6a78f97592a3b578aad3dad826b7",
+            "snapshot_copied_at": "2026-09-30T18:33:48.768822+00:00"
+          }
+        },
+        {
+          "id": "build-server-compile",
+          "role": "experiment",
+          "index_snapshot_id": "81599a9fa3e6f2e1b00884c5fb50c9424d871da39fcbdb6aab9703ba49f62089",
+          "document_id": "6a24ab8fabdb160a5644b7925e3f81724c693c558cd09bd69b12cd5102539538",
+          "content_sha256": "fad7860ceca5d495f1f6d317903af978fff98dae9640af9825e70d46fe713328",
+          "capture_kind": "EXACT_OFFLINE_BUILD_RECEIPT_BYTES",
+          "source_capture": {
+            "size_bytes": 2646,
+            "sha256": "fad7860ceca5d495f1f6d317903af978fff98dae9640af9825e70d46fe713328",
+            "snapshot_copied_at": "2026-09-30T18:33:48.768822+00:00"
+          }
+        },
+        {
+          "id": "build-server-export",
+          "role": "experiment",
+          "index_snapshot_id": "81599a9fa3e6f2e1b00884c5fb50c9424d871da39fcbdb6aab9703ba49f62089",
+          "document_id": "7f5d220fb1aa5550b0d5415a9c8c10c8fb306c24b758feed428d687667418d56",
+          "content_sha256": "a73bb2025f41211278742a1475f4641f9851845cb49432205d23e8f1f97a4b16",
+          "capture_kind": "EXACT_OFFLINE_BUILD_RECEIPT_BYTES",
+          "source_capture": {
+            "size_bytes": 2384,
+            "sha256": "a73bb2025f41211278742a1475f4641f9851845cb49432205d23e8f1f97a4b16",
+            "snapshot_copied_at": "2026-09-30T18:33:48.768822+00:00"
+          }
+        },
+        {
+          "id": "lifecycle-red",
+          "role": "experiment",
+          "index_snapshot_id": "81599a9fa3e6f2e1b00884c5fb50c9424d871da39fcbdb6aab9703ba49f62089",
+          "document_id": "c239550d13149fc0405285889e2d6fd745fbb6a80b27b73f9ff380b133af1e5f",
+          "content_sha256": "7ee2c98aeb582f23e8d43b60307e6edfeda9d91625abc2c002786da02a9d13b7",
+          "capture_kind": "EXACT_OFFLINE_VERIFICATION_BYTES",
+          "source_capture": {
+            "size_bytes": 12612,
+            "sha256": "7ee2c98aeb582f23e8d43b60307e6edfeda9d91625abc2c002786da02a9d13b7",
+            "snapshot_copied_at": "2026-09-30T18:33:48.768822+00:00"
+          }
+        },
+        {
+          "id": "initialization-red",
+          "role": "experiment",
+          "index_snapshot_id": "81599a9fa3e6f2e1b00884c5fb50c9424d871da39fcbdb6aab9703ba49f62089",
+          "document_id": "66cd40a33885a66d51324f9f604b96f975c669daac4f0f67b96ddfc9651a4146",
+          "content_sha256": "a34677f2d21a21abbe30960b1eb1b55e19acc06c66008735637f5d72c956c401",
+          "capture_kind": "EXACT_OFFLINE_VERIFICATION_BYTES",
+          "source_capture": {
+            "size_bytes": 6035,
+            "sha256": "a34677f2d21a21abbe30960b1eb1b55e19acc06c66008735637f5d72c956c401",
+            "snapshot_copied_at": "2026-09-30T18:33:48.768822+00:00"
+          }
+        },
+        {
+          "id": "lifecycle-green",
+          "role": "experiment",
+          "index_snapshot_id": "81599a9fa3e6f2e1b00884c5fb50c9424d871da39fcbdb6aab9703ba49f62089",
+          "document_id": "b90508fd8191ae45e954face507a462533554fdee550d9f25c16c786a941c5c0",
+          "content_sha256": "05a69300abd0fdb1b8324b1adfeb419f2214ff671f2344a0ed9c8a35f7eb0510",
+          "capture_kind": "EXACT_OFFLINE_VERIFICATION_BYTES",
+          "source_capture": {
+            "size_bytes": 99,
+            "sha256": "05a69300abd0fdb1b8324b1adfeb419f2214ff671f2344a0ed9c8a35f7eb0510",
+            "snapshot_copied_at": "2026-09-30T18:33:48.768822+00:00"
+          }
+        },
+        {
+          "id": "affected-observer-green",
+          "role": "experiment",
+          "index_snapshot_id": "81599a9fa3e6f2e1b00884c5fb50c9424d871da39fcbdb6aab9703ba49f62089",
+          "document_id": "cbc517238202bb7abd89ddf837f9caff5cbf81e97bdc2c3c3b901062a0f5a68d",
+          "content_sha256": "1517002ad8c3c7a28ed4bc4f2c8270af32100c01174e83c1ac84580ebb8bb6d6",
+          "capture_kind": "EXACT_OFFLINE_VERIFICATION_BYTES",
+          "source_capture": {
+            "size_bytes": 261,
+            "sha256": "1517002ad8c3c7a28ed4bc4f2c8270af32100c01174e83c1ac84580ebb8bb6d6",
+            "snapshot_copied_at": "2026-09-30T18:33:48.768822+00:00"
+          }
+        },
+        {
+          "id": "independent-review",
+          "role": "experiment",
+          "index_snapshot_id": "81599a9fa3e6f2e1b00884c5fb50c9424d871da39fcbdb6aab9703ba49f62089",
+          "document_id": "65e4be0c576d6bccb0f05555aad2b295a5c9039ca832ca86304ab16def9b7b0d",
+          "content_sha256": "2ffb6be1e5f24d07f404a42f41f204204e139273c1528deff928c2e7541dfb30",
+          "capture_kind": "EXACT_OFFLINE_VERIFICATION_BYTES",
+          "source_capture": {
+            "size_bytes": 4242,
+            "sha256": "2ffb6be1e5f24d07f404a42f41f204204e139273c1528deff928c2e7541dfb30",
+            "snapshot_copied_at": "2026-09-30T18:33:48.768822+00:00"
+          }
+        },
+        {
+          "id": "repair-result",
+          "role": "experiment",
+          "index_snapshot_id": "81599a9fa3e6f2e1b00884c5fb50c9424d871da39fcbdb6aab9703ba49f62089",
+          "document_id": "0d06386c07f284a5befb93ad93bafb972b34fdab84a61e24e8ba1befb6e63619",
+          "content_sha256": "82ea9e7be77a48df3a2724c5181d1bd49f4a039483e3884592abc789aadeab14",
+          "capture_kind": "EXACT_OFFLINE_VERIFICATION_BYTES",
+          "source_capture": {
+            "size_bytes": 3507,
+            "sha256": "82ea9e7be77a48df3a2724c5181d1bd49f4a039483e3884592abc789aadeab14",
+            "snapshot_copied_at": "2026-09-30T18:33:48.768822+00:00"
+          }
+        },
+        {
+          "id": "actual-forge-build-report",
+          "role": "experiment",
+          "index_snapshot_id": "81599a9fa3e6f2e1b00884c5fb50c9424d871da39fcbdb6aab9703ba49f62089",
+          "document_id": "6a27e4627bbdad633aa5c9b2eef42e66562cb177b6f6cd9ad802bcc4e977474c",
+          "content_sha256": "5f70998f31bd1354af27f6aa98d53f40293c6b6a281917050954b18b24b17b6c",
+          "capture_kind": "EXACT_OFFLINE_VERIFICATION_BYTES",
+          "source_capture": {
+            "size_bytes": 9216,
+            "sha256": "5f70998f31bd1354af27f6aa98d53f40293c6b6a281917050954b18b24b17b6c",
+            "snapshot_copied_at": "2026-09-30T18:33:48.768822+00:00"
+          }
+        },
+        {
+          "id": "offline-verification-summary",
+          "role": "experiment",
+          "index_snapshot_id": "81599a9fa3e6f2e1b00884c5fb50c9424d871da39fcbdb6aab9703ba49f62089",
+          "document_id": "e90c95694d175044cd0ec8ae7fa700d901c0a83ae97aa116cc8727bf1f7f5d55",
+          "content_sha256": "696edc10fce2cefd901f2ed2bcd494ea3b06b1feb03bfef36cd02549e8f1fc93",
+          "capture_kind": "MINIMIZED_DERIVED_SUMMARY",
+          "source_capture": {
+            "size_bytes": 6935,
+            "sha256": "696edc10fce2cefd901f2ed2bcd494ea3b06b1feb03bfef36cd02549e8f1fc93",
+            "snapshot_copied_at": "2026-09-30T18:33:48.768822+00:00"
+          }
+        },
+        {
+          "id": "v6-authenticated-readiness",
+          "role": "experiment",
+          "index_snapshot_id": "c0a6cde925e2afcc0fdf59969f5518172bcdf44b1d86b7c1fef9f27c416ecb42",
+          "document_id": "e0ba1939618d4a01b10ebe50406726af98746a3c7f28f8a4a87312f564bc32a8",
+          "content_sha256": "0353570f2988c84bee68396cb7076b0fbc5444c146928c10bc5ead743a8dde52",
+          "capture_kind": "MINIMIZED_DERIVED_SUMMARY",
+          "source_capture": {
+            "size_bytes": 2981,
+            "sha256": "0353570f2988c84bee68396cb7076b0fbc5444c146928c10bc5ead743a8dde52",
+            "snapshot_copied_at": "2026-09-30T19:10:55.303358+00:00"
+          }
+        },
+        {
+          "id": "v6-closure-original-outcomes",
+          "role": "experiment",
+          "index_snapshot_id": "c0a6cde925e2afcc0fdf59969f5518172bcdf44b1d86b7c1fef9f27c416ecb42",
+          "document_id": "6f99813d37b22f672604b2774164dd2e1b9008b12767a808df9270d88826bf4a",
+          "content_sha256": "bf4fadbba3670bf660452ad1d1e4497d53171b6cb5d38ec0bd43b218589cf083",
+          "capture_kind": "MINIMIZED_DERIVED_SUMMARY",
+          "source_capture": {
+            "size_bytes": 1973,
+            "sha256": "bf4fadbba3670bf660452ad1d1e4497d53171b6cb5d38ec0bd43b218589cf083",
+            "snapshot_copied_at": "2026-09-30T19:10:55.303358+00:00"
+          }
+        },
+        {
+          "id": "v6-fixed-checker-results",
+          "role": "experiment",
+          "index_snapshot_id": "c0a6cde925e2afcc0fdf59969f5518172bcdf44b1d86b7c1fef9f27c416ecb42",
+          "document_id": "9718f4f4ad92df01992a4aec97b3b7d95925a104d1c05d350b6ba8c47e085ebd",
+          "content_sha256": "6c6bccc266c496a7db60f98fae151eb841074a37e0f110be21888ad5d611745a",
+          "capture_kind": "MINIMIZED_DERIVED_SUMMARY",
+          "source_capture": {
+            "size_bytes": 2232,
+            "sha256": "6c6bccc266c496a7db60f98fae151eb841074a37e0f110be21888ad5d611745a",
+            "snapshot_copied_at": "2026-09-30T19:10:55.303358+00:00"
+          }
+        },
+        {
+          "id": "v6-fixed-setup",
+          "role": "experiment",
+          "index_snapshot_id": "c0a6cde925e2afcc0fdf59969f5518172bcdf44b1d86b7c1fef9f27c416ecb42",
+          "document_id": "29c2487f644c15488dcf4dab9c343debe2bf930ac6df64fb6d101b0aeb31fed0",
+          "content_sha256": "ad12975afd8ba43e29fe437ddaabd1e5c2e3a3a78b3dcd409362b11a4cc316e7",
+          "capture_kind": "MINIMIZED_DERIVED_SUMMARY",
+          "source_capture": {
+            "size_bytes": 1338,
+            "sha256": "ad12975afd8ba43e29fe437ddaabd1e5c2e3a3a78b3dcd409362b11a4cc316e7",
+            "snapshot_copied_at": "2026-09-30T19:10:55.303358+00:00"
+          }
+        },
+        {
+          "id": "v6-native-input-receipts",
+          "role": "experiment",
+          "index_snapshot_id": "c0a6cde925e2afcc0fdf59969f5518172bcdf44b1d86b7c1fef9f27c416ecb42",
+          "document_id": "59707d819a38db6ed29b4a3605b600e5eea4d9b8cdf350abd291e2f31131c86e",
+          "content_sha256": "5dff88176da4a0d1f27fae14810f24fd685ad1e7c1ef6990501c6c1dcfaea533",
+          "capture_kind": "MINIMIZED_DERIVED_SUMMARY",
+          "source_capture": {
+            "size_bytes": 1056,
+            "sha256": "5dff88176da4a0d1f27fae14810f24fd685ad1e7c1ef6990501c6c1dcfaea533",
+            "snapshot_copied_at": "2026-09-30T19:10:55.303358+00:00"
+          }
+        },
+        {
+          "id": "v6-retained-observation-pairs",
+          "role": "experiment",
+          "index_snapshot_id": "c0a6cde925e2afcc0fdf59969f5518172bcdf44b1d86b7c1fef9f27c416ecb42",
+          "document_id": "fa3979196cfa97bdce42826ea51e4dd5b2f14dcad211829772fc1d7701564176",
+          "content_sha256": "99a703d889034f9795b17a05d46cb3ec20391b32261baacfc9db1d174bf4bfed",
+          "capture_kind": "MINIMIZED_DERIVED_SUMMARY",
+          "source_capture": {
+            "size_bytes": 6988,
+            "sha256": "99a703d889034f9795b17a05d46cb3ec20391b32261baacfc9db1d174bf4bfed",
+            "snapshot_copied_at": "2026-09-30T19:10:55.303358+00:00"
+          }
+        },
+        {
+          "id": "v6-visual-capture-identities",
+          "role": "experiment",
+          "index_snapshot_id": "c0a6cde925e2afcc0fdf59969f5518172bcdf44b1d86b7c1fef9f27c416ecb42",
+          "document_id": "940a472dfd1c1de0ec0fe2c2da38695d7bca95bdb144712f49bf5e8d105892ad",
+          "content_sha256": "3ac8672d9bbb20c229dbe2c8075292c305cbef4a75080455f6f562c89529d502",
+          "capture_kind": "MINIMIZED_DERIVED_SUMMARY",
+          "source_capture": {
+            "size_bytes": 2223,
+            "sha256": "3ac8672d9bbb20c229dbe2c8075292c305cbef4a75080455f6f562c89529d502",
+            "snapshot_copied_at": "2026-09-30T19:10:55.303358+00:00"
+          }
+        },
+        {
+          "id": "v6-independent-actual-run-review",
+          "role": "experiment",
+          "index_snapshot_id": "c0a6cde925e2afcc0fdf59969f5518172bcdf44b1d86b7c1fef9f27c416ecb42",
+          "document_id": "0bd7b6d8b273f876457e571c7890f35f182794020962dd9939df30dcd5fdfa49",
+          "content_sha256": "3ba0993db732c7ec40caf55bb26153e379ea84c7ee9cbc437f40e1703db8d12e",
+          "capture_kind": "MINIMIZED_DERIVED_SUMMARY",
+          "source_capture": {
+            "size_bytes": 2100,
+            "sha256": "3ba0993db732c7ec40caf55bb26153e379ea84c7ee9cbc437f40e1703db8d12e",
+            "snapshot_copied_at": "2026-09-30T19:10:55.303358+00:00"
+          }
+        },
+        {
+          "id": "v6-hosted-verification-summary",
+          "role": "experiment",
+          "index_snapshot_id": "c0a6cde925e2afcc0fdf59969f5518172bcdf44b1d86b7c1fef9f27c416ecb42",
+          "document_id": "ad4c2b162a7f1b3e947530917116e47184aa2c3c242f3d18588c1470fb09722c",
+          "content_sha256": "a2c302ebde87492be3d6af41e272bbed748d220f24b6cee169cdc33caae3e0ee",
+          "capture_kind": "MINIMIZED_DERIVED_SUMMARY",
+          "source_capture": {
+            "size_bytes": 1190,
+            "sha256": "a2c302ebde87492be3d6af41e272bbed748d220f24b6cee169cdc33caae3e0ee",
+            "snapshot_copied_at": "2026-09-30T19:10:55.303358+00:00"
+          }
+        },
+        {
+          "id": "v6-minimized-acceptance-summary",
+          "role": "experiment",
+          "index_snapshot_id": "c0a6cde925e2afcc0fdf59969f5518172bcdf44b1d86b7c1fef9f27c416ecb42",
+          "document_id": "1896579f2b535e81f3065dd541544dff0f29df40df85a88b70f2b3f75300fb73",
+          "content_sha256": "b9bf063693c7aa24975baaa5560ae504b65caad91c39b26a487e53e8f5601a17",
+          "capture_kind": "MINIMIZED_DERIVED_SUMMARY",
+          "source_capture": {
+            "size_bytes": 18113,
+            "sha256": "b9bf063693c7aa24975baaa5560ae504b65caad91c39b26a487e53e8f5601a17",
+            "snapshot_copied_at": "2026-09-30T19:10:55.303358+00:00"
+          }
+        },
+        {
+          "id": "v7-readiness-and-preserved-early-read",
+          "role": "experiment",
+          "index_snapshot_id": "785ff0f3f34c2d9a27e1d31014797451c24a9dcde150ae3ea0401ebb625654e0",
+          "document_id": "36e1f6cec2b00e111412cd1507a57ca61e1bbe15d266cbfa5a2f7e64b5290aca",
+          "content_sha256": "db2debdbd7db1907fbd998bf16f67d00db56a29f6b22e939f521f5802c51cb23",
+          "capture_kind": "MINIMIZED_DERIVED_SUMMARY",
+          "source_capture": {
+            "size_bytes": 1566,
+            "sha256": "db2debdbd7db1907fbd998bf16f67d00db56a29f6b22e939f521f5802c51cb23",
+            "snapshot_copied_at": "2026-09-30T19:32:08.390724+00:00"
+          }
+        },
+        {
+          "id": "v7-single-native-and-own-checkers",
+          "role": "experiment",
+          "index_snapshot_id": "785ff0f3f34c2d9a27e1d31014797451c24a9dcde150ae3ea0401ebb625654e0",
+          "document_id": "ffe0d94118bfd1da5b9312a8a34fb60716f37625a92394010b86e3936359689e",
+          "content_sha256": "48fd2e590423dc627d0049612d571083fe999133468475215407fa32aed84253",
+          "capture_kind": "MINIMIZED_DERIVED_SUMMARY",
+          "source_capture": {
+            "size_bytes": 2236,
+            "sha256": "48fd2e590423dc627d0049612d571083fe999133468475215407fa32aed84253",
+            "snapshot_copied_at": "2026-09-30T19:32:08.390724+00:00"
+          }
+        },
+        {
+          "id": "v7-third-person-visual-review",
+          "role": "experiment",
+          "index_snapshot_id": "785ff0f3f34c2d9a27e1d31014797451c24a9dcde150ae3ea0401ebb625654e0",
+          "document_id": "9aecc43260d8b480610e256858132698d250a4344f1ccb2c2a245afe2c975779",
+          "content_sha256": "bfdfeafb52fdc161ffbba7e746db4125703481ab3e986d989c395681b20ed844",
+          "capture_kind": "MINIMIZED_DERIVED_SUMMARY",
+          "source_capture": {
+            "size_bytes": 2911,
+            "sha256": "bfdfeafb52fdc161ffbba7e746db4125703481ab3e986d989c395681b20ed844",
+            "snapshot_copied_at": "2026-09-30T19:32:08.390724+00:00"
+          }
+        },
+        {
+          "id": "v7-closure-and-original-process-outcomes",
+          "role": "experiment",
+          "index_snapshot_id": "785ff0f3f34c2d9a27e1d31014797451c24a9dcde150ae3ea0401ebb625654e0",
+          "document_id": "84379240e3fc4131f939d40b4f916d26abfb5cd2939dd0650e9bc09427a2dc69",
+          "content_sha256": "079f3876f220ca6a9f060dac8a6829625de6ae06da8f9dcfc306a50383b9dcf9",
+          "capture_kind": "MINIMIZED_DERIVED_SUMMARY",
+          "source_capture": {
+            "size_bytes": 1796,
+            "sha256": "079f3876f220ca6a9f060dac8a6829625de6ae06da8f9dcfc306a50383b9dcf9",
+            "snapshot_copied_at": "2026-09-30T19:32:08.390724+00:00"
+          }
+        },
+        {
+          "id": "v7-minimized-run-summary",
+          "role": "experiment",
+          "index_snapshot_id": "785ff0f3f34c2d9a27e1d31014797451c24a9dcde150ae3ea0401ebb625654e0",
+          "document_id": "5e59490e7d322bde84b6cf000fd75ba91841d861d0865d8f45fc54afe6714ff1",
+          "content_sha256": "b5b0565795c166c1e3e53fbb38c9ddc7c68be2515b5485925817c07821f1a35e",
+          "capture_kind": "MINIMIZED_DERIVED_SUMMARY",
+          "source_capture": {
+            "size_bytes": 9052,
+            "sha256": "b5b0565795c166c1e3e53fbb38c9ddc7c68be2515b5485925817c07821f1a35e",
+            "snapshot_copied_at": "2026-09-30T19:32:08.390724+00:00"
+          }
+        },
+        {
+          "id": "composite-scoped-acceptance-summary",
+          "role": "experiment",
+          "index_snapshot_id": "785ff0f3f34c2d9a27e1d31014797451c24a9dcde150ae3ea0401ebb625654e0",
+          "document_id": "c87658f8ebbf2facf9230f5b3521c9ab807c6c2707344fbbcb1c5189cc259599",
+          "content_sha256": "e3e365c45307e0682cbe261f8bff13a0fcb99ddf228bd2bfab436cd50dacd9df",
+          "capture_kind": "MINIMIZED_DERIVED_SUMMARY",
+          "source_capture": {
+            "size_bytes": 28141,
+            "sha256": "e3e365c45307e0682cbe261f8bff13a0fcb99ddf228bd2bfab436cd50dacd9df",
+            "snapshot_copied_at": "2026-09-30T19:32:08.390724+00:00"
+          }
+        }
+      ],
+      "symptom": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "After server and control authenticated readiness, the invoker joined with server entity ID 2 but both GET /v1/handshake readiness requests returned authenticated HTTP 409 REQUEST_REJECTED with UNKNOWN outcome and retry_allowed=false.",
+        "evidence_ids": [
+          "invoker-handshake-rejections",
+          "server-control-readiness",
+          "server-player-joins"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "The observer freezes boundEntityId and installs StaffPacketTrace synchronously in LoggingIn. The inspected Forge handleLogin disassembly calls firePlayerLogin at bytecode 383 before packet playerId at 387 and LocalPlayer.setId at 401. A provisional ID unequal to the final server ID will violate current() later.",
+        "evidence_ids": [
+          "observer-before",
+          "listener-disassembly",
+          "forge-hooks-disassembly",
+          "patched-bytecode-identity"
+        ]
+      },
+      "root_cause": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "Implementation lifecycle defect: binding the numeric entity ID and packet witness during LoggingIn can retain the provisional ID before handleLogin assigns the final ID. This code/disassembly finding is distinct from an exact causal reconstruction of the V5 live rejection; the live provisional IDs and exception message were not retained.",
+        "evidence_ids": [
+          "observer-before",
+          "listener-disassembly",
+          "forge-hooks-disassembly",
+          "invoker-handshake-rejections",
+          "patched-bytecode-identity"
+        ]
+      },
+      "repair": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "LoggingIn consumes the epoch and retains the original player, connection lifetime and channel object without freezing the provisional entity ID or exposing a receiver. A one-shot END client tick revalidates those identities and the selected UUID, then binds the final entity ID. Receiver startup verifies and initializes its session and owned directory before a checked callback installs the packet trace; only a successful callback permits receiver activation. Logout, clone, duplicate login, identity loss and startup failure permanently invalidate the pending lifetime, and later entity-ID changes remain rejected.",
+        "evidence_ids": [
+          "observer-after",
+          "receiver-owner-after",
+          "lifecycle-tests-after"
+        ]
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Defer final numeric identity and packet-witness binding until a verified post-login boundary, retaining the original player/connection checks and fail-closed lifetime semantics. A first client readiness success does not establish correct identity binding for later clients.",
+        "evidence_ids": [
+          "observer-before",
+          "listener-disassembly",
+          "server-control-readiness",
+          "server-player-joins"
+        ]
+      },
+      "causal_chain": [
+        {
+          "basis": "INFERENCE",
+          "text": "Control joined with server ID 1 and invoker with ID 2; the provisional client IDs were not captured. Control success is consistent with a coincidental provisional/final match, but does not prove one.",
+          "evidence_ids": [
+            "server-player-joins",
+            "server-control-readiness"
+          ]
+        },
+        {
+          "basis": "DIRECT_OBSERVATION",
+          "text": "Readiness failure stopped setup before commands or native gestures. Required staff verifiers remain NOT_RUN; intentional exact-owned SIGTERM was followed by closed execution threads and an empty desktop process probe. Original receipts retain FAIL, completed=true, exit_code=1 and timed_out=false.",
+          "evidence_ids": [
+            "batch-closure-and-scope",
+            "original-process-outcomes"
+          ]
+        },
+        {
+          "basis": "DIRECT_OBSERVATION",
+          "text": "Exact cached patched archive and class hashes independently confirm the login ordering. Final offline regression and build results are retained separately from live acceptance; post-fix staff behavior remains NOT_RUN.",
+          "evidence_ids": [
+            "patched-bytecode-identity",
+            "offline-verification-summary"
+          ]
+        },
+        {
+          "basis": "DIRECT_OBSERVATION",
+          "text": "In the V6 continuation all three authenticated readiness phases succeeded, with the invoker packet witness bound to final entity ID 2. Ten registered setup commands and both released native gestures completed. Separate actual-run review recomputed all four fixed checks as PASS and inspected the three display contexts; the stricter third-person visible-Glowing assertion remains NOT_RUN.",
+          "evidence_ids": [
+            "v6-authenticated-readiness",
+            "v6-fixed-setup",
+            "v6-native-input-receipts",
+            "v6-fixed-checker-results",
+            "v6-independent-actual-run-review"
+          ]
+        },
+        {
+          "basis": "DIRECT_OBSERVATION",
+          "text": "A separate V7 visual continuation used one completed 50 ms native gesture and a same-camera neutral baseline. The retained frame 1947 shows white outline on player and held staff with particles/icon and positive Glowing I metadata at 29 ticks. Independent review establishes the named third_person_view assertion. V7 repeat/expiry remain NOT_RUN; V6 behavior evidence remains under its own original references.",
+          "evidence_ids": [
+            "v7-single-native-and-own-checkers",
+            "v7-third-person-visual-review",
+            "v7-minimized-run-summary"
+          ]
+        }
+      ],
+      "reproduction": {
+        "state": "RECORDED_EXPERIMENT",
+        "evidence_ids": [
+          "invoker-handshake-rejections",
+          "server-control-readiness"
+        ],
+        "scope": "Retained live readiness symptom only; exact V5 provisional IDs were not observed."
+      },
+      "fix_verification": {
+        "state": "RECORDED_EXPERIMENT",
+        "evidence_ids": [
+          "v6-authenticated-readiness",
+          "v6-independent-actual-run-review",
+          "v6-minimized-acceptance-summary",
+          "v7-third-person-visual-review",
+          "composite-scoped-acceptance-summary"
+        ]
+      },
+      "repair_status": "SCOPED_LIVE_REPAIR_VERIFIED_V6_BEHAVIOR_V7_VISUAL",
+      "runtime_after_fix": "SCOPED_V6_BEHAVIOR_AND_V7_VISUAL_PASS",
+      "limitations": [
+        "Exact provisional client entity IDs were not captured.",
+        "Signed REQUEST_REJECTED is an exception category, not the underlying exception message or a root-cause attestation.",
+        "History import is research evidence and supplies no new runtime attestation.",
+        "Fixture tests execute the production listener and receiver startup method with isolated game/infrastructure doubles; they are not live Forge lifecycle acceptance.",
+        "The broad project test run was interrupted on scope steering; no aggregate project result is claimed.",
+        "The 28 focused lifecycle and 106 independent review cases overlap the 184 affected cases and are not summed.",
+        "Target-code coverage and ordered dependency-byte identities are complete for the declared staff scope; coverage.complete remains false and broad profiles remain UNKNOWN. Actual Forge builds do not establish live client lifecycle, rendering, behavior or memory sufficiency.",
+        "First-person cropping and third-person foreshortening do not establish complete silhouette or all-angle quality.",
+        "Original generic checker product_acceptance and native verification fields remain unchanged; the separate actual-run review is restricted to the declared staff fixture and retained evidence.",
+        "V6 third-person active-Glowing was not established in V6; the named visual assertion is established separately by V7. V7 repeat/expiry remain NOT_RUN, and V6 behavior evidence is not rebound to V7."
+      ],
+      "exact_repair_sha256": {
+        "departments/minecraft/mod-ai/forge-observer/src/main/java/org/kneekura/observer/DedicatedClientObserver.java": "7996ad18d249179d464e2f8d73fab6ac51e5bd7b6213c4f20959016ef098f868",
+        "departments/minecraft/mod-ai/forge-observer/src/main/java/org/kneekura/observer/ForgeObserver.java": "0514df2080cfb0c9c8583054bd839f60e2aad6d1a73254af21ecead3c9577ef8",
+        "tests/test_minecraft_dedicated_client_java.py": "091a6e8162c1d05f2e730b619afda88cbd938726ed280f44e84724ab19263961"
+      },
+      "offline_scope": {
+        "schema_version": 1,
+        "scope": "OFFLINE_SOURCE_AND_CONTRACT_VERIFICATION_ONLY",
+        "verification": [
+          {
+            "id": "lifecycle-red",
+            "sha256": "7ee2c98aeb582f23e8d43b60307e6edfeda9d91625abc2c002786da02a9d13b7",
+            "scope": "Original lifecycle baseline: 16 failed, 10 passed"
+          },
+          {
+            "id": "initialization-red",
+            "sha256": "a34677f2d21a21abbe30960b1eb1b55e19acc06c66008735637f5d72c956c401",
+            "scope": "Cold-session callback baseline: 8 failed, 18 passed"
+          },
+          {
+            "id": "lifecycle-green",
+            "sha256": "05a69300abd0fdb1b8324b1adfeb419f2214ff671f2344a0ed9c8a35f7eb0510",
+            "scope": "Final focused lifecycle: 28 passed, 0 skipped"
+          },
+          {
+            "id": "affected-observer-green",
+            "sha256": "1517002ad8c3c7a28ed4bc4f2c8270af32100c01174e83c1ac84580ebb8bb6d6",
+            "scope": "Affected observer suite: 184 passed, 0 skipped; includes lifecycle cases"
+          },
+          {
+            "id": "independent-review",
+            "sha256": "2ffb6be1e5f24d07f404a42f41f204204e139273c1528deff928c2e7541dfb30",
+            "scope": "Independent source/lifecycle review: PASS; 106 passed, 0 skipped; suites overlap"
+          },
+          {
+            "id": "repair-result",
+            "sha256": "82ea9e7be77a48df3a2724c5181d1bd49f4a039483e3884592abc789aadeab14",
+            "scope": "Final repair analysis and verification report"
+          },
+          {
+            "id": "actual-forge-build-report",
+            "sha256": "5f70998f31bd1354af27f6aa98d53f40293c6b6a281917050954b18b24b17b6c",
+            "scope": "All three roles compile/export PASS with frozen observer source/compiled-class identities; no runtime acceptance"
+          }
+        ],
+        "source_sha256": {
+          "departments/minecraft/mod-ai/forge-observer/src/main/java/org/kneekura/observer/DedicatedClientObserver.java": "7996ad18d249179d464e2f8d73fab6ac51e5bd7b6213c4f20959016ef098f868",
+          "departments/minecraft/mod-ai/forge-observer/src/main/java/org/kneekura/observer/ForgeObserver.java": "0514df2080cfb0c9c8583054bd839f60e2aad6d1a73254af21ecead3c9577ef8",
+          "tests/test_minecraft_dedicated_client_java.py": "091a6e8162c1d05f2e730b619afda88cbd938726ed280f44e84724ab19263961"
+        },
+        "results": {
+          "affected_observer_green": {
+            "includes_lifecycle_green": true,
+            "log_sha256": "1517002ad8c3c7a28ed4bc4f2c8270af32100c01174e83c1ac84580ebb8bb6d6",
+            "passed": 184,
+            "seconds": 55.37,
+            "skipped": 0
+          },
+          "broader_project_suite": {
+            "result_claimed": false,
+            "status": "INTERRUPTED_ON_PARENT_SCOPE_STEERING",
+            "tool_exit": 130
+          },
+          "cold_initialization_red": {
+            "failed": 8,
+            "log_sha256": "a34677f2d21a21abbe30960b1eb1b55e19acc06c66008735637f5d72c956c401",
+            "passed": 18
+          },
+          "final_lifecycle_green": {
+            "log_sha256": "05a69300abd0fdb1b8324b1adfeb419f2214ff671f2344a0ed9c8a35f7eb0510",
+            "passed": 28,
+            "seconds": 8.7,
+            "skipped": 0
+          },
+          "initial_lifecycle_red": {
+            "failed": 16,
+            "log_sha256": "7ee2c98aeb582f23e8d43b60307e6edfeda9d91625abc2c002786da02a9d13b7",
+            "passed": 10
+          },
+          "independent_review": {
+            "status": "PASS_INDEPENDENT_SOURCE_LIFECYCLE_REVIEW",
+            "passed": 106,
+            "skipped": 0
+          },
+          "overlapping_suites_not_summed": true,
+          "actual_forge_build": {
+            "status": "PASS_FROZEN_OBSERVER_BUILD_REFRESH",
+            "completed_at": "2026-09-30T18:32:02.131193+00:00",
+            "observer_source_inventory_hash": "e78ae064c7c73f544bc2507fbb2baf1162291c30531668bb7f7446850c4896f1",
+            "observer_compiled_class_inventory_hash": "f1af3b225bfacc5a65983372160d89950acfae14a2cf3d63a0e98c66ba13b810",
+            "observer_resources_inventory_hash": "90bf701ce2599e5c1a60846962f3c9724444c740b501b62b44f82debc71406a2",
+            "main_code_assets_configuration_unchanged": true,
+            "game_launches": 0,
+            "worlds_prepared": 0,
+            "sessions_created": 0,
+            "retained_v3_bytes_unchanged": true,
+            "broad_profile_status": "UNKNOWN_PRESERVED",
+            "memory_sufficiency": "NOT_VERIFIED",
+            "roles": {
+              "client": {
+                "outcome": "PASS_BUILD_ONLY",
+                "compile_receipt_hash": "176cfb76fac7cade65eefa4093f548a0000217dbacaf0475a4c084a959e569cb",
+                "export_receipt_hash": "ec338455a3f33349ba217c4ea0083054f009282b502ba87234b46ef180aa3f22",
+                "source_generation": "2471ec04fb517d6e96944a43395a8083f91104584e883401096efd109cf977e6",
+                "target_profile_id": "46c8fa8983243cca1bc9b873318032afa436fc3d7ec47e7ce7f696fdd8f3f5a8",
+                "target_index_id": "bb21810cb3c01847a9dc636726e82cce3b29e44627c12d2ab79b06a8e946879b",
+                "dependency_inventory_hash": "7ed0077ebd5953bb4029d8995f65309d9b09da60a776dcc00991e629e21677f4",
+                "runtime_artifact_hash": "dc420c33f46828f8f89081030d19efaa91dbfbe56c3d944856deb1b141d7f26c",
+                "observer_source_inventory_hash": "e78ae064c7c73f544bc2507fbb2baf1162291c30531668bb7f7446850c4896f1",
+                "observer_compilation_updated": true,
+                "main_runtime_identical_to_v3": true,
+                "target_complete": true,
+                "whole_profile_complete": false,
+                "broad_profile_status": "UNKNOWN_PRESERVED",
+                "game_launches": 0
+              },
+              "control": {
+                "outcome": "PASS_BUILD_ONLY",
+                "compile_receipt_hash": "15402bb7cc53f2c969d0a77c06897680f7b7713540975e25b03c31df3c2dfcf0",
+                "export_receipt_hash": "1a9b10d5a44ae7691229e834f67e749b099e6a78f97592a3b578aad3dad826b7",
+                "source_generation": "3e1ff2fcc89f31e13781bc0560aa1974edfb28246d5ac9c9b65d5013fd74b4e0",
+                "target_profile_id": "a6c1f40b071005e5a26606c22e5f5d6e539767c95e893bf965eae1fae67fc1a9",
+                "target_index_id": "0ef56e01afba5d07399fe15f2d4af757df8a5bea7659212b3f6370073d8dd116",
+                "dependency_inventory_hash": "b4afbcf3ad88fffe8f2d10e3e6e16143d25b92e4fa599315e0fdff905183cf13",
+                "runtime_artifact_hash": "dc420c33f46828f8f89081030d19efaa91dbfbe56c3d944856deb1b141d7f26c",
+                "observer_source_inventory_hash": "e78ae064c7c73f544bc2507fbb2baf1162291c30531668bb7f7446850c4896f1",
+                "observer_compilation_updated": true,
+                "main_runtime_identical_to_v3": true,
+                "target_complete": true,
+                "whole_profile_complete": false,
+                "broad_profile_status": "UNKNOWN_PRESERVED",
+                "game_launches": 0
+              },
+              "server": {
+                "outcome": "PASS_BUILD_ONLY",
+                "compile_receipt_hash": "fad7860ceca5d495f1f6d317903af978fff98dae9640af9825e70d46fe713328",
+                "export_receipt_hash": "a73bb2025f41211278742a1475f4641f9851845cb49432205d23e8f1f97a4b16",
+                "source_generation": "b57560a403a5ca92d2cfde1b0314ea2694373245097e3586d40ec3ce2dc9d568",
+                "target_profile_id": "9be53a5ab33c317b23b24fe372309757de63e9920a409cedf3e5cdbbdfc3dd32",
+                "target_index_id": "c305984dfcc8ac255ccaebb8a5117cf8cdb56edd21950b165ee77022454c39fd",
+                "dependency_inventory_hash": "3e36f380b9c5a2f19593f5baf2f294511e5d085a98d7c5e41ebe356687c1f42a",
+                "runtime_artifact_hash": "dc420c33f46828f8f89081030d19efaa91dbfbe56c3d944856deb1b141d7f26c",
+                "observer_source_inventory_hash": "e78ae064c7c73f544bc2507fbb2baf1162291c30531668bb7f7446850c4896f1",
+                "observer_compilation_updated": true,
+                "main_runtime_identical_to_v3": true,
+                "target_complete": true,
+                "whole_profile_complete": false,
+                "broad_profile_status": "UNKNOWN_PRESERVED",
+                "game_launches": 0
+              }
+            }
+          }
+        },
+        "runtime_after_fix": "NOT_RUN",
+        "game_launches": 0,
+        "commands_executed": 0,
+        "native_gestures": 0,
+        "limitations": [
+          "Fixture tests execute the production listener and receiver startup method with isolated game/infrastructure doubles; they are not live Forge lifecycle acceptance.",
+          "The broad project test run was interrupted on scope steering; no aggregate project result is claimed.",
+          "The 28 focused lifecycle and 106 independent review cases overlap the 184 affected cases and are not summed.",
+          "Newly authorized post-fix live staff acceptance remains NOT_RUN.",
+          "Target-code coverage and ordered dependency-byte identities are complete for the declared staff scope; coverage.complete remains false and broad profiles remain UNKNOWN. Actual Forge builds do not establish live client lifecycle, rendering, behavior or memory sufficiency."
+        ]
+      },
+      "bytecode_proof": {
+        "schema_version": 1,
+        "scope": "Cached patched target bytecode inspection only; no actual live provisional IDs observed",
+        "archive_filename": "forge-1.20.1-47.4.6_mapped_official_1.20.1.jar",
+        "patched_archive_sha256": "e4a657dab7bcbb97f8dd653e181ba9c5b44a90b2b6ce13aa2b2dd246957a8324",
+        "class_sha256": {
+          "net.minecraft.client.multiplayer.ClientPacketListener": "80568d89e78331d7e7b186da60c22014e3782bd95c9a8d15eb6b11ef199c4969",
+          "net.minecraft.util.thread.BlockableEventLoop": "e68dded7baab0c2a7da59bcf4c3de82a966abc78a239394ff788974a41908f94",
+          "net.minecraft.world.entity.Entity": "5eb5ef8427d25bbd64f67e3bf560f6ba016a3d6899604f47d9506ee6a83d9000",
+          "net.minecraftforge.client.ForgeHooksClient": "021f8622e1b8fe67b04e9122662dabc87a782d2907a30a722c0608440ad8cd71"
+        },
+        "order": {
+          "firePlayerLogin.EVENT_BUS.post": 13,
+          "handleLogin.addPlayer": 417,
+          "handleLogin.firePlayerLogin": 383,
+          "handleLogin.playerId": 387,
+          "handleLogin.setId": 401
+        },
+        "versions": {
+          "minecraft": "1.20.1",
+          "forge": "47.4.6",
+          "java_major": 17
+        },
+        "original_proof_sha256": "29e761bfda0b4227580cc109573b3e127e67a8044fd2fda4085c7d7deb08ccef"
+      },
+      "offline_scope_temporal_note": "Earlier offline verification snapshot preserved as historical context; current scoped live results are in live_verification.",
+      "live_verification_runs": {
+        "V6": {
+          "status": "SCOPED_LIVE_PASS_WITH_VISUAL_GAP",
+          "review_original_sha256": "43c4d59e0cc919baa440971ae03a8eb4e964e630429b40a0eb35002ed1a72484",
+          "review_status": "SCOPED_THIS_RUN_REVIEW_PASS_WITH_EXPLICIT_VISUAL_GAP",
+          "first_use": {
+            "outcome": "PASS",
+            "selected_packet_entity_id": 2,
+            "selected_packet_receipts": [
+              {
+                "amplifier": 0,
+                "duration_ticks": 60,
+                "effect": "minecraft:glowing",
+                "entity_id": 2,
+                "kind": "glowing",
+                "sequence": 1
+              },
+              {
+                "duration_ticks": 100,
+                "item": "kneekura:celestial_staff",
+                "kind": "cooldown",
+                "sequence": 2
+              }
+            ],
+            "client_handler_completed": 1,
+            "known_effect_mutation_attempts": 0,
+            "known_cooldown_mutation_attempts": 0,
+            "client_handler_local_state_unchanged": true
+          },
+          "repeat": {
+            "outcome": "PASS",
+            "scope": "No recorded reapplication or refreshed server/client expiry bounds during cooldown"
+          },
+          "control": {
+            "outcome": "PASS",
+            "scope": "Non-invoking control remained neutral within supplied native receipts and retained fixture-call history; unrecorded OS input is not excluded"
+          },
+          "expiry": {
+            "outcome": "PASS",
+            "scope": "Retained effect and cooldown expiry; no further recorded application"
+          },
+          "visual": {
+            "three_context_display": "OBSERVED",
+            "staff_tooltip": "Celestial Staff",
+            "third_person_visible_glowing": "NOT_RUN",
+            "reason": "Capture 012 follows effect expiry; Glowing is null",
+            "all_angle_or_full_silhouette_quality": "NOT_ESTABLISHED"
+          },
+          "not_promoted": [
+            "Twilight Forest U03 runtime",
+            "Sinytra Connector positive compatibility",
+            "canonical repository-wide or cross-mod acceptance",
+            "Windows/native platform acceptance",
+            "performance or hardware attestation",
+            "arbitrary packet delivery/processing causality",
+            "post-transform loaded class memory attestation",
+            "all-angle/full-silhouette model quality",
+            "strict third-person visible-Glowing assertion"
+          ],
+          "review_actions": "Read-only retained-record and image review plus pure fixed-verifier re-evaluation; no new game or observer calls",
+          "transport_authentication_scope": "Original calls returned AUTHENTICATED_LIVE_OBSERVER through the authenticated bridge. Independent review verifies retained hashes, identities and results; it is not a new live HTTP authentication or arbitrary packet-processing attestation."
+        },
+        "V7": {
+          "scope": "One V7 visual continuation for third_person_view only; V6 behavior assertions remain under their original V6 contracts and references",
+          "status": "PASS_SCOPED_THIRD_PERSON_VIEW",
+          "review_original_sha256": "4147fc3743cb28d8b4e4b2be97881937c8c1024db9bdb449275b8aec922f6eea",
+          "contracts": {
+            "client": "1c6521b698df3af4d566f83774a5a37f5b51b9edc8790f987f10f95c871f6711",
+            "control": "ea7185fef3982cd6a48d3e148e8a9e4d45920344c50467bc63ba93709acbe6e9",
+            "server": "071c83d63915dfc3aff064ab667000dd75fa8e7a4b0a41db978b0bb6f8c8fd17"
+          },
+          "preserved_early_read": {
+            "id": "v7-002-server-ready",
+            "phase": "ready",
+            "error": "FileNotFoundError",
+            "outcome": "BLOCKED_OR_UNKNOWN",
+            "retry_allowed": false,
+            "original_phase_sha256": "c85bddb81e908fc838ceb7a9e09833e264815233c07157101b528fc830ecc8ab"
+          },
+          "readiness": [
+            {
+              "phase": "v7-002b-server-ready",
+              "role": "server",
+              "original_phase_sha256": "ce5179c8678e7fed61572f2958ff5e69da987d72ac0afa672218cfc2f7c821a1",
+              "status": "OK",
+              "outcome": "NOT_RUN",
+              "artifact_hash": "3060338d9c576a8cc294f83baf81d855871e4e6c34bdff47cbc45070a3b2cc99",
+              "handshake_hash": "9a9f0872209de990e53b8e74b451d434a460dfe9c519286f1246391ec8f3634f",
+              "evidence_level": "AUTHENTICATED_LIVE_OBSERVER"
+            },
+            {
+              "phase": "v7-004-control-ready",
+              "role": "control",
+              "original_phase_sha256": "e66e973f3db3230ba02f194b9bd5c640dcfda6a56f8e250c0388c09ba7884153",
+              "status": "OK",
+              "outcome": "NOT_RUN",
+              "artifact_hash": "2f81809d11669c97dedc22bd9cc7318546ffa32f511a9ce96b90ab3079609068",
+              "handshake_hash": "e03508feddc33a57b176b291ff408978b9bd608df557d8e9dd98c78dbd30450b",
+              "evidence_level": "AUTHENTICATED_LIVE_OBSERVER"
+            },
+            {
+              "phase": "v7-006-client-ready",
+              "role": "client",
+              "original_phase_sha256": "b2a840450dd6e6c15f8eee9790c4fcdc408f0607d964a209ca7d2b358480dd74",
+              "status": "OK",
+              "outcome": "NOT_RUN",
+              "artifact_hash": "da7e6032f18e3fa51fdd2b1512ee7495c4171f72d802fbb3c544b27d9433f265",
+              "handshake_hash": "2886617bc3bdfe244a2429985d972e5a1313117d9f396d56d769c528a470a75f",
+              "evidence_level": "AUTHENTICATED_LIVE_OBSERVER"
+            }
+          ],
+          "retained_reference_hashes": {
+            "first_use": {
+              "after_pair": "cf2d0174902f39a31b34b09574ac6fb4bea8d239c068a2385d31a8f26754e617",
+              "before_pair": "22e449c0afbf7c40d536cb5c1399c75c4be4301563a2f4d55a9007ace313d5d8",
+              "control_after_pair": "547fb0b42d18dac27720f1f8ef8b84104bc6128040503c21eda92eff4570dfc6",
+              "control_before_pair": "6fa8ae0ffd9ff161daa1fc597c6e5d05553321fe673f495f888acdd4418bef37",
+              "input_receipt": "119671bdc9c3b9ae4490e5352c124f24bf5362219d068c9cd2a94df3e9566e5e"
+            }
+          },
+          "native_receipt": {
+            "receipt_sha256": "119671bdc9c3b9ae4490e5352c124f24bf5362219d068c9cd2a94df3e9566e5e",
+            "request_sha256": "676a22a739af70131764ce892911ca94320de55e34c7851263a34a67f6378cf6",
+            "hold_ms": 50,
+            "gestures": 1,
+            "input_status": "COMPLETED",
+            "outcome": "NOT_RUN",
+            "release_attempted": true,
+            "release_completed": true,
+            "retry_allowed": false,
+            "evidence_level": "NATIVE_INPUT_ATTEMPT_NOT_GAMEPLAY_ATTESTATION",
+            "verification": {
+              "actual_right_click": "NOT_RUN",
+              "server_behavior": "NOT_RUN",
+              "synchronization": "NOT_RUN",
+              "visual": "NOT_RUN"
+            }
+          },
+          "generic_checker_results": {
+            "control": {
+              "kind": "fixed-staff-non-invoking-control-evidence-check",
+              "outcome": "PASS",
+              "evidence_level": "RETAINED_RECORD_CONSISTENCY_NOT_LIVE_ATTESTATION",
+              "live_attestation": "NOT_ESTABLISHED",
+              "product_acceptance": "NOT_ESTABLISHED",
+              "verdicts": {
+                "control_neutral": "PASS",
+                "declared_native_input_targets_invoker": "PASS",
+                "health_stack_damage": "PASS",
+                "no_control_receipt_delta": "PASS"
+              }
+            },
+            "expiry": {
+              "outcome": "NOT_RUN",
+              "reason": "Complete required same-run evidence was not retained"
+            },
+            "first_use": {
+              "kind": "fixed-staff-client-evidence-check",
+              "outcome": "PASS",
+              "evidence_level": "RETAINED_RECORD_CONSISTENCY_NOT_LIVE_ATTESTATION",
+              "product_acceptance": "NOT_ESTABLISHED",
+              "verdicts": {
+                "client_handler_known_mutator_sites": "PASS",
+                "client_state": "PASS",
+                "health_stack_damage": "PASS",
+                "native_input": "PASS",
+                "non_invoking_player": "NOT_RUN",
+                "packet_receipts": "PASS",
+                "performance": "NOT_RUN",
+                "scoped_synchronization": "PASS",
+                "server_state": "PASS",
+                "visual": "NOT_RUN"
+              }
+            },
+            "repeat": {
+              "outcome": "NOT_RUN",
+              "reason": "Complete required same-run evidence was not retained"
+            }
+          },
+          "third_person_view": {
+            "assertion": {
+              "basis": "Host pixel review of retained authenticated same-run frame, positive Glowing I duration and exact contract/PNG binding. Not an altered generic observer/checker verdict.",
+              "id": "third_person_view",
+              "outcome": "PASS",
+              "requirement": "Third-person held staff and Glowing appearance are visible as intended in the observed camera/view",
+              "scenario_path": "tools/ci/mod_ai_staff/scenarios/client-observation.json",
+              "scenario_sha256": "f28f6f4b3b782c18cc3e2ab206ca48bd8764f6d23005d1e6faa620ce53f8e777"
+            },
+            "outcome": "PASS",
+            "review_original_sha256": "4147fc3743cb28d8b4e4b2be97881937c8c1024db9bdb449275b8aec922f6eea",
+            "views": {
+              "baseline": {
+                "phase": "v7-007b-third-person-baseline",
+                "artifact_hash": "2b0dbe649fe4c5198b1d25ac40594b6ec1a8f4e0638e2aed6c03c247bd924f00",
+                "handshake_hash": "2886617bc3bdfe244a2429985d972e5a1313117d9f396d56d769c528a470a75f",
+                "png_sha256": "2f585c20fccc6b196db8a16bc120f3983af13095ed49b478eae5b610576dc064",
+                "client_frame_start": 1567,
+                "client_frame_end": 1567,
+                "width": 1180,
+                "height": 812,
+                "atomic": false,
+                "camera": {
+                  "pitch": -0.0,
+                  "x": 0.5,
+                  "y": 66.61999988555908,
+                  "yaw": 0.0,
+                  "z": -3.5
+                },
+                "staff_state": {
+                  "applicable": true,
+                  "glowing": null,
+                  "main_hand": {
+                    "count": 1,
+                    "damage": 0,
+                    "item": "kneekura:celestial_staff"
+                  },
+                  "observation_side": "logical_client",
+                  "schema_version": 1,
+                  "staff_cooldown": {
+                    "active": false,
+                    "fraction": 0.0,
+                    "item": "kneekura:celestial_staff",
+                    "registered": true
+                  }
+                },
+                "visible": "Third-person front shows player and held gold-ring/purple-star staff without white outline or Glowing metadata; staff shaft is more extended in this pose"
+              },
+              "active_glowing": {
+                "phase": "v7-010-third-person-glowing",
+                "artifact_hash": "386c26e3d2d6fa0c79701281cdba1ccb0b8dc584d61e3998a5bb7addf3faf9d0",
+                "handshake_hash": "2886617bc3bdfe244a2429985d972e5a1313117d9f396d56d769c528a470a75f",
+                "png_sha256": "33280d8d701c50a6036b99d6c7feb3817d68cf2b61bf09589e0c51a81f207723",
+                "client_frame_start": 1947,
+                "client_frame_end": 1947,
+                "width": 1180,
+                "height": 812,
+                "atomic": false,
+                "camera": {
+                  "pitch": -0.0,
+                  "x": 0.5,
+                  "y": 66.61999988555908,
+                  "yaw": 0.0,
+                  "z": -3.5
+                },
+                "staff_state": {
+                  "applicable": true,
+                  "glowing": {
+                    "amplifier": 0,
+                    "duration_ticks": 29
+                  },
+                  "main_hand": {
+                    "count": 1,
+                    "damage": 0,
+                    "item": "kneekura:celestial_staff"
+                  },
+                  "observation_side": "logical_client",
+                  "schema_version": 1,
+                  "staff_cooldown": {
+                    "active": true,
+                    "fraction": 0.69,
+                    "item": "kneekura:celestial_staff",
+                    "registered": true
+                  }
+                },
+                "visible": "Bright white outline visibly surrounds player and held gold/purple staff; effect particles and HUD effect icon are present. Authenticated metadata records Glowing I with 29 ticks remaining"
+              }
+            },
+            "same_camera": true,
+            "quality_limit": "This frame establishes the fixed visible-appearance assertion at this camera, not all-angle geometry or complete silhouette quality; the held shaft remains pose-dependent and partly foreshortened",
+            "no_new_source_or_build": true,
+            "scope": "Independent pixel review plus exact V7 contract/capture/hash binding, separate from unchanged generic observer and native verdicts"
+          },
+          "closure": {
+            "state": "CLOSED",
+            "clock_started_utc": "2026-09-30T19:14:31.891966+00:00",
+            "execution_threads_closed_utc": "2026-09-30T19:23:59.632123+00:00",
+            "actual_desktop_closure_utc": "2026-09-30T19:25:20.784104+00:00",
+            "desktop_processes": [],
+            "active_native_markers": {
+              "client": 0,
+              "control": 0
+            },
+            "original_status_sha256": "721f21397c3d711a7427aacec7cb5d9503cf29ebecc342b6506f684e9743461a",
+            "original_cleanup_sha256": "50d32d7598e1339af341f8140575395f3ebd33d1792e26eac69b39dc6aa9520a",
+            "original_desktop_closure_sha256": "2fa4acff1a5a031cd5bb95b5b77c8085ac44af79d46886bdf2a6f7ad432f7948",
+            "process_receipts": [
+              {
+                "role": "client",
+                "original_receipt_sha256": "d8f4a7e8c09b03443f7427ab7a600199f908e4df8e94bbe48f6827f81460be74",
+                "original_log_sha256": "4b75c7fbce1cdfc064f393e59c87e2a0237c10a81c4db71a2eb6c5af1f523ae5",
+                "outcome": "FAIL",
+                "process": {
+                  "completed": true,
+                  "exit_code": 1,
+                  "timed_out": false
+                },
+                "stop_signal": "SIGTERM",
+                "original_stop_phase_sha256": "55c5e36dd61a3507010794dfe5a9417e36e870374b6fdfc11a41fdfa9471e864"
+              },
+              {
+                "role": "control",
+                "original_receipt_sha256": "096cf2c3e427621f1bbcb7ce0c3a990a08fdea8150e377dca1a2d4cdcb2c1099",
+                "original_log_sha256": "1bf2d6696eb96e26090954653cc5feb6d19c62afe8bab3c1dec791273e963923",
+                "outcome": "FAIL",
+                "process": {
+                  "completed": true,
+                  "exit_code": 1,
+                  "timed_out": false
+                },
+                "stop_signal": "SIGTERM",
+                "original_stop_phase_sha256": "2be87f716cfe2c32ae435226211f7609915e9ff12760b7cd622906802d9edfbc"
+              },
+              {
+                "role": "server",
+                "original_receipt_sha256": "e7f280a26c7cc27cb7b92356f67e6d5d2df50f40919bf0a12a16f62159a06ea4",
+                "original_log_sha256": "07ae9aa6d5477eef2dea121bcfd10a9655a2f4975a22e1b71121ab7c92cdbc8d",
+                "outcome": "FAIL",
+                "process": {
+                  "completed": true,
+                  "exit_code": 1,
+                  "timed_out": false
+                },
+                "stop_signal": "SIGTERM",
+                "original_stop_phase_sha256": "bc816935a708fbb6d0a326b4080aa32109d5401e065778ad38464984f247fadd"
+              }
+            ]
+          },
+          "not_promoted": [
+            "Twilight Forest U03 runtime",
+            "Sinytra Connector compatibility",
+            "canonical or repository-wide acceptance",
+            "Windows/platform-driver acceptance",
+            "performance/hardware or post-transform class attestation",
+            "arbitrary network/packet-processing causality",
+            "all-angle/full-silhouette model quality"
+          ],
+          "v6_raw_files_verified_unchanged": 191
+        }
+      }
+    }
+  ],
+  "prior_history": {
+    "2026-09-30": {
+      "history_hash": "4abaa63aa724be619293fbcfd8143f0676c4fa5f01d03a2cfcc4093fb2074971",
+      "files": {
+        "FAILURE-REPAIR-HISTORY.json": "7e5f8d618d6ac9780ddd56f623c16dc190dd93a6fbadeaf1508faec0c965a046",
+        "FAILURE-REPAIR-HISTORY.md": "a2a77c789a41d48405f60e2984b4bb87e10d666229fcfd7574ccf08f107ac4f6",
+        "import-result.json": "bb9bdf2411d887b69922b9c590d92ef2e51d8d45023f7bc4ae2b4038a158d760",
+        "query-roundtrip.json": "0216f876a11697fd2617280d6b26319d3fd17768992ea24c83f1cc9136394807",
+        "verification.json": "85c7ac850321d0937e596dbe691552f17b97c05aaf461d1b08c61f0ea40d57da"
+      }
+    },
+    "2026-09-30-runtime": {
+      "history_hash": "9ff2128604f3e552dd9f8fb99b3f43f70bbd02c4c49906b9b93ff8b76ba29147",
+      "files": {
+        "FAILURE-REPAIR-HISTORY.json": "7e48652ebf46f6a069aa63f16dc54c7420213b29a696788681716054dae2107b",
+        "FAILURE-REPAIR-HISTORY.md": "722c0cc001f208c2fbd4ba60f72e340ad712970026c09f7c93a6cb7b709df6cf",
+        "import-result.json": "1c25ca5ec411c2e35ab218178d83319bace46cb192612ad1f33d4052f91cc099",
+        "verification.json": "25b7b1d4908a66c37cf252e4d5e0adea0d8505cea13ffcc0865028e4a00ecc43"
+      }
+    },
+    "2026-09-30-recovery": {
+      "history_hash": "f2cf8a85048877c0ccb0d011ccc55eedb0d14b4d69f21bfa0e9f6706e8ef4bdf",
+      "files": {
+        "FAILURE-REPAIR-HISTORY.json": "73466f54b15a10fe0b652814b5f2d75f68cfab10166f4fb53ba8f273fa433e54",
+        "FAILURE-REPAIR-HISTORY.md": "94a4f3b1c91d0e99e7b4f1f96ca0bc1cc105e46b7ded7f920f775e89e6faacdf",
+        "import-result.json": "3b4835a97675db938a1b359dc0012fd54764ffa2cda76d81d4a01beedc03c8f0",
+        "verification.json": "a7f75694912f8b74884acc9262d3ed7563a76c621ad357096677c0826cb2202f"
+      }
+    },
+    "2026-09-30-login-lifecycle": {
+      "history_hash": "66d7d6111849f64fc29bfd9a37274f71c64657d71892227b9982e69f187a8270",
+      "files": {
+        "FAILURE-REPAIR-HISTORY.json": "627fd3969a894059419fda629e583af063f1cc4a5a5883a951bafeba042b9f98",
+        "FAILURE-REPAIR-HISTORY.md": "da86665081f427fbe8bc1c19bbc1d3a5c1ad35830996843ba19a2d77ea3768dd",
+        "import-result.json": "f5429d3ec46f8e7a42c7c0e9239fbc12911b6faa9f5b29a939edb9861632ca98",
+        "query-roundtrip.json": "670e39071683bcfa9dd8cf91842eb00b161b37f5d280a2ce331cf0ccd95a3936",
+        "verification.json": "c174c488b03c5e0be987d9037e75320d21b190c55657a38fb4c3237b2612eccf"
+      }
+    },
+    "2026-09-30-staff-live": {
+      "history_hash": "ced9eea26c78fe51c695cdaab9010474cc96441e5f17fcc4a333c63b029a5653",
+      "files": {
+        "FAILURE-REPAIR-HISTORY.json": "b13acecce28a98d59f8c0ea828e56205ed013a27f08ec18f44a1bd54875b419e",
+        "FAILURE-REPAIR-HISTORY.md": "32a62008cb338dbebba6e5e6d18b31857c79c76df4e22cd84d28809c0eb20e31",
+        "import-result.json": "49764e0627a044738c612246ccd55a27cfce5bd166f86446b9ce7cec7bf54b6c",
+        "query-roundtrip.json": "2067df9b6632922a557fa03e46656cfbe1cee6052c716606c32122570275280f",
+        "verification.json": "06eb3f47124c6bedd81578a3509f3e5697810bfd9ab1b05d334f5344067be2d3"
+      }
+    }
+  },
+  "batch_lifecycle": {
+    "state": "CLOSED",
+    "clock_started_utc": "2026-09-30T19:14:31.891966+00:00",
+    "execution_threads_closed_utc": "2026-09-30T19:23:59.632123+00:00",
+    "actual_desktop_closure_utc": "2026-09-30T19:25:20.784104+00:00",
+    "desktop_processes": [],
+    "active_native_markers": {
+      "client": 0,
+      "control": 0
+    },
+    "original_status_sha256": "721f21397c3d711a7427aacec7cb5d9503cf29ebecc342b6506f684e9743461a",
+    "original_cleanup_sha256": "50d32d7598e1339af341f8140575395f3ebd33d1792e26eac69b39dc6aa9520a",
+    "original_desktop_closure_sha256": "2fa4acff1a5a031cd5bb95b5b77c8085ac44af79d46886bdf2a6f7ad432f7948",
+    "process_receipts": [
+      {
+        "role": "client",
+        "original_receipt_sha256": "d8f4a7e8c09b03443f7427ab7a600199f908e4df8e94bbe48f6827f81460be74",
+        "original_log_sha256": "4b75c7fbce1cdfc064f393e59c87e2a0237c10a81c4db71a2eb6c5af1f523ae5",
+        "outcome": "FAIL",
+        "process": {
+          "completed": true,
+          "exit_code": 1,
+          "timed_out": false
+        },
+        "stop_signal": "SIGTERM",
+        "original_stop_phase_sha256": "55c5e36dd61a3507010794dfe5a9417e36e870374b6fdfc11a41fdfa9471e864"
+      },
+      {
+        "role": "control",
+        "original_receipt_sha256": "096cf2c3e427621f1bbcb7ce0c3a990a08fdea8150e377dca1a2d4cdcb2c1099",
+        "original_log_sha256": "1bf2d6696eb96e26090954653cc5feb6d19c62afe8bab3c1dec791273e963923",
+        "outcome": "FAIL",
+        "process": {
+          "completed": true,
+          "exit_code": 1,
+          "timed_out": false
+        },
+        "stop_signal": "SIGTERM",
+        "original_stop_phase_sha256": "2be87f716cfe2c32ae435226211f7609915e9ff12760b7cd622906802d9edfbc"
+      },
+      {
+        "role": "server",
+        "original_receipt_sha256": "e7f280a26c7cc27cb7b92356f67e6d5d2df50f40919bf0a12a16f62159a06ea4",
+        "original_log_sha256": "07ae9aa6d5477eef2dea121bcfd10a9655a2f4975a22e1b71121ab7c92cdbc8d",
+        "outcome": "FAIL",
+        "process": {
+          "completed": true,
+          "exit_code": 1,
+          "timed_out": false
+        },
+        "stop_signal": "SIGTERM",
+        "original_stop_phase_sha256": "bc816935a708fbb6d0a326b4080aa32109d5401e065778ad38464984f247fadd"
+      }
+    ]
+  },
+  "raw_artifacts_published": false,
+  "evidence_policy": "Shareable record is a minimized derived summary, not hash-identical raw evidence. Evidence document hashes identify their exact captured bytes. Original hashes identify separately retained originals and do not imply public downloads. No raw sessions, logs, receipts, private paths, tokens or images are included.",
+  "canonical_writes": 0,
+  "runtime_attestation": false,
+  "runtime_after_repairs": "SCOPED_V6_BEHAVIOR_AND_V7_VISUAL_PASS",
+  "previous_capture_history_hash": "ced9eea26c78fe51c695cdaab9010474cc96441e5f17fcc4a333c63b029a5653",
+  "initial_capture_history_hash": "c4a1ad9b9c3542de98692aef5602ce6bae8ea57be9508cdaf93c6eddcf177992",
+  "editorial_revision": "New immutable V7 visual-verification revision. V6 behavior and original V6 visual gap retain V6 provenance; V7 independently establishes the named visual assertion.",
+  "prior_batch_lifecycle": {
+    "V5": {
+      "state": "CLOSED",
+      "clock_started_utc": "2026-09-30T18:06:34.946911+00:00",
+      "execution_threads_closed_utc": "2026-09-30T18:16:20.245894+00:00",
+      "desktop_closure_utc": "2026-09-30T18:17:17.371428+00:00",
+      "desktop_processes": [],
+      "intentional_stops": [
+        {
+          "role": "client",
+          "signal": "SIGTERM",
+          "exact_owned_matches": 1,
+          "original_phase_sha256": "fcac7145156024bcb58513469101cfcf2750c8996ad6d5a75b301d1da63792a1"
+        },
+        {
+          "role": "control",
+          "signal": "SIGTERM",
+          "exact_owned_matches": 1,
+          "original_phase_sha256": "79ea3c7df6e0b65ad82a6c15529b2469d467568f16632de123580a8c8739aa08"
+        },
+        {
+          "role": "server",
+          "signal": "SIGTERM",
+          "exact_owned_matches": 1,
+          "original_phase_sha256": "fc5e5d3e57a238caa23a9c1be4678e5cf708adec7d6de372371983397e93f3b1"
+        }
+      ],
+      "setup_commands_executed": 0,
+      "native_gestures_executed": 0,
+      "staff_verifiers": {
+        "control": "NOT_RUN",
+        "expiry": "NOT_RUN",
+        "first_use": "NOT_RUN",
+        "repeat": "NOT_RUN"
+      },
+      "original_status_sha256": "0ae535b5e76439f27f7f0fa72192151f651725d9965afedb4205abfc8cab421d",
+      "original_cleanup_sha256": "56e94cf91540e338f67015dd183bafaa5750a4c6f10a894d7d369611999e079d",
+      "original_desktop_closure_sha256": "78c56860e4ef19d5098da21893814b93b9cd3ab496ca27638f499c11d3212a6b",
+      "original_verifier_sha256": "b1b8b8d927676d70aa450c9a3fbf0fb2b08aa5dc3c1f7577763448abb45e3b5d"
+    },
+    "V6": {
+      "active_native_markers": {
+        "client": 0,
+        "control": 0
+      },
+      "active_native_markers_checked_at": "2026-09-30T19:07:07.610626+00:00",
+      "actual_desktop_closure_utc": "2026-09-30T18:59:41.927071+00:00",
+      "clock_started_utc": "2026-09-30T18:43:16.453099+00:00",
+      "desktop_processes": [],
+      "execution_threads_closed_utc": "2026-09-30T18:58:52.809053+00:00",
+      "original_cleanup_sha256": "5d7e09b4c8fd309bcf8e757c5d8339877c1004331efb9f289993046e0855e507",
+      "original_desktop_closure_sha256": "7f40040c8be061d014e19f3aad37d3affc9ce5c08ef8d59b2df7c374f6e375f5",
+      "original_status_sha256": "b135feda1567fec6d1d561636c95459f3dcc0465dcada92e58855308d53c185e",
+      "process_receipts": [
+        {
+          "original_log_sha256": "569ece546426e2dcb6dc09f098c43cff92fde3a9fd12e6653318b3672750cf76",
+          "original_receipt_sha256": "5a4d64c8ea7b1c6706488755126275a24e75eab786e52d6eaf5acfa66c783f68",
+          "outcome": "FAIL",
+          "process": {
+            "completed": true,
+            "exit_code": 1,
+            "timed_out": false
+          },
+          "role": "client"
+        },
+        {
+          "original_log_sha256": "a547bfe2754a38bf478ddd4e5717c6e886a33cafcc7d6128a8c0a64ca642dbd8",
+          "original_receipt_sha256": "b29b4dab6cbc3942f3e4ea81da0929de58df379dbfa71e268ef815fa9a822186",
+          "outcome": "FAIL",
+          "process": {
+            "completed": true,
+            "exit_code": 1,
+            "timed_out": false
+          },
+          "role": "control"
+        },
+        {
+          "original_log_sha256": "3a65704bd0945713ebd96225a8282f17fd4f94fabe5bf2e0def3c43ffa7c53a4",
+          "original_receipt_sha256": "c8ccfd8639b33454703f9ec4ac31ddcbd0658a4b80504c23d0392cb6ae812f9e",
+          "outcome": "FAIL",
+          "process": {
+            "completed": true,
+            "exit_code": 1,
+            "timed_out": false
+          },
+          "role": "server"
+        }
+      ],
+      "state": "CLOSED",
+      "stops": [
+        {
+          "exact_owned_matches": 1,
+          "original_phase_sha256": "1cd4a62c9c18a5409911ae05f21cd401db2ab37d706cc016ad5baeb19a311a0f",
+          "role": "client",
+          "signal": "SIGTERM"
+        },
+        {
+          "exact_owned_matches": 1,
+          "original_phase_sha256": "6a0c1f4112bf6cafb0a9ce16292726cf4ca0c925db50abfc54aa4581b87a6490",
+          "role": "control",
+          "signal": "SIGTERM"
+        },
+        {
+          "exact_owned_matches": 1,
+          "original_phase_sha256": "3d4eea7b487bb16dc73ea26d8dcf0e5f8b50dd726c0c067021e2b1ac255000d8",
+          "role": "server",
+          "signal": "SIGTERM"
+        }
+      ]
+    }
+  },
+  "actual_run_reviews": {
+    "V6": {
+      "status": "SCOPED_LIVE_PASS_WITH_VISUAL_GAP",
+      "review_original_sha256": "43c4d59e0cc919baa440971ae03a8eb4e964e630429b40a0eb35002ed1a72484",
+      "review_status": "SCOPED_THIS_RUN_REVIEW_PASS_WITH_EXPLICIT_VISUAL_GAP",
+      "first_use": {
+        "outcome": "PASS",
+        "selected_packet_entity_id": 2,
+        "selected_packet_receipts": [
+          {
+            "amplifier": 0,
+            "duration_ticks": 60,
+            "effect": "minecraft:glowing",
+            "entity_id": 2,
+            "kind": "glowing",
+            "sequence": 1
+          },
+          {
+            "duration_ticks": 100,
+            "item": "kneekura:celestial_staff",
+            "kind": "cooldown",
+            "sequence": 2
+          }
+        ],
+        "client_handler_completed": 1,
+        "known_effect_mutation_attempts": 0,
+        "known_cooldown_mutation_attempts": 0,
+        "client_handler_local_state_unchanged": true
+      },
+      "repeat": {
+        "outcome": "PASS",
+        "scope": "No recorded reapplication or refreshed server/client expiry bounds during cooldown"
+      },
+      "control": {
+        "outcome": "PASS",
+        "scope": "Non-invoking control remained neutral within supplied native receipts and retained fixture-call history; unrecorded OS input is not excluded"
+      },
+      "expiry": {
+        "outcome": "PASS",
+        "scope": "Retained effect and cooldown expiry; no further recorded application"
+      },
+      "visual": {
+        "three_context_display": "OBSERVED",
+        "staff_tooltip": "Celestial Staff",
+        "third_person_visible_glowing": "NOT_RUN",
+        "reason": "Capture 012 follows effect expiry; Glowing is null",
+        "all_angle_or_full_silhouette_quality": "NOT_ESTABLISHED"
+      },
+      "not_promoted": [
+        "Twilight Forest U03 runtime",
+        "Sinytra Connector positive compatibility",
+        "canonical repository-wide or cross-mod acceptance",
+        "Windows/native platform acceptance",
+        "performance or hardware attestation",
+        "arbitrary packet delivery/processing causality",
+        "post-transform loaded class memory attestation",
+        "all-angle/full-silhouette model quality",
+        "strict third-person visible-Glowing assertion"
+      ],
+      "review_actions": "Read-only retained-record and image review plus pure fixed-verifier re-evaluation; no new game or observer calls",
+      "transport_authentication_scope": "Original calls returned AUTHENTICATED_LIVE_OBSERVER through the authenticated bridge. Independent review verifies retained hashes, identities and results; it is not a new live HTTP authentication or arbitrary packet-processing attestation."
+    },
+    "V7": {
+      "assertion": {
+        "basis": "Host pixel review of retained authenticated same-run frame, positive Glowing I duration and exact contract/PNG binding. Not an altered generic observer/checker verdict.",
+        "id": "third_person_view",
+        "outcome": "PASS",
+        "requirement": "Third-person held staff and Glowing appearance are visible as intended in the observed camera/view",
+        "scenario_path": "tools/ci/mod_ai_staff/scenarios/client-observation.json",
+        "scenario_sha256": "f28f6f4b3b782c18cc3e2ab206ca48bd8764f6d23005d1e6faa620ce53f8e777"
+      },
+      "outcome": "PASS",
+      "review_original_sha256": "4147fc3743cb28d8b4e4b2be97881937c8c1024db9bdb449275b8aec922f6eea",
+      "views": {
+        "baseline": {
+          "phase": "v7-007b-third-person-baseline",
+          "artifact_hash": "2b0dbe649fe4c5198b1d25ac40594b6ec1a8f4e0638e2aed6c03c247bd924f00",
+          "handshake_hash": "2886617bc3bdfe244a2429985d972e5a1313117d9f396d56d769c528a470a75f",
+          "png_sha256": "2f585c20fccc6b196db8a16bc120f3983af13095ed49b478eae5b610576dc064",
+          "client_frame_start": 1567,
+          "client_frame_end": 1567,
+          "width": 1180,
+          "height": 812,
+          "atomic": false,
+          "camera": {
+            "pitch": -0.0,
+            "x": 0.5,
+            "y": 66.61999988555908,
+            "yaw": 0.0,
+            "z": -3.5
+          },
+          "staff_state": {
+            "applicable": true,
+            "glowing": null,
+            "main_hand": {
+              "count": 1,
+              "damage": 0,
+              "item": "kneekura:celestial_staff"
+            },
+            "observation_side": "logical_client",
+            "schema_version": 1,
+            "staff_cooldown": {
+              "active": false,
+              "fraction": 0.0,
+              "item": "kneekura:celestial_staff",
+              "registered": true
+            }
+          },
+          "visible": "Third-person front shows player and held gold-ring/purple-star staff without white outline or Glowing metadata; staff shaft is more extended in this pose"
+        },
+        "active_glowing": {
+          "phase": "v7-010-third-person-glowing",
+          "artifact_hash": "386c26e3d2d6fa0c79701281cdba1ccb0b8dc584d61e3998a5bb7addf3faf9d0",
+          "handshake_hash": "2886617bc3bdfe244a2429985d972e5a1313117d9f396d56d769c528a470a75f",
+          "png_sha256": "33280d8d701c50a6036b99d6c7feb3817d68cf2b61bf09589e0c51a81f207723",
+          "client_frame_start": 1947,
+          "client_frame_end": 1947,
+          "width": 1180,
+          "height": 812,
+          "atomic": false,
+          "camera": {
+            "pitch": -0.0,
+            "x": 0.5,
+            "y": 66.61999988555908,
+            "yaw": 0.0,
+            "z": -3.5
+          },
+          "staff_state": {
+            "applicable": true,
+            "glowing": {
+              "amplifier": 0,
+              "duration_ticks": 29
+            },
+            "main_hand": {
+              "count": 1,
+              "damage": 0,
+              "item": "kneekura:celestial_staff"
+            },
+            "observation_side": "logical_client",
+            "schema_version": 1,
+            "staff_cooldown": {
+              "active": true,
+              "fraction": 0.69,
+              "item": "kneekura:celestial_staff",
+              "registered": true
+            }
+          },
+          "visible": "Bright white outline visibly surrounds player and held gold/purple staff; effect particles and HUD effect icon are present. Authenticated metadata records Glowing I with 29 ticks remaining"
+        }
+      },
+      "same_camera": true,
+      "quality_limit": "This frame establishes the fixed visible-appearance assertion at this camera, not all-angle geometry or complete silhouette quality; the held shaft remains pose-dependent and partly foreshortened",
+      "no_new_source_or_build": true,
+      "scope": "Independent pixel review plus exact V7 contract/capture/hash binding, separate from unchanged generic observer and native verdicts"
+    }
+  }
+}

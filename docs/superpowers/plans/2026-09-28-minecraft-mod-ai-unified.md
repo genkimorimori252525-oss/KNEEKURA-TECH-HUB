@@ -7,6 +7,14 @@
 **Tech Stack:** Existing Python 3.11+, standard library for the first slice; target Minecraft 1.20.1, Forge exact profile version, game Java 17; externally managed Blockbench/sosadly.
 **Spec:** `departments/minecraft/mod-ai/ASSET-INTEGRATION.md`, supplementing existing design v1.4 and the Foundation Session Record.
 
+**Terminal status (2026-09-30): COMPLETE_SCOPED_CURRENT_PLAN.** The authorized
+Linux/X11 staff pilot and bounded original U01–U06/A01–A24 criteria are complete.
+See the [criterion reconciliation](../../../departments/minecraft/mod-ai/CURRENT-ACCEPTANCE-2026-09-30.md)
+and [separate V6/V7 live evidence](../../../departments/minecraft/mod-ai/STAFF-LIVE-ACCEPTANCE-2026-09-30.md).
+Windows remains conditional/unsupported, performance unmeasured, canonical
+promotion excluded and positive Connector beta.50 compatibility unclaimed.
+This status does not claim arbitrary-MOD or whole-platform acceptance.
+
 ## Global constraints
 
 - Baseline PR #73 head `89cb81f412dd91df64785940569028e1a8be9920`; preserve #71/#72/#73 and main. A child branch is an additive continuation, not a merge.
@@ -74,9 +82,9 @@ GameTests retain their exact separate generation hashes.
 Consumes: M3 build/run contract and existing `forge-observer/ClientProbe.java`.
 Produces: same-run screenshot/state/log/input evidence, not a second runtime authority.
 - [x] Prove existing client capture on the target environment before creating more screenshot infrastructure.
-- [ ] Select the smallest verified input driver; Vibecraft and langyo are research inputs, not accepted dependencies. Validate source/API and Forge1.20.1/Java17/Windows fit first.
+- [x] Select the smallest verified input driver; Vibecraft and langyo are research inputs, not accepted dependencies. Source/API and Forge1.20.1/Java17 fit are verified for Linux/X11; Windows fit remains explicitly unsupported and conditional.
 - [x] Require foreground target identity, scoped coordinates, key release, run/epoch correspondence and bounded operations. Keep actual right-click distinct from test commands.
-- [ ] Observe inventory/first-person/third-person display and actual use; evaluate server state, visuals and synchronization separately. Performance is unproven without a dedicated measurement.
+- [x] Observe inventory/first-person/third-person display and actual use; evaluate server state, visuals and synchronization separately. V6 supplies scoped behavior/control evidence; V7 supplies third-person held staff and active Glowing visibility. Performance is unproven without a dedicated measurement.
 
 M4 progress detail: a concrete Linux/X11 right-button backend, authenticated
 process-start/window binding, session-owned replay/quarantine ledger, screenshot/
@@ -86,28 +94,28 @@ client pilot now verifies authenticated input/capture, Glowing/cooldown and
 inventory/first-person views. That historical third-person view was occluded. The subsequent continuation
 implements dedicated receiving-client contracts, independent state/packet
 evidence, fixed control/repeat/expiry checks and a scoped integrated Hydra route;
-its new bounded live results must be recorded separately. Windows input is
+its bounded V6/V7 live results are recorded separately with exact run identities.
+The historical occlusion and timeout outcomes remain unchanged. Windows input is
 unsupported, not silently treated as covered by Linux. Native/X server failure can leave release UNKNOWN and is
 quarantined rather than retried.
 
 ### M5 — One real MOD editing cycle and final acceptance
 - [x] Author pinned U01–U06 task inputs, A01–A24 fault recipes, fixed client/server assertions and negative controls without inventing execution results.
-- [ ] Execute investigate -> edit/assets -> build -> interact -> observe -> repair using fixed assertions and user launch budgets.
-- [ ] Exercise original U01-U06/A01-A24 plus the M1-M4 asset/input negatives; keep missing prerequisites NOT_RUN/BLOCKED.
+- [x] Execute investigate -> edit/assets -> build -> interact -> observe -> repair using fixed assertions and user launch budgets.
+- [x] Exercise original U01-U06/A01-A24 plus the M1-M4 asset/input negatives at their declared layers; retain unrun broader prerequisites as NOT_RUN/BLOCKED and U06's supported UNKNOWN as a bounded investigation result.
 - [x] Record failures/repairs through existing history. Preserve the research queue Twilight Forest -> Sinytra Connector; these investigations are not delegated to Vibecraft.
-- [ ] Close only the verified scope. Stop speculative feature growth; add future features only for a demonstrated failure or missing necessary task.
+- [x] Close only the verified scope. Stop speculative feature growth; add future features only for a demonstrated failure or missing necessary task.
 
 ## Current verified continuation — 2026-09-30
 
-Finish this current plan before selecting the
-[deferred usability improvements](../../../departments/minecraft/mod-ai/DEFERRED-IMPROVEMENTS-2026-09-30.md).
-That document records optional follow-on work; no proposed feature is implemented
-or substitutes for this plan's outstanding acceptance.
+This current plan is complete in the declared scope. The
+[deferred improvements](../../../departments/minecraft/mod-ai/DEFERRED-IMPROVEMENTS-2026-09-30.md)
+remain separate follow-on work; no proposed feature is implemented by this closure.
 The [current criterion reconciliation](../../../departments/minecraft/mod-ai/CURRENT-ACCEPTANCE-2026-09-30.md)
-maps completed offline fault coverage and bounded research outcomes separately
-from remaining live and platform acceptance.
-The [bounded runtime batch](../../../departments/minecraft/mod-ai/RUNTIME-BATCH-2026-09-30.md)
-records the later preflight/startup failures, retained limits and verified cleanup.
+separates verified Linux staff/U/A results from conditional platform and broader
+acceptance limits. The historical
+[bounded runtime batch](../../../departments/minecraft/mod-ai/RUNTIME-BATCH-2026-09-30.md)
+preserves earlier preflight/startup failures, limits and cleanup outcomes.
 
 See `departments/minecraft/mod-ai/CONTINUATION-2026-09-30.md` for current
 implementation, real Blockbench/editor review/export evidence, Core/provider
@@ -116,15 +124,15 @@ and selected-file-only environment described below are historical.
 
 ## Historical local-agent handoff checkpoint — 2026-09-28
 
-Current detailed resume state is recorded in
+The historical detailed resume state is recorded in
 `departments/minecraft/mod-ai/LOCAL-AI-HANDOFF-2026-09-28.md`.
 
-The latest executable-code head reviewed there is
+The executable-code head reviewed at that checkpoint was
 `824a2365a0ac945620f26a15339b352ac0de35f6`. Its hosted run
-`36398566854` is intentionally/actually RED at the current TDD boundary:
+`36398566854` was intentionally/actually RED at that TDD boundary:
 787 passed, 2 failed, with the remaining failures both pointing to the same missing
-pathless native `.bbmodel` capture contract. Resume there; do not skip the RED by
-weakening tests or enabling raw filesystem export.
+pathless native `.bbmodel` capture contract. That resolved RED remains historical;
+use the terminal reconciliation above rather than restarting this old boundary.
 
 ## Historical execution conditions (superseded by continuation)
 
@@ -135,4 +143,7 @@ Git object APIs for an additive child branch. No full-checkout, PostgreSQL, live
 Blockbench/Minecraft, or Windows result may be claimed from this local environment.
 No independent reviewer/subagent is available; identify the review as author self-review.
 
-Current continuation: [recovery acceptance](../../../departments/minecraft/mod-ai/RECOVERY-ACCEPTANCE-2026-09-30.md) satisfies default/no-JAPPA U04 rendering. Dedicated staff M4 remains incomplete; deferred improvements are not started.
+Final continuation: [recovery acceptance](../../../departments/minecraft/mod-ai/RECOVERY-ACCEPTANCE-2026-09-30.md)
+satisfies default/no-JAPPA U04 rendering; [staff V6/V7 acceptance](../../../departments/minecraft/mod-ai/STAFF-LIVE-ACCEPTANCE-2026-09-30.md)
+closes the declared M4/M5 staff scope. Follow-on usability work is a separate
+stage and has not been implemented by this closure.

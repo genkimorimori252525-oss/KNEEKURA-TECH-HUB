@@ -1,0 +1,827 @@
+{
+  "schema_version": 1,
+  "format": "kneekura.staff-live-acceptance.derived.v1",
+  "recorded_at": "2026-09-30T19:32:08.390724+00:00",
+  "status": "SCOPED_V6_BEHAVIOR_AND_V7_VISUAL_PASS",
+  "scope": "Two separate bounded Linux X11 runs: V6 supplies first-use/control/repeat/expiry behavior and three display contexts; V7 supplies third_person_view with active Glowing. Each assertion retains its own run contracts, receipts and hashes.",
+  "implementation_revision": "97edd36e4d3cc5c1f3c6959b6513dbe9584873c0",
+  "fixture_source_revision": "f1309ba1a574194ee8debd0dd4a3a3299fac2cbc",
+  "versions": {
+    "minecraft": "1.20.1",
+    "forge": "47.4.6",
+    "java_major": 17,
+    "gradle": "8.8"
+  },
+  "evidence_policy": "Minimized derived summary, not raw hash-identical evidence. Original hashes identify privately retained originals and do not imply public downloads. No raw receipts, logs, sessions, private paths, tokens or images are published.",
+  "source_and_build_scope": {
+    "runtime_scope": "TARGET_CODE_AND_DEPENDENCY_BYTES",
+    "target_coverage": "TARGET_CODE",
+    "dependency_coverage": "RESOLVED_BYTES_IDENTITY_ONLY",
+    "coverage_complete": false,
+    "broad_profile": "UNKNOWN",
+    "main_runtime_artifact_hash": "dc420c33f46828f8f89081030d19efaa91dbfbe56c3d944856deb1b141d7f26c",
+    "observer_source_inventory_hash": "e78ae064c7c73f544bc2507fbb2baf1162291c30531668bb7f7446850c4896f1",
+    "observer_compiled_class_inventory_hash": "f1af3b225bfacc5a65983372160d89950acfae14a2cf3d63a0e98c66ba13b810",
+    "fixture_and_development_observer_identities_distinct": true,
+    "scope_note": "Target-code coverage and ordered dependency-byte identities are complete for the declared staff scope; coverage.complete remains false and broad profiles remain UNKNOWN."
+  },
+  "offline_and_hosted_verification": {
+    "affected_observer_tests": {
+      "passed": 184,
+      "skipped": 0,
+      "scope": "Offline affected suite; includes 28 lifecycle cases"
+    },
+    "actual_forge_compile_export": {
+      "roles": [
+        "server",
+        "client",
+        "control"
+      ],
+      "outcome": "PASS_BUILD_ONLY",
+      "build_report_sha256": "5f70998f31bd1354af27f6aa98d53f40293c6b6a281917050954b18b24b17b6c"
+    },
+    "hosted_runs": [
+      {
+        "kind": "push",
+        "run_id": 36760284116,
+        "checkout_revision": "97edd36e4d3cc5c1f3c6959b6513dbe9584873c0",
+        "passed": 1641,
+        "skipped": 331,
+        "warnings": 8,
+        "errors": 0,
+        "failures": 0,
+        "archive_sha256": "e928daa3f43c7c29d3b89ae6290a9876f7c0bad81bc3961ccf1cb02d2caa6297",
+        "junit_sha256": "86fc4c1c5d517fcd9e69817627773692d312f5d51c78eb59711fb0e6c27ea238",
+        "pytest_log_sha256": "ba0d488c290d6bf2e8a400923d251b24f308f8392a581af861f2c1649f1667b6",
+        "commit_file_sha256": "d1821d26a0fdac0463115e48bb6a03c81eb794d18c8663fdad323be8e3adf846"
+      },
+      {
+        "kind": "pull_request_merge",
+        "run_id": 36760293077,
+        "checkout_revision": "304d93e55a01051cff8e1508dc322451ac2b38c1",
+        "passed": 1641,
+        "skipped": 331,
+        "warnings": 8,
+        "errors": 0,
+        "failures": 0,
+        "archive_sha256": "193e7476c8e02cfda8626d476d584c6d6107ae89b6fbf16e313c1c487cd90756",
+        "junit_sha256": "e271b3c9a45afd8e9a452ad646e5f6335e348d87f5af8e0d71a7935277361274",
+        "pytest_log_sha256": "730c822043792b6171832311cf67ec7340bc0c5e68f0f9d9489c5add47f9ccdd",
+        "commit_file_sha256": "1f48b30fa8f451a0e4179ff8923fe2174382b3547e77da2e79efa740158ad811"
+      }
+    ]
+  },
+  "canonical_writes": 0,
+  "history_adapter_runtime_attestation": false,
+  "full_product_acceptance": "NOT_ESTABLISHED",
+  "history": {
+    "history_hash": "0819e762e892b9418341fc95cc37dfb91b97a8b0d661ac9fd419cc137107af7c",
+    "previous_capture_history_hash": "ced9eea26c78fe51c695cdaab9010474cc96441e5f17fcc4a333c63b029a5653",
+    "index_snapshot_id": "785ff0f3f34c2d9a27e1d31014797451c24a9dcde150ae3ea0401ebb625654e0",
+    "canonical_writes": 0,
+    "runtime_attestation": false
+  },
+  "preservation": {
+    "v7_original_hashes_verified": 57,
+    "v6_raw_files_unchanged": 191,
+    "prior_public_history_directories_unchanged": 5,
+    "query_resolves_all_evidence": true
+  },
+  "runs": {
+    "V6": {
+      "readiness": [
+        {
+          "artifact_hash": "c06c1d796939700e99246786f22c25491aebfbd258490297fd239cb5215e26e5",
+          "build_artifact_hash": "dc420c33f46828f8f89081030d19efaa91dbfbe56c3d944856deb1b141d7f26c",
+          "dependency_coverage": "RESOLVED_BYTES_IDENTITY_ONLY",
+          "dependency_inventory_hash": "3e36f380b9c5a2f19593f5baf2f294511e5d085a98d7c5e41ebe356687c1f42a",
+          "evidence_level": "AUTHENTICATED_LIVE_OBSERVER",
+          "handshake_hash": "b6ea17932d6573b3a6f36468c071db3b7437e60fdb33afc917a67cd9115c37c5",
+          "index_snapshot_id": "c305984dfcc8ac255ccaebb8a5117cf8cdb56edd21950b165ee77022454c39fd",
+          "original_phase_sha256": "a732df9230ce06d5638f4606736719e4c8c343688070bf902c4b0b1ded84f7a5",
+          "outcome": "NOT_RUN",
+          "phase": "002-server-ready",
+          "profile_id": "9be53a5ab33c317b23b24fe372309757de63e9920a409cedf3e5cdbbdfc3dd32",
+          "role": "server",
+          "runtime_scope": "TARGET_CODE_AND_DEPENDENCY_BYTES",
+          "status": "OK",
+          "target_coverage": "TARGET_CODE"
+        },
+        {
+          "artifact_hash": "665bd1e3a3bcc1a6af1b75dc8dc3b3ed3d6ac2b397ed8c7a9ea0c99d97e418ff",
+          "build_artifact_hash": "dc420c33f46828f8f89081030d19efaa91dbfbe56c3d944856deb1b141d7f26c",
+          "dependency_coverage": "RESOLVED_BYTES_IDENTITY_ONLY",
+          "dependency_inventory_hash": "b4afbcf3ad88fffe8f2d10e3e6e16143d25b92e4fa599315e0fdff905183cf13",
+          "evidence_level": "AUTHENTICATED_LIVE_OBSERVER",
+          "handshake_hash": "18e0d6ccb4d3fce8f2cee037c4419e55407d8669a4b40d1a4e07a250e323683b",
+          "index_snapshot_id": "0ef56e01afba5d07399fe15f2d4af757df8a5bea7659212b3f6370073d8dd116",
+          "original_phase_sha256": "456b1702c337d7d94a05c5f783b55179442d8ff9b35e47d1e7bd5ace8a2fe65b",
+          "outcome": "NOT_RUN",
+          "packet_trace": {
+            "active": true,
+            "entity_id": 1,
+            "scope": "SELECTED_VANILLA_RECEIPT_NOT_PROCESSING_ATTESTATION",
+            "supported": true
+          },
+          "phase": "004-control-ready",
+          "profile_id": "a6c1f40b071005e5a26606c22e5f5d6e539767c95e893bf965eae1fae67fc1a9",
+          "role": "control",
+          "runtime_scope": "TARGET_CODE_AND_DEPENDENCY_BYTES",
+          "status": "OK",
+          "target_coverage": "TARGET_CODE"
+        },
+        {
+          "artifact_hash": "78c444324a95a28245ca127766904a485047e1a3b75d97b883dd29656901d13e",
+          "build_artifact_hash": "dc420c33f46828f8f89081030d19efaa91dbfbe56c3d944856deb1b141d7f26c",
+          "dependency_coverage": "RESOLVED_BYTES_IDENTITY_ONLY",
+          "dependency_inventory_hash": "7ed0077ebd5953bb4029d8995f65309d9b09da60a776dcc00991e629e21677f4",
+          "evidence_level": "AUTHENTICATED_LIVE_OBSERVER",
+          "handshake_hash": "ae4136083c8a4514cf971cd690b994b50cda238ae0b6d7fd8026d84cb563bd50",
+          "index_snapshot_id": "bb21810cb3c01847a9dc636726e82cce3b29e44627c12d2ab79b06a8e946879b",
+          "original_phase_sha256": "1eb5e05c6b5c075462dc375bb5ec2e0d9e66f8b0fdbd8157aa2e542173f607ff",
+          "outcome": "NOT_RUN",
+          "packet_trace": {
+            "active": true,
+            "entity_id": 2,
+            "scope": "SELECTED_VANILLA_RECEIPT_NOT_PROCESSING_ATTESTATION",
+            "supported": true
+          },
+          "phase": "006-client-ready",
+          "profile_id": "46c8fa8983243cca1bc9b873318032afa436fc3d7ec47e7ce7f696fdd8f3f5a8",
+          "role": "client",
+          "runtime_scope": "TARGET_CODE_AND_DEPENDENCY_BYTES",
+          "status": "OK",
+          "target_coverage": "TARGET_CODE"
+        }
+      ],
+      "fixed_setup": {
+        "commands": [
+          {
+            "artifact_hash": "673fd12612017d7ff7b74a3a7763edae1d9e80a40002deb53be77200bd24f650",
+            "order": 1,
+            "outcome": "PASS"
+          },
+          {
+            "artifact_hash": "546b8d64726dbfaeb3379e21dfea7dca950842b13901e3d249e4afa3dca7751b",
+            "order": 2,
+            "outcome": "PASS"
+          },
+          {
+            "artifact_hash": "44392284603bf188cd683401faa282c561a9ade7e487e21a028feb7553815528",
+            "order": 3,
+            "outcome": "PASS"
+          },
+          {
+            "artifact_hash": "8117bb167939009ca0706148739fa61241934aa4fd2c93c8cf6211e578636f12",
+            "order": 4,
+            "outcome": "PASS"
+          },
+          {
+            "artifact_hash": "56ccb8db1339cd7b4369ec18353045bf6dbecdb389c45044d9d164e4828076e9",
+            "order": 5,
+            "outcome": "PASS"
+          },
+          {
+            "artifact_hash": "7faac94e72c803d9bd663e93f29df012e0692598a163878d1cefacdd43d07264",
+            "order": 6,
+            "outcome": "PASS"
+          },
+          {
+            "artifact_hash": "93ee015c429accdc96f4a7e1dd5119d53f9be04b176521d0c6459d38fb05053c",
+            "order": 7,
+            "outcome": "PASS"
+          },
+          {
+            "artifact_hash": "478c31e14c89841c069d66facab4ff5fc2c213e6f031a26f34c8ce03d4c58a8e",
+            "order": 8,
+            "outcome": "PASS"
+          },
+          {
+            "artifact_hash": "82928c4a1338586739e32f4ce2b55d7399f11b8bc4bc5117ee198a7d9006e81d",
+            "order": 9,
+            "outcome": "PASS"
+          },
+          {
+            "artifact_hash": "beee142308ab143613a25521a35fe67889bf2f9ebdca3fdd2c30347df17cfad3",
+            "order": 10,
+            "outcome": "PASS"
+          }
+        ],
+        "count": 10,
+        "outcome": "PASS"
+      },
+      "native_receipts": [
+        {
+          "evidence_level": "NATIVE_INPUT_ATTEMPT_NOT_GAMEPLAY_ATTESTATION",
+          "input_status": "COMPLETED",
+          "native_completion": {
+            "pressed": true,
+            "released": true
+          },
+          "outcome": "NOT_RUN",
+          "receipt_sha256": "66f8b4a64007407edbe5981d9638ad7f85a6a5708379ffb2ff8db52cdd7fa922",
+          "release_attempted": true,
+          "release_completed": true,
+          "retry_allowed": false,
+          "role": "first_use",
+          "verification": {
+            "actual_right_click": "NOT_RUN",
+            "server_behavior": "NOT_RUN",
+            "synchronization": "NOT_RUN",
+            "visual": "NOT_RUN"
+          }
+        },
+        {
+          "evidence_level": "NATIVE_INPUT_ATTEMPT_NOT_GAMEPLAY_ATTESTATION",
+          "input_status": "COMPLETED",
+          "native_completion": {
+            "pressed": true,
+            "released": true
+          },
+          "outcome": "NOT_RUN",
+          "receipt_sha256": "2066b221591eebcb0928e0f95e200d61c599baf1bb4523c3af6a8dcb16f55b27",
+          "release_attempted": true,
+          "release_completed": true,
+          "retry_allowed": false,
+          "role": "repeat",
+          "verification": {
+            "actual_right_click": "NOT_RUN",
+            "server_behavior": "NOT_RUN",
+            "synchronization": "NOT_RUN",
+            "visual": "NOT_RUN"
+          }
+        }
+      ],
+      "retained_reference_hashes": {
+        "cooldown_expiry_pair": "9655151ead8ccb8fdce52d03952d266be164797a4fec41508be117b76ea46aa4",
+        "effect_expiry_pair": "e1a20640ecd1692535f21ee36cccd3b0bb59ad354f58184a61f59433ed4768f2",
+        "first_use": {
+          "after_pair": "c97e359ea1f52448073b166bcaac4ca0a795e146828c8e7531dcb005a1fd88c5",
+          "before_pair": "584d862bdddc4f910a461e042ee81611fa92b00c11ab52602796f2d05aefdcb4",
+          "control_after_pair": "7422741fd26678bbde68db79964dbb59e4ec35258e540cfd829be7d7a4bfc161",
+          "control_before_pair": "f0d26a541647be738455812b5d0c82da40c4ede9e3c7c85b06a72a416dc9312f",
+          "input_receipt": "66f8b4a64007407edbe5981d9638ad7f85a6a5708379ffb2ff8db52cdd7fa922"
+        },
+        "repeat": {
+          "repeat_after_pair": "f394df26b4f867868e48eaab9ccd07f9b5d7a193a47f85ba1bebd63de589aece",
+          "repeat_before_pair": "671ad68bada2c2a5059ac194ee31a2cdc496f2fdbd919a28527ae5ef9ad94d1e",
+          "repeat_input_receipt": "2066b221591eebcb0928e0f95e200d61c599baf1bb4523c3af6a8dcb16f55b27"
+        }
+      },
+      "generic_checker_results": {
+        "control": {
+          "evidence_level": "RETAINED_RECORD_CONSISTENCY_NOT_LIVE_ATTESTATION",
+          "input_absence_scope": "Supplied native receipts and retained fixture calls only; unrecorded OS input is not excluded",
+          "kind": "fixed-staff-non-invoking-control-evidence-check",
+          "live_attestation": "NOT_ESTABLISHED",
+          "outcome": "PASS",
+          "product_acceptance": "NOT_ESTABLISHED",
+          "verdicts": {
+            "control_neutral": "PASS",
+            "declared_native_input_targets_invoker": "PASS",
+            "health_stack_damage": "PASS",
+            "no_control_receipt_delta": "PASS"
+          }
+        },
+        "expiry": {
+          "evidence_level": "RETAINED_RECORD_CONSISTENCY_NOT_LIVE_ATTESTATION",
+          "kind": "fixed-staff-expiry-evidence-check",
+          "live_attestation": "NOT_ESTABLISHED",
+          "outcome": "PASS",
+          "product_acceptance": "NOT_ESTABLISHED",
+          "verdicts": {
+            "cooldown_expired": "PASS",
+            "effect_expired": "PASS",
+            "health_stack_damage": "PASS",
+            "no_further_recorded_client_use": "PASS",
+            "no_reapplication_receipts": "PASS"
+          }
+        },
+        "first_use": {
+          "evidence_level": "RETAINED_RECORD_CONSISTENCY_NOT_LIVE_ATTESTATION",
+          "kind": "fixed-staff-client-evidence-check",
+          "outcome": "PASS",
+          "product_acceptance": "NOT_ESTABLISHED",
+          "scope": "Selected vanilla packet/state correlation and verified fixture mutator-site execution only",
+          "verdicts": {
+            "client_handler_known_mutator_sites": "PASS",
+            "client_state": "PASS",
+            "health_stack_damage": "PASS",
+            "native_input": "PASS",
+            "non_invoking_player": "NOT_RUN",
+            "packet_receipts": "PASS",
+            "performance": "NOT_RUN",
+            "scoped_synchronization": "PASS",
+            "server_state": "PASS",
+            "visual": "NOT_RUN"
+          }
+        },
+        "repeat": {
+          "evidence_level": "RETAINED_RECORD_CONSISTENCY_NOT_LIVE_ATTESTATION",
+          "kind": "fixed-staff-cooldown-repeat-evidence-check",
+          "live_attestation": "NOT_ESTABLISHED",
+          "outcome": "PASS",
+          "product_acceptance": "NOT_ESTABLISHED",
+          "timing_scope": "Independent server/client sample expiry-bound consistency with one update-phase tick and 1e-4 cooldown-tick rounding allowance",
+          "verdicts": {
+            "client_handler_known_mutator_sites": "PASS",
+            "health_stack_damage": "PASS",
+            "native_repeat": "PASS",
+            "no_new_application_receipts": "PASS",
+            "no_refresh_client_bounds": "PASS",
+            "no_refresh_server_bounds": "PASS"
+          }
+        }
+      },
+      "actual_run_review": {
+        "status": "SCOPED_LIVE_PASS_WITH_VISUAL_GAP",
+        "review_original_sha256": "43c4d59e0cc919baa440971ae03a8eb4e964e630429b40a0eb35002ed1a72484",
+        "review_status": "SCOPED_THIS_RUN_REVIEW_PASS_WITH_EXPLICIT_VISUAL_GAP",
+        "first_use": {
+          "outcome": "PASS",
+          "selected_packet_entity_id": 2,
+          "selected_packet_receipts": [
+            {
+              "amplifier": 0,
+              "duration_ticks": 60,
+              "effect": "minecraft:glowing",
+              "entity_id": 2,
+              "kind": "glowing",
+              "sequence": 1
+            },
+            {
+              "duration_ticks": 100,
+              "item": "kneekura:celestial_staff",
+              "kind": "cooldown",
+              "sequence": 2
+            }
+          ],
+          "client_handler_completed": 1,
+          "known_effect_mutation_attempts": 0,
+          "known_cooldown_mutation_attempts": 0,
+          "client_handler_local_state_unchanged": true
+        },
+        "repeat": {
+          "outcome": "PASS",
+          "scope": "No recorded reapplication or refreshed server/client expiry bounds during cooldown"
+        },
+        "control": {
+          "outcome": "PASS",
+          "scope": "Non-invoking control remained neutral within supplied native receipts and retained fixture-call history; unrecorded OS input is not excluded"
+        },
+        "expiry": {
+          "outcome": "PASS",
+          "scope": "Retained effect and cooldown expiry; no further recorded application"
+        },
+        "visual": {
+          "three_context_display": "OBSERVED",
+          "staff_tooltip": "Celestial Staff",
+          "third_person_visible_glowing": "NOT_RUN",
+          "reason": "Capture 012 follows effect expiry; Glowing is null",
+          "all_angle_or_full_silhouette_quality": "NOT_ESTABLISHED"
+        },
+        "not_promoted": [
+          "Twilight Forest U03 runtime",
+          "Sinytra Connector positive compatibility",
+          "canonical repository-wide or cross-mod acceptance",
+          "Windows/native platform acceptance",
+          "performance or hardware attestation",
+          "arbitrary packet delivery/processing causality",
+          "post-transform loaded class memory attestation",
+          "all-angle/full-silhouette model quality",
+          "strict third-person visible-Glowing assertion"
+        ],
+        "review_actions": "Read-only retained-record and image review plus pure fixed-verifier re-evaluation; no new game or observer calls",
+        "transport_authentication_scope": "Original calls returned AUTHENTICATED_LIVE_OBSERVER through the authenticated bridge. Independent review verifies retained hashes, identities and results; it is not a new live HTTP authentication or arbitrary packet-processing attestation."
+      },
+      "visual_captures": [
+        {
+          "artifact_hash": "3b996edd6b5a06b417f6fd7a22e8fd2a131d456a9f6c9e3e6545457c2a86d116",
+          "atomic": false,
+          "authentication_basis": "AUTHENTICATED_LIVE_OBSERVER",
+          "capture_id": "011-first-person",
+          "client_frame_end": 2991,
+          "client_frame_start": 2991,
+          "handshake_hash": "ae4136083c8a4514cf971cd690b994b50cda238ae0b6d7fd8026d84cb563bd50",
+          "height": 812,
+          "original_raw_file_sha256": "3b996edd6b5a06b417f6fd7a22e8fd2a131d456a9f6c9e3e6545457c2a86d116",
+          "png_sha256": "eeb02f6eebef49e9568d720372f16464c270e1b4d414cb734ed12eb4c5147005",
+          "width": 1180,
+          "view": "first_person",
+          "visible": "Gold staff shaft/ring, purple star and matching hotbar icon; normal central aim remains unobscured",
+          "limitation": "Top/right crop prevents a complete silhouette or all-geometry judgment",
+          "glowing": null
+        },
+        {
+          "artifact_hash": "69f136f392843ccd4282d4f391e9a2d117e935f285584f95ed6053c0159cff2c",
+          "atomic": false,
+          "authentication_basis": "AUTHENTICATED_LIVE_OBSERVER",
+          "capture_id": "012-third-person-front",
+          "client_frame_end": 6637,
+          "client_frame_start": 6637,
+          "handshake_hash": "ae4136083c8a4514cf971cd690b994b50cda238ae0b6d7fd8026d84cb563bd50",
+          "height": 812,
+          "original_raw_file_sha256": "69f136f392843ccd4282d4f391e9a2d117e935f285584f95ed6053c0159cff2c",
+          "png_sha256": "8b3819817f8f8d6fc22bb5f35bbea11b85b30a8ccc3b94f4ac05c1297ffdab51",
+          "width": 1180,
+          "view": "third_person",
+          "visible": "Full player with clearly held gold ring and purple star",
+          "limitation": "Shaft is strongly foreshortened/partly occluded; Glowing is absent after expiry, so the stricter visible-Glowing assertion is not demonstrated",
+          "glowing": null
+        },
+        {
+          "artifact_hash": "970e8f9929671f6c40619cffadcdf124576044be61f6ec6bde4c1c523578aeff",
+          "atomic": false,
+          "authentication_basis": "AUTHENTICATED_LIVE_OBSERVER",
+          "capture_id": "013-inventory",
+          "client_frame_end": 7524,
+          "client_frame_start": 7524,
+          "handshake_hash": "ae4136083c8a4514cf971cd690b994b50cda238ae0b6d7fd8026d84cb563bd50",
+          "height": 812,
+          "original_raw_file_sha256": "970e8f9929671f6c40619cffadcdf124576044be61f6ec6bde4c1c523578aeff",
+          "png_sha256": "6213d5445a29bdb19600405573a40843381d994058c9dd0ed737f2e23a35e2d1",
+          "width": 1180,
+          "view": "inventory",
+          "visible": "Complete small staff icon in first hotbar slot",
+          "limitation": "Hovered tooltip is Spruce Trapdoor, not the staff",
+          "glowing": null
+        },
+        {
+          "artifact_hash": "521b9f85386c7fdebd908d15602ec3b3aeb1642fad790b66acdca6ee3c025ae4",
+          "atomic": false,
+          "authentication_basis": "AUTHENTICATED_LIVE_OBSERVER",
+          "capture_id": "014-inventory-tooltip",
+          "client_frame_end": 9801,
+          "client_frame_start": 9801,
+          "handshake_hash": "ae4136083c8a4514cf971cd690b994b50cda238ae0b6d7fd8026d84cb563bd50",
+          "height": 812,
+          "original_raw_file_sha256": "521b9f85386c7fdebd908d15602ec3b3aeb1642fad790b66acdca6ee3c025ae4",
+          "png_sha256": "7b54136b026b84599cc4bdbb1bb23e0eb4d59835adec8cc310f1e98b7c3b5fab",
+          "width": 1180,
+          "view": "inventory",
+          "visible": "Complete small staff icon with visibly hovered Celestial Staff tooltip",
+          "limitation": "Small GUI representation does not establish held-model silhouette quality",
+          "glowing": null
+        }
+      ],
+      "closure": {
+        "active_native_markers": {
+          "client": 0,
+          "control": 0
+        },
+        "active_native_markers_checked_at": "2026-09-30T19:07:07.610626+00:00",
+        "actual_desktop_closure_utc": "2026-09-30T18:59:41.927071+00:00",
+        "clock_started_utc": "2026-09-30T18:43:16.453099+00:00",
+        "desktop_processes": [],
+        "execution_threads_closed_utc": "2026-09-30T18:58:52.809053+00:00",
+        "original_cleanup_sha256": "5d7e09b4c8fd309bcf8e757c5d8339877c1004331efb9f289993046e0855e507",
+        "original_desktop_closure_sha256": "7f40040c8be061d014e19f3aad37d3affc9ce5c08ef8d59b2df7c374f6e375f5",
+        "original_status_sha256": "b135feda1567fec6d1d561636c95459f3dcc0465dcada92e58855308d53c185e",
+        "process_receipts": [
+          {
+            "original_log_sha256": "569ece546426e2dcb6dc09f098c43cff92fde3a9fd12e6653318b3672750cf76",
+            "original_receipt_sha256": "5a4d64c8ea7b1c6706488755126275a24e75eab786e52d6eaf5acfa66c783f68",
+            "outcome": "FAIL",
+            "process": {
+              "completed": true,
+              "exit_code": 1,
+              "timed_out": false
+            },
+            "role": "client"
+          },
+          {
+            "original_log_sha256": "a547bfe2754a38bf478ddd4e5717c6e886a33cafcc7d6128a8c0a64ca642dbd8",
+            "original_receipt_sha256": "b29b4dab6cbc3942f3e4ea81da0929de58df379dbfa71e268ef815fa9a822186",
+            "outcome": "FAIL",
+            "process": {
+              "completed": true,
+              "exit_code": 1,
+              "timed_out": false
+            },
+            "role": "control"
+          },
+          {
+            "original_log_sha256": "3a65704bd0945713ebd96225a8282f17fd4f94fabe5bf2e0def3c43ffa7c53a4",
+            "original_receipt_sha256": "c8ccfd8639b33454703f9ec4ac31ddcbd0658a4b80504c23d0392cb6ae812f9e",
+            "outcome": "FAIL",
+            "process": {
+              "completed": true,
+              "exit_code": 1,
+              "timed_out": false
+            },
+            "role": "server"
+          }
+        ],
+        "state": "CLOSED",
+        "stops": [
+          {
+            "exact_owned_matches": 1,
+            "original_phase_sha256": "1cd4a62c9c18a5409911ae05f21cd401db2ab37d706cc016ad5baeb19a311a0f",
+            "role": "client",
+            "signal": "SIGTERM"
+          },
+          {
+            "exact_owned_matches": 1,
+            "original_phase_sha256": "6a0c1f4112bf6cafb0a9ce16292726cf4ca0c925db50abfc54aa4581b87a6490",
+            "role": "control",
+            "signal": "SIGTERM"
+          },
+          {
+            "exact_owned_matches": 1,
+            "original_phase_sha256": "3d4eea7b487bb16dc73ea26d8dcf0e5f8b50dd726c0c067021e2b1ac255000d8",
+            "role": "server",
+            "signal": "SIGTERM"
+          }
+        ]
+      },
+      "scope": "Closed V6 behavior and three-context observations; its original third-person Glowing gap remains historical",
+      "history_hash": "ced9eea26c78fe51c695cdaab9010474cc96441e5f17fcc4a333c63b029a5653"
+    },
+    "V7": {
+      "scope": "One V7 visual continuation for third_person_view only; V6 behavior assertions remain under their original V6 contracts and references",
+      "status": "PASS_SCOPED_THIRD_PERSON_VIEW",
+      "review_original_sha256": "4147fc3743cb28d8b4e4b2be97881937c8c1024db9bdb449275b8aec922f6eea",
+      "contracts": {
+        "client": "1c6521b698df3af4d566f83774a5a37f5b51b9edc8790f987f10f95c871f6711",
+        "control": "ea7185fef3982cd6a48d3e148e8a9e4d45920344c50467bc63ba93709acbe6e9",
+        "server": "071c83d63915dfc3aff064ab667000dd75fa8e7a4b0a41db978b0bb6f8c8fd17"
+      },
+      "preserved_early_read": {
+        "id": "v7-002-server-ready",
+        "phase": "ready",
+        "error": "FileNotFoundError",
+        "outcome": "BLOCKED_OR_UNKNOWN",
+        "retry_allowed": false,
+        "original_phase_sha256": "c85bddb81e908fc838ceb7a9e09833e264815233c07157101b528fc830ecc8ab"
+      },
+      "readiness": [
+        {
+          "phase": "v7-002b-server-ready",
+          "role": "server",
+          "original_phase_sha256": "ce5179c8678e7fed61572f2958ff5e69da987d72ac0afa672218cfc2f7c821a1",
+          "status": "OK",
+          "outcome": "NOT_RUN",
+          "artifact_hash": "3060338d9c576a8cc294f83baf81d855871e4e6c34bdff47cbc45070a3b2cc99",
+          "handshake_hash": "9a9f0872209de990e53b8e74b451d434a460dfe9c519286f1246391ec8f3634f",
+          "evidence_level": "AUTHENTICATED_LIVE_OBSERVER"
+        },
+        {
+          "phase": "v7-004-control-ready",
+          "role": "control",
+          "original_phase_sha256": "e66e973f3db3230ba02f194b9bd5c640dcfda6a56f8e250c0388c09ba7884153",
+          "status": "OK",
+          "outcome": "NOT_RUN",
+          "artifact_hash": "2f81809d11669c97dedc22bd9cc7318546ffa32f511a9ce96b90ab3079609068",
+          "handshake_hash": "e03508feddc33a57b176b291ff408978b9bd608df557d8e9dd98c78dbd30450b",
+          "evidence_level": "AUTHENTICATED_LIVE_OBSERVER"
+        },
+        {
+          "phase": "v7-006-client-ready",
+          "role": "client",
+          "original_phase_sha256": "b2a840450dd6e6c15f8eee9790c4fcdc408f0607d964a209ca7d2b358480dd74",
+          "status": "OK",
+          "outcome": "NOT_RUN",
+          "artifact_hash": "da7e6032f18e3fa51fdd2b1512ee7495c4171f72d802fbb3c544b27d9433f265",
+          "handshake_hash": "2886617bc3bdfe244a2429985d972e5a1313117d9f396d56d769c528a470a75f",
+          "evidence_level": "AUTHENTICATED_LIVE_OBSERVER"
+        }
+      ],
+      "retained_reference_hashes": {
+        "first_use": {
+          "after_pair": "cf2d0174902f39a31b34b09574ac6fb4bea8d239c068a2385d31a8f26754e617",
+          "before_pair": "22e449c0afbf7c40d536cb5c1399c75c4be4301563a2f4d55a9007ace313d5d8",
+          "control_after_pair": "547fb0b42d18dac27720f1f8ef8b84104bc6128040503c21eda92eff4570dfc6",
+          "control_before_pair": "6fa8ae0ffd9ff161daa1fc597c6e5d05553321fe673f495f888acdd4418bef37",
+          "input_receipt": "119671bdc9c3b9ae4490e5352c124f24bf5362219d068c9cd2a94df3e9566e5e"
+        }
+      },
+      "native_receipt": {
+        "receipt_sha256": "119671bdc9c3b9ae4490e5352c124f24bf5362219d068c9cd2a94df3e9566e5e",
+        "request_sha256": "676a22a739af70131764ce892911ca94320de55e34c7851263a34a67f6378cf6",
+        "hold_ms": 50,
+        "gestures": 1,
+        "input_status": "COMPLETED",
+        "outcome": "NOT_RUN",
+        "release_attempted": true,
+        "release_completed": true,
+        "retry_allowed": false,
+        "evidence_level": "NATIVE_INPUT_ATTEMPT_NOT_GAMEPLAY_ATTESTATION",
+        "verification": {
+          "actual_right_click": "NOT_RUN",
+          "server_behavior": "NOT_RUN",
+          "synchronization": "NOT_RUN",
+          "visual": "NOT_RUN"
+        }
+      },
+      "generic_checker_results": {
+        "control": {
+          "kind": "fixed-staff-non-invoking-control-evidence-check",
+          "outcome": "PASS",
+          "evidence_level": "RETAINED_RECORD_CONSISTENCY_NOT_LIVE_ATTESTATION",
+          "live_attestation": "NOT_ESTABLISHED",
+          "product_acceptance": "NOT_ESTABLISHED",
+          "verdicts": {
+            "control_neutral": "PASS",
+            "declared_native_input_targets_invoker": "PASS",
+            "health_stack_damage": "PASS",
+            "no_control_receipt_delta": "PASS"
+          }
+        },
+        "expiry": {
+          "outcome": "NOT_RUN",
+          "reason": "Complete required same-run evidence was not retained"
+        },
+        "first_use": {
+          "kind": "fixed-staff-client-evidence-check",
+          "outcome": "PASS",
+          "evidence_level": "RETAINED_RECORD_CONSISTENCY_NOT_LIVE_ATTESTATION",
+          "product_acceptance": "NOT_ESTABLISHED",
+          "verdicts": {
+            "client_handler_known_mutator_sites": "PASS",
+            "client_state": "PASS",
+            "health_stack_damage": "PASS",
+            "native_input": "PASS",
+            "non_invoking_player": "NOT_RUN",
+            "packet_receipts": "PASS",
+            "performance": "NOT_RUN",
+            "scoped_synchronization": "PASS",
+            "server_state": "PASS",
+            "visual": "NOT_RUN"
+          }
+        },
+        "repeat": {
+          "outcome": "NOT_RUN",
+          "reason": "Complete required same-run evidence was not retained"
+        }
+      },
+      "third_person_view": {
+        "assertion": {
+          "basis": "Host pixel review of retained authenticated same-run frame, positive Glowing I duration and exact contract/PNG binding. Not an altered generic observer/checker verdict.",
+          "id": "third_person_view",
+          "outcome": "PASS",
+          "requirement": "Third-person held staff and Glowing appearance are visible as intended in the observed camera/view",
+          "scenario_path": "tools/ci/mod_ai_staff/scenarios/client-observation.json",
+          "scenario_sha256": "f28f6f4b3b782c18cc3e2ab206ca48bd8764f6d23005d1e6faa620ce53f8e777"
+        },
+        "outcome": "PASS",
+        "review_original_sha256": "4147fc3743cb28d8b4e4b2be97881937c8c1024db9bdb449275b8aec922f6eea",
+        "views": {
+          "baseline": {
+            "phase": "v7-007b-third-person-baseline",
+            "artifact_hash": "2b0dbe649fe4c5198b1d25ac40594b6ec1a8f4e0638e2aed6c03c247bd924f00",
+            "handshake_hash": "2886617bc3bdfe244a2429985d972e5a1313117d9f396d56d769c528a470a75f",
+            "png_sha256": "2f585c20fccc6b196db8a16bc120f3983af13095ed49b478eae5b610576dc064",
+            "client_frame_start": 1567,
+            "client_frame_end": 1567,
+            "width": 1180,
+            "height": 812,
+            "atomic": false,
+            "camera": {
+              "pitch": -0.0,
+              "x": 0.5,
+              "y": 66.61999988555908,
+              "yaw": 0.0,
+              "z": -3.5
+            },
+            "staff_state": {
+              "applicable": true,
+              "glowing": null,
+              "main_hand": {
+                "count": 1,
+                "damage": 0,
+                "item": "kneekura:celestial_staff"
+              },
+              "observation_side": "logical_client",
+              "schema_version": 1,
+              "staff_cooldown": {
+                "active": false,
+                "fraction": 0.0,
+                "item": "kneekura:celestial_staff",
+                "registered": true
+              }
+            },
+            "visible": "Third-person front shows player and held gold-ring/purple-star staff without white outline or Glowing metadata; staff shaft is more extended in this pose"
+          },
+          "active_glowing": {
+            "phase": "v7-010-third-person-glowing",
+            "artifact_hash": "386c26e3d2d6fa0c79701281cdba1ccb0b8dc584d61e3998a5bb7addf3faf9d0",
+            "handshake_hash": "2886617bc3bdfe244a2429985d972e5a1313117d9f396d56d769c528a470a75f",
+            "png_sha256": "33280d8d701c50a6036b99d6c7feb3817d68cf2b61bf09589e0c51a81f207723",
+            "client_frame_start": 1947,
+            "client_frame_end": 1947,
+            "width": 1180,
+            "height": 812,
+            "atomic": false,
+            "camera": {
+              "pitch": -0.0,
+              "x": 0.5,
+              "y": 66.61999988555908,
+              "yaw": 0.0,
+              "z": -3.5
+            },
+            "staff_state": {
+              "applicable": true,
+              "glowing": {
+                "amplifier": 0,
+                "duration_ticks": 29
+              },
+              "main_hand": {
+                "count": 1,
+                "damage": 0,
+                "item": "kneekura:celestial_staff"
+              },
+              "observation_side": "logical_client",
+              "schema_version": 1,
+              "staff_cooldown": {
+                "active": true,
+                "fraction": 0.69,
+                "item": "kneekura:celestial_staff",
+                "registered": true
+              }
+            },
+            "visible": "Bright white outline visibly surrounds player and held gold/purple staff; effect particles and HUD effect icon are present. Authenticated metadata records Glowing I with 29 ticks remaining"
+          }
+        },
+        "same_camera": true,
+        "quality_limit": "This frame establishes the fixed visible-appearance assertion at this camera, not all-angle geometry or complete silhouette quality; the held shaft remains pose-dependent and partly foreshortened",
+        "no_new_source_or_build": true,
+        "scope": "Independent pixel review plus exact V7 contract/capture/hash binding, separate from unchanged generic observer and native verdicts"
+      },
+      "closure": {
+        "state": "CLOSED",
+        "clock_started_utc": "2026-09-30T19:14:31.891966+00:00",
+        "execution_threads_closed_utc": "2026-09-30T19:23:59.632123+00:00",
+        "actual_desktop_closure_utc": "2026-09-30T19:25:20.784104+00:00",
+        "desktop_processes": [],
+        "active_native_markers": {
+          "client": 0,
+          "control": 0
+        },
+        "original_status_sha256": "721f21397c3d711a7427aacec7cb5d9503cf29ebecc342b6506f684e9743461a",
+        "original_cleanup_sha256": "50d32d7598e1339af341f8140575395f3ebd33d1792e26eac69b39dc6aa9520a",
+        "original_desktop_closure_sha256": "2fa4acff1a5a031cd5bb95b5b77c8085ac44af79d46886bdf2a6f7ad432f7948",
+        "process_receipts": [
+          {
+            "role": "client",
+            "original_receipt_sha256": "d8f4a7e8c09b03443f7427ab7a600199f908e4df8e94bbe48f6827f81460be74",
+            "original_log_sha256": "4b75c7fbce1cdfc064f393e59c87e2a0237c10a81c4db71a2eb6c5af1f523ae5",
+            "outcome": "FAIL",
+            "process": {
+              "completed": true,
+              "exit_code": 1,
+              "timed_out": false
+            },
+            "stop_signal": "SIGTERM",
+            "original_stop_phase_sha256": "55c5e36dd61a3507010794dfe5a9417e36e870374b6fdfc11a41fdfa9471e864"
+          },
+          {
+            "role": "control",
+            "original_receipt_sha256": "096cf2c3e427621f1bbcb7ce0c3a990a08fdea8150e377dca1a2d4cdcb2c1099",
+            "original_log_sha256": "1bf2d6696eb96e26090954653cc5feb6d19c62afe8bab3c1dec791273e963923",
+            "outcome": "FAIL",
+            "process": {
+              "completed": true,
+              "exit_code": 1,
+              "timed_out": false
+            },
+            "stop_signal": "SIGTERM",
+            "original_stop_phase_sha256": "2be87f716cfe2c32ae435226211f7609915e9ff12760b7cd622906802d9edfbc"
+          },
+          {
+            "role": "server",
+            "original_receipt_sha256": "e7f280a26c7cc27cb7b92356f67e6d5d2df50f40919bf0a12a16f62159a06ea4",
+            "original_log_sha256": "07ae9aa6d5477eef2dea121bcfd10a9655a2f4975a22e1b71121ab7c92cdbc8d",
+            "outcome": "FAIL",
+            "process": {
+              "completed": true,
+              "exit_code": 1,
+              "timed_out": false
+            },
+            "stop_signal": "SIGTERM",
+            "original_stop_phase_sha256": "bc816935a708fbb6d0a326b4080aa32109d5401e065778ad38464984f247fadd"
+          }
+        ]
+      },
+      "not_promoted": [
+        "Twilight Forest U03 runtime",
+        "Sinytra Connector compatibility",
+        "canonical or repository-wide acceptance",
+        "Windows/platform-driver acceptance",
+        "performance/hardware or post-transform class attestation",
+        "arbitrary network/packet-processing causality",
+        "all-angle/full-silhouette model quality"
+      ],
+      "v6_raw_files_verified_unchanged": 191
+    }
+  },
+  "fixed_assertion_outcomes": {
+    "V6_first_use": "PASS",
+    "V6_non_invoking_control": "PASS",
+    "V6_cooldown_repeat": "PASS",
+    "V6_expiry": "PASS",
+    "V6_three_context_display": "OBSERVED",
+    "V7_third_person_view": "PASS",
+    "V7_repeat": "NOT_RUN",
+    "V7_expiry": "NOT_RUN"
+  }
+}
