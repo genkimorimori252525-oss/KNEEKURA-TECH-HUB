@@ -39,14 +39,15 @@ def test_plugin_permission_document_grants_only_loopback_network_module():
     assert m.plugin_permissions() == {"blockbench_mcp": {"allowed": {"net": True}}}
 
 
-def test_celestial_staff_plan_is_bounded_and_nontrivial():
+def test_celestial_staff_plan_is_bounded_and_has_explicit_palette_regions():
     m = load_harness()
     request_hash = "a" * 64
     plan = m.celestial_staff_plan(request_hash)
-    assert set(plan) == {"schema_version", "request_hash", "fill", "cubes"}
+    assert set(plan) == {"schema_version", "request_hash", "fill", "cubes", "texture_regions"}
     assert plan["schema_version"] == 1 and plan["request_hash"] == request_hash
     assert plan["fill"] == "#d4af37"
-    assert 8 <= len(plan["cubes"]) <= 32
+    assert 1 <= len(plan["cubes"]) <= 128
+    assert plan["texture_regions"] == [{"rect": [24, 24, 32, 32], "color": "#864fc7"}]
     assert len({c["name"] for c in plan["cubes"]}) == len(plan["cubes"])
     assert any(c["name"].startswith("star_") for c in plan["cubes"])
     for cube in plan["cubes"]:
@@ -180,3 +181,43 @@ def test_hosted_editor_uses_explicit_software_webgl():
     assert '--use-angle=gl' in text
     assert 'LIBGL_ALWAYS_SOFTWARE' in text
     assert '--enable-unsafe-swiftshader' not in text
+
+
+def test_staff_has_smaller_purple_star_with_clear_air_gaps_inside_halo():
+    plan = load_harness().celestial_staff_plan("a" * 64)
+    stars = [c for c in plan["cubes"] if c["name"].startswith("star_")]
+    halo = [c for c in plan["cubes"] if c["name"].startswith("halo_")]
+    assert stars and halo
+    for star in stars:
+        assert 2 < star["from"][0] < star["to"][0] < 14
+        assert 20 < star["from"][1] < star["to"][1] < 30
+        assert all(24 <= n <= 32 for n in star["uv"])
+        for rim in halo:
+            assert any(star["to"][i] <= rim["from"][i] or rim["to"][i] <= star["from"][i] for i in (0, 1))
+    for x, y in [(4, 24), (12, 24), (8, 21), (8, 29), (5, 27), (11, 27)]:
+        assert not any(c["from"][0] <= x < c["to"][0] and c["from"][1] <= y < c["to"][1] for c in plan["cubes"])
+    for rim in halo:
+        assert rim["uv"][3] <= 24
+
+
+def test_live_harness_exports_a_separate_validated_resource_package(tmp_path,monkeypatch):
+    from test_minecraft_asset_session import prepared as fixture_setup
+    from test_minecraft_asset_export import capture as capture_setup
+    prepared=fixture_setup.__wrapped__(tmp_path)
+    store,h,receipt=capture_setup.__wrapped__(prepared)
+    module=load_harness()
+    root=tmp_path/'runner';root.mkdir();package=root/'private';package.mkdir()
+    (package/'client-private.json').write_text('{}')
+    (root/'context-private.json').write_text(json.dumps({'store_root':str(store.root),
+        'package_directory':str(package),'bridge_port':8787,'plan':{}}))
+    result={'status':'OK','outcome':'NOT_RUN','request_hash':receipt['request_hash'],
+            'loaded_revision':receipt['loaded_revision'],'project_uuid':receipt['project_uuid'],
+            'inspection_hash':receipt['inspection_hash'],'receipt_hash':h,
+            'artifacts':receipt['artifacts'],'verification':receipt['verification']}
+    monkeypatch.setattr(module,'run_session',lambda *a,**k:result)
+    evidence=tmp_path/'evidence'
+    output=module.run(root,evidence)
+    assert output['export']['verification']=={'structural':'PASS','visual':'NOT_RUN','runtime':'NOT_RUN'}
+    assert json.loads((evidence/'session.json').read_text())['verification']['structural']=='NOT_RUN'
+    assert json.loads((evidence/'export.json').read_text())['manifest_hash']==output['export']['manifest_hash']
+    assert Path(output['export']['directory']).is_relative_to(evidence)

@@ -1,7 +1,7 @@
 """Asset preparation CLI: python -m kneekura_tech_hub.minecraft.assets.
 
 Uses the existing Minecraft CAS. Does not install plugins, launch a process,
-write model files, or submit editing commands. Probe is explicit opt-in IO.
+submit editing commands. Probe and no-overwrite local export are explicit opt-in IO.
 """
 from __future__ import annotations
 
@@ -40,6 +40,9 @@ def main(argv: list[str] | None = None) -> int:
     source.add_argument('--profile', help='JSON object returned by capture_profile')
     inspect = subs.add_parser('probe', help='Three read-only loopback requests with explicit registry permission')
     inspect.add_argument('--registry', required=True)
+    export = subs.add_parser('export', help='Materialize a verified capture into a fresh resource package')
+    export.add_argument('--receipt', required=True)
+    export.add_argument('--parent', required=True)
     try:
         args = parser.parse_args(argv)
         if args.operation == 'check':
@@ -48,10 +51,13 @@ def main(argv: list[str] | None = None) -> int:
                       'assertion_domain': 'asset_spec_validation', 'asset_id': s['asset_id']}
         else:
             if not args.store:
-                raise ContractError('--store is required for prepare and probe')
+                raise ContractError('--store is required for prepare, probe and export')
             store = Store(args.store)
             if args.operation == 'probe':
                 result = probe(store, _read(args.registry))
+            elif args.operation == 'export':
+                from .asset_export import materialize_asset
+                result = materialize_asset(store, args.receipt, parent=Path(args.parent))
             else:
                 if args.index:
                     snapshot = store.json(args.index)

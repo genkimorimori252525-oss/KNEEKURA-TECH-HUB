@@ -50,7 +50,7 @@ def validate_plan(store: Store, request_hash: str, value: dict) -> dict:
     valid_hash(request_hash)
     request, spec = load_request(store, request_hash)
     plan = _detached(value)
-    if not isinstance(plan, dict) or set(plan) != _PLAN_FIELDS:
+    if not isinstance(plan, dict) or set(plan) not in (_PLAN_FIELDS, _PLAN_FIELDS | {'texture_regions'}):
         raise ContractError('Expected exactly the asset-session plan fields')
     if type(plan['schema_version']) is not int or plan['schema_version'] != 1:
         raise ContractError('Asset-session plan requires schema_version=1')
@@ -65,6 +65,20 @@ def validate_plan(store: Store, request_hash: str, value: dict) -> dict:
         raise ContractError('Plan requires 1..128 explicit cubes')
     names: set[str] = set()
     width, height = spec['style']['texture_size']
+    regions = plan.get('texture_regions', [])
+    if not isinstance(regions, list) or len(regions) > 32:
+        raise ContractError('Plan allows at most 32 texture regions')
+    for region in regions:
+        if not isinstance(region, dict) or set(region) != {'rect', 'color'}:
+            raise ContractError('Each texture region has exactly rect/color')
+        if not isinstance(region['color'], str) or region['color'] not in palette:
+            raise ContractError('Texture region color must be in the request palette')
+        rect = region['rect']
+        if (not isinstance(rect, list) or len(rect) != 4
+                or any(type(n) is not int for n in rect)
+                or not 0 <= rect[0] < rect[2] <= width
+                or not 0 <= rect[1] < rect[3] <= height):
+            raise ContractError('Texture region must be an integer rectangle within the request texture')
     for cube in cubes:
         if not isinstance(cube, dict) or set(cube) != _CUBE_FIELDS:
             raise ContractError('Each planned cube has exactly name/from/to/uv')
@@ -299,6 +313,8 @@ def run_session(store: Store, registry: dict, private_config: dict, plan: dict) 
 
     call('begin', {})
     call('texture', {'fill': p['fill']})
+    for region in p.get('texture_regions', []):
+        call('texture_region', region)
     for cube in p['cubes']:
         call('cube', cube)
     inspection = call('inspect', {})['result']

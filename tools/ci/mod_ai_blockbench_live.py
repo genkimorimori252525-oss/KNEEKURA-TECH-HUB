@@ -19,6 +19,7 @@ from kneekura_tech_hub.minecraft.asset_contract import (
 )
 from kneekura_tech_hub.minecraft.asset_guard import prepare_guarded_package
 from kneekura_tech_hub.minecraft.asset_session import run_session
+from kneekura_tech_hub.minecraft.asset_export import materialize_asset
 from kneekura_tech_hub.minecraft.storage import Store, canonical, capture_profile, digest
 
 
@@ -38,24 +39,31 @@ def plugin_permissions() -> dict:
 
 
 def celestial_staff_plan(request_hash: str) -> dict:
+    # An open stepped gold halo, with air separating every purple star tip.
+    # UVs reserve the lower-right atlas quadrant for the accent color.
     cubes = [
         ("shaft_bottom", [7, 0, 7], [9, 8, 9], [0, 0, 2, 8]),
-        ("shaft_mid", [7, 8, 7], [9, 16, 9], [2, 0, 4, 8]),
+        ("shaft_mid", [7, 8, 7], [9, 18, 9], [2, 0, 4, 10]),
         ("collar", [6, 15, 6], [10, 17, 10], [4, 0, 8, 4]),
-        ("halo_left", [3, 19, 7], [5, 25, 9], [8, 0, 10, 6]),
-        ("halo_right", [11, 19, 7], [13, 25, 9], [10, 0, 12, 6]),
-        ("halo_top", [5, 23, 7], [11, 25, 9], [12, 0, 18, 2]),
-        ("halo_bottom", [5, 19, 7], [11, 21, 9], [18, 0, 24, 2]),
-        ("star_core", [7, 21, 6], [9, 23, 10], [24, 0, 26, 4]),
-        ("star_up", [7.25, 23, 7], [8.75, 27, 9], [0, 8, 2, 12]),
-        ("star_down", [7.25, 17, 7], [8.75, 21, 9], [2, 8, 4, 12]),
-        ("star_left", [4, 21.25, 7], [7, 22.75, 9], [4, 8, 7, 10]),
-        ("star_right", [9, 21.25, 7], [12, 22.75, 9], [7, 8, 10, 10]),
+        ("halo_left", [0, 22, 7], [2, 28, 9], [8, 0, 10, 6]),
+        ("halo_right", [14, 22, 7], [16, 28, 9], [10, 0, 12, 6]),
+        ("halo_top", [4, 30, 7], [12, 32, 9], [12, 0, 20, 2]),
+        ("halo_bottom", [4, 18, 7], [12, 20, 9], [12, 2, 20, 4]),
+        ("halo_top_left", [2, 28, 7], [4, 30, 9], [20, 0, 22, 2]),
+        ("halo_top_right", [12, 28, 7], [14, 30, 9], [20, 0, 22, 2]),
+        ("halo_bottom_left", [2, 20, 7], [4, 22, 9], [20, 0, 22, 2]),
+        ("halo_bottom_right", [12, 20, 7], [14, 22, 9], [20, 0, 22, 2]),
+        ("star_core", [7, 24, 7], [9, 26, 9], [24, 24, 28, 28]),
+        ("star_up", [7.5, 26, 7], [8.5, 28.5, 9], [24, 24, 28, 28]),
+        ("star_down", [7.5, 21.5, 7], [8.5, 24, 9], [24, 24, 28, 28]),
+        ("star_left", [4.5, 24.5, 7], [7, 25.5, 9], [24, 24, 28, 28]),
+        ("star_right", [9, 24.5, 7], [11.5, 25.5, 9], [24, 24, 28, 28]),
     ]
     return {
         "schema_version": 1,
         "request_hash": request_hash,
         "fill": "#d4af37",
+        "texture_regions": [{"rect": [24, 24, 32, 32], "color": "#864fc7"}],
         "cubes": [
             {"name": name, "from": start, "to": end, "uv": uv}
             for name, start, end, uv in cubes
@@ -207,7 +215,8 @@ def _copy_artifact(store: Store, item: dict, evidence: Path) -> str:
     else:
         raise ValueError("Unexpected captured artifact kind")
     target = evidence / name
-    target.write_bytes(store.read(item["content_hash"]))
+    with target.open("xb") as stream:
+        stream.write(store.read(item["content_hash"]))
     return name
 
 
@@ -248,8 +257,14 @@ def run(root: Path, evidence: Path) -> dict:
         "verification": result["verification"],
         "desktop_environment": "GitHub-hosted Ubuntu/Xvfb",
     }
-    (evidence / "session.json").write_text(json.dumps(safe, indent=2), encoding="utf-8")
-    return safe
+    with (evidence / "session.json").open("x", encoding="utf-8") as stream:
+        stream.write(json.dumps(safe, indent=2))
+    # Resource compatibility is a separate check from capture transport. Keep
+    # the original receipt and its NOT_RUN visual/runtime gates unchanged.
+    exported = materialize_asset(store, result["receipt_hash"], parent=evidence)
+    with (evidence / "export.json").open("x", encoding="utf-8") as stream:
+        stream.write(json.dumps(exported, indent=2))
+    return {**safe, "export": exported}
 
 
 def main(argv: list[str] | None = None) -> int:

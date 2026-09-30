@@ -111,6 +111,7 @@ class Fixture:
             completion='CONFIRMED'
         if op=='begin': inner={'name':'celestial_staff','format':'java_block'}
         elif op=='texture': inner={'uuid':'tex-1'}
+        elif op=='texture_region': inner={'painted':True,'ops':1}
         elif op=='cube': inner={'uuid':'cube-'+str(seq)}
         elif op=='inspect': inner={'issue_count':0}
         elif op=='capture':
@@ -242,3 +243,33 @@ def test_permission_and_private_config_are_checked_before_network(prepared):
     mismatched={**config,'request_hash':'0'*64}
     with pytest.raises(ContractError): api().run_session(store,registry(9),mismatched,plan)
     assert files(store.root)==before
+
+
+def test_palette_regions_are_validated_and_sent_before_cubes(prepared):
+    store, h, config, plan = prepared
+    region = {"rect": [24, 24, 32, 32], "color": "#864fc7"}
+    plan = {**plan, "texture_regions": [region]}
+    assert api().validate_plan(store, h, plan) == plan
+    result, server = run_fixture((store, h, config, plan))
+    calls = [r["params"] for r in server.requests if r["action"] == "kneekura_asset"]
+    assert [r["operation"] for r in calls[:4]] == ["begin", "texture", "texture_region", "cube"]
+    assert calls[2]["arguments"] == region
+    assert store.json(store.json(result["receipt_hash"])["plan_hash"]) == plan
+
+
+@pytest.mark.parametrize("regions", [
+    [{"rect": [0, 0, 33, 1], "color": "#864fc7"}],
+    [{"rect": [0, 0, 1.5, 1], "color": "#864fc7"}],
+    [{"rect": [0, 0, True, 1], "color": "#864fc7"}],
+    [{"rect": [0, 0, 0, 1], "color": "#864fc7"}],
+    [{"rect": [0, 0, 1, 1], "color": "#ffffff"}],
+    [{"rect": [0, 0, 1, 1], "color": "#864fc7", "ops": []}],
+    [{"rect": [0, 0, 1, 1], "color": "#864fc7"}] * 33,
+    None,
+])
+def test_bad_texture_regions_reject_before_network_or_cas(prepared, regions):
+    store, h, config, plan = prepared
+    before = files(store.root)
+    with pytest.raises(ContractError):
+        api().run_session(store, registry(9), config, {**plan, "texture_regions": regions})
+    assert files(store.root) == before

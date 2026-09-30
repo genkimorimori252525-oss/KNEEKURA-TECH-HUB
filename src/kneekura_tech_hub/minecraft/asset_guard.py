@@ -23,6 +23,23 @@ from .asset_contract import (
 from .storage import ContractError, IntegrityError, Store, canonical, digest, valid_hash
 
 
+# Blockbench 5.2.1 project.ts maps 1.9.0 to Minecraft 1.9 through 1.21.5.
+# This M2 pilot accepts only Minecraft 1.20.1; never inherit the editor's latest.
+JAVA_BLOCK_VERSION = '1.9.0'
+# Fixed item transforms, serialized identically by Java and native codecs.
+# Default-valued fields are omitted just as pinned DisplaySlot.export() does.
+# These are explicit pilot settings, not a runtime/in-game visual verdict.
+ITEM_DISPLAY = {
+    'gui': {'rotation': [20, -30, 0], 'translation': [0, -4, 0], 'scale': [0.5, 0.5, 0.5]},
+    'ground': {'translation': [0, 2, 0], 'scale': [0.4, 0.4, 0.4]},
+    'fixed': {'rotation': [0, -180, 0], 'translation': [0, -4, 0], 'scale': [0.5, 0.5, 0.5]},
+    'thirdperson_righthand': {'rotation': [0, 90, 0], 'translation': [0, 4, 1], 'scale': [0.7, 0.7, 0.7]},
+    'thirdperson_lefthand': {'rotation': [0, 90, 0], 'translation': [0, 4, 1], 'scale': [0.7, 0.7, 0.7]},
+    'firstperson_righthand': {'rotation': [0, -90, 25], 'translation': [1.13, 3.2, 1.13], 'scale': [0.68, 0.68, 0.68]},
+    'firstperson_lefthand': {'rotation': [0, -90, 25], 'translation': [1.13, 3.2, 1.13], 'scale': [0.68, 0.68, 0.68]},
+}
+
+
 # Exact reviewed seam at upstream 028cdd765... lines 6721 onward. Preserve the
 # upstream copyright/license in the locally supplied source; distribute only
 # this modification recipe, not a second copy of the third-party implementation.
@@ -54,6 +71,7 @@ UPSTREAM_AUTOSTART = """	if (autostartSetting.value && isApp) {
 GUARD_FACTORY = r'''(function createKneekuraAssetGuard(input, host) {
   'use strict';
   const config = JSON.parse(JSON.stringify(input));
+  const projectPolicy = {java_block_version:__JAVA_BLOCK_VERSION__,display:__ITEM_DISPLAY__};
   const own = (v, k) => Object.prototype.hasOwnProperty.call(v, k);
   function fail(code) { const e = new Error('KNEEKURA asset guard: ' + code); e.code = code; throw e; }
   function keys(v, expected) {
@@ -70,7 +88,7 @@ GUARD_FACTORY = r'''(function createKneekuraAssetGuard(input, host) {
       config.palette.some(c => typeof c !== 'string' || !/^#[a-f0-9]{6}$/.test(c))) fail('INVALID_CONFIG');
   const started = host.now();
   let phase = 'READY', project = null, projectUUID = null, textureUUID = null;
-  let next = 0, cubeCount = 0, busy = false, last = null;
+  let next = 0, cubeCount = 0, regionCount = 0, busy = false, last = null;
   const names = new Set();
   const gates = () => ({structural:'NOT_RUN', visual:'NOT_RUN', runtime:'NOT_RUN'});
   const detached = v => JSON.parse(JSON.stringify(v));
@@ -82,7 +100,13 @@ GUARD_FACTORY = r'''(function createKneekuraAssetGuard(input, host) {
     if (diff || p.request_hash !== config.request_hash) fail('UNAUTHORIZED');
   }
   function poison() { phase = 'UNKNOWN'; fail('UNKNOWN'); }
-  function stateCheck(empty=false, expectedCubes=cubeCount, expectedTexture=textureUUID) {
+  function sameJSON(a,b) {
+    if (a === b) return true;
+    if (!a || !b || typeof a !== 'object' || typeof b !== 'object' || Array.isArray(a) !== Array.isArray(b)) return false;
+    const ak=Object.keys(a), bk=Object.keys(b);
+    return ak.length===bk.length && ak.every(k=>own(b,k) && sameJSON(a[k],b[k]));
+  }
+  function stateCheck(empty=false, expectedCubes=cubeCount, expectedTexture=textureUUID, configured=true) {
     const s = host.state();
     if (!s || !Array.isArray(s.projects) || !Array.isArray(s.plugins) || !Array.isArray(s.textures) ||
         !Number.isInteger(s.cubes) || s.plugins.length !== 1 || s.plugins[0] !== 'blockbench_mcp' ||
@@ -93,6 +117,8 @@ GUARD_FACTORY = r'''(function createKneekuraAssetGuard(input, host) {
       if (!project || s.active !== project || s.projects.length !== 1 || s.projects[0] !== project ||
           s.active.uuid !== projectUUID || s.format !== 'java_block' || s.cubes !== expectedCubes ||
           s.textures.length !== (expectedTexture ? 1 : 0)) poison();
+      if (configured && (s.java_block_version !== projectPolicy.java_block_version ||
+          !sameJSON(s.display,projectPolicy.display))) poison();
       if (expectedTexture) {
         const t = s.textures[0];
         if (t.uuid !== expectedTexture || t.ready !== true || t.width !== config.texture_size[0] ||
@@ -119,6 +145,17 @@ GUARD_FACTORY = r'''(function createKneekuraAssetGuard(input, host) {
       if (textureUUID || cubeCount || !config.palette.includes(args.fill)) fail('INVALID_TEXTURE');
       return ['create_texture', {name:config.asset_name, width:config.texture_size[0],
         height:config.texture_size[1], fill:args.fill}];
+    }
+    if (operation === 'texture_region') {
+      keys(args, ['rect','color']);
+      if (!textureUUID || cubeCount || regionCount >= 32 || !config.palette.includes(args.color)) fail('INVALID_TEXTURE_REGION');
+      const rect = numberVector(args.rect,4,0,256);
+      if (rect.some(n=>!Number.isInteger(n)) || rect[0]>=rect[2] || rect[1]>=rect[3] ||
+          rect[2]>config.texture_size[0] || rect[3]>config.texture_size[1]) fail('INVALID_TEXTURE_REGION');
+      // Pinned paint_texture -> applyPaintOps receives only this filled rect.
+      // The caller cannot choose a texture, brush type, URL, code or file path.
+      return ['paint_texture',{texture:textureUUID,ops:[{type:'rect',x:rect[0],y:rect[1],
+        width:rect[2]-rect[0],height:rect[3]-rect[1],color:args.color,fill:true}]}];
     }
     if (operation === 'cube') {
       keys(args, ['name','from','to','uv']);
@@ -181,6 +218,9 @@ GUARD_FACTORY = r'''(function createKneekuraAssetGuard(input, host) {
     auth(p);
     if (action === 'kneekura_asset_status') {
       keys(p, ['token','request_hash']);
+      if (phase === 'OPEN' && !busy) {
+        try { stateCheck(); } catch(e) { phase='UNKNOWN'; }
+      }
       return detached({guard_protocol:1, state:phase, next_sequence:next, project_uuid:projectUUID,
         busy, request_hash:config.request_hash, loaded_revision:'UNATTESTED', last_receipt:last});
     }
@@ -215,6 +255,8 @@ GUARD_FACTORY = r'''(function createKneekuraAssetGuard(input, host) {
         // The pinned new_project returns get_status().project WITHOUT uuid.
         // Bind the actual freshly created object, not an invented response field.
         if (typeof projectUUID !== 'string' || !projectUUID || !result || typeof result !== 'object') poison();
+        stateCheck(false,0,null,false);
+        host.configureProject(project,detached(projectPolicy));
         phase='OPEN';
       }
       const nextTexture = operation === 'texture' ? result && result.uuid : textureUUID;
@@ -225,6 +267,7 @@ GUARD_FACTORY = r'''(function createKneekuraAssetGuard(input, host) {
       const responseLimit = operation === 'capture' ? 786432 : 262144;
       if (typeof raw !== 'string' || raw.length > responseLimit) poison();
       if (operation === 'texture') textureUUID=nextTexture;
+      if (operation === 'texture_region') regionCount++;
       if (operation === 'cube') { cubeCount++; names.add(args.name); }
       last = {seq,operation,completion:'CONFIRMED',project_uuid:projectUUID,request_hash:config.request_hash,
         assertion_domain:'asset_editor_operation',verification:gates(),result:JSON.parse(raw)};
@@ -237,16 +280,20 @@ GUARD_FACTORY = r'''(function createKneekuraAssetGuard(input, host) {
     } finally { clearTimeout(timer); busy=false; }
   }
   return Object.freeze({dispatch});
-})'''
+})'''.replace('__JAVA_BLOCK_VERSION__', canonical(JAVA_BLOCK_VERSION).decode()).replace('__ITEM_DISPLAY__', canonical(ITEM_DISPLAY).decode())
 
-# Access only the APIs already used by the pinned provider, plus read-only
-# project/plugin inventory. Missing inventory APIs fail closed at runtime.
+# Access reviewed provider APIs and pinned per-project version/display APIs,
+# plus read-only project/plugin inventory. Missing inventory APIs fail closed at runtime.
 HOST_ADAPTER = r'''{
   now: () => performance.now(),
   state: () => ({
     active: typeof Project === 'undefined' ? null : Project,
     projects: typeof ModelProject === 'undefined' ? null : ModelProject.all,
     format: typeof Format === 'undefined' || !Format ? null : Format.id,
+    java_block_version: typeof Project === 'undefined' || !Project ? null : Project.java_block_version,
+    display: typeof Project === 'undefined' || !Project || !Project.display_settings ? null :
+      Object.fromEntries(Object.entries(Project.display_settings).map(([key,slot])=>
+        [key,slot && typeof slot.export === 'function' ? slot.export() : null])),
     plugins: typeof Plugins === 'undefined' ? null : (Plugins.all || []).filter(p => p.installed && !p.disabled).map(p => p.id),
     cubes: typeof Cube === 'undefined' ? 0 : Cube.all.length,
     textures: typeof Texture === 'undefined' ? [] : Texture.all.map(t => ({
@@ -255,9 +302,29 @@ HOST_ADAPTER = r'''{
     })),
     serverAlreadyRunning: kneekuraPreviousServer
   }),
+  configureProject: (ownedProject, policy) => {
+    if (typeof Project === 'undefined' || Project !== ownedProject ||
+        typeof ModelProject === 'undefined' || ModelProject.all.length !== 1 || ModelProject.all[0] !== ownedProject ||
+        typeof Format === 'undefined' || !Format || Format.id !== 'java_block' ||
+        typeof DisplayMode === 'undefined' || typeof DisplayMode.loadJSON !== 'function')
+      throw new Error('Expected owned Java project with display API');
+    Project.java_block_version = policy.java_block_version;
+    Project.display_settings = {};
+    DisplayMode.loadJSON(policy.display);
+  },
   invoke: (action, args) => {
     if (!Object.prototype.hasOwnProperty.call(commands, action)) throw new Error('Missing reviewed action');
-    return commands[action](args);
+    const texture = action === 'paint_texture' ? Texture.all.find(t=>t.uuid===args.texture) : null;
+    if (action === 'paint_texture' && !texture) throw new Error('Bound texture is unavailable');
+    const result = commands[action](args);
+    if (action !== 'paint_texture') return result;
+    // Pinned Painter updates img.src after editing the canvas. Its command
+    // returns before that bitmap load completes; the guard deadline still applies.
+    return Promise.resolve(result).then(async value => {
+      if (!texture.img.complete || texture.img.naturalWidth !== texture.width || texture.img.naturalHeight !== texture.height)
+        await texture.img.decode();
+      return value;
+    });
   },
   capture: async (kind, args) => {
     if (kind === 'model') {
@@ -270,7 +337,7 @@ HOST_ADAPTER = r'''{
     if (kind === 'native') {
       if (typeof Codecs === 'undefined' || !Codecs || !Codecs.project || typeof Codecs.project.compile !== 'function')
         throw new Error('Blockbench project codec is unavailable');
-      const data = await Promise.resolve(Codecs.project.compile({compressed:false, absolute_paths:false, raw:true}));
+      const data = await Promise.resolve(Codecs.project.compile({compressed:false, absolute_paths:false, bitmaps:true, raw:true}));
       const content = typeof data === 'string' ? data : JSON.stringify(data);
       return {kind:'native', mime:'application/json', encoding:'utf8', content};
     }

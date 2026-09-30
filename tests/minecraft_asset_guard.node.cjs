@@ -8,12 +8,16 @@ function fixture(overrides={}) {
   const state={active:null,projects:[],format:null,plugins:['blockbench_mcp'],cubes:0,textures:[],serverAlreadyRunning:false};
   const calls=[];
   const captures=[];
+  const configurationCalls=[];
   let clock=0;
-  const host={state:()=>state,now:()=>clock, invoke:async(action,args)=>{
+  const host={state:()=>state,now:()=>clock, configureProject:(project,settings)=>{
+    configurationCalls.push({project,settings});state.java_block_version=settings.java_block_version;state.display=JSON.parse(JSON.stringify(settings.display));
+  }, invoke:async(action,args)=>{
     calls.push({action,args:JSON.parse(JSON.stringify(args))});
     if(action==='new_project') {const project={uuid:'project-1'};state.active=project;state.projects=[project];state.format='java_block';return {uuid:project.uuid};}
     if(action==='create_texture') {state.textures=[{uuid:'tex-1',ready:true,width:32,height:32}];return {uuid:'tex-1'};}
     if(action==='add_cube') {state.cubes++;return {uuid:'cube-'+state.cubes};}
+    if(action==='paint_texture') return {painted:true,ops:1};
     if(action==='check_model') return {issue_count:0};
     throw new Error('Unexpected raw action '+action);
   },capture:async(kind,args)=>{
@@ -32,7 +36,7 @@ function fixture(overrides={}) {
     {token:config.token,request_hash:config.request_hash,seq,project_uuid,operation,arguments:args});
   const status=()=>guard.dispatch('kneekura_asset_status',{token:config.token,request_hash:config.request_hash});
   const cube={name:'handle',from:[7,0,7],to:[9,16,9],uv:[0,0,4,4]};
-  return {config,state,calls,captures,host,guard,call,status,cube,setClock:n=>clock=n};
+  return {config,state,calls,captures,configurationCalls,host,guard,call,status,cube,setClock:n=>clock=n};
 }
 async function ready(f){await f.call(0,'begin');await f.call(1,'texture',{fill:'#d4af37'});}
 
@@ -205,4 +209,58 @@ test('oversized or malformed capture poisons session and is never retried',async
  await assert.rejects(f.call(3,'capture',{kind:'view',view:'front'}),e=>e.code==='UNKNOWN');
  assert.equal((await f.status()).state,'UNKNOWN');
  await assert.rejects(f.call(3,'capture',{kind:'view',view:'front'}));
+});
+
+test('begin pins legacy Java version and explicit seven-slot item display in owned project',async()=>{
+ const f=fixture();await f.call(0,'begin');
+ assert.equal(f.state.java_block_version,'1.9.0');
+ assert.deepEqual(Object.keys(f.state.display).sort(),['firstperson_lefthand','firstperson_righthand','fixed','ground','gui','thirdperson_lefthand','thirdperson_righthand']);
+ assert.ok(f.state.display.gui.scale.every(n=>n>0&&n<1));
+ assert.equal(f.configurationCalls.length,1);
+ assert.equal(f.configurationCalls[0].project,f.state.active);
+});
+for(const key of ['java_block_version','display']) {
+ test('external project '+key+' drift blocks next operation without repairing it',async()=>{
+  const f=fixture();await ready(f);const n=f.calls.length;
+  f.state[key]=key==='display'?{}:'26.3';
+  await assert.rejects(f.call(2,'cube',f.cube));
+  assert.equal(f.calls.length,n);assert.equal((await f.status()).state,'UNKNOWN');
+ });
+ test('project '+key+' drift inside an operation poisons the session',async()=>{
+  const f=fixture();await ready(f);const original=f.host.invoke;
+  f.host.invoke=async(a,p)=>{const r=await original(a,p);f.state[key]=key==='display'?{}:'26.3';return r;};
+  await assert.rejects(f.call(2,'cube',f.cube));assert.equal((await f.status()).state,'UNKNOWN');
+ });
+}
+test('palette region produces one bounded rectangle on the bound texture before geometry',async()=>{
+ const f=fixture();await ready(f);
+ const r=await f.call(2,'texture_region',{rect:[24,24,32,32],color:'#864fc7'});
+ assert.equal(r.completion,'CONFIRMED');
+ assert.deepEqual(f.calls.at(-1),{action:'paint_texture',args:{texture:'tex-1',ops:[{type:'rect',x:24,y:24,width:8,height:8,color:'#864fc7',fill:true}]}});
+ await f.call(3,'cube',f.cube);const n=f.calls.length;
+ await assert.rejects(f.call(4,'texture_region',{rect:[0,0,1,1],color:'#d4af37'}));
+ assert.equal(f.calls.length,n);
+});
+for(const region of [
+ {rect:[0,0,33,1],color:'#864fc7'}, {rect:[0,0,1.5,1],color:'#864fc7'},
+ {rect:[0,0,0,1],color:'#864fc7'}, {rect:[0,0,1,1],color:'#ffffff'},
+ {rect:[0,0,1,1],color:'#864fc7',texture:'foreign'},
+ {rect:[0,0,1,1],color:'#864fc7',ops:[{type:'clear'}]},
+ {rect:[0,0,1,1],color:'#864fc7',path:'../evil'}
+]) test('invalid texture region is rejected before painter '+JSON.stringify(region),async()=>{
+ const f=fixture();await ready(f);const n=f.calls.length;
+ await assert.rejects(f.call(2,'texture_region',region));assert.equal(f.calls.length,n);
+});
+test('texture region has a per-session cap and respects sequence and project identity',async()=>{
+ const f=fixture();await ready(f);const region={rect:[0,0,1,1],color:'#864fc7'};
+ await assert.rejects(f.call(2,'texture_region',region,'foreign'));assert.equal(f.calls.length,2);
+ for(let seq=2;seq<34;seq++) await f.call(seq,'texture_region',region);
+ const n=f.calls.length;await assert.rejects(f.call(33,'texture_region',region));
+ await assert.rejects(f.call(34,'texture_region',region));assert.equal(f.calls.length,n);
+});
+
+test('status detects project-policy drift and reports UNKNOWN without rewriting it',async()=>{
+ const f=fixture();await ready(f);f.state.java_block_version='26.3';
+ assert.equal((await f.status()).state,'UNKNOWN');
+ assert.equal(f.state.java_block_version,'26.3');assert.equal(f.configurationCalls.length,1);
 });

@@ -250,3 +250,84 @@ def test_private_parent_validation_allows_real_external_directory(tmp_path):
     module=api()
     assert hasattr(module,'validate_package_parent'),'secret destination policy missing'
     assert module.validate_package_parent(store,parent)==parent.absolute()
+
+
+def test_trusted_host_configures_only_owned_project_and_exports_exact_display():
+    m = api()
+    script = '''
+    const assert = require('node:assert/strict');
+    globalThis.performance={now:()=>0};
+    globalThis.Project={uuid:'owned',java_block_version:'26.3',display_settings:{}};
+    globalThis.ModelProject={all:[Project]}; globalThis.Format={id:'java_block'};
+    globalThis.Plugins={all:[{id:'blockbench_mcp',installed:true}]};
+    globalThis.Cube={all:[]};globalThis.Texture={all:[]};
+    const kneekuraPreviousServer=false;
+    globalThis.DisplayMode={loadJSON:values=>{
+      for(const [key,value] of Object.entries(values)) Project.display_settings[key]={export:()=>value};
+    }};
+    globalThis.settings = new Proxy({}, {get:()=>{throw new Error('must not read global defaults')},set:()=>{throw new Error('must not change global defaults')}});
+    const host=HOST_ADAPTER;
+    const policy=POLICY;
+    assert.throws(()=>host.configureProject({uuid:'foreign'},policy));
+    assert.equal(Project.java_block_version,'26.3');
+    host.configureProject(Project,policy);
+    assert.equal(Project.java_block_version,'1.9.0');
+    assert.equal(host.state().java_block_version,'1.9.0');
+    assert.deepEqual(host.state().display,policy.display);
+    '''.replace('HOST_ADAPTER', m.HOST_ADAPTER).replace('POLICY', json.dumps({
+        'java_block_version': '1.9.0', 'display': {'gui': {'scale': [0.5, 0.5, 0.5]}}}))
+    run = subprocess.run(['node', '-e', script], capture_output=True, text=True, timeout=5)
+    assert run.returncode == 0, run.stderr
+
+
+def test_trusted_host_awaits_bound_texture_decode_after_palette_paint():
+    script = '''
+    const assert=require('node:assert/strict');
+    let finishDecode, calls=0;
+    const image={complete:true,naturalWidth:32,naturalHeight:32,
+      decode:()=>new Promise(resolve=>{finishDecode=()=>{image.complete=true;resolve();};})};
+    globalThis.Texture={all:[{uuid:'owned',img:image,width:32,height:32}]};
+    const commands={paint_texture:args=>{calls++;assert.equal(args.texture,'owned');image.complete=false;return {painted:true};}};
+    const host=HOST_ADAPTER;
+    (async()=>{
+      let settled=false;
+      const painting=host.invoke('paint_texture',{texture:'owned'});
+      Promise.resolve(painting).then(()=>{settled=true;});
+      await Promise.resolve();await Promise.resolve();
+      assert.equal(calls,1);assert.equal(settled,false,'paint must wait for the changed bitmap');
+      assert.equal(typeof finishDecode,'function');finishDecode();
+      assert.deepEqual(await painting,{painted:true});
+    })().catch(e=>{console.error(e);process.exitCode=1;});
+    '''.replace('HOST_ADAPTER', api().HOST_ADAPTER)
+    run=subprocess.run(['node','-e',script],capture_output=True,text=True,timeout=5)
+    assert run.returncode == 0, run.stderr
+
+
+def test_fixed_item_policy_is_already_in_pinned_display_slot_export_form():
+    # Blockbench e2ede0809ee6bc91f374ac7e00d34cffbdf86a14 DisplaySlot.extend
+    # applies Math.trimDeg=(a+180*15)%360-180 before both codecs export.
+    policy = api().ITEM_DISPLAY
+    assert len(policy) == 7
+    for transform in policy.values():
+        for angle in transform.get('rotation', []):
+            assert (angle + 180 * 15) % 360 - 180 == angle
+        assert transform.get('rotation') != [0, 0, 0]
+        assert transform.get('translation') != [0, 0, 0]
+        assert transform.get('scale') != [1, 1, 1]
+
+
+def test_native_capture_embeds_bitmap_without_reading_global_preference():
+    script = '''
+    const assert=require('node:assert/strict');
+    let options;
+    globalThis.Codecs={project:{compile:arg=>{options=arg;return {meta:{model_format:'java_block'}}}}};
+    globalThis.Settings={get:()=>{throw new Error('global preference must not control capture')}};
+    const host=HOST;
+    host.capture('native',{}).then(value=>{
+      assert.equal(options.bitmaps,true);
+      assert.equal(options.absolute_paths,false);
+      assert.equal(value.kind,'native');
+    }).catch(error=>{console.error(error);process.exitCode=1});
+    '''.replace('HOST',api().HOST_ADAPTER)
+    result=subprocess.run(['node','-e',script],capture_output=True,text=True,timeout=5)
+    assert result.returncode==0,result.stderr
