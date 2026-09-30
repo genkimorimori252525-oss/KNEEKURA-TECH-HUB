@@ -366,6 +366,10 @@ legibility     -> visual review
 
 Visual evidence supplements structured evidence; it does not replace precise telemetry.
 
+The AI is never treated as an unquestionable visual oracle. Visual conclusions are scoped
+to explicit checks and evidence, and the packet format itself must be benchmarked against
+known Minecraft debugging cases before it becomes the default.
+
 ---
 
 ## 9. Cardinal-4 Multi-View Camera Rig
@@ -537,6 +541,146 @@ Conceptual bundle:
 
 The exact schema will be fixed during implementation, but it must preserve independent raw
 and derived identities.
+
+---
+
+## 11A. AI Visual Observation Packet
+
+The AI-facing visual unit is not "four screenshots." It is a deliberately structured
+observation packet that removes avoidable spatial ambiguity before asking a vision model
+to reason about appearance.
+
+The default packet should contain, in this order:
+
+1. experiment / RunSnapshot / capture identity;
+2. compact structured facts;
+3. exact top-down spatial schematic;
+4. Cardinal-4 RGB contact sheet;
+5. explicit visual questions;
+6. drill-down references to original views and optional debug views;
+7. bounded event timeline;
+8. matched before/after comparison when a repair is being verified.
+
+### Exact top-down schematic
+
+Generate a machine-derived top-down map from Probe/world facts, not from vision inference.
+
+It should be able to show, when available:
+
+- Arena bounds;
+- selected entity positions;
+- exact entity IDs;
+- bounding-box footprints;
+- facing/velocity vectors;
+- navigation target/path;
+- projectile positions/trajectory;
+- collision/contact markers;
+- named observation points.
+
+The schematic is a derived artifact with its own hash and source Observation IDs.
+It must never replace raw world/Probe evidence.
+
+Its main purpose is to solve cross-view correspondence for the AI: the model should not
+have to infer whether an entity in NORTH and EAST is the same entity when KNEEKURA already
+knows the exact UUID.
+
+### Stable subject labels across views
+
+Each selected subject receives one stable short label for the capture set, for example:
+
+```text
+A = Reimu / UUID …91af
+B = Zombie / UUID …720c
+C = projectile / entity …13
+```
+
+The same label is used on every derived view and the top-down schematic.
+
+Color may be used as an additional cue, but color alone is not identity. Text label +
+underlying exact UUID/entity identity is authoritative.
+
+### Hierarchical visual drill-down
+
+Do not give every full-resolution image to the AI by default.
+
+Use:
+
+```text
+Level 0: structured summary + top-down schematic + 2×2 RGB contact sheet
+Level 1: one or two selected original camera views
+Level 2: bounded crop around the relevant subject/region
+Level 3: optional diagnostic render such as ID/depth/collision/path view
+```
+
+The host AI requests deeper levels only when the previous level leaves a concrete visual
+question unresolved.
+
+This is the visual equivalent of TaskContext's "compact first, expand on demand" rule.
+
+### Explicit visual-check contract
+
+Do not use an unconstrained prompt such as "look for anything wrong" as the primary
+acceptance oracle.
+
+An experiment may attach bounded visual checks such as:
+
+```text
+VIS-01 subject A feet below declared ground plane?
+VIS-02 subject A mesh clips the declared obstacle?
+VIS-03 expected texture region missing/corrupted?
+VIS-04 projectile visually appears on the wrong side of the obstacle?
+```
+
+Allowed visual answers should be explicit:
+
+- `YES`
+- `NO`
+- `NOT_VISIBLE`
+- `AMBIGUOUS`
+
+Each answer references the camera/debug-view evidence used.
+
+A visual check may support a visual finding. It does not overwrite a contradictory
+structured fact, and `NOT_VISIBLE` / `AMBIGUOUS` must remain unresolved.
+
+---
+
+## 11B. Optional diagnostic visual channels
+
+RGB is the default human/AI appearance view, but the system may derive narrowly scoped
+diagnostic images when a visual question needs them.
+
+Useful candidate channels:
+
+### Entity-ID mask
+
+Render selected entities/projectiles with flat stable IDs/colors and background separation.
+
+Purpose: object correspondence and occlusion, not visual quality.
+
+### Depth view
+
+A normalized depth representation for the declared camera.
+
+Purpose: clarify front/behind relationships when RGB is ambiguous.
+
+### Collision / bounds view
+
+Show authoritative collision shapes, entity bounding boxes and Arena/world contacts.
+
+Purpose: diagnose clipping/penetration without asking vision to infer geometry from textures.
+
+### Navigation/path view
+
+Project the structured path/target/velocity information into camera/top-down coordinates.
+
+Purpose: combine visual presentation with exact navigation evidence.
+
+These are **derived debugging artifacts**, not new runtime truth. Every channel must retain
+the source Observation IDs and camera transform used to derive it.
+
+Do not implement all channels in X3/X4 by default. Start with top-down schematic + entity
+labels; add a diagnostic channel only when a real visual-debugging case benefits from it.
 
 ---
 
@@ -815,9 +959,17 @@ Start with explicit capture only.
 Add:
 
 - 2×2 contact sheet;
+- stable cross-view subject labels;
+- exact top-down schematic derived from Probe/world facts;
 - structured-data-derived annotation;
+- explicit bounded visual-check records;
+- hierarchical original/crop/debug-view drill-down;
 - compact visual bundle;
 - raw/derived lineage.
+
+Run the initial KNEEKURA-specific visual-format benchmark before freezing the default packet.
+Start with RGB + labels + top-down schematic; diagnostic ID/depth/collision/path channels are
+added only when the benchmark or a real debugging task demonstrates value.
 
 ### X5 — Trigger / ring-buffer integration
 
@@ -895,8 +1047,44 @@ Acceptance requires at least:
 - default result is compact;
 - raw logs/images/traces are fetched only when needed;
 - structured facts are not reconstructed by Vision;
+- stable subject labels and the exact top-down schematic remove avoidable cross-view ambiguity;
+- the AI can answer bounded visual checks with YES / NO / NOT_VISIBLE / AMBIGUOUS and evidence references;
+- drill-down reaches original/cropped/diagnostic views without loading every image by default;
 - one real debugging task demonstrates reduced manual navigation versus using raw low-level
   surfaces alone.
+
+### Vision-format benchmark
+
+Before treating the visual packet format as stable, build a small KNEEKURA-specific benchmark
+whose expected visual conditions are known independently of the vision model.
+
+Representative cases should include:
+
+- normal/no-defect control;
+- entity partially below ground;
+- mesh/block clipping;
+- visible texture omission/corruption;
+- wrong-facing or obviously displaced body part;
+- projectile on the wrong side of an obstacle;
+- partial/full occlusion;
+- a case where RGB is ambiguous but structured/depth/ID evidence disambiguates it.
+
+Compare at least these information formats on the **same cases**:
+
+```text
+A. one RGB view
+B. four raw RGB views
+C. Cardinal-4 contact sheet
+D. contact sheet + stable entity labels + exact top-down schematic
+E. D + structured state/timeline summary
+F. E + one task-relevant diagnostic view when requested
+```
+
+Record per-check outcomes and failure modes. Do not collapse them into a universal "vision
+score" or assume the most information-dense format is always best.
+
+The selected default packet should be the simplest format that materially improves the real
+debugging checks while keeping context cost bounded.
 
 ### Repair verification
 
