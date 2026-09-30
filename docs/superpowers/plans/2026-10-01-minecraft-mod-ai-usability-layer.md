@@ -686,3 +686,12 @@ After that trial:
 - Review Focus: hostile text, stale identity, UNKNOWN retry, secret leakage and oversized context each have named regression coverage.
 - Proportion: no new workflow engine or MCP implementation is planned; existing low-level adapters remain the implementation.
 - Deliberate exclusion: asset part editing / before-after view tooling / retained UV-display editing remain in the separate deferred asset plan and are not required by this facade.
+
+## Post-completion successor
+
+After this usability layer and the current unified MOD-AI acceptance scope are closed, the next architectural stage is the real-Minecraft experimental runtime bridge with KNEEKURA-LAB:
+
+`docs/superpowers/specs/2026-10-01-minecraft-mod-ai-experimental-runtime-bridge-design.md`
+
+That successor is a separate future stage. It does not expand this plan or authorize LAB/Minecraft execution.
+
