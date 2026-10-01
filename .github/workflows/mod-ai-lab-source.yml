@@ -41,7 +41,7 @@ jobs:
         with:
           distribution: temurin
           java-version: "17"
-      - name: Validate exact public source pins
+      - name: Validate exact source pins
         id: pins
         run: |
           python - <<'PY'
@@ -59,12 +59,14 @@ jobs:
         with:
           repository: genkimorimori252525-oss/KNEEKURA-LAB
           ref: ${{ steps.pins.outputs.lab_revision }}
+          ssh-key: ${{ secrets.MOD_AI_LAB_SOURCE_SSH_KEY }}
           path: lab
           persist-credentials: false
       - uses: actions/checkout@v4
         with:
           repository: genkimorimori252525-oss/reimu-mod
           ref: ${{ steps.pins.outputs.mod_revision }}
+          ssh-key: ${{ secrets.MOD_AI_MOD_SOURCE_SSH_KEY }}
           path: mod
           persist-credentials: false
       - name: Verify checkout identities

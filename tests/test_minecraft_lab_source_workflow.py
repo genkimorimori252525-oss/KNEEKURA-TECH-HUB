@@ -18,5 +18,9 @@ def test_lab_source_pin_and_workflow_are_source_only_exact_refs():
     assert 'kneekuraDebugClasses --no-daemon' in workflow
     assert 'npm run test:ci' in workflow and 'test:bridge-runtime' in workflow
     assert 'check_lab_adapter_source.py' in workflow
-    for forbidden in ('runClient','runServer','debug:start','self-hosted','workflow_dispatch','secrets.'):
+    # Private cross-repository checkout needs dedicated read-only deploy keys;
+    # no runtime or other credential may enter this source-only workflow.
+    assert re.findall(r'\$\{\{\s*secrets\.([A-Z0-9_]+)\s*\}\}',workflow)==[
+        'MOD_AI_LAB_SOURCE_SSH_KEY','MOD_AI_MOD_SOURCE_SSH_KEY']
+    for forbidden in ('runClient','runServer','debug:start','self-hosted','workflow_dispatch'):
         assert forbidden not in workflow
