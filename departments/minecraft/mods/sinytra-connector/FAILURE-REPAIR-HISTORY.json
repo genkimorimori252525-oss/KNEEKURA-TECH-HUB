@@ -1,0 +1,1002 @@
+{
+  "format": "kneekura.failure-history.v1",
+  "repository": "https://github.com/Sinytra/Connector",
+  "scope": {
+    "track": "ANCHOR",
+    "head_revision": "7f68ac02291fde986119a3f5cab85436bed5c350",
+    "history_window": "Selection inventory: first 100 commit objects reachable from exact ANCHOR (2026-09-13 back through 2024-03-03 in this page), plus two path-filtered locator-history pages. Deep inspection limited to #904/#924 -> #926 -> #991 repair chain and #993 regex repair, each immediate repair parent/after source and current ANCHOR symbols. No repository-wide or all-release history claim.",
+    "queries": [
+      "https://api.github.com/repos/Sinytra/Connector/commits?sha=7f68ac02291fde986119a3f5cab85436bed5c350&per_page=100&page=1",
+      "https://api.github.com/repos/Sinytra/Connector/commits?sha=7f68ac02291fde986119a3f5cab85436bed5c350&path=src/main/java/dev/su5ed/sinytra/connector/locator/ConnectorLocator.java&per_page=100&page=1",
+      "https://api.github.com/repos/Sinytra/Connector/commits?sha=7f68ac02291fde986119a3f5cab85436bed5c350&path=src/main/java/org/sinytra/connector/locator/ConnectorLocator.java&per_page=20&page=1"
+    ],
+    "selection_rule": "Choose two source-level cases among discovery/nested metadata and Mixin remapping; follow explicit upstream repair links. Additional #991 inspection was required when ANCHOR contradicted the initially apparent #926 placement.",
+    "excluded_ranges": [
+      "General commit-list pages >=2 were not retrieved",
+      "Commit details of other first-page entries were not deeply inspected",
+      "History before the legacy Java package path and unrelated issues/PRs excluded",
+      "NeoForge/FRONTIER history excluded entirely",
+      "External mod full sources, complete CI/release history and binary artifacts excluded"
+    ],
+    "pagination": [
+      {
+        "id": "commits-anchor-page1",
+        "requested_page": 1,
+        "per_page": 100,
+        "returned": 100,
+        "more_pages": "not requested; inventory intentionally bounded"
+      },
+      {
+        "id": "locator-history-legacy",
+        "requested_page": 1,
+        "per_page": 100,
+        "returned": 40,
+        "more_pages": "not requested; returned fewer than page bound"
+      },
+      {
+        "id": "locator-history-current",
+        "requested_page": 1,
+        "per_page": 20,
+        "returned": 1,
+        "more_pages": "not requested; returned fewer than page bound"
+      }
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "inspected_evidence_ids": [
+      "after-926-code",
+      "after-993-code",
+      "anchor-dependency-code",
+      "anchor-locator-code",
+      "anchor-renaming-code",
+      "before-926-code",
+      "before-993-code",
+      "commits-anchor-page1",
+      "fix-926",
+      "fix-993",
+      "followup-991",
+      "issue-904",
+      "issue-904-comments",
+      "issue-904-timeline",
+      "issue-924",
+      "issue-924-comments",
+      "issue-924-gist",
+      "issue-924-log",
+      "issue-991",
+      "issue-991-comments",
+      "issue-993",
+      "issue-993-comments",
+      "issue-993-timeline",
+      "locator-history-current",
+      "locator-history-legacy",
+      "post-followup-locator",
+      "post-followup-resolver",
+      "pr-926",
+      "pr-926-comments",
+      "pr-926-commits",
+      "pr-926-review-comments",
+      "pr-926-reviews",
+      "pre-followup-locator",
+      "pre-followup-resolver",
+      "previous-fix-904"
+    ],
+    "deferred": [
+      "Runtime reproduction and controlled post-fix verification, explicitly outside this read-only task",
+      "Exact Yttr/Lib39 nested artifact topology and Custom LAN selector bytecode not acquired",
+      "Broader C2ME issue #88 and historical aggregate PR #908 not deeply inspected",
+      "The separate EnvironmentInterface implementation in #991 is preserved in the commit diff but not independently reproduced or fully analyzed",
+      "Other repository history and release/CI evidence intentionally excluded"
+    ],
+    "unavailable": [
+      "#904 linked log https://mclo.gs/JxVObeG returned HTTP 404 during 2026-10-01 capture; web lookup also unavailable",
+      "#993 linked gist https://gist.github.com/mpustovoi/4e499cb79448628c54a328db3cd89d64 returned HTTP 404 from GitHub Gist API; web lookup also unavailable"
+    ]
+  },
+  "scope_evidence": [
+    {
+      "id": "commits-anchor-page1",
+      "role": "search_inventory",
+      "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+      "document_id": "9379072b8156a968a063549ea51578165de08db4f299765f393a0dd331cd5fb6",
+      "source_url": "https://api.github.com/repos/Sinytra/Connector/commits?sha=7f68ac02291fde986119a3f5cab85436bed5c350&per_page=100&page=1",
+      "content_sha256": "4e2431683d0ae1421e1808169d03e7613f5b8bfa96b6b30fe948089ba90576ce",
+      "captured_at": "2026-10-01T17:13:32Z",
+      "source_capture": {
+        "size_bytes": 427859,
+        "sha256": "4e2431683d0ae1421e1808169d03e7613f5b8bfa96b6b30fe948089ba90576ce",
+        "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+      },
+      "source_revision": null
+    },
+    {
+      "id": "locator-history-legacy",
+      "role": "search_inventory",
+      "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+      "document_id": "20e9f4da8e1d38b910836e54d13380e665c4f46a50de1387764accdb7c7122b4",
+      "source_url": "https://api.github.com/repos/Sinytra/Connector/commits?sha=7f68ac02291fde986119a3f5cab85436bed5c350&path=src/main/java/dev/su5ed/sinytra/connector/locator/ConnectorLocator.java&per_page=100&page=1",
+      "content_sha256": "a6c744f79f6da1d4ed89c2e971ca0c74d11975eba9a6394f78fa88e83ed0eea6",
+      "captured_at": "2026-10-01T17:18:33.805Z",
+      "source_capture": {
+        "size_bytes": 171186,
+        "sha256": "a6c744f79f6da1d4ed89c2e971ca0c74d11975eba9a6394f78fa88e83ed0eea6",
+        "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+      },
+      "source_revision": null
+    },
+    {
+      "id": "locator-history-current",
+      "role": "search_inventory",
+      "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+      "document_id": "471a91cd1c05f4129aa796fc4d8c3ea9ec35541f189c46cc6e8faf11d93ceef1",
+      "source_url": "https://api.github.com/repos/Sinytra/Connector/commits?sha=7f68ac02291fde986119a3f5cab85436bed5c350&path=src/main/java/org/sinytra/connector/locator/ConnectorLocator.java&per_page=20&page=1",
+      "content_sha256": "7e07286029a1f4bdc8978a3d1295fc74762d24d0dac856f6a72b4dddf3b9096e",
+      "captured_at": "2026-10-01T17:18:11Z",
+      "source_capture": {
+        "size_bytes": 3792,
+        "sha256": "7e07286029a1f4bdc8978a3d1295fc74762d24d0dac856f6a72b4dddf3b9096e",
+        "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+      },
+      "source_revision": null
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "connector-anchor-wrong-side-admission-and-jij-regression",
+      "origin": "UPSTREAM",
+      "track": "ANCHOR",
+      "environment": {
+        "minecraft": "1.20.1",
+        "loader": "forge",
+        "physical_side": "dedicated_server",
+        "reported_versions": {
+          "BCLib_report": "Connector beta.37 to beta.39; exact BCLib, Forge and Java versions unknown",
+          "C2ME_report": "Connector 1.0.0-beta.39+1.20.1; Forge 47.1.3; C2ME 0.2.0+alpha.11.0; Java 17.0.10; Linux amd64",
+          "Yttr_nested_dependency_regression": "Connector beta.41 versus beta.40; exact Yttr/Lib39 artifacts unestablished"
+        },
+        "runtime_executed_by_analyst": false
+      },
+      "affected_symbols": [
+        "ConnectorLocator.locateFabricMods",
+        "ConnectorLocator.shouldIgnoreMod",
+        "ConnectorLocator.discoverNestedJarsRecursive",
+        "DependencyResolver.resolveDependencies",
+        "DependencyResolver.createCandidatesRecursive",
+        "EnvironmentStripperTransformer (separate change in follow-up commit)"
+      ],
+      "before_revision": "c4ee605c7f89aae244c0097c12c0bd3fb4b7f84e",
+      "after_revision": "96cdbd49a2fb1ef81657f40431f7a59e7b18dcbd",
+      "revision_semantics": "before_revision is the first repair commit parent, not the original bug-introducing revision. after_revision is the later repair/relocation commit. Intermediate changes are preserved below; this is not represented as one isolated diff.",
+      "evidence": [
+        {
+          "id": "issue-904",
+          "role": "issue",
+          "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+          "document_id": "f772c30ac10d4fe45348786a727790257d07d63c890fcf8e7763ca3090fe73a2",
+          "source_url": "https://api.github.com/repos/Sinytra/Connector/issues/904",
+          "content_sha256": "ac3056364e86f32c831b85ab6a9cac31b141116970996f4a5764aa8a52c0dba7",
+          "captured_at": "2026-10-01T17:14:11.947Z",
+          "source_capture": {
+            "size_bytes": 6003,
+            "sha256": "ac3056364e86f32c831b85ab6a9cac31b141116970996f4a5764aa8a52c0dba7",
+            "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+          },
+          "source_revision": null
+        },
+        {
+          "id": "issue-904-comments",
+          "role": "discussion",
+          "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+          "document_id": "92957c7aea0115b0d0fa14bf1abf6dbd82ef464be6a23eba3e81fccba4720349",
+          "source_url": "https://api.github.com/repos/Sinytra/Connector/issues/904/comments?per_page=100&page=1",
+          "content_sha256": "fcec0a5be73d29907300887da6cd719d49713540df4bfd8699176f71e4e85055",
+          "captured_at": "2026-10-01T17:14:13.977Z",
+          "source_capture": {
+            "size_bytes": 3505,
+            "sha256": "fcec0a5be73d29907300887da6cd719d49713540df4bfd8699176f71e4e85055",
+            "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+          },
+          "source_revision": null
+        },
+        {
+          "id": "issue-904-timeline",
+          "role": "discussion",
+          "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+          "document_id": "0a05d340e2782079dec03244119b899728296dfe588e29c4956ccb9826b257cc",
+          "source_url": "https://api.github.com/repos/Sinytra/Connector/issues/904/timeline?per_page=100&page=1",
+          "content_sha256": "f12d99a2cb7e18f3852251822d2c4cd242733a646ae266e643de0bcf1567fd1b",
+          "captured_at": "2026-10-01T17:17:00.435Z",
+          "source_capture": {
+            "size_bytes": 27691,
+            "sha256": "f12d99a2cb7e18f3852251822d2c4cd242733a646ae266e643de0bcf1567fd1b",
+            "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+          },
+          "source_revision": null
+        },
+        {
+          "id": "issue-924",
+          "role": "issue",
+          "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+          "document_id": "e38689920f987fe996c09db9d131ec5cc9e5207ab10b894760f6c22f831c5d39",
+          "source_url": "https://api.github.com/repos/Sinytra/Connector/issues/924",
+          "content_sha256": "f3272afa54f580c233536bda65464d40ed55b42d86ea3009a2472bbe1d2c69e7",
+          "captured_at": "2026-10-01T17:15:02.895Z",
+          "source_capture": {
+            "size_bytes": 4006,
+            "sha256": "f3272afa54f580c233536bda65464d40ed55b42d86ea3009a2472bbe1d2c69e7",
+            "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+          },
+          "source_revision": null
+        },
+        {
+          "id": "issue-924-comments",
+          "role": "discussion",
+          "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+          "document_id": "4a524106ccfc64595223563ae25bd57e89ae2f29574cd1160d9cc6fe8a1096a0",
+          "source_url": "https://api.github.com/repos/Sinytra/Connector/issues/924/comments?per_page=100&page=1",
+          "content_sha256": "c01f99b5a43dc88c441a0a5364e20135006d0a3b812132acd5bbc4160e6c6e3b",
+          "captured_at": "2026-10-01T17:15:05.839Z",
+          "source_capture": {
+            "size_bytes": 6636,
+            "sha256": "c01f99b5a43dc88c441a0a5364e20135006d0a3b812132acd5bbc4160e6c6e3b",
+            "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+          },
+          "source_revision": null
+        },
+        {
+          "id": "issue-924-gist",
+          "role": "log",
+          "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+          "document_id": "1f79c566297b5cf77ee7f2cd0a108a43d891231513716485e311857f4064ebc9",
+          "source_url": "https://api.github.com/gists/f337fad5c024525399f335c08111a9af",
+          "content_sha256": "9f17058df87900339c2344a452aef90f5ee0fac963e82581df58e6bdff31e58c",
+          "captured_at": "2026-10-01T17:17:50.996961+00:00",
+          "source_capture": {
+            "size_bytes": 192339,
+            "sha256": "9f17058df87900339c2344a452aef90f5ee0fac963e82581df58e6bdff31e58c",
+            "capture_format": "HTTP response body bytes"
+          },
+          "source_revision": null
+        },
+        {
+          "id": "issue-924-log",
+          "role": "log",
+          "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+          "document_id": "12c048f16de150c962f6fc98275a2dc5a3515dd7b65f8dd9e84909128d0a6a49",
+          "source_url": "https://gist.github.com/heipiao233/f337fad5c024525399f335c08111a9af/raw/c3af243398860ad69a5d9b6807a5e09bb30aab2e/debug.log",
+          "content_sha256": "73dc3d7ad419839c1ec5f5f5a8e6b987b6b92a00006d38f720321dec7a013a47",
+          "captured_at": "2026-10-01T17:16:44.102024+00:00",
+          "source_capture": {
+            "size_bytes": 180189,
+            "sha256": "73dc3d7ad419839c1ec5f5f5a8e6b987b6b92a00006d38f720321dec7a013a47",
+            "capture_format": "HTTP response body bytes"
+          },
+          "source_revision": null
+        },
+        {
+          "id": "pr-926",
+          "role": "pull_request",
+          "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+          "document_id": "1c5d0708c280ffe8de126cf59720cad509d0aaf44c5eb173a3dbf4abd51a3d0d",
+          "source_url": "https://api.github.com/repos/Sinytra/Connector/pulls/926",
+          "content_sha256": "7b614aae520ff718662f3ef7812267e6ab31bb38d581f9cbdee1206142f00439",
+          "captured_at": "2026-10-01T17:14:16.566Z",
+          "source_capture": {
+            "size_bytes": 13887,
+            "sha256": "7b614aae520ff718662f3ef7812267e6ab31bb38d581f9cbdee1206142f00439",
+            "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+          },
+          "source_revision": null
+        },
+        {
+          "id": "pr-926-comments",
+          "role": "discussion",
+          "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+          "document_id": "e7226e90f16dc5084e3e5f5609e27ed5a83b0642e5bc4d9739218145594d9f5a",
+          "source_url": "https://api.github.com/repos/Sinytra/Connector/issues/926/comments?per_page=100&page=1",
+          "content_sha256": "8c18ccf0cb3fa55dac3233f0a8d60a7a0218e098e3fa88f14fda81e7d8d0a991",
+          "captured_at": "2026-10-01T17:14:56.101Z",
+          "source_capture": {
+            "size_bytes": 1663,
+            "sha256": "8c18ccf0cb3fa55dac3233f0a8d60a7a0218e098e3fa88f14fda81e7d8d0a991",
+            "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+          },
+          "source_revision": null
+        },
+        {
+          "id": "pr-926-reviews",
+          "role": "discussion",
+          "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+          "document_id": "f47867a1dd223e1319852921243354063d407decbe736631d9b56c855922db40",
+          "source_url": "https://api.github.com/repos/Sinytra/Connector/pulls/926/reviews?per_page=100&page=1",
+          "content_sha256": "168c0dd85fc367648be5bcf8e4e7e485e6984f2fec50b596c1924f9d427cd8be",
+          "captured_at": "2026-10-01T17:14:58.435Z",
+          "source_capture": {
+            "size_bytes": 6092,
+            "sha256": "168c0dd85fc367648be5bcf8e4e7e485e6984f2fec50b596c1924f9d427cd8be",
+            "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+          },
+          "source_revision": null
+        },
+        {
+          "id": "pr-926-review-comments",
+          "role": "discussion",
+          "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+          "document_id": "7fbce95ab1eb94a0b26a6c1b7f8b811325c9afc884f381da24c95b3c88315ce1",
+          "source_url": "https://api.github.com/repos/Sinytra/Connector/pulls/926/comments?per_page=100&page=1",
+          "content_sha256": "de1f42a69f6239769ee78f29fd983e2a9dd84f9bb1318af396f71b876b6b53d2",
+          "captured_at": "2026-10-01T17:15:00.763Z",
+          "source_capture": {
+            "size_bytes": 5482,
+            "sha256": "de1f42a69f6239769ee78f29fd983e2a9dd84f9bb1318af396f71b876b6b53d2",
+            "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+          },
+          "source_revision": null
+        },
+        {
+          "id": "pr-926-commits",
+          "role": "search_inventory",
+          "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+          "document_id": "38453369a77c7aa6f2c9196fb4325c4af7cfc43d29a04fc5127205ec609a2403",
+          "source_url": "https://api.github.com/repos/Sinytra/Connector/pulls/926/commits?per_page=100&page=1",
+          "content_sha256": "58a34ce30e3e331629f68413777e27ab9746b52d2ca00d2ffbdfa3cc44716f03",
+          "captured_at": "2026-10-01T17:19:01.178Z",
+          "source_capture": {
+            "size_bytes": 13098,
+            "sha256": "58a34ce30e3e331629f68413777e27ab9746b52d2ca00d2ffbdfa3cc44716f03",
+            "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+          },
+          "source_revision": null
+        },
+        {
+          "id": "previous-fix-904",
+          "role": "commit",
+          "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+          "document_id": "162addc2360622aa413e0e36668de0ef70bba1af290903b8500528824963f6f8",
+          "source_url": "https://api.github.com/repos/Sinytra/Connector/commits/2bc9aeec8dfa83b7e89cc550f000617054c12c97",
+          "content_sha256": "b23e50c6873207a997ca20d2b14c64a3bcda13d277199c3e60b75d5896bf12f1",
+          "captured_at": "2026-10-01T17:14:53.994Z",
+          "source_capture": {
+            "size_bytes": 6942,
+            "sha256": "b23e50c6873207a997ca20d2b14c64a3bcda13d277199c3e60b75d5896bf12f1",
+            "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+          },
+          "source_revision": null
+        },
+        {
+          "id": "fix-926",
+          "role": "commit",
+          "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+          "document_id": "c33695f8e275a45a92247440560d0f1e43931823e9dbe4f27543a8a640939f48",
+          "source_url": "https://api.github.com/repos/Sinytra/Connector/commits/4b2014653be008e2f6463226f0224c1d1144c087",
+          "content_sha256": "41f830400d76c545e9bd284280e9cea38e5b144546f94adad0104ca88e720838",
+          "captured_at": "2026-10-01T17:14:49.346Z",
+          "source_capture": {
+            "size_bytes": 8697,
+            "sha256": "41f830400d76c545e9bd284280e9cea38e5b144546f94adad0104ca88e720838",
+            "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+          },
+          "source_revision": null
+        },
+        {
+          "id": "before-926-code",
+          "role": "before_code",
+          "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+          "document_id": "33c803e78424653cc9b44dfe016ce6664392bb3306543d1050129a6145f25ed5",
+          "source_url": "https://raw.githubusercontent.com/Sinytra/Connector/c4ee605c7f89aae244c0097c12c0bd3fb4b7f84e/src/main/java/dev/su5ed/sinytra/connector/locator/ConnectorLocator.java",
+          "content_sha256": "ef3076d25564af5a90b0416680965e6221d3212d00927afe6c7776492d12fd3f",
+          "captured_at": "2026-10-01T17:15:40.740Z",
+          "source_capture": {
+            "size_bytes": 16733,
+            "sha256": "ef3076d25564af5a90b0416680965e6221d3212d00927afe6c7776492d12fd3f",
+            "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+          },
+          "source_revision": "c4ee605c7f89aae244c0097c12c0bd3fb4b7f84e"
+        },
+        {
+          "id": "after-926-code",
+          "role": "after_code",
+          "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+          "document_id": "5b93594c7faf508c93914f4676a2be0eecd24519eadca6171f9668958d56e1f9",
+          "source_url": "https://raw.githubusercontent.com/Sinytra/Connector/4b2014653be008e2f6463226f0224c1d1144c087/src/main/java/dev/su5ed/sinytra/connector/locator/ConnectorLocator.java",
+          "content_sha256": "f67d6b3a182d062886612ba389ae01f539e5c42a3269e7d3f8b4a483016a564a",
+          "captured_at": "2026-10-01T17:15:43.337Z",
+          "source_capture": {
+            "size_bytes": 16948,
+            "sha256": "f67d6b3a182d062886612ba389ae01f539e5c42a3269e7d3f8b4a483016a564a",
+            "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+          },
+          "source_revision": "4b2014653be008e2f6463226f0224c1d1144c087"
+        },
+        {
+          "id": "issue-991",
+          "role": "issue",
+          "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+          "document_id": "3a5a71b3c1cb3bd874bad72c442c7cb4600295da927eefec3c698524bee4eef4",
+          "source_url": "https://api.github.com/repos/Sinytra/Connector/issues/991",
+          "content_sha256": "b48d2d3d86ffc8ea073d048885ae636b6b5c79a160a0e7088a4e4382d51c7841",
+          "captured_at": "2026-10-01T17:18:56.608Z",
+          "source_capture": {
+            "size_bytes": 6853,
+            "sha256": "b48d2d3d86ffc8ea073d048885ae636b6b5c79a160a0e7088a4e4382d51c7841",
+            "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+          },
+          "source_revision": null
+        },
+        {
+          "id": "issue-991-comments",
+          "role": "discussion",
+          "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+          "document_id": "127a5ab83d42c08f418726b0995596b15dc334766eb49b8b89cc3d4c0e930b11",
+          "source_url": "https://api.github.com/repos/Sinytra/Connector/issues/991/comments?per_page=100&page=1",
+          "content_sha256": "31c8d53d55602f69c4e2118bdb74d2ab0edf1413ebf8a67ff7836ae6edd74a56",
+          "captured_at": "2026-10-01T17:18:58.716Z",
+          "source_capture": {
+            "size_bytes": 6532,
+            "sha256": "31c8d53d55602f69c4e2118bdb74d2ab0edf1413ebf8a67ff7836ae6edd74a56",
+            "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+          },
+          "source_revision": null
+        },
+        {
+          "id": "followup-991",
+          "role": "commit",
+          "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+          "document_id": "be3090e32f0be9a064d99039108451640e65cb69187ea58cb1357c7f817d4b0f",
+          "source_url": "https://api.github.com/repos/Sinytra/Connector/commits/96cdbd49a2fb1ef81657f40431f7a59e7b18dcbd",
+          "content_sha256": "3dd0068c9cbe059dd0614186f8515df9574a571cd21d5b306688e9f04efe3039",
+          "captured_at": "2026-10-01T17:18:54.460Z",
+          "source_capture": {
+            "size_bytes": 14201,
+            "sha256": "3dd0068c9cbe059dd0614186f8515df9574a571cd21d5b306688e9f04efe3039",
+            "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+          },
+          "source_revision": null
+        },
+        {
+          "id": "pre-followup-locator",
+          "role": "before_code",
+          "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+          "document_id": "051856605dcbde00072ce062be26e2d819fb7ebfabec82a57a1d50ceb2992df7",
+          "source_url": "https://raw.githubusercontent.com/Sinytra/Connector/34d620665f525e57273cc3dac7da76b653b21949/src/main/java/dev/su5ed/sinytra/connector/locator/ConnectorLocator.java",
+          "content_sha256": "58f88b13741722bc2a1b96987d76683507819a186fc105ecad8cc197f19c7c23",
+          "captured_at": "2026-10-01T17:19:57.646Z",
+          "source_capture": {
+            "size_bytes": 18312,
+            "sha256": "58f88b13741722bc2a1b96987d76683507819a186fc105ecad8cc197f19c7c23",
+            "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+          },
+          "source_revision": "34d620665f525e57273cc3dac7da76b653b21949"
+        },
+        {
+          "id": "post-followup-locator",
+          "role": "after_code",
+          "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+          "document_id": "5bedf4460c3e5b1ec71c516478323d8b16903377875e1d15313d552d7320fd47",
+          "source_url": "https://raw.githubusercontent.com/Sinytra/Connector/96cdbd49a2fb1ef81657f40431f7a59e7b18dcbd/src/main/java/dev/su5ed/sinytra/connector/locator/ConnectorLocator.java",
+          "content_sha256": "e7da9856242a029bb0a64bf545fdca5bef8c534f15888d340359b41c895d115e",
+          "captured_at": "2026-10-01T17:20:00.406Z",
+          "source_capture": {
+            "size_bytes": 18186,
+            "sha256": "e7da9856242a029bb0a64bf545fdca5bef8c534f15888d340359b41c895d115e",
+            "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+          },
+          "source_revision": "96cdbd49a2fb1ef81657f40431f7a59e7b18dcbd"
+        },
+        {
+          "id": "pre-followup-resolver",
+          "role": "before_code",
+          "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+          "document_id": "9603410fbcacc99af6aaa2a63e67674362afd9def4505f18967624ea983662bc",
+          "source_url": "https://raw.githubusercontent.com/Sinytra/Connector/34d620665f525e57273cc3dac7da76b653b21949/src/main/java/dev/su5ed/sinytra/connector/locator/DependencyResolver.java",
+          "content_sha256": "277c0c3ece54569289565a54146169aaa2bc7dbe3352f588c585addd6bb55b50",
+          "captured_at": "2026-10-01T17:20:02.826Z",
+          "source_capture": {
+            "size_bytes": 8761,
+            "sha256": "277c0c3ece54569289565a54146169aaa2bc7dbe3352f588c585addd6bb55b50",
+            "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+          },
+          "source_revision": "34d620665f525e57273cc3dac7da76b653b21949"
+        },
+        {
+          "id": "post-followup-resolver",
+          "role": "after_code",
+          "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+          "document_id": "1a5d532c4aa57b2d9b2d6092b472fc001349757c761e2b03879687c84681b0f8",
+          "source_url": "https://raw.githubusercontent.com/Sinytra/Connector/96cdbd49a2fb1ef81657f40431f7a59e7b18dcbd/src/main/java/dev/su5ed/sinytra/connector/locator/DependencyResolver.java",
+          "content_sha256": "beba14aeac18d835e66f47ad439130a3a8a957b5866e85670e8587d6f3d851f8",
+          "captured_at": "2026-10-01T17:20:05.236Z",
+          "source_capture": {
+            "size_bytes": 8860,
+            "sha256": "beba14aeac18d835e66f47ad439130a3a8a957b5866e85670e8587d6f3d851f8",
+            "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+          },
+          "source_revision": "96cdbd49a2fb1ef81657f40431f7a59e7b18dcbd"
+        },
+        {
+          "id": "anchor-locator-code",
+          "role": "after_code",
+          "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+          "document_id": "6591c35242b8ff163eec45ebe6250a71ceab8441d8c38773f322c7c1f0e31b80",
+          "source_url": "https://raw.githubusercontent.com/Sinytra/Connector/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/ConnectorLocator.java",
+          "content_sha256": "46d225142d645e92f3aed1be5e41b8e9d77395716df9e5d1ad19b6f5adfe5fa3",
+          "captured_at": "2026-10-01T17:15:50.993Z",
+          "source_capture": {
+            "size_bytes": 18150,
+            "sha256": "46d225142d645e92f3aed1be5e41b8e9d77395716df9e5d1ad19b6f5adfe5fa3",
+            "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+          },
+          "source_revision": "7f68ac02291fde986119a3f5cab85436bed5c350"
+        },
+        {
+          "id": "anchor-dependency-code",
+          "role": "after_code",
+          "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+          "document_id": "9989b7dfea82a0dc769ca316c4e83f5536d6fdabb8db43253efd882e45c2788d",
+          "source_url": "https://raw.githubusercontent.com/Sinytra/Connector/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/DependencyResolver.java",
+          "content_sha256": "bc5485cbace6846a9622841458ab911fcc1cda4f490a6cc962b6b9a3bc086f7f",
+          "captured_at": "2026-10-01T17:18:36.558Z",
+          "source_capture": {
+            "size_bytes": 9008,
+            "sha256": "bc5485cbace6846a9622841458ab911fcc1cda4f490a6cc962b6b9a3bc086f7f",
+            "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+          },
+          "source_revision": null
+        }
+      ],
+      "symptom": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Reports describe BCLib dedicated-server freeze after beta.37 to beta.39, C2ME dedicated-server failure while a client-only nested module is admitted, and a subsequent beta.41 regression where Yttr nested dependencies are not loaded. These reports are related by upstream discussion; they are not one reproduced runtime experiment.",
+        "evidence_ids": [
+          "issue-904",
+          "issue-924",
+          "issue-991",
+          "issue-991-comments"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "The original wrong-side reports run Fabric mods through Connector on a Forge 1.20.1 dedicated server. The later regression is reported with Yttr and Lib39 on beta.41; the reporter used beta.40 because beta.41 did not load nested dependencies. Exact failing Yttr artifact topology remains unknown.",
+        "evidence_ids": [
+          "issue-904",
+          "issue-924",
+          "issue-991"
+        ]
+      },
+      "root_cause": {
+        "basis": "INFERENCE",
+        "text": "Two distinct static mechanisms are visible: before #926 the admission predicate checks disabled/duplicate mod IDs but no environment; #926 places its new environment predicate before nested traversal, so rejecting a container also prevents discovery of that branch of descendants. Su5eD explicitly attributes the observed Yttr JiJ regression to #926. The particular Yttr container and dependency edge responsible were not established from captured artifacts.",
+        "evidence_ids": [
+          "before-926-code",
+          "after-926-code",
+          "pre-followup-locator",
+          "issue-991-comments"
+        ]
+      },
+      "repair": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "Commit 4b201465 adds loadsInEnvironment rejection to the common root/nested predicate. Commit 96cdbd49 subsequently removes that early predicate and filters resolved TransformableJars after ModResolver.resolve and inverse jar mapping. At ANCHOR the later placement remains: graph construction and resolution precede the environment filter, which still precedes JarTransformer.transform. The same follow-up commit also adds EnvironmentInterface stripping; that distinct class-level fix is not isolated as the cause of the JiJ repair.",
+        "evidence_ids": [
+          "fix-926",
+          "followup-991",
+          "after-926-code",
+          "pre-followup-resolver",
+          "post-followup-resolver",
+          "anchor-locator-code",
+          "anchor-dependency-code"
+        ]
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Separate container discovery and dependency-graph construction from final load admission. An early whole-container environment rejection can hide otherwise needed nested dependencies. For this Connector architecture, preserve graph input through resolution, then exclude wrong-side output before transformation/loading. Test top-level side exclusion and nested dependency retention together; neither a closed issue nor a downstream classloading patch proves both.",
+        "evidence_ids": [
+          "after-926-code",
+          "issue-991-comments",
+          "post-followup-resolver",
+          "anchor-locator-code"
+        ]
+      },
+      "causal_chain": [
+        {
+          "basis": "DIRECT_OBSERVATION",
+          "text": "The captured reporter log identifies Forge 47.1.3, Minecraft 1.20.1, Java 17.0.10 and Connector beta.39. It records transformation of the c2me-client-uncapvd nested jar, then attempts to resolve client Options on DEDICATED_SERVER. This is observation of an external log, not our runtime reproduction.",
+          "evidence_ids": [
+            "issue-924-log"
+          ]
+        },
+        {
+          "basis": "DIRECT_OBSERVATION",
+          "text": "In the pre-#926 source, shouldIgnoreMod only tests disabled and already-loaded IDs; both top-level selection and nested recursion use that predicate.",
+          "evidence_ids": [
+            "before-926-code"
+          ]
+        },
+        {
+          "basis": "AUTHOR_CLAIM",
+          "text": "An earlier commit 2bc9aeec said it fixed #904 by applying CLASS_TRANSFORMS to non-Mixin classes; a later issue commenter and PR #926 author say it does not fix the real wrong-side-loading problem. The #904 timeline closes against the earlier commit and later references #926, demonstrating that closure alone cannot choose the final repair.",
+          "evidence_ids": [
+            "previous-fix-904",
+            "issue-904-comments",
+            "issue-904-timeline",
+            "pr-926"
+          ]
+        },
+        {
+          "basis": "DIRECT_OBSERVATION",
+          "text": "#926 uses ConnectorLoaderModMetadata in shouldIgnoreMod and returns true when metadata does not load in the current environment. The PR review explicitly requested true to stop incompatible loading. The merged code is authoritative over an intermediate commit message.",
+          "evidence_ids": [
+            "fix-926",
+            "after-926-code",
+            "pr-926-review-comments",
+            "pr-926-commits"
+          ]
+        },
+        {
+          "basis": "INFERENCE",
+          "text": "Because top-level roots are filtered before discovering children, and recursive rejection returns an empty stream before putting parent-to-child edges or descending, an environment-rejected container loses the opportunity to expose its descendants.",
+          "evidence_ids": [
+            "after-926-code",
+            "pre-followup-locator"
+          ]
+        },
+        {
+          "basis": "AUTHOR_CLAIM",
+          "text": "Su5eD reports independently encountering Yttr JiJ dependency loss and attributes it to a regression introduced by #926; the promised next-update fix is a maintainer statement, not a runtime pass.",
+          "evidence_ids": [
+            "issue-991-comments"
+          ]
+        },
+        {
+          "basis": "DIRECT_OBSERVATION",
+          "text": "The 96cdbd49 diff removes early loadsInEnvironment from ConnectorLocator and adds it to the resolved candidate stream in DependencyResolver. Separate before/after files corroborate the relocation.",
+          "evidence_ids": [
+            "followup-991",
+            "pre-followup-locator",
+            "post-followup-locator",
+            "pre-followup-resolver",
+            "post-followup-resolver"
+          ]
+        },
+        {
+          "basis": "DIRECT_OBSERVATION",
+          "text": "At the pinned beta.50 anchor, shouldIgnoreMod again contains only disabled/duplicate checks; resolveDependencies filters environment after resolution, and locateFabricMods transforms that returned list.",
+          "evidence_ids": [
+            "anchor-locator-code",
+            "anchor-dependency-code"
+          ]
+        }
+      ],
+      "reproduction": {
+        "state": "REPORTED",
+        "evidence_ids": [
+          "issue-904",
+          "issue-924",
+          "issue-924-log",
+          "issue-991",
+          "issue-991-comments"
+        ],
+        "details": "Upstream reporter recipes/log and maintainer report only; analyst did not launch Minecraft or build/run Connector."
+      },
+      "fix_verification": {
+        "state": "NOT_RUN",
+        "evidence_ids": [],
+        "details": "No captured controlled before/after run establishes complete BCLib/C2ME/Yttr success. Maintainer thanks/approval/closure are not a verified runtime result."
+      },
+      "revision_chain": [
+        {
+          "revision": "2bc9aeec8dfa83b7e89cc550f000617054c12c97",
+          "role": "Earlier claimed #904 repair, later disputed; non-Mixin CLASS_TRANSFORMS branch",
+          "evidence_ids": [
+            "previous-fix-904",
+            "issue-904-comments"
+          ]
+        },
+        {
+          "before": "c4ee605c7f89aae244c0097c12c0bd3fb4b7f84e",
+          "after": "4b2014653be008e2f6463226f0224c1d1144c087",
+          "role": "Wrong-side admission filter; later identified as introducing nested-dependency regression",
+          "evidence_ids": [
+            "fix-926",
+            "issue-991-comments"
+          ]
+        },
+        {
+          "before": "34d620665f525e57273cc3dac7da76b653b21949",
+          "after": "96cdbd49a2fb1ef81657f40431f7a59e7b18dcbd",
+          "role": "Move environment filter after dependency resolution; concurrent EnvironmentInterface repair",
+          "evidence_ids": [
+            "followup-991",
+            "pre-followup-locator",
+            "post-followup-locator",
+            "pre-followup-resolver",
+            "post-followup-resolver"
+          ]
+        }
+      ],
+      "contrary_evidence": [
+        "Issue #924 comments initially classify it as duplicate #88; reporter disputes that classification. Broader C2ME compatibility is not established.",
+        "Issue #991 also reports an independent EnvironmentInterface failure and a disputed Lib39 injection descriptor in the developer environment; no attempt is made to collapse these into the nested-discovery failure."
+      ],
+      "regression_tests": {
+        "state": "NOT_RUN",
+        "captured_test_additions": "No test files appear in the inspected #926 or 96cdbd49 commit diffs. This is not a claim that the repository has no other tests.",
+        "proposed": [
+          "Dedicated server with a top-level client-only mod: no resulting load candidate",
+          "Client-only nested module plus common/server-safe sibling: only valid side reaches transform",
+          "Nested container rejected by environment but carrying dependencies needed by another selected candidate: preserve discoverable candidate/parent topology until resolver decision",
+          "Repeat above with client side and multi-level nesting; inspect resolved candidates independently of final game startup"
+        ]
+      },
+      "unknowns": [
+        "Original wrong-side bug-introducing commit not identified",
+        "Exact Yttr/Lib39 nested jar metadata and hashes not captured",
+        "No guaranteed safe user workaround derived; choosing beta.40 was an upstream diagnostic choice, not a general recommendation"
+      ]
+    },
+    {
+      "case_id": "connector-anchor-regex-mixin-method-selector-remapping",
+      "origin": "UPSTREAM",
+      "track": "ANCHOR",
+      "environment": {
+        "minecraft": "1.20.1",
+        "loader": "forge",
+        "physical_side": "client",
+        "connector": "1.0.0-beta.41",
+        "forgified_fabric_api": "0.92.0+1.11.5",
+        "connector_extras": "1.10.0 (report says failure also without it)",
+        "custom_lan": "2.3.0",
+        "cloth_config": "11.1.118-forge",
+        "forge_exact_version": null,
+        "java_exact_version": null,
+        "runtime_executed_by_analyst": false
+      },
+      "affected_symbols": [
+        "OptimizedRenamingTransformer.postProcess",
+        "OptimizedRenamingTransformer.processMixinAnnotation",
+        "OptimizedRenamingTransformer.REGEX_DESC_PATTERN",
+        "OptimizedRenamingTransformer.PostProcessRemapper.mapValue"
+      ],
+      "before_revision": "96cdbd49a2fb1ef81657f40431f7a59e7b18dcbd",
+      "after_revision": "84fb91456cb0aade0f0d44e4d4a4e925e0f47f5e",
+      "revision_semantics": "before_revision is the immediate parent of the repair, not evidence of bug introduction.",
+      "evidence": [
+        {
+          "id": "issue-993",
+          "role": "issue",
+          "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+          "document_id": "66302a1e3f3890995d37807834db68f453d4e55f50414d0e8909acf4b660a8b0",
+          "source_url": "https://api.github.com/repos/Sinytra/Connector/issues/993",
+          "content_sha256": "402411d4be646ddccfe90e85c03ab1cd42e2514c71fe885bf0a11dd7a77bf9dd",
+          "captured_at": "2026-10-01T17:14:18.813Z",
+          "source_capture": {
+            "size_bytes": 6664,
+            "sha256": "402411d4be646ddccfe90e85c03ab1cd42e2514c71fe885bf0a11dd7a77bf9dd",
+            "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+          },
+          "source_revision": null
+        },
+        {
+          "id": "issue-993-comments",
+          "role": "discussion",
+          "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+          "document_id": "5d4216b7afe43dc6a52e574c29e27b8d8a3d5e044b97c430183287464c1f8f7b",
+          "source_url": "https://api.github.com/repos/Sinytra/Connector/issues/993/comments?per_page=100&page=1",
+          "content_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "captured_at": "2026-10-01T17:14:20.779Z",
+          "source_capture": {
+            "size_bytes": 2,
+            "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+          },
+          "source_revision": null
+        },
+        {
+          "id": "issue-993-timeline",
+          "role": "discussion",
+          "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+          "document_id": "2b1d56e9c92bef8ee5e44098b2579cdf9ce2f672e65dbd3a4664c58cd38c1efc",
+          "source_url": "https://api.github.com/repos/Sinytra/Connector/issues/993/timeline?per_page=100&page=1",
+          "content_sha256": "8dbd9a70edcde6050ba9a491e835af171c9c5d0c91af75c2905936326ffe34f0",
+          "captured_at": "2026-10-01T17:17:03.068Z",
+          "source_capture": {
+            "size_bytes": 22211,
+            "sha256": "8dbd9a70edcde6050ba9a491e835af171c9c5d0c91af75c2905936326ffe34f0",
+            "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+          },
+          "source_revision": null
+        },
+        {
+          "id": "fix-993",
+          "role": "commit",
+          "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+          "document_id": "c9972ab7e833e0bebe1b5e995f07d74d303640e283715c14a8cb9583e23a0c3a",
+          "source_url": "https://api.github.com/repos/Sinytra/Connector/commits/84fb91456cb0aade0f0d44e4d4a4e925e0f47f5e",
+          "content_sha256": "f8419a957cc07664bfb7a7cb01f0e34650ecc90d65c7c596ecc01bbc7460c333",
+          "captured_at": "2026-10-01T17:14:51.834Z",
+          "source_capture": {
+            "size_bytes": 8843,
+            "sha256": "f8419a957cc07664bfb7a7cb01f0e34650ecc90d65c7c596ecc01bbc7460c333",
+            "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+          },
+          "source_revision": null
+        },
+        {
+          "id": "before-993-code",
+          "role": "before_code",
+          "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+          "document_id": "d677ca4ea7b96e8bfb5504e0be4cb93d722397811bb6d2f8e24fdc69b25261d3",
+          "source_url": "https://raw.githubusercontent.com/Sinytra/Connector/96cdbd49a2fb1ef81657f40431f7a59e7b18dcbd/src/main/java/dev/su5ed/sinytra/connector/transformer/OptimizedRenamingTransformer.java",
+          "content_sha256": "1871bc0a13f18ad67b1cac8fe7786833bfd94968f1ce8f56b6aebf9064ffc526",
+          "captured_at": "2026-10-01T17:15:45.990Z",
+          "source_capture": {
+            "size_bytes": 16484,
+            "sha256": "1871bc0a13f18ad67b1cac8fe7786833bfd94968f1ce8f56b6aebf9064ffc526",
+            "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+          },
+          "source_revision": "96cdbd49a2fb1ef81657f40431f7a59e7b18dcbd"
+        },
+        {
+          "id": "after-993-code",
+          "role": "after_code",
+          "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+          "document_id": "471f2c5206590399f6f181d822e0488e81bb98e9fc02e9f287e9f2c8e2685e64",
+          "source_url": "https://raw.githubusercontent.com/Sinytra/Connector/84fb91456cb0aade0f0d44e4d4a4e925e0f47f5e/src/main/java/dev/su5ed/sinytra/connector/transformer/OptimizedRenamingTransformer.java",
+          "content_sha256": "94a996b08f9f5d923d75eaed8430201ada273faa20792ae4dd447316fd3d5907",
+          "captured_at": "2026-10-01T17:15:48.508Z",
+          "source_capture": {
+            "size_bytes": 17759,
+            "sha256": "94a996b08f9f5d923d75eaed8430201ada273faa20792ae4dd447316fd3d5907",
+            "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+          },
+          "source_revision": "84fb91456cb0aade0f0d44e4d4a4e925e0f47f5e"
+        },
+        {
+          "id": "anchor-renaming-code",
+          "role": "after_code",
+          "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+          "document_id": "f1889c693246381a035f5fec1ce62c85fb50844d0b2d29ca97cc34270090f8a3",
+          "source_url": "https://raw.githubusercontent.com/Sinytra/Connector/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/OptimizedRenamingTransformer.java",
+          "content_sha256": "bbe5dd863d3470128de30943f7780ec7d77dc7955c88491ae1c13a366b744cd5",
+          "captured_at": "2026-10-01T17:15:53.461Z",
+          "source_capture": {
+            "size_bytes": 17747,
+            "sha256": "bbe5dd863d3470128de30943f7780ec7d77dc7955c88491ae1c13a366b744cd5",
+            "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+          },
+          "source_revision": "7f68ac02291fde986119a3f5cab85436bed5c350"
+        }
+      ],
+      "symptom": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Custom LAN 2.3.0 starts successfully but crashes after selecting Create New World, reportedly showing Saving World.",
+        "evidence_ids": [
+          "issue-993"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "The reporter supplies Connector beta.41, Forgified Fabric API 0.92.0+1.11.5, Connector Extras 1.10.0, Custom LAN 2.3.0 and Cloth Config 11.1.118-forge on Minecraft 1.20.1, and says the crash also happens without Extras.",
+        "evidence_ids": [
+          "issue-993"
+        ]
+      },
+      "root_cause": {
+        "basis": "INFERENCE",
+        "text": "The linked repair indicates an unhandled Mixin method selector representation: a desc= regular expression containing an escaped intermediary class token needs namespace translation. Before the patch, visible method annotations only enter the generic remapRefs/remap=false annotation-value path; the new specialized regex branch did not exist. The unavailable linked crash log prevents establishing the exact exception, selector bytes and target method behind this specific report.",
+        "evidence_ids": [
+          "fix-993",
+          "before-993-code",
+          "after-993-code",
+          "issue-993-timeline"
+        ]
+      },
+      "repair": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "The patch introduces REGEX_DESC_PATTERN and processMixinAnnotation. For one method selector beginning desc=, it captures an escaped net/minecraft/class_ token, unescapes slash separators for flatMappings.map, re-escapes the mapped name and replaces the captured token in the selector. It then retains the old conditional generic annotation remapping. The regex branch occurs before that remapRefs/remap=false gate.",
+        "evidence_ids": [
+          "fix-993",
+          "before-993-code",
+          "after-993-code"
+        ]
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Mixin metadata has representation-specific grammar. A general class/descriptor mapper may miss a class name embedded in an escaped regex selector; preserve regex escaping when translating its namespace. Scope the fix to its actual selector gate and capture pattern rather than claiming general regex support.",
+        "evidence_ids": [
+          "before-993-code",
+          "after-993-code",
+          "anchor-renaming-code"
+        ]
+      },
+      "causal_chain": [
+        {
+          "basis": "AUTHOR_CLAIM",
+          "text": "The report locates the failure at Create New World after successful client startup, not at initial discovery.",
+          "evidence_ids": [
+            "issue-993"
+          ]
+        },
+        {
+          "basis": "DIRECT_OBSERVATION",
+          "text": "Commit 84fb914 names regex Mixin specifier support and explicitly references #993. The issue timeline links and later closes against that exact commit.",
+          "evidence_ids": [
+            "fix-993",
+            "issue-993-timeline"
+          ]
+        },
+        {
+          "basis": "DIRECT_OBSERVATION",
+          "text": "The before-source postProcess loop directly conditionally calls mapAnnotationValues; the after-source routes visible method annotations through the new processMixinAnnotation method.",
+          "evidence_ids": [
+            "before-993-code",
+            "after-993-code"
+          ]
+        },
+        {
+          "basis": "DIRECT_OBSERVATION",
+          "text": "The new branch requires method list size one and startsWith desc=. Its pattern captures net\\/minecraft\\/class_ followed by four digits; flat mapping uses unescaped slashes and replacement restores escaping. There is one captured class-name group.",
+          "evidence_ids": [
+            "after-993-code"
+          ]
+        },
+        {
+          "basis": "INFERENCE",
+          "text": "An unmapped intermediary class token could cause selector mismatch after ordinary class remapping; this is a code-based explanation of the repair, not a confirmed reconstruction of the unavailable crash.",
+          "evidence_ids": [
+            "before-993-code",
+            "after-993-code"
+          ]
+        },
+        {
+          "basis": "DIRECT_OBSERVATION",
+          "text": "The same REGEX_DESC_PATTERN and processMixinAnnotation body remain in the exact ANCHOR source under org.sinytra.connector.",
+          "evidence_ids": [
+            "after-993-code",
+            "anchor-renaming-code"
+          ]
+        }
+      ],
+      "reproduction": {
+        "state": "REPORTED",
+        "evidence_ids": [
+          "issue-993"
+        ],
+        "details": "Only the issue recipe is available; the linked gist returns HTTP 404 through public GitHub API and was unavailable in web lookup."
+      },
+      "fix_verification": {
+        "state": "NOT_RUN",
+        "evidence_ids": [],
+        "details": "No local runtime, build or captured post-fix reporter run. Issue closure and commit wording do not establish success."
+      },
+      "limitations": [
+        "The branch is not a general regex parser: one method-list entry and desc= prefix are required.",
+        "The capture pattern uses four digits without a trailing numeric boundary, so do not infer safe support for longer numeric class IDs.",
+        "A single captured class group does not establish correct remapping of multiple distinct class tokens.",
+        "The unavailable crash gist prevents quoting a stack trace or asserting an exact failing Mixin target."
+      ],
+      "regression_tests": {
+        "state": "NOT_RUN",
+        "captured_test_additions": "The inspected commit changes one transformer source file and adds no test file.",
+        "proposed": [
+          "One escaped desc= selector with a mapped intermediary class",
+          "Unmapped class token leaves selector unchanged",
+          "Multiple distinct class tokens, longer numeric IDs, multiple method entries and other selector representations as explicitly unsupported/edge cases",
+          "remapRefs true/false and explicit annotation remap=false; ensure regex step ordering does not double-remap or lose escaping"
+        ]
+      },
+      "unknowns": [
+        "Original introducing commit not identified",
+        "Exact Custom LAN mixin artifact/hash and failing target not captured",
+        "No independent verification that every stated dependency version matches the lost crash artifact"
+      ]
+    }
+  ],
+  "capture_notes": {
+    "date": "2026-10-01",
+    "artifact_count": 35,
+    "source_content_bytes": 1311321,
+    "raw_policy": "Keep raw issue/PR JSON and logs outside normal Git history/publication. Share minimized derived analysis only.",
+    "timestamp_policy": "Per-document UTC capture times and SHA-256 are in evidence entries. GitHub connector content strings are preserved as returned; HTTP raw log/API-gist bodies are separately labeled.",
+    "source_status": "Primary upstream discussion/source and one reporter log; all imported as research, not authenticated live execution."
+  }
+}

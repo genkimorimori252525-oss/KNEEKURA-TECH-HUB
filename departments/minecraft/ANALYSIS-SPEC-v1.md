@@ -155,3 +155,6 @@ before deep code interpretation (for example bosses, progression, structures, wo
 rendering-visible mechanics and compatibility). The map is a navigation aid, not a second
 canonical knowledge graph.
 
+
+Practical execution, checklist and lightweight templates: [ANALYSIS-WORKFLOW.md](ANALYSIS-WORKFLOW.md).
+This is an analyst workflow using existing retrieval/history/Core staging, not an automatic site scraper or completion gate.

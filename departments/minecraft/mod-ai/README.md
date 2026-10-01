@@ -86,6 +86,8 @@ MOD全体解析を始めるときは、コードだけから入らず、利用�
 Source/bytecode/Issue/PR/実機で追う検索語へ変換する。攻略情報そのものを実装事実やPASSにはしない。
 別バージョンの記述、community report、相互に矛盾する記述はその由来を保ったまま仮説として扱う。
 規範は [ANALYSIS-SPEC-v1 §10](../ANALYSIS-SPEC-v1.md#10-player-facing-behavioral-reconnaissance--required-discovery-aid) を参照。
+具体的な順序・記録テンプレート・既存CLIの限界は [実践ガイド](../ANALYSIS-WORKFLOW.md)、
+実例と続きの計画は [Sinytra Connector](../mods/sinytra-connector/ANALYSIS-CONTINUATION-2026-10-01.md) を参照。
 
 以下は `python -m kneekura_tech_hub.minecraft --store CACHE` の後へ渡す。
 

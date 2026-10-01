@@ -1,0 +1,287 @@
+{
+  "tool_revision": "2fb2e0eda62b2c132d53dc9d33c2fe1730475347",
+  "tracks": {
+    "anchor": {
+      "repository": "https://github.com/Sinytra/Connector",
+      "revision": "7f68ac02291fde986119a3f5cab85436bed5c350",
+      "profile_id": "3161cd7cd84ba1add48de08b2318d1a10ad0681dc1fbc1f981ffd7156a7c20c0",
+      "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+      "status": "PARTIAL",
+      "captured_documents": 141,
+      "text_searchable_documents": 125,
+      "readback_pages": 235,
+      "all_document_bytes_match_acquired_files": true,
+      "queries": [
+        {
+          "literal": "globalModAliases",
+          "matching_documents": 2,
+          "pages": 1,
+          "opposite_track_hits": 0
+        },
+        {
+          "literal": "hiddenMods",
+          "matching_documents": 2,
+          "pages": 1,
+          "opposite_track_hits": 0
+        },
+        {
+          "literal": "enableMixinSafeguard",
+          "matching_documents": 0,
+          "pages": 1,
+          "opposite_track_hits": 0
+        },
+        {
+          "literal": "loadsInEnvironment",
+          "matching_documents": 2,
+          "pages": 1,
+          "opposite_track_hits": 0
+        },
+        {
+          "literal": "fabric_api",
+          "matching_documents": 1,
+          "pages": 1,
+          "opposite_track_hits": 0
+        },
+        {
+          "literal": "getCached",
+          "matching_documents": 3,
+          "pages": 1,
+          "opposite_track_hits": 0
+        },
+        {
+          "literal": "JarTransformer",
+          "matching_documents": 7,
+          "pages": 2,
+          "opposite_track_hits": 0
+        },
+        {
+          "literal": "TransformerPlugin",
+          "matching_documents": 0,
+          "pages": 1,
+          "opposite_track_hits": 0
+        },
+        {
+          "literal": "ClassTweaker",
+          "matching_documents": 0,
+          "pages": 1,
+          "opposite_track_hits": 0
+        },
+        {
+          "literal": "AccessWidener",
+          "matching_documents": 6,
+          "pages": 2,
+          "opposite_track_hits": 0
+        },
+        {
+          "literal": "Launchpad",
+          "matching_documents": 0,
+          "pages": 1,
+          "opposite_track_hits": 0
+        }
+      ],
+      "coverage": {
+        "complete": false,
+        "requested_roots": [
+          "connector-anchor-full-tree"
+        ],
+        "analyzed_roots": [],
+        "unresolved_roots": [
+          {
+            "root_id": null,
+            "reasons": [
+              "Original source tree only; matching binary/build dependency closure and actual runtime not established"
+            ],
+            "kind": "dependency_resolution"
+          },
+          {
+            "root_id": null,
+            "reasons": [
+              "No Javap, Gradle, Minecraft or upstream scripts executed; third-party dependency trees remain separate unacquired SourceSnapshots"
+            ],
+            "kind": "dependency_resolution"
+          },
+          {
+            "root_id": "connector-anchor-full-tree",
+            "reasons": [
+              "Nested JAR requires its own explicit root: gradle/wrapper/gradle-wrapper.jar"
+            ]
+          }
+        ],
+        "exclusions": []
+      },
+      "warnings": [
+        "UNKNOWN exact loader_version",
+        "UNKNOWN dirty_hash",
+        "UNKNOWN toolchain",
+        "UNKNOWN input identity: one or more roots are incomplete"
+      ],
+      "query_pages": 13
+    },
+    "frontier": {
+      "repository": "https://github.com/Sinytra/Connector",
+      "revision": "c84a96a3c04aa4c5253032c338434de5329be08a",
+      "profile_id": "b6e8959ed87e41de945338b53b1b9e2a4040505238d2af0c5862779ee39e49b9",
+      "index_snapshot_id": "27882ce6d3a03ec5fac8cdfe8533824c6fe6c120c13a0ed82efae73e356dd8a0",
+      "status": "PARTIAL",
+      "captured_documents": 131,
+      "text_searchable_documents": 109,
+      "readback_pages": 303,
+      "all_document_bytes_match_acquired_files": true,
+      "queries": [
+        {
+          "literal": "globalModAliases",
+          "matching_documents": 4,
+          "pages": 1,
+          "opposite_track_hits": 0
+        },
+        {
+          "literal": "hiddenMods",
+          "matching_documents": 2,
+          "pages": 1,
+          "opposite_track_hits": 0
+        },
+        {
+          "literal": "enableMixinSafeguard",
+          "matching_documents": 2,
+          "pages": 1,
+          "opposite_track_hits": 0
+        },
+        {
+          "literal": "loadsInEnvironment",
+          "matching_documents": 1,
+          "pages": 1,
+          "opposite_track_hits": 0
+        },
+        {
+          "literal": "fabric_api",
+          "matching_documents": 1,
+          "pages": 1,
+          "opposite_track_hits": 0
+        },
+        {
+          "literal": "getCached",
+          "matching_documents": 4,
+          "pages": 1,
+          "opposite_track_hits": 0
+        },
+        {
+          "literal": "JarTransformer",
+          "matching_documents": 10,
+          "pages": 2,
+          "opposite_track_hits": 0
+        },
+        {
+          "literal": "TransformerPlugin",
+          "matching_documents": 4,
+          "pages": 1,
+          "opposite_track_hits": 0
+        },
+        {
+          "literal": "ClassTweaker",
+          "matching_documents": 5,
+          "pages": 1,
+          "opposite_track_hits": 0
+        },
+        {
+          "literal": "AccessWidener",
+          "matching_documents": 1,
+          "pages": 1,
+          "opposite_track_hits": 0
+        },
+        {
+          "literal": "Launchpad",
+          "matching_documents": 12,
+          "pages": 3,
+          "opposite_track_hits": 0
+        }
+      ],
+      "coverage": {
+        "complete": false,
+        "requested_roots": [
+          "connector-frontier-full-tree"
+        ],
+        "analyzed_roots": [],
+        "unresolved_roots": [
+          {
+            "root_id": null,
+            "reasons": [
+              "Original source tree only; matching binary/build dependency closure and actual runtime not established"
+            ],
+            "kind": "dependency_resolution"
+          },
+          {
+            "root_id": null,
+            "reasons": [
+              "No Javap, Gradle, Minecraft or upstream scripts executed; third-party dependency trees remain separate unacquired SourceSnapshots"
+            ],
+            "kind": "dependency_resolution"
+          },
+          {
+            "root_id": "connector-frontier-full-tree",
+            "reasons": [
+              "Nested JAR requires its own explicit root: gradle/wrapper/gradle-wrapper.jar"
+            ]
+          }
+        ],
+        "exclusions": []
+      },
+      "warnings": [
+        "UNKNOWN exact loader_version",
+        "UNKNOWN dirty_hash",
+        "UNKNOWN toolchain",
+        "UNKNOWN input identity: one or more roots are incomplete"
+      ],
+      "query_pages": 14
+    }
+  },
+  "upstream_execution": false,
+  "game_launches": 0,
+  "canonical_writes": 0,
+  "adapter_regressions": {
+    "status": "PASSED",
+    "tests_passed": 140,
+    "tests_skipped": 0,
+    "suites": [
+      "tests/test_minecraft_index.py",
+      "tests/test_minecraft_storage.py",
+      "tests/test_minecraft_connected_cli.py",
+      "tests/test_minecraft_failure_history.py"
+    ],
+    "scope": "Existing TECH HUB source/index/history adapter regression fixtures, not Connector execution or compatibility",
+    "runtime_compatibility": "UNKNOWN"
+  },
+  "history_static_verification": {
+    "history_hash": "642d3f40c98c3cfab06212aebc5fe27419f5a020e06c2bfec1e3a1609a6138e5",
+    "evidence_hashes_checked": 35,
+    "regex_method_text_identical_after_fix_and_anchor": true,
+    "wrong_loader_or_version_or_track_query_results": 0,
+    "runtime_run": false,
+    "canonical_writes": 0
+  },
+  "history_queries": [
+    {
+      "query": "nested",
+      "status": "PARTIAL",
+      "case_ids": [
+        "connector-anchor-wrong-side-admission-and-jij-regression"
+      ],
+      "missing_evidence": [
+        {
+          "connector-anchor-wrong-side-admission-and-jij-regression": []
+        }
+      ]
+    },
+    {
+      "query": "regex",
+      "status": "PARTIAL",
+      "case_ids": [
+        "connector-anchor-regex-mixin-method-selector-remapping"
+      ],
+      "missing_evidence": [
+        {
+          "connector-anchor-regex-mixin-method-selector-remapping": []
+        }
+      ]
+    }
+  ]
+}

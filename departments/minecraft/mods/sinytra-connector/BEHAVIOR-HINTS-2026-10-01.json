@@ -1,0 +1,436 @@
+{
+  "record_kind": "LIGHTWEIGHT_ANALYST_FEATURE_MAP_NOT_ADAPTER_SCHEMA",
+  "captured_at_utc": "2026-10-01",
+  "status": "PARTIAL",
+  "sources": [
+    {
+      "id": "homepage",
+      "url": "https://connector.sinytra.org/",
+      "source_type": "OFFICIAL_SITE",
+      "retrieved_at": "2026-10-01T17:19:26.093Z",
+      "claimed_version": "NeoForge / 26.1.2",
+      "acquisition_status": "REVIEWED_DISCOVERY_ONLY",
+      "representation": "web.run extracted response, not original HTML/video",
+      "capture_sha256": "700f06224decb394f983fe9ec4c3efc81d9aa87cfbef356fd545925b987c868b",
+      "limits": "Current page does not prove Forge 1.20.1 compatibility",
+      "publication": "Minimized derived summary and locator only; raw capture retained outside repository"
+    },
+    {
+      "id": "configuration",
+      "url": "https://moddedmc.wiki/en/project/connector/latest/docs/configuration",
+      "source_type": "OFFICIAL_LINKED_WIKI",
+      "retrieved_at": "2026-10-01T17:19:28.586Z",
+      "claimed_version": "latest; exact Connector revision not declared",
+      "acquisition_status": "REVIEWED_DISCOVERY_ONLY",
+      "representation": "web.run extracted response, not original HTML/video",
+      "capture_sha256": "72a1b212dccb83b652f9adab5a63fd35acee5ab8d506d9a46a595356dbfc1d42",
+      "limits": "Mutable documentation; each feature must be rechecked at each pinned source revision",
+      "publication": "Minimized derived summary and locator only; raw capture retained outside repository"
+    },
+    {
+      "id": "community-180",
+      "url": "https://github.com/Sinytra/Connector/discussions/180",
+      "source_type": "COMMUNITY_DISCUSSION",
+      "retrieved_at": "2026-10-01T17:19:31.073Z",
+      "claimed_version": "1.20.1 title; individual comments vary or omit exact versions",
+      "acquisition_status": "PARTIAL_REVIEW",
+      "representation": "web.run extracted response, not original HTML/video",
+      "capture_sha256": "17ec4c9a259427bfad6d3c1c7fce9c6dae8cfa325b1595914dd68b08538f5273",
+      "limits": "Visible discussion only; not an exhaustive comment inventory or compatibility certification",
+      "publication": "Minimized derived summary and locator only; raw capture retained outside repository"
+    },
+    {
+      "id": "video",
+      "url": "https://www.youtube.com/watch?v=iZgKRa2JROs",
+      "source_type": "COMMUNITY_VIDEO",
+      "retrieved_at": "2026-10-01T17:19:33.630Z",
+      "claimed_version": "1.20.1 in search title; exact Connector version unknown",
+      "acquisition_status": "DISCOVERED_NOT_REVIEWED",
+      "representation": "web.run extracted response, not original HTML/video",
+      "capture_sha256": "fe5bc8d053196071a760eaaf518f590394440197f5e4f226a027d3352821c242",
+      "limits": "Opened page exposed footer only; no playback, transcript or timestamp evidence available",
+      "publication": "Minimized derived summary and locator only; raw capture retained outside repository"
+    },
+    {
+      "id": "anchor-readme",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/README.md",
+      "source_type": "OFFICIAL_PINNED_README",
+      "track": "ANCHOR",
+      "acquisition_status": "ACQUIRED_HASH_VERIFIED",
+      "locator": {
+        "path": "README.md",
+        "document_id": "434aa2d2146a06dc9f3e510c363c75cccdb08faf2166b2f957173f5fe24b74ac",
+        "content_hash": "476325c289f288eaf7bf8108abfec30baff299e26e193cfa897ddf3ce6ea570d",
+        "track": "ANCHOR",
+        "namespace": "mojmap",
+        "media": "text",
+        "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+        "profile_id": "3161cd7cd84ba1add48de08b2318d1a10ad0681dc1fbc1f981ffd7156a7c20c0",
+        "revision": "7f68ac02291fde986119a3f5cab85436bed5c350",
+        "lines": [
+          1,
+          64
+        ],
+        "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/README.md#L1-L64"
+      }
+    },
+    {
+      "id": "frontier-plugin-docs",
+      "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/docs/docs/plugins.mdx",
+      "source_type": "OFFICIAL_PINNED_DOCUMENTATION",
+      "track": "FRONTIER",
+      "acquisition_status": "ACQUIRED_HASH_VERIFIED",
+      "representation": "Original repository MDX bytes; inspected through byte view because MDX is not text-searchable",
+      "locator": {
+        "path": "docs/docs/plugins.mdx",
+        "document_id": "5520679094c77856ff5ae4d760302fe1ca7a559a564b69d1a49f7808ea43853d",
+        "content_hash": "36f21240fa01e1b44494c82c8c18a870454c6c4062ce7a3c1153d42933ded101",
+        "track": "FRONTIER",
+        "namespace": "unknown",
+        "media": "binary",
+        "index_snapshot_id": "27882ce6d3a03ec5fac8cdfe8533824c6fe6c120c13a0ed82efae73e356dd8a0",
+        "profile_id": "b6e8959ed87e41de945338b53b1b9e2a4040505238d2af0c5862779ee39e49b9",
+        "revision": "c84a96a3c04aa4c5253032c338434de5329be08a",
+        "lines": [
+          1,
+          45
+        ],
+        "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/docs/docs/plugins.mdx#L1-L45"
+      }
+    },
+    {
+      "id": "issue-991",
+      "source_type": "UPSTREAM_ISSUE_REPORT",
+      "track": "ANCHOR",
+      "claimed_version": "Connector beta.41 symptom; beta.40 report; exact Yttr/Lib39 identity unresolved",
+      "acquisition_status": "ACQUIRED_HASH_VERIFIED",
+      "url": "https://github.com/Sinytra/Connector/issues/991",
+      "retrieved_at": "2026-10-01T17:18:56.608Z",
+      "locator": {
+        "id": "issue-991",
+        "role": "issue",
+        "index_snapshot_id": "77ab5e20fc41095d4493bb039cabc84d81227db68c6671d25191920328babe10",
+        "document_id": "3a5a71b3c1cb3bd874bad72c442c7cb4600295da927eefec3c698524bee4eef4",
+        "source_url": "https://api.github.com/repos/Sinytra/Connector/issues/991",
+        "content_sha256": "b48d2d3d86ffc8ea073d048885ae636b6b5c79a160a0e7088a4e4382d51c7841",
+        "captured_at": "2026-10-01T17:18:56.608Z",
+        "source_capture": {
+          "size_bytes": 6853,
+          "sha256": "b48d2d3d86ffc8ea073d048885ae636b6b5c79a160a0e7088a4e4382d51c7841",
+          "capture_format": "Exact UTF-8 content string returned by GitHub connector; not a capture of HTTP response headers or original wire serialization"
+        },
+        "source_revision": null
+      },
+      "limits": "Reporter/maintainer claims; no controlled runtime reproduction; see bounded failure/repair record"
+    }
+  ],
+  "features": [
+    {
+      "id": "BH01",
+      "subsystem": "aliases / dependency metadata",
+      "source_refs": [
+        "configuration",
+        "community-180"
+      ],
+      "hint": "Reports suggest alias or dependency overrides may allow a mixed-loader integration to proceed",
+      "terms": [
+        "globalModAliases",
+        "removeAliasedModDependencyConstraints",
+        "fabric_loader_dependencies.json"
+      ],
+      "track": "ANCHOR",
+      "finding": "Config accepts single or list aliases; resolver applies them, widens aliased dependency constraints to wildcard, removes aliased BREAKS constraints and drops fabricloader requirements. These are metadata operations, not API equivalence or a successful integration.",
+      "basis": "DIRECT_OBSERVATION_OF_SOURCE",
+      "locators": [
+        {
+          "path": "src/main/java/org/sinytra/connector/locator/ConnectorConfig.java",
+          "document_id": "64c82d1ac2b02eecddf846c0cb8fcbf8c85114bc3e72066abb48c0796d7d754e",
+          "content_hash": "ab71fecb216bc7ba4550f0ae853b9406fb6f8e722e6053fac1790f8cc3136d6e",
+          "track": "ANCHOR",
+          "namespace": "mojmap",
+          "media": "text",
+          "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+          "profile_id": "3161cd7cd84ba1add48de08b2318d1a10ad0681dc1fbc1f981ffd7156a7c20c0",
+          "revision": "7f68ac02291fde986119a3f5cab85436bed5c350",
+          "lines": [
+            31,
+            60
+          ],
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/ConnectorConfig.java#L31-L60"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/locator/DependencyResolver.java",
+          "document_id": "2321cdf168a93317c5f3b453562ec8db0fcb9a80475157230efaf9613d2a38b7",
+          "content_hash": "bc5485cbace6846a9622841458ab911fcc1cda4f490a6cc962b6b9a3bc086f7f",
+          "track": "ANCHOR",
+          "namespace": "mojmap",
+          "media": "text",
+          "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+          "profile_id": "3161cd7cd84ba1add48de08b2318d1a10ad0681dc1fbc1f981ffd7156a7c20c0",
+          "revision": "7f68ac02291fde986119a3f5cab85436bed5c350",
+          "lines": [
+            49,
+            55
+          ],
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/DependencyResolver.java#L49-L55"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/locator/DependencyResolver.java",
+          "document_id": "2321cdf168a93317c5f3b453562ec8db0fcb9a80475157230efaf9613d2a38b7",
+          "content_hash": "bc5485cbace6846a9622841458ab911fcc1cda4f490a6cc962b6b9a3bc086f7f",
+          "track": "ANCHOR",
+          "namespace": "mojmap",
+          "media": "text",
+          "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+          "profile_id": "3161cd7cd84ba1add48de08b2318d1a10ad0681dc1fbc1f981ffd7156a7c20c0",
+          "revision": "7f68ac02291fde986119a3f5cab85436bed5c350",
+          "lines": [
+            81,
+            101
+          ],
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/DependencyResolver.java#L81-L101"
+        }
+      ],
+      "remaining": "Inspect actual selected Fabric Loader implementation and run-bound dependencies before asserting an alias fixes a specific MOD",
+      "facet_state": "MAPPED",
+      "runtime": "NOT_RUN",
+      "canonical_promotion": false
+    },
+    {
+      "id": "BH02",
+      "subsystem": "optional integration visibility",
+      "source_refs": [
+        "configuration"
+      ],
+      "hint": "Hiding a host MOD may avoid incompatible optional integration detection",
+      "terms": [
+        "hiddenMods",
+        "addFmlMods"
+      ],
+      "track": "ANCHOR",
+      "finding": "Early loader filters hidden IDs from the host MOD list passed to Fabric Loader, but explicitly keeps Connector-transformed MODs. This does not uninstall or prevent Forge from loading a MOD.",
+      "basis": "DIRECT_OBSERVATION_OF_SOURCE",
+      "locators": [
+        {
+          "path": "src/main/java/org/sinytra/connector/loader/ConnectorEarlyLoader.java",
+          "document_id": "fa88a060033fe7ae1f6d130c8faa51957fbe94e93e7b7b3d3e4b86254da7b7a6",
+          "content_hash": "6eeb8a88c76c7239776dfee066e3b4392044c79984e9715e9d3a2a0dc94f8339",
+          "track": "ANCHOR",
+          "namespace": "mojmap",
+          "media": "text",
+          "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+          "profile_id": "3161cd7cd84ba1add48de08b2318d1a10ad0681dc1fbc1f981ffd7156a7c20c0",
+          "revision": "7f68ac02291fde986119a3f5cab85436bed5c350",
+          "lines": [
+            90,
+            118
+          ],
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/loader/ConnectorEarlyLoader.java#L90-L118"
+        }
+      ],
+      "remaining": "Whether an individual integration uses Fabric visibility or another detection path is unknown",
+      "facet_state": "MAPPED",
+      "runtime": "NOT_RUN",
+      "canonical_promotion": false
+    },
+    {
+      "id": "BH03",
+      "subsystem": "Mixin transform safeguard / version delta",
+      "source_refs": [
+        "configuration"
+      ],
+      "hint": "Latest documentation describes enableMixinSafeguard",
+      "terms": [
+        "enableMixinSafeguard",
+        "MixinTransformSafeguard"
+      ],
+      "track": "CROSS_TRACK_COMPARISON_ONLY",
+      "finding": "ANCHOR config has version/hiddenMods/globalModAliases only and the exact literal is absent from captured searchable source. FRONTIER config contains the option defaulting true; locator feeds failing audit entries to the safeguard. This is a bounded configuration/API delta, not a semantic absence proof for all ANCHOR error handling.",
+      "basis": "DIRECT_OBSERVATION_OF_SEPARATE_SOURCES",
+      "locators": [
+        {
+          "path": "src/main/java/org/sinytra/connector/locator/ConnectorConfig.java",
+          "document_id": "64c82d1ac2b02eecddf846c0cb8fcbf8c85114bc3e72066abb48c0796d7d754e",
+          "content_hash": "ab71fecb216bc7ba4550f0ae853b9406fb6f8e722e6053fac1790f8cc3136d6e",
+          "track": "ANCHOR",
+          "namespace": "mojmap",
+          "media": "text",
+          "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+          "profile_id": "3161cd7cd84ba1add48de08b2318d1a10ad0681dc1fbc1f981ffd7156a7c20c0",
+          "revision": "7f68ac02291fde986119a3f5cab85436bed5c350",
+          "lines": [
+            31,
+            62
+          ],
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/ConnectorConfig.java#L31-L62"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/util/ConnectorConfig.java",
+          "document_id": "a3e3f9c5c5c0397cf08afe9e2262822751f69e5b3bce9778b0af67a74a407b84",
+          "content_hash": "186fa685a567de03e53c18a670894a33ea3916e6ed014bb1f6bb73b6f1b32ea6",
+          "track": "FRONTIER",
+          "namespace": "unknown",
+          "media": "text",
+          "index_snapshot_id": "27882ce6d3a03ec5fac8cdfe8533824c6fe6c120c13a0ed82efae73e356dd8a0",
+          "profile_id": "b6e8959ed87e41de945338b53b1b9e2a4040505238d2af0c5862779ee39e49b9",
+          "revision": "c84a96a3c04aa4c5253032c338434de5329be08a",
+          "lines": [
+            30,
+            64
+          ],
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/main/java/org/sinytra/connector/util/ConnectorConfig.java#L30-L64"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/locator/ConnectorLocator.java",
+          "document_id": "6f3b14ba2d7fae8d3e3ade3e4e60cc60899658d3a025d6734c4f083414ff7923",
+          "content_hash": "d2e41013a1dfcef7af8274ae0c824ad82650785953addb90a7bb34faa3400ec0",
+          "track": "FRONTIER",
+          "namespace": "unknown",
+          "media": "text",
+          "index_snapshot_id": "27882ce6d3a03ec5fac8cdfe8533824c6fe6c120c13a0ed82efae73e356dd8a0",
+          "profile_id": "b6e8959ed87e41de945338b53b1b9e2a4040505238d2af0c5862779ee39e49b9",
+          "revision": "c84a96a3c04aa4c5253032c338434de5329be08a",
+          "lines": [
+            137,
+            143
+          ],
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/main/java/org/sinytra/connector/locator/ConnectorLocator.java#L137-L143"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/locator/MixinTransformSafeguard.java",
+          "document_id": "74f8fa9bb298486253659250e69d7e17a866cdf3e7af4626be51f6459156867c",
+          "content_hash": "3a4f29fdb517fd869cd95211093fecd22e859ec3e511543182622abd20a082d4",
+          "track": "FRONTIER",
+          "namespace": "unknown",
+          "media": "text",
+          "index_snapshot_id": "27882ce6d3a03ec5fac8cdfe8533824c6fe6c120c13a0ed82efae73e356dd8a0",
+          "profile_id": "b6e8959ed87e41de945338b53b1b9e2a4040505238d2af0c5862779ee39e49b9",
+          "revision": "c84a96a3c04aa4c5253032c338434de5329be08a",
+          "lines": [
+            17,
+            53
+          ],
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/main/java/org/sinytra/connector/locator/MixinTransformSafeguard.java#L17-L53"
+        }
+      ],
+      "remaining": "Backport would need the corresponding audit/dependency and Forge error-reporting design; do not copy a current config key as a verified 1.20.1 feature",
+      "facet_state": "MAPPED",
+      "runtime": "NOT_RUN",
+      "canonical_promotion": false
+    },
+    {
+      "id": "BH04",
+      "subsystem": "physical side / nested dependencies",
+      "source_refs": [
+        "issue-991"
+      ],
+      "hint_basis": "AUTHOR_CLAIM_IN_UPSTREAM_ISSUE",
+      "hint": "Reporter describes Yttr nested dependencies failing to load; maintainer attributes the regression to earlier side filtering",
+      "terms": [
+        "loadsInEnvironment",
+        "discoverNestedJarsRecursive",
+        "resolveDependencies"
+      ],
+      "track": "ANCHOR",
+      "finding": "Current anchor discovers nested candidates before dependency resolution; resolver filters final candidate jars by environment after ModResolver.resolve. Follow the documented repair-regression-repair chain rather than assuming the earliest fix remains unchanged.",
+      "basis": "DIRECT_OBSERVATION_OF_SOURCE",
+      "locators": [
+        {
+          "path": "src/main/java/org/sinytra/connector/locator/ConnectorLocator.java",
+          "document_id": "100148b725596239f2192cfaf8305f90e820045d9dc02f0bec0965e480f8748a",
+          "content_hash": "46d225142d645e92f3aed1be5e41b8e9d77395716df9e5d1ad19b6f5adfe5fa3",
+          "track": "ANCHOR",
+          "namespace": "mojmap",
+          "media": "text",
+          "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+          "profile_id": "3161cd7cd84ba1add48de08b2318d1a10ad0681dc1fbc1f981ffd7156a7c20c0",
+          "revision": "7f68ac02291fde986119a3f5cab85436bed5c350",
+          "lines": [
+            115,
+            148
+          ],
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/ConnectorLocator.java#L115-L148"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/locator/DependencyResolver.java",
+          "document_id": "2321cdf168a93317c5f3b453562ec8db0fcb9a80475157230efaf9613d2a38b7",
+          "content_hash": "bc5485cbace6846a9622841458ab911fcc1cda4f490a6cc962b6b9a3bc086f7f",
+          "track": "ANCHOR",
+          "namespace": "mojmap",
+          "media": "text",
+          "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+          "profile_id": "3161cd7cd84ba1add48de08b2318d1a10ad0681dc1fbc1f981ffd7156a7c20c0",
+          "revision": "7f68ac02291fde986119a3f5cab85436bed5c350",
+          "lines": [
+            52,
+            79
+          ],
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/DependencyResolver.java#L52-L79"
+        }
+      ],
+      "remaining": "See FAILURE-REPAIR-HISTORY; no current runtime reproduction",
+      "facet_state": "MAPPED",
+      "runtime": "NOT_RUN",
+      "canonical_promotion": false
+    },
+    {
+      "id": "BH05",
+      "subsystem": "transformer extension / portability",
+      "source_refs": [
+        "frontier-plugin-docs"
+      ],
+      "hint": "Pinned FRONTIER documentation offers a transformer plugin extension surface",
+      "terms": [
+        "TransformerPlugin",
+        "PluginManager"
+      ],
+      "track": "FRONTIER",
+      "finding": "Pinned FRONTIER has a transformer subproject and ServiceLoader-based plugin manager; registration gathers patches and jar transformers. The ANCHOR source inventory has no same-named TransformerPlugin API. This does not prove all extension mechanisms absent at ANCHOR.",
+      "basis": "DIRECT_OBSERVATION_OF_SOURCE",
+      "locators": [
+        {
+          "path": "settings.gradle.kts",
+          "document_id": "52d9c8a6940d5b737faecead427f3f9708d50a57551a054f4d8e2b5f57c62c47",
+          "content_hash": "8e0969acec4c5639eef6cb6983dcf0c94fdf1c269273de450832dc7635093f69",
+          "track": "FRONTIER",
+          "namespace": "unknown",
+          "media": "text",
+          "index_snapshot_id": "27882ce6d3a03ec5fac8cdfe8533824c6fe6c120c13a0ed82efae73e356dd8a0",
+          "profile_id": "b6e8959ed87e41de945338b53b1b9e2a4040505238d2af0c5862779ee39e49b9",
+          "revision": "c84a96a3c04aa4c5253032c338434de5329be08a",
+          "lines": [
+            14,
+            17
+          ],
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/settings.gradle.kts#L14-L17"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/plugin/PluginManager.java",
+          "document_id": "4787cd495a46393afa7680bfba73f52ec557a87cd8ccd21d654c11259eec35f6",
+          "content_hash": "2304c9b7ea7f48d196a81496555053c7cffcd080cde15a5c4f322dc7238961d1",
+          "track": "FRONTIER",
+          "namespace": "unknown",
+          "media": "text",
+          "index_snapshot_id": "27882ce6d3a03ec5fac8cdfe8533824c6fe6c120c13a0ed82efae73e356dd8a0",
+          "profile_id": "b6e8959ed87e41de945338b53b1b9e2a4040505238d2af0c5862779ee39e49b9",
+          "revision": "c84a96a3c04aa4c5253032c338434de5329be08a",
+          "lines": [
+            35,
+            79
+          ],
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/plugin/PluginManager.java#L35-L79"
+        }
+      ],
+      "remaining": "Inspect plugin ordering, resource visibility, adapter APIs and loader lifecycle before designing a Forge backport",
+      "facet_state": "MAPPED",
+      "runtime": "NOT_RUN",
+      "canonical_promotion": false
+    }
+  ],
+  "conflicts_and_unavailable": [
+    "Current docs and ANCHOR differ on enableMixinSafeguard; retain both source versions",
+    "Community compatibility tables and contradictory version/config reports are discovery hints, not truth by majority",
+    "Video content and precise timestamps unavailable through the read path",
+    "Feature map is navigation only; full-tree inventory remains the analysis universe"
+  ]
+}
