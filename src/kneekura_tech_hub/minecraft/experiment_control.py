@@ -15,6 +15,7 @@ import time
 from .asset_contract import decode_json
 from .experiment_adapter import _directory, _exclusive, _file, _FIELDS
 from .experiment_bridge import _read_bounded, load_experiment
+from .experiment_contract import validate_experiment_request
 from .process import run_process
 from .storage import ContractError, IntegrityError, Store, canonical, key_for, valid_hash
 
@@ -24,10 +25,14 @@ MODULES = (
     'debug-workspace/bridge/json.mjs', 'debug-workspace/bridge/materials.mjs',
     'debug-workspace/bridge/owner-action-adapter.mjs', 'debug-workspace/bridge/owner-control-cli.mjs',
     'debug-workspace/bridge/owner-grant.mjs', 'debug-workspace/bridge/owner-prelaunch.mjs',
+    'debug-workspace/bridge/owner-trigger-config.mjs', 'debug-workspace/bridge/owner-trigger-source.mjs',
     'debug-workspace/bridge/registration.mjs', 'debug-workspace/bridge/result-export-source.mjs',
     'debug-workspace/bridge/result-export.mjs', 'debug-workspace/bridge/selected-action.mjs',
-    'debug-workspace/evidence/ring-buffer.mjs', 'debug-workspace/evidence/schema.mjs',
+    'debug-workspace/evidence/broker.mjs', 'debug-workspace/evidence/capture.mjs',
+    'debug-workspace/evidence/ingest.mjs', 'debug-workspace/evidence/ring-buffer.mjs',
+    'debug-workspace/evidence/runtime.mjs', 'debug-workspace/evidence/schema.mjs',
     'debug-workspace/evidence/store.mjs', 'debug-workspace/evidence/visual-capture.mjs',
+    'debug-workspace/evidence/trigger-capture.mjs', 'debug-workspace/evidence/watchpoints.mjs',
     'debug-workspace/evidence/visual-packet.mjs', 'debug-workspace/evidence/visual-request-contract.mjs',
     'simlab/golden/png.mjs')
 _ID_FIELDS = {'debugSessionId', 'runId', 'runSnapshotId', 'processEpoch', 'experimentId', 'requestHash'}
@@ -53,7 +58,29 @@ def _timeout(registry):
     return value
 
 
-def _registry(value, *, deadline=None):
+def _trigger_config(value, request):
+    fields = {'enabled', 'triggerKinds', 'offsetsMs', 'toleranceMs', 'cooldownMs',
+              'maxWindows', 'captureBudget', 'timeoutMs', 'captureIndices'}
+    if (not isinstance(value, dict) or set(value) != fields or value['enabled'] is not True
+            or value['triggerKinds'] != ['ARENA_EXIT'] or request['visual_rig']['mode'] != 'cardinal-4-snapshot-v1'):
+        raise ContractError('Exact selected owner trigger configuration required')
+    offsets = value['offsetsMs']; slots = value['captureIndices']
+    if (not isinstance(offsets, list) or not 1 <= len(offsets) <= 21
+            or any(type(n) is not int or not -10000 <= n <= 10000 for n in offsets)
+            or any(b-a < 250 for a, b in zip(offsets, offsets[1:]))):
+        raise ContractError('Bounded sorted trigger sample offsets required')
+    bounds = {'toleranceMs':(0,250), 'cooldownMs':(1000,60000), 'maxWindows':(1,8),
+              'captureBudget':(1,4), 'timeoutMs':(max(1,*offsets),min(20000,request['budgets']['time_budget_ms']))}
+    if any(type(value[k]) is not int or not lo <= value[k] <= hi for k,(lo,hi) in bounds.items()):
+        raise ContractError('Trigger bounds exceed the retained request')
+    if (not isinstance(slots, list) or len(slots) != value['captureBudget']
+            or any(type(n) is not int or not 0 <= n < request['budgets']['max_captures']//4 for n in slots)
+            or len(set(slots)) != len(slots)):
+        raise ContractError('Unique declared trigger capture slots required')
+    return value
+
+
+def _registry(value, *, deadline=None, require_triggers=False):
     if (not isinstance(value, dict) or set(value) != _FIELDS or type(value['schema_version']) is not int
             or value['schema_version'] != 1 or value['enabled'] is not True or value['backend'] != BACKEND):
         raise ContractError('Separate enabled scoped-control registry required')
@@ -90,7 +117,7 @@ def _registry(value, *, deadline=None):
         raise ContractError('Private export transport overlaps the sealed run')
     envelope = decode_json(_file(run_dir/'control/owner-envelope.json', 128*1024,
         expected=run['ownerEnvelopeHash'], deadline=deadline), max_bytes=128*1024)
-    if (not isinstance(envelope, dict) or set(envelope) != _ENVELOPE_FIELDS
+    if (not isinstance(envelope, dict) or set(envelope) not in (_ENVELOPE_FIELDS, _ENVELOPE_FIELDS | {'triggerConfigHash'})
             or type(envelope['schemaVersion']) is not int or envelope['schemaVersion'] != 1
             or envelope['controlMode'] != 'BOUNDED_DIAGNOSTIC_CONTROL'
             or type(envelope['processEpoch']) is not int):
@@ -100,6 +127,16 @@ def _registry(value, *, deadline=None):
     for name in ('requestHash', 'grantHash', 'materialDescriptorHash', 'worldRegistrationHash'): valid_hash(envelope[name])
     for name in ('debugSessionId', 'runId', 'runSnapshotId', 'processEpoch', 'requestHash'):
         if envelope[name] != identity[name]: raise IntegrityError('Owner envelope identity mismatch')
+    if 'triggerConfigHash' in envelope:
+        valid_hash(envelope['triggerConfigHash'])
+        config = decode_json(_file(run_dir/'control/owner-trigger-config.json', 16384,
+            expected=envelope['triggerConfigHash'], deadline=deadline), max_bytes=16384)
+        request = validate_experiment_request(decode_json(_file(run_dir/'control/owner-experiment-request.json', 128*1024,
+            expected=identity['requestHash'], deadline=deadline), max_bytes=128*1024))
+        if request['experiment_id'] != identity['experimentId']: raise IntegrityError('Trigger request identity mismatch')
+        _trigger_config(config, request)
+    elif require_triggers:
+        raise ContractError('Explicit sealed owner trigger configuration required')
     return root, owner
 
 
@@ -118,7 +155,7 @@ def _command(value, request=None):
     if not isinstance(value, dict): raise ContractError('Fixed scoped-control command required')
     operation = value.get('operation')
     extra = {'inspect_owner':set(), 'submit_action':{'selectedActionId'}, 'inspect_action':{'selectedActionId'},
-        'request_capture':{'captureIndex'}, 'request_cleanup':set(), 'inspect_cleanup':set(),
+        'request_capture':{'captureIndex'}, 'request_cleanup':set(), 'inspect_cleanup':set(), 'watch_triggers':set(),
         'export_result':{'observationIds', 'timelineObservationIds', 'visualPacketHash'}}
     if (not isinstance(operation, str) or operation not in extra or set(value) != {'schemaVersion', 'operation', 'requestHash'} | extra[operation]
             or type(value['schemaVersion']) is not int or value['schemaVersion'] != 1):
@@ -178,6 +215,14 @@ def _response(value, command, envelope_hash=None):
                 or status == 'NEVER_SEEN' and value['evidenceHashes']
                 or recorded in ('APPLIED', 'VERIFIED', 'PARTIAL_APPLY') and not value['evidenceHashes']):
             raise IntegrityError('Contradictory or unbacked journal summary')
+    elif op == 'watch_triggers':
+        fields.add('captureWindowIds')
+        windows = value.get('captureWindowIds')
+        if (value.get('status') not in ('WINDOWS_FINISHED', 'OWNER_WATCH_DEADLINE', 'OWNER_NOT_ACTIVE')
+                or not isinstance(windows, list) or len(windows) > 8):
+            raise IntegrityError('Invalid bounded trigger watch summary')
+        for window in windows: _id(window)
+        if len(set(windows)) != len(windows): raise IntegrityError('Duplicate trigger window identity')
     else:
         fields.add('manifestHash'); valid_hash(value.get('manifestHash'))
         if value['status'] != 'EXPORTED': raise IntegrityError('Invalid export response')
@@ -189,6 +234,7 @@ def _next(command, status):
     return {'inspect_owner':'experiment.inspect_owner', 'submit_action':'experiment.inspect_action',
         'inspect_action':'experiment.inspect_action', 'request_capture':'experiment.inspect_owner',
         'request_cleanup':'experiment.inspect_cleanup', 'inspect_cleanup':'experiment.inspect_cleanup',
+        'watch_triggers':'experiment.inspect_owner',
         'export_result':'experiment.import_export' if status == 'EXPORTED' else 'experiment.inspect_owner'}[command['operation']]
 
 
@@ -207,21 +253,28 @@ def _retain(store, record):
 
 
 def _invoke(store, registry, command):
-    deadline = time.monotonic() + _timeout(registry)
+    ordinary_timeout = _timeout(registry)
+    deadline = time.monotonic() + ordinary_timeout
     request = load_experiment(store, command['requestHash']); _command(command, request)
-    root, owner = _registry(registry, deadline=deadline)
+    watching = command['operation'] == 'watch_triggers'
+    root, owner = _registry(registry, deadline=deadline, require_triggers=watching)
     if (owner['run']['identity']['requestHash'] != command['requestHash']
             or owner['run']['identity']['experimentId'] != request['experiment_id']):
         raise IntegrityError('Registered owner is for another experiment')
     command_file = _directory(owner['inputRoot']) / ('control-' + key_for(command) + '.json')
     _exclusive(command_file, canonical(command))
-    _registry(registry, deadline=deadline)
+    _registry(registry, deadline=deadline, require_triggers=watching)
     remaining = deadline - time.monotonic()
     if remaining <= 0: raise ContractError('Scoped-control deadline exhausted before invocation')
     # Persist uncertainty first so interruption after process start cannot erase
     # the possible submission. This is an immutable receipt, not a replay ledger.
     pending = _retain(store, _record(registry, command))
     result = {}; response = None
+    if watching:
+        # Only this fixed explicit operation may observe for the retained budget.
+        # LAB enforces the original nonrenewable owner lease and finite slots.
+        deadline += request['budgets']['time_budget_ms'] / 1000
+        remaining = deadline - time.monotonic()
     try:
         result = run_process([registry['executable'], str(root/'debug-workspace/bridge/owner-control-cli.mjs'),
             '--owner', registry['owner_file'], '--request', str(command_file)], root,
@@ -262,6 +315,11 @@ def inspect_cleanup(store: Store, registry: dict, request_hash: str):
     return _invoke(store, registry, {'schemaVersion':1, 'operation':'inspect_cleanup', 'requestHash':valid_hash(request_hash)})
 
 
+def watch_triggers(store: Store, registry: dict, request_hash: str):
+    """Explicit foreground observation may publish only sealed trigger capture slots."""
+    return _invoke(store, registry, {'schemaVersion':1, 'operation':'watch_triggers', 'requestHash':valid_hash(request_hash)})
+
+
 def export_result(store: Store, registry: dict, request_hash: str, *, observation_ids=(), timeline_ids=(), visual_packet_hash=None):
     if any(not isinstance(rows, (tuple, list)) or len(rows) > 32 for rows in (observation_ids, timeline_ids)):
         raise ContractError('Explicit bounded observation lists required')
@@ -292,7 +350,8 @@ def inspect_receipt(store: Store, receipt_hash: str, *, registry=None):
         raise IntegrityError('Missing reported control outcome')
     # Even a VERIFIED cleanup only covers the owner's supported reset classes;
     # it cannot reconcile the wider experiment or clear earlier unsafe outcomes.
-    uncertain = (record['command']['operation'] in ('request_cleanup', 'inspect_cleanup')
+    # A stopped trigger watcher likewise proves no capture completion.
+    uncertain = (record['command']['operation'] in ('request_cleanup', 'inspect_cleanup', 'watch_triggers')
                  or record['status'] in ('OUTCOME_UNKNOWN', 'PARTIAL_APPLY', 'REQUESTED', 'ALREADY_RECORDED', 'FAILED')
                  or response is not None and response.get('recordedStatus') in ('ACCEPTED', 'APPLIED'))
     return {'schema_version':1, 'receipt_hash':receipt_hash, 'request_hash':record['request_hash'],

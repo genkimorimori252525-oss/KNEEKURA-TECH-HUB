@@ -20,7 +20,7 @@ def add_commands(commands):
         if name == 'reconcile-unknown': p.add_argument('--action-id', required=True)
     sub.add_parser('inspect-control').add_argument('--registry', required=True)
     sub.add_parser('inspect-control-receipt').add_argument('--receipt-hash', required=True)
-    for name in ('inspect-owner', 'submit-action', 'request-capture', 'inspect-action', 'request-cleanup', 'inspect-cleanup', 'export-result', 'import-export'):
+    for name in ('inspect-owner', 'submit-action', 'request-capture', 'inspect-action', 'request-cleanup', 'inspect-cleanup', 'watch-triggers', 'export-result', 'import-export'):
         p = sub.add_parser(name); p.add_argument('--registry', required=True); p.add_argument('--request-hash', required=True)
         if name in ('submit-action', 'inspect-action'): p.add_argument('--action-id', required=True)
         if name == 'request-capture': p.add_argument('--capture-index', required=True, type=int)
@@ -63,7 +63,7 @@ def dispatch(args, store, read_json):
         if args.action == 'inspect-control-receipt':
             from .experiment_control import inspect_receipt
             return inspect_receipt(store, args.receipt_hash)
-        if args.action in ('inspect-control', 'inspect-owner', 'submit-action', 'request-capture', 'inspect-action', 'request-cleanup', 'inspect-cleanup', 'export-result', 'import-export'):
+        if args.action in ('inspect-control', 'inspect-owner', 'submit-action', 'request-capture', 'inspect-action', 'request-cleanup', 'inspect-cleanup', 'watch-triggers', 'export-result', 'import-export'):
             from . import experiment_control
             registry = experiment_adapter.read_registry_file(args.registry)
             if args.action == 'inspect-control': return experiment_control.inspect_registry(registry)
@@ -73,6 +73,7 @@ def dispatch(args, store, read_json):
             if args.action == 'inspect-action': return experiment_control.inspect_action(store, registry, args.request_hash, args.action_id)
             if args.action == 'request-cleanup': return experiment_control.request_cleanup(store, registry, args.request_hash)
             if args.action == 'inspect-cleanup': return experiment_control.inspect_cleanup(store, registry, args.request_hash)
+            if args.action == 'watch-triggers': return experiment_control.watch_triggers(store, registry, args.request_hash)
             if args.action == 'export-result':
                 return experiment_control.export_result(store, registry, args.request_hash, observation_ids=args.observation_id,
                     timeline_ids=args.timeline_observation_id, visual_packet_hash=args.visual_packet_hash)

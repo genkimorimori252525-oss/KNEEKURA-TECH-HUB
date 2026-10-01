@@ -7,7 +7,7 @@ permission through an ExperimentRequest. Source tests do not establish live
 repair acceptance.
 
 The new registry uses the same exact outer fields as the legacy adapter. Its
-`module_hashes` keys are the 19 fixed repository-relative paths in
+`module_hashes` keys are the 27 fixed repository-relative paths in
 `experiment_control.MODULES`, including the owner entry point and every imported
 bridge/evidence/PNG module. The executable, complete source closure, private owner
 configuration, and owner envelope are hash-checked on every invocation. A declared
@@ -50,6 +50,7 @@ kneekura-minecraft experiment request-capture --registry CONTROL.json --request-
 kneekura-minecraft experiment inspect-action --registry CONTROL.json --request-hash HASH --action-id ID
 kneekura-minecraft experiment request-cleanup --registry CONTROL.json --request-hash HASH
 kneekura-minecraft experiment inspect-cleanup --registry CONTROL.json --request-hash HASH
+kneekura-minecraft experiment watch-triggers --registry CONTROL.json --request-hash HASH
 kneekura-minecraft experiment export-result --registry CONTROL.json --request-hash HASH --observation-id ID
 kneekura-minecraft experiment import-export --registry CONTROL.json --request-hash HASH --manifest-hash HASH
 kneekura-minecraft experiment inspect-control-receipt --receipt-hash HASH
@@ -75,6 +76,33 @@ None of these reports proves the reset was applied or Arena cleanup confirmed.
 Even a `VERIFIED` cleanup journal only covers supported bounded reset classes;
 an explicitly supplied cleanup receipt continues to recommend read-only
 reconciliation and cannot clear uncertainty about earlier actions.
+
+## Explicit finite trigger watch
+
+The separately pinned owner envelope may add `triggerConfigHash` for immutable
+`control/owner-trigger-config.json`. Existing envelopes stay valid. The config
+selects only `ARENA_EXIT`, sorted sample offsets from -10,000 to 10,000 ms,
+250 ms minimum spacing, at most 21 slots, at most eight windows and one to four
+reserved Cardinal-4 capture sets. The config's timeout is at most 20 seconds
+and stays within the retained request budget. Reserved capture indices cannot
+expand that request's image budget. TECH checks both the config and the original
+hash-pinned request before dispatch.
+
+`watch-triggers` has no raw timing, event, executable or callback arguments. It
+explicitly runs a finite foreground watch on LAB's existing EvidenceRuntime;
+TaskContext never starts or recommends it automatically. Registry pinning and
+ordinary commands remain bounded by `timeout_seconds <= 10`. Only the watch
+process can use the retained request time budget plus that ordinary allowance,
+with a maximum transport deadline of 130 seconds. LAB also enforces the original
+nonrenewable owner lease. A run-scoped watch reservation prevents rearming from
+a new process or TECH Store; uncertainty never causes an automatic retry.
+
+The response contains a stop reason (`WINDOWS_FINISHED`, `OWNER_WATCH_DEADLINE`
+or `OWNER_NOT_ACTIVE`) and at most eight window IDs. These describe the observer,
+not completed captures or gameplay acceptance. Every watch receipt retains
+read-only `experiment.inspect_owner` reconciliation and `NOT_ESTABLISHED`
+runtime attestation. The native gate validates event identity, reserved slots
+and deadlines before any temporary camera effect.
 
 ## Private result import
 
@@ -123,4 +151,4 @@ The source phase does not close the saved design's real-runtime acceptance:
 
 X4/X6 final independent review remains unperformed after its review continuation was blocked; author tests and source compilation are reported separately. X8 synchronized multipass remains `DEFERRED`: it may only be selected after a concrete defect shows the sequential rig is insufficient.
 
-For the code-first publication, LAB commits use the standard `[skip ci]` marker to honor the instruction to defer real-device verification. Existing LAB workflows and runner settings are untouched. TECH's hosted source workflow checks out the exact published LAB commit and pinned MOD source, runs source contracts and paired fixtures, and compiles the real Forge source without launching Minecraft. Skipped Windows checks are not counted as successful checks.
+For the code-first publication, LAB commits use the standard `[skip ci]` marker to honor the instruction to defer real-device verification. Existing LAB workflows and runner settings are untouched. TECH's hosted source workflow is configured to select pinned source, run source contracts and paired fixtures, and compile Forge source without launching Minecraft. The current hosted paired gate stopped before source tests and remains uncompleted. Local source results are reported separately; skipped Windows checks are not counted as successful checks.
