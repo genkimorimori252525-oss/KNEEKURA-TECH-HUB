@@ -14,6 +14,8 @@ from .storage import ContractError, Store, capture_profile, valid_hash
 
 
 def add_commands(commands, profile):
+    from .experiment_cli import add_commands as add_experiment_commands
+    add_experiment_commands(commands)
     p = profile.add_parser('discover')
     p.add_argument('--workspace', required=True)
     p.add_argument('--physical-side', choices=('client', 'server'), default='server')
@@ -124,6 +126,9 @@ def _read_task_file(reader, path, label):
 
 
 def dispatch(args, store: Store, read_json, parse_json):
+    if args.command == 'experiment':
+        from .experiment_cli import dispatch as experiment_dispatch
+        return experiment_dispatch(args, store, read_json)
     if args.command == 'task' and args.action in ('prepare', 'capabilities'):
         result = task_context.prepare_task_context(store, _read_task_file(read_json, args.request, 'request'),
             index_id=args.index,
@@ -244,7 +249,7 @@ def dispatch(args, store: Store, read_json, parse_json):
         return {'status': 'OK', 'adapter_version': runtime.ADAPTER_VERSION,
                 'capability_scope': 'STATIC_SURFACE',
                 'operations': ['profile', 'search', 'inspect', 'mapping', 'interventions', 'relations',
-                               'context', 'knowledge', 'artifact', 'validate', 'world', 'client-directory', 'contract', 'session', 'observe', 'observe-pair', 'input'],
+                               'context', 'knowledge', 'artifact', 'validate', 'world', 'client-directory', 'contract', 'session', 'observe', 'observe-pair', 'input', 'experiment'],
                 'execution_policy': 'EXPLICIT_REGISTERED_PROVIDERS_ONLY', 'ci_used': False,
                 'runtime_status': 'NOT_PROBED', 'core_status': 'OPTIONAL_EXISTING_CORE',
                 'note': 'Command availability is not evidence of installed tools or successful Forge integration'}

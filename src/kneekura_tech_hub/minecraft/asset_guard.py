@@ -106,7 +106,7 @@ GUARD_FACTORY = r'''(function createKneekuraAssetGuard(input, host) {
     const ak=Object.keys(a), bk=Object.keys(b);
     return ak.length===bk.length && ak.every(k=>own(b,k) && sameJSON(a[k],b[k]));
   }
-  function stateCheck(empty=false, expectedCubes=cubeCount, expectedTexture=textureUUID, configured=true) {
+  function stateCheck(empty=false, expectedCubes=cubeCount, expectedTexture=textureUUID, configured=true, expectedDisplay=projectPolicy.display) {
     const s = host.state();
     if (!s || !Array.isArray(s.projects) || !Array.isArray(s.plugins) || !Array.isArray(s.textures) ||
         !Number.isInteger(s.cubes) || s.plugins.length !== 1 || s.plugins[0] !== 'blockbench_mcp' ||
@@ -118,7 +118,7 @@ GUARD_FACTORY = r'''(function createKneekuraAssetGuard(input, host) {
           s.active.uuid !== projectUUID || s.format !== 'java_block' || s.cubes !== expectedCubes ||
           s.textures.length !== (expectedTexture ? 1 : 0)) poison();
       if (configured && (s.java_block_version !== projectPolicy.java_block_version ||
-          !sameJSON(s.display,projectPolicy.display))) poison();
+          !sameJSON(s.display,expectedDisplay))) poison();
       if (expectedTexture) {
         const t = s.textures[0];
         if (t.uuid !== expectedTexture || t.ready !== true || t.width !== config.texture_size[0] ||
@@ -132,6 +132,127 @@ GUARD_FACTORY = r'''(function createKneekuraAssetGuard(input, host) {
         v.some(x => typeof x !== 'number' || !Number.isFinite(x) || x < lo || x > hi)) fail('INVALID_VECTOR');
     return v.slice();
   }
+  const repairOps = ['part_edit','uv_edit','texture_edit','display_edit'];
+  let sealedSnapshot=null, sealedHash=null, generation=0, ownedTexture=null;
+  const ownedParts=[];
+  const stable = v => v === null || typeof v !== 'object' ? JSON.stringify(v) :
+    Array.isArray(v) ? '['+v.map(stable).join(',')+']' :
+    '{'+Object.keys(v).sort().map(k=>JSON.stringify(k)+':'+stable(v[k])).join(',')+'}';
+  const decodePixels = v => Uint8Array.from(atob(v), c=>c.charCodeAt(0));
+  function encodePixels(v) { let raw=''; for (const n of v) raw+=String.fromCharCode(n); return btoa(raw); }
+  function ownedCheck() {
+    if (typeof host.elementIdentity !== 'function' || typeof host.textureIdentity !== 'function' ||
+        !ownedTexture || host.textureIdentity(textureUUID) !== ownedTexture ||
+        ownedParts.length !== cubeCount) poison();
+    for (const p of ownedParts) {
+      if (!p.object || host.elementIdentity(p.native_uuid) !== p.object ||
+          p.object.uuid !== p.native_uuid || p.object.name !== p.part_id) poison();
+    }
+  }
+  function snapshotValue(expectedDisplay=projectPolicy.display, version=generation) {
+    stateCheck(false,cubeCount,textureUUID,true,expectedDisplay); ownedCheck();
+    if (typeof host.snapshot !== 'function') poison();
+    const value=host.snapshot();
+    if (!value || typeof value !== 'object' || value.then || !value.native || !value.model ||
+        typeof value.rgba !== 'string') poison();
+    const snapshot=detached({schema_version:1,request_hash:config.request_hash,project_uuid:projectUUID,
+      generation:version,parts:ownedParts.map(p=>({part_id:p.part_id,native_uuid:p.native_uuid})),
+      texture:{texture_id:'atlas',native_uuid:textureUUID,width:config.texture_size[0],
+        height:config.texture_size[1],rgba:value.rgba},native:value.native,model:value.model});
+    if (decodePixels(snapshot.texture.rgba).length !== config.texture_size[0]*config.texture_size[1]*4 ||
+        !Array.isArray(snapshot.native.elements) || !Array.isArray(snapshot.model.elements) ||
+        snapshot.native.elements.length !== cubeCount || snapshot.model.elements.length !== cubeCount ||
+        !sameJSON(snapshot.native.outliner,ownedParts.map(p=>p.native_uuid))) poison();
+    for (let i=0;i<ownedParts.length;i++) {
+      const p=ownedParts[i],n=snapshot.native.elements[i],m=snapshot.model.elements[i];
+      if (!n || !m || n.uuid!==p.native_uuid || n.name!==p.part_id || m.name!==p.part_id || n.type!=='cube') poison();
+    }
+    if (!Array.isArray(snapshot.native.textures) || snapshot.native.textures.length!==1 ||
+        snapshot.native.textures[0].uuid!==textureUUID) poison();
+    if (stable(snapshot).length>524288) fail('SNAPSHOT_TOO_LARGE');
+    return snapshot;
+  }
+  function assertSealed() {
+    if (sealedSnapshot && !sameJSON(snapshotValue(),sealedSnapshot)) poison();
+  }
+  async function sealSnapshot(active=()=>{}) {
+    active();
+    assertSealed();
+    const value=snapshotValue(),content=stable(value);
+    if (typeof host.hash !== 'function') poison();
+    const hash=await host.hash(content);
+    active();
+    if (typeof hash!=='string' || !/^[a-f0-9]{64}$/.test(hash) || !sameJSON(snapshotValue(),value)) poison();
+    if (sealedHash && hash!==sealedHash) poison();
+    active();
+    sealedSnapshot=value;sealedHash=hash;
+    return {kind:'snapshot',generation,snapshot_hash:hash,encoding:'utf8',content};
+  }
+  function repairArguments(operation,args) {
+    keys(args,['schema_version','request_hash','project_uuid','expected_generation','expected_snapshot_hash',
+      'operation','target','expected','value']);
+    if (!sealedSnapshot || generation>=32 || args.schema_version!==1 || args.operation!==operation ||
+        args.request_hash!==config.request_hash || args.project_uuid!==projectUUID ||
+        !Number.isInteger(args.expected_generation) || args.expected_generation!==generation ||
+        args.expected_snapshot_hash!==sealedHash) fail('STALE_MUTATION');
+    assertSealed();
+    const expected=detached(sealedSnapshot);expected.generation=generation+1;
+    const target=args.target,value=args.value;let old,action,params,region=null;
+    const partIndex=id=>{const found=ownedParts.map((p,i)=>p.part_id===id?i:-1).filter(i=>i>=0);
+      if(found.length!==1)fail('PART_NOT_OWNED');return found[0];};
+    const scalar=(v,lo,hi)=>numberVector([v],1,lo,hi)[0];
+    if(operation==='part_edit') {
+      keys(target,['part_id','property','axis']);
+      if(!['from','to'].includes(target.property)||!Number.isInteger(target.axis)||target.axis<0||target.axis>2)fail('INVALID_PART_EDIT');
+      const i=partIndex(target.part_id),p=target.property,a=target.axis;scalar(value,-16,32);
+      old=expected.native.elements[i][p][a];
+      expected.native.elements[i][p][a]=value;expected.model.elements[i][p][a]=value;
+      if(expected.native.elements[i].from.some((v,j)=>v>=expected.native.elements[i].to[j]))fail('DEGENERATE_CUBE');
+      action='edit_element';params={element:ownedParts[i].native_uuid,[p]:expected.native.elements[i][p].slice()};
+    } else if(operation==='uv_edit') {
+      keys(target,['part_id','face','texture_id']);
+      if(target.texture_id!=='atlas'||!['north','south','east','west','up','down'].includes(target.face))fail('INVALID_FACE_EDIT');
+      const i=partIndex(target.part_id),f=target.face,uv=numberVector(value,4,0,256);
+      if(uv[0]>=uv[2]||uv[1]>=uv[3]||uv[2]>config.texture_size[0]||uv[3]>config.texture_size[1])fail('INVALID_UV');
+      old=expected.native.elements[i].faces[f].uv.slice();
+      expected.native.elements[i].faces[f].uv=uv;
+      expected.model.elements[i].faces[f].uv=uv.map((n,j)=>n*16/config.texture_size[j%2]);
+      action='set_cube_uv';params={cube:ownedParts[i].native_uuid,faces:{[f]:{uv}}};
+    } else if(operation==='texture_edit') {
+      keys(target,['texture_id','rect']);
+      const rect=numberVector(target.rect,4,0,256);
+      if(target.texture_id!=='atlas'||rect.some(n=>!Number.isInteger(n))||rect[0]>=rect[2]||rect[1]>=rect[3]||
+        rect[2]>config.texture_size[0]||rect[3]>config.texture_size[1]||!config.palette.includes(value)||
+        typeof args.expected!=='string'||!/^[a-f0-9]{64}$/.test(args.expected))fail('INVALID_TEXTURE_EDIT');
+      const pixels=decodePixels(expected.texture.rgba),w=config.texture_size[0],oldBytes=[];
+      const color=[parseInt(value.slice(1,3),16),parseInt(value.slice(3,5),16),parseInt(value.slice(5,7),16),255];
+      let changed=false;
+      for(let y=rect[1];y<rect[3];y++)for(let x=rect[0];x<rect[2];x++)for(let c=0;c<4;c++){
+        const i=(y*w+x)*4+c;oldBytes.push(pixels[i]);changed=changed||pixels[i]!==color[c];pixels[i]=color[c];
+      }
+      if(!changed)fail('NO_OP_MUTATION');
+      expected.texture.rgba=encodePixels(pixels);region=new Uint8Array(oldBytes);
+      action='paint_texture';params={texture:textureUUID,ops:[{type:'rect',x:rect[0],y:rect[1],
+        width:rect[2]-rect[0],height:rect[3]-rect[1],color:value,fill:true}]};
+    } else {
+      keys(target,['slot','property','axis']);
+      if(!own(expected.native.display,target.slot)||!['rotation','translation','scale'].includes(target.property)||
+        !Number.isInteger(target.axis)||target.axis<0||target.axis>2)fail('INVALID_DISPLAY_EDIT');
+      const p=target.property,limit=p==='scale'?4:p==='rotation'?180:80;
+      scalar(value,-limit,limit);if(p==='scale'&&value<=0)fail('INVALID_DISPLAY_EDIT');
+      const defaults=p==='scale'?[1,1,1]:[0,0,0];
+      const vector=(expected.native.display[target.slot][p]||defaults).slice();old=vector[target.axis];
+      vector[target.axis]=p==='rotation'?(value+180*15)%360-180:value;
+      for(const kind of ['native','model']){
+        if(sameJSON(vector,defaults))delete expected[kind].display[target.slot][p];
+        else expected[kind].display[target.slot][p]=vector.slice();
+      }
+      action='__display';params={slot:target.slot,property:p,value:vector};
+    }
+    if(region===null && (!sameJSON(args.expected,old)||sameJSON(value,old)))fail('EXPECTED_VALUE_MISMATCH');
+    return [action,params,{expected,region,oldHash:args.expected}];
+  }
+
   function argumentsFor(operation, args) {
     if (operation === 'begin') {
       keys(args, []);
@@ -140,6 +261,9 @@ GUARD_FACTORY = r'''(function createKneekuraAssetGuard(input, host) {
         texture_width:config.texture_size[0], texture_height:config.texture_size[1]}];
     }
     if (phase !== 'OPEN') fail('SESSION_NOT_OPEN');
+    if (operation === 'snapshot') { keys(args,[]); if (!textureUUID || cubeCount<1) fail('CAPTURE_NOT_READY'); return ['__snapshot',{}]; }
+    if (repairOps.includes(operation)) return repairArguments(operation,args);
+    if (sealedSnapshot && ['texture','texture_region','cube'].includes(operation)) fail('GENERATION_SEALED');
     if (operation === 'texture') {
       keys(args, ['fill']);
       if (textureUUID || cubeCount || !config.palette.includes(args.fill)) fail('INVALID_TEXTURE');
@@ -198,7 +322,8 @@ GUARD_FACTORY = r'''(function createKneekuraAssetGuard(input, host) {
       if (value.kind !== 'texture' || value.mime !== 'image/png' || value.encoding !== 'base64') bad();
       boundedBase64(value.content);
     } else if (expected.kind === 'view') {
-      keys(value, ['kind','mime','encoding','view','looking_at','model_right_on','note','content']);
+      keys(value, ['kind','mime','encoding','view','looking_at','model_right_on','note','content',...(sealedSnapshot?['frame','generation']:[])]);
+      if(sealedSnapshot&&(!value.frame||typeof value.frame!=='object'||value.generation!==generation))bad();
       if (value.kind !== 'view' || value.mime !== 'image/png' || value.encoding !== 'base64' ||
           value.view !== expected.view) bad();
       for (const k of ['looking_at','model_right_on','note'])
@@ -219,7 +344,7 @@ GUARD_FACTORY = r'''(function createKneekuraAssetGuard(input, host) {
     if (action === 'kneekura_asset_status') {
       keys(p, ['token','request_hash']);
       if (phase === 'OPEN' && !busy) {
-        try { stateCheck(); } catch(e) { phase='UNKNOWN'; }
+        try { stateCheck(); assertSealed(); } catch(e) { phase='UNKNOWN'; }
       }
       return detached({guard_protocol:1, state:phase, next_sequence:next, project_uuid:projectUUID,
         busy, request_hash:config.request_hash, loaded_revision:'UNATTESTED', last_receipt:last});
@@ -232,8 +357,8 @@ GUARD_FACTORY = r'''(function createKneekuraAssetGuard(input, host) {
     if (p.project_uuid !== projectUUID) fail('PROJECT_ID_MISMATCH');
     const now = host.now();
     if (!Number.isFinite(started) || !Number.isFinite(now) || now - started > 900000 || now < started) poison();
-    const [upstreamAction, args] = argumentsFor(p.operation, p.arguments);
-    try { stateCheck(p.operation === 'begin'); }
+    const [upstreamAction, args, repair] = argumentsFor(p.operation, p.arguments);
+    try { stateCheck(p.operation === 'begin'); assertSealed(); }
     catch(e) { if (phase === 'OPEN') phase = 'UNKNOWN'; throw e; }
     const seq = next++;
     const operation = p.operation;
@@ -241,14 +366,33 @@ GUARD_FACTORY = r'''(function createKneekuraAssetGuard(input, host) {
     last = {seq,operation,completion:'UNKNOWN',verification:gates()};
     let timer;
     try {
-      // A deadline cannot cancel editor-side side effects. Expiration poisons
-      // this whole session; it never unlocks another write or triggers retry.
-      const result = await Promise.race([
-        Promise.resolve(operation === 'capture'
-          ? host.capture(args.kind, {view:args.view})
-          : host.invoke(upstreamAction,args)),
-        new Promise((_,reject) => { timer=setTimeout(() => reject(new Error('deadline')),10000); })
-      ]);
+      // One deadline owns every accepted async step, including hashing. A
+      // timeout cannot cancel a provider; late continuations must not invoke
+      // another mutator, commit a generation or turn UNKNOWN into CONFIRMED.
+      let expired=false;
+      const operationStarted=host.now();
+      const deadline=new Promise((_,reject)=>{
+        timer=setTimeout(()=>{expired=true;phase='UNKNOWN';reject(new Error('deadline'));},10000);
+      });
+      const active=()=>{
+        const current=host.now();
+        if(expired||phase==='UNKNOWN'||!Number.isFinite(current)||current<operationStarted||
+          current-operationStarted>=10000)poison();
+      };
+      const bounded=value=>Promise.race([Promise.resolve(value),deadline]);
+      active();
+      if (repair && repair.region !== null) {
+        const regionHash=await bounded(host.hash(repair.region));
+        active();
+        if (regionHash!==repair.oldHash) fail('EXPECTED_REGION_MISMATCH');
+        assertSealed();
+      }
+      active();
+      const result = await bounded(operation === 'snapshot' ? sealSnapshot(active) : operation === 'capture'
+        ? host.capture(args.kind, sealedSnapshot ? {view:args.view,freeze:true,generation} : {view:args.view})
+        : upstreamAction === '__display' ? host.editDisplay(args.slot,args.property,args.value)
+        : host.invoke(upstreamAction,args));
+      active();
       if (operation === 'begin') {
         const s=host.state();
         project=s.active; projectUUID=project && project.uuid;
@@ -261,14 +405,29 @@ GUARD_FACTORY = r'''(function createKneekuraAssetGuard(input, host) {
       }
       const nextTexture = operation === 'texture' ? result && result.uuid : textureUUID;
       if (operation === 'texture' && (typeof nextTexture !== 'string' || !nextTexture)) poison();
-      stateCheck(false, cubeCount+(operation==='cube'?1:0), nextTexture);
+      stateCheck(false, cubeCount+(operation==='cube'?1:0), nextTexture,true,repair?repair.expected.native.display:projectPolicy.display);
+      if (repair) {
+        const after=snapshotValue(repair.expected.native.display,generation+1);
+        if(operation==='texture_edit')repair.expected.native.textures[0].source=after.native.textures[0].source;
+        if(!sameJSON(after,repair.expected))poison();
+        const hash=await bounded(host.hash(stable(after)));
+        active();
+        if(typeof hash!=='string'||!/^[a-f0-9]{64}$/.test(hash)||!sameJSON(snapshotValue(repair.expected.native.display,generation+1),after))poison();
+        active();
+        generation++;projectPolicy.display=detached(after.native.display);sealedSnapshot=after;sealedHash=hash;
+      } else if (sealedSnapshot) assertSealed();
       if (operation === 'capture') captureResult(args, result);
       const raw = JSON.stringify(result);
-      const responseLimit = operation === 'capture' ? 786432 : 262144;
+      const responseLimit = operation === 'snapshot' ? 1572864 : operation === 'capture' ? 786432 : 262144;
       if (typeof raw !== 'string' || raw.length > responseLimit) poison();
-      if (operation === 'texture') textureUUID=nextTexture;
+      if (operation === 'texture') { textureUUID=nextTexture; if(typeof host.textureIdentity==='function')ownedTexture=host.textureIdentity(textureUUID); }
       if (operation === 'texture_region') regionCount++;
-      if (operation === 'cube') { cubeCount++; names.add(args.name); }
+      if (operation === 'cube') { cubeCount++; names.add(args.name);
+        if(typeof host.elementIdentity==='function'){const id=result&&result.uuid;
+          const object=host.elementIdentity(id);if(!object||object.uuid!==id||object.name!==args.name||ownedParts.some(p=>p.native_uuid===id))poison();
+          ownedParts.push({part_id:args.name,native_uuid:id,object});}
+      }
+      active();
       last = {seq,operation,completion:'CONFIRMED',project_uuid:projectUUID,request_hash:config.request_hash,
         assertion_domain:'asset_editor_operation',verification:gates(),result:JSON.parse(raw)};
       return detached(last);
@@ -285,6 +444,85 @@ GUARD_FACTORY = r'''(function createKneekuraAssetGuard(input, host) {
 # Access reviewed provider APIs and pinned per-project version/display APIs,
 # plus read-only project/plugin inventory. Missing inventory APIs fail closed at runtime.
 HOST_ADAPTER = r'''{
+  elementIdentity: uuid => {
+    if (typeof Cube === 'undefined') return null;
+    const found=Cube.all.filter(c=>c.uuid===uuid);return found.length===1?found[0]:null;
+  },
+  textureIdentity: uuid => {
+    if (typeof Texture === 'undefined') return null;
+    const found=Texture.all.filter(t=>t.uuid===uuid);return found.length===1?found[0]:null;
+  },
+  hash: async value => {
+    const bytes=typeof value==='string'?new TextEncoder().encode(value):value;
+    const hash=await globalThis.crypto.subtle.digest('SHA-256',bytes);
+    return Array.from(new Uint8Array(hash),n=>n.toString(16).padStart(2,'0')).join('');
+  },
+  snapshot: () => {
+    if(typeof Texture==='undefined'||Texture.all.length!==1||!Texture.all[0].ctx||
+      typeof Format==='undefined'||!Format.codec||typeof Codecs==='undefined'||!Codecs.project)
+      throw new Error('Owned snapshot APIs unavailable');
+    const native=Codecs.project.compile({compressed:false,absolute_paths:false,bitmaps:true,raw:true});
+    const model=Format.codec.compile();
+    if((native&&native.then)||(model&&model.then))throw new Error('Snapshot codecs must be synchronous');
+    const t=Texture.all[0],pixels=t.ctx.getImageData(0,0,t.width,t.height).data;
+    let raw='';for(const n of pixels)raw+=String.fromCharCode(n);
+    return {native:typeof native==='string'?JSON.parse(native):native,
+      model:typeof model==='string'?JSON.parse(model):model,rgba:btoa(raw)};
+  },
+  editDisplay: (slot,property,value) => {
+    const owned=Project.display_settings[slot];
+    if(!owned||typeof owned.extend!=='function')throw new Error('Owned display slot unavailable');
+    Undo.initEdit({display_slots:[slot]});owned.extend({[property]:value.slice()});
+    Undo.finishEdit('KNEEKURA: bounded display component');
+    return {slot,transform:owned.export()};
+  },
+  frozenFrames: Object.create(null),
+  fixedView: async function(view,generation) {
+    const preview=Preview.selected;
+    if(!preview||!preview.renderer||!preview.renderer.domElement)throw new Error('Preview unavailable');
+    const saved=this.frozenFrames[view];
+    if(saved){
+      if(typeof preview.setProjectionMode==='function')preview.setProjectionMode(saved.projection==='orthographic');
+      const c=preview.camera;
+      for(const [key,value] of Object.entries(saved.camera_parameters))c[key]=value;
+      c.position.fromArray(saved.position);c.quaternion.fromArray(saved.quaternion);c.up.fromArray(saved.up);
+      preview.controls.target.fromArray(saved.target);c.updateProjectionMatrix();c.updateMatrixWorld(true);
+    }else{
+      if(typeof preview.setProjectionMode==='function')preview.setProjectionMode(false);
+      applyAngleName(preview,view);
+      if(preview.controls&&typeof preview.controls.update==='function')preview.controls.update();
+    }
+    // Preview.render() updates OrbitControls and can apply damping/rounding.
+    // Once frozen, render the exact restored camera directly without another
+    // controls update; the initial baseline is explicitly perspective.
+    if(saved)preview.renderer.render(Canvas.scene,preview.camera);
+    else preview.render();
+    const c=preview.camera,canvas=preview.renderer.domElement;
+    const parameters={near:c.near,far:c.far,zoom:c.zoom};
+    for(const key of (preview.isOrtho?['left','right','top','bottom']:['fov','aspect']))parameters[key]=c[key];
+    const frame={schema_version:1,view,projection:preview.isOrtho?'orthographic':'perspective',
+      position:c.position.toArray(),quaternion:c.quaternion.toArray(),up:c.up.toArray(),
+      target:preview.controls.target.toArray(),projection_matrix:c.projectionMatrix.toArray(),
+      camera_parameters:parameters,viewport:[preview.width,preview.height],canvas:[canvas.width,canvas.height],
+      output:[320,320],device_pixel_ratio:typeof devicePixelRatio==='number'?devicePixelRatio:1,
+      render_mode:typeof Mode!=='undefined'&&Mode.selected?String(Mode.selected.id):'edit',
+      capture_method:'fixed_preview_canvas_v1',render_settings:{
+        shading:typeof settings!=='undefined'&&settings.shading?settings.shading.value:null,
+        tone_mapping:preview.renderer.toneMapping??0,exposure:preview.renderer.toneMappingExposure??1,
+        pixel_ratio:typeof preview.renderer.getPixelRatio==='function'?preview.renderer.getPixelRatio():1,
+        background:typeof Canvas!=='undefined'&&Canvas.scene&&Canvas.scene.background&&
+          typeof Canvas.scene.background.getHexString==='function'?Canvas.scene.background.getHexString():null}};
+    if(!saved)this.frozenFrames[view]=JSON.parse(JSON.stringify(frame));
+    const out=document.createElement('canvas');out.width=320;out.height=320;
+    const ctx=out.getContext('2d');ctx.clearRect(0,0,320,320);
+    const scale=Math.min(320/canvas.width,320/canvas.height),w=canvas.width*scale,h=canvas.height*scale;
+    ctx.drawImage(canvas,(320-w)/2,(320-h)/2,w,h);
+    const data=out.toDataURL('image/png');if(!data.startsWith('data:image/png;base64,'))throw new Error('Frozen capture is not PNG');
+    const info=describeView(view);
+    return {kind:'view',mime:'image/png',encoding:'base64',view,looking_at:String(info.looking_at||''),
+      model_right_on:String(info.model_right_on||''),note:String(info.note||''),
+      frame,generation,content:data.slice('data:image/png;base64,'.length)};
+  },
   now: () => performance.now(),
   state: () => ({
     active: typeof Project === 'undefined' ? null : Project,
@@ -326,7 +564,7 @@ HOST_ADAPTER = r'''{
       return value;
     });
   },
-  capture: async (kind, args) => {
+  capture: async function(kind, args) {
     if (kind === 'model') {
       if (typeof Format === 'undefined' || !Format || !Format.codec || typeof Format.codec.compile !== 'function')
         throw new Error('Current format has no reviewed compile path');
@@ -351,6 +589,7 @@ HOST_ADAPTER = r'''{
         content:data.slice('data:image/png;base64,'.length)};
     }
     if (kind === 'view') {
+      if(args.freeze===true)return this.fixedView(args.view,args.generation);
       const shot = await commands.screenshot({view:args.view,width:320,height:320,annotate:true,stamp:'KNEEKURA evidence'});
       if (!shot || typeof shot.base64 !== 'string') throw new Error('Screenshot capture failed');
       return {kind:'view', mime:'image/png', encoding:'base64', view:shot.view,

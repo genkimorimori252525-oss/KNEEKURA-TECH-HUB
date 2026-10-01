@@ -19,7 +19,7 @@ from .workspace import workspace_fingerprint
 
 CAPABILITY_IDS = ('source_search', 'bytecode_inspect', 'mappings', 'failure_history',
                   'core_context', 'blockbench_asset', 'forge_build', 'gametest',
-                  'server_observation', 'client_observation', 'native_input')
+                  'server_observation', 'client_observation', 'native_input', 'experimental_runtime')
 _LOCAL_ERRORS = (ContractError, OSError, ValueError, TypeError, KeyError, AttributeError, zipfile.BadZipFile)
 _RUNTIME_IDS = ('gametest', 'server_observation', 'client_observation', 'native_input')
 
@@ -318,6 +318,9 @@ def evaluate_capabilities(store: Store, request: dict, inputs: dict, evidence: d
                 continue
             result[identifier] = _record(identifier, 'UNKNOWN', 'SESSION_UNKNOWN_COMPLETION',
                                          missing, hashes)
+    result['experimental_runtime'] = _record('experimental_runtime', 'BLOCKED',
+        'LAB_RUNTIME_BACKEND_UNAVAILABLE',
+        ('registered_lab_execution', 'arena_typed_actions', 'capture_barrier'), surface='UNSUPPORTED')
     rows = [result[identifier] for identifier in CAPABILITY_IDS]
     task_context._check_private_aliases(rows, inputs)
     return rows

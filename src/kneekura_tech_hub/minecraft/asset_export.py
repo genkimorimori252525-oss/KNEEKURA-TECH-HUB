@@ -20,6 +20,7 @@ import zlib
 from .asset_contract import decode_json, provider_pin
 from .asset_guard import ITEM_DISPLAY, JAVA_BLOCK_VERSION, load_request
 from .asset_session import validate_plan
+from .asset_mutation import BoundedStoreView, bounded_read, json_equal
 from .storage import ContractError, Store, canonical, digest, safe_entry, valid_hash
 
 
@@ -38,7 +39,7 @@ def _numbers(value, length):
 
 
 def _json(store, key):
-    return decode_json(store.read(valid_hash(key)), max_bytes=1024 * 1024)
+    return decode_json(bounded_read(store,key,1024*1024), max_bytes=1024 * 1024)
 
 
 def _png(raw: bytes, dimensions: list[int]) -> None:
@@ -83,8 +84,7 @@ def _png(raw: bytes, dimensions: list[int]) -> None:
     _require(all(pixels[i] <= 4 for i in range(0, expected, stride)), 'Invalid PNG scanline filter')
 
 
-def _validate_capture(store: Store, receipt_hash: str):
-    receipt = _json(store, receipt_hash)
+def _validate_legacy_capture(store: Store, receipt: dict, *, effective_plan=None, effective_display=None):
     fields = {'schema_version', 'record_type', 'request_hash', 'plan_hash', 'provider', 'guard_protocol',
               'loaded_revision', 'project_uuid', 'inspection_hash', 'artifacts', 'verification', 'outcome'}
     _require(isinstance(receipt, dict) and set(receipt) == fields
@@ -96,6 +96,8 @@ def _validate_capture(store: Store, receipt_hash: str):
              and bool(receipt['project_uuid']), 'Invalid guarded capture receipt')
     request, spec = load_request(store, receipt['request_hash'])
     plan = validate_plan(store, receipt['request_hash'], _json(store, receipt['plan_hash']))
+    if effective_plan is not None:
+        plan = effective_plan
     inspection = _json(store, receipt['inspection_hash'])
     _require(isinstance(inspection, dict) and inspection.get('record_type') == 'asset_editor_inspection'
              and inspection.get('request_hash') == receipt['request_hash']
@@ -107,7 +109,7 @@ def _validate_capture(store: Store, receipt_hash: str):
     for item, pair in zip(inventory, expected):
         _require(isinstance(item, dict) and (item.get('kind'), item.get('view')) == pair,
                  'Duplicate, missing or unexpected capture')
-        raw = store.read(valid_hash(item.get('content_hash')))
+        raw = bounded_read(store,item.get('content_hash'),512*1024)
         _require(type(item.get('size_bytes')) is int and item['size_bytes'] == len(raw) and len(raw) <= 512 * 1024,
                  'Capture size mismatch')
         expected_mime = 'application/json' if pair[0] in ('model', 'native') else 'image/png'
@@ -179,9 +181,10 @@ def _validate_capture(store: Store, receipt_hash: str):
                  'Native cube transforms or rendering differ from the runtime model')
         native_faces = source.get('faces')
         _require(isinstance(native_faces, dict) and set(native_faces) == _FACES, 'Native cube faces are incomplete')
-        for face in native_faces.values():
+        for side, face in native_faces.items():
+            expected_uv = cube.get('face_uv', {}).get(side, cube['uv'])
             _require(isinstance(face, dict) and set(face) <= {'uv', 'texture', 'rotation'}
-                     and _numbers(face.get('uv'), 4) and face['uv'] == cube['uv']
+                     and _numbers(face.get('uv'), 4) and face['uv'] == expected_uv
                      and type(face.get('texture')) is int and face['texture'] == 0
                      and type(face.get('rotation', 0)) in (int, float) and face.get('rotation', 0) == 0,
                      'Native face UV or texture differs from the captured plan')
@@ -191,14 +194,15 @@ def _validate_capture(store: Store, receipt_hash: str):
         _require(isinstance(rotation, dict) and rotation.get('angle') == 0, 'Unexpected cube rotation')
         faces = element.get('faces')
         _require(isinstance(faces, dict) and set(faces) == _FACES, 'All six cube faces must be captured')
-        uv = [cube['uv'][i] * 16 / dimensions[i % 2] for i in range(4)]
-        for face in faces.values():
+        for side, face in faces.items():
+            source_uv = cube.get('face_uv', {}).get(side, cube['uv'])
+            uv = [source_uv[i] * 16 / dimensions[i % 2] for i in range(4)]
             _require(isinstance(face, dict) and set(face) <= {'texture', 'uv', 'rotation'}
                      and face.get('texture') == '#0' and _numbers(face.get('uv'), 4) and face['uv'] == uv
                      and face.get('rotation', 0) == 0, 'Texture reference or UV differs from plan')
     # Display fields, if present, remain bounded and must match editable source.
     display = model.get('display', {})
-    _require(isinstance(display, dict) and display == native.get('display', {}) == ITEM_DISPLAY,
+    _require(isinstance(display, dict) and display == native.get('display', {}) == (ITEM_DISPLAY if effective_display is None else effective_display),
              'Native/export display must match the pinned pilot transforms')
     allowed_slots = {'gui', 'ground', 'fixed', 'firstperson_righthand', 'firstperson_lefthand',
                      'thirdperson_righthand', 'thirdperson_lefthand', 'head'}
@@ -221,6 +225,70 @@ def _validate_capture(store: Store, receipt_hash: str):
             face.pop('rotation', None)
     return receipt, request, {'model': canonical(exported), 'native': captured[('native', None)], 'texture': texture}
 
+
+
+_V2_FIELDS = {'generation','snapshot_hash','parent_receipt_hash','mutation_hash'}
+
+
+def _legacy_projection(receipt):
+    projected={k:v for k,v in receipt.items() if k not in _V2_FIELDS}
+    projected['schema_version']=1
+    return projected
+
+
+def _validate_capture(store: Store, receipt_hash: str):
+    receipt=_json(store,receipt_hash)
+    if not isinstance(receipt,dict) or receipt.get('schema_version')!=2:
+        return _validate_legacy_capture(store,receipt)
+    store = BoundedStoreView(store)
+    from .asset_mutation import MAX_GENERATIONS, MUTATION_FIELDS, load_snapshot, validate_mutation, verify_delta
+    expected_fields={'schema_version','record_type','request_hash','plan_hash','provider','guard_protocol',
+        'loaded_revision','project_uuid','inspection_hash','artifacts','verification','outcome'}|_V2_FIELDS
+    chain=[];seen=set();current=receipt_hash
+    for _ in range(MAX_GENERATIONS+1):
+        _require(current not in seen,'Cyclic asset generation lineage');seen.add(current)
+        r,snapshot=load_snapshot(store,current)
+        _require(set(r)==expected_fields and type(r['schema_version']) is int and r['schema_version']==2,
+                 'Invalid exact generation capture fields')
+        _require(r['provider']==provider_pin() and type(r['guard_protocol']) is int and r['guard_protocol']==1
+                 and r['loaded_revision']=='UNATTESTED','Generation provider identity mismatch')
+        chain.append((current,r,snapshot))
+        if r['generation']==0:
+            _require(r['parent_receipt_hash'] is None and r['mutation_hash'] is None,'Initial generation has unexpected parent')
+            _validate_legacy_capture(store,_legacy_projection(r))
+            request,spec=load_request(store,r['request_hash'])
+            _require(request['asset_id']=='kneekura:celestial_staff','Repair pilot is restricted to the owned Celestial Staff')
+            root_plan=validate_plan(store,r['request_hash'],_json(store,r['plan_hash']))
+            width,height=spec['style']['texture_size']
+            expected_pixels=bytearray((bytes.fromhex(root_plan['fill'][1:])+b'\xff')*width*height)
+            for region in root_plan.get('texture_regions',[]):
+                x0,y0,x1,y1=region['rect'];color=bytes.fromhex(region['color'][1:])+b'\xff'
+                for y in range(y0,y1):expected_pixels[(y*width+x0)*4:(y*width+x1)*4]=color*(x1-x0)
+            _require(bytes(expected_pixels)==base64.b64decode(snapshot['texture']['rgba'],validate=True),
+                     'Initial pixels differ from the declared plan')
+            break
+        valid_hash(r['parent_receipt_hash']);valid_hash(r['mutation_hash'])
+        current=r['parent_receipt_hash']
+    else:
+        raise ContractError('Asset generation lineage exceeds the bound')
+    chain.reverse()
+    for (parent_hash,parent,before),(child_hash,child,after) in zip(chain,chain[1:]):
+        _require(child['generation']==parent['generation']+1 and child['plan_hash']==parent['plan_hash']
+                 and child['parent_receipt_hash']==parent_hash,'Stale or changed generation lineage')
+        mutation=_json(store,child['mutation_hash'])
+        _require(isinstance(mutation,dict),'Invalid mutation record')
+        intent={k:mutation[k] for k in MUTATION_FIELDS if k in mutation}
+        prepared=validate_mutation(store,parent_hash,intent)
+        _require(json_equal(mutation,prepared),'Mutation record/allowlist differs from exact validated intent')
+        verify_delta(before,after,prepared)
+    final=chain[-1][2]
+    effective=deepcopy(root_plan)
+    for cube,element in zip(effective['cubes'],final['native']['elements']):
+        for key in ('name','from','to'):cube[key]=deepcopy(element[key])
+        cube['face_uv']={side:deepcopy(face['uv']) for side,face in element['faces'].items()}
+    _,request,content=_validate_legacy_capture(store,_legacy_projection(receipt),
+        effective_plan=effective,effective_display=final['native']['display'])
+    return receipt,request,content
 
 def _check_parent(parent: Path):
     path = Path(parent).absolute()

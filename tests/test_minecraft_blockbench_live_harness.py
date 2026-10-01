@@ -252,3 +252,60 @@ def test_runner_root_remains_confined_when_hosted_env_is_present(tmp_path,monkey
     assert module._runner_root(tmp_path/'fixture')==tmp_path/'fixture'
     with pytest.raises(ValueError): module._runner_root(tmp_path)
     with pytest.raises(ValueError): module._runner_root(tmp_path.parent/'outside')
+
+
+def test_staff_repair_cases_have_four_separate_minimal_targets():
+    cases=load_harness().staff_repair_cases()
+    assert [c['operation'] for c in cases]==['part_edit','uv_edit','texture_edit','display_edit']
+    assert cases[0]['target']=={'part_id':'star_up','property':'to','axis':1}
+    assert cases[0]['fault']==30 and cases[0]['repair']==28.5
+    assert cases[1]['target']['face']=='north' and cases[1]['repair']==[24,24,28,28]
+    assert cases[2]['target']=={'texture_id':'atlas','rect':[24,24,32,32]}
+    assert cases[3]['target']=={'slot':'thirdperson_righthand','property':'translation','axis':1}
+    assert cases[3]['fault']==6 and cases[3]['repair']==4
+
+
+def test_hosted_repair_trial_runs_four_pairs_and_changed_bounds_control(tmp_path,monkeypatch):
+    from copy import deepcopy
+    import base64
+    from test_minecraft_asset_session import prepared as prepare_fixture
+    from test_minecraft_asset_export import capture as capture_fixture
+    from test_minecraft_asset_mutation import sealed as seal_fixture, frame, rgba_png, session_transport
+    from kneekura_tech_hub.minecraft.storage import canonical
+    module=load_harness();prepared=prepare_fixture.__wrapped__(tmp_path)
+    sealed=seal_fixture.__wrapped__(capture_fixture.__wrapped__(prepared))
+    store,_,r,s=sealed;plan=module.celestial_staff_plan(r['request_hash'])
+    ne=[];me=[]
+    for i,c in enumerate(plan['cubes']):
+        n=deepcopy(s['native']['elements'][0]);m=deepcopy(s['model']['elements'][0])
+        for key in ('name','from','to'):n[key]=deepcopy(c[key]);m[key]=deepcopy(c[key])
+        n['uuid']='part-'+str(i)
+        for f in n['faces']:n['faces'][f]['uv']=c['uv'];m['faces'][f]['uv']=[v/2 for v in c['uv']]
+        ne.append(n);me.append(m)
+    s['parts']=[dict(part_id=n['name'],native_uuid=n['uuid']) for n in ne]
+    s['native']['elements']=ne;s['native']['outliner']=[n['uuid'] for n in ne];s['model']['elements']=me
+    pixels=bytearray(base64.b64decode(s['texture']['rgba']))
+    for y in range(24,32):
+        for x in range(24,32):pixels[(y*32+x)*4:(y*32+x)*4+4]=bytes([134,79,199,255])
+    png_bytes=rgba_png(pixels);s['texture']['rgba']=base64.b64encode(pixels).decode()
+    s['native']['textures'][0]['source']='data:image/png;base64,'+base64.b64encode(png_bytes).decode()
+    for a in r['artifacts']:
+        raw=canonical(s[a['kind']]) if a['kind'] in ('model','native') else png_bytes if a['kind']=='texture' else store.read(a['content_hash'])
+        a.update(content_hash=store.put(raw),size_bytes=len(raw))
+        if a['kind']=='view':a.update(frame=frame(a['view']),generation=0)
+    r.update(plan_hash=store.put_json(plan),snapshot_hash=store.put_json(s));h=store.put_json(r)
+    _,config,registry,operations=session_transport(monkeypatch,(store,h,r,s))
+    baseline=dict(receipt_hash=h,request_hash=r['request_hash'],project_uuid=r['project_uuid'],generation=0)
+    evidence=tmp_path/'repair-evidence';evidence.mkdir()
+    result=module.run_repairs(store,registry,config,baseline,evidence)
+    assert result['fixture_faults_injected'] is True and len(result['cases'])==4
+    assert result['verification']=={'structural':'PASS','visual':'NOT_RUN','runtime':'NOT_RUN'}
+    assert all(c['comparison']['comparability']=='COMPARABLE' for c in result['cases'])
+    assert result['camera_control']['comparison']['comparability']=='COMPARABLE'
+    assert result['camera_control']['scene_bounds_changed'] is True
+    assert result['final_generation']==10
+    assert sum(operations.count(op) for op in ('part_edit','uv_edit','texture_edit','display_edit'))==10
+    assert (evidence/'repairs.json').is_file()
+    assert len(list(evidence.rglob('view-front.png')))==10
+    closure=json.loads((evidence/'capture-evidence.json').read_text())
+    assert h in closure['objects'] and result['final_receipt_hash'] in closure['objects']

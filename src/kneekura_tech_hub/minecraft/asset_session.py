@@ -21,7 +21,7 @@ from typing import Any
 
 from .asset_contract import PROVIDER_ID, PROVIDER_REVISION, decode_json, provider_pin
 from .asset_guard import load_request, validate_config
-from .storage import ContractError, IntegrityError, Store, canonical, valid_hash
+from .storage import ContractError, IntegrityError, Store, canonical, digest, valid_hash
 
 
 _PLAN_FIELDS = {'schema_version', 'request_hash', 'fill', 'cubes'}
@@ -245,6 +245,12 @@ def _capture_bytes(value: Any, kind: str, view: str | None) -> tuple[bytes, dict
         expected = {'kind','mime','encoding','content'}
     elif kind == 'view':
         expected = {'kind','mime','encoding','view','looking_at','model_right_on','note','content'}
+        if 'frame' in value or 'generation' in value:
+            expected |= {'frame','generation'}
+            if (not isinstance(value.get('frame'),dict) or type(value.get('generation')) is not int
+                    or not 0 <= value['generation'] <= 32 or len(canonical(value['frame'])) > 8192):
+                raise ContractError('Invalid generation/frame capture metadata')
+            _detached(value['frame'])
     else:
         raise ContractError('Unsupported capture kind')
     if (set(value) != expected or value.get('mime') != 'image/png'
@@ -264,11 +270,15 @@ def _capture_bytes(value: Any, kind: str, view: str | None) -> tuple[bytes, dict
         raise ContractError('Capture is not a bounded PNG')
     meta = ({k:value[k] for k in ('view','looking_at','model_right_on','note')}
             if kind == 'view' else {})
+    if kind == 'view' and 'frame' in value:
+        meta.update(frame=value['frame'],generation=value['generation'])
     return raw, meta
 
 
-def run_session(store: Store, registry: dict, private_config: dict, plan: dict) -> dict:
+def run_session(store: Store, registry: dict, private_config: dict, plan: dict, *, retain_generation: bool = False) -> dict:
     """Run one fresh guarded session and retain evidence only after all calls finish."""
+    if type(retain_generation) is not bool:
+        raise ContractError('retain_generation requires an explicit boolean')
     r = _registry(registry)
     if not r['allow_session']:
         raise ContractError('Guarded session is not enabled in the registry')
@@ -279,93 +289,171 @@ def run_session(store: Store, registry: dict, private_config: dict, plan: dict) 
     candidate = _detached(plan)
     if not isinstance(candidate, dict) or candidate.get('request_hash') != request_hash:
         raise ContractError('Private configuration and plan request hashes differ')
-    p = validate_plan(store, request_hash, candidate)
-    request, _ = load_request(store, request_hash)
+    from .asset_mutation import BoundedStoreView
+    evidence = BoundedStoreView(store) if retain_generation else store
+    p = validate_plan(evidence, request_hash, candidate)
+    request, _ = load_request(evidence, request_hash)
+    if retain_generation and request['asset_id'] != 'kneekura:celestial_staff':
+        raise ContractError('Repair pilot is restricted to the owned Celestial Staff')
 
     initial = _status(_command(r, 'kneekura_asset_status',
                                {'token': config['token'], 'request_hash': request_hash}),
                       request_hash)
     loaded_revision = initial['loaded_revision']
-    seq = 0
-    project_uuid: str | None = None
-
-    def call(operation: str, arguments: dict) -> dict:
-        nonlocal seq, project_uuid
-        params = {'token': config['token'], 'request_hash': request_hash, 'seq': seq,
-                  'project_uuid': project_uuid, 'operation': operation, 'arguments': arguments}
-        label = operation
-        if operation == 'capture' and isinstance(arguments, dict):
-            kind = arguments.get('kind')
-            if isinstance(kind, str):
-                label = f'capture:{kind}'
-        try:
-            raw_receipt = _command(r, 'kneekura_asset', params)
-            receipt = _receipt(raw_receipt, request_hash=request_hash, seq=seq,
-                               operation=operation, project_uuid=project_uuid)
-        except ContractError:
-            # Keep provider text/stack private, but retain enough fixed vocabulary
-            # to identify which reviewed guard operation failed in live acceptance.
-            raise ContractError(f'Guarded operation {label} failed') from None
-        if project_uuid is None:
-            project_uuid = receipt['project_uuid']
-        seq += 1
-        return receipt
-
+    call = _caller(r, config, 0, None)
     call('begin', {})
     call('texture', {'fill': p['fill']})
     for region in p.get('texture_regions', []):
         call('texture_region', region)
     for cube in p['cubes']:
         call('cube', cube)
-    inspection = call('inspect', {})['result']
+    snapshot = _snapshot_result(call('snapshot', {})['result'], request_hash, generation=0) if retain_generation else None
+    inspection_receipt, captured = _capture_all(call, request)
+    project_uuid = inspection_receipt['project_uuid']
+    if snapshot is not None:
+        _snapshot_matches_captures(snapshot[1], captured, project_uuid)
+    return _persist_capture(store, request_hash, p, loaded_revision, project_uuid,
+                            inspection_receipt['result'], captured, snapshot=snapshot)
 
-    captured: list[tuple[str, str | None, bytes, dict]] = []
-    for kind, view in [('model', None), ('native', None), ('texture', None)]:
-        result = call('capture', {'kind': kind, 'view': view})['result']
-        raw, meta = _capture_bytes(result, kind, view)
-        captured.append((kind, view, raw, meta))
-    for view in request['required_views']:
-        result = call('capture', {'kind': 'view', 'view': view})['result']
-        raw, meta = _capture_bytes(result, 'view', view)
-        captured.append(('view', view, raw, meta))
-    if sum(len(item[2]) for item in captured) > 4 * 1024 * 1024:
+
+def _caller(registry, config, seq, project_uuid):
+    def call(operation, arguments):
+        nonlocal seq, project_uuid
+        params = {'token':config['token'], 'request_hash':config['request_hash'], 'seq':seq,
+                  'project_uuid':project_uuid, 'operation':operation, 'arguments':arguments}
+        label = 'capture:'+arguments['kind'] if operation == 'capture' else operation
+        try:
+            value = _command(registry, 'kneekura_asset', params)
+            receipt = _receipt(value, request_hash=config['request_hash'], seq=seq,
+                               operation=operation, project_uuid=project_uuid)
+        except (ContractError, OSError, http.client.HTTPException):
+            raise ContractError(f'Guarded operation {label} failed; completion may be UNKNOWN, do not retry') from None
+        if project_uuid is None:
+            project_uuid = receipt['project_uuid']
+        seq += 1
+        return receipt
+    return call
+
+
+def _snapshot_result(value, request_hash, *, generation):
+    from .asset_mutation import validate_snapshot
+    if (not isinstance(value,dict) or set(value) != {'kind','generation','snapshot_hash','encoding','content'}
+            or value['kind'] != 'snapshot' or value['encoding'] != 'utf8' or not isinstance(value['content'],str)
+            or type(value['generation']) is not int or value['generation'] != generation):
+        raise ContractError('Invalid sealed snapshot response')
+    raw = value['content'].encode('utf8')
+    if digest(raw) != valid_hash(value['snapshot_hash']):
+        raise IntegrityError('Sealed snapshot hash differs from exact response bytes')
+    snapshot = validate_snapshot(decode_json(raw,max_bytes=786432))
+    if snapshot['request_hash'] != request_hash or snapshot['generation'] != generation:
+        raise ContractError('Sealed snapshot identity differs')
+    return raw, snapshot
+
+
+def _capture_all(call, request):
+    inspection = call('inspect', {})
+    captured = []
+    for kind, view in [('model',None),('native',None),('texture',None)]+[('view',v) for v in request['required_views']]:
+        result = call('capture', {'kind':kind,'view':view})['result']
+        raw, meta = _capture_bytes(result,kind,view)
+        captured.append((kind,view,raw,meta))
+    if sum(len(item[2]) for item in captured) > 4*1024*1024:
         raise ContractError('Whole session capture exceeds four MiB')
+    return inspection, captured
 
-    # Only now does evidence persistence begin. The secret token/request bodies
-    # and base64 transport envelopes are never stored.
-    plan_hash = store.put_json(p)
-    inspection_record = {
-        'schema_version': 1, 'record_type': 'asset_editor_inspection',
-        'request_hash': request_hash, 'project_uuid': project_uuid,
-        'loaded_revision': loaded_revision, 'result': inspection,
-        'verification': dict(_GATES),
-    }
-    inspection_hash = store.put_json(inspection_record)
+
+def _snapshot_matches_captures(snapshot, captured, project_uuid):
+    from .asset_mutation import decode_png_rgba, json_equal
+    if snapshot['project_uuid'] != project_uuid:
+        raise ContractError('Snapshot project differs from capture')
+    for kind,view,raw,meta in captured:
+        if kind in ('model','native') and not json_equal(decode_json(raw,max_bytes=512*1024),snapshot[kind]):
+            raise ContractError('Snapshot differs from complete captured document')
+        if kind == 'texture':
+            if (decode_png_rgba(raw,[snapshot['texture']['width'],snapshot['texture']['height']]) !=
+                    base64.b64decode(snapshot['texture']['rgba'],validate=True) or
+                    snapshot['native']['textures'][0]['source'] != 'data:image/png;base64,'+base64.b64encode(raw).decode('ascii')):
+                raise ContractError('Snapshot/native/captured PNG pixels or bytes differ')
+        if kind == 'view':
+            if meta.get('generation') != snapshot['generation'] or not isinstance(meta.get('frame'),dict):
+                raise ContractError('Sealed view lacks generation/frame metadata')
+            from .asset_comparison import validate_frame
+            validate_frame(meta['frame'],view)
+            decode_png_rgba(raw,meta['frame']['output'])
+
+
+def _persist_capture(store, request_hash, plan, loaded_revision, project_uuid, inspection,
+                     captured, *, snapshot=None, parent_receipt_hash=None, mutation=None):
+    # All provider calls and independent checks finish before persistence starts.
+    plan_hash = store.put_json(plan)
+    inspection_hash = store.put_json({'schema_version':1,'record_type':'asset_editor_inspection',
+        'request_hash':request_hash,'project_uuid':project_uuid,'loaded_revision':loaded_revision,
+        'result':inspection,'verification':dict(_GATES)})
     artifacts = []
-    for kind, view, raw, meta in captured:
-        content_hash = store.put(raw)
-        item = {'kind': kind, 'mime': 'application/json' if kind in ('model', 'native') else 'image/png',
-                'content_hash': content_hash, 'size_bytes': len(raw)}
+    for kind,view,raw,meta in captured:
+        item = {'kind':kind,'mime':'application/json' if kind in ('model','native') else 'image/png',
+                'content_hash':store.put(raw),'size_bytes':len(raw)}
         if view is not None:
-            item['view'] = view
+            item['view']=view
             item.update(meta)
         artifacts.append(item)
-    receipt = {
-        'schema_version': 1, 'record_type': 'asset_session_capture',
-        'request_hash': request_hash, 'plan_hash': plan_hash,
-        'provider': provider_pin(), 'guard_protocol': 1,
-        'loaded_revision': loaded_revision, 'project_uuid': project_uuid,
-        'inspection_hash': inspection_hash, 'artifacts': artifacts,
-        'verification': dict(_GATES), 'outcome': 'NOT_RUN',
-    }
-    receipt_hash = store.put_json(receipt)
-    for key in [receipt_hash, request_hash, plan_hash, inspection_hash,
-                *(item['content_hash'] for item in artifacts)]:
-        store.pin(key, 'asset-session:' + receipt_hash)
-    return {
-        'schema_version': 1, 'status': 'OK', 'outcome': 'NOT_RUN',
-        'assertion_domain': 'asset_session_capture', 'request_hash': request_hash,
-        'loaded_revision': loaded_revision, 'project_uuid': project_uuid,
-        'artifacts': artifacts, 'inspection_hash': inspection_hash,
-        'receipt_hash': receipt_hash, 'verification': dict(_GATES),
-    }
+    receipt = {'schema_version':1,'record_type':'asset_session_capture','request_hash':request_hash,
+        'plan_hash':plan_hash,'provider':provider_pin(),'guard_protocol':1,'loaded_revision':loaded_revision,
+        'project_uuid':project_uuid,'inspection_hash':inspection_hash,'artifacts':artifacts,
+        'verification':dict(_GATES),'outcome':'NOT_RUN'}
+    extra_keys=[]
+    if snapshot is not None:
+        snapshot_hash=store.put(snapshot[0]); mutation_hash=store.put_json(mutation) if mutation is not None else None
+        receipt.update(schema_version=2,generation=snapshot[1]['generation'],snapshot_hash=snapshot_hash,
+                       parent_receipt_hash=parent_receipt_hash,mutation_hash=mutation_hash)
+        extra_keys=[snapshot_hash]+([mutation_hash,parent_receipt_hash] if mutation_hash else [])
+    receipt_hash=store.put_json(receipt)
+    for key in [receipt_hash,request_hash,plan_hash,inspection_hash,*extra_keys,*(a['content_hash'] for a in artifacts)]:
+        store.pin(key,'asset-session:'+receipt_hash)
+    result={'schema_version':1,'status':'OK','outcome':'NOT_RUN','assertion_domain':'asset_session_capture',
+        'request_hash':request_hash,'loaded_revision':loaded_revision,'project_uuid':project_uuid,
+        'artifacts':artifacts,'inspection_hash':inspection_hash,'receipt_hash':receipt_hash,'verification':dict(_GATES)}
+    if snapshot is not None:
+        result.update({k:receipt[k] for k in ('generation','snapshot_hash','parent_receipt_hash','mutation_hash')})
+    return result
+
+
+def run_mutation(store: Store, registry: dict, private_config: dict,
+                 base_receipt_hash: str, mutation: dict) -> dict:
+    """One existing-project edit with exact baseline checks and no automatic retry."""
+    from .asset_mutation import BoundedStoreView, MUTATION_FIELDS, json_equal, load_snapshot, validate_mutation, verify_delta
+    r=_registry(registry); config=validate_config(private_config)
+    if not r['allow_session'] or config['allow_write'] is not True:
+        raise ContractError('Guarded mutation is not enabled')
+    from .asset_export import _validate_capture
+    evidence = BoundedStoreView(store)
+    _validate_capture(evidence,base_receipt_hash)
+    prepared=validate_mutation(evidence,base_receipt_hash,mutation)
+    base,before=load_snapshot(evidence,base_receipt_hash)
+    if config['request_hash'] != base['request_hash']:
+        raise ContractError('Private configuration belongs to another retained request')
+    request,_=load_request(evidence,base['request_hash'])
+    plan=validate_plan(evidence,base['request_hash'],evidence.json(base['plan_hash'],max_bytes=1024*1024))
+    status=_command(r,'kneekura_asset_status',{'token':config['token'],'request_hash':config['request_hash']})
+    expected={'guard_protocol','state','next_sequence','project_uuid','busy','request_hash','loaded_revision','last_receipt'}
+    if (not isinstance(status,dict) or set(status)!=expected or type(status['guard_protocol']) is not int
+            or status['guard_protocol']!=1
+            or status['state']!='OPEN' or status['busy'] is not False
+            or type(status['next_sequence']) is not int or not 0 < status['next_sequence'] < 512
+            or status['request_hash']!=base['request_hash'] or status['project_uuid']!=base['project_uuid']
+            or status['loaded_revision']!='UNATTESTED' or not isinstance(status['last_receipt'],dict)
+            or status['last_receipt'].get('completion')!='CONFIRMED'
+            or status['last_receipt'].get('request_hash')!=base['request_hash']
+            or status['last_receipt'].get('project_uuid')!=base['project_uuid']):
+        raise ContractError('Retained editor is not the same confirmed OPEN project; do not retry UNKNOWN work')
+    call=_caller(r,config,status['next_sequence'],base['project_uuid'])
+    live=_snapshot_result(call('snapshot',{})['result'],base['request_hash'],generation=base['generation'])
+    if digest(live[0])!=base['snapshot_hash'] or not json_equal(live[1],before):
+        raise ContractError('Retained snapshot no longer matches the editor; no mutation sent')
+    call(prepared['operation'],{k:prepared[k] for k in MUTATION_FIELDS})
+    after=_snapshot_result(call('snapshot',{})['result'],base['request_hash'],generation=base['generation']+1)
+    verify_delta(before,after[1],prepared)
+    inspection,captured=_capture_all(call,request)
+    _snapshot_matches_captures(after[1],captured,base['project_uuid'])
+    return _persist_capture(store,base['request_hash'],plan,base['loaded_revision'],
+        base['project_uuid'],inspection['result'],captured,snapshot=after,parent_receipt_hash=base_receipt_hash,mutation=prepared)

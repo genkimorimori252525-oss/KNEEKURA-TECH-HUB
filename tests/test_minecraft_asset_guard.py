@@ -331,3 +331,53 @@ def test_native_capture_embeds_bitmap_without_reading_global_preference():
     '''.replace('HOST',api().HOST_ADAPTER)
     result=subprocess.run(['node','-e',script],capture_output=True,text=True,timeout=5)
     assert result.returncode==0,result.stderr
+
+
+def test_node_retained_repair_contract_suite(tmp_path):
+    factory=tmp_path/'repair-factory.cjs'; factory.write_text('module.exports = '+api().GUARD_FACTORY+';\n')
+    script=Path(__file__).with_name('minecraft_asset_repair.node.cjs')
+    result=subprocess.run(['node','--test',str(script)],env={**__import__('os').environ,'KNEEKURA_TEST_GUARD':str(factory)},
+                          capture_output=True,text=True,timeout=30)
+    assert result.returncode==0,result.stdout+result.stderr
+
+
+def test_host_snapshot_uses_exact_owned_objects_full_codecs_and_pixels():
+    script = '''
+    const assert=require('node:assert/strict');
+    const cube={uuid:'cube',name:'head'},tex={uuid:'tex',width:16,height:16,ctx:{getImageData:()=>({data:new Uint8Array(1024)})}};
+    globalThis.Cube={all:[cube]};globalThis.Texture={all:[tex]};
+    globalThis.Format={codec:{compile:()=>JSON.stringify({elements:[{name:'head'}]})}};
+    globalThis.Codecs={project:{compile:options=>{assert.equal(options.bitmaps,true);return {elements:[{uuid:'cube'}]};}}};
+    const host=HOST;
+    assert.equal(host.elementIdentity('cube'),cube);assert.equal(host.textureIdentity('tex'),tex);
+    Cube.all.push({uuid:'cube'});assert.equal(host.elementIdentity('cube'),null);Cube.all.pop();
+    const s=host.snapshot();assert.equal(s.model.elements[0].name,'head');assert.equal(s.native.elements[0].uuid,'cube');assert.equal(atob(s.rgba).length,1024);
+    '''.replace('HOST',api().HOST_ADAPTER)
+    p=subprocess.run(['node','-e',script],capture_output=True,text=True,timeout=5)
+    assert p.returncode==0,p.stderr
+
+
+def test_frozen_view_reuses_camera_without_geometry_refit():
+    script='''
+    const assert=require('node:assert/strict');let fits=0,renders=0;
+    function vector(values){return {values:values.slice(),toArray(){return this.values.slice()},fromArray(a){this.values=a.slice();return this}};}
+    const camera={position:vector([1,2,3]),quaternion:vector([0,0,0,1]),up:vector([0,1,0]),near:1,far:30000,zoom:1,fov:45,aspect:1,projectionMatrix:vector(Array(16).fill(1)),updateProjectionMatrix(){},updateMatrixWorld(){}};
+    const preview={id:'main',width:640,height:480,isOrtho:false,camera,controls:{target:vector([0,0,0]),update(){}},setProjectionMode(v){this.isOrtho=v},render(){if(++renders>1)camera.position.values[0]+=1e-9;},renderer:{render(){},domElement:{width:640,height:480},getPixelRatio:()=>1,toneMapping:0,toneMappingExposure:1}};
+    globalThis.Preview={selected:preview};globalThis.Mode={selected:{id:'edit'}};globalThis.settings={shading:{value:true}};
+    globalThis.Canvas={scene:{background:null}};globalThis.devicePixelRatio=1;
+    globalThis.document={createElement:()=>({width:0,height:0,getContext:()=>({clearRect(){},drawImage(){}}),toDataURL:()=> 'data:image/png;base64,iVBORw0KGgo='})};
+    const applyAngleName=(p,v)=>{fits++;p.camera.position.fromArray([8,16,-75]);return {view:v,looking_at:'front',model_right_on:'image_left',note:''}};
+    const describeView=v=>({view:v,looking_at:'front',model_right_on:'image_left',note:''});
+    const commands={screenshot:()=>{throw Error('must not auto-refit frozen views')}};
+    const host=HOST;
+    (async()=>{
+      const before=await host.capture('view',{view:'front',freeze:true,generation:0});
+      camera.position.fromArray([900,900,900]);preview.controls.target.fromArray([90,90,90]);
+      const after=await host.capture('view',{view:'front',freeze:true,generation:1});
+      assert.equal(fits,1);assert.deepEqual(before.frame,after.frame);assert.deepEqual(after.frame.position,[8,16,-75]);assert.equal(after.generation,1);assert.deepEqual(after.frame.canvas,[640,480]);assert.deepEqual(after.frame.output,[320,320]);
+      preview.renderer.domElement.width=700;
+      const changed=await host.capture('view',{view:'front',freeze:true,generation:1});assert.notDeepEqual(changed.frame,before.frame);
+    })().catch(e=>{console.error(e);process.exitCode=1});
+    '''.replace('HOST',api().HOST_ADAPTER)
+    p=subprocess.run(['node','-e',script],capture_output=True,text=True,timeout=5)
+    assert p.returncode==0,p.stderr

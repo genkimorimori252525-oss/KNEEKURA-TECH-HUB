@@ -1,5 +1,21 @@
 # Deferred MOD-AI usability improvements
 
+
+2026-10-01 update: **CANDIDATES 1–3 SELECTED; BOUNDED SOURCE IMPLEMENTATION STARTED.**
+The user explicitly requested implementation after the prior closure. The
+[selected plan](../../../docs/superpowers/plans/2026-10-01-minecraft-bounded-asset-repair.md)
+now owns the static Celestial Staff repair scope: same live owned project,
+expected generation/hash/value, four separate edit operations, independent
+full-field/pixel invariance, and actual frozen camera metadata. The hosted editor
+trial injects declared regression faults and restores them; it does not assert
+that the already accepted staff still contains those faults. Structural,
+comparability, visual and in-game results remain separate.
+
+The historical deferred-status text below records the earlier decision and does
+not revoke this new selection. Source implementation does not by itself close
+real-editor or in-game acceptance. The [LAB successor boundary](EXPERIMENT-CONTRACTS.md)
+is separate from these asset repairs and remains unavailable for live execution.
+
 Status: **ASSET CANDIDATES 1–3 DEFERRED; BOUNDED SECONDARY FACADE CONCERNS COMPLETE.**
 
 Requested on 2026-09-30. The

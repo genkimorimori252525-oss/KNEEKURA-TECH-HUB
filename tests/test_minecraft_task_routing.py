@@ -21,7 +21,7 @@ from test_minecraft_verification import contract
 
 
 IDS = ['source_search', 'bytecode_inspect', 'mappings', 'failure_history', 'core_context',
-       'blockbench_asset', 'forge_build', 'gametest', 'server_observation', 'client_observation', 'native_input']
+       'blockbench_asset', 'forge_build', 'gametest', 'server_observation', 'client_observation', 'native_input', 'experimental_runtime']
 
 
 def api():

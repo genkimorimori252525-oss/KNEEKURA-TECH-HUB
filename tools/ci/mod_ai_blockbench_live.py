@@ -19,7 +19,9 @@ from kneekura_tech_hub.minecraft.asset_contract import (
     PROVIDER_ID, PROVIDER_REVISION, prepare_request, provider_pin,
 )
 from kneekura_tech_hub.minecraft.asset_guard import load_request, prepare_guarded_package
-from kneekura_tech_hub.minecraft.asset_session import run_session
+from kneekura_tech_hub.minecraft.asset_session import run_session, run_mutation
+from kneekura_tech_hub.minecraft.asset_mutation import bounded_read, json_equal, load_snapshot
+from kneekura_tech_hub.minecraft.asset_comparison import compare_captures
 from kneekura_tech_hub.minecraft.asset_export import materialize_asset
 from kneekura_tech_hub.minecraft.storage import Store, canonical, capture_profile, digest
 
@@ -235,10 +237,29 @@ def capture_evidence(store: Store, receipt_hash: str, export_hash: str) -> dict:
             *(a["content_hash"] for a in exported["files"])}
     if request.get("index_snapshot_id"):
         keys.add(request["index_snapshot_id"])
+    # Schema-2 repair evidence retains only its bounded exact parent closure.
+    current = receipt
+    seen = {receipt_hash}
+    for _ in range(33):
+        if current.get('schema_version') != 2:
+            break
+        keys.add(current['snapshot_hash'])
+        if current['generation'] == 0:
+            break
+        keys.add(current['mutation_hash'])
+        parent = current['parent_receipt_hash']
+        if parent in seen:
+            raise ValueError('Cyclic repair closure')
+        seen.add(parent); keys.add(parent)
+        current = json.loads(bounded_read(store, parent, 1024 * 1024))
+        keys.update([current['plan_hash'], current['inspection_hash'],
+                     *(a['content_hash'] for a in current['artifacts'])])
+    else:
+        raise ValueError('Repair evidence closure exceeds generation limit')
     objects = {}
     size = 0
     for key in sorted(keys):
-        raw = store.read(key)
+        raw = bounded_read(store, key, 1024 * 1024)
         size += len(raw)
         if size > 8 * 1024 * 1024:
             raise ValueError("Captured evidence closure exceeds budget")
@@ -247,27 +268,19 @@ def capture_evidence(store: Store, receipt_hash: str, export_hash: str) -> dict:
             "export_manifest_hash": export_hash, "encoding": "base64", "objects": objects}
 
 
-def run(root: Path, evidence: Path) -> dict:
+def run(root: Path, evidence: Path, *, repairs: bool = False) -> dict:
     root = _runner_root(root)
     evidence.mkdir(parents=True, exist_ok=True)
     context = json.loads((root / "context-private.json").read_text(encoding="utf-8"))
     store = Store(context["store_root"])
     package = Path(context["package_directory"])
     private_config = json.loads((package / "client-private.json").read_text(encoding="utf-8"))
-    result = run_session(
-        store,
-        {
-            "schema_version": 1,
-            "provider": PROVIDER_ID,
-            "revision": PROVIDER_REVISION,
-            "port": context["bridge_port"],
-            "allow_session": True,
-            "timeout_seconds": 20,
-            "max_response_bytes": 2 * 1024 * 1024,
-        },
-        private_config,
-        context["plan"],
-    )
+    registry = {
+        "schema_version": 1, "provider": PROVIDER_ID, "revision": PROVIDER_REVISION,
+        "port": context["bridge_port"], "allow_session": True,
+        "timeout_seconds": 20, "max_response_bytes": 2 * 1024 * 1024,
+    }
+    result = run_session(store, registry, private_config, context["plan"], retain_generation=repairs)
     copied = [_copy_artifact(store, item, evidence) for item in result["artifacts"]]
     safe = {
         "schema_version": 1,
@@ -293,8 +306,102 @@ def run(root: Path, evidence: Path) -> dict:
         stream.write(json.dumps(exported, indent=2))
     with (evidence / "capture-evidence.json").open("x", encoding="utf-8") as stream:
         stream.write(json.dumps(capture_evidence(store, result["receipt_hash"], exported["manifest_hash"]), indent=2))
-    return {**safe, "export": exported}
+    output = {**safe, "export": exported}
+    if repairs:
+        repair_evidence = evidence / 'repairs'
+        repair_evidence.mkdir(mode=0o700)
+        output['repairs'] = run_repairs(store, registry, private_config, result, repair_evidence)
+    return output
 
+
+
+def staff_repair_cases() -> list[dict]:
+    """Declared regression faults, not defects asserted in the accepted staff."""
+    return [
+        {'id':'part','operation':'part_edit','target':{'part_id':'star_up','property':'to','axis':1},
+         'fault':30,'repair':28.5},
+        {'id':'uv','operation':'uv_edit','target':{'part_id':'star_core','face':'north','texture_id':'atlas'},
+         'fault':[0,0,4,4],'repair':[24,24,28,28]},
+        {'id':'texture','operation':'texture_edit','target':{'texture_id':'atlas','rect':[24,24,32,32]},
+         'fault':'#d4af37','repair':'#864fc7'},
+        {'id':'display','operation':'display_edit','target':{'slot':'thirdperson_righthand','property':'translation','axis':1},
+         'fault':6,'repair':4},
+    ]
+
+
+def _repair_intent(store, receipt_hash, case, value):
+    receipt,snapshot=load_snapshot(store,receipt_hash);t=case['target'];op=case['operation']
+    if op in ('part_edit','uv_edit'):
+        index=[p['part_id'] for p in snapshot['parts']].index(t['part_id'])
+        element=snapshot['native']['elements'][index]
+        expected=element[t['property']][t['axis']] if op=='part_edit' else element['faces'][t['face']]['uv']
+    elif op=='display_edit':
+        expected=snapshot['native']['display'][t['slot']].get(t['property'],[1,1,1] if t['property']=='scale' else [0,0,0])[t['axis']]
+    else:
+        x0,y0,x1,y1=t['rect'];width=snapshot['texture']['width'];pixels=base64.b64decode(snapshot['texture']['rgba'],validate=True)
+        expected=digest(b''.join(pixels[(y*width+x0)*4:(y*width+x1)*4] for y in range(y0,y1)))
+    return {'schema_version':1,'request_hash':receipt['request_hash'],'project_uuid':receipt['project_uuid'],
+        'expected_generation':receipt['generation'],'expected_snapshot_hash':receipt['snapshot_hash'],
+        'operation':op,'target':t,'expected':expected,'value':value}
+
+
+def _retain_repair_capture(store, result, directory):
+    directory.mkdir(mode=0o700)
+    copied=[_copy_artifact(store,item,directory) for item in result['artifacts']]
+    exported=materialize_asset(store,result['receipt_hash'],parent=directory)
+    safe_export={k:v for k,v in exported.items() if k!='directory'}
+    (directory/'capture.json').write_bytes(canonical({**result,'retained_files':copied}))
+    (directory/'export.json').write_bytes(canonical(safe_export))
+    return safe_export
+
+
+def run_repairs(store, registry, config, baseline, evidence):
+    """Run each exact fault/repair once; any uncertain operation stops the trial."""
+    initial_receipt,initial_snapshot=load_snapshot(store,baseline['receipt_hash'])
+    if initial_receipt['generation']!=0:
+        raise ValueError('Repair trial requires its just-created sealed initial generation')
+    current=baseline;cases=[];last_export=None
+    bounds_case={'id':'camera-control','operation':'part_edit',
+        'target':{'part_id':'halo_top','property':'to','axis':1},'fault':31,'repair':32}
+    for case in [*staff_repair_cases(),bounds_case]:
+        before=run_mutation(store,registry,config,current['receipt_hash'],
+                            _repair_intent(store,current['receipt_hash'],case,case['fault']))
+        before_export=_retain_repair_capture(store,before,evidence/(case['id']+'-before'))
+        after=run_mutation(store,registry,config,before['receipt_hash'],
+                           _repair_intent(store,before['receipt_hash'],case,case['repair']))
+        last_export=_retain_repair_capture(store,after,evidence/(case['id']+'-after'))
+        comparison=compare_captures(store,before['receipt_hash'],after['receipt_hash'])
+        if comparison['comparability']!='COMPARABLE':
+            raise ValueError('Actual repair capture conditions are not comparable')
+        _,restored=load_snapshot(store,after['receipt_hash'])
+        restored['generation']=initial_snapshot['generation']
+        if not json_equal(restored,initial_snapshot):
+            raise ValueError('Repair did not restore the complete initial effective asset')
+        entry={'case':case['id'],'operation':case['operation'],'target':case['target'],
+            'before_receipt_hash':before['receipt_hash'],'after_receipt_hash':after['receipt_hash'],
+            'before_generation':before['generation'],'after_generation':after['generation'],
+            'before_export_manifest_hash':before_export['manifest_hash'],
+            'after_export_manifest_hash':last_export['manifest_hash'],'comparison':comparison,
+            'verification':{'structural':'PASS','visual':'NOT_RUN','runtime':'NOT_RUN'}}
+        if case['id']=='camera-control':
+            _,bad=load_snapshot(store,before['receipt_hash'])
+            maxima=lambda snap:[max(e['to'][axis] for e in snap['native']['elements']) for axis in range(3)]
+            entry['scene_bounds_changed']=maxima(bad)!=maxima(restored)
+            if not entry['scene_bounds_changed']:
+                raise ValueError('Camera control did not change scene bounds')
+            camera_control=entry
+        else:
+            cases.append(entry)
+        current=after
+    report={'schema_version':1,'assertion_domain':'live_blockbench_bounded_asset_repair',
+        'fixture_faults_injected':True,'request_hash':baseline['request_hash'],'project_uuid':baseline['project_uuid'],
+        'initial_receipt_hash':baseline['receipt_hash'],'final_receipt_hash':current['receipt_hash'],
+        'final_generation':current['generation'],'cases':cases,'camera_control':camera_control,
+        'loaded_revision':'UNATTESTED','outcome':'NOT_RUN',
+        'verification':{'structural':'PASS','visual':'NOT_RUN','runtime':'NOT_RUN'}}
+    (evidence/'repairs.json').write_bytes(canonical(report))
+    (evidence/'capture-evidence.json').write_bytes(canonical(capture_evidence(store,current['receipt_hash'],last_export['manifest_hash'])))
+    return report
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -306,9 +413,10 @@ def main(argv: list[str] | None = None) -> int:
     r = subs.add_parser("run")
     r.add_argument("--root", type=Path, required=True)
     r.add_argument("--evidence", type=Path, required=True)
+    r.add_argument("--repairs", action="store_true", help="Run the bounded retained staff repair trial")
     args = parser.parse_args(argv)
     try:
-        result = prepare(args.root, args.plugin_source, args.evidence) if args.command == "prepare" else run(args.root, args.evidence)
+        result = prepare(args.root, args.plugin_source, args.evidence) if args.command == "prepare" else run(args.root, args.evidence, repairs=args.repairs)
         print(json.dumps(result, sort_keys=True))
         return 0
     except Exception as exc:

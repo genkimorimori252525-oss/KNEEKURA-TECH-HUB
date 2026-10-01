@@ -93,7 +93,7 @@ jobs:
             --evidence "$GITHUB_WORKSPACE/blockbench-evidence/cdp.json"
           status=0
           python tools/ci/mod_ai_blockbench_live.py run \
-            --root "$ROOT" --evidence "$GITHUB_WORKSPACE/blockbench-evidence" || status=$?
+            --root "$ROOT" --repairs --evidence "$GITHUB_WORKSPACE/blockbench-evidence" || status=$?
           # Read-only diagnostics after either outcome. Never reload the plugin
           # or retry an operation whose completion is uncertain.
           node tools/ci/blockbench_cdp.mjs --port 9222 --snapshot-only \
