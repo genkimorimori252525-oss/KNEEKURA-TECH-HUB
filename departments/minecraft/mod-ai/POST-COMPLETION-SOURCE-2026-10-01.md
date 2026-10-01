@@ -1,6 +1,6 @@
 # Post-completion implementation scope — 2026-10-01
 
-Status: **BOUNDED SOURCE STAGE IMPLEMENTED; LIVE ACCEPTANCE DEFERRED.**
+Status: **BOUNDED SOURCE IMPLEMENTED; NATIVE OWNER/CAPTURE ROUND TRIP VERIFIED; FULL LIVE ACCEPTANCE OPEN.**
 
 The user authorized the three retained Blockbench improvements and the saved LAB successor design, then explicitly prioritized code over real-device validation. The original MOD-AI and AI Usability Layer acceptance stays in its original records.
 
@@ -65,3 +65,13 @@ Actual client execution exposed two MOD problems missed by source compilation: u
 The third local attempt at LAB `1264fdd` / MOD `f9502df` completed the existing G1/G2 smoke with exit 0 and both retained acceptance manifests reporting `PASS`. It observed the exact UUID declared in Golden's retained capture metadata, two heartbeat lanes and nine required entity lanes, retained a non-truncated one-second observation pre-roll, received clean flush ACK with zero writer drops/empty queue, and sealed `EVIDENCE_COMPLETE` after safe process stop. `requireReimu` was false. This is a short startup/observation/stop gate, not Reimu-specific behavior, Cardinal-4 pixels or full repair acceptance. LAB's reviewed Windows native regression passed writer 3, image 6, world 73; whole pinned MOD compilation and related Node 75/75 plus paired protocol 1/1 also passed locally. Separate Windows aggregate failures remain open.
 
 Remaining gates are scoped owner installation/actions, camera restoration/observer effect, event timing, Arena reset/cleanup, matched repair/resume, the visual-format benchmark and production endurance/full target equivalence. The three PRs remain Draft. New-pin hosted results must be read from exact-head checks; the earlier successful runs cannot certify this update.
+
+## Bounded native continuation
+
+The preceding remaining-gate list describes the startup-smoke stage. At LAB `59ae068144a36fdaa6b6b6ef2e27c1ebd02de400` / MOD `f9502df842fc5f7103217217d7a327babe452843`, disposable-copy run `run-20261001115242-5bb8ac6edb07` subsequently completed with exit 0: exact-Reimu evidence, native owner installation, two actual four-view captures (eight 640x480 PNGs), exact API-readback restoration, verified 2-tick wait and yaw change, one-use bounded baseline reset, raw/derived packet retention, finalized export/import and clean process stop. All 69 evidence records are continuous across Arena epoch 0 to 1, with zero writer drops and `EVIDENCE_COMPLETE`. Original Golden save hashes remain unchanged, 34/34.
+
+Live findings fixed in LAB were camera body/head-yaw mismatch, premature abort restoration readback and false producer sequence gaps after Arena/resource epoch changes. Existing tolerances, deadlines and real-gap/replay checks remain. Four regression tests join the normal G2/CI aggregate. Local related Node checks passed 79/79; genuine Forge checks passed writer 3/image 6/world 73; whole MOD compile and paired TECH/LAB fixture passed. Independent source review found no new issue. The previous failed/partial seals remain retained rather than rewritten.
+
+Actual TECH profile/index/CAS preparation and its existing pinned 27-module registry drove the trial. Visual export manifest `997391b76326fd0ddaff505b0bbc5288c5034a2e527c1bdddca94f01c08c06fa` imported as `IMPORTED_LAB_REPORT`, result `b0707284a4201ea03f6aebc9485eee5795e349400f21dd5dd4d0358946c001c4`. Native cleanup verifies only `BOUNDED_BLOCKS_AND_SUBJECT_POSE`; the exporter deliberately retains cleanup UNKNOWN, assertions INCONCLUSIVE and runtime NOT_ESTABLISHED. Sequential camera takeover perturbs observation and invalidates `alive`.
+
+Before/after comparison ran but returned `NON_COMPARABLE` / `NOT_EVALUATED` (`CAPTURE_CONDITIONS_MISMATCH:frames`). A subject-turn trial is not a matched MOD repair. Real matched repair/resume, event timing, the visual-format benchmark, in-game holding appearance, endurance/full target equivalence and separate Windows aggregate failures remain open. `use_item` remains unsupported. All three PRs remain Draft; this bounded trial is not full operational acceptance. Latest source-pin hosted checks must be verified at their exact TECH head.
