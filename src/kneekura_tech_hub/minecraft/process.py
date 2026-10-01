@@ -9,9 +9,12 @@ from pathlib import Path
 from .storage import ContractError
 
 
-def clean_environment(extra: dict[str,str] | None = None) -> dict[str,str]:
+def clean_environment(extra: dict[str,str] | None = None, *, inherit: bool = True) -> dict[str,str]:
     env = {k:v for k,v in os.environ.items() if k not in
            {'JAVA_TOOL_OPTIONS','_JAVA_OPTIONS','JDK_JAVA_OPTIONS','CLASSPATH','GRADLE_OPTS'} }
+    if not inherit:
+        # Explicit adapters need the OS runtime only, not shell/user loader hooks.
+        env = {k: os.environ[k] for k in ('SystemRoot', 'WINDIR') if k in os.environ}
     env['LC_ALL'] = 'C'
     if extra:
         if any(not isinstance(k,str) or not isinstance(v,str) for k,v in extra.items()):
@@ -21,13 +24,14 @@ def clean_environment(extra: dict[str,str] | None = None) -> dict[str,str]:
 
 
 def run_process(argv: list[str], cwd: Path | str, *, timeout: float = 300,
-                max_output_bytes: int = 8*1024*1024, env: dict | None = None) -> dict:
+                max_output_bytes: int = 8*1024*1024, env: dict | None = None,
+                inherit_environment: bool = True) -> dict:
     """Only explicit callers invoke this; reads never dispatch a subprocess.
 
     Logs are bounded. Timeout/output-limit is not a successful completion even
     when the OS happened to observe exit 0. Child process groups are terminated.
     """
-    if (not isinstance(argv,list) or not argv or any(not isinstance(a,str) or '\x00' in a for a in argv)
+    if (type(inherit_environment) is not bool or not isinstance(argv,list) or not argv or any(not isinstance(a,str) or '\x00' in a for a in argv)
             or isinstance(timeout,bool) or not isinstance(timeout,(int,float)) or not 0<timeout<=7200
             or type(max_output_bytes) is not int or not 1<=max_output_bytes<=256*1024*1024):
         raise ContractError('Invalid bounded process request')
@@ -35,7 +39,7 @@ def run_process(argv: list[str], cwd: Path | str, *, timeout: float = 300,
     with tempfile.TemporaryFile() as output:
         process = subprocess.Popen(argv,cwd=str(cwd),stdin=subprocess.DEVNULL,
                                    stdout=output,stderr=subprocess.STDOUT,shell=False,
-                                   env=clean_environment(env),start_new_session=os.name!='nt')
+                                   env=clean_environment(env, inherit=inherit_environment),start_new_session=os.name!='nt')
         try:
             while process.poll() is None:
                 timed_out = time.monotonic()-started > timeout

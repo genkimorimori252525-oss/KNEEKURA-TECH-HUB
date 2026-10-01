@@ -8,7 +8,7 @@ from __future__ import annotations
 import base64
 from pathlib import Path
 
-from . import core_bridge, execution, index, interventions, providers, runtime, task_context, workspace
+from . import core_bridge, execution, experiment_adapter, index, interventions, providers, runtime, task_context, workspace
 from .mappings import MappingTable
 from .storage import ContractError, Store, capture_profile, valid_hash
 
@@ -99,6 +99,10 @@ def add_commands(commands, profile):
         p.add_argument('--run-registry', metavar='RUN_REGISTRY_JSON')
         p.add_argument('--input-registry', metavar='INPUT_REGISTRY_JSON')
         p.add_argument('--blockbench-registry', metavar='REGISTRY_JSON')
+        p.add_argument('--experiment-registry', metavar='REGISTRY_JSON', help='Read-only pinned LAB adapter inspection')
+        p.add_argument('--experiment-result', metavar='RESULT_HASH', help='Retained LAB report, never runtime authority')
+        p.add_argument('--experiment-control-registry', metavar='REGISTRY_JSON', help='Inert scoped-control registration inspection')
+        p.add_argument('--experiment-control-receipt', metavar='RECEIPT_HASH', help='Retained control outcome; uncertainty blocks mutation advice')
         p.add_argument('--session', metavar='PRIVATE_SESSION_JSON')
         p.add_argument('--evidence', action='append', default=[], metavar='SHA256',
                        help='Captured evidence hash (repeatable, maximum 32)')
@@ -141,7 +145,13 @@ def dispatch(args, store: Store, read_json, parse_json):
             session=_read_task_file(runtime.load_session, args.session, 'session')
                 if args.session is not None else None,
             evidence_hashes=tuple(args.evidence), world=args.world,
-            run_directory=args.run_directory, core_configured=args.core_configured)
+            run_directory=args.run_directory, core_configured=args.core_configured,
+            experiment_registry=_read_task_file(experiment_adapter.read_registry_file, args.experiment_registry, 'experiment-registry')
+                if args.experiment_registry is not None else None,
+            experiment_result_hash=args.experiment_result,
+            experiment_control_registry=_read_task_file(experiment_adapter.read_registry_file, args.experiment_control_registry, 'experiment-control-registry')
+                if args.experiment_control_registry is not None else None,
+            experiment_control_receipt_hash=args.experiment_control_receipt)
         if args.action == 'capabilities':
             return {field: result[field] for field in ('schema_version', 'status', 'target', 'capabilities')}
         return result

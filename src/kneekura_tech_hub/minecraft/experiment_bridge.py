@@ -26,9 +26,16 @@ _RECORD_FIELDS = {'schema_version', 'record_type', 'request_hash', 'result', 'sn
                   'lab_snapshot_hash', 'lab_snapshot_hash_verification', 'provenance', 'runtime_attestation'}
 
 
+def _resolved_path(path):
+    try:
+        return path.resolve()
+    except (OSError, RuntimeError):
+        raise IntegrityError('Experiment CAS path cannot be resolved safely') from None
+
+
 def _read_bounded(store: Store, identifier: str, limit: int) -> bytes:
     path = store.blob_path(valid_hash(identifier))
-    if path.is_symlink() or not path.resolve().is_relative_to(store.root):
+    if path.is_symlink() or not _resolved_path(path).is_relative_to(store.root):
         raise IntegrityError('CAS path escapes managed storage')
     metadata = path.stat(follow_symlinks=False)
     if not stat.S_ISREG(metadata.st_mode) or metadata.st_size > limit:
@@ -39,7 +46,7 @@ def _read_bounded(store: Store, identifier: str, limit: int) -> bytes:
         opened = os.fstat(stream.fileno())
         if (not stat.S_ISREG(opened.st_mode) or opened.st_size > limit
                 or (opened.st_dev, opened.st_ino) != (metadata.st_dev, metadata.st_ino)
-                or path.is_symlink() or not path.resolve().is_relative_to(store.root)):
+                or path.is_symlink() or not _resolved_path(path).is_relative_to(store.root)):
             raise IntegrityError('Experiment artifact changed before reading')
         raw = stream.read(limit + 1)
         after = os.fstat(stream.fileno())
@@ -99,7 +106,14 @@ def load_experiment(store: Store, request_hash: str) -> dict:
 
 
 def _snapshot(store: Store, request: dict, result: dict) -> dict:
-    s = decode_json(_read_bounded(store, result['run_snapshot_content_hash'], 2 * 1024 * 1024), max_bytes=2 * 1024 * 1024)
+    return _validate_snapshot(request, result, _read_bounded(store, result['run_snapshot_content_hash'], 2 * 1024 * 1024))
+
+
+def _validate_snapshot(request: dict, result: dict, raw: bytes) -> dict:
+    """Shared pure validation permits whole export checks before CAS mutation."""
+    if digest(raw) != result['run_snapshot_content_hash']:
+        raise IntegrityError('LAB RunSnapshot content identity mismatch')
+    s = decode_json(raw, max_bytes=2 * 1024 * 1024)
     if not isinstance(s, dict) or set(s) not in (_SNAPSHOT_FIELDS, _SNAPSHOT_FIELDS | {'bridge'}):
         raise ContractError('Expected immutable LAB RunSnapshot with prelaunch TECH HUB binding')
     if (type(s['schemaVersion']) is not int or s['schemaVersion'] != 1
@@ -184,3 +198,22 @@ def inspect_experiment_result(store: Store, result_hash: str, current_target: di
     return dict(summary, currentness='NOT_CHECKED' if current_target is None else
                 'REVERIFY_REQUIRED' if differences else 'MATCHING_DECLARED_TARGET',
                 changed_target_fields=differences)
+
+
+def resume_experiment(store: Store, result_hash: str, current_target: dict | None = None) -> dict:
+    """Compact validated retained-evidence handoff, not a new runtime observation."""
+    summary = inspect_experiment_result(store, result_hash, current_target)
+    record = decode_json(_read_bounded(store, result_hash, 2 * 1024 * 1024), max_bytes=2 * 1024 * 1024)
+    result = record['result']
+    gates = ['RUNTIME_ATTESTATION_NOT_ESTABLISHED', 'LIVE_REPAIR_ACCEPTANCE_NOT_RUN']
+    if result['execution']['status'] in ('UNKNOWN', 'PARTIAL'):
+        gates.append('EXECUTION_UNKNOWN')
+    if result['execution']['cleanup'] in ('UNKNOWN', 'FAILED'):
+        gates.append('CLEANUP_UNKNOWN')
+    if any(x['status'] == 'UNKNOWN' for x in result['execution']['action_receipts']):
+        gates.append('ACTION_COMPLETION_UNKNOWN')
+    if summary['currentness'] == 'REVERIFY_REQUIRED': gates.append('CURRENT_TARGET_CHANGED')
+    return {**summary, 'assertions': result['assertions'], 'assertion_basis': _PROVENANCE,
+        'action_receipts': result['execution']['action_receipts'],
+        'evidence': result['evidence'], 'observation_pointers': result['observations'], 'gaps': result['gaps'],
+        'open_gates': gates, 'can_replay': False, 'execution_authority': 'NONE'}

@@ -318,9 +318,25 @@ def evaluate_capabilities(store: Store, request: dict, inputs: dict, evidence: d
                 continue
             result[identifier] = _record(identifier, 'UNKNOWN', 'SESSION_UNKNOWN_COMPLETION',
                                          missing, hashes)
-    result['experimental_runtime'] = _record('experimental_runtime', 'BLOCKED',
-        'LAB_RUNTIME_BACKEND_UNAVAILABLE',
-        ('registered_lab_execution', 'arena_typed_actions', 'capture_barrier'), surface='UNSUPPORTED')
+    report = inputs.get('experiment_report')
+    control = inputs.get('experiment_control_receipt')
+    if control and control['requires_reconciliation']:
+        result['experimental_runtime'] = _record('experimental_runtime', 'UNKNOWN',
+            'SESSION_UNKNOWN_COMPLETION', ('completion_reconciliation',), (control['receipt_hash'],))
+    elif report and report['next_operation'] == 'experiment.reconcile_unknown':
+        result['experimental_runtime'] = _record('experimental_runtime', 'UNKNOWN',
+            'SESSION_UNKNOWN_COMPLETION', ('completion_reconciliation',), (report['result_hash'],))
+    elif report and report['currentness'] == 'REVERIFY_REQUIRED':
+        result['experimental_runtime'] = _record('experimental_runtime', 'BLOCKED',
+            'EXPERIMENT_TARGET_CHANGED', ('current_target_reverification', 'loaded_runtime_attestation'),
+            (report['result_hash'],))
+    elif report or inputs.get('experiment_adapter') or inputs.get('experiment_control_adapter') or control:
+        result['experimental_runtime'] = _record('experimental_runtime', 'BLOCKED',
+            'LAB_RUNTIME_ATTESTATION_REQUIRED', ('loaded_runtime_attestation', 'disposable_world_authority',
+            'live_repair_acceptance'), (report['result_hash'],) if report else (control['receipt_hash'],) if control else ())
+    else:
+        result['experimental_runtime'] = _record('experimental_runtime', 'NOT_CONFIGURED',
+            'LAB_ADAPTER_NOT_REGISTERED', ('experiment_registry_or_retained_result',))
     rows = [result[identifier] for identifier in CAPABILITY_IDS]
     task_context._check_private_aliases(rows, inputs)
     return rows
@@ -363,11 +379,21 @@ def derive_next_actions(request: dict, inputs: dict, capabilities: list[dict]) -
     reconcile = _needs_reconciliation(capabilities)
     actions = []
     if reconcile:
-        actions.append(_action('runtime.reconcile_unknown', 'READ_ONLY',
+        control = inputs.get('experiment_control_receipt')
+        operation = (control['next_operation'] if control and control['requires_reconciliation'] else
+            'experiment.reconcile_unknown' if inputs.get('experiment_report', {}).get('next_operation') == 'experiment.reconcile_unknown'
+            else 'runtime.reconcile_unknown')
+        actions.append(_action(operation, 'READ_ONLY',
             ('operation_identity', 'retained_receipt'), primary=True, reason='SESSION_UNKNOWN_COMPLETION'))
     elif inputs.get('index') is None:
         actions.append(_action('profile.resolve', 'SIDE_EFFECTING', ('environment_capture',),
                                primary=True, reason='PROFILE_MISSING'))
+    if inputs.get('experiment_report') and not reconcile:
+        actions.append(_action('experiment.inspect_result', 'READ_ONLY', ('result_hash',)))
+    elif inputs.get('experiment_control_adapter') and not reconcile:
+        actions.append(_action('experiment.inspect_owner', 'READ_ONLY', ('request_hash', 'control_registry')))
+    elif inputs.get('experiment_adapter') and not reconcile:
+        actions.append(_action('experiment.prepare', 'SIDE_EFFECTING', ('experiment_request',)))
     for operation, intents, capability, mode, required in _NEXT_ACTION_RULES:
         c = by_id.get(capability, {})
         if (intent in intents and c.get('surface') == 'IMPLEMENTED' and c.get('readiness') == 'READY'

@@ -1,6 +1,6 @@
 # KNEEKURA TECH HUB × LAB Experimental Runtime Bridge v1
 
-Status: **APPROVED FUTURE / POST-COMPLETION DESIGN — DO NOT IMPLEMENT INSIDE THE CURRENT MOD-AI PLAN**  
+Status: **APPROVED POST-COMPLETION DESIGN — SOURCE IMPLEMENTATION AUTHORIZED 2026-10-01; LIVE ACCEPTANCE DEFERRED**
 Date: 2026-10-01  
 TECH HUB repository: `genkimorimori252525-oss/KNEEKURA-TECH-HUB`  
 LAB repository: `genkimorimori252525-oss/KNEEKURA-LAB`  
@@ -13,7 +13,7 @@ Parent roadmap:
 - post-completion AI usability layer:
   `docs/superpowers/plans/2026-10-01-minecraft-mod-ai-usability-layer.md`
 
-> This document defines the **next architectural stage after those plans**.
+> This document defines the **next architectural stage after those plans**. The user subsequently authorized implementation on 2026-10-01 and prioritized source implementation while deferring real-device validation. The original plan boundaries below remain the design basis; current source interfaces and explicit acceptance gaps are recorded in `departments/minecraft/mod-ai/LAB-SCOPED-CONTROL.md`.
 > It does not expand PR #74 acceptance, authorize a Minecraft launch, merge KNEEKURA-LAB
 > into this repository, or grant any new runtime/mutation permission.
 

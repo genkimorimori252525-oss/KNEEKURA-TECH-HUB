@@ -1,10 +1,12 @@
-# Offline experimental runtime bridge boundary
+# Experimental runtime bridge contracts
 
-Status: **X0/X1 SOURCE IMPLEMENTATION; REAL LAB EXECUTION UNAVAILABLE.**
+Status: **X0/X1 CONTRACTS IMPLEMENTED; SCOPED LAB SOURCE CONNECTION AVAILABLE; LIVE ACCEPTANCE DEFERRED.**
+
+The [phase-by-phase source record](POST-COMPLETION-SOURCE-2026-10-01.md) separates implemented code from deferred acceptance. The current optional control/import surface is documented in [LAB-SCOPED-CONTROL.md](LAB-SCOPED-CONTROL.md). It preserves these contracts and adds a separately pinned local adapter. Full runtime readiness and loaded-target attestation remain unestablished.
 
 This starts the [approved successor design](../../../docs/superpowers/specs/2026-10-01-minecraft-mod-ai-experimental-runtime-bridge-design.md).
 It does not reopen or replace the accepted original MOD-AI/AI Usability Layer.
-The [fresh LAB audit](LAB-BRIDGE-READINESS-2026-10-01.md) records missing owner prerequisites.
+The [initial LAB audit](LAB-BRIDGE-READINESS-2026-10-01.md) records the starting prerequisites; the scoped-control document records the subsequent source connection.
 
 ## What is available
 
@@ -17,11 +19,7 @@ The explicit `experiment` CLI supports:
 - `inspect-result --result-hash SHA256 [--current-target FILE]`: inspect immutable reported outcomes and mark changed dependencies `REVERIFY_REQUIRED`
 - `compare --before FILE --after FILE [--changed-target FIELD]`: compare declared setup/assertions and explicitly permitted repair target changes
 
-Use the existing global `--store` option. There is no `execute` command, network
-transport, process launch, auto-retry, new scheduler or second database.
-TaskContext's twelfth `experimental_runtime` capability is explicitly
-`UNSUPPORTED / BLOCKED / LAB_RUNTIME_BACKEND_UNAVAILABLE`. Offline command
-availability does not imply that a registered LAB can execute an experiment.
+Use the existing global `--store` option. These offline operations do not launch a process. The separate scoped-control backend invokes only the pinned local Node adapter with a fixed command; it has no generic `execute`, runtime launch, network transport, auto-retry, scheduler or second database. TaskContext inspects explicit registrations and retained receipts without executing them. Readiness remains blocked by the unverified loaded runtime and real repair acceptance; default operation without an explicit registry stays unavailable.
 
 ## Request v1
 
@@ -36,7 +34,7 @@ Exact top-level fields:
 - Typed actions: `wait_ticks`, `teleport_subject`, `use_item`, `set_block`; no raw commands, scripts, executable paths or embedded launch authority
 - Initial state and actions share at most 32 unique action IDs; spatial actions remain inside declared bounds
 - Observation: at most 16 exact-subject scopes with fixed allowed lanes and L0–L4 level
-- Visual rig: `none` or `cardinal-4-snapshot-v1`, FOV 30..100, integer viewport 64..2048; the latter is a requested capability, not an implemented camera
+- Visual rig: `none` or `cardinal-4-snapshot-v1`, FOV 30..100, integer viewport 64..2048; the latter selects LAB's bounded four-view source implementation; real capture acceptance is still deferred
 - Assertions: at most 32 stable IDs; explicit bounded structured fields/operators or fixed visual checks; no unconstrained aesthetic oracle
 - Budgets: at most 120000ms, 32 actions and 16 captures; four-view requests need at least four captures
 
@@ -56,7 +54,7 @@ An imported report always retains:
 
 Matching JSON/hashes proves content identity and internal linkage. It cannot
 prove that a JVM loaded those bytes, an Arena reset occurred, or an assertion
-was observed. A future registered LAB execution path must establish those facts.
+was observed. The registered LAB owner source path separately checks bounded diagnostic authority; real runtime acceptance must still establish those facts.
 An imported `PASS` remains a reported result; it is never automatically promoted
 to canonical truth or current runtime readiness.
 
@@ -89,8 +87,4 @@ remain X3/X6/X7 acceptance. A pixel difference is never an improvement verdict.
 
 ## Remaining gates
 
-LAB must own exact material/loaded-runtime attestation, resettable Arena and
-typed mutation fencing, a real capture barrier with human camera restoration,
-four raw scene views, derived visual packet/benchmark, bounded triggers, matched
-real comparisons and one actual repair/resume cycle. Those are not claimed by
-these offline contracts. X8 remains conditional on demonstrated need.
+LAB owns the source implementations for bounded Arena/actions, camera capture/restoration, visual compilation, triggers, matched comparison and finalized evidence export. The optional native owner checks actual class-resource/container and disposable-world correspondence, while explicitly leaving loaded config/resources, transformed classes and full target attestation unestablished. Real reset/capture/restore acceptance, the visual-format benchmark, actual repair/resume cycle and Windows runtime gate remain deferred. X4/X6 final independent review is also unperformed because that review continuation was blocked; passing author tests do not replace it. X8 remains conditional and DEFERRED until a concrete same-frame requirement is observed.

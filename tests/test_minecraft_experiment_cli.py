@@ -69,7 +69,7 @@ def test_task_context_does_not_advertise_unimplemented_lab_execution(tmp_path):
     store = Store(tmp_path / 'cas')
     value = task_context.prepare_task_context(store, task_request())
     c = next((c for c in value['capabilities'] if c['id'] == 'experimental_runtime'), None)
-    assert c == {'id': 'experimental_runtime', 'surface': 'UNSUPPORTED', 'readiness': 'BLOCKED',
-                 'reason_code': 'LAB_RUNTIME_BACKEND_UNAVAILABLE',
-                 'missing': ['registered_lab_execution', 'arena_typed_actions', 'capture_barrier'], 'evidence': []}
+    assert c == {'id': 'experimental_runtime', 'surface': 'IMPLEMENTED', 'readiness': 'NOT_CONFIGURED',
+                 'reason_code': 'LAB_ADAPTER_NOT_REGISTERED',
+                 'missing': ['experiment_registry_or_retained_result'], 'evidence': []}
     assert not any(a['operation_id'].startswith('experiment.execute') for a in value['next_actions'])

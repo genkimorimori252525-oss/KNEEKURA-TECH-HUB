@@ -103,7 +103,11 @@ def load_task_inputs(store: Store, *, index_id: str | None = None,
                      run_registry: dict | None = None, input_registry: dict | None = None,
                      blockbench_registry: dict | None = None, session: dict | None = None,
                      evidence_hashes: tuple[str, ...] = (), world: str | None = None,
-                     run_directory: str | None = None, core_configured: bool = False) -> dict:
+                     run_directory: str | None = None, core_configured: bool = False,
+                     experiment_registry: dict | None = None,
+                     experiment_result_hash: str | None = None,
+                     experiment_control_registry: dict | None = None,
+                     experiment_control_receipt_hash: str | None = None) -> dict:
     """Build a private input bundle without preparing, writing, or executing.
 
 Registries are detached JSON, not validated execution authority. Session input
@@ -140,8 +144,44 @@ hash verification before any downstream interpretation or public summary.
                 expected[contract_field] = captured
         if any(contract.get(field) != value for field, value in expected.items()):
             raise IntegrityError('Session identity differs from the supplied index/profile')
+    experiment = {}
+    if experiment_registry is not None:
+        from .experiment_adapter import inspect_registry
+        registered = _optional_object(experiment_registry, 'experiment_registry')
+        experiment['experiment_registry'] = registered
+        experiment['experiment_adapter'] = inspect_registry(registered)
+    if experiment_control_registry is not None:
+        from .experiment_control import inspect_registry as inspect_control_registry
+        registered = _optional_object(experiment_control_registry, 'experiment_control_registry')
+        experiment['experiment_control_registry'] = registered
+        experiment['experiment_control_adapter'] = inspect_control_registry(registered)
+    if experiment_control_receipt_hash is not None:
+        from .experiment_control import inspect_receipt
+        try:
+            experiment['experiment_control_receipt'] = inspect_receipt(store, valid_hash(experiment_control_receipt_hash),
+                registry=experiment.get('experiment_control_registry'))
+        except OSError:
+            raise IntegrityError('Explicit control receipt is unavailable') from None
+    if experiment_result_hash is not None:
+        from .experiment_bridge import load_experiment, resume_experiment
+        try:
+            experiment['experiment_report'] = resume_experiment(store, valid_hash(experiment_result_hash))
+            if snapshot is not None:
+                report = experiment['experiment_report']
+                target = load_experiment(store, report['request_hash'])['target']
+                current = {'profile_id': snapshot['profile']['profile_id'], 'index_snapshot_id': index_id,
+                    'source_revision': snapshot['profile']['manifest'].get('workspace_revision'),
+                    'dirty_hash': snapshot['profile']['manifest'].get('dirty_hash')}
+                changed = sorted(k for k, v in current.items() if target[k] != v)
+                if changed:
+                    report['currentness'] = 'REVERIFY_REQUIRED'
+                    report['changed_target_fields'] = changed
+                    report['open_gates'].append('CURRENT_TARGET_CHANGED')
+
+        except OSError:
+            raise IntegrityError('Explicit experiment report is unavailable') from None
     return {
-        'index_snapshot_id': index_id, 'index': snapshot, **registries,
+        **experiment, 'index_snapshot_id': index_id, 'index': snapshot, **registries,
         'session': selected_session, 'evidence': _evidence_metadata(store, evidence_hashes),
         'world': world, 'run_directory': run_directory, 'core_configured': core_configured,
     }
@@ -506,13 +546,13 @@ def summarize_lineage(inputs: dict, evidence: dict) -> list[dict]:
 
 
 _PRIVATE_FIELDS = ('token', 'password', 'secret', 'endpoint_path', 'report_path', 'directory',
-                   'world', 'build_artifact', 'workspace', 'display', 'run_directory')
+                   'world', 'build_artifact', 'workspace', 'display', 'run_directory', 'executable', 'owner_file')
 
 
 def _check_private_aliases(public, inputs: dict, record: dict | None = None) -> None:
     """Even syntactically valid IDs must not reproduce known private selectors/secrets."""
     containers = [inputs]
-    for field in ('session', 'run_registry', 'input_registry', 'blockbench_registry'):
+    for field in ('session', 'run_registry', 'input_registry', 'blockbench_registry', 'experiment_registry', 'experiment_control_registry'):
         if isinstance(inputs.get(field), dict):
             containers.append(inputs[field])
     if record is not None:
@@ -572,7 +612,8 @@ def _registry_evidence(store: Store, inputs: dict) -> list[dict]:
 def _task_status(request: dict, inputs: dict, capabilities: list[dict], actions: list[dict]) -> str:
     from .task_routing import _needs_reconciliation
 
-    if not actions or inputs['index'] is None or _needs_reconciliation(capabilities):
+    if (not actions or inputs['index'] is None or _needs_reconciliation(capabilities)
+            or inputs.get('experiment_report', {}).get('currentness') == 'REVERIFY_REQUIRED'):
         return 'PARTIAL'
     required = set({'create_asset': ('blockbench_asset',), 'verify_server': ('gametest',),
                     'verify_client': ('client_observation',)}.get(request['intent'], ()))
@@ -588,6 +629,8 @@ def _task_status(request: dict, inputs: dict, capabilities: list[dict], actions:
             required.update(identifiers)
     if inputs['core_configured']:
         required.add('core_context')
+    if inputs.get('experiment_registry') is not None or inputs.get('experiment_control_registry') is not None:
+        required.add('experimental_runtime')
     if any(c['id'] in required and c['readiness'] != 'READY' for c in capabilities):
         return 'PARTIAL'
     return 'OK'
@@ -597,7 +640,11 @@ def prepare_task_context(store: Store, request: dict, *, index_id: str | None = 
                          run_registry: dict | None = None, input_registry: dict | None = None,
                          blockbench_registry: dict | None = None, session: dict | None = None,
                          evidence_hashes: tuple[str, ...] = (), world: str | None = None,
-                         run_directory: str | None = None, core_configured: bool = False) -> dict:
+                         run_directory: str | None = None, core_configured: bool = False,
+                         experiment_registry: dict | None = None,
+                         experiment_result_hash: str | None = None,
+                         experiment_control_registry: dict | None = None,
+                         experiment_control_receipt_hash: str | None = None) -> dict:
     """Assemble a bounded, deterministic public view without writing or executing.
 
     OK means useful local next operations exist with their selected prerequisites;
@@ -611,7 +658,9 @@ def prepare_task_context(store: Store, request: dict, *, index_id: str | None = 
     inputs = load_task_inputs(store, index_id=index_id, run_registry=run_registry,
         input_registry=input_registry, blockbench_registry=blockbench_registry, session=session,
         evidence_hashes=evidence_hashes, world=world, run_directory=run_directory,
-        core_configured=core_configured)
+        core_configured=core_configured, experiment_registry=experiment_registry,
+        experiment_result_hash=experiment_result_hash, experiment_control_registry=experiment_control_registry,
+        experiment_control_receipt_hash=experiment_control_receipt_hash)
     target = summarize_target(inputs)
     evidence = summarize_evidence(store, inputs)
     # The caller's bounded public evidence/lineage remain unchanged. A separate
