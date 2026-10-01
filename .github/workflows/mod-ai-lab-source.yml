@@ -135,6 +135,9 @@ jobs:
       - name: Actual dependency source contracts
         working-directory: lab
         run: npm run test:bridge-runtime-api
+      - name: Pinned MOD resource and unit regressions
+        working-directory: mod
+        run: bash ./gradlew test --no-daemon -Dorg.gradle.java.home="$JAVA_HOME" -Dorg.gradle.jvmargs=-Xmx4G -Porg.gradle.java.installations.paths="$JAVA_HOME" --stacktrace
       - name: Record source-only scope
         if: always()
         env:
