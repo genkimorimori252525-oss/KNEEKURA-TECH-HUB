@@ -20,6 +20,7 @@ def test_lab_source_pin_and_workflow_are_source_only_exact_refs():
     assert 'check_lab_adapter_source.py' in workflow
     # Private cross-repository checkout needs dedicated read-only deploy keys;
     # no runtime or other credential may enter this source-only workflow.
+    assert len(re.findall(r'\bsecrets\b',workflow))==2
     assert re.findall(r'\$\{\{\s*secrets\.([A-Z0-9_]+)\s*\}\}',workflow)==[
         'MOD_AI_LAB_SOURCE_SSH_KEY','MOD_AI_MOD_SOURCE_SSH_KEY']
     for forbidden in ('runClient','runServer','debug:start','self-hosted','workflow_dispatch'):
