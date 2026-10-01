@@ -1,0 +1,2041 @@
+{
+  "record_kind": "SEPARATE_DEPENDENCY_SOURCE_SNAPSHOTS",
+  "dependencies": {
+    "ffapi-anchor": {
+      "repository": "https://github.com/Sinytra/ForgifiedFabricAPI",
+      "revision": "6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f",
+      "retrieved_at": "2026-10-01T18:26:21.248Z",
+      "track": "ANCHOR",
+      "namespace": "yarn",
+      "scope": "SELECTED_BASE_AND_LIFECYCLE_MODULES_NOT_FULL_FFAPI",
+      "total_tree_blobs": 1796,
+      "tree_truncated": false,
+      "files_acquired": 58,
+      "bytes_acquired": 173777,
+      "profile_id": "c20ce56a649c2257187b6265a6813b0b231f1b6e740c7ddd7723641ae8225ad7",
+      "index_snapshot_id": "34f82d7caa872d2ec846cfad138e56339742b3a1a30a27b63255589e84162fac",
+      "status": "PARTIAL",
+      "full_byte_readback_pages": 76,
+      "all_file_hashes_verified": true,
+      "source_binary_equivalence": "NOT_ESTABLISHED",
+      "runtime_compatibility": "UNKNOWN",
+      "files": [
+        {
+          "path": "LICENSE",
+          "mode": "100644",
+          "sha": "8dada3edaf50dbc082c9a125058f25def75e625a",
+          "size": 11357,
+          "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/LICENSE",
+          "document_id": "0657a5f4ca90f0a99ed1564d07113cc6d64379896c6e2197b3a66acd37b24537",
+          "content_hash": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1"
+        },
+        {
+          "path": "README.md",
+          "mode": "100644",
+          "sha": "a03c69052c287014e0aedc5d4ca8c2feb3798e50",
+          "size": 10445,
+          "sha256": "af33cda67da55d602ac153eed46f4c503d1d8b91ed542ef0a4a37264e881a3fd",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/README.md",
+          "document_id": "04bd7fe25e2d7508259d97ea6be83e57bf95a9f3836f1640f9c3a3f58d68f1e6",
+          "content_hash": "af33cda67da55d602ac153eed46f4c503d1d8b91ed542ef0a4a37264e881a3fd"
+        },
+        {
+          "path": "build.gradle",
+          "mode": "100644",
+          "sha": "5b2cf802132984a903b10b2968b1eeeb62adcf84",
+          "size": 22853,
+          "sha256": "78a0e86918f8054e0dccef14562dee3ece208c76524699b3a1bbe67277f8d3ae",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/build.gradle",
+          "document_id": "171ac0375d68f51fbb4270d3340bf7474b616d9db9ab346696a012c527d31c4b",
+          "content_hash": "78a0e86918f8054e0dccef14562dee3ece208c76524699b3a1bbe67277f8d3ae"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/api/event/AutoInvokingEvent.java",
+          "mode": "100644",
+          "sha": "fabfe1d277a66bb2f900d89f0f3958b10a83eeab",
+          "size": 2661,
+          "sha256": "99b2be35853c78362568c1250be7dd54ae5385255d19342fbd3e06a0dcac5522",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-api-base/src/main/java/net/fabricmc/fabric/api/event/AutoInvokingEvent.java",
+          "document_id": "76366ff92c2d99fb9b5d2f9d7a2a8efe38e3dddcd61bead53202046282e2c52c",
+          "content_hash": "99b2be35853c78362568c1250be7dd54ae5385255d19342fbd3e06a0dcac5522"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/api/event/Event.java",
+          "mode": "100644",
+          "sha": "76a844e0a2a9b42732f66a12716103f224deca00",
+          "size": 3432,
+          "sha256": "d5bf8f4488948d4210a2e93d449d33f329d69cede2f20cca6cc1c2469dc06263",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-api-base/src/main/java/net/fabricmc/fabric/api/event/Event.java",
+          "document_id": "e7a6577beb08facb407582b95b7d54a1c93d7f9a416962e392cb4919275265a5",
+          "content_hash": "d5bf8f4488948d4210a2e93d449d33f329d69cede2f20cca6cc1c2469dc06263"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/api/event/EventFactory.java",
+          "mode": "100644",
+          "sha": "76b515ef9f5ca61c3f0b682dbc6343a7271dc108",
+          "size": 5329,
+          "sha256": "bd9ae661beb0ff5f4b8ee285ae353d3776e47bafa835b88f3d16aead1923a989",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-api-base/src/main/java/net/fabricmc/fabric/api/event/EventFactory.java",
+          "document_id": "fedfc570124e755dcaa5b8c4683562dd09ac092c725e9b86254c79d0cc684524",
+          "content_hash": "bd9ae661beb0ff5f4b8ee285ae353d3776e47bafa835b88f3d16aead1923a989"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/api/util/Block2ObjectMap.java",
+          "mode": "100644",
+          "sha": "e4cea7b407f8882ca2daf5e5904d19bdf83551b8",
+          "size": 988,
+          "sha256": "8c4dd14a30c25e6c0c781e4341062555c326eaabc4b2447f7a0da49d0ad9cbe5",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-api-base/src/main/java/net/fabricmc/fabric/api/util/Block2ObjectMap.java",
+          "document_id": "5a898215c757b73aa2282a0eb062ea7ba3450bfc1a32dc3f8b070346f9db9978",
+          "content_hash": "8c4dd14a30c25e6c0c781e4341062555c326eaabc4b2447f7a0da49d0ad9cbe5"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/api/util/BooleanFunction.java",
+          "mode": "100644",
+          "sha": "dd04f76411842acaaf0bd839dc7999e0f4f0ed02",
+          "size": 1082,
+          "sha256": "06e85be3d848832fc538b0bf3ffb08acf840a9b14d8582d2497d321c7e840f64",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-api-base/src/main/java/net/fabricmc/fabric/api/util/BooleanFunction.java",
+          "document_id": "c9de24eaf0bfb100dfe12afd796d19486326f1f2676c6acfc2048fae1c09b122",
+          "content_hash": "06e85be3d848832fc538b0bf3ffb08acf840a9b14d8582d2497d321c7e840f64"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/api/util/Item2ObjectMap.java",
+          "mode": "100644",
+          "sha": "b7530bc55a31fb607138a3f12b1c0ca5993b280c",
+          "size": 1061,
+          "sha256": "451a376b8afc99b621fa809f32b1e4234da241b410374db40b2ed2bb1e9ccfb9",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-api-base/src/main/java/net/fabricmc/fabric/api/util/Item2ObjectMap.java",
+          "document_id": "ac7c1e9d3544cdd7925033e4029cfbfe3fb6a2f986e5addb64031e571b5a4aa0",
+          "content_hash": "451a376b8afc99b621fa809f32b1e4234da241b410374db40b2ed2bb1e9ccfb9"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/api/util/NbtType.java",
+          "mode": "100644",
+          "sha": "9673218fe8ca0c442fa7ac939829756e1841b9b0",
+          "size": 1748,
+          "sha256": "bec5b7719884aa90ecd8b5d192687f4f0c199059b1834c26f7ac160d1192efb9",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-api-base/src/main/java/net/fabricmc/fabric/api/util/NbtType.java",
+          "document_id": "63d4be4403c564d465c6c23cfdad1ba4574404c6eaab4153ae5bf750e588f853",
+          "content_hash": "bec5b7719884aa90ecd8b5d192687f4f0c199059b1834c26f7ac160d1192efb9"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/api/util/TriState.java",
+          "mode": "100644",
+          "sha": "f2049661264f00d879e341fceabba6040c3ab17e",
+          "size": 4309,
+          "sha256": "3609c4cc8466a5afdf004f817b0742c9de7fe309d0539bc524131a449b57e326",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-api-base/src/main/java/net/fabricmc/fabric/api/util/TriState.java",
+          "document_id": "fa7f92a5596c9cbf4ad138e7630ef6a9d00bd697849335ca479ec4a12a8b0dbc",
+          "content_hash": "3609c4cc8466a5afdf004f817b0742c9de7fe309d0539bc524131a449b57e326"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/event/ArrayBackedEvent.java",
+          "mode": "100644",
+          "sha": "d8d8699cda43bb802439635f823500f03dcbbf94",
+          "size": 4050,
+          "sha256": "f800c508638998b1261ff90c58bad379ff84876b11dce4936cc1ddea975f8bf3",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/event/ArrayBackedEvent.java",
+          "document_id": "73a290aaa9cc2396d9149bb64aa42b89f976629506f96a9bfc6716acec343423",
+          "content_hash": "f800c508638998b1261ff90c58bad379ff84876b11dce4936cc1ddea975f8bf3"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/event/EventFactoryImpl.java",
+          "mode": "100644",
+          "sha": "bbf357d5f2383634c079d28422f417e950504efb",
+          "size": 4762,
+          "sha256": "9551cb24bdef98ea00fb96ad663ebda01bedb97f767eed6cebba199d93b630b8",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/event/EventFactoryImpl.java",
+          "document_id": "ab5b3a21ae1173f4f1488898c973929497333791bf4d80d96d4ea001669b53c8",
+          "content_hash": "9551cb24bdef98ea00fb96ad663ebda01bedb97f767eed6cebba199d93b630b8"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/event/EventPhaseData.java",
+          "mode": "100644",
+          "sha": "81dbebbef2a9973811106bf42821571c282fe0bd",
+          "size": 1388,
+          "sha256": "0de1c548e923691ded5b88415ce6a0e8ec0abc49f86148b17d50ef57e2f84e63",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/event/EventPhaseData.java",
+          "document_id": "cf168a04cb044d24646ea36c98fce4fc4f1465ed6a4c1b9655f0280437ca4a0a",
+          "content_hash": "0de1c548e923691ded5b88415ce6a0e8ec0abc49f86148b17d50ef57e2f84e63"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/event/FabricApiBaseMod.java",
+          "mode": "100644",
+          "sha": "64206bd10bf1638d64e88fb5f728e025dd7f9df2",
+          "size": 763,
+          "sha256": "cc4fd80d3cddfc245c08b71a0e1e486cefede2b66081e4628640a5c2c842f937",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/event/FabricApiBaseMod.java",
+          "document_id": "8bc9cb6c9da8ba27040dc1e918652ca8ecdb5f9d09bd1fd901c5ccf83e3a528a",
+          "content_hash": "cc4fd80d3cddfc245c08b71a0e1e486cefede2b66081e4628640a5c2c842f937"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/helper/ConstructorInjectionPoint.java",
+          "mode": "100644",
+          "sha": "7133a19c7fe2e5025dc50ecebf428db7690d9e13",
+          "size": 1295,
+          "sha256": "5779fa1d488be71f89efe47714aec9b8683a2c7758226bd92f2cb95fc5c10933",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/helper/ConstructorInjectionPoint.java",
+          "document_id": "0a1f450c9c057451a5f8d337d5c79d839a66a04b0a1f7e01ecc330253346d220",
+          "content_hash": "5779fa1d488be71f89efe47714aec9b8683a2c7758226bd92f2cb95fc5c10933"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/helper/FabricApiBaseMixinPlugin.java",
+          "mode": "100644",
+          "sha": "5cf4031da4b934c196182603072615b65687289b",
+          "size": 1740,
+          "sha256": "d9b9b38b4680f9ace0667245bfcb62f6e5fc6a8bf25fd66f9416e820bd1cf381",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/helper/FabricApiBaseMixinPlugin.java",
+          "document_id": "90224666ca333d93027ae94e3cdfdf7cd9e3a03ea58efedbf5ff6dfda0fd0c4e",
+          "content_hash": "d9b9b38b4680f9ace0667245bfcb62f6e5fc6a8bf25fd66f9416e820bd1cf381"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/toposort/NodeSorting.java",
+          "mode": "100644",
+          "sha": "8d59594e4adfa25e584ca2ada435016d6627fa28",
+          "size": 5616,
+          "sha256": "4f73f4098fc41c64a2767d471b6e98411ae2f4c8e581263ed1a0cce6e621da97",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/toposort/NodeSorting.java",
+          "document_id": "0cbb5a57f6be1e6458c0df42c9682783c5f44fca8c293efaa78925d08ea89b28",
+          "content_hash": "4f73f4098fc41c64a2767d471b6e98411ae2f4c8e581263ed1a0cce6e621da97"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/toposort/SortableNode.java",
+          "mode": "100644",
+          "sha": "a420914be431d087eb9d4d0c6c593f4e43ffbc79",
+          "size": 1289,
+          "sha256": "f014d5107e44f936a07ebf748ae465511c5a09e90c57541fe7aa9641df586d89",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/toposort/SortableNode.java",
+          "document_id": "f434b383a6d651d521e9dc427fff823729fa7aaf97a3215eea2533c8f6d70558",
+          "content_hash": "f014d5107e44f936a07ebf748ae465511c5a09e90c57541fe7aa9641df586d89"
+        },
+        {
+          "path": "fabric-api-base/src/main/resources/assets/fabric-api-base/icon.png",
+          "mode": "100644",
+          "sha": "2931efbf610873c0084debb8690902b0103d27fe",
+          "size": 1579,
+          "sha256": "d02032386352dafcca365ba30ee287868026784a326f15305a0f57ec3b35b440",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-api-base/src/main/resources/assets/fabric-api-base/icon.png",
+          "document_id": "45f9c4e28a01cca5b5ffa02108c8f4f0ca29c972304a58b677e2bddee6da2d9e",
+          "content_hash": "d02032386352dafcca365ba30ee287868026784a326f15305a0f57ec3b35b440"
+        },
+        {
+          "path": "fabric-api-base/src/main/resources/fabric-api-base.init.mixins.json",
+          "mode": "100644",
+          "sha": "b544f7fad31419262c1e9423834dd3e3cd1cfafb",
+          "size": 105,
+          "sha256": "772139ec80dec6bfe8f3d5b203f596a06672f5ead61869a4bb39aff044e8826c",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-api-base/src/main/resources/fabric-api-base.init.mixins.json",
+          "document_id": "65700d19e49b737603ad96bcf1e19651d608a9f0976fa9bfdde7898a3d4153f2",
+          "content_hash": "772139ec80dec6bfe8f3d5b203f596a06672f5ead61869a4bb39aff044e8826c"
+        },
+        {
+          "path": "fabric-api-base/src/main/resources/fabric.mod.json",
+          "mode": "100644",
+          "sha": "10d1b6ec74846ce0f9ba90865dbd1d7d2b7a38d3",
+          "size": 693,
+          "sha256": "faad859f79ac387d654be1250c0a966cdbb3ed5ffdc0b5a583ef9a77bc33d96e",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-api-base/src/main/resources/fabric.mod.json",
+          "document_id": "5a78d88477f0f3c7be09036d46b3f84f586256450301f04ae946d0eaaa3f2be3",
+          "content_hash": "faad859f79ac387d654be1250c0a966cdbb3ed5ffdc0b5a583ef9a77bc33d96e"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/api/client/event/lifecycle/v1/ClientBlockEntityEvents.java",
+          "mode": "100644",
+          "sha": "4bfe5b1cf690e0312a3905e9b2d24068c305ac8e",
+          "size": 2113,
+          "sha256": "724fcd296de5e42863071f9922fa2ac4ecfbefd1af658f4389cdf524fd16b5fb",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/api/client/event/lifecycle/v1/ClientBlockEntityEvents.java",
+          "document_id": "1528b48761db1203963232f02f85d105202817c2bc97a9eef1cb081b1eaba3a0",
+          "content_hash": "724fcd296de5e42863071f9922fa2ac4ecfbefd1af658f4389cdf524fd16b5fb"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/api/client/event/lifecycle/v1/ClientChunkEvents.java",
+          "mode": "100644",
+          "sha": "f6424c44f8d907976d65478f18aa04a4772793f9",
+          "size": 1973,
+          "sha256": "52bcbef1afca63ded801d329c4f696ab7b903c0e164b4b457989b12783a0d12d",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/api/client/event/lifecycle/v1/ClientChunkEvents.java",
+          "document_id": "bc6030555560bf7f84e14c58ff479e164fce560d012668370103949f2dd653a0",
+          "content_hash": "52bcbef1afca63ded801d329c4f696ab7b903c0e164b4b457989b12783a0d12d"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/api/client/event/lifecycle/v1/ClientEntityEvents.java",
+          "mode": "100644",
+          "sha": "45097fcddada248584adad92334d44c5cf4a085b",
+          "size": 1929,
+          "sha256": "36f59ef2072c189267a3c712fc5ebba7509dc9c05df68a8e90c9441fbb0eb699",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/api/client/event/lifecycle/v1/ClientEntityEvents.java",
+          "document_id": "462a132d6dcbdd452e6fe7dc5868d68680c349fe2fb00a645d190eed6329f4fa",
+          "content_hash": "36f59ef2072c189267a3c712fc5ebba7509dc9c05df68a8e90c9441fbb0eb699"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/api/client/event/lifecycle/v1/ClientLifecycleEvents.java",
+          "mode": "100644",
+          "sha": "55de45508dc7b8167fa4c41d2923919ea980e1f5",
+          "size": 1962,
+          "sha256": "efeda68f9d49694c64355d9c9da28643e451ba508ed79c803eb73f108001b08b",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/api/client/event/lifecycle/v1/ClientLifecycleEvents.java",
+          "document_id": "65475b42b71c432f55b145991fee4e9593ab243d412e8b6ddb04e166b2df276e",
+          "content_hash": "efeda68f9d49694c64355d9c9da28643e451ba508ed79c803eb73f108001b08b"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/api/client/event/lifecycle/v1/ClientTickEvents.java",
+          "mode": "100644",
+          "sha": "2e69c46743368667d8fb1ca973b41e6a064d4713",
+          "size": 2491,
+          "sha256": "7211e0ef098e5a879b346b9bdd123d51bf85f35ff132f5b95a5ea46f309251f9",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/api/client/event/lifecycle/v1/ClientTickEvents.java",
+          "document_id": "eca1cb1ec3e7db59e8abb5850fdf0fb0bde824a4bc47161a4049c0bb01d2b976",
+          "content_hash": "7211e0ef098e5a879b346b9bdd123d51bf85f35ff132f5b95a5ea46f309251f9"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/impl/client/event/lifecycle/ClientLifecycleEventsImpl.java",
+          "mode": "100644",
+          "sha": "37ee71c7f0ffe94822c47462d7fd7e7cea173bc5",
+          "size": 1569,
+          "sha256": "23f11c100abe55799f5291bacfb601e4a30af5db96e1bed71106aded40d43254",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/impl/client/event/lifecycle/ClientLifecycleEventsImpl.java",
+          "document_id": "36492a0c378ad59d9bce5f8e7bc7e3dc27c5c560baee985a7bade7bdbf3fa81c",
+          "content_hash": "23f11c100abe55799f5291bacfb601e4a30af5db96e1bed71106aded40d43254"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/mixin/event/lifecycle/client/ClientChunkManagerMixin.java",
+          "mode": "100644",
+          "sha": "d7d8fe5ccf8318bb5d3de30cb912418148c8c710",
+          "size": 3601,
+          "sha256": "d29bc1a583189f50127645fe31c56e195acd8cee3908a1e3d536d1ccef3732e0",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/mixin/event/lifecycle/client/ClientChunkManagerMixin.java",
+          "document_id": "8af4c5297d4b142f5bd15973fe26f4d8235c2fd8b85e43d0dc1c349ce3a82706",
+          "content_hash": "d29bc1a583189f50127645fe31c56e195acd8cee3908a1e3d536d1ccef3732e0"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/mixin/event/lifecycle/client/ClientPlayNetworkHandlerMixin.java",
+          "mode": "100644",
+          "sha": "8d5d66fed5545bb7cfed62e424f2a8abcc9a0916",
+          "size": 4780,
+          "sha256": "4c4c6f3ae75f9be3d1de27168b698827b44ae141738708331750870dfbc2ea50",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/mixin/event/lifecycle/client/ClientPlayNetworkHandlerMixin.java",
+          "document_id": "aff8c146e224d98f3462e51ef98ecb08710f14016dcff6fa75bdfa0a726d0b63",
+          "content_hash": "4c4c6f3ae75f9be3d1de27168b698827b44ae141738708331750870dfbc2ea50"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/mixin/event/lifecycle/client/ClientWorldClientEntityHandlerMixin.java",
+          "mode": "100644",
+          "sha": "6aa6b58e594e8296a8c76548c40ea4efdd590dd6",
+          "size": 2001,
+          "sha256": "ff399a3733dc3a1031366edb16b125ee2c9ad6249df82f4d34057f4cfc35da33",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/mixin/event/lifecycle/client/ClientWorldClientEntityHandlerMixin.java",
+          "document_id": "8f28375e27feca95c5fc4eaeca90cad6cda8150450eac099440194dab94b51fb",
+          "content_hash": "ff399a3733dc3a1031366edb16b125ee2c9ad6249df82f4d34057f4cfc35da33"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/mixin/event/lifecycle/client/ClientWorldMixin.java",
+          "mode": "100644",
+          "sha": "13c84116f7bd8e7cab3c01cbfd9bf1d9f3c7b5f0",
+          "size": 1471,
+          "sha256": "91a720653b7fc3f183a598f5f3f1904d1797b5625309be1f740dee09d9b1fe96",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/mixin/event/lifecycle/client/ClientWorldMixin.java",
+          "document_id": "2d0cf47e8d7e2f0aeccfe5412a873e0e2b1471de14479b6b4603bbee2b5bc332",
+          "content_hash": "91a720653b7fc3f183a598f5f3f1904d1797b5625309be1f740dee09d9b1fe96"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/mixin/event/lifecycle/client/MinecraftClientMixin.java",
+          "mode": "100644",
+          "sha": "e0277d6b56ae6d09625a7346e7846745844591b3",
+          "size": 2228,
+          "sha256": "6fd95b07fdb7f75505dd2c8718bc2e5af91bf44882d9d36c71c143a00a711cc9",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/mixin/event/lifecycle/client/MinecraftClientMixin.java",
+          "document_id": "73222202b94f07359dc7fa51ae09364658d43d08d15821904c53b371520a65b8",
+          "content_hash": "6fd95b07fdb7f75505dd2c8718bc2e5af91bf44882d9d36c71c143a00a711cc9"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/mixin/event/lifecycle/client/WorldChunkMixin.java",
+          "mode": "100644",
+          "sha": "aeca4e2d56d4f26dc003b0fbbcbec60dfcb5d812",
+          "size": 5830,
+          "sha256": "0205c80c837c4dd45ad9b23fb3127fe47d0def9df9dbfb0089ede15cd37bc21e",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/mixin/event/lifecycle/client/WorldChunkMixin.java",
+          "document_id": "6d8da0705b7fb9d1b75ebe2b613f05d48291b723aab31167e05e923d4e3ddf7e",
+          "content_hash": "0205c80c837c4dd45ad9b23fb3127fe47d0def9df9dbfb0089ede15cd37bc21e"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/client/resources/fabric-lifecycle-events-v1.client.mixins.json",
+          "mode": "100644",
+          "sha": "f46283dd40ce41f429d495b68628487fd42c68ab",
+          "size": 419,
+          "sha256": "b0058b29aea4fe68b1918e507de190a83e857976aeda9d7249f55a5ca6ae33c0",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/client/resources/fabric-lifecycle-events-v1.client.mixins.json",
+          "document_id": "ac09e3d5134ff0df45ec9ce365939f6cf6ad604ef3a6735e3a444f1066c505c4",
+          "content_hash": "b0058b29aea4fe68b1918e507de190a83e857976aeda9d7249f55a5ca6ae33c0"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/CommonLifecycleEvents.java",
+          "mode": "100644",
+          "sha": "8c3f9a82e7de86689b4a8f4a30a80252a549f05d",
+          "size": 1504,
+          "sha256": "36b2d9dd60c255f2731be8f1985f5db8bdd02e8748cb43bf20aca7a6c27d8518",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/CommonLifecycleEvents.java",
+          "document_id": "5296579135c0860871c63c1a50fd4aa451ba852a46e0cc7e91c5ae218c299418",
+          "content_hash": "36b2d9dd60c255f2731be8f1985f5db8bdd02e8748cb43bf20aca7a6c27d8518"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/ServerBlockEntityEvents.java",
+          "mode": "100644",
+          "sha": "1e3e1a25203581ac94b1d7ecfec9df1abbf35df0",
+          "size": 2087,
+          "sha256": "8da956a59485d11f33bfc4f38fc2b600c38d6b6d036138edc3b0401aae6a428c",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/ServerBlockEntityEvents.java",
+          "document_id": "ef1badc85c643694349c6cd41e73d2700a1aaf74bd03d40518aa3033f1bd1da4",
+          "content_hash": "8da956a59485d11f33bfc4f38fc2b600c38d6b6d036138edc3b0401aae6a428c"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/ServerChunkEvents.java",
+          "mode": "100644",
+          "sha": "f986b7be9289940bd5242d407e5a7dacfa4074b5",
+          "size": 1954,
+          "sha256": "71d64a2c507f93b9184d5f617a043a659750f382cf6cabef102980628f9d13ec",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/ServerChunkEvents.java",
+          "document_id": "662ea07792f609aab698ccbaea0dfea5c01edcde411426e96ef1ec42ad3fc27d",
+          "content_hash": "71d64a2c507f93b9184d5f617a043a659750f382cf6cabef102980628f9d13ec"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/ServerEntityEvents.java",
+          "mode": "100644",
+          "sha": "dfc1cd7696c3f3e34908fbe13ce8ecf500a272f9",
+          "size": 2814,
+          "sha256": "2de698cd41800de57acd36b62c3cb465c8426025078f6d194e1a0b7087a75b08",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/ServerEntityEvents.java",
+          "document_id": "215724ebd357729d846e0f8d5eee2c8d86b1483adbd5a6d4410232db992c2ec1",
+          "content_hash": "2de698cd41800de57acd36b62c3cb465c8426025078f6d194e1a0b7087a75b08"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/ServerLifecycleEvents.java",
+          "mode": "100644",
+          "sha": "abd971e850452547d9df20f2d1023f02cc9c12cf",
+          "size": 6045,
+          "sha256": "bb191ca6e5cdc4d7f23f67d2720018d9fcc41e74e7f2fc40ba0f7b8778a5a3e4",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/ServerLifecycleEvents.java",
+          "document_id": "f99eeadbf3d81de879b7be598ca9e6eabc0dd6447b6d7cb9e153ae4b9e6e5be9",
+          "content_hash": "bb191ca6e5cdc4d7f23f67d2720018d9fcc41e74e7f2fc40ba0f7b8778a5a3e4"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/ServerTickEvents.java",
+          "mode": "100644",
+          "sha": "4d56cccaf4f89bd824f7d6a5fcec81eced682d98",
+          "size": 2484,
+          "sha256": "f2d93aa7576a2b4981d7462d581c2c47bb0e88b40479d1fafbb70017758e67ad",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/ServerTickEvents.java",
+          "document_id": "4796eaa151305d31c841bf2a4fe3fb1aa64338d56903b17c12f1de158bba7392",
+          "content_hash": "f2d93aa7576a2b4981d7462d581c2c47bb0e88b40479d1fafbb70017758e67ad"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/ServerWorldEvents.java",
+          "mode": "100644",
+          "sha": "fb939f62e446a44fc2dd0686ba388f1441210fa3",
+          "size": 2144,
+          "sha256": "2b6bf87981234a9b41e1d4e603a15ed6bf77b9156c8c2166f43f48a764b4301d",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/ServerWorldEvents.java",
+          "document_id": "18edd10a14afebbd5db9f3d888395a9c0934e22e9920c4ca68769702334cd8d8",
+          "content_hash": "2b6bf87981234a9b41e1d4e603a15ed6bf77b9156c8c2166f43f48a764b4301d"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/impl/event/lifecycle/LifecycleEventsImpl.java",
+          "mode": "100644",
+          "sha": "26a04281e307b594c29d3e7ecd1773ede7e24e9b",
+          "size": 2775,
+          "sha256": "6329e1d76548a83d84d23e1f2d3a1971f80808a01e786582963f58b28a95b188",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/impl/event/lifecycle/LifecycleEventsImpl.java",
+          "document_id": "a0cf65dbbec1e94cf5a9bf58b24757b4d2bf3bdd35b3cf65f9a85b61299030fc",
+          "content_hash": "6329e1d76548a83d84d23e1f2d3a1971f80808a01e786582963f58b28a95b188"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/impl/event/lifecycle/LoadedChunksCache.java",
+          "mode": "100644",
+          "sha": "79edfc4d95c5e7cece9fed50bf042ebc39859521",
+          "size": 1132,
+          "sha256": "cb121432530240798fd52348cd2b363e7a20c28f969d279a787dd1e27d96fdbc",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/impl/event/lifecycle/LoadedChunksCache.java",
+          "document_id": "577efafde5581be0954093b0db70bafb983663b2e2a7bbb584dbe252eb182497",
+          "content_hash": "cb121432530240798fd52348cd2b363e7a20c28f969d279a787dd1e27d96fdbc"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/DataPackContentsMixin.java",
+          "mode": "100644",
+          "sha": "5b3b64cabf9f9580bd34687f7b9e41d433f94d28",
+          "size": 1334,
+          "sha256": "f1d95486d19b80cbe4681f6753336840dbb67f77f2b6f438b7140ec2e0009a24",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/DataPackContentsMixin.java",
+          "document_id": "d53ac133007b68d2d26dab00ba52f2029c03046561b4e3451d16e1d77fb9a8cd",
+          "content_hash": "f1d95486d19b80cbe4681f6753336840dbb67f77f2b6f438b7140ec2e0009a24"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/LivingEntityMixin.java",
+          "mode": "100644",
+          "sha": "a67a86cc853762d71fb921926852438883ef4b8b",
+          "size": 1895,
+          "sha256": "2d12c4af9360481ef4f8e437b39147710818cabf0e8c15ebf60103230da0ccd0",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/LivingEntityMixin.java",
+          "document_id": "3aac4f485bc342e59ebb9d104539891cb18300df1e3c6650c03f537c8a50c96c",
+          "content_hash": "2d12c4af9360481ef4f8e437b39147710818cabf0e8c15ebf60103230da0ccd0"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/MinecraftServerMixin.java",
+          "mode": "100644",
+          "sha": "04cffbe7e3911fbd70e827ca84bedd879db2f816",
+          "size": 5152,
+          "sha256": "9bd1e2770b3398185fa7076371c28943b392f06da580bcb965effcb4d93a9754",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/MinecraftServerMixin.java",
+          "document_id": "438bafed86067ffb01a2277ed770f8f5ea24bbadd074761e48536023fc2c8e17",
+          "content_hash": "9bd1e2770b3398185fa7076371c28943b392f06da580bcb965effcb4d93a9754"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/PlayerManagerMixin.java",
+          "mode": "100644",
+          "sha": "d9bd77f952de88307f0fba8ec953681cbb325294",
+          "size": 1984,
+          "sha256": "22ad7c32b14efb662cd8cef05491bd55b0b3a17e74702b4a8719fdb4f5d4e497",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/PlayerManagerMixin.java",
+          "document_id": "8b9b2825a4bf87b4e27dc83a9e38c5fe49ac21a44bc565543beb238a08cfe0e9",
+          "content_hash": "22ad7c32b14efb662cd8cef05491bd55b0b3a17e74702b4a8719fdb4f5d4e497"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/ServerWorldMixin.java",
+          "mode": "100644",
+          "sha": "454abf4bcaf93cfb37f6ea3fd8ce9bb2ca3e018d",
+          "size": 1819,
+          "sha256": "f24f3b07e2f7b16eb8480621f9b83ca611327c1335af0af834e9dd181871495f",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/ServerWorldMixin.java",
+          "document_id": "27cf5505b20237d1966d9561ae21ca8c3aea02522b120fafb8d5bb40a6737c73",
+          "content_hash": "f24f3b07e2f7b16eb8480621f9b83ca611327c1335af0af834e9dd181871495f"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/ServerWorldServerEntityHandlerMixin.java",
+          "mode": "100644",
+          "sha": "f022a67abfc8b1b6ec459cd3c752c0012b300d6e",
+          "size": 1892,
+          "sha256": "882ea9c45d5f2f8157f0f29f23909b03fb7fb94dcde17dc8f0fb6dbabf2da40f",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/ServerWorldServerEntityHandlerMixin.java",
+          "document_id": "aa85d5ec1b3fb969908b1da02aeb30c1a70f94ac0fa78410526254e598421f1f",
+          "content_hash": "882ea9c45d5f2f8157f0f29f23909b03fb7fb94dcde17dc8f0fb6dbabf2da40f"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/ThreadedAnvilChunkStorageMixin.java",
+          "mode": "100644",
+          "sha": "18f63c8af65e84e2840af7cb42f221f1bffc4b55",
+          "size": 3116,
+          "sha256": "42f32f0e8538fea24b2759c984f6637a6e2f2fda0529ff61bfaa515b7a0e7e95",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/ThreadedAnvilChunkStorageMixin.java",
+          "document_id": "fa63bccfe6a6cab2c74ff654562f262fbf811a4146a0b69430757f1ceec9b0df",
+          "content_hash": "42f32f0e8538fea24b2759c984f6637a6e2f2fda0529ff61bfaa515b7a0e7e95"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/WorldMixin.java",
+          "mode": "100644",
+          "sha": "cc0bc634c08b9bb5c1afed1b81ba86cfab98512d",
+          "size": 1589,
+          "sha256": "65453dccf8ecd0fdbc04bfdf9ba53da5c8eb43f71e4116095ca566d8e5416e3c",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/WorldMixin.java",
+          "document_id": "f50f680058a6c70f3d8b2704718956bd97ffc0ce53426f5b97b18671ed250e64",
+          "content_hash": "65453dccf8ecd0fdbc04bfdf9ba53da5c8eb43f71e4116095ca566d8e5416e3c"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/server/WorldChunkMixin.java",
+          "mode": "100644",
+          "sha": "79cd3d915f42e014d175ae439186fdd5c27b7e88",
+          "size": 5117,
+          "sha256": "83ecbe94dd618ac49d3bb39fceb9f86c4a7090b6a9ce3210ca785b7fb38f62d4",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/server/WorldChunkMixin.java",
+          "document_id": "3be6faedf516ef272775cb473d651d6254cb861b70065a91350e3e155753aa51",
+          "content_hash": "83ecbe94dd618ac49d3bb39fceb9f86c4a7090b6a9ce3210ca785b7fb38f62d4"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/resources/assets/fabric-lifecycle-events-v1/icon.png",
+          "mode": "100644",
+          "sha": "2931efbf610873c0084debb8690902b0103d27fe",
+          "size": 1579,
+          "sha256": "d02032386352dafcca365ba30ee287868026784a326f15305a0f57ec3b35b440",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/main/resources/assets/fabric-lifecycle-events-v1/icon.png",
+          "document_id": "d6c15cca110eb36876a46fd8aa87ad4564beab6c7103ffeb6c273ff87261e4fd",
+          "content_hash": "d02032386352dafcca365ba30ee287868026784a326f15305a0f57ec3b35b440"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/resources/fabric-lifecycle-events-v1.accesswidener",
+          "mode": "100644",
+          "sha": "424cf80e708fdf2c23c9b2b6b7fa706744a04551",
+          "size": 298,
+          "sha256": "27ea0d28527fc43a01e6a67fb9a2eea0d7e5597108383eac08f9bee06ab60d8d",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/main/resources/fabric-lifecycle-events-v1.accesswidener",
+          "document_id": "bbf424322ab4e8e362712a2bce5a6f4fdd7e67ddbf630cf427ce9721bbf847b4",
+          "content_hash": "27ea0d28527fc43a01e6a67fb9a2eea0d7e5597108383eac08f9bee06ab60d8d"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/resources/fabric-lifecycle-events-v1.mixins.json",
+          "mode": "100644",
+          "sha": "69a7182977f185f3ecebbf74f542be6e672e3039",
+          "size": 505,
+          "sha256": "e77a4e78d82b8ad2f638b0cc6ea67641b70ad89a3b0cebb0eb897d6203ea9556",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/main/resources/fabric-lifecycle-events-v1.mixins.json",
+          "document_id": "d32d117e9541b64e3c6ece3d984ebc75287a59bbfb24f55766c7781742134231",
+          "content_hash": "e77a4e78d82b8ad2f638b0cc6ea67641b70ad89a3b0cebb0eb897d6203ea9556"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/resources/fabric.mod.json",
+          "mode": "100644",
+          "sha": "10d1535209b8351e55528b490a16bdf6c4489ae0",
+          "size": 1136,
+          "sha256": "0e931df52c9d28eb3db41616aa32af91f542a70c8b2ebf4331cbd856bcf75188",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/main/resources/fabric.mod.json",
+          "document_id": "8120aac87c9fa87bb9a8049d279c1b2de27b7dbdc49b3b4016fbdb39ce7a9e7c",
+          "content_hash": "0e931df52c9d28eb3db41616aa32af91f542a70c8b2ebf4331cbd856bcf75188"
+        },
+        {
+          "path": "gradle.properties",
+          "mode": "100644",
+          "sha": "0a7b39c32492fd89d24afe3f2a3c4d98906c22ae",
+          "size": 2510,
+          "sha256": "621f232d8d4e08e53f8f94cc27b71db5777ad8d094694e4b8941f731d1ae783f",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/gradle.properties",
+          "document_id": "dff3e78c8bf8a12c63664e11ec492b67754889f57f29339e8e66cadfbd913bad",
+          "content_hash": "621f232d8d4e08e53f8f94cc27b71db5777ad8d094694e4b8941f731d1ae783f"
+        }
+      ]
+    },
+    "ffapi-frontier": {
+      "repository": "https://github.com/Sinytra/ForgifiedFabricAPI",
+      "revision": "6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57",
+      "retrieved_at": "2026-10-01T18:26:29.933Z",
+      "track": "FRONTIER",
+      "namespace": "unknown",
+      "scope": "SELECTED_BASE_AND_LIFECYCLE_MODULES_NOT_FULL_FFAPI",
+      "total_tree_blobs": 2858,
+      "tree_truncated": false,
+      "files_acquired": 72,
+      "bytes_acquired": 204421,
+      "profile_id": "419ab72def7a9b0aa5b247eaf5a9c52c74d59671b2f8e992b8f435dd8a6797b6",
+      "index_snapshot_id": "65da923c0b9208788dd0e15c55e74f05501fdb38e2ff81b6f142cde44ff86c1f",
+      "status": "PARTIAL",
+      "full_byte_readback_pages": 92,
+      "all_file_hashes_verified": true,
+      "source_binary_equivalence": "NOT_ESTABLISHED",
+      "runtime_compatibility": "UNKNOWN",
+      "files": [
+        {
+          "path": "LICENSE",
+          "mode": "100644",
+          "sha": "8dada3edaf50dbc082c9a125058f25def75e625a",
+          "size": 11357,
+          "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/LICENSE",
+          "document_id": "4bccc1052113190944ad38e85d17a33dfac881b392dbd173d559909c28c0f98b",
+          "content_hash": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1"
+        },
+        {
+          "path": "README.md",
+          "mode": "100644",
+          "sha": "2fe9c1c80f5e738aea184503879ec111dd7e56bf",
+          "size": 6058,
+          "sha256": "64409435374977e3bed42dad5c7c12cb2c05ee5f1cdf152ed7b2e3c6b33c4825",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/README.md",
+          "document_id": "17b09edce5b0724f662d9d2dc48058c0d56b951c14e07fbca74eaf70144f6780",
+          "content_hash": "64409435374977e3bed42dad5c7c12cb2c05ee5f1cdf152ed7b2e3c6b33c4825"
+        },
+        {
+          "path": "build.gradle.kts",
+          "mode": "100644",
+          "sha": "043606b0707c481f0b120e55f137cbb0299e5118",
+          "size": 9428,
+          "sha256": "08ae774299d44016c8debaaa5e0ce3e44a08ffebce23d6736bbd89e898585355",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/build.gradle.kts",
+          "document_id": "9fa278a8536359574dff4879a364c94d3f893396cc798bf028cd888889bb7646",
+          "content_hash": "08ae774299d44016c8debaaa5e0ce3e44a08ffebce23d6736bbd89e898585355"
+        },
+        {
+          "path": "build.gradle.old",
+          "mode": "100644",
+          "sha": "a91444d6439248b92b42b869a086a46678762777",
+          "size": 19261,
+          "sha256": "536cfa0f6718cc68b688ec600be772642717c99e5da2cc0b3c67c79181fb1951",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/build.gradle.old",
+          "document_id": "02b819e70be2333f6991280c13471f4973fb0d1a1125165eea10afe5e3e29f54",
+          "content_hash": "536cfa0f6718cc68b688ec600be772642717c99e5da2cc0b3c67c79181fb1951"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/api/event/AutoInvokingEvent.java",
+          "mode": "100644",
+          "sha": "fabfe1d277a66bb2f900d89f0f3958b10a83eeab",
+          "size": 2661,
+          "sha256": "99b2be35853c78362568c1250be7dd54ae5385255d19342fbd3e06a0dcac5522",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-api-base/src/main/java/net/fabricmc/fabric/api/event/AutoInvokingEvent.java",
+          "document_id": "77b7c1a307711bfad95d939d8636bb8b6b5565945c45f32dfd6136a48ad215ae",
+          "content_hash": "99b2be35853c78362568c1250be7dd54ae5385255d19342fbd3e06a0dcac5522"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/api/event/Event.java",
+          "mode": "100644",
+          "sha": "9e4e5f68f7e271021dea4881c40e7041e655672e",
+          "size": 3454,
+          "sha256": "a760121e20b7fd1acbb3fd5732874150ca7a704e5d55388ec7366015748a5a8a",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-api-base/src/main/java/net/fabricmc/fabric/api/event/Event.java",
+          "document_id": "0eb6a081d5355d6d335a6977aebf5638aea8aa8383a282740e84a5c5b1925e6e",
+          "content_hash": "a760121e20b7fd1acbb3fd5732874150ca7a704e5d55388ec7366015748a5a8a"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/api/event/EventFactory.java",
+          "mode": "100644",
+          "sha": "4e452ca6b3453314174a64c499f1d469a63d8456",
+          "size": 5334,
+          "sha256": "da1b5b32a66c2d647bba23fae979730a95263710a0c9f8e8a60598eb30e03f26",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-api-base/src/main/java/net/fabricmc/fabric/api/event/EventFactory.java",
+          "document_id": "7534bd8b8dd944e3c9125f633024e10ce774576a11346aaf8324b9c343a0a857",
+          "content_hash": "da1b5b32a66c2d647bba23fae979730a95263710a0c9f8e8a60598eb30e03f26"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/api/util/Block2ObjectMap.java",
+          "mode": "100644",
+          "sha": "cfa3d35ea3ea0f88bec4dfae69688e6ca697043c",
+          "size": 1129,
+          "sha256": "75fe2f978862c8708038fc8b8837b05c6efa982b833e099efb3df43ed0b3432d",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-api-base/src/main/java/net/fabricmc/fabric/api/util/Block2ObjectMap.java",
+          "document_id": "fd4e871441c16fbae9db23a8518b50e34fc57c9abf180514b3a682351058344d",
+          "content_hash": "75fe2f978862c8708038fc8b8837b05c6efa982b833e099efb3df43ed0b3432d"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/api/util/BooleanFunction.java",
+          "mode": "100644",
+          "sha": "dd04f76411842acaaf0bd839dc7999e0f4f0ed02",
+          "size": 1082,
+          "sha256": "06e85be3d848832fc538b0bf3ffb08acf840a9b14d8582d2497d321c7e840f64",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-api-base/src/main/java/net/fabricmc/fabric/api/util/BooleanFunction.java",
+          "document_id": "a27b41caffc399f4a15f06575e993aeeb95e5db15dcc9bdf89f03edd2d60f3cf",
+          "content_hash": "06e85be3d848832fc538b0bf3ffb08acf840a9b14d8582d2497d321c7e840f64"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/api/util/EventResult.java",
+          "mode": "100644",
+          "sha": "2c5d5364c586a11c098811501422a51d7a0fbc6e",
+          "size": 2119,
+          "sha256": "cf0857a39ec36b1b5a16a95ddc0dc4457031294feb57b3369aec9223eb700df7",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-api-base/src/main/java/net/fabricmc/fabric/api/util/EventResult.java",
+          "document_id": "17a35f4e7031cb719336ed717fb5687c4d2e5e2b2833c2b5b4da02ff3505ab2c",
+          "content_hash": "cf0857a39ec36b1b5a16a95ddc0dc4457031294feb57b3369aec9223eb700df7"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/api/util/Item2ObjectMap.java",
+          "mode": "100644",
+          "sha": "534eb416c247b9b364a6359d555136a1b0adfa74",
+          "size": 1168,
+          "sha256": "3fc17779d333bcffe8cdc609d1b6c0beac4c5583b0533b6495ab5a3d173ecb94",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-api-base/src/main/java/net/fabricmc/fabric/api/util/Item2ObjectMap.java",
+          "document_id": "c77c8c882b56557deb6ae25ebcc9cd1eda35b9782284925d6ca44fe1b4084805",
+          "content_hash": "3fc17779d333bcffe8cdc609d1b6c0beac4c5583b0533b6495ab5a3d173ecb94"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/api/util/NbtType.java",
+          "mode": "100644",
+          "sha": "053f6cc90963ed4932e768ae7e95a947995295a5",
+          "size": 1492,
+          "sha256": "4334c09165365b6017ca80f24b462bbfe4646f23824551229e5f627042c36a1b",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-api-base/src/main/java/net/fabricmc/fabric/api/util/NbtType.java",
+          "document_id": "9ffc022247f7aea2c46596e19f7b6adcf85434800f4401e7d1d16d7842783203",
+          "content_hash": "4334c09165365b6017ca80f24b462bbfe4646f23824551229e5f627042c36a1b"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/api/util/TriState.java",
+          "mode": "100644",
+          "sha": "c0acd94d289c835cab296894a92860b3a81f3e31",
+          "size": 5292,
+          "sha256": "a40e5d1757c0dd2820ad561b19eca8852c13632b8de3ed5bf164510de0774ea5",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-api-base/src/main/java/net/fabricmc/fabric/api/util/TriState.java",
+          "document_id": "15196708523ff9053b0af8ba06deea91b177fa6d6d4c0f771ac69a5cc2897c19",
+          "content_hash": "a40e5d1757c0dd2820ad561b19eca8852c13632b8de3ed5bf164510de0774ea5"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/BaseModInitializer.java",
+          "mode": "100644",
+          "sha": "da2f0a86fd46f925c7a3600e4d99024a81f9b4f3",
+          "size": 727,
+          "sha256": "9d8dca0aa18a0ba872e1bf106987a6158868da47234c3a4fe4340001ab61f69e",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/BaseModInitializer.java",
+          "document_id": "fe94ea94dbdef384e455a2208e103c7278ba8e02a07205b57077d1282be0a7fc",
+          "content_hash": "9d8dca0aa18a0ba872e1bf106987a6158868da47234c3a4fe4340001ab61f69e"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/event/ArrayBackedEvent.java",
+          "mode": "100644",
+          "sha": "e3c338f46b9f85bd1f8dd07749bc4613f0e992d1",
+          "size": 4055,
+          "sha256": "e969ed077385b1c72c45cf04e8280424ba0b77fd022786efd6f25e867bcab7db",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/event/ArrayBackedEvent.java",
+          "document_id": "7f0ac99b7b31cdb1ede483eedfa0d616f9e545df9a98e3eb6b8991348bc3b92b",
+          "content_hash": "e969ed077385b1c72c45cf04e8280424ba0b77fd022786efd6f25e867bcab7db"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/event/EventFactoryImpl.java",
+          "mode": "100644",
+          "sha": "1d0be4aa530645e89ee0b06fb8c18306a23b1b13",
+          "size": 4767,
+          "sha256": "321efbdec2d82257d14183d5b12c9b9a5d93692255c7d666f872b1dec2e2cf28",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/event/EventFactoryImpl.java",
+          "document_id": "b8abcc2753a5baf89884146d21556d59c3bec2c6dc85c751fc0ca68b044d9d35",
+          "content_hash": "321efbdec2d82257d14183d5b12c9b9a5d93692255c7d666f872b1dec2e2cf28"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/event/EventPhaseData.java",
+          "mode": "100644",
+          "sha": "c11454e4ef35e1f68c2ecff8b87ad35e71eda497",
+          "size": 1393,
+          "sha256": "c932a806004c14d99350aa9c5476a7a14e54b7606d7702d7b6e5fa435d083ad4",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/event/EventPhaseData.java",
+          "document_id": "d511185c944fa326239e83ffae2805fdbfe23be13eaa0209709884910502c111",
+          "content_hash": "c932a806004c14d99350aa9c5476a7a14e54b7606d7702d7b6e5fa435d083ad4"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/registry/AddData.java",
+          "mode": "100644",
+          "sha": "3739e55cfa06820c8ac125a4bb4329f5f9cce0fe",
+          "size": 160,
+          "sha256": "302a6f89fd7185802defb137b70c97e48c6ea26e553fbc2252bac76d90a15874",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/registry/AddData.java",
+          "document_id": "b67ee7d2518400964b461e53741a4a5aa85730515365a34b6375e9fd8f3a7f56",
+          "content_hash": "302a6f89fd7185802defb137b70c97e48c6ea26e553fbc2252bac76d90a15874"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/registry/EarlyRegistry.java",
+          "mode": "100644",
+          "sha": "64c76ebeba52f9e660b92a2cf43a0dcc820ed254",
+          "size": 134,
+          "sha256": "d1d1864358127711cf4ccddd3c8d728f55d30cfd62ed41f3aeabf4fb9a7da83a",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/registry/EarlyRegistry.java",
+          "document_id": "e971070f56b42d25b7d73ab7be4df574d456f1e7026015f1e96872c1df54e2aa",
+          "content_hash": "d1d1864358127711cf4ccddd3c8d728f55d30cfd62ed41f3aeabf4fb9a7da83a"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/toposort/NodeSorting.java",
+          "mode": "100644",
+          "sha": "8d59594e4adfa25e584ca2ada435016d6627fa28",
+          "size": 5616,
+          "sha256": "4f73f4098fc41c64a2767d471b6e98411ae2f4c8e581263ed1a0cce6e621da97",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/toposort/NodeSorting.java",
+          "document_id": "107012f28ee0c397883b4c475351844e557cab5ed90cdb7c52b4a60168e4ddb9",
+          "content_hash": "4f73f4098fc41c64a2767d471b6e98411ae2f4c8e581263ed1a0cce6e621da97"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/toposort/SortableNode.java",
+          "mode": "100644",
+          "sha": "6d9e842b3783ce31298533c3c14b6be36d37fabf",
+          "size": 1465,
+          "sha256": "b1308288b001f623a3511f15192d193e3c771bb57a033d3e89e6155b8f0d65c8",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/toposort/SortableNode.java",
+          "document_id": "41189bdb8e58fa0f63ec6f8b9313734b741439022e7d845c85fef32be7d96f33",
+          "content_hash": "b1308288b001f623a3511f15192d193e3c771bb57a033d3e89e6155b8f0d65c8"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/mixin/base/BootstrapMixin.java",
+          "mode": "100644",
+          "sha": "69a1d50f575289ff9534b650ebfd1ef94ffc0e3f",
+          "size": 757,
+          "sha256": "a3d10bc1f5a63340d4e217528370e7630908b15d9db47f63ae37453a00689f8f",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-api-base/src/main/java/net/fabricmc/fabric/mixin/base/BootstrapMixin.java",
+          "document_id": "e59e0ef46f6587b8611c1763496a0b734d4ebd6b646d053380f3a5b7fc4e6a8a",
+          "content_hash": "a3d10bc1f5a63340d4e217528370e7630908b15d9db47f63ae37453a00689f8f"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/mixin/base/MappedRegistryMixin.java",
+          "mode": "100644",
+          "sha": "5e74311d7de042f4bf916ec40e2eacf65fe72a5f",
+          "size": 1967,
+          "sha256": "fb028178fe62cf1c5fe387439c293819d0cfc2baa10990f7f0720d52d4825b20",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-api-base/src/main/java/net/fabricmc/fabric/mixin/base/MappedRegistryMixin.java",
+          "document_id": "62535ad20eb3c985b26cc457a9255238fcf9238d1d814b4d700e732b5b4a06ad",
+          "content_hash": "fb028178fe62cf1c5fe387439c293819d0cfc2baa10990f7f0720d52d4825b20"
+        },
+        {
+          "path": "fabric-api-base/src/main/resources/assets/fabric-api-base/icon.png",
+          "mode": "100644",
+          "sha": "12c4531de92fe0544a0e15347f84381c132a7feb",
+          "size": 1555,
+          "sha256": "e5b8c2338f0260165e322cbff7a7bde5e1236788a343732ca1aa46bdf03087f2",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-api-base/src/main/resources/assets/fabric-api-base/icon.png",
+          "document_id": "a9856059a52544806d379e8d85965c82d93198e5df7511550868c3fbe59d792d",
+          "content_hash": "e5b8c2338f0260165e322cbff7a7bde5e1236788a343732ca1aa46bdf03087f2"
+        },
+        {
+          "path": "fabric-api-base/src/main/resources/fabric-api-base.mixins.json",
+          "mode": "100644",
+          "sha": "fae81d60ca0b77a79cc9dc42d95ab7b0d8470169",
+          "size": 272,
+          "sha256": "3b84e8cbc1007e21ff254ba7fa339583c8861a6a6b2fafbe71940b19283ddc60",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-api-base/src/main/resources/fabric-api-base.mixins.json",
+          "document_id": "f2c421c3a8e27730c3c64596f472dc7e474b2a4882bd248ea6ada69130d18ade",
+          "content_hash": "3b84e8cbc1007e21ff254ba7fa339583c8861a6a6b2fafbe71940b19283ddc60"
+        },
+        {
+          "path": "fabric-api-base/src/main/resources/fabric.mod.json",
+          "mode": "100644",
+          "sha": "97502d84e902fa366ca85726c2a65f3872030e25",
+          "size": 689,
+          "sha256": "f46290d01e797de49024791139e51a885466a072866305227b0fb621da1a6701",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-api-base/src/main/resources/fabric.mod.json",
+          "document_id": "327e16ff801e3931a8506d0af46d2d985b9daf1b72a262802123b430c5677d00",
+          "content_hash": "f46290d01e797de49024791139e51a885466a072866305227b0fb621da1a6701"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/api/client/event/lifecycle/v1/ClientBlockEntityEvents.java",
+          "mode": "100644",
+          "sha": "9c606dc92f82fd13d4839b787f6a4198c53d3d2e",
+          "size": 2131,
+          "sha256": "bc7a844f0b35af797bd3069fa771ba0e54563ea9b68d86059cf27d6005d011db",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/api/client/event/lifecycle/v1/ClientBlockEntityEvents.java",
+          "document_id": "d6caa69c11080773cc90747b3da4de64ea10a542ef8aae41e41247805a55a0e0",
+          "content_hash": "bc7a844f0b35af797bd3069fa771ba0e54563ea9b68d86059cf27d6005d011db"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/api/client/event/lifecycle/v1/ClientChunkEvents.java",
+          "mode": "100644",
+          "sha": "c9f5a8e689cd6aa6e033d0c5f762f050fdf51ad5",
+          "size": 1985,
+          "sha256": "6112adeba920fddc68272d8df02772d86f300794c1c3effb4c249049828a23b7",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/api/client/event/lifecycle/v1/ClientChunkEvents.java",
+          "document_id": "e7d6fafadb8ee17d5f9823036ef6b74f177914f8ef9b3aa0bcf0326f406870cc",
+          "content_hash": "6112adeba920fddc68272d8df02772d86f300794c1c3effb4c249049828a23b7"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/api/client/event/lifecycle/v1/ClientEntityEvents.java",
+          "mode": "100644",
+          "sha": "d04179aaa6caddd18f5acc7e0239fef9fcab698b",
+          "size": 1941,
+          "sha256": "d78dab79eb6cc1c69f4098450541c3ce206055e44b3a60ad99c7a71cc8bca00f",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/api/client/event/lifecycle/v1/ClientEntityEvents.java",
+          "document_id": "d9fd118e1e081b3a24ad61173f94655b0a422c4d48bd68f62369f8ec424ee88b",
+          "content_hash": "d78dab79eb6cc1c69f4098450541c3ce206055e44b3a60ad99c7a71cc8bca00f"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/api/client/event/lifecycle/v1/ClientLevelEvents.java",
+          "mode": "100644",
+          "sha": "88a6a49335e63dee16cfc6a77d770f73084e5514",
+          "size": 1583,
+          "sha256": "d0293eb87b748717fe4527af3c5cda01cdc2986ac7991684362039fa9b522953",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/api/client/event/lifecycle/v1/ClientLevelEvents.java",
+          "document_id": "5af8d8b5bf0260239d5ab3dfbbc0885effe63558e8a310e1e2d6674dc84e518e",
+          "content_hash": "d0293eb87b748717fe4527af3c5cda01cdc2986ac7991684362039fa9b522953"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/api/client/event/lifecycle/v1/ClientLifecycleEvents.java",
+          "mode": "100644",
+          "sha": "b2e3fb82ade6e068085a15980f59d9a7fd58362f",
+          "size": 1944,
+          "sha256": "393bc6c40f8b6035fea4ec298112a9940c8e7bb6887b8a2e4f51ec17a65ba834",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/api/client/event/lifecycle/v1/ClientLifecycleEvents.java",
+          "document_id": "30b45f862f1befa5e781489b7ea80a389221c621e023adb4b24ad37b1a0f6090",
+          "content_hash": "393bc6c40f8b6035fea4ec298112a9940c8e7bb6887b8a2e4f51ec17a65ba834"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/api/client/event/lifecycle/v1/ClientTickEvents.java",
+          "mode": "100644",
+          "sha": "97f858fb1da69c24b4aed7a6b20bec0eb320809a",
+          "size": 2479,
+          "sha256": "ddb558edcc9455043980a7e921d18febe636f2f0fca1e101a79ce05da3ac9704",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/api/client/event/lifecycle/v1/ClientTickEvents.java",
+          "document_id": "673e318c4190129b4e640d182b3e98c9504307aec9525f16d6fde9c561a6f754",
+          "content_hash": "ddb558edcc9455043980a7e921d18febe636f2f0fca1e101a79ce05da3ac9704"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/impl/client/event/lifecycle/ClientLifecycleEventsImpl.java",
+          "mode": "100644",
+          "sha": "6282ae9e3b2d176290bd27c6255b086446389a0d",
+          "size": 1662,
+          "sha256": "06c505b4868b107f3dbe10df3619d3fabc4fb5918fd11d5c3468d6bf72e04b8c",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/impl/client/event/lifecycle/ClientLifecycleEventsImpl.java",
+          "document_id": "408eaa4621b9146616e381d34e6354398ab003f8472d8424f6e938542b760be0",
+          "content_hash": "06c505b4868b107f3dbe10df3619d3fabc4fb5918fd11d5c3468d6bf72e04b8c"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/mixin/event/lifecycle/client/ClientChunkCacheMixin.java",
+          "mode": "100644",
+          "sha": "209dd9dbb867d1fe0d445bcd268647c064bf674d",
+          "size": 3510,
+          "sha256": "f9a0a137a18f45793dffea4d490f2baf366fc0f7e84c2df5aee4d907c8a92386",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/mixin/event/lifecycle/client/ClientChunkCacheMixin.java",
+          "document_id": "eb128f0af4d8f0c89c79fd74a82f7059f4956bd785c3d308209e00026d2f7cf6",
+          "content_hash": "f9a0a137a18f45793dffea4d490f2baf366fc0f7e84c2df5aee4d907c8a92386"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/mixin/event/lifecycle/client/ClientConfigurationPacketListenerImplMixin.java",
+          "mode": "100644",
+          "sha": "51264df4d075cbdc8f836b7441806b04efefe57c",
+          "size": 1790,
+          "sha256": "e12cc6a485c282b1275e8819e941b5c3251310effab05b0951cb791714844f8d",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/mixin/event/lifecycle/client/ClientConfigurationPacketListenerImplMixin.java",
+          "document_id": "0b0ec0d96b38a7695a394d4965a36063c8de3e1302e4955b11fb5e0d425f0940",
+          "content_hash": "e12cc6a485c282b1275e8819e941b5c3251310effab05b0951cb791714844f8d"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/mixin/event/lifecycle/client/ClientLevelEntityCallbacksMixin.java",
+          "mode": "100644",
+          "sha": "442db6a30d916f1c16738ea55981967125455e5b",
+          "size": 2004,
+          "sha256": "79f5b573756fa668faef6729d7e4ae9e301ed4eec3fc65f1136aba7a2e943573",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/mixin/event/lifecycle/client/ClientLevelEntityCallbacksMixin.java",
+          "document_id": "1a5460d29e54797e6414f7403b514fb4b4159bc6f149fe66f05575be1b3e32cd",
+          "content_hash": "79f5b573756fa668faef6729d7e4ae9e301ed4eec3fc65f1136aba7a2e943573"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/mixin/event/lifecycle/client/ClientLevelMixin.java",
+          "mode": "100644",
+          "sha": "5d3f02071c35b6275fb6bf1e63cede96cec214d7",
+          "size": 1530,
+          "sha256": "110961fd2e648de3820efe00428ddc3220eb82114a898ed4746c4f9fe4df2c37",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/mixin/event/lifecycle/client/ClientLevelMixin.java",
+          "document_id": "519094aee98c3b12c0b845ed89d49d2579a05cfbabdfe23a8641c533752b9595",
+          "content_hash": "110961fd2e648de3820efe00428ddc3220eb82114a898ed4746c4f9fe4df2c37"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/mixin/event/lifecycle/client/ClientPacketListenerMixin.java",
+          "mode": "100644",
+          "sha": "9b9e6e0397cd3c921ccd445a079f3c9a51b30406",
+          "size": 4984,
+          "sha256": "b95013676421c018342a9bf7c4090b3ecf009013d52fbada9d618953d628cb41",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/mixin/event/lifecycle/client/ClientPacketListenerMixin.java",
+          "document_id": "db6bb36a475028c0e500ba983d0d38a24182abc1496f70246f1f2845022840d3",
+          "content_hash": "b95013676421c018342a9bf7c4090b3ecf009013d52fbada9d618953d628cb41"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/mixin/event/lifecycle/client/LevelChunkMixin.java",
+          "mode": "100644",
+          "sha": "8364e0b9949597b5041b07aa6045bb83c4925441",
+          "size": 4987,
+          "sha256": "87a894de8dca3f97e986013e6e6fa1ee771453d35dd06fdd53b640c6b8d554ca",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/mixin/event/lifecycle/client/LevelChunkMixin.java",
+          "document_id": "5eb8a5ec171015da2dd08d06af3ac6adcef73fcd5f0e1c8a7283b29512398c00",
+          "content_hash": "87a894de8dca3f97e986013e6e6fa1ee771453d35dd06fdd53b640c6b8d554ca"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/mixin/event/lifecycle/client/MinecraftMixin.java",
+          "mode": "100644",
+          "sha": "5f5c36c2cd9084e2afa3e5c108047484de8baa65",
+          "size": 2747,
+          "sha256": "7344794b277680a8d3aef58a859367048ba0fc71541c52e08b0673aa65841b78",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/client/java/net/fabricmc/fabric/mixin/event/lifecycle/client/MinecraftMixin.java",
+          "document_id": "55bae145c220e643e0cb7dca996625d70cd94a53fcf3f3dffeddac4358cb9130",
+          "content_hash": "7344794b277680a8d3aef58a859367048ba0fc71541c52e08b0673aa65841b78"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/client/resources/fabric-lifecycle-events-v1.client.mixins.json",
+          "mode": "100644",
+          "sha": "c7e179e592684f0c1128ebea3475a94ca5bc3640",
+          "size": 428,
+          "sha256": "9a6eea37052a32d8d97cc41fbe22ccc2bc14a93d4127b0e4ecc674f8abcc5771",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/client/resources/fabric-lifecycle-events-v1.client.mixins.json",
+          "document_id": "7edd53d52d79146f9c731ff0386d2c343fecd6cfeaf8140c69795b619f78f673",
+          "content_hash": "9a6eea37052a32d8d97cc41fbe22ccc2bc14a93d4127b0e4ecc674f8abcc5771"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/CommonLifecycleEvents.java",
+          "mode": "100644",
+          "sha": "b3a9d1d64182107d79a2ef96208cdda776fbecd0",
+          "size": 1490,
+          "sha256": "2937a880281fe4efc19c193f5f05cf88ddb5d1a31b366bafe1bebe01523651c6",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/CommonLifecycleEvents.java",
+          "document_id": "5d04dac11641b94e764a6ef697d74097c4ea8821a2ea0069712aaa3effb2dc38",
+          "content_hash": "2937a880281fe4efc19c193f5f05cf88ddb5d1a31b366bafe1bebe01523651c6"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/EntityLoadData.java",
+          "mode": "100644",
+          "sha": "7366521ec4a41f9d0f4653b4569ca7bb8ed3c19e",
+          "size": 1389,
+          "sha256": "34caadb6512f8969f8bd9ec7df2b59070f42cf28268393d50205368a28e213d2",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/EntityLoadData.java",
+          "document_id": "4f125f07c2382fc104faad7ae04a4a306675d1c96d604b891f8b0e7d3918814e",
+          "content_hash": "34caadb6512f8969f8bd9ec7df2b59070f42cf28268393d50205368a28e213d2"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/ServerBlockEntityEvents.java",
+          "mode": "100644",
+          "sha": "089fe28243655a073f31a4c57385274ecfce2197",
+          "size": 2099,
+          "sha256": "5e979ba530bf05f54259c045cd816af322ab400b17de696884ead840abec9fed",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/ServerBlockEntityEvents.java",
+          "document_id": "5991bd77d33e2d5216b5029c7ef1e73592ecfa452e600658ef1689183cc5079e",
+          "content_hash": "5e979ba530bf05f54259c045cd816af322ab400b17de696884ead840abec9fed"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/ServerChunkEvents.java",
+          "mode": "100644",
+          "sha": "5e23434153cfd93b0c85dbeaddc187eb9a309f7f",
+          "size": 4712,
+          "sha256": "2fd6571689b61296e3d9ee9a4b03b69891bebc7ab000beb13cf980a41d0990ae",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/ServerChunkEvents.java",
+          "document_id": "54ad90c7dbc0ffd1982b798d5aaf8d8aa5abcbe7b64fa220248fde80ca0d625f",
+          "content_hash": "2fd6571689b61296e3d9ee9a4b03b69891bebc7ab000beb13cf980a41d0990ae"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/ServerEntityEvents.java",
+          "mode": "100644",
+          "sha": "2ec01b479b4001ce5d758d35815a82550aaf1f50",
+          "size": 3825,
+          "sha256": "eadb24575537430f4ceee02d5d3290573136e2363913a0c5f1917912ea7b7402",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/ServerEntityEvents.java",
+          "document_id": "bfa20cf47421adf835d025a95beedb4c7ce196e93a049147b7f956c8c84b4eab",
+          "content_hash": "eadb24575537430f4ceee02d5d3290573136e2363913a0c5f1917912ea7b7402"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/ServerLevelEvents.java",
+          "mode": "100644",
+          "sha": "48987b18a4f1434f6cd059d4f51eeeefd167b2a8",
+          "size": 2148,
+          "sha256": "de3931276d879d3b88df15c9d9f9e42974237235aaffe944dc5effc3127300db",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/ServerLevelEvents.java",
+          "document_id": "d9853dc2bf45ccbff9be16b60333f14f06a76621605d30867b3efcbe4e4c33a5",
+          "content_hash": "de3931276d879d3b88df15c9d9f9e42974237235aaffe944dc5effc3127300db"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/ServerLifecycleEvents.java",
+          "mode": "100644",
+          "sha": "17ea941a1c89d91cad2ab13f19c928a10da3abef",
+          "size": 7467,
+          "sha256": "04c06629fe1542f48995716abc0e548b53f990e0e725c8e1ce285f087bca68bd",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/ServerLifecycleEvents.java",
+          "document_id": "ccd9ce0805c8891d9b9dc32a2b11cb7d6a6ee39b59a2def97089ff693f7ec91d",
+          "content_hash": "04c06629fe1542f48995716abc0e548b53f990e0e725c8e1ce285f087bca68bd"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/ServerTickEvents.java",
+          "mode": "100644",
+          "sha": "cb299d014824640b37a7b8d976451ca30ef890a0",
+          "size": 3136,
+          "sha256": "34b2184dd3f30e73a715495f93f94e98506448eaa991ce880553ed83a5dace3c",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/ServerTickEvents.java",
+          "document_id": "d3ce7445f5dd56e1473ce819b6ed11f3021118dfb6c87418ca780a9a62763e51",
+          "content_hash": "34b2184dd3f30e73a715495f93f94e98506448eaa991ce880553ed83a5dace3c"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/impl/event/lifecycle/EntityLoadDataSetter.java",
+          "mode": "100644",
+          "sha": "2b44d528e9a1ea35b95b5b840e2c7eb30818386c",
+          "size": 875,
+          "sha256": "5595508aa34eba91b4428a5f05a44fc003868b7ceba164ab3650d3306e4ccd91",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/impl/event/lifecycle/EntityLoadDataSetter.java",
+          "document_id": "6d9a4c474f956a2dda232a2cd74b659fb58d993bea98cde63aacd604408245cf",
+          "content_hash": "5595508aa34eba91b4428a5f05a44fc003868b7ceba164ab3650d3306e4ccd91"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/impl/event/lifecycle/FullChunkStatusEventTracker.java",
+          "mode": "100644",
+          "sha": "28d94d336b237ad55319a037b3efaa48bf2fb9d4",
+          "size": 1112,
+          "sha256": "cabd0bd7329627d2616a9cd3cabb588167e2fd4c8d393dcf31165114adfda8d2",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/impl/event/lifecycle/FullChunkStatusEventTracker.java",
+          "document_id": "6040eab75df1caa5c6f0aa18166a81d76c46914d557013aeb4f7c409dda86b95",
+          "content_hash": "cabd0bd7329627d2616a9cd3cabb588167e2fd4c8d393dcf31165114adfda8d2"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/impl/event/lifecycle/LifecycleEventsImpl.java",
+          "mode": "100644",
+          "sha": "96fc2700a3edc159cace5c69e0fb64169db0f17a",
+          "size": 2527,
+          "sha256": "1665adfb9d1d506d63cbc9dac53c5d16681b4f3aa4ecbbad511b2a22f6d8c91c",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/impl/event/lifecycle/LifecycleEventsImpl.java",
+          "document_id": "279ed18baf3aaf23fd8ca4d127898b4c73d192349c100c4f26663353937567f3",
+          "content_hash": "1665adfb9d1d506d63cbc9dac53c5d16681b4f3aa4ecbbad511b2a22f6d8c91c"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/impl/event/lifecycle/LoadedChunksCache.java",
+          "mode": "100644",
+          "sha": "b8d00639dec2b193c1e01ff7733e58dddb796e3e",
+          "size": 1138,
+          "sha256": "6b8359e54b5a52b3110acc706172844854fb9c0b110f5f7abd3ac3c31e1b6565",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/impl/event/lifecycle/LoadedChunksCache.java",
+          "document_id": "9238835f6b0898d87a2b72468ce113279699ea12cbe64e09e237451667459ae4",
+          "content_hash": "6b8359e54b5a52b3110acc706172844854fb9c0b110f5f7abd3ac3c31e1b6565"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/ChunkHolderMixin.java",
+          "mode": "100644",
+          "sha": "fa871980d596d81709441103433fe9384fa55885",
+          "size": 6331,
+          "sha256": "c9d467246bffb8e37426b4c3cf0c420a05ae1e7936cb40d0e3cc21d38f462953",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/ChunkHolderMixin.java",
+          "document_id": "6b48c6d786fb05b793be2750d20674924e9c8faed3818345c89e15610963db1c",
+          "content_hash": "c9d467246bffb8e37426b4c3cf0c420a05ae1e7936cb40d0e3cc21d38f462953"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/ChunkMapMixin.java",
+          "mode": "100644",
+          "sha": "02abade4e783d1afa1efe6dad7673f3825d76b2c",
+          "size": 2116,
+          "sha256": "1d10ffbf501946a932a5a19c38aba945871f1776697d30bb7c1882b1bfd965c3",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/ChunkMapMixin.java",
+          "document_id": "e10fcaa96e9a20309446b40105ecf39b673ac11e5f8b4a6a619afeced5d51210",
+          "content_hash": "1d10ffbf501946a932a5a19c38aba945871f1776697d30bb7c1882b1bfd965c3"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/ChunkStatusTasksMixin.java",
+          "mode": "100644",
+          "sha": "c8c597a0eead248ada8b3f70d528b88b09e12d8a",
+          "size": 3154,
+          "sha256": "ebdbfa1b5f45d0dab8d3e983eac3ee74d4defbe162bb1bedbd29a3c13a72755e",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/ChunkStatusTasksMixin.java",
+          "document_id": "1b1601a764ffaaa325a8c3f6dea47a18ff659e98f22c9537ce8fd524cc9263a5",
+          "content_hash": "ebdbfa1b5f45d0dab8d3e983eac3ee74d4defbe162bb1bedbd29a3c13a72755e"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/EntityMixin.java",
+          "mode": "100644",
+          "sha": "e857a5f5ea6ad2e482a2de06e39ef35fb296309e",
+          "size": 1692,
+          "sha256": "65862c42dcea67942ceab7e2e992d067f1c88f20798e675cd164b98d1bbd2a99",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/EntityMixin.java",
+          "document_id": "a9bbeda219743b07521c8ca220cc31a0ad23b9355399fa093a86a864f80d8dd1",
+          "content_hash": "65862c42dcea67942ceab7e2e992d067f1c88f20798e675cd164b98d1bbd2a99"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/EntityTypeMixin.java",
+          "mode": "100644",
+          "sha": "1b88d3a65fc45200c65525d8daa15c593e37b819",
+          "size": 1627,
+          "sha256": "44b04832173e0ed4c6446748d3f1b81e7714e6f482282894c905cfd5cf2c74d1",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/EntityTypeMixin.java",
+          "document_id": "7023f2f968ee1f727c298b64ead8c11a58556f64340fced1797a18f596def988",
+          "content_hash": "44b04832173e0ed4c6446748d3f1b81e7714e6f482282894c905cfd5cf2c74d1"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/LevelMixin.java",
+          "mode": "100644",
+          "sha": "e77c3eda549010ff2e4150f41c55c5610c25ef08",
+          "size": 1415,
+          "sha256": "69e4af83a08af9f754be1fe8e7c3dc6a9912dd9a9a534aa965bea26cea38d833",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/LevelMixin.java",
+          "document_id": "c22f4153d4df8908cacfc2edb654a53929e3bb570c9366eb7e9837b5def6f450",
+          "content_hash": "69e4af83a08af9f754be1fe8e7c3dc6a9912dd9a9a534aa965bea26cea38d833"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/LivingEntityMixin.java",
+          "mode": "100644",
+          "sha": "eb8f6507d396aa949781890b0e3d7351411783bb",
+          "size": 1797,
+          "sha256": "d4a97e2007d3403d4538a9810967718c93a5f35cb58c67fef387db3179c3bbfc",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/LivingEntityMixin.java",
+          "document_id": "93b8505a152cd4b092120d61c1b949f5c07071a08a57de7416077c84cb2267e4",
+          "content_hash": "d4a97e2007d3403d4538a9810967718c93a5f35cb58c67fef387db3179c3bbfc"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/MinecraftServerMixin.java",
+          "mode": "100644",
+          "sha": "a1bbb6be606989b226666dee396b7e04728196c1",
+          "size": 5488,
+          "sha256": "b17540ea2569a4533a26989a30eb791507f31e9d64a72a609ffbbde7437ea8b2",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/MinecraftServerMixin.java",
+          "document_id": "61434a6cb9c7d759d1a11f54b8cc3bc3808c996bb76eff34f1f999d67ce2f85f",
+          "content_hash": "b17540ea2569a4533a26989a30eb791507f31e9d64a72a609ffbbde7437ea8b2"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/PersistentEntitySectionManagerMixin.java",
+          "mode": "100644",
+          "sha": "7fe250968b0855085a7595d4efc38b00cf479da1",
+          "size": 1804,
+          "sha256": "c6517ebf68c34180ec5eaefd99d04c69153938f2778de09b6b5d4d5c8e5d016b",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/PersistentEntitySectionManagerMixin.java",
+          "document_id": "b7b89d71c3709062390cac77e9a88e958543119d99a27aef9c2406dcc8e0bb2f",
+          "content_hash": "c6517ebf68c34180ec5eaefd99d04c69153938f2778de09b6b5d4d5c8e5d016b"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/PlayerListMixin.java",
+          "mode": "100644",
+          "sha": "6450630502bd79ba2aa3012d7a0399ca6cb77c95",
+          "size": 1994,
+          "sha256": "764147d576897f212344bb51b5c2de20aee34b614d5aea905704b369b4357372",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/PlayerListMixin.java",
+          "document_id": "176ea6ccc01660d84cb8872d5524930ae00f6a28ab178247c0e6da1365f90722",
+          "content_hash": "764147d576897f212344bb51b5c2de20aee34b614d5aea905704b369b4357372"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/ReloadableServerResourcesMixin.java",
+          "mode": "100644",
+          "sha": "da2ff85a110e49391bc7f7f5cac2cebb1a0c43bc",
+          "size": 2154,
+          "sha256": "1c8ff249f1dc4b3904653e56cb738e82d79c66ff5bfe010f61de3d8fed90797f",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/ReloadableServerResourcesMixin.java",
+          "document_id": "b0e3cf9f4173cf0395784feb26a2425a50e77cea18764d057cbbf3d423f8cf68",
+          "content_hash": "1c8ff249f1dc4b3904653e56cb738e82d79c66ff5bfe010f61de3d8fed90797f"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/ServerLevelEntityCallbacksMixin.java",
+          "mode": "100644",
+          "sha": "2bb09a3347d7bf911ecd57d5294ddcf0f15f3af4",
+          "size": 1842,
+          "sha256": "f8e48b36e598bee13715cdcb52f8e63e926883569a478bceb0ad37e99a334314",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/ServerLevelEntityCallbacksMixin.java",
+          "document_id": "b51aabc6f0c91f6235c49c26c6ae223a7dca5dae42b2e7a2280ff81873fcd093",
+          "content_hash": "f8e48b36e598bee13715cdcb52f8e63e926883569a478bceb0ad37e99a334314"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/ServerLevelMixin.java",
+          "mode": "100644",
+          "sha": "42eb4e413cdb8ef625355ca8385f2a6010769454",
+          "size": 1820,
+          "sha256": "22b584a4b5cc7108738947ecda72c5bb1527b507c3221d53c7aae9f0e56d4d06",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/ServerLevelMixin.java",
+          "document_id": "4b1b8080a0dd4f3405d0175dd6e008ce3cd5882988ca080140806163ddacf67d",
+          "content_hash": "22b584a4b5cc7108738947ecda72c5bb1527b507c3221d53c7aae9f0e56d4d06"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/server/LevelChunkMixin.java",
+          "mode": "100644",
+          "sha": "0f3f7c21286f35f07887199911dd93ec4847b672",
+          "size": 4399,
+          "sha256": "ce547ac454b1670519393259caa36a541a4ef92598fe751fb3a3de9f7b11ef63",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/server/LevelChunkMixin.java",
+          "document_id": "247528ccd4b03143a2101f48f3b105a4a9bbe22992bc145a0296c23f02058556",
+          "content_hash": "ce547ac454b1670519393259caa36a541a4ef92598fe751fb3a3de9f7b11ef63"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/resources/assets/fabric-lifecycle-events-v1/icon.png",
+          "mode": "100644",
+          "sha": "12c4531de92fe0544a0e15347f84381c132a7feb",
+          "size": 1555,
+          "sha256": "e5b8c2338f0260165e322cbff7a7bde5e1236788a343732ca1aa46bdf03087f2",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/main/resources/assets/fabric-lifecycle-events-v1/icon.png",
+          "document_id": "9aa9dcd844e4b62e25a171582f6333ded1d7ac4e39a268b8473d93590b1b3131",
+          "content_hash": "e5b8c2338f0260165e322cbff7a7bde5e1236788a343732ca1aa46bdf03087f2"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/resources/fabric-lifecycle-events-v1.classtweaker",
+          "mode": "100644",
+          "sha": "ae0f2a8fa80aab7338f6ccfa183f3570a97063d8",
+          "size": 385,
+          "sha256": "ba92bfedc5c1b44f51b980cb22a273a3c591d67663c088fc5cb618b59ed707d3",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/main/resources/fabric-lifecycle-events-v1.classtweaker",
+          "document_id": "07d61fb5309f75b4cd252adf61b42d7c983a7acdce5e6e3b26f19c131cf3d512",
+          "content_hash": "ba92bfedc5c1b44f51b980cb22a273a3c591d67663c088fc5cb618b59ed707d3"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/resources/fabric-lifecycle-events-v1.mixins.json",
+          "mode": "100644",
+          "sha": "ccbcc12d99bb8f6a0351c41bfb6f65c813afdbdf",
+          "size": 603,
+          "sha256": "5714ff42410ec893a3b5f500561e8a1bc013234d4ede0107530dbad7e69b5894",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/main/resources/fabric-lifecycle-events-v1.mixins.json",
+          "document_id": "75397ebcc74369ca6141e53b92eb3f2ad53b8fd08d0f98a12b7326945f44bf54",
+          "content_hash": "5714ff42410ec893a3b5f500561e8a1bc013234d4ede0107530dbad7e69b5894"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/resources/fabric.mod.json",
+          "mode": "100644",
+          "sha": "1a880d9371b6877f4741a97c697ad5f75f58116c",
+          "size": 1136,
+          "sha256": "5df078ff96ababc0756979248ee2aeb89d927a82440cd83385cb39b42576da55",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/fabric-lifecycle-events-v1/src/main/resources/fabric.mod.json",
+          "document_id": "416a84807b05bbb215f9ae6514dd5b40a2597ce267811927ab6a3b333996a9c4",
+          "content_hash": "5df078ff96ababc0756979248ee2aeb89d927a82440cd83385cb39b42576da55"
+        },
+        {
+          "path": "gradle.properties",
+          "mode": "100644",
+          "sha": "45910d33b845d7a181b24bda06c4c546b4c70190",
+          "size": 2094,
+          "sha256": "06774f6114c052df64994c4f733b6ff935e49da4a902889af82100ffcd74c185",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57/gradle.properties",
+          "document_id": "8d2105672a97a4b351a991c188c88c5f45fa9d5101c82f8b889d91167d2b3a8c",
+          "content_hash": "06774f6114c052df64994c4f733b6ff935e49da4a902889af82100ffcd74c185"
+        }
+      ]
+    },
+    "launchpad-frontier": {
+      "repository": "https://github.com/Sinytra/Launchpad",
+      "revision": "a1d958c952f5ffd38daa8671354e9b8fdf30f9c9",
+      "retrieved_at": "2026-10-01T18:26:38.908Z",
+      "track": "FRONTIER",
+      "namespace": "unknown",
+      "scope": "FULL_REPOSITORY_BYTE_TREE",
+      "total_tree_blobs": 67,
+      "tree_truncated": false,
+      "files_acquired": 67,
+      "bytes_acquired": 236911,
+      "profile_id": "1c872010b0580bd332753a1b4c29172b9a463aa5e1adae29f6a636683fc2b0e5",
+      "index_snapshot_id": "5305cead4ef9889e75029cfbaff0f0c8081b09b03806d41358df87397fb35ec8",
+      "status": "PARTIAL",
+      "full_byte_readback_pages": 104,
+      "all_file_hashes_verified": true,
+      "source_binary_equivalence": "NOT_ESTABLISHED",
+      "runtime_compatibility": "UNKNOWN",
+      "files": [
+        {
+          "path": ".gitattributes",
+          "mode": "100644",
+          "sha": "b7bbcc476ce55828b7010edeca69bb493a98daf3",
+          "size": 252,
+          "sha256": "9d443200b564a23ed644531ce866c43dcff8cf5fc40ea48b10f8050fa970bd91",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/.gitattributes",
+          "document_id": "21dc2a843df3d5bca750c387f70e9e9e730a0520f6a67f395d3125dd22242387",
+          "content_hash": "9d443200b564a23ed644531ce866c43dcff8cf5fc40ea48b10f8050fa970bd91"
+        },
+        {
+          "path": ".github/ISSUE_TEMPLATE/bug_report.yml",
+          "mode": "100644",
+          "sha": "14046f418f7fe1eb3275068956b6ece94356a894",
+          "size": 1945,
+          "sha256": "bec2cd25f50d5f8d0f2fa7fd63537e8c6f0c6f8dcaa05c09114dd13158f3f6b0",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/.github/ISSUE_TEMPLATE/bug_report.yml",
+          "document_id": "6d17645e8cb2b8b55434f9447009fb3833ac7b172c428cda4883f3d77c765edf",
+          "content_hash": "bec2cd25f50d5f8d0f2fa7fd63537e8c6f0c6f8dcaa05c09114dd13158f3f6b0"
+        },
+        {
+          "path": ".github/ISSUE_TEMPLATE/config.yml",
+          "mode": "100644",
+          "sha": "3f2cc4cf4ec2b97f79010459454e24a78ef8b5dd",
+          "size": 173,
+          "sha256": "bb2ac00f6582979dc0bb232a27dd741c7d3f033c97d67a4c893d91db88cd73b0",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/.github/ISSUE_TEMPLATE/config.yml",
+          "document_id": "7005ce56d10a3c8ebee8238f0612929997e1384d208aeb3cf3d80add8aa95ac2",
+          "content_hash": "bb2ac00f6582979dc0bb232a27dd741c7d3f033c97d67a4c893d91db88cd73b0"
+        },
+        {
+          "path": ".github/ISSUE_TEMPLATE/feature_request.yml",
+          "mode": "100644",
+          "sha": "468c9506d1d8c011555ad9dca9edce182d5a54ee",
+          "size": 1688,
+          "sha256": "bfe2887ba5cb914b08e25c869b839ca4c21596a636f9a843acc7798d317392cb",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/.github/ISSUE_TEMPLATE/feature_request.yml",
+          "document_id": "f40e05905aea1db31108852bade667f59b01dba495f92d3a91dfed0b2709c7c8",
+          "content_hash": "bfe2887ba5cb914b08e25c869b839ca4c21596a636f9a843acc7798d317392cb"
+        },
+        {
+          "path": ".github/PULL_REQUEST_TEMPLATE.md",
+          "mode": "100644",
+          "sha": "41141661811a51043eed3b92ac1f77fa773b558c",
+          "size": 814,
+          "sha256": "610a3dbe73b67d10d261b6e752404c316099b7a37f718a8bdffd99e52b1b9324",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/.github/PULL_REQUEST_TEMPLATE.md",
+          "document_id": "2d36905049fe97422845e228cf8ec0d8c04b9dce9b8e383a61a7cc9632562d72",
+          "content_hash": "610a3dbe73b67d10d261b6e752404c316099b7a37f718a8bdffd99e52b1b9324"
+        },
+        {
+          "path": ".github/workflows/build.yml",
+          "mode": "100644",
+          "sha": "3ff2568bce036b059dd8815fa05ab589082f76c0",
+          "size": 1206,
+          "sha256": "6440be65bb6c913852425da8880a93b5e6b6ca8b74a00e702cd9e25f8a09f633",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/.github/workflows/build.yml",
+          "document_id": "d2c57279f7a1f03e4d4fc601a58922ee1b00171004e93ad91bc00990ece6dc7f",
+          "content_hash": "6440be65bb6c913852425da8880a93b5e6b6ca8b74a00e702cd9e25f8a09f633"
+        },
+        {
+          "path": ".github/workflows/release.yml",
+          "mode": "100644",
+          "sha": "5d0979eb39f337f573bd3211ab8ef03b84b0ef0c",
+          "size": 3345,
+          "sha256": "036956bdbcdff9c5274640d0b066cc41963f7ff242079540d217d198eb597f35",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/.github/workflows/release.yml",
+          "document_id": "bc1b4673bc88e718085be4b5ae3300a87239c305201131832987eb5daab6cac9",
+          "content_hash": "036956bdbcdff9c5274640d0b066cc41963f7ff242079540d217d198eb597f35"
+        },
+        {
+          "path": ".gitignore",
+          "mode": "100644",
+          "sha": "fee2f7b6dac9b78ce20a3b193263d216dcee5c71",
+          "size": 441,
+          "sha256": "46083f471e88c22623940af8e5e917e6e6a1f90889d63346b1f3b29bedd0e657",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/.gitignore",
+          "document_id": "135ee2620473d9f893f2a9be53935ebbc49b1e783f8824762a597c3a9fe05970",
+          "content_hash": "46083f471e88c22623940af8e5e917e6e6a1f90889d63346b1f3b29bedd0e657"
+        },
+        {
+          "path": "HEADER",
+          "mode": "100644",
+          "sha": "992a3e73bbaeeeb214dd2c65d7620cc813e47f56",
+          "size": 93,
+          "sha256": "151040d91bd7a9561630101e9aeeba2b11278133acf6ccee644b5d156b7c0d7e",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/HEADER",
+          "document_id": "314fd97611601c1ef4eaafae3009b95824fe5b1f75212149b28382094bdb8be8",
+          "content_hash": "151040d91bd7a9561630101e9aeeba2b11278133acf6ccee644b5d156b7c0d7e"
+        },
+        {
+          "path": "LICENSE",
+          "mode": "100644",
+          "sha": "1d9aa4f419d5d41793733dc0cbbabe9b2df8b84d",
+          "size": 36290,
+          "sha256": "c6bb73214006a581969b8335d0052dfff3bdf1e9e7efd99475bcea725f43c895",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/LICENSE",
+          "document_id": "74512d1f09b8464a6bfacd32bc85d5b43a23492218b2979c5b6f6e7be7cbf472",
+          "content_hash": "c6bb73214006a581969b8335d0052dfff3bdf1e9e7efd99475bcea725f43c895"
+        },
+        {
+          "path": "README.md",
+          "mode": "100644",
+          "sha": "215b289b9475a01d8f83e74d137a23a451668aa6",
+          "size": 9642,
+          "sha256": "ae711b3ac801098578b77b39b90074b6a169059c50d35b99a6ae21b5a8c21ef7",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/README.md",
+          "document_id": "0ceff06c62091b4c36ffa804cadf8d9743c44fac7418e3c1af224886b10d7885",
+          "content_hash": "ae711b3ac801098578b77b39b90074b6a169059c50d35b99a6ae21b5a8c21ef7"
+        },
+        {
+          "path": "build.gradle.kts",
+          "mode": "100644",
+          "sha": "62c276220129d625f4d524a8f4f4da49e0094969",
+          "size": 8682,
+          "sha256": "565ed9d710bcdd625de6eb2194470ea5e9bf8e0cd0aa080eeea266f45ceb7cf5",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/build.gradle.kts",
+          "document_id": "40744fad242f0e2a8ffd26b5d305ac8564642b98c3762e3c43621f43681a7575",
+          "content_hash": "565ed9d710bcdd625de6eb2194470ea5e9bf8e0cd0aa080eeea266f45ceb7cf5"
+        },
+        {
+          "path": "gradle.properties",
+          "mode": "100644",
+          "sha": "f3eef6858db6ca05592dfc3beb7a5386cd05c017",
+          "size": 592,
+          "sha256": "f011e599a27c7633e123085224cb5616e4ffc60e8d86eb92564f74cdb14b612c",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/gradle.properties",
+          "document_id": "2ae101d1f1929b12a4afef37854c8cf386921705298e0708837e65423a33716e",
+          "content_hash": "f011e599a27c7633e123085224cb5616e4ffc60e8d86eb92564f74cdb14b612c"
+        },
+        {
+          "path": "gradle/libs.versions.toml",
+          "mode": "100644",
+          "sha": "882dfb9b6a3290d676ba538d63dcb02732af5af9",
+          "size": 970,
+          "sha256": "29a5806c64bf16ff86c0cf5bcbbe54587f148c4c9d0f33a3ab11728fbf384ddf",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/gradle/libs.versions.toml",
+          "document_id": "ed6f9a7bbe4247aadf5aca15e89a0ebcf1604bd6f2daea892421e3163943db7a",
+          "content_hash": "29a5806c64bf16ff86c0cf5bcbbe54587f148c4c9d0f33a3ab11728fbf384ddf"
+        },
+        {
+          "path": "gradle/wrapper/gradle-wrapper.jar",
+          "mode": "100644",
+          "sha": "b1b8ef56b44f16b14dc800fa8103a6d89abb526f",
+          "size": 48462,
+          "sha256": "497c8c2a7e5031f6aa847f88104aa80a93532ec32ee17bdb8d1d2f67a194a9c7",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/gradle/wrapper/gradle-wrapper.jar",
+          "document_id": "65edce8157fe132592fd8cc79ff2e3cbf2326fffe3e0b1046a7803b1b4ab5419",
+          "content_hash": "497c8c2a7e5031f6aa847f88104aa80a93532ec32ee17bdb8d1d2f67a194a9c7"
+        },
+        {
+          "path": "gradle/wrapper/gradle-wrapper.properties",
+          "mode": "100644",
+          "sha": "a9db11550c6202b666ed9c44cafdc6726fd5b264",
+          "size": 281,
+          "sha256": "c94d41b634a5e0ff8a2f812023697b1337eebac18e9962610356a1793f72896d",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/gradle/wrapper/gradle-wrapper.properties",
+          "document_id": "83efa697a29f48080e0366b74824f006a4ee098411311090df22efa2976f87ef",
+          "content_hash": "c94d41b634a5e0ff8a2f812023697b1337eebac18e9962610356a1793f72896d"
+        },
+        {
+          "path": "gradlew",
+          "mode": "100755",
+          "sha": "249efbb032ce46a80c687c0723eb172e85f6a136",
+          "size": 8656,
+          "sha256": "a5a5c199ba02189ae8c46a334223371a20599d9c298ef65e7540ede4a3f72d59",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/gradlew",
+          "document_id": "2d1e161f57cda8d51bf7b407c129600413c0fc39d1a791c007bf4e9abdad70da",
+          "content_hash": "a5a5c199ba02189ae8c46a334223371a20599d9c298ef65e7540ede4a3f72d59"
+        },
+        {
+          "path": "gradlew.bat",
+          "mode": "100644",
+          "sha": "a51ec4f5886d3bb106b26724ee4507addbbe3fa8",
+          "size": 2766,
+          "sha256": "59328c7a17f673b1a63040bfb380a0c749e5d6df3406f7f18641060314cd9aa1",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/gradlew.bat",
+          "document_id": "6e528b8ac8149f0e1b8d568fb72dc4e8ee0e5cd6dfc0ff12dfc0dfbe67161f00",
+          "content_hash": "59328c7a17f673b1a63040bfb380a0c749e5d6df3406f7f18641060314cd9aa1"
+        },
+        {
+          "path": "settings.gradle.kts",
+          "mode": "100644",
+          "sha": "7b9a4da893ed79f09edd45c1a377dda3bc1012a4",
+          "size": 314,
+          "sha256": "7d18decacbb20fb0379853806d842406e1135a340b5732dbc39909d571ab55a8",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/settings.gradle.kts",
+          "document_id": "a50f4d24ea504f3ffd66fa7030b8a51f4cbedbbd1166898bd46b67eacee7c888",
+          "content_hash": "7d18decacbb20fb0379853806d842406e1135a340b5732dbc39909d571ab55a8"
+        },
+        {
+          "path": "src/gameLibrary/java/org/sinytra/launchpad/game/EntrypointRunner.java",
+          "mode": "100644",
+          "sha": "5f6f97884199d2c69cbf9c94a75b46c05cf6a058",
+          "size": 2051,
+          "sha256": "325ce873ccf36cb140e6c3d412e23c2679771d8e27a04813c3091d966ddfe0a0",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/gameLibrary/java/org/sinytra/launchpad/game/EntrypointRunner.java",
+          "document_id": "b15e2b934962040986e2a6f07d8d2e2757e47d8b30565d2f78dd760f60cd8322",
+          "content_hash": "325ce873ccf36cb140e6c3d412e23c2679771d8e27a04813c3091d966ddfe0a0"
+        },
+        {
+          "path": "src/gameLibrary/java/org/sinytra/launchpad/game/LaunchpadMixinPlugin.java",
+          "mode": "100644",
+          "sha": "ee44dcb762f3840ae1450e6f89eb8287b04e3742",
+          "size": 2321,
+          "sha256": "bd5bba9d28b9587f621f5e4b35860f1fe2c0de24688e150813d3ef51886a7aa1",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/gameLibrary/java/org/sinytra/launchpad/game/LaunchpadMixinPlugin.java",
+          "document_id": "0c50e9689afb6c689df7c8a21757328d9ca05be82ded27aa4e207ff59e4c289a",
+          "content_hash": "bd5bba9d28b9587f621f5e4b35860f1fe2c0de24688e150813d3ef51886a7aa1"
+        },
+        {
+          "path": "src/gameLibrary/java/org/sinytra/launchpad/game/RegistryHelper.java",
+          "mode": "100644",
+          "sha": "020509bc04a83e301fcb328bce9792649d4f77e1",
+          "size": 3879,
+          "sha256": "79e8990e8b638c47a3d582c025028edd88bab06557d95f0831da7a7da90c436b",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/gameLibrary/java/org/sinytra/launchpad/game/RegistryHelper.java",
+          "document_id": "75c2f315d57cb36a3b7be24799d8ae7ab23f51d4282dba6687eb7762b37322f3",
+          "content_hash": "79e8990e8b638c47a3d582c025028edd88bab06557d95f0831da7a7da90c436b"
+        },
+        {
+          "path": "src/gameLibrary/java/org/sinytra/launchpad/game/mixin/launch/DatagenModLoaderMixin.java",
+          "mode": "100644",
+          "sha": "6efd8fa8625bd0b901538af0a62162d51c4ac4ea",
+          "size": 926,
+          "sha256": "ddbea80232377c2a55f6181502fa446ada27fe41888c64df59a75f8f378022ad",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/gameLibrary/java/org/sinytra/launchpad/game/mixin/launch/DatagenModLoaderMixin.java",
+          "document_id": "e84214e6c11c1a6bb58991d2ce0ecfaddc58731c54f8d1f9ede58c7ed2d64f10",
+          "content_hash": "ddbea80232377c2a55f6181502fa446ada27fe41888c64df59a75f8f378022ad"
+        },
+        {
+          "path": "src/gameLibrary/java/org/sinytra/launchpad/game/mixin/launch/MinecraftMixin.java",
+          "mode": "100644",
+          "sha": "bf0d43ad4f08297acbd9212fe26a3860e30f1f99",
+          "size": 861,
+          "sha256": "1486fe11b71316964d7fc7d1de8aa9b473145489158b9bc2209d470a85ae2c35",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/gameLibrary/java/org/sinytra/launchpad/game/mixin/launch/MinecraftMixin.java",
+          "document_id": "01118fccea5781ee1793a4065e29ff9e39d0fe8e817cad71a643c6065487c720",
+          "content_hash": "1486fe11b71316964d7fc7d1de8aa9b473145489158b9bc2209d470a85ae2c35"
+        },
+        {
+          "path": "src/gameLibrary/java/org/sinytra/launchpad/game/mixin/launch/ServerModLoaderMixin.java",
+          "mode": "100644",
+          "sha": "6ed237dad7735c0bbc032b96601438114a6e9a21",
+          "size": 893,
+          "sha256": "e74e0b4695d5ffb9de119363ea90f62783dbfb58a88dfca2c74169b2ca248688",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/gameLibrary/java/org/sinytra/launchpad/game/mixin/launch/ServerModLoaderMixin.java",
+          "document_id": "0a556ab7c57c79c456bf3567ad9ca66c0e123d8d1b2a4d15ec8cbd160ab38c6b",
+          "content_hash": "e74e0b4695d5ffb9de119363ea90f62783dbfb58a88dfca2c74169b2ca248688"
+        },
+        {
+          "path": "src/gameLibrary/java/org/sinytra/launchpad/game/mixin/registries/BlockCallbacksMixin.java",
+          "mode": "100644",
+          "sha": "0c2462b5400264d850ec0d44224dd206ea3a2362",
+          "size": 1323,
+          "sha256": "63ae6ca201639081d8f0ca174c3a5c29941622841a9a6eab66f482d6bc0bd4aa",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/gameLibrary/java/org/sinytra/launchpad/game/mixin/registries/BlockCallbacksMixin.java",
+          "document_id": "7b89ad1de935d013c918424d29e1fbcf8f0bfc3a91d8f83ac477af9b3e6fe76b",
+          "content_hash": "63ae6ca201639081d8f0ca174c3a5c29941622841a9a6eab66f482d6bc0bd4aa"
+        },
+        {
+          "path": "src/gameLibrary/java/org/sinytra/launchpad/game/mixin/registries/ByteBufCodecsMixin.java",
+          "mode": "100644",
+          "sha": "e30451690c11096ffd143af8ad4af0d993ed568d",
+          "size": 1188,
+          "sha256": "83a320fd75577c244a9fcf14d37afc5b2e6f1ca0a202fb4dc4059720cb25ed32",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/gameLibrary/java/org/sinytra/launchpad/game/mixin/registries/ByteBufCodecsMixin.java",
+          "document_id": "58d8b8a360b69e94a7906ae5b356c427d3727bcaf59f96d3cf91d7f1bddc32b3",
+          "content_hash": "83a320fd75577c244a9fcf14d37afc5b2e6f1ca0a202fb4dc4059720cb25ed32"
+        },
+        {
+          "path": "src/gameLibrary/java/org/sinytra/launchpad/game/mixin/registries/ItemTooltipHandlerMixin.java",
+          "mode": "100644",
+          "sha": "b9bf5ee8a8aa43700d14233c242c70c7bb9b16c4",
+          "size": 1151,
+          "sha256": "9e48146b4a7b30f7592ea21cf1b11af1e9d6d5381c4bba61da381eedb4137ede",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/gameLibrary/java/org/sinytra/launchpad/game/mixin/registries/ItemTooltipHandlerMixin.java",
+          "document_id": "ee92c82f2f51b048f1032e2a23bee1c72170d0372ca8b3c9f07300c185a6bb8d",
+          "content_hash": "9e48146b4a7b30f7592ea21cf1b11af1e9d6d5381c4bba61da381eedb4137ede"
+        },
+        {
+          "path": "src/gameLibrary/java/org/sinytra/launchpad/game/mixin/registries/RegistryManagerMixin.java",
+          "mode": "100644",
+          "sha": "62bc5d40df4b6920ad09ec1f3999dbb2a9968c99",
+          "size": 766,
+          "sha256": "1de2068c4ceb9b7c574f6ed66c4008c27a5c1a6728516c0acc4347843e94a49b",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/gameLibrary/java/org/sinytra/launchpad/game/mixin/registries/RegistryManagerMixin.java",
+          "document_id": "2623971d9a868d0c168d52af93d397b5e0c3e1e6263aa4206947854afb2c057d",
+          "content_hash": "1de2068c4ceb9b7c574f6ed66c4008c27a5c1a6728516c0acc4347843e94a49b"
+        },
+        {
+          "path": "src/gameLibrary/resources/launchpad.mixins.json",
+          "mode": "100644",
+          "sha": "57723c798f9e4b53270ff648af3662740702859e",
+          "size": 579,
+          "sha256": "04bd11975292ac55d7c336521f2584203c9b82085ea58b36053e6667cb7931ca",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/gameLibrary/resources/launchpad.mixins.json",
+          "document_id": "9cf1a464775c9bdcf7004aeb098bdd4dbe5d6579eeee30fd81fd8b1a1fbd1433",
+          "content_hash": "04bd11975292ac55d7c336521f2584203c9b82085ea58b36053e6667cb7931ca"
+        },
+        {
+          "path": "src/gameLibrary/resources/logo.png",
+          "mode": "100644",
+          "sha": "9f94cbd88e04236ef2aacc2fadf23c2e3ff36336",
+          "size": 14654,
+          "sha256": "5e306a9c0698243e8a11ffd66437d08c32aa58df745915e6a3e35e5bb671deb2",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/gameLibrary/resources/logo.png",
+          "document_id": "2a52b877dfbc8b392bb2ea648383cfb442636f454cdf030ac56e28305745fad1",
+          "content_hash": "5e306a9c0698243e8a11ffd66437d08c32aa58df745915e6a3e35e5bb671deb2"
+        },
+        {
+          "path": "src/gameLibrary/templates/META-INF/neoforge.mods.toml",
+          "mode": "100644",
+          "sha": "b6a46b0fb95c62446e9402c60b72e0de1be6ad03",
+          "size": 363,
+          "sha256": "82d0f617a315b0ce016c6d1320c8fe97f1a82b7701f86ed0e75fbbebf92eb371",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/gameLibrary/templates/META-INF/neoforge.mods.toml",
+          "document_id": "1c19627edf0fff360e01514d013775105a0cb6ca196bc9d18b6a501e397823a4",
+          "content_hash": "82d0f617a315b0ce016c6d1320c8fe97f1a82b7701f86ed0e75fbbebf92eb371"
+        },
+        {
+          "path": "src/main/java/org/sinytra/launchpad/api/Constants.java",
+          "mode": "100644",
+          "sha": "a98e3b858236325b039012b1dfb0832d307e891b",
+          "size": 811,
+          "sha256": "9982422d05f51d6f3913d899f56ba91991381c96a652bef6e746dca21c03570e",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/main/java/org/sinytra/launchpad/api/Constants.java",
+          "document_id": "8b2d4a4b8a630825ed76c24d4455c6303c23f98a179e74efd020ad8ab014c64a",
+          "content_hash": "9982422d05f51d6f3913d899f56ba91991381c96a652bef6e746dca21c03570e"
+        },
+        {
+          "path": "src/main/java/org/sinytra/launchpad/api/FabricModFactory.java",
+          "mode": "100644",
+          "sha": "a0753310ee1fbe87d42f1cf4a0140cb20afd09d7",
+          "size": 743,
+          "sha256": "5998bdbfc9888e1769cec2d4460aeb37704242dcfd55fd5a4a6723d4ce48bb3a",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/main/java/org/sinytra/launchpad/api/FabricModFactory.java",
+          "document_id": "6e3175c29283fdcafe835fc068f4e9c2f60e49e4711dde53c59178f2bc84e2fd",
+          "content_hash": "5998bdbfc9888e1769cec2d4460aeb37704242dcfd55fd5a4a6723d4ce48bb3a"
+        },
+        {
+          "path": "src/main/java/org/sinytra/launchpad/api/Launchpad.java",
+          "mode": "100644",
+          "sha": "c3c9b6d4e2abcd3e3927d15207feb9f585168518",
+          "size": 556,
+          "sha256": "ba5f4c1ccc47e9ccd7d4f716c45428654374b8eafb1496e36d5e8d9888461346",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/main/java/org/sinytra/launchpad/api/Launchpad.java",
+          "document_id": "33195771aa9a6dc3d6135a7b3c0e777379433b49fbc8e9fe7c41dc454cdd14cc",
+          "content_hash": "ba5f4c1ccc47e9ccd7d4f716c45428654374b8eafb1496e36d5e8d9888461346"
+        },
+        {
+          "path": "src/main/java/org/sinytra/launchpad/impl/ClassTweakerConverter.java",
+          "mode": "100644",
+          "sha": "33930184ed8c011dac64689c121d71e4c0ba1e9f",
+          "size": 4882,
+          "sha256": "ea5ca902a5023023b41eea23abc17ec0b049f9b27d4f2d3d6b39429971caf97e",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/main/java/org/sinytra/launchpad/impl/ClassTweakerConverter.java",
+          "document_id": "9960fc44c331b06680648e591c938d7f929904e9a13c3415b08f54888c94e344",
+          "content_hash": "ea5ca902a5023023b41eea23abc17ec0b049f9b27d4f2d3d6b39429971caf97e"
+        },
+        {
+          "path": "src/main/java/org/sinytra/launchpad/impl/EnvironmentSetup.java",
+          "mode": "100644",
+          "sha": "aea3e24800e57c4a55643dd716d9e4e5b81525ec",
+          "size": 2744,
+          "sha256": "023ce034aabffb8183f4111e5a5c377e09b5add8a52514903ecb8b26e3272cd6",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/main/java/org/sinytra/launchpad/impl/EnvironmentSetup.java",
+          "document_id": "0b10fc81f805e6ec003d238959f443f868f2ea7e9049d49832fcf3684e865e3d",
+          "content_hash": "023ce034aabffb8183f4111e5a5c377e09b5add8a52514903ecb8b26e3272cd6"
+        },
+        {
+          "path": "src/main/java/org/sinytra/launchpad/impl/FabricModFactoryImpl.java",
+          "mode": "100644",
+          "sha": "97aea78ad76dfeeb5b5f5d33f1820e07b444d21b",
+          "size": 3862,
+          "sha256": "d94e1421cd4faf009e2fb588abffe8951c34889003330e10803835670a38d443",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/main/java/org/sinytra/launchpad/impl/FabricModFactoryImpl.java",
+          "document_id": "f5ce480fac467e37d29fe175e2e1a8597d2b3367b2800cdb6c2bc0167f28968b",
+          "content_hash": "d94e1421cd4faf009e2fb588abffe8951c34889003330e10803835670a38d443"
+        },
+        {
+          "path": "src/main/java/org/sinytra/launchpad/impl/FabricModMetadata.java",
+          "mode": "100644",
+          "sha": "a16ad9f7e18203969291188e386a1c530dcc3220",
+          "size": 6685,
+          "sha256": "51cabd097371ba2d4b05c3a281db551f1339d1114a1da6ba4fddb41db3218724",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/main/java/org/sinytra/launchpad/impl/FabricModMetadata.java",
+          "document_id": "b85168e27e8398a722341afa3fc52a6bb7a00c5551a76d72dd0211d8743849f8",
+          "content_hash": "51cabd097371ba2d4b05c3a281db551f1339d1114a1da6ba4fddb41db3218724"
+        },
+        {
+          "path": "src/main/java/org/sinytra/launchpad/impl/JarInJarHelpers.java",
+          "mode": "100644",
+          "sha": "47b22989b3210815bb2d7f0b06af10b98def6f1e",
+          "size": 5091,
+          "sha256": "e64b79220179f0826785c65baedba74d06d37d35bb7a1763a75314a96744a983",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/main/java/org/sinytra/launchpad/impl/JarInJarHelpers.java",
+          "document_id": "a8e7dad42a08bc925fe13b45ae6bbd03072d39b712782cf48057bd9a14478126",
+          "content_hash": "e64b79220179f0826785c65baedba74d06d37d35bb7a1763a75314a96744a983"
+        },
+        {
+          "path": "src/main/java/org/sinytra/launchpad/impl/LaunchpadImpl.java",
+          "mode": "100644",
+          "sha": "5628f3b4215585ddcbf1d1de23cab59feba77449",
+          "size": 1653,
+          "sha256": "42bf7423b90849bbc271ebb8d2e0d96ded22332820706e64dae13c7cf65f8056",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/main/java/org/sinytra/launchpad/impl/LaunchpadImpl.java",
+          "document_id": "0bcee5180ea4c55d51efd8baa903a75bef252c4398bfc0ed51f222fe4f65db0b",
+          "content_hash": "42bf7423b90849bbc271ebb8d2e0d96ded22332820706e64dae13c7cf65f8056"
+        },
+        {
+          "path": "src/main/java/org/sinytra/launchpad/impl/MetadataConverter.java",
+          "mode": "100644",
+          "sha": "21e5a24af943e625487d2b9e135bae36606a3c1c",
+          "size": 8040,
+          "sha256": "5baad6ec7f2a3e07997ab519a15c1443ed690509be0f4b762f3edfa4f0bd8199",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/main/java/org/sinytra/launchpad/impl/MetadataConverter.java",
+          "document_id": "7456b1ad075278c24879e890b8e601595fd30ac21f3aad3dc54d52ec3fac78eb",
+          "content_hash": "5baad6ec7f2a3e07997ab519a15c1443ed690509be0f4b762f3edfa4f0bd8199"
+        },
+        {
+          "path": "src/main/java/org/sinytra/launchpad/impl/VersionConverter.java",
+          "mode": "100644",
+          "sha": "51b948e862b62ac7278643d19b678dfeae6a9555",
+          "size": 2621,
+          "sha256": "43fd0a7ad49cb8aca1edc69da8a5ca64ce800604ef29c9b74a1d033b31192b2a",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/main/java/org/sinytra/launchpad/impl/VersionConverter.java",
+          "document_id": "7cb535ac33a63435272c1e0c963069311f0e01b254111a00fbc94ad734ad30ee",
+          "content_hash": "43fd0a7ad49cb8aca1edc69da8a5ca64ce800604ef29c9b74a1d033b31192b2a"
+        },
+        {
+          "path": "src/main/java/org/sinytra/launchpad/service/FabricAccessTransformerServiceProvider.java",
+          "mode": "100644",
+          "sha": "935a024a52f699d2ac5985dac524746146cdd5c1",
+          "size": 3548,
+          "sha256": "33d3e96c3880baf1131cdccf67e33953148bae4e93a32743f6173978931106f8",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/main/java/org/sinytra/launchpad/service/FabricAccessTransformerServiceProvider.java",
+          "document_id": "dbcbd2a238d93c1bb4d174ff0d253c733945753d7022d848976f4abca8f6d6dc",
+          "content_hash": "33d3e96c3880baf1131cdccf67e33953148bae4e93a32743f6173978931106f8"
+        },
+        {
+          "path": "src/main/java/org/sinytra/launchpad/service/FabricJarInJarLocator.java",
+          "mode": "100644",
+          "sha": "e880fea588da9586ed94e2e2deb7e5fe4a16e578",
+          "size": 2798,
+          "sha256": "fec9a3b02c369be9e2d9699d5e3bca0d07f8bb0222a300ad35763b4ef936b391",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/main/java/org/sinytra/launchpad/service/FabricJarInJarLocator.java",
+          "document_id": "71af7e5b6e2dd215b7460d56f77cc4a5734d07d64874ab4f4a128cdd6b8d0faa",
+          "content_hash": "fec9a3b02c369be9e2d9699d5e3bca0d07f8bb0222a300ad35763b4ef936b391"
+        },
+        {
+          "path": "src/main/java/org/sinytra/launchpad/service/FabricModJsonFileReader.java",
+          "mode": "100644",
+          "sha": "af0574110528d903ec9f1c6745cfc2995a1109fb",
+          "size": 1286,
+          "sha256": "91cd30fd8abc98d06906a3954d0bba1f1bac67fb862975dd637475caf54e3a83",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/main/java/org/sinytra/launchpad/service/FabricModJsonFileReader.java",
+          "document_id": "f80951200a0a0a64779968246ab90232c054060764c6567e724a127ff594c4d0",
+          "content_hash": "91cd30fd8abc98d06906a3954d0bba1f1bac67fb862975dd637475caf54e3a83"
+        },
+        {
+          "path": "src/main/java/org/sinytra/launchpad/service/InDevFabricJarLocator.java",
+          "mode": "100644",
+          "sha": "674db58715db146928f431df60d890f2cd23e33d",
+          "size": 1225,
+          "sha256": "5c079e6596a0bc12a41b9e36487382c9704b0068e698bf367dd501145c06b286",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/main/java/org/sinytra/launchpad/service/InDevFabricJarLocator.java",
+          "document_id": "b7b45aee323c7ab8b318da0a276d5537cace0cbf4e892bcd54e73b7efaa4825e",
+          "content_hash": "5c079e6596a0bc12a41b9e36487382c9704b0068e698bf367dd501145c06b286"
+        },
+        {
+          "path": "src/main/resources/META-INF/services/net.neoforged.neoforgespi.locating.IDependencyLocator",
+          "mode": "100644",
+          "sha": "5c1e16ee6014313fe6a5dad1cf40290f6f1be460",
+          "size": 51,
+          "sha256": "b9ea35baa7cc024b0a28fab8965eb3043f7d5a550d3532f97b12a099f86ef8f4",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/main/resources/META-INF/services/net.neoforged.neoforgespi.locating.IDependencyLocator",
+          "document_id": "ea2ec2b1fbfb3a62d8652fb774ca13af8024f7ee9a2cec20310c11c07bd63e68",
+          "content_hash": "b9ea35baa7cc024b0a28fab8965eb3043f7d5a550d3532f97b12a099f86ef8f4"
+        },
+        {
+          "path": "src/main/resources/META-INF/services/net.neoforged.neoforgespi.locating.IModFileCandidateLocator",
+          "mode": "100644",
+          "sha": "0dbcdc8f353defe0c4f3ac3ffac61b6de8c3f167",
+          "size": 51,
+          "sha256": "b8ea6b71336cfed9b335bc3898e9c37cf8339a229ed9a4b24d2265c78da9e549",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/main/resources/META-INF/services/net.neoforged.neoforgespi.locating.IModFileCandidateLocator",
+          "document_id": "b48570a98fbe49a397198bb49769d7f215fa51e0db042d2d97e0db6f3f5dae7c",
+          "content_hash": "b8ea6b71336cfed9b335bc3898e9c37cf8339a229ed9a4b24d2265c78da9e549"
+        },
+        {
+          "path": "src/main/resources/META-INF/services/net.neoforged.neoforgespi.locating.IModFileReader",
+          "mode": "100644",
+          "sha": "79ec2b66ec5a91d0379f305839d86da5caa9f57c",
+          "size": 53,
+          "sha256": "3fd78a7c3459d189284ef7652c9c3c8880ff487037d3f8ea245159d98ccf94c0",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/main/resources/META-INF/services/net.neoforged.neoforgespi.locating.IModFileReader",
+          "document_id": "f06a7e2c7ef3a7f5ee5ee918a8908c711d96418df91787f488bb3aaa69acf566",
+          "content_hash": "3fd78a7c3459d189284ef7652c9c3c8880ff487037d3f8ea245159d98ccf94c0"
+        },
+        {
+          "path": "src/main/resources/META-INF/services/net.neoforged.neoforgespi.transformation.ClassProcessorProvider",
+          "mode": "100644",
+          "sha": "0843b9325e58bea33277012a80568c9e2ec5a147",
+          "size": 68,
+          "sha256": "38caecffc4c21123dbfdbca0f54d2f5be3b9eacec44d8dd5ba9b0a1ac1ea6924",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/main/resources/META-INF/services/net.neoforged.neoforgespi.transformation.ClassProcessorProvider",
+          "document_id": "6a321b9276745ae7327927c7cc03eb4e44975101d6cd009a7ddaa5e2d645ad72",
+          "content_hash": "38caecffc4c21123dbfdbca0f54d2f5be3b9eacec44d8dd5ba9b0a1ac1ea6924"
+        },
+        {
+          "path": "src/main/resources/logo.png",
+          "mode": "100644",
+          "sha": "9f94cbd88e04236ef2aacc2fadf23c2e3ff36336",
+          "size": 14654,
+          "sha256": "5e306a9c0698243e8a11ffd66437d08c32aa58df745915e6a3e35e5bb671deb2",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/main/resources/logo.png",
+          "document_id": "9fbc2beb2609c117aecd61f0feb9c93ad51341e923a0cc5d8d0583ba5e73c202",
+          "content_hash": "5e306a9c0698243e8a11ffd66437d08c32aa58df745915e6a3e35e5bb671deb2"
+        },
+        {
+          "path": "src/main/templates/META-INF/neoforge.mods.toml",
+          "mode": "100644",
+          "sha": "a8c4129178868870d076cf0c35fcd3313b8f2beb",
+          "size": 320,
+          "sha256": "1999f59ff4983473f4f82f59c615c8e7d44cac87bcde98fb7d5451eb53fd44fe",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/main/templates/META-INF/neoforge.mods.toml",
+          "document_id": "8bc3b9eb849d94d08fbc3e5a91290608b456b78ddad0ae1e1d3bd59dbb627262",
+          "content_hash": "1999f59ff4983473f4f82f59c615c8e7d44cac87bcde98fb7d5451eb53fd44fe"
+        },
+        {
+          "path": "src/test/java/org/sinytra/launchpad/test/LaunchpadTest.java",
+          "mode": "100644",
+          "sha": "8b7956f970571b5de65cfbee8ad2e930b6902c59",
+          "size": 6589,
+          "sha256": "004776d2c182447c5957eb916f26aaa84f2c0a9257b95a496b8d32613045fbda",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/test/java/org/sinytra/launchpad/test/LaunchpadTest.java",
+          "document_id": "b4c6ce5ca18e8897838346815ea9a51e0ebb86bf358bcd3a57bb1f3dfc5bcf2d",
+          "content_hash": "004776d2c182447c5957eb916f26aaa84f2c0a9257b95a496b8d32613045fbda"
+        },
+        {
+          "path": "src/test/resources/META-INF/MANIFEST.MF",
+          "mode": "100644",
+          "sha": "b325e5e808b6f78aa908d0d58ae2a930f5721997",
+          "size": 24,
+          "sha256": "715274a5ccb4bd98df729153ca12f68e8465ef3a43cd25052c7d445e7715c51a",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/test/resources/META-INF/MANIFEST.MF",
+          "document_id": "eb025f4b29b9f71bdbe164408ddb0139dc972cde91d9e62dc2685ebf30b247d5",
+          "content_hash": "715274a5ccb4bd98df729153ca12f68e8465ef3a43cd25052c7d445e7715c51a"
+        },
+        {
+          "path": "src/testmod/java/org/sinytra/launchpad/testmod/CommonMain.java",
+          "mode": "100644",
+          "sha": "0bc8bd0e50d57645890c07c0d74b1959a76e0004",
+          "size": 4910,
+          "sha256": "2e83f3d03546ec6c5e5bebe2fe7fd8a8d0850b4cade74f6c687088b340127e1b",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/testmod/java/org/sinytra/launchpad/testmod/CommonMain.java",
+          "document_id": "06631a78fc712c4c633246edd9d0fd875b642f22427d52eb3d4842f646bed04a",
+          "content_hash": "2e83f3d03546ec6c5e5bebe2fe7fd8a8d0850b4cade74f6c687088b340127e1b"
+        },
+        {
+          "path": "src/testmod/java/org/sinytra/launchpad/testmod/PrelaunchMain.java",
+          "mode": "100644",
+          "sha": "a047a7db6cf7465f51b90d9ea28d82e363cbda62",
+          "size": 656,
+          "sha256": "8513e29de0db788aa35af4093ac0cb4eaa079c1ef94e6f8d90ed5bd6c6578db6",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/testmod/java/org/sinytra/launchpad/testmod/PrelaunchMain.java",
+          "document_id": "db86dfa43d7e198ad657080edf61b499d53eaab06aac648580b2a5a31b73da6d",
+          "content_hash": "8513e29de0db788aa35af4093ac0cb4eaa079c1ef94e6f8d90ed5bd6c6578db6"
+        },
+        {
+          "path": "src/testmod/java/org/sinytra/launchpad/testmod/entity/MiniGolemEntity.java",
+          "mode": "100644",
+          "sha": "fafa1a541f30608a7ff30401d6bf405ae2a1cc05",
+          "size": 962,
+          "sha256": "a86f064773cc1772ec5bbcfdd8d15983088104640c75d2160d84d9df2a333b66",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/testmod/java/org/sinytra/launchpad/testmod/entity/MiniGolemEntity.java",
+          "document_id": "3eca63d7647a920d8338e2dbab0f0b7e9036e91ba199d419da3828a2533aefe6",
+          "content_hash": "a86f064773cc1772ec5bbcfdd8d15983088104640c75d2160d84d9df2a333b66"
+        },
+        {
+          "path": "src/testmod/java/org/sinytra/launchpad/testmod/entity/ModEntityTypes.java",
+          "mode": "100644",
+          "sha": "cd8162e6bd732886a39f92db0995a4764618b733",
+          "size": 1548,
+          "sha256": "bb8138f16233e6a77680bd9a792b3629a8ea34cd531af9cccd2c0ba39cc02f75",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/testmod/java/org/sinytra/launchpad/testmod/entity/ModEntityTypes.java",
+          "document_id": "2cdea71b323f4735cdeb4e6203e38822510918068ee1dc89e2b507cf943dd151",
+          "content_hash": "bb8138f16233e6a77680bd9a792b3629a8ea34cd531af9cccd2c0ba39cc02f75"
+        },
+        {
+          "path": "src/testmod/java/org/sinytra/launchpad/testmod/fluid/HoneyFluid.java",
+          "mode": "100644",
+          "sha": "f2877fbddf69de35fb34635f60aeebe3b607a1d9",
+          "size": 404,
+          "sha256": "835c323dcd0a194a1a0daf206993e00551a051681159e931f705004662ad2e9e",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/testmod/java/org/sinytra/launchpad/testmod/fluid/HoneyFluid.java",
+          "document_id": "cb34cbf7492874ebfed426750af498af1295f74f38c40cd030dda94b5e4651c2",
+          "content_hash": "835c323dcd0a194a1a0daf206993e00551a051681159e931f705004662ad2e9e"
+        },
+        {
+          "path": "src/testmod/java/org/sinytra/launchpad/testmod/mixin/RecipeBookTypeMixin.java",
+          "mode": "100644",
+          "sha": "df055edbc1bee822b9f34d7510639dfd3533d3dd",
+          "size": 348,
+          "sha256": "4c70e3a1e9136aa5fdb1a76b53736431220237a89a4ca2d20043cdbf0f2ec1e6",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/testmod/java/org/sinytra/launchpad/testmod/mixin/RecipeBookTypeMixin.java",
+          "document_id": "0785001eeab9eecc39f7a29fd0caca91cd2ad794be493c80ffd2c0715f63f7c9",
+          "content_hash": "4c70e3a1e9136aa5fdb1a76b53736431220237a89a4ca2d20043cdbf0f2ec1e6"
+        },
+        {
+          "path": "src/testmod/java/org/sinytra/launchpad/testmod/tooltip/TestComponent.java",
+          "mode": "100644",
+          "sha": "4e89167ed9c733feb5cdbb7b523709d741a39926",
+          "size": 453,
+          "sha256": "eaf655da5f71f4c88ed7b53b96fa76c92ce5342286fc0fce299a503ecdd51dde",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/testmod/java/org/sinytra/launchpad/testmod/tooltip/TestComponent.java",
+          "document_id": "f81caf2a6290de80a23670785861b6e69fd75cd9647036fbf4130f3f5cc1700d",
+          "content_hash": "eaf655da5f71f4c88ed7b53b96fa76c92ce5342286fc0fce299a503ecdd51dde"
+        },
+        {
+          "path": "src/testmod/resources/data/launchpad_testmod/launchpad_testmod/vegetable/tomato.json",
+          "mode": "100644",
+          "sha": "c914864f2ebec2590e243c188a323bc3c090ae0a",
+          "size": 22,
+          "sha256": "05fb1f02cc3905df42a8822a9c37c87843cdbd279ff30af8425c2ff224f961db",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/testmod/resources/data/launchpad_testmod/launchpad_testmod/vegetable/tomato.json",
+          "document_id": "3e8cfffb363bb57a377646d57d4f14b43815fc41fa27a88315d1d846f56faacf",
+          "content_hash": "05fb1f02cc3905df42a8822a9c37c87843cdbd279ff30af8425c2ff224f961db"
+        },
+        {
+          "path": "src/testmod/resources/launchpad-testmod.classtweaker",
+          "mode": "100644",
+          "sha": "d8e613703bcc7815ffe676c78a0ff65dd1cf8c2b",
+          "size": 449,
+          "sha256": "dea4d057d4d424ef23a851c07341e7ec31a06176fe2b554c74f60fc05f7010e8",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/testmod/resources/launchpad-testmod.classtweaker",
+          "document_id": "3b6423d177ae7411b26be26bf21c5fb7755358951371341d06706188f1aba096",
+          "content_hash": "dea4d057d4d424ef23a851c07341e7ec31a06176fe2b554c74f60fc05f7010e8"
+        },
+        {
+          "path": "src/testmod/resources/launchpad-testmod.mixins.json",
+          "mode": "100644",
+          "sha": "13009eddf1be101f4c485385c111f81b72667577",
+          "size": 226,
+          "sha256": "9899b6d84d14cf75f0fc8572c40a5a8127026a75f492078623770652a91f685a",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/testmod/resources/launchpad-testmod.mixins.json",
+          "document_id": "ae038fb295b66e38b4817507aabab358a4990732aeaaeff968d0c6b34f91940e",
+          "content_hash": "9899b6d84d14cf75f0fc8572c40a5a8127026a75f492078623770652a91f685a"
+        },
+        {
+          "path": "src/testmod/templates/META-INF/neoforge.mods.toml",
+          "mode": "100644",
+          "sha": "9560d08fc65e9b757cc66e6a9b2a4e2ab80804c4",
+          "size": 231,
+          "sha256": "09464f03bd0d3a82dfb34bb1a1dd18c153458470350ecca8396f3f75ae5c0d3a",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/testmod/templates/META-INF/neoforge.mods.toml",
+          "document_id": "2ccafb5015e27b0eeec2307f3ab5e0224284d3725251f4b9264ac04cd1186f73",
+          "content_hash": "09464f03bd0d3a82dfb34bb1a1dd18c153458470350ecca8396f3f75ae5c0d3a"
+        },
+        {
+          "path": "src/testmod/templates/fabric.mod.json",
+          "mode": "100644",
+          "sha": "57725e9a4fb31d219e12eb7b97d2cade3556571e",
+          "size": 780,
+          "sha256": "ec13faaae8fe0c1b8e2c6d5a25a5b348c8d9db9c15b3a52c93194c57c0ced18d",
+          "url": "https://github.com/Sinytra/Launchpad/blob/a1d958c952f5ffd38daa8671354e9b8fdf30f9c9/src/testmod/templates/fabric.mod.json",
+          "document_id": "f0bd46d983c50085dcde284e19c28a646c0c71e173ef6109fbddb34811d9f504",
+          "content_hash": "ec13faaae8fe0c1b8e2c6d5a25a5b348c8d9db9c15b3a52c93194c57c0ced18d"
+        }
+      ]
+    }
+  },
+  "game_launches": 0,
+  "upstream_builds": 0,
+  "canonical_writes": 0
+}

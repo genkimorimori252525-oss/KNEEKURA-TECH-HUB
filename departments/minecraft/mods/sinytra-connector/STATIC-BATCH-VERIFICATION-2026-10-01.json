@@ -1,0 +1,213 @@
+{
+  "record_kind": "FINITE_CONNECTOR_STATIC_KNOWLEDGE_BATCH_VERIFICATION",
+  "checked_at_utc": "2026-10-01T19:45:30.134191+00:00",
+  "publication_base_head": "0a2e0e9f6ca1a796122b95e40fd7a90909864f5b",
+  "scope": "SOURCE_AND_DERIVED_KNOWLEDGE_ONLY",
+  "finite_batch_state": "COMPLETE_AFTER_REVIEW",
+  "whole_target_dependency_closure": "IN_PROGRESS",
+  "capture_state_preserved": "PARTIAL",
+  "runtime_compatibility": "UNKNOWN",
+  "source_binary_equivalence": "NOT_ESTABLISHED",
+  "tracks": {
+    "anchor": {
+      "repository": "https://github.com/Sinytra/Connector",
+      "revision": "7f68ac02291fde986119a3f5cab85436bed5c350",
+      "verified_files": 141,
+      "tree_truncated": false,
+      "source_binary_equivalence": "NOT_ESTABLISHED",
+      "runtime_compatibility": "UNKNOWN"
+    },
+    "frontier": {
+      "repository": "https://github.com/Sinytra/Connector",
+      "revision": "c84a96a3c04aa4c5253032c338434de5329be08a",
+      "verified_files": 131,
+      "tree_truncated": false,
+      "source_binary_equivalence": "NOT_ESTABLISHED",
+      "runtime_compatibility": "UNKNOWN"
+    },
+    "ffapi-anchor": {
+      "repository": "Sinytra/ForgifiedFabricAPI",
+      "revision": "6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f",
+      "verified_files": 58,
+      "tree_truncated": false,
+      "source_binary_equivalence": "NOT_ESTABLISHED",
+      "runtime_compatibility": "UNKNOWN"
+    },
+    "ffapi-frontier": {
+      "repository": "Sinytra/ForgifiedFabricAPI",
+      "revision": "6b6e10ac2ccea496b6dfbde891be6ba50e2bfe57",
+      "verified_files": 72,
+      "tree_truncated": false,
+      "source_binary_equivalence": "NOT_ESTABLISHED",
+      "runtime_compatibility": "UNKNOWN"
+    },
+    "launchpad-frontier": {
+      "repository": "Sinytra/Launchpad",
+      "revision": "a1d958c952f5ffd38daa8671354e9b8fdf30f9c9",
+      "verified_files": 67,
+      "tree_truncated": false,
+      "source_binary_equivalence": "NOT_ESTABLISHED",
+      "runtime_compatibility": "UNKNOWN"
+    }
+  },
+  "anchor_production_paths": 115,
+  "anchor_production_paths_covered": 115,
+  "anchor_host_scope": 87,
+  "anchor_transform_scope": 28,
+  "anchor_transform_support": 8,
+  "anchor_declarative_patch_blocks": 79,
+  "frontier_coverage": {
+    "all_acquired_paths": 198,
+    "fully_read_text_files": 176,
+    "text_lines_read": 11935,
+    "scope": "All Connector src/main, src/mod and transformer text; root build/version settings and selected README/license/plugin/config/developer/probe docs. All Launchpad text including tests/fixtures/provenance/admin. All other bytes inventoried with explicit semantic exclusions.",
+    "line_count_method": "Unicode splitlines includes non-newline-terminated final lines",
+    "full_read_attribution": "Primary transformer/build review plus independently completed host and Launchpad full-text reviews; cited ranges and all byte hashes checked in this report pass",
+    "exact_inventory_sets_verified": true
+  },
+  "frontier_snapshots": [
+    {
+      "repository": "https://github.com/Sinytra/Connector",
+      "revision": "c84a96a3c04aa4c5253032c338434de5329be08a",
+      "acquired_files": 131,
+      "fully_read_text_files": 112,
+      "text_lines_read": 7808,
+      "java_files_fully_read": 89,
+      "binary_or_image_semantics_excluded": 4,
+      "other_acquisition_only_files": 15,
+      "exact_inventory_path_set_verified": true,
+      "tree_truncated": false,
+      "all_size_sha256_git_blob_sha1_match": true
+    },
+    {
+      "repository": "https://github.com/Sinytra/Launchpad",
+      "revision": "a1d958c952f5ffd38daa8671354e9b8fdf30f9c9",
+      "acquired_files": 67,
+      "fully_read_text_files": 64,
+      "text_lines_read": 4127,
+      "java_files_fully_read": 33,
+      "binary_or_image_semantics_excluded": 3,
+      "other_acquisition_only_files": 0,
+      "exact_inventory_path_set_verified": true,
+      "tree_truncated": false,
+      "all_size_sha256_git_blob_sha1_match": true
+    }
+  ],
+  "source_url_occurrences_checked": 1213,
+  "relative_markdown_links_checked": 24,
+  "core_review_candidates": {
+    "cards": 8,
+    "bundles": 8,
+    "records": 46,
+    "bundle_hashes_match_cas": true,
+    "preflight": "PASS",
+    "canonical_writes": 0,
+    "claims_created": 0,
+    "ingestion": "REQUIRES_EXISTING_CORE_REVIEW"
+  },
+  "game_launches": 0,
+  "upstream_builds": 0,
+  "upstream_execution": false,
+  "new_runtime_tests": "EXCLUDED_BY_USER_REQUEST",
+  "raw_source_or_binary_publication": false,
+  "security_or_infrastructure_changes": false,
+  "local_repository_regressions": {
+    "full_suite": {
+      "passed": 3039,
+      "skipped": 433,
+      "failed": 1,
+      "remaining_failure": "test_private_parent_validation_allows_real_external_directory",
+      "scope": "Known sandbox Git-ancestor fixture limitation; guard unchanged"
+    },
+    "documentation_contract": {
+      "passed": 3
+    },
+    "upstream_runtime_tests": 0
+  },
+  "publication_ci": "Exact-head hosted CI is checked separately in PR74; this pre-publication record is not that result",
+  "artifacts": [
+    {
+      "path": "ANALYSIS-CONTINUATION-2026-10-01.md",
+      "sha256": "d469185c45285b2d1cea8ee5a3c067cd9d131e80db8dc1eebe1a2a2f3c16af42",
+      "bytes": 11850
+    },
+    {
+      "path": "ANCHOR-HOST-2026-10-01.json",
+      "sha256": "a02b48f9efc7b9de148462602cea0515456e61e72741eddb1698a9c2dac68df5",
+      "bytes": 128722
+    },
+    {
+      "path": "ANCHOR-HOST-2026-10-01.md",
+      "sha256": "bf1edbe1fc7f3254f6b594ae33b907216a511831e60e4ced2beaa2ae111dad44",
+      "bytes": 41784
+    },
+    {
+      "path": "ANCHOR-TRANSFORM-2026-10-01.json",
+      "sha256": "9732a4e6980cbfc2c1d78651ad44ac8015f4b57227f07985272b68c9febe7a7b",
+      "bytes": 85148
+    },
+    {
+      "path": "ANCHOR-TRANSFORM-2026-10-01.md",
+      "sha256": "21e948799f3eebd76890b5fb3306cdb7c32936719dc20de8b0ab7fb798ff6e4b",
+      "bytes": 65519
+    },
+    {
+      "path": "DEPENDENCIES-AND-API-2026-10-01.md",
+      "sha256": "45f077a0995697a627f4320a35e62ae9444006c02fbe3e162c8fc8c18066f7ff",
+      "bytes": 12680
+    },
+    {
+      "path": "DEPENDENCY-SOURCE-EVIDENCE-2026-10-01.json",
+      "sha256": "e40ac239973c994afdbbb8f9e59b7d1d6d4f2d26f24811bbc679160f35ac5eee",
+      "bytes": 140285
+    },
+    {
+      "path": "FRONTIER-PIPELINE-2026-10-01.json",
+      "sha256": "b664c4a6ec79b6db7712e8e32efe6883bd15f30123645feb1ae80b28d67c35d7",
+      "bytes": 251084
+    },
+    {
+      "path": "FRONTIER-PIPELINE-2026-10-01.md",
+      "sha256": "1bb75dca4ecd3f17ad126a29974ab6c425bb32e82ffb5165542453315645275f",
+      "bytes": 53390
+    },
+    {
+      "path": "README.md",
+      "sha256": "d9d7f7531e70cff0314423608fc1779d941cc516a9b5cf381d2b821c12f7c2cb",
+      "bytes": 6177
+    },
+    {
+      "path": "STATIC-BATCH-REVIEW-2026-10-01.md",
+      "sha256": "a02398f69ce2a4561d4580f6d89074c39ced9030ddefdba37bf421481d8b263a",
+      "bytes": 6709
+    },
+    {
+      "path": "TECHNICAL-KNOWLEDGE-2026-10-01.md",
+      "sha256": "dc34797afcb948eacc90f55d04b4b8e3509e599b6d22d15c664f1fb78a7f449d",
+      "bytes": 13468
+    },
+    {
+      "path": "TECHNIQUE-CARDS-2026-10-01.json",
+      "sha256": "f7a814734ba1c084c522c9ae748c97edbd173ce273bf5941a51a714e87011a68",
+      "bytes": 27175
+    },
+    {
+      "path": "TECHNIQUE-REVIEW-BUNDLES-2026-10-01.json",
+      "sha256": "092583496849d31597b8db4e94b719f76e89dce7b4ef3f2d2016cc26845f8cf6",
+      "bytes": 65479
+    },
+    {
+      "path": "VERSION-PORTABILITY-2026-10-01.md",
+      "sha256": "194c4a579aec49fa7327222d976d77f26b0933a44c6290a2415998dea99894da",
+      "bytes": 16633
+    }
+  ],
+  "limits": [
+    "Full external loader/Adapter/remapper/host/Mixin implementation closure remains incomplete",
+    "Exact Connector release binary identity and source-bytecode equivalence not established",
+    "Selected FFAPI base/lifecycle source only; unselected modules not analyzed",
+    "Source-level cache and performance structures are not timings or compatibility certification",
+    "Existing bounded history cases retained; no unbounded history expansion",
+    "Upstream test fixtures, Gradle wrapper and game were not executed"
+  ]
+}

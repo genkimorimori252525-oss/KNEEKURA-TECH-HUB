@@ -1,5 +1,16 @@
 # Connector analysis continuation — 2026-10-01 UTC
 
+## Later static-knowledge milestone
+
+The finite source-only continuation of steps 2, 3 and 6 below is now documented in
+[Technical knowledge](TECHNICAL-KNOWLEDGE-2026-10-01.md), with path/facet ledgers,
+eight staged research candidates and [version portability](VERSION-PORTABILITY-2026-10-01.md).
+Exact dependency gaps remain explicit; the history window below is preserved.
+The user excluded runtime testing for this continuation, so the earlier conditional
+runtime step is not active work or authorization. The earlier acquisition results
+and PARTIAL/UNKNOWN capture boundaries below remain historical evidence.
+
+
 ## Result and exact scope
 
 **Whole-target analysis: IN_PROGRESS. Runtime compatibility: UNKNOWN.**

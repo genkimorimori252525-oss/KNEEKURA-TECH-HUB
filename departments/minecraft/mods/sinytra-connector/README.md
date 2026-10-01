@@ -2,10 +2,14 @@
 
 ## Current entry point
 
-**IN_PROGRESS: source/reconnaissance/history continuation. Runtime compatibility remains UNKNOWN.**
+**Finite static-knowledge batch complete; whole-target / dependency closure remains IN_PROGRESS. Runtime compatibility remains UNKNOWN.**
 
-Read [the current plan and findings](ANALYSIS-CONTINUATION-2026-10-01.md), then
-[the practical MOD-analysis workflow](../../ANALYSIS-WORKFLOW.md). The historical
+Start with [the technical explanation and eight reusable techniques](TECHNICAL-KNOWLEDGE-2026-10-01.md)
+and [version portability](VERSION-PORTABILITY-2026-10-01.md). The finite source-only
+batch maps ANCHOR host/transform paths, FRONTIER/Launchpad boundaries, selected FFAPI
+implementation, declared dependencies, provenance and remaining unknowns. Read
+[the earlier plan and acquisition/history milestone](ANALYSIS-CONTINUATION-2026-10-01.md)
+and [the practical MOD-analysis workflow](../../ANALYSIS-WORKFLOW.md) for continuity. The historical
 [DESIGN-REFERENCE.json](DESIGN-REFERENCE.json) remains a queue-registration record,
 not the current acquisition state. Earlier [U06 split-track static acceptance](../../mod-ai/verification/connector-static-2026-09-30/README.md) is preserved unchanged.
 
@@ -16,7 +20,7 @@ not the current acquisition state. Earlier [U06 split-track static acceptance](.
 - Kind: loader compatibility / translation layer
 - License: MIT
 - Original queue status: **QUEUED**; resumed 2026-10-01 UTC at the user's request
-- Current scope: both Connector source trees acquired/inventoried; five source-scoped feature leads mapped; bounded failure/repair review; whole-target analysis incomplete
+- Current scope: finite static host/transform/dependency/portability analysis and source-backed technique candidates; both Connector source trees remain separately pinned; bounded failure/repair review retained; full dependency/binary/runtime claims remain unestablished
 
 Connector is a high-value target because it translates foreign-loader Mod assumptions instead of requiring every Fabric Mod to be manually ported first.
 
@@ -49,7 +53,7 @@ Source revision: **c84a96a3c04aa4c5253032c338434de5329be08a**, tagged **3.0.0-be
 
 ## Full acquisition scope
 
-Both pinned Connector source trees have now been acquired and inventoried in full. Complete the remaining semantic analysis and separate dependency snapshots before claiming whole-target completion.
+Both pinned Connector source trees are acquired and inventoried in full. The bounded technical-knowledge pass now supplies path/facet ledgers and separately identified FFAPI/Launchpad source evidence. Full external dependency algorithms and source-binary equivalence remain unresolved; full acquisition is not a universal behavioral proof.
 
 Analyze Connector plus dependency boundaries needed to understand the mechanism:
 - Sinytra/Connector
@@ -97,4 +101,4 @@ Related repositories remain separate SourceSnapshots even when studied as one sy
 
 OVERVIEW.md / CODE-MAP.md / TRANSFORMATION-PIPELINE.md / MAPPING-PIPELINE.md / MIXIN-COMPATIBILITY.md / FABRIC-API-BRIDGE.md / CLASSLOADING.md / CACHE-LIFECYCLE.md / PLUGIN-API.md / DEPENDENCY-MAP.md / COMPATIBILITY.md / VERSION-PORTABILITY.md / PERFORMANCE.md / LICENSE-PROVENANCE.md
 
-These expected outputs remain the whole-target plan. The current continuation adds bounded, source-backed findings and a [failure/repair record](FAILURE-REPAIR-HISTORY.md); it does not establish complete implementation coverage or runtime compatibility.
+The requested subjects are consolidated into the technical explanation, ANCHOR host and transform reports, FRONTIER pipeline report, dependency/API provenance, and portability matrix rather than duplicated across empty section files. [Static batch verification](STATIC-BATCH-VERIFICATION-2026-10-01.json) and [independent review](STATIC-BATCH-REVIEW-2026-10-01.md) state the exact finite scope. The existing [failure/repair record](FAILURE-REPAIR-HISTORY.md) remains separate. Runtime tests were explicitly excluded; none of these documents certify compatibility or completeness of the external implementation closure.

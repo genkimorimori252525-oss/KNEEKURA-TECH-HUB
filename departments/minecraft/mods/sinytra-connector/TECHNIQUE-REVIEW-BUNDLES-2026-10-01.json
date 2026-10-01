@@ -1,0 +1,1115 @@
+{
+  "record_kind": "EXISTING_CORE_STAGE_BUNDLES_NOT_INGESTED",
+  "bundles": [
+    {
+      "technique_id": "T01",
+      "result": {
+        "status": "OK",
+        "bundle_hash": "af556298e30916e1f9b439bccdcf1b38a61484748a2451dec4135cbd1b81b043",
+        "records": 5,
+        "canonical_writes": 0,
+        "ingestion": "REQUIRES_EXISTING_CORE_REVIEW"
+      },
+      "bundle": {
+        "bundle_id": "bundle:minecraft:76c307271cf47a2b680f02c6c367fb32d0c12b8e03ec7c931d6ef480af3ce767",
+        "bundle_version": "1.0",
+        "domains": [
+          "minecraft"
+        ],
+        "purpose": "Review only; no claims or identity promotion",
+        "records": [
+          {
+            "acquisition": {
+              "level": "selected-files"
+            },
+            "id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d",
+            "kind": "experiment",
+            "license": {
+              "declared_expression": "MIT",
+              "state": "KNOWN"
+            },
+            "origin": {
+              "capture_type": "local_artifact",
+              "namespace": "mojmap",
+              "path": "anchor-source",
+              "root_id": "connector-anchor-full-tree",
+              "stage": "original_source_not_built"
+            },
+            "record_type": "source"
+          },
+          {
+            "captured_at": "2026-10-01T18:46:32.417804+00:00",
+            "content_hash": "46f73a75dd1ded5fa28b778dd338bf4e1e1a7898e5bcdc615c280f490c656e50",
+            "id": "ss:minecraft:160ece7fb48a1d45705c7ee9338467c0da17f2f00d013bd5656256411e65cf67",
+            "metadata": {
+              "capture_scope": "selected_documents_from_immutable_root",
+              "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+              "original_artifact_hash": null,
+              "profile_id": "3161cd7cd84ba1add48de08b2318d1a10ad0681dc1fbc1f981ffd7156a7c20c0",
+              "root_id": "connector-anchor-full-tree"
+            },
+            "record_type": "source_snapshot",
+            "source_id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d"
+          },
+          {
+            "id": "ev:minecraft:5db2ba3a29aa437a3dda8ece1b4b8bec8b0cc0826a58f0a604ed71da2f341df7",
+            "locator": {
+              "artifact_hash": "46f73a75dd1ded5fa28b778dd338bf4e1e1a7898e5bcdc615c280f490c656e50",
+              "availability": "AVAILABLE",
+              "content_hash": "46d225142d645e92f3aed1be5e41b8e9d77395716df9e5d1ad19b6f5adfe5fa3",
+              "document_id": "100148b725596239f2192cfaf8305f90e820045d9dc02f0bec0965e480f8748a",
+              "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+              "maturity": "RESEARCH_ONLY",
+              "namespace": "mojmap",
+              "path": "src/main/java/org/sinytra/connector/locator/ConnectorLocator.java",
+              "root_id": "connector-anchor-full-tree",
+              "runtime_status": "NOT_EXECUTED",
+              "stage": "original_source_not_built",
+              "type": "experiment_artifact",
+              "url": "urn:sha256:46d225142d645e92f3aed1be5e41b8e9d77395716df9e5d1ad19b6f5adfe5fa3"
+            },
+            "observed_at": "2026-10-01T18:46:32.417804+00:00",
+            "record_type": "evidence",
+            "roles": [
+              "QUALIFIES"
+            ],
+            "source_id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d",
+            "source_snapshot_id": "ss:minecraft:160ece7fb48a1d45705c7ee9338467c0da17f2f00d013bd5656256411e65cf67"
+          },
+          {
+            "id": "ev:minecraft:a9ab04d5fc9cab9fde0c006848d1bb2e580f5a31ea6edcec0d004c1197e4e734",
+            "locator": {
+              "artifact_hash": "46f73a75dd1ded5fa28b778dd338bf4e1e1a7898e5bcdc615c280f490c656e50",
+              "availability": "AVAILABLE",
+              "content_hash": "bc5485cbace6846a9622841458ab911fcc1cda4f490a6cc962b6b9a3bc086f7f",
+              "document_id": "2321cdf168a93317c5f3b453562ec8db0fcb9a80475157230efaf9613d2a38b7",
+              "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+              "maturity": "RESEARCH_ONLY",
+              "namespace": "mojmap",
+              "path": "src/main/java/org/sinytra/connector/locator/DependencyResolver.java",
+              "root_id": "connector-anchor-full-tree",
+              "runtime_status": "NOT_EXECUTED",
+              "stage": "original_source_not_built",
+              "type": "experiment_artifact",
+              "url": "urn:sha256:bc5485cbace6846a9622841458ab911fcc1cda4f490a6cc962b6b9a3bc086f7f"
+            },
+            "observed_at": "2026-10-01T18:46:32.417804+00:00",
+            "record_type": "evidence",
+            "roles": [
+              "QUALIFIES"
+            ],
+            "source_id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d",
+            "source_snapshot_id": "ss:minecraft:160ece7fb48a1d45705c7ee9338467c0da17f2f00d013bd5656256411e65cf67"
+          },
+          {
+            "created_by": {
+              "actor_id": "connector-static-research",
+              "actor_type": "ai"
+            },
+            "evidence_candidate_ids": [
+              "ev:minecraft:5db2ba3a29aa437a3dda8ece1b4b8bec8b0cc0826a58f0a604ed71da2f341df7",
+              "ev:minecraft:a9ab04d5fc9cab9fde0c006848d1bb2e580f5a31ea6edcec0d004c1197e4e734"
+            ],
+            "id": "obs:minecraft:62d9a7ee1e2e5314584dbe42ad6fe5cfc252128efa38051bab810b6dba0fa315",
+            "record_type": "staged_observation",
+            "source_id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d",
+            "status": "NEW",
+            "summary": "Discover dependency structure before final side admission\nSOURCE-BACKED RESEARCH CANDIDATE; application lesson is an inference, not validated guidance.\nRepository: https://github.com/Sinytra/Connector; revision: 7f68ac02291fde986119a3f5cab85436bed5c350; track: ANCHOR.\ncondition: A container can embed independently required components, and physical-side restrictions differ among them.\nmechanism: Build the nested candidate graph and resolve combined host/guest dependencies before filtering the selected jars with loadsInEnvironment.\ninvariant: An ineligible container must not erase nested dependency candidates before the resolver can evaluate them.\nfailure_pattern: Early side rejection hid Yttr nested dependencies in the reported #926 to #991 regression; source ordering is now different.\napplication: Separate graph discovery from execution/load admission in a loader or plugin package importer.\nlimits: Solver implementation and candidate binary topology are external; this does not require every nested child to load.\nLive runtime testing is outside the requested scope. Runtime compatibility and source-binary equivalence remain UNKNOWN."
+          }
+        ],
+        "title": "Minecraft captured-code observations"
+      }
+    },
+    {
+      "technique_id": "T02",
+      "result": {
+        "status": "OK",
+        "bundle_hash": "67e844f5c25a25b8091a5cf7d48a40f58211c2ca6ac2707165c2a1d73c202931",
+        "records": 6,
+        "canonical_writes": 0,
+        "ingestion": "REQUIRES_EXISTING_CORE_REVIEW"
+      },
+      "bundle": {
+        "bundle_id": "bundle:minecraft:51ee7d6d02b06e414e06d6ba6825c8fd75129ef298a3ed4009304b0599bb31d8",
+        "bundle_version": "1.0",
+        "domains": [
+          "minecraft"
+        ],
+        "purpose": "Review only; no claims or identity promotion",
+        "records": [
+          {
+            "acquisition": {
+              "level": "selected-files"
+            },
+            "id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d",
+            "kind": "experiment",
+            "license": {
+              "declared_expression": "MIT",
+              "state": "KNOWN"
+            },
+            "origin": {
+              "capture_type": "local_artifact",
+              "namespace": "mojmap",
+              "path": "anchor-source",
+              "root_id": "connector-anchor-full-tree",
+              "stage": "original_source_not_built"
+            },
+            "record_type": "source"
+          },
+          {
+            "captured_at": "2026-10-01T18:46:32.442274+00:00",
+            "content_hash": "46f73a75dd1ded5fa28b778dd338bf4e1e1a7898e5bcdc615c280f490c656e50",
+            "id": "ss:minecraft:160ece7fb48a1d45705c7ee9338467c0da17f2f00d013bd5656256411e65cf67",
+            "metadata": {
+              "capture_scope": "selected_documents_from_immutable_root",
+              "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+              "original_artifact_hash": null,
+              "profile_id": "3161cd7cd84ba1add48de08b2318d1a10ad0681dc1fbc1f981ffd7156a7c20c0",
+              "root_id": "connector-anchor-full-tree"
+            },
+            "record_type": "source_snapshot",
+            "source_id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d"
+          },
+          {
+            "id": "ev:minecraft:270fa8697bb05edbbe3fa85be80bfe20a5ec8a53ad6d5cbe5839d86b5df9c50a",
+            "locator": {
+              "artifact_hash": "46f73a75dd1ded5fa28b778dd338bf4e1e1a7898e5bcdc615c280f490c656e50",
+              "availability": "AVAILABLE",
+              "content_hash": "41ff986d5583af4a987657fbe16e3214bfe37c6a866efedca4614beb1cf65b1b",
+              "document_id": "7dd8999b49d1cdde870c1088024aec8db59714bda80bce59eaf35460837d6764",
+              "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+              "maturity": "RESEARCH_ONLY",
+              "namespace": "mojmap",
+              "path": "src/main/java/org/sinytra/connector/loader/ConnectorLoaderModMetadata.java",
+              "root_id": "connector-anchor-full-tree",
+              "runtime_status": "NOT_EXECUTED",
+              "stage": "original_source_not_built",
+              "type": "experiment_artifact",
+              "url": "urn:sha256:41ff986d5583af4a987657fbe16e3214bfe37c6a866efedca4614beb1cf65b1b"
+            },
+            "observed_at": "2026-10-01T18:46:32.442274+00:00",
+            "record_type": "evidence",
+            "roles": [
+              "QUALIFIES"
+            ],
+            "source_id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d",
+            "source_snapshot_id": "ss:minecraft:160ece7fb48a1d45705c7ee9338467c0da17f2f00d013bd5656256411e65cf67"
+          },
+          {
+            "id": "ev:minecraft:a24e65f564292d4f7fc8f5d5d0b84947eed93e91acbc311d39a443098ae4967f",
+            "locator": {
+              "artifact_hash": "46f73a75dd1ded5fa28b778dd338bf4e1e1a7898e5bcdc615c280f490c656e50",
+              "availability": "AVAILABLE",
+              "content_hash": "9e058a33cf42969c100c06560c00610c259272f9641d8448e63726ba3030eb25",
+              "document_id": "7e4225d078c46ef1b34b9c42e7d20e1b5c4b5bfcece0b4807901cd17ba1c2e3f",
+              "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+              "maturity": "RESEARCH_ONLY",
+              "namespace": "mojmap",
+              "path": "src/main/java/org/sinytra/connector/locator/ConnectorModMetadataParser.java",
+              "root_id": "connector-anchor-full-tree",
+              "runtime_status": "NOT_EXECUTED",
+              "stage": "original_source_not_built",
+              "type": "experiment_artifact",
+              "url": "urn:sha256:9e058a33cf42969c100c06560c00610c259272f9641d8448e63726ba3030eb25"
+            },
+            "observed_at": "2026-10-01T18:46:32.442274+00:00",
+            "record_type": "evidence",
+            "roles": [
+              "QUALIFIES"
+            ],
+            "source_id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d",
+            "source_snapshot_id": "ss:minecraft:160ece7fb48a1d45705c7ee9338467c0da17f2f00d013bd5656256411e65cf67"
+          },
+          {
+            "id": "ev:minecraft:d80deb0d8a362623540861bd49c3094cc73cbe3a927fdb9322c462e7a82bd854",
+            "locator": {
+              "artifact_hash": "46f73a75dd1ded5fa28b778dd338bf4e1e1a7898e5bcdc615c280f490c656e50",
+              "availability": "AVAILABLE",
+              "content_hash": "6eeb8a88c76c7239776dfee066e3b4392044c79984e9715e9d3a2a0dc94f8339",
+              "document_id": "fa88a060033fe7ae1f6d130c8faa51957fbe94e93e7b7b3d3e4b86254da7b7a6",
+              "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+              "maturity": "RESEARCH_ONLY",
+              "namespace": "mojmap",
+              "path": "src/main/java/org/sinytra/connector/loader/ConnectorEarlyLoader.java",
+              "root_id": "connector-anchor-full-tree",
+              "runtime_status": "NOT_EXECUTED",
+              "stage": "original_source_not_built",
+              "type": "experiment_artifact",
+              "url": "urn:sha256:6eeb8a88c76c7239776dfee066e3b4392044c79984e9715e9d3a2a0dc94f8339"
+            },
+            "observed_at": "2026-10-01T18:46:32.442274+00:00",
+            "record_type": "evidence",
+            "roles": [
+              "QUALIFIES"
+            ],
+            "source_id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d",
+            "source_snapshot_id": "ss:minecraft:160ece7fb48a1d45705c7ee9338467c0da17f2f00d013bd5656256411e65cf67"
+          },
+          {
+            "created_by": {
+              "actor_id": "connector-static-research",
+              "actor_type": "ai"
+            },
+            "evidence_candidate_ids": [
+              "ev:minecraft:270fa8697bb05edbbe3fa85be80bfe20a5ec8a53ad6d5cbe5839d86b5df9c50a",
+              "ev:minecraft:a24e65f564292d4f7fc8f5d5d0b84947eed93e91acbc311d39a443098ae4967f",
+              "ev:minecraft:d80deb0d8a362623540861bd49c3094cc73cbe3a927fdb9322c462e7a82bd854"
+            ],
+            "id": "obs:minecraft:79257e06e7637e320b063efbe92f40f31755bbaa8360a98ead304c9b26ee438b",
+            "record_type": "staged_observation",
+            "source_id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d",
+            "status": "NEW",
+            "summary": "Preserve original identity beside normalized host metadata\nSOURCE-BACKED RESEARCH CANDIDATE; application lesson is an inference, not validated guidance.\nRepository: https://github.com/Sinytra/Connector; revision: 7f68ac02291fde986119a3f5cab85436bed5c350; track: ANCHOR.\ncondition: Guest metadata and host identifiers/version/container rules differ.\nmechanism: Retain Fabric metadata while normalizing host IDs/version display and constructing in-memory Forge ModFileInfo; preserve original IDs through provided aliases.\ninvariant: The host-facing name and guest-facing identity must stay traceable to the same captured artifact.\nfailure_pattern: Treating a metadata alias or widened dependency constraint as proof of binary/API equivalence.\napplication: Maintain explicit identity/alias provenance in importers and compatibility adapters.\nlimits: The host metadata view is not a native source port and hiddenMods affects the Fabric-facing view, not disk loading.\nLive runtime testing is outside the requested scope. Runtime compatibility and source-binary equivalence remain UNKNOWN."
+          }
+        ],
+        "title": "Minecraft captured-code observations"
+      }
+    },
+    {
+      "technique_id": "T03",
+      "result": {
+        "status": "OK",
+        "bundle_hash": "dd539a398dbf7feaf8de7f3d9141515b335ad08f637d948e615b0de24f3bf0a3",
+        "records": 5,
+        "canonical_writes": 0,
+        "ingestion": "REQUIRES_EXISTING_CORE_REVIEW"
+      },
+      "bundle": {
+        "bundle_id": "bundle:minecraft:81cffec81b4d8a6b127ba21b6d5d7fd0880a120ba3c965d11dadc91583e15da7",
+        "bundle_version": "1.0",
+        "domains": [
+          "minecraft"
+        ],
+        "purpose": "Review only; no claims or identity promotion",
+        "records": [
+          {
+            "acquisition": {
+              "level": "selected-files"
+            },
+            "id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d",
+            "kind": "experiment",
+            "license": {
+              "declared_expression": "MIT",
+              "state": "KNOWN"
+            },
+            "origin": {
+              "capture_type": "local_artifact",
+              "namespace": "mojmap",
+              "path": "anchor-source",
+              "root_id": "connector-anchor-full-tree",
+              "stage": "original_source_not_built"
+            },
+            "record_type": "source"
+          },
+          {
+            "captured_at": "2026-10-01T18:46:32.456614+00:00",
+            "content_hash": "46f73a75dd1ded5fa28b778dd338bf4e1e1a7898e5bcdc615c280f490c656e50",
+            "id": "ss:minecraft:160ece7fb48a1d45705c7ee9338467c0da17f2f00d013bd5656256411e65cf67",
+            "metadata": {
+              "capture_scope": "selected_documents_from_immutable_root",
+              "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+              "original_artifact_hash": null,
+              "profile_id": "3161cd7cd84ba1add48de08b2318d1a10ad0681dc1fbc1f981ffd7156a7c20c0",
+              "root_id": "connector-anchor-full-tree"
+            },
+            "record_type": "source_snapshot",
+            "source_id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d"
+          },
+          {
+            "id": "ev:minecraft:800ab0196ffdde2907fc8311290e2c38cedbc4834657eeb118b34089a0b7478e",
+            "locator": {
+              "artifact_hash": "46f73a75dd1ded5fa28b778dd338bf4e1e1a7898e5bcdc615c280f490c656e50",
+              "availability": "AVAILABLE",
+              "content_hash": "e88b2eb5773fe83d92a2d49498704922047514cbbed69b293f89f63ca69292a4",
+              "document_id": "6bee59da2fdabca8aabbd8370278c84d3e899b503cc6b984481eb6e4e2cfbd0a",
+              "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+              "maturity": "RESEARCH_ONLY",
+              "namespace": "mojmap",
+              "path": "src/main/java/org/sinytra/connector/transformer/MixinPatches.java",
+              "root_id": "connector-anchor-full-tree",
+              "runtime_status": "NOT_EXECUTED",
+              "stage": "original_source_not_built",
+              "type": "experiment_artifact",
+              "url": "urn:sha256:e88b2eb5773fe83d92a2d49498704922047514cbbed69b293f89f63ca69292a4"
+            },
+            "observed_at": "2026-10-01T18:46:32.456614+00:00",
+            "record_type": "evidence",
+            "roles": [
+              "QUALIFIES"
+            ],
+            "source_id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d",
+            "source_snapshot_id": "ss:minecraft:160ece7fb48a1d45705c7ee9338467c0da17f2f00d013bd5656256411e65cf67"
+          },
+          {
+            "id": "ev:minecraft:717780e5398472e933bc3e648129eb2ad9211043064f70d4ee858aa57aa9ca6e",
+            "locator": {
+              "artifact_hash": "46f73a75dd1ded5fa28b778dd338bf4e1e1a7898e5bcdc615c280f490c656e50",
+              "availability": "AVAILABLE",
+              "content_hash": "a229757d426f47bc5a2bc52ecc5e76b8c89896076bf29f1c0527dc6b848e68ce",
+              "document_id": "5c2bcaa4d2f4167e8960d8e69f8cda6a9473fe3ae8451657cdc98d6f3ee8e966",
+              "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+              "maturity": "RESEARCH_ONLY",
+              "namespace": "mojmap",
+              "path": "src/main/java/org/sinytra/connector/transformer/MixinPatchTransformer.java",
+              "root_id": "connector-anchor-full-tree",
+              "runtime_status": "NOT_EXECUTED",
+              "stage": "original_source_not_built",
+              "type": "experiment_artifact",
+              "url": "urn:sha256:a229757d426f47bc5a2bc52ecc5e76b8c89896076bf29f1c0527dc6b848e68ce"
+            },
+            "observed_at": "2026-10-01T18:46:32.456614+00:00",
+            "record_type": "evidence",
+            "roles": [
+              "QUALIFIES"
+            ],
+            "source_id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d",
+            "source_snapshot_id": "ss:minecraft:160ece7fb48a1d45705c7ee9338467c0da17f2f00d013bd5656256411e65cf67"
+          },
+          {
+            "created_by": {
+              "actor_id": "connector-static-research",
+              "actor_type": "ai"
+            },
+            "evidence_candidate_ids": [
+              "ev:minecraft:800ab0196ffdde2907fc8311290e2c38cedbc4834657eeb118b34089a0b7478e",
+              "ev:minecraft:717780e5398472e933bc3e648129eb2ad9211043064f70d4ee858aa57aa9ca6e"
+            ],
+            "id": "obs:minecraft:00ead37273c6b41899f0745a96594e7eca0a1bcbfabe650cc6c324dd3c703dae",
+            "record_type": "staged_observation",
+            "source_id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d",
+            "status": "NEW",
+            "summary": "Adapt a matched method contract, not just its symbol name\nSOURCE-BACKED RESEARCH CANDIDATE; application lesson is an inference, not validated guidance.\nRepository: https://github.com/Sinytra/Connector; revision: 7f68ac02291fde986119a3f5cab85436bed5c350; track: ANCHOR.\ncondition: A known host patch changes the exact target method descriptor/injection shape.\nmechanism: For the matched HumanoidArmorLayer ModifyArg(index=4) pattern, retarget to the Forge Model/ResourceLocation overload, change the handler to Model-to-Model, insert casts and bypass non-HumanoidModel input.\ninvariant: The replacement descriptor, stack/local types and safe nonmatching behavior must agree.\nfailure_pattern: Renaming leaves a valid-looking selector with the wrong argument type, return type or insertion point.\napplication: Use explicit, narrowly matched rewrite rules when adapting bytecode to known host deltas.\nlimits: Adapter DSL matching/application is an unacquired implementation boundary; no arbitrary MOD or live armor rendering success is claimed.\nLive runtime testing is outside the requested scope. Runtime compatibility and source-binary equivalence remain UNKNOWN."
+          }
+        ],
+        "title": "Minecraft captured-code observations"
+      }
+    },
+    {
+      "technique_id": "T04",
+      "result": {
+        "status": "OK",
+        "bundle_hash": "994853df118a6765d6cdd1648e4ebb5dd505417ddc941bf9edd62ad6eec51a2c",
+        "records": 6,
+        "canonical_writes": 0,
+        "ingestion": "REQUIRES_EXISTING_CORE_REVIEW"
+      },
+      "bundle": {
+        "bundle_id": "bundle:minecraft:d6a91ff39deea9e6d1689f44a0a7198d641a422bf4e96f883c6ce368b21bfe33",
+        "bundle_version": "1.0",
+        "domains": [
+          "minecraft"
+        ],
+        "purpose": "Review only; no claims or identity promotion",
+        "records": [
+          {
+            "acquisition": {
+              "level": "selected-files"
+            },
+            "id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d",
+            "kind": "experiment",
+            "license": {
+              "declared_expression": "MIT",
+              "state": "KNOWN"
+            },
+            "origin": {
+              "capture_type": "local_artifact",
+              "namespace": "mojmap",
+              "path": "anchor-source",
+              "root_id": "connector-anchor-full-tree",
+              "stage": "original_source_not_built"
+            },
+            "record_type": "source"
+          },
+          {
+            "captured_at": "2026-10-01T18:46:32.465658+00:00",
+            "content_hash": "46f73a75dd1ded5fa28b778dd338bf4e1e1a7898e5bcdc615c280f490c656e50",
+            "id": "ss:minecraft:160ece7fb48a1d45705c7ee9338467c0da17f2f00d013bd5656256411e65cf67",
+            "metadata": {
+              "capture_scope": "selected_documents_from_immutable_root",
+              "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+              "original_artifact_hash": null,
+              "profile_id": "3161cd7cd84ba1add48de08b2318d1a10ad0681dc1fbc1f981ffd7156a7c20c0",
+              "root_id": "connector-anchor-full-tree"
+            },
+            "record_type": "source_snapshot",
+            "source_id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d"
+          },
+          {
+            "id": "ev:minecraft:10190ad2ab1ff9682e0963510f472e739269c99e13830f927a37a4588467221d",
+            "locator": {
+              "artifact_hash": "46f73a75dd1ded5fa28b778dd338bf4e1e1a7898e5bcdc615c280f490c656e50",
+              "availability": "AVAILABLE",
+              "content_hash": "813db2ecf52b616495302fcd91c715aca38ad8cd920c41e684af08bd29d147e8",
+              "document_id": "b06e60b4a257e9228002618da8c89fe4090429ebf5011b4936a34deed3784545",
+              "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+              "maturity": "RESEARCH_ONLY",
+              "namespace": "mojmap",
+              "path": "src/main/java/org/sinytra/connector/transformer/FieldToMethodTransformer.java",
+              "root_id": "connector-anchor-full-tree",
+              "runtime_status": "NOT_EXECUTED",
+              "stage": "original_source_not_built",
+              "type": "experiment_artifact",
+              "url": "urn:sha256:813db2ecf52b616495302fcd91c715aca38ad8cd920c41e684af08bd29d147e8"
+            },
+            "observed_at": "2026-10-01T18:46:32.465658+00:00",
+            "record_type": "evidence",
+            "roles": [
+              "QUALIFIES"
+            ],
+            "source_id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d",
+            "source_snapshot_id": "ss:minecraft:160ece7fb48a1d45705c7ee9338467c0da17f2f00d013bd5656256411e65cf67"
+          },
+          {
+            "id": "ev:minecraft:1e51354a0083154050ae2377097d0d229f1ede66baafb100c6114aa00928c6a3",
+            "locator": {
+              "artifact_hash": "46f73a75dd1ded5fa28b778dd338bf4e1e1a7898e5bcdc615c280f490c656e50",
+              "availability": "AVAILABLE",
+              "content_hash": "5dd9cfbf47bfcced440ce30418192745e3d4e202913be5fd99e124d07120eac1",
+              "document_id": "749d21dd637220cd1f3a04e94bb9dc3b8bf077b323eced311f86a2edd00304fe",
+              "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+              "maturity": "RESEARCH_ONLY",
+              "namespace": "mojmap",
+              "path": "src/mod/java/org/sinytra/connector/mod/compat/fieldtypes/RedirectingIdMapper.java",
+              "root_id": "connector-anchor-full-tree",
+              "runtime_status": "NOT_EXECUTED",
+              "stage": "original_source_not_built",
+              "type": "experiment_artifact",
+              "url": "urn:sha256:5dd9cfbf47bfcced440ce30418192745e3d4e202913be5fd99e124d07120eac1"
+            },
+            "observed_at": "2026-10-01T18:46:32.465658+00:00",
+            "record_type": "evidence",
+            "roles": [
+              "QUALIFIES"
+            ],
+            "source_id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d",
+            "source_snapshot_id": "ss:minecraft:160ece7fb48a1d45705c7ee9338467c0da17f2f00d013bd5656256411e65cf67"
+          },
+          {
+            "id": "ev:minecraft:85ab86e0fa962c5bed283c362b50087975a82c8f142bd552fb1ef9c9324cb4a3",
+            "locator": {
+              "artifact_hash": "46f73a75dd1ded5fa28b778dd338bf4e1e1a7898e5bcdc615c280f490c656e50",
+              "availability": "AVAILABLE",
+              "content_hash": "3540f559fee21f1693ef0815143129cde264f3a81c650f5578595664cb1db0d0",
+              "document_id": "dcae9279b84da5cccba8508a6e82d785dcdc9893e9ed5d099471aad5276c5352",
+              "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+              "maturity": "RESEARCH_ONLY",
+              "namespace": "mojmap",
+              "path": "src/mod/java/org/sinytra/connector/mod/compat/fieldtypes/RedirectingInt2ObjectMap.java",
+              "root_id": "connector-anchor-full-tree",
+              "runtime_status": "NOT_EXECUTED",
+              "stage": "original_source_not_built",
+              "type": "experiment_artifact",
+              "url": "urn:sha256:3540f559fee21f1693ef0815143129cde264f3a81c650f5578595664cb1db0d0"
+            },
+            "observed_at": "2026-10-01T18:46:32.465658+00:00",
+            "record_type": "evidence",
+            "roles": [
+              "QUALIFIES"
+            ],
+            "source_id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d",
+            "source_snapshot_id": "ss:minecraft:160ece7fb48a1d45705c7ee9338467c0da17f2f00d013bd5656256411e65cf67"
+          },
+          {
+            "created_by": {
+              "actor_id": "connector-static-research",
+              "actor_type": "ai"
+            },
+            "evidence_candidate_ids": [
+              "ev:minecraft:10190ad2ab1ff9682e0963510f472e739269c99e13830f927a37a4588467221d",
+              "ev:minecraft:1e51354a0083154050ae2377097d0d229f1ede66baafb100c6114aa00928c6a3",
+              "ev:minecraft:85ab86e0fa962c5bed283c362b50087975a82c8f142bd552fb1ef9c9324cb4a3"
+            ],
+            "id": "obs:minecraft:bdf739770142d53b99232654839119aa17f345095738a8598911d9d312d852ba",
+            "record_type": "staged_observation",
+            "source_id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d",
+            "status": "NEW",
+            "summary": "Bridge data shape through a supported-operation live view\nSOURCE-BACKED RESEARCH CANDIDATE; application lesson is an inference, not validated guidance.\nRepository: https://github.com/Sinytra/Connector; revision: 7f68ac02291fde986119a3f5cab85436bed5c350; track: ANCHOR.\ncondition: Guest code expects a field/container shape changed by the host.\nmechanism: Rewrite selected field reads to getters and return facades translating numeric IDs to the host backing map without maintaining a detached copy.\ninvariant: Supported reads/writes must refer to one authoritative backing state; unsupported collection operations remain explicit.\nfailure_pattern: A copied map goes stale, or a nominal interface is mistaken for a complete implementation; particle entrySet/keySet/values throw here.\napplication: Use live adapters for tightly scoped compatibility surfaces and list the exact supported operations.\nlimits: The field rewrite has its own narrow matching assumptions; no general collection equivalence or arbitrary field migration is established.\nLive runtime testing is outside the requested scope. Runtime compatibility and source-binary equivalence remain UNKNOWN."
+          }
+        ],
+        "title": "Minecraft captured-code observations"
+      }
+    },
+    {
+      "technique_id": "T05",
+      "result": {
+        "status": "OK",
+        "bundle_hash": "bd516f287ecf3606e9a71defda8c2c89ef00c337ea415715ec9a18babf206476",
+        "records": 6,
+        "canonical_writes": 0,
+        "ingestion": "REQUIRES_EXISTING_CORE_REVIEW"
+      },
+      "bundle": {
+        "bundle_id": "bundle:minecraft:e65219ebeb7f6065867426f13dcc15f23dc5487d59489c01186a30a56d59844a",
+        "bundle_version": "1.0",
+        "domains": [
+          "minecraft"
+        ],
+        "purpose": "Review only; no claims or identity promotion",
+        "records": [
+          {
+            "acquisition": {
+              "level": "selected-files"
+            },
+            "id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d",
+            "kind": "experiment",
+            "license": {
+              "declared_expression": "MIT",
+              "state": "KNOWN"
+            },
+            "origin": {
+              "capture_type": "local_artifact",
+              "namespace": "mojmap",
+              "path": "anchor-source",
+              "root_id": "connector-anchor-full-tree",
+              "stage": "original_source_not_built"
+            },
+            "record_type": "source"
+          },
+          {
+            "captured_at": "2026-10-01T18:46:32.477556+00:00",
+            "content_hash": "46f73a75dd1ded5fa28b778dd338bf4e1e1a7898e5bcdc615c280f490c656e50",
+            "id": "ss:minecraft:160ece7fb48a1d45705c7ee9338467c0da17f2f00d013bd5656256411e65cf67",
+            "metadata": {
+              "capture_scope": "selected_documents_from_immutable_root",
+              "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+              "original_artifact_hash": null,
+              "profile_id": "3161cd7cd84ba1add48de08b2318d1a10ad0681dc1fbc1f981ffd7156a7c20c0",
+              "root_id": "connector-anchor-full-tree"
+            },
+            "record_type": "source_snapshot",
+            "source_id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d"
+          },
+          {
+            "id": "ev:minecraft:cd58ad86b8eaedb3cf1ae8a3b070305d0a7a1448d3448ee67d715ecf820b5d88",
+            "locator": {
+              "artifact_hash": "46f73a75dd1ded5fa28b778dd338bf4e1e1a7898e5bcdc615c280f490c656e50",
+              "availability": "AVAILABLE",
+              "content_hash": "397f42132d6b176907dcd5494d89ae57d2d9d5774584d33b0384727655a280a5",
+              "document_id": "f50ebf1801316b8f7caf658cf64986842e2d9583a734d170b99b6c0c254d8acd",
+              "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+              "maturity": "RESEARCH_ONLY",
+              "namespace": "mojmap",
+              "path": "src/mod/java/org/sinytra/connector/mod/ConnectorLoader.java",
+              "root_id": "connector-anchor-full-tree",
+              "runtime_status": "NOT_EXECUTED",
+              "stage": "original_source_not_built",
+              "type": "experiment_artifact",
+              "url": "urn:sha256:397f42132d6b176907dcd5494d89ae57d2d9d5774584d33b0384727655a280a5"
+            },
+            "observed_at": "2026-10-01T18:46:32.477556+00:00",
+            "record_type": "evidence",
+            "roles": [
+              "QUALIFIES"
+            ],
+            "source_id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d",
+            "source_snapshot_id": "ss:minecraft:160ece7fb48a1d45705c7ee9338467c0da17f2f00d013bd5656256411e65cf67"
+          },
+          {
+            "id": "ev:minecraft:536aa4904e956006519dd45fbbb7c343e41932d476fad036f3161f555f634346",
+            "locator": {
+              "artifact_hash": "46f73a75dd1ded5fa28b778dd338bf4e1e1a7898e5bcdc615c280f490c656e50",
+              "availability": "AVAILABLE",
+              "content_hash": "c05596b69a0deb174461e4f06fe384044d9f5755e52265d2d2193a817f8db942",
+              "document_id": "37c3cca085fd2eaccd7622df007dce5b4a33366db75b31fa2b0efc72d9d0d455",
+              "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+              "maturity": "RESEARCH_ONLY",
+              "namespace": "mojmap",
+              "path": "src/mod/java/org/sinytra/connector/mod/mixin/registries/ForgeRegistryMixin.java",
+              "root_id": "connector-anchor-full-tree",
+              "runtime_status": "NOT_EXECUTED",
+              "stage": "original_source_not_built",
+              "type": "experiment_artifact",
+              "url": "urn:sha256:c05596b69a0deb174461e4f06fe384044d9f5755e52265d2d2193a817f8db942"
+            },
+            "observed_at": "2026-10-01T18:46:32.477556+00:00",
+            "record_type": "evidence",
+            "roles": [
+              "QUALIFIES"
+            ],
+            "source_id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d",
+            "source_snapshot_id": "ss:minecraft:160ece7fb48a1d45705c7ee9338467c0da17f2f00d013bd5656256411e65cf67"
+          },
+          {
+            "id": "ev:minecraft:76084727392564338f946f6378233719f2e5aa00a12785c56420655de7baacf2",
+            "locator": {
+              "artifact_hash": "46f73a75dd1ded5fa28b778dd338bf4e1e1a7898e5bcdc615c280f490c656e50",
+              "availability": "AVAILABLE",
+              "content_hash": "72bc154cb3af9debb0bc67fc76e1e55f5c1177b48a1c09777f0b0e613949b7ff",
+              "document_id": "9b351a9c5ceea7bdf79ac36c4b3ffcf2d3380bf8d17783db25b9f7fd201f4228",
+              "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+              "maturity": "RESEARCH_ONLY",
+              "namespace": "mojmap",
+              "path": "src/main/java/org/sinytra/connector/service/ConnectorLoaderService.java",
+              "root_id": "connector-anchor-full-tree",
+              "runtime_status": "NOT_EXECUTED",
+              "stage": "original_source_not_built",
+              "type": "experiment_artifact",
+              "url": "urn:sha256:72bc154cb3af9debb0bc67fc76e1e55f5c1177b48a1c09777f0b0e613949b7ff"
+            },
+            "observed_at": "2026-10-01T18:46:32.477556+00:00",
+            "record_type": "evidence",
+            "roles": [
+              "QUALIFIES"
+            ],
+            "source_id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d",
+            "source_snapshot_id": "ss:minecraft:160ece7fb48a1d45705c7ee9338467c0da17f2f00d013bd5656256411e65cf67"
+          },
+          {
+            "created_by": {
+              "actor_id": "connector-static-research",
+              "actor_type": "ai"
+            },
+            "evidence_candidate_ids": [
+              "ev:minecraft:cd58ad86b8eaedb3cf1ae8a3b070305d0a7a1448d3448ee67d715ecf820b5d88",
+              "ev:minecraft:536aa4904e956006519dd45fbbb7c343e41932d476fad036f3161f555f634346",
+              "ev:minecraft:76084727392564338f946f6378233719f2e5aa00a12785c56420655de7baacf2"
+            ],
+            "id": "obs:minecraft:453bfc57c59aad84eb876da81a24fb2c74911e8c6729c61bb8c38d01851814dd",
+            "record_type": "staged_observation",
+            "source_id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d",
+            "status": "NEW",
+            "summary": "Treat initialization timing as part of the API contract\nSOURCE-BACKED RESEARCH CANDIDATE; application lesson is an inference, not validated guidance.\nRepository: https://github.com/Sinytra/Connector; revision: 7f68ac02291fde986119a3f5cab85436bed5c350; track: ANCHOR.\ncondition: The guest registers content at a time when host registries may already be frozen or wrapped.\nmechanism: Hook Fabric setup/preLaunch and main/physical-side entrypoints into specific host phases while selected registry adapters preserve the required registration window.\ninvariant: An initializer is useful only when the host state it mutates is in a compatible lifecycle phase.\nfailure_pattern: Calling the right entrypoint too late, before prerequisites exist, or after a host snapshot/freeze.\napplication: Document phase preconditions and postconditions in extensible systems rather than treating callbacks as names alone.\nlimits: Connector uses invasive host-version-specific behavior; copying an unfreeze strategy is not a portable recipe.\nLive runtime testing is outside the requested scope. Runtime compatibility and source-binary equivalence remain UNKNOWN."
+          }
+        ],
+        "title": "Minecraft captured-code observations"
+      }
+    },
+    {
+      "technique_id": "T06",
+      "result": {
+        "status": "OK",
+        "bundle_hash": "388aae3f6ce147ea8ebd3007365f117e08c799edfb30f41fa48fd4e32f32b72e",
+        "records": 6,
+        "canonical_writes": 0,
+        "ingestion": "REQUIRES_EXISTING_CORE_REVIEW"
+      },
+      "bundle": {
+        "bundle_id": "bundle:minecraft:0f54bfb57ca2c9a5ff43e8b1b2e68037aa57e35047743f730d4ed3aa988fd641",
+        "bundle_version": "1.0",
+        "domains": [
+          "minecraft"
+        ],
+        "purpose": "Review only; no claims or identity promotion",
+        "records": [
+          {
+            "acquisition": {
+              "level": "selected-files"
+            },
+            "id": "src:minecraft:aa9336de9b9db3b8c1b54aefef68ae7a12d3ea003b941e551328c3404ea05180",
+            "kind": "experiment",
+            "license": {
+              "declared_expression": "Apache-2.0",
+              "state": "KNOWN"
+            },
+            "origin": {
+              "capture_type": "local_artifact",
+              "namespace": "yarn",
+              "path": "ffapi-anchor-source",
+              "root_id": "ffapi-anchor",
+              "stage": "original_source_not_built"
+            },
+            "record_type": "source"
+          },
+          {
+            "captured_at": "2026-10-01T18:46:32.488002+00:00",
+            "content_hash": "5cb7ff9918835b6db9a75e17cb3b4fb1e2b92c36a4796bc22be213c5f4c8a9e1",
+            "id": "ss:minecraft:b8793932e381fafa9d082ca75c30e1ffff1a93902c8f043d5618c456760dbc36",
+            "metadata": {
+              "capture_scope": "selected_documents_from_immutable_root",
+              "index_snapshot_id": "34f82d7caa872d2ec846cfad138e56339742b3a1a30a27b63255589e84162fac",
+              "original_artifact_hash": null,
+              "profile_id": "c20ce56a649c2257187b6265a6813b0b231f1b6e740c7ddd7723641ae8225ad7",
+              "root_id": "ffapi-anchor"
+            },
+            "record_type": "source_snapshot",
+            "source_id": "src:minecraft:aa9336de9b9db3b8c1b54aefef68ae7a12d3ea003b941e551328c3404ea05180"
+          },
+          {
+            "id": "ev:minecraft:5b2e355e97eae5f328117979c24c52e8f73ee12913cb18666b2df09cc4d3c373",
+            "locator": {
+              "artifact_hash": "5cb7ff9918835b6db9a75e17cb3b4fb1e2b92c36a4796bc22be213c5f4c8a9e1",
+              "availability": "AVAILABLE",
+              "content_hash": "f2d93aa7576a2b4981d7462d581c2c47bb0e88b40479d1fafbb70017758e67ad",
+              "document_id": "4796eaa151305d31c841bf2a4fe3fb1aa64338d56903b17c12f1de158bba7392",
+              "index_snapshot_id": "34f82d7caa872d2ec846cfad138e56339742b3a1a30a27b63255589e84162fac",
+              "maturity": "RESEARCH_ONLY",
+              "namespace": "yarn",
+              "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/ServerTickEvents.java",
+              "root_id": "ffapi-anchor",
+              "runtime_status": "NOT_EXECUTED",
+              "stage": "original_source_not_built",
+              "type": "experiment_artifact",
+              "url": "urn:sha256:f2d93aa7576a2b4981d7462d581c2c47bb0e88b40479d1fafbb70017758e67ad"
+            },
+            "observed_at": "2026-10-01T18:46:32.488002+00:00",
+            "record_type": "evidence",
+            "roles": [
+              "QUALIFIES"
+            ],
+            "source_id": "src:minecraft:aa9336de9b9db3b8c1b54aefef68ae7a12d3ea003b941e551328c3404ea05180",
+            "source_snapshot_id": "ss:minecraft:b8793932e381fafa9d082ca75c30e1ffff1a93902c8f043d5618c456760dbc36"
+          },
+          {
+            "id": "ev:minecraft:f311fa0c32f48453929a2e42497d69625dabead6645f3fc19fd8e713f1b51997",
+            "locator": {
+              "artifact_hash": "5cb7ff9918835b6db9a75e17cb3b4fb1e2b92c36a4796bc22be213c5f4c8a9e1",
+              "availability": "AVAILABLE",
+              "content_hash": "9bd1e2770b3398185fa7076371c28943b392f06da580bcb965effcb4d93a9754",
+              "document_id": "438bafed86067ffb01a2277ed770f8f5ea24bbadd074761e48536023fc2c8e17",
+              "index_snapshot_id": "34f82d7caa872d2ec846cfad138e56339742b3a1a30a27b63255589e84162fac",
+              "maturity": "RESEARCH_ONLY",
+              "namespace": "yarn",
+              "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/MinecraftServerMixin.java",
+              "root_id": "ffapi-anchor",
+              "runtime_status": "NOT_EXECUTED",
+              "stage": "original_source_not_built",
+              "type": "experiment_artifact",
+              "url": "urn:sha256:9bd1e2770b3398185fa7076371c28943b392f06da580bcb965effcb4d93a9754"
+            },
+            "observed_at": "2026-10-01T18:46:32.488002+00:00",
+            "record_type": "evidence",
+            "roles": [
+              "QUALIFIES"
+            ],
+            "source_id": "src:minecraft:aa9336de9b9db3b8c1b54aefef68ae7a12d3ea003b941e551328c3404ea05180",
+            "source_snapshot_id": "ss:minecraft:b8793932e381fafa9d082ca75c30e1ffff1a93902c8f043d5618c456760dbc36"
+          },
+          {
+            "id": "ev:minecraft:f271c4f5ce061f5f736c46501313bbd695efcef8d80798894a49fc0daaf869e3",
+            "locator": {
+              "artifact_hash": "5cb7ff9918835b6db9a75e17cb3b4fb1e2b92c36a4796bc22be213c5f4c8a9e1",
+              "availability": "AVAILABLE",
+              "content_hash": "f800c508638998b1261ff90c58bad379ff84876b11dce4936cc1ddea975f8bf3",
+              "document_id": "73a290aaa9cc2396d9149bb64aa42b89f976629506f96a9bfc6716acec343423",
+              "index_snapshot_id": "34f82d7caa872d2ec846cfad138e56339742b3a1a30a27b63255589e84162fac",
+              "maturity": "RESEARCH_ONLY",
+              "namespace": "yarn",
+              "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/event/ArrayBackedEvent.java",
+              "root_id": "ffapi-anchor",
+              "runtime_status": "NOT_EXECUTED",
+              "stage": "original_source_not_built",
+              "type": "experiment_artifact",
+              "url": "urn:sha256:f800c508638998b1261ff90c58bad379ff84876b11dce4936cc1ddea975f8bf3"
+            },
+            "observed_at": "2026-10-01T18:46:32.488002+00:00",
+            "record_type": "evidence",
+            "roles": [
+              "QUALIFIES"
+            ],
+            "source_id": "src:minecraft:aa9336de9b9db3b8c1b54aefef68ae7a12d3ea003b941e551328c3404ea05180",
+            "source_snapshot_id": "ss:minecraft:b8793932e381fafa9d082ca75c30e1ffff1a93902c8f043d5618c456760dbc36"
+          },
+          {
+            "created_by": {
+              "actor_id": "connector-static-research",
+              "actor_type": "ai"
+            },
+            "evidence_candidate_ids": [
+              "ev:minecraft:5b2e355e97eae5f328117979c24c52e8f73ee12913cb18666b2df09cc4d3c373",
+              "ev:minecraft:f311fa0c32f48453929a2e42497d69625dabead6645f3fc19fd8e713f1b51997",
+              "ev:minecraft:f271c4f5ce061f5f736c46501313bbd695efcef8d80798894a49fc0daaf869e3"
+            ],
+            "id": "obs:minecraft:ebf64bbbadf3bacc9a1e92b9630b5bc980f8579b767c5d50ca77fbd68616e237",
+            "record_type": "staged_observation",
+            "source_id": "src:minecraft:aa9336de9b9db3b8c1b54aefef68ae7a12d3ea003b941e551328c3404ea05180",
+            "status": "NEW",
+            "summary": "Supply both the API implementation and the real event trigger\nSOURCE-BACKED RESEARCH CANDIDATE; application lesson is an inference, not validated guidance.\nRepository: https://github.com/Sinytra/ForgifiedFabricAPI; revision: 6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f; track: ANCHOR.\ncondition: A guest MOD registers a callback through a public API whose implementation is absent on the host.\nmechanism: FFAPI owns the array-backed Event callback implementation; its MinecraftServerMixin invokes END_SERVER_TICK at the selected tick hook.\ninvariant: Listener storage/ordering and the source of invocation must both be supplied.\nfailure_pattern: An API class exists but the callback never fires, fires at a different phase, or changes cancellation/ordering semantics.\napplication: Trace API declaration to implementation to actual trigger before declaring an API shim complete.\nlimits: This selected module is not evidence that all FFAPI events map to Forge EventBus or that all FFAPI internals are compatible.\nLive runtime testing is outside the requested scope. Runtime compatibility and source-binary equivalence remain UNKNOWN."
+          }
+        ],
+        "title": "Minecraft captured-code observations"
+      }
+    },
+    {
+      "technique_id": "T07",
+      "result": {
+        "status": "OK",
+        "bundle_hash": "0ec8d15de8a4009c9a88ddc2c4bec1491b3af7da04d23107d61700f8e92876db",
+        "records": 6,
+        "canonical_writes": 0,
+        "ingestion": "REQUIRES_EXISTING_CORE_REVIEW"
+      },
+      "bundle": {
+        "bundle_id": "bundle:minecraft:b1bd1f503fb6374f5299d3c18c201c01ef5918af80fbe8a6d1543a20861ab968",
+        "bundle_version": "1.0",
+        "domains": [
+          "minecraft"
+        ],
+        "purpose": "Review only; no claims or identity promotion",
+        "records": [
+          {
+            "acquisition": {
+              "level": "selected-files"
+            },
+            "id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d",
+            "kind": "experiment",
+            "license": {
+              "declared_expression": "MIT",
+              "state": "KNOWN"
+            },
+            "origin": {
+              "capture_type": "local_artifact",
+              "namespace": "mojmap",
+              "path": "anchor-source",
+              "root_id": "connector-anchor-full-tree",
+              "stage": "original_source_not_built"
+            },
+            "record_type": "source"
+          },
+          {
+            "captured_at": "2026-10-01T18:46:32.497999+00:00",
+            "content_hash": "46f73a75dd1ded5fa28b778dd338bf4e1e1a7898e5bcdc615c280f490c656e50",
+            "id": "ss:minecraft:160ece7fb48a1d45705c7ee9338467c0da17f2f00d013bd5656256411e65cf67",
+            "metadata": {
+              "capture_scope": "selected_documents_from_immutable_root",
+              "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+              "original_artifact_hash": null,
+              "profile_id": "3161cd7cd84ba1add48de08b2318d1a10ad0681dc1fbc1f981ffd7156a7c20c0",
+              "root_id": "connector-anchor-full-tree"
+            },
+            "record_type": "source_snapshot",
+            "source_id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d"
+          },
+          {
+            "id": "ev:minecraft:04f6a509cda77199129feb152167164583eb66c050c956e000b970eacfb6e0da",
+            "locator": {
+              "artifact_hash": "46f73a75dd1ded5fa28b778dd338bf4e1e1a7898e5bcdc615c280f490c656e50",
+              "availability": "AVAILABLE",
+              "content_hash": "725aa716bd9b622b3b8e8ebb10df2b5a21cbb98dbf8de3c0802febb36efcf175",
+              "document_id": "8860d51e0d47df891822495dbacabcf1382733d4bb9bb45737cdf8eb205fa724",
+              "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+              "maturity": "RESEARCH_ONLY",
+              "namespace": "mojmap",
+              "path": "src/main/java/org/sinytra/connector/ConnectorUtil.java",
+              "root_id": "connector-anchor-full-tree",
+              "runtime_status": "NOT_EXECUTED",
+              "stage": "original_source_not_built",
+              "type": "experiment_artifact",
+              "url": "urn:sha256:725aa716bd9b622b3b8e8ebb10df2b5a21cbb98dbf8de3c0802febb36efcf175"
+            },
+            "observed_at": "2026-10-01T18:46:32.497999+00:00",
+            "record_type": "evidence",
+            "roles": [
+              "QUALIFIES"
+            ],
+            "source_id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d",
+            "source_snapshot_id": "ss:minecraft:160ece7fb48a1d45705c7ee9338467c0da17f2f00d013bd5656256411e65cf67"
+          },
+          {
+            "id": "ev:minecraft:915702a133b4460670f6b670ee5aa8a8397cb38bafb22d0a8742f1c10a02cd2b",
+            "locator": {
+              "artifact_hash": "46f73a75dd1ded5fa28b778dd338bf4e1e1a7898e5bcdc615c280f490c656e50",
+              "availability": "AVAILABLE",
+              "content_hash": "47742b17dda48705701512a4bbb846721f6082e6338225180440606bbde607d2",
+              "document_id": "24c516260b94cb25b0ff69dd0757dbdd8ed9071da05b97e5046e1e141f5bbd9e",
+              "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+              "maturity": "RESEARCH_ONLY",
+              "namespace": "mojmap",
+              "path": "src/main/java/org/sinytra/connector/locator/EmbeddedDependencies.java",
+              "root_id": "connector-anchor-full-tree",
+              "runtime_status": "NOT_EXECUTED",
+              "stage": "original_source_not_built",
+              "type": "experiment_artifact",
+              "url": "urn:sha256:47742b17dda48705701512a4bbb846721f6082e6338225180440606bbde607d2"
+            },
+            "observed_at": "2026-10-01T18:46:32.497999+00:00",
+            "record_type": "evidence",
+            "roles": [
+              "QUALIFIES"
+            ],
+            "source_id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d",
+            "source_snapshot_id": "ss:minecraft:160ece7fb48a1d45705c7ee9338467c0da17f2f00d013bd5656256411e65cf67"
+          },
+          {
+            "id": "ev:minecraft:7c56970f13eb01138b435796eca8fb1bf09ba7f3e5cb6f72874a2b8916dd7b84",
+            "locator": {
+              "artifact_hash": "46f73a75dd1ded5fa28b778dd338bf4e1e1a7898e5bcdc615c280f490c656e50",
+              "availability": "AVAILABLE",
+              "content_hash": "0dffcf492c91f7e59f921e4a95c46be5d2ab5febf9421dacc4acefc8f9b923b8",
+              "document_id": "baed16e77b924a2c6649d94fb6a0f05d9fd7a8674459eb427cb9e45131234516",
+              "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+              "maturity": "RESEARCH_ONLY",
+              "namespace": "mojmap",
+              "path": "src/main/java/org/sinytra/connector/transformer/jar/JarTransformer.java",
+              "root_id": "connector-anchor-full-tree",
+              "runtime_status": "NOT_EXECUTED",
+              "stage": "original_source_not_built",
+              "type": "experiment_artifact",
+              "url": "urn:sha256:0dffcf492c91f7e59f921e4a95c46be5d2ab5febf9421dacc4acefc8f9b923b8"
+            },
+            "observed_at": "2026-10-01T18:46:32.497999+00:00",
+            "record_type": "evidence",
+            "roles": [
+              "QUALIFIES"
+            ],
+            "source_id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d",
+            "source_snapshot_id": "ss:minecraft:160ece7fb48a1d45705c7ee9338467c0da17f2f00d013bd5656256411e65cf67"
+          },
+          {
+            "created_by": {
+              "actor_id": "connector-static-research",
+              "actor_type": "ai"
+            },
+            "evidence_candidate_ids": [
+              "ev:minecraft:04f6a509cda77199129feb152167164583eb66c050c956e000b970eacfb6e0da",
+              "ev:minecraft:915702a133b4460670f6b670ee5aa8a8397cb38bafb22d0a8742f1c10a02cd2b",
+              "ev:minecraft:7c56970f13eb01138b435796eca8fb1bf09ba7f3e5cb6f72874a2b8916dd7b84"
+            ],
+            "id": "obs:minecraft:82735a781362ba974e5543af12b753d67646403cfe71e161afe938ee3476f97a",
+            "record_type": "staged_observation",
+            "source_id": "src:minecraft:a42769ebe074a9ee85a78f95e238d32bef627292a824db4a3085127ffc39222d",
+            "status": "NEW",
+            "summary": "Make cache equivalence match the transformation inputs\nSOURCE-BACKED RESEARCH CANDIDATE; application lesson is an inference, not validated guidance.\nRepository: https://github.com/Sinytra/Connector; revision: 7f68ac02291fde986119a3f5cab85436bed5c350; track: ANCHOR.\ncondition: A transformed artifact is reused across process/configuration/dependency changes.\nmechanism: The inspected cache marker includes Connector implementation version, physical distribution and input hash; output naming adds game/mapping context, and a cache hit bypasses fresh transforms.\ninvariant: Reuse is valid only for the inputs actually represented by the key and validation rule.\nfailure_pattern: Assuming all dependency/coremod/config changes are included when the key code does not independently fingerprint them; output existence is not an output-byte hash check.\napplication: List every transformation determinant and either key it, invalidate explicitly or document the remaining boundary.\nlimits: The uncovered-input conclusion is source-level inference, not an observed cache incident or measured performance result.\nLive runtime testing is outside the requested scope. Runtime compatibility and source-binary equivalence remain UNKNOWN."
+          }
+        ],
+        "title": "Minecraft captured-code observations"
+      }
+    },
+    {
+      "technique_id": "T08",
+      "result": {
+        "status": "OK",
+        "bundle_hash": "28e5eb6a29bd76bf1a5787a1297eebb532ff8fee6ee8f44bdac8ad8f38627728",
+        "records": 6,
+        "canonical_writes": 0,
+        "ingestion": "REQUIRES_EXISTING_CORE_REVIEW"
+      },
+      "bundle": {
+        "bundle_id": "bundle:minecraft:7574973a1f936cf6a341d159cbda738e7d36437b9fed6f1e872852e0fcea9426",
+        "bundle_version": "1.0",
+        "domains": [
+          "minecraft"
+        ],
+        "purpose": "Review only; no claims or identity promotion",
+        "records": [
+          {
+            "acquisition": {
+              "level": "selected-files"
+            },
+            "id": "src:minecraft:990957a859e9d8843cc202c060821aca03dd5b189264362a62fcd70fb158a075",
+            "kind": "experiment",
+            "license": {
+              "declared_expression": "MIT",
+              "state": "KNOWN"
+            },
+            "origin": {
+              "capture_type": "local_artifact",
+              "namespace": "unknown",
+              "path": "frontier-source",
+              "root_id": "connector-frontier-full-tree",
+              "stage": "original_source_not_built"
+            },
+            "record_type": "source"
+          },
+          {
+            "captured_at": "2026-10-01T18:46:32.510196+00:00",
+            "content_hash": "8ad022ef5832c06d34d8ec32980a8b949e173d6536d867ae265126d2f6647445",
+            "id": "ss:minecraft:4216663d8c91daf03140619348ad412067e753f9743fb58fe90b390c55c462f0",
+            "metadata": {
+              "capture_scope": "selected_documents_from_immutable_root",
+              "index_snapshot_id": "27882ce6d3a03ec5fac8cdfe8533824c6fe6c120c13a0ed82efae73e356dd8a0",
+              "original_artifact_hash": null,
+              "profile_id": "b6e8959ed87e41de945338b53b1b9e2a4040505238d2af0c5862779ee39e49b9",
+              "root_id": "connector-frontier-full-tree"
+            },
+            "record_type": "source_snapshot",
+            "source_id": "src:minecraft:990957a859e9d8843cc202c060821aca03dd5b189264362a62fcd70fb158a075"
+          },
+          {
+            "id": "ev:minecraft:b40d340ad4d62bf0f3956677dad5875387bfb49909e6baeea5fa040d68c0d7d7",
+            "locator": {
+              "artifact_hash": "8ad022ef5832c06d34d8ec32980a8b949e173d6536d867ae265126d2f6647445",
+              "availability": "AVAILABLE",
+              "content_hash": "2304c9b7ea7f48d196a81496555053c7cffcd080cde15a5c4f322dc7238961d1",
+              "document_id": "4787cd495a46393afa7680bfba73f52ec557a87cd8ccd21d654c11259eec35f6",
+              "index_snapshot_id": "27882ce6d3a03ec5fac8cdfe8533824c6fe6c120c13a0ed82efae73e356dd8a0",
+              "maturity": "RESEARCH_ONLY",
+              "namespace": "unknown",
+              "path": "transformer/src/main/java/org/sinytra/connector/transformer/plugin/PluginManager.java",
+              "root_id": "connector-frontier-full-tree",
+              "runtime_status": "NOT_EXECUTED",
+              "stage": "original_source_not_built",
+              "type": "experiment_artifact",
+              "url": "urn:sha256:2304c9b7ea7f48d196a81496555053c7cffcd080cde15a5c4f322dc7238961d1"
+            },
+            "observed_at": "2026-10-01T18:46:32.510196+00:00",
+            "record_type": "evidence",
+            "roles": [
+              "QUALIFIES"
+            ],
+            "source_id": "src:minecraft:990957a859e9d8843cc202c060821aca03dd5b189264362a62fcd70fb158a075",
+            "source_snapshot_id": "ss:minecraft:4216663d8c91daf03140619348ad412067e753f9743fb58fe90b390c55c462f0"
+          },
+          {
+            "id": "ev:minecraft:20104c1d8f2d5fc6bbdbcf89776139f2dfc395490a1bf0fc28e62d4c62df57a7",
+            "locator": {
+              "artifact_hash": "8ad022ef5832c06d34d8ec32980a8b949e173d6536d867ae265126d2f6647445",
+              "availability": "AVAILABLE",
+              "content_hash": "cfd68b8ac9f4da681e5e9fc0fad298e6d9367a189f682ef702a406dba2a4d901",
+              "document_id": "d79767e8f3fe83e7042a327c53cd24aedf386d9af3914eaf9d8058f540dc76e5",
+              "index_snapshot_id": "27882ce6d3a03ec5fac8cdfe8533824c6fe6c120c13a0ed82efae73e356dd8a0",
+              "maturity": "RESEARCH_ONLY",
+              "namespace": "unknown",
+              "path": "transformer/src/main/java/org/sinytra/connector/transformer/api/TransformerPlugin.java",
+              "root_id": "connector-frontier-full-tree",
+              "runtime_status": "NOT_EXECUTED",
+              "stage": "original_source_not_built",
+              "type": "experiment_artifact",
+              "url": "urn:sha256:cfd68b8ac9f4da681e5e9fc0fad298e6d9367a189f682ef702a406dba2a4d901"
+            },
+            "observed_at": "2026-10-01T18:46:32.510196+00:00",
+            "record_type": "evidence",
+            "roles": [
+              "QUALIFIES"
+            ],
+            "source_id": "src:minecraft:990957a859e9d8843cc202c060821aca03dd5b189264362a62fcd70fb158a075",
+            "source_snapshot_id": "ss:minecraft:4216663d8c91daf03140619348ad412067e753f9743fb58fe90b390c55c462f0"
+          },
+          {
+            "id": "ev:minecraft:201c64618d015a58ae75da88be68be38fcdd0b4b43c87cf3efc1405f414868e7",
+            "locator": {
+              "artifact_hash": "8ad022ef5832c06d34d8ec32980a8b949e173d6536d867ae265126d2f6647445",
+              "availability": "AVAILABLE",
+              "content_hash": "61cefaa80795ce1797de26b602e1c2f1fece1cd55fbb88b8d553af3d292f93a8",
+              "document_id": "e01559e5a5db93c2aab21ba62870a9a1770b00f1f4aae9534454999cf785c754",
+              "index_snapshot_id": "27882ce6d3a03ec5fac8cdfe8533824c6fe6c120c13a0ed82efae73e356dd8a0",
+              "maturity": "RESEARCH_ONLY",
+              "namespace": "unknown",
+              "path": "transformer/src/main/java/org/sinytra/connector/transformer/plugin/TransformerRegistrarImpl.java",
+              "root_id": "connector-frontier-full-tree",
+              "runtime_status": "NOT_EXECUTED",
+              "stage": "original_source_not_built",
+              "type": "experiment_artifact",
+              "url": "urn:sha256:61cefaa80795ce1797de26b602e1c2f1fece1cd55fbb88b8d553af3d292f93a8"
+            },
+            "observed_at": "2026-10-01T18:46:32.510196+00:00",
+            "record_type": "evidence",
+            "roles": [
+              "QUALIFIES"
+            ],
+            "source_id": "src:minecraft:990957a859e9d8843cc202c060821aca03dd5b189264362a62fcd70fb158a075",
+            "source_snapshot_id": "ss:minecraft:4216663d8c91daf03140619348ad412067e753f9743fb58fe90b390c55c462f0"
+          },
+          {
+            "created_by": {
+              "actor_id": "connector-static-research",
+              "actor_type": "ai"
+            },
+            "evidence_candidate_ids": [
+              "ev:minecraft:b40d340ad4d62bf0f3956677dad5875387bfb49909e6baeea5fa040d68c0d7d7",
+              "ev:minecraft:20104c1d8f2d5fc6bbdbcf89776139f2dfc395490a1bf0fc28e62d4c62df57a7",
+              "ev:minecraft:201c64618d015a58ae75da88be68be38fcdd0b4b43c87cf3efc1405f414868e7"
+            ],
+            "id": "obs:minecraft:efaa1f934ffec12eee627a34833a06ab1c75571fb6d3d0fc9aca51fd6ff5cd33",
+            "record_type": "staged_observation",
+            "source_id": "src:minecraft:990957a859e9d8843cc202c060821aca03dd5b189264362a62fcd70fb158a075",
+            "status": "NEW",
+            "summary": "Expose ordered transformer extension points with explicit constraints\nSOURCE-BACKED RESEARCH CANDIDATE; application lesson is an inference, not validated guidance.\nRepository: https://github.com/Sinytra/Connector; revision: c84a96a3c04aa4c5253032c338434de5329be08a; track: FRONTIER.\ncondition: Multiple independent transforms and semantic patches need a predictable relationship.\nmechanism: Service-loaded plugins register per-jar transforms and patches through dedicated registrars; ordering constraints and priorities are explicit rather than inferred from discovery order.\ninvariant: A consumer must not run before the producer or semantic precondition it depends on.\nfailure_pattern: Equating plugin discovery order with execution order or collapsing transformer ordering and patch priority into one rule.\napplication: Separate registration from ordering/evaluation and expose dependency constraints in a plugin pipeline.\nlimits: FRONTIER-only API; classloader availability, cycles and exact host integration still matter. This is a redesign candidate, not a direct Forge1.20.1 backport.\nLive runtime testing is outside the requested scope. Runtime compatibility and source-binary equivalence remain UNKNOWN."
+          }
+        ],
+        "title": "Minecraft captured-code observations"
+      }
+    }
+  ],
+  "canonical_writes": 0,
+  "claims_created": 0
+}
