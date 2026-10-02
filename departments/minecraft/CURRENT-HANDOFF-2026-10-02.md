@@ -2,7 +2,8 @@
 
 Date: **2026-10-02**  
 Status: **CURRENT ENTRY POINT — supersedes older files that call themselves "current"**  
-Canonical development line: **PR #74 / `jolly/minecraft-mod-ai-assets-2026-09-28`**
+Canonical development line: **`main`**  
+Confirmed implementation merge: **`8e73ddc23b133e5a075cf58e3c7b850274f21017`**
 
 ## Read this first
 
@@ -60,21 +61,19 @@ At that head:
 
 A follow-up monorepo audit identified and repairs the observer Git-scope issue: observer identity must describe the `departments/minecraft/lab` subtree, not unrelated Tech Hub working-tree changes.
 
-## Branch / PR topology
+## Canonical branch and historical PRs
 
-The current development history is still stacked:
+`main` is now the single authoritative implementation line.
 
-```text
-main
-  └─ #71 Minecraft Technology Department
-      └─ #72 MOD-AI design
-          └─ #73 implementation
-              └─ #74 current MOD-AI + assets + integrated LAB
-```
+The former stacked Minecraft development lineage has been consolidated:
 
-This topology is historical/operational debt, not a second architecture. A fresh agent should use PR #74 as the current implementation line until the stack is deliberately consolidated into `main`.
+- PR #71 is contained in main and recorded as merged;
+- PR #72 and PR #73 are closed as historical review checkpoints, superseded by the final integrated line;
+- PR #74 was retargeted directly to main and merged as `8e73ddc23b133e5a075cf58e3c7b850274f21017`.
 
-The Bedrock Wither artifact work is PR #75. It must follow the current PR #74 line rather than an obsolete pre-integration LAB base.
+A fresh agent must start from `main`, not from the former #71–#74 branch stack.
+
+The Bedrock Wither artifact work remains separate in PR #75 and is now based directly on `main`. It is not part of the confirmed general Tech Hub/MOD-AI/LAB baseline until separately accepted.
 
 ## Data and publication boundary
 
@@ -94,4 +93,4 @@ The relevant ignore rules remain under the repository root and `departments/mine
 
 Do not recreate the LAB as another repository, add a second MOD-AI database, weaken evidence/authority gates, retry uncertain mutations, merge version/loader tracks, or treat historical RED/UNKNOWN records as obsolete mistakes.
 
-Start from the current PR #74 head, inspect this handoff, then use the specific dated evidence/acceptance document for the subsystem being changed.
+Start from `main`, inspect this handoff, then use the specific dated evidence/acceptance document for the subsystem being changed.
