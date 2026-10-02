@@ -2,12 +2,15 @@
   "format": "kneekura.product-gametest-evidence.v1",
   "deliverable": "minecraft/bedrock-wither",
   "recorded_at": "2026-10-02",
-  "source_commit": "e695c5a7781e9b5e60bb98d7f05612a1ff4e95bd",
-  "workflow": {
-    "name": "Bedrock Wither build",
-    "run_id": 36982431025,
-    "job_id": 110760130697,
-    "outcome": "SUCCESS"
+  "latest_accepted": {
+    "source_commit": "94b26ab743998e6aa3227a3f331c7363cbae78d9",
+    "workflow_run_id": 36986672495,
+    "job_id": 110773581402,
+    "outcome": "SUCCESS",
+    "required_tests": 11,
+    "passed": 11,
+    "failed": 0,
+    "server_log_summary": "All 11 required tests passed :)"
   },
   "environment": {
     "minecraft": "1.20.1",
@@ -17,31 +20,31 @@
     "gradle": "8.1.1",
     "runner": "github-hosted-ubuntu"
   },
-  "game_test_result": {
-    "namespace": "kneekura_bedrock_wither",
-    "required_tests": 4,
-    "passed": 4,
-    "failed": 0,
-    "server_log_summary": "All 4 required tests passed :)"
-  },
   "assertion_scope": [
-    "custom Bedrock Wither entity collision dimensions 1.0 x 3.0 and follow range 70",
-    "initial reconstruction state and three BDS-style head runtime slots",
-    "undead-source mob damage is rejected without reducing health",
-    "three alternative head target UUID slots round-trip independently",
-    "normal and dangerous custom skull identities remain distinct",
-    "dangerous skull alone exposes the current reflect_on_hurt gate",
-    "custom skull collision width is 0.15"
+    "official entity collision dimensions/follow range/undead family and initial three-head state",
+    "undead-source damage rejection",
+    "three independent alternative head-target slots",
+    "normal/dangerous skull identity and dangerous-only reflection gate",
+    "Bedrock skull entity hit does not leak Java direct impact damage and applies difficulty-specific Wither II",
+    "center-head 3-normal + 1-dangerous projectile order",
+    "half-health one-shot phase transition and phase-2 projectile immunity",
+    "range-1 4x6x4 and range-2 6x8x6 destruction candidate geometry",
+    "phase-1 hurt reaction countdown does not reset and emits one dangerous skull",
+    "phase-2 dash execution lasts exactly 20 controller ticks",
+    "ordinary status effects are rejected while instant heal/harm processing remains allowed"
   ],
   "not_proven": [
-    "Bedrock phase parity",
-    "skull impact/explosion/effect parity",
+    "direct current-Bedrock parity",
+    "exact phase-1 reposition algorithm",
+    "exact current shot cadence/health-speedup equation",
+    "exact passive dangerous-skull interval",
     "exact dangerous-skull reflection vector",
-    "phase-1 movement/reposition parity",
-    "shot cadence or volley parity",
-    "charge/dash parity",
-    "block-destruction parity",
-    "client rendering parity",
-    "direct Bedrock comparative parity"
+    "exact current transition explosion power/order",
+    "dash preparation trigger and movement speed",
+    "current per-attack block exclusion differences",
+    "spawn duration",
+    "shield/armor timing",
+    "death timing and visual equations",
+    "client visual acceptance in Tank"
   ]
 }
