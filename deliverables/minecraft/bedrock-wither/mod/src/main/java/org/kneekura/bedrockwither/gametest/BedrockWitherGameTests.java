@@ -153,6 +153,34 @@ public final class BedrockWitherGameTests {
         helper.succeed();
     }
 
+    @GameTest(template = "empty", timeoutTicks = 40)
+    public static void centerHeadSequenceIsThreeNormalThenDangerous(GameTestHelper helper) {
+        BedrockWitherEntity wither = createWither(helper);
+
+        BedrockWitherSkullEntity.Kind[] expected = {
+                BedrockWitherSkullEntity.Kind.NORMAL,
+                BedrockWitherSkullEntity.Kind.NORMAL,
+                BedrockWitherSkullEntity.Kind.NORMAL,
+                BedrockWitherSkullEntity.Kind.DANGEROUS,
+                BedrockWitherSkullEntity.Kind.NORMAL
+        };
+
+        for (int i = 0; i < expected.length; i++) {
+            BedrockWitherSkullEntity.Kind actual = wither.attackController().nextCenterSkullKind();
+            if (actual != expected[i]) {
+                helper.fail("Center-head projectile " + (i + 1)
+                        + " expected " + expected[i] + " but was " + actual);
+                return;
+            }
+        }
+
+        if (wither.runtimeState().projectileCounter() != expected.length) {
+            helper.fail("Projectile counter did not retain the Bedrock volley sequence state");
+            return;
+        }
+        helper.succeed();
+    }
+
     private static BedrockWitherEntity createWither(GameTestHelper helper) {
         BedrockWitherEntity wither = ModEntities.BEDROCK_WITHER.get().create(helper.getLevel());
         if (wither == null) {
