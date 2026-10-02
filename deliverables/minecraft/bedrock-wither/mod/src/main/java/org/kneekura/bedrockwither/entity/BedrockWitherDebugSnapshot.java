@@ -18,6 +18,8 @@ public record BedrockWitherDebugSnapshot(
         int threatLedgerSize,
         List<BedrockWitherHeadDebugSnapshot> heads,
         int nativePhase,
+        boolean aerialAttack,
+        boolean shieldPowered,
         boolean wantsToExplode,
         boolean charging,
         double chargeDirectionX,
