@@ -20,7 +20,7 @@ Statuses:
 | BEStyleWither constants | REJECTED | none | Not evidence of exact Bedrock values. |
 | BEStyleWither vanilla-Wither Mixin architecture | REJECTED | none | Risks Java AI leakage and attribution ambiguity. |
 | KNEEKURA Tank observation pipeline | ADOPTED_CONCEPT | bounded comparative verification | Infrastructure remains owned outside this deliverable. |
-| KNEEKURA Failure/Repair History format | ADOPTED_CONCEPT | own regression/repair records | Product incidents use `origin=OWN_DEVELOPMENT`. |
+| KNEEKURA Failure/Repair History format | ADOPTED_CONCEPT | own regression/repair records | Product incidents use `origin=OWN_DEVELOPMENT`. |\n| Vanilla death lifecycle semantics | ADOPTED_CONCEPT | preserve killer/death-event identity while extending visuals | BEStyleWither Issue #4 demonstrates compatibility failure when a boss is artificially held alive for a delayed death effect. |
 
 ## Rule for future adoption
 
