@@ -296,6 +296,11 @@ public final class BedrockWitherGameTests {
         BedrockWitherEntity wither = createCombatReadyWither(helper);
 
         helper.runAfterDelay(2, () -> {
+            if (!wither.isAerialAttack() || wither.isPowered()) {
+                helper.fail("Phase 1 should have AirAttack=1 and powered shield hidden");
+                return;
+            }
+
             int threshold = wither.runtimeState().healthThreshold();
             if (threshold <= 0) {
                 helper.fail("Difficulty health initialization did not establish half-health threshold");
@@ -308,6 +313,10 @@ public final class BedrockWitherGameTests {
                 if (wither.runtimeState().nativePhase()
                         != org.kneekura.bedrockwither.entity.BedrockWitherPhaseController.secondPhaseNativeId()) {
                     helper.fail("Half-health transition did not enter native phase 0");
+                    return;
+                }
+                if (wither.isAerialAttack() || !wither.isPowered()) {
+                    helper.fail("Phase 2 should have AirAttack=0 and powered shield visible");
                     return;
                 }
                 if (wither.getBedrockState() != BedrockWitherState.PHASE2_DASH_PREP) {
