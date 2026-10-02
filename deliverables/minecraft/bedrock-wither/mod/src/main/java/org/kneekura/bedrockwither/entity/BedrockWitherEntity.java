@@ -22,7 +22,9 @@ import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.kneekura.bedrockwither.entity.ai.BedrockHighestDamageTargetGoal;
@@ -56,6 +58,7 @@ public final class BedrockWitherEntity extends Monster {
     private final BedrockWitherThreatLedger threatLedger = new BedrockWitherThreatLedger();
     private final BedrockWitherRuntimeState runtimeState = new BedrockWitherRuntimeState();
     private final BedrockWitherAttackController attackController;
+    private final BedrockWitherPhaseController phaseController;
     private final Set<ServerPlayer> trackingBossPlayers = new HashSet<>();
 
     private boolean difficultyHealthInitialized;
@@ -64,6 +67,8 @@ public final class BedrockWitherEntity extends Monster {
         super(type, level);
         this.stateMachine = new BedrockWitherStateMachine(this);
         this.attackController = new BedrockWitherAttackController(this);
+        this.phaseController = new BedrockWitherPhaseController(this);
+        this.runtimeState.setNativePhase(BedrockWitherPhaseController.firstPhaseNativeId());
         this.bossEvent.setDarkenScreen(true);
         // Bedrock wither.json exposes movement.basic max_turn 180. The Java
         // FlyingMoveControl is an adaptation layer, but the exposed turn cap is kept exact.
@@ -126,8 +131,11 @@ public final class BedrockWitherEntity extends Monster {
 
     private boolean isBedrockNearestTargetCandidate(LivingEntity candidate) {
         // Bedrock target filter accepts players and non-undead/non-inanimate targets.
-        // Java LivingEntity already excludes inanimate entities from this candidate class.
-        return candidate != this && candidate.getMobType() != MobType.UNDEAD;
+        // ArmorStand is a Java LivingEntity but is the clearest Java analogue of
+        // Bedrock's inanimate family and must not enter the generic target branch.
+        return candidate != this
+                && !(candidate instanceof ArmorStand)
+                && candidate.getMobType() != MobType.UNDEAD;
     }
 
     @Override
@@ -140,6 +148,7 @@ public final class BedrockWitherEntity extends Monster {
         }
 
         this.stateMachine.tick();
+        this.phaseController.tick();
         this.bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
         updateBossBarPlayers();
     }
@@ -159,11 +168,18 @@ public final class BedrockWitherEntity extends Monster {
             maxHealthAttribute.setBaseValue(maxHealth);
         }
         this.setHealth((float) maxHealth);
+        this.phaseController.initializeForCurrentDifficulty();
     }
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
         Entity attacker = source.getEntity();
+
+        // Current Bedrock phase 2 rejects projectile damage. Keep this separate
+        // from the undead family damage sensor so each contract can be tested.
+        if (phaseController.isSecondPhase() && source.getDirectEntity() instanceof Projectile) {
+            return false;
+        }
 
         // Bedrock wither.json damage_sensor: undead damage deals no damage.
         if (attacker instanceof LivingEntity livingAttacker
@@ -239,6 +255,10 @@ public final class BedrockWitherEntity extends Monster {
 
     public BedrockWitherAttackController attackController() {
         return attackController;
+    }
+
+    public BedrockWitherPhaseController phaseController() {
+        return phaseController;
     }
 
     public BedrockWitherDebugSnapshot debugSnapshot() {
@@ -349,6 +369,11 @@ public final class BedrockWitherEntity extends Monster {
         tag.putInt("BedrockState", getBedrockState().id());
         tag.putLong("StateEnteredGameTime", stateMachine.enteredAtGameTime());
         tag.putBoolean("DifficultyHealthInitialized", difficultyHealthInitialized);
+        tag.putInt("NativePhase", runtimeState.nativePhase());
+        tag.putInt("HealthThreshold", runtimeState.healthThreshold());
+        tag.putBoolean("WantsToExplode", runtimeState.wantsToExplode());
+        tag.putInt("NumSkeletons", runtimeState.numSkeletons());
+        tag.putInt("MaxSkeletons", runtimeState.maxSkeletons());
     }
 
     @Override
@@ -357,5 +382,19 @@ public final class BedrockWitherEntity extends Monster {
         BedrockWitherState restoredState = BedrockWitherState.fromId(tag.getInt("BedrockState"));
         stateMachine.restore(restoredState, tag.getLong("StateEnteredGameTime"));
         difficultyHealthInitialized = tag.getBoolean("DifficultyHealthInitialized");
+
+        if (tag.contains("NativePhase")) {
+            runtimeState.setNativePhase(tag.getInt("NativePhase"));
+        } else {
+            runtimeState.setNativePhase(BedrockWitherPhaseController.firstPhaseNativeId());
+        }
+        if (tag.contains("HealthThreshold")) {
+            runtimeState.setHealthThreshold(tag.getInt("HealthThreshold"));
+        } else {
+            runtimeState.setHealthThreshold(Math.round(this.getMaxHealth()) / 2);
+        }
+        runtimeState.setWantsToExplode(tag.getBoolean("WantsToExplode"));
+        runtimeState.setNumSkeletons(tag.getInt("NumSkeletons"));
+        runtimeState.setMaxSkeletons(tag.getInt("MaxSkeletons"));
     }
 }
