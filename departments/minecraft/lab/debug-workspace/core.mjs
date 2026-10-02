@@ -432,7 +432,7 @@ async function readReadyWhenAvailable(file, expected, timeoutMs, childState) {
 }
 
 
-async function inspectGitWorkspace(workspaceDir) {
+export async function inspectGitWorkspace(workspaceDir) {
   const head = await collectProcess('git', ['-C', workspaceDir, 'rev-parse', 'HEAD']);
   if (!head.ok || !head.stdout) {
     return {
@@ -445,7 +445,7 @@ async function inspectGitWorkspace(workspaceDir) {
     collectProcess('git', ['-C', workspaceDir, 'rev-parse', '--abbrev-ref', 'HEAD']),
     collectProcess(
       'git',
-      ['-C', workspaceDir, 'status', '--porcelain=v1', '--untracked-files=all']
+      ['-C', workspaceDir, 'status', '--porcelain=v1', '--untracked-files=all', '--', '.']
     ),
     collectProcess(
       'git',
@@ -453,7 +453,7 @@ async function inspectGitWorkspace(workspaceDir) {
     ),
     collectProcess(
       'git',
-      ['-C', workspaceDir, 'ls-files', '--others', '--exclude-standard']
+      ['-C', workspaceDir, 'ls-files', '--others', '--exclude-standard', '--', '.']
     ),
   ]);
 
