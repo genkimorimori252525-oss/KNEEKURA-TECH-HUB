@@ -40,12 +40,15 @@ public final class BedrockWitherEntity extends Monster {
 
     private final BedrockWitherStateMachine stateMachine;
     private final BedrockWitherThreatLedger threatLedger = new BedrockWitherThreatLedger();
+    private final BedrockWitherRuntimeState runtimeState = new BedrockWitherRuntimeState();
+    private final BedrockWitherAttackController attackController;
 
     private boolean difficultyHealthInitialized;
 
     public BedrockWitherEntity(EntityType<? extends Monster> type, Level level) {
         super(type, level);
         this.stateMachine = new BedrockWitherStateMachine(this);
+        this.attackController = new BedrockWitherAttackController(this);
         // Bedrock wither.json exposes movement.basic max_turn 180. The Java
         // FlyingMoveControl is an adaptation layer, but the exposed turn cap is kept exact.
         this.moveControl = new FlyingMoveControl(this, 180, true);
@@ -183,8 +186,17 @@ public final class BedrockWitherEntity extends Monster {
         return threatLedger;
     }
 
+    public BedrockWitherRuntimeState runtimeState() {
+        return runtimeState;
+    }
+
+    public BedrockWitherAttackController attackController() {
+        return attackController;
+    }
+
     public BedrockWitherDebugSnapshot debugSnapshot() {
         Vec3 velocity = this.getDeltaMovement();
+        Vec3 chargeDirection = runtimeState.chargeDirection();
         return new BedrockWitherDebugSnapshot(
                 this.getId(),
                 getBedrockState(),
@@ -198,7 +210,34 @@ public final class BedrockWitherEntity extends Monster {
                 velocity.x,
                 velocity.y,
                 velocity.z,
-                threatLedger.size()
+                threatLedger.size(),
+                runtimeState.nativePhase(),
+                runtimeState.wantsToExplode(),
+                runtimeState.charging(),
+                chargeDirection.x,
+                chargeDirection.y,
+                chargeDirection.z,
+                runtimeState.chargeFrames(),
+                runtimeState.preparingCharge(),
+                runtimeState.projectileCounter(),
+                runtimeState.spawningFrames(),
+                runtimeState.timeTillNextShot(),
+                runtimeState.fireRate(),
+                runtimeState.stunTimer(),
+                runtimeState.framesTillMove(),
+                runtimeState.wantsMove(),
+                runtimeState.pathing(),
+                runtimeState.numSkeletons(),
+                runtimeState.maxSkeletons(),
+                runtimeState.movementTime(),
+                runtimeState.healthIntervals(),
+                runtimeState.lastHealthValue(),
+                runtimeState.delayShot(),
+                runtimeState.timeSinceLastShot(),
+                runtimeState.attackRange(),
+                runtimeState.secondVolley(),
+                runtimeState.mainHeadAttackCountdown(),
+                runtimeState.lastFiredHead()
         );
     }
 
