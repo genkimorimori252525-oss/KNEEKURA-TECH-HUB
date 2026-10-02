@@ -3,8 +3,6 @@ package org.kneekura.bedrockwither.entity.projectile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -91,28 +89,13 @@ public final class BedrockWitherSkullEntity extends WitherSkull {
 
     @Override
     protected void onHitEntity(EntityHitResult hitResult) {
-        // Do NOT call WitherSkull.onHitEntity(): Java adds 8/5 direct impact damage
-        // and owner healing on kill. Current Bedrock wither_skull definitions expose
-        // no impact_damage component; their entity-hit contract is the Wither effect
-        // plus the projectile's immediate power-1 explosion handled by onHit().
-        if (this.level().isClientSide) {
-            return;
-        }
-
-        if (hitResult.getEntity() instanceof LivingEntity target) {
-            int duration = switch (this.level().getDifficulty()) {
-                case PEACEFUL, EASY -> 0;
-                case NORMAL -> 200;
-                case HARD -> 800;
-            };
-
-            if (duration > 0) {
-                target.addEffect(
-                        new MobEffectInstance(MobEffects.WITHER, duration, 1),
-                        this.getEffectSource()
-                );
-            }
-        }
+        // Bedrock's public projectile JSON omits impact_damage, but the native
+        // WitherSkull runtime path is not JSON-only. Historical Bedrock native
+        // code retains owner kill-heal and Wither-effect handling, while current
+        // gameplay reports 5/8/12 impact damage by difficulty. Java 1.20.1's
+        // WitherSkull base-8 owner hit path produces that difficulty-scaled
+        // contract and the same 10s/40s Wither II durations, so reuse it here.
+        super.onHitEntity(hitResult);
     }
 
     @Override
