@@ -1,5 +1,7 @@
 package org.kneekura.bedrockwither.entity;
 
+import java.util.List;
+
 public record BedrockWitherDebugSnapshot(
         int entityId,
         BedrockWitherState state,
@@ -14,6 +16,7 @@ public record BedrockWitherDebugSnapshot(
         double velocityY,
         double velocityZ,
         int threatLedgerSize,
+        List<BedrockWitherHeadDebugSnapshot> heads,
         int nativePhase,
         boolean wantsToExplode,
         boolean charging,
