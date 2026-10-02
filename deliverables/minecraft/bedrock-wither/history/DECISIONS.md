@@ -38,3 +38,15 @@ Date: 2026-10-02
 Status: ACTIVE
 
 Decision: BEStyleWither is studied for architecture and failure history. Its source is not copied into the product unless a later explicit license/reuse decision says otherwise.
+
+
+## BWR-D006 — death visuals must preserve semantic death
+
+Date: 2026-10-02  
+Status: ACTIVE
+
+Decision: Bedrock-style delayed death visuals/explosion may extend rendering and removal timing, but the killing hit must enter the normal semantic death lifecycle and preserve killer attribution/event compatibility.
+
+Evidence lead: BEStyleWither Issue #4 and repair commit `3c519d708fb1856f4661a3670aad36a6be9353da`.
+
+Acceptance consequence: later death implementation must test `isDeadOrDying`, kill credit/events, loot and advancement-compatible attribution before visual parity is accepted.
