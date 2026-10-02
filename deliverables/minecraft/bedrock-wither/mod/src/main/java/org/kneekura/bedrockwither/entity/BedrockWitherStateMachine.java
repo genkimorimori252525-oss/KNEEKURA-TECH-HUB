@@ -10,8 +10,13 @@ public final class BedrockWitherStateMachine {
     }
 
     public void tick() {
-        // M1 intentionally owns state timing before it owns phase behavior.
-        // Phase transitions are added only with an explicit evidence-backed contract.
+        // Spawn duration is still a direct-measurement target. The native-shaped
+        // spawningFrames slot is already authoritative for this gate: a positive
+        // value keeps SPAWN_SEQUENCE active; zero means combat may begin.
+        if (owner.getBedrockState() == BedrockWitherState.SPAWN_SEQUENCE
+                && owner.runtimeState().spawningFrames() <= 0) {
+            enter(BedrockWitherState.PHASE1_REPOSITION);
+        }
     }
 
     public void enter(BedrockWitherState next) {
