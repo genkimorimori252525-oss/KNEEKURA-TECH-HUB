@@ -84,6 +84,7 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
     private final BedrockWitherSpawnController spawnController;
     private final BedrockWitherDeathController deathController;
     private final BedrockWitherSpecialMovementController specialMovementController;
+    private final BedrockWitherSideHeadController sideHeadController;
     private final Set<ServerPlayer> trackingBossPlayers = new HashSet<>();
 
     private boolean difficultyHealthInitialized;
@@ -100,6 +101,7 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
         this.spawnController = new BedrockWitherSpawnController(this);
         this.deathController = new BedrockWitherDeathController(this);
         this.specialMovementController = new BedrockWitherSpecialMovementController(this);
+        this.sideHeadController = new BedrockWitherSideHeadController(this);
         this.runtimeState.setNativePhase(BedrockWitherPhaseController.firstPhaseNativeId());
         this.spawnController.initializeNewEntity();
         this.bossEvent.setDarkenScreen(true);
@@ -210,6 +212,7 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
         this.dashController.tick();
         this.volleyController.tick();
         this.specialMovementController.tick();
+        this.sideHeadController.tick();
         this.bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
         updateBossBarPlayers();
     }
@@ -449,6 +452,10 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
 
     public BedrockWitherSpecialMovementController specialMovementController() {
         return specialMovementController;
+    }
+
+    public BedrockWitherSideHeadController sideHeadController() {
+        return sideHeadController;
     }
 
     public BedrockWitherDebugSnapshot debugSnapshot() {
