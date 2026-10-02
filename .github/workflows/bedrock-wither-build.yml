@@ -1,7 +1,7 @@
 name: Bedrock Wither build
 
 concurrency:
-  group: bedrock-wither-${{ github.workflow }}-${{ github.ref }}
+  group: bedrock-wither-${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
 
 on:
