@@ -522,7 +522,7 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
         runtimeState.setProjectileCounter(tag.getInt("ProjectileCounter"));
         runtimeState.setFireRate(tag.getInt("FireRate"));
         runtimeState.setHealthIntervals(tag.getInt("HealthIntervals"));
-        runtimeState.setLastHealthValue(tag.getInt("LastHealthValue"));
+        volleyController.restoreLastHealthInterval(tag.getInt("LastHealthValue"));
         runtimeState.setDelayShot(tag.getInt("DelayShot"));
         runtimeState.setTimeSinceLastShot(tag.getInt("TimeSinceLastShot"));
         runtimeState.setMainHeadAttackCountdown(tag.getInt("MainHeadAttackCountdown"));
