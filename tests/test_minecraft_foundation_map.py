@@ -6,6 +6,7 @@ from pathlib import Path
 import pytest
 
 from test_minecraft_storage import manifest
+from test_minecraft_cli import run_cli
 
 
 def mod(name):
@@ -170,3 +171,29 @@ def test_foundation_map_preserves_conflicting_class_origins(tmp_path):
     item = inspected["results"][0]
     assert item["variant_count"] == 2
     assert len({v["content_hash"] for v in item["variants"]}) == 2
+
+
+def test_foundation_map_public_cli_roundtrip(foundation):
+    store, prepared, _ = foundation
+    proc, built = run_cli(
+        store.root, "foundation-map", "build",
+        "--index", prepared["index_snapshot_id"]
+    )
+    assert proc.returncode == 0, proc.stderr
+    map_id = built["foundation_map_id"]
+    proc, found = run_cli(
+        store.root, "foundation-map", "search",
+        "--map", map_id, "--query", "Pathfinding"
+    )
+    assert proc.returncode == 0, proc.stderr
+    assert any(
+        row["owner"] == "net/minecraft/client/renderer/debug/PathfindingRenderer"
+        for row in found["results"]
+    )
+    proc, inspected = run_cli(
+        store.root, "foundation-map", "inspect",
+        "--map", map_id,
+        "--owner", "net/minecraft/client/renderer/debug/DebugRenderer"
+    )
+    assert proc.returncode == 0, proc.stderr
+    assert inspected["results"][0]["relations"]["outgoing_total"] >= 1
