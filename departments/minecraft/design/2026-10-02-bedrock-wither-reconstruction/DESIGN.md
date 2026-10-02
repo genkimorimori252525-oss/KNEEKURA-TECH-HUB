@@ -230,3 +230,38 @@ The KNEEKURA implementation itself lives at:
 `deliverables/minecraft/bedrock-wither/mod/`
 
 Product status, adoption decisions, own development history and product evidence live beside that source under `deliverables/minecraft/bedrock-wither/`. This separation is permanent and applies even if the MOD later becomes the largest active Minecraft task.
+
+
+## Death runtime design — current BDS ECS boundary
+
+Current BDS does not model Wither death visuals as one boolean or only as fields on `WitherBoss`. Dedicated server/client Wither death systems operate on ECS-style components.
+
+KNEEKURA must mirror that separation:
+
+```
+semantic entity death
+        |
+        +-- BedrockWitherDeathController
+        |     - owns semantic death-sequence entry
+        |     - preserves killer/death-event/loot attribution
+        |
+        +-- DeathTicking state
+        |     - remaining ticks (TBD current measurement)
+        |     - Wither death type
+        |     - XP-spawned latch
+        |
+        +-- Death visual state
+              - swell amount
+              - previous swell amount
+              - shield flicker
+              - overlay alpha
+```
+
+Rules:
+- never hold the boss semantically alive at 1 HP merely to play the animation;
+- `dyingFrames`/death ticks must be synchronized/persisted independently from visual interpolation values;
+- final explosion power is a separate acceptance value;
+- XP/nether-star/kill-credit semantics are verified separately from visual timing;
+- no exact dying-frame count is hardcoded until current Bedrock evidence closes it.
+
+The existing BEStyleWither Issue #4 failure remains a useful compatibility warning, but current BDS death ECS is the architectural authority.
