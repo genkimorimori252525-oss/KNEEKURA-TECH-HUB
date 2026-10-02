@@ -18,6 +18,8 @@ import org.kneekura.bedrockwither.entity.BedrockWitherHeadRuntime;
 public final class BedrockWitherModel extends HierarchicalModel<BedrockWitherEntity> {
     public static final ModelLayerLocation LAYER_LOCATION =
             new ModelLayerLocation(new ResourceLocation(BedrockWitherMod.MOD_ID, "bedrock_wither"), "main");
+    public static final ModelLayerLocation ARMOR_LAYER_LOCATION =
+            new ModelLayerLocation(new ResourceLocation(BedrockWitherMod.MOD_ID, "bedrock_wither"), "armor");
 
     private final ModelPart root;
     private final ModelPart ribcage;
