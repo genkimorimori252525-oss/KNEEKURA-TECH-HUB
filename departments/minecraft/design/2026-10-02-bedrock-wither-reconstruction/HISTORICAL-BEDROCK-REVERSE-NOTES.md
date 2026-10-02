@@ -213,3 +213,68 @@ Still unresolved:
 - current charge preparation/duration/speed;
 - current phase transition action tick ordering;
 - exact current explosion power confirmation from BDS 1.26.51.1 binary body.
+
+
+## Hurt-reaction and charge destruction geometry
+
+Historical native server code calls the Wither block-destruction routine with different integer ranges:
+
+- hurt reaction: `destroyBlocks(..., range=1)`
+- active charge: `destroyBlocks(..., range=2)`
+
+Current BDS independently changed the public native boundary into:
+`_destroyBlocks(..., int range, WitherAttackType attackType)`,
+with separate `HurtExplosion` and `Charge` attack types.
+
+Using the current official Bedrock Wither collision box (width 1, height 3), the historical inclusive integer block iteration yields:
+
+- AABB inflated by 1: 4 × 6 × 4 = 96 candidate block positions
+- AABB inflated by 2: 6 × 8 × 6 = 288 candidate block positions
+
+Current Bedrock Wiki runtime observation independently reports exactly:
+- 4×6×4 for the delayed hurt break
+- 6×8×6 per charge tick
+
+This is unusually strong cross-layer reconstruction evidence because the **geometry falls out of the native range parameter and official collision box**, rather than being copied from the Wiki as an arbitrary cuboid.
+
+KNEEKURA therefore accepts these two destruction geometries.
+
+## Hurt-reaction timer
+
+Historical `_hurt` only arms the destruction countdown if it is not already active and assigns 20 ticks.
+
+Current Bedrock Wiki independently reports that the phase-1 block-break reaction occurs 20 game ticks after the attack.
+
+KNEEKURA accepts:
+- delay = 20 ticks
+- repeated accepted hits do not reset an already-active timer
+- second phase does not run the ordinary hurt-break reaction
+
+The current Wiki also reports one dangerous skull fired as part of the reaction. Exact current native aim/fallback selection is not exposed. KNEEKURA temporarily stores the triggering attacker and aims at it when still valid; that targeting policy remains an explicit adaptation target.
+
+## Charge execution body
+
+Historical native code shows the active charge loop:
+- stores a charge direction;
+- uses a dedicated charge frame/timer;
+- performs range-2 block destruction while charging;
+- applies 15 damage to nearby entities.
+
+Current BDS still exposes:
+- `mCharging`
+- `mChargeDirection`
+- `mChargeFrames`
+- `mPreparingCharge`
+
+Current Bedrock Wiki independently reports approximately 20 game ticks for active charge and range-2-derived 6×8×6 destruction every tick.
+
+KNEEKURA accepts:
+- active charge duration = 20 ticks
+- charge destruction = range 2 every active tick
+- charge entity damage = 15
+
+Still measurement-gated:
+- preparation duration / trigger
+- exact current movement speed
+- collision termination nuances
+- repeated-hit semantics for an entity remaining inside the charge damage volume
