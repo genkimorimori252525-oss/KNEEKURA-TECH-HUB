@@ -12,6 +12,7 @@ public final class BedrockWitherRenderer extends MobRenderer<BedrockWitherEntity
 
     public BedrockWitherRenderer(EntityRendererProvider.Context context) {
         super(context, new BedrockWitherModel(context.bakeLayer(BedrockWitherModel.LAYER_LOCATION)), 1.0F);
+        this.addLayer(new BedrockWitherArmorLayer(this, context.getModelSet()));
     }
 
     @Override
