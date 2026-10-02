@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 const HERE=path.dirname(fileURLToPath(import.meta.url));
 const index=fs.readFileSync(path.join(HERE,'index.html'),'utf8');
 const store=fs.readFileSync(path.join(HERE,'store.js'),'utf8');
+const serve=fs.readFileSync(path.join(HERE,'..','serve.mjs'),'utf8');
 
 test('motion trace Viewer is OFF by default and requires explicit Mob selection',()=>{
   assert.match(index,/id="trail"[^>]*value="0"/);
@@ -16,12 +17,13 @@ test('motion trace Viewer is OFF by default and requires explicit Mob selection'
   assert.match(index,/function selectedTraceEntity\(\)/);
 });
 
-test('selected Mob trace reads retained samples rather than forward-filled at(t)',()=>{
+test('selected Mob trace uses the same SampledMotionTrace contract as AI output',()=>{
   assert.match(store,/samples:\s*\(startTick, endTick, limit\)/);
   assert.match(store,/SIMLAB_POS_RETAINED_POINT/);
-  const uses=(index.match(/typeof tr\.samples==='function'/g)||[]).length;
-  assert.ok(uses>=2,'F3 and plan/elevation must both consume retained samples');
-  assert.match(index,/tr\.samples\(Math\.max\(t0,tr\.t0\),Math\.min\(T\.tick,tr\.t1\),4096\)/);
+  assert.match(index,/import\('\/motion-trace\.mjs'\)/);
+  assert.match(index,/MOTION_TRACE\.buildTraceFromSimStore\(/);
+  assert.ok((index.match(/motion\.segments/g)||[]).length>=2,'F3 and plan/elevation must render contract segments');
+  assert.match(serve,/u\.pathname === '\/motion-trace\.mjs'/);
 });
 
 test('Mob and projectile traces have non-color visual distinction',()=>{
