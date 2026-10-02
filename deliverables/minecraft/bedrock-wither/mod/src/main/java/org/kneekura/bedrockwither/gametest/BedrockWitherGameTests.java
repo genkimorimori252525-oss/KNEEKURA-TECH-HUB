@@ -560,6 +560,10 @@ public final class BedrockWitherGameTests {
 
         BlockPos targetPos = helper.absolutePos(new BlockPos(4, 1, 0));
         target.moveTo(targetPos.getX() + 0.5D, targetPos.getY(), targetPos.getZ() + 0.5D);
+        // Other Wither GameTests run in the same GameTest world. Make this
+        // controller-test target invulnerable so neighboring bosses/explosions
+        // cannot invalidate the target before the synchronous assertion.
+        target.setInvulnerable(true);
         helper.getLevel().addFreshEntity(target);
 
         helper.runAfterDelay(2, () -> {
@@ -577,6 +581,11 @@ public final class BedrockWitherGameTests {
             if (wither.runtimeState().fireRate()
                     != org.kneekura.bedrockwither.entity.BedrockWitherVolleyController.PROVISIONAL_NATIVE_BASE_FIRE_RATE_TICKS) {
                 helper.fail("Volley controller did not initialize provisional native fireRate=20");
+                return;
+            }
+
+            if (!target.isAlive()) {
+                helper.fail("Isolated volley target was not alive before manual controller tick");
                 return;
             }
 
@@ -653,12 +662,14 @@ public final class BedrockWitherGameTests {
                 return;
             }
 
-            wither.setHealth(499.0F);
+            int maxHealth = Math.round(wither.getMaxHealth());
+            int firstLow = Math.max(1, maxHealth - 1);
+            wither.setHealth(firstLow);
             wither.volleyController().onAcceptedDamage();
 
-            int expected499 = org.kneekura.bedrockwither.entity.BedrockWitherVolleyController
-                    .lastHealthIntervalFor(499);
-            if (wither.runtimeState().lastHealthValue() != expected499) {
+            int expectedFirst = org.kneekura.bedrockwither.entity.BedrockWitherVolleyController
+                    .lastHealthIntervalFor(firstLow);
+            if (wither.runtimeState().lastHealthValue() != expectedFirst) {
                 helper.fail("lastHealthInterval did not track the strict-lower 75-point bucket");
                 return;
             }
@@ -670,16 +681,17 @@ public final class BedrockWitherGameTests {
             // Healing must not increase the stored lowest-health interval.
             wither.setHealth(wither.getMaxHealth());
             wither.volleyController().onAcceptedDamage();
-            if (wither.runtimeState().lastHealthValue() != expected499) {
+            if (wither.runtimeState().lastHealthValue() != expectedFirst) {
                 helper.fail("Healing incorrectly increased Bedrock lastHealthInterval");
                 return;
             }
 
-            wither.setHealth(401.0F);
+            int secondLow = Math.max(1, expectedFirst - 1);
+            wither.setHealth(secondLow);
             wither.volleyController().onAcceptedDamage();
-            int expected401 = org.kneekura.bedrockwither.entity.BedrockWitherVolleyController
-                    .lastHealthIntervalFor(401);
-            if (wither.runtimeState().lastHealthValue() != expected401) {
+            int expectedSecond = org.kneekura.bedrockwither.entity.BedrockWitherVolleyController
+                    .lastHealthIntervalFor(secondLow);
+            if (wither.runtimeState().lastHealthValue() != expectedSecond) {
                 helper.fail("Further damage did not lower lastHealthInterval monotonically");
                 return;
             }
