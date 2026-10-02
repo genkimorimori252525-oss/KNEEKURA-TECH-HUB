@@ -3,11 +3,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node simlab/network-selftest.mjs && node simlab/m6-acceptance-selftest.mjs && node simlab/palette-selftest.mjs && node simlab/palette-live-selftest.mjs && node simlab/viewer-smoke.mjs && node simlab/schema-check.mjs simlab/fixtures --coverage && npm run test:contracts && npm run test:renderpack && npm run test:renderframe && npm run test:thinviewer && npm run test:golden && npm run test:debug-workspace && npm run test:g2-evidence && npm run test:bridge-foundation && npm run test:visual-capture && npm run test:visual-evidence && npm run test:result-export && npm run test:bridge-owner-prelaunch && npm run test:bridge-owner-control",
+    "test": "npm run test:motion-decision && node simlab/network-selftest.mjs && node simlab/m6-acceptance-selftest.mjs && node simlab/palette-selftest.mjs && node simlab/palette-live-selftest.mjs && node simlab/viewer-smoke.mjs && node simlab/schema-check.mjs simlab/fixtures --coverage && npm run test:contracts && npm run test:renderpack && npm run test:renderframe && npm run test:thinviewer && npm run test:golden && npm run test:debug-workspace && npm run test:g2-evidence && npm run test:bridge-foundation && npm run test:visual-capture && npm run test:visual-evidence && npm run test:result-export && npm run test:bridge-owner-prelaunch && npm run test:bridge-owner-control",
     "serve": "node simlab/serve.mjs",
     "analyze": "node simlab/analyze.mjs",
     "schema-check": "node simlab/schema-check.mjs",
-    "test:ci": "node simlab/network-selftest.mjs && node simlab/m6-acceptance-selftest.mjs && node simlab/palette-selftest.mjs && node simlab/schema-check.mjs simlab/fixtures --coverage && npm run test:contracts && npm run test:renderpack && npm run test:renderframe && npm run test:thinviewer && npm run test:golden && npm run test:debug-workspace && npm run test:g2-evidence && npm run test:bridge-foundation && npm run test:visual-capture && npm run test:visual-evidence && npm run test:result-export && npm run test:bridge-owner-prelaunch && npm run test:bridge-owner-control",
+    "test:ci": "npm run test:motion-decision && node simlab/network-selftest.mjs && node simlab/m6-acceptance-selftest.mjs && node simlab/palette-selftest.mjs && node simlab/schema-check.mjs simlab/fixtures --coverage && npm run test:contracts && npm run test:renderpack && npm run test:renderframe && npm run test:thinviewer && npm run test:golden && npm run test:debug-workspace && npm run test:g2-evidence && npm run test:bridge-foundation && npm run test:visual-capture && npm run test:visual-evidence && npm run test:result-export && npm run test:bridge-owner-prelaunch && npm run test:bridge-owner-control",
     "check:m6": "node simlab/m6-acceptance-check.mjs",
     "test:contracts": "node --test simlab/contracts/render-v1/tests/contracts.test.mjs",
     "test:renderpack": "node --test simlab/renderpack/tests/compiler.test.mjs simlab/renderpack/tests/adapter.test.mjs",
@@ -46,6 +46,7 @@
     "test:result-export": "node --test debug-workspace/bridge/tests/result-export.test.mjs debug-workspace/evidence/tests/finalize-visual-captures.test.mjs",
     "test:bridge-owner-prelaunch": "node --test debug-workspace/bridge/tests/owner-prelaunch.test.mjs",
     "test:bridge-owner-control": "node --test debug-workspace/bridge/tests/selected-action.test.mjs debug-workspace/bridge/tests/owner-action-adapter.test.mjs debug-workspace/bridge/tests/owner-control-cli.test.mjs debug-workspace/bridge/tests/owner-trigger-source.test.mjs",
-    "test:bridge-owner-runtime": "node debug-workspace/bridge/owner-runtime-selftest.mjs"
+    "test:bridge-owner-runtime": "node debug-workspace/bridge/owner-runtime-selftest.mjs",
+    "test:motion-decision": "node --test simlab/motion-trace.test.mjs debug-workspace/evidence/tests/decision-observation.test.mjs"
   }
 }
