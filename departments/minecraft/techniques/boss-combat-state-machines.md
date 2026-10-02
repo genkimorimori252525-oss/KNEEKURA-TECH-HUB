@@ -126,3 +126,26 @@ Why this is better than hardcoding `4×6×4`:
 
 Transfer:
 useful for ramming bosses, large mobs and native-code reconstructions where evidence exposes an AABB plus an expansion/range parameter.
+
+
+## T8 — exposed component values may be native-overridden
+
+Pattern:
+- treat public entity/component JSON as an exposed configuration layer, not automatically as the final runtime value;
+- search native structure/body evidence for hardcoded reload/initialization;
+- compare the resulting runtime value against current observation;
+- preserve both the exposed value and the effective value in the evidence record.
+
+Bedrock Wither example:
+- current Mojang JSON exposes health 600 for all difficulties;
+- historical Bedrock native hardcoded reload applies 50% max-health cap on Easy and 75% on Normal, leaving Hard at 600;
+- current gameplay observation independently reports 300 / 450 / 600;
+- current Mojang JSON exposes movement 0.25;
+- historical Bedrock native hardcoded reload sets runtime movement speed 0.6;
+- current gameplay documentation independently reports speed 0.6.
+
+Engineering lesson:
+**JSON parity is not runtime parity for entities with documented unique/native behavior.**
+
+Transfer:
+This applies to future Bedrock-to-Java reconstructions, especially bosses or legacy entities with native code paths. A generated behavior pack is necessary evidence but not sufficient evidence for final runtime constants.
