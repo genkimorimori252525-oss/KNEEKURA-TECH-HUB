@@ -230,3 +230,50 @@ However, the current dedicated `minecraft:behavior.wither_random_attack_pos_goal
 - control_flags
 
 Therefore KNEEKURA does **not** assume the ordinary random-stroll numeric defaults are the effective native Wither values. The C++ inheritance proves field shape, not current initialized values. Those four values remain measurement/symbol-body targets.
+
+
+## Dedicated Wither death ECS path
+
+Current BDS exposes dedicated Wither death systems rather than routing every visual concern through the generic mob death implementation:
+
+- `ServerWitherBossTickDeathSystemImpl`
+- `ClientWitherBossTickDeathSystemImpl`
+- `WitherBossDeathWrapper`
+- `DeathTickingType::Wither = 2`
+
+The server system filters entities with:
+- `ActorTickedComponent`
+- `TickDeathNeededComponent`
+- `WitherBossFlagComponent`
+
+It reads:
+- `DeathTickingComponent`
+- actor identity/flags/position/sound information
+- optional `ExperienceRewardComponent`
+
+It writes:
+- `OverlayAlphaComponent`
+- `ShieldFlickerComponent`
+- `SwellComponent`
+- `SynchedActorDataComponent`
+
+and can write the experience-orb request queue.
+
+The client system reads `DeathTickingComponent` and writes the same core visual/synced state.
+
+Component structures:
+- `DeathTickingComponent`: short `mTicks`, `DeathTickingType mType`, bool `mSpawnedXP`
+- `SwellComponent`: interpolated swell amount + swell direction
+- `ShieldFlickerComponent`: integer value
+- `OverlayAlphaComponent`: float value
+
+Engineering consequence:
+the current Bedrock architecture separates **semantic death ticking / XP state** from **visual swelling / shield flicker / overlay**. KNEEKURA must preserve that separation. Visual parity must never be implemented by keeping the boss semantically alive after the killing blow.
+
+Unknown:
+- exact Wither death duration;
+- explosion tick and strength;
+- exact swell/flicker/overlay equations;
+- XP spawn tick.
+
+These remain direct-runtime or binary-body analysis targets.
