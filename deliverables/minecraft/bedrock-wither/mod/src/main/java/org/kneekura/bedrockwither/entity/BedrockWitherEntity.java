@@ -27,6 +27,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.kneekura.bedrockwither.entity.ai.BedrockHighestDamageTargetGoal;
 
+import java.util.List;
+
 public final class BedrockWitherEntity extends Monster {
     private static final EntityDataAccessor<Integer> DATA_STATE =
             SynchedEntityData.defineId(BedrockWitherEntity.class, EntityDataSerializers.INT);
@@ -211,6 +213,11 @@ public final class BedrockWitherEntity extends Monster {
                 velocity.y,
                 velocity.z,
                 threatLedger.size(),
+                List.of(
+                        headSnapshot(0),
+                        headSnapshot(1),
+                        headSnapshot(2)
+                ),
                 runtimeState.nativePhase(),
                 runtimeState.wantsToExplode(),
                 runtimeState.charging(),
@@ -238,6 +245,19 @@ public final class BedrockWitherEntity extends Monster {
                 runtimeState.secondVolley(),
                 runtimeState.mainHeadAttackCountdown(),
                 runtimeState.lastFiredHead()
+        );
+    }
+
+    private BedrockWitherHeadDebugSnapshot headSnapshot(int index) {
+        BedrockWitherHeadRuntime head = runtimeState.head(index);
+        return new BedrockWitherHeadDebugSnapshot(
+                index,
+                head.yaw(),
+                head.pitch(),
+                head.oldYaw(),
+                head.oldPitch(),
+                head.nextUpdate(),
+                head.idleUpdates()
         );
     }
 
