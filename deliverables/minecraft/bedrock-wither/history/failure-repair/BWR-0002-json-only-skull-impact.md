@@ -2,7 +2,7 @@
 
 Date: 2026-10-02  
 Origin: OWN_DEVELOPMENT  
-State: REPAIR_IN_PROGRESS  
+State: VERIFIED_FIXED  
 Environment: Minecraft Java 1.20.1 / Forge 47.2.0 reconstruction; Bedrock evidence pinned separately
 
 ## Symptom
@@ -76,7 +76,11 @@ Repair commits:
 
 ## Verification
 
-Pending the dedicated Forge build + GameTest generation containing the repair.
+Dedicated Forge workflow run `36993986762` (source `c230bd372ca2ee96bc0396e424071d2f4c06cb3a`) completed successfully. The GameTest server ran 14 required tests in isolated batches and reported `All 14 required tests passed :)`.
+
+The final repair no longer relies on the earlier broad Java-superclass reuse: BWR-0005 refined the hit path to explicit Bedrock 5/8/12 direct damage while retaining verified owner/effect semantics. The JSON-only inference is therefore closed by the later explicit implementation and passing runtime test.
+
+Workflow: https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/36993986762
 
 ## Reusable lesson
 
