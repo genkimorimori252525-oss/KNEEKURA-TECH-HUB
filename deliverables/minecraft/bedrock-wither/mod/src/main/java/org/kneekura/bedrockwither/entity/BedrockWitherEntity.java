@@ -60,6 +60,7 @@ public final class BedrockWitherEntity extends Monster {
     private final BedrockWitherAttackController attackController;
     private final BedrockWitherPhaseController phaseController;
     private final BedrockWitherDestructionController destructionController;
+    private final BedrockWitherHurtReactionController hurtReactionController;
     private final Set<ServerPlayer> trackingBossPlayers = new HashSet<>();
 
     private boolean difficultyHealthInitialized;
@@ -70,6 +71,7 @@ public final class BedrockWitherEntity extends Monster {
         this.attackController = new BedrockWitherAttackController(this);
         this.phaseController = new BedrockWitherPhaseController(this);
         this.destructionController = new BedrockWitherDestructionController(this);
+        this.hurtReactionController = new BedrockWitherHurtReactionController(this);
         this.runtimeState.setNativePhase(BedrockWitherPhaseController.firstPhaseNativeId());
         this.bossEvent.setDarkenScreen(true);
         // Bedrock wither.json exposes movement.basic max_turn 180. The Java
@@ -151,6 +153,7 @@ public final class BedrockWitherEntity extends Monster {
 
         this.stateMachine.tick();
         this.phaseController.tick();
+        this.hurtReactionController.tick();
         this.bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
         updateBossBarPlayers();
     }
@@ -192,6 +195,7 @@ public final class BedrockWitherEntity extends Monster {
         boolean accepted = super.hurt(source, amount);
         if (accepted && attacker instanceof LivingEntity livingAttacker && livingAttacker != this) {
             threatLedger.recordDamage(livingAttacker, amount, this.level().getGameTime());
+            hurtReactionController.onAcceptedDamage(livingAttacker);
         }
         return accepted;
     }
@@ -265,6 +269,10 @@ public final class BedrockWitherEntity extends Monster {
 
     public BedrockWitherDestructionController destructionController() {
         return destructionController;
+    }
+
+    public BedrockWitherHurtReactionController hurtReactionController() {
+        return hurtReactionController;
     }
 
     public BedrockWitherDebugSnapshot debugSnapshot() {
@@ -380,6 +388,8 @@ public final class BedrockWitherEntity extends Monster {
         tag.putBoolean("WantsToExplode", runtimeState.wantsToExplode());
         tag.putInt("NumSkeletons", runtimeState.numSkeletons());
         tag.putInt("MaxSkeletons", runtimeState.maxSkeletons());
+        tag.putInt("DestroyBlocksTick", runtimeState.destroyBlocksTick());
+        hurtReactionController.addAdditionalSaveData(tag);
     }
 
     @Override
@@ -402,5 +412,7 @@ public final class BedrockWitherEntity extends Monster {
         runtimeState.setWantsToExplode(tag.getBoolean("WantsToExplode"));
         runtimeState.setNumSkeletons(tag.getInt("NumSkeletons"));
         runtimeState.setMaxSkeletons(tag.getInt("MaxSkeletons"));
+        runtimeState.setDestroyBlocksTick(tag.getInt("DestroyBlocksTick"));
+        hurtReactionController.readAdditionalSaveData(tag);
     }
 }
