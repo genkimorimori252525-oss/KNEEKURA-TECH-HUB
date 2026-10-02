@@ -61,6 +61,7 @@ public final class BedrockWitherEntity extends Monster {
     private final BedrockWitherPhaseController phaseController;
     private final BedrockWitherDestructionController destructionController;
     private final BedrockWitherHurtReactionController hurtReactionController;
+    private final BedrockWitherDashController dashController;
     private final Set<ServerPlayer> trackingBossPlayers = new HashSet<>();
 
     private boolean difficultyHealthInitialized;
@@ -72,6 +73,7 @@ public final class BedrockWitherEntity extends Monster {
         this.phaseController = new BedrockWitherPhaseController(this);
         this.destructionController = new BedrockWitherDestructionController(this);
         this.hurtReactionController = new BedrockWitherHurtReactionController(this);
+        this.dashController = new BedrockWitherDashController(this);
         this.runtimeState.setNativePhase(BedrockWitherPhaseController.firstPhaseNativeId());
         this.bossEvent.setDarkenScreen(true);
         // Bedrock wither.json exposes movement.basic max_turn 180. The Java
@@ -154,6 +156,7 @@ public final class BedrockWitherEntity extends Monster {
         this.stateMachine.tick();
         this.phaseController.tick();
         this.hurtReactionController.tick();
+        this.dashController.tick();
         this.bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
         updateBossBarPlayers();
     }
@@ -273,6 +276,10 @@ public final class BedrockWitherEntity extends Monster {
 
     public BedrockWitherHurtReactionController hurtReactionController() {
         return hurtReactionController;
+    }
+
+    public BedrockWitherDashController dashController() {
+        return dashController;
     }
 
     public BedrockWitherDebugSnapshot debugSnapshot() {
@@ -396,6 +403,11 @@ public final class BedrockWitherEntity extends Monster {
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
         BedrockWitherState restoredState = BedrockWitherState.fromId(tag.getInt("BedrockState"));
+        if (restoredState == BedrockWitherState.PHASE2_DASH) {
+            // Dash execution depends on a measured speed and live target/world
+            // context. Never resume stale transient motion after load.
+            restoredState = BedrockWitherState.PHASE2_RECOVER;
+        }
         stateMachine.restore(restoredState, tag.getLong("StateEnteredGameTime"));
         difficultyHealthInitialized = tag.getBoolean("DifficultyHealthInitialized");
 
