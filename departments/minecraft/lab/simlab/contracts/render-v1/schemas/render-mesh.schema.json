@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kneekura.local/schemas/render-mesh-v1.json",
+  "title": "KNEEKURA RenderMeshIR v1",
+  "type": "object",
+  "required": ["schema", "schemaVersion", "modelId", "layoutHash", "buffers", "attributes", "indexAccessor", "bones", "drawGroups"],
+  "properties": {
+    "schema": {"const": "kneekura.rendermesh"},
+    "schemaVersion": {"type": "string", "pattern": "^1\\.[0-9]+\\.[0-9]+(?:[-+].*)?$"},
+    "modelId": {"type": "string", "minLength": 1},
+    "layoutHash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "buffers": {"type": "array"},
+    "attributes": {
+      "type": "object",
+      "required": ["position", "normal", "uv0", "color0", "joints", "weights"],
+      "additionalProperties": true
+    },
+    "indexAccessor": {"type": "object"},
+    "bones": {"type": "array"},
+    "drawGroups": {"type": "array"}
+  },
+  "additionalProperties": true
+}
