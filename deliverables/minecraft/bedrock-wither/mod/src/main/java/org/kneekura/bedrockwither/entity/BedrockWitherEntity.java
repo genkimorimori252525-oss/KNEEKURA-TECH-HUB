@@ -345,6 +345,13 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
         return !isAerialAttack();
     }
 
+    public int getVisualInvulnerableTicks() {
+        if (getDeathTicksRemaining() > 0) {
+            return getDeathTicksRemaining();
+        }
+        return Math.max(0, runtimeState.spawningFrames());
+    }
+
     public int getDeathTicksRemaining() {
         return this.entityData.get(DATA_DEATH_TICKS);
     }
