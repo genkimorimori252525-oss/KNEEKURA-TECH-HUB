@@ -3,6 +3,8 @@ package org.kneekura.bedrockwither.entity.projectile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -12,6 +14,7 @@ import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.kneekura.bedrockwither.registry.ModEntities;
 
@@ -83,6 +86,32 @@ public final class BedrockWitherSkullEntity extends WitherSkull {
             case NORMAL -> 5.5F;
             case HARD -> 4.5F;
         };
+    }
+
+    @Override
+    protected void onHitEntity(EntityHitResult hitResult) {
+        // Do NOT call WitherSkull.onHitEntity(): Java adds 8/5 direct impact damage
+        // and owner healing on kill. Current Bedrock wither_skull definitions expose
+        // no impact_damage component; their entity-hit contract is the Wither effect
+        // plus the projectile's immediate power-1 explosion handled by onHit().
+        if (this.level().isClientSide) {
+            return;
+        }
+
+        if (hitResult.getEntity() instanceof LivingEntity target) {
+            int duration = switch (this.level().getDifficulty()) {
+                case PEACEFUL, EASY -> 0;
+                case NORMAL -> 200;
+                case HARD -> 800;
+            };
+
+            if (duration > 0) {
+                target.addEffect(
+                        new MobEffectInstance(MobEffects.WITHER, duration, 1),
+                        this.getEffectSource()
+                );
+            }
+        }
     }
 
     @Override
