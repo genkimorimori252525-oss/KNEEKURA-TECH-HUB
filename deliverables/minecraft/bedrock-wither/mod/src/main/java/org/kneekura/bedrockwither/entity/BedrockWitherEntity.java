@@ -379,6 +379,8 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
                         headSnapshot(2)
                 ),
                 runtimeState.nativePhase(),
+                isAerialAttack(),
+                isPowered(),
                 runtimeState.wantsToExplode(),
                 runtimeState.charging(),
                 chargeDirection.x,
