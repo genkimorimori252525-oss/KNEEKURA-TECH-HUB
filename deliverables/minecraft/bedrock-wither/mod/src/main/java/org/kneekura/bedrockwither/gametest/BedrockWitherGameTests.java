@@ -185,6 +185,23 @@ public final class BedrockWitherGameTests {
 
         assertClose(helper, sourceResistance, normalResistance, "Normal skull explosion resistance");
         assertClose(helper, 0.8F, dangerousResistance, "Dangerous skull Java-equivalent resistance cap");
+
+        net.minecraft.world.level.block.state.BlockState bedrock =
+                net.minecraft.world.level.block.Blocks.BEDROCK.defaultBlockState();
+        float dangerousBedrockResistance = dangerous.getBlockExplosionResistance(
+                null,
+                helper.getLevel(),
+                resistancePos,
+                bedrock,
+                bedrock.getFluidState(),
+                sourceResistance
+        );
+        assertClose(
+                helper,
+                sourceResistance,
+                dangerousBedrockResistance,
+                "Dangerous skull must not cap Bedrock resistance"
+        );
         helper.succeed();
     }
 
