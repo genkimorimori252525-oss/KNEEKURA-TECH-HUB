@@ -160,6 +160,31 @@ public final class BedrockWitherGameTests {
 
         assertClose(helper, 0.15F, normal.getBbWidth(), "Normal skull collision width");
         assertClose(helper, 0.15F, dangerous.getBbWidth(), "Dangerous skull collision width");
+
+        net.minecraft.core.BlockPos resistancePos = helper.absolutePos(new BlockPos(0, 0, 0));
+        net.minecraft.world.level.block.state.BlockState obsidian =
+                net.minecraft.world.level.block.Blocks.OBSIDIAN.defaultBlockState();
+        float sourceResistance = 1200.0F;
+
+        float normalResistance = normal.getBlockExplosionResistance(
+                null,
+                helper.getLevel(),
+                resistancePos,
+                obsidian,
+                obsidian.getFluidState(),
+                sourceResistance
+        );
+        float dangerousResistance = dangerous.getBlockExplosionResistance(
+                null,
+                helper.getLevel(),
+                resistancePos,
+                obsidian,
+                obsidian.getFluidState(),
+                sourceResistance
+        );
+
+        assertClose(helper, sourceResistance, normalResistance, "Normal skull explosion resistance");
+        assertClose(helper, 0.8F, dangerousResistance, "Dangerous skull Java-equivalent resistance cap");
         helper.succeed();
     }
 
