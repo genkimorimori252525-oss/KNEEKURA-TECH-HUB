@@ -124,3 +124,92 @@ It may not:
 - override current Mojang JSON;
 - override current BDS generated headers;
 - bypass direct Bedrock measurement where behavior remains hidden.
+
+
+## Historical phase/volley body details now corroborated
+
+The historical native body provides several relationships that now have independent current evidence.
+
+### Native phase numbering
+
+Historical constructor initializes `Phase=1`.
+
+Historical `changePhase()`:
+- decrements Phase;
+- the half-health transition therefore changes 1 -> 0;
+- disables the aerial-attack synced flag;
+- raises an explode/wants-to-explode flag;
+- clears wants-to-move;
+- changes fire-rate related state.
+
+Current BDS independently still exposes:
+- `mPhase`
+- `mHealthThreshold`
+- `mWantsToExplode`
+- movement/fire-rate fields.
+
+Current gameplay documentation independently retains the same two-stage half-health transition.
+
+KNEEKURA therefore uses native-like phase IDs:
+- 1 = first/aerial phase
+- 0 = second/powered phase
+
+The high-level Java state enum remains separate from these IDs.
+
+### Half-health threshold
+
+Historical initialization stores `maxHealth / 2` as the phase health threshold.
+
+Current Bedrock gameplay documentation consistently places the transition at half health.
+
+KNEEKURA accepts half max health as the phase threshold.
+
+### Transition skeleton count
+
+Historical transition body spawns exactly three Wither Skeletons when difficulty is not Easy.
+
+Current maintained Minecraft Wiki and Bedrock Wiki both report three on Normal/Hard and none on Easy.
+
+KNEEKURA accepts:
+- Easy: 0
+- Normal: 3
+- Hard: 3
+
+Older/stale pages reporting four on Hard remain disagreement history and do not override the newer convergence.
+
+### Transition explosion
+
+Historical wants-to-explode body uses explosion power 7.0 with mob-griefing gating.
+
+Current documentation describes a large half-health explosion; older Minecraft Wiki material describes it as equivalent to the spawn explosion, whose documented power is 7.
+
+KNEEKURA currently records power 7.0 as **HISTORICAL_CORROBORATED**, not CURRENT_BINARY_CONFIRMED. It is isolated in `BedrockWitherPhaseController.PROVISIONAL_TRANSITION_EXPLOSION_POWER`.
+
+### Main-head projectile cycle
+
+Historical center-head ranged attack:
+- increments a Wither-owned projectile counter;
+- every fourth center-head projectile is dangerous/blue;
+- first three are normal.
+
+Current BDS still exposes:
+- `mProjectileCounter`
+- `mSecondVolley`
+- `mMainHeadAttackCountdown`
+- `mlastFiredHead`
+
+Current Bedrock Wiki independently reports a firing cycle of three normal skulls followed by one dangerous skull.
+
+KNEEKURA accepts the **projectile-type order** 3 normal + 1 dangerous. Exact inter-shot and inter-volley timers remain unresolved.
+
+### Values deliberately not promoted
+
+The historical body also contains timing/speed/range values. These are NOT current-authoritative merely because nearby structure survived.
+
+Still unresolved:
+- current `mFireRate` initialization and health update equation;
+- current second-volley delay;
+- current move cooldown;
+- current charge preparation/duration/speed;
+- current phase transition action tick ordering;
+- exact current explosion power confirmation from BDS 1.26.51.1 binary body.
