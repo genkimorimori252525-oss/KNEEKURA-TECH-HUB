@@ -902,6 +902,11 @@ http.createServer((req, res) => {
     if (u.pathname === '/stats.mjs') {
       return send(res, 200, fs.readFileSync(path.join(HERE, 'stats.mjs')), MIME['.mjs']);
     }
+    // Motion Trace も同じ原則で単一の共有実装を配る。Viewer が独自の軌跡計算を
+    // 持つと AI packet と人間表示の証拠境界がずれるため、コピーは作らない。
+    if (u.pathname === '/motion-trace.mjs') {
+      return send(res, 200, fs.readFileSync(path.join(HERE, 'motion-trace.mjs')), MIME['.mjs']);
+    }
     // 解析結果 —— **CLI が出すものと同じ関数の出力をそのまま返す** (AGENT-01)。
     // サーバ側で数え直したら、その瞬間に Viewer と CLI が食い違いうる状態になる。
     // ガードは /api/trace と同じ path.resolve + startsWith(TRACES)。
