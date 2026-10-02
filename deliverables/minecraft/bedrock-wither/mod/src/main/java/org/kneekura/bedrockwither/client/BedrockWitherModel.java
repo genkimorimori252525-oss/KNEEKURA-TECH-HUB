@@ -13,7 +13,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import org.kneekura.bedrockwither.BedrockWitherMod;
 import org.kneekura.bedrockwither.entity.BedrockWitherEntity;
-import org.kneekura.bedrockwither.entity.BedrockWitherHeadRuntime;
 
 public final class BedrockWitherModel extends HierarchicalModel<BedrockWitherEntity> {
     public static final ModelLayerLocation LAYER_LOCATION =
@@ -140,9 +139,9 @@ public final class BedrockWitherModel extends HierarchicalModel<BedrockWitherEnt
         // head3 X=query.head_x_rotation(2)
         // all three Y=query.target_y_rotation.
         float targetYaw = netHeadYaw * ((float) Math.PI / 180.0F);
-        centerHead.xRot = entity.runtimeState().head(0).pitch() * ((float) Math.PI / 180.0F);
-        rightHead.xRot = entity.runtimeState().head(1).pitch() * ((float) Math.PI / 180.0F);
-        leftHead.xRot = entity.runtimeState().head(2).pitch() * ((float) Math.PI / 180.0F);
+        centerHead.xRot = entity.getSyncedHeadPitch(0) * ((float) Math.PI / 180.0F);
+        rightHead.xRot = entity.getSyncedHeadPitch(1) * ((float) Math.PI / 180.0F);
+        leftHead.xRot = entity.getSyncedHeadPitch(2) * ((float) Math.PI / 180.0F);
 
         centerHead.yRot = targetYaw;
         rightHead.yRot = targetYaw;
