@@ -144,8 +144,7 @@ hash verification before any downstream interpretation or public summary.
                 expected[contract_field] = captured
         if any(contract.get(field) != value for field, value in expected.items()):
             raise IntegrityError('Session identity differs from the supplied index/profile')
-    from .experiment_adapter import inspect_builtin_source
-    experiment = {'builtin_lab_source': inspect_builtin_source()}
+    experiment = {}
     if experiment_registry is not None:
         from .experiment_adapter import inspect_registry
         registered = _optional_object(experiment_registry, 'experiment_registry')
