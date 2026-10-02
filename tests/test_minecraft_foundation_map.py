@@ -82,8 +82,10 @@ def test_foundation_search_finds_pathfinding_debug_surface(foundation):
     built = fm.build(store, prepared["index_snapshot_id"])
     result = fm.search(store, built["foundation_map_id"], "Pathfinding")
     owners = {row["owner"] for row in result["results"]}
+    # Search includes the subsystem label, so pathfinder classes are valid broad
+    # matches for the "Pathfinding" query.
     assert "net/minecraft/client/renderer/debug/PathfindingRenderer" in owners
-    assert "net/minecraft/world/level/pathfinder/PathFinder" not in owners
+    assert "net/minecraft/world/level/pathfinder/PathFinder" in owners
     subsystem = fm.search(
         store, built["foundation_map_id"], "Renderer", subsystem="client.debug"
     )
