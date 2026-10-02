@@ -78,3 +78,13 @@ test('other entity records are excluded by exact UUID scope',()=>{
   assert.equal(out.timeline.length,1);
   assert.equal(out.stages.STATE.facts.find(f=>f.key==='mob_target').value.present,true);
 });
+
+test('incomplete or non-observed rows are not promoted into sampled decision evidence',()=>{
+  const incomplete={...obs('AI_TARGET',106,{present:false}),observationId:'obs:incomplete',completeness:{complete:false}};
+  const inferred={...obs('NAVIGATION',106,{pathPresent:true}),observationId:'obs:inferred',epistemicStatus:'INFERRED'};
+  const out=observeDebugWorkspaceDecision({observations:[incomplete,inferred],subjectUuid:UUID,tick:106});
+  assert.equal(out.capabilities.ai_target.status,'NOT_CAPTURED');
+  assert.equal(out.capabilities.navigation.status,'NOT_CAPTURED');
+  assert.equal(out.stages.STATE,undefined);
+  assert.equal(out.stages.EXECUTION,undefined);
+});
