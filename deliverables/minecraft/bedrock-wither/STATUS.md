@@ -11,10 +11,12 @@ Completed:
 - Official/community/prior-art evidence is separated by confidence.
 - BEStyleWither is a comparative implementation reference, not specification authority.
 - Deliverables boundary and permanent product layout are established.
-- Initial Forge 1.20.1 source scaffold is being kept under `mod/`, not the research department.
+- Initial Forge 1.20.1 source scaffold is kept under `mod/`, not the research department.
+- Standalone entity registration, boss bar, state enum/state-machine shell, flight navigation base, ambiguity-preserving threat ledger and read-only debug snapshot compile successfully.
+- Dedicated product CI has a retained RED→GREEN history: BWR-0001 failed on a Java wildcard Optional boundary and the exact repaired source then built successfully.
+- Reusable boss lifecycle/state-machine lessons are separated under `departments/minecraft/techniques/`.
 
 Not yet established:
-- clean Forge compilation of this new product scaffold;
 - client renderer/model;
 - spawning/registration runtime acceptance;
 - Bedrock reference measurements for TBD constants;
@@ -25,9 +27,9 @@ Not yet established:
 
 ## Next action
 
-1. finish/compile the standalone entity skeleton;
-2. add read-only debug snapshot;
-3. add minimal GameTest smoke coverage;
+1. add minimal GameTest smoke coverage for registration/state persistence/difficulty-health candidate behavior;
+2. add a bounded client renderer placeholder, then the real three-head renderer/model;
+3. wire damage observation into the threat ledger without selecting a metric until the Bedrock reference settles it;
 4. only then implement targeting/phase-1 behavior;
 5. replace `TBD_MEASURE` constants with direct Bedrock observations before claiming parity.
 
