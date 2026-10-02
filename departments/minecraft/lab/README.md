@@ -1,7 +1,8 @@
-# KNEEKURA-LAB
+# KNEEKURA-LAB — Tech Hub integrated laboratory
 
-霊夢 AI の挙動を記録・再生・解析するための独立した SimLab リポジトリです。
-Minecraft/TouhouLittleMaid 本体とは分離し、トレース形式と Viewer を中心に管理します。
+このディレクトリが、2026-10-02以降のKNEEKURA Minecraft実験・観測層の正本です。旧 `KNEEKURA-LAB` リポジトリのソースは `f2d6165b16587672ac56f83c001c65bc2fa6d06a` から同一Tech Hubリポジトリへ移行されました。旧リポジトリは移行元・履歴参照として残し、新規実装は原則ここで行います。
+
+霊夢 AI の挙動を記録・再生・解析し、実Minecraftを権威ある検証環境として扱います。Minecraft/TouhouLittleMaid本体の製品コードとは責任を分離したまま、Tech Hubの知識・TaskContext・Evidence・実験契約と同一commitで管理します。
 
 > **Architecture note (2026-09-18):** live verification is moving to a real-Minecraft-first model.
 > Minecraft is the authoritative visual/test environment; the Web side becomes a remote-control,
