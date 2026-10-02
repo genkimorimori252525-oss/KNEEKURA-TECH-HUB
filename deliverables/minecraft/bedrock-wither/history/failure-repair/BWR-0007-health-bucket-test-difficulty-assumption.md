@@ -2,7 +2,7 @@
 
 Date: 2026-10-02  
 Origin: OWN_DEVELOPMENT  
-State: REPAIR_IN_PROGRESS
+State: VERIFIED_FIXED
 
 ## Symptom
 
@@ -32,7 +32,11 @@ All Boss GameTests are also separated into unique batches to prevent cross-test 
 
 ## Verification
 
-Pending dedicated Forge GameTest.
+Dedicated Forge workflow run `36993986762` (source `c230bd372ca2ee96bc0396e424071d2f4c06cb3a`) completed successfully. The GameTest server ran 14 required tests in isolated batches and reported `All 14 required tests passed :)`.
+
+The difficulty-safe `lastHealthIntervalTracksLowestHealthIn75PointBuckets` test passed in its isolated batch. The fixture now derives health values from the actual max-health domain instead of assuming Hard-scale absolute HP.
+
+Workflow: https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/36993986762
 
 ## Lesson
 
