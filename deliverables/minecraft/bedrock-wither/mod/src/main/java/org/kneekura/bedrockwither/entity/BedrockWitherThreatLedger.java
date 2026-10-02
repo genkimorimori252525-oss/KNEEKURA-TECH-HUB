@@ -50,7 +50,8 @@ public final class BedrockWitherThreatLedger {
         return candidates.stream()
                 .filter(LivingEntity::isAlive)
                 .filter(entity -> entries.containsKey(entity.getUUID()))
-                .max(comparator);
+                .max(comparator)
+                .map(LivingEntity.class::cast);
     }
 
     public void prune(long gameTime, long ttlTicks) {
