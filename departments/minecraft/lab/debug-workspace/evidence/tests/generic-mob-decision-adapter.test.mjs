@@ -45,3 +45,17 @@ test('missing retained state remains NOT_CAPTURED instead of invented',()=>{
   assert.equal(observation.stages.STATE,undefined);
   assert.equal(observation.capabilities.vanilla_goal.status,'NOT_EXPOSED');
 });
+
+test('gone entity does not regain a forward-filled current position',()=>{
+  const point=sample(5,1);
+  const store={
+    entities:new Map([[7,{id:7,uuid:'uuid-7',type:'minecraft:zombie',goneAt:6}]]),
+    trackOf(){return {t0:5,t1:5,samples(){return [point];},sampleAtOrBefore(){return point;}};},
+    isAlive(){return false;},
+    stateAt(){return point;},
+  };
+  const observation=observeGenericMobFromSimStore({store,entityId:7,tick:8});
+  assert.equal(observation.capabilities.position.status,'NOT_APPLICABLE');
+  assert.equal(observation.stages.STATE,undefined);
+  assert.match(observation.capabilities.position.detail,/explicitly gone/);
+});
