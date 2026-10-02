@@ -398,6 +398,32 @@ public final class BedrockWitherGameTests {
         });
     }
 
+    @GameTest(template = "empty", timeoutTicks = 40)
+    public static void statusEffectsAllowOnlyInstantHealAndHarm(GameTestHelper helper) {
+        BedrockWitherEntity wither = createWither(helper);
+
+        if (!wither.canBeAffected(new net.minecraft.world.effect.MobEffectInstance(
+                net.minecraft.world.effect.MobEffects.HEAL, 1, 0
+        ))) {
+            helper.fail("Bedrock Wither should allow Instant Health processing");
+            return;
+        }
+        if (!wither.canBeAffected(new net.minecraft.world.effect.MobEffectInstance(
+                net.minecraft.world.effect.MobEffects.HARM, 1, 0
+        ))) {
+            helper.fail("Bedrock Wither should allow Instant Damage processing");
+            return;
+        }
+        if (wither.canBeAffected(new net.minecraft.world.effect.MobEffectInstance(
+                net.minecraft.world.effect.MobEffects.POISON, 200, 0
+        ))) {
+            helper.fail("Bedrock Wither should reject ordinary status effects");
+            return;
+        }
+
+        helper.succeed();
+    }
+
     private static BedrockWitherEntity createWither(GameTestHelper helper) {
         BedrockWitherEntity wither = ModEntities.BEDROCK_WITHER.get().create(helper.getLevel());
         if (wither == null) {
