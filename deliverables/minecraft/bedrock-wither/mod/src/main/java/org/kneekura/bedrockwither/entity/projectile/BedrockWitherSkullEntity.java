@@ -113,9 +113,12 @@ public final class BedrockWitherSkullEntity extends WitherSkull {
             FluidState fluid,
             float resistance
     ) {
-        // Current Bedrock dangerous skull explosion has max_resistance=4.0.
-        // Normal skull has no such cap.
-        return isDangerous() ? Math.min(4.0F, resistance) : resistance;
+        // Bedrock JSON exposes max_resistance=4.0, but that numeric value is
+        // expressed in Bedrock explosion-resistance semantics. In Java's explosion
+        // calculation the behaviorally equivalent dangerous-skull cap is 0.8,
+        // matching current observed blue-skull terrain penetration and vanilla
+        // Java's own WitherSkull adaptation boundary.
+        return isDangerous() ? Math.min(0.8F, resistance) : resistance;
     }
 
     @Override
