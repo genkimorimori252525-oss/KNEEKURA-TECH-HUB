@@ -32,6 +32,15 @@ public final class BedrockWitherGameTests {
             assertClose(helper, 1.0F, wither.getBbWidth(), "Bedrock collision width");
             assertClose(helper, 3.0F, wither.getBbHeight(), "Bedrock collision height");
             assertClose(helper, 70.0D, wither.getAttributeValue(Attributes.FOLLOW_RANGE), "Bedrock follow range");
+            assertClose(helper, 0.6D, wither.getAttributeValue(Attributes.MOVEMENT_SPEED), "Bedrock native runtime movement speed");
+            assertClose(helper, 0.6D, wither.getAttributeValue(Attributes.FLYING_SPEED), "Bedrock native runtime flying speed");
+
+            if (BedrockWitherEntity.maxHealthForDifficulty(net.minecraft.world.Difficulty.EASY) != 300.0D
+                    || BedrockWitherEntity.maxHealthForDifficulty(net.minecraft.world.Difficulty.NORMAL) != 450.0D
+                    || BedrockWitherEntity.maxHealthForDifficulty(net.minecraft.world.Difficulty.HARD) != 600.0D) {
+                helper.fail("Bedrock difficulty health mapping is not 300/450/600");
+                return;
+            }
 
             if (wither.getMobType() != net.minecraft.world.entity.MobType.UNDEAD) {
                 helper.fail("Bedrock type_family should map Wither to MobType.UNDEAD");
