@@ -42,7 +42,7 @@
     "test:bridge-runtime": "node debug-workspace/bridge/runtime-selftest.mjs",
     "test:bridge-runtime-api": "node debug-workspace/bridge/runtime-api-selftest.mjs",
     "test:visual-capture": "node --test debug-workspace/evidence/tests/visual-capture.test.mjs debug-workspace/evidence/tests/trigger-capture.test.mjs debug-workspace/evidence/tests/trigger-retention.test.mjs",
-    "test:visual-evidence": "node --test debug-workspace/evidence/tests/visual-compiler.test.mjs debug-workspace/evidence/tests/visual-geometry.test.mjs debug-workspace/evidence/tests/visual-presentation.test.mjs debug-workspace/evidence/tests/visual-comparison.test.mjs debug-workspace/evidence/tests/visual-request-contract.test.mjs debug-workspace/evidence/tests/motion-trace.test.mjs",
+    "test:visual-evidence": "node --test debug-workspace/evidence/tests/visual-compiler.test.mjs debug-workspace/evidence/tests/visual-geometry.test.mjs debug-workspace/evidence/tests/visual-presentation.test.mjs debug-workspace/evidence/tests/visual-comparison.test.mjs debug-workspace/evidence/tests/visual-request-contract.test.mjs debug-workspace/evidence/tests/motion-trace.test.mjs debug-workspace/evidence/tests/decision-observation.test.mjs",
     "test:result-export": "node --test debug-workspace/bridge/tests/result-export.test.mjs debug-workspace/evidence/tests/finalize-visual-captures.test.mjs",
     "test:bridge-owner-prelaunch": "node --test debug-workspace/bridge/tests/owner-prelaunch.test.mjs",
     "test:bridge-owner-control": "node --test debug-workspace/bridge/tests/selected-action.test.mjs debug-workspace/bridge/tests/owner-action-adapter.test.mjs debug-workspace/bridge/tests/owner-control-cli.test.mjs debug-workspace/bridge/tests/owner-trigger-source.test.mjs",
