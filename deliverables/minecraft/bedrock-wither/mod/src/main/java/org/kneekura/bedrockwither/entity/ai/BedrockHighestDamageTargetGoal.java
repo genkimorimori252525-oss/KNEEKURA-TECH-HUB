@@ -1,6 +1,7 @@
 package org.kneekura.bedrockwither.entity.ai;
 
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.phys.AABB;
 import org.kneekura.bedrockwither.entity.BedrockWitherEntity;
@@ -53,10 +54,14 @@ public final class BedrockHighestDamageTargetGoal extends Goal {
     private LivingEntity select() {
         double range = mob.getAttributeValue(net.minecraft.world.entity.ai.attributes.Attributes.FOLLOW_RANGE);
         AABB area = mob.getBoundingBox().inflate(range);
-        List<LivingEntity> candidates = mob.level().getEntitiesOfClass(
-                LivingEntity.class,
+        // Current Bedrock BDS symbol surface exposes
+        // WitherTargetHighestDamage::getHighestDamageTarget() -> Player*.
+        // Keep the threat ledger broad for diagnostics, but this priority-1 Goal
+        // considers players only until runtime evidence proves a wider target set.
+        List<Player> candidates = mob.level().getEntitiesOfClass(
+                Player.class,
                 area,
-                entity -> entity != mob && entity.isAlive()
+                Player::isAlive
         );
 
         return mob.threatLedger()
