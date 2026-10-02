@@ -547,6 +547,15 @@ public final class BedrockWitherGameTests {
         helper.getLevel().addFreshEntity(target);
 
         helper.runAfterDelay(2, () -> {
+            // This test drives the volley controller synchronously. Re-establish
+            // every precondition here so ambient server AI ticks cannot make the
+            // controller-unit assertion nondeterministic.
+            wither.runtimeState().setNativePhase(
+                    org.kneekura.bedrockwither.entity.BedrockWitherPhaseController.firstPhaseNativeId()
+            );
+            wither.runtimeState().setSpawningFrames(0);
+            wither.spawnController().restore(0, BedrockWitherState.PHASE1_REPOSITION);
+            wither.setBedrockState(BedrockWitherState.PHASE1_REPOSITION);
             wither.setTarget(target);
 
             if (wither.runtimeState().fireRate()
