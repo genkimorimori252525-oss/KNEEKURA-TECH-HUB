@@ -20,9 +20,12 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.kneekura.bedrockwither.entity.ai.BedrockHighestDamageTargetGoal;
 
 public final class BedrockWitherEntity extends Monster {
     private static final EntityDataAccessor<Integer> DATA_STATE =
@@ -80,7 +83,29 @@ public final class BedrockWitherEntity extends Monster {
 
     @Override
     protected void registerGoals() {
-        // Goal wiring is added from Bedrock's exposed goal ordering, not from Java Wither.
+        // Current Mojang Bedrock wither.json target ordering:
+        // 1 = wither_target_highest_damage
+        // 2 = hurt_by_target
+        // 3 = nearest_attackable_target
+        this.targetSelector.addGoal(1, new BedrockHighestDamageTargetGoal(this));
+        this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
+        this.targetSelector.addGoal(
+                3,
+                new NearestAttackableTargetGoal<>(
+                        this,
+                        LivingEntity.class,
+                        10,
+                        true,
+                        false,
+                        this::isBedrockNearestTargetCandidate
+                )
+        );
+    }
+
+    private boolean isBedrockNearestTargetCandidate(LivingEntity candidate) {
+        // Bedrock target filter accepts players and non-undead/non-inanimate targets.
+        // Java LivingEntity already excludes inanimate entities from this candidate class.
+        return candidate != this && candidate.getMobType() != MobType.UNDEAD;
     }
 
     @Override
