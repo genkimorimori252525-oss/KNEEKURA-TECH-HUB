@@ -3,10 +3,12 @@ import os from 'node:os';
 import path from 'node:path';
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
+import { spawnSync } from 'node:child_process';
 import {
   assessProcessOwnership,
   doctor,
   expandTemplate,
+  inspectGitWorkspace,
   launchDebugRun,
   readCurrent,
   readStartupTimeline,
@@ -45,6 +47,39 @@ function stopAssertionDiagnostics(stopped) {
 const temp = await mkdtemp(path.join(os.tmpdir(), 'kneekura-debug-'));
 
 try {
+  const gitVersion = spawnSync('git', ['--version'], { encoding: 'utf8' });
+  if (!gitVersion.error && gitVersion.status === 0) {
+    const scopeRepo = path.join(temp, 'scope-repo');
+    const labScope = path.join(scopeRepo, 'departments', 'minecraft', 'lab');
+    await mkdir(labScope, { recursive: true });
+    await writeFile(path.join(labScope, 'observer.txt'), 'observer-v1\n', 'utf8');
+    await writeFile(path.join(scopeRepo, 'unrelated.txt'), 'unrelated-v1\n', 'utf8');
+
+    const git = (args) => {
+      const result = spawnSync('git', args, { cwd: scopeRepo, encoding: 'utf8' });
+      assert.equal(result.status, 0, result.stderr || result.stdout || args.join(' '));
+    };
+    git(['init']);
+    git(['config', 'user.email', 'selftest@example.invalid']);
+    git(['config', 'user.name', 'KNEEKURA selftest']);
+    git(['add', '.']);
+    git(['commit', '-m', 'fixture']);
+
+    const labBefore = await inspectGitWorkspace(labScope);
+    assert.equal(labBefore.available, true, JSON.stringify(labBefore));
+    assert.equal(labBefore.dirty, false);
+
+    await writeFile(path.join(scopeRepo, 'unrelated.txt'), 'unrelated-v2\n', 'utf8');
+    const labAfterUnrelated = await inspectGitWorkspace(labScope);
+    assert.equal(labAfterUnrelated.dirty, false, JSON.stringify(labAfterUnrelated));
+    assert.equal(labAfterUnrelated.fingerprintSha256, labBefore.fingerprintSha256);
+
+    await writeFile(path.join(labScope, 'observer.txt'), 'observer-v2\n', 'utf8');
+    const labAfterObserver = await inspectGitWorkspace(labScope);
+    assert.equal(labAfterObserver.dirty, true, JSON.stringify(labAfterObserver));
+    assert.notEqual(labAfterObserver.fingerprintSha256, labBefore.fingerprintSha256);
+  }
+
   const config = {
     schemaVersion: 1,
     workspaceId: 'selftest',
