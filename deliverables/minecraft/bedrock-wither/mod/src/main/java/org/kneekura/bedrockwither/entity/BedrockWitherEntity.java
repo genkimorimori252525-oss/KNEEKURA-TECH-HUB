@@ -58,6 +58,12 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
             SynchedEntityData.defineId(BedrockWitherEntity.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Integer> DATA_DEATH_SHIELD_FLICKER =
             SynchedEntityData.defineId(BedrockWitherEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Float> DATA_HEAD_PITCH_0 =
+            SynchedEntityData.defineId(BedrockWitherEntity.class, EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<Float> DATA_HEAD_PITCH_1 =
+            SynchedEntityData.defineId(BedrockWitherEntity.class, EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<Float> DATA_HEAD_PITCH_2 =
+            SynchedEntityData.defineId(BedrockWitherEntity.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Optional<UUID>> DATA_HEAD_TARGET_0 =
             SynchedEntityData.defineId(BedrockWitherEntity.class, EntityDataSerializers.OPTIONAL_UUID);
     private static final EntityDataAccessor<Optional<UUID>> DATA_HEAD_TARGET_1 =
@@ -85,6 +91,7 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
     private final BedrockWitherDeathController deathController;
     private final BedrockWitherSpecialMovementController specialMovementController;
     private final BedrockWitherSideHeadController sideHeadController;
+    private final BedrockWitherHeadTrackingController headTrackingController;
     private final Set<ServerPlayer> trackingBossPlayers = new HashSet<>();
 
     private boolean difficultyHealthInitialized;
@@ -102,6 +109,7 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
         this.deathController = new BedrockWitherDeathController(this);
         this.specialMovementController = new BedrockWitherSpecialMovementController(this);
         this.sideHeadController = new BedrockWitherSideHeadController(this);
+        this.headTrackingController = new BedrockWitherHeadTrackingController(this);
         this.runtimeState.setNativePhase(BedrockWitherPhaseController.firstPhaseNativeId());
         this.spawnController.initializeNewEntity();
         this.bossEvent.setDarkenScreen(true);
@@ -155,6 +163,9 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
         this.entityData.define(DATA_DEATH_SWELL, 0.0F);
         this.entityData.define(DATA_DEATH_OVERLAY_ALPHA, 0.0F);
         this.entityData.define(DATA_DEATH_SHIELD_FLICKER, 0);
+        this.entityData.define(DATA_HEAD_PITCH_0, 0.0F);
+        this.entityData.define(DATA_HEAD_PITCH_1, 0.0F);
+        this.entityData.define(DATA_HEAD_PITCH_2, 0.0F);
         this.entityData.define(DATA_HEAD_TARGET_0, Optional.empty());
         this.entityData.define(DATA_HEAD_TARGET_1, Optional.empty());
         this.entityData.define(DATA_HEAD_TARGET_2, Optional.empty());
@@ -213,6 +224,7 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
         this.volleyController.tick();
         this.specialMovementController.tick();
         this.sideHeadController.tick();
+        this.headTrackingController.tick();
         this.bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
         updateBossBarPlayers();
     }
@@ -397,6 +409,23 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
         return runtimeState;
     }
 
+    public float getSyncedHeadPitch(int headIndex) {
+        return this.entityData.get(headPitchAccessor(headIndex));
+    }
+
+    public void setSyncedHeadPitch(int headIndex, float pitch) {
+        this.entityData.set(headPitchAccessor(headIndex), pitch);
+    }
+
+    private static EntityDataAccessor<Float> headPitchAccessor(int headIndex) {
+        return switch (headIndex) {
+            case 0 -> DATA_HEAD_PITCH_0;
+            case 1 -> DATA_HEAD_PITCH_1;
+            case 2 -> DATA_HEAD_PITCH_2;
+            default -> throw new IndexOutOfBoundsException("Wither head index must be 0..2: " + headIndex);
+        };
+    }
+
     public Optional<UUID> getAlternativeHeadTarget(int headIndex) {
         return this.entityData.get(headTargetAccessor(headIndex));
     }
@@ -456,6 +485,10 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
 
     public BedrockWitherSideHeadController sideHeadController() {
         return sideHeadController;
+    }
+
+    public BedrockWitherHeadTrackingController headTrackingController() {
+        return headTrackingController;
     }
 
     public BedrockWitherDebugSnapshot debugSnapshot() {
