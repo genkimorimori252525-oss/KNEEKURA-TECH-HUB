@@ -1,0 +1,240 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>SimLab — 4モード比較</title>
+<!--
+  実機再現パイプラインの 3 モードを横に並べて、同じ tick で見比べるための画面。
+
+  なぜ要るか: 2026-08-19 に「採点器は 5.0% 改善と言うのに、目で見ると悪化している」
+  という食い違いが出た。採点器が測るのは対応 quad の重心距離の中央値であって
+  「その技らしく見えるか」ではない。**目で見比べる手段そのものが道具として要る。**
+
+  中身は index.html を 3 枚 iframe で並べているだけ。iframe の中身は無改変で、
+  postMessage で tick / 再生 / 速度だけを揃える (index.html 側に受け口を足してある)。
+-->
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: #0b0d10; color: #dfe4ea;
+               font-family: "Segoe UI", "Yu Gothic UI", system-ui, sans-serif; font-size: 13px; }
+  body { display: flex; flex-direction: column; }
+  header { flex: 0 0 auto; padding: 8px 12px; border-bottom: 1px solid #232830; background: #12151a;
+           display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  header h1 { font-size: 14px; margin: 0 8px 0 0; font-weight: 600; letter-spacing: .02em; }
+  .btn { background: #1b2029; border: 1px solid #2b323d; color: #dfe4ea; border-radius: 6px;
+         padding: 4px 10px; cursor: pointer; font: inherit; }
+  .btn:hover { background: #232a35; }
+  .btn.on { background: #2b6cb0; border-color: #3b82c4; }
+  select, input[type=range] { font: inherit; color: inherit; }
+  select { background: #1b2029; border: 1px solid #2b323d; border-radius: 6px; padding: 4px 8px; }
+  #scrub { flex: 1 1 240px; min-width: 160px; }
+  #tickLabel { font-variant-numeric: tabular-nums; opacity: .8; min-width: 96px; }
+  #panes { flex: 1 1 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: #232830; }
+  .pane { display: flex; flex-direction: column; background: #0b0d10; min-width: 0; }
+  .pane .cap { flex: 0 0 auto; padding: 5px 10px; background: #12151a; border-bottom: 1px solid #232830;
+               display: flex; gap: 8px; align-items: baseline; }
+  .pane .cap b { font-weight: 600; }
+  .pane .cap span { opacity: .62; font-size: 12px; }
+  .pane iframe { flex: 1 1 auto; width: 100%; border: 0; background: #0b0d10; }
+  .hint { opacity: .6; font-size: 12px; }
+  /* 実機の記録が使える範囲。ここでは 3 枚とも「実機が録った頂点」を描くので同じ絵になり、
+     比較の意味が無い。**外側でしか ysm.js の再構成は比べられない。** */
+  .win { font-size: 12px; padding: 3px 8px; border-radius: 6px; border: 1px solid #2b323d; white-space: nowrap; }
+  .win.in { background: #1d3a2a; border-color: #2f6b4a; color: #a8e6c0; }
+  .win.out { background: #2a2320; border-color: #5a4632; color: #e8c9a0; }
+  @media (max-width: 1100px) { #panes { grid-template-columns: 1fr; } }
+</style>
+
+<header>
+  <h1>SimLab — 4モード比較</h1>
+  <select id="trace"><option value="">トレースを読み込み中…</option></select>
+  <button class="btn" id="play">▶ 再生</button>
+  <input type="range" id="scrub" min="0" max="0" value="0">
+  <span id="tickLabel">0 / 0</span>
+  <select id="speed">
+    <option value="0.25">0.25x</option>
+    <option value="0.5">0.5x</option>
+    <option value="1" selected>1x</option>
+    <option value="2">2x</option>
+  </select>
+  <span id="window" class="win">実機の記録の範囲を確認中…</span>
+  <span class="hint">4枚とも同じ tick で揃います。個別に回して見るのは各ペイン内で。</span>
+</header>
+
+<div id="panes">
+  <div class="pane">
+    <div class="cap"><b>① 実機</b><span>録れた頂点そのもの（正解）。記録の外では再構成に落ちる</span></div>
+    <iframe id="f0" title="従来"></iframe>
+  </div>
+  <div class="pane">
+    <div class="cap"><b>② 再構成（既定）</b><span>?rec=0 — 記録を使わず ysm.js で組み直したもの。メインハンドの握りは実機と同じ player.pre_hold 状態機械が決める</span></div>
+    <iframe id="f1" title="ばね物理"></iframe>
+  </div>
+  <div class="pane">
+    <div class="cap"><b>③ 再構成（旧: 合成握り）</b><span>?rec=0&ctl=0 — ②の退避経路。状態機械を使わず holdAnimFor が hold_mainhand:sword1 を当てる（前腕 -72°）</span></div>
+    <iframe id="f2" title="コントローラ層"></iframe>
+  </div>
+  <div class="pane">
+    <div class="cap"><b>④ palette（実測）</b><span>?rec=0&pal=1 — 実機が録画した palette (palmask-deflate-v1) をそのまま再生。②③の CONTROLLER_WEIGHT_FIT=0.45 という当て推量を経由しない。companion が無いトレースでは自動的に②へフォールバックする (14-CONTEXT.md §2 の限定: 未観測の状態は合成できない)</span></div>
+    <iframe id="f3" title="palette"></iframe>
+  </div>
+</div>
+
+<script>
+  'use strict';
+  // 各ペインは bare=1 (3D 画面だけ)。操作は親が postMessage で配る。
+  // ① は実機の記録（正解）。②③ は同じ tick を ysm.js で再構成したもの。
+  // こう並べて初めて「実機 vs 再構成」を目で比べられる。
+  //
+  // 2026-08-20: CTL_LAYERS の既定が ON へ反転したので、② が「controller 込みの新既定」、
+  // ③ が「?ctl=0 の旧経路（holdAnimFor による合成握り）」になった。
+  // ③ を ?ctl=1 のままにすると ② と同じ絵になって比較にならない。
+  //
+  // 14-03: ④ に palette (実機が録画した局所 TRS をそのまま再生、当て推量を経由しない) を
+  // 追加。①②③ の query string は**そのまま**——変えると比較そのものが壊れる
+  // (この画面の価値は「現行方式を無改変のまま並べる」ことにある)。
+  // 2026-08-25: にーくら判定 (adopt) で palette が **既定 on** になったので、
+  // ①②③ は `pal=0` を明示しないと全部 palette になって比較が成立しない。
+  // ここを消すと 4 枚とも同じ絵になる —— この画面の存在意義がなくなる。
+  const MODES = ['?bare=1&pal=0', '?bare=1&rec=0&pal=0', '?bare=1&rec=0&ctl=0&pal=0', '?bare=1&rec=0&pal=1'];
+  const frames = [0, 1, 2, 3].map((i) => document.getElementById('f' + i));
+  const $trace = document.getElementById('trace');
+  const $play = document.getElementById('play');
+  const $scrub = document.getElementById('scrub');
+  const $label = document.getElementById('tickLabel');
+  const $speed = document.getElementById('speed');
+
+  let maxTick = 0;
+  let tick = 0;
+  let playing = false;
+  let speed = 1;
+  let acc = 0;
+  let last = 0;
+
+  /** 3 枚すべてへ同じ命令を送る。iframe が読み込み途中でも postMessage は捨てられるだけ。 */
+  function broadcast(msg) {
+    for (const f of frames) {
+      try { f.contentWindow.postMessage(Object.assign({ simlab: 1 }, msg), location.origin); }
+      catch (e) { /* まだ読み込み中 */ }
+    }
+  }
+
+  // 実機の記録 (.pose.bin) が使える tick 範囲。
+  // Viewer は poseTraceParts() が返せる tick では**実機が録った頂点そのもの**を描き、
+  // 返せない tick でだけ ysm.js の再構成へ落ちる。記録はフレーム上限 (既定 96) で
+  // 打ち切られるので、45 秒録っても**実機の記録は 5 秒弱しかない**。
+  // → その中では 3 枚とも同じ絵になり、比較にならない。ここを明示しないと
+  //    「トレースによって実機通りだったりそうでなかったり」に見えて混乱する
+  //    (2026-08-19 に実際に混乱した)。
+  let winLo = null, winHi = null;
+
+  function updateWindow() {
+    const $w = document.getElementById('window');
+    if (winLo === null) { $w.textContent = '実機の記録なし（全域が ysm.js の再構成）'; $w.className = 'win out'; return; }
+    const inside = tick >= winLo && tick <= winHi;
+    const where = inside ? '● ①は実機の記録（②③と比べられる）' : (tick < winLo ? '○ 記録の外（①も再構成）' : '○ 記録の外（①も再構成）');
+    $w.textContent = where
+      + '  （記録は tick ' + winLo + '〜' + winHi + ' / ' + ((winHi - winLo + 1) / 20).toFixed(1) + '秒ぶん）';
+    $w.className = 'win ' + (inside ? 'in' : 'out');
+    $w.title = inside
+      ? 'この tick では 3 枚とも実機が録った頂点を描くので同じ絵になります（比較にならない）'
+      : 'この tick では 3 枚とも ysm.js の再構成です（ここが比較したい範囲）';
+  }
+
+  function setTick(t) {
+    tick = Math.max(0, Math.min(maxTick, t | 0));
+    $scrub.value = String(tick);
+    $label.textContent = tick + ' / ' + maxTick + '  (' + (tick / 20).toFixed(2) + 's)';
+    updateWindow();
+    broadcast({ cmd: 'seek', tick: tick });
+  }
+
+  // 再生は親だけが持つ。子は seek を受けるだけなので、3枚が必ず同じ tick になる。
+  function loop(now) {
+    if (playing) {
+      if (!last) last = now;
+      acc += (now - last) * speed;
+      last = now;
+      const step = 50; // 1 tick = 50ms
+      while (acc >= step) {
+        acc -= step;
+        if (tick >= maxTick) { playing = false; syncPlay(); break; }
+        setTick(tick + 1);
+      }
+    } else { last = 0; acc = 0; }
+    requestAnimationFrame(loop);
+  }
+  function syncPlay() {
+    $play.textContent = playing ? '❚❚ 停止' : '▶ 再生';
+    $play.classList.toggle('on', playing);
+  }
+
+  $play.onclick = () => { playing = !playing; syncPlay(); };
+  $scrub.oninput = () => { playing = false; syncPlay(); setTick(+$scrub.value); };
+  $speed.onchange = () => { speed = +$speed.value; };
+  document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'SELECT' || e.target.tagName === 'INPUT') return;
+    if (e.key === ' ') { e.preventDefault(); playing = !playing; syncPlay(); }
+    else if (e.key === 'ArrowRight') { playing = false; syncPlay(); setTick(tick + (e.shiftKey ? 10 : 1)); }
+    else if (e.key === 'ArrowLeft') { playing = false; syncPlay(); setTick(tick - (e.shiftKey ? 10 : 1)); }
+  });
+
+  // 子から maxTick を受け取る（3枚とも同じトレースなので最初の応答を採る）
+  window.addEventListener('message', (ev) => {
+    if (ev.origin !== location.origin) return;
+    const m = ev.data;
+    if (!m || m.simlab !== 1 || m.cmd !== 'pong') return;
+    if (m.maxTick && m.maxTick !== maxTick) {
+      maxTick = m.maxTick;
+      $scrub.max = String(maxTick);
+      setTick(Math.min(tick, maxTick));
+    }
+  });
+
+  function loadTrace(p) {
+    maxTick = 0; tick = 0; playing = false; syncPlay();
+    winLo = winHi = null;
+    updateWindow();
+    // 実機の記録が使える範囲を求める (gl.js の poseTraceParts と同じ判定)
+    fetch('/api/pose?path=' + encodeURIComponent(p)).then((r) => (r.ok ? r.json() : null)).then((j) => {
+      if (!j || !j.slots) return;
+      const base = j.base || 0;
+      for (let t = 0; t < 100000; t++) {
+        const idx = t + base;
+        if (idx < 0 || idx >= j.slots.length) continue;
+        if (j.slots[idx] >= 0) { if (winLo === null) winLo = t; winHi = t; }
+      }
+      updateWindow();
+    }).catch(() => {});
+    frames.forEach((f, i) => {
+      f.src = '/' + MODES[i] + '&trace=' + encodeURIComponent(p);
+    });
+    // 読み込みが終わった頃に長さを聞く（返事が来るまで何度か）
+    let n = 0;
+    const t = setInterval(() => { broadcast({ cmd: 'ping' }); if (++n > 20 || maxTick) clearInterval(t); }, 500);
+  }
+
+  (async () => {
+    try {
+      const list = await (await fetch('/api/traces')).json();
+      $trace.innerHTML = '';
+      for (const it of list) {
+        const o = document.createElement('option');
+        o.value = it.path;
+        o.textContent = it.path;
+        $trace.appendChild(o);
+      }
+      // URL で指定があればそれ、無ければ一番新しいもの
+      const q = new URLSearchParams(location.search).get('trace');
+      // 既定は「録画 ID が一番新しいもの」。/api/traces の並び順は保証されないので、
+      // パスに埋まっている <scenario>/<seed>/<runId>/ の runId で比べる。
+      const runId = (p) => { const m = String(p).match(/(\d{8}-\d{6})/); return m ? m[1] : ''; };
+      const newest = list.slice().sort((a, b) => (runId(a.path) < runId(b.path) ? -1 : 1)).pop();
+      const pick = q || (newest ? newest.path : "");
+      if (pick) { $trace.value = pick; loadTrace(pick); }
+    } catch (e) {
+      $trace.innerHTML = '<option>トレース一覧が取れなかった</option>';
+    }
+    $trace.onchange = () => loadTrace($trace.value);
+    requestAnimationFrame(loop);
+  })();
+</script>

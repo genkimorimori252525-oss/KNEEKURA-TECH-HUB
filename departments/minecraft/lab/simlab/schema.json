@@ -1,0 +1,20 @@
+{
+  "aiSecRequired": ["phase"],
+  "dmgAttribValues": ["direct", "melee", "stack", "none"],
+  "channels": {
+    "meta": {"required": ["scenario", "seed", "arena", "duration", "gameTime"], "optional": ["run", "originX", "originZ", "floorY", "floorRadius", "blocks", "types", "mods", "delta", "keyframe"]},
+    "spawn": {"required": ["id", "role", "type"], "optional": ["name", "maxHp", "w", "h", "uuid"]},
+    "gone": {"required": ["id"], "optional": ["reason"]},
+    "pos": {"required": ["id", "x", "y", "z"], "optional": ["yaw", "pitch", "hy", "vx", "vy", "vz", "hp", "agg"]},
+    "phys": {"required": ["id"], "optional": ["air", "embed", "noGrav", "onG", "somer", "vel", "y"]},
+    "anim": {"required": ["id"], "optional": ["anim", "pend", "molang", "main", "off", "face"]},
+    "ai": {"required": ["id", "section"], "optional": ["sec", "mode", "hp", "maxHp", "target", "targetType", "dist", "form", "formMode", "amuletCd", "houju", "gensou", "musouTp"]},
+    "proj": {"required": ["ev", "id"], "optional": ["type", "phase", "owner", "vx", "vy", "vz", "w", "h"]},
+    "dmg": {"required": ["victim", "attacker", "direct", "amount", "src"], "optional": ["hpAfter", "attrib", "projType", "phase"]},
+    "vis": {"required": ["id"], "optional": ["age", "scale", "alpha", "color", "spin"]},
+    "sound": {"required": ["id", "src"], "optional": ["x", "y", "z", "vol", "pitch"]},
+    "log": {"required": ["msg"], "optional": []},
+    "tick": {"required": [], "optional": []},
+    "end": {"required": ["reason", "ticks"], "optional": ["actors", "projSpawned", "hitsByReimu", "dmgByReimu", "dmgToReimu", "voidRescues"]}
+  }
+}

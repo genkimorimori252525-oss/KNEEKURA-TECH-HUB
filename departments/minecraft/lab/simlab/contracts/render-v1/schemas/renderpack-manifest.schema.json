@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kneekura.local/schemas/renderpack-manifest-v1.json",
+  "title": "KNEEKURA Render Pack Manifest v1",
+  "type": "object",
+  "required": ["schema", "schemaVersion", "modelId", "packHash", "layoutHash", "compiler", "source", "coordinateSystem", "files"],
+  "properties": {
+    "schema": {"const": "kneekura.renderpack"},
+    "schemaVersion": {"type": "string", "pattern": "^1\\.[0-9]+\\.[0-9]+(?:[-+].*)?$"},
+    "modelId": {"type": "string", "minLength": 1},
+    "packHash": {"$ref": "#/$defs/sha256"},
+    "layoutHash": {"$ref": "#/$defs/sha256"},
+    "coordinateSystem": {"const": "KNEEKURA_RH_Y_UP_BLOCK"},
+    "compiler": {
+      "type": "object",
+      "required": ["name", "version"],
+      "properties": {"name": {"type": "string", "minLength": 1}, "version": {"type": "string", "minLength": 1}},
+      "additionalProperties": true
+    },
+    "source": {
+      "type": "object",
+      "required": ["adapter", "modVersion", "modJarHash", "modelResourceHash"],
+      "properties": {
+        "adapter": {"type": "string", "minLength": 1},
+        "modVersion": {"type": "string", "minLength": 1},
+        "modJarHash": {"$ref": "#/$defs/sha256"},
+        "modelResourceHash": {"$ref": "#/$defs/sha256"}
+      },
+      "additionalProperties": true
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"$ref": "#/$defs/sha256"}
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "$defs": {"sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}},
+  "additionalProperties": true
+}

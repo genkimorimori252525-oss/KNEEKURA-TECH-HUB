@@ -1,0 +1,82 @@
+{
+  "schema": "kneekura.renderframe",
+  "schemaVersion": "1.0.0",
+  "runId": "run-test-001",
+  "entityUuid": "00000000-0000-0000-0000-000000000001",
+  "renderSequence": 42,
+  "gameTime": 100,
+  "partialTick": 0.5,
+  "modelId": "test:reimu",
+  "packHash": "sha256:c353b1c348f4e133ca57077bc4a907ea038239cf27c6bd384fd604a67cb27da4",
+  "layoutHash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "source": {
+    "type": "runtimeMatrix",
+    "authority": "authoritative",
+    "fidelityTier": 1
+  },
+  "modelToWorldMatrix": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+  ],
+  "deformation": {
+    "type": "skinMatrices",
+    "matrices": [
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    ]
+  },
+  "visibility": {
+    "bones": [
+      true
+    ],
+    "groups": [
+      true
+    ]
+  },
+  "drawOrder": [
+    "body"
+  ],
+  "drawStates": {
+    "body": {
+      "visible": true,
+      "tint": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "light": 15728880,
+      "overlay": 0
+    }
+  }
+}
