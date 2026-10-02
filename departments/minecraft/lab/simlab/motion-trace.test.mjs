@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { buildSampledMotionTrace, buildTraceFromSimStore, motionTraceAvailability, MOTION_TRACE_V1 } from './motion-trace.mjs';
+import { buildSampledMotionTrace, buildTraceFromSimStore, motionTraceAvailability, renderMotionTraceSvg, buildMotionTracePacket, MOTION_TRACE_V1 } from './motion-trace.mjs';
 
 const obs = (tick, x, y=64, z=0, extra={}) => ({
   tick, x, y, z,
@@ -95,4 +95,35 @@ test('duplicate ticks are rejected rather than silently choosing an observation'
   assert.throws(() => buildSampledMotionTrace({
     traceClass:'MOB_ACTUAL', subject:{id:'x'}, observations:[obs(1,0), {...obs(1,1), source_observation_id:'other'}],
   }), /duplicate motion observation tick/);
+});
+
+test('AI packet returns structured metrics before bounded derived views', () => {
+  const trace = buildSampledMotionTrace({
+    traceClass: 'MOB_ACTUAL',
+    subject: { id: 'mob-1', type: 'minecraft:ghast' },
+    observations: [obs(10,0,70,0), obs(11,2,72,1), obs(12,3,71,3)],
+  });
+  const packet = buildMotionTracePacket(trace, {views:['PLAN_XZ','ELEVATION','ISOMETRIC_3D']});
+  assert.equal(packet.schema, 'kneekura.motion-trace-packet/v1');
+  assert.equal(packet.metrics.sample_count, 3);
+  assert.equal(packet.artifacts.length, 3);
+  for (const artifact of packet.artifacts) {
+    assert.equal(artifact.derived, true);
+    assert.equal(artifact.mime_type, 'image/svg+xml');
+    assert.match(artifact.content, /data-derived="true"/);
+    assert.match(artifact.content, /stroke-dasharray="12 7"/);
+  }
+});
+
+test('a gap is rendered as a break marker, never as a connecting segment', () => {
+  const trace = buildSampledMotionTrace({
+    traceClass: 'PROJECTILE_ACTUAL',
+    subject: { id: 'p-1' },
+    observations: [obs(1,0), obs(5,10)],
+    maxGapTicks: 1,
+  });
+  const svg = renderMotionTraceSvg(trace, 'PLAN_XZ');
+  assert.equal(trace.segments.length, 0);
+  assert.match(svg, /class="gap"/);
+  assert.doesNotMatch(svg, /<line /);
 });
