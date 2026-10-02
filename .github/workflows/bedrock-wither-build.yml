@@ -1,5 +1,9 @@
 name: Bedrock Wither build
 
+concurrency:
+  group: bedrock-wither-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   push:
     branches:
