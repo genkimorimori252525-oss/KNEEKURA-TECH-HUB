@@ -48,6 +48,16 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
             SynchedEntityData.defineId(BedrockWitherEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> DATA_AERIAL_ATTACK =
             SynchedEntityData.defineId(BedrockWitherEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Integer> DATA_DEATH_TICKS =
+            SynchedEntityData.defineId(BedrockWitherEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Float> DATA_DEATH_OLD_SWELL =
+            SynchedEntityData.defineId(BedrockWitherEntity.class, EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<Float> DATA_DEATH_SWELL =
+            SynchedEntityData.defineId(BedrockWitherEntity.class, EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<Float> DATA_DEATH_OVERLAY_ALPHA =
+            SynchedEntityData.defineId(BedrockWitherEntity.class, EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<Integer> DATA_DEATH_SHIELD_FLICKER =
+            SynchedEntityData.defineId(BedrockWitherEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Optional<UUID>> DATA_HEAD_TARGET_0 =
             SynchedEntityData.defineId(BedrockWitherEntity.class, EntityDataSerializers.OPTIONAL_UUID);
     private static final EntityDataAccessor<Optional<UUID>> DATA_HEAD_TARGET_1 =
@@ -72,6 +82,7 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
     private final BedrockWitherDashController dashController;
     private final BedrockWitherVolleyController volleyController;
     private final BedrockWitherSpawnController spawnController;
+    private final BedrockWitherDeathController deathController;
     private final Set<ServerPlayer> trackingBossPlayers = new HashSet<>();
 
     private boolean difficultyHealthInitialized;
@@ -86,6 +97,7 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
         this.dashController = new BedrockWitherDashController(this);
         this.volleyController = new BedrockWitherVolleyController(this);
         this.spawnController = new BedrockWitherSpawnController(this);
+        this.deathController = new BedrockWitherDeathController(this);
         this.runtimeState.setNativePhase(BedrockWitherPhaseController.firstPhaseNativeId());
         this.spawnController.initializeNewEntity();
         this.bossEvent.setDarkenScreen(true);
@@ -134,6 +146,11 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
         super.defineSynchedData();
         this.entityData.define(DATA_STATE, BedrockWitherState.SPAWN_SEQUENCE.id());
         this.entityData.define(DATA_AERIAL_ATTACK, true);
+        this.entityData.define(DATA_DEATH_TICKS, 0);
+        this.entityData.define(DATA_DEATH_OLD_SWELL, 0.0F);
+        this.entityData.define(DATA_DEATH_SWELL, 0.0F);
+        this.entityData.define(DATA_DEATH_OVERLAY_ALPHA, 0.0F);
+        this.entityData.define(DATA_DEATH_SHIELD_FLICKER, 0);
         this.entityData.define(DATA_HEAD_TARGET_0, Optional.empty());
         this.entityData.define(DATA_HEAD_TARGET_1, Optional.empty());
         this.entityData.define(DATA_HEAD_TARGET_2, Optional.empty());
@@ -246,6 +263,25 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
     }
 
     @Override
+    public void die(DamageSource source) {
+        if (!this.isRemoved() && this.isAlive()) {
+            deathController.begin();
+        }
+        super.die(source);
+    }
+
+    @Override
+    protected void tickDeath() {
+        if (this.level().isClientSide) {
+            // Server-synchronized Wither death state drives visuals/removal.
+            // Suppress Java's ordinary 20-tick side-fall removal timer.
+            this.deathTime = 0;
+            return;
+        }
+        deathController.tickServer();
+    }
+
+    @Override
     public boolean canBeAffected(MobEffectInstance effect) {
         // Current BDS exposes WitherBoss::canBeAffected, and historical Bedrock
         // native code accepts only Instant Health / Instant Damage. As an undead
@@ -285,6 +321,50 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
         // Current Bedrock NBT/visual contract: AirAttack=1 -> first phase,
         // powered shield hidden; AirAttack=0 -> second phase, shield visible.
         return !isAerialAttack();
+    }
+
+    public int getDeathTicksRemaining() {
+        return this.entityData.get(DATA_DEATH_TICKS);
+    }
+
+    public void setDeathTicksRemaining(int value) {
+        this.entityData.set(DATA_DEATH_TICKS, Math.max(0, value));
+    }
+
+    public float getDeathOldSwell() {
+        return this.entityData.get(DATA_DEATH_OLD_SWELL);
+    }
+
+    public void setDeathOldSwell(float value) {
+        this.entityData.set(DATA_DEATH_OLD_SWELL, Math.max(0.0F, value));
+    }
+
+    public float getDeathSwell() {
+        return this.entityData.get(DATA_DEATH_SWELL);
+    }
+
+    public void setDeathSwell(float value) {
+        this.entityData.set(DATA_DEATH_SWELL, Math.max(0.0F, value));
+    }
+
+    public float getDeathOverlayAlpha() {
+        return this.entityData.get(DATA_DEATH_OVERLAY_ALPHA);
+    }
+
+    public void setDeathOverlayAlpha(float value) {
+        this.entityData.set(DATA_DEATH_OVERLAY_ALPHA, Math.max(0.0F, Math.min(1.0F, value)));
+    }
+
+    public int getDeathShieldFlicker() {
+        return this.entityData.get(DATA_DEATH_SHIELD_FLICKER);
+    }
+
+    public void setDeathShieldFlicker(int value) {
+        this.entityData.set(DATA_DEATH_SHIELD_FLICKER, Math.max(0, value));
+    }
+
+    public float getBedrockSwellAmount(float partialTick) {
+        return deathController.swellAmount(partialTick);
     }
 
     public BedrockWitherState getBedrockState() {
@@ -356,6 +436,10 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
         return spawnController;
     }
 
+    public BedrockWitherDeathController deathController() {
+        return deathController;
+    }
+
     public BedrockWitherDebugSnapshot debugSnapshot() {
         Vec3 velocity = this.getDeltaMovement();
         Vec3 chargeDirection = runtimeState.chargeDirection();
@@ -381,6 +465,10 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
                 runtimeState.nativePhase(),
                 isAerialAttack(),
                 isPowered(),
+                getDeathTicksRemaining(),
+                getDeathSwell(),
+                getDeathOverlayAlpha(),
+                getDeathShieldFlicker(),
                 runtimeState.wantsToExplode(),
                 runtimeState.charging(),
                 chargeDirection.x,
@@ -481,6 +569,11 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
         tag.putInt("TimeSinceLastShot", runtimeState.timeSinceLastShot());
         tag.putInt("MainHeadAttackCountdown", runtimeState.mainHeadAttackCountdown());
         tag.putInt("SpawningFrames", runtimeState.spawningFrames());
+        tag.putInt("DyingFrames", getDeathTicksRemaining());
+        tag.putFloat("DeathOldSwell", getDeathOldSwell());
+        tag.putFloat("DeathSwell", getDeathSwell());
+        tag.putFloat("DeathOverlayAlpha", getDeathOverlayAlpha());
+        tag.putInt("DeathShieldFlicker", getDeathShieldFlicker());
         hurtReactionController.addAdditionalSaveData(tag);
     }
 
@@ -530,6 +623,14 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
                 ? tag.getInt("SpawningFrames")
                 : 0;
         spawnController.restore(spawningFrames, restoredState);
+        deathController.restore(
+                tag.getInt("DyingFrames"),
+                tag.getFloat("DeathOldSwell"),
+                tag.getFloat("DeathSwell"),
+                tag.getFloat("DeathOverlayAlpha"),
+                tag.getInt("DeathShieldFlicker"),
+                restoredState
+        );
         hurtReactionController.readAdditionalSaveData(tag);
     }
 }
