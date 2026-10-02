@@ -10,6 +10,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -201,6 +203,15 @@ public final class BedrockWitherEntity extends Monster {
             hurtReactionController.onAcceptedDamage(livingAttacker);
         }
         return accepted;
+    }
+
+    @Override
+    public boolean canBeAffected(MobEffectInstance effect) {
+        // Current BDS exposes WitherBoss::canBeAffected, and historical Bedrock
+        // native code accepts only Instant Health / Instant Damage. As an undead
+        // mob Java applies their effects with the expected reversed semantics.
+        return effect.getEffect() == MobEffects.HEAL
+                || effect.getEffect() == MobEffects.HARM;
     }
 
     @Override
