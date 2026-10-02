@@ -140,3 +140,25 @@ The prior art strengthens, rather than weakens, the current KNEEKURA design deci
 - but avoid patching vanilla `WitherBoss` as the behavioral core;
 - measure Bedrock values instead of inheriting BEStyleWither's constants;
 - add death/transition compatibility tests from the beginning.
+
+
+## Failure/repair case: Issue #4 — delayed death broke killer semantics
+
+Upstream report:
+https://github.com/MORIMORI0317/BEStyleWither/issues/4
+
+Repair commit reviewed:
+`3c519d708fb1856f4661a3670aad36a6be9353da`
+
+Observed history:
+- the reporter described a Wither being held at 1 HP for the custom death/explosion delay;
+- downstream logic checking `isDeadOrDying` at the killing hit could therefore see the boss as not dead;
+- the reporter also warned that later self-driven death could lose the original killer identity for kill-dependent advancements/mods;
+- the maintainer explicitly confirmed the `isDeadOrDying`/Fabric kill-event timing problem, while saying the claimed self-kill portion was not confirmed;
+- the repair removed the separate "alive at 1 HP" death state, called vanilla `die`, used vanilla `deathTime`/`tickDeath` lifecycle timing, suppressed duplicate loot during the initial death call, and retained the extended visual/explosion sequence around that lifecycle;
+- the original reporter subsequently confirmed their advancement triggered correctly.
+
+Engineering lesson for KNEEKURA:
+**visual death staging must not postpone the semantic death transition.** Preserve vanilla/Forge killer attribution and death-event lifecycle, then layer Bedrock-style visual/explosion timing around it. Any custom death controller needs interoperability tests for `isDeadOrDying`, kill events, loot ownership and advancement credit.
+
+This lesson is adopted in the product ledger. It does not imply that BEStyleWither's entire repaired death implementation is copied or that every loader/event edge case is solved.
