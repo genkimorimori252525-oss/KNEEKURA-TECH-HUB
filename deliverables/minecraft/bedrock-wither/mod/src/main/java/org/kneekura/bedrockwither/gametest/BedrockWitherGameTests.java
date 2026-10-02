@@ -6,6 +6,7 @@ import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.WitherSkeleton;
+import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.gametest.GameTestHolder;
 import net.minecraftforge.gametest.PrefixGameTestTemplate;
@@ -179,6 +180,87 @@ public final class BedrockWitherGameTests {
             return;
         }
         helper.succeed();
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 80)
+    public static void halfHealthTransitionIsOneShotAndProjectileImmune(GameTestHelper helper) {
+        BedrockWitherEntity wither = createWither(helper);
+
+        helper.runAfterDelay(2, () -> {
+            int threshold = wither.runtimeState().healthThreshold();
+            if (threshold <= 0) {
+                helper.fail("Difficulty health initialization did not establish half-health threshold");
+                return;
+            }
+
+            wither.setHealth(threshold);
+
+            helper.runAfterDelay(2, () -> {
+                if (wither.runtimeState().nativePhase()
+                        != org.kneekura.bedrockwither.entity.BedrockWitherPhaseController.secondPhaseNativeId()) {
+                    helper.fail("Half-health transition did not enter native phase 0");
+                    return;
+                }
+                if (wither.getBedrockState() != BedrockWitherState.PHASE2_DASH_PREP) {
+                    helper.fail("Half-health transition did not reach PHASE2_DASH_PREP");
+                    return;
+                }
+                if (wither.runtimeState().wantsToExplode()) {
+                    helper.fail("Transition explosion latch was not cleared");
+                    return;
+                }
+
+                int expectedSkeletons = switch (helper.getLevel().getDifficulty()) {
+                    case PEACEFUL, EASY -> 0;
+                    case NORMAL, HARD -> 3;
+                };
+                if (wither.runtimeState().maxSkeletons() != expectedSkeletons
+                        || wither.runtimeState().numSkeletons() != expectedSkeletons) {
+                    helper.fail("Half-health skeleton counters expected "
+                            + expectedSkeletons + " but were "
+                            + wither.runtimeState().numSkeletons() + "/"
+                            + wither.runtimeState().maxSkeletons());
+                    return;
+                }
+
+                int nearbySkeletons = helper.getLevel().getEntitiesOfClass(
+                        WitherSkeleton.class,
+                        wither.getBoundingBox().inflate(6.0D)
+                ).size();
+                if (nearbySkeletons < expectedSkeletons) {
+                    helper.fail("Expected at least " + expectedSkeletons
+                            + " spawned Wither Skeletons but found " + nearbySkeletons);
+                    return;
+                }
+
+                Arrow arrow = EntityType.ARROW.create(helper.getLevel());
+                if (arrow == null) {
+                    helper.fail("Failed to create projectile for phase-2 immunity test");
+                    return;
+                }
+
+                float beforeProjectile = wither.getHealth();
+                boolean accepted = wither.hurt(
+                        helper.getLevel().damageSources().arrow(arrow, arrow),
+                        10.0F
+                );
+                if (accepted || Math.abs(wither.getHealth() - beforeProjectile) > 0.0001F) {
+                    helper.fail("Phase-2 projectile immunity did not reject arrow damage");
+                    return;
+                }
+
+                // A second phase-controller tick must not replay the transition.
+                int beforeCount = wither.runtimeState().numSkeletons();
+                wither.phaseController().tick();
+                if (wither.runtimeState().numSkeletons() != beforeCount
+                        || wither.runtimeState().wantsToExplode()) {
+                    helper.fail("Half-health transition replayed after native phase reached 0");
+                    return;
+                }
+
+                helper.succeed();
+            });
+        });
     }
 
     private static BedrockWitherEntity createWither(GameTestHelper helper) {
