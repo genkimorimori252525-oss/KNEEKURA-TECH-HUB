@@ -12,7 +12,7 @@ Completed:
 - BEStyleWither is a comparative implementation reference, not specification authority.
 - Deliverables boundary and permanent product layout are established.
 - Initial Forge 1.20.1 source scaffold is kept under `mod/`, not the research department.
-- Standalone entity registration, boss bar, state enum/state-machine shell, flight navigation base, ambiguity-preserving threat ledger and read-only debug snapshot compile successfully.
+- Standalone entity registration, boss bar, state enum/state-machine shell, flight navigation base, ambiguity-preserving threat ledger and read-only debug snapshot compile successfully.\n- Mojang current vanilla Wither definitions are pinned at `46ba6ea985fb5a92d79a9419198f10dda14c199d`; official collision/turn/immunity/undead-damage rules have replaced earlier Java-like scaffold assumptions.\n- A custom skull entity now encodes Mojang-exposed normal/dangerous projectile values; its exact post-change build result is still pending at this checkpoint.
 - Dedicated product CI has a retained RED→GREEN history: BWR-0001 failed on a Java wildcard Optional boundary and the exact repaired source then built successfully.
 - Reusable boss lifecycle/state-machine lessons are separated under `departments/minecraft/techniques/`.
 
