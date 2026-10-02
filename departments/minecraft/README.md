@@ -111,3 +111,10 @@ Sinytra Connector は 1.20.1 Forge 系と現行 NeoForge 系の両方を保持�
 この部門はMinecraft技術の調査・根拠・移植知識を保持する。KNEEKURA自身が作るMODの製品ソースは [`deliverables/minecraft/`](../../deliverables/minecraft/README.md) に置く。
 
 例: Bedrock Witherの仕様調査・先行MOD解析・受入根拠は本部門、実際のKNEEKURA Wither MODコード・製品Status・自開発の失敗修理史はdeliverable側。製品で得た教訓を一般技術へ戻す場合も、通常のEvidence/Review経路を通す。
+
+
+## 再利用技術ノート
+
+複数対象へ転用できる実装パターンは [`techniques/`](techniques/README.md) に分離する。これは各MOD固有の仕様書やcanonical Claimの代替ではなく、原典・適用条件・失敗例を保持した技術回収ノート。
+
+最初のノートは [Boss combat state machines and lifecycle boundaries](techniques/boss-combat-state-machines.md)。Bedrock Wither/BEStyleWither調査から、フェーズLatch、突進分離、semantic deathとvisual deathの分離、projectile policy、曖昧仕様の保持、read-only debug stateを一般化した。
