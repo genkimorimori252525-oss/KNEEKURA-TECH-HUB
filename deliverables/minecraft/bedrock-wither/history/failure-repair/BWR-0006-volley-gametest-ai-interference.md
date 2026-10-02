@@ -2,7 +2,7 @@
 
 Date: 2026-10-02  
 Origin: OWN_DEVELOPMENT  
-State: REPAIR_IN_PROGRESS
+State: VERIFIED_FIXED
 
 ## Symptom
 
@@ -36,7 +36,11 @@ The broader fixture was also corrected: all Wither GameTests are assigned distin
 
 ## Verification
 
-Pending dedicated Forge GameTest after repair.
+Dedicated Forge workflow run `36993986762` (source `c230bd372ca2ee96bc0396e424071d2f4c06cb3a`) completed successfully. The GameTest server ran 14 required tests in isolated batches and reported `All 14 required tests passed :)`.
+
+The log shows every Wither test running in its own named batch, including `bwr_centervolleyusesfireratethensevensecondcooldown`. The previously failing volley controller test passed under isolated state/target conditions.
+
+Workflow: https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/36993986762
 
 ## Lesson
 
