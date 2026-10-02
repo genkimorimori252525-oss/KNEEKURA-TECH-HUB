@@ -353,6 +353,7 @@ def build(store: Store, index_snapshot_id: str, *, max_classes: int = 20_000) ->
         "status": "OK" if complete else "PARTIAL",
         "foundation_map_id": foundation_map_id,
         "source_index_snapshot_id": index_snapshot_id,
+        "index_snapshot_id": index_snapshot_id,
         "profile_id": profile["profile_id"],
         "class_count": len(classes),
         "edge_count": len(map_doc["edges"]),
