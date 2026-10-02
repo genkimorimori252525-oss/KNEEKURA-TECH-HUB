@@ -32,6 +32,10 @@ public final class BedrockWitherGameTests {
             assertClose(helper, 3.0F, wither.getBbHeight(), "Bedrock collision height");
             assertClose(helper, 70.0D, wither.getAttributeValue(Attributes.FOLLOW_RANGE), "Bedrock follow range");
 
+            if (wither.getMobType() != net.minecraft.world.entity.MobType.UNDEAD) {
+                helper.fail("Bedrock type_family should map Wither to MobType.UNDEAD");
+                return;
+            }
             if (wither.getBedrockState() != BedrockWitherState.SPAWN_SEQUENCE) {
                 helper.fail("Expected initial reconstruction state SPAWN_SEQUENCE");
                 return;
