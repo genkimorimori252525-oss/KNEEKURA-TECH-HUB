@@ -9,7 +9,11 @@ import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -39,14 +43,14 @@ public final class BedrockWitherEntity extends Monster {
     public BedrockWitherEntity(EntityType<? extends Monster> type, Level level) {
         super(type, level);
         this.stateMachine = new BedrockWitherStateMachine(this);
-        this.moveControl = new FlyingMoveControl(this, 10, true);
+        // Bedrock wither.json exposes movement.basic max_turn 180. The Java
+        // FlyingMoveControl is an adaptation layer, but the exposed turn cap is kept exact.
+        this.moveControl = new FlyingMoveControl(this, 180, true);
         this.setNoGravity(true);
         this.xpReward = 50;
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        // 600 is the exposed Bedrock base/max value. Difficulty-specific runtime
-        // values are a candidate contract until direct Bedrock measurement closes it.
         return Monster.createMonsterAttributes()
                 .add(Attributes.MAX_HEALTH, 600.0D)
                 .add(Attributes.FOLLOW_RANGE, 70.0D)
@@ -57,6 +61,10 @@ public final class BedrockWitherEntity extends Monster {
 
     @Override
     protected PathNavigation createNavigation(Level level) {
+        // Bedrock exposes can_fly plus native/unique Wither movement while its public
+        // JSON still names navigation.walk. Java needs an actual airborne navigation
+        // primitive, so FlyingPathNavigation remains an explicit adaptation, not a
+        // claim about Bedrock's hidden native implementation.
         FlyingPathNavigation navigation = new FlyingPathNavigation(this, level);
         navigation.setCanOpenDoors(false);
         navigation.setCanFloat(true);
@@ -72,8 +80,7 @@ public final class BedrockWitherEntity extends Monster {
 
     @Override
     protected void registerGoals() {
-        // Intentionally empty in the first scaffold.
-        // Bedrock-specific movement, targeting and attacks are added explicitly.
+        // Goal wiring is added from Bedrock's exposed goal ordering, not from Java Wither.
     }
 
     @Override
@@ -90,6 +97,8 @@ public final class BedrockWitherEntity extends Monster {
     }
 
     private void applyCandidateDifficultyHealth() {
+        // Public Bedrock JSON exposes 600. Difficulty-specific 300/450/600 remains
+        // secondary-observation-backed until direct Bedrock measurement closes it.
         Difficulty difficulty = this.level().getDifficulty();
         double maxHealth = switch (difficulty) {
             case HARD -> 600.0D;
@@ -102,6 +111,35 @@ public final class BedrockWitherEntity extends Monster {
             maxHealthAttribute.setBaseValue(maxHealth);
         }
         this.setHealth((float) maxHealth);
+    }
+
+    @Override
+    public boolean hurt(DamageSource source, float amount) {
+        Entity attacker = source.getEntity();
+
+        // Bedrock wither.json damage_sensor: undead damage deals no damage.
+        if (attacker instanceof LivingEntity livingAttacker
+                && livingAttacker.getMobType() == MobType.UNDEAD) {
+            return false;
+        }
+
+        boolean accepted = super.hurt(source, amount);
+        if (accepted && attacker instanceof LivingEntity livingAttacker && livingAttacker != this) {
+            threatLedger.recordDamage(livingAttacker, amount, this.level().getGameTime());
+        }
+        return accepted;
+    }
+
+    @Override
+    public boolean canBreatheUnderwater() {
+        // Bedrock breathable component: breathes_water=true, suffocate_time=0.
+        return true;
+    }
+
+    @Override
+    public boolean canFreeze() {
+        // Bedrock wither.json: minecraft:freezing_immune.
+        return false;
     }
 
     public BedrockWitherState getBedrockState() {
@@ -165,10 +203,5 @@ public final class BedrockWitherEntity extends Monster {
         BedrockWitherState restoredState = BedrockWitherState.fromId(tag.getInt("BedrockState"));
         stateMachine.restore(restoredState, tag.getLong("StateEnteredGameTime"));
         difficultyHealthInitialized = tag.getBoolean("DifficultyHealthInitialized");
-    }
-
-    @Override
-    public boolean isPushable() {
-        return false;
     }
 }
