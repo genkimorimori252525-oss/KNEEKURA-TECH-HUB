@@ -599,6 +599,17 @@ globalThis.SimStore = (function () {
           }
           return out;
         },
+        /** 直近の保持点を二分探索で1件だけ返す。前方フィルした問い合わせ値ではない。 */
+        sampleAtOrBefore: (tick) => {
+          const i = findFloorIndex(lane.ticks, lane.n, tick | 0);
+          if (i < 0) return null;
+          const sampleTick = lane.ticks[i];
+          const base = i * STRIDE;
+          const row = rowFromValues(id, sampleTick, lane.values.subarray(base, base + STRIDE));
+          row.source_observation_id = 'simlab-pos:' + id + ':' + sampleTick;
+          row.source_kind = 'SIMLAB_POS_RETAINED_POINT';
+          return row;
+        },
       };
     }
 
