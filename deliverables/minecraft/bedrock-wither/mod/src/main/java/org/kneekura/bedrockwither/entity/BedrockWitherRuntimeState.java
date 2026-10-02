@@ -9,6 +9,11 @@ import net.minecraft.world.phys.Vec3;
  * It gives runtime observation and later reconstruction a stable place to bind evidence.
  */
 public final class BedrockWitherRuntimeState {
+    private final BedrockWitherHeadRuntime[] heads = {
+            new BedrockWitherHeadRuntime(),
+            new BedrockWitherHeadRuntime(),
+            new BedrockWitherHeadRuntime()
+    };
     private int maxShieldHealth;
     private int shieldHealth;
     private int destroyBlocksTick;
@@ -40,6 +45,17 @@ public final class BedrockWitherRuntimeState {
     private boolean secondVolley;
     private int mainHeadAttackCountdown;
     private int lastFiredHead = -1;
+
+    public BedrockWitherHeadRuntime head(int index) {
+        if (index < 0 || index >= heads.length) {
+            throw new IndexOutOfBoundsException("Wither head index must be 0..2: " + index);
+        }
+        return heads[index];
+    }
+
+    public int headCount() {
+        return heads.length;
+    }
 
     public int maxShieldHealth() { return maxShieldHealth; }
     public void setMaxShieldHealth(int value) { maxShieldHealth = value; }
