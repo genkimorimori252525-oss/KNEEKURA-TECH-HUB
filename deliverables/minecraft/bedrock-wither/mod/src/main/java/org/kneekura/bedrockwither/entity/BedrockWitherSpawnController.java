@@ -23,6 +23,7 @@ public final class BedrockWitherSpawnController {
 
     public void initializeNewEntity() {
         owner.runtimeState().setSpawningFrames(CURRENT_SPAWN_DURATION_TICKS);
+        owner.setAerialAttack(true);
         owner.stateMachine().enter(BedrockWitherState.SPAWN_SEQUENCE);
         completed = false;
     }
