@@ -93,9 +93,20 @@ public final class BedrockWitherEntity extends Monster {
         return Monster.createMonsterAttributes()
                 .add(Attributes.MAX_HEALTH, 600.0D)
                 .add(Attributes.FOLLOW_RANGE, 70.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.25D)
-                .add(Attributes.FLYING_SPEED, 0.25D)
+                // Public Bedrock JSON exposes 0.25, but Bedrock native hardcoded
+                // reload historically overwrites runtime movement speed to 0.6.
+                // Current Bedrock gameplay documentation independently reports 0.6.
+                .add(Attributes.MOVEMENT_SPEED, 0.6D)
+                .add(Attributes.FLYING_SPEED, 0.6D)
                 .add(Attributes.ARMOR, 4.0D);
+    }
+
+    public static double maxHealthForDifficulty(Difficulty difficulty) {
+        return switch (difficulty) {
+            case HARD -> 600.0D;
+            case NORMAL -> 450.0D;
+            case EASY, PEACEFUL -> 300.0D;
+        };
     }
 
     @Override
@@ -161,7 +172,7 @@ public final class BedrockWitherEntity extends Monster {
         super.customServerAiStep();
 
         if (!difficultyHealthInitialized) {
-            applyCandidateDifficultyHealth();
+            applyBedrockDifficultyHealth();
             difficultyHealthInitialized = true;
         }
 
