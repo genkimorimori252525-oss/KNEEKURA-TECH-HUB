@@ -1,5 +1,6 @@
 package org.kneekura.bedrockwither.entity;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
@@ -92,6 +93,26 @@ public final class BedrockWitherHurtReactionController {
         // Exact current Bedrock fallback direction is not publicly exposed.
         // Forward firing is an explicit Java adaptation for the no-target case.
         return owner.getEyePosition().add(owner.getLookAngle().scale(16.0D));
+    }
+
+    public void addAdditionalSaveData(CompoundTag tag) {
+        if (attackerUuid != null) {
+            tag.putUUID("HurtReactionAttacker", attackerUuid);
+        }
+        tag.putDouble("HurtReactionAttackerX", attackerPosition.x);
+        tag.putDouble("HurtReactionAttackerY", attackerPosition.y);
+        tag.putDouble("HurtReactionAttackerZ", attackerPosition.z);
+    }
+
+    public void readAdditionalSaveData(CompoundTag tag) {
+        attackerUuid = tag.hasUUID("HurtReactionAttacker")
+                ? tag.getUUID("HurtReactionAttacker")
+                : null;
+        attackerPosition = new Vec3(
+                tag.getDouble("HurtReactionAttackerX"),
+                tag.getDouble("HurtReactionAttackerY"),
+                tag.getDouble("HurtReactionAttackerZ")
+        );
     }
 
     private void clearPendingAttacker() {
