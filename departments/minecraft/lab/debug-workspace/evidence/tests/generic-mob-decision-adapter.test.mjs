@@ -10,7 +10,11 @@ function fakeStore(){
   const points=[sample(5,0),sample(10,2)];
   return {
     entities,
-    trackOf(id){ assert.equal(id,7); return {t0:5,t1:10,samples(a,b){ return points.filter(p=>p.tick>=a&&p.tick<=b); }}; },
+    trackOf(id){ assert.equal(id,7); return {
+      t0:5,t1:10,
+      samples(a,b){ return points.filter(p=>p.tick>=a&&p.tick<=b); },
+      sampleAtOrBefore(t){ return [...points].reverse().find(p=>p.tick<=t)||null; },
+    }; },
     stateAt(ch,id,t){ assert.equal(ch,'pos'); assert.equal(id,7); const p=[...points].reverse().find(p=>p.tick<=t); return p?{...p,t}:null; },
   };
 }
