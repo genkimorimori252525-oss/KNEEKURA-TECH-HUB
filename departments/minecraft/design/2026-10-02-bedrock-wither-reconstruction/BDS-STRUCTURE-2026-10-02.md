@@ -206,3 +206,27 @@ For each BDS field/function:
 - preAiStep result by spawn/phase/stun/death state
 
 These are now preferred measurement/reverse-analysis targets.
+
+
+## Random-stroll inherited fields versus exposed schema
+
+Current C++ structural definition:
+`WitherRandomAttackPosGoalDefinition : RandomStrollGoalDefinition`.
+
+The parent definition contains:
+- `mSpeedModifier`
+- `mXZDist`
+- `mYDist`
+- `mInterval`
+
+The ordinary Mojang `minecraft:behavior.random_stroll` schema exposes defaults:
+- speed multiplier 1
+- xz distance 10
+- y distance 7
+- interval 120
+
+However, the current dedicated `minecraft:behavior.wither_random_attack_pos_goal` schema exposes only:
+- priority
+- control_flags
+
+Therefore KNEEKURA does **not** assume the ordinary random-stroll numeric defaults are the effective native Wither values. The C++ inheritance proves field shape, not current initialized values. Those four values remain measurement/symbol-body targets.
