@@ -2,7 +2,7 @@
 
 Date: 2026-10-02  
 Origin: OWN_DEVELOPMENT  
-State: REPAIR_IN_PROGRESS
+State: VERIFIED_FIXED
 
 ## Symptom
 
@@ -45,7 +45,15 @@ Add a dedicated spawn controller that:
 
 ## Verification
 
-Pending dedicated Forge build + GameTest.
+Dedicated Forge workflow run `36993986762` (source `c230bd372ca2ee96bc0396e424071d2f4c06cb3a`) completed successfully. The GameTest server ran 14 required tests in isolated batches and reported `All 14 required tests passed :)`.
+
+The isolated `spawnSequenceUsesModern220TickContract` batch passed, including:
+- new entity starts in the modern 220-tick spawn countdown;
+- ordinary damage is rejected during spawn;
+- the sequence remains active through tick 219;
+- tick 220 exits to `PHASE1_REPOSITION`.
+
+Workflow: https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/36993986762
 
 ## Lesson
 
