@@ -12,7 +12,7 @@ from pathlib import Path
 import sys
 import zipfile
 
-from . import asset_contract, blockbench, execution, input_route, runtime, task_context, verification
+from . import asset_contract, blockbench, execution, experiment_adapter, input_route, runtime, task_context, verification
 from .storage import ContractError, Limits, Store, _collect, digest, key_for, valid_hash
 from .workspace import workspace_fingerprint
 
@@ -334,7 +334,7 @@ def evaluate_capabilities(store: Store, request: dict, inputs: dict, evidence: d
         result['experimental_runtime'] = _record('experimental_runtime', 'BLOCKED',
             'LAB_RUNTIME_ATTESTATION_REQUIRED', ('loaded_runtime_attestation', 'disposable_world_authority',
             'live_repair_acceptance'), (report['result_hash'],) if report else (control['receipt_hash'],) if control else ())
-    elif (inputs.get('builtin_lab_source') or {}).get('status') == 'AVAILABLE':
+    elif experiment_adapter.inspect_builtin_source().get('status') == 'AVAILABLE':
         result['experimental_runtime'] = _record('experimental_runtime', 'BLOCKED',
             'LAB_RUNTIME_ATTESTATION_REQUIRED', ('experiment_registry', 'loaded_runtime_attestation',
             'disposable_world_authority', 'live_repair_acceptance'))
@@ -398,9 +398,6 @@ def derive_next_actions(request: dict, inputs: dict, capabilities: list[dict]) -
         actions.append(_action('experiment.inspect_owner', 'READ_ONLY', ('request_hash', 'control_registry')))
     elif inputs.get('experiment_adapter') and not reconcile:
         actions.append(_action('experiment.prepare', 'SIDE_EFFECTING', ('experiment_request',)))
-    elif (inputs.get('builtin_lab_source') or {}).get('status') == 'AVAILABLE' and not reconcile:
-        actions.append(_action('experiment.prepare', 'SIDE_EFFECTING',
-            ('experiment_request', 'experiment_registry'), reason='LAB_RUNTIME_ATTESTATION_REQUIRED'))
     for operation, intents, capability, mode, required in _NEXT_ACTION_RULES:
         c = by_id.get(capability, {})
         if (intent in intents and c.get('surface') == 'IMPLEMENTED' and c.get('readiness') == 'READY'
