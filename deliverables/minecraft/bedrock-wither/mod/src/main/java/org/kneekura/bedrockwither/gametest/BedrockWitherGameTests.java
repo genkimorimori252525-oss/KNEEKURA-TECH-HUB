@@ -282,6 +282,77 @@ public final class BedrockWitherGameTests {
         helper.succeed();
     }
 
+    @GameTest(template = "empty", timeoutTicks = 60)
+    public static void hurtReactionDelayDoesNotResetAndFiresDangerousSkull(GameTestHelper helper) {
+        BedrockWitherEntity wither = createWither(helper);
+        net.minecraft.world.entity.animal.Cow attacker = EntityType.COW.create(helper.getLevel());
+        if (attacker == null) {
+            helper.fail("Failed to create hurt-reaction attacker");
+            return;
+        }
+
+        BlockPos attackerPos = helper.absolutePos(new BlockPos(3, 1, 0));
+        attacker.moveTo(attackerPos.getX() + 0.5D, attackerPos.getY(), attackerPos.getZ() + 0.5D);
+        helper.getLevel().addFreshEntity(attacker);
+
+        helper.runAfterDelay(2, () -> {
+            boolean firstAccepted = wither.hurt(
+                    helper.getLevel().damageSources().mobAttack(attacker),
+                    1.0F
+            );
+            if (!firstAccepted || wither.runtimeState().destroyBlocksTick() != 20) {
+                helper.fail("First phase-1 hit did not arm a 20-tick destroy timer");
+                return;
+            }
+
+            for (int i = 0; i < 5; i++) {
+                wither.hurtReactionController().tick();
+            }
+            if (wither.runtimeState().destroyBlocksTick() != 15) {
+                helper.fail("Manual hurt reaction countdown expected 15 ticks remaining");
+                return;
+            }
+
+            // Reset vanilla hurt invulnerability only for this deterministic controller test.
+            wither.invulnerableTime = 0;
+            boolean secondAccepted = wither.hurt(
+                    helper.getLevel().damageSources().mobAttack(attacker),
+                    1.0F
+            );
+            if (!secondAccepted) {
+                helper.fail("Second deterministic hurt-reaction hit was unexpectedly rejected");
+                return;
+            }
+            if (wither.runtimeState().destroyBlocksTick() != 15) {
+                helper.fail("Repeated damage reset the Bedrock hurt-reaction timer");
+                return;
+            }
+
+            for (int i = 0; i < 15; i++) {
+                wither.hurtReactionController().tick();
+            }
+
+            if (wither.runtimeState().destroyBlocksTick() != 0) {
+                helper.fail("Hurt reaction did not complete after 20 total controller ticks");
+                return;
+            }
+
+            java.util.List<BedrockWitherSkullEntity> skulls = helper.getLevel().getEntitiesOfClass(
+                    BedrockWitherSkullEntity.class,
+                    wither.getBoundingBox().inflate(8.0D)
+            );
+            long dangerousCount = skulls.stream()
+                    .filter(BedrockWitherSkullEntity::isDangerous)
+                    .count();
+            if (dangerousCount != 1L) {
+                helper.fail("Hurt reaction expected exactly one dangerous skull but found " + dangerousCount);
+                return;
+            }
+
+            helper.succeed();
+        });
+    }
+
     private static BedrockWitherEntity createWither(GameTestHelper helper) {
         BedrockWitherEntity wither = ModEntities.BEDROCK_WITHER.get().create(helper.getLevel());
         if (wither == null) {
