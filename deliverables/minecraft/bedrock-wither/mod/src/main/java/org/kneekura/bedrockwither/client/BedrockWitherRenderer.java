@@ -17,10 +17,28 @@ public final class BedrockWitherRenderer extends MobRenderer<BedrockWitherEntity
 
     @Override
     protected void scale(BedrockWitherEntity entity, PoseStack poseStack, float partialTick) {
-        // Mojang Bedrock client entity: variable.base_scale = 2.
-        // Spawn/death swell is layered on top later once the exact Bedrock swell
-        // lifecycle is reconstructed.
-        poseStack.scale(2.0F, 2.0F, 2.0F);
+        // Current Mojang Bedrock wither.entity.json:
+        // base_scale = 2
+        // swell_clamped = clamp(query.swell_amount, 0, 1)
+        // wobble = 1 + sin(query.swell_amount * 5730deg) * query.swell_amount * 0.01
+        // swell_adjustment = swell_clamped^4
+        // scale_xz = (1 + swell_adjustment * 0.4) * wobble
+        // scale_y  = (1 + swell_adjustment * 0.1) / wobble
+        float swell = entity.getBedrockSwellAmount(partialTick);
+        float swellClamped = Math.max(0.0F, Math.min(1.0F, swell));
+        float wobble = 1.0F + (float) Math.sin(swell * 100.0F) * swell * 0.01F;
+        float adjustment = swellClamped * swellClamped;
+        adjustment *= adjustment;
+
+        float scaleXZ = (1.0F + adjustment * 0.4F) * wobble;
+        float scaleY = (1.0F + adjustment * 0.1F) / wobble;
+
+        poseStack.scale(2.0F * scaleXZ, 2.0F * scaleY, 2.0F * scaleXZ);
+    }
+
+    @Override
+    protected float getWhiteOverlayProgress(BedrockWitherEntity entity, float partialTick) {
+        return entity.getDeathOverlayAlpha();
     }
 
     @Override
