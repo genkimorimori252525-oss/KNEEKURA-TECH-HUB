@@ -30,6 +30,4 @@ def test_vendored_lab_source_is_discovered_without_external_registry(tmp_path):
     assert runtime['readiness'] == 'BLOCKED'
     assert runtime['reason_code'] == 'LAB_RUNTIME_ATTESTATION_REQUIRED'
     assert 'experiment_registry' in runtime['missing']
-    action = next(a for a in result['next_actions'] if a['operation_id'] == 'experiment.prepare')
-    assert action['mode'] == 'SIDE_EFFECTING'
-    assert action['required_inputs'] == ['experiment_request', 'experiment_registry']
+    assert all(a['operation_id'] != 'experiment.prepare' for a in result['next_actions'])
