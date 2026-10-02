@@ -50,6 +50,12 @@ public final class BedrockWitherGameTests {
                 helper.fail("Expected initial reconstruction state SPAWN_SEQUENCE");
                 return;
             }
+            if (wither.runtimeState().spawningFrames() <= 0
+                    || wither.runtimeState().spawningFrames()
+                    > org.kneekura.bedrockwither.entity.BedrockWitherSpawnController.CURRENT_SPAWN_DURATION_TICKS) {
+                helper.fail("Modern Bedrock spawn countdown was not active");
+                return;
+            }
             if (wither.runtimeState().headCount() != 3) {
                 helper.fail("Expected three BDS-style head runtime slots");
                 return;
@@ -59,8 +65,60 @@ public final class BedrockWitherGameTests {
     }
 
     @GameTest(template = "empty", timeoutTicks = 40)
-    public static void undeadDamageIsRejected(GameTestHelper helper) {
+    public static void spawnSequenceUsesModern220TickContract(GameTestHelper helper) {
         BedrockWitherEntity wither = createWither(helper);
+
+        if (wither.runtimeState().spawningFrames()
+                != org.kneekura.bedrockwither.entity.BedrockWitherSpawnController.CURRENT_SPAWN_DURATION_TICKS) {
+            helper.fail("New Bedrock Wither did not initialize a 220-tick spawn countdown");
+            return;
+        }
+
+        net.minecraft.world.entity.animal.Cow attacker = EntityType.COW.create(helper.getLevel());
+        if (attacker == null) {
+            helper.fail("Failed to create spawn-sequence attacker");
+            return;
+        }
+        BlockPos attackerPos = helper.absolutePos(new BlockPos(8, 1, 0));
+        attacker.moveTo(attackerPos.getX() + 0.5D, attackerPos.getY(), attackerPos.getZ() + 0.5D);
+        helper.getLevel().addFreshEntity(attacker);
+
+        float before = wither.getHealth();
+        boolean acceptedDuringSpawn = wither.hurt(
+                helper.getLevel().damageSources().mobAttack(attacker),
+                4.0F
+        );
+        if (acceptedDuringSpawn || Math.abs(wither.getHealth() - before) > 0.0001F) {
+            helper.fail("Spawn sequence did not reject ordinary damage");
+            return;
+        }
+
+        for (int tick = 0;
+             tick < org.kneekura.bedrockwither.entity.BedrockWitherSpawnController.CURRENT_SPAWN_DURATION_TICKS - 1;
+             tick++) {
+            wither.spawnController().tick();
+        }
+
+        if (wither.runtimeState().spawningFrames() != 1
+                || wither.getBedrockState() != BedrockWitherState.SPAWN_SEQUENCE) {
+            helper.fail("Spawn sequence ended before the 220th controller tick");
+            return;
+        }
+
+        wither.spawnController().tick();
+
+        if (wither.runtimeState().spawningFrames() != 0
+                || wither.getBedrockState() != BedrockWitherState.PHASE1_REPOSITION) {
+            helper.fail("Spawn sequence did not complete exactly on the 220th controller tick");
+            return;
+        }
+
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 40)
+    public static void undeadDamageIsRejected(GameTestHelper helper) {
+        BedrockWitherEntity wither = createCombatReadyWither(helper);
         WitherSkeleton attacker = EntityType.WITHER_SKELETON.create(helper.getLevel());
         if (attacker == null) {
             helper.fail("Failed to create Wither Skeleton attacker");
@@ -235,7 +293,7 @@ public final class BedrockWitherGameTests {
 
     @GameTest(template = "empty", timeoutTicks = 80)
     public static void halfHealthTransitionIsOneShotAndProjectileImmune(GameTestHelper helper) {
-        BedrockWitherEntity wither = createWither(helper);
+        BedrockWitherEntity wither = createCombatReadyWither(helper);
 
         helper.runAfterDelay(2, () -> {
             int threshold = wither.runtimeState().healthThreshold();
@@ -335,7 +393,7 @@ public final class BedrockWitherGameTests {
 
     @GameTest(template = "empty", timeoutTicks = 60)
     public static void hurtReactionDelayDoesNotResetAndFiresDangerousSkull(GameTestHelper helper) {
-        BedrockWitherEntity wither = createWither(helper);
+        BedrockWitherEntity wither = createCombatReadyWither(helper);
         net.minecraft.world.entity.animal.Cow attacker = EntityType.COW.create(helper.getLevel());
         if (attacker == null) {
             helper.fail("Failed to create hurt-reaction attacker");
@@ -477,7 +535,7 @@ public final class BedrockWitherGameTests {
 
     @GameTest(template = "empty", timeoutTicks = 80)
     public static void centerVolleyUsesFireRateThenSevenSecondCooldown(GameTestHelper helper) {
-        BedrockWitherEntity wither = createWither(helper);
+        BedrockWitherEntity wither = createCombatReadyWither(helper);
         net.minecraft.world.entity.animal.Cow target = EntityType.COW.create(helper.getLevel());
         if (target == null) {
             helper.fail("Failed to create volley target");
@@ -561,7 +619,7 @@ public final class BedrockWitherGameTests {
 
     @GameTest(template = "empty", timeoutTicks = 60)
     public static void damageIntervalHalvesHistoricalNativeFireRate(GameTestHelper helper) {
-        BedrockWitherEntity wither = createWither(helper);
+        BedrockWitherEntity wither = createCombatReadyWither(helper);
 
         helper.runAfterDelay(2, () -> {
             int initialRate = wither.runtimeState().fireRate();
@@ -597,6 +655,14 @@ public final class BedrockWitherGameTests {
 
             helper.succeed();
         });
+    }
+
+    private static BedrockWitherEntity createCombatReadyWither(GameTestHelper helper) {
+        BedrockWitherEntity wither = createWither(helper);
+        wither.runtimeState().setSpawningFrames(0);
+        wither.setBedrockState(BedrockWitherState.PHASE1_REPOSITION);
+        wither.spawnController().restore(0, BedrockWitherState.PHASE1_REPOSITION);
+        return wither;
     }
 
     private static BedrockWitherEntity createWither(GameTestHelper helper) {
