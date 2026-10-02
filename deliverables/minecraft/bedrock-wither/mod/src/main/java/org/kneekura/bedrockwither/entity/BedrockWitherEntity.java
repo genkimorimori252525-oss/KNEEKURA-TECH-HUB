@@ -28,10 +28,18 @@ import net.minecraft.world.phys.Vec3;
 import org.kneekura.bedrockwither.entity.ai.BedrockHighestDamageTargetGoal;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 public final class BedrockWitherEntity extends Monster {
     private static final EntityDataAccessor<Integer> DATA_STATE =
             SynchedEntityData.defineId(BedrockWitherEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Optional<UUID>> DATA_HEAD_TARGET_0 =
+            SynchedEntityData.defineId(BedrockWitherEntity.class, EntityDataSerializers.OPTIONAL_UUID);
+    private static final EntityDataAccessor<Optional<UUID>> DATA_HEAD_TARGET_1 =
+            SynchedEntityData.defineId(BedrockWitherEntity.class, EntityDataSerializers.OPTIONAL_UUID);
+    private static final EntityDataAccessor<Optional<UUID>> DATA_HEAD_TARGET_2 =
+            SynchedEntityData.defineId(BedrockWitherEntity.class, EntityDataSerializers.OPTIONAL_UUID);
 
     private final ServerBossEvent bossEvent =
             new ServerBossEvent(
@@ -84,6 +92,9 @@ public final class BedrockWitherEntity extends Monster {
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(DATA_STATE, BedrockWitherState.SPAWN_SEQUENCE.id());
+        this.entityData.define(DATA_HEAD_TARGET_0, Optional.empty());
+        this.entityData.define(DATA_HEAD_TARGET_1, Optional.empty());
+        this.entityData.define(DATA_HEAD_TARGET_2, Optional.empty());
     }
 
     @Override
@@ -192,6 +203,27 @@ public final class BedrockWitherEntity extends Monster {
         return runtimeState;
     }
 
+    public Optional<UUID> getAlternativeHeadTarget(int headIndex) {
+        return this.entityData.get(headTargetAccessor(headIndex));
+    }
+
+    public void setAlternativeHeadTarget(int headIndex, UUID targetUuid) {
+        this.entityData.set(headTargetAccessor(headIndex), Optional.ofNullable(targetUuid));
+    }
+
+    public void clearAlternativeHeadTarget(int headIndex) {
+        this.entityData.set(headTargetAccessor(headIndex), Optional.empty());
+    }
+
+    private static EntityDataAccessor<Optional<UUID>> headTargetAccessor(int headIndex) {
+        return switch (headIndex) {
+            case 0 -> DATA_HEAD_TARGET_0;
+            case 1 -> DATA_HEAD_TARGET_1;
+            case 2 -> DATA_HEAD_TARGET_2;
+            default -> throw new IndexOutOfBoundsException("Wither head index must be 0..2: " + headIndex);
+        };
+    }
+
     public BedrockWitherAttackController attackController() {
         return attackController;
     }
@@ -257,7 +289,8 @@ public final class BedrockWitherEntity extends Monster {
                 head.oldYaw(),
                 head.oldPitch(),
                 head.nextUpdate(),
-                head.idleUpdates()
+                head.idleUpdates(),
+                getAlternativeHeadTarget(index)
         );
     }
 
