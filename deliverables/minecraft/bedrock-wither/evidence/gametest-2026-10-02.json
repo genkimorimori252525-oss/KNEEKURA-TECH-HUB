@@ -3,14 +3,14 @@
   "deliverable": "minecraft/bedrock-wither",
   "recorded_at": "2026-10-02",
   "latest_accepted": {
-    "source_commit": "c230bd372ca2ee96bc0396e424071d2f4c06cb3a",
-    "workflow_run_id": 36993986762,
-    "job_id": 110796623040,
+    "source_commit": "da3ee83a14e3d110ffb34a0b442186a06e1cecae",
+    "workflow_run_id": 37001222165,
+    "job_id": 110819160128,
     "outcome": "SUCCESS",
-    "required_tests": 14,
-    "passed": 14,
+    "required_tests": 18,
+    "passed": 18,
     "failed": 0,
-    "server_log_summary": "All 14 required tests passed :)"
+    "server_log_summary": "All 18 required tests passed :)"
   },
   "environment": {
     "minecraft": "1.20.1",
@@ -34,7 +34,11 @@
     "phase-1 hurt reaction countdown does not reset and emits one dangerous skull",
     "phase-2 dash execution lasts exactly 20 controller ticks",
     "ordinary status effects are rejected while instant heal/harm processing remains allowed",
-    "isolated GameTest batches prevent cross-test AI/projectile/explosion interference"
+    "isolated GameTest batches prevent cross-test AI/projectile/explosion interference",
+    "semantic death is immediate while Bedrock-specific 200-tick provisional death ticking delays removal and advances swell/overlay state",
+    "special movement state gate requires phase-1 aerial state, live target and wantsMove without guessed destination/speed constants",
+    "passive dangerous side-head firing is disabled on Easy and enabled on Normal/Hard",
+    "three Bedrock head pitch queries track main/alternative targets independently and synchronize to the client"
   ],
   "not_proven": [
     "direct current-Bedrock parity",
