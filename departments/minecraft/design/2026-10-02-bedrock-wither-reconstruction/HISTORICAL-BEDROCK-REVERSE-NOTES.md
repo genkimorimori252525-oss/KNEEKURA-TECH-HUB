@@ -338,3 +338,26 @@ The provisional timing/equation lives only in `BedrockWitherVolleyController` so
 - current phase-2 use of the same center-head volley controller;
 - exact relation between `mSecondVolley`, `mDelayShot` and the observed 7-second pause;
 - current passive dangerous-skull timer (~15 seconds in technical observation).
+
+
+## Spawn-duration version drift
+
+This value is a clear example where current behavior should override historical native constants.
+
+Historical Bedrock native `reloadHardcoded`:
+- writes `mSpawningFrames = 200`;
+- writes synced invulnerability ticks = 200.
+
+Current Minecraft gameplay documentation describes the Wither as invulnerable for **11 seconds**, i.e. 220 game ticks at 20 TPS.
+
+Current BDS 1.26.51.1 still exposes:
+- `mSpawningFrames`;
+- pre-AI gating capable of suppressing normal AI while special state is active.
+
+KNEEKURA policy:
+- historical 200 remains retained as version-labelled evidence;
+- current reconstruction should use 220 ticks for the modern Bedrock target;
+- the constant must be isolated in the spawn controller so future version measurements can replace it cleanly;
+- spawn countdown, visual invulnerability query and initial explosion remain distinct acceptance surfaces.
+
+This is another example of why historical Bedrock native bodies are structural/corroboration input, not unversioned current constants.
