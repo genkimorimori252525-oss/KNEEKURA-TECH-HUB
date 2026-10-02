@@ -23,7 +23,7 @@ public final class BedrockWitherSkullGameTests {
     }
 
     @GameTest(template = "empty", timeoutTicks = 40)
-    public static void entityHitHasNoJavaImpactDamage(GameTestHelper helper) {
+    public static void entityHitMatchesBedrockImpactDamage(GameTestHelper helper) {
         BedrockWitherEntity owner = ModEntities.BEDROCK_WITHER.get().create(helper.getLevel());
         Cow target = EntityType.COW.create(helper.getLevel());
         if (owner == null || target == null) {
@@ -48,8 +48,17 @@ public final class BedrockWitherSkullGameTests {
         float before = target.getHealth();
         skull.onHitEntity(new EntityHitResult(target));
 
-        if (Math.abs(target.getHealth() - before) > 0.0001F) {
-            helper.fail("Bedrock skull leaked Java WitherSkull direct impact damage");
+        float expectedDamage = switch (helper.getLevel().getDifficulty()) {
+            case PEACEFUL -> 0.0F;
+            case EASY -> 5.0F;
+            case NORMAL -> 8.0F;
+            case HARD -> 12.0F;
+        };
+        float actualDamage = before - target.getHealth();
+        if (Math.abs(actualDamage - expectedDamage) > 0.0001F) {
+            helper.fail("Bedrock skull impact damage expected "
+                    + expectedDamage + " on " + helper.getLevel().getDifficulty()
+                    + " but was " + actualDamage);
             return;
         }
 
