@@ -61,6 +61,7 @@ public final class BedrockWitherPhaseController {
 
     private void beginHalfHealthTransition() {
         owner.runtimeState().setNativePhase(SECOND_PHASE_NATIVE_ID);
+        owner.setAerialAttack(false);
         owner.runtimeState().setWantsToExplode(true);
         owner.stateMachine().enter(BedrockWitherState.PHASE_TRANSITION);
     }
