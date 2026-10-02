@@ -32,6 +32,8 @@ Immediately before the manual volley-controller step, establish the exact precon
 
 Then call the controller and assert its transition/cadence deterministically.
 
+The broader fixture was also corrected: all Wither GameTests are assigned distinct batches so bosses with 70-block targeting, explosions and projectiles do not execute concurrently in the same default batch. Controller-test targets may additionally be invulnerable where their survival is a test precondition.
+
 ## Verification
 
 Pending dedicated Forge GameTest after repair.
