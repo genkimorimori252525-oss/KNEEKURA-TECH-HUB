@@ -110,3 +110,17 @@ Vanilla AIの意味解析は [vanilla-ai](vanilla-ai/README.md)、実機での�
 [2026-09-28 確定設計](design/2026-09-28-mod-ai-environment/DESIGN.md)は、Source Intelligence、全classpath、source/bytecode、Connector研究、実装例・失敗例、GameTestと実機観測を既存部門へ接続する設計。4巡の敵対的設計監査、採否記録、受け入れ仕様、参考原典を同じディレクトリに保持する。
 
 設計資料であり、新機能の実装・動作検証・既存解析キューの完了を意味しない。
+
+
+## 成果物との境界
+
+この部門はMinecraft技術の調査・根拠・移植知識を保持する。KNEEKURA自身が作るMODの製品ソースは [`deliverables/minecraft/`](../../deliverables/minecraft/README.md) に置く。
+
+例: Bedrock Witherの仕様調査・先行MOD解析・受入根拠は本部門、実際のKNEEKURA Wither MODコード・製品Status・自開発の失敗修理史はdeliverable側。製品で得た教訓を一般技術へ戻す場合も、通常のEvidence/Review経路を通す。
+
+
+## 再利用技術ノート
+
+複数対象へ転用できる実装パターンは [`techniques/`](techniques/README.md) に分離する。これは各MOD固有の仕様書やcanonical Claimの代替ではなく、原典・適用条件・失敗例を保持した技術回収ノート。
+
+最初のノートは [Boss combat state machines and lifecycle boundaries](techniques/boss-combat-state-machines.md)。Bedrock Wither/BEStyleWither調査から、フェーズLatch、突進分離、semantic deathとvisual deathの分離、projectile policy、曖昧仕様の保持、read-only debug stateを一般化した。
