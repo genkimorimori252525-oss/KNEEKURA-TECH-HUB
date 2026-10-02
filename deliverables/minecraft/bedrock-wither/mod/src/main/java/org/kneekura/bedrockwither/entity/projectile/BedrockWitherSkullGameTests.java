@@ -48,12 +48,16 @@ public final class BedrockWitherSkullGameTests {
         float before = target.getHealth();
         skull.onHitEntity(new EntityHitResult(target));
 
-        float expectedDamage = switch (helper.getLevel().getDifficulty()) {
-            case PEACEFUL -> 0.0F;
-            case EASY -> 5.0F;
-            case NORMAL -> 8.0F;
-            case HARD -> 12.0F;
-        };
+        if (BedrockWitherSkullEntity.impactDamageFor(Difficulty.EASY) != 5.0F
+                || BedrockWitherSkullEntity.impactDamageFor(Difficulty.NORMAL) != 8.0F
+                || BedrockWitherSkullEntity.impactDamageFor(Difficulty.HARD) != 12.0F) {
+            helper.fail("Bedrock skull difficulty damage mapping is not 5/8/12");
+            return;
+        }
+
+        float expectedDamage = BedrockWitherSkullEntity.impactDamageFor(
+                helper.getLevel().getDifficulty()
+        );
         float actualDamage = before - target.getHealth();
         if (Math.abs(actualDamage - expectedDamage) > 0.0001F) {
             helper.fail("Bedrock skull impact damage expected "
