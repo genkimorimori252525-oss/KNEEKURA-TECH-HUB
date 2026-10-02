@@ -27,7 +27,7 @@ test('SampledMotionTrace v1 preserves source identity and derives bounded metric
   assert.equal(trace.segments[0].semantics, 'SAMPLED_ENDPOINT_CONNECTION');
   assert.equal(trace.semantics.continuous_path_claimed, false);
   assert.deepEqual(trace.source_observation_ids, ['obs-10','obs-11','obs-12']);
-  assert.equal(trace.metrics.sampled_polyline_length, 8);
+  assert.equal(trace.metrics.sampled_polyline_length, 3 + Math.sqrt(32));
   assert.equal(trace.metrics.net_displacement, Math.sqrt(41));
   assert.equal(trace.metrics.min_altitude, 64);
   assert.equal(trace.metrics.max_altitude, 68);
