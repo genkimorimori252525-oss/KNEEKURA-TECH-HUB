@@ -66,6 +66,7 @@ public final class BedrockWitherEntity extends Monster {
     private final BedrockWitherDestructionController destructionController;
     private final BedrockWitherHurtReactionController hurtReactionController;
     private final BedrockWitherDashController dashController;
+    private final BedrockWitherVolleyController volleyController;
     private final Set<ServerPlayer> trackingBossPlayers = new HashSet<>();
 
     private boolean difficultyHealthInitialized;
@@ -78,6 +79,7 @@ public final class BedrockWitherEntity extends Monster {
         this.destructionController = new BedrockWitherDestructionController(this);
         this.hurtReactionController = new BedrockWitherHurtReactionController(this);
         this.dashController = new BedrockWitherDashController(this);
+        this.volleyController = new BedrockWitherVolleyController(this);
         this.runtimeState.setNativePhase(BedrockWitherPhaseController.firstPhaseNativeId());
         this.bossEvent.setDarkenScreen(true);
         // Bedrock wither.json exposes movement.basic max_turn 180. The Java
@@ -167,6 +169,7 @@ public final class BedrockWitherEntity extends Monster {
         this.phaseController.tick();
         this.hurtReactionController.tick();
         this.dashController.tick();
+        this.volleyController.tick();
         this.bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
         updateBossBarPlayers();
     }
@@ -187,6 +190,7 @@ public final class BedrockWitherEntity extends Monster {
         }
         this.setHealth((float) maxHealth);
         this.phaseController.initializeForCurrentDifficulty();
+        this.volleyController.initializeForCurrentDifficulty();
     }
 
     @Override
@@ -209,6 +213,7 @@ public final class BedrockWitherEntity extends Monster {
         if (accepted && attacker instanceof LivingEntity livingAttacker && livingAttacker != this) {
             threatLedger.recordDamage(livingAttacker, amount, this.level().getGameTime());
             hurtReactionController.onAcceptedDamage(livingAttacker);
+            volleyController.onAcceptedDamage();
         }
         return accepted;
     }
@@ -299,6 +304,10 @@ public final class BedrockWitherEntity extends Monster {
 
     public BedrockWitherDashController dashController() {
         return dashController;
+    }
+
+    public BedrockWitherVolleyController volleyController() {
+        return volleyController;
     }
 
     public BedrockWitherDebugSnapshot debugSnapshot() {
@@ -415,6 +424,13 @@ public final class BedrockWitherEntity extends Monster {
         tag.putInt("NumSkeletons", runtimeState.numSkeletons());
         tag.putInt("MaxSkeletons", runtimeState.maxSkeletons());
         tag.putInt("DestroyBlocksTick", runtimeState.destroyBlocksTick());
+        tag.putInt("ProjectileCounter", runtimeState.projectileCounter());
+        tag.putInt("FireRate", runtimeState.fireRate());
+        tag.putInt("HealthIntervals", runtimeState.healthIntervals());
+        tag.putInt("LastHealthValue", runtimeState.lastHealthValue());
+        tag.putInt("DelayShot", runtimeState.delayShot());
+        tag.putInt("TimeSinceLastShot", runtimeState.timeSinceLastShot());
+        tag.putInt("MainHeadAttackCountdown", runtimeState.mainHeadAttackCountdown());
         hurtReactionController.addAdditionalSaveData(tag);
     }
 
@@ -444,6 +460,13 @@ public final class BedrockWitherEntity extends Monster {
         runtimeState.setNumSkeletons(tag.getInt("NumSkeletons"));
         runtimeState.setMaxSkeletons(tag.getInt("MaxSkeletons"));
         runtimeState.setDestroyBlocksTick(tag.getInt("DestroyBlocksTick"));
+        runtimeState.setProjectileCounter(tag.getInt("ProjectileCounter"));
+        runtimeState.setFireRate(tag.getInt("FireRate"));
+        runtimeState.setHealthIntervals(tag.getInt("HealthIntervals"));
+        runtimeState.setLastHealthValue(tag.getInt("LastHealthValue"));
+        runtimeState.setDelayShot(tag.getInt("DelayShot"));
+        runtimeState.setTimeSinceLastShot(tag.getInt("TimeSinceLastShot"));
+        runtimeState.setMainHeadAttackCountdown(tag.getInt("MainHeadAttackCountdown"));
         hurtReactionController.readAdditionalSaveData(tag);
     }
 }
