@@ -26,12 +26,9 @@ export function observeGenericMobFromSimStore({
   if (!Number.isInteger(tick)) throw new TypeError('tick must be an integer');
   const entity = store.entities?.get ? store.entities.get(entityId) : null;
   const track = store.trackOf(entityId);
-  let latestSample = null;
-  if (track && typeof track.samples === 'function' && track.t0 <= tick) {
-    const end = Math.min(tick, track.t1);
-    const retained = track.samples(track.t0, end, 4096);
-    latestSample = retained.length ? retained[retained.length - 1] : null;
-  }
+  const latestSample = track && typeof track.sampleAtOrBefore === 'function'
+    ? track.sampleAtOrBefore(tick)
+    : null;
 
   const capabilities = {
     generic_entity_state: {
