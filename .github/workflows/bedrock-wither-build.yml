@@ -1,17 +1,11 @@
 name: Bedrock Wither build
 
 concurrency:
-  group: bedrock-wither-${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
+  group: bedrock-wither-${{ github.workflow }}-${{ github.ref_name }}
   cancel-in-progress: true
 
 on:
-  pull_request:
-    paths:
-      - 'deliverables/minecraft/bedrock-wither/mod/**'
-      - '.github/workflows/bedrock-wither-build.yml'
   push:
-    branches:
-      - main
     paths:
       - 'deliverables/minecraft/bedrock-wither/mod/**'
       - '.github/workflows/bedrock-wither-build.yml'
