@@ -22,7 +22,7 @@ public final class BedrockWitherSkullGameTests {
     private BedrockWitherSkullGameTests() {
     }
 
-    @GameTest(template = "empty", timeoutTicks = 40)
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_entityhitmatchesbedrockimpactdamage")
     public static void entityHitMatchesBedrockImpactDamage(GameTestHelper helper) {
         BedrockWitherEntity owner = ModEntities.BEDROCK_WITHER.get().create(helper.getLevel());
         Cow target = EntityType.COW.create(helper.getLevel());
