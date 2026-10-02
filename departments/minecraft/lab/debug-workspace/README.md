@@ -1,4 +1,4 @@
-# KNEEKURA Debug Workspace
+> **CURRENT STATUS OVERRIDE (2026-10-02):** This README preserves the original G1/G2 milestone narrative. It is not the current implementation checklist. Arena/action control, owner lifetime/control, Cardinal capture/restoration, finalized evidence/export and Tank presentation are now implemented in this subtree. Read [`../../CURRENT-HANDOFF-2026-10-02.md`](../../CURRENT-HANDOFF-2026-10-02.md) first; sections below labeled “Not implemented yet” or “under implementation” are historical checkpoint text.\n\n# KNEEKURA Debug Workspace
 
 This directory contains the G1 Debug Supervisor / Orchestrator.
 

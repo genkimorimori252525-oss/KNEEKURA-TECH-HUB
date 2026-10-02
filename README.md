@@ -1,6 +1,6 @@
 # KNEEKURA TECH HUB
 
-Private technology research infrastructure for discovering large amounts of engineering knowledge from OSS and other technical sources without confusing discovery with verified knowledge.
+Internal-purpose technology research infrastructure for discovering large amounts of engineering knowledge from OSS and other technical sources without confusing discovery with verified knowledge. The GitHub repository is currently public for repository/CI operation; runtime worlds, credentials, local evidence and other private machine data remain out of Git.
 
 > **Discover broadly. Promote knowledge carefully.**
 
@@ -12,7 +12,7 @@ Private technology research infrastructure for discovering large amounts of engi
 
 ## Minecraft Technology Department
 
-> **Integrated LAB (2026-10-02):** the former standalone KNEEKURA-LAB source is now vendored at `departments/minecraft/lab/` and is the canonical experiment/observation source for new Minecraft MOD-AI work. Knowledge/Core and LAB responsibilities remain separated in code, but they now share one repository and one revision. Historical LAB runs keep their original repository/SHA provenance.
+> **Current Minecraft entry point:** [`departments/minecraft/CURRENT-HANDOFF-2026-10-02.md`](departments/minecraft/CURRENT-HANDOFF-2026-10-02.md). The former standalone KNEEKURA-LAB source is now vendored at `departments/minecraft/lab/` and is the canonical experiment/observation source for new Minecraft MOD-AI work. Knowledge/Core and LAB responsibilities remain separated in code, but they now share one repository and one revision. Historical LAB runs keep their original repository/SHA provenance.
 
 A dedicated private research lane for Minecraft mod engineering has been established under `departments/minecraft/`.
 

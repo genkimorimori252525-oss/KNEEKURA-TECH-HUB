@@ -1,6 +1,6 @@
 # KNEEKURA-LAB — Tech Hub integrated laboratory
 
-このディレクトリが、2026-10-02以降のKNEEKURA Minecraft実験・観測層の正本です。旧 `KNEEKURA-LAB` リポジトリのソースは `f2d6165b16587672ac56f83c001c65bc2fa6d06a` から同一Tech Hubリポジトリへ移行されました。旧リポジトリは移行元・履歴参照として残し、新規実装は原則ここで行います。
+> Current cross-layer status and resume order: [`../CURRENT-HANDOFF-2026-10-02.md`](../CURRENT-HANDOFF-2026-10-02.md). Historical LAB documents below retain their original milestone wording.\n\nこのディレクトリが、2026-10-02以降のKNEEKURA Minecraft実験・観測層の正本です。旧 `KNEEKURA-LAB` リポジトリのソースは `f2d6165b16587672ac56f83c001c65bc2fa6d06a` から同一Tech Hubリポジトリへ移行されました。旧リポジトリは移行元・履歴参照として残し、新規実装は原則ここで行います。
 
 霊夢 AI の挙動を記録・再生・解析し、実Minecraftを権威ある検証環境として扱います。Minecraft/TouhouLittleMaid本体の製品コードとは責任を分離したまま、Tech Hubの知識・TaskContext・Evidence・実験契約と同一commitで管理します。
 
