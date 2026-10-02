@@ -69,6 +69,16 @@ public final class BedrockWitherVolleyController {
         owner.runtimeState().setTimeTillNextShot(PROVISIONAL_NATIVE_BASE_FIRE_RATE_TICKS);
     }
 
+    public void restoreLastHealthInterval(int lastInterval) {
+        int bounded = Math.max(0, lastInterval);
+        owner.runtimeState().setLastHealthValue(bounded);
+
+        // Exact minimum HP is not recoverable from the interval alone. The lowest
+        // value that would produce this strict-lower bucket is interval+1, which
+        // safely prevents healing from increasing the saved interval.
+        lowestHealthSeen = bounded + 1;
+    }
+
     public static int lastHealthIntervalFor(int lowestHealth) {
         if (lowestHealth <= 0) {
             return 0;
