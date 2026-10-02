@@ -12,6 +12,8 @@ Private technology research infrastructure for discovering large amounts of engi
 
 ## Minecraft Technology Department
 
+> **Integrated LAB (2026-10-02):** the former standalone KNEEKURA-LAB source is now vendored at `departments/minecraft/lab/` and is the canonical experiment/observation source for new Minecraft MOD-AI work. Knowledge/Core and LAB responsibilities remain separated in code, but they now share one repository and one revision. Historical LAB runs keep their original repository/SHA provenance.
+
 A dedicated private research lane for Minecraft mod engineering has been established under `departments/minecraft/`.
 
 Minecraft **1.20.1 + Forge remains the adaptation anchor, not the ceiling**. Each target should preserve a 1.20.1/Forge track when one exists while also acquiring and analyzing the latest useful upstream implementation. Version/loader tracks remain separate SourceSnapshots and are compared explicitly so newer techniques can be reconstructed for the 1.20.1 Forge environment without pretending that code is directly interchangeable.
