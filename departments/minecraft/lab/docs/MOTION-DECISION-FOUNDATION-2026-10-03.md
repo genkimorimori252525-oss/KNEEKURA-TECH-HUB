@@ -67,6 +67,23 @@ Implemented a conservative exact-subject SimStore adapter that:
 - reports Vanilla Goal/Brain/pathfinding/movement-control state as `NOT_EXPOSED` until a proven source-specific adapter exists;
 - supports unknown MOD entities without forcing Vanilla Goal/Path semantics.
 
+### Existing Debug Workspace evidence adapter
+
+Implemented a second exact-subject adapter over the already-retained canonical evidence lanes:
+
+- `SERVER_ENTITY_STATE`;
+- `AI_TARGET`;
+- `BRAIN_MEMORY`;
+- `RUNNING_BEHAVIORS`;
+- `BEHAVIOR_TRANSITION`;
+- `NAVIGATION`.
+
+The adapter refuses to combine records across debug-session/run/process/Arena identity. It maps only exact `ENTITY_UUID` observations into the common DecisionObservationModel and leaves Goal eligibility, path-search frontier/cost internals and movement-control internals `NOT_EXPOSED`.
+
+Existing sampled running behaviors and current navigation state populate conservative STATE/EXECUTION facts. A `BEHAVIOR_TRANSITION` with `exactTransitionTickKnown=false` remains `DERIVED_FROM_OBSERVED` plus `TEMPORAL_ASSOCIATION`; it is not upgraded into an exact causal transition.
+
+The same `SERVER_ENTITY_STATE` rows can feed `SampledMotionTrace v1`, preserving each canonical `observationId` as the point source and keeping sampled lines derived rather than continuous-path truth.
+
 ## Deliberately not claimed complete
 
 The following parts of the authoritative handoff still require local source/runtime evidence and are not completed by this foundation slice:
