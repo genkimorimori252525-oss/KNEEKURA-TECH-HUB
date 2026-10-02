@@ -52,7 +52,7 @@ public final class BedrockWitherRenderer extends MobRenderer<BedrockWitherEntity
         // Bedrock texture bytes are not redistributed; Java's bundled Mojang
         // normal/invulnerable Wither textures are used as asset substitutes while
         // preserving the Bedrock timing rule exactly.
-        int invulnerableTicks = entity.runtimeState().spawningFrames();
+        int invulnerableTicks = entity.getVisualInvulnerableTicks();
         boolean displayNormal = invulnerableTicks <= 0
                 || (invulnerableTicks <= 80 && (invulnerableTicks / 5) % 2 == 1);
         return displayNormal ? JAVA_WITHER_TEXTURE : JAVA_WITHER_INVULNERABLE_TEXTURE;
