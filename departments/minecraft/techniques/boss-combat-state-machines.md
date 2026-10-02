@@ -104,3 +104,25 @@ The first adopter is:
 `deliverables/minecraft/bedrock-wither/ADOPTION.md`
 
 Future products should link individual techniques rather than copying the entire Wither architecture.
+
+
+## T7 — derive destruction volumes from entity AABB + native range
+
+Pattern:
+- preserve the entity's authoritative collision box;
+- preserve an observed/native integer expansion range;
+- derive candidate block coordinates from the expanded AABB instead of hardcoding a visually reported cuboid.
+
+Bedrock Wither example:
+- official collision box = 1×3
+- historical/native hurt range = 1 -> inclusive 4×6×4 block positions
+- historical/native charge range = 2 -> inclusive 6×8×6 block positions
+- current runtime observation independently matches those dimensions.
+
+Why this is better than hardcoding `4×6×4`:
+- if entity position/alignment or dimensions change, the geometry remains structurally tied to the boss;
+- the implementation can reproduce the observed northwest-of-center alignment naturally from floor/inclusive coordinate conversion;
+- the same controller can retain attack-type metadata even where block exclusions differ by attack.
+
+Transfer:
+useful for ramming bosses, large mobs and native-code reconstructions where evidence exposes an AABB plus an expansion/range parameter.
