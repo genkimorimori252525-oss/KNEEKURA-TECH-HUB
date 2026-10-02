@@ -133,3 +133,20 @@ Direct Bedrock runtime observation should measure:
 - death sequence/explosion timing
 
 Each scenario should record Bedrock version, difficulty, seed/world setup, target position, health, tick/video timing method and result confidence.
+
+
+## Comparative implementation prior art
+
+### BEStyleWither
+
+Repository:
+https://github.com/MORIMORI0317/BEStyleWither
+
+Pinned review:
+- COMPARATIVE-ANCHOR-LIKE: branch `1.20`, commit `ab98547f3e8e0dac83a814d5133a113d4bfd9e40`, declared support 1.20/1.20.1, Forge 46.0.13.
+- FRONTIER: `main`, commit `e658d45ea3d2b6b6b16d6a02ee6b736ce9c411d2`, Minecraft 1.21.1.
+
+Detailed engineering review:
+[PRIOR-ART-BESTYLEWITHER.md](PRIOR-ART-BESTYLEWITHER.md)
+
+Use: implementation-technique and failure-history reference only. Its constants and behavior are not accepted as Bedrock truth.
