@@ -5,16 +5,17 @@ concurrency:
   cancel-in-progress: true
 
 on:
-  push:
-    branches:
-      - jolly/bedrock-wither-reconstruction-2026-10-02
-    paths:
-      - 'deliverables/minecraft/bedrock-wither/mod/**'
-      - '.github/workflows/bedrock-wither-build.yml'
   pull_request:
     paths:
       - 'deliverables/minecraft/bedrock-wither/mod/**'
       - '.github/workflows/bedrock-wither-build.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'deliverables/minecraft/bedrock-wither/mod/**'
+      - '.github/workflows/bedrock-wither-build.yml'
+  workflow_dispatch:
 
 jobs:
   build:
