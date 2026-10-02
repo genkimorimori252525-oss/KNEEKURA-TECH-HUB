@@ -3,7 +3,6 @@ package org.kneekura.bedrockwither.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.GameRules;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 
@@ -50,7 +49,7 @@ public final class BedrockWitherDestructionController {
                 for (int z = minZ; z <= maxZ; z++) {
                     cursor.set(x, y, z);
                     BlockState state = owner.level().getBlockState(cursor);
-                    if (!canDestroy(state, cursor, attackType)) {
+                    if (!BedrockWitherBlockRules.canDestroy(owner.level(), cursor, state, attackType)) {
                         skipped++;
                         continue;
                     }
@@ -81,47 +80,6 @@ public final class BedrockWitherDestructionController {
         return width * height * depth;
     }
 
-    private boolean canDestroy(
-            BlockState state,
-            BlockPos pos,
-            BedrockWitherAttackType attackType
-    ) {
-        if (state.isAir()) {
-            return false;
-        }
-
-        // Current Bedrock observations: liquids/waterlogged blocks and a bounded
-        // set of unbreakable/system blocks survive these destructive Wither attacks.
-        if (!state.getFluidState().isEmpty()) {
-            return false;
-        }
-        if (state.getDestroySpeed(owner.level(), pos) < 0.0F) {
-            return false;
-        }
-
-        if (state.is(Blocks.REINFORCED_DEEPSLATE)
-                || state.is(Blocks.MOVING_PISTON)
-                || state.is(Blocks.BARRIER)
-                || state.is(Blocks.END_PORTAL)
-                || state.is(Blocks.END_GATEWAY)
-                || state.is(Blocks.END_PORTAL_FRAME)
-                || state.is(Blocks.COMMAND_BLOCK)
-                || state.is(Blocks.REPEATING_COMMAND_BLOCK)
-                || state.is(Blocks.CHAIN_COMMAND_BLOCK)
-                || state.is(Blocks.STRUCTURE_BLOCK)
-                || state.is(Blocks.STRUCTURE_VOID)
-                || state.is(Blocks.JIGSAW)
-                || state.is(Blocks.LIGHT)) {
-            return false;
-        }
-
-        // Current BDS canDestroy receives WitherAttackType, which proves that the
-        // native predicate may differ by Charge/HurtExplosion/Projectile.
-        // We intentionally keep the currently corroborated shared exclusions here
-        // and do not invent attack-type differences without stronger evidence.
-        return attackType == BedrockWitherAttackType.CHARGE
-                || attackType == BedrockWitherAttackType.HURT_EXPLOSION;
-    }
 
     public record DestructionResult(int visited, int destroyed, int skipped) {
     }
