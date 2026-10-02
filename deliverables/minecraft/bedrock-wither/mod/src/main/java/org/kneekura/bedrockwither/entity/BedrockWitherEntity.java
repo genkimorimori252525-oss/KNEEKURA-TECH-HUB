@@ -7,6 +7,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
@@ -67,6 +68,7 @@ public final class BedrockWitherEntity extends Monster {
     private final BedrockWitherHurtReactionController hurtReactionController;
     private final BedrockWitherDashController dashController;
     private final BedrockWitherVolleyController volleyController;
+    private final BedrockWitherSpawnController spawnController;
     private final Set<ServerPlayer> trackingBossPlayers = new HashSet<>();
 
     private boolean difficultyHealthInitialized;
@@ -80,7 +82,9 @@ public final class BedrockWitherEntity extends Monster {
         this.hurtReactionController = new BedrockWitherHurtReactionController(this);
         this.dashController = new BedrockWitherDashController(this);
         this.volleyController = new BedrockWitherVolleyController(this);
+        this.spawnController = new BedrockWitherSpawnController(this);
         this.runtimeState.setNativePhase(BedrockWitherPhaseController.firstPhaseNativeId());
+        this.spawnController.initializeNewEntity();
         this.bossEvent.setDarkenScreen(true);
         // Bedrock wither.json exposes movement.basic max_turn 180. The Java
         // FlyingMoveControl is an adaptation layer, but the exposed turn cap is kept exact.
@@ -176,6 +180,7 @@ public final class BedrockWitherEntity extends Monster {
             difficultyHealthInitialized = true;
         }
 
+        this.spawnController.tick();
         this.stateMachine.tick();
         this.phaseController.tick();
         this.hurtReactionController.tick();
@@ -207,6 +212,13 @@ public final class BedrockWitherEntity extends Monster {
     @Override
     public boolean hurt(DamageSource source, float amount) {
         Entity attacker = source.getEntity();
+
+        // Modern Bedrock spawn sequence is invulnerable. Preserve bypass sources
+        // so administrative/void-style damage semantics are not silently blocked.
+        if (spawnController.isActive()
+                && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
+            return false;
+        }
 
         // Current Bedrock phase 2 rejects projectile damage. Keep this separate
         // from the undead family damage sensor so each contract can be tested.
@@ -319,6 +331,10 @@ public final class BedrockWitherEntity extends Monster {
 
     public BedrockWitherVolleyController volleyController() {
         return volleyController;
+    }
+
+    public BedrockWitherSpawnController spawnController() {
+        return spawnController;
     }
 
     public BedrockWitherDebugSnapshot debugSnapshot() {
@@ -442,6 +458,7 @@ public final class BedrockWitherEntity extends Monster {
         tag.putInt("DelayShot", runtimeState.delayShot());
         tag.putInt("TimeSinceLastShot", runtimeState.timeSinceLastShot());
         tag.putInt("MainHeadAttackCountdown", runtimeState.mainHeadAttackCountdown());
+        tag.putInt("SpawningFrames", runtimeState.spawningFrames());
         hurtReactionController.addAdditionalSaveData(tag);
     }
 
@@ -478,6 +495,10 @@ public final class BedrockWitherEntity extends Monster {
         runtimeState.setDelayShot(tag.getInt("DelayShot"));
         runtimeState.setTimeSinceLastShot(tag.getInt("TimeSinceLastShot"));
         runtimeState.setMainHeadAttackCountdown(tag.getInt("MainHeadAttackCountdown"));
+        int spawningFrames = tag.contains("SpawningFrames")
+                ? tag.getInt("SpawningFrames")
+                : 0;
+        spawnController.restore(spawningFrames, restoredState);
         hurtReactionController.readAdditionalSaveData(tag);
     }
 }
