@@ -247,6 +247,94 @@ export function motionTraceAvailability(store, entityIds = null) {
   return out;
 }
 
+function svgNumber(v) {
+  return Number(v.toFixed(3));
+}
+function traceStyle(traceClass) {
+  if (traceClass === 'MOB_ACTUAL') return { width: 3, dash: '12 7', marker: 'circle' };
+  if (traceClass === 'PROJECTILE_ACTUAL') return { width: 2, dash: '4 4', marker: 'diamond' };
+  return { width: 1.5, dash: '1 5', marker: 'square' };
+}
+function projectTraceSample(sample, view) {
+  if (view === 'PLAN_XZ') return [sample.x, sample.z];
+  if (view === 'ELEVATION') return [sample.tick, sample.y];
+  if (view === 'ISOMETRIC_3D') return [sample.x - sample.z, (sample.x + sample.z) * 0.5 - sample.y];
+  throw new TypeError('unsupported motion trace view: ' + view);
+}
+function svgMarker(marker, x, y) {
+  if (marker === 'circle') return '<circle cx="' + x + '" cy="' + y + '" r="3"/>';
+  if (marker === 'diamond') return '<path d="M ' + x + ' ' + (y - 3) + ' L ' + (x + 3) + ' ' + y + ' L ' + x + ' ' + (y + 3) + ' L ' + (x - 3) + ' ' + y + ' Z"/>';
+  return '<rect x="' + (x - 2.5) + '" y="' + (y - 2.5) + '" width="5" height="5"/>';
+}
+
+export function renderMotionTraceSvg(trace, view, { width = 640, height = 360, padding = 28 } = {}) {
+  if (!trace || trace.schema !== TRACE_SCHEMA) throw new TypeError('trace must be SampledMotionTrace v1');
+  if (!['PLAN_XZ', 'ELEVATION', 'ISOMETRIC_3D'].includes(view)) throw new TypeError('unsupported motion trace view: ' + view);
+  if (!Number.isFinite(width) || !Number.isFinite(height) || width <= padding * 2 || height <= padding * 2) {
+    throw new TypeError('invalid SVG dimensions');
+  }
+  const style = traceStyle(trace.trace_class);
+  const raw = trace.samples.map(s => projectTraceSample(s, view));
+  const xs = raw.map(p => p[0]), ys = raw.map(p => p[1]);
+  const minX = raw.length ? Math.min(...xs) : 0, maxX = raw.length ? Math.max(...xs) : 1;
+  const minY = raw.length ? Math.min(...ys) : 0, maxY = raw.length ? Math.max(...ys) : 1;
+  const spanX = Math.max(1e-9, maxX - minX), spanY = Math.max(1e-9, maxY - minY);
+  const scale = Math.min((width - padding * 2) / spanX, (height - padding * 2) / spanY);
+  const usedW = spanX * scale, usedH = spanY * scale;
+  const ox = (width - usedW) / 2 - minX * scale;
+  const oy = (height - usedH) / 2 + maxY * scale;
+  const projected = new Map();
+  for (let i = 0; i < trace.samples.length; i++) {
+    const [x, y] = raw[i];
+    projected.set(trace.samples[i].sample_id, [svgNumber(ox + x * scale), svgNumber(oy - y * scale)]);
+  }
+  const lines = trace.segments.map(seg => {
+    const a = projected.get(seg.from_sample_id), b = projected.get(seg.to_sample_id);
+    if (!a || !b) return '';
+    return '<line x1="' + a[0] + '" y1="' + a[1] + '" x2="' + b[0] + '" y2="' + b[1] + '"/>';
+  }).join('');
+  const markers = trace.samples.map(s => {
+    const p = projected.get(s.sample_id);
+    return p ? svgMarker(style.marker, p[0], p[1]) : '';
+  }).join('');
+  const gapMarkers = trace.gaps.map(g => {
+    const a = projected.get(g.after_sample_id), b = projected.get(g.before_sample_id);
+    if (!a || !b) return '';
+    const x = svgNumber((a[0] + b[0]) / 2), y = svgNumber((a[1] + b[1]) / 2);
+    return '<path class="gap" d="M ' + (x - 4) + ' ' + (y - 4) + ' L ' + (x + 4) + ' ' + (y + 4) + ' M ' + (x + 4) + ' ' + (y - 4) + ' L ' + (x - 4) + ' ' + (y + 4) + '"/>';
+  }).join('');
+  return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + width + ' ' + height + '" role="img" data-derived="true" data-view="' + view + '" data-trace-class="' + trace.trace_class + '">' +
+    '<g fill="none" stroke="currentColor" stroke-width="' + style.width + '" stroke-dasharray="' + style.dash + '" stroke-linecap="round">' + lines + '</g>' +
+    '<g fill="currentColor" stroke="currentColor">' + markers + '</g>' +
+    '<g fill="none" stroke="currentColor" stroke-width="1.5">' + gapMarkers + '</g>' +
+    '</svg>';
+}
+
+export function buildMotionTracePacket(trace, { views = [], includeMetrics = true } = {}) {
+  if (!trace || trace.schema !== TRACE_SCHEMA) throw new TypeError('trace must be SampledMotionTrace v1');
+  if (!Array.isArray(views)) throw new TypeError('views must be an array');
+  const allowed = new Set(['PLAN_XZ', 'ELEVATION', 'ISOMETRIC_3D']);
+  for (const view of views) if (!allowed.has(view)) throw new TypeError('unsupported motion trace view: ' + view);
+  return {
+    schema: 'kneekura.motion-trace-packet/v1',
+    version: 1,
+    trace_class: trace.trace_class,
+    subject: trace.subject,
+    request_window: trace.request_window,
+    epistemic_status: trace.epistemic_status,
+    metrics: includeMetrics ? trace.metrics : null,
+    gaps: trace.gaps,
+    source_observation_ids: trace.source_observation_ids,
+    artifacts: [...new Set(views)].map(view => ({
+      view,
+      mime_type: 'image/svg+xml',
+      derived: true,
+      content: renderMotionTraceSvg(trace, view),
+    })),
+    semantics: trace.semantics,
+  };
+}
+
 export const MOTION_TRACE_V1 = Object.freeze({
   schema: TRACE_SCHEMA,
   traceClasses: TRACE_CLASSES,
