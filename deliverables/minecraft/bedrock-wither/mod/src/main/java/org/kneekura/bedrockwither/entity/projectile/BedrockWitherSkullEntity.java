@@ -15,6 +15,8 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import org.kneekura.bedrockwither.entity.BedrockWitherAttackType;
+import org.kneekura.bedrockwither.entity.BedrockWitherBlockRules;
 import org.kneekura.bedrockwither.registry.ModEntities;
 
 public final class BedrockWitherSkullEntity extends WitherSkull {
@@ -118,7 +120,16 @@ public final class BedrockWitherSkullEntity extends WitherSkull {
         // calculation the behaviorally equivalent dangerous-skull cap is 0.8,
         // matching current observed blue-skull terrain penetration and vanilla
         // Java's own WitherSkull adaptation boundary.
-        return isDangerous() ? Math.min(0.8F, resistance) : resistance;
+        if (!isDangerous()
+                || !BedrockWitherBlockRules.canDestroy(
+                        level,
+                        pos,
+                        state,
+                        BedrockWitherAttackType.PROJECTILE
+                )) {
+            return resistance;
+        }
+        return Math.min(0.8F, resistance);
     }
 
     @Override
