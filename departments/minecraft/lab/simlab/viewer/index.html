@@ -248,8 +248,8 @@ html.bare main { grid-template-columns:1fr !important }
   <div class="sep"></div>
   <div class="grp">
     <span class="chrome-label">残光</span>
-    <input type="range" id="trail" min="0" max="120" step="5" value="40">
-    <span class="num" id="trailV" style="width:34px;color:var(--ink-dim)">40t</span>
+    <input type="range" id="trail" min="0" max="120" step="5" value="0">
+    <span class="num" id="trailV" style="width:34px;color:var(--ink-dim)">0t</span>
   </div>
   <div class="sep"></div>
   <div class="grp" id="camGrp">
@@ -448,7 +448,7 @@ function load(text,name,opts){
  * ぴったり 2400 に均す —— そうしないとバーの長さが 30 秒ごとに 25% 跳ねる)。 */
 const LIVE_WINDOW=2400;   // 2 分 (20TPS)
 const LIVE_SLACK=600;     // 30 秒
-const T={tick:0,playing:false,speed:1,acc:0,partial:0,last:0,trail:40,mode:'real',follow:false,sound:false,served:false,followLive:true};
+const T={tick:0,playing:false,speed:1,acc:0,partial:0,last:0,trail:0,mode:'real',follow:false,sound:false,served:false,followLive:true};
 
 /* =============================================================================
    3. カメラ / 投影 — F3 モードと図面モードで共有
