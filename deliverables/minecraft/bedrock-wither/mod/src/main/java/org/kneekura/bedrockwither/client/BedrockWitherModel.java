@@ -132,19 +132,18 @@ public final class BedrockWitherModel extends HierarchicalModel<BedrockWitherEnt
         );
         tail.xRot = ribcage.xRot + (0.2F + 0.1F * bodyBase) * Mth.PI;
 
-        // The public Bedrock animation drives head X by per-head query and head Y by
-        // target rotation. Until all native head-rotation state is synchronized,
-        // center head uses the entity render target while side heads consume the
-        // BDS-shaped runtime slots when available.
-        centerHead.xRot = headPitch * ((float) Math.PI / 180.0F);
-        centerHead.yRot = netHeadYaw * ((float) Math.PI / 180.0F);
+        // Current Mojang Bedrock animation:
+        // head1 X=query.head_x_rotation(0)
+        // head2 X=query.head_x_rotation(1)
+        // head3 X=query.head_x_rotation(2)
+        // all three Y=query.target_y_rotation.
+        float targetYaw = netHeadYaw * ((float) Math.PI / 180.0F);
+        centerHead.xRot = entity.runtimeState().head(0).pitch() * ((float) Math.PI / 180.0F);
+        rightHead.xRot = entity.runtimeState().head(1).pitch() * ((float) Math.PI / 180.0F);
+        leftHead.xRot = entity.runtimeState().head(2).pitch() * ((float) Math.PI / 180.0F);
 
-        applyRuntimeHead(rightHead, entity.runtimeState().head(1));
-        applyRuntimeHead(leftHead, entity.runtimeState().head(2));
-    }
-
-    private static void applyRuntimeHead(ModelPart part, BedrockWitherHeadRuntime state) {
-        part.xRot = state.pitch() * ((float) Math.PI / 180.0F);
-        part.yRot = state.yaw() * ((float) Math.PI / 180.0F);
+        centerHead.yRot = targetYaw;
+        rightHead.yRot = targetYaw;
+        leftHead.yRot = targetYaw;
     }
 }
