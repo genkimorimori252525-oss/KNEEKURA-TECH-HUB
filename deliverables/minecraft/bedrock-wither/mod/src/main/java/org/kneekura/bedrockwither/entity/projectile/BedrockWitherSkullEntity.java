@@ -3,6 +3,8 @@ package org.kneekura.bedrockwither.entity.projectile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -91,13 +93,58 @@ public final class BedrockWitherSkullEntity extends WitherSkull {
 
     @Override
     protected void onHitEntity(EntityHitResult hitResult) {
-        // Bedrock's public projectile JSON omits impact_damage, but the native
-        // WitherSkull runtime path is not JSON-only. Historical Bedrock native
-        // code retains owner kill-heal and Wither-effect handling, while current
-        // gameplay reports 5/8/12 impact damage by difficulty. Java 1.20.1's
-        // WitherSkull base-8 owner hit path produces that difficulty-scaled
-        // contract and the same 10s/40s Wither II durations, so reuse it here.
-        super.onHitEntity(hitResult);
+        if (this.level().isClientSide) {
+            return;
+        }
+
+        Entity target = hitResult.getEntity();
+        Entity owner = this.getOwner();
+        float impactDamage = impactDamageFor(this.level().getDifficulty());
+
+        boolean accepted;
+        if (owner instanceof LivingEntity livingOwner) {
+            accepted = target.hurt(
+                    this.damageSources().witherSkull(this, livingOwner),
+                    impactDamage
+            );
+            if (accepted) {
+                if (target.isAlive()) {
+                    this.doEnchantDamageEffects(livingOwner, target);
+                } else {
+                    // Historical Bedrock native WitherSkull::onHit heals the
+                    // owning mob by 5 when its skull kills the target.
+                    livingOwner.heal(5.0F);
+                }
+            }
+        } else {
+            accepted = target.hurt(this.damageSources().magic(), impactDamage);
+        }
+
+        if (accepted && target instanceof LivingEntity livingTarget) {
+            int duration = witherDurationFor(this.level().getDifficulty());
+            if (duration > 0) {
+                livingTarget.addEffect(
+                        new MobEffectInstance(MobEffects.WITHER, duration, 1),
+                        this.getEffectSource()
+                );
+            }
+        }
+    }
+
+    public static float impactDamageFor(Difficulty difficulty) {
+        return switch (difficulty) {
+            case PEACEFUL, EASY -> 5.0F;
+            case NORMAL -> 8.0F;
+            case HARD -> 12.0F;
+        };
+    }
+
+    public static int witherDurationFor(Difficulty difficulty) {
+        return switch (difficulty) {
+            case PEACEFUL, EASY -> 0;
+            case NORMAL -> 200;
+            case HARD -> 800;
+        };
     }
 
     @Override
