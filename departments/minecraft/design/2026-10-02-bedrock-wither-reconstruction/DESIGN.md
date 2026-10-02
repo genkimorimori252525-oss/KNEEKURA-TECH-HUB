@@ -220,3 +220,13 @@ These are observability surfaces, not gameplay control APIs.
 - performance claims outside the bounded Tank scenarios
 
 A Bedrock quirk/bug may later be emulated behind a compatibility option only after it is reproduced and version-bound.
+
+
+## Product home
+
+Research, evidence interpretation and cross-project technique recovery remain in this department directory.
+
+The KNEEKURA implementation itself lives at:
+`deliverables/minecraft/bedrock-wither/mod/`
+
+Product status, adoption decisions, own development history and product evidence live beside that source under `deliverables/minecraft/bedrock-wither/`. This separation is permanent and applies even if the MOD later becomes the largest active Minecraft task.
