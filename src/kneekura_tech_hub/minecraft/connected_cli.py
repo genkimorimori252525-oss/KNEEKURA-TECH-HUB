@@ -8,7 +8,7 @@ from __future__ import annotations
 import base64
 from pathlib import Path
 
-from . import core_bridge, execution, experiment_adapter, index, interventions, providers, runtime, task_context, workspace
+from . import core_bridge, execution, experiment_adapter, foundation_map, index, interventions, providers, runtime, task_context, workspace
 from .mappings import MappingTable
 from .storage import ContractError, Store, capture_profile, valid_hash
 
@@ -32,6 +32,25 @@ def add_commands(commands, profile):
     p.add_argument('--operation', choices=('decompile', 'remap'), required=True)
     p.add_argument('--provider', required=True); p.add_argument('--mapping-hash')
     p.add_argument('--from-namespace'); p.add_argument('--to-namespace')
+
+    foundation = commands.add_parser(
+        'foundation-map',
+        help='Build/query the content-addressed Minecraft 1.20.1 Vanilla Foundation Map'
+    ).add_subparsers(dest='action', required=True)
+    p = foundation.add_parser('build')
+    p.add_argument('--index', required=True)
+    p.add_argument('--max-classes', type=int, default=20000)
+    p = foundation.add_parser('search')
+    p.add_argument('--map', required=True)
+    p.add_argument('--query', required=True)
+    p.add_argument('--subsystem')
+    p.add_argument('--limit', type=int, default=20)
+    p.add_argument('--cursor')
+    p = foundation.add_parser('inspect')
+    p.add_argument('--map', required=True)
+    p.add_argument('--owner', required=True)
+    p = foundation.add_parser('subsystems')
+    p.add_argument('--map', required=True)
 
     m = commands.add_parser('mapping').add_subparsers(dest='action', required=True)
     p = m.add_parser('import'); p.add_argument('--path', required=True)
@@ -178,6 +197,17 @@ def dispatch(args, store: Store, read_json, parse_json):
             return providers.prepare_transform(store, args.index, args.root, args.operation,
                 read_json(args.provider), mapping_hash=args.mapping_hash,
                 from_namespace=args.from_namespace, to_namespace=args.to_namespace)
+    if args.command == 'foundation-map':
+        if args.action == 'build':
+            return foundation_map.build(store, args.index, max_classes=args.max_classes)
+        if args.action == 'search':
+            return foundation_map.search(
+                store, args.map, args.query, subsystem=args.subsystem,
+                limit=args.limit, cursor=args.cursor
+            )
+        if args.action == 'inspect':
+            return foundation_map.inspect(store, args.map, args.owner)
+        return foundation_map.subsystems(store, args.map)
     if args.command == 'mapping':
         if args.action == 'import':
             path = Path(args.path)
@@ -258,8 +288,10 @@ def dispatch(args, store: Store, read_json, parse_json):
     if args.command == 'capabilities':
         return {'status': 'OK', 'adapter_version': runtime.ADAPTER_VERSION,
                 'capability_scope': 'STATIC_SURFACE',
-                'operations': ['profile', 'search', 'inspect', 'mapping', 'interventions', 'relations',
-                               'context', 'knowledge', 'artifact', 'validate', 'world', 'client-directory', 'contract', 'session', 'observe', 'observe-pair', 'input', 'experiment'],
+                'operations': ['profile', 'search', 'inspect', 'foundation-map', 'mapping',
+                               'interventions', 'relations', 'context', 'knowledge', 'artifact',
+                               'validate', 'world', 'client-directory', 'contract', 'session',
+                               'observe', 'observe-pair', 'input', 'experiment'],
                 'execution_policy': 'EXPLICIT_REGISTERED_PROVIDERS_ONLY', 'ci_used': False,
                 'runtime_status': 'NOT_PROBED', 'core_status': 'OPTIONAL_EXISTING_CORE',
                 'note': 'Command availability is not evidence of installed tools or successful Forge integration'}
