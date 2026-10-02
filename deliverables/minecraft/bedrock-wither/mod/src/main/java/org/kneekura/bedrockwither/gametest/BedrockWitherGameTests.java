@@ -263,6 +263,25 @@ public final class BedrockWitherGameTests {
         });
     }
 
+    @GameTest(template = "empty", timeoutTicks = 40)
+    public static void destructionRangesMatchObservedCuboids(GameTestHelper helper) {
+        BedrockWitherEntity wither = createWither(helper);
+
+        int hurtVolume = wither.destructionController().candidateBlockCount(1);
+        int chargeVolume = wither.destructionController().candidateBlockCount(2);
+
+        if (hurtVolume != 4 * 6 * 4) {
+            helper.fail("Range-1 hurt destruction expected 4x6x4=96 positions but got " + hurtVolume);
+            return;
+        }
+        if (chargeVolume != 6 * 8 * 6) {
+            helper.fail("Range-2 charge destruction expected 6x8x6=288 positions but got " + chargeVolume);
+            return;
+        }
+
+        helper.succeed();
+    }
+
     private static BedrockWitherEntity createWither(GameTestHelper helper) {
         BedrockWitherEntity wither = ModEntities.BEDROCK_WITHER.get().create(helper.getLevel());
         if (wither == null) {
