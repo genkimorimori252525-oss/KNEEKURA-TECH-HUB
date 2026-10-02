@@ -26,7 +26,8 @@ export function observeGenericMobFromSimStore({
   if (!Number.isInteger(tick)) throw new TypeError('tick must be an integer');
   const entity = store.entities?.get ? store.entities.get(entityId) : null;
   const track = store.trackOf(entityId);
-  const latestSample = track && typeof track.sampleAtOrBefore === 'function'
+  const alive = typeof store.isAlive === 'function' ? store.isAlive(entityId, tick) : true;
+  const latestSample = alive && track && typeof track.sampleAtOrBefore === 'function'
     ? track.sampleAtOrBefore(tick)
     : null;
 
@@ -37,8 +38,9 @@ export function observeGenericMobFromSimStore({
       detail: latestSample ? 'Conservative retained position state only; no scheduler/path semantics inferred.' : 'No retained position sample for the selected subject.',
     },
     position: {
-      status: latestSample ? 'AVAILABLE' : 'NOT_CAPTURED',
+      status: !alive ? 'NOT_APPLICABLE' : (latestSample ? 'AVAILABLE' : 'NOT_CAPTURED'),
       source_observation_ids: latestSample ? [latestSample.source_observation_id] : [],
+      detail: !alive ? 'Selected entity is explicitly gone at the requested tick.' : null,
     },
     motion_trace: {
       status: track && typeof track.samples === 'function' ? 'AVAILABLE' : 'NOT_CAPTURED',
