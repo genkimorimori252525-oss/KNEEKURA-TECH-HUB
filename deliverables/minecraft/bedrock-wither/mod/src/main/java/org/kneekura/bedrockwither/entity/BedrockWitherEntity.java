@@ -27,11 +27,15 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.kneekura.bedrockwither.entity.ai.BedrockHighestDamageTargetGoal;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 public final class BedrockWitherEntity extends Monster {
+    private static final double BEDROCK_BOSS_HUD_RANGE = 55.0D;
+    private static final double BEDROCK_BOSS_HUD_RANGE_SQR = BEDROCK_BOSS_HUD_RANGE * BEDROCK_BOSS_HUD_RANGE;
     private static final EntityDataAccessor<Integer> DATA_STATE =
             SynchedEntityData.defineId(BedrockWitherEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Optional<UUID>> DATA_HEAD_TARGET_0 =
@@ -52,6 +56,7 @@ public final class BedrockWitherEntity extends Monster {
     private final BedrockWitherThreatLedger threatLedger = new BedrockWitherThreatLedger();
     private final BedrockWitherRuntimeState runtimeState = new BedrockWitherRuntimeState();
     private final BedrockWitherAttackController attackController;
+    private final Set<ServerPlayer> trackingBossPlayers = new HashSet<>();
 
     private boolean difficultyHealthInitialized;
 
@@ -59,6 +64,7 @@ public final class BedrockWitherEntity extends Monster {
         super(type, level);
         this.stateMachine = new BedrockWitherStateMachine(this);
         this.attackController = new BedrockWitherAttackController(this);
+        this.bossEvent.setDarkenScreen(true);
         // Bedrock wither.json exposes movement.basic max_turn 180. The Java
         // FlyingMoveControl is an adaptation layer, but the exposed turn cap is kept exact.
         this.moveControl = new FlyingMoveControl(this, 180, true);
@@ -135,6 +141,7 @@ public final class BedrockWitherEntity extends Monster {
 
         this.stateMachine.tick();
         this.bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
+        updateBossBarPlayers();
     }
 
     private void applyCandidateDifficultyHealth() {
@@ -169,6 +176,12 @@ public final class BedrockWitherEntity extends Monster {
             threatLedger.recordDamage(livingAttacker, amount, this.level().getGameTime());
         }
         return accepted;
+    }
+
+    @Override
+    public MobType getMobType() {
+        // Bedrock type_family explicitly includes "undead".
+        return MobType.UNDEAD;
     }
 
     @Override
@@ -297,13 +310,37 @@ public final class BedrockWitherEntity extends Monster {
     @Override
     public void startSeenByPlayer(ServerPlayer player) {
         super.startSeenByPlayer(player);
-        this.bossEvent.addPlayer(player);
+        trackingBossPlayers.add(player);
+        updateBossBarPlayer(player);
     }
 
     @Override
     public void stopSeenByPlayer(ServerPlayer player) {
         super.stopSeenByPlayer(player);
+        trackingBossPlayers.remove(player);
         this.bossEvent.removePlayer(player);
+    }
+
+    private void updateBossBarPlayers() {
+        for (ServerPlayer player : List.copyOf(trackingBossPlayers)) {
+            if (player.isRemoved()) {
+                trackingBossPlayers.remove(player);
+                bossEvent.removePlayer(player);
+                continue;
+            }
+            updateBossBarPlayer(player);
+        }
+    }
+
+    private void updateBossBarPlayer(ServerPlayer player) {
+        // Bedrock minecraft:boss exposes hud_range=55.
+        if (player.level() == this.level()
+                && player.isAlive()
+                && this.distanceToSqr(player) <= BEDROCK_BOSS_HUD_RANGE_SQR) {
+            bossEvent.addPlayer(player);
+        } else {
+            bossEvent.removePlayer(player);
+        }
     }
 
     @Override
