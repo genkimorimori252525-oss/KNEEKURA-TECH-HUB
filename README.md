@@ -1,6 +1,6 @@
 # KNEEKURA TECH HUB
 
-Private technology research infrastructure for discovering large amounts of engineering knowledge from OSS and other technical sources without confusing discovery with verified knowledge.
+Internal-purpose technology research infrastructure for discovering large amounts of engineering knowledge from OSS and other technical sources without confusing discovery with verified knowledge. The GitHub repository is currently public for repository/CI operation; runtime worlds, credentials, local evidence and other private machine data remain out of Git.
 
 > **Discover broadly. Promote knowledge carefully.**
 
@@ -9,6 +9,18 @@ Private technology research infrastructure for discovering large amounts of engi
 1. **OSS Technology Search Engine** — mass discovery and indexing.
 2. **Evidence-backed Technology Encyclopedia** — curated claims with traceable evidence.
 3. **Design Research Laboratory** — comparison, experiments, and KNEEKURA application hypotheses.
+
+## Minecraft Technology Department
+
+> **Current Minecraft entry point:** [`departments/minecraft/CURRENT-HANDOFF-2026-10-02.md`](departments/minecraft/CURRENT-HANDOFF-2026-10-02.md). The former standalone KNEEKURA-LAB source is now vendored at `departments/minecraft/lab/` and is the canonical experiment/observation source for new Minecraft MOD-AI work. Knowledge/Core and LAB responsibilities remain separated in code, but they now share one repository and one revision. Historical LAB runs keep their original repository/SHA provenance.
+
+A dedicated private research lane for Minecraft mod engineering has been established under `departments/minecraft/`.
+
+Minecraft **1.20.1 + Forge remains the adaptation anchor, not the ceiling**. Each target should preserve a 1.20.1/Forge track when one exists while also acquiring and analyzing the latest useful upstream implementation. Version/loader tracks remain separate SourceSnapshots and are compared explicitly so newer techniques can be reconstructed for the 1.20.1 Forge environment without pretending that code is directly interchangeable.
+
+The department is designed for whole-target analysis: code architecture, entity/boss AI, pathfinding, state machines, registries/events, networking, dimensions/world generation, rendering, models, animations, textures, particles, sounds, data assets, compatibility, version portability, loader translation, and performance. Full upstream source trees may be checked out locally for complete analysis; raw JARs, decompiled trees, and full third-party asset copies remain local-only by default while the repository stores pinned provenance, inventories, hashes, mappings, cross-version deltas, and derived analysis.
+
+Analysis queue starts with **The Twilight Forest**, followed by **Sinytra Connector**.
 
 ## Architecture
 

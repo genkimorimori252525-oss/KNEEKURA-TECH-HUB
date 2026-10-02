@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-28",
+  "scope": "M2 guard preparation; selected-file local verification; published to PR #74",
+  "repository": "genkimorimori252525-oss/KNEEKURA-TECH-HUB",
+  "remote_pr": 74,
+  "remote_base": "a4b195a0466ec59fb7e57a4eae1fff45e9f9603f",
+  "published": true,
+  "phase": "M2_PARTIAL",
+  "review": "AUTHOR_SELF_REVIEW_NO_INDEPENDENT_SUBAGENT",
+  "environment": {
+    "os": "Linux",
+    "python": "3.13.5",
+    "node": "v22.16.0",
+    "pytest": "pytest 9.0.2"
+  },
+  "pytest": {
+    "tests": 130,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "unchanged_m1_regressions": 79,
+    "new_tests": 51,
+    "command": "PYTHONPATH=src pytest -q --junitxml=.../junit.xml"
+  },
+  "node": {
+    "tests": 52,
+    "passed": 52,
+    "failures": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "included_in_one_pytest_case": true,
+    "host": "FAKE_EDITOR_API_REAL_GUARD",
+    "command": "KNEEKURA_TEST_GUARD=<factory.cjs> node --test tests/minecraft_asset_guard.node.cjs"
+  },
+  "source_sha256": {
+    "src/kneekura_tech_hub/minecraft/asset_guard.py": "8eaad08a46344356802771f8518712eb046233aa881bb9dbff48f959ce8f274c",
+    "tests/test_minecraft_asset_guard.py": "43fa216f81c25aa47145ca6444da0aa8fe895e525c969dcb1ac5fbb4dc242abf",
+    "tests/minecraft_asset_guard.node.cjs": "ce7870c2e3a46d7dcb23ef52984f9097dfc108b644e3c3134990eabd238b91c9"
+  },
+  "unchanged_baseline_git_blobs": {
+    "src/kneekura_tech_hub/minecraft/storage.py": "f3d31407452cc4f13029ec21d5f88b37dd9d32bc",
+    "src/kneekura_tech_hub/minecraft/asset_contract.py": "8ba78f6d2aaf54d36244e3a10ac1af076a5ece26",
+    "tests/test_minecraft_asset_contract.py": "59b85571c56d7f812d383197101fad29021cd060"
+  },
+  "acceptance": {
+    "full_repository_postgresql": "NOT_RUN",
+    "complete_pinned_plugin_transformation": "NOT_RUN",
+    "desktop_blockbench": "NOT_RUN",
+    "staff_generation": "NOT_RUN",
+    "asset_export": "NOT_RUN",
+    "visual_review": "NOT_RUN",
+    "live_forge": "NOT_RUN",
+    "windows": "NOT_RUN",
+    "runtime_input": "NOT_RUN",
+    "network_sync": "NOT_RUN",
+    "performance": "NOT_RUN"
+  },
+  "red_green_evidence": [
+    "red-guard.txt",
+    "green-guard-2.txt",
+    "red-audit-1.txt",
+    "green-audit-1.txt",
+    "red-audit-2.txt",
+    "green-audit-2.txt",
+    "red-review.txt",
+    "green-review.txt",
+    "pytest-final.txt",
+    "node-final.txt"
+  ],
+  "unavailable": [
+    "Durable workflow read failed with 429",
+    "GitHub DNS unavailable to container",
+    "Blockbench desktop not present"
+  ],
+  "next": "Run full repository CI on the published PR revision, then complete pinned-source and disposable-desktop guard acceptance before writer/export integration."
+}

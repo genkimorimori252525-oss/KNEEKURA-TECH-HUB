@@ -1,0 +1,2216 @@
+{
+  "record_kind": "DERIVED_FULL_TREE_BYTE_INVENTORY_NOT_COMPLETE_ANALYSIS",
+  "tracks": {
+    "anchor": {
+      "repository": "https://github.com/Sinytra/Connector",
+      "revision": "7f68ac02291fde986119a3f5cab85436bed5c350",
+      "retrieved_at": "2026-10-01T17:14:37.578Z",
+      "tree_truncated": false,
+      "gitlinks": [],
+      "files_acquired": 141,
+      "bytes_acquired": 584015,
+      "all_git_blob_sha1_verified": true,
+      "raw_source_publication": false,
+      "upstream_execution": false,
+      "files": [
+        {
+          "path": ".gitattributes",
+          "mode": "100644",
+          "sha": "f811f6ae6a68f671738a6cbfcd3cc426ac628ad5",
+          "size": 256,
+          "sha256": "448fc4f5b88765df18eec1a82fb0ed09d7fb148e50fe49bd004be05effb06285",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/.gitattributes"
+        },
+        {
+          "path": ".github/ISSUE_TEMPLATE/bug_report.yml",
+          "mode": "100644",
+          "sha": "5f32b38ad340f164bd10f33e5a1dc7c051c8e932",
+          "size": 2969,
+          "sha256": "c57f2dd43994f129a82490425b78b76cd10d7812cc785ae8e90f872fb9e8871c",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/.github/ISSUE_TEMPLATE/bug_report.yml"
+        },
+        {
+          "path": ".github/ISSUE_TEMPLATE/config.yml",
+          "mode": "100644",
+          "sha": "5e67c8100c47b9340fb8c401f50f71a32625dbd6",
+          "size": 374,
+          "sha256": "7161174eba7c4cd455ce0215257c276426763794c0ea53db6e17931c2f64414a",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/.github/ISSUE_TEMPLATE/config.yml"
+        },
+        {
+          "path": ".github/ISSUE_TEMPLATE/mod_incompatibility.yml",
+          "mode": "100644",
+          "sha": "eb21c28587abddf2af62724abc8446f110e5d8b9",
+          "size": 3540,
+          "sha256": "9c240f1a68e8311f2a3259082cb85abb0528050a5fc349e2f7a7cf9fc1aef8a7",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/.github/ISSUE_TEMPLATE/mod_incompatibility.yml"
+        },
+        {
+          "path": ".github/PULL_REQUEST_TEMPLATE.md",
+          "mode": "100644",
+          "sha": "cfa0042e0350215d90185cbd2449e61311b636f3",
+          "size": 814,
+          "sha256": "ed168e8adfc2ea575582bfa6295c293599e3dd465f46cd494aeb8f07a14397c3",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/.github/PULL_REQUEST_TEMPLATE.md"
+        },
+        {
+          "path": ".github/workflows/build.yml",
+          "mode": "100644",
+          "sha": "82fcf0bfe5a4cc4fca89cad514dab81693631435",
+          "size": 1198,
+          "sha256": "52842cbb790cabf621897a522ec08aaac9c3c659519b6d98e6e100e5b4a14e59",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/.github/workflows/build.yml"
+        },
+        {
+          "path": ".github/workflows/release.yml",
+          "mode": "100644",
+          "sha": "ca10b6734695e3ce785c9e676af9fe0da4373868",
+          "size": 2823,
+          "sha256": "ee49c52272ec21fd5c9752d3c046c00fb13b76257edc4c6dfd411c1c87727bca",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/.github/workflows/release.yml"
+        },
+        {
+          "path": ".gitignore",
+          "mode": "100644",
+          "sha": "12f864471f0c7b2ef77b4de79c71f39f16af7236",
+          "size": 188,
+          "sha256": "efc7995172c172d5e2a5dfad4484abc9f4b6030aa2bf5bb9453180043f8d593f",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/.gitignore"
+        },
+        {
+          "path": "LICENSE",
+          "mode": "100644",
+          "sha": "f174c356a81a8b2181b2b4785914f3570b779263",
+          "size": 1061,
+          "sha256": "74fa02130dfcc816dc95cd748fa99e289b28d6cab2207d3650637dc75957c826",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/LICENSE"
+        },
+        {
+          "path": "README.md",
+          "mode": "100644",
+          "sha": "b49a9579e2ee587edf2d778cf97ab7956caa0894",
+          "size": 8342,
+          "sha256": "476325c289f288eaf7bf8108abfec30baff299e26e193cfa897ddf3ce6ea570d",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/README.md"
+        },
+        {
+          "path": "build.gradle.kts",
+          "mode": "100644",
+          "sha": "302785e43f0c488ec86771ceda158264f77af93a",
+          "size": 17454,
+          "sha256": "0d68eace0224e2c72090602f184a13c060e12013113426610bb9c9a457ae8656",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/build.gradle.kts"
+        },
+        {
+          "path": "gradle.properties",
+          "mode": "100644",
+          "sha": "e2e8714f0448d8ee2bea6950cbfe6636b75f49b0",
+          "size": 1045,
+          "sha256": "a2236edf904541b4bb3a619e449ca979bf9cf8758f81e50edbe95a58c3be408f",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/gradle.properties"
+        },
+        {
+          "path": "gradle/wrapper/gradle-wrapper.jar",
+          "mode": "100644",
+          "sha": "7f93135c49b765f8051ef9d0a6055ff8e46073d8",
+          "size": 63721,
+          "sha256": "0336f591bc0ec9aa0c9988929b93ecc916b3c1d52aed202c7381db144aa0ef15",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/gradle/wrapper/gradle-wrapper.jar"
+        },
+        {
+          "path": "gradle/wrapper/gradle-wrapper.properties",
+          "mode": "100644",
+          "sha": "3fa8f862f753336d4fabfd607678a7a2317e8a06",
+          "size": 250,
+          "sha256": "27d72993a6890cbc1583f332ebbd13cb8412f0a7dbeb24943e2f7ee14601201d",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/gradle/wrapper/gradle-wrapper.properties"
+        },
+        {
+          "path": "gradlew",
+          "mode": "100755",
+          "sha": "1aa94a4269074199e6ed2c37e8db3e0826030965",
+          "size": 8692,
+          "sha256": "fc977a94723af68aaffa4e5d60496fb4aeed1884b6b19e5e2f2fd7612673313d",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/gradlew"
+        },
+        {
+          "path": "gradlew.bat",
+          "mode": "100644",
+          "sha": "93e3f59f135dd2dd498de4beb5c64338cc33beeb",
+          "size": 2776,
+          "sha256": "18774a0ac0203f6893bf1db3291a0d77f06cd1b4dca2a43b51e7009da3e28cfa",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/gradlew.bat"
+        },
+        {
+          "path": "run/test/config/fml.toml",
+          "mode": "100644",
+          "sha": "a7ef7888782139071c878d3a1e00c0357a9e66c1",
+          "size": 861,
+          "sha256": "024e779c2c3984cac4105d162162bfeab80854f1401794100497539ab59d0210",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/run/test/config/fml.toml"
+        },
+        {
+          "path": "settings.gradle.kts",
+          "mode": "100644",
+          "sha": "b275a22ff63efb60687510248ba90b313a5adac4",
+          "size": 785,
+          "sha256": "35196d126349c76ca551534ece48b56ec75f4b129ff974f746721d609d666650",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/settings.gradle.kts"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/ConnectorUtil.java",
+          "mode": "100644",
+          "sha": "ecebe7e3fbad7f2c8bf2665bc7e9b9f33cf0523f",
+          "size": 8542,
+          "sha256": "725aa716bd9b622b3b8e8ebb10df2b5a21cbb98dbf8de3c0802febb36efcf175",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/ConnectorUtil.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/loader/ConnectorEarlyLoader.java",
+          "mode": "100644",
+          "sha": "8d46ca6f713e709b2fcd28e0fa7af9a54157922d",
+          "size": 6011,
+          "sha256": "6eeb8a88c76c7239776dfee066e3b4392044c79984e9715e9d3a2a0dc94f8339",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/loader/ConnectorEarlyLoader.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/loader/ConnectorLoaderModMetadata.java",
+          "mode": "100644",
+          "sha": "133158924e74e5d8e303149614216cf0584dcb8c",
+          "size": 5715,
+          "sha256": "41ff986d5583af4a987657fbe16e3214bfe37c6a866efedca4614beb1cf65b1b",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/loader/ConnectorLoaderModMetadata.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/locator/ConnectorConfig.java",
+          "mode": "100644",
+          "sha": "0a3e1d1fad91c7ac72b0718acfeccf6b0c92820b",
+          "size": 3798,
+          "sha256": "ab71fecb216bc7ba4550f0ae853b9406fb6f8e722e6053fac1790f8cc3136d6e",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/ConnectorConfig.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/locator/ConnectorEarlyLocator.java",
+          "mode": "100644",
+          "sha": "eda25e6a53adbbbeea677585914742605b2d5c7c",
+          "size": 3777,
+          "sha256": "de6fd494df5868422b23b133ec5f3470142e1c3a61283d0aad3be501d660aaa0",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/ConnectorEarlyLocator.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/locator/ConnectorLocator.java",
+          "mode": "100644",
+          "sha": "3ac11e7e193b559b0eed52527ac019c72a92a312",
+          "size": 18150,
+          "sha256": "46d225142d645e92f3aed1be5e41b8e9d77395716df9e5d1ad19b6f5adfe5fa3",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/ConnectorLocator.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/locator/ConnectorModMetadataParser.java",
+          "mode": "100644",
+          "sha": "cad839a76afab0136af30afef5926ccf89de7d9b",
+          "size": 5058,
+          "sha256": "9e058a33cf42969c100c06560c00610c259272f9641d8448e63726ba3030eb25",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/ConnectorModMetadataParser.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/locator/DependencyResolver.java",
+          "mode": "100644",
+          "sha": "49d9c86807abe2a6dd7050f701c046e1d2785cef",
+          "size": 9008,
+          "sha256": "bc5485cbace6846a9622841458ab911fcc1cda4f490a6cc962b6b9a3bc086f7f",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/DependencyResolver.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/locator/EmbeddedDependencies.java",
+          "mode": "100644",
+          "sha": "df3b11bc692086f4be3aec7f1348e8db5d4ac2fa",
+          "size": 4733,
+          "sha256": "47742b17dda48705701512a4bbb846721f6082e6338225180440606bbde607d2",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/EmbeddedDependencies.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/locator/ForgeModPackageFilter.java",
+          "mode": "100644",
+          "sha": "81477522721cb8c5b3e172acb0243b9193b00388",
+          "size": 3343,
+          "sha256": "cb8fff02d54a00cf515e7f274f806ab9ab01f7f8f66a62f62797fb35da6b6c29",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/ForgeModPackageFilter.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/locator/PackageTracker.java",
+          "mode": "100644",
+          "sha": "2c6e9402dd868e52fb6f28428b6e7491608e538e",
+          "size": 1957,
+          "sha256": "360013f09dbb1ecc53dca6ae963f9a6e2f3eb6587ade8dd20e5e76ca3634d590",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/PackageTracker.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/locator/SplitPackageMerger.java",
+          "mode": "100644",
+          "sha": "e8191938ebe45630d2e932c647972c7d614560cb",
+          "size": 9146,
+          "sha256": "7a1a4d2dbb9d60e8ac68389acb51fd863c87786c139cad06468172b476cc92e3",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/SplitPackageMerger.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/service/ConnectorLoaderService.java",
+          "mode": "100644",
+          "sha": "ac9d2ae7e9ec48f2ab84700c0c0433aa30f0c5ab",
+          "size": 6719,
+          "sha256": "72bc154cb3af9debb0bc67fc76e1e55f5c1177b48a1c09777f0b0e613949b7ff",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/ConnectorLoaderService.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/service/ConnectorPreLaunchPlugin.java",
+          "mode": "100644",
+          "sha": "4800999cc9a99453e58251a7d9368ce752f8a264",
+          "size": 2559,
+          "sha256": "48b79d49a9fb9a3fca21ca4e8b7475c1ce18d5a2ca697e230ea048cd3091b1e9",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/ConnectorPreLaunchPlugin.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/service/FabricASMFixer.java",
+          "mode": "100644",
+          "sha": "7643074066e6ad88929a9d87b1c0d28a1805a055",
+          "size": 7360,
+          "sha256": "5416323c0cab6fdfc81df701f7853900e2b50f6f96c70bff06772660efa60168",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/FabricASMFixer.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/service/FabricMixinBootstrap.java",
+          "mode": "100644",
+          "sha": "28b4ca9a2a2515cdcfb8acbdd3ddc1aa1073d732",
+          "size": 6809,
+          "sha256": "c77e1a7c6358863e48e9a6f845af9558092033b397277b3081ad3a900f826fed",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/FabricMixinBootstrap.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/service/hacks/ConnectorForkJoinThreadFactory.java",
+          "mode": "100644",
+          "sha": "47a65b4ed9b5f626c4ba68a8b56ed4345b5c8506",
+          "size": 1934,
+          "sha256": "30bed171b25d607a182bed394ff2daabb41b7fd0e529b4f7a781254d74d8d00c",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/hacks/ConnectorForkJoinThreadFactory.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/service/hacks/LenientRuntimeEnumExtender.java",
+          "mode": "100644",
+          "sha": "41d25a1b13fc6d9c640e6c7cef22ddfdcc3bf66c",
+          "size": 1638,
+          "sha256": "1a43bde55d06d56b13dd47554ade38acda4ba1cbbfe9ab8ed7a4d8aec265c65b",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/hacks/LenientRuntimeEnumExtender.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/service/hacks/ModuleLayerMigrator.java",
+          "mode": "100644",
+          "sha": "cb1bb528190285b11e551b062529148c10bdfd81",
+          "size": 8603,
+          "sha256": "336668e6fcdac48320bb95e480c7536ed1f9ceb0bdeb11c81b7e2afe9996fe8d",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/hacks/ModuleLayerMigrator.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/service/hacks/ServiceProviderInheritanceWorkaround.java",
+          "mode": "100644",
+          "sha": "51ad470b68799b547b3cda6f0064838588cbe338",
+          "size": 4377,
+          "sha256": "9c8f6afc174694c5792ba3bc61d527e154a47c3578f7a2d8ed6788fa71827b8c",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/hacks/ServiceProviderInheritanceWorkaround.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/transformer/AccessWidenerTransformer.java",
+          "mode": "100644",
+          "sha": "c27e1895a464c526bdf1d62a7653fb5c5062f7ac",
+          "size": 6866,
+          "sha256": "1e0f4353f7be8cdd2317bfde1665c0d0ec585c545f4cfb6e04d0ff18eb8e0043",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/AccessWidenerTransformer.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/transformer/AccessorRedirectTransformer.java",
+          "mode": "100644",
+          "sha": "6c4174fe589cb1d6600965500fc95923652a48e8",
+          "size": 4966,
+          "sha256": "06593a875d93b9b33dffd6ca3859afe165e7d6999c48fde2cb43af082f498fdc",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/AccessorRedirectTransformer.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/transformer/FieldToMethodTransformer.java",
+          "mode": "100644",
+          "sha": "3ba6685918a1ebedd26db0c6023c8d3588f46c8a",
+          "size": 6764,
+          "sha256": "813db2ecf52b616495302fcd91c715aca38ad8cd920c41e684af08bd29d147e8",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/FieldToMethodTransformer.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/transformer/JarSignatureStripper.java",
+          "mode": "100644",
+          "sha": "1208e75f57396fdcdfd52d717220a206f49d9ede",
+          "size": 1168,
+          "sha256": "a6909682f3e69c180511b5cefe2fea41ac1094e1aab3c838555a9730131d15ad",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/JarSignatureStripper.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/transformer/MixinPatchTransformer.java",
+          "mode": "100644",
+          "sha": "56d891ad36da1304afb763888d16719e510fa4ac",
+          "size": 13761,
+          "sha256": "a229757d426f47bc5a2bc52ecc5e76b8c89896076bf29f1c0527dc6b848e68ce",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatchTransformer.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/transformer/MixinPatches.java",
+          "mode": "100644",
+          "sha": "3b4849a73ccdc64e4639584002b1393ab7e8b76d",
+          "size": 52612,
+          "sha256": "e88b2eb5773fe83d92a2d49498704922047514cbbed69b293f89f63ca69292a4",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/transformer/ModMetadataGenerator.java",
+          "mode": "100644",
+          "sha": "4b6ab8d98169b70a4e14bf22db0971b3172a010b",
+          "size": 4097,
+          "sha256": "48273f61e269ad9effbaf1fbd184e5eb66b0950f8291de5b07f248420ca9fda2",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/ModMetadataGenerator.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/transformer/OptimizedRenamingTransformer.java",
+          "mode": "100644",
+          "sha": "8cc50dfb16496146f73cdbe5b10c5cfae187bcc5",
+          "size": 17747,
+          "sha256": "bbe5dd863d3470128de30943f7780ec7d77dc7955c88491ae1c13a366b744cd5",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/OptimizedRenamingTransformer.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/transformer/RefmapRemapper.java",
+          "mode": "100644",
+          "sha": "ffd1c06f7abbf07a582ce1355e629ef3266b65db",
+          "size": 6468,
+          "sha256": "9409c5ea3f8359479fb43a6b972255c77a26bcf97e3efc631426f042749e4cb2",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/RefmapRemapper.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/transformer/SrgRemappingReferenceMapper.java",
+          "mode": "100644",
+          "sha": "206774bf834b92f65b1008dde0450c13deb0eed0",
+          "size": 5070,
+          "sha256": "c657cbf17271f44a578f47fa42f22ab68b3f4ff966afde6511113c38d19a2eb5",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/SrgRemappingReferenceMapper.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/transformer/jar/BytecodeFixerUpperFrontend.java",
+          "mode": "100644",
+          "sha": "4301ae254ef1c488e04619267dc945bd2471afc7",
+          "size": 4977,
+          "sha256": "85c16bb17139ff7bef3fb021e84b145e36546f822c654e05181e31b539c2ef22",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/jar/BytecodeFixerUpperFrontend.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/transformer/jar/EarlyJSCoremodTransformer.java",
+          "mode": "100644",
+          "sha": "0a65b1298f2984a1de39193dd78955bb54944fbb",
+          "size": 5281,
+          "sha256": "0185e37ef801f4bb3987b05389bfc6e4646503a73a4fb04dcfd8b311ce274a52",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/jar/EarlyJSCoremodTransformer.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/transformer/jar/IntermediateMapping.java",
+          "mode": "100644",
+          "sha": "72b1e99b68272ee3ba0aeb8cb580d99dff13b40d",
+          "size": 5157,
+          "sha256": "7259667936c08010f0b1ad56b306bac72b658607dee640a8f8e22d308dacbe0a",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/jar/IntermediateMapping.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/transformer/jar/JarTransformInstance.java",
+          "mode": "100644",
+          "sha": "b68b252a16c31f2c08f2b9385daa54465710946b",
+          "size": 11943,
+          "sha256": "07eda05c417975aad45750beda0f1dbd41d08903968865c7734e6f00a74f4e4b",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/jar/JarTransformInstance.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/transformer/jar/JarTransformer.java",
+          "mode": "100644",
+          "sha": "303520fc3254e0101ce8732f315fcce202437a35",
+          "size": 14379,
+          "sha256": "0dffcf492c91f7e59f921e4a95c46be5d2ab5febf9421dacc4acefc8f9b923b8",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/jar/JarTransformer.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/transformer/jar/RenamingClassLookup.java",
+          "mode": "100644",
+          "sha": "ae80b82d454095d96ed0d771c3109b307658bb1c",
+          "size": 1481,
+          "sha256": "f8146de7f470dba0b140ac779553703455ce340290758f1d975f5559b5dbe86d",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/jar/RenamingClassLookup.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/transformer/patch/ClassAnalysingTransformer.java",
+          "mode": "100644",
+          "sha": "396ec1131cd760252ffeb03bb3a113c5a21e5da7",
+          "size": 2657,
+          "sha256": "a698d051433fc70ad0225b8582e70415d48a00acdb60045e86195661b3476a19",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/patch/ClassAnalysingTransformer.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/transformer/patch/ClassNodeTransformer.java",
+          "mode": "100644",
+          "sha": "e74073cb188d36f625c0d5250633fc6b0740bd71",
+          "size": 1681,
+          "sha256": "cdc3fa66b44a1c1578ae273e75b74908ef093700d5750b50eba86960053c6fe6",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/patch/ClassNodeTransformer.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/transformer/patch/ConnectorRefmapHolder.java",
+          "mode": "100644",
+          "sha": "22e7d2fa68ae113c0c84ab0928781632a2e0b666",
+          "size": 2162,
+          "sha256": "a2d2b57f4da6c567a65840ffb6a3734357f417a3a50fb5af311d831525475df3",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/patch/ConnectorRefmapHolder.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/transformer/patch/EnvironmentStripperTransformer.java",
+          "mode": "100644",
+          "sha": "aaca4513b16a54dff6425e7a5a68fe65b3e27bf8",
+          "size": 6293,
+          "sha256": "85b08b80c0c0dc41ef2547803de3f1b553d1d1264f152f8151edf69819760686",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/patch/EnvironmentStripperTransformer.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/transformer/patch/RedirectAccessorToMethod.java",
+          "mode": "100644",
+          "sha": "acede2dcd8f918450528eaa1d951dc9279a6f1e9",
+          "size": 1454,
+          "sha256": "a1dd94860b4693b82f98d9456cbd67975769166ba82f77b84f5bbf77b1771662",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/patch/RedirectAccessorToMethod.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/transformer/patch/ReflectionRenamingTransformer.java",
+          "mode": "100644",
+          "sha": "d45db0d887114528b8cd367c92e8389c2639a278",
+          "size": 5026,
+          "sha256": "ab9b661314e590cac6596cbd2e993e00c2c38c66c5f49fc03c530f3e4def1892",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/patch/ReflectionRenamingTransformer.java"
+        },
+        {
+          "path": "src/main/resources/META-INF/services/cpw.mods.modlauncher.api.ITransformationService",
+          "mode": "100644",
+          "sha": "b81d8f138db72bde7afa934db656bff95f5ed0f0",
+          "size": 53,
+          "sha256": "710c0faff187ae54beddd86aae586671490ff04f850b37d52bb7ecdd63df1ba3",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/resources/META-INF/services/cpw.mods.modlauncher.api.ITransformationService"
+        },
+        {
+          "path": "src/main/resources/META-INF/services/net.minecraftforge.forgespi.locating.IDependencyLocator",
+          "mode": "100644",
+          "sha": "e684fb4d35122a19298b394979c2be92933122e0",
+          "size": 47,
+          "sha256": "a45fe50cba0fdb03d05c8ba0b05d5f4c2e52e6fc6357491717955f2b384aa8ea",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/resources/META-INF/services/net.minecraftforge.forgespi.locating.IDependencyLocator"
+        },
+        {
+          "path": "src/main/resources/META-INF/services/net.minecraftforge.forgespi.locating.IModLocator",
+          "mode": "100644",
+          "sha": "227323877725239153ee948d99832b4f6c8baa7a",
+          "size": 52,
+          "sha256": "98e809a544c936a6aa9c8b146082d628564913c8efbc9636791fcb95aa67b286",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/resources/META-INF/services/net.minecraftforge.forgespi.locating.IModLocator"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/ConnectorBootstrap.java",
+          "mode": "100644",
+          "sha": "3fe94d41f3eeaec81784bb939e17f9155239bef8",
+          "size": 2398,
+          "sha256": "39a105f3d66422951802f4805fe6710115f795024a3084afa87008cfca942538",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/ConnectorBootstrap.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/ConnectorLoader.java",
+          "mode": "100644",
+          "sha": "2f3dc5e6f7c5e224db30dbc785759eee0f259b54",
+          "size": 2343,
+          "sha256": "397f42132d6b176907dcd5494d89ae57d2d9d5774584d33b0384727655a280a5",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/ConnectorLoader.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/ConnectorMod.java",
+          "mode": "100644",
+          "sha": "b874b2f5ea09737da5a3bddef699cef28fa9b71a",
+          "size": 4400,
+          "sha256": "dd860e91303d2dd8b1485b938915570521e91e8af816310e197d0c8bf09bcf40",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/ConnectorMod.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/CrashReportUpgrade.java",
+          "mode": "100644",
+          "sha": "7ce17d9814924154bc081f08f2fac86a6485bab2",
+          "size": 2758,
+          "sha256": "bce32712847713344865b31d54dbe7c1a80e1ba188dcebd0f2dd2d84aa956dcc",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/CrashReportUpgrade.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/DummyTarget.java",
+          "mode": "100644",
+          "sha": "68e845d774dc368168982e4b5d2d35cd2a54f582",
+          "size": 65,
+          "sha256": "044883884ac903d3b7623f671e6a3536e91c0a2bd10fb8a9c454feeb5615268b",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/DummyTarget.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/compat/DummyResourceManager.java",
+          "mode": "100644",
+          "sha": "6471869da3d4721921b8a40eff0ba2bb3a2c037e",
+          "size": 1320,
+          "sha256": "50c2f8660b7a8f35a73aabb77a44b8171483dc2b59f56abd3ef7a5862088be0e",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/DummyResourceManager.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/compat/FluidHandlerCompat.java",
+          "mode": "100644",
+          "sha": "78c66446bab40af688e402cf81fb3e32c64c4cb2",
+          "size": 5596,
+          "sha256": "f0a925be9613a4398a378a4b89eb9de249dee9cd4d86e8f8ef7a2a57e72d5dc5",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/FluidHandlerCompat.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/compat/ItemStackExtensions.java",
+          "mode": "100644",
+          "sha": "06f24e1417ec30c6a3adf4688114bf03d416b945",
+          "size": 246,
+          "sha256": "1cf61b5f90b7939dc7f6667b757ed3c40b47225c8c9317e7796b700a2d9695da",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/ItemStackExtensions.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/compat/LateRenderTypesInit.java",
+          "mode": "100644",
+          "sha": "c2ad1da269ce349d32b50817aef81ac6f5d51a42",
+          "size": 704,
+          "sha256": "046203cb7ad810962e01e1f63975ec29fcb331f4a7255def092e9771514ff943",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/LateRenderTypesInit.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/compat/LateSheetsInit.java",
+          "mode": "100644",
+          "sha": "4964113eca244fa9865c13c60489708385354043",
+          "size": 1211,
+          "sha256": "ae1705d049169d7c3d8cabfb5d85ed744f9dcf3c18ff5b524511c5a00e0527dd",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/LateSheetsInit.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/compat/LazyEntityAttributes.java",
+          "mode": "100644",
+          "sha": "cbcb8a10ad1e00ea5d7285a75044e0a6d21891ad",
+          "size": 3815,
+          "sha256": "b6f8d06d5cbaedf682f8a249996c6c6f52800d4dd07310ab2e05960f94de31ea",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/LazyEntityAttributes.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/compat/PathPackResourcesExtensions.java",
+          "mode": "100644",
+          "sha": "feff2df86564dcf89e7c00b71a4d23bc86987eb1",
+          "size": 129,
+          "sha256": "539d6a40b884f0bb759c14c0743d29b8a32f19d8497878291d04013b584f27a9",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/PathPackResourcesExtensions.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/compat/RegistryUtil.java",
+          "mode": "100644",
+          "sha": "151927ee1be12fde7495954f84954f7622469915",
+          "size": 2572,
+          "sha256": "65ae18a2b4b8ac2b0b8dd55d999a6e983b161353b8a319800f088ebe817143d1",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/RegistryUtil.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/compat/TagConverter.java",
+          "mode": "100644",
+          "sha": "32840b2779a59e20495cac991db2d55f697dbd6a",
+          "size": 7361,
+          "sha256": "1277aab19a2834fe97ca6eaee2b357cb925877f31ab306c44869ae10052641bf",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/TagConverter.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/compat/fieldtypes/FieldTypeUtil.java",
+          "mode": "100644",
+          "sha": "48a2a67d69d4a20e30432f9e6cf0fda27b1e8f67",
+          "size": 786,
+          "sha256": "1d727c48f559d38e32c1232dea45ad07578b1cb75250fe5698729bb0f0ba5d39",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/fieldtypes/FieldTypeUtil.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/compat/fieldtypes/RedirectingIdMapper.java",
+          "mode": "100644",
+          "sha": "594324b543e2d24b163a6b2f1af9e403fa80bb40",
+          "size": 1679,
+          "sha256": "5dd9cfbf47bfcced440ce30418192745e3d4e202913be5fd99e124d07120eac1",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/fieldtypes/RedirectingIdMapper.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/compat/fieldtypes/RedirectingInt2ObjectMap.java",
+          "mode": "100644",
+          "sha": "690e7859e93d19d0dd7428223ce5474f928e898a",
+          "size": 3205,
+          "sha256": "3540f559fee21f1693ef0815143129cde264f3a81c650f5578595664cb1db0d0",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/fieldtypes/RedirectingInt2ObjectMap.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/compat/hud/GuiExtensions.java",
+          "mode": "100644",
+          "sha": "678a5308952cc2dfbc4edc6581fc5dd0e7b31a9f",
+          "size": 1012,
+          "sha256": "ed4591a4a96cb078af22866b33a1c7aed52eb48d24ac41e6a15f8db1646318c4",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/hud/GuiExtensions.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/compat/hud/HudRenderInvoker.java",
+          "mode": "100644",
+          "sha": "ed638dc78fa69c791f9fd6f8a03597ea308db5b3",
+          "size": 1143,
+          "sha256": "a70950f586fdb9b2196216142c7e4cd444dec11a742f049e121b2d59bbfd95dc",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/hud/HudRenderInvoker.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/CrashReportExtenderMixin.java",
+          "mode": "100644",
+          "sha": "78e2aff0a6b8ff52522056f6d6d8465f1c9de11c",
+          "size": 749,
+          "sha256": "d94dae96a93bf9df944324aca71009ce5cf1275b6278e1dfc52a42ff0ec5e321",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/CrashReportExtenderMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/ForgeHooksClientMixin.java",
+          "mode": "100644",
+          "sha": "05f8635fde21379d99a1a7a513d5014dd81d6d08",
+          "size": 1385,
+          "sha256": "3b95eb5975c60aa6d340535c3444b159255b2ea2cc111afdd59a4bdd9ac24189",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/ForgeHooksClientMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/ForgeHooksMixin.java",
+          "mode": "100644",
+          "sha": "7e4dc510031da38557a12754d6ebdba76a6097fc",
+          "size": 2283,
+          "sha256": "9a731ea3f4e94cc4fdcd0880ee43dc1204e0c3882706b2a3225a10ca572c2198",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/ForgeHooksMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/HumanoidArmorLayerMixin.java",
+          "mode": "100644",
+          "sha": "b123411c5ca0d58c2b4fedba7f99318a23fed42f",
+          "size": 906,
+          "sha256": "8736a75818def64ec715f7722124b9c400218dca1baa3fc7100c7fb21cce95f1",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/HumanoidArmorLayerMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/IForgeItemMixin.java",
+          "mode": "100644",
+          "sha": "fbab32456453f893fb8caefb3780d2472b592134",
+          "size": 746,
+          "sha256": "7271f783144badd399810738847e183611ebf55df542d9297eb462f6aedc2ad1",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/IForgeItemMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/ItemBlockRenderTypesMixin.java",
+          "mode": "100644",
+          "sha": "62f7161b8110888bbe037e35c65dbb46fb4e3430",
+          "size": 816,
+          "sha256": "7f44931369fad8adc477a4f7b42353702e4ee9f5845fdf56b50d7cb2db7b6929",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/ItemBlockRenderTypesMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/ItemOverridesMixin.java",
+          "mode": "100644",
+          "sha": "75bbf1a42dff44dd0d0c6730c439ff564d0cec0b",
+          "size": 1360,
+          "sha256": "c916450dca6fa494cd92b254aded4177649679415b5739a68ac0b15bb6c8d49c",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/ItemOverridesMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/OptionsMixin.java",
+          "mode": "100644",
+          "sha": "3a893aeb5a82172774db3f478690a4f5ff806755",
+          "size": 1463,
+          "sha256": "a6c19b6de361679157f542f4db0289aeb45131cdcbfff539ec09c89551222ae4",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/OptionsMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/PlayerListMixin.java",
+          "mode": "100644",
+          "sha": "86e8e60cd30069a5faabde7845af99622f06bcc0",
+          "size": 993,
+          "sha256": "6d1d2bac4ff01183c045cc7595c5a3346b7988337855a36177a25fb9070bac0a",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/PlayerListMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/PoiTypesMixin.java",
+          "mode": "100644",
+          "sha": "846d5740ee31811d9003a336089ddb06adbeb397",
+          "size": 1513,
+          "sha256": "b1e16c7b51219451d13b0807c7a4ed01c997424de00189602c855cf5de1b7563",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/PoiTypesMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/TagLoaderMixin.java",
+          "mode": "100644",
+          "sha": "995daea5b4052f031237434b6628bc80281d5bde",
+          "size": 822,
+          "sha256": "e8d9489f40d55aa6b2366f438357e2eed212c959cd82e786ebe4f05de2aeb0ff",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/TagLoaderMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/boot/DatagenModLoaderMixin.java",
+          "mode": "100644",
+          "sha": "00abe63fb29e35a7c27167a0926d675ba349dc06",
+          "size": 787,
+          "sha256": "8c5771589f32e8b5de9efb9b039172afaaa521b04ec936a2e3007389ba4bd91f",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/boot/DatagenModLoaderMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/boot/MinecraftMixin.java",
+          "mode": "100644",
+          "sha": "63b6f662b4d4051c2e9387028d5d59863f34a4f9",
+          "size": 778,
+          "sha256": "1ea6330a1a4007b2faebf7dcbc59d61a901254e4d703bf9730672a7827aa89fa",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/boot/MinecraftMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/boot/ServerMainMixin.java",
+          "mode": "100644",
+          "sha": "3981642abb3cd1cd87f2aefaef28940f88df89f5",
+          "size": 639,
+          "sha256": "bbca9f02001b076f1bbfc05643aafb80bd562dc4054c0a83e592a090385191b6",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/boot/ServerMainMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/client/KeyMappingMixin.java",
+          "mode": "100644",
+          "sha": "bc1cce7e69c83aec3557b8c53a8ef9df38d5063a",
+          "size": 5268,
+          "sha256": "f65e43c67022d62313541ecc1ed7817b4efdd9af44a558fd60c901e11117e752",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/client/KeyMappingMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/fieldtypes/BlockColorsMixin.java",
+          "mode": "100644",
+          "sha": "90fa9b796bc73a5d783106510d4be342154d912d",
+          "size": 1390,
+          "sha256": "ba334ed7e14be59fe8e9615657a1d7c66cb091f0e77734161da37358f0d17003",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/fieldtypes/BlockColorsMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/fieldtypes/ItemColorsMixin.java",
+          "mode": "100644",
+          "sha": "e0ece8b0949967780692df3c4ed97edc0e67b3a2",
+          "size": 1360,
+          "sha256": "81643cfa5caf782a8bc0cacaca1d84864db00a221652bf9b659c172b0fb62433",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/fieldtypes/ItemColorsMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/fieldtypes/ParticleEngineMixin.java",
+          "mode": "100644",
+          "sha": "0cf5959b9ef71da96d37819c5f1ebbda9766b4a0",
+          "size": 1375,
+          "sha256": "3036c2d0e54893c46756b5d294de02eec84e09fc1c2afd8886fc759e2160c1e5",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/fieldtypes/ParticleEngineMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/hud/ForgeGuiMixin.java",
+          "mode": "100644",
+          "sha": "ba031d2729845308c93ac44c712c6a253f0c59aa",
+          "size": 2200,
+          "sha256": "603b64225dc8215d0bb5e7a6f3b419340c014ea3ab336038f3ad164e99c287ac",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/hud/ForgeGuiMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/hud/GuiMixin.java",
+          "mode": "100644",
+          "sha": "4917193854b1aae57523e7c1efabb5e770d04eb8",
+          "size": 2632,
+          "sha256": "4ede9112e7378910944041c94f80d411239b782ff9dcb22575e4d0e2d00b0695",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/hud/GuiMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/item/ForgeHooksMixin.java",
+          "mode": "100644",
+          "sha": "da4ec5f133dd5f78ce4c19df54f8401f1b387262",
+          "size": 1104,
+          "sha256": "d230030b5ab59954764a18250216d45c5ab04b4c6ad2c42016a4075422b80113",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/item/ForgeHooksMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/item/ItemStackMixin.java",
+          "mode": "100644",
+          "sha": "14b10e3fd7242ef9497c4c21adf4cc9663371bf8",
+          "size": 1505,
+          "sha256": "a72b2654ba14ca917f2b0b975d1f3fd09fa3e2d45acfa4f14729237ecadc7018",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/item/ItemStackMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/item/LateItemStackMixin.java",
+          "mode": "100644",
+          "sha": "a73eae0c8810d57db1ce64a3234d7c5c865cef8a",
+          "size": 293,
+          "sha256": "3f7fe4843706600e80255899619002c72eb6801e0d7f979ca6fcdc6698bc4328",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/item/LateItemStackMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/lang/PathPackResourcesAnonMixin.java",
+          "mode": "100644",
+          "sha": "fbfb494075b6e6754ce17756c4222292b1fb9ff2",
+          "size": 1266,
+          "sha256": "e4e1c2d7c9660ce94c065000d0302b154abdd5bc811c1f522110ba929e4cfb88",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/lang/PathPackResourcesAnonMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/lang/PathPackResourcesMixin.java",
+          "mode": "100644",
+          "sha": "626f1d6d45d5f3dd260ee068ea2f8976db78f0d6",
+          "size": 1511,
+          "sha256": "6ce93148ae27543dbebdc90b6d28ecdd45a8ec07762cf690e37351f290818639",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/lang/PathPackResourcesMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/network/ConnectionTypeMixin.java",
+          "mode": "100644",
+          "sha": "6e2260d493a26df298ced49b0dcca6bd5f89c573",
+          "size": 690,
+          "sha256": "97ac4136c89702f268f1950ce0d09bda931cefd3e4af314bc2a6a5c34cc720e9",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/network/ConnectionTypeMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/network/HandshakeHandlerMixin.java",
+          "mode": "100644",
+          "sha": "734c48f536f1719179b8195dbd880daba8b79d91",
+          "size": 1427,
+          "sha256": "1faca7a064153d39abf7935e12412da7c49dc7ecf85bbdde714b1d8205a10561",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/network/HandshakeHandlerMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/network/NetworkFiltersMixin.java",
+          "mode": "100644",
+          "sha": "1afbf6de075e1677436c4395caeabf45b3baf5b4",
+          "size": 1013,
+          "sha256": "a7aaf1c9952cb0b8d9b84dd701023681f5f576cf883503aeb2085439f2649fc9",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/network/NetworkFiltersMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/recipebook/RecipeBookCategoriesAccessor.java",
+          "mode": "100644",
+          "sha": "a284986ffbcde060e150ea53442f0f5712303be0",
+          "size": 580,
+          "sha256": "0f2cac1733ab32c2a045088a203a9ca2f184b17aafcf915da81ab83d2b37127c",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/recipebook/RecipeBookCategoriesAccessor.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/recipebook/RecipeBookCategoriesMixin.java",
+          "mode": "100644",
+          "sha": "a21946e8230c410fd351f17b187af6b297c0bdb9",
+          "size": 1267,
+          "sha256": "55b701af7672db1c1456c3042a5e07fe587ffa34d668d8680c58a941b8b4b424",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/recipebook/RecipeBookCategoriesMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/recipebook/RecipeBookManagerMixin.java",
+          "mode": "100644",
+          "sha": "ca7ff821560e50a5a97265466f7994eddbcb7cde",
+          "size": 1767,
+          "sha256": "0671c9ed9be8ad87e8ba76c3cef3a28e9bc3afabbf37efcbc492788fd5b0330a",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/recipebook/RecipeBookManagerMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/registries/BootstrapMixin.java",
+          "mode": "100644",
+          "sha": "067231b6c4a858c163601d2d929979b74b3fcc79",
+          "size": 1165,
+          "sha256": "5d2ba7f1fdef1bd0675030a4b1d73b8a6801378ccf8c7261b32e119429c8e359",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/registries/BootstrapMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/registries/BuiltInRegistriesMixin.java",
+          "mode": "100644",
+          "sha": "6dcc5d983786f7ce41bf5a03d6e2cae4b8ed5f9a",
+          "size": 604,
+          "sha256": "fc981930a57e68e36f8b5053b4912e9fddc888861bb82688020497be046449c2",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/registries/BuiltInRegistriesMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/registries/ClientForgeRegistryMixin.java",
+          "mode": "100644",
+          "sha": "91e67498d5913ed787206df97cc2c0ae58c0a42e",
+          "size": 905,
+          "sha256": "f083d1104e23a159b5c358b3307ac54f3f8cb0a87570b7b0fd9307a0c3a49f0e",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/registries/ClientForgeRegistryMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/registries/ForgeRegistryMixin.java",
+          "mode": "100644",
+          "sha": "6673a620c76178af2f514d3159aed711950f59c0",
+          "size": 1787,
+          "sha256": "c05596b69a0deb174461e4f06fe384044d9f5755e52265d2d2193a817f8db942",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/registries/ForgeRegistryMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/registries/MappedRegistryMixin.java",
+          "mode": "100644",
+          "sha": "55af478d1e6cecaca91e5139b6cc0b25b6886ece",
+          "size": 722,
+          "sha256": "c5f4fb6234a160582deee72672e5aafa83b8a9c8ee0ffe5dc103c23be754039f",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/registries/MappedRegistryMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/registries/MinecraftMixin.java",
+          "mode": "100644",
+          "sha": "2f3270cd6bd9234d6eb2f5987e43a57d05c37a8d",
+          "size": 1065,
+          "sha256": "ae8776947edd94f15001ba799d58f4e74a7699004edf223bddd6bba1a755d100",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/registries/MinecraftMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/registries/MinecraftServerMixin.java",
+          "mode": "100644",
+          "sha": "aa3ca02652dece79c1fcc6cd88a2e29dbfe76f49",
+          "size": 1098,
+          "sha256": "c3ea1a0ccf2152f00d863cae0061510e061dec89e82f73662506af768b1aa9e4",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/registries/MinecraftServerMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/registries/NamespacedWrapperMixin.java",
+          "mode": "100644",
+          "sha": "008f12a3cd7ceb9423306f70e9c1d8810a69c9cc",
+          "size": 676,
+          "sha256": "76845acbb045c997e513b851093ac72bfc562e393289008a1688aa28c19df015",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/registries/NamespacedWrapperMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/registries/RegistryDataLoaderMixin.java",
+          "mode": "100644",
+          "sha": "786cdbaf5bae19eee9f59133dffb1c29b54a7ab7",
+          "size": 5116,
+          "sha256": "ac931ff026f9139b15fef3fd2fc91bc3ee4c448a76f1cc4228b62d8e960f0e93",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/registries/RegistryDataLoaderMixin.java"
+        },
+        {
+          "path": "src/mod/resources/META-INF/accesstransformer.cfg",
+          "mode": "100644",
+          "sha": "a504d2e7250cbaa7aafc6679ef75a85526723640",
+          "size": 1652,
+          "sha256": "f7b196b5b9dbfaebe724f0855886845aaf0a305718c3caabd9c0608090b57852",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/resources/META-INF/accesstransformer.cfg"
+        },
+        {
+          "path": "src/mod/resources/META-INF/asm/expandLocalVarScope.js",
+          "mode": "100644",
+          "sha": "823623f6e6739957f86899fbf88329632893fd01",
+          "size": 4028,
+          "sha256": "19895736ad9d5f7ea8c4bc3c2f4b557d29bd8f58b31113454453cf71740f8afc",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/resources/META-INF/asm/expandLocalVarScope.js"
+        },
+        {
+          "path": "src/mod/resources/META-INF/asm/fixFieldSignatureChanges.js",
+          "mode": "100644",
+          "sha": "d4dbdd6344c6a7027c65a415d590b09f7fabe5ec",
+          "size": 1207,
+          "sha256": "665dc63f0d1eabd2e8ccc50d5555cf6d2a0c9b528bba3d543002059f3fe264d2",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/resources/META-INF/asm/fixFieldSignatureChanges.js"
+        },
+        {
+          "path": "src/mod/resources/META-INF/asm/injectCreativeModeTabCtr.js",
+          "mode": "100644",
+          "sha": "508c79c835be62d506b696a84d67ab895bffeed4",
+          "size": 3496,
+          "sha256": "c7a6e5f0a684fd6cbf99c6098cda438455a292d94bcf0dd2773bef3480b518dc",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/resources/META-INF/asm/injectCreativeModeTabCtr.js"
+        },
+        {
+          "path": "src/mod/resources/META-INF/asm/injectFabricASM.js",
+          "mode": "100644",
+          "sha": "70698b0b7a90ad1b7b1b98eafce8113ce23af5e2",
+          "size": 3597,
+          "sha256": "459f4c39f808d5e074a70e88f13d48c9525e03ec04a8c67faad3bab14ff239cf",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/resources/META-INF/asm/injectFabricASM.js"
+        },
+        {
+          "path": "src/mod/resources/META-INF/asm/updateItemUseStartTreshold.js",
+          "mode": "100644",
+          "sha": "04093e910796b5b6da37a594c0f742096e6694ea",
+          "size": 1033,
+          "sha256": "d2342faeb13436ee80fe09d63776596b418401599a85c489ede31f1c145d9e4a",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/resources/META-INF/asm/updateItemUseStartTreshold.js"
+        },
+        {
+          "path": "src/mod/resources/META-INF/coremods.json",
+          "mode": "100644",
+          "sha": "b6a02a97c5b89a3fa3a45e406e2ae50874fdd9ab",
+          "size": 349,
+          "sha256": "114fef7c9aaf180f68f4008ef1e4c480c2e1f9bba88cb389db225fd64ed87f96",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/resources/META-INF/coremods.json"
+        },
+        {
+          "path": "src/mod/resources/META-INF/mods.toml",
+          "mode": "100644",
+          "sha": "57166db65cae1563f1fee6907e7900d920c91125",
+          "size": 970,
+          "sha256": "46fc6c5e870ca16d70828d15a6616010829f73a573633832dc876e088fe3bc26",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/resources/META-INF/mods.toml"
+        },
+        {
+          "path": "src/mod/resources/connectormod.mixins.json",
+          "mode": "100644",
+          "sha": "2f45104fb90c1e40a6a8c9397c093eddc4145127",
+          "size": 1638,
+          "sha256": "0651f3aa0e3d20346ae62d043693216cdd88d94238082c68ae272974eb155c8c",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/resources/connectormod.mixins.json"
+        },
+        {
+          "path": "src/mod/resources/logo.png",
+          "mode": "100644",
+          "sha": "2e37034fb1ea2c64b77f77ff7240e337f8283cff",
+          "size": 45211,
+          "sha256": "2e69ea6364794d77fa08bd21ef2b4e7e20875b24361f5a6412ed8d28b664fc53",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/resources/logo.png"
+        },
+        {
+          "path": "src/mod/resources/pack.mcmeta",
+          "mode": "100644",
+          "sha": "6ab93e7558069b0ab3699f57ad633c7e54f214ba",
+          "size": 105,
+          "sha256": "c448da13bbe2977862ffd067e7cfec04889b2dca9983a2286c2e493333f1df40",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/resources/pack.mcmeta"
+        },
+        {
+          "path": "src/test/java/org/sinytra/connector/test/ConnectorTest.java",
+          "mode": "100644",
+          "sha": "1c37ea40d08bd80d92ed84611911f25f99ff4c4b",
+          "size": 1263,
+          "sha256": "e8aa2fab56f52491bcef8044556d75668eaf747f7848ef235d4717ae58adae39",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/test/java/org/sinytra/connector/test/ConnectorTest.java"
+        },
+        {
+          "path": "src/test/java/org/sinytra/connector/test/mixin/client/MinecraftMixin.java",
+          "mode": "100644",
+          "sha": "6e828ba5b41663d83e158d3840073caeee531d13",
+          "size": 663,
+          "sha256": "12a65bcd4b1b455cadf7d0136a79ff1f413fd433cb223706a04fcc5fe0574608",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/test/java/org/sinytra/connector/test/mixin/client/MinecraftMixin.java"
+        },
+        {
+          "path": "src/test/java/org/sinytra/connector/test/mixin/client/QuickPlayMixin.java",
+          "mode": "100644",
+          "sha": "be66e6f35adf5fd3bd7ae5a412eb2544bafab279",
+          "size": 1383,
+          "sha256": "9b817c66492579cea2ee045062f953a8dbd751849a8574136961f573be0e189c",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/test/java/org/sinytra/connector/test/mixin/client/QuickPlayMixin.java"
+        },
+        {
+          "path": "src/test/resources/META-INF/MANIFEST.MF",
+          "mode": "100644",
+          "sha": "0dea672f5a1518a33e152f7abc1ca600949381d2",
+          "size": 60,
+          "sha256": "ff5c9dc7ebcf0ef21a6b1ff67f78cc53ed3301e965dfeed4ade4e3c8d4533776",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/test/resources/META-INF/MANIFEST.MF"
+        },
+        {
+          "path": "src/test/resources/META-INF/mods.toml",
+          "mode": "100644",
+          "sha": "b50f9a07d6d2e632ef5c3f759b5f427500f024a9",
+          "size": 228,
+          "sha256": "98cab573e96ed634083d9eff07cdb2f7ab6365a7732030a4b7a21f96837af5c1",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/test/resources/META-INF/mods.toml"
+        },
+        {
+          "path": "src/test/resources/connectortest.mixins.json",
+          "mode": "100644",
+          "sha": "cc53789a556b2e6dbe6acd5e013a588f7382206b",
+          "size": 273,
+          "sha256": "b232b65275e151488d524ab3aa72ceb7d76fbf4bb05c78bedd334c45878c1350",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/test/resources/connectortest.mixins.json"
+        },
+        {
+          "path": "src/test/resources/pack.mcmeta",
+          "mode": "100644",
+          "sha": "d9989eb849c27b1df90e7a132c9a2d90d0284f0f",
+          "size": 111,
+          "sha256": "a90ee48c36b21878840b87cd9540bdf4d9592f143fb6edd6d408eb5c237e6780",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/test/resources/pack.mcmeta"
+        },
+        {
+          "path": "testmods.yaml",
+          "mode": "100644",
+          "sha": "3c86f788c492fb77077755d7969d9a82c9f5ed7f",
+          "size": 431,
+          "sha256": "8b1db11070e274671fa5954d56dcd7ac7545fffc151948b220f39e1da5f5e77d",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/testmods.yaml"
+        }
+      ],
+      "track": "ANCHOR"
+    },
+    "frontier": {
+      "repository": "https://github.com/Sinytra/Connector",
+      "revision": "c84a96a3c04aa4c5253032c338434de5329be08a",
+      "retrieved_at": "2026-10-01T17:16:36.524Z",
+      "tree_truncated": false,
+      "gitlinks": [],
+      "files_acquired": 131,
+      "bytes_acquired": 914256,
+      "all_git_blob_sha1_verified": true,
+      "raw_source_publication": false,
+      "upstream_execution": false,
+      "files": [
+        {
+          "path": ".gitattributes",
+          "mode": "100644",
+          "sha": "f811f6ae6a68f671738a6cbfcd3cc426ac628ad5",
+          "size": 256,
+          "sha256": "448fc4f5b88765df18eec1a82fb0ed09d7fb148e50fe49bd004be05effb06285",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/.gitattributes"
+        },
+        {
+          "path": ".github/ISSUE_TEMPLATE/bug_report.yml",
+          "mode": "100644",
+          "sha": "bf4fffff36be673d5cf46b7da2d0e58d844738b4",
+          "size": 3226,
+          "sha256": "21b7df11414ac28cc9b1ace8d4f7ad834c1b73a367c9119d6ecabbd77021d7b6",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/.github/ISSUE_TEMPLATE/bug_report.yml"
+        },
+        {
+          "path": ".github/ISSUE_TEMPLATE/config.yml",
+          "mode": "100644",
+          "sha": "d2c45b334dc2dbd486e3e1fe7d156fd565dac0df",
+          "size": 372,
+          "sha256": "ea61da6c37491d6b06b12ce1ceb7c292d28c9115fc5a09ebaa9776c9e0aea945",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/.github/ISSUE_TEMPLATE/config.yml"
+        },
+        {
+          "path": ".github/ISSUE_TEMPLATE/mod_incompatibility.yml",
+          "mode": "100644",
+          "sha": "d2d33e1326135197b4c4e1220798c2f41b9956d8",
+          "size": 3928,
+          "sha256": "ea1a6a5fda8e3c5d32e7cdb8b279fa31a9ef23d0dcc230ff4bc5fa22b3c34b47",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/.github/ISSUE_TEMPLATE/mod_incompatibility.yml"
+        },
+        {
+          "path": ".github/PULL_REQUEST_TEMPLATE.md",
+          "mode": "100644",
+          "sha": "cfa0042e0350215d90185cbd2449e61311b636f3",
+          "size": 814,
+          "sha256": "ed168e8adfc2ea575582bfa6295c293599e3dd465f46cd494aeb8f07a14397c3",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/.github/PULL_REQUEST_TEMPLATE.md"
+        },
+        {
+          "path": ".github/workflows/build.yml",
+          "mode": "100644",
+          "sha": "759828da929043304f748c34c72e7d8e26d7e9d5",
+          "size": 1229,
+          "sha256": "2096fa91d2d110ccb524a48825987a80bb1acc5053272c481b44ebcc1d0cde83",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/.github/workflows/build.yml"
+        },
+        {
+          "path": ".github/workflows/probe.yml",
+          "mode": "100644",
+          "sha": "cfe1622643780b3d4395fef0b78ffeb84fddba35",
+          "size": 3669,
+          "sha256": "78e6566e57264d907a16f750d248f64baffb7e337428f3f46d988ab1c0e6e915",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/.github/workflows/probe.yml"
+        },
+        {
+          "path": ".github/workflows/release.yml",
+          "mode": "100644",
+          "sha": "7eb7e447e2c7659d5da20d39060d3b104c33439a",
+          "size": 3281,
+          "sha256": "a1342ea96f43e4b8cd2f384bbef18548de283b5cbceb3e1755159716922c2809",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/.github/workflows/release.yml"
+        },
+        {
+          "path": ".gitignore",
+          "mode": "100644",
+          "sha": "12f864471f0c7b2ef77b4de79c71f39f16af7236",
+          "size": 188,
+          "sha256": "efc7995172c172d5e2a5dfad4484abc9f4b6030aa2bf5bb9453180043f8d593f",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/.gitignore"
+        },
+        {
+          "path": "LICENSE",
+          "mode": "100644",
+          "sha": "f174c356a81a8b2181b2b4785914f3570b779263",
+          "size": 1061,
+          "sha256": "74fa02130dfcc816dc95cd748fa99e289b28d6cab2207d3650637dc75957c826",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/LICENSE"
+        },
+        {
+          "path": "README.md",
+          "mode": "100644",
+          "sha": "b949a7b87986cd1300ed873bc79635087b235c9b",
+          "size": 6746,
+          "sha256": "bef669072704d3631c829a397ac81b4510101d97f20d7d135e54c135fee226c7",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/README.md"
+        },
+        {
+          "path": "build.gradle.kts",
+          "mode": "100644",
+          "sha": "9f192ae7ce2604225796fb1d59ff52c24916c973",
+          "size": 9895,
+          "sha256": "e9a28624d7ebca65cd439f1c31f9f123a487dd2ba0f427a38e780a2ffee758c7",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/build.gradle.kts"
+        },
+        {
+          "path": "docs/assets/connector/mixin_safeguard.png",
+          "mode": "100644",
+          "sha": "cc245a3666a3684241d3f7fa722acb89250e93c2",
+          "size": 87567,
+          "sha256": "2a50f416dc8f54a6404b0dc8525dbd86afe6df5cb9c2afc4ab5027b457f7ccca",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/docs/assets/connector/mixin_safeguard.png"
+        },
+        {
+          "path": "docs/assets/connector/placeholder_deps.png",
+          "mode": "100644",
+          "sha": "7dcf930430a31ac4d8d2e439753ff0bfb74f8744",
+          "size": 386241,
+          "sha256": "dda1ed6246fc64251d555f2436ebd859d739a76a5eb76f4fa477e7245792a7a4",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/docs/assets/connector/placeholder_deps.png"
+        },
+        {
+          "path": "docs/docs/_meta.json",
+          "mode": "100644",
+          "sha": "f91ee4a572f5b97c236842ff4927dde69d2439a6",
+          "size": 185,
+          "sha256": "da34b097ddd9d375da8a4a4220d5907f85a3044afbddf0686e893488f5cf3206",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/docs/docs/_meta.json"
+        },
+        {
+          "path": "docs/docs/configuration.mdx",
+          "mode": "100644",
+          "sha": "63dc667f02094e664cc090f81e8ad14474b9f684",
+          "size": 3137,
+          "sha256": "ea10e91c4c4611ab9593c6ba403a885a817027e77f788c8c37fb9d0244975999",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/docs/docs/configuration.mdx"
+        },
+        {
+          "path": "docs/docs/developers.mdx",
+          "mode": "100644",
+          "sha": "8bdf6bf0e7033af578e79881843957e8149c2f96",
+          "size": 3718,
+          "sha256": "58228a903d4912e0920343025014a1a449ed35215474cf2c93c4f12e9d2eb269",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/docs/docs/developers.mdx"
+        },
+        {
+          "path": "docs/docs/faq.mdx",
+          "mode": "100644",
+          "sha": "187ebb8380680d61f5142b75703219e46d7c9da6",
+          "size": 6068,
+          "sha256": "c3fd79b67c78e78fda3d8c4ac19a33eda6934a35f51c345e1acb6c6d74934fb6",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/docs/docs/faq.mdx"
+        },
+        {
+          "path": "docs/docs/introduction.mdx",
+          "mode": "100644",
+          "sha": "525f5cae697eb3fb343140058e42948076bbcc3a",
+          "size": 3240,
+          "sha256": "b9e1dfe980f8ee71537b0f41260eacb12c9e119e3f191537cdcb65cdea39999f",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/docs/docs/introduction.mdx"
+        },
+        {
+          "path": "docs/docs/plugins.mdx",
+          "mode": "100644",
+          "sha": "45a9da911cdc31bfb78f2d30fa5a369e81b6380e",
+          "size": 4103,
+          "sha256": "36f21240fa01e1b44494c82c8c18a870454c6c4062ce7a3c1153d42933ded101",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/docs/docs/plugins.mdx"
+        },
+        {
+          "path": "docs/sinytra-wiki.json",
+          "mode": "100644",
+          "sha": "4a9130dd90b9bd29ca44702b9f2563761caa204b",
+          "size": 129,
+          "sha256": "8c6ad92478bbf0fae51c4225c09fc45c2541f43ab61ebc1356bcff634ec657f2",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/docs/sinytra-wiki.json"
+        },
+        {
+          "path": "gradle.properties",
+          "mode": "100644",
+          "sha": "1810415a1dd7fd96d3188d733953f9d819523f10",
+          "size": 729,
+          "sha256": "7e1bbc1e04f3df3609713b2b7deb659c9a5c91dd01e3adf6e56c12dea0c5257d",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/gradle.properties"
+        },
+        {
+          "path": "gradle/libs.versions.toml",
+          "mode": "100644",
+          "sha": "3d894c97064bdfb68c8fbe41bdfe4f4e7c775a11",
+          "size": 1508,
+          "sha256": "89598baff82f53f36b480d6ccd6d66946887423add3c39811f245dd9a1c66f77",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/gradle/libs.versions.toml"
+        },
+        {
+          "path": "gradle/wrapper/gradle-wrapper.jar",
+          "mode": "100644",
+          "sha": "b1b8ef56b44f16b14dc800fa8103a6d89abb526f",
+          "size": 48462,
+          "sha256": "497c8c2a7e5031f6aa847f88104aa80a93532ec32ee17bdb8d1d2f67a194a9c7",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/gradle/wrapper/gradle-wrapper.jar"
+        },
+        {
+          "path": "gradle/wrapper/gradle-wrapper.properties",
+          "mode": "100644",
+          "sha": "a9db11550c6202b666ed9c44cafdc6726fd5b264",
+          "size": 281,
+          "sha256": "c94d41b634a5e0ff8a2f812023697b1337eebac18e9962610356a1793f72896d",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/gradle/wrapper/gradle-wrapper.properties"
+        },
+        {
+          "path": "gradlew",
+          "mode": "100755",
+          "sha": "249efbb032ce46a80c687c0723eb172e85f6a136",
+          "size": 8656,
+          "sha256": "a5a5c199ba02189ae8c46a334223371a20599d9c298ef65e7540ede4a3f72d59",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/gradlew"
+        },
+        {
+          "path": "gradlew.bat",
+          "mode": "100644",
+          "sha": "a51ec4f5886d3bb106b26724ee4507addbbe3fa8",
+          "size": 2766,
+          "sha256": "59328c7a17f673b1a63040bfb380a0c749e5d6df3406f7f18641060314cd9aa1",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/gradlew.bat"
+        },
+        {
+          "path": "settings.gradle.kts",
+          "mode": "100644",
+          "sha": "b8f9511e97b1ec5060ce25a0cc96a53dc0d30332",
+          "size": 341,
+          "sha256": "8e0969acec4c5639eef6cb6983dcf0c94fdf1c269273de450832dc7635093f69",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/settings.gradle.kts"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/ConnectorEarlyLoader.java",
+          "mode": "100644",
+          "sha": "85d7b7de62656a65ead975a429ef76c3582b7c8e",
+          "size": 2379,
+          "sha256": "d5e72ec2f9fb43914dc0df7f7073ee7e799ea20d14b5ad8f8b52d9c33476d778",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/main/java/org/sinytra/connector/ConnectorEarlyLoader.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/api/Constants.java",
+          "mode": "100644",
+          "sha": "d661324fefb0d6f07d1a168e5ebbdf0e4036b2ff",
+          "size": 205,
+          "sha256": "d2c6783e8a690ea77e2bb39f053842d58daae426ddbcfc3a07af06fe2170da47",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/main/java/org/sinytra/connector/api/Constants.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/locator/ConnectorLocator.java",
+          "mode": "100644",
+          "sha": "09acda5d105147a5e8aae4bf0eb1c71fbd49de8f",
+          "size": 16489,
+          "sha256": "d2e41013a1dfcef7af8274ae0c824ad82650785953addb90a7bb34faa3400ec0",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/main/java/org/sinytra/connector/locator/ConnectorLocator.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/locator/ConnectorModFileReader.java",
+          "mode": "100644",
+          "sha": "7cb282f74c2973fce1c666048032dfa7a8a3bb7b",
+          "size": 8727,
+          "sha256": "86705bcc2a967670dcb3964ae251222b9e9d225a4191c1cd0c5f645a15a5f2e5",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/main/java/org/sinytra/connector/locator/ConnectorModFileReader.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/locator/ConnectorTransformerEnvironment.java",
+          "mode": "100644",
+          "sha": "dc63874d7fdaaff5f4891de8bc12a209d7f43661",
+          "size": 6697,
+          "sha256": "34efc9d07c6db3801d80c9ed8e612305ac24ebe15629e7a13d31a3f59d0e3f94",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/main/java/org/sinytra/connector/locator/ConnectorTransformerEnvironment.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/locator/MixinTransformSafeguard.java",
+          "mode": "100644",
+          "sha": "1756afdbc0b97c1e6ed0edbcd494b4f61294a987",
+          "size": 2183,
+          "sha256": "3a4f29fdb517fd869cd95211093fecd22e859ec3e511543182622abd20a082d4",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/main/java/org/sinytra/connector/locator/MixinTransformSafeguard.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/locator/filter/PackageTracker.java",
+          "mode": "100644",
+          "sha": "2c6a7b00a07009da61e6cfe4443b84ca88302002",
+          "size": 1947,
+          "sha256": "3490b38c6922b2117117084cf85b30aa388b9eb304aede8afdc30ba3ff065552",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/main/java/org/sinytra/connector/locator/filter/PackageTracker.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/locator/filter/SplitPackageMerger.java",
+          "mode": "100644",
+          "sha": "58bdea8226b398a99941a9f6288f48a151f231c7",
+          "size": 10439,
+          "sha256": "ed35b7677dfa0643d4ff8e3d5b551d2a379a0fbe3619ffd5938fc8849bc773a5",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/main/java/org/sinytra/connector/locator/filter/SplitPackageMerger.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/service/ConnectorForkJoinThreadFactory.java",
+          "mode": "100644",
+          "sha": "35253eb7eeb389fdfcf098b19168ef6e952ecc75",
+          "size": 2072,
+          "sha256": "645478119c4cb07e3dc8200f88aef199971827fab8d701b625f5de2f8d49fc2e",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/main/java/org/sinytra/connector/service/ConnectorForkJoinThreadFactory.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/service/ConnectorPrelaunch.java",
+          "mode": "100644",
+          "sha": "88ecd36452e9cc184813f93f98a05567a9751a64",
+          "size": 976,
+          "sha256": "f3b5b517e24d4b0002607f81abdc9d63276b2606da5bdaefe28ee0dc6615fe60",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/main/java/org/sinytra/connector/service/ConnectorPrelaunch.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/service/ModuleLayerMigrator.java",
+          "mode": "100644",
+          "sha": "851e9c05b7b997a397b7c9c1342e4d0068040017",
+          "size": 7706,
+          "sha256": "2cdb20a7cb982eecb5ddf07c9421d504c5f531d92930e5af340f50e10f85d4a5",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/main/java/org/sinytra/connector/service/ModuleLayerMigrator.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/service/coremod/ConnectorClassProcessor.java",
+          "mode": "100644",
+          "sha": "b277f0c09b0c49b7689f59a1f198953dc94d777c",
+          "size": 7594,
+          "sha256": "f3383f0e5c254236d0a0dffd8515207da9f84f7ff2ee7fea24119f35d80a16b8",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/main/java/org/sinytra/connector/service/coremod/ConnectorClassProcessor.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/service/coremod/ConnectorMethodProcessor.java",
+          "mode": "100644",
+          "sha": "c14c05a67a68466fa8b260f7d26f9f10aa987f5e",
+          "size": 7099,
+          "sha256": "56b40332c0a596e6643d4e6a95dca7f9f96f4bc819f33d19f821f8b017dab5b1",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/main/java/org/sinytra/connector/service/coremod/ConnectorMethodProcessor.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/service/coremod/FabricASMClassGenerator.java",
+          "mode": "100644",
+          "sha": "542dcd93dc2fd15fdcb529c57156c0e0af7318b6",
+          "size": 3239,
+          "sha256": "73c1415cd66536fc324cf9d9c8506ebebe92c54bebd614d62badc7a2d9ca3b34",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/main/java/org/sinytra/connector/service/coremod/FabricASMClassGenerator.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/util/ConnectorConfig.java",
+          "mode": "100644",
+          "sha": "46275c3480eb1284a4d408353e657f25b69624b1",
+          "size": 3973,
+          "sha256": "186fa685a567de03e53c18a670894a33ea3916e6ed014bb1f6bb73b6f1b32ea6",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/main/java/org/sinytra/connector/util/ConnectorConfig.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/util/ConnectorUtil.java",
+          "mode": "100644",
+          "sha": "f83c099d3eef5acdd439a020b5c4613af942298c",
+          "size": 4041,
+          "sha256": "648049080532cd8d3cc1c647bab8416bced7eeae054127cab5910c379719dcff",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/main/java/org/sinytra/connector/util/ConnectorUtil.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/util/CrashReportHeader.java",
+          "mode": "100644",
+          "sha": "5469b25f25e7cb5a4aea850771e29d3a5fb40c78",
+          "size": 3015,
+          "sha256": "077f55e47be2d76864d611e1fa39d5e7d1696d54e0cf00dbdb81f6680b23747a",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/main/java/org/sinytra/connector/util/CrashReportHeader.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/util/GameCodeRetriever.java",
+          "mode": "100644",
+          "sha": "70907680b290d7d96b0a49da81f752c172db1a33",
+          "size": 4649,
+          "sha256": "a50a109ac2d33b5e1b32d4b52a1cb5e7825421fc00400b50a2e6e6afdd026b64",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/main/java/org/sinytra/connector/util/GameCodeRetriever.java"
+        },
+        {
+          "path": "src/main/resources/META-INF/services/net.neoforged.neoforgespi.language.IModLanguageLoader",
+          "mode": "100644",
+          "sha": "a700f7cc4b9298d01ec3d7a846d466fe346b2e14",
+          "size": 48,
+          "sha256": "04dd763c98ce180ec6250825a83034d7e9b6a0d5490faac6a9d65c12606d70d4",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/main/resources/META-INF/services/net.neoforged.neoforgespi.language.IModLanguageLoader"
+        },
+        {
+          "path": "src/main/resources/META-INF/services/net.neoforged.neoforgespi.locating.IDependencyLocator",
+          "mode": "100644",
+          "sha": "bbb0843b0e607862f266e7d7cea430fd426f5a64",
+          "size": 46,
+          "sha256": "3e7a4ff61a2578d4b010a55d075194bd2ed07f721060df25bc86992d1c0a00cb",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/main/resources/META-INF/services/net.neoforged.neoforgespi.locating.IDependencyLocator"
+        },
+        {
+          "path": "src/main/resources/META-INF/services/net.neoforged.neoforgespi.locating.IModFileCandidateLocator",
+          "mode": "100644",
+          "sha": "d97d64bab2cbfa83485542ac9b71939db209f739",
+          "size": 49,
+          "sha256": "38f04975f774e773ceb4892670b956785e46015650a38cc89e6890c402f1129c",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/main/resources/META-INF/services/net.neoforged.neoforgespi.locating.IModFileCandidateLocator"
+        },
+        {
+          "path": "src/main/resources/META-INF/services/net.neoforged.neoforgespi.locating.IModFileReader",
+          "mode": "100644",
+          "sha": "7e1637623f5804d9eee6a379e5a46dff9c9494a4",
+          "size": 52,
+          "sha256": "0988af3bec728f14e0c6ea9256f9bc7231cb3fd12593069c756f77d4aa3ce656",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/main/resources/META-INF/services/net.neoforged.neoforgespi.locating.IModFileReader"
+        },
+        {
+          "path": "src/main/resources/META-INF/services/net.neoforged.neoforgespi.transformation.ClassProcessor",
+          "mode": "100644",
+          "sha": "e8b07ed18064981e8ec9c5e9f1e9f35f22e7bd23",
+          "size": 186,
+          "sha256": "da1101152b0829fc67bcb7cb679e9a58efd2811a79f83aebf57c6f498cbb80ab",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/main/resources/META-INF/services/net.neoforged.neoforgespi.transformation.ClassProcessor"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/ConnectorMod.java",
+          "mode": "100644",
+          "sha": "66c96180f33572b28842be8b382274416e8b2153",
+          "size": 1329,
+          "sha256": "0717bdbbffb62e09bc880a60a6f9b88ceab9312d4e24fe99e51e1da43cc8e6ef",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/mod/java/org/sinytra/connector/mod/ConnectorMod.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/ConnectorModClient.java",
+          "mode": "100644",
+          "sha": "ab11d1026386733f83d64ca68b9904c75f563277",
+          "size": 1271,
+          "sha256": "732a462bc5a33a2f52b9d23331372af0101d25d8f08ea8f5751bd3c48ca4565c",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/mod/java/org/sinytra/connector/mod/ConnectorModClient.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/compat/EntityDataSerializersRegistry.java",
+          "mode": "100644",
+          "sha": "3932e8f7746199040b853fd9383d6032891adc47",
+          "size": 1095,
+          "sha256": "f18fba5e500329c36f631d11c1f5e73760ac160009274eca4dbf28938c11bce2",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/mod/java/org/sinytra/connector/mod/compat/EntityDataSerializersRegistry.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/compat/ItemStackExtensions.java",
+          "mode": "100644",
+          "sha": "06f24e1417ec30c6a3adf4688114bf03d416b945",
+          "size": 246,
+          "sha256": "1cf61b5f90b7939dc7f6667b757ed3c40b47225c8c9317e7796b700a2d9695da",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/mod/java/org/sinytra/connector/mod/compat/ItemStackExtensions.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/compat/LateSheetsInit.java",
+          "mode": "100644",
+          "sha": "1f395e350bd4f525565d1559414e9a25dce72689",
+          "size": 1003,
+          "sha256": "69cd6517e7dc9f5ef8b43adb7abd48c9cb2913aa402782fec2c00cfcd2ae5ea9",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/mod/java/org/sinytra/connector/mod/compat/LateSheetsInit.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/ChunkGeneratorMixin.java",
+          "mode": "100644",
+          "sha": "60ef72d425b31db0614c45e1ef9ed8b904c7f0d5",
+          "size": 1212,
+          "sha256": "079f165933b2ee30a87cafcb367deaa11befec10a5393e22751d882ed66e21bc",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/mod/java/org/sinytra/connector/mod/mixin/ChunkGeneratorMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/CommonHooksMixin.java",
+          "mode": "100644",
+          "sha": "4716bf371730b9582f28000e9523472b25a36eeb",
+          "size": 2439,
+          "sha256": "0a267733944e287e63d370ebf893211c4ad42191250285de08f64bb76eafb7c1",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/mod/java/org/sinytra/connector/mod/mixin/CommonHooksMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/PlayerListMixin.java",
+          "mode": "100644",
+          "sha": "492a576e8c1fa21422e7016dbc0eb6431882997a",
+          "size": 1060,
+          "sha256": "a2e67766225c187875a124ab38b753672fd3b9db8076b1b46444a7c91a4de784",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/mod/java/org/sinytra/connector/mod/mixin/PlayerListMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/TranslatableContentsMixin.java",
+          "mode": "100644",
+          "sha": "a8ec06d0a724d7a55fe6028a590eaee0748f6f3b",
+          "size": 688,
+          "sha256": "6707a47b899e4fc1e888a366a6aa7f8c61cc8a85b2c75a5e2f0035a0f1e88c38",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/mod/java/org/sinytra/connector/mod/mixin/TranslatableContentsMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/block/IBlockExtensionMixin.java",
+          "mode": "100644",
+          "sha": "ece97c6af8940fabf79a11cd02acaa1ffeb17053",
+          "size": 1830,
+          "sha256": "e8325a379c07ddef301a8ebef02fb6e4b074e5f5690f887ea9bfe44bf6b6216d",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/mod/java/org/sinytra/connector/mod/mixin/block/IBlockExtensionMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/client/ForgeHooksClientMixin.java",
+          "mode": "100644",
+          "sha": "aec8028f8b338bbb15b20fa05ac6df6dec1a5b2a",
+          "size": 700,
+          "sha256": "7a42f1b5196f5d81fc6e447c39a3e8a9e0fd37b2eb39a4a3301dfc313a01442b",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/mod/java/org/sinytra/connector/mod/mixin/client/ForgeHooksClientMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/client/FullFaceCalculatorAccessor.java",
+          "mode": "100644",
+          "sha": "da75ef2c28eda4146b7dbe21f2d0bd59a6a16285",
+          "size": 383,
+          "sha256": "f35c43e55ed3e09856ba0db1817611fbc63ea643673f9912e5b7b3cde3156713",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/mod/java/org/sinytra/connector/mod/mixin/client/FullFaceCalculatorAccessor.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/client/GuiRendererMixin.java",
+          "mode": "100644",
+          "sha": "399b16b70dfbd3e0036c0a6f7d6500fba34a54e3",
+          "size": 1152,
+          "sha256": "ce7912fc648aa690f3e1a29eadfaf4f49904b66a135d0e4f19c4f6c1314518be",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/mod/java/org/sinytra/connector/mod/mixin/client/GuiRendererMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/client/KeyMappingMixin.java",
+          "mode": "100644",
+          "sha": "6946d7eeeb2f8af4f82a49f6345d47a2e80ab26c",
+          "size": 4563,
+          "sha256": "a73da470d2af5aad623ba113999a25e5518d978bbade9dc23d34c93aedc83f70",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/mod/java/org/sinytra/connector/mod/mixin/client/KeyMappingMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/client/ModelBlockRendererMixin.java",
+          "mode": "100644",
+          "sha": "1dfe8abe5b77980c45c5809f3b3cf44da2a74fa4",
+          "size": 1224,
+          "sha256": "ca41340826bfcb5defb04002ec3ea0ee59b2af77ac204ca36d375ff8e87f019d",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/mod/java/org/sinytra/connector/mod/mixin/client/ModelBlockRendererMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/item/IItemExtensionMixin.java",
+          "mode": "100644",
+          "sha": "a340229a17056a8a0fd68936d554f2a7616602a1",
+          "size": 751,
+          "sha256": "4b1b58f1a1f4b12e1e3041f29a6afe57ff48030bc035d4d4b2c8f1b15d0b6eea",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/mod/java/org/sinytra/connector/mod/mixin/item/IItemExtensionMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/item/ItemStackMixin.java",
+          "mode": "100644",
+          "sha": "da9f5ea9b47dd7d65216c83c7297120d2d1cb6a8",
+          "size": 1499,
+          "sha256": "bb48b04a56abfd2dda48e8c4f482d98afbf3c3899784fb4aebd02a6e01d3c4f6",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/mod/java/org/sinytra/connector/mod/mixin/item/ItemStackMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/network/BundlerInfoMixin.java",
+          "mode": "100644",
+          "sha": "db1c5a1a37b86e731e290e7c5f933ec600497481",
+          "size": 961,
+          "sha256": "5d3ed147bd81d684ac1caded09eabbd6edebee6c7b1c21860a21d018b068ba70",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/mod/java/org/sinytra/connector/mod/mixin/network/BundlerInfoMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/network/StreamCodecMixin.java",
+          "mode": "100644",
+          "sha": "27318ead97358b9e6dc48d470ff89a0db7cb9d95",
+          "size": 931,
+          "sha256": "49c4dfb7cdda47a7c3225b8f1e281a3e2360083f6e44d9bc223c495de4e975e2",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/mod/java/org/sinytra/connector/mod/mixin/network/StreamCodecMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/registries/DataPackRegistriesHooksAccessor.java",
+          "mode": "100644",
+          "sha": "dd7e8da55d228adeae9759b114dfec4bf1427500",
+          "size": 828,
+          "sha256": "40b9cd594fed27cdf29d65e70ab13f83ffe910fe4567cdb70c4229513409112b",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/mod/java/org/sinytra/connector/mod/mixin/registries/DataPackRegistriesHooksAccessor.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/registries/EntityDataSerializersMixin.java",
+          "mode": "100644",
+          "sha": "5ab0d098c99a7efcdd4e16dac64c31c3356c4551",
+          "size": 986,
+          "sha256": "aaaf811eac653a752f330ce39e2eb44323beb99bf86eecad93f2f48765ccf6d8",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/mod/java/org/sinytra/connector/mod/mixin/registries/EntityDataSerializersMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/registries/MappedRegistryAccessor.java",
+          "mode": "100644",
+          "sha": "8b5f995e7618c8be180a4993909d20b3f9879407",
+          "size": 299,
+          "sha256": "3a5120a6234a4959ead4cc8366a0e6df49b43faf30f6b6e3cb2282722bedf19a",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/mod/java/org/sinytra/connector/mod/mixin/registries/MappedRegistryAccessor.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/registries/NetworkRegistryMixin.java",
+          "mode": "100644",
+          "sha": "7d55e262b60bd3d4420892b5fa07b789b8120ffd",
+          "size": 3897,
+          "sha256": "08ad7101bceb952cebfa70baeb6591ee911ad24b57e9136cdd3b39ee007a606a",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/mod/java/org/sinytra/connector/mod/mixin/registries/NetworkRegistryMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/registries/PoiTypesMixin.java",
+          "mode": "100644",
+          "sha": "d6a60fc284082deb78c22353d9d1d45c3cce448a",
+          "size": 1291,
+          "sha256": "1e1b17b161fdbbb3fcfbb17f43961afde43333332641eb144feeb5a8d562db98",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/mod/java/org/sinytra/connector/mod/mixin/registries/PoiTypesMixin.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/registries/RegistryDataLoaderMixin.java",
+          "mode": "100644",
+          "sha": "9d75ed2833d944ec828ff0b34f9d5b4cc574aa40",
+          "size": 1606,
+          "sha256": "92bfaeb0add26dcd978b0609fc971da29ec91d2ddf6f671a167a3167fd228826",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/mod/java/org/sinytra/connector/mod/mixin/registries/RegistryDataLoaderMixin.java"
+        },
+        {
+          "path": "src/mod/resources/META-INF/accesstransformer.cfg",
+          "mode": "100644",
+          "sha": "10c407662d3452db5b258d58ae165bd249e8b7d0",
+          "size": 553,
+          "sha256": "576ed9de0475fd0f331216c50a789aadf36c3e8116e419d8c8a8ecc0bc788bdf",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/mod/resources/META-INF/accesstransformer.cfg"
+        },
+        {
+          "path": "src/mod/resources/META-INF/neoforge.mods.toml",
+          "mode": "100644",
+          "sha": "5263444cb29d8750d0133a746cb204bfe6bb533d",
+          "size": 1202,
+          "sha256": "fb89ae4f97614197ec161c7a524451cb11730b0b4bd26615e51304e714687bd6",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/mod/resources/META-INF/neoforge.mods.toml"
+        },
+        {
+          "path": "src/mod/resources/connector.mixins.json",
+          "mode": "100644",
+          "sha": "836e4b1150406975a3591669dab2cf110b2fe598",
+          "size": 902,
+          "sha256": "50b69408bd2dc6448e75c559584b18bb7841a17d1038b39387a7a06a09ac72f9",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/mod/resources/connector.mixins.json"
+        },
+        {
+          "path": "src/mod/resources/logo.png",
+          "mode": "100644",
+          "sha": "2e37034fb1ea2c64b77f77ff7240e337f8283cff",
+          "size": 45211,
+          "sha256": "2e69ea6364794d77fa08bd21ef2b4e7e20875b24361f5a6412ed8d28b664fc53",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/src/mod/resources/logo.png"
+        },
+        {
+          "path": "transformer/build.gradle.kts",
+          "mode": "100644",
+          "sha": "1717a5637b6cc21b4e9bd9978d7b74db89cd1594",
+          "size": 3786,
+          "sha256": "c2401e51f4781a3c1ef160b4ceb300634718cc272d8449e39eaa7597300b4940",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/build.gradle.kts"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/DependencyConfiguration.java",
+          "mode": "100644",
+          "sha": "8f7dd19de23b3968b5ba967ca33d675268d51b3d",
+          "size": 612,
+          "sha256": "727ad693bee809fb4a69a904a500099af827e40fbdd63c7212d1f393972c44b6",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/DependencyConfiguration.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/TransformerBytecodeProvider.java",
+          "mode": "100644",
+          "sha": "15e3e50e45482e802424307292c61e548e4f1b70",
+          "size": 165,
+          "sha256": "9bb9d00878d93c176335133ca601bd616bb3ba8b23acf660d80fc219f0f81e64",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/TransformerBytecodeProvider.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/TransformerEnvironment.java",
+          "mode": "100644",
+          "sha": "6b9b128ff8a28380f75f82f74d3dc861f870d64c",
+          "size": 1177,
+          "sha256": "a8a6229f0e9fc0f6738b0c341956d44e2ef3656aeeb05c4830b5b821a9a24288",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/TransformerEnvironment.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/api/CandidateJarMetadata.java",
+          "mode": "100644",
+          "sha": "7b09503e55bce05f91e86356b39fe242348c0d30",
+          "size": 2123,
+          "sha256": "7adf6bb589e56215970f8aa3d6f768b0f2cddbef905991cb532a8bfd0392a4a0",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/api/CandidateJarMetadata.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/api/PatchRegistrar.java",
+          "mode": "100644",
+          "sha": "9eacc8ff5b1d8cc211e830cf329ecd8128b8c650",
+          "size": 1368,
+          "sha256": "37d1ac60513f02e3b9e56d889366e80f8612c716bba03f09bc7d88adfc04c780",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/api/PatchRegistrar.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/api/TransformerContext.java",
+          "mode": "100644",
+          "sha": "0e7d443aa2b997e8c91095bee71f01f53f4d4bb3",
+          "size": 784,
+          "sha256": "775d5b6f1f1f8b5e119be24c8fdcf1017f3f074d3c7c5d02aa79476d5f42ce9a",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/api/TransformerContext.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/api/TransformerIds.java",
+          "mode": "100644",
+          "sha": "9b8c020edf8a3a40eb5fe7202edf11614a40e28e",
+          "size": 570,
+          "sha256": "2afe817542b955b90a96f7dc5903bec7e130ad1e824b1daaca08549cd503556e",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/api/TransformerIds.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/api/TransformerPlugin.java",
+          "mode": "100644",
+          "sha": "9571a051ec87e8cf0d12f8b402bd33ee52583712",
+          "size": 915,
+          "sha256": "cfd68b8ac9f4da681e5e9fc0fad298e6d9367a189f682ef702a406dba2a4d901",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/api/TransformerPlugin.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/api/TransformerRegistrar.java",
+          "mode": "100644",
+          "sha": "70268ab3326b221a2c719cd63926d895074345e5",
+          "size": 2872,
+          "sha256": "ddc682b4d65ba0162081617e48dfbdb752ebe192b62c93a9a606c66d11e8fd61",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/api/TransformerRegistrar.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/jar/BytecodeFixerUpperFrontend.java",
+          "mode": "100644",
+          "sha": "7d52040a06957ab2bf47f2beffa0cda7273dee8a",
+          "size": 3013,
+          "sha256": "6df5571dd4b925280477155fee0ba31b597f559dfe814ae74abd90084fbfe18d",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/jar/BytecodeFixerUpperFrontend.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/jar/EarlyCoremodTransformer.java",
+          "mode": "100644",
+          "sha": "cb42c7ab37129849170dd401ee644ac8ed15d738",
+          "size": 5144,
+          "sha256": "7a0eb1f37c110fbebcd08a946f766ec1c3184ce6651bd88a32c10e3579e3566c",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/jar/EarlyCoremodTransformer.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/jar/FabricModFileMetadata.java",
+          "mode": "100644",
+          "sha": "7a9c4b2207acb0dd8941abe951ecaa2e7768e3e7",
+          "size": 551,
+          "sha256": "7aa48d4211600f2cce24778c0cf8db0453cf579a9fd4db58f8240a1cf216e90b",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/jar/FabricModFileMetadata.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/jar/JarTransformInstance.java",
+          "mode": "100644",
+          "sha": "5b7bb0827995c3ac279ca4f475b16506fd5be35a",
+          "size": 6713,
+          "sha256": "d763ee2f562ed6609ad36a817da3968b1b19c7da623d42e2f94dfdf127af4957",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/jar/JarTransformInstance.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/jar/JarTransformer.java",
+          "mode": "100644",
+          "sha": "449785639bf67713f064213ef8587b31676dae5d",
+          "size": 9007,
+          "sha256": "c85fea12ac2f8abf3f90d4a9e7c4e9c643f13e10cc206702059a317e69894747",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/jar/JarTransformer.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/jar/MetadataReader.java",
+          "mode": "100644",
+          "sha": "468fa053749d3d095fe51f2feb92a6f72c5a24be",
+          "size": 6728,
+          "sha256": "d9a456b39bc5aabca3ea164bfaf415d1c738bf4e87a0287200e384efe2e66f19",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/jar/MetadataReader.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/jar/SimpleClassLookup.java",
+          "mode": "100644",
+          "sha": "a026f6bb587e94e90224ae48f02e8283393bf1c5",
+          "size": 1002,
+          "sha256": "ce2a22694e8b9489905eaca806fe2c4bb4540613fdecabd47235bdb039320c47",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/jar/SimpleClassLookup.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/patch/AccessorToInvokerTransformer.java",
+          "mode": "100644",
+          "sha": "be7588e4c9f2528823f71cac48e31531b4a2ba88",
+          "size": 1465,
+          "sha256": "f0dfe6300f8be732399556ac7810705a047d1051dee69cbefa0a0002ffb6607f",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/patch/AccessorToInvokerTransformer.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/patch/ClassAnalysingTransformer.java",
+          "mode": "100644",
+          "sha": "c1e14c1f151fa79db1fc7531f6bd86ccc2362d85",
+          "size": 2146,
+          "sha256": "3e05a7ea72e368a09608042f7beb6df8de15822aadb4d72f402da9651c3e7e36",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/patch/ClassAnalysingTransformer.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/patch/ClassNodeTransformer.java",
+          "mode": "100644",
+          "sha": "c1c4081ecbfc966d5d015582857b9624cd89fcb2",
+          "size": 1674,
+          "sha256": "8931349592ae38492c93f4221a05b44f004cb7d1702a894dbf26c91346f925af",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/patch/ClassNodeTransformer.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/patch/ConnectorRefmapHolder.java",
+          "mode": "100644",
+          "sha": "46596e09f48558431636448a703bc6dbda6e050e",
+          "size": 1963,
+          "sha256": "a0d13b591815ec7191228a261689bb1dd0cec85d184ff4bef6d1801cec1cdef9",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/patch/ConnectorRefmapHolder.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/patch/EnvironmentStripperTransformer.java",
+          "mode": "100644",
+          "sha": "057f742b8fa3583f56d578667cf063cdd85356a2",
+          "size": 6052,
+          "sha256": "02fbaa4ecbbca2e27c779e1d0d2e1f2c728c9ebb9e8c766136b5d401bbbc21d7",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/patch/EnvironmentStripperTransformer.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/patch/RefmapStorage.java",
+          "mode": "100644",
+          "sha": "a18ca72b4b8b0c27b023179f0a0225ce52a8a6e7",
+          "size": 1875,
+          "sha256": "7722ad519993ab29c8279d2d15c63c502eb4002ac5c95efb4565ff27af35ce0d",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/patch/RefmapStorage.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/patch/SimpleRefmap.java",
+          "mode": "100644",
+          "sha": "82e7fe0ae2d24b06b9509b91e56f258998264bc3",
+          "size": 972,
+          "sha256": "473641d250447a183d9c603d4bcf2d8c0151521e5fe4680354f4d4847d8e43c9",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/patch/SimpleRefmap.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/plugin/BuiltinConnectorPlugin.java",
+          "mode": "100644",
+          "sha": "7d06b2b878f59ce7a26483ed41cea0bd818d1f44",
+          "size": 2032,
+          "sha256": "9cadef9008abd3ca01033b88dee5c3d6ba8dec077a931079b5808dc1b0d08923",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/plugin/BuiltinConnectorPlugin.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/plugin/PatchRegistrarImpl.java",
+          "mode": "100644",
+          "sha": "519b5907e9e27da0c81ee4a5fc9fe7bf9afbae6f",
+          "size": 964,
+          "sha256": "825906da21cb6c267f9e5bd3b0c8dbc1f3e824165b8cef538f3b1562e8635588",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/plugin/PatchRegistrarImpl.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/plugin/PluginManager.java",
+          "mode": "100644",
+          "sha": "86e0bfe9b8965f15daf64d80f02b2e25ea9d515a",
+          "size": 3154,
+          "sha256": "2304c9b7ea7f48d196a81496555053c7cffcd080cde15a5c4f322dc7238961d1",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/plugin/PluginManager.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/plugin/TransformerContextImpl.java",
+          "mode": "100644",
+          "sha": "7d21d192afda03795596729fa666e2a3158157cb",
+          "size": 493,
+          "sha256": "6468a3f190d37deeb20960b00b8fc797ef4764bf7e4140b0af73481d080cd406",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/plugin/TransformerContextImpl.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/plugin/TransformerRegistrarImpl.java",
+          "mode": "100644",
+          "sha": "6728da956437521bec03e9dd074f4870fcb3f66b",
+          "size": 4051,
+          "sha256": "61cefaa80795ce1797de26b602e1c2f1fece1cd55fbb88b8d553af3d292f93a8",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/plugin/TransformerRegistrarImpl.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/transform/AccessorRedirectTransformer.java",
+          "mode": "100644",
+          "sha": "2b35f60b58b7d29989c6767b187e7fa78c1b34dd",
+          "size": 2824,
+          "sha256": "3ebd18ddf38e8d3acceee15782b2f6e6f4cb3b4625bee32d0664eb405569ae85",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/transform/AccessorRedirectTransformer.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/transform/FabricMetadataTransformer.java",
+          "mode": "100644",
+          "sha": "d700764f111803de624a97e4e03ac75b2ada68d7",
+          "size": 6215,
+          "sha256": "0a50f28a7ee6337f6a971b7a5f3a7a4696495cccf73622a4c0d6529190711109",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/transform/FabricMetadataTransformer.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/transform/FieldToMethodTransformer.java",
+          "mode": "100644",
+          "sha": "b3677c72f200d497d9118ee01ce3046b4ce357e9",
+          "size": 5974,
+          "sha256": "a5cfd268c1d72588942f817156f830b3d97f6c7d450cbd912395dfda75002211",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/transform/FieldToMethodTransformer.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/transform/InheritingClassWriter.java",
+          "mode": "100644",
+          "sha": "070482f9de62f0cbd5f46a76107bf1840e8ea77a",
+          "size": 3362,
+          "sha256": "ef914552bd85f5a85c057c30f4324518173c704751ed5d8188d63a5a3c7d4f0d",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/transform/InheritingClassWriter.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/transform/JarSignatureStripper.java",
+          "mode": "100644",
+          "sha": "b88e2a7717b2bf2e20ede6a1a11d23213cb52262",
+          "size": 1248,
+          "sha256": "6bba39b06086208304d0bc8d6c4ca86c39217108a94d412779c335d60a3fff38",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/transform/JarSignatureStripper.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/transform/MixinPatchTransformer.java",
+          "mode": "100644",
+          "sha": "a203f2d0174ff1de7d2e0782394dad2e3c39b7cf",
+          "size": 9578,
+          "sha256": "7ee4ed354b6930771544b414a09506c034e5827c09c8e529a291cafe24bb690f",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/transform/MixinPatchTransformer.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/transform/MixinPatches.java",
+          "mode": "100644",
+          "sha": "266af175af03e078d4e24becbc35a2c3f48817bf",
+          "size": 7464,
+          "sha256": "8c9d72221a9c193eea61999715479cc0be6c3fb342423ee3aaad3e86aa63ea69",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/transform/MixinPatches.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/transform/TransformProgressMeter.java",
+          "mode": "100644",
+          "sha": "ddba6fcf482593d67ef194a2ac69081d4ceebb55",
+          "size": 142,
+          "sha256": "9126f3d49e29f05b6324d48b928acba0cce71160d1b54be772de151d2b57d97f",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/transform/TransformProgressMeter.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/transform/TransformerUtil.java",
+          "mode": "100644",
+          "sha": "bd22c353fcb81b135f4014987416849e628d5ebe",
+          "size": 6656,
+          "sha256": "d88e6d22f589396fa4e5ac2bbfa5b225d9a099e7aae071a627bf55d2f6287b2e",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/transform/TransformerUtil.java"
+        },
+        {
+          "path": "transformer/src/main/resources/META-INF/services/org.sinytra.connector.transformer.api.TransformerPlugin",
+          "mode": "100644",
+          "sha": "35ebdb0f920185b18be4ab8c728b712c7657f587",
+          "size": 63,
+          "sha256": "e5bae8a82394607d836779683dd7f1c974e1335e43ac0fdaf472ff1b0c0746db",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/resources/META-INF/services/org.sinytra.connector.transformer.api.TransformerPlugin"
+        },
+        {
+          "path": "transformer/src/runner/java/org/sinytra/connector/transformer/runner/PortableRuntimeEnvironment.java",
+          "mode": "100644",
+          "sha": "1347fd80df062e0f51d79e9a2915ce1affcb8c1e",
+          "size": 3591,
+          "sha256": "58341603049b28c1f3a7a213e99f729161d6942fb9cd9212119ede63b0798222",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/runner/java/org/sinytra/connector/transformer/runner/PortableRuntimeEnvironment.java"
+        },
+        {
+          "path": "transformer/src/runner/java/org/sinytra/connector/transformer/runner/PortableTransformerFrontend.java",
+          "mode": "100644",
+          "sha": "27dbe2932a8cc68aa4c64c8ed82c3efa4c40b5ed",
+          "size": 6736,
+          "sha256": "2b69a3a2b610311f5bae78f12ef62402850ca01e46c2dc0f6a237772f2448105",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/runner/java/org/sinytra/connector/transformer/runner/PortableTransformerFrontend.java"
+        },
+        {
+          "path": "transformer/src/runner/java/org/sinytra/connector/transformer/runner/cli/Main.java",
+          "mode": "100644",
+          "sha": "e19c3e8a80126fc6ed925b0fed143511d6081217",
+          "size": 3119,
+          "sha256": "140a23cea0e53f0e7e810009021ccca3738e93ba82fda7cb60e5a516011da6a4",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/runner/java/org/sinytra/connector/transformer/runner/cli/Main.java"
+        },
+        {
+          "path": "transformer/src/runner/java/org/sinytra/connector/transformer/runner/discovery/JarInspector.java",
+          "mode": "100644",
+          "sha": "f5250034adcb3c025327aef71c6b9643d70d14e3",
+          "size": 2930,
+          "sha256": "e0ed65c51618704cdd098c5758c371a55770b2f5b24cb328b9d772c99403fa4b",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/runner/java/org/sinytra/connector/transformer/runner/discovery/JarInspector.java"
+        },
+        {
+          "path": "transformer/src/runner/java/org/sinytra/connector/transformer/runner/discovery/ProbeModDiscoverer.java",
+          "mode": "100644",
+          "sha": "255360c5d45095da576791d16f8e953b2145cb7c",
+          "size": 5309,
+          "sha256": "63c34188b522e38cfa0835a092d3cd9be1ddc0617ca84b14f2af5b6d3020dfcb",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/runner/java/org/sinytra/connector/transformer/runner/discovery/ProbeModDiscoverer.java"
+        },
+        {
+          "path": "transformer/src/runner/java/org/sinytra/connector/transformer/runner/runtime/MixinServiceProbe.java",
+          "mode": "100644",
+          "sha": "be46cfe0a18572e3bce99275cae2673a0da6940b",
+          "size": 2312,
+          "sha256": "1032ea1ccd5f7f31171e0e72e25b3d8734b6c85254e50c3f2ffe31202223d9a8",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/runner/java/org/sinytra/connector/transformer/runner/runtime/MixinServiceProbe.java"
+        },
+        {
+          "path": "transformer/src/runner/java/org/sinytra/connector/transformer/runner/runtime/ProbeBlackboard.java",
+          "mode": "100644",
+          "sha": "6dc7e16917c8d25cd97b95245ae7c0b4f3d07188",
+          "size": 2741,
+          "sha256": "1cee18619d03a0935b7cc23492679f1f5eff3019b7168c587613db6f42cb76d2",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/runner/java/org/sinytra/connector/transformer/runner/runtime/ProbeBlackboard.java"
+        },
+        {
+          "path": "transformer/src/runner/java/org/sinytra/connector/transformer/runner/runtime/ProbeClassBytecodeProvider.java",
+          "mode": "100644",
+          "sha": "67b44707d4d88ebbe877ebd7306868ac3b3351f5",
+          "size": 2269,
+          "sha256": "17531cbcd939dc3a057aa6a599b03fc12ae7037cee5aefdacab74f4283e22617",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/runner/java/org/sinytra/connector/transformer/runner/runtime/ProbeClassBytecodeProvider.java"
+        },
+        {
+          "path": "transformer/src/runner/java/org/sinytra/connector/transformer/runner/runtime/ProbeClassProvider.java",
+          "mode": "100644",
+          "sha": "7e50c53052979ee84e4b598bf55a119469b9dcf6",
+          "size": 909,
+          "sha256": "ba652a4740300e96567aba8c8fa89d94cfcaa6c46703214146f2325bf9af54a5",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/runner/java/org/sinytra/connector/transformer/runner/runtime/ProbeClassProvider.java"
+        },
+        {
+          "path": "transformer/src/runner/resources/META-INF/services/org.spongepowered.asm.service.IGlobalPropertyService",
+          "mode": "100644",
+          "sha": "5d4a8d9a9d0671fe144396c46eefa8179de2d058",
+          "size": 64,
+          "sha256": "74bb1d2ef2b53cfd5bdda20928b222f4b9d19c55e2e07e970d9a1a6ba2746b00",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/runner/resources/META-INF/services/org.spongepowered.asm.service.IGlobalPropertyService"
+        },
+        {
+          "path": "transformer/src/runner/resources/META-INF/services/org.spongepowered.asm.service.IMixinService",
+          "mode": "100644",
+          "sha": "304ada9a8d7ec9dc0491d7c5df2801612f5f2185",
+          "size": 66,
+          "sha256": "6f285c30050c0edfb8bd8bbfd4f29aeda812cc555840908285f3ff056dc5b09e",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/runner/resources/META-INF/services/org.spongepowered.asm.service.IMixinService"
+        },
+        {
+          "path": "transformer/src/runner/resources/log4j2.xml",
+          "mode": "100644",
+          "sha": "77b95661ebef1d0c572088657c4a75283e71b5d8",
+          "size": 594,
+          "sha256": "2ece807e43e28a680cdca5e5fb721a5f5388e11744e82c55cc2f246e580b87be",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/runner/resources/log4j2.xml"
+        }
+      ],
+      "track": "FRONTIER"
+    }
+  },
+  "notes": [
+    "All repository files acquired and Git blob SHA-1 checked; separate dependency repositories are not included",
+    "No upstream code, wrapper, build or game was executed",
+    "Raw source/assets/binaries are not included in this publication"
+  ]
+}

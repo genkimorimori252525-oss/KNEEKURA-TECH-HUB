@@ -1,0 +1,869 @@
+{
+  "format": "kneekura.failure-history.v1",
+  "repository": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB.git",
+  "scope": {
+    "track": "ANCHOR",
+    "head_revision": "87d2086b4121167e5c3baa19da8963692b8e0450",
+    "history_window": "Bounded live batch 2026-09-30 13:43:24Z to 14:08:24Z and immediately following offline diagnosis; subsequent actual Forge task-layer offline repair verification",
+    "queries": [
+      "empty optional generated-resource root preflight rejection",
+      "duplicate gameDir after Forge RunConfig append"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "inspected_evidence_ids": [
+      "batch-summary",
+      "client-execution",
+      "client-explicit-recovery",
+      "client-recovery-execution",
+      "client-recovery-profile",
+      "control-execution",
+      "control-explicit-recovery",
+      "control-recovery-execution",
+      "control-recovery-profile",
+      "dependencies-before",
+      "dependencies-repair",
+      "empty-root-green",
+      "empty-root-red",
+      "empty-root-regression",
+      "evidence-inventory",
+      "final-adjacent-harness-failure",
+      "final-provider-harness-source",
+      "forge-config-bytecode",
+      "forge-expansion-intermediate",
+      "forge-expansion-intermediate-adjacent",
+      "forge-expansion-intermediate-green",
+      "forge-expansion-intermediate-tests",
+      "forge-task-adjacent-green",
+      "forge-task-bytecode",
+      "forge-task-green",
+      "forge-task-inspection",
+      "forge-task-red",
+      "forge-task-regression",
+      "forge-task-repair",
+      "forge-token-provider-red",
+      "history-adapter-tests",
+      "hydra-1-log",
+      "hydra-1-receipt",
+      "hydra-2-log",
+      "hydra-2-receipt",
+      "independent-review",
+      "init-before",
+      "init-insufficient-repair",
+      "ordinary-provider-green",
+      "ordinary-provider-red",
+      "repair-evidence-inventory",
+      "staff-server-receipt"
+    ],
+    "deferred": [
+      "Any newly authorized live acceptance"
+    ],
+    "unavailable": []
+  },
+  "scope_evidence": [
+    {
+      "id": "evidence-inventory",
+      "role": "search_inventory",
+      "index_snapshot_id": "2667cbde973a137c07fd77eafa078783de4ce6c3c01c5c1820e8fd3e4abd9228",
+      "document_id": "0b71bdab12d10fa00d768cb3d712a921ae07ccf1cbc38929721c8dbf3519ae22",
+      "content_sha256": "79de86aa679ca0d61a90b27f4c733c21465187de0e81deeca090e51a12e1338e",
+      "source_capture": {
+        "size_bytes": 6185,
+        "sha256": "79de86aa679ca0d61a90b27f4c733c21465187de0e81deeca090e51a12e1338e",
+        "snapshot_copied_at": "2026-09-30T14:19:17.430456+00:00"
+      }
+    },
+    {
+      "id": "repair-evidence-inventory",
+      "role": "search_inventory",
+      "index_snapshot_id": "451ed4c98cd61fd33e0cf7613055a72c637b5399282ad8018404e7abce75887a",
+      "document_id": "f3cfd554b42c80846b656f16f120c8c22a09e91527935eedf474980c07cceb83",
+      "content_sha256": "eb750d64782e9e0e632c5db19b169a9fd2355bec652869c98eda89e085d5388c",
+      "source_capture": {
+        "size_bytes": 2356,
+        "sha256": "eb750d64782e9e0e632c5db19b169a9fd2355bec652869c98eda89e085d5388c",
+        "snapshot_copied_at": "2026-09-30T14:39:02.471055+00:00"
+      }
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "M5-EMPTY-OPTIONAL-RESOURCE-ROOT-20260930",
+      "origin": "OWN_DEVELOPMENT",
+      "track": "ANCHOR",
+      "environment": {
+        "minecraft": "1.20.1",
+        "loader": "forge",
+        "loader_version": "47.4.6",
+        "target_java_major": 17,
+        "gradle": "8.8",
+        "forgegradle": "6.0.54",
+        "assertion_domain": "bounded_runtime_failure_and_offline_repair",
+        "live_acceptance": "NOT_RUN"
+      },
+      "before_revision": "87d2086b4121167e5c3baa19da8963692b8e0450",
+      "after_revision": null,
+      "affected_symbols": [
+        "dependencies._target_profile",
+        "dependencies._empty_optional_resource_directory",
+        "runtime._profile_dependencies",
+        "contracts.prepare_contract"
+      ],
+      "evidence": [
+        {
+          "id": "batch-summary",
+          "role": "experiment",
+          "index_snapshot_id": "2667cbde973a137c07fd77eafa078783de4ce6c3c01c5c1820e8fd3e4abd9228",
+          "document_id": "0cc053f66ba9821003a1832f3e30677f0173a84327bd652183febfcdd249fc6b",
+          "content_sha256": "06ec915c2c190b14b5d65124c28056bc017e34442e93422bb2bb535c70292e60",
+          "source_capture": {
+            "size_bytes": 4848,
+            "sha256": "06ec915c2c190b14b5d65124c28056bc017e34442e93422bb2bb535c70292e60",
+            "snapshot_copied_at": "2026-09-30T14:19:17.430456+00:00"
+          }
+        },
+        {
+          "id": "staff-server-receipt",
+          "role": "experiment",
+          "index_snapshot_id": "2667cbde973a137c07fd77eafa078783de4ce6c3c01c5c1820e8fd3e4abd9228",
+          "document_id": "8e24a716c3836c85b7f131f4cdbf6711f730928e44c93a5cf1ff3f7ae89ea8b1",
+          "content_sha256": "686bf0e3585ada41206000a9ff6f041ff420fd6b0afa254267a5d904b04ac3c1",
+          "source_capture": {
+            "size_bytes": 2276,
+            "sha256": "686bf0e3585ada41206000a9ff6f041ff420fd6b0afa254267a5d904b04ac3c1",
+            "snapshot_copied_at": "2026-09-30T14:19:17.430456+00:00"
+          }
+        },
+        {
+          "id": "client-execution",
+          "role": "experiment",
+          "index_snapshot_id": "2667cbde973a137c07fd77eafa078783de4ce6c3c01c5c1820e8fd3e4abd9228",
+          "document_id": "0d2d4a415bccc2e7587f5d05c7214b1914490671e98efc8c33a4c59482731727",
+          "content_sha256": "7a8f9dbb5e6c8fa46cbca15bd189fa707cef3dc7fba9697b8f89d49000c9c33b",
+          "source_capture": {
+            "size_bytes": 154,
+            "sha256": "7a8f9dbb5e6c8fa46cbca15bd189fa707cef3dc7fba9697b8f89d49000c9c33b",
+            "snapshot_copied_at": "2026-09-30T14:19:17.430456+00:00"
+          }
+        },
+        {
+          "id": "control-execution",
+          "role": "experiment",
+          "index_snapshot_id": "2667cbde973a137c07fd77eafa078783de4ce6c3c01c5c1820e8fd3e4abd9228",
+          "document_id": "b05dab5de603003452a92773dcaff9971d9401f13ccc6b9b16eb695a91997a3c",
+          "content_sha256": "7a8f9dbb5e6c8fa46cbca15bd189fa707cef3dc7fba9697b8f89d49000c9c33b",
+          "source_capture": {
+            "size_bytes": 154,
+            "sha256": "7a8f9dbb5e6c8fa46cbca15bd189fa707cef3dc7fba9697b8f89d49000c9c33b",
+            "snapshot_copied_at": "2026-09-30T14:19:17.430456+00:00"
+          }
+        },
+        {
+          "id": "client-recovery-execution",
+          "role": "experiment",
+          "index_snapshot_id": "2667cbde973a137c07fd77eafa078783de4ce6c3c01c5c1820e8fd3e4abd9228",
+          "document_id": "948d455579c7d9c37df949ec325f958bb592ee782e360ffb1235fbdefb1557b8",
+          "content_sha256": "7a8f9dbb5e6c8fa46cbca15bd189fa707cef3dc7fba9697b8f89d49000c9c33b",
+          "source_capture": {
+            "size_bytes": 154,
+            "sha256": "7a8f9dbb5e6c8fa46cbca15bd189fa707cef3dc7fba9697b8f89d49000c9c33b",
+            "snapshot_copied_at": "2026-09-30T14:19:17.430456+00:00"
+          }
+        },
+        {
+          "id": "control-recovery-execution",
+          "role": "experiment",
+          "index_snapshot_id": "2667cbde973a137c07fd77eafa078783de4ce6c3c01c5c1820e8fd3e4abd9228",
+          "document_id": "a145e9bd6e892faad21d401bd9100e3eafa69906353b630e953ba2d4a027bf06",
+          "content_sha256": "7a8f9dbb5e6c8fa46cbca15bd189fa707cef3dc7fba9697b8f89d49000c9c33b",
+          "source_capture": {
+            "size_bytes": 154,
+            "sha256": "7a8f9dbb5e6c8fa46cbca15bd189fa707cef3dc7fba9697b8f89d49000c9c33b",
+            "snapshot_copied_at": "2026-09-30T14:19:17.430456+00:00"
+          }
+        },
+        {
+          "id": "client-recovery-profile",
+          "role": "experiment",
+          "index_snapshot_id": "2667cbde973a137c07fd77eafa078783de4ce6c3c01c5c1820e8fd3e4abd9228",
+          "document_id": "b6ac7476ea863f0c2bc0b91ec987b914588ae253a3033f088a8a963846f28f62",
+          "content_sha256": "588c5e5f85943dab6f689b94319c9b80450021e62e1fce59a08912ac4659afcb",
+          "source_capture": {
+            "size_bytes": 1056,
+            "sha256": "588c5e5f85943dab6f689b94319c9b80450021e62e1fce59a08912ac4659afcb",
+            "snapshot_copied_at": "2026-09-30T14:19:17.430456+00:00"
+          }
+        },
+        {
+          "id": "control-recovery-profile",
+          "role": "experiment",
+          "index_snapshot_id": "2667cbde973a137c07fd77eafa078783de4ce6c3c01c5c1820e8fd3e4abd9228",
+          "document_id": "18f3c45b7c031e66a94d279cde35122ffaf4084b1104512893797d37e473a04f",
+          "content_sha256": "588c5e5f85943dab6f689b94319c9b80450021e62e1fce59a08912ac4659afcb",
+          "source_capture": {
+            "size_bytes": 1056,
+            "sha256": "588c5e5f85943dab6f689b94319c9b80450021e62e1fce59a08912ac4659afcb",
+            "snapshot_copied_at": "2026-09-30T14:19:17.430456+00:00"
+          }
+        },
+        {
+          "id": "client-explicit-recovery",
+          "role": "experiment",
+          "index_snapshot_id": "2667cbde973a137c07fd77eafa078783de4ce6c3c01c5c1820e8fd3e4abd9228",
+          "document_id": "ba70e0ff5db81dd9550507e52116137099d156d38ed1c3609ecd3cdfcb38ef89",
+          "content_sha256": "8adae4ab3d0d26183da68ceb89e7f7951c7e6e28504c4f7339483ffe0652a584",
+          "source_capture": {
+            "size_bytes": 288,
+            "sha256": "8adae4ab3d0d26183da68ceb89e7f7951c7e6e28504c4f7339483ffe0652a584",
+            "snapshot_copied_at": "2026-09-30T14:19:17.430456+00:00"
+          }
+        },
+        {
+          "id": "control-explicit-recovery",
+          "role": "experiment",
+          "index_snapshot_id": "2667cbde973a137c07fd77eafa078783de4ce6c3c01c5c1820e8fd3e4abd9228",
+          "document_id": "09b460cb76f82e584c365ad6705cb92f396e785acd20b30c492485e915639376",
+          "content_sha256": "8adae4ab3d0d26183da68ceb89e7f7951c7e6e28504c4f7339483ffe0652a584",
+          "source_capture": {
+            "size_bytes": 288,
+            "sha256": "8adae4ab3d0d26183da68ceb89e7f7951c7e6e28504c4f7339483ffe0652a584",
+            "snapshot_copied_at": "2026-09-30T14:19:17.430456+00:00"
+          }
+        },
+        {
+          "id": "empty-root-red",
+          "role": "experiment",
+          "index_snapshot_id": "2667cbde973a137c07fd77eafa078783de4ce6c3c01c5c1820e8fd3e4abd9228",
+          "document_id": "4dad0add9df7adfb4aa9e3725f841f64a48dd64819167bb0319ead96d4941fde",
+          "content_sha256": "6dee6440775854b8b8a210cc2d2d2029b13d87ae85d7726244118cbb47b4719e",
+          "source_capture": {
+            "size_bytes": 4893,
+            "sha256": "6dee6440775854b8b8a210cc2d2d2029b13d87ae85d7726244118cbb47b4719e",
+            "snapshot_copied_at": "2026-09-30T14:19:17.430456+00:00"
+          }
+        },
+        {
+          "id": "empty-root-green",
+          "role": "experiment",
+          "index_snapshot_id": "2667cbde973a137c07fd77eafa078783de4ce6c3c01c5c1820e8fd3e4abd9228",
+          "document_id": "e3f497465af164824d04e0ef03587f1a38d499e42aa8869de242a5ad51bd373b",
+          "content_sha256": "eb7506c53e34b3a98971490d072186cd40221de17d9e9f9dad3175fdb784374d",
+          "source_capture": {
+            "size_bytes": 114,
+            "sha256": "eb7506c53e34b3a98971490d072186cd40221de17d9e9f9dad3175fdb784374d",
+            "snapshot_copied_at": "2026-09-30T14:19:17.430456+00:00"
+          }
+        },
+        {
+          "id": "dependencies-before",
+          "role": "before_code",
+          "index_snapshot_id": "2667cbde973a137c07fd77eafa078783de4ce6c3c01c5c1820e8fd3e4abd9228",
+          "document_id": "d279eb561cc6aa3e0a67ab192ddbea7b7820dd4a48ec97e67949a9087a936d99",
+          "content_sha256": "52801cc5adc5f30a728410d722f86ca141e49bc8c696793cfa85142881dccc71",
+          "source_capture": {
+            "size_bytes": 14001,
+            "sha256": "52801cc5adc5f30a728410d722f86ca141e49bc8c696793cfa85142881dccc71",
+            "snapshot_copied_at": "2026-09-30T14:19:17.430456+00:00"
+          }
+        },
+        {
+          "id": "dependencies-repair",
+          "role": "after_code",
+          "index_snapshot_id": "2667cbde973a137c07fd77eafa078783de4ce6c3c01c5c1820e8fd3e4abd9228",
+          "document_id": "6aa6b32ce28b12b389585eb543f7e69f2fae71e1dcc787e6e234e4a3cb9b9cc6",
+          "content_sha256": "55489a97311ce5f310365efa48e53dbf17de8d7f8a2f41dacbcff567800d7582",
+          "source_capture": {
+            "size_bytes": 15138,
+            "sha256": "55489a97311ce5f310365efa48e53dbf17de8d7f8a2f41dacbcff567800d7582",
+            "snapshot_copied_at": "2026-09-30T14:19:17.430456+00:00"
+          }
+        },
+        {
+          "id": "empty-root-regression",
+          "role": "after_code",
+          "index_snapshot_id": "2667cbde973a137c07fd77eafa078783de4ce6c3c01c5c1820e8fd3e4abd9228",
+          "document_id": "f002a1cce452ff9dadd47ab5f19de58839a5e607182e4baef0326adab5da8779",
+          "content_sha256": "a270e1de1567564c058cfa3d71bacf4df3e2ad0fed7feb5328165866bd372039",
+          "source_capture": {
+            "size_bytes": 2804,
+            "sha256": "a270e1de1567564c058cfa3d71bacf4df3e2ad0fed7feb5328165866bd372039",
+            "snapshot_copied_at": "2026-09-30T14:19:17.430456+00:00"
+          }
+        }
+      ],
+      "symptom": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "Both receiving-client roles were rejected in preflight with incomplete target capture. Each had two rejected attempts and zero JVM launches.",
+        "evidence_ids": [
+          "batch-summary",
+          "client-execution",
+          "control-execution",
+          "client-recovery-execution",
+          "control-recovery-execution"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "INFERENCE",
+        "text": "After the referenced dedicated-server Gradle launch, a formerly absent optional generated-resource root existed as an empty directory. Read-only revalidation then selected an empty directory inventory that had not been retained in the original profile.",
+        "evidence_ids": [
+          "batch-summary",
+          "client-recovery-profile",
+          "dependencies-before"
+        ]
+      },
+      "root_cause": {
+        "basis": "INFERENCE",
+        "text": "The pre-repair target-root selector treated absent and empty optional resource directories differently. The regenerated profile requested the SHA-256 of an empty inventory, which the read-only retained-byte validator correctly refused as uncaptured. The focused offline test reproduced this exact transition.",
+        "evidence_ids": [
+          "dependencies-before",
+          "client-recovery-profile",
+          "empty-root-red"
+        ]
+      },
+      "repair": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "Normalize only a directly empty, real optional resource directory to the existing explicit absence representation after lstat and bounded scandir identity checks. Nonempty, hidden-content, symlink, unreadable and missing mandatory-output cases remain rejection controls.",
+        "evidence_ids": [
+          "dependencies-repair",
+          "empty-root-regression"
+        ]
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Target-code closure validation must remain strict about bytes while handling a proven byte-empty optional-root transition consistently. Reprepare or retry only under explicit current authority and a fresh process when code changed.",
+        "evidence_ids": [
+          "dependencies-repair",
+          "empty-root-red",
+          "empty-root-green"
+        ]
+      },
+      "causal_chain": [
+        {
+          "basis": "DIRECT_OBSERVATION",
+          "text": "The recovered profile identified the optional resource root as incomplete because the empty inventory object was unavailable.",
+          "evidence_ids": [
+            "client-recovery-profile"
+          ]
+        },
+        {
+          "basis": "DIRECT_OBSERVATION",
+          "text": "The focused regression first failed, then the repaired root-selection suite recorded 66 passing tests with 16 deselected.",
+          "evidence_ids": [
+            "empty-root-red",
+            "empty-root-green"
+          ]
+        }
+      ],
+      "reproduction": {
+        "state": "RECORDED_EXPERIMENT",
+        "evidence_ids": [
+          "empty-root-red",
+          "client-execution",
+          "control-execution"
+        ]
+      },
+      "fix_verification": {
+        "state": "RECORDED_EXPERIMENT",
+        "evidence_ids": [
+          "empty-root-green"
+        ]
+      },
+      "repair_status": "OFFLINE_REGRESSION_RECORDED_LIVE_NOT_RUN",
+      "exact_repair_sha256": "55489a97311ce5f310365efa48e53dbf17de8d7f8a2f41dacbcff567800d7582",
+      "regression_sha256": "a270e1de1567564c058cfa3d71bacf4df3e2ad0fed7feb5328165866bd372039",
+      "limitations": [
+        "The second rejected live preflight occurred in the original controller that had already imported old code; it does not test the repaired code in a fresh process.",
+        "No receiving-client JVM, synchronization, non-invoker control or staff input was exercised.",
+        "Additional staff recovery was not executed; the expired batch and its failures remain unchanged.",
+        "The repair is an uncommitted byte-pinned change at capture time; no after_revision is claimed."
+      ]
+    },
+    {
+      "case_id": "U04-FORGE-LATE-GAMEDIR-20260930",
+      "origin": "OWN_DEVELOPMENT",
+      "track": "ANCHOR",
+      "environment": {
+        "minecraft": "1.20.1",
+        "loader": "forge",
+        "loader_version": "47.4.6",
+        "target_java_major": 17,
+        "gradle": "8.8",
+        "forgegradle": "6.0.54",
+        "assertion_domain": "bounded_runtime_failure_and_offline_repair",
+        "live_acceptance": "NOT_RUN",
+        "twilight_forest": "4.3.2508"
+      },
+      "before_revision": "87d2086b4121167e5c3baa19da8963692b8e0450",
+      "after_revision": null,
+      "affected_symbols": [
+        "kneekuraOwnedArguments",
+        "kneekuraApplyOwnedArguments",
+        "MinecraftRunTask.exec",
+        "RunConfigGenerator.getArgsStream",
+        "RunConfig.getArgs"
+      ],
+      "evidence": [
+        {
+          "id": "batch-summary",
+          "role": "experiment",
+          "index_snapshot_id": "2667cbde973a137c07fd77eafa078783de4ce6c3c01c5c1820e8fd3e4abd9228",
+          "document_id": "0cc053f66ba9821003a1832f3e30677f0173a84327bd652183febfcdd249fc6b",
+          "content_sha256": "06ec915c2c190b14b5d65124c28056bc017e34442e93422bb2bb535c70292e60",
+          "source_capture": {
+            "size_bytes": 4848,
+            "sha256": "06ec915c2c190b14b5d65124c28056bc017e34442e93422bb2bb535c70292e60",
+            "snapshot_copied_at": "2026-09-30T14:19:17.430456+00:00"
+          }
+        },
+        {
+          "id": "hydra-1-receipt",
+          "role": "experiment",
+          "index_snapshot_id": "2667cbde973a137c07fd77eafa078783de4ce6c3c01c5c1820e8fd3e4abd9228",
+          "document_id": "cba9d0c08c6fab95f5cc7d528ffe60a75a8e14929669bc13aff945a327266445",
+          "content_sha256": "89837352c404431cd8acb191e4dadb21d53dc7f542e3d0e5fb62e56a691d7c3a",
+          "source_capture": {
+            "size_bytes": 2175,
+            "sha256": "89837352c404431cd8acb191e4dadb21d53dc7f542e3d0e5fb62e56a691d7c3a",
+            "snapshot_copied_at": "2026-09-30T14:19:17.430456+00:00"
+          }
+        },
+        {
+          "id": "hydra-1-log",
+          "role": "log",
+          "index_snapshot_id": "2667cbde973a137c07fd77eafa078783de4ce6c3c01c5c1820e8fd3e4abd9228",
+          "document_id": "8d3d157e3b195637131e75db1c6be2e47c9c875d1f1e597f4f096264f8f1158d",
+          "content_sha256": "95aebb52fd57a4224a219f30ae62b27bd43a99c5d06e9974eab8e2cad0464d51",
+          "source_capture": {
+            "size_bytes": 5865,
+            "sha256": "95aebb52fd57a4224a219f30ae62b27bd43a99c5d06e9974eab8e2cad0464d51",
+            "snapshot_copied_at": "2026-09-30T14:19:17.430456+00:00"
+          }
+        },
+        {
+          "id": "hydra-2-receipt",
+          "role": "experiment",
+          "index_snapshot_id": "2667cbde973a137c07fd77eafa078783de4ce6c3c01c5c1820e8fd3e4abd9228",
+          "document_id": "52f8030c1c83eed6287220ddea5020c567fef456892cac9a3ab0d6bab073c154",
+          "content_sha256": "dc5683b97ae6e7fc17dc8876d00248217f6a94bba21a95a98aae5902943b4a20",
+          "source_capture": {
+            "size_bytes": 2174,
+            "sha256": "dc5683b97ae6e7fc17dc8876d00248217f6a94bba21a95a98aae5902943b4a20",
+            "snapshot_copied_at": "2026-09-30T14:19:17.430456+00:00"
+          }
+        },
+        {
+          "id": "hydra-2-log",
+          "role": "log",
+          "index_snapshot_id": "2667cbde973a137c07fd77eafa078783de4ce6c3c01c5c1820e8fd3e4abd9228",
+          "document_id": "6f7cb73789f5c630ff3e800dfefb60f741ba4e8ad89f0a0392492277709fd3e5",
+          "content_sha256": "12cdf45f5e19f7202b9c2b36ce8aff8b9981dfe6a1e2ef295e73aaef499b7a91",
+          "source_capture": {
+            "size_bytes": 4354,
+            "sha256": "12cdf45f5e19f7202b9c2b36ce8aff8b9981dfe6a1e2ef295e73aaef499b7a91",
+            "snapshot_copied_at": "2026-09-30T14:19:17.430456+00:00"
+          }
+        },
+        {
+          "id": "init-before",
+          "role": "before_code",
+          "index_snapshot_id": "2667cbde973a137c07fd77eafa078783de4ce6c3c01c5c1820e8fd3e4abd9228",
+          "document_id": "aef924da35954f65dc071341269faf66aa004f346722a2ee4b3bf1d23c592096",
+          "content_sha256": "4566322d213a6abb9bd36b6267acfbc9e6881d5ab23b9b57cebfa11782eba7cd",
+          "source_capture": {
+            "size_bytes": 6203,
+            "sha256": "4566322d213a6abb9bd36b6267acfbc9e6881d5ab23b9b57cebfa11782eba7cd",
+            "snapshot_copied_at": "2026-09-30T14:19:17.430456+00:00"
+          }
+        },
+        {
+          "id": "init-insufficient-repair",
+          "role": "after_code",
+          "index_snapshot_id": "2667cbde973a137c07fd77eafa078783de4ce6c3c01c5c1820e8fd3e4abd9228",
+          "document_id": "30a42746ad126d1e149a756ca9bf1d1589a7b16cbc49280cde782c8b7496654b",
+          "content_sha256": "b7d96af5a00302c3b30c3d2dd2c948643f114b3cfe027825673d253b08523550",
+          "source_capture": {
+            "size_bytes": 6759,
+            "sha256": "b7d96af5a00302c3b30c3d2dd2c948643f114b3cfe027825673d253b08523550",
+            "snapshot_copied_at": "2026-09-30T14:19:17.430456+00:00"
+          }
+        },
+        {
+          "id": "ordinary-provider-red",
+          "role": "experiment",
+          "index_snapshot_id": "2667cbde973a137c07fd77eafa078783de4ce6c3c01c5c1820e8fd3e4abd9228",
+          "document_id": "f6bcf60a784188112309f12cf081c3376a06b853765f94eb4ad89e8eaebad622",
+          "content_sha256": "4ae5da78df39b10a321daa76c67eb3f56aef12dff16678b8dfd865b48aaefa40",
+          "source_capture": {
+            "size_bytes": 6390,
+            "sha256": "4ae5da78df39b10a321daa76c67eb3f56aef12dff16678b8dfd865b48aaefa40",
+            "snapshot_copied_at": "2026-09-30T14:19:17.430456+00:00"
+          }
+        },
+        {
+          "id": "ordinary-provider-green",
+          "role": "experiment",
+          "index_snapshot_id": "2667cbde973a137c07fd77eafa078783de4ce6c3c01c5c1820e8fd3e4abd9228",
+          "document_id": "17f1378cacfc00f447e656fdd008ead863993b820351fcc9bb1d29c8c2b778c0",
+          "content_sha256": "f997ed33bd4767c2b3b0e9a40371f34c5996bd90799c6a6edcec91f1e3c2bd92",
+          "source_capture": {
+            "size_bytes": 111,
+            "sha256": "f997ed33bd4767c2b3b0e9a40371f34c5996bd90799c6a6edcec91f1e3c2bd92",
+            "snapshot_copied_at": "2026-09-30T14:19:17.430456+00:00"
+          }
+        },
+        {
+          "id": "forge-task-inspection",
+          "role": "experiment",
+          "index_snapshot_id": "2667cbde973a137c07fd77eafa078783de4ce6c3c01c5c1820e8fd3e4abd9228",
+          "document_id": "966d8eb142b846a19c701974e4f62911ce2407724cb0171aed8b9717683a352f",
+          "content_sha256": "366d7841b00340a18edc0f8ccfa89a3cd8dff3362df9926dc1f9efbc83097574",
+          "source_capture": {
+            "size_bytes": 3131,
+            "sha256": "366d7841b00340a18edc0f8ccfa89a3cd8dff3362df9926dc1f9efbc83097574",
+            "snapshot_copied_at": "2026-09-30T14:19:17.430456+00:00"
+          }
+        },
+        {
+          "id": "forge-task-bytecode",
+          "role": "before_code",
+          "index_snapshot_id": "2667cbde973a137c07fd77eafa078783de4ce6c3c01c5c1820e8fd3e4abd9228",
+          "document_id": "c588048952bf5e5dd89a4cbd03d0a5538177bbb7ad291159d1dcae8ba2f0256e",
+          "content_sha256": "f72a5e6063f0f6e1d6078a5f3fd2cc1b9bc58321998e23fa5bf9aead420e81e8",
+          "source_capture": {
+            "size_bytes": 13000,
+            "sha256": "f72a5e6063f0f6e1d6078a5f3fd2cc1b9bc58321998e23fa5bf9aead420e81e8",
+            "snapshot_copied_at": "2026-09-30T14:19:17.430456+00:00"
+          }
+        },
+        {
+          "id": "forge-config-bytecode",
+          "role": "before_code",
+          "index_snapshot_id": "2667cbde973a137c07fd77eafa078783de4ce6c3c01c5c1820e8fd3e4abd9228",
+          "document_id": "4d48952394422e3e353ba4faaeddd742ff37474471707f3821cbdec18e1d4711",
+          "content_sha256": "9d1789a1e1c0ccc50303aa85563ab390b2affb84e37698bc9e857f4072a8906c",
+          "source_capture": {
+            "size_bytes": 83477,
+            "sha256": "9d1789a1e1c0ccc50303aa85563ab390b2affb84e37698bc9e857f4072a8906c",
+            "snapshot_copied_at": "2026-09-30T14:19:17.430456+00:00"
+          }
+        },
+        {
+          "id": "forge-task-repair",
+          "role": "after_code",
+          "index_snapshot_id": "451ed4c98cd61fd33e0cf7613055a72c637b5399282ad8018404e7abce75887a",
+          "document_id": "2ae68ec2b4fdb417b7cd58bcfeb22c31fbad2c7d0e93cbe4d033a6eb282a1d9a",
+          "content_sha256": "5b2b4f5244678280bc28246897e49c1ec5967dcc5be7050bd97b351ba04e5193",
+          "source_capture": {
+            "size_bytes": 10342,
+            "sha256": "5b2b4f5244678280bc28246897e49c1ec5967dcc5be7050bd97b351ba04e5193",
+            "snapshot_copied_at": "2026-09-30T14:39:02.471055+00:00"
+          }
+        },
+        {
+          "id": "forge-task-regression",
+          "role": "after_code",
+          "index_snapshot_id": "451ed4c98cd61fd33e0cf7613055a72c637b5399282ad8018404e7abce75887a",
+          "document_id": "03533e1a0ed1b1ea25880264dc93c324b9590816b11e23e1d6127ca5274830e2",
+          "content_sha256": "c2f79119ffcc163a724b54d8c447cbd1c3919df8dc5ebe35a650a8073fefb9da",
+          "source_capture": {
+            "size_bytes": 15486,
+            "sha256": "c2f79119ffcc163a724b54d8c447cbd1c3919df8dc5ebe35a650a8073fefb9da",
+            "snapshot_copied_at": "2026-09-30T14:39:02.471055+00:00"
+          }
+        },
+        {
+          "id": "forge-task-red",
+          "role": "experiment",
+          "index_snapshot_id": "451ed4c98cd61fd33e0cf7613055a72c637b5399282ad8018404e7abce75887a",
+          "document_id": "636204abcc18b82015a074318db4432a7b893770653f985f1c9c1cabf285b4ec",
+          "content_sha256": "3e2fd91adf2a0680530eb492d7b3f5755f1309a1c0b525103401422eeb95a4b3",
+          "source_capture": {
+            "size_bytes": 36694,
+            "sha256": "3e2fd91adf2a0680530eb492d7b3f5755f1309a1c0b525103401422eeb95a4b3",
+            "snapshot_copied_at": "2026-09-30T14:39:02.471055+00:00"
+          }
+        },
+        {
+          "id": "forge-task-green",
+          "role": "experiment",
+          "index_snapshot_id": "451ed4c98cd61fd33e0cf7613055a72c637b5399282ad8018404e7abce75887a",
+          "document_id": "23ab691759afc81bdcdfa020f8398ae6b20ef531fe0a4b6ed54d9b751c40680b",
+          "content_sha256": "e444cb3b063fd4c47668b9befd1cf3f9608c61024364d90bb5f4fd86b91ef6da",
+          "source_capture": {
+            "size_bytes": 100,
+            "sha256": "e444cb3b063fd4c47668b9befd1cf3f9608c61024364d90bb5f4fd86b91ef6da",
+            "snapshot_copied_at": "2026-09-30T14:39:02.471055+00:00"
+          }
+        },
+        {
+          "id": "forge-token-provider-red",
+          "role": "experiment",
+          "index_snapshot_id": "451ed4c98cd61fd33e0cf7613055a72c637b5399282ad8018404e7abce75887a",
+          "document_id": "68f2a92a036a0e3508e843ec11f357c8b0a655d15cde430a18c2f4733cbc020f",
+          "content_sha256": "c6892f4832ea8df3e488dde1197e8db5f6d7bfdb9ca31ac607dfb9619e99765b",
+          "source_capture": {
+            "size_bytes": 7508,
+            "sha256": "c6892f4832ea8df3e488dde1197e8db5f6d7bfdb9ca31ac607dfb9619e99765b",
+            "snapshot_copied_at": "2026-09-30T14:39:02.471055+00:00"
+          }
+        },
+        {
+          "id": "forge-expansion-intermediate",
+          "role": "after_code",
+          "index_snapshot_id": "451ed4c98cd61fd33e0cf7613055a72c637b5399282ad8018404e7abce75887a",
+          "document_id": "a28b4e75b44408886d0b89c4ac0e00199364a75503a77302a1838753f0c8e247",
+          "content_sha256": "a1fae7ef272fdf602e1560585436a97f4e153de1476d6bd8f4955d3c0ebbe226",
+          "source_capture": {
+            "size_bytes": 8040,
+            "sha256": "a1fae7ef272fdf602e1560585436a97f4e153de1476d6bd8f4955d3c0ebbe226",
+            "snapshot_copied_at": "2026-09-30T14:39:02.471055+00:00"
+          }
+        },
+        {
+          "id": "forge-expansion-intermediate-tests",
+          "role": "after_code",
+          "index_snapshot_id": "451ed4c98cd61fd33e0cf7613055a72c637b5399282ad8018404e7abce75887a",
+          "document_id": "88d41df378f65fd2d01715afe3d4adc2ce340527019506964591c45e2a3b80bd",
+          "content_sha256": "85fe0e2815cdae708554500ac68188d45bdd60925bf4ebdb9e2469297ae0c53a",
+          "source_capture": {
+            "size_bytes": 12308,
+            "sha256": "85fe0e2815cdae708554500ac68188d45bdd60925bf4ebdb9e2469297ae0c53a",
+            "snapshot_copied_at": "2026-09-30T14:39:02.471055+00:00"
+          }
+        },
+        {
+          "id": "forge-expansion-intermediate-green",
+          "role": "experiment",
+          "index_snapshot_id": "451ed4c98cd61fd33e0cf7613055a72c637b5399282ad8018404e7abce75887a",
+          "document_id": "617ee36f4b20555a58ee16962bd35a4508d97b3a871a5214bf036fd64ce8abf1",
+          "content_sha256": "cca02b1fd3510a8cf7575bf3089363e158ab09a08b4398b8627b9bb10a3d3f12",
+          "source_capture": {
+            "size_bytes": 100,
+            "sha256": "cca02b1fd3510a8cf7575bf3089363e158ab09a08b4398b8627b9bb10a3d3f12",
+            "snapshot_copied_at": "2026-09-30T14:39:02.471055+00:00"
+          }
+        },
+        {
+          "id": "forge-expansion-intermediate-adjacent",
+          "role": "experiment",
+          "index_snapshot_id": "451ed4c98cd61fd33e0cf7613055a72c637b5399282ad8018404e7abce75887a",
+          "document_id": "de1d9cc7a1a93431a3c86ee3ab0116570c8a5d1cfc624786f4819907fe23ad39",
+          "content_sha256": "e26bfda0c516e42e48ddb173cf2733aea2fbaa33856c609dbaaa1021987fbea6",
+          "source_capture": {
+            "size_bytes": 192,
+            "sha256": "e26bfda0c516e42e48ddb173cf2733aea2fbaa33856c609dbaaa1021987fbea6",
+            "snapshot_copied_at": "2026-09-30T14:39:02.471055+00:00"
+          }
+        },
+        {
+          "id": "forge-task-adjacent-green",
+          "role": "experiment",
+          "index_snapshot_id": "451ed4c98cd61fd33e0cf7613055a72c637b5399282ad8018404e7abce75887a",
+          "document_id": "dbd1ee2ec16277c0c0d12e01cf20eb3db38cea90e25e5550167945bdaa539b32",
+          "content_sha256": "28ace041a62042597b75f94d87d563d40fd9c4ecea7bdaab16e0026750e6fe61",
+          "source_capture": {
+            "size_bytes": 125,
+            "sha256": "28ace041a62042597b75f94d87d563d40fd9c4ecea7bdaab16e0026750e6fe61",
+            "snapshot_copied_at": "2026-09-30T14:39:02.471055+00:00"
+          }
+        },
+        {
+          "id": "history-adapter-tests",
+          "role": "experiment",
+          "index_snapshot_id": "451ed4c98cd61fd33e0cf7613055a72c637b5399282ad8018404e7abce75887a",
+          "document_id": "eaa910adfa6d6365f92aedcf7e5f1892e5e8115ed7f8b195095d7330e8805d19",
+          "content_sha256": "8eafe67fbe29f46733baadddb454859bb0fe07415ea1966649993eb535a0054d",
+          "source_capture": {
+            "size_bytes": 99,
+            "sha256": "8eafe67fbe29f46733baadddb454859bb0fe07415ea1966649993eb535a0054d",
+            "snapshot_copied_at": "2026-09-30T14:39:02.471055+00:00"
+          }
+        },
+        {
+          "id": "final-adjacent-harness-failure",
+          "role": "experiment",
+          "index_snapshot_id": "451ed4c98cd61fd33e0cf7613055a72c637b5399282ad8018404e7abce75887a",
+          "document_id": "78224908be39eea7c683d1b713a31b8d27f5e6d1acd47e14ff48d5457b84e3ca",
+          "content_sha256": "7bab2b01570ba28740be03def420374a47b317e3ac54469c3ecca503bbd53ded",
+          "source_capture": {
+            "size_bytes": 52566,
+            "sha256": "7bab2b01570ba28740be03def420374a47b317e3ac54469c3ecca503bbd53ded",
+            "snapshot_copied_at": "2026-09-30T14:39:02.471055+00:00"
+          }
+        },
+        {
+          "id": "final-provider-harness-source",
+          "role": "after_code",
+          "index_snapshot_id": "451ed4c98cd61fd33e0cf7613055a72c637b5399282ad8018404e7abce75887a",
+          "document_id": "64aa098f2e3f054d03d4197e526a6277060c3b7980860f844c9027e4c61bcfae",
+          "content_sha256": "a81f98ddc90eaf1c91761cb8ead120e2c9dda3001ac79109c3179d960719568c",
+          "source_capture": {
+            "size_bytes": 6726,
+            "sha256": "a81f98ddc90eaf1c91761cb8ead120e2c9dda3001ac79109c3179d960719568c",
+            "snapshot_copied_at": "2026-09-30T14:39:02.471055+00:00"
+          }
+        },
+        {
+          "id": "independent-review",
+          "role": "discussion",
+          "index_snapshot_id": "451ed4c98cd61fd33e0cf7613055a72c637b5399282ad8018404e7abce75887a",
+          "document_id": "a7e39bf844beda147d3ce7164b165e164808861da1e75a73365b81be3a537523",
+          "content_sha256": "57f2bca3519f1138347f982ee6cb2b5a9590f86c3bd0161e764fecbf154562fd",
+          "source_capture": {
+            "size_bytes": 16432,
+            "sha256": "57f2bca3519f1138347f982ee6cb2b5a9590f86c3bd0161e764fecbf154562fd",
+            "snapshot_copied_at": "2026-09-30T14:39:02.471055+00:00"
+          }
+        }
+      ],
+      "symptom": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "Both authorized Hydra startup attempts ended with completed JVM exit code 1 before a client window or world. Effective arguments supplied more than one gameDir value.",
+        "evidence_ids": [
+          "batch-summary",
+          "hydra-1-receipt",
+          "hydra-1-log",
+          "hydra-2-receipt",
+          "hydra-2-log"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "The managed doFirst guard ran before ForgeGradle MinecraftRunTask.exec. Actual task inspection showed empty ordinary args and providers, while RunConfig already held the default gameDir argument.",
+        "evidence_ids": [
+          "forge-task-inspection",
+          "forge-task-bytecode",
+          "init-before"
+        ]
+      },
+      "root_cause": {
+        "basis": "INFERENCE",
+        "text": "ForgeGradle appended token-expanded RunConfig arguments during MinecraftRunTask.exec after the managed guard had inserted its own gameDir. Materializing ordinary Gradle argument providers could not consume or validate this later Forge-specific append.",
+        "evidence_ids": [
+          "forge-task-bytecode",
+          "forge-task-inspection",
+          "init-before",
+          "init-insufficient-repair",
+          "hydra-2-log"
+        ]
+      },
+      "repair": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "The corrected guard validates at the final Gradle argument-provider boundary after inherited Forge setup. It leaves Forge token expansion and RunConfig arguments intact, evaluates original providers in their stock context once, validates the combined arguments and owned working directory, then caches the provider result or rejection. Missing owned options are added only when absent; explicit escaping or duplicate paths are rejected.",
+        "evidence_ids": [
+          "forge-task-repair",
+          "forge-task-regression"
+        ]
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Verify the actual plugin task execution path and all post-guard argument sources. Passing a generic Gradle provider fixture is insufficient evidence for ForgeGradle startup.",
+        "evidence_ids": [
+          "ordinary-provider-green",
+          "hydra-2-receipt",
+          "forge-task-bytecode"
+        ]
+      },
+      "causal_chain": [
+        {
+          "basis": "INFERENCE",
+          "text": "Initial managed argument insertion preceded Forge RunConfig append.",
+          "evidence_ids": [
+            "init-before",
+            "forge-task-bytecode"
+          ]
+        },
+        {
+          "basis": "DIRECT_OBSERVATION",
+          "text": "The intermediate provider-only patch recorded passing fixture tests, then a fresh authorized Hydra attempt failed with the same duplicate gameDir error.",
+          "evidence_ids": [
+            "ordinary-provider-green",
+            "init-insufficient-repair",
+            "hydra-2-receipt",
+            "hydra-2-log"
+          ]
+        },
+        {
+          "basis": "DIRECT_OBSERVATION",
+          "text": "An intermediate Forge pre-expansion patch passed 23 actual-task cases and 103 adjacent tests. Independent follow-on cases then recorded 4 failures and 23 passes, exposing double evaluation of stateful lazy tokens and providers observing incomplete Forge setup.",
+          "evidence_ids": [
+            "forge-expansion-intermediate",
+            "forge-expansion-intermediate-tests",
+            "forge-expansion-intermediate-green",
+            "forge-expansion-intermediate-adjacent",
+            "forge-token-provider-red"
+          ]
+        },
+        {
+          "basis": "DIRECT_OBSERVATION",
+          "text": "The corrected final-provider boundary recorded 35 passing actual-task cases and 10 passing corrected plain-provider fixture cases. The inherited MinecraftRunTask action and JavaExec.copyTo execute; only final process creation is captured.",
+          "evidence_ids": [
+            "forge-task-green",
+            "forge-task-adjacent-green",
+            "forge-task-regression"
+          ]
+        },
+        {
+          "basis": "DIRECT_OBSERVATION",
+          "text": "The final adjacent run recorded 70 passes and 10 Groovy fixture compilation failures due to an outer variable shadowing the extracted helper local. Renaming that fixture-only variable was followed by 10 passing rerun cases; production repair bytes stayed unchanged.",
+          "evidence_ids": [
+            "final-adjacent-harness-failure",
+            "final-provider-harness-source",
+            "forge-task-adjacent-green"
+          ]
+        }
+      ],
+      "reproduction": {
+        "state": "RECORDED_EXPERIMENT",
+        "evidence_ids": [
+          "hydra-1-receipt",
+          "hydra-2-receipt"
+        ]
+      },
+      "fix_verification": {
+        "state": "RECORDED_EXPERIMENT",
+        "evidence_ids": [
+          "forge-task-green",
+          "forge-task-adjacent-green"
+        ]
+      },
+      "repair_status": "OFFLINE_ACTUAL_FORGE_TASK_REGRESSION_RECORDED_LIVE_NOT_RUN",
+      "insufficient_intermediate_repair_sha256": "b7d96af5a00302c3b30c3d2dd2c948643f114b3cfe027825673d253b08523550",
+      "forgegradle_jar_sha256": "1d54a97a225ed5180300e8070a1c818597d98ec45a11fedecb425254b7982da2",
+      "limitations": [
+        "Generic provider tests passed for a demonstrably insufficient intermediate repair.",
+        "No Hydra rendering, entity setup, texture observation, screenshot or visual acceptance occurred.",
+        "No live retry is authorized by this history record.",
+        "No source-binary or ForgeGradle equivalence is inferred for the separately derived Twilight Forest runtime artifact.",
+        "The corrected guard was verified only at the offline final JavaExec specification boundary; Minecraft itself was not relaunched.",
+        "The two original startup outcomes remain FAIL; no screenshot or rendering evidence was created by these fixtures."
+      ],
+      "exact_repair_sha256": "5b2b4f5244678280bc28246897e49c1ec5967dcc5be7050bd97b351ba04e5193",
+      "regression_sha256": "c2f79119ffcc163a724b54d8c447cbd1c3919df8dc5ebe35a650a8073fefb9da",
+      "offline_verification": {
+        "focused_actual_forge_cases": 35,
+        "corrected_plain_provider_fixture_cases": 10,
+        "earlier_adjacent_run": {
+          "passed": 70,
+          "fixture_compilation_failures": 10
+        },
+        "minecraft_processes_started": 0,
+        "fixture_boundary": "Inherited MinecraftRunTask.exec and JavaExec.copyTo run; final process-execution factory captured",
+        "live_acceptance": "NOT_RUN"
+      }
+    }
+  ],
+  "recorded_at": "2026-09-30T14:39:02.471055+00:00",
+  "prior_separate_history_hash": "4abaa63aa724be619293fbcfd8143f0676c4fa5f01d03a2cfcc4093fb2074971",
+  "raw_receipts_published": false,
+  "summary_is_hash_identical_raw_evidence": false,
+  "canonical_writes": 0,
+  "runtime_attestation": false,
+  "scope_limits": [
+    "Only these two runtime-blocking cases are included.",
+    "Earlier M2 two-case history is preserved without replacement.",
+    "No Core promotion or publication."
+  ],
+  "previous_capture_history_hash": "00f7d2b31b4e2eb2fdb7511cdf803bee92ef2e3548f449b124ec3dc235c668cc"
+}

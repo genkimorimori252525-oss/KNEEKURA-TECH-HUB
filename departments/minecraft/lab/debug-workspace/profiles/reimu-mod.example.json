@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "workspaceId": "reimu-mod-forge1201",
+  "workspaceDir": "C:/path/to/reimu-mod",
+  "runtimeRoot": "debug-runtime",
+  "worldName": "KNEEKURA_DEBUG_WORLD",
+  "readyTimeoutMs": 180000,
+  "launch": {
+    "command": "gradlew.bat",
+    "args": [
+      "runClient",
+      "--offline",
+      "--console=plain",
+      "-Dorg.gradle.daemon=true",
+      "-Dorg.gradle.daemon.idletimeout=1800000"
+    ],
+    "shell": true,
+    "env": {}
+  },
+  "gameDir": "run/client_a",
+  "requireExistingWorld": true,
+  "workspaceChecks": [
+    {
+      "path": "gradlew.bat"
+    },
+    {
+      "path": "build.gradle",
+      "contains": [
+        "KNEEKURA_DEBUG_FORGE_BRIDGE_SRC",
+        "kneekuraDebugSourceSet",
+        "--quickPlaySingleplayer",
+        "KNEEKURA_DEBUG_BUILD_MARKER"
+      ]
+    }
+  ],
+  "requireGitIdentity": true,
+  "debugProfile": "FAST_DEBUG"
+}

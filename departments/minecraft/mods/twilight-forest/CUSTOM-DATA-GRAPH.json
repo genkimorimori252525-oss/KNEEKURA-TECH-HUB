@@ -1,0 +1,1969 @@
+{
+  "graph_version": "1.0",
+  "target": "The Twilight Forest",
+  "source_snapshot": "TeamTwilight/twilightforest@793c4d4c7b0a2892f702cbb9a8d751fbe7218828",
+  "generated_from": "Pinned upstream recursive Git tree plus inspected codec/consumer classes",
+  "total_records": 290,
+  "family_count": 14,
+  "invariant": "Every record remains tied to its upstream blob SHA; family metadata describes the decoding/loading boundary and primary runtime consumers.",
+  "families": {
+    "biome_layer_stack": {
+      "loading_mode": "DATAPACK_REGISTRY",
+      "registry": "twilight:biome_layer_stack",
+      "codec": [
+        "twilightforest.init.custom.BiomeLayerStack.DISPATCH_CODEC",
+        "twilightforest.init.custom.BiomeLayerStack.HOLDER_CODEC"
+      ],
+      "consumers": [
+        "twilightforest.world.components.layer.BiomeDensitySource"
+      ],
+      "purpose": "Composable biome-layer configuration feeding the Twilight biome density/source pipeline.",
+      "record_count": 2,
+      "records": [
+        {
+          "id": "biome_layer_stack/biomes_along_streams",
+          "path": "src/generated/resources/data/twilightforest/twilight/biome_layer_stack/biomes_along_streams.json",
+          "blob_sha": "c20325f55124cd3e3fec7a989bb2753496a88ec9",
+          "size": 1178
+        },
+        {
+          "id": "biome_layer_stack/random_forest_biomes",
+          "path": "src/generated/resources/data/twilightforest/twilight/biome_layer_stack/random_forest_biomes.json",
+          "blob_sha": "cd4e2e7bc1f028b868004af5275e35466629bf1d",
+          "size": 3205
+        }
+      ]
+    },
+    "biome_terrain_data": {
+      "loading_mode": "DATAPACK_REGISTRY",
+      "registry": "twilight:biome_terrain_data",
+      "codec": [
+        "twilightforest.world.components.layer.BiomeDensitySource.CODEC"
+      ],
+      "consumers": [
+        "twilightforest.world.components.chunkgenerators.TerrainDensityRouter",
+        "twilightforest.world.components.chunkgenerators.NoiseDensityRouter",
+        "twilightforest.world.components.layer.BiomeDensitySource"
+      ],
+      "purpose": "Per-biome terrain columns and biome-layer configuration used by the current density pipeline.",
+      "record_count": 1,
+      "records": [
+        {
+          "id": "biome_terrain_data/biome_grid",
+          "path": "src/generated/resources/data/twilightforest/twilight/biome_terrain_data/biome_grid.json",
+          "blob_sha": "bb37a5b924d02bafb08ae97392f3ba34b673a6f8",
+          "size": 4971
+        }
+      ]
+    },
+    "chunk_blanket_processors": {
+      "loading_mode": "DATAPACK_REGISTRY",
+      "registry": "twilightforest:chunk_blanket_processors",
+      "codec": [
+        "twilightforest.init.custom.ChunkBlanketProcessors.DISPATCH_CODEC"
+      ],
+      "consumers": [
+        "twilightforest.init.custom.ChunkBlanketProcessors",
+        "twilightforest.world.components.chunkblanketing.ChunkBlanketProcessor"
+      ],
+      "purpose": "Post-surface chunk blanket effects such as dark-forest canopy and glacier processing.",
+      "record_count": 2,
+      "records": [
+        {
+          "id": "chunk_blanket_processors/dark_forest_canopy",
+          "path": "src/generated/resources/data/twilightforest/twilight/chunk_blanket_processors/dark_forest_canopy.json",
+          "blob_sha": "19e2f7cec9c385f1d68b47924fe483828cb6a00a",
+          "size": 349
+        },
+        {
+          "id": "chunk_blanket_processors/snowy_forest_glacier",
+          "path": "src/generated/resources/data/twilightforest/twilight/chunk_blanket_processors/snowy_forest_glacier.json",
+          "blob_sha": "069a7e20320a3515f39625e2156154f62a70d061",
+          "size": 354
+        }
+      ]
+    },
+    "dwarf_rabbit_variant": {
+      "loading_mode": "DATAPACK_REGISTRY",
+      "registry": "twilight:dwarf_rabbit_variant",
+      "codec": [
+        "twilightforest.entity.passive.DwarfRabbitVariant.DIRECT_CODEC",
+        "twilightforest.entity.passive.DwarfRabbitVariant.CODEC"
+      ],
+      "consumers": [
+        "twilightforest.entity.passive.DwarfRabbit"
+      ],
+      "purpose": "Data-selected rabbit texture/biome variants, persisted through registry keys.",
+      "record_count": 3,
+      "records": [
+        {
+          "id": "dwarf_rabbit_variant/brown",
+          "path": "src/generated/resources/data/twilightforest/twilight/dwarf_rabbit_variant/brown.json",
+          "blob_sha": "a4292152a36f8914006eea9a71ee1337e9c7707e",
+          "size": 64
+        },
+        {
+          "id": "dwarf_rabbit_variant/dutch",
+          "path": "src/generated/resources/data/twilightforest/twilight/dwarf_rabbit_variant/dutch.json",
+          "blob_sha": "c0d8ed236aaafbba4fde4ca1921ba94ba23b50b4",
+          "size": 64
+        },
+        {
+          "id": "dwarf_rabbit_variant/white",
+          "path": "src/generated/resources/data/twilightforest/twilight/dwarf_rabbit_variant/white.json",
+          "blob_sha": "e58ce3dfa5db06a28a090fbf31342be77b279f39",
+          "size": 64
+        }
+      ]
+    },
+    "magic_paintings": {
+      "loading_mode": "DATAPACK_REGISTRY",
+      "registry": "twilight:magic_paintings",
+      "codec": [
+        "twilightforest.entity.MagicPaintingVariant.CODEC"
+      ],
+      "consumers": [
+        "twilightforest.entity.MagicPainting",
+        "twilightforest.client.renderer.entity.MagicPaintingRenderer"
+      ],
+      "purpose": "Layered painting dimensions, textures, parallax and opacity behavior used directly by entity and renderer.",
+      "record_count": 5,
+      "records": [
+        {
+          "id": "magic_paintings/castaway_paradise",
+          "path": "src/generated/resources/data/twilightforest/twilight/magic_paintings/castaway_paradise.json",
+          "blob_sha": "3e1b734ab80d2cd6f0afef9d99a1b21ad4ffd033",
+          "size": 1078
+        },
+        {
+          "id": "magic_paintings/darkness",
+          "path": "src/generated/resources/data/twilightforest/twilight/magic_paintings/darkness.json",
+          "blob_sha": "56ef1f795b6f46466422377ad598d33e63dd8cac",
+          "size": 1643
+        },
+        {
+          "id": "magic_paintings/lucid_lands",
+          "path": "src/generated/resources/data/twilightforest/twilight/magic_paintings/lucid_lands.json",
+          "blob_sha": "5ac761d110a5a5c1fa93441bda03819818a4ced8",
+          "size": 5549
+        },
+        {
+          "id": "magic_paintings/music_in_the_mire",
+          "path": "src/generated/resources/data/twilightforest/twilight/magic_paintings/music_in_the_mire.json",
+          "blob_sha": "43af32cd547b629e25707c4477ed5c8b657f0506",
+          "size": 3659
+        },
+        {
+          "id": "magic_paintings/the_hostile_paradise",
+          "path": "src/generated/resources/data/twilightforest/twilight/magic_paintings/the_hostile_paradise.json",
+          "blob_sha": "407aafab2249176d38f3b221a9ed67dfc5fb1a30",
+          "size": 3483
+        }
+      ]
+    },
+    "quests": {
+      "loading_mode": "JSON_RELOAD_LISTENER",
+      "registry": null,
+      "codec": [
+        "twilightforest.entity.passive.quest.ram.QuestingRamContext.CODEC"
+      ],
+      "consumers": [
+        "twilightforest.entity.passive.quest.QuestReloadListener",
+        "twilightforest.entity.passive.QuestRam",
+        "twilightforest.network.SyncQuestsPacket"
+      ],
+      "purpose": "Reloadable quest definition data for Questing Ram behavior and synchronization.",
+      "record_count": 1,
+      "records": [
+        {
+          "id": "quests/questing_ram",
+          "path": "src/generated/resources/data/twilightforest/twilight/quests/questing_ram.json",
+          "blob_sha": "becaefcae88af127fb19693e298cf78f1eccffbf",
+          "size": 687
+        }
+      ]
+    },
+    "restrictions": {
+      "loading_mode": "DATAPACK_REGISTRY",
+      "registry": "twilight:restrictions",
+      "codec": [
+        "twilightforest.util.Restriction.CODEC",
+        "twilightforest.init.custom.Restrictions.CODEC"
+      ],
+      "consumers": [
+        "twilightforest.util.Restriction",
+        "twilightforest.util.Enforcement",
+        "twilightforest.init.custom.Enforcements"
+      ],
+      "purpose": "Biome progression gates selecting structure hints, enforcement behavior, multiplier, toast and required advancements.",
+      "record_count": 9,
+      "records": [
+        {
+          "id": "restrictions/dark_forest",
+          "path": "src/generated/resources/data/twilightforest/twilight/restrictions/dark_forest.json",
+          "blob_sha": "c4b8c4fd1b8d3206bc2db7ec9699147069d2f4f4",
+          "size": 271
+        },
+        {
+          "id": "restrictions/dark_forest_center",
+          "path": "src/generated/resources/data/twilightforest/twilight/restrictions/dark_forest_center.json",
+          "blob_sha": "8147b571bde2095c3cbe414c6b6df5cab29520d1",
+          "size": 258
+        },
+        {
+          "id": "restrictions/final_plateau",
+          "path": "src/generated/resources/data/twilightforest/twilight/restrictions/final_plateau.json",
+          "blob_sha": "3fe56e9c7094f30f77972cc5cce5a0ea4d85b8ab",
+          "size": 253
+        },
+        {
+          "id": "restrictions/fire_swamp",
+          "path": "src/generated/resources/data/twilightforest/twilight/restrictions/fire_swamp.json",
+          "blob_sha": "8358a055eba2f1c0c6057a043b9a34ded56a2733",
+          "size": 250
+        },
+        {
+          "id": "restrictions/glacier",
+          "path": "src/generated/resources/data/twilightforest/twilight/restrictions/glacier.json",
+          "blob_sha": "3d28bc320184ab9a2f6e8bc57f921f2d0b8f3a51",
+          "size": 248
+        },
+        {
+          "id": "restrictions/highlands",
+          "path": "src/generated/resources/data/twilightforest/twilight/restrictions/highlands.json",
+          "blob_sha": "e48a2171b1a380b89d04f94a79ab951222f37387",
+          "size": 248
+        },
+        {
+          "id": "restrictions/snowy_forest",
+          "path": "src/generated/resources/data/twilightforest/twilight/restrictions/snowy_forest.json",
+          "blob_sha": "1102d97062a6b4f70cb4121284fa0745da214da5",
+          "size": 260
+        },
+        {
+          "id": "restrictions/swamp",
+          "path": "src/generated/resources/data/twilightforest/twilight/restrictions/swamp.json",
+          "blob_sha": "bd6ffbbcaaaee04d4f3efcc20941d75b297eec7b",
+          "size": 261
+        },
+        {
+          "id": "restrictions/thornlands",
+          "path": "src/generated/resources/data/twilightforest/twilight/restrictions/thornlands.json",
+          "blob_sha": "e31bba32fb6d37b392d600107ea5c4742425bfc0",
+          "size": 253
+        }
+      ]
+    },
+    "stalactites": {
+      "loading_mode": "JSON_RELOAD_LISTENER",
+      "registry": null,
+      "codec": [
+        "twilightforest.world.components.speleothem.SpeleothemVarietyConfig.CODEC",
+        "twilightforest.world.components.speleothem.Stalactite.CODEC"
+      ],
+      "consumers": [
+        "twilightforest.world.components.speleothem.StalactiteReloadListener",
+        "twilightforest.world.components.structures.StructureSpeleothemConfig"
+      ],
+      "purpose": "Reloadable speleothem pools and entries used by hollow hills/caves and related structures.",
+      "record_count": 19,
+      "records": [
+        {
+          "id": "stalactites/entries/blue_ice_stalactite",
+          "path": "src/generated/resources/data/twilightforest/twilight/stalactites/entries/blue_ice_stalactite.json",
+          "blob_sha": "96e20f5b10c1e5a7a269f6f270497c3aa7624dba",
+          "size": 93
+        },
+        {
+          "id": "stalactites/entries/coal_stalactite",
+          "path": "src/generated/resources/data/twilightforest/twilight/stalactites/entries/coal_stalactite.json",
+          "blob_sha": "d6c949d42ab33e29003d38c40b046414a0f8dbd0",
+          "size": 95
+        },
+        {
+          "id": "stalactites/entries/copper_stalactite",
+          "path": "src/generated/resources/data/twilightforest/twilight/stalactites/entries/copper_stalactite.json",
+          "blob_sha": "a64961279e53ffc75ed7c991cbf3c6a4896d0579",
+          "size": 96
+        },
+        {
+          "id": "stalactites/entries/diamond_stalactite",
+          "path": "src/generated/resources/data/twilightforest/twilight/stalactites/entries/diamond_stalactite.json",
+          "blob_sha": "ee13dd083aeaf3774989ce8974e7766b1a0f8a97",
+          "size": 96
+        },
+        {
+          "id": "stalactites/entries/emerald_stalactite",
+          "path": "src/generated/resources/data/twilightforest/twilight/stalactites/entries/emerald_stalactite.json",
+          "blob_sha": "9165ba88d40fe3afbdd58266b0d5d8f079d44fd8",
+          "size": 96
+        },
+        {
+          "id": "stalactites/entries/glowstone_stalactite",
+          "path": "src/generated/resources/data/twilightforest/twilight/stalactites/entries/glowstone_stalactite.json",
+          "blob_sha": "771034ac7b7da7d9a6060f17b31a3fe5a1fd7de6",
+          "size": 95
+        },
+        {
+          "id": "stalactites/entries/gold_stalactite",
+          "path": "src/generated/resources/data/twilightforest/twilight/stalactites/entries/gold_stalactite.json",
+          "blob_sha": "492e4566d67c4aa1d72f71d43f38da6027a00333",
+          "size": 94
+        },
+        {
+          "id": "stalactites/entries/hill_stone_stalactite",
+          "path": "src/generated/resources/data/twilightforest/twilight/stalactites/entries/hill_stone_stalactite.json",
+          "blob_sha": "4c007ed9f6f5b917476bb87f03d70d119151bbc1",
+          "size": 92
+        },
+        {
+          "id": "stalactites/entries/ice_stalactite",
+          "path": "src/generated/resources/data/twilightforest/twilight/stalactites/entries/ice_stalactite.json",
+          "blob_sha": "3595f27e80a49517fa2255f5738b608e14a2b7d1",
+          "size": 89
+        },
+        {
+          "id": "stalactites/entries/iron_stalactite",
+          "path": "src/generated/resources/data/twilightforest/twilight/stalactites/entries/iron_stalactite.json",
+          "blob_sha": "6ba30bae55f820455ff19283e48d472e5ac11ad3",
+          "size": 94
+        },
+        {
+          "id": "stalactites/entries/lapis_stalactite",
+          "path": "src/generated/resources/data/twilightforest/twilight/stalactites/entries/lapis_stalactite.json",
+          "blob_sha": "f136580f1a86e7785cb5cadaa925e999b31f6459",
+          "size": 95
+        },
+        {
+          "id": "stalactites/entries/packed_ice_stalactite",
+          "path": "src/generated/resources/data/twilightforest/twilight/stalactites/entries/packed_ice_stalactite.json",
+          "blob_sha": "db41e9b0191c6240450acb99fdf0eae313d75955",
+          "size": 95
+        },
+        {
+          "id": "stalactites/entries/redstone_stalactite",
+          "path": "src/generated/resources/data/twilightforest/twilight/stalactites/entries/redstone_stalactite.json",
+          "blob_sha": "8b231a5ca6b7b9deeb161657be2a407b989e7feb",
+          "size": 98
+        },
+        {
+          "id": "stalactites/hydra_lair",
+          "path": "src/generated/resources/data/twilightforest/twilight/stalactites/hydra_lair.json",
+          "blob_sha": "2dc56a944c0d25c0bc60320bae1717ecfaaf9940",
+          "size": 541
+        },
+        {
+          "id": "stalactites/large_hollow_hill",
+          "path": "src/generated/resources/data/twilightforest/twilight/stalactites/large_hollow_hill.json",
+          "blob_sha": "4db95c3fe6cddf974c6c7272178654dff4dd2722",
+          "size": 744
+        },
+        {
+          "id": "stalactites/medium_hollow_hill",
+          "path": "src/generated/resources/data/twilightforest/twilight/stalactites/medium_hollow_hill.json",
+          "blob_sha": "c9d14a00c029c593a6378e0d7628124c130b8a4b",
+          "size": 600
+        },
+        {
+          "id": "stalactites/small_hollow_hill",
+          "path": "src/generated/resources/data/twilightforest/twilight/stalactites/small_hollow_hill.json",
+          "blob_sha": "063808e900faee7d828cccd1c0a4d373176e7ecd",
+          "size": 503
+        },
+        {
+          "id": "stalactites/troll_cave",
+          "path": "src/generated/resources/data/twilightforest/twilight/stalactites/troll_cave.json",
+          "blob_sha": "8a4566506af5f754fc4e748fe4db6414f0f5429e",
+          "size": 304
+        },
+        {
+          "id": "stalactites/yeti_cave",
+          "path": "src/generated/resources/data/twilightforest/twilight/stalactites/yeti_cave.json",
+          "blob_sha": "f41440cef3d5518ebae7dbda441ffcb4f6c2678d",
+          "size": 343
+        }
+      ]
+    },
+    "structure_speleothem_settings": {
+      "loading_mode": "DATAPACK_REGISTRY",
+      "registry": "twilight:structure_speleothem_settings",
+      "codec": [
+        "twilightforest.world.components.structures.StructureSpeleothemConfig.CODEC",
+        "twilightforest.init.custom.StructureSpeleothemConfigs.CODEC"
+      ],
+      "consumers": [
+        "twilightforest.init.custom.StructureSpeleothemConfigs",
+        "twilightforest.world.components.structures.StructureSpeleothemConfig"
+      ],
+      "purpose": "Per-structure lattice and speleothem variety selection.",
+      "record_count": 6,
+      "records": [
+        {
+          "id": "structure_speleothem_settings/hydra_lair",
+          "path": "src/generated/resources/data/twilightforest/twilight/structure_speleothem_settings/hydra_lair.json",
+          "blob_sha": "c12a450a80ffbd4bc4b434810a9e6839eeb0fe7b",
+          "size": 167
+        },
+        {
+          "id": "structure_speleothem_settings/large_hollow_hill",
+          "path": "src/generated/resources/data/twilightforest/twilight/structure_speleothem_settings/large_hollow_hill.json",
+          "blob_sha": "63509bb72d236b2eb51777d5240f0a8b291b134d",
+          "size": 176
+        },
+        {
+          "id": "structure_speleothem_settings/medium_hollow_hill",
+          "path": "src/generated/resources/data/twilightforest/twilight/structure_speleothem_settings/medium_hollow_hill.json",
+          "blob_sha": "4fd42346b841e35df35be4af6c5fea9329df0945",
+          "size": 177
+        },
+        {
+          "id": "structure_speleothem_settings/small_hollow_hill",
+          "path": "src/generated/resources/data/twilightforest/twilight/structure_speleothem_settings/small_hollow_hill.json",
+          "blob_sha": "eed2646abaf067074cac76bd4bf396dd7abdee9b",
+          "size": 176
+        },
+        {
+          "id": "structure_speleothem_settings/troll_cave",
+          "path": "src/generated/resources/data/twilightforest/twilight/structure_speleothem_settings/troll_cave.json",
+          "blob_sha": "1d9e1141acad616162a153d5aad27c82fc4b3c68",
+          "size": 167
+        },
+        {
+          "id": "structure_speleothem_settings/yeti_cave",
+          "path": "src/generated/resources/data/twilightforest/twilight/structure_speleothem_settings/yeti_cave.json",
+          "blob_sha": "b4b79ad4f194c7303c9b4776e60534819492bf11",
+          "size": 168
+        }
+      ]
+    },
+    "template_definition": {
+      "loading_mode": "JSON_RELOAD_LISTENER",
+      "registry": null,
+      "codec": [
+        "twilightforest.world.components.structures.util.StructureTemplateDefinition.CODEC"
+      ],
+      "consumers": [
+        "twilightforest.world.components.structures.util.StructureTemplateDefinitions"
+      ],
+      "purpose": "Weighted template pool definitions compiled at reload time and reservoir-sampled by structure generation.",
+      "record_count": 205,
+      "records": [
+        {
+          "id": "template_definition/_empty",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/_empty.json",
+          "blob_sha": "595473e7e32e923f7c542ae2a76c459a3550ae76",
+          "size": 113
+        },
+        {
+          "id": "template_definition/camp/campfire_east",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/campfire_east.json",
+          "blob_sha": "56e18ee05962d7609d080825d84b7e0daa16f1a1",
+          "size": 297
+        },
+        {
+          "id": "template_definition/camp/campfire_south",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/campfire_south.json",
+          "blob_sha": "56e18ee05962d7609d080825d84b7e0daa16f1a1",
+          "size": 297
+        },
+        {
+          "id": "template_definition/camp/campfire_west",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/campfire_west.json",
+          "blob_sha": "56e18ee05962d7609d080825d84b7e0daa16f1a1",
+          "size": 297
+        },
+        {
+          "id": "template_definition/camp/deco/berries_staked",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/deco/berries_staked.json",
+          "blob_sha": "3fd9d927012a0d63c5daa62e511ea130fb423ee2",
+          "size": 324
+        },
+        {
+          "id": "template_definition/camp/deco/berries_support",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/deco/berries_support.json",
+          "blob_sha": "3fd9d927012a0d63c5daa62e511ea130fb423ee2",
+          "size": 324
+        },
+        {
+          "id": "template_definition/camp/deco/berries_trellis",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/deco/berries_trellis.json",
+          "blob_sha": "3fd9d927012a0d63c5daa62e511ea130fb423ee2",
+          "size": 324
+        },
+        {
+          "id": "template_definition/camp/deco/blackberry_wall",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/deco/blackberry_wall.json",
+          "blob_sha": "3fd9d927012a0d63c5daa62e511ea130fb423ee2",
+          "size": 324
+        },
+        {
+          "id": "template_definition/camp/deco/blueberry_wall",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/deco/blueberry_wall.json",
+          "blob_sha": "3fd9d927012a0d63c5daa62e511ea130fb423ee2",
+          "size": 324
+        },
+        {
+          "id": "template_definition/camp/deco/compost_large",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/deco/compost_large.json",
+          "blob_sha": "b5dea99c6b336c3ecee799b531d4ac7dd7bb7dd2",
+          "size": 325
+        },
+        {
+          "id": "template_definition/camp/deco/compost_small",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/deco/compost_small.json",
+          "blob_sha": "b5dea99c6b336c3ecee799b531d4ac7dd7bb7dd2",
+          "size": 325
+        },
+        {
+          "id": "template_definition/camp/deco/double_drying_rack",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/deco/double_drying_rack.json",
+          "blob_sha": "5e8a5e51e2a6ce63b492177189de971dccad815c",
+          "size": 648
+        },
+        {
+          "id": "template_definition/camp/deco/garden_1x3",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/deco/garden_1x3.json",
+          "blob_sha": "b5dea99c6b336c3ecee799b531d4ac7dd7bb7dd2",
+          "size": 325
+        },
+        {
+          "id": "template_definition/camp/deco/garden_2x4",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/deco/garden_2x4.json",
+          "blob_sha": "b5dea99c6b336c3ecee799b531d4ac7dd7bb7dd2",
+          "size": 325
+        },
+        {
+          "id": "template_definition/camp/deco/garden_straight",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/deco/garden_straight.json",
+          "blob_sha": "b5dea99c6b336c3ecee799b531d4ac7dd7bb7dd2",
+          "size": 325
+        },
+        {
+          "id": "template_definition/camp/deco/garden_u",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/deco/garden_u.json",
+          "blob_sha": "b5dea99c6b336c3ecee799b531d4ac7dd7bb7dd2",
+          "size": 325
+        },
+        {
+          "id": "template_definition/camp/deco/long_drying_rack",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/deco/long_drying_rack.json",
+          "blob_sha": "5e8a5e51e2a6ce63b492177189de971dccad815c",
+          "size": 648
+        },
+        {
+          "id": "template_definition/camp/deco/lumber1",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/deco/lumber1.json",
+          "blob_sha": "617dd67d2af2f5952dea02d99879464d4e271840",
+          "size": 3187
+        },
+        {
+          "id": "template_definition/camp/deco/lumber2",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/deco/lumber2.json",
+          "blob_sha": "617dd67d2af2f5952dea02d99879464d4e271840",
+          "size": 3187
+        },
+        {
+          "id": "template_definition/camp/deco/lumber3",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/deco/lumber3.json",
+          "blob_sha": "617dd67d2af2f5952dea02d99879464d4e271840",
+          "size": 3187
+        },
+        {
+          "id": "template_definition/camp/deco/pen",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/deco/pen.json",
+          "blob_sha": "b5dea99c6b336c3ecee799b531d4ac7dd7bb7dd2",
+          "size": 325
+        },
+        {
+          "id": "template_definition/camp/deco/raspberry_wall",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/deco/raspberry_wall.json",
+          "blob_sha": "3fd9d927012a0d63c5daa62e511ea130fb423ee2",
+          "size": 324
+        },
+        {
+          "id": "template_definition/camp/deco/repair_station",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/deco/repair_station.json",
+          "blob_sha": "b5dea99c6b336c3ecee799b531d4ac7dd7bb7dd2",
+          "size": 325
+        },
+        {
+          "id": "template_definition/camp/path/intersection_left",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/path/intersection_left.json",
+          "blob_sha": "61c63be13073ef4aa81a6669e90d8884238f7bb7",
+          "size": 385
+        },
+        {
+          "id": "template_definition/camp/path/intersection_right",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/path/intersection_right.json",
+          "blob_sha": "61c63be13073ef4aa81a6669e90d8884238f7bb7",
+          "size": 385
+        },
+        {
+          "id": "template_definition/camp/path/intersection_short",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/path/intersection_short.json",
+          "blob_sha": "61c63be13073ef4aa81a6669e90d8884238f7bb7",
+          "size": 385
+        },
+        {
+          "id": "template_definition/camp/path/j_path",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/path/j_path.json",
+          "blob_sha": "61c63be13073ef4aa81a6669e90d8884238f7bb7",
+          "size": 385
+        },
+        {
+          "id": "template_definition/camp/path/l_path",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/path/l_path.json",
+          "blob_sha": "61c63be13073ef4aa81a6669e90d8884238f7bb7",
+          "size": 385
+        },
+        {
+          "id": "template_definition/camp/path/path_2x4",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/path/path_2x4.json",
+          "blob_sha": "36afb8c2f451a775435f03cbc18760cc1f40e79d",
+          "size": 1237
+        },
+        {
+          "id": "template_definition/camp/path/path_2x6",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/path/path_2x6.json",
+          "blob_sha": "ec5559622073e0ea62859cc637fd1b035ec9807d",
+          "size": 763
+        },
+        {
+          "id": "template_definition/camp/path/path_2x7",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/path/path_2x7.json",
+          "blob_sha": "ec5559622073e0ea62859cc637fd1b035ec9807d",
+          "size": 763
+        },
+        {
+          "id": "template_definition/camp/path/path_3x4",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/path/path_3x4.json",
+          "blob_sha": "36afb8c2f451a775435f03cbc18760cc1f40e79d",
+          "size": 1237
+        },
+        {
+          "id": "template_definition/camp/tent/duo_tent",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/tent/duo_tent.json",
+          "blob_sha": "4431f9a469fe84709b2391197d005eaf533a0d04",
+          "size": 9083
+        },
+        {
+          "id": "template_definition/camp/tent/luxury_tent",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/tent/luxury_tent.json",
+          "blob_sha": "bb0fcfcee66baf5335cd0b353532c7d52f5175ac",
+          "size": 9083
+        },
+        {
+          "id": "template_definition/camp/tent/open_tent",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/tent/open_tent.json",
+          "blob_sha": "4431f9a469fe84709b2391197d005eaf533a0d04",
+          "size": 9083
+        },
+        {
+          "id": "template_definition/camp/tent/solo_tent",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/camp/tent/solo_tent.json",
+          "blob_sha": "fe324de1926befacd59a36b9b0335a8d1b2ea32a",
+          "size": 9084
+        },
+        {
+          "id": "template_definition/courtyard/spawner",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/courtyard/spawner.json",
+          "blob_sha": "365b1bd95edda219d1df266ca37cee04f41327ed",
+          "size": 44
+        },
+        {
+          "id": "template_definition/final_castle/temp/bell_tower",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/final_castle/temp/bell_tower.json",
+          "blob_sha": "058cfd8cc6cb29ec3859380e950b1a387cdf05fa",
+          "size": 56
+        },
+        {
+          "id": "template_definition/final_castle/temp/gazebo",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/final_castle/temp/gazebo.json",
+          "blob_sha": "a701fb04a337deb9cd92c8988754f4a93a38dddc",
+          "size": 52
+        },
+        {
+          "id": "template_definition/final_castle/temp/large_tower",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/final_castle/temp/large_tower.json",
+          "blob_sha": "3fc3006af71d0def0093f0d9e945ad173e762df6",
+          "size": 57
+        },
+        {
+          "id": "template_definition/lich_tower/3x3/curved_roof",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/3x3/curved_roof.json",
+          "blob_sha": "734698bc2123e2e48b6787e56af3dc949a44e8d6",
+          "size": 97
+        },
+        {
+          "id": "template_definition/lich_tower/3x3/double",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/3x3/double.json",
+          "blob_sha": "a6bf3be4d27c7c49ae74779fa87699d1eb367752",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/3x3/fence_roof",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/3x3/fence_roof.json",
+          "blob_sha": "734698bc2123e2e48b6787e56af3dc949a44e8d6",
+          "size": 97
+        },
+        {
+          "id": "template_definition/lich_tower/3x3/flat_roof",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/3x3/flat_roof.json",
+          "blob_sha": "ff3d8a94d795dabbd7bc0395f4d8584b0417d09a",
+          "size": 56
+        },
+        {
+          "id": "template_definition/lich_tower/3x3/flat_side_roof",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/3x3/flat_side_roof.json",
+          "blob_sha": "ff3d8a94d795dabbd7bc0395f4d8584b0417d09a",
+          "size": 56
+        },
+        {
+          "id": "template_definition/lich_tower/3x3/lava_well",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/3x3/lava_well.json",
+          "blob_sha": "edcee81bfcd1d1df7adc36ca9a8d2ae2dc0949c6",
+          "size": 49
+        },
+        {
+          "id": "template_definition/lich_tower/3x3/lookout",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/3x3/lookout.json",
+          "blob_sha": "a6bf3be4d27c7c49ae74779fa87699d1eb367752",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/3x3/pointed_roof",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/3x3/pointed_roof.json",
+          "blob_sha": "734698bc2123e2e48b6787e56af3dc949a44e8d6",
+          "size": 97
+        },
+        {
+          "id": "template_definition/lich_tower/3x3/pyramid_roof",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/3x3/pyramid_roof.json",
+          "blob_sha": "734698bc2123e2e48b6787e56af3dc949a44e8d6",
+          "size": 97
+        },
+        {
+          "id": "template_definition/lich_tower/3x3/sapling",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/3x3/sapling.json",
+          "blob_sha": "edcee81bfcd1d1df7adc36ca9a8d2ae2dc0949c6",
+          "size": 49
+        },
+        {
+          "id": "template_definition/lich_tower/3x3/short_lookout",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/3x3/short_lookout.json",
+          "blob_sha": "a6bf3be4d27c7c49ae74779fa87699d1eb367752",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/3x3/slabs_roof",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/3x3/slabs_roof.json",
+          "blob_sha": "734698bc2123e2e48b6787e56af3dc949a44e8d6",
+          "size": 97
+        },
+        {
+          "id": "template_definition/lich_tower/3x3/taller_double",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/3x3/taller_double.json",
+          "blob_sha": "a6bf3be4d27c7c49ae74779fa87699d1eb367752",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/3x3/tree",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/3x3/tree.json",
+          "blob_sha": "91fea0c8f7390e59c5a26220085d53f4294645b1",
+          "size": 51
+        },
+        {
+          "id": "template_definition/lich_tower/3x3/water_fountain",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/3x3/water_fountain.json",
+          "blob_sha": "a178fec9ebc6611d9701af0932eb6cf300718970",
+          "size": 98
+        },
+        {
+          "id": "template_definition/lich_tower/3x3/water_well",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/3x3/water_well.json",
+          "blob_sha": "a178fec9ebc6611d9701af0932eb6cf300718970",
+          "size": 98
+        },
+        {
+          "id": "template_definition/lich_tower/3x3/wither_rose",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/3x3/wither_rose.json",
+          "blob_sha": "91fea0c8f7390e59c5a26220085d53f4294645b1",
+          "size": 51
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/altar",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/altar.json",
+          "blob_sha": "28ba06defa4a2209262a41d500e5e39b5b21ed5c",
+          "size": 140
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/beard_checkered",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/beard_checkered.json",
+          "blob_sha": "4f8d760ff62cd7bb023f62a837c4273609b67287",
+          "size": 48
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/beard_chiseled",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/beard_chiseled.json",
+          "blob_sha": "4f8d760ff62cd7bb023f62a837c4273609b67287",
+          "size": 48
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/beard_chunks",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/beard_chunks.json",
+          "blob_sha": "4f8d760ff62cd7bb023f62a837c4273609b67287",
+          "size": 48
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/beard_flat",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/beard_flat.json",
+          "blob_sha": "ba93a54ca0465dbe9ea239a7437f4fa61c33f828",
+          "size": 57
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/beard_staggered",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/beard_staggered.json",
+          "blob_sha": "4f8d760ff62cd7bb023f62a837c4273609b67287",
+          "size": 48
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/beard_trim",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/beard_trim.json",
+          "blob_sha": "48356659053ffa9966f753633364e5c2066eb4d9",
+          "size": 47
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/curved_roof",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/curved_roof.json",
+          "blob_sha": "6b5340305b85246c2677d5608361b34d0667ce6e",
+          "size": 97
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/desk",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/desk.json",
+          "blob_sha": "28ba06defa4a2209262a41d500e5e39b5b21ed5c",
+          "size": 140
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/elbow_junction",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/elbow_junction.json",
+          "blob_sha": "28ba06defa4a2209262a41d500e5e39b5b21ed5c",
+          "size": 140
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/fence_roof",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/fence_roof.json",
+          "blob_sha": "6b5340305b85246c2677d5608361b34d0667ce6e",
+          "size": 97
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/flat_roof",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/flat_roof.json",
+          "blob_sha": "22c608283963e555ed813055a5f49c934864d54e",
+          "size": 56
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/flat_side_roof",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/flat_side_roof.json",
+          "blob_sha": "22c608283963e555ed813055a5f49c934864d54e",
+          "size": 56
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/full_junction",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/full_junction.json",
+          "blob_sha": "026f9fc827e1f11d441da21c2195cd208eb1b5b1",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/full_junction_2",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/full_junction_2.json",
+          "blob_sha": "026f9fc827e1f11d441da21c2195cd208eb1b5b1",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/full_junction_3",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/full_junction_3.json",
+          "blob_sha": "026f9fc827e1f11d441da21c2195cd208eb1b5b1",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/ladder",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/ladder.json",
+          "blob_sha": "026f9fc827e1f11d441da21c2195cd208eb1b5b1",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/lectern",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/lectern.json",
+          "blob_sha": "754d1a1c1a3c83419d6fd77a2add1440489ddb45",
+          "size": 100
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/library",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/library.json",
+          "blob_sha": "026f9fc827e1f11d441da21c2195cd208eb1b5b1",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/lone_chest",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/lone_chest.json",
+          "blob_sha": "28ba06defa4a2209262a41d500e5e39b5b21ed5c",
+          "size": 140
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/pointed_roof",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/pointed_roof.json",
+          "blob_sha": "6b5340305b85246c2677d5608361b34d0667ce6e",
+          "size": 97
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/potion",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/potion.json",
+          "blob_sha": "28ba06defa4a2209262a41d500e5e39b5b21ed5c",
+          "size": 140
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/pyramid_roof",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/pyramid_roof.json",
+          "blob_sha": "6b5340305b85246c2677d5608361b34d0667ce6e",
+          "size": 97
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/slabs_roof",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/slabs_roof.json",
+          "blob_sha": "6b5340305b85246c2677d5608361b34d0667ce6e",
+          "size": 97
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/spawner_1",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/spawner_1.json",
+          "blob_sha": "026f9fc827e1f11d441da21c2195cd208eb1b5b1",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/spawner_2",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/spawner_2.json",
+          "blob_sha": "026f9fc827e1f11d441da21c2195cd208eb1b5b1",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/spawner_3",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/spawner_3.json",
+          "blob_sha": "026f9fc827e1f11d441da21c2195cd208eb1b5b1",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/spawner_4",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/spawner_4.json",
+          "blob_sha": "026f9fc827e1f11d441da21c2195cd208eb1b5b1",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/spawner_5",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/spawner_5.json",
+          "blob_sha": "026f9fc827e1f11d441da21c2195cd208eb1b5b1",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/straight_junction",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/straight_junction.json",
+          "blob_sha": "28ba06defa4a2209262a41d500e5e39b5b21ed5c",
+          "size": 140
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/t_junction",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/t_junction.json",
+          "blob_sha": "28ba06defa4a2209262a41d500e5e39b5b21ed5c",
+          "size": 140
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/trinity",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/trinity.json",
+          "blob_sha": "28ba06defa4a2209262a41d500e5e39b5b21ed5c",
+          "size": 140
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/webbed_spawner",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/webbed_spawner.json",
+          "blob_sha": "026f9fc827e1f11d441da21c2195cd208eb1b5b1",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/5x5/zombie_trap",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/5x5/zombie_trap.json",
+          "blob_sha": "026f9fc827e1f11d441da21c2195cd208eb1b5b1",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/altar",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/altar.json",
+          "blob_sha": "0c8fbc815db2e0f8027b5ee86bb3249215c3707d",
+          "size": 100
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/altars",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/altars.json",
+          "blob_sha": "31bfd6f44275ab2aea20cdb202d4ebba56659b57",
+          "size": 140
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/barbed_webs",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/barbed_webs.json",
+          "blob_sha": "454595349e5bfa1736152bfb4631e1994078034b",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/beard_checkered",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/beard_checkered.json",
+          "blob_sha": "dc7c1b0b082f92223a0fd1e8f61040535e851da0",
+          "size": 48
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/beard_chiseled",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/beard_chiseled.json",
+          "blob_sha": "dc7c1b0b082f92223a0fd1e8f61040535e851da0",
+          "size": 48
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/beard_chunks",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/beard_chunks.json",
+          "blob_sha": "dc7c1b0b082f92223a0fd1e8f61040535e851da0",
+          "size": 48
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/beard_flat",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/beard_flat.json",
+          "blob_sha": "2a66dc7452147b7d98bc7eae926b7eee6863734b",
+          "size": 57
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/beard_staggered",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/beard_staggered.json",
+          "blob_sha": "dc7c1b0b082f92223a0fd1e8f61040535e851da0",
+          "size": 48
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/beard_trim",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/beard_trim.json",
+          "blob_sha": "9766d51a023a6f86ba22007c1ccfe0a8de0b64b0",
+          "size": 47
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/book_staircases",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/book_staircases.json",
+          "blob_sha": "454595349e5bfa1736152bfb4631e1994078034b",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/cactus",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/cactus.json",
+          "blob_sha": "454595349e5bfa1736152bfb4631e1994078034b",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/corner_caging",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/corner_caging.json",
+          "blob_sha": "454595349e5bfa1736152bfb4631e1994078034b",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/curved_roof",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/curved_roof.json",
+          "blob_sha": "c13cb28b75928d75f1495e94f65136be3757db60",
+          "size": 97
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/desk",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/desk.json",
+          "blob_sha": "31bfd6f44275ab2aea20cdb202d4ebba56659b57",
+          "size": 140
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/elbow_chest",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/elbow_chest.json",
+          "blob_sha": "fc4eca08b9d2f14794773e7b1800b3f260941812",
+          "size": 100
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/elbow_junction",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/elbow_junction.json",
+          "blob_sha": "454595349e5bfa1736152bfb4631e1994078034b",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/fence_roof",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/fence_roof.json",
+          "blob_sha": "c13cb28b75928d75f1495e94f65136be3757db60",
+          "size": 97
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/flat_roof",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/flat_roof.json",
+          "blob_sha": "d6f9631c27b67555d495a6b2de18aae0fec38dec",
+          "size": 56
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/flat_side_roof",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/flat_side_roof.json",
+          "blob_sha": "d6f9631c27b67555d495a6b2de18aae0fec38dec",
+          "size": 56
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/full_junction",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/full_junction.json",
+          "blob_sha": "454595349e5bfa1736152bfb4631e1994078034b",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/full_junction_1",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/full_junction_1.json",
+          "blob_sha": "31bfd6f44275ab2aea20cdb202d4ebba56659b57",
+          "size": 140
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/full_junction_2",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/full_junction_2.json",
+          "blob_sha": "454595349e5bfa1736152bfb4631e1994078034b",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/garden_lab",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/garden_lab.json",
+          "blob_sha": "5108899f34321ebef4ce507dcac25ab4bffd38f3",
+          "size": 91
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/grave",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/grave.json",
+          "blob_sha": "454595349e5bfa1736152bfb4631e1994078034b",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/guarded_chest",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/guarded_chest.json",
+          "blob_sha": "fc4eca08b9d2f14794773e7b1800b3f260941812",
+          "size": 100
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/jar_study",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/jar_study.json",
+          "blob_sha": "48558815b0e88e22f02bce3ec2bd6f6043150e57",
+          "size": 149
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/library_hall",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/library_hall.json",
+          "blob_sha": "0e8fafa70eaa732aeb9a5c7d4fba74a64d65f8b5",
+          "size": 140
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/nursery",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/nursery.json",
+          "blob_sha": "454595349e5bfa1736152bfb4631e1994078034b",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/pedestal_junction",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/pedestal_junction.json",
+          "blob_sha": "454595349e5bfa1736152bfb4631e1994078034b",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/pedestal_library",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/pedestal_library.json",
+          "blob_sha": "454595349e5bfa1736152bfb4631e1994078034b",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/pointed_roof",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/pointed_roof.json",
+          "blob_sha": "c13cb28b75928d75f1495e94f65136be3757db60",
+          "size": 97
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/potion",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/potion.json",
+          "blob_sha": "1a27c24f363566b077536af2566c6e500ee0afc2",
+          "size": 91
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/potion_lab",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/potion_lab.json",
+          "blob_sha": "fc4eca08b9d2f14794773e7b1800b3f260941812",
+          "size": 100
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/pyramid_roof",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/pyramid_roof.json",
+          "blob_sha": "c13cb28b75928d75f1495e94f65136be3757db60",
+          "size": 97
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/ritual",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/ritual.json",
+          "blob_sha": "454595349e5bfa1736152bfb4631e1994078034b",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/shelved_jars",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/shelved_jars.json",
+          "blob_sha": "454595349e5bfa1736152bfb4631e1994078034b",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/slabs_roof",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/slabs_roof.json",
+          "blob_sha": "c13cb28b75928d75f1495e94f65136be3757db60",
+          "size": 97
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/straight_junction",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/straight_junction.json",
+          "blob_sha": "454595349e5bfa1736152bfb4631e1994078034b",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/t_junction",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/t_junction.json",
+          "blob_sha": "454595349e5bfa1736152bfb4631e1994078034b",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/tiered_library",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/tiered_library.json",
+          "blob_sha": "454595349e5bfa1736152bfb4631e1994078034b",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/tiered_study",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/tiered_study.json",
+          "blob_sha": "454595349e5bfa1736152bfb4631e1994078034b",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/7x7/walled_library",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/7x7/walled_library.json",
+          "blob_sha": "454595349e5bfa1736152bfb4631e1994078034b",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/altar",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/altar.json",
+          "blob_sha": "4ccd9518278134872f8117ec250034e5539d23e6",
+          "size": 140
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/archives",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/archives.json",
+          "blob_sha": "4ccd9518278134872f8117ec250034e5539d23e6",
+          "size": 140
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/beard_checkered",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/beard_checkered.json",
+          "blob_sha": "6f6200b5d151ee0347dfd4eefbaf1ee6b8c0592c",
+          "size": 48
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/beard_chiseled",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/beard_chiseled.json",
+          "blob_sha": "6f6200b5d151ee0347dfd4eefbaf1ee6b8c0592c",
+          "size": 48
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/beard_chunks",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/beard_chunks.json",
+          "blob_sha": "6f6200b5d151ee0347dfd4eefbaf1ee6b8c0592c",
+          "size": 48
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/beard_flat",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/beard_flat.json",
+          "blob_sha": "94d3999c23119f20a7cad879c4395fc7534402b8",
+          "size": 57
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/beard_staggered",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/beard_staggered.json",
+          "blob_sha": "6f6200b5d151ee0347dfd4eefbaf1ee6b8c0592c",
+          "size": 48
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/beard_trim",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/beard_trim.json",
+          "blob_sha": "97a82577439d03ec50088e8d3c6000b898843c2f",
+          "size": 47
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/cauldron_keep",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/cauldron_keep.json",
+          "blob_sha": "75eef6c49110d08cf776b87eb0cdc4d7467d2a07",
+          "size": 140
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/center_decor",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/center_decor.json",
+          "blob_sha": "63343a1af913c5e5c971b828b0226f8273a40097",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/centerpiece",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/centerpiece.json",
+          "blob_sha": "edd03edfcc6e6ac89e03db761339d1a86c0ed36e",
+          "size": 100
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/classic_library",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/classic_library.json",
+          "blob_sha": "a9a707c175e5590af7fb85429713fee72b41b4a4",
+          "size": 50
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/curved_roof",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/curved_roof.json",
+          "blob_sha": "bb7a9737866c5921a04107b8dccc12e53b143a96",
+          "size": 97
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/elbow_junction",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/elbow_junction.json",
+          "blob_sha": "63343a1af913c5e5c971b828b0226f8273a40097",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/enchanting_prison",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/enchanting_prison.json",
+          "blob_sha": "4ccd9518278134872f8117ec250034e5539d23e6",
+          "size": 140
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/fence_roof",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/fence_roof.json",
+          "blob_sha": "bb7a9737866c5921a04107b8dccc12e53b143a96",
+          "size": 97
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/flat_roof",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/flat_roof.json",
+          "blob_sha": "1bcfb4bfa06c46cebc9d748962bd912bd3758212",
+          "size": 56
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/flat_side_roof",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/flat_side_roof.json",
+          "blob_sha": "1bcfb4bfa06c46cebc9d748962bd912bd3758212",
+          "size": 56
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/full_junction",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/full_junction.json",
+          "blob_sha": "63343a1af913c5e5c971b828b0226f8273a40097",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/holding",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/holding.json",
+          "blob_sha": "63343a1af913c5e5c971b828b0226f8273a40097",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/keepsake_casket",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/keepsake_casket.json",
+          "blob_sha": "b7bbfb4090260bd8b4f0663c0b65b489a0b5a6a8",
+          "size": 50
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/large_study",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/large_study.json",
+          "blob_sha": "4ccd9518278134872f8117ec250034e5539d23e6",
+          "size": 140
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/lectern_hall",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/lectern_hall.json",
+          "blob_sha": "4ccd9518278134872f8117ec250034e5539d23e6",
+          "size": 140
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/library_junction",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/library_junction.json",
+          "blob_sha": "bb98a73a98282599175c7282ba36f00bbdda3ac4",
+          "size": 140
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/lockup",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/lockup.json",
+          "blob_sha": "63343a1af913c5e5c971b828b0226f8273a40097",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/mossy_junction",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/mossy_junction.json",
+          "blob_sha": "4ccd9518278134872f8117ec250034e5539d23e6",
+          "size": 140
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/pointed_roof",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/pointed_roof.json",
+          "blob_sha": "bb7a9737866c5921a04107b8dccc12e53b143a96",
+          "size": 97
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/pyramid_roof",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/pyramid_roof.json",
+          "blob_sha": "bb7a9737866c5921a04107b8dccc12e53b143a96",
+          "size": 97
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/seven",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/seven.json",
+          "blob_sha": "8b27b7b369919b4b37b1f8349b2da2c3bebbec33",
+          "size": 96
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/slabs_roof",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/slabs_roof.json",
+          "blob_sha": "bb7a9737866c5921a04107b8dccc12e53b143a96",
+          "size": 97
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/straight_junction",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/straight_junction.json",
+          "blob_sha": "63343a1af913c5e5c971b828b0226f8273a40097",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/study",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/study.json",
+          "blob_sha": "dedb41e567921494667d0a10fe081bfc372d3326",
+          "size": 198
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/t_junction",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/t_junction.json",
+          "blob_sha": "63343a1af913c5e5c971b828b0226f8273a40097",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/tiered_library",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/tiered_library.json",
+          "blob_sha": "63343a1af913c5e5c971b828b0226f8273a40097",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/tiered_spawner",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/tiered_spawner.json",
+          "blob_sha": "63343a1af913c5e5c971b828b0226f8273a40097",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/tiered_study",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/tiered_study.json",
+          "blob_sha": "63343a1af913c5e5c971b828b0226f8273a40097",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/9x9/winding_ways",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/9x9/winding_ways.json",
+          "blob_sha": "63343a1af913c5e5c971b828b0226f8273a40097",
+          "size": 42
+        },
+        {
+          "id": "template_definition/lich_tower/bridge_spawner",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/bridge_spawner.json",
+          "blob_sha": "b109c8ef6c19c4d462df51bacf701f33c3499732",
+          "size": 49
+        },
+        {
+          "id": "template_definition/lich_tower/bridge_spawner_bend",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/bridge_spawner_bend.json",
+          "blob_sha": "b109c8ef6c19c4d462df51bacf701f33c3499732",
+          "size": 49
+        },
+        {
+          "id": "template_definition/lich_tower/bridge_spawner_ropes",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/bridge_spawner_ropes.json",
+          "blob_sha": "b109c8ef6c19c4d462df51bacf701f33c3499732",
+          "size": 49
+        },
+        {
+          "id": "template_definition/lich_tower/bridge_spawner_wide",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/bridge_spawner_wide.json",
+          "blob_sha": "b109c8ef6c19c4d462df51bacf701f33c3499732",
+          "size": 49
+        },
+        {
+          "id": "template_definition/lich_tower/bridge_spawner_zag",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/bridge_spawner_zag.json",
+          "blob_sha": "b109c8ef6c19c4d462df51bacf701f33c3499732",
+          "size": 49
+        },
+        {
+          "id": "template_definition/lich_tower/bridge_spawner_zig",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/bridge_spawner_zig.json",
+          "blob_sha": "b109c8ef6c19c4d462df51bacf701f33c3499732",
+          "size": 49
+        },
+        {
+          "id": "template_definition/lich_tower/central_bridge",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/central_bridge.json",
+          "blob_sha": "76c2897ee0891cdabcd70f37792c88f91f3f9079",
+          "size": 123
+        },
+        {
+          "id": "template_definition/lich_tower/central_bridge_open",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/central_bridge_open.json",
+          "blob_sha": "4f1afc81a47b11bea7f7f2e4a1bc8353db19660f",
+          "size": 58
+        },
+        {
+          "id": "template_definition/lich_tower/end_bridge_1",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/end_bridge_1.json",
+          "blob_sha": "dc0adbae67d749080155c4e3990ae1e903a5f999",
+          "size": 49
+        },
+        {
+          "id": "template_definition/lich_tower/end_bridge_2",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/end_bridge_2.json",
+          "blob_sha": "dc0adbae67d749080155c4e3990ae1e903a5f999",
+          "size": 49
+        },
+        {
+          "id": "template_definition/lich_tower/end_bridge_3",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/end_bridge_3.json",
+          "blob_sha": "dc0adbae67d749080155c4e3990ae1e903a5f999",
+          "size": 49
+        },
+        {
+          "id": "template_definition/lich_tower/end_bridge_4",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/end_bridge_4.json",
+          "blob_sha": "dc0adbae67d749080155c4e3990ae1e903a5f999",
+          "size": 49
+        },
+        {
+          "id": "template_definition/lich_tower/end_bridge_5",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/end_bridge_5.json",
+          "blob_sha": "dc0adbae67d749080155c4e3990ae1e903a5f999",
+          "size": 49
+        },
+        {
+          "id": "template_definition/lich_tower/gallery/castaway_paradise",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/gallery/castaway_paradise.json",
+          "blob_sha": "bc5c5a306bd920c59c906da361dd64e400b56214",
+          "size": 46
+        },
+        {
+          "id": "template_definition/lich_tower/gallery/darkness",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/gallery/darkness.json",
+          "blob_sha": "bc5c5a306bd920c59c906da361dd64e400b56214",
+          "size": 46
+        },
+        {
+          "id": "template_definition/lich_tower/gallery/fence_roof_even",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/gallery/fence_roof_even.json",
+          "blob_sha": "42cade864a57e679010b5ea112419f3267108b44",
+          "size": 51
+        },
+        {
+          "id": "template_definition/lich_tower/gallery/fence_roof_odd",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/gallery/fence_roof_odd.json",
+          "blob_sha": "39618f35475c0c20e19cad8a57cdb2f7f1fa8176",
+          "size": 50
+        },
+        {
+          "id": "template_definition/lich_tower/gallery/lucid_lands",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/gallery/lucid_lands.json",
+          "blob_sha": "bc5c5a306bd920c59c906da361dd64e400b56214",
+          "size": 46
+        },
+        {
+          "id": "template_definition/lich_tower/gallery/music_in_the_mire",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/gallery/music_in_the_mire.json",
+          "blob_sha": "bc5c5a306bd920c59c906da361dd64e400b56214",
+          "size": 46
+        },
+        {
+          "id": "template_definition/lich_tower/gallery/slabs_roof_even",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/gallery/slabs_roof_even.json",
+          "blob_sha": "42cade864a57e679010b5ea112419f3267108b44",
+          "size": 51
+        },
+        {
+          "id": "template_definition/lich_tower/gallery/slabs_roof_odd",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/gallery/slabs_roof_odd.json",
+          "blob_sha": "39618f35475c0c20e19cad8a57cdb2f7f1fa8176",
+          "size": 50
+        },
+        {
+          "id": "template_definition/lich_tower/gallery/stairs_roof_even",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/gallery/stairs_roof_even.json",
+          "blob_sha": "42cade864a57e679010b5ea112419f3267108b44",
+          "size": 51
+        },
+        {
+          "id": "template_definition/lich_tower/gallery/stairs_roof_odd",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/gallery/stairs_roof_odd.json",
+          "blob_sha": "39618f35475c0c20e19cad8a57cdb2f7f1fa8176",
+          "size": 50
+        },
+        {
+          "id": "template_definition/lich_tower/gallery/the_hostile_paradise",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/gallery/the_hostile_paradise.json",
+          "blob_sha": "bc5c5a306bd920c59c906da361dd64e400b56214",
+          "size": 46
+        },
+        {
+          "id": "template_definition/lich_tower/grave",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/grave.json",
+          "blob_sha": "38bb0c28f2704efc8e5f7b83b9a5da8c24fb7c64",
+          "size": 44
+        },
+        {
+          "id": "template_definition/lich_tower/grave_ajar",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/grave_ajar.json",
+          "blob_sha": "735ed11a37395874766262284dda4bcf348de06b",
+          "size": 43
+        },
+        {
+          "id": "template_definition/lich_tower/grave_open",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/grave_open.json",
+          "blob_sha": "48a907c314d9f11b57433e589cd5b09d6dc02500",
+          "size": 43
+        },
+        {
+          "id": "template_definition/lich_tower/no_bridge",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/no_bridge.json",
+          "blob_sha": "949a7d43ea2d5e1bdf9bedeab58c9718bbe2f0c4",
+          "size": 59
+        },
+        {
+          "id": "template_definition/lich_tower/room_bridge_1",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/room_bridge_1.json",
+          "blob_sha": "4dc49adb3d661c21dd4cdc5ed5b496cff49de759",
+          "size": 50
+        },
+        {
+          "id": "template_definition/lich_tower/room_bridge_2",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/room_bridge_2.json",
+          "blob_sha": "4dc49adb3d661c21dd4cdc5ed5b496cff49de759",
+          "size": 50
+        },
+        {
+          "id": "template_definition/lich_tower/room_bridge_3",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/room_bridge_3.json",
+          "blob_sha": "4dc49adb3d661c21dd4cdc5ed5b496cff49de759",
+          "size": 50
+        },
+        {
+          "id": "template_definition/lich_tower/room_bridge_4",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/room_bridge_4.json",
+          "blob_sha": "4dc49adb3d661c21dd4cdc5ed5b496cff49de759",
+          "size": 50
+        },
+        {
+          "id": "template_definition/lich_tower/room_bridge_5",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/room_bridge_5.json",
+          "blob_sha": "4dc49adb3d661c21dd4cdc5ed5b496cff49de759",
+          "size": 50
+        },
+        {
+          "id": "template_definition/lich_tower/wall_bars",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/wall_bars.json",
+          "blob_sha": "396840754cbda4c2b75ebcc22d9e4f1f9a829a32",
+          "size": 51
+        },
+        {
+          "id": "template_definition/lich_tower/wall_cobble",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_definition/lich_tower/wall_cobble.json",
+          "blob_sha": "5ccb8f279b804acc23c1c65106c986f64a279e59",
+          "size": 109
+        }
+      ]
+    },
+    "template_marker_handler_list": {
+      "loading_mode": "DATAPACK_REGISTRY",
+      "registry": "twilight:template_marker_handler_list",
+      "codec": [
+        "twilightforest.world.components.structures.util.TemplateMarkerHandlerList.CODEC"
+      ],
+      "consumers": [
+        "twilightforest.init.custom.TemplateMarkerHandlers",
+        "twilightforest.world.components.structures.markerhandler.TemplateMarkerHandler"
+      ],
+      "purpose": "Composable marker-handler sequences for template data markers.",
+      "record_count": 1,
+      "records": [
+        {
+          "id": "template_marker_handler_list/camp_marker_handlers",
+          "path": "src/generated/resources/data/twilightforest/twilight/template_marker_handler_list/camp_marker_handlers.json",
+          "blob_sha": "522d7a67c9d37f3de7d54399d73a96aa2eccb860",
+          "size": 2344
+        }
+      ]
+    },
+    "tiny_bird_variant": {
+      "loading_mode": "DATAPACK_REGISTRY",
+      "registry": "twilight:tiny_bird_variant",
+      "codec": [
+        "twilightforest.entity.passive.TinyBirdVariant.DIRECT_CODEC",
+        "twilightforest.entity.passive.TinyBirdVariant.CODEC"
+      ],
+      "consumers": [
+        "twilightforest.entity.passive.TinyBird",
+        "twilightforest.client.renderer.entity.TinyBirdRenderer"
+      ],
+      "purpose": "Data-selected bird texture/biome variants consumed by entity state and renderer.",
+      "record_count": 4,
+      "records": [
+        {
+          "id": "tiny_bird_variant/blue",
+          "path": "src/generated/resources/data/twilightforest/twilight/tiny_bird_variant/blue.json",
+          "blob_sha": "50feeacf1bc562ca0665c72d1f937f0ec6ad9d4f",
+          "size": 66
+        },
+        {
+          "id": "tiny_bird_variant/brown",
+          "path": "src/generated/resources/data/twilightforest/twilight/tiny_bird_variant/brown.json",
+          "blob_sha": "b938666a3d1bae56244adc5f91694167326e9818",
+          "size": 67
+        },
+        {
+          "id": "tiny_bird_variant/gold",
+          "path": "src/generated/resources/data/twilightforest/twilight/tiny_bird_variant/gold.json",
+          "blob_sha": "41f701c5be9535f563bd86a7d8626fa54ec82086",
+          "size": 66
+        },
+        {
+          "id": "tiny_bird_variant/red",
+          "path": "src/generated/resources/data/twilightforest/twilight/tiny_bird_variant/red.json",
+          "blob_sha": "5308672a3dca422cf22cdd02e66e0f9b41db705f",
+          "size": 65
+        }
+      ]
+    },
+    "travellers_modifiers": {
+      "loading_mode": "DATAPACK_REGISTRY",
+      "registry": "twilight:travellers_modifiers",
+      "codec": [
+        "twilightforest.item.travellers_gear.modifiers.TravellersModifier.CODEC",
+        "twilightforest.TFRegistries.TRAVELLERS_MODIFIER_TYPE"
+      ],
+      "consumers": [
+        "twilightforest.init.custom.TravellersModifiersManager",
+        "twilightforest.item.travellers_gear.modifiers.TravellersModifier"
+      ],
+      "purpose": "Polymorphic gear abilities/modifiers dispatching through a registry of modifier MapCodecs.",
+      "record_count": 24,
+      "records": [
+        {
+          "id": "travellers_modifiers/agile_ranger",
+          "path": "src/generated/resources/data/twilightforest/twilight/travellers_modifiers/agile_ranger.json",
+          "blob_sha": "8c8946facfbd1ca918d127b189c9aee5efaa8dfc",
+          "size": 260
+        },
+        {
+          "id": "travellers_modifiers/all_night_goggles",
+          "path": "src/generated/resources/data/twilightforest/twilight/travellers_modifiers/all_night_goggles.json",
+          "blob_sha": "380d0e2d0cd9769480e0c1378e1d473ea71d6dfe",
+          "size": 261
+        },
+        {
+          "id": "travellers_modifiers/aquatic_agility",
+          "path": "src/generated/resources/data/twilightforest/twilight/travellers_modifiers/aquatic_agility.json",
+          "blob_sha": "6325b1acfcd2a38e0b66d3307bb046e2cc72a177",
+          "size": 732
+        },
+        {
+          "id": "travellers_modifiers/arrow_magnetism",
+          "path": "src/generated/resources/data/twilightforest/twilight/travellers_modifiers/arrow_magnetism.json",
+          "blob_sha": "3f1949696e5fd46c4b07369a7af1660309593139",
+          "size": 258
+        },
+        {
+          "id": "travellers_modifiers/auto_repair",
+          "path": "src/generated/resources/data/twilightforest/twilight/travellers_modifiers/auto_repair.json",
+          "blob_sha": "65dde530a3cfa87526fbb157515552af731893da",
+          "size": 265
+        },
+        {
+          "id": "travellers_modifiers/double_jump",
+          "path": "src/generated/resources/data/twilightforest/twilight/travellers_modifiers/double_jump.json",
+          "blob_sha": "7093a589f1c85404d8a2881d49863593974ed859",
+          "size": 249
+        },
+        {
+          "id": "travellers_modifiers/efficient_eater",
+          "path": "src/generated/resources/data/twilightforest/twilight/travellers_modifiers/efficient_eater.json",
+          "blob_sha": "040eb9d18287eb3479290a706f059c906e2520c3",
+          "size": 259
+        },
+        {
+          "id": "travellers_modifiers/gradual_glide",
+          "path": "src/generated/resources/data/twilightforest/twilight/travellers_modifiers/gradual_glide.json",
+          "blob_sha": "83555c931c476010a950b93b9c7dd33c88e93852",
+          "size": 275
+        },
+        {
+          "id": "travellers_modifiers/haste",
+          "path": "src/generated/resources/data/twilightforest/twilight/travellers_modifiers/haste.json",
+          "blob_sha": "83145a3648047c80acca439550f464c02c353ebd",
+          "size": 247
+        },
+        {
+          "id": "travellers_modifiers/high_jump",
+          "path": "src/generated/resources/data/twilightforest/twilight/travellers_modifiers/high_jump.json",
+          "blob_sha": "be60c2d075f0d38c238b041fdd665de1c9cd1675",
+          "size": 120
+        },
+        {
+          "id": "travellers_modifiers/item_display",
+          "path": "src/generated/resources/data/twilightforest/twilight/travellers_modifiers/item_display.json",
+          "blob_sha": "c46ad5562ca00890c8204ac34f46077bd6444377",
+          "size": 302
+        },
+        {
+          "id": "travellers_modifiers/perfect_dodge",
+          "path": "src/generated/resources/data/twilightforest/twilight/travellers_modifiers/perfect_dodge.json",
+          "blob_sha": "29feedb669e782e0d686fdd04bb1cb59bfbfbfcb",
+          "size": 267
+        },
+        {
+          "id": "travellers_modifiers/red_thread_vision",
+          "path": "src/generated/resources/data/twilightforest/twilight/travellers_modifiers/red_thread_vision.json",
+          "blob_sha": "0558e73ed39655de8d2433c2484bd301521737ae",
+          "size": 261
+        },
+        {
+          "id": "travellers_modifiers/side_step",
+          "path": "src/generated/resources/data/twilightforest/twilight/travellers_modifiers/side_step.json",
+          "blob_sha": "e64c5579b3c508c6e28962c6bc0de2a95faa77ac",
+          "size": 384
+        },
+        {
+          "id": "travellers_modifiers/slimy_soles",
+          "path": "src/generated/resources/data/twilightforest/twilight/travellers_modifiers/slimy_soles.json",
+          "blob_sha": "69f065315733487e8e1e18ff08dca8e81b1aeb15",
+          "size": 262
+        },
+        {
+          "id": "travellers_modifiers/stealth",
+          "path": "src/generated/resources/data/twilightforest/twilight/travellers_modifiers/stealth.json",
+          "blob_sha": "9e487061de9c0fea8f1db0562da3c688e6f822d6",
+          "size": 252
+        },
+        {
+          "id": "travellers_modifiers/step_up",
+          "path": "src/generated/resources/data/twilightforest/twilight/travellers_modifiers/step_up.json",
+          "blob_sha": "dad859fdc4b689ee785abb3bc35b26ea0b34a5d7",
+          "size": 359
+        },
+        {
+          "id": "travellers_modifiers/straight_ahead",
+          "path": "src/generated/resources/data/twilightforest/twilight/travellers_modifiers/straight_ahead.json",
+          "blob_sha": "0d26704309056fe4617c85a08631ee09318b9954",
+          "size": 267
+        },
+        {
+          "id": "travellers_modifiers/swap_hotbar",
+          "path": "src/generated/resources/data/twilightforest/twilight/travellers_modifiers/swap_hotbar.json",
+          "blob_sha": "663dba2ca36272b2d559991570b7d0ae0d78f5de",
+          "size": 323
+        },
+        {
+          "id": "travellers_modifiers/swap_hotbar_ability",
+          "path": "src/generated/resources/data/twilightforest/twilight/travellers_modifiers/swap_hotbar_ability.json",
+          "blob_sha": "23377050045c0ce071f4cf36ffc87f3e6fc57a91",
+          "size": 120
+        },
+        {
+          "id": "travellers_modifiers/swift_swim",
+          "path": "src/generated/resources/data/twilightforest/twilight/travellers_modifiers/swift_swim.json",
+          "blob_sha": "b7ab177e92c8e8aaf74723ee58648509a7577277",
+          "size": 379
+        },
+        {
+          "id": "travellers_modifiers/unrestrained",
+          "path": "src/generated/resources/data/twilightforest/twilight/travellers_modifiers/unrestrained.json",
+          "blob_sha": "22e9bb8b92da611ad5baf31cb4f2d0201a8abc66",
+          "size": 251
+        },
+        {
+          "id": "travellers_modifiers/water_walk",
+          "path": "src/generated/resources/data/twilightforest/twilight/travellers_modifiers/water_walk.json",
+          "blob_sha": "f521a0b27d029485b75e1465880e009d7f3d12ff",
+          "size": 247
+        },
+        {
+          "id": "travellers_modifiers/zoom",
+          "path": "src/generated/resources/data/twilightforest/twilight/travellers_modifiers/zoom.json",
+          "blob_sha": "756441bb2a9aeac63c7cc217bd4036d0b9de5bbc",
+          "size": 122
+        }
+      ]
+    },
+    "wood_palettes": {
+      "loading_mode": "DATAPACK_REGISTRY",
+      "registry": "twilight:wood_palettes",
+      "codec": [
+        "twilightforest.util.woods.WoodPalette.CODEC",
+        "twilightforest.init.custom.WoodPalettes.CODEC"
+      ],
+      "consumers": [
+        "twilightforest.world.components.processors.WoodPaletteSwizzle",
+        "twilightforest.util.woods.WoodPalette"
+      ],
+      "purpose": "Replaceable wood-family block palettes used by structure processing.",
+      "record_count": 8,
+      "records": [
+        {
+          "id": "wood_palettes/canopy",
+          "path": "src/generated/resources/data/twilightforest/twilight/wood_palettes/canopy.json",
+          "blob_sha": "2474f8c2f5459d4a9ec29396c9f2338fb356a4fa",
+          "size": 361
+        },
+        {
+          "id": "wood_palettes/darkwood",
+          "path": "src/generated/resources/data/twilightforest/twilight/wood_palettes/darkwood.json",
+          "blob_sha": "5105015fbf580cc4563337445a3a98e70a24bf05",
+          "size": 345
+        },
+        {
+          "id": "wood_palettes/mangrove",
+          "path": "src/generated/resources/data/twilightforest/twilight/wood_palettes/mangrove.json",
+          "blob_sha": "a2ca43fc75ef89067d19e22bc89c474fa97f88f7",
+          "size": 377
+        },
+        {
+          "id": "wood_palettes/minewood",
+          "path": "src/generated/resources/data/twilightforest/twilight/wood_palettes/minewood.json",
+          "blob_sha": "5b5b9b379e81b1bc12c5a2424d5667e83410ed9f",
+          "size": 361
+        },
+        {
+          "id": "wood_palettes/sortwood",
+          "path": "src/generated/resources/data/twilightforest/twilight/wood_palettes/sortwood.json",
+          "blob_sha": "3c4bee472c5d68df8b1e8c99bee63a046552ed4e",
+          "size": 369
+        },
+        {
+          "id": "wood_palettes/timewood",
+          "path": "src/generated/resources/data/twilightforest/twilight/wood_palettes/timewood.json",
+          "blob_sha": "396307f77f7e11b50ba803aedf7d659f63d08ff6",
+          "size": 345
+        },
+        {
+          "id": "wood_palettes/transwood",
+          "path": "src/generated/resources/data/twilightforest/twilight/wood_palettes/transwood.json",
+          "blob_sha": "6086fcce7e2a77e3ffeef1021f2ff2c12375f3a9",
+          "size": 425
+        },
+        {
+          "id": "wood_palettes/twilight_oak",
+          "path": "src/generated/resources/data/twilightforest/twilight/wood_palettes/twilight_oak.json",
+          "blob_sha": "9edcec278baaddd17bd0feccd78f808b4c81505a",
+          "size": 409
+        }
+      ]
+    }
+  }
+}

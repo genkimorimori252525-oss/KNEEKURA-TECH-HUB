@@ -1,0 +1,89 @@
+{
+  "schema": "kneekura.rendermesh",
+  "schemaVersion": "1.0.0",
+  "modelId": "test:reimu",
+  "layoutHash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "buffers": [
+    {
+      "id": "mesh",
+      "path": "mesh/mesh.bin",
+      "byteLength": 256,
+      "sha256": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    }
+  ],
+  "attributes": {
+    "position": {
+      "buffer": "mesh"
+    },
+    "normal": {
+      "buffer": "mesh"
+    },
+    "uv0": {
+      "buffer": "mesh"
+    },
+    "color0": {
+      "buffer": "mesh"
+    },
+    "joints": {
+      "buffer": "mesh"
+    },
+    "weights": {
+      "buffer": "mesh"
+    }
+  },
+  "indexAccessor": {
+    "buffer": "mesh"
+  },
+  "bones": [
+    {
+      "slot": 0,
+      "name": "root",
+      "parentSlot": null,
+      "bindMatrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "inverseBindMatrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    }
+  ],
+  "drawGroups": [
+    {
+      "groupId": "body",
+      "indexStart": 0,
+      "indexCount": 6,
+      "materialId": "body",
+      "order": 0
+    }
+  ]
+}

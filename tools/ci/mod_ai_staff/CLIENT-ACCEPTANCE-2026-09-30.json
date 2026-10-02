@@ -1,0 +1,326 @@
+{
+  "client_warning": {
+    "category": "Observer resource pack missing metadata",
+    "live_retest": "NOT_RUN",
+    "occurrences": 2,
+    "packaging_test_result": "5 passed",
+    "repair": "Add pack.mcmeta with Minecraft 1.20.1 pack_format 15",
+    "result": "OBSERVED"
+  },
+  "date": "2026-09-30",
+  "executions": [
+    {
+      "controller_elapsed_seconds": 17.70258097199985,
+      "exit_code": 1,
+      "log_sha256": "fc6a2bcdcbce0a46cdeb7431f1f81cc63117105efaf1429482b6c787b48da60c",
+      "original_outcome": "NOT_RUN",
+      "process_completed": true,
+      "process_elapsed_seconds": 17.30111512700023,
+      "receipt_sha256": "eabe9ce0720ccecac188a960d9d8cafd868ae23d0a6e8c793426af71ad92399a",
+      "registered_timeout_seconds": 900,
+      "request_id": "approved-staff-client-run-v1",
+      "tests_executed": 0,
+      "timed_out": false
+    },
+    {
+      "controller_elapsed_seconds": 540.4520079329995,
+      "exit_code": -9,
+      "log_sha256": "7d7479e77b70a93ee231aca80beccab32d8c3b31e2a3e1013d557cabe4f8eb4d",
+      "original_outcome": "NOT_RUN",
+      "process_completed": false,
+      "process_elapsed_seconds": 540.0825918720002,
+      "receipt_sha256": "d0c46d10f4956ac5c3491c1f835feb79a3820abe094829ac6d5bea3a1e38c495",
+      "registered_timeout_seconds": 540,
+      "request_id": "approved-staff-client-run-v2",
+      "tests_executed": 0,
+      "timed_out": true
+    }
+  ],
+  "limitations": [
+    "Native receipts retain NOT_RUN gameplay/visual/synchronization outcomes; downstream human-reviewed observations are separate derived assertions.",
+    "Observations are non-atomic: server state is captured before the client image; published tick intervals bound each capture.",
+    "First-person review uses 03-use-before; the earlier 01-equip image preceded the visible hand update.",
+    "Third-person frame is occluded by the player face and nearby tree; it cannot validate the held model.",
+    "The first attempt failed during downloadMCMeta before game startup. The retry used the existing desktop proxy and a 540-second bound within the original approval; the original 15-minute permission was not extended.",
+    "Final process timed out with exit -9. It is not successful graceful execution, even though scoped observations succeeded.",
+    "No new EULA file was written for the client attempt; prior approved server EULA acceptance is unchanged.",
+    "The post-run metadata repair has packaging coverage but no warning-free live-client retest.",
+    "No raw evidence or credentials are included; public checkout cannot independently replay the private evidence closure.",
+    "Same-run server state and client images were correlated, but no independent state-propagation/synchronization assertion was executed."
+  ],
+  "native_operations": [
+    {
+      "input_status": "COMPLETED",
+      "observation_intervals": {
+        "after": {
+          "server_tick_end": 2409,
+          "server_tick_start": 2403
+        },
+        "before": {
+          "server_tick_end": 2396,
+          "server_tick_start": 2392
+        }
+      },
+      "observation_references": {
+        "after_artifact_hash": "dc4b19a02eafc7eeb2223e97546cd3761bd76cd1de6db3f40d4cebff0e44790d",
+        "after_screenshot_hash": "f86daf190e8eb9d33ebd24af869f98a201c671fde3a2d0753805769460b989bb",
+        "artifact_hash": "52a5db875465884280eaee9b5772af5e769748fd1f1468c29b047ea919400000",
+        "handshake_hash": "3dce8f5e8fd8a39a1c53a2ca5c04bd615451edc8d941af520754a3815264f80a",
+        "logs_artifact_hash": "d67e92f0bcb2cf30a56f6b0d072bbb798e31f3bc98c15a5244b26d0e4440b6bb",
+        "screenshot_hash": "33ca9582b91541873855aad70439fe25dced73d2012f11720617ca11d7dd4ee1"
+      },
+      "operation_id": "03-use-first",
+      "original_gameplay_outcome": "NOT_RUN",
+      "receipt_sha256": "369793ffe68ee7bcfded162e9f1c0145bc1dd7c5f06819566c08f9b529ba4b52",
+      "release_completed": true,
+      "request_sha256": "2c95856fc9c2cd2189caf8394096123448e783734d643442f85c31be164fc259",
+      "retry_allowed": false
+    },
+    {
+      "input_status": "COMPLETED",
+      "observation_intervals": {
+        "after": {
+          "server_tick_end": 2456,
+          "server_tick_start": 2453
+        },
+        "before": {
+          "server_tick_end": 2445,
+          "server_tick_start": 2439
+        }
+      },
+      "observation_references": {
+        "after_artifact_hash": "330b5cef617af1dc96298e341274c866ce45b8d0cec2fac585d79195fd2deb29",
+        "after_screenshot_hash": "b9a6b62b332e732599d05e3523c4f3ccc514719dcb207efd18eb9503250ad97b",
+        "artifact_hash": "4346350be87d4f879c1d9a0289f71863c8aa0458f1a34c2f93686e9cd098248c",
+        "handshake_hash": "3dce8f5e8fd8a39a1c53a2ca5c04bd615451edc8d941af520754a3815264f80a",
+        "logs_artifact_hash": "d67e92f0bcb2cf30a56f6b0d072bbb798e31f3bc98c15a5244b26d0e4440b6bb",
+        "screenshot_hash": "2e3fe31e38aa4b45ab607e1bdf0f6c9b84e839a8b0934fd09e604b2f3e4ea8ac"
+      },
+      "operation_id": "03-use-repeat",
+      "original_gameplay_outcome": "NOT_RUN",
+      "receipt_sha256": "3b1e193451f2ad3c4b608de98f62c61d9e7565dbca1b668c420e096fa26b7908",
+      "release_completed": true,
+      "request_sha256": "07c83b53c4a159adb8be6ceae3867519fccfd93ef42187d7ca599be793b391a6",
+      "retry_allowed": false
+    }
+  ],
+  "observations": [
+    {
+      "artifact_sha256": "a385ecd7a4d144497d1a50efca09b37576e8a34775bd2dd63c981e5709faf89b",
+      "atomic": false,
+      "cooldown_active": false,
+      "cooldown_fraction": 0.0,
+      "glowing": null,
+      "health": 20.0,
+      "id": "01-equip",
+      "item_damage": 0,
+      "png_sha256": "3ef0ccc587186793b17e9a15af4dc02bc35415bea50c26e552afd6e3ce25b40c",
+      "server_tick_end": 1068,
+      "server_tick_start": 1064,
+      "stack_count": 1
+    },
+    {
+      "artifact_sha256": "09efa332e25c9548b0a71bd65f16b1cde4d9992b3361a754f2d6d62ae0905054",
+      "atomic": false,
+      "cooldown_active": false,
+      "cooldown_fraction": 0.0,
+      "glowing": null,
+      "health": 20.0,
+      "id": "03-use-before",
+      "item_damage": 0,
+      "png_sha256": "c90af9095fb650e1aa7c4a16febbc2506f383c158b1724b3549e94288e1c088a",
+      "server_tick_end": 2378,
+      "server_tick_start": 2375,
+      "stack_count": 1
+    },
+    {
+      "artifact_sha256": "ad53b050d44f4c21e9c84942a899b9a68d6835c0285bf8856b2c86764d8e33cf",
+      "atomic": false,
+      "cooldown_active": true,
+      "cooldown_fraction": 0.9,
+      "glowing": {
+        "amplifier": 0,
+        "duration_ticks": 50
+      },
+      "health": 20.0,
+      "id": "03-use-after",
+      "item_damage": 0,
+      "png_sha256": "2575ddbd5b7e2a46c0629534b89c152a1b8e19f1c99240643341beae68ea8e99",
+      "server_tick_end": 2423,
+      "server_tick_start": 2412,
+      "stack_count": 1
+    },
+    {
+      "artifact_sha256": "230f29072e803e706ad9d82ff47798c2047aa870396fd7f6f5c186f43f10875f",
+      "atomic": false,
+      "cooldown_active": true,
+      "cooldown_fraction": 0.42,
+      "glowing": {
+        "amplifier": 0,
+        "duration_ticks": 2
+      },
+      "health": 20.0,
+      "id": "03-use-repeat-after",
+      "item_damage": 0,
+      "png_sha256": "a944f27b9ea82157495706447ab41be7fe46e4d0bacb24be1aed33aa58a60a72",
+      "server_tick_end": 2464,
+      "server_tick_start": 2460,
+      "stack_count": 1
+    },
+    {
+      "artifact_sha256": "4e06b3ca492b509735a3adf5e52785eecfc31405725800cde98c60377b5a123b",
+      "atomic": false,
+      "cooldown_active": false,
+      "cooldown_fraction": 0.0,
+      "glowing": null,
+      "health": 20.0,
+      "id": "04-inventory",
+      "item_damage": 0,
+      "png_sha256": "740197576eb8dbbbd3c8b81b5634956533113d5dc0e3c97d2113bcc8ccfdb1f0",
+      "server_tick_end": 3682,
+      "server_tick_start": 3679,
+      "stack_count": 1
+    },
+    {
+      "artifact_sha256": "3b25fd2ca2f6b89e9f05953765ddb1af19464c0dc54aa283344872fa99756718",
+      "atomic": false,
+      "cooldown_active": false,
+      "cooldown_fraction": 0.0,
+      "glowing": null,
+      "health": 20.0,
+      "id": "05-third",
+      "item_damage": 0,
+      "png_sha256": "7350e1ef63fcb53c4eef44fa1ed99471498070ad114e9513ab25afa37c8c3a78",
+      "server_tick_end": 6575,
+      "server_tick_start": 6557,
+      "stack_count": 1
+    },
+    {
+      "artifact_sha256": "790dcae4100f3c7d36b5af653341c18cd10da8cad56980509b533e749ba90b62",
+      "atomic": false,
+      "cooldown_active": false,
+      "cooldown_fraction": 0.0,
+      "glowing": null,
+      "health": 20.0,
+      "id": "06-expiry",
+      "item_damage": 0,
+      "png_sha256": "f0e6c6f6cb836d0ef0e5df6e96d5fb63c639ab957ee6063d4f0a911f6bb1a856",
+      "server_tick_end": 6583,
+      "server_tick_start": 6577,
+      "stack_count": 1
+    }
+  ],
+  "overall_result": "PARTIAL_ACCEPTANCE",
+  "provenance": {
+    "adapter_id": "kneekura-forge-observer",
+    "adapter_version": "1.0.0",
+    "binding_sha256": "ec1d1c81eb64243e70965c5c806ad8791ec18e7c78891356a1014b54fa14202d",
+    "build_artifact_hash": "312a7293032ac1dec5c7d3c8ed98cf83feee6e253d7df2033a1c3e77116f5492",
+    "compile_receipt_sha256": "189da32024226c44bc822fa1eb16c8dee84eb49bf3d1358575c785648bc8d4a8",
+    "dirty_hash": "e5be642ecc85ac83e7d9913ca48b9e351fc66f0116338c5eff5cea7a8d4cb79a",
+    "distribution_jar_sha256": "e4cae193551aa4fb869b01d345cfa3558501893557eb3e3c74ebf3c2e1699d93",
+    "export_receipt_sha256": "f427ef739f773d3866f61d720fec5d4a36873c74832bb634cbc4f651905590e8",
+    "handshake_sha256": "3dce8f5e8fd8a39a1c53a2ca5c04bd615451edc8d941af520754a3815264f80a",
+    "index_snapshot_id": "b2a8cae8985db1968cca5fc275d28793ba63b0e4271f9eedbb1c1f75791d26f3",
+    "profile_id": "a8042e3926d4f0ad0343ed730c1b1082e1bde874d67eca7962bfd8fb9ec7d401",
+    "run_contract_sha256": "e3419831e8b2038cfc59bf2b7c82ea5bc601cce732b272b530e4bfb04c28da6e",
+    "run_id": "e9583899-0186-47e2-a1a8-a33244ca143f",
+    "runtime_artifact_kind": "Mojmap compiled-class inventory",
+    "scenario_sha256": "af4be6ebb241b72bfd1530d1cbdd3405d30aa3c463b6943682ab6f4a9fa81820",
+    "session_epoch": "9352a4b3-dfbb-435f-a078-9d48e1b0e5df",
+    "source_revision": "892dfb8c4d10ca25dcb1874adcb22e08df1e6f42"
+  },
+  "publication_scope": "Derived results, versions, generated operation identities and hashes only. Original receipts, parsed observations, logs, images, world data, native target identifiers and credentials remain private. Hashes are identifiers, not public download links.",
+  "pull_request": 74,
+  "record_type": "derived_public_staff_client_acceptance_summary",
+  "results": {
+    "client_only_mutation_instrumentation": "NOT_RUN",
+    "client_server_synchronization": "NOT_RUN",
+    "cooldown_repeat_no_refresh": "PASS_SCOPED_OBSERVATION",
+    "effect_after_first_input": "PASS_SCOPED_OBSERVATION",
+    "eventual_effect_and_cooldown_expiry": "PASS_LATER_SAMPLES",
+    "exact_client_duration_boundaries": "NOT_RUN",
+    "first_person_rendering": "PASS_VISIBLE_MODEL_AND_TEXTURE",
+    "full_gameplay_acceptance": "NOT_ESTABLISHED",
+    "graceful_shutdown": "NOT_ESTABLISHED",
+    "health_stack_and_item_damage": "PASS_SAMPLED_INVARIANTS",
+    "inventory_rendering": "PASS_VISIBLE_MODEL_AND_TEXTURE",
+    "native_right_button": "COMPLETED_AND_RELEASED_TWICE",
+    "performance": "NOT_RUN",
+    "remote_multiplayer": "NOT_RUN",
+    "same_run_binding": "PASS",
+    "third_person_rendering": "INCONCLUSIVE_OCCLUDED",
+    "windows": "NOT_RUN"
+  },
+  "schema_version": 1,
+  "scope": "One bounded Linux X11 cloud-client session, two target-addressed native right-button gestures, integrated-server staff-state observations and static rendering review.",
+  "shutdown": {
+    "active_native_operation_markers": 0,
+    "bounded_timeout_enforced": true,
+    "desktop_process_probe_matches": 0,
+    "process_probe_sha256": "5df269822baffc9d4e37402ee08ebf4ec977799d4290660d08c70877d291a6bd",
+    "window_absent": "CONFIRMED_BY_PARENT_DESKTOP_OBSERVATION"
+  },
+  "verification": {
+    "authentication_basis": "The original capture calls returned AUTHENTICATED_LIVE_OBSERVER through the HMAC-checking bridge. This review verified retained payload hashes and same-run identities; parsed CAS payloads do not retain the HTTP signature/nonce envelope.",
+    "checked_cas_objects": 45,
+    "checked_embedded_pngs": 12,
+    "checked_identity_records": 33,
+    "independent_hmac_reverification": false,
+    "retained_transport_signature_envelope": false,
+    "verified_cas_sha256": [
+      "07c83b53c4a159adb8be6ceae3867519fccfd93ef42187d7ca599be793b391a6",
+      "09efa332e25c9548b0a71bd65f16b1cde4d9992b3361a754f2d6d62ae0905054",
+      "189da32024226c44bc822fa1eb16c8dee84eb49bf3d1358575c785648bc8d4a8",
+      "230f29072e803e706ad9d82ff47798c2047aa870396fd7f6f5c186f43f10875f",
+      "25b41a4b29fc44dbe86744182bb69e82c867aaa5ff3f744f1eff495233f9bc8c",
+      "2c95856fc9c2cd2189caf8394096123448e783734d643442f85c31be164fc259",
+      "2e3fe31e38aa4b45ab607e1bdf0f6c9b84e839a8b0934fd09e604b2f3e4ea8ac",
+      "312a7293032ac1dec5c7d3c8ed98cf83feee6e253d7df2033a1c3e77116f5492",
+      "330b5cef617af1dc96298e341274c866ce45b8d0cec2fac585d79195fd2deb29",
+      "33ca9582b91541873855aad70439fe25dced73d2012f11720617ca11d7dd4ee1",
+      "369793ffe68ee7bcfded162e9f1c0145bc1dd7c5f06819566c08f9b529ba4b52",
+      "3b1e193451f2ad3c4b608de98f62c61d9e7565dbca1b668c420e096fa26b7908",
+      "3b25fd2ca2f6b89e9f05953765ddb1af19464c0dc54aa283344872fa99756718",
+      "3dce8f5e8fd8a39a1c53a2ca5c04bd615451edc8d941af520754a3815264f80a",
+      "4346350be87d4f879c1d9a0289f71863c8aa0458f1a34c2f93686e9cd098248c",
+      "4e06b3ca492b509735a3adf5e52785eecfc31405725800cde98c60377b5a123b",
+      "52a5db875465884280eaee9b5772af5e769748fd1f1468c29b047ea919400000",
+      "5cb0d867bcba53c0345994bd5fa57a4b75f667df2e00db66c2c4e06871aa007f",
+      "65bfc89ebb8387c221622424bebfacd2867e6b0e20f53918d6c26e0be6f7a8e4",
+      "77223e2c85d66770fbe0a4914aadff9014b79877d16a70f48369d5f3ecd10738",
+      "790dcae4100f3c7d36b5af653341c18cd10da8cad56980509b533e749ba90b62",
+      "7d7479e77b70a93ee231aca80beccab32d8c3b31e2a3e1013d557cabe4f8eb4d",
+      "a385ecd7a4d144497d1a50efca09b37576e8a34775bd2dd63c981e5709faf89b",
+      "ad53b050d44f4c21e9c84942a899b9a68d6835c0285bf8856b2c86764d8e33cf",
+      "af4be6ebb241b72bfd1530d1cbdd3405d30aa3c463b6943682ab6f4a9fa81820",
+      "b0ab19a4ae9eb4887d9d3aef43c29129f30141336b5e4f510e78dd52c95f0f14",
+      "b2a8cae8985db1968cca5fc275d28793ba63b0e4271f9eedbb1c1f75791d26f3",
+      "b9a6b62b332e732599d05e3523c4f3ccc514719dcb207efd18eb9503250ad97b",
+      "bb27c19a9c3077367157acc2a0a122a8d2e7006c44a7e4a185a543115c29e116",
+      "c2ca529113ecb8fcb1174c770229c4c54c446604c51057491fc09f574eb25dd9",
+      "c74b97b91a80f16cd93a70b22baf6ce901a4a8765707b11ab28e458f9bc2b07f",
+      "c799d9220e7e31dc7a5110b09070ce5dd92499153744414015407f76d313c483",
+      "cba62fd78113467cc7f781342ea1e14fbd4d0f4cb7d6e3cd333c88c331f5ad55",
+      "d0c46d10f4956ac5c3491c1f835feb79a3820abe094829ac6d5bea3a1e38c495",
+      "d67e92f0bcb2cf30a56f6b0d072bbb798e31f3bc98c15a5244b26d0e4440b6bb",
+      "dc4b19a02eafc7eeb2223e97546cd3761bd76cd1de6db3f40d4cebff0e44790d",
+      "e3419831e8b2038cfc59bf2b7c82ea5bc601cce732b272b530e4bfb04c28da6e",
+      "e4cae193551aa4fb869b01d345cfa3558501893557eb3e3c74ebf3c2e1699d93",
+      "eabe9ce0720ccecac188a960d9d8cafd868ae23d0a6e8c793426af71ad92399a",
+      "ec1d1c81eb64243e70965c5c806ad8791ec18e7c78891356a1014b54fa14202d",
+      "ee5936376d715b580dafeb4bf1d118fcaf33035955c4652c7da1d8893b5ef54c",
+      "f427ef739f773d3866f61d720fec5d4a36873c74832bb634cbc4f651905590e8",
+      "f86daf190e8eb9d33ebd24af869f98a201c671fde3a2d0753805769460b989bb",
+      "fc6a2bcdcbce0a46cdeb7431f1f81cc63117105efaf1429482b6c787b48da60c",
+      "ff49fd3fa18e960416e6ac263c3d3c46dd85aeeca4e7544f8eee980e07c75fd9"
+    ]
+  },
+  "versions": {
+    "gradle_version": "8.8",
+    "java_major": 17,
+    "loader": "forge",
+    "loader_version": "47.4.6",
+    "minecraft": "1.20.1"
+  }
+}

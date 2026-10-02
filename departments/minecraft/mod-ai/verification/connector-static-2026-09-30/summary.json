@@ -1,0 +1,983 @@
+{
+  "schema_version": 1,
+  "kind": "EXECUTED_U06_SPLIT_TRACK_STATIC_ACCEPTANCE_PARTIAL",
+  "date": "2026-09-30",
+  "task": "U06",
+  "execution_status": "STATIC_RETRIEVAL_PASS_ACCEPTANCE_PARTIAL",
+  "compatibility_verdict": "UNKNOWN",
+  "research_queue": [
+    "twilight-forest",
+    "sinytra-connector"
+  ],
+  "queue_precondition": "Twilight Forest U01-U05 static pass completed before this capture; no earlier runtime outcome is upgraded",
+  "fixture": {
+    "question": "Can the pinned Fabric Clumps XP-orb merge and player-pickup implementation be evaluated for Forge 1.20.1 through Connector ANCHOR without assuming transformed or runtime success?",
+    "selection": "Bounded implementation-detail choice: 21,987-byte released Fabric JAR, 16 classes, one gameplay target, two Mixin classes and a small directly used Fabric event API surface; not a claim of globally smallest MOD",
+    "feature_scope": [
+      "ExperienceOrb merge and playerTouch injection paths",
+      "event API and ServiceLoader prerequisites",
+      "refmap and inherited method mapping boundaries"
+    ],
+    "native_alternative": {
+      "url": "https://modrinth.com/mod/clumps/version/nAHGB5ls",
+      "version": "Forge 1.20.1 12.0.0.4",
+      "meaning": "An official native Forge release exists. This fixture exercises the Fabric translation question; it does not recommend Connector over that native option."
+    }
+  },
+  "target": {
+    "track": "ANCHOR",
+    "minecraft": "1.20.1",
+    "forge": "47.4.6",
+    "java_major": 17,
+    "runtime_profile_status": "UNRESOLVED_NOT_LAUNCHED"
+  },
+  "source_pins": [
+    {
+      "project": "Connector",
+      "repository_url": "https://github.com/Sinytra/Connector",
+      "commit": "7f68ac02291fde986119a3f5cab85436bed5c350",
+      "association": "Required ANCHOR source; gradle.properties says beta.50",
+      "compiled_class_identity": "NOT_ESTABLISHED",
+      "track": "ANCHOR"
+    },
+    {
+      "project": "Clumps",
+      "repository_url": "https://github.com/jaredlll08/Clumps",
+      "commit": "d249b4d25478e6044b0951f01b729c17b5860456",
+      "association": "Exact commit linked by official 12.0.0.4 release changelog",
+      "compiled_class_identity": "NOT_ESTABLISHED",
+      "track": "COMPARATIVE"
+    },
+    {
+      "project": "Forgified Fabric API",
+      "repository_url": "https://github.com/Sinytra/ForgifiedFabricAPI",
+      "commit": "84523ee99986a6b8b28ca2eff404b7702e7d5938",
+      "association": "Official tag 0.92.6+1.11.15+1.20.1",
+      "compiled_class_identity": "NOT_ESTABLISHED",
+      "track": "COMPARATIVE"
+    }
+  ],
+  "released_artifacts": [
+    {
+      "origin": "clumps",
+      "modrinth_project_id": "Wnxd13zP",
+      "version_id": "hefSwtn6",
+      "version": "12.0.0.4",
+      "filename": "Clumps-fabric-1.20.1-12.0.0.4.jar",
+      "url": "https://cdn.modrinth.com/data/Wnxd13zP/versions/hefSwtn6/Clumps-fabric-1.20.1-12.0.0.4.jar",
+      "version_url": "https://modrinth.com/mod/Wnxd13zP/version/hefSwtn6",
+      "sha256": "2eb70931dee86cef68c8538b8284c684225964632cd10e636ea938af6f66e6f7",
+      "published_hashes": {
+        "sha1": "a20cfe0b0ee0b897887f81c4919af9d220ba22e7",
+        "sha512": "2235d29b1239d5526035bffd547d35fe33b9e737d3e75cd341f6689d9cd834d0a7dc03ed80748772162cd9595ba08e7a0ab51221bc145a8fd979d596c3967544"
+      },
+      "published_hashes_verified": true,
+      "bytes": 21987,
+      "game_versions": [
+        "1.20.1"
+      ],
+      "loaders": [
+        "fabric"
+      ],
+      "dependencies": [
+        {
+          "version_id": null,
+          "project_id": "P7dR8mSH",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ],
+      "track": "COMPARATIVE"
+    },
+    {
+      "origin": "connector",
+      "modrinth_project_id": "u58R1TMW",
+      "version_id": "1MQDrKN7",
+      "version": "1.0.0-beta.49+1.20.1",
+      "filename": "Connector-1.0.0-beta.49+1.20.1.jar",
+      "url": "https://cdn.modrinth.com/data/u58R1TMW/versions/1MQDrKN7/Connector-1.0.0-beta.49%2B1.20.1.jar",
+      "version_url": "https://modrinth.com/mod/u58R1TMW/version/1MQDrKN7",
+      "sha256": "e39acd37e162eb48cdfc6ae64776c13507a5ec3d4dd76ae4f39b5b79ca24d431",
+      "published_hashes": {
+        "sha512": "c6f029b95bbb868a37eb3fe1dc71d696e7016584b10cadec36357b03c710f0f715d57c0bba5c467c0679bc32e6e5d8e366cf4edbb7d7b3edcf47f7794191e626",
+        "sha1": "2b167110353c0622939a674b80ae35b1ed6b5625"
+      },
+      "published_hashes_verified": true,
+      "bytes": 5046109,
+      "game_versions": [
+        "1.20.1"
+      ],
+      "loaders": [
+        "forge"
+      ],
+      "dependencies": [
+        {
+          "version_id": null,
+          "project_id": "Aqlf1Shp",
+          "file_name": null,
+          "dependency_type": "required"
+        },
+        {
+          "version_id": null,
+          "project_id": "FYpiwiBR",
+          "file_name": null,
+          "dependency_type": "optional"
+        }
+      ],
+      "track": "COMPARATIVE"
+    },
+    {
+      "origin": "ffapi",
+      "modrinth_project_id": "Aqlf1Shp",
+      "version_id": "g0MxcWXy",
+      "version": "0.92.6+1.11.15+1.20.1",
+      "filename": "fabric-api-0.92.6+1.11.15+1.20.1.jar",
+      "url": "https://cdn.modrinth.com/data/Aqlf1Shp/versions/g0MxcWXy/fabric-api-0.92.6%2B1.11.15%2B1.20.1.jar",
+      "version_url": "https://modrinth.com/mod/Aqlf1Shp/version/g0MxcWXy",
+      "sha256": "3dd3f93c31122d928297220601f521e6a8a20356bafc7819bf4ddce4c2bb085d",
+      "published_hashes": {
+        "sha512": "da1e59fa754edb24d8a3b6023ef648d6431a8297a9e873d18bfe866aca9384f491af1b438c2c4b75dbf9bd4b9a11daf717a8d1469e9efaed145e5c53f9cbcf37",
+        "sha1": "a37689ff8da8a32f82304ea4a1011873bb4c7eca"
+      },
+      "published_hashes_verified": true,
+      "bytes": 3065833,
+      "game_versions": [
+        "1.20.1"
+      ],
+      "loaders": [
+        "forge"
+      ],
+      "dependencies": [],
+      "track": "COMPARATIVE"
+    }
+  ],
+  "anchor_source_binary_boundary": {
+    "required_build_version": "1.0.0-beta.50",
+    "required_binary_sha256": null,
+    "reason": "No beta.50 1.20.1 release in captured official GitHub release or Modrinth version listings. Do not relabel the acquired beta.49 JAR as this anchor.",
+    "released_binary_tag_commit": "f2e42536197749baa090759004a5d12e892a308a",
+    "comparison_is_identity": false,
+    "official_listings": [
+      "https://api.github.com/repos/Sinytra/Connector/releases?per_page=100",
+      "https://api.modrinth.com/v2/project/connector/version?game_versions=%5B%221.20.1%22%5D"
+    ]
+  },
+  "dependencies": {
+    "candidate_manifest": {
+      "fabricloader": ">=0.14",
+      "minecraft": "1.20.1"
+    },
+    "candidate_release_declares": {
+      "fabric_api": "required, Modrinth project P7dR8mSH; omitted from candidate fabric.mod.json"
+    },
+    "connector_release_declares": {
+      "ffapi": "required, Aqlf1Shp",
+      "connector_extras": "optional, FYpiwiBR"
+    },
+    "anchor_build_declares": {
+      "forge": "47.4.6",
+      "forgified_loader": "2.7.15+0.19.3+1.20.1",
+      "fabric_loader_virtual": "0.19.3",
+      "ffapi": "0.92.0+1.11.5+1.20.1",
+      "mixinextras": "0.3.2",
+      "adapter_definition": "1.11.67-1.20.1",
+      "adapter_runtime": "1.0.0+1.20.1",
+      "connector_extras": "development runtimeOnly curse.maven:connector-extras-913445:5027683"
+    },
+    "ffapi_distribution": {
+      "forge": "[47.1.3,)",
+      "minecraft": "[1.20.1,1.21)",
+      "provides": [
+        "fabric",
+        "fabric-api"
+      ],
+      "base_module": "0.4.32+ef105b4977"
+    },
+    "ffapi_version_choice": "Released 0.92.6+1.11.15 is separately pinned for the released-stack comparison; it does not replace or prove the beta.50 build-declared 0.92.0+1.11.5 resolution",
+    "selected_nested_bindings": [
+      {
+        "entry": "META-INF/jarjar/Connector-1.0.0-beta.49+1.20.1-fabricloader.jar",
+        "parent_sha256": "a92ae4a7c514632d47644f5f8e8b45a51cac658765d0ebbaa0ccbdd12aeea5e0",
+        "sha256": "186079d9fdd2a5e94d69d86ac3dfbc2db3fd1872724f08f42f1e1ba491185e36",
+        "bytes": 304
+      },
+      {
+        "entry": "META-INF/jarjar/mixinextras-forge-0.3.2.jar",
+        "parent_sha256": "a92ae4a7c514632d47644f5f8e8b45a51cac658765d0ebbaa0ccbdd12aeea5e0",
+        "sha256": "cb078c47017c2caed5f9a3a6dbcbaa7879d4814430c6581ad8acbe82ad174998",
+        "bytes": 154383
+      },
+      {
+        "entry": "META-INF/jarjar/runtime-1.0.0+1.20.1.jar",
+        "parent_sha256": "a92ae4a7c514632d47644f5f8e8b45a51cac658765d0ebbaa0ccbdd12aeea5e0",
+        "sha256": "73fc95e9648c8eb0ef34df01cd9c6bfc0e6b7ec3a8164254e3a3d9c46b0c5655",
+        "bytes": 6550
+      },
+      {
+        "entry": "META-INF/jarjar/mixinextras-forge-0.4.1.jar",
+        "parent_sha256": "3dd3f93c31122d928297220601f521e6a8a20356bafc7819bf4ddce4c2bb085d",
+        "sha256": "9d48cb0a40299d283248fdad8b02c6d175c45b27f9bec48ef63d7ee8a4ee3066",
+        "bytes": 183573
+      },
+      {
+        "entry": "META-INF/jarjar/fabric-loader-2.6.0+0.15.0+1.20.1-full.jar",
+        "parent_sha256": "3dd3f93c31122d928297220601f521e6a8a20356bafc7819bf4ddce4c2bb085d",
+        "sha256": "b3fe630604fbf72022ceff74d8420c1bd39f51b6cec760cb00185ab56fd98df7",
+        "bytes": 1280511
+      },
+      {
+        "entry": "META-INF/jarjar/fabric-api-base-0.4.32+ef105b4977.jar",
+        "parent_sha256": "3dd3f93c31122d928297220601f521e6a8a20356bafc7819bf4ddce4c2bb085d",
+        "sha256": "1118cde683b469fae3d1bf20d3c1df9135e1b0d81ba5748b26ad9408cdbd961a",
+        "bytes": 31756
+      }
+    ],
+    "all_nested_inventory_sha256": "f63f66a40345f30b4a084c9a38fda1177eb1891c1832d553749228b43f041aa2",
+    "nested_archive_count": 53,
+    "runtime_selection": "NOT_EXECUTED. Connector dummy Fabric Loader and FFAPI nested real loader, plus MixinExtras 0.3.2/0.4.1 candidates, require actual host dependency selection; neither compatibility nor a conflict is inferred.",
+    "launchpad": "No requirement found in captured ANCHOR metadata/build declarations; FRONTIER inputs were not imported.",
+    "track_boundary": "anchor_build_declares are ANCHOR source declarations only. Every released/nested artifact and observed provider class in this report belongs exclusively to COMPARATIVE."
+  },
+  "mapping": {
+    "connector_packaged_mapping_sha256": "41925579b3fcc4c66e130afc1f1f352297d416c77c1d7e022c796b11f661e1e5",
+    "packaged_by": "Connector beta.49, not proven beta.50 mapping output",
+    "forge_mojmap_srg_mapping_sha256": "41c23f61816a267de2803fe68d4a9c10c486e8a0185493c74c368169c23c5b2b",
+    "provider_namespaces": {
+      "raw_header": [
+        "official",
+        "srg",
+        "intermediary",
+        "named"
+      ],
+      "provider_meaning": {
+        "official": "obfuscated Minecraft names",
+        "named": "Yarn names"
+      },
+      "queries": [
+        "intermediary -> srg",
+        "srg -> mojmap"
+      ],
+      "parchment": "source annotations only; not a runtime namespace"
+    },
+    "targets": [
+      {
+        "selector": "addAdditionalSaveData",
+        "intermediary_target": "Lnet/minecraft/class_1303;method_5652(Lnet/minecraft/class_2487;)V",
+        "direct_status": "NOT_FOUND",
+        "explicit_superclass_lookup": true,
+        "srg": {
+          "descriptor": "(Lnet/minecraft/nbt/CompoundTag;)V",
+          "kind": "method",
+          "line": 16901,
+          "name": "m_7380_",
+          "owner": "net/minecraft/world/entity/Entity"
+        },
+        "mojmap": {
+          "descriptor": "(Lnet/minecraft/nbt/CompoundTag;)V",
+          "kind": "method",
+          "line": 108327,
+          "name": "addAdditionalSaveData",
+          "owner": "net/minecraft/world/entity/Entity"
+        },
+        "proof": "mapping_domain_only_not_transformed_or_loaded"
+      },
+      {
+        "selector": "canMerge(Lnet/minecraft/world/entity/ExperienceOrb;)Z",
+        "intermediary_target": "Lnet/minecraft/class_1303;method_31494(Lnet/minecraft/class_1303;)Z",
+        "direct_status": "OK",
+        "explicit_superclass_lookup": false,
+        "srg": {
+          "descriptor": "(Lnet/minecraft/world/entity/ExperienceOrb;)Z",
+          "kind": "method",
+          "line": 17696,
+          "name": "m_147086_",
+          "owner": "net/minecraft/world/entity/ExperienceOrb"
+        },
+        "mojmap": {
+          "descriptor": "(Lnet/minecraft/world/entity/ExperienceOrb;)Z",
+          "kind": "method",
+          "line": 109424,
+          "name": "canMerge",
+          "owner": "net/minecraft/world/entity/ExperienceOrb"
+        },
+        "proof": "mapping_domain_only_not_transformed_or_loaded"
+      },
+      {
+        "selector": "canMerge(Lnet/minecraft/world/entity/ExperienceOrb;II)Z",
+        "intermediary_target": "Lnet/minecraft/class_1303;method_31495(Lnet/minecraft/class_1303;II)Z",
+        "direct_status": "OK",
+        "explicit_superclass_lookup": false,
+        "srg": {
+          "descriptor": "(Lnet/minecraft/world/entity/ExperienceOrb;II)Z",
+          "kind": "method",
+          "line": 17694,
+          "name": "m_147088_",
+          "owner": "net/minecraft/world/entity/ExperienceOrb"
+        },
+        "mojmap": {
+          "descriptor": "(Lnet/minecraft/world/entity/ExperienceOrb;II)Z",
+          "kind": "method",
+          "line": 109426,
+          "name": "canMerge",
+          "owner": "net/minecraft/world/entity/ExperienceOrb"
+        },
+        "proof": "mapping_domain_only_not_transformed_or_loaded"
+      },
+      {
+        "selector": "merge(Lnet/minecraft/world/entity/ExperienceOrb;)V",
+        "intermediary_target": "Lnet/minecraft/class_1303;method_31497(Lnet/minecraft/class_1303;)V",
+        "direct_status": "OK",
+        "explicit_superclass_lookup": false,
+        "srg": {
+          "descriptor": "(Lnet/minecraft/world/entity/ExperienceOrb;)V",
+          "kind": "method",
+          "line": 17704,
+          "name": "m_147100_",
+          "owner": "net/minecraft/world/entity/ExperienceOrb"
+        },
+        "mojmap": {
+          "descriptor": "(Lnet/minecraft/world/entity/ExperienceOrb;)V",
+          "kind": "method",
+          "line": 109430,
+          "name": "merge",
+          "owner": "net/minecraft/world/entity/ExperienceOrb"
+        },
+        "proof": "mapping_domain_only_not_transformed_or_loaded"
+      },
+      {
+        "selector": "net/minecraft/world/entity/ExperienceOrb.discard()V",
+        "intermediary_target": "Lnet/minecraft/class_1303;method_31472()V",
+        "direct_status": "NOT_FOUND",
+        "explicit_superclass_lookup": true,
+        "srg": {
+          "descriptor": "()V",
+          "kind": "method",
+          "line": 16865,
+          "name": "m_146870_",
+          "owner": "net/minecraft/world/entity/Entity"
+        },
+        "mojmap": {
+          "descriptor": "()V",
+          "kind": "method",
+          "line": 108028,
+          "name": "discard",
+          "owner": "net/minecraft/world/entity/Entity"
+        },
+        "proof": "mapping_domain_only_not_transformed_or_loaded"
+      },
+      {
+        "selector": "playerTouch(Lnet/minecraft/world/entity/player/Player;)V",
+        "intermediary_target": "Lnet/minecraft/class_1303;method_5694(Lnet/minecraft/class_1657;)V",
+        "direct_status": "NOT_FOUND",
+        "explicit_superclass_lookup": true,
+        "srg": {
+          "descriptor": "(Lnet/minecraft/world/entity/player/Player;)V",
+          "kind": "method",
+          "line": 16933,
+          "name": "m_6123_",
+          "owner": "net/minecraft/world/entity/Entity"
+        },
+        "mojmap": {
+          "descriptor": "(Lnet/minecraft/world/entity/player/Player;)V",
+          "kind": "method",
+          "line": 108265,
+          "name": "playerTouch",
+          "owner": "net/minecraft/world/entity/Entity"
+        },
+        "proof": "mapping_domain_only_not_transformed_or_loaded"
+      },
+      {
+        "selector": "readAdditionalSaveData",
+        "intermediary_target": "Lnet/minecraft/class_1303;method_5749(Lnet/minecraft/class_2487;)V",
+        "direct_status": "NOT_FOUND",
+        "explicit_superclass_lookup": true,
+        "srg": {
+          "descriptor": "(Lnet/minecraft/nbt/CompoundTag;)V",
+          "kind": "method",
+          "line": 16793,
+          "name": "m_7378_",
+          "owner": "net/minecraft/world/entity/Entity"
+        },
+        "mojmap": {
+          "descriptor": "(Lnet/minecraft/nbt/CompoundTag;)V",
+          "kind": "method",
+          "line": 108325,
+          "name": "readAdditionalSaveData",
+          "owner": "net/minecraft/world/entity/Entity"
+        },
+        "proof": "mapping_domain_only_not_transformed_or_loaded"
+      },
+      {
+        "selector": "repairPlayerItems",
+        "intermediary_target": "Lnet/minecraft/class_1303;method_35051(Lnet/minecraft/class_1657;I)I",
+        "direct_status": "OK",
+        "explicit_superclass_lookup": false,
+        "srg": {
+          "descriptor": "(Lnet/minecraft/world/entity/player/Player;I)I",
+          "kind": "method",
+          "line": 17697,
+          "name": "m_147092_",
+          "owner": "net/minecraft/world/entity/ExperienceOrb"
+        },
+        "mojmap": {
+          "descriptor": "(Lnet/minecraft/world/entity/player/Player;I)I",
+          "kind": "method",
+          "line": 109443,
+          "name": "repairPlayerItems",
+          "owner": "net/minecraft/world/entity/ExperienceOrb"
+        },
+        "proof": "mapping_domain_only_not_transformed_or_loaded"
+      },
+      {
+        "selector": "tryMergeToExisting(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/phys/Vec3;I)Z",
+        "intermediary_target": "Lnet/minecraft/class_1303;method_31496(Lnet/minecraft/class_3218;Lnet/minecraft/class_243;I)Z",
+        "direct_status": "OK",
+        "explicit_superclass_lookup": false,
+        "srg": {
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/phys/Vec3;I)Z",
+          "kind": "method",
+          "line": 17703,
+          "name": "m_147096_",
+          "owner": "net/minecraft/world/entity/ExperienceOrb"
+        },
+        "mojmap": {
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/phys/Vec3;I)Z",
+          "kind": "method",
+          "line": 109420,
+          "name": "tryMergeToExisting",
+          "owner": "net/minecraft/world/entity/ExperienceOrb"
+        },
+        "proof": "mapping_domain_only_not_transformed_or_loaded"
+      }
+    ],
+    "limit": "Four direct exact-owner lookups were NOT_FOUND because inherited names are supplied at Entity. Explicit superclass queries resolved those declarations; the adapter did not automatically remap inheritance and this is not evidence the runtime refmap resolved.",
+    "track": "COMPARATIVE",
+    "profile_id": "1b6f1c1154b31fd61c2192c1721104b000321ebbb96205a40cea42fd4a32a519",
+    "index_snapshot_id": "a2cb3581f47cea5c59f1fdecc38cda005d00351c516764e2af5db617346dcb20"
+  },
+  "pipeline": [
+    {
+      "stage": "discovery_metadata_nested_dependencies",
+      "status": "SOURCE_TRACED_NOT_EXECUTED",
+      "finding": "Fabric metadata detection, recursive nested discovery, duplicate handling, dependency resolution and side filtering precede JAR transformation. Alias dependencies may be widened; Fabric Loader dependency constraints are removed by this anchor. A declared minimum alone is not a compatibility proof.",
+      "locators": [
+        {
+          "origin": "connector",
+          "commit": "7f68ac02291fde986119a3f5cab85436bed5c350",
+          "path": "src/main/java/org/sinytra/connector/locator/ConnectorLocator.java",
+          "git_blob_sha1": "3ac11e7e193b559b0eed52527ac019c72a92a312",
+          "sha256": "46d225142d645e92f3aed1be5e41b8e9d77395716df9e5d1ad19b6f5adfe5fa3",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/ConnectorLocator.java#L92-L158",
+          "lines": [
+            92,
+            158
+          ],
+          "track": "ANCHOR"
+        },
+        {
+          "origin": "connector",
+          "commit": "7f68ac02291fde986119a3f5cab85436bed5c350",
+          "path": "src/main/java/org/sinytra/connector/locator/DependencyResolver.java",
+          "git_blob_sha1": "49d9c86807abe2a6dd7050f701c046e1d2785cef",
+          "sha256": "bc5485cbace6846a9622841458ab911fcc1cda4f490a6cc962b6b9a3bc086f7f",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/DependencyResolver.java#L52-L100",
+          "lines": [
+            52,
+            100
+          ],
+          "track": "ANCHOR"
+        }
+      ],
+      "scope": "Cross-profile comparison: each source locator has its own track; no mixed-track index is used"
+    },
+    {
+      "stage": "remap_original_intermediary_to_host",
+      "status": "SOURCE_TRACED_AND_PACKAGED_MAPPING_LOOKUP_ONLY",
+      "finding": "Anchor JarTransformer declares intermediary as input and srg as host-obfuscated namespace. JarTransformInstance uses current runtime mappings, refmaps and class providers. Original bytecode and refmap are captured; no remapped Clumps JAR was produced.",
+      "locators": [
+        {
+          "origin": "connector",
+          "commit": "7f68ac02291fde986119a3f5cab85436bed5c350",
+          "path": "src/main/java/org/sinytra/connector/transformer/jar/JarTransformer.java",
+          "git_blob_sha1": "303520fc3254e0101ce8732f315fcce202437a35",
+          "sha256": "0dffcf492c91f7e59f921e4a95c46be5d2ab5febf9421dacc4acefc8f9b923b8",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/jar/JarTransformer.java#L64-L123",
+          "lines": [
+            64,
+            123
+          ],
+          "track": "ANCHOR"
+        },
+        {
+          "origin": "connector",
+          "commit": "7f68ac02291fde986119a3f5cab85436bed5c350",
+          "path": "src/main/java/org/sinytra/connector/transformer/jar/JarTransformInstance.java",
+          "git_blob_sha1": "b68b252a16c31f2c08f2b9385daa54465710946b",
+          "sha256": "07eda05c417975aad45750beda0f1dbd41d08903968865c7734e6f00a74f4e4b",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/jar/JarTransformInstance.java#L72-L165",
+          "lines": [
+            72,
+            165
+          ],
+          "track": "ANCHOR"
+        }
+      ],
+      "scope": "Cross-profile comparison: each source locator has its own track; no mixed-track index is used"
+    },
+    {
+      "stage": "bytecode_mixin_at_aw",
+      "status": "DECLARATIONS_ONLY_NOT_TRANSFORMED",
+      "finding": "Pipeline includes signature stripping, field/accessor/reflection repair, renaming, analysis, Mixin patches, refmap repair and metadata generation; AW conversion is conditional on absence of AT. Candidate declares two Mixin classes, nine injector declarations and a refmap; its archive has no AW, AT or nested JAR.",
+      "locators": [
+        {
+          "origin": "connector",
+          "commit": "7f68ac02291fde986119a3f5cab85436bed5c350",
+          "path": "src/main/java/org/sinytra/connector/transformer/jar/JarTransformInstance.java",
+          "git_blob_sha1": "b68b252a16c31f2c08f2b9385daa54465710946b",
+          "sha256": "07eda05c417975aad45750beda0f1dbd41d08903968865c7734e6f00a74f4e4b",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/jar/JarTransformInstance.java#L126-L184",
+          "lines": [
+            126,
+            184
+          ],
+          "track": "ANCHOR"
+        },
+        {
+          "origin": "connector",
+          "commit": "7f68ac02291fde986119a3f5cab85436bed5c350",
+          "path": "src/main/java/org/sinytra/connector/transformer/AccessWidenerTransformer.java",
+          "git_blob_sha1": "c27e1895a464c526bdf1d62a7653fb5c5062f7ac",
+          "sha256": "1e0f4353f7be8cdd2317bfde1665c0d0ec585c545f4cfb6e04d0ff18eb8e0043",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/AccessWidenerTransformer.java#L25-L47",
+          "lines": [
+            25,
+            47
+          ],
+          "track": "ANCHOR"
+        },
+        {
+          "origin": "clumps",
+          "commit": "d249b4d25478e6044b0951f01b729c17b5860456",
+          "path": "common/src/main/java/com/blamejared/clumps/mixin/MixinExperienceOrb.java",
+          "git_blob_sha1": "1dc186b60f35aefdb42f0817c03cc03be177ecec",
+          "sha256": "89e801f42cf6e43ca831d509c358f364a751af6a89d85f47a8a1ac24820a49ef",
+          "url": "https://github.com/jaredlll08/Clumps/blob/d249b4d25478e6044b0951f01b729c17b5860456/common/src/main/java/com/blamejared/clumps/mixin/MixinExperienceOrb.java#L75-L207",
+          "lines": [
+            75,
+            207
+          ],
+          "track": "COMPARATIVE"
+        }
+      ],
+      "scope": "Cross-profile comparison: each source locator has its own track; no mixed-track index is used"
+    },
+    {
+      "stage": "entrypoint_and_service_loading",
+      "status": "SOURCE_AND_ORIGINAL_BYTECODE_TRACED_NOT_LOADED",
+      "finding": "Clumps declares a main entrypoint with an empty initializer; its platform/event providers are selected through Java ServiceLoader. Connector invokes main plus client/server entrypoints at its load phase. Provider selection, alias activation and side are not observed.",
+      "locators": [
+        {
+          "origin": "clumps",
+          "commit": "d249b4d25478e6044b0951f01b729c17b5860456",
+          "path": "fabric/src/main/java/com/blamejared/clumps/Clumps.java",
+          "git_blob_sha1": "d057d792ff33d15cb9be8ee7893bc1878a010abe",
+          "sha256": "efc572993e40070dd384d55ceb91d5fb98ff788ccf0dd1df8cbfe31a24f072ca",
+          "url": "https://github.com/jaredlll08/Clumps/blob/d249b4d25478e6044b0951f01b729c17b5860456/fabric/src/main/java/com/blamejared/clumps/Clumps.java#L1-L13",
+          "lines": [
+            1,
+            13
+          ],
+          "track": "COMPARATIVE"
+        },
+        {
+          "origin": "clumps",
+          "commit": "d249b4d25478e6044b0951f01b729c17b5860456",
+          "path": "common/src/main/java/com/blamejared/clumps/platform/Services.java",
+          "git_blob_sha1": "7e052b1257001ad693e0dcbcbb69760b237a8493",
+          "sha256": "286a615e3a3b3f889349b401754fb57485488df1a9ae2c1904acd87ad93f8f03",
+          "url": "https://github.com/jaredlll08/Clumps/blob/d249b4d25478e6044b0951f01b729c17b5860456/common/src/main/java/com/blamejared/clumps/platform/Services.java#L7-L24",
+          "lines": [
+            7,
+            24
+          ],
+          "track": "COMPARATIVE"
+        },
+        {
+          "origin": "connector",
+          "commit": "7f68ac02291fde986119a3f5cab85436bed5c350",
+          "path": "src/mod/java/org/sinytra/connector/mod/ConnectorLoader.java",
+          "git_blob_sha1": "2f3dc5e6f7c5e224db30dbc785759eee0f259b54",
+          "sha256": "397f42132d6b176907dcd5494d89ae57d2d9d5774584d33b0384727655a280a5",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/ConnectorLoader.java#L27-L60",
+          "lines": [
+            27,
+            60
+          ],
+          "track": "ANCHOR"
+        }
+      ],
+      "scope": "Cross-profile comparison: each source locator has its own track; no mixed-track index is used"
+    },
+    {
+      "stage": "fabric_api_bridge",
+      "status": "API_REFERENCE_AND_PROVIDER_CLASS_REACHED",
+      "finding": "ClumpsEvents calls Fabric EventFactory.createArrayBacked; FabricEventHandler invokes events when the fabric mod ID is present. Released FFAPI declares aliases fabric and fabric-api and packages fabric-api-base with the referenced Event/EventFactory classes. The FFAPI tag source uses Yarn names; distributed classes and exact Forge mappings remain separate.",
+      "locators": [
+        {
+          "origin": "clumps",
+          "commit": "d249b4d25478e6044b0951f01b729c17b5860456",
+          "path": "fabric/src/main/java/com/blamejared/clumps/api/events/ClumpsEvents.java",
+          "git_blob_sha1": "6cae1041508222ac6c1fdc921496309a1ab65855",
+          "sha256": "99f57d16eda2e1c53deaf1496a92470ddf8002e49ceee9f6d86c676cb9125e64",
+          "url": "https://github.com/jaredlll08/Clumps/blob/d249b4d25478e6044b0951f01b729c17b5860456/fabric/src/main/java/com/blamejared/clumps/api/events/ClumpsEvents.java#L3-L27",
+          "lines": [
+            3,
+            27
+          ],
+          "track": "COMPARATIVE"
+        },
+        {
+          "origin": "clumps",
+          "commit": "d249b4d25478e6044b0951f01b729c17b5860456",
+          "path": "fabric/src/main/java/com/blamejared/clumps/platform/FabricEventHandler.java",
+          "git_blob_sha1": "67dbec1d1416beac5832b62e5124ac46288c17a1",
+          "sha256": "a20a1a646f8f6d98886bab53ecffe9e12184ffaaa2422a836e47d1400eec64af",
+          "url": "https://github.com/jaredlll08/Clumps/blob/d249b4d25478e6044b0951f01b729c17b5860456/fabric/src/main/java/com/blamejared/clumps/platform/FabricEventHandler.java#L16-L38",
+          "lines": [
+            16,
+            38
+          ],
+          "track": "COMPARATIVE"
+        },
+        {
+          "origin": "ffapi",
+          "commit": "84523ee99986a6b8b28ca2eff404b7702e7d5938",
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/api/event/EventFactory.java",
+          "git_blob_sha1": "76b515ef9f5ca61c3f0b682dbc6343a7271dc108",
+          "sha256": "bd9ae661beb0ff5f4b8ee285ae353d3776e47bafa835b88f3d16aead1923a989",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/84523ee99986a6b8b28ca2eff404b7702e7d5938/fabric-api-base/src/main/java/net/fabricmc/fabric/api/event/EventFactory.java#L28-L70",
+          "lines": [
+            28,
+            70
+          ],
+          "track": "COMPARATIVE"
+        }
+      ],
+      "scope": "Cross-profile comparison: each source locator has its own track; no mixed-track index is used"
+    },
+    {
+      "stage": "host_classloading_and_cache",
+      "status": "SOURCE_TRACED_NOT_EXECUTED",
+      "finding": "Host service orders Mixin ahead of Connector launch plugin; the plugin performs a later Minecraft-member access rewrite. Cache eligibility uses embedded cache version plus input SHA-256 and host-naming output suffix. No cached transformation or loaded class generation is accepted as observed here.",
+      "locators": [
+        {
+          "origin": "connector",
+          "commit": "7f68ac02291fde986119a3f5cab85436bed5c350",
+          "path": "src/main/java/org/sinytra/connector/service/ConnectorLoaderService.java",
+          "git_blob_sha1": "ac9d2ae7e9ec48f2ab84700c0c0433aa30f0c5ab",
+          "sha256": "72bc154cb3af9debb0bc67fc76e1e55f5c1177b48a1c09777f0b0e613949b7ff",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/ConnectorLoaderService.java#L52-L115",
+          "lines": [
+            52,
+            115
+          ],
+          "track": "ANCHOR"
+        },
+        {
+          "origin": "connector",
+          "commit": "7f68ac02291fde986119a3f5cab85436bed5c350",
+          "path": "src/main/java/org/sinytra/connector/service/ConnectorPreLaunchPlugin.java",
+          "git_blob_sha1": "4800999cc9a99453e58251a7d9368ce752f8a264",
+          "sha256": "48b79d49a9fb9a3fca21ca4e8b7475c1ce18d5a2ca697e230ea048cd3091b1e9",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/ConnectorPreLaunchPlugin.java#L25-L66",
+          "lines": [
+            25,
+            66
+          ],
+          "track": "ANCHOR"
+        },
+        {
+          "origin": "connector",
+          "commit": "7f68ac02291fde986119a3f5cab85436bed5c350",
+          "path": "src/main/java/org/sinytra/connector/ConnectorUtil.java",
+          "git_blob_sha1": "ecebe7e3fbad7f2c8bf2665bc7e9b9f33cf0523f",
+          "sha256": "725aa716bd9b622b3b8e8ebb10df2b5a21cbb98dbf8de3c0802febb36efcf175",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/ConnectorUtil.java#L129-L170",
+          "lines": [
+            129,
+            170
+          ],
+          "track": "ANCHOR"
+        }
+      ],
+      "scope": "Cross-profile comparison: each source locator has its own track; no mixed-track index is used"
+    }
+  ],
+  "exact_jvm_selectors": [
+    {
+      "class_sha256": "96203b1c02863072e16f1239f319715cc1cf49a2c20b82a1bbb1ac10e595fb68",
+      "descriptor": "(Lnet/minecraft/class_1303;Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V",
+      "disassembly_lines": [
+        1026,
+        1118
+      ],
+      "disassembly_sha256": "77908c9355d133fb9ab321d93264b81e39fbaee4f01c8c03b5c7c20b78ce9d5f",
+      "document_id": "1a04b669200196291aa9441f75f34130813686e424321c2f2de77b4d9a440e5c",
+      "member": "merge",
+      "namespace": "intermediary",
+      "owner": "com/blamejared/clumps/mixin/MixinExperienceOrb",
+      "stage": "original_distribution",
+      "track": "COMPARATIVE",
+      "profile_id": "1b6f1c1154b31fd61c2192c1721104b000321ebbb96205a40cea42fd4a32a519",
+      "index_snapshot_id": "a2cb3581f47cea5c59f1fdecc38cda005d00351c516764e2af5db617346dcb20"
+    },
+    {
+      "class_sha256": "96203b1c02863072e16f1239f319715cc1cf49a2c20b82a1bbb1ac10e595fb68",
+      "descriptor": "(Lnet/minecraft/class_1657;Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V",
+      "disassembly_lines": [
+        845,
+        935
+      ],
+      "disassembly_sha256": "77908c9355d133fb9ab321d93264b81e39fbaee4f01c8c03b5c7c20b78ce9d5f",
+      "document_id": "1a04b669200196291aa9441f75f34130813686e424321c2f2de77b4d9a440e5c",
+      "member": "playerTouch",
+      "namespace": "intermediary",
+      "owner": "com/blamejared/clumps/mixin/MixinExperienceOrb",
+      "stage": "original_distribution",
+      "track": "COMPARATIVE",
+      "profile_id": "1b6f1c1154b31fd61c2192c1721104b000321ebbb96205a40cea42fd4a32a519",
+      "index_snapshot_id": "a2cb3581f47cea5c59f1fdecc38cda005d00351c516764e2af5db617346dcb20"
+    },
+    {
+      "class_sha256": "324a2945477d03693e9a1f3718bcc830e30d05083e4aa3d1418e2a8d759c7b02",
+      "descriptor": "()V",
+      "disassembly_lines": [
+        271,
+        312
+      ],
+      "disassembly_sha256": "7ef4b6d334d014562de7f109d932b364b3e577fff96c0df25dc345f25c4db999",
+      "document_id": "003941ad2db5c8ec330a686c93a69fd77fcd642d0d4d1f331100c2d185a5a845",
+      "member": "<clinit>",
+      "namespace": "intermediary",
+      "owner": "com/blamejared/clumps/api/events/ClumpsEvents",
+      "stage": "original_distribution",
+      "track": "COMPARATIVE",
+      "profile_id": "1b6f1c1154b31fd61c2192c1721104b000321ebbb96205a40cea42fd4a32a519",
+      "index_snapshot_id": "a2cb3581f47cea5c59f1fdecc38cda005d00351c516764e2af5db617346dcb20"
+    },
+    {
+      "class_sha256": "76d190660d568f326d37e2e4195e03e06b72bd4fc7335116c18987dae2373731",
+      "descriptor": "(Lnet/minecraft/class_1657;I)Lcom/mojang/datafixers/util/Either;",
+      "disassembly_lines": [
+        117,
+        163
+      ],
+      "disassembly_sha256": "cf7efc4599858d1de27d88ccc6b8f1126be6df15698445bac105ca4a4d6ec9cb",
+      "document_id": "07b1a6d0a3db8367494c451d6c940fd47372252dac02580705f42de86aa85a5b",
+      "member": "fireValueEvent",
+      "namespace": "intermediary",
+      "owner": "com/blamejared/clumps/platform/FabricEventHandler",
+      "stage": "original_distribution",
+      "track": "COMPARATIVE",
+      "profile_id": "1b6f1c1154b31fd61c2192c1721104b000321ebbb96205a40cea42fd4a32a519",
+      "index_snapshot_id": "a2cb3581f47cea5c59f1fdecc38cda005d00351c516764e2af5db617346dcb20"
+    },
+    {
+      "class_sha256": "cb7e3ae0c6be33fdda97cf625ed132df1c311daf142f5ea4cb38bf35972ce4c5",
+      "descriptor": "(Lnet/minecraft/world/entity/ExperienceOrb;)V",
+      "disassembly_lines": [
+        1374,
+        1405
+      ],
+      "disassembly_sha256": "a51dbab5983691d8305e3f4a6718c0e6befad8d25cd349bf5b970b6986ccbeb5",
+      "document_id": "32b4e69538847b82fdd529bab1268a1917d8edeea55fafefd20bc44571ec7dea",
+      "member": "merge",
+      "namespace": "mojmap",
+      "owner": "net/minecraft/world/entity/ExperienceOrb",
+      "stage": "forgegradle_mapped_userdev",
+      "track": "COMPARATIVE",
+      "profile_id": "1b6f1c1154b31fd61c2192c1721104b000321ebbb96205a40cea42fd4a32a519",
+      "index_snapshot_id": "a2cb3581f47cea5c59f1fdecc38cda005d00351c516764e2af5db617346dcb20"
+    },
+    {
+      "class_sha256": "cb7e3ae0c6be33fdda97cf625ed132df1c311daf142f5ea4cb38bf35972ce4c5",
+      "descriptor": "(Lnet/minecraft/world/entity/player/Player;)V",
+      "disassembly_lines": [
+        1597,
+        1673
+      ],
+      "disassembly_sha256": "a51dbab5983691d8305e3f4a6718c0e6befad8d25cd349bf5b970b6986ccbeb5",
+      "document_id": "32b4e69538847b82fdd529bab1268a1917d8edeea55fafefd20bc44571ec7dea",
+      "member": "playerTouch",
+      "namespace": "mojmap",
+      "owner": "net/minecraft/world/entity/ExperienceOrb",
+      "stage": "forgegradle_mapped_userdev",
+      "track": "COMPARATIVE",
+      "profile_id": "1b6f1c1154b31fd61c2192c1721104b000321ebbb96205a40cea42fd4a32a519",
+      "index_snapshot_id": "a2cb3581f47cea5c59f1fdecc38cda005d00351c516764e2af5db617346dcb20"
+    },
+    {
+      "class_sha256": "3917e9b799bcc8e96370f0718e8c223a31409f2cf66a417b9e2b75287ce5aca0",
+      "descriptor": "(Ljava/lang/Class;Ljava/util/function/Function;)Lnet/fabricmc/fabric/api/event/Event;",
+      "disassembly_lines": [
+        145,
+        169
+      ],
+      "disassembly_sha256": "b5db406693d7da28d7e079baf00c90d77c637a73a2a6fe99e2f18f2da0d59a38",
+      "document_id": "0322e625daa2abee69f7202f91ee3ddc06d6242d7f8e6ea4ff4034224c045111",
+      "member": "createArrayBacked",
+      "namespace": "srg",
+      "owner": "net/fabricmc/fabric/api/event/EventFactory",
+      "stage": "original_nested_distribution",
+      "track": "COMPARATIVE",
+      "profile_id": "1b6f1c1154b31fd61c2192c1721104b000321ebbb96205a40cea42fd4a32a519",
+      "index_snapshot_id": "a2cb3581f47cea5c59f1fdecc38cda005d00351c516764e2af5db617346dcb20"
+    },
+    {
+      "class_sha256": "3917e9b799bcc8e96370f0718e8c223a31409f2cf66a417b9e2b75287ce5aca0",
+      "descriptor": "(Ljava/lang/Class;Ljava/lang/Object;Ljava/util/function/Function;)Lnet/fabricmc/fabric/api/event/Event;",
+      "disassembly_lines": [
+        170,
+        199
+      ],
+      "disassembly_sha256": "b5db406693d7da28d7e079baf00c90d77c637a73a2a6fe99e2f18f2da0d59a38",
+      "document_id": "0322e625daa2abee69f7202f91ee3ddc06d6242d7f8e6ea4ff4034224c045111",
+      "member": "createArrayBacked",
+      "namespace": "srg",
+      "owner": "net/fabricmc/fabric/api/event/EventFactory",
+      "stage": "original_nested_distribution",
+      "track": "COMPARATIVE",
+      "profile_id": "1b6f1c1154b31fd61c2192c1721104b000321ebbb96205a40cea42fd4a32a519",
+      "index_snapshot_id": "a2cb3581f47cea5c59f1fdecc38cda005d00351c516764e2af5db617346dcb20"
+    }
+  ],
+  "counts": {
+    "acquisition": {
+      "source_blobs_verified": 63,
+      "nested_jars_hashed": 53,
+      "clumps_classes": 16
+    },
+    "anchor_static": {
+      "roots": 1,
+      "selected_documents": 27,
+      "prepared_classes": 0,
+      "selected_class_failures": 0,
+      "query_groups": 9,
+      "query_pages": 9,
+      "fully_retrieved_documents": 27,
+      "document_pages": 27,
+      "all_query_locator_documents_followed": 11,
+      "repeat_index_cache_hits": 0
+    },
+    "comparative_static": {
+      "roots": 118,
+      "selected_documents": 394,
+      "prepared_classes": 74,
+      "selected_class_failures": 0,
+      "query_groups": 22,
+      "query_pages": 38,
+      "fully_retrieved_documents": 337,
+      "document_pages": 632,
+      "all_query_locator_documents_followed": 190,
+      "repeat_index_cache_hits": 74
+    },
+    "comparative_only": {
+      "candidate_injectors": 9,
+      "exact_jvm_selectors": 8,
+      "refmap_targets_checked": 9,
+      "direct_mapping_hits": 5,
+      "explicit_superclass_mapping_hits": 4
+    },
+    "focused_regression_tests_passed": 23
+  },
+  "discovery": {
+    "role": "DISCOVERY_HINTS_ONLY_BEFORE_SOURCE",
+    "sources": [
+      "https://modrinth.com/mod/clumps",
+      "https://github.com/jaredlll08/Clumps",
+      "https://connector.sinytra.org/",
+      "https://github.com/Sinytra/Connector/discussions/180"
+    ],
+    "limits": "Player-facing descriptions selected the XP-orb feature. Current Connector site describes NeoForge/FRONTIER. Community reports and FRONTIER results were not used as ANCHOR compatibility evidence."
+  },
+  "remaining": [
+    "ANCHOR profile is source-only; matching beta.50 binary identity and declared build dependency closure remain unavailable/unresolved. COMPARATIVE released-stack bytes cannot satisfy that gate",
+    "Target side/config, full external and chosen nested runtime dependency closure and loader order unresolved",
+    "No remapped/transformed Clumps JAR, selected runtime Mixin/refmap, classloading result, live XP behavior or measured performance",
+    "Source-release associations and exact byte hashes do not establish source-to-binary compiled-class equivalence",
+    "Only selected dependency implementations were indexed; static graph remains PARTIAL with reflection, callbacks and Java ServiceLoader unresolved",
+    "Comparison against grep/IDE/Gradle performance and quality baseline NOT_MEASURED"
+  ],
+  "operations": {
+    "canonical_writes": 0,
+    "database_writes": 0,
+    "game_launches": 0,
+    "upstream_builds": 0,
+    "upstream_code_execution": 0,
+    "mod_source_changes": 0,
+    "publication": false
+  },
+  "evidence_validation": "Disjoint profiles, correct track on every root/document, positive intended-track and zero opposite-track query hits, stable index identities, complete query/document readbacks and preserved original receipts were rechecked. Raw acquisition/query material is excluded.",
+  "profiles": {
+    "anchor": {
+      "track": "ANCHOR",
+      "profile_id": "afd23ab348285bd2b3c2292d66ec72c7439c9f1b5bcd12110d858a846b8ed729",
+      "index_snapshot_id": "c375e7f9610f64672634232b48827794e9d9c70d974ffff3eb326e34fc3be8b0",
+      "status": "PARTIAL_SOURCE_ONLY_MISSING_BINARY_AND_DEPENDENCIES",
+      "scope": "Only the acquired Connector beta.50 source subset at commit 7f68ac02291fde986119a3f5cab85436bed5c350",
+      "missing": [
+        "Only the exact Connector beta.50 source subset at 7f68ac02291fde986119a3f5cab85436bed5c350 is captured in this ANCHOR profile",
+        "Matching beta.50 binary and resolved anchor build dependencies, including declared FFAPI 0.92.0+1.11.5, are unavailable or unacquired",
+        "No candidate, released beta.49 binary, alternative FFAPI, comparative mappings or runtime outputs are included",
+        "Source-declared Forge 47.4.6 and Java 17 are target settings, not observed resolved runtime facts"
+      ],
+      "counts": {
+        "roots": 1,
+        "selected_documents": 27,
+        "prepared_classes": 0,
+        "selected_class_failures": 0,
+        "query_groups": 9,
+        "query_pages": 9,
+        "fully_retrieved_documents": 27,
+        "document_pages": 27,
+        "all_query_locator_documents_followed": 11,
+        "repeat_index_cache_hits": 0
+      }
+    },
+    "comparative": {
+      "track": "COMPARATIVE",
+      "profile_id": "1b6f1c1154b31fd61c2192c1721104b000321ebbb96205a40cea42fd4a32a519",
+      "index_snapshot_id": "a2cb3581f47cea5c59f1fdecc38cda005d00351c516764e2af5db617346dcb20",
+      "status": "PARTIAL_RELEASED_STACK_STATIC_COMPARISON_NOT_RUNTIME",
+      "scope": "Connector beta.49 distribution, Fabric Clumps 12.0.0.4, FFAPI 0.92.6+1.11.15, selected Forge 47.4.6 context and separate candidate/FFAPI source; beta.50 source excluded",
+      "missing": [
+        "This COMPARATIVE profile contains Connector beta.49, Clumps Fabric 12.0.0.4, FFAPI 0.92.6+1.11.15 and selected exact Forge 47.4.6 context; beta.50 source is excluded",
+        "Original source candidates, original distribution and nested archives remain separate stages; source-to-binary class identity is not established",
+        "All nested archive hashes are captured, but actual selected host-loader dependency closure, classloader order, side/config and aliases were not executed",
+        "Only selected implementation classes were indexed; dynamic reflection, callbacks, ServiceLoader and full external implementations remain unresolved",
+        "No remapped/transformed candidate artifact, live game observation, canonical write or upstream build exists"
+      ],
+      "counts": {
+        "roots": 118,
+        "selected_documents": 394,
+        "prepared_classes": 74,
+        "selected_class_failures": 0,
+        "query_groups": 22,
+        "query_pages": 38,
+        "fully_retrieved_documents": 337,
+        "document_pages": 632,
+        "all_query_locator_documents_followed": 190,
+        "repeat_index_cache_hits": 74
+      }
+    }
+  },
+  "track_isolation": {
+    "status": "VERIFIED",
+    "all_roots_and_documents_match_own_profile_track": true,
+    "anchor_beta50_source_root_count": 1,
+    "beta50_source_roots_in_comparative": 0,
+    "intended_track_query_hits": true,
+    "opposite_track_query_hits": 0,
+    "history": "Earlier mixed-track snapshot is superseded local-only and excluded from acceptance; its historical receipts were preserved unchanged"
+  }
+}

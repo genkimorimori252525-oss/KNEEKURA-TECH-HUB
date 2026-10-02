@@ -1,0 +1,81 @@
+{
+  "status": "PARTIAL",
+  "history_hash": "f2cf8a85048877c0ccb0d011ccc55eedb0d14b4d69f21bfa0e9f6706e8ef4bdf",
+  "cases": 3,
+  "canonical_writes": 0,
+  "runtime_attestation": false,
+  "analysis_scope": {
+    "head_revision": "a57ffb32adc6a0e1f0a5d06cf45d58c407fe1679",
+    "history_window": "Closed recovery-20260930-v2 batch; original deadline 16:04 UTC, all execution threads closed 16:00:23 UTC, empty desktop process probe 16:01:36 UTC; final offline command and signed-diagnostic contract verification",
+    "queries": [
+      "player-only gamemode bare UUID rejection",
+      "control Gradle daemon disappearance",
+      "invoker observer HTTP 409"
+    ],
+    "track": "ANCHOR"
+  },
+  "coverage": {
+    "deferred": [
+      "Any newly authorized runtime after the command and diagnostic fixes"
+    ],
+    "inspected_evidence_ids": [
+      "batch-cleanup",
+      "batch-status",
+      "client-log",
+      "client-receipt",
+      "command-green",
+      "command-independent-review",
+      "command-parser-output",
+      "command-red",
+      "command-verification",
+      "control-log",
+      "control-receipt",
+      "creative-control-result",
+      "diagnostic-baseline-red",
+      "diagnostic-client",
+      "diagnostic-green",
+      "diagnostic-http200-red",
+      "diagnostic-privacy-red",
+      "diagnostic-summary-hash-red",
+      "diagnostic-tests",
+      "diagnostic-transport",
+      "equip-phase",
+      "equip-request",
+      "evidence-inventory",
+      "fixed-command-builder",
+      "fixed-command-parser-harness",
+      "fixed-command-tests",
+      "gamemode-parser-source",
+      "hydra-014-handshake",
+      "hydra-014-phase",
+      "hydra-014-raw",
+      "hydra-018-handshake",
+      "hydra-018-phase",
+      "hydra-018-raw",
+      "hydra-019-handshake",
+      "hydra-019-phase",
+      "hydra-019-raw",
+      "hydra-capture-review",
+      "hydra-receipt",
+      "invoker-phase",
+      "invoker-server-before",
+      "observer-before",
+      "offline-repair-inventory",
+      "pair-before",
+      "parser-input-identity",
+      "players-parser-source",
+      "post-run-memory",
+      "process-probe",
+      "registered-server",
+      "resource-diagnosis-proposal",
+      "runtime-before",
+      "server-log",
+      "transport-before"
+    ],
+    "status": "PARTIAL",
+    "unavailable": [
+      "PID-attributed original control-daemon failure cause",
+      "Exact original invoker observer HTTP 409 reason"
+    ]
+  }
+}

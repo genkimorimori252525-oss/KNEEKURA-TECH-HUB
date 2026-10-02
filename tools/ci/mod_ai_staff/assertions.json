@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "asset_id": "kneekura:celestial_staff",
+  "minecraft": "1.20.1",
+  "forge": "47.4.6",
+  "java_major": 17,
+  "effect": "minecraft:glowing",
+  "effect_amplifier": 0,
+  "effect_ticks": 60,
+  "cooldown_ticks": 100,
+  "target": "invoking_player_only",
+  "cooldown_repeat": "no_refresh",
+  "health_change": 0,
+  "stack_count_change": 0,
+  "durability_change": 0,
+  "client_mutation": false,
+  "handler_test": "staff_handler",
+  "expiry_test": "staff_expiry",
+  "actual_physical_right_click": "NOT_RUN",
+  "client_rendering": "NOT_RUN",
+  "network_synchronization": "NOT_RUN",
+  "negative_controls": {
+    "staff_refresh_negative": "FAIL",
+    "staff_short_cooldown_negative": "FAIL",
+    "staff_damage_negative": "FAIL"
+  },
+  "runtime_client_handler_mutation": "NOT_RUN"
+}

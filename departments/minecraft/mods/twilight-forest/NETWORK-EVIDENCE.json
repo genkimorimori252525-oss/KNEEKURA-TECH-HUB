@@ -1,0 +1,286 @@
+{
+  "evidence_version": "1.0",
+  "target": "The Twilight Forest",
+  "anchor": {
+    "source_snapshot": "TeamTwilight/twilightforest@a7dd8f13c653e137f977f5ffaa870fcb20fc1625",
+    "registration": {
+      "path": "src/main/java/twilightforest/network/TFPacketHandler.java",
+      "blob_sha": "7a2a44983eaf2fca0ad093d2e485f46e3d28dc75",
+      "size": 3839
+    },
+    "packet_sources": [
+      {
+        "path": "src/main/java/twilightforest/network/AreaProtectionPacket.java",
+        "blob_sha": "31cee1b56df39786f50ba072c35d5013e388e664",
+        "size": 2790
+      },
+      {
+        "path": "src/main/java/twilightforest/network/CreateMovingCicadaSoundPacket.java",
+        "blob_sha": "49002395595e70ab0f63e025bf7690a859ab143f",
+        "size": 1256
+      },
+      {
+        "path": "src/main/java/twilightforest/network/EnforceProgressionStatusPacket.java",
+        "blob_sha": "3bf0afaf731245c699d1766bab4b70b2d907d60e",
+        "size": 965
+      },
+      {
+        "path": "src/main/java/twilightforest/network/MagicMapPacket.java",
+        "blob_sha": "26b1cc9f9c75dd6f58b5e286c2d34f0c22d5870d",
+        "size": 2781
+      },
+      {
+        "path": "src/main/java/twilightforest/network/MazeMapPacket.java",
+        "blob_sha": "211833edb216244efd75ddd8658f2ab5671d966d",
+        "size": 2253
+      },
+      {
+        "path": "src/main/java/twilightforest/network/MissingAdvancementToastPacket.java",
+        "blob_sha": "54e128b599b6de0bc0ea0a0fbb062323e9dbacee",
+        "size": 1255
+      },
+      {
+        "path": "src/main/java/twilightforest/network/ParticlePacket.java",
+        "blob_sha": "ead09c99acf48888217a467b79aa9ab72abbe86b",
+        "size": 3248
+      },
+      {
+        "path": "src/main/java/twilightforest/network/SpawnFallenLeafFromPacket.java",
+        "blob_sha": "55bcafe97c15ea199a7005bfe7c7285a27422215",
+        "size": 2233
+      },
+      {
+        "path": "src/main/java/twilightforest/network/StructureProtectionClearPacket.java",
+        "blob_sha": "1e2de999968f18a2d88a7a7cb1598d38d67710f6",
+        "size": 1158
+      },
+      {
+        "path": "src/main/java/twilightforest/network/StructureProtectionPacket.java",
+        "blob_sha": "b4c68e2cf601bbff422b82c2de025614e3d5e922",
+        "size": 1600
+      },
+      {
+        "path": "src/main/java/twilightforest/network/SyncUncraftingTableConfigPacket.java",
+        "blob_sha": "da58cc96ec102f042430edb5705bcc75742b6df3",
+        "size": 3666
+      },
+      {
+        "path": "src/main/java/twilightforest/network/TFPacketHandler.java",
+        "blob_sha": "7a2a44983eaf2fca0ad093d2e485f46e3d28dc75",
+        "size": 3839
+      },
+      {
+        "path": "src/main/java/twilightforest/network/ThrowPlayerPacket.java",
+        "blob_sha": "562cd84a7196be81933eceb6ebeb119e1711f79b",
+        "size": 1111
+      },
+      {
+        "path": "src/main/java/twilightforest/network/UncraftingGuiPacket.java",
+        "blob_sha": "d5fa5e44fe90b2244daf351b09254376dc794687",
+        "size": 1498
+      },
+      {
+        "path": "src/main/java/twilightforest/network/UpdateFeatherFanFallPacket.java",
+        "blob_sha": "a763279b71fcfbb17303c95e2a480273b90da7bf",
+        "size": 1578
+      },
+      {
+        "path": "src/main/java/twilightforest/network/UpdateGamerulePacket.java",
+        "blob_sha": "657e5e89c92632d08523e202c8cfcee2cdb74063",
+        "size": 985
+      },
+      {
+        "path": "src/main/java/twilightforest/network/UpdateShieldPacket.java",
+        "blob_sha": "9bf14c15ecb101bfe372ac93def340f37ca3ad83",
+        "size": 1713
+      },
+      {
+        "path": "src/main/java/twilightforest/network/UpdateTFMultipartPacket.java",
+        "blob_sha": "3a4b56f0c96333d21b8f094f096d08d875d00358",
+        "size": 3762
+      },
+      {
+        "path": "src/main/java/twilightforest/network/UpdateThrownPacket.java",
+        "blob_sha": "eaf21e38c62df345575fbcedab3cbd2f4814d1a8",
+        "size": 2043
+      },
+      {
+        "path": "src/main/java/twilightforest/network/package-info.java",
+        "blob_sha": "f4e02f10a856b5770ca3e93ace0991e4aeda612c",
+        "size": 202
+      }
+    ]
+  },
+  "frontier": {
+    "source_snapshot": "TeamTwilight/twilightforest@793c4d4c7b0a2892f702cbb9a8d751fbe7218828",
+    "registration": {
+      "path": "src/main/java/twilightforest/events/RegistrationEvents.java",
+      "blob_sha": "40c87d293513059666fd71ae077cb169c44be52c",
+      "size": 50896
+    },
+    "packet_sources": [
+      {
+        "path": "src/main/java/twilightforest/network/AreaProtectionPacket.java",
+        "blob_sha": "05f065f5607fb19022617f09794f311ffa1cc140",
+        "size": 3404
+      },
+      {
+        "path": "src/main/java/twilightforest/network/CreateMovingCicadaSoundPacket.java",
+        "blob_sha": "e81471e4bfa7968c2480d40c12abeba5c35ec5c8",
+        "size": 1712
+      },
+      {
+        "path": "src/main/java/twilightforest/network/CycleMapSlotPacket.java",
+        "blob_sha": "e5aa59ef0544cd5d5de27f79fa3f100488618443",
+        "size": 2199
+      },
+      {
+        "path": "src/main/java/twilightforest/network/EnforceProgressionStatusPacket.java",
+        "blob_sha": "67d3bb75229604ec98a3e3fcc8fbd55793d2537c",
+        "size": 1446
+      },
+      {
+        "path": "src/main/java/twilightforest/network/GogglesZoomPacket.java",
+        "blob_sha": "1da4e0e3b064e0cc5f42f029bb6e76f591165638",
+        "size": 2319
+      },
+      {
+        "path": "src/main/java/twilightforest/network/GradualGlidePacket.java",
+        "blob_sha": "de61b5319443ab3e7b251487aa5a7286c57be4b5",
+        "size": 1903
+      },
+      {
+        "path": "src/main/java/twilightforest/network/LifedrainParticlePacket.java",
+        "blob_sha": "77bc698927016ad80bdca8dcd79231cbbce133f3",
+        "size": 1809
+      },
+      {
+        "path": "src/main/java/twilightforest/network/MagicMapPacket.java",
+        "blob_sha": "a05536cd9f07b9f2a21d64fff9c38032d060a88c",
+        "size": 2767
+      },
+      {
+        "path": "src/main/java/twilightforest/network/MazeMapPacket.java",
+        "blob_sha": "631d2755f323a8167a4af7e744bfd327814b732f",
+        "size": 2685
+      },
+      {
+        "path": "src/main/java/twilightforest/network/MissingAdvancementToastPacket.java",
+        "blob_sha": "10bcb4e94aebeeeff684b35384478c8284d4e3cf",
+        "size": 1695
+      },
+      {
+        "path": "src/main/java/twilightforest/network/ModUpdateURLInterceptor.java",
+        "blob_sha": "ff4cfd080649986ad8a7088e30c938550b0c7d6c",
+        "size": 1650
+      },
+      {
+        "path": "src/main/java/twilightforest/network/MovePlayerPacket.java",
+        "blob_sha": "1eee84bfa5505e3ed1fd6e2670bbe01a4cfb55f7",
+        "size": 1274
+      },
+      {
+        "path": "src/main/java/twilightforest/network/ParticlePacket.java",
+        "blob_sha": "4b1b95e2e893c03241633dab28e162b79429afe8",
+        "size": 3618
+      },
+      {
+        "path": "src/main/java/twilightforest/network/PerformDoubleJumpPacket.java",
+        "blob_sha": "5506c289b8cd212b36fc15c5041e8030d6d37b39",
+        "size": 1263
+      },
+      {
+        "path": "src/main/java/twilightforest/network/PerformSidestepPacket.java",
+        "blob_sha": "9fc200d6e73a3e693148f9361837c0073c6aa9f7",
+        "size": 1498
+      },
+      {
+        "path": "src/main/java/twilightforest/network/SetMasonJarItemPacket.java",
+        "blob_sha": "969e2a74484555b7b98aec9d7b696cbd55a3444a",
+        "size": 2214
+      },
+      {
+        "path": "src/main/java/twilightforest/network/SpawnCharmPacket.java",
+        "blob_sha": "580dee577c458030830d61c1730114aa23dc9fde",
+        "size": 3057
+      },
+      {
+        "path": "src/main/java/twilightforest/network/SpawnFallenLeafFromPacket.java",
+        "blob_sha": "38280e2a3d70e28a0b548e1f6386523401536a08",
+        "size": 2528
+      },
+      {
+        "path": "src/main/java/twilightforest/network/StructureProtectionPacket.java",
+        "blob_sha": "0533dca2001b6b12959a7631dc11b260cd99d03b",
+        "size": 1830
+      },
+      {
+        "path": "src/main/java/twilightforest/network/SwapHotbarPacket.java",
+        "blob_sha": "421501b9d6e1e5d6246f634db9c34a8524d66815",
+        "size": 1263
+      },
+      {
+        "path": "src/main/java/twilightforest/network/SyncQuestsPacket.java",
+        "blob_sha": "01e2249a0703598fb46aa0a0d195c75c56fbd5d8",
+        "size": 1270
+      },
+      {
+        "path": "src/main/java/twilightforest/network/SyncUncraftingTableConfigPacket.java",
+        "blob_sha": "a445e191fe302acdf124229ddfd358a5e2876e21",
+        "size": 2901
+      },
+      {
+        "path": "src/main/java/twilightforest/network/TFBossBarPacket.java",
+        "blob_sha": "13718fd5351c1c06b2fe53498d6c86a08fade780",
+        "size": 5373
+      },
+      {
+        "path": "src/main/java/twilightforest/network/TravellersWingsStatePacket.java",
+        "blob_sha": "1e839b2377bacdc5e0df2de94ac971c468742586",
+        "size": 2868
+      },
+      {
+        "path": "src/main/java/twilightforest/network/UncraftingGuiPacket.java",
+        "blob_sha": "f4a055a3610697ac59ae3a26346355c90467d3c9",
+        "size": 2101
+      },
+      {
+        "path": "src/main/java/twilightforest/network/UpdateDeathTimePacket.java",
+        "blob_sha": "e71e6cf35d7665fae23071acf1c9932a1878a598",
+        "size": 1556
+      },
+      {
+        "path": "src/main/java/twilightforest/network/UpdateTFMultipartPacket.java",
+        "blob_sha": "7dada304b84ffdcd4e55a7eea29bdc34512ab348",
+        "size": 3886
+      },
+      {
+        "path": "src/main/java/twilightforest/network/UpdateThrownPacket.java",
+        "blob_sha": "f7706c2b5480a95d7f00ca0d0ed8889489cd0308",
+        "size": 1963
+      },
+      {
+        "path": "src/main/java/twilightforest/network/WipeOreMeterPacket.java",
+        "blob_sha": "985e0a6411c7892a5efc5cee7497a0ccf47e85f7",
+        "size": 1557
+      },
+      {
+        "path": "src/main/java/twilightforest/network/package-info.java",
+        "blob_sha": "8788992b49967edb385ac0dbb656dcee94ecd6e9",
+        "size": 88
+      }
+    ],
+    "multipart_vanilla_sync_patch": {
+      "path": "src/asm/java/twilightforest/asm/transformers/multipart/SendDirtyEntityDataTransformer.java",
+      "blob_sha": "7ec8bfd1d124ec6745747091332d9b9e53b6845e",
+      "size": 1389
+    },
+    "mapped_registration_counts": {
+      "server_to_client": 21,
+      "client_to_server": 6,
+      "bidirectional": 2,
+      "total": 29
+    }
+  },
+  "proof_scope": "Complete Java source inventory for both network packages plus exact FRONTIER registration and multipart synchronization hook. Packet direction semantics are recorded in PACKET-MAP.json."
+}

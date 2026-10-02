@@ -1,0 +1,331 @@
+{
+  "batch": 4,
+  "source_snapshot": "793c4d4c7b0a2892f702cbb9a8d751fbe7218828",
+  "count": 17,
+  "rows": [
+    {
+      "renderer_class": "TFGiantRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/TFGiantRenderer.java",
+      "blob_sha": "b051453254e19f6a90ebf64baaf28f75fc985778",
+      "model_layers": [],
+      "model_classes": [
+        "ArmedModel",
+        "GiantModel",
+        "getModel",
+        "getParentModel",
+        "normalModel",
+        "slimModel"
+      ],
+      "textures": [],
+      "render_states": [
+        "ArmedEntityRenderState",
+        "GiantRenderState",
+        "ItemStackRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "superclass": "HumanoidMobRenderer<T, GiantRenderState, GiantModel>"
+    },
+    {
+      "renderer_class": "IceCrystalRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/IceCrystalRenderer.java",
+      "blob_sha": "ae6549eb3e586edcdb4be1d16b1b6bc3cf7465cc",
+      "model_layers": [
+        "ICE_CRYSTAL"
+      ],
+      "model_classes": [
+        "IceCrystalModel"
+      ],
+      "textures": [
+        "icecrystal.png"
+      ],
+      "render_states": [
+        "LivingEntityRenderState",
+        "createRenderState"
+      ],
+      "superclass": "MobRenderer<IceCrystal, LivingEntityRenderState, IceCrystalModel>"
+    },
+    {
+      "renderer_class": "BlockChainRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/BlockChainRenderer.java",
+      "blob_sha": "c2033451b31094125defcc4549a60880112d5a41",
+      "model_layers": [
+        "CHAIN",
+        "CHAIN_BLOCK"
+      ],
+      "model_classes": [
+        "ChainModel",
+        "SpikeBlockModel",
+        "chainModel",
+        "submitModel"
+      ],
+      "textures": [
+        "block_and_chain.png"
+      ],
+      "render_states": [
+        "CameraRenderState",
+        "ChainBlockRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "superclass": "EntityRenderer<ChainBlock, ChainBlockRenderState>"
+    },
+    {
+      "renderer_class": "CubeOfAnnihilationRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/CubeOfAnnihilationRenderer.java",
+      "blob_sha": "0ecd563ef7d41fa126aec7c4a562fe1bb470af5c",
+      "model_layers": [
+        "CUBE_OF_ANNIHILATION"
+      ],
+      "model_classes": [
+        "CubeOfAnnihilationModel",
+        "submitModel"
+      ],
+      "textures": [
+        "cubeofannihilation.png"
+      ],
+      "render_states": [
+        "CameraRenderState",
+        "CubeOfAnnihilationRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "superclass": "EntityRenderer<CubeOfAnnihilation, CubeOfAnnihilationRenderState>"
+    },
+    {
+      "renderer_class": "HarbingerCubeRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/HarbingerCubeRenderer.java",
+      "blob_sha": "99f937d89b5c07def03c74d054002428c4de0391",
+      "model_layers": [
+        "HARBINGER_CUBE"
+      ],
+      "model_classes": [
+        "HarbingerCubeModel"
+      ],
+      "textures": [
+        "apocalypse2.png"
+      ],
+      "render_states": [
+        "LivingEntityRenderState",
+        "createRenderState"
+      ],
+      "superclass": "MobRenderer<HarbingerCube, LivingEntityRenderState, HarbingerCubeModel<LivingEntityRenderState>>"
+    },
+    {
+      "renderer_class": "AdherentRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/AdherentRenderer.java",
+      "blob_sha": "bf25587ba853a71108ef818dc45c2254dbd09c93",
+      "model_layers": [
+        "ADHERENT"
+      ],
+      "model_classes": [
+        "AdherentModel"
+      ],
+      "textures": [
+        "adherent.png"
+      ],
+      "render_states": [
+        "HumanoidRenderState",
+        "createRenderState"
+      ],
+      "superclass": "HumanoidMobRenderer<Adherent, HumanoidRenderState, AdherentModel>"
+    },
+    {
+      "renderer_class": "RovingCubeRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/RovingCubeRenderer.java",
+      "blob_sha": "2f20aeeb352ee16a9c513f2163860543eb4d6a2e",
+      "model_layers": [
+        "CUBE_OF_ANNIHILATION"
+      ],
+      "model_classes": [
+        "CubeOfAnnihilationModel",
+        "submitModel"
+      ],
+      "textures": [
+        "cubeofannihilation.png"
+      ],
+      "render_states": [
+        "CameraRenderState",
+        "CubeOfAnnihilationRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "superclass": "EntityRenderer<RovingCube, CubeOfAnnihilationRenderState>"
+    },
+    {
+      "renderer_class": "RisingZombieRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/RisingZombieRenderer.java",
+      "blob_sha": "315d9f9a4796409964adf5e643d27eef724347ce",
+      "model_layers": [
+        "RISING_ZOMBIE"
+      ],
+      "model_classes": [
+        "RisingZombieModel"
+      ],
+      "textures": [
+        "textures/entity/zombie/zombie.png"
+      ],
+      "render_states": [
+        "RisingZombieRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "superclass": "HumanoidMobRenderer<RisingZombie, RisingZombieRenderState, RisingZombieModel>"
+    },
+    {
+      "renderer_class": "CustomProjectileTextureRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/CustomProjectileTextureRenderer.java",
+      "blob_sha": "f46fe1826cc4fa6294e5623218a00da54de001de",
+      "model_layers": [],
+      "model_classes": [],
+      "textures": [],
+      "render_states": [
+        "CameraRenderState",
+        "EntityRenderState",
+        "createRenderState"
+      ],
+      "superclass": "EntityRenderer<TFThrowable, EntityRenderState>"
+    },
+    {
+      "renderer_class": "HydraMortarRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/HydraMortarRenderer.java",
+      "blob_sha": "6e573cf976586dd9f3aae6992f26fbfd39632700",
+      "model_layers": [
+        "HYDRA_MORTAR"
+      ],
+      "model_classes": [
+        "HydraMortarModel",
+        "mortarModel",
+        "submitModel"
+      ],
+      "textures": [
+        "hydramortar.png"
+      ],
+      "render_states": [
+        "CameraRenderState",
+        "HydraMortarRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "superclass": "EntityRenderer<HydraMortar, HydraMortarRenderState>"
+    },
+    {
+      "renderer_class": "MoonwormShotRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/MoonwormShotRenderer.java",
+      "blob_sha": "e2721a9bf89754482e6f19dd6b174ef97dec92f7",
+      "model_layers": [
+        "MOONWORM"
+      ],
+      "model_classes": [
+        "MoonwormModel",
+        "submitModel"
+      ],
+      "textures": [
+        "moonworm.png"
+      ],
+      "render_states": [
+        "CameraRenderState",
+        "MoonwormRenderState",
+        "MoonwormShotRenderState",
+        "createRenderState",
+        "extractRenderState",
+        "moonwormRenderState"
+      ],
+      "superclass": "EntityRenderer<MoonwormShot, MoonwormShotRenderState>"
+    },
+    {
+      "renderer_class": "ThrownWepRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/ThrownWepRenderer.java",
+      "blob_sha": "94ef9783d13af3a79a13e8d4280d620cfcefbf06",
+      "model_layers": [],
+      "model_classes": [],
+      "textures": [],
+      "render_states": [
+        "CameraRenderState",
+        "ThrownWepRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "superclass": "EntityRenderer<ThrownWep, ThrownWepRenderState>"
+    },
+    {
+      "renderer_class": "FallingIceRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/FallingIceRenderer.java",
+      "blob_sha": "fb1087f969a43eb0aaeb002bd91c1681b349b2d5",
+      "model_layers": [],
+      "model_classes": [],
+      "textures": [],
+      "render_states": [
+        "CameraRenderState",
+        "FallingBlockRenderState",
+        "createRenderState",
+        "extractRenderState",
+        "movingBlockRenderState"
+      ],
+      "superclass": "EntityRenderer<FallingIce, FallingBlockRenderState>"
+    },
+    {
+      "renderer_class": "ThrownIceRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/ThrownIceRenderer.java",
+      "blob_sha": "199730fbf84c6807f110b02a54f6dc62b52e1c7a",
+      "model_layers": [],
+      "model_classes": [],
+      "textures": [],
+      "render_states": [
+        "CameraRenderState",
+        "FallingBlockRenderState",
+        "createRenderState",
+        "extractRenderState",
+        "movingBlockRenderState"
+      ],
+      "superclass": "EntityRenderer<IceBomb, FallingBlockRenderState>"
+    },
+    {
+      "renderer_class": "ThrownBlockRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/ThrownBlockRenderer.java",
+      "blob_sha": "3e84ddffb91c433124fedc1ca42854fdde775149",
+      "model_layers": [],
+      "model_classes": [],
+      "textures": [],
+      "render_states": [
+        "CameraRenderState",
+        "FallingBlockRenderState",
+        "createRenderState",
+        "extractRenderState",
+        "movingBlockRenderState"
+      ],
+      "superclass": "EntityRenderer<ThrownBlock, FallingBlockRenderState>"
+    },
+    {
+      "renderer_class": "SlideBlockRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/SlideBlockRenderer.java",
+      "blob_sha": "e8a7969a5e61bbcdb71adcc093fd3c91fdd5d431",
+      "model_layers": [],
+      "model_classes": [],
+      "textures": [],
+      "render_states": [
+        "CameraRenderState",
+        "FallingBlockRenderState",
+        "createRenderState",
+        "extractRenderState",
+        "movingBlockRenderState"
+      ],
+      "superclass": "EntityRenderer<SlideBlock, FallingBlockRenderState>"
+    },
+    {
+      "renderer_class": "DefaultArrowRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/DefaultArrowRenderer.java",
+      "blob_sha": "4b4f74e07606fe059881f022c348ae1900a3a57b",
+      "model_layers": [],
+      "model_classes": [],
+      "textures": [
+        "textures/entity/projectiles/arrow.png"
+      ],
+      "render_states": [
+        "ArrowRenderState",
+        "createRenderState"
+      ],
+      "superclass": "ArrowRenderer<T, ArrowRenderState>"
+    }
+  ]
+}

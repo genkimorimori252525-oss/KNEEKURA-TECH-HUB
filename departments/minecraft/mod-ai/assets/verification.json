@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "scope": "selected-file-local-regression-and-protocol-fixture",
+  "remote_base": "89cb81f412dd91df64785940569028e1a8be9920",
+  "counts": {
+    "tests": 159,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "unchanged_storage_tests": 30,
+  "new_tests": 129,
+  "baseline_git_blobs": {
+    "src/kneekura_tech_hub/__init__.py": "98ba36591d5f734172de66bf01e2ccc974ab91fa",
+    "src/kneekura_tech_hub/minecraft/__init__.py": "6893e83208bb49f9218a7435a414ebc30b467cbc",
+    "src/kneekura_tech_hub/minecraft/storage.py": "f3d31407452cc4f13029ec21d5f88b37dd9d32bc",
+    "tests/test_minecraft_storage.py": "5aa785ea40349ae3e2a858ef122cfd6f4b724b66"
+  },
+  "tested_files": {
+    "src/kneekura_tech_hub/__init__.py": "a81e12ffa827165a74924ca1c9340b249ef0ef49b7b31a5b1e297d15e9739595",
+    "src/kneekura_tech_hub/minecraft/__init__.py": "9092d2c4daabcd706662b68fde1709022b01e3ec2e843e2c080962e95452f8c7",
+    "src/kneekura_tech_hub/minecraft/asset_contract.py": "c59efbdf6b8bb30194c52011dd1caa3b79bae95e5ca57369bad87a9aeb1a59cc",
+    "src/kneekura_tech_hub/minecraft/assets.py": "25bd6feeba379bee2adf0aa98e79cc15a97a638c7ba4912278ecdfab59fbb01f",
+    "src/kneekura_tech_hub/minecraft/blockbench.py": "a8309d898295ded7378a399c2ecb2614281e333fdbdfa78e374a59403e7b843e",
+    "src/kneekura_tech_hub/minecraft/storage.py": "1337e6f0442d3ff4a8d2279a57cdf8153b2ee482312398173b569832fea213df",
+    "tests/test_minecraft_asset_contract.py": "c9917235e10c8ecab58d435fef653c8c010bad2fc1f2844c0d2dd3b5c00bbe47",
+    "tests/test_minecraft_assets_cli.py": "665e78c2ea9d37809b1dabbc43250de853ec2660d5c735895c02e6dc6abdd51c",
+    "tests/test_minecraft_blockbench.py": "89adec67c69ae05cd514b08f9eaad897f6349812370ef659aab12c83bd0c3081",
+    "tests/test_minecraft_storage.py": "0a0f07177903ec58ea88d18c08fcc211b81359ed2c5771c25f0136c2e4c49f37"
+  },
+  "junit_sha256": "f3ab44d5ccab084ccb056fc46d614787fc64fb433f47309eec03a8f032a40baa",
+  "log_sha256": "c763b7eda4a48a341e4a20471706c6d6ecb61b517e4ec093699acb2997e8395b",
+  "red_evidence": {
+    "audit-red.log": "b714fa4351bf17fcacbbda422b18c1065d07a1d1d386e29a27f7be8e1bfbf464",
+    "cli-red.log": "a17202ef09c8f73119c446e1fab91b953f981fd67991212126ddc2bd3adb6bf5",
+    "contract-red.log": "cee9d050fcf79cf398c9852b7ca398dcb43c909eb46186d6b04abf75981220fc",
+    "index-red.log": "24c0c7f8cdc129d14bc9c05e2d6cf7ec2d35167d303191c04a8df29d7823fe8c",
+    "probe-red.log": "fc36093252ac57606a9d1b25780f10c7be7834a13564f6eadc42252b1dbcff4a"
+  },
+  "verification": {
+    "full_repository": "NOT_RUN_LOCALLY",
+    "postgresql": "NOT_RUN_LOCALLY",
+    "live_blockbench": "NOT_RUN",
+    "minecraft": "NOT_RUN",
+    "windows": "NOT_RUN"
+  },
+  "review": "author_self_review_not_independent"
+}

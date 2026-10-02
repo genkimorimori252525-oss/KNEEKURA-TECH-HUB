@@ -1,0 +1,831 @@
+{
+  "schema_version": 1,
+  "kind": "EXECUTED_STATIC_REAL_INPUT_ACCEPTANCE_PARTIAL",
+  "date": "2026-09-30",
+  "scope": "Existing MOD-AI profile/index/search/inspect/relations/interventions/resource/context APIs on pinned Twilight Forest inputs; no new engine",
+  "source_commit": "a7dd8f13c653e137f977f5ffaa870fcb20fc1625",
+  "distribution_release": "4.3.2508",
+  "distribution_sha256": "0bdc89263616d1b35c32ef82c5e9c14cbd20368e2fe8b468c72a28320be7a778",
+  "distribution_bytes": 23332091,
+  "public_distribution_url": "https://www.curseforge.com/minecraft/mc-mods/the-twilight-forest/files/5468648",
+  "acquired_binary_url": "https://cursemaven.com/curse/maven/the-twilight-forest-227639/5468648/the-twilight-forest-227639-5468648.jar",
+  "profile_id": "5d32b1d2d6a524f6bb528c59028d8951870f97cd8070ba0fb68f15660a2c68d9",
+  "index_snapshot_id": "c71fc2b9d4522ebcb366f5950d5b11d60592fac37e1771f1c14036f7f07897d9",
+  "profile_status": "PARTIAL_SELECTED_STATIC_INPUTS_NOT_RESOLVED_TF_RUNTIME",
+  "target": {
+    "minecraft": "1.20.1",
+    "forge": "47.4.6",
+    "java_major": 17
+  },
+  "identities": {
+    "forgegradle_mapped_userdev_archive_sha256": "e4a657dab7bcbb97f8dd653e181ba9c5b44a90b2b6ce13aa2b2dd246957a8324",
+    "forge_api_patch_source_archive_sha256": "870ca8a319efd436a74c5a9a1d2246d66d9be25d89ffa907afd477df9c658624",
+    "mapping_sha256": "41c23f61816a267de2803fe68d4a9c10c486e8a0185493c74c368169c23c5b2b"
+  },
+  "counts": {
+    "source_blobs_verified": 49,
+    "selected_documents": 173,
+    "prepared_classes": 91,
+    "unprepared_selected_classes": 0,
+    "query_groups": 45,
+    "query_pages": 78,
+    "fully_retrieved_documents": 170,
+    "document_pages": 320,
+    "all_query_locator_documents_followed": 110,
+    "exact_jvm_member_selectors": 10,
+    "resource_matches": 6156,
+    "resource_mismatches": 0,
+    "selected_source_resource_matches": 19,
+    "repeat_index_cache_hits": 91
+  },
+  "source_binary_class_equivalence": "NOT_ESTABLISHED",
+  "authored_query_result": "All original U01-U05 arrays executed. All five mojmap MOD-owner lookups returned PARTIAL with zero hits because acquired distributed classes are SRG. Explicit srg follow-ups returned actual class locators; no relabeling or substituted FRONTIER examples.",
+  "discovery": {
+    "status": "DISCOVERY_HINTS_ONLY",
+    "before_code_acquisition": true,
+    "hints": [
+      "Naga target/Goal behavior",
+      "Hydra multipart damage/rendering",
+      "liveroot item versus liveroot block"
+    ],
+    "links": [
+      "https://twilightforest.fandom.com/wiki/Naga",
+      "https://twilightforest.fandom.com/wiki/Hydra",
+      "https://twilightforest.fandom.com/wiki/Roots"
+    ],
+    "limits": "Search snippets supplied light discovery only. Direct current primary Wiki pages timed out and fallback page fetch failed. No Wiki content was used as technical acceptance evidence or ingested as governed knowledge."
+  },
+  "tasks": [
+    {
+      "id": "U01",
+      "status": "STATIC_RETRIEVAL_PASS_ACCEPTANCE_PARTIAL",
+      "finding": "Pinned Naga source registers movement/target Goals. Original SRG Naga bytecode extends Monster; selected exact-version mapped dependency chain Monster -> PathfinderMob -> Mob -> LivingEntity and Mob.serverAiStep -> targetSelector/goalSelector captured. Goal member descriptors reached.",
+      "remaining": [
+        "Complete target MOD dependency/config profile is unresolved",
+        "Actual behavior changes and runtime checks not performed"
+      ]
+    },
+    {
+      "id": "U02",
+      "status": "STATIC_RETRIEVAL_PASS_ACCEPTANCE_PARTIAL",
+      "finding": "Original Hydra.attackEntityFromPart(HydraPart,DamageSource,float)Z and HydraPart damage delegation reached. Exact Forge 47.4.6 LivingAttackEvent, LivingHurtEvent, LivingDamageEvent source/patch hooks checked; an event can alter parent damage without presuming a Mixin is necessary. Part-specific gating/head accounting occurs in MOD code before or alongside the parent path.",
+      "remaining": [
+        "Choice depends on intended change; no intervention selected or applied",
+        "Post-TF-transform bytecode, loaded ordinal, runtime effects and source/binary equivalence unproven"
+      ]
+    },
+    {
+      "id": "U03",
+      "status": "STATIC_RETRIEVAL_PASS_RUNTIME_NOT_RUN",
+      "finding": "TFPacketHandler registration, ASMHooks.updateMultiparts tracking-entity send, multipart.js ServerEntity target, packet encoding, queued physical-client handler and TFPart readData reached. Registration does not explicitly restrict NetworkDirection; handler references Minecraft client.",
+      "remaining": [
+        "Coremod JavaScript is preserved/read as bytes; adapter does not infer executed transformation edges",
+        "Dedicated-server-to-client and singleplayer synchronization not executed"
+      ]
+    },
+    {
+      "id": "U04",
+      "status": "STATIC_RETRIEVAL_PASS_RUNTIME_NOT_RUN",
+      "finding": "TFClientSetup selects legacy/new Hydra renderer/model using JappaPackReloadListener; both use hydra4.png. Exact packaged texture matches pinned source bytes.",
+      "remaining": [
+        "No same-run pose/render/frame observation",
+        "Reload selection and client visual outcome unverified"
+      ]
+    },
+    {
+      "id": "U05",
+      "status": "STATIC_RESOURCE_RETRIEVAL_PASS_ACCEPTANCE_PARTIAL",
+      "finding": "Liveroot item/block registration, ItemModelGenerator and BlockLootTables source, generated item model/loot JSON, texture and distribution bytes reached. All 6,156 comparable source resources independently reverified against the exact JAR with zero mismatches.",
+      "remaining": [
+        "No MOD edits or generated/build output created by this run",
+        "All compiled classes equal pinned source candidate remains unproven"
+      ]
+    },
+    {
+      "id": "U06",
+      "status": "BLOCKED",
+      "reason": "Specific candidate Fabric MOD, immutable candidate inputs and dependency closure were not supplied; no candidate invented."
+    }
+  ],
+  "exact_members": [
+    {
+      "owner": "twilightforest/entity/boss/Naga",
+      "member": "m_8099_",
+      "descriptor": "()V",
+      "namespace": "srg",
+      "stage": "original_distribution",
+      "document_id": "b2f854e7974213a854cc291a251063649672a99d46d81ce44dbdfc1e4f5a8845",
+      "class_sha256": "5aa6370d96f5d34e8fe41b01f080841472b384ab87352ea8d6b57501989866f3",
+      "disassembly_sha256": "b017dcda3ab1fc0632781cf2208e17f8f984821788cceed3845e9c6e32b08b62",
+      "disassembly_lines": [
+        1928,
+        2031
+      ]
+    },
+    {
+      "owner": "twilightforest/entity/boss/Hydra",
+      "member": "attackEntityFromPart",
+      "descriptor": "(Ltwilightforest/entity/boss/HydraPart;Lnet/minecraft/world/damagesource/DamageSource;F)Z",
+      "namespace": "srg",
+      "stage": "original_distribution",
+      "document_id": "a4f032e4cecfd44a7f5fbc88ac3a5c5f46a12fc205f407a6f31c0da88c2d92cf",
+      "class_sha256": "5d2ead239227b9322ef7fdbb789351896f4c1edff89475044d048ad0d0e334ac",
+      "disassembly_sha256": "0a8df004b622cdef120ed35cf26aa5468d63088bc816833bab15272f56ffb865",
+      "disassembly_lines": [
+        3796,
+        4052
+      ]
+    },
+    {
+      "owner": "twilightforest/entity/boss/HydraPart",
+      "member": "m_6469_",
+      "descriptor": "(Lnet/minecraft/world/damagesource/DamageSource;F)Z",
+      "namespace": "srg",
+      "stage": "original_distribution",
+      "document_id": "a7cb57f67435a033afb9571b4faf4289e3fdec778f9f8c97ab3b4f4f72a04a1a",
+      "class_sha256": "39334888b51f7fd5b4f43cadbd46bb010335ddaab4aed6081d0b25e1b547dda4",
+      "disassembly_sha256": "3038610048d4c1e892f58529a8278c9b87c62afc5eddaa0896e4a889d8b4eaa7",
+      "disassembly_lines": [
+        531,
+        576
+      ]
+    },
+    {
+      "owner": "twilightforest/network/UpdateTFMultipartPacket$Handler",
+      "member": "onMessage",
+      "descriptor": "(Ltwilightforest/network/UpdateTFMultipartPacket;Ljava/util/function/Supplier;)Z",
+      "namespace": "srg",
+      "stage": "original_distribution",
+      "document_id": "06707279fdcb920aed9bf553c880614bf23231a6e362381aa9a0a9ea1bdbd385",
+      "class_sha256": "7735796e1bafff53db15d03adeb1be84a8c71dbd2901e1473717b891196961f7",
+      "disassembly_sha256": "5a55a7f7924a2f85d89d5ab7e99c69b60299738e783758519aec989209dfca42",
+      "disassembly_lines": [
+        81,
+        120
+      ]
+    },
+    {
+      "owner": "twilightforest/ASMHooks",
+      "member": "updateMultiparts",
+      "descriptor": "(Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/world/entity/Entity;",
+      "namespace": "srg",
+      "stage": "original_distribution",
+      "document_id": "df230d06195b4ebcdb2b47ee6cad7ca012bddde3680852d3640622e73ba11f1a",
+      "class_sha256": "3dc13c443b200a1864ce144617fddd982d73554036e1f7d67ae43a8d078bd426",
+      "disassembly_sha256": "8007313bce629d82b33bd1a97f6bd640af59a71b6f52f5ff48551f12e2d6a634",
+      "disassembly_lines": [
+        915,
+        944
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/Mob",
+      "member": "serverAiStep",
+      "descriptor": "()V",
+      "namespace": "mojmap",
+      "stage": "forgegradle_mapped_userdev",
+      "document_id": "fc7ea12b4735fec65def77bd941aec1cb787ef3b4f798d97f54ec480ef37dfd4",
+      "class_sha256": "6dd494cbf470a1fb072648f000cb6047a2a8bee0ab5419744d269230ce3b88f5",
+      "disassembly_sha256": "b2d91613df41271c9a25d76d074e3f952a7ad4088f859d6f142a310d6939b540",
+      "disassembly_lines": [
+        5246,
+        5445
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/goal/Goal",
+      "member": "canUse",
+      "descriptor": "()Z",
+      "namespace": "mojmap",
+      "stage": "forgegradle_mapped_userdev",
+      "document_id": "9723d6a7de05a5b4ef3b3c63129146a3ce67b2d43db4539fc2f68eb7d9e077d5",
+      "class_sha256": "d96b55648e1dd62ebcd119fa2b727883d381c7c4e165162e75d8c1dae50e821a",
+      "disassembly_sha256": "15cd3d9bdc1b15273c98dfd746977c966cf967b8cdfc83c734370adc473b4cbd",
+      "disassembly_lines": [
+        122,
+        125
+      ]
+    },
+    {
+      "owner": "net/minecraftforge/common/ForgeHooks",
+      "member": "onLivingAttack",
+      "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/damagesource/DamageSource;F)Z",
+      "namespace": "mojmap",
+      "stage": "forgegradle_mapped_userdev",
+      "document_id": "7ac55b13d2415129f6ad6356e94388b57b965a60fc8862e447665b4dc93ca3d9",
+      "class_sha256": "60fe69ff19cabd485565deb24139199ae706ba3b9563efffbb96c70e3baffba9",
+      "disassembly_sha256": "91e6a2f8a14c742aa24b8b7b82c94616ad729ea2e4b75f4bfcb026c6072e8747",
+      "disassembly_lines": [
+        3472,
+        3505
+      ]
+    },
+    {
+      "owner": "net/minecraftforge/common/ForgeHooks",
+      "member": "onLivingHurt",
+      "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/damagesource/DamageSource;F)F",
+      "namespace": "mojmap",
+      "stage": "forgegradle_mapped_userdev",
+      "document_id": "7ac55b13d2415129f6ad6356e94388b57b965a60fc8862e447665b4dc93ca3d9",
+      "class_sha256": "60fe69ff19cabd485565deb24139199ae706ba3b9563efffbb96c70e3baffba9",
+      "disassembly_sha256": "91e6a2f8a14c742aa24b8b7b82c94616ad729ea2e4b75f4bfcb026c6072e8747",
+      "disassembly_lines": [
+        3599,
+        3635
+      ]
+    },
+    {
+      "owner": "net/minecraftforge/common/ForgeHooks",
+      "member": "onLivingDamage",
+      "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/damagesource/DamageSource;F)F",
+      "namespace": "mojmap",
+      "stage": "forgegradle_mapped_userdev",
+      "document_id": "7ac55b13d2415129f6ad6356e94388b57b965a60fc8862e447665b4dc93ca3d9",
+      "class_sha256": "60fe69ff19cabd485565deb24139199ae706ba3b9563efffbb96c70e3baffba9",
+      "disassembly_sha256": "91e6a2f8a14c742aa24b8b7b82c94616ad729ea2e4b75f4bfcb026c6072e8747",
+      "disassembly_lines": [
+        3636,
+        3672
+      ]
+    }
+  ],
+  "source_locator_binding": [
+    {
+      "path": "build.gradle",
+      "git_blob_sha1": "00a03ad38dcc673fa97dc0ca443ab72bd3a2fa84",
+      "sha256": "270a87cb7eaa85f2964e3b5e2c7eb440881df74bc167f9cb5cfee655d5d8806c",
+      "bytes": 5578,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/build.gradle"
+    },
+    {
+      "path": "gradle.properties",
+      "git_blob_sha1": "1dffbe18541d353ae3b5652032357340aa904ac3",
+      "sha256": "6b1359f880aafe93917633e4a487ec500b4ea2a911da621ffc432548737b494b",
+      "bytes": 397,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/gradle.properties"
+    },
+    {
+      "path": "src/generated/resources/assets/twilightforest/models/item/liveroot.json",
+      "git_blob_sha1": "bd28e4fa528aaa747a8d957b0a260843f4f50b00",
+      "sha256": "40dd7d81971c1b389e23f3dd0adf7868cf31c8144a6990a40c595c142a3e80bf",
+      "bytes": 108,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/generated/resources/assets/twilightforest/models/item/liveroot.json"
+    },
+    {
+      "path": "src/generated/resources/data/twilightforest/loot_tables/blocks/liveroot_block.json",
+      "git_blob_sha1": "933b89892cdca810168f2436b3d8d9d08753c421",
+      "sha256": "0521244388be7b5d18a11b8f9229cfc2cd9dad8ba81ca5b8959763ebde79cb9f",
+      "bytes": 1380,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/generated/resources/data/twilightforest/loot_tables/blocks/liveroot_block.json"
+    },
+    {
+      "path": "src/main/java/twilightforest/ASMHooks.java",
+      "git_blob_sha1": "8eb48bd32cfd046ea02c3c2d6badc9d36ffe1547",
+      "sha256": "09cb8585416dbb047dc6029d7aef6c63226096e204f8a5565396b73414a2a498",
+      "bytes": 13644,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/ASMHooks.java"
+    },
+    {
+      "path": "src/main/java/twilightforest/TFMagicMapData.java",
+      "git_blob_sha1": "976bc34146374ad3ffdec13f0af221ec0222f2f6",
+      "sha256": "b23201987e2443b3694f636ee9e64e61a8c53e4b0dd56de1930f8fd123cd5515",
+      "bytes": 8675,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/TFMagicMapData.java"
+    },
+    {
+      "path": "src/main/java/twilightforest/block/LiverootBlock.java",
+      "git_blob_sha1": "474e6dffd6c3c226cee8de7d4c5a5566c04e1dbf",
+      "sha256": "696fe25d92552d8742f9e7e167e32146597de4a60c4c9f8a5a282f73271f41af",
+      "bytes": 2241,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/block/LiverootBlock.java"
+    },
+    {
+      "path": "src/main/java/twilightforest/client/JappaPackReloadListener.java",
+      "git_blob_sha1": "5539498443881de626f48fb85b08ee2caa9e7639",
+      "sha256": "3746c2371ef1c515ade82cec315483d4d551e6b28dfe786a7b2a3e488a20a0da",
+      "bytes": 2225,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/client/JappaPackReloadListener.java"
+    },
+    {
+      "path": "src/main/java/twilightforest/client/TFClientSetup.java",
+      "git_blob_sha1": "2e7012197d2c4e85d3fd2d6f16d7408649300e92",
+      "sha256": "e6ed399d04a7c747692c4ba5c4085a6931bb80c7b0c76cf852d032f67d59c31c",
+      "bytes": 22121,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/client/TFClientSetup.java"
+    },
+    {
+      "path": "src/main/java/twilightforest/client/model/entity/HydraModel.java",
+      "git_blob_sha1": "e2b66f6df7baf824bff9b6fdaf35535d9b57f8e5",
+      "sha256": "98a4db61d71e7e8cc3e74d2d2368750d69c3c7cfaf26338c507708fa66b8b174",
+      "bytes": 8587,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/client/model/entity/HydraModel.java"
+    },
+    {
+      "path": "src/main/java/twilightforest/client/model/entity/newmodels/NewHydraModel.java",
+      "git_blob_sha1": "3e93b31d87f5ab8e982e497d52109035c5a97a77",
+      "sha256": "df7fdd32d59a525abbb110413c13082eb14e07bb8ec68454e64a4b40f868be18",
+      "bytes": 9594,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/client/model/entity/newmodels/NewHydraModel.java"
+    },
+    {
+      "path": "src/main/java/twilightforest/client/renderer/entity/HydraRenderer.java",
+      "git_blob_sha1": "1ad130a2feaaa5eb994536e345e9f2470af9139d",
+      "sha256": "a936de2d45e89bbb92f3e98547321806a1e9deb5d401ae1c99029fa01cfe69bc",
+      "bytes": 852,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/client/renderer/entity/HydraRenderer.java"
+    },
+    {
+      "path": "src/main/java/twilightforest/client/renderer/entity/newmodels/NewHydraRenderer.java",
+      "git_blob_sha1": "7bcd6fee415d3f74253ac50bf770aa90ae7c938b",
+      "sha256": "5281dd6147f41a8d6b79936967159eb4d74900928936a313d808ed94fdba5642",
+      "bytes": 887,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/client/renderer/entity/newmodels/NewHydraRenderer.java"
+    },
+    {
+      "path": "src/main/java/twilightforest/data/BlockLootTables.java",
+      "git_blob_sha1": "974cac4a97dabd9007ac8f27ef687af6f4bfb5d4",
+      "sha256": "df159f41ee1a8d82a899e66a33ff756235c86d5e783d1331edf74fbe0f3e602f",
+      "bytes": 42725,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/data/BlockLootTables.java"
+    },
+    {
+      "path": "src/main/java/twilightforest/data/ItemModelGenerator.java",
+      "git_blob_sha1": "ecbc25a0e113ec1da89e1ee4f1820783f072bae8",
+      "sha256": "3d131d322482cd8788a69c6652477f49beb3242fdfcdf66343e392c0060557d4",
+      "bytes": 54903,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/data/ItemModelGenerator.java"
+    },
+    {
+      "path": "src/main/java/twilightforest/entity/TFPart.java",
+      "git_blob_sha1": "e37e8a7953ba106a1214c858be1794ae6fcbbe47",
+      "sha256": "fd0a95e4c71b7528e9db90ed7c8a77e93d59f937c6d43d827eb028caaf284f1a",
+      "bytes": 4972,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/entity/TFPart.java"
+    },
+    {
+      "path": "src/main/java/twilightforest/entity/ai/control/NagaMoveControl.java",
+      "git_blob_sha1": "8677e37d5009e7e7e1d1607f6ac118cd1c6c5cb8",
+      "sha256": "182d088237416b448eb815913c4036e609104bb54bdaeda0cb15326357d16145",
+      "bytes": 833,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/entity/ai/control/NagaMoveControl.java"
+    },
+    {
+      "path": "src/main/java/twilightforest/entity/ai/goal/AttemptToGoHomeGoal.java",
+      "git_blob_sha1": "ab89fc5a8a8070329fb7c490427b9ee0212e340c",
+      "sha256": "781c7cfb93e32f641e971eef1d26b0c4f50f2b42a949ebbeda74759d375794af",
+      "bytes": 1437,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/entity/ai/goal/AttemptToGoHomeGoal.java"
+    },
+    {
+      "path": "src/main/java/twilightforest/entity/ai/goal/NagaMovementPattern.java",
+      "git_blob_sha1": "5d0140f529bcdf52a04e3f507f2a0385c97cea4f",
+      "sha256": "38fbb6a84c736c7e541a1b135e13897a63dde7e5fbb3d402309b32b62778726b",
+      "bytes": 8196,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/entity/ai/goal/NagaMovementPattern.java"
+    },
+    {
+      "path": "src/main/java/twilightforest/entity/ai/goal/NagaSmashGoal.java",
+      "git_blob_sha1": "89de50ac7623756e9d7d1ab66556a3120e5b9da5",
+      "sha256": "7b8d6563113bdfc7f604e2f826259299587d675bc70198d656d1d8b4a04fa113",
+      "bytes": 1588,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/entity/ai/goal/NagaSmashGoal.java"
+    },
+    {
+      "path": "src/main/java/twilightforest/entity/ai/goal/SimplifiedAttackGoal.java",
+      "git_blob_sha1": "6601f50228c94808d5cfeb91c24f2aa7b72697fd",
+      "sha256": "f35d4338aba70c70743b500765ec2f133344b10bfe7bb1b73f880dff85a91a51",
+      "bytes": 1587,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/entity/ai/goal/SimplifiedAttackGoal.java"
+    },
+    {
+      "path": "src/main/java/twilightforest/entity/boss/Hydra.java",
+      "git_blob_sha1": "e4c67000ed516e36c9be4b359cadc492e79cc672",
+      "sha256": "71d53745286a6fb2b06abe032d766f8ad9e27c5d62fe73780e33acf3fbe1b893",
+      "bytes": 25005,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/entity/boss/Hydra.java"
+    },
+    {
+      "path": "src/main/java/twilightforest/entity/boss/HydraHead.java",
+      "git_blob_sha1": "09c5b4c1456838c99b500b19dd7de7f0c2496544",
+      "sha256": "e7093e2bca65d7336b96f1c26b75f0d71bdeb7372b8cad70217d2fe915960833",
+      "bytes": 1979,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/entity/boss/HydraHead.java"
+    },
+    {
+      "path": "src/main/java/twilightforest/entity/boss/HydraHeadContainer.java",
+      "git_blob_sha1": "5c4299d6e2656638de0a8615fcf1265c6d5cd56f",
+      "sha256": "3e1f673aaaf00ad12881ce29e5fd9a7e96d324091d1459ebc31c9543c4733f56",
+      "bytes": 37321,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/entity/boss/HydraHeadContainer.java"
+    },
+    {
+      "path": "src/main/java/twilightforest/entity/boss/HydraNeck.java",
+      "git_blob_sha1": "0183cd7313ab8cea99fd4c2c99e057a34b94e20d",
+      "sha256": "e531e281bd6aca69654540faaffbfd0744948474d524601e7386939520881a63",
+      "bytes": 568,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/entity/boss/HydraNeck.java"
+    },
+    {
+      "path": "src/main/java/twilightforest/entity/boss/HydraPart.java",
+      "git_blob_sha1": "f9de910b67ab62927a3822df69996c0d703e95ec",
+      "sha256": "42e990ffafc30beb8dc392d2d850e084a8c2b062493afbecd0e37e296fbfb766",
+      "bytes": 3223,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/entity/boss/HydraPart.java"
+    },
+    {
+      "path": "src/main/java/twilightforest/entity/boss/Naga.java",
+      "git_blob_sha1": "7745f72ff28047c5123d24f596dc9060f208212d",
+      "sha256": "1eccbc04340322b36be2bc9adb85fdbdd15366f006ef0e5d535a6e9133a5fda4",
+      "bytes": 27246,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/entity/boss/Naga.java"
+    },
+    {
+      "path": "src/main/java/twilightforest/entity/boss/NagaSegment.java",
+      "git_blob_sha1": "b3313751b9f57e1d385e6b0251483d2f3d7a6f18",
+      "sha256": "ebb2f8764d48f0194a280ba4ea6cfef29aad6fb658a5422a8d10e12201f1782b",
+      "bytes": 3805,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/entity/boss/NagaSegment.java"
+    },
+    {
+      "path": "src/main/java/twilightforest/init/TFBlocks.java",
+      "git_blob_sha1": "67f0e8c882b86d2c0ab49e85019c02411cafacd9",
+      "sha256": "9254ce34d7820d3cdce77c747d1d1dcba12623fe54c3db0a49eac0c2af2f8358",
+      "bytes": 118740,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/init/TFBlocks.java"
+    },
+    {
+      "path": "src/main/java/twilightforest/init/TFItems.java",
+      "git_blob_sha1": "c7d83a7e8189df1740fb6ecb1fd64e2f244b890c",
+      "sha256": "93a81f76f5278d8da12fdf6768b9a34486c67f0d4955203ba65e5e735ded51d6",
+      "bytes": 49996,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/init/TFItems.java"
+    },
+    {
+      "path": "src/main/java/twilightforest/network/TFPacketHandler.java",
+      "git_blob_sha1": "7a2a44983eaf2fca0ad093d2e485f46e3d28dc75",
+      "sha256": "e3441bc3a713db0f28bbb5813851064c84f7f2afcc3fe69ddae7a90880c8c93e",
+      "bytes": 3839,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/network/TFPacketHandler.java"
+    },
+    {
+      "path": "src/main/java/twilightforest/network/UpdateTFMultipartPacket.java",
+      "git_blob_sha1": "3a4b56f0c96333d21b8f094f096d08d875d00358",
+      "sha256": "fe7ce9dcf4e74414ffcef57d53dd7f49e3e2512b4bcd8591f05a273ea8150517",
+      "bytes": 3762,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/java/twilightforest/network/UpdateTFMultipartPacket.java"
+    },
+    {
+      "path": "src/main/resources/META-INF/accesstransformer.cfg",
+      "git_blob_sha1": "cdf1c29a35a59d218a31026c8cdb51f7d52d6680",
+      "sha256": "aecc1cdfd94e233fce3fd993827209989bf1c8f03f0acf0c7951b5f4727e7e34",
+      "bytes": 9779,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/META-INF/accesstransformer.cfg"
+    },
+    {
+      "path": "src/main/resources/META-INF/asm/book.js",
+      "git_blob_sha1": "088965692249c7c0010b71a3fd97a28f290dc42d",
+      "sha256": "b43ce9ed5c6e682aa74400a1489cb6f50713168648c31c246ce467736a515027",
+      "bytes": 1606,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/META-INF/asm/book.js"
+    },
+    {
+      "path": "src/main/resources/META-INF/asm/cloud.js",
+      "git_blob_sha1": "3465ed9d65702e7c1c906d4c518c756dfc2d441b",
+      "sha256": "62ee6805429da9331c27e31306c63869ac628950329c874fb80006e6aed3027d",
+      "bytes": 2138,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/META-INF/asm/cloud.js"
+    },
+    {
+      "path": "src/main/resources/META-INF/asm/conquered.js",
+      "git_blob_sha1": "c7605da47e5e00741c979663e61de1b68703c70d",
+      "sha256": "05cd481f072c9a2ee2866f9c88b4054f4d4dc8a88967c6500f006df8e4905c4e",
+      "bytes": 2327,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/META-INF/asm/conquered.js"
+    },
+    {
+      "path": "src/main/resources/META-INF/asm/foliage.js",
+      "git_blob_sha1": "cf4e996c22bcb927ae33ed2da1671340963a1ccb",
+      "sha256": "682010a41774d841b18292ef60d215028b0076c6694ca4ad375a99688d32ccfc",
+      "bytes": 1637,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/META-INF/asm/foliage.js"
+    },
+    {
+      "path": "src/main/resources/META-INF/asm/lead.js",
+      "git_blob_sha1": "2f16cb5033126c2961b9c9108521b2f1725dfbc4",
+      "sha256": "0be70b586d143c866f9bea8635242ae0ada88f06c5794dacf7b1a7593afba25b",
+      "bytes": 1463,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/META-INF/asm/lead.js"
+    },
+    {
+      "path": "src/main/resources/META-INF/asm/maprendercontext.js",
+      "git_blob_sha1": "ab823ed3ebeab1f38b181a5a9646ae27eada2cc3",
+      "sha256": "fa83e93b7d087fda3e467b2a40a25e326efcb0e1ebaa28e67ab0c9aa358df5a6",
+      "bytes": 9166,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/META-INF/asm/maprendercontext.js"
+    },
+    {
+      "path": "src/main/resources/META-INF/asm/mount.js",
+      "git_blob_sha1": "19e1d311e4090284f0462aa4aa2188a034cae191",
+      "sha256": "6e110325b5d1845f8fdcadd85acaa4ed7cad6d8cb38109a6920cb137213ce00a",
+      "bytes": 3585,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/META-INF/asm/mount.js"
+    },
+    {
+      "path": "src/main/resources/META-INF/asm/multipart.js",
+      "git_blob_sha1": "389ef4e590715e34d073ff07b0909cc56106d898",
+      "sha256": "5d99ff5aae9c8762cf010b201df72326ca5ab9de4aecfa74c743d7ca9ac0d1d5",
+      "bytes": 6430,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/META-INF/asm/multipart.js"
+    },
+    {
+      "path": "src/main/resources/META-INF/asm/music.js",
+      "git_blob_sha1": "5817d4c1b2ab9523bb1c68d0d9965babc1ad9f84",
+      "sha256": "be07f15b5877ed2a4de5ea916c8fdb5c3e416ffc151c00e34bd9409cc638393f",
+      "bytes": 1360,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/META-INF/asm/music.js"
+    },
+    {
+      "path": "src/main/resources/META-INF/asm/reach.js",
+      "git_blob_sha1": "ebc4ef15c2603df8728e145164978661776ea4ac",
+      "sha256": "a94b80444b911840e95dc12813168740747dae8cdd7d10f7c5eb140360e52f5f",
+      "bytes": 1899,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/META-INF/asm/reach.js"
+    },
+    {
+      "path": "src/main/resources/META-INF/asm/seed.js",
+      "git_blob_sha1": "7e63c15e3fbb0626f7ef608b8d112f54b39740b9",
+      "sha256": "ea8669272a7da3ed4f55d2b264d7b4f160b6f131059dd7c8666632cef0e5128b",
+      "bytes": 1306,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/META-INF/asm/seed.js"
+    },
+    {
+      "path": "src/main/resources/META-INF/asm/shroom.js",
+      "git_blob_sha1": "980beab765f318fa73061832f6f27a1a5a7d5ce9",
+      "sha256": "e4e7d944a221158faf347c865329505f4149ac600e3f89d21fa8346cf4b72e3a",
+      "bytes": 1954,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/META-INF/asm/shroom.js"
+    },
+    {
+      "path": "src/main/resources/META-INF/coremods.json",
+      "git_blob_sha1": "40b9dec8f025800357ce291d9503b299bc73fb4f",
+      "sha256": "5cae390e9e84c96098db44287184314eeeb3341c4bf27f9a5e2f4bd1265e95e8",
+      "bytes": 472,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/META-INF/coremods.json"
+    },
+    {
+      "path": "src/main/resources/META-INF/mods.toml",
+      "git_blob_sha1": "c46f4b811c21e4035dd50c4e15fd6a90bcf9f0d5",
+      "sha256": "fd11b8804eaba1e6cb32b00c85728abedd54a69945764a7d3a8da6822d5434d1",
+      "bytes": 1125,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/META-INF/mods.toml"
+    },
+    {
+      "path": "src/main/resources/assets/twilightforest/textures/item/liveroot.png",
+      "git_blob_sha1": "5c4ea60cb912ea2e0af0c72875d45d2623bebc72",
+      "sha256": "8c8df3d2f68ed8623f77bf92e4f7be54e0fd7f76aefa14440ad2e30ab2539e24",
+      "bytes": 382,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/assets/twilightforest/textures/item/liveroot.png"
+    },
+    {
+      "path": "src/main/resources/assets/twilightforest/textures/model/hydra4.png",
+      "git_blob_sha1": "45d8ab83ddbff6020e5c88f4d8de4ffff800540e",
+      "sha256": "1a9592e62e2762f1585d13292cac5bca338c606f4c60fa397bdaa96d2ce9a0ce",
+      "bytes": 26065,
+      "url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/assets/twilightforest/textures/model/hydra4.png"
+    }
+  ],
+  "selected_packaged_resource_binding": [
+    {
+      "source_path": "src/generated/resources/assets/twilightforest/models/item/liveroot.json",
+      "packaged_path": "assets/twilightforest/models/item/liveroot.json",
+      "git_blob_sha1": "bd28e4fa528aaa747a8d957b0a260843f4f50b00",
+      "sha256": "40dd7d81971c1b389e23f3dd0adf7868cf31c8144a6990a40c595c142a3e80bf",
+      "source_url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/generated/resources/assets/twilightforest/models/item/liveroot.json"
+    },
+    {
+      "source_path": "src/generated/resources/data/twilightforest/loot_tables/blocks/liveroot_block.json",
+      "packaged_path": "data/twilightforest/loot_tables/blocks/liveroot_block.json",
+      "git_blob_sha1": "933b89892cdca810168f2436b3d8d9d08753c421",
+      "sha256": "0521244388be7b5d18a11b8f9229cfc2cd9dad8ba81ca5b8959763ebde79cb9f",
+      "source_url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/generated/resources/data/twilightforest/loot_tables/blocks/liveroot_block.json"
+    },
+    {
+      "source_path": "src/main/resources/META-INF/accesstransformer.cfg",
+      "packaged_path": "META-INF/accesstransformer.cfg",
+      "git_blob_sha1": "cdf1c29a35a59d218a31026c8cdb51f7d52d6680",
+      "sha256": "aecc1cdfd94e233fce3fd993827209989bf1c8f03f0acf0c7951b5f4727e7e34",
+      "source_url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/META-INF/accesstransformer.cfg"
+    },
+    {
+      "source_path": "src/main/resources/META-INF/asm/book.js",
+      "packaged_path": "META-INF/asm/book.js",
+      "git_blob_sha1": "088965692249c7c0010b71a3fd97a28f290dc42d",
+      "sha256": "b43ce9ed5c6e682aa74400a1489cb6f50713168648c31c246ce467736a515027",
+      "source_url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/META-INF/asm/book.js"
+    },
+    {
+      "source_path": "src/main/resources/META-INF/asm/cloud.js",
+      "packaged_path": "META-INF/asm/cloud.js",
+      "git_blob_sha1": "3465ed9d65702e7c1c906d4c518c756dfc2d441b",
+      "sha256": "62ee6805429da9331c27e31306c63869ac628950329c874fb80006e6aed3027d",
+      "source_url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/META-INF/asm/cloud.js"
+    },
+    {
+      "source_path": "src/main/resources/META-INF/asm/conquered.js",
+      "packaged_path": "META-INF/asm/conquered.js",
+      "git_blob_sha1": "c7605da47e5e00741c979663e61de1b68703c70d",
+      "sha256": "05cd481f072c9a2ee2866f9c88b4054f4d4dc8a88967c6500f006df8e4905c4e",
+      "source_url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/META-INF/asm/conquered.js"
+    },
+    {
+      "source_path": "src/main/resources/META-INF/asm/foliage.js",
+      "packaged_path": "META-INF/asm/foliage.js",
+      "git_blob_sha1": "cf4e996c22bcb927ae33ed2da1671340963a1ccb",
+      "sha256": "682010a41774d841b18292ef60d215028b0076c6694ca4ad375a99688d32ccfc",
+      "source_url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/META-INF/asm/foliage.js"
+    },
+    {
+      "source_path": "src/main/resources/META-INF/asm/lead.js",
+      "packaged_path": "META-INF/asm/lead.js",
+      "git_blob_sha1": "2f16cb5033126c2961b9c9108521b2f1725dfbc4",
+      "sha256": "0be70b586d143c866f9bea8635242ae0ada88f06c5794dacf7b1a7593afba25b",
+      "source_url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/META-INF/asm/lead.js"
+    },
+    {
+      "source_path": "src/main/resources/META-INF/asm/maprendercontext.js",
+      "packaged_path": "META-INF/asm/maprendercontext.js",
+      "git_blob_sha1": "ab823ed3ebeab1f38b181a5a9646ae27eada2cc3",
+      "sha256": "fa83e93b7d087fda3e467b2a40a25e326efcb0e1ebaa28e67ab0c9aa358df5a6",
+      "source_url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/META-INF/asm/maprendercontext.js"
+    },
+    {
+      "source_path": "src/main/resources/META-INF/asm/mount.js",
+      "packaged_path": "META-INF/asm/mount.js",
+      "git_blob_sha1": "19e1d311e4090284f0462aa4aa2188a034cae191",
+      "sha256": "6e110325b5d1845f8fdcadd85acaa4ed7cad6d8cb38109a6920cb137213ce00a",
+      "source_url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/META-INF/asm/mount.js"
+    },
+    {
+      "source_path": "src/main/resources/META-INF/asm/multipart.js",
+      "packaged_path": "META-INF/asm/multipart.js",
+      "git_blob_sha1": "389ef4e590715e34d073ff07b0909cc56106d898",
+      "sha256": "5d99ff5aae9c8762cf010b201df72326ca5ab9de4aecfa74c743d7ca9ac0d1d5",
+      "source_url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/META-INF/asm/multipart.js"
+    },
+    {
+      "source_path": "src/main/resources/META-INF/asm/music.js",
+      "packaged_path": "META-INF/asm/music.js",
+      "git_blob_sha1": "5817d4c1b2ab9523bb1c68d0d9965babc1ad9f84",
+      "sha256": "be07f15b5877ed2a4de5ea916c8fdb5c3e416ffc151c00e34bd9409cc638393f",
+      "source_url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/META-INF/asm/music.js"
+    },
+    {
+      "source_path": "src/main/resources/META-INF/asm/reach.js",
+      "packaged_path": "META-INF/asm/reach.js",
+      "git_blob_sha1": "ebc4ef15c2603df8728e145164978661776ea4ac",
+      "sha256": "a94b80444b911840e95dc12813168740747dae8cdd7d10f7c5eb140360e52f5f",
+      "source_url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/META-INF/asm/reach.js"
+    },
+    {
+      "source_path": "src/main/resources/META-INF/asm/seed.js",
+      "packaged_path": "META-INF/asm/seed.js",
+      "git_blob_sha1": "7e63c15e3fbb0626f7ef608b8d112f54b39740b9",
+      "sha256": "ea8669272a7da3ed4f55d2b264d7b4f160b6f131059dd7c8666632cef0e5128b",
+      "source_url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/META-INF/asm/seed.js"
+    },
+    {
+      "source_path": "src/main/resources/META-INF/asm/shroom.js",
+      "packaged_path": "META-INF/asm/shroom.js",
+      "git_blob_sha1": "980beab765f318fa73061832f6f27a1a5a7d5ce9",
+      "sha256": "e4e7d944a221158faf347c865329505f4149ac600e3f89d21fa8346cf4b72e3a",
+      "source_url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/META-INF/asm/shroom.js"
+    },
+    {
+      "source_path": "src/main/resources/META-INF/coremods.json",
+      "packaged_path": "META-INF/coremods.json",
+      "git_blob_sha1": "40b9dec8f025800357ce291d9503b299bc73fb4f",
+      "sha256": "5cae390e9e84c96098db44287184314eeeb3341c4bf27f9a5e2f4bd1265e95e8",
+      "source_url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/META-INF/coremods.json"
+    },
+    {
+      "source_path": "src/main/resources/META-INF/mods.toml",
+      "packaged_path": "META-INF/mods.toml",
+      "git_blob_sha1": "c46f4b811c21e4035dd50c4e15fd6a90bcf9f0d5",
+      "sha256": "fd11b8804eaba1e6cb32b00c85728abedd54a69945764a7d3a8da6822d5434d1",
+      "source_url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/META-INF/mods.toml"
+    },
+    {
+      "source_path": "src/main/resources/assets/twilightforest/textures/item/liveroot.png",
+      "packaged_path": "assets/twilightforest/textures/item/liveroot.png",
+      "git_blob_sha1": "5c4ea60cb912ea2e0af0c72875d45d2623bebc72",
+      "sha256": "8c8df3d2f68ed8623f77bf92e4f7be54e0fd7f76aefa14440ad2e30ab2539e24",
+      "source_url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/assets/twilightforest/textures/item/liveroot.png"
+    },
+    {
+      "source_path": "src/main/resources/assets/twilightforest/textures/model/hydra4.png",
+      "packaged_path": "assets/twilightforest/textures/model/hydra4.png",
+      "git_blob_sha1": "45d8ab83ddbff6020e5c88f4d8de4ffff800540e",
+      "sha256": "1a9592e62e2762f1585d13292cac5bca338c606f4c60fa397bdaa96d2ce9a0ce",
+      "source_url": "https://github.com/TeamTwilight/twilightforest/blob/a7dd8f13c653e137f977f5ffaa870fcb20fc1625/src/main/resources/assets/twilightforest/textures/model/hydra4.png"
+    }
+  ],
+  "coverage_limits": [
+    "49 selected source blobs, not full source checkout",
+    "91 prepared MOD/Forge/Minecraft selected classfiles; dependency context beyond selection remains unresolved",
+    "101 cached exact baseline compile artifacts hashes verified; that baseline is not asserted to be Twilight Forest dependency closure",
+    "Relations remain PARTIAL; dynamic dispatch, callbacks, reflection, coremod execution, runtime side/load order and target origins are not proven",
+    "No transformed ordinal or performance/quality improvement claim",
+    "Metrics comparison to grep/IDE/Gradle is NOT_MEASURED"
+  ],
+  "canonical_writes": 0,
+  "database_writes": 0,
+  "game_launches": 0,
+  "upstream_code_execution": 0,
+  "upstream_builds": 0,
+  "active_source_changes": 0,
+  "publication": false,
+  "verified_static_assertions": {
+    "exact_inheritance_chain": [
+      "twilightforest/entity/boss/Naga",
+      "net/minecraft/world/entity/monster/Monster",
+      "net/minecraft/world/entity/PathfinderMob",
+      "net/minecraft/world/entity/Mob",
+      "net/minecraft/world/entity/LivingEntity"
+    ],
+    "NagaMovementPattern_extends_Goal": true,
+    "serverAiStep_references_both_Goal_selectors": true,
+    "LivingEntity_calls_exact_Forge_damage_hooks": [
+      "onLivingAttack",
+      "onLivingDamage",
+      "onLivingHurt"
+    ],
+    "all_derived_pages_rehash_verified": true
+  },
+  "namespace_resolutions": [
+    {
+      "owner": "net/minecraft/world/entity/Mob",
+      "srg_member": "m_8099_",
+      "mojmap_member": "registerGoals",
+      "descriptor": "()V"
+    },
+    {
+      "owner": "net/minecraft/world/entity/LivingEntity",
+      "srg_member": "m_6469_",
+      "mojmap_member": "hurt",
+      "descriptor": "(Lnet/minecraft/world/damagesource/DamageSource;F)Z"
+    },
+    {
+      "owner": "net/minecraft/server/level/ServerEntity",
+      "srg_member": "m_8543_",
+      "mojmap_member": "sendDirtyEntityData",
+      "descriptor": "()V"
+    }
+  ],
+  "forge_source_verification": {
+    "status": "PUBLISHED_CHECKSUM_MATCH",
+    "algorithm": "MD5 (official artifact endpoint); SHA-256 independently recorded",
+    "official_checksum": "175f30728e4ecad488093dc50432764e",
+    "artifact_url": "https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-47.4.6/forge-1.20.1-47.4.6-sources.jar",
+    "checksum_url": "https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-47.4.6/forge-1.20.1-47.4.6-sources.jar.md5"
+  },
+  "focused_regression": {
+    "status": "PASS",
+    "passed": 105,
+    "tests": [
+      "tests/test_minecraft_storage.py",
+      "tests/test_minecraft_index.py",
+      "tests/test_minecraft_interventions.py",
+      "tests/test_minecraft_core_bridge.py",
+      "tests/test_minecraft_acceptance_scenarios.py"
+    ],
+    "scope": "Existing focused adapters/fixtures regression; not full-suite or runtime acceptance"
+  },
+  "adapter_source_sha256": {
+    "src/kneekura_tech_hub/minecraft/storage.py": "1337e6f0442d3ff4a8d2279a57cdf8153b2ee482312398173b569832fea213df",
+    "src/kneekura_tech_hub/minecraft/bytecode.py": "59a385a1dce7a928db9a1144a4af6ad93393727bbe00cb6a5c48230d98a3beea",
+    "src/kneekura_tech_hub/minecraft/classfile.py": "e6222ab582b67873f5400243ea069e2735d846ed94439bc1e389abc16b5a386d",
+    "src/kneekura_tech_hub/minecraft/index.py": "b4e9739e4ca8c1c77febd6d462cd0c0cc94f531ab474bc2f67311088916b460e",
+    "src/kneekura_tech_hub/minecraft/interventions.py": "1e9a827a9ae00a62799f84dbb2bc113a750d69cdb8ddb9123e606d7a918809b2",
+    "src/kneekura_tech_hub/minecraft/core_bridge.py": "35682b9c3d34dff2bfc810f2c4c6704d71f0d463d52f9d3719254f19bac46444",
+    "src/kneekura_tech_hub/minecraft/mappings.py": "482d9f0ee62d64e3914a334fab13ded1b87a0764ca357b093fcaf01f677ee492",
+    "src/kneekura_tech_hub/minecraft/__main__.py": "2898af3838dfcfc843af5af3715a530edbe1bf58524edd042c12699cfb6ef8bc",
+    "src/kneekura_tech_hub/minecraft/connected_cli.py": "fb1073dfc6fd7f3997620672e39f245ccd285adf69ccebf4cf97e030f8607a99"
+  },
+  "provider_identity": {
+    "executable_hash": "f90ade56cebc2168984c1b0011b5325326953c05b4315074a2a434e4ba12add9",
+    "jdk_components": {
+      "lib/modules": "6a1b657bd845397ab30fe2d4d78d80c4fdc05107182843669fc928655c227241",
+      "release": "973f28729da43962dfba2e39b2a27ab736122f3a1bf829e06abfbde2a731c711"
+    },
+    "jdk_image_status": "HASHED",
+    "normalization": "remove temporary classfile path and modification date",
+    "options": [
+      "-private",
+      "-s",
+      "-c",
+      "-l",
+      "-verbose"
+    ],
+    "provider": "jdk-javap-v1"
+  }
+}

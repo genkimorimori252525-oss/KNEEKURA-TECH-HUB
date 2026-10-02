@@ -1,0 +1,316 @@
+{
+  "schema_version": 1,
+  "kind": "AUTHORED_FAULT_RECIPES_NOT_NEW_ACCEPTANCE_RESULTS",
+  "new_runtime_launches_authorized": 0,
+  "cases": [
+    {
+      "id": "A01",
+      "input_fault": "Minecraft 1.21/NeoForgeの例しかない",
+      "oracle": "ANCHOR実装例と表示しない。比較/移植候補としてだけ返す",
+      "fixture_recipe": "Use only the existing FRONTIER inventory as the comparison root; ANCHOR query cannot relabel it.",
+      "regression_nodes": [
+        "tests/test_minecraft_workspace.py::test_anchor_export_rejects_wrong_or_unpinned_environment",
+        "tests/test_minecraft_index.py::test_buildscript_and_frontier_not_silently_anchor"
+      ],
+      "real_mod_execution": "NOT_RUN",
+      "remaining_prerequisites": []
+    },
+    {
+      "id": "A02",
+      "input_fault": "Forgeのminor版・依存hash・configを変更",
+      "oracle": "別profile/indexとして識別し古い検証を再利用しない",
+      "fixture_recipe": "Change one exact Forge patch version, one dependency content hash, and one config file independently; recapture each profile.",
+      "regression_nodes": [
+        "tests/test_minecraft_storage.py::test_input_changes_invalidate_profile",
+        "tests/test_minecraft_workspace.py::test_source_and_resource_generation_changes_but_build_cache_does_not"
+      ],
+      "real_mod_execution": "NOT_RUN",
+      "remaining_prerequisites": []
+    },
+    {
+      "id": "A03",
+      "input_fault": "同名classを二つの依存JARに格納",
+      "oracle": "origin/順序を示し、実効class不明はAMBIGUOUS",
+      "fixture_recipe": "Add a second dependency origin containing the same owner, retain classpath order and unresolved effective class.",
+      "regression_nodes": [
+        "tests/test_minecraft_index.py::test_same_class_in_multiple_roots_is_ambiguous"
+      ],
+      "real_mod_execution": "NOT_RUN",
+      "remaining_prerequisites": []
+    },
+    {
+      "id": "A04",
+      "input_fault": "同名overloadとnamespace別名official",
+      "oracle": "descriptorとprovider mapping契約で解決。未解決を同一視しない",
+      "fixture_recipe": "Query an actual overloaded member first without descriptor, then use explicit provider namespace aliases with exact descriptor.",
+      "regression_nodes": [
+        "tests/test_minecraft_index.py::test_real_class_overloads_and_call_references",
+        "tests/test_minecraft_mappings.py::test_overloads_remain_ambiguous_without_descriptor",
+        "tests/test_minecraft_mappings.py::test_explicit_alias_is_scoped_not_global"
+      ],
+      "real_mod_execution": "NOT_RUN",
+      "remaining_prerequisites": []
+    },
+    {
+      "id": "A05",
+      "input_fault": "編集中sourceと古いbuildが併存",
+      "oracle": "source世代とbytecode/build世代の不一致を表示",
+      "fixture_recipe": "Capture sources, rebuild, edit a source/resource, and attempt old index/receipt reuse; no game launch is needed.",
+      "regression_nodes": [
+        "tests/test_minecraft_workspace.py::test_stale_source_is_visible_and_export_stale_config_rejected",
+        "tests/test_minecraft_completion_audit.py::test_runtime_rejects_old_index_even_with_fresh_build_receipt"
+      ],
+      "real_mod_execution": "NOT_RUN",
+      "remaining_prerequisites": []
+    },
+    {
+      "id": "A06",
+      "input_fault": "source jarの内容と配布classが一致しない",
+      "oracle": "読取自体は可能でも同一実装の証拠にはしない",
+      "fixture_recipe": "Pair pinned distribution binary with a deliberately altered source-JAR in a separate fixture origin; same implementation must remain unproven.",
+      "regression_nodes": [
+        "tests/test_minecraft_providers.py::test_external_provider_output_is_full_readable_and_has_exact_parents"
+      ],
+      "real_mod_execution": "NOT_RUN",
+      "remaining_prerequisites": [
+        "A real MOD source-JAR/binary mismatch fixture remains unrun"
+      ]
+    },
+    {
+      "id": "A07",
+      "input_fault": "Forge patch/Mixin後に命令位置が変化",
+      "oracle": "原本stageのordinalをロード後の確定値として返さない",
+      "fixture_recipe": "Retain original and real post-Forge/Mixin bytecode as distinct roots; compare one changed instruction position, never relabel the stage.",
+      "regression_nodes": [
+        "tests/test_minecraft_interventions.py::test_metadata_aw_at_and_conditionals",
+        "tests/test_minecraft_interventions.py::test_real_classfile_annotations"
+      ],
+      "real_mod_execution": "NOT_RUN",
+      "remaining_prerequisites": [
+        "Actual Forge/Mixin transformed-bytecode ordinal comparison remains unrun"
+      ]
+    },
+    {
+      "id": "A08",
+      "input_fault": "reflection、callback、条件Mixinを静的解決不可",
+      "oracle": "coverage/未解決として残し、辺なしを実行なしにしない",
+      "fixture_recipe": "Query an owner with unresolved reflective/callback/conditional-Mixin edges; preserve unknown coverage.",
+      "regression_nodes": [
+        "tests/test_minecraft_interventions.py::test_exact_owner_filter_does_not_claim_no_dynamic_injections",
+        "tests/test_minecraft_index.py::test_unprepared_bytecode_is_partial_not_absent"
+      ],
+      "real_mod_execution": "NOT_RUN",
+      "remaining_prerequisites": [
+        "Actual dynamic callback resolution is deliberately not claimed"
+      ]
+    },
+    {
+      "id": "A09",
+      "input_fault": "同じmethodへ互換な二つのinjector",
+      "oracle": "POTENTIALを確定競合へ昇格させない",
+      "fixture_recipe": "Place two compatible injectors at one member; expect potential candidates, not an established conflict.",
+      "regression_nodes": [
+        "tests/test_minecraft_interventions.py::test_metadata_aw_at_and_conditionals"
+      ],
+      "real_mod_execution": "NOT_RUN",
+      "remaining_prerequisites": [
+        "Potential-intervention metadata is not a confirmed live conflict"
+      ]
+    },
+    {
+      "id": "A10",
+      "input_fault": "一部依存のdecompile失敗",
+      "oracle": "PARTIALと不足を返す。解析できた原典を隠さずNOT_FOUNDで完結しない",
+      "fixture_recipe": "Fail one explicitly registered decompiler while keeping another root readable; preserve partial output visibility without caching failure as success.",
+      "regression_nodes": [
+        "tests/test_minecraft_providers.py::test_provider_failure_does_not_cache_partial_output",
+        "tests/test_minecraft_index.py::test_partial_inputs_never_report_not_found"
+      ],
+      "real_mod_execution": "NOT_RUN",
+      "remaining_prerequisites": []
+    },
+    {
+      "id": "A11",
+      "input_fault": "取得中にindex更新・ページcursor再利用",
+      "oracle": "同じsnapshotを読むかSTALE。黙って世代を混ぜない",
+      "fixture_recipe": "Read one page, capture an updated index, then reuse the old cursor against the new index; expect STALE.",
+      "regression_nodes": [
+        "tests/test_minecraft_index.py::test_cursor_cannot_cross_snapshot_or_query"
+      ],
+      "real_mod_execution": "NOT_RUN",
+      "remaining_prerequisites": []
+    },
+    {
+      "id": "A12",
+      "input_fault": "多原典解析を単一原典Evidenceとして投入",
+      "oracle": "由来違反を拒否し、正しい派生snapshot/原典別Evidence経路を使う",
+      "fixture_recipe": "Attempt a Core observation with mixed origin snapshots; reject the provenance violation and stage separate origin observations.",
+      "regression_nodes": [
+        "tests/test_minecraft_core_bridge.py::test_staging_bundle_preserves_single_snapshot_per_observation_and_creator",
+        "tests/test_minecraft_core_bridge.py::test_valid_bundle_preserves_licenses_and_existing_human_review_gate"
+      ],
+      "real_mod_execution": "NOT_RUN",
+      "remaining_prerequisites": [
+        "No production Core database population is claimed"
+      ]
+    },
+    {
+      "id": "A13",
+      "input_fault": "source更新で既存証拠URLの内容が変化",
+      "oracle": "元のcontent hash/履歴を維持。新版へすり替えない",
+      "fixture_recipe": "Capture source text, change the workspace file, inspect the old document locator and compare its original content hash.",
+      "regression_nodes": [
+        "tests/test_minecraft_index.py::test_source_read_is_full_paged_and_immutable",
+        "tests/test_minecraft_storage.py::test_outer_jar_remains_addressable_after_original_is_deleted"
+      ],
+      "real_mod_execution": "NOT_RUN",
+      "remaining_prerequisites": []
+    },
+    {
+      "id": "A14",
+      "input_fault": "cache掃除、disk不足、接続断",
+      "oracle": "pin済み証拠を通常GCで消さず、読めないものはUNAVAILABLE",
+      "fixture_recipe": "Pin a captured artifact, remove a readable fixture blob and inspect; preserve other results and report unavailable content. Real disk exhaustion is separately unrun.",
+      "regression_nodes": [
+        "tests/test_minecraft_storage.py::test_pin_is_durable_and_original_stays_readable",
+        "tests/test_minecraft_index.py::test_missing_blob_does_not_hide_other_readable_results",
+        "tests/test_minecraft_storage.py::test_unreadable_directory_is_reported_in_coverage"
+      ],
+      "real_mod_execution": "NOT_RUN",
+      "remaining_prerequisites": [
+        "No fresh physical disk-exhaustion experiment is claimed"
+      ]
+    },
+    {
+      "id": "A15",
+      "input_fault": "検索1000件・大きな関係グラフ",
+      "oracle": "分割/続きを返す。上位20件を全件と表示しない",
+      "fixture_recipe": "Use at least 1000 search hits and a relation graph exceeding the page limit; follow all cursors, record total/truncation.",
+      "regression_nodes": [
+        "tests/test_minecraft_index.py::test_search_pagination_is_complete_and_snapshot_bound",
+        "tests/test_minecraft_interventions.py::test_pagination_and_wrong_cursor",
+        "tests/test_minecraft_index.py::test_reference_preview_is_bounded_without_losing_full_disassembly"
+      ],
+      "real_mod_execution": "NOT_RUN",
+      "remaining_prerequisites": []
+    },
+    {
+      "id": "A16",
+      "input_fault": "README/ログに権限拡大命令、ZIPに../entry",
+      "oracle": "データとして処理し、命令実行・領域外書込をしない",
+      "fixture_recipe": "Provide inert README/log instructions and a ../ ZIP entry; no execution and no out-of-root writes.",
+      "regression_nodes": [
+        "tests/test_minecraft_storage.py::test_zip_paths_rejected_without_outside_write",
+        "tests/test_minecraft_providers.py::test_provider_output_zip_traversal_is_not_imported",
+        "tests/test_minecraft_providers.py::test_unregistered_provider_is_never_executed"
+      ],
+      "real_mod_execution": "NOT_RUN",
+      "remaining_prerequisites": [
+        "Retrieved prose remains task data, not an authorization source"
+      ]
+    },
+    {
+      "id": "A17",
+      "input_fault": "prepareを未許可workspaceで実施",
+      "oracle": "passive query内でGradle等を実行しない。許可された実行経路を要求",
+      "fixture_recipe": "Attempt prepare/export from a workspace absent from the explicit registry; query/read cannot execute Gradle.",
+      "regression_nodes": [
+        "tests/test_minecraft_workspace.py::test_gradle_plan_requires_explicit_registered_workspace",
+        "tests/test_minecraft_workspace.py::test_passive_inventory_does_not_run_gradle",
+        "tests/test_minecraft_execution.py::test_tampered_wrapper_and_unapproved_dispatch_are_rejected"
+      ],
+      "real_mod_execution": "NOT_RUN",
+      "remaining_prerequisites": []
+    },
+    {
+      "id": "A18",
+      "input_fault": "server再起動でentity ID再利用、旧session観測",
+      "oracle": "epoch/UUID/buildを照合し古いrunへ結合しない",
+      "fixture_recipe": "Reuse entity numeric ID in a new epoch with a distinct UUID; reject the prior run observation by identity.",
+      "regression_nodes": [
+        "tests/test_minecraft_verification.py::test_foreign_or_stale_report_never_passes",
+        "tests/test_minecraft_verification.py::test_observation_uses_epoch_uuid_and_nonatomic_interval"
+      ],
+      "real_mod_execution": "NOT_RUN",
+      "remaining_prerequisites": []
+    },
+    {
+      "id": "A19",
+      "input_fault": "summon後、完了応答前に接続断",
+      "oracle": "受付=成功とせずUNKNOWN。盲目的な再送をしない",
+      "fixture_recipe": "Return operation acceptance without completion after a mutation connection loss; UNKNOWN and retry_allowed=false.",
+      "regression_nodes": [
+        "tests/test_minecraft_verification.py::test_unknown_operation_completion_must_not_be_retried",
+        "tests/test_minecraft_execution.py::test_request_receipt_is_unknown_after_interruption_not_retried"
+      ],
+      "real_mod_execution": "NOT_RUN",
+      "remaining_prerequisites": []
+    },
+    {
+      "id": "A20",
+      "input_fault": "tick/描画frame/ログ時刻がずれる",
+      "oracle": "観測区間と各sequenceを明示しatomicと偽らない",
+      "fixture_recipe": "Provide distinct server-tick, client-frame and log-sequence ranges; retain every interval and atomic=false.",
+      "regression_nodes": [
+        "tests/test_minecraft_verification.py::test_observation_uses_epoch_uuid_and_nonatomic_interval"
+      ],
+      "real_mod_execution": "NOT_RUN",
+      "remaining_prerequisites": [
+        "Live cross-frame client synchronization remains unrun"
+      ]
+    },
+    {
+      "id": "A21",
+      "input_fault": "GameTest exit 0だが0件、欠落、対象optional失敗",
+      "oracle": "期待ID集合と実行数を照合し、目的の成功判定を拒否",
+      "fixture_recipe": "Supply empty/missing/optional-failing target reports with exit zero; the selected fixed expected test set must not PASS.",
+      "regression_nodes": [
+        "tests/test_minecraft_verification.py::test_exit_zero_is_not_sufficient",
+        "tests/test_minecraft_verification.py::test_missing_expected_tests_not_success",
+        "tests/test_minecraft_verification.py::test_expected_required_mode_cannot_silently_change"
+      ],
+      "real_mod_execution": "NOT_RUN",
+      "remaining_prerequisites": []
+    },
+    {
+      "id": "A22",
+      "input_fault": "無関係なoptional testだけ失敗",
+      "oracle": "目的の結果と周辺失敗を別に記録。無関係な失敗だけで全停止しない",
+      "fixture_recipe": "Supply two required staff passes with all three unrelated optional negative FAIL rows; retain both outcomes.",
+      "regression_nodes": [
+        "tests/test_minecraft_verification.py::test_unrelated_optional_failure_does_not_fail_target"
+      ],
+      "real_mod_execution": "NOT_RUN",
+      "remaining_prerequisites": []
+    },
+    {
+      "id": "A23",
+      "input_fault": "helperが直接成功状態を設定、assertion弱体化",
+      "oracle": "要求→assertionとknown-bad fixtureで発見し成功証拠にしない",
+      "fixture_recipe": "Keep the real staff refresh, short-cooldown and attempted-damage faults failing the same helpers; client control rejects effect-command substitution.",
+      "regression_nodes": [
+        "tests/test_minecraft_verification.py::test_report_requires_boolean_required_flag",
+        "tests/test_minecraft_verification.py::test_expected_required_mode_cannot_silently_change"
+      ],
+      "real_mod_execution": "NOT_RUN",
+      "remaining_prerequisites": [
+        "General helper-synthesized success or unrelated assertion-weakening cases are not automatically covered"
+      ]
+    },
+    {
+      "id": "A24",
+      "input_fault": "本番world利用、実機回数超過、描画をGameTestで代替",
+      "oracle": "登録した試験world/検証枠を尊重し、未観測はNOT_RUNのまま返す",
+      "fixture_recipe": "Select an unowned production world, exhaust the budget, or feed GameTest as render proof; reject launch or retain NOT_RUN rendering.",
+      "regression_nodes": [
+        "tests/test_minecraft_verification.py::test_production_world_and_launch_budget_guard",
+        "tests/test_minecraft_verification.py::test_rendering_not_proven_by_gametest",
+        "tests/test_minecraft_execution.py::test_game_cannot_reuse_unowned_world"
+      ],
+      "real_mod_execution": "NOT_RUN",
+      "remaining_prerequisites": [
+        "No client rendering or Windows input PASS is inferred"
+      ]
+    }
+  ]
+}

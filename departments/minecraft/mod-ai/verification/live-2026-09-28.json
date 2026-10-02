@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "record_kind": "hosted_live_verification_checkpoint",
+  "verified_code_commit": "3fa14453327e7992231e3d479ac1d1eebbd96b3c",
+  "product_complete": false,
+  "server_integration_probe_complete": true,
+  "full_suite": {
+    "run_id": 36381522497,
+    "tested_merge_commit": "675385657caa0dbb66e71605813f556651d8d5a3",
+    "passed": 597,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "warnings": 8,
+    "artifact_id": 10952439050,
+    "artifact_sha256": "ab2076a353a8923a94a67628d399dac5f9ea2d34f189c9280c822786da021c73"
+  },
+  "live": {
+    "run_id": 36381518610,
+    "job_id": 108798075071,
+    "artifact_id": 10953495169,
+    "artifact_sha256": "fa704bdbd8a92bb0f73dbd3f156b83ae33f899c38065c0154f540836e56b5994",
+    "session_run_id": "6d144fbf-0872-4ebe-bf8f-322447c692dd",
+    "index_snapshot_id": "eaa6b255b840958903be53458386749ee4ab12c500e3cfaeb2b78469f48004fd",
+    "profile_id": "f146fe7f0a2c934ee41db8e280c3a0c6e03e39611a0022d44ce3bb32e12929da",
+    "handshake": "PASS",
+    "live_entity_observation": "PASS",
+    "summoned_entity_uuid": "e52e0073-5ce9-4c43-8bfd-5d70f071de2b",
+    "selected_entity_count": 1,
+    "selected_entities_truncated": false,
+    "duplicate_command_execution_count": 1,
+    "successful_zero_result": "PASS",
+    "wrong_token_rejected": true,
+    "detected_tests": ["bridge", "knownbad"],
+    "executed_tests": ["bridge", "knownbad"],
+    "completed": true,
+    "target_result": {"id": "bridge", "required": true, "status": "PASS"},
+    "negative_control": {"id": "knownbad", "required": false, "status": "FAIL"},
+    "command_receipt_count_including_duplicates": 8,
+    "client_rendering": "NOT_RUN"
+  },
+  "scope": {
+    "runner": "GitHub-hosted ubuntu-latest",
+    "java_major": 17,
+    "minecraft": "1.20.1",
+    "forge": "47.4.6",
+    "self_hosted_used": false,
+    "repo_visibility_changed": false,
+    "user_workspace_modified": false,
+    "post_transform_bytecode_attested": false,
+    "registered_runtime_config_files": []
+  },
+  "prior_failed_runs": [
+    {"run_id": 36380185400, "commit": "400838443cd35a491acf8a9395f96a550cce608a", "cause": "Fixture assumed seed/world defaults not used by Forge Main; observer correctly rejected seed mismatch", "fix_commit": "b06dec4d052de1ff5680d4d6d5fb563de541f92f"},
+    {"run_id": 36380851488, "commit": "b06dec4d052de1ff5680d4d6d5fb563de541f92f", "cause": "Fixture counted ambient pigs in a truncated all-entity page; no global count was justified", "fix_commit": "3fa14453327e7992231e3d479ac1d1eebbd96b3c"}
+  ],
+  "not_proven": [
+    "client rendering/screenshots/network behavior",
+    "Windows process behavior",
+    "production MOD correctness/performance",
+    "Vineflower/tiny-remapper actual providers",
+    "new Core bridge with actual research records",
+    "full real-MOD edit loop/U01-U06/A01-A24",
+    "Twilight/Connector upstream failure-history investigation"
+  ],
+  "review": "Author self-review, not an independent agent audit"
+}

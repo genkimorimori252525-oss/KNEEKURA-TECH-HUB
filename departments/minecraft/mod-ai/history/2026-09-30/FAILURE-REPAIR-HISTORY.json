@@ -1,0 +1,1085 @@
+{
+  "format": "kneekura.failure-history.v1",
+  "repository": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB.git",
+  "scope": {
+    "track": "ANCHOR",
+    "head_revision": "9224c8709dc2f174ceb55f61866cd7a0b5f07166",
+    "history_window": "ddc11a0c3cb8fc1b3314c18fc9935bd86ad93e3d to a14f4ed7940236fc6c5493a0cb67835c878191a0; c6bbe10e76be0f2806ae2e770bad3914d60b6b8e byte-identity corroboration only",
+    "queries": [
+      "plugin API readiness / unavailable WebGL / chrome://gpu target",
+      "Java 26.3 format / missing purple accent / open halo / exact display slots"
+    ]
+  },
+  "coverage": {
+    "status": "REVIEWED_SCOPE",
+    "inspected_evidence_ids": [
+      "analysis/evidence-inventory.json",
+      "analysis/observations.json",
+      "live-bb-a14f4ed/celestial_staff.bbmodel",
+      "live-bb-a14f4ed/celestial_staff.model.json",
+      "live-bb-a14f4ed/celestial_staff.png",
+      "live-bb-a14f4ed/export.json",
+      "live-bb-a14f4ed/session.json",
+      "live-bb-a14f4ed/view-back.png",
+      "live-bb-a14f4ed/view-front.png",
+      "live-bb-a14f4ed/view-left.png",
+      "live-bb-c6bbe10/capture-evidence.json",
+      "live-bb-c6bbe10/session.json",
+      "live-bb-ddc11a0/blockbench.log",
+      "live-bb-ddc11a0/cdp.json",
+      "live-bb-ddc11a0/post-session-state.json",
+      "live-bb-ddc11a0/preparation.json",
+      "live-bb-f5651fe/cdp.json",
+      "live-bb-f5651fe/celestial_staff.bbmodel",
+      "live-bb-f5651fe/celestial_staff.model.json",
+      "live-bb-f5651fe/celestial_staff.png",
+      "live-bb-f5651fe/post-session-state.json",
+      "live-bb-f5651fe/session.json",
+      "live-bb-f5651fe/view-front.png",
+      "local-tests/asset-export-final.log",
+      "local-tests/asset-integration-green.log",
+      "local-tests/renderer-green.log",
+      "local-tests/renderer-red.log",
+      "local-tests/staff-display-green.log",
+      "local-tests/staff-display-red.log",
+      "local-tests/staff-host-red.log",
+      "local-tests/staff-paint-red.log",
+      "repository/a14f4ed/src__kneekura_tech_hub__minecraft__asset_guard.py.txt",
+      "repository/a14f4ed/src__kneekura_tech_hub__minecraft__asset_session.py.txt",
+      "repository/a14f4ed/tools__ci__mod_ai_blockbench_live.py.txt",
+      "repository/ddc11a0/.github__workflows__mod-ai-blockbench.yml.txt",
+      "repository/ddc11a0/tools__ci__blockbench_cdp.mjs.txt",
+      "repository/f5651fe/.github__workflows__mod-ai-blockbench.yml.txt",
+      "repository/f5651fe/src__kneekura_tech_hub__minecraft__asset_guard.py.txt",
+      "repository/f5651fe/src__kneekura_tech_hub__minecraft__asset_session.py.txt",
+      "repository/f5651fe/tools__ci__blockbench_cdp.mjs.txt",
+      "repository/f5651fe/tools__ci__mod_ai_blockbench_live.py.txt",
+      "repository/renderer-repair.diff.txt",
+      "repository/staff-repair.diff.txt",
+      "upstream-excerpts/bb-boot.js.L185-L188.txt",
+      "upstream-excerpts/bb-preview.ts.L395-L405.txt",
+      "upstream-excerpts/bb-preview.ts.L420-L437.txt",
+      "upstream-excerpts/bb-project.ts.L613-L623.txt"
+    ],
+    "deferred": [],
+    "unavailable": []
+  },
+  "scope_evidence": [
+    {
+      "id": "analysis/evidence-inventory.json",
+      "role": "search_inventory",
+      "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+      "document_id": "39146f12c45760df084416b2942eba3fdb9a8dde966bc36139474a83ae6505b2",
+      "content_sha256": "0d60fa1e65c44d6cecff3326ad4c74a93566dd6fcaa1349293e3c56333b492dd",
+      "source_capture": {
+        "size_bytes": 34442,
+        "sha256": "0d60fa1e65c44d6cecff3326ad4c74a93566dd6fcaa1349293e3c56333b492dd",
+        "snapshot_copied_at": "2026-09-30T08:14:00Z"
+      }
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "M2-EDITOR-READY-WEBGL-20260930",
+      "origin": "OWN_DEVELOPMENT",
+      "track": "ANCHOR",
+      "environment": {
+        "minecraft": "1.20.1",
+        "loader": "forge",
+        "loader_version": "47.4.6",
+        "target_java_major": 17,
+        "blockbench": "5.2.1",
+        "blockbench_revision": "e2ede0809ee6bc91f374ac7e00d34cffbdf86a14",
+        "provider": "sosadly/blockbench-mcp",
+        "provider_revision": "028cdd76589de2e2cea51bfd79495b50a3c7d1d2",
+        "desktop": "GitHub-hosted Ubuntu/Xvfb",
+        "assertion_domain": "M2_editor_experiment",
+        "game_runtime": "NOT_RUN"
+      },
+      "before_revision": "ddc11a0c3cb8fc1b3314c18fc9935bd86ad93e3d",
+      "after_revision": "f5651fe5ebbaf4df9526f4644054705d74f0215f",
+      "affected_symbols": [
+        "tools/ci/blockbench_cdp.mjs::waitForPluginApi",
+        "selectEditorTarget",
+        "rendererReady",
+        ".github/workflows/mod-ai-blockbench.yml::Launch real Blockbench"
+      ],
+      "evidence": [
+        {
+          "id": "live-bb-ddc11a0/blockbench.log",
+          "role": "log",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "9d5540bb65d2bc882a761a16bb7c780a0ff36a1e1e577b5cf6fb8f788a292f43",
+          "content_sha256": "f4577428c9682a0cb5cb3c6190dd650bfc368155f708abea2067856abdb6720c",
+          "source_capture": {
+            "size_bytes": 1970,
+            "sha256": "f4577428c9682a0cb5cb3c6190dd650bfc368155f708abea2067856abdb6720c",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "workflow_run": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/36682264552",
+            "artifact_id": 11081404332,
+            "tested_head": "ddc11a0c3cb8fc1b3314c18fc9935bd86ad93e3d"
+          }
+        },
+        {
+          "id": "live-bb-ddc11a0/cdp.json",
+          "role": "experiment",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "6e3356ba69a829b8f018cf85fdd057587c67cb4a6f1839c39e0c50bf3ed70ea8",
+          "content_sha256": "8ba494f57324ec0fd736738d6f59ef4317a86de3698451826a0e042bb87bc8e0",
+          "source_capture": {
+            "size_bytes": 298,
+            "sha256": "8ba494f57324ec0fd736738d6f59ef4317a86de3698451826a0e042bb87bc8e0",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "workflow_run": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/36682264552",
+            "artifact_id": 11081404332,
+            "tested_head": "ddc11a0c3cb8fc1b3314c18fc9935bd86ad93e3d"
+          }
+        },
+        {
+          "id": "live-bb-ddc11a0/post-session-state.json",
+          "role": "experiment",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "bf10dd9e53633d05578d23fc88a6105bbc8632dfcfffaafc2abf5c09148730d5",
+          "content_sha256": "2efa3416f3b5e3148345d0554e42754bb9b8da9d2c338138d22ff0ffa578589a",
+          "source_capture": {
+            "size_bytes": 250,
+            "sha256": "2efa3416f3b5e3148345d0554e42754bb9b8da9d2c338138d22ff0ffa578589a",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "workflow_run": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/36682264552",
+            "artifact_id": 11081404332,
+            "tested_head": "ddc11a0c3cb8fc1b3314c18fc9935bd86ad93e3d"
+          }
+        },
+        {
+          "id": "live-bb-ddc11a0/preparation.json",
+          "role": "experiment",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "04a7aec1809e1d23d62aa4b53f67c7e3b1874a63f5eb343dde23cb7430fd5bd4",
+          "content_sha256": "cf1a7c4f5eee9aaf35356b8ad3834761fb8f72a9e3c70d3a5586925ed8528d4e",
+          "source_capture": {
+            "size_bytes": 1062,
+            "sha256": "cf1a7c4f5eee9aaf35356b8ad3834761fb8f72a9e3c70d3a5586925ed8528d4e",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "workflow_run": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/36682264552",
+            "artifact_id": 11081404332,
+            "tested_head": "ddc11a0c3cb8fc1b3314c18fc9935bd86ad93e3d"
+          }
+        },
+        {
+          "id": "live-bb-f5651fe/cdp.json",
+          "role": "experiment",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "fe17e79157f5e1554b40162a49bc31734b68792c6d1cc998dfc04fa47c18ff75",
+          "content_sha256": "e59054e2d380bc26632e3617608eda047d55f11b169122f514ac076191ce6b26",
+          "source_capture": {
+            "size_bytes": 326,
+            "sha256": "e59054e2d380bc26632e3617608eda047d55f11b169122f514ac076191ce6b26",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "tested_head": "f5651fe5ebbaf4df9526f4644054705d74f0215f",
+            "workflow_run": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/36683367656"
+          }
+        },
+        {
+          "id": "live-bb-f5651fe/post-session-state.json",
+          "role": "experiment",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "3efa1db86a9e147cd27a02cf9778dd18fb197587f77a53cfc49cb6d2b5a85c80",
+          "content_sha256": "43d5e5813e74724eba420b59b0b3eb2e3bd5a8bbd3c4e3feea8f8d7ea852cbda",
+          "source_capture": {
+            "size_bytes": 301,
+            "sha256": "43d5e5813e74724eba420b59b0b3eb2e3bd5a8bbd3c4e3feea8f8d7ea852cbda",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "tested_head": "f5651fe5ebbaf4df9526f4644054705d74f0215f",
+            "workflow_run": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/36683367656"
+          }
+        },
+        {
+          "id": "live-bb-f5651fe/session.json",
+          "role": "experiment",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "a73ffb911742b5dbea977c41d17df08fe98c75d24758926e97b9d6c32db3da50",
+          "content_sha256": "4f5fb2979a7324bdddb2ce5c889b98578ea8e36e463992a83ede76458179b06b",
+          "source_capture": {
+            "size_bytes": 2433,
+            "sha256": "4f5fb2979a7324bdddb2ce5c889b98578ea8e36e463992a83ede76458179b06b",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "tested_head": "f5651fe5ebbaf4df9526f4644054705d74f0215f",
+            "workflow_run": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/36683367656"
+          }
+        },
+        {
+          "id": "repository/renderer-repair.diff.txt",
+          "role": "diff",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "e379e8f1610177396bb677961555219dc9ca68f0b6e8f37c1be44b5b823d5847",
+          "content_sha256": "6c6fbfe652c99938a31ca4522a6c031c94cc1d763900438a47b38fca08997498",
+          "source_capture": {
+            "size_bytes": 6567,
+            "sha256": "6c6fbfe652c99938a31ca4522a6c031c94cc1d763900438a47b38fca08997498",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "before_revision": "ddc11a0c3cb8fc1b3314c18fc9935bd86ad93e3d",
+            "after_revision": "f5651fe5ebbaf4df9526f4644054705d74f0215f",
+            "paths": [
+              "tools/ci/blockbench_cdp.mjs",
+              ".github/workflows/mod-ai-blockbench.yml",
+              "tests/test_minecraft_blockbench_live_harness.py"
+            ]
+          }
+        },
+        {
+          "id": "local-tests/renderer-red.log",
+          "role": "experiment",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "59ac6449897e2617e2f9da71d33f91a97f3d07a2d79c594365912c999d9fa7bb",
+          "content_sha256": "85384a96dc4fb5387ace1e236a4da6bd8f4955eb7358ecc610dc17d61b747122",
+          "source_capture": {
+            "size_bytes": 4769,
+            "sha256": "85384a96dc4fb5387ace1e236a4da6bd8f4955eb7358ecc610dc17d61b747122",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "source": "Existing local test transcript; exact execution revision and command not embedded in original log"
+          }
+        },
+        {
+          "id": "local-tests/renderer-green.log",
+          "role": "experiment",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "1cb7cc2171c8c936947b30aefc985b5aef66359dff210e438fee0c3b0e0e2de3",
+          "content_sha256": "5cbb93b14df607d25e57e30f8d2ba7b9f19a71201b91b2ede351f8eabd17a17b",
+          "source_capture": {
+            "size_bytes": 99,
+            "sha256": "5cbb93b14df607d25e57e30f8d2ba7b9f19a71201b91b2ede351f8eabd17a17b",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "source": "Existing local test transcript; exact execution revision and command not embedded in original log"
+          }
+        },
+        {
+          "id": "upstream-excerpts/bb-preview.ts.L395-L405.txt",
+          "role": "before_code",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "19b692263b9fc0b74da5cff040cc36cc60c70536682729b526d30144943c25c6",
+          "content_sha256": "5420c49ad8435aaefae164d334c0f5bcf87501acc279bc8a0b2405bcf7b81597",
+          "source_capture": {
+            "size_bytes": 479,
+            "sha256": "5420c49ad8435aaefae164d334c0f5bcf87501acc279bc8a0b2405bcf7b81597",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "source_repository": "https://github.com/JannisX11/blockbench",
+            "source_path": "js/preview/preview.ts",
+            "source_revision": "e2ede0809ee6bc91f374ac7e00d34cffbdf86a14",
+            "source_url": "https://github.com/JannisX11/blockbench/blob/e2ede0809ee6bc91f374ac7e00d34cffbdf86a14/js/preview/preview.ts#L395-L405",
+            "source_full_sha256": "fd0276afa6599f5a979519e4c1dc0589c7179a7860d117c2d0cff704d53e6489",
+            "line_start": 395,
+            "line_end": 405,
+            "extraction": "Exact contiguous byte-preserving lines; whole third-party source intentionally omitted"
+          }
+        },
+        {
+          "id": "upstream-excerpts/bb-preview.ts.L420-L437.txt",
+          "role": "before_code",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "b172d51d70e4cd98078162814755add5e1353c571181ac7fa508f79fa61b0941",
+          "content_sha256": "c41e59a32d94c7bc0819a8d23804937645e32133e295b18b4aa8548c43dd483b",
+          "source_capture": {
+            "size_bytes": 404,
+            "sha256": "c41e59a32d94c7bc0819a8d23804937645e32133e295b18b4aa8548c43dd483b",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "source_repository": "https://github.com/JannisX11/blockbench",
+            "source_path": "js/preview/preview.ts",
+            "source_revision": "e2ede0809ee6bc91f374ac7e00d34cffbdf86a14",
+            "source_url": "https://github.com/JannisX11/blockbench/blob/e2ede0809ee6bc91f374ac7e00d34cffbdf86a14/js/preview/preview.ts#L420-L437",
+            "source_full_sha256": "fd0276afa6599f5a979519e4c1dc0589c7179a7860d117c2d0cff704d53e6489",
+            "line_start": 420,
+            "line_end": 437,
+            "extraction": "Exact contiguous byte-preserving lines; whole third-party source intentionally omitted"
+          }
+        },
+        {
+          "id": "upstream-excerpts/bb-boot.js.L185-L188.txt",
+          "role": "before_code",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "63e3703f8af56cdc669280e542865cba5c7ecff75ea3bbe7186a617b1ae1bf74",
+          "content_sha256": "890e73bf7f52a3ee7b9d99b1d129bc0ae855fb3a8c68115632e40f4ce28b5988",
+          "source_capture": {
+            "size_bytes": 109,
+            "sha256": "890e73bf7f52a3ee7b9d99b1d129bc0ae855fb3a8c68115632e40f4ce28b5988",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "source_repository": "https://github.com/JannisX11/blockbench",
+            "source_path": "js/boot_loader.js",
+            "source_revision": "e2ede0809ee6bc91f374ac7e00d34cffbdf86a14",
+            "source_url": "https://github.com/JannisX11/blockbench/blob/e2ede0809ee6bc91f374ac7e00d34cffbdf86a14/js/boot_loader.js#L185-L188",
+            "source_full_sha256": "a6f24502bc51524bedb9e6e1080c0c7c774ff95e2c1d660b145316dc946841e5",
+            "line_start": 185,
+            "line_end": 188,
+            "extraction": "Exact contiguous byte-preserving lines; whole third-party source intentionally omitted"
+          }
+        },
+        {
+          "id": "repository/ddc11a0/tools__ci__blockbench_cdp.mjs.txt",
+          "role": "before_code",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "84e7555b056c2282a4cee2ff0568243d5105cb2e34839777aa05dd0d5d534692",
+          "content_sha256": "f1201841a722bc59e4db242c0a330ac4f20fb217d9a3720498f5ae3ea95120a9",
+          "source_capture": {
+            "size_bytes": 6621,
+            "sha256": "f1201841a722bc59e4db242c0a330ac4f20fb217d9a3720498f5ae3ea95120a9",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "source_path": "tools/ci/blockbench_cdp.mjs",
+            "source_revision": "ddc11a0c3cb8fc1b3314c18fc9935bd86ad93e3d",
+            "source_url": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/blob/ddc11a0c3cb8fc1b3314c18fc9935bd86ad93e3d/tools/ci/blockbench_cdp.mjs",
+            "git_blob": "e274981a85f92f35d0ef9f69c3243fa288910a08"
+          }
+        },
+        {
+          "id": "repository/ddc11a0/.github__workflows__mod-ai-blockbench.yml.txt",
+          "role": "before_code",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "994c8bea16daa6a596109e2c208e3ecfe45ca5dda85ddb394b3f8b4c8b07e0de",
+          "content_sha256": "6d92e0fec007375a5bd5a47ab3ef205317097bd28159ddd74b16217ead970d1f",
+          "source_capture": {
+            "size_bytes": 4618,
+            "sha256": "6d92e0fec007375a5bd5a47ab3ef205317097bd28159ddd74b16217ead970d1f",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "source_path": ".github/workflows/mod-ai-blockbench.yml",
+            "source_revision": "ddc11a0c3cb8fc1b3314c18fc9935bd86ad93e3d",
+            "source_url": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/blob/ddc11a0c3cb8fc1b3314c18fc9935bd86ad93e3d/.github/workflows/mod-ai-blockbench.yml",
+            "git_blob": "7b2c3482f6ec8471728df2fba5d4b59c85d82613"
+          }
+        },
+        {
+          "id": "repository/f5651fe/tools__ci__blockbench_cdp.mjs.txt",
+          "role": "after_code",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "fa7b6215ef18595dc1ff08934196f3454609a9eae4253d96f56ca08f34c8ae01",
+          "content_sha256": "9a1d6d0247bf89abd6453eb511217707622fc1eab47c4c1285c8bb1a1acee6aa",
+          "source_capture": {
+            "size_bytes": 7707,
+            "sha256": "9a1d6d0247bf89abd6453eb511217707622fc1eab47c4c1285c8bb1a1acee6aa",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "source_path": "tools/ci/blockbench_cdp.mjs",
+            "source_revision": "f5651fe5ebbaf4df9526f4644054705d74f0215f",
+            "source_url": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/blob/f5651fe5ebbaf4df9526f4644054705d74f0215f/tools/ci/blockbench_cdp.mjs",
+            "git_blob": "c2ee9d2f3aa6512c0bb1e64416fa4870937433c6"
+          }
+        },
+        {
+          "id": "repository/f5651fe/.github__workflows__mod-ai-blockbench.yml.txt",
+          "role": "after_code",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "e37d1720fe2e7c710149e018260680cc32c32325639a9a546df2a7c9b2f3d310",
+          "content_sha256": "793f5030d84d72a254df9bb4e17d356aed2c58264a15da01de711299fcd41ded",
+          "source_capture": {
+            "size_bytes": 4671,
+            "sha256": "793f5030d84d72a254df9bb4e17d356aed2c58264a15da01de711299fcd41ded",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "source_path": ".github/workflows/mod-ai-blockbench.yml",
+            "source_revision": "f5651fe5ebbaf4df9526f4644054705d74f0215f",
+            "source_url": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/blob/f5651fe5ebbaf4df9526f4644054705d74f0215f/.github/workflows/mod-ai-blockbench.yml",
+            "git_blob": "60061006e7a0ebb4781b33e313c3ff9cbac77313"
+          }
+        }
+      ],
+      "symptom": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "The failed run snapshot reported Blockbench 5.2.1, installed plugin and running bridge, while the later snapshot had null Blockbench/project/plugin fields. The same raw log reported no Vulkan drivers and inability to discover OpenGL/OpenGLES adapters; there is no session asset receipt in the complete six-file artifact.",
+        "evidence_ids": [
+          "live-bb-ddc11a0/cdp.json",
+          "live-bb-ddc11a0/post-session-state.json",
+          "live-bb-ddc11a0/blockbench.log"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "The pre-fix hosted workflow launched under Xvfb with --disable-gpu. The CDP harness selected the first page target and considered Plugin/Plugins globals sufficient readiness.",
+        "evidence_ids": [
+          "repository/ddc11a0/tools__ci__blockbench_cdp.mjs.txt",
+          "repository/ddc11a0/.github__workflows__mod-ai-blockbench.yml.txt"
+        ]
+      },
+      "root_cause": {
+        "basis": "INFERENCE",
+        "text": "Plugin API availability was an insufficient proxy for completed editor/render-context setup. The observed GPU backend warnings, the pinned preview WebGL failure handler that opens chrome://gpu, and first-page selection together explain premature operation and possible GPU-information target selection. The artifact does not preserve the exact native thrown WebGL exception or target URL inventory, so that causal route is an inference rather than a captured native stack trace.",
+        "evidence_ids": [
+          "live-bb-ddc11a0/blockbench.log",
+          "live-bb-ddc11a0/post-session-state.json",
+          "repository/ddc11a0/tools__ci__blockbench_cdp.mjs.txt",
+          "upstream-excerpts/bb-preview.ts.L395-L405.txt",
+          "upstream-excerpts/bb-preview.ts.L420-L437.txt",
+          "upstream-excerpts/bb-boot.js.L185-L188.txt"
+        ]
+      },
+      "repair": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "Require exactly one file:/index.html editor target, Blockbench.setup_successful and a non-lost renderer context; replace --disable-gpu with ANGLE OpenGL and LIBGL_ALWAYS_SOFTWARE=1 for the hosted software-GL setup.",
+        "evidence_ids": [
+          "repository/renderer-repair.diff.txt"
+        ]
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "For this pinned editor bridge, wait on completed editor initialization and a usable render context, select a unique editor target, and retain post-failure state. Transport/plugin readiness alone does not establish render readiness or a valid asset.",
+        "evidence_ids": [
+          "repository/renderer-repair.diff.txt",
+          "live-bb-ddc11a0/cdp.json",
+          "live-bb-f5651fe/session.json"
+        ]
+      },
+      "causal_chain": [
+        {
+          "basis": "DIRECT_OBSERVATION",
+          "text": "Pre-fix readiness and target selection omit editor-completion/context identity checks.",
+          "evidence_ids": [
+            "repository/ddc11a0/tools__ci__blockbench_cdp.mjs.txt"
+          ]
+        },
+        {
+          "basis": "DIRECT_OBSERVATION",
+          "text": "The raw failed-run artifact combines adapter discovery warnings with success-looking initial bridge state and null later editor fields.",
+          "evidence_ids": [
+            "live-bb-ddc11a0/blockbench.log",
+            "live-bb-ddc11a0/cdp.json",
+            "live-bb-ddc11a0/post-session-state.json"
+          ]
+        },
+        {
+          "basis": "INFERENCE",
+          "text": "The pinned preview handler makes a secondary GPU-information page a plausible explanation for the null later editor globals, but its actual URL was not captured.",
+          "evidence_ids": [
+            "upstream-excerpts/bb-preview.ts.L420-L437.txt",
+            "live-bb-ddc11a0/post-session-state.json"
+          ]
+        },
+        {
+          "basis": "DIRECT_OBSERVATION",
+          "text": "The repaired run retained a setup_successful editor snapshot and six hash-addressed assets; the original session still says outcome NOT_RUN and loaded_revision UNATTESTED.",
+          "evidence_ids": [
+            "live-bb-f5651fe/cdp.json",
+            "live-bb-f5651fe/session.json"
+          ]
+        }
+      ],
+      "reproduction": {
+        "state": "RECORDED_EXPERIMENT",
+        "evidence_ids": [
+          "live-bb-ddc11a0/cdp.json",
+          "live-bb-ddc11a0/post-session-state.json",
+          "live-bb-ddc11a0/blockbench.log"
+        ]
+      },
+      "fix_verification": {
+        "state": "RECORDED_EXPERIMENT",
+        "evidence_ids": [
+          "live-bb-f5651fe/session.json",
+          "live-bb-f5651fe/cdp.json",
+          "local-tests/renderer-green.log"
+        ]
+      },
+      "regression_tests": [
+        "test_cdp_selects_editor_not_gpu_information_window",
+        "test_cdp_requires_complete_editor_setup_and_render_context",
+        "test_hosted_editor_uses_explicit_software_webgl"
+      ],
+      "limitations": [
+        "The original failed artifact lacks target URLs and native thrown renderer stack trace",
+        "The green local log records 13 passing tests but lacks its exact execution revision/command",
+        "The repaired editor capture does not attest Minecraft runtime or perfect asset design; case 2 records the contrary asset finding",
+        "The before revision is the observed pre-fix state, not an established bug-introducing commit"
+      ]
+    },
+    {
+      "case_id": "M2-STAFF-LEGACY-PALETTE-HALO-20260930",
+      "origin": "OWN_DEVELOPMENT",
+      "track": "ANCHOR",
+      "environment": {
+        "minecraft": "1.20.1",
+        "loader": "forge",
+        "loader_version": "47.4.6",
+        "target_java_major": 17,
+        "blockbench": "5.2.1",
+        "blockbench_revision": "e2ede0809ee6bc91f374ac7e00d34cffbdf86a14",
+        "provider": "sosadly/blockbench-mcp",
+        "provider_revision": "028cdd76589de2e2cea51bfd79495b50a3c7d1d2",
+        "desktop": "GitHub-hosted Ubuntu/Xvfb",
+        "assertion_domain": "M2_editor_experiment",
+        "game_runtime": "NOT_RUN"
+      },
+      "before_revision": "f5651fe5ebbaf4df9526f4644054705d74f0215f",
+      "after_revision": "a14f4ed7940236fc6c5493a0cb67835c878191a0",
+      "affected_symbols": [
+        "minecraft.asset_guard::JAVA_BLOCK_VERSION",
+        "minecraft.asset_guard::ITEM_DISPLAY",
+        "minecraft.asset_guard::HOST_ADAPTER.configureProject",
+        "minecraft.asset_guard::texture_region",
+        "minecraft.asset_session::validate_plan",
+        "minecraft.asset_session::run_session",
+        "tools/ci/mod_ai_blockbench_live.py::celestial_staff_plan"
+      ],
+      "evidence": [
+        {
+          "id": "live-bb-f5651fe/session.json",
+          "role": "experiment",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "a73ffb911742b5dbea977c41d17df08fe98c75d24758926e97b9d6c32db3da50",
+          "content_sha256": "4f5fb2979a7324bdddb2ce5c889b98578ea8e36e463992a83ede76458179b06b",
+          "source_capture": {
+            "size_bytes": 2433,
+            "sha256": "4f5fb2979a7324bdddb2ce5c889b98578ea8e36e463992a83ede76458179b06b",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "tested_head": "f5651fe5ebbaf4df9526f4644054705d74f0215f",
+            "workflow_run": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/36683367656"
+          }
+        },
+        {
+          "id": "live-bb-f5651fe/celestial_staff.bbmodel",
+          "role": "experiment",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "79f42baa1afe5f9171377f84e2e1e56e9333bc6109229b8e3f2a819a2cb32180",
+          "content_sha256": "538c056bc154c0a93a939c8f50972e354f8ab8ed20dc847105bee7fdfabb432b",
+          "source_capture": {
+            "size_bytes": 8320,
+            "sha256": "538c056bc154c0a93a939c8f50972e354f8ab8ed20dc847105bee7fdfabb432b",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "tested_head": "f5651fe5ebbaf4df9526f4644054705d74f0215f",
+            "workflow_run": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/36683367656"
+          }
+        },
+        {
+          "id": "live-bb-f5651fe/celestial_staff.model.json",
+          "role": "experiment",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "33150d2a51005f8aa48eb2c88aa59e6aadba9aa97d4ebccccba42ee6bb0af9a4",
+          "content_sha256": "db2bffcb66ad642d1d87611a2e60b0f1037448adb149c4bbe1240acd29d861b2",
+          "source_capture": {
+            "size_bytes": 5816,
+            "sha256": "db2bffcb66ad642d1d87611a2e60b0f1037448adb149c4bbe1240acd29d861b2",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "tested_head": "f5651fe5ebbaf4df9526f4644054705d74f0215f",
+            "workflow_run": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/36683367656"
+          }
+        },
+        {
+          "id": "live-bb-f5651fe/celestial_staff.png",
+          "role": "experiment",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "af9fb9547e2c9a2513a27c4d8c698a5f903b362cddd79a8c684c239545ce208f",
+          "content_sha256": "8e6a2bfd535e8537a7e6edc18c64f487fe5eea13cba4070aeb4401e79b211d76",
+          "source_capture": {
+            "size_bytes": 134,
+            "sha256": "8e6a2bfd535e8537a7e6edc18c64f487fe5eea13cba4070aeb4401e79b211d76",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "tested_head": "f5651fe5ebbaf4df9526f4644054705d74f0215f",
+            "workflow_run": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/36683367656"
+          }
+        },
+        {
+          "id": "live-bb-f5651fe/view-front.png",
+          "role": "experiment",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "86d19a1bffec78b060d243f64244af508d7b52d889869392c77c67a3252c5270",
+          "content_sha256": "121914376e80ba1deaeac2c3a31098a7a5eda5d4fdd1cf813e72e6164072dec9",
+          "source_capture": {
+            "size_bytes": 13808,
+            "sha256": "121914376e80ba1deaeac2c3a31098a7a5eda5d4fdd1cf813e72e6164072dec9",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "tested_head": "f5651fe5ebbaf4df9526f4644054705d74f0215f",
+            "workflow_run": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/36683367656"
+          }
+        },
+        {
+          "id": "live-bb-a14f4ed/session.json",
+          "role": "experiment",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "faf59898426341b01495c831896dafbfb05c071913d9ddd7ce295eb61d358349",
+          "content_sha256": "c93c1e26b52d774e28ef45009edcb220ff659233c13a7c066e4225f5f2ab470d",
+          "source_capture": {
+            "size_bytes": 2434,
+            "sha256": "c93c1e26b52d774e28ef45009edcb220ff659233c13a7c066e4225f5f2ab470d",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "tested_head": "a14f4ed7940236fc6c5493a0cb67835c878191a0",
+            "workflow_run": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/36685697463"
+          }
+        },
+        {
+          "id": "live-bb-a14f4ed/celestial_staff.bbmodel",
+          "role": "experiment",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "ce15a7f3d57e52cd464f0f963561d6a066e61424dd440933bd378926bd462ee2",
+          "content_sha256": "d1a5e9e23862089c18a5e5a814ed0d2bb5eb635c918303b4ca3ef9fbd326938b",
+          "source_capture": {
+            "size_bytes": 11185,
+            "sha256": "d1a5e9e23862089c18a5e5a814ed0d2bb5eb635c918303b4ca3ef9fbd326938b",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "tested_head": "a14f4ed7940236fc6c5493a0cb67835c878191a0",
+            "workflow_run": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/36685697463"
+          }
+        },
+        {
+          "id": "live-bb-a14f4ed/celestial_staff.model.json",
+          "role": "experiment",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "b6a3d2f7e50c35300bf9448575cac71897913d2fded258f074c42bec071f3ca3",
+          "content_sha256": "fd34c3665766b69b3c560f2f22609b8519cb3f9b839b8ee39c1271b338a47de6",
+          "source_capture": {
+            "size_bytes": 8641,
+            "sha256": "fd34c3665766b69b3c560f2f22609b8519cb3f9b839b8ee39c1271b338a47de6",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "tested_head": "a14f4ed7940236fc6c5493a0cb67835c878191a0",
+            "workflow_run": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/36685697463"
+          }
+        },
+        {
+          "id": "live-bb-a14f4ed/celestial_staff.png",
+          "role": "experiment",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "606bc9de0a0a99a4f380aefafecaa0848fc851e72662c7d53bce0de6e3b1e070",
+          "content_sha256": "c799d9220e7e31dc7a5110b09070ce5dd92499153744414015407f76d313c483",
+          "source_capture": {
+            "size_bytes": 150,
+            "sha256": "c799d9220e7e31dc7a5110b09070ce5dd92499153744414015407f76d313c483",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "tested_head": "a14f4ed7940236fc6c5493a0cb67835c878191a0",
+            "workflow_run": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/36685697463"
+          }
+        },
+        {
+          "id": "live-bb-a14f4ed/view-front.png",
+          "role": "experiment",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "8577032bc0174669968e986b0ac41622cd254eceafa6f88210acef63ce252869",
+          "content_sha256": "91c988c09e7ed3936e3cc65de67ed7aa441263c97c3be56aee787b43a46cea5a",
+          "source_capture": {
+            "size_bytes": 14492,
+            "sha256": "91c988c09e7ed3936e3cc65de67ed7aa441263c97c3be56aee787b43a46cea5a",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "tested_head": "a14f4ed7940236fc6c5493a0cb67835c878191a0",
+            "workflow_run": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/36685697463"
+          }
+        },
+        {
+          "id": "live-bb-a14f4ed/view-left.png",
+          "role": "experiment",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "15ff67e3d60ee421d47c395ac6f1c53144cb73c4d7d43ba574808763208eaa3c",
+          "content_sha256": "c538d939e55ad0efd6a50694bec055aa40877b4ef64853265f164f685082880f",
+          "source_capture": {
+            "size_bytes": 14429,
+            "sha256": "c538d939e55ad0efd6a50694bec055aa40877b4ef64853265f164f685082880f",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "tested_head": "a14f4ed7940236fc6c5493a0cb67835c878191a0",
+            "workflow_run": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/36685697463"
+          }
+        },
+        {
+          "id": "live-bb-a14f4ed/view-back.png",
+          "role": "experiment",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "1b4a51e77b78a15148914743de4e0fb48e8541fa63b7bf0e09829736be6b7f12",
+          "content_sha256": "310670f9b751cfa0f57b91b8c2bb054ee66082a06b130beaefe553ce5d9887e1",
+          "source_capture": {
+            "size_bytes": 14965,
+            "sha256": "310670f9b751cfa0f57b91b8c2bb054ee66082a06b130beaefe553ce5d9887e1",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "tested_head": "a14f4ed7940236fc6c5493a0cb67835c878191a0",
+            "workflow_run": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/36685697463"
+          }
+        },
+        {
+          "id": "live-bb-a14f4ed/export.json",
+          "role": "experiment",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "d63e4eb56a59d8d9718def73e34ff1a61eb433989dcced569516760fae3a3c43",
+          "content_sha256": "8e91838b3f28e9dadb7b298501552dff1a927c633393bd206aab9560e0500e87",
+          "source_capture": {
+            "size_bytes": 1093,
+            "sha256": "8e91838b3f28e9dadb7b298501552dff1a927c633393bd206aab9560e0500e87",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "tested_head": "a14f4ed7940236fc6c5493a0cb67835c878191a0",
+            "workflow_run": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/36685697463"
+          }
+        },
+        {
+          "id": "live-bb-c6bbe10/session.json",
+          "role": "experiment",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "c8f04e360be946d93977927332dcd3c5f457dece5ddade5f4a1b487de12594bf",
+          "content_sha256": "76807f8508aefe62e80541659c8569dba75e54c7e42fc8e0fb567f5973600f5c",
+          "source_capture": {
+            "size_bytes": 2434,
+            "sha256": "76807f8508aefe62e80541659c8569dba75e54c7e42fc8e0fb567f5973600f5c",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "tested_head": "c6bbe10e76be0f2806ae2e770bad3914d60b6b8e",
+            "workflow_run": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/36686342010"
+          }
+        },
+        {
+          "id": "live-bb-c6bbe10/capture-evidence.json",
+          "role": "experiment",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "1e16c140cb40cb3e98323ca4232ba0e38d5dfe5a7504abb3b37641e73193ba93",
+          "content_sha256": "d4b3de6a1cffa74cc8ca4bc7de8d725bf30866dec3e89bf8d3f9f7e5018a3fd9",
+          "source_capture": {
+            "size_bytes": 107708,
+            "sha256": "d4b3de6a1cffa74cc8ca4bc7de8d725bf30866dec3e89bf8d3f9f7e5018a3fd9",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "tested_head": "c6bbe10e76be0f2806ae2e770bad3914d60b6b8e",
+            "workflow_run": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/36686342010"
+          }
+        },
+        {
+          "id": "analysis/observations.json",
+          "role": "experiment",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "31af99dda246da4675cf515fdf8ebd233a414ebe4c8327d59da09b2dac67c8be",
+          "content_sha256": "948aa9733b7a36e805a013e27164ce9d1b3d3808901014bda2ea0b598ef5a323",
+          "source_capture": {
+            "size_bytes": 4748,
+            "sha256": "948aa9733b7a36e805a013e27164ce9d1b3d3808901014bda2ea0b598ef5a323",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "source": "Derived from the exact captured input bytes; no game run"
+          }
+        },
+        {
+          "id": "repository/staff-repair.diff.txt",
+          "role": "diff",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "478ae1a221fd736593c7ce2f0405ec93bf30917a04109e0d5a4a6753d6fbe177",
+          "content_sha256": "8b0f05087941175de457cf8ed14751d0d7ca8cf339770c6f7bf5e3c2479086f6",
+          "source_capture": {
+            "size_bytes": 29281,
+            "sha256": "8b0f05087941175de457cf8ed14751d0d7ca8cf339770c6f7bf5e3c2479086f6",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "before_revision": "f5651fe5ebbaf4df9526f4644054705d74f0215f",
+            "after_revision": "a14f4ed7940236fc6c5493a0cb67835c878191a0",
+            "paths": [
+              "src/kneekura_tech_hub/minecraft/asset_guard.py",
+              "src/kneekura_tech_hub/minecraft/asset_session.py",
+              "tools/ci/mod_ai_blockbench_live.py",
+              "tests/test_minecraft_blockbench_live_harness.py",
+              "tests/test_minecraft_asset_guard.py",
+              "tests/test_minecraft_asset_session.py"
+            ]
+          }
+        },
+        {
+          "id": "upstream-excerpts/bb-project.ts.L613-L623.txt",
+          "role": "before_code",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "91005b57b3928e61fa8ca44837799b4c1e5fb70bfd9cad883cb2014d4ba7f410",
+          "content_sha256": "5157f08fe66c030c470e55766e113917d79c7e624425bbca6b2ff789def85236",
+          "source_capture": {
+            "size_bytes": 397,
+            "sha256": "5157f08fe66c030c470e55766e113917d79c7e624425bbca6b2ff789def85236",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "source_repository": "https://github.com/JannisX11/blockbench",
+            "source_path": "js/io/project.ts",
+            "source_revision": "e2ede0809ee6bc91f374ac7e00d34cffbdf86a14",
+            "source_url": "https://github.com/JannisX11/blockbench/blob/e2ede0809ee6bc91f374ac7e00d34cffbdf86a14/js/io/project.ts#L613-L623",
+            "source_full_sha256": "e1b9d51bf03851a24ae1434d278a8ee66f8faa6deffea19aabbedc4419a2b022",
+            "line_start": 613,
+            "line_end": 623,
+            "extraction": "Exact contiguous byte-preserving lines; whole third-party source intentionally omitted"
+          }
+        },
+        {
+          "id": "local-tests/staff-host-red.log",
+          "role": "experiment",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "cab4fb19fabd98979d14ffcd21680a9e7087fc84ad0b1629f29131c17b89fac8",
+          "content_sha256": "1d74774eb22ee8b747f75cc697ccb15fbb794ea02ea3359300e146bde919de39",
+          "source_capture": {
+            "size_bytes": 3164,
+            "sha256": "1d74774eb22ee8b747f75cc697ccb15fbb794ea02ea3359300e146bde919de39",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "source": "Existing local test transcript; exact execution revision and command not embedded in original log"
+          }
+        },
+        {
+          "id": "local-tests/staff-display-red.log",
+          "role": "experiment",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "a691431393129f29502f899e72ee11c7c097240aa6f78d9ee324a0e1a80f0f31",
+          "content_sha256": "1cd79682375cfd1a75449279a5d2a73026a052b9cbcc52375bfab56b84970235",
+          "source_capture": {
+            "size_bytes": 1044,
+            "sha256": "1cd79682375cfd1a75449279a5d2a73026a052b9cbcc52375bfab56b84970235",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "source": "Existing local test transcript; exact execution revision and command not embedded in original log"
+          }
+        },
+        {
+          "id": "local-tests/staff-display-green.log",
+          "role": "experiment",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "1bf91c438736ab8be668c8c9ed2eaa4a3002da3037571abc2ca9cc44abc5ff59",
+          "content_sha256": "cdb7d4604a9dcfb00bd3a2a220260966b7a6c67ee541fb5b01a40b0435981751",
+          "source_capture": {
+            "size_bytes": 99,
+            "sha256": "cdb7d4604a9dcfb00bd3a2a220260966b7a6c67ee541fb5b01a40b0435981751",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "source": "Existing local test transcript; exact execution revision and command not embedded in original log"
+          }
+        },
+        {
+          "id": "local-tests/staff-paint-red.log",
+          "role": "experiment",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "bfeb9947cf241373a6ff7e1df15a40c5206d1eb636bb43f975faa5f7c05b5ab5",
+          "content_sha256": "9c2c3a74a3d65b1048acdc657bcb8bf27292526a4d6fb27366f74232f4662d41",
+          "source_capture": {
+            "size_bytes": 11752,
+            "sha256": "9c2c3a74a3d65b1048acdc657bcb8bf27292526a4d6fb27366f74232f4662d41",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "source": "Existing local test transcript; exact execution revision and command not embedded in original log"
+          }
+        },
+        {
+          "id": "local-tests/asset-integration-green.log",
+          "role": "experiment",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "8b175d6cda378feb5748eba56e341ac6bfa9c1629acbf0f431e6c5d5847ede99",
+          "content_sha256": "19450f699a2599206f764685d638b9f8431d055398131a33b33f31eeaf0e5d63",
+          "source_capture": {
+            "size_bytes": 99,
+            "sha256": "19450f699a2599206f764685d638b9f8431d055398131a33b33f31eeaf0e5d63",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "source": "Existing local test transcript; exact execution revision and command not embedded in original log"
+          }
+        },
+        {
+          "id": "local-tests/asset-export-final.log",
+          "role": "experiment",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "1cc2acd5f71792220e2499c1cfcd80e82881a81e02bf9b1800a38f2fba1d4d4f",
+          "content_sha256": "bca15717d78a4bd2da965bf21c66943951e69bc80c4a49c8f018682ac9f02270",
+          "source_capture": {
+            "size_bytes": 99,
+            "sha256": "bca15717d78a4bd2da965bf21c66943951e69bc80c4a49c8f018682ac9f02270",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "source": "Existing local test transcript; exact execution revision and command not embedded in original log"
+          }
+        },
+        {
+          "id": "repository/f5651fe/src__kneekura_tech_hub__minecraft__asset_guard.py.txt",
+          "role": "before_code",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "5f5aa7d75a946ae15ad8257f8ddc3b85ee92119603d0dd2ba4fc77d830260be4",
+          "content_sha256": "376a378a82113a00351691f9d9ce788305b1a64055c18afaf6799a94487274d8",
+          "source_capture": {
+            "size_bytes": 27536,
+            "sha256": "376a378a82113a00351691f9d9ce788305b1a64055c18afaf6799a94487274d8",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "source_path": "src/kneekura_tech_hub/minecraft/asset_guard.py",
+            "source_revision": "f5651fe5ebbaf4df9526f4644054705d74f0215f",
+            "source_url": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/blob/f5651fe5ebbaf4df9526f4644054705d74f0215f/src/kneekura_tech_hub/minecraft/asset_guard.py",
+            "git_blob": "0cb7b3eb7b1710c42a44918f7588c9afb955fec5"
+          }
+        },
+        {
+          "id": "repository/f5651fe/src__kneekura_tech_hub__minecraft__asset_session.py.txt",
+          "role": "before_code",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "1ad48e885e06a8b4c473bbd36916bdf36eba9d01186991f99a1f0f9042f2cb29",
+          "content_sha256": "669ec8b83d1a5b31fe43f855e1d9649c9bbf88f4328deeb4e0f74be706a501aa",
+          "source_capture": {
+            "size_bytes": 17557,
+            "sha256": "669ec8b83d1a5b31fe43f855e1d9649c9bbf88f4328deeb4e0f74be706a501aa",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "source_path": "src/kneekura_tech_hub/minecraft/asset_session.py",
+            "source_revision": "f5651fe5ebbaf4df9526f4644054705d74f0215f",
+            "source_url": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/blob/f5651fe5ebbaf4df9526f4644054705d74f0215f/src/kneekura_tech_hub/minecraft/asset_session.py",
+            "git_blob": "5656bcd76b52a0c9ee87a5f73051790359a5ec64"
+          }
+        },
+        {
+          "id": "repository/f5651fe/tools__ci__mod_ai_blockbench_live.py.txt",
+          "role": "before_code",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "17a843861815a3040e584384f25a6dc546b01634ee38161196df89bf04221979",
+          "content_sha256": "8ce0ba5097e35be2d0a779b53127f4a2dcb1ddb0278c91ca9ce475bc4513c5c1",
+          "source_capture": {
+            "size_bytes": 10707,
+            "sha256": "8ce0ba5097e35be2d0a779b53127f4a2dcb1ddb0278c91ca9ce475bc4513c5c1",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "source_path": "tools/ci/mod_ai_blockbench_live.py",
+            "source_revision": "f5651fe5ebbaf4df9526f4644054705d74f0215f",
+            "source_url": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/blob/f5651fe5ebbaf4df9526f4644054705d74f0215f/tools/ci/mod_ai_blockbench_live.py",
+            "git_blob": "340aa3d9bd7322a138d64fdc116c867372f39292"
+          }
+        },
+        {
+          "id": "repository/a14f4ed/src__kneekura_tech_hub__minecraft__asset_guard.py.txt",
+          "role": "after_code",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "e80a6e5724f28a0edcd76f7b796975e09e3fc17819fccfefcff57c236de1b8d7",
+          "content_sha256": "46d84b048bf46e4b0c5047808a1e01ba1828dd3499c6d9c533f091f8baad50f3",
+          "source_capture": {
+            "size_bytes": 32153,
+            "sha256": "46d84b048bf46e4b0c5047808a1e01ba1828dd3499c6d9c533f091f8baad50f3",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "source_path": "src/kneekura_tech_hub/minecraft/asset_guard.py",
+            "source_revision": "a14f4ed7940236fc6c5493a0cb67835c878191a0",
+            "source_url": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/blob/a14f4ed7940236fc6c5493a0cb67835c878191a0/src/kneekura_tech_hub/minecraft/asset_guard.py",
+            "git_blob": "28a8d3d5c2eb8e060ba42bf4c448052fd4850d32"
+          }
+        },
+        {
+          "id": "repository/a14f4ed/src__kneekura_tech_hub__minecraft__asset_session.py.txt",
+          "role": "after_code",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "a29c4d7fe8ccddd711ee7d86943a9f418db2a0f6263138fb9a61047f53d22fd7",
+          "content_sha256": "1c5f74d62e4f0948235c4743fe967ac1b55835ac933026247a08d5c871d9b1b0",
+          "source_capture": {
+            "size_bytes": 18576,
+            "sha256": "1c5f74d62e4f0948235c4743fe967ac1b55835ac933026247a08d5c871d9b1b0",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "source_path": "src/kneekura_tech_hub/minecraft/asset_session.py",
+            "source_revision": "a14f4ed7940236fc6c5493a0cb67835c878191a0",
+            "source_url": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/blob/a14f4ed7940236fc6c5493a0cb67835c878191a0/src/kneekura_tech_hub/minecraft/asset_session.py",
+            "git_blob": "ddb1ff2f39d5b3f3055290d2b945971d3b418748"
+          }
+        },
+        {
+          "id": "repository/a14f4ed/tools__ci__mod_ai_blockbench_live.py.txt",
+          "role": "after_code",
+          "index_snapshot_id": "61a01b3598069012702d4f537fafb283f1af015db720b34021c7084b1b3fe03a",
+          "document_id": "5ade79e5a18bf7c904737fd468fa91364e5e0a64142f83e3e830488479f9c9ef",
+          "content_sha256": "858b1a33604dc3db6e156fe033dc0f7cd737d338884fcf37f0fc57c5b68c6b21",
+          "source_capture": {
+            "size_bytes": 11753,
+            "sha256": "858b1a33604dc3db6e156fe033dc0f7cd737d338884fcf37f0fc57c5b68c6b21",
+            "snapshot_copied_at": "2026-09-30T08:14:00Z",
+            "source_path": "tools/ci/mod_ai_blockbench_live.py",
+            "source_revision": "a14f4ed7940236fc6c5493a0cb67835c878191a0",
+            "source_url": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/blob/a14f4ed7940236fc6c5493a0cb67835c878191a0/tools/ci/mod_ai_blockbench_live.py",
+            "git_blob": "50c24b4d7fb7836e8653c58b33ef7671c75d104f"
+          }
+        }
+      ],
+      "symptom": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "The first real editor capture serialized Java model format 26.3/native java_block_version 26.3, omitted display transforms and showed an all-gold visually filled head with no distinct purple accent. The capture transport succeeded while this asset failed the intended legacy/palette/halo design.",
+        "evidence_ids": [
+          "live-bb-f5651fe/celestial_staff.model.json",
+          "live-bb-f5651fe/celestial_staff.bbmodel",
+          "live-bb-f5651fe/view-front.png",
+          "live-bb-f5651fe/session.json"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "The first-party pre-fix guard did not set per-project legacy version or display policy. The pre-fix staff plan used one gold texture fill and overlapping star/halo geometry without a purple texture region. Pinned Blockbench project source maps its latest default to 26.3.",
+        "evidence_ids": [
+          "repository/f5651fe/src__kneekura_tech_hub__minecraft__asset_guard.py.txt",
+          "repository/f5651fe/tools__ci__mod_ai_blockbench_live.py.txt",
+          "upstream-excerpts/bb-project.ts.L613-L623.txt"
+        ]
+      },
+      "root_cause": {
+        "basis": "INFERENCE",
+        "text": "Unpinned per-project format/display settings allowed the latest Blockbench format to flow into a Minecraft 1.20.1-targeted asset. A single-color texture and insufficient separation of star/halo geometry explain the absent purple accent and closed-looking head. Exact exported values and screenshots establish the output defects, not in-game impact.",
+        "evidence_ids": [
+          "live-bb-f5651fe/celestial_staff.model.json",
+          "live-bb-f5651fe/view-front.png",
+          "repository/f5651fe/src__kneekura_tech_hub__minecraft__asset_guard.py.txt",
+          "repository/f5651fe/tools__ci__mod_ai_blockbench_live.py.txt",
+          "upstream-excerpts/bb-project.ts.L613-L623.txt"
+        ]
+      },
+      "repair": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "Pin the owned project to legacy 1.9.0 and seven exact display slots; enforce palette-bounded integer texture rectangles, wait for changed bitmap decode, reserve purple UVs for a smaller star, and separate it from an open stepped gold halo. Repaired native/model exports agree exactly with committed display policy.",
+        "evidence_ids": [
+          "repository/staff-repair.diff.txt",
+          "analysis/observations.json"
+        ]
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Separate editor transport success, target-format/resource checks, and direct visual review. Pin version and display settings per owned project, bind bounded texture regions to the requested palette, and compare the actual exported bytes and all required views before inferring a usable asset.",
+        "evidence_ids": [
+          "live-bb-f5651fe/session.json",
+          "live-bb-a14f4ed/export.json",
+          "analysis/observations.json"
+        ]
+      },
+      "causal_chain": [
+        {
+          "basis": "DIRECT_OBSERVATION",
+          "text": "Pre-fix output retained the editor latest-format value and an all-gold head despite a successful capture transport.",
+          "evidence_ids": [
+            "live-bb-f5651fe/celestial_staff.model.json",
+            "live-bb-f5651fe/view-front.png",
+            "live-bb-f5651fe/session.json"
+          ]
+        },
+        {
+          "basis": "INFERENCE",
+          "text": "Default project settings plus the single-fill plan explain these separate compatibility and visual defects.",
+          "evidence_ids": [
+            "repository/f5651fe/src__kneekura_tech_hub__minecraft__asset_guard.py.txt",
+            "repository/f5651fe/tools__ci__mod_ai_blockbench_live.py.txt",
+            "upstream-excerpts/bb-project.ts.L613-L623.txt"
+          ]
+        },
+        {
+          "basis": "DIRECT_OBSERVATION",
+          "text": "The focused diff introduces owned-project legacy/display policy, bounded palette painting and nonintersecting star/halo layout.",
+          "evidence_ids": [
+            "repository/staff-repair.diff.txt"
+          ]
+        },
+        {
+          "basis": "DIRECT_OBSERVATION",
+          "text": "Repaired captures serialize legacy 1.9.0 with exact seven-slot display parity and show a separate purple star inside an open gold halo; later c6bbe10 exported model, texture and three view files are byte-identical, while native .bbmodel bytes differ.",
+          "evidence_ids": [
+            "live-bb-a14f4ed/celestial_staff.model.json",
+            "live-bb-a14f4ed/celestial_staff.bbmodel",
+            "live-bb-a14f4ed/view-front.png",
+            "live-bb-a14f4ed/view-left.png",
+            "live-bb-a14f4ed/view-back.png",
+            "analysis/observations.json"
+          ]
+        }
+      ],
+      "reproduction": {
+        "state": "RECORDED_EXPERIMENT",
+        "evidence_ids": [
+          "live-bb-f5651fe/session.json",
+          "live-bb-f5651fe/celestial_staff.model.json",
+          "live-bb-f5651fe/view-front.png"
+        ]
+      },
+      "fix_verification": {
+        "state": "RECORDED_EXPERIMENT",
+        "evidence_ids": [
+          "live-bb-a14f4ed/session.json",
+          "live-bb-a14f4ed/export.json",
+          "live-bb-a14f4ed/view-front.png",
+          "live-bb-a14f4ed/view-left.png",
+          "live-bb-a14f4ed/view-back.png",
+          "analysis/observations.json"
+        ]
+      },
+      "regression_tests": [
+        "test_trusted_host_configures_only_owned_project_and_exports_exact_display",
+        "test_fixed_item_policy_is_already_in_pinned_display_slot_export_form",
+        "test_trusted_host_awaits_bound_texture_decode_after_palette_paint",
+        "test_staff_has_smaller_purple_star_with_clear_air_gaps_inside_halo"
+      ],
+      "limitations": [
+        "Display transforms are explicit pilot policy, not an in-game visual verdict",
+        "Original session structural/visual/runtime gates remain NOT_RUN and loaded_revision UNATTESTED; the separate export artifact has structural PASS only",
+        "Captured local test logs are supporting development experiments and do not embed exact execution revision/command",
+        "c6bbe10 corroborates retained asset-byte identity, not a third repair case or new runtime attestation",
+        "M4/M5 and Forge acceptance remain outside this bounded history record"
+      ]
+    }
+  ],
+  "scope_limits": [
+    "Other development failures and subsystems",
+    "Full upstream Issue/PR history",
+    "Third-party whole source, installers and dependencies",
+    "Credential-bearing plugin packages and private configs",
+    "Pre-existing CAS directories or unrelated CAS objects",
+    "M4/M5/Forge implementation, build or runtime acceptance"
+  ],
+  "recorded_at": "2026-09-30T08:14:00Z"
+}

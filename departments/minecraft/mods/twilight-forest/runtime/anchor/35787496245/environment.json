@@ -1,0 +1,66 @@
+{
+  "record_version": "1.0",
+  "captured_at_utc": "2026-09-22T22:06:17.415443Z",
+  "scenario": "R1-startup",
+  "track": "anchor",
+  "source": {
+    "repository": "TeamTwilight/twilightforest",
+    "expected_commit": "a7dd8f13c653e137f977f5ffaa870fcb20fc1625",
+    "actual_commit": "a7dd8f13c653e137f977f5ffaa870fcb20fc1625"
+  },
+  "minecraft_version": "1.20.1",
+  "loader": {
+    "name": "Forge",
+    "version": "47.1.70"
+  },
+  "java": {
+    "java_home": "K:\\JollyRunnerHub\\actions-runner-kneekura-tech-hub\\_work\\_tool\\Java_Temurin-Hotspot_jdk\\17.0.20-101\\x64",
+    "version": {
+      "command": [
+        "java",
+        "-version"
+      ],
+      "exit_code": 0,
+      "output": "openjdk version \"17.0.20.1\" 2026-08-18\nOpenJDK Runtime Environment Temurin-17.0.20.1+1 (build 17.0.20.1+1)\nOpenJDK 64-Bit Server VM Temurin-17.0.20.1+1 (build 17.0.20.1+1, mixed mode, sharing)"
+    }
+  },
+  "jvm": {
+    "gradle_jvmargs": "-Xmx4G"
+  },
+  "machine": {
+    "os": "Windows-11-10.0.26200-SP0",
+    "architecture": "AMD64",
+    "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "logical_cpu_count": 32,
+    "ram_bytes": 34029125632,
+    "gpu": {
+      "applicable": false,
+      "reason": "captured for machine identity; not used by dedicated-server R1",
+      "devices": [
+        {
+          "Name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "DriverVersion": "32.0.16.1062"
+        },
+        {
+          "Name": "Intel(R) UHD Graphics",
+          "DriverVersion": "32.0.101.7085"
+        }
+      ]
+    }
+  },
+  "world": {
+    "seed": "20260923",
+    "render_distance": null,
+    "render_distance_note": "not applicable to dedicated-server R1",
+    "server_view_distance": 10,
+    "simulation_distance": 10
+  },
+  "installed_mods": {
+    "mode": "development run configuration from pinned source",
+    "note": "Raw startup logs are retained as workflow artifact; exact loaded-mod list is not promoted unless emitted unambiguously by the loader."
+  },
+  "profiler": {
+    "tool": "none",
+    "reason": "R1 startup baseline"
+  }
+}

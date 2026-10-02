@@ -21,6 +21,7 @@ dev = [
 ]
 
 [project.scripts]
+kneekura-minecraft = "kneekura_tech_hub.minecraft.__main__:main"
 kneekura-hub = "kneekura_tech_hub.cli:main"
 kneekura-hub-validate = "kneekura_tech_hub.cli:validate_main"
 kneekura-github-discover = "kneekura_tech_hub.github_cli:main"
@@ -38,3 +39,9 @@ kneekura-guidance = "kneekura_tech_hub.guidance_cli:main"
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
+
+# The Minecraft adapter uses the existing package; no extra service/database.
+[tool.hatch.build.targets.wheel.force-include]
+"departments/minecraft/mod-ai/forge-observer" = "kneekura_tech_hub/minecraft/resources/forge-observer"
+"schemas" = "kneekura_tech_hub/resources/schemas"
+"governance" = "kneekura_tech_hub/resources/governance"

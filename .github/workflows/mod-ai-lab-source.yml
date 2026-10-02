@@ -1,0 +1,160 @@
+name: MOD AI LAB source verification
+
+on:
+  push:
+    paths:
+      - ".github/workflows/mod-ai-lab-source.yml"
+      - "departments/minecraft/lab/**"
+      - "departments/minecraft/mod-ai/verification/lab-source-pin.json"
+      - "departments/minecraft/mod-ai/verification/check_lab_adapter_source.py"
+      - "src/kneekura_tech_hub/minecraft/experiment*"
+      - "src/kneekura_tech_hub/minecraft/task_context.py"
+      - "src/kneekura_tech_hub/minecraft/task_routing.py"
+  pull_request:
+    paths:
+      - ".github/workflows/mod-ai-lab-source.yml"
+      - "departments/minecraft/lab/**"
+      - "departments/minecraft/mod-ai/verification/lab-source-pin.json"
+      - "departments/minecraft/mod-ai/verification/check_lab_adapter_source.py"
+      - "src/kneekura_tech_hub/minecraft/experiment*"
+      - "src/kneekura_tech_hub/minecraft/task_context.py"
+      - "src/kneekura_tech_hub/minecraft/task_routing.py"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lab-source-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: tech-hub
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Validate monorepo source pin
+        id: pins
+        run: |
+          python - <<'PY'
+          import json, os, pathlib, re
+          p=json.load(open('tech-hub/departments/minecraft/mod-ai/verification/lab-source-pin.json'))
+          assert p['schema_version']==2
+          assert p['lab_path']=='departments/minecraft/lab'
+          assert p['lab_import_repository']=='genkimorimori252525-oss/KNEEKURA-LAB'
+          assert re.fullmatch('[a-f0-9]{40}',p['lab_import_revision'])
+          assert p['mod_repository']=='genkimorimori252525-oss/reimu-mod'
+          assert re.fullmatch('[a-f0-9]{40}',p['mod_revision'])
+          root=pathlib.Path('tech-hub')/p['lab_path']
+          assert (root/'package.json').is_file()
+          assert (root/'debug-workspace/bridge/adapter-cli.mjs').is_file()
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:
+              f.write(f"mod_revision={p['mod_revision']}\n")
+          PY
+      - uses: actions/checkout@v4
+        with:
+          repository: genkimorimori252525-oss/reimu-mod
+          ref: ${{ steps.pins.outputs.mod_revision }}
+          ssh-key: ${{ secrets.MOD_AI_MOD_SOURCE_SSH_KEY }}
+          path: mod
+          persist-credentials: false
+      - name: Record source identities
+        env:
+          MOD_REVISION: ${{ steps.pins.outputs.mod_revision }}
+        run: |
+          test "$(git -C mod rev-parse HEAD)" = "$MOD_REVISION"
+          mkdir source-evidence
+          git -C tech-hub rev-parse HEAD > source-evidence/tech-head.txt
+          python - <<'PY'
+          import json
+          p=json.load(open('tech-hub/departments/minecraft/mod-ai/verification/lab-source-pin.json'))
+          open('source-evidence/lab-import-revision.txt','w').write(p['lab_import_revision']+'\n')
+          PY
+          git -C mod rev-parse HEAD > source-evidence/mod-head.txt
+      - name: Prepare pinned Java contract dependency
+        run: |
+          curl --fail --location --retry 2 --output "$RUNNER_TEMP/gson-2.10.jar" https://repo.maven.apache.org/maven2/com/google/code/gson/gson/2.10/gson-2.10.jar
+          echo "0cdd163ce3598a20fc04eee71b140b24f6f2a3b35f0a499dbbdd9852e83fbfaf  $RUNNER_TEMP/gson-2.10.jar" | sha256sum --check
+          echo "KNEEKURA_GSON_JAR=$RUNNER_TEMP/gson-2.10.jar" >> "$GITHUB_ENV"
+      - name: LAB complete source suite
+        working-directory: tech-hub/departments/minecraft/lab
+        run: npm run test:ci
+      - name: Portable Java bridge contracts
+        working-directory: tech-hub/departments/minecraft/lab
+        run: npm run test:bridge-runtime
+      - name: Portable Java owner and Node linkage contracts
+        working-directory: tech-hub/departments/minecraft/lab
+        run: npm run test:bridge-owner-runtime
+      - name: Portable Java camera contracts
+        working-directory: tech-hub/departments/minecraft/lab
+        run: node debug-workspace/forge-bridge/check-capture-source.mjs --java-home "$JAVA_HOME"
+      - name: Paired Python Node registration fixture
+        run: |
+          python -m pip install -e './tech-hub[dev]'
+          python tech-hub/departments/minecraft/mod-ai/verification/check_lab_adapter_source.py --lab-root "$GITHUB_WORKSPACE/tech-hub/departments/minecraft/lab" > source-evidence/adapter-fixture.json
+      - name: Paired scoped-control and private export fixture
+        env:
+          KNEEKURA_LAB_SOURCE: ${{ github.workspace }}/tech-hub/departments/minecraft/lab
+        run: python -m pytest -q tech-hub/tests/test_minecraft_scoped_control_interop.py
+      - name: Compile actual LAB bridge against pinned MOD source
+        working-directory: mod
+        env:
+          KNEEKURA_DEBUG_ENABLED: "1"
+          KNEEKURA_DEBUG_WORLD_NAME: KNEEKURA_DEBUG_WORLD
+          KNEEKURA_DEBUG_SESSION_ID: ci-source-only
+          KNEEKURA_DEBUG_RUN_ID: ci-source-only
+          KNEEKURA_DEBUG_RUN_SNAPSHOT_ID: ci-source-only
+          KNEEKURA_DEBUG_HANDSHAKE_NONCE: ci-source-only-nonce-0001
+        run: |
+          export KNEEKURA_DEBUG_FORGE_BRIDGE_SRC="$GITHUB_WORKSPACE/tech-hub/departments/minecraft/lab/debug-workspace/forge-bridge/src/main/java"
+          export KNEEKURA_DEBUG_BUILD_MARKER="$RUNNER_TEMP/source-only-build-marker.json"
+          export KNEEKURA_SOURCE_CLASSPATH_OUT="$RUNNER_TEMP/lab-source-classpath.txt"
+          cat > "$RUNNER_TEMP/lab-source-classpath.gradle" <<'GROOVY'
+          gradle.projectsEvaluated {
+              rootProject.tasks.register('kneekuraSourceClasspath') {
+                  dependsOn rootProject.tasks.named('kneekuraDebugClasses')
+                  doLast {
+                      def debugSource = rootProject.sourceSets.getByName('kneekuraDebug')
+                      new File(System.getenv('KNEEKURA_SOURCE_CLASSPATH_OUT')).text = debugSource.runtimeClasspath.asPath
+                  }
+              }
+          }
+          GROOVY
+          bash ./gradlew kneekuraSourceClasspath kneekuraDebugClasses --no-daemon -Dorg.gradle.java.home="$JAVA_HOME" -Dorg.gradle.jvmargs=-Xmx4G -Porg.gradle.java.installations.paths="$JAVA_HOME" --init-script "$RUNNER_TEMP/lab-source-classpath.gradle" --stacktrace
+          test -s "$KNEEKURA_SOURCE_CLASSPATH_OUT"
+          echo "KNEEKURA_FORGE_CLASSPATH=$(cat "$KNEEKURA_SOURCE_CLASSPATH_OUT")" >> "$GITHUB_ENV"
+      - name: Actual dependency source contracts
+        working-directory: tech-hub/departments/minecraft/lab
+        run: npm run test:bridge-runtime-api
+      - name: Pinned MOD resource and unit regressions
+        working-directory: mod
+        run: bash ./gradlew test --no-daemon -Dorg.gradle.java.home="$JAVA_HOME" -Dorg.gradle.jvmargs=-Xmx4G -Porg.gradle.java.installations.paths="$JAVA_HOME" --stacktrace
+      - name: Record source-only scope
+        if: always()
+        env:
+          SOURCE_JOB_STATUS: ${{ job.status }}
+        run: |
+          mkdir -p source-evidence
+          python - <<'PY'
+          import json, os
+          json.dump({'scope':'SOURCE_AND_COMPILATION_ONLY','status':os.environ['SOURCE_JOB_STATUS'],'live_runtime':'NOT_RUN','loaded_runtime_attestation':'NOT_ESTABLISHED'},open('source-evidence/scope.json','w'),sort_keys=True)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mod-ai-lab-source-${{ github.sha }}
+          path: source-evidence/
+          retention-days: 14

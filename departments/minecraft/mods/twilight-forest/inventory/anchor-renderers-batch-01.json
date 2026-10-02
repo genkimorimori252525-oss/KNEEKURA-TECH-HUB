@@ -1,0 +1,229 @@
+{
+  "catalog_version": "1.0",
+  "source_snapshot": {
+    "repository": "TeamTwilight/twilightforest",
+    "commit": "a7dd8f13c653e137f977f5ffaa870fcb20fc1625",
+    "minecraft": "1.20.1",
+    "loader": "Forge",
+    "release_source_candidate": "4.3.2508"
+  },
+  "batch": 1,
+  "range": [
+    0,
+    14
+  ],
+  "count": 15,
+  "records": [
+    {
+      "class_name": "AdherentRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/AdherentRenderer.java",
+      "blob_sha": "842d5752273fccfe0cbef326c34f04336a65ea32",
+      "superclass": "TFBipedRenderer",
+      "literal_pngs": [
+        "adherent.png"
+      ],
+      "tf_model_layers": [
+        "ADHERENT"
+      ],
+      "minecraft_model_layers": [],
+      "model_classes": [
+        "AdherentModel"
+      ],
+      "notable_resource_paths": []
+    },
+    {
+      "class_name": "BighornRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/BighornRenderer.java",
+      "blob_sha": "b20f0da8af40ae657bda3cc7855a5cd1f6bb2cbb",
+      "superclass": "SheepRenderer",
+      "literal_pngs": [
+        "bighorn.png"
+      ],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "model_classes": [],
+      "notable_resource_paths": []
+    },
+    {
+      "class_name": "BirdRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/BirdRenderer.java",
+      "blob_sha": "65c9fa794f0e5adc37f0ea78ca0b6f6fca6e7cf6",
+      "superclass": "Bird",
+      "literal_pngs": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "model_classes": [],
+      "notable_resource_paths": []
+    },
+    {
+      "class_name": "BlockChainGoblinRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/BlockChainGoblinRenderer.java",
+      "blob_sha": "91f4a7a9ed84fe43561151949c3d9a22957ada31",
+      "superclass": "BlockChainGoblin",
+      "literal_pngs": [
+        "blockgoblin.png"
+      ],
+      "tf_model_layers": [
+        "CHAIN_BLOCK",
+        "CHAIN"
+      ],
+      "minecraft_model_layers": [],
+      "model_classes": [
+        "SpikeBlockModel",
+        "ChainModel"
+      ],
+      "notable_resource_paths": []
+    },
+    {
+      "class_name": "BlockChainRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/BlockChainRenderer.java",
+      "blob_sha": "0276fc67384c6f0b8cbab9e00754c91e9ce523a3",
+      "superclass": "EntityRenderer",
+      "literal_pngs": [
+        "blockgoblin.png"
+      ],
+      "tf_model_layers": [
+        "CHAIN_BLOCK",
+        "CHAIN"
+      ],
+      "minecraft_model_layers": [],
+      "model_classes": [
+        "SpikeBlockModel",
+        "ChainModel"
+      ],
+      "notable_resource_paths": []
+    },
+    {
+      "class_name": "BoarRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/BoarRenderer.java",
+      "blob_sha": "2ffbde7786f5a2c6fc37be4e4e52be58b4ef440b",
+      "superclass": "MobRenderer",
+      "literal_pngs": [
+        "wildboar.png"
+      ],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "model_classes": [],
+      "notable_resource_paths": []
+    },
+    {
+      "class_name": "BunnyRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/BunnyRenderer.java",
+      "blob_sha": "35d532e513104d0aaead26c385c792e6620a8c27",
+      "superclass": "MobRenderer",
+      "literal_pngs": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "model_classes": [],
+      "notable_resource_paths": []
+    },
+    {
+      "class_name": "CarminiteBroodlingRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/CarminiteBroodlingRenderer.java",
+      "blob_sha": "12eb1fde010b33865364cb6ddd9ece90ff233a90",
+      "superclass": "TowerBroodling",
+      "literal_pngs": [
+        "towerbroodling.png"
+      ],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "model_classes": [],
+      "notable_resource_paths": []
+    },
+    {
+      "class_name": "CarminiteGhastRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/CarminiteGhastRenderer.java",
+      "blob_sha": "222ae450198ce6f8a82f54653074c631ffe6ae50",
+      "superclass": "CarminiteGhastguard",
+      "literal_pngs": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "model_classes": [],
+      "notable_resource_paths": []
+    },
+    {
+      "class_name": "CarminiteGolemRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/CarminiteGolemRenderer.java",
+      "blob_sha": "99252a138cbd70a717dad077e638ea24a90967c8",
+      "superclass": "CarminiteGolem",
+      "literal_pngs": [
+        "carminitegolem.png"
+      ],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "model_classes": [],
+      "notable_resource_paths": []
+    },
+    {
+      "class_name": "CubeOfAnnihilationRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/CubeOfAnnihilationRenderer.java",
+      "blob_sha": "6477769a44f53b750b4f9ed25431d6ca91edb715",
+      "superclass": "EntityRenderer",
+      "literal_pngs": [
+        "cubeofannihilation.png"
+      ],
+      "tf_model_layers": [
+        "CUBE_OF_ANNIHILATION"
+      ],
+      "minecraft_model_layers": [],
+      "model_classes": [
+        "CubeOfAnnihilationModel"
+      ],
+      "notable_resource_paths": []
+    },
+    {
+      "class_name": "CustomProjectileTextureRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/CustomProjectileTextureRenderer.java",
+      "blob_sha": "8a1d4ad405332580c8d6be513aa8d4483ee66411",
+      "superclass": "EntityRenderer",
+      "literal_pngs": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "model_classes": [],
+      "notable_resource_paths": []
+    },
+    {
+      "class_name": "DefaultArrowRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/DefaultArrowRenderer.java",
+      "blob_sha": "3cfa9dcfc657e9f6c3c4740b24fdcda0f6d9bb42",
+      "superclass": "AbstractArrow",
+      "literal_pngs": [
+        "textures/entity/projectiles/arrow.png"
+      ],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "model_classes": [],
+      "notable_resource_paths": [
+        "textures/entity/projectiles/arrow.png"
+      ]
+    },
+    {
+      "class_name": "FallingIceRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/FallingIceRenderer.java",
+      "blob_sha": "5c5079cc05433ecf6faada004c912875efd1ee9e",
+      "superclass": "EntityRenderer",
+      "literal_pngs": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "model_classes": [],
+      "notable_resource_paths": []
+    },
+    {
+      "class_name": "HarbingerCubeRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/HarbingerCubeRenderer.java",
+      "blob_sha": "05fa25c8aa502104d445c18a2e5e6edbbe5a09d7",
+      "superclass": "HarbingerCube",
+      "literal_pngs": [
+        "apocalypse2.png"
+      ],
+      "tf_model_layers": [
+        "HARBINGER_CUBE"
+      ],
+      "minecraft_model_layers": [],
+      "model_classes": [
+        "HarbingerCubeModel"
+      ],
+      "notable_resource_paths": []
+    }
+  ]
+}

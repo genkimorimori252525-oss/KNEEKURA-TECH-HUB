@@ -1,0 +1,20 @@
+modLoader="javafml"
+loaderVersion="[47,48)"
+license="All Rights Reserved"
+[[mods]]
+modId="kneekura_observer"
+version="1.0.0"
+displayName="KNEEKURA Development Observer"
+description="Opt-in local MOD development observation; not for release distribution."
+[[dependencies.kneekura_observer]]
+modId="forge"
+mandatory=true
+versionRange="[47,48)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.kneekura_observer]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1]"
+ordering="NONE"
+side="BOTH"

@@ -1,0 +1,594 @@
+{
+  "schema_version": 1,
+  "record_type": "DERIVED_MINIMIZED_ACCEPTANCE_REVIEW",
+  "date": "2026-09-30",
+  "repository_checkpoint": "a57ffb32adc6a0e1f0a5d06cf45d58c407fe1679",
+  "overall_plan": "INCOMPLETE",
+  "M4_staff": "NOT_RUN",
+  "source_documents": [
+    {
+      "repository_path": "departments/minecraft/design/2026-09-28-mod-ai-environment/ACCEPTANCE.md",
+      "checkpoint": "a57ffb32adc6a0e1f0a5d06cf45d58c407fe1679",
+      "sha256": "5a842b391f1379e6725446c2d69613c4bfcda54563c2a2f805a358f4598d1065"
+    },
+    {
+      "repository_path": "departments/minecraft/mod-ai/acceptance/real-mod-tasks.json",
+      "checkpoint": "a57ffb32adc6a0e1f0a5d06cf45d58c407fe1679",
+      "sha256": "21c35b11768f56ef83447ed77d3d3c902f870960ce13d30639e64576b9eeebcd"
+    },
+    {
+      "repository_path": "departments/minecraft/mod-ai/verification/current-acceptance-map-2026-09-30.json",
+      "checkpoint": "a57ffb32adc6a0e1f0a5d06cf45d58c407fe1679",
+      "sha256": "118f152c011935b52a3c3c938279f28cb5629f7253d37ef2a24421f7c2c2a025"
+    },
+    {
+      "repository_path": "departments/minecraft/mod-ai/verification/twilight-static-2026-09-30/summary.json",
+      "checkpoint": "a57ffb32adc6a0e1f0a5d06cf45d58c407fe1679",
+      "sha256": "767fc6ccf8d5e18a4eb5c4b229708876fe5c83277db11afd3f4dbdbe67a22d79"
+    }
+  ],
+  "versions": {
+    "forge": "47.4.6",
+    "java_major": 17,
+    "minecraft": "1.20.1",
+    "twilight_forest": "4.3.2508",
+    "gradle": "8.8",
+    "forgegradle": "6.0.54",
+    "tiny_remapper": "0.11.2"
+  },
+  "U04": {
+    "criterion_result": "SATISFIED_SCOPED_DEFAULT_CONFIGURATION",
+    "rendering_verdict": "PASS_SCOPED_VISUAL_REVIEW",
+    "scope": "Same-run physical-client Hydra pose, default/no-JAPPA selection and visible rendering in the selected derived 4.3.2508 runtime archive.",
+    "original_criterion": "renderer/model/textureとruntime観測の証拠を結び、GameTestだけで描画成功としない",
+    "criterion_reason": "The existing pinned static registration/model/texture investigation is now linked to same-run client entity, dispatcher renderer, selected configuration, pose, screenshot/frame/camera and server intervals. Independent pixel inspection establishes visible Hydra rendering. The original criterion does not require a perfect front framing or runtime execution of every configuration branch.",
+    "another_hydra_run_required_for_this_scoped_criterion": false,
+    "JAPPA_runtime": "NOT_RUN",
+    "both_renderer_model_source_routes": "REACHED_BY_EXISTING_STATIC_INVESTIGATION",
+    "actual_model_instance_reflection": "NOT_CAPTURED",
+    "identity": {
+      "run_id": "dc9d4c72-00fe-4ea9-942c-7ae41c52a0d4",
+      "session_epoch": "411d29f3-8aed-4382-bb14-0a2c97115ca2",
+      "profile_id": "8da0b7d35e460cdbf1e90d6d52d08f64d6e25790b7a90c38073797dfd38a71bd",
+      "index_snapshot_id": "063c554bcc124721b86f9d6a5ba22fae3ec38bd89d57a3df063bdd9c84b3cc9f",
+      "build_artifact_hash": "aa93891116243c0deb106084a3ef3792ddaf6ea19b397d975850cddfabcb0cc6",
+      "source_revision": "a9ce5a7f8eab8b58ce1c231bcbae60a4d1ee2e47",
+      "dirty_hash": "7e5eee8b71fc489f63e97b256726842c4d0fccba906afd6aa7b07d8b45bd7fc3",
+      "config_hash": "022e4f84eddeca4d0791002373f47a7e9ffa0a55e5e1631b8a17b28bdeb3662d",
+      "dependency_inventory_hash": "d073ed1e04927b71ca50d33ed409c912c05efcc0bd3a5d6da1a9778690b562dd",
+      "target_selection_hash": "ec8fdc231385b2ab7b5663b7d7537602b7854bd63a763e8a3f3d6329699165e9",
+      "scenario_hash": "9e9fc653df7dc391ef66a9e7ac0ccc52c02b052b371355fc189ea7991c74e3d6",
+      "assertion_hash": "38acdee35d7923f163aad9bb65dca4efe3ef470b8e12e91d19b21897e5fdb7dd",
+      "runtime_scope": "TARGET_CODE_AND_DEPENDENCY_BYTES",
+      "world_id": "34b99eb953c3ff7db331edeb",
+      "world_template_hash": "62eacee0b1b8c69c173d31bfa41b53879cbe71df16db690d03fcaed587ac47db",
+      "contract_sha256": "90d6b667e1444fd89650d6b5110dd98b145ba74172024df364a2e52396d6a0a5"
+    },
+    "selected_runtime": {
+      "entity_uuid": "00000000-0000-4000-8000-000000000004",
+      "entity_type": "twilightforest:hydra",
+      "entity_class": "twilightforest.entity.boss.Hydra",
+      "renderer_class": "twilightforest.client.renderer.entity.HydraRenderer",
+      "jappa_marker_present": false,
+      "texture_location": "twilightforest:textures/model/hydra4.png",
+      "texture_sha256": "1a9592e62e2762f1585d13292cac5bca338c606f4c60fa397bdaa96d2ce9a0ce",
+      "texture_source_pack": "mod_resources"
+    },
+    "default_model_relation": "HydraRenderer/HydraModel via the retained static TFClientSetup registration route; not a reflected live model instance.",
+    "captures": [
+      {
+        "capture_id": "014-hydra-front",
+        "actual_view": "front",
+        "artifact_sha256": "20605e836279a390cde71263e4f22aafc4dc146459265665f990dfb4f5256b36",
+        "png_sha256": "d0d8796cb3d8ac3656165d3982efc62e56d196b417aefcf1e18cf3f4f6336f91",
+        "handshake_sha256": "4f34b69c19e3e18dbf3cbd5f12c90272090b08a9889de18fdfd817367d9adc0e",
+        "captured_utc": "2026-09-30T15:57:07.229340Z",
+        "camera": {
+          "pitch": 10.0,
+          "x": 0.5,
+          "y": 65.61999988555908,
+          "yaw": 0.0,
+          "z": -29.5
+        },
+        "intervals": {
+          "server_tick_start": 1416,
+          "server_tick_end": 1420,
+          "client_frame_start": 1239,
+          "client_frame_end": 1239,
+          "log_sequence_start": 16,
+          "log_sequence_end": 16
+        },
+        "entity_pose": {
+          "body_yaw": -180.0,
+          "entity_tick": 779,
+          "head_yaw": -180.0,
+          "pitch": 0.0,
+          "pose": "STANDING",
+          "x": 0.5,
+          "y": 65.0,
+          "yaw": -180.0,
+          "z": 0.5
+        },
+        "image_size": {
+          "width": 1180,
+          "height": 812
+        },
+        "observer_outcome": "NOT_RUN",
+        "helper_visibility": "NOT_ESTABLISHED",
+        "derived_visual_visibility": true,
+        "visual_review": "Hydra body and three active heads visible. Highest central head is clipped by the top edge and partly overlaid by the boss bar; this is not a full-frontal framing claim."
+      },
+      {
+        "capture_id": "018-hydra-oblique",
+        "actual_view": "side",
+        "artifact_sha256": "f80cc36bd9397684d3f40ac3e117194cf1f70beb0b0867459071d7b7b2c18510",
+        "png_sha256": "82b7f49b253cf4dbcc5c70ddff671ab19e65bd00fd8498cb399a49e1ff239872",
+        "handshake_sha256": "4f34b69c19e3e18dbf3cbd5f12c90272090b08a9889de18fdfd817367d9adc0e",
+        "captured_utc": "2026-09-30T15:57:59.733004Z",
+        "camera": {
+          "pitch": 10.0,
+          "x": 30.5,
+          "y": 73.6180153316199,
+          "yaw": 90.0,
+          "z": 0.5
+        },
+        "intervals": {
+          "server_tick_start": 2464,
+          "server_tick_end": 2468,
+          "client_frame_start": 2235,
+          "client_frame_end": 2235,
+          "log_sequence_start": 23,
+          "log_sequence_end": 23
+        },
+        "entity_pose": {
+          "body_yaw": -180.0,
+          "entity_tick": 1815,
+          "head_yaw": -180.0,
+          "pitch": 0.0,
+          "pose": "STANDING",
+          "x": 0.5,
+          "y": 65.0,
+          "yaw": -180.0,
+          "z": 0.5
+        },
+        "image_size": {
+          "width": 1180,
+          "height": 812
+        },
+        "observer_outcome": "NOT_RUN",
+        "helper_visibility": "NOT_ESTABLISHED",
+        "derived_visual_visibility": true,
+        "visual_review": "Full side silhouette, tail, body, feet and head/neck geometry are within the frame. Heads overlap in side projection."
+      },
+      {
+        "capture_id": "019-hydra-settled-oblique",
+        "actual_view": "oblique",
+        "artifact_sha256": "e009b1f44ac13cc51c757797fe7031d8512f88c156c90338f4e27374d37563d9",
+        "png_sha256": "9c277031c76363e5cb77c40208a661c08c6a7d10d1c98b7b996fb6ecc46710a6",
+        "handshake_sha256": "4f34b69c19e3e18dbf3cbd5f12c90272090b08a9889de18fdfd817367d9adc0e",
+        "captured_utc": "2026-09-30T15:58:39.048310Z",
+        "camera": {
+          "pitch": 12.0,
+          "x": 23.5,
+          "y": 65.61999988555908,
+          "yaw": 43.0,
+          "z": -24.5
+        },
+        "intervals": {
+          "server_tick_start": 3251,
+          "server_tick_end": 3256,
+          "client_frame_start": 2971,
+          "client_frame_end": 2971,
+          "log_sequence_start": 27,
+          "log_sequence_end": 27
+        },
+        "entity_pose": {
+          "body_yaw": -180.0,
+          "entity_tick": 2606,
+          "head_yaw": -180.0,
+          "pitch": 0.0,
+          "pose": "STANDING",
+          "x": 0.5,
+          "y": 65.0,
+          "yaw": -180.0,
+          "z": 0.5
+        },
+        "image_size": {
+          "width": 1180,
+          "height": 812
+        },
+        "observer_outcome": "NOT_RUN",
+        "helper_visibility": "NOT_ESTABLISHED",
+        "derived_visual_visibility": true,
+        "visual_review": "Three active heads, body, feet and tail are visible. Boss bar overlaps the upper region; no claim of an unobstructed presentation image."
+      }
+    ],
+    "excluded_duplicate_view": {
+      "capture_id": "016-hydra-side",
+      "actual_view": "front",
+      "artifact_sha256": "dd3a287ea263f76fc33ad774e2f4ea85932aacbb090c9180c4ff063d780af0e9",
+      "png_sha256": "c59ede1af229188e3e34b8ad0110c5437090bb611fe41669739dd5596c26bda8",
+      "reason": "Client camera had not yet reflected the preceding server teleport. Preserved and not counted as a distinct side view."
+    },
+    "limits": [
+      "Capture is non-atomic; dispatcher selection is not draw-call or loaded transformed-class attestation.",
+      "Observed visible surfaces have the expected green/dark Hydra texture; this does not prove every surface, animation or possible pose.",
+      "No model/source fix, before/after comparison, JAPPA runtime, boss combat or performance acceptance is claimed.",
+      "Immutable setup records bind intended initial configuration; dynamic options and every in-memory Forge setting are not continuously attested.",
+      "The scoped visual verdict is a derived review. Original observer NOT_RUN, helper visibility NOT_ESTABLISHED and timeout BLOCKED values remain unchanged."
+    ]
+  },
+  "provenance": {
+    "upstream_source_repository": "TeamTwilight/twilightforest",
+    "upstream_source_commit": "a7dd8f13c653e137f977f5ffaa870fcb20fc1625",
+    "original_distribution_sha256": "0bdc89263616d1b35c32ef82c5e9c14cbd20368e2fe8b468c72a28320be7a778",
+    "selected_derived_archive_sha256": "69e27b79067a9ce3bff3da18abd7b09b1ef4bc99625c07ea0c09424712df72bb",
+    "derivation_provider": "tiny-remapper",
+    "provider_version": "0.11.2",
+    "provider_receipt_sha256": "c005d50d88496d977b9afea730ba0bd585f076cd04a67251381b384127d0243c",
+    "tool_sha256": "0376b17b92f858956e018da672affb5485c18085db681f9547664996e82b6688",
+    "mapping_sha256": "41c23f61816a267de2803fe68d4a9c10c486e8a0185493c74c368169c23c5b2b",
+    "derivation_namespaces": {
+      "input": "srg",
+      "output": "mojmap"
+    },
+    "exported_namespace": "unknown",
+    "resource_parity": "ALL_NON_CLASS_ENTRIES_BYTE_IDENTICAL",
+    "source_binary_class_equivalence": "NOT_ESTABLISHED",
+    "forgegradle_equivalence": "NOT_CLAIMED",
+    "marker_build_artifact_sha256": "aa93891116243c0deb106084a3ef3792ddaf6ea19b397d975850cddfabcb0cc6",
+    "marker_compile_receipt_sha256": "8ac6876ba972fff025513f48802f0d9f9bdb01f94c92f7a206101f93f99b7736",
+    "export_receipt_sha256": "8126e1dc60077c4604e76a8a6cd5c187c1987b7ca2efdf1a5998d1767d472871",
+    "marker_is_distinct_from_selected_dependency": true,
+    "target_identity_scope": "TARGET_CODE_AND_DEPENDENCY_BYTES",
+    "whole_dependency_analysis": "NOT_ESTABLISHED"
+  },
+  "commands": {
+    "004-stage-world": {
+      "attempted": 2,
+      "requested": 7,
+      "retry_allowed": false,
+      "results": [
+        {
+          "command_id": "stage_platform",
+          "artifact_sha256": "59be1f7fe9b91b815705a4c9eb2abf0f168a75d515dcc2d8dcbdc14de2bd59ae",
+          "accepted": true,
+          "completed": true,
+          "outcome": "PASS",
+          "success": true,
+          "command_result": 625,
+          "server_tick": 1980
+        },
+        {
+          "command_id": "stage_clear_view",
+          "artifact_sha256": "a48b076d028bd9e35a0c63c398c3a4538bdf52b4888c30a58828c02d956e1a00",
+          "accepted": true,
+          "completed": true,
+          "outcome": "FAIL",
+          "success": false,
+          "command_result": 0,
+          "server_tick": 1990
+        }
+      ]
+    },
+    "005-stage-light": {
+      "attempted": 5,
+      "requested": 5,
+      "retry_allowed": false,
+      "results": [
+        {
+          "command_id": "stage_daylight",
+          "artifact_sha256": "c3181dabc36603cadf889386f5ec8f9a3045f3dce09f752048c7e5b45a7dc05b",
+          "accepted": true,
+          "completed": true,
+          "outcome": "PASS",
+          "success": true,
+          "command_result": 6000,
+          "server_tick": 4412
+        },
+        {
+          "command_id": "stage_freeze_day",
+          "artifact_sha256": "9a9747e7f1ecb8159c370a70061e07508cb1b25231ee033b06ecc535e27629cd",
+          "accepted": true,
+          "completed": true,
+          "outcome": "PASS",
+          "success": true,
+          "command_result": 0,
+          "server_tick": 4412
+        },
+        {
+          "command_id": "stage_no_mobs",
+          "artifact_sha256": "b7207d3b6de35b60c5b712c8c318dd4d1dbd073219c9f409cc957d6077faef51",
+          "accepted": true,
+          "completed": true,
+          "outcome": "PASS",
+          "success": true,
+          "command_result": 0,
+          "server_tick": 4413
+        },
+        {
+          "command_id": "stage_clear_weather",
+          "artifact_sha256": "e2c70d53cd355374df0349f190895622c0fff75e345d40d72d6070b5523cb45f",
+          "accepted": true,
+          "completed": true,
+          "outcome": "PASS",
+          "success": true,
+          "command_result": -1,
+          "server_tick": 4413
+        },
+        {
+          "command_id": "stage_freeze_weather",
+          "artifact_sha256": "7195dfab830a21c776189f35195c70ac53e27b773005fc6026e540cfe17eca71",
+          "accepted": true,
+          "completed": true,
+          "outcome": "PASS",
+          "success": true,
+          "command_result": 0,
+          "server_tick": 4414
+        }
+      ]
+    },
+    "006-equip-players": {
+      "attempted": 1,
+      "requested": 6,
+      "retry_allowed": false,
+      "results": [
+        {
+          "command_id": "creative_control",
+          "artifact_sha256": "ec30ccb9fd13473ff5cce5f059e8f1ba9e1585428149655244349366fc662be1",
+          "accepted": true,
+          "completed": true,
+          "outcome": "UNKNOWN",
+          "success": null,
+          "command_result": 0,
+          "server_tick": 5988
+        }
+      ]
+    },
+    "013-hydra-stage": {
+      "attempted": 8,
+      "requested": 8,
+      "retry_allowed": false,
+      "results": [
+        {
+          "command_id": "u04_platform",
+          "artifact_sha256": "efd709a6c5661dc10ac18fbcc70fdca3ee33f83ea41d7e50b915fd0ea3a5ec68",
+          "accepted": true,
+          "completed": true,
+          "outcome": "PASS",
+          "success": true,
+          "command_result": 2401,
+          "server_tick": 621
+        },
+        {
+          "command_id": "u04_no_mobs",
+          "artifact_sha256": "873b94509cf7c6d66e59ba3e7397f87d5c5ce6fbbc273056f1064bcff8f48129",
+          "accepted": true,
+          "completed": true,
+          "outcome": "PASS",
+          "success": true,
+          "command_result": 0,
+          "server_tick": 626
+        },
+        {
+          "command_id": "u04_daylight",
+          "artifact_sha256": "5a6f340cc7f9d133f0f8bcd6a5ea66a2431bb12d9a4211beab3da532111086b0",
+          "accepted": true,
+          "completed": true,
+          "outcome": "PASS",
+          "success": true,
+          "command_result": 6000,
+          "server_tick": 628
+        },
+        {
+          "command_id": "u04_freeze_day",
+          "artifact_sha256": "c8f77b9d832db198a389d1dd0ed062b751e69274901384eee3718acbc14ffd94",
+          "accepted": true,
+          "completed": true,
+          "outcome": "PASS",
+          "success": true,
+          "command_result": 0,
+          "server_tick": 630
+        },
+        {
+          "command_id": "u04_clear_weather",
+          "artifact_sha256": "e5f3dcddd79a72beb471b2839bd965764981def73ae45705115da3c704b7c35a",
+          "accepted": true,
+          "completed": true,
+          "outcome": "PASS",
+          "success": true,
+          "command_result": -1,
+          "server_tick": 632
+        },
+        {
+          "command_id": "u04_freeze_weather",
+          "artifact_sha256": "7b63a7871b033778c200cb9ed60d5934b8e7715dae7fcf71edd3acb78bd7f30c",
+          "accepted": true,
+          "completed": true,
+          "outcome": "PASS",
+          "success": true,
+          "command_result": 0,
+          "server_tick": 635
+        },
+        {
+          "command_id": "u04_summon_hydra",
+          "artifact_sha256": "285710edb83ca7f99666ba9e39b6599123dc00fb94f6144084cbf5096e97ae58",
+          "accepted": true,
+          "completed": true,
+          "outcome": "PASS",
+          "success": true,
+          "command_result": 1,
+          "server_tick": 636
+        },
+        {
+          "command_id": "u04_camera_front",
+          "artifact_sha256": "a3c5045a31115f8013edf424af99b42d02f0a69b745d032d7908a4dd450ea23e",
+          "accepted": true,
+          "completed": true,
+          "outcome": "PASS",
+          "success": true,
+          "command_result": 1,
+          "server_tick": 639
+        }
+      ]
+    },
+    "015-hydra-side-camera": {
+      "attempted": 1,
+      "requested": 1,
+      "retry_allowed": false,
+      "results": [
+        {
+          "command_id": "u04_camera_side",
+          "artifact_sha256": "111cb9c9c246ac29eee835cb82dd03c9b0d26236870aa2cb1bd76b020a6e7483",
+          "accepted": true,
+          "completed": true,
+          "outcome": "PASS",
+          "success": true,
+          "command_result": 1,
+          "server_tick": 2454
+        }
+      ]
+    },
+    "017-hydra-oblique-camera": {
+      "attempted": 1,
+      "requested": 1,
+      "retry_allowed": false,
+      "results": [
+        {
+          "command_id": "u04_camera_oblique",
+          "artifact_sha256": "afd2488b3f5fafd9541f6131aefde81b4c575c84dfcc757c7ba866d4cee2c2d9",
+          "accepted": true,
+          "completed": true,
+          "outcome": "PASS",
+          "success": true,
+          "command_result": 1,
+          "server_tick": 2464
+        }
+      ]
+    }
+  },
+  "staff": {
+    "verdict": "NOT_RUN",
+    "fixed_assertions_sha256": "bf04de39d90599619b5661afbe21f770738c8f0f9b7ad444f06272262db81791",
+    "native_staff_use_gestures": 0,
+    "staff_equipment_commands_executed": 0,
+    "control_pair_sha256": "252d0d0da0077fd67f0ddbf27f5dfe1e38e7c9b0f634f1157d1814308fc015fc",
+    "control_baseline": {
+      "health": 20,
+      "mainhand_item": "minecraft:air",
+      "count": 0,
+      "damage": 0,
+      "glowing": false,
+      "cooldown_active": false,
+      "client_trace_started": 0,
+      "client_trace_completed": 0
+    },
+    "creative_command": "UNKNOWN; completed with result 0 and no success flag. Player-only selector validation rejected the registered bare-UUID form. The dependent equipment sequence stopped.",
+    "invoker_pair": "HTTP_409_UNRESOLVED; no successful pair artifact or specific underlying exception was retained.",
+    "control_execution": "Gradle daemon disappeared after the player had joined. This is not classified as a confirmed startup failure.",
+    "retries_performed": 0,
+    "first_use": "NOT_RUN",
+    "noninvoking_control": "NOT_RUN",
+    "client_no_mutation": "NOT_RUN",
+    "cooldown_repeat": "NOT_RUN",
+    "expiry": "NOT_RUN",
+    "dedicated_synchronization": "NOT_RUN"
+  },
+  "execution_outcomes": {
+    "server": {
+      "receipt_sha256": "81d4d4489a98a4de8bdad29d079a87d9e531d6b6d14903ce36efed0c95575add",
+      "status": "PARTIAL",
+      "outcome": "FAIL",
+      "retry_allowed": false,
+      "tests_executed": 0,
+      "completed": true,
+      "elapsed_seconds": 640.6804662100003,
+      "exit_code": 1,
+      "timed_out": false
+    },
+    "control": {
+      "receipt_sha256": "caa49d39876f66bc101a7a52328f7ade426375f69d7a564b205339ca9646beb7",
+      "status": "PARTIAL",
+      "outcome": "FAIL",
+      "retry_allowed": false,
+      "tests_executed": 0,
+      "completed": true,
+      "elapsed_seconds": 328.9106640070022,
+      "exit_code": 1,
+      "timed_out": false
+    },
+    "client": {
+      "receipt_sha256": "f1198c96f49fe5d714ff56def9dd16fb109e0a3be94d6e7ea7120f3d75b69c0f",
+      "status": "PARTIAL",
+      "outcome": "FAIL",
+      "retry_allowed": false,
+      "tests_executed": 0,
+      "completed": true,
+      "elapsed_seconds": 614.8875427599996,
+      "exit_code": 1,
+      "timed_out": false
+    },
+    "hydra": {
+      "receipt_sha256": "b166d6044283da3d07ea7976a6713fe5a878c6e602c94c40f029c2ae566e16ec",
+      "status": "PARTIAL",
+      "outcome": "BLOCKED",
+      "retry_allowed": false,
+      "tests_executed": 0,
+      "completed": false,
+      "elapsed_seconds": 457.3685182920017,
+      "exit_code": -9,
+      "timed_out": true
+    }
+  },
+  "budgets": {
+    "overall_seconds": 1500,
+    "staff_seconds": 900,
+    "hydra_seconds": 480,
+    "cleanup_reserved_seconds": 120,
+    "max_attempts_per_role": 2,
+    "attempts_used": {
+      "client": 1,
+      "control": 1,
+      "hydra": 1,
+      "server": 1
+    },
+    "retries_used": 0,
+    "started_utc": "2026-09-30T15:39:03.616235Z",
+    "absolute_deadline_utc": "2026-09-30T16:04:03.616235Z",
+    "deadline_extended": false,
+    "hydra_started_utc": "2026-09-30T15:51:58.345612Z",
+    "hydra_registered_timeout_seconds": 476.9999963969967,
+    "hydra_process_elapsed_seconds": 457.3685182920017
+  },
+  "cleanup": {
+    "state": "CLOSED",
+    "all_execution_threads_closed": true,
+    "owned_game_processes_remaining": 0,
+    "controller_cleanup_utc": "2026-09-30T16:00:23.054579Z",
+    "elapsed_seconds_to_cleanup": 1279.4383444786072,
+    "cleanup_record_sha256": "d4eee23e6f419f3c541a9834a3dd729d0bfa01aaa3863d1d744db8d1c6fa4806",
+    "final_desktop_process_probe_utc": "2026-09-30T16:01:36.647979Z",
+    "final_desktop_process_count": 0,
+    "final_desktop_probe_sha256": "f13c2b0034f090641cc37f863dac50ecda65199041fad7f3a1fba2a2f1ae55b6",
+    "graceful_all_role_completion": false
+  },
+  "review_validation": {
+    "capture_CAS_bytes_verified": true,
+    "contract_identity_fields_verified": true,
+    "PNG_bytes_hash_frame_camera_verified": true,
+    "command_CAS_identity_verified": true,
+    "remap_input_output_mapping_tool_receipt_CAS_hashes_verified": true,
+    "actual_capture_call_evidence": "AUTHENTICATED_LIVE_OBSERVER calls retained by the execution controller",
+    "independent_HMAC_envelope_reverification": "NOT_PERFORMED; retained decoded payloads do not establish fresh verification of raw signed envelopes",
+    "pixel_inspection": "Exact 014, 018 and 019 PNGs independently inspected; images remain private",
+    "raw_evidence_modified": false
+  },
+  "publication": {
+    "raw_paths_published": false,
+    "raw_logs_published": false,
+    "raw_receipts_published": false,
+    "game_images_published": false,
+    "session_files_or_credentials_published": false,
+    "machine_process_or_window_identifiers_published": false
+  }
+}

@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kneekura.local/schemas/materials-v1.json",
+  "title": "KNEEKURA MaterialIR v1",
+  "type": "object",
+  "required": [
+    "schema",
+    "schemaVersion",
+    "materials"
+  ],
+  "properties": {
+    "schema": {
+      "const": "kneekura.materials"
+    },
+    "schemaVersion": {
+      "type": "string",
+      "pattern": "^1\\.[0-9]+\\.[0-9]+(?:[-+].*)?$"
+    },
+    "materials": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "materialId",
+          "baseTexture",
+          "normalTexture",
+          "emissiveTexture",
+          "alphaMode",
+          "blend",
+          "cullMode",
+          "depth",
+          "emissive",
+          "fullbright",
+          "fogMode",
+          "sampler",
+          "vertexTint",
+          "lightmap",
+          "overlay",
+          "replay"
+        ],
+        "properties": {
+          "materialId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "baseTexture": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "normalTexture": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "emissiveTexture": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "alphaMode": {
+            "enum": [
+              "opaque",
+              "mask",
+              "blend",
+              "UNKNOWN"
+            ]
+          },
+          "alphaCutoff": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "cullMode": {
+            "enum": [
+              "none",
+              "front",
+              "back",
+              "UNKNOWN"
+            ]
+          },
+          "blend": {
+            "type": "object",
+            "required": [
+              "enabled",
+              "equation",
+              "srcFactor",
+              "dstFactor"
+            ]
+          },
+          "depth": {
+            "type": "object",
+            "required": [
+              "testFunction",
+              "write"
+            ]
+          },
+          "emissive": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "const": "UNKNOWN"
+              }
+            ]
+          },
+          "fullbright": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "const": "UNKNOWN"
+              }
+            ]
+          },
+          "fogMode": {
+            "enum": [
+              "colorMixPreserveAlpha",
+              "rgbaFade",
+              "UNKNOWN"
+            ]
+          },
+          "sampler": {
+            "type": "object"
+          },
+          "vertexTint": {
+            "type": "string",
+            "minLength": 1
+          },
+          "lightmap": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "const": "UNKNOWN"
+              }
+            ]
+          },
+          "overlay": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "const": "UNKNOWN"
+              }
+            ]
+          },
+          "replay": {
+            "type": "object",
+            "required": [
+              "status"
+            ],
+            "properties": {
+              "status": {
+                "enum": [
+                  "measured",
+                  "UNKNOWN"
+                ]
+              }
+            },
+            "additionalProperties": true
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

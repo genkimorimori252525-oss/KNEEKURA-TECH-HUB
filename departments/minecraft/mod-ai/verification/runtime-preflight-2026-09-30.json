@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "record_type": "derived_runtime_implementation_preflight_summary",
+  "base_head": "3067acabeafcb7a382b2fd02b5d58c0e5d97481d",
+  "raw_receipts_published": false,
+  "raw_receipts_hash_identical_to_this_summary": false,
+  "publication_scope": "Source, versions, generated verification identities and hashes; raw private paths/receipts/logs omitted",
+  "local_aggregate": {
+    "passed": 1739,
+    "skipped": 103,
+    "deselected": 1,
+    "failures": 0,
+    "elapsed_seconds": 424.17,
+    "original_junit_sha256": "071946f7b936dae7f59ce33dc57c591aed8f501a85a791c8e724e9ff03d0aa12",
+    "postgresql": "NOT_AVAILABLE_LOCALLY_REQUIRES_HOSTED_SUITE",
+    "deselection": "Known ambient-parent Git checkout directory fixture; unchanged test runs in hosted CI",
+    "java_gson_groovy_netty": "EXPLICIT_CACHED_INPUTS_ENABLED"
+  },
+  "forge_compile": {
+    "minecraft": "1.20.1",
+    "forge": "47.4.6",
+    "java_major": 17,
+    "outcome": "PASS_COMPILE_ONLY",
+    "original_log_sha256": "f363ff9bdbf22ecbe80aaa5682c992d16a6d868dc9c67b953efa3c7eeced88b2"
+  },
+  "independent_review": {
+    "outcome": "NO_OUTSTANDING_IMPORTANT_FINDINGS_IN_REVIEWED_SCOPE",
+    "client_evidence_tests_passed": 112,
+    "integrated_python_java_tests_passed": 96,
+    "report_is_derived_summary": true
+  },
+  "staff_preparation": {
+    "runtime_target_class_inventory_sha256": "dc420c33f46828f8f89081030d19efaa91dbfbe56c3d944856deb1b141d7f26c",
+    "roles": 3,
+    "dependency_entries_per_role": 205,
+    "distinct_archives_per_role": 104,
+    "archive_kinds": {
+      "jar": 103,
+      "zip": 1
+    },
+    "target_code_complete": true,
+    "full_profile_complete": false,
+    "original_broad_profiles": "UNKNOWN_PRESERVED",
+    "default_staff_source_sha256": "4e190bf983d18946791a16f88f21eb48db037e7bdc9be8a0239af08137ab4b04",
+    "instrumented_staff_source_sha256": "2305402b31b5e6c7012a2dcb639a303e2a8ff19f893260b3ccd3b537c962abaf",
+    "instrumentation": "Explicit opt-in separate build; default distribution not replaced"
+  },
+  "u04_preparation": {
+    "original_tf_sha256": "0bdc89263616d1b35c32ef82c5e9c14cbd20368e2fe8b468c72a28320be7a778",
+    "derived_tf_sha256": "69e27b79067a9ce3bff3da18abd7b09b1ef4bc99625c07ea0c09424712df72bb",
+    "provider_receipt_hash": "c005d50d88496d977b9afea730ba0bd585f076cd04a67251381b384127d0243c",
+    "dependency_entries": 206,
+    "distinct_archives": 105,
+    "selected_resource_probes": 18,
+    "namespace": "Original exported unknown label preserved; separate receipt binds SRG-to-Mojmap derivation",
+    "source_equivalence": "NOT_ESTABLISHED",
+    "forgegradle_equivalence": "NOT_CLAIMED"
+  },
+  "live_acceptance": "NOT_RUN_AT_THIS_CHECKPOINT",
+  "hosted_exact_head_checks": {
+    "head": "87d2086b4121167e5c3baa19da8963692b8e0450",
+    "push_run": 36723285026,
+    "pr_run": 36723294549,
+    "passed_each": 1585,
+    "skipped_each": 259,
+    "warnings_each": 8,
+    "outcome": "SUCCESS",
+    "pr_merge_sha": "d82261ba5e9fad55deb23af54cceffe7e907f153",
+    "detailed_skip_reasons": "NOT_RETRIEVED; cached adapter/Java tests also ran in the local aggregate",
+    "push_artifact_sha256": "266bbd66f3eacc726e45996c911b1d9183440116a77dfba24d866c18af1d27f3",
+    "pr_artifact_sha256": "c248f814bf0213d1c27354cb234a27f358b27ecf1f9505db02b34b2796da1597"
+  },
+  "windows_native_input": "UNSUPPORTED",
+  "performance": "NOT_MEASURED",
+  "canonical_promotion": "NOT_PERFORMED"
+}

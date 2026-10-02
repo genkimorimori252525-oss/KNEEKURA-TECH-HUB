@@ -1,0 +1,1830 @@
+{
+  "schema_version": 1,
+  "title": "ANCHOR transformer and coremod static pipeline analysis",
+  "repository": "https://github.com/Sinytra/Connector",
+  "revision": "7f68ac02291fde986119a3f5cab85436bed5c350",
+  "track": "ANCHOR",
+  "minecraft": "1.20.1",
+  "connector": "1.0.0-beta.50",
+  "profile_id": "3161cd7cd84ba1add48de08b2318d1a10ad0681dc1fbc1f981ffd7156a7c20c0",
+  "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+  "source_status": "FULL_SCOPED_FILE_READ_AND_HASH_VERIFIED",
+  "semantic_status": "SOURCE_SCOPED_COMPLETE; EXTERNAL_DEPENDENCY_AND_RUNTIME_PARTIAL",
+  "runtime_attestation": false,
+  "upstream_execution": false,
+  "builds_run": false,
+  "sources_published": false,
+  "coverage": {
+    "required_paths": 28,
+    "required_paths_read": 28,
+    "supporting_paths": 8,
+    "all_scoped_sha256_match_inventory_and_cas": true,
+    "method": "Full text and reachable callsite reading, not inference from literal hit or absence"
+  },
+  "files": [
+    {
+      "path": "src/main/java/org/sinytra/connector/transformer/AccessWidenerTransformer.java",
+      "scope": "required_transformer_or_coremod",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "AW header namespace",
+        "AT access semantics",
+        "owner widening",
+        "mapping fallback",
+        "resource substitution"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          128
+        ]
+      ],
+      "sha256": "1e0f4353f7be8cdd2317bfde1665c0d0ec585c545f4cfb6e04d0ff18eb8e0043",
+      "git_blob_sha1": "c27e1895a464c526bdf1d62a7653fb5c5062f7ac",
+      "document_id": "9ef2303354c771f2de125def442b262ab75ac89b9221bb4b11074695bc61a620",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/AccessWidenerTransformer.java#L1-L128",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/transformer/AccessorRedirectTransformer.java",
+      "scope": "required_transformer_or_coremod",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "pre-scan packages",
+        "15 generated accessor patches",
+        "call-site renaming",
+        "method-name+descriptor index"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          114
+        ]
+      ],
+      "sha256": "06593a875d93b9b33dffd6ca3859afe165e7d6999c48fde2cb43af082f498fdc",
+      "git_blob_sha1": "6c4174fe589cb1d6600965500fc95923652a48e8",
+      "document_id": "78a1b53404d9e0c7adfc96b62e983bc86b198a793f2f9fc8c0b2622b4d2cbc42",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/AccessorRedirectTransformer.java#L1-L114",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/transformer/FieldToMethodTransformer.java",
+      "scope": "required_transformer_or_coremod",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "15 field-to-getter mappings",
+        "GETFIELD/GETSTATIC rewrite",
+        "AW filtering"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          149
+        ]
+      ],
+      "sha256": "813db2ecf52b616495302fcd91c715aca38ad8cd920c41e684af08bd29d147e8",
+      "git_blob_sha1": "3ba6685918a1ebedd26db0c6023c8d3588f46c8a",
+      "document_id": "b06e60b4a257e9228002618da8c89fe4090429ebf5011b4936a34deed3784545",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/FieldToMethodTransformer.java#L1-L149",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/transformer/JarSignatureStripper.java",
+      "scope": "required_transformer_or_coremod",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "RSA/SF filtering",
+        "manifest section removal"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          33
+        ]
+      ],
+      "sha256": "a6909682f3e69c180511b5cefe2fea41ac1094e1aab3c838555a9730131d15ad",
+      "git_blob_sha1": "1208e75f57396fdcdfd52d717220a206f49d9ede",
+      "document_id": "4600c71ce7b9d0afa468ad54d69592e24bcc9706f7e8e3a1e2d700585571068a",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/JarSignatureStripper.java#L1-L33",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/transformer/MixinPatchTransformer.java",
+      "scope": "required_transformer_or_coremod",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "ordered patch families",
+        "mixin detection",
+        "non-mixin transforms",
+        "generated classes",
+        "config/refmap finalization",
+        "service pruning",
+        "Forge finalize-spawn patch"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          271
+        ]
+      ],
+      "sha256": "a229757d426f47bc5a2bc52ecc5e76b8c89896076bf29f1c0527dc6b848e68ce",
+      "git_blob_sha1": "56d891ad36da1304afb763888d16719e510fa4ac",
+      "document_id": "5c2bcaa4d2f4167e8960d8e69f8cda6a9473fe3ae8451657cdc98d6f3ee8e966",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatchTransformer.java#L1-L271",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/transformer/MixinPatches.java",
+      "scope": "required_transformer_or_coremod",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "priority patches",
+        "78 general instantiated patches",
+        "generated shearing patch",
+        "GUI helper",
+        "ReplayMod patches",
+        "inline instruction rewrites"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          738
+        ]
+      ],
+      "sha256": "e88b2eb5773fe83d92a2d49498704922047514cbbed69b293f89f63ca69292a4",
+      "git_blob_sha1": "3b4849a73ccdc64e4639584002b1393ab7e8b76d",
+      "document_id": "6bee59da2fdabca8aabbd8370278c84d3e899b503cc6b984481eb6e4e2cfbd0a",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L1-L738",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/transformer/ModMetadataGenerator.java",
+      "scope": "required_transformer_or_coremod",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "generated Forge Mod entrypoint",
+        "pack metadata",
+        "generated-library distinction"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          107
+        ]
+      ],
+      "sha256": "48273f61e269ad9effbaf1fbd184e5eb66b0950f8291de5b07f248420ca9fda2",
+      "git_blob_sha1": "4b6ab8d98169b70a4e14bf22db0971b3172a010b",
+      "document_id": "890090ddc2c3af347d37084a08d40136f5f4bf061d731a135b9463716ad31b08",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/ModMetadataGenerator.java#L1-L107",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/transformer/OptimizedRenamingTransformer.java",
+      "scope": "required_transformer_or_coremod",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "enhanced remapping",
+        "intermediary class provider",
+        "mixin-aware member lookup",
+        "raw string mapping",
+        "annotation gates",
+        "regex selector",
+        "fallbacks"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          379
+        ]
+      ],
+      "sha256": "bbe5dd863d3470128de30943f7780ec7d77dc7955c88491ae1c13a366b744cd5",
+      "git_blob_sha1": "8cc50dfb16496146f73cdbe5b10c5cfae187bcc5",
+      "document_id": "60af6c9efd49957dfa844abb64bb3622aa5d4fd1a7ff42fe47252741cd3e5763",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/OptimizedRenamingTransformer.java#L1-L379",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/transformer/RefmapRemapper.java",
+      "scope": "required_transformer_or_coremod",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "input/classpath lookup",
+        "refmap rewriting",
+        "manifest exposure",
+        "missing-refmap behavior"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          157
+        ]
+      ],
+      "sha256": "9409c5ea3f8359479fb43a6b972255c77a26bcf97e3efc631426f042749e4cb2",
+      "git_blob_sha1": "ffd1c06f7abbf07a582ce1355e629ef3266b65db",
+      "document_id": "52eb205c5d59b6e79027bc0947f08e091bcba15ea5c2ea60374f1fe8a4afb55b",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/RefmapRemapper.java#L1-L157",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/transformer/SrgRemappingReferenceMapper.java",
+      "scope": "required_transformer_or_coremod",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "value-only reference conversion",
+        "environment label replacement",
+        "method and field indexes",
+        "shallow merge"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          107
+        ]
+      ],
+      "sha256": "c657cbf17271f44a578f47fa42f22ab68b3f4ff966afde6511113c38d19a2eb5",
+      "git_blob_sha1": "206774bf834b92f65b1008dde0450c13deb0eed0",
+      "document_id": "09a108ceba6b37d7aab683b3d0d3e3e07527c80a10bbfb9255dda4e677039149",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/SrgRemappingReferenceMapper.java#L1-L107",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/transformer/jar/BytecodeFixerUpperFrontend.java",
+      "scope": "required_transformer_or_coremod",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "field type table",
+        "six type adapters",
+        "generated adapter jar",
+        "version-only cache"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          88
+        ]
+      ],
+      "sha256": "85c16bb17139ff7bef3fb021e84b145e36546f822c654e05181e31b539c2ef22",
+      "git_blob_sha1": "4301ae254ef1c488e04619267dc945bd2471afc7",
+      "document_id": "7e741bf1ae55e5c62640c53cf01f74b517610a8cb949fc9e822261fa031c51af",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/jar/BytecodeFixerUpperFrontend.java#L1-L88",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/transformer/jar/EarlyJSCoremodTransformer.java",
+      "scope": "required_transformer_or_coremod",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "coremod discovery",
+        "private API setup",
+        "bytecode versus metadata paths",
+        "logged fallback"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          121
+        ]
+      ],
+      "sha256": "0185e37ef801f4bb3987b05389bfc6e4646503a73a4fb04dcfd8b311ce274a52",
+      "git_blob_sha1": "0a65b1298f2984a1de39193dd78955bb54944fbb",
+      "document_id": "a6100458126b964c81f3aa8f6de89e8f21587ad72f632dd4957b3758610905a6",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/jar/EarlyJSCoremodTransformer.java#L1-L121",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/transformer/jar/IntermediateMapping.java",
+      "scope": "required_transformer_or_coremod",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "prefix-filtered flat mappings",
+        "descriptor collision table",
+        "cache",
+        "nullable/default results"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          117
+        ]
+      ],
+      "sha256": "7259667936c08010f0b1ad56b306bac72b658607dee640a8f8e22d308dacbe0a",
+      "git_blob_sha1": "72b1e99b68272ee3ba0aeb8cb580d99dff13b40d",
+      "document_id": "96a27fdc74b12e1431c8c6967ec0b47770b56dd3096d66c6b955b0b7f956c72c",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/jar/IntermediateMapping.java#L1-L117",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/transformer/jar/JarTransformInstance.java",
+      "scope": "required_transformer_or_coremod",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "initialization",
+        "mapping direction",
+        "normal pipeline",
+        "generated bypass",
+        "conditional AW conversion",
+        "clean class lookup",
+        "finalization"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          209
+        ]
+      ],
+      "sha256": "07eda05c417975aad45750beda0f1dbd41d08903968865c7734e6f00a74f4e4b",
+      "git_blob_sha1": "b68b252a16c31f2c08f2b9385daa54465710946b",
+      "document_id": "46ddf85ddb3edcc838b668754bf2da909b02ca5b0a6dfad718b8c91938f7711d",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/jar/JarTransformInstance.java#L1-L209",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/transformer/jar/JarTransformer.java",
+      "scope": "required_transformer_or_coremod",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "metadata discovery",
+        "cache admission",
+        "classpath",
+        "parallel orchestration",
+        "timeout/interruption",
+        "cleanup"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          283
+        ]
+      ],
+      "sha256": "0dffcf492c91f7e59f921e4a95c46be5d2ab5febf9421dacc4acefc8f9b923b8",
+      "git_blob_sha1": "303520fc3254e0101ce8732f315fcce202437a35",
+      "document_id": "baed16e77b924a2c6649d94fb6a0f05d9fd7a8674459eb427cb9e45131234516",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/jar/JarTransformer.java#L1-L283",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/transformer/jar/RenamingClassLookup.java",
+      "scope": "required_transformer_or_coremod",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "dev clean-class remapping",
+        "positive and negative cache"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          38
+        ]
+      ],
+      "sha256": "f8146de7f470dba0b140ac779553703455ce340290758f1d975f5559b5dbe86d",
+      "git_blob_sha1": "ae80b82d454095d96ed0d771c3109b307658bb1c",
+      "document_id": "5ab80cba1f962fdc7317d3b97da1bc067375cb110c448986bd1f23e80eb0bfe5",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/jar/RenamingClassLookup.java#L1-L38",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/transformer/patch/ClassAnalysingTransformer.java",
+      "scope": "required_transformer_or_coremod",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "three runtime helper rewrites"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          44
+        ]
+      ],
+      "sha256": "a698d051433fc70ad0225b8582e70415d48a00acdb60045e86195661b3476a19",
+      "git_blob_sha1": "396ec1131cd760252ffeb03bb3a113c5a21e5da7",
+      "document_id": "99dabeb3b4e9292aa122d731637ac0799875def6f4a4a4e2ac6ef609cbb0dd71",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/patch/ClassAnalysingTransformer.java#L1-L44",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/transformer/patch/ClassNodeTransformer.java",
+      "scope": "required_transformer_or_coremod",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "processor order",
+        "PASS/APPLY/COMPUTE_FRAMES emission",
+        "resource forwarding"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          53
+        ]
+      ],
+      "sha256": "cdc3fa66b44a1c1578ae273e75b74908ef093700d5750b50eba86960053c6fe6",
+      "git_blob_sha1": "e74073cb188d36f625c0d5250633fc6b0740bd71",
+      "document_id": "f410c43cc06a4037fbddd0ee76eac115732fb479e1dd221e8707d93ab6a8f4d2",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/patch/ClassNodeTransformer.java#L1-L53",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/transformer/patch/ConnectorRefmapHolder.java",
+      "scope": "required_transformer_or_coremod",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "space-normalized lookup",
+        "copy entries",
+        "dirty tracking"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          60
+        ]
+      ],
+      "sha256": "a2d2b57f4da6c567a65840ffb6a3734357f417a3a50fb5af311d831525475df3",
+      "git_blob_sha1": "22e7d2fa68ae113c0c84ab0928781632a2e0b666",
+      "document_id": "c61b0ca641b8bd527ee2f1fe607d1666b0793f523962014beebf38e87c2163b0",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/patch/ConnectorRefmapHolder.java#L1-L60",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/transformer/patch/EnvironmentStripperTransformer.java",
+      "scope": "required_transformer_or_coremod",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "wrong-side members/interfaces",
+        "recursive lambda removal",
+        "malformed annotations"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          142
+        ]
+      ],
+      "sha256": "85b08b80c0c0dc41ef2547803de3f1b553d1d1264f152f8151edf69819760686",
+      "git_blob_sha1": "aaca4513b16a54dff6425e7a5a68fe65b3e27bf8",
+      "document_id": "f537ba361d10f72bf0423840f43b9649bb23147c6f36c84f66e5fd68d71af17c",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/patch/EnvironmentStripperTransformer.java#L1-L142",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/transformer/patch/RedirectAccessorToMethod.java",
+      "scope": "required_transformer_or_coremod",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "Accessor-to-Invoker annotation conversion"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          39
+        ]
+      ],
+      "sha256": "a1dd94860b4693b82f98d9456cbd67975769166ba82f77b84f5bbf77b1771662",
+      "git_blob_sha1": "acede2dcd8f918450528eaa1d951dc9279a6f1e9",
+      "document_id": "a09f80452e6f4590acb9444829d7359904cf935672fc5e2f05e2eab010de3d5c",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/patch/RedirectAccessorToMethod.java#L1-L39",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/transformer/patch/ReflectionRenamingTransformer.java",
+      "scope": "required_transformer_or_coremod",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "source-value analysis",
+        "three-string call pattern",
+        "owner/method/descriptor rewrite",
+        "flat fallback"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          104
+        ]
+      ],
+      "sha256": "ab9b661314e590cac6596cbd2e993e00c2c38c66c5f49fc03c530f3e4def1892",
+      "git_blob_sha1": "d45db0d887114528b8cd367c92e8389c2639a278",
+      "document_id": "f364181a1798098e239c51fcbba02080b5201a82b900e1cc9b2a2307f00abbbe",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/patch/ReflectionRenamingTransformer.java#L1-L104",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/mod/resources/META-INF/asm/expandLocalVarScope.js",
+      "scope": "required_transformer_or_coremod",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "LivingEntity local 3",
+        "BaseSpawner first boolean local",
+        "shape assumptions"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          99
+        ]
+      ],
+      "sha256": "19895736ad9d5f7ea8c4bc3c2f4b557d29bd8f58b31113454453cf71740f8afc",
+      "git_blob_sha1": "823623f6e6739957f86899fbf88329632893fd01",
+      "document_id": "a33151e0454011b35a89ed69eda1c0552e958b54d9311448559f1e0d6e039da3",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/resources/META-INF/asm/expandLocalVarScope.js#L1-L99",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/mod/resources/META-INF/asm/fixFieldSignatureChanges.js",
+      "scope": "required_transformer_or_coremod",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "KeyMapping MAP declaration",
+        "field ordering"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          30
+        ]
+      ],
+      "sha256": "665dc63f0d1eabd2e8ccc50d5555cf6d2a0c9b528bba3d543002059f3fe264d2",
+      "git_blob_sha1": "d4dbdd6344c6a7027c65a415d590b09f7fabe5ec",
+      "document_id": "db2ba5dd16b83641ec9451f60eba2d441ff6427ff65c51bc26ee386c5b893956",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/resources/META-INF/asm/fixFieldSignatureChanges.js#L1-L30",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/mod/resources/META-INF/asm/injectCreativeModeTabCtr.js",
+      "scope": "required_transformer_or_coremod",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "vanilla constructor bridge",
+        "Forge defaults"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          60
+        ]
+      ],
+      "sha256": "c7a6e5f0a684fd6cbf99c6098cda438455a292d94bcf0dd2773bef3480b518dc",
+      "git_blob_sha1": "508c79c835be62d506b696a84d67ab895bffeed4",
+      "document_id": "55e9e4d3387b545d0f54185758cc09001121d6e09970cbfb68d8fe00498866bf",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/resources/META-INF/asm/injectCreativeModeTabCtr.js#L1-L60",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/mod/resources/META-INF/asm/injectFabricASM.js",
+      "scope": "required_transformer_or_coremod",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "two package variants",
+        "fishAddURL hook",
+        "generated names",
+        "enum subclasses"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          73
+        ]
+      ],
+      "sha256": "459f4c39f808d5e074a70e88f13d48c9525e03ec04a8c67faad3bab14ff239cf",
+      "git_blob_sha1": "70698b0b7a90ad1b7b1b98eafce8113ce23af5e2",
+      "document_id": "e5d25be3c559fc33b417f7b26271e0f1147b8b42dcc1c93c7bdf307f8f97b77e",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/resources/META-INF/asm/injectFabricASM.js#L1-L73",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/mod/resources/META-INF/asm/updateItemUseStartTreshold.js",
+      "scope": "required_transformer_or_coremod",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "guarded IFGT-to-IFGE patch"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          24
+        ]
+      ],
+      "sha256": "d2342faeb13436ee80fe09d63776596b418401599a85c489ede31f1c145d9e4a",
+      "git_blob_sha1": "04093e910796b5b6da37a594c0f742096e6694ea",
+      "document_id": "aae62c1cca9e5c2abe0657aea6c0f68b3079f3b282f318fa142fb263d172a7f4",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/resources/META-INF/asm/updateItemUseStartTreshold.js#L1-L24",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/mod/resources/META-INF/coremods.json",
+      "scope": "required_transformer_or_coremod",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "five coremod registrations"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          7
+        ]
+      ],
+      "sha256": "114fef7c9aaf180f68f4008ef1e4c480c2e1f9bba88cb389db225fd64ed87f96",
+      "git_blob_sha1": "b6a02a97c5b89a3fa3a45e406e2ae50874fdd9ab",
+      "document_id": "31e2e654b005a276a8877bef949c2aa46c41067b0b5fcd787035b45af4872098",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/resources/META-INF/coremods.json#L1-L7",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/ConnectorUtil.java",
+      "scope": "supporting_callsite_or_configuration",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "cache key",
+        "cache enablement",
+        "cache save"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          236
+        ]
+      ],
+      "sha256": "725aa716bd9b622b3b8e8ebb10df2b5a21cbb98dbf8de3c0802febb36efcf175",
+      "git_blob_sha1": "ecebe7e3fbad7f2c8bf2665bc7e9b9f33cf0523f",
+      "document_id": "8860d51e0d47df891822495dbacabcf1382733d4bb9bb45737cdf8eb205fa724",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/ConnectorUtil.java#L1-L236",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/locator/EmbeddedDependencies.java",
+      "scope": "supporting_callsite_or_configuration",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "adapter data locators",
+        "cache version"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          114
+        ]
+      ],
+      "sha256": "47742b17dda48705701512a4bbb846721f6082e6338225180440606bbde607d2",
+      "git_blob_sha1": "df3b11bc692086f4be3aec7f1348e8db5d4ac2fa",
+      "document_id": "24c516260b94cb25b0ff69dd0757dbdd8ed9071da05b97e5046e1e141f5bbd9e",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/EmbeddedDependencies.java#L1-L114",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/locator/ConnectorLocator.java",
+      "scope": "supporting_callsite_or_configuration",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "caller admission order",
+        "post-transform handling",
+        "generated adapter admission"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          333
+        ]
+      ],
+      "sha256": "46d225142d645e92f3aed1be5e41b8e9d77395716df9e5d1ad19b6f5adfe5fa3",
+      "git_blob_sha1": "3ac11e7e193b559b0eed52527ac019c72a92a312",
+      "document_id": "100148b725596239f2192cfaf8305f90e820045d9dc02f0bec0965e480f8748a",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/ConnectorLocator.java#L1-L333",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/loader/ConnectorLoaderModMetadata.java",
+      "scope": "supporting_callsite_or_configuration",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "AW and mixin config delegation",
+        "normalized mod ID"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          205
+        ]
+      ],
+      "sha256": "41ff986d5583af4a987657fbe16e3214bfe37c6a866efedca4614beb1cf65b1b",
+      "git_blob_sha1": "133158924e74e5d8e303149614216cf0584dcb8c",
+      "document_id": "7dd8999b49d1cdde870c1088024aec8db59714bda80bce59eaf35460837d6764",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/loader/ConnectorLoaderModMetadata.java#L1-L205",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/service/FabricMixinBootstrap.java",
+      "scope": "supporting_callsite_or_configuration",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "LVT compatibility inference",
+        "manifest config consumer"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          151
+        ]
+      ],
+      "sha256": "c77e1a7c6358863e48e9a6f845af9558092033b397277b3081ad3a900f826fed",
+      "git_blob_sha1": "28b4ca9a2a2515cdcfb8acbdd3ddc1aa1073d732",
+      "document_id": "a7392564a1d5e62925bee1330a272346e129bb4bf364bddf817fe04e453b4b17",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/FabricMixinBootstrap.java#L1-L151",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/service/ConnectorLoaderService.java",
+      "scope": "supporting_callsite_or_configuration",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "service handoff context"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          134
+        ]
+      ],
+      "sha256": "72bc154cb3af9debb0bc67fc76e1e55f5c1177b48a1c09777f0b0e613949b7ff",
+      "git_blob_sha1": "ac9d2ae7e9ec48f2ab84700c0c0433aa30f0c5ab",
+      "document_id": "9b351a9c5ceea7bdf79ac36c4b3ffcf2d3380bf8d17783db25b9f7fd201f4228",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/ConnectorLoaderService.java#L1-L134",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "build.gradle.kts",
+      "scope": "supporting_callsite_or_configuration",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "dependency declarations",
+        "adapter data packaging",
+        "namespace build metadata"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          491
+        ]
+      ],
+      "sha256": "0d68eace0224e2c72090602f184a13c060e12013113426610bb9c9a457ae8656",
+      "git_blob_sha1": "302785e43f0c488ec86771ceda158264f77af93a",
+      "document_id": "169126777270a9ccb4b1aa3eee79e4228fa6ea95743d21a8e68b17db4aa28379",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/build.gradle.kts#L1-L491",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    },
+    {
+      "path": "gradle.properties",
+      "scope": "supporting_callsite_or_configuration",
+      "state": "FULL_TEXT_READ_STATIC_SEMANTICS_TRACED",
+      "facets": [
+        "declared version boundary"
+      ],
+      "line_ranges_read": [
+        [
+          1,
+          34
+        ]
+      ],
+      "sha256": "a2236edf904541b4bb3a619e449ca979bf9cf8758f81e50edbe95a58c3be408f",
+      "git_blob_sha1": "e2e8714f0448d8ee2bea6950cbfe6636b75f49b0",
+      "document_id": "2d9403705cbd50cee6032efd065ea96f104105e4f20f31d8318e54d466c77414",
+      "immutable_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/gradle.properties#L1-L34",
+      "namespace_label_in_capture": "mojmap",
+      "namespace_label_note": "Source-index label only; actual transformation direction is determined at runtime by MappingResolverImpl."
+    }
+  ],
+  "patch_catalog": [
+    {
+      "family": "priority",
+      "line_range": [
+        28,
+        34
+      ],
+      "summary": "ItemStack use-on injection moves to connector_useOn RETURN.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L28-L34"
+    },
+    {
+      "family": "priority",
+      "line_range": [
+        35,
+        40
+      ],
+      "summary": "ServerPlayer dimension-change injection moves to a Forge lambda.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L35-L40"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        46,
+        51
+      ],
+      "summary": "Fabric startClient hook target becomes Thread.currentThread.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L46-L51"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        52,
+        57
+      ],
+      "summary": "Fabric startServer hook target becomes ServerModLoader.load.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L52-L57"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        58,
+        66
+      ],
+      "summary": "LivingEntity travel constant becomes ModifyExpressionValue on AttributeInstance.getValue, ordinal 0.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L58-L66"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        67,
+        72
+      ],
+      "summary": "HoeItem field target becomes BlockState.getToolModifiedState invocation.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L67-L72"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        73,
+        78
+      ],
+      "summary": "Split SnowGolem interaction mixin for shearing adaptation.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L73-L78"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        79,
+        84
+      ],
+      "summary": "Split Sheep interaction mixin for shearing adaptation.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L79-L84"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        85,
+        90
+      ],
+      "summary": "Split MushroomCow interaction mixin for shearing adaptation.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L85-L90"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        91,
+        96
+      ],
+      "summary": "KeyMapping tail injection moves to Connector hook.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L91-L96"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        97,
+        102
+      ],
+      "summary": "Minecart movement injection moves to moveMinecartOnRail.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L97-L102"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        103,
+        109
+      ],
+      "summary": "Piston stickiness mixin moves to IForgeBlockState.canStickTo and removes static access.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L103-L109"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        111,
+        116
+      ],
+      "summary": "Client block-destruction target changes to BlockState.onDestroyedByPlayer.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L111-L116"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        117,
+        122
+      ],
+      "summary": "Zombie attribute query becomes AttributeInstance.getValue.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L117-L122"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        123,
+        128
+      ],
+      "summary": "FarmBlock fluid tag target becomes BlockState.canBeHydrated.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L123-L128"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        129,
+        133
+      ],
+      "summary": "LivingEntity redirect changes to FluidType.isAir.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L129-L133"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        134,
+        139
+      ],
+      "summary": "Enchantment category applicability becomes Enchantment.canApplyAtEnchantingTable.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L134-L139"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        140,
+        145
+      ],
+      "summary": "Shovel emptiness query becomes Level.isEmptyBlock.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L140-L145"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        146,
+        151
+      ],
+      "summary": "NaturalSpawner field injection becomes StructureManager registry-access invocation.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L146-L151"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        152,
+        157
+      ],
+      "summary": "Item food-property query becomes ItemStack.getFoodProperties.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L152-L157"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        158,
+        163
+      ],
+      "summary": "Entity fluid-vector injection moves to Forge lambda.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L158-L163"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        164,
+        169
+      ],
+      "summary": "Entity fluid-state injection moves to no-argument Forge method.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L164-L169"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        170,
+        180
+      ],
+      "summary": "Player shield-disable target becomes ItemStack.canDisableShield with three inserted parameters.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L170-L180"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        181,
+        186
+      ],
+      "summary": "MilkBucket effect clearing becomes curePotionEffects with ItemStack.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L181-L186"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        187,
+        193
+      ],
+      "summary": "LivingEntity sinking constant mixin moves to IForgeLivingEntity.sinkInFluid.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L187-L193"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        194,
+        199
+      ],
+      "summary": "BoneMeal target becomes applyBonemeal with Player parameter.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L194-L199"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        200,
+        205
+      ],
+      "summary": "Disable ShaderInstance constructor ResourceLocation injection.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L200-L205"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        206,
+        210
+      ],
+      "summary": "Enchantment value target changes from Item to ItemStack getter.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L206-L210"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        211,
+        216
+      ],
+      "summary": "LivingEntity friction target changes to context-aware BlockState.getFriction.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L211-L216"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        217,
+        223
+      ],
+      "summary": "Player reach mixin moves to IForgePlayer.canReach.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L217-L223"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        224,
+        235
+      ],
+      "summary": "Boat fluid-tag Redirect becomes canBoatInFluid; insert receiver and inline water tag.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L224-L235"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        237,
+        242
+      ],
+      "summary": "LightTexture local variable 17 substitutes 16.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L237-L242"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        244,
+        250
+      ],
+      "summary": "Disable PlayerList redirect into removed player display-name path.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L244-L250"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        252,
+        260
+      ],
+      "summary": "Minecraft setup method becomes Forge lambda with three inserted parameters.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L252-L260"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        261,
+        267
+      ],
+      "summary": "FireBlock shadow method becomes tryCatchFire, inserting Direction.NORTH argument.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L261-L267"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        268,
+        275
+      ],
+      "summary": "FireBlock injector target becomes tryCatchFire with Direction parameter.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L268-L275"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        276,
+        280
+      ],
+      "summary": "FireBlock injection reference adopts Direction-aware tryCatchFire descriptor.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L276-L280"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        281,
+        288
+      ],
+      "summary": "Gui health call moves to ForgeGui.renderHealth with two integer parameters.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L281-L288"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        289,
+        294
+      ],
+      "summary": "Gui HEAD moves to connector_preRender.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L289-L294"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        295,
+        301
+      ],
+      "summary": "Gui RETURN/TAIL moves to connector_postRender.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L295-L301"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        305,
+        313
+      ],
+      "summary": "Gui profiler target moves to ForgeGui.renderFood HEAD with two integer parameters.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L305-L313"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        314,
+        323
+      ],
+      "summary": "Farmers Delight BeforeInc/intValue=-10 selector moves to ForgeGui.renderFood at disableBlend.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L314-L323"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        324,
+        331
+      ],
+      "summary": "Gui food-data query moves to ForgeGui.renderFood.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L324-L331"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        332,
+        337
+      ],
+      "summary": "Gui health HEAD moves to connector_renderHealth.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L332-L337"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        338,
+        344
+      ],
+      "summary": "Remaining matched Gui health-method mixin moves to ForgeGui.renderArmor with two integer parameters.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L338-L344"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        345,
+        351
+      ],
+      "summary": "Gui hotbar call moves to connector_renderHotbar HEAD.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L345-L351"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        352,
+        358
+      ],
+      "summary": "Gui effects call moves to connector_renderEffects HEAD.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L352-L358"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        359,
+        365
+      ],
+      "summary": "Gui debug-enabled field target moves to connector_beforeDebugEnabled HEAD.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L359-L365"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        366,
+        373
+      ],
+      "summary": "Gui mount-health HEAD moves to ForgeGui.renderHealthMount with two integer parameters.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L366-L373"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        374,
+        381
+      ],
+      "summary": "Player WrapOperation uses ItemStack.canPerformAction and ToolAction.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L374-L381"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        382,
+        389
+      ],
+      "summary": "FishingHookRenderer WrapOperation uses ItemStack.canPerformAction and ToolAction.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L382-L389"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        390,
+        397
+      ],
+      "summary": "PowderSnowBlock WrapOperation uses canWalkOnPowderedSnow and LivingEntity.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L390-L397"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        398,
+        406
+      ],
+      "summary": "GameRenderer constant 9 becomes ModifyVariable at Vec3 distance result; injection ordinal 1, variable ordinal 3.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L398-L406"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        407,
+        417
+      ],
+      "summary": "ItemInHandRenderer ModifyArg becomes Redirect to ItemStack.getItem with ItemStack parameter.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L407-L417"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        418,
+        424
+      ],
+      "summary": "GameRenderer screen rendering target becomes ForgeHooksClient.drawScreen and variable index moves 0 to 1.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L418-L424"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        425,
+        430
+      ],
+      "summary": "BoatRenderer map lookup target moves to getModelWithLocation.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L425-L430"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        431,
+        436
+      ],
+      "summary": "Effect screen sorting target becomes Stream.collect.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L431-L436"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        437,
+        454
+      ],
+      "summary": "Minecraft clone-item Redirect becomes context-aware BlockState.getCloneItemStack, reorders/inlines/inserts arguments.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L437-L454"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        455,
+        479
+      ],
+      "summary": "LivingEntity travel ModifyVariable becomes WrapOperation; injected AttributeInstance and Operation return original double through Operation.call.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L455-L479"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        480,
+        486
+      ],
+      "summary": "LivingEntity fall-flying injection moves to ElytraItem.elytraFlightTick.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L480-L486"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        487,
+        492
+      ],
+      "summary": "ServerPlayerGameMode block destruction injection moves to removeBlock.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L487-L492"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        493,
+        507
+      ],
+      "summary": "ServerPlayerGameMode Level removal Redirect moves to removeBlock; inline server level before inserting new receiver.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L493-L507"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        508,
+        523
+      ],
+      "summary": "Client level mutation Redirect moves to BlockState.onDestroyedByPlayer; inline flag 11, reorder and insert context arguments.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L508-L523"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        524,
+        541
+      ],
+      "summary": "ElytraLayer Redirect diverts to shouldRender with new receiver and LivingEntity arguments.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L524-L541"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        544,
+        551
+      ],
+      "summary": "Disable EffectInstance ResourceLocation construction Redirect.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L544-L551"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        552,
+        559
+      ],
+      "summary": "Disable PostChain ResourceLocation construction Redirect.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L552-L559"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        561,
+        566
+      ],
+      "summary": "HumanoidArmorLayer ModifyArg moves to Forge renderModel overload.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L561-L566"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        567,
+        572
+      ],
+      "summary": "HumanoidArmorLayer renderTrim uses Model instead of HumanoidModel.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L567-L572"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        573,
+        578
+      ],
+      "summary": "HumanoidArmorLayer renderGlint Redirect target uses Model descriptor.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L573-L578"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        586,
+        615
+      ],
+      "summary": "Armor model ModifyArg index 4 becomes Model-to-Model; cast HumanoidModel usages and return unchanged non-HumanoidModel input.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L586-L615"
+    },
+    {
+      "family": "general",
+      "line_range": [
+        617,
+        644
+      ],
+      "summary": "KeyMapping Map.put Redirect becomes KeyMappingLookup.put void; adjust parameter types, returns and inner calls.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L617-L644"
+    },
+    {
+      "family": "generated",
+      "line_range": [
+        656,
+        675
+      ],
+      "summary": "Generated animal shearing mixin becomes onSheared HEAD; inject stack/world/position/fortune, derive hand through ConnectorMod.itemToHand.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L656-L675"
+    },
+    {
+      "family": "gui_helper",
+      "line_range": [
+        680,
+        694
+      ],
+      "summary": "GUI helper selects annotation ordinal interval, extracts ForgeGui mixin, adds dimensions, resets or offsets ordinal.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L680-L694"
+    },
+    {
+      "family": "replay",
+      "line_range": [
+        699,
+        704
+      ],
+      "summary": "Replay KeyboardHandler method_1473 moves to charTyped lambda 7 and changes first parameter to Screen.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L699-L704"
+    },
+    {
+      "family": "replay",
+      "line_range": [
+        705,
+        710
+      ],
+      "summary": "Replay KeyboardHandler method_1458 moves to charTyped lambda 6 and changes first parameter to Screen.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L705-L710"
+    },
+    {
+      "family": "replay",
+      "line_range": [
+        711,
+        716
+      ],
+      "summary": "Replay KeyboardHandler method_1454 moves to keyPress lambda 5, swaps parameter slots.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L711-L716"
+    },
+    {
+      "family": "replay",
+      "line_range": [
+        719,
+        724
+      ],
+      "summary": "Replay MouseHandler method_1611 becomes m_168084_ and removes static.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L719-L724"
+    },
+    {
+      "family": "replay",
+      "line_range": [
+        725,
+        730
+      ],
+      "summary": "Replay MouseHandler method_1605 becomes m_168078_ and removes static.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L725-L730"
+    },
+    {
+      "family": "replay",
+      "line_range": [
+        731,
+        735
+      ],
+      "summary": "Replay MouseHandler method_1602 becomes m_168072_.",
+      "claim_level": "DIRECT_SOURCE_DECLARATION; dependency-owned matcher/application semantics remain unexecuted",
+      "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L731-L735"
+    }
+  ],
+  "gui_helper_instances": [
+    {
+      "line": 302,
+      "ordinal_range": [
+        2,
+        2
+      ],
+      "target": "renderFood",
+      "offset": false
+    },
+    {
+      "line": 303,
+      "ordinal_range": [
+        3,
+        3
+      ],
+      "target": "renderAir",
+      "offset": false
+    },
+    {
+      "line": 304,
+      "ordinal_range": [
+        3,
+        5
+      ],
+      "target": "renderFood",
+      "offset": true
+    }
+  ],
+  "patch_counts": {
+    "priority": 2,
+    "general_inline": 69,
+    "gui_instantiations": 3,
+    "replay": 6,
+    "general_total_before_runtime_setup": 78,
+    "generated": 1,
+    "accessor_table_generated": 15,
+    "conditional_finalize_spawn": {
+      "minimum": 0,
+      "maximum": 1
+    },
+    "serialized_adapter_patches": "UNKNOWN; build-generated dependency data not in acquired source tree"
+  },
+  "history_reuse": {
+    "case_ids": [
+      "#904/#924 \u2192 #926 \u2192 #991",
+      "#993"
+    ],
+    "state": "EXISTING_HISTORY_REUSED_NO_REPEAT_RESEARCH",
+    "runtime_attestation": false
+  },
+  "boundaries": [
+    "MappingResolverImpl/fork Fabric Loader implementation and actual mapping bytes",
+    "FART Renamer/EnhancedRemapper scheduling, extra-entry processing, inheritance lookup and serialization behavior",
+    "Adapter Patch DSL, dynamic algorithms, BFU, generated-class map implementation and actual patch_data.json/lvt_offsets.json",
+    "Forge/ModLauncher/CoreModProvider internals and real Forge-patched Minecraft class shape",
+    "Mixin fork private fields, class provider and runtime injector matching",
+    "Actual Fabric mod jars, mixin/refmap/AW bytes and client/server runtime combinations"
+  ],
+  "verification": [
+    "Full scoped text read",
+    "Required scope inventory equals on-disk transformer/** and coremod resource inventory",
+    "Every included SHA256 equals anchor inventory and preexisting CAS content hash",
+    "All public source references pinned to the exact ANCHOR revision",
+    "No builds, runtime, installation or publication performed"
+  ],
+  "findings": [
+    {
+      "id": "normal_order",
+      "claim_level": "DIRECT_SOURCE",
+      "summary": "The explicit normal builder order is signature, field/accessor/reflection, namespace, helper callsites, Mixin/class patches, refmap/manifest, metadata, optional AW conversion.",
+      "source": {
+        "path": "src/main/java/org/sinytra/connector/transformer/jar/JarTransformInstance.java",
+        "line_range": [
+          134,
+          158
+        ],
+        "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/jar/JarTransformInstance.java#L134-L158"
+      }
+    },
+    {
+      "id": "cache_bypass",
+      "claim_level": "DIRECT_SOURCE",
+      "summary": "All-current inputs skip transform-batch initialization and generated Adapter output regeneration.",
+      "source": {
+        "path": "src/main/java/org/sinytra/connector/transformer/jar/JarTransformer.java",
+        "line_range": [
+          88,
+          112
+        ],
+        "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/jar/JarTransformer.java#L88-L112"
+      }
+    },
+    {
+      "id": "generated_bypass",
+      "claim_level": "DIRECT_SOURCE",
+      "summary": "Generated metadata library branch copies the jar and adds only absent pack metadata.",
+      "source": {
+        "path": "src/main/java/org/sinytra/connector/transformer/jar/JarTransformInstance.java",
+        "line_range": [
+          109,
+          115
+        ],
+        "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/jar/JarTransformInstance.java#L109-L115"
+      }
+    },
+    {
+      "id": "namespace_warning",
+      "claim_level": "DIRECT_SOURCE",
+      "summary": "Non-intermediary declared namespace logs an error but continues with intermediary mapping logic.",
+      "source": {
+        "path": "src/main/java/org/sinytra/connector/transformer/jar/JarTransformInstance.java",
+        "line_range": [
+          117,
+          125
+        ],
+        "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/jar/JarTransformInstance.java#L117-L125"
+      }
+    },
+    {
+      "id": "semantic_armor",
+      "claim_level": "DIRECT_SOURCE",
+      "summary": "An exact armor ModifyArg selector changes target overload, Model parameter/return types, casts and instanceof/early-return control flow.",
+      "source": {
+        "path": "src/main/java/org/sinytra/connector/transformer/MixinPatches.java",
+        "line_range": [
+          586,
+          615
+        ],
+        "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java#L586-L615"
+      }
+    },
+    {
+      "id": "refmap_miss_gate",
+      "claim_level": "SOURCE_COMPOSITION_INFERENCE",
+      "summary": "Inline annotation remapping is selected by declared refmap-name emptiness, so declared-but-missing files do not automatically activate it.",
+      "source": {
+        "path": "src/main/java/org/sinytra/connector/transformer/jar/JarTransformInstance.java",
+        "line_range": [
+          123,
+          141
+        ],
+        "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/jar/JarTransformInstance.java#L123-L141"
+      }
+    },
+    {
+      "id": "aw_existing_at",
+      "claim_level": "DIRECT_SOURCE",
+      "summary": "Original presence of an AT suppresses the separate AW-to-AT transformer.",
+      "source": {
+        "path": "src/main/java/org/sinytra/connector/transformer/jar/JarTransformInstance.java",
+        "line_range": [
+          149,
+          151
+        ],
+        "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/jar/JarTransformInstance.java#L149-L151"
+      }
+    },
+    {
+      "id": "cache_identity",
+      "claim_level": "SOURCE_COMPOSITION_INFERENCE",
+      "summary": "Explicit key is implementation-version plus physical dist plus optional input SHA; output filename adds naming and Minecraft version, while dependency changes are not independently fingerprinted.",
+      "source": {
+        "path": "src/main/java/org/sinytra/connector/ConnectorUtil.java",
+        "line_range": [
+          129,
+          158
+        ],
+        "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/ConnectorUtil.java#L129-L158"
+      }
+    },
+    {
+      "id": "early_coremod_fallback",
+      "claim_level": "DIRECT_SOURCE",
+      "summary": "Coremod-bytecode errors log and return original class bytes while metadata lookup delegates upstream.",
+      "source": {
+        "path": "src/main/java/org/sinytra/connector/transformer/jar/EarlyJSCoremodTransformer.java",
+        "line_range": [
+          84,
+          99
+        ],
+        "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/jar/EarlyJSCoremodTransformer.java#L84-L99"
+      }
+    }
+  ],
+  "capture_status": "PARTIAL",
+  "capture_status_note": "Formal source capture retains incomplete external dependency/binary/toolchain closure; finite text-path reading does not upgrade that status.",
+  "artifact_validation": {
+    "checked_at_utc": "2026-10-01T19:19:01.390626+00:00",
+    "required_scope_file_count": 28,
+    "support_file_count": 8,
+    "all_scoped_paths_present": true,
+    "hashes_verified": 36,
+    "report_source_link_ranges_checked": 127,
+    "declarative_patch_block_count": 79,
+    "runtime_attestation": false,
+    "upstream_execution": false,
+    "report_sha256": "21e948799f3eebd76890b5fb3306cdb7c32936719dc20de8b0ab7fb798ff6e4b",
+    "review_note": "Independent source review corrections included; final integrated evidence verification is separate."
+  },
+  "scope_exclusions": [
+    "Live runtime testing explicitly excluded by user",
+    "No target build/test/install/publication",
+    "No substitution of source snapshots for matching binary evidence"
+  ],
+  "cross_callsite_review_note": {
+    "scope": "readModMetadata \u2192 removeAliasedModDependencyConstraints \u2192 getMixinCompat",
+    "observation": "Standard fabricloader constraints are removed unless an earlier configured alias branch handles them. With only removed standard constraints, getMixinCompat uses default 0.10.0; surviving fabric-loader or alias-produced constraints can enter interval branches.",
+    "basis": "SOURCE_PATH_INFERENCE",
+    "runtime_attestation": false
+  }
+}

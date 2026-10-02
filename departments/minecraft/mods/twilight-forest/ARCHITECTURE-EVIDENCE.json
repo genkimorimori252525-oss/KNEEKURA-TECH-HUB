@@ -1,0 +1,89 @@
+{
+  "evidence_version": "1.0",
+  "target": "The Twilight Forest",
+  "anchor": {
+    "source_snapshot": "TeamTwilight/twilightforest@a7dd8f13c653e137f977f5ffaa870fcb20fc1625",
+    "files": [
+      {
+        "path": "gradle.properties",
+        "blob_sha": "1dffbe18541d353ae3b5652032357340aa904ac3",
+        "size": 397
+      },
+      {
+        "path": "src/main/resources/META-INF/mods.toml",
+        "blob_sha": "c46f4b811c21e4035dd50c4e15fd6a90bcf9f0d5",
+        "size": 1125
+      },
+      {
+        "path": "src/main/java/twilightforest/TwilightForestMod.java",
+        "blob_sha": "63887fea219ccac25848fa4e03a61bbdf9afd627",
+        "size": 20037
+      },
+      {
+        "path": "src/main/java/twilightforest/init/TFEntities.java",
+        "blob_sha": "7fb8a296c2d416a1b7848e225930ce54cbcf7d42",
+        "size": 34275
+      },
+      {
+        "path": "src/main/java/twilightforest/network/TFPacketHandler.java",
+        "blob_sha": "7a2a44983eaf2fca0ad093d2e485f46e3d28dc75",
+        "size": 3839
+      },
+      {
+        "path": "src/main/resources/META-INF/accesstransformer.cfg",
+        "blob_sha": "cdf1c29a35a59d218a31026c8cdb51f7d52d6680",
+        "size": 9779
+      }
+    ]
+  },
+  "frontier": {
+    "source_snapshot": "TeamTwilight/twilightforest@793c4d4c7b0a2892f702cbb9a8d751fbe7218828",
+    "files": [
+      {
+        "path": "gradle.properties",
+        "blob_sha": "86e90bdfa9df685365ab32f97092de90dc7a524e",
+        "size": 571
+      },
+      {
+        "path": "src/main/resources/META-INF/neoforge.mods.toml",
+        "blob_sha": "9ba94b07e9f8c47a9e44bdd5729147f4da386c1f",
+        "size": 1112
+      },
+      {
+        "path": "src/main/java/twilightforest/TwilightForestMod.java",
+        "blob_sha": "87911d226f75bec7b0df591cdbf686ec4382ec71",
+        "size": 4713
+      },
+      {
+        "path": "src/main/java/twilightforest/TFRegistries.java",
+        "blob_sha": "0b884dd8d55a8e07cfb431f9ebe6e72617f56573",
+        "size": 5428
+      },
+      {
+        "path": "src/main/java/twilightforest/events/RegistrationEvents.java",
+        "blob_sha": "40c87d293513059666fd71ae077cb169c44be52c",
+        "size": 50896
+      },
+      {
+        "path": "src/main/java/twilightforest/client/event/ClientRegistrationEvents.java",
+        "blob_sha": "41aa907d9c07bc9258aa91382443da87d6e66eb7",
+        "size": 47624
+      },
+      {
+        "path": "src/main/java/twilightforest/init/TFEntities.java",
+        "blob_sha": "3ba72ab7d45b3e44e33076e4fc50bfe4abcf5c4c",
+        "size": 32336
+      },
+      {
+        "path": "src/main/resources/META-INF/accesstransformer.cfg",
+        "blob_sha": "396a0d39ea788d03b2789c49d11a180df12397ea",
+        "size": 18205
+      }
+    ]
+  },
+  "supported_findings": [
+    "ANCHOR centralizes substantially more bootstrap and packet setup in TwilightForestMod and TFPacketHandler.",
+    "FRONTIER separates registry definition, common/server lifecycle, and client presentation lifecycle across TwilightForestMod, TFRegistries, RegistrationEvents, and ClientRegistrationEvents.",
+    "Entity registration remains an explicit subsystem in both tracks."
+  ]
+}

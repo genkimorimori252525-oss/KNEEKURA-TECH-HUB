@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "scope": "Actual local Celestial Staff MOD: static provider execution and review-only Core staging",
+  "target": {
+    "minecraft": "1.20.1",
+    "forge": "47.4.6",
+    "java": "Eclipse Temurin 17.0.20.1+1"
+  },
+  "source_generation": "270bb001c9f63f77bc0b28a3a63b11ae2a08cfadd36f4db25b7a89194737d902",
+  "provider_input": {
+    "named_class_resource_jar_sha256": "0059776f29064c921e4a7de0ea70ec43215797abf823ca92cb98e6391247dfa7",
+    "class_count": 7,
+    "ordered_compile_artifacts": 101
+  },
+  "package_distinction": {
+    "static_comparison_raw_jar_sha256": "2cc36031e0a0a7ff02a9a72829acd64290fc67c75a155eeb4f418b740dad74ea",
+    "later_raw_jar_sha256": "15fd766e3249f7eb8e91ddd2767faaac5dec216fd69c4443360bdc4a272d83d6",
+    "same_source_inventory": true,
+    "same_class_resource_bytes": true,
+    "different_content": [
+      "META-INF/MANIFEST.MF Implementation-Timestamp"
+    ],
+    "exact_runtime_package_generation_claim": false
+  },
+  "mapping": {
+    "origin": "Mojang client/server ProGuard files verified against captured official manifest, plus exact ForgeGradle createMcpToSrg TSRG2",
+    "conversion": "One-off input preparation through mapping-io already bundled in the pinned tiny-remapper JAR; no new provider and no invented names",
+    "derived_tiny_sha256": "41c23f61816a267de2803fe68d4a9c10c486e8a0185493c74c368169c23c5b2b",
+    "classes": 7436,
+    "fields": 33135,
+    "methods": 63477,
+    "parity_checked_members": 96612,
+    "missing_field_descriptors": 0,
+    "invented_or_changed_names": 0
+  },
+  "results": {
+    "vineflower_1_11_1": "PASS: actual MOD decompilation, Java 17 recompilation, immutable repeat cache",
+    "tiny_remapper_0_11_2": "PASS: actual MOD mojmap-to-srg, inherited and referenced symbols, immutable repeat cache",
+    "normalized_javap_class_parity": "7/7 against the prior ForgeGradle distribution build; only constant-pool indices/padding normalized",
+    "packaged_resource_parity": "6/6 byte-identical",
+    "pure_policy_smokes": "3/3 original, decompiled/recompiled, and remapped; no Minecraft started",
+    "core_staging": "PASS: actual two-source-document observation; five records pass existing Core schemas; NEW observation; canonical_writes=0; AI ingestion rejected with no writes",
+    "focused_regression": "46 passed"
+  },
+  "limits": {
+    "index": "PARTIAL: 38,753 dependency classes not prepared; 19 captured multi-release roots retain selection warnings",
+    "deployed_core": "NOT_RUN",
+    "trusted_canonical_guidance": "NOT_REQUESTED",
+    "human_canonical_review": "NOT_RUN",
+    "game_launches": 0,
+    "runtime_compatibility": "NOT_ESTABLISHED",
+    "upstream_twilight_connector_acceptance": "NOT_RUN",
+    "client_input_and_visual_acceptance": "NOT_RUN"
+  },
+  "repo_source_changes_by_this_experiment": 0,
+  "publication_scope": "Derived summary only; raw receipts, logs and local paths remain private. Hashes reference originals, not this summary.",
+  "mod_source_revision": "24f80d2e7bcb1e8c1247f13423688677d6152dad",
+  "profile_id": "21bd0b8350e63071de0d2cb843076e8fa746967978af62f85afde29f6c98c8af",
+  "adapter_repository_revision": "9224c8709dc2f174ceb55f61866cd7a0b5f07166",
+  "verified_receipts": {
+    "decompile": "cfc2dd57577ae70f22b17fb6c0a2b26e0192a948c28381129cf97ace81dd7a4c",
+    "remap": "509657e17a5860681f57ba1fc0889c97a0958438c8e9170fe4bde67c3655e277"
+  },
+  "verified_core_bundle_hash": "29d90ec677583926dc9a0a9b7d5a4eaf4b4099b20c5f1e673971d73fae3b8317",
+  "review_repairs": {
+    "normalized_parity": "Now fails on empty inventory or any class mismatch",
+    "policy_constants": "Read reflectively from each output; changed-61 negative rejected",
+    "profile_lineage": "Uses captured MOD revision, separately records adapter revision; historical misbound profiles retained locally, superseded for acceptance",
+    "focused_regressions_passed": 16,
+    "fresh_reproduction_and_verification": "PASS",
+    "inventory": "Exact named class/resource entry set required before full normalized parity; duplicates/missing/extra entries rejected"
+  },
+  "reproduction_source_sha256": {
+    "verification_helpers.py": "5731abec4b3c948851d9e4fb62f45cb03c25e92d854c01ee4a315aee7a7d2a06",
+    "ConvertMappings.java": "2960b370fb74c5cd78fa2ea3eedc516733f598b1ff4673b2ccae856ef819350f",
+    "run_actual.py": "757b608a6da1899930d27a15159c7e6d307022c542689a306e2f3a650830fff4",
+    "verify_outputs.py": "05f00b8c46e714983c30125b512d812a57dd3673856ac88aa2d670f9cf987769"
+  }
+}

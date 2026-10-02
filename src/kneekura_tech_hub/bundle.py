@@ -1,12 +1,12 @@
 from __future__ import annotations
 
-import json
 from collections import defaultdict, deque
 from pathlib import Path
 from typing import Any
 
 from jsonschema import Draft202012Validator
 
+from ._resources import load_json_resource
 from .repository import RecordRepository
 from .service import CurationEngine
 from .validator import validate_record
@@ -21,14 +21,7 @@ class BundleValidationError(ValueError):
 
 
 def load_bundle_schema(schema_path: Path | None = None) -> dict[str, Any]:
-    if schema_path is None:
-        schema_path = (
-            Path(__file__).resolve().parents[2]
-            / "schemas"
-            / "v1"
-            / "prototype-bundle.schema.json"
-        )
-    return json.loads(schema_path.read_text(encoding="utf-8"))
+    return load_json_resource("schemas/v1/prototype-bundle.schema.json", schema_path)
 
 
 def _dependencies(record: Record) -> set[str]:

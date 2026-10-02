@@ -1,0 +1,781 @@
+{
+  "catalog_version": "1.0",
+  "source_snapshot": {
+    "repository": "TeamTwilight/twilightforest",
+    "commit": "793c4d4c7b0a2892f702cbb9a8d751fbe7218828",
+    "minecraft": "26.1.2",
+    "loader": "NeoForge"
+  },
+  "evidence": {
+    "path": "src/main/java/twilightforest/client/event/ClientRegistrationEvents.java",
+    "blob_sha": "41aa907d9c07bc9258aa91382443da87d6e66eb7"
+  },
+  "count": 81,
+  "purpose": "Complete FRONTIER EntityType -> renderer registration map. Renderer-class internals are resolved in a subsequent pass.",
+  "registrations": [
+    {
+      "entity_key": "BOAR",
+      "registration": "BoarRenderer::new",
+      "renderer_class": "BoarRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "BIGHORN_SHEEP",
+      "registration": "BighornRenderer::new",
+      "renderer_class": "BighornRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "DEER",
+      "registration": "DeerRenderer::new",
+      "renderer_class": "DeerRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "REDCAP",
+      "registration": "RedcapRenderer::new",
+      "renderer_class": "RedcapRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "SKELETON_DRUID",
+      "registration": "SkeletonDruidRenderer::new",
+      "renderer_class": "SkeletonDruidRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "HOSTILE_WOLF",
+      "registration": "HostileWolfRenderer::new",
+      "renderer_class": "HostileWolfRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "WRAITH",
+      "registration": "WraithRenderer::new",
+      "renderer_class": "WraithRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "HYDRA",
+      "registration": "HydraRenderer::new",
+      "renderer_class": "HydraRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "LICH",
+      "registration": "LichRenderer::new",
+      "renderer_class": "LichRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "PENGUIN",
+      "registration": "m -> new BirdRenderer<>(m, new PenguinModel(m.bakeLayer(TFModelLayers.PENGUIN)), new PenguinModel(m.bakeLayer(TFModelLayers.PENGUIN_BABY)), 0.375F, \"penguin.png\")",
+      "renderer_class": "BirdRenderer",
+      "inline_models": [
+        "PenguinModel"
+      ],
+      "inline_model_layers": [
+        "PENGUIN",
+        "PENGUIN_BABY"
+      ],
+      "inline_textures": [
+        "penguin.png"
+      ],
+      "detail_status": "INLINE_PARTIAL_OR_COMPLETE"
+    },
+    {
+      "entity_key": "LICH_MINION",
+      "registration": "LichMinionRenderer::new",
+      "renderer_class": "LichMinionRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "LOYAL_ZOMBIE",
+      "registration": "LoyalZombieRenderer::new",
+      "renderer_class": "LoyalZombieRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "TINY_BIRD",
+      "registration": "TinyBirdRenderer::new",
+      "renderer_class": "TinyBirdRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "SQUIRREL",
+      "registration": "SquirrelRenderer::new",
+      "renderer_class": "SquirrelRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "DWARF_RABBIT",
+      "registration": "BunnyRenderer::new",
+      "renderer_class": "BunnyRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "RAVEN",
+      "registration": "m -> new BirdRenderer<>(m, new RavenModel(m.bakeLayer(TFModelLayers.RAVEN)), 0.3F, \"raven.png\")",
+      "renderer_class": "BirdRenderer",
+      "inline_models": [
+        "RavenModel"
+      ],
+      "inline_model_layers": [
+        "RAVEN"
+      ],
+      "inline_textures": [
+        "raven.png"
+      ],
+      "detail_status": "INLINE_PARTIAL_OR_COMPLETE"
+    },
+    {
+      "entity_key": "QUEST_RAM",
+      "registration": "QuestRamRenderer::new",
+      "renderer_class": "QuestRamRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "KOBOLD",
+      "registration": "KoboldRenderer::new",
+      "renderer_class": "KoboldRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "BOGGARD",
+      "registration": "m -> new RenderTFBiped<>(m, new BipedModel<>(0), 0.625F, \"kobold.png\")",
+      "renderer_class": null,
+      "inline_models": [
+        "BipedModel"
+      ],
+      "inline_model_layers": [],
+      "inline_textures": [
+        "kobold.png"
+      ],
+      "detail_status": "INLINE_PARTIAL_OR_COMPLETE"
+    },
+    {
+      "entity_key": "MOSQUITO_SWARM",
+      "registration": "MosquitoSwarmRenderer::new",
+      "renderer_class": "MosquitoSwarmRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "DEATH_TOME",
+      "registration": "DeathTomeRenderer::new",
+      "renderer_class": "DeathTomeRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "MINOTAUR",
+      "registration": "MinotaurRenderer::new",
+      "renderer_class": "MinotaurRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "MINOSHROOM",
+      "registration": "MinoshroomRenderer::new",
+      "renderer_class": "MinoshroomRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "FIRE_BEETLE",
+      "registration": "FireBeetleRenderer::new",
+      "renderer_class": "FireBeetleRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "SLIME_BEETLE",
+      "registration": "SlimeBeetleRenderer::new",
+      "renderer_class": "SlimeBeetleRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "PINCH_BEETLE",
+      "registration": "PinchBeetleRenderer::new",
+      "renderer_class": "PinchBeetleRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "MIST_WOLF",
+      "registration": "MistWolfRenderer::new",
+      "renderer_class": "MistWolfRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "CARMINITE_GHASTLING",
+      "registration": "m -> new TFGhastRenderer<>(m, new TFGhastModel<>(m.bakeLayer(TFModelLayers.CARMINITE_GHASTLING)), 0.625F)",
+      "renderer_class": "TFGhastRenderer",
+      "inline_models": [
+        "TFGhastModel"
+      ],
+      "inline_model_layers": [
+        "CARMINITE_GHASTLING"
+      ],
+      "inline_textures": [],
+      "detail_status": "INLINE_PARTIAL_OR_COMPLETE"
+    },
+    {
+      "entity_key": "CARMINITE_GOLEM",
+      "registration": "CarminiteGolemRenderer::new",
+      "renderer_class": "CarminiteGolemRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "TOWERWOOD_BORER",
+      "registration": "TowerwoodBorerRenderer::new",
+      "renderer_class": "TowerwoodBorerRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "CARMINITE_GHASTGUARD",
+      "registration": "CarminiteGhastRenderer::new",
+      "renderer_class": "CarminiteGhastRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "UR_GHAST",
+      "registration": "UrGhastRenderer::new",
+      "renderer_class": "UrGhastRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "BLOCKCHAIN_GOBLIN",
+      "registration": "BlockChainGoblinRenderer::new",
+      "renderer_class": "BlockChainGoblinRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "UPPER_GOBLIN_KNIGHT",
+      "registration": "UpperGoblinKnightRenderer::new",
+      "renderer_class": "UpperGoblinKnightRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "LOWER_GOBLIN_KNIGHT",
+      "registration": "LowerGoblinKnightRenderer::new",
+      "renderer_class": "LowerGoblinKnightRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "HELMET_CRAB",
+      "registration": "HelmetCrabRenderer::new",
+      "renderer_class": "HelmetCrabRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "KNIGHT_PHANTOM",
+      "registration": "KnightPhantomRenderer::new",
+      "renderer_class": "KnightPhantomRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "NAGA",
+      "registration": "NagaRenderer::new",
+      "renderer_class": "NagaRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "SWARM_SPIDER",
+      "registration": "m -> new TFSpiderRenderer<>(m, 0.25F, \"swarmspider.png\", 0.5F)",
+      "renderer_class": "TFSpiderRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [
+        "swarmspider.png"
+      ],
+      "detail_status": "INLINE_PARTIAL_OR_COMPLETE"
+    },
+    {
+      "entity_key": "KING_SPIDER",
+      "registration": "m -> new TFSpiderRenderer<>(m, 1.25F, \"kingspider.png\", 1.9F)",
+      "renderer_class": "TFSpiderRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [
+        "kingspider.png"
+      ],
+      "detail_status": "INLINE_PARTIAL_OR_COMPLETE"
+    },
+    {
+      "entity_key": "CARMINITE_BROODLING",
+      "registration": "m -> new TFSpiderRenderer<>(m, 0.6F, \"towerbroodling.png\", 0.7F)",
+      "renderer_class": "TFSpiderRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [
+        "towerbroodling.png"
+      ],
+      "detail_status": "INLINE_PARTIAL_OR_COMPLETE"
+    },
+    {
+      "entity_key": "HEDGE_SPIDER",
+      "registration": "m -> new TFSpiderRenderer<>(m, 0.8F, \"hedgespider.png\", 1.0F)",
+      "renderer_class": "TFSpiderRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [
+        "hedgespider.png"
+      ],
+      "detail_status": "INLINE_PARTIAL_OR_COMPLETE"
+    },
+    {
+      "entity_key": "REDCAP_SAPPER",
+      "registration": "RedcapSapperRenderer::new",
+      "renderer_class": "RedcapSapperRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "MAZE_SLIME",
+      "registration": "MazeSlimeRenderer::new",
+      "renderer_class": "MazeSlimeRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "YETI",
+      "registration": "YetiRenderer::new",
+      "renderer_class": "YetiRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "PROTECTION_BOX",
+      "registration": "ProtectionBoxRenderer::new",
+      "renderer_class": "ProtectionBoxRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "MAGIC_PAINTING",
+      "registration": "MagicPaintingRenderer::new",
+      "renderer_class": "MagicPaintingRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "ALPHA_YETI",
+      "registration": "AlphaYetiRenderer::new",
+      "renderer_class": "AlphaYetiRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "WINTER_WOLF",
+      "registration": "WinterWolfRenderer::new",
+      "renderer_class": "WinterWolfRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "SNOW_GUARDIAN",
+      "registration": "SnowGuardianRenderer::new",
+      "renderer_class": "SnowGuardianRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "STABLE_ICE_CORE",
+      "registration": "StableIceCoreRenderer::new",
+      "renderer_class": "StableIceCoreRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "UNSTABLE_ICE_CORE",
+      "registration": "UnstableIceCoreRenderer::new",
+      "renderer_class": "UnstableIceCoreRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "SNOW_QUEEN",
+      "registration": "SnowQueenRenderer::new",
+      "renderer_class": "SnowQueenRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "TROLL",
+      "registration": "TrollRenderer::new",
+      "renderer_class": "TrollRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "GIANT_MINER",
+      "registration": "TFGiantRenderer::new",
+      "renderer_class": "TFGiantRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "ARMORED_GIANT",
+      "registration": "TFGiantRenderer::new",
+      "renderer_class": "TFGiantRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "ICE_CRYSTAL",
+      "registration": "IceCrystalRenderer::new",
+      "renderer_class": "IceCrystalRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "CHAIN_BLOCK",
+      "registration": "BlockChainRenderer::new",
+      "renderer_class": "BlockChainRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "CUBE_OF_ANNIHILATION",
+      "registration": "CubeOfAnnihilationRenderer::new",
+      "renderer_class": "CubeOfAnnihilationRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "HARBINGER_CUBE",
+      "registration": "HarbingerCubeRenderer::new",
+      "renderer_class": "HarbingerCubeRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "ADHERENT",
+      "registration": "AdherentRenderer::new",
+      "renderer_class": "AdherentRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "ROVING_CUBE",
+      "registration": "RovingCubeRenderer::new",
+      "renderer_class": "RovingCubeRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "RISING_ZOMBIE",
+      "registration": "RisingZombieRenderer::new",
+      "renderer_class": "RisingZombieRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "PLATEAU_BOSS",
+      "registration": "NoopRenderer::new",
+      "renderer_class": "NoopRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "NATURE_BOLT",
+      "registration": "ThrownItemRenderer::new",
+      "renderer_class": "ThrownItemRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "LICH_BOLT",
+      "registration": "c -> new CustomProjectileTextureRenderer(c, TwilightForestMod.prefix(\"textures/particle/twilight_orb.png\"), 1.0F, true, false)",
+      "renderer_class": "CustomProjectileTextureRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [
+        "textures/particle/twilight_orb.png"
+      ],
+      "detail_status": "INLINE_PARTIAL_OR_COMPLETE"
+    },
+    {
+      "entity_key": "WAND_BOLT",
+      "registration": "c -> new CustomProjectileTextureRenderer(c, TwilightForestMod.prefix(\"textures/particle/twilight_orb.png\"), 1.0F, true, false)",
+      "renderer_class": "CustomProjectileTextureRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [
+        "textures/particle/twilight_orb.png"
+      ],
+      "detail_status": "INLINE_PARTIAL_OR_COMPLETE"
+    },
+    {
+      "entity_key": "LICH_BOMB",
+      "registration": "c -> new CustomProjectileTextureRenderer(c, Identifier.withDefaultNamespace(\"textures/item/magma_cream.png\"), 1.0F, true, true)",
+      "renderer_class": "CustomProjectileTextureRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [
+        "textures/item/magma_cream.png"
+      ],
+      "detail_status": "INLINE_PARTIAL_OR_COMPLETE"
+    },
+    {
+      "entity_key": "TOME_BOLT",
+      "registration": "ThrownItemRenderer::new",
+      "renderer_class": "ThrownItemRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "HYDRA_MORTAR",
+      "registration": "HydraMortarRenderer::new",
+      "renderer_class": "HydraMortarRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "SLIME_BLOB",
+      "registration": "ThrownItemRenderer::new",
+      "renderer_class": "ThrownItemRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "MOONWORM_SHOT",
+      "registration": "MoonwormShotRenderer::new",
+      "renderer_class": "MoonwormShotRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "CHARM_EFFECT",
+      "registration": "ThrownItemRenderer::new",
+      "renderer_class": "ThrownItemRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "THROWN_WEP",
+      "registration": "ThrownWepRenderer::new",
+      "renderer_class": "ThrownWepRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "FALLING_ICE",
+      "registration": "FallingIceRenderer::new",
+      "renderer_class": "FallingIceRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "THROWN_ICE",
+      "registration": "ThrownIceRenderer::new",
+      "renderer_class": "ThrownIceRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "THROWN_BLOCK",
+      "registration": "ThrownBlockRenderer::new",
+      "renderer_class": "ThrownBlockRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "ICE_SNOWBALL",
+      "registration": "ThrownItemRenderer::new",
+      "renderer_class": "ThrownItemRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "SLIDER",
+      "registration": "SlideBlockRenderer::new",
+      "renderer_class": "SlideBlockRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "SEEKER_ARROW",
+      "registration": "DefaultArrowRenderer::new",
+      "renderer_class": "DefaultArrowRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    },
+    {
+      "entity_key": "ICE_ARROW",
+      "registration": "DefaultArrowRenderer::new",
+      "renderer_class": "DefaultArrowRenderer",
+      "inline_models": [],
+      "inline_model_layers": [],
+      "inline_textures": [],
+      "detail_status": "RENDERER_CLASS_PENDING"
+    }
+  ]
+}

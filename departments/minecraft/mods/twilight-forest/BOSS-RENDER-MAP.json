@@ -1,0 +1,97 @@
+{
+  "schema_version": "1.0.0",
+  "source_snapshot": "TeamTwilight/twilightforest@793c4d4c7b0a2892f702cbb9a8d751fbe7218828",
+  "mappings": [
+    {
+      "boss": "Naga",
+      "renderer": "NagaRenderer",
+      "renderer_blob": "6c9742bd26e6563848e5a6ad2b559366b52c0314",
+      "model": "NagaModel",
+      "layer": "TFModelLayers.NAGA",
+      "textures": [
+        "textures/entity/nagahead.png",
+        "textures/entity/nagahead_charging.png",
+        "textures/entity/nagahead_dazed.png"
+      ]
+    },
+    {
+      "boss": "Lich",
+      "renderer": "LichRenderer",
+      "renderer_blob": "755abde65b4c8530bb64e0544aef2c7417184647",
+      "model": "LichModel",
+      "layer": "TFModelLayers.LICH",
+      "textures": [
+        "textures/entity/twilightlich64.png",
+        "textures/entity/twilightlich64_eyes.png"
+      ]
+    },
+    {
+      "boss": "Hydra",
+      "renderer": "HydraRenderer",
+      "renderer_blob": "d85966eae8c7b121b61d54cc80dcee994d1a0e37",
+      "model": "HydraModel",
+      "layer": "TFModelLayers.HYDRA",
+      "textures": [
+        "textures/entity/hydra4.png"
+      ]
+    },
+    {
+      "boss": "Ur-Ghast",
+      "renderer": "UrGhastRenderer",
+      "renderer_blob": "3dde977c1a131e5d3e835b75ddd81bc82c90891b",
+      "model": "UrGhastModel",
+      "layer": "TFModelLayers.UR_GHAST",
+      "textures": [
+        "textures/entity/towerboss.png",
+        "textures/entity/towerboss_openeyes.png",
+        "textures/entity/towerboss_fire.png"
+      ]
+    },
+    {
+      "boss": "Snow Queen",
+      "renderer": "SnowQueenRenderer",
+      "renderer_blob": "876cfe1e598cafbf4ed7cda4c26318f876bcfd58",
+      "model": "SnowQueenModel",
+      "layer": "TFModelLayers.SNOW_QUEEN",
+      "textures": [
+        "textures/entity/snowqueen.png"
+      ]
+    },
+    {
+      "boss": "Alpha Yeti",
+      "renderer": "AlphaYetiRenderer",
+      "renderer_blob": "a0f00b0211b01f9d8395c69df08326cb84f70e7c",
+      "model": "AlphaYetiModel",
+      "layer": "TFModelLayers.ALPHA_YETI",
+      "textures": [
+        "textures/entity/yetialpha.png"
+      ]
+    },
+    {
+      "boss": "Knight Phantom",
+      "renderer": "KnightPhantomRenderer",
+      "renderer_blob": "8510ee52a32a0ce296e611f77015319fc6a1234d",
+      "model": "KnightPhantomModel",
+      "layer": "TFModelLayers.KNIGHT_PHANTOM",
+      "textures": [
+        "textures/entity/phantomskeleton.png"
+      ],
+      "extra_layers": [
+        "HumanoidArmorLayer"
+      ]
+    },
+    {
+      "boss": "Minoshroom",
+      "renderer": "MinoshroomRenderer",
+      "renderer_blob": "f7ce7dbb440971bec59b51deca18ea6ef6f4a5e3",
+      "model": "MinoshroomModel",
+      "layer": "TFModelLayers.MINOSHROOM",
+      "textures": [
+        "textures/entity/minoshroomtaur.png"
+      ],
+      "extra_layers": [
+        "dynamic brown mushroom BlockModelRenderState"
+      ]
+    }
+  ]
+}

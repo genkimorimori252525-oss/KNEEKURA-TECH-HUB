@@ -1,0 +1,151 @@
+// Explicit, read-only export from an already trusted ForgeGradle workspace.
+// Invoke with: gradlew -I <this-file> kneekuraExportInputs \
+//   -PkneekuraNamespace=mojmap -PkneekuraExport=<absolute-json-path>
+// It resolves dependencies, but never runs a game or edits the build script.
+import groovy.json.JsonOutput
+import java.nio.file.Files
+import java.nio.file.StandardCopyOption
+import java.security.MessageDigest
+import org.gradle.api.artifacts.component.ModuleComponentIdentifier
+import org.gradle.jvm.JvmLibrary
+import org.gradle.language.base.artifact.SourcesArtifact
+
+String hashFile(File file) {
+    def hash = MessageDigest.getInstance('SHA-256')
+    file.withInputStream { input ->
+        byte[] buffer = new byte[65536]
+        int n
+        while ((n = input.read(buffer)) != -1) hash.update(buffer, 0, n)
+    }
+    return hash.digest().encodeHex().toString()
+}
+
+List<File> workspaceInputs(File root, boolean configOnly) {
+    def ignored = ['.git','.gradle','.kneekura-cache','.kneekura-runs','.superpowers','.idea','build','out',
+                   'run','runs','saves','node_modules','__pycache__'] as Set
+    def names = ['gradle.properties','gradlew','gradlew.bat','gradle.lockfile',
+                 'gradle-wrapper.properties','gradle-wrapper.jar','libs.versions.toml'] as Set
+    def result = []
+    def visit
+    visit = { File dir ->
+        File[] children = dir.listFiles()
+        if (children == null) throw new GradleException("Unreadable input directory: ${dir}")
+        children.each { f ->
+            if (f.isDirectory() && ignored.contains(f.name)) return
+            if (Files.isSymbolicLink(f.toPath())) throw new GradleException("Symlink input: ${f}")
+            if (f.isDirectory()) { visit(f); return }
+            String rel = root.toPath().relativize(f.toPath()).toString().replace('\\','/')
+            boolean config = names.contains(f.name) || f.name.endsWith('.gradle') ||
+                f.name.endsWith('.gradle.kts') || rel.startsWith('buildSrc/') || rel.startsWith('build-logic/')
+            if (config || (!configOnly && (rel.startsWith('src/') || rel.contains('/src/')))) result.add(f)
+        }
+    }
+    visit(root)
+    return result.sort { root.toPath().relativize(it.toPath()).toString().replace('\\','/') }
+}
+
+String fingerprint(File root, boolean configOnly) {
+    def hash = MessageDigest.getInstance('SHA-256')
+    workspaceInputs(root, configOnly).each { f ->
+        String rel = root.toPath().relativize(f.toPath()).toString().replace('\\','/')
+        hash.update((rel + '\u0000' + hashFile(f) + '\n').getBytes('UTF-8'))
+    }
+    return hash.digest().encodeHex().toString()
+}
+
+gradle.projectsEvaluated {
+    def host = gradle.rootProject
+    def target = host.findProject(host.findProperty('kneekuraProject') ?: ':')
+    if (target == null) throw new GradleException('Unknown kneekuraProject')
+    host.tasks.register('kneekuraExportInputs') {
+        group = 'kneekura'
+        description = 'Export resolved Forge inputs without compiling or launching Minecraft'
+        outputs.upToDateWhen { false }
+        doLast {
+            def sourceSets = target.extensions.findByName('sourceSets')
+            if (sourceSets == null || sourceSets.findByName('main') == null)
+                throw new GradleException('A Java sourceSets.main workspace is required')
+            String ns = host.findProperty('kneekuraNamespace')
+            if (!(ns in ['mojmap','srg','obf','intermediary','yarn']))
+                throw new GradleException('Explicit kneekuraNamespace required; Parchment is annotation')
+            String destination = host.findProperty('kneekuraExport')
+            if (!destination) throw new GradleException('Explicit kneekuraExport path required')
+            File root = target.projectDir.canonicalFile
+            String before = fingerprint(root, true)
+            def artifacts = []
+            def unresolved = []
+            def components = []
+            def coordinates = []
+            ['compile':'compileClasspath', 'runtime':'runtimeClasspath'].each { scope, name ->
+                def cfg = target.configurations.findByName(name)
+                if (cfg == null || !cfg.canBeResolved) {
+                    unresolved.add([scope:scope, reason:"Configuration ${name} cannot resolve"])
+                    return
+                }
+                def view = cfg.incoming.artifactView { lenient = true }
+                view.artifacts.failures.each { failure ->
+                    unresolved.add([scope:scope, reason:failure.message])
+                }
+                view.artifacts.artifacts.each { a ->
+                    def id = a.id.componentIdentifier
+                    def coordinate = id.displayName
+                    coordinates.add(coordinate)
+                    if (id instanceof ModuleComponentIdentifier) components.add(id)
+                    File f = a.file.canonicalFile
+                    if (!f.isFile()) {
+                        unresolved.add([scope:scope, coordinate:coordinate, reason:'Non-JAR project artifact; inspect source/output roots'])
+                        return
+                    }
+                    // Userdev transforms normally name their mapped jars. Other
+                    // mods may still contain obfuscated/SRG references: UNKNOWN
+                    // is intentional, not a default assertion about those jars.
+                    String ans = f.name.contains('_mapped_') ? ns : 'unknown'
+                    artifacts.add([path:f.path, scope:scope, coordinate:coordinate, sha256:hashFile(f),
+                                   namespace:ans, stage:'resolved_userdev'])
+                }
+            }
+            if (host.findProperty('kneekuraSources') == 'true' && !components.isEmpty()) {
+                def result = target.dependencies.createArtifactResolutionQuery()
+                    .forComponents(components.unique()).withArtifacts(JvmLibrary, SourcesArtifact).execute()
+                result.resolvedComponents.each { c ->
+                    c.getArtifacts(SourcesArtifact).each { a ->
+                        if (a instanceof org.gradle.api.artifacts.result.ResolvedArtifactResult) {
+                            artifacts.add([path:a.file.canonicalPath, scope:'compile', coordinate:c.id.displayName,
+                                sha256:hashFile(a.file), namespace:'unknown', stage:'published_source', classifier:'sources'])
+                        }
+                    }
+                }
+            }
+            def actualForge = coordinates.collect { it =~ /net\.minecraftforge:forge:([0-9.]+)-([0-9.]+)/ }
+                .findAll { it.find() }.collect { [it.group(1), it.group(2)] }.unique()
+            if (actualForge.size() != 1)
+                throw new GradleException('Cannot identify one exact resolved Minecraft/Forge artifact; refusing declared-version fallback')
+            def compiler = target.tasks.findByName('compileJava')?.javaCompiler?.getOrNull()
+            def toolchain = compiler == null ? null : [language_version:compiler.metadata.languageVersion.asInt(),
+                vendor:compiler.metadata.vendor, installation_path:compiler.metadata.installationPath.asFile.canonicalPath]
+            def fg = target.plugins.findPlugin('net.minecraftforge.gradle')
+            def fgVersion = fg?.class?.package?.implementationVersion
+            def source = sourceSets.main
+            def manifest = [schema_version:1, format:'kneekura.forge-inputs.v1', workspace:root.path,
+                source_fingerprint:fingerprint(root,false), configuration_fingerprint:before,
+                minecraft:actualForge[0][0], loader:'forge', loader_version:actualForge[0][1], namespace:ns,
+                java_major:toolchain?.language_version, toolchain:toolchain,
+                gradle_version:gradle.gradleVersion, forgegradle_version:fgVersion,
+                mappings:[namespace:ns, declared_channel:target.findProperty('mapping_channel'),
+                          declared_version:target.findProperty('mapping_version')],
+                source_roots:source.allJava.srcDirs.collect { it.canonicalPath },
+                resource_roots:source.resources.srcDirs.collect { it.canonicalPath },
+                output_roots:source.output.classesDirs.files.collect { it.canonicalPath },
+                artifacts:artifacts, unresolved:unresolved]
+            if (fingerprint(root,true) != before) throw new GradleException('Build configuration changed during export')
+            File output = new File(destination).absoluteFile
+            output.parentFile.mkdirs()
+            File temporary = File.createTempFile('.kneekura-export-', '.json', output.parentFile)
+            try {
+                temporary.setText(JsonOutput.prettyPrint(JsonOutput.toJson(manifest)), 'UTF-8')
+                Files.move(temporary.toPath(), output.toPath(), StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING)
+            } finally { temporary.delete() }
+            println("KNEEKURA_INPUTS ${output}")
+        }
+    }
+}

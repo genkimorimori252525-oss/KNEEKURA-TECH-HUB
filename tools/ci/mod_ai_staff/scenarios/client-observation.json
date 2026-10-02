@@ -1,0 +1,277 @@
+{
+  "schema_version": 1,
+  "scenario_id": "celestial-staff-client-v1",
+  "assertion_domain": "client_observation",
+  "world_seed": 0,
+  "expected_tests": [],
+  "expected_required": {},
+  "execution_status": "NOT_RUN",
+  "fixed_assertions_file": "tools/ci/mod_ai_staff/assertions.json",
+  "target": {
+    "minecraft": "1.20.1",
+    "loader": "forge",
+    "loader_version": "47.4.6",
+    "java_major": 17,
+    "asset_id": "kneekura:celestial_staff"
+  },
+  "cycle": [
+    "investigate",
+    "edit_assets",
+    "build",
+    "interact",
+    "observe",
+    "repair"
+  ],
+  "verdicts": {
+    "physical_right_click": "NOT_RUN",
+    "server_behavior": "NOT_RUN",
+    "visual": "NOT_RUN",
+    "synchronization": "NOT_RUN",
+    "runtime_client_handler_mutation": "NOT_RUN"
+  },
+  "launch_policy": {
+    "new_launches_authorized": 0,
+    "use_only_existing_registered_budget": true,
+    "production_world": false,
+    "prerequisites": [
+      "explicit disposable-world template",
+      "fresh world prepared by existing world prepare",
+      "same-source registered compile receipt",
+      "physical client profile and new contract/epoch",
+      "EULA/launch permission and budget already granted",
+      "verified Linux X11 foreground client or separately supported driver"
+    ]
+  },
+  "exact_tick_evidence": "server-behavior.json:staff_expiry",
+  "required_views": [
+    "inventory",
+    "first_person",
+    "third_person"
+  ],
+  "view_change_authority": "operator_checkpoint",
+  "input": {
+    "backend": "linux-x11-send-event-v1",
+    "control": "mouse:right",
+    "hold_ms": 50,
+    "position": "fresh bound viewport center in client-local integer pixels",
+    "target_id": "from input bind only",
+    "identity": "complete identity from the same binding and run contract",
+    "operation_id": "fresh bounded unique ID for each intentional press",
+    "retry_unknown": false,
+    "cli_bind": [
+      "input",
+      "bind",
+      "--registry",
+      "{input_registry}"
+    ],
+    "cli_dispatch": [
+      "input",
+      "dispatch",
+      "--registry",
+      "{input_registry}",
+      "--binding",
+      "{binding_hash}",
+      "--request",
+      "{input_request}"
+    ]
+  },
+  "input_registry_template": {
+    "schema_version": 1,
+    "backend": "linux-x11-send-event-v1",
+    "enabled": true,
+    "session_file": "{private_session_file}",
+    "display": "{authorized_local_x11_display}",
+    "allowed_controls": [
+      "mouse:right"
+    ],
+    "timeout_seconds": 5
+  },
+  "observation_query": {
+    "entity_uuids": [
+      "{invoking_player_uuid}"
+    ],
+    "dimension": "minecraft:overworld",
+    "limit": 1,
+    "staff_state": true,
+    "screenshot": true
+  },
+  "command_registry_template": {
+    "equip_staff": "item replace entity {invoking_player_uuid} weapon.mainhand with kneekura:celestial_staff 1"
+  },
+  "setup_constraints": [
+    "Register the exact resolved equip_staff command before session creation; placeholders are not executable commands",
+    "Select a fresh controlled test player with no Glowing/cooldown and baseline full health; if effects or hazards exist, stop and use a new authorized fixture",
+    "Do not use effect, data merge, direct Item.use, scripted success flags, or a test command to satisfy the physical input assertion",
+    "Observe one non-invoking player separately for self-only effect evidence when a second player is available; otherwise that assertion remains NOT_RUN"
+  ],
+  "steps": [
+    {
+      "id": "investigate",
+      "action": "Read the six-task acceptance inputs and actual pinned staff source; capture fixed requirements before any change"
+    },
+    {
+      "id": "edit_assets",
+      "action": "Use existing asset capture/import; preserve exact manifest/model/texture hashes and do not overwrite the original source artifact"
+    },
+    {
+      "id": "build",
+      "action": "Run existing registered compile/export, import resolved inputs, compare package resources and prepare a fresh client contract; source edits invalidate old receipts"
+    },
+    {
+      "id": "views",
+      "action": "At each operator-confirmed inventory/first-person/third-person checkpoint call observe --operation client with the exact query; retain screenshot hash, camera, screen and intervals"
+    },
+    {
+      "id": "baseline",
+      "action": "Capture exact player UUID/dimension, health, main-hand staff/count/damage, absent Glowing and inactive cooldown before the first press"
+    },
+    {
+      "id": "interact",
+      "action": "Use input bind, then exactly one scoped 50 ms physical mouse:right dispatch while actual gameplay screen is foreground; retain native receipt and its same-run pre/post evidence"
+    },
+    {
+      "id": "observe",
+      "action": "Capture the selected player immediately after dispatch. If effect expired before the sample, keep this assertion inconclusive; do not change the 60-tick rule or infer behavior from dispatch completion"
+    },
+    {
+      "id": "repeat",
+      "action": "Only while authenticated observations show active cooldown and positive Glowing duration, issue a second separately identified physical press; observe monotonic effect/cooldown decrease within measured tick intervals. If the interval crosses expiry, result is inconclusive"
+    },
+    {
+      "id": "expiry",
+      "action": "Observe the effect gone and later cooldown inactive; exact 60/100-tick claims rely only on the fixed server GameTest, not sampled wall-clock delays"
+    },
+    {
+      "id": "repair",
+      "action": "On a reproducible failed assertion, retain before evidence, repair source/asset, rebuild and recapture all identities, then rerun the same assertion/control scenario within the remaining approved launch budget. Never weaken an assertion to turn FAIL into PASS"
+    }
+  ],
+  "assertions": [
+    {
+      "id": "native_input",
+      "domain": "physical_right_click",
+      "requirement": "Native press/release completes in the current bound foreground client and same epoch; command/handler invocation is insufficient",
+      "evidence_required": [
+        "binding_hash",
+        "native_input_receipt_hash",
+        "pre_client_observation_hash",
+        "post_client_observation_hash",
+        "log_hashes"
+      ]
+    },
+    {
+      "id": "self_glow",
+      "domain": "server_behavior",
+      "requirement": "Initially unglowing invoking player gains minecraft:glowing amplifier 0 with positive duration <=60 after physical use; non-invoking control remains unchanged",
+      "evidence_required": [
+        "exact_uuid_before_after_staff_state",
+        "separate_non_invoking_player_state"
+      ]
+    },
+    {
+      "id": "repeat_no_refresh",
+      "domain": "server_behavior",
+      "requirement": "While cooldown is known active, second press does not increase Glowing duration/amplifier or cooldown fraction; interval crossing expiration is inconclusive",
+      "evidence_required": [
+        "two_native_input_receipts",
+        "server_tick_intervals",
+        "staff_state_before_after_repeat"
+      ]
+    },
+    {
+      "id": "cooldown",
+      "domain": "server_behavior",
+      "requirement": "Cooldown starts active and positive after use, decreases and eventually expires; exact 100 ticks remains server-only GameTest evidence",
+      "evidence_required": [
+        "staff_state_cooldown_samples",
+        "staff_expiry"
+      ]
+    },
+    {
+      "id": "no_damage",
+      "domain": "server_behavior",
+      "requirement": "Same player health unchanged in hazard-free controlled baseline; attempted-damage behavior additionally covered by the negative GameTest",
+      "evidence_required": [
+        "exact_uuid_health_before_after",
+        "staff_damage_negative"
+      ]
+    },
+    {
+      "id": "no_consumption_or_wear",
+      "domain": "server_behavior",
+      "requirement": "Main-hand item remains kneekura:celestial_staff with identical count and damage",
+      "evidence_required": [
+        "main_hand_before_after"
+      ]
+    },
+    {
+      "id": "inventory_view",
+      "domain": "visual",
+      "requirement": "Inventory icon is present with intended captured model/texture, readable staff silhouette and no missing texture",
+      "evidence_required": [
+        "inventory_screenshot_hash",
+        "host_visual_review"
+      ]
+    },
+    {
+      "id": "first_person_view",
+      "domain": "visual",
+      "requirement": "First-person staff shape, colors and hand placement match fixed captured asset and do not obscure normal aim",
+      "evidence_required": [
+        "first_person_screenshot_hash",
+        "host_visual_review"
+      ]
+    },
+    {
+      "id": "third_person_view",
+      "domain": "visual",
+      "requirement": "Third-person held staff and Glowing appearance are visible as intended in the observed camera/view",
+      "evidence_required": [
+        "third_person_screenshot_hash",
+        "host_visual_review"
+      ]
+    },
+    {
+      "id": "dedicated_synchronization",
+      "domain": "synchronization",
+      "requirement": "A separately connected client receives the server-authoritative state for the same player/build; singleplayer cannot PASS this assertion",
+      "evidence_required": [
+        "dedicated_server_contract",
+        "physical_client_contract",
+        "entity_uuid",
+        "correlated_observation_intervals"
+      ]
+    },
+    {
+      "id": "client_no_mutation",
+      "domain": "runtime_client_handler_mutation",
+      "requirement": "Runtime client branch itself applies no effect/cooldown mutation; eventual synchronized effect presence cannot prove or disprove this",
+      "evidence_required": [
+        "client_branch_specific_runtime_instrumentation"
+      ]
+    }
+  ],
+  "known_bad_controls_file": "client-controls.json",
+  "history": {
+    "api": "kneekura_tech_hub.minecraft.history.capture_history",
+    "before_and_after_evidence_required": true,
+    "record_origin": "OWN_DEVELOPMENT",
+    "verification_state_without_live_receipts": "NOT_RUN",
+    "fields": [
+      "symptom",
+      "trigger_conditions",
+      "root_cause",
+      "repair",
+      "lesson"
+    ],
+    "unknown_cause_must_remain_unknown": true
+  },
+  "limitations": [
+    "No launch, client interaction or compatibility execution is authorized by this scenario file",
+    "Snapshot intervals are non-atomic; do not invent tick-perfect synchronization or wall-clock timing",
+    "Dedicated synchronization and runtime client-only mutation require separate evidence; server GameTests and injected input fixtures cannot close them",
+    "Windows, Wayland and automated keyboard/view changes are not accepted by the selected Linux mouse:right route",
+    "Publish portable metadata and sanitized evidence only; retain private sessions and raw local receipts outside publication"
+  ],
+  "fixed_assertions_sha256": "bf04de39d90599619b5661afbe21f770738c8f0f9b7ad444f06272262db81791"
+}

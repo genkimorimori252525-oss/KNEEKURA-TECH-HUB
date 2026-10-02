@@ -1,0 +1,404 @@
+{
+  "record_kind": "SOURCE_BACKED_TECHNIQUE_REVIEW_CANDIDATES",
+  "scope": "Static source/history knowledge extraction only; no live runtime tests requested",
+  "cards": [
+    {
+      "id": "T01",
+      "title": "Discover dependency structure before final side admission",
+      "profile": "anchor",
+      "paths": [
+        "src/main/java/org/sinytra/connector/locator/ConnectorLocator.java",
+        "src/main/java/org/sinytra/connector/locator/DependencyResolver.java"
+      ],
+      "condition": "A container can embed independently required components, and physical-side restrictions differ among them.",
+      "mechanism": "Build the nested candidate graph and resolve combined host/guest dependencies before filtering the selected jars with loadsInEnvironment.",
+      "invariant": "An ineligible container must not erase nested dependency candidates before the resolver can evaluate them.",
+      "failure_pattern": "Early side rejection hid Yttr nested dependencies in the reported #926 to #991 regression; source ordering is now different.",
+      "application": "Separate graph discovery from execution/load admission in a loader or plugin package importer.",
+      "limits": "Solver implementation and candidate binary topology are external; this does not require every nested child to load.",
+      "history": "FAILURE-REPAIR-HISTORY.md",
+      "repository": "https://github.com/Sinytra/Connector",
+      "revision": "7f68ac02291fde986119a3f5cab85436bed5c350",
+      "track": "ANCHOR",
+      "profile_id": "3161cd7cd84ba1add48de08b2318d1a10ad0681dc1fbc1f981ffd7156a7c20c0",
+      "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+      "evidence": [
+        {
+          "path": "src/main/java/org/sinytra/connector/locator/ConnectorLocator.java",
+          "document_id": "100148b725596239f2192cfaf8305f90e820045d9dc02f0bec0965e480f8748a",
+          "content_hash": "46d225142d645e92f3aed1be5e41b8e9d77395716df9e5d1ad19b6f5adfe5fa3",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/ConnectorLocator.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/locator/DependencyResolver.java",
+          "document_id": "2321cdf168a93317c5f3b453562ec8db0fcb9a80475157230efaf9613d2a38b7",
+          "content_hash": "bc5485cbace6846a9622841458ab911fcc1cda4f490a6cc962b6b9a3bc086f7f",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/DependencyResolver.java"
+        }
+      ],
+      "observed_basis": "DIRECT_OBSERVATION_OF_SOURCE",
+      "reuse_basis": "INFERENCE_REQUIRES_CONTEXT_REVIEW",
+      "runtime": "NOT_RUN_EXCLUDED_BY_REQUEST",
+      "core_stage": {
+        "status": "OK",
+        "bundle_hash": "af556298e30916e1f9b439bccdcf1b38a61484748a2451dec4135cbd1b81b043",
+        "records": 5,
+        "canonical_writes": 0,
+        "ingestion": "REQUIRES_EXISTING_CORE_REVIEW"
+      }
+    },
+    {
+      "id": "T02",
+      "title": "Preserve original identity beside normalized host metadata",
+      "profile": "anchor",
+      "paths": [
+        "src/main/java/org/sinytra/connector/loader/ConnectorLoaderModMetadata.java",
+        "src/main/java/org/sinytra/connector/locator/ConnectorModMetadataParser.java",
+        "src/main/java/org/sinytra/connector/loader/ConnectorEarlyLoader.java"
+      ],
+      "condition": "Guest metadata and host identifiers/version/container rules differ.",
+      "mechanism": "Retain Fabric metadata while normalizing host IDs/version display and constructing in-memory Forge ModFileInfo; preserve original IDs through provided aliases.",
+      "invariant": "The host-facing name and guest-facing identity must stay traceable to the same captured artifact.",
+      "failure_pattern": "Treating a metadata alias or widened dependency constraint as proof of binary/API equivalence.",
+      "application": "Maintain explicit identity/alias provenance in importers and compatibility adapters.",
+      "limits": "The host metadata view is not a native source port and hiddenMods affects the Fabric-facing view, not disk loading.",
+      "repository": "https://github.com/Sinytra/Connector",
+      "revision": "7f68ac02291fde986119a3f5cab85436bed5c350",
+      "track": "ANCHOR",
+      "profile_id": "3161cd7cd84ba1add48de08b2318d1a10ad0681dc1fbc1f981ffd7156a7c20c0",
+      "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+      "evidence": [
+        {
+          "path": "src/main/java/org/sinytra/connector/loader/ConnectorLoaderModMetadata.java",
+          "document_id": "7dd8999b49d1cdde870c1088024aec8db59714bda80bce59eaf35460837d6764",
+          "content_hash": "41ff986d5583af4a987657fbe16e3214bfe37c6a866efedca4614beb1cf65b1b",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/loader/ConnectorLoaderModMetadata.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/locator/ConnectorModMetadataParser.java",
+          "document_id": "7e4225d078c46ef1b34b9c42e7d20e1b5c4b5bfcece0b4807901cd17ba1c2e3f",
+          "content_hash": "9e058a33cf42969c100c06560c00610c259272f9641d8448e63726ba3030eb25",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/ConnectorModMetadataParser.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/loader/ConnectorEarlyLoader.java",
+          "document_id": "fa88a060033fe7ae1f6d130c8faa51957fbe94e93e7b7b3d3e4b86254da7b7a6",
+          "content_hash": "6eeb8a88c76c7239776dfee066e3b4392044c79984e9715e9d3a2a0dc94f8339",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/loader/ConnectorEarlyLoader.java"
+        }
+      ],
+      "observed_basis": "DIRECT_OBSERVATION_OF_SOURCE",
+      "reuse_basis": "INFERENCE_REQUIRES_CONTEXT_REVIEW",
+      "runtime": "NOT_RUN_EXCLUDED_BY_REQUEST",
+      "core_stage": {
+        "status": "OK",
+        "bundle_hash": "67e844f5c25a25b8091a5cf7d48a40f58211c2ca6ac2707165c2a1d73c202931",
+        "records": 6,
+        "canonical_writes": 0,
+        "ingestion": "REQUIRES_EXISTING_CORE_REVIEW"
+      }
+    },
+    {
+      "id": "T03",
+      "title": "Adapt a matched method contract, not just its symbol name",
+      "profile": "anchor",
+      "paths": [
+        "src/main/java/org/sinytra/connector/transformer/MixinPatches.java",
+        "src/main/java/org/sinytra/connector/transformer/MixinPatchTransformer.java"
+      ],
+      "condition": "A known host patch changes the exact target method descriptor/injection shape.",
+      "mechanism": "For the matched HumanoidArmorLayer ModifyArg(index=4) pattern, retarget to the Forge Model/ResourceLocation overload, change the handler to Model-to-Model, insert casts and bypass non-HumanoidModel input.",
+      "invariant": "The replacement descriptor, stack/local types and safe nonmatching behavior must agree.",
+      "failure_pattern": "Renaming leaves a valid-looking selector with the wrong argument type, return type or insertion point.",
+      "application": "Use explicit, narrowly matched rewrite rules when adapting bytecode to known host deltas.",
+      "limits": "Adapter DSL matching/application is an unacquired implementation boundary; no arbitrary MOD or live armor rendering success is claimed.",
+      "repository": "https://github.com/Sinytra/Connector",
+      "revision": "7f68ac02291fde986119a3f5cab85436bed5c350",
+      "track": "ANCHOR",
+      "profile_id": "3161cd7cd84ba1add48de08b2318d1a10ad0681dc1fbc1f981ffd7156a7c20c0",
+      "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+      "evidence": [
+        {
+          "path": "src/main/java/org/sinytra/connector/transformer/MixinPatches.java",
+          "document_id": "6bee59da2fdabca8aabbd8370278c84d3e899b503cc6b984481eb6e4e2cfbd0a",
+          "content_hash": "e88b2eb5773fe83d92a2d49498704922047514cbbed69b293f89f63ca69292a4",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatches.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/transformer/MixinPatchTransformer.java",
+          "document_id": "5c2bcaa4d2f4167e8960d8e69f8cda6a9473fe3ae8451657cdc98d6f3ee8e966",
+          "content_hash": "a229757d426f47bc5a2bc52ecc5e76b8c89896076bf29f1c0527dc6b848e68ce",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/MixinPatchTransformer.java"
+        }
+      ],
+      "observed_basis": "DIRECT_OBSERVATION_OF_SOURCE",
+      "reuse_basis": "INFERENCE_REQUIRES_CONTEXT_REVIEW",
+      "runtime": "NOT_RUN_EXCLUDED_BY_REQUEST",
+      "core_stage": {
+        "status": "OK",
+        "bundle_hash": "dd539a398dbf7feaf8de7f3d9141515b335ad08f637d948e615b0de24f3bf0a3",
+        "records": 5,
+        "canonical_writes": 0,
+        "ingestion": "REQUIRES_EXISTING_CORE_REVIEW"
+      }
+    },
+    {
+      "id": "T04",
+      "title": "Bridge data shape through a supported-operation live view",
+      "profile": "anchor",
+      "paths": [
+        "src/main/java/org/sinytra/connector/transformer/FieldToMethodTransformer.java",
+        "src/mod/java/org/sinytra/connector/mod/compat/fieldtypes/RedirectingIdMapper.java",
+        "src/mod/java/org/sinytra/connector/mod/compat/fieldtypes/RedirectingInt2ObjectMap.java"
+      ],
+      "condition": "Guest code expects a field/container shape changed by the host.",
+      "mechanism": "Rewrite selected field reads to getters and return facades translating numeric IDs to the host backing map without maintaining a detached copy.",
+      "invariant": "Supported reads/writes must refer to one authoritative backing state; unsupported collection operations remain explicit.",
+      "failure_pattern": "A copied map goes stale, or a nominal interface is mistaken for a complete implementation; particle entrySet/keySet/values throw here.",
+      "application": "Use live adapters for tightly scoped compatibility surfaces and list the exact supported operations.",
+      "limits": "The field rewrite has its own narrow matching assumptions; no general collection equivalence or arbitrary field migration is established.",
+      "repository": "https://github.com/Sinytra/Connector",
+      "revision": "7f68ac02291fde986119a3f5cab85436bed5c350",
+      "track": "ANCHOR",
+      "profile_id": "3161cd7cd84ba1add48de08b2318d1a10ad0681dc1fbc1f981ffd7156a7c20c0",
+      "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+      "evidence": [
+        {
+          "path": "src/main/java/org/sinytra/connector/transformer/FieldToMethodTransformer.java",
+          "document_id": "b06e60b4a257e9228002618da8c89fe4090429ebf5011b4936a34deed3784545",
+          "content_hash": "813db2ecf52b616495302fcd91c715aca38ad8cd920c41e684af08bd29d147e8",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/FieldToMethodTransformer.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/compat/fieldtypes/RedirectingIdMapper.java",
+          "document_id": "749d21dd637220cd1f3a04e94bb9dc3b8bf077b323eced311f86a2edd00304fe",
+          "content_hash": "5dd9cfbf47bfcced440ce30418192745e3d4e202913be5fd99e124d07120eac1",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/fieldtypes/RedirectingIdMapper.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/compat/fieldtypes/RedirectingInt2ObjectMap.java",
+          "document_id": "dcae9279b84da5cccba8508a6e82d785dcdc9893e9ed5d099471aad5276c5352",
+          "content_hash": "3540f559fee21f1693ef0815143129cde264f3a81c650f5578595664cb1db0d0",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/fieldtypes/RedirectingInt2ObjectMap.java"
+        }
+      ],
+      "observed_basis": "DIRECT_OBSERVATION_OF_SOURCE",
+      "reuse_basis": "INFERENCE_REQUIRES_CONTEXT_REVIEW",
+      "runtime": "NOT_RUN_EXCLUDED_BY_REQUEST",
+      "core_stage": {
+        "status": "OK",
+        "bundle_hash": "994853df118a6765d6cdd1648e4ebb5dd505417ddc941bf9edd62ad6eec51a2c",
+        "records": 6,
+        "canonical_writes": 0,
+        "ingestion": "REQUIRES_EXISTING_CORE_REVIEW"
+      }
+    },
+    {
+      "id": "T05",
+      "title": "Treat initialization timing as part of the API contract",
+      "profile": "anchor",
+      "paths": [
+        "src/mod/java/org/sinytra/connector/mod/ConnectorLoader.java",
+        "src/mod/java/org/sinytra/connector/mod/mixin/registries/ForgeRegistryMixin.java",
+        "src/main/java/org/sinytra/connector/service/ConnectorLoaderService.java"
+      ],
+      "condition": "The guest registers content at a time when host registries may already be frozen or wrapped.",
+      "mechanism": "Hook Fabric setup/preLaunch and main/physical-side entrypoints into specific host phases while selected registry adapters preserve the required registration window.",
+      "invariant": "An initializer is useful only when the host state it mutates is in a compatible lifecycle phase.",
+      "failure_pattern": "Calling the right entrypoint too late, before prerequisites exist, or after a host snapshot/freeze.",
+      "application": "Document phase preconditions and postconditions in extensible systems rather than treating callbacks as names alone.",
+      "limits": "Connector uses invasive host-version-specific behavior; copying an unfreeze strategy is not a portable recipe.",
+      "repository": "https://github.com/Sinytra/Connector",
+      "revision": "7f68ac02291fde986119a3f5cab85436bed5c350",
+      "track": "ANCHOR",
+      "profile_id": "3161cd7cd84ba1add48de08b2318d1a10ad0681dc1fbc1f981ffd7156a7c20c0",
+      "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+      "evidence": [
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/ConnectorLoader.java",
+          "document_id": "f50ebf1801316b8f7caf658cf64986842e2d9583a734d170b99b6c0c254d8acd",
+          "content_hash": "397f42132d6b176907dcd5494d89ae57d2d9d5774584d33b0384727655a280a5",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/ConnectorLoader.java"
+        },
+        {
+          "path": "src/mod/java/org/sinytra/connector/mod/mixin/registries/ForgeRegistryMixin.java",
+          "document_id": "37c3cca085fd2eaccd7622df007dce5b4a33366db75b31fa2b0efc72d9d0d455",
+          "content_hash": "c05596b69a0deb174461e4f06fe384044d9f5755e52265d2d2193a817f8db942",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/registries/ForgeRegistryMixin.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/service/ConnectorLoaderService.java",
+          "document_id": "9b351a9c5ceea7bdf79ac36c4b3ffcf2d3380bf8d17783db25b9f7fd201f4228",
+          "content_hash": "72bc154cb3af9debb0bc67fc76e1e55f5c1177b48a1c09777f0b0e613949b7ff",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/ConnectorLoaderService.java"
+        }
+      ],
+      "observed_basis": "DIRECT_OBSERVATION_OF_SOURCE",
+      "reuse_basis": "INFERENCE_REQUIRES_CONTEXT_REVIEW",
+      "runtime": "NOT_RUN_EXCLUDED_BY_REQUEST",
+      "core_stage": {
+        "status": "OK",
+        "bundle_hash": "bd516f287ecf3606e9a71defda8c2c89ef00c337ea415715ec9a18babf206476",
+        "records": 6,
+        "canonical_writes": 0,
+        "ingestion": "REQUIRES_EXISTING_CORE_REVIEW"
+      }
+    },
+    {
+      "id": "T06",
+      "title": "Supply both the API implementation and the real event trigger",
+      "profile": "ffapi-anchor",
+      "paths": [
+        "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/ServerTickEvents.java",
+        "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/MinecraftServerMixin.java",
+        "fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/event/ArrayBackedEvent.java"
+      ],
+      "condition": "A guest MOD registers a callback through a public API whose implementation is absent on the host.",
+      "mechanism": "FFAPI owns the array-backed Event callback implementation; its MinecraftServerMixin invokes END_SERVER_TICK at the selected tick hook.",
+      "invariant": "Listener storage/ordering and the source of invocation must both be supplied.",
+      "failure_pattern": "An API class exists but the callback never fires, fires at a different phase, or changes cancellation/ordering semantics.",
+      "application": "Trace API declaration to implementation to actual trigger before declaring an API shim complete.",
+      "limits": "This selected module is not evidence that all FFAPI events map to Forge EventBus or that all FFAPI internals are compatible.",
+      "repository": "https://github.com/Sinytra/ForgifiedFabricAPI",
+      "revision": "6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f",
+      "track": "ANCHOR",
+      "profile_id": "c20ce56a649c2257187b6265a6813b0b231f1b6e740c7ddd7723641ae8225ad7",
+      "index_snapshot_id": "34f82d7caa872d2ec846cfad138e56339742b3a1a30a27b63255589e84162fac",
+      "evidence": [
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/ServerTickEvents.java",
+          "document_id": "4796eaa151305d31c841bf2a4fe3fb1aa64338d56903b17c12f1de158bba7392",
+          "content_hash": "f2d93aa7576a2b4981d7462d581c2c47bb0e88b40479d1fafbb70017758e67ad",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/api/event/lifecycle/v1/ServerTickEvents.java"
+        },
+        {
+          "path": "fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/MinecraftServerMixin.java",
+          "document_id": "438bafed86067ffb01a2277ed770f8f5ea24bbadd074761e48536023fc2c8e17",
+          "content_hash": "9bd1e2770b3398185fa7076371c28943b392f06da580bcb965effcb4d93a9754",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-lifecycle-events-v1/src/main/java/net/fabricmc/fabric/mixin/event/lifecycle/MinecraftServerMixin.java"
+        },
+        {
+          "path": "fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/event/ArrayBackedEvent.java",
+          "document_id": "73a290aaa9cc2396d9149bb64aa42b89f976629506f96a9bfc6716acec343423",
+          "content_hash": "f800c508638998b1261ff90c58bad379ff84876b11dce4936cc1ddea975f8bf3",
+          "url": "https://github.com/Sinytra/ForgifiedFabricAPI/blob/6ba6353854d0138d5c6a0ca2a6c1eb00ab8a6a6f/fabric-api-base/src/main/java/net/fabricmc/fabric/impl/base/event/ArrayBackedEvent.java"
+        }
+      ],
+      "observed_basis": "DIRECT_OBSERVATION_OF_SOURCE",
+      "reuse_basis": "INFERENCE_REQUIRES_CONTEXT_REVIEW",
+      "runtime": "NOT_RUN_EXCLUDED_BY_REQUEST",
+      "core_stage": {
+        "status": "OK",
+        "bundle_hash": "388aae3f6ce147ea8ebd3007365f117e08c799edfb30f41fa48fd4e32f32b72e",
+        "records": 6,
+        "canonical_writes": 0,
+        "ingestion": "REQUIRES_EXISTING_CORE_REVIEW"
+      }
+    },
+    {
+      "id": "T07",
+      "title": "Make cache equivalence match the transformation inputs",
+      "profile": "anchor",
+      "paths": [
+        "src/main/java/org/sinytra/connector/ConnectorUtil.java",
+        "src/main/java/org/sinytra/connector/locator/EmbeddedDependencies.java",
+        "src/main/java/org/sinytra/connector/transformer/jar/JarTransformer.java"
+      ],
+      "condition": "A transformed artifact is reused across process/configuration/dependency changes.",
+      "mechanism": "The inspected cache marker includes Connector implementation version, physical distribution and input hash; output naming adds game/mapping context, and a cache hit bypasses fresh transforms.",
+      "invariant": "Reuse is valid only for the inputs actually represented by the key and validation rule.",
+      "failure_pattern": "Assuming all dependency/coremod/config changes are included when the key code does not independently fingerprint them; output existence is not an output-byte hash check.",
+      "application": "List every transformation determinant and either key it, invalidate explicitly or document the remaining boundary.",
+      "limits": "The uncovered-input conclusion is source-level inference, not an observed cache incident or measured performance result.",
+      "repository": "https://github.com/Sinytra/Connector",
+      "revision": "7f68ac02291fde986119a3f5cab85436bed5c350",
+      "track": "ANCHOR",
+      "profile_id": "3161cd7cd84ba1add48de08b2318d1a10ad0681dc1fbc1f981ffd7156a7c20c0",
+      "index_snapshot_id": "295736220b392f16fd49c297c5e36ac35552a638f17ce221d1b491597ad25164",
+      "evidence": [
+        {
+          "path": "src/main/java/org/sinytra/connector/ConnectorUtil.java",
+          "document_id": "8860d51e0d47df891822495dbacabcf1382733d4bb9bb45737cdf8eb205fa724",
+          "content_hash": "725aa716bd9b622b3b8e8ebb10df2b5a21cbb98dbf8de3c0802febb36efcf175",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/ConnectorUtil.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/locator/EmbeddedDependencies.java",
+          "document_id": "24c516260b94cb25b0ff69dd0757dbdd8ed9071da05b97e5046e1e141f5bbd9e",
+          "content_hash": "47742b17dda48705701512a4bbb846721f6082e6338225180440606bbde607d2",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/EmbeddedDependencies.java"
+        },
+        {
+          "path": "src/main/java/org/sinytra/connector/transformer/jar/JarTransformer.java",
+          "document_id": "baed16e77b924a2c6649d94fb6a0f05d9fd7a8674459eb427cb9e45131234516",
+          "content_hash": "0dffcf492c91f7e59f921e4a95c46be5d2ab5febf9421dacc4acefc8f9b923b8",
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/transformer/jar/JarTransformer.java"
+        }
+      ],
+      "observed_basis": "DIRECT_OBSERVATION_OF_SOURCE",
+      "reuse_basis": "INFERENCE_REQUIRES_CONTEXT_REVIEW",
+      "runtime": "NOT_RUN_EXCLUDED_BY_REQUEST",
+      "core_stage": {
+        "status": "OK",
+        "bundle_hash": "0ec8d15de8a4009c9a88ddc2c4bec1491b3af7da04d23107d61700f8e92876db",
+        "records": 6,
+        "canonical_writes": 0,
+        "ingestion": "REQUIRES_EXISTING_CORE_REVIEW"
+      }
+    },
+    {
+      "id": "T08",
+      "title": "Expose ordered transformer extension points with explicit constraints",
+      "profile": "frontier",
+      "paths": [
+        "transformer/src/main/java/org/sinytra/connector/transformer/plugin/PluginManager.java",
+        "transformer/src/main/java/org/sinytra/connector/transformer/api/TransformerPlugin.java",
+        "transformer/src/main/java/org/sinytra/connector/transformer/plugin/TransformerRegistrarImpl.java"
+      ],
+      "condition": "Multiple independent transforms and semantic patches need a predictable relationship.",
+      "mechanism": "Service-loaded plugins register per-jar transforms and patches through dedicated registrars; ordering constraints and priorities are explicit rather than inferred from discovery order.",
+      "invariant": "A consumer must not run before the producer or semantic precondition it depends on.",
+      "failure_pattern": "Equating plugin discovery order with execution order or collapsing transformer ordering and patch priority into one rule.",
+      "application": "Separate registration from ordering/evaluation and expose dependency constraints in a plugin pipeline.",
+      "limits": "FRONTIER-only API; classloader availability, cycles and exact host integration still matter. This is a redesign candidate, not a direct Forge1.20.1 backport.",
+      "repository": "https://github.com/Sinytra/Connector",
+      "revision": "c84a96a3c04aa4c5253032c338434de5329be08a",
+      "track": "FRONTIER",
+      "profile_id": "b6e8959ed87e41de945338b53b1b9e2a4040505238d2af0c5862779ee39e49b9",
+      "index_snapshot_id": "27882ce6d3a03ec5fac8cdfe8533824c6fe6c120c13a0ed82efae73e356dd8a0",
+      "evidence": [
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/plugin/PluginManager.java",
+          "document_id": "4787cd495a46393afa7680bfba73f52ec557a87cd8ccd21d654c11259eec35f6",
+          "content_hash": "2304c9b7ea7f48d196a81496555053c7cffcd080cde15a5c4f322dc7238961d1",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/plugin/PluginManager.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/api/TransformerPlugin.java",
+          "document_id": "d79767e8f3fe83e7042a327c53cd24aedf386d9af3914eaf9d8058f540dc76e5",
+          "content_hash": "cfd68b8ac9f4da681e5e9fc0fad298e6d9367a189f682ef702a406dba2a4d901",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/api/TransformerPlugin.java"
+        },
+        {
+          "path": "transformer/src/main/java/org/sinytra/connector/transformer/plugin/TransformerRegistrarImpl.java",
+          "document_id": "e01559e5a5db93c2aab21ba62870a9a1770b00f1f4aae9534454999cf785c754",
+          "content_hash": "61cefaa80795ce1797de26b602e1c2f1fece1cd55fbb88b8d553af3d292f93a8",
+          "url": "https://github.com/Sinytra/Connector/blob/c84a96a3c04aa4c5253032c338434de5329be08a/transformer/src/main/java/org/sinytra/connector/transformer/plugin/TransformerRegistrarImpl.java"
+        }
+      ],
+      "observed_basis": "DIRECT_OBSERVATION_OF_SOURCE",
+      "reuse_basis": "INFERENCE_REQUIRES_CONTEXT_REVIEW",
+      "runtime": "NOT_RUN_EXCLUDED_BY_REQUEST",
+      "core_stage": {
+        "status": "OK",
+        "bundle_hash": "28e5eb6a29bd76bf1a5787a1297eebb532ff8fee6ee8f44bdac8ad8f38627728",
+        "records": 6,
+        "canonical_writes": 0,
+        "ingestion": "REQUIRES_EXISTING_CORE_REVIEW"
+      }
+    }
+  ],
+  "canonical_writes": 0,
+  "claims_created": 0,
+  "ingestion": "REQUIRES_EXISTING_CORE_REVIEW"
+}

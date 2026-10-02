@@ -1,0 +1,38 @@
+{
+  "record_version": "1.0",
+  "scenario_id": "R2",
+  "status": "R2_EXECUTED",
+  "repository": "genkimorimori252525-oss/KNEEKURA-TECH-HUB",
+  "branch": "jolly/minecraft-tech-department-2026-09-22",
+  "run_id": 35816706637,
+  "runner_name": "Jolly-TechHub",
+  "runner_os": "Windows",
+  "runner_arch": "X64",
+  "tech_hub_input_sha": "1c2053211764b5ed80f7b02f4030a3d78981f9d3",
+  "runtime_probe_sha256": "7da80d338aad59b8de560739086152ee21185ae85587f864de7fe14cb293e330",
+  "sources": {
+    "anchor": "a7dd8f13c653e137f977f5ffaa870fcb20fc1625",
+    "frontier": "793c4d4c7b0a2892f702cbb9a8d751fbe7218828"
+  },
+  "tracks": {
+    "anchor": {
+      "path": "departments/minecraft/mods/twilight-forest/runtime/anchor/35816706637/r2",
+      "entry_success": true,
+      "entry_command_elapsed_seconds": 0.065263,
+      "generated_twilight_chunk_count": 0
+    },
+    "frontier": {
+      "path": "departments/minecraft/mods/twilight-forest/runtime/frontier/35816706637/r2",
+      "entry_success": false,
+      "entry_command_elapsed_seconds": null,
+      "generated_twilight_chunk_count": 0
+    }
+  },
+  "boundaries": {
+    "scenario": "R2 deterministic first Twilight dimension entry only",
+    "r1_reused_as_r2": false,
+    "r3_through_r9_measured": false,
+    "overall_performance_score": false,
+    "main_merged": false
+  }
+}

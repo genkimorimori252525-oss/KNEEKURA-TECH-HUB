@@ -1,0 +1,232 @@
+{
+  "catalog_version": "1.0",
+  "source_snapshot": {
+    "repository": "TeamTwilight/twilightforest",
+    "commit": "a7dd8f13c653e137f977f5ffaa870fcb20fc1625",
+    "minecraft": "1.20.1",
+    "loader": "Forge",
+    "release_source_candidate": "4.3.2508"
+  },
+  "batch": 4,
+  "range": [
+    45,
+    59
+  ],
+  "count": 15,
+  "records": [
+    {
+      "class_name": "QuestRamRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/QuestRamRenderer.java",
+      "blob_sha": "30ec20e2e18c913ace4fc3ece0f4bc127052b298",
+      "superclass": "MobRenderer",
+      "literal_pngs": [
+        "questram.png",
+        "questram_lines.png"
+      ],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "model_classes": [],
+      "notable_resource_paths": []
+    },
+    {
+      "class_name": "RovingCubeRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/RovingCubeRenderer.java",
+      "blob_sha": "e41ace5edac6a0aacdd2f1546cfef76b93c89071",
+      "superclass": "RovingCube",
+      "literal_pngs": [
+        "cubeofannihilation.png"
+      ],
+      "tf_model_layers": [
+        "CUBE_OF_ANNIHILATION"
+      ],
+      "minecraft_model_layers": [],
+      "model_classes": [
+        "CubeOfAnnihilationModel"
+      ],
+      "notable_resource_paths": []
+    },
+    {
+      "class_name": "SlideBlockRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/SlideBlockRenderer.java",
+      "blob_sha": "f32b0fa1606970a1e246c353c00096531a229d8a",
+      "superclass": "EntityRenderer",
+      "literal_pngs": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "model_classes": [],
+      "notable_resource_paths": []
+    },
+    {
+      "class_name": "SlimeBeetleRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/SlimeBeetleRenderer.java",
+      "blob_sha": "f7e5be2fbe30d2523e1e756a0b0edbc89a673bdb",
+      "superclass": "MobRenderer",
+      "literal_pngs": [
+        "slimebeetle.png"
+      ],
+      "tf_model_layers": [
+        "NEW_SLIME_BEETLE_TAIL"
+      ],
+      "minecraft_model_layers": [],
+      "model_classes": [
+        "SlimeBeetleModel"
+      ],
+      "notable_resource_paths": []
+    },
+    {
+      "class_name": "SnowGuardianRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/SnowGuardianRenderer.java",
+      "blob_sha": "df28281876e7bc23e340c43e84cd415732c05910",
+      "superclass": "TFBipedRenderer",
+      "literal_pngs": [
+        "textures/entity/zombie/zombie.png"
+      ],
+      "tf_model_layers": [
+        "NOOP"
+      ],
+      "minecraft_model_layers": [
+        "PLAYER_INNER_ARMOR",
+        "PLAYER_OUTER_ARMOR"
+      ],
+      "model_classes": [
+        "NoopModel",
+        "HumanoidModel"
+      ],
+      "notable_resource_paths": [
+        "textures/entity/zombie/zombie.png"
+      ]
+    },
+    {
+      "class_name": "SnowQueenRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/SnowQueenRenderer.java",
+      "blob_sha": "6d80a02990b72b21220f1a7e51093ee0c7aabfb1",
+      "superclass": "HumanoidMobRenderer",
+      "literal_pngs": [
+        "snowqueen.png"
+      ],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "model_classes": [],
+      "notable_resource_paths": []
+    },
+    {
+      "class_name": "StableIceCoreRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/StableIceCoreRenderer.java",
+      "blob_sha": "07a136a03c6c527338cc5cf15cb756e6ac60fdb0",
+      "superclass": "TFGenericMobRenderer",
+      "literal_pngs": [
+        "iceshooter.png"
+      ],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "model_classes": [],
+      "notable_resource_paths": []
+    },
+    {
+      "class_name": "SwarmSpiderRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/SwarmSpiderRenderer.java",
+      "blob_sha": "d7da910183c28e4f511b5f5d7b0bd0336f4f9c9a",
+      "superclass": "SpiderRenderer",
+      "literal_pngs": [
+        "swarmspider.png"
+      ],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "model_classes": [],
+      "notable_resource_paths": []
+    },
+    {
+      "class_name": "TFBipedRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/TFBipedRenderer.java",
+      "blob_sha": "9719b4dc24d908f7f1d737858a6a312bf1bd7292",
+      "superclass": "Mob",
+      "literal_pngs": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "model_classes": [],
+      "notable_resource_paths": [
+        "textures"
+      ]
+    },
+    {
+      "class_name": "TFGenericMobRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/TFGenericMobRenderer.java",
+      "blob_sha": "ca2a0efdae88192ffc7c7fdac630591e8fb9b9c6",
+      "superclass": "Mob",
+      "literal_pngs": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "model_classes": [],
+      "notable_resource_paths": [
+        "textures"
+      ]
+    },
+    {
+      "class_name": "TFGhastRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/TFGhastRenderer.java",
+      "blob_sha": "5f3211b97ac235d177af229a0f634e800db3827e",
+      "superclass": "CarminiteGhastguard",
+      "literal_pngs": [
+        "towerghast.png",
+        "towerghast_openeyes.png",
+        "towerghast_fire.png"
+      ],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "model_classes": [],
+      "notable_resource_paths": []
+    },
+    {
+      "class_name": "TFGiantRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/TFGiantRenderer.java",
+      "blob_sha": "091225e374132b0a21dc0a366e40f3340a1fa40b",
+      "superclass": "GiantMiner",
+      "literal_pngs": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [
+        "PLAYER",
+        "PLAYER_SLIM",
+        "PLAYER_INNER_ARMOR",
+        "PLAYER_OUTER_ARMOR"
+      ],
+      "model_classes": [
+        "PlayerModel",
+        "HumanoidModel"
+      ],
+      "notable_resource_paths": []
+    },
+    {
+      "class_name": "ThrownBlockRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/ThrownBlockRenderer.java",
+      "blob_sha": "a4539b2000454970665830a5c3aa0458d24c5182",
+      "superclass": "EntityRenderer",
+      "literal_pngs": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "model_classes": [],
+      "notable_resource_paths": []
+    },
+    {
+      "class_name": "ThrownIceRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/ThrownIceRenderer.java",
+      "blob_sha": "b0a7e1b2db530ea147f5661bace53e7719695638",
+      "superclass": "EntityRenderer",
+      "literal_pngs": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "model_classes": [],
+      "notable_resource_paths": []
+    },
+    {
+      "class_name": "ThrownWepRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/ThrownWepRenderer.java",
+      "blob_sha": "bc2539dbea80cb9cb606e6b2f405d98821da43d1",
+      "superclass": "EntityRenderer",
+      "literal_pngs": [],
+      "tf_model_layers": [],
+      "minecraft_model_layers": [],
+      "model_classes": [],
+      "notable_resource_paths": []
+    }
+  ]
+}

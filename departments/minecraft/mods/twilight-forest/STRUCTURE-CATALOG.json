@@ -1,0 +1,346 @@
+{
+  "catalog_version": "1.0",
+  "source_snapshot": {
+    "repository": "TeamTwilight/twilightforest",
+    "commit": "793c4d4c7b0a2892f702cbb9a8d751fbe7218828",
+    "minecraft": "26.1.2",
+    "loader": "NeoForge"
+  },
+  "evidence": {
+    "registry_source": "src/main/java/twilightforest/init/TFStructures.java",
+    "registry_blob": "c9ab851b0118c1775c3b1d2362de4a9c5180530d",
+    "generated_structure_root": "src/generated/resources/data/twilightforest/worldgen/structure",
+    "generated_structure_set_root": "src/generated/resources/data/twilightforest/worldgen/structure_set"
+  },
+  "counts": {
+    "declared_resource_keys": 25,
+    "bootstrapped_and_generated": 21,
+    "declared_only": 4,
+    "own_generated_structure_sets": 19
+  },
+  "notes": [
+    "DECLARED_ONLY means a ResourceKey is declared in TFStructures but the pinned snapshot does not bootstrap it and no generated structure JSON was found.",
+    "mushroom_tower is bootstrapped/generated but no own generated structure_set JSON was found in this snapshot; this does not prove it can never be referenced indirectly.",
+    "Landmark-grid placement and avoid-landmark-grid placement are distinct placement strategies."
+  ],
+  "placements": {
+    "camp": {
+      "type": "twilightforest:avoid_landmark_grid",
+      "salt": 701432212,
+      "separation": 14,
+      "spacing": 18,
+      "spread_type": "triangular",
+      "avoid_additional_structures": {
+        "twilightforest:fallen_trunk": 2,
+        "twilightforest:hollow_tree": 1
+      }
+    },
+    "fallen_trunk": {
+      "type": "twilightforest:avoid_landmark_grid",
+      "frequency": 0.8,
+      "salt": 1275623845,
+      "separation": 5,
+      "spacing": 7,
+      "spread_type": "triangular",
+      "exclusion_zone": {
+        "chunk_count": 1,
+        "other_set": "twilightforest:hollow_tree"
+      }
+    },
+    "hollow_tree": {
+      "type": "twilightforest:avoid_landmark_grid",
+      "frequency": 0.5,
+      "salt": 34481210,
+      "separation": 5,
+      "spacing": 7,
+      "spread_type": "triangular",
+      "members": [
+        {
+          "structure": "twilightforest:hollow_tree",
+          "weight": 1
+        },
+        {
+          "structure": "twilightforest:swamp_hollow_tree",
+          "weight": 1
+        }
+      ]
+    }
+  },
+  "structures": [
+    {
+      "id": "aurora_palace",
+      "status": "ACTIVE",
+      "type": "twilightforest:aurora_palace",
+      "biomes": "#twilightforest:valid_aurora_palace_biomes",
+      "step": "surface_structures",
+      "terrain_adaptation": null,
+      "placement_family": "landmark_grid",
+      "has_own_structure_set": true,
+      "structure_grid_lock": null
+    },
+    {
+      "id": "camp",
+      "status": "ACTIVE",
+      "type": "twilightforest:camp",
+      "biomes": "#twilightforest:valid_camp_biomes",
+      "step": "surface_structures",
+      "terrain_adaptation": "beard_box",
+      "placement_family": "avoid_landmark_grid",
+      "has_own_structure_set": true,
+      "structure_grid_lock": null
+    },
+    {
+      "id": "dark_tower",
+      "status": "ACTIVE",
+      "type": "twilightforest:dark_tower",
+      "biomes": "#twilightforest:valid_dark_tower_biomes",
+      "step": "surface_structures",
+      "terrain_adaptation": "beard_thin",
+      "placement_family": "landmark_grid",
+      "has_own_structure_set": true,
+      "structure_grid_lock": null
+    },
+    {
+      "id": "fallen_trunk",
+      "status": "ACTIVE",
+      "type": "twilightforest:fallen_trunk",
+      "biomes": "#twilightforest:valid_hollow_tree_biomes",
+      "step": "surface_structures",
+      "terrain_adaptation": null,
+      "placement_family": "avoid_landmark_grid",
+      "has_own_structure_set": true,
+      "structure_grid_lock": null
+    },
+    {
+      "id": "final_castle",
+      "status": "ACTIVE",
+      "type": "twilightforest:final_castle",
+      "biomes": "#twilightforest:valid_final_castle_biomes",
+      "step": "surface_structures",
+      "terrain_adaptation": "beard_box",
+      "placement_family": "landmark_grid",
+      "has_own_structure_set": true,
+      "structure_grid_lock": null
+    },
+    {
+      "id": "giant_house",
+      "status": "ACTIVE",
+      "type": "twilightforest:giant_house",
+      "biomes": "#twilightforest:valid_giant_house_biomes",
+      "step": "top_layer_modification",
+      "terrain_adaptation": null,
+      "placement_family": "landmark_grid",
+      "has_own_structure_set": true,
+      "structure_grid_lock": null
+    },
+    {
+      "id": "hedge_maze",
+      "status": "ACTIVE",
+      "type": "twilightforest:hedge_maze",
+      "biomes": "#twilightforest:valid_hedge_maze_biomes",
+      "step": "surface_structures",
+      "terrain_adaptation": "beard_box",
+      "placement_family": "landmark_grid",
+      "has_own_structure_set": true,
+      "structure_grid_lock": "twilightforest:hedge_maze"
+    },
+    {
+      "id": "hollow_tree",
+      "status": "ACTIVE",
+      "type": "twilightforest:hollow_tree",
+      "biomes": "#twilightforest:valid_hollow_tree_biomes",
+      "step": "surface_structures",
+      "terrain_adaptation": null,
+      "placement_family": "avoid_landmark_grid",
+      "has_own_structure_set": true,
+      "structure_grid_lock": null
+    },
+    {
+      "id": "hydra_lair",
+      "status": "ACTIVE",
+      "type": "twilightforest:hydra_lair",
+      "biomes": "#twilightforest:valid_hydra_lair_biomes",
+      "step": "surface_structures",
+      "terrain_adaptation": null,
+      "placement_family": "landmark_grid",
+      "has_own_structure_set": true,
+      "structure_grid_lock": null
+    },
+    {
+      "id": "knight_stronghold",
+      "status": "ACTIVE",
+      "type": "twilightforest:knight_stronghold",
+      "biomes": "#twilightforest:valid_knight_stronghold_biomes",
+      "step": "underground_structures",
+      "terrain_adaptation": "bury",
+      "placement_family": "landmark_grid",
+      "has_own_structure_set": true,
+      "structure_grid_lock": null
+    },
+    {
+      "id": "labyrinth",
+      "status": "ACTIVE",
+      "type": "twilightforest:labyrinth",
+      "biomes": "#twilightforest:valid_labyrinth_biomes",
+      "step": "underground_structures",
+      "terrain_adaptation": "bury",
+      "placement_family": "landmark_grid",
+      "has_own_structure_set": true,
+      "structure_grid_lock": null
+    },
+    {
+      "id": "large_hollow_hill",
+      "status": "ACTIVE",
+      "type": "twilightforest:hollow_hill",
+      "biomes": "#twilightforest:valid_hollow_hill_biomes",
+      "step": "surface_structures",
+      "terrain_adaptation": null,
+      "placement_family": "landmark_grid",
+      "has_own_structure_set": true,
+      "structure_grid_lock": "twilightforest:large_hollow_hill"
+    },
+    {
+      "id": "lich_tower",
+      "status": "ACTIVE",
+      "type": "twilightforest:lich_tower",
+      "biomes": "#twilightforest:valid_lich_tower_biomes",
+      "step": "surface_structures",
+      "terrain_adaptation": "beard_thin",
+      "placement_family": "landmark_grid",
+      "has_own_structure_set": true,
+      "structure_grid_lock": "twilightforest:lich_tower"
+    },
+    {
+      "id": "medium_hollow_hill",
+      "status": "ACTIVE",
+      "type": "twilightforest:hollow_hill",
+      "biomes": "#twilightforest:valid_hollow_hill_biomes",
+      "step": "surface_structures",
+      "terrain_adaptation": null,
+      "placement_family": "landmark_grid",
+      "has_own_structure_set": true,
+      "structure_grid_lock": "twilightforest:medium_hollow_hill"
+    },
+    {
+      "id": "mushroom_tower",
+      "status": "ACTIVE",
+      "type": "twilightforest:mushroom_tower",
+      "biomes": "#twilightforest:valid_mushroom_tower_biomes",
+      "step": "surface_structures",
+      "terrain_adaptation": null,
+      "placement_family": null,
+      "has_own_structure_set": false,
+      "structure_grid_lock": null
+    },
+    {
+      "id": "naga_courtyard",
+      "status": "ACTIVE",
+      "type": "twilightforest:naga_courtyard",
+      "biomes": "#twilightforest:valid_naga_courtyard_biomes",
+      "step": "surface_structures",
+      "terrain_adaptation": "beard_thin",
+      "placement_family": "landmark_grid",
+      "has_own_structure_set": true,
+      "structure_grid_lock": "twilightforest:naga_courtyard"
+    },
+    {
+      "id": "quest_grove",
+      "status": "ACTIVE",
+      "type": "twilightforest:quest_grove",
+      "biomes": "#twilightforest:valid_quest_grove_biomes",
+      "step": "surface_structures",
+      "terrain_adaptation": "beard_thin",
+      "placement_family": "landmark_grid",
+      "has_own_structure_set": true,
+      "structure_grid_lock": null
+    },
+    {
+      "id": "small_hollow_hill",
+      "status": "ACTIVE",
+      "type": "twilightforest:hollow_hill",
+      "biomes": "#twilightforest:valid_hollow_hill_biomes",
+      "step": "surface_structures",
+      "terrain_adaptation": null,
+      "placement_family": "landmark_grid",
+      "has_own_structure_set": true,
+      "structure_grid_lock": "twilightforest:small_hollow_hill"
+    },
+    {
+      "id": "swamp_hollow_tree",
+      "status": "ACTIVE",
+      "type": "twilightforest:hollow_tree",
+      "biomes": "twilightforest:swamp",
+      "step": "surface_structures",
+      "terrain_adaptation": null,
+      "placement_family": "avoid_landmark_grid",
+      "has_own_structure_set": true,
+      "structure_grid_lock": null
+    },
+    {
+      "id": "troll_cave",
+      "status": "ACTIVE",
+      "type": "twilightforest:troll_cave",
+      "biomes": "#twilightforest:valid_troll_cave_biomes",
+      "step": "underground_structures",
+      "terrain_adaptation": "bury",
+      "placement_family": "landmark_grid",
+      "has_own_structure_set": true,
+      "structure_grid_lock": null
+    },
+    {
+      "id": "yeti_cave",
+      "status": "ACTIVE",
+      "type": "twilightforest:yeti_cave",
+      "biomes": "#twilightforest:valid_yeti_cave_biomes",
+      "step": "surface_structures",
+      "terrain_adaptation": null,
+      "placement_family": "landmark_grid",
+      "has_own_structure_set": true,
+      "structure_grid_lock": null
+    },
+    {
+      "id": "quest_island",
+      "status": "DECLARED_ONLY",
+      "type": null,
+      "biomes": null,
+      "step": null,
+      "terrain_adaptation": null,
+      "placement_family": null,
+      "has_own_structure_set": false,
+      "structure_grid_lock": null
+    },
+    {
+      "id": "druid_grove",
+      "status": "DECLARED_ONLY",
+      "type": null,
+      "biomes": null,
+      "step": null,
+      "terrain_adaptation": null,
+      "placement_family": null,
+      "has_own_structure_set": false,
+      "structure_grid_lock": null
+    },
+    {
+      "id": "floating_ruins",
+      "status": "DECLARED_ONLY",
+      "type": null,
+      "biomes": null,
+      "step": null,
+      "terrain_adaptation": null,
+      "placement_family": null,
+      "has_own_structure_set": false,
+      "structure_grid_lock": null
+    },
+    {
+      "id": "world_tree",
+      "status": "DECLARED_ONLY",
+      "type": null,
+      "biomes": null,
+      "step": null,
+      "terrain_adaptation": null,
+      "placement_family": null,
+      "has_own_structure_set": false,
+      "structure_grid_lock": null
+    }
+  ]
+}

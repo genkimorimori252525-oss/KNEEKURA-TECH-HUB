@@ -1,0 +1,67 @@
+{
+  "status": "PARTIAL",
+  "history_hash": "9ff2128604f3e552dd9f8fb99b3f43f70bbd02c4c49906b9b93ff8b76ba29147",
+  "cases": 2,
+  "canonical_writes": 0,
+  "runtime_attestation": false,
+  "analysis_scope": {
+    "head_revision": "87d2086b4121167e5c3baa19da8963692b8e0450",
+    "history_window": "Bounded live batch 2026-09-30 13:43:24Z to 14:08:24Z and immediately following offline diagnosis; subsequent actual Forge task-layer offline repair verification",
+    "queries": [
+      "empty optional generated-resource root preflight rejection",
+      "duplicate gameDir after Forge RunConfig append"
+    ],
+    "track": "ANCHOR"
+  },
+  "coverage": {
+    "deferred": [
+      "Any newly authorized live acceptance"
+    ],
+    "inspected_evidence_ids": [
+      "batch-summary",
+      "client-execution",
+      "client-explicit-recovery",
+      "client-recovery-execution",
+      "client-recovery-profile",
+      "control-execution",
+      "control-explicit-recovery",
+      "control-recovery-execution",
+      "control-recovery-profile",
+      "dependencies-before",
+      "dependencies-repair",
+      "empty-root-green",
+      "empty-root-red",
+      "empty-root-regression",
+      "evidence-inventory",
+      "final-adjacent-harness-failure",
+      "final-provider-harness-source",
+      "forge-config-bytecode",
+      "forge-expansion-intermediate",
+      "forge-expansion-intermediate-adjacent",
+      "forge-expansion-intermediate-green",
+      "forge-expansion-intermediate-tests",
+      "forge-task-adjacent-green",
+      "forge-task-bytecode",
+      "forge-task-green",
+      "forge-task-inspection",
+      "forge-task-red",
+      "forge-task-regression",
+      "forge-task-repair",
+      "forge-token-provider-red",
+      "history-adapter-tests",
+      "hydra-1-log",
+      "hydra-1-receipt",
+      "hydra-2-log",
+      "hydra-2-receipt",
+      "independent-review",
+      "init-before",
+      "init-insufficient-repair",
+      "ordinary-provider-green",
+      "ordinary-provider-red",
+      "repair-evidence-inventory",
+      "staff-server-receipt"
+    ],
+    "status": "PARTIAL",
+    "unavailable": []
+  }
+}

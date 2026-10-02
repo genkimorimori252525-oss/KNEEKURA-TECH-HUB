@@ -1,0 +1,1157 @@
+{
+  "format": "kneekura.failure-history.v1",
+  "repository": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB.git",
+  "scope": {
+    "track": "ANCHOR",
+    "head_revision": "a57ffb32adc6a0e1f0a5d06cf45d58c407fe1679",
+    "history_window": "Closed recovery-20260930-v2 batch; original deadline 16:04 UTC, all execution threads closed 16:00:23 UTC, empty desktop process probe 16:01:36 UTC; final offline command and signed-diagnostic contract verification",
+    "queries": [
+      "player-only gamemode bare UUID rejection",
+      "control Gradle daemon disappearance",
+      "invoker observer HTTP 409"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "inspected_evidence_ids": [
+      "batch-cleanup",
+      "batch-status",
+      "client-log",
+      "client-receipt",
+      "command-green",
+      "command-independent-review",
+      "command-parser-output",
+      "command-red",
+      "command-verification",
+      "control-log",
+      "control-receipt",
+      "creative-control-result",
+      "diagnostic-baseline-red",
+      "diagnostic-client",
+      "diagnostic-green",
+      "diagnostic-http200-red",
+      "diagnostic-privacy-red",
+      "diagnostic-summary-hash-red",
+      "diagnostic-tests",
+      "diagnostic-transport",
+      "equip-phase",
+      "equip-request",
+      "evidence-inventory",
+      "fixed-command-builder",
+      "fixed-command-parser-harness",
+      "fixed-command-tests",
+      "gamemode-parser-source",
+      "hydra-014-handshake",
+      "hydra-014-phase",
+      "hydra-014-raw",
+      "hydra-018-handshake",
+      "hydra-018-phase",
+      "hydra-018-raw",
+      "hydra-019-handshake",
+      "hydra-019-phase",
+      "hydra-019-raw",
+      "hydra-capture-review",
+      "hydra-receipt",
+      "invoker-phase",
+      "invoker-server-before",
+      "observer-before",
+      "offline-repair-inventory",
+      "pair-before",
+      "parser-input-identity",
+      "players-parser-source",
+      "post-run-memory",
+      "process-probe",
+      "registered-server",
+      "resource-diagnosis-proposal",
+      "runtime-before",
+      "server-log",
+      "transport-before"
+    ],
+    "deferred": [
+      "Any newly authorized runtime after the command and diagnostic fixes"
+    ],
+    "unavailable": [
+      "PID-attributed original control-daemon failure cause",
+      "Exact original invoker observer HTTP 409 reason"
+    ]
+  },
+  "scope_evidence": [
+    {
+      "id": "evidence-inventory",
+      "role": "search_inventory",
+      "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+      "document_id": "8c33c38d53672ecfd90d9733f648017961a59566447c9504bfd2bc27a1aec9e6",
+      "content_sha256": "f024fc5978b3e6ae8c37c265949b5719b07add13231b9d16f56433b2bf3faf39",
+      "source_capture": {
+        "size_bytes": 8251,
+        "sha256": "f024fc5978b3e6ae8c37c265949b5719b07add13231b9d16f56433b2bf3faf39",
+        "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+      }
+    },
+    {
+      "id": "batch-status",
+      "role": "experiment",
+      "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+      "document_id": "85601f0839b287be3f16a981d5b77cea55b6574acd8f31408cc00b5aef9cf3a1",
+      "content_sha256": "5eb449181e2a5f8ec0de47e80959fe159a39009626356278b48b1e0c47198ee9",
+      "source_capture": {
+        "size_bytes": 2923,
+        "sha256": "5eb449181e2a5f8ec0de47e80959fe159a39009626356278b48b1e0c47198ee9",
+        "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+      }
+    },
+    {
+      "id": "batch-cleanup",
+      "role": "experiment",
+      "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+      "document_id": "be5ecf1f8e87c751d39140814eaeab79d17462efcc3b66fc1862c3e85bab4e53",
+      "content_sha256": "d4eee23e6f419f3c541a9834a3dd729d0bfa01aaa3863d1d744db8d1c6fa4806",
+      "source_capture": {
+        "size_bytes": 94,
+        "sha256": "d4eee23e6f419f3c541a9834a3dd729d0bfa01aaa3863d1d744db8d1c6fa4806",
+        "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+      }
+    },
+    {
+      "id": "process-probe",
+      "role": "experiment",
+      "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+      "document_id": "e54b3f16720ffbdfd99208629ddd5923073fef51fd09aac72cb37e736cb65add",
+      "content_sha256": "f13c2b0034f090641cc37f863dac50ecda65199041fad7f3a1fba2a2f1ae55b6",
+      "source_capture": {
+        "size_bytes": 50,
+        "sha256": "f13c2b0034f090641cc37f863dac50ecda65199041fad7f3a1fba2a2f1ae55b6",
+        "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+      }
+    },
+    {
+      "id": "hydra-receipt",
+      "role": "experiment",
+      "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+      "document_id": "2fe77e4f703b301ebb89b0ea160c4bd4737388a77803bc09435ed8d723292452",
+      "content_sha256": "b166d6044283da3d07ea7976a6713fe5a878c6e602c94c40f029c2ae566e16ec",
+      "source_capture": {
+        "size_bytes": 2211,
+        "sha256": "b166d6044283da3d07ea7976a6713fe5a878c6e602c94c40f029c2ae566e16ec",
+        "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+      }
+    },
+    {
+      "id": "hydra-capture-review",
+      "role": "experiment",
+      "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+      "document_id": "532f61d6182713ca2fbdd7716fe964499d6596e0ebe5ac3481c9d13fcdb308ac",
+      "content_sha256": "88e4945aa6c80724e21b60c8fafffa40b285a4cc66e8b0e0856e05aee6b80acc",
+      "source_capture": {
+        "size_bytes": 3795,
+        "sha256": "88e4945aa6c80724e21b60c8fafffa40b285a4cc66e8b0e0856e05aee6b80acc",
+        "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+      }
+    },
+    {
+      "id": "hydra-014-raw",
+      "role": "experiment",
+      "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+      "document_id": "258142642791cfbcc9c767c8032d0bfe8d6b35fa2de1728f1198abc123233a42",
+      "content_sha256": "20605e836279a390cde71263e4f22aafc4dc146459265665f990dfb4f5256b36",
+      "source_capture": {
+        "size_bytes": 228190,
+        "sha256": "20605e836279a390cde71263e4f22aafc4dc146459265665f990dfb4f5256b36",
+        "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+      }
+    },
+    {
+      "id": "hydra-014-phase",
+      "role": "experiment",
+      "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+      "document_id": "087e34c3d7ca8d0bca56a08a4f19b0f62560c25d3430431b810f69fd7f663759",
+      "content_sha256": "57241b7c46efb41c7cad89c7f6f03e22c735441d4af66408b19091bc361ca9bf",
+      "source_capture": {
+        "size_bytes": 1667,
+        "sha256": "57241b7c46efb41c7cad89c7f6f03e22c735441d4af66408b19091bc361ca9bf",
+        "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+      }
+    },
+    {
+      "id": "hydra-014-handshake",
+      "role": "experiment",
+      "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+      "document_id": "23b854f0dbf0741f32923d2b9dbfca7a6a589e23df009a3e08a65c508cc2848d",
+      "content_sha256": "4f34b69c19e3e18dbf3cbd5f12c90272090b08a9889de18fdfd817367d9adc0e",
+      "source_capture": {
+        "size_bytes": 1719,
+        "sha256": "4f34b69c19e3e18dbf3cbd5f12c90272090b08a9889de18fdfd817367d9adc0e",
+        "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+      }
+    },
+    {
+      "id": "hydra-018-raw",
+      "role": "experiment",
+      "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+      "document_id": "981daa108a785650fd27435a48348fc65a84b14d36c5d3b235d7d908edac06d3",
+      "content_sha256": "f80cc36bd9397684d3f40ac3e117194cf1f70beb0b0867459071d7b7b2c18510",
+      "source_capture": {
+        "size_bytes": 335609,
+        "sha256": "f80cc36bd9397684d3f40ac3e117194cf1f70beb0b0867459071d7b7b2c18510",
+        "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+      }
+    },
+    {
+      "id": "hydra-018-phase",
+      "role": "experiment",
+      "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+      "document_id": "0e0a6e10937030810efc370b73ade87a25e60b021fffaa6987b89f2c45c99373",
+      "content_sha256": "9d887d229eab0e4b51305f91a95f49701e4a78a97c76e5075de655eda8c68eca",
+      "source_capture": {
+        "size_bytes": 1668,
+        "sha256": "9d887d229eab0e4b51305f91a95f49701e4a78a97c76e5075de655eda8c68eca",
+        "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+      }
+    },
+    {
+      "id": "hydra-018-handshake",
+      "role": "experiment",
+      "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+      "document_id": "e5c7d4fcc7eedad5b893a2b5c03ef2150dbcee23826f87f382b85b19e53c522e",
+      "content_sha256": "4f34b69c19e3e18dbf3cbd5f12c90272090b08a9889de18fdfd817367d9adc0e",
+      "source_capture": {
+        "size_bytes": 1719,
+        "sha256": "4f34b69c19e3e18dbf3cbd5f12c90272090b08a9889de18fdfd817367d9adc0e",
+        "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+      }
+    },
+    {
+      "id": "hydra-019-raw",
+      "role": "experiment",
+      "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+      "document_id": "28a30a530d9a0fd806e95f6311ac47c17797c0abe00597a9c60f7576f338258d",
+      "content_sha256": "e009b1f44ac13cc51c757797fe7031d8512f88c156c90338f4e27374d37563d9",
+      "source_capture": {
+        "size_bytes": 393503,
+        "sha256": "e009b1f44ac13cc51c757797fe7031d8512f88c156c90338f4e27374d37563d9",
+        "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+      }
+    },
+    {
+      "id": "hydra-019-phase",
+      "role": "experiment",
+      "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+      "document_id": "f7e4e44d95fb1425ca434183fbb95f3cb4fa2a898833a57488631355782d78ec",
+      "content_sha256": "3dcfcf6b7b7f011d04c359740b376f80b29baf44adf03146589a23c3119fc9bc",
+      "source_capture": {
+        "size_bytes": 1675,
+        "sha256": "3dcfcf6b7b7f011d04c359740b376f80b29baf44adf03146589a23c3119fc9bc",
+        "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+      }
+    },
+    {
+      "id": "hydra-019-handshake",
+      "role": "experiment",
+      "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+      "document_id": "a02f1846bf20b6a31bddc566217dc9aa5ddfdbb8504f2cbffdb1896301befba6",
+      "content_sha256": "4f34b69c19e3e18dbf3cbd5f12c90272090b08a9889de18fdfd817367d9adc0e",
+      "source_capture": {
+        "size_bytes": 1719,
+        "sha256": "4f34b69c19e3e18dbf3cbd5f12c90272090b08a9889de18fdfd817367d9adc0e",
+        "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+      }
+    },
+    {
+      "id": "offline-repair-inventory",
+      "role": "search_inventory",
+      "index_snapshot_id": "be537721be37bb9eb16938dfbafdebb40568cac7bf6eecf849eef0effc5a8929",
+      "document_id": "77c0df4c6132ad895bb982840c536640f843df9981d0b4ec4a221b2825b299ad",
+      "content_sha256": "6c50bf92fc1061fab136b7d74f8434578decbcb2016a7ac86afd4337a7529f23",
+      "source_capture": {
+        "size_bytes": 2816,
+        "sha256": "6c50bf92fc1061fab136b7d74f8434578decbcb2016a7ac86afd4337a7529f23",
+        "snapshot_copied_at": "2026-09-30T16:19:19.566049+00:00"
+      }
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "M5-PLAYER-ONLY-GAMEMODE-UUID-RECOVERY-V2",
+      "origin": "OWN_DEVELOPMENT",
+      "track": "ANCHOR",
+      "environment": {
+        "minecraft": "1.20.1",
+        "loader": "forge",
+        "loader_version": "47.4.6",
+        "java_major": 17,
+        "gradle": "8.8",
+        "assertion_domain": "recovery_batch_failure_research",
+        "runtime_after_repairs": "NOT_RUN"
+      },
+      "before_revision": "a57ffb32adc6a0e1f0a5d06cf45d58c407fe1679",
+      "after_revision": null,
+      "affected_symbols": [
+        "GameModeCommand.register",
+        "EntityArgument.players",
+        "creative_control"
+      ],
+      "evidence": [
+        {
+          "id": "equip-phase",
+          "role": "experiment",
+          "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+          "document_id": "ca91286509fd69f63eaabf9d8a2ab02af09b4ecdf9f37d4ba4cf85d2e061fd34",
+          "content_sha256": "9f2197225acc8c549882a4efbc8def93118bb1f001d8fef0a228e86a07c9ea0a",
+          "source_capture": {
+            "size_bytes": 1434,
+            "sha256": "9f2197225acc8c549882a4efbc8def93118bb1f001d8fef0a228e86a07c9ea0a",
+            "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+          }
+        },
+        {
+          "id": "equip-request",
+          "role": "experiment",
+          "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+          "document_id": "61c41a249991265454f52074f8040349d347df3dd56fed7463b031d5d49e76bb",
+          "content_sha256": "5305ed62e122908acbf90647d23a2c3d37c36b67c4d76d10fd1258c547ee6aac",
+          "source_capture": {
+            "size_bytes": 188,
+            "sha256": "5305ed62e122908acbf90647d23a2c3d37c36b67c4d76d10fd1258c547ee6aac",
+            "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+          }
+        },
+        {
+          "id": "creative-control-result",
+          "role": "experiment",
+          "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+          "document_id": "12f579427fbb91fb1a5920ef1aa818ff7b784b8e0a8a5e143efe70c95deb1dc1",
+          "content_sha256": "ec30ccb9fd13473ff5cce5f059e8f1ba9e1585428149655244349366fc662be1",
+          "source_capture": {
+            "size_bytes": 1714,
+            "sha256": "ec30ccb9fd13473ff5cce5f059e8f1ba9e1585428149655244349366fc662be1",
+            "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+          }
+        },
+        {
+          "id": "registered-server",
+          "role": "experiment",
+          "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+          "document_id": "7e94e8811dc12322f0f07de656a51e5b7f4b9e3867cda82675c440839d11bb85",
+          "content_sha256": "87cee4a5cab2480016335df8ff5c60cab3de5b7d5c7ad8c39fa816c76dd69cde",
+          "source_capture": {
+            "size_bytes": 3211,
+            "sha256": "87cee4a5cab2480016335df8ff5c60cab3de5b7d5c7ad8c39fa816c76dd69cde",
+            "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+          }
+        },
+        {
+          "id": "server-log",
+          "role": "log",
+          "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+          "document_id": "1dcc48c837c3e620a2d8f8ecbf491a9bb0d883291673660ece89fc7a72ae3fdb",
+          "content_sha256": "f77dd8a91e654faa97e34ffda9564a2e8ffe8bcb6c3183aae96d5c01691677b2",
+          "source_capture": {
+            "size_bytes": 139405,
+            "sha256": "f77dd8a91e654faa97e34ffda9564a2e8ffe8bcb6c3183aae96d5c01691677b2",
+            "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+          }
+        },
+        {
+          "id": "players-parser-source",
+          "role": "before_code",
+          "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+          "document_id": "ca32676edc3c11ae4793fd186e13902eacb93db1ab77321d11fc39b218b876b7",
+          "content_sha256": "26db0332b386a3a12b1f17ffe8ba528ec40570f97ad4356753731f124ff18d0c",
+          "source_capture": {
+            "size_bytes": 8920,
+            "sha256": "26db0332b386a3a12b1f17ffe8ba528ec40570f97ad4356753731f124ff18d0c",
+            "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+          }
+        },
+        {
+          "id": "gamemode-parser-source",
+          "role": "before_code",
+          "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+          "document_id": "dccaf1d09bb71c0a98f41e6012b9d40da89a2268475c5f07963ec9894383ea0e",
+          "content_sha256": "a2385a611879fdbfbd5b24a9264b353074da0edde5c77143266d1f35ad678b2e",
+          "source_capture": {
+            "size_bytes": 3038,
+            "sha256": "a2385a611879fdbfbd5b24a9264b353074da0edde5c77143266d1f35ad678b2e",
+            "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+          }
+        },
+        {
+          "id": "fixed-command-builder",
+          "role": "after_code",
+          "index_snapshot_id": "be537721be37bb9eb16938dfbafdebb40568cac7bf6eecf849eef0effc5a8929",
+          "document_id": "22866e0ad48626882caa039cd4b36514d73da4cdce82b08483eece3836300d3b",
+          "content_sha256": "96dab9736a904de8bfc63679e2ccd5b5a18f23345d32ab71e4ae477867135e78",
+          "source_capture": {
+            "size_bytes": 2135,
+            "sha256": "96dab9736a904de8bfc63679e2ccd5b5a18f23345d32ab71e4ae477867135e78",
+            "snapshot_copied_at": "2026-09-30T16:19:19.566049+00:00"
+          }
+        },
+        {
+          "id": "fixed-command-tests",
+          "role": "after_code",
+          "index_snapshot_id": "be537721be37bb9eb16938dfbafdebb40568cac7bf6eecf849eef0effc5a8929",
+          "document_id": "a480bc40b79974c1be97ded95a50b192e89c10d816a6f5283216e8c9518ed89d",
+          "content_sha256": "b2335a25bcbd68bb9f799c79a6c3198becede07bad6364dad8ba5d4e8c6ace59",
+          "source_capture": {
+            "size_bytes": 6020,
+            "sha256": "b2335a25bcbd68bb9f799c79a6c3198becede07bad6364dad8ba5d4e8c6ace59",
+            "snapshot_copied_at": "2026-09-30T16:19:19.566049+00:00"
+          }
+        },
+        {
+          "id": "fixed-command-parser-harness",
+          "role": "after_code",
+          "index_snapshot_id": "be537721be37bb9eb16938dfbafdebb40568cac7bf6eecf849eef0effc5a8929",
+          "document_id": "cc26b4396eda2fcf9d34a13faacd4a016168db5464f75b8c3e5dc3a33b0c4215",
+          "content_sha256": "07db6d5ecafd8dd2c0c1d324023ea7e16795768b202cd404bdb9d6691d1462af",
+          "source_capture": {
+            "size_bytes": 5060,
+            "sha256": "07db6d5ecafd8dd2c0c1d324023ea7e16795768b202cd404bdb9d6691d1462af",
+            "snapshot_copied_at": "2026-09-30T16:19:19.566049+00:00"
+          }
+        },
+        {
+          "id": "command-red",
+          "role": "experiment",
+          "index_snapshot_id": "be537721be37bb9eb16938dfbafdebb40568cac7bf6eecf849eef0effc5a8929",
+          "document_id": "4a7b40b07219d4e313de377c8feb5009bf05e125b82a089306ec48d886f33391",
+          "content_sha256": "5f82b18856c5e99887382b6631cc17db7734d9b9fc690e34661d3c556ce0066e",
+          "source_capture": {
+            "size_bytes": 26445,
+            "sha256": "5f82b18856c5e99887382b6631cc17db7734d9b9fc690e34661d3c556ce0066e",
+            "snapshot_copied_at": "2026-09-30T16:19:19.566049+00:00"
+          }
+        },
+        {
+          "id": "command-green",
+          "role": "experiment",
+          "index_snapshot_id": "be537721be37bb9eb16938dfbafdebb40568cac7bf6eecf849eef0effc5a8929",
+          "document_id": "bf78cea6bc04dbf30760ab83d6ed30ce627d11ac9a7618230047ec668b47a010",
+          "content_sha256": "c7e7e22574d13281fe55f518533071e8805353a624f82d8fdbcd6d902785c622",
+          "source_capture": {
+            "size_bytes": 99,
+            "sha256": "c7e7e22574d13281fe55f518533071e8805353a624f82d8fdbcd6d902785c622",
+            "snapshot_copied_at": "2026-09-30T16:19:19.566049+00:00"
+          }
+        },
+        {
+          "id": "command-parser-output",
+          "role": "experiment",
+          "index_snapshot_id": "be537721be37bb9eb16938dfbafdebb40568cac7bf6eecf849eef0effc5a8929",
+          "document_id": "26c5e8c2e92a8d590a76858a5e00de0194c95575c05c0bb38f873eb5da01dc09",
+          "content_sha256": "cd111cb7cadc940cd5675e210c79537f08119c168418117f72071d08c5d67488",
+          "source_capture": {
+            "size_bytes": 412,
+            "sha256": "cd111cb7cadc940cd5675e210c79537f08119c168418117f72071d08c5d67488",
+            "snapshot_copied_at": "2026-09-30T16:19:19.566049+00:00"
+          }
+        },
+        {
+          "id": "command-verification",
+          "role": "experiment",
+          "index_snapshot_id": "be537721be37bb9eb16938dfbafdebb40568cac7bf6eecf849eef0effc5a8929",
+          "document_id": "f3f2f4ed6770c326b19d4b93c3f298d9f7560e397a2c621a0d576b6e84cd7530",
+          "content_sha256": "54b4c2c50a012bff04434927045d977e34c503c9f9d1af34d674c0d948df2008",
+          "source_capture": {
+            "size_bytes": 33621,
+            "sha256": "54b4c2c50a012bff04434927045d977e34c503c9f9d1af34d674c0d948df2008",
+            "snapshot_copied_at": "2026-09-30T16:19:19.566049+00:00"
+          }
+        },
+        {
+          "id": "parser-input-identity",
+          "role": "experiment",
+          "index_snapshot_id": "be537721be37bb9eb16938dfbafdebb40568cac7bf6eecf849eef0effc5a8929",
+          "document_id": "1e6eb7252c6f41a4659cd4560b7f2e0a9948ba6be7eab213c16498e0fa484181",
+          "content_sha256": "d6f9a98e77a6acc675a2db4bef3cf0fb2ba782e044f04ca1ecef634e46241695",
+          "source_capture": {
+            "size_bytes": 14427,
+            "sha256": "d6f9a98e77a6acc675a2db4bef3cf0fb2ba782e044f04ca1ecef634e46241695",
+            "snapshot_copied_at": "2026-09-30T16:19:19.566049+00:00"
+          }
+        },
+        {
+          "id": "command-independent-review",
+          "role": "experiment",
+          "index_snapshot_id": "be537721be37bb9eb16938dfbafdebb40568cac7bf6eecf849eef0effc5a8929",
+          "document_id": "343751c7eaaefcf63ff54b24d19cb0ca3da4704e4d5af83ffd4fe9dcc23ee96b",
+          "content_sha256": "b6c7ca7adf1491a0cc1e114319ae8a17d5f05ba7ff6a5fc4b61aa00302361471",
+          "source_capture": {
+            "size_bytes": 100,
+            "sha256": "b6c7ca7adf1491a0cc1e114319ae8a17d5f05ba7ff6a5fc4b61aa00302361471",
+            "snapshot_copied_at": "2026-09-30T16:19:19.566049+00:00"
+          }
+        }
+      ],
+      "causal_chain": [
+        {
+          "basis": "DIRECT_OBSERVATION",
+          "text": "The missing builder produced 13 RED cases. Final GREEN recorded 14 cases, adding a swapped-UUIDs-with-original-names rejection. The actual cached parser rejects both original commands and fully parses both repaired commands without executing them.",
+          "evidence_ids": [
+            "command-red",
+            "command-green",
+            "command-parser-output",
+            "fixed-command-parser-harness"
+          ]
+        }
+      ],
+      "reproduction": {
+        "state": "RECORDED_EXPERIMENT",
+        "evidence_ids": [
+          "equip-phase"
+        ]
+      },
+      "fix_verification": {
+        "state": "RECORDED_EXPERIMENT",
+        "evidence_ids": [
+          "command-green",
+          "command-parser-output"
+        ]
+      },
+      "symptom": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "The first creative-mode command for the control player did not establish success, so the remaining equipment and position sequence stopped. The server log later recorded a player-only target parser rejection.",
+        "evidence_ids": [
+          "equip-phase",
+          "server-log"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "The registered gamemode command supplied a bare synthetic player UUID as the target of a player-only argument.",
+        "evidence_ids": [
+          "registered-server",
+          "equip-request"
+        ]
+      },
+      "root_cause": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "The real cached Minecraft 1.20.1 GameModeCommand and EntityArgument player-only parser rejects both original bare UUID targets with ERROR_ONLY_PLAYERS_ALLOWED. The fixed command parses an exact single outer entity UUID and applies nested gamemode to the source itself.",
+        "evidence_ids": [
+          "command-parser-output",
+          "fixed-command-parser-harness",
+          "parser-input-identity"
+        ]
+      },
+      "repair": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "An inert fixture builder validates the exact two approved name, UUID and role bindings, then returns execute-as-exact-UUID commands with gamemode creative @s. It accepts no arbitrary command text, mode, selector, new name or UUID and performs no I/O or execution.",
+        "evidence_ids": [
+          "fixed-command-builder",
+          "fixed-command-tests"
+        ]
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Exercise fixed registered command text with the exact Minecraft parser. A player UUID identifies a player but does not make every parser argument accept its bare textual form.",
+        "evidence_ids": [
+          "players-parser-source",
+          "gamemode-parser-source",
+          "server-log"
+        ]
+      },
+      "limitations": [
+        "Original operation receipt remains completed=true, outcome=UNKNOWN, success=null and command_result=0. The parser-error log does not rewrite that receipt.",
+        "No later equipment, native staff use or multiplayer acceptance is inferred.",
+        "The parser harness deliberately does not initialize full game registries, Bootstrap, a server or world, and it never executes a command; this is an offline parse contract."
+      ],
+      "repair_status": "OFFLINE_FIXED_COMMAND_CONTRACT_RECORDED_RUNTIME_NOT_RUN",
+      "exact_repair_sha256": "96dab9736a904de8bfc63679e2ccd5b5a18f23345d32ab71e4ae477867135e78",
+      "offline_scope": {
+        "tests_passed": 14,
+        "minecraft_parser": "ACTUAL_CACHED_GAMEMODE_AND_ENTITYARGUMENT",
+        "execute_parser": "Minimal fixed as/run branches with poison-pill execution callback",
+        "bootstrap_server_world_or_command_execution": false,
+        "runtime_after_fix": "NOT_RUN"
+      }
+    },
+    {
+      "case_id": "M5-CONTROL-DAEMON-DISAPPEARANCE-RECOVERY-V2",
+      "origin": "OWN_DEVELOPMENT",
+      "track": "ANCHOR",
+      "environment": {
+        "minecraft": "1.20.1",
+        "loader": "forge",
+        "loader_version": "47.4.6",
+        "java_major": 17,
+        "gradle": "8.8",
+        "assertion_domain": "recovery_batch_failure_research",
+        "runtime_after_repairs": "NOT_RUN"
+      },
+      "before_revision": "a57ffb32adc6a0e1f0a5d06cf45d58c407fe1679",
+      "after_revision": null,
+      "affected_symbols": [
+        "Gradle daemon lifecycle",
+        "registered control-client execution"
+      ],
+      "evidence": [
+        {
+          "id": "control-receipt",
+          "role": "experiment",
+          "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+          "document_id": "169bc4f89e7c70f59905bcd19d5c6f96d4b7eee6f94befa3ea670dde94c72641",
+          "content_sha256": "caa49d39876f66bc101a7a52328f7ade426375f69d7a564b205339ca9646beb7",
+          "source_capture": {
+            "size_bytes": 2237,
+            "sha256": "caa49d39876f66bc101a7a52328f7ade426375f69d7a564b205339ca9646beb7",
+            "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+          }
+        },
+        {
+          "id": "control-log",
+          "role": "log",
+          "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+          "document_id": "a4e6efd8fe3941dfada9c302f871b72c390835cc83ef9dcbc7a56c4c1fedf7d7",
+          "content_sha256": "a1d38575a55f918e0ca590eed02c01987551fc103618525287bb5d942baeb647",
+          "source_capture": {
+            "size_bytes": 117521,
+            "sha256": "a1d38575a55f918e0ca590eed02c01987551fc103618525287bb5d942baeb647",
+            "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+          }
+        },
+        {
+          "id": "post-run-memory",
+          "role": "experiment",
+          "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+          "document_id": "84a3dc4c957d5ce21773d11bf0161d9db62d33948c4e7899a83fffa5d187badc",
+          "content_sha256": "50bcaa1980849666afafc5dda77c72069ad0e4c8678788a28efc3fe9450a4ad7",
+          "source_capture": {
+            "size_bytes": 571,
+            "sha256": "50bcaa1980849666afafc5dda77c72069ad0e4c8678788a28efc3fe9450a4ad7",
+            "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+          }
+        },
+        {
+          "id": "batch-cleanup",
+          "role": "experiment",
+          "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+          "document_id": "be5ecf1f8e87c751d39140814eaeab79d17462efcc3b66fc1862c3e85bab4e53",
+          "content_sha256": "d4eee23e6f419f3c541a9834a3dd729d0bfa01aaa3863d1d744db8d1c6fa4806",
+          "source_capture": {
+            "size_bytes": 94,
+            "sha256": "d4eee23e6f419f3c541a9834a3dd729d0bfa01aaa3863d1d744db8d1c6fa4806",
+            "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+          }
+        },
+        {
+          "id": "process-probe",
+          "role": "experiment",
+          "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+          "document_id": "e54b3f16720ffbdfd99208629ddd5923073fef51fd09aac72cb37e736cb65add",
+          "content_sha256": "f13c2b0034f090641cc37f863dac50ecda65199041fad7f3a1fba2a2f1ae55b6",
+          "source_capture": {
+            "size_bytes": 50,
+            "sha256": "f13c2b0034f090641cc37f863dac50ecda65199041fad7f3a1fba2a2f1ae55b6",
+            "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+          }
+        },
+        {
+          "id": "resource-diagnosis-proposal",
+          "role": "experiment",
+          "index_snapshot_id": "be537721be37bb9eb16938dfbafdebb40568cac7bf6eecf849eef0effc5a8929",
+          "document_id": "c3116508fdacc5a48f9ea94d862a9722c579730b574ca027093fbdc1419dd685",
+          "content_sha256": "077fa9e51c7fb68f389de98797af90274267f81235b60ee795a55aba619a64d8",
+          "source_capture": {
+            "size_bytes": 5577,
+            "sha256": "077fa9e51c7fb68f389de98797af90274267f81235b60ee795a55aba619a64d8",
+            "snapshot_copied_at": "2026-09-30T16:19:19.566049+00:00"
+          }
+        }
+      ],
+      "causal_chain": [],
+      "reproduction": {
+        "state": "RECORDED_EXPERIMENT",
+        "evidence_ids": [
+          "control-receipt"
+        ]
+      },
+      "fix_verification": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      },
+      "symptom": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "The control Gradle build reported that its daemon disappeared and the registered process result was FAIL.",
+        "evidence_ids": [
+          "control-receipt",
+          "control-log"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "The disappearance was observed during the bounded staff batch with concurrent server and two client roles. Post-run memory counters were collected only after the processes closed.",
+        "evidence_ids": [
+          "control-log",
+          "post-run-memory"
+        ]
+      },
+      "root_cause": {
+        "basis": "UNKNOWN",
+        "text": null,
+        "reason": "No contemporaneous PID-attributed kill or crash evidence is retained. Cumulative post-run OOM and OOM-kill counters cannot identify which process died or establish causation.",
+        "evidence_ids": [
+          "control-log",
+          "post-run-memory"
+        ]
+      },
+      "repair": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "A bounded resource diagnosis and preparation proposal is retained as an offline proposal only. It does not attribute the historical daemon disappearance or establish a repaired runtime. ",
+        "evidence_ids": [
+          "resource-diagnosis-proposal"
+        ]
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Preserve process failure and collect time-bounded, process-attributed evidence before attributing a disappearance to memory pressure. A later cumulative counter is insufficient.",
+        "evidence_ids": [
+          "control-receipt",
+          "post-run-memory"
+        ]
+      },
+      "limitations": [
+        "Post-run memory.events recorded oom=17 and oom_kill=7; these are cumulative context with no attributable batch baseline or process identity.",
+        "Heap reduction or serialized preparation would be a proposed mitigation, not proof of the original cause."
+      ],
+      "repair_status": "CAUSE_UNKNOWN_NO_VERIFIED_REPAIR",
+      "resource_preparation": {
+        "state": "OFFLINE_PROPOSAL_ONLY",
+        "evidence_ids": [
+          "resource-diagnosis-proposal"
+        ],
+        "original_cause": "UNKNOWN",
+        "runtime_after_proposal": "NOT_RUN"
+      }
+    },
+    {
+      "case_id": "M5-INVOKER-OBSERVER-409-RECOVERY-V2",
+      "origin": "OWN_DEVELOPMENT",
+      "track": "ANCHOR",
+      "environment": {
+        "minecraft": "1.20.1",
+        "loader": "forge",
+        "loader_version": "47.4.6",
+        "java_major": 17,
+        "gradle": "8.8",
+        "assertion_domain": "recovery_batch_failure_research",
+        "runtime_after_repairs": "NOT_RUN"
+      },
+      "before_revision": "a57ffb32adc6a0e1f0a5d06cf45d58c407fe1679",
+      "after_revision": null,
+      "affected_symbols": [
+        "BridgeClient.request",
+        "observe_pair",
+        "ForgeObserver.receiverRequest"
+      ],
+      "evidence": [
+        {
+          "id": "invoker-phase",
+          "role": "experiment",
+          "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+          "document_id": "ef1cf6567825a6f7c6e44b3180c6f8449c5cba0566b9d57df912b9f980a087a5",
+          "content_sha256": "7d8699b172c956dcc8b0aa085768f4398e719e8d61bdec03699731f2ffdfcafc",
+          "source_capture": {
+            "size_bytes": 199,
+            "sha256": "7d8699b172c956dcc8b0aa085768f4398e719e8d61bdec03699731f2ffdfcafc",
+            "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+          }
+        },
+        {
+          "id": "invoker-server-before",
+          "role": "experiment",
+          "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+          "document_id": "039a55721942ff779009e558644330d27e0de8483ae9f548a8003c7b7870071f",
+          "content_sha256": "3ea86fe16f4d3f80f339231660f5b3885ed2ee98c29df8b7b02ebb75ea44d14f",
+          "source_capture": {
+            "size_bytes": 2655,
+            "sha256": "3ea86fe16f4d3f80f339231660f5b3885ed2ee98c29df8b7b02ebb75ea44d14f",
+            "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+          }
+        },
+        {
+          "id": "client-receipt",
+          "role": "experiment",
+          "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+          "document_id": "cceba191577038931d8081e3556cb32ce2ec61f9df7b806c71e102145cb5916d",
+          "content_sha256": "f1198c96f49fe5d714ff56def9dd16fb109e0a3be94d6e7ea7120f3d75b69c0f",
+          "source_capture": {
+            "size_bytes": 2230,
+            "sha256": "f1198c96f49fe5d714ff56def9dd16fb109e0a3be94d6e7ea7120f3d75b69c0f",
+            "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+          }
+        },
+        {
+          "id": "client-log",
+          "role": "log",
+          "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+          "document_id": "e327c536eb00d80548886851c38b5f424b6e619c952ec37681ae3af9c76614dc",
+          "content_sha256": "d821f991b848cb6ff8fccf78516bc37df666ddbade42884364a588e25dc31efd",
+          "source_capture": {
+            "size_bytes": 141076,
+            "sha256": "d821f991b848cb6ff8fccf78516bc37df666ddbade42884364a588e25dc31efd",
+            "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+          }
+        },
+        {
+          "id": "runtime-before",
+          "role": "before_code",
+          "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+          "document_id": "817f9987f71d3809195cfc8c6547a7f7df335ef00406a074724c9fc46af29543",
+          "content_sha256": "c0745e2e7d238de50fe82f9d2054b25b459e5ebaff7ddfccc4ff6e3be9af6e41",
+          "source_capture": {
+            "size_bytes": 26450,
+            "sha256": "c0745e2e7d238de50fe82f9d2054b25b459e5ebaff7ddfccc4ff6e3be9af6e41",
+            "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+          }
+        },
+        {
+          "id": "pair-before",
+          "role": "before_code",
+          "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+          "document_id": "2aa9b160ea09787c5ff558c66b3c1d13b1c58c775e7b2c93cd433781000270c8",
+          "content_sha256": "8abc3c6ed3e5d1765b6037f80a7a7786acd9b4a605bf34fb4b77850f69ded0dc",
+          "source_capture": {
+            "size_bytes": 9983,
+            "sha256": "8abc3c6ed3e5d1765b6037f80a7a7786acd9b4a605bf34fb4b77850f69ded0dc",
+            "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+          }
+        },
+        {
+          "id": "transport-before",
+          "role": "before_code",
+          "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+          "document_id": "6300d407a20676d6aae8aee097acd2afa1aa56219dd7a20ba1185614bed7bf36",
+          "content_sha256": "ba76bffa8ef158795b60864f7bd7a13715e1da9a91a2ab8d603955a560e1bf37",
+          "source_capture": {
+            "size_bytes": 5084,
+            "sha256": "ba76bffa8ef158795b60864f7bd7a13715e1da9a91a2ab8d603955a560e1bf37",
+            "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+          }
+        },
+        {
+          "id": "observer-before",
+          "role": "before_code",
+          "index_snapshot_id": "6fac4d24519e16ce7bc34703e13b1b382968fdfb1270ca921cd8bfb98b73b47a",
+          "document_id": "532db0736f132e170e84b50fdacb55d543afda14c59b98e35adeda2d7bf4f6c8",
+          "content_sha256": "cf9ac9a41f57554d7bb343578b3b634fde844314a68d75ed0a7c9bb50a97ea95",
+          "source_capture": {
+            "size_bytes": 30224,
+            "sha256": "cf9ac9a41f57554d7bb343578b3b634fde844314a68d75ed0a7c9bb50a97ea95",
+            "snapshot_copied_at": "2026-09-30T16:15:03.331778+00:00"
+          }
+        },
+        {
+          "id": "diagnostic-transport",
+          "role": "after_code",
+          "index_snapshot_id": "be537721be37bb9eb16938dfbafdebb40568cac7bf6eecf849eef0effc5a8929",
+          "document_id": "1a18f388e9d7f10cfc3133b4a4a3b77e8215893c00d54981fdcc0639df4b57a3",
+          "content_sha256": "65d6a11d7cc6e70c6fe59d9b60bb75ba1ccab737899f20fdcffb80ba5217bcc4",
+          "source_capture": {
+            "size_bytes": 6496,
+            "sha256": "65d6a11d7cc6e70c6fe59d9b60bb75ba1ccab737899f20fdcffb80ba5217bcc4",
+            "snapshot_copied_at": "2026-09-30T16:19:19.566049+00:00"
+          }
+        },
+        {
+          "id": "diagnostic-client",
+          "role": "after_code",
+          "index_snapshot_id": "be537721be37bb9eb16938dfbafdebb40568cac7bf6eecf849eef0effc5a8929",
+          "document_id": "38ef10e168c09b1e644c6252d2d559893904a2f28b5b29c4dc9003212fe0d1ac",
+          "content_sha256": "17d8724f7a74c7f801a57efee9ad04be840fbcffc17cbcae12727f8a6e5e219c",
+          "source_capture": {
+            "size_bytes": 31532,
+            "sha256": "17d8724f7a74c7f801a57efee9ad04be840fbcffc17cbcae12727f8a6e5e219c",
+            "snapshot_copied_at": "2026-09-30T16:19:19.566049+00:00"
+          }
+        },
+        {
+          "id": "diagnostic-tests",
+          "role": "after_code",
+          "index_snapshot_id": "be537721be37bb9eb16938dfbafdebb40568cac7bf6eecf849eef0effc5a8929",
+          "document_id": "e22b27efb874abd8127aa45e62ff4c0d0e898bc95c89971b9edb720fad072a4a",
+          "content_sha256": "964e6ddd30aaa007a33ef302f620b7c9e5ee5cad066214f422cf0c90a5ccdaac",
+          "source_capture": {
+            "size_bytes": 12299,
+            "sha256": "964e6ddd30aaa007a33ef302f620b7c9e5ee5cad066214f422cf0c90a5ccdaac",
+            "snapshot_copied_at": "2026-09-30T16:19:19.566049+00:00"
+          }
+        },
+        {
+          "id": "diagnostic-baseline-red",
+          "role": "experiment",
+          "index_snapshot_id": "be537721be37bb9eb16938dfbafdebb40568cac7bf6eecf849eef0effc5a8929",
+          "document_id": "1797fdbec621b0eeb08cd0cdfa5fcab355b9bd683a4a027230dc8adfb7825e50",
+          "content_sha256": "24fcd2d3e1a6b183726600ace17578e57dc8c3a59b650132f071d6887a5feddc",
+          "source_capture": {
+            "size_bytes": 7853,
+            "sha256": "24fcd2d3e1a6b183726600ace17578e57dc8c3a59b650132f071d6887a5feddc",
+            "snapshot_copied_at": "2026-09-30T16:19:19.566049+00:00"
+          }
+        },
+        {
+          "id": "diagnostic-privacy-red",
+          "role": "experiment",
+          "index_snapshot_id": "be537721be37bb9eb16938dfbafdebb40568cac7bf6eecf849eef0effc5a8929",
+          "document_id": "459b5f0f08b78f2ab97a92cd9739b6f9ee57b4ffccdada76cf35132c58f3741c",
+          "content_sha256": "1efd87b65a7ebee25607813c600530318a8c963538aa9d257f2480112c624ea9",
+          "source_capture": {
+            "size_bytes": 1367,
+            "sha256": "1efd87b65a7ebee25607813c600530318a8c963538aa9d257f2480112c624ea9",
+            "snapshot_copied_at": "2026-09-30T16:19:19.566049+00:00"
+          }
+        },
+        {
+          "id": "diagnostic-summary-hash-red",
+          "role": "experiment",
+          "index_snapshot_id": "be537721be37bb9eb16938dfbafdebb40568cac7bf6eecf849eef0effc5a8929",
+          "document_id": "f31d1dd0ffbcddbe73be25202d399c5d1b6cd9ff53170d5350ae9b3e5e5cbaa8",
+          "content_sha256": "590ab6a514cf9488f109a1dfea86bc5735b34fdad59f9fe3494b89ba54deea51",
+          "source_capture": {
+            "size_bytes": 1460,
+            "sha256": "590ab6a514cf9488f109a1dfea86bc5735b34fdad59f9fe3494b89ba54deea51",
+            "snapshot_copied_at": "2026-09-30T16:19:19.566049+00:00"
+          }
+        },
+        {
+          "id": "diagnostic-http200-red",
+          "role": "experiment",
+          "index_snapshot_id": "be537721be37bb9eb16938dfbafdebb40568cac7bf6eecf849eef0effc5a8929",
+          "document_id": "c8f81a2826ceab7b790ed3a90ae4e7d6506b4a2c56c3ec665047e566094a2490",
+          "content_sha256": "19abb01a7e00820841a228c2c01878b83e300c2784a5c967018a0bf8197fd257",
+          "source_capture": {
+            "size_bytes": 1231,
+            "sha256": "19abb01a7e00820841a228c2c01878b83e300c2784a5c967018a0bf8197fd257",
+            "snapshot_copied_at": "2026-09-30T16:19:19.566049+00:00"
+          }
+        },
+        {
+          "id": "diagnostic-green",
+          "role": "experiment",
+          "index_snapshot_id": "be537721be37bb9eb16938dfbafdebb40568cac7bf6eecf849eef0effc5a8929",
+          "document_id": "2378fab6c7c339b8f099738c812b77e1854989df8e0e20f841041a824dd917e4",
+          "content_sha256": "28d611e4b9ab73011ead08e8c7cf5bd326822600c0cb38dca1ca42fce65099f5",
+          "source_capture": {
+            "size_bytes": 181,
+            "sha256": "28d611e4b9ab73011ead08e8c7cf5bd326822600c0cb38dca1ca42fce65099f5",
+            "snapshot_copied_at": "2026-09-30T16:19:19.566049+00:00"
+          }
+        }
+      ],
+      "causal_chain": [
+        {
+          "basis": "DIRECT_OBSERVATION",
+          "text": "Ten baseline failures against isolated original code plus privacy, original-payload-versus-summary-hash and HTTP-200-error-envelope RED controls preceded the final 110 passing focused cases. The Java 17 transport peer was compiled and exercised by the offline tests.",
+          "evidence_ids": [
+            "diagnostic-baseline-red",
+            "diagnostic-privacy-red",
+            "diagnostic-summary-hash-red",
+            "diagnostic-http200-red",
+            "diagnostic-green",
+            "diagnostic-tests"
+          ]
+        }
+      ],
+      "reproduction": {
+        "state": "RECORDED_EXPERIMENT",
+        "evidence_ids": [
+          "invoker-phase"
+        ]
+      },
+      "fix_verification": {
+        "state": "RECORDED_EXPERIMENT",
+        "evidence_ids": [
+          "diagnostic-green"
+        ]
+      },
+      "symptom": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "The invoker paired baseline stopped with HTTP 409 and no completed invoker client capture.",
+        "evidence_ids": [
+          "invoker-phase"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "A retained server-before observation exists for the exact invoker UUID at server tick 6018. The pair route next calls the receiving client handshake and capture.",
+        "evidence_ids": [
+          "invoker-server-before",
+          "pair-before"
+        ]
+      },
+      "root_cause": {
+        "basis": "UNKNOWN",
+        "text": null,
+        "reason": "The original client-facing exception retained only HTTP 409. The evidence narrows the failure to client handshake or capture but does not preserve the precise rejection reason; timeout, readiness, identity or other causes cannot be selected.",
+        "evidence_ids": [
+          "invoker-phase",
+          "runtime-before",
+          "pair-before"
+        ]
+      },
+      "repair": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "The observer and client now exchange a strict bounded signed error envelope with allowlisted exception categories. The client verifies nonce-bound HMAC before retaining the error, request identity hashes and a bounded validated handshake summary. Rejections remain ERROR/UNKNOWN with retry_allowed=false. This improves future diagnostic retention without assigning a cause to the old 409.",
+        "evidence_ids": [
+          "diagnostic-transport",
+          "diagnostic-client",
+          "diagnostic-tests"
+        ]
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Retain bounded authenticated observer error details while preserving nonce/signature checks and unknown mutation outcomes. Improved diagnostics must not be presented as a fix for an unproven historical cause.",
+        "evidence_ids": [
+          "runtime-before",
+          "transport-before",
+          "invoker-phase"
+        ]
+      },
+      "limitations": [
+        "No causal link to the control daemon disappearance is established.",
+        "No automatic retry or native staff gesture is inferred from the failed baseline."
+      ],
+      "repair_status": "OFFLINE_DIAGNOSTIC_CONTRACT_RECORDED_ORIGINAL_REASON_UNKNOWN",
+      "exact_repair_sha256": {
+        "transport": "65d6a11d7cc6e70c6fe59d9b60bb75ba1ccab737899f20fdcffb80ba5217bcc4",
+        "client": "17d8724f7a74c7f801a57efee9ad04be840fbcffc17cbcae12727f8a6e5e219c"
+      },
+      "offline_scope": {
+        "tests_passed": 110,
+        "historical_409_diagnosis": "UNKNOWN",
+        "runtime_after_fix": "NOT_RUN",
+        "category_scope": "ALLOWLISTED_EXCEPTION_CATEGORY_NOT_ROOT_CAUSE"
+      }
+    }
+  ],
+  "recorded_at": "2026-09-30T16:19:19.566049+00:00",
+  "prior_history": {
+    "M2": {
+      "history_hash": "4abaa63aa724be619293fbcfd8143f0676c4fa5f01d03a2cfcc4093fb2074971",
+      "files": {
+        "FAILURE-REPAIR-HISTORY.json": "7e5f8d618d6ac9780ddd56f623c16dc190dd93a6fbadeaf1508faec0c965a046",
+        "query-roundtrip.json": "0216f876a11697fd2617280d6b26319d3fd17768992ea24c83f1cc9136394807",
+        "FAILURE-REPAIR-HISTORY.md": "a2a77c789a41d48405f60e2984b4bb87e10d666229fcfd7574ccf08f107ac4f6",
+        "verification.json": "85c7ac850321d0937e596dbe691552f17b97c05aaf461d1b08c61f0ea40d57da",
+        "import-result.json": "bb9bdf2411d887b69922b9c590d92ef2e51d8d45023f7bc4ae2b4038a158d760"
+      }
+    },
+    "first-runtime-batch": {
+      "history_hash": "9ff2128604f3e552dd9f8fb99b3f43f70bbd02c4c49906b9b93ff8b76ba29147",
+      "files": {
+        "FAILURE-REPAIR-HISTORY.json": "7e48652ebf46f6a069aa63f16dc54c7420213b29a696788681716054dae2107b",
+        "FAILURE-REPAIR-HISTORY.md": "722c0cc001f208c2fbd4ba60f72e340ad712970026c09f7c93a6cb7b709df6cf",
+        "verification.json": "25b7b1d4908a66c37cf252e4d5e0adea0d8505cea13ffcc0865028e4a00ecc43",
+        "import-result.json": "1c25ca5ec411c2e35ab218178d83319bace46cb192612ad1f33d4052f91cc099"
+      }
+    }
+  },
+  "batch_lifecycle": {
+    "state": "CLOSED",
+    "execution_threads_closed_utc": "2026-09-30T16:00:23.054579+00:00",
+    "desktop_probe_utc": "2026-09-30T16:01:36.647979+00:00",
+    "desktop_probe_processes": [],
+    "original_deadline_utc": "2026-09-30T16:04:03.616235+00:00"
+  },
+  "hydra_scoped_capture_context": {
+    "captures": [
+      {
+        "capture_id": "014",
+        "view_by_recorded_pose": "front",
+        "original_capture_label": "014-hydra-front",
+        "artifact_hash": "20605e836279a390cde71263e4f22aafc4dc146459265665f990dfb4f5256b36",
+        "handshake_hash": "4f34b69c19e3e18dbf3cbd5f12c90272090b08a9889de18fdfd817367d9adc0e",
+        "png_sha256": "d0d8796cb3d8ac3656165d3982efc62e56d196b417aefcf1e18cf3f4f6336f91",
+        "camera": {
+          "pitch": 10.0,
+          "x": 0.5,
+          "y": 65.61999988555908,
+          "yaw": 0.0,
+          "z": -29.5
+        },
+        "client_frame": 1239,
+        "entity_uuid": "00000000-0000-4000-8000-000000000004",
+        "entity_type": "twilightforest:hydra",
+        "entity_class": "twilightforest.entity.boss.Hydra",
+        "renderer_class": "twilightforest.client.renderer.entity.HydraRenderer",
+        "jappa_marker_present": false,
+        "texture_location": "twilightforest:textures/model/hydra4.png",
+        "texture_sha256": "1a9592e62e2762f1585d13292cac5bca338c606f4c60fa397bdaa96d2ce9a0ce",
+        "target_selection_hash": "ec8fdc231385b2ab7b5663b7d7537602b7854bd63a763e8a3f3d6329699165e9",
+        "observation_status": "CAPTURED",
+        "visual_review": "Hydra visible in retained PNG inspected by analyst",
+        "atomic": false,
+        "renderer_evidence": "DISPATCHER_SELECTION_NOT_DRAW_CALL_ATTESTATION",
+        "raw_observer_outcome": "NOT_RUN"
+      },
+      {
+        "capture_id": "018",
+        "view_by_recorded_pose": "side",
+        "original_capture_label": "018-hydra-oblique",
+        "artifact_hash": "f80cc36bd9397684d3f40ac3e117194cf1f70beb0b0867459071d7b7b2c18510",
+        "handshake_hash": "4f34b69c19e3e18dbf3cbd5f12c90272090b08a9889de18fdfd817367d9adc0e",
+        "png_sha256": "82b7f49b253cf4dbcc5c70ddff671ab19e65bd00fd8498cb399a49e1ff239872",
+        "camera": {
+          "pitch": 10.0,
+          "x": 30.5,
+          "y": 73.6180153316199,
+          "yaw": 90.0,
+          "z": 0.5
+        },
+        "client_frame": 2235,
+        "entity_uuid": "00000000-0000-4000-8000-000000000004",
+        "entity_type": "twilightforest:hydra",
+        "entity_class": "twilightforest.entity.boss.Hydra",
+        "renderer_class": "twilightforest.client.renderer.entity.HydraRenderer",
+        "jappa_marker_present": false,
+        "texture_location": "twilightforest:textures/model/hydra4.png",
+        "texture_sha256": "1a9592e62e2762f1585d13292cac5bca338c606f4c60fa397bdaa96d2ce9a0ce",
+        "target_selection_hash": "ec8fdc231385b2ab7b5663b7d7537602b7854bd63a763e8a3f3d6329699165e9",
+        "observation_status": "CAPTURED",
+        "visual_review": "Hydra visible in retained PNG inspected by analyst",
+        "atomic": false,
+        "renderer_evidence": "DISPATCHER_SELECTION_NOT_DRAW_CALL_ATTESTATION",
+        "raw_observer_outcome": "NOT_RUN"
+      },
+      {
+        "capture_id": "019",
+        "view_by_recorded_pose": "oblique",
+        "original_capture_label": "019-hydra-settled-oblique",
+        "artifact_hash": "e009b1f44ac13cc51c757797fe7031d8512f88c156c90338f4e27374d37563d9",
+        "handshake_hash": "4f34b69c19e3e18dbf3cbd5f12c90272090b08a9889de18fdfd817367d9adc0e",
+        "png_sha256": "9c277031c76363e5cb77c40208a661c08c6a7d10d1c98b7b996fb6ecc46710a6",
+        "camera": {
+          "pitch": 12.0,
+          "x": 23.5,
+          "y": 65.61999988555908,
+          "yaw": 43.0,
+          "z": -24.5
+        },
+        "client_frame": 2971,
+        "entity_uuid": "00000000-0000-4000-8000-000000000004",
+        "entity_type": "twilightforest:hydra",
+        "entity_class": "twilightforest.entity.boss.Hydra",
+        "renderer_class": "twilightforest.client.renderer.entity.HydraRenderer",
+        "jappa_marker_present": false,
+        "texture_location": "twilightforest:textures/model/hydra4.png",
+        "texture_sha256": "1a9592e62e2762f1585d13292cac5bca338c606f4c60fa397bdaa96d2ce9a0ce",
+        "target_selection_hash": "ec8fdc231385b2ab7b5663b7d7537602b7854bd63a763e8a3f3d6329699165e9",
+        "observation_status": "CAPTURED",
+        "visual_review": "Hydra visible in retained PNG inspected by analyst",
+        "atomic": false,
+        "renderer_evidence": "DISPATCHER_SELECTION_NOT_DRAW_CALL_ATTESTATION",
+        "raw_observer_outcome": "NOT_RUN"
+      }
+    ],
+    "process_receipt_hash": "b166d6044283da3d07ea7976a6713fe5a878c6e602c94c40f029c2ae566e16ec",
+    "process_outcome": "BLOCKED",
+    "process_timed_out": true,
+    "whole_process_success": false,
+    "history_import_is_runtime_attestation": false
+  },
+  "raw_artifacts_published": false,
+  "canonical_writes": 0,
+  "runtime_attestation": false,
+  "previous_capture_history_hash": "26d5869a1e0bd772ee04fabbb8b05927565a64c832f8be8f5b119044f5f97ea8",
+  "runtime_after_repairs": "NOT_RUN"
+}

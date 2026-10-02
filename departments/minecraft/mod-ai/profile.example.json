@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "minecraft": "1.20.1",
+  "loader": "forge",
+  "loader_version": null,
+  "java_major": 17,
+  "namespace": "mojmap",
+  "namespace_aliases": {
+    "official": "mojmap"
+  },
+  "physical_side": "server",
+  "logical_side": "server",
+  "track": "ANCHOR",
+  "workspace_revision": null,
+  "dirty_hash": null,
+  "toolchain": null,
+  "roots": [
+    {
+      "id": "workspace-source",
+      "path": "src/main/java",
+      "kind": "directory",
+      "scope": "runtime",
+      "role": "source",
+      "namespace": "mojmap",
+      "stage": "workspace",
+      "classloader": "unknown",
+      "track": "ANCHOR"
+    },
+    {
+      "id": "workspace-resources",
+      "path": "src/main/resources",
+      "kind": "directory",
+      "scope": "runtime",
+      "role": "resources",
+      "namespace": "mojmap",
+      "stage": "workspace",
+      "classloader": "unknown",
+      "track": "ANCHOR"
+    },
+    {
+      "id": "compiled-classes",
+      "path": "build/classes/java/main",
+      "kind": "directory",
+      "scope": "runtime",
+      "role": "binary",
+      "namespace": "mojmap",
+      "stage": "compiled",
+      "classloader": "unknown",
+      "track": "ANCHOR"
+    }
+  ]
+}

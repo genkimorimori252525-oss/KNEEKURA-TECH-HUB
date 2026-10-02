@@ -1,0 +1,179 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kneekura.local/schemas/v1/minecraft-mod-analysis.schema.json",
+  "title": "KNEEKURA Minecraft Technology Analysis Record v1.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "target_id",
+    "display_name",
+    "adaptation_anchor",
+    "overall_status",
+    "tracks"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.1.0"
+    },
+    "target_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "display_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target_kind": {
+      "type": "string"
+    },
+    "adaptation_anchor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "minecraft_version",
+        "loader"
+      ],
+      "properties": {
+        "minecraft_version": {
+          "const": "1.20.1"
+        },
+        "loader": {
+          "const": "Forge"
+        }
+      }
+    },
+    "overall_status": {
+      "enum": [
+        "QUEUED",
+        "IN_PROGRESS",
+        "COMPLETE"
+      ]
+    },
+    "tracks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "track_id",
+          "role",
+          "minecraft_version",
+          "loader",
+          "source_snapshot",
+          "facets"
+        ],
+        "properties": {
+          "track_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "role": {
+            "enum": [
+              "ANCHOR",
+              "FRONTIER",
+              "COMPARATIVE"
+            ]
+          },
+          "minecraft_version": {
+            "type": "string",
+            "minLength": 1
+          },
+          "loader": {
+            "enum": [
+              "Forge",
+              "NeoForge",
+              "Fabric",
+              "Quilt",
+              "Vanilla",
+              "MultiLoader",
+              "Other"
+            ]
+          },
+          "source_snapshot": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "status"
+            ],
+            "properties": {
+              "status": {
+                "enum": [
+                  "NOT_PINNED",
+                  "PINNED",
+                  "IN_PROGRESS",
+                  "COMPLETE"
+                ]
+              },
+              "repository": {
+                "type": "string"
+              },
+              "branch": {
+                "type": "string"
+              },
+              "release": {
+                "type": "string"
+              },
+              "tag": {
+                "type": "string"
+              },
+              "commit": {
+                "type": "string"
+              },
+              "jar_sha256": {
+                "type": "string",
+                "pattern": "^[A-Fa-f0-9]{64}$"
+              },
+              "source_sha256": {
+                "type": "string",
+                "pattern": "^[A-Fa-f0-9]{64}$"
+              }
+            }
+          },
+          "facets": {
+            "type": "object",
+            "additionalProperties": {
+              "enum": [
+                "NOT_ANALYZED",
+                "INVENTORIED",
+                "MAPPED",
+                "EVIDENCE_BACKED",
+                "NOT_APPLICABLE"
+              ]
+            },
+            "propertyNames": {
+              "enum": [
+                "architecture",
+                "ai",
+                "worldgen",
+                "networking",
+                "rendering_assets",
+                "data_assets",
+                "transformation",
+                "mapping",
+                "classloading",
+                "performance",
+                "compatibility",
+                "version_portability",
+                "license_provenance"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "analysis_paths": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

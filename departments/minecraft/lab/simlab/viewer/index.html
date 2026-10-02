@@ -1,0 +1,3342 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SimLab Viewer</title>
+<style>
+/* =============================================================================
+   SimLab Viewer
+   視覚言語は Minecraft 自身のデバッグ表現に従う ——
+   F3+B の白い hitbox ワイヤーフレーム / 赤緑青の XYZ 軸 / 黄のチャンク境界 /
+   シアンの速度ベクトル。実機の F3 と並べて見比べられることを優先する。
+   型: サンス = ツールの枠(ラベル・ボタン)、等幅 = 事実(座標・tick・ログ)。
+   ============================================================================= */
+:root{
+  --void:#0B0B0C;          /* void ワールドの地 */
+  --panel:#131316;
+  --panel-2:#1A1A1F;
+  --line:#26262D;
+  --line-soft:#1E1E24;
+
+  --ink:#E8E8E6;           /* F3 オーバーレイの文字 */
+  --ink-dim:#8A8A93;
+  --ink-faint:#5A5A63;
+
+  --hitbox:#FFFFFF;        /* F3+B の hitbox 白 */
+  --axis-x:#FF3B30;
+  --axis-y:#33D17A;
+  --axis-z:#4C8DFF;
+  --chunk:#FFD866;         /* チャンク境界の黄 */
+  --vel:#22D3EE;           /* 速度ベクトル / 弾 */
+  --warn:#F5A524;
+  --target:#9AA0A6;
+
+  --sans:"Segoe UI","Yu Gothic UI",system-ui,-apple-system,sans-serif;
+  --mono:"Cascadia Mono","Consolas","SFMono-Regular",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;background:var(--void);color:var(--ink);
+  font-family:var(--sans);font-size:13px;
+  display:flex;flex-direction:column;overflow:hidden;
+}
+button,select,input{font-family:inherit;font-size:inherit;color:inherit}
+
+/* ---- chrome: ラベルとボタンはサンス、字間を少し開けて「器具」の顔にする ---- */
+.chrome-label{
+  font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-faint);white-space:nowrap;
+}
+.btn{
+  background:var(--panel-2);border:1px solid var(--line);border-radius:2px;
+  padding:4px 9px;cursor:pointer;color:var(--ink-dim);line-height:1.4;
+}
+.btn:hover{border-color:#3A3A45;color:var(--ink)}
+.btn:focus-visible{outline:2px solid var(--vel);outline-offset:1px}
+.btn[aria-pressed="true"],.btn.on{background:#242430;border-color:#43434F;color:var(--ink)}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* ---- header ---- */
+header{
+  display:flex;align-items:center;gap:16px;padding:8px 14px;
+  border-bottom:1px solid var(--line);background:var(--panel);flex:none;
+}
+header .title{font-family:var(--mono);font-size:13px;color:var(--ink)}
+header .sub{font-family:var(--mono);font-size:11px;color:var(--ink-faint)}
+.modes{display:flex;gap:2px;margin-left:auto}
+.clock{font-family:var(--mono);font-size:13px;color:var(--ink);min-width:132px;text-align:right}
+
+/* ---- main ---- */
+main{flex:1;display:grid;grid-template-columns:1fr 336px;min-height:0}
+#stageWrap{position:relative;min-width:0;background:var(--void)}
+#stage{display:block;width:100%;height:100%}
+.overlay{
+  position:absolute;top:10px;left:12px;pointer-events:none;
+  font-family:var(--mono);font-size:11.5px;line-height:1.55;
+  text-shadow:1px 1px 0 rgba(0,0,0,.85);       /* F3 オーバーレイの影付き文字 */
+  white-space:pre;color:var(--ink);
+}
+.overlay .k{color:var(--ink-faint)}
+.hint{
+  position:absolute;right:12px;bottom:10px;pointer-events:none;
+  font-family:var(--mono);font-size:10.5px;color:var(--ink-faint);text-align:right;
+  text-shadow:1px 1px 0 rgba(0,0,0,.85);
+}
+
+/* ---- hud ---- */
+aside{
+  border-left:1px solid var(--line);background:var(--panel);
+  display:flex;flex-direction:column;min-height:0;
+}
+.hud-sec{border-bottom:1px solid var(--line-soft);padding:10px 12px}
+.hud-sec.grow{flex:1;min-height:0;display:flex;flex-direction:column;padding-bottom:0}
+.kv{display:grid;grid-template-columns:76px 1fr;gap:2px 8px;font-family:var(--mono);font-size:11.5px}
+.kv dt{color:var(--ink-faint)}
+.kv dd{margin:0;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar{height:5px;background:#232329;border-radius:1px;overflow:hidden;margin-top:6px}
+.bar > i{display:block;height:100%;background:var(--hitbox)}
+.bar.target > i{background:var(--target)}
+.flags{display:flex;flex-wrap:wrap;gap:4px;margin-top:7px}
+.flag{
+  font-family:var(--mono);font-size:10px;padding:1px 5px;border-radius:2px;
+  border:1px solid var(--line);color:var(--ink-faint)
+}
+.flag.on{border-color:var(--warn);color:var(--warn)}
+
+#aiLog{overflow:auto;flex:1;margin:0 -12px 0 -12px;padding:0 12px 10px}
+.ai-row{
+  display:grid;grid-template-columns:52px 1fr;gap:8px;padding:3px 0;
+  border-top:1px solid var(--line-soft);cursor:pointer;
+  font-family:var(--mono);font-size:11px;color:var(--ink-dim);
+}
+.ai-row:hover{color:var(--ink)}
+.ai-row .t{color:var(--ink-faint)}
+.ai-row.cur{color:var(--ink);background:#1C1C22}
+.ai-row .phase{color:var(--vel)}
+
+/* ---- ribbon ---- */
+#ribbonWrap{
+  flex:none;border-top:1px solid var(--line);background:var(--panel);
+  display:grid;grid-template-columns:60px 1fr;align-items:stretch;
+}
+#ribbonKeys{
+  display:flex;flex-direction:column;justify-content:space-around;
+  padding:6px 0 6px 12px;border-right:1px solid var(--line-soft);
+}
+#ribbonKeys span{font-size:9.5px;letter-spacing:.1em;color:var(--ink-faint);text-transform:uppercase}
+#ribbon{display:block;width:100%;height:104px;cursor:ew-resize}
+
+/* ---- transport ---- */
+footer{
+  flex:none;display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  padding:8px 14px;border-top:1px solid var(--line);background:var(--panel);
+}
+footer .grp{display:flex;align-items:center;gap:6px}
+footer .sep{width:1px;height:18px;background:var(--line)}
+input[type=range]{width:104px;accent-color:var(--vel)}
+
+/* ---- 記録の一覧 / 手元ファイルを開く行 (#tankPanel の「記録」節、buildTankUi() が組む) ----
+   #empty は廃止した —— 水槽は常時描画になったので、真っ黒で故障と区別が
+   つかない状態はもう起きない (下の html.bare も参照)。 */
+#traceList{display:flex;flex-direction:column;gap:2px;margin-top:4px}
+#traceList button{text-align:left;font-family:var(--mono);font-size:11.5px}
+/* .drop は元は破線の大きな枠だった。「記録」節へ移した今は一行の静かな行で足りる
+   (にーくら『design系ツールでお願い』— 常設パネルの一部として控えめに置く)。 */
+.drop{color:var(--ink-faint);font-size:11px;padding:2px 0}
+body.dragging .drop{color:var(--vel)}
+
+@media (max-width:900px){
+  main{grid-template-columns:1fr;grid-template-rows:1fr auto}
+  aside{border-left:0;border-top:1px solid var(--line);max-height:38vh}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ---- bare: 3D 画面だけにする (compare.html から ?bare=1 で使う) ----
+   3 枚並べると各ペインが 1/3 幅になり、器具 (ヘッダ / HUD / 帯 / フッタ) まで出すと
+   潰れて読めない。操作は親 (compare.html) が postMessage で配るので子に器具は要らない。
+   #empty (トレース未読込の案内) は廃止した —— 水槽(グリッド/床/void)は常時描画になり、
+   トレース未読込でも真っ黒にならない。代わりに #tankPanel / #tankLive (水槽の操作卓と
+   追従バッジ) をここで隠す —— 比較用の3ペインに常設パネルが重なる意味は無いため。 */
+html.bare header,
+html.bare main > aside,
+html.bare #ribbonWrap,
+html.bare footer,
+html.bare #stageWrap > .overlay,
+html.bare #stageWrap > .hint,
+html.bare #tankPanel,
+html.bare #tankLive { display:none !important }
+html.bare main { grid-template-columns:1fr !important }
+</style>
+<script>
+  // クラスは CSS より先に効かせたいので、ここで即座に付ける。
+  try {
+    if (new URLSearchParams(location.search).get('bare') === '1') {
+      document.documentElement.classList.add('bare');
+    }
+  } catch (e) { /* 古いブラウザ。bare でなくなるだけで動作はする */ }
+</script>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="title" id="traceName">水槽</div>
+    <div class="sub" id="traceMeta">誰もいない</div>
+  </div>
+  <div class="modes" role="group" aria-label="表示モード">
+    <button class="btn on" data-mode="real"   aria-pressed="true">実機</button>
+    <button class="btn"    data-mode="f3"     aria-pressed="false">F3 デバッグ</button>
+    <button class="btn"    data-mode="scope"  aria-pressed="false">計測器</button>
+    <button class="btn"    data-mode="plan"   aria-pressed="false">図面</button>
+  </div>
+  <div class="clock num" id="clock">— / —</div>
+</header>
+
+<main>
+  <div id="stageWrap">
+    <canvas id="glstage" style="display:none;position:absolute;inset:0;width:100%;height:100%"></canvas>
+    <canvas id="stage"></canvas>
+    <div class="overlay" id="overlay"></div>
+    <div class="hint" id="hint"><span id="hintText"></span><span id="perf"></span></div>
+  </div>
+
+  <aside>
+    <div class="hud-sec">
+      <div class="chrome-label">Reimu</div>
+      <dl class="kv" id="kvReimu"></dl>
+      <div class="bar"><i id="hpReimu" style="width:0"></i></div>
+      <div class="flags" id="flags"></div>
+    </div>
+    <div class="hud-sec">
+      <div class="chrome-label">Target</div>
+      <dl class="kv" id="kvTarget"></dl>
+      <div class="bar target"><i id="hpTarget" style="width:0"></i></div>
+    </div>
+    <div class="hud-sec grow">
+      <div class="chrome-label" style="margin-bottom:6px">AI decisions</div>
+      <div id="aiLog"></div>
+    </div>
+  </aside>
+</main>
+
+<div id="ribbonWrap">
+  <div id="ribbonKeys">
+    <span>弾</span><span>命中</span><span>音</span><span>判断</span><span>浮き</span><span>姿勢</span>
+  </div>
+  <canvas id="ribbon"></canvas>
+</div>
+
+<footer>
+  <div class="grp">
+    <button class="btn" id="toStart" title="先頭へ (Home)">|◀</button>
+    <button class="btn" id="stepBack" title="1 tick 戻る (←)">◀</button>
+    <button class="btn" id="play" title="再生 / 停止 (Space)" style="min-width:64px">▶ 再生</button>
+    <button class="btn" id="stepFwd" title="1 tick 進む (→)">▶</button>
+    <button class="btn" id="toEnd" title="末尾へ (End)">▶|</button>
+  </div>
+  <div class="sep" id="speedSep"></div>
+  <div class="grp" id="speedWrap">
+    <span class="chrome-label">速度</span>
+    <select class="btn" id="speed">
+      <option value="0.1">0.1x</option><option value="0.25">0.25x</option>
+      <option value="0.5">0.5x</option><option value="1" selected>1x</option>
+      <option value="2">2x</option><option value="4">4x</option>
+    </select>
+  </div>
+  <div class="sep"></div>
+  <div class="grp">
+    <span class="chrome-label">残光</span>
+    <input type="range" id="trail" min="0" max="120" step="5" value="40">
+    <span class="num" id="trailV" style="width:34px;color:var(--ink-dim)">40t</span>
+  </div>
+  <div class="sep"></div>
+  <div class="grp" id="camGrp">
+    <span class="chrome-label">視点</span>
+    <button class="btn" data-cam="iso">斜め</button>
+    <button class="btn" data-cam="top">真上</button>
+    <button class="btn" data-cam="side">真横</button>
+    <button class="btn" data-cam="follow" aria-pressed="false">追従</button>
+  </div>
+  <div class="sep"></div>
+  <div class="grp">
+    <button class="btn" id="sound" aria-pressed="false" title="音を鳴らす">♪ 音</button>
+    <button class="btn" id="reload" title="別のトレースを開く">開く…</button>
+  </div>
+</footer>
+
+<script src="pick.js"></script>
+<script src="ysm.js"></script>
+<script src="palette.js"></script>
+<script src="live-palette-client.js"></script>
+<script src="gl.js"></script>
+<script src="store.js"></script>
+<script>
+'use strict';
+/* =============================================================================
+   1. データ — JSONL を「tick で引ける形」に畳む
+   ============================================================================= */
+const D = {
+  meta:null, entities:new Map(), maxTick:0,
+  // minTick: 手元にある一番古い tick。**ライブは直近2分しか持たない**(下の LIVE_WINDOW)。
+  // 記録を開いたときは常に 0 —— 記録は全量のまま読む。
+  minTick:0,
+  reimuId:null, targetIds:[], series:null,
+  // WR-01(code review 150d56a5): store は load() 前から常に非null(空の SimStore)に
+  // しておく。store が最初から非nullなら「storeが無ければ…」という分岐が要らなくなる
+  // ので、以下の frameAt は無条件に store.frameAt(...) を使う(空のストアは frameAt が
+  // 空の pos Map 等を返すので、load() 前の見た目は変わらない)。
+  // gen(13-02): トレースの世代番号。D.keyの唯一の可変部分(load()が更新する)。
+  // seriesState(13-03): stats.mjs の series() を追記できる形にした状態ハンドル
+  // (SHARED.seriesState())。D.series はこれの現在値(SHARED.seriesLanes(...))を
+  // 指すビューであって、別の集計ではない(AGENT-01)。SHARED が非同期で読み込まれる
+  // ため load() 前は null のまま——D.store と違って D 構築時点では作れない。
+  nTicks:0, store:SimStore.create(), gen:0, seriesState:null,
+};
+
+/**
+ * 密フレームと同じ形のオブジェクトを返す唯一の入口 (13-01で新設、13-02で全チャンネル対応)。
+ * 13-02: D.frames(密per-tickフレーム配列)は撤去した。全8チャンネル(pos/vis/ai/dmg/
+ * sound/phys/anim/proj/log)がD.store(SimStore)から来る——中身の出どころが変わっただけで、
+ * この関数の返り値の形と呼び出し側は13-01から1行も変えていない。
+ *
+ * **同一 (t,partial) の呼び出しは1回に抑える(memo)** —— 1回の draw() の中で
+ * render()/drawBullets()/draw() 自身が同じ引数で複数回呼ぶため(実測: 42fpsで
+ * 頭打ちになり drawMs が baseline の4.9msより明らかに高かった原因がこれだった)。
+ * gl.js の setTrace/poseYsm と同じ「同じキーなら丸ごとskip」の型(13-PATTERNS.md 共有パターンC)。
+ * load() が D.store を差し替えるたびにキャッシュも捨てる(古いトレースのフレームを
+ * 新しいトレースへ誤って持ち越さないため)。
+ */
+D._frameAtCache = null;
+D.frameAt = function frameAt(t, partial){
+  const tt = Math.max(0, Math.min(t|0, D.maxTick));
+  const p = partial||0;
+  const c = D._frameAtCache;
+  if (c && c.t === tt && c.partial === p) return c.frame;
+  const frame = D.store.frameAt(tt, p);
+  D._frameAtCache = { t: tt, partial: p, frame: frame };
+  return frame;
+};
+
+/** 波形・帯の元になる tick 毎の系列を一度だけ作る。 */
+// buildSeries() は削除した（2026-08-20、Phase 10-03）。
+// Viewer が距離と phase を独自に計算しており、AGENT-01 が禁じている食い違いが
+// 実在していた（phase は /phase=(\S+)/ という自前の正規表現で抜いていた）。
+// 系列は simlab/stats.mjs の series() が組む —— CLI と同じ関数。
+// buildTracks()(旧D.tracks)は削除した(13-02)。弾の軌跡はD.store.trackOf(id)から
+// 直接引く——posレーンが既に「変化点tickと位置」を持っているので、2つ目の入れ物
+// (D.tracks)へ複製しない。消費先(drawF3/drawPlanの残光)を参照。
+
+// 解析の共有モジュール。**Viewer はここでしか計算しない。**
+// viewer/ の外にある simlab/stats.mjs を /stats.mjs 経由で読む（コピーを作らない）。
+// CLI (analyze.mjs) とサーバ (/api/analyze) と Viewer が、文字どおり同じ関数を呼ぶ。
+let SHARED=null;
+const SHARED_READY=import('/stats.mjs').then(m=>{SHARED=m;}).catch(e=>{
+  console.error('[SimLab] stats.mjs を読めなかった。系列と phase が出ません:',e);
+});
+
+/**
+ * ai イベントから構造化 section を取る。
+ * **ここでパースを書かない** —— 新トレースは Java が構造化済みの sec を持ち、
+ * 旧トレースは stats.mjs が同じ規則でパースする。
+ */
+function secOf(a){
+  if(!a) return {};
+  if(a.sec&&typeof a.sec==='object') return a.sec;
+  return SHARED?SHARED.parseSection(a.section):{};
+}
+
+/** 構造化 section の cd* キーを HUD 用の1行へ戻す（整形であって計算ではない）。 */
+function cdLine(sec){
+  const parts=[];
+  for(const [k,v] of Object.entries(sec||{})){
+    if(!k.startsWith('cd')||k.length<3) continue;
+    const name=k.slice(2);
+    parts.push(name.charAt(0).toLowerCase()+name.slice(1)+'='+v);
+  }
+  return parts.length?parts.join(' '):null;
+}
+
+function load(text,name,opts){
+  opts=opts||{};
+  // **最新を見ていたか。** ライブでは、追いかけていた人は最新へ運び、
+  // 巻き戻して過去を見ている人はそこに置いていく。
+  // 操作を検出しなくても済むので、掴んだ瞬間に引き戻される事故が起きない。
+  const wasAtEnd=T.tick>=D.maxTick;
+  // 13-02: parse()を撤去した。密per-tickフレームを1つも作らず、行はS.appendへ
+  // そのまま渡す。meta/entities/maxTick/reimuIdはstore自身が既に追跡している
+  // ものをそのまま読む(index.html側で二重に集計しない)。load() は毎回ストアを
+  // 作り直す —— ライブの差分追記(13-03)まではまだ「渡されたテキスト全文を毎回
+  // 取り込む」でよい。
+  D.store=SimStore.create();
+  D.store.append(text);
+  D.meta=D.store.meta; D.entities=D.store.entities;
+  // maxTickは空トレースで-1になる(SimStore.create()の初期値)。旧parse()は空文字列
+  // でも0を返していた(空フレームを1つ作っていたため)ので、その挙動に揃える——
+  // 0/1件のticksを前提にした箇所(HUD文言・frameCam等)を変えずに済む。
+  D.maxTick=D.store.maxTick<0?0:D.store.maxTick;
+  D.reimuId=D.store.reimuId;
+  D.nTicks=D.maxTick+1;
+  D._frameAtCache=null; // 古いトレースのフレームを新しいトレースへ持ち越さない
+  D.targetIds=[...D.entities.values()].filter(e=>e.role==='target').map(e=>e.id);
+  // **系列は stats.mjs が組む。** Viewer で組み直さない (AGENT-01)。
+  // 読めていなければ null のまま —— 黙って自前計算に落ちない（落ちたら食い違いが復活する）。
+  // 13-03: series() 自体は series(events)=seriesState()+seriesFeed()+seriesLanes() の
+  // 薄い包みになったが、load() は「渡された text 全文で最初から作り直す」を続ける
+  // (毎回 D.store も作り直しているのと同じ理由——ファイル切り替えの入口なので、
+  // 前のトレースの状態を持ち越してはいけない)。final:true を渡すのは、これが
+  // 全量で「もう続きは来ない」呼び出しであるため(seriesFeed の docstring 参照。
+  // 渡さないと末尾の数tickが未確定のまま残る)。
+  D.seriesState=SHARED?SHARED.seriesState():null;
+  if(SHARED){
+    SHARED.seriesFeed(D.seriesState,SHARED.parseTrace(text).events,{final:true});
+    D.series=SHARED.seriesLanes(D.seriesState);
+  }else{
+    D.series=null;
+  }
+  // 13-02: D.gen(世代番号)は「別のトレースになった」ときだけ増える —— 行が増えた
+  // だけでは変わらない。name が前回の D.path と同じなら継続とみなす(ライブは毎秒
+  // 同じ名前 '水槽（ライブ）' で load() を呼ぶので、そこで D.gen が安定する)。
+  // D.key の可変部分は D.gen だけにする(旧: name+'#'+D.maxTick はライブで毎秒
+  // 変わっていた —— 13-PATTERNS.md 共有パターンC/D-01③の副次指摘)。これで
+  // gl.js の setTrace の早期return(同一キーはskip)がライブ中も実際に効くようになる。
+  // **記録は全量のまま開く。** 窓(直近2分)はライブだけの話なので床を 0 へ戻す ——
+  // にーくらが切り捨てを受け入れた条件が「記録は全部残っている」ことだった。
+  D.minTick=0;
+  if(name!==D.path) D.gen=(D.gen||0)+1;
+  D.key=name+'#'+D.gen;
+  D.path=name;
+  // 記録では D.path が実パスそのもの。**ライブで入れた値を残さない** ——
+  // 残すと記録を開いた後も前の水槽の companion を引きに行く。
+  D.tracePath=null;
+  // 弾の軌跡(旧D.tracks)・AI一覧(旧D.aiList)はもう「作る」ものではない ——
+  // ストアの pos レーン(D.store.trackOf)/事象レーン(D.store.latestEvent 等)へ
+  // 直接問い合わせる形に置き換えた(下の消費側を参照)。walk/animTrack(gl.js)は
+  // 「作り直す」ではなく「伸ばす」—— D.store.append() の直後に SimGL.growDerived(D)
+  // を呼ぶ。real(3D)タブを使っていない間は旧buildWalk/buildAnimTrackも呼ばれて
+  // いなかった(setTraceがdraw()のrealブランチ経由でしか呼ばれなかったため)ので、
+  // その挙動を踏襲してavailable()で条件づける。
+  if(window.SimGL&&SimGL.available()&&SimGL.growDerived) SimGL.growDerived(D);
+
+  document.getElementById('traceName').textContent=name;
+  const m=D.meta||{};
+  document.getElementById('traceMeta').textContent=
+    `${m.scenario??'?'} · arena ${m.arena??'?'} · ${D.maxTick+1} ticks · ${D.entities.size} entities`;
+  if(opts.live){
+    // ライブ: 最新を映す。**カメラは動かさない** —— 毎秒 frameCam すると
+    // にーくらが見ている場所を1秒ごとに奪うことになる。初回だけ寄せる。
+    T.tick=wasAtEnd?D.maxTick:Math.min(T.tick,D.maxTick);
+    if(opts.frameCam) frameCam();
+  }else{
+    T.tick=0; T.playing=false; syncPlayBtn();
+    frameCam();
+  }
+  renderAiLog(); resize(); draw();
+}
+
+/* =============================================================================
+   2. 再生状態
+   ============================================================================= */
+// followLive: **「最新を追っているか」の唯一の定義。** 以前はこの判断が
+// loop()/appendLive()/tankLiveBadge() の 3 箇所に `T.tick>=D.maxTick-3` として
+// 書き写されていて、片方だけ直すたびにずれた。旗を 1 つ持つ。
+/* **ライブが手元に持つ長さ。** にーくらの決定(2026-08-23): 前に戻れるのは 2 分でよい。
+ * 本当に遡るときは「記録」を開く —— jar が書いた全量がディスクに残っている。
+ * SLACK は「切る回数を減らすための緩衝」。毎 ingest 切ると memmove が 20回/秒 になるので、
+ * 30 秒ぶん溢れてからまとめて切る(保持は 2400〜3000 tick で鋸歯になるが、表示は D.minTick で
+ * ぴったり 2400 に均す —— そうしないとバーの長さが 30 秒ごとに 25% 跳ねる)。 */
+const LIVE_WINDOW=2400;   // 2 分 (20TPS)
+const LIVE_SLACK=600;     // 30 秒
+const T={tick:0,playing:false,speed:1,acc:0,partial:0,last:0,trail:40,mode:'real',follow:false,sound:false,served:false,followLive:true};
+
+/* =============================================================================
+   3. カメラ / 投影 — F3 モードと図面モードで共有
+   ============================================================================= */
+const cam={yaw:-0.62,pitch:0.42,dist:34,tx:0,ty:65,tz:6};
+
+function frameCam(){
+  const f=D.frameAt(T.tick,0); if(!f) return;
+  let sx=0,sy=0,sz=0,k=0;
+  for(const e of D.entities.values()){
+    // **frameAt をループの中で呼ばない。** frameAt は「これまでに存在した全エンティティ」を
+    // 回すので、ここでは O(体数 × 全レーン) になっていた —— 2 万レーンなら 1 回で数秒固まる
+    // (growWalk と同じ罠。2026-08-23 実測)。欲しいのは 1 体ぶんの座標だけ。
+    const t=Math.max(D.minTick||0,Math.min(e.first,D.maxTick));
+    const p=D.store.stateAt('pos',e.id,t); if(!p) continue;
+    sx+=p.x; sy+=p.y; sz+=p.z; k++;
+  }
+  if(k){ cam.tx=sx/k; cam.ty=sy/k+1; cam.tz=sz/k; }
+  else if(D.meta){ cam.tx=D.meta.originX||0; cam.ty=(D.meta.floorY||64)+1; cam.tz=D.meta.originZ||0; }
+}
+
+function project(x,y,z,W,H){
+  const vx=x-cam.tx, vy=y-cam.ty, vz=z-cam.tz;
+  const cy=Math.cos(cam.yaw), sy=Math.sin(cam.yaw);
+  const x1=vx*cy-vz*sy, z1=vx*sy+vz*cy;
+  const cp=Math.cos(cam.pitch), sp=Math.sin(cam.pitch);
+  const y2=vy*cp-z1*sp, z2=vy*sp+z1*cp;
+  const d=z2+cam.dist;
+  if(d<0.15) return null;
+  const f=Math.min(W,H)*1.15;
+  return {x:W/2+x1*f/d, y:H/2-y2*f/d, d};
+}
+
+/* =============================================================================
+   4. 描画
+   ============================================================================= */
+const stage=document.getElementById('stage'), sctx=stage.getContext('2d');
+const ribbon=document.getElementById('ribbon'), rctx=ribbon.getContext('2d');
+const glCanvas=document.getElementById('glstage');
+const stageWrap=document.getElementById('stageWrap');
+
+function resize(){
+  for(const [c,ctx] of [[stage,sctx],[ribbon,rctx]]){
+    const r=c.getBoundingClientRect(), dpr=Math.min(2,window.devicePixelRatio||1);
+    c.width=Math.max(1,Math.round(r.width*dpr)); c.height=Math.max(1,Math.round(r.height*dpr));
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+}
+/* **毎フレームの getBoundingClientRect をやめる。**
+ *
+ * CPU プロファイル(2026-08-23、にーくら「fps は下がる。描画の重さも関係してる？」)で、
+ * **getBoundingClientRect が JS 自己時間の 11.9% で単独最大**だった。draw() は
+ * glCanvas/stage の display を書いた直後にここでサイズを読むので、**毎フレーム
+ * 同期レイアウトが強制されていた**(layout thrashing)。しかも大きさが変わるのは
+ * 窓のリサイズのときだけ。
+ *
+ * ResizeObserver に覚えさせて、読むのは覚えた値にする。0 のとき(display:none だった
+ * 直後など、まだ通知が来ていない場合)だけ実測へ落ちる —— 0 で描くと画が消えるので、
+ * 安全側は「測る」ほう。 */
+const SIZE=new WeakMap();
+const SIZE_RO=(typeof ResizeObserver!=='undefined')?new ResizeObserver((es)=>{
+  for(const e of es){ const r=e.contentRect; SIZE.set(e.target,{w:r.width,h:r.height}); }
+}):null;
+function sizeOf(c){
+  const s=SIZE.get(c);
+  if(s&&s.w>0&&s.h>0) return s;
+  if(SIZE_RO&&s===undefined) SIZE_RO.observe(c);
+  const r=c.getBoundingClientRect(), m={w:r.width,h:r.height};
+  SIZE.set(c,m);
+  return m;
+}
+const cssW=(c)=>sizeOf(c).w, cssH=(c)=>sizeOf(c).h;
+
+function line(ctx,a,b,color,w=1,alpha=1){
+  if(!a||!b) return;
+  ctx.strokeStyle=color; ctx.lineWidth=w; ctx.globalAlpha=alpha;
+  ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke(); ctx.globalAlpha=1;
+}
+
+/* --- 線の一括描画 ---------------------------------------------------------
+   canvas 2D では stroke() 1 回ごとにパスが確定するので、同じ色・太さの線は
+   1 本のパスにまとめて 1 回だけ stroke する。部屋のグリッドは 360 本以上あり、
+   1 本ずつ描くとここだけでフレームを食い潰す。 */
+function batch(ctx,color,alpha,w){ ctx.strokeStyle=color; ctx.globalAlpha=alpha; ctx.lineWidth=w; ctx.beginPath(); }
+function seg(ctx,a,b){ if(a&&b){ ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); } }
+function flush(ctx){ ctx.stroke(); ctx.globalAlpha=1; }
+
+/* canvas の font には CSS 変数が効かないので実体で持つ */
+const FONT_MONO='11px "Cascadia Mono", Consolas, ui-monospace, monospace';
+const FONT_MONO_S='9px "Cascadia Mono", Consolas, ui-monospace, monospace';
+const FONT_UI='10px "Segoe UI", "Yu Gothic UI", system-ui, sans-serif';
+
+/** hitbox の AABB をワイヤーフレームで。F3+B と同じ「足元中心・幅w・高さh」。 */
+function drawBox(ctx,W,H,p,w,h,color,alpha){
+  const r=w/2;
+  const c=[[-r,0,-r],[r,0,-r],[r,0,r],[-r,0,r],[-r,h,-r],[r,h,-r],[r,h,r],[-r,h,r]]
+    .map(([dx,dy,dz])=>project(p.x+dx,p.y+dy,p.z+dz,W,H));
+  const E=[[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]];
+  batch(ctx,color,alpha,1);
+  for(const [a,b] of E) seg(ctx,c[a],c[b]);
+  flush(ctx);
+  return c;
+}
+
+/* CSS 変数は起動時に一度だけ読む。getComputedStyle は 1 回ごとにスタイル再計算を
+   強制するので、描画ループの中から呼ぶと単体でフレーム落ちの原因になる。 */
+const C={};
+function cacheCss(){
+  const cs=getComputedStyle(document.documentElement);
+  for(const k of ['--void','--panel','--panel-2','--line','--line-soft','--ink','--ink-dim','--ink-faint',
+                  '--hitbox','--axis-x','--axis-y','--axis-z','--chunk','--vel','--warn','--target'])
+    C[k]=cs.getPropertyValue(k).trim();
+}
+const CSS=(n)=>C[n];
+
+function drawF3(){
+  const W=cssW(stage),H=cssH(stage);
+  sctx.clearRect(0,0,W,H);
+  const f=D.frameAt(T.tick,T.partial); if(!f) return;
+  // 3D の実機グリッドと同じ「床の表面」を読む(SimPick.floorSurfaceY, commit
+  // 1029da3a / HANDOFF §4-6)。ここだけ+1し忘れると、この2D側だけ床が1マス低くなる。
+  const floorY=SimPick.floorSurfaceY(D.meta);
+  const ox=(D.meta&&D.meta.originX)||0, oz=(D.meta&&D.meta.originZ)||0;
+
+  drawChamber(W,H);
+  drawBlocks(W,H);
+
+  // --- 原点の XYZ 軸 ---
+  const o=project(ox,floorY,oz,W,H);
+  line(sctx,o,project(ox+3,floorY,oz,W,H),CSS('--axis-x'),1.5,.9);
+  line(sctx,o,project(ox,floorY+3,oz,W,H),CSS('--axis-y'),1.5,.9);
+  line(sctx,o,project(ox,floorY,oz+3,W,H),CSS('--axis-z'),1.5,.9);
+
+  // --- 残光: 過去 trail tick の弾道。止めた瞬間に「弾が作った形」が見える ---
+  // 段ごとに濃さを変えるが、線は 5 段のバッチにまとめて 5 回の stroke で描く。
+  // 13-02: D.tracks(前もって全弾ぶん作っていた入れ物)を廃し、D.store.trackOf(id)
+  // (posレーンへの薄いビュー。複製を持たない)からtick単位で直接引く。tr.at(t)は
+  // stateAt('pos',id,t)相当(isAliveでgone後は自動的にnullになる——旧buildTracksの
+  // 「欠測は直前値で埋める」は実質forward-fillの重複実装だったので引き継がない)。
+  if(T.trail>0){
+    const t0=Math.max(0,T.tick-T.trail), BANDS=5;
+    const bands=Array.from({length:BANDS},()=>[]);
+    for(const e of D.entities.values()){
+      if(e.role!=='projectile') continue;
+      const tr=D.store.trackOf(e.id);
+      if(!tr||tr.t0>T.tick||tr.t1<t0) continue;
+      const half=e.h/2;   // entity Y は AABB の底なので中心へ寄せる
+      const s=Math.max(t0,tr.t0), en=Math.min(T.tick,tr.t1);
+      let prev=tr.at(s);
+      for(let t=s+1;t<=en;t++){
+        const cur=tr.at(t);
+        if(prev&&cur){
+          const a=project(prev.x,prev.y+half,prev.z,W,H), b=project(cur.x,cur.y+half,cur.z,W,H);
+          if(a&&b){
+            const age=(T.tick-t)/Math.max(1,T.trail);
+            bands[Math.min(BANDS-1,(age*BANDS)|0)].push(a,b);
+          }
+        }
+        prev=cur;
+      }
+    }
+    for(let bd=0;bd<BANDS;bd++){
+      const arr=bands[bd]; if(!arr.length) continue;
+      batch(sctx,CSS('--vel'),.6*(1-(bd+.5)/BANDS),1.25);
+      for(let i=0;i<arr.length;i+=2) seg(sctx,arr[i],arr[i+1]);
+      flush(sctx);
+    }
+  }
+
+  // --- エンティティ (奥→手前) ---
+  // 弾は AABB の底ではなく中心に描く (Minecraft の entity Y は足元基準)。
+  const list=[...f.pos.entries()].map(([id,p])=>{
+    const e=D.entities.get(id);
+    const yc=p.y+(e&&e.role==='projectile'?e.h/2:0);
+    return {id,p,e,pr:project(p.x,yc,p.z,W,H)};
+  }).filter(o=>o.e&&o.pr).sort((a,b)=>b.pr.d-a.pr.d);
+
+  sctx.fillStyle=CSS('--vel');
+  for(const {e,pr} of list){
+    if(e.role!=='projectile') continue;
+    const rad=Math.max(1.6,(e.w*0.5)*Math.min(W,H)*1.15/pr.d);
+    sctx.globalAlpha=.95; sctx.beginPath(); sctx.arc(pr.x,pr.y,rad,0,7); sctx.fill();
+  }
+  sctx.globalAlpha=1;
+
+  for(const {p,e,pr} of list){
+    if(e.role==='projectile') continue;
+    const col=e.role==='reimu'?CSS('--hitbox'):CSS('--target');
+    drawBox(sctx,W,H,p,e.w,e.h,col,e.role==='reimu'?.95:.6);
+    // 速度ベクトル (MC の F3+B と同じシアン)
+    if(p.vx||p.vy||p.vz){
+      const s=8;
+      line(sctx,project(p.x,p.y+e.h/2,p.z,W,H),
+        project(p.x+p.vx*s,p.y+e.h/2+p.vy*s,p.z+p.vz*s,W,H),CSS('--vel'),1.5,.85);
+    }
+    const top=project(p.x,p.y+e.h+0.35,p.z,W,H);
+    if(top){
+      sctx.font=FONT_MONO; sctx.textAlign='center';
+      sctx.fillStyle='rgba(0,0,0,.8)';
+      const label=`${e.type.split(':').pop()}${typeof p.hp==='number'?`  ${p.hp.toFixed(1)}`:''}`;
+      sctx.fillText(label,top.x+1,top.y+1);
+      sctx.fillStyle=col; sctx.fillText(label,top.x,top.y);
+      sctx.textAlign='left';
+    }
+  }
+  drawGizmo(W,H);
+  drawOverlay(f);
+}
+
+/**
+ * 実験室。床だけの無限 void ではなく、床 + 4 面の壁をグリッドで囲った「有界の部屋」にする。
+ * 奥行きと高さの手がかりが常に画面にあるので、飛行高度・後退距離・場外の判断が目で読める。
+ * アリーナの実寸 (meta.floorRadius) をそのまま部屋の大きさにしてあるため、
+ * <b>壁の位置 = 床の縁 = 落ちる境界</b> になっている。
+ */
+function drawChamber(W,H){
+  // 3D の実機グリッドと同じ「床の表面」を読む(SimPick.floorSurfaceY, commit
+  // 1029da3a / HANDOFF §4-6)。ここだけ+1し忘れると、この2D側だけ床が1マス低くなる。
+  const floorY=SimPick.floorSurfaceY(D.meta);
+  const ox=(D.meta&&D.meta.originX)||0, oz=(D.meta&&D.meta.originZ)||0;
+  const R=(D.meta&&D.meta.floorRadius)||24, HGT=16;
+  const P=(x,y,z)=>project(x,y,z,W,H);
+  const FINE='#212128', BIG='#3B3B45', EDGE='#C9C9D2';
+
+  // 細線 / 太線 の 2 バッチにまとめる (360 本を 2 回の stroke で描く)
+  batch(sctx,FINE,.6,1);
+  for(let i=-R;i<=R;i++){
+    if(i%8===0) continue;
+    seg(sctx,P(ox+i,floorY,oz-R),P(ox+i,floorY,oz+R));
+    seg(sctx,P(ox-R,floorY,oz+i),P(ox+R,floorY,oz+i));
+    for(const w of [{f:'z',v:oz-R},{f:'z',v:oz+R},{f:'x',v:ox-R},{f:'x',v:ox+R}]){
+      seg(sctx, w.f==='z'?P(ox+i,floorY,w.v):P(w.v,floorY,oz+i),
+                w.f==='z'?P(ox+i,floorY+HGT,w.v):P(w.v,floorY+HGT,oz+i));
+    }
+  }
+  for(let h=0;h<=HGT;h++){
+    if(h%8===0) continue;
+    for(const w of [{f:'z',v:oz-R},{f:'z',v:oz+R},{f:'x',v:ox-R},{f:'x',v:ox+R}]){
+      seg(sctx, w.f==='z'?P(ox-R,floorY+h,w.v):P(w.v,floorY+h,oz-R),
+                w.f==='z'?P(ox+R,floorY+h,w.v):P(w.v,floorY+h,oz+R));
+    }
+  }
+  flush(sctx);
+
+  batch(sctx,BIG,.9,1);
+  for(let i=-R;i<=R;i+=8){
+    seg(sctx,P(ox+i,floorY,oz-R),P(ox+i,floorY,oz+R));
+    seg(sctx,P(ox-R,floorY,oz+i),P(ox+R,floorY,oz+i));
+    for(const w of [{f:'z',v:oz-R},{f:'z',v:oz+R},{f:'x',v:ox-R},{f:'x',v:ox+R}]){
+      seg(sctx, w.f==='z'?P(ox+i,floorY,w.v):P(w.v,floorY,oz+i),
+                w.f==='z'?P(ox+i,floorY+HGT,w.v):P(w.v,floorY+HGT,oz+i));
+    }
+  }
+  for(let h=0;h<=HGT;h+=8){
+    for(const w of [{f:'z',v:oz-R},{f:'z',v:oz+R},{f:'x',v:ox-R},{f:'x',v:ox+R}]){
+      seg(sctx, w.f==='z'?P(ox-R,floorY+h,w.v):P(w.v,floorY+h,oz-R),
+                w.f==='z'?P(ox+R,floorY+h,w.v):P(w.v,floorY+h,oz+R));
+    }
+  }
+  flush(sctx);
+
+  const c=[[ox-R,oz-R],[ox+R,oz-R],[ox+R,oz+R],[ox-R,oz+R]];
+  batch(sctx,EDGE,.88,1.4);
+  for(let i=0;i<4;i++){
+    const [x1,z1]=c[i], [x2,z2]=c[(i+1)%4];
+    seg(sctx,P(x1,floorY,z1),P(x2,floorY,z2));
+    seg(sctx,P(x1,floorY,z1),P(x1,floorY+HGT,z1));
+  }
+  flush(sctx);
+  batch(sctx,EDGE,.42,1.2);
+  for(let i=0;i<4;i++){
+    const [x1,z1]=c[i], [x2,z2]=c[(i+1)%4];
+    seg(sctx,P(x1,floorY+HGT,z1),P(x2,floorY+HGT,z2));
+  }
+  flush(sctx);
+}
+
+/** シナリオで置いた構造物 (階段・柱・足場)。どの段差を登ったかを目で追うためのもの。 */
+function drawBlocks(W,H){
+  const bs=(D.meta&&D.meta.blocks)||[]; if(!bs.length) return;
+  const ox=(D.meta.originX||0), oz=(D.meta.originZ||0);
+  const boxes=bs.map(b=>{
+    const x0=ox+b.x0,x1=ox+b.x1+1,y0=b.y0,y1=b.y1+1,z0=oz+b.z0,z1=oz+b.z1+1;
+    const c=[[x0,y0,z0],[x1,y0,z0],[x1,y0,z1],[x0,y0,z1],[x0,y1,z0],[x1,y1,z0],[x1,y1,z1],[x0,y1,z1]]
+      .map(p=>project(p[0],p[1],p[2],W,H));
+    const d=c.filter(Boolean).reduce((a,p)=>a+p.d,0)/Math.max(1,c.filter(Boolean).length);
+    return {c,d};
+  }).sort((a,b)=>b.d-a.d);
+  const F=[[0,1,2,3],[4,5,6,7],[0,1,5,4],[1,2,6,5],[2,3,7,6],[3,0,4,7]];
+  const E=[[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]];
+  for(const {c} of boxes){
+    sctx.fillStyle='#262630'; sctx.globalAlpha=.72;
+    for(const f of F){
+      if(f.some(i=>!c[i])) continue;
+      sctx.beginPath(); sctx.moveTo(c[f[0]].x,c[f[0]].y);
+      for(let i=1;i<4;i++) sctx.lineTo(c[f[i]].x,c[f[i]].y);
+      sctx.closePath(); sctx.fill();
+    }
+    sctx.globalAlpha=1;
+    for(const [a,b] of E) line(sctx,c[a],c[b],'#6E6E7A',1,.85);
+  }
+}
+
+/** 右下の姿勢ジャイロ。カメラの向きだけを描くので、真上/真横に切り替えても迷子にならない。 */
+function drawGizmo(W,H){
+  const L=26, cx=W-58, cy=H-52;
+  const rot=(x,y,z)=>{
+    const c0=Math.cos(cam.yaw), s0=Math.sin(cam.yaw);
+    const x1=x*c0-z*s0, z1=x*s0+z*c0;
+    const cp=Math.cos(cam.pitch), sp=Math.sin(cam.pitch);
+    return {x:x1,y:y*cp-z1*sp};
+  };
+  const p=(x,y,z)=>{const r=rot(x,y,z);return {x:cx+r.x*L,y:cy-r.y*L};};
+  const cube=[[-1,-1,-1],[1,-1,-1],[1,-1,1],[-1,-1,1],[-1,1,-1],[1,1,-1],[1,1,1],[-1,1,1]]
+    .map(v=>p(v[0]*.6,v[1]*.6,v[2]*.6));
+  for(const [a,b] of [[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]])
+    line(sctx,cube[a],cube[b],'#4A4A55',1,.9);
+  const o=p(0,0,0);
+  line(sctx,o,p(1,0,0),CSS('--axis-x'),1.8,1);
+  line(sctx,o,p(0,1,0),CSS('--axis-y'),1.8,1);
+  line(sctx,o,p(0,0,1),CSS('--axis-z'),1.8,1);
+}
+
+/** F3 オーバーレイ相当のテキスト。実機の F3 と同じ順序・同じ語で並べる。 */
+function drawOverlay(f){
+  const el=document.getElementById('overlay');
+  const p=D.reimuId!=null?f.pos.get(D.reimuId):null;
+  const ph=f.phys;
+  if(!p){ el.textContent=''; return; }
+  const cx=Math.floor(p.x)>>4, cz=Math.floor(p.z)>>4;
+  const facing=(()=>{
+    const y=((p.yaw%360)+360)%360;
+    if(y<45||y>=315) return 'south (+Z)'; if(y<135) return 'west (-X)';
+    if(y<225) return 'north (-Z)'; return 'east (+X)';
+  })();
+  el.innerHTML=
+   `<span class="k">XYZ</span>    ${p.x.toFixed(3)} / ${p.y.toFixed(5)} / ${p.z.toFixed(3)}\n`+
+   `<span class="k">Block</span>  ${Math.floor(p.x)} ${Math.floor(p.y)} ${Math.floor(p.z)}\n`+
+   `<span class="k">Chunk</span>  ${cx} ${cz}\n`+
+   `<span class="k">Facing</span> ${facing}  (${p.yaw.toFixed(1)} / ${p.pitch.toFixed(1)})\n`+
+   `<span class="k">Motion</span> ${p.vx.toFixed(3)} ${p.vy.toFixed(3)} ${p.vz.toFixed(3)}   |v| ${(ph?ph.vel:0).toFixed(3)}\n`+
+   (ph?`<span class="k">Ground</span> onG ${ph.onG}   embed ${ph.embed}   noGrav ${ph.noGrav}   air ${ph.air}`:'');
+  document.getElementById('hintText').textContent='左drag 回転 · 右drag 平行移動 · wheel 拡縮';
+}
+
+/* ---- 計測器モード: tick を横軸に、状態を重ねて読む ---- */
+/**
+ * 高度を「その run の最低点からの相対」に直す（表示のための整形。計算ではない）。
+ * 絶対 y は 65〜71 のような範囲なので、0 基準で描くと変化が線の太さに潰れる。
+ * 値の無い tick は NaN のまま渡す —— 0 に落とすと「地面に居た」と誤読させる。
+ */
+/* yRel は撤去した。**毎フレーム配列を 2 回作り直していた** (rows の中で 2 回呼ばれていた)。
+ * 高度だけは 0 始まりでないので min を引く必要があるが、それは行に sub を持たせて
+ * 描画時に引けば足りる —— 新しい配列を作る理由が無い。 */
+
+function drawScope(){
+  const W=cssW(stage),H=cssH(stage);
+  sctx.clearRect(0,0,W,H);
+  const s=D.series; if(!s) return;
+  // 窓の範囲だけ描く。系列の配列は絶対 tick 索引のままなので、添字は触らず
+  // 「どこからどこまでを見るか」だけを動かす。
+  const t0=D.minTick||0, t1=D.maxTick, n=t1-t0+1;
+  const L=64, Rp=14, w=W-L-Rp;
+  const X=(t)=>L+w*((t-t0)/Math.max(1,n-1));
+
+  const yMin=minOf(s.y,t0,t1);
+  const rows=[
+    {label:'hp reimu', kind:'area', data:s.hpR, max:maxOf(s.hpR,t0,t1), color:CSS('--hitbox')},
+    {label:'hp target',kind:'area', data:s.hpT, max:maxOf(s.hpT,t0,t1), color:CSS('--target')},
+    {label:'dist',     kind:'line', data:s.dist,max:maxOf(s.dist,t0,t1), color:CSS('--axis-z'), unit:'m'},
+    // 高度 —— MEAS-02 が名指しする4量(距離/高度/HP/接地)のうち、これだけが無かった。
+    // 他のレーンと違い 0 始まりではないので、min を引いて振れ幅で描く
+    // (y=65〜71 のような範囲を 0 基準で描くと、変化が潰れて読めない)。
+    // 高度は 0 始まりでないので min を引いて振れ幅で描く。**配列は作らない** (sub で引く)。
+    {label:'y (高度)', kind:'line', data:s.y, sub:yMin, max:Math.max(0.001,maxOf(s.y,t0,t1)-yMin), color:CSS('--axis-y'), unit:'m'},
+    {label:'vel',      kind:'line', data:s.vel, max:Math.max(0.001,maxOf(s.vel,t0,t1)), color:CSS('--vel')},
+    {label:'onGround', kind:'bool', data:s.onG, color:CSS('--axis-y')},
+    {label:'air',      kind:'bool', data:s.air, color:CSS('--warn')},
+    {label:'phase',    kind:'phase'},
+  ];
+  const gap=8, rh=(H-16-gap*rows.length)/rows.length;
+  let y=10;
+  sctx.font=FONT_UI;
+  for(const r of rows){
+    sctx.fillStyle=CSS('--ink-faint'); sctx.textAlign='right';
+    sctx.fillText(r.label,L-8,y+10); sctx.textAlign='left';
+    sctx.strokeStyle=CSS('--line-soft'); sctx.lineWidth=1;
+    sctx.beginPath(); sctx.moveTo(L,y+rh); sctx.lineTo(L+w,y+rh); sctx.stroke();
+
+    if(r.kind==='phase'){ drawPhaseLane(s,X,y,rh,w,L,t0,t1); }
+    else if(r.kind==='bool'){
+      sctx.fillStyle=r.color; sctx.globalAlpha=.75;
+      // **絶対 tick で回す。** 以前は t=0..n で回しながら X(t) が絶対 tick を期待していたので、
+      // ライブ (minTick>0) では**別の時刻のデータを画面外へ描いていた**。
+      for(let t=t0;t<=t1;t++) if(r.data[t]) sctx.fillRect(X(t),y+rh*0.25,Math.max(1,w/n),rh*0.75);
+      sctx.globalAlpha=1;
+    } else {
+      sctx.beginPath(); let started=false;
+      for(let t=t0;t<=t1;t++){
+        const raw=r.data[t]; if(!isFinite(raw)) continue;
+        const v=raw-(r.sub||0);
+        const py=y+rh-(v/r.max)*rh;
+        if(!started){ sctx.moveTo(X(t),py); started=true; } else sctx.lineTo(X(t),py);
+      }
+      sctx.strokeStyle=r.color; sctx.lineWidth=1.25; sctx.stroke();
+      if(r.kind==='area'){ sctx.lineTo(X(t1),y+rh); sctx.lineTo(L,y+rh); sctx.closePath();
+        sctx.globalAlpha=.10; sctx.fillStyle=r.color; sctx.fill(); sctx.globalAlpha=1; }
+      const cur=isFinite(r.data[T.tick])?r.data[T.tick]-(r.sub||0):NaN;
+      if(isFinite(cur)){
+        sctx.fillStyle=r.color; sctx.font=FONT_MONO;
+        sctx.fillText(cur.toFixed(2)+(r.unit||''),L+w+2,y+rh-2);
+        sctx.font=FONT_UI;
+      }
+    }
+    y+=rh+gap;
+  }
+  // playhead
+  sctx.strokeStyle=CSS('--vel'); sctx.lineWidth=1; sctx.globalAlpha=.9;
+  sctx.beginPath(); sctx.moveTo(X(T.tick),4); sctx.lineTo(X(T.tick),H-4); sctx.stroke(); sctx.globalAlpha=1;
+  document.getElementById('overlay').textContent='';
+  document.getElementById('hintText').textContent='click / drag でシーク';
+}
+/* **窓の中だけを見る。** これらの配列は絶対 tick 索引で、水槽の稼働時間ぶん伸び続ける
+ * (stats.mjs の seriesTrim が「レーン配列には触れない。**読む側を窓に限れば CPU は
+ * 消えるので、そちらで足りる**」と明言している)。読む側が窓に限られていなかった。
+ *
+ * 実測 (2026-08-25、配列長ごとの 1 フレームぶんの走査費用):
+ *   19,000 (0.3h)   1.16ms   160fps 予算の 19%
+ *   216,000 (3h)    7.08ms   113%   <- ここで 160fps を割る
+ *   720,000 (10h)  23.54ms   377%
+ * yRel は毎フレーム配列を丸ごと確保し直してもいた (10 時間なら 1 フレーム 5.8MB)。
+ */
+function maxOf(a,t0,t1){ let m=0; const b=Math.min(t1==null?a.length-1:t1,a.length-1);
+  for(let t=Math.max(0,t0||0);t<=b;t++){ const v=a[t]; if(isFinite(v)&&v>m) m=v; } return m||1; }
+function minOf(a,t0,t1){ let m=Infinity; const b=Math.min(t1==null?a.length-1:t1,a.length-1);
+  for(let t=Math.max(0,t0||0);t<=b;t++){ const v=a[t]; if(isFinite(v)&&v<m) m=v; } return isFinite(m)?m:0; }
+
+function drawPhaseLane(s,X,y,rh,w,L,t0,t1){
+  // **窓の中だけ歩く。** 以前は s.phase の全長を歩いていた (絶対 tick 索引なので
+  // 水槽の稼働時間ぶん伸びる)。maxOf と同じ形の見落とし。
+  const n=Math.min(t1==null?s.phase.length-1:t1,s.phase.length-1)+1; let t=Math.max(0,t0||0);
+  const palette=[CSS('--vel'),CSS('--warn'),CSS('--axis-y'),CSS('--axis-z'),CSS('--target'),CSS('--hitbox')];
+  const seen=new Map();
+  while(t<n){
+    const ph=s.phase[t]; let e=t; while(e<n&&s.phase[e]===ph) e++;
+    if(ph){
+      if(!seen.has(ph)) seen.set(ph,palette[seen.size%palette.length]);
+      sctx.fillStyle=seen.get(ph); sctx.globalAlpha=.55;
+      sctx.fillRect(X(t),y+2,Math.max(1,X(e)-X(t)),rh-4); sctx.globalAlpha=1;
+      if(X(e)-X(t)>44){
+        sctx.fillStyle='#0B0B0C'; sctx.font=FONT_MONO_S;
+        sctx.fillText(ph.slice(0,14),X(t)+3,y+rh-5); sctx.font=FONT_UI;
+      }
+    }
+    t=e;
+  }
+}
+
+/* ---- 図面モード: 平面図 + 立面図。弾幕の形と寸法を読む ---- */
+function drawPlan(){
+  const W=cssW(stage),H=cssH(stage);
+  sctx.clearRect(0,0,W,H);
+  const f=D.frameAt(T.tick,T.partial); if(!f) return;
+  // 3D の実機グリッドと同じ「床の表面」を読む(SimPick.floorSurfaceY, commit
+  // 1029da3a / HANDOFF §4-6)。ここだけ+1し忘れると、この2D側だけ床が1マス低くなる。
+  const floorY=SimPick.floorSurfaceY(D.meta);
+  const ox=(D.meta&&D.meta.originX)||0, oz=(D.meta&&D.meta.originZ)||0;
+  const half=W/2, pad=18, span=34; // 表示範囲 ±span m
+  const sc=Math.min(half-pad*2,H-pad*3)/(span*2);
+
+  const views=[
+    {x0:pad, title:'PLAN  (y↓ 見下ろし)',  mapx:(p)=>p.x-ox, mapy:(p,dy=0)=>p.z-oz},
+    {x0:half+pad, title:'ELEVATION  (真横)', mapx:(p)=>p.z-oz, mapy:(p,dy=0)=>-((p.y+dy)-floorY)+span*0.55},
+  ];
+  sctx.font=FONT_UI;
+  for(const v of views){
+    const cx=v.x0+(half-pad*2)/2, cy=pad+18+(H-pad*3)/2;
+    sctx.save(); sctx.beginPath(); sctx.rect(v.x0,pad+14,half-pad*2,H-pad*3); sctx.clip();
+    // 方眼 1m / 太線 8m
+    for(let i=-span;i<=span;i++){
+      const strong=i%8===0;
+      sctx.strokeStyle=strong?CSS('--line'):CSS('--line-soft');
+      sctx.globalAlpha=strong?.9:.55; sctx.lineWidth=1;
+      sctx.beginPath(); sctx.moveTo(cx+i*sc,cy-span*sc); sctx.lineTo(cx+i*sc,cy+span*sc); sctx.stroke();
+      sctx.beginPath(); sctx.moveTo(cx-span*sc,cy+i*sc); sctx.lineTo(cx+span*sc,cy+i*sc); sctx.stroke();
+    }
+    sctx.globalAlpha=1;
+    // 弾道 (残光)
+    // 13-02: D.tracksを廃し、D.store.trackOf(id)から直接引く(drawF3の残光と同じ置き換え)。
+    // tr.at(t)がnullを返す(gone後)ことがあるので、そこでmoveTo扱いへ戻して線を切る
+    // ——旧D.tracksは前方フィル済みの配列なのでnullは無かったが、trackOfは
+    // isAlive境界で自然にnullになる。
+    if(T.trail>0){
+      const t0=Math.max(0,T.tick-T.trail);
+      sctx.strokeStyle=CSS('--vel'); sctx.lineWidth=1; sctx.globalAlpha=.5; sctx.beginPath();
+      for(const e of D.entities.values()){
+        if(e.role!=='projectile') continue;
+        const tr=D.store.trackOf(e.id);
+        if(!tr||tr.t0>T.tick||tr.t1<t0) continue;
+        const half=e.h/2;
+        const s0=Math.max(t0,tr.t0), e0=Math.min(T.tick,tr.t1);
+        let needMove=true;
+        for(let t=s0;t<=e0;t++){
+          const p=tr.at(t);
+          if(!p){ needMove=true; continue; }
+          const X=cx+v.mapx(p)*sc, Y=cy+v.mapy(p,half)*sc;
+          if(needMove){ sctx.moveTo(X,Y); needMove=false; } else sctx.lineTo(X,Y);
+        }
+      }
+      sctx.stroke(); sctx.globalAlpha=1;
+    }
+    // アクター
+    for(const [id,p] of f.pos){
+      const e=D.entities.get(id); if(!e) continue;
+      const X=cx+v.mapx(p)*sc, Y=cy+v.mapy(p,e.role==='projectile'?e.h/2:0)*sc;
+      if(e.role==='projectile'){
+        sctx.fillStyle=CSS('--vel'); sctx.beginPath(); sctx.arc(X,Y,2,0,7); sctx.fill();
+      }else{
+        const col=e.role==='reimu'?CSS('--hitbox'):CSS('--target');
+        sctx.strokeStyle=col; sctx.lineWidth=1.25;
+        sctx.strokeRect(X-e.w*sc/2,Y-e.w*sc/2,e.w*sc,e.w*sc);
+        sctx.fillStyle=col; sctx.font=FONT_MONO;
+        sctx.fillText(e.type.split(':').pop(),X+e.w*sc/2+4,Y+3);
+        sctx.font=FONT_UI;
+      }
+    }
+    sctx.restore();
+    sctx.fillStyle=CSS('--ink-faint'); sctx.fillText(v.title,v.x0,pad+6);
+    sctx.strokeStyle=CSS('--line'); sctx.strokeRect(v.x0,pad+14,half-pad*2,H-pad*3);
+  }
+  // 寸法・拡散角
+  const m=volleyMetrics(f);
+  sctx.fillStyle=CSS('--ink-dim'); sctx.font=FONT_MONO;
+  sctx.fillText(m,pad,H-8);
+  document.getElementById('overlay').textContent='';
+  document.getElementById('hintText').textContent='方眼 1m / 太線 8m';
+}
+
+/** 直近に湧いた一斉射から本数と拡散角を出す。拡散角の調整はこの数字を見る。
+ *  13-02: 20tick窓をD.frameAt(t,0)でtickごとに舐める(=毎回フルフレーム合成+
+ *  単一エントリmemoの奪い合い)のをやめ、事象レーンの範囲取得
+ *  S.eventsInRange('proj',t0,t1)に置き換えた——まさにこの用途のために13-02-PLAN.mdが
+ *  導入したAPI。 */
+function volleyMetrics(f){
+  const back=20; const yaws=[]; let type=null,count=0;
+  const t0=Math.max(0,T.tick-back);
+  for(const p of D.store.eventsInRange('proj',t0,T.tick)){
+    if(p.ev!=='spawn') continue;
+    type=type||p.type; if(p.type!==type) continue;
+    count++; yaws.push(Math.atan2(p.vx,p.vz)*180/Math.PI);
+  }
+  const dist=(()=>{
+    const a=D.reimuId!=null?f.pos.get(D.reimuId):null, b=D.targetIds[0]!=null?f.pos.get(D.targetIds[0]):null;
+    return a&&b?Math.hypot(a.x-b.x,a.y-b.y,a.z-b.z):NaN;
+  })();
+  if(!count) return `dist ${isFinite(dist)?dist.toFixed(2)+'m':'—'}    直近 ${back}t に発射なし`;
+  const spread=Math.max(...yaws)-Math.min(...yaws);
+  return `dist ${isFinite(dist)?dist.toFixed(2)+'m':'—'}    直近 ${back}t: ${type.split(':').pop()} ×${count}   拡散 ${spread.toFixed(1)}°`;
+}
+
+/* ---- 帯: 全モード共通のスクラバー。どこが見どころか一目で分かる ----
+   帯の中身は tick が進んでも変わらないので、トレース/サイズが変わったときだけ
+   オフスクリーンに焼き、毎フレームは貼り付けと再生位置の線だけにする。
+   (毎フレーム描き直すと 900tick x 5 レーンで 4500 回の fillRect になり、これ単体で落ちる) */
+let ribbonCache=null, ribbonTimer=null;
+function buildRibbonCache(W,H){
+  const dpr=Math.min(2,window.devicePixelRatio||1);
+  const cv=document.createElement('canvas');
+  cv.width=Math.max(1,Math.round(W*dpr)); cv.height=Math.max(1,Math.round(H*dpr));
+  const g=cv.getContext('2d'); g.setTransform(dpr,0,0,dpr,0,0);
+  // **毎秒 t=0..maxTick を6周していた。** 4 時間なら毎秒 170 万回。窓に限る。
+  const s=D.series, t0=D.minTick||0, t1=D.maxTick, n=t1-t0+1;
+  const X=(t)=>W*((t-t0)/Math.max(1,n-1)), bw=Math.max(1,W/n), lanes=6, lh=H/lanes;
+  // **ここも窓に限る。** 上の 6 本のループは窓へ直されたのに、この 1 本だけ
+  // 全長走査のまま残っていた (2026-08-25 発見)。trim ごと (約 30 秒に 1 回) なので
+  // 毎フレームではないが、10 時間の水槽では 1 回 2.5ms を払う。
+  let maxDmg=1; for(let t=t0;t<=t1;t++){ const v=s.dmg[t]; if(v>maxDmg) maxDmg=v; }
+
+  g.fillStyle=CSS('--vel');
+  for(let t=t0;t<=t1;t++) if(s.proj[t]){ g.globalAlpha=Math.min(1,.35+s.proj[t]*.15); g.fillRect(X(t),2,bw,lh-4); }
+  g.globalAlpha=1; g.fillStyle=CSS('--warn');
+  for(let t=t0;t<=t1;t++) if(s.dmg[t]>0){ const h=(lh-4)*Math.min(1,s.dmg[t]/maxDmg); g.fillRect(X(t),lh*2-2-h,bw,h); }
+  g.globalAlpha=.5; g.fillStyle=CSS('--ink-dim');
+  for(let t=t0;t<=t1;t++) if(s.snd[t]) g.fillRect(X(t),lh*2+2,bw,lh-4);
+  g.globalAlpha=.9; g.fillStyle=CSS('--hitbox');
+  for(let t=t0;t<=t1;t++) if(s.ai[t]) g.fillRect(X(t),lh*3+2,bw,lh-4);
+  g.globalAlpha=.75; g.fillStyle=CSS('--axis-x');
+  for(let t=t0;t<=t1;t++) if(!s.onG[t]) g.fillRect(X(t),lh*4+2,bw,lh-4);
+  // 姿勢命令が変わった tick。見た目が変わらなくてもここには必ず線が立つので、
+  // 「命令したのに効いていない」がこのレーンとモデルの比較で分かる。
+  g.globalAlpha=1; g.fillStyle=CSS('--axis-y');
+  for(let t=t0;t<=t1;t++) if(s.pose[t]) g.fillRect(X(t),lh*5+2,Math.max(1.5,bw),lh-4);
+  g.globalAlpha=1;
+
+  g.strokeStyle=CSS('--line-soft'); g.lineWidth=1; g.beginPath();
+  for(let i=1;i<lanes;i++){ g.moveTo(0,lh*i); g.lineTo(W,lh*i); }
+  g.stroke();
+  ribbonCache={canvas:cv,W,H,key:D.key,min:t0};
+}
+// 13-02: リボンはdraw()の中で毎フレーム作り直さない —— タイマーとサイズ/世代変更
+// からのみ呼ぶ。1秒粒度で足りる根拠: リボンは1tick=1画素の帯なので、ライブの
+// 1秒(=20tick)進んでも高々20画素しか変わらない(帯の幅は通常それより広い)。
+// 60fpsで作り直すのはこの粒度に対して過剰で、旧D.key(=name+'#'+D.maxTick)が
+// ライブで毎秒変わっていた時代はここが実質「毎秒作り直し」の主犯だった。
+function ensureRibbonTimer(){
+  if(ribbonTimer) return;
+  ribbonTimer=setInterval(()=>{
+    if(!D.series) return;
+    buildRibbonCache(cssW(ribbon),cssH(ribbon));
+  },1000);
+}
+function drawRibbon(){
+  const W=cssW(ribbon),H=cssH(ribbon);
+  if(!D.series) return;
+  ensureRibbonTimer();
+  // サイズ変更・世代変更は1Hzタイマーを待たず即座に作り直す(draw()呼び出しの
+  // 一環として気づけるのはここだけ——タイマー任せだと最大1秒間、古いサイズ/
+  // 別トレースのキャンバスを貼り続けてしまう)。定常状態(同世代・同サイズ)では
+  // ここでは何も作らない——作るのは上のタイマーだけ。
+  if(!ribbonCache||ribbonCache.W!==W||ribbonCache.H!==H||ribbonCache.key!==D.key||ribbonCache.min!==(D.minTick||0)) buildRibbonCache(W,H);
+  rctx.clearRect(0,0,W,H);
+  rctx.drawImage(ribbonCache.canvas,0,0,W,H);
+  const x=W*((T.tick-(D.minTick||0))/Math.max(1,D.maxTick-(D.minTick||0)));
+  rctx.strokeStyle=CSS('--vel'); rctx.lineWidth=1.5;
+  rctx.beginPath(); rctx.moveTo(x,0); rctx.lineTo(x,H); rctx.stroke();
+}
+
+function draw(){
+  const real=T.mode==='real'&&window.SimGL&&SimGL.available();
+  // **水槽は常に水槽。** トレース未読込・未召喚でも、実機(3D)タブなら空のチャンバー
+  // (グリッド/床/void) を描く —— 「誰もいない」と「壊れている」を同じ絵にしない
+  // (HANDOFF §1)。2D モード(F3/計測器/図面)は記録が無ければ元どおり何も描かない
+  // (床クリックの逆写像を持たないので、空でも描く理由が無い)。
+  if(!D.nTicks && !real) return;
+  // 描画回数カウンタ。テスト専用ではなく本番コード —— bench.mjs の実効fps測定点(13-01)。
+  T.drawN=(T.drawN||0)+1;
+  const t0=performance.now();
+  if(T.follow&&D.reimuId!=null){
+    const p=D.frameAt(T.tick,T.partial).pos.get(D.reimuId);
+    if(p){ cam.tx=p.x; cam.ty=p.y+1; cam.tz=p.z; }
+  }
+  // **変わったときだけ書く。** style を書くとレイアウトが無効化され、直後の
+  // サイズ読み取りが同期レイアウトを強制する。毎フレーム同じ値を書き込んでいた。
+  const _disp=real?1:0;
+  if(T._disp!==_disp){
+    T._disp=_disp;
+    glCanvas.style.display=real?'block':'none';
+    stage.style.display=real?'none':'block';
+  }
+  if(!real) tankMarkerHide();   // 2D モードへ切り替えたら床の狙いの輪も消す
+  if(real){
+    SimGL.setTrace(D);
+    // **3D の描画だけを別に測る。** draw() には HUD の書き換えやリボンも入っているので、
+    // 合計だけ見ても「絵が重い」のか「帳簿が重い」のか判らない —— 2026-08-23 に
+    // 実際にそこで 2 回まちがえた(どちらも UI 側だった)。分けて出せば、にーくらの画面が
+    // そのまま答えを持つ。
+    const _g0=performance.now();
+    SimGL.render(D,T,cam,cssW(glCanvas),cssH(glCanvas));
+    const _gms=performance.now()-_g0;
+    T.glMs=T.glMs?T.glMs*0.85+_gms*0.15:_gms;
+    const _f=D.frameAt(T.tick,T.partial);
+    T.drawnN=_f?_f.pos.size:0;
+    document.getElementById('overlay').textContent='';
+    const f0=D.frameAt(T.tick,T.partial);
+    if(f0) drawOverlay(f0);
+    // 描けなかったものがあれば、その理由をここに出す。**透明のまま黙らない。**
+    const miss=(SimGL.missStatus&&SimGL.missStatus())||'';
+    document.getElementById('hintText').textContent=
+      '左drag 回転 · 右drag 平行移動 · wheel 拡縮   '+SimGL.ysmStatus()+(miss?'   ⚠ '+miss:'');
+  }
+  else if(T.mode==='f3') drawF3(); else if(T.mode==='scope') drawScope(); else drawPlan();
+  drawRibbon(); updateHud();
+  document.getElementById('clock').textContent=
+    `${String(T.tick).padStart(4,' ')} / ${D.maxTick}   ${(T.tick/20).toFixed(2)}s`;
+  // 1 フレームの描画コストを実測して出す。重くなったらここが先に膨らむ。
+  const ms=performance.now()-t0;
+  T.drawMs=T.drawMs?T.drawMs*0.85+ms*0.15:ms;
+  // **fps はここでは数えない。** この関数は rAF から毎フレーム呼ばれるだけでなく、
+  // pointermove / wheel からも直接呼ばれる (視点操作に応じた再描画)。ここで数えると
+  // 「マウスを動かした回数」が fps に混ざり、大きくドラッグすれば 100 超、そっと
+  // 動かせば 2 秒に 1 回で『3fps』という、表示の滑らかさと無関係な数字になる
+  // (にーくら 2026-08-23「fps がガバガバすぎない？」の正体がこれだった)。
+  // 数えるのは loop() —— 連続表示のフレームだけを数える唯一の場所。
+  T._drawnInLoop = T._inLoop ? (T._drawnInLoop||0)+1 : (T._drawnInLoop||0);
+}
+
+/* =============================================================================
+   5. HUD
+   ============================================================================= */
+/** 13-02: D.aiList(全AI行を毎load()で作り直していた配列)を廃し、事象レーンの
+ *  latestEvent(二分探索)へ置き換えた。「直近」はai専用の2本目のレーンを作らず、
+ *  事象レーン1本への問い合わせで答える(13-02-PLAN.md interface_contextの指示どおり)。 */
+function curAi(){
+  return D.store.latestEvent('ai',T.tick);
+}
+// parseSection() は削除した（2026-08-20、Phase 10-03）。
+// **これは 2 つ目の section パーサだった** —— buildSeries の正規表現とは別に、
+// updateHud と renderAiLog がこれを使っていた。同じ文字列を 3 通りに読んでいたことになる。
+// パースは Java の SimSection と JS の stats.mjs の 2 実装だけにし、
+// その 2 つは section-parse.golden.json で相互に検証している。
+function updateHud(){
+  const f=D.frameAt(T.tick,T.partial); if(!f) return;
+  const a=curAi(), ps=secOf(a);
+  const pr=D.reimuId!=null?f.pos.get(D.reimuId):null;
+  const ph=f.phys;
+
+  const kv=(el,rows)=>{ el.innerHTML=rows.map(([k,v])=>`<dt>${k}</dt><dd>${v??'—'}</dd>`).join(''); };
+  kv(document.getElementById('kvReimu'),[
+    ['mode',a?a.mode:'—'],
+    ['phase',ps.phase?`<span style="color:var(--vel)">${ps.phase}</span>${ps.ptimer?` <span style="color:var(--ink-faint)">t${ps.ptimer}</span>`:''}`:'—'],
+    ['zone',ps.zone],
+    ['dist',a&&a.dist>=0?a.dist.toFixed(2)+' m':'—'],
+    ['hp',pr&&pr.hp!=null?`${pr.hp.toFixed(1)} / ${(a?a.maxHp:D.entities.get(D.reimuId)?.maxHp)??'?'}`:'—'],
+    ['form',a?(a.form===2?`2 · ${a.formMode}`:'1'):'—'],
+    ['vel',ph?ph.vel.toFixed(3):'—'],
+    ['cd',(()=>{const c=cdLine(ps);return c?`<span style="font-size:10.5px">${c}</span>`:'—';})()],
+    // ---- 姿勢命令 (mod が YSM へ送ったもの) ----
+    // モデルが動かなくてもここには出る。「命令したのに効いていない」の切り分けに使う。
+    ['anim',f.anim?`<span style="color:var(--axis-y)">${f.anim.anim}</span>`
+      +(f.anim.pend&&f.anim.pend!=='-'?` <span style="color:var(--ink-faint)">pend ${f.anim.pend}</span>`:''):'—'],
+    ['molang',f.anim&&f.anim.molang&&f.anim.molang!=='-'
+      ?`<span style="font-size:10.5px;color:var(--warn)">${f.anim.molang}</span>`:'—'],
+    ['hand',f.anim?`<span style="font-size:10.5px">${f.anim.main} / ${f.anim.off}</span>`:'—'],
+  ]);
+  const maxR=(a&&a.maxHp)||D.entities.get(D.reimuId)?.maxHp||1;
+  document.getElementById('hpReimu').style.width=pr&&pr.hp!=null?`${Math.max(0,Math.min(1,pr.hp/maxR))*100}%`:'0';
+
+  const flags=[['onGround',ph?ph.onG:false,true],['air',ph?ph.air:false],['embed',ph?ph.embed:false],
+    ['noGrav',ph?ph.noGrav:false],['amuletCD',a?a.amuletCd:false],
+    ['houju',a?a.houju:false],['gensou',a?a.gensou:false],['musouTP',a?a.musouTp:false]];
+  document.getElementById('flags').innerHTML=flags
+    .map(([k,v,inv])=>`<span class="flag${(inv? !v : v)?' on':''}">${k}</span>`).join('');
+
+  const tid=D.targetIds[0], te=tid!=null?D.entities.get(tid):null, tp=tid!=null?f.pos.get(tid):null;
+  kv(document.getElementById('kvTarget'),[
+    ['type',te?te.type:'—'],
+    ['hp',tp&&tp.hp!=null?`${tp.hp.toFixed(1)} / ${te.maxHp??'?'}`:'—'],
+    ['xyz',tp?`${tp.x.toFixed(1)} ${tp.y.toFixed(1)} ${tp.z.toFixed(1)}`:'—'],
+  ]);
+  document.getElementById('hpTarget').style.width=tp&&tp.hp!=null&&te.maxHp?`${Math.max(0,Math.min(1,tp.hp/te.maxHp))*100}%`:'0';
+
+  // 現在行のハイライトは「変わったときだけ」触る。
+  // 毎フレーム querySelectorAll + 全行 classList だと行数ぶんの DOM 操作が乗る。
+  // 13-02: D.aiList(配列index)を廃したので、判定は curAi() が返した行そのものの
+  // 参照同一性で行う(latestEventは同じ変化点なら同じオブジェクト参照を返すので、
+  // 「変わったか」の判定にindexは要らない)。表示側(aiRows)はrenderAiLog()が
+  // 末尾AI_LOG_CAP件だけ描いているので、掲載されていない行(=キャップの外)が
+  // 現在行になったときは cur=-1 のまま(見つからない)で構わない。
+  if(a!==lastAiRow){
+    // **索引ではなく要素で覚える。** 行は頭から捨てられる(上限 AI_LOG_CAP)ので、
+    // 索引は黙ってずれ、ずれた索引で class を外すと別の行の印が消える。
+    if(lastAiEl) lastAiEl.classList.remove('cur');
+    let el=null;
+    if(a) for(const r of aiRows){ if(+r.dataset.t===a.t){ el=r; break; } }
+    if(el){
+      el.classList.add('cur');
+      if(!T.userScrolledLog) el.scrollIntoView({block:'nearest'});
+    }
+    lastAiEl=el; lastAiRow=a;
+  }
+}
+
+let aiRows=[], lastAiEl=null, lastAiRow=null;
+/** 13-02: 末尾AI_LOG_CAP件だけ描く。放置中の水槽ではaiは82行(実測)しか無いので
+ *  現状は無害だが、戦闘4時間だと0.64行/tick×288,000≈18万行になり得る
+ *  (PHASE13-INPUT §2-2/13-02-PLAN.md interface_context)。整形であって解釈ではない
+ *  (T-13-05のmitigation)——上限に掛かっていないときは注記を出さない。 */
+const AI_LOG_CAP=500;
+/**
+ * AI ログを**新しい行だけ**足す。
+ *
+ * 旧実装は毎 ingest(20回/秒)で全行の innerHTML を組み直し、さらに
+ * querySelectorAll で全行を数え直していた。にーくらの実セッションでは ai が
+ * 2.5 分で 472 行 —— 毎秒 9,400 個の DOM ノードを作り直していた計算になる。
+ * CPU プロファイル(2026-08-23)で renderAiLog 2.4% + それが誘発する同期レイアウト。
+ *
+ * 行は tick 昇順にしか増えないので、**足すだけ**でよい。溢れたぶんは頭から捨てる。
+ * 記録が変わった(D.key)ときだけ全部組み直す。
+ */
+let aiLogKey=null, aiLogShownT=-Infinity;
+function renderAiLog(){
+  const box=document.getElementById('aiLog');
+  if(!box) return;
+  const total=D.store.eventCount('ai');
+  const fresh=(aiLogKey!==D.key);
+  if(fresh){ box.innerHTML=''; aiLogKey=D.key; aiLogShownT=-Infinity; lastAiEl=null; lastAiRow=null; }
+  // まだ出していない行だけ取る。**全件スライスをやめる**(旧: eventsInRange(-∞,+∞))。
+  const from=(aiLogShownT===-Infinity)?-Infinity:aiLogShownT+1;
+  let add=D.store.eventsInRange('ai',from,D.maxTick);
+  if(add.length>AI_LOG_CAP) add=add.slice(-AI_LOG_CAP);
+  if(add.length){
+    box.insertAdjacentHTML('beforeend', add.map((a)=>{
+      const ps=secOf(a);
+      const rest=(a.section||'').replace(/^phase=S+s*/,'');
+      return '<div class="ai-row" data-t="'+a.t+'">'+
+        '<span class="t">'+a.t+'</span>'+
+        '<span><span class="phase">'+(ps.phase??'—')+'</span> '+rest.slice(0,150)+'</span></div>';
+    }).join(''));
+    aiLogShownT=add[add.length-1].t;
+  }
+  // 溢れたぶんを頭から捨てる。**上限は行数であって、組み直しの回数ではない。**
+  let over=box.children.length-AI_LOG_CAP;
+  while(over-- > 0 && box.firstElementChild) box.removeChild(box.firstElementChild);
+  if(add.length||fresh){
+    aiRows=[...box.children];
+    // lastAiRow は捨てない —— 捨てると毎 ingest ハイライトを付け直し、
+    // scrollIntoView(同期レイアウトを起こす)が毎回走る。要素で覚えているので、
+    // 行が入れ替わっても壊れない(消えた要素は classList を触っても無害)。
+  }
+  // **切り捨てていることを見える形で言う。** ツールチップでは気づけない。
+  // 要素は 1 回だけ作り、数が変わったときだけ字を書き換える(毎 ingest 作り直さない)。
+  if(total>AI_LOG_CAP){
+    let note=document.getElementById('aiCapNote');
+    if(!note){
+      note=document.createElement('div');
+      note.id='aiCapNote'; note.className='ai-cap-note';
+      note.style.cssText='padding:2px 6px;color:var(--ink-faint);font-size:10px';
+      box.parentNode.insertBefore(note,box);
+    }
+    if(note._n!==total){ note._n=total; note.textContent='総 '+total+' 件のうち末尾 '+AI_LOG_CAP+' 件のみ表示'; }
+  }
+  box.onclick=(e)=>{ const r=e.target.closest('.ai-row'); if(!r) return; seek(+r.dataset.t); };
+}
+
+/* =============================================================================
+   6. 操作
+   ============================================================================= */
+function seek(t){
+  // 床は 0 ではなく D.minTick。ライブは直近2分しか手元に無い(LIVE_WINDOW)。
+  T.tick=Math.max(D.minTick||0,Math.min(D.maxTick,t|0)); T.acc=0; T.partial=0;
+  // **「最新を追っているか」を、時間を動かした本人が決める。** 旧来は
+  // `T.tick>=D.maxTick-3` という同じ判定が loop()/appendLive()/tankLiveBadge() の
+  // 3 箇所に写されていた。旗を 1 つにして、書き手をここに集める。
+  T.followLive=(typeof liveOpen==='function')&&liveOpen()&&(T.tick>=D.maxTick-LIVE_CLOCK.s.target-2);
+  draw();
+  if(typeof tankLiveBadge==='function') tankLiveBadge();
+}
+/** ライブで「最新へ追いつく」。追いつき方は loop() が決める(飛ぶか、早送りか)。 */
+function seekToLive(){ seek(D.maxTick); T.followLive=true; }
+
+// --- 外側 (compare.html) からの遠隔操作 ---------------------------------------
+// 3 モードを並べて見比べるとき、同じ tick で揃っていないと比較にならない。
+// iframe の中身をいじらずに済むよう、postMessage だけ受ける薄い口を置く。
+// 受けるのは自分と同じ origin からのメッセージのみ。
+window.addEventListener('message', (ev) => {
+  if (ev.origin !== location.origin) return;
+  const m = ev.data;
+  if (!m || m.simlab !== 1) return;
+  if (m.cmd === 'seek') { T.playing = false; syncPlayBtn(); seek(m.tick); }
+  else if (m.cmd === 'play') { T.playing = !!m.on; syncPlayBtn(); }
+  // 速度と時計同期は**同時には効かせない**(下の #speed.onchange と同じ理由)。
+  else if (m.cmd === 'speed') { T.speed = m.speed; if (liveOpen() && m.speed !== 1) T.followLive = false; }
+  else if (m.cmd === 'ping') {
+    // 読み込みが終わったことと、そのトレースの長さを親へ返す
+    try { ev.source.postMessage({ simlab: 1, cmd: 'pong', maxTick: D.maxTick, key: D.key || '' }, ev.origin); } catch (e) {}
+  }
+});
+/** 時間コントロールを「今どちらを見ているか」に合わせる。
+ *
+ * 録画は自分で時間を動かすもの、ライブは時間が勝手に進むもの —— 同じボタンでも
+ * 意味が違う。ライブでの「停止」は終わりではなく「その場に留まる」で、戻る先は
+ * 先頭ではなく最新。言葉は右上バッジ(「最新を映している」)と揃える —— 同じ動作を
+ * 別の名前で呼ぶと、どちらが何なのか覚え直す羽目になる。
+ * 速度はライブでは伏せる: 実時間で流れているものを 2倍速では見られない。 */
+function syncPlayBtn(){
+  const live=(typeof liveOpen==='function')&&liveOpen();
+  const b=document.getElementById('play');
+  if(b) b.textContent=live?(T.playing?'❚❚ 止める':'▶ 最新を映す')
+                          :(T.playing?'❚❚ 停止':'▶ 再生');
+  // **ライブでも速度を出す。** 以前は「実時間で流れているものを 2 倍速では見られない」
+  // として伏せていたが、時計を送り手へ同期させた今は意味が変わった —— 1× 以外を選ぶと
+  // 「遅延視聴者」になり(履歴は store が全部持っている)、追いつけば自動で同期へ戻る。
+  // 伏せておくと、録画で 4× にしたまま水槽へ来た人がそれに気付けない。
+  const sp=document.getElementById('speedWrap');
+  if(sp){ sp.style.display=''; sp.title=live?'ライブで 1× 以外にすると、追従をやめて遅れて見る（追いつけば自動で戻る）':''; }
+  const spSep=document.getElementById('speedSep');
+  if(spSep) spSep.style.display='';
+  // 「末尾へ」はライブでは「最新へ追いつく」操作。同じボタンの意味が変わるので題も変える。
+  const te=document.getElementById('toEnd');
+  if(te) te.title=live?'最新へ追いつく (End)':'末尾へ (End)';
+}
+
+document.getElementById('play').onclick=()=>{ T.playing=!T.playing; T.last=performance.now(); syncPlayBtn(); };
+document.getElementById('stepFwd').onclick=()=>seek(T.tick+1);
+document.getElementById('stepBack').onclick=()=>seek(T.tick-1);
+document.getElementById('toStart').onclick=()=>seek(D.minTick);   // 「手元の先頭」。ライブでは 2 分前
+document.getElementById('toEnd').onclick=()=>seekToLive();
+// **速度と時計同期は同時に効かせない。** 送り手より速く再生し続けることは物理的に
+// できない(必ず底に当たる)ので、掛け算で合成するとどちらかが嘘になる。ライブで
+// 1× 以外を選んだ人は「遅延視聴者」になる —— 履歴は store が全部持っているので
+// 正当な見方で、追いついたら loop() が自動で追従へ戻す。
+document.getElementById('speed').onchange=(e)=>{T.speed=+e.target.value;
+  if((typeof liveOpen==='function')&&liveOpen()&&T.speed!==1) T.followLive=false;};
+document.getElementById('trail').oninput=(e)=>{T.trail=+e.target.value;
+  document.getElementById('trailV').textContent=T.trail+'t'; draw();};
+// 「開く…」= 別のトレースを開きたい。#empty は廃止したので、
+// 記録済みトレースの一覧を持つ「記録」節(#tankPanel、既定は畳んである)を代わりに開く。
+// #recToggle は buildTankUi() が組むまで存在しないので、押された時点で(ここでは無く)
+// 安全に null チェックする — 起動直後のごく短い間だけ押しても何もしないだけで済む。
+document.getElementById('reload').onclick=()=>{
+  if(document.getElementById('recBody')) tankRecordsSetOpen(true);
+};
+// #pick / #file は「記録」節の中に移った(buildTankUi() が動的に組む)ので、
+// その配線もそちらへ移した — ここでは静的マークアップがもう存在しない。
+
+document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{
+  T.mode=b.dataset.mode;
+  document.querySelectorAll('[data-mode]').forEach(o=>{
+    const on=o===b; o.classList.toggle('on',on); o.setAttribute('aria-pressed',String(on));
+  });
+  document.getElementById('camGrp').style.opacity=T.mode==='f3'?'1':'.35';
+  draw();
+});
+document.querySelectorAll('[data-cam]').forEach(b=>b.onclick=()=>{
+  const k=b.dataset.cam;
+  if(k==='follow'){ T.follow=!T.follow; b.setAttribute('aria-pressed',String(T.follow)); b.classList.toggle('on',T.follow); }
+  else if(k==='top'){ cam.yaw=0; cam.pitch=Math.PI/2-0.001; }
+  else if(k==='side'){ cam.yaw=Math.PI/2; cam.pitch=0.02; }
+  else { cam.yaw=-0.62; cam.pitch=0.42; }
+  draw();
+});
+
+// 3D 操作
+// 水槽パネル (#tankPanel / #tankLive) は、レイアウト上 #stageWrap の子孫として
+// 同居しているだけで、3D 視点操作にも床クリックにも対象ではない
+// (#empty は廃止した — 常設パネルに置き換わったので、除外対象はこの2つで足りる)。
+// ここでガードしないと、そこでの pointerdown が無条件に setPointerCapture してしまい、
+// 直後の mouseup/click の target が stageWrap にすり替わってボタンの onclick が一切
+// 発火しなくなる (「クリックしても何も変わらない」の原因)。パネルの下の霊夢を
+// 誤って放ってしまう事故もこれで防ぐ。
+// 左ドラッグ = 回転 / 右ドラッグ = 平行移動 (注視点を動かす)。Shift+左 も従来どおり平行移動。
+// 平行移動かどうかは pointerdown の時点で確定させる — ドラッグ中に e.buttons を見ると、
+// 途中でボタン状態が変わったときに回転と平行移動が混ざる。
+const TANK_CLICK_MAX_PX=4, TANK_CLICK_MAX_MS=350;  // クリック/ドラッグの境目 (T-1a4-03)
+let drag=null;
+stageWrap.addEventListener('pointerdown',(e)=>{
+  if(e.target.closest('#tankPanel, #tankLive, .overlay, .hint')) return;
+  if(T.mode==='scope'){ scrubScope(e); return; }
+  drag={x:e.clientX,y:e.clientY,travel:0,t0:performance.now(),pan:e.button===2||e.shiftKey};
+  stageWrap.setPointerCapture(e.pointerId);
+});
+stageWrap.addEventListener('pointermove',(e)=>{
+  if(T.mode==='scope'&&e.buttons){ scrubScope(e); return; }
+  tankMarkerFollow(e);
+  if(!drag) return;
+  const dx=e.clientX-drag.x, dy=e.clientY-drag.y; drag.x=e.clientX; drag.y=e.clientY;
+  drag.travel+=Math.hypot(dx,dy);
+  if(drag.pan||e.shiftKey){
+    // **カメラの基底で動かす。** 以前は横を yaw だけから組み、縦は常にワールドの Y
+    // だった。pitch を一切見ていないので、見下ろす角度によって「上へ引いたのに奥へ
+    // 行く」等の食い違いが出る (にーくら 2026-08-23「右クリック、方向や角度によって
+    // 視野の動き方が異なる」)。
+    // 正しい基底は既に在る —— SimPick.camBasis が正規直交の x(右)/y(上) を返す
+    // (pick.js)。「カメラの唯一の定義元は SimPick」という既存の取り決めに、
+    // ここだけが従っていなかった。
+    const k=cam.dist*0.0022;
+    const B=(window.SimPick&&SimPick.camBasis)?SimPick.camBasis(cam):null;
+    if(B){
+      // 掴んだ景色が指に付いてくる向き: 右へ引けば注視点は左へ、下へ引けば上へ。
+      cam.tx+=(-B.x[0]*dx+B.y[0]*dy)*k;
+      cam.ty+=(-B.x[1]*dx+B.y[1]*dy)*k;
+      cam.tz+=(-B.x[2]*dx+B.y[2]*dy)*k;
+    }else{
+      cam.tx-=Math.cos(cam.yaw)*dx*k; cam.tz-=Math.sin(cam.yaw)*dx*k; cam.ty+=dy*k;
+    }
+  }else{
+    cam.yaw+=dx*0.006; cam.pitch=Math.max(-1.45,Math.min(1.45,cam.pitch+dy*0.005));
+  }
+  draw();
+});
+stageWrap.addEventListener('pointerup',(e)=>{
+  const d=drag; drag=null;
+  if(!d) return;
+  // クリック(=放つ狙い)は「視点操作でなかった・動いていない・速かった」の3条件。
+  // どれか1つでも外れたら視点操作とみなし、床クリックは一切しない(T-1a4-03)。
+  const elapsed=performance.now()-d.t0;
+  const isClick=!d.pan && d.travel<TANK_CLICK_MAX_PX && elapsed<TANK_CLICK_MAX_MS;
+  if(isClick) tankFloorClick(e);
+});
+// 右ドラッグを平行移動に使うので、ステージ上の既定コンテキストメニューは抑止する。
+// #tankPanel / #tankLive の上では抑止しない — そこは通常の UI として扱う
+// (#empty は廃止した。除外対象は pointerdown のガードと揃えてある)。
+stageWrap.addEventListener('contextmenu',(e)=>{
+  if(!e.target.closest('#tankPanel, #tankLive')) e.preventDefault();
+});
+// **水槽の上か、パネルの上か。** ここを分けないと、パネル内のリスト
+// (モブ一覧・中にいる・記録) がホイールで送れない —— カメラの拡縮に全部吸われる。
+// 上の pointerdown / contextmenu は既に #tankPanel を除外しているのに、wheel だけ
+// 無条件に preventDefault していた (にーくら 2026-08-22 の指摘)。
+// closest() で「自分でスクロールできる箱の中か」を見て、中なら手を出さない。
+stageWrap.addEventListener('wheel',(e)=>{
+  if(e.target.closest('#tankPanel, #tankLive')) return;   // パネルは通常の UI として扱う
+  e.preventDefault(); cam.dist=Math.max(3,Math.min(220,cam.dist*(1+Math.sign(e.deltaY)*0.11))); draw();
+},{passive:false});
+stageWrap.addEventListener('pointerleave',()=>tankMarkerHide());
+
+/* ---- 床をクリックして放つ (§7-2) ----
+   にーくら『メニューでスポーンなんて利便性が悪すぎ。design系ツールでお願い』。
+   実機(3D)タブでだけ効く —— F3/計測器/図面は別の2D投影で、その逆写像は別の仕事として
+   見送っている(この quick の <objective> 参照)。 */
+let TANK_PICK=null;   // {x,y,z} 直近にクリックで狙った床の点。y は常に床の表面。
+
+/** 中を覗ける窓。window.SIMLAB_YSM と同じ流儀の読み取り専用フック。 */
+window.SIMLAB_TANK={
+  get lastPick(){ return TANK_PICK; },
+  get cam(){ return cam; },
+};
+
+function tankArenaBounds(){
+  const ox=(D.meta&&D.meta.originX)||0, oz=(D.meta&&D.meta.originZ)||0;
+  const R=(D.meta&&D.meta.floorRadius)||24;
+  return {ox,oz,R};
+}
+function tankOriginFloor(){
+  const {ox,oz}=tankArenaBounds();
+  return {x:ox,y:SimPick.floorSurfaceY(D.meta),z:oz};
+}
+
+function tankFloorClick(e){
+  if(!(T.mode==='real'&&window.SimGL&&SimGL.available())){
+    tankSay('床をクリックして放つには「実機」タブへ切り替える。今の表示は別の投影(2D)。');
+    return;
+  }
+  const r=glCanvas.getBoundingClientRect();
+  const sx=e.clientX-r.left, sy=e.clientY-r.top;
+  const fy=SimPick.floorSurfaceY(D.meta);
+  const p=SimPick.unprojectToPlane(cam, sx, sy, r.width, r.height, fy);
+  if(!p){ tankSay('地平線より上をクリックしている —— 床を狙う。'); return; }
+
+  // /api/summon は RCON のコマンド行に載る (T-1a4-01)。四捨五入 + アリーナ半径への
+  // クランプをここで行い、serve.mjs:620-629 の Number.isFinite だけに頼らない。
+  const {ox,oz,R}=tankArenaBounds();
+  const clamp=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
+  const round2=(v)=>Math.round(v*100)/100;
+  TANK_PICK={ x:round2(clamp(p.x,ox-R,ox+R)), y:fy, z:round2(clamp(p.z,oz-R,oz+R)) };
+  tankUpdatePickReadout();
+  tankMarkerFollow(e);   // クリックした場所へも即座に反映する
+
+  if(TANK_LAST_STATE!=='live'){ tankSay('狙いは覚えた。水槽が立ったら放てる。'); return; }
+  if(!TANK_TYPE){ tankSay('狙いは覚えた。放つモブも選ぶ。'); return; }
+  summonFromPanel();
+}
+
+/** 放つ狙いの読み取り専用表示。数値は入力できない —— 押すのはボタンだけ。 */
+function tankUpdatePickReadout(){
+  const el=document.getElementById('tankPickReadout');
+  if(!el) return;
+  el.textContent=TANK_PICK
+    ? ('狙い: x='+TANK_PICK.x.toFixed(1)+' y='+TANK_PICK.y.toFixed(1)+' z='+TANK_PICK.z.toFixed(1)+'（クリックで動かす）')
+    : '実機タブで床をクリックして狙いを定める。高さは選べない —— 床に立ち、飛ぶモブは自分で上がる。';
+}
+
+/* ---- 床の狙いを見せる輪 —— design系ツールらしさの核。DOM要素で描く。
+   実機タブは #stage(2D) が隠れているので sctx には描けず、GLの描画路に足すのも
+   大掛かりなので、絶対配置の div を #stageWrap(=#glstage と同じ座標系) に重ねる。 ---- */
+const tankMarker=document.createElement('div');
+tankMarker.id='tankMarker';
+stageWrap.appendChild(tankMarker);
+let tankMarkerRAF=null;
+function tankMarkerHide(){ tankMarker.style.display='none'; }
+function tankMarkerShow(sx,sy,d){
+  // 奥ほど小さく——固定サイズだと「床に置いた」感が出ない。
+  const px=Math.max(4,Math.min(40,14*34/Math.max(0.1,d)));
+  tankMarker.style.left=sx+'px'; tankMarker.style.top=sy+'px';
+  tankMarker.style.width=px+'px'; tankMarker.style.height=px+'px';
+  tankMarker.style.marginLeft=(-px/2)+'px'; tankMarker.style.marginTop=(-px/2)+'px';
+  tankMarker.style.display='block';
+}
+function tankMarkerFollow(e){
+  if(drag) return;   // 視点操作中は動かさない
+  if(!(T.mode==='real'&&window.SimGL&&SimGL.available())){ tankMarkerHide(); return; }
+  if(TANK_LAST_STATE!=='live'){ tankMarkerHide(); return; }
+  if(tankMarkerRAF) return;
+  const cx=e.clientX, cy=e.clientY;
+  tankMarkerRAF=requestAnimationFrame(()=>{
+    tankMarkerRAF=null;
+    const r=glCanvas.getBoundingClientRect();
+    const sx=cx-r.left, sy=cy-r.top;
+    const fy=SimPick.floorSurfaceY(D.meta);
+    const p=SimPick.unprojectToPlane(cam, sx, sy, r.width, r.height, fy);
+    if(!p){ tankMarkerHide(); return; }
+    // #glstage は #stageWrap に inset:0 で重なっているので、そのまま輪の left/top に使える。
+    const back=SimPick.projectPoint(cam, p.x, fy, p.z, r.width, r.height);
+    if(!back){ tankMarkerHide(); return; }
+    tankMarkerShow(back.x, back.y, back.d);
+  });
+}
+function scrubScope(e){
+  const r=stage.getBoundingClientRect(), L=64, w=r.width-L-14;
+  seek((D.minTick||0)+Math.round(((e.clientX-r.left-L)/w)*(D.maxTick-(D.minTick||0))));
+}
+
+// 帯のシーク
+let ribbonDrag=false;
+const ribbonSeek=(e)=>{ const r=ribbon.getBoundingClientRect();
+  seek((D.minTick||0)+Math.round(((e.clientX-r.left)/r.width)*(D.maxTick-(D.minTick||0)))); };
+ribbon.addEventListener('pointerdown',(e)=>{ribbonDrag=true;ribbon.setPointerCapture(e.pointerId);ribbonSeek(e);});
+ribbon.addEventListener('pointermove',(e)=>{if(ribbonDrag)ribbonSeek(e);});
+ribbon.addEventListener('pointerup',()=>{ribbonDrag=false;});
+
+document.getElementById('aiLog').addEventListener('scroll',()=>{T.userScrolledLog=true;
+  clearTimeout(T._st); T._st=setTimeout(()=>{T.userScrolledLog=false;},2500);});
+
+addEventListener('keydown',(e)=>{
+  if(e.target.tagName==='INPUT'||e.target.tagName==='SELECT') return;
+  const k=e.key;
+  if(k===' '){ e.preventDefault(); document.getElementById('play').click(); }
+  else if(k==='ArrowRight') seek(T.tick+(e.shiftKey?10:1));
+  else if(k==='ArrowLeft')  seek(T.tick-(e.shiftKey?10:1));
+  else if(k==='Home') seek(D.minTick); else if(k==='End') seek(D.maxTick);
+  else if(k>='1'&&k<='4') document.querySelectorAll('[data-mode]')[+k-1].click();
+});
+
+// ドラッグ&ドロップ
+addEventListener('dragover',(e)=>{e.preventDefault();document.body.classList.add('dragging');});
+addEventListener('dragleave',()=>document.body.classList.remove('dragging'));
+addEventListener('drop',(e)=>{
+  e.preventDefault(); document.body.classList.remove('dragging');
+  const f=e.dataTransfer.files[0]; if(f) f.text().then(tx=>load(tx,f.name));
+});
+addEventListener('resize',()=>{resize();draw();});
+
+/* =============================================================================
+   7. 再生ループ + 音
+   ============================================================================= */
+const audio={cache:new Map(),enabled:false};
+document.getElementById('sound').onclick=(e)=>{
+  if(!T.served){ alert('音は node simlab/serve.mjs 経由で開いたときだけ鳴る（ローカルの .ogg を取りに行くため）'); return; }
+  audio.enabled=!audio.enabled;
+  e.currentTarget.setAttribute('aria-pressed',String(audio.enabled));
+  e.currentTarget.classList.toggle('on',audio.enabled);
+};
+function playSounds(t){
+  if(!audio.enabled||!T.served) return;
+  for(const s of D.frameAt(t,0).sound){
+    let a=audio.cache.get(s.id);
+    if(!a){ a=new Audio(`/api/sound?id=${encodeURIComponent(s.id)}`); audio.cache.set(s.id,a); }
+    try{ const c=a.cloneNode(); c.volume=Math.max(0,Math.min(1,s.vol??1)); c.playbackRate=Math.max(.5,Math.min(2,s.pitch??1)); c.play().catch(()=>{}); }catch{}
+  }
+}
+/**
+ * 実測値の常設表示。**fps は「連続表示のフレーム」だけを数える。**
+ *
+ * 以前は draw() の中で数えていたが、draw() は pointermove / wheel からも直接
+ * 呼ばれるので、止まっている間の数字は「マウスを動かした回数」でしかなかった
+ * (にーくら 2026-08-23:「大きく動かしたら100超、ほんの少し動かしたら3」)。
+ * ここで数えれば分子は rAF から描いたフレームだけになる。
+ *
+ * **平均の fps だけでは「カクつく」を表せない。** 60 フレームのうち 59 枚が 8ms で
+ * 1 枚だけ 200ms かかっても平均は 60fps に近いままで、しかし目にはその 200ms が
+ * はっきり止まって見える。にーくらが何度も言っている「fps は出ているのにカクつく」は
+ * これ。だから **その 0.5 秒で一番長かったフレーム間隔 (最長)** を並べて出す。
+ *   最長 ≈ 1000/fps  → 均等に出ている (滑らか)
+ *   最長 >> 1000/fps → どこかで詰まっている (カクつく)
+ * 描いていない間は 0 でも 3 でもなく「静止」と出す —— 数字を出さないことが正しい。
+ */
+/** YSM のばね積分の追いつき。**上限に当たったときだけ出す** —— 普段は 1〜4 歩で、
+ *  出しても意味が無い。当たっているなら「絵が飛んでいるかもしれない」の手掛かりになる。 */
+function ysmLine(){
+  const d=(window.SimGL&&SimGL.derivedStats)?SimGL.derivedStats():null;
+  if(!d||!d.ysmSkipped) return '';
+  return '  ·  ysm 追いつき '+d.ysmWorstStep+'/40（捨 '+d.ysmSkipped+'）';
+}
+
+/**
+ * **この絵が何を根拠にしているかを常時出す** (S1b)。
+ *
+ * `exact`（実機と同一）とは名乗らせない —— 録画自体が partialTick=1.0 固定・
+ * full-bright 固定・yaw 0/180 の合成で、alpha/lightmap/overlay を持たない。
+ * 名前が嘘をつくので、目的に合わせて「調整判断に使ってよいか」で言う。
+ *
+ * **軸ごとに出す。** 材質(弾の描画契約=S2)と資産(単一スナップショット=S4)は
+ * まだ実装していないので **`未確認` と出す** —— 揃っていないのに総合で「信頼できる」と
+ * 出すのが一番まずい。だから当面 総合は必ず `部分的` になる。それが正しい。
+ */
+// **短く保つ。** ここは右のパネルとぶつかる場所で、窓を狭めると真っ先に被る
+// (にーくら 2026-08-20「被ってるし」)。長い説明は title 属性へ回す。
+const POSE_SOURCE_LABEL={
+  run:'録画', library:'ライブラリ', backfilled:'補間', reconstructed:'再構成',
+  palette:'palette', livePalette:'live palette', missing:'—',
+};
+const POSE_SOURCE_TITLE={
+  run:'この run の録画そのもの',
+  library:'アニメライブラリの実機頂点（sweep がアニメ単体で録ったもの。この run 固有の molang や層の合成は乗っていない）',
+  backfilled:'その tick は記録されていないので直前フレームで埋めた',
+  reconstructed:'ysm.js の再構成（CONTROLLER_WEIGHT_FIT=0.45 使用中）',
+  palette:'YSM が実際に使った palette (ボーンごとの合成後ローカルTRS) から直接姿勢を組んだもの (14-01、?pal= で有効化)',
+  livePalette:'実クライアントの geoRender 直後からメモリ配信された palette。ライブ中の唯一の姿勢源',
+  missing:'霊夢を描いていない',
+};
+function confidenceLine(){
+  const d=(window.SimGL&&SimGL.derivedStats)?SimGL.derivedStats():null;
+  if(!d||!d.poseSourceCount) return '';
+  // アニメブラウザ表示中は run が無いので「実機 N%」は意味を持たない。出さない。
+  const ap=(window.SimGL&&SimGL.animPreview)?SimGL.animPreview():null;
+  if(ap) return '  ·  姿勢 ライブラリ（実機頂点・'+ap.name+' '+(ap.frame+1)+'/'+ap.frames+'）';
+  const c=d.poseSourceCount;
+  // **palette を分母に入れる。** 2026-08-25 に palette が既定 ON になったので、入れ忘れると
+  // 全 tick が palette のとき tot===0 で信頼度行そのものが消える (実際に消えていた)。
+  const tot=c.run+c.library+c.backfilled+c.reconstructed+c.missing+c.palette+(c.livePalette||0);
+  if(!tot) return '';
+  // 実機由来 = palette + run 録画 + ライブラリ。補間と再構成は実機由来ではない。
+  // palette を実機由来に数えるのは にーくら判定 2026-08-25 ——「④ palette が一番。
+  // 録画が一番 ysm の molang が異なってた」。順位で最上位に置いた源を分子から外さない。
+  const real=c.palette+c.run+c.library+(c.livePalette||0);
+  const now=POSE_SOURCE_LABEL[d.poseSource]||d.poseSource;
+  const el=document.getElementById('perf');
+  if(el) el.title='姿勢: '+(POSE_SOURCE_TITLE[d.poseSource]||'')
+    +'\n実機由来 '+real+' tick (live '+(c.livePalette||0)+' / palette '+c.palette
+    +' / 録画 '+c.run+' / ライブラリ '+c.library+')'
+    +' / 補間 '+c.backfilled+' / 再構成 '+c.reconstructed+' / 未描画 '+c.missing
+    +'\n材質(弾の描画契約=S2)と資産(単一スナップショット=S4)は未実装のため未確認。'
+    +'\n全軸が揃うまで総合は「部分的」より上にならない。';
+  // 総合は全軸が揃ったときだけ「信頼できる」。今は材質/資産が未確認なので必ず部分的。
+  return '  ·  姿勢 '+now+'（実機 '+Math.round(100*real/tot)+'%）'
+    +'  ·  材質/資産 未確認  →  総合 部分的';
+}
+/* =============================================================================
+   fps が落ちた瞬間を、推測なしで捕まえるための見張り (2026-08-25)
+   -----------------------------------------------------------------------------
+   にーくら:「複数の敵を出して戦闘が発生し、**終わったら**発生する。時間は関係ない」
+
+   2026-08-25 の調査では**再現できなかった** —— 10 分の水槽 (tick 19,000) で 163fps
+   平坦、計測器タブでも平坦、258,016 tick の録画再生でも 161.8fps。条件 (実クライアント・
+   数時間の水槽) が私の手元に無い。**再現できない症状を推測で直さない**ので、
+   代わりに「次に起きた瞬間の計器一式」を自動で残す。
+
+   何を残すか: 犯人を名指しできるだけの分解。**GL / frameAt / 取り込み / trim / 系列の長さ**
+   を同時に持つ ——「絵が重い」のか「帳簿が重い」のかを後から区別できるように。
+   2026-08-23 に同じ区別を怠って 2 回まちがえた (どちらも UI 側だった) 前例がある。
+
+   **自分が重さの原因にならないこと。** 積むのは既に計算済みの数値だけで、
+   採取は 5 分に 1 回・1 セッション 20 回まで。
+   ============================================================================= */
+const PERF_RING = [];              // 直近の標本 (助走を見るため)
+const PERF_RING_MAX = 120;         // 500ms x 120 = 直近 1 分
+const PERF_DROP_RATIO = 0.6;       // 最良の 60% を割ったら「落ちた」
+const PERF_DROP_SAMPLES = 6;       // 3 秒続いたら本物とみなす (一瞬の谷では撃たない)
+const PERF_COOLDOWN_MS = 5 * 60 * 1000;
+const PERF_MAX_DUMPS = 20;
+// **perfLastDumpAt は「まだ一度も採っていない」を負で表す。** 0 で初期化すると
+// now - 0 < COOLDOWN が最初の 5 分ずっと真になり、**開いてから 5 分間は絶対に発火しない**。
+// 2026-08-25 の配線検査で実際にこれで空振りした (黙って一度も動かない罠だった)。
+let perfBest = 0, perfLow = 0, perfDumps = 0, perfLastDumpAt = -PERF_COOLDOWN_MS;
+
+/** 今この瞬間の計器一式。**解釈しない。数字を集めるだけ。** */
+function perfSnapshot(now){
+  const s = {};
+  s.at = now; s.wall = Date.now();
+  s.fps = T.fps; s.worstMs = T.worstMs; s.drawMs = T.drawMs; s.glMs = T.glMs;
+  s.ingestMs = T.ingestMs; s.ingestLines = T.ingestLines; s.trimMs = T.trimMs;
+  s.mode = T.mode; s.tick = T.tick; s.playing = T.playing;
+  try { s.maxTick = D.maxTick; s.minTick = D.minTick; s.entities = D.entities ? D.entities.size : null; } catch(e){}
+  try {
+    const st = D.store.stats;
+    s.store = { rows: st.rows, changePoints: st.changePoints, frameAtMs: st.frameAtMs,
+      appendMsEma: st.appendMsEma, trims: st.trims, trimmedEntities: st.trimmedEntities,
+      lastTrimMs: st.lastTrimMs, droppedRows: st.droppedRows };
+  } catch(e){}
+  // **系列の長さ。** 絶対 tick 索引なので水槽の稼働時間で伸びる。
+  // 「セッション長で伸びる走査」が犯人かどうかは、この数字と fps を並べれば判る。
+  try { const q = D.series; if (q) s.seriesLen = { hpR: q.hpR && q.hpR.length, phase: q.phase && q.phase.length }; } catch(e){}
+  try { s.derived = SimGL.derivedStats(); } catch(e){}
+  try { s.clock = LIVE_CLOCK.stats ? LIVE_CLOCK.stats() : null; } catch(e){}
+  try { s.heapMB = Math.round(performance.memory.usedJSHeapSize / 1048576); } catch(e){}
+  try { s.visible = document.visibilityState; } catch(e){}
+  return s;
+}
+
+function perfWatch(now){
+  const s = perfSnapshot(now);
+  PERF_RING.push(s);
+  if (PERF_RING.length > PERF_RING_MAX) PERF_RING.shift();
+  // 助走の 10 秒は「最良」を決めるのに使わない (立ち上がりは遅い)。
+  if (PERF_RING.length > 20 && T.fps > perfBest) perfBest = T.fps;
+  if (!perfBest) return;
+  if (T.fps < perfBest * PERF_DROP_RATIO) perfLow++; else perfLow = 0;
+  if (perfLow < PERF_DROP_SAMPLES) return;
+  perfLow = 0;
+  if (perfDumps >= PERF_MAX_DUMPS) return;
+  if (now - perfLastDumpAt < PERF_COOLDOWN_MS) return;
+  perfLastDumpAt = now; perfDumps++;
+  const body = JSON.stringify({
+    why: "fps が " + perfBest.toFixed(0) + " から " + (T.fps||0).toFixed(0) + " へ落ちた状態が 3 秒続いた",
+    best: perfBest, at: s.wall, live: (typeof liveOpen === "function" ? liveOpen() : null),
+    run: (typeof LIVE_RUN !== "undefined" ? LIVE_RUN : null),
+    ua: navigator.userAgent, samples: PERF_RING.slice(),
+  });
+  fetch("/api/perfdump", { method: "POST", headers: { "Content-Type": "application/json" }, body: body })
+    .then(() => { tankSay && tankSay("fps の低下を記録した (run/sim/perf/)"); })
+    .catch(() => { /* 記録できなくても水槽は見続ける */ });
+}
+
+function perfTick(now){
+  // フレーム間隔。**最長がカクつきの正体**なので、平均に丸め込まずに最大を採る。
+  if(T._lastFrameAt!==undefined){
+    const gap=now-T._lastFrameAt;
+    if(gap>(T._worstGap||0)) T._worstGap=gap;
+  }
+  T._lastFrameAt=now;
+  if(T._perfT0===undefined){ T._perfT0=now; T._drawnInLoop=0; T._worstGap=0; return; }
+  const dt=now-T._perfT0;
+  if(dt<500) return;
+  const drawn=T._drawnInLoop||0;
+  T.fps=drawn*1000/dt; T.worstMs=T._worstGap||0;
+  T._perfT0=now; T._drawnInLoop=0; T._worstGap=0;
+  perfWatch(now);
+  const el=document.getElementById('perf');
+  if(!el) return;
+  const ing=T.ingestMs!==undefined?'  ·  取り込み '+T.ingestMs.toFixed(0)+'ms/'+(T.ingestLines||0)+'行':'';
+  // **取りこぼしを黙って隠さない。** ライブの行が落ちると、モブが死ななくなったり
+  // 位置がずれたりする(2026-08-23 の再接続バグ)。数が出ていれば一目で判る。
+  const drop=T.droppedRows?'  ·  取りこぼし '+T.droppedRows+'行':'';
+  // 「均等か」の目安。最長が理想間隔の 2 倍を超えたら、そこで止まって見えている。
+  const ideal=T.fps>0?1000/T.fps:0;
+  const janky=drawn>0&&ideal>0&&T.worstMs>ideal*2;
+  // **ライブの時計を信じる前に、数字を見る。**
+  //   水槽 = 実測した送り手の tick/秒 (20 とは限らない。混むと下がるのが正常)
+  //   遅れ = 今の遅れ / 目標  (目標は底に触れるたび自分で厚くなる)
+  //   速さ = 補正の倍率 (追従中は必ず ×0.90〜×1.10 の内側に居るはず)
+  //   底/飛/再接続 = 起きた回数。0 のままなら出さない
+  const s=LIVE_CLOCK.s;
+  const lv=liveOpen()
+    ? '  ·  水槽 '+s.rate.toFixed(1)+'t/s'
+      +'  ·  遅れ '+s.lagRaw.toFixed(1)+'/'+s.target.toFixed(1)+'t'
+      +'  ·  速さ ×'+(s.trim*s.brake).toFixed(2)
+      +(s.stalledMs>LIVE_CLOCK.STALL_MS?'  ·  停止 '+(s.stalledMs/1000).toFixed(1)+'s':'')
+      +(s.floorTouches?'  ·  底 '+s.floorTouches:'')
+      +(s.snaps?'  ·  飛 '+s.snaps:'')
+      +(s.reconnects||s.drops?'  ·  再接続 '+s.reconnects+'/'+s.drops:'')
+      +(T.trims?'  ·  保持 '+((D.maxTick-(D.minTick||0))+1)+'t（切った '+T.trims+'回）':'')
+    : '';
+  el.textContent=(drawn>0
+      ? '  ·  '+T.fps.toFixed(0)+'fps  ·  最長 '+T.worstMs.toFixed(0)+'ms'
+      : '  ·  静止')
+    +'  ·  draw '+(T.drawMs||0).toFixed(1)+'ms'
+    // draw の内訳。**絵(GL) と 帳簿(HUD/リボン) を分けて出す。**
+    +(T.glMs!==undefined?'（絵 '+T.glMs.toFixed(1)+' / 他 '+Math.max(0,(T.drawMs||0)-T.glMs).toFixed(1)+'）':'')
+    +(T.drawnN!==undefined?'  ·  '+T.drawnN+'体':'')
+    +ysmLine()+confidenceLine()+lv+ing+drop;
+  // **底に触れ続けているなら、まだ直っていない。** その一事だけ色で言う。
+  const touchedRecently=s.floorTouches!==T._lastFloor; T._lastFloor=s.floorTouches;
+  el.style.color=(T.droppedRows||janky||touchedRecently)?'var(--warn)':'';
+}
+
+/* =============================================================================
+   ライブの時計 —— 送り手の速さに同期する (clock recovery)
+
+   **固定 20tick/秒 は嘘だった。** 水槽は Minecraft サーバなので TPS は 20 が上限で、
+   混むほど下がる(実測: 1 tick に 110 行・41 体)。固定 20 で消費すると必ずデータの
+   先端に追突し、旧実装はそこで凍って待っていた。固定の消費 + 可変の生産 + 飽和
+   リミッタ = **弛張発振**。凍る→溜まる→一気に進む。静止フレームの割合は理論上
+   `1 − TPS/20` で、12TPS なら全フレームの 40% が静止画になる。
+
+   そして **不連続に飛ぶ動きは、目には二重像として見える**(映像の judder と同じ知覚)。
+   静止しているモブは飛ばないので綺麗に見える —— にーくら 2026-08-23
+   「動くモブが二重に見える」「残像が残る＝ロールバックがある」の姿と一致する。
+   **緩衝を厚くしても直らない**(定数を上げても発振の周期が延びるだけ)。
+
+   直し方は、**送り手の速さを測って、それに同期する**こと(動画配信やネットゲームの
+   クライアントがやっている clock recovery)。凍らせない。飛ばさない。速さを目に
+   見えない幅で動かして、緩衝の厚みを目標に保つ。
+   ============================================================================= */
+const lcClamp=(v,a,b)=>v<a?a:(v>b?b:v);
+const lcSmooth=(a,b,x)=>{ const t=lcClamp((x-a)/((b-a)||1),0,1); return t*t*(3-2*t); };
+
+const LIVE_CLOCK={
+  // --- 底 (もう描けない境界) ------------------------------------------------
+  // store.js の entityInterpAt は tt>=maxTick で補間を止める(先へ外挿しない)。
+  // だから整数 T.tick は maxTick-1 まで。0.25tick(12.5ms)は「1 フレーム長引いても
+  // maxTick へ乗り上げない」ための余白。
+  LAG_MIN:0.25,
+  // ここから LAG_MIN へ向けて速度を線形に 0 へ落とす。**急停止ではなく滑走停止** ——
+  // 幅を 1 tick(= 届く粒 1 つぶん)にすると τ≈50ms の指数接近になり、境界で段差が出ない。
+  BRAKE_HI:1.25,
+  // --- 目標の遅れ ------------------------------------------------------------
+  // 1(補間に t+1 が要る) + 1(届く粒。jar の flush / 配信 / 取り込みが全部 50ms=1tick)
+  // + 1(rAF 60Hz と取り込み 20Hz の位相差)。これ以上は下げられない。
+  TARGET_MIN:3,
+  TARGET_MAX:24,   // 1.2 秒。監視カメラがこれ以上「今」を偽るなら、原因は上流にある
+  TARGET_BUMP:2,   // 底に触れたら 1 粒ぶん厚くする(jitter buffer の常法)
+  TAU_GROW:3.5, TAU_SHRINK:50,   // 厚くするのは速く、薄くするのは遅く(約14倍)。
+                   // 厚くし遅れると画が止まる(見える)。薄くし遅れると遅延が残る(見えない)。
+  // --- 制御則 ----------------------------------------------------------------
+  // KP: 遅れ 1tick あたり 2%。±10% の頭打ちは e=±5tick。閉ループは1次で
+  // τ=1/(R·KP)=2.5s —— 到着の揺れ(<0.2s)より 10 倍遅いので、構造的に揺れを
+  // 追いかけられない。1次なので行き過ぎ(オーバーシュート)も原理的に無い。
+  KP:0.02,
+  // KI: R·KP²/4。R=20 で ζ=1.0(臨界制動)になる値。3tick の定常誤差で 0.6%/秒 ——
+  // これは制御ではなく「ずれ取り」。推定器の非対称 EMA が持つ約 5% の偏りを消すのが仕事。
+  KI:0.002,
+  E_INT:3,         // 積分へ入れる誤差の頭打ち(ワインドアップ防止)
+  BIAS_MIN:0.85, BIAS_MAX:1.15,
+  // 追従中の速度補正 ±10%。**連続した音が無い**(playSounds は単発サンプル)ので、
+  // 音程による ±2〜5% の厳しい閾値は効かない。50ms の tick に対し 5ms のずれで、
+  // 動きの不整を感じ取る閾値(≈40ms)より一桁小さい。
+  TRIM:0.10,
+  TRIM_CATCHUP:1.00,  // 追いつきは最大 2.0 倍。**これは目に見える** —— 見えてよい。
+                      // DVR の早送りと同じで、バッジに「追いつき中」と出す。
+  RAMP_HI:40,      // 2 秒。ここで上限が 2.0 倍に達する。始まりは L*+5 (KP の線形域の
+                   // 外側)なので、追従中の上限は必ず 10% のまま。smoothstep で段差ゼロ。
+  SNAP_AT:200,     // 10 秒。2.0 倍で追いつくと 10 秒かかる —— それは見たい絵ではない。飛ぶ。
+  // --- 測定 ------------------------------------------------------------------
+  // 窓 500ms: σ(R)≈√2·σ到着·R/T = 1.41·0.03·20/0.5 ≈ 1.7tick/s (8.5%)。
+  // これより短いと雑音が絵の速さに出る。長いと TPS の段差に追従できない。
+  RATE_WIN_MS:500,
+  // ただし**窓の中の tick が少ないと、量子化誤差がそのまま偏りになる。**
+  // 実測(live-clock-selftest, 5TPS): 500ms 窓には 2〜3 tick しか入らず、
+  // 「下げは速く上げは遅く」の非対称 EMA が下側の 4t/s を掴んで離さない →
+  // 推定 4.3(-14%)、遅れが 14tick まで開いた。窓に最低 8 tick 入るまで
+  // (最大 2.5 秒まで)伸ばすと、量子化誤差は相対的に 1/3 以下になる。
+  RATE_MIN_TICKS:8, RATE_WIN_MAX_MS:2500,
+  // **下げは速く、上げは遅く。** 遅すぎるのは無害(遅れが増え、KP が押し戻す)。
+  // 速すぎるのが底に当たる方。代償の約 5% の低い偏りは KI が消す。
+  TAU_RATE_DOWN:0.25, TAU_RATE_UP:1.0,
+  STALL_MS:300,    // 6 tick ぶん。超えたら測定を止めて R̂ を**保持する**
+                   // (0 へ落とすと、再開時に立ち上がりへ数秒かかる)
+  RING:192,   // 60fps で 3.2 秒ぶん。上の RATE_WIN_MAX_MS(2.5秒)が窓を伸ばしきれる長さが要る
+  s:null,
+};
+LIVE_CLOCK.reset=function(){
+  const C=LIVE_CLOCK;
+  C.s={ t:new Float64Array(C.RING), m:new Float64Array(C.RING), i:0, n:0,
+        rate:20, warm:false, rateAt:0, lastMax:-1, lastAdvAt:0, stalledMs:0,
+        lag:C.TARGET_MIN, lagRaw:C.TARGET_MIN, target:C.TARGET_MIN+1,
+        jit:0, burst:1, bias:1, trim:1, brake:1, onFloor:false,
+        floorTouches:0, snaps:0, reconnects:0, drops:0, beatAt:0,
+        frames:0, stoppedFrames:0 };
+};
+LIVE_CLOCK.reset();
+/** 直ったかどうかの数字。**静止フレームの割合が唯一の指標**(§検証)。 */
+LIVE_CLOCK.report=function(){
+  const s=LIVE_CLOCK.s;
+  return { stoppedPct: s.frames?100*s.stoppedFrames/s.frames:0, frames:s.frames,
+           rate:s.rate, target:s.target, lag:s.lagRaw, trim:s.trim, brake:s.brake,
+           floorTouches:s.floorTouches, snaps:s.snaps, reconnects:s.reconnects, drops:s.drops };
+};
+
+/** maxTick の伸びから送り手の速さを測る。**止まっている間は測らない**(保持する)。 */
+function liveClockSample(now){
+  const C=LIVE_CLOCK, s=C.s, m=D.maxTick;
+  // 裏タブから戻った直後など、窓が「空白の時間」をまたいでいると傾きが無意味になる。捨てる。
+  if(s.n&&now-s.t[(s.i-1+C.RING)%C.RING]>250){ s.n=0; s.i=0; }
+  if(m>s.lastMax){ s.lastMax=m; s.lastAdvAt=now; }
+  if(!s.lastAdvAt) s.lastAdvAt=now;
+  s.stalledMs=now-s.lastAdvAt;
+  if(s.stalledMs>C.STALL_MS) return;          // 止まっている間は測らず、R̂ を保持する
+  s.t[s.i]=now; s.m[s.i]=m; s.i=(s.i+1)%C.RING; if(s.n<C.RING) s.n++;
+  // 窓の左端を探す: 500ms 以上前で、かつ **その間に 8 tick 以上進んでいる**最初の点。
+  // 遅い水槽ほど窓が自動的に伸びる(上限 2.5 秒)。伸ばしきっても足りなければ、
+  // その時点で一番古い点を使う —— 測らないよりは粗くても測るほうがよい。
+  let k=-1;
+  for(let j=1;j<s.n;j++){
+    const idx=(s.i-1-j+C.RING*2)%C.RING, age=now-s.t[idx];
+    if(age<C.RATE_WIN_MS) continue;
+    k=idx;
+    if(m-s.m[idx]>=C.RATE_MIN_TICKS||age>=C.RATE_WIN_MAX_MS) break;
+  }
+  if(k<0) return;                              // まだ窓が埋まっていない(起動直後は R̂=20 のまま)
+  const dtS=(now-s.t[k])/1000; if(dtS<=0) return;
+  const r=(m-s.m[k])/dtS;
+  const tau=r<s.rate?C.TAU_RATE_DOWN:C.TAU_RATE_UP;
+  const dt=Math.min(0.25,(now-(s.rateAt||now))/1000); s.rateAt=now;
+  s.rate+=(r-s.rate)*(1-Math.exp(-dt/tau));
+  s.rate=lcClamp(s.rate,0.5,60); s.warm=true;
+}
+
+/** 底のブレーキ。**生の遅れで測る** —— 均した値では境界に間に合わない。 */
+function liveBrake(lagRaw){
+  const C=LIVE_CLOCK;
+  return lcClamp((lagRaw-C.LAG_MIN)/(C.BRAKE_HI-C.LAG_MIN),0,1);
+}
+
+/** 目標の遅れを動かす。**底に触れたら厚くする** —— これが自己調整の本体。 */
+function liveClockRetarget(dt){
+  const C=LIVE_CLOCK, s=C.s;
+  if(s.brake<1&&!s.onFloor){ s.onFloor=true; s.floorTouches++;
+    s.target=Math.min(C.TARGET_MAX,s.target+C.TARGET_BUMP); }
+  else if(s.brake>=1&&s.lagRaw>C.BRAKE_HI+0.5) s.onFloor=false;   // 0.5tick のヒステリシス
+  const dev=Math.max(0,s.lag-s.lagRaw);        // **下振れだけ**見る。危ないのはそちら
+  s.jit+=(dev-s.jit)/64;                       // RFC 3550 と同じ形。τ≈3.2s
+  const want=lcClamp(1+s.burst+1.5*s.jit+1,C.TARGET_MIN,C.TARGET_MAX);
+  const tau=want>s.target?C.TAU_GROW:C.TAU_SHRINK;
+  s.target+=(want-s.target)*(1-Math.exp(-dt/tau));
+  s.target=lcClamp(s.target,C.TARGET_MIN,C.TARGET_MAX);
+}
+
+/** このフレームで進めてよい速さ [tick/秒]。**時計の唯一の持ち主。** */
+function liveClockStep(now,dt){
+  const C=LIVE_CLOCK, s=C.s;
+  liveClockSample(now);
+  s.lagRaw=D.maxTick-(T.tick+T.partial);
+  // **10 秒以上遅れたら追いつかずに飛ぶ。** 監視カメラなので今を映すのが正しい。
+  // ただし**黙って飛ばない** —— 黙る跳躍は、直したばかりの巻き戻りと同じ種類の嘘。
+  if(s.lagRaw>C.SNAP_AT){
+    const skipped=s.lagRaw-s.target;
+    T.tick=Math.max(D.minTick||0,Math.round(D.maxTick-s.target)); T.acc=0; T.partial=0;
+    s.bias=1; s.lag=s.target; s.lagRaw=s.target; s.snaps++;
+    s.burst=1;   // 一括で届いた分を「毎回これだけ届く」と誤解しない(下の BURST_MAX 参照)
+    // gl.js の ysm は**巻き戻すと tick 0 から積分し直す**。前進は差分だけで済む。
+    // だから飛んだときに ysm の状態をリセットしてはいけない —— 前進が安い方。
+    if(typeof tankSay==='function') tankSay('最新へ飛んだ（'+(skipped/20).toFixed(1)+' 秒ぶんを飛ばした）');
+    return 0;
+  }
+  // 制御は**均した遅れ**で行う。生の遅れは 50ms ごとに 0/1/2 と跳ねるので、
+  // そのまま速度へ通すと 20Hz の速度揺れ = 新しいカクつきになる。
+  s.lag+=(s.lagRaw-s.lag)*(1-Math.exp(-dt/0.20));
+  liveClockRetarget(dt);
+  const e=s.lag-s.target;
+  const capHi=C.TRIM+(C.TRIM_CATCHUP-C.TRIM)*lcSmooth(s.target+5,C.RAMP_HI,s.lag);
+  if(s.stalledMs<=C.STALL_MS) s.bias+=C.KI*lcClamp(e,-C.E_INT,C.E_INT)*dt;
+  s.bias=lcClamp(s.bias,C.BIAS_MIN,C.BIAS_MAX);
+  s.trim=lcClamp(1+C.KP*e+(s.bias-1),1-C.TRIM,1+capHi);
+  s.brake=liveBrake(s.lagRaw);
+  return s.rate*s.trim*s.brake;
+}
+
+function loop(now){
+  // **ライブは「再生ボタンを押す」ものではない。** 配信に繋いだ時点で追従は始まって
+  // いる(openLive() が T.playing を立てる)。ただし T.playing 自体は尊重する ——
+  // 監視カメラを「今ここで止めて見る」のは正当な操作で、「最新を映す」で追い直せる。
+  const live=liveOpen();
+  if(T.playing&&D.nTicks){
+    const dt=Math.min(250,now-T.last)/1000; T.last=now;   // 250ms 上限は据え置き(裏タブ復帰の暴走止め)
+    let rate;
+    if(live&&T.followLive){
+      rate=liveClockStep(now,dt);                          // 送り手に同期する
+    }else{
+      // 記録、またはライブで過去を見ている人。名目 20tick/秒 × ユーザ速度。
+      // 底のブレーキだけは共有する —— データの先へは誰も出られない。
+      const lagRaw=D.maxTick-(T.tick+T.partial);
+      rate=20*T.speed*(live?liveBrake(lagRaw):1);
+      LIVE_CLOCK.s.lagRaw=lagRaw;
+      if(live&&lagRaw<LIVE_CLOCK.s.target) T.followLive=true;   // 追いついたら追従へ戻す
+    }
+    T.acc+=rate*dt;
+    // 音は「普通の速さで進んだ tick」でだけ鳴らす —— 追いつき中や飛んだ直後に
+    // 単発音が数十個同時に鳴るのを防ぐ。
+    let steps=0; const audible=rate<=30;
+    while(T.acc>=1&&steps<64){ T.acc-=1; T.tick++; steps++; if(audible&&steps<=4) playSounds(T.tick); }
+    if(T.acc>=1) T.acc=0;
+    // **最後の砦。** 上の rate が既に 0 へ落としているので普通は発火しない。
+    // 発火したら底に触れたのと同じ意味なので、数に入れる(黙って凍らない)。
+    const cap=live?Math.max(0,D.maxTick-1):D.maxTick;
+    if(T.tick>=cap){
+      if(T.tick>cap){ T.tick=cap; T.acc=Math.min(T.acc,0.999);
+        if(live&&!LIVE_CLOCK.s.onFloor){ LIVE_CLOCK.s.onFloor=true; LIVE_CLOCK.s.floorTouches++; } }
+      if(!live&&T.tick>=D.maxTick){ T.tick=D.maxTick; T.acc=0; T.playing=false; syncPlayBtn(); }
+    }
+    // T.partial: 次tickまでの割合(0以上1未満)。末尾では 0 —— 外挿しない(13-01 決定1③)。
+    T.partial=(T.tick<D.maxTick)?lcClamp(T.acc,0,0.999):0;
+    // **「止まったフレーム」を数える。** これが直ったかどうかの唯一の数字。
+    // 平均 fps では原理的にこの区別ができない(60fps のまま画が止まるのが本件)。
+    LIVE_CLOCK.s.frames++; if(rate<1) LIVE_CLOCK.s.stoppedFrames++;
+    // _inLoop: この draw() が「連続表示の1フレーム」であることの印。
+    // pointermove からの再描画と区別するために立てる (fps の分子はこれだけ)。
+    T._inLoop=true; draw(); T._inLoop=false;
+  } else { T.last=now; T.partial=0; }
+  perfTick(now);
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+
+/* =============================================================================
+   7.5 霊夢をスポーンさせる（シナリオを走らせて、できた結果をそのまま開く）
+   ============================================================================= */
+
+/**
+ * シナリオ選択と「スポーン」ボタンを組み立てる。
+ *
+ * <p>押すとサーバが `gradlew runSim` を起動し、**新しいトレースが出来たら**そのパスを返す。
+ * こちらはそれを自動で開く —— にーくらはトレースファイルの存在を意識しない。
+ *
+ * <p>約45秒かかる（実測）。走っている間の様子は見えない（それは Phase 12 の仕事）。
+ */
+// ===== 水槽（ライブ）==========================================================
+// にーくら 2026-08-20:『巨大な研究所の、監視カメラで監視されてる大きな水槽』
+//   カメラ = /api/live を受けて描くだけ。中を変えない。
+//   手     = 起動 / 停止 / 放つ。**押されたときだけ**中に届く。
+// この2つを混ぜないこと（見ているだけのときは中が変わらないと保証できる状態にしておく）。
+// 13-03: liveLines(受けた行を全部溜め続ける生の行の配列)を撤去した。全履歴を持つのは
+// D.store(疎ストア)1つだけにする(D-03は守るが、その担い手は生の行ではない)——
+// livePending は「まだ store/series へ取り込んでいない」分だけを一時的に積む入れ物で、
+// 毎秒 appendLive() が消費して空にする(下の openLive 参照)。
+// liveGenRun: D.gen をライブの run 入れ替わりでも進めるための直前 run 識別子
+// (openLive 冒頭の説明を参照)。
+let liveSrc=null, livePending=[], liveTimer=null, liveDirty=false, liveGenRun=undefined;
+// 取り込み済みのバイト位置と、それがどの記録のものか (= 最後に受けた行の id を分解したもの)。
+// 二重取り込みの判定はこの 2 つだけで行う —— tick は使わない (appendLive の説明を参照)。
+// liveSeenRun: liveSeen がどの run のものか。**繋ぎ直しで記録を捨てるかどうかの判断**に
+// 使う。SSE の id から採る liveSeenKey はサーバ側の正規化が入るので、行が 1 つも来る前
+// (= まさに繋ぎ直しの瞬間)には比べられない。LIVE_RUN ならその時点で判る。
+let liveSeen=0, liveSeenKey=null, liveSeenRun=null;
+
+function tankSay(m){ const el=document.getElementById('tankMsg'); if(el) el.textContent=m; }
+
+/** テキスト/色/波形(#tankPulse)が共有する3分類。判定を2箇所に書かない。 */
+function tankBeatKind(hb,state){
+  if(state==='idle'||state==='stopped'||state==='done'||!state) return 'idle';
+  if(state==='error') return 'dead';
+  if(hb&&hb.alive) return 'alive';
+  if(state==='running') return 'idle';
+  return 'dead';   // live/stale のはずが心拍が来ない —— 立てたのに死んだ
+}
+
+/**
+ * 心拍を映す。**中身とは別に『生きている』を出す。**
+ * 空の水槽では「誰もいない」と「壊れている」が同じ絵になるので、これが要る。
+ */
+function tankBeat(hb,state){
+  const el=document.getElementById('tankBeat');
+
+  /* **状態が心拍より偉い。** 心拍はファイルに書かれた「最後に見た値」なので、
+     プロセスが死んだ後も 10 秒ほど alive:true のまま残る。先に心拍を見ると、
+     その隙間で**死んだ水槽を緑で「生きている」と表示する** —— 監視カメラの
+     最悪の壊れ方(止まった画像を映し続ける)そのもの。2026-08-21 に実機で発生:
+     state:"error"(exit 1) なのにパネルは「● tick 1860 — 生きている」だった。 */
+  const kind=tankBeatKind(hb,state);
+  tankPulsePush(hb,kind);   // 波形は心拍が届くたびに1点足す(テキストと同じ判定を見る)
+  if(!el) return;
+
+  if(state==='idle'||state==='stopped'||state==='done'||!state){
+    // 一度も立てていない/明示的にたたんだ/走り切った —— 何も壊れていない。
+    el.textContent='● 未起動';
+    el.style.color='#8a8f99';
+    return;
+  }
+  if(state==='error'){
+    el.textContent='● 落ちた';
+    el.style.color='#d08a8a';
+    return;
+  }
+  // ここから先(live / stale / running)は「水槽が在るはず」の状態。心拍を信じてよい。
+  if(kind==='alive'){
+    el.textContent='● tick '+hb.tick+' — 生きている';
+    el.style.color='#8ac08a';
+    return;
+  }
+  if(state==='running'){
+    el.textContent='● 立ち上げ中';
+    el.style.color='#8a8f99';
+    return;
+  }
+  // live/stale のはずが心拍が来ない —— 立てたのに死んだ。赤の意味はここに取っておく。
+  el.textContent='● 心拍なし';
+  el.style.color='#d08a8a';
+}
+
+/* ---- 心拍の波形 (#tankPulse) ----
+   にーくらの比喩どおり「監視カメラの水槽」の心電図。テキストより先に目が行く、
+   このパネルで唯一の主張の強い要素にする(それ以外は静かに保つ)。
+   直近48サンプルの tick 差分を高さへ写す。生きていれば揺れ、死ねば揺れない。 */
+const TANK_PULSE_MAX=48;
+const TANK_PULSE_NORMAL=20, TANK_PULSE_CLAMP=40;   // 心拍はおよそ毎秒=20tick。上下 clamp はその2倍
+let TANK_PULSE=[];   // { tick:number|null, kind:'alive'|'idle'|'dead' }[] 直近48件
+
+function tankPulsePush(hb,kind){
+  TANK_PULSE.push({ tick:(hb&&typeof hb.tick==='number')?hb.tick:null, kind });
+  if(TANK_PULSE.length>TANK_PULSE_MAX) TANK_PULSE.shift();
+  tankPulseDraw();
+}
+
+function tankPulseDraw(){
+  const cv=document.getElementById('tankPulse');
+  if(!cv) return;
+  const ctx=cv.getContext('2d'), W=cv.width, H=cv.height;
+  ctx.clearRect(0,0,W,H);
+
+  if(!TANK_PULSE.length){
+    // 心拍が一度も届いていない —— 空白のまま残さない。壊れて見えるのを防ぐ細い水平線。
+    ctx.strokeStyle=CSS('--line'); ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(0,H/2+0.5); ctx.lineTo(W,H/2+0.5); ctx.stroke();
+    return;
+  }
+
+  const kind=TANK_PULSE[TANK_PULSE.length-1].kind;
+  ctx.strokeStyle = kind==='alive' ? CSS('--axis-y') : (kind==='dead' ? '#d08a8a' : CSS('--ink-faint'));
+  ctx.lineWidth=1.3;
+
+  // delta=0 は下端寄り、delta=NORMAL(20)は中央、delta>=CLAMP(40)は上端寄りへ写す。
+  // margin=H/6 を残すことで「通常運転が中央2/3に収まる」を満たす。
+  const margin=H/6;
+  const yFor=(delta)=>{
+    const c=Math.max(0,Math.min(TANK_PULSE_CLAMP,delta));
+    return (H-margin)-(c/TANK_PULSE_CLAMP)*(H-margin*2);
+  };
+  const n=TANK_PULSE.length, stepX=n>1?W/(n-1):0;
+  ctx.beginPath();
+  let prevTick=null;
+  for(let i=0;i<n;i++){
+    const s=TANK_PULSE[i];
+    // 直前サンプルの tick が無ければ差分を測れない —— 通常値で埋め、開始点が
+    // 不自然に沈まないようにする(意味の無い値を作らない: あくまで「測れない」扱い)。
+    const delta=(prevTick!=null&&s.tick!=null)?(s.tick-prevTick):TANK_PULSE_NORMAL;
+    if(s.tick!=null) prevTick=s.tick;
+    const x=n>1?i*stepX:W/2, y=yFor(delta);
+    if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+  }
+  ctx.stroke();
+}
+
+/* ---- ボタン1つの水槽パネル (§7-1) ----
+   にーくら『写真の起動と停止、なんの役に立つかすらわからないんだ』。
+   ボタンは常に1つ。/api/run/status が言える状態(idle/running/live/stale/error/done/stopped)
+   ぜんぶを、押す前から結果が判る一行の文と色に落とす。 */
+
+/** 状態名 → {label,hint,kind,disabled,act} の純粋な対応表。実データ(経過秒/エラー文)は持たない。 */
+function tankActionFor(state){
+  const START_HINT='押すと Minecraft が起動し、誰もいない世界が1〜2分で立つ。';
+  switch(state){
+    case 'running':
+      return {label:'起動中…',hint:'起動している。誰もいない世界が立つまで残り1〜2分。',
+        kind:'idle',disabled:true,act:null};
+    case 'live':
+      return {label:'水槽をたたむ',hint:'押すと Minecraft が終了し、中のモブと記録中のトレースも一緒に終わる。',
+        kind:'danger',disabled:false,act:'stop'};
+    case 'stale':
+      return {label:'再接続',hint:'心拍が途絶えた —— 表示は生きていても水槽は壊れているかもしれない。'+START_HINT,
+        kind:'primary',disabled:false,act:'start'};
+    case 'error':
+      return {label:'再起動',hint:'前回は失敗して止まった。'+START_HINT,
+        kind:'primary',disabled:false,act:'start'};
+    case 'done':
+      return {label:'水槽を立てる',hint:'前回の記録は終わっている。'+START_HINT,
+        kind:'primary',disabled:false,act:'start'};
+    case 'idle': case 'stopped': default:
+      return {label:'水槽を立てる',hint:START_HINT,kind:'primary',disabled:false,act:'start'};
+  }
+}
+
+const TANK_ACT_HANDLERS={start:null,stop:null};   // buildTankUi() が中身を差し込む
+let TANK_START_IN_FLIGHT=false;   // 起動ポーリング中は5s見張りポーリングと取り合わない
+let TANK_LAST_STATE=null;
+let TANK_LIVE_GUARD_UNTIL=0;      // live 直後この時刻まで #tankAct を強制無効化(T-1a4-02)
+let TANK_GUARD_TIMER=null;
+
+/** status(またはstate名の断片)をDOMへ描く。押下・ポーリング・再接続、全部がここを通る。 */
+function tankRenderAction(status){
+  const btn=document.getElementById('tankAct'), hintEl=document.getElementById('tankHint');
+  if(!btn||!hintEl) return;
+  const state=(status&&status.state)||'idle';
+  const r=tankActionFor(state);
+
+  // live に入った瞬間だけガードを張り直す。1200ms 経ったら自分で描き直して外す
+  // (起動連打の最後の1発が、立ち上がった直後の停止に化けて1〜2分をふいにする事故を防ぐ)。
+  const enteringLive=state==='live'&&TANK_LAST_STATE!=='live';
+  TANK_LAST_STATE=state;
+  if(enteringLive){
+    TANK_LIVE_GUARD_UNTIL=Date.now()+1200;
+    clearTimeout(TANK_GUARD_TIMER);
+    TANK_GUARD_TIMER=setTimeout(()=>tankRenderAction(status),1220);
+  }
+  const guarded=state==='live'&&Date.now()<TANK_LIVE_GUARD_UNTIL;
+
+  let hint=r.hint;
+  // **理由はメッセージ行に置く。ヒントに足さない。**
+  // ヒントは「押すと何が起きるか」だけを言う欄で、サーバの理由文はそれ自体が括弧を
+  // 含むため、足すと「…立つ。（gradlew が exit 1 で終了した（…を見る））」という
+  // 入れ子になって読めなくなっていた(2026-08-21 実機で確認)。しかも同じ文字列を
+  // tankSay() が既に出しており、二重だった。
+  if((state==='stale'||state==='error')&&status&&status.error) tankSay('× '+status.error);
+  if(state==='running'&&status&&status.started){
+    const sec=Math.max(0,Math.round((Date.now()-status.started)/1000));
+    hint=r.hint+' 経過 '+sec+'s。';
+  }
+
+  btn.textContent=r.label;
+  btn.className=r.kind==='primary'?'primary':(r.kind==='danger'?'danger':'');
+  btn.disabled=!!r.disabled||guarded;
+  btn.onclick=r.act?TANK_ACT_HANDLERS[r.act]:null;
+  hintEl.textContent=hint;
+
+  // 「放つ」(§4): live のときだけ触れる。それ以外は見えるが休眠 —— 出たり消えたり
+  // すると棚が跳ねて何ができる道具かが隠れる(design point 4)。#tankSpawn.dormant が
+  // 透明度と pointer-events をまとめて切る(CSS側、TANK_CSS参照)。
+  const spawn=document.getElementById('tankSpawn');
+  if(spawn) spawn.classList.toggle('dormant',state!=='live');
+  const summonBtn=document.getElementById('tankSummon');
+  if(summonBtn) summonBtn.disabled=state!=='live';
+}
+
+/** ライブセッションの新規開始(またはrun入れ替わり)の下ごしらえ。D.store/
+ *  D.seriesStateを空で作り直し、D.key/D.pathとtraceName表示を揃える——
+ *  実際の初期表示(空の水槽)はこの直後に openLive() が appendLive([]) を
+ *  呼んで仕上げる。load()はもう呼ばない(13-03、CYCLE-05)。 */
+function resetLiveState(){
+  D.store=SimStore.create();
+  D.minTick=0;
+  D.seriesState=SHARED?SHARED.seriesState():null;
+  D.path='水槽（ライブ）';
+  /* **表示名と実パスを分ける。**
+   *
+   * D.path はこの通り表示名で、traceName にそのまま出る。ところが gl.js の setTrace は
+   * これを companion の解決 (loadPoseTrace / loadPalette) へも渡していたので、
+   * ライブでは /api/pose も /api/palette も「水槽（ライブ）」というパスを引きに行き、
+   * **必ず 404 になっていた** —— palette がライブで一度も起動しない原因
+   * (2026-08-25 の審査で判明)。実パスは LIVE_RUN が持っている
+   * (status.trace そのもの = <scenario>/<date>/<runId>/arena-0.jsonl)。
+   *
+   * D.key は触らない —— 13-02 がライブ中に安定させたもので、変えると setTrace の
+   * 早期 return が効かなくなり GPU へ丸ごと再アップロードになる。 */
+  D.tracePath=LIVE_RUN;
+  D.key=D.path+'#'+D.gen;
+  document.getElementById('traceName').textContent=D.path;
+}
+
+/** 配信を開く。**全履歴は D.store(疎ストア)1つが持つ**(D-03)——受けた行は
+ *  livePending へ「まだ取り込んでいない分」だけ積み、毎秒 appendLive() が
+ *  store/series へ渡して空にする。生の行を溜め続けることはもうしない(13-03)。 */
+function openLive(run){
+  const target=(run!==undefined?run:LIVE_RUN);
+  /* **同じ記録の繋ぎ直しでは、覚えているものを捨てない。**
+   *
+   * 旧実装はここで無条件に resetLiveState() を呼び、D.store を空にしていた。
+   * T.tick に小さい数を代入している行は 1 つも無いのに、描画時刻は D.frameAt と
+   * SimStore.frameAt の**2 段の clamp** で「その時の D.maxTick」へ丸められる。
+   * だから store を捨てた瞬間、**絵だけが tick 0 付近まで戻り**、データが流れ込む
+   * につれて早送りで追いつく —— にーくら 2026-08-23「ロールバックがある」の正体。
+   * tankSyncLive の 5 秒見張りは SSE が切れるたびここを呼ぶので、
+   * **接続が切れた回数だけ巻き戻っていた。**
+   *
+   * 判定に LIVE_RUN を使う理由: SSE の id から採る liveSeenKey はサーバ側で
+   * 正規化されており、行が 1 つも来ていない繋ぎ直しの瞬間には比べようがない。 */
+  // 繋ぎ直し (resume) では resetLiveState を通らないので、ここでも実パスを合わせる。
+  // 同じ run なら値は変わらないが、run が入れ替わった直後にここだけ古いままだと
+  // 前の水槽の companion を引き続ける。
+  if(target) D.tracePath=target;
+  const resume=(liveSeen>0&&liveSeenRun!==null&&liveSeenRun===target);
+  closeLive();
+  livePending=[]; liveDirty=false;
+  if(resume){
+    LIVE_CLOCK.s.reconnects++;
+    // D.gen は**進めない**。進めると D.key が変わり、gl.js の setTrace の早期 return が
+    // 効かなくなって GPU へ丸ごと再アップロードになる。
+  }else{
+    liveSeen=0; liveSeenKey=null; liveSeenRun=target;
+    LIVE_CLOCK.reset();
+    T.tick=0; T.acc=0; T.partial=0;
+    TANK_FRAMED=false;
+  }
+  T.followLive=true;
+  // 素の EventSource は Last-Event-ID を送らない(ブラウザ自身の自動再接続のときだけ)。
+  // だから**こちらから開き直すときは ?from= を自分で渡す**。
+  liveSrc=new EventSource('/api/live'+(resume?('?from='+liveSeen):''));
+  // 行と一緒に **id ("<どの記録か>:<バイト位置>")** を持つ。二重取り込みの判定は
+  // これで行う —— tick で判定していた頃は、同じ tick の行がバッチ境界をまたいだ
+  // だけで後半が捨てられていた (下の appendLive の説明を参照)。
+  liveSrc.onmessage=(e)=>{ livePending.push({d:e.data,id:String(e.lastEventId||'')}); liveDirty=true; };
+  liveSrc.addEventListener('beat',(e)=>{ LIVE_CLOCK.s.beatAt=performance.now();
+    try{ tankBeat(JSON.parse(e.data),'live'); }catch{ /* 壊れた心拍は次で拾う */ } });
+  liveSrc.onerror=()=>{ LIVE_CLOCK.s.drops++;
+    tankSay('配信が切れた（続きから繋ぎ直します —— 覚えているものは捨てません）'); };
+  LIVE_CLOCK.s.beatAt=performance.now();
+  if(!resume){
+    // 13-03: 別のrun(表示名は同じ '水槽（ライブ）' のまま中身のrunだけ変わる)へ
+    // 入れ替わったときは D.gen を進める。旧来の同世代判定は、常に同じ文字列である
+    // name を D.path と比べるだけなので、ライブのrun入れ替わりを見分けられない
+    // (13-02-SUMMARY.md記載の既知の穴)。tankSyncLive が openLive() を呼ぶ直前に
+    // 更新している LIVE_RUN をここで直接比較し、世代を進める。
+    if(LIVE_RUN!==liveGenRun){ D.gen=(D.gen||0)+1; liveGenRun=LIVE_RUN; }
+    // D.store/D.seriesStateを作り直す(全文ローダはもう呼ばない——CYCLE-05のため
+    // ライブ経路は全面的にappendLiveへ寄せる。resetLiveStateのdocstring参照)。
+    // **新しい記録のときだけ。ここが唯一の呼び出し元。**
+    resetLiveState();
+  }
+  // **即座に切り替える。** 最初の SSE 行を待たない —— 空の水槽は「読み込み中」ではなく
+  // 行き先そのもの (design point 2)。appendLive([]) は0行の追記として空の状態を
+  // 確定させ、draw() のチャンバーを即座に出す。カメラは動かさない (誰か現れたときだけ
+  // 寄せる、下の interval の「初回誰か現れた」判定へ委ねる)。
+  appendLive([],{});
+  // **繋いだ時点で追い始める。** ライブは開いたら既に動いているもので、
+  // 見るために再生ボタンを押させるのは録画の作法(にーくら 2026-08-22)。
+  T.playing=true; T.last=performance.now(); T.acc=0;
+  syncPlayBtn();
+  tankLiveBadge(); tankWho();
+  // **溜めてから取り込む。ただし溜めすぎない。**
+  //
+  // 1 行ごとの取り込みは重いだけで意味が無い —— が、1 秒ぶん溜めるのは粗すぎた。
+  // 実測(2026-08-22、にーくら「fps は 60 あるのに 10fps に見える」):
+  //   tick の変化が 4 秒間に 6 回。1 秒に 1 度 +25tick まとめてワープしていた。
+  //   fps は 151 出ているのに、画面の中身は 1 秒に 1 回しか変わらない
+  //   = 1fps の紙芝居を 151fps で表示している状態だった。
+  //
+  // データは serve.mjs の pump が 250ms ごとに送っている。取り込みをそれより細かく
+  // 刻んでも新しい行は来ないので、**125ms** にして「届いたら次の刻みで必ず載る」ようにする。
+  // 費用は測ってある: 200 行で 11ms、125ms 刻みなら 1 回あたり 40 行前後で数 ms。
+  // 60fps(16.7ms/フレーム)を割る心配のない範囲。
+  const LIVE_INGEST_MS=50;
+  let first=true;
+  liveTimer=setInterval(()=>{
+    if(!liveDirty||!livePending.length) return;
+    liveDirty=false;
+    const lines=livePending; livePending=[];
+    // live:true —— 最新を追う。初回だけカメラを寄せる（毎秒寄せると視点を奪う）。
+    // **カメラを寄せるのは「最初に誰かが現れた時」。**
+    // 初回 load の時点では空の水槽なので、寄せる先が無く豆粒のままだった。
+    const someone=D.entities.size>0;
+    const frame=!TANK_FRAMED&&someone;
+    appendLive(lines,{frameCam:frame||first});
+    if(frame){
+      TANK_FRAMED=true;
+      // **距離も寄せる。** frameCam は注視点だけ動かして cam.dist を変えないので、
+      // 水槽の広さ (半径24) に合わせた初期値のままだと霊夢が豆粒だった (撮って確認)。
+      cam.dist=15; draw();
+    }
+    first=false;
+    tankLiveBadge(); tankWho();
+  },LIVE_INGEST_MS);
+}
+
+function closeLive(){
+  if(liveSrc){ liveSrc.close(); liveSrc=null; }
+  if(liveTimer){ clearInterval(liveTimer); liveTimer=null; }
+  if(typeof tankLiveBadge==='function') tankLiveBadge();
+  // 配信が切れたらここは録画の世界に戻る。ボタンの題も戻す
+  // (liveOpen() が false になってから呼ぶこと —— 上で liveSrc を null にした後)。
+  if(typeof syncPlayBtn==='function') syncPlayBtn();
+}
+
+/**
+ * ライブの毎秒処理の本体(13-03、CYCLE-05)。**新着行だけ**を D.store と
+ * D.seriesState へ追記する——旧来の全文ローダはもう呼ばない(旧来の全文ローダは
+ * 毎回 D.store を作り直し、text 全文を SHARED.parseTrace に通していた。履歴が伸びる
+ * ほど毎秒の費用も伸びていたのが直すべき本体だった。PHASE13-INPUT 実測: 41.9MB で
+ * 毎秒 4,173ms)。
+ *
+ * lines は「まだ store/series へ取り込んでいない」1秒ぶんの行配列。SimStore.append は
+ * 配列をそのまま受けるので、結合してから渡し直さない(store.js 内で自前に分割する
+ * だけなので、結合してから渡すと分割し直す分だけ無駄になる)。SHARED.parseTrace は
+ * 文字列前提なのでそちらだけ結合するが、対象は新着ぶんだけ——履歴丸ごとの結合
+ * (旧実装、42MBで26ms)はもう発生しない。
+ */
+function appendLive(lines,opts){
+  opts=opts||{};
+  // **取り込みの実費を測って残す。** 13-03 の計測は「新着 60 行」で行ったが、
+  // 実際の戦闘中は 300〜380 行/秒 出る(2026-08-22 実測)。5〜6 倍の負荷を一度も
+  // 測っていなかったので、体感との食い違いを説明できなかった。右下に出して、
+  // 「重い」と感じた瞬間の数字がその場で読めるようにする。
+  const _ingest0=performance.now();
+  /* **二重取り込みの判定は「行の位置」で行う。tick で行ってはいけない。**
+   *
+   * 旧実装は「t が store.maxTick 以下の行を捨てる」だった(T-13-09)。当時は取り込みが
+   * 1 秒バッチだったので「1 つの tick の行がバッチ境界をまたぐのは極めて起きにくい」
+   * と書いてあったが、**その前提はもう成り立たない** —— 2026-08-22 に jar の flush /
+   * 配信 / 取り込みを 3 段とも 50ms(=1 tick)へ揃えたので、バッチ境界と tick 境界は
+   * 同じ細かさになった。同じ tick の行が 2 つのバッチに分かれるのは日常で、
+   * **後から届いた半分は黙って捨てられていた**。
+   *
+   * SimArena は 1 tick の中で「全員の pos」→「消えた者の gone」の順に書く。
+   * つまり境界に当たったとき落ちやすいのは gone のほう ——
+   * にーくら 2026-08-23「クリーパーが死んでも描画される」の姿と一致する。
+   *
+   * 今は serve.mjs が各行に id (= その行の末尾のバイト位置) を付けて送るので、
+   * 「もう取り込んだ位置」より後ろかどうかで正確に判定できる。tick を見る必要が無い。
+   * 再接続はサーバ側が Last-Event-ID で続きから送るので、そもそも再送自体が来ない。 */
+  /* **記録が変わったら、バッチをそこで割る。**
+   * 旧実装はループの途中で resetLiveState() を呼びながら、append はループの**後**で
+   * 1 回だけ行っていた。だから切り替え前の行が新しい空の store へ流れ込み、
+   * 必ず非単調になって droppedRows を出していた。キーごとに分けてから順に流す。 */
+  const batches=[]; let cur={key:liveSeenKey,lines:[],reset:false};
+  for(const it of lines){
+    const line=typeof it==='string'?it:(it&&it.d);
+    const rawId=typeof it==='string'?'':((it&&it.id)||'');
+    if(!line||!line.trim()) continue;
+    if(rawId){
+      const i=rawId.lastIndexOf(':');
+      const key=i<0?'':rawId.slice(0,i);
+      const off=Number(i<0?rawId:rawId.slice(i+1))||0;
+      // **記録が変わった。** (繋ぎ直しの合間に水槽を立て直した場合。ここで気付かないと、
+      //  新しい run の先頭の行を「もう見た位置」として捨てて spawn を取りこぼす)
+      if(cur.key!==null&&key!==cur.key){ batches.push(cur); cur={key:key,lines:[],reset:true}; liveSeen=0; }
+      cur.key=key; liveSeenKey=key;
+      if(off&&off<=liveSeen) continue;     // 既に取り込んだ位置。捨ててよい唯一の場合。
+                                           // **?from= はあくまで帯域の節約で、正しさの
+                                           // 責任はここが持つ**(サーバはファイル回転時に
+                                           // 黙って先頭から送り直す)。
+      if(off>liveSeen){ liveSeen=off; liveSeenRun=LIVE_RUN; }
+    }
+    cur.lines.push(line);
+  }
+  batches.push(cur);
+  for(const b of batches){
+    if(b.reset){ D.gen=(D.gen||0)+1; resetLiveState(); LIVE_CLOCK.reset(); T.tick=0; T.acc=0; T.partial=0; }
+    if(!b.lines.length) continue;
+    D.store.append(b.lines);
+    if(SHARED){
+      const {events}=SHARED.parseTrace(b.lines.join('\n'));
+      // final を渡さない —— まだ続きが来る(seriesFeed の docstring の hold-back 参照)。
+      SHARED.seriesFeed(D.seriesState,events);
+      D.series=SHARED.seriesLanes(D.seriesState);
+    }
+  }
+  /* **履歴を窓で切る。ライブだけ。記録は全量のまま開く。**
+   *
+   * にーくら 2026-08-23:「正直前にもどれるのは2分だけでいいよ。本当にさかのぼりたく
+   * なったら録画ボタンを押しておくし、それに、切り捨てられるとはいっても、
+   * デバッグログは残るだろう？」 —— **記録がディスクに全量残ることが条件**。
+   * jar は全部書いており、「記録」から開けば全長が読める。切るのはブラウザの手元だけ。
+   *
+   * ここで切る理由は**順序**: この下で D.entities / D.targetIds / SimGL.growDerived が
+   * ストアの姿を読む。後ろへ回すと、その 1 回だけ「もう無い entity を指す targetIds」ができる。
+   * trimBefore は maxTick に触れないので、直後の D.maxTick の読み出しは切っても同じ値。 */
+  if(VIEWING_RECORD===null&&LIVE_WINDOW>0&&
+     D.store.maxTick-D.store.minTick>LIVE_WINDOW+LIVE_SLACK){
+    const r=D.store.trimBefore(D.store.maxTick-LIVE_WINDOW+1);
+    T.trims=(T.trims||0)+1; T.trimMs=r.ms;
+    // gl.js の walkPos は絶対 tick 索引の Float32Array。entity が消えても誰も読まない
+    // まま残る(4 時間なら 1 体 1.1MB)ので、こちらでも忘れさせる。
+    if(window.SimGL&&SimGL.forgetEntities) SimGL.forgetEntities(r.forgot);
+    // 系列側の「同じ tick を二度食わせない」台帳も刈る(一度も刈られていなかった)。
+    if(SHARED&&SHARED.seriesTrim&&D.seriesState) SHARED.seriesTrim(D.seriesState,r.minTick);
+  }
+  D.meta=D.store.meta; D.entities=D.store.entities;
+  const _prevMax=D.maxTick;
+  D.maxTick=D.store.maxTick<0?0:D.store.maxTick;
+  // **保持(2400〜3000 tick で鋸歯)と表示(ぴったり 2400)を分ける。**
+  // ストアの実際の床をそのまま出すと、30 秒ごとにバーの長さが 25% 跳ねる。
+  D.minTick=(VIEWING_RECORD===null&&LIVE_WINDOW>0)?Math.max(0,D.maxTick-LIVE_WINDOW+1):0;
+  // 1 回の取り込みで何 tick 届いたか。目標の遅れ(緩衝の厚み)は、この粒より大きい必要がある。
+  { const _grew=D.maxTick-_prevMax, _s=LIVE_CLOCK.s;
+    // BURST_MAX=20: 取り込みは 50ms 刻みで水槽は高々 20TPS なので、普通の粒は 1〜2 tick。
+    // 20 を超えるのは一括読み込みか停止明けで、それは「粒」ではない —— 緩衝を厚くする
+    // 判断は底に触れたかどうか(floorTouches)が持つべきで、この推定に混ぜてはいけない。
+    if(_grew>20){ /* 粒ではない。無視する */ }
+    else if(_grew>_s.burst) _s.burst=_grew;
+    else _s.burst+=(1-_s.burst)*0.02; }   // τ≈2.5秒 で忘れる
+  D.reimuId=D.store.reimuId;
+  D.nTicks=D.maxTick+1;
+  D._frameAtCache=null;
+  D.targetIds=[...D.entities.values()].filter(e=>e.role==='target').map(e=>e.id);
+  // D.key(name+'#'+D.gen) は変わらない(同じrunが続く限りD.genも変わらない) ——
+  // gl.jsのsetTraceの早期returnを壊さないため、ここではD.key/D.pathを触らない。
+  if(window.SimGL&&SimGL.available()&&SimGL.growDerived) SimGL.growDerived(D);
+  const m=D.meta||{};
+  document.getElementById('traceMeta').textContent=
+    `${m.scenario??'?'} · arena ${m.arena??'?'} · ${D.maxTick+1} ticks · ${D.entities.size} entities`;
+  // **時間の持ち主は loop() だけ。** ここで T.tick を動かすと追従の実装が 2 箇所に
+  // 分かれる(旧実装のここのコメント自身がそう警告していた)。残すのは防御的な上限だけ。
+  if(T.tick>D.maxTick){ T.tick=D.maxTick; T.acc=0; T.partial=0; }
+  // **床が上がってきたら再生位置を連れていく。** 置いていくと「空の水槽」になって
+  // 壊れて見える。連れて行けば「一番古い、まだ手元にある瞬間」が見える。
+  const _onEdge=T.tick<D.minTick;
+  if(_onEdge){ T.tick=D.minTick; T.acc=0; T.partial=0; }
+  if(_onEdge&&!T._onEdge) tankSay('保持の端に達した（手元は直近2分）— 全部を見るなら「記録」から開く');
+  T._onEdge=_onEdge;
+  if(opts.frameCam) frameCam();
+  // renderAiLog()/draw() は旧来の全文ローダの末尾がしていたのと同じ理由で明示的に呼ぶ
+  // —— 60fps の rAF ループ(loop())は T.playing の間しか draw() を呼ばない
+  // (index.html:1385 付近)。水槽を「一時停止のまま眺めている」(=再生していない)のが
+  // 既定の見方なので、ここで呼ばないと新着データが届いても画面が更新されない。
+  // resize() は無関係(window の実サイズは変わっていない、別途 resize イベントが処理する)。
+  renderAiLog();
+  // 実費は draw() の前に締める —— draw の時間は drawMs が別に持っているので、
+  // ここに混ぜると「取り込みが重い」のか「描画が重い」のかが分からなくなる。
+  T.ingestMs=performance.now()-_ingest0;
+  T.ingestLines=(lines&&lines.length)||0;
+  // 取り込めなかった行数を画面へ回す(perfTick が右下に出す)。**黙って欠けさせない。**
+  // stats ではなく droppedRows を直に読む —— stats は全レーンの byteLength を合計するので、
+  // 毎 ingest ここを通るとレーン 2 万本で 0.45ms を払う(2026-08-23 実測)。
+  T.droppedRows=D.store.droppedRows||0;
+  draw();
+}
+
+// ===== 状態 → 配信 の唯一の持ち主 ==============================================
+// 2026-08-21 実測: 心拍バッジが「● tick 3240 — 生きている」を出している同じページで
+// liveSrc は null・受信行 0・エンティティ 0 だった。呼び出し元が2つ(起動ボタンの起動
+// ポーリングと、ページ読み込み時の1回だけの確認)しか無く、どちらも「このタブが自分で
+// 起こした遷移」でしか通らなかったため、このタブが起こしたのでも読み込み時に既に在った
+// のでもない live は、心拍バッジが緑になるだけで永遠に映らなかった。
+// 持ち主を1つにする —— 既にある5秒ごとの見張りポーリングにここを通させる。
+
+/** 開いている配信がどの run のものか。null = 開いていない。「もう開いたか」の旗ではない
+ *  —— 旗はリロードで消えて liveSrc と二重帳簿になるが、これは liveSrc と対になった
+ *  観測値なので、リロードすれば liveSrc ごと消えて自然に開き直る。値は status.trace を
+ *  そのまま入れる(<scenario>/<date>/<runId>/arena-0.jsonl)。 */
+let LIVE_RUN=null;
+
+/** 記録を見ているならそのパス、今(ライブ)を見ているなら null。
+ *  **ライブと記録は排他**という事実を、コードの側にも 1 つの値として置く。
+ *  これが無かったので、記録を開いてもライブが追いかけてきて混ざっていた。 */
+let VIEWING_RECORD=null;
+
+/** 配信が実際に生きているか。liveSrc が在るだけでは足りない —— /api/live は心拍が
+ *  死んでいると 409 を返し、EventSource は 200 以外では再接続しないまま
+ *  CLOSED(readyState 2) で止まる。CLOSED を「開いている」と数えると二度と開き直せない
+ *  (tankBeat の「状態が心拍より偉い」と同じ判例、index.html:1366-1370)。 */
+function liveOpen(){ return !!liveSrc && liveSrc.readyState!==2; }
+
+/**
+ * 状態→配信 の唯一の持ち主。5秒ごとの見張りポーリングと起動ポーリング、そして
+ * 読み込み時の初回確認、全部が同じ status をここへ渡す —— このタブが起こした遷移
+ * かどうかを問わない。中で fetch はしない(status は呼び出し側が既に持っている)。
+ */
+function tankSyncLive(status){
+  const state=status&&status.state;
+  // **記録を見ている間は手を出さない。** ここは 5 秒ごとに永遠に呼ばれるので、
+  // これが無いと記録を開いた 5 秒後に配信が開き直り、記録の上へライブが流れ込む。
+  if(VIEWING_RECORD!==null) return;
+  if(state==='live'){
+    const run=status.trace;
+    // 健康な配信は張り直さない —— ここは5秒ごとに永遠に呼ばれ続けるので、
+    // 同じ run を渡されるたびに開き直すと SSE 接続とタイマーが積み上がる。
+    if(liveOpen()&&LIVE_RUN===run) return;
+    if(LIVE_RUN!==run) TANK_FRAMED=false;   // 別の水槽に入れ替わった —— カメラは寄せ直しの対象へ
+    LIVE_RUN=run;
+    loadTankEntities();   // 放つドロップダウンを埋めるだけ。待つ必要が無い。
+    // run を渡す —— openLive はこれを liveSeenRun と比べて「同じ記録の繋ぎ直しか」を
+    // 決める。同じなら store を捨てずに ?from= で続きから受ける(巻き戻り対策)。
+    const wasSameRun=(liveSeenRun===run&&liveSeen>0);
+    openLive(run);
+    tankSay(wasSameRun?'配信を繋ぎ直した（続きから）':'走っている水槽に繋いだ');
+  }else{
+    if(!liveSrc&&LIVE_RUN===null) return;   // 既に閉じている —— 5秒ごとの無駄な仕事をしない
+    closeLive();
+    LIVE_RUN=null;
+    TANK_FRAMED=false;
+  }
+}
+
+/**
+ * 放てるモブの一覧を読む。**jar が書いたものをそのまま並べる。**
+ * 絞り込みも並べ替えもしない —— サイトはモブについて判断を持たない。
+ * mods/ に mod を足せば選択肢が勝手に増える。
+ */
+async function loadTankEntities(){
+  try{
+    const j=await (await fetch('/api/entities')).json();
+    if(!j||!j.entities) return;
+    TANK_ENTITIES=j.entities;
+    // mod の選択肢。**jar が返した namespace をそのまま並べる。**
+    // にーくら『絞り込みでいいかな。すべての jar をロードさせると重いかもしれないし』
+    const mods=[...new Set(j.entities.filter(e=>e.summonable).map(e=>e.mod))].sort();
+    if(!mods.includes(TANK_MOD)) TANK_MOD='*';
+    tankDropdown(document.getElementById('ddMod'),
+      [{value:'*',label:'すべての mod（'+j.summonable+' 種）'}].concat(mods.map(m=>({value:m,label:m}))),
+      TANK_MOD,
+      (v)=>{ TANK_MOD=v; loadTankEntitiesRefresh(); });
+    // 「放つ」節は常設(§4)。中身は状態に関わらず表示され、活性/休眠は
+    // tankRenderAction() が #tankSpawn の .dormant で切り替える —— ここでは触らない。
+    fillTankTypes();
+  }catch{ /* 一覧がまだ無い＝一度も水槽を立てていない */ }
+}
+
+/** mod を選び直したとき。両方のドロップダウンを描き直す。 */
+function loadTankEntitiesRefresh(){
+  const mods=[...new Set(TANK_ENTITIES.filter(e=>e.summonable).map(e=>e.mod))].sort();
+  tankDropdown(document.getElementById('ddMod'),
+    [{value:'*',label:'すべての mod'}].concat(mods.map(m=>({value:m,label:m}))),
+    TANK_MOD,
+    (v)=>{ TANK_MOD=v; loadTankEntitiesRefresh(); });
+  fillTankTypes();
+}
+/* ============================================================================
+   水槽パネル —— 3D の上に浮かぶ操作卓
+
+   にーくら『design系ツールでお願い。メニューでスポーンなんて利便性が悪すぎ』
+
+   ネイティブの <select>/<datalist> を使わない理由: **配色を制御できない。**
+   にーくらの環境で白背景に白文字になり、読めずスクロールもできなかった
+   (2026-08-20 の写真)。OS の描画に委ねている限り直しようがないので、
+   ドロップダウンは div で自作する。
+   ============================================================================ */
+let TANK_ENTITIES=null;      // jar が書いた一覧（サイトは中身を解釈しない）
+let TANK_MOD='touhou_little_maid';
+let TANK_LIVE_AT_END=true;   // 最新に追従しているか
+let TANK_FRAMED=false;       // 最初の 1 体が現れたときに一度だけカメラを寄せたか
+
+const TANK_CSS=`
+#tankPanel{position:absolute;left:12px;top:12px;z-index:30;width:262px;
+  padding:11px 12px 10px;border-radius:9px;
+  /* **不透明にする。** 半透明だと後ろの F3 テキストが透けて読めなくなる */
+  background:#14161c;border:1px solid rgba(255,255,255,.13);
+  box-shadow:0 8px 28px rgba(0,0,0,.55);
+  font-size:12px;line-height:1.45;user-select:none}
+#tankPanel .sec{font-size:10px;letter-spacing:.1em;color:#7d838f;margin:11px 0 5px}
+#tankPanel .sec:first-child{margin-top:0}
+#tankPanel .row{display:flex;gap:5px;align-items:center}
+#tankPanel input{padding:4px 7px;border-radius:5px;border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.04);color:#e8eaee;font:inherit;min-width:0}
+#tankPanel input:focus{outline:none;border-color:#5b8dd6;background:rgba(91,141,214,.10)}
+#tankPanel button{padding:4px 10px;border-radius:5px;border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.06);color:#e8eaee;font:inherit;cursor:pointer;white-space:nowrap}
+#tankPanel button:hover{background:rgba(255,255,255,.12)}
+#tankPanel button:disabled{opacity:.4;cursor:default}
+#tankPanel .primary{background:#2f5d9e;border-color:#3f74bd}
+#tankPanel .primary:hover{background:#396fbb}
+/* **停止系(danger)は「起動系(primary)」と混同しないための独立配色。**
+   にーくら『写真の起動と停止、なんの役に立つかすらわからないんだ』(§7-1) を受け、
+   ボタンは常に1つだが、その1つが「押すと立つ」か「押すと落ちる」かは色でも判る必要がある。
+   彩度を上げた警告赤ではなく、パネル全体の落ち着いたトーンに合わせた濁った赤にする。 */
+#tankPanel .danger{background:#5a3232;border-color:#7a4040}
+#tankPanel .danger:hover{background:#6b3b3b}
+#tankAct{width:100%;margin-top:6px;padding:6px 10px}
+#tankHint{font-size:11px;color:#8a8f99;margin-top:5px;word-break:break-word;min-height:15px}
+/* 自作ドロップダウン —— 配色もスクロールも自分の手に在る */
+#tankPanel .dd{position:relative}
+#tankPanel .dd>.cur{display:flex;justify-content:space-between;align-items:center;gap:6px;
+  padding:5px 8px;border-radius:5px;border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.04);cursor:pointer;overflow:hidden}
+#tankPanel .dd>.cur span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#tankPanel .dd>.list{display:none;position:absolute;left:0;right:0;top:calc(100% + 3px);
+  z-index:40;max-height:212px;overflow-y:auto;border-radius:6px;
+  background:#1b1e26;border:1px solid rgba(255,255,255,.16);
+  box-shadow:0 10px 26px rgba(0,0,0,.6)}
+#tankPanel .dd.open>.list{display:block}
+#tankPanel .dd .it{padding:5px 9px;cursor:pointer;color:#d6d9e0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#tankPanel .dd .it:hover{background:#2a3040}
+#tankPanel .dd .it.on{background:#2f5d9e;color:#fff}
+#tankPanel .dd .list::-webkit-scrollbar{width:9px}
+#tankPanel .dd .list::-webkit-scrollbar-thumb{background:#3a4152;border-radius:5px}
+#tankPanel .who{max-height:104px;overflow-y:auto;font-size:11.5px;color:#b9bec8}
+#tankPanel .who div{display:flex;justify-content:space-between;gap:8px;padding:1px 0}
+#tankPanel .who .id{color:#6f7583}
+/* 消す × は**普段は目立たせない**。並んでいるのは「今そこに居るもの」の一覧であって
+   ボタンの一覧ではないので、行の上に来たときだけ赤くする。 */
+#tankPanel .whoKill{
+  margin-left:6px;background:none;border:0;color:#4d525c;cursor:pointer;
+  font-size:12px;line-height:1;padding:0 2px;border-radius:2px;
+}
+#tankPanel .who div:hover .whoKill{color:#8a8f99}
+#tankPanel .whoKill:hover{color:#e06c6c;background:#2a1c1c}
+#tankPanel .msg{font-size:11px;color:#8a8f99;margin-top:8px;word-break:break-word;min-height:15px}
+/* 心拍の波形。テキストより先に目が行く、このパネルで唯一の主張の強い要素にする。 */
+#tankPulse{width:100%;height:18px;display:block;margin:4px 0 8px}
+/* **「放つ」は消えない。** 水槽が無いときは触れないが、居ることは常に見える
+   (にーくら『メニューでスポーンなんて利便性が悪すぎ』への対応が、出たり消えたりする
+   節では逆効果になる —— 何ができる道具かが見えなくなる)。 */
+#tankSpawn.dormant{opacity:.45;pointer-events:none}
+#tankSpawn .dormant-msg{display:none;font-family:var(--sans);font-size:11px;color:var(--ink-faint);margin-bottom:6px}
+#tankSpawn.dormant .dormant-msg{display:block}
+/* 休眠中に出す説明は「水槽が立つと放てる。」の一行だけにする。狙いの付け方まで
+   積むと、まだ何もできない欄に読む理由の無い文が2つ並ぶ(2026-08-21 に撮って確認)。 */
+#tankSpawn.dormant #tankPickReadout{display:none}
+/* 「記録」節の開閉トグル。にーくらが 0 KB のトレースを24本の壁から拾わされた
+   反省 —— 既定は畳んでおき、中身は展開したときだけ計算する。 */
+#recToggle{cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none}
+#recToggle:hover{color:#a8adb6}
+#recToggle:focus-visible{outline:2px solid #5b8dd6;outline-offset:2px}
+#recCaret{display:inline-block;width:9px}
+#recList{max-height:220px;overflow-y:auto;margin:2px 0 6px}
+#recList::-webkit-scrollbar{width:9px}
+#recList::-webkit-scrollbar-thumb{background:#3a4152;border-radius:5px}
+/* シナリオ名(パスの第1セグメント)ごとの見出し。件数つき。データなので等幅。 */
+.recGroup{font-family:var(--mono);font-size:10.5px;color:#7d838f;margin:8px 0 3px}
+.recGroup:first-child{margin-top:0}
+.recRow{display:flex;justify-content:space-between;gap:8px;width:100%;
+  padding:3px 6px;border-radius:4px;border:none;background:transparent;
+  color:#d6d9e0;cursor:pointer;text-align:left;font:inherit}
+.recRow:hover{background:rgba(255,255,255,.08)}
+/* 0 KB = 記録が空のまま終わった run。**隠さない** —— それ自体が何も起きなかった証拠。 */
+.recRow.empty{opacity:.5}
+/* **F3 のテキストをパネルの右へ逃がす。**
+   オーバーレイは左上から書き始めるので、パネルの下に潜り込んで
+   「被って読めない」状態になっていた（2026-08-20、撮って確認）。 */
+#overlay{padding-left:288px}
+#tankLive{position:absolute;right:12px;top:12px;z-index:30;display:none;gap:6px;align-items:center;
+  padding:5px 10px;border-radius:7px;background:#14161c;
+  border:1px solid rgba(255,255,255,.13);font-size:11.5px}
+/* 床の狙いの輪。**design系ツールの手応え**——押す前に、どこへ落ちるか見える。
+   pointer-events:none なので、輪の上でクリックしてもピックを食わない。 */
+#tankMarker{position:absolute;left:0;top:0;width:14px;height:14px;
+  margin-left:-7px;margin-top:-7px;border-radius:50%;
+  border:2px solid #6cc06c;background:rgba(108,192,108,.18);
+  pointer-events:none;display:none;z-index:25}
+`;
+
+/** 自作ドロップダウン。**ネイティブ select を使わない** —— 配色を握るため。 */
+function tankDropdown(el,items,current,onPick){
+  const cur=el.querySelector('.cur span');
+  const list=el.querySelector('.list');
+  cur.textContent=current||'選ぶ';
+  list.innerHTML=items.map(it=>
+    '<div class="it'+(it.value===current?' on':'')+'" data-v="'+it.value+'">'+it.label+'</div>').join('')
+    ||'<div class="it" style="color:#6f7583">該当なし</div>';
+  list.onclick=(e)=>{
+    const it=e.target.closest('.it');
+    if(!it||!it.dataset.v) return;
+    el.classList.remove('open');
+    onPick(it.dataset.v);
+  };
+}
+
+async function buildTankUi(){
+  const host=document.getElementById('stageWrap');
+  if(!host) return;
+
+  const style=document.createElement('style');
+  style.textContent=TANK_CSS;
+  document.head.appendChild(style);
+
+  const p=document.createElement('div');
+  p.id='tankPanel';
+  p.innerHTML=
+    // ---- 水槽: 心拍 / 波形 / 単一の操作ボタン / 一行の文 ----
+    '<div class="sec">水槽</div>'+
+    '<span id="tankBeat" style="font-size:11.5px;color:#8a8f99;display:block">● 未起動</span>'+
+    '<canvas id="tankPulse" width="238" height="18"></canvas>'+
+    // にーくら『写真の起動と停止、なんの役に立つかすらわからないんだ』(§7-1)。
+    // ボタンは常に1つ —— 今できる操作だけを見せ、色と一行の文で結果を先に言う。
+    // 中身は tankActionFor()/tankRenderAction() が state から組み立てる。
+    '<button id="tankAct"></button>'+
+    '<div id="tankHint"></div>'+
+    // ---- 放つ: 水槽が無いときも消えない(§4)。触れるかどうかを .dormant で切り替える ----
+    '<div class="sec">放つ</div>'+
+    '<div id="tankSpawn" class="dormant">'+
+      '<div id="tankSpawnMsg" class="dormant-msg">水槽が立つと放てる。</div>'+
+      '<div class="dd" id="ddMod" style="margin-bottom:5px">'+
+        '<div class="cur"><span></span><span style="color:#7d838f">▾</span></div>'+
+        '<div class="list"></div></div>'+
+      '<div class="dd" id="ddType" style="margin-bottom:6px">'+
+        '<div class="cur"><span></span><span style="color:#7d838f">▾</span></div>'+
+        '<div class="list"></div></div>'+
+      // 座標は打たない —— 実機タブで床をクリックして狙う (§7-2)。
+      // にーくら『メニューでスポーンなんて利便性が悪すぎ。design系ツールでお願い』。
+      '<div id="tankPickReadout" style="font-size:11px;color:#8a8f99;margin-bottom:6px">'+
+        '実機タブで床をクリックして狙いを定める。高さは選べない —— 床に立ち、飛ぶモブは自分で上がる。</div>'+
+      '<div class="row">'+
+        '<button class="primary" id="tankSummon" style="flex:1">放つ</button>'+
+      '</div>'+
+      // **水槽を実機と違わせる設定は、ここに固めて置く。** 散らすと「今どう違うのか」が
+      // 判らなくなる。既定は on（にーくらの要望）だが、違っていることは字で言う。
+      '<div class="sec">水槽のつまみ</div>'+
+      '<label style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ink-dim);padding:2px 0">'+
+        '<input type="checkbox" id="tankItemTtl" checked>'+
+        '<span>落ちた物を1秒で消す<span style="color:var(--ink-faint)"> — 実機は5分。拾いの検証をするときは外す</span></span>'+
+      '</label>'+
+      '<div class="sec">中にいる <span id="tankWhoN" style="color:#b9bec8"></span></div>'+
+      '<div class="who" id="tankWho"></div>'+
+    '</div>'+
+    // ---- YSM アニメ (S6): 実機を起動せずにアニメを確認する ----
+    // にーくら 2026-08-24:「YSMモデルについてのアニメーションも、実機を起動して
+    // わざわざ確認するのが面倒でね。水槽で確認できたら楽かなって思ったんだ」
+    // 出どころは animsweep のライブラリ = **実機レンダラが出した頂点**なので、
+    // ysm.js の再構成も CONTROLLER_WEIGHT_FIT=0.45 も通らない。
+    // トレースも水槽も要らずに動く（起動直後の空の水槽でそのまま使える）。
+    '<div class="sec" id="animToggle" role="button" tabindex="0" aria-expanded="false">'+
+      '<span><span id="animCaret">▸</span> YSM アニメ</span>'+
+      '<span class="num" id="animCount" style="color:var(--ink-dim)"></span>'+
+    '</div>'+
+    '<div id="animBody" style="display:none">'+
+      '<input id="animFilter" placeholder="名前で絞る（例 extra4 / attack）" '+
+        'style="width:100%;box-sizing:border-box;background:#15171b;border:1px solid #2a2e36;'+
+        'color:var(--ink);border-radius:4px;padding:4px 6px;font-size:11px;margin-bottom:4px">'+
+      '<div id="animList" style="max-height:190px;overflow:auto;font-size:11px"></div>'+
+      '<div id="animPlayRow" style="display:none;align-items:center;gap:6px;margin-top:6px">'+
+        '<button class="btn" id="animPlay" style="min-width:34px">▶</button>'+
+        '<input type="range" id="animFrame" min="0" max="19" value="0" style="flex:1">'+
+        '<span id="animFrameN" class="num" style="min-width:44px;text-align:right"></span>'+
+      '</div>'+
+      '<div id="animStatus" style="font-size:11px;color:var(--ink-faint);margin-top:4px"></div>'+
+    '</div>'+
+    // ---- 記録: 既定は畳む。にーくらが 0 KB のトレースを24本の壁から拾わされた反省 ----
+    '<div class="sec" id="recToggle" role="button" tabindex="0" aria-expanded="false">'+
+      '<span><span id="recCaret">▸</span> 記録</span>'+
+      '<span class="num" id="recCount" style="color:var(--ink-dim)"></span>'+
+    '</div>'+
+    '<div id="recBody" style="display:none">'+
+      '<div id="recList"></div>'+
+      '<div class="drop" id="drop">手元の <span class="num">arena-0.jsonl</span> を開く '+
+        '<button id="pick">ファイルを選ぶ</button></div>'+
+      '<input type="file" id="file" accept=".jsonl" hidden>'+
+    '</div>'+
+    '<div class="msg" id="tankMsg"></div>';
+  host.appendChild(p);
+  tankUpdatePickReadout();
+  tankPulseDraw();   // 心拍0件でも、空白ではなく細い水平線を最初から出す
+
+  // 「記録」の開閉。既定は畳んである —— にーくらが 0 KB のトレースを24本の壁から
+  // 拾わされた反省(この quick の <why>)。中身は renderRecords() が別途組む。
+  document.getElementById('recToggle').onclick=()=>tankRecordsSetOpen(!TANK_RECORDS_OPEN);
+  document.getElementById('recToggle').addEventListener('keydown',(e)=>{
+    if(e.key==='Enter'||e.key===' '){ e.preventDefault(); tankRecordsSetOpen(!TANK_RECORDS_OPEN); }
+  });
+  // ファイル選択。元は #empty 直下にあった静的マークアップだったが、その節ごと廃止した
+  // ので、生成後のここで配線する(トップレベルの静的配線は要素が無い時点で例外になる)。
+  document.getElementById('pick').onclick=()=>document.getElementById('file').click();
+  document.getElementById('file').onchange=(e)=>{
+    const f=e.target.files[0]; if(!f) return;
+    f.text().then(tx=>load(tx,f.name));
+  };
+
+  // 追従バッジ。**今見ているのが最新かどうかを、常に画面に出す。**
+  const live=document.createElement('div');
+  live.id='tankLive';
+  live.innerHTML='<span id="tankLiveTxt"></span>'+
+    '<button id="tankToEnd" style="padding:2px 8px;display:none">最新へ</button>'+
+    '<button id="tankOpenRec" style="padding:2px 8px;display:none" title="手元の窓より前は「記録」に全部残っている">記録を開く</button>'+
+    '<button id="tankToLive" style="padding:2px 8px;display:none">今へ戻る</button>';
+  host.appendChild(live);
+  document.getElementById('tankToEnd').onclick=()=>{ seekToLive(); TANK_LIVE_AT_END=true; tankLiveBadge(); };
+  document.getElementById('tankOpenRec').onclick=()=>{ tankRecordsSetOpen(true); tankSay('記録には全長が残っている —— 開きたいものを選ぶ'); };
+  // **記録から今へ戻る唯一の道。** これが無いと、記録を開いたら戻れない。
+  document.getElementById('tankToLive').onclick=()=>tankBackToLive();
+
+  // ドロップダウンの開閉。外side クリックで閉じる。
+  p.addEventListener('click',(e)=>{
+    const cur=e.target.closest('.cur');
+    for(const dd of p.querySelectorAll('.dd')){
+      if(cur&&dd.contains(cur)) dd.classList.toggle('open');
+      else dd.classList.remove('open');
+    }
+  });
+  document.addEventListener('click',(e)=>{
+    if(!p.contains(e.target)) for(const dd of p.querySelectorAll('.dd')) dd.classList.remove('open');
+  });
+
+  // ()=>summonFromPanel() —— click イベントを summonFromPanel の引数に誤って
+  // 渡さないため(既定は直近の床クリック TANK_PICK を使う)。
+  document.getElementById('tankSummon').onclick=()=>summonFromPanel();
+  // 落ちた物の寿命。**押した結果を必ず言う** —— 黙って効くと「実機と違う状態」を
+  // 忘れたまま観察することになる。水槽が立っていなければ 409 が返るので、それも言う。
+  document.getElementById('tankItemTtl').onchange=async(e)=>{
+    const on=e.target.checked, ticks=on?20:0;
+    try{
+      const r=await fetch('/api/tank/itemttl?ticks='+ticks);
+      const j=await r.json();
+      if(!r.ok){ e.target.checked=!on; tankSay('× '+(j.error||r.status)); return; }
+      tankSay(on?'落ちた物を1秒で消す（実機は5分）':'落ちた物の寿命を実機と同じに戻した（5分）');
+    }catch(err){ e.target.checked=!on; tankSay('× 水槽へ届かなかった'); }
+  };
+
+  // ---- 起動 ----
+  // **押している間だけ「起動ポーリング」を握る**（TANK_START_IN_FLIGHT）。
+  // 5s ごとの見張りポーリング(下)と同時に描くと、2つが同じボタンを取り合って
+  // ちらつく／早口で描き直る事故になるので、どちらか一方だけが描く。
+  async function tankStartAction(){
+    TANK_START_IN_FLIGHT=true;
+    tankRenderAction({state:'running',started:Date.now()});
+    tankSay('起動中…（Minecraft が立つまで 1〜2 分）');
+    try{
+      const r=await fetch('/api/run?scenario=tank');
+      const j=await r.json();
+      if(!r.ok){
+        tankSay('× '+(j.error||r.status));
+        TANK_START_IN_FLIGHT=false; tankRenderAction({state:'error',error:j.error||String(r.status)});
+        return;
+      }
+    }catch(e){
+      tankSay('× '+e);
+      TANK_START_IN_FLIGHT=false; tankRenderAction({state:'error',error:String(e)});
+      return;
+    }
+    for(;;){
+      await new Promise(res=>setTimeout(res,2000));
+      let st;
+      try{ st=await (await fetch('/api/run/status')).json(); }catch{ continue; }
+      // 経過秒はここ(status.started)から一箇所で出す。tankSay を毎tickで更新しない。
+      tankRenderAction(st);
+      if(st.state==='live'){
+        tankBeat(st.heartbeat,st.state);
+        tankSyncLive(st);
+        // tankSyncLive が既に「走っている水槽に繋いだ」を言っている。このボタンが
+        // 起こした遷移では、それより起動固有の文を優先する —— 上書きされないよう
+        // **後に**言う(1つの経路につき文の持ち主は1つ)。
+        tankSay('水槽が立った —— 誰もいない。放つと始まる。');
+        TANK_START_IN_FLIGHT=false; return;
+      }
+      if(st.state==='error'){ tankSay('× '+(st.error||'失敗')); TANK_START_IN_FLIGHT=false; return; }
+    }
+  }
+
+  // ---- 停止 ----
+  async function tankStopAction(){
+    closeLive();
+    try{
+      const r=await fetch('/api/run/stop'); const j=await r.json().catch(()=>({}));
+      const stoppedState=(j&&j.state)||'stopped';
+      tankSay('止めた'); tankBeat(null,stoppedState); TANK_FRAMED=false;
+      tankRenderAction({state:stoppedState});
+    }catch(e){ tankSay('× '+e); }
+  }
+
+  // 起動/停止をここへ集約する。tankActionFor() は文字列だけを見る純粋な対応表、
+  // tankRenderAction() が実データ(経過秒/エラー文/live直後ガード)を足して DOM へ出す。
+  TANK_ACT_HANDLERS.start=tankStartAction;
+  TANK_ACT_HANDLERS.stop=tankStopAction;
+
+  // 心拍が途絶えたら、誰も押さなくても 5s 以内にボタンが「起動」へ戻る
+  // (HANDOFF §1: 止まった監視カメラが最新を映し続けるのが最悪の壊れ方)。
+  // 起動ポーリング(上)が握っている間は、取り合わないよう休む。
+  // **ここが本命の経路。** このタブが起こしたのでも読み込み時に既に在ったのでもない
+  // live(=よそが起こした水槽)は、ここでしか拾えない —— tankSyncLive の唯一の常駐呼び出し元。
+  setInterval(async()=>{
+    if(TANK_START_IN_FLIGHT) return;
+    let st;
+    try{ st=await (await fetch('/api/run/status')).json(); }catch{ return; }
+    tankRenderAction(st);
+    tankBeat(st.heartbeat,st.state);
+    tankSyncLive(st);
+    // **「繋がっているフリ」を拾う。** liveOpen() は readyState 0(CONNECTING) も真に
+    // 数えるので、接続がそこで固まると tankSyncLive の早期 return を毎回通り抜け、
+    // 緑バッジのまま永遠に空の水槽を映し続ける(止まった監視カメラの最悪の形)。
+    // 心拍は serve.mjs が 1 秒ごとに流しているので、15 秒来なければ死んでいる。
+    // 貼り直しは resume なので store を捨てない —— もう安い。
+    if(VIEWING_RECORD===null&&liveOpen()&&LIVE_RUN&&
+       performance.now()-LIVE_CLOCK.s.beatAt>15000){
+      LIVE_CLOCK.s.drops++;
+      tankSay('配信が黙っている（15 秒）—— 貼り直す');
+      openLive(LIVE_RUN);
+    }
+  },5000);
+
+  // 初回描画。以後の再接続・ポーリング・押下は、すべて同じ tankRenderAction を通す。
+  // live 判定と openLive の直呼びはやめ、tankSyncLive へ委ねる —— 文はもう
+  // tankSyncLive が言うので、ここでは言わない。
+  try{
+    const st=await (await fetch('/api/run/status')).json();
+    tankRenderAction(st);
+    tankBeat(st.heartbeat,st.state);
+    tankSyncLive(st);
+  }catch{ tankRenderAction({state:'idle'}); }
+}
+
+/** 追従バッジを描く。**最新を見ているか、過去を見ているかを常に出す。** */
+function tankLiveBadge(){
+  const box=document.getElementById('tankLive');
+  const txt=document.getElementById('tankLiveTxt');
+  const btn=document.getElementById('tankToEnd');
+  const back=document.getElementById('tankToLive');
+  if(!box||!txt) return;
+  // **記録を見ている**: ライブとは別の状態なので、そう言って戻り道を出す。
+  // ここを出さないと「記録を開いたら戻れない」ことになる(にーくら 2026-08-22)。
+  if(VIEWING_RECORD!==null){
+    box.style.display='flex';
+    const name=String(VIEWING_RECORD).split('/').slice(-2,-1)[0]||VIEWING_RECORD;
+    // **「全量」と言う。** ライブ側が「手元は直近2分」と言うので、両側から言って初めて
+    // 取引が見える —— 何を捨てて何が残っているのかが、どちらの画面からも判る。
+    txt.textContent='■ 記録を見ている（全量） — '+name;   // textContent なので trace 名の中身を素通しできる
+    if(btn) btn.style.display='none';
+    if(back) back.style.display='';
+    const rb=document.getElementById('tankOpenRec'); if(rb) rb.style.display='none';
+    return;
+  }
+  if(back) back.style.display='none';
+  const recBtn=document.getElementById('tankOpenRec');
+  if(!liveSrc){ box.style.display='none'; if(recBtn) recBtn.style.display='none'; return; }
+  box.style.display='flex';
+  // **判定は T.followLive を読むだけ。** 以前はここに `T.tick>=D.maxTick-3` という
+  // loop() の LIVE_LAG=2 の写しがあり、片方を直すたびにずれた(3 箇所に同じ判定があった)。
+  // **手元にどれだけあるかを常に添える。** にーくらが切り捨てを受け入れた条件が
+  // 「記録は全部残っている」だったので、その約束を画面から消さない。
+  const held=(D.minTick||0)>0
+    ?'<span style="color:var(--ink-dim);font-size:11px"> · 手元は直近'+Math.round(LIVE_WINDOW/20/60)+'分 · 記録は全部残っている</span>':'';
+  const atFloor=(D.minTick||0)>0&&T.tick<=(D.minTick||0)+1;
+  if(atFloor){
+    // **端に居ることは、端に居るときだけ言う。** ここで初めて「記録を開く」を出す ——
+    // 困った場所に道具を置く(メニューの奥ではなく)。
+    txt.innerHTML='<span style="color:#d6b25b">●</span> これより前は手元に無い'+held;
+    btn.style.display='';
+    if(recBtn) recBtn.style.display='';
+  }else if(T.followLive){
+    const tr=LIVE_CLOCK.s.trim;
+    txt.innerHTML='<span style="color:#6cc06c">●</span> 最新を映している'
+      +(tr>1.15?'（追いつき中 ×'+tr.toFixed(1)+'）':'')+held;
+    btn.style.display='none';
+    if(recBtn) recBtn.style.display='none';
+  }else{
+    const behind=D.maxTick-T.tick;
+    txt.innerHTML='<span style="color:#d6b25b">●</span> '+behind+' tick 前を見ている'+held;
+    btn.style.display='';
+    if(recBtn) recBtn.style.display='none';
+  }
+}
+
+/** 水槽の中に今いるものを並べる。**放てたかどうかが、これで判る。** */
+function tankWho(){
+  const box=document.getElementById('tankWho');
+  const n=document.getElementById('tankWhoN');
+  if(!box) return;
+  // **描画と同じ鍵で引く。** D._frameAtCache は 1 件しか持たないので、ここが (t,0) で
+  // 引くと 50ms ごとにキャッシュを叩き落とし、次の draw() も組み直しになる
+  // (フレームの組み立てが二重になる)。この一覧に partial の差は関係しない。
+  const f=D.frameAt(T.tick,T.partial);
+  if(!f){ box.innerHTML=''; if(n) n.textContent=''; return; }
+  const rows=[];
+  for(const [id,pos] of f.pos){
+    const e=D.entities.get(id);
+    if(!e||e.role==='projectile') continue;   // 弾は数えない（すぐ消えるので）
+    const short=String(e.type||'?').replace(/^[a-z0-9_.-]+:/,'');
+    const hp=pos.hp!==undefined?(' '+pos.hp.toFixed(0)):'';
+    // **消す手を、居るものの隣に置く。** メニューを探させない (放つのが床クリックなのと同じ思想)。
+    // uuid が無い記録 (2026-08-23 より前のトレース) では × を出さない —— 押せない
+    // ボタンを見せるより、無いほうが正直。
+    const kill=e.uuid&&liveOpen()
+      ?'<button class="whoKill" title="この個体を消す" data-uuid="'+e.uuid+'" data-name="'+short+'">×</button>'
+      :'';
+    rows.push('<div><span>'+short+hp+'</span><span class="id">#'+id+kill+'</span></div>');
+  }
+  if(n) n.textContent='('+rows.length+')';
+  box.innerHTML=rows.length?rows.join('')
+    :'<div style="color:#6f7583">まだ誰もいない。床をクリックして放つ。</div>';
+  for(const b of box.querySelectorAll('.whoKill')){
+    b.onclick=(ev)=>{ ev.stopPropagation(); killFromPanel(b.dataset.uuid,b.dataset.name); };
+  }
+}
+
+/** 名指しで片付ける。**確認は出さない** —— 水槽は壊してよい場所で、押し間違えても放ち直せる。 */
+async function killFromPanel(uuid,name){
+  try{
+    const r=await fetch('/api/kill?uuid='+encodeURIComponent(uuid));
+    const j=await r.json();
+    tankSay(r.ok?('消した — '+(name||'')):('× '+(j.error||r.status)));
+  }catch(e){ tankSay('× '+e); }
+}
+
+/**
+ * 放つ。座標は引数(既定 = 直近の床クリック TANK_PICK、無ければアリーナ原点の床)。
+ * 数値入力は無い —— §7-2 のとおり、狙いは常にクリックから来る。
+ */
+async function summonFromPanel(point){
+  const type=TANK_TYPE;
+  if(!type){ tankSay('放つモブを選ぶ'); return; }
+  const p=point||TANK_PICK||tankOriginFloor();
+  const q='/api/summon?type='+encodeURIComponent(type)
+    +'&x='+encodeURIComponent(p.x)
+    +'&y='+encodeURIComponent(p.y)
+    +'&z='+encodeURIComponent(p.z);
+  try{
+    const r=await fetch(q); const j=await r.json();
+    tankSay(r.ok?('放った — '+String(j.reply||'').trim()):('× '+(j.error||r.status)));
+  }catch(e){ tankSay('× '+e); }
+}
+
+let TANK_TYPE=null;
+
+/** mod で絞ってモブの選択肢を作り直す。**並べ替えない** —— jar が返した順のまま。 */
+function fillTankTypes(){
+  const dd=document.getElementById('ddType');
+  if(!dd||!TANK_ENTITIES) return;
+  const list=TANK_ENTITIES.filter(e=>e.summonable&&(TANK_MOD==='*'||e.mod===TANK_MOD));
+  if(!list.some(e=>e.id===TANK_TYPE)) TANK_TYPE=list.length?list[0].id:null;
+  tankDropdown(dd,
+    list.map(e=>({value:e.id,label:e.id.replace(/^[a-z0-9_.-]+:/,'')})),
+    TANK_TYPE,
+    (v)=>{ TANK_TYPE=v; fillTankTypes(); });
+}
+
+/* ============================================================================
+   記録 —— #tankPanel の3番目の節 (§4)。/api/traces が返すのは path と size だけ
+   (シナリオ名もタイムスタンプも tick 数もエンティティ数も持たない)。
+   サイトはこれを**整形するだけ**——パス文字列からシナリオ名とタイムスタンプを
+   読み取る計算は、値の解釈であって霊夢の判断ではない(doctrine上「置いてよい」側)。
+   ============================================================================ */
+let TANK_RECORDS_OPEN=false;
+
+/** パスの第1セグメント=シナリオ名、"YYYYMMDD-HHMMSS" セグメント=タイムスタンプ。
+    どちらも実測(/api/traces, 2026-08-21): "tank/20260820/20260821-031644/arena-0.jsonl"。
+    古い記録は日付だけの2段構成("stairs/20260814/arena-0.jsonl")もあるので、
+    時刻が無い場合は em dash で明示する(作っていない値を 00:00 と偽らない)。 */
+function tankRecordParse(p){
+  const segs=String(p).split('/');
+  const scenario=segs[0]||p;
+  for(const s of segs){
+    const m=/^(\d{4})(\d{2})(\d{2})-(\d{2})(\d{2})(\d{2})$/.exec(s);
+    if(m) return {scenario, stamp:`${m[2]}/${m[3]} ${m[4]}:${m[5]}`};
+  }
+  for(const s of segs){
+    const m=/^(\d{4})(\d{2})(\d{2})$/.exec(s);
+    if(m) return {scenario, stamp:`${m[2]}/${m[3]} —`};
+  }
+  return {scenario, stamp:'—'};
+}
+
+function escAttr(s){ return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;'); }
+
+/** 記録を開く。**これはライブから離れる操作である。**
+ *
+ * ライブと記録は排他 —— 同じ D.store に両方を流し込むと混ざる。実際、閉じずに
+ * load() すると 1 秒後の appendLive() が「今のライブ」の行を「開いたばかりの記録」へ
+ * 追記していた(にーくら 2026-08-22「トレースタブを展開した際、戻せない」)。
+ * closeLive() だけでは足りない —— 5 秒ごとの見張り tankSyncLive() が
+ * state==='live' を見て openLive() で開き直すので、VIEWING_RECORD で
+ * 「今は記録を見ている」と宣言し、見張りに手を出させない。戻るのは tankBackToLive()。 */
+async function tankRecordOpen(path){
+  const t=await (await fetch('/api/trace?path='+encodeURIComponent(path))).text();
+  closeLive();
+  VIEWING_RECORD=path;
+  load(t,path);
+  tankLiveBadge();
+}
+
+/** 記録から「今」へ戻る。水槽が生きていれば次の見張りが配信を開き直す。 */
+function tankBackToLive(){
+  VIEWING_RECORD=null;
+  LIVE_RUN=null;          // 同じ run でも開き直させる(liveOpen() は false なので素通りしない)
+  TANK_FRAMED=false;      // 誰か居れば寄せ直す
+  tankLiveBadge();
+  tankSay('今へ戻る —— 次の見張りで配信を開き直す');
+}
+
+/** /api/traces の結果を「シナリオごとにグループ化した行」へ整形するだけ。
+    並び順はサーバの応答順(新しい順)をそのまま保つ —— ここで並べ替えない。 */
+function renderRecords(list){
+  const items=list||[];
+  const count=document.getElementById('recCount');
+  if(count) count.textContent=items.length+' 件';
+  const box=document.getElementById('recList');
+  if(!box) return;
+  if(!items.length){ box.innerHTML=''; return; }
+
+  const groups=new Map();
+  for(const it of items){
+    const {scenario,stamp}=tankRecordParse(it.path);
+    if(!groups.has(scenario)) groups.set(scenario,[]);
+    groups.get(scenario).push({path:it.path,size:it.size,stamp});
+  }
+
+  const html=[];
+  for(const [scenario,rows] of groups){
+    html.push(`<div class="recGroup">${scenario}（${rows.length}）</div>`);
+    for(const it of rows){
+      const empty=it.size===0;
+      const size=empty?'空のまま終了':Math.round(it.size/1024)+' KB';
+      html.push(
+        `<button class="recRow${empty?' empty':''}" data-path="${escAttr(it.path)}">`+
+          `<span class="num">${it.stamp}</span>`+
+          `<span class="num" style="color:var(--ink-faint)">${size}</span>`+
+        `</button>`);
+    }
+  }
+  box.innerHTML=html.join('');
+  box.querySelectorAll('.recRow').forEach(b=>{ b.onclick=()=>tankRecordOpen(b.dataset.path); });
+}
+
+/** 開閉。既定は畳む(にーくらが 0 KB のトレースを24本の壁から拾わされた反省)。 */
+function tankRecordsSetOpen(open){
+  TANK_RECORDS_OPEN=open;
+  const body=document.getElementById('recBody');
+  const toggle=document.getElementById('recToggle');
+  const caret=document.getElementById('recCaret');
+  if(body) body.style.display=open?'block':'none';
+  if(toggle) toggle.setAttribute('aria-expanded',String(open));
+  if(caret) caret.textContent=open?'▾':'▸';
+}
+
+/* =============================================================================
+   7-9. YSM アニメブラウザ (S6)
+   -----------------------------------------------------------------------------
+   **実機を起動せずに YSM アニメを見る。** 出どころは `/tlmsim animsweep` が録った
+   ライブラリ = 実機レンダラの頂点。ysm.js の再構成は通らない。
+
+   **録画窓は 1 アニメ 20 tick (=1秒) しかない**（`SimAnimSweep.DEFAULT_TICKS_PER_ANIM`）。
+   長いアニメは頭 1 秒しか見られない —— そのことは画面に字で出す。黙って短く見せない。
+   ============================================================================= */
+const AB={ name:null, frame:0, frames:0, playing:false, timer:null };
+
+// 遅れて届いた資産 (テクスチャ / アニメの頂点) で描き直す。**静止した絵は自分では直らない。**
+if(window.SimGL&&SimGL.setAssetReadyHook) SimGL.setAssetReadyHook(()=>{
+  if(typeof draw==='function') draw();
+  if(AB.name) animRefresh();
+});
+
+function animSetOpen(open){
+  const b=document.getElementById('animBody'), t=document.getElementById('animToggle'),
+        c=document.getElementById('animCaret');
+  if(b) b.style.display=open?'block':'none';
+  if(t) t.setAttribute('aria-expanded',String(open));
+  if(c) c.textContent=open?'▾':'▸';
+  if(open) animBuildList();
+}
+function animBuildList(){
+  const host=document.getElementById('animList'); if(!host) return;
+  const all=(window.SimGL&&SimGL.animList)?SimGL.animList():[];
+  const cnt=document.getElementById('animCount');
+  if(!all.length){
+    host.innerHTML='<div style="color:var(--ink-faint)">ライブラリが無い —— '
+      +'<span class="num">/tlmsim animsweep</span> で全アニメを1回録ると、ここに並ぶ。</div>';
+    if(cnt) cnt.textContent='';
+    return;
+  }
+  if(cnt) cnt.textContent=all.length+' 本';
+  const q=(document.getElementById('animFilter')||{}).value||'';
+  const list=q?all.filter(a=>a.name.toLowerCase().includes(q.toLowerCase())):all;
+  host.innerHTML=list.map(a=>{
+    // **窓の外がどれだけあるかを1本ずつ出す。** 「全部見えている」と誤解させない。
+    const covered=a.frames/20, cut=a.length>covered+0.01;
+    const tail=cut?' <span style="color:#c8a04a">頭'+covered.toFixed(1)+'s/'+a.length.toFixed(1)+'s</span>'
+                  :' <span style="color:var(--ink-faint)">'+a.frames+'f</span>';
+    return '<div class="animRow" data-anim="'+a.name.replace(/"/g,'&quot;')+'" '
+      +'style="cursor:pointer;padding:2px 4px;border-radius:3px'
+      +(AB.name===a.name?';background:#26303f;color:#cfe0ff':'')+'">'
+      +a.name.replace(/</g,'&lt;')+tail+'</div>';
+  }).join('');
+  for(const el of host.querySelectorAll('.animRow')){
+    el.onclick=()=>animSelect(el.getAttribute('data-anim'));
+  }
+}
+function animSelect(name){
+  AB.name=name; AB.frame=0;
+  const a=((window.SimGL&&SimGL.animList)?SimGL.animList():[]).find(x=>x.name===name);
+  AB.frames=a?a.frames:20;
+  const row=document.getElementById('animPlayRow'); if(row) row.style.display='flex';
+  const sl=document.getElementById('animFrame'); if(sl){ sl.max=String(Math.max(0,AB.frames-1)); sl.value='0'; }
+  SimGL.setAnimPreview(name,0);
+  animBuildList(); animRefresh();
+}
+function animRefresh(){
+  const n=document.getElementById('animFrameN');
+  if(n) n.textContent=AB.name?(AB.frame+1)+'/'+AB.frames:'';
+  const st=document.getElementById('animStatus');
+  const p=(window.SimGL&&SimGL.animPreview)?SimGL.animPreview():null;
+  if(st) st.textContent=AB.name
+    ? (p&&p.status?p.status:'')+'（実機頂点。ysm.js の再構成は通っていない）'
+    : 'アニメを選ぶと、実機を起動せずにその姿勢を見られる。';
+  if(typeof draw==='function') draw();
+}
+function animSetFrame(k){
+  if(!AB.name) return;
+  AB.frame=Math.max(0,Math.min(AB.frames-1,k|0));
+  const sl=document.getElementById('animFrame'); if(sl) sl.value=String(AB.frame);
+  SimGL.setAnimPreview(AB.name,AB.frame);
+  animRefresh();
+}
+function animSetPlaying(on){
+  AB.playing=on;
+  const b=document.getElementById('animPlay'); if(b) b.textContent=on?'❚❚':'▶';
+  if(AB.timer){ clearInterval(AB.timer); AB.timer=null; }
+  // 実機と同じ 20 tick/秒 で送る（録画がその刻みだから）。
+  if(on) AB.timer=setInterval(()=>animSetFrame((AB.frame+1)%AB.frames),50);
+}
+/** 通常表示へ戻す。トレースを開いたときに呼ぶ —— 二つの絵が混ざらないように。 */
+function animClear(){
+  animSetPlaying(false); AB.name=null;
+  if(window.SimGL&&SimGL.setAnimPreview) SimGL.setAnimPreview(null);
+  const row=document.getElementById('animPlayRow'); if(row) row.style.display='none';
+  animBuildList(); animRefresh();
+}
+document.addEventListener('click',(e)=>{
+  const t=e.target.closest&&e.target.closest('#animToggle');
+  if(t) animSetOpen(document.getElementById('animBody').style.display==='none');
+});
+document.addEventListener('input',(e)=>{
+  if(e.target.id==='animFilter') animBuildList();
+  else if(e.target.id==='animFrame') animSetFrame(Number(e.target.value));
+});
+document.addEventListener('click',(e)=>{
+  if(e.target.id==='animPlay') animSetPlaying(!AB.playing);
+});
+
+/* =============================================================================
+   8. 起動
+   ============================================================================= */
+(async function boot(){
+  // 共有モジュールを先に読む。これが無いと系列も phase も出ない。
+  await SHARED_READY;
+  cacheCss();
+  if(window.SimGL) SimGL.init(glCanvas);
+  resize();
+  // **水槽は常に水槽。** トレースを開かず、ライブにも繋がっていない最初の1枚から、
+  // 空のチャンバー(グリッド/床/void)を描く(design point 1)。他の起動処理(status
+  // 取得・記録一覧の fetch)を待たない —— 見えるものは一番早く出す。
+  //
+  // **空の水槽は「水槽そのもの」として構える。** 既定の cam(dist 34) は中のモブを
+  // 見るための寄りで、誰もいない状態だと床が画面を埋めて奥の壁が切れ、何を見せられて
+  // いるのか判らない絵になっていた(2026-08-21 に撮って確認)。半径24の器がちょうど
+  // 収まる引きへ置き直す。トレースを開いた時とライブで誰か現れた時は、それぞれの
+  // frameCam / cam.dist=15 が上書きするので、これが効くのは「誰もいない間」だけ。
+  Object.assign(cam,{yaw:-0.62,pitch:0.66,dist:70,ty:68,tz:2});
+  draw();
+  document.getElementById('camGrp').style.opacity='1';
+  if(location.protocol==='http:'||location.protocol==='https:'){
+    T.served=true;
+    try{
+      // ---- 霊夢をスポーンさせる ----
+      // にーくら 2026-08-20:「どうしてトレースを開かなきゃいけないの？
+      //   1から空間に霊夢をスポーンさせればいいじゃん？」
+      // そのとおりで、トレースは**裏で生まれて裏で開かれる**べきもの。
+      // ここでシナリオを選んで押すと runSim が走り、終わったら自動でその結果が開く。
+      // (Phase 12「サイクルを閉じる」の入口。走りながら見るのは Phase 12 本体でやる)
+      await buildTankUi();
+
+      // **放つモブの一覧は、水槽の生死と関係なく読める。**
+      // entities.json は jar が前回の起動時に書いてディスクに残っているので、
+      // 水槽が立っていなくても選べる —— 立つのを 1〜2 分待つ間、ドロップダウンが
+      // 空のままだと「起動したのにスポーンできない」ことになる
+      // (にーくら 2026-08-22 の指摘)。これまで tankSyncLive() の live 分岐でしか
+      // 呼んでいなかったのが誤りで、一覧の取得は水槽の状態に紐づく仕事ではない。
+      // 立つ前に選んでおける方が、立った瞬間に放てて手数も減る。
+      loadTankEntities();
+
+      const r=await fetch('/api/traces'); const list=await r.json();
+      renderRecords(list);
+    }catch{}
+    const q=new URLSearchParams(location.search).get('trace');
+    if(q){ try{ const t=await (await fetch('/api/trace?path='+encodeURIComponent(q))).text(); load(t,q); }catch{} }
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,2561 @@
+{
+  "repository": "https://github.com/Sinytra/Connector",
+  "revision": "7f68ac02291fde986119a3f5cab85436bed5c350",
+  "track": "ANCHOR Minecraft1.20.1 Forge beta50",
+  "method": "Finite read-only source study; no upstream code execution, installation, build, game launch or public publication",
+  "scope": "All non-transformer src/main Java, all src/mod Java/resources excluding META-INF/asm/*.js and coremods.json; plus main service descriptors",
+  "source_files_reviewed": 87,
+  "text_files_fully_read": 86,
+  "text_lines_reviewed": 5117,
+  "binary_files_inspected": 1,
+  "coverage_exact_set_verified": true,
+  "all_git_blob_sha1_and_sha256_verified": true,
+  "runtime_verified": false,
+  "external_implementation_boundaries": [
+    "Fabric Loader fork: metadata/candidate resolution, addFmlMods, setup, language adapters, mapping resolver and entrypoint implementation",
+    "FFAPI modules: event/API emulation, dynamic registries, fluid render/variant attributes, object builder",
+    "Adapter and transformer pipeline: originating rewrites and generated mixins, analyzed separately",
+    "Forge/ModLauncher/SecureJarHandler/Mixin/JDK internals: actual invocation order, injected target shapes, module behavior"
+  ],
+  "facets": {
+    "cache": [
+      "src/main/java/org/sinytra/connector/ConnectorUtil.java",
+      "src/main/java/org/sinytra/connector/locator/EmbeddedDependencies.java"
+    ],
+    "metadata": [
+      "src/main/java/org/sinytra/connector/ConnectorUtil.java",
+      "src/main/java/org/sinytra/connector/loader/ConnectorEarlyLoader.java",
+      "src/main/java/org/sinytra/connector/loader/ConnectorLoaderModMetadata.java",
+      "src/main/java/org/sinytra/connector/locator/ConnectorLocator.java",
+      "src/main/java/org/sinytra/connector/locator/ConnectorModMetadataParser.java",
+      "src/main/java/org/sinytra/connector/service/FabricMixinBootstrap.java",
+      "src/mod/resources/META-INF/mods.toml"
+    ],
+    "duplicates": [
+      "src/main/java/org/sinytra/connector/ConnectorUtil.java",
+      "src/main/java/org/sinytra/connector/locator/ConnectorLocator.java"
+    ],
+    "lifecycle": [
+      "src/main/java/org/sinytra/connector/loader/ConnectorEarlyLoader.java",
+      "src/main/java/org/sinytra/connector/service/ConnectorLoaderService.java",
+      "src/mod/java/org/sinytra/connector/mod/ConnectorLoader.java",
+      "src/mod/java/org/sinytra/connector/mod/compat/LateRenderTypesInit.java",
+      "src/mod/java/org/sinytra/connector/mod/compat/LateSheetsInit.java",
+      "src/mod/java/org/sinytra/connector/mod/compat/LazyEntityAttributes.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/ItemBlockRenderTypesMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/boot/DatagenModLoaderMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/boot/MinecraftMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/boot/ServerMainMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/recipebook/RecipeBookCategoriesMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/recipebook/RecipeBookManagerMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/registries/BootstrapMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/registries/BuiltInRegistriesMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/registries/ForgeRegistryMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/registries/MappedRegistryMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/registries/MinecraftMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/registries/MinecraftServerMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/registries/NamespacedWrapperMixin.java"
+    ],
+    "error-reporting": [
+      "src/main/java/org/sinytra/connector/loader/ConnectorEarlyLoader.java",
+      "src/main/java/org/sinytra/connector/locator/ConnectorEarlyLocator.java",
+      "src/mod/java/org/sinytra/connector/mod/ConnectorBootstrap.java"
+    ],
+    "modules": [
+      "src/main/java/org/sinytra/connector/loader/ConnectorLoaderModMetadata.java",
+      "src/main/java/org/sinytra/connector/locator/ConnectorLocator.java",
+      "src/main/java/org/sinytra/connector/locator/ForgeModPackageFilter.java",
+      "src/main/java/org/sinytra/connector/locator/PackageTracker.java",
+      "src/main/java/org/sinytra/connector/locator/SplitPackageMerger.java",
+      "src/main/java/org/sinytra/connector/service/FabricASMFixer.java",
+      "src/main/java/org/sinytra/connector/service/hacks/ModuleLayerMigrator.java",
+      "src/main/java/org/sinytra/connector/service/hacks/ServiceProviderInheritanceWorkaround.java"
+    ],
+    "entrypoints": [
+      "src/main/java/org/sinytra/connector/loader/ConnectorLoaderModMetadata.java",
+      "src/mod/java/org/sinytra/connector/mod/ConnectorLoader.java"
+    ],
+    "configuration": [
+      "src/main/java/org/sinytra/connector/locator/ConnectorConfig.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/OptionsMixin.java"
+    ],
+    "dependencies": [
+      "src/main/java/org/sinytra/connector/locator/ConnectorConfig.java",
+      "src/main/java/org/sinytra/connector/locator/ConnectorLocator.java",
+      "src/main/java/org/sinytra/connector/locator/DependencyResolver.java",
+      "src/main/java/org/sinytra/connector/locator/EmbeddedDependencies.java"
+    ],
+    "bootstrap": [
+      "src/main/java/org/sinytra/connector/locator/ConnectorEarlyLocator.java",
+      "src/main/java/org/sinytra/connector/locator/EmbeddedDependencies.java",
+      "src/main/java/org/sinytra/connector/service/ConnectorLoaderService.java",
+      "src/main/java/org/sinytra/connector/service/ConnectorPreLaunchPlugin.java",
+      "src/mod/java/org/sinytra/connector/mod/DummyTarget.java",
+      "src/mod/resources/META-INF/mods.toml",
+      "src/mod/resources/connectormod.mixins.json",
+      "src/main/resources/META-INF/services/cpw.mods.modlauncher.api.ITransformationService",
+      "src/main/resources/META-INF/services/net.minecraftforge.forgespi.locating.IDependencyLocator",
+      "src/main/resources/META-INF/services/net.minecraftforge.forgespi.locating.IModLocator"
+    ],
+    "discovery": [
+      "src/main/java/org/sinytra/connector/locator/ConnectorEarlyLocator.java",
+      "src/main/java/org/sinytra/connector/locator/ConnectorLocator.java",
+      "src/main/resources/META-INF/services/net.minecraftforge.forgespi.locating.IDependencyLocator",
+      "src/main/resources/META-INF/services/net.minecraftforge.forgespi.locating.IModLocator"
+    ],
+    "nesting": [
+      "src/main/java/org/sinytra/connector/locator/ConnectorLocator.java",
+      "src/main/java/org/sinytra/connector/locator/DependencyResolver.java"
+    ],
+    "side": [
+      "src/main/java/org/sinytra/connector/locator/ConnectorModMetadataParser.java",
+      "src/main/java/org/sinytra/connector/locator/DependencyResolver.java",
+      "src/mod/resources/META-INF/mods.toml",
+      "src/mod/resources/connectormod.mixins.json"
+    ],
+    "aliases": [
+      "src/main/java/org/sinytra/connector/locator/DependencyResolver.java"
+    ],
+    "classloading": [
+      "src/main/java/org/sinytra/connector/locator/ForgeModPackageFilter.java",
+      "src/main/java/org/sinytra/connector/locator/SplitPackageMerger.java",
+      "src/main/java/org/sinytra/connector/service/ConnectorLoaderService.java",
+      "src/main/java/org/sinytra/connector/service/FabricASMFixer.java",
+      "src/main/java/org/sinytra/connector/service/hacks/ConnectorForkJoinThreadFactory.java",
+      "src/main/java/org/sinytra/connector/service/hacks/ModuleLayerMigrator.java",
+      "src/mod/java/org/sinytra/connector/mod/compat/fieldtypes/FieldTypeUtil.java"
+    ],
+    "resources": [
+      "src/main/java/org/sinytra/connector/locator/PackageTracker.java",
+      "src/main/java/org/sinytra/connector/locator/SplitPackageMerger.java",
+      "src/mod/java/org/sinytra/connector/mod/ConnectorMod.java",
+      "src/mod/java/org/sinytra/connector/mod/compat/DummyResourceManager.java",
+      "src/mod/java/org/sinytra/connector/mod/compat/PathPackResourcesExtensions.java",
+      "src/mod/java/org/sinytra/connector/mod/compat/TagConverter.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/TagLoaderMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/lang/PathPackResourcesAnonMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/lang/PathPackResourcesMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/registries/RegistryDataLoaderMixin.java",
+      "src/mod/resources/pack.mcmeta"
+    ],
+    "mixins": [
+      "src/main/java/org/sinytra/connector/service/ConnectorPreLaunchPlugin.java",
+      "src/main/java/org/sinytra/connector/service/FabricMixinBootstrap.java",
+      "src/main/java/org/sinytra/connector/service/hacks/LenientRuntimeEnumExtender.java",
+      "src/mod/java/org/sinytra/connector/mod/ConnectorBootstrap.java",
+      "src/mod/resources/connectormod.mixins.json"
+    ],
+    "access": [
+      "src/main/java/org/sinytra/connector/service/ConnectorPreLaunchPlugin.java",
+      "src/main/java/org/sinytra/connector/service/hacks/ModuleLayerMigrator.java",
+      "src/mod/resources/META-INF/accesstransformer.cfg"
+    ],
+    "generated-classes": [
+      "src/main/java/org/sinytra/connector/service/FabricASMFixer.java"
+    ],
+    "enums": [
+      "src/main/java/org/sinytra/connector/service/FabricASMFixer.java",
+      "src/main/java/org/sinytra/connector/service/hacks/LenientRuntimeEnumExtender.java"
+    ],
+    "threading": [
+      "src/main/java/org/sinytra/connector/service/hacks/ConnectorForkJoinThreadFactory.java"
+    ],
+    "service-loading": [
+      "src/main/java/org/sinytra/connector/service/hacks/ServiceProviderInheritanceWorkaround.java",
+      "src/main/resources/META-INF/services/cpw.mods.modlauncher.api.ITransformationService"
+    ],
+    "items": [
+      "src/mod/java/org/sinytra/connector/mod/ConnectorBootstrap.java",
+      "src/mod/java/org/sinytra/connector/mod/compat/ItemStackExtensions.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/HumanoidArmorLayerMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/IForgeItemMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/ItemOverridesMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/item/ForgeHooksMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/item/ItemStackMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/item/LateItemStackMixin.java",
+      "src/mod/resources/META-INF/accesstransformer.cfg"
+    ],
+    "attributes": [
+      "src/mod/java/org/sinytra/connector/mod/ConnectorLoader.java",
+      "src/mod/java/org/sinytra/connector/mod/compat/LazyEntityAttributes.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/ForgeHooksMixin.java",
+      "src/mod/resources/META-INF/accesstransformer.cfg"
+    ],
+    "events": [
+      "src/mod/java/org/sinytra/connector/mod/ConnectorMod.java",
+      "src/mod/java/org/sinytra/connector/mod/compat/FluidHandlerCompat.java",
+      "src/mod/java/org/sinytra/connector/mod/compat/LazyEntityAttributes.java",
+      "src/mod/java/org/sinytra/connector/mod/compat/hud/GuiExtensions.java",
+      "src/mod/java/org/sinytra/connector/mod/compat/hud/HudRenderInvoker.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/ForgeHooksMixin.java"
+    ],
+    "registry": [
+      "src/mod/java/org/sinytra/connector/mod/ConnectorMod.java",
+      "src/mod/java/org/sinytra/connector/mod/compat/FluidHandlerCompat.java",
+      "src/mod/java/org/sinytra/connector/mod/compat/LateSheetsInit.java",
+      "src/mod/java/org/sinytra/connector/mod/compat/RegistryUtil.java",
+      "src/mod/java/org/sinytra/connector/mod/compat/fieldtypes/RedirectingIdMapper.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/PoiTypesMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/fieldtypes/BlockColorsMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/fieldtypes/ItemColorsMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/registries/BootstrapMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/registries/BuiltInRegistriesMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/registries/ClientForgeRegistryMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/registries/ForgeRegistryMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/registries/MappedRegistryMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/registries/MinecraftMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/registries/MinecraftServerMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/registries/NamespacedWrapperMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/registries/RegistryDataLoaderMixin.java",
+      "src/mod/resources/META-INF/accesstransformer.cfg"
+    ],
+    "render": [
+      "src/mod/java/org/sinytra/connector/mod/ConnectorMod.java",
+      "src/mod/java/org/sinytra/connector/mod/compat/FluidHandlerCompat.java",
+      "src/mod/java/org/sinytra/connector/mod/compat/LateRenderTypesInit.java",
+      "src/mod/java/org/sinytra/connector/mod/compat/LateSheetsInit.java",
+      "src/mod/java/org/sinytra/connector/mod/compat/fieldtypes/RedirectingIdMapper.java",
+      "src/mod/java/org/sinytra/connector/mod/compat/fieldtypes/RedirectingInt2ObjectMap.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/HumanoidArmorLayerMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/ItemBlockRenderTypesMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/ItemOverridesMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/fieldtypes/BlockColorsMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/fieldtypes/ItemColorsMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/fieldtypes/ParticleEngineMixin.java"
+    ],
+    "fluids": [
+      "src/mod/java/org/sinytra/connector/mod/ConnectorMod.java",
+      "src/mod/java/org/sinytra/connector/mod/compat/FluidHandlerCompat.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/ForgeHooksMixin.java"
+    ],
+    "helpers": [
+      "src/mod/java/org/sinytra/connector/mod/ConnectorMod.java"
+    ],
+    "diagnostics": [
+      "src/mod/java/org/sinytra/connector/mod/CrashReportUpgrade.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/CrashReportExtenderMixin.java"
+    ],
+    "loot": [
+      "src/mod/java/org/sinytra/connector/mod/compat/DummyResourceManager.java"
+    ],
+    "interaction": [
+      "src/mod/java/org/sinytra/connector/mod/compat/ItemStackExtensions.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/item/ForgeHooksMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/item/ItemStackMixin.java"
+    ],
+    "localization": [
+      "src/mod/java/org/sinytra/connector/mod/compat/PathPackResourcesExtensions.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/lang/PathPackResourcesAnonMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/lang/PathPackResourcesMixin.java"
+    ],
+    "network": [
+      "src/mod/java/org/sinytra/connector/mod/compat/RegistryUtil.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/network/ConnectionTypeMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/network/HandshakeHandlerMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/network/NetworkFiltersMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/registries/ClientForgeRegistryMixin.java"
+    ],
+    "particles": [
+      "src/mod/java/org/sinytra/connector/mod/compat/RegistryUtil.java",
+      "src/mod/java/org/sinytra/connector/mod/compat/fieldtypes/RedirectingInt2ObjectMap.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/fieldtypes/ParticleEngineMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/registries/ClientForgeRegistryMixin.java"
+    ],
+    "tags": [
+      "src/mod/java/org/sinytra/connector/mod/compat/TagConverter.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/TagLoaderMixin.java"
+    ],
+    "field-shapes": [
+      "src/mod/java/org/sinytra/connector/mod/compat/fieldtypes/FieldTypeUtil.java",
+      "src/mod/java/org/sinytra/connector/mod/compat/fieldtypes/RedirectingIdMapper.java",
+      "src/mod/java/org/sinytra/connector/mod/compat/fieldtypes/RedirectingInt2ObjectMap.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/PoiTypesMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/client/KeyMappingMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/fieldtypes/BlockColorsMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/fieldtypes/ItemColorsMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/fieldtypes/ParticleEngineMixin.java"
+    ],
+    "hud": [
+      "src/mod/java/org/sinytra/connector/mod/compat/hud/GuiExtensions.java",
+      "src/mod/java/org/sinytra/connector/mod/compat/hud/HudRenderInvoker.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/hud/ForgeGuiMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/hud/GuiMixin.java",
+      "src/mod/resources/META-INF/accesstransformer.cfg"
+    ],
+    "cancellation": [
+      "src/mod/java/org/sinytra/connector/mod/compat/hud/GuiExtensions.java",
+      "src/mod/java/org/sinytra/connector/mod/compat/hud/HudRenderInvoker.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/hud/ForgeGuiMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/item/ForgeHooksMixin.java"
+    ],
+    "ui": [
+      "src/mod/java/org/sinytra/connector/mod/mixin/ForgeHooksClientMixin.java"
+    ],
+    "tooltip": [
+      "src/mod/java/org/sinytra/connector/mod/mixin/ForgeHooksClientMixin.java"
+    ],
+    "mutability": [
+      "src/mod/java/org/sinytra/connector/mod/mixin/ForgeHooksClientMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/recipebook/RecipeBookCategoriesAccessor.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/recipebook/RecipeBookManagerMixin.java"
+    ],
+    "ai": [
+      "src/mod/java/org/sinytra/connector/mod/mixin/IForgeItemMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/PoiTypesMixin.java"
+    ],
+    "input": [
+      "src/mod/java/org/sinytra/connector/mod/mixin/OptionsMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/client/KeyMappingMixin.java"
+    ],
+    "collections": [
+      "src/mod/java/org/sinytra/connector/mod/mixin/PlayerListMixin.java"
+    ],
+    "server-state": [
+      "src/mod/java/org/sinytra/connector/mod/mixin/PlayerListMixin.java"
+    ],
+    "datagen": [
+      "src/mod/java/org/sinytra/connector/mod/mixin/boot/DatagenModLoaderMixin.java"
+    ],
+    "client": [
+      "src/mod/java/org/sinytra/connector/mod/mixin/boot/MinecraftMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/registries/MinecraftMixin.java"
+    ],
+    "server": [
+      "src/mod/java/org/sinytra/connector/mod/mixin/boot/ServerMainMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/registries/MinecraftServerMixin.java"
+    ],
+    "mixin-hooks": [
+      "src/mod/java/org/sinytra/connector/mod/mixin/client/KeyMappingMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/hud/GuiMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/item/ItemStackMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/item/LateItemStackMixin.java"
+    ],
+    "recipebook": [
+      "src/mod/java/org/sinytra/connector/mod/mixin/recipebook/RecipeBookCategoriesAccessor.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/recipebook/RecipeBookCategoriesMixin.java",
+      "src/mod/java/org/sinytra/connector/mod/mixin/recipebook/RecipeBookManagerMixin.java"
+    ],
+    "holders": [
+      "src/mod/java/org/sinytra/connector/mod/mixin/registries/ForgeRegistryMixin.java"
+    ],
+    "worldgen": [
+      "src/mod/java/org/sinytra/connector/mod/mixin/registries/RegistryDataLoaderMixin.java"
+    ],
+    "branding": [
+      "src/mod/resources/logo.png"
+    ]
+  },
+  "files": [
+    {
+      "path": "src/main/java/org/sinytra/connector/ConnectorUtil.java",
+      "facets": [
+        "cache",
+        "metadata",
+        "duplicates"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Constants establish cache directory and transformed marker; blocks upstream fabric_api; filters redundant MixinExtras entrypoints from versions >=0.2.0-beta.6; cache stamp combines embedded version/dist and optional input SHA-256",
+      "boundary": "Cache does not independently hash Forge libraries/configuration; no runtime cache validity test",
+      "runtime_verified": false,
+      "line_count": 236,
+      "git_blob_sha1": "ecebe7e3fbad7f2c8bf2665bc7e9b9f33cf0523f",
+      "sha256": "725aa716bd9b622b3b8e8ebb10df2b5a21cbb98dbf8de3c0802febb36efcf175",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/ConnectorUtil.java",
+      "evidence": [
+        {
+          "start_line": 26,
+          "end_line": 56,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/ConnectorUtil.java#L26-L56"
+        },
+        {
+          "start_line": 115,
+          "end_line": 172,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/ConnectorUtil.java#L115-L172"
+        },
+        {
+          "start_line": 194,
+          "end_line": 233,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/ConnectorUtil.java#L194-L233"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/loader/ConnectorEarlyLoader.java",
+      "facets": [
+        "lifecycle",
+        "error-reporting",
+        "metadata"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Tracks transformed mod IDs and deferred loading errors, seeds forked Fabric Loader from accepted Forge mods except configured hidden native mods, delegates loader setup and preLaunch invocation",
+      "boundary": "FabricLoaderImpl internals are dependency boundary; transformed mods are always included even if hiddenMods lists them",
+      "runtime_verified": false,
+      "line_count": 142,
+      "git_blob_sha1": "8d46ca6f713e709b2fcd28e0fa7af9a54157922d",
+      "sha256": "6eeb8a88c76c7239776dfee066e3b4392044c79984e9715e9d3a2a0dc94f8339",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/loader/ConnectorEarlyLoader.java",
+      "evidence": [
+        {
+          "start_line": 22,
+          "end_line": 55,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/loader/ConnectorEarlyLoader.java#L22-L55"
+        },
+        {
+          "start_line": 63,
+          "end_line": 81,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/loader/ConnectorEarlyLoader.java#L63-L81"
+        },
+        {
+          "start_line": 90,
+          "end_line": 141,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/loader/ConnectorEarlyLoader.java#L90-L141"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/loader/ConnectorLoaderModMetadata.java",
+      "facets": [
+        "metadata",
+        "modules",
+        "entrypoints"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Normalizes hyphen IDs and Java keywords, removes plus in Forge-visible version, provides original ID as alias, delegates side/dependency/mixin metadata and filters selected MixinExtras entrypoints",
+      "boundary": "Normalization is an explicit policy, not a general identity-preservation proof",
+      "runtime_verified": false,
+      "line_count": 205,
+      "git_blob_sha1": "133158924e74e5d8e303149614216cf0584dcb8c",
+      "sha256": "41ff986d5583af4a987657fbe16e3214bfe37c6a866efedca4614beb1cf65b1b",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/loader/ConnectorLoaderModMetadata.java",
+      "evidence": [
+        {
+          "start_line": 26,
+          "end_line": 54,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/loader/ConnectorLoaderModMetadata.java#L26-L54"
+        },
+        {
+          "start_line": 67,
+          "end_line": 98,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/loader/ConnectorLoaderModMetadata.java#L67-L98"
+        },
+        {
+          "start_line": 121,
+          "end_line": 148,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/loader/ConnectorLoaderModMetadata.java#L121-L148"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/locator/ConnectorConfig.java",
+      "facets": [
+        "configuration",
+        "dependencies"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Memoized version-1 JSON config for hiddenMods/globalModAliases, accepting alias scalar or list; writes defaults if absent and falls back on parse/load error",
+      "boundary": "hiddenMods changes Fabric visibility, not general disk discovery; malformed config is logged then defaults used",
+      "runtime_verified": false,
+      "line_count": 83,
+      "git_blob_sha1": "0a3e1d1fad91c7ac72b0718acfeccf6b0c92820b",
+      "sha256": "ab71fecb216bc7ba4550f0ae853b9406fb6f8e722e6053fac1790f8cc3136d6e",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/ConnectorConfig.java",
+      "evidence": [
+        {
+          "start_line": 31,
+          "end_line": 82,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/ConnectorConfig.java#L31-L82"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/locator/ConnectorEarlyLocator.java",
+      "facets": [
+        "bootstrap",
+        "discovery",
+        "error-reporting"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Reflectively reorders dependency locator list so Connector runs last, configures logging, exposes embedded mod jar",
+      "boundary": "Relies on private FML fields and method names",
+      "runtime_verified": false,
+      "line_count": 83,
+      "git_blob_sha1": "eda25e6a53adbbbeea677585914742605b2d5c7c",
+      "sha256": "de6fd494df5868422b23b133ec5f3470142e1c3a61283d0aad3be501d660aaa0",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/ConnectorEarlyLocator.java",
+      "evidence": [
+        {
+          "start_line": 25,
+          "end_line": 52,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/ConnectorEarlyLocator.java#L25-L52"
+        },
+        {
+          "start_line": 63,
+          "end_line": 82,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/ConnectorEarlyLocator.java#L63-L82"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/locator/ConnectorLocator.java",
+      "facets": [
+        "discovery",
+        "nesting",
+        "duplicates",
+        "dependencies",
+        "metadata",
+        "modules"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Scans mods/classpath/additional locations, extracts nested jars recursively, resolves dependency candidates, invokes transform, resolves split packages, creates Forge ModFiles and generated adapter jar mod",
+      "boundary": "Default skips non-placeholder mods.toml; final selection remains dependent on Fabric/Forge resolvers",
+      "runtime_verified": false,
+      "line_count": 333,
+      "git_blob_sha1": "3ac11e7e193b559b0eed52527ac019c72a92a312",
+      "sha256": "46d225142d645e92f3aed1be5e41b8e9d77395716df9e5d1ad19b6f5adfe5fa3",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/ConnectorLocator.java",
+      "evidence": [
+        {
+          "start_line": 71,
+          "end_line": 158,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/ConnectorLocator.java#L71-L158"
+        },
+        {
+          "start_line": 161,
+          "end_line": 241,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/ConnectorLocator.java#L161-L241"
+        },
+        {
+          "start_line": 258,
+          "end_line": 322,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/ConnectorLocator.java#L258-L322"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/locator/ConnectorModMetadataParser.java",
+      "facets": [
+        "metadata",
+        "side"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Builds in-memory NightConfig/ModFileInfo: javafml or lowcodefml, original metadata property and transformed marker, normalized ID/version, descriptive fields and side displayTest",
+      "boundary": "Not a physical mods.toml rewrite and not a full dependency-to-Forge-TOML translation",
+      "runtime_verified": false,
+      "line_count": 120,
+      "git_blob_sha1": "cad839a76afab0136af30afef5926ccf89de7d9b",
+      "sha256": "9e058a33cf42969c100c06560c00610c259272f9641d8448e63726ba3030eb25",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/ConnectorModMetadataParser.java",
+      "evidence": [
+        {
+          "start_line": 37,
+          "end_line": 116,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/ConnectorModMetadataParser.java#L37-L116"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/locator/DependencyResolver.java",
+      "facets": [
+        "dependencies",
+        "nesting",
+        "side",
+        "aliases"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Feeds nested Fabric candidates plus Forge builtins/Java/FabricLoader into ModResolver, only afterward filters wrong-side jars; widens aliased constraints or drops their BREAKS edges first, then drops non-aliased standard fabricloader constraints; fabric-loader is a distinct surviving ID",
+      "boundary": "Resolver algorithm/source is external; relaxed dependency constraints do not prove binary compatibility",
+      "runtime_verified": false,
+      "line_count": 164,
+      "git_blob_sha1": "49d9c86807abe2a6dd7050f701c046e1d2785cef",
+      "sha256": "bc5485cbace6846a9622841458ab911fcc1cda4f490a6cc962b6b9a3bc086f7f",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/DependencyResolver.java",
+      "evidence": [
+        {
+          "start_line": 52,
+          "end_line": 120,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/DependencyResolver.java#L52-L120"
+        },
+        {
+          "start_line": 123,
+          "end_line": 161,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/DependencyResolver.java#L123-L161"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/locator/EmbeddedDependencies.java",
+      "facets": [
+        "bootstrap",
+        "cache",
+        "dependencies"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Resolves embedded mod via manifest and jij filesystem; exposes adapter JSON paths and loader version; cache version is implementationVersion plus physical side",
+      "boundary": "Missing implementation version produces per-process memoized random stamp rather than a stable cache identity",
+      "runtime_verified": false,
+      "line_count": 114,
+      "git_blob_sha1": "df3b11bc692086f4be3aec7f1348e8db5d4ac2fa",
+      "sha256": "47742b17dda48705701512a4bbb846721f6082e6338225180440606bbde607d2",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/EmbeddedDependencies.java",
+      "evidence": [
+        {
+          "start_line": 34,
+          "end_line": 79,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/EmbeddedDependencies.java#L34-L79"
+        },
+        {
+          "start_line": 89,
+          "end_line": 110,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/EmbeddedDependencies.java#L89-L110"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/locator/ForgeModPackageFilter.java",
+      "facets": [
+        "modules",
+        "classloading"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Filters Connector-owned packages from Forge UnionFileSystem jars and invalidates their computed package sets",
+      "boundary": "Only applies to Jar and UnionFileSystem implementations; reflective host-layout dependency",
+      "runtime_verified": false,
+      "line_count": 71,
+      "git_blob_sha1": "81477522721cb8c5b3e172acb0243b9193b00388",
+      "sha256": "cb8fff02d54a00cf515e7f274f806ab9ab01f7f8f66a62f62797fb35da6b6c29",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/ForgeModPackageFilter.java",
+      "evidence": [
+        {
+          "start_line": 19,
+          "end_line": 69,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/ForgeModPackageFilter.java#L19-L69"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/locator/PackageTracker.java",
+      "facets": [
+        "modules",
+        "resources"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Package exclusion predicate permits META-INF, root resources and directories while blocking files in claimed packages",
+      "boundary": "Package-level rather than exact-class conflict resolution",
+      "runtime_verified": false,
+      "line_count": 39,
+      "git_blob_sha1": "2c6e9402dd868e52fb6f28428b6e7491608e538e",
+      "sha256": "360013f09dbb1ecc53dca6ae963f9a6e2f3eb6587ade8dd20e5e76ca3634d590",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/PackageTracker.java",
+      "evidence": [
+        {
+          "start_line": 25,
+          "end_line": 38,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/PackageTracker.java#L25-L38"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/locator/SplitPackageMerger.java",
+      "facets": [
+        "modules",
+        "classloading",
+        "resources"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Assigns duplicate Fabric packages to one owner via SecureJar union views; excludes boot/service/existing Forge packages and preserves metadata mod records",
+      "boundary": "Does not shade or merge arbitrary class definitions; package ownership/collisions remain semantic risks",
+      "runtime_verified": false,
+      "line_count": 189,
+      "git_blob_sha1": "e8191938ebe45630d2e932c647972c7d614560cb",
+      "sha256": "7a1a4d2dbb9d60e8ac68389acb51fd863c87786c139cad06468172b476cc92e3",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/SplitPackageMerger.java",
+      "evidence": [
+        {
+          "start_line": 38,
+          "end_line": 134,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/SplitPackageMerger.java#L38-L134"
+        },
+        {
+          "start_line": 144,
+          "end_line": 172,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/locator/SplitPackageMerger.java#L144-L172"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/service/ConnectorLoaderService.java",
+      "facets": [
+        "bootstrap",
+        "lifecycle",
+        "classloading"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Registers transform service, puts Mixin first and lenient enum extender next, injects prelaunch plugin, wraps module-read window callback for setup/dummy-target/preLaunch, contributes generated ASM/authlib GAME jars",
+      "boundary": "ITransformer list is empty; heavy jar transforms happen in locator, private launch plugin map mutation is version-coupled",
+      "runtime_verified": false,
+      "line_count": 134,
+      "git_blob_sha1": "ac9d2ae7e9ec48f2ab84700c0c0433aa30f0c5ab",
+      "sha256": "72bc154cb3af9debb0bc67fc76e1e55f5c1177b48a1c09777f0b0e613949b7ff",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/ConnectorLoaderService.java",
+      "evidence": [
+        {
+          "start_line": 37,
+          "end_line": 85,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/ConnectorLoaderService.java#L37-L85"
+        },
+        {
+          "start_line": 87,
+          "end_line": 133,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/ConnectorLoaderService.java#L87-L133"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/service/ConnectorPreLaunchPlugin.java",
+      "facets": [
+        "bootstrap",
+        "mixins",
+        "access"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Initializes provider inheritance workaround/Fabric mod list/mixin decoration/generated classes; after-class hook makes every non-private Minecraft field and method public",
+      "boundary": "Methods/fields only, not blanket class visibility; private members stay private",
+      "runtime_verified": false,
+      "line_count": 62,
+      "git_blob_sha1": "4800999cc9a99453e58251a7d9368ce752f8a264",
+      "sha256": "48b79d49a9fb9a3fca21ca4e8b7475c1ce18d5a2ca697e230ea048cd3091b1e9",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/ConnectorPreLaunchPlugin.java",
+      "evidence": [
+        {
+          "start_line": 25,
+          "end_line": 60,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/ConnectorPreLaunchPlugin.java#L25-L60"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/service/FabricASMFixer.java",
+      "facets": [
+        "generated-classes",
+        "classloading",
+        "modules",
+        "enums"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Captures generated URL roots, flattens mixin names, extends permitted subclasses, declares two generated mixin packages and falls back from Minecraft module reader to generated resources",
+      "boundary": "Conditional Minecraft hook only for mm/mm_shedaniel; failures logged; URL provider and upstream ASM generator remain boundaries",
+      "runtime_verified": false,
+      "line_count": 178,
+      "git_blob_sha1": "7643074066e6ad88929a9d87b1c0d28a1805a055",
+      "sha256": "5416323c0cab6fdfc81df701f7853900e2b50f6f96c70bff06772660efa60168",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/FabricASMFixer.java",
+      "evidence": [
+        {
+          "start_line": 32,
+          "end_line": 95,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/FabricASMFixer.java#L32-L95"
+        },
+        {
+          "start_line": 98,
+          "end_line": 177,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/FabricASMFixer.java#L98-L177"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/service/FabricMixinBootstrap.java",
+      "facets": [
+        "mixins",
+        "metadata"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Associates manifest mixin configs with owning mods, decorates mod ID/compatibility/frame fixes, derives compatibility from loader intervals",
+      "boundary": "Missing decoration API only logs; forked Mixin implementation not included in this scope",
+      "runtime_verified": false,
+      "line_count": 151,
+      "git_blob_sha1": "28b4ca9a2a2515cdcfb8acbdd3ddc1aa1073d732",
+      "sha256": "c77e1a7c6358863e48e9a6f845af9558092033b397277b3081ad3a900f826fed",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/FabricMixinBootstrap.java",
+      "evidence": [
+        {
+          "start_line": 50,
+          "end_line": 73,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/FabricMixinBootstrap.java#L50-L73"
+        },
+        {
+          "start_line": 80,
+          "end_line": 143,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/FabricMixinBootstrap.java#L80-L143"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/service/hacks/ConnectorForkJoinThreadFactory.java",
+      "facets": [
+        "threading",
+        "classloading"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Replaces common/default ForkJoinPool factories so newly created worker threads inherit creator context classloader",
+      "boundary": "Does not retroactively reset every existing worker; reflective patch logs failures",
+      "runtime_verified": false,
+      "line_count": 43,
+      "git_blob_sha1": "47a65b4ed9b5f626c4ba68a8b56ed4345b5c8506",
+      "sha256": "30bed171b25d607a182bed394ff2daabb41b7fd0e529b4f7a781254d74d8d00c",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/hacks/ConnectorForkJoinThreadFactory.java",
+      "evidence": [
+        {
+          "start_line": 13,
+          "end_line": 42,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/hacks/ConnectorForkJoinThreadFactory.java#L13-L42"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/service/hacks/LenientRuntimeEnumExtender.java",
+      "facets": [
+        "enums",
+        "mixins"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Temporarily restores final on unique synthetic enum values array before Forge enum extender, then removes it again",
+      "boundary": "Narrow coexistence patch, not universal enum mutation support",
+      "runtime_verified": false,
+      "line_count": 36,
+      "git_blob_sha1": "41d25a1b13fc6d9c640e6c7cef22ddfdcc3bf66c",
+      "sha256": "1a43bde55d06d56b13dd47554ade38acda4ba1cbbfe9ab8ed7a4d8aec265c65b",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/hacks/LenientRuntimeEnumExtender.java",
+      "evidence": [
+        {
+          "start_line": 11,
+          "end_line": 35,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/hacks/LenientRuntimeEnumExtender.java#L11-L35"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/service/hacks/ModuleLayerMigrator.java",
+      "facets": [
+        "modules",
+        "classloading",
+        "access"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Obtains trusted lookup through Unsafe, empties BOOT provider/packages and exposes original provider as connector$authlib GAME module",
+      "boundary": "Moves provider visibility, not already-loaded class identities; JDK/SecureJar private layout dependency",
+      "runtime_verified": false,
+      "line_count": 161,
+      "git_blob_sha1": "cb1bb528190285b11e551b062529148c10bdfd81",
+      "sha256": "336668e6fcdac48320bb95e480c7536ed1f9ceb0bdeb11c81b7e2afe9996fe8d",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/hacks/ModuleLayerMigrator.java",
+      "evidence": [
+        {
+          "start_line": 28,
+          "end_line": 79,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/hacks/ModuleLayerMigrator.java#L28-L79"
+        },
+        {
+          "start_line": 81,
+          "end_line": 160,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/hacks/ModuleLayerMigrator.java#L81-L160"
+        }
+      ]
+    },
+    {
+      "path": "src/main/java/org/sinytra/connector/service/hacks/ServiceProviderInheritanceWorkaround.java",
+      "facets": [
+        "modules",
+        "service-loading"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Binds GAME ModuleClassLoader recursively to parent module layers to expose service providers without parent-classloader delegation",
+      "boundary": "Comment explicitly excludes bootstrap/platform-provider support and scopes workaround to older SecureJarHandler",
+      "runtime_verified": false,
+      "line_count": 88,
+      "git_blob_sha1": "51ad470b68799b547b3cda6f0064838588cbe338",
+      "sha256": "9c8f6afc174694c5792ba3bc61d527e154a47c3578f7a2d8ed6788fa71827b8c",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/hacks/ServiceProviderInheritanceWorkaround.java",
+      "evidence": [
+        {
+          "start_line": 38,
+          "end_line": 87,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/java/org/sinytra/connector/service/hacks/ServiceProviderInheritanceWorkaround.java#L38-L87"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/ConnectorBootstrap.java",
+      "facets": [
+        "mixins",
+        "error-reporting",
+        "items"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Registers crash diagnostics and suppresses Connector mixins on existing errors; declares postApply mutable-multimap return hook",
+      "boundary": "postApply tests stale dev.su5ed package string while actual mixin/config uses org.sinytra; intended hook is not established active",
+      "runtime_verified": false,
+      "line_count": 55,
+      "git_blob_sha1": "3fe94d41f3eeaec81784bb939e17f9155239bef8",
+      "sha256": "39a105f3d66422951802f4805fe6710115f795024a3084afa87008cfca942538",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/ConnectorBootstrap.java",
+      "evidence": [
+        {
+          "start_line": 18,
+          "end_line": 54,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/ConnectorBootstrap.java#L18-L54"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/ConnectorLoader.java",
+      "facets": [
+        "lifecycle",
+        "entrypoints",
+        "attributes"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Runs placeholder injection, main and physical-side entrypoints, releases placeholders and marks finished",
+      "boundary": "No idempotence guard; exception path throws before release/finished flag, so do not treat as transactional initialization",
+      "runtime_verified": false,
+      "line_count": 59,
+      "git_blob_sha1": "2f3dc5e6f7c5e224db30dbc785759eee0f259b54",
+      "sha256": "397f42132d6b176907dcd5494d89ae57d2d9d5774584d33b0384727655a280a5",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/ConnectorLoader.java",
+      "evidence": [
+        {
+          "start_line": 19,
+          "end_line": 57,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/ConnectorLoader.java#L19-L57"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/ConnectorMod.java",
+      "facets": [
+        "events",
+        "registry",
+        "render",
+        "fluids",
+        "resources",
+        "helpers"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Forge mod registers lifecycle listeners, fluid bridge and attribute repair; exposes transformed-call helpers; unfreezes registries and sets preventFreeze",
+      "boundary": "Helpers preserve only specified approximations; external events/dependencies decide actual invocation",
+      "runtime_verified": false,
+      "line_count": 107,
+      "git_blob_sha1": "b874b2f5ea09737da5a3bddef699cef28fa9b71a",
+      "sha256": "dd860e91303d2dd8b1485b938915570521e91e8af816310e197d0c8bf09bcf40",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/ConnectorMod.java",
+      "evidence": [
+        {
+          "start_line": 36,
+          "end_line": 106,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/ConnectorMod.java#L36-L106"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/CrashReportUpgrade.java",
+      "facets": [
+        "diagnostics"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Adds Connector version/presence/issue guidance and Fabric mod list to crash reports",
+      "boundary": "Diagnostics, not error remediation or telemetry",
+      "runtime_verified": false,
+      "line_count": 53,
+      "git_blob_sha1": "7ce17d9814924154bc081f08f2fac86a6485bab2",
+      "sha256": "bce32712847713344865b31d54dbe7c1a80e1ba188dcebd0f2dd2d84aa956dcc",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/CrashReportUpgrade.java",
+      "evidence": [
+        {
+          "start_line": 12,
+          "end_line": 52,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/CrashReportUpgrade.java#L12-L52"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/DummyTarget.java",
+      "facets": [
+        "bootstrap"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Empty class loaded to trigger mixin/plugin initialization before preLaunch",
+      "boundary": "Intent established by caller; not a gameplay object",
+      "runtime_verified": false,
+      "line_count": 4,
+      "git_blob_sha1": "68e845d774dc368168982e4b5d2d35cd2a54f582",
+      "sha256": "044883884ac903d3b7623f671e6a3536e91c0a2bd10fb8a9c454feeb5615268b",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/DummyTarget.java",
+      "evidence": [
+        {
+          "start_line": 1,
+          "end_line": 4,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/DummyTarget.java#L1-L4"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/compat/DummyResourceManager.java",
+      "facets": [
+        "resources",
+        "loot"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "All-empty ResourceManager satisfies new loot-deserialize signature",
+      "boundary": "Does not provide actual resource resolution",
+      "runtime_verified": false,
+      "line_count": 47,
+      "git_blob_sha1": "6471869da3d4721921b8a40eff0ba2bb3a2c037e",
+      "sha256": "50c2f8660b7a8f35a73aabb77a44b8171483dc2b59f56abd3ef7a5862088be0e",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/DummyResourceManager.java",
+      "evidence": [
+        {
+          "start_line": 15,
+          "end_line": 46,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/DummyResourceManager.java#L15-L46"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/compat/FluidHandlerCompat.java",
+      "facets": [
+        "fluids",
+        "render",
+        "registry",
+        "events"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Creates Forge FluidTypes for Connector-owned fluid namespaces, registers them via RegisterEvent, maps Fabric variant names and render textures/tints",
+      "boundary": "Not a storage/transaction/capability adapter; nullable render handler later dereferenced without visible guard",
+      "runtime_verified": false,
+      "line_count": 133,
+      "git_blob_sha1": "78c66446bab40af688e402cf81fb3e32c64c4cb2",
+      "sha256": "f0a925be9613a4398a378a4b89eb9de249dee9cd4d86e8f8ef7a2a57e72d5dc5",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/FluidHandlerCompat.java",
+      "evidence": [
+        {
+          "start_line": 31,
+          "end_line": 65,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/FluidHandlerCompat.java#L31-L65"
+        },
+        {
+          "start_line": 68,
+          "end_line": 129,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/FluidHandlerCompat.java#L68-L129"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/compat/ItemStackExtensions.java",
+      "facets": [
+        "items",
+        "interaction"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Declares nullable-result use-on bridge contract",
+      "boundary": "Behavior supplied by mixin/retargeted callbacks",
+      "runtime_verified": false,
+      "line_count": 8,
+      "git_blob_sha1": "06f24e1417ec30c6a3adf4688114bf03d416b945",
+      "sha256": "1cf61b5f90b7939dc7f6667b757ed3c40b47225c8c9317e7796b700a2d9695da",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/ItemStackExtensions.java",
+      "evidence": [
+        {
+          "start_line": 3,
+          "end_line": 8,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/ItemStackExtensions.java#L3-L8"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/compat/LateRenderTypesInit.java",
+      "facets": [
+        "render",
+        "lifecycle"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Reassigns chunkLayerId by current RenderType.chunkBufferLayers order during client setup",
+      "boundary": "Reconciles late registrations; no render pipeline rewrite",
+      "runtime_verified": false,
+      "line_count": 20,
+      "git_blob_sha1": "c2ad1da269ce349d32b50817aef81ac6f5d51a42",
+      "sha256": "046203cb7ad810962e01e1f63975ec29fcb331f4a7255def092e9771514ff943",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/LateRenderTypesInit.java",
+      "evidence": [
+        {
+          "start_line": 10,
+          "end_line": 19,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/LateRenderTypesInit.java#L10-L19"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/compat/LateSheetsInit.java",
+      "facets": [
+        "render",
+        "registry",
+        "lifecycle"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Fills missing sign/hanging-sign/banner/pot materials after mod load",
+      "boundary": "Only named material maps, not universal asset cache rebuild",
+      "runtime_verified": false,
+      "line_count": 25,
+      "git_blob_sha1": "4964113eca244fa9865c13c60489708385354043",
+      "sha256": "ae1705d049169d7c3d8cabfb5d85ed744f9dcf3c18ff5b524511c5a00e0527dd",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/LateSheetsInit.java",
+      "evidence": [
+        {
+          "start_line": 7,
+          "end_line": 24,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/LateSheetsInit.java#L7-L24"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/compat/LazyEntityAttributes.java",
+      "facets": [
+        "attributes",
+        "lifecycle",
+        "events"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Temporarily supplies four Forge attributes during Fabric initialization, later replaces placeholder keys in vanilla/Forge suppliers",
+      "boundary": "Rebuild uses new default AttributeInstances; no general AI port and event listener conditional on object-builder module",
+      "runtime_verified": false,
+      "line_count": 80,
+      "git_blob_sha1": "cbcb8a10ad1e00ea5d7285a75044e0a6d21891ad",
+      "sha256": "b6f8d06d5cbaedf682f8a249996c6c6f52800d4dd07310ab2e05960f94de31ea",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/LazyEntityAttributes.java",
+      "evidence": [
+        {
+          "start_line": 25,
+          "end_line": 79,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/LazyEntityAttributes.java#L25-L79"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/compat/PathPackResourcesExtensions.java",
+      "facets": [
+        "resources",
+        "localization"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Marks pack as belonging to a Connector Fabric mod",
+      "boundary": "Boolean contract only",
+      "runtime_verified": false,
+      "line_count": 5,
+      "git_blob_sha1": "feff2df86564dcf89e7c00b71a4d23bc86987eb1",
+      "sha256": "539d6a40b884f0bb759c14c0743d29b8a32f19d8497878291d04013b584f27a9",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/PathPackResourcesExtensions.java",
+      "evidence": [
+        {
+          "start_line": 1,
+          "end_line": 5,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/PathPackResourcesExtensions.java#L1-L5"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/compat/RegistryUtil.java",
+      "facets": [
+        "registry",
+        "network",
+        "particles"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Checks external Fabric dynamic-registry list; retains absent Connector particle entries during client Forge registry synchronization",
+      "boundary": "Preservation restricted to particle registry and Connector namespace heuristic",
+      "runtime_verified": false,
+      "line_count": 57,
+      "git_blob_sha1": "151927ee1be12fde7495954f84954f7622469915",
+      "sha256": "65ae18a2b4b8ac2b0b8dd55d999a6e983b161353b8a319800f088ebe817143d1",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/RegistryUtil.java",
+      "evidence": [
+        {
+          "start_line": 24,
+          "end_line": 56,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/RegistryUtil.java#L24-L56"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/compat/TagConverter.java",
+      "facets": [
+        "tags",
+        "resources"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Merges c namespace tag entries into normalized vanilla/forge tags, rewrites nested references, leaves original c tag pointing to destination",
+      "boundary": "Heuristic string naming including raw ores, storage blocks, tools and existing gem singulars; not arbitrary ontology equivalence",
+      "runtime_verified": false,
+      "line_count": 156,
+      "git_blob_sha1": "32840b2779a59e20495cac991db2d55f697dbd6a",
+      "sha256": "1277aab19a2834fe97ca6eaee2b357cb925877f31ab306c44869ae10052641bf",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/TagConverter.java",
+      "evidence": [
+        {
+          "start_line": 23,
+          "end_line": 73,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/TagConverter.java#L23-L73"
+        },
+        {
+          "start_line": 75,
+          "end_line": 153,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/TagConverter.java#L75-L153"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/compat/fieldtypes/FieldTypeUtil.java",
+      "facets": [
+        "field-shapes",
+        "classloading"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Indirection delays resolving definalized IdMapper subclass until access-transformer-dependent path is usable",
+      "boundary": "Does not dynamically repair missing access transformer",
+      "runtime_verified": false,
+      "line_count": 18,
+      "git_blob_sha1": "48a2a67d69d4a20e30432f9e6cf0fda27b1e8f67",
+      "sha256": "1d727c48f559d38e32c1232dea45ad07578b1cb75250fe5698729bb0f0ba5d39",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/fieldtypes/FieldTypeUtil.java",
+      "evidence": [
+        {
+          "start_line": 9,
+          "end_line": 17,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/fieldtypes/FieldTypeUtil.java#L9-L17"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/compat/fieldtypes/RedirectingIdMapper.java",
+      "facets": [
+        "field-shapes",
+        "registry",
+        "render"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Live IdMapper facade translates numeric IDs to keys of a shared map for add/get/lookup/iteration",
+      "boundary": "Linear value-to-ID lookup; assumptions follow backing registry and map",
+      "runtime_verified": false,
+      "line_count": 62,
+      "git_blob_sha1": "594324b543e2d24b163a6b2f1af9e403fa80bb40",
+      "sha256": "5dd9cfbf47bfcced440ce30418192745e3d4e202913be5fd99e124d07120eac1",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/fieldtypes/RedirectingIdMapper.java",
+      "evidence": [
+        {
+          "start_line": 12,
+          "end_line": 61,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/fieldtypes/RedirectingIdMapper.java#L12-L61"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/compat/fieldtypes/RedirectingInt2ObjectMap.java",
+      "facets": [
+        "field-shapes",
+        "particles",
+        "render"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Live int map facade translates key reads/writes/removal/iteration callback to a shared keyed map",
+      "boundary": "entrySet/keySet/values throw; defaultReturnValue saved but get uses raw Map.get; deliberately incomplete compatibility surface",
+      "runtime_verified": false,
+      "line_count": 115,
+      "git_blob_sha1": "690e7859e93d19d0dd7428223ce5474f928e898a",
+      "sha256": "3540f559fee21f1693ef0815143129cde264f3a81c650f5578595664cb1db0d0",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/fieldtypes/RedirectingInt2ObjectMap.java",
+      "evidence": [
+        {
+          "start_line": 14,
+          "end_line": 114,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/fieldtypes/RedirectingInt2ObjectMap.java#L14-L114"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/compat/hud/GuiExtensions.java",
+      "facets": [
+        "hud",
+        "events",
+        "cancellation"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Defines synthetic GUI phases and a sentinel-state wrapper for detecting canceled callback bodies",
+      "boundary": "Bridge contract, not renderer implementation",
+      "runtime_verified": false,
+      "line_count": 31,
+      "git_blob_sha1": "678a5308952cc2dfbc4edc6581fc5dd0e7b31a9f",
+      "sha256": "ed4591a4a96cb078af22866b33a1c7aed52eb48d24ac41e6a15f8db1646318c4",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/hud/GuiExtensions.java",
+      "evidence": [
+        {
+          "start_line": 5,
+          "end_line": 31,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/hud/GuiExtensions.java#L5-L31"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/compat/hud/HudRenderInvoker.java",
+      "facets": [
+        "hud",
+        "events",
+        "cancellation"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Forge RenderGuiEvent Pre/Post invoke synthetic GUI phases; canceled synthetic pre callback cancels Forge pre event",
+      "boundary": "Only declared render lifecycle, not general event-bus mapping",
+      "runtime_verified": false,
+      "line_count": 30,
+      "git_blob_sha1": "ed638dc78fa69c791f9fd6f8a03597ea308db5b3",
+      "sha256": "a70950f586fdb9b2196216142c7e4cd444dec11a742f049e121b2d59bbfd95dc",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/hud/HudRenderInvoker.java",
+      "evidence": [
+        {
+          "start_line": 10,
+          "end_line": 27,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/compat/hud/HudRenderInvoker.java#L10-L27"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/CrashReportExtenderMixin.java",
+      "facets": [
+        "diagnostics"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Injects Connector diagnostic header at Forge crash-header entry",
+      "boundary": "Runs if mixin configuration applies",
+      "runtime_verified": false,
+      "line_count": 18,
+      "git_blob_sha1": "78e2aff0a6b8ff52522056f6d6d8465f1c9de11c",
+      "sha256": "d94dae96a93bf9df944324aca71009ce5cf1275b6278e1dfc52a42ff0ec5e321",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/CrashReportExtenderMixin.java",
+      "evidence": [
+        {
+          "start_line": 11,
+          "end_line": 17,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/CrashReportExtenderMixin.java#L11-L17"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/ForgeHooksClientMixin.java",
+      "facets": [
+        "ui",
+        "tooltip",
+        "mutability"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Copies gathered tooltip component list to mutable ArrayList",
+      "boundary": "Container mutability repair, no tooltip feature creation",
+      "runtime_verified": false,
+      "line_count": 26,
+      "git_blob_sha1": "05f8635fde21379d99a1a7a513d5014dd81d6d08",
+      "sha256": "3b95eb5975c60aa6d340535c3444b159255b2ea2cc111afdd59a4bdd9ac24189",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/ForgeHooksClientMixin.java",
+      "evidence": [
+        {
+          "start_line": 18,
+          "end_line": 25,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/ForgeHooksClientMixin.java#L18-L25"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/ForgeHooksMixin.java",
+      "facets": [
+        "fluids",
+        "attributes",
+        "events"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Falls back to synthetic Fabric FluidType before Forge exception and merges event-modified attributes into mixin-replaced vanilla suppliers",
+      "boundary": "Uses precise Forge locals/targets and external APIs",
+      "runtime_verified": false,
+      "line_count": 45,
+      "git_blob_sha1": "7e4dc510031da38557a12754d6ebdba76a6097fc",
+      "sha256": "9a731ea3f4e94cc4fdcd0880ee43dc1204e0c3882706b2a3225a10ca572c2198",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/ForgeHooksMixin.java",
+      "evidence": [
+        {
+          "start_line": 21,
+          "end_line": 44,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/ForgeHooksMixin.java#L21-L44"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/HumanoidArmorLayerMixin.java",
+      "facets": [
+        "render",
+        "items"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Treats namespaced suffix as complete armor texture resource location",
+      "boundary": "Narrow armor-path contract adaptation",
+      "runtime_verified": false,
+      "line_count": 21,
+      "git_blob_sha1": "b123411c5ca0d58c2b4fedba7f99318a23fed42f",
+      "sha256": "8736a75818def64ec715f7722124b9c400218dca1baa3fc7100c7fb21cce95f1",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/HumanoidArmorLayerMixin.java",
+      "evidence": [
+        {
+          "start_line": 12,
+          "end_line": 20,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/HumanoidArmorLayerMixin.java#L12-L20"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/IForgeItemMixin.java",
+      "facets": [
+        "items",
+        "ai"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Delegates Forge piglin currency test to vanilla PiglinAi.isBarterCurrency",
+      "boundary": "Allows vanilla-targeting modifications to affect Forge path; no new AI behavior engine",
+      "runtime_verified": false,
+      "line_count": 18,
+      "git_blob_sha1": "fbab32456453f893fb8caefb3780d2472b592134",
+      "sha256": "7271f783144badd399810738847e183611ebf55df542d9297eb462f6aedc2ad1",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/IForgeItemMixin.java",
+      "evidence": [
+        {
+          "start_line": 11,
+          "end_line": 17,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/IForgeItemMixin.java#L11-L17"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/ItemBlockRenderTypesMixin.java",
+      "facets": [
+        "render",
+        "lifecycle"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Bypasses client-loading guard after Connector client setup flag",
+      "boundary": "No global thread-safety guarantee",
+      "runtime_verified": false,
+      "line_count": 21,
+      "git_blob_sha1": "62f7161b8110888bbe037e35c65dbb46fb4e3430",
+      "sha256": "7f44931369fad8adc477a4f7b42353702e4ee9f5845fdf56b50d7cb2db7b6929",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/ItemBlockRenderTypesMixin.java",
+      "evidence": [
+        {
+          "start_line": 10,
+          "end_line": 20,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/ItemBlockRenderTypesMixin.java#L10-L20"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/ItemOverridesMixin.java",
+      "facets": [
+        "render",
+        "items"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Supplies missing-texture getter for null ModelBaker; otherwise delegates",
+      "boundary": "Fallback avoids specific null assumption, not full model repair",
+      "runtime_verified": false,
+      "line_count": 26,
+      "git_blob_sha1": "75bbf1a42dff44dd0d0c6730c439ff564d0cec0b",
+      "sha256": "c916450dca6fa494cd92b254aded4177649679415b5739a68ac0b15bb6c8d49c",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/ItemOverridesMixin.java",
+      "evidence": [
+        {
+          "start_line": 16,
+          "end_line": 25,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/ItemOverridesMixin.java#L16-L25"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/OptionsMixin.java",
+      "facets": [
+        "input",
+        "configuration"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Deduplicates key mappings by name during Forge limited reload",
+      "boundary": "First occurrence retained, no mod conflict policy beyond names",
+      "runtime_verified": false,
+      "line_count": 40,
+      "git_blob_sha1": "3a893aeb5a82172774db3f478690a4f5ff806755",
+      "sha256": "a6c19b6de361679157f542f4db0289aeb45131cdcbfff539ec09c89551222ae4",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/OptionsMixin.java",
+      "evidence": [
+        {
+          "start_line": 17,
+          "end_line": 39,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/OptionsMixin.java#L17-L39"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/PlayerListMixin.java",
+      "facets": [
+        "collections",
+        "server-state"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Returns fresh unmodifiable view of current players list",
+      "boundary": "Reflects replacement of backing list, not a mutable player-list API",
+      "runtime_verified": false,
+      "line_count": 27,
+      "git_blob_sha1": "86e8e60cd30069a5faabde7845af99622f06bcc0",
+      "sha256": "6d1d2bac4ff01183c045cc7595c5a3346b7988337855a36177a25fb9070bac0a",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/PlayerListMixin.java",
+      "evidence": [
+        {
+          "start_line": 15,
+          "end_line": 26,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/PlayerListMixin.java#L15-L26"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/PoiTypesMixin.java",
+      "facets": [
+        "ai",
+        "registry",
+        "field-shapes"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Accepts already-inserted Holder values in blockstate-to-POI map at lookup",
+      "boundary": "Specific erased generic-type mismatch, no pathfinding or goal translation",
+      "runtime_verified": false,
+      "line_count": 35,
+      "git_blob_sha1": "846d5740ee31811d9003a336089ddb06adbeb397",
+      "sha256": "b1e16c7b51219451d13b0807c7a4ed01c997424de00189602c855cf5de1b7563",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/PoiTypesMixin.java",
+      "evidence": [
+        {
+          "start_line": 17,
+          "end_line": 34,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/PoiTypesMixin.java#L17-L34"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/TagLoaderMixin.java",
+      "facets": [
+        "tags",
+        "resources"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Post-processes tag load results using TagConverter",
+      "boundary": "Runtime data adaptation, not generated datapack files",
+      "runtime_verified": false,
+      "line_count": 22,
+      "git_blob_sha1": "995daea5b4052f031237434b6628bc80281d5bde",
+      "sha256": "e8d9489f40d55aa6b2366f438357e2eed212c959cd82e786ebe4f05de2aeb0ff",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/TagLoaderMixin.java",
+      "evidence": [
+        {
+          "start_line": 15,
+          "end_line": 21,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/TagLoaderMixin.java#L15-L21"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/boot/DatagenModLoaderMixin.java",
+      "facets": [
+        "lifecycle",
+        "datagen"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Invokes Fabric entrypoint load before Forge gatherAndInitializeMods during datagen begin",
+      "boundary": "Does not implement Fabric datagen providers itself",
+      "runtime_verified": false,
+      "line_count": 16,
+      "git_blob_sha1": "00abe63fb29e35a7c27167a0926d675ba349dc06",
+      "sha256": "8c5771589f32e8b5de9efb9b039172afaaa521b04ec936a2e3007389ba4bd91f",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/boot/DatagenModLoaderMixin.java",
+      "evidence": [
+        {
+          "start_line": 10,
+          "end_line": 15,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/boot/DatagenModLoaderMixin.java#L10-L15"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/boot/MinecraftMixin.java",
+      "facets": [
+        "lifecycle",
+        "client"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Runs Fabric main/client early in Minecraft constructor at currentThread callsite with priority 3000",
+      "boundary": "Exact constructor target/order dependent on host and other mixins",
+      "runtime_verified": false,
+      "line_count": 18,
+      "git_blob_sha1": "63b6f662b4d4051c2e9387028d5d59863f34a4f9",
+      "sha256": "1ea6330a1a4007b2faebf7dcbc59d61a901254e4d703bf9730672a7827aa89fa",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/boot/MinecraftMixin.java",
+      "evidence": [
+        {
+          "start_line": 11,
+          "end_line": 17,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/boot/MinecraftMixin.java#L11-L17"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/boot/ServerMainMixin.java",
+      "facets": [
+        "lifecycle",
+        "server"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Runs Fabric main/server before ServerModLoader.load invocation",
+      "boundary": "Dedicated server path selected in mixin JSON",
+      "runtime_verified": false,
+      "line_count": 16,
+      "git_blob_sha1": "3981642abb3cd1cd87f2aefaef28940f88df89f5",
+      "sha256": "bbca9f02001b076f1bbfc05643aafb80bd562dc4054c0a83e592a090385191b6",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/boot/ServerMainMixin.java",
+      "evidence": [
+        {
+          "start_line": 10,
+          "end_line": 15,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/boot/ServerMainMixin.java#L10-L15"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/client/KeyMappingMixin.java",
+      "facets": [
+        "input",
+        "field-shapes",
+        "mixin-hooks"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Bridges coremod-added vanilla Map field to Forge KeyModifier.NONE lookup, captures current mapping in ThreadLocal for synthetic hook",
+      "boundary": "Many-to-one get/entrySet choose first mapping; cast assumes ArrayList; requires coremod field, no full bidirectional semantic identity",
+      "runtime_verified": false,
+      "line_count": 146,
+      "git_blob_sha1": "bc1cce7e69c83aec3557b8c53a8ef9df38d5063a",
+      "sha256": "f65e43c67022d62313541ecc1ed7817b4efdd9af44a558fd60c901e11117e752",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/client/KeyMappingMixin.java",
+      "evidence": [
+        {
+          "start_line": 26,
+          "end_line": 145,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/client/KeyMappingMixin.java#L26-L145"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/fieldtypes/BlockColorsMixin.java",
+      "facets": [
+        "render",
+        "field-shapes",
+        "registry"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Exposes synthetic IdMapper getter over Forge Holder-keyed block color map",
+      "boundary": "Getter needs originating bytecode field-access rewrite",
+      "runtime_verified": false,
+      "line_count": 38,
+      "git_blob_sha1": "90fa9b796bc73a5d783106510d4be342154d912d",
+      "sha256": "ba334ed7e14be59fe8e9615657a1d7c66cb091f0e77734161da37358f0d17003",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/fieldtypes/BlockColorsMixin.java",
+      "evidence": [
+        {
+          "start_line": 18,
+          "end_line": 37,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/fieldtypes/BlockColorsMixin.java#L18-L37"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/fieldtypes/ItemColorsMixin.java",
+      "facets": [
+        "render",
+        "field-shapes",
+        "registry"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Exposes synthetic IdMapper getter over Forge Holder-keyed item color map",
+      "boundary": "Getter needs originating bytecode field-access rewrite",
+      "runtime_verified": false,
+      "line_count": 38,
+      "git_blob_sha1": "e0ece8b0949967780692df3c4ed97edc0e67b3a2",
+      "sha256": "81643cfa5caf782a8bc0cacaca1d84864db00a221652bf9b659c172b0fb62433",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/fieldtypes/ItemColorsMixin.java",
+      "evidence": [
+        {
+          "start_line": 18,
+          "end_line": 37,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/fieldtypes/ItemColorsMixin.java#L18-L37"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/fieldtypes/ParticleEngineMixin.java",
+      "facets": [
+        "particles",
+        "render",
+        "field-shapes"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Exposes synthetic int-key map getter over particle ResourceLocation provider map",
+      "boundary": "Delegates to intentionally incomplete RedirectingInt2ObjectMap",
+      "runtime_verified": false,
+      "line_count": 36,
+      "git_blob_sha1": "0cf5959b9ef71da96d37819c5f1ebbda9766b4a0",
+      "sha256": "3036c2d0e54893c46756b5d294de02eec84e09fc1c2afd8886fc759e2160c1e5",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/fieldtypes/ParticleEngineMixin.java",
+      "evidence": [
+        {
+          "start_line": 16,
+          "end_line": 35,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/fieldtypes/ParticleEngineMixin.java#L16-L35"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/hud/ForgeGuiMixin.java",
+      "facets": [
+        "hud",
+        "cancellation"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Bridges Forge health/armor/debug render sites to synthetic Gui phases and status-bar cancellation state",
+      "boundary": "Must coordinate with transformed Fabric mixin targets and other renderer changes",
+      "runtime_verified": false,
+      "line_count": 43,
+      "git_blob_sha1": "ba031d2729845308c93ac44c712c6a253f0c59aa",
+      "sha256": "603b64225dc8215d0bb5e7a6f3b419340c014ea3ab336038f3ad164e99c287ac",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/hud/ForgeGuiMixin.java",
+      "evidence": [
+        {
+          "start_line": 13,
+          "end_line": 42,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/hud/ForgeGuiMixin.java#L13-L42"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/hud/GuiMixin.java",
+      "facets": [
+        "hud",
+        "mixin-hooks"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Adds pre/post/health/armor/hotbar/effects/debug callback targets, sentinel state and hotbar/effect dispatch",
+      "boundary": "Empty bodies are deliberate insertion targets, not missing HUD implementations",
+      "runtime_verified": false,
+      "line_count": 78,
+      "git_blob_sha1": "4917193854b1aae57523e7c1efabb5e770d04eb8",
+      "sha256": "4ede9112e7378910944041c94f80d411239b782ff9dcb22575e4d0e2d00b0695",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/hud/GuiMixin.java",
+      "evidence": [
+        {
+          "start_line": 16,
+          "end_line": 77,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/hud/GuiMixin.java#L16-L77"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/item/ForgeHooksMixin.java",
+      "facets": [
+        "items",
+        "interaction",
+        "cancellation"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Invokes synthetic use-on hook at Forge placement pipeline and returns non-null override",
+      "boundary": "Does not define interaction outcome itself",
+      "runtime_verified": false,
+      "line_count": 24,
+      "git_blob_sha1": "da4ec5f133dd5f78ce4c19df54f8401f1b387262",
+      "sha256": "d230030b5ab59954764a18250216d45c5ab04b4c6ad2c42016a4075422b80113",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/item/ForgeHooksMixin.java",
+      "evidence": [
+        {
+          "start_line": 13,
+          "end_line": 23,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/item/ForgeHooksMixin.java#L13-L23"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/item/ItemStackMixin.java",
+      "facets": [
+        "items",
+        "interaction",
+        "mixin-hooks"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Implements synthetic use-on method with locals and null fallback; invokes it from Forge-modified useOn lambda",
+      "boundary": "Locals preserve retargeted injection context; null means continue normal host behavior",
+      "runtime_verified": false,
+      "line_count": 36,
+      "git_blob_sha1": "14b10e3fd7242ef9497c4c21adf4cc9663371bf8",
+      "sha256": "a72b2654ba14ca917f2b0b975d1f3fd09fa3e2d45acfa4f14729237ecadc7018",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/item/ItemStackMixin.java",
+      "evidence": [
+        {
+          "start_line": 17,
+          "end_line": 35,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/item/ItemStackMixin.java#L17-L35"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/item/LateItemStackMixin.java",
+      "facets": [
+        "items",
+        "mixin-hooks"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Priority-9999 empty mixin meant to trigger postApply hook",
+      "boundary": "Bootstrap name-string mismatch prevents assuming intended ASM mutation",
+      "runtime_verified": false,
+      "line_count": 9,
+      "git_blob_sha1": "a73eae0c8810d57db1ce64a3234d7c5c865cef8a",
+      "sha256": "3f7fe4843706600e80255899619002c72eb6801e0d7f979ca6fcdc6698bc4328",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/item/LateItemStackMixin.java",
+      "evidence": [
+        {
+          "start_line": 6,
+          "end_line": 9,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/item/LateItemStackMixin.java#L6-L9"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/lang/PathPackResourcesAnonMixin.java",
+      "facets": [
+        "resources",
+        "localization"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Marks Forge-generated resource pack by first mod's Connector identity",
+      "boundary": "Multi-mod pack classification follows first-mod heuristic",
+      "runtime_verified": false,
+      "line_count": 33,
+      "git_blob_sha1": "fbfb494075b6e6754ce17756c4222292b1fb9ff2",
+      "sha256": "e4e1c2d7c9660ce94c065000d0302b154abdd5bc811c1f522110ba929e4cfb88",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/lang/PathPackResourcesAnonMixin.java",
+      "evidence": [
+        {
+          "start_line": 16,
+          "end_line": 32,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/lang/PathPackResourcesAnonMixin.java#L16-L32"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/lang/PathPackResourcesMixin.java",
+      "facets": [
+        "resources",
+        "localization"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "For marked packs and lang paths checks SERVER_DATA root before normal resource path",
+      "boundary": "Only language paths and marked packs, not general resource redirection",
+      "runtime_verified": false,
+      "line_count": 33,
+      "git_blob_sha1": "626f1d6d45d5f3dd260ee068ea2f8976db78f0d6",
+      "sha256": "6ce93148ae27543dbebdc90b6d28ecdd45a8ec07762cf690e37351f290818639",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/lang/PathPackResourcesMixin.java",
+      "evidence": [
+        {
+          "start_line": 17,
+          "end_line": 32,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/lang/PathPackResourcesMixin.java#L17-L32"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/network/ConnectionTypeMixin.java",
+      "facets": [
+        "network"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Treats missing version flag as VANILLA",
+      "boundary": "Does not negotiate arbitrary Fabric protocol compatibility",
+      "runtime_verified": false,
+      "line_count": 18,
+      "git_blob_sha1": "6e2260d493a26df298ced49b0dcca6bd5f89c573",
+      "sha256": "97ac4136c89702f268f1950ce0d09bda931cefd3e4af314bc2a6a5c34cc720e9",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/network/ConnectionTypeMixin.java",
+      "evidence": [
+        {
+          "start_line": 9,
+          "end_line": 17,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/network/ConnectionTypeMixin.java#L9-L17"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/network/HandshakeHandlerMixin.java",
+      "facets": [
+        "network"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Lazily registers missing Forge handshake when biConsumer path asks for it",
+      "boundary": "Depends on existing Forge direction/connection context, no packet schema translation",
+      "runtime_verified": false,
+      "line_count": 33,
+      "git_blob_sha1": "734c48f536f1719179b8195dbd880daba8b79d91",
+      "sha256": "1faca7a064153d39abf7935e12412da7c49dc7ecf85bbdde714b1d8205a10561",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/network/HandshakeHandlerMixin.java",
+      "evidence": [
+        {
+          "start_line": 14,
+          "end_line": 32,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/network/HandshakeHandlerMixin.java#L14-L32"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/network/NetworkFiltersMixin.java",
+      "facets": [
+        "network"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Avoids adding duplicate named Netty handler",
+      "boundary": "Idempotency guard, not end-to-end network compatibility proof",
+      "runtime_verified": false,
+      "line_count": 22,
+      "git_blob_sha1": "1afbf6de075e1677436c4395caeabf45b3baf5b4",
+      "sha256": "a7aaf1c9952cb0b8d9b84dd701023681f5f576cf883503aeb2085439f2649fc9",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/network/NetworkFiltersMixin.java",
+      "evidence": [
+        {
+          "start_line": 13,
+          "end_line": 21,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/network/NetworkFiltersMixin.java#L13-L21"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/recipebook/RecipeBookCategoriesAccessor.java",
+      "facets": [
+        "recipebook",
+        "mutability"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Mutable accessor replaces aggregate category map",
+      "boundary": "No recipe serializer translation",
+      "runtime_verified": false,
+      "line_count": 19,
+      "git_blob_sha1": "a284986ffbcde060e150ea53442f0f5712303be0",
+      "sha256": "0f2cac1733ab32c2a045088a203a9ca2f184b17aafcf915da81ab83d2b37127c",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/recipebook/RecipeBookCategoriesAccessor.java",
+      "evidence": [
+        {
+          "start_line": 11,
+          "end_line": 18,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/recipebook/RecipeBookCategoriesAccessor.java#L11-L18"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/recipebook/RecipeBookCategoriesMixin.java",
+      "facets": [
+        "recipebook",
+        "lifecycle"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Seeds vanilla aggregate category values rather than early Forge manager map",
+      "boundary": "Preserves early Fabric mutation opportunity",
+      "runtime_verified": false,
+      "line_count": 24,
+      "git_blob_sha1": "a21946e8230c410fd351f17b187af6b297c0bdb9",
+      "sha256": "55b701af7672db1c1456c3042a5e07fe587ffa34d668d8680c58a941b8b4b424",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/recipebook/RecipeBookCategoriesMixin.java",
+      "evidence": [
+        {
+          "start_line": 15,
+          "end_line": 23,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/recipebook/RecipeBookCategoriesMixin.java#L15-L23"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/recipebook/RecipeBookManagerMixin.java",
+      "facets": [
+        "recipebook",
+        "lifecycle",
+        "mutability"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "At Forge init completion makes mutable map/list copies then merges Forge categories, removing duplicates",
+      "boundary": "Explicitly cannot easily respect insertion order",
+      "runtime_verified": false,
+      "line_count": 35,
+      "git_blob_sha1": "ca7ff821560e50a5a97265466f7994eddbcb7cde",
+      "sha256": "0671c9ed9be8ad87e8ba76c3cef3a28e9bc3afabbf37efcbc492788fd5b0330a",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/recipebook/RecipeBookManagerMixin.java",
+      "evidence": [
+        {
+          "start_line": 12,
+          "end_line": 34,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/recipebook/RecipeBookManagerMixin.java#L12-L34"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/registries/BootstrapMixin.java",
+      "facets": [
+        "registry",
+        "lifecycle"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Skips early GameData.vanillaSnapshot",
+      "boundary": "Part of delayed registry lifecycle, not standalone safe registry policy",
+      "runtime_verified": false,
+      "line_count": 30,
+      "git_blob_sha1": "067231b6c4a858c163601d2d929979b74b3fcc79",
+      "sha256": "5d2ba7f1fdef1bd0675030a4b1d73b8a6801378ccf8c7261b32e119429c8e359",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/registries/BootstrapMixin.java",
+      "evidence": [
+        {
+          "start_line": 24,
+          "end_line": 29,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/registries/BootstrapMixin.java#L24-L29"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/registries/BuiltInRegistriesMixin.java",
+      "facets": [
+        "registry",
+        "lifecycle"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Suppresses inner registry freeze calls",
+      "boundary": "Broad host invariant change",
+      "runtime_verified": false,
+      "line_count": 15,
+      "git_blob_sha1": "6dcc5d983786f7ce41bf5a03d6e2cae4b8ed5f9a",
+      "sha256": "fc981930a57e68e36f8b5053b4912e9fddc888861bb82688020497be046449c2",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/registries/BuiltInRegistriesMixin.java",
+      "evidence": [
+        {
+          "start_line": 9,
+          "end_line": 14,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/registries/BuiltInRegistriesMixin.java#L9-L14"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/registries/ClientForgeRegistryMixin.java",
+      "facets": [
+        "registry",
+        "particles",
+        "network"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Calls retention helper before names map clear during Forge sync",
+      "boundary": "Particle-only implementation lives in RegistryUtil",
+      "runtime_verified": false,
+      "line_count": 19,
+      "git_blob_sha1": "91e67498d5913ed787206df97cc2c0ae58c0a42e",
+      "sha256": "f083d1104e23a159b5c358b3307ac54f3f8cb0a87570b7b0fd9307a0c3a49f0e",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/registries/ClientForgeRegistryMixin.java",
+      "evidence": [
+        {
+          "start_line": 12,
+          "end_line": 18,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/registries/ClientForgeRegistryMixin.java#L12-L18"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/registries/ForgeRegistryMixin.java",
+      "facets": [
+        "registry",
+        "lifecycle",
+        "holders"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Before Fabric loading finishes returns existing delegate or constructs intrusive holder, with fallback for unsupported registry",
+      "boundary": "Temporary holder identity/binding behavior depends on Forge registry machinery",
+      "runtime_verified": false,
+      "line_count": 34,
+      "git_blob_sha1": "6673a620c76178af2f514d3159aed711950f59c0",
+      "sha256": "c05596b69a0deb174461e4f06fe384044d9f5755e52265d2d2193a817f8db942",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/registries/ForgeRegistryMixin.java",
+      "evidence": [
+        {
+          "start_line": 16,
+          "end_line": 33,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/registries/ForgeRegistryMixin.java#L16-L33"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/registries/MappedRegistryMixin.java",
+      "facets": [
+        "registry",
+        "lifecycle"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Cancels freeze once Connector preventFreeze flag is set",
+      "boundary": "No reset of that flag in scoped source",
+      "runtime_verified": false,
+      "line_count": 19,
+      "git_blob_sha1": "55af478d1e6cecaca91e5139b6cc0b25b6886ece",
+      "sha256": "c5f4fb6234a160582deee72672e5aafa83b8a9c8ee0ffe5dc103c23be754039f",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/registries/MappedRegistryMixin.java",
+      "evidence": [
+        {
+          "start_line": 11,
+          "end_line": 18,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/registries/MappedRegistryMixin.java#L11-L18"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/registries/MinecraftMixin.java",
+      "facets": [
+        "registry",
+        "lifecycle",
+        "client"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "At client run start makes vanilla snapshot then unfreezes builtin registries",
+      "boundary": "Log says locking, but next operation intentionally unfreezes",
+      "runtime_verified": false,
+      "line_count": 26,
+      "git_blob_sha1": "2f3270cd6bd9234d6eb2f5987e43a57d05c37a8d",
+      "sha256": "ae8776947edd94f15001ba799d58f4e74a7699004edf223bddd6bba1a755d100",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/registries/MinecraftMixin.java",
+      "evidence": [
+        {
+          "start_line": 14,
+          "end_line": 25,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/registries/MinecraftMixin.java#L14-L25"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/registries/MinecraftServerMixin.java",
+      "facets": [
+        "registry",
+        "lifecycle",
+        "server"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Dedicated server run hook makes vanilla snapshot then unfreezes builtin registries",
+      "boundary": "Not a Fabric server-world lifecycle event translator",
+      "runtime_verified": false,
+      "line_count": 27,
+      "git_blob_sha1": "aa3ca02652dece79c1fcc6cd88a2e29dbfe76f49",
+      "sha256": "c3ea1a0ccf2152f00d863cae0061510e061dec89e82f73662506af768b1aa9e4",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/registries/MinecraftServerMixin.java",
+      "evidence": [
+        {
+          "start_line": 14,
+          "end_line": 26,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/registries/MinecraftServerMixin.java#L14-L26"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/registries/NamespacedWrapperMixin.java",
+      "facets": [
+        "registry",
+        "lifecycle"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Suppresses Forge wrapper frozen-field assignment",
+      "boundary": "Private field shape/host-version coupled",
+      "runtime_verified": false,
+      "line_count": 16,
+      "git_blob_sha1": "008f12a3cd7ceb9423306f70e9c1d8810a69c9cc",
+      "sha256": "76845acbb045c997e513b851093ac72bfc562e393289008a1688aa28c19df015",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/registries/NamespacedWrapperMixin.java",
+      "evidence": [
+        {
+          "start_line": 9,
+          "end_line": 15,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/registries/NamespacedWrapperMixin.java#L9-L15"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/java/org/sinytra/connector/mod/mixin/registries/RegistryDataLoaderMixin.java",
+      "facets": [
+        "worldgen",
+        "registry",
+        "resources"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Detects mixin-added WORLDGEN_REGISTRIES and selects unprefixed Fabric paths vs Forge namespaced directories with module checks/resource fallback",
+      "boundary": "Directory convention adapter, not biome/terrain/feature-generation algorithm implementation",
+      "runtime_verified": false,
+      "line_count": 97,
+      "git_blob_sha1": "786cdbaf5bae19eee9f59133dffb1c29b54a7ab7",
+      "sha256": "ac931ff026f9139b15fef3fd2fc91bc3ee4c448a76f1cc4228b62d8e960f0e93",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/registries/RegistryDataLoaderMixin.java",
+      "evidence": [
+        {
+          "start_line": 28,
+          "end_line": 96,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/java/org/sinytra/connector/mod/mixin/registries/RegistryDataLoaderMixin.java#L28-L96"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/resources/META-INF/accesstransformer.cfg",
+      "facets": [
+        "access",
+        "registry",
+        "hud",
+        "items",
+        "attributes"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Widens named getter/registry/tag/material/HUD APIs and definalizes IdMapper.byId and AttributeSupplier.instances",
+      "boundary": "Small explicit host access policy, consumed by Forge AT machinery",
+      "runtime_verified": false,
+      "line_count": 25,
+      "git_blob_sha1": "a504d2e7250cbaa7aafc6679ef75a85526723640",
+      "sha256": "f7b196b5b9dbfaebe724f0855886845aaf0a305718c3caabd9c0608090b57852",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/resources/META-INF/accesstransformer.cfg",
+      "evidence": [
+        {
+          "start_line": 1,
+          "end_line": 25,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/resources/META-INF/accesstransformer.cfg#L1-L25"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/resources/META-INF/mods.toml",
+      "facets": [
+        "bootstrap",
+        "metadata",
+        "side"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Declares Connector javafml mod, Forge47 and Minecraft [1.20.1,1.21) dependencies, optional-side display rule",
+      "boundary": "Source declaration range is not verified runtime support across that whole range",
+      "runtime_verified": false,
+      "line_count": 30,
+      "git_blob_sha1": "57166db65cae1563f1fee6907e7900d920c91125",
+      "sha256": "46fc6c5e870ca16d70828d15a6616010829f73a573633832dc876e088fe3bc26",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/resources/META-INF/mods.toml",
+      "evidence": [
+        {
+          "start_line": 1,
+          "end_line": 30,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/resources/META-INF/mods.toml#L1-L30"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/resources/connectormod.mixins.json",
+      "facets": [
+        "mixins",
+        "side",
+        "bootstrap"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Required Java17 mixin config partitions common/client/server targets and binds ConnectorBootstrap plugin",
+      "boundary": "Declared required target list, not verified application success",
+      "runtime_verified": false,
+      "line_count": 57,
+      "git_blob_sha1": "2f45104fb90c1e40a6a8c9397c093eddc4145127",
+      "sha256": "0651f3aa0e3d20346ae62d043693216cdd88d94238082c68ae272974eb155c8c",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/resources/connectormod.mixins.json",
+      "evidence": [
+        {
+          "start_line": 1,
+          "end_line": 57,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/resources/connectormod.mixins.json#L1-L57"
+        }
+      ]
+    },
+    {
+      "path": "src/mod/resources/logo.png",
+      "facets": [
+        "branding"
+      ],
+      "review_status": "BINARY_INSPECTED",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "512px Connector Forge/Fabric plug illustration referenced by mods.toml",
+      "boundary": "Visual branding only; no gameplay asset or implementation evidence",
+      "runtime_verified": false,
+      "line_count": null,
+      "git_blob_sha1": "2e37034fb1ea2c64b77f77ff7240e337f8283cff",
+      "sha256": "2e69ea6364794d77fa08bd21ef2b4e7e20875b24361f5a6412ed8d28b664fc53",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/resources/logo.png",
+      "evidence": []
+    },
+    {
+      "path": "src/mod/resources/pack.mcmeta",
+      "facets": [
+        "resources"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Declares connector resources pack format15",
+      "boundary": "No content registration or custom data definitions",
+      "runtime_verified": false,
+      "line_count": 8,
+      "git_blob_sha1": "6ab93e7558069b0ab3699f57ad633c7e54f214ba",
+      "sha256": "c448da13bbe2977862ffd067e7cfec04889b2dca9983a2286c2e493333f1df40",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/resources/pack.mcmeta",
+      "evidence": [
+        {
+          "start_line": 1,
+          "end_line": 8,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/mod/resources/pack.mcmeta#L1-L8"
+        }
+      ]
+    },
+    {
+      "path": "src/main/resources/META-INF/services/cpw.mods.modlauncher.api.ITransformationService",
+      "facets": [
+        "bootstrap",
+        "service-loading"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Registers ConnectorLoaderService as ModLauncher transformation service",
+      "boundary": "Service discovery consumer is external",
+      "runtime_verified": false,
+      "line_count": 1,
+      "git_blob_sha1": "b81d8f138db72bde7afa934db656bff95f5ed0f0",
+      "sha256": "710c0faff187ae54beddd86aae586671490ff04f850b37d52bb7ecdd63df1ba3",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/resources/META-INF/services/cpw.mods.modlauncher.api.ITransformationService",
+      "evidence": [
+        {
+          "start_line": 1,
+          "end_line": 1,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/resources/META-INF/services/cpw.mods.modlauncher.api.ITransformationService#L1-L1"
+        }
+      ]
+    },
+    {
+      "path": "src/main/resources/META-INF/services/net.minecraftforge.forgespi.locating.IDependencyLocator",
+      "facets": [
+        "bootstrap",
+        "discovery"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Registers ConnectorLocator as Forge dependency locator",
+      "boundary": "Ordering forced by ConnectorEarlyLocator",
+      "runtime_verified": false,
+      "line_count": 1,
+      "git_blob_sha1": "e684fb4d35122a19298b394979c2be92933122e0",
+      "sha256": "a45fe50cba0fdb03d05c8ba0b05d5f4c2e52e6fc6357491717955f2b384aa8ea",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/resources/META-INF/services/net.minecraftforge.forgespi.locating.IDependencyLocator",
+      "evidence": [
+        {
+          "start_line": 1,
+          "end_line": 1,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/resources/META-INF/services/net.minecraftforge.forgespi.locating.IDependencyLocator#L1-L1"
+        }
+      ]
+    },
+    {
+      "path": "src/main/resources/META-INF/services/net.minecraftforge.forgespi.locating.IModLocator",
+      "facets": [
+        "bootstrap",
+        "discovery"
+      ],
+      "review_status": "FULL_STATIC_READ",
+      "evidence_level": "SOURCE_DECLARATION",
+      "mechanism": "Registers ConnectorEarlyLocator as Forge mod locator",
+      "boundary": "Service discovery consumer is external",
+      "runtime_verified": false,
+      "line_count": 1,
+      "git_blob_sha1": "227323877725239153ee948d99832b4f6c8baa7a",
+      "sha256": "98e809a544c936a6aa9c8b146082d628564913c8efbc9636791fcb95aa67b286",
+      "source_url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/resources/META-INF/services/net.minecraftforge.forgespi.locating.IModLocator",
+      "evidence": [
+        {
+          "start_line": 1,
+          "end_line": 1,
+          "url": "https://github.com/Sinytra/Connector/blob/7f68ac02291fde986119a3f5cab85436bed5c350/src/main/resources/META-INF/services/net.minecraftforge.forgespi.locating.IModLocator#L1-L1"
+        }
+      ]
+    }
+  ],
+  "facet_scope_assessment": [
+    {
+      "facet": "bootstrap/discovery/dependencies/nesting/side/duplicates",
+      "status": "DIRECTLY_MAPPED",
+      "boundary": "Host and Fabric-fork resolver implementations remain external; declarations do not establish launch success"
+    },
+    {
+      "facet": "metadata/entrypoints/lifecycle",
+      "status": "DIRECTLY_MAPPED",
+      "boundary": "Forked Fabric setup, language adapters and final invocation implementation are external"
+    },
+    {
+      "facet": "registry/holders/freeze/sync",
+      "status": "DIRECTLY_MAPPED",
+      "boundary": "Specific early holders, late snapshots/unfreeze and particle retention; no universal registry compatibility proof"
+    },
+    {
+      "facet": "events",
+      "status": "SELECTIVE_BRIDGES_MAPPED_EXTERNAL_GENERIC_API",
+      "boundary": "Forge setup/register/attribute/HUD events are wired; full Fabric event emulation belongs to FFAPI and is not mapped from these files"
+    },
+    {
+      "facet": "network",
+      "status": "SELECTIVE_BRIDGES_MAPPED_EXTERNAL_PROTOCOL",
+      "boundary": "Null flag, lazy handshake, duplicate pipeline guard and particle registry sync only; packet codec/channel compatibility unverified"
+    },
+    {
+      "facet": "render/HUD/particles/input",
+      "status": "DIRECTLY_MAPPED_WITH_PARTIAL_CONTRACTS",
+      "boundary": "Synthetic mixin hooks, mutable views, registry key adapters and late cache rebuilds; not a replacement renderer or full map API"
+    },
+    {
+      "facet": "items/interaction/tooltip/armor/loot/resources",
+      "status": "SELECTIVE_BRIDGES_MAPPED",
+      "boundary": "Use-on scaffold and helpers preserve narrow contracts; general item/crafting semantics are not reimplemented"
+    },
+    {
+      "facet": "tags/localization",
+      "status": "DIRECTLY_MAPPED_HEURISTIC",
+      "boundary": "c-to-forge/vanilla naming heuristics and marked-pack language lookup, not semantic equivalence of arbitrary data"
+    },
+    {
+      "facet": "recipebook",
+      "status": "DIRECTLY_MAPPED",
+      "boundary": "Category mutability/merge only, with insertion-order limitation; recipe serializers are not covered here"
+    },
+    {
+      "facet": "AI",
+      "status": "SELECTIVE_BRIDGES_MAPPED",
+      "boundary": "POI Holder-map mismatch, piglin currency dispatch and entity-attribute timing; goals/pathfinding are not implemented"
+    },
+    {
+      "facet": "worldgen",
+      "status": "SELECTIVE_BRIDGES_MAPPED",
+      "boundary": "Dynamic-registry resource path choice and injected registry detection; terrain/noise/biome algorithms are not implemented"
+    },
+    {
+      "facet": "modules/classloading/generated classes/service discovery/thread context",
+      "status": "DIRECTLY_MAPPED",
+      "boundary": "Version-coupled reflective host/JDK internals and limited generated-package conventions"
+    },
+    {
+      "facet": "cache/invalidation/config/errors",
+      "status": "DIRECTLY_MAPPED_WITH_BOUNDED_INPUTS",
+      "boundary": "Explicit version/dist/input fingerprint and staged errors; environment-complete invalidation and runtime correctness are unverified"
+    },
+    {
+      "facet": "own gameplay content catalogue: mobs/blocks/quests/combat/crafting/terrain",
+      "status": "NOT_APPLICABLE_TO_SCOPED_LAYER",
+      "boundary": "This inspected layer adapts external mods rather than defining its own gameplay catalogue; this does not mean corresponding interoperability facets are absent"
+    },
+    {
+      "facet": "actual startup/test results/cross-loader multiplayer compatibility/per-mod support",
+      "status": "UNVERIFIED_RUNTIME",
+      "boundary": "No execution/install/build/game launch performed"
+    },
+    {
+      "facet": "full FFAPI/Fabric Loader/Adapter/Forge/Mixin implementation",
+      "status": "EXTERNAL_SOURCE_BOUNDARY",
+      "boundary": "Known calls/interfaces only in this scope; do not confuse absence of source with not-applicable behavior"
+    }
+  ]
+}

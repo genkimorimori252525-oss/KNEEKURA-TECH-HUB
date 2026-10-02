@@ -1,0 +1,15 @@
+{"t":0,"ch":"meta","scenario":"newschema-min","seed":1,"arena":0,"duration":40,"gameTime":0,"originX":0,"originZ":0,"floorY":64,"floorRadius":8,"blocks":0,"types":[],"mods":[]}
+{"t":0,"ch":"spawn","id":100,"role":"reimu","type":"touhou_little_maid:reimu","name":"Reimu","maxHp":40,"w":0.6,"h":1.8}
+{"t":0,"ch":"spawn","id":200,"role":"target","type":"minecraft:zombie","name":"Zombie","maxHp":20,"w":0.6,"h":1.95}
+{"t":1,"ch":"ai","id":100,"mode":"GROUND","hp":40,"maxHp":40,"target":200,"targetType":"minecraft:zombie","dist":9.0,"form":1,"formMode":"-","amuletCd":false,"houju":false,"gensou":false,"musouTp":false,"section":"phase=RANGED_BARRAGE ptimer=0 zone=MID(>8m) dist=9.0m cd: atk=0","sec":{"phase":"RANGED_BARRAGE","ptimer":0,"zone":"MID(>8m)","dist":"9.0m","cdAtk":0}}
+{"t":3,"ch":"proj","ev":"spawn","id":301,"type":"touhou_little_maid:reimu_needle","phase":"RANGED_BARRAGE","owner":100,"vx":0.5,"vy":0,"vz":0,"w":0.2,"h":0.2}
+{"t":3,"ch":"proj","ev":"spawn","id":302,"type":"touhou_little_maid:reimu_needle","phase":"RANGED_BARRAGE","owner":100,"vx":0.5,"vy":0,"vz":0,"w":0.2,"h":0.2}
+{"t":6,"ch":"dmg","victim":200,"attacker":100,"direct":301,"amount":3.5,"src":"thrown","hpAfter":16.5,"attrib":"direct","projType":"touhou_little_maid:reimu_needle","phase":"RANGED_BARRAGE"}
+{"t":8,"ch":"proj","ev":"gone","id":301,"type":"touhou_little_maid:reimu_needle"}
+{"t":12,"ch":"dmg","victim":200,"attacker":-1,"direct":-1,"amount":2.0,"src":"magic","hpAfter":14.5,"attrib":"none"}
+{"t":14,"ch":"proj","ev":"gone","id":302,"type":"touhou_little_maid:reimu_needle"}
+{"t":20,"ch":"ai","id":100,"mode":"GROUND","hp":40,"maxHp":40,"target":200,"targetType":"minecraft:zombie","dist":1.5,"form":1,"formMode":"-","amuletCd":false,"houju":false,"gensou":false,"musouTp":false,"section":"phase=PUNCH_COMBO_1 ptimer=0 zone=CLOSE(<=2m) dist=1.5m cd: atk=4","sec":{"phase":"PUNCH_COMBO_1","ptimer":0,"zone":"CLOSE(<=2m)","dist":"1.5m","cdAtk":4}}
+{"t":22,"ch":"proj","ev":"spawn","id":303,"type":"touhou_little_maid:hakurei_amulet","phase":"PUNCH_COMBO_1","owner":100,"vx":0.2,"vy":0,"vz":0.1,"w":0.2,"h":0.2}
+{"t":24,"ch":"dmg","victim":200,"attacker":100,"direct":100,"amount":5.0,"src":"player","hpAfter":9.5,"attrib":"melee","phase":"PUNCH_COMBO_1"}
+{"t":30,"ch":"proj","ev":"gone","id":303,"type":"touhou_little_maid:hakurei_amulet"}
+{"t":39,"ch":"end","reason":"duration","ticks":40,"actors":2,"projSpawned":3,"hitsByReimu":2,"dmgByReimu":8.5,"dmgToReimu":0,"voidRescues":0}

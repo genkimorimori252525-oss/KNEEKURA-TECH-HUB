@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "base_commit": "0e773ccf509d2a24c6dca3830cef18f38334b2cd",
+  "scope": "selected-file checkout: new Minecraft adapter tests only; not full repository or product acceptance",
+  "commands": [
+    "python -m pytest -q --junitxml=verification/junit-final.xml",
+    "python -m compileall -q src"
+  ],
+  "result": {
+    "tests": 102,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "python": "3.13.5",
+  "pytest": "9.0.2",
+  "repository_pytest_constraint": ">=8.3,<9",
+  "declared_dependency_environment_tested": false,
+  "javac": "javac 21.0.11",
+  "javap": "21.0.11",
+  "fixture_class_target": "Java 17 (--release 17), not Minecraft",
+  "not_run": [
+    "full-existing-Hub-suite",
+    "PostgreSQL-integration",
+    "package-build",
+    "actual-Forge-build",
+    "Minecraft",
+    "real-GameTest",
+    "client-runtime",
+    "U01-U06",
+    "product-A01-A24"
+  ],
+  "ci_used": false,
+  "target_mod_or_world_mutations": false,
+  "tested_files_sha256": {
+    "src/kneekura_tech_hub/minecraft/__init__.py": "9092d2c4daabcd706662b68fde1709022b01e3ec2e843e2c080962e95452f8c7",
+    "src/kneekura_tech_hub/minecraft/__main__.py": "96aa3632c05fca0b807edf68e6849bcbcab8d2db9ccbe5b215e7366ad631d392",
+    "src/kneekura_tech_hub/minecraft/bytecode.py": "59a385a1dce7a928db9a1144a4af6ad93393727bbe00cb6a5c48230d98a3beea",
+    "src/kneekura_tech_hub/minecraft/index.py": "b4e9739e4ca8c1c77febd6d462cd0c0cc94f531ab474bc2f67311088916b460e",
+    "src/kneekura_tech_hub/minecraft/storage.py": "1b1bc2bdd7eba2537bb376f5791384a6633b55b6c5d81ec0a3b482d8b3eec9c4",
+    "src/kneekura_tech_hub/minecraft/verification.py": "a3b643278886fe8c8a9ca852b26f798295f6787626250cad777680b6bbd6d62f",
+    "tests/test_minecraft_cli.py": "f342317f1347c9786020070dec84c36159a05c07efb8690625ef16b316fd1022",
+    "tests/test_minecraft_index.py": "82d4a2aef8ebe7dc28dc327414a004b1e5bf0c23d3c11b658261448450b26b10",
+    "tests/test_minecraft_storage.py": "0a0f07177903ec58ea88d18c08fcc211b81359ed2c5771c25f0136c2e4c49f37",
+    "tests/test_minecraft_verification.py": "6d13c970189bf4ad12317bd80fe14dc7cfd1ca23cda3adae4ac2a64423c421d7"
+  }
+}

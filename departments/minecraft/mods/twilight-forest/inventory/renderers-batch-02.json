@@ -1,0 +1,333 @@
+{
+  "batch": 2,
+  "source_snapshot": "793c4d4c7b0a2892f702cbb9a8d751fbe7218828",
+  "count": 16,
+  "rows": [
+    {
+      "renderer_class": "KoboldRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/KoboldRenderer.java",
+      "blob_sha": "9559a490921ac919c27352a19ab139ddfb05e4ea",
+      "model_layers": [
+        "KOBOLD"
+      ],
+      "model_classes": [
+        "KoboldModel"
+      ],
+      "textures": [
+        "kobold.png"
+      ],
+      "render_states": [
+        "KoboldRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "superclass": "HumanoidMobRenderer<Kobold, KoboldRenderState, KoboldModel>"
+    },
+    {
+      "renderer_class": "MosquitoSwarmRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/MosquitoSwarmRenderer.java",
+      "blob_sha": "2307c9ec923f45b33703e4c8219dcc00ab261af1",
+      "model_layers": [
+        "MOSQUITO_SWARM"
+      ],
+      "model_classes": [
+        "MosquitoSwarmModel"
+      ],
+      "textures": [
+        "mosquitoswarm.png"
+      ],
+      "render_states": [
+        "LivingEntityRenderState",
+        "createRenderState"
+      ],
+      "superclass": "MobRenderer<MosquitoSwarm, LivingEntityRenderState, MosquitoSwarmModel>"
+    },
+    {
+      "renderer_class": "DeathTomeRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/DeathTomeRenderer.java",
+      "blob_sha": "824022eb894449b5beaab7aecdf3a049c72c5b1d",
+      "model_layers": [
+        "DEATH_TOME"
+      ],
+      "model_classes": [
+        "DeathTomeModel"
+      ],
+      "textures": [
+        "textures/entity/enchantment/enchanting_table_book.png"
+      ],
+      "render_states": [
+        "DeathTomeRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "superclass": "MobRenderer<DeathTome, DeathTomeRenderState, DeathTomeModel>"
+    },
+    {
+      "renderer_class": "MinotaurRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/MinotaurRenderer.java",
+      "blob_sha": "1ee4abf70267e35449e87b87036c99b44b50f813",
+      "model_layers": [
+        "MINOTAUR"
+      ],
+      "model_classes": [
+        "MinotaurModel"
+      ],
+      "textures": [
+        "minotaur.png"
+      ],
+      "render_states": [
+        "HumanoidRenderState",
+        "createRenderState"
+      ],
+      "superclass": "HumanoidMobRenderer<Minotaur, HumanoidRenderState, MinotaurModel>"
+    },
+    {
+      "renderer_class": "MinoshroomRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/MinoshroomRenderer.java",
+      "blob_sha": "f7ce7dbb440971bec59b51deca18ea6ef6f4a5e3",
+      "model_layers": [
+        "MINOSHROOM"
+      ],
+      "model_classes": [
+        "MinoshroomModel",
+        "getParentModel",
+        "mushroomModel"
+      ],
+      "textures": [
+        "minoshroomtaur.png"
+      ],
+      "render_states": [
+        "BlockModelRenderState",
+        "MinoshroomRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "superclass": "HumanoidMobRenderer<Minoshroom, MinoshroomRenderState, MinoshroomModel>"
+    },
+    {
+      "renderer_class": "FireBeetleRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/FireBeetleRenderer.java",
+      "blob_sha": "2932f10edbd73b8460b157694c70742e60142e17",
+      "model_layers": [
+        "FIRE_BEETLE"
+      ],
+      "model_classes": [
+        "FireBeetleModel"
+      ],
+      "textures": [
+        "firebeetle.png"
+      ],
+      "render_states": [
+        "LivingEntityRenderState",
+        "createRenderState"
+      ],
+      "superclass": "MobRenderer<FireBeetle, LivingEntityRenderState, FireBeetleModel>"
+    },
+    {
+      "renderer_class": "SlimeBeetleRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/SlimeBeetleRenderer.java",
+      "blob_sha": "1c1902f00b670add8114ec5725e8c7c277b8cc5f",
+      "model_layers": [
+        "SLIME_BEETLE",
+        "SLIME_BEETLE_TAIL"
+      ],
+      "model_classes": [
+        "SlimeBeetleModel",
+        "submitModel"
+      ],
+      "textures": [
+        "slimebeetle.png"
+      ],
+      "render_states": [
+        "LivingEntityRenderState",
+        "createRenderState"
+      ],
+      "superclass": "MobRenderer<SlimeBeetle, LivingEntityRenderState, SlimeBeetleModel>"
+    },
+    {
+      "renderer_class": "PinchBeetleRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/PinchBeetleRenderer.java",
+      "blob_sha": "f56c25d928cf186dc2b4071ba7cf53e52d3be2cf",
+      "model_layers": [
+        "PINCH_BEETLE"
+      ],
+      "model_classes": [
+        "PinchBeetleModel"
+      ],
+      "textures": [
+        "pinchbeetle.png"
+      ],
+      "render_states": [
+        "PinchBeetleRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "superclass": "MobRenderer<PinchBeetle, PinchBeetleRenderState, PinchBeetleModel>"
+    },
+    {
+      "renderer_class": "MistWolfRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/MistWolfRenderer.java",
+      "blob_sha": "40ac9cd277e97038bd2f725ee908f5b6d76916cb",
+      "model_layers": [
+        "HOSTILE_WOLF"
+      ],
+      "model_classes": [
+        "MistWolfModel"
+      ],
+      "textures": [
+        "mistwolf.png"
+      ],
+      "render_states": [
+        "MistWolfRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "superclass": "MobRenderer<MistWolf, MistWolfRenderState, MistWolfModel>"
+    },
+    {
+      "renderer_class": "TFGhastRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/TFGhastRenderer.java",
+      "blob_sha": "8b313abf50140030d8c159b11753b8218ff36e66",
+      "model_layers": [],
+      "model_classes": [
+        "TFGhastModel"
+      ],
+      "textures": [
+        "towerghast.png",
+        "towerghast_fire.png",
+        "towerghast_openeyes.png"
+      ],
+      "render_states": [
+        "TFGhastRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "superclass": "MobRenderer<T, TFGhastRenderState, M>"
+    },
+    {
+      "renderer_class": "CarminiteGolemRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/CarminiteGolemRenderer.java",
+      "blob_sha": "eeab1aa9653b5ac208cc4bd2621972d5412c33c5",
+      "model_layers": [
+        "CARMINITE_GOLEM"
+      ],
+      "model_classes": [
+        "CarminiteGolemModel"
+      ],
+      "textures": [
+        "carminitegolem.png"
+      ],
+      "render_states": [
+        "IronGolemRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "superclass": "MobRenderer<CarminiteGolem, IronGolemRenderState, CarminiteGolemModel>"
+    },
+    {
+      "renderer_class": "TowerwoodBorerRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/TowerwoodBorerRenderer.java",
+      "blob_sha": "f2bb88d3580c0e73fac6d2716714deeb31eb7195",
+      "model_layers": [
+        "TOWERWOOD_BORER"
+      ],
+      "model_classes": [
+        "SilverfishModel"
+      ],
+      "textures": [
+        "towertermite.png"
+      ],
+      "render_states": [
+        "LivingEntityRenderState",
+        "createRenderState"
+      ],
+      "superclass": "MobRenderer<TowerwoodBorer, LivingEntityRenderState, SilverfishModel>"
+    },
+    {
+      "renderer_class": "CarminiteGhastRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/CarminiteGhastRenderer.java",
+      "blob_sha": "057b503c57aa2c781f12a85653318aeec8e2ff00",
+      "model_layers": [
+        "CARMINITE_GHASTGUARD"
+      ],
+      "model_classes": [
+        "TFGhastModel"
+      ],
+      "textures": [],
+      "render_states": [
+        "TFGhastRenderState"
+      ],
+      "superclass": "TFGhastRenderer<CarminiteGhastguard, TFGhastModel<TFGhastRenderState>>"
+    },
+    {
+      "renderer_class": "UrGhastRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/UrGhastRenderer.java",
+      "blob_sha": "3dde977c1a131e5d3e835b75ddd81bc82c90891b",
+      "model_layers": [
+        "UR_GHAST"
+      ],
+      "model_classes": [
+        "UrGhastModel"
+      ],
+      "textures": [
+        "towerboss.png",
+        "towerboss_fire.png",
+        "towerboss_openeyes.png"
+      ],
+      "render_states": [
+        "TFGhastRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "superclass": "MobRenderer<UrGhast, TFGhastRenderState, UrGhastModel>"
+    },
+    {
+      "renderer_class": "BlockChainGoblinRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/BlockChainGoblinRenderer.java",
+      "blob_sha": "abce68a56b59edb8750bfc63dae6a59f73ecf90a",
+      "model_layers": [
+        "BLOCKCHAIN_GOBLIN",
+        "CHAIN",
+        "CHAIN_BLOCK"
+      ],
+      "model_classes": [
+        "BlockChainGoblinModel",
+        "ChainModel",
+        "SpikeBlockModel",
+        "chainModel",
+        "submitModel"
+      ],
+      "textures": [
+        "block_and_chain.png",
+        "blockgoblin.png"
+      ],
+      "render_states": [
+        "BlockChainGoblinRenderState",
+        "CameraRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "superclass": "HumanoidMobRenderer<BlockChainGoblin, BlockChainGoblinRenderState, BlockChainGoblinModel>"
+    },
+    {
+      "renderer_class": "UpperGoblinKnightRenderer",
+      "path": "src/main/java/twilightforest/client/renderer/entity/UpperGoblinKnightRenderer.java",
+      "blob_sha": "7ef5b1e2d4a731c0a7d4ed47e21cc633882a48d1",
+      "model_layers": [
+        "UPPER_GOBLIN_KNIGHT"
+      ],
+      "model_classes": [
+        "UpperGoblinKnightModel"
+      ],
+      "textures": [
+        "doublegoblin.png"
+      ],
+      "render_states": [
+        "UpperGoblinKnightRenderState",
+        "createRenderState",
+        "extractRenderState"
+      ],
+      "superclass": "HumanoidMobRenderer<UpperGoblinKnight, UpperGoblinKnightRenderState, UpperGoblinKnightModel>"
+    }
+  ]
+}
