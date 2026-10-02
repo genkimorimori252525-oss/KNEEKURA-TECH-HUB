@@ -102,3 +102,17 @@ test('packet timeline is bounded without changing observation history', () => {
   assert.deepEqual(packet.timeline.map(e => e.tick), [3,4]);
   assert.equal(observation.timeline.length, 5);
 });
+
+test('sampled and derived claims also require source lineage', () => {
+  for (const epistemic_status of ['SAMPLED_OBSERVED','DERIVED_FROM_OBSERVED']) {
+    assert.throws(() => createDecisionObservation({
+      ...base(),
+      stages: { STATE: { facts: [{
+        key: 'position',
+        value: {x:0,y:64,z:0},
+        epistemic_status,
+        causal_relation: 'UNKNOWN_CAUSALITY',
+      }] } },
+    }), /requires at least one source_observation_id/);
+  }
+});
