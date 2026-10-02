@@ -31,3 +31,7 @@ jobs:
 
       - name: Build standalone MOD scaffold
         run: gradle build --stacktrace --no-daemon
+
+
+      - name: Run Bedrock Wither GameTests
+        run: gradle runGameTestServer --stacktrace --no-daemon
