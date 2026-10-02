@@ -808,6 +808,23 @@ public final class BedrockWitherGameTests {
         helper.succeed();
     }
 
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_passivedangeroussidedifficultygate")
+    public static void passiveDangerousSideHeadDifficultyGateMatchesBedrock(GameTestHelper helper) {
+        if (org.kneekura.bedrockwither.entity.BedrockWitherSideHeadController
+                .passiveDangerousEnabled(net.minecraft.world.Difficulty.EASY)) {
+            helper.fail("Easy should not enable the historical/current passive dangerous side-head path");
+            return;
+        }
+        if (!org.kneekura.bedrockwither.entity.BedrockWitherSideHeadController
+                .passiveDangerousEnabled(net.minecraft.world.Difficulty.NORMAL)
+                || !org.kneekura.bedrockwither.entity.BedrockWitherSideHeadController
+                .passiveDangerousEnabled(net.minecraft.world.Difficulty.HARD)) {
+            helper.fail("Normal/Hard should enable passive dangerous side-head scheduling");
+            return;
+        }
+        helper.succeed();
+    }
+
     private static BedrockWitherEntity createCombatReadyWither(GameTestHelper helper) {
         BedrockWitherEntity wither = createWither(helper);
         wither.runtimeState().setSpawningFrames(0);
