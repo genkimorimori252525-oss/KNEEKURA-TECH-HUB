@@ -12,7 +12,7 @@ Internal-purpose technology research infrastructure for discovering large amount
 
 ## Minecraft Technology Department
 
-> **Current Minecraft entry point:** [`departments/minecraft/CURRENT-HANDOFF-2026-10-02.md`](departments/minecraft/CURRENT-HANDOFF-2026-10-02.md). The former standalone KNEEKURA-LAB source is now vendored at `departments/minecraft/lab/` and is the canonical experiment/observation source for new Minecraft MOD-AI work. Knowledge/Core and LAB responsibilities remain separated in code, but they now share one repository and one revision. Historical LAB runs keep their original repository/SHA provenance.
+> **Current Minecraft entry point:** [`departments/minecraft/CURRENT-HANDOFF-2026-10-02.md`](departments/minecraft/CURRENT-HANDOFF-2026-10-02.md). **`main` is the authoritative Minecraft/MOD-AI/LAB baseline.** The former standalone KNEEKURA-LAB source is now vendored at `departments/minecraft/lab/` and is the canonical experiment/observation source for new Minecraft MOD-AI work. Knowledge/Core and LAB responsibilities remain separated in code, but they now share one repository and one revision. Historical LAB runs keep their original repository/SHA provenance.
 
 A dedicated private research lane for Minecraft mod engineering has been established under `departments/minecraft/`.
 
