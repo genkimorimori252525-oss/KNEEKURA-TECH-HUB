@@ -250,6 +250,10 @@ html.bare main { grid-template-columns:1fr !important }
     <span class="chrome-label">残光</span>
     <input type="range" id="trail" min="0" max="120" step="5" value="0">
     <span class="num" id="trailV" style="width:34px;color:var(--ink-dim)">0t</span>
+    <span class="chrome-label">対象</span>
+    <select class="btn" id="traceSubject" title="明示的に選んだMobだけ軌跡を重ねる">
+      <option value="">弾のみ</option>
+    </select>
   </div>
   <div class="sep"></div>
   <div class="grp" id="camGrp">
@@ -358,6 +362,29 @@ function cdLine(sec){
   return parts.length?parts.join(' '):null;
 }
 
+function syncTraceSubjects(){
+  const el=document.getElementById('traceSubject'); if(!el) return;
+  const prev=T.traceSubject||'';
+  const rows=[...D.entities.values()]
+    .filter(e=>e.role!=='projectile')
+    .sort((a,b)=>String(a.type||'').localeCompare(String(b.type||''))||String(a.id).localeCompare(String(b.id)));
+  el.replaceChildren();
+  const none=document.createElement('option'); none.value=''; none.textContent='弾のみ'; el.appendChild(none);
+  for(const e of rows){
+    const o=document.createElement('option');
+    o.value=String(e.id);
+    o.textContent=(e.type||'entity')+' #'+e.id;
+    el.appendChild(o);
+  }
+  if(rows.some(e=>String(e.id)===prev)){ el.value=prev; T.traceSubject=prev; }
+  else { el.value=''; T.traceSubject=''; }
+}
+function selectedTraceEntity(){
+  if(!T.traceSubject) return null;
+  for(const e of D.entities.values()) if(String(e.id)===T.traceSubject) return e;
+  return null;
+}
+
 function load(text,name,opts){
   opts=opts||{};
   // **最新を見ていたか。** ライブでは、追いかけていた人は最新へ運び、
@@ -380,6 +407,7 @@ function load(text,name,opts){
   D.nTicks=D.maxTick+1;
   D._frameAtCache=null; // 古いトレースのフレームを新しいトレースへ持ち越さない
   D.targetIds=[...D.entities.values()].filter(e=>e.role==='target').map(e=>e.id);
+  syncTraceSubjects();
   // **系列は stats.mjs が組む。** Viewer で組み直さない (AGENT-01)。
   // 読めていなければ null のまま —— 黙って自前計算に落ちない（落ちたら食い違いが復活する）。
   // 13-03: series() 自体は series(events)=seriesState()+seriesFeed()+seriesLanes() の
@@ -448,7 +476,7 @@ function load(text,name,opts){
  * ぴったり 2400 に均す —— そうしないとバーの長さが 30 秒ごとに 25% 跳ねる)。 */
 const LIVE_WINDOW=2400;   // 2 分 (20TPS)
 const LIVE_SLACK=600;     // 30 秒
-const T={tick:0,playing:false,speed:1,acc:0,partial:0,last:0,trail:0,mode:'real',follow:false,sound:false,served:false,followLive:true};
+const T={tick:0,playing:false,speed:1,acc:0,partial:0,last:0,trail:0,traceSubject:'',mode:'real',follow:false,sound:false,served:false,followLive:true};
 
 /* =============================================================================
    3. カメラ / 投影 — F3 モードと図面モードで共有
@@ -615,6 +643,32 @@ function drawF3(){
       batch(sctx,CSS('--vel'),.6*(1-(bd+.5)/BANDS),1.25);
       for(let i=0;i<arr.length;i+=2) seg(sctx,arr[i],arr[i+1]);
       flush(sctx);
+    }
+
+    // 明示的に選んだ Mob だけを追加。全Mobを自動描画しない。
+    // samples() は pos レーンに実際に保持された点だけを返し、at(t) の前方フィルを
+    // 「観測点」と取り違えない。太い長破線 + 円ノードで弾道と色以外でも区別する。
+    const chosen=selectedTraceEntity();
+    if(chosen){
+      const tr=D.store.trackOf(chosen.id);
+      if(tr&&tr.t0<=T.tick&&tr.t1>=t0&&typeof tr.samples==='function'){
+        const pts=tr.samples(Math.max(t0,tr.t0),Math.min(T.tick,tr.t1),4096);
+        sctx.save();
+        sctx.strokeStyle=CSS('--target'); sctx.fillStyle=CSS('--target');
+        sctx.lineWidth=2.5; sctx.globalAlpha=.82; sctx.setLineDash([10,6]); sctx.beginPath();
+        let started=false;
+        for(const p of pts){
+          const q=project(p.x,p.y,p.z,W,H); if(!q) continue;
+          if(!started){ sctx.moveTo(q.x,q.y); started=true; } else sctx.lineTo(q.x,q.y);
+        }
+        if(started) sctx.stroke();
+        sctx.setLineDash([]); sctx.globalAlpha=.9;
+        for(const p of pts){
+          const q=project(p.x,p.y,p.z,W,H); if(!q) continue;
+          sctx.beginPath(); sctx.arc(q.x,q.y,2.6,0,Math.PI*2); sctx.fill();
+        }
+        sctx.restore();
+      }
     }
   }
 
@@ -959,6 +1013,29 @@ function drawPlan(){
         }
       }
       sctx.stroke(); sctx.globalAlpha=1;
+
+      const chosen=selectedTraceEntity();
+      if(chosen){
+        const tr=D.store.trackOf(chosen.id);
+        if(tr&&tr.t0<=T.tick&&tr.t1>=t0&&typeof tr.samples==='function'){
+          const pts=tr.samples(Math.max(t0,tr.t0),Math.min(T.tick,tr.t1),4096);
+          sctx.save();
+          sctx.strokeStyle=CSS('--target'); sctx.fillStyle=CSS('--target');
+          sctx.lineWidth=2.5; sctx.globalAlpha=.82; sctx.setLineDash([10,6]); sctx.beginPath();
+          let started=false;
+          for(const p of pts){
+            const X=cx+v.mapx(p)*sc, Y=cy+v.mapy(p,0)*sc;
+            if(!started){ sctx.moveTo(X,Y); started=true; } else sctx.lineTo(X,Y);
+          }
+          if(started) sctx.stroke();
+          sctx.setLineDash([]); sctx.globalAlpha=.9;
+          for(const p of pts){
+            const X=cx+v.mapx(p)*sc, Y=cy+v.mapy(p,0)*sc;
+            sctx.beginPath(); sctx.arc(X,Y,2.6,0,Math.PI*2); sctx.fill();
+          }
+          sctx.restore();
+        }
+      }
     }
     // アクター
     for(const [id,p] of f.pos){
@@ -1344,6 +1421,7 @@ document.getElementById('speed').onchange=(e)=>{T.speed=+e.target.value;
   if((typeof liveOpen==='function')&&liveOpen()&&T.speed!==1) T.followLive=false;};
 document.getElementById('trail').oninput=(e)=>{T.trail=+e.target.value;
   document.getElementById('trailV').textContent=T.trail+'t'; draw();};
+document.getElementById('traceSubject').onchange=(e)=>{T.traceSubject=e.target.value||''; draw();};
 // 「開く…」= 別のトレースを開きたい。#empty は廃止したので、
 // 記録済みトレースの一覧を持つ「記録」節(#tankPanel、既定は畳んである)を代わりに開く。
 // #recToggle は buildTankUi() が組むまで存在しないので、押された時点で(ここでは無く)
@@ -2479,6 +2557,7 @@ function appendLive(lines,opts){
   D.nTicks=D.maxTick+1;
   D._frameAtCache=null;
   D.targetIds=[...D.entities.values()].filter(e=>e.role==='target').map(e=>e.id);
+  syncTraceSubjects();
   // D.key(name+'#'+D.gen) は変わらない(同じrunが続く限りD.genも変わらない) ——
   // gl.jsのsetTraceの早期returnを壊さないため、ここではD.key/D.pathを触らない。
   if(window.SimGL&&SimGL.available()&&SimGL.growDerived) SimGL.growDerived(D);
