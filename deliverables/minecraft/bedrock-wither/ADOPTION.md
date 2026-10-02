@@ -32,3 +32,11 @@ Before a new external technique changes product code, add:
 - acceptance test that will detect an incorrect transfer.
 
 No AI should infer permission to copy code from a research link alone.
+
+
+## Reusable technique note
+
+Cross-product patterns extracted from this work are maintained at:
+`departments/minecraft/techniques/boss-combat-state-machines.md`
+
+This product ledger remains authoritative for whether the Bedrock Wither actually adopts each pattern.
