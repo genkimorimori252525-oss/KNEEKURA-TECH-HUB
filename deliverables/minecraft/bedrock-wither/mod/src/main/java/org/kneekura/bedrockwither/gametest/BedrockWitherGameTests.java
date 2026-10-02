@@ -24,7 +24,7 @@ public final class BedrockWitherGameTests {
     private BedrockWitherGameTests() {
     }
 
-    @GameTest(template = "empty", timeoutTicks = 40)
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_officialentitysurface")
     public static void officialEntitySurface(GameTestHelper helper) {
         BedrockWitherEntity wither = createWither(helper);
 
@@ -64,7 +64,7 @@ public final class BedrockWitherGameTests {
         });
     }
 
-    @GameTest(template = "empty", timeoutTicks = 40)
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_spawnsequenceusesmodern220tickcontract")
     public static void spawnSequenceUsesModern220TickContract(GameTestHelper helper) {
         BedrockWitherEntity wither = createWither(helper);
 
@@ -116,7 +116,7 @@ public final class BedrockWitherGameTests {
         helper.succeed();
     }
 
-    @GameTest(template = "empty", timeoutTicks = 40)
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_undeaddamageisrejected")
     public static void undeadDamageIsRejected(GameTestHelper helper) {
         BedrockWitherEntity wither = createCombatReadyWither(helper);
         WitherSkeleton attacker = EntityType.WITHER_SKELETON.create(helper.getLevel());
@@ -143,7 +143,7 @@ public final class BedrockWitherGameTests {
         helper.succeed();
     }
 
-    @GameTest(template = "empty", timeoutTicks = 40)
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_threealternativeheadtargetsareindependent")
     public static void threeAlternativeHeadTargetsAreIndependent(GameTestHelper helper) {
         BedrockWitherEntity wither = createWither(helper);
         UUID first = UUID.randomUUID();
@@ -179,7 +179,7 @@ public final class BedrockWitherGameTests {
         helper.succeed();
     }
 
-    @GameTest(template = "empty", timeoutTicks = 40)
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_skullkindsremaindistinct")
     public static void skullKindsRemainDistinct(GameTestHelper helper) {
         BedrockWitherEntity wither = createWither(helper);
         Vec3 origin = wither.position().add(0.0D, 2.0D, 0.0D);
@@ -263,7 +263,7 @@ public final class BedrockWitherGameTests {
         helper.succeed();
     }
 
-    @GameTest(template = "empty", timeoutTicks = 40)
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_centerheadsequenceisthreenormalthendangerous")
     public static void centerHeadSequenceIsThreeNormalThenDangerous(GameTestHelper helper) {
         BedrockWitherEntity wither = createWither(helper);
 
@@ -291,7 +291,7 @@ public final class BedrockWitherGameTests {
         helper.succeed();
     }
 
-    @GameTest(template = "empty", timeoutTicks = 80)
+    @GameTest(template = "empty", timeoutTicks = 80, batch = "bwr_halfhealthtransitionisoneshotandprojectileimmune")
     public static void halfHealthTransitionIsOneShotAndProjectileImmune(GameTestHelper helper) {
         BedrockWitherEntity wither = createCombatReadyWither(helper);
 
@@ -388,7 +388,7 @@ public final class BedrockWitherGameTests {
         });
     }
 
-    @GameTest(template = "empty", timeoutTicks = 40)
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_destructionrangesmatchobservedcuboids")
     public static void destructionRangesMatchObservedCuboids(GameTestHelper helper) {
         BedrockWitherEntity wither = createWither(helper);
 
@@ -407,7 +407,7 @@ public final class BedrockWitherGameTests {
         helper.succeed();
     }
 
-    @GameTest(template = "empty", timeoutTicks = 60)
+    @GameTest(template = "empty", timeoutTicks = 60, batch = "bwr_hurtreactiondelaydoesnotresetandfiresdangerousskull")
     public static void hurtReactionDelayDoesNotResetAndFiresDangerousSkull(GameTestHelper helper) {
         BedrockWitherEntity wither = createCombatReadyWither(helper);
         net.minecraft.world.entity.animal.Cow attacker = EntityType.COW.create(helper.getLevel());
@@ -478,7 +478,7 @@ public final class BedrockWitherGameTests {
         });
     }
 
-    @GameTest(template = "empty", timeoutTicks = 80)
+    @GameTest(template = "empty", timeoutTicks = 80, batch = "bwr_dashexecutionlastsexactlytwentycontrollerticks")
     public static void dashExecutionLastsExactlyTwentyControllerTicks(GameTestHelper helper) {
         BedrockWitherEntity wither = createWither(helper);
 
@@ -523,7 +523,7 @@ public final class BedrockWitherGameTests {
         });
     }
 
-    @GameTest(template = "empty", timeoutTicks = 40)
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_statuseffectsallowonlyinstanthealandharm")
     public static void statusEffectsAllowOnlyInstantHealAndHarm(GameTestHelper helper) {
         BedrockWitherEntity wither = createWither(helper);
 
@@ -549,7 +549,7 @@ public final class BedrockWitherGameTests {
         helper.succeed();
     }
 
-    @GameTest(template = "empty", timeoutTicks = 80)
+    @GameTest(template = "empty", timeoutTicks = 80, batch = "bwr_centervolleyusesfireratethensevensecondcooldown")
     public static void centerVolleyUsesFireRateThenSevenSecondCooldown(GameTestHelper helper) {
         BedrockWitherEntity wither = createCombatReadyWither(helper);
         net.minecraft.world.entity.animal.Cow target = EntityType.COW.create(helper.getLevel());
@@ -651,7 +651,7 @@ public final class BedrockWitherGameTests {
         });
     }
 
-    @GameTest(template = "empty", timeoutTicks = 60)
+    @GameTest(template = "empty", timeoutTicks = 60, batch = "bwr_lasthealthintervaltrackslowesthealthin75pointbuckets")
     public static void lastHealthIntervalTracksLowestHealthIn75PointBuckets(GameTestHelper helper) {
         BedrockWitherEntity wither = createCombatReadyWither(helper);
 
