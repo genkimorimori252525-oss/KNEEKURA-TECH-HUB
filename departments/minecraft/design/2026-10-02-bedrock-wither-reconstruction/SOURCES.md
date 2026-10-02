@@ -91,6 +91,48 @@ Client/render references at the same pinned revision:
 
 The client definition exposes three independently queried head rotations, invulnerability-driven skin/armor state, spawn swelling/scaling and body animation. These are visual-authority inputs, not server AI authority.
 
+
+
+### Current BDS structural surface — LeviLamina generated headers
+
+Current inspected main:
+`LiteLDev/LeviLamina@1bab1522cdfd697d241e77fe60f19b9db2a20a5a`
+
+Target dependency recorded by that revision:
+- BDS package: `1.26.51`
+- supported server: `26.51.1`
+
+Relevant generated Bedrock header blobs:
+- `WitherBoss.h`: `03cd288d06c8c053678a51891c014d0d910e94e5`
+- `WitherTargetHighestDamage.h`: `1857b2a20df2b86f07e4d661a09e67ad709a5057`
+- `WitherRandomAttackPosGoal.h`: `258cdeb206ac193336e8d90ba598a6695bd42ad1`
+- `WitherBossPreAIStepResult.h`: `6d02f203c934b22240e1cf63598e3de8cce78524`
+
+These blobs are unchanged from immediately previous main commit `32fcaa02...`.
+
+Use:
+- current hidden-implementation **structure evidence**: fields, native function boundaries, enum names, return types;
+- not function-body or exact-timing evidence.
+
+Detailed map:
+[BDS-STRUCTURE-2026-10-02.md](BDS-STRUCTURE-2026-10-02.md)
+
+Key findings now shaping product code:
+- native attack destruction categories: Charge / HurtExplosion / Projectile;
+- explicit native phase/shield/charge/projectile/skeleton/movement counters;
+- three head rotation/update slots;
+- pre-AI execution gate;
+- highest-damage target helper returns `Player*`;
+- special random-position goal derives from RandomStrollGoal and tracks pathing.
+
+### Historical Bedrock reverse engineering
+
+Version-unresolved decompiled/generator output is kept separate:
+[HISTORICAL-BEDROCK-REVERSE-NOTES.md](HISTORICAL-BEDROCK-REVERSE-NOTES.md)
+
+Use only to corroborate relationships that still have current structural counterparts or to design runtime measurements. Historical constants never override current Mojang definitions or current BDS structure.
+
+
 ## Maintained secondary / gameplay observation
 
 ### Bedrock Wiki — Wither boss behavior
