@@ -278,3 +278,63 @@ Still measurement-gated:
 - exact current movement speed
 - collision termination nuances
 - repeated-hit semantics for an entity remaining inside the charge damage volume
+
+
+## Center-head firing-rate reconstruction
+
+This section intentionally separates confidence levels.
+
+### Current-observation layer
+
+Current Bedrock technical observation reports:
+- a firing cycle of 3 normal skulls followed by 1 dangerous skull;
+- firing speed depends on damage sustained;
+- pathological healing/damage manipulation can drive the rate as fast as roughly one skull per game tick;
+- after a firing cycle, a roughly 7-second intermediate period occurs before another cycle begins.
+
+These observations are current behavior evidence, not native-body proof of the exact internal equation.
+
+### Historical native-body layer
+
+Historical Bedrock native code independently shows:
+
+1. the center-head projectile counter increments for each shot;
+2. every fourth projectile is marked dangerous;
+3. the constructor initializes the firing-rate field to 20;
+4. hardcoded reload stores:
+   - the current max health;
+   - a half-health phase threshold;
+   - a health interval equal to maxHealth / 3;
+   - a last-health cursor equal to maxHealth;
+5. after accepted damage, when health crosses the next stored interval, the firing-rate field is replaced with approximately half its previous integer value and the health cursor advances to that interval.
+
+Current BDS 1.26.51.1 independently still exposes:
+- `mProjectileCounter`
+- `mFireRate`
+- `mHealthIntervals`
+- `mLastHealthValue`
+- `mDelayShot`
+- `mTimeSinceLastShot`
+- `mSecondVolley`
+- `mMainHeadAttackCountdown`
+
+This is strong structural continuity, but current binary bodies are not available in the retained source surface.
+
+### KNEEKURA implementation labels
+
+- **ACCEPTED order:** 3 normal + 1 dangerous.
+- **OBSERVED_CURRENT:** inter-volley cooldown = about 7 seconds / 140 game ticks.
+- **HISTORICAL_NATIVE_PROVISIONAL:** base fireRate = 20 ticks.
+- **HISTORICAL_NATIVE_PROVISIONAL:** health interval = maxHealth / 3.
+- **HISTORICAL_NATIVE_PROVISIONAL:** crossing the next health interval halves the current fireRate, bounded to at least 1 in the Java adaptation.
+
+The provisional timing/equation lives only in `BedrockWitherVolleyController` so direct current-Bedrock measurement can replace it without touching projectile identity, targeting, phase or movement code.
+
+### Not yet promoted
+
+- exact current first-shot delay after target acquisition;
+- exact current handling of large damage that crosses multiple health intervals in one hit;
+- whether healing resets any current native health cursor;
+- current phase-2 use of the same center-head volley controller;
+- exact relation between `mSecondVolley`, `mDelayShot` and the observed 7-second pause;
+- current passive dangerous-skull timer (~15 seconds in technical observation).
