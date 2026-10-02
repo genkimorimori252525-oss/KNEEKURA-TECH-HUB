@@ -2,7 +2,7 @@
 
 Date: 2026-10-02  
 Origin: OWN_DEVELOPMENT  
-State: REPAIR_IN_PROGRESS  
+State: VERIFIED_FIXED  
 Environment: Minecraft 1.20.1 / Forge 47.2.0 / Java 17 / GitHub Actions Gradle 8.1.1
 
 ## Symptom
@@ -41,7 +41,16 @@ Convert the selected wildcard value to the declared base type after `max`, prese
 
 ## Verification
 
-Pending a clean build of the repaired exact source generation.
+Repair commit: `419bcaac408b5ad12202126235bdd87c257eb594`.
+
+The exact repaired source passed the dedicated Forge product build:
+- workflow run: https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/36978583434
+- conclusion: SUCCESS
+- environment: Minecraft 1.20.1 / Forge 47.2.0 / Java 17 / Gradle 8.1.1
+
+A later CI-cleanup generation with the same MOD source also passed in run `36978657407`.
+
+Verification scope is compilation/package only; no runtime/gameplay behavior is inferred.
 
 ## Lesson
 
