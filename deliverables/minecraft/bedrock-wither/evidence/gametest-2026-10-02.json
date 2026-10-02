@@ -3,14 +3,14 @@
   "deliverable": "minecraft/bedrock-wither",
   "recorded_at": "2026-10-02",
   "latest_accepted": {
-    "source_commit": "94b26ab743998e6aa3227a3f331c7363cbae78d9",
-    "workflow_run_id": 36986672495,
-    "job_id": 110773581402,
+    "source_commit": "c230bd372ca2ee96bc0396e424071d2f4c06cb3a",
+    "workflow_run_id": 36993986762,
+    "job_id": 110796623040,
     "outcome": "SUCCESS",
-    "required_tests": 11,
-    "passed": 11,
+    "required_tests": 14,
+    "passed": 14,
     "failed": 0,
-    "server_log_summary": "All 11 required tests passed :)"
+    "server_log_summary": "All 14 required tests passed :)"
   },
   "environment": {
     "minecraft": "1.20.1",
@@ -21,30 +21,32 @@
     "runner": "github-hosted-ubuntu"
   },
   "assertion_scope": [
-    "official entity collision dimensions/follow range/undead family and initial three-head state",
+    "official/native-resolved entity collision/follow-range/effective movement speed/undead family and initial three-head state",
+    "modern 220-tick spawn countdown and ordinary-damage invulnerability",
     "undead-source damage rejection",
     "three independent alternative head-target slots",
-    "normal/dangerous skull identity and dangerous-only reflection gate",
-    "Bedrock skull entity hit does not leak Java direct impact damage and applies difficulty-specific Wither II",
-    "center-head 3-normal + 1-dangerous projectile order",
-    "half-health one-shot phase transition and phase-2 projectile immunity",
+    "normal/dangerous skull identity, reflection gate, Java-equivalent resistance cap and unbreakable exceptions",
+    "explicit Bedrock skull impact damage mapping 5/8/12 plus Wither-effect contract",
+    "center-head 3-normal + 1-dangerous projectile order and observed inter-volley cooldown state",
+    "monotonic 75-point lastHealthInterval bucket tracking",
+    "half-health one-shot phase transition, AirAttack powered-shield switch and phase-2 projectile immunity",
     "range-1 4x6x4 and range-2 6x8x6 destruction candidate geometry",
     "phase-1 hurt reaction countdown does not reset and emits one dangerous skull",
     "phase-2 dash execution lasts exactly 20 controller ticks",
-    "ordinary status effects are rejected while instant heal/harm processing remains allowed"
+    "ordinary status effects are rejected while instant heal/harm processing remains allowed",
+    "isolated GameTest batches prevent cross-test AI/projectile/explosion interference"
   ],
   "not_proven": [
     "direct current-Bedrock parity",
-    "exact phase-1 reposition algorithm",
-    "exact current shot cadence/health-speedup equation",
+    "exact phase-1 special reposition algorithm",
+    "exact current accelerated ticks-per-shot at each health stage",
     "exact passive dangerous-skull interval",
-    "exact dangerous-skull reflection vector",
-    "exact current transition explosion power/order",
+    "exact dangerous-skull reflection vector/immunity ticks",
+    "exact current transition explosion binary body/order beyond accepted current/historical corroboration",
     "dash preparation trigger and movement speed",
     "current per-attack block exclusion differences",
-    "spawn duration",
-    "shield/armor timing",
-    "death timing and visual equations",
+    "full powered-shield white/blue Bedrock texture parity",
+    "death duration/explosion/swell/flicker/XP timing",
     "client visual acceptance in Tank"
   ]
 }
