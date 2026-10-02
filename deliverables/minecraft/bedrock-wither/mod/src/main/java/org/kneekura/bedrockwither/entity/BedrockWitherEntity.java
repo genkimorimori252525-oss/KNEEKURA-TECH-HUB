@@ -185,7 +185,7 @@ public final class BedrockWitherEntity extends Monster {
         updateBossBarPlayers();
     }
 
-    private void applyCandidateDifficultyHealth() {
+    private void applyBedrockDifficultyHealth() {
         // Public Bedrock JSON exposes 600. Difficulty-specific 300/450/600 remains
         // secondary-observation-backed until direct Bedrock measurement closes it.
         Difficulty difficulty = this.level().getDifficulty();
