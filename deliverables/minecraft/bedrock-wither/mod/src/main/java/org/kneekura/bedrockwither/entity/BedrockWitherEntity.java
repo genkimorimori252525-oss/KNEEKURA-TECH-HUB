@@ -17,6 +17,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobType;
+import net.minecraft.world.entity.PowerableMob;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -40,11 +41,13 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
-public final class BedrockWitherEntity extends Monster {
+public final class BedrockWitherEntity extends Monster implements PowerableMob {
     private static final double BEDROCK_BOSS_HUD_RANGE = 55.0D;
     private static final double BEDROCK_BOSS_HUD_RANGE_SQR = BEDROCK_BOSS_HUD_RANGE * BEDROCK_BOSS_HUD_RANGE;
     private static final EntityDataAccessor<Integer> DATA_STATE =
             SynchedEntityData.defineId(BedrockWitherEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Boolean> DATA_AERIAL_ATTACK =
+            SynchedEntityData.defineId(BedrockWitherEntity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Optional<UUID>> DATA_HEAD_TARGET_0 =
             SynchedEntityData.defineId(BedrockWitherEntity.class, EntityDataSerializers.OPTIONAL_UUID);
     private static final EntityDataAccessor<Optional<UUID>> DATA_HEAD_TARGET_1 =
@@ -130,6 +133,7 @@ public final class BedrockWitherEntity extends Monster {
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(DATA_STATE, BedrockWitherState.SPAWN_SEQUENCE.id());
+        this.entityData.define(DATA_AERIAL_ATTACK, true);
         this.entityData.define(DATA_HEAD_TARGET_0, Optional.empty());
         this.entityData.define(DATA_HEAD_TARGET_1, Optional.empty());
         this.entityData.define(DATA_HEAD_TARGET_2, Optional.empty());
@@ -266,6 +270,21 @@ public final class BedrockWitherEntity extends Monster {
     public boolean canFreeze() {
         // Bedrock wither.json: minecraft:freezing_immune.
         return false;
+    }
+
+    public boolean isAerialAttack() {
+        return this.entityData.get(DATA_AERIAL_ATTACK);
+    }
+
+    public void setAerialAttack(boolean value) {
+        this.entityData.set(DATA_AERIAL_ATTACK, value);
+    }
+
+    @Override
+    public boolean isPowered() {
+        // Current Bedrock NBT/visual contract: AirAttack=1 -> first phase,
+        // powered shield hidden; AirAttack=0 -> second phase, shield visible.
+        return !isAerialAttack();
     }
 
     public BedrockWitherState getBedrockState() {
@@ -446,6 +465,7 @@ public final class BedrockWitherEntity extends Monster {
         tag.putLong("StateEnteredGameTime", stateMachine.enteredAtGameTime());
         tag.putBoolean("DifficultyHealthInitialized", difficultyHealthInitialized);
         tag.putInt("NativePhase", runtimeState.nativePhase());
+        tag.putBoolean("AirAttack", isAerialAttack());
         tag.putInt("HealthThreshold", runtimeState.healthThreshold());
         tag.putBoolean("WantsToExplode", runtimeState.wantsToExplode());
         tag.putInt("NumSkeletons", runtimeState.numSkeletons());
@@ -473,6 +493,15 @@ public final class BedrockWitherEntity extends Monster {
         }
         stateMachine.restore(restoredState, tag.getLong("StateEnteredGameTime"));
         difficultyHealthInitialized = tag.getBoolean("DifficultyHealthInitialized");
+
+        if (tag.contains("AirAttack")) {
+            setAerialAttack(tag.getBoolean("AirAttack"));
+        } else {
+            setAerialAttack(restoredState != BedrockWitherState.PHASE2_DASH_PREP
+                    && restoredState != BedrockWitherState.PHASE2_DASH
+                    && restoredState != BedrockWitherState.PHASE2_RECOVER
+                    && restoredState != BedrockWitherState.DEATH_SEQUENCE);
+        }
 
         if (tag.contains("NativePhase")) {
             runtimeState.setNativePhase(tag.getInt("NativePhase"));
