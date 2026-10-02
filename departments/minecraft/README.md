@@ -99,6 +99,12 @@ Sinytra Connector は 1.20.1 Forge 系と現行 NeoForge 系の両方を保持�
 
 対象横断の一覧は catalog/MODS.md。詳細手順は ANALYSIS-SPEC-v1.md。
 
+## Minecraft 1.20.1 Vanilla Foundation Map
+
+[Vanilla Foundation Map](vanilla-foundation/README.md)は、既存Source Intelligenceの exact ANCHOR `IndexSnapshot` から `net/minecraft/**` のクラス・package・subsystem・継承/implements・JVM class-reference候補・由来を content-addressed な小型地図へ変換する。巨大なMinecraft source/JARをGitへ複製せず、実装AIが外部検索より先に1.20.1内部を発見できる入口として使う。
+
+Vanilla AIの意味解析は [vanilla-ai](vanilla-ai/README.md)、実機での意思決定可視化は LAB の Entity Decision Observatory が担当し、Foundation Map自体は静的な発見・由来層に留める。
+
 ## MOD制作AI環境の確定設計
 
 [2026-09-28 確定設計](design/2026-09-28-mod-ai-environment/DESIGN.md)は、Source Intelligence、全classpath、source/bytecode、Connector研究、実装例・失敗例、GameTestと実機観測を既存部門へ接続する設計。4巡の敵対的設計監査、採否記録、受け入れ仕様、参考原典を同じディレクトリに保持する。

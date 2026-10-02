@@ -218,9 +218,10 @@ def test_static_capabilities_preserves_prior_payload_and_labels_scope(tmp_path):
                                     Store(tmp_path / 'absent'), read_json, parse_json)
     assert result == {
         'status': 'OK', 'adapter_version': runtime.ADAPTER_VERSION,
-        'operations': ['profile', 'search', 'inspect', 'mapping', 'interventions', 'relations',
-                       'context', 'knowledge', 'artifact', 'validate', 'world', 'client-directory',
-                       'contract', 'session', 'observe', 'observe-pair', 'input', 'experiment'],
+        'operations': ['profile', 'search', 'inspect', 'foundation-map', 'mapping',
+                       'interventions', 'relations', 'context', 'knowledge', 'artifact', 'validate',
+                       'world', 'client-directory', 'contract', 'session', 'observe', 'observe-pair',
+                       'input', 'experiment'],
         'execution_policy': 'EXPLICIT_REGISTERED_PROVIDERS_ONLY', 'ci_used': False,
         'runtime_status': 'NOT_PROBED', 'core_status': 'OPTIONAL_EXISTING_CORE',
         'note': 'Command availability is not evidence of installed tools or successful Forge integration',

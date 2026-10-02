@@ -4,6 +4,10 @@ Status: **RESEARCH IN PROGRESS — not yet a complete vanilla-AI inventory**
 
 This directory is a KNEEKURA TECH HUB technical-asset area for understanding Minecraft Java Edition mob decision-making, navigation, movement control and built-in AI debugging.
 
+## Static discovery baseline
+
+Before widening an external search, use the implemented [Minecraft 1.20.1 Vanilla Foundation Map](../vanilla-foundation/README.md) when an exact local ANCHOR map is available. It is the static discovery/provenance layer; this directory remains the place for verified AI semantics and engineering conclusions.
+
 ## Approved downstream architecture
 
 The long-term Water Tank Studio consumer of this research is the approved **Entity Decision Observatory** design:
