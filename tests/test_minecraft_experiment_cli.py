@@ -65,11 +65,12 @@ def test_cli_private_bad_input_path_and_content_are_redacted(tmp_path, capsys):
     assert code == 2 and 'secret-password' not in json.dumps(result)
 
 
-def test_task_context_does_not_advertise_unimplemented_lab_execution(tmp_path):
+def test_task_context_advertises_vendored_lab_without_execution_authority(tmp_path):
     store = Store(tmp_path / 'cas')
     value = task_context.prepare_task_context(store, task_request())
     c = next((c for c in value['capabilities'] if c['id'] == 'experimental_runtime'), None)
-    assert c == {'id': 'experimental_runtime', 'surface': 'IMPLEMENTED', 'readiness': 'NOT_CONFIGURED',
-                 'reason_code': 'LAB_ADAPTER_NOT_REGISTERED',
-                 'missing': ['experiment_registry_or_retained_result'], 'evidence': []}
-    assert not any(a['operation_id'].startswith('experiment.execute') for a in value['next_actions'])
+    assert c == {'id': 'experimental_runtime', 'surface': 'IMPLEMENTED', 'readiness': 'BLOCKED',
+                 'reason_code': 'LAB_RUNTIME_ATTESTATION_REQUIRED',
+                 'missing': ['experiment_registry', 'loaded_runtime_attestation',
+                             'disposable_world_authority', 'live_repair_acceptance'], 'evidence': []}
+    assert not any(a['operation_id'].startswith('experiment.') for a in value['next_actions'])
