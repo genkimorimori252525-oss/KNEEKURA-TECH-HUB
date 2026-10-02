@@ -5,6 +5,14 @@ Status: **CURRENT ENTRY POINT — supersedes older files that call themselves "c
 Canonical development line: **`main`**  
 Confirmed implementation merge: **`8e73ddc23b133e5a075cf58e3c7b850274f21017`**
 
+## Local execution handoff
+
+For the complete remaining-work sequence from the 2026-10-02 Water Tank / Vanilla AI session, use:
+
+- [LOCAL-EXECUTION-HANDOFF-2026-10-02.md](LOCAL-EXECUTION-HANDOFF-2026-10-02.md)
+
+It includes the real local Vanilla Foundation Map generation, unfinished Vanilla AI research, the **still-unimplemented On-Demand Sampled Motion Trace plan**, Entity Decision Observatory implementation, MOD adapter proofs, and final integrated verification.
+
 ## Read this first
 
 This file is the current entry point for a fresh human or AI working on the Minecraft lane.
