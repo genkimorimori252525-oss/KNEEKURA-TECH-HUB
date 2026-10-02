@@ -769,6 +769,45 @@ public final class BedrockWitherGameTests {
         helper.succeed();
     }
 
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_specialmovementgatematchesbedrockstateboundary")
+    public static void specialMovementGateMatchesBedrockStateBoundary(GameTestHelper helper) {
+        BedrockWitherEntity wither = createCombatReadyWither(helper);
+        net.minecraft.world.entity.animal.Cow target = EntityType.COW.create(helper.getLevel());
+        if (target == null) {
+            helper.fail("Failed to create special-movement target");
+            return;
+        }
+
+        BlockPos targetPos = helper.absolutePos(new BlockPos(4, 1, 0));
+        target.moveTo(targetPos.getX() + 0.5D, targetPos.getY(), targetPos.getZ() + 0.5D);
+        target.setInvulnerable(true);
+        helper.getLevel().addFreshEntity(target);
+        wither.setTarget(target);
+
+        wither.runtimeState().setWantsMove(false);
+        wither.runtimeState().setPathing(false);
+
+        if (wither.specialMovementController().canBegin()) {
+            helper.fail("Special movement began without wantsMove");
+            return;
+        }
+
+        wither.specialMovementController().requestMove();
+        if (!wither.runtimeState().wantsMove()
+                || !wither.specialMovementController().canBegin()) {
+            helper.fail("Phase-1 target + wantsMove did not satisfy special-movement gate");
+            return;
+        }
+
+        wither.setAerialAttack(false);
+        if (wither.specialMovementController().canBegin()) {
+            helper.fail("Powered/second-phase Wither should not begin phase-1 special movement");
+            return;
+        }
+
+        helper.succeed();
+    }
+
     private static BedrockWitherEntity createCombatReadyWither(GameTestHelper helper) {
         BedrockWitherEntity wither = createWither(helper);
         wither.runtimeState().setSpawningFrames(0);
