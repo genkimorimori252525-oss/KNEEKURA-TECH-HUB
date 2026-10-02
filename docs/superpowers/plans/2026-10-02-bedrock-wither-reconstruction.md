@@ -14,7 +14,7 @@
 
 ## Phase 1 — Standalone Forge boss skeleton
 
-Create a dedicated MOD workspace/repository before production implementation; do not bury the distributable MOD inside TECH HUB's Python package.
+Use the canonical product workspace at `deliverables/minecraft/bedrock-wither/mod/`. The root `deliverables/` boundary keeps product code separate from TECH HUB research/Python infrastructure; do not place distributable MOD code under `departments/` or `src/kneekura_tech_hub/`.
 
 Initial classes:
 
