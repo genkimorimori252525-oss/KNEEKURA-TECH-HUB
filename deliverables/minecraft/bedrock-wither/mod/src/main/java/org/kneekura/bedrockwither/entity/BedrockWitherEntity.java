@@ -18,6 +18,7 @@ import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 public final class BedrockWitherEntity extends Monster {
     private static final EntityDataAccessor<Integer> DATA_STATE =
@@ -30,10 +31,14 @@ public final class BedrockWitherEntity extends Monster {
                     BossEvent.BossBarOverlay.PROGRESS
             );
 
+    private final BedrockWitherStateMachine stateMachine;
+    private final BedrockWitherThreatLedger threatLedger = new BedrockWitherThreatLedger();
+
     private boolean difficultyHealthInitialized;
 
     public BedrockWitherEntity(EntityType<? extends Monster> type, Level level) {
         super(type, level);
+        this.stateMachine = new BedrockWitherStateMachine(this);
         this.moveControl = new FlyingMoveControl(this, 10, true);
         this.setNoGravity(true);
         this.xpReward = 50;
@@ -80,6 +85,7 @@ public final class BedrockWitherEntity extends Monster {
             difficultyHealthInitialized = true;
         }
 
+        this.stateMachine.tick();
         this.bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
     }
 
@@ -106,6 +112,33 @@ public final class BedrockWitherEntity extends Monster {
         this.entityData.set(DATA_STATE, state.id());
     }
 
+    public BedrockWitherStateMachine stateMachine() {
+        return stateMachine;
+    }
+
+    public BedrockWitherThreatLedger threatLedger() {
+        return threatLedger;
+    }
+
+    public BedrockWitherDebugSnapshot debugSnapshot() {
+        Vec3 velocity = this.getDeltaMovement();
+        return new BedrockWitherDebugSnapshot(
+                this.getId(),
+                getBedrockState(),
+                stateMachine.ticksInState(),
+                this.getHealth(),
+                this.getMaxHealth(),
+                this.level().getDifficulty().name(),
+                this.getX(),
+                this.getY(),
+                this.getZ(),
+                velocity.x,
+                velocity.y,
+                velocity.z,
+                threatLedger.size()
+        );
+    }
+
     @Override
     public void startSeenByPlayer(ServerPlayer player) {
         super.startSeenByPlayer(player);
@@ -122,13 +155,15 @@ public final class BedrockWitherEntity extends Monster {
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
         tag.putInt("BedrockState", getBedrockState().id());
+        tag.putLong("StateEnteredGameTime", stateMachine.enteredAtGameTime());
         tag.putBoolean("DifficultyHealthInitialized", difficultyHealthInitialized);
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
-        setBedrockState(BedrockWitherState.fromId(tag.getInt("BedrockState")));
+        BedrockWitherState restoredState = BedrockWitherState.fromId(tag.getInt("BedrockState"));
+        stateMachine.restore(restoredState, tag.getLong("StateEnteredGameTime"));
         difficultyHealthInitialized = tag.getBoolean("DifficultyHealthInitialized");
     }
 
