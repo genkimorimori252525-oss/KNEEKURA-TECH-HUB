@@ -424,6 +424,130 @@ public final class BedrockWitherGameTests {
         helper.succeed();
     }
 
+    @GameTest(template = "empty", timeoutTicks = 80)
+    public static void centerVolleyUsesFireRateThenSevenSecondCooldown(GameTestHelper helper) {
+        BedrockWitherEntity wither = createWither(helper);
+        net.minecraft.world.entity.animal.Cow target = EntityType.COW.create(helper.getLevel());
+        if (target == null) {
+            helper.fail("Failed to create volley target");
+            return;
+        }
+
+        BlockPos targetPos = helper.absolutePos(new BlockPos(4, 1, 0));
+        target.moveTo(targetPos.getX() + 0.5D, targetPos.getY(), targetPos.getZ() + 0.5D);
+        helper.getLevel().addFreshEntity(target);
+
+        helper.runAfterDelay(2, () -> {
+            wither.setTarget(target);
+
+            if (wither.runtimeState().fireRate()
+                    != org.kneekura.bedrockwither.entity.BedrockWitherVolleyController.PROVISIONAL_NATIVE_BASE_FIRE_RATE_TICKS) {
+                helper.fail("Volley controller did not initialize provisional native fireRate=20");
+                return;
+            }
+
+            // REPOSITION -> BURST without consuming a firing tick.
+            wither.volleyController().tick();
+            if (wither.getBedrockState() != BedrockWitherState.PHASE1_BURST) {
+                helper.fail("Target acquisition did not enter PHASE1_BURST");
+                return;
+            }
+
+            for (int shot = 0; shot < 4; shot++) {
+                int cadence = wither.runtimeState().fireRate();
+                for (int tick = 0; tick < cadence; tick++) {
+                    wither.volleyController().tick();
+                }
+            }
+
+            if (wither.runtimeState().projectileCounter() != 4) {
+                helper.fail("Expected projectileCounter=4 after one Bedrock center volley");
+                return;
+            }
+            if (wither.getBedrockState() != BedrockWitherState.PHASE1_COOLDOWN) {
+                helper.fail("Fourth/dangerous projectile did not enter PHASE1_COOLDOWN");
+                return;
+            }
+            if (wither.runtimeState().mainHeadAttackCountdown()
+                    != org.kneekura.bedrockwither.entity.BedrockWitherVolleyController.OBSERVED_INTER_VOLLEY_COOLDOWN_TICKS) {
+                helper.fail("Inter-volley cooldown was not armed to 140 ticks");
+                return;
+            }
+
+            java.util.List<BedrockWitherSkullEntity> skulls = helper.getLevel().getEntitiesOfClass(
+                    BedrockWitherSkullEntity.class,
+                    wither.getBoundingBox().inflate(12.0D)
+            );
+            long dangerous = skulls.stream().filter(BedrockWitherSkullEntity::isDangerous).count();
+            long normal = skulls.size() - dangerous;
+            if (normal != 3L || dangerous != 1L) {
+                helper.fail("Expected 3 normal + 1 dangerous center skull, found "
+                        + normal + " normal / " + dangerous + " dangerous");
+                return;
+            }
+
+            for (int tick = 0;
+                 tick < org.kneekura.bedrockwither.entity.BedrockWitherVolleyController.OBSERVED_INTER_VOLLEY_COOLDOWN_TICKS - 1;
+                 tick++) {
+                wither.volleyController().tick();
+            }
+            if (wither.getBedrockState() != BedrockWitherState.PHASE1_COOLDOWN
+                    || wither.runtimeState().mainHeadAttackCountdown() != 1) {
+                helper.fail("Volley cooldown ended before 140 controller ticks");
+                return;
+            }
+
+            wither.volleyController().tick();
+            if (wither.getBedrockState() != BedrockWitherState.PHASE1_BURST
+                    || wither.runtimeState().mainHeadAttackCountdown() != wither.runtimeState().fireRate()) {
+                helper.fail("Volley cooldown did not re-arm the next burst after 140 ticks");
+                return;
+            }
+
+            helper.succeed();
+        });
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 60)
+    public static void damageIntervalHalvesHistoricalNativeFireRate(GameTestHelper helper) {
+        BedrockWitherEntity wither = createWither(helper);
+
+        helper.runAfterDelay(2, () -> {
+            int initialRate = wither.runtimeState().fireRate();
+            int interval = wither.runtimeState().healthIntervals();
+            int lastHealth = wither.runtimeState().lastHealthValue();
+
+            if (initialRate != 20 || interval <= 0 || lastHealth <= 0) {
+                helper.fail("Volley health-interval state did not initialize");
+                return;
+            }
+
+            wither.setHealth(Math.max(1.0F, lastHealth - interval - 1.0F));
+            wither.volleyController().onAcceptedDamage();
+
+            switch (helper.getLevel().getDifficulty()) {
+                case PEACEFUL, EASY -> {
+                    if (wither.runtimeState().fireRate() != initialRate) {
+                        helper.fail("Easy/Peaceful should not apply the historical fire-rate speedup");
+                        return;
+                    }
+                }
+                case NORMAL, HARD -> {
+                    if (wither.runtimeState().fireRate() != 10) {
+                        helper.fail("Crossing one historical health interval should halve fireRate 20 -> 10");
+                        return;
+                    }
+                    if (wither.runtimeState().lastHealthValue() != lastHealth - interval) {
+                        helper.fail("Health interval cursor did not advance by exactly one interval");
+                        return;
+                    }
+                }
+            }
+
+            helper.succeed();
+        });
+    }
+
     private static BedrockWitherEntity createWither(GameTestHelper helper) {
         BedrockWitherEntity wither = ModEntities.BEDROCK_WITHER.get().create(helper.getLevel());
         if (wither == null) {
