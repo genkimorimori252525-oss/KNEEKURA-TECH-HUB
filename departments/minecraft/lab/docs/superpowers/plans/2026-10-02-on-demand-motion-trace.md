@@ -182,6 +182,70 @@ For flying mobs, the plan trace alone is insufficient. The vertical view is requ
 
 A later 3D tube/ribbon renderer is deferred unless real debugging cases show plan + elevation are insufficient.
 
+### 5.5 Optional 3D Spatial Trace View
+
+Add an **optional, on-demand 3D spatial debug view** as a higher drill-down level, not as the primary representation.
+
+Its purpose is to help human and AI reviewers understand cases where plan + elevation still leave spatial relationships ambiguous, especially:
+
+- free-flight movement;
+- helical/orbiting paths;
+- repeated vertical loops;
+- Mob + projectile interaction in the same volume;
+- obstacle avoidance around genuinely 3D geometry;
+- overlapping traces whose separation is difficult to infer from orthographic views alone.
+
+The 3D view is **derived presentation**, not runtime truth.
+
+Preferred presentation:
+
+- fixed isometric / oblique camera first;
+- optional orbit camera for human inspection;
+- world-space axes or floor/grid reference;
+- minimal scene context only: selected subjects, relevant obstacles, target, trace lines and event markers;
+- measured samples shown explicitly;
+- segment semantics preserved as sampled endpoint connections;
+- raw Minecraft textures/HUD omitted when they reduce readability.
+
+The AI-facing 3D artifact should favor **stable camera geometry over cinematic realism**. A fixed deterministic isometric view is preferable to a freely chosen perspective because the same trace should render comparably across runs.
+
+The initial 3D artifact MAY be an image generated from the same structured `SampledMotionTrace` contract. It does not need to be a GLTF/OBJ/interactive model.
+
+Recommended drill-down order:
+
+```text
+Level 0: structured trace metrics / availability
+Level 1: PLAN_XZ + ELEVATION
+Level 2: fixed-isometric 3D spatial trace
+Level 3: live Minecraft client overlay / human free inspection
+```
+
+Level 2 is generated only when explicitly requested or when a visual diagnostic declares the 2D orthographic views insufficient.
+
+### 5.6 Live Minecraft client overlay
+
+The real Minecraft client may expose an **opt-in local debug overlay** that places the selected trace in world coordinates so it appears suspended in the scene.
+
+Rules:
+
+- OFF by default;
+- client-side presentation only where practical;
+- must not spawn particles, entities, blocks or other gameplay objects merely to draw the path;
+- must not contaminate raw visual evidence;
+- must not alter authoritative state, AI, physics or collision;
+- must use the same trace identity and sampled-point semantics as other views;
+- must stop drawing immediately when the trace view is closed or subject/window changes.
+
+Preferred visual grammar in-world:
+
+- `MOB_ACTUAL`: thicker long-dash path with larger circular sample nodes;
+- `PROJECTILE_ACTUAL`: thinner short-dash path with small diamond nodes;
+- `NAVIGATION_DECLARED`: fine dotted guide;
+- discontinuities: explicit break + marker rather than a connecting segment.
+
+This overlay is primarily a **human spatial-inspection surface** and final drill-down aid. AI diagnosis should normally consume the structured/orthographic/fixed-3D derived artifacts first because they are more compact and camera-stable.
+
+
 ## 6. AI-facing interface
 
 AI use is first-class, but the AI should not receive a giant trajectory dump by default.
@@ -201,6 +265,8 @@ motion_trace_available:
 
 The AI explicitly requests a trace only when movement is relevant to diagnosis.
 
+The preferred AI progression is structured metrics first, then orthographic plan/elevation, then a fixed-isometric 3D artifact only when the 2D views are insufficient. Live Minecraft overlay is the final spatial drill-down rather than the default AI input.
+
 ### 6.2 Trace request
 
 Conceptual request:
@@ -210,7 +276,7 @@ Conceptual request:
   "subject": "exact-uuid-or-trace-id",
   "classes": ["MOB_ACTUAL"],
   "window": {"endTick": 12345, "durationTicks": 120},
-  "views": ["PLAN_XZ", "ELEVATION"],
+  "views": ["PLAN_XZ", "ELEVATION", "ISOMETRIC_3D"],
   "includeMetrics": true
 }
 ```
@@ -240,6 +306,7 @@ Then provide SVG/other bounded visual artifacts:
 
 - plan trace;
 - elevation trace;
+- optional fixed-isometric 3D spatial trace;
 - optional overlay attached to an existing diagnostic view.
 
 This lets the AI reason numerically first and inspect geometry only when helpful.
@@ -384,6 +451,7 @@ Dense paths should support focus mode: selecting one trace dims other derived tr
 - [ ] Keep trace OFF by default.
 - [ ] Add distinct Mob/Projectile/Navigation visual grammar.
 - [ ] Support plan + elevation and current playback/scrub controls.
+- [ ] Add an opt-in live Minecraft client overlay using the same trace contract; do not implement it with gameplay particles/entities.
 - [ ] Ensure turning traces off produces no trace draw work.
 
 ### Task 4 — Projectile linkage
@@ -398,7 +466,8 @@ Dense paths should support focus mode: selecting one trace dims other derived tr
 - [ ] Add `motion_trace_available` capability summary.
 - [ ] Add bounded explicit trace request.
 - [ ] Generate structured trace + plan/elevation derived artifacts lazily.
-- [ ] Bind artifact to exact run/Arena/entity/time/source evidence.
+- [ ] Add fixed-isometric 3D derived artifact as an optional Level-2 drill-down.
+- [ ] Bind every 2D/3D artifact to exact run/Arena/entity/time/source evidence.
 - [ ] Keep raw Cardinal-4 frames unmodified.
 - [ ] Add drill-down references from visual checks/findings to the requested trace.
 
@@ -429,12 +498,14 @@ The feature is complete only when all of these are true:
 5. Underlying bounded observations remain available while visualization is off.
 6. Every displayed measured point maps back to retained source identity.
 7. Missing evidence creates a visible break; no silent gap interpolation.
-8. Plan + elevation make a flying-Mob trace understandable without requiring a new 3D renderer.
-9. AI can request one exact subject/window and receive compact structured metrics plus derived visual artifacts.
-10. Raw Minecraft screenshots are unchanged by trajectory overlays.
-11. Navigation/intent is shown only from explicit navigation evidence and is labelled separately.
-12. Existing projectile trail behavior/regressions remain green.
-13. No second evidence database, world scan or always-on trajectory renderer is introduced.
+8. Plan + elevation remain the default spatial explanation for a flying-Mob trace.
+9. When plan + elevation are insufficient, the same trace can produce a deterministic fixed-isometric 3D drill-down without changing its evidence semantics.
+10. AI can request one exact subject/window and receive compact structured metrics plus derived 2D/optional 3D visual artifacts.
+11. The live Minecraft trace overlay is opt-in, presentation-only and does not use gameplay particles/entities to fake the path.
+12. Raw Minecraft screenshots are unchanged by trajectory overlays unless a separately identified presented/debug frame is explicitly requested.
+13. Navigation/intent is shown only from explicit navigation evidence and is labelled separately.
+14. Existing projectile trail behavior/regressions remain green.
+15. No second evidence database, world scan or always-on trajectory renderer is introduced.
 
 ## 15. First real validation scenarios
 
@@ -463,7 +534,7 @@ Use a typed teleport receipt and show a discontinuity marker instead of a normal
 Do not decide these until evidence shows need:
 
 - one-tick always-on motion sampling for every registered subject;
-- full 3D trajectory ribbons/tubes;
+- rich 3D trajectory ribbons/tubes beyond the minimal fixed-isometric spatial view;
 - curvature/orbit classifiers;
 - automatic anomaly classification from path shape;
 - long-term cross-run trajectory warehouse;
@@ -485,6 +556,8 @@ human/AI asks about one exact subject/window
 SampledMotionTrace is derived read-only
         ↓
 structured facts + plan/elevation visualization
+        ↓
+optional fixed-isometric 3D / live client overlay if needed
         ↓
 close the view; raw evidence remains
 ```
