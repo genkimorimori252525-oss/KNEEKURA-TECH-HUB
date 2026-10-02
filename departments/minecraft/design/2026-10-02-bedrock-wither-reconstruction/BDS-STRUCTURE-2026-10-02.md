@@ -277,3 +277,54 @@ Unknown:
 - XP spawn tick.
 
 These remain direct-runtime or binary-body analysis targets.
+
+
+## Current NBT semantics refine the structural map
+
+A current detailed Bedrock entity-format reference gives behavioral meaning to several persisted Wither fields that the generated BDS header exposes only structurally.
+
+### AirAttack versus Phase
+
+Current field interpretation:
+- `AirAttack=1`: first/aerial combat behavior; powered shield visual is hidden.
+- `AirAttack=0`: second-phase behavior; powered shield visual is visible.
+- `Phase`: 1 during spawning/first phase and 0 during second/death, but the persisted value itself is documented as not directly controlling behavior or shield visibility.
+
+Design consequence:
+- KNEEKURA retains `mPhase`/nativePhase as structural state;
+- a separate synced `AirAttack`-equivalent boolean is the product authority for powered-shield visibility and the first/second combat presentation boundary;
+- renderer code must not infer shield visibility solely from nativePhase.
+
+### firerate
+
+Current field interpretation:
+`firerate` is the delay in ticks between Wither skull shots and explicitly does not represent the inter-volley delay.
+
+This reinforces the product split between:
+- `mFireRate`-shaped per-shot cadence;
+- the separately observed ~7-second inter-volley cooldown.
+
+Exact current ticks-per-shot at each health acceleration stage remain unresolved.
+
+### lastHealthInterval
+
+Current field interpretation:
+`lastHealthInterval` is the greatest multiple of **75** strictly below the lowest health the Wither has reached, and does not increase if the Wither heals.
+
+This conflicts with treating the historical native `maxHealth/3` interval as a current runtime rule.
+
+KNEEKURA correction:
+- persist/observe the current 75-point lowest-health bucket;
+- do not automatically halve fireRate using the old `maxHealth/3` equation;
+- retain current-observed firing acceleration points (500/400, reset at half, 200/100) as behavior evidence;
+- leave exact accelerated tick values measurement-gated.
+
+### Invul / spawn / death
+
+Current field interpretation:
+- `Invul` mirrors `SpawningFrames` during spawn and `dyingFrames` during death.
+- `SpawningFrames`: remaining spawn-animation ticks before vulnerability.
+- `dyingFrames`: remaining ticks before the death explosion.
+- `swellAmount`, `oldSwellAmount`, `overlayAlpha`: death-visual state.
+
+This supports separate spawn/death controllers plus separate visual state rather than one generic invulnerability timer.
