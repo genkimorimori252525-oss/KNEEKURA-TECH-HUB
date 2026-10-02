@@ -307,6 +307,8 @@ public final class BedrockWitherGameTests {
                 return;
             }
 
+            // Current behavior returns to the original firing rate at half health.
+            wither.runtimeState().setFireRate(5);
             wither.setHealth(threshold);
 
             helper.runAfterDelay(2, () -> {
@@ -317,6 +319,11 @@ public final class BedrockWitherGameTests {
                 }
                 if (wither.isAerialAttack() || !wither.isPowered()) {
                     helper.fail("Phase 2 should have AirAttack=0 and powered shield visible");
+                    return;
+                }
+                if (wither.runtimeState().fireRate()
+                        != org.kneekura.bedrockwither.entity.BedrockWitherVolleyController.PROVISIONAL_NATIVE_BASE_FIRE_RATE_TICKS) {
+                    helper.fail("Half-health transition did not reset firing to the original rate");
                     return;
                 }
                 if (wither.getBedrockState() != BedrockWitherState.PHASE2_DASH_PREP) {
@@ -636,39 +643,45 @@ public final class BedrockWitherGameTests {
     }
 
     @GameTest(template = "empty", timeoutTicks = 60)
-    public static void damageIntervalHalvesHistoricalNativeFireRate(GameTestHelper helper) {
+    public static void lastHealthIntervalTracksLowestHealthIn75PointBuckets(GameTestHelper helper) {
         BedrockWitherEntity wither = createCombatReadyWither(helper);
 
         helper.runAfterDelay(2, () -> {
-            int initialRate = wither.runtimeState().fireRate();
-            int interval = wither.runtimeState().healthIntervals();
-            int lastHealth = wither.runtimeState().lastHealthValue();
-
-            if (initialRate != 20 || interval <= 0 || lastHealth <= 0) {
-                helper.fail("Volley health-interval state did not initialize");
+            int baseRate = wither.runtimeState().fireRate();
+            if (baseRate != org.kneekura.bedrockwither.entity.BedrockWitherVolleyController.PROVISIONAL_NATIVE_BASE_FIRE_RATE_TICKS) {
+                helper.fail("Volley controller did not initialize the base fire rate");
                 return;
             }
 
-            wither.setHealth(Math.max(1.0F, lastHealth - interval - 1.0F));
+            wither.setHealth(499.0F);
             wither.volleyController().onAcceptedDamage();
 
-            switch (helper.getLevel().getDifficulty()) {
-                case PEACEFUL, EASY -> {
-                    if (wither.runtimeState().fireRate() != initialRate) {
-                        helper.fail("Easy/Peaceful should not apply the historical fire-rate speedup");
-                        return;
-                    }
-                }
-                case NORMAL, HARD -> {
-                    if (wither.runtimeState().fireRate() != 10) {
-                        helper.fail("Crossing one historical health interval should halve fireRate 20 -> 10");
-                        return;
-                    }
-                    if (wither.runtimeState().lastHealthValue() != lastHealth - interval) {
-                        helper.fail("Health interval cursor did not advance by exactly one interval");
-                        return;
-                    }
-                }
+            int expected499 = org.kneekura.bedrockwither.entity.BedrockWitherVolleyController
+                    .lastHealthIntervalFor(499);
+            if (wither.runtimeState().lastHealthValue() != expected499) {
+                helper.fail("lastHealthInterval did not track the strict-lower 75-point bucket");
+                return;
+            }
+            if (wither.runtimeState().fireRate() != baseRate) {
+                helper.fail("Unmeasured accelerated fire-rate values must not be invented");
+                return;
+            }
+
+            // Healing must not increase the stored lowest-health interval.
+            wither.setHealth(wither.getMaxHealth());
+            wither.volleyController().onAcceptedDamage();
+            if (wither.runtimeState().lastHealthValue() != expected499) {
+                helper.fail("Healing incorrectly increased Bedrock lastHealthInterval");
+                return;
+            }
+
+            wither.setHealth(401.0F);
+            wither.volleyController().onAcceptedDamage();
+            int expected401 = org.kneekura.bedrockwither.entity.BedrockWitherVolleyController
+                    .lastHealthIntervalFor(401);
+            if (wither.runtimeState().lastHealthValue() != expected401) {
+                helper.fail("Further damage did not lower lastHealthInterval monotonically");
+                return;
             }
 
             helper.succeed();
