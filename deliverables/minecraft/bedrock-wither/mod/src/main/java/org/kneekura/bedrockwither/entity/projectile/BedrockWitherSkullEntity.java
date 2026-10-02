@@ -15,6 +15,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import org.kneekura.bedrockwither.registry.ModEntities;
 
@@ -132,6 +133,26 @@ public final class BedrockWitherSkullEntity extends WitherSkull {
         // Current Bedrock dangerous skull explosion has max_resistance=4.0.
         // Normal skull has no such cap.
         return isDangerous() ? Math.min(4.0F, resistance) : resistance;
+    }
+
+    @Override
+    protected void onHit(HitResult hitResult) {
+        // Own the Bedrock explosion contract explicitly instead of inheriting
+        // Java WitherSkull's hit lifecycle. Mojang Bedrock JSON:
+        // fuse_length=0, power=1, causes_fire=false,
+        // destroy_affected_by_griefing=true.
+        if (!this.level().isClientSide) {
+            this.level().explode(
+                    this,
+                    this.getX(),
+                    this.getY(),
+                    this.getZ(),
+                    1.0F,
+                    false,
+                    Level.ExplosionInteraction.MOB
+            );
+            this.discard();
+        }
     }
 
     @Override
