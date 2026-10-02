@@ -72,7 +72,7 @@ def test_foundation_map_builds_from_exact_anchor_without_javap(foundation):
     assert result["status"] == "OK"
     assert result["class_count"] == len(ANCHORS) + 1
     assert not result["coverage"]["missing_anchors"]
-    assert result["coverage"]["skipped_non_minecraft_classes"] == 1
+    assert result["coverage"]["excluded_non_minecraft_class_documents"] == 1
     assert result["foundation_map_id"] in store.pinned_hashes()
 
 
