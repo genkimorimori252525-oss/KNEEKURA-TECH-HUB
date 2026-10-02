@@ -700,6 +700,75 @@ public final class BedrockWitherGameTests {
         });
     }
 
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_deathsequencekeepssemanticdeathandextendsremoval")
+    public static void deathSequenceKeepsSemanticDeathAndExtendsRemoval(GameTestHelper helper) {
+        BedrockWitherEntity wither = createCombatReadyWither(helper);
+
+        boolean accepted = wither.hurt(
+                helper.getLevel().damageSources().genericKill(),
+                Float.MAX_VALUE
+        );
+
+        if (!accepted || !wither.isDeadOrDying()) {
+            helper.fail("Killing hit did not enter Java semantic death immediately");
+            return;
+        }
+        if (wither.isRemoved()) {
+            helper.fail("Bedrock death sequence removed the boss immediately");
+            return;
+        }
+        if (wither.getBedrockState() != BedrockWitherState.DEATH_SEQUENCE) {
+            helper.fail("Killing hit did not enter DEATH_SEQUENCE");
+            return;
+        }
+        if (wither.getDeathTicksRemaining()
+                != org.kneekura.bedrockwither.entity.BedrockWitherDeathController.PROVISIONAL_DEATH_DURATION_TICKS) {
+            helper.fail("Bedrock death countdown did not initialize to 200 ticks");
+            return;
+        }
+
+        for (int tick = 0;
+             tick < org.kneekura.bedrockwither.entity.BedrockWitherDeathController.PROVISIONAL_DEATH_DURATION_TICKS - 1;
+             tick++) {
+            wither.deathController().tickServer();
+        }
+
+        if (wither.isRemoved()) {
+            helper.fail("Bedrock Wither was removed before the final death tick");
+            return;
+        }
+        if (wither.getDeathTicksRemaining() != 1) {
+            helper.fail("Death countdown expected one tick remaining");
+            return;
+        }
+
+        assertClose(
+                helper,
+                199.0F,
+                wither.getDeathSwell(),
+                "Historical-corroborated death swell progression"
+        );
+        assertClose(
+                helper,
+                0.995F,
+                wither.getDeathOverlayAlpha(),
+                "Historical-corroborated death overlay progression"
+        );
+
+        wither.deathController().tickServer();
+
+        if (!wither.isRemoved()) {
+            helper.fail("Bedrock Wither did not remove on the final death tick");
+            return;
+        }
+        if (wither.getDeathTicksRemaining() != 0) {
+            helper.fail("Death countdown did not end at zero");
+            return;
+        }
+
+        helper.succeed();
+    }
+
     private static BedrockWitherEntity createCombatReadyWither(GameTestHelper helper) {
         BedrockWitherEntity wither = createWither(helper);
         wither.runtimeState().setSpawningFrames(0);
