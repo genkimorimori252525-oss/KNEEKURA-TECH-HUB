@@ -120,25 +120,31 @@ public final class BedrockWitherModel extends HierarchicalModel<BedrockWitherEnt
 
         // Bedrock upperBodyPart2:
         // (0.065 + 0.05 * body_base_rotation) * 180 + target_x_rotation.
-        ribcage.xRot = (0.065F + 0.05F * bodyBase) * Mth.PI + headPitch * Mth.DEG_TO_RAD;
+        ribcage.xRot = (0.065F + 0.05F * bodyBase) * Mth.PI + headPitch * ((float) Math.PI / 180.0F);
 
-        // Bedrock upperBodyPart3 local rotation:
-        // (0.2 + 0.1 * body_base_rotation) * 180.
-        tail.xRot = (0.2F + 0.1F * bodyBase) * Mth.PI;
+        // upperBodyPart3 is parented to upperBodyPart2 in the Bedrock geometry.
+        // This Java ModelPart is flattened to the root, so preserve the parent
+        // transform explicitly in both its pivot position and global X rotation.
+        tail.setPos(
+                -2.0F,
+                6.9F + Mth.cos(ribcage.xRot) * 10.0F,
+                -0.5F + Mth.sin(ribcage.xRot) * 10.0F
+        );
+        tail.xRot = ribcage.xRot + (0.2F + 0.1F * bodyBase) * Mth.PI;
 
         // The public Bedrock animation drives head X by per-head query and head Y by
         // target rotation. Until all native head-rotation state is synchronized,
         // center head uses the entity render target while side heads consume the
         // BDS-shaped runtime slots when available.
-        centerHead.xRot = headPitch * Mth.DEG_TO_RAD;
-        centerHead.yRot = netHeadYaw * Mth.DEG_TO_RAD;
+        centerHead.xRot = headPitch * ((float) Math.PI / 180.0F);
+        centerHead.yRot = netHeadYaw * ((float) Math.PI / 180.0F);
 
         applyRuntimeHead(rightHead, entity.runtimeState().head(1));
         applyRuntimeHead(leftHead, entity.runtimeState().head(2));
     }
 
     private static void applyRuntimeHead(ModelPart part, BedrockWitherHeadRuntime state) {
-        part.xRot = state.pitch() * Mth.DEG_TO_RAD;
-        part.yRot = state.yaw() * Mth.DEG_TO_RAD;
+        part.xRot = state.pitch() * ((float) Math.PI / 180.0F);
+        part.yRot = state.yaw() * ((float) Math.PI / 180.0F);
     }
 }
