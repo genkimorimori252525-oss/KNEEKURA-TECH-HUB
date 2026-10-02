@@ -339,6 +339,10 @@ let SHARED=null;
 const SHARED_READY=import('/stats.mjs').then(m=>{SHARED=m;}).catch(e=>{
   console.error('[SimLab] stats.mjs を読めなかった。系列と phase が出ません:',e);
 });
+let MOTION_TRACE=null;
+const MOTION_TRACE_READY=import('/motion-trace.mjs').then(m=>{MOTION_TRACE=m;draw();}).catch(e=>{
+  console.error('[SimLab] motion-trace.mjs を読めなかった。Mob軌跡は表示しません:',e);
+});
 
 /**
  * ai イベントから構造化 section を取る。
@@ -383,6 +387,24 @@ function selectedTraceEntity(){
   if(!T.traceSubject) return null;
   for(const e of D.entities.values()) if(String(e.id)===T.traceSubject) return e;
   return null;
+}
+function selectedMotionTrace(t0,t1){
+  const chosen=selectedTraceEntity();
+  if(!chosen||!MOTION_TRACE) return null;
+  const tr=D.store.trackOf(chosen.id);
+  if(!tr||tr.t0>t1||tr.t1<t0) return null;
+  return MOTION_TRACE.buildTraceFromSimStore({
+    store:D.store,
+    entityId:chosen.id,
+    traceClass:'MOB_ACTUAL',
+    identity:{
+      arena_id:D.meta?.arena??null,
+      world_id:D.meta?.world??null,
+    },
+    startTick:Math.max(t0,tr.t0),
+    endTick:Math.min(t1,tr.t1),
+    maxSamples:4096,
+  });
 }
 
 function load(text,name,opts){
@@ -645,30 +667,27 @@ function drawF3(){
       flush(sctx);
     }
 
-    // 明示的に選んだ Mob だけを追加。全Mobを自動描画しない。
-    // samples() は pos レーンに実際に保持された点だけを返し、at(t) の前方フィルを
-    // 「観測点」と取り違えない。太い長破線 + 円ノードで弾道と色以外でも区別する。
-    const chosen=selectedTraceEntity();
-    if(chosen){
-      const tr=D.store.trackOf(chosen.id);
-      if(tr&&tr.t0<=T.tick&&tr.t1>=t0&&typeof tr.samples==='function'){
-        const pts=tr.samples(Math.max(t0,tr.t0),Math.min(T.tick,tr.t1),4096);
-        sctx.save();
-        sctx.strokeStyle=CSS('--target'); sctx.fillStyle=CSS('--target');
-        sctx.lineWidth=2.5; sctx.globalAlpha=.82; sctx.setLineDash([10,6]); sctx.beginPath();
-        let started=false;
-        for(const p of pts){
-          const q=project(p.x,p.y,p.z,W,H); if(!q) continue;
-          if(!started){ sctx.moveTo(q.x,q.y); started=true; } else sctx.lineTo(q.x,q.y);
-        }
-        if(started) sctx.stroke();
-        sctx.setLineDash([]); sctx.globalAlpha=.9;
-        for(const p of pts){
-          const q=project(p.x,p.y,p.z,W,H); if(!q) continue;
-          sctx.beginPath(); sctx.arc(q.x,q.y,2.6,0,Math.PI*2); sctx.fill();
-        }
-        sctx.restore();
+    // 明示的に選んだ Mob だけを追加。人間表示も AI と同じ SampledMotionTrace v1
+    // を消費し、保持点から独自に線を組み立てない。
+    const motion=selectedMotionTrace(t0,T.tick);
+    if(motion){
+      const byId=new Map(motion.samples.map(p=>[p.sample_id,p]));
+      sctx.save();
+      sctx.strokeStyle=CSS('--target'); sctx.fillStyle=CSS('--target');
+      sctx.lineWidth=2.5; sctx.globalAlpha=.82; sctx.setLineDash([10,6]); sctx.beginPath();
+      for(const edge of motion.segments){
+        const p=byId.get(edge.from_sample_id), q=byId.get(edge.to_sample_id);
+        if(!p||!q) continue;
+        const a=project(p.x,p.y,p.z,W,H), b=project(q.x,q.y,q.z,W,H);
+        if(a&&b){sctx.moveTo(a.x,a.y);sctx.lineTo(b.x,b.y);}
       }
+      sctx.stroke();
+      sctx.setLineDash([]); sctx.globalAlpha=.9;
+      for(const p of motion.samples){
+        const q=project(p.x,p.y,p.z,W,H); if(!q) continue;
+        sctx.beginPath(); sctx.arc(q.x,q.y,2.6,0,Math.PI*2); sctx.fill();
+      }
+      sctx.restore();
     }
   }
 
@@ -1014,27 +1033,25 @@ function drawPlan(){
       }
       sctx.stroke(); sctx.globalAlpha=1;
 
-      const chosen=selectedTraceEntity();
-      if(chosen){
-        const tr=D.store.trackOf(chosen.id);
-        if(tr&&tr.t0<=T.tick&&tr.t1>=t0&&typeof tr.samples==='function'){
-          const pts=tr.samples(Math.max(t0,tr.t0),Math.min(T.tick,tr.t1),4096);
-          sctx.save();
-          sctx.strokeStyle=CSS('--target'); sctx.fillStyle=CSS('--target');
-          sctx.lineWidth=2.5; sctx.globalAlpha=.82; sctx.setLineDash([10,6]); sctx.beginPath();
-          let started=false;
-          for(const p of pts){
-            const X=cx+v.mapx(p)*sc, Y=cy+v.mapy(p,0)*sc;
-            if(!started){ sctx.moveTo(X,Y); started=true; } else sctx.lineTo(X,Y);
-          }
-          if(started) sctx.stroke();
-          sctx.setLineDash([]); sctx.globalAlpha=.9;
-          for(const p of pts){
-            const X=cx+v.mapx(p)*sc, Y=cy+v.mapy(p,0)*sc;
-            sctx.beginPath(); sctx.arc(X,Y,2.6,0,Math.PI*2); sctx.fill();
-          }
-          sctx.restore();
+      const motion=selectedMotionTrace(t0,T.tick);
+      if(motion){
+        const byId=new Map(motion.samples.map(p=>[p.sample_id,p]));
+        sctx.save();
+        sctx.strokeStyle=CSS('--target'); sctx.fillStyle=CSS('--target');
+        sctx.lineWidth=2.5; sctx.globalAlpha=.82; sctx.setLineDash([10,6]); sctx.beginPath();
+        for(const edge of motion.segments){
+          const p=byId.get(edge.from_sample_id), q=byId.get(edge.to_sample_id);
+          if(!p||!q) continue;
+          sctx.moveTo(cx+v.mapx(p)*sc,cy+v.mapy(p,0)*sc);
+          sctx.lineTo(cx+v.mapx(q)*sc,cy+v.mapy(q,0)*sc);
         }
+        sctx.stroke();
+        sctx.setLineDash([]); sctx.globalAlpha=.9;
+        for(const p of motion.samples){
+          const X=cx+v.mapx(p)*sc, Y=cy+v.mapy(p,0)*sc;
+          sctx.beginPath(); sctx.arc(X,Y,2.6,0,Math.PI*2); sctx.fill();
+        }
+        sctx.restore();
       }
     }
     // アクター
