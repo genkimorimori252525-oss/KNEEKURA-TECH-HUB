@@ -1,5 +1,6 @@
 package org.kneekura.bedrockwither.client;
 
+import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.WitherSkullRenderer;
 import net.minecraftforge.api.distmarker.Dist;
@@ -19,11 +20,16 @@ public final class ClientEntityRenderers {
     }
 
     @SubscribeEvent
+    public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(
+                BedrockWitherModel.LAYER_LOCATION,
+                () -> BedrockWitherModel.createBodyLayer(CubeDeformation.NONE)
+        );
+    }
+
+    @SubscribeEvent
     public static void register(EntityRenderersEvent.RegisterRenderers event) {
-        // Boss renderer is intentionally non-authoritative/invisible until the
-        // three-head Bedrock model is implemented. It prevents missing-renderer
-        // crashes without pretending visual parity.
-        EntityRenderers.register(ModEntities.BEDROCK_WITHER.get(), BedrockWitherPlaceholderRenderer::new);
+        EntityRenderers.register(ModEntities.BEDROCK_WITHER.get(), BedrockWitherRenderer::new);
 
         // The projectile geometry is compatible with Java's skull renderer; server
         // physics and dangerous/normal behavior remain owned by our custom entity.
