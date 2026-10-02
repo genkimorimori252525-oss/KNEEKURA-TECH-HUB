@@ -2,7 +2,7 @@
 
 Date: 2026-10-02  
 Origin: OWN_DEVELOPMENT  
-State: REPAIR_IN_PROGRESS  
+State: VERIFIED_FIXED  
 Environment: Minecraft 1.20.1 / Forge 47.2.0 / Java 17 / GitHub Actions Gradle 8.1.1
 
 ## Symptom
@@ -36,7 +36,9 @@ Rename the method declaration only. No gameplay behavior or evidence interpretat
 
 ## Verification
 
-Pending dedicated Forge build + GameTest on the repaired exact source generation.
+Repair commit: `c65fe3af9b526d8ce71fd8e424c891aca5d26511`.
+
+Workflow run `36991331495` completed the **Build standalone MOD scaffold** step successfully, proving the symbol rename compile failure was repaired. That run later failed GameTests for separate spawn/skull behavior mismatches tracked as BWR-0004 and BWR-0005; those failures do not reopen this compile issue.
 
 ## Lesson
 
