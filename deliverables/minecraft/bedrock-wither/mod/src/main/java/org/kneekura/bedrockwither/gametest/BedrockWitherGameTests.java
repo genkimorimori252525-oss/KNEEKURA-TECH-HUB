@@ -353,6 +353,51 @@ public final class BedrockWitherGameTests {
         });
     }
 
+    @GameTest(template = "empty", timeoutTicks = 80)
+    public static void dashExecutionLastsExactlyTwentyControllerTicks(GameTestHelper helper) {
+        BedrockWitherEntity wither = createWither(helper);
+
+        helper.runAfterDelay(2, () -> {
+            // Put the boss directly into the accepted native second-phase identity.
+            wither.runtimeState().setNativePhase(
+                    org.kneekura.bedrockwither.entity.BedrockWitherPhaseController.secondPhaseNativeId()
+            );
+            wither.setBedrockState(BedrockWitherState.PHASE2_DASH_PREP);
+
+            // Speed remains a measurement-gated value. Zero is deliberate here:
+            // this test validates the Bedrock duration/state/destruction loop only.
+            wither.dashController().beginMeasuredDash(new Vec3(1.0D, 0.0D, 0.0D), 0.0D);
+
+            if (!wither.runtimeState().charging()
+                    || wither.runtimeState().chargeFrames() != 20
+                    || wither.getBedrockState() != BedrockWitherState.PHASE2_DASH) {
+                helper.fail("Dash did not initialize the 20-tick Bedrock execution state");
+                return;
+            }
+
+            for (int i = 0; i < 19; i++) {
+                wither.dashController().tick();
+            }
+
+            if (!wither.runtimeState().charging()
+                    || wither.runtimeState().chargeFrames() != 1) {
+                helper.fail("Dash ended before the twentieth controller tick");
+                return;
+            }
+
+            wither.dashController().tick();
+
+            if (wither.runtimeState().charging()
+                    || wither.runtimeState().chargeFrames() != 0
+                    || wither.getBedrockState() != BedrockWitherState.PHASE2_RECOVER) {
+                helper.fail("Dash did not end exactly after twenty controller ticks");
+                return;
+            }
+
+            helper.succeed();
+        });
+    }
+
     private static BedrockWitherEntity createWither(GameTestHelper helper) {
         BedrockWitherEntity wither = ModEntities.BEDROCK_WITHER.get().create(helper.getLevel());
         if (wither == null) {
