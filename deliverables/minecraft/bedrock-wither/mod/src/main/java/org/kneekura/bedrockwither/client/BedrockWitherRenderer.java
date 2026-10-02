@@ -9,6 +9,8 @@ import org.kneekura.bedrockwither.entity.BedrockWitherEntity;
 public final class BedrockWitherRenderer extends MobRenderer<BedrockWitherEntity, BedrockWitherModel> {
     private static final ResourceLocation JAVA_WITHER_TEXTURE =
             new ResourceLocation("minecraft", "textures/entity/wither/wither.png");
+    private static final ResourceLocation JAVA_WITHER_INVULNERABLE_TEXTURE =
+            new ResourceLocation("minecraft", "textures/entity/wither/wither_invulnerable.png");
 
     public BedrockWitherRenderer(EntityRendererProvider.Context context) {
         super(context, new BedrockWitherModel(context.bakeLayer(BedrockWitherModel.LAYER_LOCATION)), 1.0F);
@@ -43,8 +45,16 @@ public final class BedrockWitherRenderer extends MobRenderer<BedrockWitherEntity
 
     @Override
     public ResourceLocation getTextureLocation(BedrockWitherEntity entity) {
-        // Geometry/scale/animation come from Bedrock definitions. Texture bytes are
-        // not redistributed; use the Java runtime's Mojang Wither texture for now.
-        return JAVA_WITHER_TEXTURE;
+        // Current Mojang Bedrock entity script:
+        // display_normal_skin = invulnerable_ticks <= 0
+        //   || (invulnerable_ticks <= 80 && mod(invulnerable_ticks / 5, 2) == 1)
+        //
+        // Bedrock texture bytes are not redistributed; Java's bundled Mojang
+        // normal/invulnerable Wither textures are used as asset substitutes while
+        // preserving the Bedrock timing rule exactly.
+        int invulnerableTicks = entity.runtimeState().spawningFrames();
+        boolean displayNormal = invulnerableTicks <= 0
+                || (invulnerableTicks <= 80 && (invulnerableTicks / 5) % 2 == 1);
+        return displayNormal ? JAVA_WITHER_TEXTURE : JAVA_WITHER_INVULNERABLE_TEXTURE;
     }
 }
