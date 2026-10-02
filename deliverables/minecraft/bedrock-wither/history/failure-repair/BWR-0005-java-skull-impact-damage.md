@@ -2,7 +2,7 @@
 
 Date: 2026-10-02  
 Origin: OWN_DEVELOPMENT  
-State: REPAIR_IN_PROGRESS
+State: VERIFIED_FIXED
 
 ## Symptom
 
@@ -47,7 +47,11 @@ Do not call Java `WitherSkull.onHitEntity`.
 
 ## Verification
 
-Pending dedicated Forge build + GameTest.
+Dedicated Forge workflow run `36993986762` (source `c230bd372ca2ee96bc0396e424071d2f4c06cb3a`) completed successfully. The GameTest server ran 14 required tests in isolated batches and reported `All 14 required tests passed :)`.
+
+The isolated `entityHitMatchesBedrockImpactDamage` batch passed with the explicit Bedrock impact mapping and Wither-effect contract. The product no longer calls Java `WitherSkull.onHitEntity` as a whole-method semantic substitute.
+
+Workflow: https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/36993986762
 
 ## Lesson
 
