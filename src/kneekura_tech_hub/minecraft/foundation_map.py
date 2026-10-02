@@ -31,6 +31,7 @@ SUBSYSTEM_RULES: tuple[tuple[str, tuple[str, ...]], ...] = (
     ("ai.sensing", ("net/minecraft/world/entity/ai/sensing/",)),
     ("ai.navigation", ("net/minecraft/world/entity/ai/navigation/",)),
     ("ai.control", ("net/minecraft/world/entity/ai/control/",)),
+    ("ai.core", ("net/minecraft/world/entity/ai/",)),
     ("pathfinding", ("net/minecraft/world/level/pathfinder/",)),
     ("client.debug", ("net/minecraft/client/renderer/debug/",)),
     ("entity", ("net/minecraft/world/entity/",)),
@@ -145,19 +146,26 @@ def build(store: Store, index_snapshot_id: str, *, max_classes: int = 20_000) ->
     snapshot = index._load(store, valid_hash(index_snapshot_id))
     profile = _foundation_profile(snapshot)
 
-    selected_docs = [
+    all_class_docs = [
         d for d in profile["documents"]
         if d.get("media") == "class"
         and d.get("track") == "ANCHOR"
         and d.get("namespace") == "mojmap"
         and d.get("scope") != "buildscript"
     ]
+    # A JVM class is normally loaded from <internal-owner>.class. Restricting the
+    # expensive classfile pass to the net/minecraft path keeps the Foundation
+    # Map independent of the potentially huge MOD/library classpath.
+    selected_docs = [
+        d for d in all_class_docs
+        if d.get("path", "").startswith("net/minecraft/")
+    ]
 
     # Group exact same class bytes first. Multiple origins of identical bytes
     # are provenance, while different bytes for one owner are ambiguity.
     by_owner_hash: dict[str, dict[str, dict[str, Any]]] = defaultdict(dict)
     unreadable: list[dict[str, Any]] = []
-    skipped_non_minecraft = 0
+    path_owner_mismatches: list[dict[str, Any]] = []
     parsed_count = 0
     budget_truncated = False
 
@@ -180,7 +188,11 @@ def build(store: Store, index_snapshot_id: str, *, max_classes: int = 20_000) ->
 
         owner = parsed["owner"]
         if not owner.startswith("net/minecraft/"):
-            skipped_non_minecraft += 1
+            path_owner_mismatches.append({
+                "document_id": doc["document_id"],
+                "path": doc["path"],
+                "owner": owner,
+            })
             continue
         parsed_count += 1
         digest = doc["content_hash"]
@@ -254,9 +266,12 @@ def build(store: Store, index_snapshot_id: str, *, max_classes: int = 20_000) ->
         anchors.append({"owner": owner, "state": state})
 
     profile_complete = bool(profile.get("coverage", {}).get("complete"))
+    profile_identity_pinned = profile.get("identity_status") == "PINNED"
     complete = (
         profile_complete
+        and profile_identity_pinned
         and not unreadable
+        and not path_owner_mismatches
         and not budget_truncated
         and not missing_anchors
         and not ambiguous_anchors
@@ -265,10 +280,13 @@ def build(store: Store, index_snapshot_id: str, *, max_classes: int = 20_000) ->
     coverage = {
         "complete": complete,
         "profile_complete": profile_complete,
-        "selected_class_documents": len(selected_docs),
+        "profile_identity_status": profile.get("identity_status"),
+        "all_anchor_class_documents": len(all_class_docs),
+        "selected_minecraft_class_documents": len(selected_docs),
+        "excluded_non_minecraft_class_documents": len(all_class_docs) - len(selected_docs),
         "parsed_minecraft_class_documents": parsed_count,
         "unique_minecraft_owners": len(classes),
-        "skipped_non_minecraft_classes": skipped_non_minecraft,
+        "path_owner_mismatches": path_owner_mismatches,
         "unreadable": unreadable,
         "budget_truncated": budget_truncated,
         "max_classes": max_classes,
@@ -298,6 +316,8 @@ def build(store: Store, index_snapshot_id: str, *, max_classes: int = 20_000) ->
             "physical_side": manifest.get("physical_side"),
             "logical_side": manifest.get("logical_side"),
             "workspace_revision": manifest.get("workspace_revision"),
+            "resolution": profile.get("resolution"),
+            "identity_status": profile.get("identity_status"),
         },
         "semantics": {
             "name": "Minecraft 1.20.1 Vanilla Foundation Map",
