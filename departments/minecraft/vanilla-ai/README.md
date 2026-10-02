@@ -4,6 +4,15 @@ Status: **RESEARCH IN PROGRESS — not yet a complete vanilla-AI inventory**
 
 This directory is a KNEEKURA TECH HUB technical-asset area for understanding Minecraft Java Edition mob decision-making, navigation, movement control and built-in AI debugging.
 
+## Approved downstream architecture
+
+The long-term Water Tank Studio consumer of this research is the approved **Entity Decision Observatory** design:
+
+- `departments/minecraft/lab/docs/superpowers/plans/2026-10-02-entity-decision-observatory.md`
+
+That design intentionally treats Vanilla as the first adapter family rather than the universal AI schema. Research in this directory must therefore preserve differences between Goal, Brain, navigation, custom movement, state-machine, formation and other AI families instead of flattening them into one model.
+
+
 It is deliberately separate from Water Tank Studio implementation plans. Research facts belong here first; LAB visualization requirements are derived later.
 
 ## Tracks
