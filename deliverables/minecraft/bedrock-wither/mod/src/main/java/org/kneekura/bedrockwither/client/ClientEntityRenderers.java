@@ -25,6 +25,10 @@ public final class ClientEntityRenderers {
                 BedrockWitherModel.LAYER_LOCATION,
                 () -> BedrockWitherModel.createBodyLayer(CubeDeformation.NONE)
         );
+        event.registerLayerDefinition(
+                BedrockWitherModel.ARMOR_LAYER_LOCATION,
+                () -> BedrockWitherModel.createBodyLayer(new CubeDeformation(2.0F))
+        );
     }
 
     @SubscribeEvent
