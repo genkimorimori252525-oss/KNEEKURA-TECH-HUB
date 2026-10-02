@@ -36,12 +36,60 @@ https://learn.microsoft.com/en-us/minecraft/creator/reference/content/entityrefe
 
 Use: authoritative evidence that these dedicated Bedrock goals exist and that highest-damage targeting is intentional. Parameters not documented there remain unknown.
 
-### Mojang bedrock-samples — client Wither entity
+### Mojang bedrock-samples — current vanilla Wither definitions
 
-URL:
-https://github.com/Mojang/bedrock-samples/blob/main/resource_pack/entity/wither.entity.json
+Repository:
+https://github.com/Mojang/bedrock-samples
 
-Use: client/render state reconnaissance only. It is not server AI authority.
+Pinned revision reviewed:
+`46ba6ea985fb5a92d79a9419198f10dda14c199d`
+
+Server behavior:
+`behavior_pack/entities/wither.json`
+
+Directly exposed current contract includes:
+- `minecraft:behavior.wither_target_highest_damage` priority 1;
+- `minecraft:behavior.hurt_by_target` priority 2;
+- `minecraft:behavior.nearest_attackable_target` priority 3, `must_see=true`, max distance 70;
+- the non-player target filter excludes the `undead` and `inanimate` families;
+- `minecraft:behavior.wither_random_attack_pos_goal` priority 3;
+- boss HUD range 55 and sky darkening;
+- health 600, movement 0.25, `can_fly`;
+- collision box width 1 / height 3;
+- `movement.basic.max_turn=180`;
+- damage from the `undead` family is rejected by `minecraft:damage_sensor`;
+- fire and freezing immunity;
+- water breathing;
+- public navigation is still declared as `navigation.walk`, reinforcing that exposed JSON is not the complete hidden flight implementation.
+
+Projectile definitions:
+- `behavior_pack/entities/wither_skull.json`
+- `behavior_pack/entities/wither_skull_dangerous.json`
+
+Current shared projectile contract:
+- collision box 0.15 x 0.15;
+- gravity 0;
+- inertia 1.0 and liquid inertia 1.0;
+- explosion power 1;
+- Wither effect duration: Easy 0, Normal 200 ticks, Hard 800 ticks;
+- uncertainty base 7.5, uncertainty multiplier 1.
+
+Current normal skull:
+- launch power 1.2.
+
+Current dangerous skull:
+- launch power 0.6;
+- `is_dangerous=true`;
+- `reflect_on_hurt=true`;
+- explosion `max_resistance=4.0`.
+
+These values are primary implementation inputs. Where Java APIs do not have identical semantics (for example the exact native reflection vector or Bedrock projectile uncertainty algorithm), the adaptation is labeled separately and remains a runtime-comparison target.
+
+Client/render references at the same pinned revision:
+- `resource_pack/entity/wither.entity.json`
+- `resource_pack/animations/wither_boss.animation.json`
+
+The client definition exposes three independently queried head rotations, invulnerability-driven skin/armor state, spawn swelling/scaling and body animation. These are visual-authority inputs, not server AI authority.
 
 ## Maintained secondary / gameplay observation
 
@@ -150,3 +198,16 @@ Detailed engineering review:
 [PRIOR-ART-BESTYLEWITHER.md](PRIOR-ART-BESTYLEWITHER.md)
 
 Use: implementation-technique and failure-history reference only. Its constants and behavior are not accepted as Bedrock truth.
+
+
+## Evidence priority for product implementation
+
+For the Bedrock Wither deliverable, implementation decisions use this order:
+
+1. pinned Mojang/Microsoft Bedrock definitions and documentation;
+2. direct Bedrock runtime observation retained by KNEEKURA;
+3. maintained Bedrock technical/gameplay documentation;
+4. community reports as discovery/edge-case leads;
+5. BEStyleWither and other Java implementations as engineering hints only.
+
+A lower layer must not override a contradictory higher layer merely because its Java code is easier to reuse.
