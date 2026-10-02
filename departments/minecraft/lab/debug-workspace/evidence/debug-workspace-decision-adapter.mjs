@@ -42,6 +42,8 @@ function exactSubjectRecord(record, subjectUuid) {
     SUPPORTED_LANES.has(record.lane) &&
     record.scope?.kind === 'ENTITY_UUID' &&
     record.scope?.entityUuid === subjectUuid &&
+    record.epistemicStatus === 'OBSERVED' &&
+    record.completeness?.complete === true &&
     typeof record.observationId === 'string' &&
     Number.isInteger(record.gameTime);
 }
