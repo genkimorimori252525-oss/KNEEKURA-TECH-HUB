@@ -825,6 +825,57 @@ public final class BedrockWitherGameTests {
         helper.succeed();
     }
 
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_headpitchqueriestracktargets")
+    public static void headPitchQueriesTrackTargetsIndependently(GameTestHelper helper) {
+        BedrockWitherEntity wither = createCombatReadyWither(helper);
+
+        net.minecraft.world.entity.animal.Cow mainTarget = EntityType.COW.create(helper.getLevel());
+        net.minecraft.world.entity.animal.Cow sideTarget = EntityType.COW.create(helper.getLevel());
+        if (mainTarget == null || sideTarget == null) {
+            helper.fail("Failed to create head-tracking targets");
+            return;
+        }
+
+        BlockPos mainPos = helper.absolutePos(new BlockPos(4, 5, 0));
+        mainTarget.moveTo(mainPos.getX() + 0.5D, mainPos.getY(), mainPos.getZ() + 0.5D);
+        mainTarget.setInvulnerable(true);
+        helper.getLevel().addFreshEntity(mainTarget);
+
+        BlockPos sidePos = helper.absolutePos(new BlockPos(-4, 1, 0));
+        sideTarget.moveTo(sidePos.getX() + 0.5D, sidePos.getY(), sidePos.getZ() + 0.5D);
+        sideTarget.setInvulnerable(true);
+        helper.getLevel().addFreshEntity(sideTarget);
+
+        wither.setTarget(mainTarget);
+        wither.setAlternativeHeadTarget(1, sideTarget.getUUID());
+        wither.clearAlternativeHeadTarget(2);
+
+        wither.headTrackingController().tick();
+
+        float centerPitch = wither.getSyncedHeadPitch(0);
+        float sidePitch = wither.getSyncedHeadPitch(1);
+        float idlePitch = wither.getSyncedHeadPitch(2);
+
+        if (Math.abs(centerPitch) < 0.0001F) {
+            helper.fail("Center head did not track elevated main target");
+            return;
+        }
+        if (Math.abs(sidePitch) < 0.0001F) {
+            helper.fail("Side head did not track its alternative target");
+            return;
+        }
+        if (Math.abs(idlePitch) > 0.0001F) {
+            helper.fail("Untargeted side head should relax toward zero pitch");
+            return;
+        }
+        if (Math.abs(centerPitch - sidePitch) < 0.0001F) {
+            helper.fail("Independent head targets produced indistinguishable pitch values");
+            return;
+        }
+
+        helper.succeed();
+    }
+
     private static BedrockWitherEntity createCombatReadyWither(GameTestHelper helper) {
         BedrockWitherEntity wither = createWither(helper);
         wither.runtimeState().setSpawningFrames(0);
