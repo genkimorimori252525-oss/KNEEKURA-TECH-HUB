@@ -59,6 +59,7 @@ public final class BedrockWitherEntity extends Monster {
     private final BedrockWitherRuntimeState runtimeState = new BedrockWitherRuntimeState();
     private final BedrockWitherAttackController attackController;
     private final BedrockWitherPhaseController phaseController;
+    private final BedrockWitherDestructionController destructionController;
     private final Set<ServerPlayer> trackingBossPlayers = new HashSet<>();
 
     private boolean difficultyHealthInitialized;
@@ -68,6 +69,7 @@ public final class BedrockWitherEntity extends Monster {
         this.stateMachine = new BedrockWitherStateMachine(this);
         this.attackController = new BedrockWitherAttackController(this);
         this.phaseController = new BedrockWitherPhaseController(this);
+        this.destructionController = new BedrockWitherDestructionController(this);
         this.runtimeState.setNativePhase(BedrockWitherPhaseController.firstPhaseNativeId());
         this.bossEvent.setDarkenScreen(true);
         // Bedrock wither.json exposes movement.basic max_turn 180. The Java
@@ -259,6 +261,10 @@ public final class BedrockWitherEntity extends Monster {
 
     public BedrockWitherPhaseController phaseController() {
         return phaseController;
+    }
+
+    public BedrockWitherDestructionController destructionController() {
+        return destructionController;
     }
 
     public BedrockWitherDebugSnapshot debugSnapshot() {
