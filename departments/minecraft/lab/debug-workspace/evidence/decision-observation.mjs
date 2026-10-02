@@ -43,10 +43,15 @@ function refs(value, name) {
   }
   return [...new Set(value)];
 }
-function requireSourceForStrongClaim(status, relation, sourceRefs, where) {
-  const strongStatus = status === 'DIRECT_OBSERVED' || status === 'INSTRUMENTED_ALGORITHM_STATE';
-  const strongRelation = relation === 'DIRECT_RUNTIME_RELATION' || relation === 'ALGORITHM_TRACE_RELATION';
-  if ((strongStatus || strongRelation) && sourceRefs.length === 0) {
+function requireSourceForEvidencedClaim(status, relation, sourceRefs, where) {
+  const evidencedStatus = status === 'DIRECT_OBSERVED' ||
+    status === 'SAMPLED_OBSERVED' ||
+    status === 'INSTRUMENTED_ALGORITHM_STATE' ||
+    status === 'DERIVED_FROM_OBSERVED';
+  const evidencedRelation = relation === 'DIRECT_RUNTIME_RELATION' ||
+    relation === 'ALGORITHM_TRACE_RELATION' ||
+    relation === 'DERIVED_SPATIAL_ASSOCIATION';
+  if ((evidencedStatus || evidencedRelation) && sourceRefs.length === 0) {
     throw new Error(where + ' requires at least one source_observation_id');
   }
 }
@@ -57,7 +62,7 @@ function normalizeFact(raw, where) {
   const relation = raw.causal_relation ?? 'UNKNOWN_CAUSALITY';
   if (!CAUSAL_RELATIONS.includes(relation)) throw new TypeError(where + ': unsupported causal_relation ' + relation);
   const sourceRefs = refs(raw.source_observation_ids, where + '.source_observation_ids');
-  requireSourceForStrongClaim(status, relation, sourceRefs, where);
+  requireSourceForEvidencedClaim(status, relation, sourceRefs, where);
   return {
     fact_id: raw.fact_id == null ? null : string(raw.fact_id, where + '.fact_id'),
     key: string(raw.key, where + '.key'),
@@ -100,7 +105,7 @@ function normalizeTimelineEvent(raw, index) {
   const relation = raw.causal_relation ?? 'TEMPORAL_ASSOCIATION';
   if (!CAUSAL_RELATIONS.includes(relation)) throw new TypeError(where + ': unsupported causal_relation ' + relation);
   const sourceRefs = refs(raw.source_observation_ids, where + '.source_observation_ids');
-  requireSourceForStrongClaim(status, relation, sourceRefs, where);
+  requireSourceForEvidencedClaim(status, relation, sourceRefs, where);
   return {
     event_id: raw.event_id == null ? null : string(raw.event_id, where + '.event_id'),
     tick: raw.tick,
