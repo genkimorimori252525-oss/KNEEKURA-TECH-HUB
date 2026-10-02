@@ -24,7 +24,11 @@ Completed:
 - Phase-2 dash execution owns chargeDirection/chargeFrames/charging state, accepted 20-tick execution, range-2 destruction geometry (6×8×6) and 15 entity damage; exact current speed and preparation trigger remain measurement-gated.
 - Official Bedrock Nether Star loot contract is present.
 - Dedicated Forge CI passes build + GameTest.
-- Latest accepted runtime generation: source `c230bd372ca2ee96bc0396e424071d2f4c06cb3a`, workflow run `36993986762`: **14/14 required GameTests passed** in isolated batches.
+- Latest accepted runtime generation: source `da3ee83a14e3d110ffb34a0b442186a06e1cecae`, workflow run `37001222165`: **18/18 required GameTests passed** in isolated batches.
+- Bedrock-specific death lifecycle now preserves semantic death immediately while extending visual/removal ticking through a native-shaped death controller; current Mojang swell scaling and spawn/death invulnerability-skin timing are wired, while exact current death duration/XP timing remain provisional.
+- Special Wither repositioning has a measurement-gated controller boundary instead of guessed distance/speed constants.
+- Side-head scheduling now owns passive dangerous-skull timing, independent side targets and Normal/Hard targeted firing from Bedrock-native structure; attack range 30 remains historical-native provisional.
+- Three independent head pitch queries are server-authored and synchronized to the client model.
 - RED→GREEN history is preserved under `history/failure-repair/`.
 
 ## Still unresolved / not claimed
