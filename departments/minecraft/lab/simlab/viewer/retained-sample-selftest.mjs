@@ -26,7 +26,7 @@ test('trimmed forward-fill anchor remains queryable state but is not exposed as 
   assert.ok(state);
   assert.equal(state.x,0);
   const tr=s.trackOf(1);
-  assert.deepEqual(tr.samples(5,10,10).map(p=>p.t),[10]);
+  assert.deepEqual([...tr.samples(5,10,10)].map(p=>p.t),[10]);
   assert.equal(tr.sampleAtOrBefore(5),null);
   assert.equal(tr.sampleAtOrBefore(10).t,10);
 });
@@ -41,6 +41,6 @@ test('a real sample exactly at the trim boundary remains sampled evidence',()=>{
   ].join('\n'));
   s.trimBefore(5);
   const tr=s.trackOf(2);
-  assert.deepEqual(tr.samples(5,10,10).map(p=>p.t),[5,10]);
+  assert.deepEqual([...tr.samples(5,10,10)].map(p=>p.t),[5,10]);
   assert.equal(tr.sampleAtOrBefore(5).t,5);
 });
