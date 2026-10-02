@@ -264,7 +264,11 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
 
     @Override
     public void die(DamageSource source) {
-        if (!this.isRemoved() && this.isAlive()) {
+        // LivingEntity invokes die() after lethal damage has already reduced
+        // health to zero, so isAlive() is not a valid gate here.
+        if (!this.isRemoved()
+                && getBedrockState() != BedrockWitherState.DEATH_SEQUENCE
+                && getDeathTicksRemaining() <= 0) {
             deathController.begin();
         }
         super.die(source);
