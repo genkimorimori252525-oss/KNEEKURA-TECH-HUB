@@ -107,6 +107,7 @@ Initial subsystem taxonomy includes:
 - `ai.sensing`
 - `ai.navigation`
 - `ai.control`
+- `ai.core`
 - `pathfinding`
 - `client.debug`
 - `entity`
