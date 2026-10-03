@@ -1,8 +1,9 @@
 import {selectDecisionRecords,validDecisionSnapshot} from './debug-workspace-decision-adapter.mjs';
 import {validOriginalDecisionEvent} from './original-decision-events.mjs';
 import {validTerrainGroundQuery} from './terrain-ground-query.mjs';
+import {registeredModDecisionAdapters} from './adapters/registered-mod-adapters.mjs';
 
-const CHANNELS=new Set(['path_search','goal_transitions','brain_memory_changes','movement_control','base_malus','sensor_execution','terrain_ground']);
+const CHANNELS=new Set(['path_search','goal_transitions','brain_memory_changes','movement_control','base_malus','sensor_execution','terrain_ground','mod_state']);
 const safe=Number.isSafeInteger;
 function normalize(subjectUuid,identity,request) {
   if(typeof subjectUuid!=='string'||! /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(subjectUuid))throw new TypeError('EXACT_SUBJECT_UUID_REQUIRED');
@@ -88,6 +89,11 @@ export function queryDecisionDrilldown({observations,subjectUuid,identity,reques
     case 'terrain_ground':items=selected.filter(r=>r.gameTime>=query.startTick&&validTerrainGroundQuery(r)).map(r=>({
       tick:r.gameTime,data:structuredClone(r.payload.data),epistemic_status:'DIRECT_OBSERVED',
       causal_relation:'UNKNOWN_CAUSALITY',source_observation_ids:[r.observationId]}));break;
+    case 'mod_state': {
+      const retained=selected.filter(r=>r.gameTime>=query.startTick&&registeredModDecisionAdapters.acceptsSnapshot(r));
+      const snapshot=registeredModDecisionAdapters.captureSnapshot(retained);
+      items=snapshot?[{tick:retained.at(-1).gameTime,...snapshot}]:[];break;
+    }
     default: {
       const kind={movement_control:'CONTROL_TICK_RETURN',base_malus:'BASE_MALUS_RETURN',sensor_execution:'SENSOR_SCAN_RETURN'}[query.channel];
       items=events.filter(r=>r.payload.kind===kind).map(directEvent);

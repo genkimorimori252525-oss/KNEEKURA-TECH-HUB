@@ -153,6 +153,7 @@ public final class KneekuraDebugServerObserver {
                 emitIfChanged(localServerTick, gameTime, selected, "AI_DECISION",
                         "KneekuraDebugDecisionSnapshot.capture_cached_components",
                         snapshot);
+                KneekuraDebugDecisionAdapterRegistry.captureSelected(value,server,mob,targetRevision,localServerTick);
             }
         }
 

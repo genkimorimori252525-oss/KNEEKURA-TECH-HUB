@@ -1,0 +1,42 @@
+package com.github.tartaricacid.touhoulittlemaid.sim.debug;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+/** Same pinned descriptor as evidence/adapters/twilightforest-anchor.json; contract checked in CI. */
+final class KneekuraDebugTwilightForestDescriptor {
+    private KneekuraDebugTwilightForestDescriptor(){ }
+    static JsonObject descriptor(){return JsonParser.parseString(JSON).getAsJsonObject();}
+    static final String JSON="""
+{
+  "sdkVersion": 1,
+  "id": "twilightforest:anchor-boss",
+  "version": "1",
+  "namespace": "twilightforest",
+  "modId": "twilightforest",
+  "modVersion": "4.3.2508",
+  "minecraftVersion": "1.20.1",
+  "loader": "forge",
+  "loaderVersion": "47.2.0",
+  "mappedArtifactSha256": "7d7842c3c66d355c94bd726ef69ad14ac4f944061198927c3eb54a728e23580a",
+  "classHashes": {
+    "twilightforest.entity.boss.Hydra": "457bbb3fa353bcaebbb8833ba3a271e84388769f2049b44883c0862e6adc11c2",
+    "twilightforest.entity.boss.HydraHeadContainer": "67ef4f95866ba5d964c03a49afc6f4a708de1979e42104832c4180d97cc028b3",
+    "twilightforest.entity.boss.HydraHeadContainer$State": "86343f1fb2d9e6794b80756e31f623e159f093d9d4af4d279dc130355d0840de",
+    "twilightforest.entity.boss.SnowQueen": "6f102ec2de63ca13e608c9d5c208824cb109932382a14fc3163a6e8f304b27df",
+    "twilightforest.entity.boss.SnowQueen$Phase": "86d9254b5a51d47fd5361dfb431df05c5a069af96a363b877d96716ee60a8acc",
+    "twilightforest.entity.boss.KnightPhantom": "5be6108fbd0606e7c03060fbe843afe8a8b2b1c57247f71f146ad307b695292f",
+    "twilightforest.entity.boss.KnightPhantom$Formation": "7b98e0e66de3d1ae2505c21e5370360a00850aff7927034f29f8dcb0258d164b",
+    "twilightforest.entity.boss.UrGhast": "65014fc1e590ccb6505801d5ef130e93b828e6e56cebad226b244ca7ca844aff",
+    "twilightforest.entity.ai.control.NoClipMoveControl": "740cf677bc3e582e4139bed50d67a1ac76f0d571f4f2a1edc94696e29e99e377",
+    "twilightforest.entity.monster.CarminiteGhastguard": "d08cff7bbc32bfc2cec5e8a08e3fd7ca4289246ff7466b0afc6f7f8193068a46"
+  },
+  "instrumentation": "CACHED_REFLECTION_AND_SYNCHED_DATA_READ_ONLY",
+  "observerEffectRisk": "BOUNDED_SAMPLED_OBSERVER_WITH_ONCE_PER_PROCESS_SOURCE_IO",
+  "supportedEpistemicLevels": [
+    "SAMPLED_OBSERVED",
+    "DERIVED_FROM_OBSERVED"
+  ]
+}
+""";
+}

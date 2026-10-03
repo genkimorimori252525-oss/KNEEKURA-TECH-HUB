@@ -2,6 +2,7 @@ import { createDecisionObservation } from './decision-observation.mjs';
 import { buildSampledMotionTrace } from '../../simlab/motion-trace.mjs';
 import { validOriginalDecisionEvent, appendOriginalDecisionEvents } from './original-decision-events.mjs';
 import {validTerrainGroundQuery} from './terrain-ground-query.mjs';
+import {registeredModDecisionAdapters} from './adapters/registered-mod-adapters.mjs';
 
 const SUPPORTED_LANES = new Set([
   'SERVER_ENTITY_STATE',
@@ -197,10 +198,11 @@ export function observeDebugWorkspaceDecision({
   if (tick !== Infinity && !Number.isInteger(tick)) throw new TypeError('tick must be an integer or Infinity');
 
   const records = selectDecisionRecords(observations, subjectUuid, identity, tick)
-    .filter(r => r.lane !== 'AI_DECISION' || validDecisionSnapshot(r.payload) || validOriginalDecisionEvent(r) || validTerrainGroundQuery(r));
+    .filter(r => r.lane !== 'AI_DECISION' || validDecisionSnapshot(r.payload) || validOriginalDecisionEvent(r) || validTerrainGroundQuery(r) || registeredModDecisionAdapters.acceptsSnapshot(r));
   const snapshotRecords=records.filter(r=>r.lane === 'AI_DECISION' && validDecisionSnapshot(r.payload));
   const originalRecords=records.filter(validOriginalDecisionEvent);
   const terrain=records.filter(validTerrainGroundQuery).at(-1)??null;
+  const modSnapshot=registeredModDecisionAdapters.captureSnapshot(records);
   const latest = latestByLane(records.filter(r=>r.lane !== 'AI_DECISION' || validDecisionSnapshot(r.payload)));
   const state = latest.get('SERVER_ENTITY_STATE') ?? null;
   const target = latest.get('AI_TARGET') ?? null;
@@ -229,6 +231,14 @@ export function observeDebugWorkspaceDecision({
   if (brain) stateFacts.push(sampledFact(brain, 'brain_memory', compactBrain(brain.payload), 'Only explicitly exposed memories are represented.'));
   if (target) stateFacts.push(sampledFact(target, 'mob_target', compactTarget(target.payload)));
   if (stateFacts.length) stages.STATE = { facts: stateFacts };
+  if(modSnapshot) {
+    Object.assign(capabilities,modSnapshot.capabilities);
+    stages.STATE??={facts:[]};stages.STATE.facts.push(...modSnapshot.facts);
+    const evidenceIds=[...new Set(modSnapshot.facts.flatMap(f=>f.source_observation_ids))];
+    if(evidenceIds.length)stages.STATE.facts.push({key:modSnapshot.descriptor.namespace+':adapter_source',value:modSnapshot.descriptor,
+      epistemic_status:'SAMPLED_OBSERVED',causal_relation:'UNKNOWN_CAUSALITY',source_observation_ids:evidenceIds,
+      adapter_namespace:modSnapshot.descriptor.namespace,note:'Matched development resource; not transformed resident-byte attestation.'});
+  }
   if(terrain) {
     stages.STATE??={facts:[]};
     stages.STATE.facts.push({key:'terrain_ground',value:terrain.payload.data,epistemic_status:'DIRECT_OBSERVED',
@@ -336,6 +346,7 @@ export function observeDebugWorkspaceDecision({
       ...(snapshot ? SNAPSHOT_SECTIONS.filter(name => snapshot.payload.sections[name].status !== 'NOT_EXPOSED') : []),
       ...(originalRecords.length ? ['original_decision_events'] : []),
       ...(terrain ? ['terrain_ground'] : []),
+      ...(modSnapshot ? ['mod_state'] : []),
     ],
   });
 }
