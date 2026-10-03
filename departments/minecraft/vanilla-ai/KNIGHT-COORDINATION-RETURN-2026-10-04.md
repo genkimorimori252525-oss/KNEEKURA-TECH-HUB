@@ -17,4 +17,22 @@ The additive `MOD_COORDINATION_RETURN` uses the existing original-event envelope
 - Consumer tests: meaningful pre-implementation rejection (2 failing cases), then 3 passing cases covering original order/post-state, forged source/context/bounds/reason, and partial custom members.
 - Genuine Java API/Mixin compilation and actual pinned TF classes: pre-implementation missing producer API, then cached producer/owner/thread/channel/event/member-budget tests passed. Constructor-free test objects are unit fixtures, not gameplay acceptance. Genuine mapped artifact and Goal/Knight resource hashes were verified before warming the test compatibility cache. Java output passed the JavaScript consumer.
 - Motion/Decision suite: 109 passed, 0 skipped. Existing genuine Forge owner/Arena/camera/writer/world API regression passed.
-- Native Mixin dispatch, actual group membership, clean stop and original-save preservation for this new callback are pending a fresh frozen-source private trial. Broader coordination/battle and observer-effect acceptance remain open.
+- Frozen source `d5479b6ce9dffb6b6259599d26c8a4ff24e54dad` established the following private native trial. Broader coordination/battle and observer-effect acceptance remain open.
+
+## Native-r29
+
+The labeled prelaunch fixture restores an exact copy of the original85 files, then sets up a lit room, a controlled survival player and six actual-AI, damageable Knights numbered0–5 with a shared home. The previous R28 private world was preserved with all85 hashes. This is controlled setup, not a resize or modification of the original water tank, a full original-scene acceptance or a seeded broadcast result.
+
+Four finite `mod`-only selections of UUID `55555555-6666-7777-8888-000000000001` produced three direct broadcast RETURNs and six separate individual formation RETURNs:
+
+| Source observation | World tick | Retained original list | Post-state |
+|---|---:|---|---|
+| `obs:forge-runtime:13508:45` | 40487 | 6 exact fixture UUIDs, numbers0–5 in that original order | all six `CHARGE_MINUSZ` |
+| `obs:forge-runtime:13508:436` | 40847 | 6 exact fixture UUIDs, numbers0–5 in that original order | all six `SMALL_CLOCKWISE` |
+| `obs:forge-runtime:13508:636` | 41027 | original number order3,0,1,2,4,5 | number3 `ATTACK_PLAYER_ATTACK`; others `CHARGE_PLUSX` |
+
+No member was dropped/truncated in these three records. The third list demonstrates why sorting, inferring its first member is the leader, or treating matching formation as the definition of membership would alter the evidence. The record labels all member values as post-state; it does not independently observe the per-member eligibility branch or establish that a particular member was changed/skipped. Selection4 captured no broadcast callback; no absence reason is inferred. Each observed window ended at `SELECTION_CHANGED`.
+
+The JavaScript validator accepted all three genuine records and the retained overview included `mod_coordination_return`. All22 historical R21 formation-return records still pass the unchanged SDK descriptor. Native canonical904 unique observations finalized as `EVIDENCE_COMPLETE`, SHA256 `9fdaf56d7441bd80092628793607b5c95dfc141d312abb4c24511b4d93c32b2d`. Clean ACK, drop0/queue0, `VERIFIED_EXIT` and absence of the owned native PID13508 were verified. Original/control85 SHA hashes remain unchanged.
+
+Actual JFR start/stop textual receipts and a3,626,713-byte JFR were retained. This is descriptive, not a matched overhead comparison. Recorded callback build/first-byte-check costs were75,227,000ns for the first additional source proof and41,500ns/37,900ns for later callbacks. The measured scope excludes final encoding/writer and GPU work; initial source IO is visibly material and no negligible-observer-effect claim is made. No new pixels or raw Cardinal requests were taken in this trial.
