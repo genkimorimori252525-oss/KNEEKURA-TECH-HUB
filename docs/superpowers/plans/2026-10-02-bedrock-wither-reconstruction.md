@@ -4,6 +4,10 @@
 
 **Design:** `departments/minecraft/design/2026-10-02-bedrock-wither-reconstruction/`
 
+## 2026-10-03 current execution boundary
+
+The user has chosen code completion without direct Bedrock measurements. Continue with [the source-completion plan](../../../departments/minecraft/design/2026-10-02-bedrock-wither-reconstruction/SOURCE-COMPLETION-PLAN-2026-10-03.md). Phases 4–5 below describe the original empirical-comparison proposal and are not blockers or required next actions for this deliverable. Phase 6 remains optional/out of scope. Source-backed defaults and documented adaptations must be executable and tested; they are not evidence of full Bedrock equivalence.
+
 ## Phase 0 — Evidence freeze
 
 - [x] official exposed Wither JSON/unique behavior/special goal sourcesを記録する

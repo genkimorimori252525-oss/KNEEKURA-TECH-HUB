@@ -382,9 +382,14 @@ public final class BedrockWitherGameTests {
 
             // Current behavior returns to the original firing rate at half health.
             wither.runtimeState().setFireRate(5);
+            // Pin this existing controller contract to an already-grounded
+            // fixture. The separate ordinary-AI test exercises real descent.
+            wither.setNoAi(true);
+            wither.setOnGround(true);
             wither.setHealth(threshold);
+            wither.phaseController().tick();
 
-            helper.runAfterDelay(2, () -> {
+            {
                 if (wither.runtimeState().nativePhase()
                         != org.kneekura.bedrockwither.entity.BedrockWitherPhaseController.secondPhaseNativeId()) {
                     helper.fail("Half-health transition did not enter native phase 0");
@@ -399,8 +404,8 @@ public final class BedrockWitherGameTests {
                     helper.fail("Half-health transition did not reset firing to the original rate");
                     return;
                 }
-                if (wither.getBedrockState() != BedrockWitherState.PHASE2_DASH_PREP) {
-                    helper.fail("Half-health transition did not reach PHASE2_DASH_PREP");
+                if (wither.getBedrockState() != BedrockWitherState.PHASE2_BURST) {
+                    helper.fail("Half-health transition did not reach PHASE2_BURST");
                     return;
                 }
                 if (wither.runtimeState().wantsToExplode()) {
@@ -457,7 +462,7 @@ public final class BedrockWitherGameTests {
                 }
 
                 helper.succeed();
-            });
+            }
         });
     }
 
@@ -537,7 +542,8 @@ public final class BedrockWitherGameTests {
 
             java.util.List<BedrockWitherSkullEntity> skulls = helper.getLevel().getEntitiesOfClass(
                     BedrockWitherSkullEntity.class,
-                    wither.getBoundingBox().inflate(8.0D)
+                    wither.getBoundingBox().inflate(8.0D),
+                    skull -> skull.getOwner() == wither
             );
             long dangerousCount = skulls.stream()
                     .filter(BedrockWitherSkullEntity::isDangerous)
@@ -556,13 +562,17 @@ public final class BedrockWitherGameTests {
         BedrockWitherEntity wither = createWither(helper);
 
         helper.runAfterDelay(2, () -> {
+            // This controller fixture explicitly ends spawn before entering
+            // phase 2; public dash adapters must not override active spawn/death.
+            wither.spawnController().restore(0, BedrockWitherState.PHASE2_DASH_PREP);
+            wither.setAerialAttack(false);
             // Put the boss directly into the accepted native second-phase identity.
             wither.runtimeState().setNativePhase(
                     org.kneekura.bedrockwither.entity.BedrockWitherPhaseController.secondPhaseNativeId()
             );
             wither.setBedrockState(BedrockWitherState.PHASE2_DASH_PREP);
 
-            // Speed remains a measurement-gated value. Zero is deliberate here:
+            // Zero speed is deliberate in this controller-duration fixture:
             // this test validates the Bedrock duration/state/destruction loop only.
             wither.dashController().beginMeasuredDash(new Vec3(1.0D, 0.0D, 0.0D), 0.0D);
 
@@ -643,6 +653,7 @@ public final class BedrockWitherGameTests {
             // This test drives the volley controller synchronously. Re-establish
             // every precondition here so ambient server AI ticks cannot make the
             // controller-unit assertion nondeterministic.
+            wither.specialMovementController().cancelPath();
             wither.runtimeState().setNativePhase(
                     org.kneekura.bedrockwither.entity.BedrockWitherPhaseController.firstPhaseNativeId()
             );
@@ -692,7 +703,8 @@ public final class BedrockWitherGameTests {
 
             java.util.List<BedrockWitherSkullEntity> skulls = helper.getLevel().getEntitiesOfClass(
                     BedrockWitherSkullEntity.class,
-                    wither.getBoundingBox().inflate(12.0D)
+                    wither.getBoundingBox().inflate(12.0D),
+                    skull -> skull.getOwner() == wither
             );
             long dangerous = skulls.stream().filter(BedrockWitherSkullEntity::isDangerous).count();
             long normal = skulls.size() - dangerous;
@@ -714,9 +726,9 @@ public final class BedrockWitherGameTests {
             }
 
             wither.volleyController().tick();
-            if (wither.getBedrockState() != BedrockWitherState.PHASE1_BURST
-                    || wither.runtimeState().mainHeadAttackCountdown() != wither.runtimeState().fireRate()) {
-                helper.fail("Volley cooldown did not re-arm the next burst after 140 ticks");
+            if (wither.getBedrockState() != BedrockWitherState.PHASE1_REPOSITION
+                    || !wither.runtimeState().wantsMove()) {
+                helper.fail("Volley cooldown did not request the next reposition after 140 ticks");
                 return;
             }
 
@@ -846,9 +858,12 @@ public final class BedrockWitherGameTests {
     public static void playerKillPreservesRewardEventsAndEmitsXpOnce(GameTestHelper helper) {
         BedrockWitherEntity wither = createCombatReadyWither(helper);
         wither.setNoAi(true);
-        // Keep reward observations away from previous batches. No world/entity
-        // ticks occur inside this synchronous controller fixture.
-        wither.setPos(wither.getX(), wither.getY() + 64.0D, wither.getZ());
+        // Own an explicitly high-altitude reward area. A relative +64 placed
+        // earlier fixtures near terrain (GameTests originate near world Y=-60)
+        // and overlapped ordinary-combat fixtures. Preserve the empty-reward
+        // precondition instead of deleting or ignoring another fixture's XP.
+        // No world/entity ticks occur inside this synchronous controller fixture.
+        wither.setPos(wither.getX(), helper.getLevel().getMaxBuildHeight() - 32.0D, wither.getZ());
         net.minecraft.world.phys.AABB area = wither.getBoundingBox().inflate(16.0D);
         boolean mobLoot = helper.getLevel().getGameRules().getBoolean(net.minecraft.world.level.GameRules.RULE_DOMOBLOOT);
         int existingOrbs = helper.getLevel().getEntitiesOfClass(net.minecraft.world.entity.ExperienceOrb.class, area).size();

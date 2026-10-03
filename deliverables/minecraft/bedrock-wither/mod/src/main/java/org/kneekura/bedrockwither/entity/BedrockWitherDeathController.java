@@ -3,6 +3,7 @@ package org.kneekura.bedrockwither.entity;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 /**
  * Bedrock Wither death lifecycle boundary.
@@ -24,6 +25,8 @@ public final class BedrockWitherDeathController {
     public static final float HISTORICAL_OVERLAY_ALPHA_STEP = 0.005F;
     public static final float HISTORICAL_SWELL_STEP = 1.0F;
     public static final float HISTORICAL_SWELL_NORMALIZER = 28.0F;
+    /** PeratX ea30a251 WitherBoss constructor/death loop; version-unresolved. */
+    public static final int HISTORICAL_INITIAL_FLICKER_DIVISOR = 15;
 
     private final BedrockWitherEntity owner;
     private boolean finalized;
@@ -41,10 +44,18 @@ public final class BedrockWitherDeathController {
         owner.setDeathOldSwell(0.0F);
         owner.setDeathSwell(0.0F);
         owner.setDeathOverlayAlpha(0.0F);
-        owner.setDeathShieldFlicker(0);
+        owner.setDeathShieldFlicker(HISTORICAL_INITIAL_FLICKER_DIVISOR);
+        // Bedrock entity-format documentation separates Phase=0 during death
+        // from AirAttack, which also carries the animated shield visibility.
+        owner.runtimeState().setNativePhase(BedrockWitherPhaseController.secondPhaseNativeId());
         owner.setAerialAttack(false);
+        owner.getNavigation().stop();
+        owner.setDeltaMovement(Vec3.ZERO);
+        owner.runtimeState().setWantsMove(false);
+        owner.runtimeState().setPathing(false);
         owner.runtimeState().setCharging(false);
         owner.runtimeState().setChargeFrames(0);
+        owner.runtimeState().setPreparingCharge(0);
         owner.stateMachine().enter(BedrockWitherState.DEATH_SEQUENCE);
     }
 
@@ -63,6 +74,7 @@ public final class BedrockWitherDeathController {
         // Bedrock owns a separate Wither death visual, so keep that timer from
         // becoming the removal authority while the semantic dead flag remains set.
         owner.deathTime = 0;
+        owner.setDeltaMovement(Vec3.ZERO);
 
         float currentSwell = owner.getDeathSwell();
         owner.setDeathOldSwell(currentSwell);
@@ -74,6 +86,15 @@ public final class BedrockWitherDeathController {
 
         remaining--;
         owner.setDeathTicksRemaining(Math.max(remaining, 0));
+
+        // Historical native body toggles the AirAttack-backed shield flag when
+        // the remaining death ticks divide evenly by a decreasing divisor.
+        // This is a declared source-derived policy, not modern binary parity.
+        int divisor = Math.max(1, owner.getDeathShieldFlicker());
+        if (remaining > 0 && remaining % divisor == 0) {
+            owner.setAerialAttack(!owner.isAerialAttack());
+            owner.setDeathShieldFlicker(Math.max(1, divisor - 1));
+        }
 
         if (remaining <= 0) {
             finishServer();
@@ -93,6 +114,16 @@ public final class BedrockWitherDeathController {
         owner.setDeathSwell(Math.max(0.0F, swell));
         owner.setDeathOverlayAlpha(Math.max(0.0F, Math.min(1.0F, overlayAlpha)));
         owner.setDeathShieldFlicker(Math.max(0, shieldFlicker));
+        if (restoredState == BedrockWitherState.DEATH_SEQUENCE) {
+            owner.runtimeState().setNativePhase(BedrockWitherPhaseController.secondPhaseNativeId());
+            owner.getNavigation().stop();
+            owner.setDeltaMovement(Vec3.ZERO);
+            // Older product saves had no functioning flicker scheduler. Keep
+            // their persisted AirAttack flag, but supply a safe initial divisor.
+            owner.setDeathShieldFlicker(shieldFlicker > 0
+                    ? Math.min(shieldFlicker, HISTORICAL_INITIAL_FLICKER_DIVISOR)
+                    : HISTORICAL_INITIAL_FLICKER_DIVISOR);
+        }
 
         // A persisted entity has not executed terminal removal in this lifetime.
         // Zero remaining ticks on a living save means death has not begun, not
