@@ -53,6 +53,7 @@ public final class KneekuraDebugDecisionSnapshotSelfTest {
         JsonObject expiry = snapshot.expirableValue(custom);
         require(expiry.get("timeToLive").getAsLong() == 100, "read cached TTL without mutation");
         require(expiry.get("canExpire").getAsBoolean(), "read cached expiry policy");
+        require(expiry.get("timeToLive").getAsJsonPrimitive().isString(), "TTL must remain exact through JavaScript JSON parsing");
         require(expiry.getAsJsonObject("value").get("status").getAsString().equals("NOT_EXPOSED"), "opaque expirable value");
         System.out.println("Actual GoalSelector snapshot: bounded, revision fenced, no AI replay or mutation");
     }

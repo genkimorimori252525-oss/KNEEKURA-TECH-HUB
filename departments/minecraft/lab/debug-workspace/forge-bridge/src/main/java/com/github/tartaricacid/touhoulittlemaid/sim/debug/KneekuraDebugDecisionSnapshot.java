@@ -162,7 +162,7 @@ public final class KneekuraDebugDecisionSnapshot {
         JsonObject out = new JsonObject();
         long ttl = (Long) read(ExpirableValue.class, "timeToLive", value);
         out.addProperty("canExpire", ttl != Long.MAX_VALUE);
-        out.addProperty("timeToLive", ttl);
+        out.addProperty("timeToLive", Long.toString(ttl));
         out.add("value", memoryValue(read(ExpirableValue.class, "value", value)));
         return out;
     }

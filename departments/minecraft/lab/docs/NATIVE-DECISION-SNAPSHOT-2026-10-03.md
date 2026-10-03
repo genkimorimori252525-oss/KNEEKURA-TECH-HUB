@@ -18,6 +18,8 @@ The existing Decision adapter consumes valid bounded snapshots into optional STA
 
 ## Validation and remaining scope
 
+Brain TTL is a decimal string, preserving the `Long.MAX_VALUE` no-expiry sentinel through JavaScript JSON parsing. ExpirableValue's cached value/TTL fields are read directly, including for subclasses whose getters execute custom logic.
+
 - Motion/Decision/target-control contracts: 35 passed, zero skipped.
 - Actual ANCHOR GoalSelector self-test: bounded capture, stable/reselected identities, unchanged running/registered state; stateful eligibility/start/stop/tick/custom-getter/stringification sentinels were not invoked.
 - Actual dependency source contracts: writer claim 3, image writer 6, registered world 73, tank presentation 30, plus the new GoalSelector check passed.
