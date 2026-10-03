@@ -12,6 +12,7 @@ import net.minecraft.world.level.Level;
  */
 public final class BedrockWitherSpawnController {
     public static final int CURRENT_SPAWN_DURATION_TICKS = 220;
+    public static final int JAVA_WITHER_SPAWN_LEVEL_EVENT = 1023;
     public static final float SPAWN_EXPLOSION_POWER = 7.0F;
 
     private final BedrockWitherEntity owner;
@@ -73,6 +74,11 @@ public final class BedrockWitherSpawnController {
                     false,
                     Level.ExplosionInteraction.MOB
             );
+            if (!owner.isSilent()) {
+                // Java's global Wither spawn event is a practical sound bridge
+                // for the Bedrock spawn cue without reusing Java Wither AI.
+                level.globalLevelEvent(JAVA_WITHER_SPAWN_LEVEL_EVENT, owner.blockPosition(), 0);
+            }
         }
 
         owner.stateMachine().enter(BedrockWitherState.PHASE1_REPOSITION);
