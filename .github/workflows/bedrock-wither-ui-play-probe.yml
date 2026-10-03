@@ -38,6 +38,9 @@ jobs:
             [DllImport("user32.dll")] public static extern bool SetCursorPos(int X, int Y);
             [DllImport("user32.dll")] public static extern void mouse_event(uint flags, uint dx, uint dy, uint data, UIntPtr extra);
             [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr hWnd);
+            [DllImport("user32.dll")] public static extern IntPtr GetForegroundWindow();
+            [DllImport("user32.dll", CharSet = CharSet.Unicode)] public static extern int GetWindowText(IntPtr hWnd, System.Text.StringBuilder text, int count);
+            [DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr hWnd, int command);
             public const uint LEFTDOWN = 0x0002;
             public const uint LEFTUP = 0x0004;
           }
@@ -64,8 +67,43 @@ jobs:
           if ($null -eq $minecraft) { throw 'Minecraft did not launch' }
 
           Start-Sleep -Seconds 18
-          [Win32Input]::SetForegroundWindow($minecraft.MainWindowHandle) | Out-Null
-          Start-Sleep -Milliseconds 500
+
+          # UWP foreground ownership may sit on a top-level window process whose
+          # executable is not the same process used only for launch detection.
+          $windowProcess = Get-Process -ErrorAction SilentlyContinue |
+            Where-Object {
+              $_.SessionId -eq $sessionId -and
+              $_.MainWindowHandle -ne 0 -and
+              $_.MainWindowTitle -eq 'Minecraft'
+            } |
+            Select-Object -First 1
+          if ($null -eq $windowProcess) {
+            throw 'No top-level Minecraft window found; refusing coordinate click'
+          }
+
+          $shell = New-Object -ComObject WScript.Shell
+          [void]$shell.AppActivate($windowProcess.Id)
+          [Win32Input]::ShowWindow($windowProcess.MainWindowHandle, 9) | Out-Null
+          [Win32Input]::SetForegroundWindow($windowProcess.MainWindowHandle) | Out-Null
+
+          function Get-ForegroundTitle {
+            $handle = [Win32Input]::GetForegroundWindow()
+            $sb = New-Object System.Text.StringBuilder 512
+            [void][Win32Input]::GetWindowText($handle, $sb, $sb.Capacity)
+            return $sb.ToString()
+          }
+
+          $focusDeadline = (Get-Date).AddSeconds(8)
+          $foregroundTitle = ''
+          do {
+            Start-Sleep -Milliseconds 250
+            $foregroundTitle = Get-ForegroundTitle
+          } while ($foregroundTitle -ne 'Minecraft' -and (Get-Date) -lt $focusDeadline)
+
+          Write-Host "BWR_FOREGROUND_TITLE=$foregroundTitle"
+          if ($foregroundTitle -ne 'Minecraft') {
+            throw "Foreground focus is '$foregroundTitle', not Minecraft; refusing coordinate click"
+          }
 
           $screen = [System.Windows.Forms.SystemInformation]::VirtualScreen
           if ($screen.Width -ne 1536 -or $screen.Height -ne 864) {
@@ -92,6 +130,7 @@ jobs:
             screen_width = $screen.Width
             screen_height = $screen.Height
             minecraft_launched = $true
+            foreground_verified = ($foregroundTitle -eq 'Minecraft')
             play_click_sent = $true
             screenshot_captured = (Test-Path (Join-Path $out 'play-screen.png'))
             world_opened = $false
