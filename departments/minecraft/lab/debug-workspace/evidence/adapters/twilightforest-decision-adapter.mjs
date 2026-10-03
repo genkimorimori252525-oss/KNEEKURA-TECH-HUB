@@ -12,8 +12,9 @@ function validState(kind,s) {
     new Set(s.heads.map(h=>h.headNum)).size===7&&s.heads.every(h=>only(h,
       ['headNum','prevState','currentState','nextState','nextStateSemantics','ticksNeeded','ticksProgress','targetUuid','headUuid'])&&
       integer(h.headNum)&&h.headNum>=0&&h.headNum<7&&name(h.prevState)&&name(h.currentState)&&
-      (h.nextState===null?h.nextStateSemantics==='AUTOMATIC_SENTINEL':name(h.nextState)&&h.nextStateSemantics==='STORED_REQUESTED_STATE')&&
-      integer(h.ticksNeeded)&&integer(h.ticksProgress)&&uuid(h.targetUuid)&&uuid(h.headUuid));
+      (h.nextState==null?h.nextStateSemantics==='AUTOMATIC_SENTINEL':name(h.nextState)&&h.nextStateSemantics==='STORED_REQUESTED_STATE')&&
+      integer(h.ticksNeeded)&&integer(h.ticksProgress)&&(h.targetUuid===undefined||uuid(h.targetUuid))&&
+      (h.headUuid===undefined||uuid(h.headUuid)));
   if(kind==='SnowQueen')return only(s,['phase','beamActive','summonsRemaining','successfulDrops','maxDrops','damageWhileBeaming'])&&
     ['SUMMON','DROP','BEAM'].includes(s.phase)&&typeof s.beamActive==='boolean'&&
     ['summonsRemaining','successfulDrops','maxDrops','damageWhileBeaming'].every(k=>integer(s[k]));
@@ -39,7 +40,17 @@ export const twilightForestDecisionAdapter=Object.freeze({
     if(!['AVAILABLE','NOT_EXPOSED'].includes(d.status)||!only(d,['status','bossKind','stateSemantics','state','detail'])||
         (d.status==='AVAILABLE'&&(!Object.hasOwn(KEYS,d.bossKind)||record.payload.entityClass!=='twilightforest.entity.boss.'+d.bossKind||
         d.stateSemantics!=='CACHED_STATE_NOT_ORIGINAL_TRANSITION_OR_REASON'||!validState(d.bossKind,d.state))))throw new TypeError('TF_CACHED_STATE_CONTRACT');
-    return {...d,subjectUuid:record.scope.entityUuid,source_observation_ids:[record.observationId]};
+    const snapshot=structuredClone(d);
+    if(d.status==='AVAILABLE'&&d.bossKind==='Hydra') {
+      // Native Gson omits null fields. Only the explicit sentinel proves automatic next-state semantics;
+      // an omitted Entity reference remains unknown rather than becoming an observed null target.
+      for(const head of snapshot.state.heads) {
+        if(head.nextState===undefined)head.nextState=null;
+        if(head.targetUuid===undefined)head.targetUuidStatus='NOT_CAPTURED';
+        if(head.headUuid===undefined)head.headUuidStatus='NOT_CAPTURED';
+      }
+    }
+    return {...snapshot,subjectUuid:record.scope.entityUuid,source_observation_ids:[record.observationId]};
   },
   describeCapabilities(records,snapshot) {
     return {'twilightforest:boss_state':{status:snapshot.status,source_observation_ids:snapshot.source_observation_ids,

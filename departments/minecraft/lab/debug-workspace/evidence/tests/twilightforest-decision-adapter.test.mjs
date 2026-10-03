@@ -61,3 +61,17 @@ test('Ur-Ghast preserves tantrum and cached custom direct-flight steering withou
   assert.equal(out.facts[0].value.customFlight.aStarExplanationStatus,'NOT_EXPOSED');
   assert.equal(out.primitives.length,1);assert.equal(out.primitives[0].semantics,'DERIVED_PRESENTATION_ONLY');
 });
+
+test('Hydra accepts native Gson omitted nulls only with automatic sentinel and preserves missing references as unknown',()=>{
+  const record=row('Hydra',{numHeads:7,scope:'SELECTED_COORDINATOR_STORED_HEAD_CONTAINERS',
+    heads:Array.from({length:7},(_,headNum)=>({headNum,prevState:'IDLE',currentState:'IDLE',
+      nextStateSemantics:'AUTOMATIC_SENTINEL',ticksNeeded:10,ticksProgress:9,headUuid:uuid}))});
+  const before=JSON.stringify(record),out=capture(record),head=out.facts[0].value.heads[0];
+  assert.equal(head.nextState,null);
+  assert.equal(head.targetUuidStatus,'NOT_CAPTURED');
+  assert.equal(head.targetUuid,undefined);
+  assert.equal(head.headUuid,uuid);
+  assert.equal(JSON.stringify(record),before);
+  const bad=structuredClone(record);bad.payload.data.state.heads[0].nextStateSemantics='STORED_REQUESTED_STATE';
+  assert.throws(()=>capture(bad),/TF_CACHED_STATE_CONTRACT/);
+});
