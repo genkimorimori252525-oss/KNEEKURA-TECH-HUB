@@ -109,27 +109,30 @@ jobs:
           $focusedPath=Join-Path $out 'create-focused.png'
           Capture $focusedPath
 
-          # Frozen from the prior focus-sequence evidence (tab4.png):
-          # white border around Create New World and a green center.
+          # Frozen from actual failed-run evidence: with the pointer neutral at
+          # (10,10), Tab x4 produces the Create New World keyboard focus as a
+          # green horizontal bar spanning x=521..1150 / y=254..273.
           $bmp=[System.Drawing.Bitmap]::FromFile($focusedPath)
           try {
-            $center=$bmp.GetPixel(835,333)
-            $leftTop=$bmp.GetPixel(512,270)
-            $rightTop=$bmp.GetPixel(1158,270)
-            $rightMid=$bmp.GetPixel(1160,333)
-            $rightBottom=$bmp.GetPixel(1158,395)
+            $center=$bmp.GetPixel(835,263)
+            $left=$bmp.GetPixel(530,263)
+            $right=$bmp.GetPixel(1140,263)
+            $above=$bmp.GetPixel(835,240)
+            $below=$bmp.GetPixel(835,286)
 
-            $centerGreen=($center.G -ge 100 -and $center.G -gt ($center.R + 35) -and $center.G -gt ($center.B + 35))
-            $borderWhite=(
-              $leftTop.R -ge 245 -and $leftTop.G -ge 245 -and $leftTop.B -ge 245 -and
-              $rightTop.R -ge 245 -and $rightTop.G -ge 245 -and $rightTop.B -ge 245 -and
-              $rightMid.R -ge 245 -and $rightMid.G -ge 245 -and $rightMid.B -ge 245 -and
-              $rightBottom.R -ge 245 -and $rightBottom.G -ge 245 -and $rightBottom.B -ge 245
-            )
+            function Is-GreenFocusPixel($p) {
+              return ($p.G -ge 100 -and $p.G -gt ($p.R + 35) -and $p.G -gt ($p.B + 35))
+            }
+
+            $barGreen=(Is-GreenFocusPixel $center) -and
+                      (Is-GreenFocusPixel $left) -and
+                      (Is-GreenFocusPixel $right)
+            $boundedAbove=-not (Is-GreenFocusPixel $above)
+            $boundedBelow=-not (Is-GreenFocusPixel $below)
           } finally { $bmp.Dispose() }
 
-          if (-not ($centerGreen -and $borderWhite)) {
-            throw 'Create New World keyboard-focus fingerprint not verified; refusing Enter'
+          if (-not ($barGreen -and $boundedAbove -and $boundedBelow)) {
+            throw 'Create New World green-focus fingerprint not verified; refusing Enter'
           }
 
           [void]$shell.SendKeys('{ENTER}')
