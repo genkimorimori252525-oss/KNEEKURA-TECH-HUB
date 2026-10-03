@@ -20,11 +20,15 @@ The existing Decision adapter consumes valid bounded snapshots into optional STA
 
 Brain TTL is a decimal string, preserving the `Long.MAX_VALUE` no-expiry sentinel through JavaScript JSON parsing. ExpirableValue's cached value/TTL fields are read directly, including for subclasses whose getters execute custom logic.
 
+Signed 64-bit memory values likewise retain an exact decimal string with `INT64_DECIMAL_STRING` encoding. Actual Java tests cover both long extrema and a small long, avoiding precision loss in the JavaScript consumer.
+
 - Motion/Decision/target-control contracts: 35 passed, zero skipped.
 - Actual ANCHOR GoalSelector self-test: bounded capture, stable/reselected identities, unchanged running/registered state; stateful eligibility/start/stop/tick/custom-getter/stringification sentinels were not invoked.
 - Actual dependency source contracts: writer claim 3, image writer 6, registered world 73, tank presentation 30, plus the new GoalSelector check passed.
 - All Forge bridge Java sources compiled against SHA-verified exported dependency artifacts and the verified existing MOD output. API substitutes were not used.
 
 Native runtime acceptance is pending at this record's initial generation. Original saves remain read-only; private trial world/logs/JARs are excluded from Git.
+
+The first five private startup trials produced no observations; they are not native acceptance. Trials 1/3/4 failed Gradle task/configuration guards before gameplay. Trials 2/5 reached the native client but timed out at 600 seconds, with TacZ generated gunpack IO identified in the retained logs/thread dump. Native process exit was verified after these timeouts. Complete gunpack preparation and the mod's existing opt-out of automatic overwriting are being applied only to the dedicated private game directory; source saves and prior generated folders are retained.
 
 This slice does **not** install original eligibility/lifecycle hooks, retained PathFinder frontier/neighbor-candidate capture, terrain/malus volume consumers, decision burst, custom Boss adapters, client live overlay or controlled observer-effect acceptance. Those remain subsequent steps of the approved handoff, not inferred from snapshot/unit/compile success.

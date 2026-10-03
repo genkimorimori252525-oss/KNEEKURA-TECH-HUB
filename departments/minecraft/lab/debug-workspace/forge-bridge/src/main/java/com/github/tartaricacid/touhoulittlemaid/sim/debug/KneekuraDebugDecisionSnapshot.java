@@ -177,7 +177,10 @@ public final class KneekuraDebugDecisionSnapshot {
             out.addProperty("value", label(s));
             if (s.length() > 512) out.addProperty("status", "PARTIAL");
         } else if (value instanceof UUID uuid) out.addProperty("value", uuid.toString());
-        else if (value.getClass() == Integer.class || value.getClass() == Long.class || value.getClass() == Short.class
+        else if (value.getClass() == Long.class) {
+            out.addProperty("value", Long.toString((Long) value));
+            out.addProperty("encoding", "INT64_DECIMAL_STRING");
+        } else if (value.getClass() == Integer.class || value.getClass() == Short.class
                 || value.getClass() == Byte.class || value.getClass() == Float.class || value.getClass() == Double.class) {
             Number number = (Number) value;
             if (Double.isFinite(number.doubleValue())) out.addProperty("value", number);

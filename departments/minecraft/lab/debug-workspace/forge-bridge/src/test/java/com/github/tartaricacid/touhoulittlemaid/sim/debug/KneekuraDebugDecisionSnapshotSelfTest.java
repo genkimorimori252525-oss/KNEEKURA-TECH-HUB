@@ -55,6 +55,12 @@ public final class KneekuraDebugDecisionSnapshotSelfTest {
         require(expiry.get("canExpire").getAsBoolean(), "read cached expiry policy");
         require(expiry.get("timeToLive").getAsJsonPrimitive().isString(), "TTL must remain exact through JavaScript JSON parsing");
         require(expiry.getAsJsonObject("value").get("status").getAsString().equals("NOT_EXPOSED"), "opaque expirable value");
+        for (long value : new long[] {Long.MIN_VALUE, Long.MAX_VALUE, 100L}) {
+            JsonObject encoded = snapshot.memoryValue(value);
+            require(encoded.get("value").getAsJsonPrimitive().isString(), "64-bit memory must not lose precision in JavaScript");
+            require(encoded.get("value").getAsString().equals(Long.toString(value)), "exact signed memory value");
+            require(encoded.get("encoding").getAsString().equals("INT64_DECIMAL_STRING"), "explicit memory value encoding");
+        }
         System.out.println("Actual GoalSelector snapshot: bounded, revision fenced, no AI replay or mutation");
     }
 
