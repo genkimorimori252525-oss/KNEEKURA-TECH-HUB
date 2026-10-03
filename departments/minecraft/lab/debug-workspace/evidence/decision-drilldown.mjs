@@ -1,7 +1,8 @@
 import {selectDecisionRecords,validDecisionSnapshot} from './debug-workspace-decision-adapter.mjs';
 import {validOriginalDecisionEvent} from './original-decision-events.mjs';
+import {validTerrainGroundQuery} from './terrain-ground-query.mjs';
 
-const CHANNELS=new Set(['path_search','goal_transitions','brain_memory_changes','movement_control','base_malus','sensor_execution']);
+const CHANNELS=new Set(['path_search','goal_transitions','brain_memory_changes','movement_control','base_malus','sensor_execution','terrain_ground']);
 const safe=Number.isSafeInteger;
 function normalize(subjectUuid,identity,request) {
   if(typeof subjectUuid!=='string'||! /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(subjectUuid))throw new TypeError('EXACT_SUBJECT_UUID_REQUIRED');
@@ -84,6 +85,9 @@ export function queryDecisionDrilldown({observations,subjectUuid,identity,reques
     case 'path_search':items=pathSearch(events,query.maxNodes);break;
     case 'goal_transitions':items=events.filter(r=>['GOAL_START_RETURN','GOAL_STOP_RETURN'].includes(r.payload.kind)).map(directEvent);break;
     case 'brain_memory_changes':items=memoryChanges(selected,query);break;
+    case 'terrain_ground':items=selected.filter(r=>r.gameTime>=query.startTick&&validTerrainGroundQuery(r)).map(r=>({
+      tick:r.gameTime,data:structuredClone(r.payload.data),epistemic_status:'DIRECT_OBSERVED',
+      causal_relation:'UNKNOWN_CAUSALITY',source_observation_ids:[r.observationId]}));break;
     default: {
       const kind={movement_control:'CONTROL_TICK_RETURN',base_malus:'BASE_MALUS_RETURN',sensor_execution:'SENSOR_SCAN_RETURN'}[query.channel];
       items=events.filter(r=>r.payload.kind===kind).map(directEvent);
@@ -94,5 +98,6 @@ export function queryDecisionDrilldown({observations,subjectUuid,identity,reques
     status:total?'PARTIAL':'NOT_CAPTURED',totalMatchingItems:total,items,truncated:total>items.length,
     semantics:{readOnlyRetainedEvidence:true,adjacentEventsProveCausality:false,
       missingResultImpliesUnreachable:false,cacheEntriesImplyEvaluatedNeighbors:false,
+      queriedTerrainImpliesPathfinderEvaluation:false,
       missingMemoryChangesProveNoChange:false}};
 }

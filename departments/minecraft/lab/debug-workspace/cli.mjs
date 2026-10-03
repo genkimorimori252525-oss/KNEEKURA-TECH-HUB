@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {decisionBurstFromArgs} from './decision-burst-cli.mjs';
+import {terrainQueryFromArgs} from './terrain-query-cli.mjs';
 import {queryDecisionDrilldown} from './evidence/decision-drilldown.mjs';
 import {
   doctor,
@@ -107,6 +108,7 @@ async function main() {
     const target = await setTargetControl(current, entityUuid, {
       decisionSnapshot: process.argv.includes('--decision-snapshot'),
       decisionBurst: decisionBurstFromArgs(process.argv.slice(4)),
+      decisionTerrain: terrainQueryFromArgs(process.argv.slice(4)),
     });
     print({
       configFile: file,

@@ -59,6 +59,7 @@ public final class KneekuraDebugServerObserver {
     private static long nextBehaviorToken;
     private static boolean decisionSnapshotEnabled;
     private static KneekuraDebugDecisionBurstRequest decisionBurst;
+    private static KneekuraDebugTerrainQueryRequest decisionTerrain;
     private static final KneekuraDebugDecisionSnapshot DECISION_SNAPSHOT = new KneekuraDebugDecisionSnapshot();
 
     private KneekuraDebugServerObserver() {
@@ -83,6 +84,7 @@ public final class KneekuraDebugServerObserver {
 
         KneekuraDebugDecisionBurstRuntime.onTick(value,server,localServerTick,targetUuid,
                 targetRevision,decisionBurst,DECISION_SNAPSHOT);
+        KneekuraDebugTerrainRuntime.onTick(value,server,localServerTick,targetUuid,targetRevision,decisionTerrain);
 
         UUID selected = targetUuid;
         if (selected == null) {
@@ -223,8 +225,11 @@ public final class KneekuraDebugServerObserver {
             }
             KneekuraDebugDecisionBurstRequest nextBurst=KneekuraDebugDecisionBurstRequest.parse(root.get("decisionBurst"));
             KneekuraDebugDecisionBurstRuntime.validateRequest(nextBurst,next);
+            KneekuraDebugTerrainQueryRequest nextTerrain=KneekuraDebugTerrainQueryRequest.parse(root.get("decisionTerrain"));
+            if(nextTerrain!=null&&next==null)throw new IllegalArgumentException("decisionTerrain requires a target");
 
             KneekuraDebugDecisionBurstRuntime.selectionChanged();
+            KneekuraDebugTerrainRuntime.clear();
             targetRevision = revision;
             targetUuid = next;
             lastSampleTick = Long.MIN_VALUE;
@@ -236,6 +241,7 @@ public final class KneekuraDebugServerObserver {
             nextBehaviorToken = 0L;
             decisionSnapshotEnabled = nextSnapshot;
             decisionBurst=nextBurst;
+            decisionTerrain=nextTerrain;
             DECISION_SNAPSHOT.reset(revision);
 
             TouhouLittleMaid.LOGGER.info(
@@ -252,6 +258,7 @@ public final class KneekuraDebugServerObserver {
 
     static void stop() {
         KneekuraDebugDecisionBurstRuntime.stop();
+        KneekuraDebugTerrainRuntime.clear();decisionTerrain=null;
         targetUuid=null;targetRevision=0;decisionSnapshotEnabled=false;decisionBurst=null;
         lastTargetPollTick=Long.MIN_VALUE;lastSampleTick=Long.MIN_VALUE;
         LAST_PAYLOAD.clear();LAST_EMIT_TICK.clear();BEHAVIOR_TOKENS.clear();

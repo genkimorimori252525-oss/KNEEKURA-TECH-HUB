@@ -65,7 +65,7 @@ final class KneekuraDebugDecisionBurstRuntime {
             TouhouLittleMaid.LOGGER.error("[KNEEKURA-DEBUG] decision burst arm rejected revision={}",revision,error);
         }
     }
-    private static KneekuraDebugDecisionBurstBudget.Context context(KneekuraDebugEnv.Config config,
+    static KneekuraDebugDecisionBurstBudget.Context context(KneekuraDebugEnv.Config config,
             MinecraftServer server,Mob mob,long revision)throws IOException {
         if(config==null||!config.enabled()||server==null||mob==null||mob.isRemoved()
                 ||!(mob.level() instanceof ServerLevel level)||level.getServer()!=server

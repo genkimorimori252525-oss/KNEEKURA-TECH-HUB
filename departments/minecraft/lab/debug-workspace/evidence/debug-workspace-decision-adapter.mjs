@@ -1,6 +1,7 @@
 import { createDecisionObservation } from './decision-observation.mjs';
 import { buildSampledMotionTrace } from '../../simlab/motion-trace.mjs';
 import { validOriginalDecisionEvent, appendOriginalDecisionEvents } from './original-decision-events.mjs';
+import {validTerrainGroundQuery} from './terrain-ground-query.mjs';
 
 const SUPPORTED_LANES = new Set([
   'SERVER_ENTITY_STATE',
@@ -196,9 +197,10 @@ export function observeDebugWorkspaceDecision({
   if (tick !== Infinity && !Number.isInteger(tick)) throw new TypeError('tick must be an integer or Infinity');
 
   const records = selectDecisionRecords(observations, subjectUuid, identity, tick)
-    .filter(r => r.lane !== 'AI_DECISION' || validDecisionSnapshot(r.payload) || validOriginalDecisionEvent(r));
+    .filter(r => r.lane !== 'AI_DECISION' || validDecisionSnapshot(r.payload) || validOriginalDecisionEvent(r) || validTerrainGroundQuery(r));
   const snapshotRecords=records.filter(r=>r.lane === 'AI_DECISION' && validDecisionSnapshot(r.payload));
   const originalRecords=records.filter(validOriginalDecisionEvent);
+  const terrain=records.filter(validTerrainGroundQuery).at(-1)??null;
   const latest = latestByLane(records.filter(r=>r.lane !== 'AI_DECISION' || validDecisionSnapshot(r.payload)));
   const state = latest.get('SERVER_ENTITY_STATE') ?? null;
   const target = latest.get('AI_TARGET') ?? null;
@@ -217,6 +219,8 @@ export function observeDebugWorkspaceDecision({
     goal_eligibility: { status: 'NOT_EXPOSED', source_observation_ids: [], detail: 'Snapshot does not replay canUse/canContinue or capture every original eligibility invocation.' },
     path_search_frontier: { status: 'NOT_EXPOSED', source_observation_ids: [], detail: 'Open/closed/cost search internals require bounded deep instrumentation.' },
     movement_control: { status: 'NOT_EXPOSED', source_observation_ids: [], detail: 'MoveControl/custom controller internals are not present in the selected lanes.' },
+    terrain_ground: {status:terrain?terrain.payload.data.status:'NOT_CAPTURED',source_observation_ids:refs(terrain),
+      detail:'Explicit loaded ground query only; cached own overrides/defaults are not effective navigation costs or evaluated neighbors.'},
   };
 
   const stages = {};
@@ -225,6 +229,12 @@ export function observeDebugWorkspaceDecision({
   if (brain) stateFacts.push(sampledFact(brain, 'brain_memory', compactBrain(brain.payload), 'Only explicitly exposed memories are represented.'));
   if (target) stateFacts.push(sampledFact(target, 'mob_target', compactTarget(target.payload)));
   if (stateFacts.length) stages.STATE = { facts: stateFacts };
+  if(terrain) {
+    stages.STATE??={facts:[]};
+    stages.STATE.facts.push({key:'terrain_ground',value:terrain.payload.data,epistemic_status:'DIRECT_OBSERVED',
+      causal_relation:'UNKNOWN_CAUSALITY',source_observation_ids:refs(terrain),
+      note:'Observer queried ground; not selected evaluator admission, live effective malus or pathfinder evaluation.'});
+  }
 
   if (running) {
     stages.EXECUTION = { facts: [sampledFact(
@@ -313,7 +323,7 @@ export function observeDebugWorkspaceDecision({
       version: '1',
       family: 'GENERIC_MOB_BASELINE',
       provenance: 'SERVER_ENTITY_STATE/AI_TARGET/BRAIN_MEMORY/RUNNING_BEHAVIORS/BEHAVIOR_TRANSITION/NAVIGATION/AI_DECISION',
-      observer_effect_risk: originalRecords.length ? 'BOUNDED_INSTRUMENTED_OBSERVER' : 'BOUNDED_SAMPLED_OBSERVER',
+      observer_effect_risk: terrain ? 'BOUNDED_GROUND_QUERY_OBSERVER' : originalRecords.length ? 'BOUNDED_INSTRUMENTED_OBSERVER' : 'BOUNDED_SAMPLED_OBSERVER',
     },
     capabilities,
     stages,
@@ -325,6 +335,7 @@ export function observeDebugWorkspaceDecision({
       ...(navigation ? ['navigation'] : []),
       ...(snapshot ? SNAPSHOT_SECTIONS.filter(name => snapshot.payload.sections[name].status !== 'NOT_EXPOSED') : []),
       ...(originalRecords.length ? ['original_decision_events'] : []),
+      ...(terrain ? ['terrain_ground'] : []),
     ],
   });
 }

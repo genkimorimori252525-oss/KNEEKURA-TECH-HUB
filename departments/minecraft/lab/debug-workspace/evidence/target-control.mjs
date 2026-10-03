@@ -89,7 +89,18 @@ export function normalizeDecisionBurst(value) {
   return {...Object.fromEntries(Object.keys(limits).map(key=>[key,value[key]])),channels:[...value.channels]};
 }
 
-export async function setTargetControl(current, targetUuid, { decisionSnapshot = false,decisionBurst = null } = {}) {
+export function normalizeDecisionTerrain(value) {
+  if(value==null)return null;
+  if(typeof value!=='object'||Array.isArray(value)||Object.keys(value).sort().join(',')!=='maxCells,maxMillis,radius'||
+      !Number.isSafeInteger(value.radius)||value.radius<0||value.radius>3||
+      !Number.isSafeInteger(value.maxCells)||value.maxCells<1||value.maxCells>49||
+      !Number.isSafeInteger(value.maxMillis)||value.maxMillis<1||value.maxMillis>50) {
+    throw new TypeError('Invalid decisionTerrain: require radius 0..3, maxCells 1..49 and maxMillis 1..50');
+  }
+  return {radius:value.radius,maxCells:value.maxCells,maxMillis:value.maxMillis};
+}
+
+export async function setTargetControl(current, targetUuid, { decisionSnapshot = false,decisionBurst = null,decisionTerrain = null } = {}) {
   assertCurrentIdentity(current);
   const normalized = normalizeTargetUuid(targetUuid);
   if (typeof decisionSnapshot !== 'boolean') throw new TypeError('decisionSnapshot must be boolean');
@@ -97,6 +108,8 @@ export async function setTargetControl(current, targetUuid, { decisionSnapshot =
   const burst=normalizeDecisionBurst(decisionBurst);
   if(burst&&normalized===null)throw new TypeError('decisionBurst requires a target');
   if(burst&&current.decisionHooksEnabled!==true)throw new TypeError('DECISION_HOOKS_NOT_ENABLED');
+  const terrain=normalizeDecisionTerrain(decisionTerrain);
+  if(terrain&&normalized===null)throw new TypeError('decisionTerrain requires a target');
   const existing = await readTargetControl(current);
   const file = existing.file;
   const revision = (existing.revision ?? 0) + 1;
@@ -111,6 +124,7 @@ export async function setTargetControl(current, targetUuid, { decisionSnapshot =
     targetUuid: normalized,
     decisionSnapshot,
     decisionBurst:burst,
+    decisionTerrain:terrain,
     updatedAt: nowIso(),
   };
 
