@@ -75,5 +75,32 @@
     "log_sha256": "28b9bfb89eb651e8b11207cd3e2caeb9c0adcff63419c9055e7fa6381f73ce5f",
     "temporary_directory_reason": "Disposable Git-external test root; no production guard or test changed."
   },
-  "retention": "Only hashes, source identities, compact results and limitations are tracked; raw logs/worlds/assets/credentials are excluded."
+  "retention": "Only hashes, source identities, compact results and limitations are tracked; raw logs/worlds/assets/credentials are excluded.",
+  "hosted": {
+    "source_commit": "73c783235cf2a72c4c2ee2ab2d5d68db8ad1dbd1",
+    "source_tree": "2d341d7c5a5f21a4d764f7a596fb379fa7e5af7d",
+    "runner": "GitHub-hosted ubuntu-latest",
+    "forge": {
+      "workflow_run_id": 37136050811,
+      "job_id": 111240686248,
+      "url": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/37136050811",
+      "conclusion": "success",
+      "build": "success",
+      "required_tests": 23,
+      "passed": 23,
+      "failed": 0,
+      "server_log_summary": "All 23 required tests passed :)"
+    },
+    "repository_suite": {
+      "workflow_run_id": 37136054198,
+      "job_id": 111240695629,
+      "url": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/37136054198",
+      "conclusion": "success",
+      "passed": 3141,
+      "skipped": 332,
+      "warnings": 8,
+      "duration_seconds": 288.78
+    },
+    "notes": "Hosted results bind this exact source generation. A later documentation-only checkpoint does not change the tested MOD source."
+  }
 }
