@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {queryDecisionDrilldown} from '../decision-drilldown.mjs';
+import {validOriginalDecisionEvent,appendOriginalDecisionEvents} from '../original-decision-events.mjs';
 const uuid='00000000-0000-0000-0000-000000000001';
 const identity={debugSessionId:'s',runId:'r',runSnapshotId:'snap',processEpoch:1,arenaEpoch:2,targetRevision:1};
 function row(kind,data,tick=100){return {kind:'observation',lane:'AI_DECISION',observationId:'obs:'+kind+':'+tick,
@@ -10,6 +11,24 @@ function row(kind,data,tick=100){return {kind:'observation',lane:'AI_DECISION',o
   observerCostNanos:10,observerCostScope:'BUILD_AND_FIRST_BYTE_CHECK_EXCLUDES_FINAL_ENCODING_WRITER'}};}
 const request=channel=>({channel,startTick:90,endTick:110,limit:8,maxNodes:1});
 const query=(observations,channel='path_search')=>queryDecisionDrilldown({observations,subjectUuid:uuid,identity,request:request(channel)});
+
+test('native Gson omitted unknown identities preserve original callbacks without inventing IDs',()=>{
+  const fixtures=[
+    ['GOAL_START_RETURN',{selector:'goal',goalClass:'Goal',priority:1,instanceIdentityStatus:'NOT_EXPOSED',running:true,reasonStatus:'NOT_EXPOSED'}],
+    ['BRAIN_TICK_RETURN',{brainClass:'Brain',storedBrainMatch:true}],
+    ['BEHAVIOR_TRY_START_RETURN',{className:'Behavior',cachedStatus:'RUNNING',result:true,reasonStatus:'NOT_EXPOSED'}],
+    ['SENSOR_SCAN_RETURN',{className:'Sensor',candidatePopulationStatus:'NOT_EXPOSED'}]];
+  for(const [kind,data] of fixtures){
+    const record=row(kind,data),before=JSON.stringify(record);assert.equal(validOriginalDecisionEvent(record),true,kind);
+    const stages={},capabilities={},timeline=[];appendOriginalDecisionEvents([record],stages,capabilities,timeline);
+    assert.equal(timeline.length,1);assert.equal(timeline[0].summary.instanceIdentity,null);
+    assert.equal(timeline[0].summary.instanceIdentityStatus,'NOT_EXPOSED');assert.equal(JSON.stringify(record),before);
+    if(kind==='SENSOR_SCAN_RETURN')assert.equal(query([record],'sensor_execution').items[0].data.instanceIdentityStatus,'NOT_EXPOSED');
+    if(kind.startsWith('GOAL_'))assert.equal(query([record],'goal_transitions').items.length,1);
+    const invalid=structuredClone(record);invalid.payload.data.instanceIdentityStatus='AVAILABLE';
+    assert.equal(validOriginalDecisionEvent(invalid),false);
+  }
+});
 function frontier(){return {status:'AVAILABLE',data:{nodes:[0,1].map(x=>({x,y:64,z:0,g:x,h:1,f:x+1,costMalus:0,
   walkedDistance:x,pathType:'WALKABLE',openAtReturn:true,closedAtReturn:false,cacheRole:'OPEN_AT_RETURN'})),
   cacheNodeCount:2,truncated:false,phase:'OUTER_BEFORE_DONE_AFTER_INNER_RETURN',neighborEvaluationTraceStatus:'NOT_EXPOSED',

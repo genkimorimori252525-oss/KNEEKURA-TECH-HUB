@@ -4,6 +4,8 @@ import os from 'node:os';
 import {fileURLToPath} from 'node:url';
 import {spawnSync} from 'node:child_process';
 import {writeFileSync} from 'node:fs';
+import assert from 'node:assert/strict';
+import {validOriginalDecisionEvent,originalDecisionData} from '../evidence/original-decision-events.mjs';
 const root=fileURLToPath(new URL('../../',import.meta.url));
 const main=path.join(root,'debug-workspace/forge-bridge/src/main/java/com/github/tartaricacid/touhoulittlemaid/sim/debug');
 const test=path.join(root,'debug-workspace/forge-bridge/src/test/java/com/github/tartaricacid/touhoulittlemaid/sim/debug');
@@ -19,6 +21,7 @@ function run(command,args,env={}){
  const result=spawnSync(command,['@'+argFile],{cwd:root,encoding:'utf8',timeout:120000,maxBuffer:4*1024*1024,windowsHide:true,env:{...process.env,...env}});
  if(result.stdout)process.stdout.write(result.stdout);if(result.stderr)process.stderr.write(result.stderr);
  if(result.error||result.status!==0)throw new Error('Real API source check failed '+command,{cause:result.error});
+ return result.stdout;
 }
 try {
  const names=['Env','ActionJournal','ArenaController','ArenaOwnerGrant','ForgeArenaBackend','ArenaRuntime','Durability','EvidenceWriter',
@@ -26,11 +29,20 @@ try {
   'CaptureSession','CaptureBarrier','CaptureRestoration','ImageArtifact','CardinalCapture','CapturePolicy','CaptureOwner','CaptureEvidenceSink','CaptureClock',
   'TankPresentationRecipe','TankPresentation','TankView','DecisionSnapshot','DecisionBurstBudget','DecisionHooks','TerrainField','SynchedCached',
   'DecisionAdapter','DecisionBurstRequest','AdapterSourceProof','TwilightForestDescriptor','TwilightForestReturnDescriptor','TwilightForestAdapter',
-  'MotionTraceCache','MotionOverlayRuntime','MotionOverlayGeometry'];
+  'MotionTraceCache','MotionOverlayRuntime','MotionOverlayGeometry','MotionOverlay'];
  const sources=names.map(n=>path.join(main,'KneekuraDebug'+n+'.java'));
  const checks=['EvidenceClaim','CaptureWriter','RegisteredWorld','TankPresentation','DecisionSnapshot','DecisionHooks','TerrainField','SynchedCached','MotionTraceCache','MotionOverlayGeometry','MotionWriter'];
- run(executable('javac'),['--release','17','-proc:none','-cp',classpath,'-d',output,...sources,...checks.map(n=>path.join(test,'KneekuraDebug'+n+'SelfTest.java'))]);
+ run(executable('javac'),['--release','17','-proc:none','-cp',classpath,'-d',output,...sources,...checks.map(n=>path.join(test,'KneekuraDebug'+n+'SelfTest.java')),path.join(test,'KneekuraDebugDecisionIdentityInterop.java')]);
  for(const name of checks.filter(n=>n!=='MotionWriter'))run(executable('java'),['-cp',output+path.delimiter+classpath,'com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebug'+name+'SelfTest']);
  for(const mode of ['OFF','ON'])run(executable('java'),['-cp',output+path.delimiter+classpath,'com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugMotionWriterSelfTest',mode],{KNEEKURA_DEBUG_MOTION_OVERLAY:mode==='ON'?'1':'0'});
+ const identityOutput=run(executable('java'),['-cp',output+path.delimiter+classpath,'com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugDecisionIdentityInterop']);
+ const identityLine=identityOutput.split(/\r?\n/).find(line=>line.startsWith('INTEROP:'));
+ assert.ok(identityLine,'genuine identity-cap/Gson interop output required');
+ const identityPayloads=JSON.parse(identityLine.slice(8));assert.equal(identityPayloads.length,4);
+ for(const payload of identityPayloads){
+  const row={source:{side:'SERVER'},payload};assert.equal(validOriginalDecisionEvent(row),true,payload.kind);
+  const data=originalDecisionData(row);assert.equal(data.instanceIdentity,null);assert.equal(data.instanceIdentityStatus,'NOT_EXPOSED');
+ }
+ console.log('Genuine component128/Goal256 limits + production Gson omitted-null output preserve four original kinds as unknown identity');
  console.log('Combined owner/Arena/camera actual Forge API compilation and writer/world source tests passed; no game process launched; full pinned mod compile remains separate');
 }finally{await rm(output,{recursive:true,force:true});}

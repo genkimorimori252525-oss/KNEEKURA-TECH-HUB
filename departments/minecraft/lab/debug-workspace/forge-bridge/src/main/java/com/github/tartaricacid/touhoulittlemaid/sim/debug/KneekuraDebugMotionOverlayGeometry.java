@@ -4,6 +4,11 @@ import java.util.*;
 final class KneekuraDebugMotionOverlayGeometry {
  record Line(double x0,double y0,double z0,double x1,double y1,double z1,String traceClass,String role,List<String> sourceIds) { }
  static List<Line> lines(KneekuraDebugMotionTraceCache.Snapshot trace,String dimension,long gameTime,double cameraX,double cameraY,double cameraZ) {
+  return lines(trace,dimension,gameTime,cameraX,cameraY,cameraZ,true);
+ }
+ static List<Line> lines(KneekuraDebugMotionTraceCache.Snapshot trace,String dimension,long gameTime,double cameraX,double cameraY,double cameraZ,boolean captureQuiescent) {
+  // Raw Cardinal owns the framebuffer through restoration and its final durable acknowledgement.
+  if(!captureQuiescent)return List.of();
   var out=new ArrayList<Line>();var visible=new HashSet<Integer>();
   for(int i=0;i<trace.samples().size();i++){
    var s=trace.samples().get(i);

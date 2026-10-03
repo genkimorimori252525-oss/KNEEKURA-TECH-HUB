@@ -29,6 +29,20 @@ function bounded(value, depth=0, budget={count:0}) {
 function numberOrUnknown(data,key) {
   return Number.isFinite(data[key]) || (data[key] === undefined && data[key+'Status'] === 'NOT_EXPOSED');
 }
+function validInstanceIdentity(data,requiredStatus=false) {
+  const status=data.instanceIdentityStatus;
+  if(text(data.instanceIdentity))return status==='AVAILABLE'||(!requiredStatus&&status===undefined);
+  // The real writer's Gson omits JsonNull fields. Missing identity remains unknown, never an ID.
+  return data.instanceIdentity==null&&(status==='NOT_EXPOSED'||(!requiredStatus&&status===undefined));
+}
+export function originalDecisionData(record) {
+  const data=structuredClone(record.payload.data),kind=record.payload.kind;
+  if(kind.startsWith('GOAL_')||kind==='BRAIN_TICK_RETURN'||kind.startsWith('BEHAVIOR_')||kind==='SENSOR_SCAN_RETURN') {
+    data.instanceIdentity??=null;
+    data.instanceIdentityStatus=data.instanceIdentity===null?'NOT_EXPOSED':'AVAILABLE';
+  }
+  return data;
+}
 function validFrontier(section) {
   if (!object(section)) return false;
   if (section.status === 'NOT_EXPOSED') return section.detail === 'CUSTOM_NODE_EVALUATOR';
@@ -50,17 +64,16 @@ function validFrontier(section) {
 function validData(kind,d) {
   if (kind.startsWith('GOAL_')) {
     if (!['goal','target'].includes(d.selector) || !text(d.goalClass) || !integer(d.priority) ||
-        !(d.instanceIdentityStatus === 'AVAILABLE' ? text(d.instanceIdentity) :
-          d.instanceIdentityStatus === 'NOT_EXPOSED' && d.instanceIdentity === null)) return false;
+        !validInstanceIdentity(d,true)) return false;
     return kind.includes('ELIGIBILITY') || kind.includes('CONTINUATION')
       ? typeof d.result === 'boolean' && d.rejectionReasonStatus === 'NOT_EXPOSED' && d.callSiteStatus === 'NOT_EXPOSED'
       : typeof d.running === 'boolean' && d.reasonStatus === 'NOT_EXPOSED';
   }
-  if (kind === 'BRAIN_TICK_RETURN') return text(d.brainClass) && typeof d.storedBrainMatch === 'boolean' && (d.instanceIdentity === null || text(d.instanceIdentity));
-  if (kind.startsWith('BEHAVIOR_')) return text(d.className) && (d.instanceIdentity === null || text(d.instanceIdentity)) &&
+  if (kind === 'BRAIN_TICK_RETURN') return text(d.brainClass) && typeof d.storedBrainMatch === 'boolean' && validInstanceIdentity(d);
+  if (kind.startsWith('BEHAVIOR_')) return text(d.className) && validInstanceIdentity(d) &&
     ['RUNNING','STOPPED'].includes(d.cachedStatus) && d.reasonStatus === 'NOT_EXPOSED' &&
     (kind !== 'BEHAVIOR_TRY_START_RETURN' || typeof d.result === 'boolean');
-  if (kind === 'SENSOR_SCAN_RETURN') return text(d.className) && (d.instanceIdentity === null || text(d.instanceIdentity)) && d.candidatePopulationStatus === 'NOT_EXPOSED';
+  if (kind === 'SENSOR_SCAN_RETURN') return text(d.className) && validInstanceIdentity(d) && d.candidatePopulationStatus === 'NOT_EXPOSED';
   if (kind === 'CONTROL_TICK_RETURN') return ['move','look','jump'].includes(d.control) && object(d.cachedBaseFields) &&
     text(d.cachedBaseFields.className) && d.cachedBaseFields.fieldScope === 'BASE_CONTROL_FIELDS_ONLY';
   if (kind === 'BASE_MALUS_RETURN') return text(d.pathType) && numberOrUnknown(d,'returnedMalus') &&
@@ -89,12 +102,13 @@ export function appendOriginalDecisionEvents(records,stages,capabilities,timelin
   for (const record of records) {
     if (!validOriginalDecisionEvent(record)) continue;
     const p=record.payload;
+    const data=originalDecisionData(record);
     const [stage,capability]=KINDS[p.kind];
     const algorithm=p.kind === 'PATH_SEARCH_STATE';
     const status=algorithm ? 'INSTRUMENTED_ALGORITHM_STATE' : 'DIRECT_OBSERVED';
     const relation=algorithm ? 'ALGORITHM_TRACE_RELATION' : 'DIRECT_RUNTIME_RELATION';
     stages[stage] ??= {facts:[]};
-    stages[stage].facts.push({key:p.kind.toLowerCase(),value:p.data,epistemic_status:status,
+    stages[stage].facts.push({key:p.kind.toLowerCase(),value:data,epistemic_status:status,
       causal_relation:relation,source_observation_ids:[record.observationId],
       note:'Bounded original invocation only; no reason, complete decision history or adjacent-event causality is inferred.'});
     const unavailable=algorithm && p.data.frontier.status === 'NOT_EXPOSED';
@@ -105,7 +119,7 @@ export function appendOriginalDecisionEvents(records,stages,capabilities,timelin
         detail:'Finite opt-in capture of observed invocations; absent or suppressed invocations and causal reasons remain unknown.'};
     }
     timeline.push({event_id:record.observationId,tick:record.gameTime,stage,kind:p.kind,
-      summary:{...p.data,burstId:p.burstId,eventIndex:p.eventIndex},epistemic_status:status,
+      summary:{...data,burstId:p.burstId,eventIndex:p.eventIndex},epistemic_status:status,
       causal_relation:relation,source_observation_ids:[record.observationId]});
   }
 }

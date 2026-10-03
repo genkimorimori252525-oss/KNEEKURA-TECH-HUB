@@ -24,7 +24,7 @@ The full original handoff is **not marked complete**. Completion checkboxes in i
 4. Native overlay draw submission is observed, but pixels/framebuffer visibility and GPU cost are not verified. Cardinal raw capture must keep its existing authority/restoration gates and exclude derived overlays.
 5. JFR and bounded render/contract/SVG cost are measured descriptively. Paired identical-state experiments, GPU/OS attribution and complete total observer-effect acceptance remain open; no negligible-overhead conclusion is claimed.
 6. Full open/closed/candidate/neighbor path history and overridden/custom malus/control internals remain outside the current hook capabilities. Cached search nodes and queried ground must not be promoted to complete evaluated frontier or effective cost.
-7. Final whole-branch independent review and exact final published CI are recorded in the continuation verification record when available. Draft status remains until broader acceptance and integration are explicitly decided.
+7. One independent whole-branch review and a single tested fix pass are [recorded](lab/docs/INDEPENDENT-NATIVE-REVIEW-2026-10-03.md). Final published CI remains authoritative in Draft PR80 checks; an earlier success is not final-head acceptance. Draft status remains until broader acceptance and integration are explicitly decided.
 
 ## Reproduction and verification
 

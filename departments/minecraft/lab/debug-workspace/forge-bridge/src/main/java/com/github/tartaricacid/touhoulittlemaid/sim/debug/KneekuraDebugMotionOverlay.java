@@ -27,7 +27,7 @@ public final class KneekuraDebugMotionOverlay {
   if(trace.context()==null||config==null||trace.samples().isEmpty())return;
   if(!Objects.equals(lastContext,trace.context())){lastContext=trace.context();frames=0;totalNanos=0;maxNanos=0;}
   var camera=event.getCamera().getPosition();String dimension=mc.level.dimension().location().toString();long gameTime=mc.level.getGameTime();
-  var lines=KneekuraDebugMotionOverlayGeometry.lines(trace,dimension,gameTime,camera.x,camera.y,camera.z);if(lines.isEmpty())return;
+  var lines=KneekuraDebugMotionOverlayGeometry.lines(trace,dimension,gameTime,camera.x,camera.y,camera.z,KneekuraDebugCardinalCapture.quiescent());if(lines.isEmpty())return;
   PoseStack pose=event.getPoseStack();pose.pushPose();
   try {
    pose.translate(-camera.x,-camera.y,-camera.z);var buffers=mc.renderBuffers().bufferSource();var consumer=buffers.getBuffer(RenderType.lines());

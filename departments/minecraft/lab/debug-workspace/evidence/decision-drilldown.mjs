@@ -1,5 +1,5 @@
 import {selectDecisionRecords,validDecisionSnapshot} from './debug-workspace-decision-adapter.mjs';
-import {validOriginalDecisionEvent} from './original-decision-events.mjs';
+import {validOriginalDecisionEvent,originalDecisionData} from './original-decision-events.mjs';
 import {validTerrainGroundQuery} from './terrain-ground-query.mjs';
 import {registeredModDecisionAdapters} from './adapters/registered-mod-adapters.mjs';
 
@@ -37,7 +37,7 @@ function pathSearch(records,maxNodes) {
   return [...searches.values()];
 }
 function directEvent(record) {
-  return {tick:record.gameTime,kind:record.payload.kind,data:structuredClone(record.payload.data),reasonKnown:false,
+  return {tick:record.gameTime,kind:record.payload.kind,data:originalDecisionData(record),reasonKnown:false,
     epistemic_status:'DIRECT_OBSERVED',causal_relation:'DIRECT_RUNTIME_RELATION',source_observation_ids:[record.observationId]};
 }
 function memoryMap(record) {
