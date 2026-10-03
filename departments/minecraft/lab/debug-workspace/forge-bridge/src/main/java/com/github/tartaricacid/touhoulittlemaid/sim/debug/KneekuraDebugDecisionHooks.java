@@ -30,6 +30,8 @@ import net.minecraft.world.level.pathfinder.WalkNodeEvaluator;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.IdentityHashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.LongSupplier;
@@ -111,7 +113,7 @@ public final class KneekuraDebugDecisionHooks {
         private boolean record(String kind,String method,Data capture) {
             if(thread!=Thread.currentThread())return false;
             String channel=kind.startsWith("CONTROL_PROJECTILE_")&&channels.contains("projectile")?"projectile":
-                    kind.equals("MOD_TRANSITION_RETURN")?"mod":kind.startsWith("GOAL_")?"goal":kind.startsWith("PATH_")?"path":
+                    kind.startsWith("MOD_")?"mod":kind.startsWith("GOAL_")?"goal":kind.startsWith("PATH_")?"path":
                     kind.startsWith("CONTROL_")?"control":kind.startsWith("BASE_MALUS_")?"malus":
                     kind.startsWith("SENSOR_")?"sensor":kind.startsWith("BRAIN_")||kind.startsWith("BEHAVIOR_")?"brain":null;
             if(channel==null||!channels.contains(channel))return false;
@@ -209,6 +211,19 @@ public final class KneekuraDebugDecisionHooks {
             record("MOD_TRANSITION_RETURN",owner.getClass().getName()+"."+method+".RETURN",
                 ()->modAdapter.captureOriginalReturn(subject,owner,method,requested));
         }
+        void knightCoordination(Object goal,List<?> members) {
+            if(modAdapter==null||thread!=Thread.currentThread()||subject==null||goal==null||members==null||
+                    !subject.getClass().getName().equals("twilightforest.entity.boss.KnightPhantom")||
+                    !goal.getClass().getName().equals("twilightforest.entity.ai.goal.PhantomUpdateFormationAndMoveGoal")||
+                    members.getClass()!=ArrayList.class)return;
+            try {
+                if(!budget.allows(currentContext.get(),time.getAsLong())||
+                        KneekuraDebugDecisionSnapshot.read(goal.getClass(),"boss",goal)!=subject||
+                        !budget.context().subjectUuid().equals(KneekuraDebugDecisionSnapshot.read(Entity.class,"uuid",subject).toString()))return;
+            }catch(ReflectiveOperationException|RuntimeException unavailable){return;}
+            record("MOD_COORDINATION_RETURN",goal.getClass().getName()+".broadcastMyFormation.RETURN",
+                ()->modAdapter.captureKnightCoordination(subject,goal,members,Math.min(16,nodeLimit)));
+        }
     }
 
     public static void goalReturn(WrappedGoal wrapper,boolean continuation,boolean result) {
@@ -216,6 +231,9 @@ public final class KneekuraDebugDecisionHooks {
     }
     public static void modReturn(Object owner,String method,Object requested) {
         Session session=active;if(session!=null)session.modReturn(owner,method,requested);
+    }
+    public static void knightCoordination(Object goal,List<?> members) {
+        Session session=active;if(session!=null)session.knightCoordination(goal,members);
     }
     public static void goalLifecycle(WrappedGoal wrapper,boolean started) {
         Session session=active;if(session!=null)session.goalLifecycle(wrapper,started);

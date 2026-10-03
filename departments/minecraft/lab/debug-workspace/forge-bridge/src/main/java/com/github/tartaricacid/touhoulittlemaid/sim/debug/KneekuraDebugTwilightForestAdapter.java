@@ -13,6 +13,8 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.versions.forge.ForgeVersion;
 import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -24,6 +26,10 @@ final class KneekuraDebugTwilightForestAdapter implements KneekuraDebugDecisionA
     static KneekuraDebugTwilightForestAdapter shared(){return SHARED;}
     private Boolean compatible;
     private ClassLoader provenLoader;
+    private static final String KNIGHT_GOAL="twilightforest.entity.ai.goal.PhantomUpdateFormationAndMoveGoal";
+    private static final String KNIGHT_GOAL_HASH="bb1f3d4374a2f5926050c3fd9cf0dff142e47d81daf4d0f801d79b473f1fdaf1";
+    private Boolean coordinationCompatible;
+    private ClassLoader coordinationLoader;
     @Override public JsonObject descriptor(){return KneekuraDebugTwilightForestDescriptor.descriptor();}
     @Override public boolean supports(Mob entity){return entity!=null&&SUBJECTS.contains(entity.getClass().getName());}
     @Override public JsonObject describeCapabilities() {
@@ -100,6 +106,67 @@ final class KneekuraDebugTwilightForestAdapter implements KneekuraDebugDecisionA
         JsonObject root=new JsonObject();root.add("descriptor",KneekuraDebugTwilightForestReturnDescriptor.descriptor());
         root.addProperty("compatibilityStatus","MATCHED_DEVELOPMENT_RESOURCE_NOT_RESIDENT_ATTESTATION");
         root.addProperty("entityClass",entity.getClass().getName());root.add("data",data);return root;
+    }
+    JsonObject captureKnightCoordination(Mob entity,Object goal,List<?> members,int limit)throws ReflectiveOperationException {
+        if(!supports(entity)||!compatible(entity)||!coordinationCompatible(entity,goal))
+            throw new IllegalStateException("TF_COORDINATION_SOURCE_UNAVAILABLE");
+        JsonObject data=cachedKnightCoordination(entity,goal,members,limit),descriptor=descriptor(),proof=new JsonObject();
+        proof.add("mappedArtifactSha256",descriptor.get("mappedArtifactSha256"));
+        proof.addProperty("goalClassSha256",KNIGHT_GOAL_HASH);
+        proof.add("knightClassSha256",descriptor.getAsJsonObject("classHashes").get(entity.getClass().getName()));
+        proof.addProperty("compatibilityStatus","MATCHED_DEVELOPMENT_RESOURCE_NOT_RESIDENT_ATTESTATION");
+        data.add("sourceProof",proof);return data;
+    }
+    private boolean coordinationCompatible(Mob entity,Object goal) {
+        if(goal==null||!goal.getClass().getName().equals(KNIGHT_GOAL)||
+                goal.getClass().getClassLoader()!=entity.getClass().getClassLoader())return false;
+        if(coordinationCompatible!=null&&coordinationLoader==goal.getClass().getClassLoader())return coordinationCompatible;
+        coordinationLoader=goal.getClass().getClassLoader();coordinationCompatible=false;
+        try {
+            var mod=ModList.get().getModContainerById("twilightforest").orElse(null);if(mod==null)return false;
+            coordinationCompatible=KneekuraDebugAdapterSourceProof.verify(mod.getModInfo().getOwningFile().getFile().getFilePath(),
+                descriptor().get("mappedArtifactSha256").getAsString(),Map.of(KNIGHT_GOAL,KNIGHT_GOAL_HASH),owner->{
+                    try(var in=coordinationLoader.getResourceAsStream(owner.replace('.','/')+".class")) {
+                        return in==null?null:in.readNBytes(KneekuraDebugAdapterSourceProof.MAX_CLASS_BYTES+1);
+                    }
+                });
+        }catch(Exception|LinkageError unavailable){coordinationCompatible=false;}
+        return coordinationCompatible;
+    }
+    /** Copy only the originally passed JDK list and cached exact-class fields, never a new nearby query. */
+    static JsonObject cachedKnightCoordination(Object entity,Object goal,List<?> members,int limit)throws ReflectiveOperationException {
+        String goalName=KNIGHT_GOAL;
+        if(entity==null||!entity.getClass().getName().equals(PREFIX+"KnightPhantom")||goal==null||
+                !goal.getClass().getName().equals(goalName)||goal.getClass().getClassLoader()!=entity.getClass().getClassLoader()||
+                read(goal,"boss")!=entity)throw new IllegalArgumentException("TF_COORDINATION_OWNER_MISMATCH");
+        if(members==null||members.getClass()!=ArrayList.class)throw new IllegalArgumentException("TF_ORIGINAL_LIST_UNSUPPORTED");
+        if(limit<1||limit>16)throw new IllegalArgumentException("TF_COORDINATION_LIMIT_OUT_OF_RANGE");
+        JsonObject data=new JsonObject();data.addProperty("bossKind","KnightPhantom");
+        data.addProperty("methodOwner",goalName);data.addProperty("methodName","broadcastMyFormation");
+        data.addProperty("sourceUuid",KneekuraDebugDecisionSnapshot.read(Entity.class,"uuid",entity).toString());
+        data.add("sourceStateAtReturn",knightStateAtReturn(entity));
+        int count=members.size();data.addProperty("originalListClass","java.util.ArrayList");
+        data.addProperty("originalListCount",count);data.addProperty("maxMembers",limit);data.addProperty("truncated",count>limit);
+        JsonArray copied=new JsonArray();
+        for(int i=0;i<Math.min(count,limit);i++) {
+            Object member=members.get(i);JsonObject item=new JsonObject();item.addProperty("listIndex",i);
+            item.addProperty("entityClass",member==null?"null":member.getClass().getName());
+            if(member!=null&&member.getClass()==entity.getClass()) {
+                item.addProperty("stateStatus","AVAILABLE");
+                item.addProperty("entityUuid",KneekuraDebugDecisionSnapshot.read(Entity.class,"uuid",member).toString());
+                item.add("cachedState",knightStateAtReturn(member));
+            }else {item.addProperty("stateStatus","NOT_EXPOSED");item.addProperty("detail","UNSUPPORTED_MEMBER_CLASS");}
+            copied.add(item);
+        }
+        data.add("membersAtReturn",copied);data.addProperty("dispatchScope","ORIGINAL_PASSED_LIST_AFTER_BROADCAST");
+        data.addProperty("memberStateScope","CACHED_FIELDS_AT_RETURN");
+        data.addProperty("affectedMembersStatus","NOT_EXPOSED");data.addProperty("leaderDecisionStatus","NOT_EXPOSED");
+        data.addProperty("groupIdentityStatus","NOT_EXPOSED");return data;
+    }
+    private static JsonObject knightStateAtReturn(Object entity)throws ReflectiveOperationException {
+        JsonObject state=new JsonObject();state.addProperty("number",(Integer)read(entity,"number"));
+        state.addProperty("currentFormation",enumName(read(entity,"currentFormation")));
+        state.addProperty("ticksProgress",(Integer)read(entity,"ticksProgress"));return state;
     }
     @Override public JsonObject captureSnapshot(Mob entity,KneekuraDebugDecisionBurstBudget.Context context,Limits limits)throws Exception {
         if(!supports(entity)||!entity.getUUID().toString().equals(context.subjectUuid()))throw new IllegalArgumentException("TF_EXACT_SUBJECT_REQUIRED");

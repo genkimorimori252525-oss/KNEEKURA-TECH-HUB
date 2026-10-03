@@ -1,4 +1,7 @@
+import twilightForestAnchor from './adapters/twilightforest-anchor.json' with {type:'json'};
+
 const KINDS = Object.freeze({
+  MOD_COORDINATION_RETURN: ['EXECUTION','mod_coordination'],
   GOAL_ELIGIBILITY_RETURN: ['EVALUATION','goal_eligibility'],
   GOAL_CONTINUATION_RETURN: ['EVALUATION','goal_eligibility'],
   GOAL_START_RETURN: ['EXECUTION','goal_lifecycle'],
@@ -68,7 +71,37 @@ function validFrontier(section) {
       (n.parentX === undefined ? n.parentY === undefined && n.parentZ === undefined :
         ['parentX','parentY','parentZ'].every(k=>integer(n[k]))));
 }
+function validKnightCoordination(d,record) {
+  const knight='twilightforest.entity.boss.KnightPhantom';
+  const goal='twilightforest.entity.ai.goal.PhantomUpdateFormationAndMoveGoal';
+  const formations=['HOVER','LARGE_CLOCKWISE','SMALL_CLOCKWISE','LARGE_ANTICLOCKWISE','SMALL_ANTICLOCKWISE',
+    'CHARGE_PLUSX','CHARGE_MINUSX','CHARGE_PLUSZ','CHARGE_MINUSZ','WAITING_FOR_LEADER','ATTACK_PLAYER_START','ATTACK_PLAYER_ATTACK'];
+  const int32=v=>integer(v)&&v>=-2147483648&&v<=2147483647;
+  const state=s=>object(s)&&Object.keys(s).length===3&&int32(s.number)&&int32(s.ticksProgress)&&formations.includes(s.currentFormation);
+  const proof=d.sourceProof;
+  const keys=['bossKind','methodOwner','methodName','sourceUuid','sourceStateAtReturn','sourceProof','originalListClass',
+    'originalListCount','maxMembers','truncated','membersAtReturn','dispatchScope','memberStateScope','affectedMembersStatus',
+    'leaderDecisionStatus','groupIdentityStatus'];
+  return Object.keys(d).length===keys.length&&Object.keys(d).every(k=>keys.includes(k))&&
+    d.bossKind==='KnightPhantom'&&d.methodOwner===goal&&d.methodName==='broadcastMyFormation'&&
+    uuid(d.sourceUuid)&&d.sourceUuid===record.scope?.entityUuid&&state(d.sourceStateAtReturn)&&
+    object(proof)&&Object.keys(proof).length===4&&proof.mappedArtifactSha256===twilightForestAnchor.mappedArtifactSha256&&
+    proof.goalClassSha256==='bb1f3d4374a2f5926050c3fd9cf0dff142e47d81daf4d0f801d79b473f1fdaf1'&&
+    proof.knightClassSha256===twilightForestAnchor.classHashes[knight]&&
+    proof.compatibilityStatus==='MATCHED_DEVELOPMENT_RESOURCE_NOT_RESIDENT_ATTESTATION'&&
+    d.originalListClass==='java.util.ArrayList'&&int32(d.originalListCount)&&d.originalListCount>=0&&
+    integer(d.maxMembers)&&d.maxMembers>=1&&d.maxMembers<=16&&
+    Array.isArray(d.membersAtReturn)&&d.membersAtReturn.length===Math.min(d.originalListCount,d.maxMembers)&&
+    d.truncated===(d.originalListCount>d.maxMembers)&&
+    d.membersAtReturn.every((m,i)=>object(m)&&m.listIndex===i&&text(m.entityClass)&&
+      (m.stateStatus==='AVAILABLE'?Object.keys(m).length===5&&m.entityClass===knight&&uuid(m.entityUuid)&&state(m.cachedState):
+        Object.keys(m).length===4&&m.stateStatus==='NOT_EXPOSED'&&m.detail==='UNSUPPORTED_MEMBER_CLASS'&&
+        m.entityUuid===undefined&&m.cachedState===undefined))&&
+    d.dispatchScope==='ORIGINAL_PASSED_LIST_AFTER_BROADCAST'&&d.memberStateScope==='CACHED_FIELDS_AT_RETURN'&&
+    ['affectedMembersStatus','leaderDecisionStatus','groupIdentityStatus'].every(k=>d[k]==='NOT_EXPOSED');
+}
 function validData(kind,d,record) {
+  if (kind === 'MOD_COORDINATION_RETURN') return validKnightCoordination(d,record);
   if (kind.startsWith('GOAL_')) {
     if (!['goal','target'].includes(d.selector) || !text(d.goalClass) || !integer(d.priority) ||
         !validInstanceIdentity(d,true)) return false;
