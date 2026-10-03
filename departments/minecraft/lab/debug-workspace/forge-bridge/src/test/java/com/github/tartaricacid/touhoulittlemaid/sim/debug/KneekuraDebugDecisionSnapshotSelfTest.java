@@ -5,6 +5,7 @@ import net.minecraft.util.profiling.InactiveProfiler;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.GoalSelector;
 import net.minecraft.world.entity.ai.goal.WrappedGoal;
+import net.minecraft.world.entity.ai.memory.ExpirableValue;
 
 import java.util.EnumSet;
 
@@ -44,6 +45,15 @@ public final class KneekuraDebugDecisionSnapshotSelfTest {
             @Override public String toString() { throw new AssertionError("must not stringify opaque memory"); }
         };
         require(snapshot.memoryValue(opaque).get("status").getAsString().equals("NOT_EXPOSED"), "opaque memory status");
+        ExpirableValue<Object> custom = new ExpirableValue<>(opaque, 100) {
+            @Override public Object getValue() { throw new AssertionError("custom memory value getter invoked"); }
+            @Override public long getTimeToLive() { throw new AssertionError("custom TTL getter invoked"); }
+            @Override public boolean canExpire() { throw new AssertionError("custom expiry getter invoked"); }
+        };
+        JsonObject expiry = snapshot.expirableValue(custom);
+        require(expiry.get("timeToLive").getAsLong() == 100, "read cached TTL without mutation");
+        require(expiry.get("canExpire").getAsBoolean(), "read cached expiry policy");
+        require(expiry.getAsJsonObject("value").get("status").getAsString().equals("NOT_EXPOSED"), "opaque expirable value");
         System.out.println("Actual GoalSelector snapshot: bounded, revision fenced, no AI replay or mutation");
     }
 

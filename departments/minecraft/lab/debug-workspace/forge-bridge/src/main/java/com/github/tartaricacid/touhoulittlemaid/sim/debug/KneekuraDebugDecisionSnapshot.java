@@ -144,9 +144,10 @@ public final class KneekuraDebugDecisionSnapshot {
             row.addProperty("present", optional.isPresent());
             if (optional.isPresent()) {
                 ExpirableValue<?> value = (ExpirableValue<?>) optional.get();
-                row.addProperty("canExpire", value.canExpire());
-                row.addProperty("timeToLive", value.getTimeToLive());
-                row.add("value", memoryValue(value.getValue()));
+                JsonObject expiry = expirableValue(value);
+                row.add("canExpire", expiry.get("canExpire"));
+                row.add("timeToLive", expiry.get("timeToLive"));
+                row.add("value", expiry.get("value"));
             }
             entries.add(row);
         }
@@ -154,6 +155,15 @@ public final class KneekuraDebugDecisionSnapshot {
         out.addProperty("truncated", memories.size() > MAX_ENTRIES);
         out.addProperty("brainClass", label(brain.getClass().getName()));
         out.addProperty("activeTickMechanismStatus", "NOT_EXPOSED");
+        return out;
+    }
+
+    JsonObject expirableValue(ExpirableValue<?> value) throws ReflectiveOperationException {
+        JsonObject out = new JsonObject();
+        long ttl = (Long) read(ExpirableValue.class, "timeToLive", value);
+        out.addProperty("canExpire", ttl != Long.MAX_VALUE);
+        out.addProperty("timeToLive", ttl);
+        out.add("value", memoryValue(read(ExpirableValue.class, "value", value)));
         return out;
     }
 
