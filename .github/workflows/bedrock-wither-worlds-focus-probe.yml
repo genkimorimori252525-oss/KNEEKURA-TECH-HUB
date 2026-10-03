@@ -1,0 +1,118 @@
+name: Bedrock Wither Worlds Focus Probe
+
+on:
+  push:
+    branches:
+      - codex/bedrock-wither-lifecycle-regressions-2026-10-03
+    paths:
+      - '.github/workflows/bedrock-wither-worlds-focus-probe.yml'
+      - '.github/bedrock-wither-worlds-focus-probe-request.txt'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bedrock-wither-worlds-focus-probe
+  cancel-in-progress: false
+
+jobs:
+  worlds-focus-probe:
+    runs-on: [self-hosted, Windows, X64]
+    timeout-minutes: 8
+    defaults:
+      run:
+        shell: powershell
+
+    steps:
+      - name: Inspect reverse keyboard focus toward Worlds tab
+        run: |
+          $ErrorActionPreference='Stop'
+          $out=Join-Path $env:GITHUB_WORKSPACE 'bedrock-worlds-focus-probe'
+          if (Test-Path $out) { Remove-Item $out -Recurse -Force }
+          New-Item -ItemType Directory -Path $out | Out-Null
+
+          Add-Type @'
+          using System;
+          using System.Runtime.InteropServices;
+          public static class Win32WorldsFocusBwr {
+            [DllImport("user32.dll")] public static extern bool SetCursorPos(int X,int Y);
+            [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr hWnd);
+            [DllImport("user32.dll")] public static extern IntPtr GetForegroundWindow();
+            [DllImport("user32.dll", CharSet=CharSet.Unicode)] public static extern int GetWindowText(IntPtr hWnd,System.Text.StringBuilder text,int count);
+            [DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr hWnd,int command);
+            [DllImport("user32.dll")] public static extern uint GetWindowThreadProcessId(IntPtr hWnd,IntPtr processId);
+            [DllImport("user32.dll")] public static extern bool AttachThreadInput(uint a,uint b,bool attach);
+            [DllImport("user32.dll")] public static extern bool BringWindowToTop(IntPtr hWnd);
+            [DllImport("kernel32.dll")] public static extern uint GetCurrentThreadId();
+          }
+          '@
+          Add-Type -AssemblyName System.Drawing
+          Add-Type -AssemblyName System.Windows.Forms
+
+          function Capture([string]$path) {
+            $s=[System.Windows.Forms.SystemInformation]::VirtualScreen
+            $bmp=New-Object System.Drawing.Bitmap $s.Width,$s.Height
+            $g=[System.Drawing.Graphics]::FromImage($bmp)
+            try {
+              $g.CopyFromScreen($s.Left,$s.Top,0,0,$s.Size)
+              $bmp.Save($path,[System.Drawing.Imaging.ImageFormat]::Png)
+            } finally { $g.Dispose(); $bmp.Dispose() }
+          }
+
+          function Get-ForegroundTitle {
+            $h=[Win32WorldsFocusBwr]::GetForegroundWindow()
+            $sb=New-Object System.Text.StringBuilder 512
+            [void][Win32WorldsFocusBwr]::GetWindowText($h,$sb,$sb.Capacity)
+            return $sb.ToString()
+          }
+
+          $sessionId=(Get-Process -Id $PID).SessionId
+          $p=Get-Process -ErrorAction SilentlyContinue |
+            Where-Object { $_.SessionId -eq $sessionId -and $_.MainWindowHandle -ne 0 -and $_.MainWindowTitle -eq 'Minecraft' } |
+            Select-Object -First 1
+          if ($null -eq $p) { throw 'Minecraft window absent' }
+
+          $fg=[Win32WorldsFocusBwr]::GetForegroundWindow()
+          $cur=[Win32WorldsFocusBwr]::GetCurrentThreadId()
+          $fgT=[Win32WorldsFocusBwr]::GetWindowThreadProcessId($fg,[IntPtr]::Zero)
+          $targetT=[Win32WorldsFocusBwr]::GetWindowThreadProcessId($p.MainWindowHandle,[IntPtr]::Zero)
+          if ($fgT -ne 0) { [Win32WorldsFocusBwr]::AttachThreadInput($cur,$fgT,$true) | Out-Null }
+          if ($targetT -ne 0 -and $targetT -ne $cur) { [Win32WorldsFocusBwr]::AttachThreadInput($cur,$targetT,$true) | Out-Null }
+          try {
+            [Win32WorldsFocusBwr]::ShowWindow($p.MainWindowHandle,9) | Out-Null
+            [Win32WorldsFocusBwr]::BringWindowToTop($p.MainWindowHandle) | Out-Null
+            [Win32WorldsFocusBwr]::SetForegroundWindow($p.MainWindowHandle) | Out-Null
+          } finally {
+            if ($targetT -ne 0 -and $targetT -ne $cur) { [Win32WorldsFocusBwr]::AttachThreadInput($cur,$targetT,$false) | Out-Null }
+            if ($fgT -ne 0) { [Win32WorldsFocusBwr]::AttachThreadInput($cur,$fgT,$false) | Out-Null }
+          }
+
+          Start-Sleep -Seconds 1
+          if ((Get-ForegroundTitle) -ne 'Minecraft') { throw 'Foreground verification failed' }
+          [Win32WorldsFocusBwr]::SetCursorPos(10,10) | Out-Null
+          Start-Sleep -Seconds 1
+
+          Capture (Join-Path $out 'shift-tab0.png')
+          $shell=New-Object -ComObject WScript.Shell
+          for ($i=1; $i -le 12; $i++) {
+            [void]$shell.SendKeys('+{TAB}')
+            Start-Sleep -Milliseconds 650
+            Capture (Join-Path $out ("shift-tab{0}.png" -f $i))
+          }
+
+          Write-Host ('BWR_WORLDS_FOCUS_JSON=' + ([ordered]@{
+            foreground_verified=$true
+            reverse_tab_steps=12
+            enter_sent=$false
+            world_opened=$false
+            existing_world_clicked=$false
+          } | ConvertTo-Json -Compress))
+
+      - name: Upload Worlds reverse-focus sequence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bedrock-wither-worlds-focus-probe
+          retention-days: 3
+          if-no-files-found: warn
+          path: bedrock-worlds-focus-probe/*.png
