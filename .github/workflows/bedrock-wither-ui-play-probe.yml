@@ -1,0 +1,117 @@
+name: Bedrock Wither UI Play Probe
+
+on:
+  push:
+    branches:
+      - codex/bedrock-wither-lifecycle-regressions-2026-10-03
+    paths:
+      - '.github/workflows/bedrock-wither-ui-play-probe.yml'
+      - '.github/bedrock-wither-ui-play-probe-request.txt'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bedrock-wither-ui-play-probe
+  cancel-in-progress: false
+
+jobs:
+  play-probe:
+    runs-on: [self-hosted, Windows, X64]
+    timeout-minutes: 10
+    defaults:
+      run:
+        shell: powershell
+
+    steps:
+      - name: Launch Bedrock and open Play screen
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $out = Join-Path $env:GITHUB_WORKSPACE 'bedrock-ui-play-probe'
+          if (Test-Path $out) { Remove-Item $out -Recurse -Force }
+          New-Item -ItemType Directory -Path $out | Out-Null
+
+          Add-Type @'
+          using System;
+          using System.Runtime.InteropServices;
+          public static class Win32Input {
+            [DllImport("user32.dll")] public static extern bool SetCursorPos(int X, int Y);
+            [DllImport("user32.dll")] public static extern void mouse_event(uint flags, uint dx, uint dy, uint data, UIntPtr extra);
+            [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr hWnd);
+            public const uint LEFTDOWN = 0x0002;
+            public const uint LEFTUP = 0x0004;
+          }
+          '@
+          Add-Type -AssemblyName System.Drawing
+          Add-Type -AssemblyName System.Windows.Forms
+
+          $sessionId = (Get-Process -Id $PID).SessionId
+          $before = @(
+            Get-Process -ErrorAction SilentlyContinue |
+              Where-Object { $_.SessionId -eq $sessionId -and $_.ProcessName -match 'Minecraft|Minecraft.Windows' } |
+              Select-Object -ExpandProperty Id
+          )
+
+          Start-Process 'minecraft://'
+          $deadline = (Get-Date).AddSeconds(60)
+          $minecraft = $null
+          do {
+            Start-Sleep -Seconds 2
+            $minecraft = Get-Process -ErrorAction SilentlyContinue |
+              Where-Object { $_.SessionId -eq $sessionId -and $_.ProcessName -match 'Minecraft|Minecraft.Windows' } |
+              Select-Object -First 1
+          } while ($null -eq $minecraft -and (Get-Date) -lt $deadline)
+          if ($null -eq $minecraft) { throw 'Minecraft did not launch' }
+
+          Start-Sleep -Seconds 18
+          [Win32Input]::SetForegroundWindow($minecraft.MainWindowHandle) | Out-Null
+          Start-Sleep -Milliseconds 500
+
+          $screen = [System.Windows.Forms.SystemInformation]::VirtualScreen
+          if ($screen.Width -ne 1536 -or $screen.Height -ne 864) {
+            throw "Unexpected screen size $($screen.Width)x$($screen.Height); refusing coordinate click"
+          }
+
+          # Main-menu Play button center from the verified 1536x864 capture.
+          [Win32Input]::SetCursorPos(960, 526) | Out-Null
+          [Win32Input]::mouse_event([Win32Input]::LEFTDOWN,0,0,0,[UIntPtr]::Zero)
+          [Win32Input]::mouse_event([Win32Input]::LEFTUP,0,0,0,[UIntPtr]::Zero)
+          Start-Sleep -Seconds 7
+
+          $bitmap = New-Object System.Drawing.Bitmap $screen.Width, $screen.Height
+          $graphics = [System.Drawing.Graphics]::FromImage($bitmap)
+          try {
+            $graphics.CopyFromScreen($screen.Left, $screen.Top, 0, 0, $screen.Size)
+            $bitmap.Save((Join-Path $out 'play-screen.png'), [System.Drawing.Imaging.ImageFormat]::Png)
+          } finally {
+            $graphics.Dispose()
+            $bitmap.Dispose()
+          }
+
+          $summary = [ordered]@{
+            screen_width = $screen.Width
+            screen_height = $screen.Height
+            minecraft_launched = $true
+            play_click_sent = $true
+            screenshot_captured = (Test-Path (Join-Path $out 'play-screen.png'))
+            world_opened = $false
+            existing_world_clicked = $false
+          }
+          Write-Host ('BWR_PLAY_PROBE_JSON=' + ($summary | ConvertTo-Json -Compress))
+
+          $newPids = @(
+            Get-Process -ErrorAction SilentlyContinue |
+              Where-Object { $_.SessionId -eq $sessionId -and $_.ProcessName -match 'Minecraft|Minecraft.Windows' -and $before -notcontains $_.Id } |
+              Select-Object -ExpandProperty Id
+          )
+          foreach ($pidToStop in $newPids) {
+            Stop-Process -Id $pidToStop -Force -ErrorAction SilentlyContinue
+          }
+
+      - name: Upload Play-screen probe
+        uses: actions/upload-artifact@v4
+        with:
+          name: bedrock-wither-ui-play-probe
+          retention-days: 3
+          if-no-files-found: error
+          path: bedrock-ui-play-probe/play-screen.png
