@@ -104,8 +104,32 @@ jobs:
           Start-Sleep -Seconds 1
           if ((Get-ForegroundTitle) -ne 'Minecraft') { throw 'Minecraft foreground verification failed' }
 
-          Capture (Join-Path $out 'before-enter.png')
+          Capture (Join-Path $out 'before-up.png')
           $shell = New-Object -ComObject WScript.Shell
+          [void]$shell.SendKeys('{UP}')
+          Start-Sleep -Seconds 1
+          if ((Get-ForegroundTitle) -ne 'Minecraft') { throw 'Minecraft foreground lost after Up' }
+
+          $afterUp = Join-Path $out 'after-up.png'
+          Capture $afterUp
+
+          # Verify keyboard focus moved from Settings to Play using the known
+          # borderless menu geometry. Selected buttons are green; unselected are gray.
+          $bmp = [System.Drawing.Bitmap]::FromFile($afterUp)
+          try {
+            $play = $bmp.GetPixel(960,460)
+            $settings = $bmp.GetPixel(960,590)
+            $playSelected = ($play.G -ge 100 -and $play.G -gt ($play.R + 40) -and $play.G -gt ($play.B + 40))
+            $settingsGray = ([Math]::Abs([int]$settings.R-[int]$settings.G) -le 12 -and
+                             [Math]::Abs([int]$settings.G-[int]$settings.B) -le 12 -and
+                             $settings.R -ge 140)
+          } finally {
+            $bmp.Dispose()
+          }
+          if (-not ($playSelected -and $settingsGray)) {
+            throw 'Play selection fingerprint not verified after one Up key; refusing Enter'
+          }
+
           [void]$shell.SendKeys('{ENTER}')
           Start-Sleep -Seconds 8
           if ((Get-ForegroundTitle) -ne 'Minecraft') { throw 'Minecraft foreground lost after Enter' }
@@ -113,7 +137,9 @@ jobs:
 
           Write-Host ('BWR_KEYBOARD_PLAY_JSON=' + ([ordered]@{
             foreground_verified = $true
-            key_sent = 'ENTER'
+            up_key_sent = $true
+            play_selection_verified = $true
+            enter_key_sent = $true
             screenshot_captured = $true
             world_opened = $false
             existing_world_clicked = $false
@@ -133,5 +159,6 @@ jobs:
           retention-days: 3
           if-no-files-found: error
           path: |
-            bedrock-keyboard-play-probe/before-enter.png
+            bedrock-keyboard-play-probe/before-up.png
+            bedrock-keyboard-play-probe/after-up.png
             bedrock-keyboard-play-probe/after-enter.png
