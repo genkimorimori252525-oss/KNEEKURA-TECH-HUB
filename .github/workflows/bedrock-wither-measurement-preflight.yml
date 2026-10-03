@@ -1,0 +1,148 @@
+name: Bedrock Wither Measurement Preflight
+
+on:
+  push:
+    branches:
+      - codex/bedrock-wither-lifecycle-regressions-2026-10-03
+    paths:
+      - '.github/bedrock-wither-measurement-preflight-request.txt'
+      - '.github/workflows/bedrock-wither-measurement-preflight.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bedrock-wither-measurement-preflight
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    runs-on: [self-hosted, Windows, X64]
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: powershell
+
+    steps:
+      - name: Checkout exact PR81 branch
+        uses: actions/checkout@v4
+        with:
+          ref: codex/bedrock-wither-lifecycle-regressions-2026-10-03
+          fetch-depth: 1
+          clean: true
+          persist-credentials: false
+
+      - name: Read-only Bedrock measurement preflight
+        run: |
+          $ErrorActionPreference = 'Stop'
+
+          $runnerSessionId = (Get-Process -Id $PID).SessionId
+          $explorerSameSession = @(
+            Get-Process explorer -ErrorAction SilentlyContinue |
+              Where-Object { $_.SessionId -eq $runnerSessionId }
+          ).Count -gt 0
+          $minecraftSameSession = @(
+            Get-Process -ErrorAction SilentlyContinue |
+              Where-Object {
+                $_.SessionId -eq $runnerSessionId -and
+                ($_.ProcessName -match 'Minecraft|Minecraft.Windows')
+              }
+          ).Count -gt 0
+
+          $packages = @()
+          $allUsersQuery = 'ok'
+          try {
+            $packages = @(
+              Get-AppxPackage -AllUsers -ErrorAction Stop |
+                Where-Object { $_.Name -match 'Minecraft' } |
+                Select-Object Name, Version, Architecture, Status
+            )
+          } catch {
+            $allUsersQuery = 'unavailable'
+            try {
+              $packages = @(
+                Get-AppxPackage -ErrorAction Stop |
+                  Where-Object { $_.Name -match 'Minecraft' } |
+                  Select-Object Name, Version, Architecture, Status
+              )
+            } catch {
+              $packages = @()
+            }
+          }
+
+          $provisioned = @()
+          try {
+            $provisioned = @(
+              Get-AppxProvisionedPackage -Online -ErrorAction Stop |
+                Where-Object { $_.DisplayName -match 'Minecraft' } |
+                Select-Object DisplayName, Version
+            )
+          } catch {
+            $provisioned = @()
+          }
+
+          function Test-Command([string]$Name) {
+            return $null -ne (Get-Command $Name -ErrorAction SilentlyContinue)
+          }
+
+          $obsKnown = Join-Path $env:ProgramFiles 'obs-studio\bin\64bit\obs64.exe'
+          $ffmpegKnown = Join-Path $env:ProgramFiles 'ffmpeg\bin\ffmpeg.exe'
+          $bdsKnown = @(
+            'C:\bedrock-server\bedrock_server.exe',
+            'C:\Minecraft\bedrock-server\bedrock_server.exe',
+            (Join-Path $env:ProgramData 'Kneekura\bedrock-server\bedrock_server.exe')
+          )
+
+          $workspaceBds = @(
+            Get-ChildItem -Path $env:GITHUB_WORKSPACE -Filter 'bedrock_server.exe' -File -Recurse -ErrorAction SilentlyContinue |
+              Select-Object -First 1
+          ).Count -gt 0
+
+          $result = [ordered]@{
+            schema_version = 1
+            scenario = 'BWR-MEASURE-v1-preflight'
+            repository = $env:GITHUB_REPOSITORY
+            head_sha = (git rev-parse HEAD).Trim()
+            runner = [ordered]@{
+              name = $env:RUNNER_NAME
+              os = $env:RUNNER_OS
+              arch = $env:RUNNER_ARCH
+              session_id = $runnerSessionId
+              interactive_explorer_same_session = $explorerSameSession
+              minecraft_process_same_session = $minecraftSameSession
+            }
+            windows = [ordered]@{
+              version = [Environment]::OSVersion.Version.ToString()
+              powershell = $PSVersionTable.PSVersion.ToString()
+            }
+            bedrock_appx = [ordered]@{
+              all_users_query = $allUsersQuery
+              packages = $packages
+              provisioned = $provisioned
+            }
+            bds = [ordered]@{
+              command_available = (Test-Command 'bedrock_server.exe')
+              known_location_available = (@($bdsKnown | Where-Object { Test-Path $_ }).Count -gt 0)
+              workspace_copy_available = $workspaceBds
+            }
+            capture = [ordered]@{
+              ffmpeg_command = (Test-Command 'ffmpeg.exe')
+              ffmpeg_known_location = (Test-Path $ffmpegKnown)
+              obs_command = (Test-Command 'obs64.exe')
+              obs_known_location = (Test-Path $obsKnown)
+            }
+            boundaries = [ordered]@{
+              game_started = $false
+              world_opened = $false
+              broad_personal_file_scan = $false
+              packages_modified = $false
+              capture_started = $false
+            }
+          }
+
+          $json = $result | ConvertTo-Json -Depth 8 -Compress
+          Write-Host "BWR_PREFLIGHT_JSON=$json"
+
+      - name: Assert read-only boundary
+        run: |
+          Write-Host 'Preflight completed without starting Minecraft/BDS, opening a world, modifying packages, or starting capture.'
