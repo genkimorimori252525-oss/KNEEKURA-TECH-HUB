@@ -4,6 +4,14 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -57,6 +65,7 @@ public final class KneekuraDebugDecisionHooks {
         private final IdentityHashMap<WrappedGoal,JsonObject> goals=new IdentityHashMap<>();
         private final IdentityHashMap<Object,String> identities=new IdentityHashMap<>();
         private final IdentityHashMap<PathFinder,String> searches=new IdentityHashMap<>();
+        private final IdentityHashMap<Projectile,Integer> projectiles=new IdentityHashMap<>();
         private long nextIdentity, nextSearch;
         private boolean goalCoveragePartial;
 
@@ -99,15 +108,15 @@ public final class KneekuraDebugDecisionHooks {
             if(identities.size()>=128)return null;
             token="component:"+budget.context().selectionRevision()+":"+(++nextIdentity);identities.put(object,token);return token;
         }
-        private void record(String kind,String method,Data capture) {
-            if(thread!=Thread.currentThread())return;
+        private boolean record(String kind,String method,Data capture) {
+            if(thread!=Thread.currentThread())return false;
             String channel=kind.equals("MOD_TRANSITION_RETURN")?"mod":kind.startsWith("GOAL_")?"goal":kind.startsWith("PATH_")?"path":
                     kind.startsWith("CONTROL_")?"control":kind.startsWith("BASE_MALUS_")?"malus":
                     kind.startsWith("SENSOR_")?"sensor":kind.startsWith("BRAIN_")||kind.startsWith("BEHAVIOR_")?"brain":null;
-            if(channel==null||!channels.contains(channel))return;
+            if(channel==null||!channels.contains(channel))return false;
             try {
                 var context=currentContext.get();long tick=time.getAsLong();
-                if(!budget.allows(context,tick))return;
+                if(!budget.allows(context,tick))return false;
                 long started=System.nanoTime();JsonObject data=capture.read();
                 JsonObject root=new JsonObject();
                 boolean mod=kind.equals("MOD_TRANSITION_RETURN");
@@ -128,10 +137,46 @@ public final class KneekuraDebugDecisionHooks {
                 root.toString().getBytes(StandardCharsets.UTF_8);
                 root.addProperty("observerCostNanos",Math.max(0L,System.nanoTime()-started));
                 int bytes=root.toString().getBytes(StandardCharsets.UTF_8).length;
-                if(budget.claim(context,tick,bytes))sink.record(method,root);
+                if(budget.claim(context,tick,bytes)){sink.record(method,root);return true;}
             } catch(ReflectiveOperationException|RuntimeException|LinkageError error) {
                 budget.close("CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());
             } catch(IOException error) { budget.close("WRITER_UNAVAILABLE"); }
+            return false;
+        }
+        private boolean readyProjectile() {
+            if(thread!=Thread.currentThread()||!channels.contains("control")||subject==null)return false;
+            try{return budget.allows(currentContext.get(),time.getAsLong());}
+            catch(RuntimeException error){budget.close("CONTEXT_UNAVAILABLE");return false;}
+        }
+        private boolean selectedOwner(Projectile shot) throws ReflectiveOperationException {
+            // Do not call getOwner: its fallback performs a level lookup and mutates cachedOwner.
+            return KneekuraDebugDecisionSnapshot.read(Projectile.class,"cachedOwner",shot)==subject&&
+                subject.getUUID().equals(KneekuraDebugDecisionSnapshot.read(Projectile.class,"ownerUUID",shot))&&
+                KneekuraDebugDecisionSnapshot.read(Entity.class,"level",shot)==KneekuraDebugDecisionSnapshot.read(Entity.class,"level",subject);
+        }
+        private boolean trackedProjectile(Projectile shot) {
+            if(!projectiles.containsKey(shot)||!readyProjectile())return false;
+            if(projectiles.get(shot)==0)return false;
+            try{if(selectedOwner(shot))return true;projectiles.put(shot,0);return false;}
+            catch(ReflectiveOperationException|RuntimeException error){budget.close("PROJECTILE_OWNER_UNAVAILABLE");return false;}
+        }
+        private JsonObject projectileReference(Projectile shot,int spawnIndex) {
+            JsonObject data=new JsonObject();data.addProperty("ownerUuid",budget.context().subjectUuid());
+            data.addProperty("projectileUuid",shot.getUUID().toString());data.addProperty("projectileClass",label(shot.getClass().getName()));
+            data.addProperty("spawnEventIndex",spawnIndex);
+            data.addProperty("relationshipScope","ACCEPTED_FRESH_SPAWN_SELECTED_CACHED_OWNER");return data;
+        }
+        private void projectileSpawn(Projectile shot,boolean result) {
+            if(!readyProjectile()||projectiles.containsKey(shot)||projectiles.size()>=16)return;
+            try{if(!selectedOwner(shot))return;}
+            catch(ReflectiveOperationException|RuntimeException error){budget.close("PROJECTILE_OWNER_UNAVAILABLE");return;}
+            int index=budget.events()+1;
+            boolean written=record("CONTROL_PROJECTILE_SPAWN_RETURN","ServerLevel.addFreshEntity.RETURN",()->{
+                JsonObject data=projectileReference(shot,index);data.addProperty("result",result);data.addProperty("trackingLimit",16);
+                data.add("position",position(shot));data.add("velocity",vector(shot.getDeltaMovement()));
+                data.addProperty("dispatchScope","SERVER_ADD_FRESH_ENTITY_RETURN");return data;
+            });
+            if(written&&result)projectiles.put(shot,index);
         }
         void goalReturn(WrappedGoal wrapper,boolean continuation,boolean result) {
             JsonObject reference=goals.get(wrapper);if(reference==null)return;
@@ -221,6 +266,61 @@ public final class KneekuraDebugDecisionHooks {
             data.addProperty("reasonStatus","NOT_EXPOSED");return data;
         });
     }
+    public static void projectileSpawnReturn(Entity entity,boolean result) {
+        Session session=active;if(session!=null&&entity instanceof Projectile shot)session.projectileSpawn(shot,result);
+    }
+    public static void projectileTickReturn(Entity entity) {
+        Session session=active;if(session==null||!(entity instanceof Projectile shot)||!session.trackedProjectile(shot))return;
+        session.record("CONTROL_PROJECTILE_TICK_RETURN","ServerLevel.tickNonPassenger.Entity.tick.AFTER",()->{
+            JsonObject data=session.projectileReference(shot,session.projectiles.get(shot));
+            data.add("position",position(shot));data.add("velocity",vector(shot.getDeltaMovement()));data.addProperty("removed",shot.isRemoved());
+            data.addProperty("dimension",session.budget.context().dimension());
+            data.addProperty("dispatchScope","SERVER_NON_PASSENGER_ORIGINAL_TICK_AFTER");return data;
+        });
+    }
+    public static void projectileHitReturn(Projectile shot,HitResult hit) {
+        Session session=active;if(session==null||!session.trackedProjectile(shot)||hit==null||hit.getType()==HitResult.Type.MISS)return;
+        session.record("CONTROL_PROJECTILE_HIT_RETURN","Projectile.onHit.RETURN",()->{
+            JsonObject data=session.projectileReference(shot,session.projectiles.get(shot));
+            data.addProperty("hitType",hit.getType().name());data.add("hitPosition",vector(hit.getLocation()));
+            if(hit instanceof EntityHitResult entityHit)data.addProperty("targetUuid",entityHit.getEntity().getUUID().toString());
+            data.addProperty("dispatchScope","BASE_PROJECTILE_ON_HIT_RETURN");
+            data.addProperty("damageOutcomeStatus","NOT_EXPOSED");return data;
+        });
+    }
+    /** Redirect the one existing hurt call at inspected Arrow/Fireball sites; never replay it. */
+    public static boolean projectileHurt(Projectile shot,Entity target,DamageSource source,float amount) {
+        Session session=active;
+        boolean capture=session!=null&&session.trackedProjectile(shot);
+        long started=capture?System.nanoTime():0L;
+        Float before=capture?baseHealth(target):null;
+        long beforeCost=capture?Math.max(0L,System.nanoTime()-started):0L;
+        boolean result=target.hurt(source,amount); // Exact original dynamic dispatch, including false/exception.
+        if(capture&&session==active&&session.trackedProjectile(shot))session.record(
+            "CONTROL_PROJECTILE_HURT_RETURN","ArrowOrFireball.Entity.hurt.AFTER",()->{
+                JsonObject data=session.projectileReference(shot,session.projectiles.get(shot));
+                data.addProperty("targetUuid",target.getUUID().toString());data.addProperty("result",result);data.addProperty("requestedDamage",amount);
+                Float after=baseHealth(target);
+                if(before!=null&&after!=null){data.addProperty("healthStatus","AVAILABLE");
+                    data.addProperty("healthBefore",before);data.addProperty("healthAfter",after);data.addProperty("healthDelta",(double)before-(double)after);
+                    data.addProperty("healthScope","BASE_LIVING_DATA_HEALTH_ACROSS_ORIGINAL_CALL");
+                }else{data.addProperty("healthStatus","NOT_EXPOSED");data.addProperty("healthScope","NON_LIVING_OR_UNAVAILABLE");}
+                data.addProperty("preCallObserverCostNanos",beforeCost);
+                data.addProperty("dispatchScope","ARROW_OR_FIREBALL_ORIGINAL_ENTITY_HURT_CALL");
+                data.addProperty("damageReasonStatus","NOT_EXPOSED");return data;
+            });
+        return result;
+    }
+    @SuppressWarnings("unchecked") private static Float baseHealth(Entity entity) {
+        if(!(entity instanceof LivingEntity))return null;
+        try {
+            var data=(SynchedEntityData)KneekuraDebugDecisionSnapshot.read(Entity.class,"entityData",entity);
+            var accessor=(EntityDataAccessor<Float>)KneekuraDebugDecisionSnapshot.read(LivingEntity.class,"DATA_HEALTH_ID",null);
+            Float result=data.get(accessor);return result!=null&&Float.isFinite(result)?result:null;
+        }catch(ReflectiveOperationException|RuntimeException|LinkageError unavailable){return null;}
+    }
+    private static JsonObject position(Entity entity){return vector(new Vec3(entity.getX(),entity.getY(),entity.getZ()));}
+    private static JsonObject vector(Vec3 value){JsonObject out=new JsonObject();out.addProperty("x",value.x);out.addProperty("y",value.y);out.addProperty("z",value.z);return out;}
     public static void malusReturn(Mob mob,BlockPathTypes type,float result) {
         Session session=active;if(session==null||!session.matches(mob))return;
         session.record("BASE_MALUS_RETURN","Mob.getPathfindingMalus.RETURN",()->{

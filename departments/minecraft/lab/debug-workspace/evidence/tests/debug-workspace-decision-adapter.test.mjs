@@ -5,6 +5,7 @@ import {validOriginalDecisionEvent} from '../original-decision-events.mjs';
 import {
   observeDebugWorkspaceDecision,
   buildDebugWorkspaceMotionTrace,
+  buildDebugWorkspaceRelatedProjectileTraces,
 } from '../debug-workspace-decision-adapter.mjs';
 
 const UUID='00000000-0000-0000-0000-000000000001';
@@ -72,6 +73,104 @@ function teleportRows(event) {
   return [obs('SERVER_ENTITY_STATE',100,{targetRevision:1,dimension:'minecraft:overworld',x:1,y:64,z:2}),
     event,obs('SERVER_ENTITY_STATE',105,{targetRevision:1,dimension:'minecraft:overworld',x:2,y:64,z:2})];
 }
+const PROJECTILE='00000000-0000-0000-0000-000000000002';
+const HIT_TARGET='00000000-0000-0000-0000-000000000003';
+function ranged(kind,fields={},index=1,tick=101) {
+  const data={ownerUuid:UUID,projectileUuid:PROJECTILE,projectileClass:'net.minecraft.world.entity.projectile.Arrow',
+    spawnEventIndex:1,relationshipScope:'ACCEPTED_FRESH_SPAWN_SELECTED_CACHED_OWNER',...fields};
+  const record=original(kind,data,index);record.gameTime=tick;record.writerSeq=index;
+  record.observationId='obs:ranged:'+index;return record;
+}
+function rangedSpawn(result=true) {
+  return ranged('CONTROL_PROJECTILE_SPAWN_RETURN',{result,trackingLimit:16,
+    position:{x:1,y:65,z:2},velocity:{x:1,y:0,z:0},dispatchScope:'SERVER_ADD_FRESH_ENTITY_RETURN'});
+}
+function rangedSample(index,tick,x) {
+  return ranged('CONTROL_PROJECTILE_TICK_RETURN',{position:{x,y:65,z:2},velocity:{x:1,y:0,z:0},
+    removed:false,dimension:'minecraft:overworld',dispatchScope:'SERVER_NON_PASSENGER_ORIGINAL_TICK_AFTER'},index,tick);
+}
+test('owned projectile traces use accepted spawn references and only original completed tick samples',()=>{
+  const records=[rangedSpawn(),rangedSample(2,102,2),rangedSample(3,103,3)],before=structuredClone(records);
+  assert.ok(records.every(validOriginalDecisionEvent));
+  const result=buildDebugWorkspaceRelatedProjectileTraces({observations:records,subjectUuid:UUID});
+  assert.equal(result.length,1);assert.equal(result[0].trace.subject.id,PROJECTILE);
+  assert.equal(result[0].trace.trace_class,'PROJECTILE_ACTUAL');
+  assert.deepEqual(result[0].spawn_source_observation_ids,['obs:ranged:1']);
+  assert.deepEqual(result[0].trace.samples.map(s=>s.source_observation_id),['obs:ranged:2','obs:ranged:3']);
+  assert.equal(result[0].trace.segments.length,1);assert.deepEqual(records,before);
+});
+test('failed or missing spawn, another owner, changed owner class and invalid spawn reference create no related trace',()=>{
+  const sample=rangedSample(2,102,2);
+  for(const records of [[rangedSpawn(false),sample],[sample],
+    [rangedSpawn(),{...sample,payload:{...sample.payload,data:{...sample.payload.data,ownerUuid:HIT_TARGET}}}],
+    [rangedSpawn(),{...sample,payload:{...sample.payload,data:{...sample.payload.data,projectileClass:'OtherProjectile'}}}],
+    [rangedSpawn(),{...sample,payload:{...sample.payload,data:{...sample.payload.data,spawnEventIndex:2}}}]]) {
+    assert.equal(buildDebugWorkspaceRelatedProjectileTraces({observations:records,subjectUuid:UUID}).length,0);
+  }
+  const mismatched=rangedSample(2,102,2);mismatched.payload.data.ownerUuid=HIT_TARGET;
+  assert.equal(validOriginalDecisionEvent(mismatched),false);
+});
+test('related projectile traces refuse context/revision mixing and retain removal as a terminal boundary',()=>{
+  const spawn=rangedSpawn(),first=rangedSample(2,102,2),removed=rangedSample(3,103,3),late=rangedSample(4,104,4);
+  removed.payload.data.removed=true;
+  const result=buildDebugWorkspaceRelatedProjectileTraces({observations:[spawn,first,removed,late],subjectUuid:UUID});
+  assert.equal(result[0].trace.samples.length,1);assert.deepEqual(result[0].terminal_source_observation_ids,['obs:ranged:3']);
+  for(const mutation of [r=>r.runId='other',r=>r.arenaEpoch++,r=>r.processEpoch++,r=>r.payload.targetRevision++]) {
+    const changed=structuredClone(first);mutation(changed);
+    assert.throws(()=>buildDebugWorkspaceRelatedProjectileTraces({observations:[spawn,changed],subjectUuid:UUID}),/CONTEXT_CHANGED|SELECTION_CHANGED/);
+  }
+});
+test('projectile dispatch and actual hurt return/health delta remain separate typed result facts',()=>{
+  const dispatch=ranged('CONTROL_PROJECTILE_HIT_RETURN',{hitType:'ENTITY',targetUuid:HIT_TARGET,
+    hitPosition:{x:3,y:65,z:2},dispatchScope:'BASE_PROJECTILE_ON_HIT_RETURN',damageOutcomeStatus:'NOT_EXPOSED'},2,102);
+  assert.equal(validOriginalDecisionEvent(dispatch),true);
+  for(const [result,before,after] of [[false,20,20],[true,20,20],[true,20,17]]) {
+    const hurt=ranged('CONTROL_PROJECTILE_HURT_RETURN',{targetUuid:HIT_TARGET,result,requestedDamage:3,
+      preCallObserverCostNanos:10,
+      healthStatus:'AVAILABLE',healthBefore:before,healthAfter:after,healthDelta:before-after,
+      healthScope:'BASE_LIVING_DATA_HEALTH_ACROSS_ORIGINAL_CALL',
+      dispatchScope:'ARROW_OR_FIREBALL_ORIGINAL_ENTITY_HURT_CALL',damageReasonStatus:'NOT_EXPOSED'},3,102);
+    assert.equal(validOriginalDecisionEvent(hurt),true);
+    const decision=observeDebugWorkspaceDecision({observations:[rangedSpawn(),dispatch,hurt],subjectUuid:UUID});
+    const fact=decision.stages.RESULT.facts.find(f=>f.key==='control_projectile_hurt_return');
+    assert.equal(fact.value.result,result);assert.equal(fact.value.healthDelta,before-after);
+    assert.deepEqual(fact.source_observation_ids,['obs:ranged:3']);
+    hurt.payload.data.healthDelta=999;assert.equal(validOriginalDecisionEvent(hurt),false);
+  }
+  const malformed=structuredClone(dispatch);delete malformed.payload.data.targetUuid;
+  assert.equal(validOriginalDecisionEvent(malformed),false);
+});
+test('retained presentation preserves the original successful teleport gap alongside bounded samples',()=>{
+  const event=teleportReturn(true);
+  const presentation=buildRetainedDecisionPresentation({observations:teleportRows(event),subjectUuid:UUID,
+    identity:{debugSessionId:'sess-a',runId:'run-a',runSnapshotId:'snap-a',processEpoch:1,arenaEpoch:3,targetRevision:1},
+    request:{startTick:100,endTick:105}});
+  assert.equal(presentation.layers.motion.trace.segments.length,0);
+  assert.equal(presentation.layers.motion.trace.gaps[0].kind,'EXPLICIT_TELEPORT');
+});
+test('related projectile presentation stays default OFF with a global finite sample budget and independent UUIDs',()=>{
+  const second='00000000-0000-0000-0000-000000000004';
+  const spawn2=rangedSpawn(),sample2=rangedSample(4,104,4);
+  spawn2.payload.eventIndex=3;spawn2.payload.data.spawnEventIndex=3;spawn2.writerSeq=3;spawn2.observationId='obs:ranged:3';
+  for(const r of [spawn2,sample2]){r.payload.data.projectileUuid=second;r.payload.data.spawnEventIndex=3;}
+  const records=[rangedSpawn(),rangedSample(2,102,2),spawn2,sample2];
+  const traces=buildDebugWorkspaceRelatedProjectileTraces({observations:records,subjectUuid:UUID,maxSamples:1});
+  assert.equal(traces.reduce((n,t)=>n+t.trace.samples.length,0),1);assert.equal(traces[0].trace.subject.id,second);
+  const presentation=buildRetainedDecisionPresentation({observations:records,subjectUuid:UUID,
+    identity:{debugSessionId:'sess-a',runId:'run-a',runSnapshotId:'snap-a',processEpoch:1,arenaEpoch:3,targetRevision:1},
+    request:{startTick:100,endTick:105}});
+  assert.equal(presentation.layers.relatedProjectiles.enabledByDefault,false);
+  assert.equal(presentation.layers.relatedProjectiles.traces.length,2);
+  assert.equal(presentation.layers.motion.trace.samples.length,0);
+});
+test('ambiguous writer ordering and duplicate related observations do not fabricate projectile traces',()=>{
+  const spawn=rangedSpawn(),sample=rangedSample(2,102,2);
+  for(const mutation of [r=>r.writerId='',r=>delete r.writerSeq,r=>r.writerSeq=1,r=>r.writerId='different']) {
+    const changed=structuredClone(sample);mutation(changed);
+    assert.equal(buildDebugWorkspaceRelatedProjectileTraces({observations:[spawn,changed],subjectUuid:UUID}).length,0);
+  }
+  assert.throws(()=>buildDebugWorkspaceRelatedProjectileTraces({observations:[spawn,sample,structuredClone(sample)],subjectUuid:UUID}),/DUPLICATE_OBSERVATION/);
+});
 test('actual successful original teleport return is a result and typed gap without a fabricated sample',()=>{
   const event=teleportReturn(true),records=teleportRows(event),before=structuredClone(records);
   assert.equal(validOriginalDecisionEvent(event),true);

@@ -10,6 +10,10 @@ const KINDS = Object.freeze({
   SENSOR_SCAN_RETURN: ['INPUT','sensor_execution'],
   CONTROL_TICK_RETURN: ['EXECUTION','movement_control'],
   CONTROL_TELEPORT_RETURN: ['RESULT','teleport_result'],
+  CONTROL_PROJECTILE_SPAWN_RETURN: ['RESULT','related_projectile_spawn'],
+  CONTROL_PROJECTILE_TICK_RETURN: ['EXECUTION','related_projectile_motion'],
+  CONTROL_PROJECTILE_HIT_RETURN: ['RESULT','related_projectile_hit'],
+  CONTROL_PROJECTILE_HURT_RETURN: ['RESULT','related_projectile_hurt'],
   BASE_MALUS_RETURN: ['EVALUATION','base_path_malus'],
   PATH_SEARCH_STATE: ['EVALUATION','path_search_frontier'],
   PATH_SEARCH_RESULT: ['RESULT','path_search_result'],
@@ -17,6 +21,8 @@ const KINDS = Object.freeze({
 const text = value => typeof value === 'string' && value.length > 0 && value.length <= 512;
 const integer = value => Number.isSafeInteger(value);
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
+const uuid = value => typeof value==='string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(value);
+const vector = value => object(value)&&['x','y','z'].every(k=>Number.isFinite(value[k]));
 function bounded(value, depth=0, budget={count:0}) {
   if (++budget.count > 8192 || depth > 12) return false;
   if (typeof value === 'string') return value.length <= 512;
@@ -62,7 +68,7 @@ function validFrontier(section) {
       (n.parentX === undefined ? n.parentY === undefined && n.parentZ === undefined :
         ['parentX','parentY','parentZ'].every(k=>integer(n[k]))));
 }
-function validData(kind,d) {
+function validData(kind,d,record) {
   if (kind.startsWith('GOAL_')) {
     if (!['goal','target'].includes(d.selector) || !text(d.goalClass) || !integer(d.priority) ||
         !validInstanceIdentity(d,true)) return false;
@@ -80,6 +86,28 @@ function validData(kind,d) {
   if (kind === 'CONTROL_TELEPORT_RETURN') return typeof d.result === 'boolean' &&
     [d.requestedPosition,d.returnedPosition].every(p=>object(p)&&['x','y','z'].every(k=>Number.isFinite(p[k]))) &&
     d.dispatchScope === 'BASE_RANDOM_TELEPORT_RETURN' && d.reasonStatus === 'NOT_EXPOSED';
+  if (kind.startsWith('CONTROL_PROJECTILE_')) {
+    if(!uuid(d.ownerUuid)||d.ownerUuid!==record.scope?.entityUuid||!uuid(d.projectileUuid)||d.projectileUuid===d.ownerUuid||
+      !text(d.projectileClass)||!integer(d.spawnEventIndex)||d.spawnEventIndex<1||d.spawnEventIndex>record.payload.eventIndex||
+      d.relationshipScope!=='ACCEPTED_FRESH_SPAWN_SELECTED_CACHED_OWNER')return false;
+    if(kind==='CONTROL_PROJECTILE_SPAWN_RETURN')return typeof d.result==='boolean'&&d.trackingLimit===16&&
+      d.spawnEventIndex===record.payload.eventIndex&&vector(d.position)&&vector(d.velocity)&&d.dispatchScope==='SERVER_ADD_FRESH_ENTITY_RETURN';
+    if(d.spawnEventIndex>=record.payload.eventIndex)return false;
+    if(kind==='CONTROL_PROJECTILE_TICK_RETURN')return vector(d.position)&&vector(d.velocity)&&typeof d.removed==='boolean'&&
+      text(d.dimension)&&d.dispatchScope==='SERVER_NON_PASSENGER_ORIGINAL_TICK_AFTER';
+    if(kind==='CONTROL_PROJECTILE_HIT_RETURN')return ['ENTITY','BLOCK'].includes(d.hitType)&&vector(d.hitPosition)&&
+      (d.hitType==='ENTITY'?uuid(d.targetUuid):d.targetUuid==null)&&
+      d.dispatchScope==='BASE_PROJECTILE_ON_HIT_RETURN'&&d.damageOutcomeStatus==='NOT_EXPOSED';
+    if(kind==='CONTROL_PROJECTILE_HURT_RETURN')return uuid(d.targetUuid)&&typeof d.result==='boolean'&&Number.isFinite(d.requestedDamage)&&
+      Number.isSafeInteger(d.preCallObserverCostNanos)&&d.preCallObserverCostNanos>=0&&
+      d.requestedDamage>=0&&d.dispatchScope==='ARROW_OR_FIREBALL_ORIGINAL_ENTITY_HURT_CALL'&&d.damageReasonStatus==='NOT_EXPOSED'&&
+      (d.healthStatus==='NOT_EXPOSED'?
+        d.healthBefore===undefined&&d.healthAfter===undefined&&d.healthDelta===undefined&&d.healthScope==='NON_LIVING_OR_UNAVAILABLE':
+        d.healthStatus==='AVAILABLE'&&['healthBefore','healthAfter','healthDelta'].every(k=>Number.isFinite(d[k]))&&
+        d.healthScope==='BASE_LIVING_DATA_HEALTH_ACROSS_ORIGINAL_CALL'&&
+        Math.abs(d.healthDelta-(d.healthBefore-d.healthAfter))<=1e-5);
+    return false;
+  }
   if (kind === 'BASE_MALUS_RETURN') return text(d.pathType) && numberOrUnknown(d,'returnedMalus') &&
     d.dispatchScope === 'BASE_METHOD_RETURN_NOT_CUSTOM_OVERRIDE_RESULT' && d.effectiveSourceStatus === 'NOT_EXPOSED';
   if (kind === 'PATH_SEARCH_STATE') return text(d.searchId) && validFrontier(d.frontier);
@@ -99,7 +127,7 @@ export function validOriginalDecisionEvent(record) {
     Object.hasOwn(KINDS,p.kind) && object(p.data) && bounded(p) &&
     Number.isSafeInteger(p.observerCostNanos) && p.observerCostNanos >= 0 &&
     p.observerCostScope === 'BUILD_AND_FIRST_BYTE_CHECK_EXCLUDES_FINAL_ENCODING_WRITER' &&
-    validData(p.kind,p.data) && new TextEncoder().encode(JSON.stringify(p)).length <= 32768;
+    validData(p.kind,p.data,record) && new TextEncoder().encode(JSON.stringify(p)).length <= 32768;
 }
 
 export function appendOriginalDecisionEvents(records,stages,capabilities,timeline) {

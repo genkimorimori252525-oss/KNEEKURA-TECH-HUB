@@ -31,12 +31,19 @@ try {
   'DecisionAdapter','DecisionBurstRequest','AdapterSourceProof','TwilightForestDescriptor','TwilightForestReturnDescriptor','TwilightForestAdapter',
   'MotionTraceCache','MotionOverlayRuntime','MotionOverlayGeometry','MotionOverlay'];
  const sources=names.map(n=>path.join(main,'KneekuraDebug'+n+'.java'));
- const checks=['EvidenceClaim','CaptureWriter','RegisteredWorld','TankPresentation','DecisionSnapshot','DecisionHooks','TeleportReturn','TerrainField','SynchedCached','MotionTraceCache','MotionOverlayGeometry','MotionWriter'];
+ const checks=['EvidenceClaim','CaptureWriter','RegisteredWorld','TankPresentation','DecisionSnapshot','DecisionHooks','TeleportReturn','ProjectileResult','TerrainField','SynchedCached','MotionTraceCache','MotionOverlayGeometry','MotionWriter'];
  run(executable('javac'),['--release','17','-proc:none','-cp',classpath,'-d',output,...sources,...checks.map(n=>path.join(test,'KneekuraDebug'+n+'SelfTest.java')),path.join(test,'KneekuraDebugDecisionIdentityInterop.java')]);
  for(const name of checks.filter(n=>n!=='MotionWriter')){
   // Vanilla bootstrap can create logs; keep this new check's artifacts in its disposable output.
-  const cp=name==='TeleportReturn'?classpath.split(path.delimiter).map(p=>path.resolve(root,p)).join(path.delimiter):classpath;
-  run(executable('java'),['-cp',output+path.delimiter+cp,'com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebug'+name+'SelfTest'],{},name==='TeleportReturn'?output:root);
+  const bootstrap=['TeleportReturn','ProjectileResult'].includes(name);
+  const cp=bootstrap?classpath.split(path.delimiter).map(p=>path.resolve(root,p)).join(path.delimiter):classpath;
+  const stdout=run(executable('java'),['-cp',output+path.delimiter+cp,'com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebug'+name+'SelfTest'],{},bootstrap?output:root);
+  if(name==='ProjectileResult') {
+   const line=stdout.split(/\r?\n/).find(l=>l.startsWith('PROJECTILE_INTEROP:'));
+   assert.ok(line,'production projectile/Gson interop output required');
+   const interop=JSON.parse(line.slice('PROJECTILE_INTEROP:'.length));assert.equal(interop.rows.length,7);
+   for(const payload of interop.rows)assert.equal(validOriginalDecisionEvent({source:{side:'SERVER'},scope:{kind:'ENTITY_UUID',entityUuid:interop.subjectUuid},payload}),true,payload.kind);
+  }
  }
  for(const mode of ['OFF','ON'])run(executable('java'),['-cp',output+path.delimiter+classpath,'com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugMotionWriterSelfTest',mode],{KNEEKURA_DEBUG_MOTION_OVERLAY:mode==='ON'?'1':'0'});
  const identityOutput=run(executable('java'),['-cp',output+path.delimiter+classpath,'com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugDecisionIdentityInterop']);

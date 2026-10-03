@@ -425,3 +425,46 @@ export function buildDebugWorkspaceMotionTrace({
     explicitDiscontinuities:breaks,
   });
 }
+
+/** Independently identified related projectiles; spawn/impact callbacks never become motion samples. */
+export function buildDebugWorkspaceRelatedProjectileTraces({observations,subjectUuid,identity={},window={},maxSamples=128,maxGapTicks=10}={}) {
+  if(typeof subjectUuid!=='string'||!subjectUuid)throw new TypeError('subjectUuid is required');
+  if(!Array.isArray(observations)||observations.length>50000)throw new TypeError('BOUNDED_RETAINED_OBSERVATIONS_REQUIRED');
+  if(!Number.isSafeInteger(maxSamples)||maxSamples<1||maxSamples>128)throw new TypeError('BOUNDED_PROJECTILE_SAMPLES_REQUIRED');
+  if(!Number.isSafeInteger(maxGapTicks)||maxGapTicks<1||maxGapTicks>100)throw new TypeError('BOUNDED_PROJECTILE_GAP_REQUIRED');
+  const start=window.start_tick??window.startTick??-Infinity,end=window.end_tick??window.endTick??Infinity;
+  const records=selectDecisionRecords(observations,subjectUuid,identity,end).filter(validOriginalDecisionEvent);
+  const groups=new Map(),seenIds=new Set(),seenEvents=new Set();
+  for(const record of records) {
+    const p=record.payload,d=p.data;
+    if(!p.kind.startsWith('CONTROL_PROJECTILE_'))continue;
+    if(typeof record.writerId!=='string'||!record.writerId||!Number.isSafeInteger(record.writerSeq))continue;
+    const eventKey=JSON.stringify([record.writerId,p.burstId,p.eventIndex]);
+    if(seenIds.has(record.observationId)||seenEvents.has(eventKey))throw new Error('RELATED_PROJECTILE_DUPLICATE_OBSERVATION');
+    seenIds.add(record.observationId);seenEvents.add(eventKey);
+    const key=JSON.stringify([record.writerId,p.burstId,d.projectileUuid,d.spawnEventIndex]);
+    if(p.kind==='CONTROL_PROJECTILE_SPAWN_RETURN') {
+      if(d.result!==true||groups.size>=16||groups.has(key))continue;
+      groups.set(key,{spawn:record,points:[],terminal:null});continue;
+    }
+    const group=groups.get(key);
+    if(!group||group.terminal||p.eventIndex<=group.spawn.payload.eventIndex||
+      record.gameTime<group.spawn.gameTime||record.writerSeq<=group.spawn.writerSeq||d.projectileClass!==group.spawn.payload.data.projectileClass)continue;
+    if(p.kind!=='CONTROL_PROJECTILE_TICK_RETURN')continue;
+    if(d.removed){group.terminal=record;continue;}
+    if(record.gameTime<start)continue;
+    group.points.push({tick:record.gameTime,...d.position,vx:d.velocity.x,vy:d.velocity.y,vz:d.velocity.z,
+      source_observation_id:record.observationId,source_kind:'DEBUG_WORKSPACE_RELATED_PROJECTILE_ORIGINAL_TICK',
+      run_id:record.runId,run_snapshot_id:record.runSnapshotId,arena_epoch:record.arenaEpoch,dimension_id:d.dimension});
+  }
+  // One global position budget, not sixteen separate 128-sample allocations.
+  const retainedIds=new Set([...groups.values()].flatMap(g=>g.points).sort((a,b)=>a.tick-b.tick).slice(-maxSamples).map(p=>p.source_observation_id));
+  return [...groups.values()].map(g=>({...g,retained:g.points.filter(p=>retainedIds.has(p.source_observation_id))})).filter(g=>g.retained.length).map(g=>({
+    owner_uuid:subjectUuid,relationship_scope:'ACCEPTED_FRESH_SPAWN_SELECTED_CACHED_OWNER',
+    spawn_source_observation_ids:[g.spawn.observationId],terminal_source_observation_ids:g.terminal?[g.terminal.observationId]:[],
+    samples_truncated:g.points.length>g.retained.length,
+    trace:buildSampledMotionTrace({traceClass:'PROJECTILE_ACTUAL',subject:{id:g.spawn.payload.data.projectileUuid,type:g.spawn.payload.data.projectileClass},
+      observations:g.retained,identity,maxSamples,maxGapTicks,
+      window:{start_tick:Number.isFinite(start)?start:null,end_tick:Number.isFinite(end)?end:null}}),
+  }));
+}

@@ -1,5 +1,5 @@
 import {DECISION_OBSERVATION_V1} from './decision-observation.mjs';
-import {selectDecisionRecords,observeDebugWorkspaceDecision,buildDebugWorkspaceMotionTrace,validDecisionSnapshot} from './debug-workspace-decision-adapter.mjs';
+import {selectDecisionRecords,observeDebugWorkspaceDecision,buildDebugWorkspaceMotionTrace,buildDebugWorkspaceRelatedProjectileTraces,validDecisionSnapshot} from './debug-workspace-decision-adapter.mjs';
 import {queryDecisionDrilldown} from './decision-drilldown.mjs';
 
 const bytes=value=>Buffer.byteLength(JSON.stringify(value)??'null');
@@ -71,7 +71,7 @@ export function buildRetainedDecisionPresentation({observations,subjectUuid,iden
     if(absent||missing||distance>limits.maxSegmentDistance)discontinuities.push({after_tick:a.gameTime,before_tick:b.gameTime,
       kind:absent?'MISSING_SELECTED_ENTITY':missing?'MISSING_RETAINED_POSITION':'DERIVED_DISTANCE_THRESHOLD_BREAK',source_observation_id:absent?.observationId??missing?.observationId??b.observationId});
   }
-  const trace=buildDebugWorkspaceMotionTrace({observations:retained,subjectUuid,identity,window:request,
+  const trace=buildDebugWorkspaceMotionTrace({observations:[...retained,...records.filter(r=>r.lane!=='SERVER_ENTITY_STATE')],subjectUuid,identity,window:request,
     maxSamples:limits.maxSamples,maxGapTicks:limits.maxGapTicks,explicitDiscontinuities:discontinuities});
   const snapshot=records.filter(r=>r.lane==='AI_DECISION'&&validDecisionSnapshot(r.payload)).at(-1);
   const navigation=snapshot?.payload.sections.navigation_path;
@@ -79,10 +79,13 @@ export function buildRetainedDecisionPresentation({observations,subjectUuid,iden
   const validNav=navigation?.status==='AVAILABLE'&&navData?.pathPresent===true&&Array.isArray(navEntries)&&
     navEntries.length<=64&&navEntries.every(n=>Number.isSafeInteger(n.index)&&['x','y','z'].every(k=>Number.isFinite(n[k])));
   const overview=buildDecisionOverviewPacket(observeDebugWorkspaceDecision({observations:records,subjectUuid,identity,tick:request.endTick}),limits);
+  const related=buildDebugWorkspaceRelatedProjectileTraces({observations:records,subjectUuid,identity,window:request,maxSamples:limits.maxSamples,maxGapTicks:limits.maxGapTicks});
   const result={schema:'kneekura.retained-decision-presentation/v1',identity:{...identity,subjectUuid},
     request:{startTick:request.startTick,endTick:request.endTick,...limits},overview,
     layers:{motion:{enabledByDefault:false,status:retained.length?'AVAILABLE':'NOT_CAPTURED',trace,
       samplesTruncated:valid.length>retained.length,missingPositionRows:state.length-valid.length},
+      relatedProjectiles:{enabledByDefault:false,status:related.length?'PARTIAL':'NOT_CAPTURED',traces:related,
+        semantics:'FINITE_ACCEPTED_SPAWN_AND_COMPLETED_TICK_ONLY_NOT_ALL_OWNER_PROJECTILES'},
       terrain:{enabledByDefault:false,status:terrain?.data.status??'NOT_CAPTURED',tick:terrain?.tick??null,
         cells:terrain?.data.cells??[],data:terrain?.data??null,source_observation_ids:terrain?.source_observation_ids??[]},
       pathCache:{enabledByDefault:false,status:path?.frontierStatus??'NOT_CAPTURED',tick:path?.tick??null,
