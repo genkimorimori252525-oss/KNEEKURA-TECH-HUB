@@ -39,7 +39,7 @@ public final class BedrockLookGoal extends Goal {
         this.source = source;
         this.playerConditions = TargetingConditions.forNonCombat()
                 .range(LOOK_DISTANCE)
-                .selector(EntitySelector.notRiding(owner));
+                .selector(entity -> EntitySelector.notRiding(owner).test(entity));
         this.setFlags(EnumSet.of(Flag.LOOK));
     }
 
