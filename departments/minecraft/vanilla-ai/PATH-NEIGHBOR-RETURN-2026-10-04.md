@@ -19,4 +19,21 @@ The retained consumer adds an EVALUATION fact and a bounded read-only `path_neig
 - Consumer meaningful RED: opt-in channel rejected and valid neighbor record unsupported; GREEN2 tests preserve order, bounds, query/source truncation and unknown/null/rejected-population distinctions.
 - Genuine mapped Java compilation RED: missing original-call wrapper API; GREEN counting custom evaluator tests verify exactly one original call, preserved return/exception, detached state, finite budget, OFF/path-only suppression, other-thread and ended-search exclusion. Java Gson output passes the Node validator.
 - Motion/Decision111 tests passed /0 skipped. Existing genuine owner/Arena/camera/writer API regression includes the new producer test and interop assertion.
-- Native Mixin dispatch, same-search final result, clean stop and original-save hashes require a fresh frozen-source trial. Full candidate generation/rejection/effective custom malus and broader observer-effect/MOD coexistence remain open.
+- Frozen `b39fa3d14010fb89a99dba3b24714185291ef9c2` established the following private native trial. Full candidate generation/rejection/effective custom malus and broader observer-effect/MOD coexistence remain open.
+
+## Native-r30
+
+The labeled private Zombie fixture restores an exact original85-file copy, then prepares a controlled survival player, one actual-AI Zombie and52 fence cells. No target, search or neighbor result is seeded. Original/control85 hashes remain unchanged; all85 predecessor R29 files and the new85-file post-setup prelaunch baseline are preserved.
+
+Explicit `path,neighbors` captured175 original neighbor RETURNs plus two cache/result pairs within one200-tick burst:179 callbacks /311,695 payload bytes, ending `WINDOW_ENDED`. Source arrays were not truncated in this trial; the returned slots total416 **with repetitions across invocations**, not416 distinct geometric neighbors.
+
+| Search | Original returns / slots | Callback source range | Same-search cache / result | Result |
+|---|---|---|---|---|
+| `search:1:1` | 86 /203 (4 zero returns) | `obs:forge-runtime:46284:35`–`:120`, tick40459 | `:121` /`:122`; cache127 nodes, retained32 | Path15 nodes, `canReach=false` |
+| `search:1:2` | 89 /213 (4 zero returns) | `obs:forge-runtime:46284:242`–`:330`, tick40583 | `:331` /`:332`; cache146 nodes, retained32 | Path18 nodes, `canReach=false` |
+
+Both evaluator classes are `WalkNodeEvaluator`. All175 genuine records passed the consumer; the retained presentation builds with normal bounds. A `path_neighbors` query with `maxNodes=1` returned175 items and marked111 item truncations, preserving actual source counts/IDs and canonical bytes. No neighbor was reconstructed from the final cache and no missing result or rejection reason was inferred. Both paths being present is separate from successful arrival.
+
+605 unique observations finalized as `EVIDENCE_COMPLETE`, canonical SHA256 `d292e050269a65a0faebf2d7070e3504035526433908c250727c0d87bba3f04a`. Clean ACK/drop0/queue0, `VERIFIED_EXIT` and absence of owned native PID46284 were checked. The same run retains80 real motion samples and80 sampled decision snapshots; these do not prove continuous movement or full pursuit.
+
+Actual JFR start/stop receipts and2,551,764 bytes were retained (SHA256 `e0d3f61912d52aebd676ec00093d5566c9432eeeadd8ba484db598da2bf63313`). Callback build/first-byte-check costs: min11,400ns, median53,800ns, max3,119,200ns. These exclude final encoding/writer and original evaluator runtime, and are not a paired observer-effect measurement. No pixels or raw Cardinal requests were taken in this trial.
