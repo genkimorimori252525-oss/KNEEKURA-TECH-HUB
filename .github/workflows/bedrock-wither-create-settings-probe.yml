@@ -101,38 +101,44 @@ jobs:
           Start-Sleep -Seconds 1
 
           $shell=New-Object -ComObject WScript.Shell
-          for ($i=0; $i -lt 4; $i++) {
-            [void]$shell.SendKeys('{TAB}')
-            Start-Sleep -Milliseconds 650
+
+          function Test-CreateFocus([string]$imagePath) {
+            $bmp=[System.Drawing.Bitmap]::FromFile($imagePath)
+            try {
+              $center=$bmp.GetPixel(835,333)
+              $leftBorder=$bmp.GetPixel(511,330)
+              $topBorder=$bmp.GetPixel(835,269)
+              $rightBorder=$bmp.GetPixel(1160,330)
+              $bottomBorder=$bmp.GetPixel(835,398)
+
+              $centerGreen=($center.G -ge 100 -and $center.G -gt ($center.R + 35) -and $center.G -gt ($center.B + 35))
+              $whiteBorder=(
+                $leftBorder.R -ge 245 -and $leftBorder.G -ge 245 -and $leftBorder.B -ge 245 -and
+                $topBorder.R -ge 245 -and $topBorder.G -ge 245 -and $topBorder.B -ge 245 -and
+                $rightBorder.R -ge 245 -and $rightBorder.G -ge 245 -and $rightBorder.B -ge 245 -and
+                $bottomBorder.R -ge 245 -and $bottomBorder.G -ge 245 -and $bottomBorder.B -ge 245
+              )
+              return ($centerGreen -and $whiteBorder)
+            } finally { $bmp.Dispose() }
           }
 
           $focusedPath=Join-Path $out 'create-focused.png'
-          Capture $focusedPath
+          $focusFound=$false
+          $tabCount=0
 
-          # Frozen from actual failed-run evidence: with the pointer neutral at
-          # (10,10), Tab x4 produces the Create New World keyboard focus as a
-          # green horizontal bar spanning x=521..1150 / y=254..273.
-          $bmp=[System.Drawing.Bitmap]::FromFile($focusedPath)
-          try {
-            $center=$bmp.GetPixel(835,263)
-            $left=$bmp.GetPixel(530,263)
-            $right=$bmp.GetPixel(1140,263)
-            $above=$bmp.GetPixel(835,240)
-            $below=$bmp.GetPixel(835,286)
-
-            function Is-GreenFocusPixel($p) {
-              return ($p.G -ge 100 -and $p.G -gt ($p.R + 35) -and $p.G -gt ($p.B + 35))
+          for ($i=0; $i -lt 10; $i++) {
+            Capture $focusedPath
+            if (Test-CreateFocus $focusedPath) {
+              $focusFound=$true
+              break
             }
+            [void]$shell.SendKeys('{TAB}')
+            $tabCount++
+            Start-Sleep -Milliseconds 650
+          }
 
-            $barGreen=(Is-GreenFocusPixel $center) -and
-                      (Is-GreenFocusPixel $left) -and
-                      (Is-GreenFocusPixel $right)
-            $boundedAbove=-not (Is-GreenFocusPixel $above)
-            $boundedBelow=-not (Is-GreenFocusPixel $below)
-          } finally { $bmp.Dispose() }
-
-          if (-not ($barGreen -and $boundedAbove -and $boundedBelow)) {
-            throw 'Create New World green-focus fingerprint not verified; refusing Enter'
+          if (-not $focusFound) {
+            throw 'Create New World keyboard-focus fingerprint was not found within 10 bounded Tab steps; refusing Enter'
           }
 
           [void]$shell.SendKeys('{ENTER}')
@@ -145,7 +151,7 @@ jobs:
           Write-Host ('BWR_CREATE_SETTINGS_JSON=' + ([ordered]@{
             foreground_verified=$true
             neutral_cursor=$true
-            tab_count=4
+            tab_count=$tabCount
             create_focus_verified=$true
             enter_sent=$true
             screenshot_captured=(Test-Path $afterPath)
