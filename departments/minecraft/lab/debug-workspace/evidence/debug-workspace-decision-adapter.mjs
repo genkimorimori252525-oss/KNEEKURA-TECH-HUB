@@ -377,6 +377,9 @@ export function buildDebugWorkspaceMotionTrace({
     .filter(r => r.lane === 'SERVER_ENTITY_STATE')
     .filter(r => r.gameTime >= start);
 
+  const classes=new Set(records.map(r=>r.payload?.motionTraceClass??'MOB_ACTUAL'));
+  if(classes.size>1||[...classes].some(c=>!['MOB_ACTUAL','PROJECTILE_ACTUAL'].includes(c)))throw new Error('MOTION_TRACE_CLASS_CHANGED_OR_UNSUPPORTED');
+
   const points = records.map(r => ({
     tick: r.gameTime,
     x: r.payload?.x,
@@ -394,7 +397,7 @@ export function buildDebugWorkspaceMotionTrace({
   }));
 
   return buildSampledMotionTrace({
-    traceClass: 'MOB_ACTUAL',
+    traceClass: [...classes][0]??'MOB_ACTUAL',
     subject: { id: subjectUuid, type: subjectType },
     observations: points,
     identity,

@@ -13,6 +13,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.level.pathfinder.Node;
 import net.minecraft.world.level.pathfinder.Path;
@@ -47,6 +48,7 @@ public final class KneekuraDebugServerObserver {
     @Nullable
     private static UUID targetUuid;
     private static long targetRevision;
+    private static long observationArenaEpoch;
     private static long lastTargetPollTick = Long.MIN_VALUE;
     private static long lastSampleTick = Long.MIN_VALUE;
 
@@ -73,6 +75,7 @@ public final class KneekuraDebugServerObserver {
         config = value;
         if (value == null || !value.enabled() || server == null) {
             KneekuraDebugDecisionBurstRuntime.stop();
+            KneekuraDebugMotionOverlayRuntime.clear();
             return;
         }
 
@@ -81,6 +84,13 @@ public final class KneekuraDebugServerObserver {
             lastTargetPollTick = localServerTick;
             pollTargetFile(value);
         }
+
+        try {
+            long epoch=KneekuraDebugArenaRuntime.observationEpoch(value,server);
+            if(epoch!=observationArenaEpoch){LAST_PAYLOAD.clear();LAST_EMIT_TICK.clear();KneekuraDebugMotionOverlayRuntime.clear();}
+            observationArenaEpoch=epoch;
+            KneekuraDebugMotionOverlayRuntime.select(value,epoch,targetRevision,targetUuid);
+        }catch(Exception error){KneekuraDebugMotionOverlayRuntime.clear();KneekuraDebugDecisionBurstRuntime.stop();return;}
 
         KneekuraDebugDecisionBurstRuntime.onTick(value,server,localServerTick,targetUuid,
                 targetRevision,decisionBurst,DECISION_SNAPSHOT);
@@ -230,6 +240,7 @@ public final class KneekuraDebugServerObserver {
             if(nextTerrain!=null&&next==null)throw new IllegalArgumentException("decisionTerrain requires a target");
 
             KneekuraDebugDecisionBurstRuntime.selectionChanged();
+            KneekuraDebugMotionOverlayRuntime.clear();
             KneekuraDebugTerrainRuntime.clear();
             targetRevision = revision;
             targetUuid = next;
@@ -259,6 +270,7 @@ public final class KneekuraDebugServerObserver {
 
     static void stop() {
         KneekuraDebugDecisionBurstRuntime.stop();
+        KneekuraDebugMotionOverlayRuntime.clear();observationArenaEpoch=0;
         KneekuraDebugTerrainRuntime.clear();decisionTerrain=null;
         targetUuid=null;targetRevision=0;decisionSnapshotEnabled=false;decisionBurst=null;
         lastTargetPollTick=Long.MIN_VALUE;lastSampleTick=Long.MIN_VALUE;
@@ -290,6 +302,7 @@ public final class KneekuraDebugServerObserver {
         Vec3 velocity = entity.getDeltaMovement();
         JsonObject payload = new JsonObject();
         payload.addProperty("dimension", level.dimension().location().toString());
+        payload.addProperty("motionTraceClass",entity instanceof Projectile ? "PROJECTILE_ACTUAL" : entity instanceof Mob ? "MOB_ACTUAL" : "NOT_APPLICABLE");
         payload.addProperty("x", entity.getX());
         payload.addProperty("y", entity.getY());
         payload.addProperty("z", entity.getZ());
@@ -714,13 +727,12 @@ public final class KneekuraDebugServerObserver {
             rowPayload.addProperty("reason", changed ? "changed" : "keyframe");
             rowPayload.addProperty("targetRevision", targetRevision);
 
-            KneekuraDebugEvidenceWriter.recordEntityObserved(
+            KneekuraDebugEvidenceWriter.recordServerSelectedObserved(
                     cfg,
+                    observationArenaEpoch,
                     tick,
                     gameTime,
-                    "L1",
                     lane,
-                    "SERVER",
                     method,
                     selected,
                     rowPayload);

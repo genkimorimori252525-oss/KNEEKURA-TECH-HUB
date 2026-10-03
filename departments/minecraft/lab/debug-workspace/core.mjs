@@ -9,6 +9,7 @@ import { loadBridgeRegistration, validateTechHubBinding } from './bridge/registr
 import { hashId, exactKeys, canonicalRunSnapshotBytes } from './bridge/json.mjs';
 import { prepareOwnerControl, readPreparedOwnerControl, ownerLaunchEnvironment, ownerLaunchSelection } from './bridge/owner-prelaunch.mjs';
 import { decisionHookLaunchOptions } from './decision-hook-launch.mjs';
+import { motionOverlayLaunchEnvironment } from './motion-overlay-launch.mjs';
 
 export const READY_PROTOCOL = 'KNEEKURA_DEBUG_READY_V1';
 export const CONFIG_SCHEMA_VERSION = 1;
@@ -103,6 +104,7 @@ export function validateConfig(config, repoRoot) {
     errors.push('requireGitIdentity must be boolean');
   }
   if(config.decisionHooks!=null && typeof config.decisionHooks!=='boolean')errors.push('decisionHooks must be boolean');
+  if(config.motionOverlay!=null && typeof config.motionOverlay!=='boolean')errors.push('motionOverlay must be boolean');
 
   try { ownerLaunchSelection(config); }
   catch (error) { errors.push('ownerControl: ' + error.message); }
@@ -121,6 +123,7 @@ export function validateConfig(config, repoRoot) {
     workspaceChecks: [...(config.workspaceChecks || [])],
     requireGitIdentity: config.requireGitIdentity === true,
     decisionHooks: config.decisionHooks === true,
+    motionOverlay: config.motionOverlay === true,
     debugProfile: typeof config.debugProfile === 'string' && config.debugProfile.trim()
       ? config.debugProfile.trim()
       : 'FAST_DEBUG',
@@ -1023,6 +1026,7 @@ export async function launchDebugRun(config, repoRoot, options = {}) {
     KNEEKURA_DEBUG_FORGE_BRIDGE_SRC: forgeBridgeSourceDir,
     KNEEKURA_DEBUG_WORLD_NAME: c.worldName,
     ...decisionHooks.env,
+    ...motionOverlayLaunchEnvironment(c),
   }, preparedOwner);
 
   const runRecord = {
@@ -1041,6 +1045,7 @@ export async function launchDebugRun(config, repoRoot, options = {}) {
     worldName: c.worldName,
     forgeBridgeSourceDir,
     decisionHooksEnabled:c.decisionHooks,
+    motionOverlayEnabled:c.motionOverlay,
     launch: {
       command: c.launch.command,
       args: launchArgs,
@@ -1273,6 +1278,7 @@ export async function launchDebugRun(config, repoRoot, options = {}) {
       ...(preparedOwner ? { ownerControlIntent: preparedOwner.ownerControlIntent } : {}),
       status: 'DEBUG_READY',
       decisionHooksEnabled: c.decisionHooks,
+      motionOverlayEnabled: c.motionOverlay,
       pid: child.pid,
       runtimePid: ready.pid,
       runtimeStartedAtEpochMs,
@@ -1292,6 +1298,7 @@ export async function launchDebugRun(config, repoRoot, options = {}) {
       ok: true,
       status: 'DEBUG_READY',
       decisionHooksEnabled: c.decisionHooks,
+      motionOverlayEnabled: c.motionOverlay,
       debugSessionId,
       runId,
       processEpoch,

@@ -31,6 +31,13 @@ const rows=[
   obs('BEHAVIOR_TRANSITION',105,{transitionSemantics:'RUNNING_SET_CHANGED_BETWEEN_SAMPLES',exactTransitionTickKnown:false,reasonKnown:false,started:[{className:'Attack'}],stopped:[]}),
   obs('SERVER_ENTITY_STATE',105,{dimension:'minecraft:overworld',x:2,y:64,z:2,vx:.2,vy:0,vz:0,alive:true}),
 ];
+test('explicit native Projectile samples retain their trace class and refuse a mixed entity class',()=>{
+  const projectile=structuredClone(rows.filter(r=>r.lane==='SERVER_ENTITY_STATE'));
+  for(const r of projectile)r.payload.motionTraceClass='PROJECTILE_ACTUAL';
+  assert.equal(buildDebugWorkspaceMotionTrace({observations:projectile,subjectUuid:UUID}).trace_class,'PROJECTILE_ACTUAL');
+  projectile[0].payload.motionTraceClass='MOB_ACTUAL';
+  assert.throws(()=>buildDebugWorkspaceMotionTrace({observations:projectile,subjectUuid:UUID}),/TRACE_CLASS/);
+});
 
 function original(kind,data,index=1) {
   return obs('AI_DECISION',120+index,{schema:'kneekura.original-decision-event/v1',
