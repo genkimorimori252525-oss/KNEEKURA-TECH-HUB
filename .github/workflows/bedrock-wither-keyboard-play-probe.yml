@@ -104,40 +104,85 @@ jobs:
           Start-Sleep -Seconds 1
           if ((Get-ForegroundTitle) -ne 'Minecraft') { throw 'Minecraft foreground verification failed' }
 
-          Capture (Join-Path $out 'before-up.png')
           $shell = New-Object -ComObject WScript.Shell
-          [void]$shell.SendKeys('{UP}')
-          Start-Sleep -Seconds 1
-          if ((Get-ForegroundTitle) -ne 'Minecraft') { throw 'Minecraft foreground lost after Up' }
 
-          $afterUp = Join-Path $out 'after-up.png'
-          Capture $afterUp
+          function Test-MainMenu([string]$imagePath) {
+            $bmp = [System.Drawing.Bitmap]::FromFile($imagePath)
+            try {
+              $play = $bmp.GetPixel(960,460)
+              $settings = $bmp.GetPixel(960,590)
+              $realms = $bmp.GetPixel(960,720)
 
-          # Verify keyboard focus moved from Settings to Play using the known
-          # borderless menu geometry. Selected buttons are green; unselected are gray.
-          $bmp = [System.Drawing.Bitmap]::FromFile($afterUp)
-          try {
-            $play = $bmp.GetPixel(960,460)
-            $settings = $bmp.GetPixel(960,590)
-            $playSelected = ($play.G -ge 100 -and $play.G -gt ($play.R + 40) -and $play.G -gt ($play.B + 40))
-            $settingsGray = ([Math]::Abs([int]$settings.R-[int]$settings.G) -le 12 -and
-                             [Math]::Abs([int]$settings.G-[int]$settings.B) -le 12 -and
-                             $settings.R -ge 140)
-          } finally {
-            $bmp.Dispose()
+              $playGrayOrGreen = (($play.R -ge 170 -and [Math]::Abs([int]$play.R-[int]$play.G) -le 18 -and [Math]::Abs([int]$play.G-[int]$play.B) -le 18) -or
+                                  ($play.G -ge 100 -and $play.G -gt ($play.R + 40) -and $play.G -gt ($play.B + 40)))
+              $settingsGrayOrGreen = (($settings.R -ge 170 -and [Math]::Abs([int]$settings.R-[int]$settings.G) -le 18 -and [Math]::Abs([int]$settings.G-[int]$settings.B) -le 18) -or
+                                      ($settings.G -ge 100 -and $settings.G -gt ($settings.R + 40) -and $settings.G -gt ($settings.B + 40)))
+              $realmsPurple = ($realms.B -ge 150 -and $realms.R -ge 70 -and $realms.R -le 160)
+              return ($playGrayOrGreen -and $settingsGrayOrGreen -and $realmsPurple)
+            } finally {
+              $bmp.Dispose()
+            }
           }
-          if (-not ($playSelected -and $settingsGray)) {
-            throw 'Play selection fingerprint not verified after one Up key; refusing Enter'
+
+          function Selected-MainButton([string]$imagePath) {
+            $bmp = [System.Drawing.Bitmap]::FromFile($imagePath)
+            try {
+              $play = $bmp.GetPixel(960,460)
+              $settings = $bmp.GetPixel(960,590)
+              $playGreen = ($play.G -ge 100 -and $play.G -gt ($play.R + 40) -and $play.G -gt ($play.B + 40))
+              $settingsGreen = ($settings.G -ge 100 -and $settings.G -gt ($settings.R + 40) -and $settings.G -gt ($settings.B + 40))
+              if ($playGreen) { return 'play' }
+              if ($settingsGreen) { return 'settings' }
+              return 'other'
+            } finally {
+              $bmp.Dispose()
+            }
+          }
+
+          # A previous probe may have left Minecraft on a child screen. Back out
+          # only until the verified main-menu geometry is visible.
+          $mainPath = Join-Path $out 'main-normalized.png'
+          $mainReady = $false
+          for ($attempt = 0; $attempt -lt 4; $attempt++) {
+            Capture $mainPath
+            if (Test-MainMenu $mainPath) {
+              $mainReady = $true
+              break
+            }
+            [void]$shell.SendKeys('{ESC}')
+            Start-Sleep -Seconds 2
+            if ((Get-ForegroundTitle) -ne 'Minecraft') { throw 'Minecraft foreground lost while normalizing to main menu' }
+          }
+          if (-not $mainReady) { throw 'Could not verify Minecraft main menu after bounded Escape normalization' }
+
+          $selected = Selected-MainButton $mainPath
+          if ($selected -eq 'settings') {
+            [void]$shell.SendKeys('{UP}')
+            Start-Sleep -Seconds 1
+          } elseif ($selected -eq 'other') {
+            # Use a bounded upward walk; stop as soon as Play is selected.
+            for ($i = 0; $i -lt 3; $i++) {
+              [void]$shell.SendKeys('{UP}')
+              Start-Sleep -Milliseconds 500
+              Capture (Join-Path $out 'selection-probe.png')
+              if ((Selected-MainButton (Join-Path $out 'selection-probe.png')) -eq 'play') { break }
+            }
+          }
+
+          $playSelectedPath = Join-Path $out 'play-selected.png'
+          Capture $playSelectedPath
+          if ((Selected-MainButton $playSelectedPath) -ne 'play') {
+            throw 'Play selection not verified; refusing Enter'
           }
 
           [void]$shell.SendKeys('{ENTER}')
           Start-Sleep -Seconds 8
-          if ((Get-ForegroundTitle) -ne 'Minecraft') { throw 'Minecraft foreground lost after Enter' }
-          Capture (Join-Path $out 'after-enter.png')
+          if ((Get-ForegroundTitle) -ne 'Minecraft') { throw 'Minecraft foreground lost after Play activation' }
+          Capture (Join-Path $out 'after-play-enter.png')
 
           Write-Host ('BWR_KEYBOARD_PLAY_JSON=' + ([ordered]@{
             foreground_verified = $true
-            up_key_sent = $true
+            main_menu_verified = $true
             play_selection_verified = $true
             enter_key_sent = $true
             screenshot_captured = $true
@@ -160,6 +205,7 @@ jobs:
           retention-days: 3
           if-no-files-found: error
           path: |
-            bedrock-keyboard-play-probe/before-up.png
-            bedrock-keyboard-play-probe/after-up.png
-            bedrock-keyboard-play-probe/after-enter.png
+            bedrock-keyboard-play-probe/main-normalized.png
+            bedrock-keyboard-play-probe/selection-probe.png
+            bedrock-keyboard-play-probe/play-selected.png
+            bedrock-keyboard-play-probe/after-play-enter.png
