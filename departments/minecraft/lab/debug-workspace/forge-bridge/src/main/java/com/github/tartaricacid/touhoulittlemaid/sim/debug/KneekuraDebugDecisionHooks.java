@@ -77,7 +77,7 @@ public final class KneekuraDebugDecisionHooks {
                        LongSupplier time, Sink sink) throws ReflectiveOperationException {
             if(nodeLimit<1 || nodeLimit>64)throw new IllegalArgumentException("NODE_LIMIT_OUT_OF_RANGE");
             this.subject=subject;this.snapshot=snapshot;this.budget=budget;this.nodeLimit=nodeLimit;
-            if(channels==null||channels.isEmpty()||!Set.of("goal","brain","path","control","malus","sensor","mod","projectile","neighbors").containsAll(channels))
+            if(channels==null||channels.isEmpty()||!Set.of("goal","brain","path","control","malus","sensor","mod","projectile","neighbors","effective_malus").containsAll(channels))
                 throw new IllegalArgumentException("INVALID_CHANNELS");
             this.channels=Set.copyOf(channels);
             this.modAdapter=channels.contains("mod")?KneekuraDebugTwilightForestAdapter.shared():null;
@@ -114,6 +114,7 @@ public final class KneekuraDebugDecisionHooks {
             if(thread!=Thread.currentThread())return false;
             String channel=kind.startsWith("CONTROL_PROJECTILE_")&&channels.contains("projectile")?"projectile":
                     kind.equals("PATH_NEIGHBORS_RETURN")?"neighbors":
+                    kind.equals("EFFECTIVE_MALUS_RETURN")?"effective_malus":
                     kind.startsWith("MOD_")?"mod":kind.startsWith("GOAL_")?"goal":kind.startsWith("PATH_")?"path":
                     kind.startsWith("CONTROL_")?"control":kind.startsWith("BASE_MALUS_")?"malus":
                     kind.startsWith("SENSOR_")?"sensor":kind.startsWith("BRAIN_")||kind.startsWith("BEHAVIOR_")?"brain":null;
@@ -348,6 +349,21 @@ public final class KneekuraDebugDecisionHooks {
             number(data,"returnedMalus",result);data.addProperty("dispatchScope","BASE_METHOD_RETURN_NOT_CUSTOM_OVERRIDE_RESULT");
             data.addProperty("effectiveSourceStatus","NOT_EXPOSED");return data;
         });
+    }
+    /** The original evaluator call invokes a custom override once; no second getter/table query. */
+    public static float originalMalus(NodeEvaluator evaluator,Mob mob,BlockPathTypes type) {
+        float result=mob.getPathfindingMalus(type);
+        Session session=active;if(session==null||!session.matches(mob))return result;
+        session.record("EFFECTIVE_MALUS_RETURN","NodeEvaluator.virtualMobMalus.AFTER",()->{
+            String uuid=KneekuraDebugDecisionSnapshot.read(Entity.class,"uuid",mob).toString();
+            if(!uuid.equals(session.budget.context().subjectUuid()))throw new IllegalArgumentException("ORIGINAL_MALUS_RECEIVER_CHANGED");
+            JsonObject data=new JsonObject();data.addProperty("receiverUuid",uuid);data.addProperty("receiverClass",label(mob.getClass().getName()));
+            data.addProperty("evaluatorClass",label(evaluator.getClass().getName()));data.addProperty("pathType",type.name());
+            number(data,"returnedMalus",result);data.addProperty("dispatchScope","ORIGINAL_EVALUATOR_VIRTUAL_MOB_MALUS_RETURN");
+            data.addProperty("callSiteScope","KNOWN_BASE_EVALUATOR_CLASS_SET_NOT_EXACT_METHOD");
+            data.addProperty("effectivePathCostStatus","NOT_EXPOSED");data.addProperty("underlyingSourceStatus","NOT_EXPOSED");return data;
+        });
+        return result;
     }
     public static void pathBegin(PathFinder finder,Mob mob) {
         Session session=active;if(session==null||session.thread!=Thread.currentThread())return;

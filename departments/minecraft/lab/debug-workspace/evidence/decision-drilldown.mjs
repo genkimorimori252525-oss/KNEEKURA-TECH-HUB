@@ -3,7 +3,7 @@ import {validOriginalDecisionEvent,originalDecisionData} from './original-decisi
 import {validTerrainGroundQuery} from './terrain-ground-query.mjs';
 import {registeredModDecisionAdapters} from './adapters/registered-mod-adapters.mjs';
 
-const CHANNELS=new Set(['path_search','path_neighbors','goal_transitions','brain_memory_changes','movement_control','base_malus','sensor_execution','terrain_ground','mod_state','mod_returns']);
+const CHANNELS=new Set(['path_search','path_neighbors','goal_transitions','brain_memory_changes','movement_control','base_malus','effective_malus','sensor_execution','terrain_ground','mod_state','mod_returns']);
 const safe=Number.isSafeInteger;
 function normalize(subjectUuid,identity,request) {
   if(typeof subjectUuid!=='string'||! /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(subjectUuid))throw new TypeError('EXACT_SUBJECT_UUID_REQUIRED');
@@ -104,7 +104,7 @@ export function queryDecisionDrilldown({observations,subjectUuid,identity,reques
       items=burst?[{tick:retained.at(-1).gameTime,...burst}]:[];break;
     }
     default: {
-      const kind={movement_control:'CONTROL_TICK_RETURN',base_malus:'BASE_MALUS_RETURN',sensor_execution:'SENSOR_SCAN_RETURN'}[query.channel];
+      const kind={movement_control:'CONTROL_TICK_RETURN',base_malus:'BASE_MALUS_RETURN',effective_malus:'EFFECTIVE_MALUS_RETURN',sensor_execution:'SENSOR_SCAN_RETURN'}[query.channel];
       items=events.filter(r=>r.payload.kind===kind).map(directEvent);
     }
   }

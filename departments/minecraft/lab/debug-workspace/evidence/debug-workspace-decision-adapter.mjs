@@ -355,6 +355,7 @@ export function observeDebugWorkspaceDecision({
       ...(snapshot ? SNAPSHOT_SECTIONS.filter(name => snapshot.payload.sections[name].status !== 'NOT_EXPOSED') : []),
       ...(originalRecords.length ? ['original_decision_events'] : []),
       ...(originalRecords.some(r=>r.payload.kind==='PATH_NEIGHBORS_RETURN') ? ['path_neighbors'] : []),
+      ...(originalRecords.some(r=>r.payload.kind==='EFFECTIVE_MALUS_RETURN') ? ['effective_malus'] : []),
       ...(terrain ? ['terrain_ground'] : []),
       ...(modSnapshot ? ['mod_state'] : []),
       ...(modBurst ? ['mod_returns'] : []),

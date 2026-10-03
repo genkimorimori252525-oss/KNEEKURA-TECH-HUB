@@ -18,6 +18,7 @@ const KINDS = Object.freeze({
   CONTROL_PROJECTILE_HIT_RETURN: ['RESULT','related_projectile_hit'],
   CONTROL_PROJECTILE_HURT_RETURN: ['RESULT','related_projectile_hurt'],
   BASE_MALUS_RETURN: ['EVALUATION','base_path_malus'],
+  EFFECTIVE_MALUS_RETURN: ['EVALUATION','effective_malus'],
   PATH_SEARCH_STATE: ['EVALUATION','path_search_frontier'],
   PATH_SEARCH_RESULT: ['RESULT','path_search_result'],
   PATH_NEIGHBORS_RETURN: ['EVALUATION','path_search_neighbors'],
@@ -128,6 +129,15 @@ function validNeighborReturn(d) {
 function validData(kind,d,record) {
   if (kind === 'MOD_COORDINATION_RETURN') return validKnightCoordination(d,record);
   if (kind === 'PATH_NEIGHBORS_RETURN') return validNeighborReturn(d);
+  if (kind === 'EFFECTIVE_MALUS_RETURN') {
+    const numeric=Number.isFinite(d.returnedMalus),keys=['receiverUuid','receiverClass','evaluatorClass','pathType',
+      numeric?'returnedMalus':'returnedMalusStatus','dispatchScope','callSiteScope','effectivePathCostStatus','underlyingSourceStatus'];
+    return Object.keys(d).length===keys.length&&Object.keys(d).every(k=>keys.includes(k))&&
+      uuid(d.receiverUuid)&&d.receiverUuid===record.scope?.entityUuid&&text(d.receiverClass)&&text(d.evaluatorClass)&&text(d.pathType)&&
+      (numeric||(d.returnedMalus===undefined&&d.returnedMalusStatus==='NOT_EXPOSED'))&&
+      d.dispatchScope==='ORIGINAL_EVALUATOR_VIRTUAL_MOB_MALUS_RETURN'&&d.callSiteScope==='KNOWN_BASE_EVALUATOR_CLASS_SET_NOT_EXACT_METHOD'&&
+      d.effectivePathCostStatus==='NOT_EXPOSED'&&d.underlyingSourceStatus==='NOT_EXPOSED';
+  }
   if (kind.startsWith('GOAL_')) {
     if (!['goal','target'].includes(d.selector) || !text(d.goalClass) || !integer(d.priority) ||
         !validInstanceIdentity(d,true)) return false;
