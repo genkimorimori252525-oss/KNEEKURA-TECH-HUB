@@ -17,6 +17,8 @@ Current work is in [Draft PR81](https://github.com/genkimorimori252525-oss/KNEEK
 - Official persistent-boss behavior prevents ordinary distance/idle-random despawning, including legacy false-persistence NBT; the earlier Peaceful-removal branch is preserved
 - Highest-damage eligible Player, retaliation, then visible nearest eligible target. Creative/spectator attackers cannot retain priority-1 targeting or enter immediate combat controllers
 - Pinned public supplemental goals are now present: `behavior.float` priority 1, `look_at_target` priority 5 and `look_at_player` priority 6. The look adapter preserves public distance 8 / probability 0.02 and the Wither-specific 1..2 second look window without replacing the dedicated three-head controller
+- Public `movement.basic max_turn=180` is now applied to both yaw and pitch through `BedrockFlyingMoveControl`; Java's inherited 90-degree flying-yaw cap is no longer used
+- Public `can_climb`, `pushable_by_entity` and `pushable_by_block` coexist: climbable blocks use inherited LivingEntity climbing, entity pushes remain enabled while climbing, and piston/shulker push behavior retains Java `PushReaction.NORMAL`
 - Ordinary phase-1 ascent, target-relative reposition, hover and 3-normal/1-dangerous center volleys; finite failed-path recovery
 - Per-shot acceleration uses an explicit historical-native fallback, with the corrected maxHP/6 interval. The documented 75-HP NBT bucket is separate. Phase reset, large-hit, healing and reload policies are tested
 - Reported 140-tick inter-volley pause is independent of per-shot cadence. Phase1 then repositions/settles; phase 2 emits its next projectile after the selected 140-tick pause
@@ -34,9 +36,9 @@ Current work is in [Draft PR81](https://github.com/genkimorimori252525-oss/KNEEK
 
 ## Verification
 
-The source-completion generation originally passed **60/60 required Forge GameTests**. The post-completion parity-polish code source `a2d838cf50052d3fb0e1dfeb3a826084e8e6da6b` now passes **64/64 required Forge GameTests** in hosted run `37147781105`: the original 60 plus four supplemental goal/sound/Wither-Rose regressions. The same exact code source passed the complete hosted Tech Hub suite in run `37147783747` with **3141 passed / 332 skipped / 8 warnings**.
+The source-completion generation originally passed **60/60 required Forge GameTests**. The first parity-polish source `a2d838cf50052d3fb0e1dfeb3a826084e8e6da6b` raised that to 64. The public-contract-closure code source `020de6738646076ebb2dcbddaf3555df9c5f7791` now passes **66/66 required Forge GameTests** in hosted run `37149862840`: the prior 64 plus max-turn and climb/pushability regressions. The same exact code source passed the complete hosted Tech Hub suite in run `37149867531` with **3141 passed / 332 skipped / 8 warnings**.
 
-[Current source-completion verification receipt](evidence/source-completion-2026-10-03.json) records the original 60-test completion. [Parity-polish receipt](evidence/parity-polish-2026-10-04.json) records the audit-derived supplement, its initial compile RED at `725960309...`, the typed-predicate repair, and the exact accepted code source/hosted checks. [PR81](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/pull/81) remains the publication line.
+[Current source-completion verification receipt](evidence/source-completion-2026-10-03.json) records the original 60-test completion. [Parity-polish receipt](evidence/parity-polish-2026-10-04.json) now records both audit passes: goals/sounds/Wither-Rose and the final public max-turn/pushability closure, with exact code source and hosted checks. [PR81](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/pull/81) remains the publication line.
 
 Historical hosted checkpoint `6e2faafcb5789ce5f3d8c355bf208d037cf96646` passed [24 GameTests](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/37138822902) and [3141 Python tests /332 skipped](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/37138825757). Those are prior-generation results, not evidence for the current parity-polish source.
 
@@ -44,7 +46,7 @@ Historical hosted checkpoint `6e2faafcb5789ce5f3d8c355bf208d037cf96646` passed [
 
 See [ADOPTION](ADOPTION.md) and the [source audit](../../../departments/minecraft/design/2026-10-02-bedrock-wither-reconstruction/SOURCE-AUDIT-2026-10-03.md) for exact provenance/version limits.
 
-- Reposition radius10, uniform-angle choice and Java flying navigation are declared adapters; native-shaped modifier15 and stop delay20 are historical inputs. Java control uses 180° pitch and 90° yaw per control update; the official max-turn180 input does not establish native yaw equivalence
+- Reposition radius10, uniform-angle choice and Java flying navigation remain declared adapters; native-shaped modifier15 and stop delay20 are historical inputs. The separate public `movement.basic max_turn=180` contract is now honored for both yaw and pitch
 - Aerial height5/damping0.6/ascent0.5 are historical-native inputs integrated into Java movement
 - Dash preparation20, horizontal speed2 and recovery20 are historical-shaped policies; active20 is the retained technical report, disagreeing with historical active10
 - A finite 120-tick path budget and 100-tick/void-bounded descent fallback are Java safety policies
