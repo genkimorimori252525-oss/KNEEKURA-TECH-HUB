@@ -198,11 +198,12 @@ export function observeDebugWorkspaceDecision({
   if (tick !== Infinity && !Number.isInteger(tick)) throw new TypeError('tick must be an integer or Infinity');
 
   const records = selectDecisionRecords(observations, subjectUuid, identity, tick)
-    .filter(r => r.lane !== 'AI_DECISION' || validDecisionSnapshot(r.payload) || validOriginalDecisionEvent(r) || validTerrainGroundQuery(r) || registeredModDecisionAdapters.acceptsSnapshot(r));
+    .filter(r => r.lane !== 'AI_DECISION' || validDecisionSnapshot(r.payload) || validOriginalDecisionEvent(r) || validTerrainGroundQuery(r) || registeredModDecisionAdapters.acceptsSnapshot(r) || registeredModDecisionAdapters.acceptsBurst(r));
   const snapshotRecords=records.filter(r=>r.lane === 'AI_DECISION' && validDecisionSnapshot(r.payload));
   const originalRecords=records.filter(validOriginalDecisionEvent);
   const terrain=records.filter(validTerrainGroundQuery).at(-1)??null;
   const modSnapshot=registeredModDecisionAdapters.captureSnapshot(records);
+  const modBurst=registeredModDecisionAdapters.captureBurst(records);
   const latest = latestByLane(records.filter(r=>r.lane !== 'AI_DECISION' || validDecisionSnapshot(r.payload)));
   const state = latest.get('SERVER_ENTITY_STATE') ?? null;
   const target = latest.get('AI_TARGET') ?? null;
@@ -308,6 +309,13 @@ export function observeDebugWorkspaceDecision({
     }));
   timeline.push(...sampledGoalChanges(snapshotRecords));
   appendOriginalDecisionEvents(originalRecords,stages,capabilities,timeline);
+  if(modBurst) {
+    Object.assign(capabilities,modBurst.capabilities);
+    stages.EXECUTION??={facts:[]};stages.EXECUTION.facts.push(...modBurst.facts);
+    for(const fact of modBurst.facts)timeline.push({tick:fact.value.tick,stage:'EXECUTION',kind:'MOD_TRANSITION_METHOD_RETURN',
+      summary:{methodOwner:fact.value.methodOwner,methodName:fact.value.methodName,stateChangeStatus:'NOT_EXPOSED',reasonStatus:'NOT_EXPOSED'},
+      epistemic_status:fact.epistemic_status,causal_relation:fact.causal_relation,source_observation_ids:fact.source_observation_ids});
+  }
 
   const context = records.length ? contextOf(records[0]) : {
     debug_session_id: identity.debug_session_id ?? null,
@@ -333,7 +341,7 @@ export function observeDebugWorkspaceDecision({
       version: '1',
       family: 'GENERIC_MOB_BASELINE',
       provenance: 'SERVER_ENTITY_STATE/AI_TARGET/BRAIN_MEMORY/RUNNING_BEHAVIORS/BEHAVIOR_TRANSITION/NAVIGATION/AI_DECISION',
-      observer_effect_risk: terrain ? 'BOUNDED_GROUND_QUERY_OBSERVER' : originalRecords.length ? 'BOUNDED_INSTRUMENTED_OBSERVER' : 'BOUNDED_SAMPLED_OBSERVER',
+      observer_effect_risk: terrain ? 'BOUNDED_GROUND_QUERY_OBSERVER' : originalRecords.length||modBurst ? 'BOUNDED_INSTRUMENTED_OBSERVER' : 'BOUNDED_SAMPLED_OBSERVER',
     },
     capabilities,
     stages,
@@ -347,6 +355,7 @@ export function observeDebugWorkspaceDecision({
       ...(originalRecords.length ? ['original_decision_events'] : []),
       ...(terrain ? ['terrain_ground'] : []),
       ...(modSnapshot ? ['mod_state'] : []),
+      ...(modBurst ? ['mod_returns'] : []),
     ],
   });
 }

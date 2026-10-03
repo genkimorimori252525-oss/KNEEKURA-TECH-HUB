@@ -20,6 +20,8 @@ import java.util.Set;
 final class KneekuraDebugTwilightForestAdapter implements KneekuraDebugDecisionAdapter {
     private static final String PREFIX="twilightforest.entity.boss.";
     private static final Set<String> SUBJECTS=Set.of(PREFIX+"Hydra",PREFIX+"SnowQueen",PREFIX+"KnightPhantom",PREFIX+"UrGhast");
+    private static final KneekuraDebugTwilightForestAdapter SHARED=new KneekuraDebugTwilightForestAdapter();
+    static KneekuraDebugTwilightForestAdapter shared(){return SHARED;}
     private Boolean compatible;
     private ClassLoader provenLoader;
     @Override public JsonObject descriptor(){return KneekuraDebugTwilightForestDescriptor.descriptor();}
@@ -27,7 +29,7 @@ final class KneekuraDebugTwilightForestAdapter implements KneekuraDebugDecisionA
     @Override public JsonObject describeCapabilities() {
         JsonObject caps=new JsonObject();JsonObject state=new JsonObject(),transitions=new JsonObject();
         state.addProperty("status","NOT_CAPTURED");state.addProperty("detail","SOURCE_COMPATIBLE_SNAPSHOT_REQUIRED");
-        transitions.addProperty("status","NOT_EXPOSED");transitions.addProperty("detail","ORIGINAL_MOD_TRANSITIONS_NOT_REGISTERED");
+        transitions.addProperty("status","NOT_EXPOSED");transitions.addProperty("detail","EXACT_STATE_CHANGE_OR_REASON_NOT_EXPOSED");
         caps.add("twilightforest:boss_state",state);caps.add("twilightforest:original_transitions",transitions);return caps;
     }
     private boolean compatible(Mob entity) {
@@ -51,6 +53,54 @@ final class KneekuraDebugTwilightForestAdapter implements KneekuraDebugDecisionA
         }catch(Exception|LinkageError unavailable){compatible=false;}
         return compatible;
     }
+    @Override public JsonObject captureBurst(Mob entity,KneekuraDebugDecisionBurstBudget.Context context,KneekuraDebugDecisionBurstRequest request) {
+        JsonObject status=new JsonObject();
+        boolean eligible=request!=null&&request.channels().contains("mod")&&supports(entity)&&
+            entity.getUUID().toString().equals(context.subjectUuid())&&compatible(entity);
+        status.addProperty("status",eligible?"NOT_CAPTURED":"NOT_EXPOSED");
+        status.addProperty("detail",eligible?"ORIGINAL_RETURN_CALLBACK_REQUIRED_NO_METHOD_REPLAY":"SOURCE_COMPATIBLE_MOD_CHANNEL_REQUIRED");
+        return status;
+    }
+    JsonObject captureOriginalReturn(Mob entity,Object owner,String method,Object requested)throws ReflectiveOperationException {
+        if(!supports(entity)||!compatible(entity))throw new IllegalStateException("TF_ORIGINAL_RETURN_SOURCE_UNAVAILABLE");
+        String kind=entity.getClass().getSimpleName(),ownerName=owner.getClass().getName();
+        String expectedOwner=PREFIX+(kind.equals("Hydra")?"HydraHeadContainer":kind);
+        String expectedMethod=switch(kind) {
+            case "Hydra" -> "advanceHeadState";
+            case "SnowQueen" -> "setCurrentPhase";
+            case "KnightPhantom" -> "switchToFormation";
+            case "UrGhast" -> "setInTantrum";
+            default -> throw new IllegalArgumentException("TF_RETURN_UNSUPPORTED");
+        };
+        if(!ownerName.equals(expectedOwner)||!method.equals(expectedMethod)||
+            (kind.equals("Hydra")?read(owner,"hydra")!=entity:owner!=entity))throw new IllegalStateException("TF_ORIGINAL_RETURN_OWNER_MISMATCH");
+        JsonObject data=new JsonObject();data.addProperty("bossKind",kind);data.addProperty("methodOwner",ownerName);
+        data.addProperty("methodName",method);data.addProperty("stateChangeStatus","NOT_EXPOSED");data.addProperty("reasonStatus","NOT_EXPOSED");
+        if(kind.equals("Hydra")) {
+            if(requested!=null)throw new IllegalStateException("TF_HEAD_ARGUMENT_UNEXPECTED");
+            Object[] containers=(Object[])read(entity,"hc");int head=(Integer)read(owner,"headNum");
+            if(head<0||head>=7||containers.length!=7||containers[head]!=owner)throw new IllegalStateException("TF_HEAD_OWNER_MISMATCH");
+            data.addProperty("headNum",head);data.addProperty("requestedValueStatus","NOT_APPLICABLE");
+        }else {
+            data.addProperty("requestedValueStatus","AVAILABLE");
+            if(kind.equals("UrGhast")) {
+                if(!(requested instanceof Boolean value))throw new IllegalStateException("TF_TANTRUM_ARGUMENT_UNAVAILABLE");
+                data.addProperty("requestedValue",value);
+            }else {
+                String enumClass=PREFIX+kind+"$"+(kind.equals("SnowQueen")?"Phase":"Formation");
+                if(requested==null||!requested.getClass().getName().equals(enumClass))throw new IllegalStateException("TF_ENUM_ARGUMENT_UNAVAILABLE");
+                data.addProperty("requestedValue",enumName(requested));
+            }
+        }
+        JsonObject state=cachedState(entity,new Limits(7,24576));data.add("cachedState",state);
+        if(!kind.equals("Hydra")) {
+            String key=kind.equals("SnowQueen")?"phase":kind.equals("KnightPhantom")?"currentFormation":"inTantrum";
+            if(!data.get("requestedValue").equals(state.get(key)))throw new IllegalStateException("TF_RETURN_ARGUMENT_POST_STATE_MISMATCH");
+        }
+        JsonObject root=new JsonObject();root.add("descriptor",KneekuraDebugTwilightForestReturnDescriptor.descriptor());
+        root.addProperty("compatibilityStatus","MATCHED_DEVELOPMENT_RESOURCE_NOT_RESIDENT_ATTESTATION");
+        root.addProperty("entityClass",entity.getClass().getName());root.add("data",data);return root;
+    }
     @Override public JsonObject captureSnapshot(Mob entity,KneekuraDebugDecisionBurstBudget.Context context,Limits limits)throws Exception {
         if(!supports(entity)||!entity.getUUID().toString().equals(context.subjectUuid()))throw new IllegalArgumentException("TF_EXACT_SUBJECT_REQUIRED");
         JsonObject root=new JsonObject();root.add("descriptor",descriptor());
@@ -60,13 +110,7 @@ final class KneekuraDebugTwilightForestAdapter implements KneekuraDebugDecisionA
         data.addProperty("bossKind",entity.getClass().getSimpleName());
         data.addProperty("stateSemantics","CACHED_STATE_NOT_ORIGINAL_TRANSITION_OR_REASON");
         try {
-            JsonObject state=switch(entity.getClass().getSimpleName()) {
-                case "Hydra" -> hydra(entity,limits);
-                case "SnowQueen" -> snow(entity);
-                case "KnightPhantom" -> knight(entity);
-                case "UrGhast" -> urGhast(entity);
-                default -> throw new IllegalArgumentException("TF_SUBJECT_UNSUPPORTED");
-            };
+            JsonObject state=cachedState(entity,limits);
             data.add("state",state);data.addProperty("status","AVAILABLE");
         }catch(ReflectiveOperationException|RuntimeException unavailable) {
             data.addProperty("detail",unavailable.getClass().getSimpleName());
@@ -75,6 +119,15 @@ final class KneekuraDebugTwilightForestAdapter implements KneekuraDebugDecisionA
             data.remove("state");data.addProperty("status","NOT_EXPOSED");data.addProperty("detail","ADAPTER_BYTE_BUDGET");
         }
         return root;
+    }
+    private JsonObject cachedState(Mob entity,Limits limits)throws ReflectiveOperationException {
+        return switch(entity.getClass().getSimpleName()) {
+            case "Hydra" -> hydra(entity,limits);
+            case "SnowQueen" -> snow(entity);
+            case "KnightPhantom" -> knight(entity);
+            case "UrGhast" -> urGhast(entity);
+            default -> throw new IllegalArgumentException("TF_SUBJECT_UNSUPPORTED");
+        };
     }
     private JsonObject hydra(Mob mob,Limits limits)throws ReflectiveOperationException {
         Object[] containers=(Object[])read(mob,"hc");

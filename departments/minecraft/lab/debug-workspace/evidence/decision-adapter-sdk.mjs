@@ -53,6 +53,27 @@ function validRecord(record,expected) {
   try{return sameDescriptor(descriptor(p.descriptor),expected)&&new TextEncoder().encode(JSON.stringify(p)).length<=32768;}
   catch{return false;}
 }
+function validBurstRecord(record,expected) {
+  const p=record?.payload;
+  if(record?.kind!=='observation'||record.lane!=='AI_DECISION'||record.source?.side!=='SERVER'||record.epistemicStatus!=='OBSERVED'||
+      record.completeness?.complete!==true||typeof record.observationId!=='string'||!record.observationId.length||
+      p?.schema!=='kneekura.mod-decision-return/v1'||p.semantics!=='ORIGINAL_MOD_INVOCATION_RETURN_ONLY'||
+      p.kind!=='MOD_TRANSITION_RETURN'||!Number.isSafeInteger(p.targetRevision)||p.targetRevision<1||
+      !Number.isSafeInteger(p.returnTick)||p.returnTick<0||p.returnTick!==record.gameTime||
+      !Number.isSafeInteger(p.returnLocalTick)||p.returnLocalTick<0||p.localTickScope!=='LAST_COMPLETED_SERVER_END_COUNTER'||
+      !Number.isSafeInteger(p.eventIndex)||p.eventIndex<1||p.eventIndex>256||
+      typeof p.burstId!=='string'||!new RegExp('^burst:'+p.targetRevision+':[0-9]{1,16}$').test(p.burstId)||
+      !Number.isSafeInteger(Number(p.burstId.split(':')[2]))||Number(p.burstId.split(':')[2])>p.returnLocalTick||
+      p.returnLocalTick-Number(p.burstId.split(':')[2])>=200||
+      p.compatibilityStatus!=='MATCHED_DEVELOPMENT_RESOURCE_NOT_RESIDENT_ATTESTATION'||
+      typeof p.entityClass!=='string'||!Object.hasOwn(expected.classHashes,p.entityClass)||
+      !Number.isSafeInteger(p.observerCostNanos)||p.observerCostNanos<0||
+      p.observerCostScope!=='BUILD_AND_FIRST_BYTE_CHECK_EXCLUDES_FINAL_ENCODING_WRITER'||!object(p.data)||!bounded(record)||
+      Object.keys(p).some(k=>!['schema','semantics','targetRevision','returnTick','returnLocalTick','localTickScope','eventIndex','burstId','kind','entityClass',
+        'descriptor','compatibilityStatus','observerCostNanos','observerCostScope','data'].includes(k)))return false;
+  try{return sameDescriptor(descriptor(p.descriptor),expected)&&new TextEncoder().encode(JSON.stringify(p)).length<=32768;}
+  catch{return false;}
+}
 function exactContext(records) {
   const contexts=records.map(r=>{
     if(['debugSessionId','runId','runSnapshotId'].some(k=>typeof r[k]!=='string'||!r[k].length||r[k].length>512)||
@@ -77,18 +98,16 @@ export function createDecisionAdapterRegistry(plugins) {
     return {descriptor:d,...Object.fromEntries(methods.map(k=>[k,plugin[k].bind(plugin)]))};
   });
   if(new Set(entries.map(e=>e.descriptor.id)).size!==entries.length)throw new Error('SDK_DUPLICATE_ADAPTER');
-  return Object.freeze({
-    descriptors:freeze(entries.map(e=>e.descriptor)),
-    acceptsSnapshot:record=>entries.some(e=>validRecord(record,e.descriptor)),
-    captureSnapshot(observations) {
+  function capture(observations,burst) {
       if(!Array.isArray(observations)||observations.length>50000)throw new TypeError('SDK_BOUNDED_RETAINED_INPUT_REQUIRED');
       for(const entry of entries) {
-        const matched=observations.filter(r=>validRecord(r,entry.descriptor));
+        const matched=observations.filter(r=>(burst?validBurstRecord:validRecord)(r,entry.descriptor));
         if(!matched.length)continue;
         exactContext(matched);
+        if(burst&&new Set(matched.map(r=>r.payload.burstId+':'+r.payload.eventIndex)).size!==matched.length)throw new Error('SDK_BURST_EVENT_DUPLICATED');
         matched.sort((a,b)=>a.gameTime-b.gameTime||(a.writerSeq??0)-(b.writerSeq??0));
-        const retained=freeze(structuredClone(matched.slice(-64))),ids=new Set(retained.map(r=>r.observationId));
-        const snapshot=entry.captureSnapshot(retained);
+        const retained=freeze(structuredClone(matched.slice(burst?-8:-64))),ids=new Set(retained.map(r=>r.observationId));
+        const snapshot=(burst?entry.captureBurst:entry.captureSnapshot)(retained);
         if(!bounded(snapshot))throw new TypeError('SDK_BOUNDED_SNAPSHOT_REQUIRED');
         const immutableSnapshot=freeze(structuredClone(snapshot));
         const capabilities=entry.describeCapabilities(retained,immutableSnapshot);
@@ -98,8 +117,9 @@ export function createDecisionAdapterRegistry(plugins) {
         const facts=entry.emitStructuredFacts(immutableSnapshot,retained);
         if(!Array.isArray(facts)||facts.length>64||facts.some(f=>!NAME.test(f.key)||!f.key.startsWith(entry.descriptor.namespace+':')||
             !entry.descriptor.supportedEpistemicLevels.includes(f.epistemic_status)||
-            !['SAMPLED_OBSERVED','DERIVED_FROM_OBSERVED'].includes(f.epistemic_status)||
-            !['UNKNOWN_CAUSALITY','TEMPORAL_ASSOCIATION','DERIVED_SPATIAL_ASSOCIATION'].includes(f.causal_relation)||
+            !(burst?['DIRECT_OBSERVED','DERIVED_FROM_OBSERVED']:['SAMPLED_OBSERVED','DERIVED_FROM_OBSERVED']).includes(f.epistemic_status)||
+            !(burst?['DIRECT_RUNTIME_RELATION','UNKNOWN_CAUSALITY','TEMPORAL_ASSOCIATION']:
+              ['UNKNOWN_CAUSALITY','TEMPORAL_ASSOCIATION','DERIVED_SPATIAL_ASSOCIATION']).includes(f.causal_relation)||
             !sourceRefs(f.source_observation_ids,ids)))throw new TypeError('SDK_SNAPSHOT_FACT_NAMESPACE_AND_LINEAGE_REQUIRED');
         const primitives=entry.emitVisualPrimitives(immutableSnapshot,retained);
         if(!Array.isArray(primitives)||primitives.length>64||primitives.some(p=>p.namespace!==entry.descriptor.namespace||
@@ -111,6 +131,12 @@ export function createDecisionAdapterRegistry(plugins) {
         return structuredClone(output);
       }
       return null;
-    },
+  }
+  return Object.freeze({
+    descriptors:freeze(entries.map(e=>e.descriptor)),
+    acceptsSnapshot:record=>entries.some(e=>validRecord(record,e.descriptor)),
+    acceptsBurst:record=>entries.some(e=>validBurstRecord(record,e.descriptor)),
+    captureSnapshot:observations=>capture(observations,false),
+    captureBurst:observations=>capture(observations,true),
   });
 }

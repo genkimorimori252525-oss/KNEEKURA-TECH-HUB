@@ -50,6 +50,7 @@ public final class KneekuraDebugDecisionHooks {
         private final KneekuraDebugDecisionBurstBudget budget;
         private final int nodeLimit;
         private final Set<String> channels;
+        private final KneekuraDebugTwilightForestAdapter modAdapter;
         private final Supplier<KneekuraDebugDecisionBurstBudget.Context> currentContext;
         private final LongSupplier time;
         private final Sink sink;
@@ -65,9 +66,10 @@ public final class KneekuraDebugDecisionHooks {
                        LongSupplier time, Sink sink) throws ReflectiveOperationException {
             if(nodeLimit<1 || nodeLimit>64)throw new IllegalArgumentException("NODE_LIMIT_OUT_OF_RANGE");
             this.subject=subject;this.snapshot=snapshot;this.budget=budget;this.nodeLimit=nodeLimit;
-            if(channels==null||channels.isEmpty()||!Set.of("goal","brain","path","control","malus","sensor").containsAll(channels))
+            if(channels==null||channels.isEmpty()||!Set.of("goal","brain","path","control","malus","sensor","mod").containsAll(channels))
                 throw new IllegalArgumentException("INVALID_CHANNELS");
             this.channels=Set.copyOf(channels);
+            this.modAdapter=channels.contains("mod")?KneekuraDebugTwilightForestAdapter.shared():null;
             this.currentContext=currentContext;this.time=time;this.sink=sink;
             if(channels.contains("goal")){register(goal,"goal");register(target,"target");}
         }
@@ -99,7 +101,7 @@ public final class KneekuraDebugDecisionHooks {
         }
         private void record(String kind,String method,Data capture) {
             if(thread!=Thread.currentThread())return;
-            String channel=kind.startsWith("GOAL_")?"goal":kind.startsWith("PATH_")?"path":
+            String channel=kind.equals("MOD_TRANSITION_RETURN")?"mod":kind.startsWith("GOAL_")?"goal":kind.startsWith("PATH_")?"path":
                     kind.startsWith("CONTROL_")?"control":kind.startsWith("BASE_MALUS_")?"malus":
                     kind.startsWith("SENSOR_")?"sensor":kind.startsWith("BRAIN_")||kind.startsWith("BEHAVIOR_")?"brain":null;
             if(channel==null||!channels.contains(channel))return;
@@ -108,8 +110,16 @@ public final class KneekuraDebugDecisionHooks {
                 if(!budget.allows(context,tick))return;
                 long started=System.nanoTime();JsonObject data=capture.read();
                 JsonObject root=new JsonObject();
-                root.addProperty("schema","kneekura.original-decision-event/v1");
-                root.addProperty("semantics","ORIGINAL_INVOCATION_RETURN_ONLY");
+                boolean mod=kind.equals("MOD_TRANSITION_RETURN");
+                root.addProperty("schema",mod?"kneekura.mod-decision-return/v1":"kneekura.original-decision-event/v1");
+                root.addProperty("semantics",mod?"ORIGINAL_MOD_INVOCATION_RETURN_ONLY":"ORIGINAL_INVOCATION_RETURN_ONLY");
+                if(mod) {
+                    root.addProperty("returnTick",subject.level().getGameTime());
+                    root.addProperty("returnLocalTick",tick);root.addProperty("localTickScope","LAST_COMPLETED_SERVER_END_COUNTER");
+                    root.add("descriptor",data.get("descriptor"));
+                    root.add("compatibilityStatus",data.get("compatibilityStatus"));root.add("entityClass",data.get("entityClass"));
+                    data=data.getAsJsonObject("data");
+                }
                 root.addProperty("targetRevision",context.selectionRevision());
                 root.addProperty("burstId","burst:"+context.selectionRevision()+":"+budget.startTick());
                 root.addProperty("eventIndex",budget.events()+1);root.addProperty("kind",kind);root.add("data",data);
@@ -119,7 +129,7 @@ public final class KneekuraDebugDecisionHooks {
                 root.addProperty("observerCostNanos",Math.max(0L,System.nanoTime()-started));
                 int bytes=root.toString().getBytes(StandardCharsets.UTF_8).length;
                 if(budget.claim(context,tick,bytes))sink.record(method,root);
-            } catch(ReflectiveOperationException|RuntimeException error) {
+            } catch(ReflectiveOperationException|RuntimeException|LinkageError error) {
                 budget.close("CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());
             } catch(IOException error) { budget.close("WRITER_UNAVAILABLE"); }
         }
@@ -141,10 +151,25 @@ public final class KneekuraDebugDecisionHooks {
                         data.addProperty("reasonStatus","NOT_EXPOSED");return data;
                     });
         }
+        void modReturn(Object owner,String method,Object requested) {
+            if(modAdapter==null||thread!=Thread.currentThread()||!modAdapter.supports(subject)||owner==null)return;
+            boolean head=owner.getClass().getName().equals("twilightforest.entity.boss.HydraHeadContainer")&&
+                subject.getClass().getName().equals("twilightforest.entity.boss.Hydra");
+            if(owner!=subject&&!head)return;
+            if(head)try {
+                if(KneekuraDebugDecisionSnapshot.read(owner.getClass(),"hydra",owner)!=subject)return;
+            }catch(ReflectiveOperationException|RuntimeException unavailable){return;}
+            // Owner/member reads and source proof occur only after the finite budget/context check in record.
+            record("MOD_TRANSITION_RETURN",owner.getClass().getName()+"."+method+".RETURN",
+                ()->modAdapter.captureOriginalReturn(subject,owner,method,requested));
+        }
     }
 
     public static void goalReturn(WrappedGoal wrapper,boolean continuation,boolean result) {
         Session session=active;if(session!=null)session.goalReturn(wrapper,continuation,result);
+    }
+    public static void modReturn(Object owner,String method,Object requested) {
+        Session session=active;if(session!=null)session.modReturn(owner,method,requested);
     }
     public static void goalLifecycle(WrappedGoal wrapper,boolean started) {
         Session session=active;if(session!=null)session.goalLifecycle(wrapper,started);

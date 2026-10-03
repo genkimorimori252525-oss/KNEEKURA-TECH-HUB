@@ -6,7 +6,7 @@ const only=(v,keys)=>object(v)&&Object.keys(v).every(k=>keys.includes(k));
 const name=v=>typeof v==='string'&&/^[A-Z_]{1,64}$/.test(v);
 const uuid=v=>v===null||(typeof v==='string'&&/^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/i.test(v));
 const KEYS={Hydra:'hydra_heads',SnowQueen:'snow_queen_phase',KnightPhantom:'knight_formation',UrGhast:'ur_ghast_custom_flight'};
-function validState(kind,s) {
+export function validTwilightForestCachedState(kind,s) {
   if(kind==='Hydra')return only(s,['numHeads','scope','heads'])&&s.numHeads===7&&
     s.scope==='SELECTED_COORDINATOR_STORED_HEAD_CONTAINERS'&&Array.isArray(s.heads)&&s.heads.length===7&&
     new Set(s.heads.map(h=>h.headNum)).size===7&&s.heads.every(h=>only(h,
@@ -33,29 +33,34 @@ function validState(kind,s) {
   }
   return false;
 }
+export function normalizeTwilightForestCachedState(kind,state) {
+  const normalized=structuredClone(state);
+  if(kind==='Hydra')for(const head of normalized.heads) {
+    if(head.nextState===undefined)head.nextState=null;
+    if(head.targetUuid===undefined)head.targetUuidStatus='NOT_CAPTURED';
+    if(head.headUuid===undefined)head.headUuidStatus='NOT_CAPTURED';
+  }
+  return normalized;
+}
 export const twilightForestDecisionAdapter=Object.freeze({
   descriptor,
   captureSnapshot(records) {
     const record=records.at(-1),d=record.payload.data;
     if(!['AVAILABLE','NOT_EXPOSED'].includes(d.status)||!only(d,['status','bossKind','stateSemantics','state','detail'])||
         (d.status==='AVAILABLE'&&(!Object.hasOwn(KEYS,d.bossKind)||record.payload.entityClass!=='twilightforest.entity.boss.'+d.bossKind||
-        d.stateSemantics!=='CACHED_STATE_NOT_ORIGINAL_TRANSITION_OR_REASON'||!validState(d.bossKind,d.state))))throw new TypeError('TF_CACHED_STATE_CONTRACT');
+        d.stateSemantics!=='CACHED_STATE_NOT_ORIGINAL_TRANSITION_OR_REASON'||!validTwilightForestCachedState(d.bossKind,d.state))))throw new TypeError('TF_CACHED_STATE_CONTRACT');
     const snapshot=structuredClone(d);
     if(d.status==='AVAILABLE'&&d.bossKind==='Hydra') {
       // Native Gson omits null fields. Only the explicit sentinel proves automatic next-state semantics;
       // an omitted Entity reference remains unknown rather than becoming an observed null target.
-      for(const head of snapshot.state.heads) {
-        if(head.nextState===undefined)head.nextState=null;
-        if(head.targetUuid===undefined)head.targetUuidStatus='NOT_CAPTURED';
-        if(head.headUuid===undefined)head.headUuidStatus='NOT_CAPTURED';
-      }
+      snapshot.state=normalizeTwilightForestCachedState(d.bossKind,d.state);
     }
     return {...snapshot,subjectUuid:record.scope.entityUuid,source_observation_ids:[record.observationId]};
   },
   describeCapabilities(records,snapshot) {
     return {'twilightforest:boss_state':{status:snapshot.status,source_observation_ids:snapshot.source_observation_ids,
       detail:'Pinned cached Boss state; no exact transition invocation or causal reason.'},
-      'twilightforest:original_transitions':{status:'NOT_EXPOSED',source_observation_ids:[],detail:'Original MOD transition hooks are not registered.'}};
+      'twilightforest:original_transitions':{status:'NOT_EXPOSED',source_observation_ids:[],detail:'Snapshot cannot establish an exact state change/reason; original returns are a separate explicit channel.'}};
   },
   captureBurst(){return {status:'NOT_EXPOSED',detail:'ORIGINAL_INVOCATION_MOD_BURST_NOT_REGISTERED'};},
   emitStructuredFacts(snapshot) {

@@ -8,6 +8,9 @@ public final class KneekuraDebugDecisionBurstRequestSelfTest {
         var request=KneekuraDebugDecisionBurstRequest.parse(JsonParser.parseString(valid));
         if(request.ticks()!=20||!request.channels().equals(java.util.Set.of("goal")))throw new AssertionError("valid finite request");
         if(KneekuraDebugDecisionBurstRequest.parse(null)!=null)throw new AssertionError("default off");
+        var mod=KneekuraDebugDecisionBurstRequest.parse(JsonParser.parseString(valid.replace("goal","mod")));
+        if(!mod.channels().equals(java.util.Set.of("mod")))throw new AssertionError("explicit MOD channel");
+        if(request.channels().contains("mod"))throw new AssertionError("ordinary request cannot arm MOD");
         for(String invalid:new String[]{valid.replace("20","20.1"),valid.replace("20","201"),
                 valid.replace("20","\"20\""),valid.replace("20","1e100"),valid.replace("20","0"),
                 valid.replace("[\"goal\"]","[]"),valid.replace("[\"goal\"]","[\"goal\",\"goal\"]"),

@@ -24,7 +24,8 @@ try {
  const names=['Env','ActionJournal','ArenaController','ArenaOwnerGrant','ForgeArenaBackend','ArenaRuntime','Durability','EvidenceWriter',
   'OwnerFiles','OwnerInputs','OwnerDispatch','OwnerTriggers','OwnerLifetime','MaterialLinkage','ScopedOwnerGate','OwnerConnection',
   'CaptureSession','CaptureBarrier','CaptureRestoration','ImageArtifact','CardinalCapture','CapturePolicy','CaptureOwner','CaptureEvidenceSink','CaptureClock',
-  'TankPresentationRecipe','TankPresentation','TankView','DecisionSnapshot','DecisionBurstBudget','DecisionHooks','TerrainField','SynchedCached'];
+  'TankPresentationRecipe','TankPresentation','TankView','DecisionSnapshot','DecisionBurstBudget','DecisionHooks','TerrainField','SynchedCached',
+  'DecisionAdapter','DecisionBurstRequest','AdapterSourceProof','TwilightForestDescriptor','TwilightForestReturnDescriptor','TwilightForestAdapter'];
  const sources=names.map(n=>path.join(main,'KneekuraDebug'+n+'.java'));
  const checks=['EvidenceClaim','CaptureWriter','RegisteredWorld','TankPresentation','DecisionSnapshot','DecisionHooks','TerrainField','SynchedCached'];
  run(executable('javac'),['--release','17','-proc:none','-cp',classpath,'-d',output,...sources,...checks.map(n=>path.join(test,'KneekuraDebug'+n+'SelfTest.java'))]);

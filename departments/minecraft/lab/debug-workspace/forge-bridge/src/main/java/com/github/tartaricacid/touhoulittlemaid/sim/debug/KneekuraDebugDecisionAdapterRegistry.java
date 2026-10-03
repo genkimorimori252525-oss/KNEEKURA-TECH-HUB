@@ -8,7 +8,7 @@ import java.util.List;
 
 /** SDK v1 explicit producer registration. Source data cannot register code or owner authority. */
 final class KneekuraDebugDecisionAdapterRegistry {
-    private static final List<KneekuraDebugDecisionAdapter> ADAPTERS=List.of(new KneekuraDebugTwilightForestAdapter());
+    private static final List<KneekuraDebugDecisionAdapter> ADAPTERS=List.of(KneekuraDebugTwilightForestAdapter.shared());
     private KneekuraDebugDecisionAdapterRegistry(){ }
     static void captureSelected(KneekuraDebugEnv.Config config,MinecraftServer server,Mob mob,long revision,long tick) {
         if(config==null||!config.enabled()||server==null||!server.isSameThread()||mob==null)return;

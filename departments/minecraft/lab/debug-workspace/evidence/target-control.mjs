@@ -82,8 +82,8 @@ export function normalizeDecisionBurst(value) {
   const limits={ticks:200,maxEvents:256,maxBytes:524288,maxNodes:64};
   if(typeof value!=='object'||Array.isArray(value)||Object.keys(value).some(k=>![...Object.keys(limits),'channels'].includes(k))||
       Object.entries(limits).some(([key,max])=>!Number.isSafeInteger(value[key])||value[key]<1||value[key]>max)||
-      !Array.isArray(value.channels)||value.channels.length<1||value.channels.length>6||
-      new Set(value.channels).size!==value.channels.length||value.channels.some(c=>!['goal','brain','path','control','malus','sensor'].includes(c))){
+      !Array.isArray(value.channels)||value.channels.length<1||value.channels.length>7||
+      new Set(value.channels).size!==value.channels.length||value.channels.some(c=>!['goal','brain','path','control','malus','sensor','mod'].includes(c))){
     throw new TypeError('Invalid decisionBurst: require finite ticks/events/bytes/nodes and unique known channels');
   }
   return {...Object.fromEntries(Object.keys(limits).map(key=>[key,value[key]])),channels:[...value.channels]};
