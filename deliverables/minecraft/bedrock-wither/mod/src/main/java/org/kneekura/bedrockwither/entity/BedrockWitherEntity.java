@@ -48,6 +48,8 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
             SynchedEntityData.defineId(BedrockWitherEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> DATA_AERIAL_ATTACK =
             SynchedEntityData.defineId(BedrockWitherEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Integer> DATA_SPAWNING_FRAMES =
+            SynchedEntityData.defineId(BedrockWitherEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DATA_DEATH_TICKS =
             SynchedEntityData.defineId(BedrockWitherEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Float> DATA_DEATH_OLD_SWELL =
@@ -158,6 +160,9 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
         super.defineSynchedData();
         this.entityData.define(DATA_STATE, BedrockWitherState.SPAWN_SEQUENCE.id());
         this.entityData.define(DATA_AERIAL_ATTACK, true);
+        // Identical server/client defaults matter for late tracking: completed
+        // spawn (zero) must be included in the initial non-default snapshot.
+        this.entityData.define(DATA_SPAWNING_FRAMES, BedrockWitherSpawnController.CURRENT_SPAWN_DURATION_TICKS);
         this.entityData.define(DATA_DEATH_TICKS, 0);
         this.entityData.define(DATA_DEATH_OLD_SWELL, 0.0F);
         this.entityData.define(DATA_DEATH_SWELL, 0.0F);
@@ -349,7 +354,13 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
         if (getDeathTicksRemaining() > 0) {
             return getDeathTicksRemaining();
         }
-        return Math.max(0, runtimeState.spawningFrames());
+        return this.entityData.get(DATA_SPAWNING_FRAMES);
+    }
+
+    void setSpawningFrames(int value) {
+        int bounded = Math.max(0, value);
+        runtimeState.setSpawningFrames(bounded);
+        this.entityData.set(DATA_SPAWNING_FRAMES, bounded);
     }
 
     public int getDeathTicksRemaining() {

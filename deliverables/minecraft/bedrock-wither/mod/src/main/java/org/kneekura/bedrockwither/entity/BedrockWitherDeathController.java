@@ -94,8 +94,10 @@ public final class BedrockWitherDeathController {
         owner.setDeathOverlayAlpha(Math.max(0.0F, Math.min(1.0F, overlayAlpha)));
         owner.setDeathShieldFlicker(Math.max(0, shieldFlicker));
 
-        finalized = owner.getDeathTicksRemaining() <= 0
-                && restoredState != BedrockWitherState.DEATH_SEQUENCE;
+        // A persisted entity has not executed terminal removal in this lifetime.
+        // Zero remaining ticks on a living save means death has not begun, not
+        // that it already finished. Keep both later death and pending death usable.
+        finalized = false;
     }
 
     public float swellAmount(float partialTick) {

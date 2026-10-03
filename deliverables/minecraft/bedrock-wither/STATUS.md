@@ -1,6 +1,6 @@
 # Bedrock Wither — Current Status
 
-Updated: 2026-10-02  
+Updated: 2026-10-03
 Lifecycle: **PROTOTYPE**  
 Milestone: **BWR-M1 — standalone boss reconstruction**
 
@@ -24,11 +24,16 @@ Completed:
 - Phase-2 dash execution owns chargeDirection/chargeFrames/charging state, accepted 20-tick execution, range-2 destruction geometry (6×8×6) and 15 entity damage; exact current speed and preparation trigger remain measurement-gated.
 - Official Bedrock Nether Star loot contract is present.
 - Dedicated Forge CI passes build + GameTest.
-- Latest accepted runtime generation: source `da3ee83a14e3d110ffb34a0b442186a06e1cecae`, workflow run `37001222165`: **18/18 required GameTests passed** in isolated batches.
+- Latest retained hosted runtime generation: source `da3ee83a14e3d110ffb34a0b442186a06e1cecae`, workflow run `37001222165`: **18/18 required GameTests passed** in isolated batches.
 - Bedrock-specific death lifecycle now preserves semantic death immediately while extending visual/removal ticking through a native-shaped death controller; current Mojang swell scaling and spawn/death invulnerability-skin timing are wired, while exact current death duration/XP timing remain provisional.
 - Special Wither repositioning has a measurement-gated controller boundary instead of guessed distance/speed constants.
 - Side-head scheduling now owns passive dangerous-skull timing, independent side targets and Normal/Hard targeted firing from Bedrock-native structure; attack range 30 remains historical-native provisional.
 - Three independent head pitch queries are server-authored and synchronized to the client model.
+- Current locally verified source `b7fd04b037a4b3eed2450c51fe55c9e3ddfdfcca` passes build + **21/21 required GameTests** in isolated cloud Linux; [compact RED/GREEN receipt](evidence/gametest-2026-10-03.json). This is separate from the historical hosted run above.
+- Complete TECH HUB regression suite: **3038 passed / 435 skipped**, with Java 17 and a disposable Git-external pytest temp directory; no production guard or test was weakened.
+- Healthy save/reload no longer finalizes the future death lifecycle. Mid-death save/reload retains its countdown and visual progression.
+- The renderer-facing spawn countdown is synchronized through initial/dirty entity-data snapshots, including late tracking and NBT restoration. Real client/Tank visual acceptance remains pending.
+- [Direct Bedrock measurement scenarios v1](../../../departments/minecraft/design/2026-10-02-bedrock-wither-reconstruction/MEASUREMENT-SCENARIOS-v1.md) are PREPARED / NOT EXECUTED; no new Bedrock constants were adopted.
 - RED→GREEN history is preserved under `history/failure-repair/`.
 
 ## Still unresolved / not claimed
@@ -48,10 +53,10 @@ Completed:
 
 ## Next action
 
-1. reconstruct the semantic/visual death lifecycle from current BDS death ECS + version-labelled native evidence;
-2. implement the special `wither_random_attack_pos_goal` boundary without inventing unresolved position/timing constants;
-3. bind remaining shield/death visual values only where current evidence is strong;
-4. move unresolved firing-speed, dash-speed and special-movement constants into Tank/direct Bedrock measurement;
+1. preserve the lifecycle/synchronization regressions and verify any published source generation in the dedicated hosted workflow;
+2. fill and freeze the prepared direct-Bedrock scenario manifests for an explicitly selected version/setup; protocol preparation is not measurement;
+3. resolve firing cadence, special movement, reflection, transition/dash, shield and death questions from retained evidence, with exact-tick claims only where the observation method supports them;
+4. bind supported values only after source/adoption updates and regression tests, retaining all unresolved values as TBD;
 5. perform paired Tank acceptance before any final parity claim.
 
 ## Safety against stale handoff

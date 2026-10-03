@@ -116,6 +116,79 @@ public final class BedrockWitherGameTests {
         helper.succeed();
     }
 
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_spawnvisualticksfollowentitydatasnapshots")
+    public static void spawnVisualTicksFollowEntityDataSnapshots(GameTestHelper helper) {
+        BedrockWitherEntity server = createWither(helper);
+        server.setNoAi(true);
+        // A fresh replica uses constructor defaults, then receives only normal
+        // entity-data snapshots. It never receives the server runtimeState or NBT.
+        BedrockWitherEntity replica = ModEntities.BEDROCK_WITHER.get().create(helper.getLevel());
+        if (replica == null) {
+            helper.fail("Failed to create entity-data replica");
+            return;
+        }
+        copyInitialEntityData(server, replica);
+        if (replica.getVisualInvulnerableTicks() != 220) {
+            helper.fail("Initial spawn snapshot lost the visual countdown");
+            return;
+        }
+        for (int tick = 0; tick < 139; tick++) {
+            server.spawnController().tick();
+        }
+        copyInitialEntityData(server, replica);
+        if (replica.getVisualInvulnerableTicks() != 81) {
+            helper.fail("Mid-spawn entity-data snapshot did not update the visual countdown");
+            return;
+        }
+        net.minecraft.nbt.CompoundTag saved = new net.minecraft.nbt.CompoundTag();
+        server.saveWithoutId(saved);
+        BedrockWitherEntity restoredServer = ModEntities.BEDROCK_WITHER.get().create(helper.getLevel());
+        if (restoredServer == null) {
+            helper.fail("Failed to create mid-spawn saved copy");
+            return;
+        }
+        restoredServer.load(saved);
+        BedrockWitherEntity restoredReplica = ModEntities.BEDROCK_WITHER.get().create(helper.getLevel());
+        if (restoredReplica == null) {
+            helper.fail("Failed to create restored-spawn replica");
+            return;
+        }
+        copyInitialEntityData(restoredServer, restoredReplica);
+        if (restoredReplica.getVisualInvulnerableTicks() != 81) {
+            helper.fail("Restored spawn countdown did not reach initial entity data");
+            return;
+        }
+        for (int expected = 80; expected >= 0; expected--) {
+            server.spawnController().tick();
+            var dirty = server.getEntityData().packDirty();
+            if (dirty != null) {
+                replica.getEntityData().assignValues(dirty);
+            }
+            if (replica.getVisualInvulnerableTicks() != expected) {
+                helper.fail("Dirty spawn update expected " + expected + " visual ticks");
+                return;
+            }
+        }
+        BedrockWitherEntity lateReplica = ModEntities.BEDROCK_WITHER.get().create(helper.getLevel());
+        if (lateReplica == null) {
+            helper.fail("Failed to create late-tracking replica");
+            return;
+        }
+        copyInitialEntityData(server, lateReplica);
+        if (lateReplica.getVisualInvulnerableTicks() != 0) {
+            helper.fail("Late-tracking combat entity retained constructor spawn visuals");
+            return;
+        }
+        helper.succeed();
+    }
+
+    private static void copyInitialEntityData(BedrockWitherEntity source, BedrockWitherEntity replica) {
+        var initial = source.getEntityData().getNonDefaultValues();
+        if (initial != null) {
+            replica.getEntityData().assignValues(initial);
+        }
+    }
+
     @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_undeaddamageisrejected")
     public static void undeadDamageIsRejected(GameTestHelper helper) {
         BedrockWitherEntity wither = createCombatReadyWither(helper);
@@ -766,6 +839,92 @@ public final class BedrockWitherGameTests {
             return;
         }
 
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_livingreloadcanfinishdeathsequence")
+    public static void livingReloadCanFinishDeathSequence(GameTestHelper helper) {
+        BedrockWitherEntity original = createCombatReadyWither(helper);
+        original.setNoAi(true);
+        net.minecraft.nbt.CompoundTag saved = new net.minecraft.nbt.CompoundTag();
+        original.saveWithoutId(saved);
+        original.discard();
+
+        BedrockWitherEntity restored = ModEntities.BEDROCK_WITHER.get().create(helper.getLevel());
+        if (restored == null) {
+            helper.fail("Failed to create saved Wither copy");
+            return;
+        }
+        restored.load(saved);
+        if (!restored.isAlive() || restored.deathController().isActive()) {
+            helper.fail("Loading a living Wither incorrectly entered semantic/visual death");
+            return;
+        }
+        restored.hurt(helper.getLevel().damageSources().genericKill(), Float.MAX_VALUE);
+        if (!restored.isDeadOrDying()
+                || restored.getBedrockState() != BedrockWitherState.DEATH_SEQUENCE
+                || !restored.deathController().isActive()) {
+            helper.fail("Loading a living Wither disabled its later death sequence");
+            return;
+        }
+        int duration = org.kneekura.bedrockwither.entity.BedrockWitherDeathController
+                .PROVISIONAL_DEATH_DURATION_TICKS;
+        for (int tick = 0; tick < duration - 1; tick++) {
+            restored.deathController().tickServer();
+        }
+        if (restored.isRemoved() || restored.getDeathTicksRemaining() != 1) {
+            helper.fail("Reloaded Wither did not retain the full provisional death countdown");
+            return;
+        }
+        restored.deathController().tickServer();
+        if (!restored.isRemoved() || restored.getDeathTicksRemaining() != 0) {
+            helper.fail("Reloaded Wither did not finalize on the last death tick");
+            return;
+        }
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_activedeathreloadpreservesremainingticks")
+    public static void activeDeathReloadPreservesRemainingTicks(GameTestHelper helper) {
+        BedrockWitherEntity original = createCombatReadyWither(helper);
+        original.setNoAi(true);
+        original.hurt(helper.getLevel().damageSources().genericKill(), Float.MAX_VALUE);
+        for (int tick = 0; tick < 37; tick++) {
+            original.deathController().tickServer();
+        }
+        int remaining = original.getDeathTicksRemaining();
+        float swell = original.getDeathSwell();
+        net.minecraft.nbt.CompoundTag saved = new net.minecraft.nbt.CompoundTag();
+        original.saveWithoutId(saved);
+        original.discard();
+
+        BedrockWitherEntity restored = ModEntities.BEDROCK_WITHER.get().create(helper.getLevel());
+        if (restored == null) {
+            helper.fail("Failed to create dying Wither copy");
+            return;
+        }
+        restored.load(saved);
+        if (!restored.isDeadOrDying() || !restored.deathController().isActive()
+                || restored.getDeathTicksRemaining() != remaining) {
+            helper.fail("Loading a dying Wither lost its pending death sequence");
+            return;
+        }
+        assertClose(helper, swell, restored.getDeathSwell(), "Saved death swell");
+        for (int tick = 0; tick < remaining - 1; tick++) {
+            restored.deathController().tickServer();
+        }
+        if (restored.isRemoved() || restored.getDeathTicksRemaining() != 1) {
+            helper.fail("Saved death sequence restarted or finished early");
+            return;
+        }
+        restored.deathController().tickServer();
+        if (!restored.isRemoved()) {
+            helper.fail("Saved death sequence did not finish after its remaining ticks");
+            return;
+        }
+        float finalSwell = restored.getDeathSwell();
+        restored.deathController().tickServer();
+        assertClose(helper, finalSwell, restored.getDeathSwell(), "Finalized death tick is inert");
         helper.succeed();
     }
 
