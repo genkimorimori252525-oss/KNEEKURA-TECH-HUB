@@ -149,7 +149,10 @@ jobs:
             throw "Marketplace modal fingerprint not present; refusing close-coordinate click"
           }
 
-          Click-Point 1488 89
+          # Escape closes the verified Marketplace modal without relying on DPI-scaled
+          # cursor coordinates. It is sent only after the modal fingerprint matches.
+          $shell = New-Object -ComObject WScript.Shell
+          [void]$shell.SendKeys('{ESC}')
           Start-Sleep -Seconds 3
           if ((Get-ForegroundTitle) -ne 'Minecraft') { throw 'Minecraft foreground verification failed after modal close' }
 
