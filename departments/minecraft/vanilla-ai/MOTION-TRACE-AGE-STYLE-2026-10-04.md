@@ -21,7 +21,7 @@ Initial projectile colors derive deterministically from exact UUID/SimLab entity
 
 Related projectiles have their own trace/sample map; drawing never connects one UUID to another. The existing retained Decision Viewer was missing the related-projectile checkbox despite receiving that layer, causing a null-element exception even with default-OFF data. A real script-execution regression reproduced this and now verifies empty/default-OFF and multiple independent projectile traces.
 
-SimLab's two canvas views now consume retained SampledMotionTrace projectile segments instead of reconstructing a trail from forward-filled `at(t)` values. AI-facing packet and static SVG contracts are unchanged. The current native overlay still displays only its explicitly selected entity; simultaneous related-projectile native drawing is not claimed by this color change.
+SimLab's two canvas views now consume retained SampledMotionTrace projectile segments instead of reconstructing a trail from forward-filled `at(t)` values. AI-facing packet and static SVG contracts are unchanged. The original color-only generation displays one explicitly selected native entity. The subsequent [related-projectile source slice](NATIVE-RELATED-PROJECTILE-DISPLAY-2026-10-04.md) adds bounded simultaneous native groups from flushed accepted-spawn/tick observations; its runtime pixel acceptance remains separate.
 
 ## Validation and remaining acceptance
 

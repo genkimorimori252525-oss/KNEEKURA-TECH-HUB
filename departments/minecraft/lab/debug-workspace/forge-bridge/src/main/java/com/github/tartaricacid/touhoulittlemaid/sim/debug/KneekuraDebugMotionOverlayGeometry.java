@@ -21,6 +21,9 @@ final class KneekuraDebugMotionOverlayGeometry {
   return lines(trace,dimension,gameTime,cameraX,cameraY,cameraZ,true);
  }
  static List<Line> lines(KneekuraDebugMotionTraceCache.Snapshot trace,String dimension,long gameTime,double cameraX,double cameraY,double cameraZ,boolean captureQuiescent) {
+  return linesForIdentity(trace,trace.context()==null?null:trace.context().uuid().toString(),dimension,gameTime,cameraX,cameraY,cameraZ,captureQuiescent);
+ }
+ static List<Line> linesForIdentity(KneekuraDebugMotionTraceCache.Snapshot trace,String identity,String dimension,long gameTime,double cameraX,double cameraY,double cameraZ,boolean captureQuiescent) {
   // Raw Cardinal owns the framebuffer through restoration and its final durable acknowledgement.
   if(!captureQuiescent||trace.context()==null)return List.of();
   var out=new ArrayList<Line>();var visible=new HashMap<Integer,AgeStyle>();
@@ -28,7 +31,7 @@ final class KneekuraDebugMotionOverlayGeometry {
    var s=trace.samples().get(i);
    if(!s.dimension().equals(dimension)||s.tick()>gameTime||gameTime-s.tick()>=100||
      Math.hypot(Math.hypot(s.x()-cameraX,s.y()-cameraY),s.z()-cameraZ)>64)continue;
-   var ids=List.of(s.sourceId());double r=0.06;var style=ageStyle(s.traceClass(),trace.context().uuid().toString(),s.tick(),gameTime);visible.put(i,style);
+   var ids=List.of(s.sourceId());double r=0.06;var style=ageStyle(s.traceClass(),identity,s.tick(),gameTime);visible.put(i,style);
    out.add(new Line(s.x()-r,s.y(),s.z(),s.x()+r,s.y(),s.z(),s.traceClass(),"RETAINED_SAMPLE_MARKER",ids,style));
    out.add(new Line(s.x(),s.y(),s.z()-r,s.x(),s.y(),s.z()+r,s.traceClass(),"RETAINED_SAMPLE_MARKER",ids,style));
    if(s.traceClass().equals("PROJECTILE_ACTUAL"))out.add(new Line(s.x(),s.y()-r,s.z(),s.x(),s.y()+r,s.z(),s.traceClass(),"RETAINED_SAMPLE_MARKER",ids,style));
@@ -44,6 +47,13 @@ final class KneekuraDebugMotionOverlayGeometry {
    }
   }
   if(out.size()>1024)throw new IllegalStateException("BOUNDED_OVERLAY_GEOMETRY_EXCEEDED");
+  return List.copyOf(out);
+ }
+ static List<Line> combinedLines(KneekuraDebugMotionTraceCache.Snapshot selected,KneekuraDebugRelatedProjectileTraceCache.Snapshot related,String dimension,long gameTime,double cameraX,double cameraY,double cameraZ,boolean captureQuiescent) {
+  var out=new ArrayList<>(lines(selected,dimension,gameTime,cameraX,cameraY,cameraZ,captureQuiescent));
+  if(selected.context()!=null&&Objects.equals(selected.context(),related.context()))for(var group:related.traces())
+   out.addAll(linesForIdentity(group.trace(),group.uuid().toString(),dimension,gameTime,cameraX,cameraY,cameraZ,captureQuiescent));
+  if(out.size()>2048)throw new IllegalStateException("BOUNDED_COMBINED_OVERLAY_GEOMETRY_EXCEEDED");
   return List.copyOf(out);
  }
 }

@@ -27,9 +27,10 @@ public final class KneekuraDebugMotionOverlay {
   if(trace.context()==null||config==null||trace.samples().isEmpty())return;
   if(!Objects.equals(lastContext,trace.context())){lastContext=trace.context();frames=0;totalNanos=0;maxNanos=0;}
   var camera=event.getCamera().getPosition();String dimension=mc.level.dimension().location().toString();long gameTime=mc.level.getGameTime();
-  var lines=KneekuraDebugMotionOverlayGeometry.lines(trace,dimension,gameTime,camera.x,camera.y,camera.z,KneekuraDebugCardinalCapture.quiescent());if(lines.isEmpty())return;
   PoseStack pose=event.getPoseStack();pose.pushPose();
   try {
+   var related=KneekuraDebugMotionOverlayRuntime.relatedSnapshot();
+   var lines=KneekuraDebugMotionOverlayGeometry.combinedLines(trace,related,dimension,gameTime,camera.x,camera.y,camera.z,KneekuraDebugCardinalCapture.quiescent());if(lines.isEmpty())return;
    pose.translate(-camera.x,-camera.y,-camera.z);var buffers=mc.renderBuffers().bufferSource();var consumer=buffers.getBuffer(RenderType.lines());
    for(var line:lines)line(consumer,pose,line);
    buffers.endBatch(RenderType.lines());
@@ -40,6 +41,13 @@ public final class KneekuraDebugMotionOverlay {
     payload.addProperty("targetRevision",trace.context().revision());payload.addProperty("dimension",dimension);
     payload.addProperty("renderedFrames",frames);payload.addProperty("submittedLines",lines.size());payload.addProperty("retainedSamples",trace.samples().size());
     payload.addProperty("evictedSamples",trace.evictedSamples());payload.addProperty("rejectedSamples",trace.rejectedSamples());payload.addProperty("gapCount",trace.gaps().size());
+    if(Objects.equals(trace.context(),related.context())){
+     payload.addProperty("relatedProjectileGroups",related.traces().size());payload.addProperty("relatedProjectileSamples",related.retainedSamples());
+     payload.addProperty("relatedProjectileEvictedSamples",related.evictedSamples());payload.addProperty("relatedProjectileRejectedSamples",related.rejectedSamples());
+     payload.addProperty("relatedProjectileGroupScope","RETAINED_ACCEPTED_GROUPS_NOT_CURRENTLY_VISIBLE_COUNT");
+     var ids=new JsonArray();var spawns=new JsonArray();for(var group:related.traces()){ids.add(group.uuid().toString());spawns.add(group.spawnSource());}
+     payload.add("relatedProjectileUuids",ids);payload.add("relatedProjectileSpawnSources",spawns);
+    }
     payload.addProperty("firstRetainedTick",trace.samples().get(0).tick());payload.addProperty("lastRetainedTick",trace.samples().get(trace.samples().size()-1).tick());
     payload.addProperty("renderCpuMeanNanos",totalNanos/frames);payload.addProperty("renderCpuMaxNanos",maxNanos);
     payload.addProperty("observerCostScope","CPU_BUILD_AND_DRAW_SUBMIT_EXCLUDES_GPU_FRAMEBUFFER_CAPTURE_WRITER");

@@ -100,6 +100,9 @@ final class KneekuraDebugMotionTraceCache {
   }catch(RuntimeException unknown){return false;}
  }
  synchronized Snapshot snapshot() {
+  return derive(context,samples,evicted,rejected);
+ }
+ static Snapshot derive(Context context,List<Sample> samples,long evicted,long rejected) {
   var segments=new ArrayList<Segment>();var gaps=new ArrayList<Gap>();
   for(int i=1;i<samples.size();i++){
    Sample a=samples.get(i-1),b=samples.get(i);double distance=Math.sqrt(Math.pow(b.x()-a.x(),2)+Math.pow(b.y()-a.y(),2)+Math.pow(b.z()-a.z(),2));
