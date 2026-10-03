@@ -77,7 +77,7 @@ public final class KneekuraDebugDecisionHooks {
                        LongSupplier time, Sink sink) throws ReflectiveOperationException {
             if(nodeLimit<1 || nodeLimit>64)throw new IllegalArgumentException("NODE_LIMIT_OUT_OF_RANGE");
             this.subject=subject;this.snapshot=snapshot;this.budget=budget;this.nodeLimit=nodeLimit;
-            if(channels==null||channels.isEmpty()||!Set.of("goal","brain","path","control","malus","sensor","mod","projectile").containsAll(channels))
+            if(channels==null||channels.isEmpty()||!Set.of("goal","brain","path","control","malus","sensor","mod","projectile","neighbors").containsAll(channels))
                 throw new IllegalArgumentException("INVALID_CHANNELS");
             this.channels=Set.copyOf(channels);
             this.modAdapter=channels.contains("mod")?KneekuraDebugTwilightForestAdapter.shared():null;
@@ -113,6 +113,7 @@ public final class KneekuraDebugDecisionHooks {
         private boolean record(String kind,String method,Data capture) {
             if(thread!=Thread.currentThread())return false;
             String channel=kind.startsWith("CONTROL_PROJECTILE_")&&channels.contains("projectile")?"projectile":
+                    kind.equals("PATH_NEIGHBORS_RETURN")?"neighbors":
                     kind.startsWith("MOD_")?"mod":kind.startsWith("GOAL_")?"goal":kind.startsWith("PATH_")?"path":
                     kind.startsWith("CONTROL_")?"control":kind.startsWith("BASE_MALUS_")?"malus":
                     kind.startsWith("SENSOR_")?"sensor":kind.startsWith("BRAIN_")||kind.startsWith("BEHAVIOR_")?"brain":null;
@@ -352,7 +353,7 @@ public final class KneekuraDebugDecisionHooks {
         Session session=active;if(session==null||session.thread!=Thread.currentThread())return;
         // Also clear an interrupted selected search when this finder is reused by another Mob.
         session.searches.remove(finder);
-        if(!session.matches(mob)||!session.channels.contains("path"))return;
+        if(!session.matches(mob)||(!session.channels.contains("path")&&!session.channels.contains("neighbors")))return;
         try { if(!session.budget.allows(session.currentContext.get(),session.time.getAsLong()))return; }
         catch(RuntimeException error) {session.budget.close("CONTEXT_UNAVAILABLE");return;}
         if(session.searches.size()>=8)return;
@@ -364,6 +365,42 @@ public final class KneekuraDebugDecisionHooks {
             JsonObject data=new JsonObject();data.addProperty("searchId",session.searches.get(finder));
             data.add("frontier",frontier(finder,session.nodeLimit));return data;
         });
+    }
+    /** Preserve exactly one original virtual dispatch, including its return and exception. */
+    public static int originalNeighbors(PathFinder finder,NodeEvaluator evaluator,Node[] output,Node current) {
+        int count=evaluator.getNeighbors(output,current);
+        Session session=active;
+        if(session==null||session.thread!=Thread.currentThread()||!session.searches.containsKey(finder))return count;
+        session.record("PATH_NEIGHBORS_RETURN","PathFinder.inner.NodeEvaluator.getNeighbors.AFTER",()->{
+            if(KneekuraDebugDecisionSnapshot.read(PathFinder.class,"nodeEvaluator",finder)!=evaluator)
+                throw new IllegalArgumentException("ORIGINAL_EVALUATOR_MISMATCH");
+            if(output==null||count<0||count>output.length)throw new IllegalArgumentException("ORIGINAL_NEIGHBOR_COUNT_UNAVAILABLE");
+            JsonObject data=new JsonObject();data.addProperty("searchId",session.searches.get(finder));
+            data.addProperty("evaluatorClass",label(evaluator.getClass().getName()));data.add("currentNode",observedNode(current));
+            data.addProperty("returnedCount",count);data.addProperty("returnedArrayLength",output.length);
+            data.addProperty("maxNodes",session.nodeLimit);data.addProperty("truncated",count>session.nodeLimit);
+            JsonArray neighbors=new JsonArray();
+            for(int i=0;i<Math.min(count,session.nodeLimit);i++) {
+                JsonObject item=new JsonObject();item.addProperty("slot",i);item.add("node",observedNode(output[i]));neighbors.add(item);
+            }
+            data.add("neighbors",neighbors);data.addProperty("phase","AFTER_ORIGINAL_GET_NEIGHBORS_BEFORE_RELAXATION");
+            data.addProperty("dispatchScope","ORIGINAL_VIRTUAL_GET_NEIGHBORS_RETURN");
+            data.addProperty("subjectRelationScope","SELECTED_OUTER_FIND_PATH_INVOCATION");
+            data.addProperty("fieldScope","BASE_NODE_FIELDS_BEFORE_RELAXATION");
+            data.addProperty("neighborPopulationStatus","NOT_EXPOSED");data.addProperty("rejectionReasonStatus","NOT_EXPOSED");return data;
+        });
+        return count;
+    }
+    private static JsonObject observedNode(Node node)throws ReflectiveOperationException {
+        JsonObject section=new JsonObject();
+        if(node==null){section.addProperty("status","NOT_EXPOSED");section.addProperty("detail","NULL_NODE");return section;}
+        JsonObject row=new JsonObject();row.addProperty("className",label(node.getClass().getName()));
+        row.addProperty("x",node.x);row.addProperty("y",node.y);row.addProperty("z",node.z);
+        if(node.type==null)row.addProperty("pathTypeStatus","NOT_EXPOSED");else row.addProperty("pathType",node.type.name());
+        number(row,"g",node.g);number(row,"h",node.h);number(row,"f",node.f);
+        number(row,"costMalus",node.costMalus);number(row,"walkedDistance",node.walkedDistance);
+        row.addProperty("openAtReturn",(Integer)KneekuraDebugDecisionSnapshot.read(Node.class,"heapIdx",node)>=0);
+        row.addProperty("closedAtReturn",node.closed);section.addProperty("status","AVAILABLE");section.add("data",row);return section;
     }
     public static void pathResult(PathFinder finder,Mob mob,Path result) {
         Session session=active;if(session==null||!session.matches(mob)||!session.searches.containsKey(finder))return;

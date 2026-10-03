@@ -354,6 +354,7 @@ export function observeDebugWorkspaceDecision({
       ...(navigation ? ['navigation'] : []),
       ...(snapshot ? SNAPSHOT_SECTIONS.filter(name => snapshot.payload.sections[name].status !== 'NOT_EXPOSED') : []),
       ...(originalRecords.length ? ['original_decision_events'] : []),
+      ...(originalRecords.some(r=>r.payload.kind==='PATH_NEIGHBORS_RETURN') ? ['path_neighbors'] : []),
       ...(terrain ? ['terrain_ground'] : []),
       ...(modSnapshot ? ['mod_state'] : []),
       ...(modBurst ? ['mod_returns'] : []),

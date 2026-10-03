@@ -20,6 +20,7 @@ const KINDS = Object.freeze({
   BASE_MALUS_RETURN: ['EVALUATION','base_path_malus'],
   PATH_SEARCH_STATE: ['EVALUATION','path_search_frontier'],
   PATH_SEARCH_RESULT: ['RESULT','path_search_result'],
+  PATH_NEIGHBORS_RETURN: ['EVALUATION','path_search_neighbors'],
 });
 const text = value => typeof value === 'string' && value.length > 0 && value.length <= 512;
 const integer = value => Number.isSafeInteger(value);
@@ -100,8 +101,33 @@ function validKnightCoordination(d,record) {
     d.dispatchScope==='ORIGINAL_PASSED_LIST_AFTER_BROADCAST'&&d.memberStateScope==='CACHED_FIELDS_AT_RETURN'&&
     ['affectedMembersStatus','leaderDecisionStatus','groupIdentityStatus'].every(k=>d[k]==='NOT_EXPOSED');
 }
+function validReturnedNode(section) {
+  if(!object(section))return false;
+  if(section.status==='NOT_EXPOSED')return Object.keys(section).length===2&&section.detail==='NULL_NODE';
+  const n=section.data,floats=['g','h','f','costMalus','walkedDistance'];
+  return section.status==='AVAILABLE'&&Object.keys(section).length===2&&object(n)&&text(n.className)&&
+    ['x','y','z'].every(k=>integer(n[k]))&&
+    (text(n.pathType)||(n.pathType===undefined&&n.pathTypeStatus==='NOT_EXPOSED'))&&
+    floats.every(k=>numberOrUnknown(n,k))&&typeof n.openAtReturn==='boolean'&&typeof n.closedAtReturn==='boolean'&&
+    Object.keys(n).every(k=>['className','x','y','z','pathType','pathTypeStatus','openAtReturn','closedAtReturn',
+      ...floats,...floats.map(f=>f+'Status')].includes(k));
+}
+function validNeighborReturn(d) {
+  const keys=['searchId','evaluatorClass','currentNode','returnedCount','returnedArrayLength','maxNodes','neighbors','truncated',
+    'phase','dispatchScope','subjectRelationScope','fieldScope','neighborPopulationStatus','rejectionReasonStatus'];
+  return Object.keys(d).length===keys.length&&Object.keys(d).every(k=>keys.includes(k))&&text(d.searchId)&&text(d.evaluatorClass)&&
+    validReturnedNode(d.currentNode)&&integer(d.returnedCount)&&d.returnedCount>=0&&integer(d.returnedArrayLength)&&
+    d.returnedArrayLength>=d.returnedCount&&d.returnedArrayLength<=2147483647&&
+    integer(d.maxNodes)&&d.maxNodes>=1&&d.maxNodes<=64&&Array.isArray(d.neighbors)&&
+    d.neighbors.length===Math.min(d.returnedCount,d.maxNodes)&&d.truncated===(d.returnedCount>d.maxNodes)&&
+    d.neighbors.every((n,i)=>object(n)&&Object.keys(n).length===2&&n.slot===i&&validReturnedNode(n.node))&&
+    d.phase==='AFTER_ORIGINAL_GET_NEIGHBORS_BEFORE_RELAXATION'&&d.dispatchScope==='ORIGINAL_VIRTUAL_GET_NEIGHBORS_RETURN'&&
+    d.subjectRelationScope==='SELECTED_OUTER_FIND_PATH_INVOCATION'&&d.fieldScope==='BASE_NODE_FIELDS_BEFORE_RELAXATION'&&
+    d.neighborPopulationStatus==='NOT_EXPOSED'&&d.rejectionReasonStatus==='NOT_EXPOSED';
+}
 function validData(kind,d,record) {
   if (kind === 'MOD_COORDINATION_RETURN') return validKnightCoordination(d,record);
+  if (kind === 'PATH_NEIGHBORS_RETURN') return validNeighborReturn(d);
   if (kind.startsWith('GOAL_')) {
     if (!['goal','target'].includes(d.selector) || !text(d.goalClass) || !integer(d.priority) ||
         !validInstanceIdentity(d,true)) return false;
