@@ -2,7 +2,7 @@
 
 This is the actual product source tree for the Bedrock Wither deliverable.
 
-Current stage: **standalone prototype with bounded Forge build/GameTest verification**. See [current status](../STATUS.md) and [source-bound evidence](../evidence/gametest-cancellation-2026-10-03.json); direct Bedrock parity and client/Tank acceptance remain open.
+Current stage: **standalone prototype with bounded Forge build/GameTest verification**. See [current status](../STATUS.md) and [source-bound evidence](../evidence/gametest-rewards-2026-10-03.json); direct Bedrock parity and client/Tank acceptance remain open.
 
 Target:
 - Minecraft 1.20.1
@@ -28,4 +28,4 @@ Use Java 17 and Gradle 8.1.1, matching the dedicated workflow:
 gradle build runGameTestServer --no-daemon
 ```
 
-The current 2026-10-03 isolated cloud run passed build and 23 required GameTests, including healthy/dead save-load, spawn entity-data synchronization and positive-health Forge revival regressions. The project does not track a Gradle wrapper. A local pass is distinct from hosted CI and from current Bedrock behavioral equivalence.
+The current 2026-10-03 isolated cloud suite passed build and 24 required GameTests twice consecutively, including save/load, spawn synchronization, positive-health Forge revival and player-attributed reward/event acceptance. The reward addition changes tests only; it does not change XP timing or claim actual ServerPlayer advancement verification. The project does not track a Gradle wrapper. A local pass is distinct from hosted CI and from current Bedrock behavioral equivalence.

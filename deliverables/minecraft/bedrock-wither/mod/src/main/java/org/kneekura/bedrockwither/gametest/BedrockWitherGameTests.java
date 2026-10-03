@@ -842,6 +842,149 @@ public final class BedrockWitherGameTests {
         helper.succeed();
     }
 
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_playerkillpreservesrewardeventsandemitsxponce")
+    public static void playerKillPreservesRewardEventsAndEmitsXpOnce(GameTestHelper helper) {
+        BedrockWitherEntity wither = createCombatReadyWither(helper);
+        wither.setNoAi(true);
+        // Keep reward observations away from previous batches. No world/entity
+        // ticks occur inside this synchronous controller fixture.
+        wither.setPos(wither.getX(), wither.getY() + 64.0D, wither.getZ());
+        net.minecraft.world.phys.AABB area = wither.getBoundingBox().inflate(16.0D);
+        boolean mobLoot = helper.getLevel().getGameRules().getBoolean(net.minecraft.world.level.GameRules.RULE_DOMOBLOOT);
+        int existingOrbs = helper.getLevel().getEntitiesOfClass(net.minecraft.world.entity.ExperienceOrb.class, area).size();
+        // Ordinary terrain drops are not reward inputs; the final blast can
+        // leave them in a reused fixture without affecting either assertion.
+        int existingStars = helper.getLevel().getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class, area,
+                item -> item.getItem().is(net.minecraft.world.item.Items.NETHER_STAR)).size();
+        if (!mobLoot || existingOrbs != 0 || existingStars != 0) {
+            wither.discard();
+            helper.fail("Reward fixture is not isolated: doMobLoot=" + mobLoot
+                    + ", existingOrbs=" + existingOrbs + ", existingStars=" + existingStars);
+            return;
+        }
+        net.minecraft.world.entity.player.Player player = helper.makeMockSurvivalPlayer();
+        net.minecraft.world.damagesource.DamageSource source = helper.getLevel().damageSources().playerAttack(player);
+        int[] events = {0, 0, 0}; // death, loot, experience
+        java.util.function.Consumer<net.minecraftforge.event.entity.living.LivingDeathEvent> death = event -> {
+            if (event.getEntity() == wither) {
+                events[0]++;
+                helper.assertTrue(event.getSource() == source && event.getSource().getEntity() == player
+                        && event.getSource().getDirectEntity() == player, "Death event lost player attribution");
+            }
+        };
+        java.util.function.Consumer<net.minecraftforge.event.entity.living.LivingDropsEvent> drops = event -> {
+            if (event.getEntity() == wither) {
+                events[1]++;
+                helper.assertTrue(event.getSource() == source && event.getSource().getEntity() == player
+                        && event.isRecentlyHit(), "Loot event lost player attribution");
+                int stars = event.getDrops().stream()
+                        .filter(item -> item.getItem().is(net.minecraft.world.item.Items.NETHER_STAR))
+                        .mapToInt(item -> item.getItem().getCount()).sum();
+                helper.assertTrue(stars == 1, "Loot event did not contain exactly one Nether Star");
+            }
+        };
+        java.util.function.Consumer<net.minecraftforge.event.entity.living.LivingExperienceDropEvent> experience = event -> {
+            if (event.getEntity() == wither) {
+                events[2]++;
+                helper.assertTrue(event.getAttackingPlayer() == player, "XP event lost player kill credit");
+                helper.assertTrue(event.getOriginalExperience() == 50 && event.getDroppedExperience() == 50,
+                        "XP event did not preserve the existing 50-XP contract");
+            }
+        };
+        var bus = net.minecraftforge.common.MinecraftForge.EVENT_BUS;
+        bus.addListener(net.minecraftforge.eventbus.api.EventPriority.NORMAL, false,
+                net.minecraftforge.event.entity.living.LivingDeathEvent.class, death);
+        bus.addListener(net.minecraftforge.eventbus.api.EventPriority.NORMAL, false,
+                net.minecraftforge.event.entity.living.LivingDropsEvent.class, drops);
+        bus.addListener(net.minecraftforge.eventbus.api.EventPriority.NORMAL, false,
+                net.minecraftforge.event.entity.living.LivingExperienceDropEvent.class, experience);
+        java.util.Map<UUID, Integer> xpSeen = new java.util.HashMap<>();
+        java.util.Map<UUID, Integer> starsSeen = new java.util.HashMap<>();
+        int[] emitted = {0, 0};
+        long fixtureTick = helper.getLevel().getGameTime();
+        try {
+            boolean accepted = wither.hurt(source, wither.getMaxHealth() * 10.0F);
+            helper.assertTrue(accepted && wither.isDeadOrDying() && wither.getKillCredit() == player,
+                    "Player-attributed killing hit lost semantic death or kill credit");
+            helper.assertTrue(events[0] == 1 && events[1] == 1 && events[2] == 1,
+                    "Initial accepted death did not preserve the three Forge lifecycle events");
+            observeRewardEmissions(helper, area, xpSeen, starsSeen, emitted);
+            helper.assertTrue(emitted[0] == 50 && emitted[1] == 1,
+                    "Actual reward entities did not contain 50 XP and one Nether Star");
+
+            // Forge may repost LivingDeathEvent on repeated die() calls, so its
+            // count is not the idempotency invariant. Loot/XP emissions are.
+            wither.die(source);
+            observeRewardEmissions(helper, area, xpSeen, starsSeen, emitted);
+            int duration = org.kneekura.bedrockwither.entity.BedrockWitherDeathController
+                    .PROVISIONAL_DEATH_DURATION_TICKS;
+            for (int tick = 0; tick < duration; tick++) {
+                wither.deathController().tickServer();
+                if (tick == 36) {
+                    int remaining = wither.getDeathTicksRemaining();
+                    wither.die(source);
+                    helper.assertTrue(wither.getDeathTicksRemaining() == remaining,
+                            "Repeated death restarted the active visual countdown");
+                }
+                observeRewardEmissions(helper, area, xpSeen, starsSeen, emitted);
+            }
+            wither.die(source);
+            wither.deathController().begin();
+            wither.deathController().tickServer();
+            observeRewardEmissions(helper, area, xpSeen, starsSeen, emitted);
+            helper.assertTrue(wither.isRemoved(), "Reward fixture did not finish visual removal");
+            helper.assertTrue(events[1] == 1 && events[2] == 1 && emitted[0] == 50 && emitted[1] == 1,
+                    "Repeated death/finalization duplicated loot or experience");
+            helper.assertTrue(helper.getLevel().getGameTime() == fixtureTick,
+                    "Reward fixture unexpectedly allowed ambient entity ticks");
+            helper.succeed();
+        } finally {
+            bus.unregister(death);
+            bus.unregister(drops);
+            bus.unregister(experience);
+            // XP may already exist when a later loot-listener assertion fails.
+            observeRewardEmissions(helper, area, xpSeen, starsSeen, emitted);
+            // These identities were observed only in the initially reward-empty
+            // area, so cleanup cannot remove another fixture's rewards.
+            for (net.minecraft.world.entity.ExperienceOrb orb : helper.getLevel().getEntitiesOfClass(
+                    net.minecraft.world.entity.ExperienceOrb.class, area)) {
+                if (xpSeen.containsKey(orb.getUUID())) orb.discard();
+            }
+            for (net.minecraft.world.entity.item.ItemEntity item : helper.getLevel().getEntitiesOfClass(
+                    net.minecraft.world.entity.item.ItemEntity.class, area)) {
+                if (starsSeen.containsKey(item.getUUID())) item.discard();
+            }
+            if (!wither.isRemoved()) wither.discard();
+        }
+    }
+
+    private static void observeRewardEmissions(GameTestHelper helper, net.minecraft.world.phys.AABB area,
+                                               java.util.Map<UUID, Integer> xpSeen,
+                                               java.util.Map<UUID, Integer> starsSeen, int[] emitted) {
+        // Observe positive per-entity changes between synchronous calls rather
+        // than counting only survivors of the final explosion. This cannot see
+        // an award created and destroyed within one call; ordinary Forge reward
+        // duplication is also checked by the event counters. With no ambient
+        // ticks, only award() merges XP here; count * value includes its stacks.
+        for (net.minecraft.world.entity.ExperienceOrb orb : helper.getLevel().getEntitiesOfClass(
+                net.minecraft.world.entity.ExperienceOrb.class, area, entity -> !entity.isRemoved())) {
+            net.minecraft.nbt.CompoundTag saved = new net.minecraft.nbt.CompoundTag();
+            orb.addAdditionalSaveData(saved);
+            int value = orb.getValue() * saved.getInt("Count");
+            int previous = xpSeen.getOrDefault(orb.getUUID(), 0);
+            emitted[0] += Math.max(0, value - previous);
+            xpSeen.put(orb.getUUID(), Math.max(previous, value));
+        }
+        for (net.minecraft.world.entity.item.ItemEntity item : helper.getLevel().getEntitiesOfClass(
+                net.minecraft.world.entity.item.ItemEntity.class, area,
+                entity -> !entity.isRemoved() && entity.getItem().is(net.minecraft.world.item.Items.NETHER_STAR))) {
+            int value = item.getItem().getCount();
+            int previous = starsSeen.getOrDefault(item.getUUID(), 0);
+            emitted[1] += Math.max(0, value - previous);
+            starsSeen.put(item.getUUID(), Math.max(previous, value));
+        }
+    }
+
     @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_cancelleddeathpreservesaerialstate")
     public static void cancelledDeathPreservesAerialState(GameTestHelper helper) {
         assertCancelledDeathPreservesCombat(helper, false);
