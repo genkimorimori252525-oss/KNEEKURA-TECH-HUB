@@ -49,7 +49,7 @@ function exactSubjectRecord(record, subjectUuid) {
     typeof record.observationId === 'string' &&
     Number.isInteger(record.gameTime);
 }
-function selectedRecords(observations, subjectUuid, identity, endTick = Infinity) {
+export function selectDecisionRecords(observations, subjectUuid, identity, endTick = Infinity) {
   if (!Array.isArray(observations)) throw new TypeError('observations must be an array');
   const selected = observations
     .filter(r => exactSubjectRecord(r, subjectUuid))
@@ -130,7 +130,7 @@ function compactBrain(payload = {}) {
 }
 
 const SNAPSHOT_SECTIONS = ['goal_scheduler','brain_memory','brain_activities','navigation_path','movement_control'];
-function validSnapshot(payload) {
+export function validDecisionSnapshot(payload) {
   if (payload?.schema !== 'kneekura.vanilla-decision-snapshot/v1' ||
       !Number.isSafeInteger(payload.targetRevision) || payload.targetRevision < 1 ||
       payload.semantics !== 'MOB_COMPONENT_SNAPSHOT_ONLY' || !payload.sections) return false;
@@ -195,11 +195,11 @@ export function observeDebugWorkspaceDecision({
   if (typeof subjectUuid !== 'string' || !subjectUuid) throw new TypeError('subjectUuid is required');
   if (tick !== Infinity && !Number.isInteger(tick)) throw new TypeError('tick must be an integer or Infinity');
 
-  const records = selectedRecords(observations, subjectUuid, identity, tick)
-    .filter(r => r.lane !== 'AI_DECISION' || validSnapshot(r.payload) || validOriginalDecisionEvent(r));
-  const snapshotRecords=records.filter(r=>r.lane === 'AI_DECISION' && validSnapshot(r.payload));
+  const records = selectDecisionRecords(observations, subjectUuid, identity, tick)
+    .filter(r => r.lane !== 'AI_DECISION' || validDecisionSnapshot(r.payload) || validOriginalDecisionEvent(r));
+  const snapshotRecords=records.filter(r=>r.lane === 'AI_DECISION' && validDecisionSnapshot(r.payload));
   const originalRecords=records.filter(validOriginalDecisionEvent);
-  const latest = latestByLane(records.filter(r=>r.lane !== 'AI_DECISION' || validSnapshot(r.payload)));
+  const latest = latestByLane(records.filter(r=>r.lane !== 'AI_DECISION' || validDecisionSnapshot(r.payload)));
   const state = latest.get('SERVER_ENTITY_STATE') ?? null;
   const target = latest.get('AI_TARGET') ?? null;
   const brain = latest.get('BRAIN_MEMORY') ?? null;
@@ -342,7 +342,7 @@ export function buildDebugWorkspaceMotionTrace({
   if (typeof subjectUuid !== 'string' || !subjectUuid) throw new TypeError('subjectUuid is required');
   const start = window.start_tick ?? window.startTick ?? -Infinity;
   const end = window.end_tick ?? window.endTick ?? Infinity;
-  const records = selectedRecords(observations, subjectUuid, identity, end)
+  const records = selectDecisionRecords(observations, subjectUuid, identity, end)
     .filter(r => r.lane === 'SERVER_ENTITY_STATE')
     .filter(r => r.gameTime >= start);
 

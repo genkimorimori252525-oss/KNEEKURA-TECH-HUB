@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {decisionBurstFromArgs} from './decision-burst-cli.mjs';
+import {queryDecisionDrilldown} from './evidence/decision-drilldown.mjs';
 import {
   doctor,
   launchDebugRun,
@@ -129,6 +130,21 @@ async function main() {
       target
     });
     return;
+  }
+
+  if(command === 'evidence-decision') {
+    const subjectUuid=process.argv[3];
+    const required=name=>{const value=argValue(name);if(value==null||!value.trim()||value.startsWith('--'))throw new Error('required decision option: '+name);return value;};
+    const current=await readCurrent(config,ROOT);
+    const runtime=evidenceRuntimeFromCurrent(current);
+    // Retained canonical read only. Do not initialize, ingest or rewrite a finalized evidence run.
+    const observations=await runtime.store.readObservations();
+    const result=queryDecisionDrilldown({observations,subjectUuid,
+      identity:{debugSessionId:current.debugSessionId,runId:current.runId,runSnapshotId:current.runSnapshotId,
+        processEpoch:current.processEpoch,arenaEpoch:Number(required('--arena-epoch')),targetRevision:Number(required('--revision'))},
+      request:{channel:required('--channel'),startTick:Number(required('--start-tick')),endTick:Number(required('--end-tick')),
+        limit:Number(argValue('--limit')??64),maxNodes:Number(argValue('--max-nodes')??32)}});
+    print(result);return;
   }
 
   if (command === 'evidence-trigger-watch') {
@@ -563,7 +579,7 @@ async function main() {
     return;
   }
 
-  throw new Error('unknown command: ' + command + ' (expected doctor/start/status/timeline/smoke/g2-smoke/stop/target/target-clear/target-status/evidence-status/evidence-trigger-watch/evidence-anomalies/evidence-entity/evidence-gap/evidence-capture/evidence-finalize)');
+  throw new Error('unknown command: ' + command + ' (expected doctor/start/status/timeline/smoke/g2-smoke/stop/target/target-clear/target-status/evidence-status/evidence-trigger-watch/evidence-anomalies/evidence-entity/evidence-decision/evidence-gap/evidence-capture/evidence-finalize)');
 }
 
 main().catch((error) => {
