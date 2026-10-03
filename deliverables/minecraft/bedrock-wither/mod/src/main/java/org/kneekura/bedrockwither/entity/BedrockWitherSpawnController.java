@@ -12,6 +12,7 @@ import net.minecraft.world.level.Level;
  */
 public final class BedrockWitherSpawnController {
     public static final int CURRENT_SPAWN_DURATION_TICKS = 220;
+    public static final int JAVA_WITHER_SPAWN_LEVEL_EVENT = 1023;
     public static final float SPAWN_EXPLOSION_POWER = 7.0F;
 
     private final BedrockWitherEntity owner;
@@ -22,7 +23,7 @@ public final class BedrockWitherSpawnController {
     }
 
     public void initializeNewEntity() {
-        owner.runtimeState().setSpawningFrames(CURRENT_SPAWN_DURATION_TICKS);
+        owner.setSpawningFrames(CURRENT_SPAWN_DURATION_TICKS);
         owner.setAerialAttack(true);
         owner.stateMachine().enter(BedrockWitherState.SPAWN_SEQUENCE);
         completed = false;
@@ -36,7 +37,7 @@ public final class BedrockWitherSpawnController {
         int remaining = owner.runtimeState().spawningFrames();
         if (remaining > 0) {
             remaining--;
-            owner.runtimeState().setSpawningFrames(remaining);
+            owner.setSpawningFrames(remaining);
         }
 
         if (remaining <= 0) {
@@ -51,7 +52,7 @@ public final class BedrockWitherSpawnController {
     }
 
     public void restore(int spawningFrames, BedrockWitherState restoredState) {
-        owner.runtimeState().setSpawningFrames(Math.max(0, spawningFrames));
+        owner.setSpawningFrames(Math.max(0, spawningFrames));
         completed = restoredState != BedrockWitherState.SPAWN_SEQUENCE
                 || owner.runtimeState().spawningFrames() <= 0;
     }
@@ -61,7 +62,7 @@ public final class BedrockWitherSpawnController {
             return;
         }
         completed = true;
-        owner.runtimeState().setSpawningFrames(0);
+        owner.setSpawningFrames(0);
 
         if (owner.level() instanceof ServerLevel level) {
             level.explode(
@@ -73,6 +74,11 @@ public final class BedrockWitherSpawnController {
                     false,
                     Level.ExplosionInteraction.MOB
             );
+            if (!owner.isSilent()) {
+                // Java's global Wither spawn event is a practical sound bridge
+                // for the Bedrock spawn cue without reusing Java Wither AI.
+                level.globalLevelEvent(JAVA_WITHER_SPAWN_LEVEL_EVENT, owner.blockPosition(), 0);
+            }
         }
 
         owner.stateMachine().enter(BedrockWitherState.PHASE1_REPOSITION);

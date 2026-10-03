@@ -4,13 +4,17 @@
 
 **Design:** `departments/minecraft/design/2026-10-02-bedrock-wither-reconstruction/`
 
+## 2026-10-03 current execution boundary
+
+The user has chosen code completion without direct Bedrock measurements. Continue with [the source-completion plan](../../../departments/minecraft/design/2026-10-02-bedrock-wither-reconstruction/SOURCE-COMPLETION-PLAN-2026-10-03.md). Phases 4–5 below describe the original empirical-comparison proposal and are not blockers or required next actions for this deliverable. Phase 6 remains optional/out of scope. Source-backed defaults and documented adaptations must be executable and tested; they are not evidence of full Bedrock equivalence.
+
 ## Phase 0 — Evidence freeze
 
 - [x] official exposed Wither JSON/unique behavior/special goal sourcesを記録する
 - [x] Bedrock Wiki / Minecraft Wiki / community reportsを実装権威と分離する
 - [x] Java 1.20.1 `WitherBoss` を継承ベースではなく比較対象とする
 - [x] 未確定の数値を `TBD_MEASURE` として固定する
-- [ ] Bedrock実機観測scenario v1を作る
+- [x] [Bedrock実機観測scenario v1](../../../departments/minecraft/design/2026-10-02-bedrock-wither-reconstruction/MEASUREMENT-SCENARIOS-v1.md)を作る（2026-10-03 PREPARED / NOT EXECUTED。実行manifestの固定・観測・受入は未実施）
 
 ## Phase 1 — Standalone Forge boss skeleton
 

@@ -311,11 +311,11 @@ Exact current ticks-per-shot at each health acceleration stage remain unresolved
 Current field interpretation:
 `lastHealthInterval` is the greatest multiple of **75** strictly below the lowest health the Wither has reached, and does not increase if the Wither heals.
 
-This conflicts with treating the historical native `maxHealth/3` interval as a current runtime rule.
+This conflicts with treating the historical native `maxHealth/6` interval as a current runtime rule.
 
 KNEEKURA correction:
 - persist/observe the current 75-point lowest-health bucket;
-- do not automatically halve fireRate using the old `maxHealth/3` equation;
+- do not automatically halve fireRate using the old `maxHealth/6` equation;
 - retain current-observed firing acceleration points (500/400, reset at half, 200/100) as behavior evidence;
 - leave exact accelerated tick values measurement-gated.
 
@@ -328,3 +328,12 @@ Current field interpretation:
 - `swellAmount`, `oldSwellAmount`, `overlayAlpha`: death-visual state.
 
 This supports separate spawn/death controllers plus separate visual state rather than one generic invulnerability timer.
+
+
+## 2026-10-03 source-default clarification
+
+The public projectile schema explicitly defaults `reflect_immunity` to 0 seconds after launch and `owner_launch_immunity_ticks` to 5. The pinned dangerous-skull definition does not override those properties. Native repeated-reflector handling and possible native overrides remain separate questions; the configured defaults are not unknown. Current `ProjectileComponentDefinition` exposes `mReflectImmunityInSeconds`, while runtime `ProjectileComponent` exposes `mReflectImmunityTicks` and `mLastReflectActor`.
+
+[Official projectile properties](https://learn.microsoft.com/en-us/minecraft/creator/reference/content/entityreference/examples/entitycomponents/minecraftcomponent_projectile?view=minecraft-bedrock-stable)
+
+The historical health-interval arithmetic is `/6`, corrected in the historical notes. Structural headers themselves still contain no initializer/body proving an effective modern interval. Source-backed software completion no longer requires direct measurement; all historical/adaptation choices remain labelled.

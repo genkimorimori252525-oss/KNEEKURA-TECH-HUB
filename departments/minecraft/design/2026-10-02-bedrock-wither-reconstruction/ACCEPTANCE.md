@@ -1,13 +1,15 @@
 # Bedrock Wither Reconstruction — Acceptance
 
-The acceptance target is **behavioral equivalence within declared scenarios**, not hidden-code equivalence.
+Updated completion boundary: 2026-10-03. The user chose **source-backed software completion without empirical Bedrock measurements**. The required target is a functioning standalone boss whose ordinary code paths satisfy the declared, version-labelled reconstruction policies and automated regression tests. This is not a claim of experimentally demonstrated Bedrock equivalence.
+
+`SOURCE-COMPLETION-PLAN-2026-10-03.md` controls current execution. Earlier empirical comparisons remain optional research, outside this completion pass.
 
 ## Acceptance tiers
 
 ### R0 — build and identity
 
 - Forge 1.20.1 / Java 17 build succeeds.
-- `kneekura:bedrock_wither` registers independently from `minecraft:wither`.
+- `kneekura_bedrock_wither:bedrock_wither` registers independently from `minecraft:wither`.
 - vanilla Java Wither remains unchanged.
 - save/load does not corrupt phase/state.
 - dedicated-server classloading contains no client-only references.
@@ -24,33 +26,33 @@ Must pass before community-derived combat details are accepted:
 ### R2 — phase 1 behavior
 
 For each difficulty:
-- accepted max health matches measured Bedrock reference
+- max health matches the accepted source-backed 300/450/600 difficulty policy
 - no unapproved Java Wither regeneration leaks in
-- reference target-reposition scenario matches within declared spatial/timing tolerance
-- burst sequence matches measured skull count/order
-- health-dependent cadence matches measured reference points
+- ordinary entity ticking reaches bounded target-relative repositioning, hover and firing using declared source-derived/adaptation parameters
+- ordinary projectiles follow the accepted 3-normal/1-dangerous sequence
+- health-dependent cadence follows its explicitly version-labelled rule; per-shot and inter-volley delays are independent
 - damage reaction reproduces accepted block-destruction and dangerous-skull behavior
 
 ### R3 — transition and phase 2
 
 - transition fires exactly once at the accepted health boundary
 - accepted explosion timing/strength behavior is reproduced
-- skeleton summon count and Easy exception match measurement
-- projectile immunity boundary matches measurement
-- dash direction, duration and speed meet scenario tolerance
-- dash destruction volume/origin/timing match measurement
+- skeleton summon count is three on Normal/Hard and zero on Easy
+- projectile immunity follows the declared second-phase boundary
+- ordinary phase-2 volleys reach preparation, bounded target-directed dash and recovery using the documented policy
+- dash destruction follows the accepted 6×8×6 candidate geometry and attack-specific block rules
 - dash cannot create an unbounded block-destruction loop after target invalidation
 
 ### R4 — death and persistence
 
-- death sequence and explosion match the accepted Bedrock scenario
+- accepted semantic death enters the documented provisional visual countdown/explosion exactly once and preserves Forge events/rewards
 - boss bar and state clean up on removal
 - save/reload in safe persistent states resumes consistently
 - reload during transient attack states follows documented recovery semantics
 
-### R5 — Tank comparative acceptance
+### R5 — optional empirical comparison, not executed or required
 
-Run paired scenarios:
+The original paired-scenario proposal is retained below for historical context. The user has chosen not to run measurements; do not schedule these as completion prerequisites. If separately requested in the future, the proposal would compare:
 1. Java vanilla Wither control
 2. KNEEKURA Bedrock Wither
 3. Bedrock reference observation
@@ -89,7 +91,7 @@ Screenshots/video are supporting evidence, not the sole pass criterion.
 - target invalidation during dash
 - death cleanup
 
-### Real client/Tank
+### Optional real client/Tank evidence, not performed
 - three-head aim
 - hover/reposition shape
 - dash appearance and trajectory
@@ -98,7 +100,7 @@ Screenshots/video are supporting evidence, not the sole pass criterion.
 - boss bar behavior
 - before/after regression captures
 
-## Comparison tolerances
+## Optional future comparison tolerances
 
 Tolerance must be scenario-specific and fixed before the run.
 
@@ -139,6 +141,8 @@ Milestone BWR-M1 is complete when a standalone boss can be spawned and, in bound
 - separate dash destruction controller
 - debug state export suitable for Tank observation
 
-Exact cadence and destruction dimensions may remain `TBD_MEASURE` in M1 if they are parameterized and clearly not claimed as Bedrock-accurate.
+All required ordinary M1 paths must execute; neutral controller boundaries waiting for measurements do not count as implemented behavior. Uncertain values must instead have an explicit, bounded source-derived/adaptation policy, provenance and tests.
 
-BWR-M2 begins only after direct Bedrock measurements replace the critical TBD values.
+Complete source-backed acceptance additionally requires real projectile collision/effect paths, consistent liquid inertia, safe owner/reflection handling, synchronized presentation inputs and reload recovery. Headless tests establish these software contracts, not pixel appearance or exact Bedrock native internals.
+
+The original measurement-gated BWR-M2 endpoint is superseded for this request. No new empirical phase or optional compatibility/replacement layer is implied by software completion.

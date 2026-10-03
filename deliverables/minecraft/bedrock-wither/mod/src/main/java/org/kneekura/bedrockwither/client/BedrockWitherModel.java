@@ -13,6 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import org.kneekura.bedrockwither.BedrockWitherMod;
 import org.kneekura.bedrockwither.entity.BedrockWitherEntity;
+import org.kneekura.bedrockwither.entity.BedrockWitherPresentation;
 
 public final class BedrockWitherModel extends HierarchicalModel<BedrockWitherEntity> {
     public static final ModelLayerLocation LAYER_LOCATION =
@@ -116,8 +117,8 @@ public final class BedrockWitherModel extends HierarchicalModel<BedrockWitherEnt
             float headPitch
     ) {
         // Bedrock: body_base_rotation = cos(life_time * 114.6 degrees).
-        // 114.6 deg/sec ~= 2 rad/sec; at 20 ticks/sec this is 0.1 rad/tick.
-        float bodyBase = Mth.cos(ageInTicks * 0.1F);
+        // Preserve the literal source degrees instead of the 0.1-radian approximation.
+        float bodyBase = BedrockWitherPresentation.bodyRotation(ageInTicks);
 
         // Bedrock upperBodyPart2:
         // (0.065 + 0.05 * body_base_rotation) * 180 + target_x_rotation.

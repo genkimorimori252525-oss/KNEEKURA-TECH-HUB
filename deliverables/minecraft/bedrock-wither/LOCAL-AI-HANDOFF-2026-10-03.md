@@ -1,3 +1,7 @@
+> **Source-completion checkpoint:** The later PR81 generation now contains ordinary phase 1 ascent/reposition/volleys, phase 2 firing/alternate charges/recovery, safe transient reloads, eligible-player targeting, actual skull impact/liquid/reflection fixes, both source-defined armor passes, and death/flicker/star-lifetime handling. Build and60 required GameTests pass locally. Read `STATUS.md` and the exact-head verification on [PR81](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/pull/81) for the current result; the original 18-test narrative and PR75 references below are a preserved historical snapshot.
+
+> **Current completion amendment, 2026-10-03:** The user has chosen to finish the code without empirical Bedrock/Tank measurements. Do not use this historical handoff's measurement-gated statements as instructions to stop. Read current `STATUS.md`, `ADOPTION.md` and [SOURCE-COMPLETION-PLAN-2026-10-03.md](../../../departments/minecraft/design/2026-10-02-bedrock-wither-reconstruction/SOURCE-COMPLETION-PLAN-2026-10-03.md) first. Source-backed implementation must include ordinary AI reachability, not merely manually callable controller boundaries. Uncertain historical/adaptation values remain explicitly labelled and do not establish empirical parity. The historical health-interval arithmetic was also corrected from `/3` to `/6` after reading `SMMUL.W` in the actual native body.
+
 # Bedrock Wither Reconstruction — Local AI Handoff
 
 Date: 2026-10-03  

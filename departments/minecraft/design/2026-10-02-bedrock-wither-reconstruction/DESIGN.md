@@ -2,7 +2,13 @@
 
 Date: 2026-10-02  
 ANCHOR: Minecraft Java Edition 1.20.1 / Forge 47.2.x / Java 17  
-Target: a separate custom entity, tentatively `kneekura:bedrock_wither`
+Target: a separate custom entity, tentatively `kneekura_bedrock_wither:bedrock_wither`
+
+## 2026-10-03 completion amendment — current authority
+
+The user explicitly chose to finish code without undertaking empirical Bedrock measurements. The source-backed software completion plan supersedes measurement-only gates below: [current implementation plan](SOURCE-COMPLETION-PLAN-2026-10-03.md). Preserve existing architecture and source priority; implement documented behavior and isolate version-labelled historical/adaptation policies for values that remain uncertain. Do not leave ordinary combat unreachable pending a future measurement.
+
+Completion requires production-path, persistence and regression verification in isolated Forge tests. Actual Bedrock/client/Tank equivalence is not claimed and is not a prerequisite for this requested deliverable. Earlier candidate/measurement sections below remain research history, not instructions to stop the code pass.
 
 ## Goal
 
@@ -19,7 +25,7 @@ The implementation is driven by an evidence ladder:
 3. **C — community report**: Reddit/forum/video. Discovery evidence only.
 4. **D — direct Bedrock runtime observation**: our measured scenario with retained conditions and evidence.
 
-A/B/C material may define a candidate behavior, but uncertain numeric constants remain `TBD_MEASURE` until runtime measurement or stronger evidence. Disagreement is retained; it is not resolved by majority vote.
+A/B/C material may define a candidate behavior. Under the completion amendment, uncertain numeric constants use explicitly named provisional source-derived or Java-adaptation policies, with provenance and tests. Disagreement is retained; it is not resolved by majority vote or presented as measured equivalence.
 
 ## Why this is a custom entity
 

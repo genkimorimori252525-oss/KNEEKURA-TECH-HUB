@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "protocol": "BWR-MEASURE-v1",
+  "run_family": "M01",
+  "cell": "M01-A",
+  "status": "FROZEN_FOR_FIRST_REFERENCE_RUN",
+  "source_pr": 81,
+  "java_comparator_code_source": "020de6738646076ebb2dcbddaf3555df9c5f7791",
+  "bedrock": {
+    "channel": "stable",
+    "package": "Microsoft.MinecraftUWP",
+    "package_version": "1.26.5203.0",
+    "platform": "Windows X64",
+    "os_build": "10.0.26200.0",
+    "topology": "local integrated disposable world",
+    "addons": "none",
+    "experiments": "none"
+  },
+  "fixture": {
+    "world_name": "BWR-M01-A-20261004",
+    "world_type": "flat",
+    "seed": 20261004,
+    "dimension": "overworld",
+    "difficulty": "normal",
+    "cheats": true,
+    "player_measurement_gamemode": "survival",
+    "time_of_day": "noon",
+    "weather": "clear",
+    "show_coordinates": true,
+    "mob_griefing": true,
+    "natural_mob_spawning": false,
+    "primary_target_position": [
+      0,
+      65,
+      0
+    ],
+    "wither_summon_position": [
+      0,
+      65,
+      30
+    ],
+    "arena_rule": "unobstructed open flat reference area; no unrelated eligible mobs",
+    "target_survival_support": [
+      "long-duration high resistance",
+      "long-duration regeneration"
+    ]
+  },
+  "timing": {
+    "spawn_settle_seconds": 12,
+    "observation_window_seconds": 60,
+    "capture_target_fps": 60,
+    "exact_native_ticks_claimed": false,
+    "interpretation": "use frame/wall-clock intervals unless a validated tick source is separately obtained"
+  },
+  "capture": {
+    "backend": "ffmpeg gdigrab desktop",
+    "ffmpeg_available": true,
+    "obs_available": true,
+    "audio_required": false,
+    "camera": "stationary first-person primary target; no camera movement during reference window",
+    "fov": "freeze to 70 before first valid run",
+    "ui_scale": "freeze before first valid run",
+    "calibration": "fixed block/grid markers must be visible before quantitative trajectory claims"
+  },
+  "repetitions": {
+    "initial_valid_repetitions_per_cell": 5,
+    "first_execution_goal": 1,
+    "retain_invalid_attempts": true
+  },
+  "invalidation": [
+    "wrong Bedrock package/version or non-stable channel",
+    "unexpected eligible mob or target loss",
+    "camera movement during reference window",
+    "spawn sequence/reaction unresolved at observation start",
+    "capture gap or unbounded frame pacing across measured event",
+    "arena obstruction or boundary contact during free-flight metric",
+    "fixture settings differ from frozen manifest"
+  ],
+  "boundaries": {
+    "hidden_native_fields_inferred": false,
+    "provisional_java_values_used_as_reference": false,
+    "first_run_can_establish_only_shared_visible_observables": true
+  }
+}

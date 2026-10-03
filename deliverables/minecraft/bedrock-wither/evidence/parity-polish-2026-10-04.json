@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "recorded_date_utc": "2026-10-04",
+  "scope": "Post-completion parity polish and public-contract closure for Bedrock Wither goals, integration semantics, movement turn limit and pushability; no empirical Bedrock/Tank parity claim",
+  "baseline_source": "0865cc6c7dde6e3b4abd407dd4d2965d41525316",
+  "accepted_code_source": "020de6738646076ebb2dcbddaf3555df9c5f7791",
+  "changes": [
+    "Register pinned public behavior.float priority 1",
+    "Register look_at_target priority 5 and look_at_player priority 6 with public defaults look_distance 8 and probability 0.02 plus Wither look_time 20..40 ticks",
+    "Bridge independent Monster kill credit to vanilla-equivalent Wither Rose placement/drop semantics",
+    "Expose Wither ambient/hurt/death SoundEvents and Java Wither level-event sound bridges: break 1022, spawn 1023, shoot 1024",
+    "Add four focused Forge GameTests for the supplemented contracts",
+    "Replace Java FlyingMoveControl yaw-90 limitation with BedrockFlyingMoveControl applying public movement.basic max_turn=180 to yaw and pitch",
+    "Preserve minecraft:pushable_by_entity while on climbable blocks instead of inheriting LivingEntity's climb-time push suppression",
+    "Add two focused Forge GameTests for the 180-degree turn contract and simultaneous can_climb/pushable_by_entity/pushable_by_block behavior"
+  ],
+  "red_green": {
+    "red_head": "725960309d9ed802abc7802582fd0aefd735976f",
+    "red_run": 37147581421,
+    "failure": "BedrockLookGoal used EntitySelector.notRiding(owner) directly where TargetingConditions selector required Predicate<LivingEntity>",
+    "repair": "Wrap notRiding in an explicitly typed LivingEntity lambda",
+    "green_head": "a2d838cf50052d3fb0e1dfeb3a826084e8e6da6b"
+  },
+  "hosted_verification": {
+    "bedrock_wither_build": {
+      "run_id": 37147781105,
+      "conclusion": "success",
+      "forge_gametests_required": 64,
+      "forge_gametests_passed": 64,
+      "note": "Prior 60 plus four parity-polish tests"
+    },
+    "complete_repository": {
+      "run_id": 37147783747,
+      "conclusion": "success",
+      "passed": 3141,
+      "skipped": 332,
+      "warnings": 8,
+      "duration_seconds": 179.13
+    }
+  },
+  "limits": [
+    "Sound bridges use Java 1.20.1 Wither SoundEvents/level events; exact Bedrock audio asset mix, attenuation and timing were not measured",
+    "Look goal scheduling is a Java Goal adaptation of the public Bedrock component contract, not hidden-native implementation recovery",
+    "Wither Rose handling mirrors Java integration semantics needed because the product intentionally does not inherit WitherBoss",
+    "Reposition/path generation, cadence, dash, transition, reflection and death historical/Java-adapter limits remain; the separate public max_turn yaw mismatch is now closed",
+    "No live Bedrock client/server or Tank comparison was performed"
+  ],
+  "public_contract_closure": {
+    "source_head": "020de6738646076ebb2dcbddaf3555df9c5f7791",
+    "bedrock_wither_build": {
+      "run_id": 37149862840,
+      "conclusion": "success",
+      "forge_gametests_required": 66,
+      "forge_gametests_passed": 66,
+      "note": "Prior 64 plus max-turn and climb/pushability regressions"
+    },
+    "complete_repository": {
+      "run_id": 37149867531,
+      "conclusion": "success",
+      "passed": 3141,
+      "skipped": 332,
+      "warnings": 8,
+      "duration_seconds": 337.95
+    },
+    "closed_public_differences": [
+      "movement.basic max_turn=180 now controls Java yaw as well as pitch",
+      "pushable_by_entity remains enabled independently from can_climb",
+      "pushable_by_block retains inherited PushReaction.NORMAL"
+    ]
+  }
+}

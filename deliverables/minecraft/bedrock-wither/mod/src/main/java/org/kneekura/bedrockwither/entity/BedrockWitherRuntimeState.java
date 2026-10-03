@@ -45,6 +45,8 @@ public final class BedrockWitherRuntimeState {
     private boolean secondVolley;
     private int mainHeadAttackCountdown;
     private int lastFiredHead = -1;
+    private int historicalRateHealthCursor;
+    private int transitionTicks;
 
     public BedrockWitherHeadRuntime head(int index) {
         if (index < 0 || index >= heads.length) {
@@ -146,6 +148,12 @@ public final class BedrockWitherRuntimeState {
 
     public int mainHeadAttackCountdown() { return mainHeadAttackCountdown; }
     public void setMainHeadAttackCountdown(int value) { mainHeadAttackCountdown = value; }
+
+    public int historicalRateHealthCursor() { return historicalRateHealthCursor; }
+    public void setHistoricalRateHealthCursor(int value) { historicalRateHealthCursor = value; }
+
+    public int transitionTicks() { return transitionTicks; }
+    public void setTransitionTicks(int value) { transitionTicks = Math.max(0, value); }
 
     public int lastFiredHead() { return lastFiredHead; }
     public void setLastFiredHead(int value) { lastFiredHead = value; }
