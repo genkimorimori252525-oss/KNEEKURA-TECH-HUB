@@ -24,13 +24,14 @@ Completed:
 - Phase-2 dash execution owns chargeDirection/chargeFrames/charging state, accepted 20-tick execution, range-2 destruction geometry (6×8×6) and 15 entity damage; exact current speed and preparation trigger remain measurement-gated.
 - Official Bedrock Nether Star loot contract is present.
 - Dedicated Forge CI passes build + GameTest.
-- Latest retained hosted runtime generation: source `da3ee83a14e3d110ffb34a0b442186a06e1cecae`, workflow run `37001222165`: **18/18 required GameTests passed** in isolated batches.
+- Latest retained hosted runtime generation: source `1d067f087222a1a7efffe55cb3fc459f1b581b30`, [workflow run 37134861714](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/37134861714): **21/21 required GameTests passed**. [Complete hosted suite 37134907570](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/37134907570): **3141 passed / 332 skipped / 8 warnings**. Earlier 18-test evidence remains historical.
 - Bedrock-specific death lifecycle now preserves semantic death immediately while extending visual/removal ticking through a native-shaped death controller; current Mojang swell scaling and spawn/death invulnerability-skin timing are wired, while exact current death duration/XP timing remain provisional.
 - Special Wither repositioning has a measurement-gated controller boundary instead of guessed distance/speed constants.
 - Side-head scheduling now owns passive dangerous-skull timing, independent side targets and Normal/Hard targeted firing from Bedrock-native structure; attack range 30 remains historical-native provisional.
 - Three independent head pitch queries are server-authored and synchronized to the client model.
-- Current locally verified source `b7fd04b037a4b3eed2450c51fe55c9e3ddfdfcca` passes build + **21/21 required GameTests** in isolated cloud Linux; [compact RED/GREEN receipt](evidence/gametest-2026-10-03.json). This is separate from the historical hosted run above.
+- Current local lifecycle follow-up passes build + **23/23 required GameTests**, bound to exact changed-source hashes in the [cancellation RED/GREEN receipt](evidence/gametest-cancellation-2026-10-03.json). This adds two revival cases to the prior [21-test packet](evidence/gametest-2026-10-03.json); its hosted acceptance is separate from the source generation above.
 - Complete TECH HUB regression suite: **3038 passed / 435 skipped**, with Java 17 and a disposable Git-external pytest temp directory; no production guard or test was weakened.
+- Synchronous Forge death cancellation with positive-health revival preserves aerial or active-dash state; later accepted death still completes. Zero-health-only cancellation, delayed revival and arbitrary third-party integrations remain unverified.
 - Healthy save/reload no longer finalizes the future death lifecycle. Mid-death save/reload retains its countdown and visual progression.
 - The renderer-facing spawn countdown is synchronized through initial/dirty entity-data snapshots, including late tracking and NBT restoration. Real client/Tank visual acceptance remains pending.
 - [Direct Bedrock measurement scenarios v1](../../../departments/minecraft/design/2026-10-02-bedrock-wither-reconstruction/MEASUREMENT-SCENARIOS-v1.md) are PREPARED / NOT EXECUTED; no new Bedrock constants were adopted.

@@ -1,0 +1,79 @@
+{
+  "format": "kneekura.product-gametest-evidence.v1",
+  "deliverable": "minecraft/bedrock-wither",
+  "recorded_at": "2026-10-03",
+  "baseline_commit": "1d067f087222a1a7efffe55cb3fc459f1b581b30",
+  "source_files_sha256": {
+    "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/entity/BedrockWitherEntity.java": "deaa3693f2657506905790c451f41aeeab5168bab1186a861818508ec4425189",
+    "deliverables/minecraft/bedrock-wither/mod/src/main/java/org/kneekura/bedrockwither/gametest/BedrockWitherGameTests.java": "7a2985c847f952387e34647093357111cee6e17da37d74584dc7ce2810963f73"
+  },
+  "environment": {
+    "minecraft": "1.20.1",
+    "forge": "47.2.0",
+    "java": "Temurin 17.0.20.1+1",
+    "gradle": "8.1.1",
+    "runner": "isolated cloud Linux"
+  },
+  "source_contract": {
+    "event": "net.minecraftforge.event.entity.living.LivingDeathEvent",
+    "forge_sources_sha256": "84b9164b171a2679aadad1aac2f66446ccac85cfa2b35e97e2e32e4a40ee7c69",
+    "mapped_minecraft_forge_jar_sha256": "bebc401d6f3365416373bfd106811c3e2a7b61f49a3cc15c6843265b8284c9c9",
+    "bytecode_finding": "LivingEntity.die calls ForgeHooks.onLivingDeath at offsets 0-8 and returns on cancellation; the protected dead flag is set at offsets 106-108 after acceptance."
+  },
+  "red": {
+    "command": "gradle runGameTestServer --no-daemon --max-workers=2",
+    "required_tests": 23,
+    "passed": 21,
+    "failed": 2,
+    "failed_tests": [
+      "cancelleddeathpreservesaerialstate",
+      "cancelleddeathpreservesactivedash"
+    ],
+    "expected_message": "Canceled Forge death committed the custom death state",
+    "log_sha256": "6cfdd14aa04ac60a4794ad1401ce32b1ee485c02a1c560b79ed1fd4b0c5ab249"
+  },
+  "green": {
+    "command": "gradle build runGameTestServer --no-daemon --max-workers=2",
+    "exit_code": 0,
+    "required_tests": 23,
+    "passed": 23,
+    "failed": 0,
+    "server_log_summary": "All 23 required tests passed :)",
+    "build_summary": "BUILD SUCCESSFUL in 1m 13s",
+    "log_sha256": "102459e51b062da45c205543c7b8a2ee3559a8282d3aed099e6874c84710d533"
+  },
+  "assertion_scope": [
+    "identity-filtered Forge death cancellation restoring positive health preserves aerial state without a custom death countdown",
+    "the same revival during a fixture dash preserves state, AirAttack, charging and charge frame count",
+    "the listener is removed in finally; a later accepted death completes the unchanged provisional countdown",
+    "all 21 prior lifecycle/combat/entity-data regressions remain green"
+  ],
+  "review": {
+    "method": "independent source/fixture review and actual Forge 47.2.0 mapped bytecode inspection",
+    "blocking_findings": 0
+  },
+  "not_proven": [
+    "cancellation that leaves health at zero or delayed/asynchronous revival integrations",
+    "universal compatibility with arbitrary revival mods",
+    "real client rendering or actual network delivery",
+    "direct current-Bedrock or Tank parity",
+    "exact current Bedrock death or XP timing"
+  ],
+  "notes": [
+    "No Bedrock gameplay constants or reward timing changed",
+    "The XP-absence hypothesis was rejected: this Forge version releases eligible XP via die -> dropAllDeathLoot -> dropExperience; no extra reward was added",
+    "Non-fatal optional service/update-check network warnings and Gradle deprecation warnings remain"
+  ],
+  "repository_suite": {
+    "command": "python -m pytest -q --basetemp=/dev/shm/wither-pytest-cancellation-20261003",
+    "java": "17",
+    "passed": 3038,
+    "skipped": 435,
+    "failed": 0,
+    "errors": 0,
+    "duration_seconds": 318.41,
+    "log_sha256": "28b9bfb89eb651e8b11207cd3e2caeb9c0adcff63419c9055e7fa6381f73ce5f",
+    "temporary_directory_reason": "Disposable Git-external test root; no production guard or test changed."
+  },
+  "retention": "Only hashes, source identities, compact results and limitations are tracked; raw logs/worlds/assets/credentials are excluded."
+}

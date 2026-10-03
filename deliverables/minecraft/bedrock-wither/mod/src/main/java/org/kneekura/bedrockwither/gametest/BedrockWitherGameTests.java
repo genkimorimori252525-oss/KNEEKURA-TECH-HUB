@@ -842,6 +842,89 @@ public final class BedrockWitherGameTests {
         helper.succeed();
     }
 
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_cancelleddeathpreservesaerialstate")
+    public static void cancelledDeathPreservesAerialState(GameTestHelper helper) {
+        assertCancelledDeathPreservesCombat(helper, false);
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_cancelleddeathpreservesactivedash")
+    public static void cancelledDeathPreservesActiveDash(GameTestHelper helper) {
+        assertCancelledDeathPreservesCombat(helper, true);
+    }
+
+    private static void assertCancelledDeathPreservesCombat(GameTestHelper helper, boolean duringDash) {
+        BedrockWitherEntity wither = createCombatReadyWither(helper);
+        wither.setNoAi(true);
+        if (duringDash) {
+            // Own the phase-2 execution fixture; this explicit speed is not a
+            // claim about the unresolved current Bedrock dash speed.
+            wither.runtimeState().setNativePhase(
+                    org.kneekura.bedrockwither.entity.BedrockWitherPhaseController.secondPhaseNativeId());
+            wither.setAerialAttack(false);
+            wither.dashController().beginMeasuredDash(new Vec3(1.0D, 0.0D, 0.0D), 0.5D);
+        }
+        BedrockWitherState beforeState = wither.getBedrockState();
+        boolean beforeAerial = wither.isAerialAttack();
+        boolean beforeCharging = wither.runtimeState().charging();
+        int beforeChargeFrames = wither.runtimeState().chargeFrames();
+        int[] cancellations = {0};
+        java.util.function.Consumer<net.minecraftforge.event.entity.living.LivingDeathEvent> revival = event -> {
+            if (event.getEntity() == wither) {
+                cancellations[0]++;
+                wither.setHealth(32.0F);
+                event.setCanceled(true);
+            }
+        };
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(
+                net.minecraftforge.eventbus.api.EventPriority.NORMAL,
+                false,
+                net.minecraftforge.event.entity.living.LivingDeathEvent.class,
+                revival);
+        try {
+            wither.hurt(helper.getLevel().damageSources().genericKill(), Float.MAX_VALUE);
+        } finally {
+            net.minecraftforge.common.MinecraftForge.EVENT_BUS.unregister(revival);
+        }
+        if (cancellations[0] != 1 || !wither.isAlive() || wither.getHealth() != 32.0F) {
+            helper.fail("Scoped Forge revival did not cancel and restore the living entity");
+            return;
+        }
+        if (wither.getDeathTicksRemaining() != 0 || wither.deathController().isActive()
+                || wither.getBedrockState() != beforeState
+                || wither.isAerialAttack() != beforeAerial
+                || wither.runtimeState().charging() != beforeCharging
+                || wither.runtimeState().chargeFrames() != beforeChargeFrames) {
+            helper.fail("Canceled Forge death committed the custom death state");
+            return;
+        }
+
+        // After the scoped listener is gone, a genuine later death must still
+        // enter and finish the existing sequence. Reset only hit cooldown.
+        wither.invulnerableTime = 0;
+        wither.hurt(helper.getLevel().damageSources().genericKill(), Float.MAX_VALUE);
+        int duration = org.kneekura.bedrockwither.entity.BedrockWitherDeathController
+                .PROVISIONAL_DEATH_DURATION_TICKS;
+        if (cancellations[0] != 1 || !wither.isDeadOrDying()
+                || wither.getBedrockState() != BedrockWitherState.DEATH_SEQUENCE
+                || wither.getDeathTicksRemaining() != duration) {
+            helper.fail("A later accepted death did not enter the original death sequence");
+            return;
+        }
+        for (int tick = 0; tick < duration - 1; tick++) {
+            wither.deathController().tickServer();
+        }
+        if (wither.isRemoved() || wither.getDeathTicksRemaining() != 1) {
+            helper.fail("A later accepted death ended before its final tick");
+            return;
+        }
+        wither.deathController().tickServer();
+        if (!wither.isRemoved() || wither.getDeathTicksRemaining() != 0) {
+            helper.fail("A later accepted death did not finalize");
+            return;
+        }
+        helper.succeed();
+    }
+
     @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_livingreloadcanfinishdeathsequence")
     public static void livingReloadCanFinishDeathSequence(GameTestHelper helper) {
         BedrockWitherEntity original = createCombatReadyWither(helper);

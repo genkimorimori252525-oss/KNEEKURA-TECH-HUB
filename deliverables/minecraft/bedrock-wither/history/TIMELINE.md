@@ -15,3 +15,5 @@
 - Reproduced two implementation defects with real Forge GameTests: healthy reload disabled later death completion; spawn visuals consumed an unsynchronized local timer. RED: 19/21 passed; only the intended new regressions failed.
 - Applied minimal lifecycle/synchronization repairs without changing Bedrock constants. Local build and all 21 required GameTests passed; independent source/actual entity-data bytecode review found no blocking issue. See BWR-0008, BWR-0009 and the compact 2026-10-03 receipt.
 - Prepared direct Bedrock measurement scenarios v1 for the existing Phase 0/4 plan. No direct Bedrock run, real-client/Tank acceptance, merge or deployment was performed.
+- Published the first packet as Draft PR #81 at `1d067f087222a1a7efffe55cb3fc459f1b581b30`; dedicated hosted build/GameTest passed 21/21 and hosted TECH HUB passed 3141 tests / 332 skipped / 8 warnings. The existing PR #75 branch stayed unchanged.
+- Reproduced and repaired synchronous Forge death-cancellation/positive-health revival state corruption in aerial and active-dash fixtures. Local RED 21/23 → GREEN 23/23; BWR-0010 retains the exact scope and the rejected XP-absence hypothesis.
