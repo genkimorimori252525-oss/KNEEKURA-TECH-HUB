@@ -75,7 +75,7 @@ public final class KneekuraDebugDecisionHooks {
                        LongSupplier time, Sink sink) throws ReflectiveOperationException {
             if(nodeLimit<1 || nodeLimit>64)throw new IllegalArgumentException("NODE_LIMIT_OUT_OF_RANGE");
             this.subject=subject;this.snapshot=snapshot;this.budget=budget;this.nodeLimit=nodeLimit;
-            if(channels==null||channels.isEmpty()||!Set.of("goal","brain","path","control","malus","sensor","mod").containsAll(channels))
+            if(channels==null||channels.isEmpty()||!Set.of("goal","brain","path","control","malus","sensor","mod","projectile").containsAll(channels))
                 throw new IllegalArgumentException("INVALID_CHANNELS");
             this.channels=Set.copyOf(channels);
             this.modAdapter=channels.contains("mod")?KneekuraDebugTwilightForestAdapter.shared():null;
@@ -110,7 +110,8 @@ public final class KneekuraDebugDecisionHooks {
         }
         private boolean record(String kind,String method,Data capture) {
             if(thread!=Thread.currentThread())return false;
-            String channel=kind.equals("MOD_TRANSITION_RETURN")?"mod":kind.startsWith("GOAL_")?"goal":kind.startsWith("PATH_")?"path":
+            String channel=kind.startsWith("CONTROL_PROJECTILE_")&&channels.contains("projectile")?"projectile":
+                    kind.equals("MOD_TRANSITION_RETURN")?"mod":kind.startsWith("GOAL_")?"goal":kind.startsWith("PATH_")?"path":
                     kind.startsWith("CONTROL_")?"control":kind.startsWith("BASE_MALUS_")?"malus":
                     kind.startsWith("SENSOR_")?"sensor":kind.startsWith("BRAIN_")||kind.startsWith("BEHAVIOR_")?"brain":null;
             if(channel==null||!channels.contains(channel))return false;
@@ -144,7 +145,7 @@ public final class KneekuraDebugDecisionHooks {
             return false;
         }
         private boolean readyProjectile() {
-            if(thread!=Thread.currentThread()||!channels.contains("control")||subject==null)return false;
+            if(thread!=Thread.currentThread()||(!channels.contains("control")&&!channels.contains("projectile"))||subject==null)return false;
             try{return budget.allows(currentContext.get(),time.getAsLong());}
             catch(RuntimeException error){budget.close("CONTEXT_UNAVAILABLE");return false;}
         }

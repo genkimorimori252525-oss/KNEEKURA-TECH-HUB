@@ -121,6 +121,15 @@ public final class KneekuraDebugProjectileResultSelfTest {
         KneekuraDebugDecisionHooks.projectileHurt(finalShot,target,null,3);
         require(target.calls==9&&failingSink.budget().reason().equals("WRITER_UNAVAILABLE"),"Sink failure preserves gameplay and closes tracking");
         KneekuraDebugDecisionHooks.clear("TEST");
+        var narrowRows=new ArrayList<JsonObject>();
+        var narrow=new KneekuraDebugDecisionHooks.Session(selected,null,null,new KneekuraDebugDecisionSnapshot(),
+            new KneekuraDebugDecisionBurstBudget(context,100,10,3,65536),8,Set.of("projectile"),()->context,()->100L,(method,row)->narrowRows.add(row));
+        KneekuraDebugDecisionHooks.install(narrow);var narrowShot=shot(selected);
+        KneekuraDebugDecisionHooks.controlReturn(selected,"move");KneekuraDebugDecisionHooks.teleportReturn(selected,1,65,2,true);
+        KneekuraDebugDecisionHooks.projectileSpawnReturn(narrowShot,true);KneekuraDebugDecisionHooks.projectileTickReturn(narrowShot);
+        KneekuraDebugDecisionHooks.projectileHurt(narrowShot,target,null,3);
+        require(narrowRows.size()==3&&narrowRows.stream().allMatch(r->r.get("kind").getAsString().startsWith("CONTROL_PROJECTILE_")),"Narrow channel records only projectile facts, no control replay/budget starvation");
+        require(target.calls==10,"Narrow observation preserves one original hurt call");KneekuraDebugDecisionHooks.clear("TEST");
         var interop=new JsonObject();interop.addProperty("subjectUuid",selected.getUUID().toString());
         var payloads=new com.google.gson.JsonArray();rows.forEach(payloads::add);interop.add("rows",payloads);
         System.out.println("PROJECTILE_INTEROP:"+interop);

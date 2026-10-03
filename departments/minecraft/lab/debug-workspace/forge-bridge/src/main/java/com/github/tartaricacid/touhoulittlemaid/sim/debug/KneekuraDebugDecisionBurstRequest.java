@@ -9,7 +9,7 @@ import java.util.Set;
 /** Strict optional observation request. This cannot authorize a world action or enable launch hooks. */
 public record KneekuraDebugDecisionBurstRequest(int ticks, int maxEvents, int maxBytes,
                                                int maxNodes, Set<String> channels) {
-    private static final Set<String> CHANNELS=Set.of("goal","brain","path","control","malus","sensor","mod");
+    private static final Set<String> CHANNELS=Set.of("goal","brain","path","control","malus","sensor","mod","projectile");
     public KneekuraDebugDecisionBurstRequest {
         if(ticks<1||ticks>200||maxEvents<1||maxEvents>256||maxBytes<1||maxBytes>524288
                 ||maxNodes<1||maxNodes>64||channels==null||channels.isEmpty()
@@ -23,7 +23,7 @@ public record KneekuraDebugDecisionBurstRequest(int ticks, int maxEvents, int ma
         if(!object.keySet().equals(Set.of("ticks","maxEvents","maxBytes","maxNodes","channels")))
             throw new IllegalArgumentException("INVALID_DECISION_BURST_FIELDS");
         JsonElement list=object.get("channels");
-        if(!list.isJsonArray()||list.getAsJsonArray().isEmpty()||list.getAsJsonArray().size()>7)
+        if(!list.isJsonArray()||list.getAsJsonArray().isEmpty()||list.getAsJsonArray().size()>CHANNELS.size())
             throw new IllegalArgumentException("INVALID_DECISION_BURST_CHANNELS");
         Set<String> channels=new HashSet<>();
         for(JsonElement item:list.getAsJsonArray()) {

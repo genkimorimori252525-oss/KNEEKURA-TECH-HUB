@@ -35,3 +35,16 @@ test('Decision burst is explicit, finite, channel-scoped and reset by every sele
     await assert.rejects(setTargetControl(current,uuid,{decisionBurst:invalid}),/Invalid decisionBurst/);
   }
 });
+test('projectile-only burst is explicit and finite without arming movement controls',async t=>{
+  const runDir=await mkdtemp(path.join(tmpdir(),'kneekura-projectile-target-'));
+  t.after(()=>rm(runDir,{recursive:true,force:true}));
+  const current={runDir,debugSessionId:'s',runId:'r',runSnapshotId:'snapshot',processEpoch:1,decisionHooksEnabled:true};
+  const uuid='00000000-0000-0000-0000-000000000001';
+  const burst={ticks:200,maxEvents:256,maxBytes:524288,maxNodes:8,channels:['projectile']};
+  const armed=await setTargetControl(current,uuid,{decisionBurst:burst});
+  assert.deepEqual(armed.decisionBurst,burst);assert.equal(armed.decisionSnapshot,false);
+  assert.equal((await setTargetControl(current,uuid)).decisionBurst,null);
+  const all={...burst,channels:['goal','brain','path','control','malus','sensor','mod','projectile']};
+  assert.deepEqual((await setTargetControl(current,uuid,{decisionBurst:all})).decisionBurst,all);
+  for(const channels of [['projectile','projectile'],['projectile','unknown']])await assert.rejects(setTargetControl(current,uuid,{decisionBurst:{...burst,channels}}),/Invalid decisionBurst/);
+});
