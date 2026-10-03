@@ -1,0 +1,137 @@
+name: Bedrock Wither Keyboard Play Probe
+
+on:
+  push:
+    branches:
+      - codex/bedrock-wither-lifecycle-regressions-2026-10-03
+    paths:
+      - '.github/workflows/bedrock-wither-keyboard-play-probe.yml'
+      - '.github/bedrock-wither-keyboard-play-probe-request.txt'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bedrock-wither-keyboard-play-probe
+  cancel-in-progress: false
+
+jobs:
+  keyboard-play:
+    runs-on: [self-hosted, Windows, X64]
+    timeout-minutes: 8
+    defaults:
+      run:
+        shell: powershell
+
+    steps:
+      - name: Launch Bedrock and activate default Play selection with Enter
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $out = Join-Path $env:GITHUB_WORKSPACE 'bedrock-keyboard-play-probe'
+          if (Test-Path $out) { Remove-Item $out -Recurse -Force }
+          New-Item -ItemType Directory -Path $out | Out-Null
+
+          Add-Type @'
+          using System;
+          using System.Runtime.InteropServices;
+          public static class Win32KbBwr {
+            [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr hWnd);
+            [DllImport("user32.dll")] public static extern IntPtr GetForegroundWindow();
+            [DllImport("user32.dll", CharSet = CharSet.Unicode)] public static extern int GetWindowText(IntPtr hWnd, System.Text.StringBuilder text, int count);
+            [DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr hWnd, int command);
+            [DllImport("user32.dll")] public static extern uint GetWindowThreadProcessId(IntPtr hWnd, IntPtr processId);
+            [DllImport("user32.dll")] public static extern bool AttachThreadInput(uint idAttach, uint idAttachTo, bool attach);
+            [DllImport("user32.dll")] public static extern bool BringWindowToTop(IntPtr hWnd);
+            [DllImport("kernel32.dll")] public static extern uint GetCurrentThreadId();
+          }
+          '@
+          Add-Type -AssemblyName System.Drawing
+          Add-Type -AssemblyName System.Windows.Forms
+
+          function Get-ForegroundTitle {
+            $handle = [Win32KbBwr]::GetForegroundWindow()
+            $sb = New-Object System.Text.StringBuilder 512
+            [void][Win32KbBwr]::GetWindowText($handle, $sb, $sb.Capacity)
+            return $sb.ToString()
+          }
+
+          function Capture([string]$path) {
+            $screen = [System.Windows.Forms.SystemInformation]::VirtualScreen
+            $bitmap = New-Object System.Drawing.Bitmap $screen.Width, $screen.Height
+            $graphics = [System.Drawing.Graphics]::FromImage($bitmap)
+            try {
+              $graphics.CopyFromScreen($screen.Left,$screen.Top,0,0,$screen.Size)
+              $bitmap.Save($path,[System.Drawing.Imaging.ImageFormat]::Png)
+            } finally {
+              $graphics.Dispose()
+              $bitmap.Dispose()
+            }
+          }
+
+          $sessionId = (Get-Process -Id $PID).SessionId
+          $before = @(
+            Get-Process -ErrorAction SilentlyContinue |
+              Where-Object { $_.SessionId -eq $sessionId -and $_.ProcessName -match 'Minecraft|Minecraft.Windows' } |
+              Select-Object -ExpandProperty Id
+          )
+          Start-Process 'minecraft://'
+
+          $deadline = (Get-Date).AddSeconds(60)
+          do {
+            Start-Sleep -Seconds 2
+            $windowProcess = Get-Process -ErrorAction SilentlyContinue |
+              Where-Object { $_.SessionId -eq $sessionId -and $_.MainWindowHandle -ne 0 -and $_.MainWindowTitle -eq 'Minecraft' } |
+              Select-Object -First 1
+          } while ($null -eq $windowProcess -and (Get-Date) -lt $deadline)
+          if ($null -eq $windowProcess) { throw 'No top-level Minecraft window found' }
+
+          Start-Sleep -Seconds 15
+          $foregroundHandleBefore = [Win32KbBwr]::GetForegroundWindow()
+          $currentThread = [Win32KbBwr]::GetCurrentThreadId()
+          $foregroundThread = [Win32KbBwr]::GetWindowThreadProcessId($foregroundHandleBefore,[IntPtr]::Zero)
+          $targetThread = [Win32KbBwr]::GetWindowThreadProcessId($windowProcess.MainWindowHandle,[IntPtr]::Zero)
+          if ($foregroundThread -ne 0) { [Win32KbBwr]::AttachThreadInput($currentThread,$foregroundThread,$true) | Out-Null }
+          if ($targetThread -ne 0 -and $targetThread -ne $currentThread) { [Win32KbBwr]::AttachThreadInput($currentThread,$targetThread,$true) | Out-Null }
+          try {
+            [Win32KbBwr]::ShowWindow($windowProcess.MainWindowHandle,9) | Out-Null
+            [Win32KbBwr]::BringWindowToTop($windowProcess.MainWindowHandle) | Out-Null
+            [Win32KbBwr]::SetForegroundWindow($windowProcess.MainWindowHandle) | Out-Null
+          } finally {
+            if ($targetThread -ne 0 -and $targetThread -ne $currentThread) { [Win32KbBwr]::AttachThreadInput($currentThread,$targetThread,$false) | Out-Null }
+            if ($foregroundThread -ne 0) { [Win32KbBwr]::AttachThreadInput($currentThread,$foregroundThread,$false) | Out-Null }
+          }
+
+          Start-Sleep -Seconds 1
+          if ((Get-ForegroundTitle) -ne 'Minecraft') { throw 'Minecraft foreground verification failed' }
+
+          Capture (Join-Path $out 'before-enter.png')
+          $shell = New-Object -ComObject WScript.Shell
+          [void]$shell.SendKeys('{ENTER}')
+          Start-Sleep -Seconds 8
+          if ((Get-ForegroundTitle) -ne 'Minecraft') { throw 'Minecraft foreground lost after Enter' }
+          Capture (Join-Path $out 'after-enter.png')
+
+          Write-Host ('BWR_KEYBOARD_PLAY_JSON=' + ([ordered]@{
+            foreground_verified = $true
+            key_sent = 'ENTER'
+            screenshot_captured = $true
+            world_opened = $false
+            existing_world_clicked = $false
+          } | ConvertTo-Json -Compress))
+
+          $newPids = @(
+            Get-Process -ErrorAction SilentlyContinue |
+              Where-Object { $_.SessionId -eq $sessionId -and $_.ProcessName -match 'Minecraft|Minecraft.Windows' -and $before -notcontains $_.Id } |
+              Select-Object -ExpandProperty Id
+          )
+          foreach ($pidToStop in $newPids) { Stop-Process -Id $pidToStop -Force -ErrorAction SilentlyContinue }
+
+      - name: Upload keyboard Play probe
+        uses: actions/upload-artifact@v4
+        with:
+          name: bedrock-wither-keyboard-play-probe
+          retention-days: 3
+          if-no-files-found: error
+          path: |
+            bedrock-keyboard-play-probe/before-enter.png
+            bedrock-keyboard-play-probe/after-enter.png
