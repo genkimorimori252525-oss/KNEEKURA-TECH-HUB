@@ -79,4 +79,25 @@ The cached custom-flight controller is the actual `twilightforest.entity.ai.cont
 
 Owned-JVM JFR:7,564,015 bytes /8,672 exported selected CPU/thread/GC/write/execution events. First window has eight CPU samples, raw mean JVM user fraction0.132636748875/system0.032599914875,124 statistical execution samples/four observer frames. Producer-reported build/cached cost81 samples:median135,999ns/max266,289,900ns (includes the existing once-per-process resource proof). This is a descriptive window, not incremental observer cost; encoding/writer/Viewer, independent pre-call work, JFR overhead and GPU/OS attribution are not included in that producer timing. No negligible-overhead conclusion follows.
 
-Remaining: direct Knight coordination/battle, integrated Brain/pursuit/flight/missing-capture, native related drawing/pixels/GPU and paired observer effect, full remaining semantic/FRONTIER research, fresh whole-diff review and final exact-HEAD CI.
+## Frozen native-r23 Villager Brain and native-r24 Zombie pursuit
+
+Producer `d46cd30a86b7415fbf74be24e57724f542751a3a`, unchanged runtime implementation/genuine artifacts. Each trial starts from a separately preserved original copy with labeled private prelaunch setup. Both finalized `EVIDENCE_COMPLETE`, drop0/queue0/cleanACK/verified exit/original85 SHA unchanged. Production validation and presentation derivation leave canonical bytes unchanged.
+
+| Trial | Finalized capture | Observed scope |
+| --- | --- | --- |
+| r23 adult Villager | 1,718 unique observations /480 cached snapshots; canonical SHA256 `6fb1f4198b20a505b922904fb4f4ee3aa27b81b82ace1870e5657a877004173f` | 256 original Brain/sensor callbacks and separately retained sampled activity/memory changes |
+| r24 Zombie | 419 unique observations /80 cached snapshots; canonical SHA256 `724a1cef407aaa96173bb6ce90892ee2a0a7c7922b5509a0510635979137d809` | Actual player target,80 real motion samples and one original PathFinder search state/result pair |
+
+R23 uses actual Villager AI, no seeded Brain memories or edited POI blocks, natural daylight cycle starting11500, and the existing controlled player/health fixture. Callback counts: SENSOR_SCAN_RETURN8, BEHAVIOR_TRY_START_RETURN150, BEHAVIOR_TICK_OR_STOP_RETURN60, BEHAVIOR_STOP_RETURN20, BRAIN_TICK_RETURN18. The finite brain/sensor burst closes at256 events; subsequent sampled state does not reconstruct missing callback history. Activity samples change from core+idle (`obs:forge-runtime:11004:18`, tick40428) to core+rest (`:445`, tick40813). This is sampled temporal association, not an original causal transition.
+
+The production memory-change query retains96 items: walk_target38, path40, look_target11 and cant_reach_walk_target_since7. For example, `:90` /tick40433 → `:161` /40438 observes walk_target/path absent→present; nested values remain `NOT_EXPOSED`, exactChangeTickKnown=false. Motion retains128 actual positions with explicit truncation. INPUT/STATE/EVALUATION/EXECUTION have available evidence; CANDIDATE/SELECTION/RESULT remain `NOT_CAPTURED`.
+
+R24 uses actual Zombie AI without seeded target, a survival player and52 bounded private prelaunch oak-fence cells with alternating end gaps. Fences preserve eye-level visibility while obstructing navigation; this setup is not an original-world resize. Actual target `obs:forge-runtime:46408:22`, tick40448, is player `380df991-f603-344c-a090-369bad2a924a`, alive with observed lineOfSight=true and distanceSqr101.44094318989548. Original search `:148` and result `:149` retain32 bounded frontier nodes with `PARTIAL` coverage, resultPresent=true, Path resultNodeCount19 and **canReach=false**. Neighbor evaluation remains `NOT_EXPOSED`; this is not successful target arrival.
+
+The80 real motion samples run from `:21` /tick40448 /[4.5001112779960755,224,7.298680418275718] to `:413` /40843 /[13.920788032767453,224,10.416192413018171]. The sampled polyline length43.69285738014613 and net displacement9.923105942962257 describe those retained points over395 ticks, not continuous motion or a complete pursuit. No gaps were detected within these80 samples. The path-only burst ends normally with two callbacks; a missing candidate/cost explanation stays missing.
+
+## Windows owner directory identity diagnosis
+
+The existing `KneekuraDebugScopedOwnerGate.windowsDirectoryKey` fallback was exercised through the genuine compiled gate and hash-checked existing Forge/JNA dependencies on Windows/JDK17. Both C: and K: NTFS private directories returned nonzero volume/file identities stable across repeated reads. Earlier environment failures do not establish that the current Windows implementation is unavailable. This read-only diagnostic does not establish live owner installation, capture authorization, pixels or performance acceptance; those require separate runs through the normal registered owner flow.
+
+Remaining: direct Knight coordination/battle, native related drawing/pixels/GPU and paired observer effect, full remaining semantic/FRONTIER research, fresh whole-diff review and final exact-HEAD CI. Brain, pursuit and custom-flight examples above establish their bounded observed layers only.
