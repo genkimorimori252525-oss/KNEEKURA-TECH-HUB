@@ -1,6 +1,6 @@
 # Bedrock Wither — Current Status
 
-Updated: 2026-10-03
+Updated: 2026-10-04
 Lifecycle: **PROTOTYPE / source-backed software implementation**
 Milestone: **BWR-M1 — standalone boss code completion**
 
@@ -16,6 +16,7 @@ Current work is in [Draft PR81](https://github.com/genkimorimori252525-oss/KNEEK
 - Difficulty health 300/450/600, 1×3 collision box, follow range 70, movement/flying attribute 0.6, boss HUD 55/sky darkening, undead family, fire/freezing/water contracts and undead-source rejection
 - Official persistent-boss behavior prevents ordinary distance/idle-random despawning, including legacy false-persistence NBT; the earlier Peaceful-removal branch is preserved
 - Highest-damage eligible Player, retaliation, then visible nearest eligible target. Creative/spectator attackers cannot retain priority-1 targeting or enter immediate combat controllers
+- Pinned public supplemental goals are now present: `behavior.float` priority 1, `look_at_target` priority 5 and `look_at_player` priority 6. The look adapter preserves public distance 8 / probability 0.02 and the Wither-specific 1..2 second look window without replacing the dedicated three-head controller
 - Ordinary phase-1 ascent, target-relative reposition, hover and 3-normal/1-dangerous center volleys; finite failed-path recovery
 - Per-shot acceleration uses an explicit historical-native fallback, with the corrected maxHP/6 interval. The documented 75-HP NBT bucket is separate. Phase reset, large-hit, healing and reload policies are tested
 - Reported 140-tick inter-volley pause is independent of per-shot cadence. Phase1 then repositions/settles; phase 2 emits its next projectile after the selected 140-tick pause
@@ -26,16 +27,18 @@ Current work is in [Draft PR81](https://github.com/genkimorimori252525-oss/KNEEK
 - Pinned official body/swell/skin math and white/blue armor UV passes are wired through production-used presentation functions. Java texture/tint substitutes are explicitly documented
 - Accepted death uses native phase0, cancels residual combat motion and runs the historical-provisional visual countdown/flicker. Save/reload preserves progression; positive-health Forge cancellation preserves the live combat state
 - Ordinary player-attributed death/loot/XP events, actual 50 XP and one Nether Star, and reward idempotency remain covered. The star's documented unlimited lifetime survives item NBT reload
+- Independent-boss kill credit now restores Wither Rose behavior lost by intentionally not inheriting Java `WitherBoss`: place the rose when `mobGriefing` and survival rules permit, otherwise drop exactly one rose item
+- Wither sound integration now exposes ambient/hurt/death sounds and uses Java 1.20.1 Wither level-event bridges for block break (1022), spawn (1023) and skull shoot (1024)
 - Renderer-facing spawn ticks and independent head pitch remain synchronized through actual entity-data snapshot/dirty-data boundaries
 - Transient movement/preparation/charge reloads recover safely; volley alternation, rate cursor and pending transition work persist; obsolete hurt-state saves normalize into valid combat
 
 ## Verification
 
-The source-completion generation passes build and **60/60 required Forge GameTests** twice consecutively against the same generated world locally: the prior 24 plus 20 ordinary-combat/targeting/persistence tests, 11 presentation/projectile tests and 5 lifecycle/loot/block-rule tests. Earlier intended RED failures are retained in the compact source-completion receipt and failure/repair history.
+The source-completion generation originally passed **60/60 required Forge GameTests**. The post-completion parity-polish code source `a2d838cf50052d3fb0e1dfeb3a826084e8e6da6b` now passes **64/64 required Forge GameTests** in hosted run `37147781105`: the original 60 plus four supplemental goal/sound/Wither-Rose regressions. The same exact code source passed the complete hosted Tech Hub suite in run `37147783747` with **3141 passed / 332 skipped / 8 warnings**.
 
-[Current source-completion verification receipt](evidence/source-completion-2026-10-03.json) records final local verification and its limitations. [PR81](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/pull/81) records the exact published commit/tree and terminal hosted checks, avoiding a documentation-only CI loop.
+[Current source-completion verification receipt](evidence/source-completion-2026-10-03.json) records the original 60-test completion. [Parity-polish receipt](evidence/parity-polish-2026-10-04.json) records the audit-derived supplement, its initial compile RED at `725960309...`, the typed-predicate repair, and the exact accepted code source/hosted checks. [PR81](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/pull/81) remains the publication line.
 
-Historical hosted checkpoint `6e2faafcb5789ce5f3d8c355bf208d037cf96646` passed [24 GameTests](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/37138822902) and [3141 Python tests /332 skipped](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/37138825757). Those are prior-generation results, not evidence for the new58-test source.
+Historical hosted checkpoint `6e2faafcb5789ce5f3d8c355bf208d037cf96646` passed [24 GameTests](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/37138822902) and [3141 Python tests /332 skipped](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/37138825757). Those are prior-generation results, not evidence for the current parity-polish source.
 
 ## Declared reconstruction choices
 
@@ -49,7 +52,7 @@ See [ADOPTION](ADOPTION.md) and the [source audit](../../../departments/minecraf
 - Reflection vector/speed and same-vehicle grace use documented Java adaptations; zero configured reflection immunity does not prove native repeated-reflector behavior
 - Death200/power7/swell/overlay/flicker are historical-provisional policies. Forge reward timing remains ordinary and is not made to mimic delayed historical rewards
 - Native ShieldHealth remains a non-authoritative diagnostic field; no unsupported finite shield pool is invented
-- Exact Bedrock textures, sound/particle identity, live client/wire rendering and ServerPlayer advancement grants are not established by these headless tests
+- Java 1.20.1 Wither sound events are now wired as compatibility bridges, but exact Bedrock audio assets/mix/attenuation/timing, exact Bedrock textures, particles, live client/wire rendering and ServerPlayer advancement grants are not established by these headless tests
 
 ## Handoff / next action
 
