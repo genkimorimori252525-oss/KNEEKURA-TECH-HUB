@@ -46,7 +46,7 @@ jobs:
             [DllImport("user32.dll")] public static extern bool BringWindowToTop(IntPtr hWnd);
             [DllImport("kernel32.dll")] public static extern uint GetCurrentThreadId();
             public const uint WHEEL=0x0800;
-            public static void Wheel(int delta){ mouse_event(WHEEL,0,0,unchecked((uint)delta),UIntPtr.Zero); }
+            public static void WheelDown(){ mouse_event(WHEEL,0,0,unchecked((uint)-720),UIntPtr.Zero); }
           }
           '@
           Add-Type -AssemblyName System.Drawing
@@ -97,7 +97,7 @@ jobs:
           Capture (Join-Path $out 'scroll0.png')
 
           for($i=1;$i -le 7;$i++){
-            [Win32SettingsMapBwr]::Wheel(-720)
+            [Win32SettingsMapBwr]::WheelDown()
             Start-Sleep -Milliseconds 800
             Capture (Join-Path $out ("scroll{0}.png" -f $i))
           }
@@ -111,6 +111,7 @@ jobs:
           } | ConvertTo-Json -Compress))
 
       - name: Upload settings map
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: bedrock-wither-settings-map-probe
