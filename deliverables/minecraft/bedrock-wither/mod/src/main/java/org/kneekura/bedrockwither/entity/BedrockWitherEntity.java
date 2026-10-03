@@ -25,7 +25,6 @@ import net.minecraft.world.entity.PowerableMob;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
@@ -44,6 +43,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import org.kneekura.bedrockwither.entity.ai.BedrockFlyingMoveControl;
 import org.kneekura.bedrockwither.entity.ai.BedrockHighestDamageTargetGoal;
 import org.kneekura.bedrockwither.entity.ai.BedrockLookGoal;
 
@@ -127,10 +127,10 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
         this.runtimeState.setNativePhase(BedrockWitherPhaseController.firstPhaseNativeId());
         this.spawnController.initializeNewEntity();
         this.bossEvent.setDarkenScreen(true);
-        // Bedrock exposes movement.basic max_turn=180. This Java adapter's
-        // constructor controls pitch (180); FlyingMoveControl separately fixes
-        // yaw rotation at 90 degrees per control update. Native yaw is not reproduced.
-        this.moveControl = new FlyingMoveControl(this, 180, true);
+        // Pinned Bedrock movement.basic exposes max_turn=180 degrees/tick.
+        // Vanilla FlyingMoveControl hard-codes yaw to 90, so use the bounded
+        // KNEEKURA adapter that applies the public 180-degree cap to yaw and pitch.
+        this.moveControl = new BedrockFlyingMoveControl(this);
         this.setNoGravity(true);
         this.xpReward = 50;
     }
@@ -153,6 +153,15 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
             case NORMAL -> 450.0D;
             case EASY, PEACEFUL -> 300.0D;
         };
+    }
+
+    @Override
+    public boolean isPushable() {
+        // Pinned format 1.26.50 declares minecraft:pushable_by_entity {}.
+        // LivingEntity disables pushing while on a climbable block; Bedrock's
+        // pushability component is independent from can_climb, so preserve
+        // entity pushing even while the Wither is on a ladder/scaffolding.
+        return this.isAlive() && !this.isSpectator();
     }
 
     @Override
