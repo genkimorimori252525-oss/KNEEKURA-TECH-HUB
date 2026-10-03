@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
@@ -16,10 +17,12 @@ import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.gametest.GameTestHolder;
 import net.minecraftforge.gametest.PrefixGameTestTemplate;
 import org.kneekura.bedrockwither.BedrockWitherMod;
+import org.kneekura.bedrockwither.entity.ai.BedrockFlyingMoveControl;
 import org.kneekura.bedrockwither.entity.ai.BedrockLookGoal;
 import org.kneekura.bedrockwither.registry.ModEntities;
 
@@ -154,6 +157,64 @@ public final class BedrockWitherParityPolishGameTests {
                             && !existing.contains(entity.getUUID()))) {
                 item.discard();
             }
+        }
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_publicmaxturn")
+    public static void publicMovementMaxTurnAppliesToYaw(GameTestHelper helper) {
+        BedrockWitherEntity boss = requireBoss(helper);
+        try {
+            boss.setPos(0.5D, helper.getLevel().getMaxBuildHeight() - 40.0D, 0.5D);
+            boss.setYRot(0.0F);
+            boss.setXRot(0.0F);
+
+            helper.assertTrue(boss.getMoveControl() instanceof BedrockFlyingMoveControl,
+                    "Standalone boss must use the Bedrock max-turn flying controller");
+            helper.assertTrue(BedrockFlyingMoveControl.PUBLIC_MAX_TURN_DEGREES == 180.0F,
+                    "Pinned movement.basic max_turn must remain 180 degrees per tick");
+
+            boss.getMoveControl().setWantedPosition(
+                    boss.getX(),
+                    boss.getY(),
+                    boss.getZ() - 10.0D,
+                    1.0D
+            );
+            boss.getMoveControl().tick();
+
+            float yawError = Math.abs(Mth.wrapDegrees(boss.getYRot() - 180.0F));
+            helper.assertTrue(yawError < 1.0E-4F,
+                    "A 180-degree yaw request must be reachable in one control tick under max_turn=180");
+            helper.succeed();
+        } finally {
+            boss.discard();
+        }
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "bwr_publicpushability")
+    public static void publicPushabilityRemainsEnabledWhileClimbing(GameTestHelper helper) {
+        var level = helper.getLevel();
+        BlockPos anchor = helper.absolutePos(BlockPos.ZERO);
+        BlockPos floor = new BlockPos(anchor.getX(), level.getMaxBuildHeight() - 40, anchor.getZ());
+        BlockPos climb = floor.above();
+        BedrockWitherEntity boss = requireBoss(helper);
+
+        try {
+            level.setBlock(floor, Blocks.STONE.defaultBlockState(), 3);
+            level.setBlock(climb, Blocks.SCAFFOLDING.defaultBlockState(), 3);
+            boss.setPos(climb.getX() + 0.5D, climb.getY(), climb.getZ() + 0.5D);
+            level.addFreshEntity(boss);
+
+            helper.assertTrue(boss.onClimbable(),
+                    "Inherited LivingEntity ladder/scaffolding handling must satisfy minecraft:can_climb");
+            helper.assertTrue(boss.isPushable(),
+                    "minecraft:pushable_by_entity must remain true independently of can_climb");
+            helper.assertTrue(boss.getPistonPushReaction() == PushReaction.NORMAL,
+                    "minecraft:pushable_by_block must retain the normal Java piston push reaction");
+            helper.succeed();
+        } finally {
+            boss.discard();
+            level.setBlock(climb, Blocks.AIR.defaultBlockState(), 3);
+            level.setBlock(floor, Blocks.AIR.defaultBlockState(), 3);
         }
     }
 
