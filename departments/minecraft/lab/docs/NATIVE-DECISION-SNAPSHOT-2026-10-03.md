@@ -29,6 +29,8 @@ Signed 64-bit memory values likewise retain an exact decimal string with `INT64_
 
 Native runtime acceptance is pending at this record's initial generation. Original saves remain read-only; private trial world/logs/JARs are excluded from Git.
 
+Follow-up: [native component smoke](NATIVE-DECISION-SNAPSHOT-ACCEPTANCE-2026-10-03.md) retained 1,517 observations with clean flush, no drops and verified process exit. OFF emitted no new snapshots; the maid and all eight selected Vanilla families produced the five component sections. Full representative behavior and observer-effect acceptance remain pending.
+
 The first five private startup trials produced no observations; they are not native acceptance. Trials 1/3/4 failed Gradle task/configuration guards before gameplay. Trials 2/5 reached the native client but timed out at 600 seconds, with TacZ generated gunpack IO identified in the retained logs/thread dump. Native process exit was verified after these timeouts. Complete gunpack preparation and the mod's existing opt-out of automatic overwriting are being applied only to the dedicated private game directory; source saves and prior generated folders are retained.
 
 This slice does **not** install original eligibility/lifecycle hooks, retained PathFinder frontier/neighbor-candidate capture, terrain/malus volume consumers, decision burst, custom Boss adapters, client live overlay or controlled observer-effect acceptance. Those remain subsequent steps of the approved handoff, not inferred from snapshot/unit/compile success.
