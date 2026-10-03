@@ -13,12 +13,12 @@ const classpath=process.env.KNEEKURA_FORGE_CLASSPATH;
 if(!classpath)throw new Error('KNEEKURA_FORGE_CLASSPATH must contain genuine official-mapped Forge1.20.1, Gson, LogUtils/SLF4J and annotation dependencies; no API stubs');
 const executable=n=>process.env[n==='java'?'KNEEKURA_JAVA':'KNEEKURA_JAVAC']||(process.env.JAVA_HOME?path.join(process.env.JAVA_HOME,'bin',n+(process.platform==='win32'?'.exe':'')):n);
 const output=await mkdtemp(path.join(os.tmpdir(),'kneekura-real-api-'));
-function run(command,args,env={}){
+function run(command,args,env={},cwd=root){
  // Genuine Windows dependency paths can exceed CreateProcess's argument limit.
  const argFile=path.join(output,'java.args');
  if(args.some(a=>/[\r\n]/.test(a)))throw new Error('Invalid Java argument line break');
  writeFileSync(argFile,args.map(a=>'"'+a.replaceAll('\\','\\\\').replaceAll('"','\\"')+'"').join('\n'));
- const result=spawnSync(command,['@'+argFile],{cwd:root,encoding:'utf8',timeout:120000,maxBuffer:4*1024*1024,windowsHide:true,env:{...process.env,...env}});
+ const result=spawnSync(command,['@'+argFile],{cwd,encoding:'utf8',timeout:120000,maxBuffer:4*1024*1024,windowsHide:true,env:{...process.env,...env}});
  if(result.stdout)process.stdout.write(result.stdout);if(result.stderr)process.stderr.write(result.stderr);
  if(result.error||result.status!==0)throw new Error('Real API source check failed '+command,{cause:result.error});
  return result.stdout;
@@ -31,9 +31,13 @@ try {
   'DecisionAdapter','DecisionBurstRequest','AdapterSourceProof','TwilightForestDescriptor','TwilightForestReturnDescriptor','TwilightForestAdapter',
   'MotionTraceCache','MotionOverlayRuntime','MotionOverlayGeometry','MotionOverlay'];
  const sources=names.map(n=>path.join(main,'KneekuraDebug'+n+'.java'));
- const checks=['EvidenceClaim','CaptureWriter','RegisteredWorld','TankPresentation','DecisionSnapshot','DecisionHooks','TerrainField','SynchedCached','MotionTraceCache','MotionOverlayGeometry','MotionWriter'];
+ const checks=['EvidenceClaim','CaptureWriter','RegisteredWorld','TankPresentation','DecisionSnapshot','DecisionHooks','TeleportReturn','TerrainField','SynchedCached','MotionTraceCache','MotionOverlayGeometry','MotionWriter'];
  run(executable('javac'),['--release','17','-proc:none','-cp',classpath,'-d',output,...sources,...checks.map(n=>path.join(test,'KneekuraDebug'+n+'SelfTest.java')),path.join(test,'KneekuraDebugDecisionIdentityInterop.java')]);
- for(const name of checks.filter(n=>n!=='MotionWriter'))run(executable('java'),['-cp',output+path.delimiter+classpath,'com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebug'+name+'SelfTest']);
+ for(const name of checks.filter(n=>n!=='MotionWriter')){
+  // Vanilla bootstrap can create logs; keep this new check's artifacts in its disposable output.
+  const cp=name==='TeleportReturn'?classpath.split(path.delimiter).map(p=>path.resolve(root,p)).join(path.delimiter):classpath;
+  run(executable('java'),['-cp',output+path.delimiter+cp,'com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebug'+name+'SelfTest'],{},name==='TeleportReturn'?output:root);
+ }
  for(const mode of ['OFF','ON'])run(executable('java'),['-cp',output+path.delimiter+classpath,'com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugMotionWriterSelfTest',mode],{KNEEKURA_DEBUG_MOTION_OVERLAY:mode==='ON'?'1':'0'});
  const identityOutput=run(executable('java'),['-cp',output+path.delimiter+classpath,'com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugDecisionIdentityInterop']);
  const identityLine=identityOutput.split(/\r?\n/).find(line=>line.startsWith('INTEROP:'));

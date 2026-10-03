@@ -399,10 +399,16 @@ export function buildDebugWorkspaceMotionTrace({
   }));
 
   const absent=selected.filter(r=>r.lane==='SERVER_TARGET_TRACKED'&&r.source?.side==='SERVER'&&r.payload?.tracked===false);
+  const teleports=selected.filter(r=>validOriginalDecisionEvent(r)&&r.payload.kind==='CONTROL_TELEPORT_RETURN'&&r.payload.data.result===true);
+  const before=(a,b)=>a.gameTime<b.gameTime || (a.gameTime===b.gameTime &&
+    typeof a.writerId==='string'&&a.writerId.length>0&&a.writerId===b.writerId&&
+    Number.isSafeInteger(a.writerSeq)&&Number.isSafeInteger(b.writerSeq)&&a.writerSeq<b.writerSeq);
   const breaks=[...explicitDiscontinuities];
   for(let i=1;i<records.length;i++){
     const a=records[i-1],b=records[i],missing=absent.find(r=>r.gameTime>a.gameTime&&r.gameTime<b.gameTime);
     if(missing)breaks.push({after_tick:a.gameTime,before_tick:b.gameTime,kind:'MISSING_SELECTED_ENTITY',source_observation_id:missing.observationId});
+    const teleport=teleports.find(r=>before(a,r)&&before(r,b));
+    if(teleport)breaks.push({after_tick:a.gameTime,before_tick:b.gameTime,kind:'EXPLICIT_TELEPORT',source_observation_id:teleport.observationId});
   }
 
   return buildSampledMotionTrace({

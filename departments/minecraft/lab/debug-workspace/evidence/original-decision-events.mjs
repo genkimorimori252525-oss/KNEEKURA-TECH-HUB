@@ -9,6 +9,7 @@ const KINDS = Object.freeze({
   BEHAVIOR_STOP_RETURN: ['EXECUTION','behavior_execution'],
   SENSOR_SCAN_RETURN: ['INPUT','sensor_execution'],
   CONTROL_TICK_RETURN: ['EXECUTION','movement_control'],
+  CONTROL_TELEPORT_RETURN: ['RESULT','teleport_result'],
   BASE_MALUS_RETURN: ['EVALUATION','base_path_malus'],
   PATH_SEARCH_STATE: ['EVALUATION','path_search_frontier'],
   PATH_SEARCH_RESULT: ['RESULT','path_search_result'],
@@ -76,6 +77,9 @@ function validData(kind,d) {
   if (kind === 'SENSOR_SCAN_RETURN') return text(d.className) && validInstanceIdentity(d) && d.candidatePopulationStatus === 'NOT_EXPOSED';
   if (kind === 'CONTROL_TICK_RETURN') return ['move','look','jump'].includes(d.control) && object(d.cachedBaseFields) &&
     text(d.cachedBaseFields.className) && d.cachedBaseFields.fieldScope === 'BASE_CONTROL_FIELDS_ONLY';
+  if (kind === 'CONTROL_TELEPORT_RETURN') return typeof d.result === 'boolean' &&
+    [d.requestedPosition,d.returnedPosition].every(p=>object(p)&&['x','y','z'].every(k=>Number.isFinite(p[k]))) &&
+    d.dispatchScope === 'BASE_RANDOM_TELEPORT_RETURN' && d.reasonStatus === 'NOT_EXPOSED';
   if (kind === 'BASE_MALUS_RETURN') return text(d.pathType) && numberOrUnknown(d,'returnedMalus') &&
     d.dispatchScope === 'BASE_METHOD_RETURN_NOT_CUSTOM_OVERRIDE_RESULT' && d.effectiveSourceStatus === 'NOT_EXPOSED';
   if (kind === 'PATH_SEARCH_STATE') return text(d.searchId) && validFrontier(d.frontier);

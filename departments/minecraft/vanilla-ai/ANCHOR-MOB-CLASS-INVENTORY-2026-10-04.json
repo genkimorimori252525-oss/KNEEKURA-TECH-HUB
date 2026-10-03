@@ -1,0 +1,2555 @@
+{
+  "schema_version": 1,
+  "minecraft": "1.20.1",
+  "loader": "Forge",
+  "loader_version": "47.2.0",
+  "namespace": "mapped parchment 2023.08.20-1.20.1",
+  "status": "EXACT_STATIC_INVENTORY_NOT_COMPLETE_SEMANTIC_OR_NATIVE_REVIEW",
+  "source_jar_sha256": "1b6e6a166fbc06c6d2422cd5cf515a508977479045095363d5b4c8b89cc7b4eb",
+  "class_header_count": 896,
+  "mob_class_count": 101,
+  "concrete_mob_class_count": 79,
+  "boundary": "Includes abstract/inner Mob-derived implementation classes. Not registry-ID coverage, source-method review or native scenario acceptance.",
+  "classes": [
+    {
+      "class": "net.minecraft.world.entity.AgeableMob",
+      "superclass": "net.minecraft.world.entity.PathfinderMob",
+      "classSha256": "e8efc6edb86f462512ff4b06ac383550651499a7caebe44d6ade9766abde7474",
+      "abstract": true,
+      "entry": "net/minecraft/world/entity/AgeableMob.class",
+      "inheritance": [
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "7f586b5285810e61a15a4b6f8a64b335169f28cc179feb406b5fa29a8a1385f9",
+      "declaredAiMethods": [
+        "public void aiStep();"
+      ],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.FlyingMob",
+      "superclass": "net.minecraft.world.entity.Mob",
+      "classSha256": "6387712ff5d6439e9fd08742926ca8fb9cf463697c7c7d2125ee549c46750cef",
+      "abstract": true,
+      "entry": "net/minecraft/world/entity/FlyingMob.class",
+      "inheritance": [
+        "net.minecraft.world.entity.FlyingMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "a573c20ae11f01837bef24c74aeaa7a6d7378dc37926bc732a729215e2a1e63c",
+      "declaredAiMethods": [],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.GlowSquid",
+      "superclass": "net.minecraft.world.entity.animal.Squid",
+      "classSha256": "bb07f596f86ea286c5632f72d2498098740c61b435f1dc51a0549a3b0f4a9233",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/GlowSquid.class",
+      "inheritance": [
+        "net.minecraft.world.entity.GlowSquid",
+        "net.minecraft.world.entity.animal.Squid",
+        "net.minecraft.world.entity.animal.WaterAnimal",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "7407bbff5eb60058453c1215c3b5e91ac4d859ceefb65bb2e4ceb21d5ad755bc",
+      "declaredAiMethods": [
+        "public void aiStep();"
+      ],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.Mob",
+      "superclass": "net.minecraft.world.entity.LivingEntity",
+      "classSha256": "81e6715b2f1a722c868e89984b64088932143f2164f40009ea128323dd6a0a8d",
+      "abstract": true,
+      "entry": "net/minecraft/world/entity/Mob.class",
+      "inheritance": [
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "8cc4db08017db747efcf6312579cadc43c931f0854842f334a9d77a4c9e1695b",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "protected net.minecraft.world.entity.ai.navigation.PathNavigation createNavigation(net.minecraft.world.level.Level);",
+        "public float getPathfindingMalus(net.minecraft.world.level.pathfinder.BlockPathTypes);",
+        "public void aiStep();",
+        "protected void customServerAiStep();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.GoalSelector"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.PathfinderMob",
+      "superclass": "net.minecraft.world.entity.Mob",
+      "classSha256": "15059a6364aeb43684bb5d6f39c56c2f1a41e693c8fd93fc1cdf22e8bc7b2506",
+      "abstract": true,
+      "entry": "net/minecraft/world/entity/PathfinderMob.class",
+      "inheritance": [
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "37a8fe56c83c8f5134c93da83efa05e23475ff2e2877f28c8619b5e8392c054d",
+      "declaredAiMethods": [],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.TamableAnimal",
+      "superclass": "net.minecraft.world.entity.animal.Animal",
+      "classSha256": "4a470bd070ca7d4993762d648d7106cb252a796632e66870fd86883c46413caf",
+      "abstract": true,
+      "entry": "net/minecraft/world/entity/TamableAnimal.class",
+      "inheritance": [
+        "net.minecraft.world.entity.TamableAnimal",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "4a539a8f21a5221888d7ce1ee0d8b63e7d402d81219d968ffc16d6147d73eed1",
+      "declaredAiMethods": [],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.ambient.AmbientCreature",
+      "superclass": "net.minecraft.world.entity.Mob",
+      "classSha256": "294e606d422c681095ce1547d2997b893cceded7b6cdbb78b0c0b0b8988a905d",
+      "abstract": true,
+      "entry": "net/minecraft/world/entity/ambient/AmbientCreature.class",
+      "inheritance": [
+        "net.minecraft.world.entity.ambient.AmbientCreature",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "2566fd8d7f43c83c4ea0d130d03f0440d52b320944c8e44981991eeb4fc7c092",
+      "declaredAiMethods": [],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.ambient.Bat",
+      "superclass": "net.minecraft.world.entity.ambient.AmbientCreature",
+      "classSha256": "828744f9a6264f317a808ad60676273c2e541262e795dea979286bd932292a9d",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/ambient/Bat.class",
+      "inheritance": [
+        "net.minecraft.world.entity.ambient.Bat",
+        "net.minecraft.world.entity.ambient.AmbientCreature",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "46a9aa96ea3f777bdc0be944673896a74e3fe43db7dcd441cdf8f194804985ad",
+      "declaredAiMethods": [
+        "protected void customServerAiStep();"
+      ],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.AbstractFish",
+      "superclass": "net.minecraft.world.entity.animal.WaterAnimal",
+      "classSha256": "00f69c6c8cefd8e94037c82f4c09a7303d4bb43fc5f36942ab65ba184d87550b",
+      "abstract": true,
+      "entry": "net/minecraft/world/entity/animal/AbstractFish.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.AbstractFish",
+        "net.minecraft.world.entity.animal.WaterAnimal",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "0ba6e0ed0d013412c8f31126bb08b08fed95a1727614d016fa0d3f9bc46346c1",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "protected net.minecraft.world.entity.ai.navigation.PathNavigation createNavigation(net.minecraft.world.level.Level);",
+        "public void aiStep();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.AvoidEntityGoal",
+        "net.minecraft.world.entity.ai.goal.PanicGoal",
+        "net.minecraft.world.entity.animal.AbstractFish$FishSwimGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.AbstractGolem",
+      "superclass": "net.minecraft.world.entity.PathfinderMob",
+      "classSha256": "f5ee0b2ef74a0958d22e3d4d393ea2916a480e9d1e3262128a74b166b7c94493",
+      "abstract": true,
+      "entry": "net/minecraft/world/entity/animal/AbstractGolem.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.AbstractGolem",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "765404e00f4c56a98e440ebe2f06df372cf02c20003a70f12ec38fee4b6669ac",
+      "declaredAiMethods": [],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.AbstractSchoolingFish",
+      "superclass": "net.minecraft.world.entity.animal.AbstractFish",
+      "classSha256": "860a8da53504f4124cf9ae9912f3a852716f92721b0045edf7b7e1029f94794a",
+      "abstract": true,
+      "entry": "net/minecraft/world/entity/animal/AbstractSchoolingFish.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.AbstractSchoolingFish",
+        "net.minecraft.world.entity.animal.AbstractFish",
+        "net.minecraft.world.entity.animal.WaterAnimal",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "f11a1f27441904157aa56c97af0920c4404cafdc3ec451a73740c62d56de017c",
+      "declaredAiMethods": [
+        "protected void registerGoals();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.FollowFlockLeaderGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.Animal",
+      "superclass": "net.minecraft.world.entity.AgeableMob",
+      "classSha256": "c47c7729e29d963916873a42f59aa13172574cafe1cd2181436b0c77f010a591",
+      "abstract": true,
+      "entry": "net/minecraft/world/entity/animal/Animal.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "6abfd6189028b46e7980db6fbb4b1ce4724829b302261e1a5e7d8435c698853a",
+      "declaredAiMethods": [
+        "protected void customServerAiStep();",
+        "public void aiStep();"
+      ],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.Bee",
+      "superclass": "net.minecraft.world.entity.animal.Animal",
+      "classSha256": "11ebc47dbfd1bd4167b5de01855273e3d56112f8f4136b01457d42cb0e7af72a",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/Bee.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.Bee",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "68842408b77e3a0607e4a8f037e6c6ac07bcab2d8364b8f88f6535ce04976a19",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "protected void customServerAiStep();",
+        "public void aiStep();",
+        "protected net.minecraft.world.entity.ai.navigation.PathNavigation createNavigation(net.minecraft.world.level.Level);"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.BreedGoal",
+        "net.minecraft.world.entity.ai.goal.FloatGoal",
+        "net.minecraft.world.entity.ai.goal.FollowParentGoal",
+        "net.minecraft.world.entity.ai.goal.TemptGoal",
+        "net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal",
+        "net.minecraft.world.entity.animal.Bee$BeeAttackGoal",
+        "net.minecraft.world.entity.animal.Bee$BeeBecomeAngryTargetGoal",
+        "net.minecraft.world.entity.animal.Bee$BeeEnterHiveGoal",
+        "net.minecraft.world.entity.animal.Bee$BeeGoToHiveGoal",
+        "net.minecraft.world.entity.animal.Bee$BeeGoToKnownFlowerGoal",
+        "net.minecraft.world.entity.animal.Bee$BeeGrowCropGoal",
+        "net.minecraft.world.entity.animal.Bee$BeeHurtByOtherGoal",
+        "net.minecraft.world.entity.animal.Bee$BeeLocateHiveGoal",
+        "net.minecraft.world.entity.animal.Bee$BeePollinateGoal",
+        "net.minecraft.world.entity.animal.Bee$BeeWanderGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.Cat",
+      "superclass": "net.minecraft.world.entity.TamableAnimal",
+      "classSha256": "e79aa18ea6c364e7d8fcfe550258f41be432602931bbcb5e86b43416e78185b0",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/Cat.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.Cat",
+        "net.minecraft.world.entity.TamableAnimal",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "8fd1cd9f51a0ecf29d71ea65fd7616f04d4270462cd803d9f7f1c6682a53cbec",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "public void customServerAiStep();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.BreedGoal",
+        "net.minecraft.world.entity.ai.goal.CatLieOnBedGoal",
+        "net.minecraft.world.entity.ai.goal.CatSitOnBlockGoal",
+        "net.minecraft.world.entity.ai.goal.FloatGoal",
+        "net.minecraft.world.entity.ai.goal.FollowOwnerGoal",
+        "net.minecraft.world.entity.ai.goal.LeapAtTargetGoal",
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.OcelotAttackGoal",
+        "net.minecraft.world.entity.ai.goal.PanicGoal",
+        "net.minecraft.world.entity.ai.goal.SitWhenOrderedToGoal",
+        "net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal",
+        "net.minecraft.world.entity.ai.goal.target.NonTameRandomTargetGoal",
+        "net.minecraft.world.entity.animal.Cat$CatAvoidEntityGoal",
+        "net.minecraft.world.entity.animal.Cat$CatRelaxOnOwnerGoal",
+        "net.minecraft.world.entity.animal.Cat$CatTemptGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.Chicken",
+      "superclass": "net.minecraft.world.entity.animal.Animal",
+      "classSha256": "9d8dd9437fee2edc9c8cd2fa7f5bf59c3c3c1807a12e1a64f69a8f1b74255a19",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/Chicken.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.Chicken",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "8cccb41d0cad6a75c656f44ec8fed326c5ac922797285a0e3e4648dac153d134",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "public void aiStep();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.BreedGoal",
+        "net.minecraft.world.entity.ai.goal.FloatGoal",
+        "net.minecraft.world.entity.ai.goal.FollowParentGoal",
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.PanicGoal",
+        "net.minecraft.world.entity.ai.goal.RandomLookAroundGoal",
+        "net.minecraft.world.entity.ai.goal.TemptGoal",
+        "net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.Cod",
+      "superclass": "net.minecraft.world.entity.animal.AbstractSchoolingFish",
+      "classSha256": "a31528967cc8da9dfd70dafcbb4b4decce8a1a11fe3efa1c731963bab23ad6b8",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/Cod.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.Cod",
+        "net.minecraft.world.entity.animal.AbstractSchoolingFish",
+        "net.minecraft.world.entity.animal.AbstractFish",
+        "net.minecraft.world.entity.animal.WaterAnimal",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "e9083e10749d3dfd601385de96cf6573fe358928feab2870447afbb841593f4d",
+      "declaredAiMethods": [],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.Cow",
+      "superclass": "net.minecraft.world.entity.animal.Animal",
+      "classSha256": "87388eb6d81ee5d7b0ba3d6363d05e77349efecc8f610ae20d2d4cfca430cc51",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/Cow.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.Cow",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "5824728643156cfcd36ef3f5461777c058766807ff70c3427a8bbf028085cc44",
+      "declaredAiMethods": [
+        "protected void registerGoals();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.BreedGoal",
+        "net.minecraft.world.entity.ai.goal.FloatGoal",
+        "net.minecraft.world.entity.ai.goal.FollowParentGoal",
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.PanicGoal",
+        "net.minecraft.world.entity.ai.goal.RandomLookAroundGoal",
+        "net.minecraft.world.entity.ai.goal.TemptGoal",
+        "net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.Dolphin",
+      "superclass": "net.minecraft.world.entity.animal.WaterAnimal",
+      "classSha256": "9dc2c0a963d38618201fa248faa86c3ab160378446dfd62cd0cad64ead737af8",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/Dolphin.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.Dolphin",
+        "net.minecraft.world.entity.animal.WaterAnimal",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "e39e4874a5ad46b6a41c6abc506ce6421680b09849859537bce2b5f0cc48409e",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "protected net.minecraft.world.entity.ai.navigation.PathNavigation createNavigation(net.minecraft.world.level.Level);"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.AvoidEntityGoal",
+        "net.minecraft.world.entity.ai.goal.BreathAirGoal",
+        "net.minecraft.world.entity.ai.goal.DolphinJumpGoal",
+        "net.minecraft.world.entity.ai.goal.FollowBoatGoal",
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.MeleeAttackGoal",
+        "net.minecraft.world.entity.ai.goal.RandomLookAroundGoal",
+        "net.minecraft.world.entity.ai.goal.RandomSwimmingGoal",
+        "net.minecraft.world.entity.ai.goal.TryFindWaterGoal",
+        "net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal",
+        "net.minecraft.world.entity.animal.Dolphin$DolphinSwimToTreasureGoal",
+        "net.minecraft.world.entity.animal.Dolphin$DolphinSwimWithPlayerGoal",
+        "net.minecraft.world.entity.animal.Dolphin$PlayWithItemsGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.Fox",
+      "superclass": "net.minecraft.world.entity.animal.Animal",
+      "classSha256": "d93fee2b6d57ccb39755d9b3c72a263a048bf4d559a65b7af275fb99a3eb35e5",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/Fox.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.Fox",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "d3be4b28f61d64eba52bc3e7f21ea0f30c41dfb499eb386e64ccd14e8bdbba51",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "public void aiStep();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.AvoidEntityGoal",
+        "net.minecraft.world.entity.ai.goal.ClimbOnTopOfPowderSnowGoal",
+        "net.minecraft.world.entity.ai.goal.LeapAtTargetGoal",
+        "net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal",
+        "net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal",
+        "net.minecraft.world.entity.animal.Fox$DefendTrustedTargetGoal",
+        "net.minecraft.world.entity.animal.Fox$FaceplantGoal",
+        "net.minecraft.world.entity.animal.Fox$FoxBreedGoal",
+        "net.minecraft.world.entity.animal.Fox$FoxEatBerriesGoal",
+        "net.minecraft.world.entity.animal.Fox$FoxFloatGoal",
+        "net.minecraft.world.entity.animal.Fox$FoxFollowParentGoal",
+        "net.minecraft.world.entity.animal.Fox$FoxLookAtPlayerGoal",
+        "net.minecraft.world.entity.animal.Fox$FoxMeleeAttackGoal",
+        "net.minecraft.world.entity.animal.Fox$FoxPanicGoal",
+        "net.minecraft.world.entity.animal.Fox$FoxPounceGoal",
+        "net.minecraft.world.entity.animal.Fox$FoxSearchForItemsGoal",
+        "net.minecraft.world.entity.animal.Fox$FoxStrollThroughVillageGoal",
+        "net.minecraft.world.entity.animal.Fox$PerchAndSearchGoal",
+        "net.minecraft.world.entity.animal.Fox$SeekShelterGoal",
+        "net.minecraft.world.entity.animal.Fox$SleepGoal",
+        "net.minecraft.world.entity.animal.Fox$StalkPreyGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.IronGolem",
+      "superclass": "net.minecraft.world.entity.animal.AbstractGolem",
+      "classSha256": "9899663a134e670691a564a17b0a70dc955eb32639fbaa82c0a5e36d942eead0",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/IronGolem.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.IronGolem",
+        "net.minecraft.world.entity.animal.AbstractGolem",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "13a2520cbd3958d13409a4bfaa4891a87edab4d05a6023dd51ca4018e9e01c25",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "public void aiStep();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.GolemRandomStrollInVillageGoal",
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.MeleeAttackGoal",
+        "net.minecraft.world.entity.ai.goal.MoveBackToVillageGoal",
+        "net.minecraft.world.entity.ai.goal.MoveTowardsTargetGoal",
+        "net.minecraft.world.entity.ai.goal.OfferFlowerGoal",
+        "net.minecraft.world.entity.ai.goal.RandomLookAroundGoal",
+        "net.minecraft.world.entity.ai.goal.target.DefendVillageTargetGoal",
+        "net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal",
+        "net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal",
+        "net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.MushroomCow",
+      "superclass": "net.minecraft.world.entity.animal.Cow",
+      "classSha256": "005a7cccf59b3865fca04148f7b3aaa7a3ec8c3335ac96a2cb6c81a59136974e",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/MushroomCow.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.MushroomCow",
+        "net.minecraft.world.entity.animal.Cow",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "fe605c9614e818c53e89820fa94f16c3131c852d367cd45b0346b82a073c654a",
+      "declaredAiMethods": [],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.Ocelot",
+      "superclass": "net.minecraft.world.entity.animal.Animal",
+      "classSha256": "1e75827214b5fb2748ada85d66aaa85ce6efbd05a69b35f651697aa783ba5582",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/Ocelot.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.Ocelot",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "61693176e64e79b7f4eeb597ee60e812ab7d049bdf4e7da0ffcd666a2cf5a93e",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "public void customServerAiStep();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.BreedGoal",
+        "net.minecraft.world.entity.ai.goal.FloatGoal",
+        "net.minecraft.world.entity.ai.goal.LeapAtTargetGoal",
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.OcelotAttackGoal",
+        "net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal",
+        "net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal",
+        "net.minecraft.world.entity.animal.Ocelot$OcelotAvoidEntityGoal",
+        "net.minecraft.world.entity.animal.Ocelot$OcelotTemptGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.Panda",
+      "superclass": "net.minecraft.world.entity.animal.Animal",
+      "classSha256": "bf5e1bcdecf5717c61d9eae24ba5fc89f60fafadb2424cc7597285966f0eeb91",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/Panda.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.Panda",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "e03d39d39d2502ef5379b8dea6caeac35128ab6e93bd6c263f824a0f7c80727b",
+      "declaredAiMethods": [
+        "protected void registerGoals();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.FloatGoal",
+        "net.minecraft.world.entity.ai.goal.FollowParentGoal",
+        "net.minecraft.world.entity.ai.goal.RandomLookAroundGoal",
+        "net.minecraft.world.entity.ai.goal.TemptGoal",
+        "net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal",
+        "net.minecraft.world.entity.animal.Panda$PandaAttackGoal",
+        "net.minecraft.world.entity.animal.Panda$PandaAvoidGoal",
+        "net.minecraft.world.entity.animal.Panda$PandaBreedGoal",
+        "net.minecraft.world.entity.animal.Panda$PandaHurtByTargetGoal",
+        "net.minecraft.world.entity.animal.Panda$PandaLieOnBackGoal",
+        "net.minecraft.world.entity.animal.Panda$PandaLookAtPlayerGoal",
+        "net.minecraft.world.entity.animal.Panda$PandaPanicGoal",
+        "net.minecraft.world.entity.animal.Panda$PandaRollGoal",
+        "net.minecraft.world.entity.animal.Panda$PandaSitGoal",
+        "net.minecraft.world.entity.animal.Panda$PandaSneezeGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.Parrot",
+      "superclass": "net.minecraft.world.entity.animal.ShoulderRidingEntity",
+      "classSha256": "4f07b9d147699cca267806bae5819ab4a3790b9fe684a90e3da0082ae133babd",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/Parrot.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.Parrot",
+        "net.minecraft.world.entity.animal.ShoulderRidingEntity",
+        "net.minecraft.world.entity.TamableAnimal",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "2bd0ef4881cb82a1fc5e9fd0f2ebd2b96c1898a7d0f011a2a122a3ab42dbbe2d",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "protected net.minecraft.world.entity.ai.navigation.PathNavigation createNavigation(net.minecraft.world.level.Level);",
+        "public void aiStep();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.FloatGoal",
+        "net.minecraft.world.entity.ai.goal.FollowMobGoal",
+        "net.minecraft.world.entity.ai.goal.FollowOwnerGoal",
+        "net.minecraft.world.entity.ai.goal.LandOnOwnersShoulderGoal",
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.PanicGoal",
+        "net.minecraft.world.entity.ai.goal.SitWhenOrderedToGoal",
+        "net.minecraft.world.entity.animal.Parrot$ParrotWanderGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.Pig",
+      "superclass": "net.minecraft.world.entity.animal.Animal",
+      "classSha256": "0770a652acc78e69b1dce8e789c2cf0195ef58e98b10661d17d152dd395a47a6",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/Pig.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.Pig",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "877519749dcdb6eec2d33e7aab35389a3fae9c9bb93ba512fc1cf9a288b4ea7b",
+      "declaredAiMethods": [
+        "protected void registerGoals();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.BreedGoal",
+        "net.minecraft.world.entity.ai.goal.FloatGoal",
+        "net.minecraft.world.entity.ai.goal.FollowParentGoal",
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.PanicGoal",
+        "net.minecraft.world.entity.ai.goal.RandomLookAroundGoal",
+        "net.minecraft.world.entity.ai.goal.TemptGoal",
+        "net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.PolarBear",
+      "superclass": "net.minecraft.world.entity.animal.Animal",
+      "classSha256": "443667e5b29d5723195f6cb5b077f45308f46a280808028b96bc437d0779945f",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/PolarBear.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.PolarBear",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "eebd8ce383d3609e20759cab096e38b90ba3bebee5baf12cf71956fb749c6e00",
+      "declaredAiMethods": [
+        "protected void registerGoals();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.FloatGoal",
+        "net.minecraft.world.entity.ai.goal.FollowParentGoal",
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.RandomLookAroundGoal",
+        "net.minecraft.world.entity.ai.goal.RandomStrollGoal",
+        "net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal",
+        "net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal",
+        "net.minecraft.world.entity.animal.PolarBear$PolarBearAttackPlayersGoal",
+        "net.minecraft.world.entity.animal.PolarBear$PolarBearHurtByTargetGoal",
+        "net.minecraft.world.entity.animal.PolarBear$PolarBearMeleeAttackGoal",
+        "net.minecraft.world.entity.animal.PolarBear$PolarBearPanicGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.Pufferfish",
+      "superclass": "net.minecraft.world.entity.animal.AbstractFish",
+      "classSha256": "bd729d340dd74a3434097ecbe097469a3bda05cc27e7064a6ad11d5853595fd6",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/Pufferfish.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.Pufferfish",
+        "net.minecraft.world.entity.animal.AbstractFish",
+        "net.minecraft.world.entity.animal.WaterAnimal",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "1d8468212083b9fdffbccdc793c99134b504df716d32dbf9e7901b79376edb8d",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "public void aiStep();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.animal.Pufferfish$PufferfishPuffGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.Rabbit",
+      "superclass": "net.minecraft.world.entity.animal.Animal",
+      "classSha256": "dd23e1759137902de544c2b8a1b8c57f52975be50a42bc17f99f1cc5326e33da",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/Rabbit.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.Rabbit",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "3a9dbaed7f382dab3f1da9057dae7e9649c78e1f3e8af988369110c9b6352a8e",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "public void customServerAiStep();",
+        "public void aiStep();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.BreedGoal",
+        "net.minecraft.world.entity.ai.goal.ClimbOnTopOfPowderSnowGoal",
+        "net.minecraft.world.entity.ai.goal.FloatGoal",
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.TemptGoal",
+        "net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal",
+        "net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal",
+        "net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal",
+        "net.minecraft.world.entity.animal.Rabbit$EvilRabbitAttackGoal",
+        "net.minecraft.world.entity.animal.Rabbit$RabbitAvoidEntityGoal",
+        "net.minecraft.world.entity.animal.Rabbit$RabbitPanicGoal",
+        "net.minecraft.world.entity.animal.Rabbit$RaidGardenGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.Salmon",
+      "superclass": "net.minecraft.world.entity.animal.AbstractSchoolingFish",
+      "classSha256": "45fd700174dcb330c3c38f28c28d7f7d9d5684ab605b95ed17a003d8de4a9b32",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/Salmon.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.Salmon",
+        "net.minecraft.world.entity.animal.AbstractSchoolingFish",
+        "net.minecraft.world.entity.animal.AbstractFish",
+        "net.minecraft.world.entity.animal.WaterAnimal",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "76503d3d426229ff61e82731e17d3c357146894b78f35fc84d14c06c14303bc4",
+      "declaredAiMethods": [],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.Sheep",
+      "superclass": "net.minecraft.world.entity.animal.Animal",
+      "classSha256": "aeab27a9bd7a1ebac266f559c2e4a7ccfdcc865b290c6be98e65335733807de5",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/Sheep.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.Sheep",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "2bb542a846d98842111be244c36a01ba0744e588262f94e98116e8a99a54bd08",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "protected void customServerAiStep();",
+        "public void aiStep();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.BreedGoal",
+        "net.minecraft.world.entity.ai.goal.EatBlockGoal",
+        "net.minecraft.world.entity.ai.goal.FloatGoal",
+        "net.minecraft.world.entity.ai.goal.FollowParentGoal",
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.PanicGoal",
+        "net.minecraft.world.entity.ai.goal.RandomLookAroundGoal",
+        "net.minecraft.world.entity.ai.goal.TemptGoal",
+        "net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.ShoulderRidingEntity",
+      "superclass": "net.minecraft.world.entity.TamableAnimal",
+      "classSha256": "c1dab80a5a5ac02db2d2e264e10669c24f6b0f285c4abb12eb3cea0b1e624893",
+      "abstract": true,
+      "entry": "net/minecraft/world/entity/animal/ShoulderRidingEntity.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.ShoulderRidingEntity",
+        "net.minecraft.world.entity.TamableAnimal",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "f8f5c179036d04172bb13e3fe2c22ff79f3a695313f08de49c4566929fdb59c8",
+      "declaredAiMethods": [],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.SnowGolem",
+      "superclass": "net.minecraft.world.entity.animal.AbstractGolem",
+      "classSha256": "79cfff1273eb8d1663fb6162fd2c3c9cb77079f18592bc5a7724d9ca9831fc28",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/SnowGolem.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.SnowGolem",
+        "net.minecraft.world.entity.animal.AbstractGolem",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "dec0c5c618e4efd3175ebbb17eabe22d234cca8d602c7cf3a34a3bc911d17689",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "public void aiStep();",
+        "public void performRangedAttack(net.minecraft.world.entity.LivingEntity, float);"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.RandomLookAroundGoal",
+        "net.minecraft.world.entity.ai.goal.RangedAttackGoal",
+        "net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal",
+        "net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.Squid",
+      "superclass": "net.minecraft.world.entity.animal.WaterAnimal",
+      "classSha256": "b933e89e0c94630aa30fb750e314940fd106a8f0dcd8e4d5d30ea60966c82be0",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/Squid.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.Squid",
+        "net.minecraft.world.entity.animal.WaterAnimal",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "c8777596d96a5b55d97b7fe591d6c31856dca653644aaeab0388b728d57c25ef",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "public void aiStep();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.animal.Squid$SquidFleeGoal",
+        "net.minecraft.world.entity.animal.Squid$SquidRandomMovementGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.TropicalFish",
+      "superclass": "net.minecraft.world.entity.animal.AbstractSchoolingFish",
+      "classSha256": "5c3b0eb1c3e9d2ebca2592b45b81a0a345ce4eefe0e1161c46ea7b85fab500af",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/TropicalFish.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.TropicalFish",
+        "net.minecraft.world.entity.animal.AbstractSchoolingFish",
+        "net.minecraft.world.entity.animal.AbstractFish",
+        "net.minecraft.world.entity.animal.WaterAnimal",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "5820d47dbcff29a75b6a1bbb44ce51a65f3a739f59159e46c75dcd0c51873be8",
+      "declaredAiMethods": [],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.Turtle",
+      "superclass": "net.minecraft.world.entity.animal.Animal",
+      "classSha256": "c5a78f24dc4d651426b80584837a1026daedc5383e492182029f4b445a6be5d2",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/Turtle.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.Turtle",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "3a7b4136b86d8692ed2bd8305f04a52f09c65e3c801aabc679201685249d46f0",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "protected net.minecraft.world.entity.ai.navigation.PathNavigation createNavigation(net.minecraft.world.level.Level);",
+        "public void aiStep();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.TemptGoal",
+        "net.minecraft.world.entity.animal.Turtle$TurtleBreedGoal",
+        "net.minecraft.world.entity.animal.Turtle$TurtleGoHomeGoal",
+        "net.minecraft.world.entity.animal.Turtle$TurtleGoToWaterGoal",
+        "net.minecraft.world.entity.animal.Turtle$TurtleLayEggGoal",
+        "net.minecraft.world.entity.animal.Turtle$TurtlePanicGoal",
+        "net.minecraft.world.entity.animal.Turtle$TurtleRandomStrollGoal",
+        "net.minecraft.world.entity.animal.Turtle$TurtleTravelGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.WaterAnimal",
+      "superclass": "net.minecraft.world.entity.PathfinderMob",
+      "classSha256": "2d7a2105bcd3b3ed26a3cba78bae81dc2e064b8536adb8a1990ec800ce9205ed",
+      "abstract": true,
+      "entry": "net/minecraft/world/entity/animal/WaterAnimal.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.WaterAnimal",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "07e8c7fc15a55b37443ec286b582d32309dcb272a1a7cbd489204f12d16f2ee5",
+      "declaredAiMethods": [],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.Wolf",
+      "superclass": "net.minecraft.world.entity.TamableAnimal",
+      "classSha256": "2c763a7532c63864eeb21a2b9d3200bdb81c1a6723049845f24bda9e1a14fc62",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/Wolf.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.Wolf",
+        "net.minecraft.world.entity.TamableAnimal",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "7eecdcbc862f6e1cc2871afffdd283bf5d18a4ec0a71fa7e9cf4e4b6c252961b",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "public void aiStep();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.BegGoal",
+        "net.minecraft.world.entity.ai.goal.BreedGoal",
+        "net.minecraft.world.entity.ai.goal.FloatGoal",
+        "net.minecraft.world.entity.ai.goal.FollowOwnerGoal",
+        "net.minecraft.world.entity.ai.goal.LeapAtTargetGoal",
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.MeleeAttackGoal",
+        "net.minecraft.world.entity.ai.goal.RandomLookAroundGoal",
+        "net.minecraft.world.entity.ai.goal.SitWhenOrderedToGoal",
+        "net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal",
+        "net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal",
+        "net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal",
+        "net.minecraft.world.entity.ai.goal.target.NonTameRandomTargetGoal",
+        "net.minecraft.world.entity.ai.goal.target.OwnerHurtByTargetGoal",
+        "net.minecraft.world.entity.ai.goal.target.OwnerHurtTargetGoal",
+        "net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal",
+        "net.minecraft.world.entity.animal.Wolf$WolfAvoidEntityGoal",
+        "net.minecraft.world.entity.animal.Wolf$WolfPanicGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.allay.Allay",
+      "superclass": "net.minecraft.world.entity.PathfinderMob",
+      "classSha256": "542e6f2adedcc0d35757da6e47919b4fe3bf1a61ff1c29389fe1765c13a708f2",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/allay/Allay.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.allay.Allay",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "2fb38724b3bef228f97b2157d115896e5e1be94d64a3d9ba76b243e447037f3a",
+      "declaredAiMethods": [
+        "protected net.minecraft.world.entity.ai.Brain$Provider<net.minecraft.world.entity.animal.allay.Allay> brainProvider();",
+        "protected net.minecraft.world.entity.ai.Brain<?> makeBrain(com.mojang.serialization.Dynamic<?>);",
+        "public net.minecraft.world.entity.ai.Brain<net.minecraft.world.entity.animal.allay.Allay> getBrain();",
+        "protected net.minecraft.world.entity.ai.navigation.PathNavigation createNavigation(net.minecraft.world.level.Level);",
+        "protected void customServerAiStep();",
+        "public void aiStep();"
+      ],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.axolotl.Axolotl",
+      "superclass": "net.minecraft.world.entity.animal.Animal",
+      "classSha256": "6656b970b7435edeee216c0a032c0c55433332ef7db30b0a18a176a42898a9ac",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/axolotl/Axolotl.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.axolotl.Axolotl",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "fa7c5489e5c75a1f87915c264ead15e4e3f23cdff254ac3c436ceee98e7516fa",
+      "declaredAiMethods": [
+        "protected void customServerAiStep();",
+        "protected net.minecraft.world.entity.ai.navigation.PathNavigation createNavigation(net.minecraft.world.level.Level);",
+        "protected net.minecraft.world.entity.ai.Brain$Provider<net.minecraft.world.entity.animal.axolotl.Axolotl> brainProvider();",
+        "protected net.minecraft.world.entity.ai.Brain<?> makeBrain(com.mojang.serialization.Dynamic<?>);",
+        "public net.minecraft.world.entity.ai.Brain<net.minecraft.world.entity.animal.axolotl.Axolotl> getBrain();"
+      ],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.camel.Camel",
+      "superclass": "net.minecraft.world.entity.animal.horse.AbstractHorse",
+      "classSha256": "437ccf5a8638da1fe7df117722cdb02a4ded7f31644ea71922a3382803693485",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/camel/Camel.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.camel.Camel",
+        "net.minecraft.world.entity.animal.horse.AbstractHorse",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "a64902f3220e44eb378d005377dadbb23b1824bd77a243761fe20d49b5421245",
+      "declaredAiMethods": [
+        "protected net.minecraft.world.entity.ai.Brain$Provider<net.minecraft.world.entity.animal.camel.Camel> brainProvider();",
+        "protected void registerGoals();",
+        "protected net.minecraft.world.entity.ai.Brain<?> makeBrain(com.mojang.serialization.Dynamic<?>);",
+        "protected void customServerAiStep();"
+      ],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.frog.Frog",
+      "superclass": "net.minecraft.world.entity.animal.Animal",
+      "classSha256": "581f9791105547222bcf0637f7cefdab726b3a94e21a2c2b2857ee17c2739632",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/frog/Frog.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.frog.Frog",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "4f43d9cb180a47a7d3080788dca6f33a92ede0a829e788a9920a076b521cf3f0",
+      "declaredAiMethods": [
+        "protected net.minecraft.world.entity.ai.Brain$Provider<net.minecraft.world.entity.animal.frog.Frog> brainProvider();",
+        "protected net.minecraft.world.entity.ai.Brain<?> makeBrain(com.mojang.serialization.Dynamic<?>);",
+        "public net.minecraft.world.entity.ai.Brain<net.minecraft.world.entity.animal.frog.Frog> getBrain();",
+        "protected void customServerAiStep();",
+        "protected net.minecraft.world.entity.ai.navigation.PathNavigation createNavigation(net.minecraft.world.level.Level);"
+      ],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.frog.Tadpole",
+      "superclass": "net.minecraft.world.entity.animal.AbstractFish",
+      "classSha256": "10c29fa69ddcd68d41b23f3821e5dc370df0400e9f8db83af20e6041871d8f41",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/frog/Tadpole.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.frog.Tadpole",
+        "net.minecraft.world.entity.animal.AbstractFish",
+        "net.minecraft.world.entity.animal.WaterAnimal",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "ec8c517db668902598254e40dd051235bc187966d18426fecae1653a492c269b",
+      "declaredAiMethods": [
+        "protected net.minecraft.world.entity.ai.navigation.PathNavigation createNavigation(net.minecraft.world.level.Level);",
+        "protected net.minecraft.world.entity.ai.Brain$Provider<net.minecraft.world.entity.animal.frog.Tadpole> brainProvider();",
+        "protected net.minecraft.world.entity.ai.Brain<?> makeBrain(com.mojang.serialization.Dynamic<?>);",
+        "public net.minecraft.world.entity.ai.Brain<net.minecraft.world.entity.animal.frog.Tadpole> getBrain();",
+        "protected void customServerAiStep();",
+        "public void aiStep();"
+      ],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.goat.Goat",
+      "superclass": "net.minecraft.world.entity.animal.Animal",
+      "classSha256": "82cad18625460683ef8698fcfed8b7607899d517fddc7869c8e5860b8ec11c76",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/goat/Goat.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.goat.Goat",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "c1b7abdc4169e687f13f719c62db3b02e30e4b72339727bad6433be5082d7448",
+      "declaredAiMethods": [
+        "protected net.minecraft.world.entity.ai.Brain$Provider<net.minecraft.world.entity.animal.goat.Goat> brainProvider();",
+        "protected net.minecraft.world.entity.ai.Brain<?> makeBrain(com.mojang.serialization.Dynamic<?>);",
+        "public net.minecraft.world.entity.ai.Brain<net.minecraft.world.entity.animal.goat.Goat> getBrain();",
+        "protected void customServerAiStep();",
+        "public void aiStep();"
+      ],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.horse.AbstractChestedHorse",
+      "superclass": "net.minecraft.world.entity.animal.horse.AbstractHorse",
+      "classSha256": "8fe71eae772b4b53c49963fa6f540f49a6ff91d961957477bb061336ff14cc4a",
+      "abstract": true,
+      "entry": "net/minecraft/world/entity/animal/horse/AbstractChestedHorse.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.horse.AbstractChestedHorse",
+        "net.minecraft.world.entity.animal.horse.AbstractHorse",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "7cc5d9aa0de882c10c4bdc1d750084fccfb1145e25c43ca9a9371d20878c9b11",
+      "declaredAiMethods": [],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.horse.AbstractHorse",
+      "superclass": "net.minecraft.world.entity.animal.Animal",
+      "classSha256": "f718bcf0fa8f09616abcec05f8abc27b9c3a245eee918698b8e4087b055262d6",
+      "abstract": true,
+      "entry": "net/minecraft/world/entity/animal/horse/AbstractHorse.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.horse.AbstractHorse",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "bbd6247f56f1b42d8001a7c4d8bd1381130e43a9ce8ca75342d1c6b8a6d65189",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "public void aiStep();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.BreedGoal",
+        "net.minecraft.world.entity.ai.goal.FloatGoal",
+        "net.minecraft.world.entity.ai.goal.FollowParentGoal",
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.PanicGoal",
+        "net.minecraft.world.entity.ai.goal.RandomLookAroundGoal",
+        "net.minecraft.world.entity.ai.goal.RandomStandGoal",
+        "net.minecraft.world.entity.ai.goal.RunAroundLikeCrazyGoal",
+        "net.minecraft.world.entity.ai.goal.TemptGoal",
+        "net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.horse.Donkey",
+      "superclass": "net.minecraft.world.entity.animal.horse.AbstractChestedHorse",
+      "classSha256": "38e2a416284fcb7d75ec1bea7aaf1178d3a5801b03db8dc66cccfa450fba8510",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/horse/Donkey.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.horse.Donkey",
+        "net.minecraft.world.entity.animal.horse.AbstractChestedHorse",
+        "net.minecraft.world.entity.animal.horse.AbstractHorse",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "9d750c81a9b1cf6987ddfc6ad270840c2633d77c2b6b1afafcb2090b44491637",
+      "declaredAiMethods": [],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.horse.Horse",
+      "superclass": "net.minecraft.world.entity.animal.horse.AbstractHorse",
+      "classSha256": "68e3166b3bf68369ef8618b685a3510cc9ebed189be74b9601d352c27d0a2741",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/horse/Horse.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.horse.Horse",
+        "net.minecraft.world.entity.animal.horse.AbstractHorse",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "484163899530f759cd34daa270d84c00a2e6234dc2d51287408a0283ea594b03",
+      "declaredAiMethods": [],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.horse.Llama",
+      "superclass": "net.minecraft.world.entity.animal.horse.AbstractChestedHorse",
+      "classSha256": "ef4d72099c1b3884572106b63f66a13e3d7a22597d4bad32d507013c142c5eb1",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/horse/Llama.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.horse.Llama",
+        "net.minecraft.world.entity.animal.horse.AbstractChestedHorse",
+        "net.minecraft.world.entity.animal.horse.AbstractHorse",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "aea465894b5872689a55f24ffe49890c4970230d8e7125000658b230e480709c",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "public void performRangedAttack(net.minecraft.world.entity.LivingEntity, float);"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.BreedGoal",
+        "net.minecraft.world.entity.ai.goal.FloatGoal",
+        "net.minecraft.world.entity.ai.goal.FollowParentGoal",
+        "net.minecraft.world.entity.ai.goal.LlamaFollowCaravanGoal",
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.PanicGoal",
+        "net.minecraft.world.entity.ai.goal.RandomLookAroundGoal",
+        "net.minecraft.world.entity.ai.goal.RangedAttackGoal",
+        "net.minecraft.world.entity.ai.goal.RunAroundLikeCrazyGoal",
+        "net.minecraft.world.entity.ai.goal.TemptGoal",
+        "net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal",
+        "net.minecraft.world.entity.animal.horse.Llama$LlamaAttackWolfGoal",
+        "net.minecraft.world.entity.animal.horse.Llama$LlamaHurtByTargetGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.horse.Mule",
+      "superclass": "net.minecraft.world.entity.animal.horse.AbstractChestedHorse",
+      "classSha256": "6df0c344716b56a1046f8eff90d23c1a5117928041646d84231ca9fed483d354",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/horse/Mule.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.horse.Mule",
+        "net.minecraft.world.entity.animal.horse.AbstractChestedHorse",
+        "net.minecraft.world.entity.animal.horse.AbstractHorse",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "ad9efa99bad943487c779d9d06280f173cb02656537ed7a0b14604c99a7df731",
+      "declaredAiMethods": [],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.horse.SkeletonHorse",
+      "superclass": "net.minecraft.world.entity.animal.horse.AbstractHorse",
+      "classSha256": "44ab377086b65afca8273c5defa470002ada78658ce56b9210d3ade842862fde",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/horse/SkeletonHorse.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.horse.SkeletonHorse",
+        "net.minecraft.world.entity.animal.horse.AbstractHorse",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "603d5ad04cc424080dd277a819dd65c2a9da8e60d9e2fdf7db2b0a6a074bcfda",
+      "declaredAiMethods": [
+        "public void aiStep();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.animal.horse.SkeletonTrapGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.horse.TraderLlama",
+      "superclass": "net.minecraft.world.entity.animal.horse.Llama",
+      "classSha256": "d9418691944feeef207439a0a6eff209355a13318f8d25b4ba033798b21214e5",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/horse/TraderLlama.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.horse.TraderLlama",
+        "net.minecraft.world.entity.animal.horse.Llama",
+        "net.minecraft.world.entity.animal.horse.AbstractChestedHorse",
+        "net.minecraft.world.entity.animal.horse.AbstractHorse",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "40c55cc26611719bf2a35446187a9a41d84817f7f55c3475850694cd9d9d8e9a",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "public void aiStep();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.PanicGoal",
+        "net.minecraft.world.entity.animal.horse.TraderLlama$TraderLlamaDefendWanderingTraderGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.horse.ZombieHorse",
+      "superclass": "net.minecraft.world.entity.animal.horse.AbstractHorse",
+      "classSha256": "7885500428e67887721c5f7bf7ae07b58a2d575f6a6bb57ddb1e8eae6cd510e7",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/horse/ZombieHorse.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.horse.ZombieHorse",
+        "net.minecraft.world.entity.animal.horse.AbstractHorse",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "89fef09962107684b64b784ef6b8bbb654d397cce3edbc5ea0ae0c6773f68cc7",
+      "declaredAiMethods": [],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.animal.sniffer.Sniffer",
+      "superclass": "net.minecraft.world.entity.animal.Animal",
+      "classSha256": "357c742cb7061cab427e140e2be1312b3736bcbc198e01799b7d4403b3770ec0",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/animal/sniffer/Sniffer.class",
+      "inheritance": [
+        "net.minecraft.world.entity.animal.sniffer.Sniffer",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "35fc9b2bc82b7f10f57eabd89d4d75058d7b2d7476031d8e36abd8ef5f3b8030",
+      "declaredAiMethods": [
+        "protected net.minecraft.world.entity.ai.Brain<?> makeBrain(com.mojang.serialization.Dynamic<?>);",
+        "public net.minecraft.world.entity.ai.Brain<net.minecraft.world.entity.animal.sniffer.Sniffer> getBrain();",
+        "protected net.minecraft.world.entity.ai.Brain$Provider<net.minecraft.world.entity.animal.sniffer.Sniffer> brainProvider();",
+        "protected void customServerAiStep();"
+      ],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.boss.enderdragon.EnderDragon",
+      "superclass": "net.minecraft.world.entity.Mob",
+      "classSha256": "89b8923d1ce8d081d90973f1c304b138510659a0443ffdb48f19f4de596e0a0e",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/boss/enderdragon/EnderDragon.class",
+      "inheritance": [
+        "net.minecraft.world.entity.boss.enderdragon.EnderDragon",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "91d7db3f975d2a0863656dc13e79eeb8fa55bdc11659a9b5b473e2c721f669fe",
+      "declaredAiMethods": [
+        "public void aiStep();"
+      ],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.boss.wither.WitherBoss",
+      "superclass": "net.minecraft.world.entity.monster.Monster",
+      "classSha256": "7420fe7c5877cc587d60e5dc35d3409be1de0daf29c77a8e5a924721e13e6b76",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/boss/wither/WitherBoss.class",
+      "inheritance": [
+        "net.minecraft.world.entity.boss.wither.WitherBoss",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "2d242c712bee326a274e41ac3a5d7d711ec3980dc96f20ad38a301e7c75f9136",
+      "declaredAiMethods": [
+        "protected net.minecraft.world.entity.ai.navigation.PathNavigation createNavigation(net.minecraft.world.level.Level);",
+        "protected void registerGoals();",
+        "public void aiStep();",
+        "protected void customServerAiStep();",
+        "private void performRangedAttack(int, net.minecraft.world.entity.LivingEntity);",
+        "private void performRangedAttack(int, double, double, double, boolean);",
+        "public void performRangedAttack(net.minecraft.world.entity.LivingEntity, float);"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.RandomLookAroundGoal",
+        "net.minecraft.world.entity.ai.goal.RangedAttackGoal",
+        "net.minecraft.world.entity.ai.goal.WaterAvoidingRandomFlyingGoal",
+        "net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal",
+        "net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal",
+        "net.minecraft.world.entity.boss.wither.WitherBoss$WitherDoNothingGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.AbstractIllager",
+      "superclass": "net.minecraft.world.entity.raid.Raider",
+      "classSha256": "445731b16fb7971cd506a0227afa5975ddf5401bb24d6255ae20e9e13d7b9181",
+      "abstract": true,
+      "entry": "net/minecraft/world/entity/monster/AbstractIllager.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.AbstractIllager",
+        "net.minecraft.world.entity.raid.Raider",
+        "net.minecraft.world.entity.monster.PatrollingMonster",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "5d4289e2707da89fb183b1896771d6360303380a7e3ce91b42430290eddd425d",
+      "declaredAiMethods": [
+        "protected void registerGoals();"
+      ],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.AbstractSkeleton",
+      "superclass": "net.minecraft.world.entity.monster.Monster",
+      "classSha256": "c4acbf62ba16703480262fff6c979e46c526d6ed6063e13110eedd937573e441",
+      "abstract": true,
+      "entry": "net/minecraft/world/entity/monster/AbstractSkeleton.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.AbstractSkeleton",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "bf4f1a88cfaabe8550f0221c46d0aad576974c60d5eb99b7e294b18ec8c61d89",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "public void aiStep();",
+        "public void performRangedAttack(net.minecraft.world.entity.LivingEntity, float);"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.AvoidEntityGoal",
+        "net.minecraft.world.entity.ai.goal.FleeSunGoal",
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.RandomLookAroundGoal",
+        "net.minecraft.world.entity.ai.goal.RangedBowAttackGoal",
+        "net.minecraft.world.entity.ai.goal.RestrictSunGoal",
+        "net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal",
+        "net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal",
+        "net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.Blaze",
+      "superclass": "net.minecraft.world.entity.monster.Monster",
+      "classSha256": "a2face905bea2180a5007ba3e3e901aa8b504c9b01ab135848c283fb6077e13c",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/Blaze.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.Blaze",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "907e09314669589fe426c397577e972b2cb3e5a55350f15b32f27dec943b2076",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "public void aiStep();",
+        "protected void customServerAiStep();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.MoveTowardsRestrictionGoal",
+        "net.minecraft.world.entity.ai.goal.RandomLookAroundGoal",
+        "net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal",
+        "net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal",
+        "net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal",
+        "net.minecraft.world.entity.monster.Blaze$BlazeAttackGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.CaveSpider",
+      "superclass": "net.minecraft.world.entity.monster.Spider",
+      "classSha256": "ec3d7e0b4db6da0f22d55a2693ff87df81f255277e4d124dad6b557a36b83bd3",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/CaveSpider.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.CaveSpider",
+        "net.minecraft.world.entity.monster.Spider",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "effa4887b6fa4567086a791a73e6a30e3ddcbb77c7d9a8c6ee8aa0c36cf07f38",
+      "declaredAiMethods": [],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.Creeper",
+      "superclass": "net.minecraft.world.entity.monster.Monster",
+      "classSha256": "05118c5c485b77449b19b9b5de43d88c3b60f1bc2154b9cac85587e6a66de501",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/Creeper.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.Creeper",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "ad2f8470897060c51292e4746b57c5fefdb1bc4bdcf1a437fc6e43e843ef2614",
+      "declaredAiMethods": [
+        "protected void registerGoals();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.AvoidEntityGoal",
+        "net.minecraft.world.entity.ai.goal.FloatGoal",
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.MeleeAttackGoal",
+        "net.minecraft.world.entity.ai.goal.RandomLookAroundGoal",
+        "net.minecraft.world.entity.ai.goal.SwellGoal",
+        "net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal",
+        "net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal",
+        "net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.Drowned",
+      "superclass": "net.minecraft.world.entity.monster.Zombie",
+      "classSha256": "30bd1ba6b37030b440f7e0ac139fcea6cf501d3eb413299fbe2848793e5b981c",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/Drowned.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.Drowned",
+        "net.minecraft.world.entity.monster.Zombie",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "049894a3b7bde7dcc5012327589328cd2a3783f6222b40e6a0568fdef5e370e6",
+      "declaredAiMethods": [
+        "public void performRangedAttack(net.minecraft.world.entity.LivingEntity, float);"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.RandomStrollGoal",
+        "net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal",
+        "net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal",
+        "net.minecraft.world.entity.monster.Drowned$DrownedAttackGoal",
+        "net.minecraft.world.entity.monster.Drowned$DrownedGoToBeachGoal",
+        "net.minecraft.world.entity.monster.Drowned$DrownedGoToWaterGoal",
+        "net.minecraft.world.entity.monster.Drowned$DrownedSwimUpGoal",
+        "net.minecraft.world.entity.monster.Drowned$DrownedTridentAttackGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.ElderGuardian",
+      "superclass": "net.minecraft.world.entity.monster.Guardian",
+      "classSha256": "7afd5eadd440c9dcf2a29b3561c9fbf99d9130f99328f46021ae84d8ebbfa9c2",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/ElderGuardian.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.ElderGuardian",
+        "net.minecraft.world.entity.monster.Guardian",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "ac74ce8684d8310c343b2353b8d783b720ae25c12611609966a081bb617c2824",
+      "declaredAiMethods": [
+        "protected void customServerAiStep();"
+      ],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.EnderMan",
+      "superclass": "net.minecraft.world.entity.monster.Monster",
+      "classSha256": "816ad5449aefe2f441eb1f135350254d4ff899da2a432e41482b3a4a263b6937",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/EnderMan.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.EnderMan",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "c6a6d0e922b389a6dd230b63c379a08d2888984696357cac7c3f6d75b45e703e",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "public void aiStep();",
+        "protected void customServerAiStep();",
+        "protected boolean teleport();",
+        "private boolean teleport(double, double, double);"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.FloatGoal",
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.MeleeAttackGoal",
+        "net.minecraft.world.entity.ai.goal.RandomLookAroundGoal",
+        "net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal",
+        "net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal",
+        "net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal",
+        "net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal",
+        "net.minecraft.world.entity.monster.EnderMan$EndermanLeaveBlockGoal",
+        "net.minecraft.world.entity.monster.EnderMan$EndermanLookForPlayerGoal",
+        "net.minecraft.world.entity.monster.EnderMan$EndermanTakeBlockGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.Endermite",
+      "superclass": "net.minecraft.world.entity.monster.Monster",
+      "classSha256": "83601fa6bd1f921e1ad39ae4afc47e9a1eed4c45758c3ff3eefb09a5da6b763d",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/Endermite.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.Endermite",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "1974c8e3c713e2dd1c26a60ff5c7293cb73152196b33b0fc00fb6c1aac2f65d9",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "public void aiStep();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.ClimbOnTopOfPowderSnowGoal",
+        "net.minecraft.world.entity.ai.goal.FloatGoal",
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.MeleeAttackGoal",
+        "net.minecraft.world.entity.ai.goal.RandomLookAroundGoal",
+        "net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal",
+        "net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal",
+        "net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.Evoker",
+      "superclass": "net.minecraft.world.entity.monster.SpellcasterIllager",
+      "classSha256": "9680e418c755e8bb63778a857d68f4ab9a2d60308e2e837b270705b7fd8a026d",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/Evoker.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.Evoker",
+        "net.minecraft.world.entity.monster.SpellcasterIllager",
+        "net.minecraft.world.entity.monster.AbstractIllager",
+        "net.minecraft.world.entity.raid.Raider",
+        "net.minecraft.world.entity.monster.PatrollingMonster",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "adaa96c221fbaace2a0397978602c22cf9eeb48fb537b2f435df4a21e23c2020",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "protected void customServerAiStep();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.AvoidEntityGoal",
+        "net.minecraft.world.entity.ai.goal.FloatGoal",
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.RandomStrollGoal",
+        "net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal",
+        "net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal",
+        "net.minecraft.world.entity.monster.Evoker$EvokerAttackSpellGoal",
+        "net.minecraft.world.entity.monster.Evoker$EvokerCastingSpellGoal",
+        "net.minecraft.world.entity.monster.Evoker$EvokerSummonSpellGoal",
+        "net.minecraft.world.entity.monster.Evoker$EvokerWololoSpellGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.Ghast",
+      "superclass": "net.minecraft.world.entity.FlyingMob",
+      "classSha256": "4f0dd147478e1bff754bee8a01bea4a9ce54e873ad218f9796a1e8c8879b3a39",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/Ghast.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.Ghast",
+        "net.minecraft.world.entity.FlyingMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "1e5d234e6a2202ada94da2f6239241d323ef6a748bae967d3a570f04a47566be",
+      "declaredAiMethods": [
+        "protected void registerGoals();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal",
+        "net.minecraft.world.entity.monster.Ghast$GhastLookGoal",
+        "net.minecraft.world.entity.monster.Ghast$GhastShootFireballGoal",
+        "net.minecraft.world.entity.monster.Ghast$RandomFloatAroundGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.Giant",
+      "superclass": "net.minecraft.world.entity.monster.Monster",
+      "classSha256": "afee10388c196db754167c045efcdc555b1adaff9129db50632075171eedc8c2",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/Giant.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.Giant",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "1206f8efbe2a61a8eb14d9892df3ddde0fab5b829b8f3b722b6a015bc9efcee0",
+      "declaredAiMethods": [],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.Guardian",
+      "superclass": "net.minecraft.world.entity.monster.Monster",
+      "classSha256": "46a7e39f26d7c76e9873b4a24a56dcda9f8f4382a56f872d7fb7c6c7edae249e",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/Guardian.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.Guardian",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "7815c65c1a304aa1f9152799d9f737c717636f7b33b5ddf6b0328bd8b1f51f25",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "protected net.minecraft.world.entity.ai.navigation.PathNavigation createNavigation(net.minecraft.world.level.Level);",
+        "public void aiStep();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.MoveTowardsRestrictionGoal",
+        "net.minecraft.world.entity.ai.goal.RandomLookAroundGoal",
+        "net.minecraft.world.entity.ai.goal.RandomStrollGoal",
+        "net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal",
+        "net.minecraft.world.entity.monster.Guardian$GuardianAttackGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.Husk",
+      "superclass": "net.minecraft.world.entity.monster.Zombie",
+      "classSha256": "ac3f902166808c670f20824412e075f6ee87e46fe175cf06ba1863a30daf441c",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/Husk.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.Husk",
+        "net.minecraft.world.entity.monster.Zombie",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "13c521ff1280a839b8b2917e5ade3612321089a9a92e76ac1e0530b06e4ef5d2",
+      "declaredAiMethods": [],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.Illusioner",
+      "superclass": "net.minecraft.world.entity.monster.SpellcasterIllager",
+      "classSha256": "0c97efb4d4ee95f8e6020ad6d457f2073c5593a22fbe623a6bce68bb057126b6",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/Illusioner.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.Illusioner",
+        "net.minecraft.world.entity.monster.SpellcasterIllager",
+        "net.minecraft.world.entity.monster.AbstractIllager",
+        "net.minecraft.world.entity.raid.Raider",
+        "net.minecraft.world.entity.monster.PatrollingMonster",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "0309c76b7de59029042feb4a75d35c37cc258c478a5025a31139240012a0a621",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "public void aiStep();",
+        "public void performRangedAttack(net.minecraft.world.entity.LivingEntity, float);"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.FloatGoal",
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.RandomStrollGoal",
+        "net.minecraft.world.entity.ai.goal.RangedBowAttackGoal",
+        "net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal",
+        "net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal",
+        "net.minecraft.world.entity.monster.Illusioner$IllusionerBlindnessSpellGoal",
+        "net.minecraft.world.entity.monster.Illusioner$IllusionerMirrorSpellGoal",
+        "net.minecraft.world.entity.monster.SpellcasterIllager$SpellcasterCastingSpellGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.MagmaCube",
+      "superclass": "net.minecraft.world.entity.monster.Slime",
+      "classSha256": "a6e357c9df58a2fad968c4bb7a9f9b21b05ff4186c2b8e9de9ab5b32253d0c0c",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/MagmaCube.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.MagmaCube",
+        "net.minecraft.world.entity.monster.Slime",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "75d7586edbf7a203f35be0814da2d8d638368202e614314298bf40e7de3d65d1",
+      "declaredAiMethods": [],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.Monster",
+      "superclass": "net.minecraft.world.entity.PathfinderMob",
+      "classSha256": "7ef825718432c20eb41f444cab9051f96a94243cdcc6a279503e8fa0f2a820d0",
+      "abstract": true,
+      "entry": "net/minecraft/world/entity/monster/Monster.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "2d62e71ce25ba41a662e19f538500a5a26f8b242caca5042e6b82b24ec76f519",
+      "declaredAiMethods": [
+        "public void aiStep();"
+      ],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.PatrollingMonster",
+      "superclass": "net.minecraft.world.entity.monster.Monster",
+      "classSha256": "dc77afa984ca5cc814d51113d10c6e95a46eda29f2f75bd3cf9f50db41022e91",
+      "abstract": true,
+      "entry": "net/minecraft/world/entity/monster/PatrollingMonster.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.PatrollingMonster",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "a989193e89aa53398f7f9f7032adc5c7cbee0cd5994dd0e9595694a5bdd44057",
+      "declaredAiMethods": [
+        "protected void registerGoals();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.monster.PatrollingMonster$LongDistancePatrolGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.Phantom",
+      "superclass": "net.minecraft.world.entity.FlyingMob",
+      "classSha256": "13b2e3931ac337cb59f950de66671ab355641886da026001f1fc7a55ce06be29",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/Phantom.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.Phantom",
+        "net.minecraft.world.entity.FlyingMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "cb2b251987da3ce8914f22e145f2a5e29d944b1212b4a110a64a3f4748174043",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "public void aiStep();",
+        "protected void customServerAiStep();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.monster.Phantom$PhantomAttackPlayerTargetGoal",
+        "net.minecraft.world.entity.monster.Phantom$PhantomAttackStrategyGoal",
+        "net.minecraft.world.entity.monster.Phantom$PhantomCircleAroundAnchorGoal",
+        "net.minecraft.world.entity.monster.Phantom$PhantomSweepAttackGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.Pillager",
+      "superclass": "net.minecraft.world.entity.monster.AbstractIllager",
+      "classSha256": "75982e3aa5bd03667c5f2684b0950c8b57ff69c0c5516bfd5c3a55224f93d853",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/Pillager.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.Pillager",
+        "net.minecraft.world.entity.monster.AbstractIllager",
+        "net.minecraft.world.entity.raid.Raider",
+        "net.minecraft.world.entity.monster.PatrollingMonster",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "621a56e3bf22922b0f44a55c2016b6fee487144419bfde19b94465de745c0f9f",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "public void performRangedAttack(net.minecraft.world.entity.LivingEntity, float);"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.FloatGoal",
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.RandomStrollGoal",
+        "net.minecraft.world.entity.ai.goal.RangedCrossbowAttackGoal",
+        "net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal",
+        "net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal",
+        "net.minecraft.world.entity.raid.Raider$HoldGroundAttackGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.Ravager",
+      "superclass": "net.minecraft.world.entity.raid.Raider",
+      "classSha256": "f7343f250a5f69966fdaf4c1660e7621700540133b1ce60b64c66d3292e11a67",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/Ravager.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.Ravager",
+        "net.minecraft.world.entity.raid.Raider",
+        "net.minecraft.world.entity.monster.PatrollingMonster",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "bb184099ed1696ecb4527c336a270a8acd662d46640305e6f7cd59026c0f5240",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "public void aiStep();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.FloatGoal",
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal",
+        "net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal",
+        "net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal",
+        "net.minecraft.world.entity.monster.Ravager$RavagerMeleeAttackGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.Shulker",
+      "superclass": "net.minecraft.world.entity.animal.AbstractGolem",
+      "classSha256": "23dafac127adad0efc66c3d94e3d3d8508c4279d64de19103dc9316ae758f7a6",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/Shulker.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.Shulker",
+        "net.minecraft.world.entity.animal.AbstractGolem",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "9822fac2d85e1f6682407a64241a846da6ac79a79332ea2eec782128287c3cbb",
+      "declaredAiMethods": [
+        "protected void registerGoals();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.RandomLookAroundGoal",
+        "net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal",
+        "net.minecraft.world.entity.monster.Shulker$ShulkerAttackGoal",
+        "net.minecraft.world.entity.monster.Shulker$ShulkerDefenseAttackGoal",
+        "net.minecraft.world.entity.monster.Shulker$ShulkerNearestAttackGoal",
+        "net.minecraft.world.entity.monster.Shulker$ShulkerPeekGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.Silverfish",
+      "superclass": "net.minecraft.world.entity.monster.Monster",
+      "classSha256": "f654d05137116b5cf24e35742b1e4bdbf97c33e33f65886c3cddbddc5206df9d",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/Silverfish.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.Silverfish",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "de910b3badb4133b09064ce1dbdf584997626766dd49b625f00e6e6bbc358551",
+      "declaredAiMethods": [
+        "protected void registerGoals();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.ClimbOnTopOfPowderSnowGoal",
+        "net.minecraft.world.entity.ai.goal.FloatGoal",
+        "net.minecraft.world.entity.ai.goal.MeleeAttackGoal",
+        "net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal",
+        "net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal",
+        "net.minecraft.world.entity.monster.Silverfish$SilverfishMergeWithStoneGoal",
+        "net.minecraft.world.entity.monster.Silverfish$SilverfishWakeUpFriendsGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.Skeleton",
+      "superclass": "net.minecraft.world.entity.monster.AbstractSkeleton",
+      "classSha256": "bfcc891be1e3f2ff18cd7d20df890127db6dd72a5bfdf3228d1f358e794b8f6d",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/Skeleton.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.Skeleton",
+        "net.minecraft.world.entity.monster.AbstractSkeleton",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "d5945ae87de70643340678dc249e0ed3ee5d22f7c99f35464ec154baa6c00eff",
+      "declaredAiMethods": [],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.Slime",
+      "superclass": "net.minecraft.world.entity.Mob",
+      "classSha256": "110ed533eb3d0a3a861a389f1acd6ed9976a9382879de3931455fd436b95c715",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/Slime.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.Slime",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "018973b09961d2571dc1cabefde4b2362a40836bb57bae843986e8a9c8750ed8",
+      "declaredAiMethods": [
+        "protected void registerGoals();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal",
+        "net.minecraft.world.entity.monster.Slime$SlimeAttackGoal",
+        "net.minecraft.world.entity.monster.Slime$SlimeFloatGoal",
+        "net.minecraft.world.entity.monster.Slime$SlimeKeepOnJumpingGoal",
+        "net.minecraft.world.entity.monster.Slime$SlimeRandomDirectionGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.SpellcasterIllager",
+      "superclass": "net.minecraft.world.entity.monster.AbstractIllager",
+      "classSha256": "429c57dd10dce29a1d58d7d7700c37b6a1731018605c57af76aa1670f8e26b35",
+      "abstract": true,
+      "entry": "net/minecraft/world/entity/monster/SpellcasterIllager.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.SpellcasterIllager",
+        "net.minecraft.world.entity.monster.AbstractIllager",
+        "net.minecraft.world.entity.raid.Raider",
+        "net.minecraft.world.entity.monster.PatrollingMonster",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "cadb29f21c4c88dbce32d71a03c50e08aac4518bd143ce50c470c38d39e17910",
+      "declaredAiMethods": [
+        "protected void customServerAiStep();"
+      ],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.Spider",
+      "superclass": "net.minecraft.world.entity.monster.Monster",
+      "classSha256": "e164fd90e7d11193e6d43bf81ed540df2f6301d712485e347306bc94aaa5850b",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/Spider.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.Spider",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "d8c18bfea7b88fd6f6ac4404d0e19abe9555e4f5016b37a1907af466b7543729",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "protected net.minecraft.world.entity.ai.navigation.PathNavigation createNavigation(net.minecraft.world.level.Level);"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.FloatGoal",
+        "net.minecraft.world.entity.ai.goal.LeapAtTargetGoal",
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.RandomLookAroundGoal",
+        "net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal",
+        "net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal",
+        "net.minecraft.world.entity.monster.Spider$SpiderAttackGoal",
+        "net.minecraft.world.entity.monster.Spider$SpiderTargetGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.Stray",
+      "superclass": "net.minecraft.world.entity.monster.AbstractSkeleton",
+      "classSha256": "fe3ab85dc394591ad28c1e61cfe93a3c7b1cd7ee76128f9c5f559cb203315f01",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/Stray.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.Stray",
+        "net.minecraft.world.entity.monster.AbstractSkeleton",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "ac997bcb099cd6b7dad7992d733f9544925ebde5d3a4b3d0d371ebd6f6136d3e",
+      "declaredAiMethods": [],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.Strider",
+      "superclass": "net.minecraft.world.entity.animal.Animal",
+      "classSha256": "9afccd1050861b958361e1c9715ed34031b19ce9981df53fd16f4bfdee88357d",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/Strider.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.Strider",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "cdcba4a3722d4f74ee6a87ce0882e37d1d19d056048cf5a78eef777565320b85",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "protected net.minecraft.world.entity.ai.navigation.PathNavigation createNavigation(net.minecraft.world.level.Level);"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.BreedGoal",
+        "net.minecraft.world.entity.ai.goal.FollowParentGoal",
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.PanicGoal",
+        "net.minecraft.world.entity.ai.goal.RandomLookAroundGoal",
+        "net.minecraft.world.entity.ai.goal.RandomStrollGoal",
+        "net.minecraft.world.entity.ai.goal.TemptGoal",
+        "net.minecraft.world.entity.monster.Strider$StriderGoToLavaGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.Vex",
+      "superclass": "net.minecraft.world.entity.monster.Monster",
+      "classSha256": "13572a1df8574e0d65bbe9c5f037728365bc582456e41dfb74e43996ec756eb6",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/Vex.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.Vex",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "220af92f18664191af17ccd7924fcf349177b9c15185b3865b541114c5eac23f",
+      "declaredAiMethods": [
+        "protected void registerGoals();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.FloatGoal",
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal",
+        "net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal",
+        "net.minecraft.world.entity.monster.Vex$VexChargeAttackGoal",
+        "net.minecraft.world.entity.monster.Vex$VexCopyOwnerTargetGoal",
+        "net.minecraft.world.entity.monster.Vex$VexRandomMoveGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.Vindicator",
+      "superclass": "net.minecraft.world.entity.monster.AbstractIllager",
+      "classSha256": "acac8e4f463ce02d3da2caa80162778c9e3e4ac4de7927fae183e3d68a930490",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/Vindicator.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.Vindicator",
+        "net.minecraft.world.entity.monster.AbstractIllager",
+        "net.minecraft.world.entity.raid.Raider",
+        "net.minecraft.world.entity.monster.PatrollingMonster",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "1bfd9dba9c3b912e846b558827b4071806f8d52dd23bf121808e251ba62627be",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "protected void customServerAiStep();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.FloatGoal",
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.RandomStrollGoal",
+        "net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal",
+        "net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal",
+        "net.minecraft.world.entity.monster.AbstractIllager$RaiderOpenDoorGoal",
+        "net.minecraft.world.entity.monster.Vindicator$VindicatorBreakDoorGoal",
+        "net.minecraft.world.entity.monster.Vindicator$VindicatorJohnnyAttackGoal",
+        "net.minecraft.world.entity.monster.Vindicator$VindicatorMeleeAttackGoal",
+        "net.minecraft.world.entity.raid.Raider$HoldGroundAttackGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.Witch",
+      "superclass": "net.minecraft.world.entity.raid.Raider",
+      "classSha256": "d56901e4074020cd8bed2c5db9521a4c5c9df0099ea9139a5ec3fc42258b6bfc",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/Witch.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.Witch",
+        "net.minecraft.world.entity.raid.Raider",
+        "net.minecraft.world.entity.monster.PatrollingMonster",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "1739618d197f13c860826dcc5f0cef2191ce810664dcf71bd6a5434a8312234a",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "public void aiStep();",
+        "public void performRangedAttack(net.minecraft.world.entity.LivingEntity, float);"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.FloatGoal",
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.RandomLookAroundGoal",
+        "net.minecraft.world.entity.ai.goal.RangedAttackGoal",
+        "net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal",
+        "net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal",
+        "net.minecraft.world.entity.ai.goal.target.NearestAttackableWitchTargetGoal",
+        "net.minecraft.world.entity.ai.goal.target.NearestHealableRaiderTargetGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.WitherSkeleton",
+      "superclass": "net.minecraft.world.entity.monster.AbstractSkeleton",
+      "classSha256": "db97f39ad3f5c2e8826eabf72eab2e60d07c6de8ad5cb8591181490d3e79185f",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/WitherSkeleton.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.WitherSkeleton",
+        "net.minecraft.world.entity.monster.AbstractSkeleton",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "9156a3db192d17998ea6ebdb427feec5b586051a0b5d8b90081903772451b0b6",
+      "declaredAiMethods": [
+        "protected void registerGoals();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.Zoglin",
+      "superclass": "net.minecraft.world.entity.monster.Monster",
+      "classSha256": "5d090073932f172ff0412e6c7bd6bf6bfa59d5c92b804733fe61865b6de80bc3",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/Zoglin.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.Zoglin",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "2ef601228f66c7b57815d258195bdc16b3499d11d6eed4cc35a81328b46da413",
+      "declaredAiMethods": [
+        "protected net.minecraft.world.entity.ai.Brain$Provider<net.minecraft.world.entity.monster.Zoglin> brainProvider();",
+        "protected net.minecraft.world.entity.ai.Brain<?> makeBrain(com.mojang.serialization.Dynamic<?>);",
+        "public net.minecraft.world.entity.ai.Brain<net.minecraft.world.entity.monster.Zoglin> getBrain();",
+        "protected void customServerAiStep();",
+        "public void aiStep();"
+      ],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.Zombie",
+      "superclass": "net.minecraft.world.entity.monster.Monster",
+      "classSha256": "0bec0512ec13bf0e1938ce5e63722e65bceeb6ad71058aa94ea279466c4b29e0",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/Zombie.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.Zombie",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "df3f0b9040f34066c635b6d799ff6844584bf16cfbd3e598185f43f779ff62da",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "public void aiStep();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.BreakDoorGoal",
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.MoveThroughVillageGoal",
+        "net.minecraft.world.entity.ai.goal.RandomLookAroundGoal",
+        "net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal",
+        "net.minecraft.world.entity.ai.goal.ZombieAttackGoal",
+        "net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal",
+        "net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal",
+        "net.minecraft.world.entity.monster.Zombie$ZombieAttackTurtleEggGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.ZombieVillager",
+      "superclass": "net.minecraft.world.entity.monster.Zombie",
+      "classSha256": "ef8c37f4e2dd581406986fb31249dad6f8cd2996464e9e4dceb0acae02187660",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/ZombieVillager.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.ZombieVillager",
+        "net.minecraft.world.entity.monster.Zombie",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "c143ed5ec98c623a65c9c726b15bdb4ea2f9fbd44cf8db8e8bff11a0c31a49f7",
+      "declaredAiMethods": [],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.ZombifiedPiglin",
+      "superclass": "net.minecraft.world.entity.monster.Zombie",
+      "classSha256": "7eb86c84e8c8539027d119dc2bdc21b664e91ba0100f24ddf483433ccc375722",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/ZombifiedPiglin.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.ZombifiedPiglin",
+        "net.minecraft.world.entity.monster.Zombie",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "2a669654c09ad61726dbfabdb34e17b49369df85f95185b48e2091b18c1f9819",
+      "declaredAiMethods": [
+        "protected void customServerAiStep();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal",
+        "net.minecraft.world.entity.ai.goal.ZombieAttackGoal",
+        "net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal",
+        "net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal",
+        "net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.hoglin.Hoglin",
+      "superclass": "net.minecraft.world.entity.animal.Animal",
+      "classSha256": "a1348dd2fb52f5fe0c36907617d03f1bf4bb03f47c765451655f69c777d59148",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/hoglin/Hoglin.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.hoglin.Hoglin",
+        "net.minecraft.world.entity.animal.Animal",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "8bef390d9dc2445c78baa44d9fad7825e4cfa88e23b6b0edc38b82bd7f5069e6",
+      "declaredAiMethods": [
+        "protected net.minecraft.world.entity.ai.Brain$Provider<net.minecraft.world.entity.monster.hoglin.Hoglin> brainProvider();",
+        "protected net.minecraft.world.entity.ai.Brain<?> makeBrain(com.mojang.serialization.Dynamic<?>);",
+        "public net.minecraft.world.entity.ai.Brain<net.minecraft.world.entity.monster.hoglin.Hoglin> getBrain();",
+        "protected void customServerAiStep();",
+        "public void aiStep();"
+      ],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.piglin.AbstractPiglin",
+      "superclass": "net.minecraft.world.entity.monster.Monster",
+      "classSha256": "38022ff5bfef4b3142f799a8cc5b5375193808a9b22880dfab4339a1f8595ef7",
+      "abstract": true,
+      "entry": "net/minecraft/world/entity/monster/piglin/AbstractPiglin.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.piglin.AbstractPiglin",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "d9b8911c2dfd72994adb136c11f6c4637e9ef404fd3e3dd704af9f1a9eee8990",
+      "declaredAiMethods": [
+        "protected void customServerAiStep();"
+      ],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.piglin.Piglin",
+      "superclass": "net.minecraft.world.entity.monster.piglin.AbstractPiglin",
+      "classSha256": "556c45802151170ea4ef60c482b0063a924c4eaf68f9ef95e2a52475733474e7",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/piglin/Piglin.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.piglin.Piglin",
+        "net.minecraft.world.entity.monster.piglin.AbstractPiglin",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "7ee6abe7616f2e1396502ef61ed053a5882ff4f92ba21c37b3be006d41dab7cb",
+      "declaredAiMethods": [
+        "protected net.minecraft.world.entity.ai.Brain$Provider<net.minecraft.world.entity.monster.piglin.Piglin> brainProvider();",
+        "protected net.minecraft.world.entity.ai.Brain<?> makeBrain(com.mojang.serialization.Dynamic<?>);",
+        "public net.minecraft.world.entity.ai.Brain<net.minecraft.world.entity.monster.piglin.Piglin> getBrain();",
+        "protected void customServerAiStep();",
+        "public void performRangedAttack(net.minecraft.world.entity.LivingEntity, float);"
+      ],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.piglin.PiglinBrute",
+      "superclass": "net.minecraft.world.entity.monster.piglin.AbstractPiglin",
+      "classSha256": "8aa96c8e368d4729913c749f115636fe034c57d2f771b8b1127142def6e31a27",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/piglin/PiglinBrute.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.piglin.PiglinBrute",
+        "net.minecraft.world.entity.monster.piglin.AbstractPiglin",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "6d90a3d53b56ad0eb53d31b75f93fd5d0a1e7f1eb5c904e6463c3af7a876f33f",
+      "declaredAiMethods": [
+        "protected net.minecraft.world.entity.ai.Brain$Provider<net.minecraft.world.entity.monster.piglin.PiglinBrute> brainProvider();",
+        "protected net.minecraft.world.entity.ai.Brain<?> makeBrain(com.mojang.serialization.Dynamic<?>);",
+        "public net.minecraft.world.entity.ai.Brain<net.minecraft.world.entity.monster.piglin.PiglinBrute> getBrain();",
+        "protected void customServerAiStep();"
+      ],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.monster.warden.Warden",
+      "superclass": "net.minecraft.world.entity.monster.Monster",
+      "classSha256": "7a3d931bb0f9e57ed5678c2e775687300b34b9a626325eeb5962cc6b2da28838",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/monster/warden/Warden.class",
+      "inheritance": [
+        "net.minecraft.world.entity.monster.warden.Warden",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "32434b7394a67498891819f5111291639add7497541f53dd379c1ea2344be23c",
+      "declaredAiMethods": [
+        "protected void customServerAiStep();",
+        "protected net.minecraft.world.entity.ai.Brain<?> makeBrain(com.mojang.serialization.Dynamic<?>);",
+        "public net.minecraft.world.entity.ai.Brain<net.minecraft.world.entity.monster.warden.Warden> getBrain();",
+        "protected net.minecraft.world.entity.ai.navigation.PathNavigation createNavigation(net.minecraft.world.level.Level);"
+      ],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.npc.AbstractVillager",
+      "superclass": "net.minecraft.world.entity.AgeableMob",
+      "classSha256": "e61ccd72cdb5c88d710bcdf919058027490d1b15b20578204ff6d7de91be0119",
+      "abstract": true,
+      "entry": "net/minecraft/world/entity/npc/AbstractVillager.class",
+      "inheritance": [
+        "net.minecraft.world.entity.npc.AbstractVillager",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "ac304e3ae5d2dbe9352c26a332df4a8bac38de2ff3bc2b59ba438a982cb90ae4",
+      "declaredAiMethods": [],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.npc.Villager",
+      "superclass": "net.minecraft.world.entity.npc.AbstractVillager",
+      "classSha256": "81de732fa9dca114773d785844f6e3f4d5b7a5e05762c79e86ee9e7ada191d63",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/npc/Villager.class",
+      "inheritance": [
+        "net.minecraft.world.entity.npc.Villager",
+        "net.minecraft.world.entity.npc.AbstractVillager",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "7104bdbbe56f8d97fe9c934b30a2b93b6f55a59236181cebe970b2a375c09cdc",
+      "declaredAiMethods": [
+        "public net.minecraft.world.entity.ai.Brain<net.minecraft.world.entity.npc.Villager> getBrain();",
+        "protected net.minecraft.world.entity.ai.Brain$Provider<net.minecraft.world.entity.npc.Villager> brainProvider();",
+        "protected net.minecraft.world.entity.ai.Brain<?> makeBrain(com.mojang.serialization.Dynamic<?>);",
+        "protected void customServerAiStep();"
+      ],
+      "constructedGoalClasses": [],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.npc.WanderingTrader",
+      "superclass": "net.minecraft.world.entity.npc.AbstractVillager",
+      "classSha256": "a90a87f6da33ce03f85f99aa34a16e834e655c6ecbac6c5ad7611515f98a9a36",
+      "abstract": false,
+      "entry": "net/minecraft/world/entity/npc/WanderingTrader.class",
+      "inheritance": [
+        "net.minecraft.world.entity.npc.WanderingTrader",
+        "net.minecraft.world.entity.npc.AbstractVillager",
+        "net.minecraft.world.entity.AgeableMob",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "ea70138994ac219077327f771c04ba500ac69ab868594a9693731327505d00fe",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "public void aiStep();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.AvoidEntityGoal",
+        "net.minecraft.world.entity.ai.goal.FloatGoal",
+        "net.minecraft.world.entity.ai.goal.InteractGoal",
+        "net.minecraft.world.entity.ai.goal.LookAtPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.LookAtTradingPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.MoveTowardsRestrictionGoal",
+        "net.minecraft.world.entity.ai.goal.PanicGoal",
+        "net.minecraft.world.entity.ai.goal.TradeWithPlayerGoal",
+        "net.minecraft.world.entity.ai.goal.UseItemGoal",
+        "net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal",
+        "net.minecraft.world.entity.npc.WanderingTrader$WanderToPositionGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    },
+    {
+      "class": "net.minecraft.world.entity.raid.Raider",
+      "superclass": "net.minecraft.world.entity.monster.PatrollingMonster",
+      "classSha256": "a57dd8b15796e7ee90b7f0a295890a17c512f9f9018a6587ee2be57bace96b06",
+      "abstract": true,
+      "entry": "net/minecraft/world/entity/raid/Raider.class",
+      "inheritance": [
+        "net.minecraft.world.entity.raid.Raider",
+        "net.minecraft.world.entity.monster.PatrollingMonster",
+        "net.minecraft.world.entity.monster.Monster",
+        "net.minecraft.world.entity.PathfinderMob",
+        "net.minecraft.world.entity.Mob"
+      ],
+      "bytecodeSha256": "0f3539f6261de3776dfd940349c314e24498d8ec82a5ae0c4dd30cce023f8872",
+      "declaredAiMethods": [
+        "protected void registerGoals();",
+        "public void aiStep();"
+      ],
+      "constructedGoalClasses": [
+        "net.minecraft.world.entity.ai.goal.PathfindToRaidGoal",
+        "net.minecraft.world.entity.raid.Raider$ObtainRaidLeaderBannerGoal",
+        "net.minecraft.world.entity.raid.Raider$RaiderMoveThroughVillageGoal"
+      ],
+      "semanticStatus": "STATIC_INVENTORY_REQUIRES_PER_ALGORITHM_REVIEW"
+    }
+  ]
+}

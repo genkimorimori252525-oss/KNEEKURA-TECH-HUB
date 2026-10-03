@@ -27,6 +27,27 @@ public final class KneekuraDebugMotionTraceCacheSelfTest {
   var absent=row(105,0,"obs:absent");absent.addProperty("lane","SERVER_TARGET_TRACKED");absent.getAsJsonObject("payload").addProperty("tracked",false);
   cache.acceptFlushed(absent);cache.acceptFlushed(row(110,1,"obs:b"));
   require(cache.snapshot().segments().isEmpty()&&cache.snapshot().gaps().get(0).kind().equals("MISSING_SELECTED_ENTITY"),"explicit absent target breaks a short gap");
+  cache.clear();cache.select(context(1));var start=row(100,0,"obs:start");
+  start.addProperty("writerId","server");start.addProperty("writerSeq",100);cache.acceptFlushed(start);
+  var teleport=row(103,100,"obs:teleport");teleport.addProperty("lane","AI_DECISION");
+  teleport.addProperty("writerId","server");teleport.addProperty("writerSeq",101);
+  var payload=JsonParser.parseString("{\"schema\":\"kneekura.original-decision-event/v1\",\"semantics\":\"ORIGINAL_INVOCATION_RETURN_ONLY\",\"targetRevision\":1,\"burstId\":\"burst:1:100\",\"eventIndex\":1,\"kind\":\"CONTROL_TELEPORT_RETURN\",\"observerCostNanos\":10,\"observerCostScope\":\"BUILD_AND_FIRST_BYTE_CHECK_EXCLUDES_FINAL_ENCODING_WRITER\",\"data\":{\"result\":true,\"requestedPosition\":{\"x\":1,\"y\":64,\"z\":0},\"returnedPosition\":{\"x\":1,\"y\":64,\"z\":0},\"dispatchScope\":\"BASE_RANDOM_TELEPORT_RETURN\",\"reasonStatus\":\"NOT_EXPOSED\"}}").getAsJsonObject();
+  teleport.add("payload",payload);cache.acceptFlushed(teleport);cache.acceptFlushed(row(105,1,"obs:end"));
+  require(cache.snapshot().samples().size()==2&&cache.snapshot().segments().isEmpty(),"Original return is a break, never a position sample");
+  require(cache.snapshot().gaps().get(0).kind().equals("EXPLICIT_TELEPORT")&&cache.snapshot().gaps().get(0).sourceId().equals("obs:teleport"),"Typed native gap cites original source");
+  for(String mode:new String[]{"FALSE","MALFORMED","STALE_TICK","WRONG_REVISION","UNKNOWN_SAME_TICK_ORDER","EMPTY_SAME_TICK_ORDER"}){
+   cache.clear();cache.select(context(1));var initial=start.deepCopy();
+   if(mode.equals("EMPTY_SAME_TICK_ORDER"))initial.addProperty("writerId","");
+   cache.acceptFlushed(initial);var event=teleport.deepCopy();
+   if(mode.equals("FALSE"))event.getAsJsonObject("payload").getAsJsonObject("data").addProperty("result",false);
+   if(mode.equals("MALFORMED"))event.getAsJsonObject("payload").getAsJsonObject("data").addProperty("result","true");
+   if(mode.equals("STALE_TICK"))event.addProperty("gameTime",99);
+   if(mode.equals("WRONG_REVISION"))event.getAsJsonObject("payload").addProperty("targetRevision",2);
+   if(mode.equals("UNKNOWN_SAME_TICK_ORDER")){event.addProperty("gameTime",100);event.remove("writerId");}
+   if(mode.equals("EMPTY_SAME_TICK_ORDER")){event.addProperty("gameTime",100);event.addProperty("writerId","");}
+   cache.acceptFlushed(event);cache.acceptFlushed(row(105,1,"obs:end"));
+   require(cache.snapshot().segments().size()==1,"No successful typed break for "+mode);
+  }
   System.out.println("Retained native Motion cache boundaries/source/gaps/128-sample cap passed");
  }
 }

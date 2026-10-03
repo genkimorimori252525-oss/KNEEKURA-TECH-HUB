@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {buildRetainedDecisionPresentation} from '../decision-presentation.mjs';
+import {validOriginalDecisionEvent} from '../original-decision-events.mjs';
 import {
   observeDebugWorkspaceDecision,
   buildDebugWorkspaceMotionTrace,
@@ -60,6 +61,65 @@ function original(kind,data,index=1) {
     kind,data,observerCostNanos:100,observerCostScope:'BUILD_AND_FIRST_BYTE_CHECK_EXCLUDES_FINAL_ENCODING_WRITER'},
     {source:{side:'SERVER',method:'fixture'}});
 }
+function teleportReturn(result,tick=103) {
+  const record=original('CONTROL_TELEPORT_RETURN',{result,
+    requestedPosition:{x:2,y:64,z:2},returnedPosition:{x:result?2:1,y:64,z:2},
+    dispatchScope:'BASE_RANDOM_TELEPORT_RETURN',reasonStatus:'NOT_EXPOSED'});
+  record.gameTime=tick;record.writerSeq=tick;record.observationId='obs:teleport:'+tick;
+  return record;
+}
+function teleportRows(event) {
+  return [obs('SERVER_ENTITY_STATE',100,{targetRevision:1,dimension:'minecraft:overworld',x:1,y:64,z:2}),
+    event,obs('SERVER_ENTITY_STATE',105,{targetRevision:1,dimension:'minecraft:overworld',x:2,y:64,z:2})];
+}
+test('actual successful original teleport return is a result and typed gap without a fabricated sample',()=>{
+  const event=teleportReturn(true),records=teleportRows(event),before=structuredClone(records);
+  assert.equal(validOriginalDecisionEvent(event),true);
+  const decision=observeDebugWorkspaceDecision({observations:records,subjectUuid:UUID});
+  assert.equal(decision.stages.RESULT.facts[0].key,'control_teleport_return');
+  assert.equal(decision.stages.RESULT.facts[0].value.result,true);
+  assert.equal(decision.stages.RESULT.facts[0].epistemic_status,'DIRECT_OBSERVED');
+  assert.deepEqual(decision.stages.RESULT.facts[0].source_observation_ids,[event.observationId]);
+  const trace=buildDebugWorkspaceMotionTrace({observations:records,subjectUuid:UUID});
+  assert.equal(trace.samples.length,2);assert.equal(trace.segments.length,0);
+  assert.equal(trace.gaps[0].kind,'EXPLICIT_TELEPORT');
+  assert.equal(trace.gaps[0].source_observation_id,event.observationId);
+  assert.deepEqual(records,before);
+});
+test('failed or malformed teleport attempts do not become successful trace discontinuities',()=>{
+  const failed=teleportReturn(false);
+  assert.equal(validOriginalDecisionEvent(failed),true);
+  assert.equal(observeDebugWorkspaceDecision({observations:[failed],subjectUuid:UUID}).stages.RESULT.facts[0].value.result,false);
+  assert.equal(buildDebugWorkspaceMotionTrace({observations:teleportRows(failed),subjectUuid:UUID}).segments.length,1);
+  for(const corrupt of [d=>d.result='true',d=>delete d.returnedPosition.z,d=>d.requestedPosition.x=Infinity,
+    d=>d.dispatchScope='FORGE_PRE_TELEPORT_EVENT',d=>d.reasonStatus='INFERRED']){
+    const malformed=teleportReturn(true);corrupt(malformed.payload.data);
+    assert.equal(validOriginalDecisionEvent(malformed),false);
+    assert.equal(buildDebugWorkspaceMotionTrace({observations:teleportRows(malformed),subjectUuid:UUID}).segments.length,1);
+  }
+});
+test('same-tick teleport is assigned only across points with explicit writer ordering',()=>{
+  const event=teleportReturn(true,100);event.writerSeq=101;
+  assert.equal(buildDebugWorkspaceMotionTrace({observations:teleportRows(event),subjectUuid:UUID}).gaps[0]?.kind,'EXPLICIT_TELEPORT');
+  event.writerSeq=99;
+  assert.equal(buildDebugWorkspaceMotionTrace({observations:teleportRows(event),subjectUuid:UUID}).segments.length,1);
+  event.gameTime=105;event.writerSeq=104;
+  assert.equal(buildDebugWorkspaceMotionTrace({observations:teleportRows(event),subjectUuid:UUID}).gaps[0]?.kind,'EXPLICIT_TELEPORT');
+  event.writerSeq=106;
+  assert.equal(buildDebugWorkspaceMotionTrace({observations:teleportRows(event),subjectUuid:UUID}).segments.length,1);
+  event.writerSeq=104;event.writerId='different-server-writer';
+  assert.equal(buildDebugWorkspaceMotionTrace({observations:teleportRows(event),subjectUuid:UUID}).segments.length,1);
+  const unknownOrder=teleportRows(event);for(const r of unknownOrder)delete r.writerId;
+  assert.equal(buildDebugWorkspaceMotionTrace({observations:unknownOrder,subjectUuid:UUID}).segments.length,1);
+});
+test('teleport records keep selected subject and run/revision identity fences',()=>{
+  const other=teleportReturn(true);other.scope.entityUuid='another-mob';
+  assert.equal(buildDebugWorkspaceMotionTrace({observations:teleportRows(other),subjectUuid:UUID}).segments.length,1);
+  const mixed=teleportReturn(true);mixed.runId='another-run';
+  assert.throws(()=>buildDebugWorkspaceMotionTrace({observations:teleportRows(mixed),subjectUuid:UUID}),/CONTEXT_CHANGED/);
+  mixed.runId='run-a';mixed.payload.targetRevision=2;
+  assert.throws(()=>buildDebugWorkspaceMotionTrace({observations:teleportRows(mixed),subjectUuid:UUID}),/SELECTION_CHANGED/);
+});
 const goalReturn=()=>original('GOAL_ELIGIBILITY_RETURN',{selector:'goal',instanceIdentity:'goal:1:1',
   instanceIdentityStatus:'AVAILABLE',goalClass:'ExampleGoal',priority:2,result:false,
   rejectionReasonStatus:'NOT_EXPOSED',callSiteStatus:'NOT_EXPOSED'});

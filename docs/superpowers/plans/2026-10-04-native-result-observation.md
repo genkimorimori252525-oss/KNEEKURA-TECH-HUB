@@ -1,0 +1,78 @@
+# Native result observation implementation plan
+
+> **For agentic workers:** Use `superpowers:executing-plans` inline. This continues the user's already approved local execution architecture and standing authorization; keep the full original goal active until its remaining requirements are met.
+
+**Goal:** Close missing result-observation channels and retain integrated native scenarios without promoting attempts, cancelled events or fixture state to successful gameplay results.
+
+**Architecture:** Extend existing bounded `KneekuraDebugDecisionHooks.Session`, immutable evidence adapters and shared `SampledMotionTrace`. Use original-return callbacks and selected context; retain separate related-projectile identities only after exact source semantics and finite retention are established. No new observation database or gameplay visualization objects.
+
+**Tech Stack:** Minecraft 1.20.1, Forge 47.2.0, Java 17, existing Node ESM consumers/tests.
+
+**Spec:** `departments/minecraft/LOCAL-EXECUTION-HANDOFF-2026-10-02.md`; `departments/minecraft/vanilla-ai/REMAINING-EXECUTION-MATRIX-2026-10-04.md`; exact result research in `NATIVE-RESULT-HOOK-RESEARCH-2026-10-04.md`.
+
+## Global constraints
+
+- Baseline `1291b5e562982c851c8ce3d5c713ab87fd0a6056`, existing isolated `codex/minecraft-decision-native-20261003`, canonical LAB subtree only.
+- Existing burst maximum 200 ticks /256 events /512 KiB and exact session/run/snapshot/process/Arena/UUID/selection-generation fences remain authoritative.
+- Observation is OFF unless selected and explicitly armed. Never replay AI/search/eligibility or modify its budget/order.
+- Original world and unrelated checkouts remain read-only; new private data is on C: due limited K: capacity. Native source freezes until clean stop.
+- Preserve Draft, private evidence, missing channels and all original remaining requirements. No full-project completion from one slice.
+
+## Review focus
+
+1. False, cancelled or custom-overridden teleport must not create an explicit successful-teleport gap.
+2. Callback in another selection revision/run/Arena must not split this subject's trace or enter its Decision result.
+3. Multiple original callbacks within one sample interval, or callback at a sample tick, must retain evidence without creating duplicate/fabricated samples.
+4. Projectile impact/hurt return/health loss are distinct; shielding, absorption, piercing and subclass dispatch must not become a false damage outcome.
+5. Observer callbacks must remain finite/no replay even on sink failure, expired context, thread mismatch or identity retention limits.
+
+## Task 1 — Original teleport return producer and typed consumer
+
+**Files:**
+- Modify `departments/minecraft/lab/debug-workspace/forge-bridge/src/main/java/com/github/tartaricacid/touhoulittlemaid/sim/debug/KneekuraDebugDecisionHooks.java`.
+- Create matching `decisionmixin/KneekuraDebugLivingResultMixin.java`; register in existing `src/main/resources/kneekura-decision.mixins.json`.
+- Modify `debug-workspace/evidence/original-decision-events.mjs`, `debug-workspace/evidence/debug-workspace-decision-adapter.mjs` and their existing tests.
+- Extend `KneekuraDebugMotionTraceCache`, `KneekuraDebugMotionOverlayRuntime` and the existing pure cache test so native display also consumes a flushed successful callback as a gap, never a sampled position.
+- Extend genuine Forge producer contracts with selected/excluded/thread/budget cases; no fixture call is native acceptance.
+
+**Interfaces:**
+- Consume original `LivingEntity.randomTeleport(DDDZ)Z` RETURN and its actual argument coordinates/boolean, existing `control` channel, `Session.matches` and `Session.record`.
+- Produce `CONTROL_TELEPORT_RETURN` under the existing original-event schema. Data: `result` boolean; `requestedPosition` and `returnedPosition` each finite `{x,y,z}`; `dispatchScope='BASE_RANDOM_TELEPORT_RETURN'`; `reasonStatus='NOT_EXPOSED'`. Callback serializes after context/budget validation and never invokes teleport.
+- Consume valid records as `RESULT` / `teleport_result`, with exact source observation IDs. Only `result=true` breaks the enclosing pair of retained SERVER points as `EXPLICIT_TELEPORT`; callback coordinates do not become samples.
+
+- [ ] Write positive/negative/malformed and mixed-context retained tests; run the exact file and observe unsupported callback / unbroken short teleport fail.
+- [ ] Add RETURN mixin and bounded producer callback; test selected subject, excluded channel, thread mismatch, exhausted context/budget and no replay using genuine APIs.
+- [ ] Add strict typed consumer and trace boundary derivation; preserve false attempt as a result fact while keeping its trace connected.
+- [ ] Run focused Node suite, portable/genuine Java source contracts and all actual bridge compilation. Expected: no failures; source/API proof distinguished from runtime hook proof.
+- [ ] Commit the verified slice without publishing native-success claims.
+
+## Task 2 — Original ranged-result relationship capture
+
+**Files:** Existing Forge producer/lifecycle hooks and evidence adapters selected from exact method-body research; related tests and minimized research record.
+
+**Interfaces:** Selected owner UUID plus explicitly observed projectile UUID/target UUID and existing immutable observation identities. Finite opt-in retention; original spawn/impact/result references preserve independent entity identities.
+
+- [ ] Complete exact spawn/tick/impact/hurt/health-loss/subclass source-call research and define the smallest finite policy before edits.
+- [ ] Write cancelled/failed/absorbed/removed/mixed-owner/mixed-context regressions and observe failure first.
+- [ ] Instrument only original calls or authoritative post-result events; separate impact, return and HP effects. Do not change target selection to fabricate simultaneous traces.
+- [ ] Run genuine Forge and focused consumer regressions; commit only proven source behavior.
+
+## Task 3 — Native integrated acceptance and measurement
+
+**Files:** Private trial drivers/fixtures/receipts outside Git, dated minimized acceptance/current handoff inside Git.
+
+**Interfaces:** Frozen clean producer SHA, private copies of the preserved world, existing registered owner gates and finalized evidence stores.
+
+- [ ] Prepare independent prelaunch conditions for Enderman teleport, Skeleton/Ghast ranged shot, damageable TF phases and Knight coordination. Retain original-save hashes and predecessor copies.
+- [ ] Run finite trials; arm appropriate channels, retain actual source IDs and outcome receipts, and stop cleanly. No callbacks in constructors/load before arm count as selected capture.
+- [ ] Show integrated Brain/pursuit/custom-flight/missing-capture diagnosis and explicit unavailable layers.
+- [ ] Run same-initial-state paired observer-effect trials and authorized image checks; retain CPU/JFR/GPU/pixel coverage separately. Lack of capture capability remains an open item.
+
+## Task 4 — Full remaining reconciliation and final gate
+
+**Files:** Vanilla/FRONTIER research, requirement matrix, current handoff, tests and Draft PR80.
+
+- [ ] Complete remaining per-algorithm semantic research, terrain/community/modern comparisons and source-established additional path/malus/control slices under the original constraints.
+- [ ] Reconcile every original section21 criterion with specific evidence; do not close the goal while required work remains.
+- [ ] Perform one fresh whole-diff review against baseline1291b5e; regrade by actual user impact and fix substantive findings in one RED→GREEN pass.
+- [ ] Verify final exactHEAD focused/full suites, genuine Forge compile and hostedCI; publish Draft/update current handoff and report measured limits.

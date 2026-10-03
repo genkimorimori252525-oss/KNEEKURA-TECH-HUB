@@ -210,6 +210,17 @@ public final class KneekuraDebugDecisionHooks {
             data.add("cachedBaseFields",session.snapshot.controls(mob).getAsJsonObject(kind));return data;
         });
     }
+    public static void teleportReturn(LivingEntity entity,double x,double y,double z,boolean result) {
+        Session session=active;if(session==null||!session.matches(entity))return;
+        session.record("CONTROL_TELEPORT_RETURN","LivingEntity.randomTeleport.RETURN",()->{
+            JsonObject data=new JsonObject();data.addProperty("result",result);
+            JsonObject requested=new JsonObject();requested.addProperty("x",x);requested.addProperty("y",y);requested.addProperty("z",z);
+            JsonObject returned=new JsonObject();returned.addProperty("x",entity.getX());returned.addProperty("y",entity.getY());returned.addProperty("z",entity.getZ());
+            data.add("requestedPosition",requested);data.add("returnedPosition",returned);
+            data.addProperty("dispatchScope","BASE_RANDOM_TELEPORT_RETURN");
+            data.addProperty("reasonStatus","NOT_EXPOSED");return data;
+        });
+    }
     public static void malusReturn(Mob mob,BlockPathTypes type,float result) {
         Session session=active;if(session==null||!session.matches(mob))return;
         session.record("BASE_MALUS_RETURN","Mob.getPathfindingMalus.RETURN",()->{

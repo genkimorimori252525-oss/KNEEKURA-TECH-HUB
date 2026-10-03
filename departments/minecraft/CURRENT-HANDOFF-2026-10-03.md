@@ -1,5 +1,7 @@
 # KNEEKURA Minecraft — Current Handoff
 
+Newer ongoing continuation: [CURRENT-HANDOFF-2026-10-04.md](CURRENT-HANDOFF-2026-10-04.md). The dated results below retain their original producer generations.
+
 Date: **2026-10-03**. This is the current continuation entry point; older dated handoffs remain historical. The architecture and full checklist are still [LOCAL-EXECUTION-HANDOFF-2026-10-02.md](LOCAL-EXECUTION-HANDOFF-2026-10-02.md).
 
 Canonical LAB source is `departments/minecraft/lab` in TECH HUB. Foundation Draft PR [#79](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/pull/79) remains unchanged at `57e52f9ef44c082daf7abbb0b0f5ada3a258a406`. Native continuation is stacked Draft [#80](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/pull/80); neither has been merged. Existing owner/registration/lease/Arena/loaded-runtime gates remain authoritative.
