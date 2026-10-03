@@ -23,6 +23,10 @@ public final class KneekuraDebugMotionTraceCacheSelfTest {
   cache.select(context(1));for(int i=0;i<140;i++)cache.acceptFlushed(row(i*5,i,"obs:"+i));
   require(cache.snapshot().samples().size()==128&&cache.snapshot().evictedSamples()==12,"bounded retained cache");
   cache.clear();require(cache.snapshot().samples().isEmpty(),"clear removes old display");
+  cache.select(context(1));cache.acceptFlushed(row(100,0,"obs:a"));
+  var absent=row(105,0,"obs:absent");absent.addProperty("lane","SERVER_TARGET_TRACKED");absent.getAsJsonObject("payload").addProperty("tracked",false);
+  cache.acceptFlushed(absent);cache.acceptFlushed(row(110,1,"obs:b"));
+  require(cache.snapshot().segments().isEmpty()&&cache.snapshot().gaps().get(0).kind().equals("MISSING_SELECTED_ENTITY"),"explicit absent target breaks a short gap");
   System.out.println("Retained native Motion cache boundaries/source/gaps/128-sample cap passed");
  }
 }

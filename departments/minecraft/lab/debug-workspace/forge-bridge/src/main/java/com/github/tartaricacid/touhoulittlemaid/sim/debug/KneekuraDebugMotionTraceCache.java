@@ -30,7 +30,8 @@ final class KneekuraDebugMotionTraceCache {
  synchronized void acceptFlushed(JsonObject row) {
   if(context==null)return;
   try {
-   if(!"observation".equals(row.get("kind").getAsString())||!"SERVER_ENTITY_STATE".equals(row.get("lane").getAsString())||
+   String lane=row.get("lane").getAsString();
+   if(!"observation".equals(row.get("kind").getAsString())||!Set.of("SERVER_ENTITY_STATE","SERVER_TARGET_TRACKED").contains(lane)||
      !"SERVER".equals(row.getAsJsonObject("source").get("side").getAsString())||
      !"ENTITY_UUID".equals(row.getAsJsonObject("scope").get("kind").getAsString())||
      !context.uuid().toString().equals(row.getAsJsonObject("scope").get("entityUuid").getAsString())||
@@ -41,6 +42,12 @@ final class KneekuraDebugMotionTraceCache {
    var payload=row.getAsJsonObject("payload");if(context.revision()!=exactLong(payload,"targetRevision"))return;
    String id=row.get("observationId").getAsString();if(id.isEmpty()||id.length()>512)throw new IllegalArgumentException("INVALID_SOURCE_ID");
    long tick=exactLong(row,"gameTime");if(tick<0||tick>9007199254740991L)throw new IllegalArgumentException("INVALID_TICK");
+   if(lane.equals("SERVER_TARGET_TRACKED")){
+    if(payload.has("tracked")&&payload.get("tracked").isJsonPrimitive()&&payload.getAsJsonPrimitive("tracked").isBoolean()&&!payload.get("tracked").getAsBoolean()){
+     pendingGap="MISSING_SELECTED_ENTITY";pendingSource=id;
+    }
+    return;
+   }
    if(samples.stream().anyMatch(s->s.sourceId().equals(id)))return;
    if(!samples.isEmpty()&&tick<=samples.get(samples.size()-1).tick()){
     samples.clear();pendingGap="NONMONOTONIC_OR_DUPLICATE_TICK";pendingSource=id;rejected++;return;

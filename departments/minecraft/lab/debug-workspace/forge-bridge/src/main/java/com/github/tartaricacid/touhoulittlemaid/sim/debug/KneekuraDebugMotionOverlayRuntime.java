@@ -14,7 +14,7 @@ final class KneekuraDebugMotionOverlayRuntime {
   config=value;CACHE.select(new KneekuraDebugMotionTraceCache.Context(value.debugSessionId(),value.runId(),value.runSnapshotId(),value.processEpoch(),arena,revision,uuid));
  }
  static void onFlushed(String line){
-  if(!armed()||!CACHE.selected()||!line.contains("\"lane\":\"SERVER_ENTITY_STATE\"")||!line.contains("\"side\":\"SERVER\""))return;
+  if(!armed()||!CACHE.selected()||(!line.contains("\"lane\":\"SERVER_ENTITY_STATE\"")&&!line.contains("\"lane\":\"SERVER_TARGET_TRACKED\""))||!line.contains("\"side\":\"SERVER\""))return;
   try{CACHE.acceptFlushed(JsonParser.parseString(line).getAsJsonObject());}
   catch(RuntimeException error){CACHE.clear();}
  }

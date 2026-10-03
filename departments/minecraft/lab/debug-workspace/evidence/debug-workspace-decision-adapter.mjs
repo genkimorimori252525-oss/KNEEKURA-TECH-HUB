@@ -6,6 +6,7 @@ import {registeredModDecisionAdapters} from './adapters/registered-mod-adapters.
 
 const SUPPORTED_LANES = new Set([
   'SERVER_ENTITY_STATE',
+  'SERVER_TARGET_TRACKED',
   'AI_TARGET',
   'BRAIN_MEMORY',
   'RUNNING_BEHAVIORS',
@@ -373,7 +374,8 @@ export function buildDebugWorkspaceMotionTrace({
   if (typeof subjectUuid !== 'string' || !subjectUuid) throw new TypeError('subjectUuid is required');
   const start = window.start_tick ?? window.startTick ?? -Infinity;
   const end = window.end_tick ?? window.endTick ?? Infinity;
-  const records = selectDecisionRecords(observations, subjectUuid, identity, end)
+  const selected = selectDecisionRecords(observations, subjectUuid, identity, end).filter(r=>r.gameTime>=start);
+  const records = selected
     .filter(r => r.lane === 'SERVER_ENTITY_STATE')
     .filter(r => r.gameTime >= start);
 
@@ -396,6 +398,13 @@ export function buildDebugWorkspaceMotionTrace({
     dimension_id: r.payload?.dimension ?? null,
   }));
 
+  const absent=selected.filter(r=>r.lane==='SERVER_TARGET_TRACKED'&&r.source?.side==='SERVER'&&r.payload?.tracked===false);
+  const breaks=[...explicitDiscontinuities];
+  for(let i=1;i<records.length;i++){
+    const a=records[i-1],b=records[i],missing=absent.find(r=>r.gameTime>a.gameTime&&r.gameTime<b.gameTime);
+    if(missing)breaks.push({after_tick:a.gameTime,before_tick:b.gameTime,kind:'MISSING_SELECTED_ENTITY',source_observation_id:missing.observationId});
+  }
+
   return buildSampledMotionTrace({
     traceClass: [...classes][0]??'MOB_ACTUAL',
     subject: { id: subjectUuid, type: subjectType },
@@ -407,6 +416,6 @@ export function buildDebugWorkspaceMotionTrace({
     },
     maxSamples,
     maxGapTicks,
-    explicitDiscontinuities,
+    explicitDiscontinuities:breaks,
   });
 }

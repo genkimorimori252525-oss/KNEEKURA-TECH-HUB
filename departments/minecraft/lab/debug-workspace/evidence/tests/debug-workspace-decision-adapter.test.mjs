@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {buildRetainedDecisionPresentation} from '../decision-presentation.mjs';
 import {
   observeDebugWorkspaceDecision,
   buildDebugWorkspaceMotionTrace,
@@ -31,6 +32,20 @@ const rows=[
   obs('BEHAVIOR_TRANSITION',105,{transitionSemantics:'RUNNING_SET_CHANGED_BETWEEN_SAMPLES',exactTransitionTickKnown:false,reasonKnown:false,started:[{className:'Attack'}],stopped:[]}),
   obs('SERVER_ENTITY_STATE',105,{dimension:'minecraft:overworld',x:2,y:64,z:2,vx:.2,vy:0,vz:0,alive:true}),
 ];
+test('explicit absent target breaks motion even inside the configured sampling gap',()=>{
+  const records=[obs('SERVER_ENTITY_STATE',100,{dimension:'minecraft:overworld',x:0,y:64,z:0}),
+    obs('SERVER_TARGET_TRACKED',105,{tracked:false}),obs('SERVER_ENTITY_STATE',110,{dimension:'minecraft:overworld',x:1,y:64,z:0})];
+  const trace=buildDebugWorkspaceMotionTrace({observations:records,subjectUuid:UUID,maxGapTicks:10});
+  assert.equal(trace.segments.length,0);
+  assert.equal(trace.gaps[0].kind,'MISSING_SELECTED_ENTITY');
+  assert.equal(trace.gaps[0].source_observation_id,'obs:SERVER_TARGET_TRACKED:105');
+  for(const r of records)r.payload.targetRevision=1;
+  const presentation=buildRetainedDecisionPresentation({observations:records,subjectUuid:UUID,
+    identity:{debugSessionId:'sess-a',runId:'run-a',runSnapshotId:'snap-a',processEpoch:1,arenaEpoch:3,targetRevision:1},
+    request:{startTick:100,endTick:110}});
+  assert.equal(presentation.layers.motion.trace.segments.length,0);
+  assert.equal(presentation.layers.motion.trace.gaps[0].kind,'MISSING_SELECTED_ENTITY');
+});
 test('explicit native Projectile samples retain their trace class and refuse a mixed entity class',()=>{
   const projectile=structuredClone(rows.filter(r=>r.lane==='SERVER_ENTITY_STATE'));
   for(const r of projectile)r.payload.motionTraceClass='PROJECTILE_ACTUAL';

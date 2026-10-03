@@ -65,10 +65,11 @@ export function buildRetainedDecisionPresentation({observations,subjectUuid,iden
   const hasPosition=r=>r.payload.alive!==false&&r.payload.removed!==true&&['x','y','z'].every(k=>Number.isFinite(r.payload[k]));
   const valid=state.filter(hasPosition),retained=valid.slice(-limits.maxSamples),discontinuities=[];
   for(let i=1;i<retained.length;i++) {
-    const a=retained[i-1],b=retained[i],missing=state.find(r=>r.gameTime>a.gameTime&&r.gameTime<b.gameTime&&!hasPosition(r));
+    const a=retained[i-1],b=retained[i],absent=records.find(r=>r.lane==='SERVER_TARGET_TRACKED'&&r.payload?.tracked===false&&r.gameTime>a.gameTime&&r.gameTime<b.gameTime),
+      missing=state.find(r=>r.gameTime>a.gameTime&&r.gameTime<b.gameTime&&!hasPosition(r));
     const distance=Math.hypot(...['x','y','z'].map(k=>b.payload[k]-a.payload[k]));
-    if(missing||distance>limits.maxSegmentDistance)discontinuities.push({after_tick:a.gameTime,before_tick:b.gameTime,
-      kind:missing?'MISSING_RETAINED_POSITION':'DERIVED_DISTANCE_THRESHOLD_BREAK',source_observation_id:missing?.observationId??b.observationId});
+    if(absent||missing||distance>limits.maxSegmentDistance)discontinuities.push({after_tick:a.gameTime,before_tick:b.gameTime,
+      kind:absent?'MISSING_SELECTED_ENTITY':missing?'MISSING_RETAINED_POSITION':'DERIVED_DISTANCE_THRESHOLD_BREAK',source_observation_id:absent?.observationId??missing?.observationId??b.observationId});
   }
   const trace=buildDebugWorkspaceMotionTrace({observations:retained,subjectUuid,identity,window:request,
     maxSamples:limits.maxSamples,maxGapTicks:limits.maxGapTicks,explicitDiscontinuities:discontinuities});
