@@ -102,7 +102,9 @@ async function main() {
     if (current.live !== true) {
       throw new Error('cannot set target: debug runtime is not live');
     }
-    const target = await setTargetControl(current, entityUuid);
+    const target = await setTargetControl(current, entityUuid, {
+      decisionSnapshot: process.argv.includes('--decision-snapshot'),
+    });
     print({
       configFile: file,
       debugSessionId: current.debugSessionId,

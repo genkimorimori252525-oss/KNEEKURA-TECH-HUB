@@ -2038,6 +2038,31 @@
           "line_end": 276
         }
       ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/LivingEntity",
+      "class_hash": "914d4b6d230e1d1dd5159eb242108851be02ec636d703ac6aa15d7cda179ac11",
+      "disassembly_hash": "b996b48a0e54502b3c1131507e6867340084226200f0ae3e01c28fad792215e6",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "superclass": "net/minecraft/world/entity/Entity",
+      "member_count": 417,
+      "origin_count": 2,
+      "selected_members": [
+        {
+          "name": "brain",
+          "kind": "field",
+          "descriptor": "Lnet/minecraft/world/entity/ai/Brain;",
+          "line_start": 4942,
+          "line_end": 4946
+        },
+        {
+          "name": "getBrain",
+          "kind": "method",
+          "descriptor": "()Lnet/minecraft/world/entity/ai/Brain;",
+          "line_start": 5116,
+          "line_end": 5130
+        }
+      ]
     }
   ]
 }

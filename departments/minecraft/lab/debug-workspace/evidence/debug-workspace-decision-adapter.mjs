@@ -8,6 +8,7 @@ const SUPPORTED_LANES = new Set([
   'RUNNING_BEHAVIORS',
   'BEHAVIOR_TRANSITION',
   'NAVIGATION',
+  'AI_DECISION',
 ]);
 
 function contextOf(record) {
@@ -60,6 +61,10 @@ function selectedRecords(observations, subjectUuid, identity, endTick = Infinity
       if (!sameContext(base, contextOf(record))) {
         throw new Error('DECISION_EVIDENCE_CONTEXT_CHANGED: refusing to combine records across run/process/arena identity');
       }
+    }
+    const revisions = new Set(selected.map(r => r.payload?.targetRevision ?? null));
+    if (revisions.size > 1) {
+      throw new Error('DECISION_SELECTION_CHANGED: refusing to combine different or unknown target revisions');
     }
   }
   return selected;
@@ -123,6 +128,62 @@ function compactBrain(payload = {}) {
   return out;
 }
 
+const SNAPSHOT_SECTIONS = ['goal_scheduler','brain_memory','brain_activities','navigation_path','movement_control'];
+function validSnapshot(payload) {
+  if (payload?.schema !== 'kneekura.vanilla-decision-snapshot/v1' ||
+      !Number.isSafeInteger(payload.targetRevision) || payload.targetRevision < 1 ||
+      payload.semantics !== 'MOB_COMPONENT_SNAPSHOT_ONLY' || !payload.sections) return false;
+  // Check bounded structure before serialization, including unknown fields.
+  let values = 0;
+  function bounded(value, depth=0) {
+    if (++values > 8192 || depth > 12) return false;
+    if (typeof value === 'string') return value.length <= 512;
+    if (typeof value === 'number') return Number.isFinite(value);
+    if (value === null || typeof value === 'boolean') return true;
+    if (Array.isArray(value)) return value.length <= 64 && value.every(v => bounded(v,depth+1));
+    if (!value || typeof value !== 'object') return false;
+    const entries = Object.entries(value);
+    return entries.length <= 32 && entries.every(([k,v]) => k.length <= 128 && bounded(v,depth+1));
+  }
+  if (!bounded(payload)) return false;
+  for (const name of SNAPSHOT_SECTIONS) {
+    const section = payload.sections[name];
+    if (!section || !['AVAILABLE','PARTIAL','NOT_EXPOSED'].includes(section.status)) return false;
+    if (section.status !== 'NOT_EXPOSED' &&
+        (!section.data || typeof section.data !== 'object' || Array.isArray(section.data))) return false;
+  }
+  return new TextEncoder().encode(JSON.stringify(payload)).length <= 65536;
+}
+
+function sampledGoalChanges(records) {
+  const events = [];
+  let previous = null;
+  for (const record of records.filter(r => r.lane === 'AI_DECISION')) {
+    const section = record.payload.sections.goal_scheduler;
+    const data = section.data;
+    const complete = section.status === 'AVAILABLE' && ['goal','target'].every(name =>
+      Array.isArray(data?.[name]?.entries) && data[name].truncated === false &&
+      data[name].entries.every(e => typeof e.instanceIdentity === 'string' && typeof e.running === 'boolean'));
+    if (!complete) { previous = null; continue; }
+    const running = new Set(['goal','target'].flatMap(name =>
+      data[name].entries.filter(e => e.running).map(e => name + ':' + e.instanceIdentity)));
+    if (previous) {
+      const started = [...running].filter(token => !previous.running.has(token));
+      const stopped = [...previous.running].filter(token => !running.has(token));
+      if (started.length || stopped.length) events.push({
+        event_id: record.observationId + ':goal-delta',tick:record.gameTime,stage:'EXECUTION',
+        kind:'GOAL_RUNNING_SET_CHANGED_BETWEEN_SAMPLES',
+        summary:{started,stopped,interval:{start_tick:previous.record.gameTime,end_tick:record.gameTime},
+          exactTransitionTickKnown:false,reasonKnown:false},
+        epistemic_status:'DERIVED_FROM_OBSERVED',causal_relation:'TEMPORAL_ASSOCIATION',
+        source_observation_ids:[previous.record.observationId,record.observationId],
+      });
+    }
+    previous = {record,running};
+  }
+  return events;
+}
+
 export function observeDebugWorkspaceDecision({
   observations,
   subjectUuid,
@@ -133,13 +194,15 @@ export function observeDebugWorkspaceDecision({
   if (typeof subjectUuid !== 'string' || !subjectUuid) throw new TypeError('subjectUuid is required');
   if (tick !== Infinity && !Number.isInteger(tick)) throw new TypeError('tick must be an integer or Infinity');
 
-  const records = selectedRecords(observations, subjectUuid, identity, tick);
+  const records = selectedRecords(observations, subjectUuid, identity, tick)
+    .filter(r => r.lane !== 'AI_DECISION' || validSnapshot(r.payload));
   const latest = latestByLane(records);
   const state = latest.get('SERVER_ENTITY_STATE') ?? null;
   const target = latest.get('AI_TARGET') ?? null;
   const brain = latest.get('BRAIN_MEMORY') ?? null;
   const running = latest.get('RUNNING_BEHAVIORS') ?? null;
   const navigation = latest.get('NAVIGATION') ?? null;
+  const snapshot = latest.get('AI_DECISION') ?? null;
 
   const capabilities = {
     server_entity_state: capability(state),
@@ -148,6 +211,7 @@ export function observeDebugWorkspaceDecision({
     running_behaviors: capability(running, running ? 'Sampled running behavior set; not a complete Goal/Behavior eligibility trace.' : null),
     navigation: capability(navigation, navigation ? 'Current PathNavigation state only; open/closed search frontier is not captured.' : null),
     goal_scheduler: { status: 'NOT_EXPOSED', source_observation_ids: [], detail: 'GoalSelector lifecycle capture is not established by these lanes.' },
+    goal_eligibility: { status: 'NOT_EXPOSED', source_observation_ids: [], detail: 'Snapshot does not replay canUse/canContinue or capture every original eligibility invocation.' },
     path_search_frontier: { status: 'NOT_EXPOSED', source_observation_ids: [], detail: 'Open/closed/cost search internals require bounded deep instrumentation.' },
     movement_control: { status: 'NOT_EXPOSED', source_observation_ids: [], detail: 'MoveControl/custom controller internals are not present in the selected lanes.' },
   };
@@ -181,6 +245,26 @@ export function observeDebugWorkspaceDecision({
     ));
   }
 
+  if (snapshot) {
+    for (const name of SNAPSHOT_SECTIONS) {
+      const section = snapshot.payload.sections[name];
+      capabilities[name] = {
+        status: section.status,
+        source_observation_ids: section.status === 'NOT_EXPOSED' ? [] : refs(snapshot),
+        detail: section.detail ?? 'Bounded sampled component state; no eligibility or causal claim.',
+      };
+      if (section.status === 'NOT_EXPOSED') continue;
+      const stage = ['navigation_path','movement_control'].includes(name) ? 'EXECUTION' : 'STATE';
+      stages[stage] ??= { facts: [] };
+      stages[stage].facts.push(sampledFact(snapshot,name,section.data,
+        section.status === 'PARTIAL' ? 'Partial component capture; missing entries remain unknown.' : null));
+    }
+    stages.STATE ??= { facts: [] };
+    stages.STATE.facts.push(sampledFact(snapshot,'observation_context',{
+      ...contextOf(snapshot),target_revision:snapshot.payload.targetRevision,
+    }));
+  }
+
   const timeline = records
     .filter(r => r.lane === 'BEHAVIOR_TRANSITION')
     .map(r => ({
@@ -199,6 +283,7 @@ export function observeDebugWorkspaceDecision({
       causal_relation: 'TEMPORAL_ASSOCIATION',
       source_observation_ids: [r.observationId],
     }));
+  timeline.push(...sampledGoalChanges(records));
 
   const context = records.length ? contextOf(records[0]) : {
     debug_session_id: identity.debug_session_id ?? null,
@@ -223,7 +308,7 @@ export function observeDebugWorkspaceDecision({
       id: 'debug-workspace:exact-subject',
       version: '1',
       family: 'GENERIC_MOB_BASELINE',
-      provenance: 'SERVER_ENTITY_STATE/AI_TARGET/BRAIN_MEMORY/RUNNING_BEHAVIORS/BEHAVIOR_TRANSITION/NAVIGATION',
+      provenance: 'SERVER_ENTITY_STATE/AI_TARGET/BRAIN_MEMORY/RUNNING_BEHAVIORS/BEHAVIOR_TRANSITION/NAVIGATION/AI_DECISION',
       observer_effect_risk: 'BOUNDED_SAMPLED_OBSERVER',
     },
     capabilities,
@@ -234,6 +319,7 @@ export function observeDebugWorkspaceDecision({
       ...(brain ? ['brain_memory'] : []),
       ...(running ? ['running_behaviors'] : []),
       ...(navigation ? ['navigation'] : []),
+      ...(snapshot ? SNAPSHOT_SECTIONS.filter(name => snapshot.payload.sections[name].status !== 'NOT_EXPOSED') : []),
     ],
   });
 }

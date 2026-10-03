@@ -77,9 +77,11 @@ export async function readTargetControl(current) {
   }
 }
 
-export async function setTargetControl(current, targetUuid) {
+export async function setTargetControl(current, targetUuid, { decisionSnapshot = false } = {}) {
   assertCurrentIdentity(current);
   const normalized = normalizeTargetUuid(targetUuid);
+  if (typeof decisionSnapshot !== 'boolean') throw new TypeError('decisionSnapshot must be boolean');
+  if (decisionSnapshot && normalized === null) throw new TypeError('decisionSnapshot requires a target');
   const existing = await readTargetControl(current);
   const file = existing.file;
   const revision = (existing.revision ?? 0) + 1;
@@ -92,6 +94,7 @@ export async function setTargetControl(current, targetUuid) {
     processEpoch: current.processEpoch,
     revision,
     targetUuid: normalized,
+    decisionSnapshot,
     updatedAt: nowIso(),
   };
 

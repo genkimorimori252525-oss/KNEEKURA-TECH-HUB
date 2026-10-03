@@ -88,3 +88,68 @@ test('incomplete or non-observed rows are not promoted into sampled decision evi
   assert.equal(out.stages.STATE,undefined);
   assert.equal(out.stages.EXECUTION,undefined);
 });
+
+function decisionSnapshot(revision=1, extra={}) {
+  return obs('AI_DECISION',110,{
+    schema:'kneekura.vanilla-decision-snapshot/v1',targetRevision:revision,
+    semantics:'MOB_COMPONENT_SNAPSHOT_ONLY',
+    sections:{
+      goal_scheduler:{status:'AVAILABLE',data:{goal:{entries:[{instanceIdentity:'goal:1:1',priority:2,running:true}],truncated:false},target:{entries:[],truncated:false}}},
+      brain_memory:{status:'AVAILABLE',data:{entries:[{key:'minecraft:walk_target',registered:true,present:false}],truncated:false}},
+      brain_activities:{status:'NOT_EXPOSED',detail:'accessor unavailable'},
+      navigation_path:{status:'PARTIAL',data:{entries:[{index:0,x:3,y:64,z:5}],truncated:true}},
+      movement_control:{status:'AVAILABLE',data:{move:{className:'CustomMove',fieldScope:'BASE_CONTROL_FIELDS_ONLY'}}},
+    },...extra,
+  });
+}
+
+test('versioned snapshot exposes component state without eligibility or frontier claims',()=>{
+  const out=observeDebugWorkspaceDecision({observations:[decisionSnapshot()],subjectUuid:UUID});
+  assert.equal(out.capabilities.goal_scheduler.status,'AVAILABLE');
+  assert.equal(out.capabilities.goal_eligibility.status,'NOT_EXPOSED');
+  assert.equal(out.capabilities.navigation_path.status,'PARTIAL');
+  assert.equal(out.capabilities.brain_activities.status,'NOT_EXPOSED');
+  assert.equal(out.capabilities.path_search_frontier.status,'NOT_EXPOSED');
+  const f=out.stages.STATE.facts.find(f=>f.key==='goal_scheduler');
+  assert.deepEqual(f.source_observation_ids,['obs:AI_DECISION:110']);
+  assert.equal(f.epistemic_status,'SAMPLED_OBSERVED');
+  assert.equal(out.stages.CANDIDATE,undefined);
+  assert.equal(out.stages.EVALUATION,undefined);
+  assert.equal(out.available_drilldowns.includes('goal_scheduler'),true);
+});
+
+test('snapshot revisions fence reselection instead of joining separate selections',()=>{
+  const a=decisionSnapshot(1);
+  const b={...decisionSnapshot(2),gameTime:115,observationId:'obs:new-selection'};
+  assert.throws(()=>observeDebugWorkspaceDecision({observations:[a,b],subjectUuid:UUID}),/DECISION_SELECTION_CHANGED/);
+});
+
+test('foreign, invalid and oversized snapshot payloads never become component evidence',()=>{
+  for(const payload of [
+    {schema:'other/v1'},
+    {...decisionSnapshot().payload,targetRevision:0},
+    {...decisionSnapshot().payload,sections:{goal_scheduler:{status:'AVAILABLE',data:{entries:Array(65).fill({})}}}},
+    {...decisionSnapshot().payload,padding:'x'.repeat(65537)},
+  ]) {
+    const out=observeDebugWorkspaceDecision({observations:[obs('AI_DECISION',110,payload)],subjectUuid:UUID});
+    assert.equal(out.capabilities.goal_scheduler.status,'NOT_EXPOSED');
+    assert.equal(out.stages.STATE,undefined);
+  }
+});
+
+test('Goal running-set changes cite both samples and never invent transition tick or reason',()=>{
+  const a=decisionSnapshot();
+  const b=structuredClone(a);
+  b.gameTime=115;b.observationId='obs:goal-stopped';
+  b.payload.sections.goal_scheduler.data.goal.entries[0].running=false;
+  const out=observeDebugWorkspaceDecision({observations:[a,b],subjectUuid:UUID});
+  assert.equal(out.timeline.length,1);
+  assert.equal(out.timeline[0].kind,'GOAL_RUNNING_SET_CHANGED_BETWEEN_SAMPLES');
+  assert.deepEqual(out.timeline[0].source_observation_ids,[a.observationId,b.observationId]);
+  assert.deepEqual(out.timeline[0].summary.interval,{start_tick:110,end_tick:115});
+  assert.equal(out.timeline[0].summary.exactTransitionTickKnown,false);
+  assert.equal(out.timeline[0].summary.reasonKnown,false);
+  assert.equal(out.timeline[0].causal_relation,'TEMPORAL_ASSOCIATION');
+  b.payload.sections.goal_scheduler.status='PARTIAL';
+  assert.equal(observeDebugWorkspaceDecision({observations:[a,b],subjectUuid:UUID}).timeline.length,0);
+});

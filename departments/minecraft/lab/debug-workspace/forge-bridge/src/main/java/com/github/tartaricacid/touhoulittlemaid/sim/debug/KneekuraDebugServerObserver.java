@@ -57,6 +57,8 @@ public final class KneekuraDebugServerObserver {
     private static final IdentityHashMap<Object, String> BEHAVIOR_TOKENS =
             new IdentityHashMap<>();
     private static long nextBehaviorToken;
+    private static boolean decisionSnapshotEnabled;
+    private static final KneekuraDebugDecisionSnapshot DECISION_SNAPSHOT = new KneekuraDebugDecisionSnapshot();
 
     private KneekuraDebugServerObserver() {
     }
@@ -135,6 +137,16 @@ public final class KneekuraDebugServerObserver {
         if (entity instanceof Mob mob) {
             emitAiTarget(localServerTick, gameTime, selected, mob);
             emitNavigation(localServerTick, gameTime, selected, mob);
+            if (decisionSnapshotEnabled) {
+                long started = System.nanoTime();
+                JsonObject snapshot = DECISION_SNAPSHOT.capture(mob);
+                snapshot.addProperty("observerCostNanos", Math.max(0L, System.nanoTime() - started));
+                snapshot.addProperty("observerCostScope", "SNAPSHOT_CAPTURE_ONLY_EXCLUDES_WRITER_AND_VIEWER");
+                snapshot.addProperty("sampleTick", gameTime);
+                emitIfChanged(localServerTick, gameTime, selected, "AI_DECISION",
+                        "KneekuraDebugDecisionSnapshot.capture_cached_components",
+                        snapshot);
+            }
         }
 
         if (entity instanceof EntityMaid maid) {
@@ -195,6 +207,16 @@ public final class KneekuraDebugServerObserver {
                 next = UUID.fromString(targetElement.getAsString());
             }
 
+            JsonElement snapshotElement = root.get("decisionSnapshot");
+            if (snapshotElement != null && (!snapshotElement.isJsonPrimitive()
+                    || !snapshotElement.getAsJsonPrimitive().isBoolean())) {
+                throw new IllegalArgumentException("decisionSnapshot must be boolean");
+            }
+            boolean nextSnapshot = snapshotElement != null && snapshotElement.getAsBoolean();
+            if (nextSnapshot && next == null) {
+                throw new IllegalArgumentException("decisionSnapshot requires a target");
+            }
+
             targetRevision = revision;
             targetUuid = next;
             lastSampleTick = Long.MIN_VALUE;
@@ -204,6 +226,8 @@ public final class KneekuraDebugServerObserver {
             runningBehaviorBaselineSeen = false;
             BEHAVIOR_TOKENS.clear();
             nextBehaviorToken = 0L;
+            decisionSnapshotEnabled = nextSnapshot;
+            DECISION_SNAPSHOT.reset(revision);
 
             TouhouLittleMaid.LOGGER.info(
                     "[KNEEKURA-DEBUG] server exact target revision={} uuid={}",
