@@ -1,12 +1,16 @@
 package org.kneekura.bedrockwither.entity;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerBossEvent;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.Difficulty;
@@ -24,16 +28,24 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.decoration.ArmorStand;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.kneekura.bedrockwither.entity.ai.BedrockHighestDamageTargetGoal;
+import org.kneekura.bedrockwither.entity.ai.BedrockLookGoal;
 
 import java.util.HashSet;
 import java.util.List;
@@ -188,6 +200,10 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
     @Override
     protected void registerGoals() {
         // Current Mojang Bedrock wither.json generic goal ordering.
+        // behavior.float is an exposed priority-1 contract. It only owns JUMP,
+        // leaving the Wither's dedicated MOVE/attack controllers authoritative.
+        this.goalSelector.addGoal(1, new FloatGoal(this));
+
         // The special reposition controller owns movement whenever combat or a
         // lifecycle gate is active. Idle stroll must not overwrite its navigator.
         this.goalSelector.addGoal(5, new RandomStrollGoal(this, 1.0D) {
@@ -196,6 +212,11 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
                 return canRunIdleMovement() && super.canContinueToUse();
             }
         });
+        // Pinned Bedrock Wither: look_at_target priority 5 and look_at_player
+        // priority 6, explicit 1..2 second look_time. Public component defaults
+        // provide look_distance=8 and probability=0.02.
+        this.goalSelector.addGoal(5, new BedrockLookGoal(this, BedrockLookGoal.Source.CURRENT_TARGET));
+        this.goalSelector.addGoal(6, new BedrockLookGoal(this, BedrockLookGoal.Source.NEAREST_PLAYER));
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
 
         // Current Mojang Bedrock target ordering:
@@ -215,6 +236,21 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
                         this::isBedrockNearestTargetCandidate
                 )
         );
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return SoundEvents.WITHER_AMBIENT;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return SoundEvents.WITHER_HURT;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.WITHER_DEATH;
     }
 
     private boolean canRunIdleMovement() {
@@ -348,6 +384,43 @@ public final class BedrockWitherEntity extends Monster implements PowerableMob {
             dropped.setUnlimitedLifetime();
         }
         return dropped;
+    }
+
+    @Override
+    public boolean killedEntity(ServerLevel level, LivingEntity victim) {
+        boolean accepted = super.killedEntity(level, victim);
+        if (accepted) {
+            createBedrockWitherRose(level, victim);
+        }
+        return accepted;
+    }
+
+    /**
+     * LivingEntity.createWitherRose is hard-wired to Java WitherBoss kill credit.
+     * This independent Monster therefore bridges the same Java integration
+     * contract explicitly: place when mobGriefing allows and the rose survives,
+     * otherwise drop exactly one rose item at the victim.
+     */
+    private void createBedrockWitherRose(ServerLevel level, LivingEntity victim) {
+        boolean placed = false;
+        if (level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
+            BlockPos pos = victim.blockPosition();
+            BlockState rose = Blocks.WITHER_ROSE.defaultBlockState();
+            if (level.getBlockState(pos).isAir() && rose.canSurvive(level, pos)) {
+                level.setBlock(pos, rose, 3);
+                placed = true;
+            }
+        }
+
+        if (!placed) {
+            level.addFreshEntity(new ItemEntity(
+                    level,
+                    victim.getX(),
+                    victim.getY(),
+                    victim.getZ(),
+                    new ItemStack(Items.WITHER_ROSE)
+            ));
+        }
     }
 
     @Override
