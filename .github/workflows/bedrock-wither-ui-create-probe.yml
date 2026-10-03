@@ -1,0 +1,185 @@
+name: Bedrock Wither UI Create Probe
+
+on:
+  push:
+    branches:
+      - codex/bedrock-wither-lifecycle-regressions-2026-10-03
+    paths:
+      - '.github/workflows/bedrock-wither-ui-create-probe.yml'
+      - '.github/bedrock-wither-ui-create-probe-request.txt'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bedrock-wither-ui-create-probe
+  cancel-in-progress: false
+
+jobs:
+  create-probe:
+    runs-on: [self-hosted, Windows, X64]
+    timeout-minutes: 10
+    defaults:
+      run:
+        shell: powershell
+
+    steps:
+      - name: Launch Bedrock and reveal Play screen safely
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $out = Join-Path $env:GITHUB_WORKSPACE 'bedrock-ui-create-probe'
+          if (Test-Path $out) { Remove-Item $out -Recurse -Force }
+          New-Item -ItemType Directory -Path $out | Out-Null
+
+          Add-Type @'
+          using System;
+          using System.Runtime.InteropServices;
+          public static class Win32Input2 {
+            [DllImport("user32.dll")] public static extern bool SetCursorPos(int X, int Y);
+            [DllImport("user32.dll")] public static extern void mouse_event(uint flags, uint dx, uint dy, uint data, UIntPtr extra);
+            [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr hWnd);
+            [DllImport("user32.dll")] public static extern IntPtr GetForegroundWindow();
+            [DllImport("user32.dll", CharSet = CharSet.Unicode)] public static extern int GetWindowText(IntPtr hWnd, System.Text.StringBuilder text, int count);
+            [DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr hWnd, int command);
+            [DllImport("user32.dll")] public static extern uint GetWindowThreadProcessId(IntPtr hWnd, IntPtr processId);
+            [DllImport("user32.dll")] public static extern bool AttachThreadInput(uint idAttach, uint idAttachTo, bool attach);
+            [DllImport("user32.dll")] public static extern bool BringWindowToTop(IntPtr hWnd);
+            [DllImport("kernel32.dll")] public static extern uint GetCurrentThreadId();
+            public const uint LEFTDOWN = 0x0002;
+            public const uint LEFTUP = 0x0004;
+          }
+          '@
+          Add-Type -AssemblyName System.Drawing
+          Add-Type -AssemblyName System.Windows.Forms
+
+          function Click-Point([int]$x, [int]$y) {
+            [Win32Input2]::SetCursorPos($x, $y) | Out-Null
+            [Win32Input2]::mouse_event([Win32Input2]::LEFTDOWN,0,0,0,[UIntPtr]::Zero)
+            [Win32Input2]::mouse_event([Win32Input2]::LEFTUP,0,0,0,[UIntPtr]::Zero)
+          }
+
+          function Capture([string]$path) {
+            $screen = [System.Windows.Forms.SystemInformation]::VirtualScreen
+            $bitmap = New-Object System.Drawing.Bitmap $screen.Width, $screen.Height
+            $graphics = [System.Drawing.Graphics]::FromImage($bitmap)
+            try {
+              $graphics.CopyFromScreen($screen.Left, $screen.Top, 0, 0, $screen.Size)
+              $bitmap.Save($path, [System.Drawing.Imaging.ImageFormat]::Png)
+            } finally {
+              $graphics.Dispose()
+              $bitmap.Dispose()
+            }
+          }
+
+          function Get-ForegroundTitle {
+            $handle = [Win32Input2]::GetForegroundWindow()
+            $sb = New-Object System.Text.StringBuilder 512
+            [void][Win32Input2]::GetWindowText($handle, $sb, $sb.Capacity)
+            return $sb.ToString()
+          }
+
+          $sessionId = (Get-Process -Id $PID).SessionId
+          $before = @(
+            Get-Process -ErrorAction SilentlyContinue |
+              Where-Object { $_.SessionId -eq $sessionId -and $_.ProcessName -match 'Minecraft|Minecraft.Windows' } |
+              Select-Object -ExpandProperty Id
+          )
+
+          Start-Process 'minecraft://'
+          $deadline = (Get-Date).AddSeconds(60)
+          do {
+            Start-Sleep -Seconds 2
+            $windowProcess = Get-Process -ErrorAction SilentlyContinue |
+              Where-Object {
+                $_.SessionId -eq $sessionId -and
+                $_.MainWindowHandle -ne 0 -and
+                $_.MainWindowTitle -eq 'Minecraft'
+              } |
+              Select-Object -First 1
+          } while ($null -eq $windowProcess -and (Get-Date) -lt $deadline)
+          if ($null -eq $windowProcess) { throw 'No top-level Minecraft window found' }
+
+          Start-Sleep -Seconds 15
+          $foregroundHandleBefore = [Win32Input2]::GetForegroundWindow()
+          $currentThread = [Win32Input2]::GetCurrentThreadId()
+          $foregroundThread = [Win32Input2]::GetWindowThreadProcessId($foregroundHandleBefore, [IntPtr]::Zero)
+          $targetThread = [Win32Input2]::GetWindowThreadProcessId($windowProcess.MainWindowHandle, [IntPtr]::Zero)
+
+          if ($foregroundThread -ne 0) { [Win32Input2]::AttachThreadInput($currentThread, $foregroundThread, $true) | Out-Null }
+          if ($targetThread -ne 0 -and $targetThread -ne $currentThread) { [Win32Input2]::AttachThreadInput($currentThread, $targetThread, $true) | Out-Null }
+          try {
+            [Win32Input2]::ShowWindow($windowProcess.MainWindowHandle, 9) | Out-Null
+            [Win32Input2]::BringWindowToTop($windowProcess.MainWindowHandle) | Out-Null
+            [Win32Input2]::SetForegroundWindow($windowProcess.MainWindowHandle) | Out-Null
+          } finally {
+            if ($targetThread -ne 0 -and $targetThread -ne $currentThread) { [Win32Input2]::AttachThreadInput($currentThread, $targetThread, $false) | Out-Null }
+            if ($foregroundThread -ne 0) { [Win32Input2]::AttachThreadInput($currentThread, $foregroundThread, $false) | Out-Null }
+          }
+
+          Start-Sleep -Seconds 1
+          if ((Get-ForegroundTitle) -ne 'Minecraft') { throw 'Minecraft foreground verification failed before Play click' }
+
+          $screen = [System.Windows.Forms.SystemInformation]::VirtualScreen
+          if ($screen.Width -ne 1536 -or $screen.Height -ne 864) {
+            throw "Unexpected screen size $($screen.Width)x$($screen.Height); refusing coordinate click"
+          }
+
+          Click-Point 960 526
+          Start-Sleep -Seconds 7
+          if ((Get-ForegroundTitle) -ne 'Minecraft') { throw 'Minecraft foreground verification failed after Play click' }
+
+          $beforePath = Join-Path $out 'play-before-modal-close.png'
+          Capture $beforePath
+
+          # Fingerprint the previously observed Marketplace Pass modal before
+          # clicking its close X. If it is absent, do not guess.
+          $probeBitmap = [System.Drawing.Bitmap]::FromFile($beforePath)
+          try {
+            $xPixel = $probeBitmap.GetPixel(1488,89)
+            $bgPixel = $probeBitmap.GetPixel(1450,90)
+            $xWhite = ($xPixel.R -ge 240 -and $xPixel.G -ge 240 -and $xPixel.B -ge 240)
+            $bgGray = ($bgPixel.R -ge 55 -and $bgPixel.R -le 95 -and
+                       $bgPixel.G -ge 55 -and $bgPixel.G -le 95 -and
+                       $bgPixel.B -ge 55 -and $bgPixel.B -le 95)
+          } finally {
+            $probeBitmap.Dispose()
+          }
+
+          if (-not ($xWhite -and $bgGray)) {
+            throw "Marketplace modal fingerprint not present; refusing close-coordinate click"
+          }
+
+          Click-Point 1488 89
+          Start-Sleep -Seconds 3
+          if ((Get-ForegroundTitle) -ne 'Minecraft') { throw 'Minecraft foreground verification failed after modal close' }
+
+          $afterPath = Join-Path $out 'play-after-modal-close.png'
+          Capture $afterPath
+
+          Write-Host ('BWR_CREATE_PROBE_JSON=' + ([ordered]@{
+            foreground_verified = $true
+            play_clicked = $true
+            marketplace_modal_fingerprint_verified = $true
+            marketplace_modal_closed = $true
+            post_close_screenshot_captured = (Test-Path $afterPath)
+            world_opened = $false
+            existing_world_clicked = $false
+            create_new_clicked = $false
+          } | ConvertTo-Json -Compress))
+
+          $newPids = @(
+            Get-Process -ErrorAction SilentlyContinue |
+              Where-Object { $_.SessionId -eq $sessionId -and $_.ProcessName -match 'Minecraft|Minecraft.Windows' -and $before -notcontains $_.Id } |
+              Select-Object -ExpandProperty Id
+          )
+          foreach ($pidToStop in $newPids) { Stop-Process -Id $pidToStop -Force -ErrorAction SilentlyContinue }
+
+      - name: Upload safe Play-screen evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: bedrock-wither-ui-create-probe
+          retention-days: 3
+          if-no-files-found: error
+          path: |
+            bedrock-ui-create-probe/play-before-modal-close.png
+            bedrock-ui-create-probe/play-after-modal-close.png
