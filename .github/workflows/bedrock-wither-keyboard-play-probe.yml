@@ -153,6 +153,7 @@ jobs:
           foreach ($pidToStop in $newPids) { Stop-Process -Id $pidToStop -Force -ErrorAction SilentlyContinue }
 
       - name: Upload keyboard Play probe
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: bedrock-wither-keyboard-play-probe
