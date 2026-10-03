@@ -2,11 +2,14 @@ package org.kneekura.bedrockwither.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 
 public final class BedrockWitherDestructionController {
+    public static final int JAVA_WITHER_BREAK_BLOCK_LEVEL_EVENT = 1022;
+
     private final BedrockWitherEntity owner;
 
     public BedrockWitherDestructionController(BedrockWitherEntity owner) {
@@ -61,6 +64,11 @@ public final class BedrockWitherDestructionController {
                     }
                 }
             }
+        }
+
+        if (destroyed > 0 && !owner.isSilent()) {
+            // Java level event 1022 is the vanilla Wither block-break sound.
+            owner.level().levelEvent((Player) null, JAVA_WITHER_BREAK_BLOCK_LEVEL_EVENT, owner.blockPosition(), 0);
         }
 
         return new DestructionResult(visited, destroyed, skipped);
