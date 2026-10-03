@@ -2,6 +2,8 @@
 
 Status: **RESEARCH IN PROGRESS — not yet a complete vanilla-AI inventory**
 
+Current implementation/native evidence: [2026-10-03 handoff](../CURRENT-HANDOFF-2026-10-03.md) and [representative/observer acceptance](NATIVE-REPRESENTATIVE-OBSERVER-ACCEPTANCE-2026-10-03.md). Selected core ANCHOR hooks, retained/native views and four cached Boss proofs now exist; full inventory/FRONTIER and complete behavior acceptance remain separate.
+
 This directory is a KNEEKURA TECH HUB technical-asset area for understanding Minecraft Java Edition mob decision-making, navigation, movement control and built-in AI debugging.
 
 ## Static discovery baseline
