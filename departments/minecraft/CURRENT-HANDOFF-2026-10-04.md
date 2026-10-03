@@ -4,6 +4,8 @@ Date: 2026-10-04 (Asia/Tokyo). **Work in progress**: the user's full remaining `
 
 TECH HUB is the only source repository. LAB is its `departments/minecraft/lab` feature; no standalone LAB repository changes are required. Draft PR79 retains its foundation; Draft PR80 carries this continuation. Do not equate a completed implementation slice with full operational acceptance.
 
+The user designated the g3 `KNEEKURA_DEBUG_WORLD` as the official connected Tank. [Official world authority and sanitized templates](DEBUG-WORLD-AUTHORITY-2026-10-04.md) record its verified local path, original19×19×11 recipe and the g3 resize implementation boundary. Private trial copies preserve this source; a designation/template alone is not live owner registration or resize acceptance.
+
 ## New verified source work
 
 - Exact Forge 1.20.1 JAR research includes 896 entity-package class headers, 101 Mob-derived classes /79 concrete and corresponding method-body exports. [Public metadata inventory](vanilla-ai/ANCHOR-MOB-CLASS-INVENTORY-2026-10-04.json) contains hashes/inheritance/method/constructed-Goal metadata, not private paths or decompiled bodies. Full per-algorithm semantic and registry/runtime coverage are separate remaining items.
