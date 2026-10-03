@@ -52,8 +52,8 @@ public final class KneekuraDebugMotionOverlay {
  }
  private static void line(VertexConsumer consumer,PoseStack pose,KneekuraDebugMotionOverlayGeometry.Line line) {
   var normal=new Vector3f((float)(line.x1()-line.x0()),(float)(line.y1()-line.y0()),(float)(line.z1()-line.z0())).normalize();
-  boolean projectile=line.traceClass().equals("PROJECTILE_ACTUAL");int r=projectile?255:105,g=projectile?199:215,b=projectile?80:255;
-  consumer.vertex(pose.last().pose(),(float)line.x0(),(float)line.y0(),(float)line.z0()).color(r,g,b,255).normal(pose.last().normal(),normal.x,normal.y,normal.z).endVertex();
-  consumer.vertex(pose.last().pose(),(float)line.x1(),(float)line.y1(),(float)line.z1()).color(r,g,b,255).normal(pose.last().normal(),normal.x,normal.y,normal.z).endVertex();
+  var style=line.style();
+  consumer.vertex(pose.last().pose(),(float)line.x0(),(float)line.y0(),(float)line.z0()).color(style.r(),style.g(),style.b(),style.alpha()).normal(pose.last().normal(),normal.x,normal.y,normal.z).endVertex();
+  consumer.vertex(pose.last().pose(),(float)line.x1(),(float)line.y1(),(float)line.z1()).color(style.r(),style.g(),style.b(),style.alpha()).normal(pose.last().normal(),normal.x,normal.y,normal.z).endVertex();
  }
 }
