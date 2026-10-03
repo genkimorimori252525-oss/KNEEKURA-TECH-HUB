@@ -50,4 +50,23 @@ R18 chain, revision1 /LargeFireball `89bf998b-93a0-4d79-bf07-62cec1cb1604`: spaw
 
 R17's five production retained presentations validated default-OFF related layers and unchanged canonical bytes. Related-projectile native overlay/pixels remain unverified. Owned-JVM JFR files were retained for both trials; these standalone runs are descriptive measurements, not same-initial-state paired observer-effect acceptance. Native cancelled/false hurt and custom attacks remain outside captured scenarios.
 
-Remaining: damageable TF phase/formation, integrated Brain/pursuit/flight/missing-capture, native related drawing/pixels/GPU and paired observer effect, full remaining semantic/FRONTIER research, fresh whole-diff review and final exact-HEAD CI.
+## Frozen native-r20/r21 TF generation
+
+Producer `5c480ed1c6a21d6795197d4a7c3b4c5455dfa931` changes only documentation/templates after the previous runtime implementation. Genuine MOD/TF inputs remain pinned. Fresh original copies received separate prelaunch setup: r20 damageable actual-AI Snow Queen plus a natural Iron Golem; r21 six damageable actual-AI Knight Phantoms, numbers0..5 and shared `HomePos` through the genuine `GlobalPos` codec. These are controlled fixtures, not the official-world baseline or a live owner-authorized resize. All source/compiled-main guards passed.
+
+Offline r19 setup failed at Vanilla registry initialization before entity output/native launch. Its failed world/logs were preserved; a fresh r20 copy added genuine `SharedConstants`/`Bootstrap` initialization. Preparation repair is not a native AI result.
+
+| Trial | Finalized capture | Original returns /production consumption |
+| --- | --- | --- |
+| r20 Snow Queen | 4,734 unique observations; canonical SHA256 `0b892c5a031fc738e0a1593eba8c8c6df9ea4bbec179399fc5703ae8e736d44d` | 6 `setCurrentPhase` returns (DROP/BEAM/SUMMON twice),860 cached snapshots,24 separate exact-revision presentations |
+| r21 Knights | 3,931 unique observations; canonical SHA256 `ae4f361200d56c4124f0b9536874d8fe9cc9cb1b44885d5a92de4665c8423dfe` | 22 `switchToFormation` returns across six separately selected UUIDs,720 cached snapshots,18 separate exact-revision presentations |
+
+Both stores finalized `EVIDENCE_COMPLETE`, drop0/queue0/cleanACK/verified exit/original85 SHA unchanged. Actual SDK return contracts validate unchanged; constructor/load callbacks before arm do not count. Production derivation leaves canonical bytes unchanged. Post-setup baselines, predecessor worlds and owned-JVM descriptive JFR remain private.
+
+R20 first sequence: `obs:forge-runtime:51448:1293` /tick41614 /revision7 /DROP, `:1650` /41939 /revision9 /BEAM, `:1682` /41972 /revision9 /SUMMON. Second: `:3275` /43424 /revision17 /DROP, `:4000` /44085 /revision21 /BEAM, `:4038` /44121 /revision21 /SUMMON. Each callback cites its own context; presentations do not join selection revisions. Actual first post-SUMMON state retains summonsRemaining6, successfulDrops2/maxDrops2 and damageWhileBeaming39. Exact `customServerAiStep` requires damageWhileBeaming≥25 for BEAM→SUMMON; other phases use their own minion/drop conditions. This source explanation does not replace `reasonStatus=NOT_EXPOSED` or establish the actual attacker from fixture placement.
+
+R21 number0 callbacks `obs:forge-runtime:22756:60` and `:61` both request `CHARGE_PLUSX` at40487: two original calls, not proof of two changes. Number1 `:281` requests `WAITING_FOR_LEADER` at40686 and `:303` requests `CHARGE_PLUSX` at40706. Further retained calls include clockwise/anticlockwise/charge and `ATTACK_PLAYER_START`. Cached group/leader identity remain `NOT_EXPOSED`. Sequential member selection does not prove simultaneous broadcast, complete membership, leader identity or actual battle damage.
+
+Six additional exact TF goal/home source blobs were hash-verified at `a7dd8f13c653e137f977f5ffaa870fcb20fc1625`: `HoverSummonGoal`, `HoverThenDropGoal`, `HoverBeamGoal`, `PhantomUpdateFormationAndMoveGoal`, `PhantomWatchAndAttackGoal`, `EnforcedHomePoint`. Bodies/blob/SHA256 receipts remain private. The formation Goal uses its original nearby list for lowest-number election/broadcast/charge; the observer does not replay that query. Direct complete coordination remains open.
+
+Remaining: Ur-Ghast damage-driven phase and direct Knight coordination/battle, integrated Brain/pursuit/flight/missing-capture, native related drawing/pixels/GPU and paired observer effect, full remaining semantic/FRONTIER research, fresh whole-diff review and final exact-HEAD CI.
