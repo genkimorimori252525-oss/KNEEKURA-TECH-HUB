@@ -32,6 +32,52 @@ const rows=[
   obs('SERVER_ENTITY_STATE',105,{dimension:'minecraft:overworld',x:2,y:64,z:2,vx:.2,vy:0,vz:0,alive:true}),
 ];
 
+function original(kind,data,index=1) {
+  return obs('AI_DECISION',120+index,{schema:'kneekura.original-decision-event/v1',
+    semantics:'ORIGINAL_INVOCATION_RETURN_ONLY',targetRevision:1,burstId:'burst:1:100',eventIndex:index,
+    kind,data,observerCostNanos:100,observerCostScope:'BUILD_AND_FIRST_BYTE_CHECK_EXCLUDES_FINAL_ENCODING_WRITER'},
+    {source:{side:'SERVER',method:'fixture'}});
+}
+const goalReturn=()=>original('GOAL_ELIGIBILITY_RETURN',{selector:'goal',instanceIdentity:'goal:1:1',
+  instanceIdentityStatus:'AVAILABLE',goalClass:'ExampleGoal',priority:2,result:false,
+  rejectionReasonStatus:'NOT_EXPOSED',callSiteStatus:'NOT_EXPOSED'});
+test('original eligibility return is direct evidence without guessed reason or selection',()=>{
+  const out=observeDebugWorkspaceDecision({observations:[goalReturn()],subjectUuid:UUID});
+  assert.equal(out.capabilities.goal_eligibility.status,'PARTIAL');
+  assert.equal(out.stages.EVALUATION.facts[0].value.result,false);
+  assert.equal(out.stages.EVALUATION.facts[0].epistemic_status,'DIRECT_OBSERVED');
+  assert.equal(out.stages.SELECTION,undefined);
+  assert.equal(out.timeline[0].summary.rejectionReasonStatus,'NOT_EXPOSED');
+  assert.deepEqual(out.timeline[0].source_observation_ids,['obs:AI_DECISION:121']);
+});
+test('post-search cache remains bounded algorithm state, not evaluated-neighbor or terrain proof',()=>{
+  const record=original('PATH_SEARCH_STATE',{searchId:'search:1:1',frontier:{status:'PARTIAL',data:{
+    nodes:[{x:0,y:64,z:0,g:0,h:1,f:1,costMalus:0,walkedDistance:0,pathType:'OPEN',
+      openAtReturn:false,closedAtReturn:false,cacheRole:'OTHER_CACHED'}],cacheNodeCount:12,truncated:true,
+    phase:'OUTER_BEFORE_DONE_AFTER_INNER_RETURN',neighborEvaluationTraceStatus:'NOT_EXPOSED',rejectionReasonStatus:'NOT_EXPOSED'}}});
+  const out=observeDebugWorkspaceDecision({observations:[record],subjectUuid:UUID});
+  assert.equal(out.capabilities.path_search_frontier.status,'PARTIAL');
+  assert.equal(out.stages.EVALUATION.facts[0].epistemic_status,'INSTRUMENTED_ALGORITHM_STATE');
+  assert.equal(out.stages.EVALUATION.facts[0].value.frontier.data.nodes[0].cacheRole,'OTHER_CACHED');
+  assert.equal(out.stages.CANDIDATE,undefined);
+});
+test('malformed deep events are excluded without promoting capabilities',()=>{
+  for(const change of [r=>r.payload.eventIndex=257,r=>r.payload.data.result='false',
+    r=>r.payload.data.rejectionReasonStatus='AVAILABLE',r=>r.payload.semantics='REPLAYED',
+    r=>r.payload.data.extra='x'.repeat(513),r=>r.source.side='CLIENT',r=>r.payload.kind='INVENTED_CAUSE']) {
+    const record=goalReturn();change(record);
+    const out=observeDebugWorkspaceDecision({observations:[record],subjectUuid:UUID});
+    assert.equal(out.capabilities.goal_eligibility.status,'NOT_EXPOSED');
+    assert.equal(out.timeline.length,0);
+  }
+});
+test('deep events retain full run/process/Arena and selection fences',()=>{
+  const first=goalReturn(),second=goalReturn();second.observationId+=':other';second.processEpoch=2;
+  assert.throws(()=>observeDebugWorkspaceDecision({observations:[first,second],subjectUuid:UUID}),/CONTEXT_CHANGED/);
+  second.processEpoch=1;second.payload.targetRevision=2;
+  assert.throws(()=>observeDebugWorkspaceDecision({observations:[first,second],subjectUuid:UUID}),/SELECTION_CHANGED/);
+});
+
 test('existing exact-subject lanes populate conservative DecisionObservation stages',()=>{
   const out=observeDebugWorkspaceDecision({observations:rows,subjectUuid:UUID,subjectType:'touhou_little_maid:maid',tick:105});
   assert.equal(out.subject.id,UUID);

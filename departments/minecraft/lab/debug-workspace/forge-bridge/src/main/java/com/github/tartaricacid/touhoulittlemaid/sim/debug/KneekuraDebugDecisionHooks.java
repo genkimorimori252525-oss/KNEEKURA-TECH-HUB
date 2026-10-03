@@ -1,0 +1,261 @@
+package com.github.tartaricacid.touhoulittlemaid.sim.debug;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.Brain;
+import net.minecraft.world.entity.ai.behavior.Behavior;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.ai.goal.GoalSelector;
+import net.minecraft.world.entity.ai.goal.WrappedGoal;
+import net.minecraft.world.level.pathfinder.AmphibiousNodeEvaluator;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.level.pathfinder.FlyNodeEvaluator;
+import net.minecraft.world.level.pathfinder.Node;
+import net.minecraft.world.level.pathfinder.NodeEvaluator;
+import net.minecraft.world.level.pathfinder.Path;
+import net.minecraft.world.level.pathfinder.PathFinder;
+import net.minecraft.world.level.pathfinder.SwimNodeEvaluator;
+import net.minecraft.world.level.pathfinder.WalkNodeEvaluator;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.IdentityHashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.LongSupplier;
+import java.util.function.Supplier;
+
+/** Debug-only callbacks of original ANCHOR method invocations, never a second AI call. */
+public final class KneekuraDebugDecisionHooks {
+    private static volatile Session active;
+    private KneekuraDebugDecisionHooks() { }
+    @FunctionalInterface public interface Sink { void record(String method, JsonObject payload) throws IOException; }
+    @FunctionalInterface private interface Data { JsonObject read() throws ReflectiveOperationException; }
+
+    public static void install(Session session) {
+        if (session.thread != Thread.currentThread()) throw new IllegalStateException("SERVER_THREAD_REQUIRED");
+        clear("REARMED");active=session;
+    }
+    public static void clear(String reason) {
+        Session previous=active;active=null;
+        if(previous!=null)previous.budget.close(reason);
+    }
+
+    public static final class Session {
+        private final Thread thread=Thread.currentThread();
+        private final Mob subject;
+        private final KneekuraDebugDecisionSnapshot snapshot;
+        private final KneekuraDebugDecisionBurstBudget budget;
+        private final int nodeLimit;
+        private final Set<String> channels;
+        private final Supplier<KneekuraDebugDecisionBurstBudget.Context> currentContext;
+        private final LongSupplier time;
+        private final Sink sink;
+        private final IdentityHashMap<WrappedGoal,JsonObject> goals=new IdentityHashMap<>();
+        private final IdentityHashMap<Object,String> identities=new IdentityHashMap<>();
+        private final IdentityHashMap<PathFinder,String> searches=new IdentityHashMap<>();
+        private long nextIdentity, nextSearch;
+        private boolean goalCoveragePartial;
+
+        public Session(Mob subject, GoalSelector goal, GoalSelector target,
+                       KneekuraDebugDecisionSnapshot snapshot, KneekuraDebugDecisionBurstBudget budget,
+                       int nodeLimit, Set<String> channels, Supplier<KneekuraDebugDecisionBurstBudget.Context> currentContext,
+                       LongSupplier time, Sink sink) throws ReflectiveOperationException {
+            if(nodeLimit<1 || nodeLimit>64)throw new IllegalArgumentException("NODE_LIMIT_OUT_OF_RANGE");
+            this.subject=subject;this.snapshot=snapshot;this.budget=budget;this.nodeLimit=nodeLimit;
+            if(channels==null||channels.isEmpty()||!Set.of("goal","brain","path","control","malus","sensor").containsAll(channels))
+                throw new IllegalArgumentException("INVALID_CHANNELS");
+            this.channels=Set.copyOf(channels);
+            this.currentContext=currentContext;this.time=time;this.sink=sink;
+            if(channels.contains("goal")){register(goal,"goal");register(target,"target");}
+        }
+        private void register(GoalSelector selector,String name) throws ReflectiveOperationException {
+            Set<?> registered=(Set<?>)KneekuraDebugDecisionSnapshot.read(GoalSelector.class,"availableGoals",selector);
+            int count=0;
+            for(Object object:registered) {
+                if(count++>=64)break;
+                WrappedGoal wrapper=(WrappedGoal)object;
+                Goal goal=(Goal)KneekuraDebugDecisionSnapshot.read(WrappedGoal.class,"goal",wrapper);
+                JsonObject data=new JsonObject();data.addProperty("selector",name);
+                String token=snapshot.identity(goal);
+                data.addProperty("instanceIdentity",token);
+                data.addProperty("instanceIdentityStatus",token==null?"NOT_EXPOSED":"AVAILABLE");
+                data.addProperty("goalClass",label(goal.getClass().getName()));
+                data.addProperty("priority",(Integer)KneekuraDebugDecisionSnapshot.read(WrappedGoal.class,"priority",wrapper));
+                goals.put(wrapper,data);
+            }
+            goalCoveragePartial|=registered.size()>64;
+        }
+        public KneekuraDebugDecisionBurstBudget budget() { return budget; }
+        public boolean goalCoveragePartial() { return goalCoveragePartial; }
+        private boolean matches(LivingEntity entity) { return subject!=null && subject==entity && thread==Thread.currentThread(); }
+        private String token(Object object) {
+            String token=identities.get(object);
+            if(token!=null)return token;
+            if(identities.size()>=128)return null;
+            token="component:"+budget.context().selectionRevision()+":"+(++nextIdentity);identities.put(object,token);return token;
+        }
+        private void record(String kind,String method,Data capture) {
+            if(thread!=Thread.currentThread())return;
+            String channel=kind.startsWith("GOAL_")?"goal":kind.startsWith("PATH_")?"path":
+                    kind.startsWith("CONTROL_")?"control":kind.startsWith("BASE_MALUS_")?"malus":
+                    kind.startsWith("SENSOR_")?"sensor":kind.startsWith("BRAIN_")||kind.startsWith("BEHAVIOR_")?"brain":null;
+            if(channel==null||!channels.contains(channel))return;
+            try {
+                var context=currentContext.get();long tick=time.getAsLong();
+                if(!budget.allows(context,tick))return;
+                long started=System.nanoTime();JsonObject data=capture.read();
+                JsonObject root=new JsonObject();
+                root.addProperty("schema","kneekura.original-decision-event/v1");
+                root.addProperty("semantics","ORIGINAL_INVOCATION_RETURN_ONLY");
+                root.addProperty("targetRevision",context.selectionRevision());
+                root.addProperty("burstId","burst:"+context.selectionRevision()+":"+budget.startTick());
+                root.addProperty("eventIndex",budget.events()+1);root.addProperty("kind",kind);root.add("data",data);
+                root.addProperty("observerCostNanos",0L);
+                root.addProperty("observerCostScope","BUILD_AND_FIRST_BYTE_CHECK_EXCLUDES_FINAL_ENCODING_WRITER");
+                root.toString().getBytes(StandardCharsets.UTF_8);
+                root.addProperty("observerCostNanos",Math.max(0L,System.nanoTime()-started));
+                int bytes=root.toString().getBytes(StandardCharsets.UTF_8).length;
+                if(budget.claim(context,tick,bytes))sink.record(method,root);
+            } catch(ReflectiveOperationException|RuntimeException error) {
+                budget.close("CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());
+            } catch(IOException error) { budget.close("WRITER_UNAVAILABLE"); }
+        }
+        void goalReturn(WrappedGoal wrapper,boolean continuation,boolean result) {
+            JsonObject reference=goals.get(wrapper);if(reference==null)return;
+            record(continuation?"GOAL_CONTINUATION_RETURN":"GOAL_ELIGIBILITY_RETURN",
+                    continuation?"WrappedGoal.canContinueToUse.RETURN":"WrappedGoal.canUse.RETURN",()->{
+                        JsonObject data=reference.deepCopy();data.addProperty("result",result);
+                        data.addProperty("rejectionReasonStatus","NOT_EXPOSED");
+                        data.addProperty("callSiteStatus","NOT_EXPOSED");return data;
+                    });
+        }
+        void goalLifecycle(WrappedGoal wrapper,boolean started) {
+            JsonObject reference=goals.get(wrapper);if(reference==null)return;
+            record(started?"GOAL_START_RETURN":"GOAL_STOP_RETURN",
+                    started?"WrappedGoal.Goal.start.AFTER":"WrappedGoal.Goal.stop.AFTER",()->{
+                        JsonObject data=reference.deepCopy();
+                        data.addProperty("running",(Boolean)KneekuraDebugDecisionSnapshot.read(WrappedGoal.class,"isRunning",wrapper));
+                        data.addProperty("reasonStatus","NOT_EXPOSED");return data;
+                    });
+        }
+    }
+
+    public static void goalReturn(WrappedGoal wrapper,boolean continuation,boolean result) {
+        Session session=active;if(session!=null)session.goalReturn(wrapper,continuation,result);
+    }
+    public static void goalLifecycle(WrappedGoal wrapper,boolean started) {
+        Session session=active;if(session!=null)session.goalLifecycle(wrapper,started);
+    }
+    public static void brainReturn(Brain<?> brain,LivingEntity entity) {
+        Session session=active;if(session==null||!session.matches(entity))return;
+        session.record("BRAIN_TICK_RETURN","Brain.tick.RETURN",()->{
+            JsonObject data=new JsonObject();data.addProperty("brainClass",label(brain.getClass().getName()));
+            data.addProperty("storedBrainMatch",KneekuraDebugDecisionSnapshot.read(LivingEntity.class,"brain",entity)==brain);
+            data.addProperty("instanceIdentity",session.token(brain));return data;
+        });
+    }
+    public static void behaviorReturn(Behavior<?> behavior,LivingEntity entity,String kind,Boolean result) {
+        Session session=active;if(session==null||!session.matches(entity))return;
+        String method=switch(kind){case "BEHAVIOR_TRY_START_RETURN"->"tryStart";
+            case "BEHAVIOR_TICK_OR_STOP_RETURN"->"tickOrStop";case "BEHAVIOR_STOP_RETURN"->"doStop";default->null;};
+        if(method==null)return;
+        session.record(kind,"Behavior."+method+".RETURN",()->{
+            JsonObject data=new JsonObject();data.addProperty("className",label(behavior.getClass().getName()));
+            data.addProperty("instanceIdentity",session.token(behavior));
+            data.addProperty("cachedStatus",((Enum<?>)KneekuraDebugDecisionSnapshot.read(Behavior.class,"status",behavior)).name());
+            if(result!=null)data.addProperty("result",result);
+            data.addProperty("reasonStatus","NOT_EXPOSED");return data;
+        });
+    }
+    public static void sensorReturn(Object sensor,LivingEntity entity) {
+        Session session=active;if(session==null||!session.matches(entity))return;
+        session.record("SENSOR_SCAN_RETURN","Sensor.doTick.AFTER",()->{
+            JsonObject data=new JsonObject();data.addProperty("className",label(sensor.getClass().getName()));
+            data.addProperty("instanceIdentity",session.token(sensor));
+            data.addProperty("candidatePopulationStatus","NOT_EXPOSED");return data;
+        });
+    }
+    public static void controlReturn(Mob mob,String kind) {
+        Session session=active;if(session==null||!session.matches(mob))return;
+        session.record("CONTROL_TICK_RETURN","Mob.serverAiStep."+kind+"Control.tick.AFTER",()->{
+            JsonObject data=new JsonObject();data.addProperty("control",kind);
+            data.add("cachedBaseFields",session.snapshot.controls(mob).getAsJsonObject(kind));return data;
+        });
+    }
+    public static void malusReturn(Mob mob,BlockPathTypes type,float result) {
+        Session session=active;if(session==null||!session.matches(mob))return;
+        session.record("BASE_MALUS_RETURN","Mob.getPathfindingMalus.RETURN",()->{
+            JsonObject data=new JsonObject();data.addProperty("pathType",type.name());
+            number(data,"returnedMalus",result);data.addProperty("dispatchScope","BASE_METHOD_RETURN_NOT_CUSTOM_OVERRIDE_RESULT");
+            data.addProperty("effectiveSourceStatus","NOT_EXPOSED");return data;
+        });
+    }
+    public static void pathBegin(PathFinder finder,Mob mob) {
+        Session session=active;if(session==null||session.thread!=Thread.currentThread())return;
+        // Also clear an interrupted selected search when this finder is reused by another Mob.
+        session.searches.remove(finder);
+        if(!session.matches(mob)||!session.channels.contains("path"))return;
+        try { if(!session.budget.allows(session.currentContext.get(),session.time.getAsLong()))return; }
+        catch(RuntimeException error) {session.budget.close("CONTEXT_UNAVAILABLE");return;}
+        if(session.searches.size()>=8)return;
+        session.searches.put(finder,"search:"+session.budget.context().selectionRevision()+":"+(++session.nextSearch));
+    }
+    public static void pathState(PathFinder finder,Mob mob) {
+        Session session=active;if(session==null||!session.matches(mob)||!session.searches.containsKey(finder))return;
+        session.record("PATH_SEARCH_STATE","PathFinder.outer.findPath.BEFORE_EVALUATOR_DONE_AFTER_INNER_RETURN",()->{
+            JsonObject data=new JsonObject();data.addProperty("searchId",session.searches.get(finder));
+            data.add("frontier",frontier(finder,session.nodeLimit));return data;
+        });
+    }
+    public static void pathResult(PathFinder finder,Mob mob,Path result) {
+        Session session=active;if(session==null||!session.matches(mob)||!session.searches.containsKey(finder))return;
+        session.record("PATH_SEARCH_RESULT","PathFinder.outer.findPath.RETURN",()->{
+            JsonObject data=new JsonObject();data.addProperty("searchId",session.searches.get(finder));
+            data.addProperty("resultPresent",result!=null);
+            if(result!=null) {
+                data.addProperty("resultClass",label(result.getClass().getName()));
+                if(result.getClass()==Path.class) {data.addProperty("canReach",result.canReach());data.addProperty("resultNodeCount",result.getNodeCount());}
+            }
+            return data;
+        });
+    }
+    public static void pathEnd(PathFinder finder) {
+        Session session=active;if(session!=null&&session.thread==Thread.currentThread())session.searches.remove(finder);
+    }
+
+    static JsonObject frontier(PathFinder finder,int limit) throws ReflectiveOperationException {
+        if(limit<1||limit>64)throw new IllegalArgumentException("NODE_LIMIT_OUT_OF_RANGE");
+        NodeEvaluator evaluator=(NodeEvaluator)KneekuraDebugDecisionSnapshot.read(PathFinder.class,"nodeEvaluator",finder);
+        JsonObject section=new JsonObject();
+        if(!Set.of(WalkNodeEvaluator.class,FlyNodeEvaluator.class,SwimNodeEvaluator.class,AmphibiousNodeEvaluator.class).contains(evaluator.getClass())) {
+            section.addProperty("status","NOT_EXPOSED");section.addProperty("detail","CUSTOM_NODE_EVALUATOR");return section;
+        }
+        Map<?,?> cache=(Map<?,?>)KneekuraDebugDecisionSnapshot.read(NodeEvaluator.class,"nodes",evaluator);
+        JsonObject data=new JsonObject();JsonArray nodes=new JsonArray();data.add("nodes",nodes);
+        data.addProperty("cacheNodeCount",cache.size());data.addProperty("phase","OUTER_BEFORE_DONE_AFTER_INNER_RETURN");
+        data.addProperty("neighborEvaluationTraceStatus","NOT_EXPOSED");
+        data.addProperty("rejectionReasonStatus","NOT_EXPOSED");
+        for(Object value:cache.values()) {
+            if(nodes.size()>=limit)break;
+            Node node=(Node)value;JsonObject row=new JsonObject();
+            row.addProperty("x",node.x);row.addProperty("y",node.y);row.addProperty("z",node.z);
+            int heapIndex=(Integer)KneekuraDebugDecisionSnapshot.read(Node.class,"heapIdx",node);
+            row.addProperty("openAtReturn",heapIndex>=0);row.addProperty("closedAtReturn",node.closed);
+            row.addProperty("cacheRole",node.closed?"CLOSED_AT_RETURN":heapIndex>=0?"OPEN_AT_RETURN":"OTHER_CACHED");
+            number(row,"g",node.g);number(row,"h",node.h);number(row,"f",node.f);
+            number(row,"costMalus",node.costMalus);number(row,"walkedDistance",node.walkedDistance);
+            row.addProperty("pathType",node.type.name());
+            if(node.cameFrom!=null) {row.addProperty("parentX",node.cameFrom.x);row.addProperty("parentY",node.cameFrom.y);row.addProperty("parentZ",node.cameFrom.z);}
+            nodes.add(row);
+        }
+        data.addProperty("truncated",cache.size()>limit);
+        section.addProperty("status",cache.size()>limit?"PARTIAL":"AVAILABLE");section.add("data",data);return section;
+    }
+    private static void number(JsonObject out,String key,float value) {
+        if(Float.isFinite(value))out.addProperty(key,value);else out.addProperty(key+"Status","NOT_EXPOSED");
+    }
+    private static String label(String value) { return value.length()<=512?value:value.substring(0,512); }
+}

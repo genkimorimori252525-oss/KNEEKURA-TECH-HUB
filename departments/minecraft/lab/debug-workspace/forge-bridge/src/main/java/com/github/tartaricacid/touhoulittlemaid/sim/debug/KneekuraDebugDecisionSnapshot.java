@@ -121,7 +121,7 @@ public final class KneekuraDebugDecisionSnapshot {
         return out;
     }
 
-    private String identity(Object goal) {
+    String identity(Object goal) {
         String token = identities.get(goal);
         if (token != null) return token;
         if (identities.size() >= MAX_IDENTITIES) return null;
@@ -244,7 +244,7 @@ public final class KneekuraDebugDecisionSnapshot {
         return out;
     }
 
-    private JsonObject controls(Mob mob) throws ReflectiveOperationException {
+    JsonObject controls(Mob mob) throws ReflectiveOperationException {
         JsonObject out = new JsonObject();
         for (String kind : Set.of("move", "look", "jump")) {
             Class<?> owner = kind.equals("move") ? MoveControl.class : kind.equals("look") ? LookControl.class : JumpControl.class;
@@ -265,7 +265,7 @@ public final class KneekuraDebugDecisionSnapshot {
         return out;
     }
 
-    private static synchronized Object read(Class<?> owner, String name, Object instance) throws ReflectiveOperationException {
+    static synchronized Object read(Class<?> owner, String name, Object instance) throws ReflectiveOperationException {
         String key = owner.getName() + ":" + name;
         Field field = FIELDS.get(key);
         if (field == null) {

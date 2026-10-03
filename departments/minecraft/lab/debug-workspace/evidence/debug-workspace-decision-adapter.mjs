@@ -1,5 +1,6 @@
 import { createDecisionObservation } from './decision-observation.mjs';
 import { buildSampledMotionTrace } from '../../simlab/motion-trace.mjs';
+import { validOriginalDecisionEvent, appendOriginalDecisionEvents } from './original-decision-events.mjs';
 
 const SUPPORTED_LANES = new Set([
   'SERVER_ENTITY_STATE',
@@ -195,8 +196,10 @@ export function observeDebugWorkspaceDecision({
   if (tick !== Infinity && !Number.isInteger(tick)) throw new TypeError('tick must be an integer or Infinity');
 
   const records = selectedRecords(observations, subjectUuid, identity, tick)
-    .filter(r => r.lane !== 'AI_DECISION' || validSnapshot(r.payload));
-  const latest = latestByLane(records);
+    .filter(r => r.lane !== 'AI_DECISION' || validSnapshot(r.payload) || validOriginalDecisionEvent(r));
+  const snapshotRecords=records.filter(r=>r.lane === 'AI_DECISION' && validSnapshot(r.payload));
+  const originalRecords=records.filter(validOriginalDecisionEvent);
+  const latest = latestByLane(records.filter(r=>r.lane !== 'AI_DECISION' || validSnapshot(r.payload)));
   const state = latest.get('SERVER_ENTITY_STATE') ?? null;
   const target = latest.get('AI_TARGET') ?? null;
   const brain = latest.get('BRAIN_MEMORY') ?? null;
@@ -283,7 +286,8 @@ export function observeDebugWorkspaceDecision({
       causal_relation: 'TEMPORAL_ASSOCIATION',
       source_observation_ids: [r.observationId],
     }));
-  timeline.push(...sampledGoalChanges(records));
+  timeline.push(...sampledGoalChanges(snapshotRecords));
+  appendOriginalDecisionEvents(originalRecords,stages,capabilities,timeline);
 
   const context = records.length ? contextOf(records[0]) : {
     debug_session_id: identity.debug_session_id ?? null,
@@ -309,7 +313,7 @@ export function observeDebugWorkspaceDecision({
       version: '1',
       family: 'GENERIC_MOB_BASELINE',
       provenance: 'SERVER_ENTITY_STATE/AI_TARGET/BRAIN_MEMORY/RUNNING_BEHAVIORS/BEHAVIOR_TRANSITION/NAVIGATION/AI_DECISION',
-      observer_effect_risk: 'BOUNDED_SAMPLED_OBSERVER',
+      observer_effect_risk: originalRecords.length ? 'BOUNDED_INSTRUMENTED_OBSERVER' : 'BOUNDED_SAMPLED_OBSERVER',
     },
     capabilities,
     stages,
@@ -320,6 +324,7 @@ export function observeDebugWorkspaceDecision({
       ...(running ? ['running_behaviors'] : []),
       ...(navigation ? ['navigation'] : []),
       ...(snapshot ? SNAPSHOT_SECTIONS.filter(name => snapshot.payload.sections[name].status !== 'NOT_EXPOSED') : []),
+      ...(originalRecords.length ? ['original_decision_events'] : []),
     ],
   });
 }

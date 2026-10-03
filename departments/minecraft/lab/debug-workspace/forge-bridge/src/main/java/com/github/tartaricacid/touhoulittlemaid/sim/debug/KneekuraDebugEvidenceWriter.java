@@ -234,6 +234,19 @@ public final class KneekuraDebugEvidenceWriter {
         }
     }
 
+    /** Bounded observation only; does not grant or consume world-action authority. */
+    public static void recordDecisionObserved(
+            KneekuraDebugEnv.Config config,long arenaEpoch,long localTick,Long gameTime,
+            String method,UUID entityUuid,JsonObject payload)throws IOException {
+        if(config==null||!config.enabled()||entityUuid==null||payload==null)throw new IOException("DECISION_CONTEXT_UNAVAILABLE");
+        synchronized(LOCK) {
+            if(broken||sealed||!accepting)throw new IOException("DECISION_WRITER_UNAVAILABLE");
+            if(arenaEpoch<0||arenaEpoch>9007199254740991L||localTick<0)throw new IOException("INVALID_DECISION_EPOCH");
+            writeObservationLocked(config,localTick,gameTime,"L2","AI_DECISION","ENTITY_UUID",entityUuid,
+                    "SERVER",method,payload.deepCopy(),arenaEpoch,null);
+        }
+    }
+
     /** Selected owner event, preserving its actual Arena epoch on the existing bounded writer. */
     public static void recordOwnedEntityObserved(
             KneekuraDebugEnv.Config config, long arenaEpoch, long localTick, Long gameTime,

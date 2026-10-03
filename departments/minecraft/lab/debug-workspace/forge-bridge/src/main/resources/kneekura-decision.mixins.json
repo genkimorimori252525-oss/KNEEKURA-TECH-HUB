@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.github.tartaricacid.touhoulittlemaid.sim.debug.decisionmixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "KneekuraDebugWrappedGoalDecisionMixin",
+    "KneekuraDebugBrainDecisionMixin",
+    "KneekuraDebugBehaviorDecisionMixin",
+    "KneekuraDebugSensorDecisionMixin",
+    "KneekuraDebugMobDecisionMixin",
+    "KneekuraDebugPathDecisionMixin"
+  ],
+  "injectors": { "defaultRequire": 1 }
+}

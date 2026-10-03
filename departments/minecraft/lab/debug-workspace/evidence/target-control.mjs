@@ -77,11 +77,26 @@ export async function readTargetControl(current) {
   }
 }
 
-export async function setTargetControl(current, targetUuid, { decisionSnapshot = false } = {}) {
+export function normalizeDecisionBurst(value) {
+  if(value==null)return null;
+  const limits={ticks:200,maxEvents:256,maxBytes:524288,maxNodes:64};
+  if(typeof value!=='object'||Array.isArray(value)||Object.keys(value).some(k=>![...Object.keys(limits),'channels'].includes(k))||
+      Object.entries(limits).some(([key,max])=>!Number.isSafeInteger(value[key])||value[key]<1||value[key]>max)||
+      !Array.isArray(value.channels)||value.channels.length<1||value.channels.length>6||
+      new Set(value.channels).size!==value.channels.length||value.channels.some(c=>!['goal','brain','path','control','malus','sensor'].includes(c))){
+    throw new TypeError('Invalid decisionBurst: require finite ticks/events/bytes/nodes and unique known channels');
+  }
+  return {...Object.fromEntries(Object.keys(limits).map(key=>[key,value[key]])),channels:[...value.channels]};
+}
+
+export async function setTargetControl(current, targetUuid, { decisionSnapshot = false,decisionBurst = null } = {}) {
   assertCurrentIdentity(current);
   const normalized = normalizeTargetUuid(targetUuid);
   if (typeof decisionSnapshot !== 'boolean') throw new TypeError('decisionSnapshot must be boolean');
   if (decisionSnapshot && normalized === null) throw new TypeError('decisionSnapshot requires a target');
+  const burst=normalizeDecisionBurst(decisionBurst);
+  if(burst&&normalized===null)throw new TypeError('decisionBurst requires a target');
+  if(burst&&current.decisionHooksEnabled!==true)throw new TypeError('DECISION_HOOKS_NOT_ENABLED');
   const existing = await readTargetControl(current);
   const file = existing.file;
   const revision = (existing.revision ?? 0) + 1;
@@ -95,6 +110,7 @@ export async function setTargetControl(current, targetUuid, { decisionSnapshot =
     revision,
     targetUuid: normalized,
     decisionSnapshot,
+    decisionBurst:burst,
     updatedAt: nowIso(),
   };
 

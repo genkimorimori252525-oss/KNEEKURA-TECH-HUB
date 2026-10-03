@@ -2,6 +2,7 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import {decisionBurstFromArgs} from './decision-burst-cli.mjs';
 import {
   doctor,
   launchDebugRun,
@@ -104,6 +105,7 @@ async function main() {
     }
     const target = await setTargetControl(current, entityUuid, {
       decisionSnapshot: process.argv.includes('--decision-snapshot'),
+      decisionBurst: decisionBurstFromArgs(process.argv.slice(4)),
     });
     print({
       configFile: file,

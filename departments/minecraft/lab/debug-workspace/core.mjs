@@ -8,6 +8,7 @@ import { verifyProcessesExited } from './process-stop.mjs';
 import { loadBridgeRegistration, validateTechHubBinding } from './bridge/registration.mjs';
 import { hashId, exactKeys, canonicalRunSnapshotBytes } from './bridge/json.mjs';
 import { prepareOwnerControl, readPreparedOwnerControl, ownerLaunchEnvironment, ownerLaunchSelection } from './bridge/owner-prelaunch.mjs';
+import { decisionHookLaunchOptions } from './decision-hook-launch.mjs';
 
 export const READY_PROTOCOL = 'KNEEKURA_DEBUG_READY_V1';
 export const CONFIG_SCHEMA_VERSION = 1;
@@ -101,6 +102,7 @@ export function validateConfig(config, repoRoot) {
       typeof config.requireGitIdentity !== 'boolean') {
     errors.push('requireGitIdentity must be boolean');
   }
+  if(config.decisionHooks!=null && typeof config.decisionHooks!=='boolean')errors.push('decisionHooks must be boolean');
 
   try { ownerLaunchSelection(config); }
   catch (error) { errors.push('ownerControl: ' + error.message); }
@@ -118,6 +120,7 @@ export function validateConfig(config, repoRoot) {
     requireExistingWorld: config.requireExistingWorld === true,
     workspaceChecks: [...(config.workspaceChecks || [])],
     requireGitIdentity: config.requireGitIdentity === true,
+    decisionHooks: config.decisionHooks === true,
     debugProfile: typeof config.debugProfile === 'string' && config.debugProfile.trim()
       ? config.debugProfile.trim()
       : 'FAST_DEBUG',
@@ -993,7 +996,8 @@ export async function launchDebugRun(config, repoRoot, options = {}) {
   });
   const vars = templateVars(ctx);
 
-  const launchArgs = c.launch.args.map((x) => expandTemplate(x, vars));
+  const decisionHooks=decisionHookLaunchOptions(c,repoRoot);
+  const launchArgs = c.launch.args.map((x) => expandTemplate(x, vars)).concat(decisionHooks.extraArgs);
   const forgeBridgeSourceDir = path.join(
     repoRoot, 'debug-workspace', 'forge-bridge', 'src', 'main', 'java'
   );
@@ -1018,6 +1022,7 @@ export async function launchDebugRun(config, repoRoot, options = {}) {
     KNEEKURA_DEBUG_RUNTIME_ROOT: c.runtimeRoot,
     KNEEKURA_DEBUG_FORGE_BRIDGE_SRC: forgeBridgeSourceDir,
     KNEEKURA_DEBUG_WORLD_NAME: c.worldName,
+    ...decisionHooks.env,
   }, preparedOwner);
 
   const runRecord = {
@@ -1035,6 +1040,7 @@ export async function launchDebugRun(config, repoRoot, options = {}) {
     labGit,
     worldName: c.worldName,
     forgeBridgeSourceDir,
+    decisionHooksEnabled:c.decisionHooks,
     launch: {
       command: c.launch.command,
       args: launchArgs,
@@ -1266,6 +1272,7 @@ export async function launchDebugRun(config, repoRoot, options = {}) {
       runSnapshotFile,
       ...(preparedOwner ? { ownerControlIntent: preparedOwner.ownerControlIntent } : {}),
       status: 'DEBUG_READY',
+      decisionHooksEnabled: c.decisionHooks,
       pid: child.pid,
       runtimePid: ready.pid,
       runtimeStartedAtEpochMs,
@@ -1284,6 +1291,7 @@ export async function launchDebugRun(config, repoRoot, options = {}) {
     return {
       ok: true,
       status: 'DEBUG_READY',
+      decisionHooksEnabled: c.decisionHooks,
       debugSessionId,
       runId,
       processEpoch,

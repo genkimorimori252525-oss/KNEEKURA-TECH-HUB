@@ -58,6 +58,7 @@ public final class KneekuraDebugServerObserver {
             new IdentityHashMap<>();
     private static long nextBehaviorToken;
     private static boolean decisionSnapshotEnabled;
+    private static KneekuraDebugDecisionBurstRequest decisionBurst;
     private static final KneekuraDebugDecisionSnapshot DECISION_SNAPSHOT = new KneekuraDebugDecisionSnapshot();
 
     private KneekuraDebugServerObserver() {
@@ -70,6 +71,7 @@ public final class KneekuraDebugServerObserver {
     ) {
         config = value;
         if (value == null || !value.enabled() || server == null) {
+            KneekuraDebugDecisionBurstRuntime.stop();
             return;
         }
 
@@ -78,6 +80,9 @@ public final class KneekuraDebugServerObserver {
             lastTargetPollTick = localServerTick;
             pollTargetFile(value);
         }
+
+        KneekuraDebugDecisionBurstRuntime.onTick(value,server,localServerTick,targetUuid,
+                targetRevision,decisionBurst,DECISION_SNAPSHOT);
 
         UUID selected = targetUuid;
         if (selected == null) {
@@ -216,7 +221,10 @@ public final class KneekuraDebugServerObserver {
             if (nextSnapshot && next == null) {
                 throw new IllegalArgumentException("decisionSnapshot requires a target");
             }
+            KneekuraDebugDecisionBurstRequest nextBurst=KneekuraDebugDecisionBurstRequest.parse(root.get("decisionBurst"));
+            KneekuraDebugDecisionBurstRuntime.validateRequest(nextBurst,next);
 
+            KneekuraDebugDecisionBurstRuntime.selectionChanged();
             targetRevision = revision;
             targetUuid = next;
             lastSampleTick = Long.MIN_VALUE;
@@ -227,6 +235,7 @@ public final class KneekuraDebugServerObserver {
             BEHAVIOR_TOKENS.clear();
             nextBehaviorToken = 0L;
             decisionSnapshotEnabled = nextSnapshot;
+            decisionBurst=nextBurst;
             DECISION_SNAPSHOT.reset(revision);
 
             TouhouLittleMaid.LOGGER.info(
@@ -239,6 +248,15 @@ public final class KneekuraDebugServerObserver {
                     file,
                     e);
         }
+    }
+
+    static void stop() {
+        KneekuraDebugDecisionBurstRuntime.stop();
+        targetUuid=null;targetRevision=0;decisionSnapshotEnabled=false;decisionBurst=null;
+        lastTargetPollTick=Long.MIN_VALUE;lastSampleTick=Long.MIN_VALUE;
+        LAST_PAYLOAD.clear();LAST_EMIT_TICK.clear();BEHAVIOR_TOKENS.clear();
+        lastRunningBehaviors=List.of();runningBehaviorBaselineSeen=false;nextBehaviorToken=0;
+        DECISION_SNAPSHOT.reset(0);
     }
 
     private static ResolvedTarget resolveExact(

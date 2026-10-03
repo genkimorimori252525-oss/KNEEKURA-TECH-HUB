@@ -18,3 +18,20 @@ test('Decision snapshot control defaults OFF and explicit arming is revision fen
   await assert.rejects(setTargetControl(current,uuid,{decisionSnapshot:'true'}),/decisionSnapshot must be boolean/);
   await assert.rejects(setTargetControl(current,null,{decisionSnapshot:true}),/requires a target/);
 });
+
+test('Decision burst is explicit, finite, channel-scoped and reset by every selection',async t=>{
+  const runDir=await mkdtemp(path.join(tmpdir(),'kneekura-decision-burst-'));
+  t.after(()=>rm(runDir,{recursive:true,force:true}));
+  const current={runDir,debugSessionId:'s',runId:'r',runSnapshotId:'snapshot',processEpoch:1,decisionHooksEnabled:true};
+  const uuid='00000000-0000-0000-0000-000000000001';
+  const burst={ticks:50,maxEvents:128,maxBytes:65536,maxNodes:16,channels:['goal','path']};
+  assert.deepEqual((await setTargetControl(current,uuid,{decisionBurst:burst})).decisionBurst,burst);
+  assert.equal((await setTargetControl(current,uuid)).decisionBurst,null);
+  assert.equal((await clearTargetControl(current)).decisionBurst,null);
+  await assert.rejects(setTargetControl({...current,decisionHooksEnabled:false},uuid,{decisionBurst:burst}),/DECISION_HOOKS_NOT_ENABLED/);
+  await assert.rejects(setTargetControl(current,null,{decisionBurst:burst}),/requires a target/);
+  for(const invalid of [{...burst,ticks:201},{...burst,maxEvents:257},{...burst,maxBytes:524289},{...burst,maxNodes:65},
+    {...burst,ticks:'50'},{...burst,ticks:0},{...burst,channels:['goal','goal']},{...burst,channels:['unknown']},{...burst,unknown:1}]){
+    await assert.rejects(setTargetControl(current,uuid,{decisionBurst:invalid}),/Invalid decisionBurst/);
+  }
+});
