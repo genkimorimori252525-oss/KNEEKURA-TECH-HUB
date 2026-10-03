@@ -33,4 +33,4 @@ The common Decision Model maps these callbacks to EXECUTION and a `MOD_TRANSITIO
 
 ## Verification status
 
-Focused Motion/Decision contracts: 74 passed / 0 skipped. Portable Java request/descriptor checks, actual Java-to-Node descriptor equality, genuine Forge API contracts and all bridge/Mixin compilation passed. The four-MOD native snapshot proof is separate. Original callback application and native invocations are pending the next frozen trial; full Boss battles and total observer effects are not claimed.
+Focused Motion/Decision contracts: 74 passed / 0 skipped. Portable Java request/descriptor checks, actual Java-to-Node descriptor equality, genuine Forge API contracts and all bridge/Mixin compilation passed. [Native original-return acceptance](NATIVE-MOD-RETURN-ACCEPTANCE-2026-10-03.md) captured Hydra64/Knight2, OFF/reset0, finite event/window stops, canonical924/drop0/cleanACK and read-only CLI/hash proof. Snow Queen/Ur-Ghast were NOT_CAPTURED in the NoAI fixture; full Boss battles and total observer effects are not claimed. The four-MOD native cached-state proof is separate.
