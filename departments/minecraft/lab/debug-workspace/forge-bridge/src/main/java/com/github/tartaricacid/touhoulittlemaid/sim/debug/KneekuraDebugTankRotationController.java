@@ -12,6 +12,7 @@ import java.util.function.LongSupplier;
 /** Source-owner maintenance seam; no request ingress or experimental action authority. */
 final class KneekuraDebugTankRotationController {
     static final int CELLS_PER_TICK = 256;
+    static final long TICK_WORK_BUDGET_NANOS = 25_000_000L;
     static final long MAX_EPOCH = 9007199254740991L;
     enum Phase { PREFLIGHT, GENERATING, VERIFYING, VERIFIED, OUTCOME_UNKNOWN }
     record Cell(int x, int y, int z) {}
@@ -91,6 +92,7 @@ final class KneekuraDebugTankRotationController {
         if (executing) return unknown("TANK_ROTATION_REENTRANT_TICK");
         executing = true;
         try {
+            long tickStarted = clock.getAsLong();
             requireAuthority();
             if (tick < 0 || tick > MAX_EPOCH || lastTick >= 0 && tick != lastTick + 1) throw new IOException("TANK_ROTATION_TICK_DISCONTINUITY");
             lastTick = tick;
@@ -110,6 +112,9 @@ final class KneekuraDebugTankRotationController {
                     default -> throw new IOException("INVALID_TANK_ROTATION_PHASE");
                 }
                 cursor++;
+                // Yield only after the delegate and its following authority check completed.
+                // A synchronous delegate or boundary save may itself exceed this scheduling budget.
+                if (clock.getAsLong() - tickStarted >= TICK_WORK_BUDGET_NANOS) break;
             }
             if (cursor == plan.next().allocationCells()) {
                 requireAuthority(); backend.requireQuiet(); requireAuthority();

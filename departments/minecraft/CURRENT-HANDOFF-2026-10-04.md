@@ -89,3 +89,5 @@ The user's overlapping-trace request is implemented in native and retained/SimLa
 5. Independently review the new whole diff, verify final exact HEAD CI/genuine Forge regressions, and reconcile every original completion item. The full goal stays active while required work remains.
 
 Original world85/85 hashes were reverified unchanged at discovery; the pinned MOD checkout is clean at53a84d0. New private evidence uses C: because K: had approximately1.9GB free; preceding evidence and predecessor worlds are preserved. No user/private runtime data, credentials or raw source bodies are committed.
+
+R63 continuation: [paired native Tank frames and bounded JFR](vanilla-ai/TANK-DISPLAY-AND-PACING-2026-10-05.md) at producer1363ff5 establish one identical-camera NATIVE/OBSERVATION_BRIGHT pair and actual geometry/save closure epoch9→10 with preserved prior cells. New25ms between-cell scheduling retains all guards/256cellcap/originallease; local RED→GREEN/controller7741/genuineAPI304/plan58/atomic10 pass. New native pacing and exact new HEAD CI remain pending. Original full research/adapters/integrated cases/performance and one final whole-diff review remain open.

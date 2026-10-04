@@ -1,0 +1,525 @@
+{
+  "schemaVersion": 1,
+  "scope": "R63_PRIVATE_PAIRED_TANK_FRAME_AND_JFR_HOTSPOT_DIAGNOSTICS_NOT_ORIGINAL_GOAL_COMPLETION",
+  "producer": "1363ff5d3158e07b27f4cfb393ecd85082d4397a",
+  "pair": {
+    "commonSavedBaselineFiles": 87,
+    "initialSavedBaselineHashesEqual": true,
+    "initialLevelBytesEqual": true,
+    "actualCamera": {
+      "x": 84.5,
+      "y": 229.61999988555908,
+      "z": 7.5,
+      "yaw": -90,
+      "pitch": 30
+    },
+    "dimensions": [
+      640,
+      480
+    ],
+    "actualNativeArenaBaseline": "0f352aac3f06217bfa7239371fe60a813357f8a5edcb7770ba6b019702fef622",
+    "initialOptionsSha256": "eb71499d9e5c986e8edb4c4019e36dc0643260d81ce906186a3c842dae4c224c",
+    "privateDiagnosticJarSha256": "72a353993c532797b3852b371b01a0b1b5d53d887081327b70dab5eed956e165",
+    "originalLeasePerArmNanos": 120000000000,
+    "singleFramePerArm": true,
+    "stats": {
+      "scope": "ONE_PAIRED_FIXED_SCREEN_REGION_DESCRIPTIVE_SRGB_VALUES_NOT_PHYSICAL_LUMINANCE_OR_CAUSAL_GPU_PROOF",
+      "region": [
+        64,
+        64,
+        384,
+        300
+      ],
+      "regionBounds": "XY_MIN_INCLUSIVE_MAX_EXCLUSIVE",
+      "native": {
+        "meanRec709WeightedSrgb8": 7.97877904,
+        "medianRec709WeightedSrgb8": 0.7874,
+        "fractionBelow1": 0.80406515,
+        "pixels": 75520
+      },
+      "bright": {
+        "meanRec709WeightedSrgb8": 12.83474128,
+        "medianRec709WeightedSrgb8": 6.004,
+        "fractionBelow1": 0,
+        "pixels": 75520
+      },
+      "meanAbsoluteWeightedDifference": 4.85596224,
+      "fractionChangedAbove3": 0.92641684
+    },
+    "savedGeometry": {
+      "scope": "ACTUAL_SAVED_BLOCK_IDENTIFIERS_ONLY_NOT_LIGHTING_DYNAMICS_OR_FULL_CHUNK_EQUIVALENCE",
+      "newCells": 1089,
+      "newShellCells": 522,
+      "newInteriorCells": 567,
+      "geometryFingerprint": "sha256:55c7a3ee9d3eaf89084e0a972b57bb3e5cc025cdea2d6caf518afbfc3f2fc5e4",
+      "comparedPriorCells": 96181,
+      "unavailablePriorCells": 0,
+      "priorRecipes": 6
+    },
+    "limits": [
+      "ONE_PAIR_ONLY_NOT_REPEATED_STATISTICAL_CAUSAL_ATTRIBUTION",
+      "SERVER_TICKS_WORLD_TIME_AND_RENDER_FLICKER_NOT_EXACTLY_ALIGNED",
+      "FIXED_REGION_INCLUDES_GRID_NO_PIXEL_TO_MATERIAL_OR_UUID_SEGMENTATION",
+      "SYNCHRONOUS_GPU_READBACK_AND_PNG_IO_PERTURBS_TIMING_EXCLUDED_FROM_PERFORMANCE",
+      "PRIVATE_RUNTIME_ONLY_DIAGNOSTIC_CHANGES_CLASSPATH",
+      "NO_CAMERA_OR_WORLD_MUTATION_BY_RUNTIME_DIAGNOSTIC"
+    ]
+  },
+  "arms": [
+    {
+      "runId": "run-20261004215355-2e135d38ffea",
+      "debugSessionId": "sess-20261004215355-0d0b73430bed",
+      "runSnapshotId": "snapshot-20261004215355-0a6f4587b66b",
+      "processEpoch": 1,
+      "arenaEpoch": 9,
+      "receiptHash": "4944866f92f03103fdab51ed2d9dc6e2b3619aa4cd9f7937a4f6b6245fc954a7",
+      "arm": "native-mode",
+      "bright": false,
+      "pngSha256": "4b19f8ff47889bf9c7fc7a0b18e5f74b8bfc087b64349c6a146b61e89bdc8f4a",
+      "captureCpuNanos": 23226100,
+      "image": "evidence/tank-display-r63/native-mode.png",
+      "canonicalSha256": "5e37e31892d4cec7256d657da49a566d7977e0be64cbc754ef4e9a9b30c4fc13",
+      "records": 14,
+      "cleanAck": true,
+      "writerDroppedTotal": 0,
+      "remainingQueue": 0
+    },
+    {
+      "runId": "run-20261004215559-19d6fb431ea8",
+      "debugSessionId": "sess-20261004215559-358ec13362c8",
+      "runSnapshotId": "snapshot-20261004215559-f697cfbab52a",
+      "processEpoch": 1,
+      "arenaEpoch": 9,
+      "receiptHash": "3d888690740599b8c940f507e32150ca30bd82eff392128f41371a411c6b4708",
+      "arm": "bright-mode",
+      "bright": true,
+      "pngSha256": "4faa63d3c26d7d5056451f84ae0ad6148badde7b093b7aa40dad208b7e83c612",
+      "captureCpuNanos": 30601500,
+      "image": "evidence/tank-display-r63/bright-mode.png",
+      "canonicalSha256": "5a8cbf2362d9c7c2e1a52021479639bbaa2e8019c4e4343cd70792201e726dae",
+      "records": 16,
+      "cleanAck": true,
+      "writerDroppedTotal": 0,
+      "remainingQueue": 0
+    }
+  ],
+  "rotationJfr": {
+    "requestHash": "702558ace1754c225bef256e5779d01f3dda170bd985a9f8ea0d9897c86e24b7",
+    "runId": "run-20261004220237-02f6de2ccf36",
+    "debugSessionId": "sess-20261004220237-f2ea26e781d5",
+    "runSnapshotId": "snapshot-20261004220237-452708a950d0",
+    "processEpoch": 1,
+    "previousTankEpoch": 9,
+    "nextTankEpoch": 10,
+    "experimentalArenaEpoch": 0,
+    "nextRecipeHash": "d9b58a1df55afc6ca28f0e201894b82e3025fa8564493dc128d7aa58563a9623",
+    "jfr": {
+      "scope": "BOUNDED_PROFILE_RECORDING_HOTSPOT_DIAGNOSTIC_SAMPLING_NOT_CPU_SHARE_OR_COST_EQUIVALENCE",
+      "maxSizeBytes": 67108864,
+      "maxAgeSeconds": 180,
+      "maxDurationSeconds": 240,
+      "sourceGuardsOrLeaseChanged": false,
+      "sha256": "8a537db2735ce2091cd1d9514644d76b050692e2f22ec9ce1dab9fb830026f15",
+      "bytes": 17865801
+    },
+    "summary": {
+      "scope": "ONE_PRIVATE_JFR_ROTATION_STACK_PRESENCE_DIAGNOSTIC_NOT_TOTAL_COST_CPU_SHARE_OR_OBSERVER_EFFECT_EQUIVALENCE",
+      "allRecordingEvents": 374821,
+      "allServerThreadSamplingEvents": 189,
+      "rotationTaggedSamplingEvents": 128,
+      "rotationSampleTruncatedStacks": 0,
+      "rotationSamplesWithScopedOwnerGate": 85,
+      "rotationSamplesWithOwnerFiles": 25,
+      "rotationSamplesWithJna": 7,
+      "rotationSamplesWithWindowsFs": 97,
+      "firstRotationTaggedEvent": "2026-10-04T22:03:38.657127800Z",
+      "lastRotationTaggedEvent": "2026-10-04T22:04:09.363451400Z",
+      "taggedEventEnvelopeNanosNotTotalRotationDuration": 30706323600,
+      "retainedRotationFileReadEventsAboveProfileThreshold": 0,
+      "sumRetainedRotationFileReadEventNanosNotAllIo": 0,
+      "maxRetainedRotationFileReadEventNanos": 0,
+      "fileReadPathCategories": [],
+      "rotationEventTypes": [
+        {
+          "name": "jdk.ObjectAllocationSample",
+          "events": 2626
+        },
+        {
+          "name": "jdk.NativeMethodSample",
+          "events": 105
+        },
+        {
+          "name": "jdk.Deoptimization",
+          "events": 59
+        },
+        {
+          "name": "jdk.ExecutionSample",
+          "events": 23
+        },
+        {
+          "name": "jdk.ThreadPark",
+          "events": 7
+        },
+        {
+          "name": "jdk.FileForce",
+          "events": 2
+        },
+        {
+          "name": "jdk.OldObjectSample",
+          "events": 1
+        }
+      ],
+      "rotationSampleLeaves": [
+        {
+          "name": "sun.nio.fs.WindowsNativeDispatcher.GetFileAttributesEx0",
+          "events": 56
+        },
+        {
+          "name": "sun.nio.fs.WindowsNativeDispatcher.FindFirstFile0",
+          "events": 28
+        },
+        {
+          "name": "sun.nio.fs.WindowsNativeDispatcher.FindClose",
+          "events": 11
+        },
+        {
+          "name": "net.minecraft.world.ticks.LevelChunkTicks.count",
+          "events": 8
+        },
+        {
+          "name": "java.io.FileDescriptor.close0",
+          "events": 4
+        },
+        {
+          "name": "com.sun.jna.Native.invokeInt",
+          "events": 2
+        },
+        {
+          "name": "com.sun.jna.Native.invokePointer",
+          "events": 2
+        },
+        {
+          "name": "it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap$ValueSpliterator.acceptOnIndex",
+          "events": 2
+        },
+        {
+          "name": "it.unimi.dsi.fastutil.longs.LongAVLTreeSet$Subset.<init>",
+          "events": 2
+        },
+        {
+          "name": "com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugForgeTankRotationBackend.guard",
+          "events": 1
+        },
+        {
+          "name": "com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugScopedOwnerGate.requireFast",
+          "events": 1
+        },
+        {
+          "name": "com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugScopedOwnerGate.verifyWorld",
+          "events": 1
+        },
+        {
+          "name": "com.sun.jna.Native.getStructureAlignment",
+          "events": 1
+        },
+        {
+          "name": "java.lang.StringLatin1.hashCode",
+          "events": 1
+        },
+        {
+          "name": "java.util.WeakHashMap.hash",
+          "events": 1
+        },
+        {
+          "name": "java.util.stream.ReduceOps$5ReducingSink.begin",
+          "events": 1
+        },
+        {
+          "name": "net.minecraft.server.level.ChunkHolder.blockChanged",
+          "events": 1
+        },
+        {
+          "name": "net.minecraft.world.level.entity.EntitySectionStorage.getEntities",
+          "events": 1
+        },
+        {
+          "name": "sun.nio.ch.FileChannelImpl.implCloseChannel",
+          "events": 1
+        },
+        {
+          "name": "sun.nio.ch.FileDispatcherImpl.force0",
+          "events": 1
+        }
+      ],
+      "rotationSampleKnownFrames": [
+        {
+          "name": "com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugClientBootstrap.onServerTick",
+          "events": 128
+        },
+        {
+          "name": "com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugOwnerConnection$Session.tick",
+          "events": 128
+        },
+        {
+          "name": "com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugOwnerConnection.onServerTick",
+          "events": 128
+        },
+        {
+          "name": "com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugTankRotationController.onTick",
+          "events": 128
+        },
+        {
+          "name": "com.github.tartaricacid.touhoulittlemaid.sim.debug.__KneekuraDebugClientBootstrap_onServerTick_ServerTickEvent.invoke",
+          "events": 128
+        },
+        {
+          "name": "com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugForgeTankRotationBackend.guard",
+          "events": 110
+        },
+        {
+          "name": "com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugTankRotationController.requireAuthority",
+          "events": 110
+        },
+        {
+          "name": "com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugScopedOwnerGate.requireAuthorized",
+          "events": 85
+        },
+        {
+          "name": "com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugScopedOwnerGate.requireFast",
+          "events": 85
+        },
+        {
+          "name": "com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugScopedOwnerGate.stamp",
+          "events": 57
+        },
+        {
+          "name": "sun.nio.fs.WindowsFileAttributeViews$Basic.readAttributes",
+          "events": 56
+        },
+        {
+          "name": "sun.nio.fs.WindowsFileAttributes.get",
+          "events": 56
+        },
+        {
+          "name": "sun.nio.fs.WindowsFileSystemProvider.readAttributes",
+          "events": 56
+        },
+        {
+          "name": "sun.nio.fs.WindowsNativeDispatcher.GetFileAttributesEx",
+          "events": 56
+        },
+        {
+          "name": "sun.nio.fs.WindowsNativeDispatcher.GetFileAttributesEx0",
+          "events": 56
+        },
+        {
+          "name": "com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugArenaRuntime.requireCaptureLeaseRemainingOwner",
+          "events": 45
+        },
+        {
+          "name": "sun.nio.fs.WindowsLinkSupport.getRealPath",
+          "events": 40
+        },
+        {
+          "name": "sun.nio.fs.WindowsPath.toRealPath",
+          "events": 40
+        },
+        {
+          "name": "com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugArenaRuntime.owner",
+          "events": 34
+        },
+        {
+          "name": "sun.nio.fs.WindowsNativeDispatcher.FindFirstFile",
+          "events": 29
+        },
+        {
+          "name": "sun.nio.fs.WindowsNativeDispatcher.FindFirstFile0",
+          "events": 28
+        },
+        {
+          "name": "com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugArenaController.requireLeaseRemaining",
+          "events": 27
+        },
+        {
+          "name": "com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugArenaController.validateLeaseAndRevision",
+          "events": 27
+        },
+        {
+          "name": "com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugArenaRuntime$$Lambda$24248+0x0000027538a38610.977851638.require",
+          "events": 27
+        },
+        {
+          "name": "com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugArenaRuntime.lambda$installOwner$1",
+          "events": 27
+        },
+        {
+          "name": "com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugForgeArenaBackend.guard",
+          "events": 27
+        },
+        {
+          "name": "com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugScopedOwnerGate.verifyWorld",
+          "events": 27
+        },
+        {
+          "name": "com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugOwnerFiles.read",
+          "events": 24
+        },
+        {
+          "name": "com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugArenaRuntime.snapshotOwner",
+          "events": 16
+        },
+        {
+          "name": "com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugForgeTankRotationBackend.requireQuiet",
+          "events": 14
+        },
+        {
+          "name": "sun.nio.fs.WindowsNativeDispatcher.FindClose",
+          "events": 11
+        },
+        {
+          "name": "com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugScopedOwnerGate.windowsDirectoryKey",
+          "events": 7
+        },
+        {
+          "name": "com.sun.jna.Library$Handler.invoke",
+          "events": 5
+        },
+        {
+          "name": "com.sun.jna.Function.invoke",
+          "events": 4
+        },
+        {
+          "name": "com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugForgeTankRotationBackend.publishVerified",
+          "events": 3
+        },
+        {
+          "name": "com.sun.jna.Function.invokePointer",
+          "events": 2
+        },
+        {
+          "name": "com.sun.jna.Native.invokeInt",
+          "events": 2
+        },
+        {
+          "name": "com.sun.jna.Native.invokePointer",
+          "events": 2
+        },
+        {
+          "name": "com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugForgeTankRotationBackend.generate",
+          "events": 1
+        },
+        {
+          "name": "com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugOwnerFiles.replaceExpected",
+          "events": 1
+        }
+      ],
+      "allRecordingEventTypes": [
+        {
+          "name": "jdk.GCPhaseParallel",
+          "events": 170755
+        },
+        {
+          "name": "jdk.PromoteObjectInNewPLAB",
+          "events": 74788
+        },
+        {
+          "name": "jdk.ModuleRequire",
+          "events": 47088
+        },
+        {
+          "name": "jdk.ObjectAllocationSample",
+          "events": 21668
+        },
+        {
+          "name": "jdk.ThreadSleep",
+          "events": 10324
+        },
+        {
+          "name": "jdk.ModuleExport",
+          "events": 9602
+        },
+        {
+          "name": "jdk.PromoteObjectOutsidePLAB",
+          "events": 6079
+        },
+        {
+          "name": "jdk.TenuringDistribution",
+          "events": 4455
+        },
+        {
+          "name": "jdk.ThreadPark",
+          "events": 4032
+        },
+        {
+          "name": "jdk.NativeMethodSample",
+          "events": 3386
+        },
+        {
+          "name": "jdk.GCPhasePauseLevel1",
+          "events": 1519
+        },
+        {
+          "name": "jdk.Deoptimization",
+          "events": 1518
+        },
+        {
+          "name": "jdk.ExecutionSample",
+          "events": 1501
+        },
+        {
+          "name": "jdk.MetaspaceChunkFreeListSummary",
+          "events": 1338
+        },
+        {
+          "name": "jdk.GCReferenceStatistics",
+          "events": 1320
+        },
+        {
+          "name": "jdk.SystemProcess",
+          "events": 1104
+        },
+        {
+          "name": "jdk.ActiveSetting",
+          "events": 1070
+        },
+        {
+          "name": "jdk.BooleanFlag",
+          "events": 1050
+        },
+        {
+          "name": "jdk.JavaErrorThrow",
+          "events": 685
+        },
+        {
+          "name": "jdk.ExecuteVMOperation",
+          "events": 676
+        }
+      ],
+      "limits": [
+        "SAMPLE_COUNTS_NOT_INDEPENDENT_TESTS_OR_CPU_COST_PERCENTAGES",
+        "STACK_TRUNCATION_AND_PROFILER_SELECTION_MAY_OMIT_CALLERS",
+        "PROFILE_FILE_IO_THRESHOLD_OMITS_FAST_READS",
+        "JFR_RECORDING_PERTURBS_RUNTIME",
+        "STARTUP_RECORDED_WITH_ROTATION_FILTERED_BY_SERVER_THREAD_STACK",
+        "NO_MATCHED_NO_JFR_EQUIVALENCE_OR_SCHEDULING_FIX_PROOF"
+      ]
+    },
+    "savedGeometry": {
+      "scope": "ACTUAL_SAVED_BLOCK_IDENTIFIERS_ONLY_NOT_LIGHTING_DYNAMICS_OR_FULL_CHUNK_EQUIVALENCE",
+      "newCells": 1089,
+      "newShellCells": 522,
+      "newInteriorCells": 567,
+      "geometryFingerprint": "sha256:63c5b6c6866ebe4ffefaa8b0ad7fb30eec43227a7e66bbf46b270a186581a1c8",
+      "comparedPriorCells": 97270,
+      "unavailablePriorCells": 0,
+      "priorRecipes": 7
+    },
+    "canonicalSha256": "9964f796db083ff797405b20c1bbdbe7d1357a72ef8ee4c58016d1516e710c40",
+    "records": 58,
+    "cleanAck": true,
+    "writerDroppedTotal": 0,
+    "remainingQueue": 0
+  },
+  "preservation": "Official85/control85/commonbaseline87/bothpairedpredecessors/rotationpredecessor/pinnedMOD8444/149dependencies/TFsha verified after terminal runs",
+  "pacingChange": "25ms elapsed scheduling budget between completed cells; retains256cellcap and allguards/original120slease; source RED\u2192GREEN7741/plan58/atomic10/genuineboundary304 PASS; native pacing trial NOT_RUN at this source change"
+}

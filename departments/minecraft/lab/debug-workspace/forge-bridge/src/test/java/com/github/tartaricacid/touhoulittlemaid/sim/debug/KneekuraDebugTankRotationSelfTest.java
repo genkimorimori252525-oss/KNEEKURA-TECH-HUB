@@ -68,6 +68,33 @@ public final class KneekuraDebugTankRotationSelfTest {
         check(r.backend.publications == 0, label + " no publication");
     }
     public static void main(String[] args) throws Exception {
+        Rig paced = rig(); paced.backend.afterCell = () -> paced.clock.addAndGet(10_000_000L);
+        var pacedFirst = paced.controller.onTick(10);
+        check(pacedFirst.preflightCells() == 3 && pacedFirst.cursor() == 3, "slow cells yield between completed cells after 25ms of tick work");
+        check(pacedFirst.phase() == KneekuraDebugTankRotationController.Phase.PREFLIGHT && !paced.backend.reserved, "time-budget yield retains preflight without reservation or publication");
+        check(paced.backend.guards >= 3 * paced.backend.preflight + 2, "paced work retains authority checks around every completed cell");
+        long simulatedTickStart = 50_001_000L; int pacedTicks = 1;
+        for (long tick = 11; tick < 1200 && paced.controller.snapshot().phase() != KneekuraDebugTankRotationController.Phase.VERIFIED; tick++) {
+            paced.clock.set(simulatedTickStart); simulatedTickStart += 50_000_000L;
+            var before = paced.controller.snapshot(); var after = paced.controller.onTick(tick); pacedTicks++;
+            check(after.preflightCells() - before.preflightCells() + after.generationCells() - before.generationCells() + after.verifiedCells() - before.verifiedCells() <= 3, "all paced phases yield without skipping completed-cell accounting");
+            check(after.phase() != KneekuraDebugTankRotationController.Phase.OUTCOME_UNKNOWN, "normal 20TPS paced work stays within the original finite lease");
+        }
+        var pacedDone = paced.controller.snapshot();
+        check(pacedDone.phase() == KneekuraDebugTankRotationController.Phase.VERIFIED && pacedTicks > 15, "paced three-pass generation reaches verified over multiple server ticks");
+        check(pacedDone.preflightCells() == NEXT.allocationCells() && pacedDone.generationCells() == NEXT.allocationCells() && pacedDone.verifiedCells() == NEXT.allocationCells(), "paced completion covers every allocated cell in every phase");
+        check(paced.backend.writes == NEXT.allocationCells() - NEXT.innerCells() && paced.backend.publications == 1, "paced shell mutation and terminal publication remain exactly once");
+        Rig oneSlowCell = rig(); oneSlowCell.backend.afterCell = () -> oneSlowCell.clock.addAndGet(40_000_000L);
+        var single = oneSlowCell.controller.onTick(10);
+        check(single.preflightCells() == 1 && single.phase() == KneekuraDebugTankRotationController.Phase.PREFLIGHT, "one synchronous delegate may exceed the time budget but no next cell starts");
+        Rig revokedAfterYield = rig(); revokedAfterYield.backend.afterCell = () -> revokedAfterYield.clock.addAndGet(10_000_000L);
+        revokedAfterYield.controller.onTick(10); int beforeRevocation = revokedAfterYield.backend.preflight; revokedAfterYield.backend.authorized = false;
+        revokedAfterYield.controller.onTick(11); unknown(revokedAfterYield, "authority loss after time-budget yield");
+        check(revokedAfterYield.backend.preflight == beforeRevocation && !revokedAfterYield.backend.reserved, "yield never caches authorization for the next tick");
+        Rig expiredAfterYield = rig(); expiredAfterYield.backend.afterCell = () -> expiredAfterYield.clock.addAndGet(10_000_000L);
+        expiredAfterYield.controller.onTick(10); int beforeExpiry = expiredAfterYield.backend.preflight; expiredAfterYield.clock.set(120_000_001_000L);
+        expiredAfterYield.controller.onTick(11); unknown(expiredAfterYield, "original lease expiry after time-budget yield");
+        check(expiredAfterYield.backend.preflight == beforeExpiry && !expiredAfterYield.backend.reserved, "time-budget yield does not renew the original lease");
         Rig quietMid = rig(); quietMid.backend.afterCell = () -> quietMid.backend.quiet = false;
         quietMid.controller.onTick(10); unknown(quietMid, "quiet state changes within tick");
         check(quietMid.backend.preflight == 1, "no second cell after newly scheduled/occupied state");
