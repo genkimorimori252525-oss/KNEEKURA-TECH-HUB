@@ -1,0 +1,54 @@
+{
+  "format": "kneekura.target-source-inventory.v1",
+  "target": "Olympus!",
+  "focus": "Harpy flight AI",
+  "recorded_at": "2026-10-04",
+  "anchor": {
+    "repository": "Xylonity/Olympus",
+    "branch": "v1.20.1",
+    "revision": "dcaccaa01abb4b84191c0173ba0996acd26c1f95",
+    "version": "1.0.8",
+    "minecraft": "1.20.1",
+    "loader": "Forge 47.4.0",
+    "java": 17,
+    "curseforge_project_id": 1667111,
+    "curseforge_file_id": 8962807,
+    "curseforge_file": "olympusmythology-forge-1.20.1-1.0.8.jar",
+    "source_tree": {
+      "truncated": false,
+      "entries": 761,
+      "blobs": 615,
+      "java_files": 121,
+      "resource_files": 474,
+      "harpy_related_java_files": 16
+    }
+  },
+  "frontier": {
+    "branch": "v1.21.1",
+    "revision": "31237b1e1e3abb29c7760c2a7596f320605ce75d",
+    "version": "1.0.9",
+    "minecraft": "1.21.1",
+    "java": 21,
+    "forge": "52.0.28",
+    "neoforge": "21.1.150",
+    "curseforge_file_id": 8962781,
+    "core_harpy_flight_logic_vs_anchor": "SOURCE_EQUIVALENT_FOR_GOALS_MOVE_CONTROL_NAVIGATION"
+  },
+  "license": {
+    "source": "GPLv3 plus upstream attribution/same-terms additional clause",
+    "assets": "All Rights Reserved"
+  },
+  "evidence_status": {
+    "idle_flight": "EVIDENCE_BACKED_SOURCE",
+    "target_relative_combat_flight": "EVIDENCE_BACKED_SOURCE",
+    "hybrid_direct_and_path_navigation": "EVIDENCE_BACKED_SOURCE",
+    "inertial_move_control": "EVIDENCE_BACKED_SOURCE",
+    "projectile_dodge_prediction": "EVIDENCE_BACKED_SOURCE",
+    "scripted_dash_curve": "EVIDENCE_BACKED_SOURCE",
+    "embedded_collision_recovery": "EVIDENCE_BACKED_SOURCE",
+    "takeoff_landing": "CONFIRMED_NOT_PRESENT_IN_TARGETED_SOURCE",
+    "runtime_benchmark": "NOT_ANALYZED",
+    "automated_tests": "NOT_FOUND",
+    "released_binary_source_equivalence": "NOT_ESTABLISHED"
+  }
+}

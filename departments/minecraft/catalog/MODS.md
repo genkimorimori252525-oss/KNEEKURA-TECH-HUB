@@ -8,6 +8,7 @@
 |---:|---|---|---|---|---|
 | 1 | [The Twilight Forest](../mods/twilight-forest/README.md) | content/gameplay Mod | source candidate `a7dd8f13` pinned; distributed-JAR identity pending | `793c4d4c` pinned — MC 26.1.2 / NeoForge 26.1.2.102 | IN_PROGRESS |
 | 2 | [Sinytra Connector](../mods/sinytra-connector/README.md) | loader compatibility / translation layer | `7f68ac0` beta.50 source; 141 files acquired; binary/runtime unresolved | `c84a96a` beta.6 / 26.1.2; 131 files acquired | IN_PROGRESS (source/recon/history) |
+| 5 | [Olympus!](../mods/olympus/README.md) | flying combat mob / 3D navigation | `dcaccaa` / v1.0.8 / Forge 1.20.1 native; targeted Harpy flight AI mapped | `31237b1` / v1.0.9 / MC 1.21.1; core Harpy flight logic source-equivalent | IN_PROGRESS (targeted flight study complete) |
 
 ## Rules
 
