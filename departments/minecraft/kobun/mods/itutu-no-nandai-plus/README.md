@@ -65,6 +65,8 @@ Outer user bundle SHA-256: `9d8ea665ab8b925437fa2294f34051b8b9bdc6e9036c540f5c2a
 - [Non-spell combat atlas](NON-SPELL-COMBAT-ATLAS.md)
 - [Normal danmaku atlas](NORMAL-DANMAKU-ATLAS.md)
 - [Danmaku interaction taxonomy](DANMAKU-INTERACTION-TAXONOMY.md)
+- [Action-variant atlas — Shift/charge/context branches](ACTION-VARIANT-ATLAS.md)
+- [Input-action taxonomy](INPUT-ACTION-TAXONOMY.md)
 - [Addon ecosystem](ADDON-ECOSYSTEM.md)
 - [ERA context](ERA-CONTEXT.md)
 - [Failure / repair lessons](FAILURE-REPAIR-HISTORY.md)
