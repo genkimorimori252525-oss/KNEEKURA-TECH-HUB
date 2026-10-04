@@ -170,7 +170,7 @@ def build_seed_map(mapping: dict):
         if not owner.startswith(ROOT):
             continue
         sem = x.get("semantic_owner")
-        dom = semantic_domain(sem)
+        dom = x.get("foundation_domain") or semantic_domain(sem)
         # Prefer class mappings, then CONFIRMED over HIGH, then everything else.
         weight = 0
         if x.get("kind") == "class":
