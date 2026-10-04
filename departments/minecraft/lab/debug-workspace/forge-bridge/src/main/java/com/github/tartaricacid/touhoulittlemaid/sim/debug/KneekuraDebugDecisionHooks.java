@@ -17,6 +17,9 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.Behavior;
+import net.minecraft.world.entity.ai.behavior.BehaviorControl;
+import net.minecraft.world.entity.ai.behavior.OneShot;
+import net.minecraft.world.entity.ai.behavior.GateBehavior;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.GoalSelector;
 import net.minecraft.world.entity.ai.goal.WrappedGoal;
@@ -282,6 +285,22 @@ public final class KneekuraDebugDecisionHooks {
             JsonObject data=new JsonObject();data.addProperty("className",label(behavior.getClass().getName()));
             data.addProperty("instanceIdentity",session.token(behavior));
             data.addProperty("cachedStatus",((Enum<?>)KneekuraDebugDecisionSnapshot.read(Behavior.class,"status",behavior)).name());
+            if(result!=null)data.addProperty("result",result);
+            data.addProperty("reasonStatus","NOT_EXPOSED");return data;
+        });
+    }
+    /** Original independent-control base return only; parent success is not a child result. */
+    public static void behaviorControlReturn(BehaviorControl<?> control,LivingEntity entity,String kind,Boolean result) {
+        Session session=active;if(session==null||!session.matches(entity))return;
+        Class<?> base=control instanceof OneShot<?>?OneShot.class:control instanceof GateBehavior<?>?GateBehavior.class:null;
+        if(base==null)return;
+        String method=switch(kind){case "BEHAVIOR_TRY_START_RETURN"->"tryStart";
+            case "BEHAVIOR_TICK_OR_STOP_RETURN"->"tickOrStop";case "BEHAVIOR_STOP_RETURN"->"doStop";default->null;};
+        if(method==null)return;
+        session.record(kind,base.getSimpleName()+"."+method+".RETURN",()->{
+            JsonObject data=new JsonObject();data.addProperty("className",label(control.getClass().getName()));
+            data.addProperty("instanceIdentity",session.token(control));
+            data.addProperty("cachedStatus",((Enum<?>)KneekuraDebugDecisionSnapshot.read(base,"status",control)).name());
             if(result!=null)data.addProperty("result",result);
             data.addProperty("reasonStatus","NOT_EXPOSED");return data;
         });

@@ -1,4 +1,4 @@
-import {mkdtemp,rm} from 'node:fs/promises';
+import {mkdtemp,rm,readFile} from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
 import {fileURLToPath} from 'node:url';
@@ -6,7 +6,7 @@ import {spawnSync} from 'node:child_process';
 import {writeFileSync} from 'node:fs';
 import assert from 'node:assert/strict';
 import {validDecisionSnapshot} from '../evidence/debug-workspace-decision-adapter.mjs';
-import {validOriginalDecisionEvent,originalDecisionData} from '../evidence/original-decision-events.mjs';
+import {validOriginalDecisionEvent,originalDecisionData,appendOriginalDecisionEvents} from '../evidence/original-decision-events.mjs';
 const root=fileURLToPath(new URL('../../',import.meta.url));
 const main=path.join(root,'debug-workspace/forge-bridge/src/main/java/com/github/tartaricacid/touhoulittlemaid/sim/debug');
 const test=path.join(root,'debug-workspace/forge-bridge/src/test/java/com/github/tartaricacid/touhoulittlemaid/sim/debug');
@@ -25,20 +25,34 @@ function run(command,args,env={},cwd=root){
  return result.stdout;
 }
 try {
+ const mixins=JSON.parse(await readFile(path.join(root,'debug-workspace/forge-bridge/src/main/resources/kneekura-decision.mixins.json'),'utf8'));
+ for(const name of ['OneShot','GateBehavior'])assert.ok(mixins.mixins.includes('KneekuraDebug'+name+'DecisionMixin'),'known-control mixin resource registration');
  const names=['Env','ActionJournal','ArenaController','ArenaOwnerGrant','ForgeArenaBackend','ArenaRuntime','Durability','EvidenceWriter',
   'OwnerFiles','OwnerInputs','OwnerDispatch','OwnerTriggers','OwnerLifetime','MaterialLinkage','ScopedOwnerGate','OwnerConnection',
   'CaptureSession','CaptureBarrier','CaptureRestoration','ImageArtifact','CardinalCapture','CapturePolicy','CaptureOwner','CaptureEvidenceSink','CaptureClock',
   'TankPresentationRecipe','TankPresentation','TankView','DecisionSnapshot','DecisionBurstBudget','DecisionHooks','TerrainField','SynchedCached',
   'DecisionAdapter','DecisionBurstRequest','AdapterSourceProof','TwilightForestDescriptor','TwilightForestReturnDescriptor','TwilightForestAdapter',
   'MotionTraceCache','RelatedProjectileTraceCache','MotionOverlayRuntime','MotionOverlayGeometry','MotionOverlay'];
- const sources=[...names.map(n=>path.join(main,'KneekuraDebug'+n+'.java')),path.join(main,'decisionmixin/KneekuraDebugPathDecisionMixin.java')];
- const checks=['EvidenceClaim','CaptureWriter','RegisteredWorld','TankPresentation','DecisionSnapshot','TypedMemory','DecisionHooks','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult','TerrainField','SynchedCached','MotionTraceCache','RelatedProjectileTrace','MotionOverlayGeometry','MotionWriter'];
+ const sources=[...names.map(n=>path.join(main,'KneekuraDebug'+n+'.java')),...['Path','OneShot','GateBehavior'].map(n=>path.join(main,'decisionmixin/KneekuraDebug'+n+'DecisionMixin.java'))];
+ const checks=['EvidenceClaim','CaptureWriter','RegisteredWorld','TankPresentation','DecisionSnapshot','TypedMemory','BehaviorControl','DecisionHooks','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult','TerrainField','SynchedCached','MotionTraceCache','RelatedProjectileTrace','MotionOverlayGeometry','MotionWriter'];
  run(executable('javac'),['--release','17','-proc:none','-cp',classpath,'-d',output,...sources,...checks.map(n=>path.join(test,'KneekuraDebug'+n+'SelfTest.java')),path.join(test,'KneekuraDebugDecisionIdentityInterop.java')]);
  for(const name of checks.filter(n=>n!=='MotionWriter')){
   // Vanilla bootstrap can create logs; keep this new check's artifacts in its disposable output.
-  const bootstrap=['TypedMemory','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult'].includes(name);
+  const bootstrap=['BehaviorControl','TypedMemory','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult'].includes(name);
   const cp=bootstrap?classpath.split(path.delimiter).map(p=>path.resolve(root,p)).join(path.delimiter):classpath;
   const stdout=run(executable('java'),['-cp',output+path.delimiter+cp,'com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebug'+name+'SelfTest'],{},bootstrap?output:root);
+  if(name==='BehaviorControl') {
+   const lines=stdout.split(/\r?\n/).filter(l=>l.startsWith('BEHAVIOR_CONTROL_INTEROP:'));
+   assert.equal(lines.length,13,'genuine independent-control normal returns and capped identity required');
+   const records=lines.map((line,index)=>({source:{side:'SERVER'},observationId:'control-gson:'+index,gameTime:100,payload:JSON.parse(line.slice('BEHAVIOR_CONTROL_INTEROP:'.length))}));
+   assert.ok(records.every(validOriginalDecisionEvent),'actual production Gson control facts satisfy existing event contract');
+   const cap=records.at(-1);assert.equal(Object.hasOwn(cap.payload.data,'instanceIdentity'),false,'production Gson omits capped token');
+   assert.equal(originalDecisionData(cap).instanceIdentityStatus,'NOT_EXPOSED');
+   const stages={},capabilities={},timeline=[];appendOriginalDecisionEvents(records,stages,capabilities,timeline);
+   assert.equal(timeline.length,13);assert.equal(stages.CANDIDATE,undefined);assert.equal(stages.SELECTION,undefined);assert.equal(stages.RESULT,undefined);
+   assert.ok(stages.EVALUATION.facts.every(f=>f.value.reasonStatus==='NOT_EXPOSED'));
+   console.log('Thirteen actual independent-control/Gson cases retain parent-only returns and unknown identities without causal selection/result');
+  }
   if(name==='TypedMemory') {
    const line=stdout.split(/\r?\n/).find(l=>l.startsWith('MEMORY_INTEROP:'));
    assert.ok(line,'genuine cached memory/Gson interop output required');
