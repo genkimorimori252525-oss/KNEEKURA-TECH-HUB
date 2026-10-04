@@ -60,6 +60,8 @@ Outer user bundle SHA-256: `9d8ea665ab8b925437fa2294f34051b8b9bdc6e9036c540f5c2a
 - [Historical manifest](HISTORICAL-MANIFEST.json)
 - [Source inventory](SOURCE-INVENTORY.json)
 - [Core technologies](CORE-TECHNOLOGIES.md)
+- [Complete spell-card atlas — all 35 active cards](SPELLCARD-ATLAS.md)
+- [Danmaku pattern taxonomy](DANMAKU-PATTERN-TAXONOMY.md)
 - [Addon ecosystem](ADDON-ECOSYSTEM.md)
 - [ERA context](ERA-CONTEXT.md)
 - [Failure / repair lessons](FAILURE-REPAIR-HISTORY.md)
