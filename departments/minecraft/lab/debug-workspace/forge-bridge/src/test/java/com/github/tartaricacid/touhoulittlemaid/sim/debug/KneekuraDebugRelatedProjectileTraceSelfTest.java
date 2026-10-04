@@ -46,6 +46,7 @@ public final class KneekuraDebugRelatedProjectileTraceSelfTest {
   var labels=KneekuraDebugMotionOverlayGeometry.relatedLabels(selected,cache.snapshot(),"minecraft:overworld",102,0,64,0,true);
   require(labels.size()==2&&labels.get(0).uuid().equals(shot(1))&&labels.get(1).uuid().equals(shot(2)),"labels retain actual separate projectile UUIDs");
   require(!labels.get(0).text().equals(labels.get(1).text()),"common UUID prefix remains distinguishable");
+  require(labels.get(0).displayRow()==0&&labels.get(1).displayRow()==1,"nearby ID labels have separate bounded billboard rows");
   require(labels.get(0).x()==1&&labels.get(0).y()==64&&labels.get(0).sampleTick()==102&&labels.get(0).sourceIds().equals(List.of("obs:1:1","obs:1:5")),"label uses last retained actual point plus spawn/point provenance, no live entity position");
   require(labels.get(0).style().equals(KneekuraDebugMotionOverlayGeometry.ageStyle("PROJECTILE_ACTUAL",shot(1).toString(),102,102)),"label shares exact UUID age style");
   for(var hidden:List.of(
@@ -75,6 +76,15 @@ public final class KneekuraDebugRelatedProjectileTraceSelfTest {
   require(cache.snapshot().retainedSamples()==128&&cache.snapshot().evictedSamples()==32,"global related position budget, not128 per projectile");
   var boundedLabels=KneekuraDebugMotionOverlayGeometry.relatedLabels(selected,cache.snapshot(),"minecraft:overworld",110,0,64,0,true);
   require(boundedLabels.size()==16&&boundedLabels.stream().map(l->l.text()).distinct().count()==16,"native ID labels share finite16 group bound");
+  require(boundedLabels.stream().map(l->l.displayRow()).distinct().count()==16&&boundedLabels.stream().allMatch(l->l.displayRow()>=0&&l.displayRow()<16),"label layout has at most16 distinct rows");
+  var reversed=new ArrayList<>(cache.snapshot().traces());Collections.reverse(reversed);
+  var reversedSnapshot=new KneekuraDebugRelatedProjectileTraceCache.Snapshot(context(1),reversed,128,32,0);
+  var reversedLabels=KneekuraDebugMotionOverlayGeometry.relatedLabels(selected,reversedSnapshot,"minecraft:overworld",110,0,64,0,true);
+  require(boundedLabels.stream().allMatch(l->reversedLabels.stream().anyMatch(r->r.uuid().equals(l.uuid())&&r.displayRow()==l.displayRow())),"derived row layout is independent of retained collection order");
+  var overlapping=new KneekuraDebugRelatedProjectileTraceCache();overlapping.select(context(1));
+  for(int n=1;n<=16;n++){overlapping.acceptFlushed(row(n,true,100,n,0));overlapping.acceptFlushed(row(n,false,101,17+n,0));}
+  var overlappingLabels=KneekuraDebugMotionOverlayGeometry.relatedLabels(selected,overlapping.snapshot(),"minecraft:overworld",101,0,64,0,true);
+  require(overlappingLabels.size()==16&&overlappingLabels.stream().allMatch(l->l.x()==0&&l.y()==64&&l.z()==0)&&overlappingLabels.stream().map(l->l.displayRow()).distinct().count()==16,"16 same-position labels retain one exact observed anchor with separate derived rows");
   var invalid=row(16,false,111,195,Double.NaN);cache.acceptFlushed(invalid);cache.acceptFlushed(row(16,false,112,196,16));
   require(cache.snapshot().traces().get(15).trace().gaps().stream().anyMatch(g->g.kind().equals("INVALID_RETAINED_POSITION")),"malformed actual position prevents a later false connection");
   cache.clear();require(cache.snapshot().traces().isEmpty(),"clear releases all related display state");

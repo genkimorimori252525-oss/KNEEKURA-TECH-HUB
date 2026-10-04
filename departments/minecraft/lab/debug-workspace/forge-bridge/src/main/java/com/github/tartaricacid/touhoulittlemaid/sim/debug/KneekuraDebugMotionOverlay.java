@@ -36,13 +36,17 @@ public final class KneekuraDebugMotionOverlay {
    var labels=KneekuraDebugMotionOverlayGeometry.relatedLabels(trace,related,dimension,gameTime,camera.x,camera.y,camera.z,captureQuiescent);if(lines.isEmpty()&&labels.isEmpty())return;
    pose.translate(-camera.x,-camera.y,-camera.z);var buffers=mc.renderBuffers().bufferSource();var consumer=buffers.getBuffer(RenderType.lines());
    for(var line:lines)line(consumer,pose,line);
+   for(var label:labels) {
+    var offset=new Vector3f(0,0.18f*label.displayRow(),0).rotate(event.getCamera().rotation());
+    line(consumer,pose,new KneekuraDebugMotionOverlayGeometry.Line(label.x(),label.y(),label.z(),label.x()+offset.x(),label.y()+0.22+offset.y(),label.z()+offset.z(),"PROJECTILE_ACTUAL","DERIVED_ID_LABEL_LEADER",label.sourceIds(),label.style()));
+   }
    buffers.endBatch(RenderType.lines());
    for(var label:labels) {
     pose.pushPose();
     try {
      pose.translate(label.x(),label.y()+0.22,label.z());pose.mulPose(event.getCamera().rotation());pose.scale(-0.015f,-0.015f,0.015f);
      var style=label.style();int argb=(style.alpha()<<24)|(style.r()<<16)|(style.g()<<8)|style.b();
-     mc.font.drawInBatch(label.text(),-mc.font.width(label.text())/2.0f,0,argb,false,pose.last().pose(),buffers,Font.DisplayMode.NORMAL,0,0xF000F0);
+     mc.font.drawInBatch(label.text(),-mc.font.width(label.text())/2.0f,-12.0f*label.displayRow(),argb,false,pose.last().pose(),buffers,Font.DisplayMode.NORMAL,0,0xF000F0);
     }finally{pose.popPose();}
    }
    if(!labels.isEmpty())buffers.endBatch();
@@ -51,7 +55,8 @@ public final class KneekuraDebugMotionOverlay {
     var payload=new JsonObject();payload.addProperty("schema","kneekura.live-motion-overlay-status/v1");
     payload.addProperty("semantics","DERIVED_PRESENTATION_FROM_FLUSHED_SERVER_SAMPLES_NOT_CONTINUOUS_MOTION_OR_GAMEPLAY_OBJECTS");
     payload.addProperty("targetRevision",trace.context().revision());payload.addProperty("dimension",dimension);
-    payload.addProperty("renderedFrames",frames);payload.addProperty("submittedLines",lines.size());payload.addProperty("retainedSamples",trace.samples().size());
+    payload.addProperty("renderedFrames",frames);payload.addProperty("submittedLines",lines.size()+labels.size());payload.addProperty("retainedSamples",trace.samples().size());
+    payload.addProperty("submittedProjectileLabelLeaders",labels.size());
     payload.addProperty("submittedProjectileLabels",labels.size());payload.addProperty("projectileLabelScope","RELATED_UUID_AT_LAST_RETAINED_POSITION_NOT_LIVE_POSITION");
     payload.addProperty("evictedSamples",trace.evictedSamples());payload.addProperty("rejectedSamples",trace.rejectedSamples());payload.addProperty("gapCount",trace.gaps().size());
     if(Objects.equals(trace.context(),related.context())){

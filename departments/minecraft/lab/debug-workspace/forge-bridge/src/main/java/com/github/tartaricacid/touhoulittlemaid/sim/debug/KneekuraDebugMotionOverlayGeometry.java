@@ -4,7 +4,7 @@ import java.util.*;
 final class KneekuraDebugMotionOverlayGeometry {
  record AgeStyle(int r,int g,int b,int alpha,String ageBand) { }
  record Line(double x0,double y0,double z0,double x1,double y1,double z1,String traceClass,String role,List<String> sourceIds,AgeStyle style) { }
- record Label(UUID uuid,double x,double y,double z,long sampleTick,String text,List<String> sourceIds,AgeStyle style) { }
+ record Label(UUID uuid,double x,double y,double z,long sampleTick,String text,List<String> sourceIds,AgeStyle style,int displayRow) { }
  static AgeStyle ageStyle(String traceClass,String identity,long sampleTick,long gameTime) {
   if(!Set.of("MOB_ACTUAL","PROJECTILE_ACTUAL").contains(traceClass)||identity==null||identity.isEmpty()||identity.length()>512||sampleTick<0||gameTime<0)throw new IllegalArgumentException("INVALID_TRACE_AGE_STYLE");
   if(sampleTick>gameTime||gameTime-sampleTick>=100)return null;
@@ -67,13 +67,14 @@ final class KneekuraDebugMotionOverlayGeometry {
  static List<Label> relatedLabels(KneekuraDebugMotionTraceCache.Snapshot selected,KneekuraDebugRelatedProjectileTraceCache.Snapshot related,String dimension,long gameTime,double cameraX,double cameraY,double cameraZ,boolean captureQuiescent) {
   if(!captureQuiescent||selected.context()==null||!Objects.equals(selected.context(),related.context())||gameTime<0||!Double.isFinite(cameraX)||!Double.isFinite(cameraY)||!Double.isFinite(cameraZ))return List.of();
   var names=labelNames(related.traces().stream().map(KneekuraDebugRelatedProjectileTraceCache.Trace::uuid).toList());var labels=new ArrayList<Label>();
+  var ordered=names.keySet().stream().sorted(Comparator.comparing(UUID::toString)).toList();var rows=new HashMap<UUID,Integer>();for(int i=0;i<ordered.size();i++)rows.put(ordered.get(i),i);
   for(var group:related.traces()) {
    var samples=group.trace().samples();if(samples.isEmpty())continue;
    // Last retained observation only: do not select an older point when the latest is ineligible.
    var sample=samples.get(samples.size()-1);
    if(!sample.dimension().equals(dimension)||Math.hypot(Math.hypot(sample.x()-cameraX,sample.y()-cameraY),sample.z()-cameraZ)>64)continue;
    var style=ageStyle("PROJECTILE_ACTUAL",group.uuid().toString(),sample.tick(),gameTime);if(style==null)continue;
-   labels.add(new Label(group.uuid(),sample.x(),sample.y(),sample.z(),sample.tick(),names.get(group.uuid()),List.of(group.spawnSource(),sample.sourceId()),style));
+   labels.add(new Label(group.uuid(),sample.x(),sample.y(),sample.z(),sample.tick(),names.get(group.uuid()),List.of(group.spawnSource(),sample.sourceId()),style,rows.get(group.uuid())));
   }
   return List.copyOf(labels);
  }
