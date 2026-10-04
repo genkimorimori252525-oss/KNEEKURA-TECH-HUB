@@ -1,0 +1,21 @@
+# 元のprivate経路計算条件と判定operand
+
+既存のdefault-OFF brain_navigationと[R55の直接経路計算scope](ORIGINAL-BRAIN-PATH-COMPUTE-2026-10-04.md)を使います。exact MoveToTargetSinkの元private tryComputePathが実際に呼んだprivate reachedTargetとvirtual Path.canReachの正常booleanを、BRAIN_PATH_COMPUTE_CONDITION_RETURNとしてEVALUATION／PARTIALへ保持します。元private処理のpublic化、追加のAI／tracker／getter／query／RNG呼出し、booleanの再計算を行いません。
+
+private reachedTargetは元WT tracker position、元Mob.blockPosition、元virtual BlockPos.distManhattan、元virtual WT.getCloseEnoughDistを使い、元のsigned int比較でbooleanを返します。predicateだけの有限reached subframeが、実際のdistanceとcloseEnoughの元戻り値を保持します。対応source callbackが0回／複数回ならNOT_CAPTUREDで、別の取得やcached fieldから補いません。元predicateがthrowした場合は正常return記録を作らず、元の例外をそのまま伝播します。元Path.canReachがthrowした場合、既に完了したreachedTargetの記録は別の事実として残ります。
+
+base BlockPosはdistManhattanを宣言せず、Vec3iのvirtual実装を継承します。この実装は6つの元coordinate getterを使い、int subtraction→Math.abs→float化→3項float加算→int返却です。overflow、float丸め、customなvirtual distance／閾値もあるため、数学的なdouble距離式やcached座標から戻り値を代用しません。signed負値も元の結果として保持します。consumerは両operandが取得されたexact private comparatorの記録だけ整合性を検査し、新しいAI booleanを作りません。
+
+Path.canReachはbase classではreached fieldを返しますが、customなvirtual overrideの最終booleanは異なり得ます。元のcallを1回実行し、その実際のreturnと渡されたPath／callback後のcached Sink.pathのraw参照一致を保持します。内部cached reachedをvirtual戻り値として捏造しません。reachedTarget=trueの場合やnull Pathの場合に、元のshort circuitで呼ばれなかったcanReachを補いません。predicate true、Path.canReach true、private compute true、Navigation採用、実際の到着は別の事実です。
+
+元private reachedTargetのexact Invoker／tryfinally、private compute内の2 source call Redirect、private reached bodyのdistance／closeEnoughの2 source Redirectを使います。unsupported owner／WT reference／nested sourceはframeを抑止して元の処理を維持します。compute frameの再入・再選択・終了時にもreached frameを解放し、getter中のrearm後に旧returnを新frameへ接続しません。R55の7境界、payload、既定channel、200ticks／256events／524,288bytesは保持します。reached8IDs／depth8を既存compute256／depth8、component128、Snapshot Path参照256の下に追加します。
+
+[追加ledger](BRAIN-PATH-COMPUTE-CONDITION-BYTECODE-LEDGER-2026-10-05.json)はsame mapped artifactの4 selected owners／10 methods／4 fieldsと、BlockPosの継承照合を保持します。ledger SHA **23b022ef2689629d3df2ff3d65288052e73c39ba3cea29d672380b653f15a4a5**。JDK／class／disassembly／14 member sliceとdescriptorを照合し、旧ledgerを保全します。source bodyやmapped JARをGitHubに追加しません。
+
+元private compute／reached bytecodeによるRED→GREENを使用しました。fixtureではprivate accessと観測source delegateだけを試験用に置換し、元のcomparator／short circuitを保ちます。nonnull-unreachable、already-reached、initialnull＋reached、custom virtual距離／閾値／canReach、Integer.MIN_VALUEの元overflow結果、元例外、getter回数、OFF／thread／owner／WT・Nav owner／context／時間／event／byte／writer、8depth／8reached IDs、128component／256Path参照、unknown sourceoperand、rearm、detachを検査しました。4exact Redirectと1private Invoker／singledelegate、およびR55の既存7境界をcompiled ASMで検査します。synthetic nesting／cap／absent operand fixtureは本物のnative branchやfallback RNGの証明ではありません。
+
+Motion／Decision175件、actual production Gson→strict JavaScript35件と旧59／17／39／24／11／14を保持し、allbridge／combinedAPIの成功を確認しました。
+
+## 次の検証
+
+frozen producerから正式control85filesのfresh privateコピーを使用し、自然進行Villagerのinstalled private predicate／operandとR55のFinder→create→元代入→computeを同じdirect IDで照合します。canonical／JFRactualACK・parse／cleanstop／元・control・predecessorR55・baseline85hash不変／producerと公開HEAD CIを確認するまでnative受入を主張しません。完全fallback RNG／false／cached reuse／TICK_RECOMPUTE、outer start condition→PATH write／Navigation採用／到着、全Path候補・拒否・malus・cost、全Vanilla・FRONTIER・community、広いBoss戦、matched OFF／GPU・pixels、live Tank resize、section21全受入、最後のwhole-diff独立レビューは残っています。Draftと全体goalを継続します。

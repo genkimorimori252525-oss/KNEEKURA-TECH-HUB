@@ -4,6 +4,7 @@ import {exactObjectKeys,validPathReferenceFact,validCachedPathFact,consistentRaw
 import {BRAIN_COMPUTE_KINDS,validBrainCompute} from './brain-compute-contract.mjs';
 
 const KINDS = Object.freeze({
+  BRAIN_PATH_COMPUTE_CONDITION_RETURN: ['EVALUATION','brain_navigation'],
   BRAIN_PATH_COMPUTE_RETURN: ['EVALUATION','brain_navigation'],
   BRAIN_PATH_CREATE_RETURN: ['EVALUATION','brain_navigation'],
   BRAIN_PATH_COMPUTE_PATH_WRITE_CHECKPOINT: ['EXECUTION','brain_navigation'],

@@ -37,14 +37,21 @@ try {
   'DecisionAdapter','DecisionBurstRequest','AdapterSourceProof','TwilightForestDescriptor','TwilightForestReturnDescriptor','TwilightForestAdapter',
   'MotionTraceCache','RelatedProjectileTraceCache','MotionOverlayRuntime','MotionOverlayGeometry','MotionOverlay'];
  const sources=[...names.map(n=>path.join(main,'KneekuraDebug'+n+'.java')),...['Path','Brain','Behavior','OneShot','GateBehavior'].map(n=>path.join(main,'decisionmixin/KneekuraDebug'+n+'DecisionMixin.java')),path.join(main,'decisionmixin/KneekuraDebugScheduledActivityMixin.java'),path.join(main,'decisionmixin/KneekuraDebugNavigationResultMixin.java'),path.join(main,'decisionmixin/KneekuraDebugBrainNavigationMixin.java')];
- const checks=['EvidenceClaim','CaptureWriter','RegisteredWorld','TankPresentation','DecisionSnapshot','TypedMemory','BehaviorControl','BrainActivity','NavigationResult','BrainNavigation','BrainCompute','BrainTickStop','BrainStop','DecisionHooks','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult','TerrainField','SynchedCached','MotionTraceCache','RelatedProjectileTrace','MotionOverlayGeometry','MotionWriter'];
+ const checks=['EvidenceClaim','CaptureWriter','RegisteredWorld','TankPresentation','DecisionSnapshot','TypedMemory','BehaviorControl','BrainActivity','NavigationResult','BrainNavigation','BrainComputeCondition','BrainCompute','BrainTickStop','BrainStop','DecisionHooks','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult','TerrainField','SynchedCached','MotionTraceCache','RelatedProjectileTrace','MotionOverlayGeometry','MotionWriter'];
  run(executable('javac'),['--release','17','-proc:none','-cp',classpath,'-d',output,...sources,...checks.map(n=>path.join(test,'KneekuraDebug'+n+'SelfTest.java')),path.join(test,'KneekuraDebugDecisionIdentityInterop.java')]);
  for(const name of checks.filter(n=>n!=='MotionWriter')){
   // Vanilla bootstrap can create logs; keep this new check's artifacts in its disposable output.
-  const bootstrap=['BrainCompute','BrainTickStop','BrainStop','BrainNavigation','NavigationResult','BrainActivity','BehaviorControl','TypedMemory','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult'].includes(name);
+  const bootstrap=['BrainComputeCondition','BrainCompute','BrainTickStop','BrainStop','BrainNavigation','NavigationResult','BrainActivity','BehaviorControl','TypedMemory','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult'].includes(name);
   const cp=bootstrap?classpath.split(path.delimiter).map(p=>path.resolve(root,p)).join(path.delimiter):classpath;
   const stdout=run(executable('java'),['-cp',output+path.delimiter+cp,'com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebug'+name+'SelfTest'],{},bootstrap?output:root);
-     if(name==='BrainCompute') {
+     if(name==='BrainComputeCondition') {
+    const lines=stdout.split(/\r?\n/).filter(l=>l.startsWith('BRAIN_COMPUTE_CONDITION_INTEROP:'));
+    assert.equal(lines.length,35,'original reached/Path predicate booleans, signed operands and bounded unknowns');
+    const records=lines.map((line,index)=>({source:{side:'SERVER'},observationId:'brain-compute-condition-gson:'+index,gameTime:100,payload:JSON.parse(line.slice('BRAIN_COMPUTE_CONDITION_INTEROP:'.length))}));
+    assert.ok(records.every(validOriginalDecisionEvent),'actual original compute condition Gson satisfies strict consumer');
+    console.log('Thirty-five actual Brain compute predicate/Gson cases preserve original booleans and returned operands');
+   }
+   if(name==='BrainCompute') {
     const lines=stdout.split(/\r?\n/).filter(l=>l.startsWith('BRAIN_COMPUTE_INTEROP:'));
     assert.equal(lines.length,59,'original private branch, source return/write order, direct IDs, finite operands and capped unknowns');
     const records=lines.map((line,index)=>({source:{side:'SERVER'},observationId:'brain-compute-gson:'+index,gameTime:100,payload:JSON.parse(line.slice('BRAIN_COMPUTE_INTEROP:'.length))}));

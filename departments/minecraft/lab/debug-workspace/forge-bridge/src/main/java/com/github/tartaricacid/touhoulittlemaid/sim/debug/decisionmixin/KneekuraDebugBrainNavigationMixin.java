@@ -3,6 +3,7 @@ package com.github.tartaricacid.touhoulittlemaid.sim.debug.decisionmixin;
 import com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugDecisionHooks;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Vec3i;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.MoveToTargetSink;
@@ -103,5 +104,29 @@ public abstract class KneekuraDebugBrainNavigationMixin {
         at=@At(value="FIELD",target="Lnet/minecraft/world/entity/ai/behavior/MoveToTargetSink;path:Lnet/minecraft/world/level/pathfinder/Path;",opcode=181,ordinal=1,shift=At.Shift.AFTER),require=1)
     private void kneekura$fallbackStored(Mob owner,WalkTarget target,long gameTime,CallbackInfoReturnable<Boolean> result) {
         KneekuraDebugDecisionHooks.brainComputePathWrite((MoveToTargetSink)(Object)this,owner,target,gameTime,"FALLBACK");
+    }
+
+    @Invoker(value="reachedTarget",remap=false)
+    public abstract boolean kneekura$invokeReached(Mob owner,WalkTarget target);
+
+    @Redirect(method="tryComputePath(Lnet/minecraft/world/entity/Mob;Lnet/minecraft/world/entity/ai/memory/WalkTarget;J)Z",
+        at=@At(value="INVOKE",target="Lnet/minecraft/world/entity/ai/behavior/MoveToTargetSink;reachedTarget(Lnet/minecraft/world/entity/Mob;Lnet/minecraft/world/entity/ai/memory/WalkTarget;)Z"),require=1)
+    private boolean kneekura$reachedFromCompute(MoveToTargetSink receiver,Mob owner,WalkTarget target) {
+        return KneekuraDebugDecisionHooks.originalComputeReached(receiver,owner,target,()->kneekura$invokeReached(owner,target));
+    }
+    @Redirect(method="tryComputePath(Lnet/minecraft/world/entity/Mob;Lnet/minecraft/world/entity/ai/memory/WalkTarget;J)Z",
+        at=@At(value="INVOKE",target="Lnet/minecraft/world/level/pathfinder/Path;canReach()Z"),require=1)
+    private boolean kneekura$pathCanReach(Path path) {
+        return KneekuraDebugDecisionHooks.originalComputeCanReach((MoveToTargetSink)(Object)this,path);
+    }
+    @Redirect(method="reachedTarget(Lnet/minecraft/world/entity/Mob;Lnet/minecraft/world/entity/ai/memory/WalkTarget;)Z",
+        at=@At(value="INVOKE",target="Lnet/minecraft/core/BlockPos;distManhattan(Lnet/minecraft/core/Vec3i;)I"),require=1)
+    private int kneekura$reachedDistance(BlockPos target,Vec3i ownerPosition) {
+        return KneekuraDebugDecisionHooks.originalComputeDistance((MoveToTargetSink)(Object)this,target,ownerPosition);
+    }
+    @Redirect(method="reachedTarget(Lnet/minecraft/world/entity/Mob;Lnet/minecraft/world/entity/ai/memory/WalkTarget;)Z",
+        at=@At(value="INVOKE",target="Lnet/minecraft/world/entity/ai/memory/WalkTarget;getCloseEnoughDist()I"),require=1)
+    private int kneekura$reachedClose(WalkTarget target) {
+        return KneekuraDebugDecisionHooks.originalComputeCloseEnough((MoveToTargetSink)(Object)this,target);
     }
 }

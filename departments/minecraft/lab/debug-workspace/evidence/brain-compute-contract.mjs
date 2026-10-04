@@ -1,5 +1,5 @@
 import {exactObjectKeys as exact,validPathReferenceFact,validCachedPathFact,consistentRawPathMatch} from './cached-path-contract.mjs';
-export const BRAIN_COMPUTE_KINDS=Object.freeze(['BRAIN_PATH_COMPUTE_RETURN','BRAIN_PATH_CREATE_RETURN','BRAIN_PATH_COMPUTE_PATH_WRITE_CHECKPOINT','BRAIN_PATH_FINDER_RETURN']);
+export const BRAIN_COMPUTE_KINDS=Object.freeze(['BRAIN_PATH_COMPUTE_RETURN','BRAIN_PATH_CREATE_RETURN','BRAIN_PATH_COMPUTE_PATH_WRITE_CHECKPOINT','BRAIN_PATH_FINDER_RETURN','BRAIN_PATH_COMPUTE_CONDITION_RETURN']);
 const text=v=>typeof v==='string'&&v.length>0&&v.length<=512;
 const integer=v=>Number.isSafeInteger(v);
 const long=v=>{try{return typeof v==='string'&&/^-?(0|[1-9][0-9]*)$/.test(v)&&BigInt(v)>=-(1n<<63n)&&BigInt(v)<(1n<<63n);}catch{return false;}};
@@ -21,6 +21,17 @@ export function validBrainCompute(kind,d,record){
  if(d.sinkClass!=='net.minecraft.world.entity.ai.behavior.MoveToTargetSink'||!id(d.computeInvocationId,'compute',256)||!text(d.walkTargetClass)||!long(d.gameTimeArgument)||!['CHECK_EXTRA_START','TICK_RECOMPUTE'].includes(d.callSite)||
    !(d.instanceIdentity==null?d.instanceIdentityStatus==='NOT_EXPOSED':d.instanceIdentityStatus==='AVAILABLE'&&id(d.instanceIdentity,'component',128))||
    !optional('enclosingSinkInvocation','sink')||!optional('enclosingTickStopInvocation','tick-stop')||d.parentScope!=='CAPTURED_ENCLOSING_SOURCE_SCOPES_NOT_IMMEDIATE_CAUSE_OR_ADOPTION'||d.fieldScope!=='BASE_CACHED_FIELDS_AT_DECLARED_CAPTURE_BOUNDARY'||d.arrivalStatus!=='NOT_EXPOSED'||d.operandReasonStatus!=='NOT_EXPOSED')return false;
+ if(kind==='BRAIN_PATH_COMPUTE_CONDITION_RETURN'){
+   if(typeof d.result!=='boolean')return false;
+   if(d.condition==='REACHED_TARGET'){
+     const o=d.operands,int32=v=>integer(v)&&v>=-2147483648&&v<=2147483647;
+     const value=(key,name)=>o?.[key+'Status']==='AVAILABLE'?int32(o[name]):o?.[key+'Status']==='NOT_CAPTURED'&&o[name]===undefined;
+     return exact(d,[...common,'condition','result','reachedInvocationId','operands','resultScope'])&&child(d.reachedInvocationId,d.computeInvocationId,'reached')&&
+       o?.scope==='ORIGINAL_PRIVATE_PREDICATE_RETURN_OPERANDS_NOT_COORDINATE_RECOMPUTATION'&&value('distance','distanceReturn')&&value('closeEnough','closeEnoughReturn')&&exact(o,['scope','distanceStatus',...(o.distanceStatus==='AVAILABLE'?['distanceReturn']:[]),'closeEnoughStatus',...(o.closeEnoughStatus==='AVAILABLE'?['closeEnoughReturn']:[])])&&
+       (!(o.distanceStatus==='AVAILABLE'&&o.closeEnoughStatus==='AVAILABLE')||d.result===(o.distanceReturn<=o.closeEnoughReturn))&&d.resultScope==='ORIGINAL_PRIVATE_REACHED_TARGET_BOOLEAN_NOT_ARRIVAL';
+   }
+   return d.condition==='PATH_CAN_REACH'&&exact(d,[...common,'condition','result','argumentPath','cachedSinkPath','argumentMatchesCachedSinkPath','referenceScope','resultScope'])&&d.argumentPath?.present===true&&validPathReferenceFact(d.argumentPath,rev)&&validPathReferenceFact(d.cachedSinkPath,rev)&&typeof d.argumentMatchesCachedSinkPath==='boolean'&&consistentRawPathMatch(d.argumentMatchesCachedSinkPath,d.argumentPath,d.cachedSinkPath)&&d.referenceScope==='RAW_ARGUMENT_VS_CACHED_SINK_PATH_AFTER_ORIGINAL_RETURN'&&d.resultScope==='ORIGINAL_VIRTUAL_PATH_CAN_REACH_BOOLEAN_NOT_COMPUTE_SUCCESS_OR_ARRIVAL';
+ }
  const relation=['createReturnStatus',...(d.createReturnStatus==='AVAILABLE'?['lastCreateInvocationId','createdPath','createdMatchesSinkPath']:[]),'referenceScope'];
  const validRelation=()=>d.referenceScope==='RAW_RETURNED_VS_CACHED_PATH_REFERENCE_EQUALITY'&&
    (d.createReturnStatus==='NOT_CAPTURED'?d.lastCreateInvocationId===undefined&&d.createdPath===undefined&&d.createdMatchesSinkPath===undefined:
