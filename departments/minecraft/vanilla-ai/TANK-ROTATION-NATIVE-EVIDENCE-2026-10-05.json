@@ -1,0 +1,240 @@
+{
+  "schemaVersion": 1,
+  "scope": "LIMITED_NATIVE_DISJOINT_TANK_GEOMETRY_FRESH_OWNER_REGISTERED_DISPLAY_CONTEXT_AND_ORIGINAL_LEASE",
+  "producer": "d921bf75b1e7a4600d82b3df8ff2f678be03f2d8",
+  "pinnedMODRevision": "53a84d06578632b5d123e3c2bb631b611bf830d7",
+  "maintenance": {
+    "runId": "run-20261004205646-c04e5c249dd0",
+    "debugSessionId": "sess-20261004205646-3954851f77d4",
+    "runSnapshotId": "snapshot-20261004205646-19119cedcd5f",
+    "processEpoch": 1,
+    "ownerEnvelopeHash": "66803741cfa91f13d7598398df25fec8b871069f8fce1ca1f2530edeec06a4ac",
+    "requestHash": "9247f6c9e8c1fd49b0183c94ee46281fe47999466d88b3d67e15db830e778a68",
+    "cleanEvidenceShutdown": true,
+    "finalWriterSeq": 54,
+    "writerDroppedTotal": 0,
+    "remainingQueue": 0,
+    "ownedProcesses": [
+      43012,
+      59764
+    ],
+    "ownedProcessesAbsent": true,
+    "experimentalArenaEpoch": 0,
+    "previousSavedTankEpoch": 8,
+    "nextSavedTankEpoch": 9,
+    "phase": "VERIFIED",
+    "preflightCells": 1089,
+    "generationCells": 1089,
+    "verifiedCells": 1089,
+    "ownerInstallationReceiptHash": "a9074faecfa07861fe2117622ac9c5dc169bd5cb540b0712190fbd0e7b4b04ee",
+    "savedOwnerStatus": "GEOMETRY_VERIFIED",
+    "ownerTerminalStatus": "OWNER_CLOSED",
+    "recipeHash": "6b3cb3e1775b172f6066db9abb0627baa5df1c2ad389ba3e40df587fbcdc8432",
+    "geometryFingerprint": "sha256:55c7a3ee9d3eaf89084e0a972b57bb3e5cc025cdea2d6caf518afbfc3f2fc5e4",
+    "priorRegions": 6,
+    "resetFidelity": "NOT_ESTABLISHED",
+    "environmentApplied": false
+  },
+  "reconnect": {
+    "runId": "run-20261004211433-15436f67c704",
+    "debugSessionId": "sess-20261004211433-b724e988571c",
+    "runSnapshotId": "snapshot-20261004211433-fd8442b10964",
+    "processEpoch": 1,
+    "ownerEnvelopeHash": "183d12a8f8f8309e05794d3b0b9cab173ee00a34a018546f5bbcac0c01e021d4",
+    "requestHash": "eff9df11bec5185ce820ad7ebf681df192876f7856a2b00e3dd16c66440cffea",
+    "cleanEvidenceShutdown": true,
+    "finalWriterSeq": 252,
+    "writerDroppedTotal": 0,
+    "remainingQueue": 0,
+    "ownedProcesses": [
+      50668,
+      59844
+    ],
+    "ownedProcessesAbsent": true,
+    "experimentalArenaEpoch": 9,
+    "arenaRevision": 0,
+    "arenaCells": 75,
+    "actualBaselineHash": "0f352aac3f06217bfa7239371fe60a813357f8a5edcb7770ba6b019702fef622",
+    "ownerInstallationReceiptHash": "d90a2a4cd42ec9f696687e9bc7bfc12d71e27dc016ac22952fa7ab9603e17f44",
+    "ownerInitiallyActive": "ACTIVE_SCOPED_CONTROL",
+    "maintenancePermission": false,
+    "displayContext": {
+      "sourceMethod": "KneekuraDebugTankPresentation.viewForRender(actualSingleplayerServer)",
+      "serverIdentityMatched": true,
+      "recipeHash": "6b3cb3e1775b172f6066db9abb0627baa5df1c2ad389ba3e40df587fbcdc8432",
+      "origin": [
+        80,
+        224,
+        0
+      ],
+      "dimensions": {
+        "width": 9,
+        "height": 7,
+        "depth": 9
+      },
+      "bright": true,
+      "leaseDurationNanos": 120000000000,
+      "viewIneligibleAfterOriginalLease": true,
+      "noLeaseRenewal": true,
+      "ownerExpiryStatus": "OUTCOME_UNKNOWN",
+      "ownerExpiryError": "LEASE_EXPIRED_OR_CLOCK_CHANGED"
+    },
+    "oldOwnerRejectedReadOnly": true,
+    "expiredOwnerRejectedReadOnly": true,
+    "savedOwnerBytesUnchanged": true
+  },
+  "savedGeometryAfterBothRuns": {
+    "scope": "ACTUAL_SAVED_BLOCK_IDENTIFIERS_ONLY_NOT_LIGHTING_DYNAMICS_OR_FULL_CHUNK_EQUIVALENCE",
+    "newCells": 1089,
+    "newShellCells": 522,
+    "newInteriorCells": 567,
+    "geometryFingerprint": "sha256:55c7a3ee9d3eaf89084e0a972b57bb3e5cc025cdea2d6caf518afbfc3f2fc5e4",
+    "comparedPriorCells": 96181,
+    "unavailablePriorCells": 0,
+    "priorRecipes": 6
+  },
+  "canonicalEvidence": [
+    {
+      "trial": "native-r62-r2",
+      "records": 54,
+      "canonicalSha256": "0386fab94756185ed2026ccaf5a5695d5e2e501006226bca8a7ab30c7da45126",
+      "finalizationStatus": "EVIDENCE_COMPLETE",
+      "finalizationSha256": "9b35f5664abf48ed18c27049ef6c32946f2e04a469201fab125563e7b139a32d",
+      "rawSha256": "53dbd708fead5c940d394ae44aff67d59a30ff7b4d85a1f116fa39cac50168ba"
+    },
+    {
+      "trial": "native-r62-reconnect",
+      "records": 252,
+      "canonicalSha256": "ea29f982417877bcb501f5d06a3f4a767b12b773c0aa5a6c4a7a05353e77c32b",
+      "finalizationStatus": "EVIDENCE_COMPLETE",
+      "finalizationSha256": "5a1742c1b4c12c4407eda39132885245a500a7fbcbf2e809a73b4e7b5acda2d2",
+      "rawSha256": "f6c283c23457ede6c580161b02c63a7d010362e7c6240d87680a8b1fb27299bc"
+    }
+  ],
+  "preservation": {
+    "originalAndControlFiles": 85,
+    "originalAndControlIdentical": true,
+    "rotatedPredecessorFiles": 87,
+    "rotatedPredecessorMatched": true,
+    "precompiledMODFiles": 8444,
+    "compileArtifacts": 149,
+    "tfMappedHashVerified": true
+  },
+  "producerCI": {
+    "head": "d921bf75b1e7a4600d82b3df8ff2f678be03f2d8",
+    "runs": [
+      {
+        "id": 37233327884,
+        "url": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/37233327884",
+        "status": "success",
+        "actualCheckoutShas": [
+          "adf6acb4e4f510d9f4c2e239c6b190bfdd9b95a2",
+          "53a84d06578632b5d123e3c2bb631b611bf830d7"
+        ],
+        "mergeParents": [
+          {
+            "mergeSha": "adf6acb4e4f510d9f4c2e239c6b190bfdd9b95a2",
+            "parents": [
+              "57e52f9ef44c082daf7abbb0b0f5ada3a258a406",
+              "d921bf75b1e7a4600d82b3df8ff2f678be03f2d8"
+            ]
+          }
+        ],
+        "pytestSummary": []
+      },
+      {
+        "id": 37233327957,
+        "url": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/37233327957",
+        "status": "success",
+        "actualCheckoutShas": [
+          "adf6acb4e4f510d9f4c2e239c6b190bfdd9b95a2"
+        ],
+        "mergeParents": [
+          {
+            "mergeSha": "adf6acb4e4f510d9f4c2e239c6b190bfdd9b95a2",
+            "parents": [
+              "57e52f9ef44c082daf7abbb0b0f5ada3a258a406",
+              "d921bf75b1e7a4600d82b3df8ff2f678be03f2d8"
+            ]
+          }
+        ],
+        "pytestSummary": [
+          "pytest\tRun complete repository suite\t2026-10-04T20:49:31.6910975Z 3156 passed, 332 skipped, 8 warnings in 191.74s (0:03:11)"
+        ]
+      }
+    ],
+    "initialSourceFailures": [
+      37233010790,
+      37233006627
+    ],
+    "initialReason": "PYTHON_PAIRED_WRAPPER_EXPECTED_27_MODULES_ACTUAL_28",
+    "initialPytest": "CANCELLED_BY_CORRECTED_HEAD"
+  },
+  "privateArtifacts": [
+    {
+      "privateArtifact": "native-r62/native-report.json",
+      "sha256": "42c230ef19e9c75b5eceb36e3c59457932c8a6ebc1135cc72d6ca25657accca7"
+    },
+    {
+      "privateArtifact": "native-r62-r2/native-report.json",
+      "sha256": "53f1c60e8a4dcb5bd116f2b41909b2fbdd14a4da2e99cf589a39c6caf49a36cc"
+    },
+    {
+      "privateArtifact": "native-r62-r2/finalized-evidence-proof.json",
+      "sha256": "59f5562c17642fb39593cf1552d6997fb50c2cfae5ed522768a3f403dac3d047"
+    },
+    {
+      "privateArtifact": "native-r62-r2/saved-geometry-proof.json",
+      "sha256": "c2e6f75ad5e8b217a72833b7c2114e58beade3dc076dc33c07e2a7f231c03d28"
+    },
+    {
+      "privateArtifact": "native-r62-r2/native-latest-after-clean-stop.log",
+      "sha256": "d0ee3a9d852355b81d6586e597c1a6d9eae86f8221912d2800e0285a8a0f3ed7"
+    },
+    {
+      "privateArtifact": "native-r62-reconnect/native-report.json",
+      "sha256": "db6f5430e668db1b6fc82b6440e256bbfb58d7e0a12319742160514cc126a292"
+    },
+    {
+      "privateArtifact": "native-r62-reconnect/finalized-evidence-proof.json",
+      "sha256": "e4b2e805dd9dbda1773ac23361fa193f3390739fe2de074b1f43701a5494d579"
+    },
+    {
+      "privateArtifact": "native-r62-reconnect/saved-geometry-proof.json",
+      "sha256": "c2e6f75ad5e8b217a72833b7c2114e58beade3dc076dc33c07e2a7f231c03d28"
+    },
+    {
+      "privateArtifact": "native-r62-reconnect/old-owner-refusal.json",
+      "sha256": "6c183e5ab1e8fb7961f274a51b11a722c94e900a66106ad3abc934b87fdfa55f"
+    },
+    {
+      "privateArtifact": "native-r62-reconnect/native-latest-after-clean-stop.log",
+      "sha256": "a4c1a4146a4882f00e8f16fe73bb7da3498516d556f4221bb75181e267ccd30f"
+    },
+    {
+      "privateArtifact": "tank-context-diagnostic-r62/build-receipt.json",
+      "sha256": "9bae634e46bb811c884cd5880e54fb282e60c80d8a60d6bf334a9d669b908c54"
+    },
+    {
+      "privateArtifact": "tank-rotation-r62-native-final-preservation.json",
+      "sha256": "aecab4a9e87cd1d5298896a2369bfc760e8531f38919fcc3518c0d24a93b7289"
+    },
+    {
+      "privateArtifact": "tank-rotation-r62-producer-ci/producer-hosted-ci-receipt.json",
+      "sha256": "50202d710ee610c884642c02538c240d2e0b03170679c4f0390b2258332390ee"
+    }
+  ],
+  "limits": {
+    "firstNativeStartup": "FAILED_BEFORE_READY_NO_INSTALLED_OWNER_CLEAN_ACK_NOT_ESTABLISHED_OS_EXIT_OBSERVED",
+    "firstStartupInspection": "ConfirmScreen_CLASS_PRESENCE_AND_FALSE_CONFIRMATION_METADATA_NOT_ACTIVE_SCREEN_OR_COMPLETE_ROOT_CAUSE_PROOF",
+    "maintenanceWarning": "RUNNING_11158_MS_OR_223_TICKS_BEHIND_NOT_LATENCY_OR_PERFORMANCE_ACCEPTANCE",
+    "nativeDiagnostic": "PRIVATE_RUNTIME_ONLY_BOUNDED_READONLY_CONTEXT_MOD_NO_WORLD_INPUT_CAMERA_RENDER_OWNER_MUTATION_NOT_OBSERVER_EFFECT_ACCEPTANCE",
+    "maintenancePresentationVeto": "SOURCE_CONTRACT_TESTED_NO_NATIVE_PIXEL_ATTRIBUTION",
+    "pixels": "NOT_VERIFIED",
+    "loadedResourceAndFullTargetAttestation": "NOT_ESTABLISHED",
+    "lightingDynamicsOrCompleteChunkEquivalence": "NOT_ESTABLISHED",
+    "broadSizesNegativeCasesResetFidelity": "NOT_ACCEPTED",
+    "fullOriginalGoal": "OPEN"
+  },
+  "recordedAt": "2026-10-04T21:21:01.496Z"
+}
