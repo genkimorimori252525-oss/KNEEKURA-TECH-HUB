@@ -57,9 +57,15 @@ export function buildRetainedDecisionPresentation({observations,subjectUuid,iden
   const records=selectDecisionRecords(observations.filter(r=>r?.source?.side==='SERVER'&&r.payload?.targetRevision===identity.targetRevision),
     subjectUuid,identity,request.endTick).filter(r=>r.gameTime>=request.startTick);
   const path=queryDecisionDrilldown({observations:records,subjectUuid,identity,request:query('path_search')}).items.at(-1);
+  const returned=queryDecisionDrilldown({observations:records,subjectUuid,identity,request:query('path_returned_nodes')}).items.at(-1);
+  const returnedData=returned?.data.pathNodes.data;
+  const returnedPoint=entry=>entry?.node.status==='AVAILABLE'?{index:entry.index,...structuredClone(entry.node.data),
+    nodeIdentity:structuredClone(entry.nodeIdentity),predecessorPresent:entry.predecessorPresent,
+    predecessorIdentity:structuredClone(entry.predecessorIdentity)}:null;
   const terrain=queryDecisionDrilldown({observations:records,subjectUuid,identity,request:query('terrain_ground')}).items.at(-1);
   const dimensions=new Set(records.map(r=>r.payload?.dimension).filter(d=>typeof d==='string'));
   if(terrain?.data.dimension)dimensions.add(terrain.data.dimension);
+  if(returned?.data.dimension)dimensions.add(returned.data.dimension);
   if(dimensions.size>1)throw new Error('DECISION_PRESENTATION_DIMENSION_BOUNDARY: narrow the retained window');
   const state=records.filter(r=>r.lane==='SERVER_ENTITY_STATE');
   const hasPosition=r=>r.payload.alive!==false&&r.payload.removed!==true&&['x','y','z'].every(k=>Number.isFinite(r.payload[k]));
@@ -90,12 +96,18 @@ export function buildRetainedDecisionPresentation({observations,subjectUuid,iden
         cells:terrain?.data.cells??[],data:terrain?.data??null,source_observation_ids:terrain?.source_observation_ids??[]},
       pathCache:{enabledByDefault:false,status:path?.frontierStatus??'NOT_CAPTURED',tick:path?.tick??null,
         nodes:path?.frontier?.data?.nodes??[],data:path??null,source_observation_ids:path?.source_observation_ids??[]},
+      returnedPath:{enabledByDefault:false,status:returned?.data.pathNodes.status??'NOT_CAPTURED',tick:returned?.tick??null,
+        nodes:(returnedData?.nodes??[]).map(returnedPoint).filter(Boolean),
+        terminal:returnedPoint(returnedData?.terminalNode.data),target:returnedData?.target.status==='AVAILABLE'?structuredClone(returnedData.target.data):null,
+        data:returned?.data??null,queryNodesTruncated:returned?.queryNodesTruncated??false,
+        semantics:'ORIGINAL_RETURNED_PATH_SLOTS_NOT_ADOPTED_NAVIGATION_OR_ACTUAL_MOTION',source_observation_ids:returned?.source_observation_ids??[]},
       declaredNavigation:{enabledByDefault:false,status:validNav?'AVAILABLE':'NOT_CAPTURED',tick:validNav?snapshot.gameTime:null,
         nodes:validNav?structuredClone(navEntries.slice(0,limits.maxNodes)):[],
         nodesTruncated:validNav&&(navData.truncated===true||navEntries.length>limits.maxNodes),
         semantics:'DECLARED_ROUTE_NOT_ACTUAL_MOTION_OR_FRONTIER',source_observation_ids:validNav?[snapshot.observationId]:[]}},
     semantics:{readOnlyRetainedEvidence:true,temporalAdjacencyProvesCausality:false,distanceBreakProvesTeleport:false,
       terrainIsPathfinderEvaluation:false,pathCacheContainsAllNeighbors:false,missingPositionsAreInterpolated:false,
+      returnedPathProvesNavigationAdoption:false,terminalNodeGProvesMinimumEffectiveCost:false,
       elevationUsesTickAndHeight:true}};
   if(bytes(result)>262144)throw new RangeError('DECISION_PRESENTATION_BYTE_BUDGET_EXCEEDED');
   return result;

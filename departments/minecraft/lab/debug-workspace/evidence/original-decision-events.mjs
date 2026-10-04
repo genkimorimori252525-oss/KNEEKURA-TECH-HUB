@@ -25,6 +25,7 @@ const KINDS = Object.freeze({
   PATH_NEIGHBORS_RETURN: ['EVALUATION','path_search_neighbors'],
   PATH_HEAP_OPERATION_RETURN: ['EVALUATION','path_heap_operations'],
   PATH_NODE_CLOSED_CHECKPOINT: ['EVALUATION','path_closed_nodes'],
+  PATH_RETURNED_NODES: ['RESULT','returned_path_nodes'],
 });
 const text = value => typeof value === 'string' && value.length > 0 && value.length <= 512;
 const integer = value => Number.isSafeInteger(value);
@@ -147,14 +148,56 @@ function validHeapReturn(d,record) {
     ['neighborPopulationStatus','rejectionReasonStatus','finalPathCostStatus'].every(k=>d[k]==='NOT_EXPOSED');
 }
 function validNodeIdentity(d) {
-  const identity=d.nodeIdentity;if(!object(identity))return false;
+  return validReferenceIdentity(d.nodeIdentity,d.node.status==='AVAILABLE',d.searchId,d.maxNodes);
+}
+function validReferenceIdentity(identity,present,searchId,maxNodes) {
+  if(!object(identity))return false;
   if(identity.status==='AVAILABLE') {
-    if(d.node.status!=='AVAILABLE'||Object.keys(identity).length!==2||!text(identity.id)||!identity.id.startsWith(d.searchId+':node:'))return false;
-    const suffix=identity.id.slice((d.searchId+':node:').length);
-    if(!/^[1-9][0-9]*$/.test(suffix)||!integer(Number(suffix))||Number(suffix)>d.maxNodes)return false;
+    if(!present||Object.keys(identity).length!==2||!text(identity.id)||!identity.id.startsWith(searchId+':node:'))return false;
+    const suffix=identity.id.slice((searchId+':node:').length);
+    if(!/^[1-9][0-9]*$/.test(suffix)||!integer(Number(suffix))||Number(suffix)>maxNodes)return false;
   }else if(identity.status!=='NOT_EXPOSED'||Object.keys(identity).length!==2||
-      identity.detail!==(d.node.status==='AVAILABLE'?'NODE_IDENTITY_LIMIT':'NULL_NODE'))return false;
+      identity.detail!==(present?'NODE_IDENTITY_LIMIT':'NULL_NODE'))return false;
   return true;
+}
+function validReturnedPath(d,record) {
+  const keys=['searchId','resultPresent',...(d.resultPresent?['resultClass']:[]),'maxNodes','dimension','pathNodes','phase',
+    'dispatchScope','fieldScope','navigationAdoptionStatus','finalEffectiveCostStatus'];
+  if(Object.keys(d).length!==keys.length||Object.keys(d).some(k=>!keys.includes(k))||!text(d.searchId)||
+    !new RegExp('^search:'+record.payload.targetRevision+':[1-9][0-9]*$').test(d.searchId)||typeof d.resultPresent!=='boolean'||
+    (d.resultPresent&&!text(d.resultClass))||!integer(d.maxNodes)||d.maxNodes<1||d.maxNodes>64||!text(d.dimension)||
+    d.phase!=='AFTER_ORIGINAL_OUTER_FIND_PATH_RETURN'||d.dispatchScope!=='SELECTED_OUTER_FIND_PATH_RETURN'||
+    d.fieldScope!=='BASE_PATH_AND_NODE_CACHED_FIELDS_AT_RETURN'||d.navigationAdoptionStatus!=='NOT_EXPOSED'||
+    d.finalEffectiveCostStatus!=='NOT_EXPOSED'||!object(d.pathNodes)||Object.keys(d.pathNodes).length!==2)return false;
+  const section=d.pathNodes;
+  if(section.status==='NOT_EXPOSED')return section.detail===(!d.resultPresent?'NULL_PATH':
+    d.resultClass==='net.minecraft.world.level.pathfinder.Path'?'CUSTOM_NODE_LIST':'CUSTOM_PATH_CLASS');
+  if(!d.resultPresent||d.resultClass!=='net.minecraft.world.level.pathfinder.Path'||!['AVAILABLE','PARTIAL'].includes(section.status))return false;
+  const s=section.data,numeric=Number.isFinite(s?.distanceToTarget),fields=['listClass','nodeCount','retainedNodeCount','truncated',
+    'nodes','terminalNode','target','canReach','nextNodeIndex',numeric?'distanceToTarget':'distanceToTargetStatus','distanceToTargetScope'];
+  if(!object(s)||Object.keys(s).length!==fields.length||Object.keys(s).some(k=>!fields.includes(k))||s.listClass!=='java.util.ArrayList'||
+    !integer(s.nodeCount)||s.nodeCount<0||s.nodeCount>2147483647||!Array.isArray(s.nodes)||s.nodes.length!==Math.min(s.nodeCount,d.maxNodes)||
+    s.retainedNodeCount!==s.nodes.length||s.truncated!==(s.nodeCount>s.nodes.length)||section.status!==(s.truncated?'PARTIAL':'AVAILABLE')||
+    typeof s.canReach!=='boolean'||!integer(s.nextNodeIndex)||s.nextNodeIndex< -2147483648||s.nextNodeIndex>2147483647||
+    !numberOrUnknown(s,'distanceToTarget')||s.distanceToTargetScope!=='PATH_CONSTRUCTOR_CACHED_VALUE')return false;
+  const slot=(entry,index)=>object(entry)&&Object.keys(entry).length===5&&
+    Object.keys(entry).every(k=>['index','node','nodeIdentity','predecessorPresent','predecessorIdentity'].includes(k))&&entry.index===index&&
+    validReturnedNode(entry.node)&&validReferenceIdentity(entry.nodeIdentity,entry.node.status==='AVAILABLE',d.searchId,d.maxNodes)&&
+    typeof entry.predecessorPresent==='boolean'&&(entry.node.status==='AVAILABLE'||!entry.predecessorPresent)&&
+    validReferenceIdentity(entry.predecessorIdentity,entry.predecessorPresent,d.searchId,d.maxNodes);
+  if(!s.nodes.every((n,i)=>slot(n,i))||!object(s.terminalNode)||Object.keys(s.terminalNode).length!==2)return false;
+  if(s.nodeCount===0) {
+    if(s.terminalNode.status!=='NOT_EXPOSED'||s.terminalNode.detail!=='EMPTY_PATH')return false;
+  }else if(s.terminalNode.status!=='AVAILABLE'||!slot(s.terminalNode.data,s.nodeCount-1))return false;
+  if(s.nodeCount>0&&!s.truncated) {
+    // The producer copies the already captured last prefix slot, without another read.
+    const same=(a,b)=>Object.keys(a).length===Object.keys(b).length&&Object.keys(a).every(k=>
+      object(a[k])?object(b[k])&&same(a[k],b[k]):a[k]===b[k]);
+    if(!same(s.nodes.at(-1),s.terminalNode.data))return false;
+  }
+  const target=s.target;
+  return object(target)&&Object.keys(target).length===2&&(target.status==='NOT_EXPOSED'?target.detail==='NULL_TARGET':
+    target.status==='AVAILABLE'&&object(target.data)&&Object.keys(target.data).length===3&&['x','y','z'].every(k=>integer(target.data[k])));
 }
 function validClosedCheckpoint(d,record) {
   const keys=['searchId','priorPopEventIndex','nodeRole','node','nodeIdentity','maxNodes','phase','dispatchScope',
@@ -173,6 +216,7 @@ function validData(kind,d,record) {
   if (kind === 'PATH_NEIGHBORS_RETURN') return validNeighborReturn(d);
   if (kind === 'PATH_HEAP_OPERATION_RETURN') return validHeapReturn(d,record);
   if (kind === 'PATH_NODE_CLOSED_CHECKPOINT') return validClosedCheckpoint(d,record);
+  if (kind === 'PATH_RETURNED_NODES') return validReturnedPath(d,record);
   if (kind === 'EFFECTIVE_MALUS_RETURN') {
     const numeric=Number.isFinite(d.returnedMalus),keys=['receiverUuid','receiverClass','evaluatorClass','pathType',
       numeric?'returnedMalus':'returnedMalusStatus','dispatchScope','callSiteScope','effectivePathCostStatus','underlyingSourceStatus'];
@@ -266,7 +310,8 @@ export function appendOriginalDecisionEvents(records,stages,capabilities,timelin
     stages[stage].facts.push({key:p.kind.toLowerCase(),value:data,epistemic_status:status,
       causal_relation:relation,source_observation_ids:[record.observationId],
       note:'Bounded original observation boundary only; no reason, complete decision history or adjacent-event causality is inferred.'});
-    const unavailable=p.kind === 'PATH_SEARCH_STATE' && p.data.frontier.status === 'NOT_EXPOSED';
+    const unavailable=(p.kind === 'PATH_SEARCH_STATE' && p.data.frontier.status === 'NOT_EXPOSED')||
+      (p.kind === 'PATH_RETURNED_NODES' && p.data.pathNodes.status === 'NOT_EXPOSED');
     if (!unavailable) {
       const existing=capabilities[capability];
       capabilities[capability]={status:'PARTIAL',source_observation_ids:[...new Set([

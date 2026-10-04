@@ -34,11 +34,13 @@ export function renderDecisionPresentationHtml(presentation) {
 <label><input type="checkbox" id="relatedProjectiles">関連する弾：UUIDごとの色、破線と菱形（取得した弾のみ）</label>
 <label><input type="checkbox" id="terrain">観測用地形：四角（PathFinder評価ではない）</label>
 <label><input type="checkbox" id="pathCache">探索cache：三角／×（全neighborではない）</label>
+<label><input type="checkbox" id="returnedPath">返された検索Path：細かい破線と四角（Navigation採用不明）</label>
 <label><input type="checkbox" id="declaredNavigation">宣言された経路：太い破線と菱形</label>
 <p id="layerStatus"></p><p id="gapStatus" class="muted"></p><canvas id="space" width="900" height="420" aria-label="任意表示の保存済み空間観測"></canvas>
 <p class="muted">軌跡の色はcursorとの差です：<span style="color:rgb(105,215,255)">青 0–33t</span> → <span style="color:rgb(255,211,83)">黄 34–66t</span> → <span style="color:rgb(255,96,83)">赤 67–99t</span> → 100tで非表示。通常20t/秒。弾はUUIDの固定色から黄・赤へ寄せます。色が近い弾はUUIDとmarkerで確認してください。</p>
 <p id="projectileLegend"></p>
-<p class="muted">ELEVATIONの横軸はtickです。地形・cache・宣言経路はこの表示には重ねません。宣言経路は実移動ではありません。</p>
+<pre id="returnedPathDetails"></pre>
+<p class="muted">ELEVATIONの横軸はtickです。地形・cache・返された検索Path・宣言経路はこの表示には重ねません。Pathは実移動ではありません。</p>
 <div id="timeline"></div><details><summary>表示データ・参照元ID・欠測・省略情報</summary><pre id="raw"></pre></details>
 <script id="data" type="application/json" nonce="${nonce}">${data}</script>
 <script nonce="${nonce}">
@@ -62,11 +64,21 @@ byId('gapStatus').textContent='欠測・境界（指定区間全体・補間な�
     (gaps.length>4?' / '+(gaps.length-4)+'件の詳細を省略（参照元IDと全件は表示データを参照）':''):
   '検出された軌跡gapなし。連続取得を保証しません。');
 const cursor=byId('tick');cursor.min=p.request.startTick;cursor.max=p.request.endTick;cursor.value=p.request.endTick;
-const colors={motion:'#78d7ff',terrain:'#89d596',pathCache:'#ffc76b',declaredNavigation:'#f2a0e2'};
+const colors={motion:'#78d7ff',terrain:'#89d596',pathCache:'#ffc76b',returnedPath:'#d2dee9',declaredNavigation:'#f2a0e2'};
 function draw(){
   const tick=Number(cursor.value),view=byId('view').value,elevation=view==='ELEVATION';byId('tickLabel').textContent=tick;
   const layers=p.layers,visible={},points=[];
   const alive=s=>s.tick<=tick&&tick-s.tick<100;
+  const returned=layers.returnedPath,returnedData=returned?.data?.pathNodes?.data;
+  byId('returnedPathDetails').textContent=!byId('returnedPath').checked?'':returned?.tick>tick?'返された検索Path：取得tickがcursorより未来なので非表示':
+    '返された検索Path：Navigationへの採用・最小実効コストは不明。欠けたindexや省略区間は接続しません。終端・targetは独立した点です。\\n'+
+    JSON.stringify({status:returned?.status,detail:returned?.data?.pathNodes?.detail,tick:returned?.tick,
+      nodeCount:returnedData?.nodeCount,retainedNodeCount:returnedData?.retainedNodeCount,
+      producerPrefixTruncated:returnedData?.truncated,queryPrefixTruncated:returned?.queryNodesTruncated,
+      canReach:returnedData?.canReach,nextNodeIndex:returnedData?.nextNodeIndex,
+      constructorCachedDistance:returnedData?.distanceToTarget??returnedData?.distanceToTargetStatus,
+      slots:returned?.nodes,terminal:returned?.terminal,target:returned?.target,
+      source_observation_ids:returned?.source_observation_ids},null,2);
   byId('projectileLegend').textContent=byId('relatedProjectiles').checked?(layers.relatedProjectiles?.traces??[]).filter(group=>group.trace.samples.some(alive)).map(group=>group.trace.subject.id+' · 初期色 '+traceAgeStyle({traceClass:'PROJECTILE_ACTUAL',identity:group.trace.subject.id,sampleTick:tick,currentTick:tick}).color).join(' | '):'';
   const selected=Object.entries(layers).map(([key,layer])=>key+': '+layer.status+(layer.tick===null||layer.tick===undefined?'':' / 取得tick '+layer.tick)+(layer.tick>tick?' / cursorより未来なので非表示':''));
   byId('layerStatus').textContent=selected.join(' | ');
@@ -74,6 +86,7 @@ function draw(){
     if(!byId(key)?.checked||layer.tick>tick||(elevation&&!['motion','relatedProjectiles'].includes(key)))continue;
     const rows=key==='motion'?layer.trace.samples.filter(alive):key==='relatedProjectiles'?layer.traces.map(group=>({...group.trace,samples:group.trace.samples.filter(alive)})):key==='terrain'?layer.cells:layer.nodes;
     visible[key]=rows;points.push(...(key==='relatedProjectiles'?rows.flatMap(trace=>trace.samples):rows).filter(s=>[s.x,s.y,s.z].every(Number.isFinite)));
+    if(key==='returnedPath')points.push(...[layer.terminal,layer.target].filter(s=>s&&[s.x,s.y,s.z].every(Number.isFinite)));
   }
   const canvas=byId('space'),ctx=canvas.getContext('2d');ctx.clearRect(0,0,canvas.width,canvas.height);
   const project=s=>elevation?[s.tick,s.y]:view==='PLAN_XZ'?[s.x,s.z]:[s.x-s.z,(s.x+s.z)/2-s.y];
@@ -95,17 +108,22 @@ function draw(){
     if(key==='motion'){drawTrace(layers.motion.trace,rows);continue;}
     if(key==='relatedProjectiles'){for(const trace of rows)drawTrace(trace,trace.samples);continue;}
     ctx.strokeStyle=colors[key];ctx.fillStyle=colors[key];ctx.lineWidth=key==='declaredNavigation'?3:1.5;
-    ctx.setLineDash(key==='declaredNavigation'?[8,5]:[]);
+    ctx.setLineDash(key==='declaredNavigation'?[8,5]:key==='returnedPath'?[2,5]:[]);
     const line=(a,b)=>{const from=xy(a),to=xy(b);ctx.beginPath();ctx.moveTo(...from);ctx.lineTo(...to);ctx.stroke();};
     if(key==='declaredNavigation')for(let i=1;i<rows.length;i++)line(rows[i-1],rows[i]);
+    if(key==='returnedPath')for(let i=1;i<rows.length;i++)if(rows[i].index===rows[i-1].index+1)line(rows[i-1],rows[i]);
     ctx.setLineDash([]);
-    for(const point of rows){if(![point.x,point.y,point.z].every(Number.isFinite))continue;const [x,y]=xy(point);ctx.beginPath();
+    const markers=key==='returnedPath'?[...rows,...(layers.returnedPath.terminal&&!rows.some(n=>n.index===layers.returnedPath.terminal.index)?[layers.returnedPath.terminal]:[])]:rows;
+    for(const point of markers){if(![point.x,point.y,point.z].every(Number.isFinite))continue;const [x,y]=xy(point);ctx.beginPath();
       if(key==='terrain')ctx.rect(x-4,y-4,8,8);
       else if(key==='pathCache'&&point.closedAtReturn){ctx.moveTo(x-4,y-4);ctx.lineTo(x+4,y+4);ctx.moveTo(x+4,y-4);ctx.lineTo(x-4,y+4);}
       else if(key==='pathCache'){ctx.moveTo(x,y-5);ctx.lineTo(x+5,y+4);ctx.lineTo(x-5,y+4);ctx.closePath();}
       else if(key==='declaredNavigation'){ctx.moveTo(x,y-5);ctx.lineTo(x+5,y);ctx.lineTo(x,y+5);ctx.lineTo(x-5,y);ctx.closePath();}
+      else if(key==='returnedPath')ctx.rect(x-3,y-3,6,6);
       else ctx.arc(x,y,3,0,2*Math.PI);ctx.stroke();
+      if(key==='returnedPath')ctx.fillText('#'+point.index+(point.index===layers.returnedPath.terminal?.index?' 終端':''),x+6,y-6);
     }
+    if(key==='returnedPath'&&layers.returnedPath.target){const [x,y]=xy(layers.returnedPath.target);ctx.beginPath();ctx.moveTo(x-5,y);ctx.lineTo(x+5,y);ctx.moveTo(x,y-5);ctx.lineTo(x,y+5);ctx.stroke();ctx.fillText('target',x+6,y+12);}
   }
 }
 for(const event of p.overview.timeline){const button=document.createElement('button');button.type='button';button.textContent=event.tick+' · '+event.kind;

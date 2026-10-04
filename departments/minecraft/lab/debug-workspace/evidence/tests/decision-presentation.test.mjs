@@ -73,7 +73,7 @@ test('standalone view safely embeds evidence and starts with every spatial layer
   assert.ok(!html.includes('</script><script>window.pwned=true</script>'));
   assert.ok(html.includes('\\u003c/script>'));
   assert.ok(html.includes('Content-Security-Policy'));
-  assert.equal((html.match(/type="checkbox"/g)??[]).length,5);
+  assert.equal((html.match(/type="checkbox"/g)??[]).length,Object.keys(out.layers).length);
   assert.ok(!html.includes(' checked'));assert.ok(!html.includes('innerHTML'));
   assert.ok(!html.includes('fetch('));assert.ok(!html.includes('eval('));
 });

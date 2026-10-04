@@ -357,6 +357,7 @@ export function observeDebugWorkspaceDecision({
       ...(originalRecords.some(r=>r.payload.kind==='PATH_NEIGHBORS_RETURN') ? ['path_neighbors'] : []),
       ...(originalRecords.some(r=>r.payload.kind==='PATH_HEAP_OPERATION_RETURN') ? ['path_heap_operations'] : []),
       ...(originalRecords.some(r=>r.payload.kind==='PATH_NODE_CLOSED_CHECKPOINT') ? ['path_closed_nodes'] : []),
+      ...(originalRecords.some(r=>r.payload.kind==='PATH_RETURNED_NODES') ? ['path_returned_nodes'] : []),
       ...(originalRecords.some(r=>r.payload.kind==='EFFECTIVE_MALUS_RETURN') ? ['effective_malus'] : []),
       ...(terrain ? ['terrain_ground'] : []),
       ...(modSnapshot ? ['mod_state'] : []),

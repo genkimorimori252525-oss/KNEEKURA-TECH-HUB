@@ -2,6 +2,8 @@ package com.github.tartaricacid.touhoulittlemaid.sim.debug;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Vec3i;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.Ghast;
@@ -82,10 +84,10 @@ public final class KneekuraDebugDecisionHooks {
                        LongSupplier time, Sink sink) throws ReflectiveOperationException {
             if(nodeLimit<1 || nodeLimit>64)throw new IllegalArgumentException("NODE_LIMIT_OUT_OF_RANGE");
             this.subject=subject;this.snapshot=snapshot;this.budget=budget;this.nodeLimit=nodeLimit;
-            if(channels==null||channels.isEmpty()||!Set.of("goal","brain","path","control","malus","sensor","mod","projectile","neighbors","effective_malus","frontier").containsAll(channels))
+            if(channels==null||channels.isEmpty()||!Set.of("goal","brain","path","control","malus","sensor","mod","projectile","neighbors","effective_malus","frontier","path_nodes").containsAll(channels))
                 throw new IllegalArgumentException("INVALID_CHANNELS");
             this.channels=Set.copyOf(channels);
-            this.heapNodes=channels.contains("frontier")?new IdentityHashMap<>():null;
+            this.heapNodes=channels.contains("frontier")||channels.contains("path_nodes")?new IdentityHashMap<>():null;
             this.pendingPops=channels.contains("frontier")?new IdentityHashMap<>():null;
             this.modAdapter=channels.contains("mod")?KneekuraDebugTwilightForestAdapter.shared():null;
             this.currentContext=currentContext;this.time=time;this.sink=sink;
@@ -130,6 +132,7 @@ public final class KneekuraDebugDecisionHooks {
             if(thread!=Thread.currentThread())return false;
             String channel=kind.startsWith("CONTROL_PROJECTILE_")&&channels.contains("projectile")?"projectile":
                     kind.equals("PATH_NEIGHBORS_RETURN")?"neighbors":
+                    kind.equals("PATH_RETURNED_NODES")?"path_nodes":
                     kind.equals("PATH_HEAP_OPERATION_RETURN")||kind.equals("PATH_NODE_CLOSED_CHECKPOINT")?"frontier":
                     kind.equals("EFFECTIVE_MALUS_RETURN")?"effective_malus":
                     kind.startsWith("MOD_")?"mod":kind.startsWith("GOAL_")?"goal":kind.startsWith("PATH_")?"path":
@@ -409,7 +412,7 @@ public final class KneekuraDebugDecisionHooks {
         session.searches.remove(finder);
         if(session.heapNodes!=null)session.heapNodes.remove(finder);
         if(session.pendingPops!=null)session.pendingPops.remove(finder);
-        if(!session.matches(mob)||(!session.channels.contains("path")&&!session.channels.contains("neighbors")&&!session.channels.contains("frontier")))return;
+        if(!session.matches(mob)||(!session.channels.contains("path")&&!session.channels.contains("neighbors")&&!session.channels.contains("frontier")&&!session.channels.contains("path_nodes")))return;
         try { if(!session.budget.allows(session.currentContext.get(),session.time.getAsLong())){session.clearHeapNodes();return;} }
         catch(RuntimeException error) {session.clearHeapNodes();session.budget.close("CONTEXT_UNAVAILABLE");return;}
         if(session.searches.size()>=8)return;
@@ -527,10 +530,54 @@ public final class KneekuraDebugDecisionHooks {
             data.addProperty("resultPresent",result!=null);
             if(result!=null) {
                 data.addProperty("resultClass",label(result.getClass().getName()));
-                if(result.getClass()==Path.class) {data.addProperty("canReach",result.canReach());data.addProperty("resultNodeCount",result.getNodeCount());}
+                if(result.getClass()==Path.class) {
+                    data.addProperty("canReach",(Boolean)KneekuraDebugDecisionSnapshot.read(Path.class,"reached",result));
+                    Object nodes=KneekuraDebugDecisionSnapshot.read(Path.class,"nodes",result);
+                    if(nodes!=null&&nodes.getClass()==ArrayList.class)data.addProperty("resultNodeCount",((ArrayList<?>)nodes).size());
+                    else data.addProperty("resultNodeCountStatus","NOT_EXPOSED");
+                }
             }
             return data;
         });
+        session.record("PATH_RETURNED_NODES","PathFinder.outer.findPath.RETURN_CACHED_NODES",()->{
+            JsonObject data=new JsonObject();data.addProperty("searchId",session.searches.get(finder));
+            data.addProperty("resultPresent",result!=null);if(result!=null)data.addProperty("resultClass",label(result.getClass().getName()));
+            data.addProperty("maxNodes",session.nodeLimit);data.addProperty("dimension",session.budget.context().dimension());
+            data.add("pathNodes",returnedPathNodes(session,finder,result));
+            data.addProperty("phase","AFTER_ORIGINAL_OUTER_FIND_PATH_RETURN");
+            data.addProperty("dispatchScope","SELECTED_OUTER_FIND_PATH_RETURN");
+            data.addProperty("fieldScope","BASE_PATH_AND_NODE_CACHED_FIELDS_AT_RETURN");
+            data.addProperty("navigationAdoptionStatus","NOT_EXPOSED");data.addProperty("finalEffectiveCostStatus","NOT_EXPOSED");return data;
+        });
+    }
+    private static JsonObject returnedPathNodes(Session session,PathFinder finder,Path result)throws ReflectiveOperationException {
+        JsonObject section=new JsonObject();String unavailable=result==null?"NULL_PATH":result.getClass()!=Path.class?"CUSTOM_PATH_CLASS":null;
+        if(unavailable!=null){section.addProperty("status","NOT_EXPOSED");section.addProperty("detail",unavailable);return section;}
+        Object raw=KneekuraDebugDecisionSnapshot.read(Path.class,"nodes",result);
+        if(raw==null||raw.getClass()!=ArrayList.class){section.addProperty("status","NOT_EXPOSED");section.addProperty("detail","CUSTOM_NODE_LIST");return section;}
+        // Exact ArrayList only: arbitrary Path/List/Node query methods are never dispatched.
+        ArrayList<?> nodes=(ArrayList<?>)raw;int count=nodes.size(),retained=Math.min(count,session.nodeLimit);
+        JsonObject data=new JsonObject();data.addProperty("listClass","java.util.ArrayList");
+        data.addProperty("nodeCount",count);data.addProperty("retainedNodeCount",retained);data.addProperty("truncated",retained<count);
+        JsonArray entries=new JsonArray();for(int i=0;i<retained;i++)entries.add(returnedPathSlot(session,finder,(Node)nodes.get(i),i));
+        data.add("nodes",entries);JsonObject terminal=new JsonObject();
+        if(count==0){terminal.addProperty("status","NOT_EXPOSED");terminal.addProperty("detail","EMPTY_PATH");}
+        else {terminal.addProperty("status","AVAILABLE");terminal.add("data",count<=retained?entries.get(count-1).deepCopy():returnedPathSlot(session,finder,(Node)nodes.get(count-1),count-1));}
+        data.add("terminalNode",terminal);JsonObject targetSection=new JsonObject();
+        BlockPos target=(BlockPos)KneekuraDebugDecisionSnapshot.read(Path.class,"target",result);
+        if(target==null){targetSection.addProperty("status","NOT_EXPOSED");targetSection.addProperty("detail","NULL_TARGET");}
+        else {JsonObject xyz=new JsonObject();for(String axis:new String[]{"x","y","z"})xyz.addProperty(axis,(Integer)KneekuraDebugDecisionSnapshot.read(Vec3i.class,axis,target));
+            targetSection.addProperty("status","AVAILABLE");targetSection.add("data",xyz);}
+        data.add("target",targetSection);data.addProperty("canReach",(Boolean)KneekuraDebugDecisionSnapshot.read(Path.class,"reached",result));
+        data.addProperty("nextNodeIndex",(Integer)KneekuraDebugDecisionSnapshot.read(Path.class,"nextNodeIndex",result));
+        number(data,"distanceToTarget",(Float)KneekuraDebugDecisionSnapshot.read(Path.class,"distToTarget",result));
+        data.addProperty("distanceToTargetScope","PATH_CONSTRUCTOR_CACHED_VALUE");
+        section.addProperty("status",retained<count?"PARTIAL":"AVAILABLE");section.add("data",data);return section;
+    }
+    private static JsonObject returnedPathSlot(Session session,PathFinder finder,Node node,int index)throws ReflectiveOperationException {
+        JsonObject slot=new JsonObject();slot.addProperty("index",index);slot.add("node",observedNode(node));
+        slot.add("nodeIdentity",session.nodeIdentity(finder,node));Node predecessor=node==null?null:node.cameFrom;
+        slot.addProperty("predecessorPresent",predecessor!=null);slot.add("predecessorIdentity",session.nodeIdentity(finder,predecessor));return slot;
     }
     public static void pathEnd(PathFinder finder) {
         Session session=active;if(session!=null&&session.thread==Thread.currentThread()){
