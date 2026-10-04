@@ -76,3 +76,13 @@
 - [ ] Reconcile every original section21 criterion with specific evidence; do not close the goal while required work remains.
 - [ ] Perform one fresh whole-diff review against baseline1291b5e; regrade by actual user impact and fix substantive findings in one RED→GREEN pass.
 - [ ] Verify final exactHEAD focused/full suites, genuine Forge compile and hostedCI; publish Draft/update current handoff and report measured limits.
+
+## Bounded custom-flight continuation — original Ghast reach return
+
+Exact ANCHOR `Ghast$GhastMoveControl` class SHA256 `9cf70e9f2224e83c26b76de3ed734789c44e6e61d016550e443bea8b1de8934d`, normalized disassembly SHA256 `5602ddf2ea35d4692483668446b2d2b235611b8b3437dfa198f406a86893ec3d`, establishes a private `canReach(Vec3,int):boolean`. Its one inspected caller uses the normalized wanted-position displacement and `ceil(distance)` during original control tick. The method advances the Ghast bounding box for integer steps1 through length-1 and returns false at the first failed `Level.noCollision`; lengths0/1 return true without a collision-loop iteration. This is custom steering feasibility, not a complete A* search, exact collision location or final chosen destination.
+
+- Reuse the existing explicitly armed `control` channel and its unchanged caps. Add one non-cancelling original private-method RETURN injection; never invoke/replay reach tests, collision queries, random, controller setters or movement.
+- Retain exact selected Ghast/controller reference, cached UUID, owning server thread and full burst context. Record only actual direction argument, step count and boolean with explicit custom-steering scope; collision location and cause remain NOT_EXPOSED.
+- Consumer accepts a strictly scoped `CONTROL_GHAST_REACH_RETURN` as direct EVALUATION / partial custom-flight reach capability. No invented CANDIDATE/SELECTION, destination, extra Motion sample or path frontier.
+- First write genuine mapped producer owner/thread/OFF/channel/context/window/UUID/event/byte/sink tests and retained positive/false/malformed/identity/late-arm tests; preserve RED evidence. Then add the minimal hook/validator and integrate existing source suites. Genuine all-bridge/Mixin compile and Java/Gson→Node interop precede a fresh frozen private native trial.
+- Preserve all prior producers and original world; native return/position correspondence is temporal unless stronger evidence exists. This slice does not complete Phantom/custom MOD controls, full flight diagnosis, all-view/GPU or the broad goal.

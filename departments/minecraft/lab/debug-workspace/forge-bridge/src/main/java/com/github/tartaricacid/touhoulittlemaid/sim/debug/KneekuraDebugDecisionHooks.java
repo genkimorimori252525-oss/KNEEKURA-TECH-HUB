@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.monster.Ghast;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.damagesource.DamageSource;
@@ -285,6 +286,24 @@ public final class KneekuraDebugDecisionHooks {
             data.add("requestedPosition",requested);data.add("returnedPosition",returned);
             data.addProperty("dispatchScope","BASE_RANDOM_TELEPORT_RETURN");
             data.addProperty("reasonStatus","NOT_EXPOSED");return data;
+        });
+    }
+    public static void ghastReachReturn(Ghast mob,Object controller,Vec3 direction,int stepCount,boolean result) {
+        Session session=active;if(session==null||!session.matches(mob))return;
+        session.record("CONTROL_GHAST_REACH_RETURN","Ghast$GhastMoveControl.canReach.RETURN",()->{
+            String uuid=KneekuraDebugDecisionSnapshot.read(Entity.class,"uuid",mob).toString();
+            if(!uuid.equals(session.budget.context().subjectUuid())||controller==null||
+                controller!=KneekuraDebugDecisionSnapshot.read(Mob.class,"moveControl",mob)||
+                !controller.getClass().getName().equals("net.minecraft.world.entity.monster.Ghast$GhastMoveControl"))
+                throw new IllegalArgumentException("GHAST_REACH_RECEIVER_CHANGED");
+            if(direction==null||!Double.isFinite(direction.x)||!Double.isFinite(direction.y)||!Double.isFinite(direction.z)||stepCount<0)
+                throw new IllegalArgumentException("GHAST_REACH_ARGUMENT_UNAVAILABLE");
+            JsonObject data=new JsonObject();data.addProperty("receiverUuid",uuid);
+            data.addProperty("controllerClass",controller.getClass().getName());data.add("direction",vector(direction));
+            data.addProperty("stepCount",stepCount);data.addProperty("result",result);
+            data.addProperty("dispatchScope","GHAST_ORIGINAL_CAN_REACH_RETURN");
+            data.addProperty("pathSemantics","CUSTOM_STEERING_REACH_NOT_A_STAR");
+            data.addProperty("collisionLocationStatus","NOT_EXPOSED");data.addProperty("reasonStatus","NOT_EXPOSED");return data;
         });
     }
     public static void projectileSpawnReturn(Entity entity,boolean result) {

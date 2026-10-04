@@ -13,6 +13,7 @@ const KINDS = Object.freeze({
   SENSOR_SCAN_RETURN: ['INPUT','sensor_execution'],
   CONTROL_TICK_RETURN: ['EXECUTION','movement_control'],
   CONTROL_TELEPORT_RETURN: ['RESULT','teleport_result'],
+  CONTROL_GHAST_REACH_RETURN: ['EVALUATION','custom_flight_reach'],
   CONTROL_PROJECTILE_SPAWN_RETURN: ['RESULT','related_projectile_spawn'],
   CONTROL_PROJECTILE_TICK_RETURN: ['EXECUTION','related_projectile_motion'],
   CONTROL_PROJECTILE_HIT_RETURN: ['RESULT','related_projectile_hit'],
@@ -155,6 +156,15 @@ function validData(kind,d,record) {
   if (kind === 'CONTROL_TELEPORT_RETURN') return typeof d.result === 'boolean' &&
     [d.requestedPosition,d.returnedPosition].every(p=>object(p)&&['x','y','z'].every(k=>Number.isFinite(p[k]))) &&
     d.dispatchScope === 'BASE_RANDOM_TELEPORT_RETURN' && d.reasonStatus === 'NOT_EXPOSED';
+  if (kind === 'CONTROL_GHAST_REACH_RETURN') {
+    const keys=['receiverUuid','controllerClass','direction','stepCount','result','dispatchScope','pathSemantics','collisionLocationStatus','reasonStatus'];
+    return Object.keys(d).length===keys.length&&Object.keys(d).every(k=>keys.includes(k))&&
+      uuid(d.receiverUuid)&&d.receiverUuid===record.scope?.entityUuid&&
+      d.controllerClass==='net.minecraft.world.entity.monster.Ghast$GhastMoveControl'&&vector(d.direction)&&Object.keys(d.direction).length===3&&
+      integer(d.stepCount)&&d.stepCount>=0&&d.stepCount<=2147483647&&typeof d.result==='boolean'&&
+      d.dispatchScope==='GHAST_ORIGINAL_CAN_REACH_RETURN'&&d.pathSemantics==='CUSTOM_STEERING_REACH_NOT_A_STAR'&&
+      d.collisionLocationStatus==='NOT_EXPOSED'&&d.reasonStatus==='NOT_EXPOSED';
+  }
   if (kind.startsWith('CONTROL_PROJECTILE_')) {
     if(!uuid(d.ownerUuid)||d.ownerUuid!==record.scope?.entityUuid||!uuid(d.projectileUuid)||d.projectileUuid===d.ownerUuid||
       !text(d.projectileClass)||!integer(d.spawnEventIndex)||d.spawnEventIndex<1||d.spawnEventIndex>record.payload.eventIndex||

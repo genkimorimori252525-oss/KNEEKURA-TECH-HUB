@@ -25,3 +25,13 @@ These are class/member/method-body findings for the captured development generat
 Public getter snapshots may report bounded base fields with explicit `BASE_CONTROL_FIELDS_ONLY` semantics. A custom controller adapter exposes additional fields only after exact owner/member verification. Missing private/custom fields remain `NOT_EXPOSED`; a zero/default base field must not be substituted for them.
 
 Never tick a Move/Look/Jump/Body control to inspect it. Never alter controller operation, wanted coordinates, speed, random stream or navigation to create a visualization. Diagnostic instrumentation overhead is measured rather than assumed absent.
+
+## Original Ghast reach callback continuation
+
+The pinned `Ghast$GhastMoveControl` class SHA256 is `9cf70e9f2224e83c26b76de3ed734789c44e6e61d016550e443bea8b1de8934d`; normalized disassembly SHA256 is `5602ddf2ea35d4692483668446b2d2b235611b8b3437dfa198f406a86893ec3d`. Original `tick` at bytecode offset109 invokes its private `canReach(Vec3,int):boolean` with normalized wanted-position displacement and `ceil(distance)`. The control's countdown delays such tests; not every tick evaluates a candidate.
+
+`canReach` advances the current bounding box by the passed direction for steps1 through length-1 and returns false at the first failed original `Level.noCollision` call. Length0/1 returns true without a loop collision query. A true result is this algorithm's returned feasibility value, not proof of every point/destination being collision-free, arrival, successful attack or globally chosen path. False does not expose the actual blocked cell, first failed step or high-level reason.
+
+One non-cancelling RETURN Mixin now captures this original boolean and passed direction/step count under the existing explicitly armed `control` burst. Exact selected Ghast/controller reference, cached UUID, SERVER thread and unchanged context/window/event/byte bounds apply. No extra reach/collision/controller/random invocation is performed. `CONTROL_GHAST_REACH_RETURN` becomes direct EVALUATION with partial `custom_flight_reach`; CANDIDATE/SELECTION/reason/collision location remain unknown. Direction arguments are not additional Motion positions or A* nodes.
+
+Three retained regressions establish true/false, strict malformed-data refusal and late-arm/other-identity absence without reconstruction. Genuine mapped producer tests and Gson→Node interop establish the source contract and suppression fences. Actual native Mixin firing and integrated flight/result correspondence require a separately frozen private trial; this source proof alone does not establish them.
