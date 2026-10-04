@@ -1,0 +1,93 @@
+name: Publish YSM Foundation Map index
+
+on:
+  push:
+    branches: ["jolly/research-ysm-2026-10-05"]
+    paths:
+      - '.github/workflows/ysm-265-foundation-publish.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          ref: jolly/research-ysm-2026-10-05
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch exact artifact and build compact index
+        shell: bash
+        run: |
+          set -euo pipefail
+          URL='https://cdn.modrinth.com/data/86xjpqqS/versions/Zqooxsd2/ysm-2.6.5-forge%2Bmc1.20.1-release.jar'
+          curl --fail --location --retry 3 --max-time 180 "$URL" -o "$RUNNER_TEMP/ysm-2.6.5.jar"
+          echo '25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f  '"$RUNNER_TEMP/ysm-2.6.5.jar" | sha256sum --check
+          python departments/minecraft/mods/yes-steve-model/tools/cluster_ysm_265.py \
+            --jar "$RUNNER_TEMP/ysm-2.6.5.jar" \
+            --map departments/minecraft/mods/yes-steve-model/OBFUSCATION-MAP-2026-10-05.json \
+            --out "$RUNNER_TEMP/foundation-full.json" >/dev/null
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.load(open(Path(__import__('os').environ['RUNNER_TEMP'])/'foundation-full.json',encoding='utf-8'))
+          compact={
+            'format':'kneekura.ysm-foundation-map.index.v1',
+            'recorded_at':'2026-10-05',
+            'artifact':d['artifact'],
+            'graph':d['graph'],
+            'domains':{},
+            'cross_domain_edges':d['cross_domain_edges'],
+            'classes':[],
+            'unknown':[],
+            'methodology':{
+              'seed_source':d['methodology']['seed_source'],
+              'propagation_iterations':d['methodology']['propagation_iterations'],
+              'neighbor_weight':d['methodology']['neighbor_weight'],
+              'stable_external_anchor_weight':d['methodology']['stable_external_anchor_weight'],
+              'warning':d['methodology']['warning'],
+            }
+          }
+          for name,v in d['domains'].items():
+            compact['domains'][name]={
+              k:v[k] for k in (
+                'classes','mapped_seed_classes','unresolved_classes',
+                'high_confidence_assignment_count','average_degree','average_domain_score',
+                'mapped_hubs','top_unresolved','central_classes'
+              ) if k in v
+            }
+          for x in d['classes']:
+            short=x['class'].split('com/elfmcys/yesstevemodel/',1)[-1]
+            compact['classes'].append({
+              'class':short,'domain':x['domain'],'score':x['domain_score'],
+              'margin':x['margin'],'mapped':x['mapped_seed'],'degree':x['degree'],
+              'mapped_neighbors':x['mapped_neighbors'],'priority':x['unresolved_priority'],
+              'component':x['component'],'super':x['super'],'interfaces':x['interfaces']
+            })
+            if x['domain']=='UNKNOWN':
+              compact['unknown'].append({
+                'class':short,'super':x['super'],'interfaces':x['interfaces'],
+                'methods':x['method_count'],'fields':x['field_count']
+              })
+          out=Path('departments/minecraft/mods/yes-steve-model/FOUNDATION-MAP-INDEX-2026-10-05.json')
+          out.write_text(json.dumps(compact,ensure_ascii=False,separators=(',',':'))+'\n',encoding='utf-8')
+          assert len(compact['classes'])==955
+          assert len({x['class'] for x in compact['classes']})==955
+          assert compact['artifact']['sha256']=='25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f'
+          print('FOUNDATION_INDEX_BYTES',out.stat().st_size)
+          PY
+      - name: Commit Foundation Map index only
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Kneekura Evidence Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add departments/minecraft/mods/yes-steve-model/FOUNDATION-MAP-INDEX-2026-10-05.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'docs(minecraft): publish YSM 2.6.5 Foundation Map index'
+          git push origin HEAD:jolly/research-ysm-2026-10-05
