@@ -18,6 +18,33 @@ frame256／depth8、条件内compute ID8／start内Sink ID8に明示的tailを�
 
 Motion／Decision181件、production Gson→strict JavaScript42新規startケースと旧35／59／17／39／24／11／14を保持します。allbridge／genuinecombinedAPIの成功を確認しました。
 
-## 次の検証
+## Frozen native R57
 
-frozen producerから正式control85filesのfresh privateコピーを使い、自然進行Villagerのinstalled memory条件→追加条件内compute6境界→start→PATH write／Nav return→tryStart returnを直接IDで照合します。canonical／actualJFRACK・parse／cleanstop／元・control・predecessorR56・baseline85hash不変／producerと公開HEAD CIを確認するまでnative受入を主張しません。全memory理由／全compute branch・fallback RNG・cached reuse・TICK_RECOMPUTE・arrival、全Path候補・拒否・malus・effective cost、全Vanilla・FRONTIER・community、広いBoss戦、matched OFF／GPU・pixels、live Tank resize、section21全受入、最後のwhole-diff独立レビューは残ります。Draftと全体goalを継続します。
+producer **d1269520e91eb639cfdad6c65b2a7465733a9179**、run-20261004160121-0a03e7d121f3／sess-20261004160121-d9cd4cd03963／snapshot-20261004160121-5f3f5774ac2a、process epoch1／Arena epoch0、private adult Villager UUID55555555-6666-7777-8888-000000000001です。正式control85ファイルのfresh privateコピーを使い、自然day11850から進行しました。desired result／Brain memory／navigationをseedしていません。
+
+**344新規start events、169 complete tryStart groups、1 partial group**を取得しました。hasRequiredMemoriesはfalse166／true4、追加条件はfalse2／true2、tryStart正常returnはfalse168／true1、start正常dispatchは1です。completeは取得された元short circuitと正常returnの一致を意味し、全MemoryStatus・priority・Activityの選択理由や到着ではありません。
+
+**1組の13-event direct chain**で元memory条件→追加条件内compute6境界→追加条件→PATH書込み→Navigation戻り値→Sink start戻り値→元start dispatch→tryStart戻り値を照合しました。parent try-start:1:68／compute compute:1:1／Sink sink:1:2、game tick 40477、runtime40028、component component:1:1。実際のsource ID末尾は **185 → 187 → 188 → 189 → 190 → 191 → 192 → 193 → 194 → 195 → 196 → 197 → 198**です。
+
+元memory=true／extra=true／private reached=false／Path.canReach=false／compute=true／Navigation=true／tryStart=trueを別々に保持します。元distance／closeEnoughは38／4。元格納Sink.path、PATH書込み引数、Navigation引数、Sink before/after PATH・Nav raw参照はpath:1:20で一致し、元Navはabsent→present、speed0.5です。元virtual条件・interface呼出し・child frame ID、全UUID／run／session／snapshot／process／Arena／revision、元gameTimeArgument、instanceIdentity、eventIndexと生のPath参照を照合しました。時間や位置の近さから関係を推測していません。Navigationのtrueは移動成功・到着を証明しません。
+
+R55/R56のcomputeは2 complete6-event groupsを保持しました。compute:1:1／tick40477のsource187→188→189→190→191→192はdistance38／4、compute:2:1／tick41140のsource925→926→927→928→929→930はdistance33／4で、どちらもreached=false／canReach=false／compute=trueです。しかしrevision2のparent try-start:2:102は条件2点のprefixだけです。PATH書込み／Nav戻り値も残りますが、256events上限後のstart dispatch／tryStart正常returnは未取得です。この組を2本目の完全開始chain・成功・失敗・未呼出しとして補いません。
+
+| revision | valid snapshots | 全callbacks／payload bytes | Motion実サンプル | same-snapshot PATH／Nav参照一致 | callback終了理由 |
+| --- | ---: | --- | ---: | ---: | --- |
+| 1 | 124 | 256／287343 | 68 | 60 | EVENT_BUDGET |
+| 2 | 120 | 256／264514 | 64 | 56 | EVENT_BUDGET |
+
+全512 callbacks／244 valid snapshots、canonical **1,241 unique observations**はEVIDENCE_COMPLETE、SHA **e866e5d0c8a82d431695bc489ca7eacb6cfd2c006f6e36ebcacac5e600b06d72**、finalization SHA **6a4beed4a5e4854376150dcdb619f3e81e74f84cfeb6da993b63fadef095782a**です。既存200ticks／256events／524,288bytes／32nodesを維持し、revision1 local101..301 exclusiveとrevision2 local721..921 exclusiveはEVENT_BUDGETで閉じています。132 Motion実サンプル／116 same-snapshot参照一致は別の事実です。
+
+clean ACK／drop0／queue0／finalWriterSeq1241、owned launcher52368／runtime40028のOS終了、元／control／predecessor R56／baseline各85ファイルのhash不変を確認しました。正式save、private runtime data、mapped JAR、source bodyはGitHubに追加しません。
+
+JFR設定34,835bytes／SHA d4d74f3594bfe342397f53aaa75a7551e7b2d9ac6f86c7ca2bc016690501b37dのpreflight、actual start／stop ACK、保存fileのJDK parseを確認しました。JFR **3786978bytes**／SHA **4d83c144ec4ffeb5d64602d4c7c74b3b689e50e6b6b4f428b300ba3ff926c5db**、63秒／ExecutionSample321／CPULoad60／ThreadCPULoad440です。単独記録であり、matched OFF／GPU／pixels／observer-effect受入ではありません。過去のR51未取得を含む記録を保全します。
+
+## Hosted producer CI
+
+producer push37215124788／PR source37215129322／pytest37215129331はSUCCESS。actual PR checkout merge **858cea2f75813e6ecd718cb6637008dca42330ce**の親は57e52f9ef44c082daf7abbb0b0f5ada3a258a406／d1269520e91eb639cfdad6c65b2a7465733a9179です。181focused／42新規actual Gson、および旧35／59／17／39／24／11／14、完全LAB source／portable Java／pinned MOD compile／dependency／resource／unit gatesを確認しました。hosted pytestは**3,149 passed, 332 skipped, 8 warnings in 230.13s**。document publication HEADのCIは別に確認します。
+
+## 残る検証
+
+個別MemoryStatus／entryConditionの元checkMemory戻り値、全priority／Activity候補理由、nativeの他compute枝・duration／fallback RNG・cached reuse・TICK_RECOMPUTE・例外／cap／rearm、完全Brain理由と到着、全Path候補・拒否・malus・effective cost、全Vanilla・FRONTIER・community、広いBoss戦、matched OFF／GPU・pixels、live Tank resize、section21全受入、最後のwhole-diff独立レビューは残っています。Draftと全体goalを継続します。
