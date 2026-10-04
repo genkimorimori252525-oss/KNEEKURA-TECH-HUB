@@ -358,3 +358,50 @@ Still needed:
 - runtime reproduction of selected 2.6.5 failure classes;
 - performance regression measurements;
 - long-soak memory/model-swap verification.
+
+
+## 15. 2026-10-05 — first exact-JAR scanner run did not execute
+
+### Failure
+
+The first exact-artifact CI pass successfully:
+
+- fetched the official Modrinth JAR;
+- computed the correct SHA-256 / SHA-1;
+- verified the exact binary size.
+
+But the Python structural scanner produced no `structure.json`.
+
+Cause:
+
+- `main()` was defined;
+- the initial committed script omitted the module entrypoint that calls it.
+
+The following reporting step therefore failed because its expected result file did not exist.
+
+### Repair
+
+- add `if __name__ == "__main__": main()`;
+- rerun against the same exact Modrinth artifact;
+- verify the exact same artifact hash;
+- keep the failed CI run in history.
+
+The corrected scanner subsequently parsed all **955** classes with zero parse errors.
+
+### Reusable lesson
+
+An evidence tool must verify **its own output contract**, not merely that prerequisite acquisition
+succeeded.
+
+For future KNEEKURA evidence pipelines:
+
+~~~text
+acquire target
+ -> verify identity
+ -> run analyzer
+ -> assert expected result file/schema exists
+ -> validate result invariants
+ -> publish minimized evidence
+~~~
+
+Do not collapse “artifact acquisition succeeded” into “analysis succeeded”.
