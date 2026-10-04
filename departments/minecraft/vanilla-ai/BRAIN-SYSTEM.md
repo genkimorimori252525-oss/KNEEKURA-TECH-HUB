@@ -60,7 +60,7 @@ On `setActiveActivity`, an already active requested activity causes no change. O
 
 BehaviorControl is the scheduler interface; Behavior implements a status/start/end-time lifecycle and memory requirements. A snapshot may record running class/reference identity. A sampled set difference is a derived transition interval, not an exact lifecycle callback or explanation of why a behavior ran.
 
-`BehaviorControl` declares `getStatus`, `tryStart`, `tickOrStop`, `doStop` and `debugString`; it supplies no default lifecycle bodies. An implementation need not extend Behavior, so base-Behavior hooks do not cover every BehaviorControl implementation.
+`BehaviorControl` declares `getStatus`, `tryStart`, `tickOrStop`, `doStop` and `debugString`; it supplies no default lifecycle bodies. An implementation need not extend Behavior. [R49](ORIGINAL-INDEPENDENT-CONTROL-RETURN-2026-10-04.md) now records original normal lifecycle returns for OneShot and GateBehavior (including inherited Gate bodies such as RunOne), in addition to the existing base Behavior hooks. Arbitrary implementations or overridden bodies that bypass these bases remain outside that coverage. Generic BehaviorBuilder$1 class identity does not identify a concrete trigger, and Gate parent success is not a child-success result.
 
 | Base Behavior member | Inspected body |
 | --- | --- |
