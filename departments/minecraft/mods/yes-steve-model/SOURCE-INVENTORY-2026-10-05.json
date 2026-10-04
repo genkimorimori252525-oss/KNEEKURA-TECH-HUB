@@ -37,7 +37,8 @@
       "e1413f7 changes gradle.properties from 2.6.4 to 2.6.5",
       "fb23351 is the next runtime/content fix on the 2.6.5 line",
       "f184eda adds a Fast DEV build task while preserving mod_version 2.6.5",
-      "historical tree has no root LICENSE file; do not infer current Apache-2.0 terms for this historical snapshot"
+      "historical tree has no root LICENSE file; do not infer current Apache-2.0 terms for this historical snapshot",
+      "Actual 2.6.5 compatibility probes expose a readable-layout ModelPreviewRenderer semantic class, while f184eda has no such path and carries the paperdoll counterpart in RenderUtil. Keep this as SOURCE_ARTIFACT_DIVERGENCE and do not claim exact binary/source identity."
     ],
     "surface_inventory": {
       "client_animation_molang_java": 47,
@@ -138,6 +139,26 @@
       "role": "COMPARATIVE_ONLY",
       "implementation_truth": "NOT_ACCEPTED_FOR_OFFICIAL_YSM_CLAIMS",
       "note": "Project materials discuss prior decryption/reverse-rendering work; KNEEKURA does not reproduce protected-bypass methods."
+    },
+    "ysm_epicfight_actual_jar_probe": {
+      "repository": "HSZK2017/ysm_epicfight_compat",
+      "revision": "18db9328132bea921ea49f2125e4c0c319fbb5c8",
+      "date": "2026-10-04",
+      "role": "SECONDARY_ACTUAL_2_6_5_JAR_SYMBOL_AND_DESCRIPTOR_EVIDENCE",
+      "note": "Public compatibility code and tests preserve actual-jar obfuscated targets and fork fingerprints. Human comments are still subordinate to exact JVM descriptors."
+    },
+    "ysm_ragdoll_actual_jar_probe": {
+      "repository": "Esnowflake/YSMRagdoll",
+      "revision": "aa944a1484f53af328b76545857a98cc1ac55542",
+      "date": "2026-10-04",
+      "role": "SECONDARY_ACTUAL_2_6_5_RENDER_BOUNDARY_EVIDENCE",
+      "note": "Only public compatibility target names/descriptors are used. Any protection-bypass/decryption material remains out of scope."
+    },
+    "fastlaunch_native_bootstrap_probe": {
+      "repository": "sabu8190/TheFastLaunch",
+      "revision": "14a0e075c0ce3308299fd3a303ab7de83b4d1cf8",
+      "role": "SECONDARY_RUNTIME_REFLECTION_EVIDENCE",
+      "note": "Public reflection target corroborates the obfuscated NativeLibUtil no-arg preload entry."
     }
   },
   "evidence_status": {
@@ -163,7 +184,16 @@
     "model_distribution_java_jni_boundary": "EVIDENCE_BACKED_STATIC",
     "model_distribution_native_wire_protocol": "OPAQUE_NOT_ANALYZED",
     "client_build_progress_wedge_hazard": "DIRECT_SOURCE_STATIC_HAZARD_NOT_RUNTIME_CONFIRMED",
-    "issue_444_root_cause": "UNKNOWN"
+    "issue_444_root_cause": "UNKNOWN",
+    "java_obfuscation_map_2_6_5": "PARTIAL_EVIDENCE_BACKED_PUBLIC_CROSS_REFERENCE",
+    "obfuscated_native_lib_bootstrap": "HIGH_CONFIDENCE",
+    "obfuscated_capability_provider": "CONFIRMED_PUBLIC_ACTUAL_JAR_CROSS_REFERENCE",
+    "obfuscated_native_renderer_bridge": "CONFIRMED_PUBLIC_ACTUAL_JAR_DESCRIPTOR",
+    "obfuscated_render_event_hooks": "CONFIRMED_PUBLIC_ACTUAL_JAR_DESCRIPTOR",
+    "obfuscated_preview_paperdoll_path": "HIGH_WITH_SOURCE_ARTIFACT_DIVERGENCE",
+    "complete_obfuscation_map": "NOT_COMPLETE",
+    "distributed_jar_local_structural_scan": "NOT_PERFORMED_BINARY_ACQUISITION_UNAVAILABLE_IN_SESSION",
+    "native_protection_internals": "OUT_OF_SCOPE"
   },
   "safety_and_provenance_boundaries": [
     "No VMProtect/native protection bypass.",
