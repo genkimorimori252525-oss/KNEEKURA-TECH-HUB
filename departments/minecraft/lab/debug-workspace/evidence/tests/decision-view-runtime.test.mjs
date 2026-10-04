@@ -29,3 +29,22 @@ test('related projectiles draw their own segments and stable identity colors wit
  assert.match(view.elements.get('projectileLegend').textContent,/000000000001/);assert.match(view.elements.get('projectileLegend').textContent,/000000000002/);
  view.elements.get('tick').value=190;view.elements.get('tick').listeners.input();assert.equal(JSON.stringify(p),before);
 });
+test('visible gap summary distinguishes omitted source interval from age expiry and stays tied to the whole retained window',()=>{
+ const p=presentation();p.layers.motion.trace.gaps=[{kind:'SOURCE_GAP',after_tick:130,before_tick:175}];
+ const before=JSON.stringify(p),view=runView(p),summary=view.elements.get('gapStatus');
+ assert.ok(summary,'a visible retained-window gap status is required');
+ assert.match(summary.textContent,/指定区間全体/);assert.match(summary.textContent,/補間なし/);
+ assert.match(summary.textContent,/SOURCE_GAP/);assert.match(summary.textContent,/130.*175/);
+ view.elements.get('tick').value=120;view.elements.get('tick').listeners.input();
+ assert.match(summary.textContent,/130.*175/,'cursor must not relabel a whole-window boundary');
+ assert.equal(JSON.stringify(p),before);
+});
+test('gap summary bounds detailed rows and preserves each projectile identity without implying a complete trace',()=>{
+ const p=presentation();p.layers.motion.trace.gaps=[];
+ p.layers.relatedProjectiles.traces=[1,2].map(n=>({trace:{subject:{id:'00000000-0000-0000-0000-'+String(n).padStart(12,'0')},
+   samples:[],segments:[],gaps:Array.from({length:3},(_,i)=>({kind:'SOURCE_GAP',after_tick:100+i*20,before_tick:115+i*20}))}}));
+ const view=runView(p),summary=view.elements.get('gapStatus');assert.ok(summary);
+ assert.match(summary.textContent,/6/);assert.match(summary.textContent,/000000000001/);assert.match(summary.textContent,/000000000002/);
+ assert.match(summary.textContent,/省略/);assert.equal((summary.textContent.match(/SOURCE_GAP/g)??[]).length,4);
+ const empty=runView(presentation());assert.match(empty.elements.get('gapStatus').textContent,/連続取得を保証しません/);
+});

@@ -35,7 +35,7 @@ export function renderDecisionPresentationHtml(presentation) {
 <label><input type="checkbox" id="terrain">観測用地形：四角（PathFinder評価ではない）</label>
 <label><input type="checkbox" id="pathCache">探索cache：三角／×（全neighborではない）</label>
 <label><input type="checkbox" id="declaredNavigation">宣言された経路：太い破線と菱形</label>
-<p id="layerStatus"></p><canvas id="space" width="900" height="420" aria-label="任意表示の保存済み空間観測"></canvas>
+<p id="layerStatus"></p><p id="gapStatus" class="muted"></p><canvas id="space" width="900" height="420" aria-label="任意表示の保存済み空間観測"></canvas>
 <p class="muted">軌跡の色はcursorとの差です：<span style="color:rgb(105,215,255)">青 0–33t</span> → <span style="color:rgb(255,211,83)">黄 34–66t</span> → <span style="color:rgb(255,96,83)">赤 67–99t</span> → 100tで非表示。通常20t/秒。弾はUUIDの固定色から黄・赤へ寄せます。色が近い弾はUUIDとmarkerで確認してください。</p>
 <p id="projectileLegend"></p>
 <p class="muted">ELEVATIONの横軸はtickです。地形・cache・宣言経路はこの表示には重ねません。宣言経路は実移動ではありません。</p>
@@ -55,6 +55,12 @@ for(const [name,stage] of Object.entries(p.overview.stages)){
   byId('stages').append(box);
 }
 byId('raw').textContent=JSON.stringify(p,null,2);
+const gaps=[...(p.layers.motion.trace.gaps??[]).map(gap=>({subject:'実移動',gap})),
+  ...(p.layers.relatedProjectiles?.traces??[]).flatMap(group=>(group.trace.gaps??[]).map(gap=>({subject:'弾 '+group.trace.subject.id,gap})))];
+byId('gapStatus').textContent='欠測・境界（指定区間全体・補間なし）：'+(gaps.length?
+  gaps.length+'件 / '+gaps.slice(0,4).map(({subject,gap})=>subject+' '+gap.kind+' ['+gap.after_tick+' … '+gap.before_tick+']').join(' | ')+
+    (gaps.length>4?' / '+(gaps.length-4)+'件の詳細を省略（参照元IDと全件は表示データを参照）':''):
+  '検出された軌跡gapなし。連続取得を保証しません。');
 const cursor=byId('tick');cursor.min=p.request.startTick;cursor.max=p.request.endTick;cursor.value=p.request.endTick;
 const colors={motion:'#78d7ff',terrain:'#89d596',pathCache:'#ffc76b',declaredNavigation:'#f2a0e2'};
 function draw(){
