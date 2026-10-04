@@ -267,3 +267,7 @@ def main():
         print("KNEEKURA_CLUSTER_" + label.upper() + "=" + json.dumps(cluster_hits[label][:8], ensure_ascii=False))
     print("KNEEKURA_JADE=" + json.dumps([x["name"] for x in interface_hits["snownee/jade/api/IWailaPlugin"]]))
     print("KNEEKURA_IGUIOVERLAY=" + json.dumps([x["name"] for x in interface_hits["net/minecraftforge/client/gui/overlay/IGuiOverlay"]]))
+
+
+if __name__ == "__main__":
+    main()
