@@ -1,0 +1,40 @@
+# Core movement controls and shared terrain cache — bounded FRONTIER comparison
+
+This extends [version portability](VERSION-PORTABILITY.md) with exact official Vanilla1.21.1 method bodies, separately from Forge1.20.1 ANCHOR and loader patches. [The additive ledger](FRONTIER-CONTROL-CACHE-LEDGER-2026-10-04.json) pins eight owners, fourteen core-control comparisons and seven cache methods. The previous26-owner/13-method ledger remains unchanged. Private mappings/class exports stay outside Git; the public ledger contains identities, descriptors and hashes only.
+
+Official client SHA256 `499f6897d1837516680f3114072d8106e11c9adcd933fe5cf051b551089b0c99` and mapping SHA256 `140c47931cccc8fc9e4c22d7603e2d714d1a953a146f51ea7397d95c955536ec` were rechecked. JDK17 javap reads class-major65 bytes; Minecraft1.21.1 execution requires Java21. No modern client, gameplay query or new JDK installation was performed.
+
+## What the control comparison establishes
+
+The selected fourteen methods have matching opcode/offset/numeric-operand shape after constant-pool indices/comments are excluded. That mechanical finding **does not compare referenced members or constant-pool values**, and does not establish semantic equivalence. Exact mapped calls, fields and relevant constants were also read to explain the following bounded concepts. Modern attributes use `Holder<Attribute>` where ANCHOR uses `Attribute`; the base upward-step call maps to modern `maxUpStep`, whereas the captured Forge ANCHOR calls `getStepHeight`. Their underlying implementations and arbitrary subclasses are not made equivalent by similar caller structure.
+
+| Component / inspected members | Bounded source behavior and interpretation |
+| --- | --- |
+| MoveControl.hasWanted /setWantedPosition /strafe /tick | `hasWanted` tests only MOVE_TO. Setting wanted position updates coordinates/speed but preserves JUMPING. STRAFE uses movement-speed scaling, yaw-relative components and a walkability check before returning to WAIT. MOVE_TO sets WAIT before applying the current request, rotates yaw by a bounded step and may request jumping. JUMPING remains until the ground predicate succeeds. Cached wanted coordinates may remain after WAIT; they do not establish an active route or arrival. |
+| FlyingMoveControl.tick | MOVE_TO sets WAIT and disables gravity; speed uses MOVEMENT_SPEED on ground and FLYING_SPEED otherwise. It applies bounded yaw/pitch changes and signed vertical input. The inactive branch restores gravity only when `hoversInPlace` is false and clears vertical/forward inputs. A false base `hasWanted` after this tick does not prove there was no command during it. |
+| SmoothSwimmingMoveControl.tick /getTurningSpeedFactor | When configured, being in water adds0.005 to vertical velocity before checking the request. Active steering requires MOVE_TO and unfinished navigation; inactive steering clears speed and three input axes. Water speed uses its water modifier, bounded pitch and pitch-derived forward/vertical inputs. Outside-water speed also depends on yaw error through `1-clamp((error-10)/50,0,1)`. That factor is full through10degrees and zero at60degrees; the divisor50 is not a50degree stopping threshold. |
+| LookControl.tick | The virtual reset predicate may reset pitch. A positive look cooldown is decremented before applying available desired yaw/pitch; otherwise the head turns toward body yaw with a10degree bound. Head/body clamping is a separate final call. Wanted look coordinates, eye-facing rotation and movement destination remain separate observations. |
+| JumpControl.jump /tick | `jump()` sets a private pending flag; `tick()` passes it to Mob.setJumping then clears it. Post-tick cached false is compatible with a request consumed during that tick. Calling either method for inspection changes execution. |
+| BodyRotationControl.clientTick /rotateHeadTowardsFront /notCarryingMobPassengers /isMoving | The movement predicate uses only squared x/z displacement with threshold approximately2.5e-7; vertical-only motion is not this predicate. Moving aligns body yaw to entity yaw, bounds head rotation and resets stability. Otherwise, when the first passenger is not a Mob, a head change over15degrees resets stability; after more than10 stable ticks the body allowance narrows over another10ticks. `clientTick` naming is not proof of thread/side authority at every caller. |
+
+These explain cached operation, wanted position, speed and rotation fields; they are not additional runtime observations. Ghast/Phantom/Slime and arbitrary MOD overrides require separate exact bodies/adapters. R40's original Ghast feasibility is [independent runtime evidence](GHAST-ORIGINAL-REACH-ACCEPTANCE-2026-10-04.md), not a consequence of this modern comparison.
+
+## PathTypeCache lifecycle and one verified invalidation site
+
+Official1.21.1 `PathTypeCache` class SHA256 is `0395dec5d101ec638de4951981bd02919f5cd6a66fa9a2b2937a802fdaffc19e`; its complete hashed export and exact method locators are in the additive ledger.
+
+- The constructor allocates4096 position slots and4096 PathType slots. The index is the low integer part of `HashCommon.mix(packedPosition)`, masked with4095. It is a fixed direct-mapped cache; two positions sharing an index replace each other.
+- `getOrCompute` checks both the full packed position and a non-null retained type. On a miss, `compute` invokes the original static WalkNodeEvaluator.getPathTypeFromState with the passed BlockGetter/position, then replaces the slot's position/type. A visualizer's extra call can populate or evict entries; it is not a passive retained-data read.
+- `invalidate(position)` clears the type only when that slot contains the exact packed position. It does not clear every slot or itself scan neighbors. There is no complete invalidation/callsite proof from this method alone.
+- `ServerLevel` constructs one cache and returns it through getPathTypeCache. Its inspected sendBlockUpdated calls invalidate for the changed position at bytecode41, **before** comparing old/new collision shapes and before the equal-shape return at73. If shapes differ, it collects eligible navigation objects and recomputes them under isUpdatingNavigations, clearing that guard on normal and exceptional exit. This is one exact Vanilla callsite; it does not prove every world mutation, chunk unload or loader path invokes it.
+- The previously inspected PathfindingContext constructor obtains this cache from the Mob's ServerLevel when applicable. getPathTypeFromState uses the retained cache with the supplied collision region, or direct classification when no cache is available. This is raw terrain classification, not per-Mob malus, accepted neighbor, closed-node status, chosen route or final effective path cost.
+
+The query key has no per-Mob identity or malus value; Mob/evaluator-specific interpretation occurs elsewhere. Neither a terrain cache hit nor identical terrain types demonstrates equal feasibility for two Mobs. Recompute calls are gameplay operations and must never be performed by a viewer to obtain evidence.
+
+## Backport and observer design
+
+Keep current ANCHOR producers version-specific. Do not import modern PathTypeCache, PathfindingContext, Holder attribute descriptors or obfuscated member names into the1.20.1 readiness map. Shared contracts remain optional stages, exact subject/context, original invocation facts, retained real Motion and explicit unknowns.
+
+A future modern terrain observer must account for cache mutation in its observer-effect measurements and identify raw terrain queries separately from original evaluator results. Prefer displaying already retained classifications; any explicitly armed additional query needs bounds and its own semantics. No runtime producer, default, public API, dependency or generated gameplay fixture changes with this research.
+
+Remaining scope includes custom modern controllers, underlying attribute/step implementations, exhaustive cache invalidation/loaders, modern runtime hooks, other evaluator cost/lifecycle, full ANCHOR algorithms and community reproductions. This bounded extension does not close the full `/goal`.

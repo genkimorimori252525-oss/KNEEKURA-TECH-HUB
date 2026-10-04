@@ -8,6 +8,12 @@ FlyingMoveControl changes vertical/yaw handling and gravity behavior within its 
 
 LookControl exposes whether it is looking at a target and cached wanted coordinates. Its look operation is separate from MoveControl and navigation. JumpControl has a private desired-jump flag in the captured class; a public tick is an actuator, not a read API. BodyRotationControl is another execution component.
 
+## Operation, speed and rotation interpretation
+
+Exact ANCHOR bodies now have a [bounded six-control explanation and modern comparison](FRONTIER-CONTROL-CACHE-2026-10-04.md). MOVE_TO and STRAFE may apply a request and leave WAIT in the same tick; `setWantedPosition` preserves JUMPING. Flying control distinguishes ground/flying speed and hover gravity. Swimming steering requires unfinished navigation and scales speed differently in/out of water. Look cooldown and desired rotation are separate from movement. Jump tick consumes its pending flag. Body rotation's movement predicate uses horizontal displacement, with a separate head-stability delay. A post-tick WAIT/false/zero field must not be promoted to "no request occurred" or a selected-path explanation. Cached coordinates are controller state, not additional Motion samples.
+
+The explanation is static source evidence; current original control returns and real positions remain separately retained. Modern attribute Holder/step descriptors and shared terrain-cache effects are version-specific, not new ANCHOR read APIs.
+
 ## Custom families
 
 | Family | Proven static mechanism | Observation limitation |

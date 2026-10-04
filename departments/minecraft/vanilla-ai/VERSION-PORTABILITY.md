@@ -11,7 +11,7 @@ ANCHOR is the exact Minecraft 1.20.1 / Forge 47.2.0 / Mojmap development artifac
 | Path search | Open/closed/predecessor/cost/selected path | Exact descriptor, weighted relaxation, visited budget and evaluator cleanup | Inspected outer/inner search preserves prepare/start/inner/done, budget-before-pop and 1.5 weighted heuristic; evaluator context API differs |
 | Terrain | Type defaults, effective getter, evaluated-node cost | Vehicle inheritance and evaluator-specific acceptance | PathType replaces BlockPathTypes vocabulary; new PathfindingContext can use the ServerLevel PathTypeCache; an observer query can affect cache state |
 | Debug transport | Typed state plus client presentation | Older channel/buffer packet; key senders dormant | 1.21.1 has typed payload owners, but inspected Path/Goal/Brain sender bodies still return immediately |
-| Custom control | Selected target/controller/phase with actual motion | Ghast/Phantom/Slime-specific implementations | Version-unverified |
+| Core/custom control | Selected target/controller/phase with actual motion | Six core controls and Ghast/Phantom/Slime-specific implementations | [Fourteen core-control method comparisons](FRONTIER-CONTROL-CACHE-2026-10-04.md) retain caller concepts but different attribute/step APIs; custom modern controls/runtime remain unverified |
 
 ## Exact modern snapshot and evidence boundary
 
@@ -21,7 +21,7 @@ JDK17 javap inspected class-major65 bytes; this is read-only inspection, not exe
 
 Modern `DebugPackets.sendPathFindingPacket`, `sendGoalSelector` and `sendEntityBrain` each contain only `return` in this binary. Typed `PathfindingDebugPayload`/`GoalDebugPayload`/`BrainDebugPayload` existence therefore does not establish an active producer, complete candidate population or ready-made observability. Modern mods that re-enable senders require their own exact snapshot and cost/permission design.
 
-Modern `NodeEvaluator.prepare` constructs a PathfindingContext and clears node cache; `done` clears context/Mob references. The context uses ServerLevel's PathTypeCache when the Mob's level is a ServerLevel, otherwise direct static classification. Its query result is terrain type, not original neighbor acceptance or effective Mob cost. Cache lifecycle/invalidation, every evaluator/control and complete modern AI behavior remain outside this thirteen-method comparison.
+Modern `NodeEvaluator.prepare` constructs a PathfindingContext and clears node cache; `done` clears context/Mob references. The context uses ServerLevel's PathTypeCache when the Mob's level is a ServerLevel, otherwise direct static classification. Its query result is terrain type, not original neighbor acceptance or effective Mob cost. A separate [control/cache extension](FRONTIER-CONTROL-CACHE-2026-10-04.md) now pins eight owners, fourteen core-control comparisons and seven cache methods:4096-slot exact-position direct mapping, compute/replacement, exact-position invalidation and the sendBlockUpdated call before collision-shape comparison. The original26-owner/13-method ledger is preserved. Exhaustive invalidation/loaders, every evaluator/custom control and complete modern AI behavior remain outside these bounded comparisons.
 
 ## Backport strategy and risks
 
