@@ -48,6 +48,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.LongSupplier;
+import java.util.function.BooleanSupplier;
+import net.minecraft.server.level.ServerLevel;
 import java.util.function.Supplier;
 
 /** Debug-only callbacks of original ANCHOR method invocations, never a second AI call. */
@@ -61,13 +63,25 @@ public final class KneekuraDebugDecisionHooks {
     private record SinkFrame(MoveToTargetSink behavior,Mob owner,Brain<?> brain,PathNavigation navigation,
                              String id,String parentId,String callSite,long gameTime,JsonObject before,long preCallCost) { }
 
+    private static final class DispatchCapture {
+        final String branch;final List<String> children=new ArrayList<>();boolean truncated;
+        DispatchCapture(String branch){this.branch=branch;}
+    }
+    private static final class TickStopFrame {
+        final MoveToTargetSink behavior;final Mob owner;final Brain<?> brain;final PathNavigation navigation;
+        final ServerLevel level;final long gameTime;final String id;DispatchCapture dispatch;
+        TickStopFrame(MoveToTargetSink behavior,Mob owner,Brain<?> brain,PathNavigation navigation,ServerLevel level,long gameTime,String id){
+            this.behavior=behavior;this.owner=owner;this.brain=brain;this.navigation=navigation;this.level=level;this.gameTime=gameTime;this.id=id;
+        }
+    }
+
     public static void install(Session session) {
         if (session.thread != Thread.currentThread()) throw new IllegalStateException("SERVER_THREAD_REQUIRED");
         clear("REARMED");active=session;
     }
     public static void clear(String reason) {
         Session previous=active;active=null;
-        if(previous!=null){previous.budget.close(reason);previous.clearHeapNodes();previous.sinkFrame=null;}
+        if(previous!=null){previous.budget.close(reason);previous.clearHeapNodes();previous.sinkFrame=null;previous.tickStopFrame=null;}
     }
 
     public static final class Session {
@@ -93,6 +107,8 @@ public final class KneekuraDebugDecisionHooks {
         private ActivityFrame activityFrame;
         private int nextSink,sinkDepth;
         private SinkFrame sinkFrame;
+        private TickStopFrame tickStopFrame;
+        private int nextTickStop,tickStopDepth;
         private boolean goalCoveragePartial;
 
         public Session(Mob subject, GoalSelector goal, GoalSelector target,
@@ -182,6 +198,24 @@ public final class KneekuraDebugDecisionHooks {
                     previous!=null&&previous.behavior()==behavior&&previous.owner()==owner?previous.id():null,site,gameTime,before,
                     Math.max(0L,System.nanoTime()-started));
             }catch(ReflectiveOperationException|RuntimeException|LinkageError error){budget.close("SINK_CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());return null;}
+        }
+        private boolean tickStopReady(TickStopFrame frame) {
+            if(active!=this||!matches(frame.owner)||!channels.contains("brain_navigation"))return false;
+            try {return budget.allows(currentContext.get(),time.getAsLong())&&
+                KneekuraDebugDecisionSnapshot.read(LivingEntity.class,"brain",subject)==frame.brain&&
+                KneekuraDebugDecisionSnapshot.read(Mob.class,"navigation",subject)==frame.navigation&&
+                KneekuraDebugDecisionSnapshot.read(PathNavigation.class,"mob",frame.navigation)==subject;
+            }catch(ReflectiveOperationException|RuntimeException|LinkageError error){budget.close("TICK_STOP_CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());return false;}
+        }
+        private TickStopFrame tickStopBegin(Brain<?> brain,BehaviorControl<?> control,ServerLevel level,LivingEntity owner,long gameTime) {
+            if(!matches(owner)||!channels.contains("brain_navigation")||control==null||control.getClass()!=MoveToTargetSink.class||nextTickStop>=256||tickStopDepth>8)return null;
+            try {
+                if(!budget.allows(currentContext.get(),time.getAsLong())||KneekuraDebugDecisionSnapshot.read(LivingEntity.class,"brain",owner)!=brain)return null;
+                PathNavigation navigation=(PathNavigation)KneekuraDebugDecisionSnapshot.read(Mob.class,"navigation",owner);
+                if(brain==null||navigation==null||KneekuraDebugDecisionSnapshot.read(PathNavigation.class,"mob",navigation)!=owner)return null;
+                return new TickStopFrame((MoveToTargetSink)control,(Mob)owner,brain,navigation,level,gameTime,
+                    "tick-stop:"+budget.context().selectionRevision()+":"+(++nextTickStop));
+            }catch(ReflectiveOperationException|RuntimeException|LinkageError error){budget.close("TICK_STOP_CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());return null;}
         }
         private String token(Object object) {
             String token=identities.get(object);
@@ -365,6 +399,50 @@ public final class KneekuraDebugDecisionHooks {
             });
         }catch(ReflectiveOperationException|RuntimeException|LinkageError error){session.budget.close("NAVIGATION_CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());}
     }
+    /** Source Brain loop interface call. Unknown controls and all OFF/throw paths still execute once. */
+    @SuppressWarnings({"rawtypes","unchecked"})
+    public static void originalBrainTickOrStop(Brain<?> brain,BehaviorControl<?> control,ServerLevel level,LivingEntity owner,long gameTime) {
+        originalBrainCall(brain,control,level,owner,gameTime,()->((BehaviorControl)control).tickOrStop(level,owner,gameTime));
+    }
+    private static void originalBrainCall(Brain<?> brain,BehaviorControl<?> control,ServerLevel level,LivingEntity owner,long gameTime,Runnable original) {
+        Session session=active;
+        if(session==null||session.thread!=Thread.currentThread()){original.run();return;}
+        TickStopFrame previous=session.tickStopFrame;int depth=session.tickStopDepth;session.tickStopDepth++;
+        try {session.tickStopFrame=session.tickStopBegin(brain,control,level,owner,gameTime);original.run();}
+        finally {session.tickStopFrame=active==session?previous:null;session.tickStopDepth=depth;}
+    }
+    public static boolean originalBrainCondition(Behavior<?> behavior,long gameTime,String condition,ServerLevel level,LivingEntity owner,BooleanSupplier original) {
+        boolean result=original.getAsBoolean();Session session=active;TickStopFrame frame=tickStopFrame(session,behavior,gameTime);
+        if(frame!=null&&Set.of("TIMED_OUT","CAN_STILL_USE").contains(condition)&&(condition.equals("TIMED_OUT")||frame.owner==owner&&frame.level==level))session.record("BRAIN_PATH_CONDITION_RETURN",
+            "Behavior.tickOrStop."+(condition.equals("TIMED_OUT")?"timedOut":"canStillUse")+".AFTER",()->{
+                JsonObject data=tickStopData(session,frame);data.addProperty("condition",condition);data.addProperty("result",result);
+                data.addProperty("resultScope","ORIGINAL_VIRTUAL_BOOLEAN_NOT_INDIVIDUAL_OPERAND_REASONS");return data;
+            });return result;
+    }
+    public static void originalBrainDispatch(Behavior<?> behavior,ServerLevel level,LivingEntity owner,long gameTime,String branch,Runnable original) {
+        Session session=active;TickStopFrame frame=tickStopFrame(session,behavior,gameTime);
+        if(frame==null||frame.owner!=owner||frame.level!=level||!Set.of("TICK","STOP").contains(branch)){original.run();return;}
+        DispatchCapture capture=new DispatchCapture(branch),previous=frame.dispatch;frame.dispatch=capture;
+        try {
+            original.run();
+            if(session.tickStopReady(frame))session.record("BRAIN_PATH_DISPATCH_RETURN","Behavior.tickOrStop."+(branch.equals("TICK")?"tick":"doStop")+".AFTER",()->{
+                JsonObject data=tickStopData(session,frame);data.addProperty("branch",branch);JsonArray children=new JsonArray();capture.children.forEach(children::add);
+                data.add("capturedSinkInvocationIds",children);data.addProperty("capturedSinkInvocationsTruncated",capture.truncated);
+                data.addProperty("childScope","DIRECT_CAPTURED_CONCRETE_CALL_SCOPES_NOT_COMPLETION_OR_FULL_CHILDREN");
+                data.addProperty("returnScope","NORMAL_ORIGINAL_DISPATCH_VOID_NOT_ARRIVAL");return data;
+            });
+        }finally{frame.dispatch=active==session?previous:null;}
+    }
+    private static TickStopFrame tickStopFrame(Session session,Behavior<?> behavior,long gameTime) {
+        if(session==null||session.thread!=Thread.currentThread())return null;TickStopFrame frame=session.tickStopFrame;
+        return frame!=null&&frame.behavior==behavior&&frame.gameTime==gameTime&&session.tickStopReady(frame)?frame:null;
+    }
+    private static JsonObject tickStopData(Session session,TickStopFrame frame) {
+        JsonObject data=new JsonObject();data.addProperty("sinkClass",label(frame.behavior.getClass().getName()));component(data,session,frame.behavior,"instanceIdentity");
+        data.addProperty("tickOrStopInvocationId",frame.id);data.addProperty("gameTimeArgument",Long.toString(frame.gameTime));
+        data.addProperty("dispatchScope","ORIGINAL_BRAIN_RUNNING_BEHAVIOR_INTERFACE_CALL_EXACT_SINK");data.addProperty("operandReasonStatus","NOT_EXPOSED");
+        data.addProperty("arrivalStatus","NOT_EXPOSED");data.addProperty("searchRelationStatus","NOT_EXPOSED");return data;
+    }
     /** Known sink bridge/restart call. The protected original delegate runs once, including OFF/throw. */
     public static void originalSinkCall(MoveToTargetSink behavior,Mob owner,long gameTime,String site,Runnable original) {
         Session session=active;
@@ -373,6 +451,12 @@ public final class KneekuraDebugDecisionHooks {
         try {
             SinkFrame frame=session.sinkBegin(behavior,owner,gameTime,site,previous);
             session.sinkFrame=frame; // Never attribute an unsupported nested call to the captured parent.
+            TickStopFrame caller=session.tickStopFrame;
+            if(frame!=null&&caller!=null&&caller.behavior==behavior&&caller.owner==owner&&caller.brain==frame.brain()&&
+                caller.navigation==frame.navigation()&&caller.gameTime==gameTime&&session.tickStopReady(caller)&&caller.dispatch!=null&&
+                (caller.dispatch.branch.equals("STOP")?site.equals("STOP_FROM_BRIDGE"):Set.of("TICK_FROM_BRIDGE","START_FROM_TICK").contains(site))){
+                if(caller.dispatch.children.size()<8)caller.dispatch.children.add(frame.id());else caller.dispatch.truncated=true;
+            }
             original.run();
             if(frame!=null&&session.sinkReady(frame))session.record("BRAIN_PATH_SINK_RETURN","MoveToTargetSink."+site+".AFTER",()->{
                 JsonObject data=sinkData(session,frame);data.add("before",frame.before().deepCopy());

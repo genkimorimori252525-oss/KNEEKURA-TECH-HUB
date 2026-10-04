@@ -36,14 +36,27 @@ try {
   'TankPresentationRecipe','TankPresentation','TankView','DecisionSnapshot','DecisionBurstBudget','DecisionHooks','TerrainField','SynchedCached',
   'DecisionAdapter','DecisionBurstRequest','AdapterSourceProof','TwilightForestDescriptor','TwilightForestReturnDescriptor','TwilightForestAdapter',
   'MotionTraceCache','RelatedProjectileTraceCache','MotionOverlayRuntime','MotionOverlayGeometry','MotionOverlay'];
- const sources=[...names.map(n=>path.join(main,'KneekuraDebug'+n+'.java')),...['Path','Brain','OneShot','GateBehavior'].map(n=>path.join(main,'decisionmixin/KneekuraDebug'+n+'DecisionMixin.java')),path.join(main,'decisionmixin/KneekuraDebugScheduledActivityMixin.java'),path.join(main,'decisionmixin/KneekuraDebugNavigationResultMixin.java'),path.join(main,'decisionmixin/KneekuraDebugBrainNavigationMixin.java')];
- const checks=['EvidenceClaim','CaptureWriter','RegisteredWorld','TankPresentation','DecisionSnapshot','TypedMemory','BehaviorControl','BrainActivity','NavigationResult','BrainNavigation','BrainStop','DecisionHooks','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult','TerrainField','SynchedCached','MotionTraceCache','RelatedProjectileTrace','MotionOverlayGeometry','MotionWriter'];
+ const sources=[...names.map(n=>path.join(main,'KneekuraDebug'+n+'.java')),...['Path','Brain','Behavior','OneShot','GateBehavior'].map(n=>path.join(main,'decisionmixin/KneekuraDebug'+n+'DecisionMixin.java')),path.join(main,'decisionmixin/KneekuraDebugScheduledActivityMixin.java'),path.join(main,'decisionmixin/KneekuraDebugNavigationResultMixin.java'),path.join(main,'decisionmixin/KneekuraDebugBrainNavigationMixin.java')];
+ const checks=['EvidenceClaim','CaptureWriter','RegisteredWorld','TankPresentation','DecisionSnapshot','TypedMemory','BehaviorControl','BrainActivity','NavigationResult','BrainNavigation','BrainTickStop','BrainStop','DecisionHooks','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult','TerrainField','SynchedCached','MotionTraceCache','RelatedProjectileTrace','MotionOverlayGeometry','MotionWriter'];
  run(executable('javac'),['--release','17','-proc:none','-cp',classpath,'-d',output,...sources,...checks.map(n=>path.join(test,'KneekuraDebug'+n+'SelfTest.java')),path.join(test,'KneekuraDebugDecisionIdentityInterop.java')]);
  for(const name of checks.filter(n=>n!=='MotionWriter')){
   // Vanilla bootstrap can create logs; keep this new check's artifacts in its disposable output.
-  const bootstrap=['BrainStop','BrainNavigation','NavigationResult','BrainActivity','BehaviorControl','TypedMemory','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult'].includes(name);
+  const bootstrap=['BrainTickStop','BrainStop','BrainNavigation','NavigationResult','BrainActivity','BehaviorControl','TypedMemory','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult'].includes(name);
   const cp=bootstrap?classpath.split(path.delimiter).map(p=>path.resolve(root,p)).join(path.delimiter):classpath;
   const stdout=run(executable('java'),['-cp',output+path.delimiter+cp,'com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebug'+name+'SelfTest'],{},bootstrap?output:root);
+  if(name==='BrainTickStop') {
+   const lines=stdout.split(/\r?\n/).filter(l=>l.startsWith('BRAIN_TICK_STOP_INTEROP:'));
+   assert.equal(lines.length,17,'original short circuit, branch, completed-condition-before-throw and capped component cases');
+   const records=lines.map((line,index)=>({source:{side:'SERVER'},observationId:'brain-tick-stop-gson:'+index,gameTime:100,payload:JSON.parse(line.slice('BRAIN_TICK_STOP_INTEROP:'.length))}));
+   assert.ok(records.every(validOriginalDecisionEvent),'actual original condition/dispatch Gson satisfies strict consumer');
+   assert.deepEqual(records.slice(3,5).map(r=>r.payload.kind),['BRAIN_PATH_CONDITION_RETURN','BRAIN_PATH_DISPATCH_RETURN'],'timedOut true never invents canStillUse');
+   assert.equal(records[3].payload.data.condition,'TIMED_OUT');assert.equal(records[3].payload.data.result,true);assert.equal(records[4].payload.data.branch,'STOP');
+   assert.equal(records[7].payload.data.branch,'TICK');assert.equal(records[14].payload.data.instanceIdentityStatus,'NOT_EXPOSED');
+   const stages={},capabilities={},timeline=[];appendOriginalDecisionEvents(records,stages,capabilities,timeline);
+   assert.equal(stages.EVALUATION.facts.length,12);assert.equal(stages.EXECUTION.facts.length,5);assert.equal(capabilities.brain_navigation.status,'PARTIAL');
+   for(const stage of ['CANDIDATE','SELECTION','RESULT'])assert.equal(stages[stage],undefined);
+   console.log('Seventeen actual Brain tick-or-stop/Gson cases preserve virtual booleans, short circuit and direct concrete scopes');
+  }
   if(name==='BrainStop') {
    const lines=stdout.split(/\r?\n/).filter(l=>l.startsWith('BRAIN_STOP_INTEROP:'));
    assert.equal(lines.length,39,'genuine stop, custom retained state, absent/malformed slots and caps');

@@ -5,6 +5,7 @@ import com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugDecisionH
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.Brain;
+import net.minecraft.world.entity.ai.behavior.BehaviorControl;
 import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.entity.schedule.Schedule;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,6 +17,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value=Brain.class,remap=false)
 public abstract class KneekuraDebugBrainDecisionMixin {
+    @Redirect(method="tickEachRunningBehavior(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)V",
+        at=@At(value="INVOKE",target="Lnet/minecraft/world/entity/ai/behavior/BehaviorControl;tickOrStop(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V"),require=1)
+    private void kneekura$originalTickOrStop(BehaviorControl<?> control,ServerLevel level,LivingEntity owner,long tick) {
+        KneekuraDebugDecisionHooks.originalBrainTickOrStop((Brain<?>)(Object)this,control,level,owner,tick);
+    }
     @Redirect(method="updateActivityFromSchedule(JJ)V",
         at=@At(value="INVOKE",target="Lnet/minecraft/world/entity/schedule/Schedule;getActivityAt(I)Lnet/minecraft/world/entity/schedule/Activity;"),require=1)
     private Activity kneekura$originalActivityQuery(Schedule schedule,int tick) {

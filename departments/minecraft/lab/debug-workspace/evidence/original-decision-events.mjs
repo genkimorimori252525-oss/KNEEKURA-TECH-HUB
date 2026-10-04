@@ -18,6 +18,8 @@ const KINDS = Object.freeze({
   BRAIN_PATH_SINK_RETURN: ['EXECUTION','brain_navigation'],
   BRAIN_PATH_NAVIGATION_STOP_RETURN: ['EXECUTION','brain_navigation'],
   BRAIN_PATH_MEMORY_ERASE_RETURN: ['EXECUTION','brain_navigation'],
+  BRAIN_PATH_CONDITION_RETURN: ['EVALUATION','brain_navigation'],
+  BRAIN_PATH_DISPATCH_RETURN: ['EXECUTION','brain_navigation'],
   BEHAVIOR_TRY_START_RETURN: ['EVALUATION','behavior_execution'],
   BEHAVIOR_TICK_OR_STOP_RETURN: ['EXECUTION','behavior_execution'],
   BEHAVIOR_STOP_RETURN: ['EXECUTION','behavior_execution'],
@@ -318,6 +320,20 @@ function validNavigationReturn(d,record) {
     !['reasonStatus','arrivalStatus','searchRelationStatus'].every(k=>d[k]==='NOT_EXPOSED'))return false;
   return consistentRawPathMatch(d.requestedMatchesCachedPath,d.requestedPath,d.cachedPath,true);
 }
+function validBrainTickStop(kind,d,record) {
+  const revision=record.payload.targetRevision,id=(value,prefix,max)=>typeof value==='string'&&new RegExp('^'+prefix+':'+revision+':([1-9][0-9]{0,2})$').test(value)&&Number(value.split(':').at(-1))<=max;
+  const common=['sinkClass','instanceIdentityStatus',...(d.instanceIdentity==null?[]:['instanceIdentity']),'tickOrStopInvocationId','gameTimeArgument','dispatchScope','operandReasonStatus','arrivalStatus','searchRelationStatus'];
+  const condition=kind==='BRAIN_PATH_CONDITION_RETURN',extra=condition?['condition','result','resultScope']:['branch','capturedSinkInvocationIds','capturedSinkInvocationsTruncated','childScope','returnScope'];
+  if(!exactObjectKeys(d,[...common,...extra])||d.sinkClass!=='net.minecraft.world.entity.ai.behavior.MoveToTargetSink'||
+    !(d.instanceIdentity==null?d.instanceIdentityStatus==='NOT_EXPOSED':d.instanceIdentityStatus==='AVAILABLE'&&id(d.instanceIdentity,'component',128))||
+    !id(d.tickOrStopInvocationId,'tick-stop',256)||!signedLong(d.gameTimeArgument)||d.dispatchScope!=='ORIGINAL_BRAIN_RUNNING_BEHAVIOR_INTERFACE_CALL_EXACT_SINK'||
+    !['operandReasonStatus','arrivalStatus','searchRelationStatus'].every(k=>d[k]==='NOT_EXPOSED'))return false;
+  if(condition)return ['TIMED_OUT','CAN_STILL_USE'].includes(d.condition)&&typeof d.result==='boolean'&&d.resultScope==='ORIGINAL_VIRTUAL_BOOLEAN_NOT_INDIVIDUAL_OPERAND_REASONS';
+  const children=d.capturedSinkInvocationIds;
+  return ['TICK','STOP'].includes(d.branch)&&Array.isArray(children)&&children.length<=8&&children.every((v,i)=>id(v,'sink',256)&&(i===0||Number(v.split(':').at(-1))>Number(children[i-1].split(':').at(-1))))&&
+    typeof d.capturedSinkInvocationsTruncated==='boolean'&&(!d.capturedSinkInvocationsTruncated||children.length===8)&&
+    d.childScope==='DIRECT_CAPTURED_CONCRETE_CALL_SCOPES_NOT_COMPLETION_OR_FULL_CHILDREN'&&d.returnScope==='NORMAL_ORIGINAL_DISPATCH_VOID_NOT_ARRIVAL';
+}
 function validBrainNavigation(kind,d,record) {
   const revision=record.payload.targetRevision,exact=exactObjectKeys;
   const component=key=>d[key]==null?d[key+'Status']==='NOT_EXPOSED':d[key+'Status']==='AVAILABLE'&&typeof d[key]==='string'&&
@@ -384,6 +400,7 @@ function validBrainNavigation(kind,d,record) {
     d.returnScope==='ORIGINAL_VIRTUAL_MOVE_TO_RETURN_AT_SINK_CALL_SITE_NOT_ARRIVAL'&&d.referenceScope==='RAW_ARGUMENT_VS_CACHED_PATH_REFERENCE_EQUALITY';
 }
 function validData(kind,d,record) {
+  if(['BRAIN_PATH_CONDITION_RETURN','BRAIN_PATH_DISPATCH_RETURN'].includes(kind))return validBrainTickStop(kind,d,record);
   if(kind.startsWith('BRAIN_PATH_'))return validBrainNavigation(kind,d,record);
   if(kind==='NAVIGATION_MOVE_TO_RETURN')return validNavigationReturn(d,record);
   if(kind.startsWith('BRAIN_ACTIVITY_'))return validActivityData(kind,d,record);
