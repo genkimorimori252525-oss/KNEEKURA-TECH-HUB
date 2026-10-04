@@ -27,7 +27,8 @@ The Minecraft engineering system is now one Tech Hub monorepo:
 departments/minecraft/
 ├─ mod-ai/       knowledge, TaskContext, evidence contracts and MOD-making AI interfaces
 ├─ lab/          bounded experiment/observation apparatus, Tank, capture and retained SimLab/Viewer history
-├─ mods/         analyzed MOD technology and reusable engineering findings
+├─ mods/         modern analyzed MOD technology (ANCHOR / FRONTIER)
+├─ kobun/        historically isolated ancient MOD analysis (ORIGINAL-first)
 └─ design/       architecture and acceptance design records
 ```
 

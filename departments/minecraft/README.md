@@ -99,6 +99,22 @@ Sinytra Connector は 1.20.1 Forge 系と現行 NeoForge 系の両方を保持�
 
 対象横断の一覧は catalog/MODS.md。詳細手順は ANALYSIS-SPEC-v1.md。
 
+## 古文 — 太古の MOD 解析
+
+Minecraft 1.7.10以前を典型例とする、現代APIと大きく隔たった歴史的MODは
+[古文](kobun/README.md)で別系統として解析する。
+
+古文targetは通常の `mods/` / `catalog/MODS.md` に混ぜず、
+
+- ORIGINAL — 当時の原版
+- ERA-CONTEXT — 同時代資料
+- DESCENDANT — 後世のport/remake
+- MODERN-EXTRACTION — 現代へ持ち帰る派生知識
+
+を分離する。古いclass/APIを1.20.1へ黙って読み替えない。
+
+古文専用catalog: [kobun/catalog/MODS.md](kobun/catalog/MODS.md)
+
 ## Minecraft 1.20.1 Vanilla Foundation Map
 
 [Vanilla Foundation Map](vanilla-foundation/README.md)は、既存Source Intelligenceの exact ANCHOR `IndexSnapshot` から `net/minecraft/**` のクラス・package・subsystem・継承/implements・JVM class-reference候補・由来を content-addressed な小型地図へ変換する。巨大なMinecraft source/JARをGitへ複製せず、実装AIが外部検索より先に1.20.1内部を発見できる入口として使う。
