@@ -31,6 +31,11 @@ departments/minecraft/
 └─ design/       architecture and acceptance design records
 ```
 
+A specialized performance-analysis lane also lives at
+`departments/minecraft/optimization/`. Performance-focused MOD research should use its separate
+MOD/technique catalogs and benchmark contract rather than turning the general MOD catalog into an
+FPS/TPS comparison table.
+
 `departments/minecraft/lab/` is the canonical LAB source for new work. The old standalone `KNEEKURA-LAB` repository is retained only as source-origin/history unless explicitly needed for historical evidence.
 
 The raw LAB migration boundary is commit `c7461ef2da1dbfe137b73fa16b6c26b225bc427f`, imported from `KNEEKURA-LAB@f2d6165b16587672ac56f83c001c65bc2fa6d06a`. The import was verified 348/348 by Git blob SHA and file mode with missing 0, mismatch 0 and extra 0.
