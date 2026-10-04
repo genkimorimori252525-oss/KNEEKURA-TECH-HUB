@@ -32,7 +32,11 @@
         "rendering_assets": "INVENTORIED",
         "performance": "MAPPED",
         "failure_repair_history": "PARTIAL",
-        "license_provenance": "MAPPED"
+        "license_provenance": "MAPPED",
+        "burrower_3d": "EVIDENCE_BACKED",
+        "flying_ai": "MAPPED_WITH_WIP_BOUNDARY",
+        "mob_roles": "EVIDENCE_BACKED",
+        "wave_design": "EVIDENCE_BACKED"
       }
     },
     {
@@ -55,7 +59,10 @@
         "waves_spawning": "MAPPED",
         "performance": "MAPPED",
         "version_portability": "EVIDENCE_BACKED",
-        "license_provenance": "MAPPED"
+        "license_provenance": "MAPPED",
+        "burrower_3d": "EVIDENCE_BACKED",
+        "flying_ai": "MAPPED",
+        "wave_design": "EVIDENCE_BACKED"
       }
     },
     {
@@ -91,12 +98,18 @@
     "VERSION-PORTABILITY.md",
     "FAILURE-REPAIR-HISTORY.md",
     "FAILURE-REPAIR-HISTORY.json",
-    "LICENSE-PROVENANCE.md"
+    "LICENSE-PROVENANCE.md",
+    "BURROWER-3D-MOVEMENT.md",
+    "FLYING-AI.md",
+    "MOB-AI-CATALOG.md",
+    "WAVE-DEEP-DIVE.md"
   ],
   "notes": [
     "The historical uploaded JAR is primary evidence for distributed 1.1.2 claims.",
     "Player-facing guide/wiki/forum material is reconnaissance only.",
     "No runtime, performance benchmark or source-binary equivalence experiment was run.",
-    "Whole-target completion is not claimed; high-value siege/pathfinding/wave subsystems are the current evidence-backed focus."
+    "Whole-target completion is not claimed; high-value siege/pathfinding/wave subsystems are the current evidence-backed focus.",
+    "Burrower and flying-AI deep dives explicitly separate latent/debug legacy research code from normal 1.1.2 invasion gameplay.",
+    "Wave deep dive confirms the distributed Wave-5 unreachable-finale defect and maps the modern persistent BudgetWavePlan driver."
   ]
 }
