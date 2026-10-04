@@ -1,0 +1,74 @@
+name: YSM 2.6.5 structural scan
+
+on:
+  push:
+    branches: ["jolly/research-ysm-2026-10-05"]
+    paths:
+      - 'departments/minecraft/mods/yes-steve-model/tools/scan_ysm_265.py'
+      - 'departments/minecraft/mods/yes-steve-model/OBFUSCATION-MAP-2026-10-05.json'
+      - '.github/workflows/ysm-265-structural-scan.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ysm-265-structural-scan-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  structural-scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch exact official Modrinth artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p ysm-265-evidence
+          URL='https://cdn.modrinth.com/data/86xjpqqS/versions/Zqooxsd2/ysm-2.6.5-forge%2Bmc1.20.1-release.jar'
+          curl --fail --location --retry 3 --max-time 180 "$URL" -o "$RUNNER_TEMP/ysm-2.6.5.jar"
+          sha256sum "$RUNNER_TEMP/ysm-2.6.5.jar" | tee ysm-265-evidence/sha256.txt
+          sha1sum "$RUNNER_TEMP/ysm-2.6.5.jar" | tee ysm-265-evidence/sha1.txt
+          stat --printf='%s\n' "$RUNNER_TEMP/ysm-2.6.5.jar" | tee ysm-265-evidence/size.txt
+          printf '%s\n' "$URL" > ysm-265-evidence/source-url.txt
+      - name: Scan Java classfile structure only
+        shell: bash
+        run: |
+          set -euo pipefail
+          python departments/minecraft/mods/yes-steve-model/tools/scan_ysm_265.py \
+            --jar "$RUNNER_TEMP/ysm-2.6.5.jar" \
+            --map departments/minecraft/mods/yes-steve-model/OBFUSCATION-MAP-2026-10-05.json \
+            --out ysm-265-evidence/structure.json \
+            2>&1 | tee ysm-265-evidence/summary.txt
+      - name: Print bounded high-value structural detail
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('ysm-265-evidence/structure.json',encoding='utf-8'))
+          print('KNEEKURA_HIGH_VALUE_BEGIN')
+          print(json.dumps({
+            'artifact': d['artifact'],
+            'map_contract': {k:v for k,v in d['map_contract'].items() if k != 'checks'},
+            'bone_alias_candidates': d['bone_alias_candidates'][:5],
+            'seam_details': d['seam_details'],
+            'cluster_hits': {k:v[:8] for k,v in d['cluster_hits'].items()},
+            'interface_hits': d['interface_hits'],
+            'hierarchy_hits': d['hierarchy_hits'],
+            'parse_errors': d['parse_errors'],
+          }, ensure_ascii=False))
+          print('KNEEKURA_HIGH_VALUE_END')
+          PY
+      - name: Retain bounded evidence (no YSM JAR)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ysm-265-structure-${{ github.sha }}
+          path: ysm-265-evidence/
+          retention-days: 7
