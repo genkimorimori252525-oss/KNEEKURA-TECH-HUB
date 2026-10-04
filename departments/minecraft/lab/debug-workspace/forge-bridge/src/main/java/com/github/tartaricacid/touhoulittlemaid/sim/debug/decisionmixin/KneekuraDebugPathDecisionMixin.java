@@ -9,6 +9,7 @@ import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.level.pathfinder.PathFinder;
 import net.minecraft.world.level.pathfinder.Node;
 import net.minecraft.world.level.pathfinder.NodeEvaluator;
+import net.minecraft.world.level.pathfinder.BinaryHeap;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -18,6 +19,26 @@ import java.util.Set;
 
 @Mixin(value=PathFinder.class,remap=false)
 public abstract class KneekuraDebugPathDecisionMixin {
+    @Redirect(method="findPath(Lnet/minecraft/util/profiling/ProfilerFiller;Lnet/minecraft/world/level/pathfinder/Node;Ljava/util/Map;FIF)Lnet/minecraft/world/level/pathfinder/Path;",
+            at=@At(value="INVOKE",target="Lnet/minecraft/world/level/pathfinder/BinaryHeap;insert(Lnet/minecraft/world/level/pathfinder/Node;)Lnet/minecraft/world/level/pathfinder/Node;",ordinal=0),require=1)
+    private Node kneekura$originalStartInsert(BinaryHeap heap,Node node) {
+        return KneekuraDebugDecisionHooks.originalHeapInsert((PathFinder)(Object)this,heap,node,true);
+    }
+    @Redirect(method="findPath(Lnet/minecraft/util/profiling/ProfilerFiller;Lnet/minecraft/world/level/pathfinder/Node;Ljava/util/Map;FIF)Lnet/minecraft/world/level/pathfinder/Path;",
+            at=@At(value="INVOKE",target="Lnet/minecraft/world/level/pathfinder/BinaryHeap;insert(Lnet/minecraft/world/level/pathfinder/Node;)Lnet/minecraft/world/level/pathfinder/Node;",ordinal=1),require=1)
+    private Node kneekura$originalRelaxationInsert(BinaryHeap heap,Node node) {
+        return KneekuraDebugDecisionHooks.originalHeapInsert((PathFinder)(Object)this,heap,node,false);
+    }
+    @Redirect(method="findPath(Lnet/minecraft/util/profiling/ProfilerFiller;Lnet/minecraft/world/level/pathfinder/Node;Ljava/util/Map;FIF)Lnet/minecraft/world/level/pathfinder/Path;",
+            at=@At(value="INVOKE",target="Lnet/minecraft/world/level/pathfinder/BinaryHeap;pop()Lnet/minecraft/world/level/pathfinder/Node;"),require=1)
+    private Node kneekura$originalPop(BinaryHeap heap) {
+        return KneekuraDebugDecisionHooks.originalHeapPop((PathFinder)(Object)this,heap);
+    }
+    @Redirect(method="findPath(Lnet/minecraft/util/profiling/ProfilerFiller;Lnet/minecraft/world/level/pathfinder/Node;Ljava/util/Map;FIF)Lnet/minecraft/world/level/pathfinder/Path;",
+            at=@At(value="INVOKE",target="Lnet/minecraft/world/level/pathfinder/BinaryHeap;changeCost(Lnet/minecraft/world/level/pathfinder/Node;F)V"),require=1)
+    private void kneekura$originalChangeCost(BinaryHeap heap,Node node,float cost) {
+        KneekuraDebugDecisionHooks.originalHeapChangeCost((PathFinder)(Object)this,heap,node,cost);
+    }
     @Redirect(method="findPath(Lnet/minecraft/util/profiling/ProfilerFiller;Lnet/minecraft/world/level/pathfinder/Node;Ljava/util/Map;FIF)Lnet/minecraft/world/level/pathfinder/Path;",
             at=@At(value="INVOKE",target="Lnet/minecraft/world/level/pathfinder/NodeEvaluator;getNeighbors([Lnet/minecraft/world/level/pathfinder/Node;Lnet/minecraft/world/level/pathfinder/Node;)I"),require=1)
     private int kneekura$originalNeighbors(NodeEvaluator evaluator,Node[] output,Node current) {

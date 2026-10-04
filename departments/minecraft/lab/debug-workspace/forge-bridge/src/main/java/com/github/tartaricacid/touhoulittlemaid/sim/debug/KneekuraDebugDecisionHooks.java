@@ -20,6 +20,7 @@ import net.minecraft.world.entity.ai.goal.GoalSelector;
 import net.minecraft.world.entity.ai.goal.WrappedGoal;
 import net.minecraft.world.level.pathfinder.AmphibiousNodeEvaluator;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.level.pathfinder.BinaryHeap;
 import net.minecraft.world.level.pathfinder.FlyNodeEvaluator;
 import net.minecraft.world.level.pathfinder.Node;
 import net.minecraft.world.level.pathfinder.NodeEvaluator;
@@ -51,7 +52,7 @@ public final class KneekuraDebugDecisionHooks {
     }
     public static void clear(String reason) {
         Session previous=active;active=null;
-        if(previous!=null)previous.budget.close(reason);
+        if(previous!=null){previous.budget.close(reason);previous.clearHeapNodes();}
     }
 
     public static final class Session {
@@ -68,6 +69,7 @@ public final class KneekuraDebugDecisionHooks {
         private final IdentityHashMap<WrappedGoal,JsonObject> goals=new IdentityHashMap<>();
         private final IdentityHashMap<Object,String> identities=new IdentityHashMap<>();
         private final IdentityHashMap<PathFinder,String> searches=new IdentityHashMap<>();
+        private final IdentityHashMap<PathFinder,IdentityHashMap<Node,String>> heapNodes;
         private final IdentityHashMap<Projectile,Integer> projectiles=new IdentityHashMap<>();
         private long nextIdentity, nextSearch;
         private boolean goalCoveragePartial;
@@ -78,9 +80,10 @@ public final class KneekuraDebugDecisionHooks {
                        LongSupplier time, Sink sink) throws ReflectiveOperationException {
             if(nodeLimit<1 || nodeLimit>64)throw new IllegalArgumentException("NODE_LIMIT_OUT_OF_RANGE");
             this.subject=subject;this.snapshot=snapshot;this.budget=budget;this.nodeLimit=nodeLimit;
-            if(channels==null||channels.isEmpty()||!Set.of("goal","brain","path","control","malus","sensor","mod","projectile","neighbors","effective_malus").containsAll(channels))
+            if(channels==null||channels.isEmpty()||!Set.of("goal","brain","path","control","malus","sensor","mod","projectile","neighbors","effective_malus","frontier").containsAll(channels))
                 throw new IllegalArgumentException("INVALID_CHANNELS");
             this.channels=Set.copyOf(channels);
+            this.heapNodes=channels.contains("frontier")?new IdentityHashMap<>():null;
             this.modAdapter=channels.contains("mod")?KneekuraDebugTwilightForestAdapter.shared():null;
             this.currentContext=currentContext;this.time=time;this.sink=sink;
             if(channels.contains("goal")){register(goal,"goal");register(target,"target");}
@@ -104,6 +107,7 @@ public final class KneekuraDebugDecisionHooks {
         }
         public KneekuraDebugDecisionBurstBudget budget() { return budget; }
         public boolean goalCoveragePartial() { return goalCoveragePartial; }
+        private void clearHeapNodes(){if(heapNodes!=null)heapNodes.clear();}
         private boolean matches(LivingEntity entity) { return subject!=null && subject==entity && thread==Thread.currentThread(); }
         private String token(Object object) {
             String token=identities.get(object);
@@ -115,6 +119,7 @@ public final class KneekuraDebugDecisionHooks {
             if(thread!=Thread.currentThread())return false;
             String channel=kind.startsWith("CONTROL_PROJECTILE_")&&channels.contains("projectile")?"projectile":
                     kind.equals("PATH_NEIGHBORS_RETURN")?"neighbors":
+                    kind.equals("PATH_HEAP_OPERATION_RETURN")?"frontier":
                     kind.equals("EFFECTIVE_MALUS_RETURN")?"effective_malus":
                     kind.startsWith("MOD_")?"mod":kind.startsWith("GOAL_")?"goal":kind.startsWith("PATH_")?"path":
                     kind.startsWith("CONTROL_")?"control":kind.startsWith("BASE_MALUS_")?"malus":
@@ -122,7 +127,7 @@ public final class KneekuraDebugDecisionHooks {
             if(channel==null||!channels.contains(channel))return false;
             try {
                 var context=currentContext.get();long tick=time.getAsLong();
-                if(!budget.allows(context,tick))return false;
+                if(!budget.allows(context,tick)){clearHeapNodes();return false;}
                 long started=System.nanoTime();JsonObject data=capture.read();
                 JsonObject root=new JsonObject();
                 boolean mod=kind.equals("MOD_TRANSITION_RETURN");
@@ -144,9 +149,11 @@ public final class KneekuraDebugDecisionHooks {
                 root.addProperty("observerCostNanos",Math.max(0L,System.nanoTime()-started));
                 int bytes=root.toString().getBytes(StandardCharsets.UTF_8).length;
                 if(budget.claim(context,tick,bytes)){sink.record(method,root);return true;}
+                clearHeapNodes();
             } catch(ReflectiveOperationException|RuntimeException|LinkageError error) {
+                clearHeapNodes();
                 budget.close("CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());
-            } catch(IOException error) { budget.close("WRITER_UNAVAILABLE"); }
+            } catch(IOException error) {clearHeapNodes();budget.close("WRITER_UNAVAILABLE");}
             return false;
         }
         private boolean readyProjectile() {
@@ -388,11 +395,13 @@ public final class KneekuraDebugDecisionHooks {
         Session session=active;if(session==null||session.thread!=Thread.currentThread())return;
         // Also clear an interrupted selected search when this finder is reused by another Mob.
         session.searches.remove(finder);
-        if(!session.matches(mob)||(!session.channels.contains("path")&&!session.channels.contains("neighbors")))return;
-        try { if(!session.budget.allows(session.currentContext.get(),session.time.getAsLong()))return; }
-        catch(RuntimeException error) {session.budget.close("CONTEXT_UNAVAILABLE");return;}
+        if(session.heapNodes!=null)session.heapNodes.remove(finder);
+        if(!session.matches(mob)||(!session.channels.contains("path")&&!session.channels.contains("neighbors")&&!session.channels.contains("frontier")))return;
+        try { if(!session.budget.allows(session.currentContext.get(),session.time.getAsLong())){session.clearHeapNodes();return;} }
+        catch(RuntimeException error) {session.clearHeapNodes();session.budget.close("CONTEXT_UNAVAILABLE");return;}
         if(session.searches.size()>=8)return;
         session.searches.put(finder,"search:"+session.budget.context().selectionRevision()+":"+(++session.nextSearch));
+        if(session.heapNodes!=null)session.heapNodes.put(finder,new IdentityHashMap<>());
     }
     public static void pathState(PathFinder finder,Mob mob) {
         Session session=active;if(session==null||!session.matches(mob)||!session.searches.containsKey(finder))return;
@@ -426,6 +435,45 @@ public final class KneekuraDebugDecisionHooks {
         });
         return count;
     }
+    /** Exactly one original virtual heap call. Observation never reads the whole heap. */
+    public static Node originalHeapInsert(PathFinder finder,BinaryHeap heap,Node argument,boolean start) {
+        Node returned=heap.insert(argument);
+        heapReturn(finder,heap,returned,start?"START_INSERT":"RELAXATION_INSERT",argument==returned,0);
+        return returned;
+    }
+    public static Node originalHeapPop(PathFinder finder,BinaryHeap heap) {
+        Node returned=heap.pop();heapReturn(finder,heap,returned,"POP",false,0);return returned;
+    }
+    public static void originalHeapChangeCost(PathFinder finder,BinaryHeap heap,Node argument,float requestedCost) {
+        heap.changeCost(argument,requestedCost);heapReturn(finder,heap,argument,"CHANGE_COST",false,requestedCost);
+    }
+    private static void heapReturn(PathFinder finder,BinaryHeap heap,Node node,String operation,boolean argumentMatches,float cost) {
+        Session session=active;
+        if(session==null||session.thread!=Thread.currentThread()||!session.channels.contains("frontier")||!session.searches.containsKey(finder))return;
+        session.record("PATH_HEAP_OPERATION_RETURN","PathFinder.inner.BinaryHeap."+operation+".AFTER",()->{
+            if(KneekuraDebugDecisionSnapshot.read(PathFinder.class,"openSet",finder)!=heap)
+                throw new IllegalArgumentException("ORIGINAL_HEAP_MISMATCH");
+            String searchId=session.searches.get(finder);
+            JsonObject data=new JsonObject();data.addProperty("searchId",searchId);data.addProperty("heapClass",label(heap.getClass().getName()));
+            data.addProperty("operation",operation);
+            data.addProperty("phase",operation.equals("POP")?"AFTER_ORIGINAL_POP_BEFORE_CALLER_CLOSE":
+                operation.equals("CHANGE_COST")?"AFTER_ORIGINAL_CHANGE_COST":"AFTER_ORIGINAL_INSERT");
+            data.addProperty("nodeRole",operation.equals("CHANGE_COST")?"PASSED_NODE_AFTER_ORIGINAL_CALL":"ORIGINAL_RETURNED_NODE");
+            data.add("node",observedNode(node));data.addProperty("maxNodes",session.nodeLimit);
+            JsonObject identity=new JsonObject();var nodes=session.heapNodes.get(finder);
+            String id=node==null?null:nodes.get(node);
+            if(node!=null&&id==null&&nodes.size()<session.nodeLimit){id=searchId+":node:"+(nodes.size()+1);nodes.put(node,id);}
+            if(id==null){identity.addProperty("status","NOT_EXPOSED");identity.addProperty("detail",node==null?"NULL_NODE":"NODE_IDENTITY_LIMIT");}
+            else {identity.addProperty("status","AVAILABLE");identity.addProperty("id",id);}
+            data.add("nodeIdentity",identity);
+            if(operation.endsWith("INSERT"))data.addProperty("argumentMatchesReturned",argumentMatches);
+            if(operation.equals("CHANGE_COST"))number(data,"requestedCost",cost);
+            data.addProperty("dispatchScope","ORIGINAL_PATHFINDER_INNER_HEAP_CALL_RETURN");
+            data.addProperty("subjectRelationScope","SELECTED_OUTER_FIND_PATH_INVOCATION");
+            data.addProperty("neighborPopulationStatus","NOT_EXPOSED");data.addProperty("rejectionReasonStatus","NOT_EXPOSED");
+            data.addProperty("finalPathCostStatus","NOT_EXPOSED");return data;
+        });
+    }
     private static JsonObject observedNode(Node node)throws ReflectiveOperationException {
         JsonObject section=new JsonObject();
         if(node==null){section.addProperty("status","NOT_EXPOSED");section.addProperty("detail","NULL_NODE");return section;}
@@ -450,7 +498,9 @@ public final class KneekuraDebugDecisionHooks {
         });
     }
     public static void pathEnd(PathFinder finder) {
-        Session session=active;if(session!=null&&session.thread==Thread.currentThread())session.searches.remove(finder);
+        Session session=active;if(session!=null&&session.thread==Thread.currentThread()){
+            session.searches.remove(finder);if(session.heapNodes!=null)session.heapNodes.remove(finder);
+        }
     }
 
     static JsonObject frontier(PathFinder finder,int limit) throws ReflectiveOperationException {

@@ -20,6 +20,8 @@ The inspected normal PathFinder body does not call `Path.setDebug()`. `Path.getO
 
 An armed recorder can observe existing original invocations and copy a bounded number of node fields at a proven hook. It must distinguish actual open membership, closed nodes, cached/initialized candidates and unestablished evaluation. It must not invoke a second search, advance the evaluator, or reconstruct missing nodes and call them captured.
 
+The explicit [original heap-operation channel](PATH-HEAP-OPERATION-RETURN-2026-10-04.md) adds start/accepted insertion, cost-update and popped-before-caller-close boundaries with finite per-search reference identities. It preserves original virtual dispatch and does not claim a complete open/closed lifecycle or infer rejection/final cost from a capped stream. Native acceptance is recorded separately from source verification.
+
 ## Terrain and effective type malus
 
 `BlockPathTypes` carries a default type malus. `Mob.getPathfindingMalus(type)` can read a controlled vehicle Mob's malus map when that vehicle permits passengers to inherit malus. Otherwise it reads the selected Mob's override map, falling back to the type default. A naive selected-Mob-only override table is incomplete.

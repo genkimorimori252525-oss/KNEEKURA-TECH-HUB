@@ -3,7 +3,7 @@ import {validOriginalDecisionEvent,originalDecisionData} from './original-decisi
 import {validTerrainGroundQuery} from './terrain-ground-query.mjs';
 import {registeredModDecisionAdapters} from './adapters/registered-mod-adapters.mjs';
 
-const CHANNELS=new Set(['path_search','path_neighbors','goal_transitions','brain_memory_changes','movement_control','base_malus','effective_malus','sensor_execution','terrain_ground','mod_state','mod_returns']);
+const CHANNELS=new Set(['path_search','path_neighbors','path_heap_operations','goal_transitions','brain_memory_changes','movement_control','base_malus','effective_malus','sensor_execution','terrain_ground','mod_state','mod_returns']);
 const safe=Number.isSafeInteger;
 function normalize(subjectUuid,identity,request) {
   if(typeof subjectUuid!=='string'||! /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(subjectUuid))throw new TypeError('EXACT_SUBJECT_UUID_REQUIRED');
@@ -84,6 +84,7 @@ export function queryDecisionDrilldown({observations,subjectUuid,identity,reques
   let items;
   switch(query.channel) {
     case 'path_search':items=pathSearch(events,query.maxNodes);break;
+    case 'path_heap_operations':items=events.filter(r=>r.payload.kind==='PATH_HEAP_OPERATION_RETURN').map(directEvent);break;
     case 'path_neighbors':items=events.filter(r=>r.payload.kind==='PATH_NEIGHBORS_RETURN').map(r=>{
       const item=directEvent(r);item.queryNodesTruncated=item.data.neighbors.length>query.maxNodes;
       item.data.neighbors=item.data.neighbors.slice(0,query.maxNodes);return item;

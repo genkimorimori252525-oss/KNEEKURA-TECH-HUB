@@ -23,6 +23,7 @@ const KINDS = Object.freeze({
   PATH_SEARCH_STATE: ['EVALUATION','path_search_frontier'],
   PATH_SEARCH_RESULT: ['RESULT','path_search_result'],
   PATH_NEIGHBORS_RETURN: ['EVALUATION','path_search_neighbors'],
+  PATH_HEAP_OPERATION_RETURN: ['EVALUATION','path_heap_operations'],
 });
 const text = value => typeof value === 'string' && value.length > 0 && value.length <= 512;
 const integer = value => Number.isSafeInteger(value);
@@ -127,9 +128,32 @@ function validNeighborReturn(d) {
     d.subjectRelationScope==='SELECTED_OUTER_FIND_PATH_INVOCATION'&&d.fieldScope==='BASE_NODE_FIELDS_BEFORE_RELAXATION'&&
     d.neighborPopulationStatus==='NOT_EXPOSED'&&d.rejectionReasonStatus==='NOT_EXPOSED';
 }
+function validHeapReturn(d,record) {
+  const insert=['START_INSERT','RELAXATION_INSERT'].includes(d.operation),change=d.operation==='CHANGE_COST';
+  if(!insert&&!change&&d.operation!=='POP')return false;
+  const keys=['searchId','heapClass','operation','phase','nodeRole','node','nodeIdentity','maxNodes',
+    'dispatchScope','subjectRelationScope','neighborPopulationStatus','rejectionReasonStatus','finalPathCostStatus',
+    ...(insert?['argumentMatchesReturned']:[]),...(change?[Number.isFinite(d.requestedCost)?'requestedCost':'requestedCostStatus']:[])];
+  if(Object.keys(d).length!==keys.length||Object.keys(d).some(k=>!keys.includes(k))||!text(d.searchId)||
+    !new RegExp('^search:'+record.payload.targetRevision+':[1-9][0-9]*$').test(d.searchId)||!text(d.heapClass)||
+    !integer(d.maxNodes)||d.maxNodes<1||d.maxNodes>64||!validReturnedNode(d.node)||!object(d.nodeIdentity))return false;
+  const identity=d.nodeIdentity;
+  if(identity.status==='AVAILABLE') {
+    if(d.node.status!=='AVAILABLE'||Object.keys(identity).length!==2||!text(identity.id)||!identity.id.startsWith(d.searchId+':node:'))return false;
+    const suffix=identity.id.slice((d.searchId+':node:').length);
+    if(!/^[1-9][0-9]*$/.test(suffix)||!integer(Number(suffix))||Number(suffix)>d.maxNodes)return false;
+  }else if(identity.status!=='NOT_EXPOSED'||Object.keys(identity).length!==2||
+      identity.detail!==(d.node.status==='AVAILABLE'?'NODE_IDENTITY_LIMIT':'NULL_NODE'))return false;
+  return d.phase===(insert?'AFTER_ORIGINAL_INSERT':change?'AFTER_ORIGINAL_CHANGE_COST':'AFTER_ORIGINAL_POP_BEFORE_CALLER_CLOSE')&&
+    d.nodeRole===(change?'PASSED_NODE_AFTER_ORIGINAL_CALL':'ORIGINAL_RETURNED_NODE')&&
+    (!insert||typeof d.argumentMatchesReturned==='boolean')&&(!change||numberOrUnknown(d,'requestedCost'))&&
+    d.dispatchScope==='ORIGINAL_PATHFINDER_INNER_HEAP_CALL_RETURN'&&d.subjectRelationScope==='SELECTED_OUTER_FIND_PATH_INVOCATION'&&
+    ['neighborPopulationStatus','rejectionReasonStatus','finalPathCostStatus'].every(k=>d[k]==='NOT_EXPOSED');
+}
 function validData(kind,d,record) {
   if (kind === 'MOD_COORDINATION_RETURN') return validKnightCoordination(d,record);
   if (kind === 'PATH_NEIGHBORS_RETURN') return validNeighborReturn(d);
+  if (kind === 'PATH_HEAP_OPERATION_RETURN') return validHeapReturn(d,record);
   if (kind === 'EFFECTIVE_MALUS_RETURN') {
     const numeric=Number.isFinite(d.returnedMalus),keys=['receiverUuid','receiverClass','evaluatorClass','pathType',
       numeric?'returnedMalus':'returnedMalusStatus','dispatchScope','callSiteScope','effectivePathCostStatus','underlyingSourceStatus'];
