@@ -8,8 +8,10 @@
     "loader": "Forge",
     "distribution_provider": "Modrinth",
     "distribution_version_id": "Zqooxsd2",
-    "exact_distributed_jar_sha256": null,
-    "exact_binary_source_equivalence": "NOT_ESTABLISHED"
+    "exact_distributed_jar_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+    "exact_binary_source_equivalence": "NOT_ESTABLISHED_EXACT_ARTIFACT_NOW_HASHED",
+    "exact_distributed_jar_sha1": "151ac7b24da8beeca1a20864565743cfd77af286",
+    "exact_distributed_jar_size_bytes": 63269843
   },
   "scope": {
     "included": [
@@ -27,8 +29,10 @@
   "source_tracks": {
     "distributed_artifact_observation": {
       "identity": "YSM 2.6.5 Forge 1.20.1 public distribution",
-      "sha256": null,
-      "evidence_note": "Exact JAR bytes were not acquired in this TECH-HUB pass. Artifact symbols are accepted only where public projects/issues explicitly state they were derived or verified against the official 2.6.5 jar."
+      "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+      "evidence_note": "Exact official Modrinth Zqooxsd2 JAR was fetched in GitHub Actions run 37226280005, hashed, structurally scanned, then discarded from runner temp storage. The JAR itself is not committed or retained in the research artifact.",
+      "sha1": "151ac7b24da8beeca1a20864565743cfd77af286",
+      "size_bytes": 63269843
     },
     "official_release_line_source_candidate": {
       "repository": "YesSteveModel/YesSteveModel",
@@ -1083,7 +1087,7 @@
       "kind": "class",
       "obfuscated_owner": "com.elfmcys.yesstevemodel.o0000OoOooO0oo0o0oooo0Oo",
       "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.AnimatableEntity",
-      "confidence": "HIGH",
+      "confidence": "CONFIRMED",
       "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
       "source_artifact_divergence": true,
       "release_line_counterpart": "f184eda: com.elfmcys.yesstevemodel.geckolib3.model.AnimatableEntity",
@@ -1094,14 +1098,16 @@
           "revision": "a2223f838fc4f16ecae0315663b7e0e3ca5d23d4",
           "fact": "This type is the GeoEntityRenderer animatable parameter; reflection aliases on the runtime object use getEntity/getCurrentModel, matching the readable AnimatableEntity layout."
         }
-      ]
+      ],
+      "exact_jar_verified": true,
+      "exact_jar_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f"
     },
     {
       "id": "ysm265.class.animation-event",
       "kind": "class",
       "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00O0o0OooOOOo00OO00o00",
       "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.event.predicate.AnimationEvent",
-      "confidence": "HIGH",
+      "confidence": "CONFIRMED",
       "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
       "evidence": [
         {
@@ -1110,24 +1116,28 @@
           "revision": "a2223f838fc4f16ecae0315663b7e0e3ca5d23d4",
           "fact": "Returned from the animatable one-float animation processing call and passed to all TaCZ animation selector methods, matching AnimationEvent on both readable tracks."
         }
-      ]
+      ],
+      "exact_jar_verified": true,
+      "exact_jar_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f"
     },
     {
       "id": "ysm265.class.living-animatable",
       "kind": "class",
       "obfuscated_owner": "com.elfmcys.yesstevemodel.o0O0oOooOo0OoOo0oOo00O00",
       "semantic_owner": "com.elfmcys.yesstevemodel.client.entity.LivingAnimatable",
-      "confidence": "HIGH",
+      "confidence": "CONFIRMED",
       "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
       "source_artifact_divergence": true,
-      "release_line_counterpart": "f184eda: CustomHumanoidEntity"
+      "release_line_counterpart": "f184eda: CustomHumanoidEntity",
+      "exact_jar_verified": true,
+      "exact_jar_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f"
     },
     {
       "id": "ysm265.class.animated-geo-model",
       "kind": "class",
       "obfuscated_owner": "com.elfmcys.yesstevemodel.OOOO0O0O000O000000oOOO0o",
       "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.geo.animated.AnimatedGeoModel",
-      "confidence": "HIGH",
+      "confidence": "CONFIRMED",
       "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
       "source_artifact_divergence": true,
       "release_line_counterpart": "f184eda: GeoModelState",
@@ -1145,14 +1155,16 @@
           "path": "common/src/main/java/com/elfmcys/yesstevemodel/geckolib3/geo/animated/AnimatedGeoModel.java",
           "fact": "Exposes bones() and is passed to the same render/TaCZ/held-item seams."
         }
-      ]
+      ],
+      "exact_jar_verified": true,
+      "exact_jar_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f"
     },
     {
       "id": "ysm265.class.custom-player-entity",
       "kind": "class",
       "obfuscated_owner": "com.elfmcys.yesstevemodel.oo0OooOO0oOoOoOoo00oO000",
       "semantic_owner": "com.elfmcys.yesstevemodel.client.entity.CustomPlayerEntity",
-      "confidence": "HIGH",
+      "confidence": "CONFIRMED",
       "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
       "evidence": [
         {
@@ -1161,7 +1173,9 @@
           "revision": "a2223f838fc4f16ecae0315663b7e0e3ca5d23d4",
           "fact": "Exact parameter position in CustomPlayerItemInHandLayer.render matches CustomPlayerEntity on both readable tracks."
         }
-      ]
+      ],
+      "exact_jar_verified": true,
+      "exact_jar_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f"
     },
     {
       "id": "ysm265.class.play-state",
@@ -1196,6 +1210,1106 @@
           "repository": "3SCR1P7/TaczFixes",
           "revision": "a2223f838fc4f16ecae0315663b7e0e3ca5d23d4",
           "fact": "The exact type is the sole argument to the CommonGunIndex-backed gun-type binding method, matching IContext<LivingEntity> in both readable source lines."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.ibone",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact JAR class declares the complete 33-method public bone contract and is implemented by OO0oo000o00O0O0oo00oO000."
+        },
+        {
+          "type": "READABLE_LAYOUT_EXACT_SURFACE",
+          "repository": "OpenYSM/OpenYSM",
+          "revision": "a515d44686af77155a311b2a592327ca5d45a658",
+          "path": "common/src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/processor/IBone.java"
+        },
+        {
+          "type": "RELEASE_LINE_COUNTERPART",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/processor/IBone.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.animated-geo-bone",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO0oo000o00O0O0oo00oO000",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.geo.animated.AnimatedGeoBone",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "source_artifact_divergence": true,
+      "release_line_counterpart": "f184eda: com.elfmcys.yesstevemodel.geckolib3.model.GeoBoneState",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact JAR class implements the recovered IBone owner and declares all 33 IBone methods; constructor shape is (GeoBone-like,float[],int,float[],int), matching the readable 2.6.5-era AnimatedGeoBone layout."
+        },
+        {
+          "type": "COMPARATIVE_READABLE_LAYOUT",
+          "repository": "OpenYSM/OpenYSM",
+          "revision": "a515d44686af77155a311b2a592327ca5d45a658",
+          "path": "common/src/main/java/com/elfmcys/yesstevemodel/geckolib3/geo/animated/AnimatedGeoBone.java"
+        },
+        {
+          "type": "RELEASE_LINE_DIVERGENCE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/model/GeoBoneState.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-get-rotation-x",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()F",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "getRotationX",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-set-rotation-x",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(F)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "setRotationX",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-get-rotation-y",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "()F",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "getRotationY",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-set-rotation-y",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(F)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "setRotationY",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-get-rotation-z",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "()F",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "getRotationZ",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-set-rotation-z",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "(F)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "setRotationZ",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-get-position-x",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "oOOOo0OOO0ooooo0O00OO0o0",
+      "descriptor": "()F",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "getPositionX",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-set-position-x",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "oOOOo0OOO0ooooo0O00OO0o0",
+      "descriptor": "(F)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "setPositionX",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-get-position-y",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+      "descriptor": "()F",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "getPositionY",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-set-position-y",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+      "descriptor": "(F)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "setPositionY",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-get-position-z",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "Ooooo0oooO0oooOOOoO0000O",
+      "descriptor": "()F",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "getPositionZ",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-set-position-z",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "Ooooo0oooO0oooOOOoO0000O",
+      "descriptor": "(F)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "setPositionZ",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-get-scale-x",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "oo0OoO00oOoo000O0000o0oo",
+      "descriptor": "()F",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "getScaleX",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-set-scale-x",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "oo0OoO00oOoo000O0000o0oo",
+      "descriptor": "(F)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "setScaleX",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-get-scale-y",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "oooooooOOoOOoO00OooOo00O",
+      "descriptor": "()F",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "getScaleY",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-set-scale-y",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "oooooooOOoOOoO00OooOo00O",
+      "descriptor": "(F)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "setScaleY",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-get-scale-z",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "Oo00o0OooOOo0ooOoo0oO0o0",
+      "descriptor": "()F",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "getScaleZ",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-set-scale-z",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "Oo00o0OooOOo0ooOoo0oO0o0",
+      "descriptor": "(F)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "setScaleZ",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-get-pivot-x",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "o0OOO0o0o0OOo000oO00o00O",
+      "descriptor": "()F",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "getPivotX",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-get-pivot-y",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "O0OooOo0oOOoOoOoOooO000o",
+      "descriptor": "()F",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "getPivotY",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-get-pivot-z",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "ooOO000o0O0OOOoO0Oo0o0Oo",
+      "descriptor": "()F",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "getPivotZ",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-is-hidden",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "OOOo0OOOoOO0O00Oo00ooOOO",
+      "descriptor": "()Z",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "isHidden",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-set-hidden-one",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Z)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "setHidden",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-child-bones-are-hidden-too",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "oOo0o0000OOOO0OooooO00oo",
+      "descriptor": "()Z",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "childBonesAreHiddenToo",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-set-hidden-two",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(ZZ)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "setHidden",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-is-tracking-xform",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "O0ooooOO0oOo000O0Oo00OOO",
+      "descriptor": "()Z",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "isTrackingXform",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-set-track-xform",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Z)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "setTrackXform",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-get-initial-rotation",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "OO0ooO00OoO00o0OO0OOooO0",
+      "descriptor": "()Lorg/joml/Vector3f;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "getInitialRotation",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-get-pivot-abs-x",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "Ooo0O0000OO0OOO0o0Oo0oOO",
+      "descriptor": "()F",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "getPivotAbsX",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-get-pivot-abs-y",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "o0o0Oooo00OoOoOOOooo0000",
+      "descriptor": "()F",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "getPivotAbsY",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-get-pivot-abs-z",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "ooooO0o00oO0Oo0OOo0O0O0o",
+      "descriptor": "()F",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "getPivotAbsZ",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-get-name",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "oOOo0Ooo0oOoo0O0OOOOo0oo",
+      "descriptor": "()Ljava/lang/String;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "getName",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ibone-get-bone-id",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "obfuscated_member": "O0o00oO0O0ooOOOo0oo0Oo00",
+      "descriptor": "()I",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.processor.IBone",
+      "semantic_member": "getBoneId",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005,
+          "fact": "Exact method+descriptor exists on the recovered IBone owner and on its concrete implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.animatable-get-entity",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.o0000OoOooO0oo0o0oooo0Oo",
+      "obfuscated_member": "OO00OOOOo0Ooo0oo0o0Oo0OO",
+      "descriptor": "()Lnet/minecraft/world/entity/Entity;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.AnimatableEntity",
+      "semantic_member": "getEntity",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.animatable-get-current-model",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.o0000OoOooO0oo0o0oooo0Oo",
+      "obfuscated_member": "OOOoOO000000o0o0oOooo0o0",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/OOOO0O0O000O000000oOOO0o;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.AnimatableEntity",
+      "semantic_member": "getCurrentModel",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.animatable-process-animation",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.o0000OoOooO0oo0o0oooo0Oo",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(F)Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.AnimatableEntity",
+      "semantic_member": "processAnimation",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.animatable-get-bone",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.o0000OoOooO0oo0o0oooo0Oo",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(I)Lcom/elfmcys/yesstevemodel/Oo0o00oOOo0OO000000O0oO0;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.AnimatableEntity",
+      "semantic_member": "getBone",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.animated-model-matrix-data",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OOOO0O0O000O000000oOOO0o",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()[F",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.geo.animated.AnimatedGeoModel",
+      "semantic_member": "getMatrixData",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.animated-model-abs-pivot-data",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OOOO0O0O000O000000oOOO0o",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "()[F",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.geo.animated.AnimatedGeoModel",
+      "semantic_member": "getAbsPivotData",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.animated-model-bones",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OOOO0O0O000O000000oOOO0o",
+      "obfuscated_member": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "()Lit/unimi/dsi/fastutil/ints/Int2ReferenceMap;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.geo.animated.AnimatedGeoModel",
+      "semantic_member": "bones",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.animated-model-geo-model",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OOOO0O0O000O000000oOOO0o",
+      "obfuscated_member": "oOOOo0OOO0ooooo0O00OO0o0",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/OOoOoooOOooO0o0000o0O0o0;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.geo.animated.AnimatedGeoModel",
+      "semantic_member": "getGeoModel",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.animation-event-get-current-tick",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00O0o0OooOOOo00OO00o00",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()F",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.event.predicate.AnimationEvent",
+      "semantic_member": "getCurrentTick",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.animation-event-get-animatable",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00O0o0OooOOOo00OO00o00",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.event.predicate.AnimationEvent",
+      "semantic_member": "getAnimatable",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.animation-event-get-limb-swing",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00O0o0OooOOOo00OO00o00",
+      "obfuscated_member": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "()F",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.event.predicate.AnimationEvent",
+      "semantic_member": "getLimbSwing",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.animation-event-get-limb-swing-amount",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00O0o0OooOOOo00OO00o00",
+      "obfuscated_member": "oOOOo0OOO0ooooo0O00OO0o0",
+      "descriptor": "()F",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.event.predicate.AnimationEvent",
+      "semantic_member": "getLimbSwingAmount",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.animation-event-get-tick-count",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00O0o0OooOOOo00OO00o00",
+      "obfuscated_member": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+      "descriptor": "()I",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.event.predicate.AnimationEvent",
+      "semantic_member": "getTickCount",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.animation-event-get-partial-tick",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00O0o0OooOOOo00OO00o00",
+      "obfuscated_member": "Ooooo0oooO0oooOOOoO0000O",
+      "descriptor": "()F",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.event.predicate.AnimationEvent",
+      "semantic_member": "getPartialTick",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.animation-event-get-frame-time",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00O0o0OooOOOo00OO00o00",
+      "obfuscated_member": "oo0OoO00oOoo000O0000o0oo",
+      "descriptor": "()F",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.event.predicate.AnimationEvent",
+      "semantic_member": "getFrameTime",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.animation-event-is-moving",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00O0o0OooOOOo00OO00o00",
+      "obfuscated_member": "oooooooOOoOOoO00OooOo00O",
+      "descriptor": "()Z",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.event.predicate.AnimationEvent",
+      "semantic_member": "isMoving",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.animation-event-is-first-person",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00O0o0OooOOOo00OO00o00",
+      "obfuscated_member": "Oo00o0OooOOo0ooOoo0oO0o0",
+      "descriptor": "()Z",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.event.predicate.AnimationEvent",
+      "semantic_member": "isFirstPerson",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.animation-event-get-controller",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00O0o0OooOOOo00OO00o00",
+      "obfuscated_member": "o0OOO0o0o0OOo000oO00o00O",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.event.predicate.AnimationEvent",
+      "semantic_member": "getController",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.animation-event-set-controller",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00O0o0OooOOOo00OO00o00",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO;)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.event.predicate.AnimationEvent",
+      "semantic_member": "setController",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.animation-event-get-model-data",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00O0o0OooOOOo00OO00o00",
+      "obfuscated_member": "O0OooOo0oOOoOoOoOooO000o",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/O00OoOOOOoOOOO0OOOoO0ooO;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.event.predicate.AnimationEvent",
+      "semantic_member": "getModelData",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226280005
         }
       ]
     }
@@ -1237,8 +2351,8 @@
     {
       "id": "ysm265.alias.animated-bone-public-surface",
       "observed_on": "runtime animated-bone implementation returned from the current model's bones map",
-      "owner_status": "UNRESOLVED",
-      "confidence": "HIGH_SEMANTIC_OWNER_UNKNOWN",
+      "owner_status": "RESOLVED_EXACT_JAR",
+      "confidence": "CONFIRMED_EXACT_JAR",
       "evidence": {
         "repository": "3SCR1P7/TaczFixes",
         "revision": "a2223f838fc4f16ecae0315663b7e0e3ca5d23d4",
@@ -1361,7 +2475,9 @@
           "obfuscated": "OO0ooO00OoO00o0OO0OOooO0",
           "descriptor": "()Lorg/joml/Vector3f;"
         }
-      ]
+      ],
+      "interface_owner": "com.elfmcys.yesstevemodel.Oo0o00oOOo0OO000000O0oO0",
+      "implementation_owner": "com.elfmcys.yesstevemodel.OO0oo000o00O0O0oo00oO000"
     },
     {
       "id": "ysm265.alias.animatable-model-access",
@@ -1401,5 +2517,22 @@
         }
       ]
     }
-  ]
+  ],
+  "exact_artifact_scan": {
+    "run_id": 37226280005,
+    "scanner_revision": "3c5b7e7c27463d631cd792a4a886b1960b8b5c53",
+    "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+    "class_files": 955,
+    "zip_entries": 1853,
+    "classfile_major": 61,
+    "previous_map_contract": {
+      "mappings": 55,
+      "class_present": 31,
+      "exact_methods": 23,
+      "exact_fields": 1,
+      "failures": 0
+    },
+    "parse_errors": 0,
+    "jar_retained": false
+  }
 }
