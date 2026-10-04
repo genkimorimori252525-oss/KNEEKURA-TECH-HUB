@@ -3,7 +3,7 @@
 ## Scope
 
 - Kind: Minecraft-native RTS / civilization / worker-and-army command system
-- Research status: **TARGETED_RTS_ARCHITECTURE_MAPPED**
+- Research status: **TARGETED_RTS_ARCHITECTURE_AND_CLIENT_UX_MAPPED**
 - Whole-target status: **IN_PROGRESS / NOT COMPLETE**
 - TECH-HUB adaptation anchor: Minecraft **1.20.1 + Forge**
 - Native upstream track: Minecraft **26.1.2 + NeoForge**
@@ -79,6 +79,9 @@ The full evidence map and 1.20.1 portability notes are in
 
 The bounded repair-history review is in
 [FAILURE-REPAIR-HISTORY.md](FAILURE-REPAIR-HISTORY.md).
+
+The client-side continuation covering camera/input/selection/build preview/minimap/occlusion/HUD is in
+[RTS-CLIENT-UX-RESEARCH-2026-10-04.md](RTS-CLIENT-UX-RESEARCH-2026-10-04.md).
 
 ## Important limits
 
