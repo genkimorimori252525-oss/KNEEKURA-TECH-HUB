@@ -1,0 +1,661 @@
+{
+  "format": "kneekura.ysm-obfuscation-map.v1",
+  "recorded_at": "2026-10-05",
+  "target": {
+    "mod": "Yes Steve Model",
+    "version": "2.6.5-forge+mc1.20.1",
+    "minecraft": "1.20.1",
+    "loader": "Forge",
+    "distribution_provider": "Modrinth",
+    "distribution_version_id": "Zqooxsd2",
+    "exact_distributed_jar_sha256": null,
+    "exact_binary_source_equivalence": "NOT_ESTABLISHED"
+  },
+  "scope": {
+    "included": [
+      "public Java-level obfuscated class/member symbols exposed by public stack traces and public compatibility projects",
+      "JVM descriptors, Forge event types, return/parameter shapes and public call-chain semantics",
+      "cross-reference against official public 2.6.5 release-line source candidate"
+    ],
+    "excluded": [
+      "VMProtect/native protection bypass",
+      "native binary decryption/devirtualization",
+      "encrypted model circumvention",
+      "publication of private YSM jars or private analyzer output"
+    ]
+  },
+  "source_tracks": {
+    "distributed_artifact_observation": {
+      "identity": "YSM 2.6.5 Forge 1.20.1 public distribution",
+      "sha256": null,
+      "evidence_note": "Exact JAR bytes were not acquired in this TECH-HUB pass. Artifact symbols are accepted only where public projects/issues explicitly state they were derived or verified against the official 2.6.5 jar."
+    },
+    "official_release_line_source_candidate": {
+      "repository": "YesSteveModel/YesSteveModel",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+      "tree": "da392147cdba57b734aa18e25674745291d7f24a",
+      "source_declared_version": "2.6.5-forge+mc1.20.1",
+      "exact_match": false
+    },
+    "mapping_technique": {
+      "repository": "sakuraimikoto33/YSM-Mapping-API",
+      "revision": "6a01cdfec45623e39bc7fd890e91066e3507666c",
+      "branch": "mc/1.20.1",
+      "policy": "SAFE_ONLY style: unique structural candidate required; ambiguity retained."
+    }
+  },
+  "confidence_definitions": {
+    "CONFIRMED": "Actual-2.6.5 artifact-facing public evidence supplies an exact owner/member descriptor or exact structural target, and the semantic identity has a unique matching official/readable implementation role.",
+    "HIGH": "Actual-2.6.5 artifact-facing evidence and event/log/call-chain structure identify one semantic role, but exact source identity or one member name cannot be proven from the currently acquired public evidence.",
+    "MEDIUM": "Structure is compatible with a semantic target but at least one meaningful alternative remains.",
+    "LOW": "Only cross-version/lineage evidence supports the candidate.",
+    "UNKNOWN": "No defensible semantic identity has been assigned."
+  },
+  "key_rule": "A member mapping key is owner + member + JVM descriptor. Obfuscated member text alone is never an identity.",
+  "contradiction_rules": [
+    "If a future exact 2.6.5 JAR scan yields multiple structural candidates, downgrade to AMBIGUOUS.",
+    "A JVM descriptor mismatch invalidates a member mapping.",
+    "A mismatch between distributed-artifact evidence and the public release-line source candidate is SOURCE_ARTIFACT_DIVERGENCE; do not overwrite either track.",
+    "Evidence from another Minecraft/YSM version is comparative only unless independently reproduced on the 2.6.5 Forge 1.20.1 anchor."
+  ],
+  "mappings": [
+    {
+      "id": "ysm265.class.native-lib-util",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oOoOO0o0ooO0oO000o0oOOoO",
+      "semantic_owner": "com.elfmcys.yesstevemodel.util.NativeLibUtil",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "release_line_counterpart": "com.elfmcys.yesstevemodel.util.NativeLibUtil",
+      "evidence": [
+        {
+          "type": "OFFICIAL_ISSUE_RUNTIME",
+          "locator": "YesSteveModel/YSM-Wiki-Issues#444",
+          "fact": "Files.createDirectories failure stack enters this owner and the log says 'Failed to create preferred directory, using fallback'."
+        },
+        {
+          "type": "PUBLIC_COMPAT/UTILITY",
+          "repository": "sabu8190/TheFastLaunch",
+          "revision": "14a0e075c0ce3308299fd3a303ab7de83b4d1cf8",
+          "path": "src/main/java/com/fastlaunch/core/ClassPreloadEngine.java",
+          "fact": "Reflectively invokes this owner for YSM native-core preload."
+        },
+        {
+          "type": "OFFICIAL_SOURCE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/util/NativeLibUtil.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.native-lib-load-core",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oOoOO0o0ooO0oO000o0oOOoO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.util.NativeLibUtil",
+      "semantic_member": "loadCoreLibrary",
+      "semantic_descriptor": "()V",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "evidence": [
+        {
+          "type": "PUBLIC_REFLECTION",
+          "repository": "sabu8190/TheFastLaunch",
+          "revision": "14a0e075c0ce3308299fd3a303ab7de83b4d1cf8",
+          "fact": "getDeclaredMethod on the no-arg obfuscated member, then invokes it as the YSM native preload."
+        },
+        {
+          "type": "OFFICIAL_SOURCE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/util/NativeLibUtil.java",
+          "fact": "The public counterpart has a unique public static no-arg loadCoreLibrary entry."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.native-lib-prepare-extract-path",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oOoOO0o0ooO0oO000o0oOOoO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/nio/file/Path;)Ljava/nio/file/Path;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.util.NativeLibUtil",
+      "semantic_member": "prepareExtractPath",
+      "semantic_descriptor": "(Ljava/nio/file/Path;)Ljava/nio/file/Path;",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "evidence": [
+        {
+          "type": "OFFICIAL_ISSUE_RUNTIME",
+          "locator": "YesSteveModel/YSM-Wiki-Issues#444",
+          "fact": "Stack reaches Files.createDirectories from the same obfuscated owner/member while emitting the exact preferred-directory fallback warning."
+        },
+        {
+          "type": "OFFICIAL_SOURCE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/util/NativeLibUtil.java",
+          "fact": "prepareExtractPath(Path) contains Files.createDirectories and that exact warning/fallback."
+        },
+        {
+          "type": "OFFICIAL_HISTORY",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "39d6fbbc808ec4ce41b2fc31cea19aa49c6cdb34",
+          "fact": "Commit message explicitly fixes Linux startup when the user directory is not writable."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.capability-event",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OoOoOOOOO0ooooo0O0ooo000",
+      "semantic_owner": "com.elfmcys.yesstevemodel.event.CapabilityEvent",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "evidence": [
+        {
+          "type": "PUBLIC_CRASH_RUNTIME",
+          "locator": "OC2R issue #147 linked 2.6.5 crash log",
+          "fact": "Forge dynamic subscriber names this owner/member for AttachCapabilitiesEvent and fails while resolving entity capability."
+        },
+        {
+          "type": "OFFICIAL_SOURCE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/event/CapabilityEvent.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.capability-event-attach",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OoOoOOOOO0ooooo0O0ooo000",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.event.CapabilityEvent",
+      "semantic_member": "onAttachCapabilityEvent",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "caveat": "Generic type <Entity> is not represented in the JVM descriptor.",
+      "evidence": [
+        {
+          "type": "PUBLIC_CRASH_RUNTIME",
+          "locator": "OC2R issue #147 linked 2.6.5 crash log",
+          "fact": "Generated subscriber is explicitly tied to AttachCapabilitiesEvent."
+        },
+        {
+          "type": "OFFICIAL_SOURCE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/event/CapabilityEvent.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.player-animatable-capability-provider",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O0OooOo0oOOoOoOoOooO000o",
+      "semantic_owner": "com.elfmcys.yesstevemodel.capability.PlayerAnimatableCapabilityProvider",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "evidence": [
+        {
+          "type": "PUBLIC_ACTUAL_JAR_FINGERPRINT",
+          "repository": "HSZK2017/ysm_epicfight_compat",
+          "revision": "18db9328132bea921ea49f2125e4c0c319fbb5c8",
+          "path": "src/main/java/com/ysmef/compat/ysm/YsmFork.java",
+          "fact": "Defines this exact class as LEGACY_OBFUSCATED_PLAYER_CAPABILITY_PROVIDER."
+        },
+        {
+          "type": "PUBLIC_TEST",
+          "repository": "HSZK2017/ysm_epicfight_compat",
+          "revision": "18db9328132bea921ea49f2125e4c0c319fbb5c8",
+          "path": "src/test/java/com/ysmef/compat/ysm/YsmForkFingerprintTest.java",
+          "fact": "States the fingerprints are verified against actual jars and locks the legacy provider."
+        },
+        {
+          "type": "OFFICIAL_SOURCE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/capability/PlayerAnimatableCapabilityProvider.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.field.player-capability",
+      "kind": "field",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O0OooOo0oOOoOoOoOooO000o",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "Lnet/minecraftforge/common/capabilities/Capability;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.capability.PlayerAnimatableCapabilityProvider",
+      "semantic_member": "CAP",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "evidence": [
+        {
+          "type": "PUBLIC_ACTUAL_JAR_FINGERPRINT",
+          "repository": "HSZK2017/ysm_epicfight_compat",
+          "revision": "18db9328132bea921ea49f2125e4c0c319fbb5c8",
+          "fact": "LEGACY_PLAYER_CAPABILITY_FIELD is pinned to this member and resolved as a Capability field."
+        },
+        {
+          "type": "OFFICIAL_SOURCE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/capability/PlayerAnimatableCapabilityProvider.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.native-renderer",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.ooOOo000OOO0ooO0oo0ooooO",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.geo.NativeRenderer",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "evidence": [
+        {
+          "type": "PUBLIC_ACTUAL_2_6_5_MIXIN",
+          "repository": "Esnowflake/YSMRagdoll",
+          "revision": "aa944a1484f53af328b76545857a98cc1ac55542",
+          "path": "src/main/java/com/ysmragdoll/mixin/Ysm265MeshCaptureMixin.java",
+          "fact": "Targets this exact official-2.6.5 owner immediately before final mesh submission."
+        },
+        {
+          "type": "OFFICIAL_SOURCE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/geo/NativeRenderer.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.geo-model",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OOoOoooOOooO0o0000o0O0o0",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.geo.render.built.GeoModel",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "evidence": [
+        {
+          "type": "PUBLIC_ACTUAL_2_6_5_DESCRIPTOR",
+          "repository": "Esnowflake/YSMRagdoll",
+          "revision": "aa944a1484f53af328b76545857a98cc1ac55542",
+          "path": "src/main/java/com/ysmragdoll/mixin/Ysm265MeshCaptureMixin.java",
+          "fact": "Appears as the model argument type inside the exact native-renderer descriptor."
+        },
+        {
+          "type": "OFFICIAL_SOURCE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/geo/render/built/GeoModel.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.native-renderer-render-model",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.ooOOo000OOO0ooO0oo0ooooO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/mojang/blaze3d/vertex/VertexConsumer;Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lcom/elfmcys/yesstevemodel/OOoOoooOOooO0o0000o0O0o0;[F[FIIIIFFFF)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.geo.NativeRenderer",
+      "semantic_member": "renderModel",
+      "semantic_descriptor": "(Lcom/mojang/blaze3d/vertex/VertexConsumer;Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lcom/elfmcys/yesstevemodel/geckolib3/geo/render/built/GeoModel;[F[FIIIIFFFF)V",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "evidence": [
+        {
+          "type": "PUBLIC_ACTUAL_2_6_5_MIXIN",
+          "repository": "Esnowflake/YSMRagdoll",
+          "revision": "aa944a1484f53af328b76545857a98cc1ac55542",
+          "path": "src/main/java/com/ysmragdoll/mixin/Ysm265MeshCaptureMixin.java",
+          "fact": "Hardcodes the full method descriptor and labels it the official YSM 2.6.5 final mesh submission."
+        },
+        {
+          "type": "OFFICIAL_SOURCE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/geo/NativeRenderer.java",
+          "fact": "renderModel has the same complete parameter/return shape."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.replace-player-render-event",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O0oOOo00o0oooOo0OoO0OOo0",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.event.ReplacePlayerRenderEvent",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "evidence": [
+        {
+          "type": "PUBLIC_ACTUAL_JAR_MIXIN",
+          "repository": "HSZK2017/ysm_epicfight_compat",
+          "revision": "18db9328132bea921ea49f2125e4c0c319fbb5c8",
+          "path": "src/main/java/com/ysmef/compat/mixin/YsmPlayerRenderMixin.java",
+          "fact": "Comment and exact RenderPlayerEvent.Pre descriptor identify the target."
+        },
+        {
+          "type": "OFFICIAL_SOURCE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/event/ReplacePlayerRenderEvent.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.replace-player-render-event",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O0oOOo00o0oooOo0OoO0OOo0",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraftforge/client/event/RenderPlayerEvent$Pre;)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.event.ReplacePlayerRenderEvent",
+      "semantic_member": "onRender",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1"
+    },
+    {
+      "id": "ysm265.class.replace-player-hand-render-event",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.ooOOOoOO000oo0o00o00o000",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.event.ReplacePlayerHandRenderEvent",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "evidence": [
+        {
+          "type": "PUBLIC_ACTUAL_JAR_MIXIN",
+          "repository": "HSZK2017/ysm_epicfight_compat",
+          "revision": "18db9328132bea921ea49f2125e4c0c319fbb5c8",
+          "path": "src/main/java/com/ysmef/compat/mixin/YsmArmRenderMixin.java"
+        },
+        {
+          "type": "OFFICIAL_SOURCE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/event/ReplacePlayerHandRenderEvent.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.replace-player-hand-render-event",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.ooOOOoOO000oo0o00o00o000",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraftforge/client/event/RenderArmEvent;)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.event.ReplacePlayerHandRenderEvent",
+      "semantic_member": "onRenderHand",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1"
+    },
+    {
+      "id": "ysm265.class.render-first-player-background",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O000O0O00ooo000O0oOOoo00",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.event.RenderFirstPlayerBackground",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "evidence": [
+        {
+          "type": "PUBLIC_ACTUAL_JAR_MIXIN",
+          "repository": "HSZK2017/ysm_epicfight_compat",
+          "revision": "18db9328132bea921ea49f2125e4c0c319fbb5c8",
+          "path": "src/main/java/com/ysmef/compat/mixin/YsmBackgroundHandMixin.java"
+        },
+        {
+          "type": "OFFICIAL_SOURCE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/event/RenderFirstPlayerBackground.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.render-first-player-background",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O000O0O00ooo000O0oOOoo00",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraftforge/client/event/RenderHandEvent;)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.event.RenderFirstPlayerBackground",
+      "semantic_member": "onRenderHand",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1"
+    },
+    {
+      "id": "ysm265.class.entity-renderer-replace",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OOoO0O0OooOO0o00oOoOOoO0",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.renderer.replace.EntityRendererReplace",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "caveat": "A public compat comment calls this CustomVehicleRenderer#renderVehicle, but the exact boolean descriptor matches EntityRendererReplace.renderInMixin in the official release-line source candidate; the descriptor wins.",
+      "evidence": [
+        {
+          "type": "PUBLIC_ACTUAL_JAR_MIXIN",
+          "repository": "HSZK2017/ysm_epicfight_compat",
+          "revision": "18db9328132bea921ea49f2125e4c0c319fbb5c8",
+          "path": "src/main/java/com/ysmef/compat/mixin/YsmVehicleRenderMixin.java"
+        },
+        {
+          "type": "OFFICIAL_SOURCE_EXACT_DESCRIPTOR",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/renderer/replace/EntityRendererReplace.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.entity-renderer-replace",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OOoO0O0OooOO0o00oOoOOoO0",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/world/entity/Entity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)Z",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.renderer.replace.EntityRendererReplace",
+      "semantic_member": "renderInMixin",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1"
+    },
+    {
+      "id": "ysm265.class.projectile-renderer-replace",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O0oOooooo00Ooooo0OoOOOO0",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.renderer.replace.ProjectileRendererReplace",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1"
+    },
+    {
+      "id": "ysm265.method.projectile-renderer-replace",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O0oOooooo00Ooooo0OoOOOO0",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/world/entity/projectile/Projectile;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)Z",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.renderer.replace.ProjectileRendererReplace",
+      "semantic_member": "renderInMixin",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "evidence": [
+        {
+          "type": "PUBLIC_ACTUAL_JAR_MIXIN",
+          "repository": "HSZK2017/ysm_epicfight_compat",
+          "revision": "18db9328132bea921ea49f2125e4c0c319fbb5c8",
+          "path": "src/main/java/com/ysmef/compat/mixin/YsmProjectileRenderMixin.java"
+        },
+        {
+          "type": "OFFICIAL_SOURCE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/renderer/replace/ProjectileRendererReplace.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.fishing-hook-renderer-replace",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oO0Ooooooo0O0OOOO00OoOo0",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.renderer.replace.FishingHookRendererReplace",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1"
+    },
+    {
+      "id": "ysm265.method.fishing-hook-renderer-replace",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oO0Ooooooo0O0OOOO00OoOo0",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/world/entity/projectile/FishingHook;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)Z",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.renderer.replace.FishingHookRendererReplace",
+      "semantic_member": "renderInMixin",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "evidence": [
+        {
+          "type": "PUBLIC_ACTUAL_JAR_MIXIN",
+          "repository": "HSZK2017/ysm_epicfight_compat",
+          "revision": "18db9328132bea921ea49f2125e4c0c319fbb5c8",
+          "path": "src/main/java/com/ysmef/compat/mixin/YsmFishingHookRenderMixin.java"
+        },
+        {
+          "type": "OFFICIAL_SOURCE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/renderer/replace/FishingHookRendererReplace.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.model-preview-renderer",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OoO00Oo00Ooo0OoOoo00o000",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.renderer.ModelPreviewRenderer",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "source_artifact_divergence": true,
+      "release_line_counterpart": "Paperdoll rendering is in com.elfmcys.yesstevemodel.util.RenderUtil in f184eda; no ModelPreviewRenderer path exists in that candidate's path history.",
+      "evidence": [
+        {
+          "type": "PUBLIC_ACTUAL_JAR_MIXIN",
+          "repository": "HSZK2017/ysm_epicfight_compat",
+          "revision": "18db9328132bea921ea49f2125e4c0c319fbb5c8",
+          "paths": [
+            "src/main/java/com/ysmef/compat/mixin/YsmVehiclePreviewMixin.java",
+            "src/main/java/com/ysmef/compat/mixin/YsmObfuscatedExtraPlayerOverlayMixin.java"
+          ],
+          "fact": "Class/method names are documented as derived from the official YSM 2.6.5 release test instance."
+        },
+        {
+          "type": "COMPARATIVE_READABLE_LAYOUT",
+          "repository": "OpenYSM/OpenYSM",
+          "revision": "a515d44686af77155a311b2a592327ca5d45a658",
+          "path": "common/src/main/java/com/elfmcys/yesstevemodel/client/renderer/ModelPreviewRenderer.java",
+          "fact": "Exposes the readable methods with matching descriptors."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_DIVERGENCE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/util/RenderUtil.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.model-preview-render-vehicle",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OoO00Oo00Ooo0OoOoo00o000",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/world/entity/Entity;Lcom/mojang/blaze3d/vertex/PoseStack;F)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.renderer.ModelPreviewRenderer",
+      "semantic_member": "renderVehicleModel",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "source_artifact_divergence": true
+    },
+    {
+      "id": "ysm265.method.model-preview-render-player-overlay",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OoO00Oo00Ooo0OoOoo00o000",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/player/LocalPlayer;DDFFIF)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.renderer.ModelPreviewRenderer",
+      "semantic_member": "renderPlayerOverlay",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "source_artifact_divergence": true,
+      "evidence": [
+        {
+          "type": "PUBLIC_ACTUAL_JAR_CALL_CHAIN",
+          "repository": "HSZK2017/ysm_epicfight_compat",
+          "revision": "18db9328132bea921ea49f2125e4c0c319fbb5c8",
+          "path": "src/main/java/com/ysmef/compat/mixin/YsmObfuscatedExtraPlayerOverlayMixin.java",
+          "fact": "Derives target from the sole IGuiOverlay implementation and exact descriptor, warning that the obfuscated member name is heavily reused."
+        },
+        {
+          "type": "COMPARATIVE_READABLE_LAYOUT",
+          "repository": "OpenYSM/OpenYSM",
+          "revision": "a515d44686af77155a311b2a592327ca5d45a658",
+          "fact": "Readable ModelPreviewRenderer has the same renderPlayerOverlay signature."
+        },
+        {
+          "type": "OFFICIAL_RELEASE_LINE_COUNTERPART",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/util/RenderUtil.java",
+          "fact": "renderExtraPlayerEntity performs the equivalent paperdoll operation but lives in a different class layout."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.extra-player-screen",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O0O00oOoOoooOOooo0OOOoO0",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.gui.overlay.ExtraPlayerScreen",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "evidence": [
+        {
+          "type": "PUBLIC_ACTUAL_JAR_CALL_CHAIN",
+          "repository": "HSZK2017/ysm_epicfight_compat",
+          "revision": "18db9328132bea921ea49f2125e4c0c319fbb5c8",
+          "fact": "The actual-jar crash/call-chain identifies this owner as the sole IGuiOverlay entry before the paperdoll render helper."
+        },
+        {
+          "type": "OFFICIAL_SOURCE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/gui/overlay/ExtraPlayerScreen.java",
+          "fact": "Implements IGuiOverlay, reads paperdoll config and calls the paperdoll renderer."
+        }
+      ]
+    }
+  ],
+  "unresolved_hints": [
+    {
+      "obfuscated_member": "OOOoOOo0oO00O0OoOO0oO00O",
+      "descriptor": "()Ljava/lang/String;",
+      "observed_on": "runtime player animatable capability object",
+      "semantic_hint": "selected/current model ID getter",
+      "confidence": "HIGH",
+      "release_line_counterpart": "CustomEntity.getModelId()",
+      "caveat": "The exact obfuscated owner class is not established in the public evidence acquired in this pass."
+    },
+    {
+      "obfuscated_member": "O0OooOo0oOOoOoOoOooO000o",
+      "descriptor": "()Z",
+      "observed_on": "runtime player animatable capability object",
+      "semantic_hint": "isModelSwitching",
+      "confidence": "HIGH",
+      "caveat": "The exact obfuscated owner is not established, and f184eda has no obvious readable method counterpart; retain as SOURCE_ARTIFACT_DIVERGENCE."
+    },
+    {
+      "semantic_hint": "RegisterEntityRenderersEvent / player renderer registry",
+      "observed_obfuscated_owner": "com.elfmcys.yesstevemodel.OOoO00ooO00OOO00O0o0000O",
+      "confidence": "HIGH",
+      "caveat": "The specific obfuscated static getter member name is not established in this pass."
+    }
+  ],
+  "negative_findings": [
+    "The public official f184eda tree has no C/C++/Rust native source; native protocol/renderer internals behind JNI remain unestablished.",
+    "GitHub path history through f184eda has no client/renderer/ModelPreviewRenderer.java, while actual-2.6.5-derived compatibility evidence exposes that semantic layout. This is explicit source/artifact divergence.",
+    "Member text Oo0Oo0o00O00Oo0OOoOOoooo is reused across unrelated classes and descriptors; a name-only mapping would be demonstrably wrong.",
+    "No 1.21.1 NeoForge or 2.5.x symbol was promoted into the 2.6.5 Forge 1.20.1 anchor solely by name similarity."
+  ]
+}
