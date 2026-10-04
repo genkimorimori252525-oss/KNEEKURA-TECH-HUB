@@ -521,5 +521,208 @@
     "remainingQueue": 0
   },
   "preservation": "Official85/control85/commonbaseline87/bothpairedpredecessors/rotationpredecessor/pinnedMOD8444/149dependencies/TFsha verified after terminal runs",
-  "pacingChange": "25ms elapsed scheduling budget between completed cells; retains256cellcap and allguards/original120slease; source RED\u2192GREEN7741/plan58/atomic10/genuineboundary304 PASS; native pacing trial NOT_RUN at this source change"
+  "pacingChange": "25ms between-completed-cell scheduling/256cellcap/allguards/original120slease retained; RED\u2192GREEN7741/plan58/atomic10/genuine304 PASS; actual native paced original-copy epoch9\u219210/save/closure verified at producer2d54f281828fa450564255436653d19ddf832d0e; exact final publication HEAD CI recorded separately in Draft PR",
+  "pacedNative": {
+    "producer": "2d54f281828fa450564255436653d19ddf832d0e",
+    "requestHash": "eae6bbd7625d7435ae6521dd306411cebb0b6bd72a291f232a48595d36048b02",
+    "runId": "run-20261004221350-072210e4b56b",
+    "debugSessionId": "sess-20261004221350-6908a4f4fabb",
+    "runSnapshotId": "snapshot-20261004221350-6316550ca2f7",
+    "processEpoch": 1,
+    "experimentalArenaEpoch": 0,
+    "previousTankEpoch": 9,
+    "nextTankEpoch": 10,
+    "nextRecipeHash": "d9b58a1df55afc6ca28f0e201894b82e3025fa8564493dc128d7aa58563a9623",
+    "savedGeometry": {
+      "scope": "ACTUAL_SAVED_BLOCK_IDENTIFIERS_ONLY_NOT_LIGHTING_DYNAMICS_OR_FULL_CHUNK_EQUIVALENCE",
+      "newCells": 1089,
+      "newShellCells": 522,
+      "newInteriorCells": 567,
+      "geometryFingerprint": "sha256:63c5b6c6866ebe4ffefaa8b0ad7fb30eec43227a7e66bbf46b270a186581a1c8",
+      "comparedPriorCells": 97270,
+      "unavailablePriorCells": 0,
+      "priorRecipes": 7
+    },
+    "jfr": {
+      "scope": "BOUNDED_PROFILE_RECORDING_HOTSPOT_DIAGNOSTIC_SAMPLING_NOT_CPU_SHARE_OR_COST_EQUIVALENCE",
+      "maxSizeBytes": 67108864,
+      "maxAgeSeconds": 180,
+      "maxDurationSeconds": 240,
+      "sourceGuardsOrLeaseChanged": false,
+      "sha256": "06b8043a8aa2b00e43f5acd12c613cdd251cf2ecaafa3df50744fb9de5b78806",
+      "bytes": 19644501
+    },
+    "rotationSamplingEvents": 209,
+    "rotationSamplesWithGuard": 182,
+    "canonicalSha256": "4103bc4a6cd1eaac4357793878465495def94e201e91e2c4d7bc57e4c15d063d",
+    "records": 127,
+    "cleanAck": true,
+    "writerDroppedTotal": 0,
+    "remainingQueue": 0,
+    "allExactCommonSetupGuardsVerified": true,
+    "keepUpLogWarnings": [],
+    "warningAbsenceNotMaxTickGuarantee": true,
+    "phaseFilePollObservations": [
+      {
+        "stage": "rotation-phase",
+        "at": "2026-10-04T22:14:53.588Z",
+        "value": {
+          "phase": "PREFLIGHT",
+          "status": "TANK_ROTATION_IN_PROGRESS"
+        }
+      },
+      {
+        "stage": "rotation-phase",
+        "at": "2026-10-04T22:15:12.019Z",
+        "value": {
+          "phase": "GENERATING",
+          "status": "TANK_ROTATION_IN_PROGRESS"
+        }
+      },
+      {
+        "stage": "rotation-phase",
+        "at": "2026-10-04T22:15:30.479Z",
+        "value": {
+          "phase": "VERIFYING",
+          "status": "TANK_ROTATION_IN_PROGRESS"
+        }
+      },
+      {
+        "stage": "rotation-phase",
+        "at": "2026-10-04T22:15:49.365Z",
+        "value": {
+          "phase": "VERIFIED",
+          "status": "OWNER_CLOSED"
+        }
+      }
+    ],
+    "phaseTimesNotExactTickDurations": true
+  },
+  "pacedPairLimits": [
+    "ONE_ORDERED_PAIR_NOT_ORDER_REVERSED_OR_REPEATED",
+    "PHASE_OBSERVATIONS_ARE_FILE_POLL_TIMES_NOT_EXACT_PHASE_OR_TICK_DURATIONS",
+    "NO_KEEP_UP_WARNING_IN_ONE_RUN_NOT_MAX_TICK_DURATION_GUARANTEE",
+    "JFR_SAMPLING_COUNTS_NOT_CPU_PERCENTAGES",
+    "JFR_PROFILING_CHANGES_RUNTIME",
+    "NEITHER_RAW_CAPTURE_NOR_FULL_RESET_DYNAMIC_ACCEPTANCE"
+  ],
+  "retainedHeartbeatCadence": {
+    "schemaVersion": 1,
+    "scope": "DESCRIPTIVE_SAME_INITIAL_FIXTURE_JFR_PAIR_RETAINED_SERVER_HEARTBEAT_CADENCE_NOT_FULL_OR_ORDER_REVERSED_PERFORMANCE_ACCEPTANCE",
+    "trials": [
+      {
+        "name": "native-r63-rotation-jfr-r2",
+        "producer": "1363ff5d3158e07b27f4cfb393ecd85082d4397a",
+        "runId": "run-20261004220237-02f6de2ccf36",
+        "scope": "RETAINED_SERVER_HEARTBEAT_SPACING_OVER_NATIVE_TRIAL_NOT_MAX_SINGLE_TICK_OR_EXACT_ROTATION_CPU_COST",
+        "records": 21,
+        "firstObservationId": "obs:forge-runtime:8152:1",
+        "lastObservationId": "obs:forge-runtime:8152:58",
+        "localServerTickDelta": 408,
+        "monotonicIntervalSeconds": 37.1512032,
+        "retainedIntervalMeanTicksPerSecond": 10.982147679136272,
+        "heartbeatTickDeltaValues": [
+          20,
+          28
+        ],
+        "heartbeatIntervalMs": {
+          "median": 23.6847,
+          "max": 17085.9427,
+          "p95NearestRank": 12612.258
+        }
+      },
+      {
+        "name": "native-r63-rotation-paced",
+        "producer": "2d54f281828fa450564255436653d19ddf832d0e",
+        "runId": "run-20261004221350-072210e4b56b",
+        "scope": "RETAINED_SERVER_HEARTBEAT_SPACING_OVER_NATIVE_TRIAL_NOT_MAX_SINGLE_TICK_OR_EXACT_ROTATION_CPU_COST",
+        "records": 62,
+        "firstObservationId": "obs:forge-runtime:10532:1",
+        "lastObservationId": "obs:forge-runtime:10532:126",
+        "localServerTickDelta": 1237,
+        "monotonicIntervalSeconds": 63.8185981,
+        "retainedIntervalMeanTicksPerSecond": 19.3830644487316,
+        "heartbeatTickDeltaValues": [
+          20,
+          37
+        ],
+        "heartbeatIntervalMs": {
+          "median": 999.9707,
+          "max": 3049.7962,
+          "p95NearestRank": 1005.078
+        }
+      }
+    ],
+    "limits": [
+      "RETAINED_20_TICK_HEARTBEAT_GAPS_NOT_SINGLE_TICK_LATENCY",
+      "WHOLE_TRIAL_STARTUP_POST_CLOSURE_TAILS_INCLUDED",
+      "ONE_ORDERED_PAIR_NOT_STATISTICAL_EQUIVALENCE",
+      "NO_CPU_OR_GPU_SAVINGS_CLAIM",
+      "DIAGNOSTIC_JFR_ON_BOTH_ARMS"
+    ]
+  },
+  "pacingSourceCi": {
+    "head": "2d54f281828fa450564255436653d19ddf832d0e",
+    "runs": [
+      {
+        "id": 37239193329,
+        "event": "push",
+        "conclusion": "success",
+        "actualCheckoutShas": [
+          "2d54f281828fa450564255436653d19ddf832d0e",
+          "53a84d06578632b5d123e3c2bb631b611bf830d7"
+        ],
+        "mergeParents": [],
+        "pytestSummary": []
+      },
+      {
+        "id": 37239196483,
+        "event": "pull_request",
+        "conclusion": "success",
+        "actualCheckoutShas": [
+          "e13a40260c31cf2c0517c3ccdf2fe6602d644287",
+          "53a84d06578632b5d123e3c2bb631b611bf830d7"
+        ],
+        "mergeParents": [
+          {
+            "mergeSha": "e13a40260c31cf2c0517c3ccdf2fe6602d644287",
+            "parents": [
+              "57e52f9ef44c082daf7abbb0b0f5ada3a258a406",
+              "2d54f281828fa450564255436653d19ddf832d0e"
+            ]
+          }
+        ],
+        "pytestSummary": []
+      },
+      {
+        "id": 37239196347,
+        "event": "pull_request",
+        "conclusion": "success",
+        "actualCheckoutShas": [
+          "e13a40260c31cf2c0517c3ccdf2fe6602d644287"
+        ],
+        "mergeParents": [
+          {
+            "mergeSha": "e13a40260c31cf2c0517c3ccdf2fe6602d644287",
+            "parents": [
+              "57e52f9ef44c082daf7abbb0b0f5ada3a258a406",
+              "2d54f281828fa450564255436653d19ddf832d0e"
+            ]
+          }
+        ],
+        "pytestSummary": [
+          "pytest\tRun complete repository suite\t2026-10-04T22:19:26.7657648Z 3156 passed, 332 skipped, 8 warnings in 322.62s (0:05:22)"
+        ]
+      }
+    ],
+    "allNineMandatorySourceGatesVerified": true,
+    "motionDecisionTests": 205,
+    "controllerAssertions": 7741,
+    "planAssertions": 58,
+    "compiledBoundaryAssertions": 304,
+    "pytestPassed": 3156,
+    "pytestSkipped": 332,
+    "pytestWarnings": 8,
+    "scope": "SOURCE_PRODUCER_CI_NOT_SELF_REFERENTIAL_PUBLICATION_HEAD_CI"
+  }
 }
