@@ -1,4 +1,4 @@
-# Original requirement reconciliation — R63
+# Original requirement reconciliation — R64
 
 The original `/goal` remains `LOCAL-EXECUTION-HANDOFF-2026-10-02.md`. A private requirement/proof map reconciles34 groups, all51 original section21 checkbox items and56 source/evidence document hashes at1363ff5. R63 native/scoped scheduling evidence is additive. This map is not the final whole-diff independent audit or an original-goal completion declaration.
 
@@ -8,7 +8,7 @@ Optional Decision stages, `NOT_EXPOSED`, `NOT_CAPTURED`, partial paths and bound
 |---|---|
 | Foundation / named artifacts | Retain exact7,108owner/61,051edge/13anchor discovery and all ten named research artifacts; exclusions and PARTIAL all-method preparation stay explicit. Verify immutable CAS/hash proof at the final audit. |
 | Goal / Brain B2–B3 | Existing26-owner/204-method/27-field explanations and R48–R61 evidence cover core semantics. Reconcile combined Brain memory/activity/behavior/navigation/motion diagnosis using retained same-case chains; do not add another hook solely because optional custom reasons remain unknown. |
-| Path / evaluator / malus B4–B5 | Finish detailed family/recompute/collision/hazard/evaluator explanations and exact effective-versus-default cost semantics. Ledger presence alone is not a complete explanation. Keep source search and captured runtime returns distinct. |
+| Path / evaluator / malus B4–B5 | [R64 detailed static explanation](PATH-TERRAIN-RESEARCH-2026-10-05.md) now covers the complete same-artifact11 Navigation/6 Evaluator/2 Finder families, recompute/adoption, search structures/budgets, collision/accepted-node, all25 declared defaults and effective-versus-default/query-versus-evaluated cost semantics;31 classes/302 methods/116 fields are linked to exact hashes/locators. Reconcile FRONTIER differences and supported numeric-view/combined-native/cost criteria separately; this research adds no new runtime acceptance. |
 | Control / Mob catalog B6–B7 / section14 | Preserve Ghast/Phantom/Slime/aquatic custom-control boundaries and eight scoped native families. Finish the required inheritance-aware/general Mob research catalog; opaque AI remains generic fallback. |
 | Debug render / precedent B8–B9 | Complete actual1.20.1 caller/receiver/payload population/render controls and relevant MOD/community technical cases/UX with source provenance. Dormant sender owners or generic community links alone do not complete these items. |
 | Version B10 | Reconcile existing official1.21.1 comparisons against the remaining exact B4/B5/B8 explanations. Uninspected future versions are not automatically an additional criterion. |

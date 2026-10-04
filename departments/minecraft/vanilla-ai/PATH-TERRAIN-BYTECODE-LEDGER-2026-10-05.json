@@ -1,0 +1,3888 @@
+{
+  "schema_version": 1,
+  "minecraft": "1.20.1",
+  "loader": "forge",
+  "loader_version": "47.2.0",
+  "namespace": "mojmap",
+  "artifact_stage": "resolved_userdev",
+  "minecraft_artifact_sha256": "1b6e6a166fbc06c6d2422cd5cf515a508977479045095363d5b4c8b89cc7b4eb",
+  "foundation_map_id": "522cbb565d187f8e1e7b97140206f5ac11e8ca90719528bd661f875f184e34fd",
+  "source_index_snapshot_id": "55a63559b62697c11e8ece0cd2fcb97d2db4730684789a31240b2c515f08ba06",
+  "provider": {
+    "name": "jdk-javap-v1",
+    "options": [
+      "-private",
+      "-s",
+      "-c",
+      "-l",
+      "-verbose"
+    ],
+    "executable_hash": "bd5a9f99365fd432f79162f4ed9ca9b956c78cc81dfb6962adb6d207075711fb",
+    "jdk_components": {
+      "release": "00d3211a59bc9f2577f93962e9210de8578c49fd2625022cb38606817d3a71f9",
+      "lib/modules": "81f0e1bb87cd303ddcce2b216e27da416bd20799d9a9811ea1b070123cefff0f"
+    },
+    "jdk_image_status": "HASHED"
+  },
+  "original_ledger_sha256": "afa74e9bd62749f7d340e9174e84016f2b572bef75252834311ede4d755a4e13",
+  "scope": "ADDITIVE_ORIGINAL_B4_B5_NAVIGATION_EVALUATOR_SEARCH_TERRAIN_METHOD_EXPLANATION_EVIDENCE",
+  "not_a_claim_of": [
+    "loaded transformed byte equivalence",
+    "native branch acceptance",
+    "all third-party subclasses",
+    "full original goal completion"
+  ],
+  "slice_hash_contract": "SHA256 of UTF8 lines[line_start-1:line_end].join(LF), preserving each retained CR; lines identify the private whole javap output, not Java source or a canonical bytecode-body hash.",
+  "inheritance": {
+    "owners_scanned": 7108,
+    "inventory_sha256": "aa36f85cd2eb6c228d13694d920a56957ffbfc772fc047f1d301222356affb60",
+    "families_including_base": {
+      "net/minecraft/world/entity/ai/navigation/PathNavigation": [
+        "net/minecraft/world/entity/ai/navigation/AmphibiousPathNavigation",
+        "net/minecraft/world/entity/ai/navigation/FlyingPathNavigation",
+        "net/minecraft/world/entity/ai/navigation/GroundPathNavigation",
+        "net/minecraft/world/entity/ai/navigation/PathNavigation",
+        "net/minecraft/world/entity/ai/navigation/WallClimberNavigation",
+        "net/minecraft/world/entity/ai/navigation/WaterBoundPathNavigation",
+        "net/minecraft/world/entity/animal/Bee$1",
+        "net/minecraft/world/entity/animal/Turtle$TurtlePathNavigation",
+        "net/minecraft/world/entity/animal/frog/Frog$FrogPathNavigation",
+        "net/minecraft/world/entity/monster/Strider$StriderPathNavigation",
+        "net/minecraft/world/entity/monster/warden/Warden$1"
+      ],
+      "net/minecraft/world/level/pathfinder/NodeEvaluator": [
+        "net/minecraft/world/entity/animal/frog/Frog$FrogNodeEvaluator",
+        "net/minecraft/world/level/pathfinder/AmphibiousNodeEvaluator",
+        "net/minecraft/world/level/pathfinder/FlyNodeEvaluator",
+        "net/minecraft/world/level/pathfinder/NodeEvaluator",
+        "net/minecraft/world/level/pathfinder/SwimNodeEvaluator",
+        "net/minecraft/world/level/pathfinder/WalkNodeEvaluator"
+      ],
+      "net/minecraft/world/level/pathfinder/PathFinder": [
+        "net/minecraft/world/entity/monster/warden/Warden$1$1",
+        "net/minecraft/world/level/pathfinder/PathFinder"
+      ]
+    },
+    "scope": "COMPLETE_FOR_THE_HASHED_RESOLVED_MINECRAFT_ARTIFACT_ONLY"
+  },
+  "reading_aid": {
+    "provider": "Vineflower 1.11.2",
+    "provider_sha256": "e1e2415e7f78b34960402c4beddfc88e033d7842a23ecd132a8ec2eadd54f6bf",
+    "input_jar_sha256": "f09b0d502899c5bc217e6f99546eae7f6d695a523d5d0cbfe006282d60460fc3",
+    "log_sha256": "d251d34f0eb65cbc20ac26b39e5ecf00635f41a9e80b5cdab5b8f2a65795ca22",
+    "warnings": 48,
+    "status": "PRIVATE_DERIVED_READING_AID_CROSSCHECKED_WITH_JAVAP_NOT_ORIGINAL_SOURCE_EQUIVALENCE"
+  },
+  "class_count": 31,
+  "selected_method_count": 302,
+  "selected_field_count": 116,
+  "local_only_artifacts": [
+    "Minecraft JAR/class bytes",
+    "whole javap outputs",
+    "derived Java",
+    "machine paths"
+  ],
+  "classes": [
+    {
+      "owner": "net/minecraft/world/entity/Mob",
+      "superclass": "net/minecraft/world/entity/LivingEntity",
+      "class_hash": "81e6715b2f1a722c868e89984b64088932143f2164f40009ea128323dd6a0a8d",
+      "disassembly_hash": "6f7e262f6a26092d06cdbc9da26401209be0fd18b688d6e21f91a5218f9a5149",
+      "origin": "HASH_VERIFIED_ORIGINAL_DISASSEMBLY",
+      "evidence_status": "EXACT_CAPTURED_RESOLVED_DEVELOPMENT_BYTECODE",
+      "selected_members": [
+        {
+          "name": "createNavigation",
+          "declaration": "protected net.minecraft.world.entity.ai.navigation.PathNavigation createNavigation(net.minecraft.world.level.Level);",
+          "descriptor": "(Lnet/minecraft/world/level/Level;)Lnet/minecraft/world/entity/ai/navigation/PathNavigation;",
+          "access": 4,
+          "line_start": 2521,
+          "line_end": 2538,
+          "disassembly_slice_sha256": "a458814afc4cd3e7b8039dedb433854b164d5b719bd66751e91647533e4a2703"
+        },
+        {
+          "name": "shouldPassengersInheritMalus",
+          "declaration": "protected boolean shouldPassengersInheritMalus();",
+          "descriptor": "()Z",
+          "access": 4,
+          "line_start": 2539,
+          "line_end": 2551,
+          "disassembly_slice_sha256": "439c9f9f4ff19d46ef961c62fdccc9b2187004146c193b7ea2ed8b134da11164"
+        },
+        {
+          "name": "getPathfindingMalus",
+          "declaration": "public float getPathfindingMalus(net.minecraft.world.level.pathfinder.BlockPathTypes);",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/BlockPathTypes;)F",
+          "access": 1,
+          "line_start": 2552,
+          "line_end": 2619,
+          "disassembly_slice_sha256": "c787ea425d9c7e6140898e200b947074c2b480c8b5bc6151f5663ad15ee24601"
+        },
+        {
+          "name": "setPathfindingMalus",
+          "declaration": "public void setPathfindingMalus(net.minecraft.world.level.pathfinder.BlockPathTypes, float);",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/BlockPathTypes;F)V",
+          "access": 1,
+          "line_start": 2620,
+          "line_end": 2641,
+          "disassembly_slice_sha256": "0a97888398fbbee2bc518c86a2354b396481e786b675cec09871fbe3deb7eb52"
+        }
+      ],
+      "fields": [
+        {
+          "name": "pathfindingMalus",
+          "descriptor": "Ljava/util/Map;",
+          "access": 18,
+          "annotations": []
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/navigation/AmphibiousPathNavigation",
+      "superclass": "net/minecraft/world/entity/ai/navigation/PathNavigation",
+      "class_hash": "14a1a3225fc801c5b6a1e1710101b9d031e160655f841e21dea92ea29067ab16",
+      "disassembly_hash": "2cd4cb5714cd1cc509971b91ee509f1699f727fb464e96728b227757b4c718f5",
+      "origin": "FRESH_GENUINE_JAVAP_SAME_ARTIFACT",
+      "evidence_status": "EXACT_CAPTURED_RESOLVED_DEVELOPMENT_BYTECODE",
+      "selected_members": [
+        {
+          "name": "<init>",
+          "declaration": "public net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation(net.minecraft.world.entity.Mob, net.minecraft.world.level.Level);",
+          "descriptor": "(Lnet/minecraft/world/entity/Mob;Lnet/minecraft/world/level/Level;)V",
+          "access": 1,
+          "line_start": 129,
+          "line_end": 147,
+          "disassembly_slice_sha256": "4cb8cea7a8758b41a7ff5287fe79635480631d23b316f766354e4b5827585f2b"
+        },
+        {
+          "name": "createPathFinder",
+          "declaration": "protected net.minecraft.world.level.pathfinder.PathFinder createPathFinder(int);",
+          "descriptor": "(I)Lnet/minecraft/world/level/pathfinder/PathFinder;",
+          "access": 4,
+          "line_start": 148,
+          "line_end": 178,
+          "disassembly_slice_sha256": "586a5575180d29b6a0473331020dfb606547cde376424b7a9480205dfc3b1937"
+        },
+        {
+          "name": "canUpdatePath",
+          "declaration": "protected boolean canUpdatePath();",
+          "descriptor": "()Z",
+          "access": 4,
+          "line_start": 179,
+          "line_end": 191,
+          "disassembly_slice_sha256": "f3ae041400f765aae149586ee6773d918194fc34a6eb8b3ce0d04ed3d517b849"
+        },
+        {
+          "name": "getTempMobPos",
+          "declaration": "protected net.minecraft.world.phys.Vec3 getTempMobPos();",
+          "descriptor": "()Lnet/minecraft/world/phys/Vec3;",
+          "access": 4,
+          "line_start": 192,
+          "line_end": 216,
+          "disassembly_slice_sha256": "bcba6a233a95392a4b761653092970bccd838786b87f04acb35d37e419490f7b"
+        },
+        {
+          "name": "getGroundY",
+          "declaration": "protected double getGroundY(net.minecraft.world.phys.Vec3);",
+          "descriptor": "(Lnet/minecraft/world/phys/Vec3;)D",
+          "access": 4,
+          "line_start": 217,
+          "line_end": 231,
+          "disassembly_slice_sha256": "e2834f776c2ba4662942c24c8cfb4fe95fc3e5cfe9a7166e3cd327c06018c0c6"
+        },
+        {
+          "name": "canMoveDirectly",
+          "declaration": "protected boolean canMoveDirectly(net.minecraft.world.phys.Vec3, net.minecraft.world.phys.Vec3);",
+          "descriptor": "(Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/Vec3;)Z",
+          "access": 4,
+          "line_start": 232,
+          "line_end": 261,
+          "disassembly_slice_sha256": "faf7fbdadbf1498fc3c898acc2c54cd32df34964e9c91fd40b7b595bcd45876d"
+        },
+        {
+          "name": "isStableDestination",
+          "declaration": "public boolean isStableDestination(net.minecraft.core.BlockPos);",
+          "descriptor": "(Lnet/minecraft/core/BlockPos;)Z",
+          "access": 1,
+          "line_start": 262,
+          "line_end": 289,
+          "disassembly_slice_sha256": "8be96a7e8ff0bf028f0aa87643df075540e569ce8bb435f22adb7ac55e63778e"
+        },
+        {
+          "name": "setCanFloat",
+          "declaration": "public void setCanFloat(boolean);",
+          "descriptor": "(Z)V",
+          "access": 1,
+          "line_start": 290,
+          "line_end": 301,
+          "disassembly_slice_sha256": "9d7c296bf45ff8b52a2ff92f6ada3f47b709c6fa3d8ad5c29d72c8bbf37a9773"
+        }
+      ],
+      "fields": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/navigation/FlyingPathNavigation",
+      "superclass": "net/minecraft/world/entity/ai/navigation/PathNavigation",
+      "class_hash": "f94f918b65a3af5fe7442acc5794242014afdcdb884c34104a4470653ebff430",
+      "disassembly_hash": "4c6441bc2f93e1f311c25a35dbb97f3a8f0575e68c1d82825540d1015b7f2f16",
+      "origin": "HASH_VERIFIED_ORIGINAL_DISASSEMBLY",
+      "evidence_status": "EXACT_CAPTURED_RESOLVED_DEVELOPMENT_BYTECODE",
+      "selected_members": [
+        {
+          "name": "<init>",
+          "declaration": "public net.minecraft.world.entity.ai.navigation.FlyingPathNavigation(net.minecraft.world.entity.Mob, net.minecraft.world.level.Level);",
+          "descriptor": "(Lnet/minecraft/world/entity/Mob;Lnet/minecraft/world/level/Level;)V",
+          "access": 1,
+          "line_start": 214,
+          "line_end": 232,
+          "disassembly_slice_sha256": "4283c3fe96a098c3c199ab0f2ae0696101ef47c624f877c411d57c326068ec7c"
+        },
+        {
+          "name": "createPathFinder",
+          "declaration": "protected net.minecraft.world.level.pathfinder.PathFinder createPathFinder(int);",
+          "descriptor": "(I)Lnet/minecraft/world/level/pathfinder/PathFinder;",
+          "access": 4,
+          "line_start": 233,
+          "line_end": 262,
+          "disassembly_slice_sha256": "234150f00618a158c0adb5d6ea276001ac0d9f3c0c6eab6c0413a7d3d246cc39"
+        },
+        {
+          "name": "canMoveDirectly",
+          "declaration": "protected boolean canMoveDirectly(net.minecraft.world.phys.Vec3, net.minecraft.world.phys.Vec3);",
+          "descriptor": "(Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/Vec3;)Z",
+          "access": 4,
+          "line_start": 263,
+          "line_end": 282,
+          "disassembly_slice_sha256": "84ce8386e1f6237fd62019d2f951796c4677ff0e4fc1658d5cb8e223bf8ec6ca"
+        },
+        {
+          "name": "canUpdatePath",
+          "declaration": "protected boolean canUpdatePath();",
+          "descriptor": "()Z",
+          "access": 4,
+          "line_start": 283,
+          "line_end": 314,
+          "disassembly_slice_sha256": "091f13d1c71b2f4193ad5ddae3b4565c8388f0e4cdb9c89a3d059a6781d461da"
+        },
+        {
+          "name": "getTempMobPos",
+          "declaration": "protected net.minecraft.world.phys.Vec3 getTempMobPos();",
+          "descriptor": "()Lnet/minecraft/world/phys/Vec3;",
+          "access": 4,
+          "line_start": 315,
+          "line_end": 329,
+          "disassembly_slice_sha256": "29e73ec5a2d7f73bb77f87fc06853745cdf69a26bf116d84471b29c257b58810"
+        },
+        {
+          "name": "createPath",
+          "declaration": "public net.minecraft.world.level.pathfinder.Path createPath(net.minecraft.world.entity.Entity, int);",
+          "descriptor": "(Lnet/minecraft/world/entity/Entity;I)Lnet/minecraft/world/level/pathfinder/Path;",
+          "access": 1,
+          "line_start": 330,
+          "line_end": 348,
+          "disassembly_slice_sha256": "ea32f78b658f92213628e2b437861ec84d6cda6337a248815b04fb59d3d3d5b4"
+        },
+        {
+          "name": "tick",
+          "declaration": "public void tick();",
+          "descriptor": "()V",
+          "access": 1,
+          "line_start": 349,
+          "line_end": 474,
+          "disassembly_slice_sha256": "09c7aaf577dd4a313eb388e0e7693ab30c6abd78a8b0405c02e82413f88917f7"
+        },
+        {
+          "name": "setCanOpenDoors",
+          "declaration": "public void setCanOpenDoors(boolean);",
+          "descriptor": "(Z)V",
+          "access": 1,
+          "line_start": 475,
+          "line_end": 492,
+          "disassembly_slice_sha256": "08c2165f8e9bd8f6a3a12c4122614800ca0a0246a2cc87d62a1d3bfeb3122ecb"
+        },
+        {
+          "name": "canPassDoors",
+          "declaration": "public boolean canPassDoors();",
+          "descriptor": "()Z",
+          "access": 1,
+          "line_start": 493,
+          "line_end": 507,
+          "disassembly_slice_sha256": "9e552253c1750a41aed6c98d3744134f40956397e049ed6815504c02403e652f"
+        },
+        {
+          "name": "setCanPassDoors",
+          "declaration": "public void setCanPassDoors(boolean);",
+          "descriptor": "(Z)V",
+          "access": 1,
+          "line_start": 508,
+          "line_end": 525,
+          "disassembly_slice_sha256": "c9807d50ae11312a6240c2a4693e95c051292d12239888541aa3479267b37644"
+        },
+        {
+          "name": "canOpenDoors",
+          "declaration": "public boolean canOpenDoors();",
+          "descriptor": "()Z",
+          "access": 1,
+          "line_start": 526,
+          "line_end": 540,
+          "disassembly_slice_sha256": "e5196d66d7d47d9facf8c414660003951915bd69323506caf99bcfcb24b0b4ff"
+        },
+        {
+          "name": "isStableDestination",
+          "declaration": "public boolean isStableDestination(net.minecraft.core.BlockPos);",
+          "descriptor": "(Lnet/minecraft/core/BlockPos;)Z",
+          "access": 1,
+          "line_start": 541,
+          "line_end": 562,
+          "disassembly_slice_sha256": "ed15d8cf7675ddc6343cd839d14ecfb823ecce149da61cbf62328d6be676466a"
+        }
+      ],
+      "fields": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/navigation/GroundPathNavigation",
+      "superclass": "net/minecraft/world/entity/ai/navigation/PathNavigation",
+      "class_hash": "3098776edeebcc6cd59e28d9431ec66766f3ae0aafebbc58a1b03e3de8e9be7e",
+      "disassembly_hash": "5f828779170246f2742742a515d5609ce11e83b3a1b77555eedc8b068798aa32",
+      "origin": "HASH_VERIFIED_ORIGINAL_DISASSEMBLY",
+      "evidence_status": "EXACT_CAPTURED_RESOLVED_DEVELOPMENT_BYTECODE",
+      "selected_members": [
+        {
+          "name": "<init>",
+          "declaration": "public net.minecraft.world.entity.ai.navigation.GroundPathNavigation(net.minecraft.world.entity.Mob, net.minecraft.world.level.Level);",
+          "descriptor": "(Lnet/minecraft/world/entity/Mob;Lnet/minecraft/world/level/Level;)V",
+          "access": 1,
+          "line_start": 255,
+          "line_end": 273,
+          "disassembly_slice_sha256": "647bfa32ae90af158bdf09ea2366be31c5ff6174a47240bd67829da6fa258ad9"
+        },
+        {
+          "name": "createPathFinder",
+          "declaration": "protected net.minecraft.world.level.pathfinder.PathFinder createPathFinder(int);",
+          "descriptor": "(I)Lnet/minecraft/world/level/pathfinder/PathFinder;",
+          "access": 4,
+          "line_start": 274,
+          "line_end": 303,
+          "disassembly_slice_sha256": "d05af0cc786cad373ba10f0d7bf27c6979078a40ac27b95e85bcc80bb9170ce8"
+        },
+        {
+          "name": "canUpdatePath",
+          "declaration": "protected boolean canUpdatePath();",
+          "descriptor": "()Z",
+          "access": 4,
+          "line_start": 304,
+          "line_end": 335,
+          "disassembly_slice_sha256": "5664bc2fd5b0dd5c873339d7b1f089b55da1dc13932d8039f764a1006ffa5321"
+        },
+        {
+          "name": "getTempMobPos",
+          "declaration": "protected net.minecraft.world.phys.Vec3 getTempMobPos();",
+          "descriptor": "()Lnet/minecraft/world/phys/Vec3;",
+          "access": 4,
+          "line_start": 336,
+          "line_end": 359,
+          "disassembly_slice_sha256": "7d4c539cd32be9ac445fd2856222a575ce1535ae2204642a7d0645a65b1e3c26"
+        },
+        {
+          "name": "createPath",
+          "declaration": "public net.minecraft.world.level.pathfinder.Path createPath(net.minecraft.core.BlockPos, int);",
+          "descriptor": "(Lnet/minecraft/core/BlockPos;I)Lnet/minecraft/world/level/pathfinder/Path;",
+          "access": 1,
+          "line_start": 360,
+          "line_end": 499,
+          "disassembly_slice_sha256": "f907dd75339cc2218a2d1860bba40b2849150266593e702abd04efcc9fff56f4"
+        },
+        {
+          "name": "createPath",
+          "declaration": "public net.minecraft.world.level.pathfinder.Path createPath(net.minecraft.world.entity.Entity, int);",
+          "descriptor": "(Lnet/minecraft/world/entity/Entity;I)Lnet/minecraft/world/level/pathfinder/Path;",
+          "access": 1,
+          "line_start": 500,
+          "line_end": 518,
+          "disassembly_slice_sha256": "97218decf84ecc667be89c3227e00fb513155b1e439b52f4b24edf936f23f1f6"
+        },
+        {
+          "name": "getSurfaceY",
+          "declaration": "private int getSurfaceY();",
+          "descriptor": "()I",
+          "access": 2,
+          "line_start": 519,
+          "line_end": 613,
+          "disassembly_slice_sha256": "273e65b458d40425008dbba633fe4c32ef5ce0941d80709eb20e3b122a075dd4"
+        },
+        {
+          "name": "trimPath",
+          "declaration": "protected void trimPath();",
+          "descriptor": "()V",
+          "access": 4,
+          "line_start": 614,
+          "line_end": 699,
+          "disassembly_slice_sha256": "9ab1b9cd59a128fc26b451ec0a2a0412c59ed61a192c9b56d3dcf80d384146f0"
+        },
+        {
+          "name": "hasValidPathType",
+          "declaration": "protected boolean hasValidPathType(net.minecraft.world.level.pathfinder.BlockPathTypes);",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/BlockPathTypes;)Z",
+          "access": 4,
+          "line_start": 700,
+          "line_end": 742,
+          "disassembly_slice_sha256": "e390e88a9cb2c4ebbe5313a4fa342d01cc19340e548eaab2cda1dbee54b684f3"
+        },
+        {
+          "name": "setCanOpenDoors",
+          "declaration": "public void setCanOpenDoors(boolean);",
+          "descriptor": "(Z)V",
+          "access": 1,
+          "line_start": 743,
+          "line_end": 760,
+          "disassembly_slice_sha256": "ecf9b3f2a5d1582884187a0504da27d9c9ec1de9cd8364b7e02fb073e4328fe5"
+        },
+        {
+          "name": "canPassDoors",
+          "declaration": "public boolean canPassDoors();",
+          "descriptor": "()Z",
+          "access": 1,
+          "line_start": 761,
+          "line_end": 775,
+          "disassembly_slice_sha256": "c3f4d3b5abead1b7901f40d5bddd696c79225230b5c4ee4e18fb29d8db27847f"
+        },
+        {
+          "name": "setCanPassDoors",
+          "declaration": "public void setCanPassDoors(boolean);",
+          "descriptor": "(Z)V",
+          "access": 1,
+          "line_start": 776,
+          "line_end": 793,
+          "disassembly_slice_sha256": "a90ec5489db60fa02cb9275d3a51d59a85b3558f302e6e0d9213de2296a482d7"
+        },
+        {
+          "name": "canOpenDoors",
+          "declaration": "public boolean canOpenDoors();",
+          "descriptor": "()Z",
+          "access": 1,
+          "line_start": 794,
+          "line_end": 808,
+          "disassembly_slice_sha256": "b86b9c86e4e97eeee627ad4ab31e3c75887a65dcfdf3b714c5275e523dcf51d9"
+        },
+        {
+          "name": "setAvoidSun",
+          "declaration": "public void setAvoidSun(boolean);",
+          "descriptor": "(Z)V",
+          "access": 1,
+          "line_start": 809,
+          "line_end": 825,
+          "disassembly_slice_sha256": "42b6d3c3e98a175c6dacbfeb5be95216399c18faa0268538f105ac220aa91955"
+        },
+        {
+          "name": "setCanWalkOverFences",
+          "declaration": "public void setCanWalkOverFences(boolean);",
+          "descriptor": "(Z)V",
+          "access": 1,
+          "line_start": 826,
+          "line_end": 842,
+          "disassembly_slice_sha256": "75108f13d6bf6f6bff8dba208988c346351f76d6b0439626e01ea83547b55819"
+        }
+      ],
+      "fields": [
+        {
+          "name": "avoidSun",
+          "descriptor": "Z",
+          "access": 2,
+          "annotations": []
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/navigation/PathNavigation",
+      "superclass": "java/lang/Object",
+      "class_hash": "78346d21ea9ba13ddbc7211666f3a80b54d773a864203922bb71d336b4dac2ac",
+      "disassembly_hash": "10a99a7e067bfae8e7bc060f84055bbb5bc1fffa042983008be7d2419e134ff0",
+      "origin": "HASH_VERIFIED_ORIGINAL_DISASSEMBLY",
+      "evidence_status": "EXACT_CAPTURED_RESOLVED_DEVELOPMENT_BYTECODE",
+      "selected_members": [
+        {
+          "name": "<init>",
+          "declaration": "public net.minecraft.world.entity.ai.navigation.PathNavigation(net.minecraft.world.entity.Mob, net.minecraft.world.level.Level);",
+          "descriptor": "(Lnet/minecraft/world/entity/Mob;Lnet/minecraft/world/level/Level;)V",
+          "access": 1,
+          "line_start": 755,
+          "line_end": 810,
+          "disassembly_slice_sha256": "1bf6dd8b059c22d9db514eb1ff4cfc9ce1c127079295bafaab178bddd3706267"
+        },
+        {
+          "name": "resetMaxVisitedNodesMultiplier",
+          "declaration": "public void resetMaxVisitedNodesMultiplier();",
+          "descriptor": "()V",
+          "access": 1,
+          "line_start": 811,
+          "line_end": 826,
+          "disassembly_slice_sha256": "d2b36ee2e42895e6e39143dfc7de28601ed300b7bebee952686307a3b56f49b3"
+        },
+        {
+          "name": "setMaxVisitedNodesMultiplier",
+          "declaration": "public void setMaxVisitedNodesMultiplier(float);",
+          "descriptor": "(F)V",
+          "access": 1,
+          "line_start": 827,
+          "line_end": 843,
+          "disassembly_slice_sha256": "6943fcdcb670aba247bb6a4471c58282794e4b0f8ec505ae0fef182045a5b4a0"
+        },
+        {
+          "name": "getTargetPos",
+          "declaration": "public net.minecraft.core.BlockPos getTargetPos();",
+          "descriptor": "()Lnet/minecraft/core/BlockPos;",
+          "access": 1,
+          "line_start": 844,
+          "line_end": 860,
+          "disassembly_slice_sha256": "a2dd5b441aa86635a70e14e4bef343d4ce06974f334ed37b6a8a2a73179b84e4"
+        },
+        {
+          "name": "createPathFinder",
+          "declaration": "protected abstract net.minecraft.world.level.pathfinder.PathFinder createPathFinder(int);",
+          "descriptor": "(I)Lnet/minecraft/world/level/pathfinder/PathFinder;",
+          "access": 1028,
+          "line_start": 861,
+          "line_end": 864,
+          "disassembly_slice_sha256": "5a09ac3b206bab2c17ae8ea75ccb0871e0136af5a74fa29da04949235690fefc"
+        },
+        {
+          "name": "setSpeedModifier",
+          "declaration": "public void setSpeedModifier(double);",
+          "descriptor": "(D)V",
+          "access": 1,
+          "line_start": 865,
+          "line_end": 881,
+          "disassembly_slice_sha256": "e860323fb692d875aed9bec9318dd1526b112ce7e7c05e76fef6f5557eeb48ec"
+        },
+        {
+          "name": "recomputePath",
+          "declaration": "public void recomputePath();",
+          "descriptor": "()V",
+          "access": 1,
+          "line_start": 882,
+          "line_end": 939,
+          "disassembly_slice_sha256": "b4575281b8d439c6347b67ec986dd0cdda588b3f26c580e0ff00a88db14d1648"
+        },
+        {
+          "name": "createPath",
+          "declaration": "public final net.minecraft.world.level.pathfinder.Path createPath(double, double, double, int);",
+          "descriptor": "(DDDI)Lnet/minecraft/world/level/pathfinder/Path;",
+          "access": 17,
+          "line_start": 940,
+          "line_end": 965,
+          "disassembly_slice_sha256": "8468103b61f579f4a19eac5067db8a6cebf5371236dbee2654db26785c982266"
+        },
+        {
+          "name": "createPath",
+          "declaration": "public net.minecraft.world.level.pathfinder.Path createPath(java.util.stream.Stream<net.minecraft.core.BlockPos>, int);",
+          "descriptor": "(Ljava/util/stream/Stream;I)Lnet/minecraft/world/level/pathfinder/Path;",
+          "access": 1,
+          "line_start": 966,
+          "line_end": 995,
+          "disassembly_slice_sha256": "e4845c49c1f63fb4b4ed22a96a40b2e6893044050a0087b0ef3096c5d1b24479"
+        },
+        {
+          "name": "createPath",
+          "declaration": "public net.minecraft.world.level.pathfinder.Path createPath(java.util.Set<net.minecraft.core.BlockPos>, int);",
+          "descriptor": "(Ljava/util/Set;I)Lnet/minecraft/world/level/pathfinder/Path;",
+          "access": 1,
+          "line_start": 996,
+          "line_end": 1022,
+          "disassembly_slice_sha256": "6280dc7e12b491b097be8a71fe29776677f6291a1bb69513c1a938ea1918a0f0"
+        },
+        {
+          "name": "createPath",
+          "declaration": "public net.minecraft.world.level.pathfinder.Path createPath(net.minecraft.core.BlockPos, int);",
+          "descriptor": "(Lnet/minecraft/core/BlockPos;I)Lnet/minecraft/world/level/pathfinder/Path;",
+          "access": 1,
+          "line_start": 1023,
+          "line_end": 1046,
+          "disassembly_slice_sha256": "be5650219940d884e4bfdefc084e3553cc941f5970c2fcd453e07b7b705501cd"
+        },
+        {
+          "name": "createPath",
+          "declaration": "public net.minecraft.world.level.pathfinder.Path createPath(net.minecraft.core.BlockPos, int, int);",
+          "descriptor": "(Lnet/minecraft/core/BlockPos;II)Lnet/minecraft/world/level/pathfinder/Path;",
+          "access": 1,
+          "line_start": 1047,
+          "line_end": 1073,
+          "disassembly_slice_sha256": "9779767cf27ca0f07add90d18c36d3c275cc44cce79818b538c3562f6b028591"
+        },
+        {
+          "name": "createPath",
+          "declaration": "public net.minecraft.world.level.pathfinder.Path createPath(net.minecraft.world.entity.Entity, int);",
+          "descriptor": "(Lnet/minecraft/world/entity/Entity;I)Lnet/minecraft/world/level/pathfinder/Path;",
+          "access": 1,
+          "line_start": 1074,
+          "line_end": 1098,
+          "disassembly_slice_sha256": "3984ebca8661542c8656fc87ed7be9401ca69c663ea415b36f988627629fbcec"
+        },
+        {
+          "name": "createPath",
+          "declaration": "protected net.minecraft.world.level.pathfinder.Path createPath(java.util.Set<net.minecraft.core.BlockPos>, int, boolean, int);",
+          "descriptor": "(Ljava/util/Set;IZI)Lnet/minecraft/world/level/pathfinder/Path;",
+          "access": 4,
+          "line_start": 1099,
+          "line_end": 1132,
+          "disassembly_slice_sha256": "73634986e2d24b487ef2af60e8d287b87215e176d09f032bf9df7d5d94261ddb"
+        },
+        {
+          "name": "createPath",
+          "declaration": "protected net.minecraft.world.level.pathfinder.Path createPath(java.util.Set<net.minecraft.core.BlockPos>, int, boolean, int, float);",
+          "descriptor": "(Ljava/util/Set;IZIF)Lnet/minecraft/world/level/pathfinder/Path;",
+          "access": 4,
+          "line_start": 1133,
+          "line_end": 1298,
+          "disassembly_slice_sha256": "9c681d06e75ba2d9ef8a87958634f532683e187771771dd388b63fea1c60a61a"
+        },
+        {
+          "name": "moveTo",
+          "declaration": "public boolean moveTo(double, double, double, double);",
+          "descriptor": "(DDDD)Z",
+          "access": 1,
+          "line_start": 1299,
+          "line_end": 1323,
+          "disassembly_slice_sha256": "2a87cebb46659dc2bb96ee87d76f332bdf3da6153b979d7248a32d560f612f50"
+        },
+        {
+          "name": "moveTo",
+          "declaration": "public boolean moveTo(net.minecraft.world.entity.Entity, double);",
+          "descriptor": "(Lnet/minecraft/world/entity/Entity;D)Z",
+          "access": 1,
+          "line_start": 1324,
+          "line_end": 1360,
+          "disassembly_slice_sha256": "80e5adb422211b53634d5a69966ba2ebe1815c8ec66a6d8af2dd94cb067c2c30"
+        },
+        {
+          "name": "moveTo",
+          "declaration": "public boolean moveTo(net.minecraft.world.level.pathfinder.Path, double);",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/Path;D)Z",
+          "access": 1,
+          "line_start": 1361,
+          "line_end": 1441,
+          "disassembly_slice_sha256": "f5464f672746bd514fe0fe3ec4965be9ec0bb32777d71249f087134078c39cdf"
+        },
+        {
+          "name": "getPath",
+          "declaration": "public net.minecraft.world.level.pathfinder.Path getPath();",
+          "descriptor": "()Lnet/minecraft/world/level/pathfinder/Path;",
+          "access": 1,
+          "line_start": 1442,
+          "line_end": 1458,
+          "disassembly_slice_sha256": "cf0969b4fc1423cfff7ee33c6e150f36f1984c69ba153dc40f4304a07fa288d6"
+        },
+        {
+          "name": "tick",
+          "declaration": "public void tick();",
+          "descriptor": "()V",
+          "access": 1,
+          "line_start": 1459,
+          "line_end": 1589,
+          "disassembly_slice_sha256": "f436d28655ec77c87c297f8ce9841d40465250634d59e0eaf0eb01bdb1ee3cb0"
+        },
+        {
+          "name": "getGroundY",
+          "declaration": "protected double getGroundY(net.minecraft.world.phys.Vec3);",
+          "descriptor": "(Lnet/minecraft/world/phys/Vec3;)D",
+          "access": 4,
+          "line_start": 1590,
+          "line_end": 1627,
+          "disassembly_slice_sha256": "e1bf1e7aa2a8fff22daab1b117efd018f5e5e13d4daebb55e78376dffaf2d447"
+        },
+        {
+          "name": "followThePath",
+          "declaration": "protected void followThePath();",
+          "descriptor": "()V",
+          "access": 4,
+          "line_start": 1628,
+          "line_end": 1786,
+          "disassembly_slice_sha256": "0e2a799686fc0fad3b44e98a62304d568e01a96403742c3a753548c424e59a61"
+        },
+        {
+          "name": "shouldTargetNextNodeInDirection",
+          "declaration": "private boolean shouldTargetNextNodeInDirection(net.minecraft.world.phys.Vec3);",
+          "descriptor": "(Lnet/minecraft/world/phys/Vec3;)Z",
+          "access": 2,
+          "line_start": 1787,
+          "line_end": 1947,
+          "disassembly_slice_sha256": "e662f7761aa7fd751da0024e646872d6d2a830b10bb6e29592f40e99e65ed46c"
+        },
+        {
+          "name": "doStuckDetection",
+          "declaration": "protected void doStuckDetection(net.minecraft.world.phys.Vec3);",
+          "descriptor": "(Lnet/minecraft/world/phys/Vec3;)V",
+          "access": 4,
+          "line_start": 1948,
+          "line_end": 2144,
+          "disassembly_slice_sha256": "5b1d7ca49808ff98bd8eed4c7ebeea3a6de43d1c6223732a1d9a6387f1391281"
+        },
+        {
+          "name": "timeoutPath",
+          "declaration": "private void timeoutPath();",
+          "descriptor": "()V",
+          "access": 2,
+          "line_start": 2145,
+          "line_end": 2162,
+          "disassembly_slice_sha256": "50faf8ef73c986fdb14943631cc7372277e81122bc96a2399600a52823c4d1b9"
+        },
+        {
+          "name": "resetStuckTimeout",
+          "declaration": "private void resetStuckTimeout();",
+          "descriptor": "()V",
+          "access": 2,
+          "line_start": 2163,
+          "line_end": 2190,
+          "disassembly_slice_sha256": "1d9926a984dd9c0183c5a58ff05518a636a7b4150c05c4906303c17351798569"
+        },
+        {
+          "name": "isDone",
+          "declaration": "public boolean isDone();",
+          "descriptor": "()Z",
+          "access": 1,
+          "line_start": 2191,
+          "line_end": 2217,
+          "disassembly_slice_sha256": "857f86859c361498fb3ca7f3716e1a6ecf5e4fe9812e03a1d57f7acbce5e3d2a"
+        },
+        {
+          "name": "isInProgress",
+          "declaration": "public boolean isInProgress();",
+          "descriptor": "()Z",
+          "access": 1,
+          "line_start": 2218,
+          "line_end": 2239,
+          "disassembly_slice_sha256": "d4640a55de0c72005fa588b99aaa74f75643b6a71f51fbbd2523b68bf6608139"
+        },
+        {
+          "name": "stop",
+          "declaration": "public void stop();",
+          "descriptor": "()V",
+          "access": 1,
+          "line_start": 2240,
+          "line_end": 2255,
+          "disassembly_slice_sha256": "0fdc254468e4d7511bad353a9c1650d07e4eaae668ebfa9b26ddc917090689f1"
+        },
+        {
+          "name": "getTempMobPos",
+          "declaration": "protected abstract net.minecraft.world.phys.Vec3 getTempMobPos();",
+          "descriptor": "()Lnet/minecraft/world/phys/Vec3;",
+          "access": 1028,
+          "line_start": 2256,
+          "line_end": 2259,
+          "disassembly_slice_sha256": "ae0a213cae0150d72a8bf23f51bb6cd6c3638c500c044015386212f92cae1a02"
+        },
+        {
+          "name": "canUpdatePath",
+          "declaration": "protected abstract boolean canUpdatePath();",
+          "descriptor": "()Z",
+          "access": 1028,
+          "line_start": 2260,
+          "line_end": 2263,
+          "disassembly_slice_sha256": "8790043be3be868d63a4ad56bde54646787f4ee976f457a6453a3c74192cd6e4"
+        },
+        {
+          "name": "isInLiquid",
+          "declaration": "protected boolean isInLiquid();",
+          "descriptor": "()Z",
+          "access": 4,
+          "line_start": 2264,
+          "line_end": 2291,
+          "disassembly_slice_sha256": "2fcdfda7d136a47dba27ed0d0956143119e3affb3d60f39277480e1663851ebe"
+        },
+        {
+          "name": "trimPath",
+          "declaration": "protected void trimPath();",
+          "descriptor": "()V",
+          "access": 4,
+          "line_start": 2292,
+          "line_end": 2417,
+          "disassembly_slice_sha256": "992285173b62788c4bbb38116d0b538358210abfedb9e2863a63f823bbb446cc"
+        },
+        {
+          "name": "canMoveDirectly",
+          "declaration": "protected boolean canMoveDirectly(net.minecraft.world.phys.Vec3, net.minecraft.world.phys.Vec3);",
+          "descriptor": "(Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/Vec3;)Z",
+          "access": 4,
+          "line_start": 2418,
+          "line_end": 2432,
+          "disassembly_slice_sha256": "e24936d85280cdaa9036f463cb9aae694f4e6434897069f36ef766263ea71859"
+        },
+        {
+          "name": "canCutCorner",
+          "declaration": "public boolean canCutCorner(net.minecraft.world.level.pathfinder.BlockPathTypes);",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/BlockPathTypes;)Z",
+          "access": 1,
+          "line_start": 2433,
+          "line_end": 2461,
+          "disassembly_slice_sha256": "9ef507dc9cc54a107599111dbf40b7663152d8de1295da4a13f9c8475376f8fc"
+        },
+        {
+          "name": "isClearForMovementBetween",
+          "declaration": "protected static boolean isClearForMovementBetween(net.minecraft.world.entity.Mob, net.minecraft.world.phys.Vec3, net.minecraft.world.phys.Vec3, boolean);",
+          "descriptor": "(Lnet/minecraft/world/entity/Mob;Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/Vec3;Z)Z",
+          "access": 12,
+          "line_start": 2462,
+          "line_end": 2527,
+          "disassembly_slice_sha256": "a94eb0c958134f1bcab2a8f1c1cbeab289c7bfb06d335035d4c4e10d57264bb8"
+        },
+        {
+          "name": "isStableDestination",
+          "declaration": "public boolean isStableDestination(net.minecraft.core.BlockPos);",
+          "descriptor": "(Lnet/minecraft/core/BlockPos;)Z",
+          "access": 1,
+          "line_start": 2528,
+          "line_end": 2553,
+          "disassembly_slice_sha256": "304a14505316227cd7369d26dfa623ce728e2403ecd399ac59f1857b77738fbb"
+        },
+        {
+          "name": "getNodeEvaluator",
+          "declaration": "public net.minecraft.world.level.pathfinder.NodeEvaluator getNodeEvaluator();",
+          "descriptor": "()Lnet/minecraft/world/level/pathfinder/NodeEvaluator;",
+          "access": 1,
+          "line_start": 2554,
+          "line_end": 2567,
+          "disassembly_slice_sha256": "245cded78637a1845e8bb898017e38d852d9c5b64ce0beaa5ee8902fe63c49a4"
+        },
+        {
+          "name": "setCanFloat",
+          "declaration": "public void setCanFloat(boolean);",
+          "descriptor": "(Z)V",
+          "access": 1,
+          "line_start": 2568,
+          "line_end": 2585,
+          "disassembly_slice_sha256": "811ec301af3edc93273367d9dd64935d523c554021600b75fd1b8cd9fff3a3c8"
+        },
+        {
+          "name": "canFloat",
+          "declaration": "public boolean canFloat();",
+          "descriptor": "()Z",
+          "access": 1,
+          "line_start": 2586,
+          "line_end": 2600,
+          "disassembly_slice_sha256": "09d6302f09839d0d4bc9bd7bded89a18c9385eb9f68467da4258129ab846edfc"
+        },
+        {
+          "name": "shouldRecomputePath",
+          "declaration": "public boolean shouldRecomputePath(net.minecraft.core.BlockPos);",
+          "descriptor": "(Lnet/minecraft/core/BlockPos;)Z",
+          "access": 1,
+          "line_start": 2601,
+          "line_end": 2689,
+          "disassembly_slice_sha256": "5e91dd60927638bceb4b98b172d077a0a894108b93a4f91c2d08cb6861676e22"
+        },
+        {
+          "name": "getMaxDistanceToWaypoint",
+          "declaration": "public float getMaxDistanceToWaypoint();",
+          "descriptor": "()F",
+          "access": 1,
+          "line_start": 2690,
+          "line_end": 2703,
+          "disassembly_slice_sha256": "6c15ec91ce792788fe5fb60206951bac8d92fce8a1f941af2d7ff0fcdc290dee"
+        },
+        {
+          "name": "isStuck",
+          "declaration": "public boolean isStuck();",
+          "descriptor": "()Z",
+          "access": 1,
+          "line_start": 2704,
+          "line_end": 2716,
+          "disassembly_slice_sha256": "db9a34657b75c6b538007a7452cffb557b09ad73b3438c147fecfe05802d76f1"
+        }
+      ],
+      "fields": [
+        {
+          "name": "MAX_TIME_RECOMPUTE",
+          "descriptor": "I",
+          "access": 26,
+          "annotations": []
+        },
+        {
+          "name": "STUCK_CHECK_INTERVAL",
+          "descriptor": "I",
+          "access": 26,
+          "annotations": []
+        },
+        {
+          "name": "STUCK_THRESHOLD_DISTANCE_FACTOR",
+          "descriptor": "F",
+          "access": 26,
+          "annotations": []
+        },
+        {
+          "name": "mob",
+          "descriptor": "Lnet/minecraft/world/entity/Mob;",
+          "access": 20,
+          "annotations": []
+        },
+        {
+          "name": "level",
+          "descriptor": "Lnet/minecraft/world/level/Level;",
+          "access": 20,
+          "annotations": []
+        },
+        {
+          "name": "path",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/Path;",
+          "access": 4,
+          "annotations": [
+            {
+              "descriptor": "Ljavax/annotation/Nullable;",
+              "elements": {}
+            }
+          ]
+        },
+        {
+          "name": "speedModifier",
+          "descriptor": "D",
+          "access": 4,
+          "annotations": []
+        },
+        {
+          "name": "tick",
+          "descriptor": "I",
+          "access": 4,
+          "annotations": []
+        },
+        {
+          "name": "lastStuckCheck",
+          "descriptor": "I",
+          "access": 4,
+          "annotations": []
+        },
+        {
+          "name": "lastStuckCheckPos",
+          "descriptor": "Lnet/minecraft/world/phys/Vec3;",
+          "access": 4,
+          "annotations": []
+        },
+        {
+          "name": "timeoutCachedNode",
+          "descriptor": "Lnet/minecraft/core/Vec3i;",
+          "access": 4,
+          "annotations": []
+        },
+        {
+          "name": "timeoutTimer",
+          "descriptor": "J",
+          "access": 4,
+          "annotations": []
+        },
+        {
+          "name": "lastTimeoutCheck",
+          "descriptor": "J",
+          "access": 4,
+          "annotations": []
+        },
+        {
+          "name": "timeoutLimit",
+          "descriptor": "D",
+          "access": 4,
+          "annotations": []
+        },
+        {
+          "name": "maxDistanceToWaypoint",
+          "descriptor": "F",
+          "access": 4,
+          "annotations": []
+        },
+        {
+          "name": "hasDelayedRecomputation",
+          "descriptor": "Z",
+          "access": 4,
+          "annotations": []
+        },
+        {
+          "name": "timeLastRecompute",
+          "descriptor": "J",
+          "access": 4,
+          "annotations": []
+        },
+        {
+          "name": "nodeEvaluator",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/NodeEvaluator;",
+          "access": 4,
+          "annotations": []
+        },
+        {
+          "name": "targetPos",
+          "descriptor": "Lnet/minecraft/core/BlockPos;",
+          "access": 2,
+          "annotations": [
+            {
+              "descriptor": "Ljavax/annotation/Nullable;",
+              "elements": {}
+            }
+          ]
+        },
+        {
+          "name": "reachRange",
+          "descriptor": "I",
+          "access": 2,
+          "annotations": []
+        },
+        {
+          "name": "maxVisitedNodesMultiplier",
+          "descriptor": "F",
+          "access": 2,
+          "annotations": []
+        },
+        {
+          "name": "pathFinder",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/PathFinder;",
+          "access": 18,
+          "annotations": []
+        },
+        {
+          "name": "isStuck",
+          "descriptor": "Z",
+          "access": 2,
+          "annotations": []
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/navigation/WallClimberNavigation",
+      "superclass": "net/minecraft/world/entity/ai/navigation/GroundPathNavigation",
+      "class_hash": "67aa3241d668c7423132c1484309294f7940dc279b9686316df7585f1e2fd0bd",
+      "disassembly_hash": "406ff770376cc1bcb6fc4c7fc06ac25db8413f02b02d58e398f3d8ba9f8c3125",
+      "origin": "FRESH_GENUINE_JAVAP_SAME_ARTIFACT",
+      "evidence_status": "EXACT_CAPTURED_RESOLVED_DEVELOPMENT_BYTECODE",
+      "selected_members": [
+        {
+          "name": "<init>",
+          "declaration": "public net.minecraft.world.entity.ai.navigation.WallClimberNavigation(net.minecraft.world.entity.Mob, net.minecraft.world.level.Level);",
+          "descriptor": "(Lnet/minecraft/world/entity/Mob;Lnet/minecraft/world/level/Level;)V",
+          "access": 1,
+          "line_start": 140,
+          "line_end": 158,
+          "disassembly_slice_sha256": "93855c69d81f2c3b957371e6c8fb1d55faf8d71c21ea194b1b81350aa27be77a"
+        },
+        {
+          "name": "createPath",
+          "declaration": "public net.minecraft.world.level.pathfinder.Path createPath(net.minecraft.core.BlockPos, int);",
+          "descriptor": "(Lnet/minecraft/core/BlockPos;I)Lnet/minecraft/world/level/pathfinder/Path;",
+          "access": 1,
+          "line_start": 159,
+          "line_end": 180,
+          "disassembly_slice_sha256": "792020de206311fc11c79ea1e1cac06389bd4c67f8f369d9f1df8614f7808b69"
+        },
+        {
+          "name": "createPath",
+          "declaration": "public net.minecraft.world.level.pathfinder.Path createPath(net.minecraft.world.entity.Entity, int);",
+          "descriptor": "(Lnet/minecraft/world/entity/Entity;I)Lnet/minecraft/world/level/pathfinder/Path;",
+          "access": 1,
+          "line_start": 181,
+          "line_end": 203,
+          "disassembly_slice_sha256": "2811c887ad7cf58a1b98b39e47641e36e8549ffd56f47393e27de2685281f89f"
+        },
+        {
+          "name": "moveTo",
+          "declaration": "public boolean moveTo(net.minecraft.world.entity.Entity, double);",
+          "descriptor": "(Lnet/minecraft/world/entity/Entity;D)Z",
+          "access": 1,
+          "line_start": 204,
+          "line_end": 247,
+          "disassembly_slice_sha256": "8e993ba6371e9aa3994e4602a8dc757c503b0f845eddf3aa232299c696021e80"
+        },
+        {
+          "name": "tick",
+          "declaration": "public void tick();",
+          "descriptor": "()V",
+          "access": 1,
+          "line_start": 248,
+          "line_end": 346,
+          "disassembly_slice_sha256": "d66210791a8c8a7b8826573e2d859f2df552cc3e34033df0322885d247bf759d"
+        }
+      ],
+      "fields": [
+        {
+          "name": "pathToPosition",
+          "descriptor": "Lnet/minecraft/core/BlockPos;",
+          "access": 2,
+          "annotations": [
+            {
+              "descriptor": "Ljavax/annotation/Nullable;",
+              "elements": {}
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/navigation/WaterBoundPathNavigation",
+      "superclass": "net/minecraft/world/entity/ai/navigation/PathNavigation",
+      "class_hash": "aa5b9a3d0fffd33dd8df478c89af88e00d9af0f90809520c9632133fc490dd83",
+      "disassembly_hash": "e0d4924492c79688fe08a50522d4c6280ca8187bbe19693176e7880060f414d5",
+      "origin": "HASH_VERIFIED_ORIGINAL_DISASSEMBLY",
+      "evidence_status": "EXACT_CAPTURED_RESOLVED_DEVELOPMENT_BYTECODE",
+      "selected_members": [
+        {
+          "name": "<init>",
+          "declaration": "public net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation(net.minecraft.world.entity.Mob, net.minecraft.world.level.Level);",
+          "descriptor": "(Lnet/minecraft/world/entity/Mob;Lnet/minecraft/world/level/Level;)V",
+          "access": 1,
+          "line_start": 135,
+          "line_end": 153,
+          "disassembly_slice_sha256": "605627838cf4ea0e7d9317c3d6efe7c4895eb2558bc6dd0556fc759bc11d922f"
+        },
+        {
+          "name": "createPathFinder",
+          "declaration": "protected net.minecraft.world.level.pathfinder.PathFinder createPathFinder(int);",
+          "descriptor": "(I)Lnet/minecraft/world/level/pathfinder/PathFinder;",
+          "access": 4,
+          "line_start": 154,
+          "line_end": 198,
+          "disassembly_slice_sha256": "1b9c12de0d94766c77ca1fe6bb0d577d8997dfb49533f04e79a0b114420e85d7"
+        },
+        {
+          "name": "canUpdatePath",
+          "declaration": "protected boolean canUpdatePath();",
+          "descriptor": "()Z",
+          "access": 4,
+          "line_start": 199,
+          "line_end": 225,
+          "disassembly_slice_sha256": "707fe71353298799b2db214a7e82df67a1ccdbef0af53f0d054867ff45e3117b"
+        },
+        {
+          "name": "getTempMobPos",
+          "declaration": "protected net.minecraft.world.phys.Vec3 getTempMobPos();",
+          "descriptor": "()Lnet/minecraft/world/phys/Vec3;",
+          "access": 4,
+          "line_start": 226,
+          "line_end": 250,
+          "disassembly_slice_sha256": "868e7dca7988a4cc6eddfabcd1797bd5c23a094d70b66189bf6c0ea748332691"
+        },
+        {
+          "name": "getGroundY",
+          "declaration": "protected double getGroundY(net.minecraft.world.phys.Vec3);",
+          "descriptor": "(Lnet/minecraft/world/phys/Vec3;)D",
+          "access": 4,
+          "line_start": 251,
+          "line_end": 265,
+          "disassembly_slice_sha256": "01b82dc950c4e1cdd4c95a84248bf8fda677a3609273500564a6ba91b4f4397c"
+        },
+        {
+          "name": "canMoveDirectly",
+          "declaration": "protected boolean canMoveDirectly(net.minecraft.world.phys.Vec3, net.minecraft.world.phys.Vec3);",
+          "descriptor": "(Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/Vec3;)Z",
+          "access": 4,
+          "line_start": 266,
+          "line_end": 285,
+          "disassembly_slice_sha256": "271aad5341acc6501d1320d98bff957115debf9ca887e4f18bd0240ebd3b1726"
+        },
+        {
+          "name": "isStableDestination",
+          "declaration": "public boolean isStableDestination(net.minecraft.core.BlockPos);",
+          "descriptor": "(Lnet/minecraft/core/BlockPos;)Z",
+          "access": 1,
+          "line_start": 286,
+          "line_end": 315,
+          "disassembly_slice_sha256": "ec147c8fdcf40bf505717b1f17338b061fdb1a0ee7364fdcb7c245b7e785c191"
+        },
+        {
+          "name": "setCanFloat",
+          "declaration": "public void setCanFloat(boolean);",
+          "descriptor": "(Z)V",
+          "access": 1,
+          "line_start": 316,
+          "line_end": 327,
+          "disassembly_slice_sha256": "7ed76f82ded7f3969c74e27da63f2c3402779659cff92e3d4e49f9266b9f29d1"
+        }
+      ],
+      "fields": [
+        {
+          "name": "allowBreaching",
+          "descriptor": "Z",
+          "access": 2,
+          "annotations": []
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/animal/Bee",
+      "superclass": "net/minecraft/world/entity/animal/Animal",
+      "class_hash": "11ebc47dbfd1bd4167b5de01855273e3d56112f8f4136b01457d42cb0e7af72a",
+      "disassembly_hash": "8ddb4a8467cb5b28e9a234034cf30ba4d1a6e31152e36b39efa1ec2553eb4144",
+      "origin": "FRESH_GENUINE_JAVAP_SAME_ARTIFACT",
+      "evidence_status": "EXACT_CAPTURED_RESOLVED_DEVELOPMENT_BYTECODE",
+      "selected_members": [
+        {
+          "name": "<init>",
+          "declaration": "public net.minecraft.world.entity.animal.Bee(net.minecraft.world.entity.EntityType<? extends net.minecraft.world.entity.animal.Bee>, net.minecraft.world.level.Level);",
+          "descriptor": "(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V",
+          "access": 1,
+          "line_start": 1333,
+          "line_end": 1405,
+          "disassembly_slice_sha256": "6a9a829307568c61a4a2c407c0ee6f710279f4dafb530d1fba83cb6e4c978ee0"
+        },
+        {
+          "name": "createNavigation",
+          "declaration": "protected net.minecraft.world.entity.ai.navigation.PathNavigation createNavigation(net.minecraft.world.level.Level);",
+          "descriptor": "(Lnet/minecraft/world/level/Level;)Lnet/minecraft/world/entity/ai/navigation/PathNavigation;",
+          "access": 4,
+          "line_start": 3240,
+          "line_end": 3274,
+          "disassembly_slice_sha256": "8d3dac3e08bb7bb59203370b236ce5f5a91079759034c143bb5bdba036a0feb5"
+        }
+      ],
+      "fields": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/animal/Bee$1",
+      "superclass": "net/minecraft/world/entity/ai/navigation/FlyingPathNavigation",
+      "class_hash": "dd4a323f724761030fe5b77c8962228e9b29fc7bd407d03883a7b902c5053a02",
+      "disassembly_hash": "8cf61c4f74e81b81d7c2efc07924105eb7a9eae443a4653c95248d228cd2ca7a",
+      "origin": "FRESH_GENUINE_JAVAP_SAME_ARTIFACT",
+      "evidence_status": "EXACT_CAPTURED_RESOLVED_DEVELOPMENT_BYTECODE",
+      "selected_members": [
+        {
+          "name": "<init>",
+          "declaration": "net.minecraft.world.entity.animal.Bee$1(net.minecraft.world.entity.animal.Bee, net.minecraft.world.entity.Mob, net.minecraft.world.level.Level);",
+          "descriptor": "(Lnet/minecraft/world/entity/animal/Bee;Lnet/minecraft/world/entity/Mob;Lnet/minecraft/world/level/Level;)V",
+          "access": 0,
+          "line_start": 91,
+          "line_end": 112,
+          "disassembly_slice_sha256": "6a500fb8447d19bf300efc792b0e38ec41d395b4d5d24323855130c38ac703ae"
+        },
+        {
+          "name": "isStableDestination",
+          "declaration": "public boolean isStableDestination(net.minecraft.core.BlockPos);",
+          "descriptor": "(Lnet/minecraft/core/BlockPos;)Z",
+          "access": 1,
+          "line_start": 113,
+          "line_end": 139,
+          "disassembly_slice_sha256": "1f961638e22ec89d56d020da6969c326abdfdf0e47e5fae565593bc4ad53dfed"
+        },
+        {
+          "name": "tick",
+          "declaration": "public void tick();",
+          "descriptor": "()V",
+          "access": 1,
+          "line_start": 140,
+          "line_end": 161,
+          "disassembly_slice_sha256": "c2f036c860c9a6c651137913da661894d575e2bbe88609d499e099e89c227068"
+        }
+      ],
+      "fields": [
+        {
+          "name": "this$0",
+          "descriptor": "Lnet/minecraft/world/entity/animal/Bee;",
+          "access": 4112,
+          "annotations": []
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/animal/Turtle",
+      "superclass": "net/minecraft/world/entity/animal/Animal",
+      "class_hash": "c5a78f24dc4d651426b80584837a1026daedc5383e492182029f4b445a6be5d2",
+      "disassembly_hash": "50175b465bfe2a9750639d503b1543c09f856c598309707affc6a2adece41ea1",
+      "origin": "FRESH_GENUINE_JAVAP_SAME_ARTIFACT",
+      "evidence_status": "EXACT_CAPTURED_RESOLVED_DEVELOPMENT_BYTECODE",
+      "selected_members": [
+        {
+          "name": "<init>",
+          "declaration": "public net.minecraft.world.entity.animal.Turtle(net.minecraft.world.entity.EntityType<? extends net.minecraft.world.entity.animal.Turtle>, net.minecraft.world.level.Level);",
+          "descriptor": "(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V",
+          "access": 1,
+          "line_start": 762,
+          "line_end": 815,
+          "disassembly_slice_sha256": "ab4516e54b8f917c8b745cda10b436993286ec416bc512127a744179ab2a1417"
+        },
+        {
+          "name": "createNavigation",
+          "declaration": "protected net.minecraft.world.entity.ai.navigation.PathNavigation createNavigation(net.minecraft.world.level.Level);",
+          "descriptor": "(Lnet/minecraft/world/level/Level;)Lnet/minecraft/world/entity/ai/navigation/PathNavigation;",
+          "access": 4,
+          "line_start": 1739,
+          "line_end": 1756,
+          "disassembly_slice_sha256": "034751cb2b5cb99b14382246c46177aca79b0a74e1da214e91c87ce857f5125d"
+        }
+      ],
+      "fields": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/animal/Turtle$TurtlePathNavigation",
+      "superclass": "net/minecraft/world/entity/ai/navigation/AmphibiousPathNavigation",
+      "class_hash": "f6d0ac639d83102621164e9bded2d89afff16e7ac182eabdf13f86677d3e3d70",
+      "disassembly_hash": "820bb9f585e36c63aa684e69928a9e6403af2508958a93cea5ce8ea29c872588",
+      "origin": "FRESH_GENUINE_JAVAP_SAME_ARTIFACT",
+      "evidence_status": "EXACT_CAPTURED_RESOLVED_DEVELOPMENT_BYTECODE",
+      "selected_members": [
+        {
+          "name": "<init>",
+          "declaration": "net.minecraft.world.entity.animal.Turtle$TurtlePathNavigation(net.minecraft.world.entity.animal.Turtle, net.minecraft.world.level.Level);",
+          "descriptor": "(Lnet/minecraft/world/entity/animal/Turtle;Lnet/minecraft/world/level/Level;)V",
+          "access": 0,
+          "line_start": 83,
+          "line_end": 101,
+          "disassembly_slice_sha256": "1a44f92efb41dcd9c21f795dbb166b7ed11841e86072041bf3c89903b4a33af9"
+        },
+        {
+          "name": "isStableDestination",
+          "declaration": "public boolean isStableDestination(net.minecraft.core.BlockPos);",
+          "descriptor": "(Lnet/minecraft/core/BlockPos;)Z",
+          "access": 1,
+          "line_start": 102,
+          "line_end": 152,
+          "disassembly_slice_sha256": "1f4f5dd70d5e96acaf1e7ff6ececdf5e905450e7f40135baed64a2be93d4e976"
+        }
+      ],
+      "fields": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/animal/frog/Frog",
+      "superclass": "net/minecraft/world/entity/animal/Animal",
+      "class_hash": "581f9791105547222bcf0637f7cefdab726b3a94e21a2c2b2857ee17c2739632",
+      "disassembly_hash": "a661f285886474520bc0549a618385a8297fb193c67e45df24e5ca0a21e168ef",
+      "origin": "FRESH_GENUINE_JAVAP_SAME_ARTIFACT",
+      "evidence_status": "EXACT_CAPTURED_RESOLVED_DEVELOPMENT_BYTECODE",
+      "selected_members": [
+        {
+          "name": "<init>",
+          "declaration": "public net.minecraft.world.entity.animal.frog.Frog(net.minecraft.world.entity.EntityType<? extends net.minecraft.world.entity.animal.Animal>, net.minecraft.world.level.Level);",
+          "descriptor": "(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V",
+          "access": 1,
+          "line_start": 902,
+          "line_end": 982,
+          "disassembly_slice_sha256": "30eebf0ea8b023f4c3edbe7c0744c543958a13dac75255d0fc9039615902a373"
+        },
+        {
+          "name": "createNavigation",
+          "declaration": "protected net.minecraft.world.entity.ai.navigation.PathNavigation createNavigation(net.minecraft.world.level.Level);",
+          "descriptor": "(Lnet/minecraft/world/level/Level;)Lnet/minecraft/world/entity/ai/navigation/PathNavigation;",
+          "access": 4,
+          "line_start": 1888,
+          "line_end": 1905,
+          "disassembly_slice_sha256": "f6238a1d9d75def993408080e2f8894ec4df61e2a1c184bf1b00b57c88ad50cf"
+        }
+      ],
+      "fields": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/animal/frog/Frog$FrogNodeEvaluator",
+      "superclass": "net/minecraft/world/level/pathfinder/AmphibiousNodeEvaluator",
+      "class_hash": "2cb416a392603c8b537d206f543c35ce647fa0f604ff0e2853c90b55644176a9",
+      "disassembly_hash": "e86534b024757324c3ef0950d9bbe29d551d31a7e503aa1bfa918d51db92ca9b",
+      "origin": "FRESH_GENUINE_JAVAP_SAME_ARTIFACT",
+      "evidence_status": "EXACT_CAPTURED_RESOLVED_DEVELOPMENT_BYTECODE",
+      "selected_members": [
+        {
+          "name": "<init>",
+          "declaration": "public net.minecraft.world.entity.animal.frog.Frog$FrogNodeEvaluator(boolean);",
+          "descriptor": "(Z)V",
+          "access": 1,
+          "line_start": 136,
+          "line_end": 158,
+          "disassembly_slice_sha256": "0955c8f684cd0b82caaa187bce879ad54cfabac9e25d149e4ae4492369599cde"
+        },
+        {
+          "name": "getStart",
+          "declaration": "public net.minecraft.world.level.pathfinder.Node getStart();",
+          "descriptor": "()Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 1,
+          "line_start": 159,
+          "line_end": 201,
+          "disassembly_slice_sha256": "dbae70a487050e78093e64d8861802d6d795c6febc4ff9758ff5b799e6275fd8"
+        },
+        {
+          "name": "getBlockPathType",
+          "declaration": "public net.minecraft.world.level.pathfinder.BlockPathTypes getBlockPathType(net.minecraft.world.level.BlockGetter, int, int, int);",
+          "descriptor": "(Lnet/minecraft/world/level/BlockGetter;III)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 1,
+          "line_start": 202,
+          "line_end": 249,
+          "disassembly_slice_sha256": "0365aa8d1053e005c51cac764ec70dfab26493a7947321a31d9a6148ff4a75d9"
+        }
+      ],
+      "fields": [
+        {
+          "name": "belowPos",
+          "descriptor": "Lnet/minecraft/core/BlockPos$MutableBlockPos;",
+          "access": 18,
+          "annotations": []
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/animal/frog/Frog$FrogPathNavigation",
+      "superclass": "net/minecraft/world/entity/ai/navigation/AmphibiousPathNavigation",
+      "class_hash": "4f6a1700c24f0c7d97fbacc292d0b919e025bd4ad47a63b99684012b9ffb7712",
+      "disassembly_hash": "1ec274a93b648675461b5e654079894ea2d78f9dc964a9380f950ca246722fc3",
+      "origin": "FRESH_GENUINE_JAVAP_SAME_ARTIFACT",
+      "evidence_status": "EXACT_CAPTURED_RESOLVED_DEVELOPMENT_BYTECODE",
+      "selected_members": [
+        {
+          "name": "<init>",
+          "declaration": "net.minecraft.world.entity.animal.frog.Frog$FrogPathNavigation(net.minecraft.world.entity.animal.frog.Frog, net.minecraft.world.level.Level);",
+          "descriptor": "(Lnet/minecraft/world/entity/animal/frog/Frog;Lnet/minecraft/world/level/Level;)V",
+          "access": 0,
+          "line_start": 75,
+          "line_end": 93,
+          "disassembly_slice_sha256": "239e5607956b2f26948ce91e3d231f13f5c074098705da156821a805b573645c"
+        },
+        {
+          "name": "canCutCorner",
+          "declaration": "public boolean canCutCorner(net.minecraft.world.level.pathfinder.BlockPathTypes);",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/BlockPathTypes;)Z",
+          "access": 1,
+          "line_start": 94,
+          "line_end": 121,
+          "disassembly_slice_sha256": "02b48030efdf27b4d071798b5b3884370d0e61f087875da882764d3982714edd"
+        },
+        {
+          "name": "createPathFinder",
+          "declaration": "protected net.minecraft.world.level.pathfinder.PathFinder createPathFinder(int);",
+          "descriptor": "(I)Lnet/minecraft/world/level/pathfinder/PathFinder;",
+          "access": 4,
+          "line_start": 122,
+          "line_end": 151,
+          "disassembly_slice_sha256": "a4d3923a56e5e28350ab18932def490dedcece8eb6d666f588652a9663743795"
+        }
+      ],
+      "fields": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/monster/Strider",
+      "superclass": "net/minecraft/world/entity/animal/Animal",
+      "class_hash": "9afccd1050861b958361e1c9715ed34031b19ce9981df53fd16f4bfdee88357d",
+      "disassembly_hash": "85caed51a08abe6ad07cee489ea6b48b01543014c0c4ef5bb8ec58a28283497b",
+      "origin": "FRESH_GENUINE_JAVAP_SAME_ARTIFACT",
+      "evidence_status": "EXACT_CAPTURED_RESOLVED_DEVELOPMENT_BYTECODE",
+      "selected_members": [
+        {
+          "name": "<init>",
+          "declaration": "public net.minecraft.world.entity.monster.Strider(net.minecraft.world.entity.EntityType<? extends net.minecraft.world.entity.monster.Strider>, net.minecraft.world.level.Level);",
+          "descriptor": "(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V",
+          "access": 1,
+          "line_start": 1119,
+          "line_end": 1175,
+          "disassembly_slice_sha256": "9e8f0635156fbffcd3a7b28cea37105854d5d91611b8dbbf9aa55708f6456baa"
+        },
+        {
+          "name": "shouldPassengersInheritMalus",
+          "declaration": "protected boolean shouldPassengersInheritMalus();",
+          "descriptor": "()Z",
+          "access": 4,
+          "line_start": 2419,
+          "line_end": 2431,
+          "disassembly_slice_sha256": "4de2e2e499d6962ac074d52ef5ee691e0a12825202d730aca8cded6fc38a9ebd"
+        },
+        {
+          "name": "createNavigation",
+          "declaration": "protected net.minecraft.world.entity.ai.navigation.PathNavigation createNavigation(net.minecraft.world.level.Level);",
+          "descriptor": "(Lnet/minecraft/world/level/Level;)Lnet/minecraft/world/entity/ai/navigation/PathNavigation;",
+          "access": 4,
+          "line_start": 2618,
+          "line_end": 2635,
+          "disassembly_slice_sha256": "1670770fb0412007b0c64d24b762ff0ce412e01caad351740858a6c352556cac"
+        }
+      ],
+      "fields": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/monster/Strider$StriderPathNavigation",
+      "superclass": "net/minecraft/world/entity/ai/navigation/GroundPathNavigation",
+      "class_hash": "1b2794d036031287dad66eb3c2f25e7d93440c72148b7143011f59a6a73abf14",
+      "disassembly_hash": "e2d2cb5e6a674f1ff953cb88b922b5babf70647f0fc0a74b325f62d3bd6f3689",
+      "origin": "FRESH_GENUINE_JAVAP_SAME_ARTIFACT",
+      "evidence_status": "EXACT_CAPTURED_RESOLVED_DEVELOPMENT_BYTECODE",
+      "selected_members": [
+        {
+          "name": "<init>",
+          "declaration": "net.minecraft.world.entity.monster.Strider$StriderPathNavigation(net.minecraft.world.entity.monster.Strider, net.minecraft.world.level.Level);",
+          "descriptor": "(Lnet/minecraft/world/entity/monster/Strider;Lnet/minecraft/world/level/Level;)V",
+          "access": 0,
+          "line_start": 107,
+          "line_end": 125,
+          "disassembly_slice_sha256": "5c9d7bac2af76379377356767f5c60f847124015e8e522111f4001c8015dd3ee"
+        },
+        {
+          "name": "createPathFinder",
+          "declaration": "protected net.minecraft.world.level.pathfinder.PathFinder createPathFinder(int);",
+          "descriptor": "(I)Lnet/minecraft/world/level/pathfinder/PathFinder;",
+          "access": 4,
+          "line_start": 126,
+          "line_end": 155,
+          "disassembly_slice_sha256": "e19132e4764ec77cabe0c1cc619057275300977de46be474edc0af4b1fc82e60"
+        },
+        {
+          "name": "hasValidPathType",
+          "declaration": "protected boolean hasValidPathType(net.minecraft.world.level.pathfinder.BlockPathTypes);",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/BlockPathTypes;)Z",
+          "access": 4,
+          "line_start": 156,
+          "line_end": 190,
+          "disassembly_slice_sha256": "819f2aea6911248e6d627937e49136e88e4f194c7beb856d08c59d66aed066f5"
+        },
+        {
+          "name": "isStableDestination",
+          "declaration": "public boolean isStableDestination(net.minecraft.core.BlockPos);",
+          "descriptor": "(Lnet/minecraft/core/BlockPos;)Z",
+          "access": 1,
+          "line_start": 191,
+          "line_end": 222,
+          "disassembly_slice_sha256": "e05468ce4e5684ffc35759cd5eb9369293d520099ce5539386a1f074c9e0d9e7"
+        }
+      ],
+      "fields": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/monster/warden/Warden",
+      "superclass": "net/minecraft/world/entity/monster/Monster",
+      "class_hash": "7a3d931bb0f9e57ed5678c2e775687300b34b9a626325eeb5962cc6b2da28838",
+      "disassembly_hash": "ac7c6904e309042859207636ffd939349d31b5c493c2d0263d7cbba927968d3b",
+      "origin": "FRESH_GENUINE_JAVAP_SAME_ARTIFACT",
+      "evidence_status": "EXACT_CAPTURED_RESOLVED_DEVELOPMENT_BYTECODE",
+      "selected_members": [
+        {
+          "name": "<init>",
+          "declaration": "public net.minecraft.world.entity.monster.warden.Warden(net.minecraft.world.entity.EntityType<? extends net.minecraft.world.entity.monster.Monster>, net.minecraft.world.level.Level);",
+          "descriptor": "(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V",
+          "access": 1,
+          "line_start": 1334,
+          "line_end": 1463,
+          "disassembly_slice_sha256": "25e6dd3fc748b2a4dbaa53445857343077e10928a7ffb45d48ee6b2f4d8503f4"
+        },
+        {
+          "name": "createNavigation",
+          "declaration": "protected net.minecraft.world.entity.ai.navigation.PathNavigation createNavigation(net.minecraft.world.level.Level);",
+          "descriptor": "(Lnet/minecraft/world/level/Level;)Lnet/minecraft/world/entity/ai/navigation/PathNavigation;",
+          "access": 4,
+          "line_start": 3362,
+          "line_end": 3380,
+          "disassembly_slice_sha256": "2df0cd24dce0ccde47335c20e74a955edf40ac2516316745e02d30d78ecaa612"
+        }
+      ],
+      "fields": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/monster/warden/Warden$1",
+      "superclass": "net/minecraft/world/entity/ai/navigation/GroundPathNavigation",
+      "class_hash": "bd4dc60fded4e01bb185977309db01306e60a72114c616f4d433bbb8ac00243c",
+      "disassembly_hash": "c84073d00b269940d6733c9462314154870d3496629594992e2d33ed2e91d9bc",
+      "origin": "FRESH_GENUINE_JAVAP_SAME_ARTIFACT",
+      "evidence_status": "EXACT_CAPTURED_RESOLVED_DEVELOPMENT_BYTECODE",
+      "selected_members": [
+        {
+          "name": "<init>",
+          "declaration": "net.minecraft.world.entity.monster.warden.Warden$1(net.minecraft.world.entity.monster.warden.Warden, net.minecraft.world.entity.Mob, net.minecraft.world.level.Level);",
+          "descriptor": "(Lnet/minecraft/world/entity/monster/warden/Warden;Lnet/minecraft/world/entity/Mob;Lnet/minecraft/world/level/Level;)V",
+          "access": 0,
+          "line_start": 75,
+          "line_end": 96,
+          "disassembly_slice_sha256": "725a96d33782a22804e26bc8620916eab577f5e6da7a351c5ad251735d9c3e1f"
+        },
+        {
+          "name": "createPathFinder",
+          "declaration": "protected net.minecraft.world.level.pathfinder.PathFinder createPathFinder(int);",
+          "descriptor": "(I)Lnet/minecraft/world/level/pathfinder/PathFinder;",
+          "access": 4,
+          "line_start": 97,
+          "line_end": 126,
+          "disassembly_slice_sha256": "e973540a0c9b60e5674ebe05056ac275bb460af3fa630aca4c4a6e57314c1f63"
+        }
+      ],
+      "fields": [
+        {
+          "name": "this$0",
+          "descriptor": "Lnet/minecraft/world/entity/monster/warden/Warden;",
+          "access": 4112,
+          "annotations": []
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/level/pathfinder/AmphibiousNodeEvaluator",
+      "superclass": "net/minecraft/world/level/pathfinder/WalkNodeEvaluator",
+      "class_hash": "22e42766e85405ead3e4857f7ffbbff03b03c2bcc507741ea79bc18565d52e03",
+      "disassembly_hash": "c081f3273e31a2ee499416c016b98a727a1ffbdd7f4fb94ddddb66ef259c25b9",
+      "origin": "HASH_VERIFIED_ORIGINAL_DISASSEMBLY",
+      "evidence_status": "EXACT_CAPTURED_RESOLVED_DEVELOPMENT_BYTECODE",
+      "selected_members": [
+        {
+          "name": "<init>",
+          "declaration": "public net.minecraft.world.level.pathfinder.AmphibiousNodeEvaluator(boolean);",
+          "descriptor": "(Z)V",
+          "access": 1,
+          "line_start": 282,
+          "line_end": 301,
+          "disassembly_slice_sha256": "1ec78aae45c1f081684889c53c9a016f2fb6d581fb3b6f3b4e7a219000005049"
+        },
+        {
+          "name": "prepare",
+          "declaration": "public void prepare(net.minecraft.world.level.PathNavigationRegion, net.minecraft.world.entity.Mob);",
+          "descriptor": "(Lnet/minecraft/world/level/PathNavigationRegion;Lnet/minecraft/world/entity/Mob;)V",
+          "access": 1,
+          "line_start": 302,
+          "line_end": 347,
+          "disassembly_slice_sha256": "78b8ee425c36d1363465c734f893c61589abc03784bad5f6f606fbdbc488c5fb"
+        },
+        {
+          "name": "done",
+          "declaration": "public void done();",
+          "descriptor": "()V",
+          "access": 1,
+          "line_start": 348,
+          "line_end": 376,
+          "disassembly_slice_sha256": "6641a930cab4ffd64a82b304dc8dd5341c79562a089ad6e570af686c140a5474"
+        },
+        {
+          "name": "getStart",
+          "declaration": "public net.minecraft.world.level.pathfinder.Node getStart();",
+          "descriptor": "()Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 1,
+          "line_start": 377,
+          "line_end": 421,
+          "disassembly_slice_sha256": "b3a14c7d732b105eae3084139eef0a4aab7ee7e51fab17ff55d2018d45b6bec4"
+        },
+        {
+          "name": "getGoal",
+          "declaration": "public net.minecraft.world.level.pathfinder.Target getGoal(double, double, double);",
+          "descriptor": "(DDD)Lnet/minecraft/world/level/pathfinder/Target;",
+          "access": 1,
+          "line_start": 422,
+          "line_end": 448,
+          "disassembly_slice_sha256": "713e92b8678aa0e4a1d8727ae050c0d79f8d19d997335d99fcfca746748228c9"
+        },
+        {
+          "name": "getNeighbors",
+          "declaration": "public int getNeighbors(net.minecraft.world.level.pathfinder.Node[], net.minecraft.world.level.pathfinder.Node);",
+          "descriptor": "([Lnet/minecraft/world/level/pathfinder/Node;Lnet/minecraft/world/level/pathfinder/Node;)I",
+          "access": 1,
+          "line_start": 449,
+          "line_end": 659,
+          "disassembly_slice_sha256": "33dc4302d25384da5475f82a6e8abdf90baae3b5218ca797807efe2ad2ab1efb"
+        },
+        {
+          "name": "isVerticalNeighborValid",
+          "declaration": "private boolean isVerticalNeighborValid(net.minecraft.world.level.pathfinder.Node, net.minecraft.world.level.pathfinder.Node);",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/Node;Lnet/minecraft/world/level/pathfinder/Node;)Z",
+          "access": 2,
+          "line_start": 660,
+          "line_end": 694,
+          "disassembly_slice_sha256": "375b18e7a07114bf0b04fc61ec7f9e0a0e1e015fcc1818d35abda8abf0ad8383"
+        },
+        {
+          "name": "isAmphibious",
+          "declaration": "protected boolean isAmphibious();",
+          "descriptor": "()Z",
+          "access": 4,
+          "line_start": 695,
+          "line_end": 707,
+          "disassembly_slice_sha256": "0b8507b78ba821f9b16ccfc0094ce71584c319b0d59bdcddc69092ef567fe176"
+        },
+        {
+          "name": "getBlockPathType",
+          "declaration": "public net.minecraft.world.level.pathfinder.BlockPathTypes getBlockPathType(net.minecraft.world.level.BlockGetter, int, int, int);",
+          "descriptor": "(Lnet/minecraft/world/level/BlockGetter;III)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 1,
+          "line_start": 708,
+          "line_end": 795,
+          "disassembly_slice_sha256": "298336d0051ae597730632848c7166cec828f92aeb6d7e65c43eb45bd0814523"
+        }
+      ],
+      "fields": [
+        {
+          "name": "prefersShallowSwimming",
+          "descriptor": "Z",
+          "access": 18,
+          "annotations": []
+        },
+        {
+          "name": "oldWalkableCost",
+          "descriptor": "F",
+          "access": 2,
+          "annotations": []
+        },
+        {
+          "name": "oldWaterBorderCost",
+          "descriptor": "F",
+          "access": 2,
+          "annotations": []
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/level/pathfinder/BinaryHeap",
+      "superclass": "java/lang/Object",
+      "class_hash": "05af3f22ca50b795799311c528044598e9e05974b56050929b4c5bcd8d808ff0",
+      "disassembly_hash": "8648cc10e9147a1e58456630d4fb07e092f37445fce36cbd0f703f8d7218c8c3",
+      "origin": "HASH_VERIFIED_ORIGINAL_DISASSEMBLY",
+      "evidence_status": "EXACT_CAPTURED_RESOLVED_DEVELOPMENT_BYTECODE",
+      "selected_members": [
+        {
+          "name": "<init>",
+          "declaration": "public net.minecraft.world.level.pathfinder.BinaryHeap();",
+          "descriptor": "()V",
+          "access": 1,
+          "line_start": 108,
+          "line_end": 126,
+          "disassembly_slice_sha256": "4b32cac4e60d5a0048a4aa099d32e3269a1efd30d95c37418e0ca0b9fd6145ab"
+        },
+        {
+          "name": "insert",
+          "declaration": "public net.minecraft.world.level.pathfinder.Node insert(net.minecraft.world.level.pathfinder.Node);",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/Node;)Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 1,
+          "line_start": 127,
+          "line_end": 203,
+          "disassembly_slice_sha256": "5301f1be31d1fd45da389cdc7c5834e9434c8ffcfc67f9a1c83abf2fbb54fb01"
+        },
+        {
+          "name": "clear",
+          "declaration": "public void clear();",
+          "descriptor": "()V",
+          "access": 1,
+          "line_start": 204,
+          "line_end": 219,
+          "disassembly_slice_sha256": "bbe6ff6ea38c4d9988496665556a9be4f8d96d824cbc33d2650ae7f0076c83a4"
+        },
+        {
+          "name": "peek",
+          "declaration": "public net.minecraft.world.level.pathfinder.Node peek();",
+          "descriptor": "()Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 1,
+          "line_start": 220,
+          "line_end": 235,
+          "disassembly_slice_sha256": "350f25a69e538714b7039759f90be8ab4a3b32f0c46423987ed302e54c3e0196"
+        },
+        {
+          "name": "pop",
+          "declaration": "public net.minecraft.world.level.pathfinder.Node pop();",
+          "descriptor": "()Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 1,
+          "line_start": 236,
+          "line_end": 294,
+          "disassembly_slice_sha256": "65c8024476e58515e3a19836f9b3cd68b4e6d4817a279457eff95c47c2302bfb"
+        },
+        {
+          "name": "remove",
+          "declaration": "public void remove(net.minecraft.world.level.pathfinder.Node);",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/Node;)V",
+          "access": 1,
+          "line_start": 295,
+          "line_end": 369,
+          "disassembly_slice_sha256": "657ec81c333b2097e52f42081293941c4292b89e36afb582069880e482a6e4c1"
+        },
+        {
+          "name": "changeCost",
+          "declaration": "public void changeCost(net.minecraft.world.level.pathfinder.Node, float);",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/Node;F)V",
+          "access": 1,
+          "line_start": 370,
+          "line_end": 413,
+          "disassembly_slice_sha256": "7590538934cef5a5e22a94776aec75e5b67b9f92c069581d7daa1d913ee5f6f4"
+        },
+        {
+          "name": "size",
+          "declaration": "public int size();",
+          "descriptor": "()I",
+          "access": 1,
+          "line_start": 414,
+          "line_end": 427,
+          "disassembly_slice_sha256": "55496d79a135d5b5edd9d2b5b8ab607cee77eb2e8730169ff4b4ed7fc49a40d0"
+        },
+        {
+          "name": "upHeap",
+          "declaration": "private void upHeap(int);",
+          "descriptor": "(I)V",
+          "access": 2,
+          "line_start": 428,
+          "line_end": 507,
+          "disassembly_slice_sha256": "44fced30bcc2b60497f415cc3963cc13bae2b935df460858fd76f6b057a2ebc8"
+        },
+        {
+          "name": "downHeap",
+          "declaration": "private void downHeap(int);",
+          "descriptor": "(I)V",
+          "access": 2,
+          "line_start": 508,
+          "line_end": 668,
+          "disassembly_slice_sha256": "9ce43c71ac4502510e1e6191f951f5efea8ceee4ccec8f2d5349949aca714435"
+        },
+        {
+          "name": "isEmpty",
+          "declaration": "public boolean isEmpty();",
+          "descriptor": "()Z",
+          "access": 1,
+          "line_start": 669,
+          "line_end": 691,
+          "disassembly_slice_sha256": "08fc8fda6a9c75fc0a3606d90671951411962fd957f45556f54bb7ecbb74917e"
+        },
+        {
+          "name": "getHeap",
+          "declaration": "public net.minecraft.world.level.pathfinder.Node[] getHeap();",
+          "descriptor": "()[Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 1,
+          "line_start": 692,
+          "line_end": 718,
+          "disassembly_slice_sha256": "706cbe3b2bf140d4e9d2c296280753103ffc75779672094e12eda247b14635a3"
+        }
+      ],
+      "fields": [
+        {
+          "name": "heap",
+          "descriptor": "[Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 2,
+          "annotations": []
+        },
+        {
+          "name": "size",
+          "descriptor": "I",
+          "access": 2,
+          "annotations": []
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/level/pathfinder/BlockPathTypes",
+      "superclass": "java/lang/Enum",
+      "class_hash": "14a3ece198a30f25b6e652050190f837fa0bd4806ff377b0d511f36e280a114a",
+      "disassembly_hash": "0a044db30a632988ec95c7e842b245b1d7115b3d96984221908d861151b34e2f",
+      "origin": "HASH_VERIFIED_ORIGINAL_DISASSEMBLY",
+      "evidence_status": "EXACT_CAPTURED_RESOLVED_DEVELOPMENT_BYTECODE",
+      "selected_members": [
+        {
+          "name": "values",
+          "declaration": "public static net.minecraft.world.level.pathfinder.BlockPathTypes[] values();",
+          "descriptor": "()[Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 9,
+          "line_start": 294,
+          "line_end": 305,
+          "disassembly_slice_sha256": "1582118f589a7693f25c694c19dd926dcc40b15a2d42a8f5dd2ef6999084ba3b"
+        },
+        {
+          "name": "valueOf",
+          "declaration": "public static net.minecraft.world.level.pathfinder.BlockPathTypes valueOf(java.lang.String);",
+          "descriptor": "(Ljava/lang/String;)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 9,
+          "line_start": 306,
+          "line_end": 321,
+          "disassembly_slice_sha256": "e58c88f0659b5ac6dfccde402a5babc75cd2a222b255ff9e00454666e71ce19e"
+        },
+        {
+          "name": "<init>",
+          "declaration": "private net.minecraft.world.level.pathfinder.BlockPathTypes(float);",
+          "descriptor": "(Ljava/lang/String;IF)V",
+          "access": 2,
+          "line_start": 322,
+          "line_end": 344,
+          "disassembly_slice_sha256": "7913eae76d1b6f2c6e9f196e4a248965187ad6bc52863bdbc593258a05d555b5"
+        },
+        {
+          "name": "getMalus",
+          "declaration": "public float getMalus();",
+          "descriptor": "()F",
+          "access": 1,
+          "line_start": 345,
+          "line_end": 358,
+          "disassembly_slice_sha256": "b591012e23999810a1465aa9c8e936931eba3abb9783f67cd08d19ed800af0c0"
+        },
+        {
+          "name": "getDanger",
+          "declaration": "public net.minecraft.world.level.pathfinder.BlockPathTypes getDanger();",
+          "descriptor": "()Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 1,
+          "line_start": 359,
+          "line_end": 410,
+          "disassembly_slice_sha256": "f286a27dcb431324e14f7c30a8169ba3166b17cc8fb143c168842fcc3aea141f"
+        },
+        {
+          "name": "create",
+          "declaration": "public static net.minecraft.world.level.pathfinder.BlockPathTypes create(java.lang.String, float);",
+          "descriptor": "(Ljava/lang/String;F)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 9,
+          "line_start": 411,
+          "line_end": 427,
+          "disassembly_slice_sha256": "0cdf496f139b103cc00c47a77a20db37ce953bf3117df5aad9079a64d1571040"
+        },
+        {
+          "name": "$values",
+          "declaration": "private static net.minecraft.world.level.pathfinder.BlockPathTypes[] $values();",
+          "descriptor": "()[Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 4106,
+          "line_start": 428,
+          "line_end": 538,
+          "disassembly_slice_sha256": "d18d0fc1995884e2afec4333c5f18c973121e815829ecc0f2717327639e5d71e"
+        },
+        {
+          "name": "<clinit>",
+          "declaration": "static {};",
+          "descriptor": "()V",
+          "access": 8,
+          "line_start": 539,
+          "line_end": 748,
+          "disassembly_slice_sha256": "58573f5656f4e3228057c2e333fd5a0f926c3e5d7e3e9f905c99f03bace7ba83"
+        }
+      ],
+      "fields": [
+        {
+          "name": "BLOCKED",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 16409,
+          "annotations": []
+        },
+        {
+          "name": "OPEN",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 16409,
+          "annotations": []
+        },
+        {
+          "name": "WALKABLE",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 16409,
+          "annotations": []
+        },
+        {
+          "name": "WALKABLE_DOOR",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 16409,
+          "annotations": []
+        },
+        {
+          "name": "TRAPDOOR",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 16409,
+          "annotations": []
+        },
+        {
+          "name": "POWDER_SNOW",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 16409,
+          "annotations": []
+        },
+        {
+          "name": "DANGER_POWDER_SNOW",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 16409,
+          "annotations": []
+        },
+        {
+          "name": "FENCE",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 16409,
+          "annotations": []
+        },
+        {
+          "name": "LAVA",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 16409,
+          "annotations": []
+        },
+        {
+          "name": "WATER",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 16409,
+          "annotations": []
+        },
+        {
+          "name": "WATER_BORDER",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 16409,
+          "annotations": []
+        },
+        {
+          "name": "RAIL",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 16409,
+          "annotations": []
+        },
+        {
+          "name": "UNPASSABLE_RAIL",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 16409,
+          "annotations": []
+        },
+        {
+          "name": "DANGER_FIRE",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 16409,
+          "annotations": []
+        },
+        {
+          "name": "DAMAGE_FIRE",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 16409,
+          "annotations": []
+        },
+        {
+          "name": "DANGER_OTHER",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 16409,
+          "annotations": []
+        },
+        {
+          "name": "DAMAGE_OTHER",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 16409,
+          "annotations": []
+        },
+        {
+          "name": "DOOR_OPEN",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 16409,
+          "annotations": []
+        },
+        {
+          "name": "DOOR_WOOD_CLOSED",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 16409,
+          "annotations": []
+        },
+        {
+          "name": "DOOR_IRON_CLOSED",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 16409,
+          "annotations": []
+        },
+        {
+          "name": "BREACH",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 16409,
+          "annotations": []
+        },
+        {
+          "name": "LEAVES",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 16409,
+          "annotations": []
+        },
+        {
+          "name": "STICKY_HONEY",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 16409,
+          "annotations": []
+        },
+        {
+          "name": "COCOA",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 16409,
+          "annotations": []
+        },
+        {
+          "name": "DAMAGE_CAUTIOUS",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 16409,
+          "annotations": []
+        },
+        {
+          "name": "malus",
+          "descriptor": "F",
+          "access": 18,
+          "annotations": []
+        },
+        {
+          "name": "$VALUES",
+          "descriptor": "[Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 4122,
+          "annotations": []
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/level/pathfinder/FlyNodeEvaluator",
+      "superclass": "net/minecraft/world/level/pathfinder/WalkNodeEvaluator",
+      "class_hash": "81d110874d7fcd28fa574909a03c4745b11b6c40afe6325430e5ab2975dce05b",
+      "disassembly_hash": "3174f81638b03d1af1ef1d681636164a56d10d4030740d6fa1c48c77dcbaae1a",
+      "origin": "HASH_VERIFIED_ORIGINAL_DISASSEMBLY",
+      "evidence_status": "EXACT_CAPTURED_RESOLVED_DEVELOPMENT_BYTECODE",
+      "selected_members": [
+        {
+          "name": "<init>",
+          "declaration": "public net.minecraft.world.level.pathfinder.FlyNodeEvaluator();",
+          "descriptor": "()V",
+          "access": 1,
+          "line_start": 464,
+          "line_end": 483,
+          "disassembly_slice_sha256": "fedf3bd860cb9aa4240f13cc7f4b07e117b5721d75b5fedcbde1cb506353614d"
+        },
+        {
+          "name": "prepare",
+          "declaration": "public void prepare(net.minecraft.world.level.PathNavigationRegion, net.minecraft.world.entity.Mob);",
+          "descriptor": "(Lnet/minecraft/world/level/PathNavigationRegion;Lnet/minecraft/world/entity/Mob;)V",
+          "access": 1,
+          "line_start": 484,
+          "line_end": 509,
+          "disassembly_slice_sha256": "a15e6682dd61b822cb5659578362ff1d577dd6f346a30e81c34f4b37331005c7"
+        },
+        {
+          "name": "done",
+          "declaration": "public void done();",
+          "descriptor": "()V",
+          "access": 1,
+          "line_start": 510,
+          "line_end": 532,
+          "disassembly_slice_sha256": "007f27ea596449906dbcfa9789c54b79f955249658f992753c2118d5811b4e8a"
+        },
+        {
+          "name": "getStart",
+          "declaration": "public net.minecraft.world.level.pathfinder.Node getStart();",
+          "descriptor": "()Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 1,
+          "line_start": 533,
+          "line_end": 681,
+          "disassembly_slice_sha256": "d62a4eb28bc304f1e51e1489543744cc3ed4aaf1c77e0e61d9059835e218fd8e"
+        },
+        {
+          "name": "canStartAt",
+          "declaration": "protected boolean canStartAt(net.minecraft.core.BlockPos);",
+          "descriptor": "(Lnet/minecraft/core/BlockPos;)Z",
+          "access": 4,
+          "line_start": 682,
+          "line_end": 717,
+          "disassembly_slice_sha256": "2fa8397fc932377b23ebd4c063c07190c938122d81ba135e8c68116b82d8d70c"
+        },
+        {
+          "name": "getGoal",
+          "declaration": "public net.minecraft.world.level.pathfinder.Target getGoal(double, double, double);",
+          "descriptor": "(DDD)Lnet/minecraft/world/level/pathfinder/Target;",
+          "access": 1,
+          "line_start": 718,
+          "line_end": 742,
+          "disassembly_slice_sha256": "711c27dbf87744681be8e3f8d8eb1228e1c595968e8b5893d58c588388bafaf7"
+        },
+        {
+          "name": "getNeighbors",
+          "declaration": "public int getNeighbors(net.minecraft.world.level.pathfinder.Node[], net.minecraft.world.level.pathfinder.Node);",
+          "descriptor": "([Lnet/minecraft/world/level/pathfinder/Node;Lnet/minecraft/world/level/pathfinder/Node;)I",
+          "access": 1,
+          "line_start": 743,
+          "line_end": 1814,
+          "disassembly_slice_sha256": "16d8046dc57472a3048f613ecfc26e31c64d555a9b9bf921bc52591a903a5884"
+        },
+        {
+          "name": "hasMalus",
+          "declaration": "private boolean hasMalus(net.minecraft.world.level.pathfinder.Node);",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/Node;)Z",
+          "access": 2,
+          "line_start": 1815,
+          "line_end": 1846,
+          "disassembly_slice_sha256": "9ebbea03395171695f01c67dd258d4d7c56b723ead857f76c3a0b64a813524d0"
+        },
+        {
+          "name": "isOpen",
+          "declaration": "private boolean isOpen(net.minecraft.world.level.pathfinder.Node);",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/Node;)Z",
+          "access": 2,
+          "line_start": 1847,
+          "line_end": 1876,
+          "disassembly_slice_sha256": "718ed1e92a8b32b6407c32f8abc6d648976b8202a7d498ae9a12471f628870b8"
+        },
+        {
+          "name": "findAcceptedNode",
+          "declaration": "protected net.minecraft.world.level.pathfinder.Node findAcceptedNode(int, int, int);",
+          "descriptor": "(III)Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 4,
+          "line_start": 1877,
+          "line_end": 1953,
+          "disassembly_slice_sha256": "fac2520a4f529815dc37f38f69ba46d27a5af6968321af7cba067173a6081456"
+        },
+        {
+          "name": "getCachedBlockPathType",
+          "declaration": "private net.minecraft.world.level.pathfinder.BlockPathTypes getCachedBlockPathType(int, int, int);",
+          "descriptor": "(III)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 2,
+          "line_start": 1954,
+          "line_end": 1981,
+          "disassembly_slice_sha256": "2949102810cde5e6183b04fa829a330428217492cff19954daf73ba7d6ab8ce4"
+        },
+        {
+          "name": "getBlockPathType",
+          "declaration": "public net.minecraft.world.level.pathfinder.BlockPathTypes getBlockPathType(net.minecraft.world.level.BlockGetter, int, int, int, net.minecraft.world.entity.Mob);",
+          "descriptor": "(Lnet/minecraft/world/level/BlockGetter;IIILnet/minecraft/world/entity/Mob;)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 1,
+          "line_start": 1982,
+          "line_end": 2108,
+          "disassembly_slice_sha256": "7d40ce28940ba48dc74fc1e22c5cbdff8183b8452fea4d2a822893f4bb73ef75"
+        },
+        {
+          "name": "getBlockPathType",
+          "declaration": "public net.minecraft.world.level.pathfinder.BlockPathTypes getBlockPathType(net.minecraft.world.level.BlockGetter, int, int, int);",
+          "descriptor": "(Lnet/minecraft/world/level/BlockGetter;III)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 1,
+          "line_start": 2109,
+          "line_end": 2265,
+          "disassembly_slice_sha256": "11bfb8eee60db6f6f002526388590d5b69d28b7ed96c234a2d259bbafad8278e"
+        },
+        {
+          "name": "iteratePathfindingStartNodeCandidatePositions",
+          "declaration": "private java.lang.Iterable<net.minecraft.core.BlockPos> iteratePathfindingStartNodeCandidatePositions(net.minecraft.world.entity.Mob);",
+          "descriptor": "(Lnet/minecraft/world/entity/Mob;)Ljava/lang/Iterable;",
+          "access": 2,
+          "line_start": 2266,
+          "line_end": 2417,
+          "disassembly_slice_sha256": "ca12e95bd13de8d16954c2f028175ed14ce9a4673d600119d6e946d51d276d9e"
+        },
+        {
+          "name": "lambda$getCachedBlockPathType$0",
+          "declaration": "private net.minecraft.world.level.pathfinder.BlockPathTypes lambda$getCachedBlockPathType$0(int, int, int, long);",
+          "descriptor": "(IIIJ)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 4098,
+          "line_start": 2418,
+          "line_end": 2447,
+          "disassembly_slice_sha256": "0ccff72652d37cb60c9aa718539607013de2638c4d62cfe509e02fd02d39bd3b"
+        }
+      ],
+      "fields": [
+        {
+          "name": "pathTypeByPosCache",
+          "descriptor": "Lit/unimi/dsi/fastutil/longs/Long2ObjectMap;",
+          "access": 18,
+          "annotations": []
+        },
+        {
+          "name": "SMALL_MOB_INFLATED_START_NODE_BOUNDING_BOX",
+          "descriptor": "F",
+          "access": 26,
+          "annotations": []
+        },
+        {
+          "name": "MAX_START_NODE_CANDIDATES",
+          "descriptor": "I",
+          "access": 26,
+          "annotations": []
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/level/pathfinder/Node",
+      "superclass": "java/lang/Object",
+      "class_hash": "ea0bcbf7e19a3b628b607ffd94336e925bd65d07fc9503036480ede3599a71c4",
+      "disassembly_hash": "31fff4c7f961990353ecce16a51508b3f14e4cf2c248506e356492aef332aa9f",
+      "origin": "HASH_VERIFIED_ORIGINAL_DISASSEMBLY",
+      "evidence_status": "EXACT_CAPTURED_RESOLVED_DEVELOPMENT_BYTECODE",
+      "selected_members": [
+        {
+          "name": "<init>",
+          "declaration": "public net.minecraft.world.level.pathfinder.Node(int, int, int);",
+          "descriptor": "(III)V",
+          "access": 1,
+          "line_start": 265,
+          "line_end": 309,
+          "disassembly_slice_sha256": "bba671690f7422d2093ddae170a85325dfb7348bfc154c4ee10a6718f18b1af5"
+        },
+        {
+          "name": "cloneAndMove",
+          "declaration": "public net.minecraft.world.level.pathfinder.Node cloneAndMove(int, int, int);",
+          "descriptor": "(III)Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 1,
+          "line_start": 310,
+          "line_end": 379,
+          "disassembly_slice_sha256": "c3b38741b2b8d850ac283fe99947041c8c65ece6192922300c4cdc4320d37c48"
+        },
+        {
+          "name": "createHash",
+          "declaration": "public static int createHash(int, int, int);",
+          "descriptor": "(III)I",
+          "access": 9,
+          "line_start": 380,
+          "line_end": 437,
+          "disassembly_slice_sha256": "e2e0921174c0a344369563c071392a3c55949b083452a5909613c31266d1ec01"
+        },
+        {
+          "name": "distanceTo",
+          "declaration": "public float distanceTo(net.minecraft.world.level.pathfinder.Node);",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/Node;)F",
+          "access": 1,
+          "line_start": 438,
+          "line_end": 489,
+          "disassembly_slice_sha256": "726bc6196ba5e3f95438eeb9163a06bf5e4480e7d06ce77f8b96ffcf06b0e8c9"
+        },
+        {
+          "name": "distanceToXZ",
+          "declaration": "public float distanceToXZ(net.minecraft.world.level.pathfinder.Node);",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/Node;)F",
+          "access": 1,
+          "line_start": 490,
+          "line_end": 528,
+          "disassembly_slice_sha256": "56f6737288965ede41550d3b3b489a9275aa466eb85572d4a2c3e1f4d89e7468"
+        },
+        {
+          "name": "distanceTo",
+          "declaration": "public float distanceTo(net.minecraft.core.BlockPos);",
+          "descriptor": "(Lnet/minecraft/core/BlockPos;)F",
+          "access": 1,
+          "line_start": 529,
+          "line_end": 580,
+          "disassembly_slice_sha256": "7da30838d781e8df396c8397e68aac60570a27b1b3f333a5f3a7db1e9d08f083"
+        },
+        {
+          "name": "distanceToSqr",
+          "declaration": "public float distanceToSqr(net.minecraft.world.level.pathfinder.Node);",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/Node;)F",
+          "access": 1,
+          "line_start": 581,
+          "line_end": 631,
+          "disassembly_slice_sha256": "28490b553eef5c624601f6c593cf6cf0f35cd4083ec441d0d3d637800cc921d8"
+        },
+        {
+          "name": "distanceToSqr",
+          "declaration": "public float distanceToSqr(net.minecraft.core.BlockPos);",
+          "descriptor": "(Lnet/minecraft/core/BlockPos;)F",
+          "access": 1,
+          "line_start": 632,
+          "line_end": 682,
+          "disassembly_slice_sha256": "1e8f0926ad8cb048ea64d8dee545622ddab5ffe8bc35594240e76d7a4a654d45"
+        },
+        {
+          "name": "distanceManhattan",
+          "declaration": "public float distanceManhattan(net.minecraft.world.level.pathfinder.Node);",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/Node;)F",
+          "access": 1,
+          "line_start": 683,
+          "line_end": 730,
+          "disassembly_slice_sha256": "307664eb35d66e009870a23fec25fbab0c8b51617b50841040aa78d0223e07f1"
+        },
+        {
+          "name": "distanceManhattan",
+          "declaration": "public float distanceManhattan(net.minecraft.core.BlockPos);",
+          "descriptor": "(Lnet/minecraft/core/BlockPos;)F",
+          "access": 1,
+          "line_start": 731,
+          "line_end": 778,
+          "disassembly_slice_sha256": "c3863c0f7c509b5dde8a7003855a42adfb3dec73e1b791d5bd9f31d984b892b9"
+        },
+        {
+          "name": "asBlockPos",
+          "declaration": "public net.minecraft.core.BlockPos asBlockPos();",
+          "descriptor": "()Lnet/minecraft/core/BlockPos;",
+          "access": 1,
+          "line_start": 779,
+          "line_end": 799,
+          "disassembly_slice_sha256": "1c8db764d9ba8a57f5498c4e7980931813f04158eb4769f981eea326a01f1a11"
+        },
+        {
+          "name": "asVec3",
+          "declaration": "public net.minecraft.world.phys.Vec3 asVec3();",
+          "descriptor": "()Lnet/minecraft/world/phys/Vec3;",
+          "access": 1,
+          "line_start": 800,
+          "line_end": 823,
+          "disassembly_slice_sha256": "d02855fdff577bdd76e9b5d5159e36ba2be3f97d9691eca3873650b2e1766fbc"
+        },
+        {
+          "name": "equals",
+          "declaration": "public boolean equals(java.lang.Object);",
+          "descriptor": "(Ljava/lang/Object;)Z",
+          "access": 1,
+          "line_start": 824,
+          "line_end": 877,
+          "disassembly_slice_sha256": "f3dc1385b28f212e87f319778eb1304cb5f224c7209c08bfe927195b7628e1e7"
+        },
+        {
+          "name": "hashCode",
+          "declaration": "public int hashCode();",
+          "descriptor": "()I",
+          "access": 1,
+          "line_start": 878,
+          "line_end": 891,
+          "disassembly_slice_sha256": "ce1dcf34ba0f6d5c507f4c15928d25c51b9f478a2efdf3866407f8ec588fc0f2"
+        },
+        {
+          "name": "inOpenSet",
+          "declaration": "public boolean inOpenSet();",
+          "descriptor": "()Z",
+          "access": 1,
+          "line_start": 892,
+          "line_end": 914,
+          "disassembly_slice_sha256": "3ea7760f431061243efd4d719f6464a0fc46e39f8c42142c6043c6a6841d0358"
+        },
+        {
+          "name": "toString",
+          "declaration": "public java.lang.String toString();",
+          "descriptor": "()Ljava/lang/String;",
+          "access": 1,
+          "line_start": 915,
+          "line_end": 933,
+          "disassembly_slice_sha256": "b4ff11f0c18624f5bc2ca20fe5b04043c99d26a8fc2d9fd815164a29843f2854"
+        },
+        {
+          "name": "writeToStream",
+          "declaration": "public void writeToStream(net.minecraft.network.FriendlyByteBuf);",
+          "descriptor": "(Lnet/minecraft/network/FriendlyByteBuf;)V",
+          "access": 1,
+          "line_start": 934,
+          "line_end": 994,
+          "disassembly_slice_sha256": "5be95aa922e30e7d5fd934f07796998bc4b16c8dcd51ef0a22e462d9814fe7b7"
+        },
+        {
+          "name": "createFromStream",
+          "declaration": "public static net.minecraft.world.level.pathfinder.Node createFromStream(net.minecraft.network.FriendlyByteBuf);",
+          "descriptor": "(Lnet/minecraft/network/FriendlyByteBuf;)Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 9,
+          "line_start": 995,
+          "line_end": 1023,
+          "disassembly_slice_sha256": "9439e77dd8815b1d3ca3bc478a3785fc1cc3ecc098527e33931483eb5436804e"
+        },
+        {
+          "name": "readContents",
+          "declaration": "protected static void readContents(net.minecraft.network.FriendlyByteBuf, net.minecraft.world.level.pathfinder.Node);",
+          "descriptor": "(Lnet/minecraft/network/FriendlyByteBuf;Lnet/minecraft/world/level/pathfinder/Node;)V",
+          "access": 12,
+          "line_start": 1024,
+          "line_end": 1067,
+          "disassembly_slice_sha256": "6d0fd60368a4c102d819226312302f388c1465577251ee8e784d4a20e6870a70"
+        }
+      ],
+      "fields": [
+        {
+          "name": "x",
+          "descriptor": "I",
+          "access": 17,
+          "annotations": []
+        },
+        {
+          "name": "y",
+          "descriptor": "I",
+          "access": 17,
+          "annotations": []
+        },
+        {
+          "name": "z",
+          "descriptor": "I",
+          "access": 17,
+          "annotations": []
+        },
+        {
+          "name": "hash",
+          "descriptor": "I",
+          "access": 18,
+          "annotations": []
+        },
+        {
+          "name": "heapIdx",
+          "descriptor": "I",
+          "access": 1,
+          "annotations": []
+        },
+        {
+          "name": "g",
+          "descriptor": "F",
+          "access": 1,
+          "annotations": []
+        },
+        {
+          "name": "h",
+          "descriptor": "F",
+          "access": 1,
+          "annotations": []
+        },
+        {
+          "name": "f",
+          "descriptor": "F",
+          "access": 1,
+          "annotations": []
+        },
+        {
+          "name": "cameFrom",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 1,
+          "annotations": [
+            {
+              "descriptor": "Ljavax/annotation/Nullable;",
+              "elements": {}
+            }
+          ]
+        },
+        {
+          "name": "closed",
+          "descriptor": "Z",
+          "access": 1,
+          "annotations": []
+        },
+        {
+          "name": "walkedDistance",
+          "descriptor": "F",
+          "access": 1,
+          "annotations": []
+        },
+        {
+          "name": "costMalus",
+          "descriptor": "F",
+          "access": 1,
+          "annotations": []
+        },
+        {
+          "name": "type",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 1,
+          "annotations": []
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/level/pathfinder/NodeEvaluator",
+      "superclass": "java/lang/Object",
+      "class_hash": "739b9ff3b79bf79c3fc59df868b78f2744384ce1e7433ece38f423b69ee3563b",
+      "disassembly_hash": "dfc2f9bcb1d4d1711bcad3ffdbd0111865e6a2bf756a54e3aa4333ec4aecb591",
+      "origin": "HASH_VERIFIED_ORIGINAL_DISASSEMBLY",
+      "evidence_status": "EXACT_CAPTURED_RESOLVED_DEVELOPMENT_BYTECODE",
+      "selected_members": [
+        {
+          "name": "<init>",
+          "declaration": "public net.minecraft.world.level.pathfinder.NodeEvaluator();",
+          "descriptor": "()V",
+          "access": 1,
+          "line_start": 228,
+          "line_end": 248,
+          "disassembly_slice_sha256": "944deaf10a4750e8d3a3b5ed32d794bddae5b70cf78d2bcaa967cb0b20fd1b77"
+        },
+        {
+          "name": "prepare",
+          "declaration": "public void prepare(net.minecraft.world.level.PathNavigationRegion, net.minecraft.world.entity.Mob);",
+          "descriptor": "(Lnet/minecraft/world/level/PathNavigationRegion;Lnet/minecraft/world/entity/Mob;)V",
+          "access": 1,
+          "line_start": 249,
+          "line_end": 298,
+          "disassembly_slice_sha256": "efca79773e26c6ef5d707a1af01a4fa1286c68e955b182aaa4dcf0a45ea13b8a"
+        },
+        {
+          "name": "done",
+          "declaration": "public void done();",
+          "descriptor": "()V",
+          "access": 1,
+          "line_start": 299,
+          "line_end": 318,
+          "disassembly_slice_sha256": "5317263f7027bd46e885b423965856922d5371caebcf58f5f73a1a32adb14cc8"
+        },
+        {
+          "name": "getNode",
+          "declaration": "protected net.minecraft.world.level.pathfinder.Node getNode(net.minecraft.core.BlockPos);",
+          "descriptor": "(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 4,
+          "line_start": 319,
+          "line_end": 339,
+          "disassembly_slice_sha256": "733823a6eab93c67e2884c75a62f9932d2296c42638bf4cc752c4f63687603b8"
+        },
+        {
+          "name": "getNode",
+          "declaration": "protected net.minecraft.world.level.pathfinder.Node getNode(int, int, int);",
+          "descriptor": "(III)Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 4,
+          "line_start": 340,
+          "line_end": 366,
+          "disassembly_slice_sha256": "2e68a7e4c68dc586ed0e6c0e5eaff334d711d150ef8bee6e1cedade77159937f"
+        },
+        {
+          "name": "getStart",
+          "declaration": "public abstract net.minecraft.world.level.pathfinder.Node getStart();",
+          "descriptor": "()Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 1025,
+          "line_start": 367,
+          "line_end": 370,
+          "disassembly_slice_sha256": "4a8a2509cae6558c4fecd2ca1bfee1f2e863c3937fb6fdf51c1c59ac682d8607"
+        },
+        {
+          "name": "getGoal",
+          "declaration": "public abstract net.minecraft.world.level.pathfinder.Target getGoal(double, double, double);",
+          "descriptor": "(DDD)Lnet/minecraft/world/level/pathfinder/Target;",
+          "access": 1025,
+          "line_start": 371,
+          "line_end": 374,
+          "disassembly_slice_sha256": "ec672601188e2ff0054f3af20cb2caa1a0f412c6d0e9181a70b94a6f68e3475f"
+        },
+        {
+          "name": "getTargetFromNode",
+          "declaration": "protected net.minecraft.world.level.pathfinder.Target getTargetFromNode(net.minecraft.world.level.pathfinder.Node);",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/Node;)Lnet/minecraft/world/level/pathfinder/Target;",
+          "access": 4,
+          "line_start": 375,
+          "line_end": 391,
+          "disassembly_slice_sha256": "e14d636cba254d1bd695bf7491b1038a8cb70144d124bac18ac2502ea4699bc2"
+        },
+        {
+          "name": "getNeighbors",
+          "declaration": "public abstract int getNeighbors(net.minecraft.world.level.pathfinder.Node[], net.minecraft.world.level.pathfinder.Node);",
+          "descriptor": "([Lnet/minecraft/world/level/pathfinder/Node;Lnet/minecraft/world/level/pathfinder/Node;)I",
+          "access": 1025,
+          "line_start": 392,
+          "line_end": 395,
+          "disassembly_slice_sha256": "760d80f5dc2a36d463d9c65da481de08748566f5d4f2e6cc0a5042a5815e3155"
+        },
+        {
+          "name": "getBlockPathType",
+          "declaration": "public abstract net.minecraft.world.level.pathfinder.BlockPathTypes getBlockPathType(net.minecraft.world.level.BlockGetter, int, int, int, net.minecraft.world.entity.Mob);",
+          "descriptor": "(Lnet/minecraft/world/level/BlockGetter;IIILnet/minecraft/world/entity/Mob;)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 1025,
+          "line_start": 396,
+          "line_end": 399,
+          "disassembly_slice_sha256": "5ce0d1bf6fa6e93802735d2d562e5d54f1d98220a304188d2f4d63403b7bd755"
+        },
+        {
+          "name": "getBlockPathType",
+          "declaration": "public abstract net.minecraft.world.level.pathfinder.BlockPathTypes getBlockPathType(net.minecraft.world.level.BlockGetter, int, int, int);",
+          "descriptor": "(Lnet/minecraft/world/level/BlockGetter;III)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 1025,
+          "line_start": 400,
+          "line_end": 403,
+          "disassembly_slice_sha256": "bf4f22af8992cbd41218ce8d58886d4f5e58bdd1600207bcebf74bb58dc65295"
+        },
+        {
+          "name": "setCanPassDoors",
+          "declaration": "public void setCanPassDoors(boolean);",
+          "descriptor": "(Z)V",
+          "access": 1,
+          "line_start": 404,
+          "line_end": 420,
+          "disassembly_slice_sha256": "299c3172d5270c214f4a463761518c1a15d53ce98fe8f87d88fc2243365b90a2"
+        },
+        {
+          "name": "setCanOpenDoors",
+          "declaration": "public void setCanOpenDoors(boolean);",
+          "descriptor": "(Z)V",
+          "access": 1,
+          "line_start": 421,
+          "line_end": 437,
+          "disassembly_slice_sha256": "feb54db9928bad656fbbb50a0444b1d2a3af3cb0222ec05363b9f8d983893532"
+        },
+        {
+          "name": "setCanFloat",
+          "declaration": "public void setCanFloat(boolean);",
+          "descriptor": "(Z)V",
+          "access": 1,
+          "line_start": 438,
+          "line_end": 454,
+          "disassembly_slice_sha256": "e51f253c84463b2002a0044f88fcb01ef9831ec25b30e5e5a3490c3eb2bcfb84"
+        },
+        {
+          "name": "setCanWalkOverFences",
+          "declaration": "public void setCanWalkOverFences(boolean);",
+          "descriptor": "(Z)V",
+          "access": 1,
+          "line_start": 455,
+          "line_end": 471,
+          "disassembly_slice_sha256": "c377d2c6a5df2ccdbc8dd2b6507b868030b268d0afaeaaa7bfe9b82d1640bca4"
+        },
+        {
+          "name": "canPassDoors",
+          "declaration": "public boolean canPassDoors();",
+          "descriptor": "()Z",
+          "access": 1,
+          "line_start": 472,
+          "line_end": 485,
+          "disassembly_slice_sha256": "a6725b7bae0386c7b1731629a81f3704e7c9d7c06eef64ad796f41dcce02f875"
+        },
+        {
+          "name": "canOpenDoors",
+          "declaration": "public boolean canOpenDoors();",
+          "descriptor": "()Z",
+          "access": 1,
+          "line_start": 486,
+          "line_end": 499,
+          "disassembly_slice_sha256": "57f27860dbcaf2516c27e594146833faf7ed028a90d9b188f7a100ab5e525d0e"
+        },
+        {
+          "name": "canFloat",
+          "declaration": "public boolean canFloat();",
+          "descriptor": "()Z",
+          "access": 1,
+          "line_start": 500,
+          "line_end": 513,
+          "disassembly_slice_sha256": "3fee9109d9daae5a90de6245f494fd6dfb0691c212d4ffe0a99f4832f53e0171"
+        },
+        {
+          "name": "canWalkOverFences",
+          "declaration": "public boolean canWalkOverFences();",
+          "descriptor": "()Z",
+          "access": 1,
+          "line_start": 514,
+          "line_end": 527,
+          "disassembly_slice_sha256": "1b4b577bfea5c61a8617a0bcd357f3ffa4cf351d0c4586d590e269528071811d"
+        },
+        {
+          "name": "lambda$getNode$0",
+          "declaration": "private static net.minecraft.world.level.pathfinder.Node lambda$getNode$0(int, int, int, int);",
+          "descriptor": "(IIII)Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 4106,
+          "line_start": 528,
+          "line_end": 552,
+          "disassembly_slice_sha256": "7e0f3b102ca368009f06507776d7b450064c947c7d89cfcd478cc1d91315363e"
+        }
+      ],
+      "fields": [
+        {
+          "name": "level",
+          "descriptor": "Lnet/minecraft/world/level/PathNavigationRegion;",
+          "access": 4,
+          "annotations": []
+        },
+        {
+          "name": "mob",
+          "descriptor": "Lnet/minecraft/world/entity/Mob;",
+          "access": 4,
+          "annotations": []
+        },
+        {
+          "name": "nodes",
+          "descriptor": "Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;",
+          "access": 20,
+          "annotations": []
+        },
+        {
+          "name": "entityWidth",
+          "descriptor": "I",
+          "access": 4,
+          "annotations": []
+        },
+        {
+          "name": "entityHeight",
+          "descriptor": "I",
+          "access": 4,
+          "annotations": []
+        },
+        {
+          "name": "entityDepth",
+          "descriptor": "I",
+          "access": 4,
+          "annotations": []
+        },
+        {
+          "name": "canPassDoors",
+          "descriptor": "Z",
+          "access": 4,
+          "annotations": []
+        },
+        {
+          "name": "canOpenDoors",
+          "descriptor": "Z",
+          "access": 4,
+          "annotations": []
+        },
+        {
+          "name": "canFloat",
+          "descriptor": "Z",
+          "access": 4,
+          "annotations": []
+        },
+        {
+          "name": "canWalkOverFences",
+          "descriptor": "Z",
+          "access": 4,
+          "annotations": []
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/level/pathfinder/Path",
+      "superclass": "java/lang/Object",
+      "class_hash": "94bfcd6f1aa220bce972201fc2f109f2bff3abc45c39b502fa2807da4cd65c93",
+      "disassembly_hash": "dd1540b07207eab558c5462623ee7b323a05957beacf8348068e6a8067996e63",
+      "origin": "HASH_VERIFIED_ORIGINAL_DISASSEMBLY",
+      "evidence_status": "EXACT_CAPTURED_RESOLVED_DEVELOPMENT_BYTECODE",
+      "selected_members": [
+        {
+          "name": "<init>",
+          "declaration": "public net.minecraft.world.level.pathfinder.Path(java.util.List<net.minecraft.world.level.pathfinder.Node>, net.minecraft.core.BlockPos, boolean);",
+          "descriptor": "(Ljava/util/List;Lnet/minecraft/core/BlockPos;Z)V",
+          "access": 1,
+          "line_start": 367,
+          "line_end": 439,
+          "disassembly_slice_sha256": "c50446c39aeca5fc974bd0b3cd313c61f4a6336a4aec56284e5d1c8b3cc24564"
+        },
+        {
+          "name": "advance",
+          "declaration": "public void advance();",
+          "descriptor": "()V",
+          "access": 1,
+          "line_start": 440,
+          "line_end": 458,
+          "disassembly_slice_sha256": "85b5f20bc3b9414fc9a17fd09ce46312ad5b265400229fe451c43a4fe95055ab"
+        },
+        {
+          "name": "notStarted",
+          "declaration": "public boolean notStarted();",
+          "descriptor": "()Z",
+          "access": 1,
+          "line_start": 459,
+          "line_end": 481,
+          "disassembly_slice_sha256": "cfe08b492ccecc659a1250ea49118c72fcaa8ef8aa97e9459c3808ab40373d25"
+        },
+        {
+          "name": "isDone",
+          "declaration": "public boolean isDone();",
+          "descriptor": "()Z",
+          "access": 1,
+          "line_start": 482,
+          "line_end": 507,
+          "disassembly_slice_sha256": "c686cca541af720418298700bb4db41bb18146db7a48e607e775ea2a7752d2b5"
+        },
+        {
+          "name": "getEndNode",
+          "declaration": "public net.minecraft.world.level.pathfinder.Node getEndNode();",
+          "descriptor": "()Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 1,
+          "line_start": 508,
+          "line_end": 542,
+          "disassembly_slice_sha256": "4bb7956ffa8d429174b8aff2989cee5a5de805599122464420ebc0c5f680566b"
+        },
+        {
+          "name": "getNode",
+          "declaration": "public net.minecraft.world.level.pathfinder.Node getNode(int);",
+          "descriptor": "(I)Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 1,
+          "line_start": 543,
+          "line_end": 560,
+          "disassembly_slice_sha256": "242ff7bd014206508b40ac45b74be2c2e3b566b008b09310c8204620e295959d"
+        },
+        {
+          "name": "truncateNodes",
+          "declaration": "public void truncateNodes(int);",
+          "descriptor": "(I)V",
+          "access": 1,
+          "line_start": 561,
+          "line_end": 591,
+          "disassembly_slice_sha256": "bac978659af3ebc2904d63bf202c85b29c6c127b665df06cd5c23ab639aa110e"
+        },
+        {
+          "name": "replaceNode",
+          "declaration": "public void replaceNode(int, net.minecraft.world.level.pathfinder.Node);",
+          "descriptor": "(ILnet/minecraft/world/level/pathfinder/Node;)V",
+          "access": 1,
+          "line_start": 592,
+          "line_end": 612,
+          "disassembly_slice_sha256": "6455a783adc8b4da1c7e8f900d347ccad5d5f719658f5aa69c94e0141d3d67e0"
+        },
+        {
+          "name": "getNodeCount",
+          "declaration": "public int getNodeCount();",
+          "descriptor": "()I",
+          "access": 1,
+          "line_start": 613,
+          "line_end": 627,
+          "disassembly_slice_sha256": "0ce08fa81a33c5664d62a6d8676f2787665d150a29a59a84a14644c331d4c01b"
+        },
+        {
+          "name": "getNextNodeIndex",
+          "declaration": "public int getNextNodeIndex();",
+          "descriptor": "()I",
+          "access": 1,
+          "line_start": 628,
+          "line_end": 641,
+          "disassembly_slice_sha256": "7e158087e2f1e1c20a105a894e6abf97c93f1efc3452b2ffdfc6c403b5a70153"
+        },
+        {
+          "name": "setNextNodeIndex",
+          "declaration": "public void setNextNodeIndex(int);",
+          "descriptor": "(I)V",
+          "access": 1,
+          "line_start": 642,
+          "line_end": 658,
+          "disassembly_slice_sha256": "77e61fc62da096f34ef0ac005913b73b8e43093e0c3f44d21805dc92d2381a16"
+        },
+        {
+          "name": "getEntityPosAtNode",
+          "declaration": "public net.minecraft.world.phys.Vec3 getEntityPosAtNode(net.minecraft.world.entity.Entity, int);",
+          "descriptor": "(Lnet/minecraft/world/entity/Entity;I)Lnet/minecraft/world/phys/Vec3;",
+          "access": 1,
+          "line_start": 659,
+          "line_end": 722,
+          "disassembly_slice_sha256": "aea38e945b86d732825e3a9ea2dfe70a8e4df3e51fee1c6d2c7fd7a65dbc24a8"
+        },
+        {
+          "name": "getNodePos",
+          "declaration": "public net.minecraft.core.BlockPos getNodePos(int);",
+          "descriptor": "(I)Lnet/minecraft/core/BlockPos;",
+          "access": 1,
+          "line_start": 723,
+          "line_end": 741,
+          "disassembly_slice_sha256": "bbcd9a80be31def5a0f534c288a47744de3af4568329d04c093c869457f43cf0"
+        },
+        {
+          "name": "getNextEntityPos",
+          "declaration": "public net.minecraft.world.phys.Vec3 getNextEntityPos(net.minecraft.world.entity.Entity);",
+          "descriptor": "(Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/world/phys/Vec3;",
+          "access": 1,
+          "line_start": 742,
+          "line_end": 759,
+          "disassembly_slice_sha256": "483550a229ad9102eb19dde7bee01a4342202ebab20dd73c5d9ff3117ddf9d74"
+        },
+        {
+          "name": "getNextNodePos",
+          "declaration": "public net.minecraft.core.BlockPos getNextNodePos();",
+          "descriptor": "()Lnet/minecraft/core/BlockPos;",
+          "access": 1,
+          "line_start": 760,
+          "line_end": 778,
+          "disassembly_slice_sha256": "f1e94a706b5a20cdb947271eb7225949fe464304fd98eb19015576a0807a0baa"
+        },
+        {
+          "name": "getNextNode",
+          "declaration": "public net.minecraft.world.level.pathfinder.Node getNextNode();",
+          "descriptor": "()Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 1,
+          "line_start": 779,
+          "line_end": 796,
+          "disassembly_slice_sha256": "91d1961db4f158f062745a8e5d34a1f97ddae3e39fe2c1cc291aa0b12aaa55ef"
+        },
+        {
+          "name": "getPreviousNode",
+          "declaration": "public net.minecraft.world.level.pathfinder.Node getPreviousNode();",
+          "descriptor": "()Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 1,
+          "line_start": 797,
+          "line_end": 829,
+          "disassembly_slice_sha256": "8cd8b44512be99b0b9c6a0bd002962756d705e106f8f54f7bd09c4cbae9d34c7"
+        },
+        {
+          "name": "sameAs",
+          "declaration": "public boolean sameAs(net.minecraft.world.level.pathfinder.Path);",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/Path;)Z",
+          "access": 1,
+          "line_start": 830,
+          "line_end": 924,
+          "disassembly_slice_sha256": "e401c46807cccd5993ddf70e5c68c242e79576d5d8ec23241ce3f73271b43e07"
+        },
+        {
+          "name": "canReach",
+          "declaration": "public boolean canReach();",
+          "descriptor": "()Z",
+          "access": 1,
+          "line_start": 925,
+          "line_end": 938,
+          "disassembly_slice_sha256": "3d2f9d350943e75b34069ee9172b06ded8d9cc89bcac94ef239c3c17728209c1"
+        },
+        {
+          "name": "setDebug",
+          "declaration": "public void setDebug(net.minecraft.world.level.pathfinder.Node[], net.minecraft.world.level.pathfinder.Node[], java.util.Set<net.minecraft.world.level.pathfinder.Target>);",
+          "descriptor": "([Lnet/minecraft/world/level/pathfinder/Node;[Lnet/minecraft/world/level/pathfinder/Node;Ljava/util/Set;)V",
+          "access": 1,
+          "line_start": 939,
+          "line_end": 972,
+          "disassembly_slice_sha256": "ce0a57c622f115454510aa5e17f91c4f332a8e53c477dc3e21c94b87cd4946b1"
+        },
+        {
+          "name": "getOpenSet",
+          "declaration": "public net.minecraft.world.level.pathfinder.Node[] getOpenSet();",
+          "descriptor": "()[Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 1,
+          "line_start": 973,
+          "line_end": 989,
+          "disassembly_slice_sha256": "1a2e806aebda16a940bf0be17a4b2445284e2c5a740e3623bea156cfe5149c1c"
+        },
+        {
+          "name": "getClosedSet",
+          "declaration": "public net.minecraft.world.level.pathfinder.Node[] getClosedSet();",
+          "descriptor": "()[Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 1,
+          "line_start": 990,
+          "line_end": 1006,
+          "disassembly_slice_sha256": "998e530dcdc5c94ca4de03721529f7255cea5ff61c5b947043aa59c8e068d07b"
+        },
+        {
+          "name": "writeToStream",
+          "declaration": "public void writeToStream(net.minecraft.network.FriendlyByteBuf);",
+          "descriptor": "(Lnet/minecraft/network/FriendlyByteBuf;)V",
+          "access": 1,
+          "line_start": 1007,
+          "line_end": 1187,
+          "disassembly_slice_sha256": "0716fe9191545ff7dc49887915d7fa8aa0eaa13e08d20052ea9c32507f10be26"
+        },
+        {
+          "name": "createFromStream",
+          "declaration": "public static net.minecraft.world.level.pathfinder.Path createFromStream(net.minecraft.network.FriendlyByteBuf);",
+          "descriptor": "(Lnet/minecraft/network/FriendlyByteBuf;)Lnet/minecraft/world/level/pathfinder/Path;",
+          "access": 9,
+          "line_start": 1188,
+          "line_end": 1374,
+          "disassembly_slice_sha256": "166541f62831e090d71607e97d841c4bd5dd0cc2d8b04189a7cb7e3a35bcf63e"
+        },
+        {
+          "name": "toString",
+          "declaration": "public java.lang.String toString();",
+          "descriptor": "()Ljava/lang/String;",
+          "access": 1,
+          "line_start": 1375,
+          "line_end": 1390,
+          "disassembly_slice_sha256": "6248a2c4d8e5895bc4beb678d2f5db5f99b0e862c80a95c4d7603638df96090d"
+        },
+        {
+          "name": "getTarget",
+          "declaration": "public net.minecraft.core.BlockPos getTarget();",
+          "descriptor": "()Lnet/minecraft/core/BlockPos;",
+          "access": 1,
+          "line_start": 1391,
+          "line_end": 1404,
+          "disassembly_slice_sha256": "697102659cc554e3ebbec300c3c146480345f14227e46ed1826909f5b15fb3d5"
+        },
+        {
+          "name": "getDistToTarget",
+          "declaration": "public float getDistToTarget();",
+          "descriptor": "()F",
+          "access": 1,
+          "line_start": 1405,
+          "line_end": 1418,
+          "disassembly_slice_sha256": "6667820a49501129fa9e1c954a118f90df287002768bdbd4a6ed953c3844a4da"
+        },
+        {
+          "name": "lambda$writeToStream$0",
+          "declaration": "private static void lambda$writeToStream$0(net.minecraft.network.FriendlyByteBuf, net.minecraft.world.level.pathfinder.Target);",
+          "descriptor": "(Lnet/minecraft/network/FriendlyByteBuf;Lnet/minecraft/world/level/pathfinder/Target;)V",
+          "access": 4106,
+          "line_start": 1419,
+          "line_end": 1438,
+          "disassembly_slice_sha256": "eec19c8b738635071932ec859056936a84b14f218c745a22628ed8782310d5fa"
+        }
+      ],
+      "fields": [
+        {
+          "name": "nodes",
+          "descriptor": "Ljava/util/List;",
+          "access": 18,
+          "annotations": []
+        },
+        {
+          "name": "openSet",
+          "descriptor": "[Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 2,
+          "annotations": []
+        },
+        {
+          "name": "closedSet",
+          "descriptor": "[Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 2,
+          "annotations": []
+        },
+        {
+          "name": "targetNodes",
+          "descriptor": "Ljava/util/Set;",
+          "access": 2,
+          "annotations": [
+            {
+              "descriptor": "Ljavax/annotation/Nullable;",
+              "elements": {}
+            }
+          ]
+        },
+        {
+          "name": "nextNodeIndex",
+          "descriptor": "I",
+          "access": 2,
+          "annotations": []
+        },
+        {
+          "name": "target",
+          "descriptor": "Lnet/minecraft/core/BlockPos;",
+          "access": 18,
+          "annotations": []
+        },
+        {
+          "name": "distToTarget",
+          "descriptor": "F",
+          "access": 18,
+          "annotations": []
+        },
+        {
+          "name": "reached",
+          "descriptor": "Z",
+          "access": 18,
+          "annotations": []
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/level/pathfinder/PathComputationType",
+      "superclass": "java/lang/Enum",
+      "class_hash": "e364f4663725351e2ffeab51fb425401b534c93f20f09c97b17f3d9dd803f730",
+      "disassembly_hash": "78ce0331a46d54fcd89c5764c66ca50088e2d74ffb45ad8ce1d46511c7301d0a",
+      "origin": "FRESH_GENUINE_JAVAP_SAME_ARTIFACT",
+      "evidence_status": "EXACT_CAPTURED_RESOLVED_DEVELOPMENT_BYTECODE",
+      "selected_members": [
+        {
+          "name": "values",
+          "declaration": "public static net.minecraft.world.level.pathfinder.PathComputationType[] values();",
+          "descriptor": "()[Lnet/minecraft/world/level/pathfinder/PathComputationType;",
+          "access": 9,
+          "line_start": 83,
+          "line_end": 94,
+          "disassembly_slice_sha256": "51c616a0af3490a0bbcbfde29958e371549732e68122d5c27f0acf73e5fdbe19"
+        },
+        {
+          "name": "valueOf",
+          "declaration": "public static net.minecraft.world.level.pathfinder.PathComputationType valueOf(java.lang.String);",
+          "descriptor": "(Ljava/lang/String;)Lnet/minecraft/world/level/pathfinder/PathComputationType;",
+          "access": 9,
+          "line_start": 95,
+          "line_end": 110,
+          "disassembly_slice_sha256": "29f0f395d26f0ad08a364d8fe4b91d08a87d7cbca0524e8aa2505b02393d9ee6"
+        },
+        {
+          "name": "<init>",
+          "declaration": "private net.minecraft.world.level.pathfinder.PathComputationType();",
+          "descriptor": "(Ljava/lang/String;I)V",
+          "access": 2,
+          "line_start": 111,
+          "line_end": 127,
+          "disassembly_slice_sha256": "017d17bd88ee393ff54bf3f3e201122877248353cd1c0a2f718f4577e68e5cff"
+        },
+        {
+          "name": "$values",
+          "declaration": "private static net.minecraft.world.level.pathfinder.PathComputationType[] $values();",
+          "descriptor": "()[Lnet/minecraft/world/level/pathfinder/PathComputationType;",
+          "access": 4106,
+          "line_start": 128,
+          "line_end": 150,
+          "disassembly_slice_sha256": "646e8ae1528c6345fe0f4841a5df7e0ab6d5b82411f25b5aecce9a2d1d8da382"
+        },
+        {
+          "name": "<clinit>",
+          "declaration": "static {};",
+          "descriptor": "()V",
+          "access": 8,
+          "line_start": 151,
+          "line_end": 179,
+          "disassembly_slice_sha256": "f0d703e4db37aeac649aee5e54ca483042e5af214a177af3cbe0e96f12dbd03a"
+        }
+      ],
+      "fields": [
+        {
+          "name": "LAND",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/PathComputationType;",
+          "access": 16409,
+          "annotations": []
+        },
+        {
+          "name": "WATER",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/PathComputationType;",
+          "access": 16409,
+          "annotations": []
+        },
+        {
+          "name": "AIR",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/PathComputationType;",
+          "access": 16409,
+          "annotations": []
+        },
+        {
+          "name": "$VALUES",
+          "descriptor": "[Lnet/minecraft/world/level/pathfinder/PathComputationType;",
+          "access": 4122,
+          "annotations": []
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/level/pathfinder/PathFinder",
+      "superclass": "java/lang/Object",
+      "class_hash": "5d308818c953fcba2353de06b03fb4a80a0f12370c7f92f1baad7f7d574cae3b",
+      "disassembly_hash": "d929f5154b88c5c977b99d47a7e0d8003a4d45373e08989b2b04711e8dc4f4aa",
+      "origin": "HASH_VERIFIED_ORIGINAL_DISASSEMBLY",
+      "evidence_status": "EXACT_CAPTURED_RESOLVED_DEVELOPMENT_BYTECODE",
+      "selected_members": [
+        {
+          "name": "<init>",
+          "declaration": "public net.minecraft.world.level.pathfinder.PathFinder(net.minecraft.world.level.pathfinder.NodeEvaluator, int);",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/NodeEvaluator;I)V",
+          "access": 1,
+          "line_start": 469,
+          "line_end": 504,
+          "disassembly_slice_sha256": "e321ffb915290ba555dffa3fd14fe35de88552394907658a149d2c1fbf2ba2eb"
+        },
+        {
+          "name": "findPath",
+          "declaration": "public net.minecraft.world.level.pathfinder.Path findPath(net.minecraft.world.level.PathNavigationRegion, net.minecraft.world.entity.Mob, java.util.Set<net.minecraft.core.BlockPos>, float, int, float);",
+          "descriptor": "(Lnet/minecraft/world/level/PathNavigationRegion;Lnet/minecraft/world/entity/Mob;Ljava/util/Set;FIF)Lnet/minecraft/world/level/pathfinder/Path;",
+          "access": 1,
+          "line_start": 505,
+          "line_end": 586,
+          "disassembly_slice_sha256": "bd9b523a85a8bba1d35f6e38a132a01afb53870b9d2a9ac8787cbb1b4dcf8a6b"
+        },
+        {
+          "name": "findPath",
+          "declaration": "protected net.minecraft.world.level.pathfinder.Path findPath(net.minecraft.util.profiling.ProfilerFiller, net.minecraft.world.level.pathfinder.Node, java.util.Map<net.minecraft.world.level.pathfinder.Target, net.minecraft.core.BlockPos>, float, int, float);",
+          "descriptor": "(Lnet/minecraft/util/profiling/ProfilerFiller;Lnet/minecraft/world/level/pathfinder/Node;Ljava/util/Map;FIF)Lnet/minecraft/world/level/pathfinder/Path;",
+          "access": 4,
+          "line_start": 587,
+          "line_end": 944,
+          "disassembly_slice_sha256": "83ff82121a247c3fc2e3ea97b350e173b4d9427f385198c5cca012b20f1714a0"
+        },
+        {
+          "name": "distance",
+          "declaration": "protected float distance(net.minecraft.world.level.pathfinder.Node, net.minecraft.world.level.pathfinder.Node);",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/Node;Lnet/minecraft/world/level/pathfinder/Node;)F",
+          "access": 4,
+          "line_start": 945,
+          "line_end": 961,
+          "disassembly_slice_sha256": "3df6cde386625f62db3d5c46327aa1cf08bc8524965a38509cdc5f91e7af2633"
+        },
+        {
+          "name": "getBestH",
+          "declaration": "public float getBestH(net.minecraft.world.level.pathfinder.Node, java.util.Set<net.minecraft.world.level.pathfinder.Target>);",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/Node;Ljava/util/Set;)F",
+          "access": 1,
+          "line_start": 962,
+          "line_end": 1023,
+          "disassembly_slice_sha256": "154d99f3d934fa3354937b820eab56e05dbb8a32786368266876695c7cdfb8b5"
+        },
+        {
+          "name": "reconstructPath",
+          "declaration": "private net.minecraft.world.level.pathfinder.Path reconstructPath(net.minecraft.world.level.pathfinder.Node, net.minecraft.core.BlockPos, boolean);",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/Node;Lnet/minecraft/core/BlockPos;Z)Lnet/minecraft/world/level/pathfinder/Path;",
+          "access": 2,
+          "line_start": 1024,
+          "line_end": 1081,
+          "disassembly_slice_sha256": "30e95cc8f866fb6d8ef4347812f7e43cfa496eed119eda61b4a38f958bf5c4f1"
+        },
+        {
+          "name": "lambda$findPath$2",
+          "declaration": "private net.minecraft.world.level.pathfinder.Path lambda$findPath$2(java.util.Map, net.minecraft.world.level.pathfinder.Target);",
+          "descriptor": "(Ljava/util/Map;Lnet/minecraft/world/level/pathfinder/Target;)Lnet/minecraft/world/level/pathfinder/Path;",
+          "access": 4098,
+          "line_start": 1082,
+          "line_end": 1104,
+          "disassembly_slice_sha256": "0e8d017fcf6d513a446169a68fcc720926017b35b77d64374d84ae73f7bf1c71"
+        },
+        {
+          "name": "lambda$findPath$1",
+          "declaration": "private net.minecraft.world.level.pathfinder.Path lambda$findPath$1(java.util.Map, net.minecraft.world.level.pathfinder.Target);",
+          "descriptor": "(Ljava/util/Map;Lnet/minecraft/world/level/pathfinder/Target;)Lnet/minecraft/world/level/pathfinder/Path;",
+          "access": 4098,
+          "line_start": 1105,
+          "line_end": 1127,
+          "disassembly_slice_sha256": "1da9035f5e05757df20f7a6babc2fa81541906f3cf6874bd8f5db101441cddb4"
+        },
+        {
+          "name": "lambda$findPath$0",
+          "declaration": "private net.minecraft.world.level.pathfinder.Target lambda$findPath$0(net.minecraft.core.BlockPos);",
+          "descriptor": "(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/pathfinder/Target;",
+          "access": 4098,
+          "line_start": 1128,
+          "line_end": 1156,
+          "disassembly_slice_sha256": "246597004d45eb73f3fd8df3ba1cfec38bba15b200a8054fdd17f7fd103fa94a"
+        }
+      ],
+      "fields": [
+        {
+          "name": "FUDGING",
+          "descriptor": "F",
+          "access": 26,
+          "annotations": []
+        },
+        {
+          "name": "neighbors",
+          "descriptor": "[Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 18,
+          "annotations": []
+        },
+        {
+          "name": "maxVisitedNodes",
+          "descriptor": "I",
+          "access": 18,
+          "annotations": []
+        },
+        {
+          "name": "nodeEvaluator",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/NodeEvaluator;",
+          "access": 18,
+          "annotations": []
+        },
+        {
+          "name": "DEBUG",
+          "descriptor": "Z",
+          "access": 26,
+          "annotations": []
+        },
+        {
+          "name": "openSet",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/BinaryHeap;",
+          "access": 1,
+          "annotations": []
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/level/pathfinder/SwimNodeEvaluator",
+      "superclass": "net/minecraft/world/level/pathfinder/NodeEvaluator",
+      "class_hash": "772063a83c01af95d09d6f068d07785c0d230d6fddec57233d39a75106f21e43",
+      "disassembly_hash": "57ddc47c5ab685217a56d1848cf3d9535b0b09c5fab7b87894b0c276c5b453a1",
+      "origin": "HASH_VERIFIED_ORIGINAL_DISASSEMBLY",
+      "evidence_status": "EXACT_CAPTURED_RESOLVED_DEVELOPMENT_BYTECODE",
+      "selected_members": [
+        {
+          "name": "<init>",
+          "declaration": "public net.minecraft.world.level.pathfinder.SwimNodeEvaluator(boolean);",
+          "descriptor": "(Z)V",
+          "access": 1,
+          "line_start": 380,
+          "line_end": 405,
+          "disassembly_slice_sha256": "45ced07819d6b6a1524de58d4d50ee9f7c6c59de476b08b4b2f6fd4ee4ae18e8"
+        },
+        {
+          "name": "prepare",
+          "declaration": "public void prepare(net.minecraft.world.level.PathNavigationRegion, net.minecraft.world.entity.Mob);",
+          "descriptor": "(Lnet/minecraft/world/level/PathNavigationRegion;Lnet/minecraft/world/entity/Mob;)V",
+          "access": 1,
+          "line_start": 406,
+          "line_end": 428,
+          "disassembly_slice_sha256": "31ea9857f5eb6cfd860b16ee2fbc0d95f63ea5953c6f7acf31a4b87250ddc839"
+        },
+        {
+          "name": "done",
+          "declaration": "public void done();",
+          "descriptor": "()V",
+          "access": 1,
+          "line_start": 429,
+          "line_end": 447,
+          "disassembly_slice_sha256": "beb03e2f185e9b78eaa997b04bbcd0d9b5dfebc11cfc3482f713857a1e496763"
+        },
+        {
+          "name": "getStart",
+          "declaration": "public net.minecraft.world.level.pathfinder.Node getStart();",
+          "descriptor": "()Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 1,
+          "line_start": 448,
+          "line_end": 478,
+          "disassembly_slice_sha256": "d8f2e8675daa09e549f4b0dcf2f3142ea0fd9a253c6d8026f7194bca209c1a70"
+        },
+        {
+          "name": "getGoal",
+          "declaration": "public net.minecraft.world.level.pathfinder.Target getGoal(double, double, double);",
+          "descriptor": "(DDD)Lnet/minecraft/world/level/pathfinder/Target;",
+          "access": 1,
+          "line_start": 479,
+          "line_end": 503,
+          "disassembly_slice_sha256": "bb76e257b45089ca6276b5db4893ba8b37df8321789372df7f5127a1ed13b19a"
+        },
+        {
+          "name": "getNeighbors",
+          "declaration": "public int getNeighbors(net.minecraft.world.level.pathfinder.Node[], net.minecraft.world.level.pathfinder.Node);",
+          "descriptor": "([Lnet/minecraft/world/level/pathfinder/Node;Lnet/minecraft/world/level/pathfinder/Node;)I",
+          "access": 1,
+          "line_start": 504,
+          "line_end": 665,
+          "disassembly_slice_sha256": "bfe726bfe555490cb15891468f93c6b7f7d897788168eac77c3b71e1aece5004"
+        },
+        {
+          "name": "isNodeValid",
+          "declaration": "protected boolean isNodeValid(net.minecraft.world.level.pathfinder.Node);",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/Node;)Z",
+          "access": 4,
+          "line_start": 666,
+          "line_end": 695,
+          "disassembly_slice_sha256": "268d05c5516e2deb6baefaa651af5b7650d9f8b3034f52975feaf2f4f398bd4c"
+        },
+        {
+          "name": "isDiagonalNodeValid",
+          "declaration": "protected boolean isDiagonalNodeValid(net.minecraft.world.level.pathfinder.Node, net.minecraft.world.level.pathfinder.Node, net.minecraft.world.level.pathfinder.Node);",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/Node;Lnet/minecraft/world/level/pathfinder/Node;Lnet/minecraft/world/level/pathfinder/Node;)Z",
+          "access": 4,
+          "line_start": 696,
+          "line_end": 748,
+          "disassembly_slice_sha256": "d0a844c951d077fe0534f2029f18e5bcea893cf7335de04588381fe182eb6b11"
+        },
+        {
+          "name": "findAcceptedNode",
+          "declaration": "protected net.minecraft.world.level.pathfinder.Node findAcceptedNode(int, int, int);",
+          "descriptor": "(III)Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 4,
+          "line_start": 749,
+          "line_end": 847,
+          "disassembly_slice_sha256": "67c150109b52f6f2e46be340748342779d69d219bc6848845101fc7a9c48b7d3"
+        },
+        {
+          "name": "getCachedBlockType",
+          "declaration": "protected net.minecraft.world.level.pathfinder.BlockPathTypes getCachedBlockType(int, int, int);",
+          "descriptor": "(III)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 4,
+          "line_start": 848,
+          "line_end": 875,
+          "disassembly_slice_sha256": "3591b50dd955f6f356284bf015c9fa671692fcd084cc086f380c1b7b45f0cf76"
+        },
+        {
+          "name": "getBlockPathType",
+          "declaration": "public net.minecraft.world.level.pathfinder.BlockPathTypes getBlockPathType(net.minecraft.world.level.BlockGetter, int, int, int);",
+          "descriptor": "(Lnet/minecraft/world/level/BlockGetter;III)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 1,
+          "line_start": 876,
+          "line_end": 899,
+          "disassembly_slice_sha256": "cf0c1ad58145db253b0970f4064d2901b38d2cdf1b8ee94c51ff9bafd8367031"
+        },
+        {
+          "name": "getBlockPathType",
+          "declaration": "public net.minecraft.world.level.pathfinder.BlockPathTypes getBlockPathType(net.minecraft.world.level.BlockGetter, int, int, int, net.minecraft.world.entity.Mob);",
+          "descriptor": "(Lnet/minecraft/world/level/BlockGetter;IIILnet/minecraft/world/entity/Mob;)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 1,
+          "line_start": 900,
+          "line_end": 1051,
+          "disassembly_slice_sha256": "9a2c0803bda4f7f8dba6281ffc7cfb8ded1f2fb37e70d64d88d71a7529075696"
+        },
+        {
+          "name": "lambda$getCachedBlockType$0",
+          "declaration": "private net.minecraft.world.level.pathfinder.BlockPathTypes lambda$getCachedBlockType$0(int, int, int, long);",
+          "descriptor": "(IIIJ)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 4098,
+          "line_start": 1052,
+          "line_end": 1080,
+          "disassembly_slice_sha256": "9dce4bb963f870691121b886012d4c87b8640f1e9d672c1c22fa5ab75c760f17"
+        }
+      ],
+      "fields": [
+        {
+          "name": "allowBreaching",
+          "descriptor": "Z",
+          "access": 18,
+          "annotations": []
+        },
+        {
+          "name": "pathTypesByPosCache",
+          "descriptor": "Lit/unimi/dsi/fastutil/longs/Long2ObjectMap;",
+          "access": 18,
+          "annotations": []
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/level/pathfinder/Target",
+      "superclass": "net/minecraft/world/level/pathfinder/Node",
+      "class_hash": "fd6afbb4b4317c1b4a640cd854a13d70a8901c4f2a3cc6b028614b306c32df81",
+      "disassembly_hash": "9a2feb63a9586bf2965da8a187eb5b0a765e9521e1f47c549fe084648681f396",
+      "origin": "HASH_VERIFIED_ORIGINAL_DISASSEMBLY",
+      "evidence_status": "EXACT_CAPTURED_RESOLVED_DEVELOPMENT_BYTECODE",
+      "selected_members": [
+        {
+          "name": "<init>",
+          "declaration": "public net.minecraft.world.level.pathfinder.Target(net.minecraft.world.level.pathfinder.Node);",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/Node;)V",
+          "access": 1,
+          "line_start": 94,
+          "line_end": 119,
+          "disassembly_slice_sha256": "8c84664d627134b67775bb4ef8134234758d6baf63893c6f30ea7253ec395197"
+        },
+        {
+          "name": "<init>",
+          "declaration": "public net.minecraft.world.level.pathfinder.Target(int, int, int);",
+          "descriptor": "(III)V",
+          "access": 1,
+          "line_start": 120,
+          "line_end": 144,
+          "disassembly_slice_sha256": "30ba971ebc961763c2be62ccdffc46e4a535858c8b612454295774723c840828"
+        },
+        {
+          "name": "updateBest",
+          "declaration": "public void updateBest(float, net.minecraft.world.level.pathfinder.Node);",
+          "descriptor": "(FLnet/minecraft/world/level/pathfinder/Node;)V",
+          "access": 1,
+          "line_start": 145,
+          "line_end": 175,
+          "disassembly_slice_sha256": "72f2c77e64b5d4c8552dd1e2fc4d987ef1ea89d74eb739c98617473e0ec044e0"
+        },
+        {
+          "name": "getBestNode",
+          "declaration": "public net.minecraft.world.level.pathfinder.Node getBestNode();",
+          "descriptor": "()Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 1,
+          "line_start": 176,
+          "line_end": 189,
+          "disassembly_slice_sha256": "379f854e7686263870cc48e3db73ba2ae4a0c159041fd73066cf9df174a02c99"
+        },
+        {
+          "name": "setReached",
+          "declaration": "public void setReached();",
+          "descriptor": "()V",
+          "access": 1,
+          "line_start": 190,
+          "line_end": 205,
+          "disassembly_slice_sha256": "bac820e01f2793a2d76b893b7f4b5e8b5d118682b34e522e1bd19c4526e00272"
+        },
+        {
+          "name": "isReached",
+          "declaration": "public boolean isReached();",
+          "descriptor": "()Z",
+          "access": 1,
+          "line_start": 206,
+          "line_end": 219,
+          "disassembly_slice_sha256": "d60080ff3b29b9f159e4eaf1cb60d13af0ff87f9c92ab3bd4cf74701f7662092"
+        },
+        {
+          "name": "createFromStream",
+          "declaration": "public static net.minecraft.world.level.pathfinder.Target createFromStream(net.minecraft.network.FriendlyByteBuf);",
+          "descriptor": "(Lnet/minecraft/network/FriendlyByteBuf;)Lnet/minecraft/world/level/pathfinder/Target;",
+          "access": 9,
+          "line_start": 220,
+          "line_end": 247,
+          "disassembly_slice_sha256": "2b2755d1deb1d31a06f4c1f5ecace8dc9a826035faceca7414f18ccf5f5e030b"
+        }
+      ],
+      "fields": [
+        {
+          "name": "bestHeuristic",
+          "descriptor": "F",
+          "access": 2,
+          "annotations": []
+        },
+        {
+          "name": "bestNode",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 2,
+          "annotations": []
+        },
+        {
+          "name": "reached",
+          "descriptor": "Z",
+          "access": 2,
+          "annotations": []
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/level/pathfinder/WalkNodeEvaluator",
+      "superclass": "net/minecraft/world/level/pathfinder/NodeEvaluator",
+      "class_hash": "c5ac3d3dde5d9cc01ef09e9e13c6cf5cea8c73183bd396a13785d3068b8b2f0c",
+      "disassembly_hash": "b8d2ed7c169abbe55d2a70dca6486abe360ae8d396878ad5025d25eca2f07623",
+      "origin": "HASH_VERIFIED_ORIGINAL_DISASSEMBLY",
+      "evidence_status": "EXACT_CAPTURED_RESOLVED_DEVELOPMENT_BYTECODE",
+      "selected_members": [
+        {
+          "name": "<init>",
+          "declaration": "public net.minecraft.world.level.pathfinder.WalkNodeEvaluator();",
+          "descriptor": "()V",
+          "access": 1,
+          "line_start": 875,
+          "line_end": 900,
+          "disassembly_slice_sha256": "5da764dda8bab7876ebe47229dfbdc6bb28352d02dc2d08e963c8af8379ff1ed"
+        },
+        {
+          "name": "prepare",
+          "declaration": "public void prepare(net.minecraft.world.level.PathNavigationRegion, net.minecraft.world.entity.Mob);",
+          "descriptor": "(Lnet/minecraft/world/level/PathNavigationRegion;Lnet/minecraft/world/entity/Mob;)V",
+          "access": 1,
+          "line_start": 901,
+          "line_end": 922,
+          "disassembly_slice_sha256": "dbfcfc5f4ff1fba9dea6fcaaafa8bf207ccdbc0e8a91681af85cc3e55e3d714f"
+        },
+        {
+          "name": "done",
+          "declaration": "public void done();",
+          "descriptor": "()V",
+          "access": 1,
+          "line_start": 923,
+          "line_end": 949,
+          "disassembly_slice_sha256": "d1602dec6a2c0ca7f455ec3f164f3453b7b6038577d606fad8623e64997e2283"
+        },
+        {
+          "name": "getStart",
+          "declaration": "public net.minecraft.world.level.pathfinder.Node getStart();",
+          "descriptor": "()Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 1,
+          "line_start": 950,
+          "line_end": 1222,
+          "disassembly_slice_sha256": "68337da9ca454d3427b088a025f98d42dbe63efb061162aa955df539c4e954c0"
+        },
+        {
+          "name": "getStartNode",
+          "declaration": "protected net.minecraft.world.level.pathfinder.Node getStartNode(net.minecraft.core.BlockPos);",
+          "descriptor": "(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 4,
+          "line_start": 1223,
+          "line_end": 1259,
+          "disassembly_slice_sha256": "3d30c28ce22bc6a1ee8045858c0615b163f85df976bd417649c84987578a15db"
+        },
+        {
+          "name": "canStartAt",
+          "declaration": "protected boolean canStartAt(net.minecraft.core.BlockPos);",
+          "descriptor": "(Lnet/minecraft/core/BlockPos;)Z",
+          "access": 4,
+          "line_start": 1260,
+          "line_end": 1299,
+          "disassembly_slice_sha256": "615b60fe3ed50a0e373221dde5c5880b9cb740fb3ccd59bd48369783cfe3d1b6"
+        },
+        {
+          "name": "getGoal",
+          "declaration": "public net.minecraft.world.level.pathfinder.Target getGoal(double, double, double);",
+          "descriptor": "(DDD)Lnet/minecraft/world/level/pathfinder/Target;",
+          "access": 1,
+          "line_start": 1300,
+          "line_end": 1324,
+          "disassembly_slice_sha256": "aec52bb20ceae2da62266aaaff7eef8346fda0bca30a4e1cb41ea14a79f9e833"
+        },
+        {
+          "name": "getNeighbors",
+          "declaration": "public int getNeighbors(net.minecraft.world.level.pathfinder.Node[], net.minecraft.world.level.pathfinder.Node);",
+          "descriptor": "([Lnet/minecraft/world/level/pathfinder/Node;Lnet/minecraft/world/level/pathfinder/Node;)I",
+          "access": 1,
+          "line_start": 1325,
+          "line_end": 1685,
+          "disassembly_slice_sha256": "e14d757b66563e1613d0bec76e1bbd0ecb4be32974b25a2d8d1d76ae16630184"
+        },
+        {
+          "name": "isNeighborValid",
+          "declaration": "protected boolean isNeighborValid(net.minecraft.world.level.pathfinder.Node, net.minecraft.world.level.pathfinder.Node);",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/Node;Lnet/minecraft/world/level/pathfinder/Node;)Z",
+          "access": 4,
+          "line_start": 1686,
+          "line_end": 1727,
+          "disassembly_slice_sha256": "b4a335500c20153e42809f8c4737dec0e9bb8fd3459919553b2164657a4d9ca9"
+        },
+        {
+          "name": "isDiagonalValid",
+          "declaration": "protected boolean isDiagonalValid(net.minecraft.world.level.pathfinder.Node, net.minecraft.world.level.pathfinder.Node, net.minecraft.world.level.pathfinder.Node, net.minecraft.world.level.pathfinder.Node);",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/Node;Lnet/minecraft/world/level/pathfinder/Node;Lnet/minecraft/world/level/pathfinder/Node;Lnet/minecraft/world/level/pathfinder/Node;)Z",
+          "access": 4,
+          "line_start": 1728,
+          "line_end": 1871,
+          "disassembly_slice_sha256": "7aa9de8433fe3b169dda0fcaa0113a449112c544d0a290c1a19a4cd63d5c5028"
+        },
+        {
+          "name": "doesBlockHavePartialCollision",
+          "declaration": "private static boolean doesBlockHavePartialCollision(net.minecraft.world.level.pathfinder.BlockPathTypes);",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/BlockPathTypes;)Z",
+          "access": 10,
+          "line_start": 1872,
+          "line_end": 1900,
+          "disassembly_slice_sha256": "45e2deb227f413abb397e694e89c82cf52b3c1effcd967de48786de2d0aed823"
+        },
+        {
+          "name": "canReachWithoutCollision",
+          "declaration": "private boolean canReachWithoutCollision(net.minecraft.world.level.pathfinder.Node);",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/Node;)Z",
+          "access": 2,
+          "line_start": 1901,
+          "line_end": 2011,
+          "disassembly_slice_sha256": "a6d27d13f583827c060b361a57a574b37672997977e1d56c56f79eccd9476669"
+        },
+        {
+          "name": "getFloorLevel",
+          "declaration": "protected double getFloorLevel(net.minecraft.core.BlockPos);",
+          "descriptor": "(Lnet/minecraft/core/BlockPos;)D",
+          "access": 4,
+          "line_start": 2012,
+          "line_end": 2052,
+          "disassembly_slice_sha256": "c9ea7186ff205eb4022cbb90a6cf5f85236326e92de5d51c717fbcc53e9e1019"
+        },
+        {
+          "name": "getFloorLevel",
+          "declaration": "public static double getFloorLevel(net.minecraft.world.level.BlockGetter, net.minecraft.core.BlockPos);",
+          "descriptor": "(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;)D",
+          "access": 9,
+          "line_start": 2053,
+          "line_end": 2100,
+          "disassembly_slice_sha256": "83477305e857504e0866b46b949da846d8b3d7aa731cd10b2273474f583e1958"
+        },
+        {
+          "name": "isAmphibious",
+          "declaration": "protected boolean isAmphibious();",
+          "descriptor": "()Z",
+          "access": 4,
+          "line_start": 2101,
+          "line_end": 2113,
+          "disassembly_slice_sha256": "036633eaff73eee7dc63002e323acf07e262c6cc8a5cdc460f4ca51f0a8e2521"
+        },
+        {
+          "name": "findAcceptedNode",
+          "declaration": "protected net.minecraft.world.level.pathfinder.Node findAcceptedNode(int, int, int, int, double, net.minecraft.core.Direction, net.minecraft.world.level.pathfinder.BlockPathTypes);",
+          "descriptor": "(IIIIDLnet/minecraft/core/Direction;Lnet/minecraft/world/level/pathfinder/BlockPathTypes;)Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 4,
+          "line_start": 2114,
+          "line_end": 2582,
+          "disassembly_slice_sha256": "ab386e50a388f7c7edd3f73e33f93167a4127b69b91f286754f4f3a994c53e11"
+        },
+        {
+          "name": "getMobJumpHeight",
+          "declaration": "private double getMobJumpHeight();",
+          "descriptor": "()D",
+          "access": 2,
+          "line_start": 2583,
+          "line_end": 2600,
+          "disassembly_slice_sha256": "dd29e0e203fe7d5d1827a59fb419a536967435aff3e3b1172c9a2083cc9b4a2e"
+        },
+        {
+          "name": "getNodeAndUpdateCostToMax",
+          "declaration": "private net.minecraft.world.level.pathfinder.Node getNodeAndUpdateCostToMax(int, int, int, net.minecraft.world.level.pathfinder.BlockPathTypes, float);",
+          "descriptor": "(IIILnet/minecraft/world/level/pathfinder/BlockPathTypes;F)Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 2,
+          "line_start": 2601,
+          "line_end": 2637,
+          "disassembly_slice_sha256": "dc19f42a83f3f011bc7530e9a40c8c5d035637aac2c2ac539ac3a37e62f60514"
+        },
+        {
+          "name": "getBlockedNode",
+          "declaration": "private net.minecraft.world.level.pathfinder.Node getBlockedNode(int, int, int);",
+          "descriptor": "(III)Lnet/minecraft/world/level/pathfinder/Node;",
+          "access": 2,
+          "line_start": 2638,
+          "line_end": 2669,
+          "disassembly_slice_sha256": "50d4a6184ac93c79408f8c5040c88a4ef4d90eb5c5eb1105a11bf405d4f84b28"
+        },
+        {
+          "name": "hasCollisions",
+          "declaration": "private boolean hasCollisions(net.minecraft.world.phys.AABB);",
+          "descriptor": "(Lnet/minecraft/world/phys/AABB;)Z",
+          "access": 2,
+          "line_start": 2670,
+          "line_end": 2689,
+          "disassembly_slice_sha256": "554f5c20d029d0e9c95409ed98c12813a7b9be45667b7b2fcabfadd8e77b5d0d"
+        },
+        {
+          "name": "getBlockPathType",
+          "declaration": "public net.minecraft.world.level.pathfinder.BlockPathTypes getBlockPathType(net.minecraft.world.level.BlockGetter, int, int, int, net.minecraft.world.entity.Mob);",
+          "descriptor": "(Lnet/minecraft/world/level/BlockGetter;IIILnet/minecraft/world/entity/Mob;)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 1,
+          "line_start": 2690,
+          "line_end": 2820,
+          "disassembly_slice_sha256": "312a29502ce65acc684c5167a41f2928373e20c76afa567ef576d6991bba9004"
+        },
+        {
+          "name": "getBlockPathTypes",
+          "declaration": "public net.minecraft.world.level.pathfinder.BlockPathTypes getBlockPathTypes(net.minecraft.world.level.BlockGetter, int, int, int, java.util.EnumSet<net.minecraft.world.level.pathfinder.BlockPathTypes>, net.minecraft.world.level.pathfinder.BlockPathTypes, net.minecraft.core.BlockPos);",
+          "descriptor": "(Lnet/minecraft/world/level/BlockGetter;IIILjava/util/EnumSet;Lnet/minecraft/world/level/pathfinder/BlockPathTypes;Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 1,
+          "line_start": 2821,
+          "line_end": 2948,
+          "disassembly_slice_sha256": "e47f7daee0639548ae085bb6022ccc5eccb5a64371b869872e660d8469f9dc93"
+        },
+        {
+          "name": "evaluateBlockPathType",
+          "declaration": "protected net.minecraft.world.level.pathfinder.BlockPathTypes evaluateBlockPathType(net.minecraft.world.level.BlockGetter, net.minecraft.core.BlockPos, net.minecraft.world.level.pathfinder.BlockPathTypes);",
+          "descriptor": "(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/pathfinder/BlockPathTypes;)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 4,
+          "line_start": 2949,
+          "line_end": 3016,
+          "disassembly_slice_sha256": "ae3a1fd9fd3bfd4c583bc5ba57243302fca881065411393bc201867b2521b82b"
+        },
+        {
+          "name": "getBlockPathType",
+          "declaration": "protected net.minecraft.world.level.pathfinder.BlockPathTypes getBlockPathType(net.minecraft.world.entity.Mob, net.minecraft.core.BlockPos);",
+          "descriptor": "(Lnet/minecraft/world/entity/Mob;Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 4,
+          "line_start": 3017,
+          "line_end": 3039,
+          "disassembly_slice_sha256": "8dce781357cdfede342330cf375582b5c4816b87a2a383d0d9771cad1b409792"
+        },
+        {
+          "name": "getCachedBlockType",
+          "declaration": "protected net.minecraft.world.level.pathfinder.BlockPathTypes getCachedBlockType(net.minecraft.world.entity.Mob, int, int, int);",
+          "descriptor": "(Lnet/minecraft/world/entity/Mob;III)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 4,
+          "line_start": 3040,
+          "line_end": 3069,
+          "disassembly_slice_sha256": "1faac4ed04101c09597e042074cf10a0fa52940fbd56952fbf51e0cf81bb7592"
+        },
+        {
+          "name": "getBlockPathType",
+          "declaration": "public net.minecraft.world.level.pathfinder.BlockPathTypes getBlockPathType(net.minecraft.world.level.BlockGetter, int, int, int);",
+          "descriptor": "(Lnet/minecraft/world/level/BlockGetter;III)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 1,
+          "line_start": 3070,
+          "line_end": 3093,
+          "disassembly_slice_sha256": "2fdaf1853225f51f48534e6f669cde82f91961bad50faa6f67fd2f6d7aa6544a"
+        },
+        {
+          "name": "getBlockPathTypeStatic",
+          "declaration": "public static net.minecraft.world.level.pathfinder.BlockPathTypes getBlockPathTypeStatic(net.minecraft.world.level.BlockGetter, net.minecraft.core.BlockPos$MutableBlockPos);",
+          "descriptor": "(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos$MutableBlockPos;)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 9,
+          "line_start": 3094,
+          "line_end": 3230,
+          "disassembly_slice_sha256": "763f5a2918cbffea01674a2fd2ed7cc9a153f312fc14c4b4231072686add87f9"
+        },
+        {
+          "name": "checkNeighbourBlocks",
+          "declaration": "public static net.minecraft.world.level.pathfinder.BlockPathTypes checkNeighbourBlocks(net.minecraft.world.level.BlockGetter, net.minecraft.core.BlockPos$MutableBlockPos, net.minecraft.world.level.pathfinder.BlockPathTypes);",
+          "descriptor": "(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos$MutableBlockPos;Lnet/minecraft/world/level/pathfinder/BlockPathTypes;)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 9,
+          "line_start": 3231,
+          "line_end": 3421,
+          "disassembly_slice_sha256": "01d8cdd7a4aba60ae10e8a3bae78b67b2f63f785e721a91dd3cf74ba0684c328"
+        },
+        {
+          "name": "getBlockPathTypeRaw",
+          "declaration": "protected static net.minecraft.world.level.pathfinder.BlockPathTypes getBlockPathTypeRaw(net.minecraft.world.level.BlockGetter, net.minecraft.core.BlockPos);",
+          "descriptor": "(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 12,
+          "line_start": 3422,
+          "line_end": 3697,
+          "disassembly_slice_sha256": "eadca60077d249dad337a54def1ecd2b807ea99e47ca9ebef04d0251439725cf"
+        },
+        {
+          "name": "isBurningBlock",
+          "declaration": "public static boolean isBurningBlock(net.minecraft.world.level.block.state.BlockState);",
+          "descriptor": "(Lnet/minecraft/world/level/block/state/BlockState;)Z",
+          "access": 9,
+          "line_start": 3698,
+          "line_end": 3736,
+          "disassembly_slice_sha256": "b11bcbc07f953593f73ec00d7304d28e574586e4c51cfebf51b9c0515c29d14b"
+        },
+        {
+          "name": "lambda$getCachedBlockType$1",
+          "declaration": "private net.minecraft.world.level.pathfinder.BlockPathTypes lambda$getCachedBlockType$1(int, int, int, net.minecraft.world.entity.Mob, long);",
+          "descriptor": "(IIILnet/minecraft/world/entity/Mob;J)Lnet/minecraft/world/level/pathfinder/BlockPathTypes;",
+          "access": 4098,
+          "line_start": 3737,
+          "line_end": 3761,
+          "disassembly_slice_sha256": "22e27775943a5c726dfb2369d201aa815a6aa34e77040dd43e1b49ac6930c697"
+        },
+        {
+          "name": "lambda$hasCollisions$0",
+          "declaration": "private boolean lambda$hasCollisions$0(net.minecraft.world.phys.AABB, java.lang.Object);",
+          "descriptor": "(Lnet/minecraft/world/phys/AABB;Ljava/lang/Object;)Z",
+          "access": 4098,
+          "line_start": 3762,
+          "line_end": 3795,
+          "disassembly_slice_sha256": "06bc3b297e206fa8d4a3bcdd2fa7726222b3d05118421f07b3a614484050397c"
+        }
+      ],
+      "fields": [
+        {
+          "name": "SPACE_BETWEEN_WALL_POSTS",
+          "descriptor": "D",
+          "access": 25,
+          "annotations": []
+        },
+        {
+          "name": "DEFAULT_MOB_JUMP_HEIGHT",
+          "descriptor": "D",
+          "access": 26,
+          "annotations": []
+        },
+        {
+          "name": "pathTypesByPosCache",
+          "descriptor": "Lit/unimi/dsi/fastutil/longs/Long2ObjectMap;",
+          "access": 18,
+          "annotations": []
+        },
+        {
+          "name": "collisionCache",
+          "descriptor": "Lit/unimi/dsi/fastutil/objects/Object2BooleanMap;",
+          "access": 18,
+          "annotations": []
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/monster/warden/Warden$1$1",
+      "superclass": "net/minecraft/world/level/pathfinder/PathFinder",
+      "class_hash": "4a13e20f7319e1521e35681c48500f04996bd0ea1c2af67f07a29156b8256a92",
+      "disassembly_hash": "0709bf353756d260c83d83b69f1579995dc29c4049aa8aabf18bfa3078cbb9f9",
+      "origin": "FRESH_SAME_HASHED_PROVIDER_DISASSEMBLY",
+      "evidence_status": "EXACT_CAPTURED_RESOLVED_DEVELOPMENT_BYTECODE",
+      "selected_members": [
+        {
+          "name": "<init>",
+          "declaration": "net.minecraft.world.entity.monster.warden.Warden$1$1(net.minecraft.world.entity.monster.warden.Warden$1, net.minecraft.world.level.pathfinder.NodeEvaluator, int);",
+          "descriptor": "(Lnet/minecraft/world/entity/monster/warden/Warden$1;Lnet/minecraft/world/level/pathfinder/NodeEvaluator;I)V",
+          "access": 0,
+          "line_start": 64,
+          "line_end": 85,
+          "disassembly_slice_sha256": "4fce6ba6ba0266fa0d15fe174ea72d59bbfaffe487bcde04927bcf6202ac8b0c"
+        },
+        {
+          "name": "distance",
+          "declaration": "protected float distance(net.minecraft.world.level.pathfinder.Node, net.minecraft.world.level.pathfinder.Node);",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/Node;Lnet/minecraft/world/level/pathfinder/Node;)F",
+          "access": 4,
+          "line_start": 86,
+          "line_end": 101,
+          "disassembly_slice_sha256": "4d1b6de5c52f6f36977348d349670a06bfa60f2ea0badf697eb8ce38f75b58fb"
+        }
+      ],
+      "fields": [
+        {
+          "name": "this$1",
+          "descriptor": "Lnet/minecraft/world/entity/monster/warden/Warden$1;",
+          "access": 4112,
+          "annotations": []
+        }
+      ]
+    }
+  ]
+}
