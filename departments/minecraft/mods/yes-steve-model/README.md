@@ -24,11 +24,15 @@ Official Modrinth release:
 - Minecraft: **1.20.1**
 - loader: **Forge**
 - client + server
-- displayed size: **5.02 MB**
+- previous page display size: **5.02 MB** (not used as binary identity)
+- exact JAR size: **63,269,843 bytes**
+- exact SHA-256: **25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f**
+- exact SHA-1: **151ac7b24da8beeca1a20864565743cfd77af286**
 - displayed license: **ARR**
 
-The exact distributed JAR SHA-256 has not been captured in this pass.
-Therefore binary/source equivalence is **NOT_ESTABLISHED**.
+The official distributed JAR is now an **EXACT BINARY ANCHOR**. Binary/source equivalence to the
+public f184eda source candidate remains **NOT_ESTABLISHED**; exact binary identity and source identity
+are deliberately separate claims.
 
 ## RELEASE-LINE SOURCE CANDIDATE
 
@@ -138,13 +142,16 @@ The machine-readable map deliberately keeps distributed-artifact observations se
 version-matched public source candidate. This exposed concrete source/artifact divergence around the
 preview/paperdoll renderer instead of silently forcing them to agree.
 
-The current machine-readable map contains **55** owner/member mappings (**22 CONFIRMED / 33 HIGH**) plus separate unresolved-owner alias surfaces. Public Chinese-speaking compatibility projects were especially useful because several validate exact 2.6.5 JAR descriptors or prove hooks at runtime.
+The current machine-readable map contains **210** mappings (**183 CONFIRMED / 27 HIGH**).
+Every recorded owner/member/descriptor contract passes against the exact official JAR: 83 class
+targets, 122 exact methods and 5 exact fields, with **0 failures**. Bone ownership, Molang context,
+binding/functions, animation-controller core and the Java network registration table are now
+exact-artifact-backed.
 
 Protected native internals remain out of scope.
 
 ## Important limits
 
-- The distributed 2.6.5 JAR has not been hashed here.
 - Public release-line source candidate equivalence to the distributed JAR is not proven.
 - Native internal implementation of protected 2.6.5 binaries is not analyzed.
 - Encrypted-model protection is not bypassed.
@@ -160,6 +167,7 @@ Protected native internals remain out of scope.
 - [MODEL-DISTRIBUTION-2026-10-05.md](MODEL-DISTRIBUTION-2026-10-05.md)
 - [OBFUSCATION-RESEARCH-2026-10-05.md](OBFUSCATION-RESEARCH-2026-10-05.md)
 - [OBFUSCATION-MAP-2026-10-05.json](OBFUSCATION-MAP-2026-10-05.json)
+- [EXACT-JAR-STRUCTURAL-SCAN-2026-10-05.md](EXACT-JAR-STRUCTURAL-SCAN-2026-10-05.md)
 - [CHINESE-COMMUNITY-OBFUSCATION-RECON-2026-10-05.md](CHINESE-COMMUNITY-OBFUSCATION-RECON-2026-10-05.md)
 - [FAILURE-REPAIR-HISTORY.md](FAILURE-REPAIR-HISTORY.md)
 - [RECONNAISSANCE-2026-10-05.md](RECONNAISSANCE-2026-10-05.md)
