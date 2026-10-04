@@ -30,6 +30,40 @@ custom queryがfalseを返し、Navigation／erase overrideが状態を保持す
 
 Motion／Decision **161件成功**。**39件のactual production Gson→JavaScriptケース**はNavigation停止10件／memory消去19件／Sink return10件で、bounded consumer契約を通りました。EXECUTION／PARTIALのみへ接続し、CANDIDATE／SELECTION／到着RESULTを補いません。
 
-hash照合したgenuine依存関係で全bridge／Mixinをcompileし、combined API／owner／writer／Arena／overlay回帰が成功しました。既存24件のBrain Navigation、11件のNavigation、14件のactivity Gsonも維持しています。今回のfrozen native実機証拠とexact HEADのhosted CIは未取得です。source／genuine API／test fixtureの成功を実機検証済みとは扱いません。
+hash照合したgenuine依存関係で全bridge／Mixinをcompileし、combined API／owner／writer／Arena／overlay回帰が成功しました。既存24件のBrain Navigation、11件のNavigation、14件のactivity Gsonも維持しています。
+
+## Frozen native R53
+
+producer **e3d7bf6840f20e0e8bbabb15f62f4dc807a00f6e**、`run-20261004122747-d6dc8cb6a07c`／`sess-20261004122747-182548defd18`／`snapshot-20261004122747-21617b0d75cf`、process epoch1／Arena epoch0です。private adult Villager UUIDは`55555555-6666-7777-8888-000000000001`。元control85ファイルからcopyし、R50〜R52と同じprelaunch floor／照明／player設定、DayTime11850の自然進行を使用しました。memoryや停止結果をfixtureへ書き込みません。
+
+| revision | valid snapshots | Stop／WALK_TARGET erase／PATH erase／Stop終了 | 全channel events／payload bytes | Motion実サンプル | same-snapshot PATH／Navigation参照一致 |
+| --- | ---: | --- | --- | ---: | ---: |
+| 1 | 120 | 2／2／2／2 | 133／323,007 | 76 | 64 |
+| 2 | 120 | 2／2／2／2 | 134／324,769 | 91 | 81 |
+
+各窓は`brain_navigation`のみ、200 ticks／256 events／524,288 bytes／32 search nodesの既存上限で、WINDOW_ENDED（101..301／701..901 exclusive）です。267件の正常return証拠は、4組の停止call（16件）、4組のstart call（12件）、239件のtick returnです。247 invocation IDsをrevisionごとに照合しました。4組の停止callに部分取得はありません。
+
+| invocation ID | game tick | Navigation stop observation ID | WALK_TARGET erase observation ID | PATH erase observation ID | Sink return observation ID |
+| --- | ---: | --- | --- | --- | --- |
+| `sink:1:18` | 40426 | `obs:forge-runtime:44292:49` | `obs:forge-runtime:44292:50` | `obs:forge-runtime:44292:51` | `obs:forge-runtime:44292:52` |
+| `sink:1:87` | 40544 | `obs:forge-runtime:44292:197` | `obs:forge-runtime:44292:198` | `obs:forge-runtime:44292:199` | `obs:forge-runtime:44292:200` |
+| `sink:2:42` | 41050 | `obs:forge-runtime:44292:601` | `obs:forge-runtime:44292:602` | `obs:forge-runtime:44292:603` | `obs:forge-runtime:44292:604` |
+| `sink:2:112` | 41173 | `obs:forge-runtime:44292:750` | `obs:forge-runtime:44292:751` | `obs:forge-runtime:44292:752` | `obs:forge-runtime:44292:753` |
+
+4組ともbeforeのSink Path／Brain PATH／Navigation Pathはpresentで、WALK_TARGET Optional slotも非emptyです。Navigation停止のnormal return後にはcached Navigation Pathがabsentになり、Brain PATHはまだpresentでした。その後、WALK_TARGET消去、PATH消去、Sink終了のnormal returnsを同じ直接取得したinvocation ID／gameTimeArgument／source method／eventIndex順序で照合しました。afterの3箇所のPathとWALK_TARGET slotはabsent、Navigation speedは0.5のままでした。最初の`sink:1:18`のbefore Path参照は`path:1:2`です。
+
+これはこの元call内で取得したnormal returnsとbase cached状態であり、WALK_TARGETの値、到達条件、RNG／cooldown、上流の停止理由、目的地到着を証明しません。167件のMotion実サンプルと145件のsame-snapshot参照一致からも、到着や未取得の因果関係を補いません。custom保持、例外、未登録・壊れたslot、参照上限、非有限speedはgenuine API／test fixtureの範囲で、このnative窓では取得していません。nested restart／tick reconciliationも未観測です。
+
+canonical **1,081 unique observations**は`EVIDENCE_COMPLETE`、SHA **a36b555e526e0f6d366629a7df017a4947ce5fa9b7a2cc0588d990cb357a6095**。finalization SHA **beb31de8873d406b673fb5b4540fcc8d2704be53d1a754ff5feed658a1eff4b5**。clean ACK／drop0／queue0／finalWriterSeq1081、owned launcher41296／runtime44292のOS上の終了と、元／control／predecessor R52／fixture baseline各85ファイルのhash不変を確認しました。
+
+JFR設定34,835 bytesのSHA`d4d74f3594bfe342397f53aaa75a7551e7b2d9ac6f86c7ca2bc016690501b37d`を起動前に照合し、actual start／stop応答を要求しました。保存JFR **3,944,464 bytes**、SHA **4d4bd4e738df3f0af52f23bc2f8d009d6f5c444c530585a5aba95c340f6d0281**はJDK`jfr summary`でparse成功です。記録期間63秒にExecutionSample348／CPULoad60／ThreadCPULoad446を含みます。単独記録であり、matched OFF対照、GPU／pixels、性能上限や観測影響の受入ではありません。
+
+private canonical／native report／installed-stop proof／JFR／post-setup baselineと以前の証拠を保全しています。GitHubへsave、JAR、source body、private runtime dataを追加しません。
+
+## Hosted producer CI
+
+source push **37202102207**／source PR **37202106471**／pytest **37202106507**はSUCCESSです。actual PR checkout merge`a5460b26534ad8ce709ea87a21e486ccbb491afc`の親はbase`57e52f9ef44c082daf7abbb0b0f5ada3a258a406`とproducer`e3d7bf6840f20e0e8bbabb15f62f4dc807a00f6e`。161 focused／39 actual Brain stop Gson markers、完全LAB source suite、portable Java、pinned MOD compile、dependency／resource／unit gatesを確認しました。hosted pytestは**3,149成功／332スキップ／8 warnings（256.39秒）**。documentation publication HEADは別に確認します。
+
+## 残る検証
 
 完全な停止・到達条件／RNG／compute branchの理由、全Path候補・拒否・cost、広いBoss戦、Vanilla／FRONTIER／community、matched observer-effect／GPU／pixels、live Tank resize、section21全受入、最後のwhole-diff独立レビューは残っています。Draftと全体goalを継続します。
