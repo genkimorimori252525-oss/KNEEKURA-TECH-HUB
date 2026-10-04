@@ -37,13 +37,29 @@ try {
   'DecisionAdapter','DecisionBurstRequest','AdapterSourceProof','TwilightForestDescriptor','TwilightForestReturnDescriptor','TwilightForestAdapter',
   'MotionTraceCache','RelatedProjectileTraceCache','MotionOverlayRuntime','MotionOverlayGeometry','MotionOverlay'];
  const sources=[...names.map(n=>path.join(main,'KneekuraDebug'+n+'.java')),...['Path','Brain','Behavior','OneShot','GateBehavior'].map(n=>path.join(main,'decisionmixin/KneekuraDebug'+n+'DecisionMixin.java')),path.join(main,'decisionmixin/KneekuraDebugScheduledActivityMixin.java'),path.join(main,'decisionmixin/KneekuraDebugNavigationResultMixin.java'),path.join(main,'decisionmixin/KneekuraDebugBrainNavigationMixin.java')];
- const checks=['EvidenceClaim','CaptureWriter','RegisteredWorld','TankPresentation','DecisionSnapshot','TypedMemory','BehaviorControl','BrainActivity','NavigationResult','BrainNavigation','ActivityRequirement','BrainStartLoop','BrainMemoryCheck','BrainStart','BrainComputeCondition','BrainCompute','BrainTickStop','BrainStop','DecisionHooks','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult','TerrainField','SynchedCached','MotionTraceCache','RelatedProjectileTrace','MotionOverlayGeometry','MotionWriter'];
+ const checks=['EvidenceClaim','CaptureWriter','RegisteredWorld','TankPresentation','DecisionSnapshot','TypedMemory','BehaviorControl','BrainActivity','NavigationResult','BrainNavigation','BrainMemorySource','ActivityRequirement','BrainStartLoop','BrainMemoryCheck','BrainStart','BrainComputeCondition','BrainCompute','BrainTickStop','BrainStop','DecisionHooks','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult','TerrainField','SynchedCached','MotionTraceCache','RelatedProjectileTrace','MotionOverlayGeometry','MotionWriter'];
  run(executable('javac'),['--release','17','-proc:none','-cp',classpath,'-d',output,...sources,...checks.map(n=>path.join(test,'KneekuraDebug'+n+'SelfTest.java')),path.join(test,'KneekuraDebugDecisionIdentityInterop.java')]);
  for(const name of checks.filter(n=>n!=='MotionWriter')){
   // Vanilla bootstrap can create logs; keep this new check's artifacts in its disposable output.
-  const bootstrap=['ActivityRequirement','BrainStartLoop','BrainMemoryCheck','BrainStart','BrainComputeCondition','BrainCompute','BrainTickStop','BrainStop','BrainNavigation','NavigationResult','BrainActivity','BehaviorControl','TypedMemory','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult'].includes(name);
+  const bootstrap=['BrainMemorySource','ActivityRequirement','BrainStartLoop','BrainMemoryCheck','BrainStart','BrainComputeCondition','BrainCompute','BrainTickStop','BrainStop','BrainNavigation','NavigationResult','BrainActivity','BehaviorControl','TypedMemory','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult'].includes(name);
   const cp=bootstrap?classpath.split(path.delimiter).map(p=>path.resolve(root,p)).join(path.delimiter):classpath;
   const stdout=run(executable('java'),['-cp',output+path.delimiter+cp,'com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebug'+name+'SelfTest'],{},bootstrap?output:root);
+   if(name==='BrainMemorySource') {
+    const lines=stdout.split(/\r?\n/).filter(l=>l.startsWith('BRAIN_MEMORY_SOURCE_INTEROP:'));
+    assert.equal(lines.length,26,'genuine base branches, both parents, source/base/virtual separation, caps, nested and eight-check prefix');
+    const records=lines.map((line,index)=>({source:{side:'SERVER'},observationId:'brain-memory-source-gson:'+index,gameTime:100,payload:JSON.parse(line.slice('BRAIN_MEMORY_SOURCE_INTEROP:'.length))}));
+    assert.ok(records.every(validOriginalDecisionEvent),'actual original Map/presence/base/virtual Gson satisfies strict consumer');
+    assert.equal(records[0].payload.data.slotStatus,'NULL');assert.equal(records[0].payload.data.presenceStatus,'NOT_CALLED');
+    for(const index of [1,2,7,8])assert.equal(records[index].payload.data.presenceStatus,'NOT_CALLED');
+    for(let index=3;index<7;index++){const data=records[index].payload.data;assert.equal(data.presenceStatus,'NORMAL_RETURN');assert.equal(data.presenceResult,index%2===0);assert.equal(data.presenceSite,index<5?'VALUE_PRESENT':'VALUE_ABSENT');}
+    assert.equal(records[9].payload.data.baseResult,false);assert.equal(records[9].payload.data.result,true);assert.equal(records[10].payload.kind,'BRAIN_ACTIVITY_MEMORY_SOURCE_RETURN');
+    for(const index of [11,12])assert.equal(records[index].payload.data.memoryModuleStatus,'NOT_EXPOSED');assert.equal(records[13].payload.data.memorySourceInvocationId,'memory-source:7:256');assert.equal(records[14].payload.data.instanceIdentityStatus,'NOT_EXPOSED');
+    assert.equal(records[15].payload.data.memorySourceInvocationId,'memory-source:7:2');assert.equal(records[16].payload.data.memorySourceInvocationId,'memory-source:7:1');assert.equal(records[17].payload.kind,'BRAIN_ACTIVITY_MEMORY_SOURCE_RETURN');
+    assert.deepEqual(records.slice(-8).map(r=>r.payload.data.checkIndex),[1,2,3,4,5,6,7,8]);
+    const stages={},capabilities={},timeline=[];appendOriginalDecisionEvents(records,stages,capabilities,timeline);assert.equal(stages.EVALUATION.facts.length,26);assert.equal(capabilities.brain_navigation.status,'PARTIAL');assert.equal(capabilities.brain_activity.status,'PARTIAL');
+    for(const stage of ['CANDIDATE','SELECTION','EXECUTION','RESULT'])assert.equal(stages[stage],undefined);
+    console.log('Twenty-six actual Brain memory source/Gson cases preserve original Map/presence and base/virtual returns');
+   }
    if(name==='ActivityRequirement') {
     const lines=stdout.split(/\r?\n/).filter(l=>l.startsWith('ACTIVITY_REQUIREMENT_INTEROP:'));
     assert.equal(lines.length,17,'actual predicate/two callers, missing/empty/source checks, caps, unknowns and nested scopes');

@@ -23,6 +23,25 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value=Brain.class,remap=false)
 public abstract class KneekuraDebugBrainDecisionMixin {
+    @Redirect(method="checkMemory(Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;Lnet/minecraft/world/entity/ai/memory/MemoryStatus;)Z",
+        at=@At(value="INVOKE",target="Ljava/util/Map;get(Ljava/lang/Object;)Ljava/lang/Object;"),require=1)
+    private Object kneekura$memorySourceGet(Map<?,?> map,Object key,MemoryModuleType<?> module,MemoryStatus requested) {
+        return KneekuraDebugDecisionHooks.originalMemorySourceGet((Brain<?>)(Object)this,map,key,module,requested);
+    }
+    @Redirect(method="checkMemory(Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;Lnet/minecraft/world/entity/ai/memory/MemoryStatus;)Z",
+        at=@At(value="INVOKE",target="Ljava/util/Optional;isPresent()Z",ordinal=0),require=1)
+    private boolean kneekura$memorySourcePresent(java.util.Optional<?> slot,MemoryModuleType<?> module,MemoryStatus requested) {
+        return KneekuraDebugDecisionHooks.originalMemorySourcePresence((Brain<?>)(Object)this,slot,module,requested,"VALUE_PRESENT");
+    }
+    @Redirect(method="checkMemory(Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;Lnet/minecraft/world/entity/ai/memory/MemoryStatus;)Z",
+        at=@At(value="INVOKE",target="Ljava/util/Optional;isPresent()Z",ordinal=1),require=1)
+    private boolean kneekura$memorySourceAbsent(java.util.Optional<?> slot,MemoryModuleType<?> module,MemoryStatus requested) {
+        return KneekuraDebugDecisionHooks.originalMemorySourcePresence((Brain<?>)(Object)this,slot,module,requested,"VALUE_ABSENT");
+    }
+    @Inject(method="checkMemory(Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;Lnet/minecraft/world/entity/ai/memory/MemoryStatus;)Z",at=@At("RETURN"),require=2)
+    private void kneekura$memorySourceReturn(MemoryModuleType<?> module,MemoryStatus requested,CallbackInfoReturnable<Boolean> result) {
+        KneekuraDebugDecisionHooks.memorySourceBaseReturn((Brain<?>)(Object)this,module,requested,result.getReturnValue());
+    }
     @Invoker(value="activityRequirementsAreMet",remap=false)
     public abstract boolean kneekura$invokeActivityRequirement(Activity requested);
 

@@ -68,6 +68,12 @@ public final class KneekuraDebugDecisionHooks {
         final List<JsonObject> checks=new ArrayList<>();Boolean membership;int count;boolean truncated,invalid;
         ActivityRequirementFrame(ActivityFrame parent,Activity requested,Map<?,?> requirements,String id,String site){this.parent=parent;this.requested=requested;this.requirements=requirements;this.id=id;this.site=site;}
     }
+    private static final class MemorySourceFrame {
+        final Brain<?> brain;final MemoryModuleType<?> module;final MemoryStatus requested;final Map<?,?> memories;final String id;final int index;
+        final StartFrame start;final StartConditionCapture condition;final MemoryRequirementCapture requirement;final ActivityRequirementFrame activity;
+        Object slot;boolean got,invalid,returned;Boolean presence,baseResult;String presenceSite;
+        MemorySourceFrame(Brain<?> brain,MemoryModuleType<?> module,MemoryStatus requested,Map<?,?> memories,String id,int index,StartFrame start,StartConditionCapture condition,MemoryRequirementCapture requirement,ActivityRequirementFrame activity){this.brain=brain;this.module=module;this.requested=requested;this.memories=memories;this.id=id;this.index=index;this.start=start;this.condition=condition;this.requirement=requirement;this.activity=activity;}
+    }
     private record SinkFrame(MoveToTargetSink behavior,Mob owner,Brain<?> brain,PathNavigation navigation,
                              String id,String parentId,String callSite,long gameTime,JsonObject before,long preCallCost) { }
 
@@ -145,7 +151,7 @@ public final class KneekuraDebugDecisionHooks {
     }
     public static void clear(String reason) {
         Session previous=active;active=null;
-        if(previous!=null){previous.budget.close(reason);previous.clearHeapNodes();previous.activityRequirementFrame=null;previous.sinkFrame=null;previous.tickStopFrame=null;previous.startFrame=null;previous.startLoopFrame=null;previous.computeFrame=null;previous.createFrame=null;previous.finderFrame=null;previous.reachedFrame=null;}
+        if(previous!=null){previous.budget.close(reason);previous.clearHeapNodes();previous.memorySourceFrame=null;previous.activityRequirementFrame=null;previous.sinkFrame=null;previous.tickStopFrame=null;previous.startFrame=null;previous.startLoopFrame=null;previous.computeFrame=null;previous.createFrame=null;previous.finderFrame=null;previous.reachedFrame=null;}
     }
 
     public static final class Session {
@@ -176,6 +182,7 @@ public final class KneekuraDebugDecisionHooks {
         private int nextTickStop,tickStopDepth;
         private StartFrame startFrame;private int nextStart,startDepth;
         private int nextMemoryRequirement;
+        private MemorySourceFrame memorySourceFrame;private int nextMemorySource,memorySourceDepth;
         private StartLoopFrame startLoopFrame;private int nextStartLoop,startLoopDepth;
         private ComputeFrame computeFrame;private CreateFrame createFrame;private FinderFrame finderFrame;
         private int nextCompute,computeDepth,createDepth,finderDepth,reachedDepth;
@@ -257,6 +264,20 @@ public final class KneekuraDebugDecisionHooks {
             try {Map<?,?> map=(Map<?,?>)KneekuraDebugDecisionSnapshot.read(Brain.class,"activityRequirements",brain);if(map==null)return null;
                 return new ActivityRequirementFrame(parent,requested,map,"activity-requirement:"+budget.context().selectionRevision()+":"+(++nextActivityRequirement),site);
             }catch(ReflectiveOperationException|RuntimeException|LinkageError error){budget.close("ACTIVITY_REQUIREMENT_CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());return null;}
+        }
+        private boolean memorySourceReady(MemorySourceFrame frame) {
+            if(active!=this||thread!=Thread.currentThread()||frame==null||frame.invalid)return false;
+            if(frame.start!=null){if(startFrame!=frame.start||frame.start.condition!=frame.condition||frame.condition.requirement!=null||frame.requirement.unsupportedSource||!startReady(frame.start))return false;}
+            else if(activityRequirementFrame!=null||!activityRequirementReady(frame.activity))return false;
+            try {return KneekuraDebugDecisionSnapshot.read(Brain.class,"memories",frame.brain)==frame.memories;}
+            catch(ReflectiveOperationException|RuntimeException|LinkageError error){budget.close("MEMORY_SOURCE_CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());return false;}
+        }
+        private MemorySourceFrame memorySourceBegin(Brain<?> brain,MemoryModuleType<?> module,MemoryStatus requested,int index,StartFrame start,StartConditionCapture condition,MemoryRequirementCapture requirement,ActivityRequirementFrame activity) {
+            if(index<1||index>8||nextMemorySource>=256||memorySourceDepth>8)return null;
+            try {Map<?,?> map=(Map<?,?>)KneekuraDebugDecisionSnapshot.read(Brain.class,"memories",brain);if(map==null)return null;
+                MemorySourceFrame frame=new MemorySourceFrame(brain,module,requested,map,"memory-source:"+budget.context().selectionRevision()+":"+(++nextMemorySource),index,start,condition,requirement,activity);
+                return memorySourceReady(frame)?frame:null;
+            }catch(ReflectiveOperationException|RuntimeException|LinkageError error){budget.close("MEMORY_SOURCE_CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());return null;}
         }
         private boolean sinkReady(SinkFrame frame) {
             if(active!=this||thread!=Thread.currentThread()||!channels.contains("brain_navigation")||!matches(frame.owner()))return false;
@@ -818,8 +839,10 @@ public final class KneekuraDebugDecisionHooks {
         if(previous!=null&&!supported)previous.unsupportedSource=true;
         int index=supported?(previous.count=Math.min(9,previous.count+1)):0;
         if(condition!=null)condition.requirement=null;
+        MemorySourceFrame oldSource=session.memorySourceFrame;int sourceDepth=session.memorySourceDepth;session.memorySourceDepth++;
+        MemorySourceFrame source=supported?session.memorySourceBegin(brain,module,requested,index,frame,condition,previous,null):null;session.memorySourceFrame=source;
         try {
-            boolean result=brain.checkMemory(module,requested);
+            boolean result=brain.checkMemory(module,requested);memorySourceReturn(session,source,result);
             if(supported&&active==session&&session.startFrame==frame&&frame.condition==condition&&session.startReady(frame)){
                 if(index>8)previous.truncated=true;
                 else {JsonObject check=new JsonObject();check.addProperty("checkIndex",index);
@@ -830,7 +853,7 @@ public final class KneekuraDebugDecisionHooks {
                         requested==MemoryStatus.VALUE_ABSENT?"VALUE_ABSENT":"NOT_EXPOSED");check.addProperty("result",result);previous.checks.add(check);
                 }
             }return result;
-        }finally{if(condition!=null)condition.requirement=active==session&&session.startFrame==frame&&frame.condition==condition?previous:null;}
+        }finally{session.memorySourceFrame=active==session?oldSource:null;session.memorySourceDepth=sourceDepth;if(condition!=null)condition.requirement=active==session&&session.startFrame==frame&&frame.condition==condition?previous:null;}
     }
     public static void originalBrainStartDispatch(Behavior<?> behavior,ServerLevel level,LivingEntity owner,long gameTime,Runnable original) {
         Session session=active;
@@ -1087,12 +1110,53 @@ public final class KneekuraDebugDecisionHooks {
         ActivityRequirementFrame frame=session.activityRequirementFrame;
         boolean supported=session.activityRequirementReady(frame)&&frame.parent.brain()==brain&&frame.requested==requested&&Boolean.TRUE.equals(frame.membership);
         if(frame!=null&&!supported)frame.invalid=true;session.activityRequirementFrame=null;
-        try {boolean result=brain.checkMemory(module,status);if(supported&&session.activityRequirementReady(frame)){
+        MemorySourceFrame oldSource=session.memorySourceFrame;int sourceDepth=session.memorySourceDepth;session.memorySourceDepth++;
+        MemorySourceFrame source=supported?session.memorySourceBegin(brain,module,status,frame.count+1,null,null,null,frame):null;session.memorySourceFrame=source;
+        try {boolean result=brain.checkMemory(module,status);memorySourceReturn(session,source,result);if(supported&&session.activityRequirementReady(frame)){
                 int index=frame.count=Math.min(9,frame.count+1);if(index>8)frame.truncated=true;
                 else {JsonObject c=new JsonObject();c.addProperty("checkIndex",index);String name=module==MemoryModuleType.PATH?"PATH":module==MemoryModuleType.WALK_TARGET?"WALK_TARGET":module==MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE?"CANT_REACH_WALK_TARGET_SINCE":null;
                     c.addProperty("memoryModuleStatus",name==null?"NOT_EXPOSED":"AVAILABLE");if(name!=null)c.addProperty("memoryModule",name);c.addProperty("requestedMemoryStatus",status==MemoryStatus.REGISTERED?"REGISTERED":status==MemoryStatus.VALUE_PRESENT?"VALUE_PRESENT":status==MemoryStatus.VALUE_ABSENT?"VALUE_ABSENT":"NOT_EXPOSED");c.addProperty("result",result);frame.checks.add(c);}
             }return result;
-        }finally{session.activityRequirementFrame=active==session?frame:null;}
+        }finally{session.memorySourceFrame=active==session?oldSource:null;session.memorySourceDepth=sourceDepth;session.activityRequirementFrame=active==session?frame:null;}
+    }
+    /** Source Map.get returns Object: the original caller retains its checkcast and null branch. */
+    public static Object originalMemorySourceGet(Brain<?> brain,Map<?,?> map,Object key,MemoryModuleType<?> module,MemoryStatus requested) {
+        Session session=active;if(session==null||session.thread!=Thread.currentThread())return map.get(key);
+        MemorySourceFrame frame=session.memorySourceFrame;
+        boolean supported=session.memorySourceReady(frame)&&frame.brain==brain&&frame.module==module&&frame.requested==requested&&frame.memories==map&&key==module&&!frame.got&&!frame.returned;
+        if(frame!=null&&!supported)frame.invalid=true;session.memorySourceFrame=null;
+        try {Object result=map.get(key);if(supported&&session.memorySourceReady(frame)){frame.got=true;frame.slot=result;}return result;}
+        finally{session.memorySourceFrame=active==session?frame:null;}
+    }
+    public static boolean originalMemorySourcePresence(Brain<?> brain,java.util.Optional<?> slot,MemoryModuleType<?> module,MemoryStatus requested,String site) {
+        Session session=active;if(session==null||session.thread!=Thread.currentThread())return slot.isPresent();
+        MemorySourceFrame frame=session.memorySourceFrame;
+        boolean supported=session.memorySourceReady(frame)&&frame.brain==brain&&frame.module==module&&frame.requested==requested&&frame.got&&frame.slot==slot&&slot!=null&&frame.presence==null&&!frame.returned&&
+            (requested==MemoryStatus.VALUE_PRESENT&&"VALUE_PRESENT".equals(site)||requested==MemoryStatus.VALUE_ABSENT&&"VALUE_ABSENT".equals(site));
+        if(frame!=null&&!supported)frame.invalid=true;session.memorySourceFrame=null;
+        try {boolean result=slot.isPresent();if(supported&&session.memorySourceReady(frame)){frame.presence=result;frame.presenceSite=site;}return result;}
+        finally{session.memorySourceFrame=active==session?frame:null;}
+    }
+    public static void memorySourceBaseReturn(Brain<?> brain,MemoryModuleType<?> module,MemoryStatus requested,boolean result) {
+        Session session=active;if(session==null||session.thread!=Thread.currentThread())return;MemorySourceFrame frame=session.memorySourceFrame;
+        boolean supported=session.memorySourceReady(frame)&&frame.brain==brain&&frame.module==module&&frame.requested==requested&&frame.got&&!frame.returned&&
+            (frame.slot==null||requested!=MemoryStatus.VALUE_PRESENT&&requested!=MemoryStatus.VALUE_ABSENT||frame.presence!=null);
+        if(frame!=null&&!supported)frame.invalid=true;if(supported){frame.returned=true;frame.baseResult=result;}
+    }
+    private static void memorySourceReturn(Session session,MemorySourceFrame frame,boolean result) {
+        if(!session.memorySourceReady(frame)||!frame.got||!frame.returned)return;
+        session.record(frame.start==null?"BRAIN_ACTIVITY_MEMORY_SOURCE_RETURN":"BRAIN_PATH_MEMORY_SOURCE_RETURN","Brain.checkMemory.originalSource.AFTER_VIRTUAL_RETURN",()->{
+            JsonObject data=new JsonObject();data.addProperty("brainClass",label(frame.brain.getClass().getName()));String token=session.token(frame.brain);
+            if(token!=null)data.addProperty("instanceIdentity",token);data.addProperty("instanceIdentityStatus",token==null?"NOT_EXPOSED":"AVAILABLE");
+            data.addProperty("memorySourceInvocationId",frame.id);data.addProperty("requirementInvocationId",frame.start==null?frame.activity.id:frame.requirement.id);
+            if(frame.start==null)data.addProperty("activityInvocationId",frame.activity.parent.id());else data.addProperty("tryStartInvocationId",frame.start.id);
+            data.addProperty("checkIndex",frame.index);String name=frame.module==MemoryModuleType.PATH?"PATH":frame.module==MemoryModuleType.WALK_TARGET?"WALK_TARGET":frame.module==MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE?"CANT_REACH_WALK_TARGET_SINCE":null;
+            data.addProperty("memoryModuleStatus",name==null?"NOT_EXPOSED":"AVAILABLE");if(name!=null)data.addProperty("memoryModule",name);
+            data.addProperty("requestedMemoryStatus",frame.requested==MemoryStatus.REGISTERED?"REGISTERED":frame.requested==MemoryStatus.VALUE_PRESENT?"VALUE_PRESENT":frame.requested==MemoryStatus.VALUE_ABSENT?"VALUE_ABSENT":"NOT_EXPOSED");
+            data.addProperty("slotStatus",frame.slot==null?"NULL":"NON_NULL");data.addProperty("presenceStatus",frame.presence==null?"NOT_CALLED":"NORMAL_RETURN");
+            if(frame.presence!=null){data.addProperty("presenceSite",frame.presenceSite);data.addProperty("presenceResult",frame.presence);}
+            data.addProperty("baseResult",frame.baseResult);data.addProperty("result",result);data.addProperty("sourceScope","ORIGINAL_BASE_MAP_PRESENCE_AND_RETURN_WITH_VIRTUAL_RESULT_NOT_ALL_ELIGIBILITY_REASONS");return data;
+        });
     }
     public static void activityRequirementsReturn(Brain<?> brain,Activity requested,boolean result) {
         Session session=active;ActivityFrame frame=activityFrame(session,brain);
