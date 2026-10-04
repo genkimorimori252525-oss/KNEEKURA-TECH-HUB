@@ -38,7 +38,23 @@
       "fb23351 is the next runtime/content fix on the 2.6.5 line",
       "f184eda adds a Fast DEV build task while preserving mod_version 2.6.5",
       "historical tree has no root LICENSE file; do not infer current Apache-2.0 terms for this historical snapshot"
-    ]
+    ],
+    "surface_inventory": {
+      "client_animation_molang_java": 47,
+      "geckolib_core_molang_java": 102,
+      "molang_parser_runtime_java": 37,
+      "tlm_compat_java": 27,
+      "network_java": 21,
+      "client_compat_java": 85,
+      "mixin_java": 22
+    },
+    "molang_surface": {
+      "direct_ysm_binding_registrations": 110,
+      "ctrl_main_conditions": 19,
+      "ctrl_functions": 9,
+      "ctrl_constants": 7,
+      "tlm_variables": 16
+    }
   },
   "frontier": {
     "repository": "YesSteveModel/YesSteveModel",
@@ -106,7 +122,11 @@
     "touhou_little_maid_integration": "EVIDENCE_BACKED",
     "runtime_performance": "NOT_ANALYZED",
     "distributed_binary_source_equivalence": "NOT_ESTABLISHED",
-    "protected_native_or_model_encryption_internals": "OUT_OF_SCOPE"
+    "protected_native_or_model_encryption_internals": "OUT_OF_SCOPE",
+    "molang_surface_inventory": "EVIDENCE_BACKED_STATIC",
+    "tlm_capability_renderer_controller_bridge": "EVIDENCE_BACKED_STATIC",
+    "tlm_roaming_variable_parity": "NOT_ESTABLISHED_TODO_IN_SOURCE",
+    "non_player_entity_presentation_wrapper": "EVIDENCE_BACKED_TLM"
   },
   "safety_and_provenance_boundaries": [
     "No VMProtect/native protection bypass.",
