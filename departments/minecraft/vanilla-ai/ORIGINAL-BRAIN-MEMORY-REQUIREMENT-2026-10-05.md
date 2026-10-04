@@ -16,6 +16,31 @@ requirement IDs256／prefix8、共有StartFrame256／depth8／component128、既
 
 compiled ASMでsource-specific mandatory Redirectのexact method／target／handler args／require1、1production delegate、各OFF／observed branchの元virtual checkMemory1回を照合しました。旧R54～R57 compiled境界とGsonを維持します。Motion／Decision188件、production Gson→strict JavaScript16新規requirementケースと旧42／35／59／17／39／24／11／14です。null等のmalformed nested checkを安全に拒否するJS regressionもRED→GREENです。allbridge／genuinecombinedAPIの成功を確認しました。
 
-## 次の検証
+## Frozen native R58
 
-frozen producerから正式control85filesのfresh privateコピーを使い、自然進行Villagerのinstalled要求prefixと元memory条件／tryStart、取得できたcompute／startのdirect IDs・raw参照・source順序を照合します。canonical／actualJFRACK・parse／cleanstop／元・control・predecessorR57・baseline85hash不変／producerと公開HEAD CIを確認するまでnative受入を主張しません。上限で未取得となるbranchは不明のまま保持します。全memory内部理由・eligibility／全compute枝・duration/fallback RNG・cached reuse・TICK_RECOMPUTE・arrival、全Path候補・拒否・malus・effective cost、全Vanilla・FRONTIER・community、広いBoss戦、matched OFF／GPU・pixels、live Tank resize、section21全受入、最後のwhole-diff独立レビューは残ります。Draftと全体goalを継続します。
+producer **263a9cf2b7d98b21e50b13fb2ee9ed1bb0ab8e03**、run-20261004164937-0ace1c53a83a／sess-20261004164937-33681c253b81／snapshot-20261004164937-5f613bcfa9da、process epoch1／Arena epoch0、private adult Villager UUID55555555-6666-7777-8888-000000000001です。正式control85filesのfresh privateコピー、自然day11850から進行し、desired Brain memory／path／resultをseedしていません。
+
+**80新規requirement receipts**に、元virtual checkMemoryの**240正常returns**（各3件）が含まれます。個別checkに別observation IDを付けたのではなく、1receipt内のsource prefixです。CANT_REACH_WALK_TARGET_SINCE／REGISTERED=trueが80、PATH／VALUE_ABSENT=trueが80、WALK_TARGET／VALUE_PRESENT=falseが79／trueが1でした。これは元実戻り値で、cached memoryを読み直してboolean・未登録／欠測理由を再計算していません。
+
+**79 complete requirement→元memory条件→tryStart正常return groups、1 partial group**です。partialではrequirement正常return自体は取得済みですが、上限後の元memory条件／tryStart receiptは未取得であり、そのtailを失敗・未呼出し・完全開始処理へ補いません。native prefixは3件でtruncation=false、synthetic9件／ID256／custom／null等のfixtureと区別します。既知constructorの実source順序とfirst-falseを照合しましたが、全priority・Activity eligibilityや内部slot理由の受入ではありません。
+
+全3要求がtrueとなった **memory-requirement:1:8／try-start:1:8**（tick40437、runtime26392）では、requirement summaryと[R57の13点](ORIGINAL-BRAIN-TRY-START-CALL-2026-10-05.md)をつないだ**1 complete14-event direct chain**を照合しました。実source ID末尾は **148 → 149 → 150 → 151 → 152 → 153 → 154 → 155 → 156 → 157 → 158 → 159 → 160 → 161**です。computecompute:1:1／Sinksink:1:22、raw path:1:6の元格納／PATHwrite／Nav引数／before-after参照、exact UUIDと全run／session／snapshot／process／Arena／revision、元gameTimeArgument、instanceIdentity、eventIndexを照合しました。memory=true／extra=true／reached=false／Path.canReach=true／compute=true／Nav=true／tryStart=true、元distance／closeEnoughは8／0です。R55/R56の6compute境界は1complete／partial0です。今回は元Path.canReach=trueをnativeで取得しましたが、NavのtrueやPath.canReachは実到着ではありません。
+
+| revision | valid snapshots | 新requirement receipts | 全callbacks／payload bytes | Motion実サンプル | same-snapshot PATH／Nav参照一致 | 終了理由 |
+| --- | ---: | ---: | --- | ---: | ---: | --- |
+| 1 | 120 | 8 | 256／325010 | 98 | 91 | EVENT_BUDGET |
+| 2 | 120 | 72 | 256／277683 | 83 | 72 | EVENT_BUDGET |
+
+全512 callbacks／240 valid snapshots、canonical **1,340 unique observations**はEVIDENCE_COMPLETE、SHA **fe63d8b3a799a7f891a2a36164b03386f229858489064e1c7ac11273979daafd**、finalization SHA **8b60f53b8e51b2d8f6144f727746adff4bd1ee4f299fb70911f245e5c42f17e8**。旧start160events／79completegroupsと旧compute4events／predicate2eventsを保持します。既存200ticks／256events／524,288bytes／32nodes、revision1 local101..301 exclusiveとrevision2 local701..901 exclusiveのEVENT_BUDGETを維持しました。181Motion実サンプル／163same-snapshot参照一致は独立した事実です。全tail／全AIを取得済みとはしません。
+
+clean ACK／drop0／queue0／finalWriterSeq1340、owned launcher23544／runtime26392のOS終了、元／control／predecessorR57／baseline各85filesのhash不変、MOD53a84の8,444precompiled files／149compile artifacts／TF hash不変を確認しました。正式save／private runtime data／mapped JAR／source bodyはGitHubへ追加しません。
+
+JFR34,835bytesのpreflight／actual start-stop ACK／JDK parseを確認しました。保存 **4643766bytes**／SHA **38b06374b77ad72fea344308a3b0f9aadde2601fe7f18ead09a0ea1bdbd36e78**、63秒／ExecutionSample338／CPULoad60／ThreadCPULoad467です。単独記録で、matched OFF／GPU／pixels／observer-effect受入ではありません。R51未取得やR56初回CI失敗の履歴を保全します。
+
+## Hosted producer CI
+
+push37218159840／PR source37218163557／pytest37218163565はSUCCESS。actual PR checkout merge **4e2e5fb9acad76ffdb67f9aeeafc0ed612209111**の親は57e52f9ef44c082daf7abbb0b0f5ada3a258a406／263a9cf2b7d98b21e50b13fb2ee9ed1bb0ab8e03です。188focused／16newactualGsonと旧42／35／59／17／39／24／11／14、complete LAB source／portable Java／pinned MOD compile／dependency／resource／unit gatesを確認しました。hosted pytest: **2026-10-04T16:53:34.9475097Z 3149 passed, 332 skipped, 8 warnings in 239.70s (0:03:59)**。document publication HEADのCIは別に確認します。
+
+## 残る検証
+
+全priority／Activity候補・internal memory理由、他native source branches／custom／null／cap／例外／rearm、全compute枝・duration／fallback RNG・cached reuse・TICK_RECOMPUTEと実到着、全Path候補・拒否・malus・effective cost、全Vanilla・FRONTIER・community、広いBoss戦・coordination、matched OFF／GPU・pixels、live Tank resize、section21全受入、最後のwhole-diff独立レビューは残っています。Draftと全体goalを継続します。
