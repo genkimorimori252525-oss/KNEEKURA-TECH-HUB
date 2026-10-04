@@ -4,9 +4,11 @@ import {exactObjectKeys,validPathReferenceFact,validCachedPathFact,consistentRaw
 import {BRAIN_COMPUTE_KINDS,validBrainCompute} from './brain-compute-contract.mjs';
 import {BRAIN_START_KINDS,validBrainStart} from './brain-start-contract.mjs';
 import {validBrainMemoryRequirement} from './brain-memory-check-contract.mjs';
+import {validBrainStartLoop} from './brain-start-loop-contract.mjs';
 
 const KINDS = Object.freeze({
   BRAIN_PATH_MEMORY_REQUIREMENT_RETURN: ['EVALUATION','brain_navigation'],
+  BRAIN_PATH_START_LOOP_RETURN: ['EVALUATION','brain_navigation'],
   BRAIN_PATH_START_CONDITION_RETURN: ['EVALUATION','brain_navigation'],
   BRAIN_PATH_START_DISPATCH_RETURN: ['EXECUTION','brain_navigation'],
   BRAIN_PATH_TRY_START_RETURN: ['EVALUATION','brain_navigation'],
@@ -415,6 +417,7 @@ function validBrainNavigation(kind,d,record) {
 function validData(kind,d,record) {
   if(BRAIN_COMPUTE_KINDS.includes(kind))return validBrainCompute(kind,d,record);
   if(kind==='BRAIN_PATH_MEMORY_REQUIREMENT_RETURN')return validBrainMemoryRequirement(d,record);
+  if(kind==='BRAIN_PATH_START_LOOP_RETURN')return validBrainStartLoop(d,record);
   if(BRAIN_START_KINDS.includes(kind))return validBrainStart(kind,d,record);
   if(['BRAIN_PATH_CONDITION_RETURN','BRAIN_PATH_DISPATCH_RETURN'].includes(kind))return validBrainTickStop(kind,d,record);
   if(kind.startsWith('BRAIN_PATH_'))return validBrainNavigation(kind,d,record);

@@ -6,17 +6,38 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.BehaviorControl;
+import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.entity.schedule.Schedule;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.gen.Invoker;
+import java.util.Set;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value=Brain.class,remap=false)
 public abstract class KneekuraDebugBrainDecisionMixin {
+    @Invoker(value="startEachNonRunningBehavior",remap=false)
+    public abstract void kneekura$invokeStartEach(ServerLevel level,LivingEntity owner);
+
+    @Redirect(method="tick(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)V",
+        at=@At(value="INVOKE",target="Lnet/minecraft/world/entity/ai/Brain;startEachNonRunningBehavior(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)V"),require=1)
+    private void kneekura$originalStartLoop(Brain<?> brain,ServerLevel level,LivingEntity owner) {
+        KneekuraDebugDecisionHooks.originalBrainStartLoop(brain,level,owner,()->kneekura$invokeStartEach(level,owner));
+    }
+    @Redirect(method="startEachNonRunningBehavior(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)V",
+        at=@At(value="INVOKE",target="Ljava/util/Set;contains(Ljava/lang/Object;)Z"),require=1)
+    private boolean kneekura$originalStartActivity(Set<?> activities,Object requested,ServerLevel level,LivingEntity owner) {
+        return KneekuraDebugDecisionHooks.originalBrainStartActivity((Brain<?>)(Object)this,activities,requested,level,owner);
+    }
+    @Redirect(method="startEachNonRunningBehavior(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)V",
+        at=@At(value="INVOKE",target="Lnet/minecraft/world/entity/ai/behavior/BehaviorControl;getStatus()Lnet/minecraft/world/entity/ai/behavior/Behavior$Status;"),require=1)
+    private Behavior.Status kneekura$originalStartStatus(BehaviorControl<?> control,ServerLevel level,LivingEntity owner) {
+        return KneekuraDebugDecisionHooks.originalBrainStartStatus((Brain<?>)(Object)this,control,level,owner);
+    }
     @Redirect(method="startEachNonRunningBehavior(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)V",
         at=@At(value="INVOKE",target="Lnet/minecraft/world/entity/ai/behavior/BehaviorControl;tryStart(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)Z"),require=1)
     private boolean kneekura$originalTryStart(BehaviorControl<?> control,ServerLevel level,LivingEntity owner,long tick) {

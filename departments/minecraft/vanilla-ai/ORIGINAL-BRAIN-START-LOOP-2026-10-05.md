@@ -1,0 +1,17 @@
+# 元のBrain開始ループのActivity・状態・開始戻り値
+
+[R57の元tryStart](ORIGINAL-BRAIN-TRY-START-CALL-2026-10-05.md)と[R58の元メモリ要求](ORIGINAL-BRAIN-MEMORY-REQUIREMENT-2026-10-05.md)へ、Brain.tickが実際に呼ぶprivate startEachNonRunningBehaviorの直接scopeを追加します。元private methodを既存Brain Mixin内のInvokerから1回実行し、そのsource Set.contains(Activity)／interface BehaviorControl.getStatusを各1回だけ実行します。元Map.values／entrySet／iterator、Level.getGameTime、STOPPEDだけのtryStart分岐を維持し、再走査・AI／getter／registry queryの追加はありません。
+
+元loopは数値priorityキーを読みません。priorityStatus=NOT_EXPOSEDで、Activity/controlの元走査indexを数値priorityや理由へ変換しません。ActivityはCORE／IDLE／REST／WORK／MEET／PLAY／FIGHTのraw identityだけを既知labelにし、その他とnullはNOT_EXPOSEDです。未知のMOD controlも元interfaceの実戻り値を扱いますが、独自AIをVanilla Goalとして説明しません。STOPPED／RUNNING／nullの元statusと、元tryStartの正常booleanを別の事実として保持し、cached statusを読み直して再計算しません。
+
+新しいBRAIN_PATH_START_LOOP_RETURNはEVALUATION／brain_navigation／PARTIALです。正常に完了した元private loopの有限prefixを記録します。Activity8／各control8、実際の9件目正常returnで各truncated=true。inactive Activityはcontrols空、RUNNING/null statusはtryStartStatus=NOT_CALLED、STOPPEDは元正常tryStartResultを持ちます。元tryStartへ実際に渡ったlongがある場合だけsourceGameTimeStatus=AVAILABLEとgameTimeArgumentを保持します。それ以外はNOT_CAPTUREDで、元Level.getGameTime結果を追加取得したりreceipt時刻と同一視しません。R57 frameが実際に割り当てられた場合だけcapturedTryStartInvocationIdを付け、そのIDだけで子の正常完了・record保持を主張しません。旧R57/R58/compute/Sinkのpayloadは変更しません。
+
+loop IDs256／depth8、共有component128と既存200ticks／256events／524,288bytes／32nodesは不変です。exact選択owner／Brain／cached Nav／raw Navowner／cached activeActivities Set／level／thread／contextが必要です。source delegate中は古いloop scopeを一時抑止し、任意callbackを親の元走査へ混ぜません。正しいnested private loopは別IDで捕捉します。mixed source／cached Set変更／rearm／clear／例外／budget終了では正常loop summaryを偽装せず、元例外同一性とfinally cleanupを保ちます。observerCostNanosは既存summary buildとfirst-byte-checkの範囲で、prefix収集や観測全体のCPU費用は含みません。
+
+[追加source ledger](BRAIN-START-LOOP-BYTECODE-LEDGER-2026-10-05.json)はsame mapped artifactの3owners／4methods／3fields／7member slicesです。SHA **5f64ab73c390bd8639e1ef5973d15411c96ba88cb6b11d88a9313e2a5f4e5f65**。artifact/JDK/class/disassembly/member hashesとexact descriptorsを照合しました。静的sourceはinstalled transformed class attestationではなく、source body/JARを公開しません。
+
+元private loopのgenuine bytecodeをcloneし、試験用private field accessorと3source delegateだけを置換しました。未変更private methodとのgetter/values/contains/status/tryStart回数・実順序・分岐を照合するRED→GREENです。inactive、STOPPED/RUNNING/null、unknown/null Activity、virtual true/false、8+tail×2、nested loopとcallback抑止、exact R57 child、元例外、OFF/channel/thread/cached Brain/Nav/Set/Navowner/revision/time/event/byte/rearm/clear/component128/writerとframe解放を検査します。compiled ASMで3mandatory source Redirect/require1/Invokerとsingle original delegateを照合します。synthetic map/reflection writes/unsafe subjectはfixtureのみで、native全branchの受入証拠ではありません。旧tick/stopのlambda検査を元Behaviorクラスへ限定し、旧3protected/1final delegateと5必須Redirect件数を維持しました。
+
+Motion/Decision194件と新16Gsonケース、および旧16/42/35/59/17/39/24/11/14を検査します。genuinecombinedAPIは成功しました。Windowsのbridge全124件は119成功/4失敗/1skipでした。失敗は既存のsymlink権限3件とdescendant pipe終了判定1件で、今回変更範囲の失敗とは扱いません。OS設定や無関係コードは変更せず、hosted Linux CIを別途確認します。公開HEAD CIとfrozen producerのfresh private85copy、actual JFR ACK/parse、canonical/cleanstop/全保存対象hash照合は次の検証です。現段階では新loopの実機受入済みとはしません。
+
+全eligibility/priority/internal reasons、全compute枝/duration/fallback RNG/cached reuse/TICK_RECOMPUTE/arrival、全Path候補/拒否/malus/effective cost、全Vanilla/FRONTIER/community、広いBoss戦、matched OFF/GPU/pixels、live Tank resize、section21全受入と最後のwhole-diff独立レビューは引き続き未完了です。Draftと元の全体goalを継続します。

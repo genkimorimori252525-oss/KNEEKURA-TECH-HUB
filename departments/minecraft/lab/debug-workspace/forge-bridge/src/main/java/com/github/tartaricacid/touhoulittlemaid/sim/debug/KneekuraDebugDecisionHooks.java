@@ -117,13 +117,30 @@ public final class KneekuraDebugDecisionHooks {
         }
     }
 
+    private static final class StartLoopFrame {
+        final Brain<?> brain;final Mob owner;final PathNavigation navigation;final ServerLevel level;final Set<?> activeActivities;final String id;
+        final List<StartActivityCapture> activities=new ArrayList<>();int count;boolean truncated,invalid;Long gameTime;
+        StartActivityCapture activity;StartControlCapture control;
+        StartLoopFrame(Brain<?> brain,Mob owner,PathNavigation navigation,ServerLevel level,Set<?> activeActivities,String id){
+            this.brain=brain;this.owner=owner;this.navigation=navigation;this.level=level;this.activeActivities=activeActivities;this.id=id;
+        }
+    }
+    private static final class StartActivityCapture {
+        final Object requested;final boolean result;final int index;final List<StartControlCapture> controls=new ArrayList<>();int count;boolean truncated;
+        StartActivityCapture(Object requested,boolean result,int index){this.requested=requested;this.result=result;this.index=index;}
+    }
+    private static final class StartControlCapture {
+        final BehaviorControl<?> control;final Behavior.Status status;final int index;Boolean result;String child;
+        StartControlCapture(BehaviorControl<?> control,Behavior.Status status,int index){this.control=control;this.status=status;this.index=index;}
+    }
+
     public static void install(Session session) {
         if (session.thread != Thread.currentThread()) throw new IllegalStateException("SERVER_THREAD_REQUIRED");
         clear("REARMED");active=session;
     }
     public static void clear(String reason) {
         Session previous=active;active=null;
-        if(previous!=null){previous.budget.close(reason);previous.clearHeapNodes();previous.sinkFrame=null;previous.tickStopFrame=null;previous.startFrame=null;previous.computeFrame=null;previous.createFrame=null;previous.finderFrame=null;previous.reachedFrame=null;}
+        if(previous!=null){previous.budget.close(reason);previous.clearHeapNodes();previous.sinkFrame=null;previous.tickStopFrame=null;previous.startFrame=null;previous.startLoopFrame=null;previous.computeFrame=null;previous.createFrame=null;previous.finderFrame=null;previous.reachedFrame=null;}
     }
 
     public static final class Session {
@@ -153,6 +170,7 @@ public final class KneekuraDebugDecisionHooks {
         private int nextTickStop,tickStopDepth;
         private StartFrame startFrame;private int nextStart,startDepth;
         private int nextMemoryRequirement;
+        private StartLoopFrame startLoopFrame;private int nextStartLoop,startLoopDepth;
         private ComputeFrame computeFrame;private CreateFrame createFrame;private FinderFrame finderFrame;
         private int nextCompute,computeDepth,createDepth,finderDepth,reachedDepth;
         private ReachedFrame reachedFrame;
@@ -271,6 +289,25 @@ public final class KneekuraDebugDecisionHooks {
                 KneekuraDebugDecisionSnapshot.read(Mob.class,"navigation",subject)==frame.navigation&&
                 KneekuraDebugDecisionSnapshot.read(PathNavigation.class,"mob",frame.navigation)==subject;
             }catch(ReflectiveOperationException|RuntimeException|LinkageError error){budget.close("COMPUTE_CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());return false;}
+        }
+        private boolean startLoopReady(StartLoopFrame frame) {
+            if(active!=this||frame==null||frame.invalid||!matches(frame.owner)||!channels.contains("brain_navigation"))return false;
+            try {return budget.allows(currentContext.get(),time.getAsLong())&&
+                KneekuraDebugDecisionSnapshot.read(LivingEntity.class,"brain",subject)==frame.brain&&
+                KneekuraDebugDecisionSnapshot.read(Mob.class,"navigation",subject)==frame.navigation&&
+                KneekuraDebugDecisionSnapshot.read(PathNavigation.class,"mob",frame.navigation)==subject&&
+                KneekuraDebugDecisionSnapshot.read(Brain.class,"activeActivities",frame.brain)==frame.activeActivities;
+            }catch(ReflectiveOperationException|RuntimeException|LinkageError error){budget.close("START_LOOP_CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());return false;}
+        }
+        private StartLoopFrame startLoopBegin(Brain<?> brain,ServerLevel level,LivingEntity owner) {
+            if(!matches(owner)||!channels.contains("brain_navigation")||brain==null||nextStartLoop>=256||startLoopDepth>8)return null;
+            try {
+                if(!budget.allows(currentContext.get(),time.getAsLong())||KneekuraDebugDecisionSnapshot.read(LivingEntity.class,"brain",owner)!=brain)return null;
+                PathNavigation navigation=(PathNavigation)KneekuraDebugDecisionSnapshot.read(Mob.class,"navigation",owner);
+                Set<?> activities=(Set<?>)KneekuraDebugDecisionSnapshot.read(Brain.class,"activeActivities",brain);
+                if(navigation==null||activities==null||KneekuraDebugDecisionSnapshot.read(PathNavigation.class,"mob",navigation)!=owner)return null;
+                return new StartLoopFrame(brain,(Mob)owner,navigation,level,activities,"start-loop:"+budget.context().selectionRevision()+":"+(++nextStartLoop));
+            }catch(ReflectiveOperationException|RuntimeException|LinkageError error){budget.close("START_LOOP_CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());return null;}
         }
         private boolean startReady(StartFrame frame) {
             if(active!=this||frame==null||!matches(frame.owner)||!channels.contains("brain_navigation"))return false;
@@ -636,6 +673,66 @@ public final class KneekuraDebugDecisionHooks {
             });
         }catch(ReflectiveOperationException|RuntimeException|LinkageError error){session.budget.close("NAVIGATION_CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());}
     }
+    /** Wrap the actual private loop; source delegates gather returns without replaying its iterators. */
+    public static void originalBrainStartLoop(Brain<?> brain,ServerLevel level,LivingEntity owner,Runnable original) {
+        Session session=active;
+        if(session==null||session.thread!=Thread.currentThread()){original.run();return;}
+        StartLoopFrame previous=session.startLoopFrame;int depth=session.startLoopDepth;session.startLoopDepth++;
+        try {
+            StartLoopFrame frame=session.startLoopBegin(brain,level,owner);session.startLoopFrame=frame;
+            original.run();
+            if(session.startLoopReady(frame))session.record("BRAIN_PATH_START_LOOP_RETURN","Brain.startEachNonRunningBehavior.AFTER",()->startLoopData(session,frame));
+        }finally{session.startLoopFrame=active==session?previous:null;session.startLoopDepth=depth;}
+    }
+    public static boolean originalBrainStartActivity(Brain<?> brain,Set<?> activities,Object requested,ServerLevel level,LivingEntity owner) {
+        Session session=active;
+        if(session==null||session.thread!=Thread.currentThread())return activities.contains(requested);
+        StartLoopFrame frame=session.startLoopFrame;
+        boolean supported=session.startLoopReady(frame)&&frame.brain==brain&&frame.level==level&&frame.owner==owner&&frame.activeActivities==activities;
+        if(frame!=null){frame.activity=null;frame.control=null;if(!supported)frame.invalid=true;}
+        session.startLoopFrame=null;
+        try {
+            boolean result=activities.contains(requested);
+            if(supported&&session.startLoopReady(frame)){
+                int index=frame.count=Math.min(9,frame.count+1);
+                if(index>8)frame.truncated=true;
+                else {frame.activity=new StartActivityCapture(requested,result,index);frame.activities.add(frame.activity);}
+            }return result;
+        }finally{session.startLoopFrame=active==session?frame:null;}
+    }
+    public static Behavior.Status originalBrainStartStatus(Brain<?> brain,BehaviorControl<?> control,ServerLevel level,LivingEntity owner) {
+        Session session=active;
+        if(session==null||session.thread!=Thread.currentThread())return control.getStatus();
+        StartLoopFrame frame=session.startLoopFrame;StartActivityCapture activity=frame==null?null:frame.activity;
+        boolean source=session.startLoopReady(frame)&&frame.brain==brain&&frame.level==level&&frame.owner==owner;
+        boolean supported=source&&activity!=null&&activity.result;
+        if(frame!=null){frame.control=null;if(!source||activity!=null&&!activity.result)frame.invalid=true;}
+        session.startLoopFrame=null;
+        try {
+            Behavior.Status status=control.getStatus();
+            if(supported&&session.startLoopReady(frame)){
+                int index=activity.count=Math.min(9,activity.count+1);
+                if(index>8)activity.truncated=true;
+                else {frame.control=new StartControlCapture(control,status,index);activity.controls.add(frame.control);}
+            }return status;
+        }finally{session.startLoopFrame=active==session?frame:null;}
+    }
+    private static JsonObject startLoopData(Session session,StartLoopFrame frame) {
+        JsonObject data=new JsonObject();data.addProperty("brainClass",label(frame.brain.getClass().getName()));component(data,session,frame.brain,"instanceIdentity");
+        data.addProperty("loopInvocationId",frame.id);data.addProperty("sourceGameTimeStatus",frame.gameTime==null?"NOT_CAPTURED":"AVAILABLE");
+        if(frame.gameTime!=null)data.addProperty("gameTimeArgument",Long.toString(frame.gameTime));data.addProperty("priorityStatus","NOT_EXPOSED");JsonArray activities=new JsonArray();
+        for(StartActivityCapture activity:frame.activities){JsonObject a=new JsonObject();a.addProperty("activityIndex",activity.index);
+            String name=activity.requested==Activity.CORE?"CORE":activity.requested==Activity.IDLE?"IDLE":activity.requested==Activity.REST?"REST":activity.requested==Activity.WORK?"WORK":
+                activity.requested==Activity.MEET?"MEET":activity.requested==Activity.PLAY?"PLAY":activity.requested==Activity.FIGHT?"FIGHT":null;
+            a.addProperty("activityStatus",name==null?"NOT_EXPOSED":"AVAILABLE");if(name!=null)a.addProperty("activity",name);a.addProperty("result",activity.result);JsonArray controls=new JsonArray();
+            for(StartControlCapture control:activity.controls){JsonObject c=new JsonObject();c.addProperty("controlIndex",control.index);c.addProperty("controlClass",label(control.control.getClass().getName()));component(c,session,control.control,"instanceIdentity");
+                c.addProperty("status",control.status==Behavior.Status.STOPPED?"STOPPED":control.status==Behavior.Status.RUNNING?"RUNNING":"NOT_EXPOSED");
+                c.addProperty("tryStartStatus",control.result==null?"NOT_CALLED":"NORMAL_RETURN");if(control.result!=null)c.addProperty("tryStartResult",control.result);if(control.child!=null)c.addProperty("capturedTryStartInvocationId",control.child);controls.add(c);
+            }a.add("controls",controls);a.addProperty("controlsTruncated",activity.truncated);activities.add(a);
+        }data.add("activities",activities);data.addProperty("activitiesTruncated",frame.truncated);
+        data.addProperty("iterationScope","ORIGINAL_ACTIVITY_AND_CONTROL_RETURN_PREFIX_NOT_ALL_ELIGIBILITY_REASONS");data.addProperty("returnScope","NORMAL_ORIGINAL_PRIVATE_START_LOOP_NOT_ALL_STARTS_OR_ARRIVAL");
+        data.addProperty("eligibilityReasonStatus","NOT_EXPOSED");data.addProperty("arrivalStatus","NOT_EXPOSED");return data;
+    }
     /** Source Brain loop interface call. Unknown controls and all OFF/throw paths still execute once. */
     @SuppressWarnings({"rawtypes","unchecked"})
     public static boolean originalBrainTryStart(Brain<?> brain,BehaviorControl<?> control,ServerLevel level,LivingEntity owner,long gameTime) {
@@ -644,15 +741,24 @@ public final class KneekuraDebugDecisionHooks {
     private static boolean originalBrainStartCall(Brain<?> brain,BehaviorControl<?> control,ServerLevel level,LivingEntity owner,long gameTime,BooleanSupplier original) {
         Session session=active;
         if(session==null||session.thread!=Thread.currentThread())return original.getAsBoolean();
+        StartLoopFrame loop=session.startLoopFrame;StartControlCapture captured=loop==null?null:loop.control;
+        boolean loopSource=session.startLoopReady(loop)&&loop.brain==brain&&loop.level==level&&loop.owner==owner;
+        boolean loopSupported=loopSource&&captured!=null&&captured.control==control&&captured.status==Behavior.Status.STOPPED&&captured.result==null;
+        if(loop!=null&&(!loopSource||captured!=null&&!loopSupported))loop.invalid=true;
+        session.startLoopFrame=null;
         StartFrame previous=session.startFrame;int depth=session.startDepth;session.startDepth++;
         try {
             StartFrame frame=session.startBegin(brain,control,level,owner,gameTime);session.startFrame=frame;
             boolean result=original.getAsBoolean();
+            if(loopSource&&session.startLoopReady(loop)){
+                if(loop.gameTime!=null&&loop.gameTime.longValue()!=gameTime)loop.invalid=true;
+                else {loop.gameTime=gameTime;if(loopSupported){captured.result=result;captured.child=frame==null?null:frame.id;}}
+            }
             if(session.startReady(frame))session.record("BRAIN_PATH_TRY_START_RETURN","Brain.startEachNonRunningBehavior.tryStart.AFTER",()->{
                 JsonObject data=startData(session,frame);data.addProperty("result",result);
                 data.addProperty("resultScope","ORIGINAL_INTERFACE_TRY_START_BOOLEAN_NOT_NAVIGATION_SUCCESS_OR_ARRIVAL");return data;
             });return result;
-        }finally{session.startFrame=active==session?previous:null;session.startDepth=depth;}
+        }finally{session.startFrame=active==session?previous:null;session.startDepth=depth;session.startLoopFrame=active==session?loop:null;}
     }
     public static boolean originalBrainStartCondition(Behavior<?> behavior,String condition,ServerLevel level,LivingEntity owner,BooleanSupplier original) {
         Session session=active;
