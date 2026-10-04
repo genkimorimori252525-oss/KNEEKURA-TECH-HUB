@@ -23,14 +23,27 @@
       "ysm_class_files": 955,
       "classfile_major": 61,
       "latest_contract": {
-        "mappings": 210,
-        "class_targets": 83,
-        "exact_methods": 122,
+        "mappings": 232,
+        "class_targets": 97,
+        "exact_methods": 130,
         "exact_fields": 5,
         "failures": 0
       },
       "jar_committed": false,
-      "jar_retained": false
+      "jar_retained": false,
+      "foundation_map": {
+        "classes": 955,
+        "nodes": 955,
+        "undirected_edges": 3618,
+        "directed_class_refs_observed": 3823,
+        "components": 19,
+        "main_component_classes": 722,
+        "bundled_concentus_classes": 131,
+        "bundled_vorbisjava_classes": 86,
+        "unknown_singletons": 15,
+        "semantic_seed_classes": 97,
+        "index": "departments/minecraft/mods/yes-steve-model/FOUNDATION-MAP-INDEX-2026-10-05.json"
+      }
     }
   },
   "release_line_source_candidate": {
@@ -208,6 +221,16 @@
       "role": "PRIMARY_EXACT_DISTRIBUTED_ARTIFACT_STRUCTURAL_EVIDENCE",
       "scanner": "departments/minecraft/mods/yes-steve-model/tools/scan_ysm_265.py",
       "note": "Exact JAR used only in temporary CI storage; structural hashes/descriptors and bounded registration bytecode were retained, not the JAR."
+    },
+    "foundation_map_exact_jar": {
+      "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+      "role": "PRIMARY_WHOLE_JAR_STRUCTURAL_DOMAIN_MAP",
+      "index": "departments/minecraft/mods/yes-steve-model/FOUNDATION-MAP-INDEX-2026-10-05.json",
+      "tools": [
+        "departments/minecraft/mods/yes-steve-model/tools/scan_ysm_265.py",
+        "departments/minecraft/mods/yes-steve-model/tools/cluster_ysm_265.py"
+      ],
+      "note": "Compact index retains 955 class domain/score/degree/component records; full analysis is regenerable from the exact official JAR and the semantic map."
     }
   },
   "evidence_status": {
@@ -234,7 +257,7 @@
     "model_distribution_native_wire_protocol": "OPAQUE_NOT_ANALYZED",
     "client_build_progress_wedge_hazard": "DIRECT_SOURCE_STATIC_HAZARD_NOT_RUNTIME_CONFIRMED",
     "issue_444_root_cause": "UNKNOWN",
-    "java_obfuscation_map_2_6_5": "210_MAPPINGS_183_CONFIRMED_27_HIGH_EXACT_JAR_CONTRACT_0_FAILURES",
+    "java_obfuscation_map_2_6_5": "232_MAPPINGS_205_CONFIRMED_27_HIGH_EXACT_JAR_CONTRACT_0_FAILURES",
     "obfuscated_native_lib_bootstrap": "HIGH_CONFIDENCE",
     "obfuscated_capability_provider": "CONFIRMED_PUBLIC_ACTUAL_JAR_CROSS_REFERENCE",
     "obfuscated_native_renderer_bridge": "CONFIRMED_PUBLIC_ACTUAL_JAR_DESCRIPTOR",
@@ -254,7 +277,10 @@
     "molang_binding_functions": "CONFIRMED_EXACT_JAR_BOUNDED_BYTECODE",
     "animation_controller_core": "CONFIRMED_EXACT_JAR_WITH_SOURCE_ARTIFACT_DIVERGENCE",
     "network_message_registration": "CONFIRMED_EXACT_JAR_IDS_1_9_15_19_21_23_51_52",
-    "network_sync_bytebuffer_envelopes": "CONFIRMED_EXACT_JAR_JAVA_TRANSPORT_NATIVE_PROTOCOL_STILL_OPAQUE"
+    "network_sync_bytebuffer_envelopes": "CONFIRMED_EXACT_JAR_JAVA_TRANSPORT_NATIVE_PROTOCOL_STILL_OPAQUE",
+    "foundation_map_exact_jar": "955_OF_955_CLASSES_STRUCTURALLY_MAPPED_15_UNKNOWN_SINGLETONS",
+    "bundled_concentus_component": "131_CLASSES_IDENTIFIED_SEPARATE_COMPONENT",
+    "bundled_vorbisjava_component": "86_CLASSES_IDENTIFIED_SEPARATE_COMPONENT"
   },
   "safety_and_provenance_boundaries": [
     "No VMProtect/native protection bypass.",
