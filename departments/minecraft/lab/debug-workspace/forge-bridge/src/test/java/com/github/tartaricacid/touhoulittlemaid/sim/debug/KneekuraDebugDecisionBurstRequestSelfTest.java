@@ -13,6 +13,9 @@ public final class KneekuraDebugDecisionBurstRequestSelfTest {
         if(request.channels().contains("mod"))throw new AssertionError("ordinary request cannot arm MOD");
         var projectile=KneekuraDebugDecisionBurstRequest.parse(JsonParser.parseString(valid.replace("goal","projectile")));
         if(!projectile.channels().equals(java.util.Set.of("projectile")))throw new AssertionError("explicit projectile-only channel");
+        var activity=KneekuraDebugDecisionBurstRequest.parse(JsonParser.parseString(valid.replace("goal","brain_activity")));
+        if(!activity.channels().equals(java.util.Set.of("brain_activity"))||request.channels().contains("brain_activity"))
+            throw new AssertionError("activity requires dedicated explicit channel");
         var all=KneekuraDebugDecisionBurstRequest.parse(JsonParser.parseString(valid.replace("[\"goal\"]","[\"goal\",\"brain\",\"path\",\"control\",\"malus\",\"sensor\",\"mod\",\"projectile\"]")));
         if(all.channels().size()!=8)throw new AssertionError("eight unique known channels remain finite");
         for(String invalid:new String[]{valid.replace("20","20.1"),valid.replace("20","201"),

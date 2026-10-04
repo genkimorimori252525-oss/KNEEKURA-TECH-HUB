@@ -16,6 +16,9 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.entity.ai.Brain;
+import net.minecraft.world.entity.schedule.Activity;
+import net.minecraft.world.entity.schedule.Schedule;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.entity.ai.behavior.BehaviorControl;
 import net.minecraft.world.entity.ai.behavior.OneShot;
@@ -51,6 +54,7 @@ public final class KneekuraDebugDecisionHooks {
     @FunctionalInterface public interface Sink { void record(String method, JsonObject payload) throws IOException; }
     @FunctionalInterface private interface Data { JsonObject read() throws ReflectiveOperationException; }
     private record PendingPop(Node node,int eventIndex) { }
+    private record ActivityFrame(Brain<?> brain,String id,JsonObject before,long preCallCost) { }
 
     public static void install(Session session) {
         if (session.thread != Thread.currentThread()) throw new IllegalStateException("SERVER_THREAD_REQUIRED");
@@ -79,6 +83,9 @@ public final class KneekuraDebugDecisionHooks {
         private final IdentityHashMap<PathFinder,PendingPop> pendingPops;
         private final IdentityHashMap<Projectile,Integer> projectiles=new IdentityHashMap<>();
         private long nextIdentity, nextSearch;
+        private int nextActivity;
+        private int activityDepth;
+        private ActivityFrame activityFrame;
         private boolean goalCoveragePartial;
 
         public Session(Mob subject, GoalSelector goal, GoalSelector target,
@@ -87,7 +94,7 @@ public final class KneekuraDebugDecisionHooks {
                        LongSupplier time, Sink sink) throws ReflectiveOperationException {
             if(nodeLimit<1 || nodeLimit>64)throw new IllegalArgumentException("NODE_LIMIT_OUT_OF_RANGE");
             this.subject=subject;this.snapshot=snapshot;this.budget=budget;this.nodeLimit=nodeLimit;
-            if(channels==null||channels.isEmpty()||!Set.of("goal","brain","path","control","malus","sensor","mod","projectile","neighbors","effective_malus","frontier","path_nodes","path_g","path_distance").containsAll(channels))
+            if(channels==null||channels.isEmpty()||!Set.of("goal","brain","brain_activity","path","control","malus","sensor","mod","projectile","neighbors","effective_malus","frontier","path_nodes","path_g","path_distance").containsAll(channels))
                 throw new IllegalArgumentException("INVALID_CHANNELS");
             this.channels=Set.copyOf(channels);
             this.heapNodes=channels.contains("frontier")||channels.contains("path_nodes")||channels.contains("path_g")||channels.contains("path_distance")?new IdentityHashMap<>():null;
@@ -125,6 +132,26 @@ public final class KneekuraDebugDecisionHooks {
             return identity;
         }
         private boolean matches(LivingEntity entity) { return subject!=null && subject==entity && thread==Thread.currentThread(); }
+        private boolean activityReady(Brain<?> brain) {
+            if(thread!=Thread.currentThread()||subject==null||!channels.contains("brain_activity"))return false;
+            try {
+                return budget.allows(currentContext.get(),time.getAsLong())&&
+                    KneekuraDebugDecisionSnapshot.read(LivingEntity.class,"brain",subject)==brain;
+            }catch(ReflectiveOperationException|RuntimeException|LinkageError error){
+                budget.close("ACTIVITY_CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());return false;
+            }
+        }
+        private ActivityFrame activityBegin(Brain<?> brain) {
+            if(!activityReady(brain)||nextActivity>=256||activityDepth>8)return null;
+            long started=System.nanoTime();
+            try {
+                JsonObject before=activityState(brain);
+                return new ActivityFrame(brain,"activity:"+budget.context().selectionRevision()+":"+(++nextActivity),
+                    before,Math.max(0L,System.nanoTime()-started));
+            }catch(ReflectiveOperationException|RuntimeException|LinkageError error){
+                budget.close("ACTIVITY_CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());return null;
+            }
+        }
         private String token(Object object) {
             String token=identities.get(object);
             if(token!=null)return token;
@@ -134,6 +161,7 @@ public final class KneekuraDebugDecisionHooks {
         private boolean record(String kind,String method,Data capture) {
             if(thread!=Thread.currentThread())return false;
             String channel=kind.startsWith("CONTROL_PROJECTILE_")&&channels.contains("projectile")?"projectile":
+                    kind.startsWith("BRAIN_ACTIVITY_")?"brain_activity":
                     kind.equals("PATH_NEIGHBORS_RETURN")?"neighbors":
                     kind.equals("PATH_RETURNED_NODES")?"path_nodes":
                     kind.equals("PATH_NODE_G_WRITE_CHECKPOINT")?"path_g":
@@ -275,6 +303,96 @@ public final class KneekuraDebugDecisionHooks {
             data.addProperty("storedBrainMatch",KneekuraDebugDecisionSnapshot.read(LivingEntity.class,"brain",entity)==brain);
             data.addProperty("instanceIdentity",session.token(brain));return data;
         });
+    }
+    /** Exact UpdateActivityFromSchedule call site. Virtual original executes once, including OFF/throw. */
+    public static void originalActivityUpdate(Brain<?> brain,long day,long game) {
+        Session session=active;
+        if(session==null||session.thread!=Thread.currentThread()){brain.updateActivityFromSchedule(day,game);return;}
+        ActivityFrame previous=session.activityFrame;
+        int previousDepth=session.activityDepth;session.activityDepth++;
+        try {
+            ActivityFrame frame=session.activityBegin(brain);
+            // Suppress an unsupported nested call rather than misattribute its callbacks to the caller.
+            session.activityFrame=frame;
+            brain.updateActivityFromSchedule(day,game);
+            if(frame!=null&&active==session&&session.activityReady(brain))session.record(
+                "BRAIN_ACTIVITY_UPDATE_RETURN","UpdateActivityFromSchedule.Brain.updateActivityFromSchedule.AFTER",()->{
+                    JsonObject data=activityData(session,frame);
+                    data.addProperty("dayTimeArgument",Long.toString(day));data.addProperty("gameTimeArgument",Long.toString(game));
+                    data.add("before",frame.before().deepCopy());data.add("after",activityState(brain));
+                    data.addProperty("preCallObserverCostNanos",frame.preCallCost());
+                    data.addProperty("returnScope","NORMAL_VOID_RETURN_NOT_ACTIVITY_SUCCESS");return data;
+                });
+        } finally {session.activityFrame=active==session?previous:null;session.activityDepth=previousDepth;}
+    }
+    /** Delegate the original stateful query once; never evaluate Schedule to fill an observation. */
+    public static Activity originalActivityQuery(Brain<?> brain,Schedule schedule,int tick) {
+        Activity result=schedule.getActivityAt(tick);
+        Session session=active;ActivityFrame frame=activityFrame(session,brain);
+        if(frame!=null)session.record("BRAIN_ACTIVITY_QUERY_RETURN","Brain.updateActivityFromSchedule.Schedule.getActivityAt.AFTER",()->{
+            JsonObject data=activityData(session,frame);data.addProperty("scheduleClass",label(schedule.getClass().getName()));
+            String identity=session.token(schedule);data.addProperty("scheduleInstanceIdentity",identity);
+            data.addProperty("scheduleInstanceIdentityStatus",identity==null?"NOT_EXPOSED":"AVAILABLE");data.addProperty("queryTickArgument",tick);
+            data.addProperty("storedScheduleMatch",KneekuraDebugDecisionSnapshot.read(Brain.class,"schedule",brain)==schedule);
+            data.add("returnedActivity",activityValue(result));data.add("stateAtReturn",activityState(brain));
+            data.addProperty("returnScope","ORIGINAL_VIRTUAL_SCHEDULE_QUERY_RETURN");return data;
+        });
+        return result;
+    }
+    public static void activityRequirementsReturn(Brain<?> brain,Activity requested,boolean result) {
+        Session session=active;ActivityFrame frame=activityFrame(session,brain);
+        if(frame!=null)session.record("BRAIN_ACTIVITY_REQUIREMENTS_RETURN","Brain.activityRequirementsAreMet.RETURN",()->{
+            JsonObject data=activityData(session,frame);data.add("requestedActivity",activityValue(requested));
+            data.addProperty("result",result);data.add("stateAtReturn",activityState(brain));
+            data.addProperty("returnScope","ORIGINAL_REGISTERED_MEMORY_REQUIREMENTS_RETURN");return data;
+        });
+    }
+    public static void activeActivityReturn(Brain<?> brain,Activity requested) {
+        Session session=active;ActivityFrame frame=activityFrame(session,brain);
+        if(frame!=null)session.record("BRAIN_ACTIVITY_SET_RETURN","Brain.setActiveActivity.RETURN",()->{
+            JsonObject data=activityData(session,frame);data.add("requestedActivity",activityValue(requested));
+            data.add("stateAtReturn",activityState(brain));data.addProperty("returnScope","NORMAL_PRIVATE_SETTER_RETURN_NOT_SWITCH_SUCCESS");return data;
+        });
+    }
+    private static ActivityFrame activityFrame(Session session,Brain<?> brain) {
+        if(session==null||session.thread!=Thread.currentThread())return null;
+        ActivityFrame frame=session.activityFrame;
+        return frame!=null&&frame.brain()==brain&&session.activityReady(brain)?frame:null;
+    }
+    private static JsonObject activityData(Session session,ActivityFrame frame) {
+        JsonObject data=new JsonObject();data.addProperty("brainClass",label(frame.brain().getClass().getName()));
+        String identity=session.token(frame.brain());data.addProperty("instanceIdentity",identity);
+        data.addProperty("instanceIdentityStatus",identity==null?"NOT_EXPOSED":"AVAILABLE");data.addProperty("activityInvocationId",frame.id());
+        data.addProperty("dispatchScope","UPDATE_ACTIVITY_FROM_SCHEDULE_ORIGINAL_VIRTUAL_CALL");
+        data.addProperty("fieldScope","BASE_BRAIN_CACHED_FIELDS_ONLY");
+        data.addProperty("behaviorStopStatus","NOT_EXPOSED");data.addProperty("movementOutcomeStatus","NOT_EXPOSED");return data;
+    }
+    private static JsonObject activityState(Brain<?> brain)throws ReflectiveOperationException {
+        JsonObject state=new JsonObject();
+        state.add("activeActivities",activitySet(KneekuraDebugDecisionSnapshot.read(Brain.class,"activeActivities",brain)));
+        state.add("coreActivities",activitySet(KneekuraDebugDecisionSnapshot.read(Brain.class,"coreActivities",brain)));
+        state.add("defaultActivity",activityValue((Activity)KneekuraDebugDecisionSnapshot.read(Brain.class,"defaultActivity",brain)));
+        state.addProperty("lastScheduleUpdate",Long.toString((Long)KneekuraDebugDecisionSnapshot.read(Brain.class,"lastScheduleUpdate",brain)));
+        return state;
+    }
+    private static JsonObject activityValue(Activity activity) {
+        JsonObject value=new JsonObject();
+        if(activity==null||activity.getClass()!=Activity.class){value.addProperty("status","NOT_EXPOSED");value.addProperty("detail",activity==null?"NULL_ACTIVITY":"CUSTOM_ACTIVITY_CLASS");return value;}
+        var key=BuiltInRegistries.ACTIVITY.getKey(activity);
+        if(key==null){value.addProperty("status","NOT_EXPOSED");value.addProperty("detail","UNREGISTERED_ACTIVITY");}
+        else {value.addProperty("status","AVAILABLE");value.addProperty("key",label(key.toString()));}
+        return value;
+    }
+    private static JsonObject activitySet(Object object) {
+        JsonObject section=new JsonObject();
+        if(object==null||!Set.of("java.util.HashSet","java.util.ImmutableCollections$Set12","java.util.ImmutableCollections$SetN",
+            "com.google.common.collect.RegularImmutableSet","com.google.common.collect.SingletonImmutableSet").contains(object.getClass().getName())){
+            section.addProperty("status","NOT_EXPOSED");section.addProperty("detail",object==null?"NULL_ACTIVITY_SET":"CUSTOM_ACTIVITY_SET");return section;
+        }
+        Set<?> set=(Set<?>)object;JsonArray values=new JsonArray();int retained=0;
+        for(Object activity:set){if(retained++>=16)break;values.add(activityValue((Activity)activity));}
+        section.addProperty("status",set.size()>16?"PARTIAL":"AVAILABLE");section.addProperty("count",set.size());
+        section.addProperty("truncated",set.size()>16);section.add("values",values);return section;
     }
     public static void behaviorReturn(Behavior<?> behavior,LivingEntity entity,String kind,Boolean result) {
         Session session=active;if(session==null||!session.matches(entity))return;

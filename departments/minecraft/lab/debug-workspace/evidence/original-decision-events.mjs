@@ -7,6 +7,10 @@ const KINDS = Object.freeze({
   GOAL_START_RETURN: ['EXECUTION','goal_lifecycle'],
   GOAL_STOP_RETURN: ['EXECUTION','goal_lifecycle'],
   BRAIN_TICK_RETURN: ['EXECUTION','brain_execution'],
+  BRAIN_ACTIVITY_QUERY_RETURN: ['EVALUATION','brain_activity'],
+  BRAIN_ACTIVITY_REQUIREMENTS_RETURN: ['EVALUATION','brain_activity'],
+  BRAIN_ACTIVITY_SET_RETURN: ['EXECUTION','brain_activity'],
+  BRAIN_ACTIVITY_UPDATE_RETURN: ['EXECUTION','brain_activity'],
   BEHAVIOR_TRY_START_RETURN: ['EVALUATION','behavior_execution'],
   BEHAVIOR_TICK_OR_STOP_RETURN: ['EXECUTION','behavior_execution'],
   BEHAVIOR_STOP_RETURN: ['EXECUTION','behavior_execution'],
@@ -55,7 +59,7 @@ function validInstanceIdentity(data,requiredStatus=false) {
 }
 export function originalDecisionData(record) {
   const data=structuredClone(record.payload.data),kind=record.payload.kind;
-  if(kind.startsWith('GOAL_')||kind==='BRAIN_TICK_RETURN'||kind.startsWith('BEHAVIOR_')||kind==='SENSOR_SCAN_RETURN') {
+  if(kind.startsWith('GOAL_')||kind.startsWith('BRAIN_')||kind.startsWith('BEHAVIOR_')||kind==='SENSOR_SCAN_RETURN') {
     data.instanceIdentity??=null;
     data.instanceIdentityStatus=data.instanceIdentity===null?'NOT_EXPOSED':'AVAILABLE';
   }
@@ -244,7 +248,52 @@ function validEdgeDistance(d,record) {
     d.subjectRelationScope==='SELECTED_OUTER_FIND_PATH_INVOCATION'&&d.fieldScope==='BASE_NODE_FIELDS_AFTER_ORIGINAL_RETURN_AND_CAPTURE_GATES'&&
     ['comparisonOperandsStatus','neighborPopulationStatus','rejectionReasonStatus','finalPathCostStatus','navigationAdoptionStatus'].every(k=>d[k]==='NOT_EXPOSED');
 }
+function validActivityValue(value) {
+  return object(value)&&Object.keys(value).length===2&&(value.status==='AVAILABLE'?text(value.key):
+    value.status==='NOT_EXPOSED'&&['NULL_ACTIVITY','CUSTOM_ACTIVITY_CLASS','UNREGISTERED_ACTIVITY'].includes(value.detail));
+}
+function validActivitySet(value) {
+  if(!object(value))return false;
+  if(value.status==='NOT_EXPOSED')return Object.keys(value).length===2&&['NULL_ACTIVITY_SET','CUSTOM_ACTIVITY_SET'].includes(value.detail);
+  return Object.keys(value).length===4&&['AVAILABLE','PARTIAL'].includes(value.status)&&
+    integer(value.count)&&value.count>=0&&value.count<=2147483647&&Array.isArray(value.values)&&
+    value.values.length===Math.min(value.count,16)&&value.values.every(validActivityValue)&&
+    value.truncated===(value.count>16)&&value.status===(value.truncated?'PARTIAL':'AVAILABLE');
+}
+function signedLong(value) {
+  if(typeof value!=='string'||!/^(0|-?[1-9][0-9]{0,18})$/.test(value))return false;
+  const n=BigInt(value);return n>=-9223372036854775808n&&n<=9223372036854775807n;
+}
+function validActivityState(value) {
+  return object(value)&&Object.keys(value).length===4&&validActivitySet(value.activeActivities)&&
+    validActivitySet(value.coreActivities)&&validActivityValue(value.defaultActivity)&&signedLong(value.lastScheduleUpdate);
+}
+function validActivityData(kind,d,record) {
+  const component=(identity,status)=>identity==null?status==='NOT_EXPOSED':
+    status==='AVAILABLE'&&typeof identity==='string'&&new RegExp('^component:'+record.payload.targetRevision+':[1-9][0-9]{0,2}$').test(identity)&&
+    Number(identity.split(':').at(-1))<=128;
+  const common=['brainClass','instanceIdentity','instanceIdentityStatus','activityInvocationId','dispatchScope','fieldScope',
+    'behaviorStopStatus','movementOutcomeStatus','returnScope'];
+  const extra=kind==='BRAIN_ACTIVITY_UPDATE_RETURN'?['dayTimeArgument','gameTimeArgument','before','after','preCallObserverCostNanos']:
+    kind==='BRAIN_ACTIVITY_QUERY_RETURN'?['scheduleClass','scheduleInstanceIdentity','scheduleInstanceIdentityStatus','queryTickArgument','storedScheduleMatch','returnedActivity','stateAtReturn']:
+    kind==='BRAIN_ACTIVITY_REQUIREMENTS_RETURN'?['requestedActivity','result','stateAtReturn']:['requestedActivity','stateAtReturn'];
+  if(Object.keys(d).some(k=>![...common,...extra].includes(k))||!text(d.brainClass)||!component(d.instanceIdentity,d.instanceIdentityStatus)||
+    !text(d.activityInvocationId)||!new RegExp('^activity:'+record.payload.targetRevision+':([1-9][0-9]{0,2})$').test(d.activityInvocationId)||
+    Number(d.activityInvocationId.split(':').at(-1))>256||d.dispatchScope!=='UPDATE_ACTIVITY_FROM_SCHEDULE_ORIGINAL_VIRTUAL_CALL'||
+    d.fieldScope!=='BASE_BRAIN_CACHED_FIELDS_ONLY'||d.behaviorStopStatus!=='NOT_EXPOSED'||d.movementOutcomeStatus!=='NOT_EXPOSED')return false;
+  if(kind==='BRAIN_ACTIVITY_UPDATE_RETURN')return signedLong(d.dayTimeArgument)&&signedLong(d.gameTimeArgument)&&
+    validActivityState(d.before)&&validActivityState(d.after)&&integer(d.preCallObserverCostNanos)&&d.preCallObserverCostNanos>=0&&
+    d.returnScope==='NORMAL_VOID_RETURN_NOT_ACTIVITY_SUCCESS';
+  if(!validActivityState(d.stateAtReturn))return false;
+  if(kind==='BRAIN_ACTIVITY_QUERY_RETURN')return text(d.scheduleClass)&&component(d.scheduleInstanceIdentity,d.scheduleInstanceIdentityStatus)&&
+    integer(d.queryTickArgument)&&d.queryTickArgument>=-2147483648&&d.queryTickArgument<=2147483647&&
+    typeof d.storedScheduleMatch==='boolean'&&validActivityValue(d.returnedActivity)&&d.returnScope==='ORIGINAL_VIRTUAL_SCHEDULE_QUERY_RETURN';
+  return validActivityValue(d.requestedActivity)&&(kind==='BRAIN_ACTIVITY_REQUIREMENTS_RETURN'?
+    typeof d.result==='boolean'&&d.returnScope==='ORIGINAL_REGISTERED_MEMORY_REQUIREMENTS_RETURN':
+    d.returnScope==='NORMAL_PRIVATE_SETTER_RETURN_NOT_SWITCH_SUCCESS');
+}
 function validData(kind,d,record) {
+  if(kind.startsWith('BRAIN_ACTIVITY_'))return validActivityData(kind,d,record);
   if (kind === 'MOD_COORDINATION_RETURN') return validKnightCoordination(d,record);
   if (kind === 'PATH_NEIGHBORS_RETURN') return validNeighborReturn(d);
   if (kind === 'PATH_HEAP_OPERATION_RETURN') return validHeapReturn(d,record);

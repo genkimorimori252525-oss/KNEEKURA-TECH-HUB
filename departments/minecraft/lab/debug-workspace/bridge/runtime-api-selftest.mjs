@@ -27,20 +27,32 @@ function run(command,args,env={},cwd=root){
 try {
  const mixins=JSON.parse(await readFile(path.join(root,'debug-workspace/forge-bridge/src/main/resources/kneekura-decision.mixins.json'),'utf8'));
  for(const name of ['OneShot','GateBehavior'])assert.ok(mixins.mixins.includes('KneekuraDebug'+name+'DecisionMixin'),'known-control mixin resource registration');
+ assert.ok(mixins.mixins.includes('KneekuraDebugScheduledActivityMixin'),'original activity call-site mixin registration');
  const names=['Env','ActionJournal','ArenaController','ArenaOwnerGrant','ForgeArenaBackend','ArenaRuntime','Durability','EvidenceWriter',
   'OwnerFiles','OwnerInputs','OwnerDispatch','OwnerTriggers','OwnerLifetime','MaterialLinkage','ScopedOwnerGate','OwnerConnection',
   'CaptureSession','CaptureBarrier','CaptureRestoration','ImageArtifact','CardinalCapture','CapturePolicy','CaptureOwner','CaptureEvidenceSink','CaptureClock',
   'TankPresentationRecipe','TankPresentation','TankView','DecisionSnapshot','DecisionBurstBudget','DecisionHooks','TerrainField','SynchedCached',
   'DecisionAdapter','DecisionBurstRequest','AdapterSourceProof','TwilightForestDescriptor','TwilightForestReturnDescriptor','TwilightForestAdapter',
   'MotionTraceCache','RelatedProjectileTraceCache','MotionOverlayRuntime','MotionOverlayGeometry','MotionOverlay'];
- const sources=[...names.map(n=>path.join(main,'KneekuraDebug'+n+'.java')),...['Path','OneShot','GateBehavior'].map(n=>path.join(main,'decisionmixin/KneekuraDebug'+n+'DecisionMixin.java'))];
- const checks=['EvidenceClaim','CaptureWriter','RegisteredWorld','TankPresentation','DecisionSnapshot','TypedMemory','BehaviorControl','DecisionHooks','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult','TerrainField','SynchedCached','MotionTraceCache','RelatedProjectileTrace','MotionOverlayGeometry','MotionWriter'];
+ const sources=[...names.map(n=>path.join(main,'KneekuraDebug'+n+'.java')),...['Path','Brain','OneShot','GateBehavior'].map(n=>path.join(main,'decisionmixin/KneekuraDebug'+n+'DecisionMixin.java')),path.join(main,'decisionmixin/KneekuraDebugScheduledActivityMixin.java')];
+ const checks=['EvidenceClaim','CaptureWriter','RegisteredWorld','TankPresentation','DecisionSnapshot','TypedMemory','BehaviorControl','BrainActivity','DecisionHooks','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult','TerrainField','SynchedCached','MotionTraceCache','RelatedProjectileTrace','MotionOverlayGeometry','MotionWriter'];
  run(executable('javac'),['--release','17','-proc:none','-cp',classpath,'-d',output,...sources,...checks.map(n=>path.join(test,'KneekuraDebug'+n+'SelfTest.java')),path.join(test,'KneekuraDebugDecisionIdentityInterop.java')]);
  for(const name of checks.filter(n=>n!=='MotionWriter')){
   // Vanilla bootstrap can create logs; keep this new check's artifacts in its disposable output.
-  const bootstrap=['BehaviorControl','TypedMemory','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult'].includes(name);
+  const bootstrap=['BrainActivity','BehaviorControl','TypedMemory','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult'].includes(name);
   const cp=bootstrap?classpath.split(path.delimiter).map(p=>path.resolve(root,p)).join(path.delimiter):classpath;
   const stdout=run(executable('java'),['-cp',output+path.delimiter+cp,'com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebug'+name+'SelfTest'],{},bootstrap?output:root);
+  if(name==='BrainActivity') {
+   const lines=stdout.split(/\r?\n/).filter(l=>l.startsWith('BRAIN_ACTIVITY_INTEROP:'));
+   assert.equal(lines.length,14,'genuine original activity and compiled-fixture inner returns');
+   const records=lines.map((line,index)=>({source:{side:'SERVER'},observationId:'activity-gson:'+index,gameTime:100,payload:JSON.parse(line.slice('BRAIN_ACTIVITY_INTEROP:'.length))}));
+   assert.ok(records.every(validOriginalDecisionEvent),'actual production activity Gson satisfies consumer contract');
+   assert.equal(Object.hasOwn(records.at(-1).payload.data,'scheduleInstanceIdentity'),false,'Gson omits capped schedule token');
+   const stages={},capabilities={},timeline=[];appendOriginalDecisionEvents(records,stages,capabilities,timeline);
+   assert.equal(timeline.length,14);assert.equal(capabilities.brain_activity.status,'PARTIAL');
+   for(const stage of ['CANDIDATE','SELECTION','RESULT'])assert.equal(stages[stage],undefined);
+   console.log('Fourteen actual activity-call/Gson cases preserve original scope and unknown outcomes');
+  }
   if(name==='BehaviorControl') {
    const lines=stdout.split(/\r?\n/).filter(l=>l.startsWith('BEHAVIOR_CONTROL_INTEROP:'));
    assert.equal(lines.length,13,'genuine independent-control normal returns and capped identity required');
