@@ -27,6 +27,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
       - name: Fetch exact official YSM artifact
         shell: bash
         run: |
@@ -45,6 +49,53 @@ jobs:
             --map departments/minecraft/mods/yes-steve-model/OBFUSCATION-MAP-2026-10-05.json \
             --out foundation-evidence/foundation-map.json \
             2>&1 | tee foundation-evidence/summary.txt
+      - name: Inspect seedless component beacons
+        shell: bash
+        run: |
+          set -euo pipefail
+          jar tf "$RUNNER_TEMP/ysm-2.6.5.jar" | grep -Ev '\\.class        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('foundation-evidence/foundation-map.json',encoding='utf-8'))
+          assert d['artifact']['sha256']=='25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f'
+          assert d['artifact']['classes']==955
+          assert len(d['classes'])==955
+          assert len({x['class'] for x in d['classes']})==955
+          assert d['artifact']['parse_errors']==0
+          assert d['graph']['seed_classes']>0
+          print('KNEEKURA_FOUNDATION_FULL_COVERAGE_PASS')
+          print(json.dumps({
+            'graph':d['graph'],
+            'domains':{k:{kk:v[kk] for kk in ('classes','mapped_seed_classes','unresolved_classes','average_domain_score')} for k,v in d['domains'].items()},
+            'cross_domain_edges':d['cross_domain_edges'][:20],
+          }, ensure_ascii=False))
+          PY
+      - name: Retain bounded Foundation evidence (no YSM JAR)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ysm-265-foundation-${{ github.sha }}
+          path: foundation-evidence/
+          retention-days: 7
+ | sort > foundation-evidence/resources.txt
+          for cls in \
+            com.elfmcys.yesstevemodel.o0o0o0oOooOO0OOOOO00O0O0 \
+            com.elfmcys.yesstevemodel.O0OoOoOo0OOooOo000o00oOo \
+            com.elfmcys.yesstevemodel.OoOO0oooooo00O0oOooOo0oO \
+            com.elfmcys.yesstevemodel.o0O0OOo0oOOoO0oOO0OO00O0 \
+            com.elfmcys.yesstevemodel.oOoO00O0O0ooOoOoOOo0oO0O \
+            com.elfmcys.yesstevemodel.oO00O00OooO00OoOOoo0oooO
+          do
+            safe=$(printf '%s' "$cls" | tr '.' '_')
+            javap -classpath "$RUNNER_TEMP/ysm-2.6.5.jar" -verbose -p "$cls" > "foundation-evidence/javap-$safe.txt"
+          done
+          echo 'KNEEKURA_RESOURCE_BEACONS_BEGIN'
+          grep -Ei 'license|notice|service|native|compress|codec|lz4|zstd|xz|png|json|proto|jna|asm|maven' foundation-evidence/resources.txt | head -200 || true
+          echo 'KNEEKURA_RESOURCE_BEACONS_END'
+          echo 'KNEEKURA_SOURCEFILE_BEACONS_BEGIN'
+          grep -H -E 'SourceFile:|Utf8 +[^<>].*(compress|decompress|cipher|decode|encode|stream|archive|image|matrix|vector|checksum|crc|inflate|deflate|lz|zstd|xz|png|jpeg|wave|ogg)' foundation-evidence/javap-*.txt | head -400 || true
+          echo 'KNEEKURA_SOURCEFILE_BEACONS_END'
       - name: Validate full coverage
         shell: bash
         run: |
