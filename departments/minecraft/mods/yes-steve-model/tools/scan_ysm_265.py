@@ -247,6 +247,30 @@ def main():
             }),
         }
 
+    # Exact core-interface/controller probes.
+    controller_probe_names = {
+        "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO",
+        "com/elfmcys/yesstevemodel/oo0oOO0000o0Ooooo0OoOo0O",
+    }
+    for name in controller_probe_names:
+        c = ysm_classes.get(name)
+        if c:
+            candidate_details[name] = {
+                "access": c["access"], "super": c["super"], "interfaces": c["interfaces"],
+                "fields": [{"access":x["access"],"name":x["name"],"descriptor":x["descriptor"]} for x in c["fields"]],
+                "methods": [{"access":x["access"],"name":x["name"],"descriptor":x["descriptor"]} for x in c["methods"]],
+                "class_refs": c["class_refs"], "anchor_utf8": sorted(set(c["utf8"])),
+            }
+    context_interface = "com/elfmcys/yesstevemodel/oo0oOO0000o0Ooooo0OoOo0O"
+    context_implementors = [
+        {
+            "class": c["name"], "access": c["access"], "super": c["super"], "interfaces": c["interfaces"],
+            "fields": [{"name":x["name"],"descriptor":x["descriptor"]} for x in c["fields"]],
+            "methods": [{"name":x["name"],"descriptor":x["descriptor"]} for x in c["methods"]],
+        }
+        for c in ysm_classes.values() if context_interface in c["interfaces"]
+    ]
+
     # Packet/network structural candidates.
     bytebuffer_packets = []
     simple_channel_candidates = []
@@ -315,6 +339,7 @@ def main():
             "simple_channel_candidates": simple_channel_candidates,
             "friendly_buf_candidates": friendly_buf_candidates,
         },
+        "context_implementors": context_implementors,
         "hierarchy_hits": hierarchy_hits,
         "parse_errors": [{"entry":k,"error":v["error"]} for k,v in classes.items() if k.startswith("!parse-error:")],
     }
