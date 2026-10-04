@@ -99,6 +99,25 @@ Sinytra Connector は 1.20.1 Forge 系と現行 NeoForge 系の両方を保持�
 
 対象横断の一覧は catalog/MODS.md。詳細手順は ANALYSIS-SPEC-v1.md。
 
+## 軽量化 — Performance / Optimization Technology
+
+性能改善を主目的とするMODは [軽量化](optimization/README.md) で別系統として解析する。
+
+ここでは通常の ANCHOR / FRONTIER を維持しつつ、追加で:
+
+- optimization mechanism
+- correctness invariant
+- benchmark workload
+- performance metric
+- cache / invalidation
+- concurrency
+- compatibility / regression
+
+を必須の観点として扱う。
+
+軽量化MOD catalog: [optimization/catalog/MODS.md](optimization/catalog/MODS.md)  
+横断技術catalog: [optimization/catalog/TECHNIQUES.md](optimization/catalog/TECHNIQUES.md)
+
 ## Minecraft 1.20.1 Vanilla Foundation Map
 
 [Vanilla Foundation Map](vanilla-foundation/README.md)は、既存Source Intelligenceの exact ANCHOR `IndexSnapshot` から `net/minecraft/**` のクラス・package・subsystem・継承/implements・JVM class-reference候補・由来を content-addressed な小型地図へ変換する。巨大なMinecraft source/JARをGitへ複製せず、実装AIが外部検索より先に1.20.1内部を発見できる入口として使う。
