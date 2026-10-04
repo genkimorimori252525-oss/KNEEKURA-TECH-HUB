@@ -202,16 +202,22 @@ export function validDecisionSnapshot(payload) {
       !Number.isSafeInteger(payload.targetRevision) || payload.targetRevision < 1 ||
       payload.semantics !== 'MOB_COMPONENT_SNAPSHOT_ONLY' || !payload.sections) return false;
   // Check bounded structure before serialization, including unknown fields.
+  const memoryEntries=payload.sections.brain_memory?.data?.entries;
+  const typedRoots=new Set(Array.isArray(memoryEntries) ? memoryEntries.filter(e=>e?.present &&
+    e.value?.encoding === 'TYPED_CACHED_MEMORY_V1').map(e=>e.value) : []);
   let values = 0;
-  function bounded(value, depth=0) {
-    if (++values > 8192 || depth > 12) return false;
+  function bounded(value, depth=0, maxDepth=12) {
+    // A real WalkTarget -> EntityTracker -> Entity cached point needs depth13.
+    // Only the independently validated typed memory branch gets two extra levels.
+    if (typedRoots.has(value)) maxDepth=14;
+    if (++values > 8192 || depth > maxDepth) return false;
     if (typeof value === 'string') return value.length <= 512;
     if (typeof value === 'number') return Number.isFinite(value);
     if (value === null || typeof value === 'boolean') return true;
-    if (Array.isArray(value)) return value.length <= 64 && value.every(v => bounded(v,depth+1));
+    if (Array.isArray(value)) return value.length <= 64 && value.every(v => bounded(v,depth+1,maxDepth));
     if (!value || typeof value !== 'object') return false;
     const entries = Object.entries(value);
-    return entries.length <= 32 && entries.every(([k,v]) => k.length <= 128 && bounded(v,depth+1));
+    return entries.length <= 32 && entries.every(([k,v]) => k.length <= 128 && bounded(v,depth+1,maxDepth));
   }
   if (!bounded(payload)) return false;
   for (const name of SNAPSHOT_SECTIONS) {

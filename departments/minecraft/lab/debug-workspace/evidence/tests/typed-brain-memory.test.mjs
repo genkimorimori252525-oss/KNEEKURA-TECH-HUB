@@ -36,3 +36,12 @@ test('typed cached state alone cannot manufacture candidate, selection, executio
   assert.equal(model.stages.STATE.facts.some(f=>f.key==='brain_memory'||f.name==='brain_memory'),true);
   for(const stage of ['CANDIDATE','SELECTION','EXECUTION','RESULT'])assert.equal(model.stages[stage]?.facts?.length??0,0,stage);
 });
+
+test('actual WalkTarget -> EntityTracker -> cached Entity fields fit the typed branch while arbitrary deep structures stay rejected',()=>{
+  const entity={status:'AVAILABLE',className:'net.minecraft.server.level.ServerPlayer',encoding:'TYPED_CACHED_MEMORY_V1',kind:'ENTITY_REFERENCE',data:{instanceIdentity:ref('entity',2),entityUuid:{status:'AVAILABLE',value:uuid},position:structuredClone(point),blockPosition:structuredClone(block),eyeHeight:{status:'AVAILABLE',value:1.62},semantics:'BASE_ENTITY_CACHED_FIELDS_ONLY_NOT_TRACKER_QUERY_OR_ACTUAL_MOTION'}};
+  const tracking={status:'AVAILABLE',className:'net.minecraft.world.entity.ai.behavior.EntityTracker',encoding:'TYPED_CACHED_MEMORY_V1',kind:'ENTITY_TRACKER',data:{instanceIdentity:ref('memory',3),trackEyeHeight:true,entity,semantics:'CACHED_TRACKER_POLICY_NOT_CURRENT_POSITION_OR_VISIBILITY_QUERY'}};
+  const walk={status:'AVAILABLE',className:'net.minecraft.world.entity.ai.memory.WalkTarget',encoding:'TYPED_CACHED_MEMORY_V1',kind:'WALK_TARGET',data:{instanceIdentity:ref('memory',4),speedModifier:.5,closeEnoughDist:2,target:tracking,semantics:'CACHED_WALK_PARAMETERS_NOT_ELIGIBILITY_OR_NAVIGATION_RESULT'}};
+  assert.equal(validDecisionSnapshot(snapshot(walk)),true);
+  const unrelated=snapshot();unrelated.unrelated={};let current=unrelated.unrelated;for(let i=0;i<13;i++){current.child={};current=current.child;}
+  assert.equal(validDecisionSnapshot(unrelated),false,'historical unrelated depth limit remains enforced');
+});

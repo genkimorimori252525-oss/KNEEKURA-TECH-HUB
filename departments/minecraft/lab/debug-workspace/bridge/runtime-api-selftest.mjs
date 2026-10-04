@@ -42,7 +42,7 @@ try {
   if(name==='TypedMemory') {
    const line=stdout.split(/\r?\n/).find(l=>l.startsWith('MEMORY_INTEROP:'));
    assert.ok(line,'genuine cached memory/Gson interop output required');
-   const values=JSON.parse(line.slice(15)); assert.equal(values.length,8);
+   const values=JSON.parse(line.slice(15)); assert.equal(values.length,9);
    const payload={schema:'kneekura.vanilla-decision-snapshot/v1',targetRevision:19,semantics:'MOB_COMPONENT_SNAPSHOT_ONLY',sections:{}};
    for(const name of ['goal_scheduler','brain_memory','brain_activities','navigation_path','movement_control'])payload.sections[name]={status:'NOT_EXPOSED'};
    for(const value of values){
@@ -51,7 +51,7 @@ try {
     assert.equal(validDecisionSnapshot(payload),true,value.kind ?? value.className ?? value.detail);
    }
    const capped=values[3]; assert.equal(Object.hasOwn(capped.data.instanceIdentity,'token'),false,'production Gson omits unavailable reference token');
-   console.log('Eight actual typed-memory/Gson cases preserve cached state and explicit unknowns across Java/JS');
+   console.log('Nine actual typed-memory/Gson cases preserve cached state and explicit unknowns across Java/JS');
   }
   if(name==='PathNeighbors') {
    const line=stdout.split(/\r?\n/).find(l=>l.startsWith('NEIGHBOR_INTEROP:'));

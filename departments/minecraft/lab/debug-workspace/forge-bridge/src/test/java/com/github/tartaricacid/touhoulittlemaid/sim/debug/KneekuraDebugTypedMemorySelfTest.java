@@ -84,6 +84,7 @@ public final class KneekuraDebugTypedMemorySelfTest {
         set(Entity.class, "blockPosition", entity, new BlockPos(2, 65, 3)); set(Entity.class, "eyeHeight", entity, 1.625F);
         var entityTracker = new EntityTracker(entity, true);
         JsonObject tracked = observer.memoryValue(entityTracker), entityCopy = data(tracked).getAsJsonObject("entity");
+        JsonObject entityWalk = observer.memoryValue(new WalkTarget(entityTracker, .5F, 2));
         require(data(tracked).get("trackEyeHeight").getAsBoolean(), "cached tracker policy");
         require(data(entityCopy).getAsJsonObject("eyeHeight").get("value").getAsFloat() == 1.625F, "cached eye height, not getter result");
         require(token(entityCopy).equals(token(observer.memoryValue(entity))), "attack memory and tracker share same scoped entity reference");
@@ -123,7 +124,7 @@ public final class KneekuraDebugTypedMemorySelfTest {
         JsonObject capped = observer.memoryValue(new BlockPosTracker(new BlockPos(0, 0, 0)));
         require(data(capped).getAsJsonObject("instanceIdentity").get("status").getAsString().equals("NOT_EXPOSED"), "shared reference cap declares unknown");
         require(token(stable).equals(token(observer.memoryValue(path))), "cap must not evict or rename known reference");
-        var values = new JsonArray(); for (JsonObject v : new JsonObject[] {encoded, tracked, route, capped, observer.memoryValue(null), observer.memoryValue(new CustomTracker()), observer.memoryValue(nonfiniteWalk), observer.memoryValue(listPath)}) values.add(v);
+        var values = new JsonArray(); for (JsonObject v : new JsonObject[] {encoded, tracked, route, capped, observer.memoryValue(null), observer.memoryValue(new CustomTracker()), observer.memoryValue(nonfiniteWalk), observer.memoryValue(listPath), entityWalk}) values.add(v);
         var hugeNodes = new ArrayList<Node>(); for (int i = 0; i < 64; i++) hugeNodes.add(new Node(i, 64, i));
         var hugePath = new Path(hugeNodes, new BlockPos(64, 64, 64), true);
         var brain = (net.minecraft.world.entity.ai.Brain<?>) unsafe.allocateInstance(net.minecraft.world.entity.ai.Brain.class);
