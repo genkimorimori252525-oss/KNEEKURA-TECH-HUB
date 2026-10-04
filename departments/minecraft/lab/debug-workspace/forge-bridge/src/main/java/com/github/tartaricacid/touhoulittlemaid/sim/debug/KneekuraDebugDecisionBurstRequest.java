@@ -9,7 +9,7 @@ import java.util.Set;
 /** Strict optional observation request. This cannot authorize a world action or enable launch hooks. */
 public record KneekuraDebugDecisionBurstRequest(int ticks, int maxEvents, int maxBytes,
                                                int maxNodes, Set<String> channels) {
-    private static final Set<String> CHANNELS=Set.of("goal","brain","path","control","malus","sensor","mod","projectile","neighbors","effective_malus","frontier","path_nodes");
+    private static final Set<String> CHANNELS=Set.of("goal","brain","path","control","malus","sensor","mod","projectile","neighbors","effective_malus","frontier","path_nodes","path_g");
     public KneekuraDebugDecisionBurstRequest {
         if(ticks<1||ticks>200||maxEvents<1||maxEvents>256||maxBytes<1||maxBytes>524288
                 ||maxNodes<1||maxNodes>64||channels==null||channels.isEmpty()

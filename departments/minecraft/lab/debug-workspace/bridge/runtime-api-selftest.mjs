@@ -31,11 +31,11 @@ try {
   'DecisionAdapter','DecisionBurstRequest','AdapterSourceProof','TwilightForestDescriptor','TwilightForestReturnDescriptor','TwilightForestAdapter',
   'MotionTraceCache','RelatedProjectileTraceCache','MotionOverlayRuntime','MotionOverlayGeometry','MotionOverlay'];
  const sources=names.map(n=>path.join(main,'KneekuraDebug'+n+'.java'));
- const checks=['EvidenceClaim','CaptureWriter','RegisteredWorld','TankPresentation','DecisionSnapshot','DecisionHooks','PathNeighbors','PathHeap','PathClosed','PathNodes','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult','TerrainField','SynchedCached','MotionTraceCache','RelatedProjectileTrace','MotionOverlayGeometry','MotionWriter'];
+ const checks=['EvidenceClaim','CaptureWriter','RegisteredWorld','TankPresentation','DecisionSnapshot','DecisionHooks','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult','TerrainField','SynchedCached','MotionTraceCache','RelatedProjectileTrace','MotionOverlayGeometry','MotionWriter'];
  run(executable('javac'),['--release','17','-proc:none','-cp',classpath,'-d',output,...sources,...checks.map(n=>path.join(test,'KneekuraDebug'+n+'SelfTest.java')),path.join(test,'KneekuraDebugDecisionIdentityInterop.java')]);
  for(const name of checks.filter(n=>n!=='MotionWriter')){
   // Vanilla bootstrap can create logs; keep this new check's artifacts in its disposable output.
-  const bootstrap=['PathNeighbors','PathHeap','PathClosed','PathNodes','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult'].includes(name);
+  const bootstrap=['PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult'].includes(name);
   const cp=bootstrap?classpath.split(path.delimiter).map(p=>path.resolve(root,p)).join(path.delimiter):classpath;
   const stdout=run(executable('java'),['-cp',output+path.delimiter+cp,'com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebug'+name+'SelfTest'],{},bootstrap?output:root);
   if(name==='PathNeighbors') {
@@ -60,6 +60,12 @@ try {
    const lines=stdout.split(/\r?\n/).filter(l=>l.startsWith('PATH_NODES_INTEROP:'));
    assert.equal(lines.length,7,'actual partial/full/null/custom/empty/max-prefix Path/Gson interop required');
    for(const line of lines){const payload=JSON.parse(line.slice('PATH_NODES_INTEROP:'.length));
+    assert.equal(validOriginalDecisionEvent({source:{side:'SERVER'},payload}),true,payload.kind);}
+  }
+  if(name==='PathGWrite') {
+   const lines=stdout.split(/\r?\n/).filter(l=>l.startsWith('G_WRITE_INTEROP:'));
+   assert.equal(lines.length,5,'actual written argument/cached field/predecessor/unknown/capture-gate Gson interop required');
+   for(const line of lines){const payload=JSON.parse(line.slice('G_WRITE_INTEROP:'.length));
     assert.equal(validOriginalDecisionEvent({source:{side:'SERVER'},payload}),true,payload.kind);}
   }
   if(name==='EffectiveMalus') {

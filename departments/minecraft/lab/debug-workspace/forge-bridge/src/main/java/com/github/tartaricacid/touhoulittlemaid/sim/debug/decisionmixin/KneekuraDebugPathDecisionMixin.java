@@ -22,6 +22,11 @@ import java.util.Map;
 @Mixin(value=PathFinder.class,remap=false)
 public abstract class KneekuraDebugPathDecisionMixin {
     @Redirect(method="findPath(Lnet/minecraft/util/profiling/ProfilerFiller;Lnet/minecraft/world/level/pathfinder/Node;Ljava/util/Map;FIF)Lnet/minecraft/world/level/pathfinder/Path;",
+            at=@At(value="FIELD",target="Lnet/minecraft/world/level/pathfinder/Node;g:F",opcode=181,ordinal=1),require=1)
+    private void kneekura$acceptedGWrite(Node node,float writtenG) {
+        KneekuraDebugDecisionHooks.originalAcceptedGWrite((PathFinder)(Object)this,node,writtenG);
+    }
+    @Redirect(method="findPath(Lnet/minecraft/util/profiling/ProfilerFiller;Lnet/minecraft/world/level/pathfinder/Node;Ljava/util/Map;FIF)Lnet/minecraft/world/level/pathfinder/Path;",
             at=@At(value="INVOKE",target="Lnet/minecraft/world/level/pathfinder/BinaryHeap;insert(Lnet/minecraft/world/level/pathfinder/Node;)Lnet/minecraft/world/level/pathfinder/Node;",ordinal=0),require=1)
     private Node kneekura$originalStartInsert(BinaryHeap heap,Node node) {
         return KneekuraDebugDecisionHooks.originalHeapInsert((PathFinder)(Object)this,heap,node,true);

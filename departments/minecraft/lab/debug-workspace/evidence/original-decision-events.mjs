@@ -25,6 +25,7 @@ const KINDS = Object.freeze({
   PATH_NEIGHBORS_RETURN: ['EVALUATION','path_search_neighbors'],
   PATH_HEAP_OPERATION_RETURN: ['EVALUATION','path_heap_operations'],
   PATH_NODE_CLOSED_CHECKPOINT: ['EVALUATION','path_closed_nodes'],
+  PATH_NODE_G_WRITE_CHECKPOINT: ['EVALUATION','path_g_writes'],
   PATH_RETURNED_NODES: ['RESULT','returned_path_nodes'],
 });
 const text = value => typeof value === 'string' && value.length > 0 && value.length <= 512;
@@ -211,11 +212,27 @@ function validClosedCheckpoint(d,record) {
     d.referenceScope==='RETAINED_ORIGINAL_POP_RETURN_REFERENCE'&&
     ['neighborPopulationStatus','rejectionReasonStatus','finalPathCostStatus'].every(k=>d[k]==='NOT_EXPOSED');
 }
+function validGWriteCheckpoint(d,record) {
+  const numeric=Number.isFinite(d.writtenG),keys=['searchId','maxNodes',numeric?'writtenG':'writtenGStatus','writtenGScope',
+    'nodeRole','node','nodeIdentity','predecessorPresent','predecessorIdentity','phase','dispatchScope','subjectRelationScope','fieldScope',
+    'comparisonOperandsStatus','neighborPopulationStatus','rejectionReasonStatus','finalPathCostStatus','navigationAdoptionStatus'];
+  if(Object.keys(d).length!==keys.length||Object.keys(d).some(k=>!keys.includes(k))||!text(d.searchId)||
+    !new RegExp('^search:'+record.payload.targetRevision+':[1-9][0-9]*$').test(d.searchId)||!integer(d.maxNodes)||d.maxNodes<1||d.maxNodes>64||
+    !numberOrUnknown(d,'writtenG')||d.writtenGScope!=='ORIGINAL_PUTFIELD_ARGUMENT'||d.node?.status!=='AVAILABLE'||
+    !validReturnedNode(d.node,true)||!validNodeIdentity(d)||typeof d.predecessorPresent!=='boolean'||
+    !validReferenceIdentity(d.predecessorIdentity,d.predecessorPresent,d.searchId,d.maxNodes))return false;
+  if(Number.isFinite(d.node.data.g)&&d.node.data.gStatus!==undefined)return false;
+  return d.nodeRole==='ORIGINAL_FIELD_WRITE_RECEIVER'&&d.phase==='AFTER_ORIGINAL_ACCEPTED_G_FIELD_WRITE_BEFORE_HEURISTIC_UPDATE'&&
+    d.dispatchScope==='ORIGINAL_PATHFINDER_INNER_ACCEPTED_G_FIELD_WRITE'&&d.subjectRelationScope==='SELECTED_OUTER_FIND_PATH_INVOCATION'&&
+    d.fieldScope==='BASE_NODE_FIELDS_AFTER_WRITE_AND_CAPTURE_GATES'&&
+    ['comparisonOperandsStatus','neighborPopulationStatus','rejectionReasonStatus','finalPathCostStatus','navigationAdoptionStatus'].every(k=>d[k]==='NOT_EXPOSED');
+}
 function validData(kind,d,record) {
   if (kind === 'MOD_COORDINATION_RETURN') return validKnightCoordination(d,record);
   if (kind === 'PATH_NEIGHBORS_RETURN') return validNeighborReturn(d);
   if (kind === 'PATH_HEAP_OPERATION_RETURN') return validHeapReturn(d,record);
   if (kind === 'PATH_NODE_CLOSED_CHECKPOINT') return validClosedCheckpoint(d,record);
+  if (kind === 'PATH_NODE_G_WRITE_CHECKPOINT') return validGWriteCheckpoint(d,record);
   if (kind === 'PATH_RETURNED_NODES') return validReturnedPath(d,record);
   if (kind === 'EFFECTIVE_MALUS_RETURN') {
     const numeric=Number.isFinite(d.returnedMalus),keys=['receiverUuid','receiverClass','evaluatorClass','pathType',
@@ -288,7 +305,7 @@ function validData(kind,d,record) {
 export function validOriginalDecisionEvent(record) {
   const p=record.payload;
   return record.source?.side === 'SERVER' && p?.schema === 'kneekura.original-decision-event/v1' &&
-    p.semantics === (p.kind==='PATH_NODE_CLOSED_CHECKPOINT'?'ORIGINAL_FIELD_WRITE_CHECKPOINT_ONLY':'ORIGINAL_INVOCATION_RETURN_ONLY') &&
+    p.semantics === (['PATH_NODE_CLOSED_CHECKPOINT','PATH_NODE_G_WRITE_CHECKPOINT'].includes(p.kind)?'ORIGINAL_FIELD_WRITE_CHECKPOINT_ONLY':'ORIGINAL_INVOCATION_RETURN_ONLY') &&
     integer(p.targetRevision) && p.targetRevision > 0 &&
     integer(p.eventIndex) && p.eventIndex >= 1 && p.eventIndex <= 256 && text(p.burstId) &&
     Object.hasOwn(KINDS,p.kind) && object(p.data) && bounded(p) &&
@@ -303,7 +320,7 @@ export function appendOriginalDecisionEvents(records,stages,capabilities,timelin
     const p=record.payload;
     const data=originalDecisionData(record);
     const [stage,capability]=KINDS[p.kind];
-    const algorithm=p.kind === 'PATH_SEARCH_STATE'||p.kind === 'PATH_NODE_CLOSED_CHECKPOINT';
+    const algorithm=['PATH_SEARCH_STATE','PATH_NODE_CLOSED_CHECKPOINT','PATH_NODE_G_WRITE_CHECKPOINT'].includes(p.kind);
     const status=algorithm ? 'INSTRUMENTED_ALGORITHM_STATE' : 'DIRECT_OBSERVED';
     const relation=algorithm ? 'ALGORITHM_TRACE_RELATION' : 'DIRECT_RUNTIME_RELATION';
     stages[stage] ??= {facts:[]};
