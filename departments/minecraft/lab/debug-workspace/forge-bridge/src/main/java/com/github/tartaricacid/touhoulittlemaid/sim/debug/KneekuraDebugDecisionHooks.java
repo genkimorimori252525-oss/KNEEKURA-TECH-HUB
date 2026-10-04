@@ -26,6 +26,7 @@ import net.minecraft.world.entity.ai.behavior.OneShot;
 import net.minecraft.world.entity.ai.behavior.GateBehavior;
 import net.minecraft.world.entity.ai.behavior.MoveToTargetSink;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.GoalSelector;
 import net.minecraft.world.entity.ai.goal.WrappedGoal;
@@ -100,7 +101,12 @@ public final class KneekuraDebugDecisionHooks {
     }
     private static final class StartConditionCapture {
         final String condition;final List<String> computes=new ArrayList<>();boolean truncated;
+        MemoryRequirementCapture requirement;
         StartConditionCapture(String condition){this.condition=condition;}
+    }
+    private static final class MemoryRequirementCapture {
+        final String id;final List<JsonObject> checks=new ArrayList<>();int count;boolean truncated,unsupportedSource;
+        MemoryRequirementCapture(String id){this.id=id;}
     }
     private static final class StartFrame {
         final MoveToTargetSink behavior;final Mob owner;final Brain<?> brain;final PathNavigation navigation;
@@ -146,6 +152,7 @@ public final class KneekuraDebugDecisionHooks {
         private TickStopFrame tickStopFrame;
         private int nextTickStop,tickStopDepth;
         private StartFrame startFrame;private int nextStart,startDepth;
+        private int nextMemoryRequirement;
         private ComputeFrame computeFrame;private CreateFrame createFrame;private FinderFrame finderFrame;
         private int nextCompute,computeDepth,createDepth,finderDepth,reachedDepth;
         private ReachedFrame reachedFrame;
@@ -654,9 +661,18 @@ public final class KneekuraDebugDecisionHooks {
         boolean supported=frame!=null&&frame.owner==owner&&Set.of("HAS_REQUIRED_MEMORIES","CHECK_EXTRA_START").contains(condition)&&
             (condition.equals("HAS_REQUIRED_MEMORIES")||frame.level==level);
         StartConditionCapture capture=supported?new StartConditionCapture(condition):null,old=supported?frame.condition:null;
+        if(supported&&condition.equals("HAS_REQUIRED_MEMORIES")&&session.nextMemoryRequirement<256)
+            capture.requirement=new MemoryRequirementCapture("memory-requirement:"+session.budget.context().selectionRevision()+":"+(++session.nextMemoryRequirement));
         if(supported)frame.condition=capture;else session.startFrame=null;
         try {
             boolean result=original.getAsBoolean();
+            if(supported&&session.startFrame==frame&&session.startReady(frame)&&capture.requirement!=null&&!capture.requirement.unsupportedSource&&!capture.requirement.checks.isEmpty())
+                session.record("BRAIN_PATH_MEMORY_REQUIREMENT_RETURN","Behavior.hasRequiredMemories.checkMemory.AFTER",()->{
+                    JsonObject data=startData(session,frame);data.addProperty("requirementInvocationId",capture.requirement.id);
+                    data.addProperty("condition","HAS_REQUIRED_MEMORIES");data.addProperty("result",result);JsonArray checks=new JsonArray();capture.requirement.checks.forEach(checks::add);
+                    data.add("checks",checks);data.addProperty("checksTruncated",capture.requirement.truncated);
+                    data.addProperty("checkScope","ORIGINAL_VIRTUAL_CHECK_MEMORY_RETURNS_PREFIX_NOT_REPLAY_OR_ALL_ELIGIBILITY_REASONS");return data;
+                });
             if(supported&&session.startFrame==frame&&session.startReady(frame))session.record("BRAIN_PATH_START_CONDITION_RETURN",
                 "Behavior.tryStart."+(condition.equals("HAS_REQUIRED_MEMORIES")?"hasRequiredMemories":"checkExtraStartConditions")+".AFTER",()->{
                     JsonObject data=startData(session,frame);data.addProperty("condition",condition);data.addProperty("result",result);
@@ -666,6 +682,31 @@ public final class KneekuraDebugDecisionHooks {
                     data.addProperty("resultScope","ORIGINAL_VIRTUAL_START_CONDITION_BOOLEAN_NOT_INDIVIDUAL_MEMORY_REASONS");return data;
                 });return result;
         }finally{if(supported)frame.condition=active==session?old:null;session.startFrame=active==session?previous:null;}
+    }
+    /** The original requirement-loop virtual call; no additional memory query or owner getter. */
+    public static boolean originalBrainMemoryCheck(Behavior<?> behavior,Brain<?> brain,MemoryModuleType<?> module,MemoryStatus requested,LivingEntity owner) {
+        Session session=active;
+        if(session==null||session.thread!=Thread.currentThread())return brain.checkMemory(module,requested);
+        StartFrame frame=session.startFrame;StartConditionCapture condition=frame==null?null:frame.condition;
+        MemoryRequirementCapture previous=condition==null?null:condition.requirement;
+        boolean supported=previous!=null&&frame.behavior==behavior&&frame.brain==brain&&frame.owner==owner&&
+            condition.condition.equals("HAS_REQUIRED_MEMORIES")&&session.startReady(frame);
+        if(previous!=null&&!supported)previous.unsupportedSource=true;
+        int index=supported?(previous.count=Math.min(9,previous.count+1)):0;
+        if(condition!=null)condition.requirement=null;
+        try {
+            boolean result=brain.checkMemory(module,requested);
+            if(supported&&active==session&&session.startFrame==frame&&frame.condition==condition&&session.startReady(frame)){
+                if(index>8)previous.truncated=true;
+                else {JsonObject check=new JsonObject();check.addProperty("checkIndex",index);
+                    String name=module==MemoryModuleType.PATH?"PATH":module==MemoryModuleType.WALK_TARGET?"WALK_TARGET":
+                        module==MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE?"CANT_REACH_WALK_TARGET_SINCE":null;
+                    check.addProperty("memoryModuleStatus",name==null?"NOT_EXPOSED":"AVAILABLE");if(name!=null)check.addProperty("memoryModule",name);
+                    check.addProperty("requestedMemoryStatus",requested==MemoryStatus.REGISTERED?"REGISTERED":requested==MemoryStatus.VALUE_PRESENT?"VALUE_PRESENT":
+                        requested==MemoryStatus.VALUE_ABSENT?"VALUE_ABSENT":"NOT_EXPOSED");check.addProperty("result",result);previous.checks.add(check);
+                }
+            }return result;
+        }finally{if(condition!=null)condition.requirement=active==session&&session.startFrame==frame&&frame.condition==condition?previous:null;}
     }
     public static void originalBrainStartDispatch(Behavior<?> behavior,ServerLevel level,LivingEntity owner,long gameTime,Runnable original) {
         Session session=active;

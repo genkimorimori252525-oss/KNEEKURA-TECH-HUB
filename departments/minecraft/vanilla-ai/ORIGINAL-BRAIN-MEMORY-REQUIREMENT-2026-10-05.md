@@ -1,0 +1,21 @@
+# 元のBrainメモリ要求判定と有限の実戻り値
+
+[R57の元開始条件](ORIGINAL-BRAIN-TRY-START-CALL-2026-10-05.md)内で、Behavior.hasRequiredMemoriesが実際に呼んだvirtual Brain.checkMemoryの引数と正常booleanを保持します。元loopのentryCondition・owner.getBrain・checkMemory・first-false short circuitを変更せず、元checkMemoryを1回だけ実行します。memory／AI／getter／entry iterator／registry queryを追加しません。exact選択MoveToTargetSink/current cached Brain・Nav/rawNavowner、現在のHAS_REQUIRED_MEMORIES source scopeの一致が必要です。
+
+元Brain.checkMemoryのbase bodyはcached memoriesのslotを調べ、未登録ならfalse、REGISTEREDならtrue、VALUE_PRESENT／VALUE_ABSENTはOptionalのpresenceで判定します。しかしvirtual callにはcustom override／Mixinがあり得るため、記録は元実戻り値です。observerがslotを読み直して理由やbooleanを再計算することはありません。元Sink constructorの要求はCANT_REACH_WALK_TARGET_SINCE=REGISTERED／PATH=VALUE_ABSENT／WALK_TARGET=VALUE_PRESENTです。moduleはこれら3つのraw identityだけをlabelし、unknown/null moduleはNOT_EXPOSED、null MemoryStatusもNOT_EXPOSEDとします。未知のMOD memoryを既知型へ偽装しません。
+
+新しいBRAIN_PATH_MEMORY_REQUIREMENT_RETURNはEVALUATION／brain_navigation／PARTIALです。元predicateが正常returnし、実際のsource checkの正常returnを1件以上取得した場合だけ、独立requirementInvocationIdと元condition boolean、checkIndex順のpassed module／requested MemoryStatus／元check booleanのprefixを記録します。最大8件、9件目の元正常returnでchecksTruncated=trueです。check配列の内容から元predicateのbooleanを書き換えたり、全eligibility・priority・Activity・internal memory理由・到着を取得済みとは扱いません。空のloop／未対応source／例外／上限後の未取得は、未呼出し・成功・失敗へ補いません。旧R57／compute／Sink payloadは変更しません。
+
+requirement IDs256／prefix8、共有StartFrame256／depth8／component128、既存200ticks／256events／524,288bytes／32nodesを維持します。unsupported source owner／Brain／Behaviorでは元callを1回実行し、callback中は古いrequirementを一時抑止します。同じ元loop内に不一致sourceが混ざった場合は新requirement summary全体を抑止し、欠測を圧縮した連続checkIndexへ偽装しません。旧memory条件の実booleanは独立に維持します。正しいnested predicateは別IDに記録し、元parentを復元します。source delegate中のrearm／clear／cached-owner・context変更／thread／時間・event・byte・writer gateで、旧returnを新sessionへ付けません。元例外とtryfinally cleanupを維持します。observerCostNanosは既存のsummary build／first-byte-check範囲で、prefix収集を含む観測全体のCPU費用ではありません。
+
+[追加ledger](BRAIN-MEMORY-REQUIREMENT-BYTECODE-LEDGER-2026-10-05.json)はsame mapped artifactの4owners／4method slices（Sink constructors2を含む）／5fields、9member hashes／exact descriptorsです。ledger SHA **39001d22fff449cbd898bbf0d43cf10e435e5509b5128b5e94d47cc56c92e4ae**。JDK／artifact／class／disassembly／member slicesを照合しました。静的sourceはinstalled transformed classのattestationではありません。旧ledgerを保全し、source body／JARはGitHubへ追加しません。
+
+## Source／fixture検証
+
+元protected hasRequiredMemoriesのbytecodeをcloneし、試験用private entryCondition accessorと元checkMemory source delegateだけを置換しました。元owner.getBrain・loop・first falseの元bytecodeを保持し、genuine baselineと元getter／query回数・booleanを照合するRED→GREENを行いました。3既知MemoryStatus／false条件／全3true／unknown・null module／null status／custom virtualtrue／9-entry prefix8＋tail／requirementID256、nested arbitrary callback抑止と正しいnested scopes分離、空loop、source args不一致／genuine loop中のforeign Brain混入（RED→GREEN）、元例外同一性、OFF／channel／cachedBrain／rawNavowner／revision／time／event1／byte1／thread／rearm／component128／writer failureとframe解放を検査しました。synthetic test map／reflection writes／unsafe subjectはfixtureだけで、native全branch／AI理由の証明ではありません。
+
+compiled ASMでsource-specific mandatory Redirectのexact method／target／handler args／require1、1production delegate、各OFF／observed branchの元virtual checkMemory1回を照合しました。旧R54～R57 compiled境界とGsonを維持します。Motion／Decision188件、production Gson→strict JavaScript16新規requirementケースと旧42／35／59／17／39／24／11／14です。null等のmalformed nested checkを安全に拒否するJS regressionもRED→GREENです。allbridge／genuinecombinedAPIの成功を確認しました。
+
+## 次の検証
+
+frozen producerから正式control85filesのfresh privateコピーを使い、自然進行Villagerのinstalled要求prefixと元memory条件／tryStart、取得できたcompute／startのdirect IDs・raw参照・source順序を照合します。canonical／actualJFRACK・parse／cleanstop／元・control・predecessorR57・baseline85hash不変／producerと公開HEAD CIを確認するまでnative受入を主張しません。上限で未取得となるbranchは不明のまま保持します。全memory内部理由・eligibility／全compute枝・duration/fallback RNG・cached reuse・TICK_RECOMPUTE・arrival、全Path候補・拒否・malus・effective cost、全Vanilla・FRONTIER・community、広いBoss戦、matched OFF／GPU・pixels、live Tank resize、section21全受入、最後のwhole-diff独立レビューは残ります。Draftと全体goalを継続します。

@@ -5,6 +5,9 @@ import com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugDecisionH
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.behavior.Behavior;
+import net.minecraft.world.entity.ai.Brain;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -15,6 +18,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value=Behavior.class,remap=false)
 public abstract class KneekuraDebugBehaviorDecisionMixin {
+    @Redirect(method="hasRequiredMemories(Lnet/minecraft/world/entity/LivingEntity;)Z",
+        at=@At(value="INVOKE",target="Lnet/minecraft/world/entity/ai/Brain;checkMemory(Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;Lnet/minecraft/world/entity/ai/memory/MemoryStatus;)Z"),require=1)
+    private boolean kneekura$memoryCheck(Brain<?> brain,MemoryModuleType<?> module,MemoryStatus requested,LivingEntity owner) {
+        return KneekuraDebugDecisionHooks.originalBrainMemoryCheck((Behavior<?>)(Object)this,brain,module,requested,owner);
+    }
     @Shadow protected abstract boolean hasRequiredMemories(LivingEntity owner);
     @Shadow protected abstract boolean checkExtraStartConditions(ServerLevel level,LivingEntity owner);
     @Shadow protected abstract void start(ServerLevel level,LivingEntity owner,long tick);
