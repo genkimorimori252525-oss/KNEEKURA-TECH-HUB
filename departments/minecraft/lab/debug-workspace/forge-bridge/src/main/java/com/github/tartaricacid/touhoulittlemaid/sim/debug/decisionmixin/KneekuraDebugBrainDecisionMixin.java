@@ -15,11 +15,37 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.gen.Invoker;
 import java.util.Set;
+import java.util.Map;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value=Brain.class,remap=false)
 public abstract class KneekuraDebugBrainDecisionMixin {
+    @Invoker(value="activityRequirementsAreMet",remap=false)
+    public abstract boolean kneekura$invokeActivityRequirement(Activity requested);
+
+    @Redirect(method="setActiveActivityIfPossible(Lnet/minecraft/world/entity/schedule/Activity;)V",
+        at=@At(value="INVOKE",target="Lnet/minecraft/world/entity/ai/Brain;activityRequirementsAreMet(Lnet/minecraft/world/entity/schedule/Activity;)Z"),require=1)
+    private boolean kneekura$requirementIfPossible(Brain<?> brain,Activity requested) {
+        return KneekuraDebugDecisionHooks.originalActivityRequirement(brain,requested,"IF_POSSIBLE",()->kneekura$invokeActivityRequirement(requested));
+    }
+    @Redirect(method="setActiveActivityToFirstValid(Ljava/util/List;)V",
+        at=@At(value="INVOKE",target="Lnet/minecraft/world/entity/ai/Brain;activityRequirementsAreMet(Lnet/minecraft/world/entity/schedule/Activity;)Z"),require=1)
+    private boolean kneekura$requirementFirstValid(Brain<?> brain,Activity requested) {
+        return KneekuraDebugDecisionHooks.originalActivityRequirement(brain,requested,"FIRST_VALID",()->kneekura$invokeActivityRequirement(requested));
+    }
+    @Redirect(method="activityRequirementsAreMet(Lnet/minecraft/world/entity/schedule/Activity;)Z",
+        at=@At(value="INVOKE",target="Ljava/util/Map;containsKey(Ljava/lang/Object;)Z"),require=1)
+    private boolean kneekura$requirementContains(Map<?,?> map,Object key,Activity requested) {
+        return KneekuraDebugDecisionHooks.originalActivityRequirementContains((Brain<?>)(Object)this,map,key,requested);
+    }
+    @Redirect(method="activityRequirementsAreMet(Lnet/minecraft/world/entity/schedule/Activity;)Z",
+        at=@At(value="INVOKE",target="Lnet/minecraft/world/entity/ai/Brain;checkMemory(Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;Lnet/minecraft/world/entity/ai/memory/MemoryStatus;)Z"),require=1)
+    private boolean kneekura$requirementCheck(Brain<?> brain,MemoryModuleType<?> module,MemoryStatus status,Activity requested) {
+        return KneekuraDebugDecisionHooks.originalActivityRequirementCheck(brain,module,status,requested);
+    }
     @Invoker(value="startEachNonRunningBehavior",remap=false)
     public abstract void kneekura$invokeStartEach(ServerLevel level,LivingEntity owner);
 

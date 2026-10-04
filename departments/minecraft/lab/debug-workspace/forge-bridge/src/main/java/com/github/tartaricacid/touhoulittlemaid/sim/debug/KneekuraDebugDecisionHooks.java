@@ -63,6 +63,11 @@ public final class KneekuraDebugDecisionHooks {
     @FunctionalInterface private interface Data { JsonObject read() throws ReflectiveOperationException; }
     private record PendingPop(Node node,int eventIndex) { }
     private record ActivityFrame(Brain<?> brain,String id,JsonObject before,long preCallCost) { }
+    private static final class ActivityRequirementFrame {
+        final ActivityFrame parent;final Activity requested;final Map<?,?> requirements;final String id,site;
+        final List<JsonObject> checks=new ArrayList<>();Boolean membership;int count;boolean truncated,invalid;
+        ActivityRequirementFrame(ActivityFrame parent,Activity requested,Map<?,?> requirements,String id,String site){this.parent=parent;this.requested=requested;this.requirements=requirements;this.id=id;this.site=site;}
+    }
     private record SinkFrame(MoveToTargetSink behavior,Mob owner,Brain<?> brain,PathNavigation navigation,
                              String id,String parentId,String callSite,long gameTime,JsonObject before,long preCallCost) { }
 
@@ -140,7 +145,7 @@ public final class KneekuraDebugDecisionHooks {
     }
     public static void clear(String reason) {
         Session previous=active;active=null;
-        if(previous!=null){previous.budget.close(reason);previous.clearHeapNodes();previous.sinkFrame=null;previous.tickStopFrame=null;previous.startFrame=null;previous.startLoopFrame=null;previous.computeFrame=null;previous.createFrame=null;previous.finderFrame=null;previous.reachedFrame=null;}
+        if(previous!=null){previous.budget.close(reason);previous.clearHeapNodes();previous.activityRequirementFrame=null;previous.sinkFrame=null;previous.tickStopFrame=null;previous.startFrame=null;previous.startLoopFrame=null;previous.computeFrame=null;previous.createFrame=null;previous.finderFrame=null;previous.reachedFrame=null;}
     }
 
     public static final class Session {
@@ -164,6 +169,7 @@ public final class KneekuraDebugDecisionHooks {
         private int nextActivity;
         private int activityDepth;
         private ActivityFrame activityFrame;
+        private ActivityRequirementFrame activityRequirementFrame;private int nextActivityRequirement,activityRequirementDepth;
         private int nextSink,sinkDepth;
         private SinkFrame sinkFrame;
         private TickStopFrame tickStopFrame;
@@ -239,6 +245,18 @@ public final class KneekuraDebugDecisionHooks {
             }catch(ReflectiveOperationException|RuntimeException|LinkageError error){
                 budget.close("ACTIVITY_CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());return null;
             }
+        }
+        private boolean activityRequirementReady(ActivityRequirementFrame frame) {
+            if(active!=this||frame==null||frame.invalid||activityFrame!=frame.parent||!activityReady(frame.parent.brain()))return false;
+            try {return KneekuraDebugDecisionSnapshot.read(Brain.class,"activityRequirements",frame.parent.brain())==frame.requirements;}
+            catch(ReflectiveOperationException|RuntimeException|LinkageError error){budget.close("ACTIVITY_REQUIREMENT_CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());return false;}
+        }
+        private ActivityRequirementFrame activityRequirementBegin(Brain<?> brain,Activity requested,String site) {
+            ActivityFrame parent=activityFrame(this,brain);
+            if(parent==null||!Set.of("IF_POSSIBLE","FIRST_VALID").contains(site)||nextActivityRequirement>=256||activityRequirementDepth>8)return null;
+            try {Map<?,?> map=(Map<?,?>)KneekuraDebugDecisionSnapshot.read(Brain.class,"activityRequirements",brain);if(map==null)return null;
+                return new ActivityRequirementFrame(parent,requested,map,"activity-requirement:"+budget.context().selectionRevision()+":"+(++nextActivityRequirement),site);
+            }catch(ReflectiveOperationException|RuntimeException|LinkageError error){budget.close("ACTIVITY_REQUIREMENT_CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());return null;}
         }
         private boolean sinkReady(SinkFrame frame) {
             if(active!=this||thread!=Thread.currentThread()||!channels.contains("brain_navigation")||!matches(frame.owner()))return false;
@@ -1036,6 +1054,45 @@ public final class KneekuraDebugDecisionHooks {
             data.addProperty("returnScope","ORIGINAL_VIRTUAL_SCHEDULE_QUERY_RETURN");return data;
         });
         return result;
+    }
+    /** Two original private predicate callers; normal results are not recomputed from slots. */
+    public static boolean originalActivityRequirement(Brain<?> brain,Activity requested,String site,BooleanSupplier original) {
+        Session session=active;
+        if(session==null||session.thread!=Thread.currentThread())return original.getAsBoolean();
+        ActivityRequirementFrame previous=session.activityRequirementFrame;int depth=session.activityRequirementDepth;session.activityRequirementDepth++;
+        try {
+            ActivityRequirementFrame frame=session.activityRequirementBegin(brain,requested,site);session.activityRequirementFrame=frame;
+            boolean result=original.getAsBoolean();
+            if(session.activityRequirementReady(frame)&&frame.membership!=null)session.record("BRAIN_ACTIVITY_REQUIREMENT_CHECKS_RETURN","Brain.activityRequirementsAreMet.sourceChecks.AFTER",()->{
+                JsonObject data=activityData(session,frame.parent);data.addProperty("requirementInvocationId",frame.id);data.addProperty("callerSite",frame.site);
+                String name=requested==Activity.CORE?"CORE":requested==Activity.IDLE?"IDLE":requested==Activity.REST?"REST":requested==Activity.WORK?"WORK":requested==Activity.MEET?"MEET":requested==Activity.PLAY?"PLAY":requested==Activity.FIGHT?"FIGHT":null;
+                data.addProperty("requestedActivityStatus",name==null?"NOT_EXPOSED":"AVAILABLE");if(name!=null)data.addProperty("requestedActivity",name);
+                data.addProperty("mapContains",frame.membership);data.addProperty("result",result);JsonArray checks=new JsonArray();frame.checks.forEach(checks::add);data.add("checks",checks);data.addProperty("checksTruncated",frame.truncated);
+                data.addProperty("checkScope","ORIGINAL_ACTIVITY_REQUIREMENT_MAP_AND_VIRTUAL_CHECK_RETURNS_PREFIX_NOT_ALL_ELIGIBILITY_REASONS");return data;
+            });return result;
+        }finally{session.activityRequirementFrame=active==session?previous:null;session.activityRequirementDepth=depth;}
+    }
+    public static boolean originalActivityRequirementContains(Brain<?> brain,Map<?,?> map,Object key,Activity requested) {
+        Session session=active;
+        if(session==null||session.thread!=Thread.currentThread())return map.containsKey(key);
+        ActivityRequirementFrame frame=session.activityRequirementFrame;
+        boolean supported=session.activityRequirementReady(frame)&&frame.parent.brain()==brain&&frame.requirements==map&&frame.requested==requested&&key==requested&&frame.membership==null;
+        if(frame!=null&&!supported)frame.invalid=true;session.activityRequirementFrame=null;
+        try {boolean result=map.containsKey(key);if(supported&&session.activityRequirementReady(frame))frame.membership=result;return result;}
+        finally{session.activityRequirementFrame=active==session?frame:null;}
+    }
+    public static boolean originalActivityRequirementCheck(Brain<?> brain,MemoryModuleType<?> module,MemoryStatus status,Activity requested) {
+        Session session=active;
+        if(session==null||session.thread!=Thread.currentThread())return brain.checkMemory(module,status);
+        ActivityRequirementFrame frame=session.activityRequirementFrame;
+        boolean supported=session.activityRequirementReady(frame)&&frame.parent.brain()==brain&&frame.requested==requested&&Boolean.TRUE.equals(frame.membership);
+        if(frame!=null&&!supported)frame.invalid=true;session.activityRequirementFrame=null;
+        try {boolean result=brain.checkMemory(module,status);if(supported&&session.activityRequirementReady(frame)){
+                int index=frame.count=Math.min(9,frame.count+1);if(index>8)frame.truncated=true;
+                else {JsonObject c=new JsonObject();c.addProperty("checkIndex",index);String name=module==MemoryModuleType.PATH?"PATH":module==MemoryModuleType.WALK_TARGET?"WALK_TARGET":module==MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE?"CANT_REACH_WALK_TARGET_SINCE":null;
+                    c.addProperty("memoryModuleStatus",name==null?"NOT_EXPOSED":"AVAILABLE");if(name!=null)c.addProperty("memoryModule",name);c.addProperty("requestedMemoryStatus",status==MemoryStatus.REGISTERED?"REGISTERED":status==MemoryStatus.VALUE_PRESENT?"VALUE_PRESENT":status==MemoryStatus.VALUE_ABSENT?"VALUE_ABSENT":"NOT_EXPOSED");c.addProperty("result",result);frame.checks.add(c);}
+            }return result;
+        }finally{session.activityRequirementFrame=active==session?frame:null;}
     }
     public static void activityRequirementsReturn(Brain<?> brain,Activity requested,boolean result) {
         Session session=active;ActivityFrame frame=activityFrame(session,brain);
