@@ -6,6 +6,10 @@ import com.google.gson.JsonObject;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.ai.behavior.BlockPosTracker;
+import net.minecraft.world.entity.ai.behavior.EntityTracker;
+import net.minecraft.world.entity.ai.memory.WalkTarget;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.control.JumpControl;
@@ -24,6 +28,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.IdentityHashMap;
 import java.util.Map;
@@ -121,12 +126,15 @@ public final class KneekuraDebugDecisionSnapshot {
         return out;
     }
 
-    String identity(Object goal) {
-        String token = identities.get(goal);
+    String identity(Object goal) { return identity(goal, "goal"); }
+
+    private String identity(Object value, String namespace) {
+        if (value == null) return null;
+        String token = identities.get(value);
         if (token != null) return token;
         if (identities.size() >= MAX_IDENTITIES) return null;
-        token = "goal:" + revision + ":" + (++nextIdentity);
-        identities.put(goal, token);
+        token = namespace + ":" + revision + ":" + (++nextIdentity);
+        identities.put(value, token);
         return token;
     }
 
@@ -190,9 +198,127 @@ public final class KneekuraDebugDecisionSnapshot {
             out.addProperty("x", pos.getX()); out.addProperty("y", pos.getY()); out.addProperty("z", pos.getZ());
         } else if (value.getClass() == Vec3.class) {
             Vec3 pos = (Vec3) value;
-            out.addProperty("x", pos.x); out.addProperty("y", pos.y); out.addProperty("z", pos.z);
+            if (Double.isFinite(pos.x) && Double.isFinite(pos.y) && Double.isFinite(pos.z)) {
+                out.addProperty("x", pos.x); out.addProperty("y", pos.y); out.addProperty("z", pos.z);
+            } else return unavailable("NONFINITE_CACHED_POSITION");
+        } else if (value.getClass() == WalkTarget.class || value.getClass() == BlockPosTracker.class
+                || value.getClass() == EntityTracker.class || value instanceof Entity || value.getClass() == Path.class) {
+            return typedMemory(value);
         } else out.addProperty("status", "NOT_EXPOSED");
         return out;
+    }
+
+    /** Same bounded allocator as Goals; these tokens never equal the Hooks component allocator. */
+    private JsonObject reference(Object value, String namespace) {
+        JsonObject out = new JsonObject();
+        String token = identity(value, namespace);
+        out.addProperty("status", token == null ? "NOT_EXPOSED" : "AVAILABLE");
+        out.addProperty("allocator", "SNAPSHOT_REFERENCE");
+        out.addProperty("targetRevision", revision);
+        if (token == null) out.addProperty("detail", "REFERENCE_LIMIT");
+        else out.addProperty("token", token);
+        return out;
+    }
+
+    private JsonObject typedMemory(Object value) {
+        try {
+            JsonObject data = new JsonObject();
+            String kind;
+            if (value.getClass() == WalkTarget.class) {
+                kind = "WALK_TARGET";
+                data.add("instanceIdentity", reference(value, "memory"));
+                float speed = (Float) read(WalkTarget.class, "speedModifier", value);
+                if (Float.isFinite(speed)) data.addProperty("speedModifier", speed);
+                else data.addProperty("speedModifierStatus", "NOT_EXPOSED");
+                data.addProperty("closeEnoughDist", (Integer) read(WalkTarget.class, "closeEnoughDist", value));
+                Object target = read(WalkTarget.class, "target", value);
+                data.add("target", target == null ? unavailable("NULL_TRACKER") : memoryValue(target));
+                data.addProperty("semantics", "CACHED_WALK_PARAMETERS_NOT_ELIGIBILITY_OR_NAVIGATION_RESULT");
+            } else if (value.getClass() == BlockPosTracker.class) {
+                kind = "BLOCK_POSITION_TRACKER";
+                data.add("instanceIdentity", reference(value, "memory"));
+                data.add("blockPosition", cachedMemory(read(BlockPosTracker.class, "blockPos", value), "NULL_CACHED_BLOCK_POSITION"));
+                data.add("position", cachedMemory(read(BlockPosTracker.class, "centerPosition", value), "NULL_CACHED_POSITION"));
+                data.addProperty("semantics", "CACHED_FIXED_TRACKER_FIELDS_NOT_VISIBILITY_QUERY");
+            } else if (value.getClass() == EntityTracker.class) {
+                kind = "ENTITY_TRACKER";
+                data.add("instanceIdentity", reference(value, "memory"));
+                data.addProperty("trackEyeHeight", (Boolean) read(EntityTracker.class, "trackEyeHeight", value));
+                data.add("entity", cachedMemory(read(EntityTracker.class, "entity", value), "NULL_ENTITY"));
+                data.addProperty("semantics", "CACHED_TRACKER_POLICY_NOT_CURRENT_POSITION_OR_VISIBILITY_QUERY");
+            } else if (value instanceof Entity) {
+                kind = "ENTITY_REFERENCE";
+                data.add("instanceIdentity", reference(value, "entity"));
+                data.add("entityUuid", cachedMemory(read(Entity.class, "uuid", value), "NULL_CACHED_UUID"));
+                data.add("position", cachedMemory(read(Entity.class, "position", value), "NULL_CACHED_POSITION"));
+                data.add("blockPosition", cachedMemory(read(Entity.class, "blockPosition", value), "NULL_CACHED_BLOCK_POSITION"));
+                data.add("eyeHeight", memoryValue(read(Entity.class, "eyeHeight", value)));
+                data.addProperty("semantics", "BASE_ENTITY_CACHED_FIELDS_ONLY_NOT_TRACKER_QUERY_OR_ACTUAL_MOTION");
+            } else {
+                kind = "PATH";
+                data.add("instanceIdentity", reference(value, "path"));
+                data.add("target", cachedMemory(read(Path.class, "target", value), "NULL_CACHED_TARGET"));
+                data.addProperty("nextNodeIndex", (Integer) read(Path.class, "nextNodeIndex", value));
+                data.addProperty("canReach", (Boolean) read(Path.class, "reached", value));
+                data.add("distanceToTarget", memoryValue(read(Path.class, "distToTarget", value)));
+                Object list = read(Path.class, "nodes", value);
+                if (list == null || list.getClass() != ArrayList.class) {
+                    data.addProperty("nodesStatus", "NOT_EXPOSED");
+                    data.addProperty("nodesDetail", list == null ? "NULL_NODE_LIST" : "CUSTOM_NODE_LIST");
+                } else {
+                    ArrayList<?> nodes = (ArrayList<?>) list;
+                    data.addProperty("nodeCount", nodes.size());
+                    data.addProperty("truncated", nodes.size() > MAX_ENTRIES);
+                    data.addProperty("nodesStatus", nodes.size() > MAX_ENTRIES ? "PARTIAL" : "AVAILABLE");
+                    JsonArray entries = new JsonArray();
+                    for (int i = 0; i < Math.min(nodes.size(), MAX_ENTRIES); i++) {
+                        Object node = nodes.get(i);
+                        if (node == null || node.getClass() != Node.class) {
+                            entries.add(unavailable(node == null ? "NULL_NODE" : "CUSTOM_NODE_CLASS"));
+                            continue;
+                        }
+                        Node cached = (Node) node;
+                        JsonObject row = new JsonObject();
+                        row.addProperty("status", "AVAILABLE");
+                        row.addProperty("x", cached.x); row.addProperty("y", cached.y); row.addProperty("z", cached.z);
+                        if (cached.type != null) row.addProperty("type", cached.type.name());
+                        else row.addProperty("status", "PARTIAL");
+                        if (Float.isFinite(cached.costMalus)) row.addProperty("costMalus", cached.costMalus);
+                        else row.addProperty("status", "PARTIAL");
+                        entries.add(row);
+                    }
+                    data.add("nodes", entries);
+                }
+                data.addProperty("semantics", "CACHED_MEMORY_ROUTE_NOT_ADOPTION_ACTUAL_MOTION_OR_SEARCH_FRONTIER");
+            }
+            JsonObject out = new JsonObject();
+            out.addProperty("status", incomplete(data) ? "PARTIAL" : "AVAILABLE");
+            out.addProperty("className", label(value.getClass().getName()));
+            out.addProperty("encoding", "TYPED_CACHED_MEMORY_V1");
+            out.addProperty("kind", kind);
+            out.add("data", data);
+            return out;
+        } catch (ReflectiveOperationException | RuntimeException error) {
+            return unavailable("MEMBER_UNAVAILABLE:" + error.getClass().getSimpleName());
+        }
+    }
+
+    private JsonObject cachedMemory(Object value, String nullReason) {
+        return value == null ? unavailable(nullReason) : memoryValue(value);
+    }
+
+    private static boolean incomplete(com.google.gson.JsonElement value) {
+        if (value.isJsonObject()) {
+            for (Map.Entry<String, com.google.gson.JsonElement> entry : value.getAsJsonObject().entrySet()) {
+                if ((entry.getKey().equals("status") || entry.getKey().endsWith("Status"))
+                        && !entry.getValue().getAsString().equals("AVAILABLE")) return true;
+                if (entry.getKey().equals("truncated") && entry.getValue().getAsBoolean()) return true;
+                if (incomplete(entry.getValue())) return true;
+            }
+        } else if (value.isJsonArray()) {
+            for (com.google.gson.JsonElement child : value.getAsJsonArray()) if (incomplete(child)) return true;
+        }
+        return false;
     }
 
     private JsonObject activities(Brain<?> brain) throws ReflectiveOperationException {
@@ -223,24 +349,29 @@ public final class KneekuraDebugDecisionSnapshot {
         out.addProperty("pathSemantics", "DECLARED_ROUTE_NOT_ACTUAL_MOTION_OR_FRONTIER");
         out.addProperty("truncated", false);
         if (path == null) return out;
-        if (path.getClass() != Path.class) throw new IllegalStateException("CUSTOM_PATH_NOT_EXPOSED");
+        JsonObject memory = memoryValue(path);
+        if (!memory.has("encoding")) throw new IllegalStateException("CUSTOM_PATH_NOT_EXPOSED");
+        JsonObject cached = memory.getAsJsonObject("data");
+        if (cached.get("nodesStatus").getAsString().equals("NOT_EXPOSED")) throw new IllegalStateException("NODE_LIST_NOT_EXPOSED");
+        JsonObject target = cached.getAsJsonObject("target");
+        if (!target.get("status").getAsString().equals("AVAILABLE")) throw new IllegalStateException("PATH_TARGET_NOT_EXPOSED");
+        out.add("pathIdentity", cached.get("instanceIdentity"));
+        out.add("nodeCount", cached.get("nodeCount"));
+        out.add("nextNodeIndex", cached.get("nextNodeIndex"));
+        out.add("canReach", cached.get("canReach"));
+        out.add("targetX", target.get("x")); out.add("targetY", target.get("y")); out.add("targetZ", target.get("z"));
         JsonArray entries = new JsonArray();
-        out.add("entries", entries);
-        out.addProperty("nodeCount", path.getNodeCount());
-        out.addProperty("nextNodeIndex", path.getNextNodeIndex());
-        out.addProperty("canReach", path.canReach());
-        BlockPos target = path.getTarget();
-        out.addProperty("targetX", target.getX()); out.addProperty("targetY", target.getY()); out.addProperty("targetZ", target.getZ());
-        for (int i = 0; i < Math.min(path.getNodeCount(), MAX_ENTRIES); i++) {
-            Node node = path.getNode(i);
+        int index = 0;
+        for (com.google.gson.JsonElement element : cached.getAsJsonArray("nodes")) {
+            JsonObject node = element.getAsJsonObject();
+            if (!node.get("status").getAsString().equals("AVAILABLE")) throw new IllegalStateException("PATH_NODE_NOT_EXPOSED");
             JsonObject row = new JsonObject();
-            row.addProperty("index", i);
-            row.addProperty("x", node.x); row.addProperty("y", node.y); row.addProperty("z", node.z);
-            row.addProperty("type", node.type.name());
-            row.addProperty("costMalus", node.costMalus);
+            row.addProperty("index", index++);
+            for (String key : Set.of("x", "y", "z", "type", "costMalus")) row.add(key, node.get(key));
             entries.add(row);
         }
-        out.addProperty("truncated", path.getNodeCount() > MAX_ENTRIES);
+        out.add("entries", entries);
+        out.add("truncated", cached.get("truncated"));
         return out;
     }
 

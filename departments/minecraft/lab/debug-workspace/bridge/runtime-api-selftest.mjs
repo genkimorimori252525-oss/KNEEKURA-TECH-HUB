@@ -5,6 +5,7 @@ import {fileURLToPath} from 'node:url';
 import {spawnSync} from 'node:child_process';
 import {writeFileSync} from 'node:fs';
 import assert from 'node:assert/strict';
+import {validDecisionSnapshot} from '../evidence/debug-workspace-decision-adapter.mjs';
 import {validOriginalDecisionEvent,originalDecisionData} from '../evidence/original-decision-events.mjs';
 const root=fileURLToPath(new URL('../../',import.meta.url));
 const main=path.join(root,'debug-workspace/forge-bridge/src/main/java/com/github/tartaricacid/touhoulittlemaid/sim/debug');
@@ -31,13 +32,27 @@ try {
   'DecisionAdapter','DecisionBurstRequest','AdapterSourceProof','TwilightForestDescriptor','TwilightForestReturnDescriptor','TwilightForestAdapter',
   'MotionTraceCache','RelatedProjectileTraceCache','MotionOverlayRuntime','MotionOverlayGeometry','MotionOverlay'];
  const sources=[...names.map(n=>path.join(main,'KneekuraDebug'+n+'.java')),path.join(main,'decisionmixin/KneekuraDebugPathDecisionMixin.java')];
- const checks=['EvidenceClaim','CaptureWriter','RegisteredWorld','TankPresentation','DecisionSnapshot','DecisionHooks','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult','TerrainField','SynchedCached','MotionTraceCache','RelatedProjectileTrace','MotionOverlayGeometry','MotionWriter'];
+ const checks=['EvidenceClaim','CaptureWriter','RegisteredWorld','TankPresentation','DecisionSnapshot','TypedMemory','DecisionHooks','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult','TerrainField','SynchedCached','MotionTraceCache','RelatedProjectileTrace','MotionOverlayGeometry','MotionWriter'];
  run(executable('javac'),['--release','17','-proc:none','-cp',classpath,'-d',output,...sources,...checks.map(n=>path.join(test,'KneekuraDebug'+n+'SelfTest.java')),path.join(test,'KneekuraDebugDecisionIdentityInterop.java')]);
  for(const name of checks.filter(n=>n!=='MotionWriter')){
   // Vanilla bootstrap can create logs; keep this new check's artifacts in its disposable output.
-  const bootstrap=['PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult'].includes(name);
+  const bootstrap=['TypedMemory','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult'].includes(name);
   const cp=bootstrap?classpath.split(path.delimiter).map(p=>path.resolve(root,p)).join(path.delimiter):classpath;
   const stdout=run(executable('java'),['-cp',output+path.delimiter+cp,'com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebug'+name+'SelfTest'],{},bootstrap?output:root);
+  if(name==='TypedMemory') {
+   const line=stdout.split(/\r?\n/).find(l=>l.startsWith('MEMORY_INTEROP:'));
+   assert.ok(line,'genuine cached memory/Gson interop output required');
+   const values=JSON.parse(line.slice(15)); assert.equal(values.length,8);
+   const payload={schema:'kneekura.vanilla-decision-snapshot/v1',targetRevision:19,semantics:'MOB_COMPONENT_SNAPSHOT_ONLY',sections:{}};
+   for(const name of ['goal_scheduler','brain_memory','brain_activities','navigation_path','movement_control'])payload.sections[name]={status:'NOT_EXPOSED'};
+   for(const value of values){
+    const revision=value.data?.instanceIdentity?.targetRevision ?? 19;payload.targetRevision=revision;
+    payload.sections.brain_memory={status:'AVAILABLE',data:{entries:[{registered:true,present:true,key:'minecraft:fixture',value}],truncated:false}};
+    assert.equal(validDecisionSnapshot(payload),true,value.kind ?? value.className ?? value.detail);
+   }
+   const capped=values[3]; assert.equal(Object.hasOwn(capped.data.instanceIdentity,'token'),false,'production Gson omits unavailable reference token');
+   console.log('Eight actual typed-memory/Gson cases preserve cached state and explicit unknowns across Java/JS');
+  }
   if(name==='PathNeighbors') {
    const line=stdout.split(/\r?\n/).find(l=>l.startsWith('NEIGHBOR_INTEROP:'));
    assert.ok(line,'production neighbor/Gson interop output required');

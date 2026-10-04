@@ -132,6 +132,70 @@ function compactBrain(payload = {}) {
   return out;
 }
 
+
+function validSnapshotReference(ref, revision, namespace) {
+  if (!ref || ref.allocator !== 'SNAPSHOT_REFERENCE' || ref.targetRevision !== revision) return false;
+  if (ref.status === 'NOT_EXPOSED') return ref.detail === 'REFERENCE_LIMIT' && !Object.hasOwn(ref,'token');
+  if (ref.status !== 'AVAILABLE' || typeof ref.token !== 'string') return false;
+  const parts=ref.token.split(':');
+  return parts.length === 3 && parts[0] === namespace && parts[1] === String(revision) &&
+    /^[1-9][0-9]*$/.test(parts[2]) && Number(parts[2]) <= 256;
+}
+
+// Additive typed cached memory contract; historical opaque/scalar observations remain readable.
+function validTypedMemory(value, revision, depth=0) {
+  if (value?.encoding !== 'TYPED_CACHED_MEMORY_V1') return true;
+  if (depth > 4 || !['AVAILABLE','PARTIAL'].includes(value.status) || !value.data) return false;
+  const d=value.data, kind=value.kind;
+  const namespace=kind === 'PATH' ? 'path' : kind === 'ENTITY_REFERENCE' ? 'entity' : 'memory';
+  if (!validSnapshotReference(d.instanceIdentity,revision,namespace)) return false;
+  const unknown=v=>v?.status === 'NOT_EXPOSED';
+  const point=(v,block=false)=>unknown(v) || (v?.status === 'AVAILABLE' && ['x','y','z'].every(k=>
+    block ? Number.isSafeInteger(v[k]) : Number.isFinite(v[k])));
+  const scalar=v=>unknown(v) || (v?.status === 'AVAILABLE' && Number.isFinite(v.value));
+  const child=(v,kinds)=>unknown(v) || (v?.encoding === 'TYPED_CACHED_MEMORY_V1' &&
+    kinds.includes(v.kind) && validTypedMemory(v,revision,depth+1));
+  let valid=false;
+  switch (kind) {
+    case 'WALK_TARGET':
+      valid=d.semantics === 'CACHED_WALK_PARAMETERS_NOT_ELIGIBILITY_OR_NAVIGATION_RESULT' &&
+        Number.isSafeInteger(d.closeEnoughDist) &&
+        (d.speedModifierStatus === 'NOT_EXPOSED' ? !Object.hasOwn(d,'speedModifier') : Number.isFinite(d.speedModifier)) &&
+        child(d.target,['BLOCK_POSITION_TRACKER','ENTITY_TRACKER']);
+      break;
+    case 'BLOCK_POSITION_TRACKER':
+      valid=d.semantics === 'CACHED_FIXED_TRACKER_FIELDS_NOT_VISIBILITY_QUERY' && point(d.position) && point(d.blockPosition,true);
+      break;
+    case 'ENTITY_TRACKER':
+      valid=d.semantics === 'CACHED_TRACKER_POLICY_NOT_CURRENT_POSITION_OR_VISIBILITY_QUERY' &&
+        typeof d.trackEyeHeight === 'boolean' && child(d.entity,['ENTITY_REFERENCE']);
+      break;
+    case 'ENTITY_REFERENCE':
+      valid=d.semantics === 'BASE_ENTITY_CACHED_FIELDS_ONLY_NOT_TRACKER_QUERY_OR_ACTUAL_MOTION' &&
+        point(d.position) && point(d.blockPosition,true) && scalar(d.eyeHeight) &&
+        (unknown(d.entityUuid) || (d.entityUuid?.status === 'AVAILABLE' &&
+          typeof d.entityUuid.value === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(d.entityUuid.value)));
+      break;
+    case 'PATH':
+      valid=d.semantics === 'CACHED_MEMORY_ROUTE_NOT_ADOPTION_ACTUAL_MOTION_OR_SEARCH_FRONTIER' &&
+        Number.isSafeInteger(d.nextNodeIndex) && typeof d.canReach === 'boolean' && point(d.target,true) && scalar(d.distanceToTarget);
+      if (d.nodesStatus === 'NOT_EXPOSED') valid &&= !Object.hasOwn(d,'nodes') && ['NULL_NODE_LIST','CUSTOM_NODE_LIST'].includes(d.nodesDetail);
+      else valid &&= Number.isSafeInteger(d.nodeCount) && d.nodeCount >= 0 &&
+        d.truncated === (d.nodeCount > 64) && d.nodesStatus === (d.truncated ? 'PARTIAL' : 'AVAILABLE') &&
+        Array.isArray(d.nodes) && d.nodes.length === Math.min(d.nodeCount,64) && d.nodes.every(n=>unknown(n) ||
+          (['AVAILABLE','PARTIAL'].includes(n.status) && ['x','y','z'].every(k=>Number.isSafeInteger(n[k])) &&
+            (n.status === 'PARTIAL' || (typeof n.type === 'string' && Number.isFinite(n.costMalus)))));
+      break;
+  }
+  if (!valid) return false;
+  function incomplete(v) {
+    if (!v || typeof v !== 'object') return false;
+    return Object.entries(v).some(([k,child])=>((k === 'status' || k.endsWith('Status')) && child !== 'AVAILABLE') ||
+      (k === 'truncated' && child === true) || incomplete(child));
+  }
+  return value.status !== 'AVAILABLE' || !incomplete(d);
+}
+
 const SNAPSHOT_SECTIONS = ['goal_scheduler','brain_memory','brain_activities','navigation_path','movement_control'];
 export function validDecisionSnapshot(payload) {
   if (payload?.schema !== 'kneekura.vanilla-decision-snapshot/v1' ||
@@ -156,6 +220,10 @@ export function validDecisionSnapshot(payload) {
     if (section.status !== 'NOT_EXPOSED' &&
         (!section.data || typeof section.data !== 'object' || Array.isArray(section.data))) return false;
   }
+  const memories=payload.sections.brain_memory.data?.entries;
+  if (Array.isArray(memories) && !memories.every(entry=>!entry.present || validTypedMemory(entry.value,payload.targetRevision))) return false;
+  const routeRef=payload.sections.navigation_path.data?.pathIdentity;
+  if (routeRef && !validSnapshotReference(routeRef,payload.targetRevision,'path')) return false;
   return new TextEncoder().encode(JSON.stringify(payload)).length <= 65536;
 }
 
