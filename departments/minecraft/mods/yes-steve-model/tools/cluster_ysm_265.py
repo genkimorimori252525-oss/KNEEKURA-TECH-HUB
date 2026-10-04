@@ -25,6 +25,8 @@ from scan_ysm_265 import parse_class
 ROOT = "com/elfmcys/yesstevemodel/"
 
 DOMAINS = (
+    "BUNDLED_CONCENTUS",
+    "BUNDLED_VORBISJAVA",
     "MODEL",
     "ANIMATION",
     "MOLANG",
@@ -46,6 +48,10 @@ def semantic_domain(name: str | None) -> str:
     s = (name or "").lower()
     if not s:
         return "UNKNOWN"
+    if "org.concentus" in s or "bundled_concentus" in s:
+        return "BUNDLED_CONCENTUS"
+    if "org.gagravarr" in s or "vorbisjava" in s or "bundled_vorbisjava" in s:
+        return "BUNDLED_VORBISJAVA"
     if ".network" in s:
         return "NETWORK"
     if ".mixin" in s:
