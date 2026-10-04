@@ -1,0 +1,69 @@
+{
+  "format": "kneekura.target-source-inventory.v1",
+  "target": "Liberty's Villagers",
+  "recorded_at": "2026-10-04",
+  "focus": "villager AI / POI / habits",
+  "original_baseline": {
+    "repository": "gitsh01/libertyvillagers",
+    "branch": "v2-1.20.1-architectury",
+    "revision": "e0bade76b49a40950d69ba4ce7e5d51799e4ea7f",
+    "version": "2.0.0",
+    "minecraft": "1.20.1",
+    "forge": "47.1.47",
+    "java": 17,
+    "architectury": "9.1.12",
+    "license": "CC0-1.0",
+    "curseforge_project_id": 700485
+  },
+  "maintained_anchor": {
+    "repository": "Leclowndu93150/Liberty-Villagers",
+    "branch": "1.20.1-architectury",
+    "revision": "f2e25484049366fe13ec48f7c1e4d97c94809898",
+    "source_version": "2.0.2",
+    "minecraft": "1.20.1",
+    "forge": "47.1.47",
+    "distributed_forge": {
+      "version": "2.0.1",
+      "curseforge_project_id": 1334457,
+      "file_id": 6930028,
+      "file_name": "libertyvillagers-2.0.1+forge+1.20.1.jar",
+      "uploaded": "2025-08-26"
+    },
+    "source_tree": {
+      "truncated": false,
+      "entries": 153,
+      "blobs": 109,
+      "java_files": 78,
+      "mixins": 46,
+      "configs": 8,
+      "custom_tasks": 6,
+      "commands": 7,
+      "custom_goals": 1
+    },
+    "branch_license": "CC0-1.0 inherited in branch",
+    "binary_source_equivalence": "NOT_ESTABLISHED"
+  },
+  "frontier": {
+    "repository": "Leclowndu93150/Liberty-Villagers",
+    "branch": "1.21.11",
+    "revision": "40e1384183c074bcfc63ae15b231c9bcd31429ad",
+    "version": "1.0.1",
+    "minecraft": "1.21.11",
+    "java": 21,
+    "license_declaration": "MIT"
+  },
+  "evidence_status": {
+    "poi_policy": "EVIDENCE_BACKED_SOURCE",
+    "sleep_bed_logic": "EVIDENCE_BACKED_SOURCE",
+    "work_task_rewrite": "EVIDENCE_BACKED_SOURCE",
+    "profession_habits": "EVIDENCE_BACKED_SOURCE",
+    "breeding_policy": "EVIDENCE_BACKED_SOURCE",
+    "path_hazard_policy": "EVIDENCE_BACKED_SOURCE",
+    "stuck_recovery": "EVIDENCE_BACKED_SOURCE",
+    "panic_fix": "EVIDENCE_BACKED_SOURCE_PLUS_RELEASE_CLAIM",
+    "brain_observability": "EVIDENCE_BACKED_SOURCE",
+    "runtime_performance": "NOT_ANALYZED",
+    "automated_tests": "NOT_FOUND",
+    "jar_source_equivalence": "NOT_ESTABLISHED"
+  }
+}
