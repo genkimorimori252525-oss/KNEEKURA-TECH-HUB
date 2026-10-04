@@ -1,0 +1,73 @@
+name: YSM 2.6.5 Foundation Map
+
+on:
+  push:
+    branches: ["jolly/research-ysm-2026-10-05"]
+    paths:
+      - 'departments/minecraft/mods/yes-steve-model/tools/cluster_ysm_265.py'
+      - 'departments/minecraft/mods/yes-steve-model/tools/scan_ysm_265.py'
+      - 'departments/minecraft/mods/yes-steve-model/OBFUSCATION-MAP-2026-10-05.json'
+      - '.github/workflows/ysm-265-foundation-map.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ysm-265-foundation-map-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  foundation-map:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch exact official YSM artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p foundation-evidence
+          URL='https://cdn.modrinth.com/data/86xjpqqS/versions/Zqooxsd2/ysm-2.6.5-forge%2Bmc1.20.1-release.jar'
+          curl --fail --location --retry 3 --max-time 180 "$URL" -o "$RUNNER_TEMP/ysm-2.6.5.jar"
+          echo '25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f  '"$RUNNER_TEMP/ysm-2.6.5.jar" | sha256sum --check
+          sha256sum "$RUNNER_TEMP/ysm-2.6.5.jar" > foundation-evidence/sha256.txt
+      - name: Build Foundation Map
+        shell: bash
+        run: |
+          set -euo pipefail
+          python departments/minecraft/mods/yes-steve-model/tools/cluster_ysm_265.py \
+            --jar "$RUNNER_TEMP/ysm-2.6.5.jar" \
+            --map departments/minecraft/mods/yes-steve-model/OBFUSCATION-MAP-2026-10-05.json \
+            --out foundation-evidence/foundation-map.json \
+            2>&1 | tee foundation-evidence/summary.txt
+      - name: Validate full coverage
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('foundation-evidence/foundation-map.json',encoding='utf-8'))
+          assert d['artifact']['sha256']=='25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f'
+          assert d['artifact']['classes']==955
+          assert len(d['classes'])==955
+          assert len({x['class'] for x in d['classes']})==955
+          assert d['artifact']['parse_errors']==0
+          assert d['graph']['seed_classes']>0
+          print('KNEEKURA_FOUNDATION_FULL_COVERAGE_PASS')
+          print(json.dumps({
+            'graph':d['graph'],
+            'domains':{k:{kk:v[kk] for kk in ('classes','mapped_seed_classes','unresolved_classes','average_domain_score')} for k,v in d['domains'].items()},
+            'cross_domain_edges':d['cross_domain_edges'][:20],
+          }, ensure_ascii=False))
+          PY
+      - name: Retain bounded Foundation evidence (no YSM JAR)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ysm-265-foundation-${{ github.sha }}
+          path: foundation-evidence/
+          retention-days: 7
