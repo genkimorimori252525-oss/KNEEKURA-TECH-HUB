@@ -159,6 +159,29 @@
       "revision": "14a0e075c0ce3308299fd3a303ab7de83b4d1cf8",
       "role": "SECONDARY_RUNTIME_REFLECTION_EVIDENCE",
       "note": "Public reflection target corroborates the obfuscated NativeLibUtil no-arg preload entry."
+    },
+    "taczfixes_actual_jar_probe": {
+      "repository": "3SCR1P7/TaczFixes",
+      "revision": "a2223f838fc4f16ecae0315663b7e0e3ca5d23d4",
+      "date": "2026-10-05 observed",
+      "role": "SECONDARY_EXACT_2_6_5_COMPILE_TARGET_AND_RUNTIME_HOOK_EVIDENCE",
+      "note": "Pins libs/ysm-2.6.5-forge+mc1.20.1-release.jar; exact Mixins plus runtime hook counters expose TaCZ/render/layer/model/bone seams."
+    },
+    "maid_survival_2_6_5_probe": {
+      "repository": "Aleph-1374/tlm-maid-survival",
+      "revision": "d264991d5ab68370db953ecec1a491c99b576952",
+      "role": "SECONDARY_2_6_5_MIXIN_RUNTIME_LOG_EVIDENCE",
+      "note": "Exact Carry On predicate target and runtime logs revealing an obfuscated Jade plugin owner."
+    },
+    "tinkersnewlife_javap_probe": {
+      "repository": "mofeng945/TinkersNewlife",
+      "revision": "6e7f207759fc3de50969ea2a96d717d2409e7b49",
+      "role": "SECONDARY_JAVAP_STRUCTURAL_EVIDENCE",
+      "note": "Records a YSM 2.6.5 renderer override/call shape that uniquely matches the CustomPlayerRenderer semantic role."
+    },
+    "chinese_public_community": {
+      "role": "RECONNAISSANCE_AND_SECONDARY_COMPATIBILITY_EVIDENCE",
+      "note": "Chinese-speaking public YSM technical work is substantial across compatibility mods, MC百科, official issue logs, and reverse-engineering reports. Only Java structural/compatibility findings and high-level architecture are retained; protection-bypass/decryption procedures are excluded."
     }
   },
   "evidence_status": {
@@ -185,7 +208,7 @@
     "model_distribution_native_wire_protocol": "OPAQUE_NOT_ANALYZED",
     "client_build_progress_wedge_hazard": "DIRECT_SOURCE_STATIC_HAZARD_NOT_RUNTIME_CONFIRMED",
     "issue_444_root_cause": "UNKNOWN",
-    "java_obfuscation_map_2_6_5": "PARTIAL_EVIDENCE_BACKED_PUBLIC_CROSS_REFERENCE",
+    "java_obfuscation_map_2_6_5": "55_MAPPINGS_22_CONFIRMED_33_HIGH_PUBLIC_CROSS_REFERENCE",
     "obfuscated_native_lib_bootstrap": "HIGH_CONFIDENCE",
     "obfuscated_capability_provider": "CONFIRMED_PUBLIC_ACTUAL_JAR_CROSS_REFERENCE",
     "obfuscated_native_renderer_bridge": "CONFIRMED_PUBLIC_ACTUAL_JAR_DESCRIPTOR",
@@ -193,12 +216,20 @@
     "obfuscated_preview_paperdoll_path": "HIGH_WITH_SOURCE_ARTIFACT_DIVERGENCE",
     "complete_obfuscation_map": "NOT_COMPLETE",
     "distributed_jar_local_structural_scan": "NOT_PERFORMED_BINARY_ACQUISITION_UNAVAILABLE_IN_SESSION",
-    "native_protection_internals": "OUT_OF_SCOPE"
+    "native_protection_internals": "OUT_OF_SCOPE",
+    "obfuscated_bone_alias_surface": "23_HIGH_SEMANTIC_ALIASES_OWNER_UNRESOLVED",
+    "tacz_obfuscated_surface": "HIGH_ACTUAL_2_6_5_COMPAT_WITH_SOURCE_ARTIFACT_DIVERGENCE",
+    "carryon_obfuscated_predicate": "CONFIRMED",
+    "jade_obfuscated_plugin": "CONFIRMED",
+    "custom_player_renderer_obfuscated_class": "CONFIRMED",
+    "config_screen_obfuscated_class": "CONFIRMED",
+    "chinese_community_recon": "EVIDENCE_BACKED_PUBLIC_SOURCES"
   },
   "safety_and_provenance_boundaries": [
     "No VMProtect/native protection bypass.",
     "No encrypted-model circumvention or decryption recipe.",
     "No private YSM JAR, mapping output, or decrypted artifact is committed.",
-    "Community and Reddit material seeds hypotheses only; it never promotes a claim without source/history/runtime evidence."
+    "Community and Reddit material seeds hypotheses only; it never promotes a claim without source/history/runtime evidence.",
+    "Chinese-language reverse-engineering reports are used only for ecosystem existence and safe architectural reconnaissance; no anti-debug/protection-bypass/decryption procedure, key, modified constant, or DRM-removal recipe is retained."
   ]
 }
