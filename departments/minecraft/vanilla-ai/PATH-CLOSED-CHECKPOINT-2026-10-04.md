@@ -38,4 +38,30 @@ Consumer RED3 rejected the unsupported kind/semantics/query; genuine mapped comp
 
 Focused Motion/Decision suite passes124 tests /0 skipped. Every bridge/Mixin source compiles against149 hash-verified genuine compile artifacts plus the pinned TF development artifact/output roots. Two actual Java/Gson checkpoint payloads (known reference and identity limit) validate in Node. Existing combined genuine API regression also passes, including original heap returns and the new checkpoint test. Static source checks verify the exact five-instruction boundary and injection signature; these remain development-source proof.
 
-R42 proves earlier pop-before-close returns only. Native dispatch for this additional field checkpoint, arbitrary Mixin coexistence, complete frontier/candidate/rejection/final-cost coverage and paired observer/GPU acceptance remain unverified until separately recorded. Existing Windows whole-suite failures remain disclosed in the earlier record; they have not been relabeled as a passing gate.
+R42 proves earlier pop-before-close returns only. Frozen producer `5c9275d489556a2b31f26b7527913c9bb043dd84` subsequently establishes the additional bounded native acceptance below. Arbitrary Mixin coexistence, complete frontier/candidate/rejection/final-cost coverage and paired observer/GPU acceptance remain unverified. Existing Windows whole-suite failures remain disclosed in the earlier record; they have not been relabeled as a passing gate.
+
+## Native-r43 bounded acceptance
+
+Normal private Java Forge1.20.1 R43 uses the same labeled prelaunch one-Zombie/Survival-player/52-fence scenario, with no seeded AI target/search/closed flags. Original/control85 files, predecessor R42 world85 files and post-setup baseline85 files remain hash-matched. The actual selected Zombie UUID is `55555555-6666-7777-8888-000000000001`; run `run-20261004040513-47a529901c59`, session `sess-20261004040513-6d4b8661759c`, snapshot `snapshot-20261004040513-6a0c09017a03`, process1/Arena0. Source stays clean and frozen throughout launch/capture/stop.
+
+| Explicit channels / selection revision | Actual heap returns: start / accepted insert / pop / cost | Closed checkpoints | Other retained facts | Stop |
+| --- | --- | --- | --- | --- |
+|`path,frontier` /1|176:1 /83 /81 /11|80|No retained cache/result before cap|256 events /280,775 bytes; EVENT_BUDGET|
+|`path,neighbors,frontier` /2|85:8 /54 /23 /0|23|15 neighbors;8 cache/result pairs, all returned canReach=true|139 events /171,043 bytes; WINDOW_ENDED|
+|`frontier` /3|22:11 /0 /11 /0|11|No neighbor/cache/result records|33 events /35,280 bytes; WINDOW_ENDED|
+
+All283 heap returns and114 checkpoints validate in the real retained consumer/drilldown. Each checkpoint refers to exactly one actual prior pop event index under the same burst/search/run/snapshot/process/Arena/revision/selected UUID. Known Node IDs match; capped identities stay unavailable. All115 pops retain open=false/closed=false before the original write; all114 checkpoints retain open=false/closed=true after it. Each actual pop is referenced at most once.
+
+The first pair is `obs:forge-runtime:61336:65` → `obs:forge-runtime:61336:66`, search:1:1, tick40497, producer event2→3, known node1. The last retained pair of this capped search is315→316, event252→253, with NODE_IDENTITY_LIMIT. Pop `obs:forge-runtime:61336:319` is the final captured event256 and has no retained checkpoint. This absent callback does not establish that the original field write was skipped. Revision1's32-reference table yields112 heap and48 checkpoint identity-limit **records**, not160 known distinct objects. For example cost return `obs:forge-runtime:61336:165` retains passed22.093388 and actual g10/h12.093387/f22.093388/costMalus0/walkedDistance15.656854, with unknown Node identity; no final effective path cost is invented.
+
+Revision2 retains eight separate search IDs and eight Path results of2–3 nodes. Their returned canReach flags do not prove actual arrival. Revision3 retains11 independent start/pop/checkpoint sequences, one known Node reference per search. All three packet windows leave CANDIDATE/SELECTION NOT_CAPTURED. Real retained Motion samples are80/60/59 with0/8/10 SOURCE_GAP records. Gaps do not prove teleport, and zero retained gaps do not prove continuous acquisition.
+
+Canonical1,479 unique observations finalize EVIDENCE_COMPLETE, SHA256 `3b63a196c34c85f4a43892a45878e8e14b8f336b032caa7125b389206b05292d`; finalization SHA256 `572f0df8512c99fc441c17dc5237fa9ea9ea5cd00ed215beef6eccf6785ee3d0`. Clean ACK reports drop0/remainingQueue0. OS inspection separately confirms owned runtime61336 and launcher1872 absent. Actual JFR start/stop receipts and4,386,151 bytes remain retained, SHA256 `f118f96d33c959d72f34b87d104c8d689144164947bc980b19bb237d4f8a9dcf`.
+
+Closed-checkpoint build/first-byte-check medians are16,400ns /8,700ns /11,200ns by revision, maxima82,700ns /33,200ns /48,400ns. The first heap search's maximum is26,787,600ns. These exclude original heap work and final encoding/writer; concurrent activity, initial/JIT work and unmatched OFF conditions prevent a paired or negligible-overhead claim.
+
+The R43 driver records each actual requested channel set, fixing R42's case-metadata reporting error. The first private finalizer compared channel array order against producer Set order and failed although contents matched. Its original helper/log are preserved; a separate r2 helper compares sets and validates all facts without rewriting the native report or canonical bytes. This is a post-stop verifier diagnostic, not a failed native field callback.
+
+## Hosted source generation
+
+All three runs associated with `5c9275d489556a2b31f26b7527913c9bb043dd84` are SUCCESS: source push37175864160, source PR37175868106 and repository pytest37175868141. Complete LAB source suite, portable contracts, genuine pinned MOD/bridge compilation, dependency contracts and pinned resource/unit checks succeed. Hosted pytest reports3,149 passed /332 skipped /8 warnings. The source push checks this producer directly; PR jobs use generated merge checkout `c2a74dd489b729461f0fd898ced0a34608765bd7`. Pinned MOD checkout remains `53a84d06578632b5d123e3c2bb631b611bf830d7`. Later research/publication commits require their own exact-head checks.
