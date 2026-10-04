@@ -4517,6 +4517,441 @@
           "fact": "Exact controller method shape matches isDeprecatedMode."
         }
       ]
+    },
+    {
+      "id": "ysm265.class.player-animatable-capability",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.o0OOO0o0o0OOo000oO00o00O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.capability.PlayerAnimatableCapability",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "foundation_domain": "CAPABILITY",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_JAVAP",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37228526616,
+          "fact": "Exact class is final, extends the already-confirmed CustomPlayerEntity owner, takes Player in its constructor, owns roaming-variable maps/state-tracker/model lifecycle methods, and matches the release-line PlayerAnimatableCapability role."
+        },
+        {
+          "type": "OFFICIAL_RELEASE_LINE_SOURCE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/capability/PlayerAnimatableCapability.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.ctrl-binding",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OoOOOOOo0oo0000oooOOOoOO",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.animation.molang.CtrlBinding",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "foundation_domain": "MOLANG",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_JAVAP",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37228526616,
+          "fact": "Exact class extends ContextBinding and uniquely contains death/riptide/sleep/.../idle plus state_continue/state_stop/state_pause/state_bypass, loop/play_once/hold_on_last_frame and set_animation/reset/indicate_reload literals."
+        },
+        {
+          "type": "OFFICIAL_RELEASE_LINE_SOURCE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/CtrlBinding.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.query-binding",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.o0000OOo0000oo000OOOo0o0",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.molang.builtin.QueryBinding",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "foundation_domain": "MOLANG",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_JAVAP",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37228526616,
+          "fact": "Exact class extends ContextBinding and uniquely contains the complete query literal surface including actor_count, anim_time, ground_speed, health/max_health, equipment_count and cape_flap_amount."
+        },
+        {
+          "type": "OFFICIAL_RELEASE_LINE_SOURCE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/molang/builtin/QueryBinding.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.custom-entity",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oOo00OoOO00O000ooO0Oo00o",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.entity.CustomEntity",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "foundation_domain": "ENTITY_PRESENTATION",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_JAVAP",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37228526616,
+          "fact": "Exact class is abstract, extends confirmed AnimatableEntity, owns model-id/current-model/defer/async Future state and model lifecycle/audio methods, matching CustomEntity."
+        },
+        {
+          "type": "OFFICIAL_RELEASE_LINE_SOURCE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/entity/CustomEntity.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.composite-animation-controller",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oO00oooOoOo0O0oOo000o0Oo",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.CompositeAnimationController",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "foundation_domain": "ANIMATION",
+      "source_artifact_divergence": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_JAVAP",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37228526616,
+          "fact": "Exact class implements confirmed IAnimationController and has the six-field artifact-era layout: name, animatable, PredicateBasedController, AnimationControllerRuntime, initialized flag and active controller, with the same 7 public controller methods plus two constructors."
+        },
+        {
+          "type": "COMPARATIVE_READABLE_LAYOUT",
+          "repository": "OpenYSM/OpenYSM",
+          "revision": "a515d44686af77155a311b2a592327ca5d45a658",
+          "path": "common/src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/controller/CompositeAnimationController.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.bone-animation-queue",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooO000oOoOooooOooo00oOO",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.keyframe.BoneAnimationQueue",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "foundation_domain": "ANIMATION",
+      "source_artifact_divergence": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_JAVAP",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37228526616,
+          "fact": "Exact class has the artifact-era BoneAnimationQueue shape: top-level/controller snapshots, three interpolation timelines, active/blend state, three Vector3f outputs, override flag and three animation queues; its public method surface matches apply/snapshot/queue/active/clear/blend/reset behavior."
+        },
+        {
+          "type": "COMPARATIVE_READABLE_LAYOUT",
+          "repository": "OpenYSM/OpenYSM",
+          "revision": "a515d44686af77155a311b2a592327ca5d45a658",
+          "path": "common/src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/keyframe/BoneAnimationQueue.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.register-entity-renderers-event",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OOoO00ooO00OOO00O0o0000O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.event.RegisterEntityRenderersEvent",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "foundation_domain": "RENDERER",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_JAVAP",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37228526616,
+          "fact": "Exact class has four static renderer fields, AddReloadListenerEvent callback, EntityRenderDispatcher/EntityRendererProvider refs and four renderer getters, exactly matching RegisterEntityRenderersEvent."
+        },
+        {
+          "type": "OFFICIAL_RELEASE_LINE_SOURCE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/event/RegisterEntityRenderersEvent.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.custom-ysm-maid-entity",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Ooo0OOOOOoooo0oo00OoO0oO",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.compat.touhoulittlemaid.client.CustomYsmMaidEntity",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "foundation_domain": "INTEGRATION",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_JAVAP",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37228526616,
+          "fact": "Exact class extends the mapped LivingAnimatable/CustomHumanoid presentation lineage with EntityMaid generic type and directly implements TLM IGeoEntity; MaidModelInfo and maid roaming/model methods match CustomYsmMaidEntity."
+        },
+        {
+          "type": "OFFICIAL_RELEASE_LINE_SOURCE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/compat/touhoulittlemaid/client/CustomYsmMaidEntity.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.server-model-manager",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OoOoOoooO0O00oOoO00OOo00",
+      "semantic_owner": "com.elfmcys.yesstevemodel.model.ServerModelManager",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "foundation_domain": "NETWORK",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_JAVAP",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37228526616,
+          "fact": "Exact class contains native reload/sync task methods, UUID+ByteBuffer receive path, Netty connection/outbound-buffer send helpers, ServerPlayer/MinecraftServer refs and default model+texture access, matching ServerModelManager."
+        },
+        {
+          "type": "OFFICIAL_RELEASE_LINE_SOURCE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/model/ServerModelManager.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.client-model-manager",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.o0OooO00ooo0OO000O0OoOoO",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.ClientModelManager",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "foundation_domain": "NETWORK",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_JAVAP",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37228526616,
+          "fact": "Exact class owns volatile model/pack/default-model state, NEW_MODEL_QUEUE, sync listeners/state, LAST_CONNECTION, direct ByteBuffer native sync bridge and the unique 'Failed to process {}' literal, matching ClientModelManager."
+        },
+        {
+          "type": "OFFICIAL_RELEASE_LINE_SOURCE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/ClientModelManager.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.model-info-capability",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooooooOOoOOoO00OooOo00O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.capability.ModelInfoCapability",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "foundation_domain": "CAPABILITY",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_JAVAP",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37228526616,
+          "fact": "Exact class uniquely contains model_id/select_texture/mandatory/disabled/molang_storage NBT keys and ServerPlayer/roaming-variable dispatch methods, matching ModelInfoCapability."
+        },
+        {
+          "type": "OFFICIAL_RELEASE_LINE_SOURCE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/capability/ModelInfoCapability.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.register-renderers-player",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OOoO00ooO00OOO00O0o0000O",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/o0ooO0o0ooo000OOO0o0oo0o;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.event.RegisterEntityRenderersEvent",
+      "semantic_member": "getPlayerRenderer",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_JAVAP",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37228526616,
+          "fact": "Exact descriptor and recovered class role identify getPlayerRenderer."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.register-renderers-projectile",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OOoO00ooO00OOO00O0o0000O",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/O0Oo000OO0O00oooO00Oo0OO;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.event.RegisterEntityRenderersEvent",
+      "semantic_member": "getProjectRenderer",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_JAVAP",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37228526616,
+          "fact": "Exact descriptor and recovered class role identify getProjectRenderer."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.register-renderers-first-person",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OOoO00ooO00OOO00O0o0000O",
+      "obfuscated_member": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/o0oo00OoO00OO0Oo0oo00ooo;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.event.RegisterEntityRenderersEvent",
+      "semantic_member": "getFirstPersonArmRenderer",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_JAVAP",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37228526616,
+          "fact": "Exact descriptor and recovered class role identify getFirstPersonArmRenderer."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.register-renderers-vehicle",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OOoO00ooO00OOO00O0o0000O",
+      "obfuscated_member": "oOOOo0OOO0ooooo0O00OO0o0",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/oo00OO0OO0o000oo0oOOoo0O;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.event.RegisterEntityRenderersEvent",
+      "semantic_member": "getVehicleRenderer",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_JAVAP",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37228526616,
+          "fact": "Exact descriptor and recovered class role identify getVehicleRenderer."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.model-info-get-model-id",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooooooOOoOOoO00OooOo00O",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "()Ljava/lang/String;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.capability.ModelInfoCapability",
+      "semantic_member": "getModelId",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_JAVAP",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37228526616,
+          "fact": "Exact descriptor and recovered class role identify getModelId."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.model-info-get-select-texture",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooooooOOoOOoO00OooOo00O",
+      "obfuscated_member": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "()Ljava/lang/String;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.capability.ModelInfoCapability",
+      "semantic_member": "getSelectTexture",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_JAVAP",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37228526616,
+          "fact": "Exact descriptor and recovered class role identify getSelectTexture."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.model-info-serialize-nbt",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooooooOOoOOoO00OooOo00O",
+      "obfuscated_member": "O0OooOo0oOOoOoOoOooO000o",
+      "descriptor": "()Lnet/minecraft/nbt/CompoundTag;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.capability.ModelInfoCapability",
+      "semantic_member": "serializeNBT",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_JAVAP",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37228526616,
+          "fact": "Exact descriptor and recovered class role identify serializeNBT."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.model-info-deserialize-nbt",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooooooOOoOOoO00OooOo00O",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/nbt/CompoundTag;)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.capability.ModelInfoCapability",
+      "semantic_member": "deserializeNBT",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_JAVAP",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37228526616,
+          "fact": "Exact descriptor and recovered class role identify deserializeNBT."
+        }
+      ]
     }
   ],
   "unresolved_hints": [
@@ -4832,6 +5267,98 @@
       "context_implementor_count": 1,
       "predicate_controller": "oo000oooo0OOoo00O0o0OOOO",
       "controller_interface": "OoOoOO0O00oOoO0o0ooOO0oO"
+    }
+  },
+  "foundation_map_recovery": {
+    "high_value_pass": {
+      "run_id": 37228526616,
+      "recovered_classes": [
+        {
+          "id": "ysm265.class.player-animatable-capability",
+          "obfuscated_owner": "com.elfmcys.yesstevemodel.o0OOO0o0o0OOo000oO00o00O",
+          "semantic_owner": "com.elfmcys.yesstevemodel.capability.PlayerAnimatableCapability",
+          "domain": "CAPABILITY"
+        },
+        {
+          "id": "ysm265.class.ctrl-binding",
+          "obfuscated_owner": "com.elfmcys.yesstevemodel.OoOOOOOo0oo0000oooOOOoOO",
+          "semantic_owner": "com.elfmcys.yesstevemodel.client.animation.molang.CtrlBinding",
+          "domain": "MOLANG"
+        },
+        {
+          "id": "ysm265.class.query-binding",
+          "obfuscated_owner": "com.elfmcys.yesstevemodel.o0000OOo0000oo000OOOo0o0",
+          "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.molang.builtin.QueryBinding",
+          "domain": "MOLANG"
+        },
+        {
+          "id": "ysm265.class.custom-entity",
+          "obfuscated_owner": "com.elfmcys.yesstevemodel.oOo00OoOO00O000ooO0Oo00o",
+          "semantic_owner": "com.elfmcys.yesstevemodel.client.entity.CustomEntity",
+          "domain": "ENTITY_PRESENTATION"
+        },
+        {
+          "id": "ysm265.class.composite-animation-controller",
+          "obfuscated_owner": "com.elfmcys.yesstevemodel.oO00oooOoOo0O0oOo000o0Oo",
+          "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.CompositeAnimationController",
+          "domain": "ANIMATION"
+        },
+        {
+          "id": "ysm265.class.bone-animation-queue",
+          "obfuscated_owner": "com.elfmcys.yesstevemodel.oooO000oOoOooooOooo00oOO",
+          "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.keyframe.BoneAnimationQueue",
+          "domain": "ANIMATION"
+        },
+        {
+          "id": "ysm265.class.register-entity-renderers-event",
+          "obfuscated_owner": "com.elfmcys.yesstevemodel.OOoO00ooO00OOO00O0o0000O",
+          "semantic_owner": "com.elfmcys.yesstevemodel.client.event.RegisterEntityRenderersEvent",
+          "domain": "RENDERER"
+        },
+        {
+          "id": "ysm265.class.custom-ysm-maid-entity",
+          "obfuscated_owner": "com.elfmcys.yesstevemodel.Ooo0OOOOOoooo0oo00OoO0oO",
+          "semantic_owner": "com.elfmcys.yesstevemodel.client.compat.touhoulittlemaid.client.CustomYsmMaidEntity",
+          "domain": "INTEGRATION"
+        },
+        {
+          "id": "ysm265.class.server-model-manager",
+          "obfuscated_owner": "com.elfmcys.yesstevemodel.OoOoOoooO0O00oOoO00OOo00",
+          "semantic_owner": "com.elfmcys.yesstevemodel.model.ServerModelManager",
+          "domain": "NETWORK"
+        },
+        {
+          "id": "ysm265.class.client-model-manager",
+          "obfuscated_owner": "com.elfmcys.yesstevemodel.o0OooO00ooo0OO000O0OoOoO",
+          "semantic_owner": "com.elfmcys.yesstevemodel.client.ClientModelManager",
+          "domain": "NETWORK"
+        },
+        {
+          "id": "ysm265.class.model-info-capability",
+          "obfuscated_owner": "com.elfmcys.yesstevemodel.oooooooOOoOOoO00OooOo00O",
+          "semantic_owner": "com.elfmcys.yesstevemodel.capability.ModelInfoCapability",
+          "domain": "CAPABILITY"
+        }
+      ],
+      "recovered_methods": 8,
+      "bundled_components": {
+        "concentus": {
+          "status": "COMPONENT_IDENTIFIED",
+          "exact_component_size": 131,
+          "hub_class": "com/elfmcys/yesstevemodel/o0o0o0oOooOO0OOOOO00O0O0",
+          "semantic_hub": "org.concentus.Inlines",
+          "evidence": "Exact hub has 247 methods/2 fields; upstream Concentus Inlines has constructor + ~246 arithmetic helper methods and 2 fields. Current official YSM NOTICE explicitly lists bundled Concentus."
+        },
+        "vorbisjava": {
+          "status": "COMPONENT_IDENTIFIED",
+          "exact_component_size": 86,
+          "theora_class": "com/elfmcys/yesstevemodel/oOoO00O0O0ooOoOoOOo0oO0O",
+          "semantic_theora": "org.gagravarr.theora.TheoraFile",
+          "base_class": "com/elfmcys/yesstevemodel/oO00O00OooO00OoOOoo0oooO",
+          "semantic_base": "org.gagravarr.ogg.HighLevelOggStreamPacket",
+          "evidence": "Exact Theora class retains 'Supplied File is not Theora' and matches TheoraFile I/O/Closeable shape; exact base has 2 fields, 2 constructors and 5 methods matching HighLevelOggStreamPacket. Current official YSM NOTICE explicitly lists bundled VorbisJava/Gagravarr."
+        }
+      }
     }
   }
 }
