@@ -6,7 +6,9 @@ Status: **LOCAL ANCHOR CORE BYTECODE LEDGER AVAILABLE — complete study/runtime
 
 Use [ANCHOR-BYTECODE-LEDGER-2026-10-03.json](ANCHOR-BYTECODE-LEDGER-2026-10-03.json) and [the actual local Foundation Map generation](../vanilla-foundation/LOCAL-GENERATION-2026-10-03.md) first. The scoped map contains 7,108 exact Minecraft owners, 61,051 structural edges and all 13 readiness anchors. Sixty selected core/representative classes have exact private method-body disassemblies with content hashes and member locators.
 
-New exact research is organized in AI-ARCHITECTURE, GOAL-SYSTEM, BRAIN-SYSTEM, PATHFINDING, MOVEMENT-CONTROLS, DEBUG-INFRASTRUCTURE, MOB-AI-CATALOG, VERSION-PORTABILITY and DECISION-VIEW-REQUIREMENTS. Static research is not loaded-hook/native acceptance. Full all-Mob inventory, deeper candidate semantics, community reproduction and a pinned modern Vanilla FRONTIER remain unfinished.
+New exact research is organized in AI-ARCHITECTURE, GOAL-SYSTEM, BRAIN-SYSTEM, PATHFINDING, MOVEMENT-CONTROLS, DEBUG-INFRASTRUCTURE, MOB-AI-CATALOG, VERSION-PORTABILITY and DECISION-VIEW-REQUIREMENTS. Static research is not loaded-hook/native acceptance. Full all-Mob inventory, community evidence/reproduction and remaining comparisons against the now-pinned modern Vanilla FRONTIER remain unfinished.
+
+The later [R64 Path/terrain study](PATH-TERRAIN-RESEARCH-2026-10-05.md) and [R65 debug-infrastructure study](DEBUG-INFRASTRUCTURE-RESEARCH-2026-10-05.md) expand original B4/B5/B8 explanations with exact method/field/inheritance/callsite provenance. They do not add runtime acceptance. The latest [original reconciliation](ORIGINAL-REQUIREMENT-RECONCILIATION-2026-10-05.md) distinguishes required outstanding research/scenarios/measurements from optional unknown/capped fields.
 
 The exact 1.20.1 class inventory corrects earlier cross-version typed-payload vocabulary: `PathfindingDebugPayload`, `GoalDebugPayload` and `BrainDebugPayload` are absent from this ANCHOR. Use the actual debug renderer inner data classes and older custom channel/buffer packet instead; see DEBUG-INFRASTRUCTURE.
 
@@ -53,7 +55,10 @@ Initial precedent:
   - `DebugPacketsMixin`
   - `DebugRenderersCommand`
   - `DebugRendererMixin`
-  - current inspected source injects pathfinding and Goal debug payload production and renders vanilla debug renderers behind explicit toggles.
+  - actual inspected feature source is commit `72afa38c8b7f5c05639644fdabc92d5254924732`, declaring Minecraft1.21.1, modern typed payloads and NeoForge/Fabric dependencies.
+  - it injects Path/Goal debug payload production and client render dispatch behind separate toggles; its fallback Path debug arrays are reconstructed from returned nodes, not captured original frontier.
+  - the inspected1.20.1 snapshot `a08339340ef4e39ce4d204728737c872c0329e4e` does not contain these named feature files in its complete tree.
+  - [exact source snapshots and implications](DEBUG-INFRASTRUCTURE.md) retain commit/tree/blob/hash facts; no upstream code/dependency or ANCHOR compatibility assertion is added.
 
 Treat the exact upstream commit/version as a separate SourceSnapshot. Do not assume its current implementation is identical to Forge 1.20.1.
 
