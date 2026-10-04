@@ -491,19 +491,21 @@ No claim about how the native protection itself works is inferred from this.
 
 ## 15. What remains unknown
 
+The exact distributed artifact is now SHA-256 anchored and has been structurally scanned.
+
 Still unresolved:
 
-1. exact SHA-256 of the distributed 2.6.5 JAR in TECH HUB evidence;
-2. a complete class/member map for all ~root-package obfuscated classes;
-3. exact obfuscated owners for the selected-model and model-switching getters;
-4. the native model-sync protocol body;
-5. the protected renderer/native library implementation;
-6. encrypted model/container internals;
-7. exact source-to-distributed build transformation chain.
+1. exact readable semantic names for every one of the 955 Java classes;
+2. exact obfuscated owners for the selected-model and model-switching getters;
+3. the native model-sync protocol body;
+4. the protected renderer/native library implementation;
+5. encrypted model/container internals;
+6. exact source-to-distributed build transformation chain;
+7. 15 isolated degree-0 Java singleton classes whose semantic role is not worth forcing without new evidence.
 
-The next safe route for deeper coverage is an **authorized local structural scan of the user's own
-installed 2.6.5 JAR**, recording only hashes, normalized fingerprints and minimized mappings. The JAR
-itself and raw private analysis output should stay outside Git.
+The whole-JAR Foundation Map now separates YSM's main 722-class component from bundled Concentus
+(131 classes) and Gagravarr/VorbisJava (86 classes), so embedded media libraries no longer inflate
+the apparent amount of unknown YSM business logic.
 
 ## 16. Engineering takeaway
 
@@ -614,3 +616,33 @@ Major new exact-artifact closures:
 See [EXACT-JAR-STRUCTURAL-SCAN-2026-10-05.md](EXACT-JAR-STRUCTURAL-SCAN-2026-10-05.md).
 
 Protected native implementation and model/container decryption remain outside scope.
+
+
+## 19. Whole-JAR Foundation Map
+
+The exact-artifact semantic map has expanded to **232** entries:
+
+- **205 CONFIRMED**
+- **27 HIGH**
+- exact-JAR contract: **97 classes + 130 methods + 5 fields**
+- failures: **0**
+
+A separate structural Foundation Map covers **955 / 955 Java classes**.
+
+Major components:
+
+- 722-class YSM/main modified-runtime component;
+- 131-class bundled Concentus component;
+- 86-class bundled Gagravarr/VorbisJava component;
+- 15 degree-0 singleton UNKNOWN classes.
+
+The machine-readable compact index stores every class with domain, score, margin, mapped status,
+graph degree, mapped-neighbor count and connected-component ID.
+
+See:
+
+- [FOUNDATION-MAP-2026-10-05.md](FOUNDATION-MAP-2026-10-05.md)
+- [FOUNDATION-MAP-INDEX-2026-10-05.json](FOUNDATION-MAP-INDEX-2026-10-05.json)
+
+The structural domain map is a search-priority tool. An unmapped class is not promoted to an exact
+semantic owner solely because label propagation assigns a domain.
