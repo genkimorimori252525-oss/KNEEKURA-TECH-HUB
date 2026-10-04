@@ -63,8 +63,14 @@ The 1.20.1 port preserves this invariant but does **not** port the legacy global
 7. **Spawn fallback without silently changing the wave plan** — sector relaxation, retry and modern failure accounting prevent impossible terrain from hanging progression.
 8. **Structural resistance separate from vanilla hardness** — path preference and destruction time are independently tunable, with adjacency bonuses for constructed defenses.
 9. **Persistence by system state, not only entity presence** — Nexus, wave time and scaffold plans are persisted; the legacy scheduler replays elapsed time, while modern code adds explicit recovery/phase accounting.
+10. **3D breadcrumb locomotion** — modern Burrower converts actual traveled head motion into a distance-sampled centerline for its segmented body.
+11. **Movement-phase ownership** — explicit maneuver phases keep special climbs/crossings/attack runs from being stolen by generic recovery.
+12. **Native movement-controller adapters** — modern flying/jumping roles retain native locomotion while Nexus logic supplies objective/obstacle waypoints.
+13. **Persistent budgeted themes** — modern waves persist exact purchases and softly bias future themes from observed player defense.
 
 See [TECHNICAL-KNOWLEDGE.md](TECHNICAL-KNOWLEDGE.md), [CODE-MAP.md](CODE-MAP.md) and [VERSION-PORTABILITY.md](VERSION-PORTABILITY.md).
+
+Deep dives: [Burrower 3D movement](BURROWER-3D-MOVEMENT.md), [flying AI](FLYING-AI.md), [legacy mob roles](MOB-AI-CATALOG.md), and [wave-system evolution](WAVE-DEEP-DIVE.md).
 
 ## Important legacy limits / defects
 
@@ -74,6 +80,8 @@ See [TECHNICAL-KNOWLEDGE.md](TECHNICAL-KNOWLEDGE.md), [CODE-MAP.md](CODE-MAP.md)
 - The generic Netty \`PacketPipeline\` files are entirely commented out; actual old-version synchronization mainly uses DataWatcher plus Nexus \`S35PacketUpdateTileEntity\`.
 - The distributed 1.1.2 binary contains a confirmed wave-pattern bug: the T2/T3 Zombie Pigman pattern objects are created, but tiers 2 and 3 are accidentally added to the T1 object. The T2/T3 mapped patterns therefore fall back to default tier 1.
 - The source contains incomplete/WIP surfaces such as the flying navigator's commented ray-trace retina update; do not treat every class in the JAR as production-proven.
+- Legacy Burrower is implemented but absent from normal Wave 1–11, extended/continuous pools and the normal entity/spawn-egg registration path; it is treated as latent technology.
+- The distributed Wave 5 defines a seven-mob finale beginning at 135 s while the enclosing Wave completes at 130 s, making that finale unreachable through the normal scheduler.
 
 ## Reconnaissance sources
 
@@ -97,6 +105,9 @@ These are discovery evidence, not source authority. A concrete disagreement is r
 | pathfinding/navigation | EVIDENCE_BACKED | legacy and ANCHOR mechanisms mapped |
 | terrain destruction/building | EVIDENCE_BACKED | legacy and ANCHOR mechanisms mapped |
 | attacker coordination | EVIDENCE_BACKED | density/scaffold/support mechanisms mapped |
+| mob role architecture | EVIDENCE_BACKED | breacher/engineer/demolition/artillery/ranged/spawn-pressure roles catalogued |
+| Burrower 3D locomotion | EVIDENCE_BACKED | legacy mechanism + modern repair/evolution mapped |
+| flying AI | MAPPED_WITH_WIP_BOUNDARY | legacy prototype separated from modern native-controller adapters |
 | spawning | EVIDENCE_BACKED | legacy spawn geometry + ANCHOR recovery mapped |
 | persistence | MAPPED | NBT/resume and modern persistence surfaces identified |
 | networking | MAPPED | active legacy sync boundary identified |
