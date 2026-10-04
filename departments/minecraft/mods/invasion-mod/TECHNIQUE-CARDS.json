@@ -135,6 +135,81 @@
       ],
       "reuse": "HIGH",
       "limits": "Player-facing progress must explain skipped obligations."
+    },
+    {
+      "id": "INV-T10",
+      "title": "Reconstruct segmented bodies from realized movement history",
+      "invariant": "A long body follows the head's actual traveled centerline at fixed spatial offsets rather than independently predicting path nodes.",
+      "legacy_paths": [
+        "invmod/common/entity/NavigatorBurrower.java",
+        "invmod/common/entity/EntityIMBurrower.java"
+      ],
+      "anchor_paths": [
+        "com/invasion/entity/pathfinding/BurrowerNavigation.java",
+        "com/invasion/entity/BurrowerEntity.java"
+      ],
+      "reuse": "HIGH",
+      "limits": "Prefer the modern breadcrumb/ring-buffer form over literal legacy segment interpolation."
+    },
+    {
+      "id": "INV-T11",
+      "title": "Own special movement with explicit maneuver phases",
+      "invariant": "A climb/cross/attack-run state owns movement until completion or explicit abort, preventing generic recovery from stealing control.",
+      "legacy_paths": [
+        "invmod/common/entity/ai/EntityAISwoop.java",
+        "invmod/common/entity/ai/EntityAIFlyingStrike.java"
+      ],
+      "anchor_paths": [
+        "com/invasion/entity/pathfinding/BurrowerNavigation.java",
+        "com/invasion/entity/pathfinding/IMMobNavigation.java"
+      ],
+      "reuse": "HIGH",
+      "limits": "Every phase needs bounded abort/recovery rules."
+    },
+    {
+      "id": "INV-T12",
+      "title": "Steer heterogeneous mobs through native movement controls",
+      "invariant": "Strategic Nexus intent is adapted to each mob's existing movement controller instead of replacing all locomotion with one navigator.",
+      "legacy_paths": [
+        "invmod/common/entity/EntityIMFlying.java",
+        "invmod/common/entity/NavigatorFlying.java"
+      ],
+      "anchor_paths": [
+        "com/invasion/entity/FlyingWallPath.java",
+        "com/invasion/entity/IMPhantomEntity.java",
+        "com/invasion/compat/ConfiguredModMobs.java"
+      ],
+      "reuse": "HIGH",
+      "limits": "Legacy retina obstacle avoidance is inert/WIP and is not a proven implementation."
+    },
+    {
+      "id": "INV-T13",
+      "title": "Persist exact tactical purchases for procedural waves",
+      "invariant": "Generate a themed cost-budget plan once and persist exact purchases/current phase so reload does not reroll composition.",
+      "legacy_paths": [
+        "invmod/common/nexus/IMWaveBuilder.java",
+        "invmod/common/nexus/Wave.java"
+      ],
+      "anchor_paths": [
+        "com/invasion/nexus/wave/BudgetWavePlan.java",
+        "com/invasion/nexus/Nexus.java"
+      ],
+      "reuse": "HIGH",
+      "limits": "Soft adaptation should bias probabilities rather than deterministically punish player success."
+    },
+    {
+      "id": "INV-T14",
+      "title": "Separate strategic, hostile and cooperation targets",
+      "invariant": "The Nexus objective, enemy combat target and ally/support target are distinct AI state even if legacy code stores them in one field.",
+      "legacy_paths": [
+        "invmod/common/entity/ai/EntityAITargetOnNoNexusPath.java",
+        "invmod/common/entity/ai/EntityAIWaitForEngy.java"
+      ],
+      "anchor_paths": [
+        "com/invasion/entity/PigmanEngineerEntity.java"
+      ],
+      "reuse": "MEDIUM_HIGH",
+      "limits": "Preserve the intent, not legacy attackTarget overloading."
     }
   ]
 }
