@@ -1,0 +1,64 @@
+name: YSM high-value unresolved inspect
+
+on:
+  push:
+    branches: ["jolly/research-ysm-2026-10-05"]
+    paths:
+      - '.github/workflows/ysm-265-highvalue-inspect.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Fetch exact official artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p highvalue-evidence
+          URL='https://cdn.modrinth.com/data/86xjpqqS/versions/Zqooxsd2/ysm-2.6.5-forge%2Bmc1.20.1-release.jar'
+          curl --fail --location --retry 3 --max-time 180 "$URL" -o "$RUNNER_TEMP/ysm-2.6.5.jar"
+          echo '25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f  '"$RUNNER_TEMP/ysm-2.6.5.jar" | sha256sum --check
+      - name: Inspect selected unresolved hubs
+        shell: bash
+        run: |
+          set -euo pipefail
+          classes=(
+            com.elfmcys.yesstevemodel.o0OOO0o0o0OOo000oO00o00O
+            com.elfmcys.yesstevemodel.OoOOOOOo0oo0000oooOOOoOO
+            com.elfmcys.yesstevemodel.o0000OOo0000oo000OOOo0o0
+            com.elfmcys.yesstevemodel.oOo00OoOO00O000ooO0Oo00o
+            com.elfmcys.yesstevemodel.oO00oooOoOo0O0oOo000o0Oo
+            com.elfmcys.yesstevemodel.oooO000oOoOooooOooo00oOO
+            com.elfmcys.yesstevemodel.OOoO00ooO00OOO00O0o0000O
+            com.elfmcys.yesstevemodel.Ooo0OOOOOoooo0oo00OoO0oO
+            com.elfmcys.yesstevemodel.OoOoOoooO0O00oOoO00OOo00
+            com.elfmcys.yesstevemodel.o0OooO00ooo0OO000O0OoOoO
+            com.elfmcys.yesstevemodel.oooooooOOoOOoO00OooOo00O
+          )
+          for cls in "${classes[@]}"; do
+            safe=$(printf '%s' "$cls" | tr '.' '_')
+            javap -classpath "$RUNNER_TEMP/ysm-2.6.5.jar" -c -p -verbose "$cls" > "highvalue-evidence/$safe.txt"
+          done
+          echo KNEEKURA_HIGHVALUE_BEGIN
+          for f in highvalue-evidence/*.txt; do
+            echo "### $f"
+            grep -E '^(public|protected|private|final|abstract|class|interface)| descriptor:|String (death|state_continue|set_animation|actor_count|ground_speed|Failed to process|sync|model|maid|roulette|renderer|reload|default)|Utf8 +(death|state_continue|set_animation|actor_count|ground_speed|Failed to process|maid|roulette|renderer|reload)' "$f" | head -260 || true
+          done
+          echo KNEEKURA_HIGHVALUE_END
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ysm-highvalue-${{ github.sha }}
+          path: highvalue-evidence/
+          retention-days: 7
