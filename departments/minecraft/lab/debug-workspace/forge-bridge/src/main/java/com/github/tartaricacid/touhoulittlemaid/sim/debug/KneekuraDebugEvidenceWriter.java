@@ -234,6 +234,42 @@ public final class KneekuraDebugEvidenceWriter {
         }
     }
 
+    /** Bounded observation only; does not grant or consume world-action authority. */
+    public static void recordServerSelectedObserved(
+            KneekuraDebugEnv.Config config,long arenaEpoch,long localTick,Long gameTime,
+            String lane,String method,UUID entityUuid,JsonObject payload)throws IOException {
+        if(config==null||!config.enabled()||entityUuid==null||payload==null)return;
+        synchronized(LOCK) {
+            if(broken||sealed||!accepting)return;
+            if(arenaEpoch<0||arenaEpoch>9007199254740991L||localTick<0)throw new IOException("INVALID_SELECTED_OBSERVATION_EPOCH");
+            writeObservationLocked(config,localTick,gameTime,"L1",lane,"ENTITY_UUID",entityUuid,"SERVER",method,payload.deepCopy(),arenaEpoch,null);
+        }
+    }
+
+    /** Derived drawing receipt on the existing writer, without world-action/capture authority. */
+    public static void recordMotionOverlayObserved(
+            KneekuraDebugEnv.Config config,long arenaEpoch,long gameTime,UUID entityUuid,JsonObject payload)throws IOException {
+        if(config==null||!config.enabled()||entityUuid==null||payload==null)return;
+        synchronized(LOCK) {
+            if(broken||sealed||!accepting)return;
+            if(arenaEpoch<0||arenaEpoch>9007199254740991L||gameTime<0)throw new IOException("INVALID_MOTION_VIEW_EPOCH");
+            writeObservationLocked(config,gameTime,gameTime,"L1","MOTION_TRACE_VIEW","ENTITY_UUID",entityUuid,
+                    "CLIENT","RenderLevelStageEvent.AFTER_TRANSLUCENT_BLOCKS",payload.deepCopy(),arenaEpoch,null);
+        }
+    }
+
+    public static void recordDecisionObserved(
+            KneekuraDebugEnv.Config config,long arenaEpoch,long localTick,Long gameTime,
+            String method,UUID entityUuid,JsonObject payload)throws IOException {
+        if(config==null||!config.enabled()||entityUuid==null||payload==null)throw new IOException("DECISION_CONTEXT_UNAVAILABLE");
+        synchronized(LOCK) {
+            if(broken||sealed||!accepting)throw new IOException("DECISION_WRITER_UNAVAILABLE");
+            if(arenaEpoch<0||arenaEpoch>9007199254740991L||localTick<0)throw new IOException("INVALID_DECISION_EPOCH");
+            writeObservationLocked(config,localTick,gameTime,"L2","AI_DECISION","ENTITY_UUID",entityUuid,
+                    "SERVER",method,payload.deepCopy(),arenaEpoch,null);
+        }
+    }
+
     /** Selected owner event, preserving its actual Arena epoch on the existing bounded writer. */
     public static void recordOwnedEntityObserved(
             KneekuraDebugEnv.Config config, long arenaEpoch, long localTick, Long gameTime,
@@ -602,6 +638,7 @@ public final class KneekuraDebugEvidenceWriter {
                 }
                 if (claimed.row().image() != null) claimed.row().image().persist();
                 KneekuraDebugDurability.write(claimed.file(), claimed.writer(), claimed.row().line(), claimed.row().durable());
+                KneekuraDebugMotionOverlayRuntime.onFlushed(claimed.row().line());
             } catch (Throwable e) {
                 if (claimed.row().durable() != null) claimed.row().durable().completeExceptionally(e);
                 synchronized (LOCK) { failWriterLocked("async disk writer failed", e); }

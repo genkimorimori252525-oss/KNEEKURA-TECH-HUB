@@ -1,12 +1,20 @@
 # Vanilla AI Source Map
 
-Status: **initial source ledger — research not complete**
+Status: **LOCAL ANCHOR CORE BYTECODE LEDGER AVAILABLE — complete study/runtime work remains open**
+
+## 2026-10-03 exact local evidence
+
+Use [ANCHOR-BYTECODE-LEDGER-2026-10-03.json](ANCHOR-BYTECODE-LEDGER-2026-10-03.json) and [the actual local Foundation Map generation](../vanilla-foundation/LOCAL-GENERATION-2026-10-03.md) first. The scoped map contains 7,108 exact Minecraft owners, 61,051 structural edges and all 13 readiness anchors. Sixty selected core/representative classes have exact private method-body disassemblies with content hashes and member locators.
+
+New exact research is organized in AI-ARCHITECTURE, GOAL-SYSTEM, BRAIN-SYSTEM, PATHFINDING, MOVEMENT-CONTROLS, DEBUG-INFRASTRUCTURE, MOB-AI-CATALOG, VERSION-PORTABILITY and DECISION-VIEW-REQUIREMENTS. Static research is not loaded-hook/native acceptance. Full all-Mob inventory, deeper candidate semantics, community reproduction and a pinned modern Vanilla FRONTIER remain unfinished.
+
+The exact 1.20.1 class inventory corrects earlier cross-version typed-payload vocabulary: `PathfindingDebugPayload`, `GoalDebugPayload` and `BrainDebugPayload` are absent from this ANCHOR. Use the actual debug renderer inner data classes and older custom channel/buffer packet instead; see DEBUG-INFRASTRUCTURE.
 
 ## Source precedence
 
 ### Tier A — ANCHOR structural evidence
 
-Use exact Minecraft 1.20.1 / Forge 47.2.x mappings and API documentation first.
+Use the exact captured local 1.20.1 / Forge 47.2.0 Foundation Map and bytecode ledger first. Exact-version mappings/API documentation can complement it; signatures alone do not establish a method body.
 
 Current primary families:
 
@@ -14,9 +22,9 @@ Current primary families:
   - `Mob`
   - `Goal`, `WrappedGoal`, `GoalSelector`
   - `DebugPackets`
-  - `PathfindingDebugPayload`
-  - `GoalDebugPayload.DebugGoal`
-  - `BrainDebugPayload.BrainDump`
+  - `Path` optional debug arrays
+  - `GoalSelectorDebugRenderer$DebugGoal`
+  - `BrainDebugRenderer$BrainDump`
   - `PathfindingRenderer`
   - `GoalSelectorDebugRenderer`
   - `BrainDebugRenderer`
@@ -155,13 +163,13 @@ Minecraft 1.20.1 `Mob` owns:
 - Brain;
 - Bee/hive/POI and other world diagnostics.
 
-`GoalDebugPayload.DebugGoal` already models:
+The actual 1.20.1 `GoalSelectorDebugRenderer$DebugGoal` vocabulary models:
 
 - priority;
 - running state;
 - name.
 
-`BrainDebugPayload.BrainDump` already models a useful aggregate including:
+The actual 1.20.1 `BrainDebugRenderer$BrainDump` / `DebugPackets.writeBrain` vocabulary represents a useful aggregate including:
 
 - UUID/entity identity;
 - position/health;
@@ -190,9 +198,9 @@ Minecraft 1.20.1 Ghast has a custom `GhastMoveControl` with its own collision/re
 
 This exception is a primary reason to complete the per-Mob catalog before finalizing the Decision Debug View.
 
-## Research gaps
+## Initial research gaps and current boundary
 
-Still required before calling this study complete:
+The following was the initial gap list. The dated core files now establish selected Goal/Brain/pathfinding/control/debug method-body semantics. Do not interpret this as closing all remaining runtime, full-inventory or FRONTIER work:
 
 - exact GoalSelector tick/replacement flow and cadence in 1.20.1;
 - complete Brain Sensor/Memory/Activity/Behavior map;
