@@ -28,6 +28,8 @@ Source generation `91b0ddc9255945972b2fe7d2acfc7e7f8757a0b0` has all three exact
 
 ## Next required work
 
+[R37 raw/derived separation](vanilla-ai/NATIVE-RAW-OVERLAY-SEPARATION-2026-10-04.md) now verifies normal fixed-owner capture/restoration and live suppression with a synthetic finite Arrow fixture. Four groups/128 retained positions yield432..462 eligible lines but0 under actual capture; all four raw views and a separate post-restoration derived framebuffer were inspected.433 canonical observations finalize clean/drop0/owner cleanup VERIFIED/exit/original-control-predecessor-baseline85 unchanged. This is bounded synthetic QA; natural-AI registration, exact pixels/GPU and broader observer acceptance remain open. R36's missing private JFR settings preparation failure is preserved.
+
 [R34/R35 normal-owner capture rejections](vanilla-ai/NATIVE-CAPTURE-BASELINE-REJECTIONS-2026-10-04.md) preserve `ARENA_BASELINE_MISMATCH` before any raw capture/JFR. Later read-only R35 samples show natural Skeleton pose drift relative to its prelaunch baseline, not the exact rejected fingerprint. Both runs flush/exit cleanly and preserve original/control/baseline/predecessor85 hashes; owner cleanup is installation-unverified. Keep dynamic natural-AI capture unaccepted; use an explicitly synthetic fixed-owner fixture only for bounded overlay/raw separation QA. Published docs source `91e53f8` has exact-HEAD source PR and pytest checks SUCCESS (`37163206633`, `37163206645`).
 
 1. Retain the established typed teleport and Arrow/LargeFireball original-result proofs with their narrow coverage. Native false/cancelled hurt, custom attacks, whole explosions and related-projectile native drawing remain unestablished by these retained layers.
