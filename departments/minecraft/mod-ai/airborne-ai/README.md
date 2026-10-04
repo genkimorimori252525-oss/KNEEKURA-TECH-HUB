@@ -48,7 +48,7 @@ There is no single "best flying AI" to copy. The useful techniques occupy differ
 
 The recommended foundation therefore uses replaceable layers and performance tiers instead of forcing every flying creature through one expensive universal controller.
 
-## Runtime boundary
+## Offline prototype\n\nThe follow-up executable contract prototype is under [prototype/README.md](prototype/README.md). It keeps Tier A/Tier B logic and failure regressions outside the active LAB/native observer paths. Its status is **OFFLINE_CONTRACT_PROTOTYPE / MINECRAFT_RUNTIME_NOT_RUN**.\n\n## Runtime boundary
 
 No Minecraft client/server was launched for this synthesis. No claim here establishes:
 - actual TPS cost;
