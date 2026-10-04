@@ -1,0 +1,95 @@
+{
+  "schema": "kneekura.tank-source-integration-boundary/v1",
+  "scope": "READ_ONLY_LEGACY_REFERENCE_AND_PRECHANGE_CANONICAL_CONSTRAINTS_NOT_NATIVE_ACCEPTANCE",
+  "inputs": [
+    {
+      "role": "READ_ONLY_LEGACY_REFERENCE_NOT_TARGET_REPOSITORY",
+      "file": "debug-workspace/forge-bridge/src/main/java/com/github/tartaricacid/touhoulittlemaid/sim/debug/KneekuraDebugTankCoordinator.java",
+      "gitSha": "8e36ea8b1c8634bb1422c965b0e5f179d54f1cdf",
+      "gitBlob": "5b4c1a9b6a47d8783cbe53115e95415fcb8c8af4",
+      "sha256": "713e6eb15f475584faa83126831d83aff4e358da31bee5075a1b6737c5eb8ebb",
+      "lines": 866,
+      "stage": "GIT_SOURCE_BLOB_NOT_TRANSFORMED_CLASS"
+    },
+    {
+      "role": "READ_ONLY_LEGACY_REFERENCE_NOT_TARGET_REPOSITORY",
+      "file": "debug-workspace/forge-bridge/src/main/java/com/github/tartaricacid/touhoulittlemaid/sim/debug/KneekuraTankGeometry.java",
+      "gitSha": "8e36ea8b1c8634bb1422c965b0e5f179d54f1cdf",
+      "gitBlob": "2d8f3c4d84d28bb9824d47ee1323ed49d726ba8c",
+      "sha256": "43386b03d509a60428333e745d615f2243677d060f87d0c6f96575bbc245e000",
+      "lines": 34,
+      "stage": "GIT_SOURCE_BLOB_NOT_TRANSFORMED_CLASS"
+    },
+    {
+      "role": "PRECHANGE_CANONICAL_GIT_SOURCE",
+      "file": "departments/minecraft/lab/debug-workspace/forge-bridge/src/main/java/com/github/tartaricacid/touhoulittlemaid/sim/debug/KneekuraDebugArenaController.java",
+      "gitSha": "78358e006022ed7571f12575f837cd0b86268a42",
+      "sha256": "bd9b00b10e3c0a641ccb63a5da2b0ab3d8a91b7d7754a0bead34a4e87fe32899",
+      "lines": 157,
+      "stage": "GIT_SOURCE_BLOB_NOT_TRANSFORMED_CLASS",
+      "gitBlob": "9fea43bd762e7e3c8067eb498db25509a8f36fb0"
+    },
+    {
+      "role": "PRECHANGE_CANONICAL_GIT_SOURCE",
+      "file": "departments/minecraft/lab/debug-workspace/forge-bridge/src/main/java/com/github/tartaricacid/touhoulittlemaid/sim/debug/KneekuraDebugEnv.java",
+      "gitSha": "78358e006022ed7571f12575f837cd0b86268a42",
+      "sha256": "a6505ab8cf4ff5d82dabf6e7baa64e93f9cc744f22ee7d40377c37a8ee394e61",
+      "lines": 171,
+      "stage": "GIT_SOURCE_BLOB_NOT_TRANSFORMED_CLASS",
+      "gitBlob": "96a56d202e471caae8a958f9a7745e9570453cb3"
+    },
+    {
+      "role": "PRECHANGE_CANONICAL_GIT_SOURCE",
+      "file": "departments/minecraft/lab/debug-workspace/forge-bridge/src/main/java/com/github/tartaricacid/touhoulittlemaid/sim/debug/KneekuraDebugOwnerConnection.java",
+      "gitSha": "78358e006022ed7571f12575f837cd0b86268a42",
+      "sha256": "7a47084085293d90f05643c5eb1b19bf042d6f0cbf135fee43e5d9ae7dc4d300",
+      "lines": 155,
+      "stage": "GIT_SOURCE_BLOB_NOT_TRANSFORMED_CLASS",
+      "gitBlob": "fb62e3c2d5b36d9750c9f0b33d2f8262328521c3"
+    },
+    {
+      "role": "PRECHANGE_CANONICAL_GIT_SOURCE",
+      "file": "departments/minecraft/lab/debug-workspace/forge-bridge/src/main/java/com/github/tartaricacid/touhoulittlemaid/sim/debug/KneekuraDebugTankPresentationRecipe.java",
+      "gitSha": "78358e006022ed7571f12575f837cd0b86268a42",
+      "sha256": "1159f37a7645033e9b602614ee26457a4b247ca5e474a9b27a4003202df0f055",
+      "lines": 112,
+      "stage": "GIT_SOURCE_BLOB_NOT_TRANSFORMED_CLASS",
+      "gitBlob": "9279a1aaa0c95340a3194e31edf5747bec1e6ede"
+    }
+  ],
+  "migration": {
+    "privateSelectionFields": 8,
+    "sealedPlanFields": 19,
+    "separatePermission": "PRE_EXPERIMENT_TANK_ROTATION",
+    "existingArenaCellLimit": 4096,
+    "existingActionLimit": 32,
+    "originalLeaseMaximumMs": 120000,
+    "tankDimensions": [
+      1,
+      64
+    ],
+    "innerVolumeMaximum": 65536,
+    "allocatedShellMaximum": 100000,
+    "cellsPerTick": 256,
+    "priorRegionsMaximum": 16,
+    "operation": "NEW_DISJOINT_EMPTY_REGION_WITH_PRESERVED_PRIOR_REGIONS",
+    "terminal": "GEOMETRY_ONLY_NEW_SAVED_TANK_EPOCH_FRESH_RUN_REQUIRED",
+    "resetFidelity": "NOT_ESTABLISHED",
+    "environmentApplied": false,
+    "nativeAcceptance": "PENDING"
+  },
+  "sourceProofClasses": [
+    "NODE_SEALED_INTENT",
+    "ACTUAL_JAVA_PARSER_PID_INTEROP",
+    "PURE_BOUNDED_CONTROLLER",
+    "ACTUAL_ATOMIC_FILES",
+    "GENUINE_FORGE_COMPILED_CALL_BOUNDARIES"
+  ],
+  "notImported": [
+    "LEGACY_RESET_PROTOCOL",
+    "GLOBAL_ENVIRONMENT_EFFECTS",
+    "PLAYER_PLACEMENT",
+    "ENTITY_MANAGEMENT",
+    "OLD_LEASE_OR_DISPLAY_REUSE"
+  ]
+}

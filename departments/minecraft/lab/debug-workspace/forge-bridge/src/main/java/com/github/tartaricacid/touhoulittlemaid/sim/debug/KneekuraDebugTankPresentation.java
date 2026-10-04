@@ -40,6 +40,7 @@ public final class KneekuraDebugTankPresentation {
             clear();
             var root = config.runDir().toRealPath();
             var envelope = KneekuraDebugOwnerFiles.json(root, "control/owner-envelope.json", config.ownerSetup().sha256(), 16 * 1024);
+            if (envelope.has("tankRotationHash")) return;
             var materials = KneekuraDebugOwnerFiles.json(root, "control/owner-material-descriptor.json",
                     KneekuraDebugOwnerInputs.t(envelope, "materialDescriptorHash"), 16 * 1024);
             byte[] resource = KneekuraDebugOwnerFiles.read(root, "control/owner-materials/resources.bin",

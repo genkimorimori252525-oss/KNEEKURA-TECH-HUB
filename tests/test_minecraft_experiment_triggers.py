@@ -177,19 +177,51 @@ def test_watch_cli_requires_only_registered_request(trigger_control,tmp_path,cap
 
 
 @pytest.mark.parametrize('name', [
-    'bridge/owner-trigger-config.mjs', 'bridge/owner-trigger-source.mjs',
+    'bridge/owner-trigger-config.mjs', 'bridge/owner-trigger-source.mjs', 'bridge/owner-tank-rotation.mjs',
     'evidence/broker.mjs', 'evidence/capture.mjs', 'evidence/ingest.mjs',
     'evidence/runtime.mjs', 'evidence/trigger-capture.mjs', 'evidence/watchpoints.mjs'])
 @pytest.mark.parametrize('change', ['missing', 'tampered'])
 def test_every_new_imported_leaf_remains_pinned(control, monkeypatch, name, change):
     store,_,registry,owner=control
-    assert len(api().MODULES)==27
+    assert len(api().MODULES)==28
     relative='debug-workspace/'+name
     assert relative in api().MODULES
     if change=='missing':registry['module_hashes'].pop(relative)
     else:(Path(registry['workspace'])/relative).write_text('// changed imported leaf\n')
     monkeypatch.setattr(subprocess,'Popen',lambda *a,**k:pytest.fail('changed source closure dispatched'))
     with pytest.raises(ContractError):api().inspect_owner(store,registry,owner['run']['identity']['requestHash'])
+
+
+def test_optional_tank_plan_and_predecessor_are_pinned_without_dispatch(control, monkeypatch):
+    store,_,registry,owner=control
+    root=Path(owner['run']['runDir'])/'control'
+    envelope=json.loads((root/'owner-envelope.json').read_bytes())
+    previous=canonical({'status':'GEOMETRY_VERIFIED','arenaEpoch':8})
+    plan={'schemaVersion':1,'scope':'PRE_EXPERIMENT_TANK_ROTATION','rotationId':'rotation',
+        **{key:envelope[key] for key in ('debugSessionId','runId','runSnapshotId','processEpoch','handshakeNonce','requestHash')},
+        'grantId':'grant','leaseId':'lease','arenaId':'arena','expectedArenaEpoch':0,'expectedArenaRevision':0,
+        'previousOwnerFileSha256':digest(previous),'previousRecipeHash':'a'*64,'previousTankEpoch':8,
+        'nextRecipeHash':'b'*64,'nextRecipe':{}}
+    # This fixture tests local closure pins only; actual Node/Java parsing rejects its non-native recipe.
+    (root/'owner-tank-rotation.json').write_bytes(canonical(plan))
+    (root/'owner-tank-predecessor.json').write_bytes(previous)
+    envelope['tankRotationHash']=digest(canonical(plan));(root/'owner-envelope.json').write_bytes(canonical(envelope))
+    owner['run']['ownerEnvelopeHash']=digest(canonical(envelope));Path(registry['owner_file']).write_bytes(canonical(owner));registry['owner_hash']=digest(canonical(owner))
+    monkeypatch.setattr(subprocess,'Popen',lambda *a,**k:pytest.fail('read-only Tank pin inspection dispatched'))
+    before=tree(store.root);result=api().inspect_registry(registry)
+    assert result['execution']=='NOT_RUN' and result['runtime_attestation']=='NOT_ESTABLISHED' and tree(store.root)==before
+    (root/'owner-tank-predecessor.json').write_bytes(b'changed')
+    with pytest.raises(ContractError):api().inspect_registry(registry)
+
+
+@pytest.mark.parametrize('bad_hash',[None,'',True,'not-a-hash'])
+def test_optional_tank_pin_cannot_be_null_or_malformed(control,bad_hash):
+    _,_,registry,owner=control
+    file=Path(owner['run']['runDir'])/'control/owner-envelope.json'
+    envelope=json.loads(file.read_bytes());envelope['tankRotationHash']=bad_hash
+    file.write_bytes(canonical(envelope));owner['run']['ownerEnvelopeHash']=digest(canonical(envelope))
+    Path(registry['owner_file']).write_bytes(canonical(owner));registry['owner_hash']=digest(canonical(owner))
+    with pytest.raises(ContractError):api().inspect_registry(registry)
 
 
 @pytest.mark.parametrize('bad_hash', [None, '', True, 'not-a-hash'])
