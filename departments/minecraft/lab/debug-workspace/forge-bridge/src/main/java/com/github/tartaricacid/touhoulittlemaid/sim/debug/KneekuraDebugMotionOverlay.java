@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderLevelStageEvent;
@@ -30,16 +31,28 @@ public final class KneekuraDebugMotionOverlay {
   PoseStack pose=event.getPoseStack();pose.pushPose();
   try {
    var related=KneekuraDebugMotionOverlayRuntime.relatedSnapshot();
-   var lines=KneekuraDebugMotionOverlayGeometry.combinedLines(trace,related,dimension,gameTime,camera.x,camera.y,camera.z,KneekuraDebugCardinalCapture.quiescent());if(lines.isEmpty())return;
+   boolean captureQuiescent=KneekuraDebugCardinalCapture.quiescent();
+   var lines=KneekuraDebugMotionOverlayGeometry.combinedLines(trace,related,dimension,gameTime,camera.x,camera.y,camera.z,captureQuiescent);
+   var labels=KneekuraDebugMotionOverlayGeometry.relatedLabels(trace,related,dimension,gameTime,camera.x,camera.y,camera.z,captureQuiescent);if(lines.isEmpty()&&labels.isEmpty())return;
    pose.translate(-camera.x,-camera.y,-camera.z);var buffers=mc.renderBuffers().bufferSource();var consumer=buffers.getBuffer(RenderType.lines());
    for(var line:lines)line(consumer,pose,line);
    buffers.endBatch(RenderType.lines());
+   for(var label:labels) {
+    pose.pushPose();
+    try {
+     pose.translate(label.x(),label.y()+0.22,label.z());pose.mulPose(event.getCamera().rotation());pose.scale(-0.015f,-0.015f,0.015f);
+     var style=label.style();int argb=(style.alpha()<<24)|(style.r()<<16)|(style.g()<<8)|style.b();
+     mc.font.drawInBatch(label.text(),-mc.font.width(label.text())/2.0f,0,argb,false,pose.last().pose(),buffers,Font.DisplayMode.NORMAL,0,0xF000F0);
+    }finally{pose.popPose();}
+   }
+   if(!labels.isEmpty())buffers.endBatch();
    long cost=Math.max(0,System.nanoTime()-started);frames++;totalNanos+=cost;maxNanos=Math.max(maxNanos,cost);
    if(frames%100==0){
     var payload=new JsonObject();payload.addProperty("schema","kneekura.live-motion-overlay-status/v1");
     payload.addProperty("semantics","DERIVED_PRESENTATION_FROM_FLUSHED_SERVER_SAMPLES_NOT_CONTINUOUS_MOTION_OR_GAMEPLAY_OBJECTS");
     payload.addProperty("targetRevision",trace.context().revision());payload.addProperty("dimension",dimension);
     payload.addProperty("renderedFrames",frames);payload.addProperty("submittedLines",lines.size());payload.addProperty("retainedSamples",trace.samples().size());
+    payload.addProperty("submittedProjectileLabels",labels.size());payload.addProperty("projectileLabelScope","RELATED_UUID_AT_LAST_RETAINED_POSITION_NOT_LIVE_POSITION");
     payload.addProperty("evictedSamples",trace.evictedSamples());payload.addProperty("rejectedSamples",trace.rejectedSamples());payload.addProperty("gapCount",trace.gaps().size());
     if(Objects.equals(trace.context(),related.context())){
      payload.addProperty("relatedProjectileGroups",related.traces().size());payload.addProperty("relatedProjectileSamples",related.retainedSamples());
@@ -52,7 +65,7 @@ public final class KneekuraDebugMotionOverlay {
     payload.addProperty("renderCpuMeanNanos",totalNanos/frames);payload.addProperty("renderCpuMaxNanos",maxNanos);
     payload.addProperty("observerCostScope","CPU_BUILD_AND_DRAW_SUBMIT_EXCLUDES_GPU_FRAMEBUFFER_CAPTURE_WRITER");
     payload.addProperty("rawPixelsVerified",false);payload.addProperty("maxAgeTicks",100);payload.addProperty("maxCameraDistanceBlocks",64);
-    var refs=new JsonArray();lines.stream().flatMap(l->l.sourceIds().stream()).distinct().forEach(refs::add);payload.add("source_observation_ids",refs);
+    var refs=new JsonArray();java.util.stream.Stream.concat(lines.stream().flatMap(l->l.sourceIds().stream()),labels.stream().flatMap(l->l.sourceIds().stream())).distinct().forEach(refs::add);payload.add("source_observation_ids",refs);
     KneekuraDebugEvidenceWriter.recordMotionOverlayObserved(config,trace.context().arena(),gameTime,trace.context().uuid(),payload);
    }
   }catch(Exception error){KneekuraDebugMotionOverlayRuntime.disable();TouhouLittleMaid.LOGGER.error("[KNEEKURA-DEBUG] native Motion overlay disabled after render failure",error);}

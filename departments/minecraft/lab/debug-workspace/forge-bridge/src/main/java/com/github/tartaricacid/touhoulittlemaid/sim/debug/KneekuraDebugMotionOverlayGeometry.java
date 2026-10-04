@@ -1,9 +1,10 @@
 package com.github.tartaricacid.touhoulittlemaid.sim.debug;
 import java.util.*;
-/** Pure bounded derived lines; no game objects, world mutation, interpolation of samples or camera takeover. */
+/** Pure bounded derived lines and labels; no game objects, world mutation, interpolation or camera takeover. */
 final class KneekuraDebugMotionOverlayGeometry {
  record AgeStyle(int r,int g,int b,int alpha,String ageBand) { }
  record Line(double x0,double y0,double z0,double x1,double y1,double z1,String traceClass,String role,List<String> sourceIds,AgeStyle style) { }
+ record Label(UUID uuid,double x,double y,double z,long sampleTick,String text,List<String> sourceIds,AgeStyle style) { }
  static AgeStyle ageStyle(String traceClass,String identity,long sampleTick,long gameTime) {
   if(!Set.of("MOB_ACTUAL","PROJECTILE_ACTUAL").contains(traceClass)||identity==null||identity.isEmpty()||identity.length()>512||sampleTick<0||gameTime<0)throw new IllegalArgumentException("INVALID_TRACE_AGE_STYLE");
   if(sampleTick>gameTime||gameTime-sampleTick>=100)return null;
@@ -55,5 +56,25 @@ final class KneekuraDebugMotionOverlayGeometry {
    out.addAll(linesForIdentity(group.trace(),group.uuid().toString(),dimension,gameTime,cameraX,cameraY,cameraZ,captureQuiescent));
   if(out.size()>2048)throw new IllegalStateException("BOUNDED_COMBINED_OVERLAY_GEOMETRY_EXCEEDED");
   return List.copyOf(out);
+ }
+ static Map<UUID,String> labelNames(List<UUID> identities) {
+  if(identities.size()>16)throw new IllegalArgumentException("BOUNDED_PROJECTILE_LABEL_IDENTITIES_EXCEEDED");
+  var shortNames=new LinkedHashMap<UUID,String>();var counts=new HashMap<String,Integer>();
+  for(var uuid:new LinkedHashSet<>(identities)){String id=uuid.toString(),name="P "+id.substring(0,4)+".."+id.substring(28);shortNames.put(uuid,name);counts.merge(name,1,Integer::sum);}
+  var names=new LinkedHashMap<UUID,String>();shortNames.forEach((uuid,name)->names.put(uuid,counts.get(name)>1?"P "+uuid:name));
+  return Map.copyOf(names);
+ }
+ static List<Label> relatedLabels(KneekuraDebugMotionTraceCache.Snapshot selected,KneekuraDebugRelatedProjectileTraceCache.Snapshot related,String dimension,long gameTime,double cameraX,double cameraY,double cameraZ,boolean captureQuiescent) {
+  if(!captureQuiescent||selected.context()==null||!Objects.equals(selected.context(),related.context())||gameTime<0||!Double.isFinite(cameraX)||!Double.isFinite(cameraY)||!Double.isFinite(cameraZ))return List.of();
+  var names=labelNames(related.traces().stream().map(KneekuraDebugRelatedProjectileTraceCache.Trace::uuid).toList());var labels=new ArrayList<Label>();
+  for(var group:related.traces()) {
+   var samples=group.trace().samples();if(samples.isEmpty())continue;
+   // Last retained observation only: do not select an older point when the latest is ineligible.
+   var sample=samples.get(samples.size()-1);
+   if(!sample.dimension().equals(dimension)||Math.hypot(Math.hypot(sample.x()-cameraX,sample.y()-cameraY),sample.z()-cameraZ)>64)continue;
+   var style=ageStyle("PROJECTILE_ACTUAL",group.uuid().toString(),sample.tick(),gameTime);if(style==null)continue;
+   labels.add(new Label(group.uuid(),sample.x(),sample.y(),sample.z(),sample.tick(),names.get(group.uuid()),List.of(group.spawnSource(),sample.sourceId()),style));
+  }
+  return List.copyOf(labels);
  }
 }

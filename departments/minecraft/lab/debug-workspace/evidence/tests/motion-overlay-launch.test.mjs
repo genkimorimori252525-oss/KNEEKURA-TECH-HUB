@@ -5,8 +5,10 @@ import {motionOverlayLaunchEnvironment} from '../../motion-overlay-launch.mjs';
 
 test('native renderer forwards actual Cardinal quiescence before acquiring a drawing buffer',async()=>{
   const source=await readFile(new URL('../../forge-bridge/src/main/java/com/github/tartaricacid/touhoulittlemaid/sim/debug/KneekuraDebugMotionOverlay.java',import.meta.url),'utf8');
-  assert.ok(/camera\.z,KneekuraDebugCardinalCapture\.quiescent\(\)\)/.test(source),'Renderer must forward actual raw-capture quiescence');
-  assert.ok(source.indexOf('KneekuraDebugCardinalCapture.quiescent()')<source.indexOf('buffers.getBuffer(RenderType.lines())'));
+  assert.match(source,/boolean captureQuiescent=KneekuraDebugCardinalCapture\.quiescent\(\)/,'Renderer reads actual raw-capture quiescence');
+  for(const method of ['combinedLines','relatedLabels'])assert.match(source,new RegExp(method+'\\([^;]+camera\\.z,captureQuiescent\\)'),'Lines and labels share the actual capture gate');
+  const gate=source.indexOf('if(lines.isEmpty()&&labels.isEmpty())return;');
+  assert.ok(gate>=0&&source.indexOf('KneekuraDebugCardinalCapture.quiescent()')<gate&&gate<source.indexOf('buffers.getBuffer(RenderType.lines())'));
 });
 import {validateConfig} from '../../core.mjs';
 test('native Motion overlay is explicit/default OFF and inherited environment cannot arm it',()=>{

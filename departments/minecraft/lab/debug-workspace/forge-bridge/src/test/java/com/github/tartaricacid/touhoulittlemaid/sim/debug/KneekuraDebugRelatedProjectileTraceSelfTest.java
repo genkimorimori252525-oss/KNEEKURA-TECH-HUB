@@ -43,6 +43,23 @@ public final class KneekuraDebugRelatedProjectileTraceSelfTest {
   require(combined.size()==la.size()+lb.size(),"same selected-shooter context combines both real groups");
   require(KneekuraDebugMotionOverlayGeometry.combinedLines(selected,cache.snapshot(),"minecraft:overworld",102,0,64,0,false).isEmpty(),"actual combined raw-capture suppression");
   require(KneekuraDebugMotionOverlayGeometry.combinedLines(KneekuraDebugMotionTraceCache.derive(context(2),List.of(),0,0),cache.snapshot(),"minecraft:overworld",102,0,64,0,true).isEmpty(),"race between separate snapshots never mixes revisions");
+  var labels=KneekuraDebugMotionOverlayGeometry.relatedLabels(selected,cache.snapshot(),"minecraft:overworld",102,0,64,0,true);
+  require(labels.size()==2&&labels.get(0).uuid().equals(shot(1))&&labels.get(1).uuid().equals(shot(2)),"labels retain actual separate projectile UUIDs");
+  require(!labels.get(0).text().equals(labels.get(1).text()),"common UUID prefix remains distinguishable");
+  require(labels.get(0).x()==1&&labels.get(0).y()==64&&labels.get(0).sampleTick()==102&&labels.get(0).sourceIds().equals(List.of("obs:1:1","obs:1:5")),"label uses last retained actual point plus spawn/point provenance, no live entity position");
+  require(labels.get(0).style().equals(KneekuraDebugMotionOverlayGeometry.ageStyle("PROJECTILE_ACTUAL",shot(1).toString(),102,102)),"label shares exact UUID age style");
+  for(var hidden:List.of(
+   KneekuraDebugMotionOverlayGeometry.relatedLabels(selected,cache.snapshot(),"minecraft:overworld",102,0,64,0,false),
+   KneekuraDebugMotionOverlayGeometry.relatedLabels(selected,cache.snapshot(),"minecraft:overworld",202,0,64,0,true),
+   KneekuraDebugMotionOverlayGeometry.relatedLabels(selected,cache.snapshot(),"minecraft:overworld",101,0,64,0,true),
+   KneekuraDebugMotionOverlayGeometry.relatedLabels(selected,cache.snapshot(),"minecraft:the_nether",102,0,64,0,true),
+   KneekuraDebugMotionOverlayGeometry.relatedLabels(selected,cache.snapshot(),"minecraft:overworld",102,1000,64,0,true),
+   KneekuraDebugMotionOverlayGeometry.relatedLabels(selected,cache.snapshot(),"minecraft:overworld",102,Double.NaN,64,0,true),
+   KneekuraDebugMotionOverlayGeometry.relatedLabels(KneekuraDebugMotionTraceCache.derive(context(2),List.of(),0,0),cache.snapshot(),"minecraft:overworld",102,0,64,0,true)))require(hidden.isEmpty(),"label obeys capture/expiry/future/dimension/distance/finite/context boundaries without falling back to older point");
+  var collisionA=UUID.fromString("11110000-0000-0000-0000-000000000001");var collisionB=UUID.fromString("1111ffff-0000-0000-0000-000000000001");
+  var collisionNames=KneekuraDebugMotionOverlayGeometry.labelNames(List.of(collisionA,collisionB));
+  require(collisionNames.get(collisionA).equals("P "+collisionA)&&collisionNames.get(collisionB).equals("P "+collisionB),"abbreviation collision falls back to exact full UUID");
+  require(collisionNames.equals(KneekuraDebugMotionOverlayGeometry.labelNames(List.of(collisionB,collisionA))),"identity names do not depend on collection order");
   for(String boundary:new String[]{"source","revision","owner","burst","spawn-index","class"}) {
    var bad=row(1,false,103,7,3);var d=bad.getAsJsonObject("payload").getAsJsonObject("data");
    switch(boundary){case "source"->bad.getAsJsonObject("source").addProperty("side","CLIENT");case "revision"->bad.getAsJsonObject("payload").addProperty("targetRevision",2);
@@ -56,6 +73,8 @@ public final class KneekuraDebugRelatedProjectileTraceSelfTest {
   cache.select(context(1));for(int n=1;n<=17;n++)cache.acceptFlushed(row(n,true,100,n,0));require(cache.snapshot().traces().size()==16,"finite accepted UUID groups");
   for(int t=101;t<=110;t++)for(int n=1;n<=16;n++)cache.acceptFlushed(row(n,false,t,18+(t-101)*16+n,n));
   require(cache.snapshot().retainedSamples()==128&&cache.snapshot().evictedSamples()==32,"global related position budget, not128 per projectile");
+  var boundedLabels=KneekuraDebugMotionOverlayGeometry.relatedLabels(selected,cache.snapshot(),"minecraft:overworld",110,0,64,0,true);
+  require(boundedLabels.size()==16&&boundedLabels.stream().map(l->l.text()).distinct().count()==16,"native ID labels share finite16 group bound");
   var invalid=row(16,false,111,195,Double.NaN);cache.acceptFlushed(invalid);cache.acceptFlushed(row(16,false,112,196,16));
   require(cache.snapshot().traces().get(15).trace().gaps().stream().anyMatch(g->g.kind().equals("INVALID_RETAINED_POSITION")),"malformed actual position prevents a later false connection");
   cache.clear();require(cache.snapshot().traces().isEmpty(),"clear releases all related display state");
