@@ -1,6 +1,6 @@
 # Vanilla AI architecture — exact ANCHOR core
 
-Status: **CORE DEVELOPMENT BYTECODE INSPECTED; NATIVE ACCEPTANCE PENDING**
+Status: **SCOPED SOURCE RESEARCH AND BOUNDED NATIVE EVIDENCE; FULL ACCEPTANCE PENDING**
 
 All ANCHOR statements here refer to the exact Minecraft 1.20.1 / Forge 47.2.0 development artifact in [the bytecode ledger](ANCHOR-BYTECODE-LEDGER-2026-10-03.json), discovered through [the local Foundation Map](../vanilla-foundation/LOCAL-GENERATION-2026-10-03.md). They are not assertions about loaded post-Mixin bytes.
 
@@ -24,4 +24,6 @@ The common Decision stages are optional. No adapter fills CANDIDATE/EVALUATION f
 
 ## Research boundary
 
-The ledger retains 60 selected core/representative class identities and private disassembly locators. Goal/Brain/pathfinding/control/debug core semantics below are grounded in those bytes. Full inheritance-aware all-Mob inventory, broader random-position/sensor candidate semantics, COMMUNITY reproduction, a pinned modern Vanilla FRONTIER, and observer-effect/native coverage remain unfinished.
+The original ledger retains 60 selected core/representative class identities and private disassembly locators. The additive [Goal / Brain research](GOAL-BRAIN-RESEARCH-2026-10-04.md) verifies 26 related owners (including overlapping original owners), with exact method/field locators for the expanded B2/B3 explanations. It preserves the original ledger and does not establish all subclasses or loaded transformations.
+
+Representative native runs and the pinned modern Vanilla FRONTIER now have bounded evidence recorded in the [remaining execution matrix](REMAINING-EXECUTION-MATRIX-2026-10-04.md). Full inheritance-aware all-Mob semantics, broader random-position/sensor candidate populations, integrated Brain/result and Boss evidence, full path rejection/cost semantics, COMMUNITY reproduction and broader observer/native acceptance remain open. Source explanations, installed callbacks, sampled state and actual result evidence retain distinct scopes.
