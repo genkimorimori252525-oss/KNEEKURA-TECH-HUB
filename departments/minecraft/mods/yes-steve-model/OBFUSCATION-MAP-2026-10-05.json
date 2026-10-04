@@ -939,7 +939,27 @@
       "obfuscated_owner": "com.elfmcys.yesstevemodel.OOoo0o0oO000ooO0Oo00OoOo",
       "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.geo.GeoReplacedEntityRenderer",
       "confidence": "HIGH",
-      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1"
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "evidence": [
+        {
+          "type": "PUBLIC_EXACT_2_6_5_MIXIN",
+          "repository": "3SCR1P7/TaczFixes",
+          "revision": "a2223f838fc4f16ecae0315663b7e0e3ca5d23d4",
+          "path": "src/main/java/com/ssscript/taczfixes/client/mixin/MixinYsmLivingRendererPose.java",
+          "fact": "Exact 2.6.5 Mixin targets this owner at the living-renderer pose seam."
+        },
+        {
+          "type": "EXACT_OFFICIAL_JAR_HIERARCHY",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "fact": "Exact artifact class is the unique mapped direct LivingEntityRenderer subclass for this seam."
+        },
+        {
+          "type": "READABLE_LAYOUT_MATCH",
+          "repository": "OpenYSM/OpenYSM",
+          "revision": "a515d44686af77155a311b2a592327ca5d45a658",
+          "path": "common/src/main/java/com/elfmcys/yesstevemodel/geckolib3/geo/GeoReplacedEntityRenderer.java"
+        }
+      ]
     },
     {
       "id": "ysm265.method.geo-replaced-render-with-texture",
@@ -1054,7 +1074,27 @@
       "semantic_owner": "com.elfmcys.yesstevemodel.client.renderer.layer.CustomPlayerItemInHandLayer",
       "semantic_member": "render",
       "confidence": "HIGH",
-      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1"
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "evidence": [
+        {
+          "type": "PUBLIC_EXACT_2_6_5_MIXIN",
+          "repository": "3SCR1P7/TaczFixes",
+          "revision": "a2223f838fc4f16ecae0315663b7e0e3ca5d23d4",
+          "path": "src/main/java/com/ssscript/taczfixes/client/mixin/MixinYsmItemInHandLayer.java",
+          "fact": "Exact method descriptor is the YSM held-item layer entry used by the compatibility hook."
+        },
+        {
+          "type": "EXACT_OFFICIAL_JAR_CONTRACT",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "fact": "The exact owner+method+descriptor exists in the official distributed JAR."
+        },
+        {
+          "type": "READABLE_LAYOUT_MATCH",
+          "repository": "OpenYSM/OpenYSM",
+          "revision": "a515d44686af77155a311b2a592327ca5d45a658",
+          "path": "common/src/main/java/com/elfmcys/yesstevemodel/client/renderer/layer/CustomPlayerItemInHandLayer.java"
+        }
+      ]
     },
     {
       "id": "ysm265.method.item-in-hand-render-item",
