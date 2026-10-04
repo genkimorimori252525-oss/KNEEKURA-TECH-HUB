@@ -12,6 +12,7 @@ import net.minecraft.world.level.pathfinder.Node;
 import net.minecraft.world.level.pathfinder.NodeEvaluator;
 import net.minecraft.world.level.pathfinder.BinaryHeap;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -21,6 +22,15 @@ import java.util.Map;
 
 @Mixin(value=PathFinder.class,remap=false)
 public abstract class KneekuraDebugPathDecisionMixin {
+    @Shadow(remap=false) protected abstract float distance(Node from,Node to);
+    @Redirect(method="findPath(Lnet/minecraft/util/profiling/ProfilerFiller;Lnet/minecraft/world/level/pathfinder/Node;Ljava/util/Map;FIF)Lnet/minecraft/world/level/pathfinder/Path;",
+            at=@At(value="INVOKE",target="Lnet/minecraft/world/level/pathfinder/PathFinder;distance(Lnet/minecraft/world/level/pathfinder/Node;Lnet/minecraft/world/level/pathfinder/Node;)F",ordinal=0),require=1)
+    private float kneekura$originalDistance(PathFinder receiver,Node from,Node to) {
+        // Exact original site loads this as receiver; Shadow retains its protected virtual dispatch.
+        float result=distance(from,to);
+        KneekuraDebugDecisionHooks.pathDistanceReturn(receiver,from,to,result);
+        return result;
+    }
     @Redirect(method="findPath(Lnet/minecraft/util/profiling/ProfilerFiller;Lnet/minecraft/world/level/pathfinder/Node;Ljava/util/Map;FIF)Lnet/minecraft/world/level/pathfinder/Path;",
             at=@At(value="FIELD",target="Lnet/minecraft/world/level/pathfinder/Node;g:F",opcode=181,ordinal=1),require=1)
     private void kneekura$acceptedGWrite(Node node,float writtenG) {

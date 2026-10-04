@@ -3,7 +3,7 @@ import {validOriginalDecisionEvent,originalDecisionData} from './original-decisi
 import {validTerrainGroundQuery} from './terrain-ground-query.mjs';
 import {registeredModDecisionAdapters} from './adapters/registered-mod-adapters.mjs';
 
-const CHANNELS=new Set(['path_search','path_neighbors','path_heap_operations','path_closed_nodes','path_g_writes','path_returned_nodes','goal_transitions','brain_memory_changes','movement_control','base_malus','effective_malus','sensor_execution','terrain_ground','mod_state','mod_returns']);
+const CHANNELS=new Set(['path_search','path_neighbors','path_heap_operations','path_closed_nodes','path_g_writes','path_edge_distances','path_returned_nodes','goal_transitions','brain_memory_changes','movement_control','base_malus','effective_malus','sensor_execution','terrain_ground','mod_state','mod_returns']);
 const safe=Number.isSafeInteger;
 function normalize(subjectUuid,identity,request) {
   if(typeof subjectUuid!=='string'||! /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(subjectUuid))throw new TypeError('EXACT_SUBJECT_UUID_REQUIRED');
@@ -85,6 +85,7 @@ export function queryDecisionDrilldown({observations,subjectUuid,identity,reques
   switch(query.channel) {
     case 'path_search':items=pathSearch(events,query.maxNodes);break;
     case 'path_heap_operations':items=events.filter(r=>r.payload.kind==='PATH_HEAP_OPERATION_RETURN').map(directEvent);break;
+    case 'path_edge_distances':items=events.filter(r=>r.payload.kind==='PATH_EDGE_DISTANCE_RETURN').map(directEvent);break;
     case 'path_closed_nodes':items=events.filter(r=>r.payload.kind==='PATH_NODE_CLOSED_CHECKPOINT').map(r=>({
       ...directEvent(r),epistemic_status:'INSTRUMENTED_ALGORITHM_STATE',causal_relation:'ALGORITHM_TRACE_RELATION'}));break;
     case 'path_g_writes':items=events.filter(r=>r.payload.kind==='PATH_NODE_G_WRITE_CHECKPOINT').map(r=>({

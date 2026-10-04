@@ -26,6 +26,7 @@ const KINDS = Object.freeze({
   PATH_HEAP_OPERATION_RETURN: ['EVALUATION','path_heap_operations'],
   PATH_NODE_CLOSED_CHECKPOINT: ['EVALUATION','path_closed_nodes'],
   PATH_NODE_G_WRITE_CHECKPOINT: ['EVALUATION','path_g_writes'],
+  PATH_EDGE_DISTANCE_RETURN: ['EVALUATION','path_edge_distances'],
   PATH_RETURNED_NODES: ['RESULT','returned_path_nodes'],
 });
 const text = value => typeof value === 'string' && value.length > 0 && value.length <= 512;
@@ -227,12 +228,29 @@ function validGWriteCheckpoint(d,record) {
     d.fieldScope==='BASE_NODE_FIELDS_AFTER_WRITE_AND_CAPTURE_GATES'&&
     ['comparisonOperandsStatus','neighborPopulationStatus','rejectionReasonStatus','finalPathCostStatus','navigationAdoptionStatus'].every(k=>d[k]==='NOT_EXPOSED');
 }
+function validEdgeDistance(d,record) {
+  const keys=['searchId','maxNodes','receiverClass','receiverScope',Number.isFinite(d.returnedDistance)?'returnedDistance':'returnedDistanceStatus',
+    'returnedDistanceScope','fromNode','fromIdentity','toNode','toIdentity','phase','dispatchScope','subjectRelationScope','fieldScope',
+    'comparisonOperandsStatus','neighborPopulationStatus','rejectionReasonStatus','finalPathCostStatus','navigationAdoptionStatus'];
+  if(Object.keys(d).length!==keys.length||Object.keys(d).some(k=>!keys.includes(k))||!text(d.searchId)||
+    !new RegExp('^search:'+record.payload.targetRevision+':[1-9][0-9]*$').test(d.searchId)||!integer(d.maxNodes)||d.maxNodes<1||d.maxNodes>64||
+    !text(d.receiverClass)||!numberOrUnknown(d,'returnedDistance'))return false;
+  for(const [section,identity] of [[d.fromNode,d.fromIdentity],[d.toNode,d.toIdentity]]) {
+    if(!validReturnedNode(section)||!validReferenceIdentity(identity,section.status==='AVAILABLE',d.searchId,d.maxNodes))return false;
+    if(section.status==='AVAILABLE'&&['g','h','f','costMalus','walkedDistance'].some(k=>Number.isFinite(section.data[k])&&section.data[k+'Status']!==undefined))return false;
+  }
+  return d.receiverScope==='ORIGINAL_CALLER_THIS'&&d.returnedDistanceScope==='ORIGINAL_VIRTUAL_CALL_RETURN'&&
+    d.phase==='AFTER_ORIGINAL_EDGE_DISTANCE_BEFORE_WALKED_DISTANCE_WRITE'&&d.dispatchScope==='ORIGINAL_PATHFINDER_INNER_PROTECTED_VIRTUAL_DISTANCE_RETURN'&&
+    d.subjectRelationScope==='SELECTED_OUTER_FIND_PATH_INVOCATION'&&d.fieldScope==='BASE_NODE_FIELDS_AFTER_ORIGINAL_RETURN_AND_CAPTURE_GATES'&&
+    ['comparisonOperandsStatus','neighborPopulationStatus','rejectionReasonStatus','finalPathCostStatus','navigationAdoptionStatus'].every(k=>d[k]==='NOT_EXPOSED');
+}
 function validData(kind,d,record) {
   if (kind === 'MOD_COORDINATION_RETURN') return validKnightCoordination(d,record);
   if (kind === 'PATH_NEIGHBORS_RETURN') return validNeighborReturn(d);
   if (kind === 'PATH_HEAP_OPERATION_RETURN') return validHeapReturn(d,record);
   if (kind === 'PATH_NODE_CLOSED_CHECKPOINT') return validClosedCheckpoint(d,record);
   if (kind === 'PATH_NODE_G_WRITE_CHECKPOINT') return validGWriteCheckpoint(d,record);
+  if (kind === 'PATH_EDGE_DISTANCE_RETURN') return validEdgeDistance(d,record);
   if (kind === 'PATH_RETURNED_NODES') return validReturnedPath(d,record);
   if (kind === 'EFFECTIVE_MALUS_RETURN') {
     const numeric=Number.isFinite(d.returnedMalus),keys=['receiverUuid','receiverClass','evaluatorClass','pathType',
