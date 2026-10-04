@@ -29,3 +29,44 @@ export function validCachedPathData(d) {
         (n.status === 'PARTIAL' || (typeof n.type === 'string' && Number.isFinite(n.costMalus)))));
   return valid;
 }
+
+export const exactObjectKeys=(value,keys)=>value!==null&&typeof value==='object'&&!Array.isArray(value)&&
+  Object.keys(value).length===keys.length&&Object.keys(value).every(k=>keys.includes(k));
+export function sameCapturedValue(a,b) {
+  if(Array.isArray(a))return Array.isArray(b)&&a.length===b.length&&a.every((v,i)=>sameCapturedValue(v,b[i]));
+  return a!==null&&typeof a==='object'?b!==null&&typeof b==='object'&&!Array.isArray(b)&&
+    Object.keys(a).length===Object.keys(b).length&&Object.keys(a).every(k=>sameCapturedValue(a[k],b[k])):a===b;
+}
+function strictPathReference(ref,revision) {
+  return validSnapshotReference(ref,revision,'path')&&exactObjectKeys(ref,
+    ['status','allocator','targetRevision',ref.status==='AVAILABLE'?'token':'detail']);
+}
+export function validPathReferenceFact(p,revision) {
+  if(p?.present===false)return exactObjectKeys(p,['present']);
+  return p?.present===true&&exactObjectKeys(p,['present','className','identity'])&&typeof p.className==='string'&&
+    p.className.length>0&&p.className.length<=512&&strictPathReference(p.identity,revision);
+}
+export function validCachedPathFact(p,revision) {
+  if(p?.present===false)return exactObjectKeys(p,['present']);
+  if(p?.present!==true||!exactObjectKeys(p,['present','className','identity','cachedFields'])||
+    !validPathReferenceFact({present:p.present,className:p.className,identity:p.identity},revision))return false;
+  const value=p.cachedFields;
+  if(value?.status==='NOT_EXPOSED')return (exactObjectKeys(value,['className','status'])&&value.className===p.className&&
+    p.className!=='net.minecraft.world.level.pathfinder.Path')||(exactObjectKeys(value,['status','detail'])&&
+    typeof value.detail==='string'&&value.detail.startsWith('MEMBER_UNAVAILABLE:'));
+  return p.className==='net.minecraft.world.level.pathfinder.Path'&&exactObjectKeys(value,['status','className','encoding','kind','data'])&&
+    value.className===p.className&&value.encoding==='TYPED_CACHED_MEMORY_V1'&&value.kind==='PATH'&&
+    ['AVAILABLE','PARTIAL'].includes(value.status)&&validCachedPathData(value.data)&&strictPathReference(value.data.instanceIdentity,revision)&&
+    sameCapturedValue(value.data.instanceIdentity,p.identity)&&(value.status!=='AVAILABLE'||!incompleteCachedFields(value.data));
+}
+/** Cross-check a raw source boolean without deriving equality from unknown reference tokens. */
+export function consistentRawPathMatch(match,requested,cached,fullCopies=false) {
+  if(match){
+    if(fullCopies)return sameCapturedValue(requested,cached);
+    return requested.present===cached.present&&(!requested.present||requested.className===cached.className&&
+      sameCapturedValue(requested.identity,cached.identity));
+  }
+  if(!requested.present&&!cached.present)return false;
+  return !requested.present||!cached.present||requested.identity.status!=='AVAILABLE'||cached.identity.status!=='AVAILABLE'||
+    requested.identity.token!==cached.identity.token;
+}

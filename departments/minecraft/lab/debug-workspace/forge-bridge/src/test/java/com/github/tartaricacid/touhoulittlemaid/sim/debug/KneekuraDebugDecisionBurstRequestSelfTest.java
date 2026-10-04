@@ -19,6 +19,9 @@ public final class KneekuraDebugDecisionBurstRequestSelfTest {
         var navigation=KneekuraDebugDecisionBurstRequest.parse(JsonParser.parseString(valid.replace("goal","navigation_result")));
         if(!navigation.channels().equals(java.util.Set.of("navigation_result"))||request.channels().contains("navigation_result"))
             throw new AssertionError("Navigation result requires explicit channel");
+        var sink=KneekuraDebugDecisionBurstRequest.parse(JsonParser.parseString(valid.replace("goal","brain_navigation")));
+        if(!sink.channels().equals(java.util.Set.of("brain_navigation"))||request.channels().contains("brain_navigation"))
+            throw new AssertionError("Brain Navigation requires explicit channel");
         var all=KneekuraDebugDecisionBurstRequest.parse(JsonParser.parseString(valid.replace("[\"goal\"]","[\"goal\",\"brain\",\"path\",\"control\",\"malus\",\"sensor\",\"mod\",\"projectile\"]")));
         if(all.channels().size()!=8)throw new AssertionError("eight unique known channels remain finite");
         for(String invalid:new String[]{valid.replace("20","20.1"),valid.replace("20","201"),

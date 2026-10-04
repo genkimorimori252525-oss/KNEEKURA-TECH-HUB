@@ -29,20 +29,34 @@ try {
  for(const name of ['OneShot','GateBehavior'])assert.ok(mixins.mixins.includes('KneekuraDebug'+name+'DecisionMixin'),'known-control mixin resource registration');
  assert.ok(mixins.mixins.includes('KneekuraDebugScheduledActivityMixin'),'original activity call-site mixin registration');
  assert.ok(mixins.mixins.includes('KneekuraDebugNavigationResultMixin'),'base Navigation normal-return mixin registration');
+ assert.ok(mixins.mixins.includes('KneekuraDebugBrainNavigationMixin'),'original Brain/Navigation call-site mixin registration');
  const names=['Env','ActionJournal','ArenaController','ArenaOwnerGrant','ForgeArenaBackend','ArenaRuntime','Durability','EvidenceWriter',
   'OwnerFiles','OwnerInputs','OwnerDispatch','OwnerTriggers','OwnerLifetime','MaterialLinkage','ScopedOwnerGate','OwnerConnection',
   'CaptureSession','CaptureBarrier','CaptureRestoration','ImageArtifact','CardinalCapture','CapturePolicy','CaptureOwner','CaptureEvidenceSink','CaptureClock',
   'TankPresentationRecipe','TankPresentation','TankView','DecisionSnapshot','DecisionBurstBudget','DecisionHooks','TerrainField','SynchedCached',
   'DecisionAdapter','DecisionBurstRequest','AdapterSourceProof','TwilightForestDescriptor','TwilightForestReturnDescriptor','TwilightForestAdapter',
   'MotionTraceCache','RelatedProjectileTraceCache','MotionOverlayRuntime','MotionOverlayGeometry','MotionOverlay'];
- const sources=[...names.map(n=>path.join(main,'KneekuraDebug'+n+'.java')),...['Path','Brain','OneShot','GateBehavior'].map(n=>path.join(main,'decisionmixin/KneekuraDebug'+n+'DecisionMixin.java')),path.join(main,'decisionmixin/KneekuraDebugScheduledActivityMixin.java'),path.join(main,'decisionmixin/KneekuraDebugNavigationResultMixin.java')];
- const checks=['EvidenceClaim','CaptureWriter','RegisteredWorld','TankPresentation','DecisionSnapshot','TypedMemory','BehaviorControl','BrainActivity','NavigationResult','DecisionHooks','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult','TerrainField','SynchedCached','MotionTraceCache','RelatedProjectileTrace','MotionOverlayGeometry','MotionWriter'];
+ const sources=[...names.map(n=>path.join(main,'KneekuraDebug'+n+'.java')),...['Path','Brain','OneShot','GateBehavior'].map(n=>path.join(main,'decisionmixin/KneekuraDebug'+n+'DecisionMixin.java')),path.join(main,'decisionmixin/KneekuraDebugScheduledActivityMixin.java'),path.join(main,'decisionmixin/KneekuraDebugNavigationResultMixin.java'),path.join(main,'decisionmixin/KneekuraDebugBrainNavigationMixin.java')];
+ const checks=['EvidenceClaim','CaptureWriter','RegisteredWorld','TankPresentation','DecisionSnapshot','TypedMemory','BehaviorControl','BrainActivity','NavigationResult','BrainNavigation','DecisionHooks','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult','TerrainField','SynchedCached','MotionTraceCache','RelatedProjectileTrace','MotionOverlayGeometry','MotionWriter'];
  run(executable('javac'),['--release','17','-proc:none','-cp',classpath,'-d',output,...sources,...checks.map(n=>path.join(test,'KneekuraDebug'+n+'SelfTest.java')),path.join(test,'KneekuraDebugDecisionIdentityInterop.java')]);
  for(const name of checks.filter(n=>n!=='MotionWriter')){
   // Vanilla bootstrap can create logs; keep this new check's artifacts in its disposable output.
-  const bootstrap=['NavigationResult','BrainActivity','BehaviorControl','TypedMemory','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult'].includes(name);
+  const bootstrap=['BrainNavigation','NavigationResult','BrainActivity','BehaviorControl','TypedMemory','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult'].includes(name);
   const cp=bootstrap?classpath.split(path.delimiter).map(p=>path.resolve(root,p)).join(path.delimiter):classpath;
   const stdout=run(executable('java'),['-cp',output+path.delimiter+cp,'com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebug'+name+'SelfTest'],{},bootstrap?output:root);
+  if(name==='BrainNavigation') {
+   const lines=stdout.split(/\r?\n/).filter(l=>l.startsWith('BRAIN_NAVIGATION_INTEROP:'));
+   assert.equal(lines.length,24,'genuine sink call, original virtual return, cached references and explicit unknown cases');
+   const records=lines.map((line,index)=>({source:{side:'SERVER'},observationId:'brain-navigation-gson:'+index,gameTime:100,payload:JSON.parse(line.slice('BRAIN_NAVIGATION_INTEROP:'.length))}));
+   assert.ok(records.every(validOriginalDecisionEvent),'actual production Brain/Navigation Gson satisfies consumer contract');
+   assert.deepEqual(records.slice(0,3).map(r=>r.payload.kind),['BRAIN_PATH_MEMORY_WRITE_RETURN','BRAIN_PATH_NAVIGATION_RETURN','BRAIN_PATH_SINK_RETURN']);
+   assert.equal(new Set(records.slice(0,3).map(r=>r.payload.data.sinkInvocationId)).size,1,'same original concrete invocation');
+   assert.equal(records[4].payload.data.result,false,'final virtual return can differ from the base Navigation true');
+   const stages={},capabilities={},timeline=[];appendOriginalDecisionEvents(records,stages,capabilities,timeline);
+   assert.equal(timeline.length,24);assert.equal(stages.EXECUTION.facts.length,24);assert.equal(capabilities.brain_navigation.status,'PARTIAL');
+   for(const stage of ['CANDIDATE','SELECTION','RESULT'])assert.equal(stages[stage],undefined);
+   console.log('Twenty-four actual Brain/Navigation/Gson cases preserve call scope, final virtual return and unknown arrival');
+  }
   if(name==='NavigationResult') {
    const lines=stdout.split(/\r?\n/).filter(l=>l.startsWith('NAVIGATION_RESULT_INTEROP:'));
    assert.equal(lines.length,11,'genuine Navigation original boolean, cached/reference and cap cases');

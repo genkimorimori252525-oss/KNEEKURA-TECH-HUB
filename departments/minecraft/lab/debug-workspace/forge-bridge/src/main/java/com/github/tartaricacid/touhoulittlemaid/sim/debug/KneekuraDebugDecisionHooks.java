@@ -24,6 +24,8 @@ import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.entity.ai.behavior.BehaviorControl;
 import net.minecraft.world.entity.ai.behavior.OneShot;
 import net.minecraft.world.entity.ai.behavior.GateBehavior;
+import net.minecraft.world.entity.ai.behavior.MoveToTargetSink;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.GoalSelector;
 import net.minecraft.world.entity.ai.goal.WrappedGoal;
@@ -56,6 +58,8 @@ public final class KneekuraDebugDecisionHooks {
     @FunctionalInterface private interface Data { JsonObject read() throws ReflectiveOperationException; }
     private record PendingPop(Node node,int eventIndex) { }
     private record ActivityFrame(Brain<?> brain,String id,JsonObject before,long preCallCost) { }
+    private record SinkFrame(MoveToTargetSink behavior,Mob owner,Brain<?> brain,PathNavigation navigation,
+                             String id,String parentId,String callSite,long gameTime,JsonObject before,long preCallCost) { }
 
     public static void install(Session session) {
         if (session.thread != Thread.currentThread()) throw new IllegalStateException("SERVER_THREAD_REQUIRED");
@@ -63,7 +67,7 @@ public final class KneekuraDebugDecisionHooks {
     }
     public static void clear(String reason) {
         Session previous=active;active=null;
-        if(previous!=null){previous.budget.close(reason);previous.clearHeapNodes();}
+        if(previous!=null){previous.budget.close(reason);previous.clearHeapNodes();previous.sinkFrame=null;}
     }
 
     public static final class Session {
@@ -87,6 +91,8 @@ public final class KneekuraDebugDecisionHooks {
         private int nextActivity;
         private int activityDepth;
         private ActivityFrame activityFrame;
+        private int nextSink,sinkDepth;
+        private SinkFrame sinkFrame;
         private boolean goalCoveragePartial;
 
         public Session(Mob subject, GoalSelector goal, GoalSelector target,
@@ -95,7 +101,7 @@ public final class KneekuraDebugDecisionHooks {
                        LongSupplier time, Sink sink) throws ReflectiveOperationException {
             if(nodeLimit<1 || nodeLimit>64)throw new IllegalArgumentException("NODE_LIMIT_OUT_OF_RANGE");
             this.subject=subject;this.snapshot=snapshot;this.budget=budget;this.nodeLimit=nodeLimit;
-            if(channels==null||channels.isEmpty()||!Set.of("goal","brain","brain_activity","navigation_result","path","control","malus","sensor","mod","projectile","neighbors","effective_malus","frontier","path_nodes","path_g","path_distance").containsAll(channels))
+            if(channels==null||channels.isEmpty()||!Set.of("goal","brain","brain_activity","brain_navigation","navigation_result","path","control","malus","sensor","mod","projectile","neighbors","effective_malus","frontier","path_nodes","path_g","path_distance").containsAll(channels))
                 throw new IllegalArgumentException("INVALID_CHANNELS");
             this.channels=Set.copyOf(channels);
             this.heapNodes=channels.contains("frontier")||channels.contains("path_nodes")||channels.contains("path_g")||channels.contains("path_distance")?new IdentityHashMap<>():null;
@@ -153,6 +159,30 @@ public final class KneekuraDebugDecisionHooks {
                 budget.close("ACTIVITY_CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());return null;
             }
         }
+        private boolean sinkReady(SinkFrame frame) {
+            if(active!=this||thread!=Thread.currentThread()||!channels.contains("brain_navigation")||!matches(frame.owner()))return false;
+            try {
+                return budget.allows(currentContext.get(),time.getAsLong())&&
+                    KneekuraDebugDecisionSnapshot.read(LivingEntity.class,"brain",subject)==frame.brain()&&
+                    KneekuraDebugDecisionSnapshot.read(Mob.class,"navigation",subject)==frame.navigation()&&
+                    KneekuraDebugDecisionSnapshot.read(PathNavigation.class,"mob",frame.navigation())==subject;
+            }catch(ReflectiveOperationException|RuntimeException|LinkageError error){budget.close("SINK_CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());return false;}
+        }
+        private SinkFrame sinkBegin(MoveToTargetSink behavior,Mob owner,long gameTime,String site,SinkFrame previous) {
+            if(!matches(owner)||!channels.contains("brain_navigation")||behavior==null||behavior.getClass()!=MoveToTargetSink.class||
+                !Set.of("START_FROM_BRIDGE","TICK_FROM_BRIDGE","START_FROM_TICK").contains(site)||nextSink>=256||sinkDepth>8)return null;
+            long started=System.nanoTime();
+            try {
+                if(!budget.allows(currentContext.get(),time.getAsLong()))return null;
+                Brain<?> brain=(Brain<?>)KneekuraDebugDecisionSnapshot.read(LivingEntity.class,"brain",owner);
+                PathNavigation navigation=(PathNavigation)KneekuraDebugDecisionSnapshot.read(Mob.class,"navigation",owner);
+                if(brain==null||navigation==null||KneekuraDebugDecisionSnapshot.read(PathNavigation.class,"mob",navigation)!=owner)return null;
+                JsonObject before=sinkState(this,behavior,brain,navigation);
+                return new SinkFrame(behavior,owner,brain,navigation,"sink:"+budget.context().selectionRevision()+":"+(++nextSink),
+                    previous!=null&&previous.behavior()==behavior&&previous.owner()==owner?previous.id():null,site,gameTime,before,
+                    Math.max(0L,System.nanoTime()-started));
+            }catch(ReflectiveOperationException|RuntimeException|LinkageError error){budget.close("SINK_CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());return null;}
+        }
         private String token(Object object) {
             String token=identities.get(object);
             if(token!=null)return token;
@@ -163,6 +193,7 @@ public final class KneekuraDebugDecisionHooks {
             if(thread!=Thread.currentThread())return false;
             String channel=kind.startsWith("CONTROL_PROJECTILE_")&&channels.contains("projectile")?"projectile":
                     kind.startsWith("BRAIN_ACTIVITY_")?"brain_activity":
+                    kind.startsWith("BRAIN_PATH_")?"brain_navigation":
                     kind.equals("NAVIGATION_MOVE_TO_RETURN")?"navigation_result":
                     kind.equals("PATH_NEIGHBORS_RETURN")?"neighbors":
                     kind.equals("PATH_RETURNED_NODES")?"path_nodes":
@@ -333,6 +364,85 @@ public final class KneekuraDebugDecisionHooks {
                 data.addProperty("searchRelationStatus","NOT_EXPOSED");return data;
             });
         }catch(ReflectiveOperationException|RuntimeException|LinkageError error){session.budget.close("NAVIGATION_CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());}
+    }
+    /** Known sink bridge/restart call. The protected original delegate runs once, including OFF/throw. */
+    public static void originalSinkCall(MoveToTargetSink behavior,Mob owner,long gameTime,String site,Runnable original) {
+        Session session=active;
+        if(session==null||session.thread!=Thread.currentThread()){original.run();return;}
+        SinkFrame previous=session.sinkFrame;int previousDepth=session.sinkDepth;session.sinkDepth++;
+        try {
+            SinkFrame frame=session.sinkBegin(behavior,owner,gameTime,site,previous);
+            session.sinkFrame=frame; // Never attribute an unsupported nested call to the captured parent.
+            original.run();
+            if(frame!=null&&session.sinkReady(frame))session.record("BRAIN_PATH_SINK_RETURN","MoveToTargetSink."+site+".AFTER",()->{
+                JsonObject data=sinkData(session,frame);data.add("before",frame.before().deepCopy());
+                data.add("after",sinkState(session,behavior,frame.brain(),frame.navigation()));
+                data.addProperty("preCallObserverCostNanos",frame.preCallCost());
+                data.addProperty("beforeScope","BEFORE_ORIGINAL_CALL_AFTER_CAPTURE_GATES");
+                data.addProperty("afterScope","AFTER_ORIGINAL_RETURN_AND_CAPTURE_GATES");
+                data.addProperty("returnScope","NORMAL_ORIGINAL_VOID_RETURN_NOT_MOVEMENT_SUCCESS");return data;
+            });
+        }finally{session.sinkFrame=active==session?previous:null;session.sinkDepth=previousDepth;}
+    }
+    @SuppressWarnings({"rawtypes","unchecked"})
+    public static void originalSinkPathWrite(Brain<?> brain,MemoryModuleType<?> module,Object requested,MoveToTargetSink behavior,String site) {
+        brain.setMemory((MemoryModuleType)module,requested);
+        Session session=active;SinkFrame frame=sinkFrame(session,behavior);
+        if(frame==null||frame.brain()!=brain||module!=MemoryModuleType.PATH||!(requested==null||requested instanceof Path)||
+            !(frame.callSite().equals("TICK_FROM_BRIDGE")?"TICK_PATH_RECONCILE":"START_PATH_WRITE").equals(site))return;
+        session.record("BRAIN_PATH_MEMORY_WRITE_RETURN","MoveToTargetSink."+site+".Brain.setMemory.AFTER",()->{
+            JsonObject data=sinkData(session,frame);data.addProperty("brainClass",label(brain.getClass().getName()));
+            component(data,session,brain,"brainIdentity");var cached=session.snapshot.pathMemoryReference(brain);
+            data.add("requestedPath",session.snapshot.pathFact((Path)requested));data.add("memoryAtReturn",cached.data());
+            if(cached.known())data.addProperty("requestedMatchesCachedMemory",requested==cached.path());
+            else data.addProperty("requestedMatchesCachedMemoryStatus","NOT_EXPOSED");
+            data.addProperty("writeSite",site);data.addProperty("returnScope","ORIGINAL_VIRTUAL_PATH_MEMORY_WRITE_NORMAL_RETURN_NOT_RETENTION_SUCCESS");
+            data.addProperty("referenceScope","RAW_ARGUMENT_VS_CACHED_MEMORY_VALUE_REFERENCE_NOT_WRITE_SUCCESS");return data;
+        });
+    }
+    public static boolean originalSinkMoveTo(PathNavigation navigation,Path requested,double speed,MoveToTargetSink behavior) {
+        boolean result=navigation.moveTo(requested,speed);
+        Session session=active;SinkFrame frame=sinkFrame(session,behavior);
+        if(frame!=null&&frame.navigation()==navigation&&!frame.callSite().equals("TICK_FROM_BRIDGE"))session.record(
+            "BRAIN_PATH_NAVIGATION_RETURN","MoveToTargetSink.start.PathNavigation.moveTo.AFTER",()->{
+                JsonObject data=sinkData(session,frame);data.addProperty("navigationClass",label(navigation.getClass().getName()));
+                component(data,session,navigation,"navigationIdentity");data.addProperty("result",result);
+                finite(data,"requestedSpeed",speed);finite(data,"cachedSpeed",(Double)KneekuraDebugDecisionSnapshot.read(PathNavigation.class,"speedModifier",navigation));
+                Path cached=(Path)KneekuraDebugDecisionSnapshot.read(PathNavigation.class,"path",navigation);
+                data.addProperty("requestedMatchesCachedPath",requested==cached);JsonObject passed=session.snapshot.pathFact(requested);
+                data.add("requestedPath",passed);data.add("cachedPath",requested==cached?passed.deepCopy():session.snapshot.pathFact(cached));
+                data.add("brainPathAtReturn",session.snapshot.pathMemoryReference(frame.brain()).data());
+                data.addProperty("returnScope","ORIGINAL_VIRTUAL_MOVE_TO_RETURN_AT_SINK_CALL_SITE_NOT_ARRIVAL");
+                data.addProperty("referenceScope","RAW_ARGUMENT_VS_CACHED_PATH_REFERENCE_EQUALITY");return data;
+            });
+        return result;
+    }
+    private static SinkFrame sinkFrame(Session session,MoveToTargetSink behavior) {
+        if(session==null||session.thread!=Thread.currentThread())return null;
+        SinkFrame frame=session.sinkFrame;return frame!=null&&frame.behavior()==behavior&&session.sinkReady(frame)?frame:null;
+    }
+    private static void component(JsonObject data,Session session,Object value,String key) {
+        String token=session.token(value);data.addProperty(key,token);data.addProperty(key+"Status",token==null?"NOT_EXPOSED":"AVAILABLE");
+    }
+    private static void finite(JsonObject data,String key,double value) {
+        if(Double.isFinite(value))data.addProperty(key,value);else data.addProperty(key+"Status","NOT_EXPOSED");
+    }
+    private static JsonObject sinkData(Session session,SinkFrame frame) {
+        JsonObject data=new JsonObject();data.addProperty("sinkClass",label(frame.behavior().getClass().getName()));
+        component(data,session,frame.behavior(),"instanceIdentity");data.addProperty("sinkInvocationId",frame.id());
+        data.addProperty("parentInvocationStatus",frame.parentId()==null?"NOT_CAPTURED":"AVAILABLE");
+        if(frame.parentId()!=null)data.addProperty("parentInvocationId",frame.parentId());
+        data.addProperty("callSite",frame.callSite());data.addProperty("gameTimeArgument",Long.toString(frame.gameTime()));
+        data.addProperty("dispatchScope","ORIGINAL_KNOWN_SINK_CONCRETE_CALL_FROM_BRIDGE_OR_RESTART");
+        data.addProperty("fieldScope","BASE_CACHED_FIELDS_AT_DECLARED_CAPTURE_BOUNDARY");
+        data.addProperty("reasonStatus","NOT_EXPOSED");data.addProperty("arrivalStatus","NOT_EXPOSED");data.addProperty("searchRelationStatus","NOT_EXPOSED");return data;
+    }
+    private static JsonObject sinkState(Session session,MoveToTargetSink behavior,Brain<?> brain,PathNavigation navigation)throws ReflectiveOperationException {
+        JsonObject state=new JsonObject();state.add("sinkPath",session.snapshot.pathReferenceFact((Path)KneekuraDebugDecisionSnapshot.read(MoveToTargetSink.class,"path",behavior)));
+        state.add("brainPath",session.snapshot.pathMemoryReference(brain).data());
+        state.add("navigationPath",session.snapshot.pathReferenceFact((Path)KneekuraDebugDecisionSnapshot.read(PathNavigation.class,"path",navigation)));
+        finite(state,"sinkSpeed",(Float)KneekuraDebugDecisionSnapshot.read(MoveToTargetSink.class,"speedModifier",behavior));
+        finite(state,"navigationSpeed",(Double)KneekuraDebugDecisionSnapshot.read(PathNavigation.class,"speedModifier",navigation));return state;
     }
     /** Exact UpdateActivityFromSchedule call site. Virtual original executes once, including OFF/throw. */
     public static void originalActivityUpdate(Brain<?> brain,long day,long game) {

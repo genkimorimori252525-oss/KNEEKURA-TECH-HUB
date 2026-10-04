@@ -209,11 +209,40 @@ public final class KneekuraDebugDecisionSnapshot {
     }
 
     /** Same path namespace/256-reference budget as sampled memory, including opaque custom references. */
-    JsonObject pathFact(Path path) {
+    JsonObject pathReferenceFact(Path path) {
         JsonObject out=new JsonObject();out.addProperty("present",path!=null);
         if(path==null)return out;
         out.addProperty("className",label(path.getClass().getName()));
-        out.add("identity",reference(path,"path"));out.add("cachedFields",memoryValue(path));return out;
+        out.add("identity",reference(path,"path"));return out;
+    }
+    JsonObject pathFact(Path path) {
+        JsonObject out=pathReferenceFact(path);
+        if(path!=null)out.add("cachedFields",memoryValue(path));
+        return out;
+    }
+    record CachedPathMemory(JsonObject data,Path path,boolean known) { }
+    /** One known map slot and base wrapper fields; no Brain getter or custom map dispatch. */
+    CachedPathMemory pathMemoryReference(Brain<?> brain) {
+        try {
+            Object object=read(Brain.class,"memories",brain);
+            if(object==null||object.getClass()!=HashMap.class)
+                return new CachedPathMemory(unavailable(object==null?"NULL_MEMORY_MAP":"CUSTOM_MEMORY_MAP"),null,false);
+            Map<?,?> map=(Map<?,?>)object;boolean registered=map.containsKey(MemoryModuleType.PATH);
+            Object entry=map.get(MemoryModuleType.PATH);JsonObject out=new JsonObject();
+            out.addProperty("status","AVAILABLE");out.addProperty("registered",registered);
+            if(!registered){out.addProperty("present",false);return new CachedPathMemory(out,null,true);}
+            if(!(entry instanceof Optional<?> optional))return new CachedPathMemory(unavailable("UNEXPECTED_MEMORY_ENTRY"),null,false);
+            out.addProperty("present",optional.isPresent());
+            if(optional.isEmpty())return new CachedPathMemory(out,null,true);
+            Object wrapper=optional.get();
+            if(wrapper.getClass()!=ExpirableValue.class)return new CachedPathMemory(unavailable("CUSTOM_MEMORY_WRAPPER"),null,false);
+            Object value=read(ExpirableValue.class,"value",wrapper);
+            if(!(value instanceof Path path))return new CachedPathMemory(unavailable("NON_PATH_MEMORY_VALUE"),null,false);
+            out.addProperty("timeToLive",Long.toString((Long)read(ExpirableValue.class,"timeToLive",wrapper)));
+            out.add("path",pathReferenceFact(path));return new CachedPathMemory(out,path,true);
+        }catch(ReflectiveOperationException|RuntimeException|LinkageError error){
+            return new CachedPathMemory(unavailable("MEMBER_UNAVAILABLE:"+error.getClass().getSimpleName()),null,false);
+        }
     }
 
     /** Same bounded allocator as Goals; these tokens never equal the Hooks component allocator. */
