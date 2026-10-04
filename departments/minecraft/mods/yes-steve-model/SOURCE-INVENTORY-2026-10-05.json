@@ -10,10 +10,28 @@
     "minecraft": "1.20.1",
     "loader": "Forge",
     "environment": "client_and_server",
-    "file_size_display": "5.02 MB",
+    "file_size_display": "5.02 MB (page display; not binary identity)",
     "license_display": "ARR",
-    "sha256": null,
-    "source_equivalence": "NOT_ESTABLISHED"
+    "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+    "source_equivalence": "NOT_ESTABLISHED",
+    "exact_size_bytes": 63269843,
+    "sha1": "151ac7b24da8beeca1a20864565743cfd77af286",
+    "binary_identity": "EXACT_OFFICIAL_MODRINTH_ARTIFACT",
+    "exact_scan": {
+      "zip_entries": 1853,
+      "class_files": 955,
+      "ysm_class_files": 955,
+      "classfile_major": 61,
+      "latest_contract": {
+        "mappings": 210,
+        "class_targets": 83,
+        "exact_methods": 122,
+        "exact_fields": 5,
+        "failures": 0
+      },
+      "jar_committed": false,
+      "jar_retained": false
+    }
   },
   "release_line_source_candidate": {
     "repository": "YesSteveModel/YesSteveModel",
@@ -182,10 +200,18 @@
     "chinese_public_community": {
       "role": "RECONNAISSANCE_AND_SECONDARY_COMPATIBILITY_EVIDENCE",
       "note": "Chinese-speaking public YSM technical work is substantial across compatibility mods, MC百科, official issue logs, and reverse-engineering reports. Only Java structural/compatibility findings and high-level architecture are retained; protection-bypass/decryption procedures are excluded."
+    },
+    "exact_jar_structural_scan": {
+      "provider": "Modrinth",
+      "version_id": "Zqooxsd2",
+      "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+      "role": "PRIMARY_EXACT_DISTRIBUTED_ARTIFACT_STRUCTURAL_EVIDENCE",
+      "scanner": "departments/minecraft/mods/yes-steve-model/tools/scan_ysm_265.py",
+      "note": "Exact JAR used only in temporary CI storage; structural hashes/descriptors and bounded registration bytecode were retained, not the JAR."
     }
   },
   "evidence_status": {
-    "2.6.5_release_binary_identity": "DISTRIBUTION_METADATA_ONLY_SHA_NOT_CAPTURED",
+    "2.6.5_release_binary_identity": "EXACT_SHA256_ANCHORED",
     "2.6.5_release_line_source_tree": "FULL_TREE_INVENTORIED_SOURCE_CANDIDATE",
     "3.0_dev_source_tree": "FULL_TREE_INVENTORIED",
     "per_entity_animation_runtime": "EVIDENCE_BACKED",
@@ -208,22 +234,27 @@
     "model_distribution_native_wire_protocol": "OPAQUE_NOT_ANALYZED",
     "client_build_progress_wedge_hazard": "DIRECT_SOURCE_STATIC_HAZARD_NOT_RUNTIME_CONFIRMED",
     "issue_444_root_cause": "UNKNOWN",
-    "java_obfuscation_map_2_6_5": "55_MAPPINGS_22_CONFIRMED_33_HIGH_PUBLIC_CROSS_REFERENCE",
+    "java_obfuscation_map_2_6_5": "210_MAPPINGS_183_CONFIRMED_27_HIGH_EXACT_JAR_CONTRACT_0_FAILURES",
     "obfuscated_native_lib_bootstrap": "HIGH_CONFIDENCE",
     "obfuscated_capability_provider": "CONFIRMED_PUBLIC_ACTUAL_JAR_CROSS_REFERENCE",
     "obfuscated_native_renderer_bridge": "CONFIRMED_PUBLIC_ACTUAL_JAR_DESCRIPTOR",
     "obfuscated_render_event_hooks": "CONFIRMED_PUBLIC_ACTUAL_JAR_DESCRIPTOR",
     "obfuscated_preview_paperdoll_path": "HIGH_WITH_SOURCE_ARTIFACT_DIVERGENCE",
     "complete_obfuscation_map": "NOT_COMPLETE",
-    "distributed_jar_local_structural_scan": "NOT_PERFORMED_BINARY_ACQUISITION_UNAVAILABLE_IN_SESSION",
+    "distributed_jar_local_structural_scan": "COMPLETED_IN_CI_EXACT_OFFICIAL_ARTIFACT_JAR_NOT_RETAINED",
     "native_protection_internals": "OUT_OF_SCOPE",
-    "obfuscated_bone_alias_surface": "23_HIGH_SEMANTIC_ALIASES_OWNER_UNRESOLVED",
+    "obfuscated_bone_alias_surface": "RESOLVED_EXACT_JAR_IBONE_AND_ANIMATED_GEOBONE",
     "tacz_obfuscated_surface": "HIGH_ACTUAL_2_6_5_COMPAT_WITH_SOURCE_ARTIFACT_DIVERGENCE",
     "carryon_obfuscated_predicate": "CONFIRMED",
     "jade_obfuscated_plugin": "CONFIRMED",
     "custom_player_renderer_obfuscated_class": "CONFIRMED",
     "config_screen_obfuscated_class": "CONFIRMED",
-    "chinese_community_recon": "EVIDENCE_BACKED_PUBLIC_SOURCES"
+    "chinese_community_recon": "EVIDENCE_BACKED_PUBLIC_SOURCES",
+    "molang_context_interface": "CONFIRMED_EXACT_JAR",
+    "molang_binding_functions": "CONFIRMED_EXACT_JAR_BOUNDED_BYTECODE",
+    "animation_controller_core": "CONFIRMED_EXACT_JAR_WITH_SOURCE_ARTIFACT_DIVERGENCE",
+    "network_message_registration": "CONFIRMED_EXACT_JAR_IDS_1_9_15_19_21_23_51_52",
+    "network_sync_bytebuffer_envelopes": "CONFIRMED_EXACT_JAR_JAVA_TRANSPORT_NATIVE_PROTOCOL_STILL_OPAQUE"
   },
   "safety_and_provenance_boundaries": [
     "No VMProtect/native protection bypass.",
