@@ -54,6 +54,38 @@
       "ctrl_functions": 9,
       "ctrl_constants": 7,
       "tlm_variables": 16
+    },
+    "network_surface": {
+      "forge_channel_version": "2.6.0",
+      "registered_message_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        15,
+        16,
+        17,
+        18,
+        19,
+        21,
+        22,
+        23,
+        51,
+        52
+      ],
+      "client_sync_states": [
+        "WAITING",
+        "LOADING",
+        "IDLE",
+        "PREPARING",
+        "SYNCING"
+      ],
+      "native_source_in_historical_tree": false
     }
   },
   "frontier": {
@@ -126,7 +158,12 @@
     "molang_surface_inventory": "EVIDENCE_BACKED_STATIC",
     "tlm_capability_renderer_controller_bridge": "EVIDENCE_BACKED_STATIC",
     "tlm_roaming_variable_parity": "NOT_ESTABLISHED_TODO_IN_SOURCE",
-    "non_player_entity_presentation_wrapper": "EVIDENCE_BACKED_TLM"
+    "non_player_entity_presentation_wrapper": "EVIDENCE_BACKED_TLM",
+    "model_distribution_handshake": "EVIDENCE_BACKED_STATIC",
+    "model_distribution_java_jni_boundary": "EVIDENCE_BACKED_STATIC",
+    "model_distribution_native_wire_protocol": "OPAQUE_NOT_ANALYZED",
+    "client_build_progress_wedge_hazard": "DIRECT_SOURCE_STATIC_HAZARD_NOT_RUNTIME_CONFIRMED",
+    "issue_444_root_cause": "UNKNOWN"
   },
   "safety_and_provenance_boundaries": [
     "No VMProtect/native protection bypass.",
