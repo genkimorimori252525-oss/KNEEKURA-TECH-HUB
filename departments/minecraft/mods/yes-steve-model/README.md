@@ -125,7 +125,11 @@ A bounded public-evidence pass now recovers a useful subset of the distributed 2
 - final Java/native renderer bridge;
 - player/arm/background render hooks;
 - vehicle/projectile/fishing-hook replacement helpers;
-- paperdoll/preview render path.
+- paperdoll/preview render path;
+- Carry On and Jade integration anchors;
+- TaCZ binding/render/animation seams;
+- core animatable/render-layer semantic types;
+- a separate unresolved-owner bone accessor surface.
 
 The mapping is keyed by **owner + member + JVM descriptor** because YSM reuses the same obfuscated
 member strings across unrelated methods and fields.
@@ -133,6 +137,8 @@ member strings across unrelated methods and fields.
 The machine-readable map deliberately keeps distributed-artifact observations separate from the
 version-matched public source candidate. This exposed concrete source/artifact divergence around the
 preview/paperdoll renderer instead of silently forcing them to agree.
+
+The current machine-readable map contains **55** owner/member mappings (**22 CONFIRMED / 33 HIGH**) plus separate unresolved-owner alias surfaces. Public Chinese-speaking compatibility projects were especially useful because several validate exact 2.6.5 JAR descriptors or prove hooks at runtime.
 
 Protected native internals remain out of scope.
 
@@ -154,6 +160,7 @@ Protected native internals remain out of scope.
 - [MODEL-DISTRIBUTION-2026-10-05.md](MODEL-DISTRIBUTION-2026-10-05.md)
 - [OBFUSCATION-RESEARCH-2026-10-05.md](OBFUSCATION-RESEARCH-2026-10-05.md)
 - [OBFUSCATION-MAP-2026-10-05.json](OBFUSCATION-MAP-2026-10-05.json)
+- [CHINESE-COMMUNITY-OBFUSCATION-RECON-2026-10-05.md](CHINESE-COMMUNITY-OBFUSCATION-RECON-2026-10-05.md)
 - [FAILURE-REPAIR-HISTORY.md](FAILURE-REPAIR-HISTORY.md)
 - [RECONNAISSANCE-2026-10-05.md](RECONNAISSANCE-2026-10-05.md)
 - [SOURCE-INVENTORY-2026-10-05.json](SOURCE-INVENTORY-2026-10-05.json)
