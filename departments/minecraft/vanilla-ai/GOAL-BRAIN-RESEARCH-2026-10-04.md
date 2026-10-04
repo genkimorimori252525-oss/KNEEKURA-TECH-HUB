@@ -6,7 +6,7 @@ This addresses the named Goal and Brain research in [original sections B2/B3](..
 
 ## Evidence and reproducibility
 
-The [additive ledger](GOAL-BRAIN-BYTECODE-LEDGER-2026-10-04.json) records 26 exact class identities, 204 selected method locators and 27 field locators. It shares these immutable identities with the original [60-class ledger](ANCHOR-BYTECODE-LEDGER-2026-10-03.json) and [Foundation Map](../vanilla-foundation/LOCAL-GENERATION-2026-10-03.md):
+The [additive ledger](GOAL-BRAIN-BYTECODE-LEDGER-2026-10-04.json) records 26 exact class identities, 204 selected method locators and 27 field locators. It shares these immutable identities with the original [61-class ledger](ANCHOR-BYTECODE-LEDGER-2026-10-03.json) and [Foundation Map](../vanilla-foundation/LOCAL-GENERATION-2026-10-03.md):
 
 | Item | Identity |
 | --- | --- |
