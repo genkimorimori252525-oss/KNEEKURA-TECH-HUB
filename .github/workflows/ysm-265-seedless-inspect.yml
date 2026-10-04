@@ -1,0 +1,59 @@
+name: YSM seedless component inspect
+
+on:
+  push:
+    branches: ["jolly/research-ysm-2026-10-05"]
+    paths:
+      - '.github/workflows/ysm-265-seedless-inspect.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Fetch exact official artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p seedless-evidence
+          URL='https://cdn.modrinth.com/data/86xjpqqS/versions/Zqooxsd2/ysm-2.6.5-forge%2Bmc1.20.1-release.jar'
+          curl --fail --location --retry 3 --max-time 180 "$URL" -o "$RUNNER_TEMP/ysm-2.6.5.jar"
+          echo '25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f  '"$RUNNER_TEMP/ysm-2.6.5.jar" | sha256sum --check
+      - name: Inspect resources and selected seedless classes
+        shell: bash
+        run: |
+          set -euo pipefail
+          jar tf "$RUNNER_TEMP/ysm-2.6.5.jar" | grep -Ev '\\.class$' | sort > seedless-evidence/resources.txt
+          for cls in \
+            com.elfmcys.yesstevemodel.o0o0o0oOooOO0OOOOO00O0O0 \
+            com.elfmcys.yesstevemodel.O0OoOoOo0OOooOo000o00oOo \
+            com.elfmcys.yesstevemodel.OoOO0oooooo00O0oOooOo0oO \
+            com.elfmcys.yesstevemodel.o0O0OOo0oOOoO0oOO0OO00O0 \
+            com.elfmcys.yesstevemodel.oOoO00O0O0ooOoOoOOo0oO0O \
+            com.elfmcys.yesstevemodel.oO00O00OooO00OoOOoo0oooO
+          do
+            safe=$(printf '%s' "$cls" | tr '.' '_')
+            javap -classpath "$RUNNER_TEMP/ysm-2.6.5.jar" -verbose -p "$cls" > "seedless-evidence/javap-$safe.txt"
+          done
+          echo 'KNEEKURA_RESOURCES_BEGIN'
+          grep -Ei 'license|notice|service|native|compress|codec|lz4|zstd|xz|png|json|proto|jna|asm|maven|ogg|vorbis|audio|image' seedless-evidence/resources.txt | head -300 || true
+          echo 'KNEEKURA_RESOURCES_END'
+          echo 'KNEEKURA_SEEDLESS_BEACONS_BEGIN'
+          grep -H -E 'SourceFile:|Utf8 +[^<>].*(compress|decompress|cipher|decode|encode|stream|archive|image|matrix|vector|checksum|crc|inflate|deflate|lz|zstd|xz|png|jpeg|wave|ogg|vorbis|huffman|range|arithmetic)' seedless-evidence/javap-*.txt | head -600 || true
+          echo 'KNEEKURA_SEEDLESS_BEACONS_END'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ysm-seedless-${{ github.sha }}
+          path: seedless-evidence/
+          retention-days: 7
