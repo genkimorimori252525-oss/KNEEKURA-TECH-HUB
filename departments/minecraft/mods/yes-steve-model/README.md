@@ -6,7 +6,7 @@
 - Primary adaptation anchor: Minecraft **1.20.1 + Forge**
 - Distributed target: **2.6.5-forge+mc1.20.1**
 - Main focus: model runtime, Molang, animation controllers, per-entity state, rendering, model distribution and integration seams
-- Research status: **FOUNDATION_ARCHITECTURE_MAPPED / JAVA_OBFUSCATION_PARTIALLY_RECOVERED**
+- Research status: **EXACT_JAR_ANCHORED / 955_CLASS_FOUNDATION_MAPPED / JAVA_OBFUSCATION_PARTIALLY_RECOVERED**
 - Whole-target status: **IN_PROGRESS / NOT COMPLETE**
 - Research date: 2026-10-05
 
@@ -142,11 +142,14 @@ The machine-readable map deliberately keeps distributed-artifact observations se
 version-matched public source candidate. This exposed concrete source/artifact divergence around the
 preview/paperdoll renderer instead of silently forcing them to agree.
 
-The current machine-readable map contains **210** mappings (**183 CONFIRMED / 27 HIGH**).
-Every recorded owner/member/descriptor contract passes against the exact official JAR: 83 class
-targets, 122 exact methods and 5 exact fields, with **0 failures**. Bone ownership, Molang context,
-binding/functions, animation-controller core and the Java network registration table are now
-exact-artifact-backed.
+The current machine-readable map contains **232** mappings (**205 CONFIRMED / 27 HIGH**).
+Every recorded owner/member/descriptor contract passes against the exact official JAR: **97 class
+targets, 130 exact methods and 5 exact fields, with 0 failures**. The whole-JAR Foundation Map covers
+**955 / 955 classes**. Two large formerly-UNKNOWN islands are now separated as bundled **Concentus
+(131 classes)** and **Gagravarr/VorbisJava (86 classes)**; only **15 degree-0 singleton classes** remain
+UNKNOWN.
+
+A whole-JAR Foundation Map now classifies the exact Java artifact by structural domain. The strongest mapped hubs are `IContext` (degree 103), `PlayerAnimatableCapability` (57), `YSMBinding` (48), `NetworkHandler` (47), `AnimatableEntity` (41) and `CtrlBinding` (40). The strongest cross-domain seam is **CAPABILITY ↔ NETWORK (116 internal edges)**.
 
 Protected native internals remain out of scope.
 
@@ -168,6 +171,8 @@ Protected native internals remain out of scope.
 - [OBFUSCATION-RESEARCH-2026-10-05.md](OBFUSCATION-RESEARCH-2026-10-05.md)
 - [OBFUSCATION-MAP-2026-10-05.json](OBFUSCATION-MAP-2026-10-05.json)
 - [EXACT-JAR-STRUCTURAL-SCAN-2026-10-05.md](EXACT-JAR-STRUCTURAL-SCAN-2026-10-05.md)
+- [FOUNDATION-MAP-2026-10-05.md](FOUNDATION-MAP-2026-10-05.md)
+- [FOUNDATION-MAP-INDEX-2026-10-05.json](FOUNDATION-MAP-INDEX-2026-10-05.json)
 - [CHINESE-COMMUNITY-OBFUSCATION-RECON-2026-10-05.md](CHINESE-COMMUNITY-OBFUSCATION-RECON-2026-10-05.md)
 - [FAILURE-REPAIR-HISTORY.md](FAILURE-REPAIR-HISTORY.md)
 - [RECONNAISSANCE-2026-10-05.md](RECONNAISSANCE-2026-10-05.md)
