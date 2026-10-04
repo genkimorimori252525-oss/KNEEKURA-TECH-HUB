@@ -1,0 +1,117 @@
+{
+  "format": "kneekura.target-source-inventory.v1",
+  "target": "Yes Steve Model (YSM)",
+  "focus": "player/entity model runtime, Molang/controller animation, rendering, model distribution, integrations",
+  "recorded_at": "2026-10-05",
+  "distributed_anchor": {
+    "provider": "Modrinth",
+    "version_id": "Zqooxsd2",
+    "version": "2.6.5-forge+mc1.20.1",
+    "minecraft": "1.20.1",
+    "loader": "Forge",
+    "environment": "client_and_server",
+    "file_size_display": "5.02 MB",
+    "license_display": "ARR",
+    "sha256": null,
+    "source_equivalence": "NOT_ESTABLISHED"
+  },
+  "release_line_source_candidate": {
+    "repository": "YesSteveModel/YesSteveModel",
+    "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+    "tree": "da392147cdba57b734aa18e25674745291d7f24a",
+    "date": "2026-04-18T17:39:33Z",
+    "source_declared_version": "2.6.5-forge+mc1.20.1",
+    "relationship": "VERSION_MATCHED_RELEASE_LINE_SOURCE_CANDIDATE",
+    "exact_binary_source_match": "NOT_ESTABLISHED",
+    "tree_inventory": {
+      "truncated": false,
+      "entries": 1888,
+      "blobs": 1513,
+      "java_files": 828,
+      "markdown_files": 0,
+      "json_files": 379,
+      "main_resource_blobs": 669,
+      "test_blobs": 0
+    },
+    "provenance_notes": [
+      "e1413f7 changes gradle.properties from 2.6.4 to 2.6.5",
+      "fb23351 is the next runtime/content fix on the 2.6.5 line",
+      "f184eda adds a Fast DEV build task while preserving mod_version 2.6.5",
+      "historical tree has no root LICENSE file; do not infer current Apache-2.0 terms for this historical snapshot"
+    ]
+  },
+  "frontier": {
+    "repository": "YesSteveModel/YesSteveModel",
+    "branch": "dev/1.20",
+    "revision": "74c53b58b2f9b680a6c6dc5d5d41e7422fc000bb",
+    "tree": "6cb3ff6224bd19f76481dd59f40807e0c98da5ec",
+    "date": "2026-09-20T17:10:41Z",
+    "source_declared_version": "3.0-dev-forge+mc1.20.1",
+    "repository_license": "Apache-2.0",
+    "tree_inventory": {
+      "truncated": false,
+      "entries": 2712,
+      "blobs": 2075,
+      "java_files": 1140,
+      "proto_files": 55,
+      "markdown_files": 155,
+      "json_files": 380,
+      "test_blobs": 148,
+      "main_java_files": 958,
+      "docs_blobs": 182
+    }
+  },
+  "comparative_tracks": {
+    "ysm_mapping_api": {
+      "repository": "sakuraimikoto33/YSM-Mapping-API",
+      "branch": "mc/1.20.1",
+      "revision": "6a01cdfec45623e39bc7fd890e91066e3507666c",
+      "date": "2026-09-11T11:12:59Z",
+      "role": "SECONDARY_STRUCTURAL_ANALYSIS_TECHNIQUE",
+      "tree": {
+        "entries": 265,
+        "blobs": 142,
+        "java_files": 83,
+        "test_blobs": 22
+      },
+      "restrictions": "Do not store private YSM jars or private analysis outputs; use public analyzer design only."
+    },
+    "ysm_epicfight_compat": {
+      "repository": "sakuraimikoto33/YSM-EpicFight-Compat",
+      "revision": "16d9a81b4ccbea6c6e9867272121c016d22d7ac2",
+      "date": "2026-09-12T09:55:19Z",
+      "role": "SECONDARY_INTEGRATION_SEAM_REFERENCE"
+    },
+    "openysm": {
+      "repository": "OpenYSM/OpenYSM",
+      "branch": "1.20.1-forge",
+      "revision": "a515d44686af77155a311b2a592327ca5d45a658",
+      "date": "2026-08-02T08:14:34Z",
+      "role": "COMPARATIVE_ONLY",
+      "implementation_truth": "NOT_ACCEPTED_FOR_OFFICIAL_YSM_CLAIMS",
+      "note": "Project materials discuss prior decryption/reverse-rendering work; KNEEKURA does not reproduce protected-bypass methods."
+    }
+  },
+  "evidence_status": {
+    "2.6.5_release_binary_identity": "DISTRIBUTION_METADATA_ONLY_SHA_NOT_CAPTURED",
+    "2.6.5_release_line_source_tree": "FULL_TREE_INVENTORIED_SOURCE_CANDIDATE",
+    "3.0_dev_source_tree": "FULL_TREE_INVENTORIED",
+    "per_entity_animation_runtime": "EVIDENCE_BACKED",
+    "molanq_task_queue": "EVIDENCE_BACKED",
+    "coded_bedrock_hybrid_controllers": "EVIDENCE_BACKED",
+    "visibility_distance_animation_throttling": "EVIDENCE_BACKED_2_6_5_SOURCE_CANDIDATE",
+    "native_render_boundary_2_6_5": "EVIDENCE_BACKED_JAVA_JNI_BOUNDARY_NATIVE_INTERNALS_NOT_ESTABLISHED",
+    "bake_extract_render_frontier": "EVIDENCE_BACKED_FRONTIER_ONLY",
+    "exact_connection_session_frontier": "EVIDENCE_BACKED_FRONTIER_ONLY",
+    "touhou_little_maid_integration": "EVIDENCE_BACKED",
+    "runtime_performance": "NOT_ANALYZED",
+    "distributed_binary_source_equivalence": "NOT_ESTABLISHED",
+    "protected_native_or_model_encryption_internals": "OUT_OF_SCOPE"
+  },
+  "safety_and_provenance_boundaries": [
+    "No VMProtect/native protection bypass.",
+    "No encrypted-model circumvention or decryption recipe.",
+    "No private YSM JAR, mapping output, or decrypted artifact is committed.",
+    "Community and Reddit material seeds hypotheses only; it never promotes a claim without source/history/runtime evidence."
+  ]
+}
