@@ -526,3 +526,51 @@ For KNEEKURA, the more durable asset is not the current literal `Oo0o...` dictio
 
 It is the **descriptor/structure-first resolver** that can regenerate the semantic map when those
 names change.
+
+
+## 17. Chinese-speaking community expansion
+
+A second public-evidence pass expanded the machine-readable map from **26** to **55** owner/member
+mappings.
+
+Current audited distribution:
+
+- **22 CONFIRMED**
+- **33 HIGH**
+- **0 duplicate owner + member + descriptor keys**
+- **20 explicit SOURCE_ARTIFACT_DIVERGENCE mappings**
+- **0 diverged mapping promoted to CONFIRMED**
+
+New high-value areas include:
+
+- Carry On compatibility;
+- YSM Jade plugin;
+- ConfigScreen;
+- CustomPlayerRenderer;
+- TaCZ binding, transform and animation handlers;
+- GeoEntityRenderer / GeoReplacedEntityRenderer;
+- CustomPlayerItemInHandLayer;
+- actual-artifact AnimatableEntity / LivingAnimatable / AnimatedGeoModel semantic roles.
+
+A separate unresolved-owner alias surface records **23** public animated-bone accessors. These are not
+inflated into owner mappings until the concrete runtime bone class is independently identified.
+
+The strongest maintenance lesson from the Chinese-speaking compatibility projects is to use two
+verification layers:
+
+~~~text
+exact supported JAR
+    -> ASM name + full descriptor contract
+
+then
+
+relevant runtime context
+    -> expected hook entered / not entered diagnostic
+~~~
+
+This catches both stale descriptors and "method exists but the intended runtime path never fires".
+
+See:
+
+- [CHINESE-COMMUNITY-OBFUSCATION-RECON-2026-10-05.md](CHINESE-COMMUNITY-OBFUSCATION-RECON-2026-10-05.md)
+- [OBFUSCATION-MAP-2026-10-05.json](OBFUSCATION-MAP-2026-10-05.json)
