@@ -1,4 +1,5 @@
 import twilightForestAnchor from './adapters/twilightforest-anchor.json' with {type:'json'};
+import {validSnapshotReference,validCachedPathData,incompleteCachedFields} from './cached-path-contract.mjs';
 
 const KINDS = Object.freeze({
   MOD_COORDINATION_RETURN: ['EXECUTION','mod_coordination'],
@@ -11,6 +12,7 @@ const KINDS = Object.freeze({
   BRAIN_ACTIVITY_REQUIREMENTS_RETURN: ['EVALUATION','brain_activity'],
   BRAIN_ACTIVITY_SET_RETURN: ['EXECUTION','brain_activity'],
   BRAIN_ACTIVITY_UPDATE_RETURN: ['EXECUTION','brain_activity'],
+  NAVIGATION_MOVE_TO_RETURN: ['EXECUTION','navigation_move_to'],
   BEHAVIOR_TRY_START_RETURN: ['EVALUATION','behavior_execution'],
   BEHAVIOR_TICK_OR_STOP_RETURN: ['EXECUTION','behavior_execution'],
   BEHAVIOR_STOP_RETURN: ['EXECUTION','behavior_execution'],
@@ -292,7 +294,48 @@ function validActivityData(kind,d,record) {
     typeof d.result==='boolean'&&d.returnScope==='ORIGINAL_REGISTERED_MEMORY_REQUIREMENTS_RETURN':
     d.returnScope==='NORMAL_PRIVATE_SETTER_RETURN_NOT_SWITCH_SUCCESS');
 }
+function validNavigationReturn(d,record) {
+  const revision=record.payload.targetRevision;
+  const exact=(v,keys)=>object(v)&&Object.keys(v).length===keys.length&&Object.keys(v).every(k=>keys.includes(k));
+  const reference=ref=>validSnapshotReference(ref,revision,'path')&&exact(ref,
+    ['status','allocator','targetRevision',ref.status==='AVAILABLE'?'token':'detail']);
+  const equal=(a,b)=>object(a)?object(b)&&Object.keys(a).length===Object.keys(b).length&&Object.keys(a).every(k=>equal(a[k],b[k])):
+    Array.isArray(a)?Array.isArray(b)&&a.length===b.length&&a.every((v,i)=>equal(v,b[i])):a===b;
+  const path=p=>{
+    if(p?.present===false)return exact(p,['present']);
+    if(p?.present!==true||!exact(p,['present','className','identity','cachedFields'])||!text(p.className)||!reference(p.identity))return false;
+    const value=p.cachedFields;
+    if(value?.status==='NOT_EXPOSED')return (exact(value,['className','status'])&&value.className===p.className&&
+      p.className!=='net.minecraft.world.level.pathfinder.Path')||(exact(value,['status','detail'])&&
+      typeof value.detail==='string'&&value.detail.startsWith('MEMBER_UNAVAILABLE:'));
+    return p.className==='net.minecraft.world.level.pathfinder.Path'&&exact(value,['status','className','encoding','kind','data'])&&
+      value.className===p.className&&value.encoding==='TYPED_CACHED_MEMORY_V1'&&value.kind==='PATH'&&
+      ['AVAILABLE','PARTIAL'].includes(value.status)&&validCachedPathData(value.data)&&reference(value.data.instanceIdentity)&&
+      equal(value.data.instanceIdentity,p.identity)&&(value.status!=='AVAILABLE'||!incompleteCachedFields(value.data));
+  };
+  const speed=key=>Number.isFinite(d[key])?d[key+'Status']===undefined:d[key]===undefined&&d[key+'Status']==='NOT_EXPOSED';
+  const component=d.instanceIdentityStatus==='AVAILABLE'?typeof d.instanceIdentity==='string'&&
+    new RegExp('^component:'+revision+':([1-9][0-9]{0,2})$').test(d.instanceIdentity)&&Number(d.instanceIdentity.split(':').at(-1))<=128:
+    d.instanceIdentityStatus==='NOT_EXPOSED'&&d.instanceIdentity==null;
+  const keys=['navigationClass','instanceIdentityStatus',...(d.instanceIdentity==null?[]:['instanceIdentity']),'result',
+    Number.isFinite(d.requestedSpeed)?'requestedSpeed':'requestedSpeedStatus',Number.isFinite(d.cachedSpeed)?'cachedSpeed':'cachedSpeedStatus',
+    'requestedMatchesCachedPath','requestedPath','cachedPath','dispatchScope','fieldScope','resultScope','referenceScope',
+    'reasonStatus','arrivalStatus','searchRelationStatus'];
+  if(!exact(d,keys)||!text(d.navigationClass)||!component||typeof d.result!=='boolean'||!speed('requestedSpeed')||!speed('cachedSpeed')||
+    typeof d.requestedMatchesCachedPath!=='boolean'||!path(d.requestedPath)||!path(d.cachedPath)||
+    d.dispatchScope!=='BASE_PATHNAVIGATION_NORMAL_RETURN_NOT_FINAL_CUSTOM_OVERRIDE'||
+    d.fieldScope!=='BASE_NAVIGATION_AND_EXACT_PATH_CACHED_FIELDS_AFTER_RETURN_AND_CAPTURE_GATES'||
+    d.resultScope!=='ORIGINAL_BASE_METHOD_BOOLEAN_NOT_ARRIVAL'||d.referenceScope!=='RAW_ARGUMENT_VS_CACHED_PATH_REFERENCE_EQUALITY'||
+    !['reasonStatus','arrivalStatus','searchRelationStatus'].every(k=>d[k]==='NOT_EXPOSED'))return false;
+  const requested=d.requestedPath,cached=d.cachedPath;
+  if(d.requestedMatchesCachedPath)return equal(requested,cached);
+  if(!requested.present&&!cached.present)return false;
+  // Unavailable IDs cannot establish equality; the raw source boolean stays separate.
+  return !requested.present||!cached.present||requested.identity.status!=='AVAILABLE'||cached.identity.status!=='AVAILABLE'||
+    requested.identity.token!==cached.identity.token;
+}
 function validData(kind,d,record) {
+  if(kind==='NAVIGATION_MOVE_TO_RETURN')return validNavigationReturn(d,record);
   if(kind.startsWith('BRAIN_ACTIVITY_'))return validActivityData(kind,d,record);
   if (kind === 'MOD_COORDINATION_RETURN') return validKnightCoordination(d,record);
   if (kind === 'PATH_NEIGHBORS_RETURN') return validNeighborReturn(d);

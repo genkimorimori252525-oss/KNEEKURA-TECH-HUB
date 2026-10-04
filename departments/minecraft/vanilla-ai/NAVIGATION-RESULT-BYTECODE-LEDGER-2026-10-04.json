@@ -1,0 +1,98 @@
+{
+  "schema": "kneekura.original-navigation-result-source/v1",
+  "scope": "EXACT_BASE_NAVIGATION_ORIGINAL_RETURN_AND_CACHED_FIELDS_NOT_FINAL_CUSTOM_RESULT_OR_ARRIVAL",
+  "minecraft": "1.20.1",
+  "forge": "47.2.0",
+  "namespace": "Mojmap",
+  "minecraft_artifact_sha256": "1b6e6a166fbc06c6d2422cd5cf515a508977479045095363d5b4c8b89cc7b4eb",
+  "disassembly_provider": {
+    "name": "jdk-javap-v1",
+    "options": [
+      "-private",
+      "-s",
+      "-c",
+      "-l",
+      "-verbose"
+    ],
+    "executable_hash": "bd5a9f99365fd432f79162f4ed9ca9b956c78cc81dfb6962adb6d207075711fb",
+    "jdk_components": {
+      "release": "00d3211a59bc9f2577f93962e9210de8578c49fd2625022cb38606817d3a71f9",
+      "lib/modules": "81f0e1bb87cd303ddcce2b216e27da416bd20799d9a9811ea1b070123cefff0f"
+    },
+    "jdk_image_status": "HASHED"
+  },
+  "classes": [
+    {
+      "owner": "net/minecraft/world/entity/ai/navigation/PathNavigation",
+      "class_hash": "78346d21ea9ba13ddbc7211666f3a80b54d773a864203922bb71d336b4dac2ac",
+      "disassembly_hash": "0322906326eaa641c89f534b772402fb67057e573b1e70c6f5bd2b0636793b58",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/brain-result-r50-source/PathNavigation.javap.txt",
+      "selected_members": [
+        {
+          "kind": "FIELD",
+          "name": "mob",
+          "descriptor": "Lnet/minecraft/world/entity/Mob;",
+          "line_start": 670,
+          "line_end": 673,
+          "slice_sha256": "593f8585dde30248bb603016407a5cf0f7d396a54bba7610406e422abcd48cfd"
+        },
+        {
+          "kind": "FIELD",
+          "name": "path",
+          "descriptor": "Lnet/minecraft/world/level/pathfinder/Path;",
+          "line_start": 678,
+          "line_end": 684,
+          "slice_sha256": "1c4f22575aacf668af1edeaeab26fabf787b95fb68e7ad1dfa9363f43e651c70"
+        },
+        {
+          "kind": "FIELD",
+          "name": "speedModifier",
+          "descriptor": "D",
+          "line_start": 685,
+          "line_end": 688,
+          "slice_sha256": "50b3a8b697b16d7147d38ce3c1e26635a8e6103b716332f954fd6853553dfb4f"
+        },
+        {
+          "kind": "METHOD",
+          "name": "moveTo",
+          "descriptor": "(DDDD)Z",
+          "line_start": 1300,
+          "line_end": 1324,
+          "slice_sha256": "82a78a7e03aee77fe3cf0361e5fa3a6208c75aedf9aebd8077bcda52ef840b83"
+        },
+        {
+          "kind": "METHOD",
+          "name": "moveTo",
+          "descriptor": "(Lnet/minecraft/world/entity/Entity;D)Z",
+          "line_start": 1325,
+          "line_end": 1361,
+          "slice_sha256": "85877047f1ee3f175206a24112f5cada4fb049dd626a7875261120509210745a"
+        },
+        {
+          "kind": "METHOD",
+          "name": "moveTo",
+          "descriptor": "(Lnet/minecraft/world/level/pathfinder/Path;D)Z",
+          "line_start": 1362,
+          "line_end": 1442,
+          "slice_sha256": "0836b0dcc0bcc08908d8770ec64f33c2df07e20c5b6fd59bee8bf6d24841a782"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/Mob",
+      "class_hash": "81e6715b2f1a722c868e89984b64088932143f2164f40009ea128323dd6a0a8d",
+      "disassembly_hash": "c72f9fe9a1efc95cb4bc4ca627dd4c872ea708aa34b88b509de4379edc68d2d1",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/brain-result-r50-source/Mob.javap.txt",
+      "selected_members": [
+        {
+          "kind": "FIELD",
+          "name": "navigation",
+          "descriptor": "Lnet/minecraft/world/entity/ai/navigation/PathNavigation;",
+          "line_start": 2252,
+          "line_end": 2255,
+          "slice_sha256": "db278f10125aacb7b8ae3c1d036f8b8356c45ccc59b990ccaeb4bf5402b2b644"
+        }
+      ]
+    }
+  ]
+}

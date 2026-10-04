@@ -208,6 +208,14 @@ public final class KneekuraDebugDecisionSnapshot {
         return out;
     }
 
+    /** Same path namespace/256-reference budget as sampled memory, including opaque custom references. */
+    JsonObject pathFact(Path path) {
+        JsonObject out=new JsonObject();out.addProperty("present",path!=null);
+        if(path==null)return out;
+        out.addProperty("className",label(path.getClass().getName()));
+        out.add("identity",reference(path,"path"));out.add("cachedFields",memoryValue(path));return out;
+    }
+
     /** Same bounded allocator as Goals; these tokens never equal the Hooks component allocator. */
     private JsonObject reference(Object value, String namespace) {
         JsonObject out = new JsonObject();

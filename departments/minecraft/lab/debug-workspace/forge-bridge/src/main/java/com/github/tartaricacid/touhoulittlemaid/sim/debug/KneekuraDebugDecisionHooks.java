@@ -16,6 +16,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.entity.ai.Brain;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.entity.schedule.Schedule;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -94,7 +95,7 @@ public final class KneekuraDebugDecisionHooks {
                        LongSupplier time, Sink sink) throws ReflectiveOperationException {
             if(nodeLimit<1 || nodeLimit>64)throw new IllegalArgumentException("NODE_LIMIT_OUT_OF_RANGE");
             this.subject=subject;this.snapshot=snapshot;this.budget=budget;this.nodeLimit=nodeLimit;
-            if(channels==null||channels.isEmpty()||!Set.of("goal","brain","brain_activity","path","control","malus","sensor","mod","projectile","neighbors","effective_malus","frontier","path_nodes","path_g","path_distance").containsAll(channels))
+            if(channels==null||channels.isEmpty()||!Set.of("goal","brain","brain_activity","navigation_result","path","control","malus","sensor","mod","projectile","neighbors","effective_malus","frontier","path_nodes","path_g","path_distance").containsAll(channels))
                 throw new IllegalArgumentException("INVALID_CHANNELS");
             this.channels=Set.copyOf(channels);
             this.heapNodes=channels.contains("frontier")||channels.contains("path_nodes")||channels.contains("path_g")||channels.contains("path_distance")?new IdentityHashMap<>():null;
@@ -162,6 +163,7 @@ public final class KneekuraDebugDecisionHooks {
             if(thread!=Thread.currentThread())return false;
             String channel=kind.startsWith("CONTROL_PROJECTILE_")&&channels.contains("projectile")?"projectile":
                     kind.startsWith("BRAIN_ACTIVITY_")?"brain_activity":
+                    kind.equals("NAVIGATION_MOVE_TO_RETURN")?"navigation_result":
                     kind.equals("PATH_NEIGHBORS_RETURN")?"neighbors":
                     kind.equals("PATH_RETURNED_NODES")?"path_nodes":
                     kind.equals("PATH_NODE_G_WRITE_CHECKPOINT")?"path_g":
@@ -303,6 +305,34 @@ public final class KneekuraDebugDecisionHooks {
             data.addProperty("storedBrainMatch",KneekuraDebugDecisionSnapshot.read(LivingEntity.class,"brain",entity)==brain);
             data.addProperty("instanceIdentity",session.token(brain));return data;
         });
+    }
+    /** Original base return and later cached fields; a true boolean is neither arrival nor Path adoption. */
+    public static void navigationMoveReturn(PathNavigation navigation,Path requested,double speed,boolean result) {
+        Session session=active;
+        if(session==null||session.thread!=Thread.currentThread()||!session.channels.contains("navigation_result"))return;
+        try {
+            if(!session.budget.allows(session.currentContext.get(),session.time.getAsLong()))return;
+            Mob owner=(Mob)KneekuraDebugDecisionSnapshot.read(PathNavigation.class,"mob",navigation);
+            if(!session.matches(owner)||KneekuraDebugDecisionSnapshot.read(Mob.class,"navigation",owner)!=navigation)return;
+            session.record("NAVIGATION_MOVE_TO_RETURN","PathNavigation.moveTo(Path,double).RETURN",()->{
+                Path cached=(Path)KneekuraDebugDecisionSnapshot.read(PathNavigation.class,"path",navigation);
+                double cachedSpeed=(Double)KneekuraDebugDecisionSnapshot.read(PathNavigation.class,"speedModifier",navigation);
+                JsonObject data=new JsonObject();data.addProperty("navigationClass",label(navigation.getClass().getName()));
+                String identity=session.token(navigation);data.addProperty("instanceIdentity",identity);
+                data.addProperty("instanceIdentityStatus",identity==null?"NOT_EXPOSED":"AVAILABLE");data.addProperty("result",result);
+                if(Double.isFinite(speed))data.addProperty("requestedSpeed",speed);else data.addProperty("requestedSpeedStatus","NOT_EXPOSED");
+                if(Double.isFinite(cachedSpeed))data.addProperty("cachedSpeed",cachedSpeed);else data.addProperty("cachedSpeedStatus","NOT_EXPOSED");
+                data.addProperty("requestedMatchesCachedPath",requested==cached);
+                JsonObject passed=session.snapshot.pathFact(requested);data.add("requestedPath",passed);
+                data.add("cachedPath",requested==cached?passed.deepCopy():session.snapshot.pathFact(cached));
+                data.addProperty("dispatchScope","BASE_PATHNAVIGATION_NORMAL_RETURN_NOT_FINAL_CUSTOM_OVERRIDE");
+                data.addProperty("fieldScope","BASE_NAVIGATION_AND_EXACT_PATH_CACHED_FIELDS_AFTER_RETURN_AND_CAPTURE_GATES");
+                data.addProperty("resultScope","ORIGINAL_BASE_METHOD_BOOLEAN_NOT_ARRIVAL");
+                data.addProperty("referenceScope","RAW_ARGUMENT_VS_CACHED_PATH_REFERENCE_EQUALITY");
+                data.addProperty("reasonStatus","NOT_EXPOSED");data.addProperty("arrivalStatus","NOT_EXPOSED");
+                data.addProperty("searchRelationStatus","NOT_EXPOSED");return data;
+            });
+        }catch(ReflectiveOperationException|RuntimeException|LinkageError error){session.budget.close("NAVIGATION_CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());}
     }
     /** Exact UpdateActivityFromSchedule call site. Virtual original executes once, including OFF/throw. */
     public static void originalActivityUpdate(Brain<?> brain,long day,long game) {

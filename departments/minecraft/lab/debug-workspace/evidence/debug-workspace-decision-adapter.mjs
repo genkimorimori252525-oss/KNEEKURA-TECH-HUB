@@ -1,3 +1,4 @@
+import {validSnapshotReference,validCachedPathData,incompleteCachedFields} from './cached-path-contract.mjs';
 import { createDecisionObservation } from './decision-observation.mjs';
 import { buildSampledMotionTrace } from '../../simlab/motion-trace.mjs';
 import { validOriginalDecisionEvent, appendOriginalDecisionEvents } from './original-decision-events.mjs';
@@ -133,14 +134,7 @@ function compactBrain(payload = {}) {
 }
 
 
-function validSnapshotReference(ref, revision, namespace) {
-  if (!ref || ref.allocator !== 'SNAPSHOT_REFERENCE' || ref.targetRevision !== revision) return false;
-  if (ref.status === 'NOT_EXPOSED') return ref.detail === 'REFERENCE_LIMIT' && !Object.hasOwn(ref,'token');
-  if (ref.status !== 'AVAILABLE' || typeof ref.token !== 'string') return false;
-  const parts=ref.token.split(':');
-  return parts.length === 3 && parts[0] === namespace && parts[1] === String(revision) &&
-    /^[1-9][0-9]*$/.test(parts[2]) && Number(parts[2]) <= 256;
-}
+
 
 // Additive typed cached memory contract; historical opaque/scalar observations remain readable.
 function validTypedMemory(value, revision, depth=0) {
@@ -177,23 +171,11 @@ function validTypedMemory(value, revision, depth=0) {
           typeof d.entityUuid.value === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(d.entityUuid.value)));
       break;
     case 'PATH':
-      valid=d.semantics === 'CACHED_MEMORY_ROUTE_NOT_ADOPTION_ACTUAL_MOTION_OR_SEARCH_FRONTIER' &&
-        Number.isSafeInteger(d.nextNodeIndex) && typeof d.canReach === 'boolean' && point(d.target,true) && scalar(d.distanceToTarget);
-      if (d.nodesStatus === 'NOT_EXPOSED') valid &&= !Object.hasOwn(d,'nodes') && ['NULL_NODE_LIST','CUSTOM_NODE_LIST'].includes(d.nodesDetail);
-      else valid &&= Number.isSafeInteger(d.nodeCount) && d.nodeCount >= 0 &&
-        d.truncated === (d.nodeCount > 64) && d.nodesStatus === (d.truncated ? 'PARTIAL' : 'AVAILABLE') &&
-        Array.isArray(d.nodes) && d.nodes.length === Math.min(d.nodeCount,64) && d.nodes.every(n=>unknown(n) ||
-          (['AVAILABLE','PARTIAL'].includes(n.status) && ['x','y','z'].every(k=>Number.isSafeInteger(n[k])) &&
-            (n.status === 'PARTIAL' || (typeof n.type === 'string' && Number.isFinite(n.costMalus)))));
+      valid=validCachedPathData(d);
       break;
   }
   if (!valid) return false;
-  function incomplete(v) {
-    if (!v || typeof v !== 'object') return false;
-    return Object.entries(v).some(([k,child])=>((k === 'status' || k.endsWith('Status')) && child !== 'AVAILABLE') ||
-      (k === 'truncated' && child === true) || incomplete(child));
-  }
-  return value.status !== 'AVAILABLE' || !incomplete(d);
+  return value.status !== 'AVAILABLE' || !incompleteCachedFields(d);
 }
 
 const SNAPSHOT_SECTIONS = ['goal_scheduler','brain_memory','brain_activities','navigation_path','movement_control'];
