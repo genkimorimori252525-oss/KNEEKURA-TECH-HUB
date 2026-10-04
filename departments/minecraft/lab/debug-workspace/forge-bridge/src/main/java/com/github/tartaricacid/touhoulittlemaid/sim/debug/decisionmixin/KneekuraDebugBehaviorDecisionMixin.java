@@ -15,6 +15,24 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value=Behavior.class,remap=false)
 public abstract class KneekuraDebugBehaviorDecisionMixin {
+    @Shadow protected abstract boolean hasRequiredMemories(LivingEntity owner);
+    @Shadow protected abstract boolean checkExtraStartConditions(ServerLevel level,LivingEntity owner);
+    @Shadow protected abstract void start(ServerLevel level,LivingEntity owner,long tick);
+    @Redirect(method="tryStart(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)Z",
+        at=@At(value="INVOKE",target="Lnet/minecraft/world/entity/ai/behavior/Behavior;hasRequiredMemories(Lnet/minecraft/world/entity/LivingEntity;)Z"),require=1)
+    private boolean kneekura$startMemory(Behavior<?> behavior,LivingEntity owner) {
+        return KneekuraDebugDecisionHooks.originalBrainStartCondition(behavior,"HAS_REQUIRED_MEMORIES",null,owner,()->hasRequiredMemories(owner));
+    }
+    @Redirect(method="tryStart(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)Z",
+        at=@At(value="INVOKE",target="Lnet/minecraft/world/entity/ai/behavior/Behavior;checkExtraStartConditions(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)Z"),require=1)
+    private boolean kneekura$startExtra(Behavior<?> behavior,ServerLevel level,LivingEntity owner) {
+        return KneekuraDebugDecisionHooks.originalBrainStartCondition(behavior,"CHECK_EXTRA_START",level,owner,()->checkExtraStartConditions(level,owner));
+    }
+    @Redirect(method="tryStart(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)Z",
+        at=@At(value="INVOKE",target="Lnet/minecraft/world/entity/ai/behavior/Behavior;start(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V"),require=1)
+    private void kneekura$startDispatch(Behavior<?> behavior,ServerLevel level,LivingEntity owner,long tick) {
+        KneekuraDebugDecisionHooks.originalBrainStartDispatch(behavior,level,owner,tick,()->start(level,owner,tick));
+    }
     @Shadow protected abstract boolean timedOut(long tick);
     @Shadow protected abstract boolean canStillUse(ServerLevel level,LivingEntity owner,long tick);
     @Shadow protected abstract void tick(ServerLevel level,LivingEntity owner,long tick);

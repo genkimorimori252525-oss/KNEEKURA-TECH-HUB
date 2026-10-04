@@ -98,6 +98,18 @@ public final class KneekuraDebugDecisionHooks {
             this.behavior=behavior;this.owner=owner;this.brain=brain;this.navigation=navigation;this.level=level;this.gameTime=gameTime;this.id=id;
         }
     }
+    private static final class StartConditionCapture {
+        final String condition;final List<String> computes=new ArrayList<>();boolean truncated;
+        StartConditionCapture(String condition){this.condition=condition;}
+    }
+    private static final class StartFrame {
+        final MoveToTargetSink behavior;final Mob owner;final Brain<?> brain;final PathNavigation navigation;
+        final ServerLevel level;final long gameTime;final String id;
+        StartConditionCapture condition;DispatchCapture dispatch;
+        StartFrame(MoveToTargetSink behavior,Mob owner,Brain<?> brain,PathNavigation navigation,ServerLevel level,long gameTime,String id){
+            this.behavior=behavior;this.owner=owner;this.brain=brain;this.navigation=navigation;this.level=level;this.gameTime=gameTime;this.id=id;
+        }
+    }
 
     public static void install(Session session) {
         if (session.thread != Thread.currentThread()) throw new IllegalStateException("SERVER_THREAD_REQUIRED");
@@ -105,7 +117,7 @@ public final class KneekuraDebugDecisionHooks {
     }
     public static void clear(String reason) {
         Session previous=active;active=null;
-        if(previous!=null){previous.budget.close(reason);previous.clearHeapNodes();previous.sinkFrame=null;previous.tickStopFrame=null;previous.computeFrame=null;previous.createFrame=null;previous.finderFrame=null;previous.reachedFrame=null;}
+        if(previous!=null){previous.budget.close(reason);previous.clearHeapNodes();previous.sinkFrame=null;previous.tickStopFrame=null;previous.startFrame=null;previous.computeFrame=null;previous.createFrame=null;previous.finderFrame=null;previous.reachedFrame=null;}
     }
 
     public static final class Session {
@@ -133,6 +145,7 @@ public final class KneekuraDebugDecisionHooks {
         private SinkFrame sinkFrame;
         private TickStopFrame tickStopFrame;
         private int nextTickStop,tickStopDepth;
+        private StartFrame startFrame;private int nextStart,startDepth;
         private ComputeFrame computeFrame;private CreateFrame createFrame;private FinderFrame finderFrame;
         private int nextCompute,computeDepth,createDepth,finderDepth,reachedDepth;
         private ReachedFrame reachedFrame;
@@ -251,6 +264,23 @@ public final class KneekuraDebugDecisionHooks {
                 KneekuraDebugDecisionSnapshot.read(Mob.class,"navigation",subject)==frame.navigation&&
                 KneekuraDebugDecisionSnapshot.read(PathNavigation.class,"mob",frame.navigation)==subject;
             }catch(ReflectiveOperationException|RuntimeException|LinkageError error){budget.close("COMPUTE_CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());return false;}
+        }
+        private boolean startReady(StartFrame frame) {
+            if(active!=this||frame==null||!matches(frame.owner)||!channels.contains("brain_navigation"))return false;
+            try {return budget.allows(currentContext.get(),time.getAsLong())&&
+                KneekuraDebugDecisionSnapshot.read(LivingEntity.class,"brain",subject)==frame.brain&&
+                KneekuraDebugDecisionSnapshot.read(Mob.class,"navigation",subject)==frame.navigation&&
+                KneekuraDebugDecisionSnapshot.read(PathNavigation.class,"mob",frame.navigation)==subject;
+            }catch(ReflectiveOperationException|RuntimeException|LinkageError error){budget.close("START_CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());return false;}
+        }
+        private StartFrame startBegin(Brain<?> brain,BehaviorControl<?> control,ServerLevel level,LivingEntity owner,long gameTime) {
+            if(!matches(owner)||!channels.contains("brain_navigation")||control==null||control.getClass()!=MoveToTargetSink.class||nextStart>=256||startDepth>8)return null;
+            try {
+                if(!budget.allows(currentContext.get(),time.getAsLong())||KneekuraDebugDecisionSnapshot.read(LivingEntity.class,"brain",owner)!=brain)return null;
+                PathNavigation navigation=(PathNavigation)KneekuraDebugDecisionSnapshot.read(Mob.class,"navigation",owner);
+                if(brain==null||navigation==null||KneekuraDebugDecisionSnapshot.read(PathNavigation.class,"mob",navigation)!=owner)return null;
+                return new StartFrame((MoveToTargetSink)control,(Mob)owner,brain,navigation,level,gameTime,"try-start:"+budget.context().selectionRevision()+":"+(++nextStart));
+            }catch(ReflectiveOperationException|RuntimeException|LinkageError error){budget.close("START_CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());return null;}
         }
         private boolean reachedReady(ReachedFrame frame) {
             return frame!=null&&computeFrame==frame.compute&&computeReady(frame.compute);
@@ -429,6 +459,11 @@ public final class KneekuraDebugDecisionHooks {
         ReachedFrame previousReached=session.reachedFrame;int depth=session.computeDepth;session.computeDepth++;
         try {
             ComputeFrame frame=session.computeBegin(behavior,owner,target,game,site);session.computeFrame=frame;session.createFrame=null;session.finderFrame=null;session.reachedFrame=null;
+            StartFrame caller=session.startFrame;
+            if(frame!=null&&caller!=null&&caller.behavior==behavior&&caller.owner==owner&&caller.brain==frame.brain&&caller.navigation==frame.navigation&&
+                caller.gameTime==game&&site.equals("CHECK_EXTRA_START")&&session.startReady(caller)&&caller.condition!=null&&caller.condition.condition.equals("CHECK_EXTRA_START")){
+                if(caller.condition.computes.size()<8)caller.condition.computes.add(frame.id);else caller.condition.truncated=true;
+            }
             boolean result=original.getAsBoolean();
             if(session.computeReady(frame))session.record("BRAIN_PATH_COMPUTE_RETURN","MoveToTargetSink.tryComputePath.AFTER",()->{
                 JsonObject data=computeData(session,frame);data.addProperty("result",result);
@@ -596,6 +631,70 @@ public final class KneekuraDebugDecisionHooks {
     }
     /** Source Brain loop interface call. Unknown controls and all OFF/throw paths still execute once. */
     @SuppressWarnings({"rawtypes","unchecked"})
+    public static boolean originalBrainTryStart(Brain<?> brain,BehaviorControl<?> control,ServerLevel level,LivingEntity owner,long gameTime) {
+        return originalBrainStartCall(brain,control,level,owner,gameTime,()->((BehaviorControl)control).tryStart(level,owner,gameTime));
+    }
+    private static boolean originalBrainStartCall(Brain<?> brain,BehaviorControl<?> control,ServerLevel level,LivingEntity owner,long gameTime,BooleanSupplier original) {
+        Session session=active;
+        if(session==null||session.thread!=Thread.currentThread())return original.getAsBoolean();
+        StartFrame previous=session.startFrame;int depth=session.startDepth;session.startDepth++;
+        try {
+            StartFrame frame=session.startBegin(brain,control,level,owner,gameTime);session.startFrame=frame;
+            boolean result=original.getAsBoolean();
+            if(session.startReady(frame))session.record("BRAIN_PATH_TRY_START_RETURN","Brain.startEachNonRunningBehavior.tryStart.AFTER",()->{
+                JsonObject data=startData(session,frame);data.addProperty("result",result);
+                data.addProperty("resultScope","ORIGINAL_INTERFACE_TRY_START_BOOLEAN_NOT_NAVIGATION_SUCCESS_OR_ARRIVAL");return data;
+            });return result;
+        }finally{session.startFrame=active==session?previous:null;session.startDepth=depth;}
+    }
+    public static boolean originalBrainStartCondition(Behavior<?> behavior,String condition,ServerLevel level,LivingEntity owner,BooleanSupplier original) {
+        Session session=active;
+        if(session==null||session.thread!=Thread.currentThread())return original.getAsBoolean();
+        StartFrame previous=session.startFrame,frame=startFrame(session,behavior);
+        boolean supported=frame!=null&&frame.owner==owner&&Set.of("HAS_REQUIRED_MEMORIES","CHECK_EXTRA_START").contains(condition)&&
+            (condition.equals("HAS_REQUIRED_MEMORIES")||frame.level==level);
+        StartConditionCapture capture=supported?new StartConditionCapture(condition):null,old=supported?frame.condition:null;
+        if(supported)frame.condition=capture;else session.startFrame=null;
+        try {
+            boolean result=original.getAsBoolean();
+            if(supported&&session.startFrame==frame&&session.startReady(frame))session.record("BRAIN_PATH_START_CONDITION_RETURN",
+                "Behavior.tryStart."+(condition.equals("HAS_REQUIRED_MEMORIES")?"hasRequiredMemories":"checkExtraStartConditions")+".AFTER",()->{
+                    JsonObject data=startData(session,frame);data.addProperty("condition",condition);data.addProperty("result",result);
+                    JsonArray ids=new JsonArray();capture.computes.forEach(ids::add);data.add("capturedComputeInvocationIds",ids);
+                    data.addProperty("capturedComputeInvocationsTruncated",capture.truncated);
+                    data.addProperty("childScope","DIRECT_CAPTURED_PRIVATE_COMPUTE_SCOPES_NOT_COMPLETION_OR_FULL_CHILDREN");
+                    data.addProperty("resultScope","ORIGINAL_VIRTUAL_START_CONDITION_BOOLEAN_NOT_INDIVIDUAL_MEMORY_REASONS");return data;
+                });return result;
+        }finally{if(supported)frame.condition=active==session?old:null;session.startFrame=active==session?previous:null;}
+    }
+    public static void originalBrainStartDispatch(Behavior<?> behavior,ServerLevel level,LivingEntity owner,long gameTime,Runnable original) {
+        Session session=active;
+        if(session==null||session.thread!=Thread.currentThread()){original.run();return;}
+        StartFrame previous=session.startFrame,frame=startFrame(session,behavior);
+        boolean supported=frame!=null&&frame.owner==owner&&frame.level==level&&frame.gameTime==gameTime;
+        DispatchCapture capture=supported?new DispatchCapture("START"):null,old=supported?frame.dispatch:null;
+        if(supported)frame.dispatch=capture;else session.startFrame=null;
+        try {
+            original.run();
+            if(supported&&session.startFrame==frame&&session.startReady(frame))session.record("BRAIN_PATH_START_DISPATCH_RETURN","Behavior.tryStart.start.AFTER",()->{
+                JsonObject data=startData(session,frame);data.addProperty("branch","START");JsonArray ids=new JsonArray();capture.children.forEach(ids::add);
+                data.add("capturedSinkInvocationIds",ids);data.addProperty("capturedSinkInvocationsTruncated",capture.truncated);
+                data.addProperty("childScope","DIRECT_CAPTURED_CONCRETE_CALL_SCOPES_NOT_COMPLETION_OR_FULL_CHILDREN");
+                data.addProperty("returnScope","NORMAL_ORIGINAL_START_VOID_NOT_NAVIGATION_SUCCESS_OR_ARRIVAL");return data;
+            });
+        }finally{if(supported)frame.dispatch=active==session?old:null;session.startFrame=active==session?previous:null;}
+    }
+    private static StartFrame startFrame(Session session,Behavior<?> behavior) {
+        if(session==null||session.thread!=Thread.currentThread())return null;StartFrame frame=session.startFrame;
+        return frame!=null&&frame.behavior==behavior&&session.startReady(frame)?frame:null;
+    }
+    private static JsonObject startData(Session session,StartFrame frame) {
+        JsonObject data=new JsonObject();data.addProperty("sinkClass",label(frame.behavior.getClass().getName()));component(data,session,frame.behavior,"instanceIdentity");
+        data.addProperty("tryStartInvocationId",frame.id);data.addProperty("gameTimeArgument",Long.toString(frame.gameTime));
+        data.addProperty("dispatchScope","ORIGINAL_BRAIN_NON_RUNNING_BEHAVIOR_INTERFACE_CALL_EXACT_SINK");
+        data.addProperty("operandReasonStatus","NOT_EXPOSED");data.addProperty("arrivalStatus","NOT_EXPOSED");data.addProperty("searchRelationStatus","NOT_EXPOSED");return data;
+    }
+    @SuppressWarnings({"rawtypes","unchecked"})
     public static void originalBrainTickOrStop(Brain<?> brain,BehaviorControl<?> control,ServerLevel level,LivingEntity owner,long gameTime) {
         originalBrainCall(brain,control,level,owner,gameTime,()->((BehaviorControl)control).tickOrStop(level,owner,gameTime));
     }
@@ -651,6 +750,11 @@ public final class KneekuraDebugDecisionHooks {
                 caller.navigation==frame.navigation()&&caller.gameTime==gameTime&&session.tickStopReady(caller)&&caller.dispatch!=null&&
                 (caller.dispatch.branch.equals("STOP")?site.equals("STOP_FROM_BRIDGE"):Set.of("TICK_FROM_BRIDGE","START_FROM_TICK").contains(site))){
                 if(caller.dispatch.children.size()<8)caller.dispatch.children.add(frame.id());else caller.dispatch.truncated=true;
+            }
+            StartFrame starter=session.startFrame;
+            if(frame!=null&&starter!=null&&starter.behavior==behavior&&starter.owner==owner&&starter.brain==frame.brain()&&starter.navigation==frame.navigation()&&
+                starter.gameTime==gameTime&&session.startReady(starter)&&starter.dispatch!=null&&site.equals("START_FROM_BRIDGE")){
+                if(starter.dispatch.children.size()<8)starter.dispatch.children.add(frame.id());else starter.dispatch.truncated=true;
             }
             original.run();
             if(frame!=null&&session.sinkReady(frame))session.record("BRAIN_PATH_SINK_RETURN","MoveToTargetSink."+site+".AFTER",()->{

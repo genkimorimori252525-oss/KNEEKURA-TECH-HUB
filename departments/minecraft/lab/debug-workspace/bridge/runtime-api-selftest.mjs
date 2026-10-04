@@ -37,13 +37,26 @@ try {
   'DecisionAdapter','DecisionBurstRequest','AdapterSourceProof','TwilightForestDescriptor','TwilightForestReturnDescriptor','TwilightForestAdapter',
   'MotionTraceCache','RelatedProjectileTraceCache','MotionOverlayRuntime','MotionOverlayGeometry','MotionOverlay'];
  const sources=[...names.map(n=>path.join(main,'KneekuraDebug'+n+'.java')),...['Path','Brain','Behavior','OneShot','GateBehavior'].map(n=>path.join(main,'decisionmixin/KneekuraDebug'+n+'DecisionMixin.java')),path.join(main,'decisionmixin/KneekuraDebugScheduledActivityMixin.java'),path.join(main,'decisionmixin/KneekuraDebugNavigationResultMixin.java'),path.join(main,'decisionmixin/KneekuraDebugBrainNavigationMixin.java')];
- const checks=['EvidenceClaim','CaptureWriter','RegisteredWorld','TankPresentation','DecisionSnapshot','TypedMemory','BehaviorControl','BrainActivity','NavigationResult','BrainNavigation','BrainComputeCondition','BrainCompute','BrainTickStop','BrainStop','DecisionHooks','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult','TerrainField','SynchedCached','MotionTraceCache','RelatedProjectileTrace','MotionOverlayGeometry','MotionWriter'];
+ const checks=['EvidenceClaim','CaptureWriter','RegisteredWorld','TankPresentation','DecisionSnapshot','TypedMemory','BehaviorControl','BrainActivity','NavigationResult','BrainNavigation','BrainStart','BrainComputeCondition','BrainCompute','BrainTickStop','BrainStop','DecisionHooks','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult','TerrainField','SynchedCached','MotionTraceCache','RelatedProjectileTrace','MotionOverlayGeometry','MotionWriter'];
  run(executable('javac'),['--release','17','-proc:none','-cp',classpath,'-d',output,...sources,...checks.map(n=>path.join(test,'KneekuraDebug'+n+'SelfTest.java')),path.join(test,'KneekuraDebugDecisionIdentityInterop.java')]);
  for(const name of checks.filter(n=>n!=='MotionWriter')){
   // Vanilla bootstrap can create logs; keep this new check's artifacts in its disposable output.
-  const bootstrap=['BrainComputeCondition','BrainCompute','BrainTickStop','BrainStop','BrainNavigation','NavigationResult','BrainActivity','BehaviorControl','TypedMemory','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult'].includes(name);
+  const bootstrap=['BrainStart','BrainComputeCondition','BrainCompute','BrainTickStop','BrainStop','BrainNavigation','NavigationResult','BrainActivity','BehaviorControl','TypedMemory','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult'].includes(name);
   const cp=bootstrap?classpath.split(path.delimiter).map(p=>path.resolve(root,p)).join(path.delimiter):classpath;
   const stdout=run(executable('java'),['-cp',output+path.delimiter+cp,'com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebug'+name+'SelfTest'],{},bootstrap?output:root);
+   if(name==='BrainStart') {
+    const lines=stdout.split(/\r?\n/).filter(l=>l.startsWith('BRAIN_START_INTEROP:'));
+    assert.equal(lines.length,42,'original short circuit, duration RNG, direct compute/start scopes, capped children and unknowns');
+    const records=lines.map((line,index)=>({source:{side:'SERVER'},observationId:'brain-start-gson:'+index,gameTime:100,payload:JSON.parse(line.slice('BRAIN_START_INTEROP:'.length))}));
+    assert.ok(records.every(validOriginalDecisionEvent),'actual original start Gson satisfies strict consumer');
+    assert.equal(records[0].payload.data.condition,'HAS_REQUIRED_MEMORIES');assert.equal(records[0].payload.data.result,false);
+    assert.equal(records[3].payload.data.condition,'CHECK_EXTRA_START');assert.equal(records[3].payload.data.result,false);
+    assert.equal(records[6].payload.data.capturedComputeInvocationIds.length,1);assert.equal(records[7].payload.data.capturedSinkInvocationIds.length,1);assert.equal(records[8].payload.data.result,true);
+    const stages={},capabilities={},timeline=[];appendOriginalDecisionEvents(records,stages,capabilities,timeline);
+    assert.equal(stages.EVALUATION.facts.length,40);assert.equal(stages.EXECUTION.facts.length,2);assert.equal(capabilities.brain_navigation.status,'PARTIAL');
+    for(const stage of ['CANDIDATE','SELECTION','RESULT'])assert.equal(stages[stage],undefined);
+    console.log('Forty-two actual Brain start/Gson cases preserve original conditions, duration RNG and direct child scopes');
+   }
      if(name==='BrainComputeCondition') {
     const lines=stdout.split(/\r?\n/).filter(l=>l.startsWith('BRAIN_COMPUTE_CONDITION_INTEROP:'));
     assert.equal(lines.length,35,'original reached/Path predicate booleans, signed operands and bounded unknowns');

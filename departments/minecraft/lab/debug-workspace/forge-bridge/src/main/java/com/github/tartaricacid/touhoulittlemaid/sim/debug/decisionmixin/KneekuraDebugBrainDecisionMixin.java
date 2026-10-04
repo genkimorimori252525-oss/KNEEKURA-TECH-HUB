@@ -17,6 +17,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value=Brain.class,remap=false)
 public abstract class KneekuraDebugBrainDecisionMixin {
+    @Redirect(method="startEachNonRunningBehavior(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)V",
+        at=@At(value="INVOKE",target="Lnet/minecraft/world/entity/ai/behavior/BehaviorControl;tryStart(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)Z"),require=1)
+    private boolean kneekura$originalTryStart(BehaviorControl<?> control,ServerLevel level,LivingEntity owner,long tick) {
+        return KneekuraDebugDecisionHooks.originalBrainTryStart((Brain<?>)(Object)this,control,level,owner,tick);
+    }
     @Redirect(method="tickEachRunningBehavior(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)V",
         at=@At(value="INVOKE",target="Lnet/minecraft/world/entity/ai/behavior/BehaviorControl;tickOrStop(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V"),require=1)
     private void kneekura$originalTickOrStop(BehaviorControl<?> control,ServerLevel level,LivingEntity owner,long tick) {
