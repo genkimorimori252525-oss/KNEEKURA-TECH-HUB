@@ -26,6 +26,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
       - name: Fetch exact official Modrinth artifact
         shell: bash
         run: |
@@ -65,6 +69,22 @@ jobs:
           }, ensure_ascii=False))
           print('KNEEKURA_HIGH_VALUE_END')
           PY
+      - name: Bounded javap for semantic registration seams
+        shell: bash
+        run: |
+          set -euo pipefail
+          javap -classpath "$RUNNER_TEMP/ysm-2.6.5.jar" -c -p \
+            com.elfmcys.yesstevemodel.OO00OoOOOOooO0ooOoOoOooO \
+            > ysm-265-evidence/network-handler-javap.txt
+          javap -classpath "$RUNNER_TEMP/ysm-2.6.5.jar" -c -p \
+            com.elfmcys.yesstevemodel.oo00O000000OoOo0O0O00oOO \
+            > ysm-265-evidence/ysm-binding-javap.txt
+          echo 'KNEEKURA_JAVAP_NETWORK_BEGIN'
+          cat ysm-265-evidence/network-handler-javap.txt
+          echo 'KNEEKURA_JAVAP_NETWORK_END'
+          echo 'KNEEKURA_JAVAP_MOLANG_BEGIN'
+          cat ysm-265-evidence/ysm-binding-javap.txt
+          echo 'KNEEKURA_JAVAP_MOLANG_END'
       - name: Retain bounded evidence (no YSM JAR)
         if: always()
         uses: actions/upload-artifact@v4
