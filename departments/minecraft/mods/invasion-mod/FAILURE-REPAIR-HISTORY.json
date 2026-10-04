@@ -1,0 +1,29 @@
+{
+  "format": "kneekura.failure-history.v1",
+  "repository": "https://github.com/UnstoppableN/Invasion-mod",
+  "scope": {
+    "track": "COMPARATIVE_LEGACY_1_7_10",
+    "head_revision": "644a52ddea104c206d022bef9edc135c060cba1d",
+    "history_window": "Bounded review of visible commits around Invasion 1.1.2 plus selected modern 1.20.1 repair chains for spawning, engineer towers, Burrower locomotion and flying wall traversal. Human-readable candidate cases are in FAILURE-REPAIR-HISTORY.md. Structured import remains deferred until immutable TECH-HUB profile/CAS evidence IDs exist.",
+    "queries": [
+      "UnstoppableN/Invasion-mod recent commits at/around 1.1.2",
+      "kevintrini2811/Invasion-Mod recent commits concerning spawn failure and engineer tower/path recovery",
+      "kevintrini2811/Invasion-Mod Burrower movement/pathfinding repair commits",
+      "kevintrini2811/Invasion-Mod flying wall traversal/native movement repair commits",
+      "kevintrini2811/Invasion-Mod blocked spawn retry/pending spawn repair commits"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "inspected_evidence_ids": [],
+    "deferred": [
+      "Capture the inspected GitHub commit/diff/source documents through the existing profile adapter to obtain immutable index_snapshot_id/document_id pairs.",
+      "Author the nine readable candidate cases into structured records only after those evidence IDs exist.",
+      "Runtime reproduction and post-fix execution were not performed.",
+      "Repository-wide/all-release issue and PR history was not crawled."
+    ],
+    "unavailable": []
+  },
+  "scope_evidence": [],
+  "cases": []
+}

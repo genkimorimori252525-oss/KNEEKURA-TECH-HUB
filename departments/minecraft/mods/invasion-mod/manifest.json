@@ -1,0 +1,115 @@
+{
+  "schema_version": "1.1.0",
+  "target_id": "invasion-mod",
+  "display_name": "Invasion Mod",
+  "target_kind": "siege / mob AI / pathfinding gameplay Mod",
+  "adaptation_anchor": {
+    "minecraft_version": "1.20.1",
+    "loader": "Forge"
+  },
+  "overall_status": "IN_PROGRESS",
+  "tracks": [
+    {
+      "track_id": "legacy-1.7.10-1.1.2-uploaded",
+      "role": "COMPARATIVE",
+      "minecraft_version": "1.7.10",
+      "loader": "Forge",
+      "source_snapshot": {
+        "status": "PINNED_CANDIDATE_WITH_DISTRIBUTED_ARTIFACT",
+        "repository": "UnstoppableN/Invasion-mod",
+        "commit": "644a52ddea104c206d022bef9edc135c060cba1d",
+        "jar_sha256": "944f4c33687ef256bf692666421a757345519b1318df96de95565a53c2e28ddc",
+        "binary_source_equivalence": "NOT_PROVEN"
+      },
+      "facets": {
+        "architecture": "MAPPED",
+        "ai": "MAPPED",
+        "pathfinding": "EVIDENCE_BACKED",
+        "terrain_siege": "EVIDENCE_BACKED",
+        "waves_spawning": "EVIDENCE_BACKED",
+        "networking": "MAPPED",
+        "persistence": "MAPPED",
+        "rendering_assets": "INVENTORIED",
+        "performance": "MAPPED",
+        "failure_repair_history": "PARTIAL",
+        "license_provenance": "MAPPED",
+        "burrower_3d": "EVIDENCE_BACKED",
+        "flying_ai": "MAPPED_WITH_WIP_BOUNDARY",
+        "mob_roles": "EVIDENCE_BACKED",
+        "wave_design": "EVIDENCE_BACKED"
+      }
+    },
+    {
+      "track_id": "anchor-1.20.1-forge-neoforge",
+      "role": "ANCHOR",
+      "minecraft_version": "1.20.1",
+      "loader": "Forge/NeoForge-compatible legacyForge build",
+      "source_snapshot": {
+        "status": "PINNED",
+        "repository": "kevintrini2811/Invasion-Mod",
+        "branch": "1.20.1-neo",
+        "commit": "aaa6812b786eeb4c7b48ec5cc7a77d061d6b9e10",
+        "source_version": "2.1.0"
+      },
+      "facets": {
+        "architecture": "MAPPED",
+        "ai": "MAPPED",
+        "pathfinding": "EVIDENCE_BACKED",
+        "terrain_siege": "EVIDENCE_BACKED",
+        "waves_spawning": "MAPPED",
+        "performance": "MAPPED",
+        "version_portability": "EVIDENCE_BACKED",
+        "license_provenance": "MAPPED",
+        "burrower_3d": "EVIDENCE_BACKED",
+        "flying_ai": "MAPPED",
+        "wave_design": "EVIDENCE_BACKED"
+      }
+    },
+    {
+      "track_id": "frontier-26.3-neoforge",
+      "role": "FRONTIER",
+      "minecraft_version": "26.3",
+      "loader": "NeoForge",
+      "source_snapshot": {
+        "status": "PINNED",
+        "repository": "kevintrini2811/Invasion-Mod",
+        "branch": "26.3neo",
+        "commit": "fce5d30b74f804ae90814c7a10cdff255ba80363",
+        "source_version": "2.1.0"
+      },
+      "facets": {
+        "architecture": "INVENTORIED",
+        "ai": "INVENTORIED",
+        "pathfinding": "MAPPED",
+        "version_portability": "MAPPED",
+        "performance": "INVENTORIED",
+        "license_provenance": "MAPPED"
+      }
+    }
+  ],
+  "analysis_paths": [
+    "README.md",
+    "SOURCE-INVENTORY.json",
+    "JAR-PROVENANCE.md",
+    "GAMEPLAY-FEATURE-MAP.md",
+    "CODE-MAP.md",
+    "TECHNICAL-KNOWLEDGE.md",
+    "TECHNIQUE-CARDS.json",
+    "VERSION-PORTABILITY.md",
+    "FAILURE-REPAIR-HISTORY.md",
+    "FAILURE-REPAIR-HISTORY.json",
+    "LICENSE-PROVENANCE.md",
+    "BURROWER-3D-MOVEMENT.md",
+    "FLYING-AI.md",
+    "MOB-AI-CATALOG.md",
+    "WAVE-DEEP-DIVE.md"
+  ],
+  "notes": [
+    "The historical uploaded JAR is primary evidence for distributed 1.1.2 claims.",
+    "Player-facing guide/wiki/forum material is reconnaissance only.",
+    "No runtime, performance benchmark or source-binary equivalence experiment was run.",
+    "Whole-target completion is not claimed; high-value siege/pathfinding/wave subsystems are the current evidence-backed focus.",
+    "Burrower and flying-AI deep dives explicitly separate latent/debug legacy research code from normal 1.1.2 invasion gameplay.",
+    "Wave deep dive confirms the distributed Wave-5 unreachable-finale defect and maps the modern persistent BudgetWavePlan driver."
+  ]
+}
