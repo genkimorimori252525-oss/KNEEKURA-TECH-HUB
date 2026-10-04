@@ -348,3 +348,35 @@ It is bounded evidence acquisition against the current map:
 3. map native JNI method contracts without entering protected native internals;
 4. design LAB fixtures for render context, hot reload and dedicated-server distribution;
 5. only then run bounded runtime tests.
+
+
+## 11. Chinese-speaking compatibility / analysis community
+
+A dedicated pass confirmed that Chinese-speaking public YSM technical work is unusually rich.
+
+High-value evidence is not limited to discussion posts. It includes compatibility projects that:
+
+- compile directly against the official 2.6.5 Forge 1.20.1 JAR;
+- validate optional Mixin targets against that JAR with ASM;
+- expose exact obfuscated owner/member/descriptor triples;
+- record javap-verified renderer shapes;
+- keep runtime counters proving that expected hooks actually execute;
+- maintain readable+obfuscated reflection aliases for unstable internal APIs.
+
+Pinned examples used in the map:
+
+- `HSZK2017/ysm_epicfight_compat@18db9328132bea921ea49f2125e4c0c319fbb5c8`
+- `3SCR1P7/TaczFixes@a2223f838fc4f16ecae0315663b7e0e3ca5d23d4`
+- `Aleph-1374/tlm-maid-survival@d264991d5ab68370db953ecec1a491c99b576952`
+- `mofeng945/TinkersNewlife@6e7f207759fc3de50969ea2a96d717d2409e7b49`
+
+Chinese-language knowledge bases such as the official YSM documentation and MC百科 are valuable for
+version/compatibility reconnaissance, but they do not outrank bytecode/source/runtime evidence.
+
+Public reverse-engineering reports also demonstrate that a specialized community has investigated
+YSM's Java/JNI/native/network layers. KNEEKURA deliberately excludes operational protection-bypass,
+anti-debug bypass and model-decryption material from that track.
+
+The reusable analysis method is documented separately in:
+
+- [CHINESE-COMMUNITY-OBFUSCATION-RECON-2026-10-05.md](CHINESE-COMMUNITY-OBFUSCATION-RECON-2026-10-05.md)
