@@ -214,6 +214,68 @@ def main():
     ]:
         interface_hits[iface] = [slim(c) for c in ysm_classes.values() if iface in c["interfaces"]]
 
+    # Deep details for high-value cluster candidates. Still metadata-only: no method code is emitted.
+    detail_names = set()
+    for label in ("network_version", "molang_core", "molang_side_effects", "carryon_binding", "tacz_binding"):
+        detail_names.update(x["class"] for x in cluster_hits[label])
+    # Include the direct superclass of the Molang binding candidate.
+    for name in list(detail_names):
+        c = ysm_classes.get(name)
+        if c and c.get("super", "").startswith(root):
+            detail_names.add(c["super"])
+
+    candidate_details = {}
+    for name in sorted(detail_names):
+        c = ysm_classes.get(name)
+        if not c:
+            continue
+        candidate_details[name] = {
+            "access": c["access"],
+            "super": c["super"],
+            "interfaces": c["interfaces"],
+            "fields": [{"access":x["access"],"name":x["name"],"descriptor":x["descriptor"]} for x in c["fields"]],
+            "methods": [{"access":x["access"],"name":x["name"],"descriptor":x["descriptor"]} for x in c["methods"]],
+            "class_refs": c["class_refs"],
+            "anchor_utf8": sorted({
+                x for x in c["utf8"]
+                if any(t in x for t in (
+                    "2.6.0","ground_speed2","bone_rot","bone_pos","play_sound","particle","defer",
+                    "tac_hold_gun","tac_gun_type","tac_is_fire","tac_fire_mode",
+                    "carryon_type","carryon_is_princess","model_id","select_texture",
+                    "SimpleChannel","FriendlyByteBuf","NetworkDirection"
+                ))
+            }),
+        }
+
+    # Packet/network structural candidates.
+    bytebuffer_packets = []
+    simple_channel_candidates = []
+    friendly_buf_candidates = []
+    for c in ysm_classes.values():
+        fields_desc = [x["descriptor"] for x in c["fields"]]
+        refs = set(c["class_refs"])
+        if "Ljava/nio/ByteBuffer;" in fields_desc:
+            bytebuffer_packets.append({
+                "class": c["name"], "super": c["super"], "interfaces": c["interfaces"],
+                "fields": [{"name":x["name"],"descriptor":x["descriptor"]} for x in c["fields"]],
+                "methods": [{"name":x["name"],"descriptor":x["descriptor"]} for x in c["methods"]],
+                "class_refs": c["class_refs"],
+            })
+        if "net/minecraftforge/network/simple/SimpleChannel" in refs:
+            simple_channel_candidates.append({
+                "class": c["name"], "super": c["super"], "interfaces": c["interfaces"],
+                "fields": [{"name":x["name"],"descriptor":x["descriptor"]} for x in c["fields"]],
+                "methods": [{"name":x["name"],"descriptor":x["descriptor"]} for x in c["methods"]],
+                "class_refs": c["class_refs"],
+            })
+        if "net/minecraft/network/FriendlyByteBuf" in refs:
+            friendly_buf_candidates.append({
+                "class": c["name"], "super": c["super"], "interfaces": c["interfaces"],
+                "fields": [{"name":x["name"],"descriptor":x["descriptor"]} for x in c["fields"]],
+                "methods": [{"name":x["name"],"descriptor":x["descriptor"]} for x in c["methods"]],
+                "class_refs": c["class_refs"],
+            })
+
     # Hierarchy beacons.
     hierarchy_hits = {}
     for super_name in [
@@ -247,6 +309,12 @@ def main():
         "seam_details": seam_details,
         "cluster_hits": cluster_hits,
         "interface_hits": interface_hits,
+        "candidate_details": candidate_details,
+        "network_probes": {
+            "bytebuffer_packets": bytebuffer_packets,
+            "simple_channel_candidates": simple_channel_candidates,
+            "friendly_buf_candidates": friendly_buf_candidates,
+        },
         "hierarchy_hits": hierarchy_hits,
         "parse_errors": [{"entry":k,"error":v["error"]} for k,v in classes.items() if k.startswith("!parse-error:")],
     }
@@ -267,6 +335,8 @@ def main():
         print("KNEEKURA_CLUSTER_" + label.upper() + "=" + json.dumps(cluster_hits[label][:8], ensure_ascii=False))
     print("KNEEKURA_JADE=" + json.dumps([x["name"] for x in interface_hits["snownee/jade/api/IWailaPlugin"]]))
     print("KNEEKURA_IGUIOVERLAY=" + json.dumps([x["name"] for x in interface_hits["net/minecraftforge/client/gui/overlay/IGuiOverlay"]]))
+    print("KNEEKURA_NETWORK_SIMPLE_CHANNEL=" + json.dumps([x["class"] for x in simple_channel_candidates]))
+    print("KNEEKURA_NETWORK_BYTEBUFFER=" + json.dumps([x["class"] for x in bytebuffer_packets]))
 
 
 if __name__ == "__main__":
