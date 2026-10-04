@@ -4,7 +4,7 @@
 
 - Target: **Gensokyo Delight ~ Youkai's Homecoming**
 - Focus: **danmaku / spell-card / grazing / projectile virtualization**
-- Research status: **TARGETED_DANMAKU_ARCHITECTURE_MAPPED**
+- Research status: **TARGETED_DANMAKU_ARCHITECTURE_AND_ALL_ENEMY_SPELL_CARDS_MAPPED**
 - Whole-target status: **IN_PROGRESS / NOT COMPLETE**
 - Research date: 2026-10-05
 
@@ -89,6 +89,9 @@ entity-manager/render-dispatch overhead that dense bullet hell would otherwise p
 
 Detailed report:
 [DANMAKU-RESEARCH-2026-10-05.md](DANMAKU-RESEARCH-2026-10-05.md)
+
+Exhaustive enemy Spell Card trajectory atlas:
+[ALL-SPELL-CARDS-PATTERN-ATLAS-2026-10-05.md](ALL-SPELL-CARDS-PATTERN-ATLAS-2026-10-05.md)
 
 Bounded repair history:
 [FAILURE-REPAIR-HISTORY.md](FAILURE-REPAIR-HISTORY.md)
