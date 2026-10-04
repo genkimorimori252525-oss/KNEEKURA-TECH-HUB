@@ -574,3 +574,43 @@ See:
 
 - [CHINESE-COMMUNITY-OBFUSCATION-RECON-2026-10-05.md](CHINESE-COMMUNITY-OBFUSCATION-RECON-2026-10-05.md)
 - [OBFUSCATION-MAP-2026-10-05.json](OBFUSCATION-MAP-2026-10-05.json)
+
+
+## 18. Exact distributed JAR closure
+
+The official Modrinth 2.6.5 Forge 1.20.1 artifact is now hash-fixed:
+
+- SHA-256: `25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f`
+- SHA-1: `151ac7b24da8beeca1a20864565743cfd77af286`
+- size: **63,269,843 bytes**
+- class files: **955**
+- classfile major: **61 / Java 17**
+
+The current obfuscation map has **210** entries:
+
+- **183 CONFIRMED**
+- **27 HIGH**
+
+The complete map contract passes against the exact JAR:
+
+- 83 class targets;
+- 122 exact method+descriptor targets;
+- 5 exact field+descriptor targets;
+- **0 failures**.
+
+Major new exact-artifact closures:
+
+1. `IBone` + concrete `AnimatedGeoBone` and the complete bone accessor surface.
+2. `AnimatableEntity`, `AnimatedGeoModel`, `AnimationEvent`, `LivingAnimatable`,
+   `CustomPlayerEntity`.
+3. `IContext` and its sole exact-JAR YSM implementation `MolangContext`.
+4. `ContextBinding` and `YSMBinding`.
+5. 25 YSMBinding literal -> Molang function/variable class pairs.
+6. artifact-era `PredicateBasedController` + `IAnimationController`, with f184eda's
+   `CodedAnimationController` retained as a separate release-line counterpart.
+7. `NetworkHandler`, its channel fields/helpers, all exact registered packet classes for IDs
+   1-9, 15-19, 21-23, 51 and 52, plus Java ByteBuffer sync envelopes.
+
+See [EXACT-JAR-STRUCTURAL-SCAN-2026-10-05.md](EXACT-JAR-STRUCTURAL-SCAN-2026-10-05.md).
+
+Protected native implementation and model/container decryption remain outside scope.
