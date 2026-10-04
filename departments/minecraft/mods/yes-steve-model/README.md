@@ -6,7 +6,7 @@
 - Primary adaptation anchor: Minecraft **1.20.1 + Forge**
 - Distributed target: **2.6.5-forge+mc1.20.1**
 - Main focus: model runtime, Molang, animation controllers, per-entity state, rendering, model distribution and integration seams
-- Research status: **FOUNDATION_ARCHITECTURE_MAPPED**
+- Research status: **FOUNDATION_ARCHITECTURE_MAPPED / JAVA_OBFUSCATION_PARTIALLY_RECOVERED**
 - Whole-target status: **IN_PROGRESS / NOT COMPLETE**
 - Research date: 2026-10-05
 
@@ -116,6 +116,26 @@ as a bounded capability layer for codec/render work.
 11. **Integration adapters as translators**, demonstrated by Touhou Little Maid, rather than giving every compatibility target a second animation engine.
 12. Secondary technique: **semantic structural bytecode matching** from YSM Mapping API for version-resilient external integration.
 
+## Java obfuscation status
+
+A bounded public-evidence pass now recovers a useful subset of the distributed 2.6.5 Java shell:
+
+- native-library bootstrap;
+- capability attachment/provider;
+- final Java/native renderer bridge;
+- player/arm/background render hooks;
+- vehicle/projectile/fishing-hook replacement helpers;
+- paperdoll/preview render path.
+
+The mapping is keyed by **owner + member + JVM descriptor** because YSM reuses the same obfuscated
+member strings across unrelated methods and fields.
+
+The machine-readable map deliberately keeps distributed-artifact observations separate from the
+version-matched public source candidate. This exposed concrete source/artifact divergence around the
+preview/paperdoll renderer instead of silently forcing them to agree.
+
+Protected native internals remain out of scope.
+
 ## Important limits
 
 - The distributed 2.6.5 JAR has not been hashed here.
@@ -132,6 +152,8 @@ as a bounded capability layer for codec/render work.
 - [MOLANG-SURFACE-2026-10-05.md](MOLANG-SURFACE-2026-10-05.md)
 - [TLM-INTEGRATION-2026-10-05.md](TLM-INTEGRATION-2026-10-05.md)
 - [MODEL-DISTRIBUTION-2026-10-05.md](MODEL-DISTRIBUTION-2026-10-05.md)
+- [OBFUSCATION-RESEARCH-2026-10-05.md](OBFUSCATION-RESEARCH-2026-10-05.md)
+- [OBFUSCATION-MAP-2026-10-05.json](OBFUSCATION-MAP-2026-10-05.json)
 - [FAILURE-REPAIR-HISTORY.md](FAILURE-REPAIR-HISTORY.md)
 - [RECONNAISSANCE-2026-10-05.md](RECONNAISSANCE-2026-10-05.md)
 - [SOURCE-INVENTORY-2026-10-05.json](SOURCE-INVENTORY-2026-10-05.json)
