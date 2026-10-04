@@ -24,6 +24,7 @@ const KINDS = Object.freeze({
   PATH_SEARCH_RESULT: ['RESULT','path_search_result'],
   PATH_NEIGHBORS_RETURN: ['EVALUATION','path_search_neighbors'],
   PATH_HEAP_OPERATION_RETURN: ['EVALUATION','path_heap_operations'],
+  PATH_NODE_CLOSED_CHECKPOINT: ['EVALUATION','path_closed_nodes'],
 });
 const text = value => typeof value === 'string' && value.length > 0 && value.length <= 512;
 const integer = value => Number.isSafeInteger(value);
@@ -104,15 +105,16 @@ function validKnightCoordination(d,record) {
     d.dispatchScope==='ORIGINAL_PASSED_LIST_AFTER_BROADCAST'&&d.memberStateScope==='CACHED_FIELDS_AT_RETURN'&&
     ['affectedMembersStatus','leaderDecisionStatus','groupIdentityStatus'].every(k=>d[k]==='NOT_EXPOSED');
 }
-function validReturnedNode(section) {
+function validReturnedNode(section,checkpoint=false) {
   if(!object(section))return false;
   if(section.status==='NOT_EXPOSED')return Object.keys(section).length===2&&section.detail==='NULL_NODE';
   const n=section.data,floats=['g','h','f','costMalus','walkedDistance'];
+  const open=checkpoint?'openAtCheckpoint':'openAtReturn',closed=checkpoint?'closedAtCheckpoint':'closedAtReturn';
   return section.status==='AVAILABLE'&&Object.keys(section).length===2&&object(n)&&text(n.className)&&
     ['x','y','z'].every(k=>integer(n[k]))&&
     (text(n.pathType)||(n.pathType===undefined&&n.pathTypeStatus==='NOT_EXPOSED'))&&
-    floats.every(k=>numberOrUnknown(n,k))&&typeof n.openAtReturn==='boolean'&&typeof n.closedAtReturn==='boolean'&&
-    Object.keys(n).every(k=>['className','x','y','z','pathType','pathTypeStatus','openAtReturn','closedAtReturn',
+    floats.every(k=>numberOrUnknown(n,k))&&typeof n[open]==='boolean'&&typeof n[closed]==='boolean'&&
+    Object.keys(n).every(k=>['className','x','y','z','pathType','pathTypeStatus',open,closed,
       ...floats,...floats.map(f=>f+'Status')].includes(k));
 }
 function validNeighborReturn(d) {
@@ -137,23 +139,40 @@ function validHeapReturn(d,record) {
   if(Object.keys(d).length!==keys.length||Object.keys(d).some(k=>!keys.includes(k))||!text(d.searchId)||
     !new RegExp('^search:'+record.payload.targetRevision+':[1-9][0-9]*$').test(d.searchId)||!text(d.heapClass)||
     !integer(d.maxNodes)||d.maxNodes<1||d.maxNodes>64||!validReturnedNode(d.node)||!object(d.nodeIdentity))return false;
-  const identity=d.nodeIdentity;
-  if(identity.status==='AVAILABLE') {
-    if(d.node.status!=='AVAILABLE'||Object.keys(identity).length!==2||!text(identity.id)||!identity.id.startsWith(d.searchId+':node:'))return false;
-    const suffix=identity.id.slice((d.searchId+':node:').length);
-    if(!/^[1-9][0-9]*$/.test(suffix)||!integer(Number(suffix))||Number(suffix)>d.maxNodes)return false;
-  }else if(identity.status!=='NOT_EXPOSED'||Object.keys(identity).length!==2||
-      identity.detail!==(d.node.status==='AVAILABLE'?'NODE_IDENTITY_LIMIT':'NULL_NODE'))return false;
+  if(!validNodeIdentity(d))return false;
   return d.phase===(insert?'AFTER_ORIGINAL_INSERT':change?'AFTER_ORIGINAL_CHANGE_COST':'AFTER_ORIGINAL_POP_BEFORE_CALLER_CLOSE')&&
     d.nodeRole===(change?'PASSED_NODE_AFTER_ORIGINAL_CALL':'ORIGINAL_RETURNED_NODE')&&
     (!insert||typeof d.argumentMatchesReturned==='boolean')&&(!change||numberOrUnknown(d,'requestedCost'))&&
     d.dispatchScope==='ORIGINAL_PATHFINDER_INNER_HEAP_CALL_RETURN'&&d.subjectRelationScope==='SELECTED_OUTER_FIND_PATH_INVOCATION'&&
     ['neighborPopulationStatus','rejectionReasonStatus','finalPathCostStatus'].every(k=>d[k]==='NOT_EXPOSED');
 }
+function validNodeIdentity(d) {
+  const identity=d.nodeIdentity;if(!object(identity))return false;
+  if(identity.status==='AVAILABLE') {
+    if(d.node.status!=='AVAILABLE'||Object.keys(identity).length!==2||!text(identity.id)||!identity.id.startsWith(d.searchId+':node:'))return false;
+    const suffix=identity.id.slice((d.searchId+':node:').length);
+    if(!/^[1-9][0-9]*$/.test(suffix)||!integer(Number(suffix))||Number(suffix)>d.maxNodes)return false;
+  }else if(identity.status!=='NOT_EXPOSED'||Object.keys(identity).length!==2||
+      identity.detail!==(d.node.status==='AVAILABLE'?'NODE_IDENTITY_LIMIT':'NULL_NODE'))return false;
+  return true;
+}
+function validClosedCheckpoint(d,record) {
+  const keys=['searchId','priorPopEventIndex','nodeRole','node','nodeIdentity','maxNodes','phase','dispatchScope',
+    'subjectRelationScope','referenceScope','neighborPopulationStatus','rejectionReasonStatus','finalPathCostStatus'];
+  return Object.keys(d).length===keys.length&&Object.keys(d).every(k=>keys.includes(k))&&text(d.searchId)&&
+    new RegExp('^search:'+record.payload.targetRevision+':[1-9][0-9]*$').test(d.searchId)&&
+    integer(d.maxNodes)&&d.maxNodes>=1&&d.maxNodes<=64&&d.node?.status==='AVAILABLE'&&validReturnedNode(d.node,true)&&
+    validNodeIdentity(d)&&integer(d.priorPopEventIndex)&&d.priorPopEventIndex>=1&&d.priorPopEventIndex<record.payload.eventIndex&&
+    d.nodeRole==='PRECEDING_ORIGINAL_POP_RETURN_REFERENCE'&&d.phase==='AFTER_ORIGINAL_CALLER_CLOSED_FIELD_WRITE'&&
+    d.dispatchScope==='ORIGINAL_PATHFINDER_INNER_CLOSED_FIELD_WRITE'&&d.subjectRelationScope==='SELECTED_OUTER_FIND_PATH_INVOCATION'&&
+    d.referenceScope==='RETAINED_ORIGINAL_POP_RETURN_REFERENCE'&&
+    ['neighborPopulationStatus','rejectionReasonStatus','finalPathCostStatus'].every(k=>d[k]==='NOT_EXPOSED');
+}
 function validData(kind,d,record) {
   if (kind === 'MOD_COORDINATION_RETURN') return validKnightCoordination(d,record);
   if (kind === 'PATH_NEIGHBORS_RETURN') return validNeighborReturn(d);
   if (kind === 'PATH_HEAP_OPERATION_RETURN') return validHeapReturn(d,record);
+  if (kind === 'PATH_NODE_CLOSED_CHECKPOINT') return validClosedCheckpoint(d,record);
   if (kind === 'EFFECTIVE_MALUS_RETURN') {
     const numeric=Number.isFinite(d.returnedMalus),keys=['receiverUuid','receiverClass','evaluatorClass','pathType',
       numeric?'returnedMalus':'returnedMalusStatus','dispatchScope','callSiteScope','effectivePathCostStatus','underlyingSourceStatus'];
@@ -225,7 +244,8 @@ function validData(kind,d,record) {
 export function validOriginalDecisionEvent(record) {
   const p=record.payload;
   return record.source?.side === 'SERVER' && p?.schema === 'kneekura.original-decision-event/v1' &&
-    p.semantics === 'ORIGINAL_INVOCATION_RETURN_ONLY' && integer(p.targetRevision) && p.targetRevision > 0 &&
+    p.semantics === (p.kind==='PATH_NODE_CLOSED_CHECKPOINT'?'ORIGINAL_FIELD_WRITE_CHECKPOINT_ONLY':'ORIGINAL_INVOCATION_RETURN_ONLY') &&
+    integer(p.targetRevision) && p.targetRevision > 0 &&
     integer(p.eventIndex) && p.eventIndex >= 1 && p.eventIndex <= 256 && text(p.burstId) &&
     Object.hasOwn(KINDS,p.kind) && object(p.data) && bounded(p) &&
     Number.isSafeInteger(p.observerCostNanos) && p.observerCostNanos >= 0 &&
@@ -239,19 +259,19 @@ export function appendOriginalDecisionEvents(records,stages,capabilities,timelin
     const p=record.payload;
     const data=originalDecisionData(record);
     const [stage,capability]=KINDS[p.kind];
-    const algorithm=p.kind === 'PATH_SEARCH_STATE';
+    const algorithm=p.kind === 'PATH_SEARCH_STATE'||p.kind === 'PATH_NODE_CLOSED_CHECKPOINT';
     const status=algorithm ? 'INSTRUMENTED_ALGORITHM_STATE' : 'DIRECT_OBSERVED';
     const relation=algorithm ? 'ALGORITHM_TRACE_RELATION' : 'DIRECT_RUNTIME_RELATION';
     stages[stage] ??= {facts:[]};
     stages[stage].facts.push({key:p.kind.toLowerCase(),value:data,epistemic_status:status,
       causal_relation:relation,source_observation_ids:[record.observationId],
-      note:'Bounded original invocation only; no reason, complete decision history or adjacent-event causality is inferred.'});
-    const unavailable=algorithm && p.data.frontier.status === 'NOT_EXPOSED';
+      note:'Bounded original observation boundary only; no reason, complete decision history or adjacent-event causality is inferred.'});
+    const unavailable=p.kind === 'PATH_SEARCH_STATE' && p.data.frontier.status === 'NOT_EXPOSED';
     if (!unavailable) {
       const existing=capabilities[capability];
       capabilities[capability]={status:'PARTIAL',source_observation_ids:[...new Set([
         ...(existing?.source_observation_ids ?? []),record.observationId])],
-        detail:'Finite opt-in capture of observed invocations; absent or suppressed invocations and causal reasons remain unknown.'};
+        detail:'Finite opt-in capture of observed boundaries; absent or suppressed observations and causal reasons remain unknown.'};
     }
     timeline.push({event_id:record.observationId,tick:record.gameTime,stage,kind:p.kind,
       summary:{...data,burstId:p.burstId,eventIndex:p.eventIndex},epistemic_status:status,

@@ -17,7 +17,7 @@ The genuine protected inner method descriptor includes Forge's profiler argument
 |380|`CHANGE_COST`|Actual `changeCost(Node,float):void` return|
 |408|`RELAXATION_INSERT`|Actual accepted-relaxation insertion return|
 
-The caller writes `Node.closed=true` at128. This field write is not instrumented or relabeled as a method return. A pop record's `closedAtReturn` is the actual flag **before** that write. Later neighbor/current-node and search-end cache observations remain separate states; the stream does not establish every closed transition.
+The caller writes `Node.closed=true` at128. Producer `e513a7f` does not instrument this field write or relabel it as a method return. A pop record's `closedAtReturn` is the actual flag **before** that write. Later neighbor/current-node and search-end cache observations remain separate states; this generation's stream does not establish every closed transition. The subsequent [closed checkpoint slice](PATH-CLOSED-CHECKPOINT-2026-10-04.md) keeps its distinct field-write semantics and separate acceptance status.
 
 Each debug-only Redirect calls the passed heap's original virtual method exactly once, retaining the actual return reference or exception. Recording starts after that call and after selected-search/thread/channel/context/budget checks. The passed heap must match the selected finder's cached `openSet` reference. The observer reads detached base Node fields; it never invokes another search, evaluator, distance/heuristic, heap query or controller setter. Another Mixin redirecting these callsites can conflict; arbitrary MOD coexistence and negligible overhead are unverified.
 

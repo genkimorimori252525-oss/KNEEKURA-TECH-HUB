@@ -45,6 +45,7 @@ public final class KneekuraDebugDecisionHooks {
     private KneekuraDebugDecisionHooks() { }
     @FunctionalInterface public interface Sink { void record(String method, JsonObject payload) throws IOException; }
     @FunctionalInterface private interface Data { JsonObject read() throws ReflectiveOperationException; }
+    private record PendingPop(Node node,int eventIndex) { }
 
     public static void install(Session session) {
         if (session.thread != Thread.currentThread()) throw new IllegalStateException("SERVER_THREAD_REQUIRED");
@@ -70,6 +71,7 @@ public final class KneekuraDebugDecisionHooks {
         private final IdentityHashMap<Object,String> identities=new IdentityHashMap<>();
         private final IdentityHashMap<PathFinder,String> searches=new IdentityHashMap<>();
         private final IdentityHashMap<PathFinder,IdentityHashMap<Node,String>> heapNodes;
+        private final IdentityHashMap<PathFinder,PendingPop> pendingPops;
         private final IdentityHashMap<Projectile,Integer> projectiles=new IdentityHashMap<>();
         private long nextIdentity, nextSearch;
         private boolean goalCoveragePartial;
@@ -84,6 +86,7 @@ public final class KneekuraDebugDecisionHooks {
                 throw new IllegalArgumentException("INVALID_CHANNELS");
             this.channels=Set.copyOf(channels);
             this.heapNodes=channels.contains("frontier")?new IdentityHashMap<>():null;
+            this.pendingPops=channels.contains("frontier")?new IdentityHashMap<>():null;
             this.modAdapter=channels.contains("mod")?KneekuraDebugTwilightForestAdapter.shared():null;
             this.currentContext=currentContext;this.time=time;this.sink=sink;
             if(channels.contains("goal")){register(goal,"goal");register(target,"target");}
@@ -107,7 +110,15 @@ public final class KneekuraDebugDecisionHooks {
         }
         public KneekuraDebugDecisionBurstBudget budget() { return budget; }
         public boolean goalCoveragePartial() { return goalCoveragePartial; }
-        private void clearHeapNodes(){if(heapNodes!=null)heapNodes.clear();}
+        private void clearHeapNodes(){if(heapNodes!=null)heapNodes.clear();if(pendingPops!=null)pendingPops.clear();}
+        private JsonObject nodeIdentity(PathFinder finder,Node node) {
+            JsonObject identity=new JsonObject();var nodes=heapNodes.get(finder);
+            String id=node==null?null:nodes.get(node);
+            if(node!=null&&id==null&&nodes.size()<nodeLimit){id=searches.get(finder)+":node:"+(nodes.size()+1);nodes.put(node,id);}
+            if(id==null){identity.addProperty("status","NOT_EXPOSED");identity.addProperty("detail",node==null?"NULL_NODE":"NODE_IDENTITY_LIMIT");}
+            else {identity.addProperty("status","AVAILABLE");identity.addProperty("id",id);}
+            return identity;
+        }
         private boolean matches(LivingEntity entity) { return subject!=null && subject==entity && thread==Thread.currentThread(); }
         private String token(Object object) {
             String token=identities.get(object);
@@ -119,7 +130,7 @@ public final class KneekuraDebugDecisionHooks {
             if(thread!=Thread.currentThread())return false;
             String channel=kind.startsWith("CONTROL_PROJECTILE_")&&channels.contains("projectile")?"projectile":
                     kind.equals("PATH_NEIGHBORS_RETURN")?"neighbors":
-                    kind.equals("PATH_HEAP_OPERATION_RETURN")?"frontier":
+                    kind.equals("PATH_HEAP_OPERATION_RETURN")||kind.equals("PATH_NODE_CLOSED_CHECKPOINT")?"frontier":
                     kind.equals("EFFECTIVE_MALUS_RETURN")?"effective_malus":
                     kind.startsWith("MOD_")?"mod":kind.startsWith("GOAL_")?"goal":kind.startsWith("PATH_")?"path":
                     kind.startsWith("CONTROL_")?"control":kind.startsWith("BASE_MALUS_")?"malus":
@@ -132,7 +143,8 @@ public final class KneekuraDebugDecisionHooks {
                 JsonObject root=new JsonObject();
                 boolean mod=kind.equals("MOD_TRANSITION_RETURN");
                 root.addProperty("schema",mod?"kneekura.mod-decision-return/v1":"kneekura.original-decision-event/v1");
-                root.addProperty("semantics",mod?"ORIGINAL_MOD_INVOCATION_RETURN_ONLY":"ORIGINAL_INVOCATION_RETURN_ONLY");
+                root.addProperty("semantics",mod?"ORIGINAL_MOD_INVOCATION_RETURN_ONLY":
+                    kind.equals("PATH_NODE_CLOSED_CHECKPOINT")?"ORIGINAL_FIELD_WRITE_CHECKPOINT_ONLY":"ORIGINAL_INVOCATION_RETURN_ONLY");
                 if(mod) {
                     root.addProperty("returnTick",subject.level().getGameTime());
                     root.addProperty("returnLocalTick",tick);root.addProperty("localTickScope","LAST_COMPLETED_SERVER_END_COUNTER");
@@ -396,6 +408,7 @@ public final class KneekuraDebugDecisionHooks {
         // Also clear an interrupted selected search when this finder is reused by another Mob.
         session.searches.remove(finder);
         if(session.heapNodes!=null)session.heapNodes.remove(finder);
+        if(session.pendingPops!=null)session.pendingPops.remove(finder);
         if(!session.matches(mob)||(!session.channels.contains("path")&&!session.channels.contains("neighbors")&&!session.channels.contains("frontier")))return;
         try { if(!session.budget.allows(session.currentContext.get(),session.time.getAsLong())){session.clearHeapNodes();return;} }
         catch(RuntimeException error) {session.clearHeapNodes();session.budget.close("CONTEXT_UNAVAILABLE");return;}
@@ -442,6 +455,9 @@ public final class KneekuraDebugDecisionHooks {
         return returned;
     }
     public static Node originalHeapPop(PathFinder finder,BinaryHeap heap) {
+        // A failed next original pop cannot leave an earlier return eligible for a checkpoint.
+        Session session=active;
+        if(session!=null&&session.thread==Thread.currentThread()&&session.pendingPops!=null)session.pendingPops.remove(finder);
         Node returned=heap.pop();heapReturn(finder,heap,returned,"POP",false,0);return returned;
     }
     public static void originalHeapChangeCost(PathFinder finder,BinaryHeap heap,Node argument,float requestedCost) {
@@ -460,21 +476,40 @@ public final class KneekuraDebugDecisionHooks {
                 operation.equals("CHANGE_COST")?"AFTER_ORIGINAL_CHANGE_COST":"AFTER_ORIGINAL_INSERT");
             data.addProperty("nodeRole",operation.equals("CHANGE_COST")?"PASSED_NODE_AFTER_ORIGINAL_CALL":"ORIGINAL_RETURNED_NODE");
             data.add("node",observedNode(node));data.addProperty("maxNodes",session.nodeLimit);
-            JsonObject identity=new JsonObject();var nodes=session.heapNodes.get(finder);
-            String id=node==null?null:nodes.get(node);
-            if(node!=null&&id==null&&nodes.size()<session.nodeLimit){id=searchId+":node:"+(nodes.size()+1);nodes.put(node,id);}
-            if(id==null){identity.addProperty("status","NOT_EXPOSED");identity.addProperty("detail",node==null?"NULL_NODE":"NODE_IDENTITY_LIMIT");}
-            else {identity.addProperty("status","AVAILABLE");identity.addProperty("id",id);}
-            data.add("nodeIdentity",identity);
+            data.add("nodeIdentity",session.nodeIdentity(finder,node));
             if(operation.endsWith("INSERT"))data.addProperty("argumentMatchesReturned",argumentMatches);
             if(operation.equals("CHANGE_COST"))number(data,"requestedCost",cost);
             data.addProperty("dispatchScope","ORIGINAL_PATHFINDER_INNER_HEAP_CALL_RETURN");
             data.addProperty("subjectRelationScope","SELECTED_OUTER_FIND_PATH_INVOCATION");
             data.addProperty("neighborPopulationStatus","NOT_EXPOSED");data.addProperty("rejectionReasonStatus","NOT_EXPOSED");
+            data.addProperty("finalPathCostStatus","NOT_EXPOSED");
+            // Saved within the checked capture. record clears references on claim/writer failure.
+            if(operation.equals("POP")&&node!=null)session.pendingPops.put(finder,new PendingPop(node,session.budget.events()+1));
+            return data;
+        });
+    }
+    /** Read only the preceding original pop return after the caller's original field write. */
+    public static void pathClosedWrite(PathFinder finder) {
+        Session session=active;
+        if(session==null||session.thread!=Thread.currentThread()||session.pendingPops==null||!session.searches.containsKey(finder))return;
+        PendingPop pending=session.pendingPops.remove(finder);if(pending==null)return;
+        session.record("PATH_NODE_CLOSED_CHECKPOINT","PathFinder.inner.Node.closed.AFTER_ORIGINAL_WRITE",()->{
+            JsonObject data=new JsonObject();data.addProperty("searchId",session.searches.get(finder));
+            data.addProperty("priorPopEventIndex",pending.eventIndex());
+            data.addProperty("nodeRole","PRECEDING_ORIGINAL_POP_RETURN_REFERENCE");
+            data.add("node",observedNode(pending.node(),true));data.add("nodeIdentity",session.nodeIdentity(finder,pending.node()));
+            data.addProperty("maxNodes",session.nodeLimit);data.addProperty("phase","AFTER_ORIGINAL_CALLER_CLOSED_FIELD_WRITE");
+            data.addProperty("dispatchScope","ORIGINAL_PATHFINDER_INNER_CLOSED_FIELD_WRITE");
+            data.addProperty("subjectRelationScope","SELECTED_OUTER_FIND_PATH_INVOCATION");
+            data.addProperty("referenceScope","RETAINED_ORIGINAL_POP_RETURN_REFERENCE");
+            data.addProperty("neighborPopulationStatus","NOT_EXPOSED");data.addProperty("rejectionReasonStatus","NOT_EXPOSED");
             data.addProperty("finalPathCostStatus","NOT_EXPOSED");return data;
         });
     }
     private static JsonObject observedNode(Node node)throws ReflectiveOperationException {
+        return observedNode(node,false);
+    }
+    private static JsonObject observedNode(Node node,boolean checkpoint)throws ReflectiveOperationException {
         JsonObject section=new JsonObject();
         if(node==null){section.addProperty("status","NOT_EXPOSED");section.addProperty("detail","NULL_NODE");return section;}
         JsonObject row=new JsonObject();row.addProperty("className",label(node.getClass().getName()));
@@ -482,8 +517,8 @@ public final class KneekuraDebugDecisionHooks {
         if(node.type==null)row.addProperty("pathTypeStatus","NOT_EXPOSED");else row.addProperty("pathType",node.type.name());
         number(row,"g",node.g);number(row,"h",node.h);number(row,"f",node.f);
         number(row,"costMalus",node.costMalus);number(row,"walkedDistance",node.walkedDistance);
-        row.addProperty("openAtReturn",(Integer)KneekuraDebugDecisionSnapshot.read(Node.class,"heapIdx",node)>=0);
-        row.addProperty("closedAtReturn",node.closed);section.addProperty("status","AVAILABLE");section.add("data",row);return section;
+        row.addProperty(checkpoint?"openAtCheckpoint":"openAtReturn",(Integer)KneekuraDebugDecisionSnapshot.read(Node.class,"heapIdx",node)>=0);
+        row.addProperty(checkpoint?"closedAtCheckpoint":"closedAtReturn",node.closed);section.addProperty("status","AVAILABLE");section.add("data",row);return section;
     }
     public static void pathResult(PathFinder finder,Mob mob,Path result) {
         Session session=active;if(session==null||!session.matches(mob)||!session.searches.containsKey(finder))return;
@@ -500,6 +535,7 @@ public final class KneekuraDebugDecisionHooks {
     public static void pathEnd(PathFinder finder) {
         Session session=active;if(session!=null&&session.thread==Thread.currentThread()){
             session.searches.remove(finder);if(session.heapNodes!=null)session.heapNodes.remove(finder);
+            if(session.pendingPops!=null)session.pendingPops.remove(finder);
         }
     }
 

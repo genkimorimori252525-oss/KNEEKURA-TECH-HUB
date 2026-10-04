@@ -3,6 +3,7 @@ package com.github.tartaricacid.touhoulittlemaid.sim.debug.decisionmixin;
 import com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugDecisionHooks;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.PathNavigationRegion;
 import net.minecraft.world.level.pathfinder.Path;
@@ -16,6 +17,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Set;
+import java.util.Map;
 
 @Mixin(value=PathFinder.class,remap=false)
 public abstract class KneekuraDebugPathDecisionMixin {
@@ -33,6 +35,11 @@ public abstract class KneekuraDebugPathDecisionMixin {
             at=@At(value="INVOKE",target="Lnet/minecraft/world/level/pathfinder/BinaryHeap;pop()Lnet/minecraft/world/level/pathfinder/Node;"),require=1)
     private Node kneekura$originalPop(BinaryHeap heap) {
         return KneekuraDebugDecisionHooks.originalHeapPop((PathFinder)(Object)this,heap);
+    }
+    @Inject(method="findPath(Lnet/minecraft/util/profiling/ProfilerFiller;Lnet/minecraft/world/level/pathfinder/Node;Ljava/util/Map;FIF)Lnet/minecraft/world/level/pathfinder/Path;",
+            at=@At(value="FIELD",target="Lnet/minecraft/world/level/pathfinder/Node;closed:Z",opcode=181,ordinal=0,shift=At.Shift.AFTER),require=1)
+    private void kneekura$closedWrite(ProfilerFiller profiler,Node start,Map<?,?> targets,float range,int accuracy,float multiplier,CallbackInfoReturnable<Path> ignored) {
+        KneekuraDebugDecisionHooks.pathClosedWrite((PathFinder)(Object)this);
     }
     @Redirect(method="findPath(Lnet/minecraft/util/profiling/ProfilerFiller;Lnet/minecraft/world/level/pathfinder/Node;Ljava/util/Map;FIF)Lnet/minecraft/world/level/pathfinder/Path;",
             at=@At(value="INVOKE",target="Lnet/minecraft/world/level/pathfinder/BinaryHeap;changeCost(Lnet/minecraft/world/level/pathfinder/Node;F)V"),require=1)
