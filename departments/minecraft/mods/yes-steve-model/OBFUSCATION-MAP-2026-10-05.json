@@ -4952,6 +4952,99 @@
           "fact": "Exact descriptor and recovered class role identify deserializeNBT."
         }
       ]
+    },
+    {
+      "id": "ysm265.class.bundled-concentus-inlines",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.o0o0o0oOooOO0OOOOO00O0O0",
+      "semantic_owner": "org.concentus.Inlines",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "foundation_domain": "BUNDLED_CONCENTUS",
+      "evidence": [
+        {
+          "type": "EXACT_COMPONENT_FINGERPRINT",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37228156684,
+          "fact": "Exact seedless-component hub has 247 classfile methods and exactly 2 fields, dominated by primitive arithmetic helpers. Upstream Concentus Inlines has a constructor plus about 246 arithmetic helper methods and 2 fields; the exact component contains 131 connected classes."
+        },
+        {
+          "type": "UPSTREAM_SOURCE",
+          "repository": "lostromb/concentus",
+          "revision": "3885c4e46513ef0fc81fca100189e54f1714c6ca",
+          "path": "Java/Concentus/src/main/java/org/concentus/Inlines.java"
+        },
+        {
+          "type": "OFFICIAL_FRONTIER_NOTICE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "74c53b58b2f9b680a6c6dc5d5d41e7422fc000bb",
+          "path": "NOTICE.md",
+          "fact": "Official YSM NOTICE explicitly lists bundled/relocated Concentus and Gagravarr/VorbisJava source components, while noting exact upstream revision cannot be proven from current source."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.bundled-gagravarr-high-level-ogg-stream-packet",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oO00O00OooO00OoOOoo0oooO",
+      "semantic_owner": "org.gagravarr.ogg.HighLevelOggStreamPacket",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "foundation_domain": "BUNDLED_VORBISJAVA",
+      "evidence": [
+        {
+          "type": "EXACT_COMPONENT_FINGERPRINT",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37228156684,
+          "fact": "Exact abstract class has 2 fields, 2 constructors and 5 methods over an Ogg-packet-like object/byte[] surface. Upstream HighLevelOggStreamPacket has the same structural shape."
+        },
+        {
+          "type": "UPSTREAM_SOURCE",
+          "repository": "Gagravarr/VorbisJava",
+          "revision": "a2e8a3b546fab22e7145b78c41f50654351028f5",
+          "path": "core/src/main/java/org/gagravarr/ogg/HighLevelOggStreamPacket.java"
+        },
+        {
+          "type": "OFFICIAL_FRONTIER_NOTICE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "74c53b58b2f9b680a6c6dc5d5d41e7422fc000bb",
+          "path": "NOTICE.md",
+          "fact": "Official YSM NOTICE explicitly lists bundled/relocated Concentus and Gagravarr/VorbisJava source components, while noting exact upstream revision cannot be proven from current source."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.bundled-gagravarr-theora-file",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oOoO00O0O0ooOoOoOOo0oO0O",
+      "semantic_owner": "org.gagravarr.theora.TheoraFile",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "foundation_domain": "BUNDLED_VORBISJAVA",
+      "evidence": [
+        {
+          "type": "EXACT_COMPONENT_FINGERPRINT",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37228156684,
+          "fact": "Exact class extends the recovered HighLevelOggStreamPacket owner, implements Closeable, matches the File/Ogg-reader/Ogg-writer/OutputStream constructor family, and retains the unique literal 'Supplied File is not Theora' plus matching Theora/audio-stream diagnostics."
+        },
+        {
+          "type": "UPSTREAM_SOURCE",
+          "repository": "Gagravarr/VorbisJava",
+          "revision": "a2e8a3b546fab22e7145b78c41f50654351028f5",
+          "path": "core/src/main/java/org/gagravarr/theora/TheoraFile.java"
+        },
+        {
+          "type": "OFFICIAL_FRONTIER_NOTICE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "74c53b58b2f9b680a6c6dc5d5d41e7422fc000bb",
+          "path": "NOTICE.md",
+          "fact": "Official YSM NOTICE explicitly lists bundled/relocated Concentus and Gagravarr/VorbisJava source components, while noting exact upstream revision cannot be proven from current source."
+        }
+      ]
     }
   ],
   "unresolved_hints": [
@@ -5347,7 +5440,8 @@
           "exact_component_size": 131,
           "hub_class": "com/elfmcys/yesstevemodel/o0o0o0oOooOO0OOOOO00O0O0",
           "semantic_hub": "org.concentus.Inlines",
-          "evidence": "Exact hub has 247 methods/2 fields; upstream Concentus Inlines has constructor + ~246 arithmetic helper methods and 2 fields. Current official YSM NOTICE explicitly lists bundled Concentus."
+          "evidence": "Exact hub has 247 methods/2 fields; upstream Concentus Inlines has constructor + ~246 arithmetic helper methods and 2 fields. Current official YSM NOTICE explicitly lists bundled Concentus.",
+          "map_seed": "ysm265.class.bundled-concentus-inlines"
         },
         "vorbisjava": {
           "status": "COMPONENT_IDENTIFIED",
@@ -5356,7 +5450,11 @@
           "semantic_theora": "org.gagravarr.theora.TheoraFile",
           "base_class": "com/elfmcys/yesstevemodel/oO00O00OooO00OoOOoo0oooO",
           "semantic_base": "org.gagravarr.ogg.HighLevelOggStreamPacket",
-          "evidence": "Exact Theora class retains 'Supplied File is not Theora' and matches TheoraFile I/O/Closeable shape; exact base has 2 fields, 2 constructors and 5 methods matching HighLevelOggStreamPacket. Current official YSM NOTICE explicitly lists bundled VorbisJava/Gagravarr."
+          "evidence": "Exact Theora class retains 'Supplied File is not Theora' and matches TheoraFile I/O/Closeable shape; exact base has 2 fields, 2 constructors and 5 methods matching HighLevelOggStreamPacket. Current official YSM NOTICE explicitly lists bundled VorbisJava/Gagravarr.",
+          "map_seeds": [
+            "ysm265.class.bundled-gagravarr-high-level-ogg-stream-packet",
+            "ysm265.class.bundled-gagravarr-theora-file"
+          ]
         }
       }
     }
