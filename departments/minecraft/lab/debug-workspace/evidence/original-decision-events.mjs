@@ -1,7 +1,13 @@
 import twilightForestAnchor from './adapters/twilightforest-anchor.json' with {type:'json'};
 import {exactObjectKeys,validPathReferenceFact,validCachedPathFact,consistentRawPathMatch} from './cached-path-contract.mjs';
 
+import {BRAIN_COMPUTE_KINDS,validBrainCompute} from './brain-compute-contract.mjs';
+
 const KINDS = Object.freeze({
+  BRAIN_PATH_COMPUTE_RETURN: ['EVALUATION','brain_navigation'],
+  BRAIN_PATH_CREATE_RETURN: ['EVALUATION','brain_navigation'],
+  BRAIN_PATH_COMPUTE_PATH_WRITE_CHECKPOINT: ['EXECUTION','brain_navigation'],
+  BRAIN_PATH_FINDER_RETURN: ['EVALUATION','brain_navigation'],
   MOD_COORDINATION_RETURN: ['EXECUTION','mod_coordination'],
   GOAL_ELIGIBILITY_RETURN: ['EVALUATION','goal_eligibility'],
   GOAL_CONTINUATION_RETURN: ['EVALUATION','goal_eligibility'],
@@ -400,6 +406,7 @@ function validBrainNavigation(kind,d,record) {
     d.returnScope==='ORIGINAL_VIRTUAL_MOVE_TO_RETURN_AT_SINK_CALL_SITE_NOT_ARRIVAL'&&d.referenceScope==='RAW_ARGUMENT_VS_CACHED_PATH_REFERENCE_EQUALITY';
 }
 function validData(kind,d,record) {
+  if(BRAIN_COMPUTE_KINDS.includes(kind))return validBrainCompute(kind,d,record);
   if(['BRAIN_PATH_CONDITION_RETURN','BRAIN_PATH_DISPATCH_RETURN'].includes(kind))return validBrainTickStop(kind,d,record);
   if(kind.startsWith('BRAIN_PATH_'))return validBrainNavigation(kind,d,record);
   if(kind==='NAVIGATION_MOVE_TO_RETURN')return validNavigationReturn(d,record);
@@ -482,7 +489,7 @@ function validData(kind,d,record) {
 export function validOriginalDecisionEvent(record) {
   const p=record.payload;
   return record.source?.side === 'SERVER' && p?.schema === 'kneekura.original-decision-event/v1' &&
-    p.semantics === (['PATH_NODE_CLOSED_CHECKPOINT','PATH_NODE_G_WRITE_CHECKPOINT'].includes(p.kind)?'ORIGINAL_FIELD_WRITE_CHECKPOINT_ONLY':'ORIGINAL_INVOCATION_RETURN_ONLY') &&
+    p.semantics === (['PATH_NODE_CLOSED_CHECKPOINT','PATH_NODE_G_WRITE_CHECKPOINT','BRAIN_PATH_COMPUTE_PATH_WRITE_CHECKPOINT'].includes(p.kind)?'ORIGINAL_FIELD_WRITE_CHECKPOINT_ONLY':'ORIGINAL_INVOCATION_RETURN_ONLY') &&
     integer(p.targetRevision) && p.targetRevision > 0 &&
     integer(p.eventIndex) && p.eventIndex >= 1 && p.eventIndex <= 256 && text(p.burstId) &&
     Object.hasOwn(KINDS,p.kind) && object(p.data) && bounded(p) &&

@@ -49,6 +49,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.LongSupplier;
 import java.util.function.BooleanSupplier;
+import net.minecraft.world.entity.ai.memory.WalkTarget;
+import net.minecraft.world.level.PathNavigationRegion;
 import net.minecraft.server.level.ServerLevel;
 import java.util.function.Supplier;
 
@@ -62,6 +64,24 @@ public final class KneekuraDebugDecisionHooks {
     private record ActivityFrame(Brain<?> brain,String id,JsonObject before,long preCallCost) { }
     private record SinkFrame(MoveToTargetSink behavior,Mob owner,Brain<?> brain,PathNavigation navigation,
                              String id,String parentId,String callSite,long gameTime,JsonObject before,long preCallCost) { }
+
+    private static final class ComputeFrame {
+        final MoveToTargetSink behavior;final Mob owner;final Brain<?> brain;final PathNavigation navigation;
+        final WalkTarget target;final long gameTime;final String id,site,sinkId,tickStopId;
+        int nextCreate;CreateFrame lastCreate;
+        ComputeFrame(MoveToTargetSink behavior,Mob owner,Brain<?> brain,PathNavigation navigation,WalkTarget target,long gameTime,String id,String site,String sinkId,String tickStopId){
+            this.behavior=behavior;this.owner=owner;this.brain=brain;this.navigation=navigation;this.target=target;this.gameTime=gameTime;this.id=id;this.site=site;this.sinkId=sinkId;this.tickStopId=tickStopId;
+        }
+    }
+    private static final class CreateFrame {
+        final ComputeFrame compute;final String id,site;final JsonObject arguments;
+        final List<String> finderIds=new ArrayList<>();boolean truncated,returned;Path path;
+        CreateFrame(ComputeFrame compute,String id,String site,JsonObject arguments){this.compute=compute;this.id=id;this.site=site;this.arguments=arguments;}
+    }
+    private static final class FinderFrame {
+        final CreateFrame create;final PathFinder finder;final String id;String searchId;
+        FinderFrame(CreateFrame create,PathFinder finder,String id){this.create=create;this.finder=finder;this.id=id;}
+    }
 
     private static final class DispatchCapture {
         final String branch;final List<String> children=new ArrayList<>();boolean truncated;
@@ -81,7 +101,7 @@ public final class KneekuraDebugDecisionHooks {
     }
     public static void clear(String reason) {
         Session previous=active;active=null;
-        if(previous!=null){previous.budget.close(reason);previous.clearHeapNodes();previous.sinkFrame=null;previous.tickStopFrame=null;}
+        if(previous!=null){previous.budget.close(reason);previous.clearHeapNodes();previous.sinkFrame=null;previous.tickStopFrame=null;previous.computeFrame=null;previous.createFrame=null;previous.finderFrame=null;}
     }
 
     public static final class Session {
@@ -109,6 +129,8 @@ public final class KneekuraDebugDecisionHooks {
         private SinkFrame sinkFrame;
         private TickStopFrame tickStopFrame;
         private int nextTickStop,tickStopDepth;
+        private ComputeFrame computeFrame;private CreateFrame createFrame;private FinderFrame finderFrame;
+        private int nextCompute,computeDepth,createDepth,finderDepth;
         private boolean goalCoveragePartial;
 
         public Session(Mob subject, GoalSelector goal, GoalSelector target,
@@ -217,6 +239,27 @@ public final class KneekuraDebugDecisionHooks {
                     "tick-stop:"+budget.context().selectionRevision()+":"+(++nextTickStop));
             }catch(ReflectiveOperationException|RuntimeException|LinkageError error){budget.close("TICK_STOP_CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());return null;}
         }
+        private boolean computeReady(ComputeFrame frame) {
+            if(active!=this||frame==null||!matches(frame.owner)||!channels.contains("brain_navigation"))return false;
+            try {return budget.allows(currentContext.get(),time.getAsLong())&&
+                KneekuraDebugDecisionSnapshot.read(LivingEntity.class,"brain",subject)==frame.brain&&
+                KneekuraDebugDecisionSnapshot.read(Mob.class,"navigation",subject)==frame.navigation&&
+                KneekuraDebugDecisionSnapshot.read(PathNavigation.class,"mob",frame.navigation)==subject;
+            }catch(ReflectiveOperationException|RuntimeException|LinkageError error){budget.close("COMPUTE_CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());return false;}
+        }
+        private ComputeFrame computeBegin(MoveToTargetSink behavior,Mob owner,WalkTarget target,long game,String site) {
+            if(!matches(owner)||!channels.contains("brain_navigation")||behavior==null||behavior.getClass()!=MoveToTargetSink.class||target==null||
+                !Set.of("CHECK_EXTRA_START","TICK_RECOMPUTE").contains(site)||nextCompute>=256||computeDepth>8)return null;
+            try {
+                if(!budget.allows(currentContext.get(),time.getAsLong()))return null;
+                Brain<?> brain=(Brain<?>)KneekuraDebugDecisionSnapshot.read(LivingEntity.class,"brain",owner);
+                PathNavigation navigation=(PathNavigation)KneekuraDebugDecisionSnapshot.read(Mob.class,"navigation",owner);
+                if(brain==null||navigation==null||KneekuraDebugDecisionSnapshot.read(PathNavigation.class,"mob",navigation)!=owner)return null;
+                String sinkId=sinkFrame!=null&&sinkFrame.behavior()==behavior&&sinkFrame.owner()==owner&&sinkFrame.brain()==brain&&sinkFrame.navigation()==navigation&&sinkReady(sinkFrame)?sinkFrame.id():null;
+                String tickId=tickStopFrame!=null&&tickStopFrame.behavior==behavior&&tickStopFrame.owner==owner&&tickStopFrame.brain==brain&&tickStopFrame.navigation==navigation&&tickStopReady(tickStopFrame)?tickStopFrame.id:null;
+                return new ComputeFrame(behavior,owner,brain,navigation,target,game,"compute:"+budget.context().selectionRevision()+":"+(++nextCompute),site,sinkId,tickId);
+            }catch(ReflectiveOperationException|RuntimeException|LinkageError error){budget.close("COMPUTE_CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());return null;}
+        }
         private String token(Object object) {
             String token=identities.get(object);
             if(token!=null)return token;
@@ -247,7 +290,7 @@ public final class KneekuraDebugDecisionHooks {
                 boolean mod=kind.equals("MOD_TRANSITION_RETURN");
                 root.addProperty("schema",mod?"kneekura.mod-decision-return/v1":"kneekura.original-decision-event/v1");
                 root.addProperty("semantics",mod?"ORIGINAL_MOD_INVOCATION_RETURN_ONLY":
-                    kind.equals("PATH_NODE_CLOSED_CHECKPOINT")||kind.equals("PATH_NODE_G_WRITE_CHECKPOINT")?"ORIGINAL_FIELD_WRITE_CHECKPOINT_ONLY":"ORIGINAL_INVOCATION_RETURN_ONLY");
+                    kind.equals("PATH_NODE_CLOSED_CHECKPOINT")||kind.equals("PATH_NODE_G_WRITE_CHECKPOINT")||kind.equals("BRAIN_PATH_COMPUTE_PATH_WRITE_CHECKPOINT")?"ORIGINAL_FIELD_WRITE_CHECKPOINT_ONLY":"ORIGINAL_INVOCATION_RETURN_ONLY");
                 if(mod) {
                     root.addProperty("returnTick",subject.level().getGameTime());
                     root.addProperty("returnLocalTick",tick);root.addProperty("localTickScope","LAST_COMPLETED_SERVER_END_COUNTER");
@@ -371,6 +414,112 @@ public final class KneekuraDebugDecisionHooks {
             data.addProperty("instanceIdentity",session.token(brain));return data;
         });
     }
+    /** Exact private source delegate; its boolean is not Path.canReach, adoption or arrival. */
+    public static boolean originalBrainCompute(MoveToTargetSink behavior,Mob owner,WalkTarget target,long game,String site,BooleanSupplier original) {
+        Session session=active;if(session==null||session.thread!=Thread.currentThread())return original.getAsBoolean();
+        ComputeFrame previous=session.computeFrame;CreateFrame previousCreate=session.createFrame;FinderFrame previousFinder=session.finderFrame;
+        int depth=session.computeDepth;session.computeDepth++;
+        try {
+            ComputeFrame frame=session.computeBegin(behavior,owner,target,game,site);session.computeFrame=frame;session.createFrame=null;session.finderFrame=null;
+            boolean result=original.getAsBoolean();
+            if(session.computeReady(frame))session.record("BRAIN_PATH_COMPUTE_RETURN","MoveToTargetSink.tryComputePath.AFTER",()->{
+                JsonObject data=computeData(session,frame);data.addProperty("result",result);
+                data.addProperty("resultScope","ORIGINAL_PRIVATE_COMPUTE_BOOLEAN_NOT_CAN_REACH_ADOPTION_OR_ARRIVAL");
+                Path stored=(Path)KneekuraDebugDecisionSnapshot.read(MoveToTargetSink.class,"path",behavior);
+                data.add("sinkPath",session.snapshot.pathFact(stored));
+                data.add("navigationPath",session.snapshot.pathReferenceFact((Path)KneekuraDebugDecisionSnapshot.read(PathNavigation.class,"path",frame.navigation)));
+                addCreateRelation(session,data,frame.lastCreate,stored);return data;
+            });return result;
+        }finally {session.computeFrame=active==session?previous:null;session.createFrame=active==session?previousCreate:null;session.finderFrame=active==session?previousFinder:null;session.computeDepth=depth;}
+    }
+    public static Path originalBrainCreatePath(PathNavigation navigation,BlockPos target,int accuracy) {
+        return originalBrainCreate(navigation,"INITIAL",()->blockArguments(target,accuracy),()->navigation.createPath(target,accuracy));
+    }
+    public static Path originalBrainFallbackPath(PathNavigation navigation,double x,double y,double z,int accuracy) {
+        return originalBrainCreate(navigation,"FALLBACK",()->{
+            JsonObject args=new JsonObject();args.addProperty("kind","DDD_I");finite(args,"x",x);finite(args,"y",y);finite(args,"z",z);args.addProperty("accuracy",accuracy);return args;
+        },()->navigation.createPath(x,y,z,accuracy));
+    }
+    private static JsonObject blockArguments(BlockPos target,int accuracy)throws ReflectiveOperationException {
+        JsonObject args=new JsonObject();args.addProperty("kind","BLOCK_POS_I");args.addProperty("accuracy",accuracy);args.addProperty("present",target!=null);
+        if(target!=null){args.addProperty("className",label(target.getClass().getName()));
+            boolean known=target.getClass()==BlockPos.class||target.getClass()==BlockPos.MutableBlockPos.class;args.addProperty("positionStatus",known?"AVAILABLE":"NOT_EXPOSED");
+            if(known)for(String axis:List.of("x","y","z"))args.addProperty(axis,(Integer)KneekuraDebugDecisionSnapshot.read(Vec3i.class,axis,target));
+        }return args;
+    }
+    private static Path originalBrainCreate(PathNavigation navigation,String site,Data arguments,Supplier<Path> original) {
+        Session session=active;if(session==null||session.thread!=Thread.currentThread())return original.get();
+        ComputeFrame compute=session.computeFrame;CreateFrame previous=session.createFrame;FinderFrame previousFinder=session.finderFrame;
+        int depth=session.createDepth;session.createDepth++;CreateFrame frame=null;
+        // Clear even an unsupported/capped second call; never attribute its store to an earlier return.
+        if(compute!=null)compute.lastCreate=null;
+        try {
+            if(session.computeReady(compute)&&compute.navigation==navigation&&compute.nextCreate<8&&session.createDepth<=8){
+                try {frame=new CreateFrame(compute,compute.id+":create:"+(++compute.nextCreate),site,arguments.read());}
+                catch(ReflectiveOperationException|RuntimeException|LinkageError error){session.budget.close("CREATE_CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());}
+            }
+            session.createFrame=frame;session.finderFrame=null;Path path=original.get();
+            if(frame!=null&&session.computeReady(compute)){
+                frame.path=path;frame.returned=true;compute.lastCreate=frame;CreateFrame captured=frame;
+                session.record("BRAIN_PATH_CREATE_RETURN","MoveToTargetSink.PathNavigation.createPath.AFTER",()->{
+                    JsonObject data=computeData(session,compute);data.addProperty("createInvocationId",captured.id);data.addProperty("createSite",site);data.add("arguments",captured.arguments.deepCopy());
+                    data.add("returnedPath",session.snapshot.pathFact(path));Path cached=(Path)KneekuraDebugDecisionSnapshot.read(PathNavigation.class,"path",navigation);
+                    data.add("navigationPath",session.snapshot.pathReferenceFact(cached));data.addProperty("returnedMatchesNavigationPath",path==cached);
+                    JsonArray children=new JsonArray();captured.finderIds.forEach(children::add);data.add("capturedFinderInvocationIds",children);data.addProperty("capturedFinderInvocationsTruncated",captured.truncated);
+                    data.addProperty("searchScope","CAPTURED_ORIGINAL_BASE_NAVIGATION_FINDER_CALLS_ONLY_EMPTY_IS_NOT_NO_SEARCH_PROOF");
+                    data.addProperty("returnScope","ORIGINAL_CREATE_PATH_NORMAL_RETURN_NOT_ADOPTION_OR_ARRIVAL");return data;
+                });
+            }return path;
+        }finally {session.createFrame=active==session?previous:null;session.finderFrame=active==session?previousFinder:null;session.createDepth=depth;}
+    }
+    /** Called AFTER the two genuine PUTFIELD instructions; never replaces the assignment. */
+    public static void brainComputePathWrite(MoveToTargetSink behavior,Mob owner,WalkTarget target,long game,String site) {
+        Session session=active;if(session==null)return;ComputeFrame frame=session.computeFrame;
+        if(!session.computeReady(frame)||frame.behavior!=behavior||frame.owner!=owner||frame.target!=target||frame.gameTime!=game||!Set.of("INITIAL","FALLBACK").contains(site))return;
+        session.record("BRAIN_PATH_COMPUTE_PATH_WRITE_CHECKPOINT","MoveToTargetSink.tryComputePath.path.PUTFIELD.AFTER",()->{
+            JsonObject data=computeData(session,frame);data.addProperty("writeSite",site);data.addProperty("writeScope","AFTER_ORIGINAL_SINK_PATH_PUTFIELD_NOT_NAVIGATION_ADOPTION");
+            Path stored=(Path)KneekuraDebugDecisionSnapshot.read(MoveToTargetSink.class,"path",behavior);data.add("sinkPath",session.snapshot.pathFact(stored));
+            CreateFrame create=frame.lastCreate;addCreateRelation(session,data,create!=null&&create.site.equals(site)?create:null,stored);return data;
+        });
+    }
+    public static Path originalBrainFinder(PathNavigation navigation,PathFinder finder,PathNavigationRegion region,Mob owner,Set<BlockPos> targets,float range,int accuracy,float multiplier) {
+        return originalBrainFinderCall(navigation,finder,owner,range,accuracy,multiplier,targets==null?null:targets.getClass().getName(),()->finder.findPath(region,owner,targets,range,accuracy,multiplier));
+    }
+    private static Path originalBrainFinderCall(PathNavigation navigation,PathFinder finder,Mob owner,float range,int accuracy,float multiplier,String targetsClass,Supplier<Path> original) {
+        Session session=active;if(session==null||session.thread!=Thread.currentThread())return original.get();
+        CreateFrame create=session.createFrame;FinderFrame previous=session.finderFrame;int depth=session.finderDepth;session.finderDepth++;FinderFrame frame=null;
+        try {
+            if(create!=null&&session.computeReady(create.compute)&&create.compute.navigation==navigation&&create.compute.owner==owner&&session.finderDepth<=8){
+                try {if(finder!=null&&KneekuraDebugDecisionSnapshot.read(PathNavigation.class,"pathFinder",navigation)==finder){
+                    if(create.finderIds.size()<8){frame=new FinderFrame(create,finder,create.id+":finder:"+(create.finderIds.size()+1));create.finderIds.add(frame.id);}else create.truncated=true;
+                }}catch(ReflectiveOperationException|RuntimeException|LinkageError error){session.budget.close("FINDER_CAPTURE_UNAVAILABLE:"+error.getClass().getSimpleName());}
+            }
+            session.finderFrame=frame;Path path=original.get();
+            if(frame!=null&&session.computeReady(create.compute)){FinderFrame captured=frame;session.record("BRAIN_PATH_FINDER_RETURN","PathNavigation.createPath.PathFinder.findPath.AFTER",()->{
+                JsonObject data=computeData(session,create.compute);data.addProperty("createInvocationId",create.id);data.addProperty("createSite",create.site);data.addProperty("finderInvocationId",captured.id);
+                data.addProperty("finderClass",label(finder.getClass().getName()));
+                data.addProperty("targetSetClass",targetsClass==null?null:label(targetsClass));data.addProperty("targetContentsStatus","NOT_EXPOSED");
+                finite(data,"followRange",range);data.addProperty("accuracy",accuracy);finite(data,"maxVisitedNodesMultiplier",multiplier);
+                data.add("returnedPath",session.snapshot.pathFact(path));data.addProperty("searchIdStatus",captured.searchId==null?"NOT_CAPTURED":"AVAILABLE");if(captured.searchId!=null)data.addProperty("searchId",captured.searchId);
+                data.addProperty("returnScope","ORIGINAL_NAVIGATION_SOURCE_FINDER_NORMAL_RETURN_NOT_ADOPTION_OR_ARRIVAL");return data;
+            });}return path;
+        }finally {session.finderFrame=active==session?previous:null;session.finderDepth=depth;}
+    }
+    private static JsonObject computeData(Session session,ComputeFrame frame) {
+        JsonObject data=new JsonObject();data.addProperty("sinkClass",label(frame.behavior.getClass().getName()));component(data,session,frame.behavior,"instanceIdentity");
+        data.addProperty("computeInvocationId",frame.id);data.addProperty("callSite",frame.site);data.addProperty("gameTimeArgument",Long.toString(frame.gameTime));
+        data.addProperty("walkTargetClass",label(frame.target.getClass().getName()));
+        data.addProperty("enclosingSinkInvocationStatus",frame.sinkId==null?"NOT_CAPTURED":"AVAILABLE");if(frame.sinkId!=null)data.addProperty("enclosingSinkInvocationId",frame.sinkId);
+        data.addProperty("enclosingTickStopInvocationStatus",frame.tickStopId==null?"NOT_CAPTURED":"AVAILABLE");if(frame.tickStopId!=null)data.addProperty("enclosingTickStopInvocationId",frame.tickStopId);
+        data.addProperty("parentScope","CAPTURED_ENCLOSING_SOURCE_SCOPES_NOT_IMMEDIATE_CAUSE_OR_ADOPTION");
+        data.addProperty("fieldScope","BASE_CACHED_FIELDS_AT_DECLARED_CAPTURE_BOUNDARY");data.addProperty("arrivalStatus","NOT_EXPOSED");data.addProperty("operandReasonStatus","NOT_EXPOSED");return data;
+    }
+    private static void addCreateRelation(Session session,JsonObject data,CreateFrame create,Path stored) {
+        boolean known=create!=null&&create.returned;data.addProperty("createReturnStatus",known?"AVAILABLE":"NOT_CAPTURED");
+        if(known){data.addProperty("lastCreateInvocationId",create.id);data.add("createdPath",session.snapshot.pathReferenceFact(create.path));data.addProperty("createdMatchesSinkPath",create.path==stored);}
+        data.addProperty("referenceScope","RAW_RETURNED_VS_CACHED_PATH_REFERENCE_EQUALITY");
+    }
+
     /** Original base return and later cached fields; a true boolean is neither arrival nor Path adoption. */
     public static void navigationMoveReturn(PathNavigation navigation,Path requested,double speed,boolean result) {
         Session session=active;
@@ -809,6 +958,8 @@ public final class KneekuraDebugDecisionHooks {
         if(session.searches.size()>=8)return;
         session.searches.put(finder,"search:"+session.budget.context().selectionRevision()+":"+(++session.nextSearch));
         if(session.heapNodes!=null)session.heapNodes.put(finder,new IdentityHashMap<>());
+        FinderFrame direct=session.finderFrame;
+        if(direct!=null&&direct.finder==finder&&direct.create.compute.owner==mob&&session.computeReady(direct.create.compute))direct.searchId=session.searches.get(finder);
     }
     public static void pathState(PathFinder finder,Mob mob) {
         Session session=active;if(session==null||!session.matches(mob)||!session.searches.containsKey(finder))return;

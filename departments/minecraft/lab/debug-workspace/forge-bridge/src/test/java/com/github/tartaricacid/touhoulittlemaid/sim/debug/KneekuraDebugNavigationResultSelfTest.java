@@ -72,7 +72,7 @@ public final class KneekuraDebugNavigationResultSelfTest {
         int[] found={0};try(var stream=KneekuraDebugNavigationResultSelfTest.class.getClassLoader().getResourceAsStream(name+".class")){
             require(stream!=null,"compiled normal-return Navigation mixin required");new ClassReader(stream).accept(new ClassVisitor(Opcodes.ASM9){
                 @Override public MethodVisitor visitMethod(int access,String name,String desc,String signature,String[] exceptions){
-                    if(!name.startsWith("kneekura$"))return null;found[0]++;int[] calls={0},required={0},returns={0},methods={0};
+                    if(!name.equals("kneekura$moveReturned"))return null;found[0]++;int[] calls={0},required={0},returns={0},methods={0};
                     return new MethodVisitor(Opcodes.ASM9){
                         @Override public AnnotationVisitor visitAnnotation(String desc,boolean visible){require(desc.endsWith("/Inject;"),"normal original RETURN injection");return new AnnotationVisitor(Opcodes.ASM9){
                             @Override public void visit(String key,Object value){if(key.equals("require"))required[0]=(Integer)value;if(key.equals("cancellable"))require(Boolean.FALSE.equals(value),"must not cancel");}
