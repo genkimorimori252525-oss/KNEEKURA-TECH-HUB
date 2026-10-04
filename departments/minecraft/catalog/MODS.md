@@ -8,6 +8,7 @@
 |---:|---|---|---|---|---|
 | 1 | [The Twilight Forest](../mods/twilight-forest/README.md) | content/gameplay Mod | source candidate `a7dd8f13` pinned; distributed-JAR identity pending | `793c4d4c` pinned — MC 26.1.2 / NeoForge 26.1.2.102 | IN_PROGRESS |
 | 2 | [Sinytra Connector](../mods/sinytra-connector/README.md) | loader compatibility / translation layer | `7f68ac0` beta.50 source; 141 files acquired; binary/runtime unresolved | `c84a96a` beta.6 / 26.1.2; 131 files acquired | IN_PROGRESS (source/recon/history) |
+| 6 | [Liberty's Villagers](../mods/liberty-villagers/README.md) | villager Brain / POI / village habits | Revived source `f2e2548` / MC 1.20.1 Forge line; distributed Forge 2.0.1 file 6930028; 78 Java / 46 mixins | `40e1384` / Revived MC 1.21.11 | IN_PROGRESS (targeted villager AI study complete) |
 
 ## Rules
 
