@@ -42,6 +42,32 @@
       "revision": "6a01cdfec45623e39bc7fd890e91066e3507666c",
       "branch": "mc/1.20.1",
       "policy": "SAFE_ONLY style: unique structural candidate required; ambiguity retained."
+    },
+    "chinese_community_public_compat": {
+      "role": "PUBLIC_CHINESE_SPEAKING_COMPATIBILITY_AND_RESEARCH_EVIDENCE",
+      "note": "Only Java-level compatibility, descriptors, logs, structural mappings and high-level architecture are retained. Protection-bypass/decryption recipes are excluded.",
+      "repositories": [
+        {
+          "repository": "HSZK2017/ysm_epicfight_compat",
+          "revision": "18db9328132bea921ea49f2125e4c0c319fbb5c8",
+          "strength": "ACTUAL_JAR_ASM_CONTRACT"
+        },
+        {
+          "repository": "3SCR1P7/TaczFixes",
+          "revision": "a2223f838fc4f16ecae0315663b7e0e3ca5d23d4",
+          "strength": "EXACT_2_6_5_COMPILE_TARGET_PLUS_RUNTIME_HOOK_DIAGNOSTICS"
+        },
+        {
+          "repository": "Aleph-1374/tlm-maid-survival",
+          "revision": "d264991d5ab68370db953ecec1a491c99b576952",
+          "strength": "EXACT_2_6_5_MIXIN_AND_RUNTIME_LOG"
+        },
+        {
+          "repository": "mofeng945/TinkersNewlife",
+          "revision": "6e7f207759fc3de50969ea2a96d717d2409e7b49",
+          "strength": "JAVAP_VERIFIED_RENDERER_SHAPE"
+        }
+      ]
     }
   },
   "confidence_definitions": {
@@ -625,6 +651,553 @@
           "fact": "Implements IGuiOverlay, reads paperdoll config and calls the paperdoll renderer."
         }
       ]
+    },
+    {
+      "id": "ysm265.class.carryon-compat",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.o0oO0OO0OoO0o00OOo0oOOo0",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.compat.carryon.CarryOnCompat",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "evidence": [
+        {
+          "type": "PUBLIC_EXACT_2_6_5_MIXIN",
+          "repository": "Aleph-1374/tlm-maid-survival",
+          "revision": "d264991d5ab68370db953ecec1a491c99b576952",
+          "path": "src/main/java/com/shiyin/maid_survival/mixin/client/YsmCarryOwnerPrincessMixin.java",
+          "fact": "Mixin explicitly labels the target as YSM 2.6.5 Carry On princess predicate."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_UNIQUE_SIGNATURE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/compat/carryon/CarryOnCompat.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.carryon-princess",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.o0oO0OO0OoO0o00OOo0oOOo0",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/world/entity/player/Player;)Z",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.compat.carryon.CarryOnCompat",
+      "semantic_member": "isCarryOnPrincess",
+      "semantic_descriptor": "(Lnet/minecraft/world/entity/player/Player;)Z",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "evidence": [
+        {
+          "type": "PUBLIC_EXACT_2_6_5_MIXIN_AND_REFLECTION",
+          "repository": "Aleph-1374/tlm-maid-survival",
+          "revision": "d264991d5ab68370db953ecec1a491c99b576952",
+          "fact": "The exact owner/member/descriptor is both injected and reflectively invoked as the Carry On princess predicate."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_EXACT_DESCRIPTOR",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/compat/carryon/CarryOnCompat.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.custom-player-renderer",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.o0ooO0o0ooo000OOO0o0oo0o",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.renderer.CustomPlayerRenderer",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "evidence": [
+        {
+          "type": "PUBLIC_JAVAP_VERIFICATION",
+          "repository": "mofeng945/TinkersNewlife",
+          "revision": "6e7f207759fc3de50969ea2a96d717d2409e7b49",
+          "path": "src/main/java/com/mofengbaizhi/tinkersnewlife/mixin/EntityRendererNameTagMixin.java",
+          "fact": "Records that this YSM 2.6.5 class overrides render, shouldShowName and renderNameTag and that renderNameTag invokes its superclass implementation twice."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_UNIQUE_SHAPE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/renderer/CustomPlayerRenderer.java",
+          "fact": "CustomPlayerRenderer has the same three override roles and two super.renderNameTag calls."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.config-screen",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O0o000o0oOoOoOoOOO0oOOoO",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.gui.ConfigScreen",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "evidence": [
+        {
+          "type": "PUBLIC_ACTUAL_JAR_ASM_CONTRACT",
+          "repository": "HSZK2017/ysm_epicfight_compat",
+          "revision": "18db9328132bea921ea49f2125e4c0c319fbb5c8",
+          "paths": [
+            "src/main/java/com/ysmef/compat/mixin/YsmLegacyConfigScreenMixin.java",
+            "src/test/java/com/ysmef/compat/contract/MixinTargetSignatureTest.java"
+          ],
+          "fact": "Official-YSM contract test opens libs/ysm-2.6.5.jar and validates this obfuscated Mixin class/method target."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_UNIQUE_LAYOUT",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/gui/ConfigScreen.java",
+          "fact": "The YSM Config GUI has the same 22px checkbox rows and loading-state PositionButton at y+264 targeted by the compatibility Mixin."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.jade-plugin",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oOooo0Oo00000o0OooOo0OO0",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.compat.jade.JadePlugin",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "evidence": [
+        {
+          "type": "PUBLIC_2_6_5_RUNTIME_LOG",
+          "repository": "Aleph-1374/tlm-maid-survival",
+          "revision": "d264991d5ab68370db953ecec1a491c99b576952",
+          "path": "reference/crash-2026-08-04T20-43-39/latest.log",
+          "fact": "With ysm-2.6.5-forge+mc1.20.1-release.jar loaded, Jade logs 'Start loading plugin at' this obfuscated class."
+        },
+        {
+          "type": "JADE_LOG_SEMANTICS",
+          "fact": "The exact 'Start loading plugin at <class>' message is Jade's plugin loader message."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_UNIQUE_PLUGIN",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/compat/jade/JadePlugin.java",
+          "fact": "This is the YSM @WailaPlugin / IWailaPlugin implementation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.tacz-compat",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OOO0O0O0oo0ooooo00oOOOO0",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.compat.gun.tacz.TacCompat",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "source_artifact_divergence": true,
+      "release_line_counterpart": "f184eda: com.elfmcys.yesstevemodel.client.compat.tacz.TACZCompat",
+      "evidence": [
+        {
+          "type": "PUBLIC_EXACT_2_6_5_COMPILE_TARGET",
+          "repository": "3SCR1P7/TaczFixes",
+          "revision": "a2223f838fc4f16ecae0315663b7e0e3ca5d23d4",
+          "paths": [
+            "build.gradle",
+            "src/main/java/com/ssscript/taczfixes/client/mixin/MixinYsmBackGun.java"
+          ],
+          "fact": "Project compileOnly-pins ysm-2.6.5-forge+mc1.20.1-release.jar and targets this owner with the exact item/model/entity/pose/light/tick signature."
+        },
+        {
+          "type": "COMPARATIVE_READABLE_LAYOUT",
+          "repository": "OpenYSM/OpenYSM",
+          "revision": "a515d44686af77155a311b2a592327ca5d45a658",
+          "path": "forge/src/main/java/com/elfmcys/yesstevemodel/client/compat/gun/tacz/TacCompat.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.tacz-apply-item-transform",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OOO0O0O0oo0ooooo00oOOOO0",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/world/item/ItemStack;Lcom/elfmcys/yesstevemodel/OOOO0O0O000O000000oOOO0o;Lnet/minecraft/world/entity/LivingEntity;Lcom/mojang/blaze3d/vertex/PoseStack;IF)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.compat.gun.tacz.TacCompat",
+      "semantic_member": "applyItemTransform",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "source_artifact_divergence": true,
+      "release_line_counterpart": "f184eda: TACZCompat.renderOffsetHand(ItemStack, GeoModelState, LivingEntity, PoseStack, int, float)",
+      "evidence": [
+        {
+          "type": "PUBLIC_EXACT_2_6_5_MIXIN",
+          "repository": "3SCR1P7/TaczFixes",
+          "revision": "a2223f838fc4f16ecae0315663b7e0e3ca5d23d4",
+          "path": "src/main/java/com/ssscript/taczfixes/client/mixin/MixinYsmBackGun.java"
+        },
+        {
+          "type": "COMPARATIVE_EXACT_SEMANTIC_SHAPE",
+          "repository": "OpenYSM/OpenYSM",
+          "revision": "a515d44686af77155a311b2a592327ca5d45a658",
+          "path": "forge/src/main/java/com/elfmcys/yesstevemodel/client/compat/gun/tacz/TacCompat.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.tacz-binding",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O0OoOo00OoOOoOo0oo0O00oo",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.compat.gun.tacz.TacBinding",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "source_artifact_divergence": true,
+      "release_line_counterpart": "f184eda: com.elfmcys.yesstevemodel.client.compat.tacz.TacCtrlBinding"
+    },
+    {
+      "id": "ysm265.method.tacz-binding-gun-type",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O0OoOo00OoOOoOo0oo0O00oo",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oo0oOO0000o0Ooooo0OoOo0O;)Ljava/lang/String;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.compat.gun.tacz.TacBinding",
+      "semantic_member": "getMainHandGunId",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "source_artifact_divergence": true,
+      "release_line_counterpart": "f184eda: TacCtrlBinding.getGunType(IContext)",
+      "evidence": [
+        {
+          "type": "PUBLIC_EXACT_2_6_5_MIXIN_CALLSITE",
+          "repository": "3SCR1P7/TaczFixes",
+          "revision": "a2223f838fc4f16ecae0315663b7e0e3ca5d23d4",
+          "path": "src/main/java/com/ssscript/taczfixes/client/mixin/MixinYsmTacBinding.java",
+          "fact": "Redirects CommonGunIndex.getType inside the exact obfuscated method."
+        },
+        {
+          "type": "COMPARATIVE_READABLE_CALLSITE",
+          "repository": "OpenYSM/OpenYSM",
+          "revision": "a515d44686af77155a311b2a592327ca5d45a658",
+          "path": "forge/src/main/java/com/elfmcys/yesstevemodel/client/compat/gun/tacz/TacBinding.java",
+          "fact": "getMainHandGunId(IContext) uniquely performs the matching CommonGunIndex.getType call."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.geo-entity-renderer",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oOoOOO0OOOoo000O0o0oo0OO",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.geo.GeoEntityRenderer",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "evidence": [
+        {
+          "type": "PUBLIC_EXACT_2_6_5_MIXIN",
+          "repository": "3SCR1P7/TaczFixes",
+          "revision": "a2223f838fc4f16ecae0315663b7e0e3ca5d23d4",
+          "path": "src/main/java/com/ssscript/taczfixes/client/mixin/MixinYsmRendererPose.java"
+        },
+        {
+          "type": "READABLE_LAYOUT_MATCH",
+          "repository": "OpenYSM/OpenYSM",
+          "revision": "a515d44686af77155a311b2a592327ca5d45a658",
+          "path": "common/src/main/java/com/elfmcys/yesstevemodel/geckolib3/geo/GeoEntityRenderer.java"
+        },
+        {
+          "type": "RELEASE_LINE_COUNTERPART",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/geo/GeoEntityRenderer.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.geo-entity-renderer-render",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oOoOOO0OOOoo000O0o0oo0OO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.geo.GeoEntityRenderer",
+      "semantic_member": "renderEntity",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "source_artifact_divergence": true,
+      "release_line_counterpart": "f184eda: GeoEntityRenderer.render(AnimatableEntity, float, float, PoseStack, MultiBufferSource, int)",
+      "evidence": [
+        {
+          "type": "PUBLIC_EXACT_2_6_5_MIXIN",
+          "repository": "3SCR1P7/TaczFixes",
+          "revision": "a2223f838fc4f16ecae0315663b7e0e3ca5d23d4",
+          "fact": "Injects immediately after the animatable's one-float animation-evaluation method returns an AnimationEvent-like type."
+        },
+        {
+          "type": "COMPARATIVE_EXACT_SIGNATURE",
+          "repository": "OpenYSM/OpenYSM",
+          "revision": "a515d44686af77155a311b2a592327ca5d45a658",
+          "path": "common/src/main/java/com/elfmcys/yesstevemodel/geckolib3/geo/GeoEntityRenderer.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.geo-replaced-entity-renderer",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OOoo0o0oO000ooO0Oo00OoOo",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.geo.GeoReplacedEntityRenderer",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1"
+    },
+    {
+      "id": "ysm265.method.geo-replaced-render-with-texture",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OOoo0o0oO000ooO0Oo00OoOo",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/o0O0oOooOo0OoOo0oOo00O00;Lnet/minecraft/resources/ResourceLocation;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.geo.GeoReplacedEntityRenderer",
+      "semantic_member": "renderEntityWithTexture",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "source_artifact_divergence": true,
+      "release_line_counterpart": "f184eda: renderAnimatableEntity(CustomHumanoidEntity, ResourceLocation, float, float, PoseStack, MultiBufferSource, int)",
+      "evidence": [
+        {
+          "type": "PUBLIC_EXACT_2_6_5_MIXIN",
+          "repository": "3SCR1P7/TaczFixes",
+          "revision": "a2223f838fc4f16ecae0315663b7e0e3ca5d23d4",
+          "path": "src/main/java/com/ssscript/taczfixes/client/mixin/MixinYsmLivingRendererPose.java"
+        },
+        {
+          "type": "COMPARATIVE_EXACT_SIGNATURE",
+          "repository": "OpenYSM/OpenYSM",
+          "revision": "a515d44686af77155a311b2a592327ca5d45a658",
+          "path": "common/src/main/java/com/elfmcys/yesstevemodel/geckolib3/geo/GeoReplacedEntityRenderer.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.tacz-animation-handler",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.ooOoOo0o0OO0ooOO00Oo0ooO",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.compat.gun.tacz.TacAnimHandler",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "source_artifact_divergence": true,
+      "release_line_counterpart": "f184eda: com.elfmcys.yesstevemodel.client.compat.tacz.TacCompatInner"
+    },
+    {
+      "id": "ysm265.method.tacz-hold-animation",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.ooOoOo0o0OO0ooOO00Oo0ooO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Lnet/minecraft/world/item/ItemStack;)Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.compat.gun.tacz.TacAnimHandler",
+      "semantic_member": "handleTaczGunHold",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "source_artifact_divergence": true,
+      "release_line_counterpart": "f184eda: TacCompatInner.playGunHoldAnimation"
+    },
+    {
+      "id": "ysm265.method.tacz-main-animation",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.ooOoOo0o0OO0ooOO00Oo0ooO",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Ljava/lang/String;Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;)Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.compat.gun.tacz.TacAnimHandler",
+      "semantic_member": "handleTaczAnimState",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "source_artifact_divergence": true,
+      "release_line_counterpart": "f184eda: TacCompatInner.playGunMainAnimation(AnimationEvent,String,LoopType)"
+    },
+    {
+      "id": "ysm265.method.tacz-action-animation",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.ooOoOo0o0OO0ooOO00Oo0ooO",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Lnet/minecraft/world/item/ItemStack;)Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.compat.gun.tacz.TacAnimHandler",
+      "semantic_member": "handleTaczGunAction",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "source_artifact_divergence": true,
+      "release_line_counterpart": "f184eda: TacCompatInner.playGunOnceAnimation"
+    },
+    {
+      "id": "ysm265.class.item-in-hand-layer",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.o000Oo0OO0O00Oo0OOoOoooO",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.renderer.layer.CustomPlayerItemInHandLayer",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "evidence": [
+        {
+          "type": "PUBLIC_EXACT_2_6_5_MIXIN",
+          "repository": "3SCR1P7/TaczFixes",
+          "revision": "a2223f838fc4f16ecae0315663b7e0e3ca5d23d4",
+          "path": "src/main/java/com/ssscript/taczfixes/client/mixin/MixinYsmItemInHandLayer.java"
+        },
+        {
+          "type": "READABLE_LAYOUT_MATCH",
+          "repository": "OpenYSM/OpenYSM",
+          "revision": "a515d44686af77155a311b2a592327ca5d45a658",
+          "path": "common/src/main/java/com/elfmcys/yesstevemodel/client/renderer/layer/CustomPlayerItemInHandLayer.java"
+        },
+        {
+          "type": "RELEASE_LINE_COUNTERPART",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/renderer/layer/CustomPlayerItemInHandLayer.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.item-in-hand-layer-render",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.o000Oo0OO0O00Oo0OOoOoooO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILcom/elfmcys/yesstevemodel/oo0OooOO0oOoOoOoo00oO000;FFFFFF)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.renderer.layer.CustomPlayerItemInHandLayer",
+      "semantic_member": "render",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1"
+    },
+    {
+      "id": "ysm265.method.item-in-hand-render-item",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.o000Oo0OO0O00Oo0OOoOoooO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/OOOO0O0O000O000000oOOO0o;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemDisplayContext;Lnet/minecraft/world/entity/HumanoidArm;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.renderer.layer.CustomPlayerItemInHandLayer",
+      "semantic_member": "renderItem",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "source_artifact_divergence": true,
+      "release_line_counterpart": "f184eda: renderArmWithItem(GeoModelState,...)"
+    },
+    {
+      "id": "ysm265.method.item-in-hand-apply-bone-transform",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.o000Oo0OO0O00Oo0OOoOoooO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/world/entity/HumanoidArm;Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/elfmcys/yesstevemodel/OOOO0O0O000O000000oOOO0o;)Z",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.renderer.layer.CustomPlayerItemInHandLayer",
+      "semantic_member": "applyItemBoneTransform",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "source_artifact_divergence": true,
+      "release_line_counterpart": "f184eda: translateToHand(HumanoidArm,PoseStack,GeoModelState)"
+    },
+    {
+      "id": "ysm265.class.animatable-entity",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.o0000OoOooO0oo0o0oooo0Oo",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.AnimatableEntity",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "source_artifact_divergence": true,
+      "release_line_counterpart": "f184eda: com.elfmcys.yesstevemodel.geckolib3.model.AnimatableEntity",
+      "evidence": [
+        {
+          "type": "DESCRIPTOR_AND_RUNTIME_ALIAS_CLUSTER",
+          "repository": "3SCR1P7/TaczFixes",
+          "revision": "a2223f838fc4f16ecae0315663b7e0e3ca5d23d4",
+          "fact": "This type is the GeoEntityRenderer animatable parameter; reflection aliases on the runtime object use getEntity/getCurrentModel, matching the readable AnimatableEntity layout."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.animation-event",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00O0o0OooOOOo00OO00o00",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.event.predicate.AnimationEvent",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "evidence": [
+        {
+          "type": "DESCRIPTOR_CLUSTER",
+          "repository": "3SCR1P7/TaczFixes",
+          "revision": "a2223f838fc4f16ecae0315663b7e0e3ca5d23d4",
+          "fact": "Returned from the animatable one-float animation processing call and passed to all TaCZ animation selector methods, matching AnimationEvent on both readable tracks."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.living-animatable",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.o0O0oOooOo0OoOo0oOo00O00",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.entity.LivingAnimatable",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "source_artifact_divergence": true,
+      "release_line_counterpart": "f184eda: CustomHumanoidEntity"
+    },
+    {
+      "id": "ysm265.class.animated-geo-model",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OOOO0O0O000O000000oOOO0o",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.geo.animated.AnimatedGeoModel",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "source_artifact_divergence": true,
+      "release_line_counterpart": "f184eda: GeoModelState",
+      "evidence": [
+        {
+          "type": "RUNTIME_REFLECTION_ALIAS_CLUSTER",
+          "repository": "3SCR1P7/TaczFixes",
+          "revision": "a2223f838fc4f16ecae0315663b7e0e3ca5d23d4",
+          "fact": "The current-model object is expected to expose bones(); the same obfuscated type appears in TaCZ transform and held-item descriptors."
+        },
+        {
+          "type": "COMPARATIVE_READABLE_LAYOUT",
+          "repository": "OpenYSM/OpenYSM",
+          "revision": "a515d44686af77155a311b2a592327ca5d45a658",
+          "path": "common/src/main/java/com/elfmcys/yesstevemodel/geckolib3/geo/animated/AnimatedGeoModel.java",
+          "fact": "Exposes bones() and is passed to the same render/TaCZ/held-item seams."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.custom-player-entity",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo0OooOO0oOoOoOoo00oO000",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.entity.CustomPlayerEntity",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "evidence": [
+        {
+          "type": "GENERIC_LAYER_DESCRIPTOR",
+          "repository": "3SCR1P7/TaczFixes",
+          "revision": "a2223f838fc4f16ecae0315663b7e0e3ca5d23d4",
+          "fact": "Exact parameter position in CustomPlayerItemInHandLayer.render matches CustomPlayerEntity on both readable tracks."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.play-state",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O0oOo0OoO0O0o0000o0O00o0",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.enums.PlayState",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "release_line_counterpart": "f184eda: com.elfmcys.yesstevemodel.geckolib3.core.PlayState",
+      "source_artifact_divergence": true
+    },
+    {
+      "id": "ysm265.class.loop-type",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OooOO0OOOoO0oOO0OOOO0Ooo",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.builder.ILoopType",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "release_line_counterpart": "f184eda: LoopType",
+      "source_artifact_divergence": true
+    },
+    {
+      "id": "ysm265.class.molang-context-interface",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo0oOO0000o0Ooooo0OoOo0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.molang.context.IContext",
+      "confidence": "HIGH",
+      "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "evidence": [
+        {
+          "type": "TAC_BINDING_DESCRIPTOR",
+          "repository": "3SCR1P7/TaczFixes",
+          "revision": "a2223f838fc4f16ecae0315663b7e0e3ca5d23d4",
+          "fact": "The exact type is the sole argument to the CommonGunIndex-backed gun-type binding method, matching IContext<LivingEntity> in both readable source lines."
+        }
+      ]
     }
   ],
   "unresolved_hints": [
@@ -656,6 +1229,177 @@
     "The public official f184eda tree has no C/C++/Rust native source; native protocol/renderer internals behind JNI remain unestablished.",
     "GitHub path history through f184eda has no client/renderer/ModelPreviewRenderer.java, while actual-2.6.5-derived compatibility evidence exposes that semantic layout. This is explicit source/artifact divergence.",
     "Member text Oo0Oo0o00O00Oo0OOoOOoooo is reused across unrelated classes and descriptors; a name-only mapping would be demonstrably wrong.",
-    "No 1.21.1 NeoForge or 2.5.x symbol was promoted into the 2.6.5 Forge 1.20.1 anchor solely by name similarity."
+    "No 1.21.1 NeoForge or 2.5.x symbol was promoted into the 2.6.5 Forge 1.20.1 anchor solely by name similarity.",
+    "Chinese-speaking compatibility projects reveal many valid symbol aliases, but reflection-only alias sets without an exact owner are kept outside the confirmed owner/member mapping table.",
+    "The distributed 2.6.5 model/animation classes appear closer to an AnimatedGeoModel/getCurrentModel/bones readable layout in several compatibility probes, while f184eda uses GeoModelState/getLoadedGeoModel/boneMap; treat this as source-artifact generation drift."
+  ],
+  "alias_surfaces": [
+    {
+      "id": "ysm265.alias.animated-bone-public-surface",
+      "observed_on": "runtime animated-bone implementation returned from the current model's bones map",
+      "owner_status": "UNRESOLVED",
+      "confidence": "HIGH_SEMANTIC_OWNER_UNKNOWN",
+      "evidence": {
+        "repository": "3SCR1P7/TaczFixes",
+        "revision": "a2223f838fc4f16ecae0315663b7e0e3ca5d23d4",
+        "path": "src/main/java/com/ssscript/taczfixes/common/compat/YsmDualWieldCompat.java",
+        "comparative_readable": "OpenYSM AnimatedGeoBone / IBone"
+      },
+      "aliases": [
+        {
+          "semantic": "getName",
+          "obfuscated": "oOOo0Ooo0oOoo0O0OOOOo0oo",
+          "descriptor": "()Ljava/lang/String;"
+        },
+        {
+          "semantic": "getRotationX",
+          "obfuscated": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "()F"
+        },
+        {
+          "semantic": "setRotationX",
+          "obfuscated": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(F)V"
+        },
+        {
+          "semantic": "getRotationY",
+          "obfuscated": "o0OOooo0o0OO00OoOOOo0o0O",
+          "descriptor": "()F"
+        },
+        {
+          "semantic": "setRotationY",
+          "obfuscated": "o0OOooo0o0OO00OoOOOo0o0O",
+          "descriptor": "(F)V"
+        },
+        {
+          "semantic": "getRotationZ",
+          "obfuscated": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "()F"
+        },
+        {
+          "semantic": "setRotationZ",
+          "obfuscated": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "(F)V"
+        },
+        {
+          "semantic": "getPositionX",
+          "obfuscated": "oOOOo0OOO0ooooo0O00OO0o0",
+          "descriptor": "()F"
+        },
+        {
+          "semantic": "setPositionX",
+          "obfuscated": "oOOOo0OOO0ooooo0O00OO0o0",
+          "descriptor": "(F)V"
+        },
+        {
+          "semantic": "getPositionY",
+          "obfuscated": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+          "descriptor": "()F"
+        },
+        {
+          "semantic": "setPositionY",
+          "obfuscated": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+          "descriptor": "(F)V"
+        },
+        {
+          "semantic": "getPositionZ",
+          "obfuscated": "Ooooo0oooO0oooOOOoO0000O",
+          "descriptor": "()F"
+        },
+        {
+          "semantic": "setPositionZ",
+          "obfuscated": "Ooooo0oooO0oooOOOoO0000O",
+          "descriptor": "(F)V"
+        },
+        {
+          "semantic": "getScaleX",
+          "obfuscated": "oo0OoO00oOoo000O0000o0oo",
+          "descriptor": "()F"
+        },
+        {
+          "semantic": "setScaleX",
+          "obfuscated": "oo0OoO00oOoo000O0000o0oo",
+          "descriptor": "(F)V"
+        },
+        {
+          "semantic": "getScaleY",
+          "obfuscated": "oooooooOOoOOoO00OooOo00O",
+          "descriptor": "()F"
+        },
+        {
+          "semantic": "setScaleY",
+          "obfuscated": "oooooooOOoOOoO00OooOo00O",
+          "descriptor": "(F)V"
+        },
+        {
+          "semantic": "getScaleZ",
+          "obfuscated": "Oo00o0OooOOo0ooOoo0oO0o0",
+          "descriptor": "()F"
+        },
+        {
+          "semantic": "setScaleZ",
+          "obfuscated": "Oo00o0OooOOo0ooOoo0oO0o0",
+          "descriptor": "(F)V"
+        },
+        {
+          "semantic": "isHidden",
+          "obfuscated": "OOOo0OOOoOO0O00Oo00ooOOO",
+          "descriptor": "()Z"
+        },
+        {
+          "semantic": "childBonesAreHiddenToo",
+          "obfuscated": "oOo0o0000OOOO0OooooO00oo",
+          "descriptor": "()Z"
+        },
+        {
+          "semantic": "setHidden",
+          "obfuscated": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(ZZ)V"
+        },
+        {
+          "semantic": "getInitialRotation",
+          "obfuscated": "OO0ooO00OoO00o0OO0OOooO0",
+          "descriptor": "()Lorg/joml/Vector3f;"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.alias.animatable-model-access",
+      "observed_on": "runtime animatable/model/event/context objects",
+      "owner_status": "PARTIALLY_RESOLVED",
+      "confidence": "HIGH_SEMANTIC",
+      "evidence": {
+        "repository": "3SCR1P7/TaczFixes",
+        "revision": "a2223f838fc4f16ecae0315663b7e0e3ca5d23d4",
+        "path": "src/main/java/com/ssscript/taczfixes/common/compat/YsmDualWieldCompat.java"
+      },
+      "aliases": [
+        {
+          "semantic": "AnimatableEntity.getEntity",
+          "obfuscated": "OO00OOOOo0Ooo0oo0o0Oo0OO",
+          "descriptor": "()Lnet/minecraft/world/entity/Entity;"
+        },
+        {
+          "semantic": "AnimatableEntity.getCurrentModel",
+          "obfuscated": "OOOoOO000000o0o0oOooo0o0",
+          "descriptor": "()Lcom/elfmcys/yesstevemodel/OOOO0O0O000O000000oOOO0o;"
+        },
+        {
+          "semantic": "AnimatedGeoModel.bones",
+          "obfuscated": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "return Map-compatible bone collection; exact JVM return descriptor not established here"
+        },
+        {
+          "semantic": "AnimationEvent.getAnimatable",
+          "obfuscated": "o0OOooo0o0OO00OoOOOo0o0O",
+          "descriptor": "returns AnimatableEntity-like object"
+        },
+        {
+          "semantic": "IContext.getEntity",
+          "obfuscated": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "returns LivingEntity/Entity-like object"
+        }
+      ]
+    }
   ]
 }
