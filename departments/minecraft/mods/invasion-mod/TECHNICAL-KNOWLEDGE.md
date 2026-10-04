@@ -102,6 +102,55 @@ The modern spawn generator caps work to **256 spawn-point probes per tick** inst
 
 **Lesson:** when siege logic needs large spatial sampling, split discovery across ticks while keeping an immutable/committed result for consumers.
 
+
+## T11 — Drive long bodies from actual movement breadcrumbs
+
+**Problem:** a multi-segment creature becomes unstable when every segment follows predicted path nodes, especially after collision or replanning.
+
+**Mechanism:** record the head's realized world-space trace and resample it at fixed distance intervals. Place each visual/body segment at an older point on that centerline.
+
+**Why it matters:** spacing remains approximately constant across speed changes, stalls and collision.
+
+**Modern evidence:** Burrower movement/render history; the later implementation replaces broad segment synchronization with bounded client-side history.
+
+**KNEEKURA guidance:** use actual traveled distance as the source of truth for worms, snakes, trains, tails and other long bodies.
+
+## T12 — Give special movement an owned phase
+
+**Problem:** generic repath/stuck recovery can interrupt a climb, bridge crossing or attack run halfway through.
+
+**Mechanism:** represent the maneuver explicitly, for example `APPROACH -> CLIMB -> CROSS`, and suppress competing movement until completion or explicit abort.
+
+**Evidence:** modern Burrower stair/ledge repairs, Engineer tower ownership, and legacy flying strike commitment.
+
+**KNEEKURA guidance:** special movement should own locomotion just as a terrain transaction owns block edits.
+
+## T13 — Adapt strategic intent to a mob's native controller
+
+**Problem:** forcing every creature through one navigation abstraction discards useful native physics and MOD-specific movement.
+
+**Mechanism:** keep Phantom/Ghast/flying/jumping controls and provide a small adapter that supplies Nexus-directed targets. Add narrow obstacle helpers such as a cached wall-crossing waypoint only when required.
+
+**Why it matters:** compatibility improves while the invasion layer remains responsible for intent rather than locomotion internals.
+
+## T14 — Persist exact tactical purchases for procedural waves
+
+**Problem:** rerolling a procedural wave after save/load changes difficulty and unit relationships.
+
+**Mechanism:** generate themed phases once from a budget, persist every purchase plus phase index, and turn those purchases into spawn entries later.
+
+**Modern evidence:** `BudgetWavePlan`.
+
+**Useful extension:** player behavior can softly bias future theme probabilities without deterministically hard-countering every successful defense.
+
+## T15 — Separate strategic, hostile and cooperation targets
+
+**Legacy observation:** some mobs reuse `attackTarget` to point at an Engineer when they need route help; task priority makes `WaitForEngy` interpret that target as an ally before generic combat consumes it.
+
+**Lesson:** the behavior is clever but brittle.
+
+**KNEEKURA guidance:** model at least three distinct concepts: strategic objective (Nexus), hostile combat target, and ally/cooperation target.
+
 ## Techniques not promoted
 
 - Legacy \`PathfinderIM\` implementation itself: globally synchronized, singleton state.
