@@ -2312,6 +2312,1647 @@
           "run_id": 37226280005
         }
       ]
+    },
+    {
+      "id": "ysm265.class.network-handler",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00OoOOOOooO0ooOoOoOooO",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.NetworkHandler",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "Exact class contains VERSION='2.6.0', ResourceLocation, SimpleChannel and AttributeKey fields and its init bytecode registers the same packet IDs/directions as the release-line source."
+        },
+        {
+          "type": "OFFICIAL_SOURCE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/network/NetworkHandler.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.network-set-channel-version",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00OoOOOOooO0ooOoOoOooO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/network/Connection;Ljava/lang/String;)Z",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.NetworkHandler",
+      "semantic_member": "setChannelVersion",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "Exact NetworkHandler method shape matches setChannelVersion."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.network-is-player-channel-present",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00OoOOOOooO0ooOoOoOooO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/server/level/ServerPlayer;)Z",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.NetworkHandler",
+      "semantic_member": "isPlayerChannelPresent",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "Exact NetworkHandler method shape matches isPlayerChannelPresent."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.network-is-remote-channel-present",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00OoOOOOooO0ooOoOoOooO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()Z",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.NetworkHandler",
+      "semantic_member": "isRemoteChannelPresent",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "Exact NetworkHandler method shape matches isRemoteChannelPresent."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.network-is-channel-present",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00OoOOOOooO0ooOoOoOooO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/network/Connection;)Z",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.NetworkHandler",
+      "semantic_member": "isChannelPresent",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "Exact NetworkHandler method shape matches isChannelPresent."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.network-init",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00OoOOOOooO0ooOoOoOooO",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "()V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.NetworkHandler",
+      "semantic_member": "init",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "Exact NetworkHandler method shape matches init."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.network-send-to-server",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00OoOOOOooO0ooOoOoOooO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/lang/Object;)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.NetworkHandler",
+      "semantic_member": "sendToServer",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "Exact NetworkHandler method shape matches sendToServer."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.network-send-to-client-player",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00OoOOOOooO0ooOoOoOooO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/lang/Object;Lnet/minecraft/world/entity/player/Player;)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.NetworkHandler",
+      "semantic_member": "sendToClientPlayer",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "Exact NetworkHandler method shape matches sendToClientPlayer."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.network-broadcast-all",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00OoOOOOooO0ooOoOoOooO",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Ljava/lang/Object;)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.NetworkHandler",
+      "semantic_member": "broadcastToAllPlayers",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "Exact NetworkHandler method shape matches broadcastToAllPlayers."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.network-broadcast-visible",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00OoOOOOooO0ooOoOoOooO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/lang/Object;Lnet/minecraft/world/entity/Entity;)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.NetworkHandler",
+      "semantic_member": "broadcastToVisiblePlayers",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "Exact NetworkHandler method shape matches broadcastToVisiblePlayers."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.network-broadcast-visible-self",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00OoOOOOooO0ooOoOoOooO",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Ljava/lang/Object;Lnet/minecraft/world/entity/player/Player;)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.NetworkHandler",
+      "semantic_member": "broadcastToVisiblePlayersAndSelf",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "Exact NetworkHandler method shape matches broadcastToVisiblePlayersAndSelf."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.field.network-version",
+      "kind": "field",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00OoOOOOooO0ooOoOoOooO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "Ljava/lang/String;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.NetworkHandler",
+      "semantic_member": "VERSION",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "Exact NetworkHandler field matches VERSION."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.field.network-channel-name",
+      "kind": "field",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00OoOOOOooO0ooOoOoOooO",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "Lnet/minecraft/resources/ResourceLocation;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.NetworkHandler",
+      "semantic_member": "CHANNEL_NAME",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "Exact NetworkHandler field matches CHANNEL_NAME."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.field.network-channel",
+      "kind": "field",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00OoOOOOooO0ooOoOoOooO",
+      "obfuscated_member": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "Lnet/minecraftforge/network/simple/SimpleChannel;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.NetworkHandler",
+      "semantic_member": "CHANNEL",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "Exact NetworkHandler field matches CHANNEL."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.field.network-channel-version-attribute",
+      "kind": "field",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00OoOOOOooO0ooOoOoOooO",
+      "obfuscated_member": "oOOOo0OOO0ooooo0O00OO0o0",
+      "descriptor": "Lio/netty/util/AttributeKey;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.NetworkHandler",
+      "semantic_member": "ATTRIBUTE_CHANNEL_VERSION",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "Exact NetworkHandler field matches ATTRIBUTE_CHANNEL_VERSION."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.network-message-sync-data-to-client",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O0oo00oo00OoOooO000oO00O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.message.SyncDataToClient",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "NetworkHandler.init bytecode registers this class as message ID 1, matching official source registration for SyncDataToClient."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_REGISTRATION",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/network/NetworkHandler.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.network-message-sync-data-to-server",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo00oOo0OOO0OoOOo0O0oO0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.message.SyncDataToServer",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "NetworkHandler.init bytecode registers this class as message ID 2, matching official source registration for SyncDataToServer."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_REGISTRATION",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/network/NetworkHandler.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.network-message-execute-molang",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.o0oo0O0o0oO0O0o0OoOOOoOO",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.message.ExecuteMolang",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "NetworkHandler.init bytecode registers this class as message ID 3, matching official source registration for ExecuteMolang."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_REGISTRATION",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/network/NetworkHandler.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.network-message-sync-model-info",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O0oOOo0OO0000oooOO0ooo0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.message.SyncModelInfo",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "NetworkHandler.init bytecode registers this class as message ID 4, matching official source registration for SyncModelInfo."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_REGISTRATION",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/network/NetworkHandler.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.network-message-set-model-and-texture",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O0Oo0oooOoOOO0oOoOOoOooo",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.message.SetModelAndTexture",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "NetworkHandler.init bytecode registers this class as message ID 5, matching official source registration for SetModelAndTexture."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_REGISTRATION",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/network/NetworkHandler.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.network-message-sync-auth-models",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OoOOOoOOOOooo00o0OOoooOo",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.message.SyncAuthModels",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "NetworkHandler.init bytecode registers this class as message ID 6, matching official source registration for SyncAuthModels."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_REGISTRATION",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/network/NetworkHandler.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.network-message-set-play-animation",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00OOoo0ooO0o000O0oO0oO",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.message.SetPlayAnimation",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "NetworkHandler.init bytecode registers this class as message ID 7, matching official source registration for SetPlayAnimation."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_REGISTRATION",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/network/NetworkHandler.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.network-message-sync-star-models",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OoO0O0Oo0oooo0O0Oo000o0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.message.SyncStarModels",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "NetworkHandler.init bytecode registers this class as message ID 8, matching official source registration for SyncStarModels."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_REGISTRATION",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/network/NetworkHandler.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.network-message-set-star-model",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oO0o0o0ooOO0OO0O0oO0OOo0",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.message.SetStarModel",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "NetworkHandler.init bytecode registers this class as message ID 9, matching official source registration for SetStarModel."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_REGISTRATION",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/network/NetworkHandler.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.network-message-submit-roaming-vars-changes",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oOOoOo0o0OOOooo00OOo0O0o",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.message.SubmitRoamingVarsChanges",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "NetworkHandler.init bytecode registers this class as message ID 15, matching official source registration for SubmitRoamingVarsChanges."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_REGISTRATION",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/network/NetworkHandler.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.network-message-sync-projectile-model-info",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OOOOoO00oo0000OO0ooo0OOo",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.message.SyncProjectileModelInfo",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "NetworkHandler.init bytecode registers this class as message ID 16, matching official source registration for SyncProjectileModelInfo."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_REGISTRATION",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/network/NetworkHandler.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.network-message-submit-roulette-config",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oOooOooO0Oo0oo0o0o00O0Oo",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.message.SubmitRouletteConfig",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "NetworkHandler.init bytecode registers this class as message ID 17, matching official source registration for SubmitRouletteConfig."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_REGISTRATION",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/network/NetworkHandler.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.network-message-emit-molang-sync",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O0oOoOOo00O0OoOoOoOO0oo0",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.message.EmitMolangSync",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "NetworkHandler.init bytecode registers this class as message ID 18, matching official source registration for EmitMolangSync."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_REGISTRATION",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/network/NetworkHandler.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.network-message-molang-sync",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooo0oooO0O00000ooOO0OoO",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.message.MolangSync",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "NetworkHandler.init bytecode registers this class as message ID 19, matching official source registration for MolangSync."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_REGISTRATION",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/network/NetworkHandler.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.network-message-dispatch-server-driven-property",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O00OO0Oo0O0Oo0O0Ooo0o00O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.message.DispatchServerDrivenProperty",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "NetworkHandler.init bytecode registers this class as message ID 21, matching official source registration for DispatchServerDrivenProperty."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_REGISTRATION",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/network/NetworkHandler.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.network-message-sync-vehicle-model-info",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.o00o00Oo0oooo00o0oo000o0",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.message.SyncVehicleModelInfo",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "NetworkHandler.init bytecode registers this class as message ID 22, matching official source registration for SyncVehicleModelInfo."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_REGISTRATION",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/network/NetworkHandler.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.network-message-emit-swing-hand",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oOO0O00OOoO00000OoOoOOo0",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.message.EmitSwingHand",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "NetworkHandler.init bytecode registers this class as message ID 23, matching official source registration for EmitSwingHand."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_REGISTRATION",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/network/NetworkHandler.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.network-message-server-info",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oO000OOo0o000oOoo0O000Oo",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.message.ServerInfo",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "NetworkHandler.init bytecode registers this class as message ID 51, matching official source registration for ServerInfo."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_REGISTRATION",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/network/NetworkHandler.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.network-message-client-info",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.o0O0oo00OO00oO0O0o0o0o00",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.message.ClientInfo",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "NetworkHandler.init bytecode registers this class as message ID 52, matching official source registration for ClientInfo."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_REGISTRATION",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/network/NetworkHandler.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.network-serverinfo-decode",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oO000OOo0o000oOoo0O000Oo",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/network/FriendlyByteBuf;)Lcom/elfmcys/yesstevemodel/oO000OOo0o000oOoo0O000Oo;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.message.ServerInfo",
+      "semantic_member": "decode",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "ServerInfo exact method shape and ID registration match decode."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.network-serverinfo-encode",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oO000OOo0o000oOoo0O000Oo",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oO000OOo0o000oOoo0O000Oo;Lnet/minecraft/network/FriendlyByteBuf;)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.message.ServerInfo",
+      "semantic_member": "encode",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "ServerInfo exact method shape and ID registration match encode."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.network-serverinfo-handle",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oO000OOo0o000oOoo0O000Oo",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oO000OOo0o000oOoo0O000Oo;Ljava/util/function/Supplier;)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.message.ServerInfo",
+      "semantic_member": "handleOnClient",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "ServerInfo exact method shape and ID registration match handleOnClient."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.network-clientinfo-decode",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.o0O0oo00OO00oO0O0o0o0o00",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/network/FriendlyByteBuf;)Lcom/elfmcys/yesstevemodel/o0O0oo00OO00oO0O0o0o0o00;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.message.ClientInfo",
+      "semantic_member": "decode",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "ClientInfo exact method shape and ID registration match decode."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.network-clientinfo-encode",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.o0O0oo00OO00oO0O0o0o0o00",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/o0O0oo00OO00oO0O0o0o0o00;Lnet/minecraft/network/FriendlyByteBuf;)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.message.ClientInfo",
+      "semantic_member": "encode",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "ClientInfo exact method shape and ID registration match encode."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.network-clientinfo-handle",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.o0O0oo00OO00oO0O0o0o0o00",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/o0O0oo00OO00oO0O0o0o0o00;Ljava/util/function/Supplier;)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.message.ClientInfo",
+      "semantic_member": "handleOnServer",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "ClientInfo exact method shape and ID registration match handleOnServer."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.network-sync-data-to-client-encode",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O0oo00oo00OoOooO000oO00O",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0oo00oo00OoOooO000oO00O;Lnet/minecraft/network/FriendlyByteBuf;)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.message.SyncDataToClient",
+      "semantic_member": "encode",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "SyncDataToClient has a single ByteBuffer payload and exact encode/decode/handle shape; server variant uniquely references ServerPlayer."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.network-sync-data-to-client-decode",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O0oo00oo00OoOooO000oO00O",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/network/FriendlyByteBuf;)Lcom/elfmcys/yesstevemodel/O0oo00oo00OoOooO000oO00O;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.message.SyncDataToClient",
+      "semantic_member": "decode",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "SyncDataToClient has a single ByteBuffer payload and exact encode/decode/handle shape; server variant uniquely references ServerPlayer."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.network-sync-data-to-client-handle",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O0oo00oo00OoOooO000oO00O",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0oo00oo00OoOooO000oO00O;Ljava/util/function/Supplier;)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.message.SyncDataToClient",
+      "semantic_member": "handle",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "SyncDataToClient has a single ByteBuffer payload and exact encode/decode/handle shape; server variant uniquely references ServerPlayer."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.network-sync-data-to-server-encode",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo00oOo0OOO0OoOOo0O0oO0O",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oo00oOo0OOO0OoOOo0O0oO0O;Lnet/minecraft/network/FriendlyByteBuf;)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.message.SyncDataToServer",
+      "semantic_member": "encode",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "SyncDataToServer has a single ByteBuffer payload and exact encode/decode/handle shape; server variant uniquely references ServerPlayer."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.network-sync-data-to-server-decode",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo00oOo0OOO0OoOOo0O0oO0O",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/network/FriendlyByteBuf;)Lcom/elfmcys/yesstevemodel/oo00oOo0OOO0OoOOo0O0oO0O;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.message.SyncDataToServer",
+      "semantic_member": "decode",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "SyncDataToServer has a single ByteBuffer payload and exact encode/decode/handle shape; server variant uniquely references ServerPlayer."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.network-sync-data-to-server-handle",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo00oOo0OOO0OoOOo0O0oO0O",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oo00oOo0OOO0OoOOo0O0oO0O;Ljava/util/function/Supplier;)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.network.message.SyncDataToServer",
+      "semantic_member": "handle",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "SyncDataToServer has a single ByteBuffer payload and exact encode/decode/handle shape; server variant uniquely references ServerPlayer."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.context-binding",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oOoOoO0O000OOoo000O0OO00",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.molang.binding.ContextBinding",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "Exact class is the direct superclass of the unique YSMBinding candidate, contains an Object2ReferenceOpenHashMap binding table and readable getProperty(String), matching ContextBinding."
+        },
+        {
+          "type": "OFFICIAL_SOURCE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/molang/binding/ContextBinding.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.context-binding-get-property",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oOoOoO0O000OOoo000O0OO00",
+      "obfuscated_member": "getProperty",
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/Object;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.molang.binding.ContextBinding",
+      "semantic_member": "getProperty",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "Readable method name and exact descriptor survive in the distributed JAR."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.context-binding-get-all-name",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oOoOoO0O000OOoo000O0OO00",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()Ljava/util/Set;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.molang.binding.ContextBinding",
+      "semantic_member": "getAllName",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "Exact superclass shape and source declaration uniquely identify getAllName()."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.ysm-binding",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo00O000000OoOo0O0O00oOO",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.animation.molang.YSMBinding",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "Unique exact-JAR class contains ground_speed2/bone_rot/bone_pos plus particle/play_sound/defer and directly extends the recovered ContextBinding."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_UNIQUE_BINDING_SET",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/YSMBinding.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.molang-dump-equipped-item",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0OoooO00o00OooO0Oo000o",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.animation.molang.functions.DumpEquippedItem",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "YSMBinding constructor loads literal 'dump_equipped_item' and immediately instantiates this class before registering it to the binding table."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_BINDING",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/YSMBinding.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.molang-dump-relative-block",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.o0OoOoOO000OOo0OOOO0oOoO",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.animation.molang.functions.DumpRelativeBlock",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "YSMBinding constructor loads literal 'dump_relative_block' and immediately instantiates this class before registering it to the binding table."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_BINDING",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/YSMBinding.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.molang-mod-version",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OoO0o00oooo00oO000oO0ooo",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.animation.molang.functions.ModVersion",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "YSMBinding constructor loads literal 'mod_version' and immediately instantiates this class before registering it to the binding table."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_BINDING",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/YSMBinding.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.molang-equipped-enchantment-level",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OOoOo0oOOOo0O0000o0OOoOO",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.animation.molang.functions.EquippedEnchantmentLevel",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "YSMBinding constructor loads literal 'equipped_enchantment_level' and immediately instantiates this class before registering it to the binding table."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_BINDING",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/YSMBinding.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.molang-effect-level",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo00O0OOO0Oo0oO0oO0Oo0o0",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.animation.molang.functions.EffectLevel",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "YSMBinding constructor loads literal 'effect_level' and immediately instantiates this class before registering it to the binding table."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_BINDING",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/YSMBinding.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.molang-relative-block-name",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oOOOO00ooooO0O0ooO000o00",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.animation.molang.functions.RelativeBlockName",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "YSMBinding constructor loads literal 'relative_block_name' and immediately instantiates this class before registering it to the binding table."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_BINDING",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/YSMBinding.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.molang-relative-block-name-any",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0ooOo0OOOO00o0OOO0o0OO",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.animation.molang.functions.RelativeBlockNameAny",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "YSMBinding constructor loads literal 'relative_block_name_any' and immediately instantiates this class before registering it to the binding table."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_BINDING",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/YSMBinding.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.molang-bone-rotation",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo0ooOOo00o0O0OO0O0OOO00",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.animation.molang.functions.BoneRotation",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "YSMBinding constructor loads literal 'bone_rot' and immediately instantiates this class before registering it to the binding table."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_BINDING",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/YSMBinding.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.molang-bone-position",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.o0o0oOO0o0ooOooO00OO000O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.animation.molang.functions.BonePosition",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "YSMBinding constructor loads literal 'bone_pos' and immediately instantiates this class before registering it to the binding table."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_BINDING",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/YSMBinding.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.molang-bone-scale",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OOOOooOo0000o0OO00O0OoOO",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.animation.molang.functions.BoneScale",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "YSMBinding constructor loads literal 'bone_scale' and immediately instantiates this class before registering it to the binding table."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_BINDING",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/YSMBinding.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.molang-bone-absolute-pivot",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OoooOooOOooooo000o0o0o0o",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.animation.molang.functions.BoneAbsolutePivot",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "YSMBinding constructor loads literal 'bone_pivot_abs' and immediately instantiates this class before registering it to the binding table."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_BINDING",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/YSMBinding.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.molang-ladder-facing-variable",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OOo0O00o0o00oo0ooOOoo00o",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.animation.molang.variable.LadderFacingVariable",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "YSMBinding constructor loads literal 'ladder_facing' and immediately instantiates this class before registering it to the binding table."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_BINDING",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/YSMBinding.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.molang-texture-name-variable",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O0O0o0Oo0OOoo0o0Oo0O00O0",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.animation.molang.variable.TextureNameVariable",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "YSMBinding constructor loads literal 'texture_name' and immediately instantiates this class before registering it to the binding table."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_BINDING",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/YSMBinding.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.molang-first-person-mod-hide-variable",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O0O0o0OOOoOoO0OOooOoooO0",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.animation.molang.variable.FirstPersonModHideVariable",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "YSMBinding constructor loads literal 'first_person_mod_hide' and immediately instantiates this class before registering it to the binding table."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_BINDING",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/YSMBinding.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.molang-first-order-function",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oOO00ooOo00Ooo0OOOOoO0oO",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.animation.molang.functions.FirstOrderFunction",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "YSMBinding constructor loads literal 'first_order' and immediately instantiates this class before registering it to the binding table."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_BINDING",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/YSMBinding.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.molang-second-order-function",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O0OO0ooOoooOO0oo0o0oOOOo",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.animation.molang.functions.SecondOrderFunction",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "YSMBinding constructor loads literal 'second_order' and immediately instantiates this class before registering it to the binding table."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_BINDING",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/YSMBinding.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.molang-particle-function",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOoo00Ooo0000OoO0OOo0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.animation.molang.functions.ParticleFunction",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "YSMBinding constructor loads literal 'particle / abs_particle' and immediately instantiates this class before registering it to the binding table."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_BINDING",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/YSMBinding.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.molang-perlin-noise-function",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Ooo000O0OO0O0OOO0oO0OOOo",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.animation.molang.functions.PerlinNoiseFunction",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "YSMBinding constructor loads literal 'perlin_noise' and immediately instantiates this class before registering it to the binding table."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_BINDING",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/YSMBinding.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.molang-sound-play",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.o0o00O0O0ooo00ooO0o00000$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.animation.molang.functions.SoundFunction$Play",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "YSMBinding constructor loads literal 'play_sound' and immediately instantiates this class before registering it to the binding table."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_BINDING",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/YSMBinding.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.molang-sound-stop",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.o0o00O0O0ooo00ooO0o00000$o0OOooo0o0OO00OoOOOo0o0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.animation.molang.functions.SoundFunction$Stop",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "YSMBinding constructor loads literal 'stop_sound' and immediately instantiates this class before registering it to the binding table."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_BINDING",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/YSMBinding.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.molang-sound-stop-all",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.o0o00O0O0ooo00ooO0o00000$O00OOOooOoooOoo0o0o0oO0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.animation.molang.functions.SoundFunction$StopAll",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "YSMBinding constructor loads literal 'stop_all_sounds' and immediately instantiates this class before registering it to the binding table."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_BINDING",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/YSMBinding.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.molang-input-keyboard",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O0000O000OOOO0O0oOoOoOo0$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.animation.molang.functions.InputCheck$Keyboard",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "YSMBinding constructor loads literal 'keyboard' and immediately instantiates this class before registering it to the binding table."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_BINDING",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/YSMBinding.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.molang-input-mouse",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O0000O000OOOO0O0oOoOoOo0$o0OOooo0o0OO00OoOOOo0o0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.animation.molang.functions.InputCheck$Mouse",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "YSMBinding constructor loads literal 'mouse' and immediately instantiates this class before registering it to the binding table."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_BINDING",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/YSMBinding.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.molang-sync-function",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo0oO0O0000oOo00ooOooo00",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.animation.molang.functions.Sync",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "YSMBinding constructor loads literal 'sync' and immediately instantiates this class before registering it to the binding table."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_BINDING",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/YSMBinding.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.molang-defer-function",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.o00OOOoo0ooOoO0oO0O000O0",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.animation.molang.functions.Defer",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BYTECODE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37226945568,
+          "fact": "YSMBinding constructor loads literal 'defer' and immediately instantiates this class before registering it to the binding table."
+        },
+        {
+          "type": "OFFICIAL_SOURCE_BINDING",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/YSMBinding.java"
+        }
+      ]
     }
   ],
   "unresolved_hints": [
@@ -2533,6 +4174,92 @@
       "failures": 0
     },
     "parse_errors": 0,
-    "jar_retained": false
+    "jar_retained": false,
+    "network_registration": {
+      "run_id": 37226945568,
+      "mapping": {
+        "1": {
+          "obfuscated_class": "O0oo00oo00OoOooO000oO00O",
+          "semantic": "SyncDataToClient"
+        },
+        "2": {
+          "obfuscated_class": "oo00oOo0OOO0OoOOo0O0oO0O",
+          "semantic": "SyncDataToServer"
+        },
+        "3": {
+          "obfuscated_class": "o0oo0O0o0oO0O0o0OoOOOoOO",
+          "semantic": "ExecuteMolang"
+        },
+        "4": {
+          "obfuscated_class": "O0oOOo0OO0000oooOO0ooo0O",
+          "semantic": "SyncModelInfo"
+        },
+        "5": {
+          "obfuscated_class": "O0Oo0oooOoOOO0oOoOOoOooo",
+          "semantic": "SetModelAndTexture"
+        },
+        "6": {
+          "obfuscated_class": "OoOOOoOOOOooo00o0OOoooOo",
+          "semantic": "SyncAuthModels"
+        },
+        "7": {
+          "obfuscated_class": "OO00OOoo0ooO0o000O0oO0oO",
+          "semantic": "SetPlayAnimation"
+        },
+        "8": {
+          "obfuscated_class": "OoO0O0Oo0oooo0O0Oo000o0O",
+          "semantic": "SyncStarModels"
+        },
+        "9": {
+          "obfuscated_class": "oO0o0o0ooOO0OO0O0oO0OOo0",
+          "semantic": "SetStarModel"
+        },
+        "15": {
+          "obfuscated_class": "oOOoOo0o0OOOooo00OOo0O0o",
+          "semantic": "SubmitRoamingVarsChanges"
+        },
+        "16": {
+          "obfuscated_class": "OOOOoO00oo0000OO0ooo0OOo",
+          "semantic": "SyncProjectileModelInfo"
+        },
+        "17": {
+          "obfuscated_class": "oOooOooO0Oo0oo0o0o00O0Oo",
+          "semantic": "SubmitRouletteConfig"
+        },
+        "18": {
+          "obfuscated_class": "O0oOoOOo00O0OoOoOoOO0oo0",
+          "semantic": "EmitMolangSync"
+        },
+        "19": {
+          "obfuscated_class": "oooo0oooO0O00000ooOO0OoO",
+          "semantic": "MolangSync"
+        },
+        "21": {
+          "obfuscated_class": "O00OO0Oo0O0Oo0O0Ooo0o00O",
+          "semantic": "DispatchServerDrivenProperty"
+        },
+        "22": {
+          "obfuscated_class": "o00o00Oo0oooo00o0oo000o0",
+          "semantic": "SyncVehicleModelInfo"
+        },
+        "23": {
+          "obfuscated_class": "oOO0O00OOoO00000OoOoOOo0",
+          "semantic": "EmitSwingHand"
+        },
+        "51": {
+          "obfuscated_class": "oO000OOo0o000oOoo0O000Oo",
+          "semantic": "ServerInfo"
+        },
+        "52": {
+          "obfuscated_class": "o0O0oo00OO00oO0O0o0o0o00",
+          "semantic": "ClientInfo"
+        }
+      }
+    },
+    "molang_constructor_pairs": {
+      "run_id": 37226945568,
+      "count": 25,
+      "note": "Literal binding name -> immediately constructed class pairs recovered from bounded javap of the exact YSMBinding constructor."
+    }
   }
 }
