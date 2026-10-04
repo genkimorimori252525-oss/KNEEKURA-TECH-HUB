@@ -37,13 +37,27 @@ try {
   'DecisionAdapter','DecisionBurstRequest','AdapterSourceProof','TwilightForestDescriptor','TwilightForestReturnDescriptor','TwilightForestAdapter',
   'MotionTraceCache','RelatedProjectileTraceCache','MotionOverlayRuntime','MotionOverlayGeometry','MotionOverlay'];
  const sources=[...names.map(n=>path.join(main,'KneekuraDebug'+n+'.java')),...['Path','Brain','OneShot','GateBehavior'].map(n=>path.join(main,'decisionmixin/KneekuraDebug'+n+'DecisionMixin.java')),path.join(main,'decisionmixin/KneekuraDebugScheduledActivityMixin.java'),path.join(main,'decisionmixin/KneekuraDebugNavigationResultMixin.java'),path.join(main,'decisionmixin/KneekuraDebugBrainNavigationMixin.java')];
- const checks=['EvidenceClaim','CaptureWriter','RegisteredWorld','TankPresentation','DecisionSnapshot','TypedMemory','BehaviorControl','BrainActivity','NavigationResult','BrainNavigation','DecisionHooks','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult','TerrainField','SynchedCached','MotionTraceCache','RelatedProjectileTrace','MotionOverlayGeometry','MotionWriter'];
+ const checks=['EvidenceClaim','CaptureWriter','RegisteredWorld','TankPresentation','DecisionSnapshot','TypedMemory','BehaviorControl','BrainActivity','NavigationResult','BrainNavigation','BrainStop','DecisionHooks','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult','TerrainField','SynchedCached','MotionTraceCache','RelatedProjectileTrace','MotionOverlayGeometry','MotionWriter'];
  run(executable('javac'),['--release','17','-proc:none','-cp',classpath,'-d',output,...sources,...checks.map(n=>path.join(test,'KneekuraDebug'+n+'SelfTest.java')),path.join(test,'KneekuraDebugDecisionIdentityInterop.java')]);
  for(const name of checks.filter(n=>n!=='MotionWriter')){
   // Vanilla bootstrap can create logs; keep this new check's artifacts in its disposable output.
-  const bootstrap=['BrainNavigation','NavigationResult','BrainActivity','BehaviorControl','TypedMemory','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult'].includes(name);
+  const bootstrap=['BrainStop','BrainNavigation','NavigationResult','BrainActivity','BehaviorControl','TypedMemory','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult'].includes(name);
   const cp=bootstrap?classpath.split(path.delimiter).map(p=>path.resolve(root,p)).join(path.delimiter):classpath;
   const stdout=run(executable('java'),['-cp',output+path.delimiter+cp,'com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebug'+name+'SelfTest'],{},bootstrap?output:root);
+  if(name==='BrainStop') {
+   const lines=stdout.split(/\r?\n/).filter(l=>l.startsWith('BRAIN_STOP_INTEROP:'));
+   assert.equal(lines.length,39,'genuine stop, custom retained state, absent/malformed slots and caps');
+   const records=lines.map((line,index)=>({source:{side:'SERVER'},observationId:'brain-stop-gson:'+index,gameTime:100,payload:JSON.parse(line.slice('BRAIN_STOP_INTEROP:'.length))}));
+   assert.ok(records.every(validOriginalDecisionEvent),'actual production stop Gson satisfies consumer contract');
+   assert.deepEqual(records.slice(1,5).map(r=>r.payload.kind),['BRAIN_PATH_NAVIGATION_STOP_RETURN','BRAIN_PATH_MEMORY_ERASE_RETURN','BRAIN_PATH_MEMORY_ERASE_RETURN','BRAIN_PATH_SINK_RETURN']);
+   assert.equal(new Set(records.slice(1,5).map(r=>r.payload.data.sinkInvocationId)).size,1,'same original concrete stop invocation');
+   assert.equal(records[5].payload.data.cachedPath.present,true,'normal custom stop can retain cached Path');
+   assert.equal(records[6].payload.data.slotAtReturn.present,true,'normal custom erase can retain Optional slot');
+   const stages={},capabilities={},timeline=[];appendOriginalDecisionEvents(records,stages,capabilities,timeline);
+   assert.equal(timeline.length,39);assert.equal(stages.EXECUTION.facts.length,39);assert.equal(capabilities.brain_navigation.status,'PARTIAL');
+   for(const stage of ['CANDIDATE','SELECTION','RESULT'])assert.equal(stages[stage],undefined);
+   console.log('Thirty-nine actual Brain stop/Gson cases preserve original void returns, cached slot scope and unknown arrival');
+  }
   if(name==='BrainNavigation') {
    const lines=stdout.split(/\r?\n/).filter(l=>l.startsWith('BRAIN_NAVIGATION_INTEROP:'));
    assert.equal(lines.length,24,'genuine sink call, original virtual return, cached references and explicit unknown cases');

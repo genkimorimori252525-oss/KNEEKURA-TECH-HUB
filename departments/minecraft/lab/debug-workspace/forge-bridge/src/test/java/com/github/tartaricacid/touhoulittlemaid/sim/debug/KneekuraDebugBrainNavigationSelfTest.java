@@ -127,7 +127,7 @@ public final class KneekuraDebugBrainNavigationSelfTest {
         try(var bytes=KneekuraDebugBrainNavigationSelfTest.class.getClassLoader().getResourceAsStream("com/github/tartaricacid/touhoulittlemaid/sim/debug/decisionmixin/KneekuraDebugBrainNavigationMixin.class")){
             require(bytes!=null,"compiled source-specific mixin required");new ClassReader(bytes).accept(new ClassVisitor(Opcodes.ASM9){
                 @Override public MethodVisitor visitMethod(int access,String name,String desc,String signature,String[] exceptions){
-                    var spec=expected.get(name);if(spec==null){if(!name.startsWith("lambda$"))return null;return new MethodVisitor(Opcodes.ASM9){@Override public void visitMethodInsn(int op,String owner,String call,String descriptor,boolean itf){require(op==Opcodes.INVOKEVIRTUAL&&owner.endsWith("/KneekuraDebugBrainNavigationMixin")&&Set.of("start","tick").contains(call)&&descriptor.equals(mob),"original protected Shadow delegate only");originals[0]++;}};}
+                    var spec=expected.get(name);if(spec==null){if(!name.startsWith("lambda$"))return null;return new MethodVisitor(Opcodes.ASM9){@Override public void visitMethodInsn(int op,String owner,String call,String descriptor,boolean itf){require(op==Opcodes.INVOKEVIRTUAL&&owner.endsWith("/KneekuraDebugBrainNavigationMixin")&&Set.of("start","tick","stop").contains(call)&&descriptor.equals(mob),"original protected Shadow delegate only");originals[0]++;}};}
                     found.add(name);int[] methods={0},target={0},at={0},required={0},calls={0};return new MethodVisitor(Opcodes.ASM9){
                         private AnnotationVisitor annotation(){return new AnnotationVisitor(Opcodes.ASM9){@Override public void visit(String key,Object value){if(key.equals("require"))required[0]=(Integer)value;if(key.equals("target")){require(value.equals(spec[1]),"exact original target");target[0]++;}if(key.equals("value")&&value.equals("INVOKE"))at[0]++;if(key.equals("cancellable"))require(Boolean.FALSE.equals(value),"noncancelling");}
                             @Override public AnnotationVisitor visitArray(String key){if(key.equals("method"))return new AnnotationVisitor(Opcodes.ASM9){@Override public void visit(String ignored,Object value){require(value.equals(spec[0]),"exact source method descriptor");methods[0]++;}};return annotation();}
@@ -138,7 +138,7 @@ public final class KneekuraDebugBrainNavigationSelfTest {
                     };
                 }
             },ClassReader.SKIP_DEBUG|ClassReader.SKIP_FRAMES);
-        }require(found.equals(expected.keySet())&&originals[0]==3,"six redirect handlers and three protected delegates");
+        }require(found.equals(expected.keySet())&&originals[0]==4,"six existing redirect handlers and four protected delegates");
     }
     public static void main(String[] args)throws Exception {
         net.minecraft.SharedConstants.tryDetectVersion();net.minecraft.server.Bootstrap.bootStrap();var uf=sun.misc.Unsafe.class.getDeclaredField("theUnsafe");uf.setAccessible(true);var unsafe=(sun.misc.Unsafe)uf.get(null);

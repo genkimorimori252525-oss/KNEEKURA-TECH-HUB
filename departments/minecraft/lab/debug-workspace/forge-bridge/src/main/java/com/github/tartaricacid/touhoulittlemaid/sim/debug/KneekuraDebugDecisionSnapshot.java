@@ -221,6 +221,19 @@ public final class KneekuraDebugDecisionSnapshot {
         return out;
     }
     record CachedPathMemory(JsonObject data,Path path,boolean known) { }
+    /** Exact known map's Optional slot only; presence does not expose or validate its target value. */
+    JsonObject walkTargetMemoryPresence(Brain<?> brain) {
+        try {
+            Object object=read(Brain.class,"memories",brain);
+            if(object==null||object.getClass()!=HashMap.class)return unavailable(object==null?"NULL_MEMORY_MAP":"CUSTOM_MEMORY_MAP");
+            Map<?,?> map=(Map<?,?>)object;boolean registered=map.containsKey(MemoryModuleType.WALK_TARGET);
+            Object entry=map.get(MemoryModuleType.WALK_TARGET);JsonObject out=new JsonObject();
+            out.addProperty("status","AVAILABLE");out.addProperty("registered",registered);
+            if(!registered){out.addProperty("present",false);return out;}
+            if(!(entry instanceof Optional<?> optional))return unavailable("UNEXPECTED_MEMORY_ENTRY");
+            out.addProperty("present",optional.isPresent());return out;
+        }catch(ReflectiveOperationException|RuntimeException|LinkageError error){return unavailable("MEMBER_UNAVAILABLE:"+error.getClass().getSimpleName());}
+    }
     /** One known map slot and base wrapper fields; no Brain getter or custom map dispatch. */
     CachedPathMemory pathMemoryReference(Brain<?> brain) {
         try {

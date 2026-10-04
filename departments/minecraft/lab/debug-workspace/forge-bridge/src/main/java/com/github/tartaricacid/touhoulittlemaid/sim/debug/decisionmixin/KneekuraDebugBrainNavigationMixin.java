@@ -17,6 +17,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public abstract class KneekuraDebugBrainNavigationMixin {
     @Shadow protected abstract void start(ServerLevel level,Mob owner,long gameTime);
     @Shadow protected abstract void tick(ServerLevel level,Mob owner,long gameTime);
+    @Shadow protected abstract void stop(ServerLevel level,Mob owner,long gameTime);
 
     // Pinned bridge/restart bytecode passes this as receiver; the Shadow preserves virtual dispatch.
     @Redirect(method="start(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
@@ -48,5 +49,20 @@ public abstract class KneekuraDebugBrainNavigationMixin {
         at=@At(value="INVOKE",target="Lnet/minecraft/world/entity/ai/navigation/PathNavigation;moveTo(Lnet/minecraft/world/level/pathfinder/Path;D)Z"),require=1)
     private boolean kneekura$navigationReturn(PathNavigation navigation,Path path,double speed) {
         return KneekuraDebugDecisionHooks.originalSinkMoveTo(navigation,path,speed,(MoveToTargetSink)(Object)this);
+    }
+    @Redirect(method="stop(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+        at=@At(value="INVOKE",target="Lnet/minecraft/world/entity/ai/behavior/MoveToTargetSink;stop(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/Mob;J)V"),require=1)
+    private void kneekura$stopFromBridge(MoveToTargetSink receiver,ServerLevel level,Mob owner,long gameTime) {
+        KneekuraDebugDecisionHooks.originalSinkCall(receiver,owner,gameTime,"STOP_FROM_BRIDGE",()->stop(level,owner,gameTime));
+    }
+    @Redirect(method="stop(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/Mob;J)V",
+        at=@At(value="INVOKE",target="Lnet/minecraft/world/entity/ai/navigation/PathNavigation;stop()V"),require=1)
+    private void kneekura$navigationStop(PathNavigation navigation) {
+        KneekuraDebugDecisionHooks.originalSinkNavigationStop(navigation,(MoveToTargetSink)(Object)this);
+    }
+    @Redirect(method="stop(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/Mob;J)V",
+        at=@At(value="INVOKE",target="Lnet/minecraft/world/entity/ai/Brain;eraseMemory(Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;)V"),require=2)
+    private void kneekura$memoryErase(Brain<?> brain,MemoryModuleType<?> module) {
+        KneekuraDebugDecisionHooks.originalSinkMemoryErase(brain,module,(MoveToTargetSink)(Object)this);
     }
 }

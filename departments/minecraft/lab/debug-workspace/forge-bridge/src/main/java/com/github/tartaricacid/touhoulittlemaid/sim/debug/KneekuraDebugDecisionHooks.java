@@ -170,14 +170,14 @@ public final class KneekuraDebugDecisionHooks {
         }
         private SinkFrame sinkBegin(MoveToTargetSink behavior,Mob owner,long gameTime,String site,SinkFrame previous) {
             if(!matches(owner)||!channels.contains("brain_navigation")||behavior==null||behavior.getClass()!=MoveToTargetSink.class||
-                !Set.of("START_FROM_BRIDGE","TICK_FROM_BRIDGE","START_FROM_TICK").contains(site)||nextSink>=256||sinkDepth>8)return null;
+                !Set.of("START_FROM_BRIDGE","TICK_FROM_BRIDGE","START_FROM_TICK","STOP_FROM_BRIDGE").contains(site)||nextSink>=256||sinkDepth>8)return null;
             long started=System.nanoTime();
             try {
                 if(!budget.allows(currentContext.get(),time.getAsLong()))return null;
                 Brain<?> brain=(Brain<?>)KneekuraDebugDecisionSnapshot.read(LivingEntity.class,"brain",owner);
                 PathNavigation navigation=(PathNavigation)KneekuraDebugDecisionSnapshot.read(Mob.class,"navigation",owner);
                 if(brain==null||navigation==null||KneekuraDebugDecisionSnapshot.read(PathNavigation.class,"mob",navigation)!=owner)return null;
-                JsonObject before=sinkState(this,behavior,brain,navigation);
+                JsonObject before=sinkState(this,behavior,brain,navigation,site.equals("STOP_FROM_BRIDGE"));
                 return new SinkFrame(behavior,owner,brain,navigation,"sink:"+budget.context().selectionRevision()+":"+(++nextSink),
                     previous!=null&&previous.behavior()==behavior&&previous.owner()==owner?previous.id():null,site,gameTime,before,
                     Math.max(0L,System.nanoTime()-started));
@@ -376,7 +376,7 @@ public final class KneekuraDebugDecisionHooks {
             original.run();
             if(frame!=null&&session.sinkReady(frame))session.record("BRAIN_PATH_SINK_RETURN","MoveToTargetSink."+site+".AFTER",()->{
                 JsonObject data=sinkData(session,frame);data.add("before",frame.before().deepCopy());
-                data.add("after",sinkState(session,behavior,frame.brain(),frame.navigation()));
+                data.add("after",sinkState(session,behavior,frame.brain(),frame.navigation(),frame.callSite().equals("STOP_FROM_BRIDGE")));
                 data.addProperty("preCallObserverCostNanos",frame.preCallCost());
                 data.addProperty("beforeScope","BEFORE_ORIGINAL_CALL_AFTER_CAPTURE_GATES");
                 data.addProperty("afterScope","AFTER_ORIGINAL_RETURN_AND_CAPTURE_GATES");
@@ -388,7 +388,7 @@ public final class KneekuraDebugDecisionHooks {
     public static void originalSinkPathWrite(Brain<?> brain,MemoryModuleType<?> module,Object requested,MoveToTargetSink behavior,String site) {
         brain.setMemory((MemoryModuleType)module,requested);
         Session session=active;SinkFrame frame=sinkFrame(session,behavior);
-        if(frame==null||frame.brain()!=brain||module!=MemoryModuleType.PATH||!(requested==null||requested instanceof Path)||
+        if(frame==null||frame.callSite().equals("STOP_FROM_BRIDGE")||frame.brain()!=brain||module!=MemoryModuleType.PATH||!(requested==null||requested instanceof Path)||
             !(frame.callSite().equals("TICK_FROM_BRIDGE")?"TICK_PATH_RECONCILE":"START_PATH_WRITE").equals(site))return;
         session.record("BRAIN_PATH_MEMORY_WRITE_RETURN","MoveToTargetSink."+site+".Brain.setMemory.AFTER",()->{
             JsonObject data=sinkData(session,frame);data.addProperty("brainClass",label(brain.getClass().getName()));
@@ -403,7 +403,7 @@ public final class KneekuraDebugDecisionHooks {
     public static boolean originalSinkMoveTo(PathNavigation navigation,Path requested,double speed,MoveToTargetSink behavior) {
         boolean result=navigation.moveTo(requested,speed);
         Session session=active;SinkFrame frame=sinkFrame(session,behavior);
-        if(frame!=null&&frame.navigation()==navigation&&!frame.callSite().equals("TICK_FROM_BRIDGE"))session.record(
+        if(frame!=null&&frame.navigation()==navigation&&Set.of("START_FROM_BRIDGE","START_FROM_TICK").contains(frame.callSite()))session.record(
             "BRAIN_PATH_NAVIGATION_RETURN","MoveToTargetSink.start.PathNavigation.moveTo.AFTER",()->{
                 JsonObject data=sinkData(session,frame);data.addProperty("navigationClass",label(navigation.getClass().getName()));
                 component(data,session,navigation,"navigationIdentity");data.addProperty("result",result);
@@ -416,6 +416,33 @@ public final class KneekuraDebugDecisionHooks {
                 data.addProperty("referenceScope","RAW_ARGUMENT_VS_CACHED_PATH_REFERENCE_EQUALITY");return data;
             });
         return result;
+    }
+    public static void originalSinkNavigationStop(PathNavigation navigation,MoveToTargetSink behavior) {
+        navigation.stop();
+        Session session=active;SinkFrame frame=sinkFrame(session,behavior);
+        if(frame!=null&&frame.navigation()==navigation&&frame.callSite().equals("STOP_FROM_BRIDGE"))session.record(
+            "BRAIN_PATH_NAVIGATION_STOP_RETURN","MoveToTargetSink.stop.PathNavigation.stop.AFTER",()->{
+                JsonObject data=sinkData(session,frame);data.addProperty("navigationClass",label(navigation.getClass().getName()));
+                component(data,session,navigation,"navigationIdentity");
+                data.add("cachedPath",session.snapshot.pathFact((Path)KneekuraDebugDecisionSnapshot.read(PathNavigation.class,"path",navigation)));
+                finite(data,"cachedSpeed",(Double)KneekuraDebugDecisionSnapshot.read(PathNavigation.class,"speedModifier",navigation));
+                data.add("brainPathAtReturn",session.snapshot.pathMemoryReference(frame.brain()).data());
+                data.addProperty("returnScope","ORIGINAL_VIRTUAL_STOP_NORMAL_RETURN_NOT_ARRIVAL_OR_PATH_CLEAR_SUCCESS");return data;
+            });
+    }
+    @SuppressWarnings({"rawtypes","unchecked"})
+    public static void originalSinkMemoryErase(Brain<?> brain,MemoryModuleType<?> module,MoveToTargetSink behavior) {
+        brain.eraseMemory((MemoryModuleType)module);
+        Session session=active;SinkFrame frame=sinkFrame(session,behavior);
+        if(frame!=null&&frame.brain()==brain&&frame.callSite().equals("STOP_FROM_BRIDGE")&&
+            (module==MemoryModuleType.PATH||module==MemoryModuleType.WALK_TARGET))session.record(
+                "BRAIN_PATH_MEMORY_ERASE_RETURN","MoveToTargetSink.stop.Brain.eraseMemory.AFTER",()->{
+                    JsonObject data=sinkData(session,frame);data.addProperty("brainClass",label(brain.getClass().getName()));
+                    component(data,session,brain,"brainIdentity");data.addProperty("memoryModule",module==MemoryModuleType.PATH?"PATH":"WALK_TARGET");
+                    data.add("slotAtReturn",module==MemoryModuleType.PATH?session.snapshot.pathMemoryReference(brain).data():session.snapshot.walkTargetMemoryPresence(brain));
+                    data.addProperty("memoryScope","BASE_CACHED_PATH_OR_WALK_TARGET_OPTIONAL_SLOT_AFTER_RETURN");
+                    data.addProperty("returnScope","ORIGINAL_VIRTUAL_ERASE_NORMAL_RETURN_NOT_SLOT_CLEAR_SUCCESS");return data;
+                });
     }
     private static SinkFrame sinkFrame(Session session,MoveToTargetSink behavior) {
         if(session==null||session.thread!=Thread.currentThread())return null;
@@ -437,12 +464,13 @@ public final class KneekuraDebugDecisionHooks {
         data.addProperty("fieldScope","BASE_CACHED_FIELDS_AT_DECLARED_CAPTURE_BOUNDARY");
         data.addProperty("reasonStatus","NOT_EXPOSED");data.addProperty("arrivalStatus","NOT_EXPOSED");data.addProperty("searchRelationStatus","NOT_EXPOSED");return data;
     }
-    private static JsonObject sinkState(Session session,MoveToTargetSink behavior,Brain<?> brain,PathNavigation navigation)throws ReflectiveOperationException {
+    private static JsonObject sinkState(Session session,MoveToTargetSink behavior,Brain<?> brain,PathNavigation navigation,boolean stop)throws ReflectiveOperationException {
         JsonObject state=new JsonObject();state.add("sinkPath",session.snapshot.pathReferenceFact((Path)KneekuraDebugDecisionSnapshot.read(MoveToTargetSink.class,"path",behavior)));
         state.add("brainPath",session.snapshot.pathMemoryReference(brain).data());
         state.add("navigationPath",session.snapshot.pathReferenceFact((Path)KneekuraDebugDecisionSnapshot.read(PathNavigation.class,"path",navigation)));
         finite(state,"sinkSpeed",(Float)KneekuraDebugDecisionSnapshot.read(MoveToTargetSink.class,"speedModifier",behavior));
-        finite(state,"navigationSpeed",(Double)KneekuraDebugDecisionSnapshot.read(PathNavigation.class,"speedModifier",navigation));return state;
+        finite(state,"navigationSpeed",(Double)KneekuraDebugDecisionSnapshot.read(PathNavigation.class,"speedModifier",navigation));
+        if(stop)state.add("walkTargetSlot",session.snapshot.walkTargetMemoryPresence(brain));return state;
     }
     /** Exact UpdateActivityFromSchedule call site. Virtual original executes once, including OFF/throw. */
     public static void originalActivityUpdate(Brain<?> brain,long day,long game) {
