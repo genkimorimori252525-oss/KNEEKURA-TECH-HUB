@@ -1202,7 +1202,7 @@
       "kind": "class",
       "obfuscated_owner": "com.elfmcys.yesstevemodel.oo0oOO0000o0Ooooo0OoOo0O",
       "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.molang.context.IContext",
-      "confidence": "HIGH",
+      "confidence": "CONFIRMED",
       "artifact_scope": "DISTRIBUTED_2_6_5_FORGE_1_20_1",
       "evidence": [
         {
@@ -1210,8 +1210,15 @@
           "repository": "3SCR1P7/TaczFixes",
           "revision": "a2223f838fc4f16ecae0315663b7e0e3ca5d23d4",
           "fact": "The exact type is the sole argument to the CommonGunIndex-backed gun-type binding method, matching IContext<LivingEntity> in both readable source lines."
+        },
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37227158589,
+          "fact": "Exact class access is 0x601 (public abstract interface), declares the IContext method surface, and has exactly one YSM implementor in the distributed JAR."
         }
-      ]
+      ],
+      "exact_jar_verified": true
     },
     {
       "id": "ysm265.class.ibone",
@@ -3953,6 +3960,523 @@
           "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/YSMBinding.java"
         }
       ]
+    },
+    {
+      "id": "ysm265.class.molang-context",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O0O00Oo0o0oO0oo0oO00OOoO",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.molang.context.MolangContext",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37227158589,
+          "fact": "This is the only exact-JAR implementor of the recovered IContext interface; its entity/animatable/event/data/context/random/memory/storage fields and two constructors match MolangContext."
+        },
+        {
+          "type": "OFFICIAL_SOURCE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/molang/context/MolangContext.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.icontext-entity",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo0oOO0000o0Ooooo0OoOo0O",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()Ljava/lang/Object;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.molang.context.IContext",
+      "semantic_member": "entity",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37227158589,
+          "fact": "Exact IContext descriptor identifies entity."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.icontext-animatable-entity",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo0oOO0000o0Ooooo0OoOo0O",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.molang.context.IContext",
+      "semantic_member": "animatableEntity",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37227158589,
+          "fact": "Exact IContext descriptor identifies animatable-entity."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.icontext-mc",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo0oOO0000o0Ooooo0OoOo0O",
+      "obfuscated_member": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "()Lnet/minecraft/client/Minecraft;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.molang.context.IContext",
+      "semantic_member": "mc",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37227158589,
+          "fact": "Exact IContext descriptor identifies mc."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.icontext-level",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo0oOO0000o0Ooooo0OoOo0O",
+      "obfuscated_member": "oOOOo0OOO0ooooo0O00OO0o0",
+      "descriptor": "()Lnet/minecraft/client/multiplayer/ClientLevel;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.molang.context.IContext",
+      "semantic_member": "level",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37227158589,
+          "fact": "Exact IContext descriptor identifies level."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.icontext-animation-event",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo0oOO0000o0Ooooo0OoOo0O",
+      "obfuscated_member": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.molang.context.IContext",
+      "semantic_member": "animationEvent",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37227158589,
+          "fact": "Exact IContext descriptor identifies animation-event."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.icontext-data",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo0oOO0000o0Ooooo0OoOo0O",
+      "obfuscated_member": "Ooooo0oooO0oooOOOoO0000O",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/O00OoOOOOoOOOO0OOOoO0ooO;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.molang.context.IContext",
+      "semantic_member": "data",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37227158589,
+          "fact": "Exact IContext descriptor identifies data."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.icontext-animation-context",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo0oOO0000o0Ooooo0OoOo0O",
+      "obfuscated_member": "oo0OoO00oOoo000O0000o0oo",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/o000o0o0Ooooo0ooo0oO0O0o;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.molang.context.IContext",
+      "semantic_member": "animationContext",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37227158589,
+          "fact": "Exact IContext descriptor identifies animation-context."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.icontext-controller-context",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo0oOO0000o0Ooooo0OoOo0O",
+      "obfuscated_member": "oooooooOOoOOoO00OooOo00O",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/O0oo0oOo0OOOO00Oo0oo0o00;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.molang.context.IContext",
+      "semantic_member": "controllerContext",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37227158589,
+          "fact": "Exact IContext descriptor identifies controller-context."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.icontext-random",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo0oOO0000o0Ooooo0OoOo0O",
+      "obfuscated_member": "Oo00o0OooOOo0ooOoo0oO0o0",
+      "descriptor": "()Lnet/minecraft/util/RandomSource;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.molang.context.IContext",
+      "semantic_member": "random",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37227158589,
+          "fact": "Exact IContext descriptor identifies random."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.icontext-create-child",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo0oOO0000o0Ooooo0OoOo0O",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/lang/Object;)Lcom/elfmcys/yesstevemodel/oo0oOO0000o0Ooooo0OoOo0O;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.molang.context.IContext",
+      "semantic_member": "createChild",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37227158589,
+          "fact": "Exact IContext descriptor identifies create-child."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.icontext-is-debug-enabled",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo0oOO0000o0Ooooo0OoOo0O",
+      "obfuscated_member": "O0ooooOO0oOo000O0Oo00OOO",
+      "descriptor": "()Z",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.molang.context.IContext",
+      "semantic_member": "isDebugEnabled",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37227158589,
+          "fact": "Exact IContext descriptor identifies is-debug-enabled."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.icontext-allow-emitting",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo0oOO0000o0Ooooo0OoOo0O",
+      "obfuscated_member": "OO0ooO00OoO00o0OO0OOooO0",
+      "descriptor": "()Z",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.molang.context.IContext",
+      "semantic_member": "allowEmitting",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37227158589,
+          "fact": "Exact IContext descriptor identifies allow-emitting."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.predicate-based-controller",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo000oooo0OOoo00O0o0OOOO",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.PredicateBasedController",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "source_artifact_divergence": true,
+      "release_line_counterpart": "f184eda: com.elfmcys.yesstevemodel.geckolib3.core.controller.CodedAnimationController",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37227158589,
+          "fact": "Exact controller has the same two constructors, eight-field role layout, process/init/name/current-animation/setAnimation/transition/interpolator/expression/transform/reset surface as the readable 2.6.5-era PredicateBasedController and implements a single recovered controller interface."
+        },
+        {
+          "type": "COMPARATIVE_READABLE_LAYOUT",
+          "repository": "OpenYSM/OpenYSM",
+          "revision": "a515d44686af77155a311b2a592327ca5d45a658",
+          "path": "common/src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/controller/PredicateBasedController.java"
+        },
+        {
+          "type": "RELEASE_LINE_DIVERGENCE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/controller/CodedAnimationController.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.animation-controller-interface",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OoOoOO0O00oOoO0o0ooOO0oO",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.IAnimationController",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37227158589,
+          "fact": "Exact PredicateBasedController directly implements this sole controller interface; the readable artifact-era PredicateBasedController implements IAnimationController with the same role."
+        },
+        {
+          "type": "COMPARATIVE_READABLE_LAYOUT",
+          "repository": "OpenYSM/OpenYSM",
+          "revision": "a515d44686af77155a311b2a592327ca5d45a658",
+          "path": "common/src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/controller/IAnimationController.java"
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.controller-process",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo000oooo0OOoo00O0o0OOOO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;Z)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.PredicateBasedController",
+      "semantic_member": "process",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37227158589,
+          "fact": "Exact controller method shape matches process."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.controller-init",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo000oooo0OOoo00O0o0OOOO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/util/List;Lit/unimi/dsi/fastutil/objects/Object2ReferenceMap;)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.PredicateBasedController",
+      "semantic_member": "init",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37227158589,
+          "fact": "Exact controller method shape matches init."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.controller-get-name",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo000oooo0OOoo00O0o0OOOO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()Ljava/lang/String;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.PredicateBasedController",
+      "semantic_member": "getName",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37227158589,
+          "fact": "Exact controller method shape matches getName."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.controller-get-current-animation",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo000oooo0OOoo00O0o0OOOO",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "()Ljava/lang/String;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.PredicateBasedController",
+      "semantic_member": "getCurrentAnimation",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37227158589,
+          "fact": "Exact controller method shape matches getCurrentAnimation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.controller-set-animation",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo000oooo0OOoo00O0o0OOOO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/lang/String;)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.PredicateBasedController",
+      "semantic_member": "setAnimation",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37227158589,
+          "fact": "Exact controller method shape matches setAnimation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.controller-set-animation-loop",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo000oooo0OOoo00O0o0OOOO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/lang/String;Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.PredicateBasedController",
+      "semantic_member": "setAnimation",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37227158589,
+          "fact": "Exact controller method shape matches setAnimation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.controller-set-transition-length",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo000oooo0OOoo00O0o0OOOO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(F)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.PredicateBasedController",
+      "semantic_member": "setTransitionLengthTicks",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37227158589,
+          "fact": "Exact controller method shape matches setTransitionLengthTicks."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.controller-for-each-transform",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo000oooo0OOoo00O0o0OOOO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/util/function/Consumer;)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.PredicateBasedController",
+      "semantic_member": "forEachTransform",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37227158589,
+          "fact": "Exact controller method shape matches forEachTransform."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.controller-reset",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo000oooo0OOoo00O0o0OOOO",
+      "obfuscated_member": "oOOOo0OOO0ooooo0O00OO0o0",
+      "descriptor": "()V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.PredicateBasedController",
+      "semantic_member": "reset",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37227158589,
+          "fact": "Exact controller method shape matches reset."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.controller-is-deprecated-mode",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo000oooo0OOoo00O0o0OOOO",
+      "obfuscated_member": "oooooooOOoOOoO00OooOo00O",
+      "descriptor": "()Z",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.PredicateBasedController",
+      "semantic_member": "isDeprecatedMode",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "run_id": 37227158589,
+          "fact": "Exact controller method shape matches isDeprecatedMode."
+        }
+      ]
     }
   ],
   "unresolved_hints": [
@@ -4260,6 +4784,14 @@
       "run_id": 37226945568,
       "count": 25,
       "note": "Literal binding name -> immediately constructed class pairs recovered from bounded javap of the exact YSMBinding constructor."
+    },
+    "context_controller": {
+      "run_id": 37227158589,
+      "icontext": "oo0oOO0000o0Ooooo0OoOo0O",
+      "molang_context": "O0O00Oo0o0oO0oo0oO00OOoO",
+      "context_implementor_count": 1,
+      "predicate_controller": "oo000oooo0OOoo00O0o0OOOO",
+      "controller_interface": "OoOoOO0O00oOoO0o0ooOO0oO"
     }
   }
 }
