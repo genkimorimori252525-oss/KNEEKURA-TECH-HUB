@@ -8,6 +8,7 @@
 |---:|---|---|---|---|---|
 | 1 | [The Twilight Forest](../mods/twilight-forest/README.md) | content/gameplay Mod | source candidate `a7dd8f13` pinned; distributed-JAR identity pending | `793c4d4c` pinned — MC 26.1.2 / NeoForge 26.1.2.102 | IN_PROGRESS |
 | 2 | [Sinytra Connector](../mods/sinytra-connector/README.md) | loader compatibility / translation layer | `7f68ac0` beta.50 source; 141 files acquired; binary/runtime unresolved | `c84a96a` beta.6 / 26.1.2; 131 files acquired | IN_PROGRESS (source/recon/history) |
+| 3 | [Invasion Mod](../mods/invasion-mod/README.md) | siege / mob AI / pathfinding Mod | `aaa6812b` pinned — MC 1.20.1 legacyForge/Forge+NeoForge source; runtime/binary unresolved | `fce5d30` pinned — MC 26.3 / NeoForge | IN_PROGRESS (legacy JAR + siege systems mapped) |
 
 ## Rules
 

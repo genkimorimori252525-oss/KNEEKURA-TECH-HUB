@@ -1,0 +1,140 @@
+{
+  "record_kind": "SOURCE_BACKED_TECHNIQUE_REVIEW_CANDIDATES",
+  "scope": "Legacy uploaded JAR + pinned source with 1.20.1 adaptation evidence; no runtime tests",
+  "cards": [
+    {
+      "id": "INV-T01",
+      "title": "Encode terrain work as path-node actions",
+      "invariant": "A route may contain both movement and world-edit operations; movement cannot advance past an unfinished action.",
+      "legacy_paths": [
+        "invmod/common/entity/PathNode.java",
+        "invmod/common/entity/PathAction.java",
+        "invmod/common/entity/NavigatorEngy.java"
+      ],
+      "anchor_paths": [
+        "com/invasion/entity/pathfinding/path/ActionablePathNode.java",
+        "com/invasion/mixin/PathNodeMixin.java",
+        "com/invasion/entity/pathfinding/IMMobNavigation.java"
+      ],
+      "reuse": "HIGH",
+      "limits": "Do not copy legacy static synchronized PathfinderIM."
+    },
+    {
+      "id": "INV-T02",
+      "title": "Select infrastructure with counterfactual re-pathing",
+      "invariant": "Evaluate candidate construction by re-running the route with a hypothetical overlay instead of mutating the live world.",
+      "legacy_paths": [
+        "invmod/common/entity/ai/AttackerAI.java",
+        "invmod/common/entity/Scaffold.java"
+      ],
+      "anchor_paths": [
+        "com/invasion/nexus/ai/scaffold/ScaffoldGenerator.java"
+      ],
+      "reuse": "HIGH",
+      "limits": "Path snapshots/overlays must remain isolated from live world mutation."
+    },
+    {
+      "id": "INV-T03",
+      "title": "Overlay crowd density into path cost",
+      "invariant": "Tactical occupancy data is a separate pathing layer, not physical terrain.",
+      "legacy_paths": [
+        "invmod/common/TerrainDataLayer.java",
+        "invmod/common/entity/ai/AttackerAI.java"
+      ],
+      "anchor_paths": [
+        "com/invasion/nexus/ai/AttackerAI.java",
+        "com/invasion/entity/pathfinding/IMLandPathNodeMaker.java"
+      ],
+      "reuse": "HIGH",
+      "limits": "Update budget must be bounded for large waves."
+    },
+    {
+      "id": "INV-T04",
+      "title": "Execute terrain changes as costed transactions",
+      "invariant": "Planned world edits are owned, reach-bounded, timed and acknowledge success/failure.",
+      "legacy_paths": [
+        "invmod/common/entity/TerrainModifier.java",
+        "invmod/common/entity/TerrainDigger.java",
+        "invmod/common/entity/TerrainBuilder.java"
+      ],
+      "anchor_paths": [
+        "com/invasion/entity/ai/builder/TerrainModifier.java",
+        "com/invasion/entity/ai/builder/TerrainDigger.java"
+      ],
+      "reuse": "HIGH",
+      "limits": "World mutation remains server-thread sensitive."
+    },
+    {
+      "id": "INV-T05",
+      "title": "Compose waves from overlapping time and direction windows",
+      "invariant": "Spawn rhythm, unit mix and attack direction are separate parameters with terrain-aware fallback.",
+      "legacy_paths": [
+        "invmod/common/nexus/Wave.java",
+        "invmod/common/nexus/WaveEntry.java",
+        "invmod/common/nexus/IMWaveBuilder.java"
+      ],
+      "anchor_paths": [
+        "com/invasion/nexus/wave/Wave.java",
+        "com/invasion/nexus/wave/WaveEntry.java"
+      ],
+      "reuse": "HIGH",
+      "limits": "Blocked spawn obligations require explicit completion policy."
+    },
+    {
+      "id": "INV-T06",
+      "title": "Separate path desirability from demolition resistance",
+      "invariant": "Movement preference and break time are different tactical properties.",
+      "legacy_paths": [
+        "invmod/common/entity/EntityIMLiving.java"
+      ],
+      "anchor_paths": [
+        "com/invasion/block/BlockMetadata.java"
+      ],
+      "reuse": "HIGH",
+      "limits": "Avoid double-counting vanilla malus, custom cost and work cost."
+    },
+    {
+      "id": "INV-T07",
+      "title": "Give specialists small cooperation contracts",
+      "invariant": "Followers can wait/assist a route-builder and suppress conflicting work without a global squad brain.",
+      "legacy_paths": [
+        "invmod/common/entity/ai/EntityAIWaitForEngy.java",
+        "invmod/common/entity/ai/EntityAITargetOnNoNexusPath.java",
+        "invmod/common/entity/EntityIMPigEngy.java"
+      ],
+      "anchor_paths": [
+        "com/invasion/entity/PigmanEngineerEntity.java"
+      ],
+      "reuse": "MEDIUM_HIGH",
+      "limits": "Modern goal arbitration needs explicit ownership/exclusion."
+    },
+    {
+      "id": "INV-T08",
+      "title": "Amortize expensive spatial discovery",
+      "invariant": "Large scans produce a committed result over bounded per-tick work rather than one tick spike.",
+      "legacy_paths": [
+        "invmod/common/nexus/IMWaveSpawner.java"
+      ],
+      "anchor_paths": [
+        "com/invasion/nexus/spawns/IMWaveSpawner.java",
+        "com/invasion/nexus/ai/AttackerAI.java"
+      ],
+      "reuse": "HIGH",
+      "limits": "Consumers need a defined behavior while generation is incomplete."
+    },
+    {
+      "id": "INV-T09",
+      "title": "Keep failure accounting separate from kill accounting",
+      "invariant": "An impossible spawn can discharge a scheduler obligation without being recorded as a combat kill.",
+      "legacy_paths": [
+        "invmod/common/nexus/WaveEntry.java"
+      ],
+      "anchor_paths": [
+        "com/invasion/nexus/spawns/IMWaveSpawner.java",
+        "com/invasion/nexus/Nexus.java"
+      ],
+      "reuse": "HIGH",
+      "limits": "Player-facing progress must explain skipped obligations."
+    }
+  ]
+}
