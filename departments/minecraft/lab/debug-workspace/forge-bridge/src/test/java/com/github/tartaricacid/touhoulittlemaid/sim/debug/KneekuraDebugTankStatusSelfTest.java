@@ -26,8 +26,13 @@ public final class KneekuraDebugTankStatusSelfTest {
         var disconnected = status.sample(context, server, 122_000_000_000L, false, false);
         check(disconnected != null && disconnected.reason().equals("DISCONNECTED"), "disconnected never eligible");
         check(first.eligible() && !first.drawSubmitted(), "prior snapshot immutable");
+        var cleared = status.sample(null, server, 123_000_000_000L, true, false);
+        check(cleared != null && !cleared.eligible() && !cleared.registered() && cleared.reason().equals("EXPIRED")
+                && cleared.recipeHash().equals(view.recipeHash()), "cleared presentation retains only historical expiry metadata");
+        status.reset();
+        check(status.sample(null, server, 124_000_000_000L, true, false).reason().equals("UNREGISTERED"), "new owner binding does not reuse old metadata");
         System.out.println("TANK_STATUS_INTEROP:" + drawn.json());
         System.out.println("TANK_STATUS_INTEROP:" + new KneekuraDebugTankStatus().sample(null, server, 0L, true, false).json());
-        System.out.println("Tank status clock self-test: 12 checks passed");
+        System.out.println("Tank status clock self-test: 14 checks passed");
     }
 }

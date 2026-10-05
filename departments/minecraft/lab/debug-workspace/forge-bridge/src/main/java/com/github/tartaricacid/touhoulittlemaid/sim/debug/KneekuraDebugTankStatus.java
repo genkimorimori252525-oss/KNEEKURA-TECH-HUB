@@ -20,29 +20,38 @@ public final class KneekuraDebugTankStatus {
     private long lastSentNanos = Long.MIN_VALUE;
     private long lastDrawNanos = Long.MIN_VALUE;
     private KneekuraDebugTankPresentationRecipe.Context drawnContext;
+    private KneekuraDebugTankPresentationRecipe.Context historicalContext;
     private String previousReason;
     private KneekuraDebugTankPresentationRecipe.View previousView;
     private long suppressed;
 
+    synchronized void reset() {
+        lastSentNanos = Long.MIN_VALUE; lastDrawNanos = Long.MIN_VALUE;
+        drawnContext = null; historicalContext = null; previousReason = null; previousView = null; suppressed = 0L;
+    }
+
     synchronized Snapshot sample(KneekuraDebugTankPresentationRecipe.Context context, Object server,
             long now, boolean connected, boolean submitted) {
         boolean eligible = connected && context != null && context.viewFor(server, now) != null;
+        if (context != null) historicalContext = context;
+        var metadata = context != null ? context : historicalContext;
         if (submitted && eligible) { lastDrawNanos = now; drawnContext = context; }
         boolean drawn = eligible && drawnContext == context && lastDrawNanos != Long.MIN_VALUE
                 && now - lastDrawNanos >= 0 && now - lastDrawNanos < 1_000_000_000L;
-        String reason = !connected ? "DISCONNECTED" : context == null ? "UNREGISTERED"
-                : server != context.server() ? "SERVER_MISMATCH"
+        String reason = !connected ? "DISCONNECTED" : metadata == null ? "UNREGISTERED"
+                : server != metadata.server() ? "SERVER_MISMATCH"
+                : context == null ? now - metadata.deadlineNanos() >= 0 ? "EXPIRED" : "REGISTRATION_CLEARED"
                 : !eligible ? "EXPIRED" : drawn ? "DRAW_SUBMITTED" : "ELIGIBLE_NOT_DRAWN";
-        var view = context == null ? null : context.view();
+        var view = metadata == null ? null : metadata.view();
         long interval = reason.equals(previousReason) && java.util.Objects.equals(view, previousView)
                 ? 1_000_000_000L : 500_000_000L;
         if (lastSentNanos != Long.MIN_VALUE && now - lastSentNanos < interval) { suppressed++; return null; }
         lastSentNanos = now;
         previousReason = reason;
         previousView = view;
-        Long remaining = context == null ? null : Math.max(0L, Math.min(120_000L,
-                (context.deadlineNanos() - now) / 1_000_000L));
-        return new Snapshot("kneekura.tank-presentation-status/v1", context != null, context != null,
+        Long remaining = metadata == null ? null : Math.max(0L, Math.min(120_000L,
+                (metadata.deadlineNanos() - now) / 1_000_000L));
+        return new Snapshot("kneekura.tank-presentation-status/v1", metadata != null, context != null,
                 eligible, drawn, view != null && view.bright(), reason, view == null ? null : view.recipeHash(),
                 view == null ? null : view.geometry(), remaining, suppressed);
     }

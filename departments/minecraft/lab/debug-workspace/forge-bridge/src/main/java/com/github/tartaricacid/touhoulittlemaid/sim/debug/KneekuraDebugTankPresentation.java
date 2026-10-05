@@ -48,6 +48,7 @@ public final class KneekuraDebugTankPresentation {
                 return;
             }
             KneekuraDebugArenaRuntime.requireCaptureLeaseRemainingOwner(state, 0);
+            if (statusBinding == null || !statusBinding.configKey().equals(config.identityKey())) STATUS.reset();
             statusBinding = new StatusBinding(config.identityKey(), state.arenaEpoch());
             if (config.identityKey().equals(attemptedIdentity)) return;
             attemptedIdentity = config.identityKey();
