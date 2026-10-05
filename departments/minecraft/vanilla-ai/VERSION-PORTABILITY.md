@@ -1,6 +1,6 @@
 # Vanilla AI version portability
 
-Status: **ANCHOR CORE PINNED; OFFICIAL VANILLA 1.21.1 FRONTIER PINNED WITH A BOUNDED METHOD COMPARISON**
+Status: **ANCHOR CORE PINNED; OFFICIAL VANILLA 1.21.1 FRONTIER PINNED WITH BOUNDED SCHEDULER, CONTROL, CACHE, PATH, TERRAIN AND DEBUG COMPARISONS**
 
 ANCHOR is the exact Minecraft 1.20.1 / Forge 47.2.0 / Mojmap development artifact in [the ledger](ANCHOR-BYTECODE-LEDGER-2026-10-03.json). Its access-transformed flags, descriptors, debug transport and scheduler bodies are generation-specific.
 
@@ -32,3 +32,9 @@ No ANCHOR producer/registration changes are made by this research. Modern runtim
 The existing Twilight Forest FRONTIER is a separately researched MOD track. It is not proof of modern Vanilla AI semantics, nor a substitute for a Vanilla FRONTIER snapshot.
 
 Community reports remain hypotheses until tied to exact source or reproduced. The separately retained Paper reports suggest diagnostic scenarios, not ANCHOR causes; no new community gameplay reproduction is claimed.
+
+## Remaining Path /terrain /debug source comparison — R67
+
+[The detailed additive comparison](FRONTIER-PATH-DEBUG-2026-10-05.md) now records52 exact class identities and117 selected method locators,44 critical source checks and all26 actual terrain defaults. It compares navigation adoption/recompute, effective versus declared cost, evaluator lifecycle/helper/API changes, typed codec/client dispatch and renderer lifetime/options. The original ledgers remain immutable. Private1,385-slice integrity verification is not semantic coverage of every body.
+
+All25 ANCHOR defaults remain; DANGER_TRAPDOOR adds a zero default. Modern Holder/context/step APIs differ from ANCHOR and its Forge callback surfaces. Path/Goal/Brain payload field order and Path collection/array encoding also differ; serializers are not interchangeable. Registered typed codecs, dormant senders, debug-data population and root renderer activation are separate facts. The1MiB unknown-payload fallback bound does not establish a global bound for known payloads. This source research adds no modern runtime acceptance, active sender, ANCHOR hook, gameplay query or cost measurement.
