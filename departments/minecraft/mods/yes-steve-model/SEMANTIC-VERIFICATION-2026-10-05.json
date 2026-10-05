@@ -1,0 +1,196 @@
+{
+  "format": "kneekura.ysm.practical-semantic-verification.v1",
+  "artifact": {
+    "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+    "size": 63269843,
+    "classes": 955,
+    "parse_errors": 0
+  },
+  "mapping_count": 604,
+  "baseline282_preserved": true,
+  "mapping_ids_unique": true,
+  "exact_identity_targets_unique": true,
+  "scanner": {
+    "classes": 955,
+    "class_contracts": 294,
+    "method_contracts": 302,
+    "field_contracts": 8,
+    "failures": 0
+  },
+  "audits": [
+    {
+      "evidence": "MOLANG-LOOP-EVIDENCE-2026-10-05.json",
+      "checks": 109,
+      "failures": 0
+    },
+    {
+      "evidence": "BROAD-ROLE-EVIDENCE-2026-10-05.json",
+      "checks": 495,
+      "failures": 0
+    },
+    {
+      "evidence": "BROAD-FOLLOWUP-EVIDENCE-2026-10-05.json",
+      "checks": 117,
+      "failures": 0
+    },
+    {
+      "evidence": "MOLANG-MATH-EVIDENCE-2026-10-05.json",
+      "checks": 678,
+      "failures": 0
+    },
+    {
+      "evidence": "MOLANG-POOLED-PARSER-EVIDENCE-2026-10-05.json",
+      "checks": 298,
+      "failures": 0
+    },
+    {
+      "evidence": "BROAD-POOL-EVIDENCE-2026-10-05.json",
+      "checks": 919,
+      "failures": 0
+    },
+    {
+      "evidence": "MOLANG-TYPED-AST-EVIDENCE-2026-10-05.json",
+      "checks": 516,
+      "failures": 0
+    },
+    {
+      "evidence": "SEED-RECOVERY-EVIDENCE-2026-10-05.json",
+      "checks": 66,
+      "failures": 0
+    },
+    {
+      "evidence": "MOLANG-EVALUATION-EVIDENCE-2026-10-05.json",
+      "checks": 106,
+      "failures": 0
+    },
+    {
+      "evidence": "MOLANG-EVALUATOR-EVIDENCE-2026-10-05.json",
+      "checks": 92,
+      "failures": 0
+    },
+    {
+      "evidence": "SOURCE-HINT-FOLLOWUP-EVIDENCE-2026-10-05.json",
+      "checks": 376,
+      "failures": 0
+    }
+  ],
+  "negative_regression": {
+    "purpose": "Evidence corruption regression checks; no artifact modification or runtime execution",
+    "checks": 10,
+    "failures": [],
+    "results": [
+      {
+        "mutation": "loop-local-iinc-zero",
+        "exit_code": 1,
+        "rejected": true,
+        "failed_checks": [
+          "ysm265.method.expression-evaluator-impl-visit-loop:encoded-operands"
+        ]
+      },
+      {
+        "mutation": "loop-foreach-bootstrap-body-swapped",
+        "exit_code": 1,
+        "rejected": true,
+        "failed_checks": [
+          "com/elfmcys/yesstevemodel/OOooO0oOOOoO000oOo0O00Oo:bootstrap_methods"
+        ]
+      },
+      {
+        "mutation": "acos-registration-reassigned-to-asin",
+        "exit_code": 1,
+        "rejected": true,
+        "failed_checks": [
+          "com/elfmcys/yesstevemodel/oO00O0OOo0oOooO0OooO00o0:unique-declaration-and-relations"
+        ]
+      },
+      {
+        "mutation": "acos-arity-one-to-two",
+        "exit_code": 1,
+        "rejected": true,
+        "failed_checks": [
+          "ysm265.method.math-acos-validateargumentsize:opcode-control-flow"
+        ]
+      },
+      {
+        "mutation": "acos-operation-changed-to-asin",
+        "exit_code": 1,
+        "rejected": true,
+        "failed_checks": [
+          "ysm265.method.math-acos-evaluate:opcode-control-flow"
+        ]
+      },
+      {
+        "mutation": "struct-copy-sharing-condition-inverted",
+        "exit_code": 1,
+        "rejected": true,
+        "failed_checks": [
+          "ysm265.method.hashmapstruct-copy:opcode-control-flow"
+        ]
+      },
+      {
+        "mutation": "variable-node-target-interface-swapped",
+        "exit_code": 1,
+        "rejected": true,
+        "failed_checks": [
+          "com/elfmcys/yesstevemodel/o000o0oO0Ooo00oO0Oo0ooO0:unique-declaration-and-relations"
+        ]
+      },
+      {
+        "mutation": "binary-node-constructor-label-wrong",
+        "exit_code": 1,
+        "rejected": true,
+        "failed_checks": [
+          "com/elfmcys/yesstevemodel/oo00OOOoo00000Oo0Oooo0Oo:unique-declaration-and-relations"
+        ]
+      },
+      {
+        "mutation": "array-visitor-dispatch-subtype-wrong",
+        "exit_code": 1,
+        "rejected": true,
+        "failed_checks": [
+          "com/elfmcys/yesstevemodel/O00oo0oOOO0oo0o0oOoo00Oo.Oo0Oo0o00O00Oo0OOoOOoooo(Lcom/elfmcys/yesstevemodel/Oo0000oo0oo0OoO00000O0O0;)Ljava/lang/Object;:opcode-control-flow"
+        ]
+      },
+      {
+        "mutation": "context-function-gate-condition-inverted",
+        "exit_code": 1,
+        "rejected": true,
+        "failed_checks": [
+          "ysm265.method.contextfunction-evaluate:opcode-control-flow"
+        ]
+      }
+    ]
+  },
+  "source_tracks_verified": 185,
+  "source_revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+  "foundation": {
+    "nodes": 955,
+    "undirected_edges": 3618,
+    "directed_class_refs_observed": 3823,
+    "components": 19,
+    "largest_components": [
+      722,
+      131,
+      86,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "seed_classes": 294
+  },
+  "semantic_limits": "Audit reproduces bounded exact evidence; pinned-source semantic interpretation independently reviewed. No JVM/Minecraft/native execution or global artifact/source identity.",
+  "baseline585_preserved": true
+}

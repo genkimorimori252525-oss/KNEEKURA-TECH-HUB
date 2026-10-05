@@ -53,8 +53,8 @@ Current exact graph:
 - main YSM component: **722 classes**
 - bundled Concentus component: **131 classes**
 - bundled Gagravarr/VorbisJava component: **86 classes**
-- remaining components: **15 singleton classes**
-- exact semantic seed classes: **107**
+- remaining components: **16 singleton classes** (15 UNKNOWN; one mapped AnimationUtils)
+- exact semantic seed classes: **294**
 
 The three large connected components explain nearly the complete Java artifact:
 
@@ -67,11 +67,10 @@ The three large connected components explain nearly the complete Java artifact:
  |
  +-- 86   bundled Gagravarr / VorbisJava media-container component
  |
- +-- 15   isolated singleton utility/constants/enum/annotation/exception candidates
+ +-- 16   isolated singleton utility/constants/enum/annotation/exception candidates
 ~~~
 
-The 15 singleton classes have zero internal graph degree. They are kept as UNKNOWN instead of being
-forced into a subsystem.
+All 16 singleton classes have zero internal graph degree. Fifteen remain UNKNOWN; one now has an independently source-grounded AnimationUtils role.
 
 ## 4. Domain inventory
 
@@ -80,18 +79,18 @@ forced into a subsystem.
 | BUNDLED_CONCENTUS | 131 | 1 | 130 |
 | BUNDLED_VORBISJAVA | 86 | 2 | 84 |
 | MODEL | 9 | 4 | 5 |
-| ANIMATION | 47 | 6 | 41 |
-| MOLANG | 255 | 38 | 217 |
-| RENDERER | 73 | 10 | 63 |
-| NETWORK / DISTRIBUTION | 71 | 22 | 49 |
-| CAPABILITY / STATE | 50 | 4 | 46 |
-| GUI | 43 | 2 | 41 |
-| INTEGRATION | 25 | 6 | 19 |
-| ENTITY PRESENTATION | 128 | 4 | 124 |
-| EVENT / LIFECYCLE | 10 | 4 | 6 |
+| ANIMATION | 50 | 13 | 37 |
+| MOLANG | 243 | 112 | 131 |
+| RENDERER | 72 | 25 | 47 |
+| NETWORK | 60 | 29 | 31 |
+| CAPABILITY | 48 | 11 | 37 |
+| GUI | 54 | 17 | 37 |
+| INTEGRATION | 21 | 9 | 12 |
+| ENTITY_PRESENTATION | 146 | 57 | 89 |
+| EVENT_LIFECYCLE | 10 | 9 | 1 |
 | UTILITY | 3 | 1 | 2 |
-| CORE | 9 | 3 | 6 |
-| UNKNOWN singleton | 15 | 0 | 15 |
+| CORE | 7 | 4 | 3 |
+| UNKNOWN | 15 | 0 | 15 |
 
 "Structurally unresolved" does **not** mean the subsystem is unknown. It means those class identities
 have not yet been promoted to exact semantic owner names.
@@ -552,7 +551,7 @@ implementation and runtime checks remain future work.
 
 ## 22. Concrete evaluator seeds
 
-The current map has **282 mappings (245 CONFIRMED / 37 HIGH)**: **107 classes / 170 methods /
+At the previous evaluator milestone, the map had **282 mappings (245 CONFIRMED / 37 HIGH)**: **107 classes / 170 methods /
 5 fields**, with **0 failures**. Two class seeds and ten methods connect evaluator factories to
 single/multi expression dispatch, selected visitor entries and per-instance return/control state.
 Exact finally handlers reset state on normal completion and protected escaping exceptions; they
@@ -561,7 +560,7 @@ Multi initialization precedes its protected iteration region. Named enum initial
 relations establish RETURN/BREAK/CONTINUE branches without guessed ordinals.
 
 Fresh audits pass **92 + 106 + 66 checks**, zero failures; six targeted durable mutations each fail.
-Foundation now uses **107 seeds**, with **255 MOLANG-domain classes** as structural search hints;
+At that milestone Foundation used **107 seeds**, with **255 MOLANG-domain classes** as structural search hints;
 graph955 / edges3,618 / components19 and15 isolated UNKNOWN classes are unchanged. Previous270rows
 remain intact. Original symbols/global source identity remain unproven. No broad AST/loop/lambda or
 native recovery was added.
@@ -569,3 +568,18 @@ native recovery was added.
 See [MOLANG-EVALUATOR-RECOVERY-2026-10-05.md](MOLANG-EVALUATOR-RECOVERY-2026-10-05.md) and
 [MOLANG-EVALUATOR-EVIDENCE-2026-10-05.json](MOLANG-EVALUATOR-EVIDENCE-2026-10-05.json) for the exact
 contracts, source hashes, negative results, cleanup boundaries and reproduction commands.
+
+## Final practical semantic snapshot
+
+Current map: **604 mappings (340 CONFIRMED / 264 HIGH)**, **294 class roles / 302 methods / 8 fields**.
+The exact scanner and all eleven old/new evidence audits report zero failures. The main component
+has 290 mapped roles and 432 unseeded owners; bundled media 214 unseeded; isolated 15 unseeded
+(one of 16 total singletons is now mapped), for 661 overall. All 618 initial main-unseeded owners were
+screened; 109 literal/relational leads and all 18 additional concrete source candidates received actual
+semantic dispositions. [SEMANTIC-COVERAGE-2026-10-05.json](SEMANTIC-COVERAGE-2026-10-05.json)
+retains every remaining owner and reason;
+[SEMANTIC-RECOVERY-2026-10-05.md](SEMANTIC-RECOVERY-2026-10-05.md) explains confidence, stopping
+boundaries and reruns. [SOURCE-HINT-FOLLOWUP-EVIDENCE-2026-10-05.json](SOURCE-HINT-FOLLOWUP-EVIDENCE-2026-10-05.json)
+closes 19 class-only roles with source hashes and bounded support. Prior 585 and original 282 rows
+remain unchanged. Original symbols, whole-source equivalence and runtime/native/protection
+implementation remain unproven. No further campaign expansion.

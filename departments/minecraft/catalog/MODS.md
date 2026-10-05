@@ -8,7 +8,7 @@
 |---:|---|---|---|---|---|
 | 1 | [The Twilight Forest](../mods/twilight-forest/README.md) | content/gameplay Mod | source candidate `a7dd8f13` pinned; distributed-JAR identity pending | `793c4d4c` pinned — MC 26.1.2 / NeoForge 26.1.2.102 | IN_PROGRESS |
 | 2 | [Sinytra Connector](../mods/sinytra-connector/README.md) | loader compatibility / translation layer | `7f68ac0` beta.50 source; 141 files acquired; binary/runtime unresolved | `c84a96a` beta.6 / 26.1.2; 131 files acquired | IN_PROGRESS (source/recon/history) |
-| 3 | [Yes Steve Model](../mods/yes-steve-model/README.md) | model / animation / rendering runtime | exact distributed 2.6.5 Forge 1.20.1 SHA-256 anchored; 282 semantic mappings; 955-class Foundation Map | official 3.0-dev source 74c53b5; architecture/docs mapped | IN_PROGRESS (exact Java Foundation mapped; native protected internals out of scope) |
+| 3 | [Yes Steve Model](../mods/yes-steve-model/README.md) | model / animation / rendering runtime | exact distributed 2.6.5 Forge 1.20.1 SHA-256 anchored; 604 semantic mappings (294 class roles);432 main unseeded;955-class Foundation Map | official 3.0-dev source 74c53b5; architecture/docs mapped | IN_PROGRESS (exact Java Foundation mapped; native protected internals out of scope) |
 
 ## Rules
 

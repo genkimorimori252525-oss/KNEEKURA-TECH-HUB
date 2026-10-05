@@ -700,7 +700,7 @@ implementation and runtime checks remain future work.
 
 ## 22. Concrete evaluator dispatch and lifecycle
 
-The current map has **282 mappings (245 CONFIRMED / 37 HIGH)**: **107 classes / 170 methods /
+At the previous evaluator milestone, the map had **282 mappings (245 CONFIRMED / 37 HIGH)**: **107 classes / 170 methods /
 5 fields**, with **0 failures**. Two class seeds and ten methods connect evaluator factories to
 single/multi expression dispatch, selected visitor entries and per-instance return/control state.
 Exact finally handlers reset state on normal completion and protected escaping exceptions; they
@@ -709,7 +709,7 @@ Multi initialization precedes its protected iteration region. Named enum initial
 relations establish RETURN/BREAK/CONTINUE branches without guessed ordinals.
 
 Fresh audits pass **92 + 106 + 66 checks**, zero failures; six targeted durable mutations each fail.
-Foundation now uses **107 seeds**, with **255 MOLANG-domain classes** as structural search hints;
+At that milestone Foundation used **107 seeds**, with **255 MOLANG-domain classes** as structural search hints;
 graph955 / edges3,618 / components19 and15 isolated UNKNOWN classes are unchanged. Previous270rows
 remain intact. Original symbols/global source identity remain unproven. No broad AST/loop/lambda or
 native recovery was added.
@@ -717,3 +717,18 @@ native recovery was added.
 See [MOLANG-EVALUATOR-RECOVERY-2026-10-05.md](MOLANG-EVALUATOR-RECOVERY-2026-10-05.md) and
 [MOLANG-EVALUATOR-EVIDENCE-2026-10-05.json](MOLANG-EVALUATOR-EVIDENCE-2026-10-05.json) for the exact
 contracts, source hashes, negative results, cleanup boundaries and reproduction commands.
+
+## Final practical semantic snapshot
+
+Current map: **604 mappings (340 CONFIRMED / 264 HIGH)**, **294 class roles / 302 methods / 8 fields**.
+The exact scanner and all eleven old/new evidence audits report zero failures. The main component
+has 290 mapped roles and 432 unseeded owners; bundled media 214 unseeded; isolated 15 unseeded
+(one of 16 total singletons is now mapped), for 661 overall. All 618 initial main-unseeded owners were
+screened; 109 literal/relational leads and all 18 additional concrete source candidates received actual
+semantic dispositions. [SEMANTIC-COVERAGE-2026-10-05.json](SEMANTIC-COVERAGE-2026-10-05.json)
+retains every remaining owner and reason;
+[SEMANTIC-RECOVERY-2026-10-05.md](SEMANTIC-RECOVERY-2026-10-05.md) explains confidence, stopping
+boundaries and reruns. [SOURCE-HINT-FOLLOWUP-EVIDENCE-2026-10-05.json](SOURCE-HINT-FOLLOWUP-EVIDENCE-2026-10-05.json)
+closes 19 class-only roles with source hashes and bounded support. Prior 585 and original 282 rows
+remain unchanged. Original symbols, whole-source equivalence and runtime/native/protection
+implementation remain unproven. No further campaign expansion.

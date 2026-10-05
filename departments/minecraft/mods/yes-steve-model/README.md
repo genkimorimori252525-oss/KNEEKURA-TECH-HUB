@@ -142,19 +142,23 @@ The machine-readable map deliberately keeps distributed-artifact observations se
 version-matched public source candidate. This exposed concrete source/artifact divergence around the
 preview/paperdoll renderer instead of silently forcing them to agree.
 
-The current machine-readable map contains **282** mappings (**245 CONFIRMED / 37 HIGH**).
-Every recorded owner/member/descriptor contract passes against the exact official JAR: **107 class
-targets, 170 exact methods and 5 exact fields, with 0 failures**. The whole-JAR Foundation Map covers
+The current machine-readable map contains **604** mappings (**340 CONFIRMED / 264 HIGH**).
+Every recorded owner/member/descriptor contract passes against the exact official JAR: **294 class
+targets, 302 exact methods and 8 exact fields, with 0 failures**. The whole-JAR Foundation Map covers
 **955 / 955 classes**. Two large formerly-UNKNOWN islands are now separated as bundled **Concentus
 (131 classes)** and **Gagravarr/VorbisJava (86 classes)**; only **15 degree-0 singleton classes** remain
 UNKNOWN.
 
-A whole-JAR Foundation Map now classifies the exact Java artifact by structural domain. The strongest mapped hubs are `IContext` (degree 103), `Function$ArgumentCollection` (86), `Function` (85), `ExecutionContext` (58), `PlayerAnimatableCapability` (57), `YesSteveModel` (50), `YSMBinding` (48) and `NetworkHandler` (47). The strongest cross-domain seam is **CAPABILITY ↔ NETWORK (104 internal edges)**.
+A whole-JAR Foundation Map now classifies the exact Java artifact by structural domain. The strongest mapped hubs are `IContext` (degree 103), `Function$ArgumentCollection` (86), `Function` (85), `ExecutionContext` (58), `PlayerAnimatableCapability` (57), `YesSteveModel` (50), `YSMBinding` (48) and `NetworkHandler` (47). The strongest cross-domain seam is **CAPABILITY ↔ NETWORK (88 internal edges)**.
 
-The latest bounded continuation connects entity factories to the concrete evaluator, single/multi
-expression dispatch, return-through state and selected visitor behavior. Finally cleanup preserves
-escaping exceptions; safe-wrapper Exception-to-null behavior is a separate prior layer. See
-[MOLANG-EVALUATOR-RECOVERY-2026-10-05.md](MOLANG-EVALUATOR-RECOVERY-2026-10-05.md).
+The latest practical continuation closes loop/control execution, the finite math registration cohort,
+property stores, parser lifecycle and typed AST roles, then exhausts a finite directly grounded
+source/literal/relational shortlist across controller, GUI, renderer and compatibility roles. All 18
+additional concrete source leads also received actual dispositions. **432 main-component classes
+remain unseeded; 661 overall**, including 214 bundled media and 15 isolated classes. This is semantic
+recovery; original names and whole-artifact/source equivalence remain unproven. See
+[SEMANTIC-RECOVERY-2026-10-05.md](SEMANTIC-RECOVERY-2026-10-05.md) for the stopping boundary and
+[SEMANTIC-COVERAGE-2026-10-05.json](SEMANTIC-COVERAGE-2026-10-05.json) for every remaining owner.
 
 Protected native internals remain out of scope.
 
@@ -184,6 +188,9 @@ Protected native internals remain out of scope.
 - [MOLANG-EVALUATOR-RECOVERY-2026-10-05.md](MOLANG-EVALUATOR-RECOVERY-2026-10-05.md)
 - [MOLANG-EVALUATOR-EVIDENCE-2026-10-05.json](MOLANG-EVALUATOR-EVIDENCE-2026-10-05.json)
 - [CHINESE-COMMUNITY-OBFUSCATION-RECON-2026-10-05.md](CHINESE-COMMUNITY-OBFUSCATION-RECON-2026-10-05.md)
+- [SEMANTIC-RECOVERY-2026-10-05.md](SEMANTIC-RECOVERY-2026-10-05.md)
+- [SEMANTIC-COVERAGE-2026-10-05.json](SEMANTIC-COVERAGE-2026-10-05.json)
+- [SEMANTIC-VERIFICATION-2026-10-05.json](SEMANTIC-VERIFICATION-2026-10-05.json)
 - [FAILURE-REPAIR-HISTORY.md](FAILURE-REPAIR-HISTORY.md)
 - [RECONNAISSANCE-2026-10-05.md](RECONNAISSANCE-2026-10-05.md)
 - [SOURCE-INVENTORY-2026-10-05.json](SOURCE-INVENTORY-2026-10-05.json)

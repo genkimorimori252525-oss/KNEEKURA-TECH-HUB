@@ -441,3 +441,28 @@ changed by this wording repair. Its opt-in detailed operand schema captures sign
 and numeric constants while leaving old dossiers unchanged. Fresh92/106/66 audits have0failures;
 six intended lifecycle/control-flow mutations each fail. No runtime failure or protected-native
 behavior was inferred. Existing javap limitation is unchanged.
+
+## Practical campaign repair record — 2026-10-05
+
+- The integration guard caught server/client MolangCommand simple-name ID collision before map
+  write; one ID was package-qualified. Exact targets remain distinct; all 604 IDs/targets are unique.
+- Baseline total 848 unseeded was correct; 618 main + 214 media + 15 UNKNOWN omitted one RENDERER
+  singleton. There have always been 16 singleton components. AnimationUtils is now mapped; final
+  432 main + 214 media + 15 isolated = 661 unseeded. Graph topology is unchanged.
+- Final index review caught raw cluster keys replacing consumer `mapped/score/priority` keys.
+  Restored the original top-level index format/date/keys/15-entry unknown inventory, plus the 11-column compact class schema and short class identifier values for all 955 rows, with regenerated values and
+  294 mapped classes. Preserved historical document hashes while refreshing only current blocks.
+- Durable audit now checks encoded operands, ConstantValue, constructor-registration paths and
+  BootstrapMethods connections; ten meaningful corrupt-evidence controls reject.
+- Corrected duplicated RealCamera method counts, maid vehicle labels, Molang packet dispatch,
+  pi/e Float storage, partial finally coverage and Token tag wording. No confidence promotion
+  conceals source/SRG/runtime uncertainty. Whole copied Java source bodies were removed from new
+  dossiers; hashes, URLs, bounded prose and exact artifact support remain.
+- All 18 concrete source leads previously hidden by propagated MOLANG labels received actual
+  comparison and class-only HIGH roles. One independently sourced singleton also closed. Prior
+  585 and original 282 rows remain identical; no generic source-candidate deferral remains.
+
+- Final full-schema review also caught raw foundation format/header replacing the index format,
+  dropping recorded_at and the compact unknown inventory. Restored the complete original top-level
+  contract, .index.v1 format/date, short identifiers and unchanged 15-entry unknown metadata.
+  This correction precedes remote publication; graph and semantic role counts are unchanged.

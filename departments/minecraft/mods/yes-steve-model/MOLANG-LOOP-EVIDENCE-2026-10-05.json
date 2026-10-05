@@ -1,0 +1,5420 @@
+{
+  "format": "kneekura.ysm-bounded-seed-evidence.v1",
+  "recorded_at": "2026-10-05",
+  "artifact": {
+    "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+    "sha1": "151ac7b24da8beeca1a20864565743cfd77af286",
+    "size": 63269843,
+    "classes": 955
+  },
+  "detailed_operands": true,
+  "source_tracks": [
+    {
+      "role": "OFFICIAL_RELEASE_LINE_SOURCE_CANDIDATE",
+      "repository": "YesSteveModel/YesSteveModel",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+      "path": "src/main/java/com/elfmcys/yesstevemodel/molang/runtime/ExpressionEvaluatorImpl.java",
+      "sha256": "b1f5667dd9fc2e6b61d46fba8f66bc9ab51854e555fc192561ea552654febc2e",
+      "url": "https://github.com/YesSteveModel/YesSteveModel/blob/f184edabd1b5115ce5a24cb6d155ba5a669f5ba6/src/main/java/com/elfmcys/yesstevemodel/molang/runtime/ExpressionEvaluatorImpl.java"
+    },
+    {
+      "role": "OFFICIAL_RELEASE_LINE_SOURCE_CANDIDATE",
+      "repository": "YesSteveModel/YesSteveModel",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+      "path": "src/main/java/com/elfmcys/yesstevemodel/molang/runtime/binding/StandardBindings.java",
+      "sha256": "93c7cbc1116fb1b4ba91998190a313df28810b33394c01e10837c61b6101d214",
+      "url": "https://github.com/YesSteveModel/YesSteveModel/blob/f184edabd1b5115ce5a24cb6d155ba5a669f5ba6/src/main/java/com/elfmcys/yesstevemodel/molang/runtime/binding/StandardBindings.java"
+    },
+    {
+      "role": "OFFICIAL_RELEASE_LINE_SOURCE_CANDIDATE",
+      "repository": "YesSteveModel/YesSteveModel",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+      "path": "src/main/java/com/elfmcys/yesstevemodel/molang/parser/ast/ExecutionScopeExpression.java",
+      "sha256": "0e0f07f78acf4ccf487116d85120d72d84b5800b0d61275a2bc6a62fac630ce7",
+      "url": "https://github.com/YesSteveModel/YesSteveModel/blob/f184edabd1b5115ce5a24cb6d155ba5a669f5ba6/src/main/java/com/elfmcys/yesstevemodel/molang/parser/ast/ExecutionScopeExpression.java"
+    },
+    {
+      "role": "OFFICIAL_RELEASE_LINE_SOURCE_CANDIDATE",
+      "repository": "YesSteveModel/YesSteveModel",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+      "path": "src/main/java/com/elfmcys/yesstevemodel/molang/parser/ast/AssignableVariableExpression.java",
+      "sha256": "f2b35fc9a7005e9f4a83dcebea30b330170e80162f1ab44e103147fa72314ecd",
+      "url": "https://github.com/YesSteveModel/YesSteveModel/blob/f184edabd1b5115ce5a24cb6d155ba5a669f5ba6/src/main/java/com/elfmcys/yesstevemodel/molang/parser/ast/AssignableVariableExpression.java"
+    }
+  ],
+  "source_artifact_equivalence": "NOT_ESTABLISHED",
+  "preserved_global_negative_finding": "SOURCE_ARTIFACT_DIVERGENCE",
+  "confidence_policy": "Semantic correspondence of bounded pinned-source/exact-artifact relations; original names, whole artifact/source identity and runtime claims unproven. OpenYSM comparative only; no community promotion.",
+  "class_shape_predicate": "Whole order-independent access/normalized-descriptor field/method multisets with YSM internal names erased, 955 population; scope and standard bindings unique1/955 plus exact behavior connections.",
+  "classes": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.parser.ast.ExecutionScopeExpression",
+      "confidence": "CONFIRMED",
+      "foundation_domain": "MOLANG",
+      "original_symbol_proven": false,
+      "source_artifact_divergence": false,
+      "declaration": {
+        "access": 49,
+        "super": "java/lang/Object",
+        "interfaces": [
+          "com/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0"
+        ],
+        "fields": [
+          {
+            "access": 18,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Ljava/util/List;"
+          }
+        ],
+        "methods": [
+          {
+            "access": 1,
+            "name": "<init>",
+            "descriptor": "(Ljava/util/List;)V"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Ljava/util/List;"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/Oo0000oo0oo0OoO00000O0O0;)Ljava/lang/Object;"
+          },
+          {
+            "access": 1,
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;"
+          },
+          {
+            "access": 1,
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z"
+          },
+          {
+            "access": 1,
+            "name": "hashCode",
+            "descriptor": "()I"
+          }
+        ]
+      },
+      "role_evidence": "Unique List-backed expression shape1/955, requiresNonNull constructor string expressions, retained ExecutionScope concat string, exact ExpressionVisitor.visitExecutionScope dispatch and two independently decoded execution consumers.",
+      "competitor_evidence": {
+        "population": 955,
+        "normalized_declaration_matches": [
+          "com/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo"
+        ]
+      }
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOooO0oOOOoO000oOo0O00Oo",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.binding.StandardBindings",
+      "confidence": "CONFIRMED",
+      "foundation_domain": "MOLANG",
+      "original_symbol_proven": false,
+      "source_artifact_divergence": false,
+      "declaration": {
+        "access": 49,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": [
+          {
+            "access": 26,
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "I"
+          },
+          {
+            "access": 25,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O;"
+          },
+          {
+            "access": 25,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O;"
+          }
+        ],
+        "methods": [
+          {
+            "access": 1,
+            "name": "<init>",
+            "descriptor": "()V"
+          },
+          {
+            "access": 4106,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo;)Ljava/lang/Object;"
+          },
+          {
+            "access": 4106,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo;)Ljava/lang/Object;"
+          },
+          {
+            "access": 8,
+            "name": "<clinit>",
+            "descriptor": "()V"
+          }
+        ]
+      },
+      "role_evidence": "Unique final utility shape1/955; two public-static-final Function fields, private-static-final int constant1024, two synthetic implementations with exact loop/foreach behavior. Bootstrap method handles connect each field to its coherent implementation, avoiding declaration-order inference.",
+      "competitor_evidence": {
+        "population": 955,
+        "normalized_declaration_matches": [
+          "com/elfmcys/yesstevemodel/OOooO0oOOOoO000oOo0O00Oo"
+        ]
+      }
+    }
+  ],
+  "members": [
+    {
+      "mapping_id": "ysm265.method.expression-evaluator-impl-visit-execution-scope",
+      "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo;)Ljava/lang/Object;",
+      "access": 1,
+      "code_sha256": "0d590146641445da0d31dc7d0fdd83fc3893cca74acf2170fd4d20f3a93c5c00",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Ljava/util/List;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x4d"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x1"
+        },
+        {
+          "offset": 6,
+          "opcode": "0x4e"
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/List",
+            "name": "iterator",
+            "descriptor": "()Ljava/util/Iterator;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 13,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 15,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 17,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/Iterator",
+            "name": "hasNext",
+            "descriptor": "()Z",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 22,
+          "opcode": "0x99",
+          "branch_target": 79
+        },
+        {
+          "offset": 25,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 27,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/Iterator",
+            "name": "next",
+            "descriptor": "()Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 32,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 35,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 37,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 39,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 40,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/Oo0000oo0oo0OoO00000O0O0;)Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 45,
+          "opcode": "0x4e"
+        },
+        {
+          "offset": 46,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 47,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "()Ljava/lang/Object;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 50,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 52,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 54,
+          "opcode": "0xc6",
+          "branch_target": 60
+        },
+        {
+          "offset": 57,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 59,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 60,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 61,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 64,
+          "opcode": "0x9e",
+          "branch_target": 76
+        },
+        {
+          "offset": 67,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 68,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 71,
+          "opcode": "0xc6",
+          "branch_target": 76
+        },
+        {
+          "offset": 74,
+          "opcode": "0x1"
+        },
+        {
+          "offset": 75,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 76,
+          "opcode": "0xa7",
+          "branch_target": 15
+        },
+        {
+          "offset": 79,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 80,
+          "opcode": "0xb0"
+        }
+      ],
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExpressionEvaluatorImpl",
+      "semantic_member": "visitExecutionScope",
+      "confidence": "CONFIRMED",
+      "original_symbol_proven": false,
+      "source_artifact_divergence": false,
+      "behavior_evidence": "Read scope expressions List; initialize lastResult=null; iterate visits at40 then pop47; nonnull pop returns59. Otherwise depth61 ifle64->76 and control68 ifnull71->76; pending control at positive depth returns null75; iteration76->15; exhausted returns lastResult80. No control consumption or depth mutation here.",
+      "competitor_evidence": {
+        "candidate_domain": "52 methods of selected owner; erase internal YSM names for competitor descriptor",
+        "exact_descriptor_count": 1,
+        "normalized_descriptor_count": 15,
+        "reference_presence_count": 1,
+        "behavior_final_count": 1,
+        "reference_predicate": "Connected owner/member/descriptor conjunction described in behavior evidence; coarse presence only",
+        "final_predicate": "reference conjunction AND reviewed full ordered instructions/resolved operands/branch targets/exception table AND all raw encoded local/iinc/invoke operand bytes; SHA256 recorded but not semantic acceptance criterion"
+      },
+      "reference_path": [
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Ljava/util/List;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/List",
+            "name": "iterator",
+            "descriptor": "()Ljava/util/Iterator;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 17,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/Iterator",
+            "name": "hasNext",
+            "descriptor": "()Z",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 27,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/Iterator",
+            "name": "next",
+            "descriptor": "()Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 32,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 40,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/Oo0000oo0oo0OoO00000O0O0;)Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 47,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "()Ljava/lang/Object;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 61,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 68,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo;",
+            "cp_tag": 9
+          }
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00ad"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x4d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0x1",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 6,
+          "opcode": "0x4e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00b00100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 13,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 15,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 17,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00860100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 22,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0039"
+        },
+        {
+          "offset": 25,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 27,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00890100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 32,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "0069"
+        },
+        {
+          "offset": 35,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "05",
+          "local_index": 5
+        },
+        {
+          "offset": 37,
+          "opcode": "0x19",
+          "encoded_operands_hex": "05",
+          "local_index": 5
+        },
+        {
+          "offset": 39,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 40,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "006c0200",
+          "argument_slot_count": 2,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 45,
+          "opcode": "0x4e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 46,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 47,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "008b"
+        },
+        {
+          "offset": 50,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 52,
+          "opcode": "0x19",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 54,
+          "opcode": "0xc6",
+          "encoded_operands_hex": "0006"
+        },
+        {
+          "offset": 57,
+          "opcode": "0x19",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 59,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 60,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 61,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0040"
+        },
+        {
+          "offset": 64,
+          "opcode": "0x9e",
+          "encoded_operands_hex": "000c"
+        },
+        {
+          "offset": 67,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 68,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0070"
+        },
+        {
+          "offset": 71,
+          "opcode": "0xc6",
+          "encoded_operands_hex": "0005"
+        },
+        {
+          "offset": 74,
+          "opcode": "0x1",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 75,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 76,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "ffc3"
+        },
+        {
+          "offset": 79,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 80,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "mapping_id": "ysm265.method.expression-evaluator-impl-visit-execution-scope-in-loop",
+      "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo;)Z",
+      "access": 2,
+      "code_sha256": "b0bfe755a20fe7e8f9af91f6a77b71581212f3df4cfd08ce55897bfd268ea43c",
+      "exception_handlers": [
+        {
+          "start": 10,
+          "end": 65,
+          "handler": 140,
+          "catch": null
+        },
+        {
+          "start": 78,
+          "end": 111,
+          "handler": 140,
+          "catch": null
+        },
+        {
+          "start": 124,
+          "end": 127,
+          "handler": 140,
+          "catch": null
+        },
+        {
+          "start": 140,
+          "end": 142,
+          "handler": 140,
+          "catch": null
+        }
+      ],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 2,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 5,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 6,
+          "opcode": "0x60"
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 10,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Ljava/util/List;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0x4d"
+        },
+        {
+          "offset": 15,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/List",
+            "name": "iterator",
+            "descriptor": "()Ljava/util/Iterator;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 21,
+          "opcode": "0x4e"
+        },
+        {
+          "offset": 22,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 23,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/Iterator",
+            "name": "hasNext",
+            "descriptor": "()Z",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 28,
+          "opcode": "0x99",
+          "branch_target": 127
+        },
+        {
+          "offset": 31,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 32,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/Iterator",
+            "name": "next",
+            "descriptor": "()Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 37,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 40,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 42,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 44,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 45,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/Oo0000oo0oo0OoO00000O0O0;)Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 50,
+          "opcode": "0x57"
+        },
+        {
+          "offset": 51,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 52,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "()Ljava/lang/Object;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 55,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 57,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 59,
+          "opcode": "0xc6",
+          "branch_target": 78
+        },
+        {
+          "offset": 62,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 63,
+          "opcode": "0x36"
+        },
+        {
+          "offset": 65,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 66,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 67,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 70,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 71,
+          "opcode": "0x64"
+        },
+        {
+          "offset": 72,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 75,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 77,
+          "opcode": "0xac"
+        },
+        {
+          "offset": 78,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 79,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 82,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 84,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 85,
+          "opcode": "0x1"
+        },
+        {
+          "offset": 86,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 89,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 91,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 94,
+          "opcode": "0xa6",
+          "branch_target": 100
+        },
+        {
+          "offset": 97,
+          "opcode": "0xa7",
+          "branch_target": 127
+        },
+        {
+          "offset": 100,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 102,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 105,
+          "opcode": "0xa6",
+          "branch_target": 124
+        },
+        {
+          "offset": 108,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 109,
+          "opcode": "0x36"
+        },
+        {
+          "offset": 111,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 112,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 113,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 116,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 117,
+          "opcode": "0x64"
+        },
+        {
+          "offset": 118,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 121,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 123,
+          "opcode": "0xac"
+        },
+        {
+          "offset": 124,
+          "opcode": "0xa7",
+          "branch_target": 22
+        },
+        {
+          "offset": 127,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 128,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 129,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 132,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 133,
+          "opcode": "0x64"
+        },
+        {
+          "offset": 134,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 137,
+          "opcode": "0xa7",
+          "branch_target": 155
+        },
+        {
+          "offset": 140,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 142,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 143,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 144,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 147,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 148,
+          "opcode": "0x64"
+        },
+        {
+          "offset": 149,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 152,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 154,
+          "opcode": "0xbf"
+        },
+        {
+          "offset": 155,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 156,
+          "opcode": "0xac"
+        }
+      ],
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExpressionEvaluatorImpl",
+      "semantic_member": "visitExecutionScopeInLoop",
+      "confidence": "CONFIRMED",
+      "original_symbol_proven": false,
+      "source_artifact_divergence": false,
+      "behavior_evidence": "Increment inLoop before try0-7. Visit/pop45/52: nonnull return emits true62, decrements67-72, returns77. Load and clear control78-86 before comparison: named CONTINUE field91 equality falls to goto97->127 (end this iteration and false155); BREAK field102 equality returns true108 with decrement113-118. Exhaustion decrements129-134 then false155. Catch-all at140 decrements144-149 and rethrows154; handlers [10,65),[78,111),[124,127),[140,142).",
+      "competitor_evidence": {
+        "candidate_domain": "52 methods of selected owner; erase internal YSM names for competitor descriptor",
+        "exact_descriptor_count": 1,
+        "normalized_descriptor_count": 1,
+        "reference_presence_count": 1,
+        "behavior_final_count": 1,
+        "reference_predicate": "Connected owner/member/descriptor conjunction described in behavior evidence; coarse presence only",
+        "final_predicate": "reference conjunction AND reviewed full ordered instructions/resolved operands/branch targets/exception table AND all raw encoded local/iinc/invoke operand bytes; SHA256 recorded but not semantic acceptance criterion"
+      },
+      "reference_path": [
+        {
+          "offset": 2,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Ljava/util/List;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/List",
+            "name": "iterator",
+            "descriptor": "()Ljava/util/Iterator;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 23,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/Iterator",
+            "name": "hasNext",
+            "descriptor": "()Z",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 32,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/Iterator",
+            "name": "next",
+            "descriptor": "()Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 37,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 45,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/Oo0000oo0oo0OoO00000O0O0;)Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 52,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "()Ljava/lang/Object;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 67,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 72,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 79,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 86,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 91,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 102,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 113,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 118,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 129,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 134,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 144,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 149,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 2,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0040"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 6,
+          "opcode": "0x60",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "0040"
+        },
+        {
+          "offset": 10,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00ad"
+        },
+        {
+          "offset": 14,
+          "opcode": "0x4d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 15,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00b00100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 21,
+          "opcode": "0x4e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 22,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 23,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00860100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 28,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0063"
+        },
+        {
+          "offset": 31,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 32,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00890100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 37,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "0069"
+        },
+        {
+          "offset": 40,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 42,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 44,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 45,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "006c0200",
+          "argument_slot_count": 2,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 50,
+          "opcode": "0x57",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 51,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 52,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "008b"
+        },
+        {
+          "offset": 55,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "05",
+          "local_index": 5
+        },
+        {
+          "offset": 57,
+          "opcode": "0x19",
+          "encoded_operands_hex": "05",
+          "local_index": 5
+        },
+        {
+          "offset": 59,
+          "opcode": "0xc6",
+          "encoded_operands_hex": "0013"
+        },
+        {
+          "offset": 62,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 63,
+          "opcode": "0x36",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 65,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 66,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 67,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0040"
+        },
+        {
+          "offset": 70,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 71,
+          "opcode": "0x64",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 72,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "0040"
+        },
+        {
+          "offset": 75,
+          "opcode": "0x15",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 77,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 78,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 79,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0070"
+        },
+        {
+          "offset": 82,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 84,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 85,
+          "opcode": "0x1",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 86,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "0070"
+        },
+        {
+          "offset": 89,
+          "opcode": "0x19",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 91,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "00b3"
+        },
+        {
+          "offset": 94,
+          "opcode": "0xa6",
+          "encoded_operands_hex": "0006"
+        },
+        {
+          "offset": 97,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "001e"
+        },
+        {
+          "offset": 100,
+          "opcode": "0x19",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 102,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "00b5"
+        },
+        {
+          "offset": 105,
+          "opcode": "0xa6",
+          "encoded_operands_hex": "0013"
+        },
+        {
+          "offset": 108,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 109,
+          "opcode": "0x36",
+          "encoded_operands_hex": "07",
+          "local_index": 7
+        },
+        {
+          "offset": 111,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 112,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 113,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0040"
+        },
+        {
+          "offset": 116,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 117,
+          "opcode": "0x64",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 118,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "0040"
+        },
+        {
+          "offset": 121,
+          "opcode": "0x15",
+          "encoded_operands_hex": "07",
+          "local_index": 7
+        },
+        {
+          "offset": 123,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 124,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "ff9a"
+        },
+        {
+          "offset": 127,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 128,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 129,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0040"
+        },
+        {
+          "offset": 132,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 133,
+          "opcode": "0x64",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 134,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "0040"
+        },
+        {
+          "offset": 137,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0012"
+        },
+        {
+          "offset": 140,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 142,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 143,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 144,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0040"
+        },
+        {
+          "offset": 147,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 148,
+          "opcode": "0x64",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 149,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "0040"
+        },
+        {
+          "offset": 152,
+          "opcode": "0x19",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 154,
+          "opcode": "0xbf",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 155,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 156,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "mapping_id": "ysm265.method.expression-evaluator-impl-visit-loop",
+      "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo;I)V",
+      "access": 1,
+      "code_sha256": "5de989a19232463fe6fc7a53add7a06e3da1d958e34a7a5ef8ee572607c560d5",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 1,
+          "opcode": "0x3e"
+        },
+        {
+          "offset": 2,
+          "opcode": "0x1d"
+        },
+        {
+          "offset": 3,
+          "opcode": "0x1c"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xa2",
+          "branch_target": 24
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 8,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 12,
+          "opcode": "0x99",
+          "branch_target": 18
+        },
+        {
+          "offset": 15,
+          "opcode": "0xa7",
+          "branch_target": 24
+        },
+        {
+          "offset": 18,
+          "opcode": "0x84"
+        },
+        {
+          "offset": 21,
+          "opcode": "0xa7",
+          "branch_target": 2
+        },
+        {
+          "offset": 24,
+          "opcode": "0xb1"
+        }
+      ],
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExpressionEvaluatorImpl",
+      "semantic_member": "visitLoop",
+      "confidence": "CONFIRMED",
+      "original_symbol_proven": false,
+      "source_artifact_divergence": false,
+      "behavior_evidence": "i=0; i>=times branch4->24; private scope-in-loop call9; false12->18 increments local3 by1; true goto15->24 exits; back-edge21->2. Negative/zero times skip body. No lower clamp is added.",
+      "competitor_evidence": {
+        "candidate_domain": "52 methods of selected owner; erase internal YSM names for competitor descriptor",
+        "exact_descriptor_count": 1,
+        "normalized_descriptor_count": 1,
+        "reference_presence_count": 1,
+        "behavior_final_count": 1,
+        "reference_predicate": "Connected owner/member/descriptor conjunction described in behavior evidence; coarse presence only",
+        "final_predicate": "reference conjunction AND reviewed full ordered instructions/resolved operands/branch targets/exception table AND all raw encoded local/iinc/invoke operand bytes; SHA256 recorded but not semantic acceptance criterion"
+      },
+      "reference_path": [
+        {
+          "offset": 9,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo;)Z",
+            "cp_tag": 10
+          }
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0x3e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 2,
+          "opcode": "0x1d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 3,
+          "opcode": "0x1c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 4,
+          "opcode": "0xa2",
+          "encoded_operands_hex": "0014"
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 8,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00b8"
+        },
+        {
+          "offset": 12,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0006"
+        },
+        {
+          "offset": 15,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0009"
+        },
+        {
+          "offset": 18,
+          "opcode": "0x84",
+          "encoded_operands_hex": "0301",
+          "local_index": 3,
+          "increment": 1
+        },
+        {
+          "offset": 21,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "ffed"
+        },
+        {
+          "offset": 24,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "mapping_id": "ysm265.method.expression-evaluator-impl-visit-for-each",
+      "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo;Lcom/elfmcys/yesstevemodel/OO00oo0o0o0oo0OoO00OOoOo;Ljava/lang/Iterable;)V",
+      "access": 1,
+      "code_sha256": "906639128948b44b985dd7dcc104b2e9a92df6f117f5bdbde2c915b48d5e01cd",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/lang/Iterable",
+            "name": "iterator",
+            "descriptor": "()Ljava/util/Iterator;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 6,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 8,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/Iterator",
+            "name": "hasNext",
+            "descriptor": "()Z",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 15,
+          "opcode": "0x99",
+          "branch_target": 50
+        },
+        {
+          "offset": 18,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 20,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/Iterator",
+            "name": "next",
+            "descriptor": "()Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 25,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 27,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 28,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 29,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 31,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OO00oo0o0o0oo0OoO00OOoOo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;Ljava/lang/Object;)V",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 36,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 37,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 38,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 41,
+          "opcode": "0x99",
+          "branch_target": 47
+        },
+        {
+          "offset": 44,
+          "opcode": "0xa7",
+          "branch_target": 50
+        },
+        {
+          "offset": 47,
+          "opcode": "0xa7",
+          "branch_target": 8
+        },
+        {
+          "offset": 50,
+          "opcode": "0xb1"
+        }
+      ],
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExpressionEvaluatorImpl",
+      "semantic_member": "visitForEach",
+      "confidence": "CONFIRMED",
+      "original_symbol_proven": false,
+      "source_artifact_divergence": false,
+      "behavior_evidence": "Iterator reads each element then AssignableVariable.assign(this,element)31 before private scope-in-loop38. True exits44->50; false41->47 loops47->8. Empty iterable skips both assignment and body.",
+      "competitor_evidence": {
+        "candidate_domain": "52 methods of selected owner; erase internal YSM names for competitor descriptor",
+        "exact_descriptor_count": 1,
+        "normalized_descriptor_count": 1,
+        "reference_presence_count": 1,
+        "behavior_final_count": 1,
+        "reference_predicate": "Connected owner/member/descriptor conjunction described in behavior evidence; coarse presence only",
+        "final_predicate": "reference conjunction AND reviewed full ordered instructions/resolved operands/branch targets/exception table AND all raw encoded local/iinc/invoke operand bytes; SHA256 recorded but not semantic acceptance criterion"
+      },
+      "reference_path": [
+        {
+          "offset": 1,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/lang/Iterable",
+            "name": "iterator",
+            "descriptor": "()Ljava/util/Iterator;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/Iterator",
+            "name": "hasNext",
+            "descriptor": "()Z",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 20,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/Iterator",
+            "name": "next",
+            "descriptor": "()Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 31,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OO00oo0o0o0oo0OoO00OOoOo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;Ljava/lang/Object;)V",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 38,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo;)Z",
+            "cp_tag": 10
+          }
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00800100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 6,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 8,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00860100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 15,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0023"
+        },
+        {
+          "offset": 18,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 20,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00890100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 25,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "05",
+          "local_index": 5
+        },
+        {
+          "offset": 27,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 28,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 29,
+          "opcode": "0x19",
+          "encoded_operands_hex": "05",
+          "local_index": 5
+        },
+        {
+          "offset": 31,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00bf0300",
+          "argument_slot_count": 3,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 36,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 37,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 38,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00b8"
+        },
+        {
+          "offset": 41,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0006"
+        },
+        {
+          "offset": 44,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0006"
+        },
+        {
+          "offset": 47,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "ffd9"
+        },
+        {
+          "offset": 50,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "mapping_id": "ysm265.method.expression-evaluator-impl-create-child",
+      "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Ljava/lang/Object;)Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO;",
+      "access": 1,
+      "code_sha256": "5ce301dd5961658e88e1d930d97462a6c048dda268bb1ebfc757602fd4962f6c",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "<init>",
+            "descriptor": "(Ljava/lang/Object;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb0"
+        }
+      ],
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExpressionEvaluatorImpl",
+      "semantic_member": "createChild",
+      "confidence": "CONFIRMED",
+      "original_symbol_proven": false,
+      "source_artifact_divergence": false,
+      "behavior_evidence": "new same concrete evaluator at0, invokes Object-entity constructor5 with requested entity local1, returns8; does not copy parent return/control/depth fields. Constructor support confirms entity assignment and only inLoop/returnThrough zero initialization.",
+      "competitor_evidence": {
+        "candidate_domain": "52 methods of selected owner; erase internal YSM names for competitor descriptor",
+        "exact_descriptor_count": 1,
+        "normalized_descriptor_count": 1,
+        "reference_presence_count": 1,
+        "behavior_final_count": 1,
+        "reference_predicate": "Connected owner/member/descriptor conjunction described in behavior evidence; coarse presence only",
+        "final_predicate": "reference conjunction AND reviewed full ordered instructions/resolved operands/branch targets/exception table AND all raw encoded local/iinc/invoke operand bytes; SHA256 recorded but not semantic acceptance criterion"
+      },
+      "reference_path": [
+        {
+          "offset": 0,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "<init>",
+            "descriptor": "(Ljava/lang/Object;)V",
+            "cp_tag": 10
+          }
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0xbb",
+          "encoded_operands_hex": "0002"
+        },
+        {
+          "offset": 3,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "008f"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "mapping_id": "ysm265.method.standard-bindings-loop-evaluate",
+      "owner": "com/elfmcys/yesstevemodel/OOooO0oOOOoO000oOo0O00Oo",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo;)Ljava/lang/Object;",
+      "access": 4106,
+      "code_sha256": "e44492074ed1bab0f9186e91e6d2aaf5ea8ecaaeb93745262d682e00412976f9",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x5"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x9f",
+          "branch_target": 10
+        },
+        {
+          "offset": 8,
+          "opcode": "0x1"
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 10,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 11,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 12,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Math",
+            "name": "round",
+            "descriptor": "(F)I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 19,
+          "opcode": "0x11",
+          "immediate": 1024
+        },
+        {
+          "offset": 22,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Math",
+            "name": "min",
+            "descriptor": "(II)I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 25,
+          "opcode": "0x3d"
+        },
+        {
+          "offset": 26,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 27,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 28,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(I)Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 31,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 33,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 35,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 38,
+          "opcode": "0x99",
+          "branch_target": 56
+        },
+        {
+          "offset": 41,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 43,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 46,
+          "opcode": "0x4e"
+        },
+        {
+          "offset": 47,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 48,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 51,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 52,
+          "opcode": "0x1c"
+        },
+        {
+          "offset": 53,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo;I)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 56,
+          "opcode": "0x1"
+        },
+        {
+          "offset": 57,
+          "opcode": "0xb0"
+        }
+      ],
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.binding.StandardBindings",
+      "semantic_member": "LOOP_FUNC.evaluate",
+      "confidence": "CONFIRMED",
+      "original_symbol_proven": false,
+      "source_artifact_divergence": false,
+      "behavior_evidence": "Arity must2 via iconst2@4/if_icmpeq5->10 else null9; Arguments.getAsFloat(ctx,0)13 then Math.round16; sipush1024@19 then Math.min22; getExpression(1)28; require scope instanceof35 else null56; cast evaluator48 then visitLoop53; null57. Cap is upper only.",
+      "competitor_evidence": {
+        "candidate_domain": "4 methods of selected owner; erase internal YSM names for competitor descriptor",
+        "exact_descriptor_count": 2,
+        "normalized_descriptor_count": 2,
+        "reference_presence_count": 1,
+        "behavior_final_count": 1,
+        "reference_predicate": "Connected owner/member/descriptor conjunction described in behavior evidence; coarse presence only",
+        "final_predicate": "reference conjunction AND reviewed full ordered instructions/resolved operands/branch targets/exception table AND all raw encoded local/iinc/invoke operand bytes; SHA256 recorded but not semantic acceptance criterion"
+      },
+      "reference_path": [
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Math",
+            "name": "round",
+            "descriptor": "(F)I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 22,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Math",
+            "name": "min",
+            "descriptor": "(II)I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 28,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(I)Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 35,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 43,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 48,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 53,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo;I)V",
+            "cp_tag": 10
+          }
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "001b"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x5",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0x9f",
+          "encoded_operands_hex": "0005"
+        },
+        {
+          "offset": 8,
+          "opcode": "0x1",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 10,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 11,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 12,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0034"
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "003a"
+        },
+        {
+          "offset": 19,
+          "opcode": "0x11",
+          "encoded_operands_hex": "0400"
+        },
+        {
+          "offset": 22,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "003e"
+        },
+        {
+          "offset": 25,
+          "opcode": "0x3d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 26,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 27,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 28,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "001e"
+        },
+        {
+          "offset": 31,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 33,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 35,
+          "opcode": "0xc1",
+          "encoded_operands_hex": "0022"
+        },
+        {
+          "offset": 38,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0012"
+        },
+        {
+          "offset": 41,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 43,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "0022"
+        },
+        {
+          "offset": 46,
+          "opcode": "0x4e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 47,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 48,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "002a"
+        },
+        {
+          "offset": 51,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 52,
+          "opcode": "0x1c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 53,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0041"
+        },
+        {
+          "offset": 56,
+          "opcode": "0x1",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 57,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "mapping_id": "ysm265.method.standard-bindings-for-each-evaluate",
+      "owner": "com/elfmcys/yesstevemodel/OOooO0oOOOoO000oOo0O00Oo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo;)Ljava/lang/Object;",
+      "access": 4106,
+      "code_sha256": "e219130832a90bb815a6020c0065bca20395824a7de2a2e5789ba64a55b8f6c8",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x6"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x9f",
+          "branch_target": 10
+        },
+        {
+          "offset": 8,
+          "opcode": "0x1"
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 10,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 11,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(I)Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 15,
+          "opcode": "0x4e"
+        },
+        {
+          "offset": 16,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 17,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oOo0O0o0Oooo0o0oO0oOOO0o",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 20,
+          "opcode": "0x99",
+          "branch_target": 86
+        },
+        {
+          "offset": 23,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 24,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oOo0O0o0Oooo0o0oO0oOOO0o",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 27,
+          "opcode": "0x4d"
+        },
+        {
+          "offset": 28,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 29,
+          "opcode": "0x5"
+        },
+        {
+          "offset": 30,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(I)Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 33,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 35,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 37,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 40,
+          "opcode": "0x99",
+          "branch_target": 86
+        },
+        {
+          "offset": 43,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 45,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 48,
+          "opcode": "0x4e"
+        },
+        {
+          "offset": 49,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 50,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 51,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 52,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "oooooooOOoOOoO00OooOo00O",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)Ljava/lang/Object;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 55,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 57,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 59,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "java/lang/Iterable",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 62,
+          "opcode": "0x99",
+          "branch_target": 86
+        },
+        {
+          "offset": 65,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 67,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "java/lang/Iterable",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 70,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 72,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 73,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 76,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 77,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 78,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOo0O0o0Oooo0o0oO0oOOO0o",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/OO00oo0o0o0oo0OoO00OOoOo;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 81,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 83,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo;Lcom/elfmcys/yesstevemodel/OO00oo0o0o0oo0OoO00OOoOo;Ljava/lang/Iterable;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 86,
+          "opcode": "0x1"
+        },
+        {
+          "offset": 87,
+          "opcode": "0xb0"
+        }
+      ],
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.binding.StandardBindings",
+      "semantic_member": "FOR_EACH_FUNC.evaluate",
+      "confidence": "CONFIRMED",
+      "original_symbol_proven": false,
+      "source_artifact_divergence": false,
+      "behavior_evidence": "Arity must3 at4/5->10; expression0@12 must AssignableVariableExpression; expression2@30 must scope; only then getValue(ctx,1)52; result must Iterable59; variable.target78 then evaluator.visitForEach83; all exits null86/87.",
+      "competitor_evidence": {
+        "candidate_domain": "4 methods of selected owner; erase internal YSM names for competitor descriptor",
+        "exact_descriptor_count": 2,
+        "normalized_descriptor_count": 2,
+        "reference_presence_count": 1,
+        "behavior_final_count": 1,
+        "reference_predicate": "Connected owner/member/descriptor conjunction described in behavior evidence; coarse presence only",
+        "final_predicate": "reference conjunction AND reviewed full ordered instructions/resolved operands/branch targets/exception table AND all raw encoded local/iinc/invoke operand bytes; SHA256 recorded but not semantic acceptance criterion"
+      },
+      "reference_path": [
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(I)Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 17,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oOo0O0o0Oooo0o0oO0oOOO0o",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 24,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oOo0O0o0Oooo0o0oO0oOOO0o",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 30,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(I)Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 37,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 45,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 52,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "oooooooOOoOOoO00OooOo00O",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)Ljava/lang/Object;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 59,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "java/lang/Iterable",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 67,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "java/lang/Iterable",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 73,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 78,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOo0O0o0Oooo0o0oO0oOOO0o",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/OO00oo0o0o0oo0OoO00OOoOo;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 83,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo;Lcom/elfmcys/yesstevemodel/OO00oo0o0o0oo0OoO00OOoOo;Ljava/lang/Iterable;)V",
+            "cp_tag": 10
+          }
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "001b"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x6",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0x9f",
+          "encoded_operands_hex": "0005"
+        },
+        {
+          "offset": 8,
+          "opcode": "0x1",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 10,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 11,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "001e"
+        },
+        {
+          "offset": 15,
+          "opcode": "0x4e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 16,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 17,
+          "opcode": "0xc1",
+          "encoded_operands_hex": "0020"
+        },
+        {
+          "offset": 20,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0042"
+        },
+        {
+          "offset": 23,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 24,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "0020"
+        },
+        {
+          "offset": 27,
+          "opcode": "0x4d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 28,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 29,
+          "opcode": "0x5",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 30,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "001e"
+        },
+        {
+          "offset": 33,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 35,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 37,
+          "opcode": "0xc1",
+          "encoded_operands_hex": "0022"
+        },
+        {
+          "offset": 40,
+          "opcode": "0x99",
+          "encoded_operands_hex": "002e"
+        },
+        {
+          "offset": 43,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 45,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "0022"
+        },
+        {
+          "offset": 48,
+          "opcode": "0x4e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 49,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 50,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 51,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 52,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0026"
+        },
+        {
+          "offset": 55,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 57,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 59,
+          "opcode": "0xc1",
+          "encoded_operands_hex": "0028"
+        },
+        {
+          "offset": 62,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0018"
+        },
+        {
+          "offset": 65,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 67,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "0028"
+        },
+        {
+          "offset": 70,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "05",
+          "local_index": 5
+        },
+        {
+          "offset": 72,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 73,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "002a"
+        },
+        {
+          "offset": 76,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 77,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 78,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "002d"
+        },
+        {
+          "offset": 81,
+          "opcode": "0x19",
+          "encoded_operands_hex": "05",
+          "local_index": 5
+        },
+        {
+          "offset": 83,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0030"
+        },
+        {
+          "offset": 86,
+          "opcode": "0x1",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 87,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "mapping_id": "ysm265.method.execution-scope-expression-expressions",
+      "owner": "com/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()Ljava/util/List;",
+      "access": 1,
+      "code_sha256": "7e0bb919657973bf0959e14569eb267b15bb4e98602248480db68213179c69da",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Ljava/util/List;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb0"
+        }
+      ],
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.parser.ast.ExecutionScopeExpression",
+      "semantic_member": "expressions",
+      "confidence": "CONFIRMED",
+      "original_symbol_proven": false,
+      "source_artifact_divergence": false,
+      "behavior_evidence": "Return the same private-final List field used in constructor and both scope visitor methods; this accessor is included to close the scope execution relation.",
+      "competitor_evidence": {
+        "candidate_domain": "6 methods of selected owner; erase internal YSM names for competitor descriptor",
+        "exact_descriptor_count": 1,
+        "normalized_descriptor_count": 1,
+        "reference_presence_count": 1,
+        "behavior_final_count": 1,
+        "reference_predicate": "Connected owner/member/descriptor conjunction described in behavior evidence; coarse presence only",
+        "final_predicate": "reference conjunction AND reviewed full ordered instructions/resolved operands/branch targets/exception table AND all raw encoded local/iinc/invoke operand bytes; SHA256 recorded but not semantic acceptance criterion"
+      },
+      "reference_path": [
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Ljava/util/List;",
+            "cp_tag": 9
+          }
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0021"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "mapping_id": "ysm265.method.execution-scope-expression-visit",
+      "owner": "com/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/Oo0000oo0oo0OoO00000O0O0;)Ljava/lang/Object;",
+      "access": 1,
+      "code_sha256": "349a1186389595c6372c903ef00b51586cca472e5f32a4acbfeab4eb6e767eda",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 1,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 2,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/Oo0000oo0oo0OoO00000O0O0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo;)Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb0"
+        }
+      ],
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.parser.ast.ExecutionScopeExpression",
+      "semantic_member": "visit",
+      "confidence": "CONFIRMED",
+      "original_symbol_proven": false,
+      "source_artifact_divergence": false,
+      "behavior_evidence": "Invoke established visitor interface with this exact scope-node descriptor and return result; connects Expression.visit to concrete visitExecutionScope.",
+      "competitor_evidence": {
+        "candidate_domain": "6 methods of selected owner; erase internal YSM names for competitor descriptor",
+        "exact_descriptor_count": 1,
+        "normalized_descriptor_count": 1,
+        "reference_presence_count": 1,
+        "behavior_final_count": 1,
+        "reference_predicate": "Connected owner/member/descriptor conjunction described in behavior evidence; coarse presence only",
+        "final_predicate": "reference conjunction AND reviewed full ordered instructions/resolved operands/branch targets/exception table AND all raw encoded local/iinc/invoke operand bytes; SHA256 recorded but not semantic acceptance criterion"
+      },
+      "reference_path": [
+        {
+          "offset": 2,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/Oo0000oo0oo0OoO00000O0O0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo;)Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 2,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "002a0200",
+          "argument_slot_count": 2,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    }
+  ],
+  "bounded_dependency_support": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+      "name": "<init>",
+      "descriptor": "(Ljava/lang/Object;)V",
+      "access": 1,
+      "code_sha256": "8863ae3518697989c0b94664ddd91d52ee2ec01b58e75006f819ec3e4d5639df",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "java/lang/Object",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 10,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "Ooooo0oooO0oooOOOoO0000O",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 15,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Ljava/lang/Object;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 19,
+          "opcode": "0xb1"
+        }
+      ],
+      "purpose": "Constructor for createChild entity-only state initialization; no constructor mapping promotion",
+      "reference_path": [
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "java/lang/Object",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "Ooooo0oooO0oooOOOoO0000O",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Ljava/lang/Object;",
+            "cp_tag": 9
+          }
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "003e"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "0040"
+        },
+        {
+          "offset": 9,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 10,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "0042"
+        },
+        {
+          "offset": 14,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 15,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "0044"
+        },
+        {
+          "offset": 19,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOooO0oOOOoO000oOo0O00Oo",
+      "name": "<clinit>",
+      "descriptor": "()V",
+      "access": 8,
+      "code_sha256": "0c24603939c6b6e0a494a2018aa12180f15c4a1f816b18c8bc6eff769630f987",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xba",
+          "reference": {
+            "name": "evaluate",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O;",
+            "bootstrap_index": 0,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb3",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOooO0oOOOoO000oOo0O00Oo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 8,
+          "opcode": "0xba",
+          "reference": {
+            "name": "evaluate",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O;",
+            "bootstrap_index": 1,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb3",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOooO0oOOOoO000oOo0O00Oo",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb1"
+        }
+      ],
+      "purpose": "Lambda field binding; bootstrap method handles retained below",
+      "reference_path": [
+        {
+          "offset": 0,
+          "opcode": "0xba",
+          "reference": {
+            "name": "evaluate",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O;",
+            "bootstrap_index": 0,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb3",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOooO0oOOOoO000oOo0O00Oo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 8,
+          "opcode": "0xba",
+          "reference": {
+            "name": "evaluate",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O;",
+            "bootstrap_index": 1,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb3",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOooO0oOOOoO000oOo0O00Oo",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O;",
+            "cp_tag": 9
+          }
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0xba",
+          "encoded_operands_hex": "00510000"
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb3",
+          "encoded_operands_hex": "0053"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xba",
+          "encoded_operands_hex": "00570000"
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb3",
+          "encoded_operands_hex": "0059"
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOo0O0o0Oooo0o0oO0oOOO0o",
+      "name": "<init>",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00oo0o0o0oo0OoO00OOoOo;)V",
+      "access": 1,
+      "code_sha256": "4e5c58d32a5749f077336d114c36fcd5fc2a9d4eae77da8c046dbd108578bc2f",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "java/lang/Object",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x12",
+          "reference": {
+            "string": "target",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/util/Objects",
+            "name": "requireNonNull",
+            "descriptor": "(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 10,
+          "opcode": "0x57"
+        },
+        {
+          "offset": 11,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 12,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOo0O0o0Oooo0o0oO0oOOO0o",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/OO00oo0o0o0oo0OoO00OOoOo;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb1"
+        }
+      ],
+      "purpose": "AssignableVariableExpression unpromoted AST identity support; coarse normalized shape has two candidates",
+      "reference_path": [
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "java/lang/Object",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 5,
+          "opcode": "0x12",
+          "reference": {
+            "string": "target",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/util/Objects",
+            "name": "requireNonNull",
+            "descriptor": "(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOo0O0o0Oooo0o0oO0oOOO0o",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/OO00oo0o0o0oo0OoO00OOoOo;",
+            "cp_tag": 9
+          }
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "000d"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0x12",
+          "encoded_operands_hex": "0f"
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0015"
+        },
+        {
+          "offset": 10,
+          "opcode": "0x57",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 11,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 12,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "0017"
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOo0O0o0Oooo0o0oO0oOOO0o",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/OO00oo0o0o0oo0OoO00OOoOo;",
+      "access": 1,
+      "code_sha256": "8d2aec6788db2b05a70890264c04f2cdb831396ab355947b95b7e2e0e5946927",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOo0O0o0Oooo0o0oO0oOOO0o",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/OO00oo0o0o0oo0OoO00OOoOo;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb0"
+        }
+      ],
+      "purpose": "for_each target accessor relation only; no accessor mapping promotion",
+      "reference_path": [
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOo0O0o0Oooo0o0oO0oOOO0o",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/OO00oo0o0o0oo0OoO00OOoOo;",
+            "cp_tag": 9
+          }
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0017"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOo0O0o0Oooo0o0oO0oOOO0o",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/Oo0000oo0oo0OoO00000O0O0;)Ljava/lang/Object;",
+      "access": 1,
+      "code_sha256": "8eacde279b272b2c334efd17e234ccb47562a1bb43af89120b43a20038365963",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 1,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 2,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/Oo0000oo0oo0OoO00000O0O0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oOo0O0o0Oooo0o0oO0oOOO0o;)Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb0"
+        }
+      ],
+      "purpose": "Assignable expression visitor dispatch relation only; no AST class mapping promotion",
+      "reference_path": [
+        {
+          "offset": 2,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/Oo0000oo0oo0OoO00000O0O0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oOo0O0o0Oooo0o0oO0oOOO0o;)Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 2,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00200200",
+          "argument_slot_count": 2,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo",
+      "name": "<init>",
+      "descriptor": "(Ljava/util/List;)V",
+      "access": 1,
+      "code_sha256": "ead59da8e88b13a007f22997309c0da5eea0a877ae4873cfbd62c76bca76eb5c",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "java/lang/Object",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 6,
+          "opcode": "0x12",
+          "reference": {
+            "string": "expressions",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/util/Objects",
+            "name": "requireNonNull",
+            "descriptor": "(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "java/util/List",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Ljava/util/List;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 17,
+          "opcode": "0xb1"
+        }
+      ],
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.parser.ast.ExecutionScopeExpression",
+      "semantic_member": "<init>",
+      "confidence": "CONFIRMED",
+      "original_symbol_proven": false,
+      "source_artifact_divergence": false,
+      "behavior_evidence": "Object constructor, Objects.requireNonNull(list,\"expressions\"), checkcast List, store same list into private-final expressions; no defensive copy.",
+      "competitor_evidence": {
+        "candidate_domain": "6 methods of selected owner; erase internal YSM names for competitor descriptor",
+        "exact_descriptor_count": 1,
+        "normalized_descriptor_count": 1,
+        "reference_presence_count": 1,
+        "behavior_final_count": 1,
+        "reference_predicate": "Connected owner/member/descriptor conjunction described in behavior evidence; coarse presence only",
+        "final_predicate": "reference conjunction AND reviewed full ordered instructions/resolved operands/branch targets/exception table AND all raw encoded local/iinc/invoke operand bytes; SHA256 recorded but not semantic acceptance criterion"
+      },
+      "reference_path": [
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "java/lang/Object",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 6,
+          "opcode": "0x12",
+          "reference": {
+            "string": "expressions",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/util/Objects",
+            "name": "requireNonNull",
+            "descriptor": "(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "java/util/List",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo0Ooo00oo0000oOOOo0oOoo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Ljava/util/List;",
+            "cp_tag": 9
+          }
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "0015"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 6,
+          "opcode": "0x12",
+          "encoded_operands_hex": "17"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "001d"
+        },
+        {
+          "offset": 11,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "001f"
+        },
+        {
+          "offset": 14,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "0021"
+        },
+        {
+          "offset": 17,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ],
+      "purpose": "Constructor support only; no constructor mapping promotion"
+    }
+  ],
+  "bootstrap_and_constant_evidence": {
+    "owner": "com/elfmcys/yesstevemodel/OOooO0oOOOoO000oOo0O00Oo",
+    "constant_values": {
+      "O00OOOooOoooOoo0o0o0oO0O": {
+        "cp_tag": 3,
+        "value": 1024
+      }
+    },
+    "bootstrap_methods": [
+      {
+        "method_handle": {
+          "cp_tag": 15,
+          "reference_kind": 6,
+          "reference": {
+            "cp_tag": 10,
+            "owner": "java/lang/invoke/LambdaMetafactory",
+            "name": "metafactory",
+            "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+          }
+        },
+        "arguments": [
+          {
+            "cp_tag": 16,
+            "value": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo;)Ljava/lang/Object;"
+          },
+          {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "com/elfmcys/yesstevemodel/OOooO0oOOOoO000oOo0O00Oo",
+              "name": "o0OOooo0o0OO00OoOOOo0o0O",
+              "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo;)Ljava/lang/Object;"
+            }
+          },
+          {
+            "cp_tag": 16,
+            "value": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo;)Ljava/lang/Object;"
+          }
+        ]
+      },
+      {
+        "method_handle": {
+          "cp_tag": 15,
+          "reference_kind": 6,
+          "reference": {
+            "cp_tag": 10,
+            "owner": "java/lang/invoke/LambdaMetafactory",
+            "name": "metafactory",
+            "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+          }
+        },
+        "arguments": [
+          {
+            "cp_tag": 16,
+            "value": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo;)Ljava/lang/Object;"
+          },
+          {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "com/elfmcys/yesstevemodel/OOooO0oOOOoO000oOo0O00Oo",
+              "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+              "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo;)Ljava/lang/Object;"
+            }
+          },
+          {
+            "cp_tag": 16,
+            "value": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo;)Ljava/lang/Object;"
+          }
+        ]
+      }
+    ]
+  },
+  "reused_enum_branch_relations": {
+    "unary": {
+      "retained_names_to_fields": {
+        "LOGICAL_NEGATION": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "ARITHMETICAL_NEGATION": "o0OOooo0o0OO00OoOOOo0o0O",
+        "PLUS": "O00OOOooOoooOoo0o0o0oO0O",
+        "RETURN": "oOOOo0OOO0ooooo0O00OO0o0"
+      },
+      "named_fields_to_switch_keys": {
+        "Oo0Oo0o00O00Oo0OOoOOoooo": 1,
+        "o0OOooo0o0OO00OoOOOo0o0O": 2,
+        "oOOOo0OOO0ooooo0O00OO0o0": 3
+      },
+      "switch": {
+        "offset": 22,
+        "default": 83,
+        "cases": {
+          "1": 48,
+          "2": 64,
+          "3": 73
+        }
+      },
+      "PLUS": "initializer proves PLUS field exists; no switch-map assignment; reaches default. No ordinal assumed."
+    },
+    "statement": {
+      "retained_names_to_fields": {
+        "BREAK": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "CONTINUE": "o0OOooo0o0OO00OoOOOo0o0O"
+      },
+      "named_fields_to_switch_keys": {
+        "Oo0Oo0o00O00Oo0OOoOOoooo": 1,
+        "o0OOooo0o0OO00OoOOOo0o0O": 2
+      },
+      "switch": {
+        "offset": 11,
+        "default": 53,
+        "cases": {
+          "1": 36,
+          "2": 46
+        }
+      }
+    },
+    "switch_initializer_evidence": {
+      "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$1",
+      "name": "<clinit>",
+      "descriptor": "()V",
+      "access": 8,
+      "code_sha256": "1ff1b9be423f7af4a69b958646b3ebf433672c2f0c1762bcddf40229e79f1ed4",
+      "exception_handlers": [
+        {
+          "start": 9,
+          "end": 20,
+          "handler": 23,
+          "catch": "java/lang/NoSuchFieldError"
+        },
+        {
+          "start": 24,
+          "end": 35,
+          "handler": 38,
+          "catch": "java/lang/NoSuchFieldError"
+        },
+        {
+          "start": 48,
+          "end": 59,
+          "handler": 62,
+          "catch": "java/lang/NoSuchFieldError"
+        },
+        {
+          "start": 63,
+          "end": 74,
+          "handler": 77,
+          "catch": "java/lang/NoSuchFieldError"
+        },
+        {
+          "start": 78,
+          "end": 89,
+          "handler": 92,
+          "catch": "java/lang/NoSuchFieldError"
+        }
+      ],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "values",
+            "descriptor": "()[Lcom/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0xbe"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xbc"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb3",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$1",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "[I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$1",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "[I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 15,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "ordinal",
+            "descriptor": "()I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 18,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 19,
+          "opcode": "0x4f"
+        },
+        {
+          "offset": 20,
+          "opcode": "0xa7",
+          "branch_target": 24
+        },
+        {
+          "offset": 23,
+          "opcode": "0x4b"
+        },
+        {
+          "offset": 24,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$1",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "[I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 27,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 30,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "ordinal",
+            "descriptor": "()I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 33,
+          "opcode": "0x5"
+        },
+        {
+          "offset": 34,
+          "opcode": "0x4f"
+        },
+        {
+          "offset": 35,
+          "opcode": "0xa7",
+          "branch_target": 39
+        },
+        {
+          "offset": 38,
+          "opcode": "0x4b"
+        },
+        {
+          "offset": 39,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "values",
+            "descriptor": "()[Lcom/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 42,
+          "opcode": "0xbe"
+        },
+        {
+          "offset": 43,
+          "opcode": "0xbc"
+        },
+        {
+          "offset": 45,
+          "opcode": "0xb3",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$1",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "[I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 48,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$1",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "[I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 51,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 54,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "ordinal",
+            "descriptor": "()I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 57,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 58,
+          "opcode": "0x4f"
+        },
+        {
+          "offset": 59,
+          "opcode": "0xa7",
+          "branch_target": 63
+        },
+        {
+          "offset": 62,
+          "opcode": "0x4b"
+        },
+        {
+          "offset": 63,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$1",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "[I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 66,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 69,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "ordinal",
+            "descriptor": "()I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 72,
+          "opcode": "0x5"
+        },
+        {
+          "offset": 73,
+          "opcode": "0x4f"
+        },
+        {
+          "offset": 74,
+          "opcode": "0xa7",
+          "branch_target": 78
+        },
+        {
+          "offset": 77,
+          "opcode": "0x4b"
+        },
+        {
+          "offset": 78,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$1",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "[I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 81,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 84,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "ordinal",
+            "descriptor": "()I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 87,
+          "opcode": "0x6"
+        },
+        {
+          "offset": 88,
+          "opcode": "0x4f"
+        },
+        {
+          "offset": 89,
+          "opcode": "0xa7",
+          "branch_target": 93
+        },
+        {
+          "offset": 92,
+          "opcode": "0x4b"
+        },
+        {
+          "offset": 93,
+          "opcode": "0xb1"
+        }
+      ]
+    },
+    "enum_initializer_evidence": {
+      "com/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo": {
+        "owner": "com/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo",
+        "name": "<clinit>",
+        "descriptor": "()V",
+        "access": 8,
+        "code_sha256": "c8e44d63d8cd6925b9460aa278182b4d660a0b7670e38c9284f04d610c4bab51",
+        "exception_handlers": [],
+        "instructions": [
+          {
+            "offset": 0,
+            "opcode": "0xbb",
+            "reference": {
+              "class_name": "com/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo",
+              "cp_tag": 7
+            }
+          },
+          {
+            "offset": 3,
+            "opcode": "0x59"
+          },
+          {
+            "offset": 4,
+            "opcode": "0x12",
+            "reference": {
+              "string": "LOGICAL_NEGATION",
+              "cp_tag": 8
+            }
+          },
+          {
+            "offset": 6,
+            "opcode": "0x3"
+          },
+          {
+            "offset": 7,
+            "opcode": "0x11",
+            "immediate": 2800
+          },
+          {
+            "offset": 10,
+            "opcode": "0xb7",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo",
+              "name": "<init>",
+              "descriptor": "(Ljava/lang/String;II)V",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 13,
+            "opcode": "0xb3",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo",
+              "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+              "descriptor": "Lcom/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo;",
+              "cp_tag": 9
+            }
+          },
+          {
+            "offset": 16,
+            "opcode": "0xbb",
+            "reference": {
+              "class_name": "com/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo",
+              "cp_tag": 7
+            }
+          },
+          {
+            "offset": 19,
+            "opcode": "0x59"
+          },
+          {
+            "offset": 20,
+            "opcode": "0x12",
+            "reference": {
+              "string": "ARITHMETICAL_NEGATION",
+              "cp_tag": 8
+            }
+          },
+          {
+            "offset": 22,
+            "opcode": "0x4"
+          },
+          {
+            "offset": 23,
+            "opcode": "0x11",
+            "immediate": 2800
+          },
+          {
+            "offset": 26,
+            "opcode": "0xb7",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo",
+              "name": "<init>",
+              "descriptor": "(Ljava/lang/String;II)V",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 29,
+            "opcode": "0xb3",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo",
+              "name": "o0OOooo0o0OO00OoOOOo0o0O",
+              "descriptor": "Lcom/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo;",
+              "cp_tag": 9
+            }
+          },
+          {
+            "offset": 32,
+            "opcode": "0xbb",
+            "reference": {
+              "class_name": "com/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo",
+              "cp_tag": 7
+            }
+          },
+          {
+            "offset": 35,
+            "opcode": "0x59"
+          },
+          {
+            "offset": 36,
+            "opcode": "0x12",
+            "reference": {
+              "string": "PLUS",
+              "cp_tag": 8
+            }
+          },
+          {
+            "offset": 38,
+            "opcode": "0x5"
+          },
+          {
+            "offset": 39,
+            "opcode": "0x11",
+            "immediate": 2800
+          },
+          {
+            "offset": 42,
+            "opcode": "0xb7",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo",
+              "name": "<init>",
+              "descriptor": "(Ljava/lang/String;II)V",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 45,
+            "opcode": "0xb3",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo",
+              "name": "O00OOOooOoooOoo0o0o0oO0O",
+              "descriptor": "Lcom/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo;",
+              "cp_tag": 9
+            }
+          },
+          {
+            "offset": 48,
+            "opcode": "0xbb",
+            "reference": {
+              "class_name": "com/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo",
+              "cp_tag": 7
+            }
+          },
+          {
+            "offset": 51,
+            "opcode": "0x59"
+          },
+          {
+            "offset": 52,
+            "opcode": "0x12",
+            "reference": {
+              "string": "RETURN",
+              "cp_tag": 8
+            }
+          },
+          {
+            "offset": 54,
+            "opcode": "0x6"
+          },
+          {
+            "offset": 55,
+            "opcode": "0x2"
+          },
+          {
+            "offset": 56,
+            "opcode": "0xb7",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo",
+              "name": "<init>",
+              "descriptor": "(Ljava/lang/String;II)V",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 59,
+            "opcode": "0xb3",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo",
+              "name": "oOOOo0OOO0ooooo0O00OO0o0",
+              "descriptor": "Lcom/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo;",
+              "cp_tag": 9
+            }
+          },
+          {
+            "offset": 62,
+            "opcode": "0xb8",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo",
+              "name": "o0OOooo0o0OO00OoOOOo0o0O",
+              "descriptor": "()[Lcom/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 65,
+            "opcode": "0xb3",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo",
+              "name": "Ooooo0oooO0oooOOOoO0000O",
+              "descriptor": "[Lcom/elfmcys/yesstevemodel/O0o0Oo0oo0oOooOO000oO00o$Oo0Oo0o00O00Oo0OOoOOoooo;",
+              "cp_tag": 9
+            }
+          },
+          {
+            "offset": 68,
+            "opcode": "0xb1"
+          }
+        ]
+      },
+      "com/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo": {
+        "owner": "com/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo",
+        "name": "<clinit>",
+        "descriptor": "()V",
+        "access": 8,
+        "code_sha256": "3581b704f873dd80fc00a36af3574eea4439512b70c6630668537de9c8cb4e38",
+        "exception_handlers": [],
+        "instructions": [
+          {
+            "offset": 0,
+            "opcode": "0xbb",
+            "reference": {
+              "class_name": "com/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo",
+              "cp_tag": 7
+            }
+          },
+          {
+            "offset": 3,
+            "opcode": "0x59"
+          },
+          {
+            "offset": 4,
+            "opcode": "0x12",
+            "reference": {
+              "string": "BREAK",
+              "cp_tag": 8
+            }
+          },
+          {
+            "offset": 6,
+            "opcode": "0x3"
+          },
+          {
+            "offset": 7,
+            "opcode": "0xb7",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo",
+              "name": "<init>",
+              "descriptor": "(Ljava/lang/String;I)V",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 10,
+            "opcode": "0xb3",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo",
+              "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+              "descriptor": "Lcom/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo;",
+              "cp_tag": 9
+            }
+          },
+          {
+            "offset": 13,
+            "opcode": "0xbb",
+            "reference": {
+              "class_name": "com/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo",
+              "cp_tag": 7
+            }
+          },
+          {
+            "offset": 16,
+            "opcode": "0x59"
+          },
+          {
+            "offset": 17,
+            "opcode": "0x12",
+            "reference": {
+              "string": "CONTINUE",
+              "cp_tag": 8
+            }
+          },
+          {
+            "offset": 19,
+            "opcode": "0x4"
+          },
+          {
+            "offset": 20,
+            "opcode": "0xb7",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo",
+              "name": "<init>",
+              "descriptor": "(Ljava/lang/String;I)V",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 23,
+            "opcode": "0xb3",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo",
+              "name": "o0OOooo0o0OO00OoOOOo0o0O",
+              "descriptor": "Lcom/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo;",
+              "cp_tag": 9
+            }
+          },
+          {
+            "offset": 26,
+            "opcode": "0xb8",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo",
+              "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+              "descriptor": "()[Lcom/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo;",
+              "cp_tag": 10
+            }
+          },
+          {
+            "offset": 29,
+            "opcode": "0xb3",
+            "reference": {
+              "owner": "com/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo",
+              "name": "O00OOOooOoooOoo0o0o0oO0O",
+              "descriptor": "[Lcom/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo;",
+              "cp_tag": 9
+            }
+          },
+          {
+            "offset": 32,
+            "opcode": "0xb1"
+          }
+        ]
+      }
+    }
+  },
+  "field_mapping_candidates": [
+    {
+      "mapping_id": "ysm265.field.expression-evaluator-impl-in-loop",
+      "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+      "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+      "descriptor": "I",
+      "access": 2,
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExpressionEvaluatorImpl",
+      "semantic_member": "inLoop",
+      "confidence": "CONFIRMED",
+      "original_symbol_proven": false,
+      "competitor_evidence": {
+        "private_int_candidates": 2,
+        "behavior_final_count": 1
+      },
+      "behavior_evidence": "The same private int is incremented before per-loop body, decremented on every exit/catch-all path, and gates pending-control early return in ordinary scope; returnThrough private int is independently anchored by prior multi/pop behavior."
+    },
+    {
+      "mapping_id": "ysm265.field.standard-bindings-loop-func",
+      "owner": "com/elfmcys/yesstevemodel/OOooO0oOOOoO000oOo0O00Oo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O;",
+      "access": 25,
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.binding.StandardBindings",
+      "semantic_member": "LOOP_FUNC",
+      "confidence": "CONFIRMED",
+      "original_symbol_proven": false,
+      "competitor_evidence": {
+        "descriptor_flags_candidates": 2,
+        "bootstrap_behavior_final_count": 1
+      },
+      "behavior_evidence": "clinit invokedynamic bootstrap0 implementation method handle selects alt exact two-arity rounded capped loop consumer; putstatic@5 binds this field.",
+      "implementation_method_mapping_id": "ysm265.method.standard-bindings-loop-evaluate"
+    },
+    {
+      "mapping_id": "ysm265.field.standard-bindings-for-each-func",
+      "owner": "com/elfmcys/yesstevemodel/OOooO0oOOOoO000oOo0O00Oo",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O;",
+      "access": 25,
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.binding.StandardBindings",
+      "semantic_member": "FOR_EACH_FUNC",
+      "confidence": "CONFIRMED",
+      "original_symbol_proven": false,
+      "competitor_evidence": {
+        "descriptor_flags_candidates": 2,
+        "bootstrap_behavior_final_count": 1
+      },
+      "behavior_evidence": "clinit invokedynamic bootstrap1 implementation method handle selects base exact three-arity assignable/scope/Iterable consumer; putstatic@13 binds this field.",
+      "implementation_method_mapping_id": "ysm265.method.standard-bindings-for-each-evaluate"
+    }
+  ],
+  "negative_checks": [
+    {
+      "mapping_id": "ysm265.method.expression-evaluator-impl-visit-execution-scope",
+      "mutation": "Control gate skips remaining body instead of continue iteration",
+      "offset": 64,
+      "changed_key": "branch_target",
+      "replacement": 79,
+      "coarse_reference_predicate_accepts": true,
+      "semantic_predicate_accepts": false
+    },
+    {
+      "mapping_id": "ysm265.method.expression-evaluator-impl-visit-execution-scope-in-loop",
+      "mutation": "Swap CONTINUE comparison to BREAK",
+      "offset": 91,
+      "changed_key": "reference",
+      "replacement": {
+        "owner": "com/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "Lcom/elfmcys/yesstevemodel/ooOo0OO0OOOoo0ooooo00Oo0$Oo0Oo0o00O00Oo0OOoOOoooo;",
+        "cp_tag": 9
+      },
+      "coarse_reference_predicate_accepts": false,
+      "semantic_predicate_accepts": false
+    },
+    {
+      "mapping_id": "ysm265.method.expression-evaluator-impl-visit-execution-scope-in-loop",
+      "mutation": "Clear return slot instead of consuming control slot",
+      "offset": 86,
+      "changed_key": "reference",
+      "replacement": {
+        "owner": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO",
+        "name": "O00OOOooOoooOoo0o0o0oO0O",
+        "descriptor": "Ljava/lang/Object;",
+        "cp_tag": 9
+      },
+      "coarse_reference_predicate_accepts": true,
+      "semantic_predicate_accepts": false
+    },
+    {
+      "mapping_id": "ysm265.method.expression-evaluator-impl-visit-loop",
+      "mutation": "False loop-body result stops repeat",
+      "offset": 12,
+      "changed_key": "branch_target",
+      "replacement": 24,
+      "coarse_reference_predicate_accepts": true,
+      "semantic_predicate_accepts": false
+    },
+    {
+      "mapping_id": "ysm265.method.expression-evaluator-impl-visit-for-each",
+      "mutation": "False foreach-body result stops iteration",
+      "offset": 41,
+      "changed_key": "branch_target",
+      "replacement": 50,
+      "coarse_reference_predicate_accepts": true,
+      "semantic_predicate_accepts": false
+    },
+    {
+      "mapping_id": "ysm265.method.standard-bindings-loop-evaluate",
+      "mutation": "Alter cap",
+      "offset": 19,
+      "changed_key": "immediate",
+      "replacement": 1025,
+      "coarse_reference_predicate_accepts": true,
+      "semantic_predicate_accepts": false
+    },
+    {
+      "mapping_id": "ysm265.method.standard-bindings-for-each-evaluate",
+      "mutation": "Use argument0 instead of argument1 for iterable evaluation",
+      "offset": 51,
+      "changed_key": "opcode",
+      "replacement": "0x3",
+      "coarse_reference_predicate_accepts": true,
+      "semantic_predicate_accepts": false
+    },
+    {
+      "mapping_id": "ysm265.method.expression-evaluator-impl-visit-execution-scope-in-loop",
+      "mutation": "Narrow first finally catch-all to Exception",
+      "coarse_reference_predicate_accepts": true,
+      "semantic_predicate_accepts": false
+    },
+    {
+      "mapping_id": "ysm265.method.expression-evaluator-impl-visit-loop",
+      "mutation": "iinc loop counter by0 instead of1; retained parser instruction records unchanged",
+      "coarse_reference_predicate_accepts": true,
+      "semantic_predicate_accepts": false
+    },
+    {
+      "mapping_id": "ysm265.field.standard-bindings-loop-func",
+      "mutation": "Swap bootstrap0 implementation method handle to foreach synthetic implementation while retaining descriptor",
+      "coarse_descriptor_accepts": true,
+      "semantic_predicate_accepts": false,
+      "expected_handle": {
+        "cp_tag": 15,
+        "reference_kind": 6,
+        "reference": {
+          "cp_tag": 10,
+          "owner": "com/elfmcys/yesstevemodel/OOooO0oOOOoO000oOo0O00Oo",
+          "name": "o0OOooo0o0OO00OoOOOo0o0O",
+          "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo;)Ljava/lang/Object;"
+        }
+      },
+      "mutated_handle": {
+        "cp_tag": 15,
+        "reference_kind": 6,
+        "reference": {
+          "cp_tag": 10,
+          "owner": "com/elfmcys/yesstevemodel/OOooO0oOOOoO000oOo0O00Oo",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo;)Ljava/lang/Object;"
+        }
+      }
+    }
+  ],
+  "ambiguities_and_plateau": [
+    "AssignableVariableExpression unpromoted; normalized source-like class shape has 2/955 candidates, differentiable by target owner/accessor but full AST class promotion not needed for this path.",
+    "No extra standalone getters except scope expressions required to close body dispatch.",
+    "No full binary operator/lambda table recovery; arrow evaluator return-value propagation stays outside this campaign. createChild itself matches entity-only creation and no parent-state copy.",
+    "No original names; retained global divergence; no runtime/native/protection/decryption actions.",
+    "Existing auditor does not decode local load/store indices or iinc amounts; supplemental records cover every raw instruction operand and semantic negatives include increment mutation; independent parent review must retain these supplementary checks."
+  ],
+  "verification_tool": "tools/audit_seed_recovery_ysm_265.py",
+  "verification_limits": "Static exact declaration/instruction/reference/encoded operand/handler audit; source semantic comparison separately reviewed. No Minecraft/JVM runtime execution, whole-source equivalence, native/protection/model decryption or original-symbol proof."
+}
