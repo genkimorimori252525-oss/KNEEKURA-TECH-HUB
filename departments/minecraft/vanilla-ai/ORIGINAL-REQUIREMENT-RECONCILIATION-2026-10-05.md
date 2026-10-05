@@ -1,4 +1,4 @@
-# Original requirement reconciliation — R70
+# Original requirement reconciliation — R71/R72
 
 The original `/goal` remains `LOCAL-EXECUTION-HANDOFF-2026-10-02.md`. A private requirement/proof map reconciles34 groups, all51 original section21 checkbox items and56 source/evidence document hashes at1363ff5. R63 native/scoped scheduling evidence is additive. This map is not the final whole-diff independent audit or an original-goal completion declaration.
 
@@ -21,3 +21,8 @@ Optional Decision stages, `NOT_EXPOSED`, `NOT_CAPTURED`, partial paths and bound
 | User Tank / visibility requests | Official Tank remains readonly; private disjoint generation/save/new-owner reconnect/original expiry, R63 paired pixels and paced scheduling are scoped actual evidence. Reset/dynamic fidelity, broader rendering and general performance remain explicit limitations. Trail age and stable projectile identity colors are implemented in retained R28–R39; fresh random colors per frame are not required. [Stopped-parent retention](STOPPED-MOTION-RETENTION-2026-10-05.md) reproduces and fixes stationary related-projectile cache pressure with preserved raw/age/gap/bounds; the user's exact surface and new native pixel acceptance remain unconfirmed. |
 
 [Current matrix](REMAINING-EXECUTION-MATRIX-2026-10-04.md) retains the detailed historical evidence. [R63 display/scheduling](TANK-DISPLAY-AND-PACING-2026-10-05.md) and [world authority](../DEBUG-WORLD-AUTHORITY-2026-10-04.md) record the latest scoped Tank proof. No merge, full acceptance or scope reduction is implied.
+
+
+## R71/R72 scoped reconciliation
+
+[Integrated observations](INTEGRATED-OBSERVATIONS-2026-10-05.md) now records same-context packets/details/current production browser views, distinct pursuit diagnostic checkpoints, existing controlled omission and retained Phantom cadence. [Nine separate cost groups](NINE-OBSERVER-COSTS-2026-10-05.md) now records18 matched native runs and actual offline/render measurements. Foundation CAS9130 files and all13 anchors were reverified. These additions resolve the acquisition/reconciliation tasks above within their declared source/workload scope; optional unexposed causes, every subclass/battle/version and GPU completion remain unknown. [All51 original criteria](ORIGINAL-ACCEPTANCE-CHECKLIST-2026-10-05.md) preserve the exact wording and final CI/review gates. No extra native branch is required solely to fabricate an optional reason.
