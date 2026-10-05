@@ -1,0 +1,106 @@
+{
+  "schema": "kneekura.original-brain-start-loop-source/v1",
+  "scope": "ORIGINAL_ACTIVITY_MEMBERSHIP_CONTROL_STATUS_AND_TRY_START_RETURNS_PREFIX_NOT_PRIORITY_OR_ALL_ELIGIBILITY_REASONS",
+  "minecraft": "1.20.1",
+  "forge": "47.2.0",
+  "namespace": "Mojmap",
+  "minecraft_artifact_sha256": "1b6e6a166fbc06c6d2422cd5cf515a508977479045095363d5b4c8b89cc7b4eb",
+  "disassembly_provider": {
+    "name": "jdk-javap-v1",
+    "options": [
+      "-private",
+      "-s",
+      "-c",
+      "-l",
+      "-verbose"
+    ],
+    "executable_hash": "bd5a9f99365fd432f79162f4ed9ca9b956c78cc81dfb6962adb6d207075711fb",
+    "jdk_components": {
+      "release": "00d3211a59bc9f2577f93962e9210de8578c49fd2625022cb38606817d3a71f9",
+      "lib/modules": "81f0e1bb87cd303ddcce2b216e27da416bd20799d9a9811ea1b070123cefff0f"
+    },
+    "jdk_image_status": "HASHED"
+  },
+  "classes": [
+    {
+      "owner": "net/minecraft/world/entity/ai/Brain",
+      "class_hash": "441ee6715fb13f271943a9a462c5ff64e491a993ff28d724df06885d83012a3d",
+      "disassembly_hash": "d25d42a41b31c1bb5d24cac87573c1616e163df34980e362d124ca77e8e7b146",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/brain-result-r50-source/Brain.javap.txt",
+      "selected_members": [
+        {
+          "name": "availableBehaviorsByPriority",
+          "header": "private final java.util.Map<java.lang.Integer, java.util.Map<net.minecraft.world.entity.schedule.Activity, java.util.Set<net.minecraft.world.entity.ai.behavior.BehaviorControl<? super E>>>> availableBehaviorsByPriority;",
+          "descriptor": "descriptor: Ljava/util/Map;",
+          "lineStart": 880,
+          "lineEnd": 884,
+          "sliceSha256": "83ae0dbde8bbfe50874adf6323a6a6b17c89510d3803d5f7d8bfc038ef40ad5b"
+        },
+        {
+          "name": "activeActivities",
+          "header": "private final java.util.Set<net.minecraft.world.entity.schedule.Activity> activeActivities;",
+          "descriptor": "descriptor: Ljava/util/Set;",
+          "lineStart": 904,
+          "lineEnd": 908,
+          "sliceSha256": "7d9923515869d7a6353e1c81f7d7541c6b227f2ba915bc7e5c5be276d3a9f0fe"
+        },
+        {
+          "name": "tick",
+          "header": "public void tick(net.minecraft.server.level.ServerLevel, E);",
+          "descriptor": "descriptor: (Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)V",
+          "lineStart": 2552,
+          "lineEnd": 2588,
+          "sliceSha256": "03d925f3e2c580e84a6ff8d208c59cda5c6f881d9d937db9096923241b8a62b1"
+        },
+        {
+          "name": "startEachNonRunningBehavior",
+          "header": "private void startEachNonRunningBehavior(net.minecraft.server.level.ServerLevel, E);",
+          "descriptor": "descriptor: (Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)V",
+          "lineStart": 2760,
+          "lineEnd": 2874,
+          "sliceSha256": "87cfc22316a5c69d05bf85731607c474d72073dd29a542d6804370136e09aecf"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/BehaviorControl",
+      "class_hash": "bf5d1010d11a963210827ad30c53faa51540309b4d47add7f6fbe6b567d41de4",
+      "disassembly_hash": "d95dbb893b88eb592790cacb8e5e3f45bea5bcbef18af5e2a5adc0c66c8859fd",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/goal-brain-research-r47-r3/BehaviorControl.javap.txt",
+      "selected_members": [
+        {
+          "name": "getStatus",
+          "header": "public abstract net.minecraft.world.entity.ai.behavior.Behavior$Status getStatus();",
+          "descriptor": "descriptor: ()Lnet/minecraft/world/entity/ai/behavior/Behavior$Status;",
+          "lineStart": 38,
+          "lineEnd": 41,
+          "sliceSha256": "12b28f3392d1ed8a8802516181adcb68659c2def7ff75b5e32952369962152b3"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/Behavior",
+      "class_hash": "bb73feb84c79565213f7a6001c47d0e1cc2fc7d947a89d99ae5c70b5e058e7dd",
+      "disassembly_hash": "a14ed1bb37e1bbba57916781421c53353d6bff2b8346758b240b0a2d3968f6d0",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/goal-brain-research-r47-r3/Behavior.javap.txt",
+      "selected_members": [
+        {
+          "name": "status",
+          "header": "private net.minecraft.world.entity.ai.behavior.Behavior$Status status;",
+          "descriptor": "descriptor: Lnet/minecraft/world/entity/ai/behavior/Behavior$Status;",
+          "lineStart": 215,
+          "lineEnd": 218,
+          "sliceSha256": "63d51254e44d38bdd974eae17f54718e0440f5e125e45f7994123dcf3e35cad5"
+        },
+        {
+          "name": "getStatus",
+          "header": "public net.minecraft.world.entity.ai.behavior.Behavior$Status getStatus();",
+          "descriptor": "descriptor: ()Lnet/minecraft/world/entity/ai/behavior/Behavior$Status;",
+          "lineStart": 318,
+          "lineEnd": 334,
+          "sliceSha256": "a472b28e1cff8f4e25bbba1e57c9b300e1e3efae1396ab46fcc9afc509b84670"
+        }
+      ]
+    }
+  ]
+}

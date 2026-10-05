@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "workspaceId": "official-g3-tank",
+  "workspaceDir": "C:/Users/genki/.codex/worktrees/g3-real-machine-acceptance/reimu-mod",
+  "runtimeRoot": "debug-runtime-official-tank",
+  "readyTimeoutMs": 1200000,
+  "worldName": "KNEEKURA_DEBUG_WORLD",
+  "gameDir": "run/client_a",
+  "requireExistingWorld": true,
+  "requireGitIdentity": true,
+  "decisionHooks": false,
+  "motionOverlay": false,
+  "launch": {
+    "command": "gradlew.bat",
+    "args": ["runClient", "--offline", "--console=plain"],
+    "shell": true,
+    "env": {}
+  }
+}

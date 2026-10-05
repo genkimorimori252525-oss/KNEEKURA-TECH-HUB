@@ -1,0 +1,266 @@
+{
+  "schema": "kneekura.original-brain-path-compute-source/v1",
+  "scope": "EXACT_ORIGINAL_PRIVATE_COMPUTE_CREATE_FINDER_RETURN_AND_PATH_WRITE_NOT_CAN_REACH_ADOPTION_OR_ARRIVAL",
+  "minecraft": "1.20.1",
+  "forge": "47.2.0",
+  "namespace": "Mojmap",
+  "minecraft_artifact_sha256": "1b6e6a166fbc06c6d2422cd5cf515a508977479045095363d5b4c8b89cc7b4eb",
+  "disassembly_provider": {
+    "name": "jdk-javap-v1",
+    "options": [
+      "-private",
+      "-s",
+      "-c",
+      "-l",
+      "-verbose"
+    ],
+    "executable_hash": "bd5a9f99365fd432f79162f4ed9ca9b956c78cc81dfb6962adb6d207075711fb",
+    "jdk_components": {
+      "release": "00d3211a59bc9f2577f93962e9210de8578c49fd2625022cb38606817d3a71f9",
+      "lib/modules": "81f0e1bb87cd303ddcce2b216e27da416bd20799d9a9811ea1b070123cefff0f"
+    },
+    "jdk_image_status": "HASHED"
+  },
+  "classes": [
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/MoveToTargetSink",
+      "class_hash": "e2b60638bb381a1d96702bea9701e594c001ae7138b8134b3ecbdee8f0771dae",
+      "disassembly_hash": "7cd6e7de45969754ab5ec0163cd39f89887b25b27a9d061dad8ee46386c4e846",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/brain-result-r50-source/MoveToTargetSink.javap.txt",
+      "selected_members": [
+        {
+          "name": "path",
+          "header": "private net.minecraft.world.level.pathfinder.Path path;",
+          "descriptor": "descriptor: Lnet/minecraft/world/level/pathfinder/Path;",
+          "lineStart": 357,
+          "lineEnd": 363,
+          "sliceSha256": "59ab47b0d9bffaa14b08a83f6c7128a657e500c1e6c0a3aa544b85198d31eca1"
+        },
+        {
+          "name": "lastTargetPos",
+          "header": "private net.minecraft.core.BlockPos lastTargetPos;",
+          "descriptor": "descriptor: Lnet/minecraft/core/BlockPos;",
+          "lineStart": 364,
+          "lineEnd": 370,
+          "sliceSha256": "afc2e905ab61a9cbc6c4f5e12ec680ab2490ba06e86a9183dbb1f2b99b3a474c"
+        },
+        {
+          "name": "speedModifier",
+          "header": "private float speedModifier;",
+          "descriptor": "descriptor: F",
+          "lineStart": 371,
+          "lineEnd": 374,
+          "sliceSha256": "f4e88cb75e50e64524e1cc866d53bce55502c680a19a3e3aea514f9c31635db3"
+        },
+        {
+          "name": "checkExtraStartConditions",
+          "header": "protected boolean checkExtraStartConditions(net.minecraft.server.level.ServerLevel, net.minecraft.world.entity.Mob);",
+          "descriptor": "descriptor: (Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/Mob;)Z",
+          "lineStart": 420,
+          "lineEnd": 511,
+          "sliceSha256": "58496bb114803c9f477f48f77bccf9b777caf733aabacd3b887fd6ccb87b0ebc"
+        },
+        {
+          "name": "start",
+          "header": "protected void start(net.minecraft.server.level.ServerLevel, net.minecraft.world.entity.Mob, long);",
+          "descriptor": "descriptor: (Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/Mob;J)V",
+          "lineStart": 658,
+          "lineEnd": 689,
+          "sliceSha256": "829a648d950bb67fd6d46907c42b1e26c93a3ee20a31d382d90aa2739f4d6cde"
+        },
+        {
+          "name": "tick",
+          "header": "protected void tick(net.minecraft.server.level.ServerLevel, net.minecraft.world.entity.Mob, long);",
+          "descriptor": "descriptor: (Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/Mob;J)V",
+          "lineStart": 690,
+          "lineEnd": 794,
+          "sliceSha256": "bb3d02cf7d9c0a6fecae902b1cb6f62996eb33d76bbee3601a7fbab40b1cd6cd"
+        },
+        {
+          "name": "tryComputePath",
+          "header": "private boolean tryComputePath(net.minecraft.world.entity.Mob, net.minecraft.world.entity.ai.memory.WalkTarget, long);",
+          "descriptor": "descriptor: (Lnet/minecraft/world/entity/Mob;Lnet/minecraft/world/entity/ai/memory/WalkTarget;J)Z",
+          "lineStart": 795,
+          "lineEnd": 943,
+          "sliceSha256": "42761525a57a231cc4c4679153ef121dcfc9c71b61e116f05cd6e19430c6c117"
+        },
+        {
+          "name": "reachedTarget",
+          "header": "private boolean reachedTarget(net.minecraft.world.entity.Mob, net.minecraft.world.entity.ai.memory.WalkTarget);",
+          "descriptor": "descriptor: (Lnet/minecraft/world/entity/Mob;Lnet/minecraft/world/entity/ai/memory/WalkTarget;)Z",
+          "lineStart": 944,
+          "lineEnd": 974,
+          "sliceSha256": "9e0fbd59dd2cb4df8cbdea9208ac99c7af0fc892f8b5513b1f80033173588fc7"
+        },
+        {
+          "name": "checkExtraStartConditions",
+          "header": "protected boolean checkExtraStartConditions(net.minecraft.server.level.ServerLevel, net.minecraft.world.entity.LivingEntity);",
+          "descriptor": "descriptor: (Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)Z",
+          "lineStart": 1009,
+          "lineEnd": 1025,
+          "sliceSha256": "83a97bad59916b7ebc1664f74743152f4c836540c652e30227529a16b3f96836"
+        },
+        {
+          "name": "tick",
+          "header": "protected void tick(net.minecraft.server.level.ServerLevel, net.minecraft.world.entity.LivingEntity, long);",
+          "descriptor": "descriptor: (Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "lineStart": 1062,
+          "lineEnd": 1079,
+          "sliceSha256": "e71aab9f3734fe07563b14296f155359152b88d24c3e58b4d6ef9f2dc8f277d0"
+        },
+        {
+          "name": "start",
+          "header": "protected void start(net.minecraft.server.level.ServerLevel, net.minecraft.world.entity.LivingEntity, long);",
+          "descriptor": "descriptor: (Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "lineStart": 1080,
+          "lineEnd": 1096,
+          "sliceSha256": "811a84d0e9c6b06c563c678e477da156bb7f9475d10e4cccd9dbfda2840db542"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/navigation/PathNavigation",
+      "class_hash": "78346d21ea9ba13ddbc7211666f3a80b54d773a864203922bb71d336b4dac2ac",
+      "disassembly_hash": "0322906326eaa641c89f534b772402fb67057e573b1e70c6f5bd2b0636793b58",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/brain-result-r50-source/PathNavigation.javap.txt",
+      "selected_members": [
+        {
+          "name": "mob",
+          "header": "protected final net.minecraft.world.entity.Mob mob;",
+          "descriptor": "descriptor: Lnet/minecraft/world/entity/Mob;",
+          "lineStart": 670,
+          "lineEnd": 673,
+          "sliceSha256": "593f8585dde30248bb603016407a5cf0f7d396a54bba7610406e422abcd48cfd"
+        },
+        {
+          "name": "level",
+          "header": "protected final net.minecraft.world.level.Level level;",
+          "descriptor": "descriptor: Lnet/minecraft/world/level/Level;",
+          "lineStart": 674,
+          "lineEnd": 677,
+          "sliceSha256": "1c2eeaaaa806cf04d794b0426eb3f75cd8f03df2afe7eb550f0f8415932ffb0f"
+        },
+        {
+          "name": "path",
+          "header": "protected net.minecraft.world.level.pathfinder.Path path;",
+          "descriptor": "descriptor: Lnet/minecraft/world/level/pathfinder/Path;",
+          "lineStart": 678,
+          "lineEnd": 684,
+          "sliceSha256": "1c4f22575aacf668af1edeaeab26fabf787b95fb68e7ad1dfa9363f43e651c70"
+        },
+        {
+          "name": "targetPos",
+          "header": "private net.minecraft.core.BlockPos targetPos;",
+          "descriptor": "descriptor: Lnet/minecraft/core/BlockPos;",
+          "lineStart": 733,
+          "lineEnd": 739,
+          "sliceSha256": "a1d74517e3ad1e4f626b25017ba28969cbc976d6a5e24071a2985792cfaf48e4"
+        },
+        {
+          "name": "maxVisitedNodesMultiplier",
+          "header": "private float maxVisitedNodesMultiplier;",
+          "descriptor": "descriptor: F",
+          "lineStart": 744,
+          "lineEnd": 747,
+          "sliceSha256": "b5d58c9e132ddd10f554b0ad2b19c9136f51d29670535075035acd8febbafe17"
+        },
+        {
+          "name": "pathFinder",
+          "header": "private final net.minecraft.world.level.pathfinder.PathFinder pathFinder;",
+          "descriptor": "descriptor: Lnet/minecraft/world/level/pathfinder/PathFinder;",
+          "lineStart": 748,
+          "lineEnd": 751,
+          "sliceSha256": "28f916d19e06ffddebbf7905de6a24532902f32059d463cb91f15a3f489fe12d"
+        },
+        {
+          "name": "createPath",
+          "header": "public final net.minecraft.world.level.pathfinder.Path createPath(double, double, double, int);",
+          "descriptor": "descriptor: (DDDI)Lnet/minecraft/world/level/pathfinder/Path;",
+          "lineStart": 941,
+          "lineEnd": 966,
+          "sliceSha256": "3937fb0fbedcfee92cae13a0e7fd935de261b4087f17f0b914d8c63360d9d26c"
+        },
+        {
+          "name": "createPath",
+          "header": "public net.minecraft.world.level.pathfinder.Path createPath(java.util.stream.Stream<net.minecraft.core.BlockPos>, int);",
+          "descriptor": "descriptor: (Ljava/util/stream/Stream;I)Lnet/minecraft/world/level/pathfinder/Path;",
+          "lineStart": 967,
+          "lineEnd": 996,
+          "sliceSha256": "7118ef4994a00626e323f1423f7cebbaac7375cbb6dc9b7538f403d212c57a0a"
+        },
+        {
+          "name": "createPath",
+          "header": "public net.minecraft.world.level.pathfinder.Path createPath(java.util.Set<net.minecraft.core.BlockPos>, int);",
+          "descriptor": "descriptor: (Ljava/util/Set;I)Lnet/minecraft/world/level/pathfinder/Path;",
+          "lineStart": 997,
+          "lineEnd": 1023,
+          "sliceSha256": "2d91a1838641896d32eb9e4d30d8e24484de2d12c7012a2d75ce2f77a98e2f2c"
+        },
+        {
+          "name": "createPath",
+          "header": "public net.minecraft.world.level.pathfinder.Path createPath(net.minecraft.core.BlockPos, int);",
+          "descriptor": "descriptor: (Lnet/minecraft/core/BlockPos;I)Lnet/minecraft/world/level/pathfinder/Path;",
+          "lineStart": 1024,
+          "lineEnd": 1047,
+          "sliceSha256": "034b41710ac4957f4248d538c08a5a2dca1332d357c92ace6b4ecba515b01696"
+        },
+        {
+          "name": "createPath",
+          "header": "public net.minecraft.world.level.pathfinder.Path createPath(net.minecraft.core.BlockPos, int, int);",
+          "descriptor": "descriptor: (Lnet/minecraft/core/BlockPos;II)Lnet/minecraft/world/level/pathfinder/Path;",
+          "lineStart": 1048,
+          "lineEnd": 1074,
+          "sliceSha256": "39462e1e440a96b6bed8392bbd94cedd2dc02aa4506bcf98a807512a98d4481c"
+        },
+        {
+          "name": "createPath",
+          "header": "public net.minecraft.world.level.pathfinder.Path createPath(net.minecraft.world.entity.Entity, int);",
+          "descriptor": "descriptor: (Lnet/minecraft/world/entity/Entity;I)Lnet/minecraft/world/level/pathfinder/Path;",
+          "lineStart": 1075,
+          "lineEnd": 1099,
+          "sliceSha256": "46de63800ca9fa84b054cbe942a2a35a9d2db21cab739da8b0d6015e3ea46ad7"
+        },
+        {
+          "name": "createPath",
+          "header": "protected net.minecraft.world.level.pathfinder.Path createPath(java.util.Set<net.minecraft.core.BlockPos>, int, boolean, int);",
+          "descriptor": "descriptor: (Ljava/util/Set;IZI)Lnet/minecraft/world/level/pathfinder/Path;",
+          "lineStart": 1100,
+          "lineEnd": 1133,
+          "sliceSha256": "7b9a389a22b6d66aad8be5fc04b844be4568fd4f040099a0c543490dcc259e71"
+        },
+        {
+          "name": "createPath",
+          "header": "protected net.minecraft.world.level.pathfinder.Path createPath(java.util.Set<net.minecraft.core.BlockPos>, int, boolean, int, float);",
+          "descriptor": "descriptor: (Ljava/util/Set;IZIF)Lnet/minecraft/world/level/pathfinder/Path;",
+          "lineStart": 1134,
+          "lineEnd": 1299,
+          "sliceSha256": "143221c45e534dc438f9cfacded8c99d28abd8c7687618810488b59e993a045a"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/level/pathfinder/PathFinder",
+      "class_hash": "5d308818c953fcba2353de06b03fb4a80a0f12370c7f92f1baad7f7d574cae3b",
+      "disassembly_hash": "d929f5154b88c5c977b99d47a7e0d8003a4d45373e08989b2b04711e8dc4f4aa",
+      "disassembly_locator": "K:/kneekura-decision-native-data-20261003/ai-bytecode/PathFinder.javap.txt",
+      "selected_members": [
+        {
+          "name": "findPath",
+          "header": "public net.minecraft.world.level.pathfinder.Path findPath(net.minecraft.world.level.PathNavigationRegion, net.minecraft.world.entity.Mob, java.util.Set<net.minecraft.core.BlockPos>, float, int, float);",
+          "descriptor": "descriptor: (Lnet/minecraft/world/level/PathNavigationRegion;Lnet/minecraft/world/entity/Mob;Ljava/util/Set;FIF)Lnet/minecraft/world/level/pathfinder/Path;",
+          "lineStart": 505,
+          "lineEnd": 586,
+          "sliceSha256": "bd9b523a85a8bba1d35f6e38a132a01afb53870b9d2a9ac8787cbb1b4dcf8a6b"
+        },
+        {
+          "name": "findPath",
+          "header": "protected net.minecraft.world.level.pathfinder.Path findPath(net.minecraft.util.profiling.ProfilerFiller, net.minecraft.world.level.pathfinder.Node, java.util.Map<net.minecraft.world.level.pathfinder.Target, net.minecraft.core.BlockPos>, float, int, float);",
+          "descriptor": "descriptor: (Lnet/minecraft/util/profiling/ProfilerFiller;Lnet/minecraft/world/level/pathfinder/Node;Ljava/util/Map;FIF)Lnet/minecraft/world/level/pathfinder/Path;",
+          "lineStart": 587,
+          "lineEnd": 944,
+          "sliceSha256": "83ff82121a247c3fc2e3ea97b350e173b4d9427f385198c5cca012b20f1714a0"
+        }
+      ]
+    }
+  ]
+}

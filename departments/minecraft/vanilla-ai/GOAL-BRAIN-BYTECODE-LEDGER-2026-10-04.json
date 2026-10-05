@@ -1,0 +1,1951 @@
+{
+  "schema_version": 1,
+  "minecraft": "1.20.1",
+  "loader": "forge",
+  "loader_version": "47.2.0",
+  "namespace": "mojmap",
+  "artifact_stage": "resolved_userdev",
+  "foundation_map_id": "522cbb565d187f8e1e7b97140206f5ac11e8ca90719528bd661f875f184e34fd",
+  "source_index_snapshot_id": "55a63559b62697c11e8ece0cd2fcb97d2db4730684789a31240b2c515f08ba06",
+  "minecraft_artifact_sha256": "1b6e6a166fbc06c6d2422cd5cf515a508977479045095363d5b4c8b89cc7b4eb",
+  "provider": {
+    "name": "jdk-javap-v1",
+    "options": [
+      "-private",
+      "-s",
+      "-c",
+      "-l",
+      "-verbose"
+    ],
+    "executable_hash": "bd5a9f99365fd432f79162f4ed9ca9b956c78cc81dfb6962adb6d207075711fb",
+    "jdk_components": {
+      "release": "00d3211a59bc9f2577f93962e9210de8578c49fd2625022cb38606817d3a71f9",
+      "lib/modules": "81f0e1bb87cd303ddcce2b216e27da416bd20799d9a9811ea1b070123cefff0f"
+    },
+    "jdk_image_status": "HASHED"
+  },
+  "original_ledger_sha256": "afa74e9bd62749f7d340e9174e84016f2b572bef75252834311ede4d755a4e13",
+  "scope": "ADDITIVE_GOAL_BRAIN_SELECTED_METHOD_AND_FIELD_EXPLANATION_EVIDENCE",
+  "not_a_claim_of": [
+    "all subclass semantics",
+    "runtime-loaded transformed bytes",
+    "native behavior acceptance",
+    "complete original requirement 21"
+  ],
+  "slice_hash_contract": "SHA256 of UTF8 lines[line_start-1:line_end].join(LF), preserving each retained CR; line numbers refer to the private whole javap output, not Java source. A slice includes descriptor and metadata; it is not a canonical bytecode-body hash.",
+  "local_only_artifacts": [
+    "JAR bytes",
+    "class bytes",
+    "whole javap outputs",
+    "machine paths"
+  ],
+  "classes": [
+    {
+      "owner": "net/minecraft/world/entity/ai/goal/Goal",
+      "class_hash": "ac4e31853768b9b4fa931d12158038e177f310b6596fc5e764e1a0f77b00276d",
+      "disassembly_hash": "322884b77965f356892b0eb2ad7eecea8a9dbc8935bfc3c7138df120adef738a",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "origin": "HASH_VERIFIED_ORIGINAL_DISASSEMBLY",
+      "member_count": 13,
+      "selected_members": [
+        {
+          "declaration": "public net.minecraft.world.entity.ai.goal.Goal();",
+          "descriptor": "()V",
+          "line_start": 103,
+          "line_end": 121,
+          "disassembly_slice_sha256": "7e84a252a6d235e6967074066f0453193d0cbcb92030353c3c79252ff8717a68"
+        },
+        {
+          "declaration": "public abstract boolean canUse();",
+          "descriptor": "()Z",
+          "line_start": 122,
+          "line_end": 125,
+          "disassembly_slice_sha256": "5299b70bfd265201dfa730471b625edad22bdda824e0542c9211ac362686d7c6"
+        },
+        {
+          "declaration": "public boolean canContinueToUse();",
+          "descriptor": "()Z",
+          "line_start": 126,
+          "line_end": 139,
+          "disassembly_slice_sha256": "a595502a760c18b2a297b5fd63966c660de563503ae8e5b5e6e7e65ca1409a8b"
+        },
+        {
+          "declaration": "public boolean isInterruptable();",
+          "descriptor": "()Z",
+          "line_start": 140,
+          "line_end": 152,
+          "disassembly_slice_sha256": "2a9dacff4df01904e73fdc5898de3defc4b9b71049d89512c412aeec31a1684d"
+        },
+        {
+          "declaration": "public void start();",
+          "descriptor": "()V",
+          "line_start": 153,
+          "line_end": 164,
+          "disassembly_slice_sha256": "ce014252f7bd79fe174195a230b2a934d1a2271434658600e6ee7e0ece9f9866"
+        },
+        {
+          "declaration": "public void stop();",
+          "descriptor": "()V",
+          "line_start": 165,
+          "line_end": 176,
+          "disassembly_slice_sha256": "b1e8d0ddd2ca0f6dab2c78c41fd706e5c64e2e9a2fccadabe0cf0838b2e69ff5"
+        },
+        {
+          "declaration": "public boolean requiresUpdateEveryTick();",
+          "descriptor": "()Z",
+          "line_start": 177,
+          "line_end": 189,
+          "disassembly_slice_sha256": "22bf6506846d742e6b2942a91c445ee7ddbe63e9be823ab0f41f343f1eb71082"
+        },
+        {
+          "declaration": "public void tick();",
+          "descriptor": "()V",
+          "line_start": 190,
+          "line_end": 201,
+          "disassembly_slice_sha256": "f0bd8dbf3279fe429416921e8f58c07423039405313cab41fcccc2b7633e6bc0"
+        },
+        {
+          "declaration": "public void setFlags(java.util.EnumSet<net.minecraft.world.entity.ai.goal.Goal$Flag>);",
+          "descriptor": "(Ljava/util/EnumSet;)V",
+          "line_start": 202,
+          "line_end": 228,
+          "disassembly_slice_sha256": "3ff198d5e2151cb3271137c1e81fd5067251653fae02913943f6c8dac40da000"
+        },
+        {
+          "declaration": "public java.lang.String toString();",
+          "descriptor": "()Ljava/lang/String;",
+          "line_start": 229,
+          "line_end": 243,
+          "disassembly_slice_sha256": "2d9088564aabd4e6c01b24dda935609981f47674cff982949b55becfe5875203"
+        },
+        {
+          "declaration": "public java.util.EnumSet<net.minecraft.world.entity.ai.goal.Goal$Flag> getFlags();",
+          "descriptor": "()Ljava/util/EnumSet;",
+          "line_start": 244,
+          "line_end": 258,
+          "disassembly_slice_sha256": "413aba0002d3aeeddf3ccccb868dd0074d99a6e8c5935d5cb4d861b4a80ee343"
+        },
+        {
+          "declaration": "protected int adjustedTickDelay(int);",
+          "descriptor": "(I)I",
+          "line_start": 259,
+          "line_end": 287,
+          "disassembly_slice_sha256": "1bf9f235384fbf3fddd6f6bfb8900ea851974c45ff2c01f34c97a7a6a6c3cf30"
+        },
+        {
+          "declaration": "protected static int reducedTickDelay(int);",
+          "descriptor": "(I)I",
+          "line_start": 288,
+          "line_end": 301,
+          "disassembly_slice_sha256": "ee0e53d71a03a24fd2085c0f54c66b5fe2e72d3e983977549c7df07b11ebe810"
+        }
+      ],
+      "selected_fields": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/goal/Goal$Flag",
+      "class_hash": "63a08d04330d334cdb6e39581d0d7e66765d59a344059fdb4a54cd164fcfe694",
+      "disassembly_hash": "b67e4499ef37dd817ac71e4df39333512c621a07208db497d8e75095bfb6c93d",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "origin": "FRESH_GENUINE_JAVAP_SAME_ARTIFACT",
+      "member_count": 5,
+      "selected_members": [],
+      "selected_fields": [
+        {
+          "declaration": "public static final net.minecraft.world.entity.ai.goal.Goal$Flag MOVE;",
+          "descriptor": "Lnet/minecraft/world/entity/ai/goal/Goal$Flag;",
+          "line_start": 76,
+          "line_end": 79,
+          "disassembly_slice_sha256": "9f1dbeb68c29630758e89cb749e8b96ee35b54a594ddb85707d2fd51e771f9ae"
+        },
+        {
+          "declaration": "public static final net.minecraft.world.entity.ai.goal.Goal$Flag LOOK;",
+          "descriptor": "Lnet/minecraft/world/entity/ai/goal/Goal$Flag;",
+          "line_start": 80,
+          "line_end": 83,
+          "disassembly_slice_sha256": "c7b7d70a7ef5ad9eaf38e507ff3b8171cb5fafa8f0599a0e9c5b6c723c07a86f"
+        },
+        {
+          "declaration": "public static final net.minecraft.world.entity.ai.goal.Goal$Flag JUMP;",
+          "descriptor": "Lnet/minecraft/world/entity/ai/goal/Goal$Flag;",
+          "line_start": 84,
+          "line_end": 87,
+          "disassembly_slice_sha256": "ffa87b594bb8a83cafdd429162b805570a58735322124d9ab1d07657be1e0bc7"
+        },
+        {
+          "declaration": "public static final net.minecraft.world.entity.ai.goal.Goal$Flag TARGET;",
+          "descriptor": "Lnet/minecraft/world/entity/ai/goal/Goal$Flag;",
+          "line_start": 88,
+          "line_end": 91,
+          "disassembly_slice_sha256": "7b611eea42cac3d4e4bc7e17938c36ec4a92f0e2d14d3a67d2d4cee3e1b9d30e"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/goal/WrappedGoal",
+      "class_hash": "3ecb3ba3f369809589cc5e0f560dc15b003aa83bffde744a0870c06e77cab0a3",
+      "disassembly_hash": "a2a164853e80dad3e5506d2c39d53482380d248ccda54cfdeb6dd7423a3fd76b",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "origin": "HASH_VERIFIED_ORIGINAL_DISASSEMBLY",
+      "member_count": 17,
+      "selected_members": [
+        {
+          "declaration": "public net.minecraft.world.entity.ai.goal.WrappedGoal(int, net.minecraft.world.entity.ai.goal.Goal);",
+          "descriptor": "(ILnet/minecraft/world/entity/ai/goal/Goal;)V",
+          "line_start": 128,
+          "line_end": 152,
+          "disassembly_slice_sha256": "f77d58f7ddf5167a890a3ae3ed0049083c8990957568daa7df7c2fff51e5bd54"
+        },
+        {
+          "declaration": "public boolean canBeReplacedBy(net.minecraft.world.entity.ai.goal.WrappedGoal);",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/goal/WrappedGoal;)Z",
+          "line_start": 153,
+          "line_end": 181,
+          "disassembly_slice_sha256": "ddcc6f33caf80455ca12e8cabfc996d8644bf36f25fb1be930f0964b8cae905c"
+        },
+        {
+          "declaration": "public boolean canUse();",
+          "descriptor": "()Z",
+          "line_start": 182,
+          "line_end": 196,
+          "disassembly_slice_sha256": "017056b7b265b76a9e54ac15ddec9baf311739186aa470c6219fa600013fb43f"
+        },
+        {
+          "declaration": "public boolean canContinueToUse();",
+          "descriptor": "()Z",
+          "line_start": 197,
+          "line_end": 211,
+          "disassembly_slice_sha256": "78fd7f630136606660086ae136a8b70fccd55a15da2dfc1de181c0364a0ec7ed"
+        },
+        {
+          "declaration": "public boolean isInterruptable();",
+          "descriptor": "()Z",
+          "line_start": 212,
+          "line_end": 226,
+          "disassembly_slice_sha256": "a59edc7cdcfed7314368a30790a2ebece6794dc17830009909baea44fb9ed085"
+        },
+        {
+          "declaration": "public void start();",
+          "descriptor": "()V",
+          "line_start": 227,
+          "line_end": 254,
+          "disassembly_slice_sha256": "dba7c0ef4b2818a69e911828c434de41997bf26f78f4b34ebd8250bf9fedc59e"
+        },
+        {
+          "declaration": "public void stop();",
+          "descriptor": "()V",
+          "line_start": 255,
+          "line_end": 282,
+          "disassembly_slice_sha256": "ab3c17f4885765a33f5954a29b39f667cc3ee01b8c320f4bb07aed80e9927638"
+        },
+        {
+          "declaration": "public boolean requiresUpdateEveryTick();",
+          "descriptor": "()Z",
+          "line_start": 283,
+          "line_end": 297,
+          "disassembly_slice_sha256": "c57e04bac9bb415cdce2ed93caa26afc2b5f5732f75a5582f7329d5e61e42416"
+        },
+        {
+          "declaration": "protected int adjustedTickDelay(int);",
+          "descriptor": "(I)I",
+          "line_start": 298,
+          "line_end": 314,
+          "disassembly_slice_sha256": "cc0277ee33fe85bfacabbe596e788b34d0c6fa5f493a1605801d2b4cd11527c2"
+        },
+        {
+          "declaration": "public void tick();",
+          "descriptor": "()V",
+          "line_start": 315,
+          "line_end": 330,
+          "disassembly_slice_sha256": "eea32bcb366a601c634cce69234860c87a33928fab3a9f5972a2759187f14a77"
+        },
+        {
+          "declaration": "public void setFlags(java.util.EnumSet<net.minecraft.world.entity.ai.goal.Goal$Flag>);",
+          "descriptor": "(Ljava/util/EnumSet;)V",
+          "line_start": 331,
+          "line_end": 352,
+          "disassembly_slice_sha256": "fab4c20a0ab3cf4a9f3f45f28c4e3a0d17f6366f6c3eac566697b40c3ec2bb4a"
+        },
+        {
+          "declaration": "public java.util.EnumSet<net.minecraft.world.entity.ai.goal.Goal$Flag> getFlags();",
+          "descriptor": "()Ljava/util/EnumSet;",
+          "line_start": 353,
+          "line_end": 368,
+          "disassembly_slice_sha256": "b87ab5f9892b0c86b8835224bebe670a2219f6e9f65609049978441b4b368687"
+        },
+        {
+          "declaration": "public boolean isRunning();",
+          "descriptor": "()Z",
+          "line_start": 369,
+          "line_end": 382,
+          "disassembly_slice_sha256": "8eb864aeeb4ca0b4565fbb98c7033cc8c89a1472316103d7513cd6df58488ee0"
+        },
+        {
+          "declaration": "public int getPriority();",
+          "descriptor": "()I",
+          "line_start": 383,
+          "line_end": 396,
+          "disassembly_slice_sha256": "dfa8c9f2c180678c3a2e71a9804374edafe4f19860b15aea4d75d98b93efba8e"
+        },
+        {
+          "declaration": "public net.minecraft.world.entity.ai.goal.Goal getGoal();",
+          "descriptor": "()Lnet/minecraft/world/entity/ai/goal/Goal;",
+          "line_start": 397,
+          "line_end": 410,
+          "disassembly_slice_sha256": "00bedb9591d4d2c6891b0b15ac61e4ae6848f48948d23256e1f7988c28f840f3"
+        },
+        {
+          "declaration": "public boolean equals(java.lang.Object);",
+          "descriptor": "(Ljava/lang/Object;)Z",
+          "line_start": 411,
+          "line_end": 458,
+          "disassembly_slice_sha256": "2cc8ff86b630c12b9c0c2af52e196375c8fcd279e8ff652ca6b73842d7904ae8"
+        },
+        {
+          "declaration": "public int hashCode();",
+          "descriptor": "()I",
+          "line_start": 459,
+          "line_end": 472,
+          "disassembly_slice_sha256": "5bc6d87a226062d8876a3d90d38425daa088d3e94fefdf27a21c792d8fc113e5"
+        }
+      ],
+      "selected_fields": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/goal/GoalSelector",
+      "class_hash": "2455d75eb56bfed726051b6bdb44f7c227c9e032fc798f93f5718379d8a26fb7",
+      "disassembly_hash": "b8a49822a45e8d34effa08e88372b77e49cbe743e2b821aa68de5aa4914bef15",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "origin": "HASH_VERIFIED_ORIGINAL_DISASSEMBLY",
+      "member_count": 18,
+      "selected_members": [
+        {
+          "declaration": "public net.minecraft.world.entity.ai.goal.GoalSelector(java.util.function.Supplier<net.minecraft.util.profiling.ProfilerFiller>);",
+          "descriptor": "(Ljava/util/function/Supplier;)V",
+          "line_start": 387,
+          "line_end": 430,
+          "disassembly_slice_sha256": "2714f3eb37420c0b37925c755ec0621d7cf41997359267d8daf35eb2bc787bac"
+        },
+        {
+          "declaration": "public void addGoal(int, net.minecraft.world.entity.ai.goal.Goal);",
+          "descriptor": "(ILnet/minecraft/world/entity/ai/goal/Goal;)V",
+          "line_start": 431,
+          "line_end": 454,
+          "disassembly_slice_sha256": "a853c6ac207bab8dd917bf4602104248a8991e6f7a55dde9cd3fafc3d44ed800"
+        },
+        {
+          "declaration": "public void removeAllGoals(java.util.function.Predicate<net.minecraft.world.entity.ai.goal.Goal>);",
+          "descriptor": "(Ljava/util/function/Predicate;)V",
+          "line_start": 455,
+          "line_end": 481,
+          "disassembly_slice_sha256": "eee513d7c8fd689e27d0d9a4ba71476d8006af389103fc48a09ef59bedcd5c38"
+        },
+        {
+          "declaration": "public void removeGoal(net.minecraft.world.entity.ai.goal.Goal);",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/goal/Goal;)V",
+          "line_start": 482,
+          "line_end": 512,
+          "disassembly_slice_sha256": "16a116b6b82f67efcf7c814866cfc01fa8d0c07d72f24d9e26577475bf073b27"
+        },
+        {
+          "declaration": "private static boolean goalContainsAnyFlags(net.minecraft.world.entity.ai.goal.WrappedGoal, java.util.EnumSet<net.minecraft.world.entity.ai.goal.Goal$Flag>);",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/goal/WrappedGoal;Ljava/util/EnumSet;)Z",
+          "line_start": 513,
+          "line_end": 561,
+          "disassembly_slice_sha256": "34a39b4fbd4360d46e3e8a4864d2314431ccd11db0d5c32a416d151b1aaae581"
+        },
+        {
+          "declaration": "private static boolean goalCanBeReplacedForAllFlags(net.minecraft.world.entity.ai.goal.WrappedGoal, java.util.Map<net.minecraft.world.entity.ai.goal.Goal$Flag, net.minecraft.world.entity.ai.goal.WrappedGoal>);",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/goal/WrappedGoal;Ljava/util/Map;)Z",
+          "line_start": 562,
+          "line_end": 613,
+          "disassembly_slice_sha256": "c41f507881274bf9104460e048029eabec951af6562573d0dadafbd11c4daf5d"
+        },
+        {
+          "declaration": "public void tick();",
+          "descriptor": "()V",
+          "line_start": 614,
+          "line_end": 812,
+          "disassembly_slice_sha256": "82edd6196e27a10c9fac6400f3f9147f5b095eb773de97706b5b3f53adecb0d2"
+        },
+        {
+          "declaration": "public void tickRunningGoals(boolean);",
+          "descriptor": "(Z)V",
+          "line_start": 813,
+          "line_end": 880,
+          "disassembly_slice_sha256": "f33c62d114591094710540eb13e586c45236f7490e073d7722ad7e0f821642ae"
+        },
+        {
+          "declaration": "public java.util.Set<net.minecraft.world.entity.ai.goal.WrappedGoal> getAvailableGoals();",
+          "descriptor": "()Ljava/util/Set;",
+          "line_start": 881,
+          "line_end": 895,
+          "disassembly_slice_sha256": "d05aee77ef847d2eb5dc69c587d510a00e782d3e379bf6538167f4bf1ea2eae9"
+        },
+        {
+          "declaration": "public java.util.stream.Stream<net.minecraft.world.entity.ai.goal.WrappedGoal> getRunningGoals();",
+          "descriptor": "()Ljava/util/stream/Stream;",
+          "line_start": 896,
+          "line_end": 913,
+          "disassembly_slice_sha256": "03b208a143f9f4dee54ccc43c780360d59ab5e96e15621d7702abd1ffa5eb7dc"
+        },
+        {
+          "declaration": "public void setNewGoalRate(int);",
+          "descriptor": "(I)V",
+          "line_start": 914,
+          "line_end": 930,
+          "disassembly_slice_sha256": "40412e1ae0b778f6bf31b986f4e7f4dbcd38452620276f8393f255d305215fae"
+        },
+        {
+          "declaration": "public void disableControlFlag(net.minecraft.world.entity.ai.goal.Goal$Flag);",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/goal/Goal$Flag;)V",
+          "line_start": 931,
+          "line_end": 949,
+          "disassembly_slice_sha256": "cc4acb51596a6c7f44d485020048e633f1d89c73fd3144f0aadedeaa52d59980"
+        },
+        {
+          "declaration": "public void enableControlFlag(net.minecraft.world.entity.ai.goal.Goal$Flag);",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/goal/Goal$Flag;)V",
+          "line_start": 950,
+          "line_end": 968,
+          "disassembly_slice_sha256": "378ee603bfdfacc8086ca1d7acb3ad1fd46c28080b515e753abd4beec597bd93"
+        },
+        {
+          "declaration": "public void setControlFlag(net.minecraft.world.entity.ai.goal.Goal$Flag, boolean);",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/goal/Goal$Flag;Z)V",
+          "line_start": 969,
+          "line_end": 999,
+          "disassembly_slice_sha256": "e149369092b72623eb70c54c8cf285515c4dce2e471429a04c6688e0b3f058b3"
+        },
+        {
+          "declaration": "private static boolean lambda$removeGoal$2(net.minecraft.world.entity.ai.goal.Goal, net.minecraft.world.entity.ai.goal.WrappedGoal);",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/goal/Goal;Lnet/minecraft/world/entity/ai/goal/WrappedGoal;)Z",
+          "line_start": 1000,
+          "line_end": 1024,
+          "disassembly_slice_sha256": "4be27b13032f681ff4b859ca236db450a33cbca4d8739d65539312c119a4a720"
+        },
+        {
+          "declaration": "private static boolean lambda$removeGoal$1(net.minecraft.world.entity.ai.goal.Goal, net.minecraft.world.entity.ai.goal.WrappedGoal);",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/goal/Goal;Lnet/minecraft/world/entity/ai/goal/WrappedGoal;)Z",
+          "line_start": 1025,
+          "line_end": 1049,
+          "disassembly_slice_sha256": "e7f72ad4f966a900c4799dc8f4c09f3a8e0f7d70180cae30769d92b2c09e3b43"
+        },
+        {
+          "declaration": "private static boolean lambda$removeAllGoals$0(java.util.function.Predicate, net.minecraft.world.entity.ai.goal.WrappedGoal);",
+          "descriptor": "(Ljava/util/function/Predicate;Lnet/minecraft/world/entity/ai/goal/WrappedGoal;)Z",
+          "line_start": 1050,
+          "line_end": 1066,
+          "disassembly_slice_sha256": "c14bb73aa46fffa809aa5c6b9e258cffc3c9ea8ccb3da644c3d32c9535c92fb5"
+        },
+        {
+          "declaration": "static {};",
+          "descriptor": "()V",
+          "line_start": 1067,
+          "line_end": 1085,
+          "disassembly_slice_sha256": "6d4c43e597aa0554bd7017a4c3c79f0efb2b717758b0f61c841d465c45651251"
+        }
+      ],
+      "selected_fields": [
+        {
+          "declaration": "private final java.util.Map<net.minecraft.world.entity.ai.goal.Goal$Flag, net.minecraft.world.entity.ai.goal.WrappedGoal> lockedFlags;",
+          "descriptor": "Ljava/util/Map;",
+          "line_start": 359,
+          "line_end": 363,
+          "disassembly_slice_sha256": "f7e194538ef22a3cccd67676cbf28de5a702512c1a736e561fd0f9178c720048"
+        },
+        {
+          "declaration": "private final java.util.Set<net.minecraft.world.entity.ai.goal.WrappedGoal> availableGoals;",
+          "descriptor": "Ljava/util/Set;",
+          "line_start": 364,
+          "line_end": 368,
+          "disassembly_slice_sha256": "cb8dde30aa4d2038d3e547888d60f1d7249ce85e45eecd3be23b43f3042571a7"
+        },
+        {
+          "declaration": "private final java.util.EnumSet<net.minecraft.world.entity.ai.goal.Goal$Flag> disabledFlags;",
+          "descriptor": "Ljava/util/EnumSet;",
+          "line_start": 374,
+          "line_end": 378,
+          "disassembly_slice_sha256": "fbcf09e816d32b02c3deaab51bab2b246e2cc9e6039dd956dc1452fbfa0312f4"
+        },
+        {
+          "declaration": "private int newGoalRate;",
+          "descriptor": "I",
+          "line_start": 383,
+          "line_end": 386,
+          "disassembly_slice_sha256": "0dffd2aaec0eaa3ac32f78cd49069d4e381a2aecf98a565990cb281dbc5aac67"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/Mob",
+      "class_hash": "81e6715b2f1a722c868e89984b64088932143f2164f40009ea128323dd6a0a8d",
+      "disassembly_hash": "6f7e262f6a26092d06cdbc9da26401209be0fd18b688d6e21f91a5218f9a5149",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "origin": "HASH_VERIFIED_ORIGINAL_DISASSEMBLY",
+      "member_count": 144,
+      "selected_members": [
+        {
+          "declaration": "protected net.minecraft.world.entity.Mob(net.minecraft.world.entity.EntityType<? extends net.minecraft.world.entity.Mob>, net.minecraft.world.level.Level);",
+          "descriptor": "(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V",
+          "line_start": 2353,
+          "line_end": 2493,
+          "disassembly_slice_sha256": "784b7aa162dadc5b72e309e077c71936016dc2d6baecde55b318cff7bd751727"
+        },
+        {
+          "declaration": "protected final void serverAiStep();",
+          "descriptor": "()V",
+          "line_start": 5200,
+          "line_end": 5399,
+          "disassembly_slice_sha256": "aa3decc1f0952ed727b617a3b11c3032ea377160f3b64126359d56c9f744f991"
+        }
+      ],
+      "selected_fields": [
+        {
+          "declaration": "public final net.minecraft.world.entity.ai.goal.GoalSelector goalSelector;",
+          "descriptor": "Lnet/minecraft/world/entity/ai/goal/GoalSelector;",
+          "line_start": 2255,
+          "line_end": 2258,
+          "disassembly_slice_sha256": "7ac55c63b12af09df1b930bd50df371a690849032cf0df94064ecf472403a563"
+        },
+        {
+          "declaration": "public final net.minecraft.world.entity.ai.goal.GoalSelector targetSelector;",
+          "descriptor": "Lnet/minecraft/world/entity/ai/goal/GoalSelector;",
+          "line_start": 2259,
+          "line_end": 2262,
+          "disassembly_slice_sha256": "f620d2443bf7ec24559521a0c84d9629c1822c374233a75ee1631aae44cb18eb"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/Brain",
+      "class_hash": "441ee6715fb13f271943a9a462c5ff64e491a993ff28d724df06885d83012a3d",
+      "disassembly_hash": "ea1e8017d5b0f5c5366274744ffd17b0914b5fb68b45790ae8538d96ad4bc5a7",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "origin": "HASH_VERIFIED_ORIGINAL_DISASSEMBLY",
+      "member_count": 56,
+      "selected_members": [
+        {
+          "declaration": "public static <E extends net.minecraft.world.entity.LivingEntity> net.minecraft.world.entity.ai.Brain$Provider<E> provider(java.util.Collection<? extends net.minecraft.world.entity.ai.memory.MemoryModuleType<?>>, java.util.Collection<? extends net.minecraft.world.entity.ai.sensing.SensorType<? extends net.minecraft.world.entity.ai.sensing.Sensor<? super E>>>);",
+          "descriptor": "(Ljava/util/Collection;Ljava/util/Collection;)Lnet/minecraft/world/entity/ai/Brain$Provider;",
+          "line_start": 916,
+          "line_end": 938,
+          "disassembly_slice_sha256": "2017c3e762505c9b049d1a396bd0427751b6db5fab9dd3219814c73d24fe145c"
+        },
+        {
+          "declaration": "public static <E extends net.minecraft.world.entity.LivingEntity> com.mojang.serialization.Codec<net.minecraft.world.entity.ai.Brain<E>> codec(java.util.Collection<? extends net.minecraft.world.entity.ai.memory.MemoryModuleType<?>>, java.util.Collection<? extends net.minecraft.world.entity.ai.sensing.SensorType<? extends net.minecraft.world.entity.ai.sensing.Sensor<? super E>>>);",
+          "descriptor": "(Ljava/util/Collection;Ljava/util/Collection;)Lcom/mojang/serialization/Codec;",
+          "line_start": 939,
+          "line_end": 980,
+          "disassembly_slice_sha256": "5ce1b265407999454fcc035d317da57bb2ff29e9c78b1088aa304154a5bad795"
+        },
+        {
+          "declaration": "public net.minecraft.world.entity.ai.Brain(java.util.Collection<? extends net.minecraft.world.entity.ai.memory.MemoryModuleType<?>>, java.util.Collection<? extends net.minecraft.world.entity.ai.sensing.SensorType<? extends net.minecraft.world.entity.ai.sensing.Sensor<? super E>>>, com.google.common.collect.ImmutableList<net.minecraft.world.entity.ai.Brain$MemoryValue<?>>, java.util.function.Supplier<com.mojang.serialization.Codec<net.minecraft.world.entity.ai.Brain<E>>>);",
+          "descriptor": "(Ljava/util/Collection;Ljava/util/Collection;Lcom/google/common/collect/ImmutableList;Ljava/util/function/Supplier;)V",
+          "line_start": 981,
+          "line_end": 1182,
+          "disassembly_slice_sha256": "21bd23942b74ee2b559ec15756ca5a3cf3d7e5faf94a40ff67db882fa03f7e52"
+        },
+        {
+          "declaration": "public <T extends java.lang.Object> com.mojang.serialization.DataResult<T> serializeStart(com.mojang.serialization.DynamicOps<T>);",
+          "descriptor": "(Lcom/mojang/serialization/DynamicOps;)Lcom/mojang/serialization/DataResult;",
+          "line_start": 1183,
+          "line_end": 1207,
+          "disassembly_slice_sha256": "dd1bb750dc0fe725e6eb9a0961e6a4183716a879678e5d99f55c536b2593e139"
+        },
+        {
+          "declaration": "java.util.stream.Stream<net.minecraft.world.entity.ai.Brain$MemoryValue<?>> memories();",
+          "descriptor": "()Ljava/util/stream/Stream;",
+          "line_start": 1208,
+          "line_end": 1229,
+          "disassembly_slice_sha256": "68e4cc5864585d927808410d13b4da5e3c16c4e6dadb3c21af4a4502c435565d"
+        },
+        {
+          "declaration": "public boolean hasMemoryValue(net.minecraft.world.entity.ai.memory.MemoryModuleType<?>);",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;)Z",
+          "line_start": 1230,
+          "line_end": 1251,
+          "disassembly_slice_sha256": "aac816bd2a4b99287e2ecae5c62bf5454a909e76496bbc7cc20ef3765b2762a7"
+        },
+        {
+          "declaration": "public void clearMemories();",
+          "descriptor": "()V",
+          "line_start": 1252,
+          "line_end": 1273,
+          "disassembly_slice_sha256": "96836c36a45a4751bbb990be7caab2cac968cb9dd8c5d85798ee9ba621efe703"
+        },
+        {
+          "declaration": "public <U extends java.lang.Object> void eraseMemory(net.minecraft.world.entity.ai.memory.MemoryModuleType<U>);",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;)V",
+          "line_start": 1274,
+          "line_end": 1296,
+          "disassembly_slice_sha256": "2b9e5a79d55d2b30a28dd3fcd2f3cb7d2b5f381f7e7ca2e6822c75209d5ae960"
+        },
+        {
+          "declaration": "public <U extends java.lang.Object> void setMemory(net.minecraft.world.entity.ai.memory.MemoryModuleType<U>, U);",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;Ljava/lang/Object;)V",
+          "line_start": 1297,
+          "line_end": 1327,
+          "disassembly_slice_sha256": "4e41c39cb086f0dff97d02515bebc5c47c25d66e30dcadcde2da55fd3473a289"
+        },
+        {
+          "declaration": "public <U extends java.lang.Object> void setMemoryWithExpiry(net.minecraft.world.entity.ai.memory.MemoryModuleType<U>, U, long);",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;Ljava/lang/Object;J)V",
+          "line_start": 1328,
+          "line_end": 1356,
+          "disassembly_slice_sha256": "d6044530b7286c6747847b0d6076d7aaf7de811525716a5e8ad339cd0e0c5e87"
+        },
+        {
+          "declaration": "public <U extends java.lang.Object> void setMemory(net.minecraft.world.entity.ai.memory.MemoryModuleType<U>, java.util.Optional<? extends U>);",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;Ljava/util/Optional;)V",
+          "line_start": 1357,
+          "line_end": 1383,
+          "disassembly_slice_sha256": "a37f643eacc78d6aa79c1dc3ba84543152996fc9e8bcef9bf753f7623172f65f"
+        },
+        {
+          "declaration": "<U extends java.lang.Object> void setMemoryInternal(net.minecraft.world.entity.ai.memory.MemoryModuleType<U>, java.util.Optional<? extends net.minecraft.world.entity.ai.memory.ExpirableValue<?>>);",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;Ljava/util/Optional;)V",
+          "line_start": 1384,
+          "line_end": 1435,
+          "disassembly_slice_sha256": "a860d2afa4082a8703f04f4494378949fffaca1b5bf5501f273cf2834e810432"
+        },
+        {
+          "declaration": "public <U extends java.lang.Object> java.util.Optional<U> getMemory(net.minecraft.world.entity.ai.memory.MemoryModuleType<U>);",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;)Ljava/util/Optional;",
+          "line_start": 1436,
+          "line_end": 1479,
+          "disassembly_slice_sha256": "a08f396783b287e6d158f27d17cd98a8febef9eafa80a060da4b6b511093bc80"
+        },
+        {
+          "declaration": "public <U extends java.lang.Object> java.util.Optional<U> getMemoryInternal(net.minecraft.world.entity.ai.memory.MemoryModuleType<U>);",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;)Ljava/util/Optional;",
+          "line_start": 1480,
+          "line_end": 1522,
+          "disassembly_slice_sha256": "1056880f5c4da89a2dc4ce4e8a8963fcff2e3af69c4505cbbb83eb1bc0b7ec14"
+        },
+        {
+          "declaration": "public <U extends java.lang.Object> long getTimeUntilExpiry(net.minecraft.world.entity.ai.memory.MemoryModuleType<U>);",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;)J",
+          "line_start": 1523,
+          "line_end": 1557,
+          "disassembly_slice_sha256": "3dffea0379c296619872876b520c6ec94f395f2c94ca30a487eadc66e9c4553f"
+        },
+        {
+          "declaration": "public java.util.Map<net.minecraft.world.entity.ai.memory.MemoryModuleType<?>, java.util.Optional<? extends net.minecraft.world.entity.ai.memory.ExpirableValue<?>>> getMemories();",
+          "descriptor": "()Ljava/util/Map;",
+          "line_start": 1558,
+          "line_end": 1582,
+          "disassembly_slice_sha256": "2a5b7cf256b582baf15ae48fce4584a18a2aa4a93c259610d3382c549fa24bfd"
+        },
+        {
+          "declaration": "public <U extends java.lang.Object> boolean isMemoryValue(net.minecraft.world.entity.ai.memory.MemoryModuleType<U>, U);",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;Ljava/lang/Object;)Z",
+          "line_start": 1583,
+          "line_end": 1623,
+          "disassembly_slice_sha256": "5fd16447c39b3cca3fd523699cd6fd905d7b79fd3030241be8b07bf707871018"
+        },
+        {
+          "declaration": "public boolean checkMemory(net.minecraft.world.entity.ai.memory.MemoryModuleType<?>, net.minecraft.world.entity.ai.memory.MemoryStatus);",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;Lnet/minecraft/world/entity/ai/memory/MemoryStatus;)Z",
+          "line_start": 1624,
+          "line_end": 1684,
+          "disassembly_slice_sha256": "0ea3790f66fc3cfbf58068db4e08375e0669619f23f1672ef60e125b20dccdaa"
+        },
+        {
+          "declaration": "public net.minecraft.world.entity.schedule.Schedule getSchedule();",
+          "descriptor": "()Lnet/minecraft/world/entity/schedule/Schedule;",
+          "line_start": 1685,
+          "line_end": 1701,
+          "disassembly_slice_sha256": "ca863d30a3d1c55f321d35ae0b8bf636299a3b0d4e23879720e41538515fc65f"
+        },
+        {
+          "declaration": "public void setSchedule(net.minecraft.world.entity.schedule.Schedule);",
+          "descriptor": "(Lnet/minecraft/world/entity/schedule/Schedule;)V",
+          "line_start": 1702,
+          "line_end": 1721,
+          "disassembly_slice_sha256": "7e60fde67acdfd85f38fd5dcf134081c00698fbbd0025ed04757cb13d52ec07d"
+        },
+        {
+          "declaration": "public void setCoreActivities(java.util.Set<net.minecraft.world.entity.schedule.Activity>);",
+          "descriptor": "(Ljava/util/Set;)V",
+          "line_start": 1722,
+          "line_end": 1743,
+          "disassembly_slice_sha256": "50306f84af32573d2cd797587afcf5f4364b4b865c150c6a06e94da80ab27ca9"
+        },
+        {
+          "declaration": "public java.util.Set<net.minecraft.world.entity.schedule.Activity> getActiveActivities();",
+          "descriptor": "()Ljava/util/Set;",
+          "line_start": 1744,
+          "line_end": 1768,
+          "disassembly_slice_sha256": "4094feb3a2c798280834ca88c5ddff9db350b1d7dd7e69d59633d88b9413da61"
+        },
+        {
+          "declaration": "public java.util.List<net.minecraft.world.entity.ai.behavior.BehaviorControl<? super E>> getRunningBehaviors();",
+          "descriptor": "()Ljava/util/List;",
+          "line_start": 1769,
+          "line_end": 1874,
+          "disassembly_slice_sha256": "850821858b834992e6001d0d84954daf20eab40516558066176145806e92412d"
+        },
+        {
+          "declaration": "public void useDefaultActivity();",
+          "descriptor": "()V",
+          "line_start": 1875,
+          "line_end": 1894,
+          "disassembly_slice_sha256": "546b6d798b4df791c6a165d05cfd5b9c6ba7ed250722b295327c36fa3050bfd2"
+        },
+        {
+          "declaration": "public java.util.Optional<net.minecraft.world.entity.schedule.Activity> getActiveNonCoreActivity();",
+          "descriptor": "()Ljava/util/Optional;",
+          "line_start": 1895,
+          "line_end": 1943,
+          "disassembly_slice_sha256": "3618e3338b2d950880026074803081725889f9039e7758c27b6f9665d25574d4"
+        },
+        {
+          "declaration": "public void setActiveActivityIfPossible(net.minecraft.world.entity.schedule.Activity);",
+          "descriptor": "(Lnet/minecraft/world/entity/schedule/Activity;)V",
+          "line_start": 1944,
+          "line_end": 1975,
+          "disassembly_slice_sha256": "ba43078dc3d1d3f5641e1b66172add0c50ae1a840ae7c8878adfacd5be4e0173"
+        },
+        {
+          "declaration": "private void setActiveActivity(net.minecraft.world.entity.schedule.Activity);",
+          "descriptor": "(Lnet/minecraft/world/entity/schedule/Activity;)V",
+          "line_start": 1976,
+          "line_end": 2019,
+          "disassembly_slice_sha256": "a3f3b43735787931f1328b930eb407d9288e5c5505d23db49d6db75af05914d0"
+        },
+        {
+          "declaration": "private void eraseMemoriesForOtherActivitesThan(net.minecraft.world.entity.schedule.Activity);",
+          "descriptor": "(Lnet/minecraft/world/entity/schedule/Activity;)V",
+          "line_start": 2020,
+          "line_end": 2096,
+          "disassembly_slice_sha256": "aad0fe189aee72117e2d05ce30997e485941b4b783aaa2a6c9419466e9f7de27"
+        },
+        {
+          "declaration": "public void updateActivityFromSchedule(long, long);",
+          "descriptor": "(JJ)V",
+          "line_start": 2097,
+          "line_end": 2147,
+          "disassembly_slice_sha256": "7d4df9f0b6d3b43543c7e19d84710fd2045672f20f561560c91438032d8b8670"
+        },
+        {
+          "declaration": "public void setActiveActivityToFirstValid(java.util.List<net.minecraft.world.entity.schedule.Activity>);",
+          "descriptor": "(Ljava/util/List;)V",
+          "line_start": 2148,
+          "line_end": 2197,
+          "disassembly_slice_sha256": "e2c22801e2afa31dd2b4c9a326ba84abdf881981ba842f62521b01c8fffa8898"
+        },
+        {
+          "declaration": "public void setDefaultActivity(net.minecraft.world.entity.schedule.Activity);",
+          "descriptor": "(Lnet/minecraft/world/entity/schedule/Activity;)V",
+          "line_start": 2198,
+          "line_end": 2217,
+          "disassembly_slice_sha256": "9492542804872ec96de062ae927f9d6cbb7e68eeeb2801c73597e6f9c279e6ba"
+        },
+        {
+          "declaration": "public void addActivity(net.minecraft.world.entity.schedule.Activity, int, com.google.common.collect.ImmutableList<? extends net.minecraft.world.entity.ai.behavior.BehaviorControl<? super E>>);",
+          "descriptor": "(Lnet/minecraft/world/entity/schedule/Activity;ILcom/google/common/collect/ImmutableList;)V",
+          "line_start": 2218,
+          "line_end": 2245,
+          "disassembly_slice_sha256": "edcf84e0dc02de752307afeae12c119d903e2989c7505b74d74cf87ec2be6263"
+        },
+        {
+          "declaration": "public void addActivityAndRemoveMemoryWhenStopped(net.minecraft.world.entity.schedule.Activity, int, com.google.common.collect.ImmutableList<? extends net.minecraft.world.entity.ai.behavior.BehaviorControl<? super E>>, net.minecraft.world.entity.ai.memory.MemoryModuleType<?>);",
+          "descriptor": "(Lnet/minecraft/world/entity/schedule/Activity;ILcom/google/common/collect/ImmutableList;Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;)V",
+          "line_start": 2246,
+          "line_end": 2291,
+          "disassembly_slice_sha256": "fd9b73b1948c9f83b79eb3309eef7e604ac783e0824ce3bb9f0d29fa07771bbd"
+        },
+        {
+          "declaration": "public void addActivity(net.minecraft.world.entity.schedule.Activity, com.google.common.collect.ImmutableList<? extends com.mojang.datafixers.util.Pair<java.lang.Integer, ? extends net.minecraft.world.entity.ai.behavior.BehaviorControl<? super E>>>);",
+          "descriptor": "(Lnet/minecraft/world/entity/schedule/Activity;Lcom/google/common/collect/ImmutableList;)V",
+          "line_start": 2292,
+          "line_end": 2317,
+          "disassembly_slice_sha256": "bdd8b5eec68442c5a507be28fc852c5f494dff3329649db70a8c8f66bd2700da"
+        },
+        {
+          "declaration": "public void addActivityWithConditions(net.minecraft.world.entity.schedule.Activity, com.google.common.collect.ImmutableList<? extends com.mojang.datafixers.util.Pair<java.lang.Integer, ? extends net.minecraft.world.entity.ai.behavior.BehaviorControl<? super E>>>, java.util.Set<com.mojang.datafixers.util.Pair<net.minecraft.world.entity.ai.memory.MemoryModuleType<?>, net.minecraft.world.entity.ai.memory.MemoryStatus>>);",
+          "descriptor": "(Lnet/minecraft/world/entity/schedule/Activity;Lcom/google/common/collect/ImmutableList;Ljava/util/Set;)V",
+          "line_start": 2318,
+          "line_end": 2345,
+          "disassembly_slice_sha256": "566c436a907cb9c0a98aba79917808fe0c5efbe8f277e0af7f6c356312adf794"
+        },
+        {
+          "declaration": "public void addActivityAndRemoveMemoriesWhenStopped(net.minecraft.world.entity.schedule.Activity, com.google.common.collect.ImmutableList<? extends com.mojang.datafixers.util.Pair<java.lang.Integer, ? extends net.minecraft.world.entity.ai.behavior.BehaviorControl<? super E>>>, java.util.Set<com.mojang.datafixers.util.Pair<net.minecraft.world.entity.ai.memory.MemoryModuleType<?>, net.minecraft.world.entity.ai.memory.MemoryStatus>>, java.util.Set<net.minecraft.world.entity.ai.memory.MemoryModuleType<?>>);",
+          "descriptor": "(Lnet/minecraft/world/entity/schedule/Activity;Lcom/google/common/collect/ImmutableList;Ljava/util/Set;Ljava/util/Set;)V",
+          "line_start": 2346,
+          "line_end": 2428,
+          "disassembly_slice_sha256": "64da758e5005424a423baa37af134a15a32b83b3b91d207427d4532cc57c0a22"
+        },
+        {
+          "declaration": "public void removeAllBehaviors();",
+          "descriptor": "()V",
+          "line_start": 2429,
+          "line_end": 2450,
+          "disassembly_slice_sha256": "b03b8a083143bd81f1a5b707d37bd6f74e62e78e669bfcba79e847ae20fa3498"
+        },
+        {
+          "declaration": "public boolean isActive(net.minecraft.world.entity.schedule.Activity);",
+          "descriptor": "(Lnet/minecraft/world/entity/schedule/Activity;)Z",
+          "line_start": 2451,
+          "line_end": 2470,
+          "disassembly_slice_sha256": "f62a1035b8be6c59f9db2f5cf48b522010f13f1e5e7782706480bfec5dd14f51"
+        },
+        {
+          "declaration": "public net.minecraft.world.entity.ai.Brain<E> copyWithoutBehaviors();",
+          "descriptor": "()Lnet/minecraft/world/entity/ai/Brain;",
+          "line_start": 2471,
+          "line_end": 2550,
+          "disassembly_slice_sha256": "cea958a81854ff7808648b9acf4ea444268377839df2e351995296d1e2695376"
+        },
+        {
+          "declaration": "public void tick(net.minecraft.server.level.ServerLevel, E);",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)V",
+          "line_start": 2551,
+          "line_end": 2587,
+          "disassembly_slice_sha256": "ee6033e6a1cb81e7f62012231a20cae516f1939405b52a5d90b9ec64a6917316"
+        },
+        {
+          "declaration": "private void tickSensors(net.minecraft.server.level.ServerLevel, E);",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)V",
+          "line_start": 2588,
+          "line_end": 2634,
+          "disassembly_slice_sha256": "5b8acffff470204edd37cc08550532aebc08ada7d17e88dbb35bbb84d12d4075"
+        },
+        {
+          "declaration": "private void forgetOutdatedMemories();",
+          "descriptor": "()V",
+          "line_start": 2635,
+          "line_end": 2705,
+          "disassembly_slice_sha256": "9833aaa39878856a25016183239b88e25709d558f63152b00075a63e96a0388e"
+        },
+        {
+          "declaration": "public void stopAll(net.minecraft.server.level.ServerLevel, E);",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)V",
+          "line_start": 2706,
+          "line_end": 2758,
+          "disassembly_slice_sha256": "6bff4947961c877502c508fdb8040ec834d9e680d14de936508c97589d60ddaf"
+        },
+        {
+          "declaration": "private void startEachNonRunningBehavior(net.minecraft.server.level.ServerLevel, E);",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)V",
+          "line_start": 2759,
+          "line_end": 2873,
+          "disassembly_slice_sha256": "489098984d804f00ebdd3d897d1a843ffc61185cc84189003aa018562c831523"
+        },
+        {
+          "declaration": "private void tickEachRunningBehavior(net.minecraft.server.level.ServerLevel, E);",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)V",
+          "line_start": 2874,
+          "line_end": 2925,
+          "disassembly_slice_sha256": "6cdcd6b83631a7170d952448b3fa152df857c9e8b9b374f43746abe775d0872f"
+        },
+        {
+          "declaration": "private boolean activityRequirementsAreMet(net.minecraft.world.entity.schedule.Activity);",
+          "descriptor": "(Lnet/minecraft/world/entity/schedule/Activity;)Z",
+          "line_start": 2926,
+          "line_end": 3000,
+          "disassembly_slice_sha256": "60193a9f3b72d0566ddf4a06c060b26ae976e7b562a645cb193a6620acdd8a07"
+        },
+        {
+          "declaration": "private boolean isEmptyCollection(java.lang.Object);",
+          "descriptor": "(Ljava/lang/Object;)Z",
+          "line_start": 3001,
+          "line_end": 3030,
+          "disassembly_slice_sha256": "273d8354f50b5ba4f0edffda7cc6806ceccf4ec0eb96e815b9f509c45e58d617"
+        },
+        {
+          "declaration": "com.google.common.collect.ImmutableList<? extends com.mojang.datafixers.util.Pair<java.lang.Integer, ? extends net.minecraft.world.entity.ai.behavior.BehaviorControl<? super E>>> createPriorityPairs(int, com.google.common.collect.ImmutableList<? extends net.minecraft.world.entity.ai.behavior.BehaviorControl<? super E>>);",
+          "descriptor": "(ILcom/google/common/collect/ImmutableList;)Lcom/google/common/collect/ImmutableList;",
+          "line_start": 3031,
+          "line_end": 3090,
+          "disassembly_slice_sha256": "2a8797965b673b4721c3b8689d77cea620f689e6784f90e2a0b9e33883d0e59c"
+        },
+        {
+          "declaration": "public net.minecraftforge.common.util.BrainBuilder<E> createBuilder();",
+          "descriptor": "()Lnet/minecraftforge/common/util/BrainBuilder;",
+          "line_start": 3091,
+          "line_end": 3168,
+          "disassembly_slice_sha256": "9d021327f0766343f9b487d6ea675dbaace456374500d704dba1d8acf7391e9b"
+        },
+        {
+          "declaration": "public void copyFromBuilder(net.minecraftforge.common.util.BrainBuilder<E>);",
+          "descriptor": "(Lnet/minecraftforge/common/util/BrainBuilder;)V",
+          "line_start": 3169,
+          "line_end": 3223,
+          "disassembly_slice_sha256": "e244d5e816dd69d0f59763ac026538761fe516b24be4d81f4be2e1f6b4f28a33"
+        },
+        {
+          "declaration": "private static java.util.Set lambda$addActivityAndRemoveMemoriesWhenStopped$4(net.minecraft.world.entity.schedule.Activity);",
+          "descriptor": "(Lnet/minecraft/world/entity/schedule/Activity;)Ljava/util/Set;",
+          "line_start": 3224,
+          "line_end": 3236,
+          "disassembly_slice_sha256": "a8db58f9fdfc245bdcc5bc714bf4b37349b5f0ab82bf04bb4a30542c8de084ba"
+        },
+        {
+          "declaration": "private static java.util.Map lambda$addActivityAndRemoveMemoriesWhenStopped$3(java.lang.Integer);",
+          "descriptor": "(Ljava/lang/Integer;)Ljava/util/Map;",
+          "line_start": 3237,
+          "line_end": 3249,
+          "disassembly_slice_sha256": "9425eb5561e902bf9ad0aa6a8743a98d7c79fc13cea98084e84c76a0f8ad4869"
+        },
+        {
+          "declaration": "private static boolean lambda$isMemoryValue$2(java.lang.Object, java.lang.Object);",
+          "descriptor": "(Ljava/lang/Object;Ljava/lang/Object;)Z",
+          "line_start": 3250,
+          "line_end": 3265,
+          "disassembly_slice_sha256": "66e47cf074f05a9caf72fc93d2fb37860d4e6547501a4c4c5e498c656e0fbc91"
+        },
+        {
+          "declaration": "private void lambda$clearMemories$1(net.minecraft.world.entity.ai.memory.MemoryModuleType);",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;)V",
+          "line_start": 3266,
+          "line_end": 3288,
+          "disassembly_slice_sha256": "11a37ebafef4adc273639d48b34719699fc2a47e6b9f3b17e15c61e47208a902"
+        },
+        {
+          "declaration": "private static net.minecraft.world.entity.ai.Brain$MemoryValue lambda$memories$0(java.util.Map$Entry);",
+          "descriptor": "(Ljava/util/Map$Entry;)Lnet/minecraft/world/entity/ai/Brain$MemoryValue;",
+          "line_start": 3289,
+          "line_end": 3307,
+          "disassembly_slice_sha256": "2ca5ae47f012bcdf2af6745475e73f58ac3998e9c0c25b917c7153f1b1ea365e"
+        },
+        {
+          "declaration": "static {};",
+          "descriptor": "()V",
+          "line_start": 3308,
+          "line_end": 3317,
+          "disassembly_slice_sha256": "154ee069123376d4af29c0358d51df73613108758b5d095cec63c8725e2489de"
+        }
+      ],
+      "selected_fields": [
+        {
+          "declaration": "private final java.util.Map<net.minecraft.world.entity.ai.memory.MemoryModuleType<?>, java.util.Optional<? extends net.minecraft.world.entity.ai.memory.ExpirableValue<?>>> memories;",
+          "descriptor": "Ljava/util/Map;",
+          "line_start": 869,
+          "line_end": 873,
+          "disassembly_slice_sha256": "cbf2ffb263ec260aa39744a345df53b8d58ec0bc88b6a99776e3203a98324fe5"
+        },
+        {
+          "declaration": "private final java.util.Map<net.minecraft.world.entity.ai.sensing.SensorType<? extends net.minecraft.world.entity.ai.sensing.Sensor<? super E>>, net.minecraft.world.entity.ai.sensing.Sensor<? super E>> sensors;",
+          "descriptor": "Ljava/util/Map;",
+          "line_start": 874,
+          "line_end": 878,
+          "disassembly_slice_sha256": "6330ae9546b9b839d40912e86712b068794ac4248796f57458e07e2c0e711864"
+        },
+        {
+          "declaration": "private final java.util.Map<java.lang.Integer, java.util.Map<net.minecraft.world.entity.schedule.Activity, java.util.Set<net.minecraft.world.entity.ai.behavior.BehaviorControl<? super E>>>> availableBehaviorsByPriority;",
+          "descriptor": "Ljava/util/Map;",
+          "line_start": 879,
+          "line_end": 883,
+          "disassembly_slice_sha256": "3536dd9736ee43efe9af41f1f64e6abac1b882eea8e3239078f84db63706d630"
+        },
+        {
+          "declaration": "private final java.util.Map<net.minecraft.world.entity.schedule.Activity, java.util.Set<com.mojang.datafixers.util.Pair<net.minecraft.world.entity.ai.memory.MemoryModuleType<?>, net.minecraft.world.entity.ai.memory.MemoryStatus>>> activityRequirements;",
+          "descriptor": "Ljava/util/Map;",
+          "line_start": 888,
+          "line_end": 892,
+          "disassembly_slice_sha256": "ab7dc3fcbe1ecbc0a46dede431a8d6e2f91a74c7b5cfdbc06ab49127a433ac2c"
+        },
+        {
+          "declaration": "private java.util.Set<net.minecraft.world.entity.schedule.Activity> coreActivities;",
+          "descriptor": "Ljava/util/Set;",
+          "line_start": 898,
+          "line_end": 902,
+          "disassembly_slice_sha256": "9f5880b4360cf95a8a39369ea5a486dc231d0f08ec1681fac6e702c114628e77"
+        },
+        {
+          "declaration": "private final java.util.Set<net.minecraft.world.entity.schedule.Activity> activeActivities;",
+          "descriptor": "Ljava/util/Set;",
+          "line_start": 903,
+          "line_end": 907,
+          "disassembly_slice_sha256": "bb8d9dc559ecfe8d3755f97dae78297c6b20c437b04a85434617700a67a11523"
+        },
+        {
+          "declaration": "private net.minecraft.world.entity.schedule.Activity defaultActivity;",
+          "descriptor": "Lnet/minecraft/world/entity/schedule/Activity;",
+          "line_start": 908,
+          "line_end": 911,
+          "disassembly_slice_sha256": "3cc0886425bc31b09bd79596fbff89ba5be4d267e34c2fbdf165765d69f925d3"
+        },
+        {
+          "declaration": "public long lastScheduleUpdate;",
+          "descriptor": "J",
+          "line_start": 912,
+          "line_end": 915,
+          "disassembly_slice_sha256": "90b6b24f9b620c7a79ca6fdb7241a9aeb56e03bfc239853c424d5037d653906a"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/sensing/Sensor",
+      "class_hash": "1c85530961b5b577dfef338544ef21cbcc4636ef999864b3ab4d343e3ef275bf",
+      "disassembly_hash": "7ae0d67707dcb061b2e493da62a8a3010a50bf413d01cdad8c081c287b10699b",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "origin": "HASH_VERIFIED_ORIGINAL_DISASSEMBLY",
+      "member_count": 9,
+      "selected_members": [
+        {
+          "declaration": "public net.minecraft.world.entity.ai.sensing.Sensor(int);",
+          "descriptor": "(I)V",
+          "line_start": 192,
+          "line_end": 221,
+          "disassembly_slice_sha256": "e4de22be68655909adbf4616fdd208b1348130d054c6e0f03f7effc881417674"
+        },
+        {
+          "declaration": "public net.minecraft.world.entity.ai.sensing.Sensor();",
+          "descriptor": "()V",
+          "line_start": 222,
+          "line_end": 240,
+          "disassembly_slice_sha256": "cc53e5b2817a6f35d3eb8e7059c9013cadcb3c615b3b2037dcd3f973ac0fa9dc"
+        },
+        {
+          "declaration": "public final void tick(net.minecraft.server.level.ServerLevel, E);",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)V",
+          "line_start": 241,
+          "line_end": 284,
+          "disassembly_slice_sha256": "4e2635d4dc22287a46677d0e06226151fe0a093051c4c93c25eca03dbcdff224"
+        },
+        {
+          "declaration": "protected abstract void doTick(net.minecraft.server.level.ServerLevel, E);",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)V",
+          "line_start": 285,
+          "line_end": 289,
+          "disassembly_slice_sha256": "5f265f0d65f9a589995aea9b3f6576cf60fbccd9a72f3449107c137740590120"
+        },
+        {
+          "declaration": "public abstract java.util.Set<net.minecraft.world.entity.ai.memory.MemoryModuleType<?>> requires();",
+          "descriptor": "()Ljava/util/Set;",
+          "line_start": 290,
+          "line_end": 294,
+          "disassembly_slice_sha256": "24d1907c3d0e0b6233f383396fe5eef4327a46a0f1fbcf6bbdcd09ea3e36d316"
+        }
+      ],
+      "selected_fields": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/sensing/SensorType",
+      "class_hash": "ccfdab8eada9a8306764a739c6a49692a379186561fa613418958dfaf1a27281",
+      "disassembly_hash": "f3dcdf224057da0743838f14a1c4cecc794de3ad208fac67802a4a94d7909688",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "origin": "FRESH_GENUINE_JAVAP_SAME_ARTIFACT",
+      "member_count": 9,
+      "selected_members": [
+        {
+          "declaration": "public net.minecraft.world.entity.ai.sensing.SensorType(java.util.function.Supplier<U>);",
+          "descriptor": "(Ljava/util/function/Supplier;)V",
+          "line_start": 526,
+          "line_end": 550,
+          "disassembly_slice_sha256": "4e997ac35a3074da5e64b3675e05c7ca54d19c49ba030964818ce47bb7bf9e2b"
+        },
+        {
+          "declaration": "public U create();",
+          "descriptor": "()Lnet/minecraft/world/entity/ai/sensing/Sensor;",
+          "line_start": 551,
+          "line_end": 570,
+          "disassembly_slice_sha256": "cb7643a81beea9246ab2f690a33422b2004a7c9f98baf0700ea76b652aa5a3c9"
+        },
+        {
+          "declaration": "private static <U extends net.minecraft.world.entity.ai.sensing.Sensor<?>> net.minecraft.world.entity.ai.sensing.SensorType<U> register(java.lang.String, java.util.function.Supplier<U>);",
+          "descriptor": "(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/minecraft/world/entity/ai/sensing/SensorType;",
+          "line_start": 571,
+          "line_end": 598,
+          "disassembly_slice_sha256": "6f0a4f092e5ecb2d2dce1cb34bd069880ae02bcb2a365ed966937b8f97be3f6f"
+        }
+      ],
+      "selected_fields": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/Behavior",
+      "class_hash": "bb73feb84c79565213f7a6001c47d0e1cc2fc7d947a89d99ae5c70b5e058e7dd",
+      "disassembly_hash": "a14ed1bb37e1bbba57916781421c53353d6bff2b8346758b240b0a2d3968f6d0",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "origin": "HASH_VERIFIED_ORIGINAL_DISASSEMBLY",
+      "member_count": 15,
+      "selected_members": [
+        {
+          "declaration": "public net.minecraft.world.entity.ai.behavior.Behavior(java.util.Map<net.minecraft.world.entity.ai.memory.MemoryModuleType<?>, net.minecraft.world.entity.ai.memory.MemoryStatus>);",
+          "descriptor": "(Ljava/util/Map;)V",
+          "line_start": 231,
+          "line_end": 253,
+          "disassembly_slice_sha256": "48272144c6eb705e3fa560dec717269a0143b516d7d2de75cafbe37906fe1309"
+        },
+        {
+          "declaration": "public net.minecraft.world.entity.ai.behavior.Behavior(java.util.Map<net.minecraft.world.entity.ai.memory.MemoryModuleType<?>, net.minecraft.world.entity.ai.memory.MemoryStatus>, int);",
+          "descriptor": "(Ljava/util/Map;I)V",
+          "line_start": 254,
+          "line_end": 278,
+          "disassembly_slice_sha256": "b7e7957af6a214f0bf3866d26ca15723f2db1a6d8a00d53da6a84c254e4d322c"
+        },
+        {
+          "declaration": "public net.minecraft.world.entity.ai.behavior.Behavior(java.util.Map<net.minecraft.world.entity.ai.memory.MemoryModuleType<?>, net.minecraft.world.entity.ai.memory.MemoryStatus>, int, int);",
+          "descriptor": "(Ljava/util/Map;II)V",
+          "line_start": 279,
+          "line_end": 317,
+          "disassembly_slice_sha256": "0dbcfbce2580f0c97d86dd70b183c023af3542b4ca35fe96f87fad3407cabf69"
+        },
+        {
+          "declaration": "public net.minecraft.world.entity.ai.behavior.Behavior$Status getStatus();",
+          "descriptor": "()Lnet/minecraft/world/entity/ai/behavior/Behavior$Status;",
+          "line_start": 318,
+          "line_end": 334,
+          "disassembly_slice_sha256": "a472b28e1cff8f4e25bbba1e57c9b300e1e3efae1396ab46fcc9afc509b84670"
+        },
+        {
+          "declaration": "public final boolean tryStart(net.minecraft.server.level.ServerLevel, E, long);",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)Z",
+          "line_start": 335,
+          "line_end": 406,
+          "disassembly_slice_sha256": "7ca1939e1c5216e8d3091a03ec3ab5e6a5c08de292b34d2cd5f357f9376589ea"
+        },
+        {
+          "declaration": "protected void start(net.minecraft.server.level.ServerLevel, E, long);",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "line_start": 407,
+          "line_end": 426,
+          "disassembly_slice_sha256": "df0dc227b1e9f780866e1475c5c707f62015eaa0566e9b143f40784fe2f66a71"
+        },
+        {
+          "declaration": "public final void tickOrStop(net.minecraft.server.level.ServerLevel, E, long);",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "line_start": 427,
+          "line_end": 476,
+          "disassembly_slice_sha256": "973e7969146f0fd85100b96e2b856836d95f60885cf3301eb0672d4b9eba278a"
+        },
+        {
+          "declaration": "protected void tick(net.minecraft.server.level.ServerLevel, E, long);",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "line_start": 477,
+          "line_end": 496,
+          "disassembly_slice_sha256": "ef658568139cee616e2b56e5237775b36d973faff01b46cff2c51760ed321a7f"
+        },
+        {
+          "declaration": "public final void doStop(net.minecraft.server.level.ServerLevel, E, long);",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "line_start": 497,
+          "line_end": 526,
+          "disassembly_slice_sha256": "957f486aeadbcdc8e3681226a4c03b85d239c29964f7a3f45be4639d51281300"
+        },
+        {
+          "declaration": "protected void stop(net.minecraft.server.level.ServerLevel, E, long);",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "line_start": 527,
+          "line_end": 546,
+          "disassembly_slice_sha256": "597855f7518146a1799f038cfd503898b82fdfae8934c515a559d503111585d8"
+        },
+        {
+          "declaration": "protected boolean canStillUse(net.minecraft.server.level.ServerLevel, E, long);",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)Z",
+          "line_start": 547,
+          "line_end": 567,
+          "disassembly_slice_sha256": "19d4098c5bc1108b74fede7dbaa0487b016e0b796009ee9d7165303bd88cf32a"
+        },
+        {
+          "declaration": "protected boolean timedOut(long);",
+          "descriptor": "(J)Z",
+          "line_start": 568,
+          "line_end": 596,
+          "disassembly_slice_sha256": "d0b3082c4f0270c9a32f14bc8c56b81c18a2052a94cb6d389f8546df137bae54"
+        },
+        {
+          "declaration": "protected boolean checkExtraStartConditions(net.minecraft.server.level.ServerLevel, E);",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)Z",
+          "line_start": 597,
+          "line_end": 616,
+          "disassembly_slice_sha256": "6645d872ab82313f553e39c8124b729ead23ad875d36a8256959158569a1d4db"
+        },
+        {
+          "declaration": "public java.lang.String debugString();",
+          "descriptor": "()Ljava/lang/String;",
+          "line_start": 617,
+          "line_end": 634,
+          "disassembly_slice_sha256": "a48ef4b76f8e589a1425796c96af7cf79b5afc6875268271667d2e13204e6364"
+        },
+        {
+          "declaration": "protected boolean hasRequiredMemories(E);",
+          "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;)Z",
+          "line_start": 635,
+          "line_end": 700,
+          "disassembly_slice_sha256": "59e4aed018d609fe4861df2a2f007a02c4a3f4ad831e99f0f324dd1e98d8c24f"
+        }
+      ],
+      "selected_fields": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/BehaviorControl",
+      "class_hash": "bf5d1010d11a963210827ad30c53faa51540309b4d47add7f6fbe6b567d41de4",
+      "disassembly_hash": "d95dbb893b88eb592790cacb8e5e3f45bea5bcbef18af5e2a5adc0c66c8859fd",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "origin": "HASH_VERIFIED_ORIGINAL_DISASSEMBLY",
+      "member_count": 5,
+      "selected_members": [
+        {
+          "declaration": "public abstract net.minecraft.world.entity.ai.behavior.Behavior$Status getStatus();",
+          "descriptor": "()Lnet/minecraft/world/entity/ai/behavior/Behavior$Status;",
+          "line_start": 38,
+          "line_end": 41,
+          "disassembly_slice_sha256": "12b28f3392d1ed8a8802516181adcb68659c2def7ff75b5e32952369962152b3"
+        },
+        {
+          "declaration": "public abstract boolean tryStart(net.minecraft.server.level.ServerLevel, E, long);",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)Z",
+          "line_start": 42,
+          "line_end": 46,
+          "disassembly_slice_sha256": "1b269617ddcf23fbc880770c5d51cbbfda5380e6d387b2fa6f2e5ccc8696c9a1"
+        },
+        {
+          "declaration": "public abstract void tickOrStop(net.minecraft.server.level.ServerLevel, E, long);",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "line_start": 47,
+          "line_end": 51,
+          "disassembly_slice_sha256": "744a3e129e14a2b081c44b010d1e5d9bc6c504aa5bad6f1f0b942cae6c463525"
+        },
+        {
+          "declaration": "public abstract void doStop(net.minecraft.server.level.ServerLevel, E, long);",
+          "descriptor": "(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "line_start": 52,
+          "line_end": 56,
+          "disassembly_slice_sha256": "9334ea6180385b0a25ea2be86e45bd4a58729b03d80a42b5fd432d0d61ed5547"
+        },
+        {
+          "declaration": "public abstract java.lang.String debugString();",
+          "descriptor": "()Ljava/lang/String;",
+          "line_start": 57,
+          "line_end": 59,
+          "disassembly_slice_sha256": "a2b89111a76ca09606637123bef0d5097e3739dc425244e79c7845cab9d78731"
+        }
+      ],
+      "selected_fields": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/Behavior$Status",
+      "class_hash": "d9b8e17b6b9f4fa8e69eecaa0df1f9cd622998c24740080b89b3004347ea0462",
+      "disassembly_hash": "7c68c48a555f797912d161d6cedbc46967afecd11720c8f3c6ac2c712c43dfbd",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "origin": "FRESH_GENUINE_JAVAP_SAME_ARTIFACT",
+      "member_count": 5,
+      "selected_members": [],
+      "selected_fields": [
+        {
+          "declaration": "public static final net.minecraft.world.entity.ai.behavior.Behavior$Status STOPPED;",
+          "descriptor": "Lnet/minecraft/world/entity/ai/behavior/Behavior$Status;",
+          "line_start": 68,
+          "line_end": 71,
+          "disassembly_slice_sha256": "42e754821ac236715d655bcc1fafd3d243ef8235ccc84bcba3018afe34765631"
+        },
+        {
+          "declaration": "public static final net.minecraft.world.entity.ai.behavior.Behavior$Status RUNNING;",
+          "descriptor": "Lnet/minecraft/world/entity/ai/behavior/Behavior$Status;",
+          "line_start": 72,
+          "line_end": 75,
+          "disassembly_slice_sha256": "f5a295b9612f678df7e85033ca0c82529806fd56528ca4791dd15391c49ed5b0"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/memory/ExpirableValue",
+      "class_hash": "91de5e1f31fc1408333a0110b2564d17c37ff458b8ea6688a7bfb9fd4ac6e6f8",
+      "disassembly_hash": "854d7726ef47d9f86fb77aa8f130ed5b5f2498f9b0e0ebf79951f24b4d50035a",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "origin": "HASH_VERIFIED_ORIGINAL_DISASSEMBLY",
+      "member_count": 14,
+      "selected_members": [
+        {
+          "declaration": "public net.minecraft.world.entity.ai.memory.ExpirableValue(T, long);",
+          "descriptor": "(Ljava/lang/Object;J)V",
+          "line_start": 233,
+          "line_end": 262,
+          "disassembly_slice_sha256": "da0afb4c77cc68609e6da8416ee7f41f6467a77054cf942e4c3550ed5068736d"
+        },
+        {
+          "declaration": "public void tick();",
+          "descriptor": "()V",
+          "line_start": 263,
+          "line_end": 291,
+          "disassembly_slice_sha256": "721885c15e070d6a22b7690f5f14f1ea23f0b0fa58f2c6f8fed9555597d9a6ba"
+        },
+        {
+          "declaration": "public static <T extends java.lang.Object> net.minecraft.world.entity.ai.memory.ExpirableValue<T> of(T);",
+          "descriptor": "(Ljava/lang/Object;)Lnet/minecraft/world/entity/ai/memory/ExpirableValue;",
+          "line_start": 292,
+          "line_end": 312,
+          "disassembly_slice_sha256": "5a005bb3009a20584de040fb82a208a73d8c61dbf79d04178807ed3b8b64f53b"
+        },
+        {
+          "declaration": "public static <T extends java.lang.Object> net.minecraft.world.entity.ai.memory.ExpirableValue<T> of(T, long);",
+          "descriptor": "(Ljava/lang/Object;J)Lnet/minecraft/world/entity/ai/memory/ExpirableValue;",
+          "line_start": 313,
+          "line_end": 334,
+          "disassembly_slice_sha256": "bb2c46cd3276cca69c78982b83826a3844eb5c5eec35241701f697a2aa60a77e"
+        },
+        {
+          "declaration": "public long getTimeToLive();",
+          "descriptor": "()J",
+          "line_start": 335,
+          "line_end": 351,
+          "disassembly_slice_sha256": "57c124930b42c229b25dac7a9b38962f42ac32094a294554240427056985836c"
+        },
+        {
+          "declaration": "public T getValue();",
+          "descriptor": "()Ljava/lang/Object;",
+          "line_start": 352,
+          "line_end": 369,
+          "disassembly_slice_sha256": "e723a42c2b9d2a0ff09c42a8285b5f29dd38dbc73d66fbf805ed1916ae900c2b"
+        },
+        {
+          "declaration": "public boolean hasExpired();",
+          "descriptor": "()Z",
+          "line_start": 370,
+          "line_end": 397,
+          "disassembly_slice_sha256": "0713146272ac99bbbef8b8662a431dbbb201a1cdb02ba47ffbe4744b993d6487"
+        },
+        {
+          "declaration": "public java.lang.String toString();",
+          "descriptor": "()Ljava/lang/String;",
+          "line_start": 398,
+          "line_end": 432,
+          "disassembly_slice_sha256": "dc2a050ed33dde937a25fb239dd3f5dc4d856e1b20d72d93006d689e633a1df3"
+        },
+        {
+          "declaration": "public boolean canExpire();",
+          "descriptor": "()Z",
+          "line_start": 433,
+          "line_end": 463,
+          "disassembly_slice_sha256": "752f2af97c35d9127688eae326198c086907e14843164092a8468eaa10cc2278"
+        },
+        {
+          "declaration": "public static <T extends java.lang.Object> com.mojang.serialization.Codec<net.minecraft.world.entity.ai.memory.ExpirableValue<T>> codec(com.mojang.serialization.Codec<T>);",
+          "descriptor": "(Lcom/mojang/serialization/Codec;)Lcom/mojang/serialization/Codec;",
+          "line_start": 464,
+          "line_end": 482,
+          "disassembly_slice_sha256": "82184b03f82d718cd8722a146b53adad56c379ee079e341f9b78d3810dfd85aa"
+        },
+        {
+          "declaration": "private static com.mojang.datafixers.kinds.App lambda$codec$3(com.mojang.serialization.Codec, com.mojang.serialization.codecs.RecordCodecBuilder$Instance);",
+          "descriptor": "(Lcom/mojang/serialization/Codec;Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;",
+          "line_start": 483,
+          "line_end": 515,
+          "disassembly_slice_sha256": "ea245ff9b2dac7fd614c0d77ef23d55fd61cf50a76b54080505790bd2f6efbae"
+        },
+        {
+          "declaration": "private static net.minecraft.world.entity.ai.memory.ExpirableValue lambda$codec$2(java.lang.Object, java.util.Optional);",
+          "descriptor": "(Ljava/lang/Object;Ljava/util/Optional;)Lnet/minecraft/world/entity/ai/memory/ExpirableValue;",
+          "line_start": 516,
+          "line_end": 538,
+          "disassembly_slice_sha256": "0d434a05bfecc6dec4504b6b0a54d318deec3125e9f5c4a1c02fc61b18c4c8ad"
+        },
+        {
+          "declaration": "private static java.util.Optional lambda$codec$1(net.minecraft.world.entity.ai.memory.ExpirableValue);",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/memory/ExpirableValue;)Ljava/util/Optional;",
+          "line_start": 539,
+          "line_end": 564,
+          "disassembly_slice_sha256": "5d07c8aac63160686d25bafeb15727172e98cee8a75e988b7ac18dc58186cd66"
+        },
+        {
+          "declaration": "private static java.lang.Object lambda$codec$0(net.minecraft.world.entity.ai.memory.ExpirableValue);",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/memory/ExpirableValue;)Ljava/lang/Object;",
+          "line_start": 565,
+          "line_end": 577,
+          "disassembly_slice_sha256": "3d91fa0f56293f522bb6ecdbd22fc6658e0d4ef0ba967cefd02179f551e5d56f"
+        }
+      ],
+      "selected_fields": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/memory/MemoryModuleType",
+      "class_hash": "3580fdffdb1dd0359784af0b485b623472a71d58d49705d9ea71e9e8d5356988",
+      "disassembly_hash": "ae493ea0cf2be82486d8b38ad9c4c5996301b7b3f6ca7bddfc376ea93da5e737",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "origin": "FRESH_GENUINE_JAVAP_SAME_ARTIFACT",
+      "member_count": 6,
+      "selected_members": [
+        {
+          "declaration": "public net.minecraft.world.entity.ai.memory.MemoryModuleType(java.util.Optional<com.mojang.serialization.Codec<U>>);",
+          "descriptor": "(Ljava/util/Optional;)V",
+          "line_start": 1167,
+          "line_end": 1196,
+          "disassembly_slice_sha256": "1403a277ddcba884e5f8e7e2b2c1e9c229a7cab4ef3eeaa77cd31d4f28f26281"
+        },
+        {
+          "declaration": "public java.util.Optional<com.mojang.serialization.Codec<net.minecraft.world.entity.ai.memory.ExpirableValue<U>>> getCodec();",
+          "descriptor": "()Ljava/util/Optional;",
+          "line_start": 1216,
+          "line_end": 1233,
+          "disassembly_slice_sha256": "62b7f32bef247a9e39795a4ff95e6aa2e85f54a1a801045ff91e60ec65b05cfc"
+        },
+        {
+          "declaration": "private static <U extends java.lang.Object> net.minecraft.world.entity.ai.memory.MemoryModuleType<U> register(java.lang.String, com.mojang.serialization.Codec<U>);",
+          "descriptor": "(Ljava/lang/String;Lcom/mojang/serialization/Codec;)Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;",
+          "line_start": 1234,
+          "line_end": 1262,
+          "disassembly_slice_sha256": "68217524b837d0645a63dc98aed10c1299d086303dcbb0200a5c446d13aa79ee"
+        },
+        {
+          "declaration": "private static <U extends java.lang.Object> net.minecraft.world.entity.ai.memory.MemoryModuleType<U> register(java.lang.String);",
+          "descriptor": "(Ljava/lang/String;)Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;",
+          "line_start": 1263,
+          "line_end": 1286,
+          "disassembly_slice_sha256": "b2cb10a7a34246b9e3df254d5bcc23742f4c4057b4817fcb9810438a39bda287"
+        }
+      ],
+      "selected_fields": [
+        {
+          "declaration": "public static final net.minecraft.world.entity.ai.memory.MemoryModuleType<net.minecraft.world.entity.ai.memory.WalkTarget> WALK_TARGET;",
+          "descriptor": "Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;",
+          "line_start": 737,
+          "line_end": 741,
+          "disassembly_slice_sha256": "4f1a809a941336a06685530a28a6824b6fece06d8fd9540ec02a12e11c2cfd12"
+        },
+        {
+          "declaration": "public static final net.minecraft.world.entity.ai.memory.MemoryModuleType<net.minecraft.world.entity.ai.behavior.PositionTracker> LOOK_TARGET;",
+          "descriptor": "Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;",
+          "line_start": 742,
+          "line_end": 746,
+          "disassembly_slice_sha256": "a5a44c6616bafa4baa3ec3453efa20ef0cc4f01d4f3c18c82f0237f1fa42085c"
+        },
+        {
+          "declaration": "public static final net.minecraft.world.entity.ai.memory.MemoryModuleType<net.minecraft.world.entity.LivingEntity> ATTACK_TARGET;",
+          "descriptor": "Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;",
+          "line_start": 747,
+          "line_end": 751,
+          "disassembly_slice_sha256": "69ad173043c5dfa2a16263e7081045a4ad45ec5ac4b19c36543efb1cea0a1718"
+        },
+        {
+          "declaration": "public static final net.minecraft.world.entity.ai.memory.MemoryModuleType<net.minecraft.world.level.pathfinder.Path> PATH;",
+          "descriptor": "Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;",
+          "line_start": 772,
+          "line_end": 776,
+          "disassembly_slice_sha256": "29c6519b5ccfa174438c666eb93a846d143c9c3c1d3b837745912178e0b377b6"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/memory/MemoryStatus",
+      "class_hash": "049a2134384a56d5ad5ddbea5b7c907b1bf696854126c5d287b26d6a96e53019",
+      "disassembly_hash": "421f4a473014ad63fbffa11cb32eab10dfd2b51ec92236c2521411aeaa5798c0",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "origin": "FRESH_GENUINE_JAVAP_SAME_ARTIFACT",
+      "member_count": 5,
+      "selected_members": [],
+      "selected_fields": [
+        {
+          "declaration": "public static final net.minecraft.world.entity.ai.memory.MemoryStatus VALUE_PRESENT;",
+          "descriptor": "Lnet/minecraft/world/entity/ai/memory/MemoryStatus;",
+          "line_start": 67,
+          "line_end": 70,
+          "disassembly_slice_sha256": "e8c16c308a20b393092481901c5b04040a1e0e0b4e84dd9dc5e28bcb4793daac"
+        },
+        {
+          "declaration": "public static final net.minecraft.world.entity.ai.memory.MemoryStatus VALUE_ABSENT;",
+          "descriptor": "Lnet/minecraft/world/entity/ai/memory/MemoryStatus;",
+          "line_start": 71,
+          "line_end": 74,
+          "disassembly_slice_sha256": "fb2572035049046781134e55616ba2a6353be25fab4674da3104461649e5a35f"
+        },
+        {
+          "declaration": "public static final net.minecraft.world.entity.ai.memory.MemoryStatus REGISTERED;",
+          "descriptor": "Lnet/minecraft/world/entity/ai/memory/MemoryStatus;",
+          "line_start": 75,
+          "line_end": 78,
+          "disassembly_slice_sha256": "b8274b321ccd830de2253cc8b4929a4354f853f98b1402bb5367e503066a3588"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/schedule/Activity",
+      "class_hash": "a0fd2619ada4912ae04d2e612d60363c6e7abd0026590000a246f0b12f8cbfa4",
+      "disassembly_hash": "769ce99bcb1318d1db3593031db6fff050d962a589ca73e9895b8dfa1727e1b2",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "origin": "FRESH_GENUINE_JAVAP_SAME_ARTIFACT",
+      "member_count": 7,
+      "selected_members": [
+        {
+          "declaration": "public net.minecraft.world.entity.schedule.Activity(java.lang.String);",
+          "descriptor": "(Ljava/lang/String;)V",
+          "line_start": 322,
+          "line_end": 346,
+          "disassembly_slice_sha256": "32570eae9484c089fe61acc8ad4cdb96e406834938e415b4065155f1efaf0879"
+        },
+        {
+          "declaration": "public java.lang.String getName();",
+          "descriptor": "()Ljava/lang/String;",
+          "line_start": 347,
+          "line_end": 360,
+          "disassembly_slice_sha256": "9d464e44be0adf997e77465cb5fb51844f1a3a99a4aad9a90d633fb36fcdae09"
+        },
+        {
+          "declaration": "private static net.minecraft.world.entity.schedule.Activity register(java.lang.String);",
+          "descriptor": "(Ljava/lang/String;)Lnet/minecraft/world/entity/schedule/Activity;",
+          "line_start": 361,
+          "line_end": 380,
+          "disassembly_slice_sha256": "675fe03e03fc6dd1aa3b13d5676d78b6c8f138b086b52d9f7769c3ad2d82f9c6"
+        },
+        {
+          "declaration": "public boolean equals(java.lang.Object);",
+          "descriptor": "(Ljava/lang/Object;)Z",
+          "line_start": 381,
+          "line_end": 428,
+          "disassembly_slice_sha256": "511f3b22f3d40f5e4cd2242d59e022efb496aee81618628d49913f6d0f4ead0e"
+        },
+        {
+          "declaration": "public int hashCode();",
+          "descriptor": "()I",
+          "line_start": 429,
+          "line_end": 442,
+          "disassembly_slice_sha256": "9efe06c793294ffe313c5df57bea6aaf0a0388c4c7f5e7fdd578968b5062bc87"
+        }
+      ],
+      "selected_fields": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/schedule/Schedule",
+      "class_hash": "b9c7c0a047ca71fee833c78e87fefc73f7c2db46c64ba13cdf4e32331a195e1e",
+      "disassembly_hash": "b8bc46ef6dc0fe051a375348804a629a69f1ada97b3bf08d27c65a10d1681c0a",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "origin": "FRESH_GENUINE_JAVAP_SAME_ARTIFACT",
+      "member_count": 9,
+      "selected_members": [
+        {
+          "declaration": "public net.minecraft.world.entity.schedule.Schedule();",
+          "descriptor": "()V",
+          "line_start": 298,
+          "line_end": 315,
+          "disassembly_slice_sha256": "9a77f2b82777c2be751f773ea89d57e36c6ce3446ca563335f4142089789b284"
+        },
+        {
+          "declaration": "protected static net.minecraft.world.entity.schedule.ScheduleBuilder register(java.lang.String);",
+          "descriptor": "(Ljava/lang/String;)Lnet/minecraft/world/entity/schedule/ScheduleBuilder;",
+          "line_start": 316,
+          "line_end": 341,
+          "disassembly_slice_sha256": "15fdf08eb5543c53f6b061e4d1d7d9c158d1f3322f4608e5243a462921d7951d"
+        },
+        {
+          "declaration": "protected void ensureTimelineExistsFor(net.minecraft.world.entity.schedule.Activity);",
+          "descriptor": "(Lnet/minecraft/world/entity/schedule/Activity;)V",
+          "line_start": 342,
+          "line_end": 372,
+          "disassembly_slice_sha256": "c1cdc7b9e33798df518b9601711531b8b2a4ed6bf592b366281e30021029695a"
+        },
+        {
+          "declaration": "protected net.minecraft.world.entity.schedule.Timeline getTimelineFor(net.minecraft.world.entity.schedule.Activity);",
+          "descriptor": "(Lnet/minecraft/world/entity/schedule/Activity;)Lnet/minecraft/world/entity/schedule/Timeline;",
+          "line_start": 373,
+          "line_end": 390,
+          "disassembly_slice_sha256": "a7be3019142f19100ded2e9f1b1fd5dbbed71d1ed7efc0abf39c48a19d671b27"
+        },
+        {
+          "declaration": "protected java.util.List<net.minecraft.world.entity.schedule.Timeline> getAllTimelinesExceptFor(net.minecraft.world.entity.schedule.Activity);",
+          "descriptor": "(Lnet/minecraft/world/entity/schedule/Activity;)Ljava/util/List;",
+          "line_start": 391,
+          "line_end": 421,
+          "disassembly_slice_sha256": "ed754b2423e33d3f97beb9c513bc8ff3f1388cd18e892fefc18935539e0fd6b8"
+        },
+        {
+          "declaration": "public net.minecraft.world.entity.schedule.Activity getActivityAt(int);",
+          "descriptor": "(I)Lnet/minecraft/world/entity/schedule/Activity;",
+          "line_start": 422,
+          "line_end": 452,
+          "disassembly_slice_sha256": "64a126fc51c7a47b31810b877cd8e11d8dee75cdd374d77d4dc00cc4f03cc568"
+        },
+        {
+          "declaration": "private static double lambda$getActivityAt$1(int, java.util.Map$Entry);",
+          "descriptor": "(ILjava/util/Map$Entry;)D",
+          "line_start": 453,
+          "line_end": 471,
+          "disassembly_slice_sha256": "9726a5a2fd93733a0a4d5ae81a8a0978ee84e94bce753b8c9d24ebe0c36e9bf3"
+        },
+        {
+          "declaration": "private static boolean lambda$getAllTimelinesExceptFor$0(net.minecraft.world.entity.schedule.Activity, java.util.Map$Entry);",
+          "descriptor": "(Lnet/minecraft/world/entity/schedule/Activity;Ljava/util/Map$Entry;)Z",
+          "line_start": 472,
+          "line_end": 496,
+          "disassembly_slice_sha256": "1de64de37032613a5058ad083c0a716564b27dea6874a7dff44a675ca07e6d8f"
+        },
+        {
+          "declaration": "static {};",
+          "descriptor": "()V",
+          "line_start": 497,
+          "line_end": 580,
+          "disassembly_slice_sha256": "9431e885188b11d1c93aace23f352745ee2099a16fcd176835f22855d27922d4"
+        }
+      ],
+      "selected_fields": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/schedule/Timeline",
+      "class_hash": "2f5477528b363bdca065986d760bbbd60980d3474e865860d388d1d5f9cfbbb9",
+      "disassembly_hash": "ceb595574e47b4148356248db406870d5f0f5db3fe658f2512aa78876735d236",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "origin": "FRESH_GENUINE_JAVAP_SAME_ARTIFACT",
+      "member_count": 7,
+      "selected_members": [
+        {
+          "declaration": "public net.minecraft.world.entity.schedule.Timeline();",
+          "descriptor": "()V",
+          "line_start": 173,
+          "line_end": 190,
+          "disassembly_slice_sha256": "a4de3f3d85831f79a31c7dfba03c63d3e485054d064c37bffa0c99617224a8ba"
+        },
+        {
+          "declaration": "public com.google.common.collect.ImmutableList<net.minecraft.world.entity.schedule.Keyframe> getKeyframes();",
+          "descriptor": "()Lcom/google/common/collect/ImmutableList;",
+          "line_start": 191,
+          "line_end": 206,
+          "disassembly_slice_sha256": "dfc8f0f5047356aab088f67a7766a49dd30b46f6ee8cdaa9219d873d40555d37"
+        },
+        {
+          "declaration": "public net.minecraft.world.entity.schedule.Timeline addKeyframe(int, float);",
+          "descriptor": "(IF)Lnet/minecraft/world/entity/schedule/Timeline;",
+          "line_start": 207,
+          "line_end": 234,
+          "disassembly_slice_sha256": "ba1862aae179144e7d43e2f58cc58e09562bb0e3b682146eab7a6c1267db9145"
+        },
+        {
+          "declaration": "public net.minecraft.world.entity.schedule.Timeline addKeyframes(java.util.Collection<net.minecraft.world.entity.schedule.Keyframe>);",
+          "descriptor": "(Ljava/util/Collection;)Lnet/minecraft/world/entity/schedule/Timeline;",
+          "line_start": 235,
+          "line_end": 261,
+          "disassembly_slice_sha256": "0def0d368ae5f203bdcb307a25edcefbacffe7857b0518a61e4497669d4f92db"
+        },
+        {
+          "declaration": "private void sortAndDeduplicateKeyframes();",
+          "descriptor": "()V",
+          "line_start": 262,
+          "line_end": 303,
+          "disassembly_slice_sha256": "8cb482f2ba637c0b9e7e90d307e7509af9ec3f33347b6086600ae29ff9b830fc"
+        },
+        {
+          "declaration": "public float getValueAt(int);",
+          "descriptor": "(I)F",
+          "line_start": 304,
+          "line_end": 442,
+          "disassembly_slice_sha256": "b74660e2a57ed4645b12feccd57c41962c9da2192952e18b021a7781e48a7eff"
+        },
+        {
+          "declaration": "private static void lambda$sortAndDeduplicateKeyframes$0(it.unimi.dsi.fastutil.ints.Int2ObjectSortedMap, net.minecraft.world.entity.schedule.Keyframe);",
+          "descriptor": "(Lit/unimi/dsi/fastutil/ints/Int2ObjectSortedMap;Lnet/minecraft/world/entity/schedule/Keyframe;)V",
+          "line_start": 443,
+          "line_end": 460,
+          "disassembly_slice_sha256": "3d01e56564f9a2f79ff374209aaade97cfd809640ebcd24a0f7a980724d24103"
+        }
+      ],
+      "selected_fields": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/schedule/Keyframe",
+      "class_hash": "6b0c6c46820fe5f1604a0b9f62ca013cabba8400e5ded295043bb4060d6b1eb1",
+      "disassembly_hash": "620aef4a445f20f81fa135f7c82de8ea8d10612a1c0ef5eeea58e25c4aabe6b7",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "origin": "FRESH_GENUINE_JAVAP_SAME_ARTIFACT",
+      "member_count": 3,
+      "selected_members": [
+        {
+          "declaration": "public net.minecraft.world.entity.schedule.Keyframe(int, float);",
+          "descriptor": "(IF)V",
+          "line_start": 52,
+          "line_end": 76,
+          "disassembly_slice_sha256": "927f21df247c7b9fb5b0dba8e963a8ba8d262bf1f2f0516cc5780ae5c90836aa"
+        },
+        {
+          "declaration": "public int getTimeStamp();",
+          "descriptor": "()I",
+          "line_start": 77,
+          "line_end": 90,
+          "disassembly_slice_sha256": "855e90daa448b2c2932efaba71160676a6e82f6e8089247d4027cd86a1a8140f"
+        },
+        {
+          "declaration": "public float getValue();",
+          "descriptor": "()F",
+          "line_start": 91,
+          "line_end": 103,
+          "disassembly_slice_sha256": "d432c85892ed1cffd3929b5918eeb87cdad2a1cb5a4161f1eaaf0f0b78638ad3"
+        }
+      ],
+      "selected_fields": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/memory/WalkTarget",
+      "class_hash": "576c496d41aaeb253a68874c060abe763b1f81d43844536b4fe375f4d40f7455",
+      "disassembly_hash": "9ebb68392b75246372d27da32a5e4fc3e988bee5956cedb67d700f7ea3ecde16",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "origin": "FRESH_GENUINE_JAVAP_SAME_ARTIFACT",
+      "member_count": 7,
+      "selected_members": [
+        {
+          "declaration": "public net.minecraft.world.entity.ai.memory.WalkTarget(net.minecraft.core.BlockPos, float, int);",
+          "descriptor": "(Lnet/minecraft/core/BlockPos;FI)V",
+          "line_start": 90,
+          "line_end": 113,
+          "disassembly_slice_sha256": "37032cee26a41d031e7b3c483d370e256f8ad34b86e7bf31b3cd5974ddc2fe48"
+        },
+        {
+          "declaration": "public net.minecraft.world.entity.ai.memory.WalkTarget(net.minecraft.world.phys.Vec3, float, int);",
+          "descriptor": "(Lnet/minecraft/world/phys/Vec3;FI)V",
+          "line_start": 114,
+          "line_end": 138,
+          "disassembly_slice_sha256": "66483c6f0896df912a303434f88c8243dd837bff17aa9f191acf35063582cd68"
+        },
+        {
+          "declaration": "public net.minecraft.world.entity.ai.memory.WalkTarget(net.minecraft.world.entity.Entity, float, int);",
+          "descriptor": "(Lnet/minecraft/world/entity/Entity;FI)V",
+          "line_start": 139,
+          "line_end": 163,
+          "disassembly_slice_sha256": "2b171c45e02df977413d3e5ff42140657332e2f9e3cb560960e75d92efb68ea0"
+        },
+        {
+          "declaration": "public net.minecraft.world.entity.ai.memory.WalkTarget(net.minecraft.world.entity.ai.behavior.PositionTracker, float, int);",
+          "descriptor": "(Lnet/minecraft/world/entity/ai/behavior/PositionTracker;FI)V",
+          "line_start": 164,
+          "line_end": 193,
+          "disassembly_slice_sha256": "c09d84fb64c1db6b06f86f606128c2007bec1ee0138625938a14273f8fc7c39f"
+        },
+        {
+          "declaration": "public net.minecraft.world.entity.ai.behavior.PositionTracker getTarget();",
+          "descriptor": "()Lnet/minecraft/world/entity/ai/behavior/PositionTracker;",
+          "line_start": 194,
+          "line_end": 207,
+          "disassembly_slice_sha256": "6d05fd2d9464b2e9d5ba3c49790de650c5a9d6e7f953b916bf6f8bd4e6f53b38"
+        },
+        {
+          "declaration": "public float getSpeedModifier();",
+          "descriptor": "()F",
+          "line_start": 208,
+          "line_end": 221,
+          "disassembly_slice_sha256": "004d784201a9a3d9de85d228e188e17805a03ababd504162ed44bb7feb0b0b72"
+        },
+        {
+          "declaration": "public int getCloseEnoughDist();",
+          "descriptor": "()I",
+          "line_start": 222,
+          "line_end": 234,
+          "disassembly_slice_sha256": "88c3f1b0a006761132758c814a5b58025ea0a0dd250eaa3dc798a1b59d33e528"
+        }
+      ],
+      "selected_fields": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/PositionTracker",
+      "class_hash": "2e75b90bca14d47fc72be1af72a44733b37d7570c0d7e20c1f76dd3469f0d52b",
+      "disassembly_hash": "2f8ad24c588a6098afb7857314e7f69bd2376e425066b6b0a87d0009851bdc43",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "origin": "FRESH_GENUINE_JAVAP_SAME_ARTIFACT",
+      "member_count": 3,
+      "selected_members": [
+        {
+          "declaration": "public abstract net.minecraft.world.phys.Vec3 currentPosition();",
+          "descriptor": "()Lnet/minecraft/world/phys/Vec3;",
+          "line_start": 26,
+          "line_end": 29,
+          "disassembly_slice_sha256": "449452075064c40003f0e3ca35e6d6b6541cbfd78f79431e21d370fe95e1697e"
+        },
+        {
+          "declaration": "public abstract net.minecraft.core.BlockPos currentBlockPosition();",
+          "descriptor": "()Lnet/minecraft/core/BlockPos;",
+          "line_start": 30,
+          "line_end": 33,
+          "disassembly_slice_sha256": "e19ba83dffaa342e96953caf63ecfc17e3b1640fd945cb9370e8532f86a04f3e"
+        },
+        {
+          "declaration": "public abstract boolean isVisibleBy(net.minecraft.world.entity.LivingEntity);",
+          "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;)Z",
+          "line_start": 34,
+          "line_end": 36,
+          "disassembly_slice_sha256": "1ef41b24678541303cc77734682fdecacf6121fbf15b04a50c29bbeeca8954d6"
+        }
+      ],
+      "selected_fields": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/EntityTracker",
+      "class_hash": "e156b8b2374f6aed1bae2d8e08a56e273a009de3f09f5658c8c080c8d50c2d17",
+      "disassembly_hash": "68e5f677c23df9c167393aacadcc48f7526f46e33c7cc96d48293759e2f90b95",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "origin": "FRESH_GENUINE_JAVAP_SAME_ARTIFACT",
+      "member_count": 6,
+      "selected_members": [
+        {
+          "declaration": "public net.minecraft.world.entity.ai.behavior.EntityTracker(net.minecraft.world.entity.Entity, boolean);",
+          "descriptor": "(Lnet/minecraft/world/entity/Entity;Z)V",
+          "line_start": 141,
+          "line_end": 165,
+          "disassembly_slice_sha256": "3463cd62c56197d06f90d62847dd2e2870731e3fc1b4f81ec201043bf3413a84"
+        },
+        {
+          "declaration": "public net.minecraft.world.phys.Vec3 currentPosition();",
+          "descriptor": "()Lnet/minecraft/world/phys/Vec3;",
+          "line_start": 166,
+          "line_end": 200,
+          "disassembly_slice_sha256": "6c50697fd44dbb977cf06a2c84ebf2b796bea0bb9ff22506ed1e2d570de5b8d8"
+        },
+        {
+          "declaration": "public net.minecraft.core.BlockPos currentBlockPosition();",
+          "descriptor": "()Lnet/minecraft/core/BlockPos;",
+          "line_start": 201,
+          "line_end": 215,
+          "disassembly_slice_sha256": "b4bdc0d59d2dab88d9d71416b28151fb91b6b22760e7853e0d9f4bb6040e66f0"
+        },
+        {
+          "declaration": "public boolean isVisibleBy(net.minecraft.world.entity.LivingEntity);",
+          "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;)Z",
+          "line_start": 216,
+          "line_end": 284,
+          "disassembly_slice_sha256": "f32570360dc0bfb1ce1bc31eedaa0daae40a7ba134499639602f97f7be94a964"
+        },
+        {
+          "declaration": "public net.minecraft.world.entity.Entity getEntity();",
+          "descriptor": "()Lnet/minecraft/world/entity/Entity;",
+          "line_start": 285,
+          "line_end": 298,
+          "disassembly_slice_sha256": "e1978c208e271bf51f2f6b43da042ce8dc5b5e17869eebc243b7029862a78266"
+        },
+        {
+          "declaration": "public java.lang.String toString();",
+          "descriptor": "()Ljava/lang/String;",
+          "line_start": 299,
+          "line_end": 312,
+          "disassembly_slice_sha256": "0575166892f5586ec764dfbc40a5f7b4c5633a12634e7b91b14d5cc7ac749093"
+        }
+      ],
+      "selected_fields": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/BlockPosTracker",
+      "class_hash": "e96aab9f8677dc076d20591fc4eed73da65570c02a65653912222d18d598a90d",
+      "disassembly_hash": "670da9599d18af1ccfa744166a0aaa117e0e6074fe754fbfb2e9aad8935ee9c5",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "origin": "FRESH_GENUINE_JAVAP_SAME_ARTIFACT",
+      "member_count": 6,
+      "selected_members": [
+        {
+          "declaration": "public net.minecraft.world.entity.ai.behavior.BlockPosTracker(net.minecraft.core.BlockPos);",
+          "descriptor": "(Lnet/minecraft/core/BlockPos;)V",
+          "line_start": 95,
+          "line_end": 120,
+          "disassembly_slice_sha256": "dc809089563e1b47c83817cecb7e455a44f0ea26ebd86c799d7532aaac8b933c"
+        },
+        {
+          "declaration": "public net.minecraft.world.entity.ai.behavior.BlockPosTracker(net.minecraft.world.phys.Vec3);",
+          "descriptor": "(Lnet/minecraft/world/phys/Vec3;)V",
+          "line_start": 121,
+          "line_end": 145,
+          "disassembly_slice_sha256": "fb708560d1242557e7298fd5999e7f2d5f331b7de9b421f91042fa09ac8d2906"
+        },
+        {
+          "declaration": "public net.minecraft.world.phys.Vec3 currentPosition();",
+          "descriptor": "()Lnet/minecraft/world/phys/Vec3;",
+          "line_start": 146,
+          "line_end": 159,
+          "disassembly_slice_sha256": "55647b352b90c8ff783ed7f56217d9de8fa0d552d0878f8c7b2722bc5cd07455"
+        },
+        {
+          "declaration": "public net.minecraft.core.BlockPos currentBlockPosition();",
+          "descriptor": "()Lnet/minecraft/core/BlockPos;",
+          "line_start": 160,
+          "line_end": 173,
+          "disassembly_slice_sha256": "6288ca154733fd9e52c0f00858d7853aebdcbc52a6bbc52d6b011c70a0b4e260"
+        },
+        {
+          "declaration": "public boolean isVisibleBy(net.minecraft.world.entity.LivingEntity);",
+          "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;)Z",
+          "line_start": 174,
+          "line_end": 187,
+          "disassembly_slice_sha256": "475e3643e6544dc1487e21c3fd39c46b3cb4324bc1120bc5e2cfab76d14b984c"
+        },
+        {
+          "declaration": "public java.lang.String toString();",
+          "descriptor": "()Ljava/lang/String;",
+          "line_start": 188,
+          "line_end": 203,
+          "disassembly_slice_sha256": "8f0c5dbfdee2d23f18ddd248bf591c4c4eaf16e568a70d69ebd52fdae16c5076"
+        }
+      ],
+      "selected_fields": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/npc/Villager",
+      "class_hash": "81de732fa9dca114773d785844f6e3f4d5b7a5e05762c79e86ee9e7ada191d63",
+      "disassembly_hash": "01654c4875ad2b5275162dbde238f80fcdf1d984ab326a41079dbd554981042e",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "origin": "HASH_VERIFIED_ORIGINAL_DISASSEMBLY",
+      "member_count": 95,
+      "selected_members": [
+        {
+          "declaration": "protected void customServerAiStep();",
+          "descriptor": "()V",
+          "line_start": 2625,
+          "line_end": 2784,
+          "disassembly_slice_sha256": "8739e268fa122aee7c3334fbbec46cd1c99058054b87a8d03b1dce00fdcc750c"
+        }
+      ],
+      "selected_fields": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/goal/GoalSelector$1",
+      "class_hash": "e94131c0ca611d1f639296364314d8661baa25c76a2ff4e874eadf90b5d91156",
+      "disassembly_hash": "d75195c3d2bc2dccdb476841fb250734d3ac2d20a0478c456e618c7cb98d8930",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "origin": "FRESH_GENUINE_JAVAP_SAME_ARTIFACT",
+      "member_count": 2,
+      "selected_members": [
+        {
+          "declaration": "net.minecraft.world.entity.ai.goal.GoalSelector$1();",
+          "descriptor": "()V",
+          "line_start": 36,
+          "line_end": 49,
+          "disassembly_slice_sha256": "0bc388eb48c81a902b30cc5d174776341d93e180cfe63a367387be3e4eda1624"
+        },
+        {
+          "declaration": "public boolean canUse();",
+          "descriptor": "()Z",
+          "line_start": 50,
+          "line_end": 61,
+          "disassembly_slice_sha256": "b4fa627bf98f403d1c610a61e2d3d295d5f115228b553dacef82e5cc0771bdd5"
+        }
+      ],
+      "selected_fields": []
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/goal/GoalSelector$2",
+      "class_hash": "cd5745b67ae0ee64cfe17cd92c3d5222dd749fb42dc5153e9e22d4cb6c6d856c",
+      "disassembly_hash": "a1dbb1f43195a4c85d46717364a3f17a1ff8eb6e6fb54c7c6bfb46bdd92b409d",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "origin": "FRESH_GENUINE_JAVAP_SAME_ARTIFACT",
+      "member_count": 2,
+      "selected_members": [
+        {
+          "declaration": "net.minecraft.world.entity.ai.goal.GoalSelector$2(int, net.minecraft.world.entity.ai.goal.Goal);",
+          "descriptor": "(ILnet/minecraft/world/entity/ai/goal/Goal;)V",
+          "line_start": 40,
+          "line_end": 57,
+          "disassembly_slice_sha256": "dcc7aabc55afe688c3f70719242bb2621a05b849d806221cccbec1e59228e0cb"
+        },
+        {
+          "declaration": "public boolean isRunning();",
+          "descriptor": "()Z",
+          "line_start": 58,
+          "line_end": 69,
+          "disassembly_slice_sha256": "fbe0853bc3369af7b6046b9cf203adb8ad08dd1526e2e039f338ee4f50df1ee3"
+        }
+      ],
+      "selected_fields": []
+    },
+    {
+      "owner": "net/minecraft/util/Mth",
+      "class_hash": "bc99da563af42df35bd5290136b7e204210b51a3c35d52b1811237887fb3908d",
+      "disassembly_hash": "00e5c68e0c431efe9e98fb42c532c5d409edd51016ba054084511554daab9032",
+      "evidence_status": "EXACT_CAPTURED_DEVELOPMENT_BYTECODE",
+      "origin": "FRESH_GENUINE_JAVAP_SAME_ARTIFACT",
+      "member_count": 94,
+      "selected_members": [
+        {
+          "declaration": "public static int positiveCeilDiv(int, int);",
+          "descriptor": "(II)I",
+          "line_start": 3623,
+          "line_end": 3640,
+          "disassembly_slice_sha256": "b3a1dd02a3f498d9b27628bb0866981cc341ef1e0cd3cc3cb79dbb1d380c5bdd"
+        }
+      ],
+      "selected_fields": []
+    }
+  ]
+}

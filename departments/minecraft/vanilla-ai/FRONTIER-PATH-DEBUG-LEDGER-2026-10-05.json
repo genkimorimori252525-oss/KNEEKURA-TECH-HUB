@@ -1,0 +1,3200 @@
+{
+  "schema_version": 1,
+  "minecraft": "1.21.1",
+  "loader": "OFFICIAL_VANILLA_UNTRANSFORMED",
+  "scope": "BOUNDED_ORIGINAL_B10_PATH_TERRAIN_DEBUG_SOURCE_COMPARISON_NOT_RUNTIME_ACCEPTANCE",
+  "artifact_receipt": {
+    "schemaVersion": 1,
+    "minecraft": "1.21.1",
+    "track": "FRONTIER_OFFICIAL_VANILLA_BINARY_MOJANG_MAPPINGS_NOT_ANCHOR_OR_LOADER_PATCH",
+    "javaVersion": {
+      "component": "java-runtime-delta",
+      "majorVersion": 21
+    },
+    "manifestUrl": "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json",
+    "versionUrl": "https://piston-meta.mojang.com/v1/packages/22a1966494dfa4eeb5ee778c8e6ed5b774839582/1.21.1.json",
+    "versionSha1": "22a1966494dfa4eeb5ee778c8e6ed5b774839582",
+    "versionSha256": "458f2fbabc75a1cf79e5853c067f5ad95fca2163941c343b56c5c55b9127c8df",
+    "artifacts": [
+      {
+        "kind": "client",
+        "file": "client.jar",
+        "url": "https://piston-data.mojang.com/v1/objects/30c73b1c5da787909b2f73340419fdf13b9def88/client.jar",
+        "bytes": 26836906,
+        "sha1": "30c73b1c5da787909b2f73340419fdf13b9def88",
+        "sha256": "499f6897d1837516680f3114072d8106e11c9adcd933fe5cf051b551089b0c99"
+      },
+      {
+        "kind": "client_mappings",
+        "file": "client-mappings.txt",
+        "url": "https://piston-data.mojang.com/v1/objects/2244b6f072256667bcd9a73df124d6c58de77992/client.txt",
+        "bytes": 9598610,
+        "sha1": "2244b6f072256667bcd9a73df124d6c58de77992",
+        "sha256": "140c47931cccc8fc9e4c22d7603e2d714d1a953a146f51ea7397d95c955536ec"
+      }
+    ],
+    "checkedAt": "2026-10-03T21:16:06.942Z",
+    "executed": false,
+    "limits": [
+      "Static bytecode/mapping inspection only; no JDK21 install or Minecraft1.21.1 launch.",
+      "Official Vanilla is not Forge/NeoForge transformed behavior; never mix its member locators into ANCHOR1.20.1.",
+      "Third-party binary/mapping contents remain private; Git records only bounded provenance and derived findings."
+    ]
+  },
+  "provider": {
+    "options": [
+      "-private",
+      "-s",
+      "-c",
+      "-l",
+      "-verbose"
+    ],
+    "executable_sha256": "bd5a9f99365fd432f79162f4ed9ca9b956c78cc81dfb6962adb6d207075711fb",
+    "jdk_release_sha256": "00d3211a59bc9f2577f93962e9210de8578c49fd2625022cb38606817d3a71f9",
+    "jdk_modules_sha256": "81f0e1bb87cd303ddcce2b216e27da416bd20799d9a9811ea1b070123cefff0f"
+  },
+  "prior_ledgers_sha256": {
+    "PATH-TERRAIN-BYTECODE-LEDGER-2026-10-05.json": "20b82feacc62e548fc76f9cea07986f0ed5c938f350113d0f16b601078880132",
+    "DEBUG-INFRASTRUCTURE-BYTECODE-LEDGER-2026-10-05.json": "cd5a14d95ab2ed027e32db6dfb5e4a996173fcb7024b499925be9c7d735e0f6a",
+    "FRONTIER-1.21.1-BYTECODE-LEDGER-2026-10-04.json": "778f6baddf5747c941b44ae5a3f5adaee7574982ddf820b22900fd2204e57388",
+    "FRONTIER-CONTROL-CACHE-LEDGER-2026-10-04.json": "15f7bef0a7053fb67c811468b96bb1e6244cfff807e5164ef9565d9714a4efd1"
+  },
+  "class_count": 52,
+  "selected_method_count": 117,
+  "all_private_resolved_method_count": 1385,
+  "inheritance_families": {
+    "net.minecraft.world.entity.ai.navigation.PathNavigation": [
+      {
+        "owner": "net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation",
+        "inheritance": [
+          "net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation",
+          "net.minecraft.world.entity.ai.navigation.PathNavigation"
+        ],
+        "class_hash": "02e50f4c18857bfd44bc06662966f12bc86098c25efd97602b0d77f7d1937fa1"
+      },
+      {
+        "owner": "net.minecraft.world.entity.ai.navigation.FlyingPathNavigation",
+        "inheritance": [
+          "net.minecraft.world.entity.ai.navigation.FlyingPathNavigation",
+          "net.minecraft.world.entity.ai.navigation.PathNavigation"
+        ],
+        "class_hash": "1fb9eb2cfc955fdcb8d522f4b138f2f85823bfb593466e7674d2acad24836439"
+      },
+      {
+        "owner": "net.minecraft.world.entity.ai.navigation.GroundPathNavigation",
+        "inheritance": [
+          "net.minecraft.world.entity.ai.navigation.GroundPathNavigation",
+          "net.minecraft.world.entity.ai.navigation.PathNavigation"
+        ],
+        "class_hash": "b5bf8be8556223ba9b082617d0c4c88b16253c684ea016f580718d2c47068bdb"
+      },
+      {
+        "owner": "net.minecraft.world.entity.ai.navigation.PathNavigation",
+        "inheritance": [
+          "net.minecraft.world.entity.ai.navigation.PathNavigation"
+        ],
+        "class_hash": "d86e25d6cf698e7f6688a0137304d02f59c8d01e60030afb81b5662e209956a3"
+      },
+      {
+        "owner": "net.minecraft.world.entity.ai.navigation.WallClimberNavigation",
+        "inheritance": [
+          "net.minecraft.world.entity.ai.navigation.WallClimberNavigation",
+          "net.minecraft.world.entity.ai.navigation.GroundPathNavigation",
+          "net.minecraft.world.entity.ai.navigation.PathNavigation"
+        ],
+        "class_hash": "b16bb3b12308d3bd03815e431013959c3c9cd18e57d92d9f05d016fdab95a542"
+      },
+      {
+        "owner": "net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation",
+        "inheritance": [
+          "net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation",
+          "net.minecraft.world.entity.ai.navigation.PathNavigation"
+        ],
+        "class_hash": "a9f46c79d14f69fccf861e24d5173f3b4ff0057553b2be569aba4d6de91eb7ef"
+      },
+      {
+        "owner": "net.minecraft.world.entity.animal.Bee$1",
+        "inheritance": [
+          "net.minecraft.world.entity.animal.Bee$1",
+          "net.minecraft.world.entity.ai.navigation.FlyingPathNavigation",
+          "net.minecraft.world.entity.ai.navigation.PathNavigation"
+        ],
+        "class_hash": "f1f9eca11a9b3c0e06af967b833741d906490ee32ab348ba598ef2feca2af97d"
+      },
+      {
+        "owner": "net.minecraft.world.entity.animal.Turtle$TurtlePathNavigation",
+        "inheritance": [
+          "net.minecraft.world.entity.animal.Turtle$TurtlePathNavigation",
+          "net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation",
+          "net.minecraft.world.entity.ai.navigation.PathNavigation"
+        ],
+        "class_hash": "6624633cc39ea0fd65bee44805bc1b9dd0e458a690ca4d3b898ce7cad049dbe0"
+      },
+      {
+        "owner": "net.minecraft.world.entity.animal.frog.Frog$FrogPathNavigation",
+        "inheritance": [
+          "net.minecraft.world.entity.animal.frog.Frog$FrogPathNavigation",
+          "net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation",
+          "net.minecraft.world.entity.ai.navigation.PathNavigation"
+        ],
+        "class_hash": "8ede3b5bb46c4c8489434b0da6cb7f7d316f277b54c054d2637cabc2de10402b"
+      },
+      {
+        "owner": "net.minecraft.world.entity.monster.Strider$StriderPathNavigation",
+        "inheritance": [
+          "net.minecraft.world.entity.monster.Strider$StriderPathNavigation",
+          "net.minecraft.world.entity.ai.navigation.GroundPathNavigation",
+          "net.minecraft.world.entity.ai.navigation.PathNavigation"
+        ],
+        "class_hash": "666dee85d1c6ccc0eb55030794710b6e678b048331595bd1f5921504e4e124c6"
+      },
+      {
+        "owner": "net.minecraft.world.entity.monster.warden.Warden$1",
+        "inheritance": [
+          "net.minecraft.world.entity.monster.warden.Warden$1",
+          "net.minecraft.world.entity.ai.navigation.GroundPathNavigation",
+          "net.minecraft.world.entity.ai.navigation.PathNavigation"
+        ],
+        "class_hash": "d5bb49890ccd87ff93b57dca26f7b314010fb094534b2730cb30170504e503c2"
+      }
+    ],
+    "net.minecraft.world.level.pathfinder.NodeEvaluator": [
+      {
+        "owner": "net.minecraft.world.entity.animal.frog.Frog$FrogNodeEvaluator",
+        "inheritance": [
+          "net.minecraft.world.entity.animal.frog.Frog$FrogNodeEvaluator",
+          "net.minecraft.world.level.pathfinder.AmphibiousNodeEvaluator",
+          "net.minecraft.world.level.pathfinder.WalkNodeEvaluator",
+          "net.minecraft.world.level.pathfinder.NodeEvaluator"
+        ],
+        "class_hash": "096499a70a7dea9ef7b215d2638487ded984b54bc26c21c85863be59314f37dd"
+      },
+      {
+        "owner": "net.minecraft.world.level.pathfinder.AmphibiousNodeEvaluator",
+        "inheritance": [
+          "net.minecraft.world.level.pathfinder.AmphibiousNodeEvaluator",
+          "net.minecraft.world.level.pathfinder.WalkNodeEvaluator",
+          "net.minecraft.world.level.pathfinder.NodeEvaluator"
+        ],
+        "class_hash": "8ade699feb8a1f73a8919fb2aea9dee6d59a1de25dfec6bf5dce0e39d732e59f"
+      },
+      {
+        "owner": "net.minecraft.world.level.pathfinder.FlyNodeEvaluator",
+        "inheritance": [
+          "net.minecraft.world.level.pathfinder.FlyNodeEvaluator",
+          "net.minecraft.world.level.pathfinder.WalkNodeEvaluator",
+          "net.minecraft.world.level.pathfinder.NodeEvaluator"
+        ],
+        "class_hash": "a8bd0d17d938b6d9be2b2bb9486c767caab62f915c7ccd17fc74e542eb1321a8"
+      },
+      {
+        "owner": "net.minecraft.world.level.pathfinder.NodeEvaluator",
+        "inheritance": [
+          "net.minecraft.world.level.pathfinder.NodeEvaluator"
+        ],
+        "class_hash": "6ba6e79602d91f40c88c64cf27e2c6659c2ff5b584c0004e8fb415f8bfe6f0e9"
+      },
+      {
+        "owner": "net.minecraft.world.level.pathfinder.SwimNodeEvaluator",
+        "inheritance": [
+          "net.minecraft.world.level.pathfinder.SwimNodeEvaluator",
+          "net.minecraft.world.level.pathfinder.NodeEvaluator"
+        ],
+        "class_hash": "ae1521ee131401a51d7e02ca33a1b95cb0cd99ffae73002566bf710fb5349e17"
+      },
+      {
+        "owner": "net.minecraft.world.level.pathfinder.WalkNodeEvaluator",
+        "inheritance": [
+          "net.minecraft.world.level.pathfinder.WalkNodeEvaluator",
+          "net.minecraft.world.level.pathfinder.NodeEvaluator"
+        ],
+        "class_hash": "1c862c7f9410ccb6515653e0490b91d77ba4d9e477c1445ce3d81c6854d1301e"
+      }
+    ],
+    "net.minecraft.world.level.pathfinder.PathFinder": [
+      {
+        "owner": "net.minecraft.world.entity.monster.warden.Warden$1$1",
+        "inheritance": [
+          "net.minecraft.world.entity.monster.warden.Warden$1$1",
+          "net.minecraft.world.level.pathfinder.PathFinder"
+        ],
+        "class_hash": "fd2309afeaabf99a0c6a2b625ca9cef0b5e45529743312dff509712be77344f3"
+      },
+      {
+        "owner": "net.minecraft.world.level.pathfinder.PathFinder",
+        "inheritance": [
+          "net.minecraft.world.level.pathfinder.PathFinder"
+        ],
+        "class_hash": "91f07489c3a6694ea2b531f862a37aac36663107621989043782d05a645b4913"
+      }
+    ]
+  },
+  "declared_terrain_defaults": {
+    "BLOCKED": -1.0,
+    "OPEN": 0.0,
+    "WALKABLE": 0.0,
+    "WALKABLE_DOOR": 0.0,
+    "TRAPDOOR": 0.0,
+    "POWDER_SNOW": -1.0,
+    "DANGER_POWDER_SNOW": 0.0,
+    "FENCE": -1.0,
+    "LAVA": -1.0,
+    "WATER": 8.0,
+    "WATER_BORDER": 8.0,
+    "RAIL": 0.0,
+    "UNPASSABLE_RAIL": -1.0,
+    "DANGER_FIRE": 8.0,
+    "DAMAGE_FIRE": 16.0,
+    "DANGER_OTHER": 8.0,
+    "DAMAGE_OTHER": -1.0,
+    "DOOR_OPEN": 0.0,
+    "DOOR_WOOD_CLOSED": -1.0,
+    "DOOR_IRON_CLOSED": -1.0,
+    "BREACH": 4.0,
+    "LEAVES": -1.0,
+    "STICKY_HONEY": 8.0,
+    "COCOA": 0.0,
+    "DAMAGE_CAUTIOUS": 0.0,
+    "DANGER_TRAPDOOR": 0.0
+  },
+  "additional_default_vs_anchor": {
+    "DANGER_TRAPDOOR": 0
+  },
+  "critical_source_checks": [
+    "GroundPathNavigation getter still reads pass-door flag",
+    "FlyingPathNavigation getter still reads pass-door flag",
+    "strict 20-tick recompute",
+    "coordinate-only route adoption gate with virtual navigation completion",
+    "base navigation completion checks retained Path",
+    "sameAs compares XYZ not g/h/malus",
+    "modern Holder follow-range and fixed constructor budget",
+    "prepare constructs context and clears nodes",
+    "done clears references without clearing node cache",
+    "amphibious temporary costs",
+    "amphibious restores two costs, not WATER",
+    "vehicle effective malus inheritance",
+    "modern jump step API",
+    "volume flags and rail transformation",
+    "raw Vanilla classifier has no Forge callback surfaces",
+    "fly maximum cost then WALKABLE additive cost",
+    "swim empty-fluid additional eight",
+    "search weighted heuristic, Manhattan reach and original cost",
+    "sendPathFindingPacket actual immediate return",
+    "sendGoalSelector actual immediate return",
+    "sendEntityBrain actual immediate return",
+    "modern Path payload wire order",
+    "modern Goal payload wire order",
+    "Goal decoder UTF bound remains255",
+    "modern Brain UUID/id precede position",
+    "Path body precedes separate debug data",
+    "separate target/open/closed debug data",
+    "modern node-array count is VarInt",
+    "Node packet does not serialize g/h/predecessor",
+    "typed codec lookup and decode",
+    "unknown fallback limits and discards bytes",
+    "unknown fallback1MiB lambda$static$0",
+    "unknown fallback1MiB lambda$static$2",
+    "three registered typed payload codecs",
+    "discarded early return before thread handling",
+    "three typed renderer dispatches",
+    "root render only chunk-border interface and GameTest dispatch",
+    "Path render draws then expires two maps only",
+    "modern labels include type and evaluated cost",
+    "Goal renderer range160 and name/running presentation",
+    "Brain target update is optional and eight-block bound",
+    "all25 defaults retained; DANGER_TRAPDOOR added with zero default",
+    "PathFinder DEBUG actual ConstantValue false",
+    "Path renderer lacks clear override; interface default is no-op"
+  ],
+  "slice_hash_contract": "UTF8 of exact selected original javap lines split on LF retaining CR; inclusive one-based line bounds. Private derived comment mapping is only a reading aid, never original source bytes.",
+  "private_reading_aid": {
+    "sha256": "be645d0f5657c6e33dc5e643fd05c7500d76e906d2fbfa3f234162ef75498506",
+    "unresolved_references_retained": 509,
+    "not_canonical": true,
+    "non_opcode_numeric_rows_excluded_from_checks": true
+  },
+  "classes": [
+    {
+      "owner": "net.minecraft.client.KeyboardHandler",
+      "obfuscated_owner": "fgn",
+      "class_hash": "478d4719e1065d84e9e740c6c08cd629d4f5e2e69d911e7ae8384d76051bcc7a",
+      "disassembly_hash": "e8ce7c90dfd16b0698d19431acbbc01c4bb6736fbd590655915a515f0c7d0dc3",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_RAW_JAVAP_STDOUT",
+      "physical_method_count": 30,
+      "resolved_method_count": 30,
+      "selected_members": [],
+      "mapped_fields": [],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.client.multiplayer.ClientCommonPacketListenerImpl",
+      "obfuscated_owner": "fzc",
+      "class_hash": "856a550de2d70b997b4d1e1d034496cac702ec363f9014abbbd58be087916b69",
+      "disassembly_hash": "6ba4513c6e51450b1f2d461f55afa4294030b1607033ea28ead62fe7011bb752",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_RAW_JAVAP_STDOUT",
+      "physical_method_count": 35,
+      "resolved_method_count": 35,
+      "selected_members": [
+        {
+          "name": "handleCustomPayload",
+          "obfuscated_member": "a",
+          "descriptor": "(Lzn;)V",
+          "named_descriptor": "(Lnet/minecraft/network/protocol/common/ClientboundCustomPayloadPacket;)V",
+          "line_start": 1249,
+          "line_end": 1312,
+          "disassembly_slice_sha256": "6c71e40d754fefd00aa5c6c923636afddd842f264b15d84731d8124a09a9096f"
+        },
+        {
+          "name": "handleCustomPayload",
+          "obfuscated_member": "a",
+          "descriptor": "(Laaj;)V",
+          "named_descriptor": "(Lnet/minecraft/network/protocol/common/custom/CustomPacketPayload;)V",
+          "line_start": 1313,
+          "line_end": 1316,
+          "disassembly_slice_sha256": "d8825b974a8dcca889ee6f899215a663b121a7ea2954286758f68a7e3bc6c255"
+        }
+      ],
+      "mapped_fields": [],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.client.multiplayer.ClientPacketListener",
+      "obfuscated_owner": "fzg",
+      "class_hash": "e43c95a3346f89934f43170414f210cc385b2d75da435aea553dd9ac2c8298ca",
+      "disassembly_hash": "ecf70324e05ae205ae4379a46c91d05b93e52805064f13a94c90abcc6116e472",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_RAW_JAVAP_STDOUT",
+      "physical_method_count": 178,
+      "resolved_method_count": 178,
+      "selected_members": [
+        {
+          "name": "handleCustomPayload",
+          "obfuscated_member": "a",
+          "descriptor": "(Laaj;)V",
+          "named_descriptor": "(Lnet/minecraft/network/protocol/common/custom/CustomPacketPayload;)V",
+          "line_start": 11738,
+          "line_end": 12145,
+          "disassembly_slice_sha256": "c9f05f3709c605cae474c4ba5038f2294114bbca409fab5517ac53cd2bb2c06e"
+        }
+      ],
+      "mapped_fields": [],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.client.renderer.LevelRenderer",
+      "obfuscated_owner": "gex",
+      "class_hash": "e5e7a1e7c5e108245e8ea73b1ddf90e7058d144b79335c5fbf12f593c0302af9",
+      "disassembly_hash": "4fc65787e39ba148c3fcf1bae60ea9fff87ca58d96076940c158a6ca9bc8ab46",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_RAW_JAVAP_STDOUT",
+      "physical_method_count": 107,
+      "resolved_method_count": 107,
+      "selected_members": [],
+      "mapped_fields": [],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.client.renderer.debug.BrainDebugRenderer",
+      "obfuscated_owner": "gih",
+      "class_hash": "43a141547ee199bbb007e635dc15ad2229cba59c75ec4e403941bedf816d4235",
+      "disassembly_hash": "d911c347d7592d1d5d73fa35dce0e81bc11209515eaab3cdf2d34369708a3b81",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_RAW_JAVAP_STDOUT",
+      "physical_method_count": 36,
+      "resolved_method_count": 36,
+      "selected_members": [
+        {
+          "name": "render",
+          "obfuscated_member": "a",
+          "descriptor": "(Lfbi;Lgez;DDD)V",
+          "named_descriptor": "(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;DDD)V",
+          "line_start": 1055,
+          "line_end": 1096,
+          "disassembly_slice_sha256": "5adfaea71c3c1943644193f8bb35bb5b716b3fc5824a6eb5ef2421fa826e939b"
+        },
+        {
+          "name": "updateLastLookedAtUuid",
+          "obfuscated_member": "d",
+          "descriptor": "()V",
+          "named_descriptor": "()V",
+          "line_start": 2240,
+          "line_end": 2260,
+          "disassembly_slice_sha256": "b436e09f7386c8349b014f3bc3da8eb1e31b16918157158ca5d55d5629558e87"
+        },
+        {
+          "name": "lambda$updateLastLookedAtUuid$8",
+          "obfuscated_member": "a",
+          "descriptor": "(Lbsr;)V",
+          "named_descriptor": "(Lnet/minecraft/world/entity/Entity;)V",
+          "line_start": 2261,
+          "line_end": 2277,
+          "disassembly_slice_sha256": "17a22aa56582c5725a885b0d9d5a7b8860f76025fff584383ad711de747179f4"
+        }
+      ],
+      "mapped_fields": [
+        {
+          "type": "org.slf4j.Logger",
+          "name": "LOGGER",
+          "obfuscated": "a"
+        },
+        {
+          "type": "boolean",
+          "name": "SHOW_NAME_FOR_ALL",
+          "obfuscated": "b"
+        },
+        {
+          "type": "boolean",
+          "name": "SHOW_PROFESSION_FOR_ALL",
+          "obfuscated": "c"
+        },
+        {
+          "type": "boolean",
+          "name": "SHOW_BEHAVIORS_FOR_ALL",
+          "obfuscated": "d"
+        },
+        {
+          "type": "boolean",
+          "name": "SHOW_ACTIVITIES_FOR_ALL",
+          "obfuscated": "e"
+        },
+        {
+          "type": "boolean",
+          "name": "SHOW_INVENTORY_FOR_ALL",
+          "obfuscated": "f"
+        },
+        {
+          "type": "boolean",
+          "name": "SHOW_GOSSIPS_FOR_ALL",
+          "obfuscated": "g"
+        },
+        {
+          "type": "boolean",
+          "name": "SHOW_PATH_FOR_ALL",
+          "obfuscated": "h"
+        },
+        {
+          "type": "boolean",
+          "name": "SHOW_HEALTH_FOR_ALL",
+          "obfuscated": "i"
+        },
+        {
+          "type": "boolean",
+          "name": "SHOW_WANTS_GOLEM_FOR_ALL",
+          "obfuscated": "j"
+        },
+        {
+          "type": "boolean",
+          "name": "SHOW_ANGER_LEVEL_FOR_ALL",
+          "obfuscated": "k"
+        },
+        {
+          "type": "boolean",
+          "name": "SHOW_NAME_FOR_SELECTED",
+          "obfuscated": "l"
+        },
+        {
+          "type": "boolean",
+          "name": "SHOW_PROFESSION_FOR_SELECTED",
+          "obfuscated": "m"
+        },
+        {
+          "type": "boolean",
+          "name": "SHOW_BEHAVIORS_FOR_SELECTED",
+          "obfuscated": "n"
+        },
+        {
+          "type": "boolean",
+          "name": "SHOW_ACTIVITIES_FOR_SELECTED",
+          "obfuscated": "o"
+        },
+        {
+          "type": "boolean",
+          "name": "SHOW_MEMORIES_FOR_SELECTED",
+          "obfuscated": "p"
+        },
+        {
+          "type": "boolean",
+          "name": "SHOW_INVENTORY_FOR_SELECTED",
+          "obfuscated": "q"
+        },
+        {
+          "type": "boolean",
+          "name": "SHOW_GOSSIPS_FOR_SELECTED",
+          "obfuscated": "r"
+        },
+        {
+          "type": "boolean",
+          "name": "SHOW_PATH_FOR_SELECTED",
+          "obfuscated": "s"
+        },
+        {
+          "type": "boolean",
+          "name": "SHOW_HEALTH_FOR_SELECTED",
+          "obfuscated": "t"
+        },
+        {
+          "type": "boolean",
+          "name": "SHOW_WANTS_GOLEM_FOR_SELECTED",
+          "obfuscated": "u"
+        },
+        {
+          "type": "boolean",
+          "name": "SHOW_ANGER_LEVEL_FOR_SELECTED",
+          "obfuscated": "v"
+        },
+        {
+          "type": "boolean",
+          "name": "SHOW_POI_INFO",
+          "obfuscated": "w"
+        },
+        {
+          "type": "int",
+          "name": "MAX_RENDER_DIST_FOR_BRAIN_INFO",
+          "obfuscated": "x"
+        },
+        {
+          "type": "int",
+          "name": "MAX_RENDER_DIST_FOR_POI_INFO",
+          "obfuscated": "y"
+        },
+        {
+          "type": "int",
+          "name": "MAX_TARGETING_DIST",
+          "obfuscated": "z"
+        },
+        {
+          "type": "float",
+          "name": "TEXT_SCALE",
+          "obfuscated": "A"
+        },
+        {
+          "type": "int",
+          "name": "WHITE",
+          "obfuscated": "B"
+        },
+        {
+          "type": "int",
+          "name": "YELLOW",
+          "obfuscated": "C"
+        },
+        {
+          "type": "int",
+          "name": "CYAN",
+          "obfuscated": "D"
+        },
+        {
+          "type": "int",
+          "name": "GREEN",
+          "obfuscated": "E"
+        },
+        {
+          "type": "int",
+          "name": "GRAY",
+          "obfuscated": "F"
+        },
+        {
+          "type": "int",
+          "name": "PINK",
+          "obfuscated": "G"
+        },
+        {
+          "type": "int",
+          "name": "RED",
+          "obfuscated": "H"
+        },
+        {
+          "type": "int",
+          "name": "ORANGE",
+          "obfuscated": "I"
+        },
+        {
+          "type": "net.minecraft.client.Minecraft",
+          "name": "minecraft",
+          "obfuscated": "J"
+        },
+        {
+          "type": "java.util.Map",
+          "name": "pois",
+          "obfuscated": "K"
+        },
+        {
+          "type": "java.util.Map",
+          "name": "brainDumpsPerEntity",
+          "obfuscated": "L"
+        },
+        {
+          "type": "java.util.UUID",
+          "name": "lastLookedAtUuid",
+          "obfuscated": "M"
+        }
+      ],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.client.renderer.debug.BrainDebugRenderer$PoiInfo",
+      "obfuscated_owner": "gih$a",
+      "class_hash": "a774d5f683e17b1ba8c99109e008aba9d59f32ef8c39745d11d73ed58053ee87",
+      "disassembly_hash": "d13f1a6554ba33354a0b00fba46479c3f09be157c6b6238c4ffe1ecdfe68fc10",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_RAW_JAVAP_STDOUT",
+      "physical_method_count": 1,
+      "resolved_method_count": 1,
+      "selected_members": [],
+      "mapped_fields": [],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.client.renderer.debug.DebugRenderer",
+      "obfuscated_owner": "gim",
+      "class_hash": "6eb9ad15678ef79f1604e574aac2f3568ff14d7db96063d34a9ea8866629ef12",
+      "disassembly_hash": "7e2bb41b786b27e115d18850230b1dc92b10f7bebcc83beb4540b7d8a725f850",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_RAW_JAVAP_STDOUT",
+      "physical_method_count": 15,
+      "resolved_method_count": 15,
+      "selected_members": [
+        {
+          "name": "clear",
+          "obfuscated_member": "a",
+          "descriptor": "()V",
+          "named_descriptor": "()V",
+          "line_start": 727,
+          "line_end": 822,
+          "disassembly_slice_sha256": "96517d3fb156cc1d664935eab8d0025dd18abdc70facd8f96e31c86361de2a02"
+        },
+        {
+          "name": "render",
+          "obfuscated_member": "a",
+          "descriptor": "(Lfbi;Lgez$a;DDD)V",
+          "named_descriptor": "(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource$BufferSource;DDD)V",
+          "line_start": 853,
+          "line_end": 896,
+          "disassembly_slice_sha256": "be4d7ae4140a6e912aece7e0d551639a616034334b8029a3893b796acb6b6239"
+        }
+      ],
+      "mapped_fields": [
+        {
+          "type": "net.minecraft.client.renderer.debug.PathfindingRenderer",
+          "name": "pathfindingRenderer",
+          "obfuscated": "a"
+        },
+        {
+          "type": "net.minecraft.client.renderer.debug.DebugRenderer$SimpleDebugRenderer",
+          "name": "waterDebugRenderer",
+          "obfuscated": "b"
+        },
+        {
+          "type": "net.minecraft.client.renderer.debug.DebugRenderer$SimpleDebugRenderer",
+          "name": "chunkBorderRenderer",
+          "obfuscated": "c"
+        },
+        {
+          "type": "net.minecraft.client.renderer.debug.DebugRenderer$SimpleDebugRenderer",
+          "name": "heightMapRenderer",
+          "obfuscated": "d"
+        },
+        {
+          "type": "net.minecraft.client.renderer.debug.DebugRenderer$SimpleDebugRenderer",
+          "name": "collisionBoxRenderer",
+          "obfuscated": "e"
+        },
+        {
+          "type": "net.minecraft.client.renderer.debug.DebugRenderer$SimpleDebugRenderer",
+          "name": "supportBlockRenderer",
+          "obfuscated": "f"
+        },
+        {
+          "type": "net.minecraft.client.renderer.debug.DebugRenderer$SimpleDebugRenderer",
+          "name": "neighborsUpdateRenderer",
+          "obfuscated": "g"
+        },
+        {
+          "type": "net.minecraft.client.renderer.debug.StructureRenderer",
+          "name": "structureRenderer",
+          "obfuscated": "h"
+        },
+        {
+          "type": "net.minecraft.client.renderer.debug.DebugRenderer$SimpleDebugRenderer",
+          "name": "lightDebugRenderer",
+          "obfuscated": "i"
+        },
+        {
+          "type": "net.minecraft.client.renderer.debug.DebugRenderer$SimpleDebugRenderer",
+          "name": "worldGenAttemptRenderer",
+          "obfuscated": "j"
+        },
+        {
+          "type": "net.minecraft.client.renderer.debug.DebugRenderer$SimpleDebugRenderer",
+          "name": "solidFaceRenderer",
+          "obfuscated": "k"
+        },
+        {
+          "type": "net.minecraft.client.renderer.debug.DebugRenderer$SimpleDebugRenderer",
+          "name": "chunkRenderer",
+          "obfuscated": "l"
+        },
+        {
+          "type": "net.minecraft.client.renderer.debug.BrainDebugRenderer",
+          "name": "brainDebugRenderer",
+          "obfuscated": "m"
+        },
+        {
+          "type": "net.minecraft.client.renderer.debug.VillageSectionsDebugRenderer",
+          "name": "villageSectionsDebugRenderer",
+          "obfuscated": "n"
+        },
+        {
+          "type": "net.minecraft.client.renderer.debug.BeeDebugRenderer",
+          "name": "beeDebugRenderer",
+          "obfuscated": "o"
+        },
+        {
+          "type": "net.minecraft.client.renderer.debug.RaidDebugRenderer",
+          "name": "raidDebugRenderer",
+          "obfuscated": "p"
+        },
+        {
+          "type": "net.minecraft.client.renderer.debug.GoalSelectorDebugRenderer",
+          "name": "goalSelectorRenderer",
+          "obfuscated": "q"
+        },
+        {
+          "type": "net.minecraft.client.renderer.debug.GameTestDebugRenderer",
+          "name": "gameTestDebugRenderer",
+          "obfuscated": "r"
+        },
+        {
+          "type": "net.minecraft.client.renderer.debug.GameEventListenerRenderer",
+          "name": "gameEventListenerRenderer",
+          "obfuscated": "s"
+        },
+        {
+          "type": "net.minecraft.client.renderer.debug.LightSectionDebugRenderer",
+          "name": "skyLightSectionDebugRenderer",
+          "obfuscated": "t"
+        },
+        {
+          "type": "net.minecraft.client.renderer.debug.BreezeDebugRenderer",
+          "name": "breezeDebugRenderer",
+          "obfuscated": "u"
+        },
+        {
+          "type": "boolean",
+          "name": "renderChunkborder",
+          "obfuscated": "v"
+        }
+      ],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.client.renderer.debug.DebugRenderer$SimpleDebugRenderer",
+      "obfuscated_owner": "gim$a",
+      "class_hash": "1d28e7428ad4db05098fb19e7d7d23c49a46fcab6f4880e20b945f65939f0583",
+      "disassembly_hash": "d02befb73a72758cea8a80919836bbfe04ea2824805f1832b47b1af2a9488563",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_RAW_JAVAP_STDOUT",
+      "physical_method_count": 2,
+      "resolved_method_count": 2,
+      "selected_members": [
+        {
+          "name": "clear",
+          "obfuscated_member": "a",
+          "descriptor": "()V",
+          "named_descriptor": "()V",
+          "line_start": 35,
+          "line_end": 45,
+          "disassembly_slice_sha256": "6ac2a5b9fbb6868ef254d874333c6e5e190d9ee04bcfc9e1b3db7453ce5f2db1"
+        }
+      ],
+      "mapped_fields": [],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.client.renderer.debug.GoalSelectorDebugRenderer",
+      "obfuscated_owner": "gip",
+      "class_hash": "68f23e42c9dee4eac07b9130fd07526d2923b26088211a561bd305069f29f4b7",
+      "disassembly_hash": "8db869a5f8a4d44521fe6df02e9473ed0d05ff6f87ba858cfee666f8faec329b",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_RAW_JAVAP_STDOUT",
+      "physical_method_count": 5,
+      "resolved_method_count": 5,
+      "selected_members": [
+        {
+          "name": "addGoalSelector",
+          "obfuscated_member": "a",
+          "descriptor": "(ILjd;Ljava/util/List;)V",
+          "named_descriptor": "(ILnet/minecraft/core/BlockPos;Ljava/util/List;)V",
+          "line_start": 228,
+          "line_end": 257,
+          "disassembly_slice_sha256": "90ae7c9d1a68e14340b74844b39526102bed3925fef59ace3269af9eb119e6e5"
+        },
+        {
+          "name": "removeGoalSelector",
+          "obfuscated_member": "a",
+          "descriptor": "(I)V",
+          "named_descriptor": "(I)V",
+          "line_start": 258,
+          "line_end": 276,
+          "disassembly_slice_sha256": "954d07f195f4414146630c5553f335431d93899473a64a2261d2fe56a42191fb"
+        },
+        {
+          "name": "render",
+          "obfuscated_member": "a",
+          "descriptor": "(Lfbi;Lgez;DDD)V",
+          "named_descriptor": "(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;DDD)V",
+          "line_start": 303,
+          "line_end": 453,
+          "disassembly_slice_sha256": "123a78f3705e37880964e228b46a1b21176209894f0e8d182cdf422b13af5c36"
+        }
+      ],
+      "mapped_fields": [
+        {
+          "type": "int",
+          "name": "MAX_RENDER_DIST",
+          "obfuscated": "a"
+        },
+        {
+          "type": "net.minecraft.client.Minecraft",
+          "name": "minecraft",
+          "obfuscated": "b"
+        },
+        {
+          "type": "it.unimi.dsi.fastutil.ints.Int2ObjectMap",
+          "name": "goalSelectors",
+          "obfuscated": "c"
+        }
+      ],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.client.renderer.debug.GoalSelectorDebugRenderer$EntityGoalInfo",
+      "obfuscated_owner": "gip$a",
+      "class_hash": "144aab531f5713e4128ef423fbf9a1137d7a5cff64c2a7bc5d66b4b46feb4f2d",
+      "disassembly_hash": "b96893e2bef99cd8f9169ea5f0dcd97bbeefeb90591f65ab7276e7f432519854",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_RAW_JAVAP_STDOUT",
+      "physical_method_count": 6,
+      "resolved_method_count": 6,
+      "selected_members": [],
+      "mapped_fields": [],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.client.renderer.debug.PathfindingRenderer",
+      "obfuscated_owner": "giu",
+      "class_hash": "efaabc410ee29bb4f73b829de9e917464c80d8760b5fbcd8990322d888f5773b",
+      "disassembly_hash": "0a06bdafda1744a136e164010a6bd89986eb82385c7746fb5abfad8fff449037",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_RAW_JAVAP_STDOUT",
+      "physical_method_count": 6,
+      "resolved_method_count": 6,
+      "selected_members": [
+        {
+          "name": "addPath",
+          "obfuscated_member": "a",
+          "descriptor": "(ILeps;F)V",
+          "named_descriptor": "(ILnet/minecraft/world/level/pathfinder/Path;F)V",
+          "line_start": 395,
+          "line_end": 435,
+          "disassembly_slice_sha256": "aec5657041d53a5452bea47ae12bb5eb56550487fc9bdfbd48fea5f1db4a2b83"
+        },
+        {
+          "name": "render",
+          "obfuscated_member": "a",
+          "descriptor": "(Lfbi;Lgez;DDD)V",
+          "named_descriptor": "(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;DDD)V",
+          "line_start": 436,
+          "line_end": 574,
+          "disassembly_slice_sha256": "50aa94e4c6d8f6ede716f1cfc5ac2419a530a844f129e3e10cc074929cd8ec6c"
+        },
+        {
+          "name": "renderPath",
+          "obfuscated_member": "a",
+          "descriptor": "(Lfbi;Lgez;Leps;FZZDDD)V",
+          "named_descriptor": "(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/world/level/pathfinder/Path;FZZDDD)V",
+          "line_start": 575,
+          "line_end": 1141,
+          "disassembly_slice_sha256": "a2976abccbdb66516995a39c82194af0e185dbe33af2e3d2248e99c0ef995518"
+        }
+      ],
+      "mapped_fields": [
+        {
+          "type": "java.util.Map",
+          "name": "pathMap",
+          "obfuscated": "a"
+        },
+        {
+          "type": "java.util.Map",
+          "name": "pathMaxDist",
+          "obfuscated": "b"
+        },
+        {
+          "type": "java.util.Map",
+          "name": "creationMap",
+          "obfuscated": "c"
+        },
+        {
+          "type": "long",
+          "name": "TIMEOUT",
+          "obfuscated": "d"
+        },
+        {
+          "type": "float",
+          "name": "MAX_RENDER_DIST",
+          "obfuscated": "e"
+        },
+        {
+          "type": "boolean",
+          "name": "SHOW_OPEN_CLOSED",
+          "obfuscated": "f"
+        },
+        {
+          "type": "boolean",
+          "name": "SHOW_OPEN_CLOSED_COST_MALUS",
+          "obfuscated": "g"
+        },
+        {
+          "type": "boolean",
+          "name": "SHOW_OPEN_CLOSED_NODE_TYPE_WITH_TEXT",
+          "obfuscated": "h"
+        },
+        {
+          "type": "boolean",
+          "name": "SHOW_OPEN_CLOSED_NODE_TYPE_WITH_BOX",
+          "obfuscated": "i"
+        },
+        {
+          "type": "boolean",
+          "name": "SHOW_GROUND_LABELS",
+          "obfuscated": "j"
+        },
+        {
+          "type": "float",
+          "name": "TEXT_SCALE",
+          "obfuscated": "k"
+        }
+      ],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket",
+      "obfuscated_owner": "zn",
+      "class_hash": "924f63c07af8f957ce0753f7c368570a250a79bcec8876554f5216dd726ab683",
+      "disassembly_hash": "da3d6f8a29845ae1bc419cfcd480d8a6a8200547fd97b5891c3282d99a466882",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_RAW_JAVAP_STDOUT",
+      "physical_method_count": 12,
+      "resolved_method_count": 12,
+      "selected_members": [
+        {
+          "name": "lambda$static$2",
+          "obfuscated_member": "a",
+          "descriptor": "(Lakr;)Lyx;",
+          "named_descriptor": "(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/network/codec/StreamCodec;",
+          "line_start": 422,
+          "line_end": 436,
+          "disassembly_slice_sha256": "c401bf79107580beaa971e9f6a6a436a823c667b1fc0fc32d39e9fcafaac3d26"
+        },
+        {
+          "name": "lambda$static$0",
+          "obfuscated_member": "b",
+          "descriptor": "(Lakr;)Lyx;",
+          "named_descriptor": "(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/network/codec/StreamCodec;",
+          "line_start": 449,
+          "line_end": 463,
+          "disassembly_slice_sha256": "c72862b5bba2369dc48cb2ef4018cc827a95dbf409967b5f1f30d8cc38e1c728"
+        },
+        {
+          "name": "<clinit>",
+          "obfuscated_member": "<clinit>",
+          "descriptor": "()V",
+          "named_descriptor": "()V",
+          "line_start": 464,
+          "line_end": 664,
+          "disassembly_slice_sha256": "930f3b0d1724401700204ddeb37e0bb8d59b846c5c73d9ec4286fadb738323ca"
+        }
+      ],
+      "mapped_fields": [
+        {
+          "type": "net.minecraft.network.protocol.common.custom.CustomPacketPayload",
+          "name": "payload",
+          "obfuscated": "c"
+        },
+        {
+          "type": "int",
+          "name": "MAX_PAYLOAD_SIZE",
+          "obfuscated": "d"
+        },
+        {
+          "type": "net.minecraft.network.codec.StreamCodec",
+          "name": "GAMEPLAY_STREAM_CODEC",
+          "obfuscated": "a"
+        },
+        {
+          "type": "net.minecraft.network.codec.StreamCodec",
+          "name": "CONFIG_STREAM_CODEC",
+          "obfuscated": "b"
+        }
+      ],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.network.protocol.common.custom.BrainDebugPayload",
+      "obfuscated_owner": "aag",
+      "class_hash": "56407678437dde4f7609c07205e5e983d045b3d72c3cd2d551aa9c101ec3f853",
+      "disassembly_hash": "1c04209c457d8470103b36b21e05b0941ef723596352a7367a19dbace4ed7ff2",
+      "disassembly_encoding": "utf-8",
+      "origin": "HASH_VERIFIED_RETAINED_NODE_UTF8_TEXT_STDOUT",
+      "physical_method_count": 9,
+      "resolved_method_count": 9,
+      "selected_members": [],
+      "mapped_fields": [],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.network.protocol.common.custom.BrainDebugPayload$BrainDump",
+      "obfuscated_owner": "aag$a",
+      "class_hash": "1a96ab43da77fa03d480b767b2c37025fbc2ec786918ff2cf389e21f9cf6dc55",
+      "disassembly_hash": "0d0f08264e759f4922263284072bdb9dd1a68023289ad92aed6b615029afe268",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_RAW_JAVAP_STDOUT",
+      "physical_method_count": 27,
+      "resolved_method_count": 27,
+      "selected_members": [
+        {
+          "name": "<init>",
+          "obfuscated_member": "<init>",
+          "descriptor": "(Lvw;)V",
+          "named_descriptor": "(Lnet/minecraft/network/FriendlyByteBuf;)V",
+          "line_start": 384,
+          "line_end": 466,
+          "disassembly_slice_sha256": "208161dfe59081983401dc22663a384b4ea946cbd31226a2342ba140fff8e8c6"
+        },
+        {
+          "name": "<init>",
+          "obfuscated_member": "<init>",
+          "descriptor": "(Ljava/util/UUID;ILjava/lang/String;Ljava/lang/String;IFFLexc;Ljava/lang/String;Leps;ZILjava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/Set;Ljava/util/Set;)V",
+          "named_descriptor": "(Ljava/util/UUID;ILjava/lang/String;Ljava/lang/String;IFFLnet/minecraft/world/phys/Vec3;Ljava/lang/String;Lnet/minecraft/world/level/pathfinder/Path;ZILjava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/Set;Ljava/util/Set;)V",
+          "line_start": 467,
+          "line_end": 602,
+          "disassembly_slice_sha256": "040eb16db66a2e10c0587bf477055b252bb2603be12b8b3b13d77b07ce5fed16"
+        },
+        {
+          "name": "write",
+          "obfuscated_member": "a",
+          "descriptor": "(Lvw;)V",
+          "named_descriptor": "(Lnet/minecraft/network/FriendlyByteBuf;)V",
+          "line_start": 603,
+          "line_end": 722,
+          "disassembly_slice_sha256": "1bb9188c879f936a652f27223bf32da952cc0362374f27f0d42a038f1d7d4518"
+        }
+      ],
+      "mapped_fields": [
+        {
+          "type": "java.util.UUID",
+          "name": "uuid",
+          "obfuscated": "a"
+        },
+        {
+          "type": "int",
+          "name": "id",
+          "obfuscated": "b"
+        },
+        {
+          "type": "java.lang.String",
+          "name": "name",
+          "obfuscated": "c"
+        },
+        {
+          "type": "java.lang.String",
+          "name": "profession",
+          "obfuscated": "d"
+        },
+        {
+          "type": "int",
+          "name": "xp",
+          "obfuscated": "e"
+        },
+        {
+          "type": "float",
+          "name": "health",
+          "obfuscated": "f"
+        },
+        {
+          "type": "float",
+          "name": "maxHealth",
+          "obfuscated": "g"
+        },
+        {
+          "type": "net.minecraft.world.phys.Vec3",
+          "name": "pos",
+          "obfuscated": "h"
+        },
+        {
+          "type": "java.lang.String",
+          "name": "inventory",
+          "obfuscated": "i"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.Path",
+          "name": "path",
+          "obfuscated": "j"
+        },
+        {
+          "type": "boolean",
+          "name": "wantsGolem",
+          "obfuscated": "k"
+        },
+        {
+          "type": "int",
+          "name": "angerLevel",
+          "obfuscated": "l"
+        },
+        {
+          "type": "java.util.List",
+          "name": "activities",
+          "obfuscated": "m"
+        },
+        {
+          "type": "java.util.List",
+          "name": "behaviors",
+          "obfuscated": "n"
+        },
+        {
+          "type": "java.util.List",
+          "name": "memories",
+          "obfuscated": "o"
+        },
+        {
+          "type": "java.util.List",
+          "name": "gossips",
+          "obfuscated": "p"
+        },
+        {
+          "type": "java.util.Set",
+          "name": "pois",
+          "obfuscated": "q"
+        },
+        {
+          "type": "java.util.Set",
+          "name": "potentialPois",
+          "obfuscated": "r"
+        }
+      ],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.network.protocol.common.custom.CustomPacketPayload",
+      "obfuscated_owner": "aaj",
+      "class_hash": "4d42f836ccac8fb35ba37dce642f3a39009194a6642354df1c7c3fce4a029b94",
+      "disassembly_hash": "ce35327be7be868c4ef427d1265f7aaab0f16e9295c6b477b40e650dab281030",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_RAW_JAVAP_STDOUT",
+      "physical_method_count": 5,
+      "resolved_method_count": 5,
+      "selected_members": [],
+      "mapped_fields": [],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.network.protocol.common.custom.GoalDebugPayload",
+      "obfuscated_owner": "aap",
+      "class_hash": "8f5450d3bbc4baa1b59215044f378c65e093cb17dd38db2e1acf978de9338a4c",
+      "disassembly_hash": "0ddf684ec316c904cc764b70d62db862d51a205098810797d6a63b01e031af29",
+      "disassembly_encoding": "utf-8",
+      "origin": "HASH_VERIFIED_RETAINED_NODE_UTF8_TEXT_STDOUT",
+      "physical_method_count": 12,
+      "resolved_method_count": 12,
+      "selected_members": [
+        {
+          "name": "<init>",
+          "obfuscated_member": "<init>",
+          "descriptor": "(Lvw;)V",
+          "named_descriptor": "(Lnet/minecraft/network/FriendlyByteBuf;)V",
+          "line_start": 207,
+          "line_end": 233,
+          "disassembly_slice_sha256": "9469795d689f6ae66025ad9d3cb831559c3899f84f86e7ee56baba805c904c8a"
+        },
+        {
+          "name": "<init>",
+          "obfuscated_member": "<init>",
+          "descriptor": "(ILjd;Ljava/util/List;)V",
+          "named_descriptor": "(ILnet/minecraft/core/BlockPos;Ljava/util/List;)V",
+          "line_start": 234,
+          "line_end": 268,
+          "disassembly_slice_sha256": "2a0e78c448fb60da0763fe27c1afa890626c9b570353d896ce04ee56bb167630"
+        },
+        {
+          "name": "write",
+          "obfuscated_member": "a",
+          "descriptor": "(Lvw;)V",
+          "named_descriptor": "(Lnet/minecraft/network/FriendlyByteBuf;)V",
+          "line_start": 269,
+          "line_end": 299,
+          "disassembly_slice_sha256": "05850d857db53d6a5fae2254574b38e6140585d786c54fcfa47433af3ddc7a4c"
+        },
+        {
+          "name": "<clinit>",
+          "obfuscated_member": "<clinit>",
+          "descriptor": "()V",
+          "named_descriptor": "()V",
+          "line_start": 417,
+          "line_end": 439,
+          "disassembly_slice_sha256": "4baf93819283257519bbf0e61dc225a5fd6d9d7283e9c45aa27f74fa3323b588"
+        }
+      ],
+      "mapped_fields": [
+        {
+          "type": "int",
+          "name": "entityId",
+          "obfuscated": "c"
+        },
+        {
+          "type": "net.minecraft.core.BlockPos",
+          "name": "pos",
+          "obfuscated": "d"
+        },
+        {
+          "type": "java.util.List",
+          "name": "goals",
+          "obfuscated": "e"
+        },
+        {
+          "type": "net.minecraft.network.codec.StreamCodec",
+          "name": "STREAM_CODEC",
+          "obfuscated": "a"
+        },
+        {
+          "type": "net.minecraft.network.protocol.common.custom.CustomPacketPayload$Type",
+          "name": "TYPE",
+          "obfuscated": "b"
+        }
+      ],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.network.protocol.common.custom.GoalDebugPayload$DebugGoal",
+      "obfuscated_owner": "aap$a",
+      "class_hash": "27fccc77649eaac3b7b614cb8329ea02f44433f38a175f8587f136c49acce738",
+      "disassembly_hash": "0691cfebb66f93db6919f5f555f04556e17a2c9b3346a4c7720fe544002ed68e",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_RAW_JAVAP_STDOUT",
+      "physical_method_count": 9,
+      "resolved_method_count": 9,
+      "selected_members": [
+        {
+          "name": "<init>",
+          "obfuscated_member": "<init>",
+          "descriptor": "(Lvw;)V",
+          "named_descriptor": "(Lnet/minecraft/network/FriendlyByteBuf;)V",
+          "line_start": 123,
+          "line_end": 149,
+          "disassembly_slice_sha256": "5aebf14e1adf4b80dc39516b06aafc83a1e9534c3345b3a14320484abfe06793"
+        },
+        {
+          "name": "<init>",
+          "obfuscated_member": "<init>",
+          "descriptor": "(IZLjava/lang/String;)V",
+          "named_descriptor": "(IZLjava/lang/String;)V",
+          "line_start": 150,
+          "line_end": 180,
+          "disassembly_slice_sha256": "e63dce1c950f3a9a99e2cb6486cd813fac78dbe0d926a79151122047a7c04dd2"
+        },
+        {
+          "name": "write",
+          "obfuscated_member": "a",
+          "descriptor": "(Lvw;)V",
+          "named_descriptor": "(Lnet/minecraft/network/FriendlyByteBuf;)V",
+          "line_start": 181,
+          "line_end": 211,
+          "disassembly_slice_sha256": "97d5ccf16ac8bb1772fc655f7bdfb6d7af2d700bae61c62f84da8cb137b97c12"
+        }
+      ],
+      "mapped_fields": [
+        {
+          "type": "int",
+          "name": "priority",
+          "obfuscated": "a"
+        },
+        {
+          "type": "boolean",
+          "name": "isRunning",
+          "obfuscated": "b"
+        },
+        {
+          "type": "java.lang.String",
+          "name": "name",
+          "obfuscated": "c"
+        }
+      ],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.network.protocol.common.custom.PathfindingDebugPayload",
+      "obfuscated_owner": "aas",
+      "class_hash": "bea210a9e4b8a234330e47ec9bf1c09b126d4b0783c132561c057876ba0bf619",
+      "disassembly_hash": "da27be121d815898614b4eaeaf92a42a4ec48edd3744e5f8f7cd45323ce29f19",
+      "disassembly_encoding": "utf-8",
+      "origin": "HASH_VERIFIED_RETAINED_NODE_UTF8_TEXT_STDOUT",
+      "physical_method_count": 11,
+      "resolved_method_count": 11,
+      "selected_members": [
+        {
+          "name": "<init>",
+          "obfuscated_member": "<init>",
+          "descriptor": "(Lvw;)V",
+          "named_descriptor": "(Lnet/minecraft/network/FriendlyByteBuf;)V",
+          "line_start": 185,
+          "line_end": 210,
+          "disassembly_slice_sha256": "05a98980d883e4c4ca696ed41d341948c2c714a15a685ed29fd2ac1e39d03c09"
+        },
+        {
+          "name": "<init>",
+          "obfuscated_member": "<init>",
+          "descriptor": "(ILeps;F)V",
+          "named_descriptor": "(ILnet/minecraft/world/level/pathfinder/Path;F)V",
+          "line_start": 211,
+          "line_end": 241,
+          "disassembly_slice_sha256": "6358bda6f0c4eb4cd2be3e9311adc9c26415ed74302a314b08f1971dac5ab9b7"
+        },
+        {
+          "name": "write",
+          "obfuscated_member": "a",
+          "descriptor": "(Lvw;)V",
+          "named_descriptor": "(Lnet/minecraft/network/FriendlyByteBuf;)V",
+          "line_start": 242,
+          "line_end": 271,
+          "disassembly_slice_sha256": "697c2144e2dbeaf6f362d271638574c0569a0fdca7f610b401ce4e065383661e"
+        },
+        {
+          "name": "<clinit>",
+          "obfuscated_member": "<clinit>",
+          "descriptor": "()V",
+          "named_descriptor": "()V",
+          "line_start": 372,
+          "line_end": 393,
+          "disassembly_slice_sha256": "ae1dacba9cef4b171dc80da75ddfde087da14bb4c2bd7997e89872a20c338df2"
+        }
+      ],
+      "mapped_fields": [
+        {
+          "type": "int",
+          "name": "entityId",
+          "obfuscated": "c"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.Path",
+          "name": "path",
+          "obfuscated": "d"
+        },
+        {
+          "type": "float",
+          "name": "maxNodeDistance",
+          "obfuscated": "e"
+        },
+        {
+          "type": "net.minecraft.network.codec.StreamCodec",
+          "name": "STREAM_CODEC",
+          "obfuscated": "a"
+        },
+        {
+          "type": "net.minecraft.network.protocol.common.custom.CustomPacketPayload$Type",
+          "name": "TYPE",
+          "obfuscated": "b"
+        }
+      ],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.network.protocol.game.DebugPackets",
+      "obfuscated_owner": "agf",
+      "class_hash": "21b277e866db10cd3e11c453d1a0defd8e78a64cd871b42ef2f1ca960daa55cb",
+      "disassembly_hash": "919febfcc811644e80996d644e642740526300937d21e3f6f3ba7b7b3c6f607c",
+      "disassembly_encoding": "utf-8",
+      "origin": "HASH_VERIFIED_RETAINED_NODE_UTF8_TEXT_STDOUT",
+      "physical_method_count": 31,
+      "resolved_method_count": 31,
+      "selected_members": [
+        {
+          "name": "sendPathFindingPacket",
+          "obfuscated_member": "a",
+          "descriptor": "(Ldcw;Lbtp;Leps;F)V",
+          "named_descriptor": "(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/Mob;Lnet/minecraft/world/level/pathfinder/Path;F)V",
+          "line_start": 610,
+          "line_end": 631,
+          "disassembly_slice_sha256": "3a540b002709f5fbb9198ebb6c4f4bd62c1c53946c013c7368ac2b57443917b9"
+        },
+        {
+          "name": "sendGoalSelector",
+          "obfuscated_member": "a",
+          "descriptor": "(Ldcw;Lbtp;Lcan;)V",
+          "named_descriptor": "(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/Mob;Lnet/minecraft/world/entity/ai/goal/GoalSelector;)V",
+          "line_start": 658,
+          "line_end": 671,
+          "disassembly_slice_sha256": "30d5bc361a3cfbef0c330bf252e18a99680e01f763f223d03802f589c0353eb2"
+        },
+        {
+          "name": "sendEntityBrain",
+          "obfuscated_member": "a",
+          "descriptor": "(Lbtn;)V",
+          "named_descriptor": "(Lnet/minecraft/world/entity/LivingEntity;)V",
+          "line_start": 689,
+          "line_end": 700,
+          "disassembly_slice_sha256": "42e6b57c715eaf3718a0458b2b3b044cdddffb0a738d96272d3bad7ab9b33425"
+        }
+      ],
+      "mapped_fields": [
+        {
+          "type": "org.slf4j.Logger",
+          "name": "LOGGER",
+          "obfuscated": "a"
+        }
+      ],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.world.entity.Mob",
+      "obfuscated_owner": "btp",
+      "class_hash": "64df9009f5438ccad2a3fdd4d612b60848cf84b8f05c2a7b5ec0582253439d95",
+      "disassembly_hash": "a2150fd27cd9a41f572623b5893eee785d0844102d9dee4ff4b0de448157e064",
+      "disassembly_encoding": "utf-8",
+      "origin": "HASH_VERIFIED_RETAINED_NODE_UTF8_TEXT_STDOUT",
+      "physical_method_count": 149,
+      "resolved_method_count": 149,
+      "selected_members": [
+        {
+          "name": "getPathfindingMalus",
+          "obfuscated_member": "a",
+          "descriptor": "(Lepv;)F",
+          "named_descriptor": "(Lnet/minecraft/world/level/pathfinder/PathType;)F",
+          "line_start": 2208,
+          "line_end": 2272,
+          "disassembly_slice_sha256": "217f4a1e433b7ccde5ac7efb3baf54e36709487d5a3722908e598ae45d0c7bae"
+        },
+        {
+          "name": "setPathfindingMalus",
+          "obfuscated_member": "a",
+          "descriptor": "(Lepv;F)V",
+          "named_descriptor": "(Lnet/minecraft/world/level/pathfinder/PathType;F)V",
+          "line_start": 2273,
+          "line_end": 2294,
+          "disassembly_slice_sha256": "05f8afa2773031f6427fcef1d715685de9e229c250a6fa07df6d54dddd1deb88"
+        }
+      ],
+      "mapped_fields": [],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation",
+      "obfuscated_owner": "ccx",
+      "class_hash": "02e50f4c18857bfd44bc06662966f12bc86098c25efd97602b0d77f7d1937fa1",
+      "disassembly_hash": "53b472741cab48b7299beef4baf5ecb0c7c6d99163436623181e6c3f9ea1564c",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_RAW_JAVAP_STDOUT",
+      "physical_method_count": 8,
+      "resolved_method_count": 8,
+      "selected_members": [],
+      "mapped_fields": [],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.world.entity.ai.navigation.FlyingPathNavigation",
+      "obfuscated_owner": "ccy",
+      "class_hash": "1fb9eb2cfc955fdcb8d522f4b138f2f85823bfb593466e7674d2acad24836439",
+      "disassembly_hash": "4964a0b7587a9090be62c5df2b62432aad93264f3912e34822c985710e0b69c3",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_RAW_JAVAP_STDOUT",
+      "physical_method_count": 12,
+      "resolved_method_count": 12,
+      "selected_members": [
+        {
+          "name": "createPathFinder",
+          "obfuscated_member": "a",
+          "descriptor": "(I)Lepu;",
+          "named_descriptor": "(I)Lnet/minecraft/world/level/pathfinder/PathFinder;",
+          "line_start": 202,
+          "line_end": 231,
+          "disassembly_slice_sha256": "3c64cca49d57edad44597ab5e325a9e993ab385c22361517d847bc0165585f95"
+        },
+        {
+          "name": "canOpenDoors",
+          "obfuscated_member": "e",
+          "descriptor": "()Z",
+          "named_descriptor": "()Z",
+          "line_start": 496,
+          "line_end": 510,
+          "disassembly_slice_sha256": "0e0737917a2af85f6584e94d58acab4716d0b69a5b1074dde04f838578872a71"
+        }
+      ],
+      "mapped_fields": [],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.world.entity.ai.navigation.GroundPathNavigation",
+      "obfuscated_owner": "ccz",
+      "class_hash": "b5bf8be8556223ba9b082617d0c4c88b16253c684ea016f580718d2c47068bdb",
+      "disassembly_hash": "17d245992888eccbfdfcfe767d8f5cfb653d5d1525842dded96de73385bd8880",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_RAW_JAVAP_STDOUT",
+      "physical_method_count": 15,
+      "resolved_method_count": 15,
+      "selected_members": [
+        {
+          "name": "createPathFinder",
+          "obfuscated_member": "a",
+          "descriptor": "(I)Lepu;",
+          "named_descriptor": "(I)Lnet/minecraft/world/level/pathfinder/PathFinder;",
+          "line_start": 267,
+          "line_end": 296,
+          "disassembly_slice_sha256": "b89e9307f5f936e0060658493fe073d2ebeb2d6da0bcf8fe700783be65dc898c"
+        },
+        {
+          "name": "canOpenDoors",
+          "obfuscated_member": "f",
+          "descriptor": "()Z",
+          "named_descriptor": "()Z",
+          "line_start": 808,
+          "line_end": 822,
+          "disassembly_slice_sha256": "4b301fe0408941cceab50fb77d03aa45a80fd5030cf1a6508c4ebd52ab660acd"
+        }
+      ],
+      "mapped_fields": [
+        {
+          "type": "boolean",
+          "name": "avoidSun",
+          "obfuscated": "p"
+        }
+      ],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.world.entity.ai.navigation.PathNavigation",
+      "obfuscated_owner": "cda",
+      "class_hash": "d86e25d6cf698e7f6688a0137304d02f59c8d01e60030afb81b5662e209956a3",
+      "disassembly_hash": "40584cecfb9622a369cfd86b93e9f497718b1f37a2b499644966e9e34f9f87df",
+      "disassembly_encoding": "utf-8",
+      "origin": "HASH_VERIFIED_RETAINED_NODE_UTF8_TEXT_STDOUT",
+      "physical_method_count": 43,
+      "resolved_method_count": 43,
+      "selected_members": [
+        {
+          "name": "<init>",
+          "obfuscated_member": "<init>",
+          "descriptor": "(Lbtp;Ldcw;)V",
+          "named_descriptor": "(Lnet/minecraft/world/entity/Mob;Lnet/minecraft/world/level/Level;)V",
+          "line_start": 628,
+          "line_end": 683,
+          "disassembly_slice_sha256": "35ea72b7b09e3b950295421cb4d5892ae8ef69499dba7b1c7704ecbe7a11086e"
+        },
+        {
+          "name": "recomputePath",
+          "obfuscated_member": "i",
+          "descriptor": "()V",
+          "named_descriptor": "()V",
+          "line_start": 755,
+          "line_end": 813,
+          "disassembly_slice_sha256": "c640985efe0dcb3055531e54940cbf795c699c4ee3125bacd21cb89f2afecf68"
+        },
+        {
+          "name": "createPath",
+          "obfuscated_member": "a",
+          "descriptor": "(DDDI)Leps;",
+          "named_descriptor": "(DDDI)Lnet/minecraft/world/level/pathfinder/Path;",
+          "line_start": 814,
+          "line_end": 839,
+          "disassembly_slice_sha256": "70f5056412b0a9037cbb1f4ae9332af90909128f31bacbc2afa277b898854cb5"
+        },
+        {
+          "name": "createPath",
+          "obfuscated_member": "a",
+          "descriptor": "(Ljava/util/stream/Stream;I)Leps;",
+          "named_descriptor": "(Ljava/util/stream/Stream;I)Lnet/minecraft/world/level/pathfinder/Path;",
+          "line_start": 840,
+          "line_end": 869,
+          "disassembly_slice_sha256": "4f4d2c581dd123583ed643581cafcf054342933dfdc51a0eb40dca8506d1299c"
+        },
+        {
+          "name": "createPath",
+          "obfuscated_member": "a",
+          "descriptor": "(Ljava/util/Set;I)Leps;",
+          "named_descriptor": "(Ljava/util/Set;I)Lnet/minecraft/world/level/pathfinder/Path;",
+          "line_start": 870,
+          "line_end": 896,
+          "disassembly_slice_sha256": "34b0a1c746968e59015f142775f82392075c9818d46c79bec79e9e87c2caf5b6"
+        },
+        {
+          "name": "createPath",
+          "obfuscated_member": "a",
+          "descriptor": "(Ljd;I)Leps;",
+          "named_descriptor": "(Lnet/minecraft/core/BlockPos;I)Lnet/minecraft/world/level/pathfinder/Path;",
+          "line_start": 897,
+          "line_end": 920,
+          "disassembly_slice_sha256": "eab559e66ab93a401d72e69bc3d4cfc15c6a90e3021430909182d87769e8d1cd"
+        },
+        {
+          "name": "createPath",
+          "obfuscated_member": "a",
+          "descriptor": "(Ljd;II)Leps;",
+          "named_descriptor": "(Lnet/minecraft/core/BlockPos;II)Lnet/minecraft/world/level/pathfinder/Path;",
+          "line_start": 921,
+          "line_end": 947,
+          "disassembly_slice_sha256": "d1318803494d1d966f4fedca7b0fa814d54705af39253a784fde9aa4a457c790"
+        },
+        {
+          "name": "createPath",
+          "obfuscated_member": "a",
+          "descriptor": "(Lbsr;I)Leps;",
+          "named_descriptor": "(Lnet/minecraft/world/entity/Entity;I)Lnet/minecraft/world/level/pathfinder/Path;",
+          "line_start": 948,
+          "line_end": 972,
+          "disassembly_slice_sha256": "17d3cb7def8115e6643b16ad12abab22476cf7a4632e660fc6a5e1151407ec05"
+        },
+        {
+          "name": "createPath",
+          "obfuscated_member": "a",
+          "descriptor": "(Ljava/util/Set;IZI)Leps;",
+          "named_descriptor": "(Ljava/util/Set;IZI)Lnet/minecraft/world/level/pathfinder/Path;",
+          "line_start": 973,
+          "line_end": 1006,
+          "disassembly_slice_sha256": "2f22ae1aed4db22439a21226ad3fb89fa23e9736f4d149cfab9533cf2af3d31b"
+        },
+        {
+          "name": "createPath",
+          "obfuscated_member": "a",
+          "descriptor": "(Ljava/util/Set;IZIF)Leps;",
+          "named_descriptor": "(Ljava/util/Set;IZIF)Lnet/minecraft/world/level/pathfinder/Path;",
+          "line_start": 1007,
+          "line_end": 1175,
+          "disassembly_slice_sha256": "72205a21a95931addf763c0fb2ce33227281634d61c1d632f837fc0a292d9943"
+        },
+        {
+          "name": "moveTo",
+          "obfuscated_member": "a",
+          "descriptor": "(DDDD)Z",
+          "named_descriptor": "(DDDD)Z",
+          "line_start": 1176,
+          "line_end": 1200,
+          "disassembly_slice_sha256": "f8cbe4b7c1c2b453af86e5eafffe526f39dc8fd003b94f2b83a9d5006e91bdd8"
+        },
+        {
+          "name": "moveTo",
+          "obfuscated_member": "a",
+          "descriptor": "(DDDID)Z",
+          "named_descriptor": "(DDDID)Z",
+          "line_start": 1201,
+          "line_end": 1226,
+          "disassembly_slice_sha256": "905271e77b2f638969dc49c29a931c604aded356b24a99219460dac3325581cc"
+        },
+        {
+          "name": "moveTo",
+          "obfuscated_member": "a",
+          "descriptor": "(Lbsr;D)Z",
+          "named_descriptor": "(Lnet/minecraft/world/entity/Entity;D)Z",
+          "line_start": 1227,
+          "line_end": 1262,
+          "disassembly_slice_sha256": "3d726c87d2405011f3c186a9c63f665910cd33ae18da1f787bf6c4ab996bb368"
+        },
+        {
+          "name": "moveTo",
+          "obfuscated_member": "a",
+          "descriptor": "(Leps;D)Z",
+          "named_descriptor": "(Lnet/minecraft/world/level/pathfinder/Path;D)Z",
+          "line_start": 1263,
+          "line_end": 1346,
+          "disassembly_slice_sha256": "ea999632d9114fa1dcd784f960c284cbf047be6ac6c2692c6098b07f923c00de"
+        },
+        {
+          "name": "followThePath",
+          "obfuscated_member": "k",
+          "descriptor": "()V",
+          "named_descriptor": "()V",
+          "line_start": 1540,
+          "line_end": 1680,
+          "disassembly_slice_sha256": "8becd83d818755374994860c74680a6fb844df732b38afa7979b78968d609689"
+        },
+        {
+          "name": "shouldTargetNextNodeInDirection",
+          "obfuscated_member": "c",
+          "descriptor": "(Lexc;)Z",
+          "named_descriptor": "(Lnet/minecraft/world/phys/Vec3;)Z",
+          "line_start": 1681,
+          "line_end": 1845,
+          "disassembly_slice_sha256": "9502a2fe954c58baa571fefc78954148669ddb266c712fdb5070e623db047ef5"
+        },
+        {
+          "name": "doStuckDetection",
+          "obfuscated_member": "b",
+          "descriptor": "(Lexc;)V",
+          "named_descriptor": "(Lnet/minecraft/world/phys/Vec3;)V",
+          "line_start": 1846,
+          "line_end": 2040,
+          "disassembly_slice_sha256": "e306db782130cbfcadd704a78767816bbfe99560a8a37d0ffec636c3e4a35499"
+        },
+        {
+          "name": "resetStuckTimeout",
+          "obfuscated_member": "f",
+          "descriptor": "()V",
+          "named_descriptor": "()V",
+          "line_start": 2059,
+          "line_end": 2086,
+          "disassembly_slice_sha256": "c775d3c93a1a995179e32d4b7e8721fb664c396f92dd4512b99ebf31b376b165"
+        },
+        {
+          "name": "isDone",
+          "obfuscated_member": "l",
+          "descriptor": "()Z",
+          "named_descriptor": "()Z",
+          "line_start": 2087,
+          "line_end": 2114,
+          "disassembly_slice_sha256": "1740b5427c1288f853b16becff8bab4818a760f3c6b160e1d774f77a9ab9e9fe"
+        }
+      ],
+      "mapped_fields": [
+        {
+          "type": "int",
+          "name": "MAX_TIME_RECOMPUTE",
+          "obfuscated": "p"
+        },
+        {
+          "type": "int",
+          "name": "STUCK_CHECK_INTERVAL",
+          "obfuscated": "q"
+        },
+        {
+          "type": "float",
+          "name": "STUCK_THRESHOLD_DISTANCE_FACTOR",
+          "obfuscated": "r"
+        },
+        {
+          "type": "net.minecraft.world.entity.Mob",
+          "name": "mob",
+          "obfuscated": "a"
+        },
+        {
+          "type": "net.minecraft.world.level.Level",
+          "name": "level",
+          "obfuscated": "b"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.Path",
+          "name": "path",
+          "obfuscated": "c"
+        },
+        {
+          "type": "double",
+          "name": "speedModifier",
+          "obfuscated": "d"
+        },
+        {
+          "type": "int",
+          "name": "tick",
+          "obfuscated": "e"
+        },
+        {
+          "type": "int",
+          "name": "lastStuckCheck",
+          "obfuscated": "f"
+        },
+        {
+          "type": "net.minecraft.world.phys.Vec3",
+          "name": "lastStuckCheckPos",
+          "obfuscated": "g"
+        },
+        {
+          "type": "net.minecraft.core.Vec3i",
+          "name": "timeoutCachedNode",
+          "obfuscated": "h"
+        },
+        {
+          "type": "long",
+          "name": "timeoutTimer",
+          "obfuscated": "i"
+        },
+        {
+          "type": "long",
+          "name": "lastTimeoutCheck",
+          "obfuscated": "j"
+        },
+        {
+          "type": "double",
+          "name": "timeoutLimit",
+          "obfuscated": "k"
+        },
+        {
+          "type": "float",
+          "name": "maxDistanceToWaypoint",
+          "obfuscated": "l"
+        },
+        {
+          "type": "boolean",
+          "name": "hasDelayedRecomputation",
+          "obfuscated": "m"
+        },
+        {
+          "type": "long",
+          "name": "timeLastRecompute",
+          "obfuscated": "n"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.NodeEvaluator",
+          "name": "nodeEvaluator",
+          "obfuscated": "o"
+        },
+        {
+          "type": "net.minecraft.core.BlockPos",
+          "name": "targetPos",
+          "obfuscated": "s"
+        },
+        {
+          "type": "int",
+          "name": "reachRange",
+          "obfuscated": "t"
+        },
+        {
+          "type": "float",
+          "name": "maxVisitedNodesMultiplier",
+          "obfuscated": "u"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.PathFinder",
+          "name": "pathFinder",
+          "obfuscated": "v"
+        },
+        {
+          "type": "boolean",
+          "name": "isStuck",
+          "obfuscated": "w"
+        }
+      ],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.world.entity.ai.navigation.WallClimberNavigation",
+      "obfuscated_owner": "cdb",
+      "class_hash": "b16bb3b12308d3bd03815e431013959c3c9cd18e57d92d9f05d016fdab95a542",
+      "disassembly_hash": "3a8c0fa269acb52c91e25e3b14f5f3fc4e8ec5f27e271f3db91d988adef3113b",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_RAW_JAVAP_STDOUT",
+      "physical_method_count": 5,
+      "resolved_method_count": 5,
+      "selected_members": [],
+      "mapped_fields": [],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation",
+      "obfuscated_owner": "cdc",
+      "class_hash": "a9f46c79d14f69fccf861e24d5173f3b4ff0057553b2be569aba4d6de91eb7ef",
+      "disassembly_hash": "d42460642e2b31d2bea15fba79fa35149ea2bebaa4cfde49bd847a21efc854bb",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_RAW_JAVAP_STDOUT",
+      "physical_method_count": 8,
+      "resolved_method_count": 8,
+      "selected_members": [],
+      "mapped_fields": [],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.world.entity.animal.Bee$1",
+      "obfuscated_owner": "cff$1",
+      "class_hash": "f1f9eca11a9b3c0e06af967b833741d906490ee32ab348ba598ef2feca2af97d",
+      "disassembly_hash": "c701b66ee887536cf6e415f36908b643c14568783f07a94aaa0ab7a0a1506d77",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_RAW_JAVAP_STDOUT",
+      "physical_method_count": 3,
+      "resolved_method_count": 3,
+      "selected_members": [],
+      "mapped_fields": [],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.world.entity.animal.Turtle$TurtlePathNavigation",
+      "obfuscated_owner": "cgf$g",
+      "class_hash": "6624633cc39ea0fd65bee44805bc1b9dd0e458a690ca4d3b898ce7cad049dbe0",
+      "disassembly_hash": "40557d84dbc2fa9132f4a2ce840f81cc595f1faa460b3072a8c58b6cce6c63fd",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_RAW_JAVAP_STDOUT",
+      "physical_method_count": 2,
+      "resolved_method_count": 2,
+      "selected_members": [],
+      "mapped_fields": [],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.world.entity.animal.frog.Frog$FrogNodeEvaluator",
+      "obfuscated_owner": "cgy$b",
+      "class_hash": "096499a70a7dea9ef7b215d2638487ded984b54bc26c21c85863be59314f37dd",
+      "disassembly_hash": "9ab7a07b94420d5f3af04feed87c7ac488f3d9d67ab01fc859d26fab535d8abf",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_RAW_JAVAP_STDOUT",
+      "physical_method_count": 3,
+      "resolved_method_count": 3,
+      "selected_members": [],
+      "mapped_fields": [],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.world.entity.animal.frog.Frog$FrogPathNavigation",
+      "obfuscated_owner": "cgy$c",
+      "class_hash": "8ede3b5bb46c4c8489434b0da6cb7f7d316f277b54c054d2637cabc2de10402b",
+      "disassembly_hash": "134ada94871c572482bcd1acfe671036b29c5f18e62a13c214858cc76c3bfc91",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_RAW_JAVAP_STDOUT",
+      "physical_method_count": 3,
+      "resolved_method_count": 3,
+      "selected_members": [],
+      "mapped_fields": [],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.world.entity.monster.Strider$StriderPathNavigation",
+      "obfuscated_owner": "ckq$b",
+      "class_hash": "666dee85d1c6ccc0eb55030794710b6e678b048331595bd1f5921504e4e124c6",
+      "disassembly_hash": "1fb9d1a84a1e931a2a9cb500d691c2790b29da007b36b7b1ee26c84f311b41ae",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_RAW_JAVAP_STDOUT",
+      "physical_method_count": 4,
+      "resolved_method_count": 4,
+      "selected_members": [],
+      "mapped_fields": [],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.world.entity.monster.warden.Warden$1",
+      "obfuscated_owner": "cmb$1",
+      "class_hash": "d5bb49890ccd87ff93b57dca26f7b314010fb094534b2730cb30170504e503c2",
+      "disassembly_hash": "66e4adff7e6c2a0ac013a42248e5c8a40eaccc64e2c4b4ca7d064ce61e3639b2",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_RAW_JAVAP_STDOUT",
+      "physical_method_count": 2,
+      "resolved_method_count": 2,
+      "selected_members": [],
+      "mapped_fields": [],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.world.entity.monster.warden.Warden$1$1",
+      "obfuscated_owner": "cmb$1$1",
+      "class_hash": "fd2309afeaabf99a0c6a2b625ca9cef0b5e45529743312dff509712be77344f3",
+      "disassembly_hash": "6c78d97f36c8ebc4f0268f25225150638b48d1e8cbd16906553129e09aa935e2",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_RAW_JAVAP_STDOUT",
+      "physical_method_count": 2,
+      "resolved_method_count": 2,
+      "selected_members": [],
+      "mapped_fields": [],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.world.level.pathfinder.AmphibiousNodeEvaluator",
+      "obfuscated_owner": "epn",
+      "class_hash": "8ade699feb8a1f73a8919fb2aea9dee6d59a1de25dfec6bf5dce0e39d732e59f",
+      "disassembly_hash": "b72d607888c7ba1832bada63ae548d026a865944ef93b0ef8bf97181e9060fca",
+      "disassembly_encoding": "utf-8",
+      "origin": "HASH_VERIFIED_RETAINED_NODE_UTF8_TEXT_STDOUT",
+      "physical_method_count": 9,
+      "resolved_method_count": 9,
+      "selected_members": [
+        {
+          "name": "prepare",
+          "obfuscated_member": "a",
+          "descriptor": "(Lddj;Lbtp;)V",
+          "named_descriptor": "(Lnet/minecraft/world/level/PathNavigationRegion;Lnet/minecraft/world/entity/Mob;)V",
+          "line_start": 265,
+          "line_end": 310,
+          "disassembly_slice_sha256": "aa16e658cc3859830d79060a3dec5b9c68d6b0ed97ecdbbb135e103d8882e80e"
+        },
+        {
+          "name": "done",
+          "obfuscated_member": "b",
+          "descriptor": "()V",
+          "named_descriptor": "()V",
+          "line_start": 311,
+          "line_end": 339,
+          "disassembly_slice_sha256": "fde1e2534dfb6b0f926765b642d0842d090b51730b49d6c0e7c83769ec2282e0"
+        },
+        {
+          "name": "getNeighbors",
+          "obfuscated_member": "a",
+          "descriptor": "([Lepq;Lepq;)I",
+          "named_descriptor": "([Lnet/minecraft/world/level/pathfinder/Node;Lnet/minecraft/world/level/pathfinder/Node;)I",
+          "line_start": 407,
+          "line_end": 622,
+          "disassembly_slice_sha256": "8c47d9887ca10ea32920754d2f73eaee5ba2ec44d1bdbfe8bb1ddc393db4a62f"
+        }
+      ],
+      "mapped_fields": [
+        {
+          "type": "boolean",
+          "name": "prefersShallowSwimming",
+          "obfuscated": "l"
+        },
+        {
+          "type": "float",
+          "name": "oldWalkableCost",
+          "obfuscated": "m"
+        },
+        {
+          "type": "float",
+          "name": "oldWaterBorderCost",
+          "obfuscated": "n"
+        }
+      ],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.world.level.pathfinder.BinaryHeap",
+      "obfuscated_owner": "epo",
+      "class_hash": "000668601bbdeee079c9fe60cd08bf424d98adf3ece0afcc86cafdff9bfc751a",
+      "disassembly_hash": "6ebf6349de3b43855deb7119ea1f2e3ca4eedf478c927a6ad839b9f15142c7aa",
+      "disassembly_encoding": "utf-8",
+      "origin": "HASH_VERIFIED_RETAINED_NODE_UTF8_TEXT_STDOUT",
+      "physical_method_count": 12,
+      "resolved_method_count": 12,
+      "selected_members": [],
+      "mapped_fields": [],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.world.level.pathfinder.FlyNodeEvaluator",
+      "obfuscated_owner": "epp",
+      "class_hash": "a8bd0d17d938b6d9be2b2bb9486c767caab62f915c7ccd17fc74e542eb1321a8",
+      "disassembly_hash": "3ac8bfe8c4d4f7a1951d736a831265e31cdc10571a0a8e936fafccccf40cb9f8",
+      "disassembly_encoding": "utf-8",
+      "origin": "HASH_VERIFIED_RETAINED_NODE_UTF8_TEXT_STDOUT",
+      "physical_method_count": 14,
+      "resolved_method_count": 14,
+      "selected_members": [
+        {
+          "name": "prepare",
+          "obfuscated_member": "a",
+          "descriptor": "(Lddj;Lbtp;)V",
+          "named_descriptor": "(Lnet/minecraft/world/level/PathNavigationRegion;Lnet/minecraft/world/entity/Mob;)V",
+          "line_start": 420,
+          "line_end": 445,
+          "disassembly_slice_sha256": "b1919ac5984622a4fc7dd44601f012a77bc7a56920745e30cf080c6418b8abb8"
+        },
+        {
+          "name": "done",
+          "obfuscated_member": "b",
+          "descriptor": "()V",
+          "named_descriptor": "()V",
+          "line_start": 446,
+          "line_end": 468,
+          "disassembly_slice_sha256": "dc59470a1302b7fe136f8762ed89ce9ebac58d8aee893a3e6ecb6cfa5957052b"
+        },
+        {
+          "name": "findAcceptedNode",
+          "obfuscated_member": "a",
+          "descriptor": "(III)Lepq;",
+          "named_descriptor": "(III)Lnet/minecraft/world/level/pathfinder/Node;",
+          "line_start": 1811,
+          "line_end": 1887,
+          "disassembly_slice_sha256": "b5f8888f367e24a6621e2493e8c451189689c0d28e4d482044117d1ba074a436"
+        }
+      ],
+      "mapped_fields": [
+        {
+          "type": "it.unimi.dsi.fastutil.longs.Long2ObjectMap",
+          "name": "pathTypeByPosCache",
+          "obfuscated": "l"
+        },
+        {
+          "type": "float",
+          "name": "SMALL_MOB_SIZE",
+          "obfuscated": "m"
+        },
+        {
+          "type": "float",
+          "name": "SMALL_MOB_INFLATED_START_NODE_BOUNDING_BOX",
+          "obfuscated": "n"
+        },
+        {
+          "type": "int",
+          "name": "MAX_START_NODE_CANDIDATES",
+          "obfuscated": "o"
+        }
+      ],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.world.level.pathfinder.Node",
+      "obfuscated_owner": "epq",
+      "class_hash": "1fe465d1be94976059a3954720fc041cd6cc95b21c36b2853090c5fa71de077b",
+      "disassembly_hash": "7080d4756d1d27e653071aa365a0c68f769c880075fb87b3a1b74ff86cf3787a",
+      "disassembly_encoding": "utf-8",
+      "origin": "HASH_VERIFIED_RETAINED_NODE_UTF8_TEXT_STDOUT",
+      "physical_method_count": 19,
+      "resolved_method_count": 19,
+      "selected_members": [
+        {
+          "name": "writeToStream",
+          "obfuscated_member": "a",
+          "descriptor": "(Lvw;)V",
+          "named_descriptor": "(Lnet/minecraft/network/FriendlyByteBuf;)V",
+          "line_start": 908,
+          "line_end": 968,
+          "disassembly_slice_sha256": "27c960b04a89b2278e060edd3c7b1a01c230c676723280a2ff34fa99cf2ac44c"
+        },
+        {
+          "name": "createFromStream",
+          "obfuscated_member": "b",
+          "descriptor": "(Lvw;)Lepq;",
+          "named_descriptor": "(Lnet/minecraft/network/FriendlyByteBuf;)Lnet/minecraft/world/level/pathfinder/Node;",
+          "line_start": 969,
+          "line_end": 997,
+          "disassembly_slice_sha256": "f1be18a27ab83d08e0d5f70158a4342dcc4b0db4ea11615185f761a9150b2650"
+        },
+        {
+          "name": "readContents",
+          "obfuscated_member": "a",
+          "descriptor": "(Lvw;Lepq;)V",
+          "named_descriptor": "(Lnet/minecraft/network/FriendlyByteBuf;Lnet/minecraft/world/level/pathfinder/Node;)V",
+          "line_start": 998,
+          "line_end": 1041,
+          "disassembly_slice_sha256": "f0d4d4afc02e3ea5e6507014dfca0f41c09a34476aca746f5a89ba8367f57c9f"
+        }
+      ],
+      "mapped_fields": [
+        {
+          "type": "int",
+          "name": "x",
+          "obfuscated": "a"
+        },
+        {
+          "type": "int",
+          "name": "y",
+          "obfuscated": "b"
+        },
+        {
+          "type": "int",
+          "name": "z",
+          "obfuscated": "c"
+        },
+        {
+          "type": "int",
+          "name": "hash",
+          "obfuscated": "m"
+        },
+        {
+          "type": "int",
+          "name": "heapIdx",
+          "obfuscated": "d"
+        },
+        {
+          "type": "float",
+          "name": "g",
+          "obfuscated": "e"
+        },
+        {
+          "type": "float",
+          "name": "h",
+          "obfuscated": "f"
+        },
+        {
+          "type": "float",
+          "name": "f",
+          "obfuscated": "g"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.Node",
+          "name": "cameFrom",
+          "obfuscated": "h"
+        },
+        {
+          "type": "boolean",
+          "name": "closed",
+          "obfuscated": "i"
+        },
+        {
+          "type": "float",
+          "name": "walkedDistance",
+          "obfuscated": "j"
+        },
+        {
+          "type": "float",
+          "name": "costMalus",
+          "obfuscated": "k"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.PathType",
+          "name": "type",
+          "obfuscated": "l"
+        }
+      ],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.world.level.pathfinder.NodeEvaluator",
+      "obfuscated_owner": "epr",
+      "class_hash": "6ba6e79602d91f40c88c64cf27e2c6659c2ff5b584c0004e8fb415f8bfe6f0e9",
+      "disassembly_hash": "f3291dc94f72c94a94cfc41d857dac39cddf3115cae07bae6c27e2f0e70794de",
+      "disassembly_encoding": "utf-8",
+      "origin": "HASH_VERIFIED_RETAINED_NODE_UTF8_TEXT_STDOUT",
+      "physical_method_count": 22,
+      "resolved_method_count": 22,
+      "selected_members": [
+        {
+          "name": "prepare",
+          "obfuscated_member": "a",
+          "descriptor": "(Lddj;Lbtp;)V",
+          "named_descriptor": "(Lnet/minecraft/world/level/PathNavigationRegion;Lnet/minecraft/world/entity/Mob;)V",
+          "line_start": 271,
+          "line_end": 324,
+          "disassembly_slice_sha256": "adef38ef1c013b8f95d9cf8090f7e38d4537626e8b1455be9e474d7bab612055"
+        },
+        {
+          "name": "done",
+          "obfuscated_member": "b",
+          "descriptor": "()V",
+          "named_descriptor": "()V",
+          "line_start": 325,
+          "line_end": 344,
+          "disassembly_slice_sha256": "9e7c5ee8a3c495e0ef0e65f4f972c340494c217c06212196aaa0693285ff3519"
+        },
+        {
+          "name": "getNode",
+          "obfuscated_member": "b",
+          "descriptor": "(Ljd;)Lepq;",
+          "named_descriptor": "(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/pathfinder/Node;",
+          "line_start": 345,
+          "line_end": 365,
+          "disassembly_slice_sha256": "321d446e9aabad73f002abe96cf359e5b14e2b50e4ca27224bfc811c9cc1fdd1"
+        },
+        {
+          "name": "getNode",
+          "obfuscated_member": "c",
+          "descriptor": "(III)Lepq;",
+          "named_descriptor": "(III)Lnet/minecraft/world/level/pathfinder/Node;",
+          "line_start": 366,
+          "line_end": 392,
+          "disassembly_slice_sha256": "43820e0f817e1323b22ef110c6bd07b6edc1c1287b882594be59a1b89d50e0eb"
+        },
+        {
+          "name": "canPassDoors",
+          "obfuscated_member": "d",
+          "descriptor": "()Z",
+          "named_descriptor": "()Z",
+          "line_start": 535,
+          "line_end": 548,
+          "disassembly_slice_sha256": "40341ad0241800e4d65fa74916e2e67087b9209895cfe62d802e66bdbd6b02c8"
+        },
+        {
+          "name": "canOpenDoors",
+          "obfuscated_member": "e",
+          "descriptor": "()Z",
+          "named_descriptor": "()Z",
+          "line_start": 549,
+          "line_end": 562,
+          "disassembly_slice_sha256": "1b1f8a2c318aa45f644f9228d33501eca6f4adc09d153911e4c44cb5de709e5c"
+        }
+      ],
+      "mapped_fields": [
+        {
+          "type": "net.minecraft.world.level.pathfinder.PathfindingContext",
+          "name": "currentContext",
+          "obfuscated": "a"
+        },
+        {
+          "type": "net.minecraft.world.entity.Mob",
+          "name": "mob",
+          "obfuscated": "b"
+        },
+        {
+          "type": "it.unimi.dsi.fastutil.ints.Int2ObjectMap",
+          "name": "nodes",
+          "obfuscated": "c"
+        },
+        {
+          "type": "int",
+          "name": "entityWidth",
+          "obfuscated": "d"
+        },
+        {
+          "type": "int",
+          "name": "entityHeight",
+          "obfuscated": "e"
+        },
+        {
+          "type": "int",
+          "name": "entityDepth",
+          "obfuscated": "f"
+        },
+        {
+          "type": "boolean",
+          "name": "canPassDoors",
+          "obfuscated": "g"
+        },
+        {
+          "type": "boolean",
+          "name": "canOpenDoors",
+          "obfuscated": "h"
+        },
+        {
+          "type": "boolean",
+          "name": "canFloat",
+          "obfuscated": "i"
+        },
+        {
+          "type": "boolean",
+          "name": "canWalkOverFences",
+          "obfuscated": "j"
+        }
+      ],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.world.level.pathfinder.Path",
+      "obfuscated_owner": "eps",
+      "class_hash": "ef3a32b6c5a6af539dfb8134ee662ceac7177d6a36cb1129f4be05619803c834",
+      "disassembly_hash": "84073893227808bb126b85b06c6903035b72ed003ef9ff262a0efce7a4244bf0",
+      "disassembly_encoding": "utf-8",
+      "origin": "HASH_VERIFIED_RETAINED_NODE_UTF8_TEXT_STDOUT",
+      "physical_method_count": 30,
+      "resolved_method_count": 30,
+      "selected_members": [
+        {
+          "name": "sameAs",
+          "obfuscated_member": "a",
+          "descriptor": "(Leps;)Z",
+          "named_descriptor": "(Lnet/minecraft/world/level/pathfinder/Path;)Z",
+          "line_start": 734,
+          "line_end": 828,
+          "disassembly_slice_sha256": "7acd55a5f9064799cc5d7190df890922fff013f235c1339b3c05f9d65639f325"
+        },
+        {
+          "name": "setDebug",
+          "obfuscated_member": "a",
+          "descriptor": "([Lepq;[Lepq;Ljava/util/Set;)V",
+          "named_descriptor": "([Lnet/minecraft/world/level/pathfinder/Node;[Lnet/minecraft/world/level/pathfinder/Node;Ljava/util/Set;)V",
+          "line_start": 843,
+          "line_end": 873,
+          "disassembly_slice_sha256": "3a0cedd68562e7ac14f07976841ee48f83a716f42f459e7099f5632c67eae316"
+        },
+        {
+          "name": "writeToStream",
+          "obfuscated_member": "a",
+          "descriptor": "(Lvw;)V",
+          "named_descriptor": "(Lnet/minecraft/network/FriendlyByteBuf;)V",
+          "line_start": 891,
+          "line_end": 949,
+          "disassembly_slice_sha256": "973cf502e1874c1c424b2c5e9ab60720257d61c1db9752f203823ee722d9c694"
+        },
+        {
+          "name": "createFromStream",
+          "obfuscated_member": "b",
+          "descriptor": "(Lvw;)Leps;",
+          "named_descriptor": "(Lnet/minecraft/network/FriendlyByteBuf;)Lnet/minecraft/world/level/pathfinder/Path;",
+          "line_start": 950,
+          "line_end": 1008,
+          "disassembly_slice_sha256": "f126c6e9c82f6b897e7838650c3a14692215a2c524925823af92c778be70bb6a"
+        },
+        {
+          "name": "readNodeArray",
+          "obfuscated_member": "c",
+          "descriptor": "(Lvw;)[Lepq;",
+          "named_descriptor": "(Lnet/minecraft/network/FriendlyByteBuf;)[Lnet/minecraft/world/level/pathfinder/Node;",
+          "line_start": 1053,
+          "line_end": 1096,
+          "disassembly_slice_sha256": "9a1fd04dd3fc2cfb2967546fa86767c07fe45ffbde0572b47939ee22b712e54c"
+        },
+        {
+          "name": "writeNodeArray",
+          "obfuscated_member": "a",
+          "descriptor": "(Lvw;[Lepq;)V",
+          "named_descriptor": "(Lnet/minecraft/network/FriendlyByteBuf;[Lnet/minecraft/world/level/pathfinder/Node;)V",
+          "line_start": 1097,
+          "line_end": 1147,
+          "disassembly_slice_sha256": "b867de6b46f0bb542d647f13f68369a42fe87ad83020a969147a1bb69b9ec5cf"
+        }
+      ],
+      "mapped_fields": [
+        {
+          "type": "java.util.List",
+          "name": "nodes",
+          "obfuscated": "a"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.Path$DebugData",
+          "name": "debugData",
+          "obfuscated": "b"
+        },
+        {
+          "type": "int",
+          "name": "nextNodeIndex",
+          "obfuscated": "c"
+        },
+        {
+          "type": "net.minecraft.core.BlockPos",
+          "name": "target",
+          "obfuscated": "d"
+        },
+        {
+          "type": "float",
+          "name": "distToTarget",
+          "obfuscated": "e"
+        },
+        {
+          "type": "boolean",
+          "name": "reached",
+          "obfuscated": "f"
+        }
+      ],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.world.level.pathfinder.PathFinder",
+      "obfuscated_owner": "epu",
+      "class_hash": "91f07489c3a6694ea2b531f862a37aac36663107621989043782d05a645b4913",
+      "disassembly_hash": "48f64e1d807d1ff4559d13a5873b50781e4570afd9461a71b8f534453cace81f",
+      "disassembly_encoding": "utf-8",
+      "origin": "HASH_VERIFIED_RETAINED_NODE_UTF8_TEXT_STDOUT",
+      "physical_method_count": 10,
+      "resolved_method_count": 10,
+      "selected_members": [
+        {
+          "name": "<init>",
+          "obfuscated_member": "<init>",
+          "descriptor": "(Lepr;I)V",
+          "named_descriptor": "(Lnet/minecraft/world/level/pathfinder/NodeEvaluator;I)V",
+          "line_start": 422,
+          "line_end": 457,
+          "disassembly_slice_sha256": "29d76d43b186df8abf3d809379bde323878fbb9b0a02233f389f07d437191c4c"
+        },
+        {
+          "name": "findPath",
+          "obfuscated_member": "a",
+          "descriptor": "(Lddj;Lbtp;Ljava/util/Set;FIF)Leps;",
+          "named_descriptor": "(Lnet/minecraft/world/level/PathNavigationRegion;Lnet/minecraft/world/entity/Mob;Ljava/util/Set;FIF)Lnet/minecraft/world/level/pathfinder/Path;",
+          "line_start": 458,
+          "line_end": 539,
+          "disassembly_slice_sha256": "f0d2dbdf30c20e62dc66f9c8268ce24623802715492e2cecbfeb73d29fa0986b"
+        },
+        {
+          "name": "findPath",
+          "obfuscated_member": "a",
+          "descriptor": "(Lbnf;Lepq;Ljava/util/Map;FIF)Leps;",
+          "named_descriptor": "(Lnet/minecraft/util/profiling/ProfilerFiller;Lnet/minecraft/world/level/pathfinder/Node;Ljava/util/Map;FIF)Lnet/minecraft/world/level/pathfinder/Path;",
+          "line_start": 540,
+          "line_end": 897,
+          "disassembly_slice_sha256": "846b5aab33c2e10a2e4799171b442d7aa7bc720dccbd25e1804bf58c71c60540"
+        },
+        {
+          "name": "distance",
+          "obfuscated_member": "a",
+          "descriptor": "(Lepq;Lepq;)F",
+          "named_descriptor": "(Lnet/minecraft/world/level/pathfinder/Node;Lnet/minecraft/world/level/pathfinder/Node;)F",
+          "line_start": 898,
+          "line_end": 914,
+          "disassembly_slice_sha256": "a5696fde6a2db37a0fd075647fd157f3050b93d0b9fb5a59a7155bb6e7dcfc2e"
+        },
+        {
+          "name": "getBestH",
+          "obfuscated_member": "a",
+          "descriptor": "(Lepq;Ljava/util/Set;)F",
+          "named_descriptor": "(Lnet/minecraft/world/level/pathfinder/Node;Ljava/util/Set;)F",
+          "line_start": 915,
+          "line_end": 976,
+          "disassembly_slice_sha256": "37e33ae73df1458b4c437948e445482c9cd44949db749161181d412b842914a2"
+        },
+        {
+          "name": "reconstructPath",
+          "obfuscated_member": "a",
+          "descriptor": "(Lepq;Ljd;Z)Leps;",
+          "named_descriptor": "(Lnet/minecraft/world/level/pathfinder/Node;Lnet/minecraft/core/BlockPos;Z)Lnet/minecraft/world/level/pathfinder/Path;",
+          "line_start": 977,
+          "line_end": 1034,
+          "disassembly_slice_sha256": "5d1333d9b3c9890d76c7bcdfb9a4a8d19c2427f2f2533a621c68fe79f1a8c0c5"
+        },
+        {
+          "name": "lambda$findPath$2",
+          "obfuscated_member": "a",
+          "descriptor": "(Ljava/util/Map;Lepz;)Leps;",
+          "named_descriptor": "(Ljava/util/Map;Lnet/minecraft/world/level/pathfinder/Target;)Lnet/minecraft/world/level/pathfinder/Path;",
+          "line_start": 1049,
+          "line_end": 1071,
+          "disassembly_slice_sha256": "0102cee4c61521571abf66c68873e9040e0766a7d35a77a3e17df46386fb2720"
+        },
+        {
+          "name": "lambda$findPath$1",
+          "obfuscated_member": "b",
+          "descriptor": "(Ljava/util/Map;Lepz;)Leps;",
+          "named_descriptor": "(Ljava/util/Map;Lnet/minecraft/world/level/pathfinder/Target;)Lnet/minecraft/world/level/pathfinder/Path;",
+          "line_start": 1072,
+          "line_end": 1094,
+          "disassembly_slice_sha256": "87d6d2325543ea64a0c5bd59144591c867d336422cffca18c421e1f083320907"
+        }
+      ],
+      "mapped_fields": [
+        {
+          "type": "float",
+          "name": "FUDGING",
+          "obfuscated": "a"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.Node[]",
+          "name": "neighbors",
+          "obfuscated": "b"
+        },
+        {
+          "type": "int",
+          "name": "maxVisitedNodes",
+          "obfuscated": "c"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.NodeEvaluator",
+          "name": "nodeEvaluator",
+          "obfuscated": "d"
+        },
+        {
+          "type": "boolean",
+          "name": "DEBUG",
+          "obfuscated": "e"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.BinaryHeap",
+          "name": "openSet",
+          "obfuscated": "f"
+        }
+      ],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.world.level.pathfinder.PathType",
+      "obfuscated_owner": "epv",
+      "class_hash": "1299bd556ed27b991a98d337dd55b7184edb1b81cb0d6d79b3e3c6aa1deb20d7",
+      "disassembly_hash": "8e59fbfa304c6de067f10735cab7c5b59749a439997581ac18e99bb5007f311c",
+      "disassembly_encoding": "utf-8",
+      "origin": "HASH_VERIFIED_RETAINED_NODE_UTF8_TEXT_STDOUT",
+      "physical_method_count": 6,
+      "resolved_method_count": 6,
+      "selected_members": [
+        {
+          "name": "getMalus",
+          "obfuscated_member": "a",
+          "descriptor": "()F",
+          "named_descriptor": "()F",
+          "line_start": 367,
+          "line_end": 380,
+          "disassembly_slice_sha256": "00d3e3d4d27461c8a4be64a9b4c08a6d2e4aa404df682433c2df555ce92392a0"
+        },
+        {
+          "name": "<clinit>",
+          "obfuscated_member": "<clinit>",
+          "descriptor": "()V",
+          "named_descriptor": "()V",
+          "line_start": 496,
+          "line_end": 713,
+          "disassembly_slice_sha256": "b014dab1988a56821740b44e60f7e48d065cd01457407e3c7ee0363ab0b47979"
+        }
+      ],
+      "mapped_fields": [
+        {
+          "type": "net.minecraft.world.level.pathfinder.PathType",
+          "name": "BLOCKED",
+          "obfuscated": "a"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.PathType",
+          "name": "OPEN",
+          "obfuscated": "b"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.PathType",
+          "name": "WALKABLE",
+          "obfuscated": "c"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.PathType",
+          "name": "WALKABLE_DOOR",
+          "obfuscated": "d"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.PathType",
+          "name": "TRAPDOOR",
+          "obfuscated": "e"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.PathType",
+          "name": "POWDER_SNOW",
+          "obfuscated": "f"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.PathType",
+          "name": "DANGER_POWDER_SNOW",
+          "obfuscated": "g"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.PathType",
+          "name": "FENCE",
+          "obfuscated": "h"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.PathType",
+          "name": "LAVA",
+          "obfuscated": "i"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.PathType",
+          "name": "WATER",
+          "obfuscated": "j"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.PathType",
+          "name": "WATER_BORDER",
+          "obfuscated": "k"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.PathType",
+          "name": "RAIL",
+          "obfuscated": "l"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.PathType",
+          "name": "UNPASSABLE_RAIL",
+          "obfuscated": "m"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.PathType",
+          "name": "DANGER_FIRE",
+          "obfuscated": "n"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.PathType",
+          "name": "DAMAGE_FIRE",
+          "obfuscated": "o"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.PathType",
+          "name": "DANGER_OTHER",
+          "obfuscated": "p"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.PathType",
+          "name": "DAMAGE_OTHER",
+          "obfuscated": "q"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.PathType",
+          "name": "DOOR_OPEN",
+          "obfuscated": "r"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.PathType",
+          "name": "DOOR_WOOD_CLOSED",
+          "obfuscated": "s"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.PathType",
+          "name": "DOOR_IRON_CLOSED",
+          "obfuscated": "t"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.PathType",
+          "name": "BREACH",
+          "obfuscated": "u"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.PathType",
+          "name": "LEAVES",
+          "obfuscated": "v"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.PathType",
+          "name": "STICKY_HONEY",
+          "obfuscated": "w"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.PathType",
+          "name": "COCOA",
+          "obfuscated": "x"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.PathType",
+          "name": "DAMAGE_CAUTIOUS",
+          "obfuscated": "y"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.PathType",
+          "name": "DANGER_TRAPDOOR",
+          "obfuscated": "z"
+        },
+        {
+          "type": "float",
+          "name": "malus",
+          "obfuscated": "A"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.PathType[]",
+          "name": "$VALUES",
+          "obfuscated": "B"
+        }
+      ],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.world.level.pathfinder.PathTypeCache",
+      "obfuscated_owner": "epw",
+      "class_hash": "0395dec5d101ec638de4951981bd02919f5cd6a66fa9a2b2937a802fdaffc19e",
+      "disassembly_hash": "8464fab86efbeed7eb54e301d5798a9593680638aa9e3ca60a2b2a68e6d14f19",
+      "disassembly_encoding": "utf-8",
+      "origin": "HASH_VERIFIED_RETAINED_NODE_UTF8_TEXT_STDOUT",
+      "physical_method_count": 6,
+      "resolved_method_count": 6,
+      "selected_members": [],
+      "mapped_fields": [],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.world.level.pathfinder.PathfindingContext",
+      "obfuscated_owner": "epx",
+      "class_hash": "d12308afcbc4a56ec0bdf79646120c50a138a8f0b3417a298c197fc79e00e25d",
+      "disassembly_hash": "921aa0dd29ab0aac0ddb938c3950a52536f83f19387592dce8d2e1f273c5b3f6",
+      "disassembly_encoding": "utf-8",
+      "origin": "HASH_VERIFIED_RETAINED_NODE_UTF8_TEXT_STDOUT",
+      "physical_method_count": 5,
+      "resolved_method_count": 5,
+      "selected_members": [],
+      "mapped_fields": [],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.world.level.pathfinder.SwimNodeEvaluator",
+      "obfuscated_owner": "epy",
+      "class_hash": "ae1521ee131401a51d7e02ca33a1b95cb0cd99ffae73002566bf710fb5349e17",
+      "disassembly_hash": "2202e02f6fda2615348284ae8ffde2ec7eaf5246407dcc6d44502ccbaa950fda",
+      "disassembly_encoding": "utf-8",
+      "origin": "HASH_VERIFIED_RETAINED_NODE_UTF8_TEXT_STDOUT",
+      "physical_method_count": 13,
+      "resolved_method_count": 13,
+      "selected_members": [
+        {
+          "name": "prepare",
+          "obfuscated_member": "a",
+          "descriptor": "(Lddj;Lbtp;)V",
+          "named_descriptor": "(Lnet/minecraft/world/level/PathNavigationRegion;Lnet/minecraft/world/entity/Mob;)V",
+          "line_start": 356,
+          "line_end": 378,
+          "disassembly_slice_sha256": "1be6b25a73021276546422c4171e4b246ae46ffe4886644319dca77b74ebd6d4"
+        },
+        {
+          "name": "done",
+          "obfuscated_member": "b",
+          "descriptor": "()V",
+          "named_descriptor": "()V",
+          "line_start": 379,
+          "line_end": 397,
+          "disassembly_slice_sha256": "7f4fbde7cb6686a6d97564de6355d4c812b1dfdeef9fd0e9f5b9f5edc09c44e3"
+        },
+        {
+          "name": "findAcceptedNode",
+          "obfuscated_member": "a",
+          "descriptor": "(III)Lepq;",
+          "named_descriptor": "(III)Lnet/minecraft/world/level/pathfinder/Node;",
+          "line_start": 677,
+          "line_end": 776,
+          "disassembly_slice_sha256": "0d870c1a9625a96d086e73b579b2b0962ea95a36b7ddb5576714235a7ef52020"
+        }
+      ],
+      "mapped_fields": [
+        {
+          "type": "boolean",
+          "name": "allowBreaching",
+          "obfuscated": "k"
+        },
+        {
+          "type": "it.unimi.dsi.fastutil.longs.Long2ObjectMap",
+          "name": "pathTypesByPosCache",
+          "obfuscated": "l"
+        }
+      ],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.world.level.pathfinder.Target",
+      "obfuscated_owner": "epz",
+      "class_hash": "0f35a2d3e43285224e121a5efda13bd97c03b52e5aded16130dd5e79ed10075c",
+      "disassembly_hash": "c592e859abe19c02e69bbcbfa264c0e7ff87fee778bf0e721bf7105adc03b43f",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_RAW_JAVAP_STDOUT",
+      "physical_method_count": 7,
+      "resolved_method_count": 7,
+      "selected_members": [],
+      "mapped_fields": [],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.world.level.pathfinder.WalkNodeEvaluator",
+      "obfuscated_owner": "eqa",
+      "class_hash": "1c862c7f9410ccb6515653e0490b91d77ba4d9e477c1445ce3d81c6854d1301e",
+      "disassembly_hash": "7bed22e85aa89c66f648efa87593773c3807a2fe1dfd26b4dd6581b91e760d81",
+      "disassembly_encoding": "utf-8",
+      "origin": "HASH_VERIFIED_RETAINED_NODE_UTF8_TEXT_STDOUT",
+      "physical_method_count": 35,
+      "resolved_method_count": 35,
+      "selected_members": [
+        {
+          "name": "prepare",
+          "obfuscated_member": "a",
+          "descriptor": "(Lddj;Lbtp;)V",
+          "named_descriptor": "(Lnet/minecraft/world/level/PathNavigationRegion;Lnet/minecraft/world/entity/Mob;)V",
+          "line_start": 774,
+          "line_end": 795,
+          "disassembly_slice_sha256": "2316fcc237ec1b0c8cb5bd59e027ff517fca9dcce4ffa0d60954a43c5a4f1506"
+        },
+        {
+          "name": "done",
+          "obfuscated_member": "b",
+          "descriptor": "()V",
+          "named_descriptor": "()V",
+          "line_start": 796,
+          "line_end": 822,
+          "disassembly_slice_sha256": "8d3b445a2e4a45cbacd4460918a6540a252078a545b68a427182c0c38a0db7c4"
+        },
+        {
+          "name": "findAcceptedNode",
+          "obfuscated_member": "a",
+          "descriptor": "(IIIIDLji;Lepv;)Lepq;",
+          "named_descriptor": "(IIIIDLnet/minecraft/core/Direction;Lnet/minecraft/world/level/pathfinder/PathType;)Lnet/minecraft/world/level/pathfinder/Node;",
+          "line_start": 1933,
+          "line_end": 2158,
+          "disassembly_slice_sha256": "31d96c899f625a838e91e8e12dffea0fe37f67aab09454023fe71882a529f49f"
+        },
+        {
+          "name": "getMobJumpHeight",
+          "obfuscated_member": "h",
+          "descriptor": "()D",
+          "named_descriptor": "()D",
+          "line_start": 2159,
+          "line_end": 2176,
+          "disassembly_slice_sha256": "5616bb1e9ba8015b160205086d98ac31e764d51ce660e8bfc76ddd5fd5be291f"
+        },
+        {
+          "name": "getNodeAndUpdateCostToMax",
+          "obfuscated_member": "a",
+          "descriptor": "(IIILepv;F)Lepq;",
+          "named_descriptor": "(IIILnet/minecraft/world/level/pathfinder/PathType;F)Lnet/minecraft/world/level/pathfinder/Node;",
+          "line_start": 2177,
+          "line_end": 2213,
+          "disassembly_slice_sha256": "166f8cfcf4be11f6d02c200c8e4729e429ef04a55a3c5524df93365e6b986320"
+        },
+        {
+          "name": "getBlockedNode",
+          "obfuscated_member": "a",
+          "descriptor": "(III)Lepq;",
+          "named_descriptor": "(III)Lnet/minecraft/world/level/pathfinder/Node;",
+          "line_start": 2214,
+          "line_end": 2245,
+          "disassembly_slice_sha256": "f5e3d60d8a83c63d760bc6b2fff4809fae04182b8ca8e95c1347fbc5f2ebb678"
+        },
+        {
+          "name": "getClosedNode",
+          "obfuscated_member": "a",
+          "descriptor": "(IIILepv;)Lepq;",
+          "named_descriptor": "(IIILnet/minecraft/world/level/pathfinder/PathType;)Lnet/minecraft/world/level/pathfinder/Node;",
+          "line_start": 2246,
+          "line_end": 2283,
+          "disassembly_slice_sha256": "3feb0643ff53ba6f1fcafc8a96be6f15aeb999bad3d7f9b41b6d4cdfe3294414"
+        },
+        {
+          "name": "tryJumpOn",
+          "obfuscated_member": "a",
+          "descriptor": "(IIIIDLji;Lepv;Ljd$a;)Lepq;",
+          "named_descriptor": "(IIIIDLnet/minecraft/core/Direction;Lnet/minecraft/world/level/pathfinder/PathType;Lnet/minecraft/core/BlockPos$MutableBlockPos;)Lnet/minecraft/world/level/pathfinder/Node;",
+          "line_start": 2284,
+          "line_end": 2453,
+          "disassembly_slice_sha256": "0b636114343a41a0b4e7fa25c5447e04b03d5af893e862870d69c04b6787bbcc"
+        },
+        {
+          "name": "tryFindFirstNonWaterBelow",
+          "obfuscated_member": "a",
+          "descriptor": "(IIILepq;)Lepq;",
+          "named_descriptor": "(IIILnet/minecraft/world/level/pathfinder/Node;)Lnet/minecraft/world/level/pathfinder/Node;",
+          "line_start": 2454,
+          "line_end": 2533,
+          "disassembly_slice_sha256": "852135465fe54a42238984c640da1172a987db3a65036c63a80281e2bc50dae7"
+        },
+        {
+          "name": "tryFindFirstGroundNodeBelow",
+          "obfuscated_member": "d",
+          "descriptor": "(III)Lepq;",
+          "named_descriptor": "(III)Lnet/minecraft/world/level/pathfinder/Node;",
+          "line_start": 2534,
+          "line_end": 2638,
+          "disassembly_slice_sha256": "faa8c76f768f8bd24667e07de2d16b2df93272cff1a1672abb5993b7e80bdd96"
+        },
+        {
+          "name": "getPathTypeOfMob",
+          "obfuscated_member": "a",
+          "descriptor": "(Lepx;IIILbtp;)Lepv;",
+          "named_descriptor": "(Lnet/minecraft/world/level/pathfinder/PathfindingContext;IIILnet/minecraft/world/entity/Mob;)Lnet/minecraft/world/level/pathfinder/PathType;",
+          "line_start": 2687,
+          "line_end": 2817,
+          "disassembly_slice_sha256": "2d2c24196d68eac4b07edb4afdac325f8249e0e68781de034874abd3fcd75b8a"
+        },
+        {
+          "name": "getPathTypeWithinMobBB",
+          "obfuscated_member": "b",
+          "descriptor": "(Lepx;III)Ljava/util/Set;",
+          "named_descriptor": "(Lnet/minecraft/world/level/pathfinder/PathfindingContext;III)Ljava/util/Set;",
+          "line_start": 2818,
+          "line_end": 2999,
+          "disassembly_slice_sha256": "6e0d1b34c528b690fc27db839aaa82afe735125f28ebf16978a686438bfa305b"
+        },
+        {
+          "name": "getPathTypeStatic",
+          "obfuscated_member": "b",
+          "descriptor": "(Lbtp;Ljd;)Lepv;",
+          "named_descriptor": "(Lnet/minecraft/world/entity/Mob;Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/pathfinder/PathType;",
+          "line_start": 3024,
+          "line_end": 3045,
+          "disassembly_slice_sha256": "d0bc62b15adfd61e5dfb3d74eaaeffba425cdec2ea2c1197f21e8a09abe08843"
+        },
+        {
+          "name": "getPathTypeStatic",
+          "obfuscated_member": "a",
+          "descriptor": "(Lepx;Ljd$a;)Lepv;",
+          "named_descriptor": "(Lnet/minecraft/world/level/pathfinder/PathfindingContext;Lnet/minecraft/core/BlockPos$MutableBlockPos;)Lnet/minecraft/world/level/pathfinder/PathType;",
+          "line_start": 3046,
+          "line_end": 3174,
+          "disassembly_slice_sha256": "7f5723518fbae6b5b11eb5c2bdd312aa4a96f25ae91e308fe26c4ea0e60c59d3"
+        },
+        {
+          "name": "checkNeighbourBlocks",
+          "obfuscated_member": "a",
+          "descriptor": "(Lepx;IIILepv;)Lepv;",
+          "named_descriptor": "(Lnet/minecraft/world/level/pathfinder/PathfindingContext;IIILnet/minecraft/world/level/pathfinder/PathType;)Lnet/minecraft/world/level/pathfinder/PathType;",
+          "line_start": 3175,
+          "line_end": 3304,
+          "disassembly_slice_sha256": "01ba2fe691785c8b456fef4330adfd7f9f0c77a6916c69ce7d6433de49c05b1b"
+        },
+        {
+          "name": "getPathTypeFromState",
+          "obfuscated_member": "b",
+          "descriptor": "(Ldcc;Ljd;)Lepv;",
+          "named_descriptor": "(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/pathfinder/PathType;",
+          "line_start": 3305,
+          "line_end": 3566,
+          "disassembly_slice_sha256": "54e1a121128b223df19f1fb988fd32e854e74bd0550371dd2ddd8696df474744"
+        },
+        {
+          "name": "lambda$hasCollisions$0",
+          "obfuscated_member": "a",
+          "descriptor": "(Lewx;Ljava/lang/Object;)Z",
+          "named_descriptor": "(Lnet/minecraft/world/phys/AABB;Ljava/lang/Object;)Z",
+          "line_start": 3592,
+          "line_end": 3629,
+          "disassembly_slice_sha256": "52ff3cecac980f0b28bbbb4a47be74d761943380fe952faa584bab5f9df73a94"
+        }
+      ],
+      "mapped_fields": [
+        {
+          "type": "double",
+          "name": "SPACE_BETWEEN_WALL_POSTS",
+          "obfuscated": "k"
+        },
+        {
+          "type": "double",
+          "name": "DEFAULT_MOB_JUMP_HEIGHT",
+          "obfuscated": "l"
+        },
+        {
+          "type": "it.unimi.dsi.fastutil.longs.Long2ObjectMap",
+          "name": "pathTypesByPosCacheByMob",
+          "obfuscated": "m"
+        },
+        {
+          "type": "it.unimi.dsi.fastutil.objects.Object2BooleanMap",
+          "name": "collisionCache",
+          "obfuscated": "n"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.Node[]",
+          "name": "reusableNeighbors",
+          "obfuscated": "o"
+        }
+      ],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.world.level.pathfinder.Path$DebugData",
+      "obfuscated_owner": "eps$a",
+      "class_hash": "5ce0fe2a13d32769b5c2f3c4b0a0408be53301bd7e9e457399b86d2241b5d498",
+      "disassembly_hash": "8d198d68d25c7fe48d0e46e99f684a3c0a16c07ac0a3b3f30ff147468ac7c7be",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_CODEC_SUPPLEMENT",
+      "physical_method_count": 10,
+      "resolved_method_count": 10,
+      "selected_members": [
+        {
+          "name": "write",
+          "obfuscated_member": "a",
+          "descriptor": "(Lvw;)V",
+          "named_descriptor": "(Lnet/minecraft/network/FriendlyByteBuf;)V",
+          "line_start": 208,
+          "line_end": 236,
+          "disassembly_slice_sha256": "5c43f56379e98d26757492dbb71ef00d174574599f4b80000fbb5751a2b5c631"
+        },
+        {
+          "name": "read",
+          "obfuscated_member": "b",
+          "descriptor": "(Lvw;)Leps$a;",
+          "named_descriptor": "(Lnet/minecraft/network/FriendlyByteBuf;)Lnet/minecraft/world/level/pathfinder/Path$DebugData;",
+          "line_start": 237,
+          "line_end": 275,
+          "disassembly_slice_sha256": "dbe6f55cadbe0faf916adafea08e63c58e95b80295d87522e040b06dbac48098"
+        }
+      ],
+      "mapped_fields": [
+        {
+          "type": "net.minecraft.world.level.pathfinder.Node[]",
+          "name": "openSet",
+          "obfuscated": "a"
+        },
+        {
+          "type": "net.minecraft.world.level.pathfinder.Node[]",
+          "name": "closedSet",
+          "obfuscated": "b"
+        },
+        {
+          "type": "java.util.Set",
+          "name": "targetNodes",
+          "obfuscated": "c"
+        }
+      ],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.network.FriendlyByteBuf",
+      "obfuscated_owner": "vw",
+      "class_hash": "6412f24ac18b1dcfbb4cec0d1e8e553f2eb631f492a777d3af8a1e7c324d5a09",
+      "disassembly_hash": "9e95a6f35aecea422fc9e7f19061d1e4e6eb293aa7c9e61b56e8199b0910dce2",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_CODEC_SUPPLEMENT",
+      "physical_method_count": 364,
+      "resolved_method_count": 364,
+      "selected_members": [],
+      "mapped_fields": [],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.network.protocol.common.custom.CustomPacketPayload$1",
+      "obfuscated_owner": "aaj$1",
+      "class_hash": "dc7078db6e8c4e1fb0843075584485c7c5c22eaafe00955f43a15cb9a1bf27a3",
+      "disassembly_hash": "e2d12eff682118c00f6bdcfe1282cb5d95a8e38ae6a845b31c0b9a12ae094108",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_CODEC_SUPPLEMENT",
+      "physical_method_count": 7,
+      "resolved_method_count": 7,
+      "selected_members": [
+        {
+          "name": "findCodec",
+          "obfuscated_member": "a",
+          "descriptor": "(Lakr;)Lyx;",
+          "named_descriptor": "(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/network/codec/StreamCodec;",
+          "line_start": 144,
+          "line_end": 180,
+          "disassembly_slice_sha256": "5a0d9288edc1e8ee07bc9003221a8d5f0a27ec22c1ec7e0d8d1ea842a59aea8e"
+        },
+        {
+          "name": "decode",
+          "obfuscated_member": "a",
+          "descriptor": "(Lvw;)Laaj;",
+          "named_descriptor": "(Lnet/minecraft/network/FriendlyByteBuf;)Lnet/minecraft/network/protocol/common/custom/CustomPacketPayload;",
+          "line_start": 245,
+          "line_end": 272,
+          "disassembly_slice_sha256": "94f5f31bd81b82f44e9470fce032fa3d826b301c743d1c9c3da1324d2fdd9384"
+        },
+        {
+          "name": "decode",
+          "obfuscated_member": "decode",
+          "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+          "named_descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+          "line_start": 295,
+          "line_end": 312,
+          "disassembly_slice_sha256": "06688ee553685e06ab8360904bcfc747660b38c05a00bbea035f75b46de8fa61"
+        }
+      ],
+      "mapped_fields": [
+        {
+          "type": "java.util.Map",
+          "name": "val$idToType",
+          "obfuscated": "a"
+        },
+        {
+          "type": "net.minecraft.network.protocol.common.custom.CustomPacketPayload$FallbackProvider",
+          "name": "val$fallback",
+          "obfuscated": "b"
+        }
+      ],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.network.protocol.common.custom.CustomPacketPayload$Type",
+      "obfuscated_owner": "aaj$b",
+      "class_hash": "51d649cd4c47650c5088dcbd6942f409eb55718b2e264e150fff61ce74fc4033",
+      "disassembly_hash": "5dfb10c7478cb620040215ca564655c30ba8da5ac8526dfe327dd340d95c5ab0",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_CODEC_SUPPLEMENT",
+      "physical_method_count": 5,
+      "resolved_method_count": 5,
+      "selected_members": [],
+      "mapped_fields": [],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.network.protocol.common.custom.CustomPacketPayload$TypeAndCodec",
+      "obfuscated_owner": "aaj$c",
+      "class_hash": "47648d8357e63c09c2ff3cc20570a30e536a4e11b4d0fad2c6a7e60b01d256c9",
+      "disassembly_hash": "4da69b0e23db257a4f78e6e1570c30af035d9409cfce40a2ec55c1ed6506729e",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_CODEC_SUPPLEMENT",
+      "physical_method_count": 6,
+      "resolved_method_count": 6,
+      "selected_members": [],
+      "mapped_fields": [],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    },
+    {
+      "owner": "net.minecraft.network.protocol.common.custom.DiscardedPayload",
+      "obfuscated_owner": "aak",
+      "class_hash": "b39d3f9ba4eaa447b329001f2499cf976bbc3124a6181a56a6314b538c04ac79",
+      "disassembly_hash": "2413c3e547448b33dc93a25c151948050424d136068bdee3bcd296239ebed049",
+      "disassembly_encoding": "utf-8",
+      "origin": "FRESH_CODEC_SUPPLEMENT",
+      "physical_method_count": 9,
+      "resolved_method_count": 9,
+      "selected_members": [
+        {
+          "name": "lambda$codec$1",
+          "obfuscated_member": "a",
+          "descriptor": "(ILakr;Lvw;)Laak;",
+          "named_descriptor": "(ILnet/minecraft/resources/ResourceLocation;Lnet/minecraft/network/FriendlyByteBuf;)Lnet/minecraft/network/protocol/common/custom/DiscardedPayload;",
+          "line_start": 270,
+          "line_end": 317,
+          "disassembly_slice_sha256": "e572f1bc57ad74799889c6ed06cbfe5d5da3b881b58231116798ec2dacc67807"
+        }
+      ],
+      "mapped_fields": [
+        {
+          "type": "net.minecraft.resources.ResourceLocation",
+          "name": "id",
+          "obfuscated": "a"
+        }
+      ],
+      "evidence_status": "STATIC_HASHED_EXPORT_SELECTED_LOCATORS_NOT_ALL_BRANCH_SEMANTICS"
+    }
+  ],
+  "not_a_claim_of": [
+    "All1385 bodies or all52 exports are semantically covered",
+    "Forge/NeoForge/Mixin transformed runtime equivalence",
+    "Active sender, captured frontier, client draw or modern runtime acceptance",
+    "Complete wire validation or every cache invalidation path",
+    "Additional support-enum switch mapping without the compiler switch owner"
+  ],
+  "private_exports_committed": false,
+  "anchor_runtime_changed": false,
+  "minecraft_launched": false
+}

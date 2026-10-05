@@ -1,0 +1,177 @@
+{
+  "schema": "kneekura.original-brain-path-compute-condition-source/v1",
+  "scope": "ORIGINAL_PRIVATE_REACHED_PREDICATE_RETURN_OPERANDS_AND_VIRTUAL_PATH_CAN_REACH_NOT_COMPUTE_SUCCESS_ADOPTION_OR_ARRIVAL",
+  "minecraft": "1.20.1",
+  "forge": "47.2.0",
+  "namespace": "Mojmap",
+  "minecraft_artifact_sha256": "1b6e6a166fbc06c6d2422cd5cf515a508977479045095363d5b4c8b89cc7b4eb",
+  "disassembly_provider": {
+    "name": "jdk-javap-v1",
+    "options": [
+      "-private",
+      "-s",
+      "-c",
+      "-l",
+      "-verbose"
+    ],
+    "executable_hash": "bd5a9f99365fd432f79162f4ed9ca9b956c78cc81dfb6962adb6d207075711fb",
+    "jdk_components": {
+      "release": "00d3211a59bc9f2577f93962e9210de8578c49fd2625022cb38606817d3a71f9",
+      "lib/modules": "81f0e1bb87cd303ddcce2b216e27da416bd20799d9a9811ea1b070123cefff0f"
+    },
+    "jdk_image_status": "HASHED"
+  },
+  "classes": [
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/MoveToTargetSink",
+      "class_hash": "e2b60638bb381a1d96702bea9701e594c001ae7138b8134b3ecbdee8f0771dae",
+      "disassembly_hash": "7cd6e7de45969754ab5ec0163cd39f89887b25b27a9d061dad8ee46386c4e846",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/brain-result-r50-source/MoveToTargetSink.javap.txt",
+      "selected_members": [
+        {
+          "name": "path",
+          "header": "private net.minecraft.world.level.pathfinder.Path path;",
+          "descriptor": "descriptor: Lnet/minecraft/world/level/pathfinder/Path;",
+          "lineStart": 357,
+          "lineEnd": 363,
+          "sliceSha256": "59ab47b0d9bffaa14b08a83f6c7128a657e500c1e6c0a3aa544b85198d31eca1"
+        },
+        {
+          "name": "checkExtraStartConditions",
+          "header": "protected boolean checkExtraStartConditions(net.minecraft.server.level.ServerLevel, net.minecraft.world.entity.Mob);",
+          "descriptor": "descriptor: (Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/Mob;)Z",
+          "lineStart": 420,
+          "lineEnd": 511,
+          "sliceSha256": "58496bb114803c9f477f48f77bccf9b777caf733aabacd3b887fd6ccb87b0ebc"
+        },
+        {
+          "name": "tick",
+          "header": "protected void tick(net.minecraft.server.level.ServerLevel, net.minecraft.world.entity.Mob, long);",
+          "descriptor": "descriptor: (Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/Mob;J)V",
+          "lineStart": 690,
+          "lineEnd": 794,
+          "sliceSha256": "bb3d02cf7d9c0a6fecae902b1cb6f62996eb33d76bbee3601a7fbab40b1cd6cd"
+        },
+        {
+          "name": "tryComputePath",
+          "header": "private boolean tryComputePath(net.minecraft.world.entity.Mob, net.minecraft.world.entity.ai.memory.WalkTarget, long);",
+          "descriptor": "descriptor: (Lnet/minecraft/world/entity/Mob;Lnet/minecraft/world/entity/ai/memory/WalkTarget;J)Z",
+          "lineStart": 795,
+          "lineEnd": 943,
+          "sliceSha256": "42761525a57a231cc4c4679153ef121dcfc9c71b61e116f05cd6e19430c6c117"
+        },
+        {
+          "name": "reachedTarget",
+          "header": "private boolean reachedTarget(net.minecraft.world.entity.Mob, net.minecraft.world.entity.ai.memory.WalkTarget);",
+          "descriptor": "descriptor: (Lnet/minecraft/world/entity/Mob;Lnet/minecraft/world/entity/ai/memory/WalkTarget;)Z",
+          "lineStart": 944,
+          "lineEnd": 974,
+          "sliceSha256": "9e0fbd59dd2cb4df8cbdea9208ac99c7af0fc892f8b5513b1f80033173588fc7"
+        },
+        {
+          "name": "checkExtraStartConditions",
+          "header": "protected boolean checkExtraStartConditions(net.minecraft.server.level.ServerLevel, net.minecraft.world.entity.LivingEntity);",
+          "descriptor": "descriptor: (Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)Z",
+          "lineStart": 1009,
+          "lineEnd": 1025,
+          "sliceSha256": "83a97bad59916b7ebc1664f74743152f4c836540c652e30227529a16b3f96836"
+        },
+        {
+          "name": "tick",
+          "header": "protected void tick(net.minecraft.server.level.ServerLevel, net.minecraft.world.entity.LivingEntity, long);",
+          "descriptor": "descriptor: (Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "lineStart": 1062,
+          "lineEnd": 1079,
+          "sliceSha256": "e71aab9f3734fe07563b14296f155359152b88d24c3e58b4d6ef9f2dc8f277d0"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/level/pathfinder/Path",
+      "class_hash": "94bfcd6f1aa220bce972201fc2f109f2bff3abc45c39b502fa2807da4cd65c93",
+      "disassembly_hash": "c9eb0e70ac383dfa7823c1e197e1b2abfab2f550926862345f4653d7e8165a28",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/typed-memory-r48-source/Path.javap.txt",
+      "selected_members": [
+        {
+          "name": "reached",
+          "header": "private final boolean reached;",
+          "descriptor": "descriptor: Z",
+          "lineStart": 364,
+          "lineEnd": 367,
+          "sliceSha256": "8166a0eec429122265136025e617264750cb8fc62999eb06fbf3eb607dc94fb7"
+        },
+        {
+          "name": "canReach",
+          "header": "public boolean canReach();",
+          "descriptor": "descriptor: ()Z",
+          "lineStart": 926,
+          "lineEnd": 939,
+          "sliceSha256": "a099a166fdd225a96cea0eca51ca5c623e453dbb874a0fff4db9e45297c982ac"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/memory/WalkTarget",
+      "class_hash": "576c496d41aaeb253a68874c060abe763b1f81d43844536b4fe375f4d40f7455",
+      "disassembly_hash": "9ebb68392b75246372d27da32a5e4fc3e988bee5956cedb67d700f7ea3ecde16",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/typed-memory-r48-source/WalkTarget.javap.txt",
+      "selected_members": [
+        {
+          "name": "target",
+          "header": "private final net.minecraft.world.entity.ai.behavior.PositionTracker target;",
+          "descriptor": "descriptor: Lnet/minecraft/world/entity/ai/behavior/PositionTracker;",
+          "lineStart": 78,
+          "lineEnd": 81,
+          "sliceSha256": "0521c2f0ebe1c7265b085944d452117f03c9d2de16da48daf5b12d1305d89423"
+        },
+        {
+          "name": "closeEnoughDist",
+          "header": "private final int closeEnoughDist;",
+          "descriptor": "descriptor: I",
+          "lineStart": 86,
+          "lineEnd": 89,
+          "sliceSha256": "67ed983e558fdcfe665ae0e615d9a2396444f8ffcdcb96f0949499b1e5a64985"
+        },
+        {
+          "name": "getTarget",
+          "header": "public net.minecraft.world.entity.ai.behavior.PositionTracker getTarget();",
+          "descriptor": "descriptor: ()Lnet/minecraft/world/entity/ai/behavior/PositionTracker;",
+          "lineStart": 194,
+          "lineEnd": 207,
+          "sliceSha256": "6d05fd2d9464b2e9d5ba3c49790de650c5a9d6e7f953b916bf6f8bd4e6f53b38"
+        },
+        {
+          "name": "getCloseEnoughDist",
+          "header": "public int getCloseEnoughDist();",
+          "descriptor": "descriptor: ()I",
+          "lineStart": 222,
+          "lineEnd": 234,
+          "sliceSha256": "88c3f1b0a006761132758c814a5b58025ea0a0dd250eaa3dc798a1b59d33e528"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/core/Vec3i",
+      "class_hash": "064c9e6c98066740efc8d6eeb9f73cd923e050abce736e52a77d6e0ed763e685",
+      "disassembly_hash": "5fa38f266c461bcf8fb804b125d55887ac13421ba35f272856c394becb0445b8",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/brain-compute-condition-r56-source/Vec3i.javap.txt",
+      "selected_members": [
+        {
+          "name": "distManhattan",
+          "header": "public int distManhattan(net.minecraft.core.Vec3i);",
+          "descriptor": "descriptor: (Lnet/minecraft/core/Vec3i;)I",
+          "lineStart": 1408,
+          "lineEnd": 1456,
+          "sliceSha256": "6db1d9645880ef305b1bb4ad0ef8babe2246adaaf456865c3407cbd0bddcc78f"
+        }
+      ]
+    }
+  ],
+  "inherited_blockpos": {
+    "owner": "net/minecraft/core/BlockPos",
+    "class_hash": "4b3cdccfc6e119bee0f6eb772f2ccdbf31544de613b6a2850ad292fe4ffd5996",
+    "disassembly_hash": "e018772eb88a18fd1c076d4a08d73ebcd13cc63cb9f7084cbbdc5abf3af5f82e",
+    "file": "C:/temp/kneekura-tech-remaining-data-20261004/brain-compute-condition-r56-source/BlockPos.javap.txt",
+    "scope": "NO_DECLARED_DIST_MANHATTAN_OVERRIDE_VIRTUAL_BASE_OR_CUSTOM_RETURN_PRESERVED"
+  }
+}

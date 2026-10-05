@@ -2,9 +2,13 @@
 
 Status: **RESEARCH IN PROGRESS — not yet a complete vanilla-AI inventory**
 
+Current implementation/native evidence: [2026-10-03 handoff](../CURRENT-HANDOFF-2026-10-03.md) and [representative/observer acceptance](NATIVE-REPRESENTATIVE-OBSERVER-ACCEPTANCE-2026-10-03.md). Selected core ANCHOR hooks, retained/native views and four cached Boss proofs now exist; full inventory/FRONTIER and complete behavior acceptance remain separate.
+
 This directory is a KNEEKURA TECH HUB technical-asset area for understanding Minecraft Java Edition mob decision-making, navigation, movement control and built-in AI debugging.
 
 ## Static discovery baseline
+
+The [2026-10-03 local generation report](../vanilla-foundation/LOCAL-GENERATION-2026-10-03.md) now records an actual 1.20.1 Forge class-root map: 7,108 Minecraft owners, 61,051 structural edges and 13/13 anchors. The [ANCHOR bytecode ledger](ANCHOR-BYTECODE-LEDGER-2026-10-03.json) pins 60 selected core/representative classes, with member/body locators in private retained disassemblies. The required core research files and eight-family static catalog are available. Full semantic inventory, FRONTIER/community comparison and native/runtime acceptance are still in progress.
 
 Before widening an external search, use the implemented [Minecraft 1.20.1 Vanilla Foundation Map](../vanilla-foundation/README.md) when an exact local ANCHOR map is available. It is the static discovery/provenance layer; this directory remains the place for verified AI semantics and engineering conclusions.
 
@@ -136,9 +140,7 @@ Not every Mob uses every layer. Special/custom controllers, imperative tick logi
 
 8. **Vanilla debug infrastructure**
    - DebugPackets
-   - PathfindingDebugPayload
-   - GoalDebugPayload
-   - BrainDebugPayload
+   - exact 1.20.1 Path/debug-renderer data and channel/buffer packet
    - PathfindingRenderer
    - GoalSelectorDebugRenderer
    - BrainDebugRenderer

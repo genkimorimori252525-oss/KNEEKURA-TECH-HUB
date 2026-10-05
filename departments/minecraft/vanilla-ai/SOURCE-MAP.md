@@ -1,12 +1,22 @@
 # Vanilla AI Source Map
 
-Status: **initial source ledger — research not complete**
+Status: **LOCAL ANCHOR CORE BYTECODE LEDGER AVAILABLE — complete study/runtime work remains open**
+
+## 2026-10-03 exact local evidence
+
+Use [ANCHOR-BYTECODE-LEDGER-2026-10-03.json](ANCHOR-BYTECODE-LEDGER-2026-10-03.json) and [the actual local Foundation Map generation](../vanilla-foundation/LOCAL-GENERATION-2026-10-03.md) first. The scoped map contains 7,108 exact Minecraft owners, 61,051 structural edges and all 13 readiness anchors. Sixty selected core/representative classes have exact private method-body disassemblies with content hashes and member locators.
+
+New exact research is organized in AI-ARCHITECTURE, GOAL-SYSTEM, BRAIN-SYSTEM, PATHFINDING, MOVEMENT-CONTROLS, DEBUG-INFRASTRUCTURE, MOB-AI-CATALOG, VERSION-PORTABILITY and DECISION-VIEW-REQUIREMENTS. Static research is not loaded-hook/native acceptance. The additive [general Mob study](MOB-AI-CATALOG-RESEARCH-2026-10-05.md) now maps101 Mob-derived classes/79 registered concrete types with inheritance/member/factory provenance; [community evidence](COMMUNITY-EVIDENCE-2026-10-05.md) records10 concrete technical reports, qualified repro designs and UX. Exhaustive per-branch semantics, external historical native reproduction and remaining comparisons against the pinned modern Vanilla FRONTIER are distinct from these completed research mappings.
+
+The later [R64 Path/terrain study](PATH-TERRAIN-RESEARCH-2026-10-05.md) and [R65 debug-infrastructure study](DEBUG-INFRASTRUCTURE-RESEARCH-2026-10-05.md) expand original B4/B5/B8 explanations with exact method/field/inheritance/callsite provenance. [R67 remaining FRONTIER comparison](FRONTIER-PATH-DEBUG-2026-10-05.md) connects them to the official1.21.1 snapshot through52 class identities/117 selected method locators and actual API/terrain/serialization/render differences. They do not add runtime acceptance. The latest [original reconciliation](ORIGINAL-REQUIREMENT-RECONCILIATION-2026-10-05.md) distinguishes required outstanding research/scenarios/measurements from optional unknown/capped fields.
+
+The exact 1.20.1 class inventory corrects earlier cross-version typed-payload vocabulary: `PathfindingDebugPayload`, `GoalDebugPayload` and `BrainDebugPayload` are absent from this ANCHOR. Use the actual debug renderer inner data classes and older custom channel/buffer packet instead; see DEBUG-INFRASTRUCTURE.
 
 ## Source precedence
 
 ### Tier A — ANCHOR structural evidence
 
-Use exact Minecraft 1.20.1 / Forge 47.2.x mappings and API documentation first.
+Use the exact captured local 1.20.1 / Forge 47.2.0 Foundation Map and bytecode ledger first. Exact-version mappings/API documentation can complement it; signatures alone do not establish a method body.
 
 Current primary families:
 
@@ -14,9 +24,9 @@ Current primary families:
   - `Mob`
   - `Goal`, `WrappedGoal`, `GoalSelector`
   - `DebugPackets`
-  - `PathfindingDebugPayload`
-  - `GoalDebugPayload.DebugGoal`
-  - `BrainDebugPayload.BrainDump`
+  - `Path` optional debug arrays
+  - `GoalSelectorDebugRenderer$DebugGoal`
+  - `BrainDebugRenderer$BrainDump`
   - `PathfindingRenderer`
   - `GoalSelectorDebugRenderer`
   - `BrainDebugRenderer`
@@ -45,7 +55,10 @@ Initial precedent:
   - `DebugPacketsMixin`
   - `DebugRenderersCommand`
   - `DebugRendererMixin`
-  - current inspected source injects pathfinding and Goal debug payload production and renders vanilla debug renderers behind explicit toggles.
+  - actual inspected feature source is commit `72afa38c8b7f5c05639644fdabc92d5254924732`, declaring Minecraft1.21.1, modern typed payloads and NeoForge/Fabric dependencies.
+  - it injects Path/Goal debug payload production and client render dispatch behind separate toggles; its fallback Path debug arrays are reconstructed from returned nodes, not captured original frontier.
+  - the inspected1.20.1 snapshot `a08339340ef4e39ce4d204728737c872c0329e4e` does not contain these named feature files in its complete tree.
+  - [exact source snapshots and implications](DEBUG-INFRASTRUCTURE.md) retain commit/tree/blob/hash facts; no upstream code/dependency or ANCHOR compatibility assertion is added.
 
 Treat the exact upstream commit/version as a separate SourceSnapshot. Do not assume its current implementation is identical to Forge 1.20.1.
 
@@ -155,13 +168,13 @@ Minecraft 1.20.1 `Mob` owns:
 - Brain;
 - Bee/hive/POI and other world diagnostics.
 
-`GoalDebugPayload.DebugGoal` already models:
+The actual 1.20.1 `GoalSelectorDebugRenderer$DebugGoal` vocabulary models:
 
 - priority;
 - running state;
 - name.
 
-`BrainDebugPayload.BrainDump` already models a useful aggregate including:
+The actual 1.20.1 `BrainDebugRenderer$BrainDump` / `DebugPackets.writeBrain` vocabulary represents a useful aggregate including:
 
 - UUID/entity identity;
 - position/health;
@@ -190,9 +203,9 @@ Minecraft 1.20.1 Ghast has a custom `GhastMoveControl` with its own collision/re
 
 This exception is a primary reason to complete the per-Mob catalog before finalizing the Decision Debug View.
 
-## Research gaps
+## Initial research gaps and current boundary
 
-Still required before calling this study complete:
+The following was the initial gap list. The dated core files now establish selected Goal/Brain/pathfinding/control/debug method-body semantics. Do not interpret this as closing all remaining runtime, full-inventory or FRONTIER work:
 
 - exact GoalSelector tick/replacement flow and cadence in 1.20.1;
 - complete Brain Sensor/Memory/Activity/Behavior map;

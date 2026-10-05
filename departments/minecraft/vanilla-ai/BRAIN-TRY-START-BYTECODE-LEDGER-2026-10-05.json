@@ -1,0 +1,226 @@
+{
+  "schema": "kneekura.original-brain-try-start-source/v1",
+  "scope": "ORIGINAL_BRAIN_INTERFACE_TRY_START_CONDITION_AND_START_DISPATCH_NOT_FULL_MEMORY_REASONS_NAVIGATION_SUCCESS_OR_ARRIVAL",
+  "minecraft": "1.20.1",
+  "forge": "47.2.0",
+  "namespace": "Mojmap",
+  "minecraft_artifact_sha256": "1b6e6a166fbc06c6d2422cd5cf515a508977479045095363d5b4c8b89cc7b4eb",
+  "disassembly_provider": {
+    "name": "jdk-javap-v1",
+    "options": [
+      "-private",
+      "-s",
+      "-c",
+      "-l",
+      "-verbose"
+    ],
+    "executable_hash": "bd5a9f99365fd432f79162f4ed9ca9b956c78cc81dfb6962adb6d207075711fb",
+    "jdk_components": {
+      "release": "00d3211a59bc9f2577f93962e9210de8578c49fd2625022cb38606817d3a71f9",
+      "lib/modules": "81f0e1bb87cd303ddcce2b216e27da416bd20799d9a9811ea1b070123cefff0f"
+    },
+    "jdk_image_status": "HASHED"
+  },
+  "classes": [
+    {
+      "owner": "net/minecraft/world/entity/ai/Brain",
+      "class_hash": "441ee6715fb13f271943a9a462c5ff64e491a993ff28d724df06885d83012a3d",
+      "disassembly_hash": "d25d42a41b31c1bb5d24cac87573c1616e163df34980e362d124ca77e8e7b146",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/brain-result-r50-source/Brain.javap.txt",
+      "selected_members": [
+        {
+          "name": "availableBehaviorsByPriority",
+          "header": "private final java.util.Map<java.lang.Integer, java.util.Map<net.minecraft.world.entity.schedule.Activity, java.util.Set<net.minecraft.world.entity.ai.behavior.BehaviorControl<? super E>>>> availableBehaviorsByPriority;",
+          "descriptor": "descriptor: Ljava/util/Map;",
+          "lineStart": 880,
+          "lineEnd": 884,
+          "sliceSha256": "83ae0dbde8bbfe50874adf6323a6a6b17c89510d3803d5f7d8bfc038ef40ad5b"
+        },
+        {
+          "name": "activeActivities",
+          "header": "private final java.util.Set<net.minecraft.world.entity.schedule.Activity> activeActivities;",
+          "descriptor": "descriptor: Ljava/util/Set;",
+          "lineStart": 904,
+          "lineEnd": 908,
+          "sliceSha256": "7d9923515869d7a6353e1c81f7d7541c6b227f2ba915bc7e5c5be276d3a9f0fe"
+        },
+        {
+          "name": "startEachNonRunningBehavior",
+          "header": "private void startEachNonRunningBehavior(net.minecraft.server.level.ServerLevel, E);",
+          "descriptor": "descriptor: (Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)V",
+          "lineStart": 2760,
+          "lineEnd": 2874,
+          "sliceSha256": "87cfc22316a5c69d05bf85731607c474d72073dd29a542d6804370136e09aecf"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/Behavior",
+      "class_hash": "bb73feb84c79565213f7a6001c47d0e1cc2fc7d947a89d99ae5c70b5e058e7dd",
+      "disassembly_hash": "a14ed1bb37e1bbba57916781421c53353d6bff2b8346758b240b0a2d3968f6d0",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/goal-brain-research-r47-r3/Behavior.javap.txt",
+      "selected_members": [
+        {
+          "name": "entryCondition",
+          "header": "protected final java.util.Map<net.minecraft.world.entity.ai.memory.MemoryModuleType<?>, net.minecraft.world.entity.ai.memory.MemoryStatus> entryCondition;",
+          "descriptor": "descriptor: Ljava/util/Map;",
+          "lineStart": 210,
+          "lineEnd": 214,
+          "sliceSha256": "0e4ee7cf5a2be9948ba0c0ecec3276e7667307a34a151751436b129093fa46c1"
+        },
+        {
+          "name": "status",
+          "header": "private net.minecraft.world.entity.ai.behavior.Behavior$Status status;",
+          "descriptor": "descriptor: Lnet/minecraft/world/entity/ai/behavior/Behavior$Status;",
+          "lineStart": 215,
+          "lineEnd": 218,
+          "sliceSha256": "63d51254e44d38bdd974eae17f54718e0440f5e125e45f7994123dcf3e35cad5"
+        },
+        {
+          "name": "endTimestamp",
+          "header": "private long endTimestamp;",
+          "descriptor": "descriptor: J",
+          "lineStart": 219,
+          "lineEnd": 222,
+          "sliceSha256": "828c256a83bda1596b2559725a2a2c4d07bf61d04357dc679bfb9d52c1bc5921"
+        },
+        {
+          "name": "minDuration",
+          "header": "private final int minDuration;",
+          "descriptor": "descriptor: I",
+          "lineStart": 223,
+          "lineEnd": 226,
+          "sliceSha256": "0ad7a15ccfa776ec2eb04bd15ef50add25599ab5520c11b1e2af6de26c22155f"
+        },
+        {
+          "name": "maxDuration",
+          "header": "private final int maxDuration;",
+          "descriptor": "descriptor: I",
+          "lineStart": 227,
+          "lineEnd": 230,
+          "sliceSha256": "0197275f9ea4dd554f458a821a5086ae79b31f28b89f10a97e247f346ea14af2"
+        },
+        {
+          "name": "tryStart",
+          "header": "public final boolean tryStart(net.minecraft.server.level.ServerLevel, E, long);",
+          "descriptor": "descriptor: (Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)Z",
+          "lineStart": 335,
+          "lineEnd": 406,
+          "sliceSha256": "7ca1939e1c5216e8d3091a03ec3ab5e6a5c08de292b34d2cd5f357f9376589ea"
+        },
+        {
+          "name": "start",
+          "header": "protected void start(net.minecraft.server.level.ServerLevel, E, long);",
+          "descriptor": "descriptor: (Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "lineStart": 407,
+          "lineEnd": 426,
+          "sliceSha256": "df0dc227b1e9f780866e1475c5c707f62015eaa0566e9b143f40784fe2f66a71"
+        },
+        {
+          "name": "checkExtraStartConditions",
+          "header": "protected boolean checkExtraStartConditions(net.minecraft.server.level.ServerLevel, E);",
+          "descriptor": "descriptor: (Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)Z",
+          "lineStart": 597,
+          "lineEnd": 616,
+          "sliceSha256": "6645d872ab82313f553e39c8124b729ead23ad875d36a8256959158569a1d4db"
+        },
+        {
+          "name": "hasRequiredMemories",
+          "header": "protected boolean hasRequiredMemories(E);",
+          "descriptor": "descriptor: (Lnet/minecraft/world/entity/LivingEntity;)Z",
+          "lineStart": 635,
+          "lineEnd": 700,
+          "sliceSha256": "59e4aed018d609fe4861df2a2f007a02c4a3f4ad831e99f0f324dd1e98d8c24f"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/BehaviorControl",
+      "class_hash": "bf5d1010d11a963210827ad30c53faa51540309b4d47add7f6fbe6b567d41de4",
+      "disassembly_hash": "d95dbb893b88eb592790cacb8e5e3f45bea5bcbef18af5e2a5adc0c66c8859fd",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/goal-brain-research-r47-r3/BehaviorControl.javap.txt",
+      "selected_members": [
+        {
+          "name": "tryStart",
+          "header": "public abstract boolean tryStart(net.minecraft.server.level.ServerLevel, E, long);",
+          "descriptor": "descriptor: (Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)Z",
+          "lineStart": 42,
+          "lineEnd": 46,
+          "sliceSha256": "1b269617ddcf23fbc880770c5d51cbbfda5380e6d387b2fa6f2e5ccc8696c9a1"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/MoveToTargetSink",
+      "class_hash": "e2b60638bb381a1d96702bea9701e594c001ae7138b8134b3ecbdee8f0771dae",
+      "disassembly_hash": "7cd6e7de45969754ab5ec0163cd39f89887b25b27a9d061dad8ee46386c4e846",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/brain-result-r50-source/MoveToTargetSink.javap.txt",
+      "selected_members": [
+        {
+          "name": "remainingCooldown",
+          "header": "private int remainingCooldown;",
+          "descriptor": "descriptor: I",
+          "lineStart": 353,
+          "lineEnd": 356,
+          "sliceSha256": "fb1537c955be7c4e6f007634c8585cfec3b6ca0ffe24a441ebe3d63598ac3e06"
+        },
+        {
+          "name": "path",
+          "header": "private net.minecraft.world.level.pathfinder.Path path;",
+          "descriptor": "descriptor: Lnet/minecraft/world/level/pathfinder/Path;",
+          "lineStart": 357,
+          "lineEnd": 363,
+          "sliceSha256": "59ab47b0d9bffaa14b08a83f6c7128a657e500c1e6c0a3aa544b85198d31eca1"
+        },
+        {
+          "name": "checkExtraStartConditions",
+          "header": "protected boolean checkExtraStartConditions(net.minecraft.server.level.ServerLevel, net.minecraft.world.entity.Mob);",
+          "descriptor": "descriptor: (Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/Mob;)Z",
+          "lineStart": 420,
+          "lineEnd": 511,
+          "sliceSha256": "58496bb114803c9f477f48f77bccf9b777caf733aabacd3b887fd6ccb87b0ebc"
+        },
+        {
+          "name": "start",
+          "header": "protected void start(net.minecraft.server.level.ServerLevel, net.minecraft.world.entity.Mob, long);",
+          "descriptor": "descriptor: (Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/Mob;J)V",
+          "lineStart": 658,
+          "lineEnd": 689,
+          "sliceSha256": "829a648d950bb67fd6d46907c42b1e26c93a3ee20a31d382d90aa2739f4d6cde"
+        },
+        {
+          "name": "tryComputePath",
+          "header": "private boolean tryComputePath(net.minecraft.world.entity.Mob, net.minecraft.world.entity.ai.memory.WalkTarget, long);",
+          "descriptor": "descriptor: (Lnet/minecraft/world/entity/Mob;Lnet/minecraft/world/entity/ai/memory/WalkTarget;J)Z",
+          "lineStart": 795,
+          "lineEnd": 943,
+          "sliceSha256": "42761525a57a231cc4c4679153ef121dcfc9c71b61e116f05cd6e19430c6c117"
+        },
+        {
+          "name": "reachedTarget",
+          "header": "private boolean reachedTarget(net.minecraft.world.entity.Mob, net.minecraft.world.entity.ai.memory.WalkTarget);",
+          "descriptor": "descriptor: (Lnet/minecraft/world/entity/Mob;Lnet/minecraft/world/entity/ai/memory/WalkTarget;)Z",
+          "lineStart": 944,
+          "lineEnd": 974,
+          "sliceSha256": "9e0fbd59dd2cb4df8cbdea9208ac99c7af0fc892f8b5513b1f80033173588fc7"
+        },
+        {
+          "name": "checkExtraStartConditions",
+          "header": "protected boolean checkExtraStartConditions(net.minecraft.server.level.ServerLevel, net.minecraft.world.entity.LivingEntity);",
+          "descriptor": "descriptor: (Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)Z",
+          "lineStart": 1009,
+          "lineEnd": 1025,
+          "sliceSha256": "83a97bad59916b7ebc1664f74743152f4c836540c652e30227529a16b3f96836"
+        },
+        {
+          "name": "start",
+          "header": "protected void start(net.minecraft.server.level.ServerLevel, net.minecraft.world.entity.LivingEntity, long);",
+          "descriptor": "descriptor: (Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V",
+          "lineStart": 1080,
+          "lineEnd": 1096,
+          "sliceSha256": "811a84d0e9c6b06c563c678e477da156bb7f9475d10e4cccd9dbfda2840db542"
+        }
+      ]
+    }
+  ]
+}

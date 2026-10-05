@@ -1,0 +1,349 @@
+{
+  "schema_version": 1,
+  "minecraft": "1.21.1",
+  "track": "FRONTIER",
+  "loader": "OFFICIAL_VANILLA_NO_LOADER_TRANSFORM",
+  "namespace": "OFFICIAL_MOJANG_MAPPING_TO_BINARY",
+  "provider": {
+    "name": "jdk-javap17-private-s-c-l-verbose",
+    "executableSha256": "bd5a9f99365fd432f79162f4ed9ca9b956c78cc81dfb6962adb6d207075711fb"
+  },
+  "artifacts": [
+    {
+      "kind": "client",
+      "file": "client.jar",
+      "url": "https://piston-data.mojang.com/v1/objects/30c73b1c5da787909b2f73340419fdf13b9def88/client.jar",
+      "bytes": 26836906,
+      "sha1": "30c73b1c5da787909b2f73340419fdf13b9def88",
+      "sha256": "499f6897d1837516680f3114072d8106e11c9adcd933fe5cf051b551089b0c99"
+    },
+    {
+      "kind": "client_mappings",
+      "file": "client-mappings.txt",
+      "url": "https://piston-data.mojang.com/v1/objects/2244b6f072256667bcd9a73df124d6c58de77992/client.txt",
+      "bytes": 9598610,
+      "sha1": "2244b6f072256667bcd9a73df124d6c58de77992",
+      "sha256": "140c47931cccc8fc9e4c22d7603e2d714d1a953a146f51ea7397d95c955536ec"
+    }
+  ],
+  "versionUrl": "https://piston-meta.mojang.com/v1/packages/22a1966494dfa4eeb5ee778c8e6ed5b774839582/1.21.1.json",
+  "versionSha1": "22a1966494dfa4eeb5ee778c8e6ed5b774839582",
+  "versionSha256": "458f2fbabc75a1cf79e5853c067f5ad95fca2163941c343b56c5c55b9127c8df",
+  "javaRuntimeRequired": 21,
+  "scope": "26_CORE_OWNERS_PINNED_13_METHOD_BODIES_COMPARED_NOT_FULL_MODERN_AI_OR_RUNTIME",
+  "owners": [
+    {
+      "owner": "net.minecraft.world.entity.Mob",
+      "obfuscated": "btp",
+      "classMajorVersion": 65,
+      "classSha256": "64df9009f5438ccad2a3fdd4d612b60848cf84b8f05c2a7b5ec0582253439d95",
+      "bodySha256": "a2150fd27cd9a41f572623b5893eee785d0844102d9dee4ff4b0de448157e064",
+      "inspectedMethods": [
+        {
+          "name": "serverAiStep",
+          "obfuscated": "fm",
+          "obfuscatedDescriptor": "()V",
+          "descriptorLine": 4870,
+          "codeSha256": "236b5aef6e30e28d042000931b65a2d9fcc96641a2ec093503ee6cece9d35cc8"
+        }
+      ]
+    },
+    {
+      "owner": "net.minecraft.world.entity.ai.goal.Goal",
+      "obfuscated": "cam",
+      "classMajorVersion": 65,
+      "classSha256": "caa75dc6adf075f969c2e095ba837f42e9c07c495dfb460ca7240e6f35ea4ff8",
+      "bodySha256": "6e67d38dea9b8daf13b249efce8e53d9efa5c9d4ba5687a18f377e741ec2e37c",
+      "inspectedMethods": []
+    },
+    {
+      "owner": "net.minecraft.world.entity.ai.goal.GoalSelector",
+      "obfuscated": "can",
+      "classMajorVersion": 65,
+      "classSha256": "1b053eee39cae8579007df85bb02076f66b4fb890b89b7f035466d2152b4b21e",
+      "bodySha256": "4ac27914e64da6689403db934905755ff7a7a2a7ec3c94c9f9464924fc4620bf",
+      "inspectedMethods": []
+    },
+    {
+      "owner": "net.minecraft.world.entity.ai.goal.WrappedGoal",
+      "obfuscated": "cca",
+      "classMajorVersion": 65,
+      "classSha256": "253f7469def6b7274a51944b3215f5d4fff500276dbd51e5e73f95c5382f0b2c",
+      "bodySha256": "65f48d5f6f422171f27c233da99b9dda65a5b8a3dd926e544f35196c75799e8d",
+      "inspectedMethods": [
+        {
+          "name": "canBeReplacedBy",
+          "obfuscated": "a",
+          "obfuscatedDescriptor": "(Lcca;)Z",
+          "descriptorLine": 145,
+          "codeSha256": "59b775822e84dc6a41be4d06beaab7ea7e1ed8ecfef6d53eda0866e505ceaa1b"
+        }
+      ]
+    },
+    {
+      "owner": "net.minecraft.world.entity.ai.Brain",
+      "obfuscated": "buq",
+      "classMajorVersion": 65,
+      "classSha256": "5a424f43a813e40ce3ab0f57fd93d41f90cda9ec085b0bdd7336c14fee5ecfb1",
+      "bodySha256": "bcec737627f3af44ffbcd0930cc329463f69199cb0e105ad1198d53509742ea4",
+      "inspectedMethods": [
+        {
+          "name": "updateActivityFromSchedule",
+          "obfuscated": "a",
+          "obfuscatedDescriptor": "(JJ)V",
+          "descriptorLine": 1955,
+          "codeSha256": "b77ba5678e5f58a2fcc66dfcf9f98e9709d015d14d8d29f4d59e40503d6d2e9d"
+        },
+        {
+          "name": "forgetOutdatedMemories",
+          "obfuscated": "k",
+          "obfuscatedDescriptor": "()V",
+          "descriptorLine": 2506,
+          "codeSha256": "62c0b4443f22d022c7506edd5e3168c9096492f129115ea1a80890315030fb8f"
+        }
+      ]
+    },
+    {
+      "owner": "net.minecraft.world.entity.ai.memory.ExpirableValue",
+      "obfuscated": "ccr",
+      "classMajorVersion": 65,
+      "classSha256": "7afc586dbb0d08e3c2919f591151069ed3823a2eebf16f54c7a7587b45683651",
+      "bodySha256": "a9600d1a567850d1d4e338b54d1ec3bc006d4ec0cba1702348a39c4072ccf8f9",
+      "inspectedMethods": []
+    },
+    {
+      "owner": "net.minecraft.world.entity.ai.sensing.Sensor",
+      "obfuscated": "cdy",
+      "classMajorVersion": 65,
+      "classSha256": "2ab6ac1d084e4ed01e78a6f4d9cd76be3e5966fa5574e0f24df5e051ca7620be",
+      "bodySha256": "4f8f4425581d421bb7f3b213d131f58eb4007845c5f7d1acaaf5b9f09c74a0f9",
+      "inspectedMethods": []
+    },
+    {
+      "owner": "net.minecraft.world.entity.ai.behavior.Behavior",
+      "obfuscated": "bvh",
+      "classMajorVersion": 65,
+      "classSha256": "2ced5683dc06c32304ea024a3b0fc2f57ef6da8a2a1f17e7b5a69f9accecc018",
+      "bodySha256": "2a4f9805b6bce1aea3e0f63f06741a5f9a9aeeb222b80d203d30d5955a3b2339",
+      "inspectedMethods": []
+    },
+    {
+      "owner": "net.minecraft.world.entity.ai.behavior.BehaviorControl",
+      "obfuscated": "bvi",
+      "classMajorVersion": 65,
+      "classSha256": "ce8abbf3b5ad1a52bc7a629e4a508c074b69a66303c420635d010d18c005730f",
+      "bodySha256": "3af36bd52d28618426cb8ec13511d9f77acb220224d79e9d822bbf84f7295d23",
+      "inspectedMethods": []
+    },
+    {
+      "owner": "net.minecraft.world.entity.ai.navigation.PathNavigation",
+      "obfuscated": "cda",
+      "classMajorVersion": 65,
+      "classSha256": "d86e25d6cf698e7f6688a0137304d02f59c8d01e60030afb81b5662e209956a3",
+      "bodySha256": "40584cecfb9622a369cfd86b93e9f497718b1f37a2b499644966e9e34f9f87df",
+      "inspectedMethods": []
+    },
+    {
+      "owner": "net.minecraft.world.level.pathfinder.PathFinder",
+      "obfuscated": "epu",
+      "classMajorVersion": 65,
+      "classSha256": "91f07489c3a6694ea2b531f862a37aac36663107621989043782d05a645b4913",
+      "bodySha256": "48f64e1d807d1ff4559d13a5873b50781e4570afd9461a71b8f534453cace81f",
+      "inspectedMethods": [
+        {
+          "name": "findPath",
+          "obfuscated": "a",
+          "obfuscatedDescriptor": "(Lddj;Lbtp;Ljava/util/Set;FIF)Leps;",
+          "descriptorLine": 459,
+          "codeSha256": "9db8348401c1d561199db921fafc85b9c748315aaeaf89b39465da4f53d55352"
+        },
+        {
+          "name": "findPath",
+          "obfuscated": "a",
+          "obfuscatedDescriptor": "(Lbnf;Lepq;Ljava/util/Map;FIF)Leps;",
+          "descriptorLine": 541,
+          "codeSha256": "0336b4bead4fe5cbf6d61654edeb32b92f962d9284faa05f39788aa5dfeb6bfd"
+        }
+      ]
+    },
+    {
+      "owner": "net.minecraft.world.level.pathfinder.NodeEvaluator",
+      "obfuscated": "epr",
+      "classMajorVersion": 65,
+      "classSha256": "6ba6e79602d91f40c88c64cf27e2c6659c2ff5b584c0004e8fb415f8bfe6f0e9",
+      "bodySha256": "f3291dc94f72c94a94cfc41d857dac39cddf3115cae07bae6c27e2f0e70794de",
+      "inspectedMethods": [
+        {
+          "name": "prepare",
+          "obfuscated": "a",
+          "obfuscatedDescriptor": "(Lddj;Lbtp;)V",
+          "descriptorLine": 272,
+          "codeSha256": "dac2fe4f4916535aba6fae6ea42defdcafdd8f9db44131de069df9e997f2e712"
+        },
+        {
+          "name": "done",
+          "obfuscated": "b",
+          "obfuscatedDescriptor": "()V",
+          "descriptorLine": 326,
+          "codeSha256": "de3e985acf23c02a54e3b0b5d8938ca294616e069ea7c0658597d5f8057bd23e"
+        }
+      ]
+    },
+    {
+      "owner": "net.minecraft.world.level.pathfinder.WalkNodeEvaluator",
+      "obfuscated": "eqa",
+      "classMajorVersion": 65,
+      "classSha256": "1c862c7f9410ccb6515653e0490b91d77ba4d9e477c1445ce3d81c6854d1301e",
+      "bodySha256": "7bed22e85aa89c66f648efa87593773c3807a2fe1dfd26b4dd6581b91e760d81",
+      "inspectedMethods": []
+    },
+    {
+      "owner": "net.minecraft.world.level.pathfinder.FlyNodeEvaluator",
+      "obfuscated": "epp",
+      "classMajorVersion": 65,
+      "classSha256": "a8bd0d17d938b6d9be2b2bb9486c767caab62f915c7ccd17fc74e542eb1321a8",
+      "bodySha256": "3ac8bfe8c4d4f7a1951d736a831265e31cdc10571a0a8e936fafccccf40cb9f8",
+      "inspectedMethods": []
+    },
+    {
+      "owner": "net.minecraft.world.level.pathfinder.SwimNodeEvaluator",
+      "obfuscated": "epy",
+      "classMajorVersion": 65,
+      "classSha256": "ae1521ee131401a51d7e02ca33a1b95cb0cd99ffae73002566bf710fb5349e17",
+      "bodySha256": "2202e02f6fda2615348284ae8ffde2ec7eaf5246407dcc6d44502ccbaa950fda",
+      "inspectedMethods": []
+    },
+    {
+      "owner": "net.minecraft.world.level.pathfinder.AmphibiousNodeEvaluator",
+      "obfuscated": "epn",
+      "classMajorVersion": 65,
+      "classSha256": "8ade699feb8a1f73a8919fb2aea9dee6d59a1de25dfec6bf5dce0e39d732e59f",
+      "bodySha256": "b72d607888c7ba1832bada63ae548d026a865944ef93b0ef8bf97181e9060fca",
+      "inspectedMethods": []
+    },
+    {
+      "owner": "net.minecraft.world.level.pathfinder.BinaryHeap",
+      "obfuscated": "epo",
+      "classMajorVersion": 65,
+      "classSha256": "000668601bbdeee079c9fe60cd08bf424d98adf3ece0afcc86cafdff9bfc751a",
+      "bodySha256": "6ebf6349de3b43855deb7119ea1f2e3ca4eedf478c927a6ad839b9f15142c7aa",
+      "inspectedMethods": []
+    },
+    {
+      "owner": "net.minecraft.world.level.pathfinder.Node",
+      "obfuscated": "epq",
+      "classMajorVersion": 65,
+      "classSha256": "1fe465d1be94976059a3954720fc041cd6cc95b21c36b2853090c5fa71de077b",
+      "bodySha256": "7080d4756d1d27e653071aa365a0c68f769c880075fb87b3a1b74ff86cf3787a",
+      "inspectedMethods": []
+    },
+    {
+      "owner": "net.minecraft.world.level.pathfinder.PathType",
+      "obfuscated": "epv",
+      "classMajorVersion": 65,
+      "classSha256": "1299bd556ed27b991a98d337dd55b7184edb1b81cb0d6d79b3e3c6aa1deb20d7",
+      "bodySha256": "8e59fbfa304c6de067f10735cab7c5b59749a439997581ac18e99bb5007f311c",
+      "inspectedMethods": []
+    },
+    {
+      "owner": "net.minecraft.world.level.pathfinder.PathfindingContext",
+      "obfuscated": "epx",
+      "classMajorVersion": 65,
+      "classSha256": "d12308afcbc4a56ec0bdf79646120c50a138a8f0b3417a298c197fc79e00e25d",
+      "bodySha256": "921aa0dd29ab0aac0ddb938c3950a52536f83f19387592dce8d2e1f273c5b3f6",
+      "inspectedMethods": [
+        {
+          "name": "<init>",
+          "obfuscated": "<init>",
+          "obfuscatedDescriptor": "(Ldcg;Lbtp;)V",
+          "descriptorLine": 117,
+          "codeSha256": "3611a236ddd34270d56763b5e05ea52061d0e6bbf49ccdc0d52c8c9e4b7e27b6"
+        },
+        {
+          "name": "getPathTypeFromState",
+          "obfuscated": "a",
+          "obfuscatedDescriptor": "(III)Lepv;",
+          "descriptorLine": 176,
+          "codeSha256": "57ae81f4da1c8cf2a599342e68ea08b41a4a70ac45dd8b6141d7b7c3e6cea396"
+        }
+      ]
+    },
+    {
+      "owner": "net.minecraft.world.level.pathfinder.Path",
+      "obfuscated": "eps",
+      "classMajorVersion": 65,
+      "classSha256": "ef3a32b6c5a6af539dfb8134ee662ceac7177d6a36cb1129f4be05619803c834",
+      "bodySha256": "84073893227808bb126b85b06c6903035b72ed003ef9ff262a0efce7a4244bf0",
+      "inspectedMethods": []
+    },
+    {
+      "owner": "net.minecraft.network.protocol.game.DebugPackets",
+      "obfuscated": "agf",
+      "classMajorVersion": 65,
+      "classSha256": "21b277e866db10cd3e11c453d1a0defd8e78a64cd871b42ef2f1ca960daa55cb",
+      "bodySha256": "919febfcc811644e80996d644e642740526300937d21e3f6f3ba7b7b3c6f607c",
+      "inspectedMethods": [
+        {
+          "name": "sendPathFindingPacket",
+          "obfuscated": "a",
+          "obfuscatedDescriptor": "(Ldcw;Lbtp;Leps;F)V",
+          "descriptorLine": 611,
+          "codeSha256": "05edca38aeee4a6865e70b45efa216506531e302691df89e548417c8733faf42"
+        },
+        {
+          "name": "sendGoalSelector",
+          "obfuscated": "a",
+          "obfuscatedDescriptor": "(Ldcw;Lbtp;Lcan;)V",
+          "descriptorLine": 659,
+          "codeSha256": "d9efdc211ec699968a7e15b20f7df9db8ece36aa390ef572508476efff78abab"
+        },
+        {
+          "name": "sendEntityBrain",
+          "obfuscated": "a",
+          "obfuscatedDescriptor": "(Lbtn;)V",
+          "descriptorLine": 690,
+          "codeSha256": "e64f135bfbb447f092aab1ebbd4b5582668d34fe9f7178bb81489c7545a86900"
+        }
+      ]
+    },
+    {
+      "owner": "net.minecraft.network.protocol.common.custom.PathfindingDebugPayload",
+      "obfuscated": "aas",
+      "classMajorVersion": 65,
+      "classSha256": "bea210a9e4b8a234330e47ec9bf1c09b126d4b0783c132561c057876ba0bf619",
+      "bodySha256": "da27be121d815898614b4eaeaf92a42a4ec48edd3744e5f8f7cd45323ce29f19",
+      "inspectedMethods": []
+    },
+    {
+      "owner": "net.minecraft.network.protocol.common.custom.GoalDebugPayload",
+      "obfuscated": "aap",
+      "classMajorVersion": 65,
+      "classSha256": "8f5450d3bbc4baa1b59215044f378c65e093cb17dd38db2e1acf978de9338a4c",
+      "bodySha256": "0ddf684ec316c904cc764b70d62db862d51a205098810797d6a63b01e031af29",
+      "inspectedMethods": []
+    },
+    {
+      "owner": "net.minecraft.network.protocol.common.custom.BrainDebugPayload",
+      "obfuscated": "aag",
+      "classMajorVersion": 65,
+      "classSha256": "56407678437dde4f7609c07205e5e983d045b3d72c3cd2d551aa9c101ec3f853",
+      "bodySha256": "1c04209c457d8470103b36b21e05b0941ef723596352a7367a19dbace4ed7ff2",
+      "inspectedMethods": []
+    },
+    {
+      "owner": "net.minecraft.world.entity.ai.control.MoveControl",
+      "obfuscated": "bzp",
+      "classMajorVersion": 65,
+      "classSha256": "501ac34d6e3f3d2e1d9246b952a0b947ff380e882d65c2239bd579c9975c77e5",
+      "bodySha256": "576781ea9110ac07d48613a4488e2b60d07450dffebad9339fccb84253947bd3",
+      "inspectedMethods": []
+    }
+  ],
+  "not_a_claim_of": [
+    "modern runtime acceptance",
+    "Forge/NeoForge transformed implementation",
+    "all26 owner methods semantically studied",
+    "ANCHOR descriptor compatibility"
+  ],
+  "private_exports_committed": false
+}

@@ -1,0 +1,17 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {validOriginalDecisionEvent,appendOriginalDecisionEvents} from '../original-decision-events.mjs';
+const base=()=>({sinkClass:'net.minecraft.world.entity.ai.behavior.MoveToTargetSink',instanceIdentity:'component:7:1',instanceIdentityStatus:'AVAILABLE',tickOrStopInvocationId:'tick-stop:7:1',gameTimeArgument:'100',dispatchScope:'ORIGINAL_BRAIN_RUNNING_BEHAVIOR_INTERFACE_CALL_EXACT_SINK',operandReasonStatus:'NOT_EXPOSED',arrivalStatus:'NOT_EXPOSED',searchRelationStatus:'NOT_EXPOSED'});
+const record=(kind,extra)=>({source:{side:'SERVER'},gameTime:100,observationId:'obs:tick-stop:'+kind,payload:{schema:'kneekura.original-decision-event/v1',semantics:'ORIGINAL_INVOCATION_RETURN_ONLY',targetRevision:7,burstId:'burst:7:100',eventIndex:1,kind,data:{...base(),...extra},observerCostNanos:1,observerCostScope:'BUILD_AND_FIRST_BYTE_CHECK_EXCLUDES_FINAL_ENCODING_WRITER'}});
+const condition=(condition='TIMED_OUT',result=false)=>record('BRAIN_PATH_CONDITION_RETURN',{condition,result,resultScope:'ORIGINAL_VIRTUAL_BOOLEAN_NOT_INDIVIDUAL_OPERAND_REASONS'});
+const dispatch=()=>record('BRAIN_PATH_DISPATCH_RETURN',{branch:'STOP',capturedSinkInvocationIds:['sink:7:1'],capturedSinkInvocationsTruncated:false,childScope:'DIRECT_CAPTURED_CONCRETE_CALL_SCOPES_NOT_COMPLETION_OR_FULL_CHILDREN',returnScope:'NORMAL_ORIGINAL_DISPATCH_VOID_NOT_ARRIVAL'});
+test('original condition booleans and branch dispatch stay separate partial scoped facts',()=>{
+ const records=[condition(),condition('CAN_STILL_USE',false),dispatch()];assert.ok(records.every(validOriginalDecisionEvent));const stages={},capabilities={},timeline=[];appendOriginalDecisionEvents(records,stages,capabilities,timeline);assert.equal(stages.EVALUATION.facts.length,2);assert.equal(stages.EXECUTION.facts.length,1);assert.equal(capabilities.brain_navigation.status,'PARTIAL');for(const s of ['CANDIDATE','SELECTION','RESULT'])assert.equal(stages[s],undefined);
+});
+test('reject operand reason, arrival, wrong revision, duplicate/overflow child IDs and fake short-circuit data',()=>{
+ for(const mutate of [d=>d.condition='REACHED_TARGET',d=>d.result='false',d=>d.operandReasonStatus='AVAILABLE',d=>d.resultScope='ARRIVED',d=>d.canStillUse=false,d=>d.tickOrStopInvocationId='tick-stop:8:1']){const r=condition();mutate(r.payload.data);assert.equal(validOriginalDecisionEvent(r),false);}
+ for(const mutate of [d=>d.branch='ARRIVED',d=>d.result=true,d=>d.capturedSinkInvocationIds=['sink:8:1'],d=>d.capturedSinkInvocationIds=['sink:7:1','sink:7:1'],d=>d.capturedSinkInvocationIds=['sink:7:2','sink:7:1'],d=>d.capturedSinkInvocationIds=Array.from({length:9},(_,i)=>'sink:7:'+(i+1)),d=>d.capturedSinkInvocationsTruncated=true]){const r=dispatch();mutate(r.payload.data);assert.equal(validOriginalDecisionEvent(r),false);}
+});
+test('empty direct child list, cap tail and unknown component token do not invent missing children',()=>{
+ const r=dispatch();r.payload.data.capturedSinkInvocationIds=[];assert.equal(validOriginalDecisionEvent(r),true);delete r.payload.data.instanceIdentity;r.payload.data.instanceIdentityStatus='NOT_EXPOSED';assert.equal(validOriginalDecisionEvent(r),true);r.payload.data.capturedSinkInvocationIds=Array.from({length:8},(_,i)=>'sink:7:'+(i+1));r.payload.data.capturedSinkInvocationsTruncated=true;assert.equal(validOriginalDecisionEvent(r),true);
+});

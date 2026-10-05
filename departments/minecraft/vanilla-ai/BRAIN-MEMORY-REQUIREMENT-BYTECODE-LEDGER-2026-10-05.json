@@ -1,0 +1,130 @@
+{
+  "schema": "kneekura.original-brain-memory-requirement-source/v1",
+  "scope": "ORIGINAL_BEHAVIOR_MEMORY_REQUIREMENT_VIRTUAL_CHECK_RETURNS_PREFIX_NOT_FULL_ELIGIBILITY_INTERNAL_SLOT_REASON_OR_ARRIVAL",
+  "minecraft": "1.20.1",
+  "forge": "47.2.0",
+  "namespace": "Mojmap",
+  "minecraft_artifact_sha256": "1b6e6a166fbc06c6d2422cd5cf515a508977479045095363d5b4c8b89cc7b4eb",
+  "disassembly_provider": {
+    "name": "jdk-javap-v1",
+    "options": [
+      "-private",
+      "-s",
+      "-c",
+      "-l",
+      "-verbose"
+    ],
+    "executable_hash": "bd5a9f99365fd432f79162f4ed9ca9b956c78cc81dfb6962adb6d207075711fb",
+    "jdk_components": {
+      "release": "00d3211a59bc9f2577f93962e9210de8578c49fd2625022cb38606817d3a71f9",
+      "lib/modules": "81f0e1bb87cd303ddcce2b216e27da416bd20799d9a9811ea1b070123cefff0f"
+    },
+    "jdk_image_status": "HASHED"
+  },
+  "classes": [
+    {
+      "owner": "net/minecraft/world/entity/ai/Brain",
+      "class_hash": "441ee6715fb13f271943a9a462c5ff64e491a993ff28d724df06885d83012a3d",
+      "disassembly_hash": "d25d42a41b31c1bb5d24cac87573c1616e163df34980e362d124ca77e8e7b146",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/brain-result-r50-source/Brain.javap.txt",
+      "selected_members": [
+        {
+          "name": "memories",
+          "header": "private final java.util.Map<net.minecraft.world.entity.ai.memory.MemoryModuleType<?>, java.util.Optional<? extends net.minecraft.world.entity.ai.memory.ExpirableValue<?>>> memories;",
+          "descriptor": "descriptor: Ljava/util/Map;",
+          "lineStart": 870,
+          "lineEnd": 874,
+          "sliceSha256": "728f43ecabdfbc83fad1d2862620820593a306c4d666378f7bfdca7f80a2ed0a"
+        },
+        {
+          "name": "checkMemory",
+          "header": "public boolean checkMemory(net.minecraft.world.entity.ai.memory.MemoryModuleType<?>, net.minecraft.world.entity.ai.memory.MemoryStatus);",
+          "descriptor": "descriptor: (Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;Lnet/minecraft/world/entity/ai/memory/MemoryStatus;)Z",
+          "lineStart": 1625,
+          "lineEnd": 1685,
+          "sliceSha256": "9ac39af26215d2ab2558a453eea54a9cbf6d7f8091bc85a9a937596ef0369327"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/Behavior",
+      "class_hash": "bb73feb84c79565213f7a6001c47d0e1cc2fc7d947a89d99ae5c70b5e058e7dd",
+      "disassembly_hash": "a14ed1bb37e1bbba57916781421c53353d6bff2b8346758b240b0a2d3968f6d0",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/goal-brain-research-r47-r3/Behavior.javap.txt",
+      "selected_members": [
+        {
+          "name": "entryCondition",
+          "header": "protected final java.util.Map<net.minecraft.world.entity.ai.memory.MemoryModuleType<?>, net.minecraft.world.entity.ai.memory.MemoryStatus> entryCondition;",
+          "descriptor": "descriptor: Ljava/util/Map;",
+          "lineStart": 210,
+          "lineEnd": 214,
+          "sliceSha256": "0e4ee7cf5a2be9948ba0c0ecec3276e7667307a34a151751436b129093fa46c1"
+        },
+        {
+          "name": "hasRequiredMemories",
+          "header": "protected boolean hasRequiredMemories(E);",
+          "descriptor": "descriptor: (Lnet/minecraft/world/entity/LivingEntity;)Z",
+          "lineStart": 635,
+          "lineEnd": 700,
+          "sliceSha256": "59e4aed018d609fe4861df2a2f007a02c4a3f4ad831e99f0f324dd1e98d8c24f"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/behavior/MoveToTargetSink",
+      "class_hash": "e2b60638bb381a1d96702bea9701e594c001ae7138b8134b3ecbdee8f0771dae",
+      "disassembly_hash": "7cd6e7de45969754ab5ec0163cd39f89887b25b27a9d061dad8ee46386c4e846",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/brain-result-r50-source/MoveToTargetSink.javap.txt",
+      "selected_members": [
+        {
+          "name": "MoveToTargetSink",
+          "header": "public net.minecraft.world.entity.ai.behavior.MoveToTargetSink();",
+          "descriptor": "descriptor: ()V",
+          "lineStart": 375,
+          "lineEnd": 391,
+          "sliceSha256": "31457b75763181712a18fa93559353bbd1f75ceb1532a908e0ca11bbbc26d285"
+        },
+        {
+          "name": "MoveToTargetSink",
+          "header": "public net.minecraft.world.entity.ai.behavior.MoveToTargetSink(int, int);",
+          "descriptor": "descriptor: (II)V",
+          "lineStart": 392,
+          "lineEnd": 419,
+          "sliceSha256": "c65afedcbbbbb555c84869a65a46960b015fe9e17992ab7145c80bf547869654"
+        }
+      ]
+    },
+    {
+      "owner": "net/minecraft/world/entity/ai/memory/MemoryStatus",
+      "class_hash": "049a2134384a56d5ad5ddbea5b7c907b1bf696854126c5d287b26d6a96e53019",
+      "disassembly_hash": "421f4a473014ad63fbffa11cb32eab10dfd2b51ec92236c2521411aeaa5798c0",
+      "disassembly_locator": "C:/temp/kneekura-tech-remaining-data-20261004/goal-brain-research-r47-r3/MemoryStatus.javap.txt",
+      "selected_members": [
+        {
+          "name": "VALUE_PRESENT",
+          "header": "public static final net.minecraft.world.entity.ai.memory.MemoryStatus VALUE_PRESENT;",
+          "descriptor": "descriptor: Lnet/minecraft/world/entity/ai/memory/MemoryStatus;",
+          "lineStart": 67,
+          "lineEnd": 70,
+          "sliceSha256": "e8c16c308a20b393092481901c5b04040a1e0e0b4e84dd9dc5e28bcb4793daac"
+        },
+        {
+          "name": "VALUE_ABSENT",
+          "header": "public static final net.minecraft.world.entity.ai.memory.MemoryStatus VALUE_ABSENT;",
+          "descriptor": "descriptor: Lnet/minecraft/world/entity/ai/memory/MemoryStatus;",
+          "lineStart": 71,
+          "lineEnd": 74,
+          "sliceSha256": "fb2572035049046781134e55616ba2a6353be25fab4674da3104461649e5a35f"
+        },
+        {
+          "name": "REGISTERED",
+          "header": "public static final net.minecraft.world.entity.ai.memory.MemoryStatus REGISTERED;",
+          "descriptor": "descriptor: Lnet/minecraft/world/entity/ai/memory/MemoryStatus;",
+          "lineStart": 75,
+          "lineEnd": 78,
+          "sliceSha256": "b8274b321ccd830de2253cc8b4929a4354f853f98b1402bb5367e503066a3588"
+        }
+      ]
+    }
+  ]
+}

@@ -11,6 +11,7 @@ import { prepareOwnerControl, readPreparedOwnerControl, ownerLaunchEnvironment }
 import { buildRunSnapshot, writeImmutableRunSnapshot, launchDebugRun, stopCurrent } from '../../core.mjs';
 
 import { ownerPrelaunchFixture as fixture } from './owner-prelaunch-fixtures.mjs';
+import { maintenance } from './owner-tank-rotation-fixtures.mjs';
 
 test('prelaunch creates exact fixed owner closure without runtime attestation claims', async t => {
   const f = await fixture(t); const prepared = await prepareOwnerControl(f.options);
@@ -150,7 +151,7 @@ for (const fault of ['schema', 'world', 'pid', 'topology']) test(`prepared reade
 });
 
 
-test('existing launch flow prepares owner files before the source-only fixture starts and seals its initial snapshot', async t => {
+for(const mode of ['ordinary','tankRotation']) test(`existing launch flow prepares ${mode} owner files before the source-only fixture starts and seals its initial snapshot`, async t => {
   const exec = promisify(execFile);
   const root = await mkdtemp(path.join(tmpdir(), 'owner-launch-source-'));
   t.after(() => rm(root, { recursive: true, force: true }));
@@ -161,7 +162,7 @@ test('existing launch flow prepares owner files before the source-only fixture s
   await exec('git', ['-C', workspace, 'add', 'source.txt']);
   await exec('git', ['-C', workspace, '-c', 'user.name=Source Test', '-c', 'user.email=source@example.invalid', 'commit', '-qm', 'source fixture']);
   const revision = (await exec('git', ['-C', workspace, 'rev-parse', 'HEAD'])).stdout.trim();
-  const f = await fixture(null, path.join(root, 'fixture'), revision);
+  const f = await (mode==='ordinary'?fixture:maintenance)(null, path.join(root, 'fixture'), revision);
   const repoRoot = fileURLToPath(new URL('../../../', import.meta.url));
   const target = path.join(root, 'source-only-target.mjs');
   const original = await readFile(path.join(repoRoot, 'debug-workspace/fixtures/fake-target.mjs'), 'utf8');
@@ -192,6 +193,12 @@ await writeFile(path.join(path.dirname(path.dirname(ownerEnvelope)), 'fixture-ob
     assert.equal(prepared.snapshot.runtime.pid, started.runtimePid);
     assert.equal(prepared.snapshot.bridge.ownerControlIntent.fullTargetAttestation, 'NOT_ESTABLISHED');
     assert.equal(prepared.snapshot.bridge.runtimeAttestation, 'NOT_ESTABLISHED');
+    assert.equal(Boolean(prepared.tankRotation),mode==='tankRotation');
+    if(prepared.tankRotation){
+      for(const key of ['debugSessionId','runId','runSnapshotId','processEpoch','handshakeNonce'])assert.equal(prepared.tankRotation[key],observed.envelope[key]);
+      assert.notEqual(prepared.tankRotation.runSnapshotId,f.identity.runSnapshotId);
+      assert.equal(prepared.grant.maxActions,0);assert.equal(prepared.grant.maxCaptures,0);
+    }
   } finally {
     if (started) {
       const stopped = await stopCurrent(config, repoRoot);

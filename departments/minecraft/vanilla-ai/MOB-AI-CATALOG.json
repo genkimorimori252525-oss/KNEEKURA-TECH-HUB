@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "minecraft": "1.20.1",
+  "loader": "forge",
+  "loader_version": "47.2.0",
+  "namespace": "mojmap",
+  "status": "STATIC_REPRESENTATIVE_FAMILY_CATALOG_RUNTIME_NOT_RUN",
+  "foundation_map_id": "522cbb565d187f8e1e7b97140206f5ac11e8ca90719528bd661f875f184e34fd",
+  "evidence_ledger": "ANCHOR-BYTECODE-LEDGER-2026-10-03.json",
+  "epistemic_boundary": "Class/member/body evidence establishes static mechanisms, not current entity decisions or loaded Mixin behavior. The additive MOB-AI-INHERITANCE-2026-10-05.json maps all 101 Mob-derived classes and 79 registered concrete types; these eight historical representative entries retain their original scope.",
+  "entities": [
+    {
+      "entity_type": "minecraft:zombie",
+      "source_owner": "net/minecraft/world/entity/monster/Zombie",
+      "class_hash": "0bec0512ec13bf0e1938ce5e63722e65bceeb6ad71058aa94ea279466c4b29e0",
+      "disassembly_hash": "c7e39f31e855cde7981f6e45a2fdd0be945e84d5d9da978cd35487d4b507c7bc",
+      "ai_family": "GOAL_GROUND",
+      "navigation": "INHERITED_GROUND_NAVIGATION",
+      "movement_control": "STANDARD_BASE_CONTROL",
+      "note": "Zombie registered goals plus conventional ground path execution; inherited/added goals require their own source locator.",
+      "static_status": "EXACT_CAPTURED_BYTECODE",
+      "runtime_status": "NOT_RUN",
+      "decision_stage_runtime_status": {
+        "INPUT": "NOT_CAPTURED",
+        "STATE": "NOT_CAPTURED",
+        "CANDIDATE": "NOT_CAPTURED",
+        "EVALUATION": "NOT_CAPTURED",
+        "SELECTION": "NOT_CAPTURED",
+        "EXECUTION": "NOT_CAPTURED",
+        "RESULT": "NOT_CAPTURED"
+      }
+    },
+    {
+      "entity_type": "minecraft:skeleton",
+      "source_owner": "net/minecraft/world/entity/monster/AbstractSkeleton",
+      "class_hash": "c4acbf62ba16703480262fff6c979e46c526d6ed6063e13110eedd937573e441",
+      "disassembly_hash": "b31584abb358aef857ab8c70bc39575479daccb2f38f4559341db08ee980d933",
+      "ai_family": "GOAL_RANGED_GROUND",
+      "navigation": "INHERITED_GROUND_NAVIGATION",
+      "movement_control": "STANDARD_BASE_CONTROL",
+      "note": "RangedBowAttackGoal and ranged projectile emission; attack and projectile linkage still need actual observation.",
+      "static_status": "EXACT_CAPTURED_BYTECODE",
+      "runtime_status": "NOT_RUN",
+      "decision_stage_runtime_status": {
+        "INPUT": "NOT_CAPTURED",
+        "STATE": "NOT_CAPTURED",
+        "CANDIDATE": "NOT_CAPTURED",
+        "EVALUATION": "NOT_CAPTURED",
+        "SELECTION": "NOT_CAPTURED",
+        "EXECUTION": "NOT_CAPTURED",
+        "RESULT": "NOT_CAPTURED"
+      }
+    },
+    {
+      "entity_type": "minecraft:villager",
+      "source_owner": "net/minecraft/world/entity/npc/Villager",
+      "class_hash": "81de732fa9dca114773d785844f6e3f4d5b7a5e05762c79e86ee9e7ada191d63",
+      "disassembly_hash": "01654c4875ad2b5275162dbde238f80fcdf1d984ab326a41079dbd554981042e",
+      "ai_family": "BRAIN_GROUND",
+      "navigation": "GROUND_NAVIGATION",
+      "movement_control": "STANDARD_BASE_CONTROL",
+      "note": "customServerAiStep calls Brain.tick; memory/activity/behavior state is not Goal eligibility.",
+      "static_status": "EXACT_CAPTURED_BYTECODE",
+      "runtime_status": "NOT_RUN",
+      "decision_stage_runtime_status": {
+        "INPUT": "NOT_CAPTURED",
+        "STATE": "NOT_CAPTURED",
+        "CANDIDATE": "NOT_CAPTURED",
+        "EVALUATION": "NOT_CAPTURED",
+        "SELECTION": "NOT_CAPTURED",
+        "EXECUTION": "NOT_CAPTURED",
+        "RESULT": "NOT_CAPTURED"
+      }
+    },
+    {
+      "entity_type": "minecraft:ghast",
+      "source_owner": "net/minecraft/world/entity/monster/Ghast",
+      "class_hash": "4f0dd147478e1bff754bee8a01bea4a9ce54e873ad218f9796a1e8c8879b3a39",
+      "disassembly_hash": "ef94fe07c773fac52637adc55a7f4549869a8cc76ac32ff7ed7ca5e46f215ae2",
+      "ai_family": "GOAL_CUSTOM_FLIGHT",
+      "navigation": "DO_NOT_INFER_A_STAR_FROM_INHERITED_NAVIGATION",
+      "movement_control": "Ghast$GhastMoveControl",
+      "note": "Random float target and custom reach/collision testing; no invented conventional selected path.",
+      "static_status": "EXACT_CAPTURED_BYTECODE",
+      "runtime_status": "NOT_RUN",
+      "decision_stage_runtime_status": {
+        "INPUT": "NOT_CAPTURED",
+        "STATE": "NOT_CAPTURED",
+        "CANDIDATE": "NOT_CAPTURED",
+        "EVALUATION": "NOT_CAPTURED",
+        "SELECTION": "NOT_CAPTURED",
+        "EXECUTION": "NOT_CAPTURED",
+        "RESULT": "NOT_CAPTURED"
+      }
+    },
+    {
+      "entity_type": "minecraft:phantom",
+      "source_owner": "net/minecraft/world/entity/monster/Phantom",
+      "class_hash": "13b2e3931ac337cb59f950de66671ab355641886da026001f1fc7a55ce06be29",
+      "disassembly_hash": "e37fb215f4c40bd82e684059bc64f4bfca507f10a2f5e0d71bf6c4821aad2697",
+      "ai_family": "GOAL_PHASE_AERIAL",
+      "navigation": "DO_NOT_INFER_A_STAR_FROM_INHERITED_NAVIGATION",
+      "movement_control": "Phantom$PhantomMoveControl",
+      "note": "Attack strategy/circle/sweep and private moveTargetPoint; base wanted coordinates do not prove custom steering target.",
+      "static_status": "EXACT_CAPTURED_BYTECODE",
+      "runtime_status": "NOT_RUN",
+      "decision_stage_runtime_status": {
+        "INPUT": "NOT_CAPTURED",
+        "STATE": "NOT_CAPTURED",
+        "CANDIDATE": "NOT_CAPTURED",
+        "EVALUATION": "NOT_CAPTURED",
+        "SELECTION": "NOT_CAPTURED",
+        "EXECUTION": "NOT_CAPTURED",
+        "RESULT": "NOT_CAPTURED"
+      }
+    },
+    {
+      "entity_type": "minecraft:slime",
+      "source_owner": "net/minecraft/world/entity/monster/Slime",
+      "class_hash": "110ed533eb3d0a3a861a389f1acd6ed9976a9382879de3931455fd436b95c715",
+      "disassembly_hash": "92f7e5343b00264e2ddb2f16944581cf0500fe192731623befe8f7c951cd59c7",
+      "ai_family": "GOAL_CUSTOM_JUMP",
+      "navigation": "INHERITED_GROUND_NAVIGATION_NOT_PROOF_OF_EACH_JUMP_PATH",
+      "movement_control": "Slime$SlimeMoveControl",
+      "note": "Custom jump/direction delay controller; distinguish operation cache from actual hop execution.",
+      "static_status": "EXACT_CAPTURED_BYTECODE",
+      "runtime_status": "NOT_RUN",
+      "decision_stage_runtime_status": {
+        "INPUT": "NOT_CAPTURED",
+        "STATE": "NOT_CAPTURED",
+        "CANDIDATE": "NOT_CAPTURED",
+        "EVALUATION": "NOT_CAPTURED",
+        "SELECTION": "NOT_CAPTURED",
+        "EXECUTION": "NOT_CAPTURED",
+        "RESULT": "NOT_CAPTURED"
+      }
+    },
+    {
+      "entity_type": "minecraft:dolphin",
+      "source_owner": "net/minecraft/world/entity/animal/Dolphin",
+      "class_hash": "9dc2c0a963d38618201fa248faa86c3ab160378446dfd62cd0cad64ead737af8",
+      "disassembly_hash": "0d25cc75d4524b363b803cbad55ed2b29115638977b7c458b8123611d5d730dd",
+      "ai_family": "GOAL_SWIMMING",
+      "navigation": "WaterBoundPathNavigation",
+      "movement_control": "SmoothSwimmingMoveControl",
+      "note": "Aquatic evaluator/control semantics; a ground-only static terrain field is not the dolphin node evaluator.",
+      "static_status": "EXACT_CAPTURED_BYTECODE",
+      "runtime_status": "NOT_RUN",
+      "decision_stage_runtime_status": {
+        "INPUT": "NOT_CAPTURED",
+        "STATE": "NOT_CAPTURED",
+        "CANDIDATE": "NOT_CAPTURED",
+        "EVALUATION": "NOT_CAPTURED",
+        "SELECTION": "NOT_CAPTURED",
+        "EXECUTION": "NOT_CAPTURED",
+        "RESULT": "NOT_CAPTURED"
+      }
+    },
+    {
+      "entity_type": "minecraft:enderman",
+      "source_owner": "net/minecraft/world/entity/monster/EnderMan",
+      "class_hash": "816ad5449aefe2f441eb1f135350254d4ff899da2a432e41482b3a4a263b6937",
+      "disassembly_hash": "aa775398b5ef03e8738952d1acb144cbd6a0342614177f83c459bdb2197021de",
+      "ai_family": "GOAL_GROUND_WITH_TELEPORT",
+      "navigation": "INHERITED_GROUND_NAVIGATION",
+      "movement_control": "STANDARD_BASE_CONTROL_WITH_EXPLICIT_TELEPORT",
+      "note": "Teleport is a discontinuity; never connect it as an observed continuous path.",
+      "static_status": "EXACT_CAPTURED_BYTECODE",
+      "runtime_status": "NOT_RUN",
+      "decision_stage_runtime_status": {
+        "INPUT": "NOT_CAPTURED",
+        "STATE": "NOT_CAPTURED",
+        "CANDIDATE": "NOT_CAPTURED",
+        "EVALUATION": "NOT_CAPTURED",
+        "SELECTION": "NOT_CAPTURED",
+        "EXECUTION": "NOT_CAPTURED",
+        "RESULT": "NOT_CAPTURED"
+      }
+    }
+  ]
+}

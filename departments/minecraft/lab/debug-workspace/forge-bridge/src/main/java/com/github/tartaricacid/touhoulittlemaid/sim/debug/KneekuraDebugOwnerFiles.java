@@ -27,6 +27,15 @@ final class KneekuraDebugOwnerFiles {
  static String sha256(byte[] b){try{return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(b));}catch(NoSuchAlgorithmException e){throw new AssertionError(e);}}
  static String hashStream(InputStream stream,int max)throws IOException{try(stream){try{MessageDigest digest=MessageDigest.getInstance("SHA-256");byte[] buffer=new byte[8192];long size=0;for(int n;(n=stream.read(buffer))!=-1;){if(n==0)continue;if((size+=n)>max)throw new IOException("OWNER_STREAM_SIZE_LIMIT");digest.update(buffer,0,n);}return HexFormat.of().formatHex(digest.digest());}catch(NoSuchAlgorithmException e){throw new AssertionError(e);}}}
  static void writeNew(Path root,String name,JsonObject body)throws IOException{Path p=writablePath(root,name);write(p,body);}
+ /** Checked predecessor and forced temp file, atomic publication only; failed temp files remain for inspection. */
+ static String replaceExpected(Path root,String name,String expected,JsonObject body)throws IOException{
+  byte[] bytes=(KneekuraDebugActionJournal.canonical(body)+"\n").getBytes(StandardCharsets.UTF_8);
+  if(bytes.length>65536)throw new IOException("OWNER_PUBLICATION_SIZE_LIMIT");
+  read(root,name,expected,65536);Path target=writablePath(root,name),temp=writablePath(root,name+".tmp-"+UUID.randomUUID());
+  write(temp,body);read(root,name,expected,65536);
+  Files.move(temp,target,StandardCopyOption.ATOMIC_MOVE,StandardCopyOption.REPLACE_EXISTING);
+  String published=sha256(bytes);read(root,name,published,65536);return published;
+ }
  static void writeStatus(Path root,JsonObject body)throws IOException{Path target=writablePath(root,"control/owner-status.json"),temp=writablePath(root,"control/owner-status.tmp-"+UUID.randomUUID());write(temp,body);try{Files.move(temp,target,StandardCopyOption.ATOMIC_MOVE,StandardCopyOption.REPLACE_EXISTING);}catch(AtomicMoveNotSupportedException e){Files.move(temp,target,StandardCopyOption.REPLACE_EXISTING);}finally{Files.deleteIfExists(temp);}}
  private static Path writablePath(Path root,String relative)throws IOException{
   if(!root.isAbsolute()||!root.normalize().equals(root.toRealPath()))throw new IOException("UNSAFE_OWNER_ROOT");Path rel=Path.of(relative);if(rel.isAbsolute()||rel.getNameCount()>8||relative.contains("\\")||Arrays.stream(relative.split("/",-1)).anyMatch(s->s.isEmpty()||s.equals(".")||s.equals("..")))throw new IOException("UNSAFE_OWNER_PATH");
