@@ -331,7 +331,7 @@
   ],
   "local_capture_runtime_status": "KNIGHT_R68_ORIGINAL_MEMBER_DISPATCH_RETURN_OBSERVED",
   "slice_hash_contract": "UTF8 of exact one-based inclusive original javap lines, LF split retaining CR",
-  "native_status": "KNIGHT_R68_LIMITED_ACCEPTANCE_HYDRA_PENDING",
+  "native_status": "KNIGHT_R68_AND_HYDRA_R70_LIMITED_ACCEPTANCE",
   "private_body_exports_committed": false,
   "native_knight": {
     "producer_sha": "d4315957d8462d0d43303d9bd8ce355d0f4e300a",
@@ -342,8 +342,36 @@
     "broadcast_returns": 3,
     "formation_returns": 6,
     "leader_false": "NOT_CAPTURED",
-    "hydra": "NOT_YET_VERIFIED",
+    "hydra": "SEPARATE_R70_LIMITED_ACCEPTANCE",
     "battle": "NOT_VERIFIED",
+    "paired_observer_effect": "NOT_VERIFIED"
+  },
+  "native_hydra": {
+    "producer_sha": "61d85f1852003aa0abc410787c6a5d519b3098a1",
+    "canonical_records": 1803,
+    "canonical_sha256": "e1f9a65158673ba02693a0fd78ec0b108d1eb00754bdfd829ce10c970c263da1",
+    "target_returns": 504,
+    "conditional_state_writes": 48,
+    "historical_head_returns": 588,
+    "cached_head_snapshots": 244,
+    "active_flame_snapshots_by_revision": [
+      41,
+      28,
+      13,
+      32,
+      16,
+      40
+    ],
+    "burst_stops": [
+      "BYTE_BUDGET",
+      "BYTE_BUDGET",
+      "BYTE_BUDGET",
+      "BYTE_BUDGET",
+      "BYTE_BUDGET",
+      "BYTE_BUDGET"
+    ],
+    "direct_attacking_state_write": "NOT_CAPTURED",
+    "executed_attack": "NOT_VERIFIED",
     "paired_observer_effect": "NOT_VERIFIED"
   }
 }
