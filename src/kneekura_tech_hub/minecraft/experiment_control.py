@@ -29,10 +29,12 @@ MODULES = (
     'debug-workspace/bridge/owner-trigger-config.mjs', 'debug-workspace/bridge/owner-trigger-source.mjs',
     'debug-workspace/bridge/registration.mjs', 'debug-workspace/bridge/result-export-source.mjs',
     'debug-workspace/bridge/result-export.mjs', 'debug-workspace/bridge/selected-action.mjs',
+    'debug-workspace/bridge/tank-preflight.mjs', 'debug-workspace/bridge/tank-resource.mjs',
     'debug-workspace/evidence/broker.mjs', 'debug-workspace/evidence/capture.mjs',
     'debug-workspace/evidence/ingest.mjs', 'debug-workspace/evidence/ring-buffer.mjs',
     'debug-workspace/evidence/runtime.mjs', 'debug-workspace/evidence/schema.mjs',
     'debug-workspace/evidence/store.mjs', 'debug-workspace/evidence/visual-capture.mjs',
+    'debug-workspace/evidence/tank-contract.mjs',
     'debug-workspace/evidence/trigger-capture.mjs', 'debug-workspace/evidence/watchpoints.mjs',
     'debug-workspace/evidence/visual-packet.mjs', 'debug-workspace/evidence/visual-request-contract.mjs',
     'simlab/golden/png.mjs')
