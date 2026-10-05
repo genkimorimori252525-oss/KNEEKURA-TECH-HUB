@@ -5,7 +5,7 @@ import {traceAgeStyle} from '../../simlab/trace-age-style.mjs';
 import {requireTankIdentity,sameTankIdentity,boundedTankPacket} from './tank-contract.mjs';
 
 /** Deduplicated immutable object table: cursor packets refer to shared samples/facts/layers. */
-export function packTankWorkbenchData({status,preflight=null,cursorPackets,map,experiment=null,comparison=null,cursorSelection=null}) {
+export function packTankWorkbenchData({status,preflight=null,cursorPackets,map,experiment=null,comparison=null,cursorSelection=null,guidance=null,reproduction=null}) {
   requireTankIdentity(status?.identity);
   if(!Array.isArray(cursorPackets)||!cursorPackets.length||cursorPackets.length>256)throw new RangeError('TANK_WORKBENCH_CURSOR_LIMIT');
   for(const p of cursorPackets) {
@@ -17,6 +17,8 @@ export function packTankWorkbenchData({status,preflight=null,cursorPackets,map,e
   for(const item of [preflight,map,experiment])if(item&&(!item.identity||!sameTankIdentity(item.identity,status.identity)))throw new TypeError('WORKBENCH_IDENTITY_MISMATCH');
   if(experiment&&(experiment.identity.subjectUuid!==cursorPackets[0].identity.subjectUuid||experiment.identity.targetRevision!==cursorPackets[0].identity.targetRevision))throw new TypeError('WORKBENCH_EXPERIMENT_SUBJECT_MISMATCH');
   if(comparison&&!sameTankIdentity(comparison.before,status.identity)&&!sameTankIdentity(comparison.after,status.identity))throw new TypeError('WORKBENCH_COMPARISON_IDENTITY_MISMATCH');
+  if(guidance&&(!sameTankIdentity(guidance.identity,status.identity)||guidance.identity.subjectUuid!==cursorPackets[0].identity.subjectUuid||guidance.identity.targetRevision!==cursorPackets[0].identity.targetRevision))throw new TypeError('WORKBENCH_GUIDANCE_IDENTITY_MISMATCH');
+  if(reproduction&&(!sameTankIdentity(reproduction.sourceBinding?.identity,status.identity)||reproduction.sourceBinding.identity.subjectUuid!==cursorPackets[0].identity.subjectUuid))throw new TypeError('WORKBENCH_REPRODUCTION_IDENTITY_MISMATCH');
   const nodes=[],intern=new Map();
   function encode(value,depth=0) {
     if(depth>64)throw new RangeError('TANK_WORKBENCH_NESTING_LIMIT');
@@ -29,7 +31,7 @@ export function packTankWorkbenchData({status,preflight=null,cursorPackets,map,e
       :['object',Object.entries(value).map(([k,v])=>[k,encode(v,depth+1)])];
     return {ref:id};
   }
-  const roots={status:encode(status),preflight:encode(preflight),map:encode(map),experiment:encode(experiment),comparison:encode(comparison),
+  const roots={status:encode(status),preflight:encode(preflight),map:encode(map),experiment:encode(experiment),comparison:encode(comparison),guidance:encode(guidance),reproduction:encode(reproduction),
     cursorPackets:cursorPackets.map(p=>encode(p))};
   return boundedTankPacket({schema:'kneekura.tank-workbench-data/v1',nodes,roots,
     cursorSelection:cursorSelection??{eligibleCount:null,displayedCount:cursorPackets.length,omittedCount:null,selectionPolicy:'EXPLICIT_CURSOR_PACKETS_NOT_CONTINUOUS_COVERAGE'}});
@@ -61,6 +63,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}label{display:inl
 <main><section><h2>固定座標の図</h2><p id="mapInfo" class="muted"></p><canvas id="canvas" width="960" height="960"></canvas><p id="quality"></p></section>
 <section><h2 id="overviewTitle">Decision</h2><div id="stages"></div><details><summary>現在のpacketと証拠参照</summary><pre id="packet"></pre></details></section></main>
 <section><h2>実験・比較</h2><pre id="experiment"></pre></section>
+<section><h2>再現準備・確認候補</h2><p class="muted">候補は読み取り用です。閲覧によるworld操作や再実行はありません。</p><pre id="guidance"></pre></section>
 <script type="application/json" id="data" nonce="${nonce}">${data}</script><script nonce="${nonce}">
 const data=JSON.parse(document.getElementById('data').textContent),cache=new Map(),byId=id=>document.getElementById(id);
 function decode(value){if(!value||typeof value!=='object')return value;const id=value.ref;if(cache.has(id))return cache.get(id);const [kind,entries]=data.nodes[id];const result=kind==='array'?entries.map(decode):Object.fromEntries(entries.map(([k,v])=>[k,decode(v)]));cache.set(id,result);return result;}
@@ -72,6 +75,7 @@ byId('status').textContent='開始前確認：'+(p.preflight?.status??'未確認
 byId('identity').textContent='run '+p.status.identity.runId+' / Arena '+p.status.identity.arenaEpoch+' / 対象 '+packets[0].identity.subjectUuid+' / 選択revision '+packets[0].identity.targetRevision;
 byId('statusDetail').textContent=JSON.stringify({status:p.status,preflight:p.preflight},null,2);
 byId('experiment').textContent=JSON.stringify({experiment:p.experiment,comparison:p.comparison},null,2);
+byId('guidance').textContent=JSON.stringify({guidance:p.guidance,reproduction:p.reproduction},null,2);
 function point(pos,packet){const g=p.map?.geometry,v=p.map?.viewport;if(!g||!v)return null;return byId('projection').value==='ELEVATION'
  ?[v.margin+(pos.tick-packet.window.startTick)*2,v.margin+(g.y+g.height-pos.y)*v.pixelsPerBlock]
  :[v.margin+(pos.x-g.x)*v.pixelsPerBlock,v.margin+(pos.z-g.z)*v.pixelsPerBlock];}
@@ -92,6 +96,7 @@ function draw(){const packet=packets[Number(cursor.value)],latest=packets.at(-1)
  canvas.width=v.width;canvas.height=v.height;ctx.strokeStyle='#334657';ctx.lineWidth=1;
  const elevation=byId('projection').value==='ELEVATION';byId('mapInfo').textContent=elevation?'横：元tick / 縦：y（高度）':'北 ↑ −Z / 横 +X / 縦 +Z / 固定 '+v.pixelsPerBlock+'px/ブロック';
  if(!elevation){for(let x=0;x<=g.width;x++){ctx.beginPath();ctx.moveTo(v.margin+x*v.pixelsPerBlock,v.margin);ctx.lineTo(v.margin+x*v.pixelsPerBlock,v.margin+g.depth*v.pixelsPerBlock);ctx.stroke();}for(let z=0;z<=g.depth;z++){ctx.beginPath();ctx.moveTo(v.margin,v.margin+z*v.pixelsPerBlock);ctx.lineTo(v.margin+g.width*v.pixelsPerBlock,v.margin+z*v.pixelsPerBlock);ctx.stroke();}}
+ if(packet.dimension!=='minecraft:overworld'){byId('quality').textContent='対象dimension未取得。水槽との座標対応を確認できないため位置レイヤーを描画しません。';return;}
  const layers=packet.layers;if(byId('motion').checked)trace(layers.motion.trace,packet);if(byId('projectiles').checked)for(const group of layers.relatedProjectiles.traces)trace(group.trace,packet,true);
  if(byId('declared').checked)pathLayer(layers.declaredNavigation,packet,'#efa4df',true);if(byId('returned').checked)pathLayer(layers.returnedPath,packet,'#dce5ed',true);if(byId('cache').checked)pathLayer(layers.pathCache,packet,'#ffc76b',false);
  byId('quality').textContent='欠測・境界 '+packet.quality.gaps.length+'件（表示部分） / 連続取得は未確認 / 青→黄→赤は元tickからの表示年齢 / レイヤOFFは未取得とは別';

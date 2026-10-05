@@ -73,7 +73,7 @@ export function buildExperimentDigest({request,actionReceipts=[],observations,id
       capturedCount:inWindow.length,eligibleCount:samples.length,expectedSampleCount:expectedSamples,samplingIntervalTicks:interval,intervalSource:limits.observer?'EXPLICIT_PROFILE':'CONSERVATIVE_DEFAULT_NOT_VERIFIED_PROFILE',startCaptured,endCaptured,gapCount:gaps.length,gaps,
       health:structuredClone(health),sourceBinding:limits.sourceBinding??null,continuousCoverage:'NOT_ESTABLISHED',allEventsCaptured:'NOT_ESTABLISHED'}},
     retainedEvents:events.map(r=>({observationId:r.observationId,tick:r.gameTime,kind:r.payload.kind,evidenceRefs:[r.observationId],imageStatus:'NOT_CAPTURED'})),
-    cleanup:limits.cleanup??'UNKNOWN',evidenceRefs:{identity:requireTankIdentity(identity),sourceObservationCount:subjectRows.length,
+    retainedCaptures:limits.captureLinks??[],cleanup:limits.cleanup??'UNKNOWN',evidenceRefs:{identity:requireTankIdentity(identity),sourceObservationCount:subjectRows.length,
       sourceObservationIds:subjectRows.slice(0,32).map(r=>r.observationId),omittedReferenceCount:Math.max(0,subjectRows.length-32),canonicalBinding:limits.sourceBinding??null},
     semantics:{displaySelectionAffectsMetrics:false,readOnlyRetainedEvidence:true,temporalAdjacencyProvesCausality:false}});
 }

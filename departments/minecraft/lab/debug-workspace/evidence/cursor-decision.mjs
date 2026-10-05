@@ -22,6 +22,7 @@ export function buildCursorDecisionPacket({observations,identity,subjectUuid,win
   const dimensions=new Set(observations.filter(r=>sameTankIdentity(r,identity)&&r.scope?.entityUuid===subjectUuid
     &&r.source?.side==='SERVER'&&r.payload?.targetRevision===identity.targetRevision&&r.gameTime>=window.startTick&&r.gameTime<=cursorTick)
     .map(r=>r.payload?.dimension).filter(d=>typeof d==='string'));
+  for(const d of [view.layers.returnedPath.data?.dimension,view.layers.terrain.data?.dimension])if(typeof d==='string')dimensions.add(d);
   return boundedTankPacket({schema:'kneekura.cursor-decision/v1',identity:{...view.identity},cursorTick,window:structuredClone(window),
     dimension:dimensions.size===1?[...dimensions][0]:null,overview:view.overview,layers:view.layers,quality:{status:'RETAINED_SAMPLES_ONLY',gaps:view.layers.motion.trace.gaps,
       gapScope:'DISPLAYED_SUBSET_NOT_COMPLETE_WINDOW',continuousCoverage:'NOT_ESTABLISHED'},

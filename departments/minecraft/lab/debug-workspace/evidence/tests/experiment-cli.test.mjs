@@ -15,3 +15,10 @@ test('digest reader uses sealed source inventory and existing journal export wit
   assert.deepEqual(await readFile(finalFile),before);
   await writeFile(requestFile,Buffer.from('{}'));await assert.rejects(readExperimentDigest(args));
 });
+
+test('sealed capture references survive digest reading with exact original image hashes',async t=>{
+  const f=await fixture(t,{visual:true}),requestFile=path.join(f.runDir,'request-input.json'),assertionsFile=path.join(f.runDir,'assertion-input.json');
+  await writeFile(requestFile,f.requestBytes);await writeFile(assertionsFile,f.assertionsBytes);
+  const {digest}=await readExperimentDigest({runDir:f.runDir,requestFile,assertionsFile,subjectUuid:uuid,targetRevision:1,arenaEpoch:0,window:{startTick:0,endTick:40},actionKeys:[{actionId:'action-1',idempotencyKey:'key-1'}]});
+  assert.equal(digest.retainedCaptures.length,4);assert.deepEqual(digest.retainedCaptures.map(c=>c.imageHash),f.manifest.frames.map(c=>c.imageHash));
+});

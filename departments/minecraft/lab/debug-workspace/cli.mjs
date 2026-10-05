@@ -13,6 +13,8 @@ import {buildTankMap} from './evidence/tank-map.mjs';
 import {writeTankWorkbenchArtifact} from './evidence/tank-workbench-view.mjs';
 import {readExperimentDigest} from './experiment-cli.mjs';
 import {compareExperimentDigests} from './evidence/experiment-comparison.mjs';
+import {buildReproductionManifest,writeReproductionManifest} from './evidence/reproduction-manifest.mjs';
+import {buildExperimentGuidance} from './evidence/experiment-guidance.mjs';
 import {
   doctor,
   launchDebugRun,
@@ -72,18 +74,30 @@ async function main() {
   const command = process.argv[2] || 'status';
   const { file, config } = await loadConfig();
 
-  if(command==='experiment-summary') {
+  if(command==='experiment-summary'||command==='experiment-reproduction') {
     const required=name=>{const value=argValue(name);if(!value||value.startsWith('--'))throw new Error('MISSING_'+name);return value;};
     const result=await readExperimentDigest({runDir:required('--run-dir'),requestFile:required('--request'),assertionsFile:required('--assertions'),
       subjectUuid:required('--uuid'),targetRevision:Number(required('--revision')),arenaEpoch:Number(required('--arena-epoch')),
       window:{startTick:Number(required('--start-tick')),endTick:Number(required('--end-tick'))},
       actionKeys:argValue('--action-keys')?await readTankJsonFile(required('--action-keys')):[],contextRelative:argValue('--context-relative')});
-    print(result.digest);return;
+    if(command==='experiment-reproduction') {
+      const manifest=buildReproductionManifest({requestBytes:result.requestBytes,assertionsBytes:result.assertionsBytes,
+        sourceBinding:{...result.digest.quality.coverage.sourceBinding,identity:result.digest.identity},worldBinding:result.digest.conditions.worldBinding,
+        observerProfile:result.digest.conditions.observer,exportReferences:{resultHash:result.exported.manifest.result_hash,visualBundleHash:result.exported.result.observations.visual_bundle}});
+      if(argValue('--output'))await writeReproductionManifest({manifest,output:required('--output'),runDir:required('--run-dir')});
+      print(manifest);
+    } else print(result.digest);
+    return;
   }
   if(command==='experiment-compare') {
     const required=name=>{const value=argValue(name);if(!value||value.startsWith('--'))throw new Error('MISSING_'+name);return value;};
     print(compareExperimentDigests({before:await readTankJsonFile(required('--before')),after:await readTankJsonFile(required('--after')),
       intendedDifferences:argValue('--intended-differences')?await readTankJsonFile(required('--intended-differences')):[]}));return;
+  }
+  if(command==='experiment-guidance') {
+    const required=name=>{const value=argValue(name);if(!value||value.startsWith('--'))throw new Error('MISSING_'+name);return value;};
+    print(buildExperimentGuidance({digest:await readTankJsonFile(required('--digest')),health:argValue('--health')?await readTankJsonFile(required('--health')):{},
+      capabilities:await readTankJsonFile(required('--capabilities')),maxBookmarks:Number(argValue('--bookmark-limit')??32)}));return;
   }
 
   if(command==='tank-resource') {
@@ -113,7 +127,8 @@ async function main() {
     const latest=cursorPackets.at(-1),map=buildTankMap({status:context.status,positions:latest.layers.motion.trace,declaredPaths:latest.layers.declaredNavigation.nodes});
     const experiment=argValue('--experiment')?await readTankJsonFile(required('--experiment')):null;
     const comparison=argValue('--comparison')?await readTankJsonFile(required('--comparison')):null;
-    const outputFile=await writeTankWorkbenchArtifact({status:context.status,cursorPackets,map,cursorSelection,experiment,comparison},required('--output'),current.runDir);
+    const guidance=argValue('--guidance')?await readTankJsonFile(required('--guidance')):null,reproduction=argValue('--reproduction')?await readTankJsonFile(required('--reproduction')):null;
+    const outputFile=await writeTankWorkbenchArtifact({status:context.status,cursorPackets,map,cursorSelection,experiment,comparison,guidance,reproduction},required('--output'),current.runDir);
     print({schema:'kneekura.tank-workbench/v1',identity,subjectUuid,outputFile,cursorSelection,readOnlyRetainedEvidence:true});return;
   }
 
