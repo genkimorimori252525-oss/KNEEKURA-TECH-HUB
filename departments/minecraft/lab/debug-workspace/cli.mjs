@@ -8,6 +8,9 @@ import {queryDecisionDrilldown} from './evidence/decision-drilldown.mjs';
 import {buildRetainedDecisionPresentation} from './evidence/decision-presentation.mjs';
 import {writeDecisionPresentationArtifact} from './evidence/decision-view.mjs';
 import {readTankContext,readTankJsonFile,prepareTankResourceFile} from './tank-cli.mjs';
+import {buildCursorDecisionPacket,selectTankCursorTicks} from './evidence/cursor-decision.mjs';
+import {buildTankMap} from './evidence/tank-map.mjs';
+import {writeTankWorkbenchArtifact} from './evidence/tank-workbench-view.mjs';
 import {
   doctor,
   launchDebugRun,
@@ -80,6 +83,20 @@ async function main() {
       profile:command==='tank-preflight'?await readTankJsonFile(required('--profile')):undefined,
       timeBudget:command==='tank-preflight'?await readTankJsonFile(required('--time-budget')):undefined});
     print(command==='tank-status'?context.status:context.preflight);return;
+  }
+  if(command==='tank-view') {
+    const required=name=>{const value=argValue(name);if(!value||value.startsWith('--'))throw new Error('MISSING_'+name);return value;};
+    const subjectUuid=process.argv[3];if(!subjectUuid||subjectUuid.startsWith('--'))throw new Error('TANK_VIEW_UUID_REQUIRED');
+    const current=await readCurrent(config,ROOT),runtime=evidenceRuntimeFromCurrent(current);await runtime.init();
+    const observations=await runtime.store.readObservations(),arenaEpoch=Number(required('--arena-epoch'));
+    const context=await readTankContext({current,observations,arenaEpoch,expectedRecipeHash:argValue('--recipe-hash'),
+      worldBinding:argValue('--world-binding')?await readTankJsonFile(required('--world-binding')):undefined});
+    const identity={...context.status.identity,targetRevision:Number(required('--revision'))},window={startTick:Number(required('--start-tick')),endTick:Number(required('--end-tick'))};
+    const cursorSelection=selectTankCursorTicks({observations,identity,subjectUuid,window,maxCursors:Number(argValue('--cursor-limit')??32)});
+    const cursorPackets=cursorSelection.ticks.map(cursorTick=>buildCursorDecisionPacket({observations,identity,subjectUuid,window,cursorTick}));
+    const latest=cursorPackets.at(-1),map=buildTankMap({status:context.status,positions:latest.layers.motion.trace,declaredPaths:latest.layers.declaredNavigation.nodes});
+    const outputFile=await writeTankWorkbenchArtifact({status:context.status,cursorPackets,map,cursorSelection},required('--output'),current.runDir);
+    print({schema:'kneekura.tank-workbench/v1',identity,subjectUuid,outputFile,cursorSelection,readOnlyRetainedEvidence:true});return;
   }
 
   if (command === 'doctor') {
