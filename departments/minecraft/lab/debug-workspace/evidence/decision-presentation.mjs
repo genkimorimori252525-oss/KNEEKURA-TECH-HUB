@@ -54,8 +54,9 @@ export function buildRetainedDecisionPresentation({observations,subjectUuid,iden
   const query=channel=>({channel,startTick:request.startTick,endTick:request.endTick,limit:1,maxNodes:limits.maxNodes,maxGapTicks:limits.maxGapTicks});
   // Reuse the strict full identity/window/input bounds and duplicate-ID refusal.
   queryDecisionDrilldown({observations,subjectUuid,identity,request:query('path_search')});
-  const records=selectDecisionRecords(observations.filter(r=>r?.source?.side==='SERVER'&&r.payload?.targetRevision===identity.targetRevision),
-    subjectUuid,identity,request.endTick).filter(r=>r.gameTime>=request.startTick);
+  const selected=selectDecisionRecords(observations.filter(r=>r?.source?.side==='SERVER'&&r.payload?.targetRevision===identity.targetRevision),
+    subjectUuid,identity,request.endTick);
+  const records=selected.filter(r=>r.gameTime>=request.startTick);
   const path=queryDecisionDrilldown({observations:records,subjectUuid,identity,request:query('path_search')}).items.at(-1);
   const returned=queryDecisionDrilldown({observations:records,subjectUuid,identity,request:query('path_returned_nodes')}).items.at(-1);
   const returnedData=returned?.data.pathNodes.data;
@@ -85,7 +86,8 @@ export function buildRetainedDecisionPresentation({observations,subjectUuid,iden
   const validNav=navigation?.status==='AVAILABLE'&&navData?.pathPresent===true&&Array.isArray(navEntries)&&
     navEntries.length<=64&&navEntries.every(n=>Number.isSafeInteger(n.index)&&['x','y','z'].every(k=>Number.isFinite(n[k])));
   const overview=buildDecisionOverviewPacket(observeDebugWorkspaceDecision({observations:records,subjectUuid,identity,tick:request.endTick}),limits);
-  const related=buildDebugWorkspaceRelatedProjectileTraces({observations:records,subjectUuid,identity,window:request,maxSamples:limits.maxSamples,maxGapTicks:limits.maxGapTicks});
+  // Retain earlier accepted-spawn/removal evidence; the builder windows actual positions independently.
+  const related=buildDebugWorkspaceRelatedProjectileTraces({observations:selected,subjectUuid,identity,window:request,maxSamples:limits.maxSamples,maxGapTicks:limits.maxGapTicks});
   const result={schema:'kneekura.retained-decision-presentation/v1',identity:{...identity,subjectUuid},
     request:{startTick:request.startTick,endTick:request.endTick,...limits},overview,
     layers:{motion:{enabledByDefault:false,status:retained.length?'AVAILABLE':'NOT_CAPTURED',trace,

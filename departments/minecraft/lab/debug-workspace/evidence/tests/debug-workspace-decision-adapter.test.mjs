@@ -171,6 +171,43 @@ test('ambiguous writer ordering and duplicate related observations do not fabric
   }
   assert.throws(()=>buildDebugWorkspaceRelatedProjectileTraces({observations:[spawn,sample,structuredClone(sample)],subjectUuid:UUID}),/DUPLICATE_OBSERVATION/);
 });
+
+test('presentation retains pre-window spawn evidence while displaying only in-window stationary projectile samples',()=>{
+  const spawn=rangedSpawn(),early=rangedSample(2,102,2),first=rangedSample(3,103,3),stopped=rangedSample(4,104,3),future=rangedSample(5,105,4);
+  const records=[spawn,early,first,stopped,future],before=structuredClone(records);
+  const identity={debugSessionId:'sess-a',runId:'run-a',runSnapshotId:'snap-a',processEpoch:1,arenaEpoch:3,targetRevision:1};
+  const request={startTick:103,endTick:104};
+  const direct=buildDebugWorkspaceRelatedProjectileTraces({observations:records,subjectUuid:UUID,identity,window:request});
+  assert.equal(direct.length,1);
+  const out=buildRetainedDecisionPresentation({observations:records,subjectUuid:UUID,identity,request});
+  assert.equal(out.layers.relatedProjectiles.status,'PARTIAL');
+  assert.deepEqual(out.layers.relatedProjectiles.traces,direct);
+  assert.deepEqual(out.layers.relatedProjectiles.traces[0].spawn_source_observation_ids,[spawn.observationId]);
+  assert.deepEqual(out.layers.relatedProjectiles.traces[0].trace.samples.map(s=>s.source_observation_id),[first.observationId,stopped.observationId]);
+  assert.equal(out.layers.relatedProjectiles.traces[0].trace.segments.length,1);
+  assert.ok(out.overview.timeline.every(event=>event.tick>=request.startTick&&event.tick<=request.endTick));
+  assert.equal(out.layers.motion.trace.samples.length,0);assert.deepEqual(records,before);
+});
+
+test('pre-window projectile relationship evidence cannot cross identity, revision, source or subject boundaries',()=>{
+  const sample=rangedSample(2,103,2);
+  const identity={debugSessionId:'sess-a',runId:'run-a',runSnapshotId:'snap-a',processEpoch:1,arenaEpoch:3,targetRevision:1};
+  for(const mutate of [r=>r.runId='other',r=>r.processEpoch++,r=>r.arenaEpoch++,r=>r.payload.targetRevision++,
+    r=>r.source.side='CLIENT',r=>r.scope.entityUuid=HIT_TARGET,r=>r.payload.data.ownerUuid=HIT_TARGET,
+    r=>r.gameTime=105,r=>r.payload.data.result=false]) {
+    const spawn=rangedSpawn();mutate(spawn);
+    const out=buildRetainedDecisionPresentation({observations:[spawn,sample],subjectUuid:UUID,identity,request:{startTick:103,endTick:104}});
+    assert.equal(out.layers.relatedProjectiles.traces.length,0);
+  }
+});
+
+test('pre-window removal remains a terminal boundary and cannot resurrect later projectile positions',()=>{
+  const removed=rangedSample(2,102,2);removed.payload.data.removed=true;
+  const out=buildRetainedDecisionPresentation({observations:[rangedSpawn(),removed,rangedSample(3,103,3)],subjectUuid:UUID,
+    identity:{debugSessionId:'sess-a',runId:'run-a',runSnapshotId:'snap-a',processEpoch:1,arenaEpoch:3,targetRevision:1},
+    request:{startTick:103,endTick:104}});
+  assert.equal(out.layers.relatedProjectiles.traces.length,0);
+});
 test('actual successful original teleport return is a result and typed gap without a fabricated sample',()=>{
   const event=teleportReturn(true),records=teleportRows(event),before=structuredClone(records);
   assert.equal(validOriginalDecisionEvent(event),true);
