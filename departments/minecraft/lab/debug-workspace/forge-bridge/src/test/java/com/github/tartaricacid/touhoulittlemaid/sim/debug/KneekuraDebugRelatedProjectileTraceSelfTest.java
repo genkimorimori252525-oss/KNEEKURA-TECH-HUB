@@ -72,7 +72,7 @@ public final class KneekuraDebugRelatedProjectileTraceSelfTest {
   cache.acceptFlushed(row(2,false,120,10,4));require(cache.snapshot().traces().get(1).trace().gaps().get(0).kind().equals("SOURCE_GAP"),"missing actual ticks break connection");
   cache.select(context(2));cache.acceptFlushed(first);require(cache.snapshot().traces().isEmpty(),"selection revision clears related groups");
   cache.select(context(1));for(int n=1;n<=17;n++)cache.acceptFlushed(row(n,true,100,n,0));require(cache.snapshot().traces().size()==16,"finite accepted UUID groups");
-  for(int t=101;t<=110;t++)for(int n=1;n<=16;n++)cache.acceptFlushed(row(n,false,t,18+(t-101)*16+n,n));
+  for(int t=101;t<=110;t++)for(int n=1;n<=16;n++)cache.acceptFlushed(row(n,false,t,18+(t-101)*16+n,n+(t-101)*0.1));
   require(cache.snapshot().retainedSamples()==128&&cache.snapshot().evictedSamples()==32,"global related position budget, not128 per projectile");
   var boundedLabels=KneekuraDebugMotionOverlayGeometry.relatedLabels(selected,cache.snapshot(),"minecraft:overworld",110,0,64,0,true);
   require(boundedLabels.size()==16&&boundedLabels.stream().map(l->l.text()).distinct().count()==16,"native ID labels share finite16 group bound");
@@ -88,6 +88,30 @@ public final class KneekuraDebugRelatedProjectileTraceSelfTest {
   var invalid=row(16,false,111,195,Double.NaN);cache.acceptFlushed(invalid);cache.acceptFlushed(row(16,false,112,196,16));
   require(cache.snapshot().traces().get(15).trace().gaps().stream().anyMatch(g->g.kind().equals("INVALID_RETAINED_POSITION")),"malformed actual position prevents a later false connection");
   cache.clear();require(cache.snapshot().traces().isEmpty(),"clear releases all related display state");
+  var stopped=new KneekuraDebugRelatedProjectileTraceCache();stopped.select(context(1));
+  for(int n=1;n<=3;n++)stopped.acceptFlushed(row(n,true,100,n,0));
+  int event=4;
+  for(int tick=101;tick<=150;tick++)for(int n=1;n<=3;n++)stopped.acceptFlushed(row(n,false,tick,event++,tick==101?0:1));
+  for(var group:stopped.snapshot().traces()){
+   var visible=KneekuraDebugMotionOverlayGeometry.linesForIdentity(group.trace(),group.uuid().toString(),"minecraft:overworld",150,0,64,0,true);
+   require(visible.stream().anyMatch(l->l.role().equals("SAMPLED_ENDPOINT_CONNECTION")&&l.x0()!=l.x1()),"stopped projectiles retain their unexpired travelled path");
+   require(group.trace().samples().get(group.trace().samples().size()-1).tick()==150,"stationary endpoint is the latest actual observation");
+   var expired=KneekuraDebugMotionOverlayGeometry.linesForIdentity(group.trace(),group.uuid().toString(),"minecraft:overworld",202,0,64,0,true);
+   require(expired.stream().noneMatch(l->l.role().equals("SAMPLED_ENDPOINT_CONNECTION")&&l.x0()!=l.x1()),"movement endpoint age is never refreshed by stationary ticks");
+  }
+  require(stopped.snapshot().retainedSamples()<=128,"stationary retention keeps the existing global bound");
+  var ended=row(1,false,151,event++,1);ended.getAsJsonObject("payload").getAsJsonObject("data").addProperty("removed",true);stopped.acceptFlushed(ended);
+  var endedTrace=stopped.snapshot().traces().get(0);
+  require(KneekuraDebugMotionOverlayGeometry.linesForIdentity(endedTrace.trace(),endedTrace.uuid().toString(),"minecraft:overworld",151,0,64,0,true).stream().anyMatch(l->l.role().equals("SAMPLED_ENDPOINT_CONNECTION")&&l.x0()!=l.x1()),"removed parent leaves unexpired retained geometry");
+  stopped.acceptFlushed(row(2,false,151,event++,2));
+  require(stopped.snapshot().traces().get(1).trace().segments().stream().anyMatch(s->s.distance()==1),"resumed movement connects only to its latest retained endpoint");
+  var interrupted=new KneekuraDebugRelatedProjectileTraceCache();interrupted.select(context(1));interrupted.acceptFlushed(row(1,true,100,1,0));
+  for(int tick=101;tick<=110;tick++)interrupted.acceptFlushed(row(1,false,tick,tick-99,1));
+  interrupted.acceptFlushed(row(1,false,130,32,1));interrupted.acceptFlushed(row(1,false,131,33,1));
+  var interruptedTrace=interrupted.snapshot().traces().get(0).trace();
+  require(interruptedTrace.samples().stream().anyMatch(s->s.tick()==130)&&interruptedTrace.gaps().stream().anyMatch(g->g.kind().equals("SOURCE_GAP")),"stationary compaction preserves the first observation after a source gap");
+  var dimension=row(1,false,132,34,1);dimension.getAsJsonObject("payload").getAsJsonObject("data").addProperty("dimension","minecraft:the_nether");interrupted.acceptFlushed(dimension);
+  require(interrupted.snapshot().traces().get(0).trace().gaps().stream().anyMatch(g->g.kind().equals("IDENTITY_BOUNDARY")),"equal positions do not erase a dimension boundary");
   System.out.println("Related native projectile display: exact accepted spawn/context/UUID, tick-only positions, no replay/forward-fill/cross-connect,16 groups/global128 positions, age/capture/gap boundaries passed");
  }
 }

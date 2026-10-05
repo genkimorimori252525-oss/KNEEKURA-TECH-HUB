@@ -69,6 +69,21 @@ test('Hydra original target assignment distinguishes null and exact assigned tar
   r.payload.data.requestedTargetUuid=null;r.payload.data.cachedTargetUuid=null;assert.equal(validOriginalDecisionEvent(r),true);
   r.payload.data.cachedTargetUuid=target;assert.equal(validOriginalDecisionEvent(r),false);
 });
+test('existing Gson transport may omit nullable Boss target UUIDs without inventing a retained null',()=>{
+  const leader=row('MOD_KNIGHT_LEADER_RETURN');delete leader.payload.data.membersAtReturn[0].targetUuid;
+  const dispatch=row('MOD_KNIGHT_MEMBER_DISPATCH_RETURN');delete dispatch.payload.data.targetUuid;
+  const assigned=row('MOD_HYDRA_TARGET_RETURN');delete assigned.payload.data.requestedTargetUuid;delete assigned.payload.data.cachedTargetUuid;
+  const state=row('MOD_HYDRA_STATE_WRITE_CHECKPOINT');delete state.payload.data.targetUuid;
+  for(const r of [leader,dispatch,assigned,state]){
+    const before=JSON.stringify(r);assert.equal(validOriginalDecisionEvent(r),true);
+    const stages={},caps={},timeline=[];appendOriginalDecisionEvents([r],stages,caps,timeline);
+    assert.equal(JSON.stringify(r),before,'missing target remains absent, rather than reconstructed');
+  }
+  assigned.payload.data.cachedTargetUuid=target;assert.equal(validOriginalDecisionEvent(assigned),false);
+  for(const value of [false,123,'invalid-uuid',{}]){
+    dispatch.payload.data.targetUuid=value;assert.equal(validOriginalDecisionEvent(dispatch),false);
+  }
+});
 test('Hydra conditional write is algorithm state and its derived attack type is not an executed attack',()=>{
   const r=row('MOD_HYDRA_STATE_WRITE_CHECKPOINT');assert.equal(validOriginalDecisionEvent(r),true);
   const stages={},caps={},timeline=[];appendOriginalDecisionEvents([r],stages,caps,timeline);

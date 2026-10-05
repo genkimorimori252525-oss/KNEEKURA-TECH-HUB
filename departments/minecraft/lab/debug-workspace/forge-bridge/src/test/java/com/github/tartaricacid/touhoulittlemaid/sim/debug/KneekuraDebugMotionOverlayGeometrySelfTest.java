@@ -23,6 +23,12 @@ public final class KneekuraDebugMotionOverlayGeometrySelfTest {
   if(KneekuraDebugMotionOverlayGeometry.lines(projectile.snapshot(),"minecraft:overworld",105,0,64,0).size()!=9)throw new AssertionError("projectile requires dashed line and distinct 3-axis markers");
   if(!KneekuraDebugMotionOverlayGeometry.lines(cache.snapshot(),"minecraft:overworld",105,0,64,0,false).isEmpty())throw new AssertionError("derived drawing must be absent during raw capture");
   if(!KneekuraDebugMotionOverlayGeometry.lines(cache.snapshot(),"minecraft:overworld",105,0,64,0,true).equals(lines))throw new AssertionError("capture completion must resume the same retained view without deleting evidence");
+  for(int tick=110;tick<=150;tick+=5)cache.acceptFlushed(KneekuraDebugMotionTraceCacheSelfTest.row(tick,1,"obs:stopped:"+tick));
+  for(long tick:new long[]{150,180}){
+   var stopped=KneekuraDebugMotionOverlayGeometry.lines(cache.snapshot(),"minecraft:overworld",tick,0,64,0,true);
+   if(stopped.stream().noneMatch(l->l.role().equals("SAMPLED_ENDPOINT_CONNECTION")&&l.x0()!=l.x1()))throw new AssertionError("stationary Mob retains unexpired movement");
+  }
+  if(KneekuraDebugMotionOverlayGeometry.lines(cache.snapshot(),"minecraft:overworld",205,0,64,0,true).stream().anyMatch(l->l.role().equals("SAMPLED_ENDPOINT_CONNECTION")&&l.x0()!=l.x1()))throw new AssertionError("stationary Mob cannot refresh older movement age");
   System.out.println("Native overlay geometry retains source refs, gap/age/dimension/distance boundaries and non-color styles");
  }
 }

@@ -63,9 +63,21 @@ final class KneekuraDebugRelatedProjectileTraceCache {
     Track invalid=track;retained.removeIf(r->r.track()==invalid);track.samples.clear();track.pendingGap="NONMONOTONIC_OR_DUPLICATE_TICK";track.pendingSource=source;rejected++;return;
    }
    var sample=new KneekuraDebugMotionTraceCache.Sample(tick,x,y,z,source,dimension,"PROJECTILE_ACTUAL",track.pendingGap,track.pendingSource);
+   // Keep actual endpoints of a stationary run instead of letting repeated zero-length
+   // ticks evict other projectiles' unexpired travelled paths. Raw evidence is untouched.
+   if(track.samples.size()>=2){
+    var previous=track.samples.get(track.samples.size()-1);var before=track.samples.get(track.samples.size()-2);
+    if(previous.breakBefore()==null&&sample.breakBefore()==null&&previous.tick()-before.tick()<=10&&tick-previous.tick()<=10&&
+      samePosition(before,previous)&&samePosition(previous,sample)){
+     track.samples.remove(track.samples.size()-1);retained.remove(new Retained(track,previous));
+    }
+   }
    track.samples.add(sample);retained.addLast(new Retained(track,sample));track.pendingGap=null;track.pendingSource=null;
    if(retained.size()>MAX_SAMPLES){var oldest=retained.removeFirst();oldest.track().samples.remove(oldest.sample());evicted++;}
   }catch(RuntimeException invalid){rejected++;if(track!=null&&!track.ended){track.pendingGap="INVALID_RETAINED_POSITION";track.pendingSource=source;}}
+ }
+ private static boolean samePosition(KneekuraDebugMotionTraceCache.Sample a,KneekuraDebugMotionTraceCache.Sample b){
+  return a.x()==b.x()&&a.y()==b.y()&&a.z()==b.z()&&a.dimension().equals(b.dimension())&&a.traceClass().equals(b.traceClass());
  }
  synchronized Snapshot snapshot(){
   var result=new ArrayList<Trace>();for(var track:tracks.values())result.add(new Trace(track.uuid,track.source,KneekuraDebugMotionTraceCache.derive(context,track.samples,0,0)));
