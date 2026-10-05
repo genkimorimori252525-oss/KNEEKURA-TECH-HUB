@@ -429,3 +429,15 @@ the bounded primary-source work. Chinese wiki direct reads timed out; indexed sn
 only. An additional broad search returned irrelevant results. No runtime or native result is inferred
 from successful structural verification. The earlier integer accessor ambiguity is resolved only by
 the new independently evidenced converter calls, leaving the historical negative record intact.
+
+
+## Concrete evaluator evidence — predicate wording repair
+
+Independent review found the comparison helper used unordered reference-presence conjunctions,
+while its labels said reference paths. The durable dossier now names reference_presence_count and
+coarse_reference_presence_accepted and states this distinction. The durable audit independently
+checks complete ordered reference paths and full selected instructions/handlers; no mapping was
+changed by this wording repair. Its opt-in detailed operand schema captures signed switch targets
+and numeric constants while leaving old dossiers unchanged. Fresh92/106/66 audits have0failures;
+six intended lifecycle/control-flow mutations each fail. No runtime failure or protected-native
+behavior was inferred. Existing javap limitation is unchanged.

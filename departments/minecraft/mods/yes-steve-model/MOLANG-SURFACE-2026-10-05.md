@@ -504,3 +504,11 @@ The bounded 2026-10-05 continuation maps ExecutionContext, Expression and ValueC
 calls, records Exception-to-null wrapper behavior and primitive/string branch semantics, and retains
 community creator scripts as future fixture leads only. See
 [MOLANG-EVALUATION-RECOVERY-2026-10-05.md](MOLANG-EVALUATION-RECOVERY-2026-10-05.md).
+
+
+## Concrete evaluator dispatch and lifecycle
+
+Two factories now connect the recovered ExecutionContext/Expression boundary to its concrete
+ExpressionEvaluatorImpl. Single/multi dispatch, finally reset/rethrow, pending-return depth and
+selected call/unary/statement branches are statically evidenced. Scope/loop traversal remains future
+work. See [MOLANG-EVALUATOR-RECOVERY-2026-10-05.md](MOLANG-EVALUATOR-RECOVERY-2026-10-05.md).

@@ -678,7 +678,7 @@ JAR or native implementation were committed. Global binary/source equivalence re
 
 ## 21. Function argument evaluation and conversions
 
-The current map has **270 mappings (233 CONFIRMED / 37 HIGH)**: **105 classes / 160 methods /
+At the previous evaluator-boundary milestone the map had **270 mappings (233 CONFIRMED / 37 HIGH)**: **105 classes / 160 methods /
 5 fields**, with **0 failures**. This pass adds ExecutionContext, Expression and ValueConversions plus
 14 methods, including the two previously ambiguous integer ArgumentCollection accessors.
 Expression has two normalized declaration candidates; the independently grounded getExpression
@@ -696,3 +696,24 @@ exact identities, behavior, source/version separation, failure history and rerun
 [MOLANG-EVALUATION-EVIDENCE-2026-10-05.json](MOLANG-EVALUATION-EVIDENCE-2026-10-05.json) for
 the retained machine-readable dossier. This closes the selected small cluster; broader evaluator
 implementation and runtime checks remain future work.
+
+
+## 22. Concrete evaluator dispatch and lifecycle
+
+The current map has **282 mappings (245 CONFIRMED / 37 HIGH)**: **107 classes / 170 methods /
+5 fields**, with **0 failures**. Two class seeds and ten methods connect evaluator factories to
+single/multi expression dispatch, selected visitor entries and per-instance return/control state.
+Exact finally handlers reset state on normal completion and protected escaping exceptions; they
+rethrow, while prior safe ExecutionContext wrappers separately catch Exception and return null.
+Multi initialization precedes its protected iteration region. Named enum initializer and switch-map
+relations establish RETURN/BREAK/CONTINUE branches without guessed ordinals.
+
+Fresh audits pass **92 + 106 + 66 checks**, zero failures; six targeted durable mutations each fail.
+Foundation now uses **107 seeds**, with **255 MOLANG-domain classes** as structural search hints;
+graph955 / edges3,618 / components19 and15 isolated UNKNOWN classes are unchanged. Previous270rows
+remain intact. Original symbols/global source identity remain unproven. No broad AST/loop/lambda or
+native recovery was added.
+
+See [MOLANG-EVALUATOR-RECOVERY-2026-10-05.md](MOLANG-EVALUATOR-RECOVERY-2026-10-05.md) and
+[MOLANG-EVALUATOR-EVIDENCE-2026-10-05.json](MOLANG-EVALUATOR-EVIDENCE-2026-10-05.json) for the exact
+contracts, source hashes, negative results, cleanup boundaries and reproduction commands.

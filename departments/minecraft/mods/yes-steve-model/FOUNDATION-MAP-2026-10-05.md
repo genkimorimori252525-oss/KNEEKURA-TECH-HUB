@@ -54,7 +54,7 @@ Current exact graph:
 - bundled Concentus component: **131 classes**
 - bundled Gagravarr/VorbisJava component: **86 classes**
 - remaining components: **15 singleton classes**
-- exact semantic seed classes: **105**
+- exact semantic seed classes: **107**
 
 The three large connected components explain nearly the complete Java artifact:
 
@@ -80,14 +80,14 @@ forced into a subsystem.
 | BUNDLED_CONCENTUS | 131 | 1 | 130 |
 | BUNDLED_VORBISJAVA | 86 | 2 | 84 |
 | MODEL | 9 | 4 | 5 |
-| ANIMATION | 50 | 6 | 44 |
-| MOLANG | 249 | 36 | 213 |
+| ANIMATION | 47 | 6 | 41 |
+| MOLANG | 255 | 38 | 217 |
 | RENDERER | 73 | 10 | 63 |
 | NETWORK / DISTRIBUTION | 71 | 22 | 49 |
-| CAPABILITY / STATE | 51 | 4 | 47 |
+| CAPABILITY / STATE | 50 | 4 | 46 |
 | GUI | 43 | 2 | 41 |
 | INTEGRATION | 25 | 6 | 19 |
-| ENTITY PRESENTATION | 130 | 4 | 126 |
+| ENTITY PRESENTATION | 128 | 4 | 124 |
 | EVENT / LIFECYCLE | 10 | 4 | 6 |
 | UTILITY | 3 | 1 | 2 |
 | CORE | 9 | 3 | 6 |
@@ -201,7 +201,7 @@ no longer opaque.
 
 ## 7. Molang is the largest semantic subsystem
 
-MOLANG contains **249 classes** and is the largest first-party/modified subsystem in the exact JAR.
+MOLANG contains **255 classes** and is the largest first-party/modified subsystem in the exact JAR.
 
 Mapped hubs:
 
@@ -216,14 +216,16 @@ Mapped hubs:
 - `QueryBinding` — degree **28**
 - `ContextBinding` — degree **28**
 - `MolangContext` — degree **23**
+- `ExpressionEvaluatorImpl` — degree **33**
+- `ExpressionEvaluator` — degree **17**
 
 This explains why model behavior reaches so many apparently unrelated systems.
 
 Major cross-domain edges include:
 
-- ENTITY_PRESENTATION ↔ MOLANG: **89**
-- ANIMATION ↔ MOLANG: **30**
-- CAPABILITY ↔ MOLANG: **26**
+- ENTITY_PRESENTATION ↔ MOLANG: **92**
+- ANIMATION ↔ MOLANG: **40**
+- CAPABILITY ↔ MOLANG: **28**
 - MOLANG ↔ NETWORK: **14**
 - MOLANG ↔ RENDERER: present as a smaller but direct seam
 
@@ -241,11 +243,11 @@ Mapped presentation anchors:
 
 Important cross-domain edges:
 
-- ENTITY_PRESENTATION ↔ RENDERER: **86**
-- ANIMATION ↔ ENTITY_PRESENTATION: **74**
-- CAPABILITY ↔ ENTITY_PRESENTATION: **49**
-- ENTITY_PRESENTATION ↔ INTEGRATION: **43**
-- ENTITY_PRESENTATION ↔ EVENT_LIFECYCLE: **42**
+- ENTITY_PRESENTATION ↔ RENDERER: **84**
+- ANIMATION ↔ ENTITY_PRESENTATION: **66**
+- CAPABILITY ↔ ENTITY_PRESENTATION: **47**
+- ENTITY_PRESENTATION ↔ INTEGRATION: **42**
+- ENTITY_PRESENTATION ↔ EVENT_LIFECYCLE: **41**
 - ENTITY_PRESENTATION ↔ NETWORK: **27**
 - ENTITY_PRESENTATION ↔ GUI: **26**
 
@@ -281,7 +283,7 @@ MODEL is small and comparatively well constrained:
 
 - classes: **9**
 - semantic seeds: **4**
-- average domain score: **0.83318**
+- average domain score: **0.832965**
 
 Mapped hubs:
 
@@ -431,19 +433,19 @@ Final strongest seams:
 | Domains | Internal edges |
 |---|---:|
 | CAPABILITY ↔ NETWORK | 104 |
-| ENTITY_PRESENTATION ↔ MOLANG | 89 |
-| ENTITY_PRESENTATION ↔ RENDERER | 86 |
-| ANIMATION ↔ ENTITY_PRESENTATION | 74 |
-| CAPABILITY ↔ ENTITY_PRESENTATION | 49 |
+| ENTITY_PRESENTATION ↔ MOLANG | 92 |
+| ENTITY_PRESENTATION ↔ RENDERER | 84 |
+| ANIMATION ↔ ENTITY_PRESENTATION | 66 |
+| CAPABILITY ↔ ENTITY_PRESENTATION | 47 |
 | CORE ↔ ENTITY_PRESENTATION | 43 |
-| ENTITY_PRESENTATION ↔ INTEGRATION | 43 |
-| ENTITY_PRESENTATION ↔ EVENT_LIFECYCLE | 42 |
+| ENTITY_PRESENTATION ↔ INTEGRATION | 42 |
+| ENTITY_PRESENTATION ↔ EVENT_LIFECYCLE | 41 |
+| ANIMATION ↔ MOLANG | 40 |
 | GUI ↔ NETWORK | 38 |
 | CAPABILITY ↔ RENDERER | 31 |
-| ANIMATION ↔ MOLANG | 30 |
+| CAPABILITY ↔ MOLANG | 28 |
 | ENTITY_PRESENTATION ↔ NETWORK | 27 |
 | GUI ↔ RENDERER | 27 |
-| CAPABILITY ↔ MOLANG | 26 |
 | ENTITY_PRESENTATION ↔ GUI | 26 |
 | CAPABILITY ↔ GUI | 22 |
 | NETWORK ↔ RENDERER | 21 |
@@ -526,9 +528,9 @@ See [SEED-RECOVERY-EVIDENCE-2026-10-05.json](SEED-RECOVERY-EVIDENCE-2026-10-05.j
 descriptors, competitor predicates, pinned counterparts, bounded reference paths and unresolved cases.
 
 
-## 21. Molang evaluation seeds
+## 21. Previous Molang evaluation milestone (270 mappings)
 
-The current map has **270 mappings (233 CONFIRMED / 37 HIGH)**: **105 classes / 160 methods /
+At that milestone the map had **270 mappings (233 CONFIRMED / 37 HIGH)**: **105 classes / 160 methods /
 5 fields**, with **0 failures**. This pass adds ExecutionContext, Expression and ValueConversions plus
 14 methods, including the two previously ambiguous integer ArgumentCollection accessors.
 Expression has two normalized declaration candidates; the independently grounded getExpression
@@ -546,3 +548,24 @@ exact identities, behavior, source/version separation, failure history and rerun
 [MOLANG-EVALUATION-EVIDENCE-2026-10-05.json](MOLANG-EVALUATION-EVIDENCE-2026-10-05.json) for
 the retained machine-readable dossier. This closes the selected small cluster; broader evaluator
 implementation and runtime checks remain future work.
+
+
+## 22. Concrete evaluator seeds
+
+The current map has **282 mappings (245 CONFIRMED / 37 HIGH)**: **107 classes / 170 methods /
+5 fields**, with **0 failures**. Two class seeds and ten methods connect evaluator factories to
+single/multi expression dispatch, selected visitor entries and per-instance return/control state.
+Exact finally handlers reset state on normal completion and protected escaping exceptions; they
+rethrow, while prior safe ExecutionContext wrappers separately catch Exception and return null.
+Multi initialization precedes its protected iteration region. Named enum initializer and switch-map
+relations establish RETURN/BREAK/CONTINUE branches without guessed ordinals.
+
+Fresh audits pass **92 + 106 + 66 checks**, zero failures; six targeted durable mutations each fail.
+Foundation now uses **107 seeds**, with **255 MOLANG-domain classes** as structural search hints;
+graph955 / edges3,618 / components19 and15 isolated UNKNOWN classes are unchanged. Previous270rows
+remain intact. Original symbols/global source identity remain unproven. No broad AST/loop/lambda or
+native recovery was added.
+
+See [MOLANG-EVALUATOR-RECOVERY-2026-10-05.md](MOLANG-EVALUATOR-RECOVERY-2026-10-05.md) and
+[MOLANG-EVALUATOR-EVIDENCE-2026-10-05.json](MOLANG-EVALUATOR-EVIDENCE-2026-10-05.json) for the exact
+contracts, source hashes, negative results, cleanup boundaries and reproduction commands.

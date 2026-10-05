@@ -23,9 +23,9 @@
       "ysm_class_files": 955,
       "classfile_major": 61,
       "latest_contract": {
-        "mappings": 270,
-        "class_targets": 105,
-        "exact_methods": 160,
+        "mappings": 282,
+        "class_targets": 107,
+        "exact_methods": 170,
         "exact_fields": 5,
         "failures": 0
       },
@@ -41,7 +41,7 @@
         "bundled_concentus_classes": 131,
         "bundled_vorbisjava_classes": 86,
         "unknown_singletons": 15,
-        "semantic_seed_classes": 105,
+        "semantic_seed_classes": 107,
         "index": "departments/minecraft/mods/yes-steve-model/FOUNDATION-MAP-INDEX-2026-10-05.json"
       }
     }
@@ -343,6 +343,58 @@
       }
     ],
     "community_mapping_promotions": 0,
+    "source_artifact_equivalence": "NOT_ESTABLISHED"
+  },
+  "molang_evaluator_continuation": {
+    "baseline_commit": "e333e96aa7ee1fa10884cc5b9dc156a4ee847584",
+    "evidence": "MOLANG-EVALUATOR-EVIDENCE-2026-10-05.json",
+    "semantic_additions": {
+      "classes": 2,
+      "methods": 10
+    },
+    "source_tracks": [
+      {
+        "role": "OFFICIAL_RELEASE_LINE_SOURCE_CANDIDATE",
+        "repository": "YesSteveModel/YesSteveModel",
+        "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+        "path": "src/main/java/com/elfmcys/yesstevemodel/molang/runtime/ExpressionEvaluator.java",
+        "sha256": "59382efe582411212e7abb825c0fd4a41baa62c47c7070d089582de540ff3842",
+        "url": "https://github.com/YesSteveModel/YesSteveModel/blob/f184edabd1b5115ce5a24cb6d155ba5a669f5ba6/src/main/java/com/elfmcys/yesstevemodel/molang/runtime/ExpressionEvaluator.java"
+      },
+      {
+        "role": "OFFICIAL_RELEASE_LINE_SOURCE_CANDIDATE",
+        "repository": "YesSteveModel/YesSteveModel",
+        "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+        "path": "src/main/java/com/elfmcys/yesstevemodel/molang/runtime/binding/ObjectBinding.java",
+        "sha256": "0c7fe74f15d38260b2d4de616927685968e1922ee028957ac4732ff9f7e4fabb",
+        "url": "https://github.com/YesSteveModel/YesSteveModel/blob/f184edabd1b5115ce5a24cb6d155ba5a669f5ba6/src/main/java/com/elfmcys/yesstevemodel/molang/runtime/binding/ObjectBinding.java"
+      },
+      {
+        "role": "OFFICIAL_RELEASE_LINE_SOURCE_CANDIDATE",
+        "repository": "YesSteveModel/YesSteveModel",
+        "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+        "path": "src/main/java/com/elfmcys/yesstevemodel/molang/runtime/ExpressionEvaluatorImpl.java",
+        "sha256": "b1f5667dd9fc2e6b61d46fba8f66bc9ab51854e555fc192561ea552654febc2e",
+        "url": "https://github.com/YesSteveModel/YesSteveModel/blob/f184edabd1b5115ce5a24cb6d155ba5a669f5ba6/src/main/java/com/elfmcys/yesstevemodel/molang/runtime/ExpressionEvaluatorImpl.java"
+      },
+      {
+        "role": "OFFICIAL_RELEASE_LINE_SOURCE_CANDIDATE",
+        "repository": "YesSteveModel/YesSteveModel",
+        "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+        "path": "src/main/java/com/elfmcys/yesstevemodel/molang/parser/ast/UnaryExpression.java",
+        "sha256": "eb1b2764d6ac9fb5fbe532d20a353ef161bb2152ae1b7fc037628438a94a8da9",
+        "url": "https://github.com/YesSteveModel/YesSteveModel/blob/f184edabd1b5115ce5a24cb6d155ba5a669f5ba6/src/main/java/com/elfmcys/yesstevemodel/molang/parser/ast/UnaryExpression.java"
+      },
+      {
+        "role": "OFFICIAL_RELEASE_LINE_SOURCE_CANDIDATE",
+        "repository": "YesSteveModel/YesSteveModel",
+        "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+        "path": "src/main/java/com/elfmcys/yesstevemodel/molang/parser/ast/StatementExpression.java",
+        "sha256": "598f132ef19f68f48358785f3ede7a6d3894617cb93006b8025568e923c79186",
+        "url": "https://github.com/YesSteveModel/YesSteveModel/blob/f184edabd1b5115ce5a24cb6d155ba5a669f5ba6/src/main/java/com/elfmcys/yesstevemodel/molang/parser/ast/StatementExpression.java"
+      }
+    ],
+    "community_evidence": "Previously pinned Chinese creator/compatibility sources reused as fixture/provenance leads; no new exact-version primary clue needed and no community mapping promotions.",
     "source_artifact_equivalence": "NOT_ESTABLISHED"
   }
 }

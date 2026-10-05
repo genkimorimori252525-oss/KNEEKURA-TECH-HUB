@@ -16,7 +16,7 @@ from scan_ysm_265 import parse_class
 
 BOUNDATTRS = {}
 
-def parse_bounded(raw):
+def parse_bounded(raw, detailed_operands=False):
     b=io.BytesIO(raw)
     def u(n): return int.from_bytes(b.read(n),'big')
     assert u(4)==0xcafebabe
@@ -42,6 +42,9 @@ def parse_bounded(raw):
             nt=cp[x[2]]
             return dict(name=utf(nt[1]),descriptor=utf(nt[2]),bootstrap_index=x[1],cp_tag=18)
         if x[0]==8:return dict(string=utf(x[1]),cp_tag=8)
+        if detailed_operands and x[0] in (3,4,5,6):
+            value=struct.unpack({3:'>i',4:'>f',5:'>q',6:'>d'}[x[0]],x[1])[0]
+            return dict(cp_tag=x[0],value=value)
         return dict(cp_tag=x[0])
     u(2);owner=utf(cp[u(2)][1]);u(2)
     for _ in range(u(2)):u(2)
@@ -76,10 +79,18 @@ def parse_bounded(raw):
                             lo=int.from_bytes(code[p+4:p+8],'big',signed=True);hi=int.from_bytes(code[p+8:p+12],'big',signed=True);length=p-pos+12+4*(hi-lo+1)
                         else:length=p-pos+8+8*int.from_bytes(code[p+4:p+8],'big')
                     inst=dict(offset=start,opcode=hex(op))
+                    if detailed_operands and op in (0x10,0x11):inst['immediate']=int.from_bytes(code[pos+1:pos+length],'big',signed=True)
+                    if detailed_operands and op in (0xaa,0xab):
+                        inst['switch_default']=start+int.from_bytes(code[p:p+4],'big',signed=True)
+                        if op==0xaa:
+                            inst['switch_cases']={str(k):start+int.from_bytes(code[p+12+4*(k-lo):p+16+4*(k-lo)],'big',signed=True) for k in range(lo,hi+1)}
+                        else:
+                            inst['switch_cases']={str(int.from_bytes(code[q:q+4],'big',signed=True)):start+int.from_bytes(code[q+4:q+8],'big',signed=True) for q in range(p+8,pos+length,8)}
                     if op in [*range(0x99,0xa9),0xc6,0xc7]:inst['branch_target']=start+int.from_bytes(code[pos+1:pos+3],'big',signed=True)
                     if op in (0xc8,0xc9):inst['branch_target']=start+int.from_bytes(code[pos+1:pos+5],'big',signed=True)
                     if op in [*range(0xb2,0xbb),0xbb,0xbd,0xc0,0xc1]:inst['reference']=ref(int.from_bytes(code[pos+1:pos+3],'big'))
                     if op in (0x12,0x13):inst['reference']=ref(code[pos+1] if op==0x12 else int.from_bytes(code[pos+1:pos+3],'big'))
+                    if detailed_operands and op==0x14:inst['reference']=ref(int.from_bytes(code[pos+1:pos+3],'big'))
                     ops.append(inst);pos+=length
                 assert pos==len(code)
                 rec['instructions']=ops
@@ -129,7 +140,7 @@ def main():
                 c=parse_class(z.read(n));classes[c['name']]=c
         support=evidence.get('bounded_dependency_support',[])
         owners={c['owner'] for c in evidence['classes']} | {m['owner'] for m in evidence['members']+support}
-        bounded={owner:parse_bounded(z.read(owner+'.class')) for owner in sorted(owners)}
+        bounded={owner:parse_bounded(z.read(owner+'.class'),evidence.get('detailed_operands',False)) for owner in sorted(owners)}
     checks=[]
     for row in evidence['classes']:
         owner=row['owner'];actual=classes[owner];expected=row['declaration']
