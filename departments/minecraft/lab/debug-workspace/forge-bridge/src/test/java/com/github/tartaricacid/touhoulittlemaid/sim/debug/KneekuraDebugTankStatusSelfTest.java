@@ -31,8 +31,8 @@ public final class KneekuraDebugTankStatusSelfTest {
                 && cleared.recipeHash().equals(view.recipeHash()), "cleared presentation retains only historical expiry metadata");
         status.reset();
         check(status.sample(null, server, 124_000_000_000L, true, false).reason().equals("UNREGISTERED"), "new owner binding does not reuse old metadata");
-        System.out.println("TANK_STATUS_INTEROP:" + drawn.json());
-        System.out.println("TANK_STATUS_INTEROP:" + new KneekuraDebugTankStatus().sample(null, server, 0L, true, false).json());
+        System.out.println("TANK_STATUS_INTEROP:" + new com.google.gson.Gson().toJson(drawn.json()));
+        System.out.println("TANK_STATUS_INTEROP:" + new com.google.gson.Gson().toJson(new KneekuraDebugTankStatus().sample(null, server, 0L, true, false).json()));
         System.out.println("Tank status clock self-test: 14 checks passed");
     }
 }

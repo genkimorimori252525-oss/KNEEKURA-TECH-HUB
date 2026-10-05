@@ -50,3 +50,12 @@ test('stored evidence, another clock, expired and mismatched recipes do not beco
   assert.equal(build({observations:[expired]}).presentation.reason,'EXPIRED');
   assert.equal(build({observations:[row, {...expired,observationId:'obs:2',writerSeq:2,gameTime:101}]}).presentation.eligible.value,false);
 });
+
+test('production Gson omitted optional metadata at startup does not reject later valid status',()=>{
+  const startup={...row,observationId:'obs:startup',writerSeq:1,payload:{schema:'kneekura.tank-presentation-status/v1',
+    requested:false,registered:false,eligible:false,drawSubmitted:false,brightness:false,reason:'UNREGISTERED',motionEnabled:false,statusSuppressedTotal:0}};
+  const missing=build({observations:[startup]});assert.equal(missing.geometry.value,null);assert.equal(missing.geometry.status,'NOT_CAPTURED');
+  assert.equal(missing.presentation.recipeHash.status,'NOT_CAPTURED');assert.equal(missing.presentation.reportedRemainingMs.status,'NOT_CAPTURED');
+  const drawn={...row,observationId:'obs:drawn',writerSeq:2};assert.equal(build({observations:[startup,drawn]}).presentation.drawSubmitted.value,true);
+  assert.throws(()=>build({observations:[{...startup,payload:{...startup.payload,registered:true}}]}),/STATUS/);
+});
