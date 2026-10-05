@@ -15,6 +15,21 @@ test('active scoped owner exposes hashes and incomplete target certainty only',a
  const {validateControlState}=await api();const f=state();const v=validateControlState(f.prepared,f.receipt,f.status,{now:f.now});
  assert.equal(v.installedReceiptHash,f.receipt.receiptHash);assert.equal(v.fullTargetAttestation,'NOT_ESTABLISHED');assert.equal(JSON.stringify(v).includes('/private/'),false);
 });
+
+test('fresh lease budget is checked independently of cached preflight and at selected publication',async t=>{
+ const {validateControlState,submitSelectedAction}=await api();const f=state();f.prepared.grant.timeBudgetMs=120000;
+ f.status.leaseRemainingMs=46000;
+ assert.doesNotThrow(()=>validateControlState(f.prepared,f.receipt,f.status,{now:f.now,minRemainingMs:45000}));
+ assert.throws(()=>validateControlState(f.prepared,f.receipt,f.status,{now:f.now+1,minRemainingMs:45000}),/LEASE_BUDGET/);
+ delete f.status.leaseRemainingMs;
+ assert.throws(()=>validateControlState(f.prepared,f.receipt,f.status,{now:f.now,minRemainingMs:45000}),/LEASE_BUDGET/);
+ const live=await preparedOwner(t),file=path.join(live.runDir,'control/owner-status.json');
+ const value=JSON.parse(await readFile(file,'utf8'));value.leaseRemainingMs=4000;value.observedAt=new Date().toISOString();
+ await writeFile(file,JSON.stringify(value));
+ const result=await submitSelectedAction({...live.controlOptions,selectedActionId:'wait',minRemainingMs:1000});
+ const marker=JSON.parse(await readFile(path.join(live.runDir,'control/actions',sha256(result.idempotencyKey),'dispatch.json'),'utf8'));
+ assert.equal(marker.minRemainingMs,1000);
+});
 test('receipt status must bind exact run snapshot envelope world and material',async()=>{
  const {validateControlState}=await api();
  for(const change of ['run','envelope','world','material','hash','scope']){

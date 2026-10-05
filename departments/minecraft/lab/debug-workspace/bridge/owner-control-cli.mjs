@@ -10,6 +10,7 @@ import {actionIdempotencyKey} from './selected-action.mjs';
 import {exportFinalizedExperiment} from './result-export.mjs';
 import {EvidenceRuntime} from '../evidence/runtime.mjs';
 import {watchOwnerTriggerCaptures} from './owner-trigger-source.mjs';
+import {requireTankTimeBudget} from './tank-preflight.mjs';
 
 async function directory(value){
  if(typeof value!=='string'||!path.isAbsolute(value)||path.resolve(value)!==value||await realpath(value)!==value||!(await lstat(value)).isDirectory())throw new Error('OWNER_DIRECTORY_UNSAFE');
@@ -63,6 +64,7 @@ async function run(owner,command){
  if(['submit_action','inspect_action'].includes(command?.operation))fields.push('selectedActionId');
  else if(command?.operation==='request_capture')fields.push('captureIndex');
  else if(command?.operation==='export_result')fields.push('observationIds','timelineObservationIds','visualPacketHash');
+ if(command?.operation==='submit_action'&&Object.hasOwn(command,'timeBudget'))fields.push('timeBudget');
  exactKeys(command,fields,'CONTROL_COMMAND');integer(command.schemaVersion,1,1);hashId(command.requestHash);
  if(!['inspect_owner','submit_action','request_capture','inspect_action','export_result','request_cleanup','inspect_cleanup','watch_triggers'].includes(command.operation))throw new Error('UNSUPPORTED_CONTROL_OPERATION');
  const p=await ownerScope(owner,command),base={schemaVersion:1,operation:command.operation,requestHash:command.requestHash,runtimeAttestation:'NOT_ESTABLISHED'};
@@ -76,7 +78,8 @@ async function run(owner,command){
  if(command.operation==='request_cleanup'){const result=await requestOwnerCleanup(options);return {...base,status:result.status};}
  if(command.operation==='inspect_cleanup'){const result=await inspectOwnerCleanup(options);return {...base,status:result.reportedStatus,recordedStatus:result.recordedStatus,evidenceHashes:result.evidenceHashes,dispatchAllowed:false};}
  if(command.operation==='submit_action'){
-  const result=await submitSelectedAction({...options,selectedActionId:command.selectedActionId});
+  const result=await submitSelectedAction({...options,selectedActionId:command.selectedActionId,
+   minRemainingMs:Object.hasOwn(command,'timeBudget')?requireTankTimeBudget(command.timeBudget):0});
   return {...base,status:result.status,selectedActionId:command.selectedActionId};
  }
  if(command.operation==='request_capture'){
