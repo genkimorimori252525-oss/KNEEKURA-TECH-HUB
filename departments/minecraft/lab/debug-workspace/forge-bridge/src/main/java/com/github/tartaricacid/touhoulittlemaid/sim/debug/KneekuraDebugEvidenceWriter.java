@@ -45,6 +45,9 @@ public final class KneekuraDebugEvidenceWriter {
     private record QueuedRow(String line, CompletableFuture<String> durable, KneekuraDebugImageArtifact image) { }
     private static final ArrayBlockingQueue<QueuedRow> QUEUE =
             new ArrayBlockingQueue<>(QUEUE_CAPACITY);
+    // One coalesced low-priority row, outside the existing evidence queue. Sequence is assigned at claim.
+    private static JsonObject pendingTankStatus;
+    private static long tankStatusSuppressedTotal;
     private static final long CLOCK_ORIGIN_NANOS = System.nanoTime();
     private static final Instant CLOCK_ORIGIN_WALL = Instant.now();
     @Nullable
@@ -69,6 +72,22 @@ public final class KneekuraDebugEvidenceWriter {
     private static volatile boolean writerBusy;
 
     private KneekuraDebugEvidenceWriter() {
+    }
+
+    /** Render callers never open a file; an established heartbeat writer is required. */
+    static void recordTankStatus(KneekuraDebugEnv.Config config, long arenaEpoch, long localTick,
+            Long gameTime, JsonObject payload) {
+        synchronized (LOCK) {
+            if (config == null || !config.enabled() || broken || !accepting || sealed || out == null
+                    || !config.identityKey().equals(identityKey)) return;
+            try {
+                writeObservationLocked(config, localTick, gameTime, "L0", "TANK_PRESENTATION_STATUS",
+                        "GLOBAL_HEALTH", null, "CLIENT", "TankView.sample", payload.deepCopy(), arenaEpoch, null);
+            } catch (IOException error) {
+                // Optional status cannot poison the existing writer.
+                tankStatusSuppressedTotal++;
+            }
+        }
     }
 
     public static void maybeClientHeartbeat(
@@ -366,7 +385,7 @@ public final class KneekuraDebugEvidenceWriter {
         }
 
         while (System.nanoTime() < deadline) {
-            if (QUEUE.isEmpty() && !writerBusy) {
+            if (QUEUE.isEmpty() && pendingTankStatus == null && !writerBusy) {
                 break;
             }
             try {
@@ -378,7 +397,7 @@ public final class KneekuraDebugEvidenceWriter {
         }
 
         synchronized (LOCK) {
-            boolean clean = !broken && QUEUE.isEmpty() && !writerBusy;
+            boolean clean = !broken && QUEUE.isEmpty() && pendingTankStatus == null && !writerBusy;
             try {
                 if (out != null) {
                     out.flush();
@@ -396,7 +415,7 @@ public final class KneekuraDebugEvidenceWriter {
             }
 
             String fileName = file == null ? null : file.toString();
-            int remaining = QUEUE.size();
+            int remaining = QUEUE.size() + (pendingTankStatus == null ? 0 : 1);
             closeQuietlyLocked();
 
             return new FlushResult(
@@ -457,7 +476,8 @@ public final class KneekuraDebugEvidenceWriter {
             return;
         }
 
-        long nextSeq = ++seq;
+        boolean tankStatus = "TANK_PRESENTATION_STATUS".equals(lane);
+        long nextSeq = tankStatus ? 0L : ++seq;
         String writerId = writerId();
         Instant observedAt = Instant.now();
 
@@ -527,6 +547,12 @@ public final class KneekuraDebugEvidenceWriter {
 
         String line = GSON.toJson(row);
         int bytes = line.getBytes(StandardCharsets.UTF_8).length;
+        if (tankStatus) {
+            if (bytes > 8192 || QUEUE.remainingCapacity() == 0) { tankStatusSuppressedTotal++; return; }
+            if (pendingTankStatus != null) tankStatusSuppressedTotal++;
+            pendingTankStatus = row;
+            return; // Neither successful nor suppressed status changes heartbeat clocks or evidence-drop counts.
+        }
         boolean accepted = false;
 
         if (bytes <= MAX_ROW_BYTES) {
@@ -558,7 +584,7 @@ public final class KneekuraDebugEvidenceWriter {
             return;
         }
 
-        if (out != null && (!QUEUE.isEmpty() || writerBusy)) {
+        if (out != null && (!QUEUE.isEmpty() || pendingTankStatus != null || writerBusy)) {
             throw new IOException(
                     "cannot switch evidence identity while queued rows remain");
         }
@@ -574,6 +600,8 @@ public final class KneekuraDebugEvidenceWriter {
         sealed = false;
         writerBusy = false;
         QUEUE.clear();
+        pendingTankStatus = null;
+        tankStatusSuppressedTotal = 0L;
 
         Path dir = config.evidenceRawDir();
         Files.createDirectories(dir);
@@ -610,8 +638,17 @@ public final class KneekuraDebugEvidenceWriter {
     /** Dequeue, busy ownership and exact output capture share the identity/shutdown lock. */
     private static ClaimedRow claimQueuedRow() {
         synchronized (LOCK) {
-            if (broken || (sealed && QUEUE.isEmpty())) return null;
+            if (broken || (sealed && QUEUE.isEmpty() && pendingTankStatus == null)) return null;
             QueuedRow row = QUEUE.poll();
+            if (row == null && pendingTankStatus != null) {
+                var status = pendingTankStatus;
+                pendingTankStatus = null;
+                long assigned = ++seq;
+                status.addProperty("writerSeq", assigned);
+                status.addProperty("observationId", "obs:" + writerId() + ":" + assigned);
+                status.getAsJsonObject("payload").addProperty("writerStatusSuppressedTotal", tankStatusSuppressedTotal);
+                row = new QueuedRow(GSON.toJson(status), null, null);
+            }
             if (row == null) return null;
             writerBusy = true;
             return new ClaimedRow(row, out, file);
@@ -622,7 +659,7 @@ public final class KneekuraDebugEvidenceWriter {
         while (true) {
             ClaimedRow claimed = claimQueuedRow();
             if (claimed == null) {
-                if (broken || (sealed && QUEUE.isEmpty())) return;
+                if (broken || (sealed && QUEUE.isEmpty() && pendingTankStatus == null)) return;
                 try { Thread.sleep(10L); }
                 catch (InterruptedException e) { Thread.currentThread().interrupt(); return; }
                 continue;

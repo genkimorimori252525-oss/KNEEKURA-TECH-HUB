@@ -52,6 +52,13 @@ public final class KneekuraDebugClientBootstrap {
     private KneekuraDebugClientBootstrap() {
     }
 
+    static void sampleTankStatus(boolean submitted) {
+        if (!envResolved || disabled || config == null) return;
+        var mc = Minecraft.getInstance();
+        KneekuraDebugTankPresentation.sampleStatus(config, mc.getSingleplayerServer(), tickCounter,
+                mc.level == null ? null : mc.level.getGameTime(), mc.level != null && mc.getConnection() != null, submitted);
+    }
+
     @SubscribeEvent
     public static void onClientTick(TickEvent.ClientTickEvent event) {
         if (event.phase != TickEvent.Phase.END || disabled) {

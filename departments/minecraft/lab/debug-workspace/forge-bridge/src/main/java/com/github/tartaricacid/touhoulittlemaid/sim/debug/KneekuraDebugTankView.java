@@ -52,6 +52,7 @@ public final class KneekuraDebugTankView {
                     && mc.level.dimension().location().toString().equals("minecraft:overworld");
             // LightTexture.tick marks the native lightmap dirty even while server/client game ticks are paused.
             if (LIGHTMAP.update(bright, mc.level != null)) mc.gameRenderer.lightTexture().tick();
+            KneekuraDebugClientBootstrap.sampleTankStatus(false);
         }
 
         @SubscribeEvent
@@ -84,6 +85,7 @@ public final class KneekuraDebugTankView {
             }
             buffers.endBatch(RenderType.lines());
             pose.popPose();
+            KneekuraDebugClientBootstrap.sampleTankStatus(true);
         }
         private static void line(VertexConsumer consumer, PoseStack pose, double x0, double y0, double z0, double x1, double y1, double z1) {
             Vector3f normal = new Vector3f((float)(x1-x0), (float)(y1-y0), (float)(z1-z0)).normalize();
