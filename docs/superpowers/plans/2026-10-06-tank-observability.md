@@ -10,7 +10,7 @@
 
 **Spec:** [改善設計](../specs/2026-10-06-tank-observability-design.md)
 
-状態: 2026-10-06承認後、T1〜T5のsource実装・関連回帰と単一全体レビューの指摘修正を完了。基準HEAD `07c34216319400ddfa3d1a99f7b9970bf8857190`。T6は進行中。[受入記録](../../../departments/minecraft/lab/docs/KNEEKURA_TANK_WORKBENCH_ACCEPTANCE.md)に実際の成功・失敗・未取得を記載する。world/observer/区間全体のpresentationを既存証拠で完全照合できない比較はINCONCLUSIVE。実機品質維持と最終CIは未確認。
+状態: 2026-10-06承認後、T1〜T5のsource実装・関連回帰と単一全体レビューの指摘修正を完了。基準HEAD `07c34216319400ddfa3d1a99f7b9970bf8857190`。T6の有限表示診断・未取得項目の記録を完了し、最終レビュー/文書HEAD CIを確認中。[受入記録](../../../departments/minecraft/lab/docs/KNEEKURA_TANK_WORKBENCH_ACCEPTANCE.md)に実際の成功・失敗・未取得を記載する。world/observer/区間全体のpresentationを既存証拠で完全照合できない比較はINCONCLUSIVE。実機4試行は完了したが、最初のserver tick p95比7.178で登録予算超過。品質維持は未完了。最終文書HEAD CIはPR94に記録する。
 同日の軽量監査を反映済み。観測への干渉、表示条件、残lease、表示間引きの4点を必須のテスト・受入条件へ追加した。非劣化の実証はT6まで未完了。
 実装はT1→T2→T3→T4→T5→T6を同一セッションで順次進め、全体の独立レビューを最後に一度行う方式を推奨する。packetの相互依存が強く、taskごとの大量の別セッション化は不要。
 
@@ -131,13 +131,15 @@
 
 **Files:** 作成 `L/docs/KNEEKURA_TANK_WORKBENCH_ACCEPTANCE.md`。変更 `L/docs/KNEEKURA_REGISTERED_TANK_PRESENTATION.md`、`departments/minecraft/CURRENT-HANDOFF-2026-10-04.md`。証拠本体は既存のprivate保存先。
 
-- [ ] 正式元save/複製baseline/source/build/resourceをhashで固定し、原本を保全した試行を準備する。T2で格子ONと必要観測のpreflightを確認し、画像と記録の時刻を結ぶ。
-- [ ] 最小実機ケースを実施する: (a)格子ON→期限終了、(b)移動→停止/壁で停止した候補→再移動、(c)複数弾が停止しても元時刻の期限まで経路を保持、(d)A/B同条件と意図しない条件差。未取得のケースは未検証として残し、正常ケースへ読み替えない。
-- [ ] 同じfixture・対象・camera条件で格子OFF/明るさ補正OFFの実画像を取得する。格子ONや補正ONとの対照で、格子による遮蔽や補正に隠れる照明差を点検する。各表示条件とidentity/tickを記録し、表示診断を通常の外観A/Bの合格根拠に混ぜない。通常A/Bは両側とも補正なしの同条件に揃える。
-- [ ] 観測費用を、同一save/optionsで順序を反転した有限回数の比較として計測する。grid ON/OFF、新status通知ON/OFFをそれぞれ比較し、CPU、frame時間とserver tick処理時間のp50/p95/p99、heartbeat間隔、lane別証拠drop/status抑制数、記録量、実験準備時間、packetサイズを記録する。取得方法と計測自体の費用を明記し、heartbeat間隔をtick処理時間の代替にしない。必要な計測が取得不能ならNOT_CAPTUREDとして非劣化の受入を未完了にする。GPU readbackを通常測定へ混ぜず、GPU完了時間とは表現しない。cold outlierと観測上限も報告する。
-- [ ] T1のheartbeat/drop非干渉、T2の開始直前の予算不足拒否、T4の表示選択に依存しない集計を受入記録へ結ぶ。事前登録した性能予算を超えた場合は原因を調べ、品質維持の受入を完了扱いにしない。都合の悪い試行を除外して再試行だけで合格にしない。
-- [ ] 必要な関連回帰を実行する: `npm run test:motion-decision`、`npm run test:visual-evidence`、`npm run test:visual-capture`、`npm run test:result-export`、`npm run test:bridge-owner-prelaunch`、`npm run test:bridge-owner-control`、genuine Forge/runtime API。新taskのテストは各既存scriptに接続済みとする。
-- [ ] 全体差分の独立レビューを最後に一度行い、指摘の必要修正は同じレビューで確認する。最終HEADの既存source CI/pytest/pinned MOD buildを確認し、Draftと引き継ぎへ成功・未取得・限界を反映する。
+- [x] 正式元save/複製baseline/source/build/resourceをhashで固定し、原本を保全した試行を準備する。T2で格子ONと必要観測のpreflightを確認し、画像と記録の時刻を結ぶ。
+- [x] 最小実機ケースを実施する: (a)格子ON→期限終了、(b)移動→停止/壁で停止した候補→再移動、(c)複数弾が停止しても元時刻の期限まで経路を保持、(d)A/B同条件と意図しない条件差。未取得のケースは未検証として残し、正常ケースへ読み替えない。
+- [x] 同じfixture・対象・camera条件で格子OFF/明るさ補正OFFの実画像を取得する。格子ONや補正ONとの対照で、格子による遮蔽や補正に隠れる照明差を点検する。各表示条件とidentity/tickを記録し、表示診断を通常の外観A/Bの合格根拠に混ぜない。通常A/Bは両側とも補正なしの同条件に揃える。
+- [x] 観測費用を、同一save/optionsで順序を反転した有限回数の比較として計測する。grid ON/OFF、新status通知ON/OFFをそれぞれ比較し、CPU、frame時間とserver tick処理時間のp50/p95/p99、heartbeat間隔、lane別証拠drop/status抑制数、記録量、実験準備時間、packetサイズを記録する。取得方法と計測自体の費用を明記し、heartbeat間隔をtick処理時間の代替にしない。必要な計測が取得不能ならNOT_CAPTUREDとして非劣化の受入を未完了にする。GPU readbackを通常測定へ混ぜず、GPU完了時間とは表現しない。cold outlierと観測上限も報告する。
+- [x] T1のheartbeat/drop非干渉、T2の開始直前の予算不足拒否、T4の表示選択に依存しない集計を受入記録へ結ぶ。事前登録した性能予算を超えた場合は原因を調べ、品質維持の受入を完了扱いにしない。都合の悪い試行を除外して再試行だけで合格にしない。
+- [x] 必要な関連回帰を実行する: `npm run test:motion-decision`、`npm run test:visual-evidence`、`npm run test:visual-capture`、`npm run test:result-export`、`npm run test:bridge-owner-prelaunch`、`npm run test:bridge-owner-control`、genuine Forge/runtime API。新taskのテストは各既存scriptに接続済みとする。
+- [x] 全体差分の独立レビューを最後に一度行い、指摘の必要修正を同じレビューで確認した。実機producer c511c9fのsource CI/pytest/pinned MOD buildはSUCCESS。Draft PR94と引き継ぎに成功・未取得・限界を反映した。最終文書HEADのCI結果は再commitによる自己参照を避け、PR94の最終検証欄を正本として照合する。
+
+T6進捗の[x]は有限試行と未取得記録の処理を示す。自律移動/複数弾/完全A/B/status ON-OFF/格子単独費用は未確認。性能予算超過を含め、品質維持の受入を完了扱いにしない。
 
 **受入:** 通知による既存観測への干渉、表示による見落とし、残時間不足、間引きによる集計の偏りの4項目を証拠付きで判定する。unit/CI成功だけで実機の品質維持まで検証済みとはしない。
 
