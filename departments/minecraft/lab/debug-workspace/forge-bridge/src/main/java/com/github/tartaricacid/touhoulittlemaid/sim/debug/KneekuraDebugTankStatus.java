@@ -11,7 +11,11 @@ public final class KneekuraDebugTankStatus {
             boolean drawSubmitted, boolean brightness, String reason, String recipeHash,
             KneekuraDebugTankPresentationRecipe.Geometry geometry, Long reportedRemainingMs,
             long statusSuppressedTotal) {
-        JsonObject json() { return GSON.toJsonTree(this).getAsJsonObject(); }
+        JsonObject json() {
+            JsonObject payload = GSON.toJsonTree(this).getAsJsonObject();
+            payload.addProperty("motionEnabled", KneekuraDebugMotionOverlayRuntime.armed());
+            return payload;
+        }
     }
     private long lastSentNanos = Long.MIN_VALUE;
     private long lastDrawNanos = Long.MIN_VALUE;

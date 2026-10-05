@@ -74,6 +74,17 @@ public final class KneekuraDebugEvidenceWriter {
     private KneekuraDebugEvidenceWriter() {
     }
 
+    /** Reference clock for current owner status, in the same process/origin as raw observations. */
+    static JsonObject currentClockSample() {
+        JsonObject clock = new JsonObject();
+        clock.addProperty("domain", "JVM_PROCESS_MONOTONIC");
+        clock.addProperty("processId", ProcessHandle.current().pid());
+        if (PROCESS_STARTED_AT != null) clock.addProperty("processStartedAt", PROCESS_STARTED_AT.toString());
+        clock.addProperty("monotonicOriginWallClock", CLOCK_ORIGIN_WALL.toString());
+        clock.addProperty("monotonicElapsedNanos", Math.max(0L, System.nanoTime() - CLOCK_ORIGIN_NANOS));
+        return clock;
+    }
+
     /** Render callers never open a file; an established heartbeat writer is required. */
     static void recordTankStatus(KneekuraDebugEnv.Config config, long arenaEpoch, long localTick,
             Long gameTime, JsonObject payload) {

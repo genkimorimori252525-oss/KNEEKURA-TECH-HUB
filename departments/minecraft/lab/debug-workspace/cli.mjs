@@ -7,6 +7,7 @@ import {terrainQueryFromArgs} from './terrain-query-cli.mjs';
 import {queryDecisionDrilldown} from './evidence/decision-drilldown.mjs';
 import {buildRetainedDecisionPresentation} from './evidence/decision-presentation.mjs';
 import {writeDecisionPresentationArtifact} from './evidence/decision-view.mjs';
+import {readTankContext,readTankJsonFile,prepareTankResourceFile} from './tank-cli.mjs';
 import {
   doctor,
   launchDebugRun,
@@ -65,6 +66,21 @@ function print(value) {
 async function main() {
   const command = process.argv[2] || 'status';
   const { file, config } = await loadConfig();
+
+  if(command==='tank-resource') {
+    const required=name=>{const value=argValue(name);if(!value||value.startsWith('--'))throw new Error('MISSING_'+name);return value;};
+    print(await prepareTankResourceFile({savedFile:required('--saved-recipe'),profileFile:required('--profile'),output:required('--output')}));return;
+  }
+  if(command==='tank-status'||command==='tank-preflight') {
+    const required=name=>{const value=argValue(name);if(!value||value.startsWith('--'))throw new Error('MISSING_'+name);return value;};
+    const current=await readCurrent(config,ROOT),runtime=evidenceRuntimeFromCurrent(current);await runtime.init();
+    const observations=await runtime.store.readObservations();
+    const context=await readTankContext({current,observations,arenaEpoch:Number(required('--arena-epoch')),
+      expectedRecipeHash:argValue('--recipe-hash'),worldBinding:argValue('--world-binding')?await readTankJsonFile(required('--world-binding')):undefined,
+      profile:command==='tank-preflight'?await readTankJsonFile(required('--profile')):undefined,
+      timeBudget:command==='tank-preflight'?await readTankJsonFile(required('--time-budget')):undefined});
+    print(command==='tank-status'?context.status:context.preflight);return;
+  }
 
   if (command === 'doctor') {
     const result = await doctor(config, ROOT);

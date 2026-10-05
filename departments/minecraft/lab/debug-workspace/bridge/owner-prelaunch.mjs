@@ -8,6 +8,7 @@ import { loadBridgeRegistration, validateTechHubBinding } from './registration.m
 import { buildOwnerGrantIntent, buildGrantFromSealedRequest } from './owner-grant.mjs';
 import { validateOwnerTriggerConfig } from './owner-trigger-config.mjs';
 import { TANK_ROTATION_PERMISSION, buildTankRotationIntent, validateTankRotation } from './owner-tank-rotation.mjs';
+export {buildTankPresentationResource} from './tank-resource.mjs';
 
 export const OWNER_ENV_FILE = 'KNEEKURA_DEBUG_OWNER_ENVELOPE_FILE';
 export const OWNER_ENV_HASH = 'KNEEKURA_DEBUG_OWNER_ENVELOPE_SHA256';

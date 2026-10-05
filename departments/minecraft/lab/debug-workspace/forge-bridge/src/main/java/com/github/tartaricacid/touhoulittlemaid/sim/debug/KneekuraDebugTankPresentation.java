@@ -48,6 +48,7 @@ public final class KneekuraDebugTankPresentation {
                 return;
             }
             KneekuraDebugArenaRuntime.requireCaptureLeaseRemainingOwner(state, 0);
+            statusBinding = new StatusBinding(config.identityKey(), state.arenaEpoch());
             if (config.identityKey().equals(attemptedIdentity)) return;
             attemptedIdentity = config.identityKey();
             clear();
@@ -66,7 +67,6 @@ public final class KneekuraDebugTankPresentation {
             if (!registered.equals(saved)) throw new IllegalArgumentException("TANK_PRESENTATION_WORLD_RESOURCE_MISMATCH");
             var lease = KneekuraDebugArenaRuntime.presentationLeaseOwner(state);
             context = new KneekuraDebugTankPresentationRecipe.Context(registered, server, lease.issuedNanos(), lease.deadlineNanos());
-            statusBinding = new StatusBinding(config.identityKey(), state.arenaEpoch());
         } catch (Exception error) {
             clear();
             // Owner absence during startup is normal; log a failed opt-in only once per run.

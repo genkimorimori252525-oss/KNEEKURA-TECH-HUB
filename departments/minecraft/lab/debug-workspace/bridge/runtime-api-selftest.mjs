@@ -8,6 +8,8 @@ import assert from 'node:assert/strict';
 import {validDecisionSnapshot} from '../evidence/debug-workspace-decision-adapter.mjs';
 import {validOriginalDecisionEvent,originalDecisionData,appendOriginalDecisionEvents} from '../evidence/original-decision-events.mjs';
 import {buildTankStatus} from '../evidence/tank-status.mjs';
+import {buildTankPresentationResource} from './tank-resource.mjs';
+import {sha256,stableJson} from './json.mjs';
 const root=fileURLToPath(new URL('../../',import.meta.url));
 const main=path.join(root,'debug-workspace/forge-bridge/src/main/java/com/github/tartaricacid/touhoulittlemaid/sim/debug');
 const test=path.join(root,'debug-workspace/forge-bridge/src/test/java/com/github/tartaricacid/touhoulittlemaid/sim/debug');
@@ -39,7 +41,7 @@ try {
   'MotionTraceCache','RelatedProjectileTraceCache','MotionOverlayRuntime','MotionOverlayGeometry','MotionOverlay',
   'TerrainQueryRequest','TerrainRuntime','LoadedGroundSource','DecisionBurstRuntime','DecisionAdapterRegistry'];
  const sources=[...names.map(n=>path.join(main,'KneekuraDebug'+n+'.java')),...['Path','Brain','Behavior','OneShot','GateBehavior'].map(n=>path.join(main,'decisionmixin/KneekuraDebug'+n+'DecisionMixin.java')),path.join(main,'decisionmixin/KneekuraDebugScheduledActivityMixin.java'),path.join(main,'decisionmixin/KneekuraDebugNavigationResultMixin.java'),path.join(main,'decisionmixin/KneekuraDebugBrainNavigationMixin.java')];
- const checks=['EvidenceClaim','CaptureWriter','RegisteredWorld','TankPresentation','TankStatus','TankStatusWriter','TankRotation','TankRotationFiles','TankRotationBackend','DecisionSnapshot','TypedMemory','BehaviorControl','BrainActivity','NavigationResult','BrainNavigation','BrainMemorySource','ActivityRequirement','BrainStartLoop','BrainMemoryCheck','BrainStart','BrainComputeCondition','BrainCompute','BrainTickStop','BrainStop','DecisionHooks','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult','TerrainField','SynchedCached','MotionTraceCache','RelatedProjectileTrace','MotionOverlayGeometry','MotionWriter'];
+ const checks=['EvidenceClaim','CaptureWriter','RegisteredWorld','TankPresentation','TankStatus','TankStatusWriter','TankPreflight','TankRotation','TankRotationFiles','TankRotationBackend','DecisionSnapshot','TypedMemory','BehaviorControl','BrainActivity','NavigationResult','BrainNavigation','BrainMemorySource','ActivityRequirement','BrainStartLoop','BrainMemoryCheck','BrainStart','BrainComputeCondition','BrainCompute','BrainTickStop','BrainStop','DecisionHooks','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult','TerrainField','SynchedCached','MotionTraceCache','RelatedProjectileTrace','MotionOverlayGeometry','MotionWriter'];
  const selected=process.env.KNEEKURA_API_SELFTEST_FILTER?.split(',');
  if(selected?.some(n=>!checks.includes(n)))throw new Error('UNKNOWN_API_SELFTEST_FILTER');
  run(executable('javac'),['--release','17','-proc:none','-cp',classpath,'-d',output,...sources,...checks.map(n=>path.join(test,'KneekuraDebug'+n+'SelfTest.java')),path.join(test,'KneekuraDebugDecisionIdentityInterop.java')]);
@@ -47,7 +49,14 @@ try {
   // Vanilla bootstrap can create logs; keep this new check's artifacts in its disposable output.
   const bootstrap=['BrainMemorySource','ActivityRequirement','BrainStartLoop','BrainMemoryCheck','BrainStart','BrainComputeCondition','BrainCompute','BrainTickStop','BrainStop','BrainNavigation','NavigationResult','BrainActivity','BehaviorControl','TypedMemory','PathNeighbors','PathHeap','PathClosed','PathNodes','PathGWrite','PathDistance','EffectiveMalus','GhastReach','TeleportReturn','ProjectileResult'].includes(name);
   const cp=bootstrap?classpath.split(path.delimiter).map(p=>path.resolve(root,p)).join(path.delimiter):classpath;
-  const stdout=run(executable('java'),['-cp',output+path.delimiter+cp,'com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebug'+name+'SelfTest'],{},bootstrap?output:root);
+  const extra=[];
+  if(name==='TankPreflight') {
+   const recipe={v:1,kind:'tank_recipe',dimension:'minecraft:overworld',origin:{x:0,y:64,z:0},dimensions:{width:16,height:8,depth:16},presentation:{gridSpacing:1,mode:'NATIVE'}};
+   const saved={status:'GEOMETRY_VERIFIED',recipe,recipeHash:sha256(stableJson(recipe)),displayMode:'NATIVE'};
+   const capsule=path.join(output,'tank-resource.zip');
+   writeFileSync(capsule,buildTankPresentationResource({saved,profile:{kind:'OBSERVE_GRID',grid:true,brightness:false,motion:false,decisionChannels:[]}}));extra.push(capsule);
+  }
+  const stdout=run(executable('java'),['-cp',output+path.delimiter+cp,'com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebug'+name+'SelfTest',...extra],{},bootstrap?output:root);
    if(name==='TankStatus') {
     const identity={debugSessionId:'s',runId:'r',runSnapshotId:'snap',processEpoch:1,arenaEpoch:0};
     const payloads=stdout.split(/\r?\n/).filter(l=>l.startsWith('TANK_STATUS_INTEROP:')).map(l=>JSON.parse(l.slice('TANK_STATUS_INTEROP:'.length)));

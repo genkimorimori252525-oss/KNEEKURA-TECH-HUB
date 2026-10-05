@@ -39,6 +39,7 @@ export function buildTankStatus({observations,identity,expected={},worldBinding,
         ||typeof p.reason!=='string'||p.reason.length>128
         ||!(p.recipeHash===null||hash(p.recipeHash))||!(p.geometry===null||validTankGeometry(p.geometry))
         ||!(p.reportedRemainingMs===null||Number.isSafeInteger(p.reportedRemainingMs)&&p.reportedRemainingMs>=0&&p.reportedRemainingMs<=120000)
+        ||p.motionEnabled!=null&&typeof p.motionEnabled!=='boolean'
         ||p.drawSubmitted&&!p.eligible||p.eligible&&!p.registered)throw new TypeError('INVALID_TANK_STATUS');
     if(seen.has(r.observationId))throw new TypeError('DUPLICATE_TANK_STATUS');seen.add(r.observationId);
   }
@@ -48,6 +49,7 @@ export function buildTankStatus({observations,identity,expected={},worldBinding,
   return boundedTankPacket({schema:'kneekura.tank-status/v1',identity:id,worldBinding:bindingOf(worldBinding),
     geometry:fact('geometry'),presentation:{requested:fact('requested'),registered:fact('registered'),eligible:fact('eligible'),
       drawSubmitted:fact('drawSubmitted'),brightness:fact('brightness'),recipeHash:fact('recipeHash'),
+      motion:typeof p?.motionEnabled==='boolean'?tankFact(p.motionEnabled,'SAMPLED_OBSERVED',latest):tankFact(null,'NOT_CAPTURED'),
       pixelEvidence:tankFact(null,'NOT_CAPTURED',null,['DRAW_SUBMISSION_DOES_NOT_PROVE_VISIBLE_PIXELS']),
       reportedRemainingMs:latest?tankFact(p.reportedRemainingMs,'SAMPLED_OBSERVED',latest,['REFERENCE_ONLY_NOT_AUTHORITY']):tankFact(null,'NOT_CAPTURED'),
       reason:mismatch?'RECIPE_MISMATCH':p?.reason??'NOT_CAPTURED',freshness:freshness(latest,expected)},
