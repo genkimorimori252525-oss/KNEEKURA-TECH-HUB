@@ -23,9 +23,9 @@
       "ysm_class_files": 955,
       "classfile_major": 61,
       "latest_contract": {
-        "mappings": 253,
-        "class_targets": 102,
-        "exact_methods": 146,
+        "mappings": 270,
+        "class_targets": 105,
+        "exact_methods": 160,
         "exact_fields": 5,
         "failures": 0
       },
@@ -41,7 +41,7 @@
         "bundled_concentus_classes": 131,
         "bundled_vorbisjava_classes": 86,
         "unknown_singletons": 15,
-        "semantic_seed_classes": 102,
+        "semantic_seed_classes": 105,
         "index": "departments/minecraft/mods/yes-steve-model/FOUNDATION-MAP-INDEX-2026-10-05.json"
       }
     }
@@ -288,5 +288,61 @@
     "No private YSM JAR, mapping output, or decrypted artifact is committed.",
     "Community and Reddit material seeds hypotheses only; it never promotes a claim without source/history/runtime evidence.",
     "Chinese-language reverse-engineering reports are used only for ecosystem existence and safe architectural reconnaissance; no anti-debug/protection-bypass/decryption procedure, key, modified constant, or DRM-removal recipe is retained."
-  ]
+  ],
+  "molang_evaluation_continuation": {
+    "baseline_commit": "225428d05fae385d1ada3b5ba9f6ee74c86761b0",
+    "evidence": "MOLANG-EVALUATION-EVIDENCE-2026-10-05.json",
+    "semantic_additions": {
+      "classes": 3,
+      "methods": 14
+    },
+    "community_sources": [
+      {
+        "repository": "Anan1a/YSM-molang-functions",
+        "revision": "1c027e56d1ade400ed6abb3d23068b2b6d1a469c",
+        "url": "https://github.com/Anan1a/YSM-molang-functions",
+        "status": "INSPECTED_PRIMARY_CREATOR_SOURCE_BEHAVIORAL_LEAD_ONLY",
+        "version": {
+          "ysm": "unspecified",
+          "minecraft": "unspecified",
+          "loader": "unspecified"
+        }
+      },
+      {
+        "repository": "lin114810/ysm-vivecraft-compat",
+        "revision": "04ab2ad83a8f19f3746079c2cfe823431a191a26",
+        "url": "https://github.com/lin114810/ysm-vivecraft-compat",
+        "status": "INSPECTED_PRIMARY_COMPAT_SOURCE_NEGATIVE_SPECULATIVE_CROSS_VERSION",
+        "version": {
+          "ysm": "2.5.1 in gradle.properties; README 2.5.1+; mods.toml [2.5,)",
+          "minecraft": "1.21.1",
+          "loader": "NeoForge 21.1.172 configured"
+        }
+      },
+      {
+        "repository": "Fox-TerribleCoding/YES_SlashBlade",
+        "revision": "3b47cae18149a7a2de551e819ad9a00aae305aaf",
+        "url": "https://github.com/Fox-TerribleCoding/YES_SlashBlade",
+        "status": "INSPECTED_PRIMARY_COMPAT_SOURCE_PRECISE_CROSS_VERSION_ADJACENT_NEGATIVE_FOR_CLUSTER",
+        "version": {
+          "ysm": "2.6.5-neoforge+mc1.21.1-release.jar; README fingerprint prefix B285C73D4EC010D9, 63463229 bytes, community-reported",
+          "minecraft": "1.21.1",
+          "loader": "NeoForge 21.1.x; build.ps1 lists 21.1.248"
+        }
+      },
+      {
+        "repository": null,
+        "revision": null,
+        "url": "https://ysm.cfpa.team/wiki/molang/script/",
+        "status": "PRIMARY_DOCUMENTATION_INDEX_SNIPPET_ONLY_DIRECT_FETCH_TIMEOUT",
+        "version": {
+          "ysm": "unspecified on retrieved snippet",
+          "minecraft": "unspecified",
+          "loader": "unspecified"
+        }
+      }
+    ],
+    "community_mapping_promotions": 0,
+    "source_artifact_equivalence": "NOT_ESTABLISHED"
+  }
 }

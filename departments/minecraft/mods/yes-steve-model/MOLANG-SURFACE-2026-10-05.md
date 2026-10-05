@@ -495,3 +495,12 @@ Not established:
 - hostile/untrusted-expression robustness.
 
 Those require separate runtime or focused security/performance work.
+
+
+## Exact-artifact evaluation continuation
+
+The bounded 2026-10-05 continuation maps ExecutionContext, Expression and ValueConversions and
+14 methods. It resolves two integer ArgumentCollection overloads through their terminal converter
+calls, records Exception-to-null wrapper behavior and primitive/string branch semantics, and retains
+community creator scripts as future fixture leads only. See
+[MOLANG-EVALUATION-RECOVERY-2026-10-05.md](MOLANG-EVALUATION-RECOVERY-2026-10-05.md).

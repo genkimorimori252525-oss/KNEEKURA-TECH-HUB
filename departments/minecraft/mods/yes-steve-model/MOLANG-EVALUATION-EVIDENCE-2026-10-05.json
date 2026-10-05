@@ -1,0 +1,2743 @@
+{
+  "format": "kneekura.ysm-bounded-seed-evidence.v1",
+  "recorded_at": "2026-10-05",
+  "artifact": {
+    "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+    "sha1": "151ac7b24da8beeca1a20864565743cfd77af286",
+    "size": 63269843,
+    "version_id": "Zqooxsd2",
+    "classes": 955
+  },
+  "source_tracks": [
+    {
+      "role": "OFFICIAL_RELEASE_LINE_SOURCE_CANDIDATE",
+      "repository": "YesSteveModel/YesSteveModel",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+      "path": "src/main/java/com/elfmcys/yesstevemodel/molang/runtime/ExecutionContext.java",
+      "sha256": "4567c411c88fa5328804167f0acb04f994ace8035a2931cb20725b0a7e3a99a0",
+      "url": "https://github.com/YesSteveModel/YesSteveModel/blob/f184edabd1b5115ce5a24cb6d155ba5a669f5ba6/src/main/java/com/elfmcys/yesstevemodel/molang/runtime/ExecutionContext.java"
+    },
+    {
+      "role": "OFFICIAL_RELEASE_LINE_SOURCE_CANDIDATE",
+      "repository": "YesSteveModel/YesSteveModel",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+      "path": "src/main/java/com/elfmcys/yesstevemodel/molang/parser/ast/Expression.java",
+      "sha256": "a2f12a252eadd8fe587cd35e5885f8fab914bab6a5ba01bd515652b05edab006",
+      "url": "https://github.com/YesSteveModel/YesSteveModel/blob/f184edabd1b5115ce5a24cb6d155ba5a669f5ba6/src/main/java/com/elfmcys/yesstevemodel/molang/parser/ast/Expression.java"
+    },
+    {
+      "role": "OFFICIAL_RELEASE_LINE_SOURCE_CANDIDATE",
+      "repository": "YesSteveModel/YesSteveModel",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+      "path": "src/main/java/com/elfmcys/yesstevemodel/molang/parser/ast/ExpressionVisitor.java",
+      "sha256": "75492015cb2373e6a5fe8043ea0c7a9b52681a77bf4168f238e89a9bb11e4659",
+      "url": "https://github.com/YesSteveModel/YesSteveModel/blob/f184edabd1b5115ce5a24cb6d155ba5a669f5ba6/src/main/java/com/elfmcys/yesstevemodel/molang/parser/ast/ExpressionVisitor.java"
+    },
+    {
+      "role": "OFFICIAL_RELEASE_LINE_SOURCE_CANDIDATE",
+      "repository": "YesSteveModel/YesSteveModel",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+      "path": "src/main/java/com/elfmcys/yesstevemodel/molang/runtime/Function.java",
+      "sha256": "66e683e3b7e342e5fb5706c67409e88bcc3cb243eb89486ae85bc0597f44fff4",
+      "url": "https://github.com/YesSteveModel/YesSteveModel/blob/f184edabd1b5115ce5a24cb6d155ba5a669f5ba6/src/main/java/com/elfmcys/yesstevemodel/molang/runtime/Function.java"
+    },
+    {
+      "repository": "YesSteveModel/YesSteveModel",
+      "role": "OFFICIAL_RELEASE_LINE_SOURCE_CANDIDATE",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+      "path": "src/main/java/com/elfmcys/yesstevemodel/molang/runtime/binding/ValueConversions.java",
+      "sha256": "3eb91e8a0c75cb893fed4a2607e3e9e680e2c94e88ad0b655822b1200ac365ff",
+      "url": "https://github.com/YesSteveModel/YesSteveModel/blob/f184edabd1b5115ce5a24cb6d155ba5a669f5ba6/src/main/java/com/elfmcys/yesstevemodel/molang/runtime/binding/ValueConversions.java"
+    },
+    {
+      "repository": "YesSteveModel/YesSteveModel",
+      "role": "OFFICIAL_RELEASE_LINE_SOURCE_CANDIDATE",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+      "path": "src/main/java/com/elfmcys/yesstevemodel/molang/parser/ast/StringExpression.java",
+      "sha256": "cc1d016a328939bd9a41e76f3da37f7a898bb71eae123167d71b1b86bc5a3386",
+      "url": "https://github.com/YesSteveModel/YesSteveModel/blob/f184edabd1b5115ce5a24cb6d155ba5a669f5ba6/src/main/java/com/elfmcys/yesstevemodel/molang/parser/ast/StringExpression.java"
+    },
+    {
+      "repository": "YesSteveModel/YesSteveModel",
+      "role": "OFFICIAL_RELEASE_LINE_SOURCE_CANDIDATE",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+      "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/molang/util/StringPool.java",
+      "sha256": "49d6d71d5279fe98ba6622384d78cc3a22c35474d8d7fb5eedf470f8d931b363",
+      "url": "https://github.com/YesSteveModel/YesSteveModel/blob/f184edabd1b5115ce5a24cb6d155ba5a669f5ba6/src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/molang/util/StringPool.java"
+    },
+    {
+      "repository": "OpenYSM/OpenYSM",
+      "role": "COMPARATIVE_ONLY",
+      "revision": "a515d44686af77155a311b2a592327ca5d45a658",
+      "path": "common/src/main/java/com/elfmcys/yesstevemodel/molang/runtime/binding/ValueConversions.java",
+      "sha256": "d6a9f08f7eda62c33d534ecd0528cbce48d96cd4e1af72c3f115819285914f74",
+      "url": "https://github.com/OpenYSM/OpenYSM/blob/a515d44686af77155a311b2a592327ca5d45a658/common/src/main/java/com/elfmcys/yesstevemodel/molang/runtime/binding/ValueConversions.java"
+    }
+  ],
+  "source_artifact_equivalence": "NOT_ESTABLISHED",
+  "preserved_global_negative_finding": "SOURCE_ARTIFACT_DIVERGENCE",
+  "confidence_policy": "Community evidence supplies hypotheses only. Exact declarations/relations and bounded Java behavior support semantic correspondence to pinned official source; no original-symbol or whole-build equivalence claim.",
+  "class_shape_predicate": "Order-independent access/normalized-descriptor member multisets erase YSM internal names; Expression has two shape candidates and requires the confirmed ArgumentCollection getExpression return relation to resolve uniquely.",
+  "classes": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExecutionContext",
+      "confidence": "CONFIRMED",
+      "foundation_domain": "MOLANG",
+      "original_symbol_proven": false,
+      "source_artifact_divergence": false,
+      "declaration": {
+        "access": 1537,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": [],
+        "methods": [
+          {
+            "access": 1025,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Ljava/lang/Object;"
+          },
+          {
+            "access": 1025,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;)Ljava/lang/Object;"
+          },
+          {
+            "access": 1025,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/Iterable;Z)Ljava/lang/Object;"
+          },
+          {
+            "access": 1,
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;)Ljava/lang/Object;"
+          },
+          {
+            "access": 1,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "(Ljava/lang/Iterable;Z)Ljava/lang/Object;"
+          }
+        ]
+      },
+      "role_evidence": "Entity-bound raw-expression evaluation interface; default wrappers catch Exception, log failure and return null.",
+      "competitor_evidence": {
+        "population": 955,
+        "normalized_declaration_matches": [
+          "com/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo"
+        ]
+      },
+      "nesting_attributes": {}
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.parser.ast.Expression",
+      "confidence": "CONFIRMED",
+      "foundation_domain": "MOLANG",
+      "original_symbol_proven": false,
+      "source_artifact_divergence": false,
+      "declaration": {
+        "access": 1537,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": [],
+        "methods": [
+          {
+            "access": 1025,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/Oo0000oo0oo0OoO00000O0O0;)Ljava/lang/Object;"
+          }
+        ]
+      },
+      "role_evidence": "AST visitor input interface returned by the already confirmed Function.ArgumentCollection.getExpression; semantic identity needs this relation because normalized declaration has two candidates.",
+      "competitor_evidence": {
+        "population": 955,
+        "normalized_declaration_matches": [
+          "com/elfmcys/yesstevemodel/OoOoo0oOoOoo0OOoo0O0o0OO",
+          "com/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0"
+        ],
+        "after_confirmed_return_type_relation": [
+          "com/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0"
+        ]
+      },
+      "nesting_attributes": {},
+      "return_type_anchor": {
+        "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(I)Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;",
+        "semantic_role": "CONFIRMED Function.ArgumentCollection.getExpression"
+      }
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO0O00ooOo0OO0oooOoo0Oo0",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.binding.ValueConversions",
+      "confidence": "CONFIRMED",
+      "foundation_domain": "MOLANG",
+      "original_symbol_proven": false,
+      "source_artifact_divergence": false,
+      "declaration": {
+        "access": 49,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": [],
+        "methods": [
+          {
+            "access": 1,
+            "name": "<init>",
+            "descriptor": "()V"
+          },
+          {
+            "access": 9,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/Object;)Z"
+          },
+          {
+            "access": 9,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "(Ljava/lang/Object;)F"
+          },
+          {
+            "access": 9,
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "(Ljava/lang/Object;)I"
+          },
+          {
+            "access": 9,
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "(Ljava/lang/Object;)D"
+          },
+          {
+            "access": 9,
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "(Ljava/lang/Object;)Ljava/lang/String;"
+          },
+          {
+            "access": 9,
+            "name": "Ooooo0oooO0oooOOOoO0000O",
+            "descriptor": "(Ljava/lang/Object;)I"
+          }
+        ]
+      },
+      "role_evidence": "Object-to-Boolean/float/int/double/String/pooled-String conversions with exact null, NaN, primitive and pooling call paths matching pinned official source.",
+      "competitor_evidence": {
+        "predicate": "exact class access49, Object superclass,no interfaces,no fields, public ()V constructor and public-static converter descriptor multiset [Object->Z,F,I,D,String,I], plus converter behavior below",
+        "declaration_candidate_count": 1,
+        "population": 955,
+        "matches": [
+          "com/elfmcys/yesstevemodel/OO0O00ooOo0OO0oooOoo0Oo0"
+        ]
+      },
+      "nesting_attributes": {}
+    }
+  ],
+  "members": [
+    {
+      "mapping_id": "ysm265.method.execution-context-entity",
+      "owner": "com/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()Ljava/lang/Object;",
+      "access": 1025,
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExecutionContext",
+      "semantic_member": "entity",
+      "confidence": "CONFIRMED",
+      "source_artifact_divergence": false,
+      "behavior_evidence": "Sole public abstract no-argument Object method; official generic TEntity entity() counterpart.",
+      "reference_path": []
+    },
+    {
+      "mapping_id": "ysm265.method.execution-context-eval-single-expression-unsafe",
+      "owner": "com/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;)Ljava/lang/Object;",
+      "access": 1025,
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExecutionContext",
+      "semantic_member": "evalSingleExpressionUnsafe",
+      "confidence": "CONFIRMED",
+      "source_artifact_divergence": false,
+      "behavior_evidence": "Abstract single-expression entry called directly by the safe default wrapper; exact typed Expression argument anchors identity.",
+      "reference_path": []
+    },
+    {
+      "mapping_id": "ysm265.method.execution-context-eval-multi-expression-unsafe",
+      "owner": "com/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/lang/Iterable;Z)Ljava/lang/Object;",
+      "access": 1025,
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExecutionContext",
+      "semantic_member": "evalMultiExpressionUnsafe",
+      "confidence": "CONFIRMED",
+      "source_artifact_divergence": false,
+      "behavior_evidence": "Abstract Iterable plus boolean returnThrough entry called by the multi-expression safe wrapper; pinned official source counterpart.",
+      "reference_path": []
+    },
+    {
+      "mapping_id": "ysm265.method.execution-context-eval-single-expression",
+      "owner": "com/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo",
+      "name": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;)Ljava/lang/Object;",
+      "access": 1,
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExecutionContext",
+      "semantic_member": "evalSingleExpression",
+      "confidence": "CONFIRMED",
+      "source_artifact_divergence": false,
+      "behavior_evidence": "Default single-expression wrapper invokes abstract unsafe entry; exception range0..7 catches java/lang/Exception at8, logs failure and null-returns.",
+      "reference_path": [
+        {
+          "offset": 2,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;)Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/YesSteveModel",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lorg/apache/logging/log4j/Logger;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 12,
+          "opcode": "0x12",
+          "reference": {
+            "string": "Failed to evaluate molang expression.",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 15,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "org/apache/logging/log4j/Logger",
+            "name": "debug",
+            "descriptor": "(Ljava/lang/String;Ljava/lang/Throwable;)V",
+            "cp_tag": 11
+          }
+        }
+      ],
+      "code_sha256": "ea8120a6f10db56e4dca7956f3bc6c8f8ee687617d96db8d908a5fd82be7de33",
+      "exception_handlers": [
+        {
+          "start": 0,
+          "end": 7,
+          "handler": 8,
+          "catch": "java/lang/Exception"
+        }
+      ],
+      "simple_opcodes": [
+        "0x2a",
+        "0x2b",
+        "0xb9",
+        "0xb0",
+        "0x4d",
+        "0xb2",
+        "0x12",
+        "0x2c",
+        "0xb9",
+        "0x1",
+        "0xb0"
+      ]
+    },
+    {
+      "mapping_id": "ysm265.method.execution-context-eval-multi-expression",
+      "owner": "com/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Ljava/lang/Iterable;Z)Ljava/lang/Object;",
+      "access": 1,
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExecutionContext",
+      "semantic_member": "evalMultiExpression",
+      "confidence": "CONFIRMED",
+      "source_artifact_divergence": false,
+      "behavior_evidence": "Default multi-expression wrapper forwards Iterable and returnThrough boolean; exception range0..8 catches java/lang/Exception at9, logs failure and null-returns.",
+      "reference_path": [
+        {
+          "offset": 3,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/Iterable;Z)Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/YesSteveModel",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lorg/apache/logging/log4j/Logger;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 13,
+          "opcode": "0x12",
+          "reference": {
+            "string": "Failed to evaluate molang expression.",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "org/apache/logging/log4j/Logger",
+            "name": "debug",
+            "descriptor": "(Ljava/lang/String;Ljava/lang/Throwable;)V",
+            "cp_tag": 11
+          }
+        }
+      ],
+      "code_sha256": "c5b1ed3bbb232c1f68bf7f6b0b0461a843d5a236cabaf56abcacee5667d53c6a",
+      "exception_handlers": [
+        {
+          "start": 0,
+          "end": 8,
+          "handler": 9,
+          "catch": "java/lang/Exception"
+        }
+      ],
+      "simple_opcodes": [
+        "0x2a",
+        "0x2b",
+        "0x1c",
+        "0xb9",
+        "0xb0",
+        "0x4e",
+        "0xb2",
+        "0x12",
+        "0x2d",
+        "0xb9",
+        "0x1",
+        "0xb0"
+      ]
+    },
+    {
+      "mapping_id": "ysm265.method.expression-visit",
+      "owner": "com/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/Oo0000oo0oo0OoO00000O0O0;)Ljava/lang/Object;",
+      "access": 1025,
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.parser.ast.Expression",
+      "semantic_member": "visit",
+      "confidence": "CONFIRMED",
+      "source_artifact_divergence": false,
+      "behavior_evidence": "Sole abstract visitor dispatch contract; exact visitor type differs from the alternate normalized candidate whose parameter is ExecutionContext. Confirmed ArgumentCollection raw-expression return relation selects this owner.",
+      "reference_path": []
+    },
+    {
+      "mapping_id": "ysm265.method.value-conversions-as-boolean",
+      "owner": "com/elfmcys/yesstevemodel/OO0O00ooOo0OO0oooOoo0Oo0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "access": 9,
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.binding.ValueConversions",
+      "semantic_member": "asBoolean",
+      "confidence": "CONFIRMED",
+      "source_artifact_divergence": false,
+      "behavior_evidence": "null false; Boolean.booleanValue; Number.floatValue returns false for NaN and both signed zeros, true for other nonzero values; any other object true.",
+      "competitor_evidence": {
+        "population_classes": 955,
+        "population_methods": 6451,
+        "initial_predicate": "flags plus YSM-normalized descriptor",
+        "initial_candidate_count": 1,
+        "final_predicate": "initial predicate plus entire bounded opcode/branch-target sequence and reference path; YSM reference owners/member names erased (descriptors normalized), Java references preserved",
+        "final_candidate_count": 1,
+        "matches": [
+          {
+            "owner": "com/elfmcys/yesstevemodel/OO0O00ooOo0OO0oooOoo0Oo0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "access": 9
+          }
+        ]
+      },
+      "reference_path": [
+        {
+          "offset": 7,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "java/lang/Boolean",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "java/lang/Boolean",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 17,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/Boolean",
+            "name": "booleanValue",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 22,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "java/lang/Number",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 29,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "java/lang/Number",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 32,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/Number",
+            "name": "floatValue",
+            "descriptor": "()F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 37,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Float",
+            "name": "isNaN",
+            "descriptor": "(F)Z",
+            "cp_tag": 10
+          }
+        }
+      ],
+      "code_sha256": "101bf402fe9d7b6b4a431dbb973cd325a172a4e181eed78d954469c6b35e4972",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xc7",
+          "branch_target": 6
+        },
+        {
+          "offset": 4,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 5,
+          "opcode": "0xac"
+        },
+        {
+          "offset": 6,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 7,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "java/lang/Boolean",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 10,
+          "opcode": "0x99",
+          "branch_target": 21
+        },
+        {
+          "offset": 13,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 14,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "java/lang/Boolean",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 17,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/Boolean",
+            "name": "booleanValue",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 20,
+          "opcode": "0xac"
+        },
+        {
+          "offset": 21,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 22,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "java/lang/Number",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 25,
+          "opcode": "0x99",
+          "branch_target": 55
+        },
+        {
+          "offset": 28,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 29,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "java/lang/Number",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 32,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/Number",
+            "name": "floatValue",
+            "descriptor": "()F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 35,
+          "opcode": "0x44"
+        },
+        {
+          "offset": 36,
+          "opcode": "0x23"
+        },
+        {
+          "offset": 37,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Float",
+            "name": "isNaN",
+            "descriptor": "(F)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 40,
+          "opcode": "0x9a",
+          "branch_target": 53
+        },
+        {
+          "offset": 43,
+          "opcode": "0x23"
+        },
+        {
+          "offset": 44,
+          "opcode": "0xb"
+        },
+        {
+          "offset": 45,
+          "opcode": "0x95"
+        },
+        {
+          "offset": 46,
+          "opcode": "0x99",
+          "branch_target": 53
+        },
+        {
+          "offset": 49,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 50,
+          "opcode": "0xa7",
+          "branch_target": 54
+        },
+        {
+          "offset": 53,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 54,
+          "opcode": "0xac"
+        },
+        {
+          "offset": 55,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 56,
+          "opcode": "0xac"
+        }
+      ]
+    },
+    {
+      "mapping_id": "ysm265.method.value-conversions-as-float",
+      "owner": "com/elfmcys/yesstevemodel/OO0O00ooOo0OO0oooOoo0Oo0",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Ljava/lang/Object;)F",
+      "access": 9,
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.binding.ValueConversions",
+      "semantic_member": "asFloat",
+      "confidence": "CONFIRMED",
+      "source_artifact_divergence": false,
+      "behavior_evidence": "null +0.0f; Number.floatValue returned except NaN becomes +0.0f (signed zero retained if supplied by Number); Boolean true 1.0f / false +0.0f; other object 1.0f.",
+      "competitor_evidence": {
+        "population_classes": 955,
+        "population_methods": 6451,
+        "initial_predicate": "flags plus YSM-normalized descriptor",
+        "initial_candidate_count": 1,
+        "final_predicate": "initial predicate plus entire bounded opcode/branch-target sequence and reference path; YSM reference owners/member names erased (descriptors normalized), Java references preserved",
+        "final_candidate_count": 1,
+        "matches": [
+          {
+            "owner": "com/elfmcys/yesstevemodel/OO0O00ooOo0OO0oooOoo0Oo0",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "(Ljava/lang/Object;)F",
+            "access": 9
+          }
+        ]
+      },
+      "reference_path": [
+        {
+          "offset": 7,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "java/lang/Number",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "java/lang/Number",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 17,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/Number",
+            "name": "floatValue",
+            "descriptor": "()F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 22,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Float",
+            "name": "isNaN",
+            "descriptor": "(F)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 33,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "java/lang/Boolean",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 40,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "java/lang/Boolean",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 43,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/Boolean",
+            "name": "booleanValue",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        }
+      ],
+      "code_sha256": "a021be547ba150f600680ccd3ed82ec683b4debdd77401bed244e70991447f9d",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xc7",
+          "branch_target": 6
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb"
+        },
+        {
+          "offset": 5,
+          "opcode": "0xae"
+        },
+        {
+          "offset": 6,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 7,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "java/lang/Number",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 10,
+          "opcode": "0x99",
+          "branch_target": 32
+        },
+        {
+          "offset": 13,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 14,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "java/lang/Number",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 17,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/Number",
+            "name": "floatValue",
+            "descriptor": "()F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 20,
+          "opcode": "0x44"
+        },
+        {
+          "offset": 21,
+          "opcode": "0x23"
+        },
+        {
+          "offset": 22,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Float",
+            "name": "isNaN",
+            "descriptor": "(F)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 25,
+          "opcode": "0x9a",
+          "branch_target": 30
+        },
+        {
+          "offset": 28,
+          "opcode": "0x23"
+        },
+        {
+          "offset": 29,
+          "opcode": "0xae"
+        },
+        {
+          "offset": 30,
+          "opcode": "0xb"
+        },
+        {
+          "offset": 31,
+          "opcode": "0xae"
+        },
+        {
+          "offset": 32,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 33,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "java/lang/Boolean",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 36,
+          "opcode": "0x99",
+          "branch_target": 55
+        },
+        {
+          "offset": 39,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 40,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "java/lang/Boolean",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 43,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/Boolean",
+            "name": "booleanValue",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 46,
+          "opcode": "0x99",
+          "branch_target": 53
+        },
+        {
+          "offset": 49,
+          "opcode": "0xc"
+        },
+        {
+          "offset": 50,
+          "opcode": "0xa7",
+          "branch_target": 54
+        },
+        {
+          "offset": 53,
+          "opcode": "0xb"
+        },
+        {
+          "offset": 54,
+          "opcode": "0xae"
+        },
+        {
+          "offset": 55,
+          "opcode": "0xc"
+        },
+        {
+          "offset": 56,
+          "opcode": "0xae"
+        }
+      ]
+    },
+    {
+      "mapping_id": "ysm265.method.value-conversions-as-int",
+      "owner": "com/elfmcys/yesstevemodel/OO0O00ooOo0OO0oooOoo0Oo0",
+      "name": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "(Ljava/lang/Object;)I",
+      "access": 9,
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.binding.ValueConversions",
+      "semantic_member": "asInt",
+      "confidence": "CONFIRMED",
+      "source_artifact_divergence": false,
+      "behavior_evidence": "null 0; Number.intValue directly, without any explicit NaN guard or float/double conversion; Boolean true 1 / false 0; other object 1. Float/Double NaN semantics are inherited from their intValue implementations, not a local isNaN branch.",
+      "competitor_evidence": {
+        "population_classes": 955,
+        "population_methods": 6451,
+        "initial_predicate": "flags plus YSM-normalized descriptor",
+        "initial_candidate_count": 2,
+        "final_predicate": "initial predicate plus entire bounded opcode/branch-target sequence and reference path; YSM reference owners/member names erased (descriptors normalized), Java references preserved",
+        "final_candidate_count": 1,
+        "matches": [
+          {
+            "owner": "com/elfmcys/yesstevemodel/OO0O00ooOo0OO0oooOoo0Oo0",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "(Ljava/lang/Object;)I",
+            "access": 9
+          }
+        ]
+      },
+      "reference_path": [
+        {
+          "offset": 7,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "java/lang/Number",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "java/lang/Number",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 17,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/Number",
+            "name": "intValue",
+            "descriptor": "()I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 22,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "java/lang/Boolean",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 29,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "java/lang/Boolean",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 32,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/Boolean",
+            "name": "booleanValue",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        }
+      ],
+      "code_sha256": "783d1dd3dc0411dfaf418edf245725838c119d4467c099b85723a0611af80862",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xc7",
+          "branch_target": 6
+        },
+        {
+          "offset": 4,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 5,
+          "opcode": "0xac"
+        },
+        {
+          "offset": 6,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 7,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "java/lang/Number",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 10,
+          "opcode": "0x99",
+          "branch_target": 21
+        },
+        {
+          "offset": 13,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 14,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "java/lang/Number",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 17,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/Number",
+            "name": "intValue",
+            "descriptor": "()I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 20,
+          "opcode": "0xac"
+        },
+        {
+          "offset": 21,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 22,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "java/lang/Boolean",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 25,
+          "opcode": "0x99",
+          "branch_target": 44
+        },
+        {
+          "offset": 28,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 29,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "java/lang/Boolean",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 32,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/Boolean",
+            "name": "booleanValue",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 35,
+          "opcode": "0x99",
+          "branch_target": 42
+        },
+        {
+          "offset": 38,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 39,
+          "opcode": "0xa7",
+          "branch_target": 43
+        },
+        {
+          "offset": 42,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 43,
+          "opcode": "0xac"
+        },
+        {
+          "offset": 44,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 45,
+          "opcode": "0xac"
+        }
+      ]
+    },
+    {
+      "mapping_id": "ysm265.method.value-conversions-as-double",
+      "owner": "com/elfmcys/yesstevemodel/OO0O00ooOo0OO0oooOoo0Oo0",
+      "name": "oOOOo0OOO0ooooo0O00OO0o0",
+      "descriptor": "(Ljava/lang/Object;)D",
+      "access": 9,
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.binding.ValueConversions",
+      "semantic_member": "asDouble",
+      "confidence": "CONFIRMED",
+      "source_artifact_divergence": false,
+      "behavior_evidence": "null +0.0d; Number.doubleValue returned except NaN becomes +0.0d (signed zero retained if supplied by Number); Boolean true 1.0d / false +0.0d; other object 1.0d.",
+      "competitor_evidence": {
+        "population_classes": 955,
+        "population_methods": 6451,
+        "initial_predicate": "flags plus YSM-normalized descriptor",
+        "initial_candidate_count": 1,
+        "final_predicate": "initial predicate plus entire bounded opcode/branch-target sequence and reference path; YSM reference owners/member names erased (descriptors normalized), Java references preserved",
+        "final_candidate_count": 1,
+        "matches": [
+          {
+            "owner": "com/elfmcys/yesstevemodel/OO0O00ooOo0OO0oooOoo0Oo0",
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "(Ljava/lang/Object;)D",
+            "access": 9
+          }
+        ]
+      },
+      "reference_path": [
+        {
+          "offset": 7,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "java/lang/Number",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "java/lang/Number",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 17,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/Number",
+            "name": "doubleValue",
+            "descriptor": "()D",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 22,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Double",
+            "name": "isNaN",
+            "descriptor": "(D)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 33,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "java/lang/Boolean",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 40,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "java/lang/Boolean",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 43,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/Boolean",
+            "name": "booleanValue",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        }
+      ],
+      "code_sha256": "6ab2309f9058fef21f019bee1a42554aa1aa09f0f8fe445ea440500a96772f37",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xc7",
+          "branch_target": 6
+        },
+        {
+          "offset": 4,
+          "opcode": "0xe"
+        },
+        {
+          "offset": 5,
+          "opcode": "0xaf"
+        },
+        {
+          "offset": 6,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 7,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "java/lang/Number",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 10,
+          "opcode": "0x99",
+          "branch_target": 32
+        },
+        {
+          "offset": 13,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 14,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "java/lang/Number",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 17,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/Number",
+            "name": "doubleValue",
+            "descriptor": "()D",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 20,
+          "opcode": "0x48"
+        },
+        {
+          "offset": 21,
+          "opcode": "0x27"
+        },
+        {
+          "offset": 22,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Double",
+            "name": "isNaN",
+            "descriptor": "(D)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 25,
+          "opcode": "0x9a",
+          "branch_target": 30
+        },
+        {
+          "offset": 28,
+          "opcode": "0x27"
+        },
+        {
+          "offset": 29,
+          "opcode": "0xaf"
+        },
+        {
+          "offset": 30,
+          "opcode": "0xe"
+        },
+        {
+          "offset": 31,
+          "opcode": "0xaf"
+        },
+        {
+          "offset": 32,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 33,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "java/lang/Boolean",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 36,
+          "opcode": "0x99",
+          "branch_target": 55
+        },
+        {
+          "offset": 39,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 40,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "java/lang/Boolean",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 43,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/Boolean",
+            "name": "booleanValue",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 46,
+          "opcode": "0x99",
+          "branch_target": 53
+        },
+        {
+          "offset": 49,
+          "opcode": "0xf"
+        },
+        {
+          "offset": 50,
+          "opcode": "0xa7",
+          "branch_target": 54
+        },
+        {
+          "offset": 53,
+          "opcode": "0xe"
+        },
+        {
+          "offset": 54,
+          "opcode": "0xaf"
+        },
+        {
+          "offset": 55,
+          "opcode": "0xf"
+        },
+        {
+          "offset": 56,
+          "opcode": "0xaf"
+        }
+      ]
+    },
+    {
+      "mapping_id": "ysm265.method.value-conversions-as-string",
+      "owner": "com/elfmcys/yesstevemodel/OO0O00ooOo0OO0oooOoo0Oo0",
+      "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+      "descriptor": "(Ljava/lang/Object;)Ljava/lang/String;",
+      "access": 9,
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.binding.ValueConversions",
+      "semantic_member": "asString",
+      "confidence": "CONFIRMED",
+      "source_artifact_divergence": false,
+      "behavior_evidence": "candidate StringExpression instance: call its ()String getter; String instance: return cast object; all others including null: aconst_null. Does not stringify other objects.",
+      "competitor_evidence": {
+        "population_classes": 955,
+        "population_methods": 6451,
+        "initial_predicate": "flags plus YSM-normalized descriptor",
+        "initial_candidate_count": 1,
+        "final_predicate": "initial predicate plus entire bounded opcode/branch-target sequence and reference path; YSM reference owners/member names erased (descriptors normalized), Java references preserved",
+        "final_candidate_count": 1,
+        "matches": [
+          {
+            "owner": "com/elfmcys/yesstevemodel/OO0O00ooOo0OO0oooOoo0Oo0",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "(Ljava/lang/Object;)Ljava/lang/String;",
+            "access": 9
+          }
+        ]
+      },
+      "reference_path": [
+        {
+          "offset": 1,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oo0OoOoOoOo0oOoooo0oOOo0",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 8,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oo0OoOoOoOo0oOoooo0oOOo0",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo0OoOoOoOo0oOoooo0oOOo0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 16,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "java/lang/String",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 23,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "java/lang/String",
+            "cp_tag": 7
+          }
+        }
+      ],
+      "code_sha256": "0bf9337e2156c8dc0d1fa0bfa673ee53696d462c040287e393c4e2f3fb91d129",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oo0OoOoOoOo0oOoooo0oOOo0",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x99",
+          "branch_target": 15
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oo0OoOoOoOo0oOoooo0oOOo0",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo0OoOoOoOo0oOoooo0oOOo0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 15,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 16,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "java/lang/String",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 19,
+          "opcode": "0x99",
+          "branch_target": 27
+        },
+        {
+          "offset": 22,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 23,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "java/lang/String",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 26,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 27,
+          "opcode": "0x1"
+        },
+        {
+          "offset": 28,
+          "opcode": "0xb0"
+        }
+      ]
+    },
+    {
+      "mapping_id": "ysm265.method.value-conversions-as-pooled-string",
+      "owner": "com/elfmcys/yesstevemodel/OO0O00ooOo0OO0oooOoo0Oo0",
+      "name": "Ooooo0oooO0oooOOOoO0000O",
+      "descriptor": "(Ljava/lang/Object;)I",
+      "access": 9,
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.binding.ValueConversions",
+      "semantic_member": "asPooledString",
+      "confidence": "CONFIRMED",
+      "source_artifact_divergence": false,
+      "behavior_evidence": "candidate StringExpression instance: call its ()I getter; String instance: call candidate StringPool (String)I static method; all others including null: getstatic candidate StringPool I field. Fallback is the EMPTY field, not an iconst_0 literal.",
+      "competitor_evidence": {
+        "population_classes": 955,
+        "population_methods": 6451,
+        "initial_predicate": "flags plus YSM-normalized descriptor",
+        "initial_candidate_count": 2,
+        "final_predicate": "initial predicate plus entire bounded opcode/branch-target sequence and reference path; YSM reference owners/member names erased (descriptors normalized), Java references preserved",
+        "final_candidate_count": 1,
+        "matches": [
+          {
+            "owner": "com/elfmcys/yesstevemodel/OO0O00ooOo0OO0oooOoo0Oo0",
+            "name": "Ooooo0oooO0oooOOOoO0000O",
+            "descriptor": "(Ljava/lang/Object;)I",
+            "access": 9
+          }
+        ]
+      },
+      "reference_path": [
+        {
+          "offset": 1,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oo0OoOoOoOo0oOoooo0oOOo0",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 8,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oo0OoOoOoOo0oOoooo0oOOo0",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo0OoOoOoOo0oOoooo0oOOo0",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "()I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 16,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "java/lang/String",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 23,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "java/lang/String",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 26,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOO0OO0oO0oooo00OooooO0O",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;)I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 30,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOO0OO0oO0oooo00OooooO0O",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        }
+      ],
+      "code_sha256": "d9a5fc414db5d4bc9d67d686358a2d116476f002ab86f416d6488cb3a77b0eea",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oo0OoOoOoOo0oOoooo0oOOo0",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x99",
+          "branch_target": 15
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oo0OoOoOoOo0oOoooo0oOOo0",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo0OoOoOoOo0oOoooo0oOOo0",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "()I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0xac"
+        },
+        {
+          "offset": 15,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 16,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "java/lang/String",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 19,
+          "opcode": "0x99",
+          "branch_target": 30
+        },
+        {
+          "offset": 22,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 23,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "java/lang/String",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 26,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOO0OO0oO0oooo00OooooO0O",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;)I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 29,
+          "opcode": "0xac"
+        },
+        {
+          "offset": 30,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOO0OO0oO0oooo00OooooO0O",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 33,
+          "opcode": "0xac"
+        }
+      ]
+    },
+    {
+      "mapping_id": "ysm265.method.molang-argument-collection-get-as-pooled-string",
+      "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)I",
+      "access": 1,
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.Function$ArgumentCollection",
+      "semantic_member": "getAsPooledString",
+      "confidence": "CONFIRMED",
+      "source_artifact_divergence": false,
+      "behavior_evidence": "Read arguments List element at index, cast candidate Expression, invoke candidate ExecutionContext.evalSingleExpression -> Object, invoke the independently resolved asPooledString converter, ireturn.",
+      "competitor_evidence": {
+        "population_classes": 955,
+        "population_methods": 6451,
+        "initial_predicate": "public flags plus normalized (YSM,int)int descriptor",
+        "initial_candidate_count": 2,
+        "without_terminal_semantics_predicate": "initial plus normalized opcodes/reference path, erased YSM member names",
+        "without_terminal_semantics_count": 2,
+        "final_predicate": "initial plus opcodes/reference path and exact independently resolved converter target at offset19",
+        "final_candidate_count": 1,
+        "matches": [
+          {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)I",
+            "access": 1
+          }
+        ]
+      },
+      "reference_path": [
+        {
+          "offset": 2,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Ljava/util/List;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/List",
+            "name": "get",
+            "descriptor": "(I)Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;)Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 19,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OO0O00ooOo0OO0oooOoo0Oo0",
+            "name": "Ooooo0oooO0oooOOOoO0000O",
+            "descriptor": "(Ljava/lang/Object;)I",
+            "cp_tag": 10
+          }
+        }
+      ],
+      "code_sha256": "a5c9681a5c101d821d3f55328d7006a7de5df721f00a95fb024414245d4f2067",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 1,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 2,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Ljava/util/List;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 5,
+          "opcode": "0x1c"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/List",
+            "name": "get",
+            "descriptor": "(I)Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;)Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 19,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OO0O00ooOo0OO0oooOoo0Oo0",
+            "name": "Ooooo0oooO0oooOOOoO0000O",
+            "descriptor": "(Ljava/lang/Object;)I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 22,
+          "opcode": "0xac"
+        }
+      ]
+    },
+    {
+      "mapping_id": "ysm265.method.molang-argument-collection-get-as-int",
+      "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "name": "oOOOo0OOO0ooooo0O00OO0o0",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)I",
+      "access": 1,
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.Function$ArgumentCollection",
+      "semantic_member": "getAsInt",
+      "confidence": "CONFIRMED",
+      "source_artifact_divergence": false,
+      "behavior_evidence": "Read arguments List element at index, cast candidate Expression, invoke candidate ExecutionContext.evalSingleExpression -> Object, invoke the independently resolved asInt converter, ireturn.",
+      "competitor_evidence": {
+        "population_classes": 955,
+        "population_methods": 6451,
+        "initial_predicate": "public flags plus normalized (YSM,int)int descriptor",
+        "initial_candidate_count": 2,
+        "without_terminal_semantics_predicate": "initial plus normalized opcodes/reference path, erased YSM member names",
+        "without_terminal_semantics_count": 2,
+        "final_predicate": "initial plus opcodes/reference path and exact independently resolved converter target at offset19",
+        "final_candidate_count": 1,
+        "matches": [
+          {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)I",
+            "access": 1
+          }
+        ]
+      },
+      "reference_path": [
+        {
+          "offset": 2,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Ljava/util/List;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/List",
+            "name": "get",
+            "descriptor": "(I)Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;)Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 19,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OO0O00ooOo0OO0oooOoo0Oo0",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "(Ljava/lang/Object;)I",
+            "cp_tag": 10
+          }
+        }
+      ],
+      "code_sha256": "caa973da47f0b12c6ba57d2e198301d603c800136cec070b91170598ec3137f7",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 1,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 2,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Ljava/util/List;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 5,
+          "opcode": "0x1c"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/List",
+            "name": "get",
+            "descriptor": "(I)Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;)Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 19,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OO0O00ooOo0OO0oooOoo0Oo0",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "(Ljava/lang/Object;)I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 22,
+          "opcode": "0xac"
+        }
+      ]
+    }
+  ],
+  "bounded_dependency_support": [
+    {
+      "purpose": "Bounded dependency only; no mapping recommendation",
+      "owner": "com/elfmcys/yesstevemodel/oo0OoOoOoOo0oOoooo0oOOo0",
+      "name": "<init>",
+      "descriptor": "(Ljava/lang/String;)V",
+      "access": 1,
+      "code_sha256": "eff9cc4f7478e616d9af599a7f292973ac63c2e54449ed607856c460fcb77c48",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "java/lang/Object",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 6,
+          "opcode": "0x12",
+          "reference": {
+            "string": "value",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/util/Objects",
+            "name": "requireNonNull",
+            "descriptor": "(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "java/lang/String",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo0OoOoOoOo0oOoooo0oOOo0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Ljava/lang/String;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 17,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 18,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 19,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOO0OO0oO0oooo00OooooO0O",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;)I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 22,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo0OoOoOoOo0oOoooo0oOOo0",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 25,
+          "opcode": "0xb1"
+        }
+      ]
+    },
+    {
+      "purpose": "Bounded dependency only; no mapping recommendation",
+      "owner": "com/elfmcys/yesstevemodel/oo0OoOoOoOo0oOoooo0oOOo0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "code_sha256": "0f5cdc4799996e0209bb41d6911e611ea1618e67c003ef3e10158301018e74d1",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo0OoOoOoOo0oOoooo0oOOo0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Ljava/lang/String;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb0"
+        }
+      ]
+    },
+    {
+      "purpose": "Bounded dependency only; no mapping recommendation",
+      "owner": "com/elfmcys/yesstevemodel/oo0OoOoOoOo0oOoooo0oOOo0",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "()I",
+      "access": 1,
+      "code_sha256": "2d459b467ac0b79bcc0bcad6ca538566d38d28b282cb706a07e5bd7d23d8b1af",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo0OoOoOoOo0oOoooo0oOOo0",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xac"
+        }
+      ]
+    },
+    {
+      "purpose": "Bounded dependency only; no mapping recommendation",
+      "owner": "com/elfmcys/yesstevemodel/oOO0OO0oO0oooo00OooooO0O",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/lang/String;)I",
+      "access": 9,
+      "code_sha256": "78d8406b4ee4d10e2df9ce36345c68d45f21765f86f3c6b7839db13873b93850",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOO0OO0oO0oooo00OooooO0O",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "Ljava/util/concurrent/ConcurrentHashMap;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xba",
+          "reference": {
+            "name": "apply",
+            "descriptor": "()Ljava/util/function/Function;",
+            "bootstrap_index": 0,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/util/concurrent/ConcurrentHashMap",
+            "name": "computeIfAbsent",
+            "descriptor": "(Ljava/lang/Object;Ljava/util/function/Function;)Ljava/lang/Object;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 12,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "java/lang/Integer",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 15,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/Integer",
+            "name": "intValue",
+            "descriptor": "()I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 18,
+          "opcode": "0xac"
+        }
+      ]
+    },
+    {
+      "purpose": "Bounded dependency only; no mapping recommendation",
+      "owner": "com/elfmcys/yesstevemodel/oOO0OO0oO0oooo00OooooO0O",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Ljava/lang/String;)I",
+      "access": 9,
+      "code_sha256": "047b46be81e36ebe736c70cbbd9d4310063e4fc1fdefcc60aa42cd62a6f7a425",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOO0OO0oO0oooo00OooooO0O",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "Ljava/util/concurrent/ConcurrentHashMap;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x12",
+          "reference": {
+            "cp_tag": 3
+          }
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Integer",
+            "name": "valueOf",
+            "descriptor": "(I)Ljava/lang/Integer;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/util/concurrent/ConcurrentHashMap",
+            "name": "getOrDefault",
+            "descriptor": "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 12,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "java/lang/Integer",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 15,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/Integer",
+            "name": "intValue",
+            "descriptor": "()I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 18,
+          "opcode": "0xac"
+        }
+      ]
+    },
+    {
+      "purpose": "Bounded dependency only; no mapping recommendation",
+      "owner": "com/elfmcys/yesstevemodel/oOO0OO0oO0oooo00OooooO0O",
+      "name": "<clinit>",
+      "descriptor": "()V",
+      "access": 8,
+      "code_sha256": "ca1334c657d5fd1bc6f5f17b3dbb0566253ae612db5d4adb9de0743515ca4183",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "java/util/concurrent/atomic/AtomicInteger",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "java/util/concurrent/atomic/AtomicInteger",
+            "name": "<init>",
+            "descriptor": "(I)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb3",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOO0OO0oO0oooo00OooooO0O",
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "Ljava/util/concurrent/atomic/AtomicInteger;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "java/util/concurrent/ConcurrentHashMap",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 15,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "java/util/concurrent/ConcurrentHashMap",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb3",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOO0OO0oO0oooo00OooooO0O",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "Ljava/util/concurrent/ConcurrentHashMap;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 21,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "java/util/concurrent/ConcurrentHashMap",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 24,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 25,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "java/util/concurrent/ConcurrentHashMap",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 28,
+          "opcode": "0xb3",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOO0OO0oO0oooo00OooooO0O",
+            "name": "Ooooo0oooO0oooOOOoO0000O",
+            "descriptor": "Ljava/util/concurrent/ConcurrentHashMap;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 31,
+          "opcode": "0x12",
+          "reference": {
+            "string": "",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 33,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOO0OO0oO0oooo00OooooO0O",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;)I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 36,
+          "opcode": "0xb3",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOO0OO0oO0oooo00OooooO0O",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 39,
+          "opcode": "0xb1"
+        }
+      ]
+    }
+  ],
+  "preserved_negative_competitor_result": {
+    "owner": "com/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0",
+    "normalized_matches": [
+      "com/elfmcys/yesstevemodel/OoOoo0oOoOoo0OOoo0O0o0OO",
+      "com/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0"
+    ],
+    "reason_not_shape_only": "Two interfaces have identical erased flag/descriptor shape. Known raw-expression return type and actual visitor parameter eliminate alternate; no claim of original symbol recovery."
+  },
+  "resolved_prior_ambiguity": {
+    "prior_evidence": "SEED-RECOVERY-EVIDENCE-2026-10-05.json",
+    "integer_accessors": [
+      "getAsPooledString",
+      "getAsInt"
+    ],
+    "proof": "Accessor terminal invokestatic at offset19 selects independently resolved asPooledString or asInt; descriptor alone still admits two candidates."
+  },
+  "scope": "Three new class declarations and fourteen method contracts in the Molang argument/evaluation/conversion cluster. Dependency roles are not promoted. No native/protection/decryption work.",
+  "verification_tool": "tools/audit_seed_recovery_ysm_265.py",
+  "community_reconnaissance": {
+    "date": "2026-10-05",
+    "scope": "Fresh bounded Chinese-language primary-source reconnaissance for Function → ExecutionContext → Expression visitor → ValueConversions, exact target YSM 2.6.5 Forge Minecraft 1.20.1",
+    "baseline": "Read CHINESE-COMMUNITY-OBFUSCATION-RECON-2026-10-05.md; no main-repository edits, builds, commits, publication, or mapping promotions.",
+    "result": "No exact-version artifact symbol confirmation for the chosen evaluator cluster. Useful creator-language fixtures; one speculative hook negative; one precise but cross-version adjacent compatibility source.",
+    "sources": [
+      {
+        "repository": "Anan1a/YSM-molang-functions",
+        "url": "https://github.com/Anan1a/YSM-molang-functions",
+        "branch": "main",
+        "revision": "1c027e56d1ade400ed6abb3d23068b2b6d1a469c",
+        "commit_date": "2025-11-11T10:11:56+08:00",
+        "retrieved": "2026-10-05",
+        "language_evidence": "Chinese repository description, Chinese README and function documentation.",
+        "status": "INSPECTED_PRIMARY_CREATOR_SOURCE_BEHAVIORAL_LEAD_ONLY",
+        "version": {
+          "ysm": "unspecified",
+          "minecraft": "unspecified",
+          "loader": "unspecified"
+        },
+        "inspected_files": [
+          "README.md",
+          "_README.md",
+          "_使用和开放函数说明.md",
+          "math_ext_vector_3.molang",
+          "math_ext_vector_3_norm.molang",
+          "math_ext_vector_3_sdiv.molang",
+          "math_ext_vector_3_cdiv.molang",
+          "stat_pos_diff.molang",
+          "stat_pos_reload.molang",
+          "stat_pos_diff_reload.molang"
+        ],
+        "primary_files": [
+          {
+            "path": "math_ext_vector_3.molang",
+            "url": "https://github.com/Anan1a/YSM-molang-functions/blob/1c027e56d1ade400ed6abb3d23068b2b6d1a469c/math_ext_vector_3.molang",
+            "lines": "1-7",
+            "observation": "Assigns args[0..2] into t.result.x/y/z and returns t.result.",
+            "sha256": "31a9c46f661aaa14d6de2215afe0eb872582ecfcf2c2d3fe65251635847b09ba"
+          },
+          {
+            "path": "math_ext_vector_3_norm.molang",
+            "url": "https://github.com/Anan1a/YSM-molang-functions/blob/1c027e56d1ade400ed6abb3d23068b2b6d1a469c/math_ext_vector_3_norm.molang",
+            "lines": "1-10",
+            "observation": "Reads args[0], nests fn.math_ext_vector_3_len and fn.math_ext_vector_3_sdiv, and returns a structure.",
+            "sha256": "f571ecf5b09e05ea5c333ce50d0bc67dbd54cc155cf28adad224860f6ffcc699"
+          },
+          {
+            "path": "stat_pos_reload.molang",
+            "url": "https://github.com/Anan1a/YSM-molang-functions/blob/1c027e56d1ade400ed6abb3d23068b2b6d1a469c/stat_pos_reload.molang",
+            "lines": "3-16",
+            "observation": "Assigns t.result = args[0], mutates its scalar members, then returns it.",
+            "sha256": "45f90d23769bfde878ea151d692850b7960b99c84c6bab71cfaecdc58016d4e3"
+          }
+        ],
+        "concrete_lead": "Candidate fixtures for argument-array binding, local temp scope, nested function execution, structure-valued return, and argument-structure mutation. Zero-length normalization can supply a division edge input; repository code does not specify expected evaluator result.",
+        "limits": "Not a Java implementation, binary contract, test run, or artifact mapping. No version provenance; mutation code alone does not prove identity aliasing across context copies. No exact Function/ExecutionContext/visitor/ValueConversions symbols found."
+      },
+      {
+        "repository": "lin114810/ysm-vivecraft-compat",
+        "url": "https://github.com/lin114810/ysm-vivecraft-compat",
+        "branch": "main",
+        "revision": "04ab2ad83a8f19f3746079c2cfe823431a191a26",
+        "commit_date": "2026-04-17T21:30:39+08:00",
+        "retrieved": "2026-10-05",
+        "language_evidence": "Chinese project README; source comments predominantly English.",
+        "status": "INSPECTED_PRIMARY_COMPAT_SOURCE_NEGATIVE_SPECULATIVE_CROSS_VERSION",
+        "version": {
+          "ysm": "2.5.1 in gradle.properties; README 2.5.1+; mods.toml [2.5,)",
+          "minecraft": "1.21.1",
+          "loader": "NeoForge 21.1.172 configured"
+        },
+        "inspected_files": [
+          "README.md",
+          "gradle.properties",
+          "build.gradle",
+          "src/main/resources/META-INF/neoforge.mods.toml",
+          "src/main/resources/ysm_vivecraft_compat.mixins.json",
+          "src/main/java/com/example/ysmvivecraft/mixin/client/YSMMolangVariableMixin.java",
+          "src/main/java/com/example/ysmvivecraft/YSMVRAnimationProvider.java"
+        ],
+        "primary_files": [
+          {
+            "path": "src/main/java/com/example/ysmvivecraft/mixin/client/YSMMolangVariableMixin.java",
+            "url": "https://github.com/lin114810/ysm-vivecraft-compat/blob/04ab2ad83a8f19f3746079c2cfe823431a191a26/src/main/java/com/example/ysmvivecraft/mixin/client/YSMMolangVariableMixin.java",
+            "lines": "13-44,71-103",
+            "observation": "Names speculative target ysm.common.animation.molang.MolangVariable, injects bare method eval with require=0, says 'or similar' and 'typically' signature; reflection picks the first String field and first Player-compatible context field.",
+            "sha256": "420a0cc2fe21cdbecb0e09cecee3f126dfdf2202861ccd80f19686bb2e850976"
+          }
+        ],
+        "concrete_lead": "Negative control: a Molang-looking compatibility claim can be authored without an exact artifact contract. Bare method name, guessed owner, broad optional injection and arbitrary-field reflection do not establish evaluator semantics.",
+        "limits": "No exact descriptor, artifact fingerprint or runtime hook proof found in inspected files. YSM compileOnly Maven line commented out; optional libs fileTree only. Cannot confirm even its own runtime target, and not Forge1.20.1/YSM2.6.5."
+      },
+      {
+        "repository": "Fox-TerribleCoding/YES_SlashBlade",
+        "url": "https://github.com/Fox-TerribleCoding/YES_SlashBlade",
+        "branch": "main",
+        "revision": "3b47cae18149a7a2de551e819ad9a00aae305aaf",
+        "commit_date": "2026-09-18T00:24:15+08:00",
+        "retrieved": "2026-10-05",
+        "language_evidence": "Extensive Chinese README and Chinese source comments.",
+        "status": "INSPECTED_PRIMARY_COMPAT_SOURCE_PRECISE_CROSS_VERSION_ADJACENT_NEGATIVE_FOR_CLUSTER",
+        "version": {
+          "ysm": "2.6.5-neoforge+mc1.21.1-release.jar; README fingerprint prefix B285C73D4EC010D9, 63463229 bytes, community-reported",
+          "minecraft": "1.21.1",
+          "loader": "NeoForge 21.1.x; build.ps1 lists 21.1.248"
+        },
+        "inspected_files": [
+          "README.md sections 8.1-8.2",
+          "build.ps1",
+          "src/main/java/dev/yessb/mixin/ysm/MixinYsmSlashBladeModule.java",
+          "src/main/java/dev/yessb/compat/YsmSlashBladeModule.java",
+          "src/main/java/dev/yessb/mixin/plugin/YsmMixinPlugin.java"
+        ],
+        "primary_files": [
+          {
+            "path": "src/main/java/dev/yessb/mixin/ysm/MixinYsmSlashBladeModule.java",
+            "url": "https://github.com/Fox-TerribleCoding/YES_SlashBlade/blob/3b47cae18149a7a2de551e819ad9a00aae305aaf/src/main/java/dev/yessb/mixin/ysm/MixinYsmSlashBladeModule.java",
+            "lines": "43-99",
+            "observation": "Exact obfuscated owner com.elfmcys.yesstevemodel.o0000o000ooO00O00o0O0ooO and full descriptors for ItemStack→boolean, animation-context→String, and main-animation selection. Context type is Oo0Oo0O0OoOoO0oooO00O0o0.",
+            "sha256": "eb5828074a55d6637bccd5cf90e34173277919c8c8beb09b05fe2988d41f58ca"
+          },
+          {
+            "path": "src/main/java/dev/yessb/compat/YsmSlashBladeModule.java",
+            "url": "https://github.com/Fox-TerribleCoding/YES_SlashBlade/blob/3b47cae18149a7a2de551e819ad9a00aae305aaf/src/main/java/dev/yessb/compat/YsmSlashBladeModule.java",
+            "lines": "62-93",
+            "observation": "Typed direct call ctx.oOoo00O0o0oO0o0oO00OO0O0(), followed by holder.ooo00OoO00OOOO0oOooOo0Oo() for entity and holder.Oo0O0OoOo0O0oOoo0000O0oO(name) for animation existence.",
+            "sha256": "f2a700e49569c91b56ffe7331d82788996c23a10038e0be6245a02cab80a1e52"
+          }
+        ],
+        "concrete_lead": "Strong neighboring compatibility provenance pattern: exact injected descriptors, typed owner/member calls, explicit artifact fingerprint and clear public-source-versus-artifact boundary. Useful for method, not evaluator identity.",
+        "limits": "Existing reconnaissance already mentioned this repository; fresh pinned actual files inspected in this pass. Its animation holder context must not be equated to Molang ExecutionContext. NeoForge1.21.1 symbols cannot promote Forge1.20.1 mappings. README states third-party types22/22 members34/34 verified; this pass did not reproduce that verification. build.ps1 is normal javac/jar build; do not describe README verification as an executable contract test."
+      },
+      {
+        "repository": null,
+        "url": "https://ysm.cfpa.team/wiki/molang/script/",
+        "revision": null,
+        "publication_date_index": "2025-09-17",
+        "retrieved": "2026-10-05",
+        "status": "PRIMARY_DOCUMENTATION_INDEX_SNIPPET_ONLY_DIRECT_FETCH_TIMEOUT",
+        "version": {
+          "ysm": "unspecified on retrieved snippet",
+          "minecraft": "unspecified",
+          "loader": "unspecified"
+        },
+        "inspected_files": [],
+        "concrete_lead": "Indexed custom-function documentation says self-call recursion supported and call chain above32 returns null; index-page snippet says uninitialized variables null, numeric contexts0 or false, and structures cannot nest.",
+        "related_url": "https://ysm.cfpa.team/wiki/molang/index/",
+        "related_publication_date_index": "2025-01-28",
+        "limits": "Open attempted and timed out on both pages. No full-page inspection or revision pin; treat as documentation lead only. These claims are not exact artifact evidence."
+      }
+    ],
+    "excluded": "No YSMParser or protection repository opened. No native protection/decryption/keys/DRM investigation.",
+    "mapping_rows_promoted": 0
+  },
+  "audit_regression": {
+    "previous_failure": "KeyError for the prior mapped ArgumentCollection owner: the bounded inventory used new class seeds only.",
+    "repair": "Include the union of class, member and bounded-support owners. Two new accessors on the old owner are now part of the normal rerunnable dossier.",
+    "expected_result": "All member owners inventoried; audit succeeds without adding a duplicate class mapping."
+  },
+  "verification_result": {
+    "checks": 106,
+    "failures": 0,
+    "prior_seed_checks": 66,
+    "prior_seed_failures": 0,
+    "negative_mutations": [
+      {
+        "mutation": "relation",
+        "exit": 1,
+        "failed_checks": [
+          "com/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0:unique-declaration-and-relations"
+        ]
+      },
+      {
+        "mutation": "branch",
+        "exit": 1,
+        "failed_checks": [
+          "ysm265.method.value-conversions-as-boolean:opcode-control-flow"
+        ]
+      },
+      {
+        "mutation": "exception",
+        "exit": 1,
+        "failed_checks": [
+          "ysm265.method.execution-context-eval-single-expression:exception-handlers"
+        ]
+      },
+      {
+        "mutation": "digest",
+        "exit": 1,
+        "failed_checks": [
+          "ysm265.method.execution-context-eval-single-expression:code-digest"
+        ]
+      }
+    ],
+    "existing_owner_regression": "Two member rows on prior ArgumentCollection are included in the normal passing audit, without duplicating its class seed."
+  },
+  "verification_limits": "The audit checks exact declarations, selected Java instructions/reference paths/code digests and exception tables. Compiler/source semantic correspondence is reviewed separately. It does not execute Minecraft/Molang or validate whole-binary equivalence; visitor class shape/dispatch is not a separate audited dependency."
+}

@@ -54,7 +54,7 @@ Current exact graph:
 - bundled Concentus component: **131 classes**
 - bundled Gagravarr/VorbisJava component: **86 classes**
 - remaining components: **15 singleton classes**
-- exact semantic seed classes: **102**
+- exact semantic seed classes: **105**
 
 The three large connected components explain nearly the complete Java artifact:
 
@@ -81,10 +81,10 @@ forced into a subsystem.
 | BUNDLED_VORBISJAVA | 86 | 2 | 84 |
 | MODEL | 9 | 4 | 5 |
 | ANIMATION | 50 | 6 | 44 |
-| MOLANG | 248 | 33 | 215 |
+| MOLANG | 249 | 36 | 213 |
 | RENDERER | 73 | 10 | 63 |
 | NETWORK / DISTRIBUTION | 71 | 22 | 49 |
-| CAPABILITY / STATE | 52 | 4 | 48 |
+| CAPABILITY / STATE | 51 | 4 | 47 |
 | GUI | 43 | 2 | 41 |
 | INTEGRATION | 25 | 6 | 19 |
 | ENTITY PRESENTATION | 130 | 4 | 126 |
@@ -201,13 +201,16 @@ no longer opaque.
 
 ## 7. Molang is the largest semantic subsystem
 
-MOLANG contains **248 classes** and is the largest first-party/modified subsystem in the exact JAR.
+MOLANG contains **249 classes** and is the largest first-party/modified subsystem in the exact JAR.
 
 Mapped hubs:
 
 - `IContext` — degree **103**
 - `Function$ArgumentCollection` — degree **86**
 - `Function` — degree **85**
+- `Expression` — degree **16**
+- `ExecutionContext` — degree **58**
+- `ValueConversions` — degree **9**
 - `YSMBinding` — degree **48**
 - `CtrlBinding` — degree **40**
 - `QueryBinding` — degree **28**
@@ -220,7 +223,7 @@ Major cross-domain edges include:
 
 - ENTITY_PRESENTATION ↔ MOLANG: **89**
 - ANIMATION ↔ MOLANG: **30**
-- CAPABILITY ↔ MOLANG: **27**
+- CAPABILITY ↔ MOLANG: **26**
 - MOLANG ↔ NETWORK: **14**
 - MOLANG ↔ RENDERER: present as a smaller but direct seam
 
@@ -438,9 +441,9 @@ Final strongest seams:
 | GUI ↔ NETWORK | 38 |
 | CAPABILITY ↔ RENDERER | 31 |
 | ANIMATION ↔ MOLANG | 30 |
-| CAPABILITY ↔ MOLANG | 27 |
 | ENTITY_PRESENTATION ↔ NETWORK | 27 |
 | GUI ↔ RENDERER | 27 |
+| CAPABILITY ↔ MOLANG | 26 |
 | ENTITY_PRESENTATION ↔ GUI | 26 |
 | CAPABILITY ↔ GUI | 22 |
 | NETWORK ↔ RENDERER | 21 |
@@ -500,23 +503,46 @@ It does **not** establish:
 Those boundaries remain unchanged.
 
 
-## 20. Bounded seed recovery
+## 20. Previous bounded seed milestone (253 mappings)
 
 The explicit unobfuscated `YesSteveModel` entrypoint is now a CORE seed; its earlier NETWORK label
 was propagation, not a semantic identity. Its graph degree remains 50.
 
-Five new semantic seeds raise the seed count from 97 to **102**. The complete map now has **253**
+At the previous milestone, five new semantic seeds raised the seed count from 97 to **102**. At that milestone the complete map had **253**
 entries (**216 CONFIRMED / 37 HIGH**), comprising **102 classes, 146 methods and 5 fields**. The exact
 contract and the bounded flags/reference audit both have **0 failures**.
 
 Molang `Function` and `Function$ArgumentCollection` now have unique exact declaration shapes and a
 verified typed/nest relationship. Eight methods match pinned official-source behavior; both ambiguous
-integer-return overloads and placeholder-field names remain unmapped. CONFIRMED here means semantic
+integer-return overloads and placeholder-field names remained unmapped at that milestone. The integer
+accessors are resolved in section 21. CONFIRMED here means semantic
 correspondence, not proof of the full original symbol table or binary/source equivalence.
 
-The regenerated domain labels are search hints: ANIMATION has 50 classes, MOLANG 248, CORE 9. The graph
+At that milestone, regenerated domain labels were search hints: ANIMATION 50 classes, MOLANG 248, CORE 9. The graph
 is unchanged at 955 nodes, 3,618 edges, 3,823 directed references and 19 components, and 15 degree-zero UNKNOWN
 singletons remain. Label changes follow the five stronger seeds; they do not add graph edges.
 
 See [SEED-RECOVERY-EVIDENCE-2026-10-05.json](SEED-RECOVERY-EVIDENCE-2026-10-05.json) for flags,
 descriptors, competitor predicates, pinned counterparts, bounded reference paths and unresolved cases.
+
+
+## 21. Molang evaluation seeds
+
+The current map has **270 mappings (233 CONFIRMED / 37 HIGH)**: **105 classes / 160 methods /
+5 fields**, with **0 failures**. This pass adds ExecutionContext, Expression and ValueConversions plus
+14 methods, including the two previously ambiguous integer ArgumentCollection accessors.
+Expression has two normalized declaration candidates; the independently grounded getExpression
+return-type relation reduces this to one. Context wrappers catch Exception and return null; converter
+branch/reference behavior establishes primitive/string semantics. CONFIRMED denotes semantic
+correspondence, with original symbol spelling unproven and SOURCE_ARTIFACT_DIVERGENCE preserved.
+
+Fresh audits: old seed **66 / 0**, evaluation **106 / 0** checks/failures. Relation, branch target, catch
+type and code digest negative mutations each fail. Foundation now uses **105 seeds**; the graph remains
+955 classes / 3,618 edges / 19 components with 15 isolated UNKNOWN classes. Three pinned Chinese
+primary repositories provide fixture/provenance leads but no exact-version mapping promotions.
+
+See [MOLANG-EVALUATION-RECOVERY-2026-10-05.md](MOLANG-EVALUATION-RECOVERY-2026-10-05.md) for
+exact identities, behavior, source/version separation, failure history and rerun commands, and
+[MOLANG-EVALUATION-EVIDENCE-2026-10-05.json](MOLANG-EVALUATION-EVIDENCE-2026-10-05.json) for
+the retained machine-readable dossier. This closes the selected small cluster; broader evaluator
+implementation and runtime checks remain future work.

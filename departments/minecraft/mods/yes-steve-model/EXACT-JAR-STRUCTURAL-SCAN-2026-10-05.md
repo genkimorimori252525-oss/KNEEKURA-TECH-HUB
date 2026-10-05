@@ -434,11 +434,11 @@ That is enough to treat the 2.6.5 Java shell as a partially recovered architectu
 opaque obfuscated blob.
 
 
-## 14. Bounded continuation and latest contract
+## 14. Previous bounded continuation (253 mappings)
 
 Fresh official Modrinth Zqooxsd2 acquisition reproduced SHA-256/SHA-1/size before analysis. The
 232-entry baseline reproduced 97 classes / 130 methods / 5 fields with 0 failures. After five class seeds and
-sixteen bounded methods, the latest result is:
+sixteen bounded methods, that milestone result was:
 
 - **253 mappings (216 CONFIRMED / 37 HIGH)**;
 - **102 class targets / 146 exact methods / 5 exact fields**;
@@ -464,3 +464,25 @@ python tools/cluster_ysm_265.py --jar /scratch/ysm-2.6.5-forge+mc1.20.1-release.
 
 Commands run from the YSM research directory. The structural contract does not replace semantic
 review, and no Minecraft/native runtime correctness or performance result is claimed.
+
+
+## 15. Molang evaluation continuation
+
+The current map has **270 mappings (233 CONFIRMED / 37 HIGH)**: **105 classes / 160 methods /
+5 fields**, with **0 failures**. This pass adds ExecutionContext, Expression and ValueConversions plus
+14 methods, including the two previously ambiguous integer ArgumentCollection accessors.
+Expression has two normalized declaration candidates; the independently grounded getExpression
+return-type relation reduces this to one. Context wrappers catch Exception and return null; converter
+branch/reference behavior establishes primitive/string semantics. CONFIRMED denotes semantic
+correspondence, with original symbol spelling unproven and SOURCE_ARTIFACT_DIVERGENCE preserved.
+
+Fresh audits: old seed **66 / 0**, evaluation **106 / 0** checks/failures. Relation, branch target, catch
+type and code digest negative mutations each fail. Foundation now uses **105 seeds**; the graph remains
+955 classes / 3,618 edges / 19 components with 15 isolated UNKNOWN classes. Three pinned Chinese
+primary repositories provide fixture/provenance leads but no exact-version mapping promotions.
+
+See [MOLANG-EVALUATION-RECOVERY-2026-10-05.md](MOLANG-EVALUATION-RECOVERY-2026-10-05.md) for
+exact identities, behavior, source/version separation, failure history and rerun commands, and
+[MOLANG-EVALUATION-EVIDENCE-2026-10-05.json](MOLANG-EVALUATION-EVIDENCE-2026-10-05.json) for
+the retained machine-readable dossier. This closes the selected small cluster; broader evaluator
+implementation and runtime checks remain future work.

@@ -648,9 +648,9 @@ The structural domain map is a search-priority tool. An unmapped class is not pr
 semantic owner solely because label propagation assigns a domain.
 
 
-## 20. CORE / Animation / Molang bounded continuation
+## 20. Previous CORE / Animation / Molang milestone (253 mappings)
 
-The latest map contains **253 mappings: 216 CONFIRMED / 37 HIGH**. This pass adds **5 class seeds and
+At the previous bounded seed milestone, the map contained **253 mappings: 216 CONFIRMED / 37 HIGH**. This pass adds **5 class seeds and
 16 methods** to the audited 232-entry baseline. All **102 class / 146 method / 5 field** exact-JAR
 contracts pass with **0 failures**; all bounded seed checks pass and mapping IDs and
 owner+member+descriptor keys remain unique.
@@ -662,7 +662,7 @@ owner+member+descriptor keys remain unique.
   SOURCE_ARTIFACT_DIVERGENCE. Original animation symbols remain unproven.
 - MOLANG: `Function` and nested `ArgumentCollection`, two classes+eight methods CONFIRMED for
   semantic correspondence to the pinned official source. NestHost/NestMembers/InnerClasses and the
-  typed evaluate argument establish nesting. Integer-return accessor names remain ambiguous.
+  typed evaluate argument establish nesting. Integer-return accessor names were ambiguous at this milestone; section 21 resolves them.
 
 Every class has a unique normalized declaration shape among all 955 classes; member names are erased
 and access flags/external descriptors preserved. Member confidence additionally uses Java field/call
@@ -674,3 +674,25 @@ flags disambiguate it. Class declaration matching uses order-independent member 
 dossier. `tools/audit_seed_recovery_ysm_265.py` checks the hash before inspecting the five Java owners,
 then verifies flags/shape uniqueness/nesting and 16 bounded reference paths. No extracted method bodies,
 JAR or native implementation were committed. Global binary/source equivalence remains NOT_ESTABLISHED.
+
+
+## 21. Function argument evaluation and conversions
+
+The current map has **270 mappings (233 CONFIRMED / 37 HIGH)**: **105 classes / 160 methods /
+5 fields**, with **0 failures**. This pass adds ExecutionContext, Expression and ValueConversions plus
+14 methods, including the two previously ambiguous integer ArgumentCollection accessors.
+Expression has two normalized declaration candidates; the independently grounded getExpression
+return-type relation reduces this to one. Context wrappers catch Exception and return null; converter
+branch/reference behavior establishes primitive/string semantics. CONFIRMED denotes semantic
+correspondence, with original symbol spelling unproven and SOURCE_ARTIFACT_DIVERGENCE preserved.
+
+Fresh audits: old seed **66 / 0**, evaluation **106 / 0** checks/failures. Relation, branch target, catch
+type and code digest negative mutations each fail. Foundation now uses **105 seeds**; the graph remains
+955 classes / 3,618 edges / 19 components with 15 isolated UNKNOWN classes. Three pinned Chinese
+primary repositories provide fixture/provenance leads but no exact-version mapping promotions.
+
+See [MOLANG-EVALUATION-RECOVERY-2026-10-05.md](MOLANG-EVALUATION-RECOVERY-2026-10-05.md) for
+exact identities, behavior, source/version separation, failure history and rerun commands, and
+[MOLANG-EVALUATION-EVIDENCE-2026-10-05.json](MOLANG-EVALUATION-EVIDENCE-2026-10-05.json) for
+the retained machine-readable dossier. This closes the selected small cluster; broader evaluator
+implementation and runtime checks remain future work.

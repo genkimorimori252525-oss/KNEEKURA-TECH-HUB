@@ -585,3 +585,15 @@ That one scan would likely:
 - promote most of the 23 bone aliases in one batch;
 - resolve remaining animatable/model owners;
 - verify or reject current HIGH mappings without touching protected native internals.
+
+
+## Bounded evaluator follow-up
+
+Fresh immutable source inspection covers Anan1a/YSM-molang-functions (creator function scripts,
+version unspecified), lin114810/ysm-vivecraft-compat (speculative optional eval hook, YSM2.5.1 /
+NeoForge1.21.1), and Fox-TerribleCoding/YES_SlashBlade (precise adjacent animation descriptors,
+YSM2.6.5 / NeoForge1.21.1). None confirms the selected Forge1.20.1 evaluator identities.
+Zero community-based promotions were made. Pinned revisions, exact file URLs/hashes, provenance
+limits and documentation retrieval failures are retained in
+[MOLANG-EVALUATION-EVIDENCE-2026-10-05.json](MOLANG-EVALUATION-EVIDENCE-2026-10-05.json); the
+source/version comparison is in [MOLANG-EVALUATION-RECOVERY-2026-10-05.md](MOLANG-EVALUATION-RECOVERY-2026-10-05.md).

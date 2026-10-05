@@ -414,3 +414,18 @@ paths were instead read by the retained bounded classfile audit tool. The scratc
 refresh helper initially had a syntax error; it was repaired before any refresh output was accepted.
 The final exact artifact contract and seed audit both have 0 failures. These checks do not claim runtime
 execution or native correctness; integer accessor ambiguities and source/artifact divergence remain.
+
+
+## Molang evaluation continuation — existing-owner audit regression
+
+The first new dossier audit raised KeyError for ArgumentCollection: the bounded inventory included
+only newly seeded class owners, while two new member mappings belonged to a previously mapped owner.
+The repair inventories the union of class, member and bounded-support owners. The two accessor rows
+remain the normal regression case in the durable dossier. Fresh old/new audits pass 66/106 checks
+with zero failures. Relation, branch target, catch type and code digest mutations each exit1.
+
+The first delegated reconnaissance model was unavailable; authorized Sol reconnaissance completed
+the bounded primary-source work. Chinese wiki direct reads timed out; indexed snippets remain leads
+only. An additional broad search returned irrelevant results. No runtime or native result is inferred
+from successful structural verification. The earlier integer accessor ambiguity is resolved only by
+the new independently evidenced converter calls, leaving the historical negative record intact.

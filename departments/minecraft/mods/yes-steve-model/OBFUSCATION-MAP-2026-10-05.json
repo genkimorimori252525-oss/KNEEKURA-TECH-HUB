@@ -5574,6 +5574,425 @@
           "fact": "List.get(index), cast to expression owner, directly returns it; no execution context evaluation."
         }
       ]
+    },
+    {
+      "id": "ysm265.class.execution-context",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oO0OoO0O0OoO0oo0oo0OOooo",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExecutionContext",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "foundation_domain": "MOLANG",
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_PINNED_OFFICIAL_SOURCE_COUNTERPART",
+      "source_artifact_divergence": false,
+      "release_line_counterpart": "com.elfmcys.yesstevemodel.molang.runtime.ExecutionContext",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_DECLARATION_RELATION_AND_BOUNDED_JAVA_BEHAVIOR",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo.class",
+          "locator": "MOLANG-EVALUATION-EVIDENCE-2026-10-05.json",
+          "fact": "Entity-bound raw-expression evaluation interface; default wrappers catch Exception, log failure and return null."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.expression",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oOOOOoo0O0Oo0O00oo0oooO0",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.parser.ast.Expression",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "foundation_domain": "MOLANG",
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_PINNED_OFFICIAL_SOURCE_COUNTERPART",
+      "source_artifact_divergence": false,
+      "release_line_counterpart": "com.elfmcys.yesstevemodel.molang.parser.ast.Expression",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_DECLARATION_RELATION_AND_BOUNDED_JAVA_BEHAVIOR",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0.class",
+          "locator": "MOLANG-EVALUATION-EVIDENCE-2026-10-05.json",
+          "fact": "AST visitor input interface returned by the already confirmed Function.ArgumentCollection.getExpression; semantic identity needs this relation because normalized declaration has two candidates."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.value-conversions",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO0O00ooOo0OO0oooOoo0Oo0",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.binding.ValueConversions",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "foundation_domain": "MOLANG",
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_PINNED_OFFICIAL_SOURCE_COUNTERPART",
+      "source_artifact_divergence": false,
+      "release_line_counterpart": "com.elfmcys.yesstevemodel.molang.runtime.binding.ValueConversions",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_DECLARATION_RELATION_AND_BOUNDED_JAVA_BEHAVIOR",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/OO0O00ooOo0OO0oooOoo0Oo0.class",
+          "locator": "MOLANG-EVALUATION-EVIDENCE-2026-10-05.json",
+          "fact": "Object-to-Boolean/float/int/double/String/pooled-String conversions with exact null, NaN, primitive and pooling call paths matching pinned official source."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.execution-context-entity",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oO0OoO0O0OoO0oo0oo0OOooo",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()Ljava/lang/Object;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExecutionContext",
+      "semantic_member": "entity",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_PINNED_OFFICIAL_SOURCE_COUNTERPART",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_JAVA_CALLS_AND_CODE_DIGEST",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo.class",
+          "access": 1025,
+          "locator": "MOLANG-EVALUATION-EVIDENCE-2026-10-05.json",
+          "fact": "Sole public abstract no-argument Object method; official generic TEntity entity() counterpart."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.execution-context-eval-single-expression-unsafe",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oO0OoO0O0OoO0oo0oo0OOooo",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;)Ljava/lang/Object;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExecutionContext",
+      "semantic_member": "evalSingleExpressionUnsafe",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_PINNED_OFFICIAL_SOURCE_COUNTERPART",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_JAVA_CALLS_AND_CODE_DIGEST",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo.class",
+          "access": 1025,
+          "locator": "MOLANG-EVALUATION-EVIDENCE-2026-10-05.json",
+          "fact": "Abstract single-expression entry called directly by the safe default wrapper; exact typed Expression argument anchors identity."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.execution-context-eval-multi-expression-unsafe",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oO0OoO0O0OoO0oo0oo0OOooo",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/lang/Iterable;Z)Ljava/lang/Object;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExecutionContext",
+      "semantic_member": "evalMultiExpressionUnsafe",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_PINNED_OFFICIAL_SOURCE_COUNTERPART",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_JAVA_CALLS_AND_CODE_DIGEST",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo.class",
+          "access": 1025,
+          "locator": "MOLANG-EVALUATION-EVIDENCE-2026-10-05.json",
+          "fact": "Abstract Iterable plus boolean returnThrough entry called by the multi-expression safe wrapper; pinned official source counterpart."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.execution-context-eval-single-expression",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oO0OoO0O0OoO0oo0oo0OOooo",
+      "obfuscated_member": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;)Ljava/lang/Object;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExecutionContext",
+      "semantic_member": "evalSingleExpression",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_PINNED_OFFICIAL_SOURCE_COUNTERPART",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_JAVA_CALLS_AND_CODE_DIGEST",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo.class",
+          "access": 1,
+          "locator": "MOLANG-EVALUATION-EVIDENCE-2026-10-05.json",
+          "fact": "Default single-expression wrapper invokes abstract unsafe entry; exception range0..7 catches java/lang/Exception at8, logs failure and null-returns."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.execution-context-eval-multi-expression",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oO0OoO0O0OoO0oo0oo0OOooo",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Ljava/lang/Iterable;Z)Ljava/lang/Object;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExecutionContext",
+      "semantic_member": "evalMultiExpression",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_PINNED_OFFICIAL_SOURCE_COUNTERPART",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_JAVA_CALLS_AND_CODE_DIGEST",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo.class",
+          "access": 1,
+          "locator": "MOLANG-EVALUATION-EVIDENCE-2026-10-05.json",
+          "fact": "Default multi-expression wrapper forwards Iterable and returnThrough boolean; exception range0..8 catches java/lang/Exception at9, logs failure and null-returns."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.expression-visit",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oOOOOoo0O0Oo0O00oo0oooO0",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/Oo0000oo0oo0OoO00000O0O0;)Ljava/lang/Object;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.parser.ast.Expression",
+      "semantic_member": "visit",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_PINNED_OFFICIAL_SOURCE_COUNTERPART",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_JAVA_CALLS_AND_CODE_DIGEST",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0.class",
+          "access": 1025,
+          "locator": "MOLANG-EVALUATION-EVIDENCE-2026-10-05.json",
+          "fact": "Sole abstract visitor dispatch contract; exact visitor type differs from the alternate normalized candidate whose parameter is ExecutionContext. Confirmed ArgumentCollection raw-expression return relation selects this owner."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.value-conversions-as-boolean",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO0O00ooOo0OO0oooOoo0Oo0",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.binding.ValueConversions",
+      "semantic_member": "asBoolean",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_PINNED_OFFICIAL_SOURCE_COUNTERPART",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_JAVA_CALLS_AND_CODE_DIGEST",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/OO0O00ooOo0OO0oooOoo0Oo0.class",
+          "access": 9,
+          "locator": "MOLANG-EVALUATION-EVIDENCE-2026-10-05.json",
+          "fact": "null false; Boolean.booleanValue; Number.floatValue returns false for NaN and both signed zeros, true for other nonzero values; any other object true."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.value-conversions-as-float",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO0O00ooOo0OO0oooOoo0Oo0",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Ljava/lang/Object;)F",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.binding.ValueConversions",
+      "semantic_member": "asFloat",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_PINNED_OFFICIAL_SOURCE_COUNTERPART",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_JAVA_CALLS_AND_CODE_DIGEST",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/OO0O00ooOo0OO0oooOoo0Oo0.class",
+          "access": 9,
+          "locator": "MOLANG-EVALUATION-EVIDENCE-2026-10-05.json",
+          "fact": "null +0.0f; Number.floatValue returned except NaN becomes +0.0f (signed zero retained if supplied by Number); Boolean true 1.0f / false +0.0f; other object 1.0f."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.value-conversions-as-int",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO0O00ooOo0OO0oooOoo0Oo0",
+      "obfuscated_member": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "(Ljava/lang/Object;)I",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.binding.ValueConversions",
+      "semantic_member": "asInt",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_PINNED_OFFICIAL_SOURCE_COUNTERPART",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_JAVA_CALLS_AND_CODE_DIGEST",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/OO0O00ooOo0OO0oooOoo0Oo0.class",
+          "access": 9,
+          "locator": "MOLANG-EVALUATION-EVIDENCE-2026-10-05.json",
+          "fact": "null 0; Number.intValue directly, without any explicit NaN guard or float/double conversion; Boolean true 1 / false 0; other object 1. Float/Double NaN semantics are inherited from their intValue implementations, not a local isNaN branch."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.value-conversions-as-double",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO0O00ooOo0OO0oooOoo0Oo0",
+      "obfuscated_member": "oOOOo0OOO0ooooo0O00OO0o0",
+      "descriptor": "(Ljava/lang/Object;)D",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.binding.ValueConversions",
+      "semantic_member": "asDouble",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_PINNED_OFFICIAL_SOURCE_COUNTERPART",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_JAVA_CALLS_AND_CODE_DIGEST",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/OO0O00ooOo0OO0oooOoo0Oo0.class",
+          "access": 9,
+          "locator": "MOLANG-EVALUATION-EVIDENCE-2026-10-05.json",
+          "fact": "null +0.0d; Number.doubleValue returned except NaN becomes +0.0d (signed zero retained if supplied by Number); Boolean true 1.0d / false +0.0d; other object 1.0d."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.value-conversions-as-string",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO0O00ooOo0OO0oooOoo0Oo0",
+      "obfuscated_member": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+      "descriptor": "(Ljava/lang/Object;)Ljava/lang/String;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.binding.ValueConversions",
+      "semantic_member": "asString",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_PINNED_OFFICIAL_SOURCE_COUNTERPART",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_JAVA_CALLS_AND_CODE_DIGEST",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/OO0O00ooOo0OO0oooOoo0Oo0.class",
+          "access": 9,
+          "locator": "MOLANG-EVALUATION-EVIDENCE-2026-10-05.json",
+          "fact": "candidate StringExpression instance: call its ()String getter; String instance: return cast object; all others including null: aconst_null. Does not stringify other objects."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.value-conversions-as-pooled-string",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO0O00ooOo0OO0oooOoo0Oo0",
+      "obfuscated_member": "Ooooo0oooO0oooOOOoO0000O",
+      "descriptor": "(Ljava/lang/Object;)I",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.binding.ValueConversions",
+      "semantic_member": "asPooledString",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_PINNED_OFFICIAL_SOURCE_COUNTERPART",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_JAVA_CALLS_AND_CODE_DIGEST",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/OO0O00ooOo0OO0oooOoo0Oo0.class",
+          "access": 9,
+          "locator": "MOLANG-EVALUATION-EVIDENCE-2026-10-05.json",
+          "fact": "candidate StringExpression instance: call its ()I getter; String instance: call candidate StringPool (String)I static method; all others including null: getstatic candidate StringPool I field. Fallback is the EMPTY field, not an iconst_0 literal."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.molang-argument-collection-get-as-pooled-string",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)I",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.Function$ArgumentCollection",
+      "semantic_member": "getAsPooledString",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_PINNED_OFFICIAL_SOURCE_COUNTERPART",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_JAVA_CALLS_AND_CODE_DIGEST",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo.class",
+          "access": 1,
+          "locator": "MOLANG-EVALUATION-EVIDENCE-2026-10-05.json",
+          "fact": "Read arguments List element at index, cast candidate Expression, invoke candidate ExecutionContext.evalSingleExpression -> Object, invoke the independently resolved asPooledString converter, ireturn."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.molang-argument-collection-get-as-int",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "obfuscated_member": "oOOOo0OOO0ooooo0O00OO0o0",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)I",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.Function$ArgumentCollection",
+      "semantic_member": "getAsInt",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_PINNED_OFFICIAL_SOURCE_COUNTERPART",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_JAVA_CALLS_AND_CODE_DIGEST",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo.class",
+          "access": 1,
+          "locator": "MOLANG-EVALUATION-EVIDENCE-2026-10-05.json",
+          "fact": "Read arguments List element at index, cast candidate Expression, invoke candidate ExecutionContext.evalSingleExpression -> Object, invoke the independently resolved asInt converter, ireturn."
+        }
+      ]
     }
   ],
   "unresolved_hints": [
@@ -5891,9 +6310,9 @@
       "controller_interface": "OoOoOO0O00oOoO0o0ooOO0oO"
     },
     "latest_contract": {
-      "mappings": 253,
-      "class_targets": 102,
-      "exact_methods": 146,
+      "mappings": 270,
+      "class_targets": 105,
+      "exact_methods": 160,
       "exact_fields": 5,
       "failures": 0
     }
@@ -6006,6 +6425,56 @@
       "verification": {
         "checks": 66,
         "failures": 0,
+        "duplicate_ids": 0,
+        "duplicate_owner_member_descriptor_keys": 0
+      }
+    },
+    "molang_evaluation_pass": {
+      "recorded_at": "2026-10-05",
+      "baseline_mappings": 253,
+      "new_class_seeds": 3,
+      "new_method_mappings": 14,
+      "evidence": "MOLANG-EVALUATION-EVIDENCE-2026-10-05.json",
+      "scope": "Function argument evaluation, exception-to-null wrappers and primitive/string conversions; no further class cluster expansion.",
+      "original_symbol_policy": "CONFIRMED denotes semantic correspondence; original unobfuscated spelling remains unproven.",
+      "source_artifact_equivalence": "NOT_ESTABLISHED",
+      "preserved_negative_finding": "SOURCE_ARTIFACT_DIVERGENCE",
+      "resolved_prior_ambiguity": "Two ArgumentCollection integer accessors distinguished by independently resolved terminal asInt/asPooledString converters.",
+      "verification": {
+        "checks": 106,
+        "failures": 0,
+        "prior_seed_checks": 66,
+        "prior_seed_failures": 0,
+        "negative_mutations": [
+          {
+            "mutation": "relation",
+            "exit": 1,
+            "failed_checks": [
+              "com/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0:unique-declaration-and-relations"
+            ]
+          },
+          {
+            "mutation": "branch",
+            "exit": 1,
+            "failed_checks": [
+              "ysm265.method.value-conversions-as-boolean:opcode-control-flow"
+            ]
+          },
+          {
+            "mutation": "exception",
+            "exit": 1,
+            "failed_checks": [
+              "ysm265.method.execution-context-eval-single-expression:exception-handlers"
+            ]
+          },
+          {
+            "mutation": "digest",
+            "exit": 1,
+            "failed_checks": [
+              "ysm265.method.execution-context-eval-single-expression:code-digest"
+            ]
+          }
+        ],
         "duplicate_ids": 0,
         "duplicate_owner_member_descriptor_keys": 0
       }

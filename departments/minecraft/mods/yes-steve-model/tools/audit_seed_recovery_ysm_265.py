@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit the five bounded YSM seed declarations and sixteen Java reference paths.
+"""Audit hash-fixed YSM seed declarations and bounded Java reference paths.
 
 Requires the official hash-fixed artifact locally; does not emit method bodies,
 extract native entries, decrypt models, or establish binary/source equivalence.
@@ -55,6 +55,12 @@ def parse_bounded(raw):
             rec=dict(owner=owner,name=name,descriptor=desc,access=access)
             if 'Code' in attrs:
                 cb=attrs['Code'];n=int.from_bytes(cb[4:8],'big');code=cb[8:8+n]
+                rec['code_sha256']=hashlib.sha256(code).hexdigest()
+                ep=8+n;count=int.from_bytes(cb[ep:ep+2],'big');ep+=2
+                rec['exception_handlers']=[]
+                for _ in range(count):
+                    start,end,handler,catch=struct.unpack('>HHHH',cb[ep:ep+8]);ep+=8
+                    rec['exception_handlers'].append(dict(start=start,end=end,handler=handler,catch=utf(cp[catch][1]) if catch else None))
                 ops=[];pos=0
                 while pos<len(code):
                     start=pos;op=code[pos];length=1
@@ -70,6 +76,8 @@ def parse_bounded(raw):
                             lo=int.from_bytes(code[p+4:p+8],'big',signed=True);hi=int.from_bytes(code[p+8:p+12],'big',signed=True);length=p-pos+12+4*(hi-lo+1)
                         else:length=p-pos+8+8*int.from_bytes(code[p+4:p+8],'big')
                     inst=dict(offset=start,opcode=hex(op))
+                    if op in [*range(0x99,0xa9),0xc6,0xc7]:inst['branch_target']=start+int.from_bytes(code[pos+1:pos+3],'big',signed=True)
+                    if op in (0xc8,0xc9):inst['branch_target']=start+int.from_bytes(code[pos+1:pos+5],'big',signed=True)
                     if op in [*range(0xb2,0xbb),0xbb,0xbd,0xc0,0xc1]:inst['reference']=ref(int.from_bytes(code[pos+1:pos+3],'big'))
                     if op in (0x12,0x13):inst['reference']=ref(code[pos+1] if op==0x12 else int.from_bytes(code[pos+1:pos+3],'big'))
                     ops.append(inst);pos+=length
@@ -119,7 +127,9 @@ def main():
         for n in z.namelist():
             if n.endswith('.class') and not n.startswith('META-INF/versions/'):
                 c=parse_class(z.read(n));classes[c['name']]=c
-        bounded={owner:parse_bounded(z.read(owner+'.class')) for owner in [c['owner'] for c in evidence['classes']]}
+        support=evidence.get('bounded_dependency_support',[])
+        owners={c['owner'] for c in evidence['classes']} | {m['owner'] for m in evidence['members']+support}
+        bounded={owner:parse_bounded(z.read(owner+'.class')) for owner in sorted(owners)}
     checks=[]
     for row in evidence['classes']:
         owner=row['owner'];actual=classes[owner];expected=row['declaration']
@@ -130,20 +140,34 @@ def main():
             checks.append({'check':owner+':'+k,'pass':shape(actual[k])==shape(expected[k])})
         shape=normalized_shape(actual)
         matches=sorted(k for k,c in classes.items() if normalized_shape(c)==shape)
-        checks.append({'check':owner+':unique-normalized-shape','pass':matches==[owner],'population':len(classes),'matches':matches})
+        shape_matches=matches
+        if row.get('return_type_anchor'):
+            anchor=row['return_type_anchor']
+            methods=[m for m in classes[anchor['owner']]['methods'] if m['name']==anchor['name'] and m['descriptor']==anchor['descriptor']]
+            returns={m['descriptor'].split(')',1)[1] for m in methods}
+            matches=[k for k in matches if 'L'+k+';' in returns]
+        checks.append({'check':owner+':unique-declaration-and-relations','pass':matches==[owner],'population':len(classes),'shape_matches':shape_matches,'matches':matches})
         if row.get('nesting_attributes'):
             checks.append({'check':owner+':nesting','pass':BOUNDATTRS[owner]==row['nesting_attributes']})
         if owner.endswith('/YesSteveModel'):
             anchors=['Lnet/minecraftforge/fml/common/Mod;','yes_steve_model','yes_steve_model-common.toml','yes_steve_model-client.toml']
             checks.append({'check':owner+':mod-config-anchors','pass':all(x in actual['utf8'] for x in anchors)})
-    for row in evidence['members']:
+    for row in evidence['members']+support:
+        identity=row.get('mapping_id',row['owner']+'.'+row['name']+row['descriptor'])
         matches=[m for m in bounded[row['owner']] if m['name']==row['name'] and m['descriptor']==row['descriptor'] and m['access']==row['access']]
         ok=len(matches)==1
-        checks.append({'check':row['mapping_id']+':flags-name-descriptor','pass':ok})
+        checks.append({'check':identity+':flags-name-descriptor','pass':ok})
         if ok:
-            checks.append({'check':row['mapping_id']+':bounded-reference-path','pass':reference_path(matches[0])==row['reference_path']})
+            expected_path=row.get('reference_path',[op for op in row.get('instructions',[]) if 'reference' in op])
+            checks.append({'check':identity+':bounded-reference-path','pass':reference_path(matches[0])==expected_path})
+            if row.get('instructions') is not None:
+                checks.append({'check':identity+':opcode-control-flow','pass':matches[0].get('instructions')==row['instructions']})
+            if row.get('code_sha256') is not None:
+                checks.append({'check':identity+':code-digest','pass':matches[0].get('code_sha256')==row['code_sha256']})
+            if row.get('exception_handlers') is not None:
+                checks.append({'check':identity+':exception-handlers','pass':matches[0].get('exception_handlers')==row['exception_handlers']})
             if row.get('simple_opcodes') is not None:
-                checks.append({'check':row['mapping_id']+':simple-opcodes','pass':[op['opcode'] for op in matches[0]['instructions']]==row['simple_opcodes']})
+                checks.append({'check':identity+':simple-opcodes','pass':[op['opcode'] for op in matches[0]['instructions']]==row['simple_opcodes']})
     result={'artifact_sha256':evidence['artifact']['sha256'],'classes':len(classes),'seed_declarations':len(evidence['classes']),'member_paths':len(evidence['members']),'checks':checks,'failures':[x for x in checks if not x['pass']]}
     Path(args.out).write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps({k:v for k,v in result.items() if k!='checks'}))
