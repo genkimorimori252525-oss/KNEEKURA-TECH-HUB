@@ -142,14 +142,14 @@ The machine-readable map deliberately keeps distributed-artifact observations se
 version-matched public source candidate. This exposed concrete source/artifact divergence around the
 preview/paperdoll renderer instead of silently forcing them to agree.
 
-The current machine-readable map contains **232** mappings (**205 CONFIRMED / 27 HIGH**).
-Every recorded owner/member/descriptor contract passes against the exact official JAR: **97 class
-targets, 130 exact methods and 5 exact fields, with 0 failures**. The whole-JAR Foundation Map covers
+The current machine-readable map contains **253** mappings (**216 CONFIRMED / 37 HIGH**).
+Every recorded owner/member/descriptor contract passes against the exact official JAR: **102 class
+targets, 146 exact methods and 5 exact fields, with 0 failures**. The whole-JAR Foundation Map covers
 **955 / 955 classes**. Two large formerly-UNKNOWN islands are now separated as bundled **Concentus
 (131 classes)** and **Gagravarr/VorbisJava (86 classes)**; only **15 degree-0 singleton classes** remain
 UNKNOWN.
 
-A whole-JAR Foundation Map now classifies the exact Java artifact by structural domain. The strongest mapped hubs are `IContext` (degree 103), `PlayerAnimatableCapability` (57), `YSMBinding` (48), `NetworkHandler` (47), `AnimatableEntity` (41) and `CtrlBinding` (40). The strongest cross-domain seam is **CAPABILITY ↔ NETWORK (116 internal edges)**.
+A whole-JAR Foundation Map now classifies the exact Java artifact by structural domain. The strongest mapped hubs are `IContext` (degree 103), `Function$ArgumentCollection` (86), `Function` (85), `PlayerAnimatableCapability` (57), `YesSteveModel` (50), `YSMBinding` (48) and `NetworkHandler` (47). The strongest cross-domain seam is **CAPABILITY ↔ NETWORK (104 internal edges)**.
 
 Protected native internals remain out of scope.
 
@@ -173,6 +173,7 @@ Protected native internals remain out of scope.
 - [EXACT-JAR-STRUCTURAL-SCAN-2026-10-05.md](EXACT-JAR-STRUCTURAL-SCAN-2026-10-05.md)
 - [FOUNDATION-MAP-2026-10-05.md](FOUNDATION-MAP-2026-10-05.md)
 - [FOUNDATION-MAP-INDEX-2026-10-05.json](FOUNDATION-MAP-INDEX-2026-10-05.json)
+- [SEED-RECOVERY-EVIDENCE-2026-10-05.json](SEED-RECOVERY-EVIDENCE-2026-10-05.json)
 - [CHINESE-COMMUNITY-OBFUSCATION-RECON-2026-10-05.md](CHINESE-COMMUNITY-OBFUSCATION-RECON-2026-10-05.md)
 - [FAILURE-REPAIR-HISTORY.md](FAILURE-REPAIR-HISTORY.md)
 - [RECONNAISSANCE-2026-10-05.md](RECONNAISSANCE-2026-10-05.md)

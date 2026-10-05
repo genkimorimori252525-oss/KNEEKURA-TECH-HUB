@@ -646,3 +646,31 @@ See:
 
 The structural domain map is a search-priority tool. An unmapped class is not promoted to an exact
 semantic owner solely because label propagation assigns a domain.
+
+
+## 20. CORE / Animation / Molang bounded continuation
+
+The latest map contains **253 mappings: 216 CONFIRMED / 37 HIGH**. This pass adds **5 class seeds and
+16 methods** to the audited 232-entry baseline. All **102 class / 146 method / 5 field** exact-JAR
+contracts pass with **0 failures**; all bounded seed checks pass and mapping IDs and
+owner+member+descriptor keys remain unique.
+
+- CORE: retained unobfuscated `YesSteveModel`, explicitly seeded as CORE.
+- ANIMATION: runtime 18 fields / 15 methods and instance 17 fields / 34 methods; two classes+eight methods
+  remain HIGH. Comparative `AnimationControllerRuntime`/`AnimationControllerInstance` names are
+  paired with official `BedrockAnimationController`/`AnimationPlayer` counterparts and explicit
+  SOURCE_ARTIFACT_DIVERGENCE. Original animation symbols remain unproven.
+- MOLANG: `Function` and nested `ArgumentCollection`, two classes+eight methods CONFIRMED for
+  semantic correspondence to the pinned official source. NestHost/NestMembers/InnerClasses and the
+  typed evaluate argument establish nesting. Integer-return accessor names remain ambiguous.
+
+Every class has a unique normalized declaration shape among all 955 classes; member names are erased
+and access flags/external descriptors preserved. Member confidence additionally uses Java field/call
+behavior and source counterparts. Descriptor presence alone is insufficient: `evaluate` shares its
+full descriptor with a private static synthetic null-lambda implementation, and the public abstract
+flags disambiguate it. Class declaration matching uses order-independent member multisets.
+
+[SEED-RECOVERY-EVIDENCE-2026-10-05.json](SEED-RECOVERY-EVIDENCE-2026-10-05.json) contains the reproducible
+dossier. `tools/audit_seed_recovery_ysm_265.py` checks the hash before inspecting the five Java owners,
+then verifies flags/shape uniqueness/nesting and 16 bounded reference paths. No extracted method bodies,
+JAR or native implementation were committed. Global binary/source equivalence remains NOT_ESTABLISHED.

@@ -70,7 +70,7 @@ After the Controller/Context expansion, the map reached **210** entries and pass
 - exact field+descriptor targets present: **5**
 - failures: **0**
 
-Current map confidence:
+Controller/Context-pass map confidence:
 
 - **183 CONFIRMED**
 - **27 HIGH**
@@ -432,3 +432,35 @@ NetworkHandler
 
 That is enough to treat the 2.6.5 Java shell as a partially recovered architecture rather than an
 opaque obfuscated blob.
+
+
+## 14. Bounded continuation and latest contract
+
+Fresh official Modrinth Zqooxsd2 acquisition reproduced SHA-256/SHA-1/size before analysis. The
+232-entry baseline reproduced 97 classes / 130 methods / 5 fields with 0 failures. After five class seeds and
+sixteen bounded methods, the latest result is:
+
+- **253 mappings (216 CONFIRMED / 37 HIGH)**;
+- **102 class targets / 146 exact methods / 5 exact fields**;
+- **0 failures / 0 parse errors / 0 duplicate IDs / 0 duplicate owner+member+descriptor keys**;
+- **102 semantic seeds** and an unchanged 955-class, 3,618-edge, 19-component graph.
+
+The dossier records exact flags/descriptors, order-independent normalized declaration predicates,
+1/955 candidate matches for each seed, typed nesting and selected Java field/call-reference paths.
+Animation remains HIGH with explicit source divergence; Molang matches the pinned official source
+surface but does not establish whole-binary equivalence. Ambiguous overloads are preserved.
+
+`javap` was unavailable locally. A bounded classfile reader replaces it for these five Java owners;
+this is recorded as a tool limitation, not a runtime verification. Source/hash/call evidence is
+retained in [SEED-RECOVERY-EVIDENCE-2026-10-05.json](SEED-RECOVERY-EVIDENCE-2026-10-05.json).
+
+Reproduce with an official JAR held outside the repository:
+
+```bash
+python tools/scan_ysm_265.py --jar /scratch/ysm-2.6.5-forge+mc1.20.1-release.jar --map OBFUSCATION-MAP-2026-10-05.json --out /scratch/ysm-scan.json
+python tools/audit_seed_recovery_ysm_265.py --jar /scratch/ysm-2.6.5-forge+mc1.20.1-release.jar --evidence SEED-RECOVERY-EVIDENCE-2026-10-05.json --out /scratch/ysm-seed-audit.json
+python tools/cluster_ysm_265.py --jar /scratch/ysm-2.6.5-forge+mc1.20.1-release.jar --map OBFUSCATION-MAP-2026-10-05.json --out /scratch/ysm-foundation.json
+```
+
+Commands run from the YSM research directory. The structural contract does not replace semantic
+review, and no Minecraft/native runtime correctness or performance result is claimed.

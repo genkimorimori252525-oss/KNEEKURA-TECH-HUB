@@ -54,7 +54,7 @@ Current exact graph:
 - bundled Concentus component: **131 classes**
 - bundled Gagravarr/VorbisJava component: **86 classes**
 - remaining components: **15 singleton classes**
-- exact semantic seed classes: **97**
+- exact semantic seed classes: **102**
 
 The three large connected components explain nearly the complete Java artifact:
 
@@ -80,17 +80,17 @@ forced into a subsystem.
 | BUNDLED_CONCENTUS | 131 | 1 | 130 |
 | BUNDLED_VORBISJAVA | 86 | 2 | 84 |
 | MODEL | 9 | 4 | 5 |
-| ANIMATION | 40 | 4 | 36 |
-| MOLANG | 256 | 31 | 225 |
-| RENDERER | 74 | 10 | 64 |
-| NETWORK / DISTRIBUTION | 73 | 22 | 51 |
-| CAPABILITY / STATE | 51 | 4 | 47 |
-| GUI | 42 | 2 | 40 |
-| INTEGRATION | 26 | 6 | 20 |
-| ENTITY PRESENTATION | 134 | 4 | 130 |
+| ANIMATION | 50 | 6 | 44 |
+| MOLANG | 248 | 33 | 215 |
+| RENDERER | 73 | 10 | 63 |
+| NETWORK / DISTRIBUTION | 71 | 22 | 49 |
+| CAPABILITY / STATE | 52 | 4 | 48 |
+| GUI | 43 | 2 | 41 |
+| INTEGRATION | 25 | 6 | 19 |
+| ENTITY PRESENTATION | 130 | 4 | 126 |
 | EVENT / LIFECYCLE | 10 | 4 | 6 |
 | UTILITY | 3 | 1 | 2 |
-| CORE | 5 | 2 | 3 |
+| CORE | 9 | 3 | 6 |
 | UNKNOWN singleton | 15 | 0 | 15 |
 
 "Structurally unresolved" does **not** mean the subsystem is unknown. It means those class identities
@@ -191,7 +191,7 @@ NetworkHandler
 
 The strongest subsystem edge in the entire final map is:
 
-> **CAPABILITY ↔ NETWORK: 116 edges**
+> **CAPABILITY ↔ NETWORK: 104 edges**
 
 That matches the observed design: model identity, selected texture, roaming variables, animation
 state and server-driven properties are all capability-owned state distributed over the network.
@@ -201,11 +201,13 @@ no longer opaque.
 
 ## 7. Molang is the largest semantic subsystem
 
-MOLANG contains **256 classes** and is the largest first-party/modified subsystem in the exact JAR.
+MOLANG contains **248 classes** and is the largest first-party/modified subsystem in the exact JAR.
 
 Mapped hubs:
 
 - `IContext` — degree **103**
+- `Function$ArgumentCollection` — degree **86**
+- `Function` — degree **85**
 - `YSMBinding` — degree **48**
 - `CtrlBinding` — degree **40**
 - `QueryBinding` — degree **28**
@@ -216,10 +218,10 @@ This explains why model behavior reaches so many apparently unrelated systems.
 
 Major cross-domain edges include:
 
-- ENTITY_PRESENTATION ↔ MOLANG: **96**
-- ANIMATION ↔ MOLANG: **36**
-- CAPABILITY ↔ MOLANG: **29**
-- MOLANG ↔ NETWORK: **19**
+- ENTITY_PRESENTATION ↔ MOLANG: **89**
+- ANIMATION ↔ MOLANG: **30**
+- CAPABILITY ↔ MOLANG: **27**
+- MOLANG ↔ NETWORK: **14**
 - MOLANG ↔ RENDERER: present as a smaller but direct seam
 
 YSM's Molang layer is not a decorative script parser. It is the presentation-side state/query and
@@ -237,12 +239,12 @@ Mapped presentation anchors:
 Important cross-domain edges:
 
 - ENTITY_PRESENTATION ↔ RENDERER: **86**
-- ANIMATION ↔ ENTITY_PRESENTATION: **70**
+- ANIMATION ↔ ENTITY_PRESENTATION: **74**
 - CAPABILITY ↔ ENTITY_PRESENTATION: **49**
-- ENTITY_PRESENTATION ↔ INTEGRATION: **44**
+- ENTITY_PRESENTATION ↔ INTEGRATION: **43**
 - ENTITY_PRESENTATION ↔ EVENT_LIFECYCLE: **42**
-- ENTITY_PRESENTATION ↔ NETWORK: **31**
-- ENTITY_PRESENTATION ↔ GUI: **25**
+- ENTITY_PRESENTATION ↔ NETWORK: **27**
+- ENTITY_PRESENTATION ↔ GUI: **26**
 
 This strengthens the earlier TLM conclusion: the fundamental reusable primitive is a **presentation
 runtime wrapped around a gameplay entity**, not a fake-player architecture.
@@ -252,6 +254,8 @@ runtime wrapped around a gameplay entity**, not a fake-player architecture.
 Current exact semantic anchors:
 
 - `PredicateBasedController` — degree **33**
+- `AnimationControllerInstance` — degree **26** (HIGH semantic role)
+- `AnimationControllerRuntime` — degree **18** (HIGH semantic role)
 - `IAnimationController` — degree **17**
 - `CompositeAnimationController` — degree **15**
 - `BoneAnimationQueue` — degree **11**
@@ -262,8 +266,11 @@ several places. That divergence remains first-class evidence.
 The high-value unresolved animation region is now a small, connected controller/runtime cluster
 rather than an unknown forest.
 
-The next priority inside ANIMATION is the 18-field / IAnimationController-implementing runtime class
-that sits directly beside the recovered controller types.
+The 18-field / IAnimationController runtime and the 17-field single-animation instance are now
+HIGH semantic seeds. Their comparative names are `AnimationControllerRuntime` and
+`AnimationControllerInstance`; the official source counterparts are `BedrockAnimationController` and
+`AnimationPlayer`. Eight bounded members were added at HIGH, preserving SOURCE_ARTIFACT_DIVERGENCE.
+Original unobfuscated animation names remain unproven.
 
 ## 10. Model and bone core
 
@@ -271,7 +278,7 @@ MODEL is small and comparatively well constrained:
 
 - classes: **9**
 - semantic seeds: **4**
-- average domain score: **0.833399**
+- average domain score: **0.83318**
 
 Mapped hubs:
 
@@ -420,26 +427,26 @@ Final strongest seams:
 
 | Domains | Internal edges |
 |---|---:|
-| CAPABILITY ↔ NETWORK | 116 |
-| ENTITY_PRESENTATION ↔ MOLANG | 96 |
+| CAPABILITY ↔ NETWORK | 104 |
+| ENTITY_PRESENTATION ↔ MOLANG | 89 |
 | ENTITY_PRESENTATION ↔ RENDERER | 86 |
-| ANIMATION ↔ ENTITY_PRESENTATION | 70 |
+| ANIMATION ↔ ENTITY_PRESENTATION | 74 |
 | CAPABILITY ↔ ENTITY_PRESENTATION | 49 |
-| GUI ↔ NETWORK | 45 |
-| ENTITY_PRESENTATION ↔ INTEGRATION | 44 |
+| CORE ↔ ENTITY_PRESENTATION | 43 |
+| ENTITY_PRESENTATION ↔ INTEGRATION | 43 |
 | ENTITY_PRESENTATION ↔ EVENT_LIFECYCLE | 42 |
-| CORE ↔ ENTITY_PRESENTATION | 41 |
-| ANIMATION ↔ MOLANG | 36 |
-| NETWORK ↔ RENDERER | 32 |
+| GUI ↔ NETWORK | 38 |
 | CAPABILITY ↔ RENDERER | 31 |
-| ENTITY_PRESENTATION ↔ NETWORK | 31 |
-| CAPABILITY ↔ MOLANG | 29 |
-| ENTITY_PRESENTATION ↔ GUI | 25 |
-| GUI ↔ RENDERER | 25 |
+| ANIMATION ↔ MOLANG | 30 |
+| CAPABILITY ↔ MOLANG | 27 |
+| ENTITY_PRESENTATION ↔ NETWORK | 27 |
+| GUI ↔ RENDERER | 27 |
+| ENTITY_PRESENTATION ↔ GUI | 26 |
 | CAPABILITY ↔ GUI | 22 |
+| NETWORK ↔ RENDERER | 21 |
 | MODEL ↔ RENDERER | 20 |
-| MOLANG ↔ NETWORK | 19 |
-| INTEGRATION ↔ RENDERER | 13 |
+| CORE ↔ RENDERER | 14 |
+| MOLANG ↔ NETWORK | 14 |
 
 This is more useful than a package tree because it exposes the real coupling structure of the
 distributed artifact.
@@ -491,3 +498,25 @@ It does **not** establish:
 - encrypted model/container internals.
 
 Those boundaries remain unchanged.
+
+
+## 20. Bounded seed recovery
+
+The explicit unobfuscated `YesSteveModel` entrypoint is now a CORE seed; its earlier NETWORK label
+was propagation, not a semantic identity. Its graph degree remains 50.
+
+Five new semantic seeds raise the seed count from 97 to **102**. The complete map now has **253**
+entries (**216 CONFIRMED / 37 HIGH**), comprising **102 classes, 146 methods and 5 fields**. The exact
+contract and the bounded flags/reference audit both have **0 failures**.
+
+Molang `Function` and `Function$ArgumentCollection` now have unique exact declaration shapes and a
+verified typed/nest relationship. Eight methods match pinned official-source behavior; both ambiguous
+integer-return overloads and placeholder-field names remain unmapped. CONFIRMED here means semantic
+correspondence, not proof of the full original symbol table or binary/source equivalence.
+
+The regenerated domain labels are search hints: ANIMATION has 50 classes, MOLANG 248, CORE 9. The graph
+is unchanged at 955 nodes, 3,618 edges, 3,823 directed references and 19 components, and 15 degree-zero UNKNOWN
+singletons remain. Label changes follow the five stronger seeds; they do not add graph edges.
+
+See [SEED-RECOVERY-EVIDENCE-2026-10-05.json](SEED-RECOVERY-EVIDENCE-2026-10-05.json) for flags,
+descriptors, competitor predicates, pinned counterparts, bounded reference paths and unresolved cases.

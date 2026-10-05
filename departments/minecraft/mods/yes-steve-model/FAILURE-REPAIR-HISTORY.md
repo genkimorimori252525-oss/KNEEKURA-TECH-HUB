@@ -405,3 +405,12 @@ acquire target
 ~~~
 
 Do not collapse “artifact acquisition succeeded” into “analysis succeeded”.
+
+
+## Bounded seed continuation — tool limitations
+
+The local `javap` command was unavailable. Five Java declaration shapes and 16 selected method reference
+paths were instead read by the retained bounded classfile audit tool. The scratch-only documentation
+refresh helper initially had a syntax error; it was repaired before any refresh output was accepted.
+The final exact artifact contract and seed audit both have 0 failures. These checks do not claim runtime
+execution or native correctness; integer accessor ambiguities and source/artifact divergence remain.

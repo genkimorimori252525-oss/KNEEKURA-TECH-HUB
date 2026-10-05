@@ -1,0 +1,1980 @@
+{
+  "format": "kneekura.ysm-bounded-seed-evidence.v1",
+  "recorded_at": "2026-10-05",
+  "artifact": {
+    "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+    "sha1": "151ac7b24da8beeca1a20864565743cfd77af286",
+    "size": 63269843,
+    "version_id": "Zqooxsd2",
+    "classes": 955
+  },
+  "source_tracks": [
+    {
+      "role": "OFFICIAL_DIVERGENT_RELEASE_LINE_CANDIDATE",
+      "repository": "YesSteveModel/YesSteveModel",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+      "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/controller/BedrockAnimationController.java",
+      "sha256": "9e19c878f2df8fe2f9f8deae14506ad04a5d19f425984f2e912bf3b1c5e5214a"
+    },
+    {
+      "role": "OFFICIAL_DIVERGENT_RELEASE_LINE_CANDIDATE",
+      "repository": "YesSteveModel/YesSteveModel",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+      "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/controller/AnimationPlayer.java",
+      "sha256": "d1716903063b44feda14c4d60c96c319744c60dcd19d75583bd3a7b6db50edea"
+    },
+    {
+      "role": "OFFICIAL_DIVERGENT_RELEASE_LINE_CANDIDATE",
+      "repository": "YesSteveModel/YesSteveModel",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+      "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/controller/IAnimationController.java",
+      "sha256": "23b8f5c7b112fd7522f342cd8c6703809f4525fe4d7521a7c85e95073a07de6d"
+    },
+    {
+      "role": "COMPARATIVE_ONLY",
+      "repository": "OpenYSM/OpenYSM",
+      "revision": "a515d44686af77155a311b2a592327ca5d45a658",
+      "path": "common/src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/controller/AnimationControllerRuntime.java",
+      "sha256": "0a27f0232207d1740483a5ad4c622ba1628d3b7350c667a7c05cd8f98d833cda"
+    },
+    {
+      "role": "COMPARATIVE_ONLY",
+      "repository": "OpenYSM/OpenYSM",
+      "revision": "a515d44686af77155a311b2a592327ca5d45a658",
+      "path": "common/src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/controller/AnimationControllerInstance.java",
+      "sha256": "48f62bab1052857929e1eb32f7bd84871e78e8d2694f0fe31020087fb566e14e"
+    },
+    {
+      "role": "COMPARATIVE_ONLY",
+      "repository": "OpenYSM/OpenYSM",
+      "revision": "a515d44686af77155a311b2a592327ca5d45a658",
+      "path": "common/src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/controller/IAnimationController.java",
+      "sha256": "f83c624fb607cb368082d0dba841d95ae107417c952721b05cbd11d8cac411c8"
+    },
+    {
+      "role": "OFFICIAL_SOURCE_CANDIDATE",
+      "repository": "YesSteveModel/YesSteveModel",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+      "sha256": "66e683e3b7e342e5fb5706c67409e88bcc3cb243eb89486ae85bc0597f44fff4",
+      "path": "src/main/java/com/elfmcys/yesstevemodel/molang/runtime/Function.java"
+    },
+    {
+      "role": "COMPARATIVE_ONLY",
+      "repository": "OpenYSM/OpenYSM",
+      "revision": "a515d44686af77155a311b2a592327ca5d45a658",
+      "sha256": "5a328cb5a064e1293c7619febcd8afb1b552585fedf046a7a05895d4cdb86281",
+      "path": "common/src/main/java/com/elfmcys/yesstevemodel/molang/runtime/Function.java"
+    },
+    {
+      "repository": "YesSteveModel/YesSteveModel",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+      "path": "src/main/java/com/elfmcys/yesstevemodel/YesSteveModel.java",
+      "role": "OFFICIAL_SOURCE_CANDIDATE",
+      "sha256": "9b76fc10757b48e985b725eb6b01307e1819242750e9b66e2f58f12546baebba"
+    }
+  ],
+  "source_artifact_equivalence": "NOT_ESTABLISHED",
+  "preserved_global_negative_finding": "SOURCE_ARTIFACT_DIVERGENCE",
+  "confidence_policy": "Exact target existence validates contracts; semantic confidence additionally requires unique declaration shape, bounded Java behavior and pinned source counterpart. Comparative names alone remain HIGH.",
+  "class_shape_predicate": "Exact class access/hierarchy plus order-independent multisets of(member access,normalized descriptor); erase all internal YSM names to LYSM; preserve external descriptors and arrays. Owner/member names excluded. CORE additionally retains independent Forge mod/config literals.",
+  "classes": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/YesSteveModel",
+      "semantic_owner": "com.elfmcys.yesstevemodel.YesSteveModel",
+      "confidence": "CONFIRMED",
+      "foundation_domain": "CORE",
+      "original_symbol_proven": true,
+      "source_artifact_divergence": false,
+      "declaration": {
+        "access": 33,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": [
+          {
+            "access": 25,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Ljava/lang/String;"
+          },
+          {
+            "access": 25,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lorg/apache/logging/log4j/Logger;"
+          }
+        ],
+        "methods": [
+          {
+            "access": 1,
+            "name": "<init>",
+            "descriptor": "()V"
+          },
+          {
+            "access": 10,
+            "name": "Ooooo0oooO0oooOOOoO0000O",
+            "descriptor": "()V"
+          },
+          {
+            "access": 9,
+            "name": "isAvailable",
+            "descriptor": "()Z"
+          },
+          {
+            "access": 9,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Z"
+          },
+          {
+            "access": 9,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "()V"
+          },
+          {
+            "access": 9,
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "()Lnet/minecraftforge/fml/ModLoadingWarning;"
+          },
+          {
+            "access": 9,
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "()Lnet/minecraft/network/chat/Component;"
+          },
+          {
+            "access": 9,
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "()Ljava/lang/String;"
+          },
+          {
+            "access": 8,
+            "name": "<clinit>",
+            "descriptor": "()V"
+          }
+        ]
+      },
+      "role_evidence": "Explicit CORE seed fixes prior NETWORK label propagation; no claim of binary/source equivalence or obfuscated member semantic names.",
+      "competitor_evidence": {
+        "predicate": "2 fields,9 methods,Forge @Mod descriptor CP anchor,mod-id literal,and both client/common config-file literals (owner text excluded)",
+        "population": 955,
+        "matches": [
+          "com/elfmcys/yesstevemodel/YesSteveModel"
+        ]
+      },
+      "nesting_attributes": {}
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.AnimationControllerRuntime",
+      "confidence": "HIGH",
+      "foundation_domain": "ANIMATION",
+      "original_symbol_proven": false,
+      "source_artifact_divergence": true,
+      "declaration": {
+        "access": 33,
+        "super": "java/lang/Object",
+        "interfaces": [
+          "com/elfmcys/yesstevemodel/OoOoOO0O00oOoO0o0ooOO0oO"
+        ],
+        "fields": [
+          {
+            "access": 26,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "I"
+          },
+          {
+            "access": 18,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;"
+          },
+          {
+            "access": 18,
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "Ljava/lang/String;"
+          },
+          {
+            "access": 18,
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "F"
+          },
+          {
+            "access": 18,
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O0oo0oOo0OOOO00Oo0oo0o00;"
+          },
+          {
+            "access": 2,
+            "name": "Ooooo0oooO0oooOOOoO0000O",
+            "descriptor": "Ljava/util/List;"
+          },
+          {
+            "access": 2,
+            "name": "oo0OoO00oOoo000O0000o0oo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/ooOo0OoOoo0ooOOoOO0o000O;"
+          },
+          {
+            "access": 2,
+            "name": "oooooooOOoOOoO00OooOo00O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O00ooo0OooOo00o0o0Oo00oO;"
+          },
+          {
+            "access": 2,
+            "name": "Oo00o0OooOOo0ooOoo0oO0o0",
+            "descriptor": "Ljava/lang/String;"
+          },
+          {
+            "access": 18,
+            "name": "o0OOO0o0o0OOo000oO00o00O",
+            "descriptor": "Lit/unimi/dsi/fastutil/objects/ReferenceArrayList;"
+          },
+          {
+            "access": 2,
+            "name": "O0OooOo0oOOoOoOoOooO000o",
+            "descriptor": "I"
+          },
+          {
+            "access": 18,
+            "name": "ooOO000o0O0OOOoO0Oo0o0Oo",
+            "descriptor": "Lit/unimi/dsi/fastutil/ints/Int2ReferenceOpenHashMap;"
+          },
+          {
+            "access": 18,
+            "name": "OOOo0OOOoOO0O00Oo00ooOOO",
+            "descriptor": "Lit/unimi/dsi/fastutil/objects/ReferenceArrayList;"
+          },
+          {
+            "access": 2,
+            "name": "oOo0o0000OOOO0OooooO00oo",
+            "descriptor": "Z"
+          },
+          {
+            "access": 2,
+            "name": "O0ooooOO0oOo000O0Oo00OOO",
+            "descriptor": "Ljava/lang/String;"
+          },
+          {
+            "access": 2,
+            "name": "OO0ooO00OoO00o0OO0OOooO0",
+            "descriptor": "I"
+          },
+          {
+            "access": 2,
+            "name": "Ooo0O0000OO0OOO0o0Oo0oOO",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO;"
+          },
+          {
+            "access": 18,
+            "name": "o0o0Oooo00OoOoOOOooo0000",
+            "descriptor": "Lit/unimi/dsi/fastutil/ints/IntOpenHashSet;"
+          }
+        ],
+        "methods": [
+          {
+            "access": 1,
+            "name": "<init>",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;Ljava/lang/String;F)V"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;Z)V"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Ljava/lang/String;"
+          },
+          {
+            "access": 1,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "()Ljava/lang/String;"
+          },
+          {
+            "access": 2,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;)V"
+          },
+          {
+            "access": 1,
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/O00ooo0OooOo00o0o0Oo00oO;"
+          },
+          {
+            "access": 1,
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "()Z"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/util/List;Lit/unimi/dsi/fastutil/objects/Object2ReferenceMap;)V"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/util/List;Lcom/elfmcys/yesstevemodel/ooOo0OoOoo0ooOOoOO0o000O;)V"
+          },
+          {
+            "access": 2,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/ooOo0OoOoo0ooOOoOO0o000O;)V"
+          },
+          {
+            "access": 2,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;I)V"
+          },
+          {
+            "access": 2,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Z"
+          },
+          {
+            "access": 2,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/O00ooo0OooOo00o0o0Oo00oO;Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)V"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/util/function/Consumer;)V"
+          },
+          {
+            "access": 1,
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "()V"
+          }
+        ]
+      },
+      "role_evidence": "Hierarchical state machine: recursive child controller, visited-entry set, state data, animation slots, active blend queue rebuild and transforms consumer.",
+      "competitor_evidence": {
+        "population": 955,
+        "predicates": [
+          {
+            "predicate": "class access + field count + method count (names/order excluded)",
+            "matches": [
+              "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO"
+            ]
+          },
+          {
+            "predicate": "Exact class access/hierarchy plus order-independent multisets of(member access,normalized descriptor); erase all internal YSM names to LYSM; preserve external descriptors and arrays. Owner/member names excluded. CORE additionally retains independent Forge mod/config literals.",
+            "matches": [
+              "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO"
+            ]
+          }
+        ]
+      },
+      "nesting_attributes": {}
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOOO0o0oo0o000oOOooOoOo0",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.AnimationControllerInstance",
+      "confidence": "HIGH",
+      "foundation_domain": "ANIMATION",
+      "original_symbol_proven": false,
+      "source_artifact_divergence": true,
+      "declaration": {
+        "access": 33,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": [
+          {
+            "access": 18,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lit/unimi/dsi/fastutil/ints/Int2ReferenceOpenHashMap;"
+          },
+          {
+            "access": 18,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lit/unimi/dsi/fastutil/objects/ReferenceArrayList;"
+          },
+          {
+            "access": 18,
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/o000o0o0Ooooo0ooo0oO0O0o;"
+          },
+          {
+            "access": 18,
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;"
+          },
+          {
+            "access": 2,
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "Z"
+          },
+          {
+            "access": 18,
+            "name": "Ooooo0oooO0oooOOOoO0000O",
+            "descriptor": "F"
+          },
+          {
+            "access": 2,
+            "name": "oo0OoO00oOoo000O0000o0oo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/Oo0oOoO0OooOO0ooooOooo0O;"
+          },
+          {
+            "access": 2,
+            "name": "oooooooOOoOOoO00OooOo00O",
+            "descriptor": "F"
+          },
+          {
+            "access": 2,
+            "name": "Oo00o0OooOOo0ooOoo0oO0o0",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/o0OoOoOO0oooO0O000oO0o0o;"
+          },
+          {
+            "access": 2,
+            "name": "o0OOO0o0o0OOo000oO00o00O",
+            "descriptor": "F"
+          },
+          {
+            "access": 2,
+            "name": "O0OooOo0oOOoOoOoOooO000o",
+            "descriptor": "Lcom/mojang/datafixers/util/Pair;"
+          },
+          {
+            "access": 2,
+            "name": "ooOO000o0O0OOOoO0Oo0o0Oo",
+            "descriptor": "Lcom/mojang/datafixers/util/Pair;"
+          },
+          {
+            "access": 2,
+            "name": "OOOo0OOOoOO0O00Oo00ooOOO",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/Oo0OOo00Oo00oO00Ooo0O00O;"
+          },
+          {
+            "access": 2,
+            "name": "oOo0o0000OOOO0OooooO00oo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;"
+          },
+          {
+            "access": 2,
+            "name": "O0ooooOO0oOo000O0Oo00OOO",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/OoOOo0O0oo0OO0o0ooOO0OO0;"
+          },
+          {
+            "access": 2,
+            "name": "OO0ooO00OoO00o0OO0OOooO0",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O00OoO0oOoO0oOo0o000ooo0;"
+          },
+          {
+            "access": 2,
+            "name": "Ooo0O0000OO0OOO0o0Oo0oOO",
+            "descriptor": "Z"
+          }
+        ],
+        "methods": [
+          {
+            "access": 1,
+            "name": "<init>",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;F)V"
+          },
+          {
+            "access": 1,
+            "name": "<init>",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;FZ)V"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/util/List;)V"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;)V"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;)V"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(FLcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;Z)V"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/o000o0o0Ooooo0ooo0oO0O0o;"
+          },
+          {
+            "access": 2,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;Z)V"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)V"
+          },
+          {
+            "access": 2,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;FZ)V"
+          },
+          {
+            "access": 2,
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "(F)V"
+          },
+          {
+            "access": 2,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;F)V"
+          },
+          {
+            "access": 2,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;F)V"
+          },
+          {
+            "access": 2,
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;F)V"
+          },
+          {
+            "access": 1,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "()V"
+          },
+          {
+            "access": 2,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oOOOO0oo00o0oOoo0oOoooOO;F)Lcom/elfmcys/yesstevemodel/O00ooo0O0Ooo0OOO0oo00o0o;"
+          },
+          {
+            "access": 2,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oOOOO0oo00o0oOoo0oOoooOO;FFLorg/joml/Vector3f;)Lcom/elfmcys/yesstevemodel/O0O0O00OOO0o00o00ooooOo0;"
+          },
+          {
+            "access": 2,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(FLorg/joml/Vector3f;Z)Lcom/elfmcys/yesstevemodel/Oo0oooOOoo00ooOO00OO0OO0;"
+          },
+          {
+            "access": 2,
+            "name": "OOOo0OOOoOO0O00Oo00ooOOO",
+            "descriptor": "()Z"
+          },
+          {
+            "access": 2,
+            "name": "oOo0o0000OOOO0OooooO00oo",
+            "descriptor": "()V"
+          },
+          {
+            "access": 1,
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/Oo0OOo00Oo00oO00Ooo0O00O;"
+          },
+          {
+            "access": 1,
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/Oo0oOoO0OooOO0ooooOooo0O;"
+          },
+          {
+            "access": 1,
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "()Lit/unimi/dsi/fastutil/ints/Int2ReferenceOpenHashMap;"
+          },
+          {
+            "access": 1,
+            "name": "Ooooo0oooO0oooOOOoO0000O",
+            "descriptor": "()Lit/unimi/dsi/fastutil/objects/ReferenceArrayList;"
+          },
+          {
+            "access": 1,
+            "name": "oo0OoO00oOoo000O0000o0oo",
+            "descriptor": "()Z"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/o0OoOoOO0oooO0O000oO0o0o;)V"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Z)V"
+          },
+          {
+            "access": 1,
+            "name": "oooooooOOoOOoO00OooOo00O",
+            "descriptor": "()F"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(F)F"
+          },
+          {
+            "access": 1,
+            "name": "Oo00o0OooOOo0ooOoo0oO0o0",
+            "descriptor": "()V"
+          },
+          {
+            "access": 1,
+            "name": "o0OOO0o0o0OOo000oO00o00O",
+            "descriptor": "()V"
+          },
+          {
+            "access": 1,
+            "name": "O0OooOo0oOOoOoOoOooO000o",
+            "descriptor": "()V"
+          },
+          {
+            "access": 1,
+            "name": "ooOO000o0O0OOOoO0Oo0o0Oo",
+            "descriptor": "()V"
+          },
+          {
+            "access": 1,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "(F)V"
+          }
+        ]
+      },
+      "role_evidence": "Single-animation player: pending/current loop pairs, queue map/list, per-animation context, transition interpolator, state enum and sound/instruction event executors.",
+      "competitor_evidence": {
+        "population": 955,
+        "predicates": [
+          {
+            "predicate": "class access + field count + method count (names/order excluded)",
+            "matches": [
+              "com/elfmcys/yesstevemodel/OOOO0o0oo0o000oOOooOoOo0"
+            ]
+          },
+          {
+            "predicate": "Exact class access/hierarchy plus order-independent multisets of(member access,normalized descriptor); erase all internal YSM names to LYSM; preserve external descriptors and arrays. Owner/member names excluded. CORE additionally retains independent Forge mod/config literals.",
+            "matches": [
+              "com/elfmcys/yesstevemodel/OOOO0o0oo0o000oOOooOoOo0"
+            ]
+          }
+        ]
+      },
+      "nesting_attributes": {}
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.Function",
+      "confidence": "CONFIRMED",
+      "foundation_domain": "MOLANG",
+      "original_symbol_proven": false,
+      "source_artifact_divergence": false,
+      "declaration": {
+        "access": 1537,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": [
+          {
+            "access": 25,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O;"
+          },
+          {
+            "access": 25,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo;"
+          }
+        ],
+        "methods": [
+          {
+            "access": 1025,
+            "name": "evaluate",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo;)Ljava/lang/Object;"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(I)Z"
+          },
+          {
+            "access": 4106,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo;)Ljava/lang/Object;"
+          },
+          {
+            "access": 8,
+            "name": "<clinit>",
+            "descriptor": "()V"
+          }
+        ]
+      },
+      "role_evidence": "Official Function/ArgumentCollection surface, typed enclosing relationship and bounded evaluator/accessor behavior.",
+      "competitor_evidence": {
+        "population": 955,
+        "predicates": [
+          {
+            "predicate": "class access + field count + method count (names/order excluded)",
+            "matches": [
+              "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O"
+            ]
+          },
+          {
+            "predicate": "Exact class access/hierarchy plus order-independent multisets of(member access,normalized descriptor); erase all internal YSM names to LYSM; preserve external descriptors and arrays. Owner/member names excluded. CORE additionally retains independent Forge mod/config literals.",
+            "matches": [
+              "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O"
+            ]
+          }
+        ]
+      },
+      "nesting_attributes": {
+        "InnerClasses": [
+          {
+            "inner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "outer": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O",
+            "inner_name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "access": 9
+          },
+          {
+            "inner": "java/lang/invoke/MethodHandles$Lookup",
+            "outer": "java/lang/invoke/MethodHandles",
+            "inner_name": "Lookup",
+            "access": 25
+          }
+        ],
+        "NestMembers": [
+          "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo"
+        ]
+      }
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.Function$ArgumentCollection",
+      "confidence": "CONFIRMED",
+      "foundation_domain": "MOLANG",
+      "original_symbol_proven": false,
+      "source_artifact_divergence": false,
+      "declaration": {
+        "access": 33,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": [
+          {
+            "access": 18,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Ljava/util/List;"
+          }
+        ],
+        "methods": [
+          {
+            "access": 1,
+            "name": "<init>",
+            "descriptor": "(Ljava/util/List;)V"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()I"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)Ljava/lang/String;"
+          },
+          {
+            "access": 1,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)I"
+          },
+          {
+            "access": 1,
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)D"
+          },
+          {
+            "access": 1,
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)I"
+          },
+          {
+            "access": 1,
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)F"
+          },
+          {
+            "access": 1,
+            "name": "Ooooo0oooO0oooOOOoO0000O",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)Z"
+          },
+          {
+            "access": 1,
+            "name": "oo0OoO00oOoo000O0000o0oo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)Lnet/minecraft/resources/ResourceLocation;"
+          },
+          {
+            "access": 1,
+            "name": "oooooooOOoOOoO00OooOo00O",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)Ljava/lang/Object;"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(I)Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;"
+          }
+        ]
+      },
+      "role_evidence": "Official Function/ArgumentCollection surface, typed enclosing relationship and bounded evaluator/accessor behavior.",
+      "competitor_evidence": {
+        "population": 955,
+        "predicates": [
+          {
+            "predicate": "class access + field count + method count (names/order excluded)",
+            "matches": [
+              "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo"
+            ]
+          },
+          {
+            "predicate": "Exact class access/hierarchy plus order-independent multisets of(member access,normalized descriptor); erase all internal YSM names to LYSM; preserve external descriptors and arrays. Owner/member names excluded. CORE additionally retains independent Forge mod/config literals.",
+            "matches": [
+              "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo"
+            ]
+          }
+        ]
+      },
+      "nesting_attributes": {
+        "InnerClasses": [
+          {
+            "inner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "outer": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O",
+            "inner_name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "access": 9
+          }
+        ],
+        "NestHost": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O"
+      }
+    }
+  ],
+  "members": [
+    {
+      "mapping_id": "ysm265.method.animation-runtime-get-name",
+      "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "semantic_member": "getName",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.AnimationControllerRuntime",
+      "confidence": "HIGH",
+      "source_artifact_divergence": true,
+      "behavior_evidence": "Only own reference is getfield O00OOOooOoooOoo0o0o0oO0O:String, the final String assigned by the constructor; separates it from the other public String getter.",
+      "reference_path": [
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "Ljava/lang/String;",
+            "cp_tag": 9
+          }
+        }
+      ]
+    },
+    {
+      "mapping_id": "ysm265.method.animation-runtime-get-current-animation",
+      "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "semantic_member": "getCurrentAnimation",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.AnimationControllerRuntime",
+      "confidence": "HIGH",
+      "source_artifact_divergence": true,
+      "behavior_evidence": "Reads current state and child-controller fields, recursively invokes this exact getter on child, otherwise reads display String; ldc \"(null)\" matches both sources. This is a current-state/display role, not proof that its original name was getCurrentAnimation.",
+      "reference_path": [
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+            "name": "oooooooOOoOOoO00OooOo00O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O00ooo0OooOo00o0o0Oo00oO;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+            "name": "oooooooOOoOOoO00OooOo00O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O00ooo0OooOo00o0o0Oo00oO;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00ooo0OooOo00o0o0Oo00oO",
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "()Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+            "name": "Ooo0O0000OO0OOO0o0Oo0oOO",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 25,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+            "name": "Ooo0O0000OO0OOO0o0Oo0oOO",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 28,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "()Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 33,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+            "name": "Oo00o0OooOOo0ooOoo0oO0o0",
+            "descriptor": "Ljava/lang/String;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 37,
+          "opcode": "0x12",
+          "reference": {
+            "string": "(null)",
+            "cp_tag": 8
+          }
+        }
+      ]
+    },
+    {
+      "mapping_id": "ysm265.method.animation-runtime-init-with-bones",
+      "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/util/List;Lcom/elfmcys/yesstevemodel/ooOo0OoOoo0ooOOoOO0o000O;)V",
+      "access": 1,
+      "semantic_member": "initWithBones",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.AnimationControllerRuntime",
+      "confidence": "HIGH",
+      "source_artifact_divergence": true,
+      "behavior_evidence": "Invokes reset, stores controller data, iterates input snapshots into Int2ReferenceOpenHashMap and stores supplied List as bone targets. Unique public descriptor in owner.",
+      "reference_path": [
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+            "name": "oo0OoO00oOoo000O0000o0oo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/ooOo0OoOoo0ooOOoOO0o000O;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/List",
+            "name": "iterator",
+            "descriptor": "()Ljava/util/Iterator;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 17,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/Iterator",
+            "name": "hasNext",
+            "descriptor": "()Z",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 26,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/Iterator",
+            "name": "next",
+            "descriptor": "()Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 31,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oOO0o0oOOOoOoo00oOO0Oo00",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 37,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+            "name": "ooOO000o0O0OOOoO0Oo0o0Oo",
+            "descriptor": "Lit/unimi/dsi/fastutil/ints/Int2ReferenceOpenHashMap;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 42,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOO0o0oOOOoOoo00oOO0Oo00",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 45,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO$o0OOooo0o0OO00OoOOOo0o0O",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 51,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO$o0OOooo0o0OO00OoOOOo0o0O",
+            "name": "<init>",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oOO0o0oOOOoOoo00oOO0Oo00;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 54,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/Int2ReferenceOpenHashMap",
+            "name": "put",
+            "descriptor": "(ILjava/lang/Object;)Ljava/lang/Object;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 63,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+            "name": "Ooooo0oooO0oooOOOoO0000O",
+            "descriptor": "Ljava/util/List;",
+            "cp_tag": 9
+          }
+        }
+      ]
+    },
+    {
+      "mapping_id": "ysm265.method.animation-runtime-reset",
+      "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+      "name": "oOOOo0OOO0ooooo0O00OO0o0",
+      "descriptor": "()V",
+      "access": 1,
+      "semantic_member": "reset",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.AnimationControllerRuntime",
+      "confidence": "HIGH",
+      "source_artifact_divergence": true,
+      "behavior_evidence": "Nulls controller/state references, clears active transform and bone map collections, handles child by hierarchy depth, resets animation slots and clears slot list. Only public no-argument void method.",
+      "reference_path": [
+        {
+          "offset": 1,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/objects/ReferenceLists",
+            "name": "emptyList",
+            "descriptor": "()Lit/unimi/dsi/fastutil/objects/ReferenceList;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+            "name": "Ooooo0oooO0oooOOOoO0000O",
+            "descriptor": "Ljava/util/List;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+            "name": "oo0OoO00oOoo000O0000o0oo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/ooOo0OoOoo0ooOOoOO0o000O;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+            "name": "oooooooOOoOOoO00OooOo00O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O00ooo0OooOo00o0o0Oo00oO;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 19,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+            "name": "O0OooOo0oOOoOoOoOooO000o",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 23,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+            "name": "OOOo0OOOoOO0O00Oo00ooOOO",
+            "descriptor": "Lit/unimi/dsi/fastutil/objects/ReferenceArrayList;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 26,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/objects/ReferenceArrayList",
+            "name": "clear",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 30,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+            "name": "ooOO000o0O0OOOoO0Oo0o0Oo",
+            "descriptor": "Lit/unimi/dsi/fastutil/ints/Int2ReferenceOpenHashMap;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 33,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/Int2ReferenceOpenHashMap",
+            "name": "clear",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 37,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+            "name": "OO0ooO00OoO00o0OO0OOooO0",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 46,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+            "name": "Ooo0O0000OO0OOO0o0Oo0oOO",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 50,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+            "name": "o0OOO0o0o0OOo000oO00o00O",
+            "descriptor": "Lit/unimi/dsi/fastutil/objects/ReferenceArrayList;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 53,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/objects/ReferenceArrayList",
+            "name": "iterator",
+            "descriptor": "()Lit/unimi/dsi/fastutil/objects/ObjectListIterator;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 58,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/Iterator",
+            "name": "hasNext",
+            "descriptor": "()Z",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 67,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/Iterator",
+            "name": "next",
+            "descriptor": "()Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 72,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 77,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/OOOO0o0oo0o000oOOooOoOo0;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 80,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOOO0o0oo0o000oOOooOoOo0",
+            "name": "O0OooOo0oOOoOoOoOooO000o",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 87,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+            "name": "o0OOO0o0o0OOo000oO00o00O",
+            "descriptor": "Lit/unimi/dsi/fastutil/objects/ReferenceArrayList;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 90,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/objects/ReferenceArrayList",
+            "name": "clear",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 94,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O0oo0oOo0OOOO00Oo0oo0o00;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 97,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0oo0oOo0OOOO00Oo0oo0o00",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/OOOO0O0OO0oOOo00Ooo0oooO;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 100,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOOO0O0OO0oOOo00Ooo0oooO",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        }
+      ]
+    },
+    {
+      "mapping_id": "ysm265.method.animation-instance-get-context",
+      "owner": "com/elfmcys/yesstevemodel/OOOO0o0oo0o000oOOooOoOo0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/o000o0o0Ooooo0ooo0oO0O0o;",
+      "access": 1,
+      "semantic_member": "getContext",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.AnimationControllerInstance",
+      "confidence": "HIGH",
+      "source_artifact_divergence": true,
+      "behavior_evidence": "Only own reference is getfield O00OOOooOoooOoo0o0o0oO0O:context. Constructor creates it; process and executeRenderLayers attach it to evaluator entity. Unique return descriptor in owner.",
+      "reference_path": [
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOOO0o0oo0o000oOOooOoOo0",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/o000o0o0Ooooo0ooo0oO0O0o;",
+            "cp_tag": 9
+          }
+        }
+      ]
+    },
+    {
+      "mapping_id": "ysm265.method.animation-instance-get-current-animation",
+      "owner": "com/elfmcys/yesstevemodel/OOOO0o0oo0o000oOOooOoOo0",
+      "name": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/Oo0OOo00Oo00oO00Ooo0O00O;",
+      "access": 1,
+      "semantic_member": "getCurrentAnimation",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.AnimationControllerInstance",
+      "confidence": "HIGH",
+      "source_artifact_divergence": true,
+      "behavior_evidence": "Only own reference is getfield OOOo0OOOoOO0O00Oo00ooOOO:animation, set from pending Pair second in load/apply helper and nulled by clear helper. Unique return descriptor in owner.",
+      "reference_path": [
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOOO0o0oo0o000oOOooOoOo0",
+            "name": "OOOo0OOOoOO0O00Oo00ooOOO",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/Oo0OOo00Oo00oO00Ooo0O00O;",
+            "cp_tag": 9
+          }
+        }
+      ]
+    },
+    {
+      "mapping_id": "ysm265.method.animation-instance-get-active-bone-animation-queues",
+      "owner": "com/elfmcys/yesstevemodel/OOOO0o0oo0o000oOOooOoOo0",
+      "name": "Ooooo0oooO0oooOOOoO0000O",
+      "descriptor": "()Lit/unimi/dsi/fastutil/objects/ReferenceArrayList;",
+      "access": 1,
+      "semantic_member": "getActiveBoneAnimationQueues",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.AnimationControllerInstance",
+      "confidence": "HIGH",
+      "source_artifact_divergence": true,
+      "behavior_evidence": "Only own reference is getfield o0OOooo0o0OO00OoOOOo0o0O:ReferenceArrayList. Load helper adds queues selected from map; run/reset helpers iterate this list. Unique public return descriptor in owner.",
+      "reference_path": [
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOOO0o0oo0o000oOOooOoOo0",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lit/unimi/dsi/fastutil/objects/ReferenceArrayList;",
+            "cp_tag": 9
+          }
+        }
+      ]
+    },
+    {
+      "mapping_id": "ysm265.method.animation-instance-cancel-animation",
+      "owner": "com/elfmcys/yesstevemodel/OOOO0o0oo0o000oOOooOoOo0",
+      "name": "o0OOO0o0o0OOo000oO00o00O",
+      "descriptor": "()V",
+      "access": 1,
+      "semantic_member": "cancelAnimation",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.AnimationControllerInstance",
+      "confidence": "HIGH",
+      "source_artifact_divergence": true,
+      "behavior_evidence": "Writes null to last-requested and pending Pair fields then invokes private clear/idle helper. Contrasts with fullReset (adds map clear) and resetRequestedAnimation (nulls only last request). Disambiguates five public void/no-argument methods by actual field/call sequence.",
+      "reference_path": [
+        {
+          "offset": 2,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOOO0o0oo0o000oOOooOoOo0",
+            "name": "O0OooOo0oOOoOoOoOooO000o",
+            "descriptor": "Lcom/mojang/datafixers/util/Pair;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOOO0o0oo0o000oOOooOoOo0",
+            "name": "ooOO000o0O0OOOoO0Oo0o0Oo",
+            "descriptor": "Lcom/mojang/datafixers/util/Pair;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOOO0o0oo0o000oOOooOoOo0",
+            "name": "oOo0o0000OOOO0OooooO00oo",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        }
+      ]
+    },
+    {
+      "mapping_id": "ysm265.method.molang-function-evaluate",
+      "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O",
+      "name": "evaluate",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo;)Ljava/lang/Object;",
+      "access": 1025,
+      "semantic_member": "evaluate",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.Function",
+      "confidence": "CONFIRMED",
+      "source_artifact_divergence": false,
+      "behavior_evidence": "Public abstract functional method preserves evaluate spelling, typed context+argument-collection parameters and Object return; official interface has the same surface.",
+      "reference_path": []
+    },
+    {
+      "mapping_id": "ysm265.method.molang-function-validate-argument-size",
+      "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(I)Z",
+      "access": 1,
+      "semantic_member": "validateArgumentSize",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.Function",
+      "confidence": "CONFIRMED",
+      "source_artifact_divergence": false,
+      "behavior_evidence": "Only nonstatic concrete interface method; bytes 04ac are iconst_1, ireturn, exactly matching unconditional true validation default.",
+      "reference_path": [],
+      "simple_opcodes": [
+        "0x4",
+        "0xac"
+      ]
+    },
+    {
+      "mapping_id": "ysm265.method.molang-argument-collection-size",
+      "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()I",
+      "access": 1,
+      "semantic_member": "size",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.Function$ArgumentCollection",
+      "confidence": "CONFIRMED",
+      "source_artifact_divergence": false,
+      "behavior_evidence": "Reads sole List field and invokes java/util/List.size()I.",
+      "reference_path": [
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Ljava/util/List;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/List",
+            "name": "size",
+            "descriptor": "()I",
+            "cp_tag": 11
+          }
+        }
+      ]
+    },
+    {
+      "mapping_id": "ysm265.method.molang-argument-collection-get-as-string",
+      "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)Ljava/lang/String;",
+      "access": 1,
+      "semantic_member": "getAsString",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.Function$ArgumentCollection",
+      "confidence": "CONFIRMED",
+      "source_artifact_divergence": false,
+      "behavior_evidence": "List.get(index), Expression cast, context expression evaluation, then static Object-to-String conversion; unique String-return argument accessor.",
+      "reference_path": [
+        {
+          "offset": 2,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Ljava/util/List;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/List",
+            "name": "get",
+            "descriptor": "(I)Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;)Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 19,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OO0O00ooOo0OO0oooOoo0Oo0",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "(Ljava/lang/Object;)Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        }
+      ]
+    },
+    {
+      "mapping_id": "ysm265.method.molang-argument-collection-get-as-double",
+      "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "name": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)D",
+      "access": 1,
+      "semantic_member": "getAsDouble",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.Function$ArgumentCollection",
+      "confidence": "CONFIRMED",
+      "source_artifact_divergence": false,
+      "behavior_evidence": "Same indexed-expression evaluation followed by static (Object)D conversion; unique double-return argument accessor.",
+      "reference_path": [
+        {
+          "offset": 2,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Ljava/util/List;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/List",
+            "name": "get",
+            "descriptor": "(I)Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;)Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 19,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OO0O00ooOo0OO0oooOoo0Oo0",
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "(Ljava/lang/Object;)D",
+            "cp_tag": 10
+          }
+        }
+      ]
+    },
+    {
+      "mapping_id": "ysm265.method.molang-argument-collection-get-as-resource-location",
+      "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "name": "oo0OoO00oOoo000O0000o0oo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)Lnet/minecraft/resources/ResourceLocation;",
+      "access": 1,
+      "semantic_member": "getAsResourceLocation",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.Function$ArgumentCollection",
+      "confidence": "CONFIRMED",
+      "source_artifact_divergence": false,
+      "behavior_evidence": "Invokes getValue role; supports cached ResourceLocation on StringExpression, ResourceLocation.m_135820_(String), caches successful parse, String fallback, and Illegal resource location: diagnostic. Source candidate matches all these branches.",
+      "reference_path": [
+        {
+          "offset": 3,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "oooooooOOoOOoO00OooOo00O",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)Ljava/lang/Object;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 8,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oo0OoOoOoOo0oOoooo0oOOo0",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 15,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oo0OoOoOoOo0oOoooo0oOOo0",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 22,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo0OoOoOoOo0oOoooo0oOOo0",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "()Lnet/minecraft/resources/ResourceLocation;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 30,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo0OoOoOoOo0oOoooo0oOOo0",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "()Lnet/minecraft/resources/ResourceLocation;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 36,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo0OoOoOoOo0oOoooo0oOOo0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 39,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "net/minecraft/resources/ResourceLocation",
+            "name": "m_135820_",
+            "descriptor": "(Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 53,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo0OoOoOoOo0oOoooo0oOOo0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/resources/ResourceLocation;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 61,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo0OoOoOoOo0oOoooo0oOOo0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 70,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "java/lang/String",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 77,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "java/lang/String",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 84,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "net/minecraft/resources/ResourceLocation",
+            "name": "m_135820_",
+            "descriptor": "(Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 108,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 113,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oo0oOO0000o0Ooooo0OoOo0O",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 116,
+          "opcode": "0x12",
+          "reference": {
+            "string": "Illegal resource location: ",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 119,
+          "opcode": "0xbd",
+          "reference": {
+            "class_name": "java/lang/Object",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 127,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo0oOO0000o0Ooooo0OoOo0O",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;[Ljava/lang/Object;)V",
+            "cp_tag": 11
+          }
+        }
+      ]
+    },
+    {
+      "mapping_id": "ysm265.method.molang-argument-collection-get-value",
+      "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "name": "oooooooOOoOOoO00OooOo00O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)Ljava/lang/Object;",
+      "access": 1,
+      "semantic_member": "getValue",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.Function$ArgumentCollection",
+      "confidence": "CONFIRMED",
+      "source_artifact_divergence": false,
+      "behavior_evidence": "List.get(index), Expression cast, context expression evaluation, directly returns resulting Object without conversion.",
+      "reference_path": [
+        {
+          "offset": 2,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Ljava/util/List;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/List",
+            "name": "get",
+            "descriptor": "(I)Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;)Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        }
+      ]
+    },
+    {
+      "mapping_id": "ysm265.method.molang-argument-collection-get-expression",
+      "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(I)Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;",
+      "access": 1,
+      "semantic_member": "getExpression",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.Function$ArgumentCollection",
+      "confidence": "CONFIRMED",
+      "source_artifact_divergence": false,
+      "behavior_evidence": "List.get(index), cast to expression owner, directly returns it; no execution context evaluation.",
+      "reference_path": [
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Ljava/util/List;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/List",
+            "name": "get",
+            "descriptor": "(I)Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 10,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0",
+            "cp_tag": 7
+          }
+        }
+      ]
+    }
+  ],
+  "unresolved": [
+    "Runtime implements confirmed IAnimationController; four artifact implementers, but other implementers have 6/9, 8/20 and 5/10 field/method counts versus 18/15. Shape search independently unique among all955.",
+    "Runtime official counterpart is BedrockAnimationController, with18 fields and15 top-level methods; comparative counterpart is AnimationControllerRuntime with18 fields and15 methods. Official names differ (getStateName/updateModel/clear versus getCurrentAnimation/init/reset).",
+    "Instance official counterpart AnimationPlayer has17 fields and34 methods; comparative AnimationControllerInstance has17 fields and32 methods. Artifact adds map getter and boolean setter relative to comparative source, and has ending-transition helpers taking only float, unlike comparative float+evaluator.",
+    "Instance timeline sampling helper also differs: artifact (lookup,float)->keyframe point versus comparative sampleTimeline(lookup,point,float,evaluator)->Vector3f. Do not map that private helper or ending-transition helpers from comparative name/shape alone.",
+    "Duplicate String getters in Runtime and five public ()V Instance methods require bytecode references to separate; descriptor presence alone was not used to upgrade semantic confidence.",
+    "Member/class target-existence is exact, but semantic labels remain HIGH because source-artifact equivalence and original names are not proven. No additional field/helper mappings recommended.",
+    {
+      "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)I",
+      "members": [
+        "o0OOooo0o0OO00OoOOOo0o0O",
+        "oOOOo0OOO0ooooo0O00OO0o0"
+      ],
+      "reason": "Two distinct public int-return accessors call different Object-to-int conversion helpers. Official getAsPooledString versus getAsInt cannot be selected by descriptor. Comparative OpenYSM getStringId vs getAsInt alone is insufficient. No integer mapping recommended."
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O",
+      "fields": [
+        {
+          "access": 25,
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O;"
+        },
+        {
+          "access": 25,
+          "name": "o0OOooo0o0OO00OoOOOo0o0O",
+          "descriptor": "Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo;"
+        }
+      ],
+      "reason": "First field receives null-return lambda; second receives new ArgumentCollection(new ArrayList). Roles observed, but PLACE_HOLDER versus OpenYSM NOOP name divergence retained; field mappings omitted from bounded eight-member set."
+    }
+  ],
+  "scope": "Five Java class declarations and16 bounded method reference paths only; no native/protection/decryption work.",
+  "verification_tool": "tools/audit_seed_recovery_ysm_265.py",
+  "verification": {
+    "mapping_contract": {
+      "mappings": 253,
+      "class_targets": 102,
+      "exact_methods": 146,
+      "exact_fields": 5,
+      "failures": 0
+    },
+    "seed_audit_checks": 66,
+    "seed_audit_failures": 0,
+    "graph": {
+      "nodes": 955,
+      "undirected_edges": 3618,
+      "directed_class_refs_observed": 3823,
+      "components": 19,
+      "largest_components": [
+        722,
+        131,
+        86,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "seed_classes": 102
+    },
+    "parse_errors": 0
+  }
+}

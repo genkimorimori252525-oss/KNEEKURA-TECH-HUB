@@ -5045,6 +5045,535 @@
           "fact": "Official YSM NOTICE explicitly lists bundled/relocated Concentus and Gagravarr/VorbisJava source components, while noting exact upstream revision cannot be proven from current source."
         }
       ]
+    },
+    {
+      "id": "ysm265.class.yes-steve-model-entrypoint",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.YesSteveModel",
+      "semantic_owner": "com.elfmcys.yesstevemodel.YesSteveModel",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "foundation_domain": "CORE",
+      "identity_status": "RETAINED_UNOBFUSCATED_CLASS_NAME",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/YesSteveModel.class",
+          "access": 33,
+          "field_count": 2,
+          "method_count": 9,
+          "fact": "Retained unobfuscated entrypoint name, Forge @Mod descriptor, yes_steve_model literal, client/common config migration literals and Forge bootstrap references establish CORE identity. Metadata competitor predicate (owner text excluded) yields exactly one match among955 classes."
+        },
+        {
+          "type": "OFFICIAL_RELEASE_LINE_SOURCE_CANDIDATE",
+          "repository": "YesSteveModel/YesSteveModel",
+          "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+          "path": "src/main/java/com/elfmcys/yesstevemodel/YesSteveModel.java",
+          "fact": "Same readable entrypoint and9-method/2-field bootstrap/config surface; does not establish whole binary/source equivalence."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.animation-runtime",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O00Oo0oo0Ooo0oOOOo0OO0oO",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.AnimationControllerRuntime",
+      "confidence": "HIGH",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "foundation_domain": "ANIMATION",
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_SOURCE_COUNTERPART",
+      "source_artifact_divergence": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE_AND_BOUNDED_JAVA_REFERENCES",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO.class",
+          "locator": "SEED-RECOVERY-EVIDENCE-2026-10-05.json",
+          "fact": "Hierarchical state machine: recursive child controller, visited-entry set, state data, animation slots, active blend queue rebuild and transforms consumer. Unique normalized access/descriptor/hierarchy shape among955classes; existence alone is not semantic proof."
+        }
+      ],
+      "release_line_counterpart": "com/elfmcys/yesstevemodel/geckolib3/core/controller/BedrockAnimationController"
+    },
+    {
+      "id": "ysm265.class.animation-instance",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OOOO0o0oo0o000oOOooOoOo0",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.AnimationControllerInstance",
+      "confidence": "HIGH",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "foundation_domain": "ANIMATION",
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_SOURCE_COUNTERPART",
+      "source_artifact_divergence": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE_AND_BOUNDED_JAVA_REFERENCES",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/OOOO0o0oo0o000oOOooOoOo0.class",
+          "locator": "SEED-RECOVERY-EVIDENCE-2026-10-05.json",
+          "fact": "Single-animation player: pending/current loop pairs, queue map/list, per-animation context, transition interpolator, state enum and sound/instruction event executors. Unique normalized access/descriptor/hierarchy shape among955classes; existence alone is not semantic proof."
+        }
+      ],
+      "release_line_counterpart": "com/elfmcys/yesstevemodel/geckolib3/core/controller/AnimationPlayer"
+    },
+    {
+      "id": "ysm265.class.molang-function",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O00OOo00o0O00ooo000OOo0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.Function",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "foundation_domain": "MOLANG",
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_SOURCE_COUNTERPART",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE_AND_BOUNDED_JAVA_REFERENCES",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O.class",
+          "locator": "SEED-RECOVERY-EVIDENCE-2026-10-05.json",
+          "fact": "Official Function/ArgumentCollection surface, typed enclosing relationship and bounded evaluator/accessor behavior. Unique normalized access/descriptor/hierarchy shape among955classes; existence alone is not semantic proof."
+        }
+      ],
+      "release_line_counterpart": "com.elfmcys.yesstevemodel.molang.runtime.Function"
+    },
+    {
+      "id": "ysm265.class.molang-argument-collection",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.Function$ArgumentCollection",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "foundation_domain": "MOLANG",
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_SOURCE_COUNTERPART",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_STRUCTURE_AND_BOUNDED_JAVA_REFERENCES",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo.class",
+          "locator": "SEED-RECOVERY-EVIDENCE-2026-10-05.json",
+          "fact": "Official Function/ArgumentCollection surface, typed enclosing relationship and bounded evaluator/accessor behavior. Unique normalized access/descriptor/hierarchy shape among955classes; existence alone is not semantic proof."
+        }
+      ],
+      "release_line_counterpart": "com.elfmcys.yesstevemodel.molang.runtime.Function$ArgumentCollection"
+    },
+    {
+      "id": "ysm265.method.animation-runtime-get-name",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O00Oo0oo0Ooo0oOOOo0OO0oO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()Ljava/lang/String;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.AnimationControllerRuntime",
+      "semantic_member": "getName",
+      "confidence": "HIGH",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_SOURCE_COUNTERPART",
+      "source_artifact_divergence": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_JAVA_REFERENCES",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO.class",
+          "access": 1,
+          "locator": "SEED-RECOVERY-EVIDENCE-2026-10-05.json",
+          "fact": "Only own reference is getfield O00OOOooOoooOoo0o0o0oO0O:String, the final String assigned by the constructor; separates it from the other public String getter."
+        }
+      ],
+      "release_line_counterpart_member": "BedrockAnimationController.getName"
+    },
+    {
+      "id": "ysm265.method.animation-runtime-get-current-animation",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O00Oo0oo0Ooo0oOOOo0OO0oO",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "()Ljava/lang/String;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.AnimationControllerRuntime",
+      "semantic_member": "getCurrentAnimation",
+      "confidence": "HIGH",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_SOURCE_COUNTERPART",
+      "source_artifact_divergence": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_JAVA_REFERENCES",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO.class",
+          "access": 1,
+          "locator": "SEED-RECOVERY-EVIDENCE-2026-10-05.json",
+          "fact": "Reads current state and child-controller fields, recursively invokes this exact getter on child, otherwise reads display String; ldc \"(null)\" matches both sources. This is a current-state/display role, not proof that its original name was getCurrentAnimation."
+        }
+      ],
+      "release_line_counterpart_member": "BedrockAnimationController.getStateName"
+    },
+    {
+      "id": "ysm265.method.animation-runtime-init-with-bones",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O00Oo0oo0Ooo0oOOOo0OO0oO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/util/List;Lcom/elfmcys/yesstevemodel/ooOo0OoOoo0ooOOoOO0o000O;)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.AnimationControllerRuntime",
+      "semantic_member": "initWithBones",
+      "confidence": "HIGH",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_SOURCE_COUNTERPART",
+      "source_artifact_divergence": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_JAVA_REFERENCES",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO.class",
+          "access": 1,
+          "locator": "SEED-RECOVERY-EVIDENCE-2026-10-05.json",
+          "fact": "Invokes reset, stores controller data, iterates input snapshots into Int2ReferenceOpenHashMap and stores supplied List as bone targets. Unique public descriptor in owner."
+        }
+      ],
+      "release_line_counterpart_member": "BedrockAnimationController.updateModel(List,AnimationControllerData)"
+    },
+    {
+      "id": "ysm265.method.animation-runtime-reset",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O00Oo0oo0Ooo0oOOOo0OO0oO",
+      "obfuscated_member": "oOOOo0OOO0ooooo0O00OO0o0",
+      "descriptor": "()V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.AnimationControllerRuntime",
+      "semantic_member": "reset",
+      "confidence": "HIGH",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_SOURCE_COUNTERPART",
+      "source_artifact_divergence": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_JAVA_REFERENCES",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO.class",
+          "access": 1,
+          "locator": "SEED-RECOVERY-EVIDENCE-2026-10-05.json",
+          "fact": "Nulls controller/state references, clears active transform and bone map collections, handles child by hierarchy depth, resets animation slots and clears slot list. Only public no-argument void method."
+        }
+      ],
+      "release_line_counterpart_member": "BedrockAnimationController.clear"
+    },
+    {
+      "id": "ysm265.method.animation-instance-get-context",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OOOO0o0oo0o000oOOooOoOo0",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/o000o0o0Ooooo0ooo0oO0O0o;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.AnimationControllerInstance",
+      "semantic_member": "getContext",
+      "confidence": "HIGH",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_SOURCE_COUNTERPART",
+      "source_artifact_divergence": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_JAVA_REFERENCES",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/OOOO0o0oo0o000oOOooOoOo0.class",
+          "access": 1,
+          "locator": "SEED-RECOVERY-EVIDENCE-2026-10-05.json",
+          "fact": "Only own reference is getfield O00OOOooOoooOoo0o0o0oO0O:context. Constructor creates it; process and executeRenderLayers attach it to evaluator entity. Unique return descriptor in owner."
+        }
+      ],
+      "release_line_counterpart_member": "AnimationPlayer.getAnimationContext"
+    },
+    {
+      "id": "ysm265.method.animation-instance-get-current-animation",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OOOO0o0oo0o000oOOooOoOo0",
+      "obfuscated_member": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/Oo0OOo00Oo00oO00Ooo0O00O;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.AnimationControllerInstance",
+      "semantic_member": "getCurrentAnimation",
+      "confidence": "HIGH",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_SOURCE_COUNTERPART",
+      "source_artifact_divergence": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_JAVA_REFERENCES",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/OOOO0o0oo0o000oOOooOoOo0.class",
+          "access": 1,
+          "locator": "SEED-RECOVERY-EVIDENCE-2026-10-05.json",
+          "fact": "Only own reference is getfield OOOo0OOOoOO0O00Oo00ooOOO:animation, set from pending Pair second in load/apply helper and nulled by clear helper. Unique return descriptor in owner."
+        }
+      ],
+      "release_line_counterpart_member": "AnimationPlayer.getCurrentAnim"
+    },
+    {
+      "id": "ysm265.method.animation-instance-get-active-bone-animation-queues",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OOOO0o0oo0o000oOOooOoOo0",
+      "obfuscated_member": "Ooooo0oooO0oooOOOoO0000O",
+      "descriptor": "()Lit/unimi/dsi/fastutil/objects/ReferenceArrayList;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.AnimationControllerInstance",
+      "semantic_member": "getActiveBoneAnimationQueues",
+      "confidence": "HIGH",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_SOURCE_COUNTERPART",
+      "source_artifact_divergence": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_JAVA_REFERENCES",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/OOOO0o0oo0o000oOOooOoOo0.class",
+          "access": 1,
+          "locator": "SEED-RECOVERY-EVIDENCE-2026-10-05.json",
+          "fact": "Only own reference is getfield o0OOooo0o0OO00OoOOOo0o0O:ReferenceArrayList. Load helper adds queues selected from map; run/reset helpers iterate this list. Unique public return descriptor in owner."
+        }
+      ],
+      "release_line_counterpart_member": "AnimationPlayer.getActiveBoneAnimQueues"
+    },
+    {
+      "id": "ysm265.method.animation-instance-cancel-animation",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OOOO0o0oo0o000oOOooOoOo0",
+      "obfuscated_member": "o0OOO0o0o0OOo000oO00o00O",
+      "descriptor": "()V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.AnimationControllerInstance",
+      "semantic_member": "cancelAnimation",
+      "confidence": "HIGH",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_SOURCE_COUNTERPART",
+      "source_artifact_divergence": true,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_JAVA_REFERENCES",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/OOOO0o0oo0o000oOOooOoOo0.class",
+          "access": 1,
+          "locator": "SEED-RECOVERY-EVIDENCE-2026-10-05.json",
+          "fact": "Writes null to last-requested and pending Pair fields then invokes private clear/idle helper. Contrasts with fullReset (adds map clear) and resetRequestedAnimation (nulls only last request). Disambiguates five public void/no-argument methods by actual field/call sequence."
+        }
+      ],
+      "release_line_counterpart_member": "AnimationPlayer.reset"
+    },
+    {
+      "id": "ysm265.method.molang-function-evaluate",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O00OOo00o0O00ooo000OOo0O",
+      "obfuscated_member": "evaluate",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo;)Ljava/lang/Object;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.Function",
+      "semantic_member": "evaluate",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": true,
+      "confidence_scope": "SEMANTIC_ROLE_AND_SOURCE_COUNTERPART",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_JAVA_REFERENCES",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O.class",
+          "access": 1025,
+          "locator": "SEED-RECOVERY-EVIDENCE-2026-10-05.json",
+          "fact": "Public abstract functional method preserves evaluate spelling, typed context+argument-collection parameters and Object return; official interface has the same surface."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.molang-function-validate-argument-size",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O00OOo00o0O00ooo000OOo0O",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(I)Z",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.Function",
+      "semantic_member": "validateArgumentSize",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_SOURCE_COUNTERPART",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_JAVA_REFERENCES",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O.class",
+          "access": 1,
+          "locator": "SEED-RECOVERY-EVIDENCE-2026-10-05.json",
+          "fact": "Only nonstatic concrete interface method; bytes 04ac are iconst_1, ireturn, exactly matching unconditional true validation default."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.molang-argument-collection-size",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()I",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.Function$ArgumentCollection",
+      "semantic_member": "size",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_SOURCE_COUNTERPART",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_JAVA_REFERENCES",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo.class",
+          "access": 1,
+          "locator": "SEED-RECOVERY-EVIDENCE-2026-10-05.json",
+          "fact": "Reads sole List field and invokes java/util/List.size()I."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.molang-argument-collection-get-as-string",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)Ljava/lang/String;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.Function$ArgumentCollection",
+      "semantic_member": "getAsString",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_SOURCE_COUNTERPART",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_JAVA_REFERENCES",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo.class",
+          "access": 1,
+          "locator": "SEED-RECOVERY-EVIDENCE-2026-10-05.json",
+          "fact": "List.get(index), Expression cast, context expression evaluation, then static Object-to-String conversion; unique String-return argument accessor."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.molang-argument-collection-get-as-double",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "obfuscated_member": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)D",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.Function$ArgumentCollection",
+      "semantic_member": "getAsDouble",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_SOURCE_COUNTERPART",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_JAVA_REFERENCES",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo.class",
+          "access": 1,
+          "locator": "SEED-RECOVERY-EVIDENCE-2026-10-05.json",
+          "fact": "Same indexed-expression evaluation followed by static (Object)D conversion; unique double-return argument accessor."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.molang-argument-collection-get-as-resource-location",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "obfuscated_member": "oo0OoO00oOoo000O0000o0oo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)Lnet/minecraft/resources/ResourceLocation;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.Function$ArgumentCollection",
+      "semantic_member": "getAsResourceLocation",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_SOURCE_COUNTERPART",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_JAVA_REFERENCES",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo.class",
+          "access": 1,
+          "locator": "SEED-RECOVERY-EVIDENCE-2026-10-05.json",
+          "fact": "Invokes getValue role; supports cached ResourceLocation on StringExpression, ResourceLocation.m_135820_(String), caches successful parse, String fallback, and Illegal resource location: diagnostic. Source candidate matches all these branches."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.molang-argument-collection-get-value",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "obfuscated_member": "oooooooOOoOOoO00OooOo00O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)Ljava/lang/Object;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.Function$ArgumentCollection",
+      "semantic_member": "getValue",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_SOURCE_COUNTERPART",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_JAVA_REFERENCES",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo.class",
+          "access": 1,
+          "locator": "SEED-RECOVERY-EVIDENCE-2026-10-05.json",
+          "fact": "List.get(index), Expression cast, context expression evaluation, directly returns resulting Object without conversion."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.molang-argument-collection-get-expression",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(I)Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.Function$ArgumentCollection",
+      "semantic_member": "getExpression",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "SEMANTIC_ROLE_AND_SOURCE_COUNTERPART",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_JAVA_REFERENCES",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo.class",
+          "access": 1,
+          "locator": "SEED-RECOVERY-EVIDENCE-2026-10-05.json",
+          "fact": "List.get(index), cast to expression owner, directly returns it; no execution context evaluation."
+        }
+      ]
     }
   ],
   "unresolved_hints": [
@@ -5360,6 +5889,13 @@
       "context_implementor_count": 1,
       "predicate_controller": "oo000oooo0OOoo00O0o0OOOO",
       "controller_interface": "OoOoOO0O00oOoO0o0ooOO0oO"
+    },
+    "latest_contract": {
+      "mappings": 253,
+      "class_targets": 102,
+      "exact_methods": 146,
+      "exact_fields": 5,
+      "failures": 0
     }
   },
   "foundation_map_recovery": {
@@ -5456,6 +5992,22 @@
             "ysm265.class.bundled-gagravarr-theora-file"
           ]
         }
+      }
+    },
+    "bounded_seed_pass": {
+      "recorded_at": "2026-10-05",
+      "baseline_mappings": 232,
+      "new_class_seeds": 5,
+      "new_method_mappings": 16,
+      "evidence": "SEED-RECOVERY-EVIDENCE-2026-10-05.json",
+      "original_symbol_policy": "Semantic counterpart names do not prove original unobfuscated symbols; retained YesSteveModel and evaluate spelling are explicit exceptions.",
+      "source_artifact_equivalence": "NOT_ESTABLISHED",
+      "preserved_negative_finding": "SOURCE_ARTIFACT_DIVERGENCE",
+      "verification": {
+        "checks": 66,
+        "failures": 0,
+        "duplicate_ids": 0,
+        "duplicate_owner_member_descriptor_keys": 0
       }
     }
   }
