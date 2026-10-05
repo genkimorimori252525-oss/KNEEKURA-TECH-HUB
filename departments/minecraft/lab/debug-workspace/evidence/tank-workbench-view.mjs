@@ -1,6 +1,6 @@
 import {randomBytes} from 'node:crypto';
-import {realpath,writeFile} from 'node:fs/promises';
-import path from 'node:path';
+import {writeFile} from 'node:fs/promises';
+import {requireDerivedOutput} from './derived-output.mjs';
 import {traceAgeStyle} from '../../simlab/trace-age-style.mjs';
 import {requireTankIdentity,sameTankIdentity,boundedTankPacket} from './tank-contract.mjs';
 
@@ -38,9 +38,7 @@ export function packTankWorkbenchData({status,preflight=null,cursorPackets,map,e
 }
 
 export async function writeTankWorkbenchArtifact(input,output,runDir) {
-  const file=path.resolve(output),parent=await realpath(path.dirname(file)),run=await realpath(runDir),resolved=path.join(parent,path.basename(file));
-  const relative=path.relative(run,resolved);
-  if(relative===''||(!relative.startsWith('..'+path.sep)&&relative!=='..'&&!path.isAbsolute(relative)))throw new Error('TANK_VIEW_OUTPUT_MUST_BE_OUTSIDE_RETAINED_RUN');
+  const resolved=await requireDerivedOutput(output,runDir,'TANK_VIEW_OUTPUT_MUST_BE_OUTSIDE_RETAINED_RUN');
   await writeFile(resolved,renderTankWorkbenchHtml(input),{encoding:'utf8',flag:'wx'});return resolved;
 }
 

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdtemp,mkdir,readFile,rm} from 'node:fs/promises';
+import {mkdtemp,mkdir,writeFile,readFile,rm} from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
 import {buildCursorDecisionPacket} from '../cursor-decision.mjs';
@@ -35,4 +35,6 @@ test('workbench output cannot append to retained run or overwrite existing outpu
   const output=path.join(root,'view.html');await writeTankWorkbenchArtifact(input,output,runDir);
   const before=await readFile(output,'utf8');await assert.rejects(writeTankWorkbenchArtifact(input,output,runDir),{code:'EEXIST'});
   assert.equal(await readFile(output,'utf8'),before);
+  const other=path.join(root,'other-run');await mkdir(path.join(other,'evidence'),{recursive:true});await writeFile(path.join(other,'run-snapshot.json'),'{}');
+  await assert.rejects(writeTankWorkbenchArtifact(input,path.join(other,'evidence','view.html'),runDir),/OUTSIDE/);
 });

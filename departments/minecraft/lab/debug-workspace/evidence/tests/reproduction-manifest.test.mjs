@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdtemp,mkdir,readFile,rm} from 'node:fs/promises';
+import {mkdtemp,mkdir,writeFile,readFile,rm} from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
 import {sha256} from '../../bridge/json.mjs';
@@ -23,4 +23,6 @@ test('manifest output is exclusive and cannot write inside finalized or retained
   const m=buildReproductionManifest(input);await assert.rejects(writeReproductionManifest({manifest:m,output:path.join(run,'new.json'),runDir:run}),/OUTSIDE/);
   const output=path.join(root,'manifest.json');await writeReproductionManifest({manifest:m,output,runDir:run});const before=await readFile(output);
   await assert.rejects(writeReproductionManifest({manifest:m,output,runDir:run}),{code:'EEXIST'});assert.deepEqual(await readFile(output),before);
+  const other=path.join(root,'other-run');await mkdir(path.join(other,'evidence'),{recursive:true});await writeFile(path.join(other,'evidence','finalization.json'),'{}');
+  await assert.rejects(writeReproductionManifest({manifest:m,output:path.join(other,'evidence','new.json'),runDir:run}),/OUTSIDE/);
 });

@@ -25,3 +25,10 @@ test('saved owner metadata and credentials do not enter the resource capsule',()
   assert.equal(artifact.includes(Buffer.from('PRIVATE_NONCE')),false);
   assert.equal(artifact.includes(Buffer.from('C:/private/world')),false);
 });
+
+test('nested private data cannot be exported even with a matching recipe hash',()=>{
+  for(const privateData of [{credential:'SYNTHETIC_PRIVATE_TOKEN'},{metadata:{path:'C:/private/world'}},{ownerNonce:'private'}]){
+    const nested={...recipe,presentation:{...recipe.presentation,...privateData}};
+    assert.throws(()=>buildTankPresentationResource({saved:{...saved,recipe:nested,recipeHash:sha256(stableJson(nested))},profile}),/PRIVATE/);
+  }
+});

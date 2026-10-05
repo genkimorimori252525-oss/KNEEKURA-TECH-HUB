@@ -1,6 +1,7 @@
 import {createHash} from 'node:crypto';
 import {validOriginalDecisionEvent} from './original-decision-events.mjs';
 import {requireTankIdentity,requireTankObservations,sameTankIdentity,boundedTankPacket} from './tank-contract.mjs';
+import {verifyExperimentAlignment} from './experiment-alignment.mjs';
 const safe=Number.isSafeInteger;
 const hash=v=>createHash('sha256').update(JSON.stringify(v)).digest('hex');
 const metric=(value,rows,limitations=[])=>({status:rows.length?'DERIVED_FROM_RETAINED_SAMPLES':'NOT_CAPTURED',value,
@@ -54,16 +55,23 @@ export function buildExperimentDigest({request,actionReceipts=[],observations,id
   const knownHealth=['dropped','errors','trailingPartialFiles','partialCaptures'].every(k=>safe(health[k])&&health[k]===0);
   const samplingComplete=startCaptured&&endCaptured&&samples.length===expectedSamples&&!gaps.length&&state.length===samples.length&&knownHealth
     &&limits.sourceBinding?.verifiedCanonical===true&&limits.observer?.sampleIntervalTicks===interval;
+  const alignmentEvidence=verifyExperimentAlignment({alignment:limits.alignment,request,actionReceipts,receiptBlobs:limits.receiptBlobs,
+    observations,identity,window});
   const conditions={baselineHash:request.arena?.baseline_hash??null,fixtureHash:limits.worldBinding?.fixtureHash??null,
     worldBinding:limits.worldBinding??null,sourceBinding:request.target??null,
     subject:{subjectId:subject.subject_id??null,entityType:subject.entity_type??null,uuid:subject.uuid},
-    observer:limits.observer??null,presentation:limits.presentation??null,alignment:limits.alignment??null,
+    observer:limits.observer??null,presentation:limits.presentation??null,alignment:alignmentEvidence.condition,
     initialState:request.initial_state??null,actions:request.actions??null,assertions:request.assertions,
     windowDurationTicks:window.endTick-window.startTick};
   for(const r of actionReceipts)if(typeof r?.action_id!=='string'||!['ACCEPTED','REQUESTED','APPLIED','VERIFIED','REJECTED','FAILED','NOT_RUN','UNKNOWN'].includes(r.status))throw new TypeError('ACTION_RECEIPT_STATUS_REQUIRED');
   return boundedTankPacket({schema:'kneekura.experiment-digest/v1',identity:structuredClone(identity),question:request.question??request.experiment_id,
     registeredAssertions:request.assertions.map(a=>({assertion_id:a.assertion_id,status:'INCONCLUSIVE',registered:a,evidenceRefs:[],limitations:['REGISTERED_ASSERTION_EVALUATION_REQUIRED_NOT_INFERRED_FROM_DISTANCE']})),
-    conditions,actions:structuredClone(actionReceipts),executionEffect:'NOT_ESTABLISHED',
+    conditions,alignmentEvidence,conditionEvidence:{
+      source:limits.sourceBinding?.verifiedRequestBinding===true?'VERIFIED_REGISTERED_DISK_BINDING':'UNVERIFIED',
+      world:'UNVERIFIED',observer:'UNVERIFIED',presentation:'UNVERIFIED',alignment:alignmentEvidence.status,
+      limitations:['SEALED_CONTEXT_IS_A_DECLARATION_NOT_WORLD_OR_OBSERVER_ATTESTATION','REGISTERED_DISK_BINDING_NOT_LOADED_RUNTIME_EQUIVALENCE',
+        'NOMINAL_TICK_RATE_AND_WINDOW_WIDE_PRESENTATION_NOT_ESTABLISHED']},
+    actions:structuredClone(actionReceipts),executionEffect:'NOT_ESTABLISHED',
     metrics:{positionSamples:metric(samples.length,samples),observedDistance:metric(samples.length?distance:null,[...new Set(used)],['POINT_TO_POINT_SUM_ONLY_NOT_CONTINUOUS_PATH']),
       sameCoordinateIntervals:metric({totalObservedTicks:stationary.reduce((s,i)=>s+i.endTick-i.startTick,0),intervals:stationary},samples,['SAME_RECORDED_COORDINATES_NOT_CONTINUOUS_STOP_OR_CAUSE']),
       arrival:{status:arrivals.some(a=>a.status==='RECORDED_POSITION_MATCH')?'DERIVED_FROM_RETAINED_SAMPLES':'NOT_CAPTURED',value:arrivals.length?arrivals:null,

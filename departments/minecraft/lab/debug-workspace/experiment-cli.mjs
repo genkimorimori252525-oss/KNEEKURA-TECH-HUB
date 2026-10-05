@@ -34,7 +34,7 @@ export async function readExperimentDigest({runDir,requestFile,assertionsFile,su
   const digest=buildExperimentDigest({request:source.request,identity,window,
     actionReceipts:exported.result.execution.action_receipts,
     observations:source.rows.map(r=>r.row).filter(r=>r.arenaEpoch===arenaEpoch),
-    limits:{...context,sourceBinding:{verifiedCanonical:true,canonicalFileHash:source.canonicalFile.sha256,
+    limits:{...context,receiptBlobs:exported.blobs,sourceBinding:{verifiedCanonical:true,verifiedRequestBinding:true,canonicalFileHash:source.canonicalFile.sha256,
       finalizationHash:source.finalFile.sha256,requestHash:source.requestHash,assertionsHash:source.binding.assertions_hash,
       contextHash:contextRelative?source.inventory.get(contextRelative).sha256:null},health:source.finalization.counts,
       cleanup:exported.result.execution.cleanup,captureLinks}});

@@ -32,6 +32,8 @@ node debug-workspace/cli.mjs tank-resource --config <config.json> --saved-recipe
 
 The output is created exclusively; existing artifacts are not overwritten. Only the four display/recipe fields enter the capsule. Register its hash as the resource artifact before owner preparation; resource generation itself does not register or authorize a run. Keep all other experiment bindings consistent. Existing generic launch defaults are unchanged.
 
+Nested private recipe fields/paths are rejected. Resource, workbench and reproduction outputs also reject any retained/finalized run ancestor after directory-link resolution, including runs other than the input run. [Tank Workbench acceptance](KNEEKURA_TANK_WORKBENCH_ACCEPTANCE.md) separates implemented contracts, actual native evidence, failed attempts and incomplete performance acceptance.
+
 For a retained/current run, supply its exact Arena epoch:
 
 ```powershell

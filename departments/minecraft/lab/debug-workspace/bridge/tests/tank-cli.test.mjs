@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdtemp,writeFile,readFile,rm} from 'node:fs/promises';
+import {mkdtemp,mkdir,writeFile,readFile,rm} from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import {sha256,stableJson} from '../json.mjs';
@@ -27,4 +27,8 @@ test('resource CLI prepares a new bounded ZIP and refuses to overwrite an artifa
   const before=await readFile(output);assert.equal(before.readUInt32LE(0),0x04034b50);
   await assert.rejects(prepareTankResourceFile({savedFile,profileFile,output}),{code:'EEXIST'});
   assert.deepEqual(await readFile(output),before);assert.deepEqual(JSON.parse(await readFile(savedFile,'utf8')),saved);
+  const retained=path.join(root,'different-retained-run');await mkdir(path.join(retained,'evidence'),{recursive:true});
+  await writeFile(path.join(retained,'run-snapshot.json'),'{}');
+  await writeFile(path.join(retained,'evidence','finalization.json'),JSON.stringify({status:'EVIDENCE_COMPLETE'}));
+  await assert.rejects(prepareTankResourceFile({savedFile,profileFile,output:path.join(retained,'evidence','new-resource.zip')}),/OUTSIDE_RETAINED_RUN/);
 });

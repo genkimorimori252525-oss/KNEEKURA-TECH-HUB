@@ -1,5 +1,5 @@
-import {realpath,writeFile} from 'node:fs/promises';
-import path from 'node:path';
+import {writeFile} from 'node:fs/promises';
+import {requireDerivedOutput} from './derived-output.mjs';
 import {sha256,decodeJson,hashId,stableJson} from '../bridge/json.mjs';
 import {privatePath} from '../bridge/result-export-source.mjs';
 import {validateVisualExperimentRequest} from './visual-request-contract.mjs';
@@ -35,9 +35,7 @@ export function buildReproductionManifest({requestBytes,assertionsBytes,sourceBi
       executionReadiness:'NOT_AUTHORIZED_BY_MANIFEST'},limitations:['HASH_REFERENCES_REQUIRE_THE_ORIGINAL_BYTES_AND_EXISTING_CAS_EXPORT_VERIFICATION','NO_RUNTIME_OR_BEHAVIOR_ACCEPTANCE_INFERRED']});
 }
 export async function writeReproductionManifest({manifest,output,runDir}) {
-  const file=path.resolve(output),parent=await realpath(path.dirname(file)),run=await realpath(runDir),resolved=path.join(parent,path.basename(file));
-  const relative=path.relative(run,resolved);
-  if(relative===''||(!relative.startsWith('..'+path.sep)&&relative!=='..'&&!path.isAbsolute(relative)))throw new Error('REPRODUCTION_OUTPUT_MUST_BE_OUTSIDE_RETAINED_RUN');
+  const resolved=await requireDerivedOutput(output,runDir,'REPRODUCTION_OUTPUT_MUST_BE_OUTSIDE_RETAINED_RUN');
   boundedTankPacket(manifest);if(privateFields(manifest))throw new TypeError('REPRODUCTION_PRIVATE_FIELDS_NOT_EXPORTABLE');
   await writeFile(resolved,JSON.stringify(manifest,null,2)+'\n',{flag:'wx',mode:0o600});return resolved;
 }

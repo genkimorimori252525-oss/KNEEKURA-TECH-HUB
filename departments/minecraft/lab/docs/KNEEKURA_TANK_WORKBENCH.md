@@ -22,6 +22,8 @@ TECH HUB内のLABが正本。元の正式水槽saveは保全し、実機試行�
 
 sealed contextがある場合、`observer`（channels/sampleIntervalTicks/tickRate）、`presentation`（grid/brightness等）、`worldBinding`（authorityHash/copyBaselineHash/fixtureHash）、`alignment`（actionReceiptHash/anchorTick）を指定できる。contextはfinalized inventory内の元ファイルに限定する。未取得値はnullのまま。宣言値だけでは実機の動作・完全なevent観測を証明しない。
 
+alignmentは既存exportのAPPLIED receipt hashと同一run/Arenaのcanonical ACTION_APPLIED tickへ照合する。比較条件は登録actionとanchorからの相対windowであり、別runのreceipt hashや絶対tickの一致は要求しない。未取得・不一致はINCONCLUSIVE。元save/複製/fixtureの由来、実際のobserver/tickRate、区間全体のpresentationには現時点で完全なretained検証器がなく、宣言が一致してもUNVERIFIEDのまま比較を成立させない。[受入記録](KNEEKURA_TANK_WORKBENCH_ACCEPTANCE.md)に取得済み・未取得を記載する。
+
 距離は指定区間の全ての適格canonical位置から計算する。表示点・bookmark・cursor選択に依存しない。欠測、次元、削除、テレポート、同tickの曖昧さ、距離閾値では接続しない。距離は点間和、同座標区間は保持されたサンプルの関係。全経路や連続停止、停止原因を保証しない。
 
 `experiment-compare --before A.json --after B.json [--intended-differences EXACT.json] --config CONFIG`

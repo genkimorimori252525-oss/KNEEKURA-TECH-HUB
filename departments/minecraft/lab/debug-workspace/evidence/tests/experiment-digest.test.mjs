@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {buildExperimentDigest} from '../experiment-digest.mjs';
+import {sha256,stableJson} from '../../bridge/json.mjs';
 export const identity={debugSessionId:'s',runId:'r',runSnapshotId:'snap',processEpoch:1,arenaEpoch:0,targetRevision:1,subjectUuid:'00000000-0000-0000-0000-000000000001'};
 export const request={experiment_id:'experiment',question:'observed motion?',subjects:[{subject_id:'A',uuid:identity.subjectUuid,entity_type:'minecraft:zombie'}],target:{source_revision:'a'},arena:{baseline_hash:'b',bounds:{min:[0,0,0],max:[64,64,64]}},assertions:[{assertion_id:'registered'}],actions:[]};
 export const row=(tick,x=tick/10)=>({kind:'observation',...identity,observationId:'obs:'+tick,gameTime:tick,lane:'SERVER_ENTITY_STATE',source:{side:'SERVER'},scope:{kind:'ENTITY_UUID',entityUuid:identity.subjectUuid},epistemicStatus:'OBSERVED',completeness:{complete:true},payload:{targetRevision:1,x,y:64,z:0,dimension:'minecraft:overworld'}});
@@ -22,6 +23,21 @@ test('accepted is never promoted and foreign identity/duplicate IDs fail closed'
   assert.throws(()=>build({observations:[row(0),row(0)]}),/DUPLICATE/);
   assert.throws(()=>build({observations:[{...row(0),runId:'other'}]}),/IDENTITY/);
   assert.throws(()=>build({identity:{...identity,subjectUuid:'other'}}),/SUBJECT/);
+});
+
+test('alignment requires exact APPLIED export bytes and the original canonical effect tick',()=>{
+  const action={action_id:'start',operation:'wait_ticks',ticks:1},req={...request,initial_state:[],actions:[action]};
+  const effect={...row(10),observationId:'effect:start',lane:'ACTION_APPLIED',payload:{actionId:'start',postconditionMatched:true}};
+  const effectBytes=Buffer.from(stableJson(effect)),effectHash=sha256(effectBytes);
+  const receiptBytes=Buffer.from(stableJson({kind:'lab_action_receipt_export',identity,actionId:'start',reportedStatus:'APPLIED',effectEvidence:[{contentHash:effectHash,observationId:effect.observationId}]}));
+  const receiptHash=sha256(receiptBytes),input={request:req,window:{startTick:10,endTick:11},observations:[effect,row(10),row(11)],
+    actionReceipts:[{action_id:'start',status:'APPLIED',evidence_hash:receiptHash}],limits:{alignment:{actionReceiptHash:receiptHash,anchorTick:10},
+      receiptBlobs:[{contentHash:receiptHash,bytes:receiptBytes},{contentHash:effectHash,bytes:effectBytes}]}};
+  const a=build(input);assert.equal(a.alignmentEvidence.status,'VERIFIED_RETAINED_ACTION_EFFECT');assert.equal(a.conditions.alignment.windowStartOffset,0);
+  const b=build({...input,window:{startTick:100,endTick:101}});assert.equal(b.conditions.alignment.windowStartOffset,90);
+  assert.equal(build({...input,limits:{...input.limits,alignment:{actionReceiptHash:receiptHash,anchorTick:0}}}).conditions.alignment,null);
+  assert.equal(build({...input,actionReceipts:[]}).conditions.alignment,null);
+  assert.equal(a.conditionEvidence.world,'UNVERIFIED');assert.equal(a.conditionEvidence.observer,'UNVERIFIED');
 });
 
 test('more than32 retained hit callbacks are counted independently from selected bookmarks',()=>{

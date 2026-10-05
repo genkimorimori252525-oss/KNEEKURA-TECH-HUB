@@ -1,6 +1,6 @@
 # 水槽の状況確認・時刻連動・実験比較 Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** AIと人が、水槽の実際の表示状態・観測時刻・実験条件・結果を同じ証拠から確認できるようにする。
 
@@ -10,7 +10,7 @@
 
 **Spec:** [改善設計](../specs/2026-10-06-tank-observability-design.md)
 
-状態: 2026-10-06承認後に実装開始。基準HEAD `07c34216319400ddfa3d1a99f7b9970bf8857190`。T1のローカル回帰を確認し、T2以降を順次実施中。実機品質維持と最終CIは未確認。
+状態: 2026-10-06承認後、T1〜T5のsource実装・関連回帰と単一全体レビューの指摘修正を完了。基準HEAD `07c34216319400ddfa3d1a99f7b9970bf8857190`。T6は進行中。[受入記録](../../../departments/minecraft/lab/docs/KNEEKURA_TANK_WORKBENCH_ACCEPTANCE.md)に実際の成功・失敗・未取得を記載する。world/observer/区間全体のpresentationを既存証拠で完全照合できない比較はINCONCLUSIVE。実機品質維持と最終CIは未確認。
 同日の軽量監査を反映済み。観測への干渉、表示条件、残lease、表示間引きの4点を必須のテスト・受入条件へ追加した。非劣化の実証はT6まで未完了。
 実装はT1→T2→T3→T4→T5→T6を同一セッションで順次進め、全体の独立レビューを最後に一度行う方式を推奨する。packetの相互依存が強く、taskごとの大量の別セッション化は不要。
 
@@ -58,13 +58,13 @@
 
 **Interfaces:** `buildTankStatus({observations,identity,expected,worldBinding,health}) -> TankStatus`。native通知はGLOBAL_HEALTH scopeの新lane `TANK_PRESENTATION_STATUS`、payload schema `kneekura.tank-presentation-status/v1`。payloadにrecipeHash/geometry/owner identity/状態理由/元lease内の記録時remainingを含め、credentialは含めない。
 
-- [ ] `tank-status.test.mjs`に、同名world・違うfixtureを同一扱いしない、未取得はnull、foreign run/Arena拒否、draw送信とpixel確認を別扱いにするテストを作成する。`node --test debug-workspace/evidence/tests/tank-status.test.mjs`で未実装による失敗を確認。
-- [ ] pure-Javaテストに、fake monotonic clockで元120秒期限、pause、server切替、max2件/秒、記録抑制数、disconnect後の状態を固定する。新しい期限を生成しないことを検証する。
-- [ ] `KneekuraDebugTankStatusSelfTest`とwriter接続テストで、同じ既存観測列・clock・drain順に対してstatus ON/OFFのheartbeat発行tickが一致することを確認する。statusの受付/dropの双方、queue満杯直前・満杯・回復を含め、既存観測の受付数とdrop数が悪化せず、status抑制数を別に報告することを固定する。
-- [ ] `KneekuraDebugTankStatus`へ状態のimmutable snapshotと送信頻度制御を実装。Presentation更新、render tickの失効検査、実際のgrid `endBatch`完了から通知し、既存writerへ非同期enqueueする。render callbackでdisk I/Oや追加world queryをしない。
-- [ ] writerにstatus専用の低優先受付を追加し、既存観測用queueの容量をstatusで占有しない有界な待機枠を使う。status受付/dropは既存heartbeat時計を更新せず、既存laneを優先してdrainする。既存laneの意味・上限・heartbeat抑制規則は維持する。
-- [ ] `buildTankStatus`でnative通知を既存canonical読取から整理する。producerが無い旧runは`NOT_CAPTURED`。freshnessは現在owner/serverと同一clock domainで判断し、別processのnanoTimeを比較しない。保存済み通知は「当時の状態」と明示する。
-- [ ] packageの既存Motion/Decision検証へNode回帰を追加し、Java pureテストを既存runtime/API selftest経路へ接続する（`W/bridge/runtime-api-selftest.mjs`）。関連Node/Java/Forge compileが成功したらこの単位をcommit。
+- [x] `tank-status.test.mjs`に、同名world・違うfixtureを同一扱いしない、未取得はnull、foreign run/Arena拒否、draw送信とpixel確認を別扱いにするテストを作成する。`node --test debug-workspace/evidence/tests/tank-status.test.mjs`で未実装による失敗を確認。
+- [x] pure-Javaテストに、fake monotonic clockで元120秒期限、pause、server切替、max2件/秒、記録抑制数、disconnect後の状態を固定する。新しい期限を生成しないことを検証する。
+- [x] `KneekuraDebugTankStatusSelfTest`とwriter接続テストで、同じ既存観測列・clock・drain順に対してstatus ON/OFFのheartbeat発行tickが一致することを確認する。statusの受付/dropの双方、queue満杯直前・満杯・回復を含め、既存観測の受付数とdrop数が悪化せず、status抑制数を別に報告することを固定する。
+- [x] `KneekuraDebugTankStatus`へ状態のimmutable snapshotと送信頻度制御を実装。Presentation更新、render tickの失効検査、実際のgrid `endBatch`完了から通知し、既存writerへ非同期enqueueする。render callbackでdisk I/Oや追加world queryをしない。
+- [x] writerにstatus専用の低優先受付を追加し、既存観測用queueの容量をstatusで占有しない有界な待機枠を使う。status受付/dropは既存heartbeat時計を更新せず、既存laneを優先してdrainする。既存laneの意味・上限・heartbeat抑制規則は維持する。
+- [x] `buildTankStatus`でnative通知を既存canonical読取から整理する。producerが無い旧runは`NOT_CAPTURED`。freshnessは現在owner/serverと同一clock domainで判断し、別processのnanoTimeを比較しない。保存済み通知は「当時の状態」と明示する。
+- [x] packageの既存Motion/Decision検証へNode回帰を追加し、Java pureテストを既存runtime/API selftest経路へ接続する（`W/bridge/runtime-api-selftest.mjs`）。関連Node/Java/Forge compileが成功したらこの単位をcommit。
 
 **受入:** recipeファイルの存在だけで格子ONと報告しない。期限後の描画資格は失われ、保存済みの過去の描画証拠はその時刻のまま残る。status通知の有無によって既存heartbeatが抑制されたり、既存観測に追加dropが発生したりしない。実負荷での確認はT6でも行う。
 
@@ -74,11 +74,11 @@
 
 **Interfaces:** `buildTankPreflight({status,profile,requiredChannels,timeBudget,leaseCheck}) -> TankPreflight`。`profile`は`{kind:'OBSERVE_GRID'|'BENCHMARK',grid,brightness,motion,decisionChannels}`。全項目を指定し、BENCHMARKの暗黙既定値を禁止。既存`prepareOwnerControl(...)`の成果、T1のpacket、同一clock domainで経過時間を控除した最新のowner照合を入力に使う。`leaseCheck.status`は`SUFFICIENT/INSUFFICIENT/UNKNOWN`。これはread-only判定であり、実際の開始時には既存owner gateで再計算する。
 
-- [ ] テストで、要求格子ON/実記録なしはUNKNOWN、期限切れ・recipe不一致はNOT_READY、新しい同一runの描画送信・必要観測・十分な残leaseありはREADYと固定する。BENCHMARKではgrid=falseも明示条件として受理する。既存一般起動への副作用がないことを確認する。
-- [ ] 残時間の境界テストを追加する。実験30,000ms・結果確定5,000ms・後片付け5,000ms・余裕5,000msなら必要時間45,000ms。その他条件が有効な場合、最新残時間45,000msでREADY、44,999msでNOT_READY、照合不能/古い保存値だけならUNKNOWN。preflight後の待機で不足するケースはdispatch直前に拒否し、owner期限が延長されないことを確認する。
-- [ ] 通常profileの準備時に、保存済みrecipeから既存`kneekura/tank-presentation.json`をresource artifactへ入れる。owner登録を先に済ませ、起動後T1の証拠でpreflightを再確認する。登録済みartifactのin-place書換えは行わない。
-- [ ] 新CLI `tank-status` / `tank-preflight`でJSONを返す。実験開始の前提確認に接続し、UNKNOWN/NOT_READYの理由と既存の準備手順を示す。撮影や確認中の経過時間も控除し、dispatch直前に同じ予算を既存owner gateで再照合する。自動lease延長や勝手な再起動は追加しない。
-- [ ] `npm run test:bridge-owner-prelaunch`と追加テスト、既存起動selftestを実行し成功後commit。通常/性能profileのコマンド例を同じcommitに含める。
+- [x] テストで、要求格子ON/実記録なしはUNKNOWN、期限切れ・recipe不一致はNOT_READY、新しい同一runの描画送信・必要観測・十分な残leaseありはREADYと固定する。BENCHMARKではgrid=falseも明示条件として受理する。既存一般起動への副作用がないことを確認する。
+- [x] 残時間の境界テストを追加する。実験30,000ms・結果確定5,000ms・後片付け5,000ms・余裕5,000msなら必要時間45,000ms。その他条件が有効な場合、最新残時間45,000msでREADY、44,999msでNOT_READY、照合不能/古い保存値だけならUNKNOWN。preflight後の待機で不足するケースはdispatch直前に拒否し、owner期限が延長されないことを確認する。
+- [x] 通常profileの準備時に、保存済みrecipeから既存`kneekura/tank-presentation.json`をresource artifactへ入れる。owner登録を先に済ませ、起動後T1の証拠でpreflightを再確認する。登録済みartifactのin-place書換えは行わない。
+- [x] 新CLI `tank-status` / `tank-preflight`でJSONを返す。実験開始の前提確認に接続し、UNKNOWN/NOT_READYの理由と既存の準備手順を示す。撮影や確認中の経過時間も控除し、dispatch直前に同じ予算を既存owner gateで再照合する。自動lease延長や勝手な再起動は追加しない。
+- [x] `npm run test:bridge-owner-prelaunch`と追加テスト、既存起動selftestを実行し成功後commit。通常/性能profileのコマンド例を同じcommitに含める。
 
 **受入:** 正式元save、変更したfixture、実験領域、格子要求/実状態をAIと人が別項目として確認できる。preflight時にREADYでも開始時に残時間不足なら拒否され、元leaseの内側に実験と終了処理の予算を確保する。
 
@@ -88,12 +88,12 @@
 
 **Interfaces:** `buildCursorDecisionPacket({observations,identity,subjectUuid,window,cursorTick,maxGapTicks}) -> CursorDecisionPacket`、`buildTankMap({status,positions,declaredPaths,viewport}) -> {bounds,axes,layers,evidenceRefs}`、`renderTankWorkbenchHtml({status,preflight,cursorPackets,map,experiment,comparison}) -> string`。後2引数はT4接続前はnull。
 
-- [ ] cursor=105/観測100,110のfixtureで110のfactを出さず、100を105の新観測へ書換えないテストを作成する。前window spawn/停止/削除/再移動、gap、run/revision変更を併せて確認する。
-- [ ] `queryDecisionDrilldown`と`buildRetainedDecisionPresentation`を再利用してcursor上限のpacketを作る。参照に必要な過去spawn/terminalを保持し、表示位置のwindow制限と分離する。旧schemaを変更せず新schemaを返す。
-- [ ] mapの基準範囲をT1のgeometryに固定し、X/Z/北/1ブロック目盛と既存線種を描画する。位置だけから壁やtargetを補完しない。図からはみ出した点を境界内へ丸めず、範囲外と明記する。
-- [ ] HTMLでcursor時点/区間末尾を明記し、該当packetと図を連動させる。保存済み観測tick/イベントtickから最大256時点を選択する。共通samples/facts/layersは一度だけ格納し、各時点はindexで参照する。埋込JSON全体が256KiBを超える場合は範囲を狭める明示エラーとし、全tickの巨大packet複製や暗黙間引きはしない。
-- [ ] 点・cursorの選択に`displaySelection`を添え、対象/表示/省略件数と選択規則を示す。表示用配列をT4の集計入力へ渡さず、元区間の照合済み証拠への参照を保持する。
-- [ ] 新CLI `tank-view --output ...`へ接続し、出力はretained run外の新規ファイルのみ。実ブラウザで時刻戻し・対象変更・固定縮尺・空層・巨大値・HTMLエスケープを検証。関連Motion/Decisionとvisualテスト成功後commit。
+- [x] cursor=105/観測100,110のfixtureで110のfactを出さず、100を105の新観測へ書換えないテストを作成する。前window spawn/停止/削除/再移動、gap、run/revision変更を併せて確認する。
+- [x] `queryDecisionDrilldown`と`buildRetainedDecisionPresentation`を再利用してcursor上限のpacketを作る。参照に必要な過去spawn/terminalを保持し、表示位置のwindow制限と分離する。旧schemaを変更せず新schemaを返す。
+- [x] mapの基準範囲をT1のgeometryに固定し、X/Z/北/1ブロック目盛と既存線種を描画する。位置だけから壁やtargetを補完しない。図からはみ出した点を境界内へ丸めず、範囲外と明記する。
+- [x] HTMLでcursor時点/区間末尾を明記し、該当packetと図を連動させる。保存済み観測tick/イベントtickから最大256時点を選択する。共通samples/facts/layersは一度だけ格納し、各時点はindexで参照する。埋込JSON全体が256KiBを超える場合は範囲を狭める明示エラーとし、全tickの巨大packet複製や暗黙間引きはしない。
+- [x] 点・cursorの選択に`displaySelection`を添え、対象/表示/省略件数と選択規則を示す。表示用配列をT4の集計入力へ渡さず、元区間の照合済み証拠への参照を保持する。
+- [x] 新CLI `tank-view --output ...`へ接続し、出力はretained run外の新規ファイルのみ。実ブラウザで時刻戻し・対象変更・固定縮尺・空層・巨大値・HTMLエスケープを検証。関連Motion/Decisionとvisualテスト成功後commit。
 
 **受入:** 同じcursorで図とDecisionに未来の情報が混入しない。A/Bで同じ1ブロックが同じ画面上の長さになり、取得なしと表示OFFが見分けられる。
 
@@ -103,13 +103,13 @@
 
 **Interfaces:** `buildExperimentDigest({request,actionReceipts,observations,identity,window,limits}) -> ExperimentDigest`、`compareExperimentDigests({before,after,intendedDifferences}) -> ExperimentComparison`。意図した変更は具体的field/before/after値で指定し、wildcard許可をしない。
 
-- [ ] 操作受付だけ、失敗、効果未確認、記録欠損のfixtureで、既存exportのstatusを勝手にAPPLIED/PASSへ上げないテストを作成する。
-- [ ] 固定した期待条件と実際のaction receiptを実験カードへ接続する。metricは元tick/算出条件/証拠IDを保持し、到達は観測区間で示す。サンプルgapがある停止時間を連続停止と断言しない。
-- [ ] metricは指定identity/windowの照合済みcanonical証拠から計算する。`quality.coverage`と表示選択を分離し、50,000観測を超える入力は明示エラーで範囲縮小を求める。gap/identity境界をまたぐ距離を加算せず、証拠不足で判定できないassertionはINCONCLUSIVEとする。件数は保持された観測の件数であり、未記録イベントの全数とは表現しない。
-- [ ] 128点・32イベント・256時点をそれぞれ超えるfixtureを用い、同じ要求区間で表示点数・bookmark選択・cursor選択だけを変えても距離/件数の指標が一致することを検証する。gap、drop、50,001観測、区間の片側欠落も含め、部分集計を全区間の成功へ昇格しないことを確認する。
-- [ ] A/Bのbaseline/fixture/source差分/対象対応/観測項目/採取間隔/表示/整列receiptを検査する。意図しない差はNON_COMPARABLE、必要証拠なしはINCONCLUSIVE。比較可能でも自動で「改善」と判定しない。
-- [ ] 画像がある場合は既存`compareVisualRuns({before,after,intendedDifferences})`の判定・画像を参照する。別のpixel比較を実装しない。格子/明るさのON/OFF対照は表示診断としてラベルし、通常の外観A/Bは格子OFF・明るさ補正OFFの同条件で行う。表示差を隠して比較可能にするテスト回避は禁止。画像なしでも構造化比較の可否は独立に示す。
-- [ ] 新CLI `experiment-summary` / `experiment-compare`、共通HTMLへ接続。条件一致/不一致、UUID誤対応、違うtick速度、固定縮尺、可視性不足のテストと既存visual comparison/export回帰を実行してcommit。
+- [x] 操作受付だけ、失敗、効果未確認、記録欠損のfixtureで、既存exportのstatusを勝手にAPPLIED/PASSへ上げないテストを作成する。
+- [x] 固定した期待条件と実際のaction receiptを実験カードへ接続する。metricは元tick/算出条件/証拠IDを保持し、到達は観測区間で示す。サンプルgapがある停止時間を連続停止と断言しない。
+- [x] metricは指定identity/windowの照合済みcanonical証拠から計算する。`quality.coverage`と表示選択を分離し、50,000観測を超える入力は明示エラーで範囲縮小を求める。gap/identity境界をまたぐ距離を加算せず、証拠不足で判定できないassertionはINCONCLUSIVEとする。件数は保持された観測の件数であり、未記録イベントの全数とは表現しない。
+- [x] 128点・32イベント・256時点をそれぞれ超えるfixtureを用い、同じ要求区間で表示点数・bookmark選択・cursor選択だけを変えても距離/件数の指標が一致することを検証する。gap、drop、50,001観測、区間の片側欠落も含め、部分集計を全区間の成功へ昇格しないことを確認する。
+- [x] A/Bのbaseline/fixture/source差分/対象対応/観測項目/採取間隔/表示/整列receiptを検査する。意図しない差はNON_COMPARABLE、必要証拠なしはINCONCLUSIVE。比較可能でも自動で「改善」と判定しない。
+- [x] 画像がある場合は既存`compareVisualRuns({before,after,intendedDifferences})`の判定・画像を参照する。別のpixel比較を実装しない。格子/明るさのON/OFF対照は表示診断としてラベルし、通常の外観A/Bは格子OFF・明るさ補正OFFの同条件で行う。表示差を隠して比較可能にするテスト回避は禁止。画像なしでも構造化比較の可否は独立に示す。
+- [x] 新CLI `experiment-summary` / `experiment-compare`、共通HTMLへ接続。条件一致/不一致、UUID誤対応、違うtick速度、固定縮尺、可視性不足のテストと既存visual comparison/export回帰を実行してcommit。
 
 **受入:** 「良くなったように見える」ことと、登録条件を満たすことを別欄に示せる。同じ条件の2試行から元証拠まで辿れる。表示選択は集計値を変えず、coverage不足は明示される。補正された画像だけで外観の合格を主張しない。
 
@@ -119,11 +119,11 @@
 
 **Interfaces:** `buildReproductionManifest({requestBytes,assertionsBytes,sourceBinding,worldBinding,observerProfile,comparison}) -> ReproductionManifest`、`buildExperimentGuidance({digest,health,capabilities,maxBookmarks:32}) -> {bookmarks,suggestions,budgets}`。suggestionは`{reason,evidenceRefs,proposedQuery,expectedInformation}`で、実行命令ではない。
 
-- [ ] 元request/assertion bytes/hash不一致、private path、credential、finalized出力先、存在しないpre-frame、古いownerのfixtureで不正なexport/replay準備を拒否するテストを作成する。
-- [ ] 元bytes/hashと既存export/CASへの参照をmanifestへまとめる。新実行には新identityとowner登録が必要であることを記録し、既存の元save復元・predecessor保全手順を参照する。
-- [ ] 保存済みevents/watchpointsから最大32bookmarkを生成し、取得済み画像/packetへリンクする。対象/選択/省略件数と選択規則を表示し、bookmark数をイベント総数にしない。ない過去画像を生成して補わない。
-- [ ] 不足に対する確認候補を、既存typed query/観測channelのallowlistから作る。優先候補は対象不一致、期限切れ、gap、Path採用記録なし。推測したAI理由や確率値を付けない。
-- [ ] 残時間・容量・cold/warm起動時間・反復予算と前回cleanup結果をカードへ接続。準備確認までを初版に含め、world操作の自動再実行は新規に追加しない。関連export/trigger/owner回帰成功後commit。
+- [x] 元request/assertion bytes/hash不一致、private path、credential、finalized出力先、存在しないpre-frame、古いownerのfixtureで不正なexport/replay準備を拒否するテストを作成する。
+- [x] 元bytes/hashと既存export/CASへの参照をmanifestへまとめる。新実行には新identityとowner登録が必要であることを記録し、既存の元save復元・predecessor保全手順を参照する。
+- [x] 保存済みevents/watchpointsから最大32bookmarkを生成し、取得済み画像/packetへリンクする。対象/選択/省略件数と選択規則を表示し、bookmark数をイベント総数にしない。ない過去画像を生成して補わない。
+- [x] 不足に対する確認候補を、既存typed query/観測channelのallowlistから作る。優先候補は対象不一致、期限切れ、gap、Path採用記録なし。推測したAI理由や確率値を付けない。
+- [x] 残時間・容量・cold/warm起動時間・反復予算と前回cleanup結果をカードへ接続。準備確認までを初版に含め、world操作の自動再実行は新規に追加しない。関連export/trigger/owner回帰成功後commit。
 
 **受入:** 1件の実験を別セッションから読み直して、何を確認すれば再実行できるか分かる。閲覧だけではゲーム状態が変わらない。
 

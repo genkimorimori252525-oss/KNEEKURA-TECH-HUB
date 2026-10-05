@@ -1,6 +1,13 @@
 import {sha256,stableJson} from './json.mjs';
 import {validTankGeometry} from '../evidence/tank-contract.mjs';
 import {requireTankProfile} from './tank-preflight.mjs';
+import {privatePath} from './result-export-source.mjs';
+
+function privateFields(value) {
+  if(privatePath(value))return true;
+  if(Array.isArray(value))return value.some(privateFields);
+  return value&&typeof value==='object'?Object.entries(value).some(([key,v])=>/(credential|password|secret|token|authorization|nonce|workspaceDir|canonicalWorldRoot|runDir)/i.test(key)||privateFields(v)):false;
+}
 
 function crc32(bytes) {
   let crc=0xffffffff;
@@ -16,6 +23,7 @@ export function buildTankPresentationResource({saved,profile}) {
   const end=Buffer.alloc(22);end.writeUInt32LE(0x06054b50);
   if(!profile.grid)return end;
   const r=saved?.recipe,hash=saved?.recipeHash?.replace(/^sha256:/,'');
+  if(privateFields(r))throw new TypeError('TANK_RESOURCE_PRIVATE_FIELDS_NOT_EXPORTABLE');
   if(saved?.status!=='GEOMETRY_VERIFIED'||r?.v!==1||r.kind!=='tank_recipe'||r.dimension!=='minecraft:overworld'
       ||!validTankGeometry({...r.origin,...r.dimensions})||r.presentation?.gridSpacing!==1
       ||!['NATIVE','OBSERVATION_BRIGHT'].includes(r.presentation?.mode)||sha256(stableJson(r))!==hash

@@ -7,15 +7,17 @@ import {readInstalledControl} from './bridge/owner-action-adapter.mjs';
 import {buildTankPresentationResource} from './bridge/tank-resource.mjs';
 import {writeFile} from 'node:fs/promises';
 import {requireTankObservations} from './evidence/tank-contract.mjs';
+import {requireDerivedOutput} from './evidence/derived-output.mjs';
 
 export async function readTankJsonFile(file) {
   const full=path.resolve(file),root=path.dirname(full);
   return decodeJson((await readRegisteredFile({root,relativePath:path.basename(full),maxBytes:256*1024})).bytes);
 }
 export async function prepareTankResourceFile({savedFile,profileFile,output}) {
+  const resolved=await requireDerivedOutput(output);
   const artifact=buildTankPresentationResource({saved:await readTankJsonFile(savedFile),profile:await readTankJsonFile(profileFile)});
-  await writeFile(path.resolve(output),artifact,{flag:'wx',mode:0o600});
-  return {outputFile:path.resolve(output),artifactBytes:artifact.length,requiresNewRegistration:true,grantsAuthority:false};
+  await writeFile(resolved,artifact,{flag:'wx',mode:0o600});
+  return {outputFile:resolved,artifactBytes:artifact.length,requiresNewRegistration:true,grantsAuthority:false};
 }
 export async function readTankContext({current,observations,arenaEpoch,expectedRecipeHash,worldBinding,profile,timeBudget}={}) {
   requireTankObservations(observations);
