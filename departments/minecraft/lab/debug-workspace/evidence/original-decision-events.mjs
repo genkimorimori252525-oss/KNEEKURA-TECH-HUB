@@ -7,6 +7,7 @@ import {validBrainMemoryRequirement} from './brain-memory-check-contract.mjs';
 import {validBrainStartLoop} from './brain-start-loop-contract.mjs';
 import {validBrainMemorySource} from './brain-memory-source-contract.mjs';
 import {validActivityRequirement} from './activity-requirement-contract.mjs';
+import {validBossMethodBoundary} from './boss-method-contract.mjs';
 
 const KINDS = Object.freeze({
   BRAIN_PATH_MEMORY_SOURCE_RETURN: ['EVALUATION','brain_navigation'],
@@ -23,6 +24,10 @@ const KINDS = Object.freeze({
   BRAIN_PATH_COMPUTE_PATH_WRITE_CHECKPOINT: ['EXECUTION','brain_navigation'],
   BRAIN_PATH_FINDER_RETURN: ['EVALUATION','brain_navigation'],
   MOD_COORDINATION_RETURN: ['EXECUTION','mod_coordination'],
+  MOD_KNIGHT_LEADER_RETURN: ['EVALUATION','mod_coordination'],
+  MOD_KNIGHT_MEMBER_DISPATCH_RETURN: ['EXECUTION','mod_coordination'],
+  MOD_HYDRA_TARGET_RETURN: ['EXECUTION','mod_head_state'],
+  MOD_HYDRA_STATE_WRITE_CHECKPOINT: ['STATE','mod_head_state'],
   GOAL_ELIGIBILITY_RETURN: ['EVALUATION','goal_eligibility'],
   GOAL_CONTINUATION_RETURN: ['EVALUATION','goal_eligibility'],
   GOAL_START_RETURN: ['EXECUTION','goal_lifecycle'],
@@ -431,6 +436,7 @@ function validData(kind,d,record) {
   if(kind==='NAVIGATION_MOVE_TO_RETURN')return validNavigationReturn(d,record);
   if(kind.startsWith('BRAIN_ACTIVITY_'))return validActivityData(kind,d,record);
   if (kind === 'MOD_COORDINATION_RETURN') return validKnightCoordination(d,record);
+  if (kind.startsWith('MOD_KNIGHT_')||kind.startsWith('MOD_HYDRA_')) return validBossMethodBoundary(kind,d,record);
   if (kind === 'PATH_NEIGHBORS_RETURN') return validNeighborReturn(d);
   if (kind === 'PATH_HEAP_OPERATION_RETURN') return validHeapReturn(d,record);
   if (kind === 'PATH_NODE_CLOSED_CHECKPOINT') return validClosedCheckpoint(d,record);
@@ -508,7 +514,7 @@ function validData(kind,d,record) {
 export function validOriginalDecisionEvent(record) {
   const p=record.payload;
   return record.source?.side === 'SERVER' && p?.schema === 'kneekura.original-decision-event/v1' &&
-    p.semantics === (['PATH_NODE_CLOSED_CHECKPOINT','PATH_NODE_G_WRITE_CHECKPOINT','BRAIN_PATH_COMPUTE_PATH_WRITE_CHECKPOINT'].includes(p.kind)?'ORIGINAL_FIELD_WRITE_CHECKPOINT_ONLY':'ORIGINAL_INVOCATION_RETURN_ONLY') &&
+    p.semantics === (['PATH_NODE_CLOSED_CHECKPOINT','PATH_NODE_G_WRITE_CHECKPOINT','BRAIN_PATH_COMPUTE_PATH_WRITE_CHECKPOINT','MOD_HYDRA_STATE_WRITE_CHECKPOINT'].includes(p.kind)?'ORIGINAL_FIELD_WRITE_CHECKPOINT_ONLY':'ORIGINAL_INVOCATION_RETURN_ONLY') &&
     integer(p.targetRevision) && p.targetRevision > 0 &&
     integer(p.eventIndex) && p.eventIndex >= 1 && p.eventIndex <= 256 && text(p.burstId) &&
     Object.hasOwn(KINDS,p.kind) && object(p.data) && bounded(p) &&
@@ -523,7 +529,7 @@ export function appendOriginalDecisionEvents(records,stages,capabilities,timelin
     const p=record.payload;
     const data=originalDecisionData(record);
     const [stage,capability]=KINDS[p.kind];
-    const algorithm=['PATH_SEARCH_STATE','PATH_NODE_CLOSED_CHECKPOINT','PATH_NODE_G_WRITE_CHECKPOINT'].includes(p.kind);
+    const algorithm=['PATH_SEARCH_STATE','PATH_NODE_CLOSED_CHECKPOINT','PATH_NODE_G_WRITE_CHECKPOINT','MOD_HYDRA_STATE_WRITE_CHECKPOINT'].includes(p.kind);
     const status=algorithm ? 'INSTRUMENTED_ALGORITHM_STATE' : 'DIRECT_OBSERVED';
     const relation=algorithm ? 'ALGORITHM_TRACE_RELATION' : 'DIRECT_RUNTIME_RELATION';
     stages[stage] ??= {facts:[]};

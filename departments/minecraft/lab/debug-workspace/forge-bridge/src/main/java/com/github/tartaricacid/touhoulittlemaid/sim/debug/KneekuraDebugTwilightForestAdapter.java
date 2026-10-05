@@ -117,6 +117,76 @@ final class KneekuraDebugTwilightForestAdapter implements KneekuraDebugDecisionA
         proof.addProperty("compatibilityStatus","MATCHED_DEVELOPMENT_RESOURCE_NOT_RESIDENT_ATTESTATION");
         data.add("sourceProof",proof);return data;
     }
+    JsonObject captureKnightLeader(Mob entity,Object goal,List<?> members,int limit,boolean result)throws ReflectiveOperationException {
+        JsonObject data=captureKnightCoordination(entity,goal,members,limit);
+        data.addProperty("methodName","isThisTheLeader");data.addProperty("leaderResult",result);
+        data.remove("dispatchScope");data.remove("affectedMembersStatus");data.remove("leaderDecisionStatus");
+        data.addProperty("returnScope","ORIGINAL_LEADER_PREDICATE_RETURN");data.addProperty("sharedTargetStatus","NOT_EXPOSED");
+        JsonArray copied=data.getAsJsonArray("membersAtReturn");
+        for(int i=0;i<copied.size();i++) {
+            JsonObject item=copied.get(i).getAsJsonObject();
+            if(item.get("stateStatus").getAsString().equals("AVAILABLE"))
+                uuid(item,"targetUuid",KneekuraDebugDecisionSnapshot.read(Mob.class,"target",members.get(i)));
+        }
+        data.add("sourceProof",bossMethodProof(entity,goal));return data;
+    }
+    JsonObject captureKnightMemberDispatch(Mob entity,Object goal,Object member)throws ReflectiveOperationException {
+        if(!supports(entity)||!compatible(entity)||!coordinationCompatible(entity,goal)||
+                read(goal,"boss")!=entity||member==null||member.getClass()!=entity.getClass())
+            throw new IllegalArgumentException("TF_DISPATCH_OWNER_MISMATCH");
+        JsonObject data=bossMethodData(entity,goal,"broadcastMyFormation");
+        uuid(data,"memberUuid",member);data.add("memberStateAtReturn",knightStateAtReturn(member));
+        uuid(data,"targetUuid",KneekuraDebugDecisionSnapshot.read(Mob.class,"target",member));
+        data.addProperty("dispatchScope","ORIGINAL_LOOP_MEMBER_SWITCH_RETURN");
+        data.addProperty("requestedValueStatus","NOT_CAPTURED");data.addProperty("stateChangeStatus","NOT_EXPOSED");
+        data.addProperty("groupIdentityStatus","NOT_EXPOSED");return data;
+    }
+    JsonObject captureHydraTargetReturn(Mob entity,Object head,Entity requested)throws ReflectiveOperationException {
+        int number=checkedHydraHead(entity,head);Object cached=read(head,"targetEntity");
+        if(cached!=requested)throw new IllegalStateException("TF_ASSIGNED_TARGET_MISMATCH");
+        JsonObject data=bossMethodData(entity,head,"setTargetEntity");data.addProperty("headNum",number);
+        uuid(data,"requestedTargetUuid",requested);uuid(data,"cachedTargetUuid",cached);
+        data.addProperty("assignmentScope","ORIGINAL_TARGET_SETTER_RETURN");data.addProperty("attackSuccessStatus","NOT_EXPOSED");return data;
+    }
+    JsonObject captureHydraStateWrite(Mob entity,Object head)throws ReflectiveOperationException {
+        int number=checkedHydraHead(entity,head);JsonObject data=bossMethodData(entity,head,"advanceHeadState");
+        String previous=enumName(read(head,"prevState")),current=enumName(read(head,"currentState"));
+        data.addProperty("headNum",number);data.addProperty("previousState",previous);data.addProperty("currentState",current);
+        data.addProperty("valueChanged",!previous.equals(current));uuid(data,"targetUuid",read(head,"targetEntity"));
+        data.addProperty("ticksProgress",(Integer)read(head,"ticksProgress"));data.addProperty("ticksNeeded",(Integer)read(head,"ticksNeeded"));
+        data.addProperty("isSecondaryAttacking",(Boolean)read(head,"isSecondaryAttacking"));
+        String attack=switch(current) {
+            case "BITE_BEGINNING","BITE_READY","BITING" -> "BITE";
+            case "FLAME_BEGINNING","FLAMING" -> "FLAME";
+            case "MORTAR_BEGINNING","MORTAR_SHOOTING" -> "MORTAR";
+            default -> "NONE";
+        };
+        data.addProperty("activeAttackType",attack);data.addProperty("attackTypeScope","DERIVED_FROM_STORED_STATE");
+        data.addProperty("assignmentScope","AFTER_ORIGINAL_CONDITIONAL_CURRENT_STATE_WRITE");
+        data.addProperty("reasonStatus","NOT_EXPOSED");data.addProperty("attackSuccessStatus","NOT_EXPOSED");return data;
+    }
+    private int checkedHydraHead(Mob entity,Object head)throws ReflectiveOperationException {
+        if(!supports(entity)||!entity.getClass().getName().equals(PREFIX+"Hydra")||!compatible(entity)||head==null||
+                !head.getClass().getName().equals(PREFIX+"HydraHeadContainer")||read(head,"hydra")!=entity)
+            throw new IllegalArgumentException("TF_HEAD_OWNER_MISMATCH");
+        Object[] heads=(Object[])read(entity,"hc");int number=(Integer)read(head,"headNum");
+        if((Integer)read(entity,"numHeads")!=7||heads.length!=7||number<0||number>=7||heads[number]!=head)
+            throw new IllegalArgumentException("TF_HEAD_OWNER_MISMATCH");
+        return number;
+    }
+    private JsonObject bossMethodData(Mob entity,Object owner,String method)throws ReflectiveOperationException {
+        JsonObject data=new JsonObject();data.addProperty("bossKind",entity.getClass().getSimpleName());
+        data.addProperty("methodOwner",owner.getClass().getName());data.addProperty("methodName",method);
+        uuid(data,"sourceUuid",entity);data.add("sourceProof",bossMethodProof(entity,owner));return data;
+    }
+    private JsonObject bossMethodProof(Mob entity,Object owner) {
+        JsonObject descriptor=descriptor(),proof=new JsonObject(),hashes=new JsonObject();
+        proof.add("mappedArtifactSha256",descriptor.get("mappedArtifactSha256"));
+        hashes.add(entity.getClass().getName(),descriptor.getAsJsonObject("classHashes").get(entity.getClass().getName()));
+        if(owner.getClass().getName().equals(KNIGHT_GOAL))hashes.addProperty(KNIGHT_GOAL,KNIGHT_GOAL_HASH);
+        else hashes.add(owner.getClass().getName(),descriptor.getAsJsonObject("classHashes").get(owner.getClass().getName()));
+        proof.add("classHashes",hashes);proof.addProperty("compatibilityStatus","MATCHED_DEVELOPMENT_RESOURCE_NOT_RESIDENT_ATTESTATION");return proof;
+    }
     private boolean coordinationCompatible(Mob entity,Object goal) {
         if(goal==null||!goal.getClass().getName().equals(KNIGHT_GOAL)||
                 goal.getClass().getClassLoader()!=entity.getClass().getClassLoader())return false;

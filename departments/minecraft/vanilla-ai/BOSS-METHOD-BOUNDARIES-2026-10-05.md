@@ -1,0 +1,26 @@
+# Source-bound Knight and Hydra observations
+
+R68 adds four opt-in boundaries under the existing selected-subject `mod` burst. [The source ledger](BOSS-METHOD-BYTECODE-LEDGER-2026-10-05.json) pins the same development TF artifact `7d7842c3c66d355c94bd726ef69ad14ac4f944061198927c3eb54a728e23580a`, four actual class exports,18 method slices, five independently verified Git blobs and the JDK provider. It is separate from the distributed SRG artifact and transformed resident-byte attestation. Third-party bodies remain private.
+
+| Record | Actual boundary / retained fact | Explicit limit |
+|---|---|---|
+| MOD_KNIGHT_LEADER_RETURN | Original isThisTheLeader(List) boolean RETURN, original bounded list order, stored number/formation/progress and each known member's cached Mob target UUID | Leader is a predicate over that original list, not a persistent leader/group UUID. Matching member targets do not establish a shared-target field or cause. Partial/custom members remain explicit. |
+| MOD_KNIGHT_MEMBER_DISPATCH_RETURN | After the original loop member's switchToFormation returns at bytecode41; captures that retained member local, UUID and cached state/target | Does not replay the setter or charging predicate. Requested enum and before-call values are not captured; value-change and skipped-member reasons remain unknown. A completed dispatch is distinct from comparing the final list's formations. |
+| MOD_HYDRA_TARGET_RETURN | Original setTargetEntity(Entity) RETURN with requested and cached target UUID, including exact null assignment, on the selected coordinator's verified head slot | Assignment does not prove attack execution or hit. A requested/cached raw-reference mismatch is suppressed. |
+| MOD_HYDRA_STATE_WRITE_CHECKPOINT | After the actual conditional currentState PUTFIELD at bytecode113, retaining preceding prevState, assigned current state, timers, stored target and secondary-attack flag | The assignment can preserve the same enum value. Derived BITE/FLAME/MORTAR/NONE uses the seven attacking states in exact source; it is not an executed attack, damage result or state-transition reason. |
+
+The head assignment is skipped by the original branch to116 until progress reaches its threshold. The checkpoint observes its write, rather than inferring it from the method's frequent RETURN. The leader predicate returns at53; the broadcast calls only eligible non-charging members. Knight's original setter also resets progress, updates its number and updates charging state. These original operations remain in place and are not invoked for inspection.
+
+The member callback uses `LocalCapture.CAPTURE_FAILSOFT` with the original loop local and a coerced Object argument; it adds no TF compile-time dependency and does not wrap the original virtual call. The exact static class retains Knight in slot3 over the original call. Source/compile correspondence does not prove transformed-local compatibility: an unavailable local/hook must remain NOT_CAPTURED, and native application is a separate required gate.
+
+The producer requires the exact selected Knight/Goal or Hydra/head owner relation, source UUID, thread, current context and existing finite window/event/byte/node limits. Source proof and field copying occur within the recorded observer-cost scope; no getter, nearby query, RNG, sensor or AI is replayed. Custom List implementations are rejected before size/get. No mutable member/target reference is retained in evidence. The `mod` channel stays excluded from default bursts. Historical MOD snapshot/transition/broadcast descriptors and records are unchanged.
+
+Consumer validation checks exact keys, artifact/class hashes, vocabulary, member order/bounds, target consistency and explicit unknowns. Leader goes to EVALUATION; completed dispatch and target setter go to EXECUTION; the head write goes to STATE as INSTRUMENTED_ALGORITHM_STATE. Their direct observation IDs remain separate; temporal adjacency is not a causal link. The attack-type subfield explicitly states DERIVED_FROM_STORED_STATE.
+
+## Verification and native boundary
+
+The new consumer tests first rejected all four valid new record kinds, then passed after implementation. The nine focused new/historical Boss tests and full211 Motion/Decision tests pass. Genuine pinned Forge/TF compilation and the six Java-produced records pass JavaScript validation, with exact resource proof, detached targets, owner/thread/channel/event bounds, null assignment and same-value field assignment. Existing actual Forge owner/Arena/camera API tests also pass. Constructor-free objects are unit fixtures; no gameplay AI was executed by those tests.
+
+The private RED/first-GREEN compiler logs and a malformed unit-fixture owner type are retained. The fixture was corrected to declare Session's checked exception and use a different actual Hydra as the unselected coordinator. This correction does not change production behavior.
+
+**Native Mixin application and original-AI acceptance are pending for this producer generation.** Neither compile success nor the synthetic method-boundary fixture proves actual leader dispatch, Hydra assignment/transition, attack effects, same-case Motion/packet integration or observer-effect costs. Continue the original [reconciliation](ORIGINAL-REQUIREMENT-RECONCILIATION-2026-10-05.md); the full goal remains active.

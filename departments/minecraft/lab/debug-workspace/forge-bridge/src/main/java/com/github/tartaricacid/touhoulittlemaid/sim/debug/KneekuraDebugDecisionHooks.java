@@ -411,7 +411,7 @@ public final class KneekuraDebugDecisionHooks {
                 boolean mod=kind.equals("MOD_TRANSITION_RETURN");
                 root.addProperty("schema",mod?"kneekura.mod-decision-return/v1":"kneekura.original-decision-event/v1");
                 root.addProperty("semantics",mod?"ORIGINAL_MOD_INVOCATION_RETURN_ONLY":
-                    kind.equals("PATH_NODE_CLOSED_CHECKPOINT")||kind.equals("PATH_NODE_G_WRITE_CHECKPOINT")||kind.equals("BRAIN_PATH_COMPUTE_PATH_WRITE_CHECKPOINT")?"ORIGINAL_FIELD_WRITE_CHECKPOINT_ONLY":"ORIGINAL_INVOCATION_RETURN_ONLY");
+                    kind.equals("PATH_NODE_CLOSED_CHECKPOINT")||kind.equals("PATH_NODE_G_WRITE_CHECKPOINT")||kind.equals("BRAIN_PATH_COMPUTE_PATH_WRITE_CHECKPOINT")||kind.equals("MOD_HYDRA_STATE_WRITE_CHECKPOINT")?"ORIGINAL_FIELD_WRITE_CHECKPOINT_ONLY":"ORIGINAL_INVOCATION_RETURN_ONLY");
                 if(mod) {
                     root.addProperty("returnTick",subject.level().getGameTime());
                     root.addProperty("returnLocalTick",tick);root.addProperty("localTickScope","LAST_COMPLETED_SERVER_END_COUNTER");
@@ -513,6 +513,44 @@ public final class KneekuraDebugDecisionHooks {
             record("MOD_COORDINATION_RETURN",goal.getClass().getName()+".broadcastMyFormation.RETURN",
                 ()->modAdapter.captureKnightCoordination(subject,goal,members,Math.min(16,nodeLimit)));
         }
+        private boolean readyKnightBoundary(Object goal) {
+            if(modAdapter==null||!channels.contains("mod")||thread!=Thread.currentThread()||subject==null||goal==null||
+                    !subject.getClass().getName().equals("twilightforest.entity.boss.KnightPhantom")||
+                    !goal.getClass().getName().equals("twilightforest.entity.ai.goal.PhantomUpdateFormationAndMoveGoal"))return false;
+            try{return budget.allows(currentContext.get(),time.getAsLong())&&
+                KneekuraDebugDecisionSnapshot.read(goal.getClass(),"boss",goal)==subject&&
+                budget.context().subjectUuid().equals(KneekuraDebugDecisionSnapshot.read(Entity.class,"uuid",subject).toString());
+            }catch(ReflectiveOperationException|RuntimeException unavailable){return false;}
+        }
+        void knightLeader(Object goal,List<?> members,boolean result) {
+            if(members==null||members.getClass()!=ArrayList.class||!readyKnightBoundary(goal))return;
+            record("MOD_KNIGHT_LEADER_RETURN",goal.getClass().getName()+".isThisTheLeader.RETURN",
+                ()->modAdapter.captureKnightLeader(subject,goal,members,Math.min(16,nodeLimit),result));
+        }
+        void knightMemberDispatch(Object goal,Object member) {
+            if(!readyKnightBoundary(goal)||member==null||member.getClass()!=subject.getClass())return;
+            record("MOD_KNIGHT_MEMBER_DISPATCH_RETURN",goal.getClass().getName()+".broadcastMyFormation.AFTER_ORIGINAL_MEMBER_SWITCH",
+                ()->modAdapter.captureKnightMemberDispatch(subject,goal,member));
+        }
+        private boolean readyHydraBoundary(Object head) {
+            if(modAdapter==null||!channels.contains("mod")||thread!=Thread.currentThread()||subject==null||head==null||
+                    !subject.getClass().getName().equals("twilightforest.entity.boss.Hydra")||
+                    !head.getClass().getName().equals("twilightforest.entity.boss.HydraHeadContainer"))return false;
+            try{return budget.allows(currentContext.get(),time.getAsLong())&&
+                KneekuraDebugDecisionSnapshot.read(head.getClass(),"hydra",head)==subject&&
+                budget.context().subjectUuid().equals(KneekuraDebugDecisionSnapshot.read(Entity.class,"uuid",subject).toString());
+            }catch(ReflectiveOperationException|RuntimeException unavailable){return false;}
+        }
+        void hydraTargetReturn(Object head,Entity requested) {
+            if(!readyHydraBoundary(head))return;
+            record("MOD_HYDRA_TARGET_RETURN",head.getClass().getName()+".setTargetEntity.RETURN",
+                ()->modAdapter.captureHydraTargetReturn(subject,head,requested));
+        }
+        void hydraStateWrite(Object head) {
+            if(!readyHydraBoundary(head))return;
+            record("MOD_HYDRA_STATE_WRITE_CHECKPOINT",head.getClass().getName()+".advanceHeadState.AFTER_ORIGINAL_CURRENT_STATE_WRITE",
+                ()->modAdapter.captureHydraStateWrite(subject,head));
+        }
     }
 
     public static void goalReturn(WrappedGoal wrapper,boolean continuation,boolean result) {
@@ -523,6 +561,18 @@ public final class KneekuraDebugDecisionHooks {
     }
     public static void knightCoordination(Object goal,List<?> members) {
         Session session=active;if(session!=null)session.knightCoordination(goal,members);
+    }
+    public static void knightLeader(Object goal,List<?> members,boolean result) {
+        Session session=active;if(session!=null)session.knightLeader(goal,members,result);
+    }
+    public static void knightMemberDispatch(Object goal,Object member) {
+        Session session=active;if(session!=null)session.knightMemberDispatch(goal,member);
+    }
+    public static void hydraTargetReturn(Object head,Entity requested) {
+        Session session=active;if(session!=null)session.hydraTargetReturn(head,requested);
+    }
+    public static void hydraStateWrite(Object head) {
+        Session session=active;if(session!=null)session.hydraStateWrite(head);
     }
     public static void goalLifecycle(WrappedGoal wrapper,boolean started) {
         Session session=active;if(session!=null)session.goalLifecycle(wrapper,started);
