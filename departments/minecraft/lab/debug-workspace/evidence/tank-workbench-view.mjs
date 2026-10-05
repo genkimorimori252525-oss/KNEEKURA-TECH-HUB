@@ -15,6 +15,8 @@ export function packTankWorkbenchData({status,preflight=null,cursorPackets,map,e
     boundedTankPacket(p);
   }
   for(const item of [preflight,map,experiment])if(item&&(!item.identity||!sameTankIdentity(item.identity,status.identity)))throw new TypeError('WORKBENCH_IDENTITY_MISMATCH');
+  if(experiment&&(experiment.identity.subjectUuid!==cursorPackets[0].identity.subjectUuid||experiment.identity.targetRevision!==cursorPackets[0].identity.targetRevision))throw new TypeError('WORKBENCH_EXPERIMENT_SUBJECT_MISMATCH');
+  if(comparison&&!sameTankIdentity(comparison.before,status.identity)&&!sameTankIdentity(comparison.after,status.identity))throw new TypeError('WORKBENCH_COMPARISON_IDENTITY_MISMATCH');
   const nodes=[],intern=new Map();
   function encode(value,depth=0) {
     if(depth>64)throw new RangeError('TANK_WORKBENCH_NESTING_LIMIT');
