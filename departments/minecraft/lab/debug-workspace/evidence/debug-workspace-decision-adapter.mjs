@@ -508,7 +508,7 @@ export function buildDebugWorkspaceRelatedProjectileTraces({observations,subject
     const key=JSON.stringify([record.writerId,p.burstId,d.projectileUuid,d.spawnEventIndex]);
     if(p.kind==='CONTROL_PROJECTILE_SPAWN_RETURN') {
       if(d.result!==true||groups.size>=16||groups.has(key))continue;
-      groups.set(key,{spawn:record,points:[],terminal:null});continue;
+    groups.set(key,{spawn:record,points:[],pointCount:0,terminal:null});continue;
     }
     const group=groups.get(key);
     if(!group||group.terminal||p.eventIndex<=group.spawn.payload.eventIndex||
@@ -516,16 +516,23 @@ export function buildDebugWorkspaceRelatedProjectileTraces({observations,subject
     if(p.kind!=='CONTROL_PROJECTILE_TICK_RETURN')continue;
     if(d.removed){group.terminal=record;continue;}
     if(record.gameTime<start)continue;
-    group.points.push({tick:record.gameTime,...d.position,vx:d.velocity.x,vy:d.velocity.y,vz:d.velocity.z,
+    const point={tick:record.gameTime,...d.position,vx:d.velocity.x,vy:d.velocity.y,vz:d.velocity.z,
       source_observation_id:record.observationId,source_kind:'DEBUG_WORKSPACE_RELATED_PROJECTILE_ORIGINAL_TICK',
-      run_id:record.runId,run_snapshot_id:record.runSnapshotId,arena_epoch:record.arenaEpoch,dimension_id:d.dimension});
+      run_id:record.runId,run_snapshot_id:record.runSnapshotId,arena_epoch:record.arenaEpoch,dimension_id:d.dimension};
+    const previous=group.points.at(-1),before=group.points.at(-2);
+    const samePosition=(a,b)=>['x','y','z','dimension_id'].every(k=>a[k]===b[k]);
+    // Keep real stationary endpoints without consuming the global display budget with interior ticks.
+    if(before&&previous.tick>before.tick&&point.tick>previous.tick&&
+      previous.tick-before.tick<=maxGapTicks&&point.tick-previous.tick<=maxGapTicks&&
+      samePosition(before,previous)&&samePosition(previous,point))group.points.pop();
+    group.points.push(point);group.pointCount++;
   }
   // One global position budget, not sixteen separate 128-sample allocations.
   const retainedIds=new Set([...groups.values()].flatMap(g=>g.points).sort((a,b)=>a.tick-b.tick).slice(-maxSamples).map(p=>p.source_observation_id));
   return [...groups.values()].map(g=>({...g,retained:g.points.filter(p=>retainedIds.has(p.source_observation_id))})).filter(g=>g.retained.length).map(g=>({
     owner_uuid:subjectUuid,relationship_scope:'ACCEPTED_FRESH_SPAWN_SELECTED_CACHED_OWNER',
     spawn_source_observation_ids:[g.spawn.observationId],terminal_source_observation_ids:g.terminal?[g.terminal.observationId]:[],
-    samples_truncated:g.points.length>g.retained.length,
+    samples_truncated:g.pointCount>g.retained.length,
     trace:buildSampledMotionTrace({traceClass:'PROJECTILE_ACTUAL',subject:{id:g.spawn.payload.data.projectileUuid,type:g.spawn.payload.data.projectileClass},
       observations:g.retained,identity,maxSamples,maxGapTicks,
       window:{start_tick:Number.isFinite(start)?start:null,end_tick:Number.isFinite(end)?end:null}}),

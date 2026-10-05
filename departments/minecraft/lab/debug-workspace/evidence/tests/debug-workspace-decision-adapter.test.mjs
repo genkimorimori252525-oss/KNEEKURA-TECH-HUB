@@ -208,6 +208,43 @@ test('pre-window removal remains a terminal boundary and cannot resurrect later 
     request:{startTick:103,endTick:104}});
   assert.equal(out.layers.relatedProjectiles.traces.length,0);
 });
+
+test('retained presentation preserves travelled endpoints under three stationary projectile histories within the global cap',()=>{
+  const records=[],spawnIndices=[],projectiles=[PROJECTILE,HIT_TARGET,'00000000-0000-0000-0000-000000000004'];
+  let index=1;
+  for(const projectile of projectiles){
+    const spawn=rangedSpawn();spawn.payload.eventIndex=index;spawn.writerSeq=index;spawn.observationId='obs:ranged:'+index;
+    spawn.payload.data.projectileUuid=projectile;spawn.payload.data.spawnEventIndex=index;
+    spawn.gameTime=100;spawnIndices.push(index++);records.push(spawn);
+  }
+  for(let tick=101;tick<=150;tick++)for(let i=0;i<projectiles.length;i++){
+    const sample=rangedSample(index++,tick,tick===101?0:1);
+    sample.payload.data.projectileUuid=projectiles[i];sample.payload.data.spawnEventIndex=spawnIndices[i];records.push(sample);
+  }
+  const before=structuredClone(records),out=buildRetainedDecisionPresentation({observations:records,subjectUuid:UUID,
+    identity:{debugSessionId:'sess-a',runId:'run-a',runSnapshotId:'snap-a',processEpoch:1,arenaEpoch:3,targetRevision:1},
+    request:{startTick:100,endTick:150}});
+  const traces=out.layers.relatedProjectiles.traces;
+  assert.equal(traces.length,3);assert.ok(traces.reduce((n,t)=>n+t.trace.samples.length,0)<=128);
+  for(const {trace,samples_truncated} of traces){
+    assert.equal(trace.samples[0].tick,101);assert.equal(trace.samples[0].x,0);
+    assert.equal(trace.samples.at(-1).tick,150);assert.equal(trace.samples.at(-1).x,1);
+    assert.ok(trace.segments.some(s=>s.distance===1));assert.equal(samples_truncated,true);
+    assert.ok(trace.samples.every(s=>records.some(r=>r.observationId===s.source_observation_id&&r.gameTime===s.tick)));
+  }
+  assert.deepEqual(records,before);
+});
+
+test('stationary projectile display compaction preserves gaps, dimension changes and the actual resumption endpoint',()=>{
+  const records=[rangedSpawn(),rangedSample(2,102,1),rangedSample(3,103,1),rangedSample(4,130,1),rangedSample(5,131,1),rangedSample(6,132,1),rangedSample(7,133,2)];
+  records[4].payload.data.dimension='minecraft:the_nether';
+  const [{trace}]=buildDebugWorkspaceRelatedProjectileTraces({observations:records,subjectUuid:UUID});
+  assert.deepEqual(trace.samples.map(s=>s.tick),[102,103,130,131,132,133]);
+  assert.deepEqual(trace.gaps.map(g=>g.kind),['SOURCE_GAP','IDENTITY_BOUNDARY','IDENTITY_BOUNDARY']);
+  assert.equal(trace.segments.at(-1).distance,1);
+  const moving=[rangedSpawn(),...Array.from({length:130},(_,i)=>rangedSample(i+2,102+i,i))];
+  assert.equal(buildDebugWorkspaceRelatedProjectileTraces({observations:moving,subjectUuid:UUID})[0].trace.samples.length,128);
+});
 test('actual successful original teleport return is a result and typed gap without a fabricated sample',()=>{
   const event=teleportReturn(true),records=teleportRows(event),before=structuredClone(records);
   assert.equal(validOriginalDecisionEvent(event),true);
