@@ -373,7 +373,106 @@ Technique:
 
 This is a useful old design concept even though modern Goal/navigation APIs differ.
 
-## 17. Tactical AI primitives worth preserving
+## 17. Servant master-defense is a separate event-driven target lane
+
+`EntityGarnetAIMasterHurtByTarget` is the servant analogue of owner protection.
+
+It:
+- resolves `IServantGarnet.getMaster()`;
+- rejects missing/dead master;
+- reads the master's revenge/AI target;
+- compares the master's revenge timestamp against its cached timestamp;
+- validates the attacker through the shared Garnet target-suitability policy;
+- assigns that attacker to the servant.
+
+Confirmed users include:
+- Sayaka's Servant Oktavia;
+- Kyouko's Rosso Fantasma;
+- Yuri's Corno Forte.
+
+So servant behavior is not just “follow master + attack nearest”. It has a dedicated **master-was-attacked event lane**.
+
+Technique:
+**master defensive intent propagation for summons**.
+
+## 18. Some witch families can call same-class allies for help
+
+`EntityGarnetAIHurtByTarget` optionally enables `callForHelp`.
+
+When active:
+1. the entity adopts its own revenge target;
+2. it queries nearby entities of **the exact same runtime class** inside target range/height;
+3. for same-class allies that:
+   - are not itself;
+   - currently have no attack target;
+   - are not on the attacker's team;
+4. it assigns the same revenge target.
+
+In the supplied QB tree, `callForHelp=true` is used by at least:
+- Lotte;
+- phantom Ophelia.
+
+Most other witches instantiate the same Goal with `false`.
+
+Technique:
+**damage-triggered local pack aggro restricted to exact same class**.
+
+This is different from encounter-wide faction alerting. ANCHOR should decide whether intended behavior is:
+- same species only;
+- same encounter/faction;
+- or a data-driven alert group.
+
+## 19. Collision-only attack Goal cleanly separates movement from melee
+
+`EntityGarnetAIOnlyAttackOnCollide`:
+- never computes a path;
+- only runs when the current target is already inside configurable collision-range padding;
+- attacks once;
+- optionally swings held item;
+- immediately ends;
+- reset applies a fixed attack cooldown.
+
+Confirmed users:
+- Liese;
+- Homulilly Nutcracker.
+
+Their locomotion comes from other controllers:
+- Liese's free-flight behavior;
+- Nutcracker's `EntityHomulillyAIMoveForTarget`.
+
+This is a strong architectural primitive:
+
+**movement controller owns positioning; collision Goal owns only hit timing**.
+
+That separation is preferable for scripted/flying bosses whose motion should not be overwritten by generic melee navigation.
+
+## 20. Range-goal handoff is asymmetric at short range
+
+The three shared magical-girl attack Goals do not reset identically.
+
+### Short-range reset
+`EntityMadomagiAIShortRangeAttack.resetTask()`:
+- clears its target reference;
+- explicitly calls `theHost.setAttackTarget(null)`;
+- clears navigation;
+- removes held weapon;
+- clears posture.
+
+### Middle/long reset
+The middle and long Goals:
+- clear navigation;
+- clear held weapon/posture;
+- **do not clear the host's attack target**.
+
+Therefore leaving/failing the short-range Goal can force the target selectors to reacquire combat before the middle/long band resumes, while ordinary middle↔long handoff can retain target identity.
+
+This is direct source asymmetry, but whether it creates visible one-tick pauses/retargeting in normal 1.6.4 execution is a runtime-observation question.
+
+Technique/modernization:
+- separate **attack-band transition** from **target invalidation**;
+- do not clear target merely because one range-specific Goal stops unless that is deliberately part of the behavior.
+
+## 21. Tactical AI primitives worth preserving
 
 Keep independently:
 
