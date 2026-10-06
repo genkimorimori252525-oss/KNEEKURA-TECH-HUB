@@ -367,8 +367,7 @@ The first all-aircraft layer now exists for all 24 base aircraft:
 - [reports/aircraft-atlas-ai-view.json](reports/aircraft-atlas-ai-view.json) — machine-readable ranks, doctrine contrasts and query flags;
 - [reports/AIRCRAFT-ATLAS.md](reports/AIRCRAFT-ATLAS.md) — human-readable extrema and interpretation warnings.
 
-The Atlas deliberately avoids a composite "strongest" score. Speed, yaw, pitch, identical-input
-retention and durability are ranked independently.
+The Atlas deliberately avoids a composite "strongest" score. Atlas v2 ranks speed, yaw, pitch, same-input retention, equal-angle 90° turn time/retention/path distance, and durability independently.
 
 Individual per-aircraft cards and pairwise combat recommendations can now be generated from this
 shared representation as needed. Runtime mismatch warnings remain pending same-artifact calibration.
@@ -410,14 +409,27 @@ must be resolved through same-artifact runtime trace replay, not by tuning const
 numbers look familiar.
 
 
-## 8. Retention metric correction
+## 8. Retention metric correction — implemented
 
-The current Atlas field `turn_exit_speed_retention` is the speed ratio after the **same 20-tick
-full-yaw input**. Aircraft with low yaw authority can therefore appear to retain more speed simply
-because they turned less.
+The original field `turn_exit_speed_retention` remains the speed ratio after the **same 20-tick
+full-yaw input**. It is now exposed in the AI view as `same_input_retention`.
 
-Do not translate that field into "turning energy efficiency".
+Atlas v2 adds an explicit equal-angle experiment:
 
-The next physics feature should add an **equal-angle turn** experiment—for example comparing speed
-and altitude after each aircraft has actually achieved the same 90° heading change. Both metrics are
-useful, but they answer different questions.
+- `turn_90_ticks`;
+- `equal_angle_90_speed_retention`;
+- `distance_to_90_yaw_blocks`.
+
+This lets the AI answer two different questions without conflating them:
+
+> "How much speed survives the same control duration?"
+
+and
+
+> "How much speed survives after the same 90° heading change, and how long/far did that change take?"
+
+For example, B-17 has excellent equal-angle retention (~0.9946) but needs 118 ticks to reach 90°,
+whereas A6M reaches 90° in 42 ticks but retains ~0.9256. Neither single number is "turning quality";
+the tactical policy needs both time-to-nose and energy cost.
+
+The next evidence upgrade is to reproduce these equal-angle traces in the exact Minecraft runtime.

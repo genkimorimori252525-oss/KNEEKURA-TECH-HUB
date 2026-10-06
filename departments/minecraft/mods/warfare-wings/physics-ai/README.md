@@ -95,7 +95,8 @@ Current verified scope:
 - A6M and P-47N focused seed/reference models;
 - 18 pure-Java invariant checks;
 - deterministic 24-aircraft source-Atlas regeneration;
-- AI-readable independent-axis ranks, doctrine contrasts and statistical inspection flags;
+- AI-readable **Atlas v2** independent-axis ranks, doctrine contrasts and statistical inspection flags;
+- fixed-duration and equal-angle 90° turn metrics kept as separate questions;
 - deterministic 401-sample throttle trace generation;
 - threshold-free trace comparator + AI-readable full-series output;
 - Forge runtime-probe source compilation;
@@ -221,8 +222,31 @@ The 24-aircraft source Atlas is now implemented. The next gate is **same-artifac
 2. add the same P-47N throttle trace to test the high-`engineSpeed` end of the source model;
 3. add A6M/P-47N yaw and pitch steps to validate the two fighter-control extremes already used in tactical comparisons;
 4. add IL-2 and B-17 yaw traces because the Atlas places them at the global high/low yaw extremes;
-5. add an **equal-angle turn** scenario so energy retention is compared after the same achieved heading change rather than the same control duration;
-6. then calibrate representative attacker/escort envelopes and promote trustworthy Atlas axes toward `MEASURED`;
+5. reproduce the implemented **90° equal-angle turn** scenario in Minecraft for representative fighters/attackers/bombers, comparing turn time, speed retention and path distance;
+6. calibrate representative attacker/escort envelopes and promote trustworthy Atlas axes toward `MEASURED`;
 7. only after those transfer functions are bounded, use the fast environment for large-batch autonomous combat tuning.
 
 See [reports/AIRCRAFT-ATLAS.md](reports/AIRCRAFT-ATLAS.md) for the current 24-aircraft overview.
+## Atlas v2 turn semantics
+
+The source Atlas now carries both:
+
+- `same_input_retention` — speed retained after the same 20-tick full-yaw input;
+- `equal_angle_retention` — speed retained after each aircraft actually reaches 90° yaw.
+
+It also records `turn_90_ticks` and `distance_90`. This prevents a slow-turning aircraft from
+looking "efficient" solely because it changed little heading during the fixed 20-tick window.
+
+Representative source results:
+
+| Aircraft | 90° ticks | Equal-angle retention | Distance to 90° |
+|---|---:|---:|---:|
+| IL-2 | 41 | 0.951955 | 63.074 |
+| A6M | 42 | 0.925567 | 68.547 |
+| Spitfire | 44 | 0.935021 | 91.231 |
+| Yak-3 | 46 | 0.939018 | 96.495 |
+| Ki-84 | 48 | 0.941936 | 104.950 |
+| P-47N | 60 | 0.964626 | 134.909 |
+| B-17 | 118 | 0.994638 | 118.738 |
+
+These remain `SOURCE_MICROKERNEL`, not same-artifact measurements.

@@ -165,9 +165,7 @@ Current source-Atlas extrema:
 | identical-input 20-tick speed retention | B-17 | A6M |
 | durability | B-29 | A6M |
 
-The retention axis is intentionally labeled **identical-input retention**. It is not equal-angle turn
-efficiency: B-17/B-29 retain more speed partly because they achieve far less yaw during the same
-20-tick command. An equal-angle turn scenario is therefore a required calibration extension.
+The fixed-duration retention axis remains intentionally labeled **identical-input retention**. Atlas v2 now also adds an **equal-angle 90°** experiment, so the two questions no longer have to be conflated.
 
 The Atlas computes no composite "best aircraft" score. Ranking stays per-axis so tactical consumers
 can choose the relevant dimensions without hiding trade-offs.
@@ -182,3 +180,34 @@ High-value contrasts already visible in source space include:
   acting as ordinary yaw/pitch inertia in the inspected source path.
 
 These remain `SOURCE_MICROKERNEL` facts until same-artifact runtime calibration promotes them.
+## Atlas v2 equal-angle extension
+
+The source Atlas schema is now `ww.physics.aircraft-atlas.v2`.
+
+New fields:
+
+- `ticks_to_90_yaw`;
+- `equal_angle_90_speed_retention`;
+- `distance_to_90_yaw_blocks`.
+
+The AI-readable view is `ww.physics.aircraft-atlas-ai.v2`. It ranks `turn_90_ticks` and
+`distance_90` with **lower values first**, while speed/yaw/pitch/retention/durability continue to
+rank higher values first.
+
+The two retention dimensions are deliberately separate:
+
+1. **same-input retention** — same 20-tick control duration;
+2. **equal-angle retention** — same achieved 90° yaw change.
+
+All 24 aircraft reach 90° within the bounded source scenario. Observed turn time spans **41 ticks
+(IL-2) to 118 ticks (B-17)**.
+
+This materially changes interpretation without erasing the old measurement:
+
+- A6M: 42 ticks / 0.925567 — very fast nose change, highest speed cost among the 24;
+- P-47N: 60 / 0.964626 — slower heading change, better equal-angle retention;
+- B-17: 118 / 0.994638 — very low speed loss but very high time cost;
+- IL-2: 41 / 0.951955 — fastest source 90° result despite attacker role.
+
+The distance-to-90 value is path distance under this scenario, **not** asserted to be an aerodynamic
+turn radius.

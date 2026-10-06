@@ -126,8 +126,23 @@ The 24-aircraft source Atlas now gives a concrete order for future same-artifact
 2. **P-47N throttle** — calibrates the high-`engineSpeed` fighter end and tests whether thrust scaling transfers.
 3. **A6M + P-47N yaw/pitch** — validates the turn-fighter vs low-nose-authority energy-fighter contrast.
 4. **IL-2 + B-17 yaw** — validates the global source-Atlas yaw extrema (highest vs lowest).
-5. **Equal-angle turn** — removes the current identical-input retention confound and measures speed/altitude loss after the same achieved heading change.
+5. **Runtime equal-angle turn parity** — the source experiment is now implemented; reproduce its 90° turn time, speed retention and path distance in the exact Minecraft runtime.
 6. **Representative attacker/escort traces** — Ju 87/IL-2 and B-17/G4M are useful because their shared labels hide large source-envelope differences.
 
 This order is chosen for information gain, not because those six aircraft are the only supported
 targets. The full source dataset already contains all 24 base aircraft.
+## Equal-angle source baseline now available
+
+Atlas v2 already supplies a source-side 90° turn baseline for all 24 aircraft, so the future runtime
+test has explicit targets rather than an undefined "turn performance" goal.
+
+High-information parity cases:
+
+- IL-2 — 41 ticks / 0.951955 retention / 63.074 blocks;
+- A6M — 42 / 0.925567 / 68.547;
+- P-47N — 60 / 0.964626 / 134.909;
+- Ju 87 — 81 / 0.983141 / 89.993;
+- B-17 — 118 / 0.994638 / 118.738.
+
+A runtime mismatch can therefore be classified as **turn-phase timing**, **energy-retention drift**,
+or **path-geometry drift** instead of being collapsed into one scalar "turn error".
