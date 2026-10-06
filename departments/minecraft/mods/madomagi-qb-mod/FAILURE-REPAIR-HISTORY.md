@@ -47,3 +47,23 @@ This does not mean the MOD had no bugs; it means the mandatory repair-history fa
 12. **Creative/flying capability mutation is duplicated** — the unsafe anti-cheese pattern exists outside Walpurgisnacht in Homulilly Nutcracker.
 
 These remain static anomaly candidates. Without a historical report, repair diff or bounded runtime reproduction they are not promoted to proven failures.
+
+
+## Additional architecture / persistence / asset anomaly leads
+
+13. **Garnet reverse dependency on QB** — `EntityGarnetAINearestAttackableTarget` directly references `puellamagi.mods.entity.monster.EntityHomulillyNutcracker`, and the reference is present in the distributed Garnet class constant pool. The nominal lower-level framework therefore contains a concrete upper-layer QB dependency.
+14. **Source-only stale external imports** — two Garnet Java files import Korezon/Kuko classes from unrelated packages even though their method bodies do not use them and the compiled class files do not contain those references. A clean source build can therefore have dependency friction not represented by the shipped binary.
+15. **Repeated target reacquisition** — Garnet nearest-target `continueExecuting()` calls `shouldExecute()`, potentially repeating multi-AABB scans/sorts while already tracking a target. Static performance lead only.
+16. **TexturePack Madoka UF resource-path mismatch** — the intended `madokaUF.png` entry begins with full-width U+FF4D `ｍ`, not ASCII `m`. Nineteen other overrides map to exact base paths; this one does not.
+17. **Homulilly ritual flag not persisted** — `EntityGriefSeed.isHomulilly` selects Nutcracker hatching but is absent from custom NBT read/write. Save/load should therefore lose the special ritual identity unless an unobserved engine path restores it.
+18. **Charlotte second-form flag not persisted** — DataWatcher 19 controls second-form behavior/rendering, but NBT stores only `Revivable`. Default load state is first form unless another path resets it.
+19. **Witch ecological age not persisted** — `EntityMajo.age` and `summonServant` drive evolution/summoning and are plain fields with no NBT persistence. Save/load resets the growth clock by construction.
+20. **Parent/encounter object references are runtime-only** — Ophelia master, Shadow→Walpurgis and Homulilly-servant→Nutcracker links are not persisted as stable IDs in the inspected classes, so callbacks/lifetime coupling can be lost across serialization boundaries.
+21. **Walpurgis singleton gate is process-local** — `mod_QB.canWalpurgisSpawn` is a static runtime/config boolean flipped false at spawn and true on death/removal; it is not world-persisted. Server restart with an existing encounter is a duplicate-admission candidate.
+22. **GarnetGun packet indexes byte zero without visible length validation** — malformed/empty legacy custom payload is a packet-boundary robustness lead.
+23. **Lotte/Luiselotte hostile hit upgrades weak armor to diamond** — source explicitly replaces sub-diamond armor with diamond equivalents. This may be intentional oddity or inverted logic; historical intent is unavailable.
+24. **Kriemhild possible duplicate Grief Seed path** — health<=0 living-update code explicitly drops one Seed before `setDead()`, while `dropFewItems` separately drops one. Exact superclass death lifecycle must be traced/runtime-tested before claiming two drops.
+25. **EntityGriefSeed bypasses superclass custom NBT hooks** — its overrides do not call `super.writeEntityToNBT/readEntityFromNBT`. Base Entity serialization still handles common outer fields, but inherited EntityLiving/Creature-specific state impact is unresolved.
+26. **Reserved Oriko/Yuma configuration without implementation** — config/entity/item ID fields exist, but the supplied tree contains no corresponding entities and no usable registration/instantiation. Treat as dead/reserved code, not a feature.
+
+These are deliberately kept as **static leads**. Promotion to a failure/repair case still requires bounded runtime evidence or historical report+repair provenance.
