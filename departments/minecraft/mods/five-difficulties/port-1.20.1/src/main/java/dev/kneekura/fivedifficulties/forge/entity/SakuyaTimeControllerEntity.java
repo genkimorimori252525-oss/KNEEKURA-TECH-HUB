@@ -9,6 +9,7 @@ import dev.kneekura.fivedifficulties.core.x1.SakuyaControllerKind;
 import dev.kneekura.fivedifficulties.core.x1.SakuyaWatchContract;
 import dev.kneekura.fivedifficulties.core.x1.X1SakuyaControllerGeometry;
 import dev.kneekura.fivedifficulties.forge.PortRegistries;
+import dev.kneekura.fivedifficulties.forge.timestop.SakuyaTimeStopRuntime;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -197,6 +198,23 @@ public final class SakuyaTimeControllerEntity extends Entity {
         );
         this.setPos(center.x(), center.y(), center.z());
         this.setDeltaMovement(source.getDeltaMovement());
+    }
+
+    @Override
+    public void onAddedToWorld() {
+        super.onAddedToWorld();
+        SakuyaTimeStopRuntime.registerController(this);
+    }
+
+    @Override
+    public void onRemovedFromWorld() {
+        SakuyaTimeStopRuntime.unregisterController(this);
+        super.onRemovedFromWorld();
+    }
+
+    @Override
+    public boolean shouldBeSaved() {
+        return false;
     }
 
     @Override
