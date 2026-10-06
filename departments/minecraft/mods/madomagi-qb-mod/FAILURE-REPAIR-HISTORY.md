@@ -74,4 +74,7 @@ These remain static anomaly candidates. Without a historical report, repair diff
 32. **Projectile substrate deliberately clears target hurt-resistance** — both `EntityGarnetArrow` and `EntityGarnetThrowable` set the target hurt-resistance timer to zero immediately before damage. This appears intentional to support dense volleys, but a literal modern port could bypass other combat systems' expected i-frame pacing.
 33. **Garnet Throwable critical means terrain-damaging explosion** — critical entity impact creates strength-6 explosion and critical block impact strength-4. Mami's `Tiro Finale!` marks its Garnet bullet critical, so this high-impact path can combine projectile damage with explosion/world damage.
 
+34. **Anti-air self-poison pattern also exists in Nutcracker movement AI** — `EntityHomulillyAIMoveForTarget` copies the Walpurgis airborne punishment structure and, after the strength-6 fallback explosion, applies Poison to `theHost`. Distributed bytecode loads the host before the potion-effect call. The same suspicious target choice now exists in three implementations, strengthening the copied-defect hypothesis.
+35. **Servant Oktavia uses direct 3-block position steps every two ticks** — movement uses `setPosition` toward a randomly selected waypoint rather than navigation/velocity. Collision/clipping behavior is a runtime-verification lead, especially in dense terrain.
+
 These are deliberately kept as **static leads**. Promotion to a failure/repair case still requires bounded runtime evidence or historical report+repair provenance.
