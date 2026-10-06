@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 2,
+  "tickRate": 20,
+  "durationTicks": 260,
+  "tracks": [
+    {
+      "name": "halo",
+      "startTick": 20,
+      "endTick": 120,
+      "hue": 36.0,
+      "radius": 0.14,
+      "pattern": "RING",
+      "bullets": 24,
+      "speed": 0.16,
+      "intervalTicks": 12,
+      "fanAngleDeg": 360.0,
+      "rotationDegPerSecond": 0.0,
+      "elevationDeg": 0.0,
+      "lifetimeTicks": 70
+    },
+    {
+      "name": "spiral_a",
+      "startTick": 80,
+      "endTick": 220,
+      "hue": 205.0,
+      "radius": 0.12,
+      "pattern": "SPIRAL",
+      "bullets": 8,
+      "speed": 0.18,
+      "intervalTicks": 6,
+      "fanAngleDeg": 360.0,
+      "rotationDegPerSecond": 115.0,
+      "elevationDeg": 0.0,
+      "lifetimeTicks": 90
+    },
+    {
+      "name": "spiral_b",
+      "startTick": 80,
+      "endTick": 220,
+      "hue": 325.0,
+      "radius": 0.12,
+      "pattern": "SPIRAL",
+      "bullets": 8,
+      "speed": 0.18,
+      "intervalTicks": 6,
+      "fanAngleDeg": 360.0,
+      "rotationDegPerSecond": -115.0,
+      "elevationDeg": 0.0,
+      "lifetimeTicks": 90
+    },
+    {
+      "name": "finale",
+      "startTick": 190,
+      "endTick": 260,
+      "hue": 55.0,
+      "radius": 0.17,
+      "pattern": "RING",
+      "bullets": 36,
+      "speed": 0.21,
+      "intervalTicks": 18,
+      "fanAngleDeg": 360.0,
+      "rotationDegPerSecond": 24.0,
+      "elevationDeg": 0.0,
+      "lifetimeTicks": 60
+    }
+  ]
+}
