@@ -1,0 +1,43 @@
+{
+  "format": "kneekura.minecraft.mod-analysis.v1",
+  "target": "Jujutsu Kaisen (Jujutsu Verse)",
+  "slug": "jujutsu-verse",
+  "overall_status": "STATIC_ANALYSIS_COMPLETE",
+  "runtime_status": "NOT_RUN",
+  "anchor": {
+    "minecraft": "1.20.1",
+    "loader": "Forge",
+    "loader_version": "47+",
+    "distribution": "jujutsu_kaisen-8.1-forge-1.20.1.jar",
+    "public_version": "8.1",
+    "embedded_version": "7.0",
+    "curseforge_project_id": 1269804,
+    "curseforge_file_id": 8097357,
+    "public_release_date": "2026-05-16",
+    "sha256": "d0f2f4e427ae3db92432cfac186a7db137ab8960807ed13ebfa64c7971cb8217",
+    "sha1": "84f8b095672d931c9ffed30bd7eb62354863311a",
+    "size_bytes": 28285565,
+    "java_classfile_major": 61,
+    "public_license": "All Rights Reserved",
+    "embedded_license": "Not specified",
+    "public_source": "NOT_FOUND_IN_TARGETED_SEARCH"
+  },
+  "facets": {
+    "provenance": "EVIDENCE_BACKED",
+    "inventory": "EVIDENCE_BACKED",
+    "domain_lifecycle": "EVIDENCE_BACKED",
+    "domain_clash": "EVIDENCE_BACKED",
+    "simultaneous_domain_cutin": "EVIDENCE_BACKED",
+    "rendering_vfx": "EVIDENCE_BACKED",
+    "technique_patterns": "EVIDENCE_BACKED",
+    "animation": "MAPPED",
+    "networking_sync": "MAPPED",
+    "world_data": "MAPPED",
+    "runtime": "NOT_RUN"
+  },
+  "cautions": [
+    "Three-participant cut-in does not prove a centralized symmetric three-way domain battle solver.",
+    "ParticlePacketMixin forces the client particle override limiter and may increase load.",
+    "Distribution version 8.1 differs from embedded mods.toml version 7.0."
+  ]
+}
