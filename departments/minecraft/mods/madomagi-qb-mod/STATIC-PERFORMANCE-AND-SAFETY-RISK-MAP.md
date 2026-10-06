@@ -291,6 +291,29 @@ ANCHOR:
 - visible charge/reflect cue;
 - avoid unbounded one-counter-projectile-per-hit behavior unless measured safe.
 
+### ItemBreaker shared mutable singleton state
+
+Garnet `ItemBreaker`, used by Sayaka Bat, keeps traversal/work state on fields of the registered Item object:
+
+- `breakableList`;
+- `breakCount`;
+- `isCut`;
+- `isBreak`;
+- `isDig`;
+- `xDig/yDig/zDig`.
+
+Minecraft Item instances are registry singletons shared across ItemStacks/players.
+
+The normal legacy method executes the traversal synchronously and clears the queue before returning, so ordinary sequential use may appear fine. However the design is not reentrancy-safe: callbacks during harvesting/events or another nested use path can observe/overwrite shared work state.
+
+This is separate from the already-recorded **unbounded connected-block workload** risk.
+
+ANCHOR:
+- allocate a per-use/per-player block-edit job;
+- keep queue/mode/origin inside that job;
+- never store active traversal state on the Item singleton;
+- use bounded per-tick processing and cancellation.
+
 ## Safety / griefing risks
 
 ### Player capability mutation
