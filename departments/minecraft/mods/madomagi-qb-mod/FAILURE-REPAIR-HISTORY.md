@@ -77,4 +77,6 @@ These remain static anomaly candidates. Without a historical report, repair diff
 34. **Anti-air self-poison pattern also exists in Nutcracker movement AI** — `EntityHomulillyAIMoveForTarget` copies the Walpurgis airborne punishment structure and, after the strength-6 fallback explosion, applies Poison to `theHost`. Distributed bytecode loads the host before the potion-effect call. The same suspicious target choice now exists in three implementations, strengthening the copied-defect hypothesis.
 35. **Servant Oktavia uses direct 3-block position steps every two ticks** — movement uses `setPosition` toward a randomly selected waypoint rather than navigation/velocity. Collision/clipping behavior is a runtime-verification lead, especially in dense terrain.
 
+36. **Kriemhild has a redundant `armorValue > 10` super-armor condition** — the same method clamps cumulative armorValue to a maximum of10, so this explicit >10 branch is not reachable through the observed damage-update path. The effective mechanism is a 10-damage budget reset every20 ticks, not that condition.
+
 These are deliberately kept as **static leads**. Promotion to a failure/repair case still requires bounded runtime evidence or historical report+repair provenance.
