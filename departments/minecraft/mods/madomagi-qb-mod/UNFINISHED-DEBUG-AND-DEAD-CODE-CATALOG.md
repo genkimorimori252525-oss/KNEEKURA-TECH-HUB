@@ -210,7 +210,39 @@ Status:
 
 The base renderer requests ASCII `madokaUF.png`.
 
-## 12. Preservation categories
+## 12. Abstract ItemMadomagiWeapon retains an overridden legacy right-click implementation
+
+`ItemMadomagiWeapon` contains a concrete `onItemRightClick` despite being an abstract base.
+
+Its default path:
+- damages the held weapon by 32;
+- if the item ID is Sayaka Cutlass, applies Regeneration for 600 ticks at amplifier 4;
+- if the item ID is Kyouko Spear, creates an `EntitySpear2`.
+
+However the concrete subclasses present in the supplied tree are:
+- `ItemSayakaCutlass`;
+- `ItemKyoukoSpear`;
+- `ItemKirikaClaw`.
+
+All three override `onItemRightClick`, and none calls `super.onItemRightClick`.
+
+Their active behavior has diverged:
+- Sayaka Cutlass checks existing Regeneration, costs 48 durability and then applies the buff;
+- Kyouko Spear has its own Spear2 launch plus enchantment propagation;
+- Kirika Claw implements its own multi-Claw launch.
+
+Therefore the base implementation is best classified as:
+
+**IMPLEMENTED_BUT_SHADOWED_BY_ALL_CURRENT_CONCRETE_SUBCLASSES**
+
+It survives in source/bytecode as an older generic weapon implementation, but no current concrete weapon reaches it through ordinary virtual dispatch.
+
+This is useful design archaeology because it shows a likely refactor path:
+`one generic ID-switch weapon base → character-specific subclass implementations`.
+
+It must not be reported as an additional active player control path.
+
+## 13. Preservation categories
 
 Use these labels for future archaeology:
 
