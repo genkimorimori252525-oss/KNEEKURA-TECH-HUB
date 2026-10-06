@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "target": "Terry0333/FatePhantasms",
+  "minecraft": "1.20.1",
+  "loader": "Forge",
+  "analysis_date": "2026-10-06",
+  "releases": {
+    "r205": {
+      "sha256": "1372be839df53214b53481dfce989486025c5d8b9273b0e3aa51450660ede9d1",
+      "entries": 97,
+      "classes": 46,
+      "resources": 29,
+      "photon_ldlib_caller_candidates": 0
+    },
+    "r224": {
+      "sha256": "6842008cea5107c13fa806bf433224841f3147c9c832be9d894837f0bf677d36",
+      "entries": 106,
+      "classes": 55,
+      "resources": 29,
+      "photon_ldlib_caller_candidates": 9,
+      "photon_dependency": {
+        "mandatory": true,
+        "version": "[1.1.17,)",
+        "ordering": "AFTER"
+      }
+    },
+    "r284": {
+      "sha256": "68158d03ae033577def23d51c4e238c8f9aa082243c8da16fbe0e4f9a3fcc88c",
+      "entries": 168,
+      "classes": 94,
+      "resources": 44,
+      "photon_ldlib_caller_candidates": 15,
+      "photon_dependency": {
+        "mandatory": false,
+        "version": "[1.1.17,)",
+        "ordering": "AFTER"
+      }
+    }
+  },
+  "r205_to_r224": {
+    "added_entries": 9,
+    "removed_entries": 0,
+    "changed_entries": 22,
+    "unchanged_common_entries": 53,
+    "resource_entries_added": 0,
+    "finding": "Photon VFX transition is predominantly procedural Java-side composition, not a newly added resource pack."
+  },
+  "ea_default_timeline_ticks": {
+    "chant_one_charge": 164,
+    "chant_two_spin_raise": 316,
+    "chant_three_release_delay": 46,
+    "beam": 140,
+    "finish": 76,
+    "release_at": 526,
+    "beam_end": 666,
+    "gameplay_visual_total": 742,
+    "separate_sound_end": 833
+  },
+  "gate_of_babylon": {
+    "presets": {
+      "SMALL": {
+        "min": 5,
+        "max": 8,
+        "window_ticks": 30
+      },
+      "MEDIUM": {
+        "min": 15,
+        "max": 25,
+        "window_ticks": 54
+      },
+      "LARGE": {
+        "min": 46,
+        "max": 54,
+        "window_ticks": 96
+      },
+      "ULTRA": {
+        "min": 150,
+        "max": 200,
+        "window_ticks": 150
+      }
+    },
+    "weapon_mesh_entries": 4,
+    "client_state_fields": [
+      "caster_uuid",
+      "phase",
+      "seed",
+      "count",
+      "volley_ordinal"
+    ],
+    "photon_fire_layers": [
+      "gob_volley_flash",
+      "gob_volley_drift"
+    ]
+  },
+  "enkidu": {
+    "chain_count": 12,
+    "emerge_ticks_before_launch": 16,
+    "flight_timeout_ticks": 90,
+    "bind_initial_damage": 14,
+    "tighten_at_bound_phase_tick": 46,
+    "tighten_damage": 40,
+    "release_ticks": 24,
+    "states": [
+      "EMERGE",
+      "FLY",
+      "BOUND",
+      "RELEASE"
+    ]
+  },
+  "custom_sound_events_r284": [
+    "ea_full",
+    "ea_summon",
+    "ea_reveal",
+    "ea_rune_bass",
+    "gate_open",
+    "gate_unsheathe"
+  ],
+  "evidence_runs": [
+    {
+      "run_id": 37485453489,
+      "job_id": 112344171330,
+      "purpose": "release hashes, inventory, version differential, Photon caller javap"
+    },
+    {
+      "run_id": 37486911279,
+      "job_id": 112349206094,
+      "purpose": "r284 selected combat/VFX/network/resource deep probe"
+    }
+  ],
+  "rights_boundary": "Derived facts only. No upstream JAR, audio, texture, model, mesh payload, or decompiled source is committed."
+}
