@@ -1,6 +1,6 @@
 # Five Difficulties X1 Preservation Port — Minecraft 1.20.1 Forge
 
-Status: **P5 complete — the current Homing + Sakuya vertical slice boots successfully in a real Forge 1.20.1 dedicated-server process**.
+Status: **P6 complete — the Homing + Sakuya vertical slice now passes world-mutating dedicated-server runtime scenarios on Forge 1.20.1**.
 
 Target:
 - Minecraft 1.20.1
@@ -163,3 +163,24 @@ See:
 - `IMPLEMENTATION-CHECKPOINT-P5.md`
 
 The next gate is **world-mutating server-side runtime testing** of Homing movement/hits and Sakuya FULL/HALF behavior. Client rendering parity remains separate.
+
+
+## P6 world-mutating runtime scenario
+
+P6 upgrades the current vertical slice from startup-only runtime evidence to actual world behavior.
+
+Latest hardened run:
+- GitHub Actions `37535774768`;
+- head `f4a570b014ca7dcad1e324c7cc535c3e5274c150`;
+- SUCCESS.
+
+Real-server receipts:
+- FULL_STOP: target tick count remained 4 → 4 during the bounded freeze window;
+- HALF_SPEED: target advanced by 3 ticks in the bounded half-rate window;
+- red Homing Amulet: live projectile hit a 20-HP target for the canonical 5 damage (20 → 15) after 11 scenario ticks;
+- final marker: `P6_WORLD_RUNTIME_PASS`.
+
+See:
+- `IMPLEMENTATION-CHECKPOINT-P6.md`
+
+The next gate is **client-integrated visual/runtime parity** with the private canonical X1 texture overlay, followed by connected-client item interaction testing.
