@@ -64,6 +64,31 @@ do not blindly assign modern `invulnerableTime = 0` everywhere. That can bypass 
 - boss immunity rules;
 - telemetry for simultaneous projectile bursts.
 
+### Shared burning-projectile block ignition
+
+Both Garnet projectile foundations also contain a common incendiary block-impact rule.
+
+When the projectile is burning and hits a block:
+1. the hit side is converted into the adjacent cell;
+2. if that adjacent cell is air;
+3. the projectile places vanilla Fire there.
+
+This behavior exists in:
+- `EntityGarnetArrow`;
+- `EntityGarnetThrowable`.
+
+So Fire Aspect / burning state can affect more than entity damage: it can **ignite world geometry at the collision face**.
+
+This matters for character/item attacks that propagate fire enchantment into projectiles.
+
+Technique:
+**projectile elemental state → local world interaction at impact face**.
+
+ANCHOR should route this through:
+- server-side mob-griefing/config policy;
+- block protection hooks;
+- encounter/world-edit policy where appropriate.
+
 ### Throwable critical mode — impact becomes an explosion
 
 `EntityGarnetThrowable` treats its synchronized critical bit as an explosive modifier:
