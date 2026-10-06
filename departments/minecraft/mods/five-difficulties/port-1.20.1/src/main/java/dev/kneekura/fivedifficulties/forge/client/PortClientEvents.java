@@ -2,6 +2,7 @@ package dev.kneekura.fivedifficulties.forge.client;
 
 import dev.kneekura.fivedifficulties.forge.FiveDifficultiesPort;
 import dev.kneekura.fivedifficulties.forge.PortRegistries;
+import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -20,6 +21,10 @@ public final class PortClientEvents {
         event.registerEntityRenderer(
                 PortRegistries.HOMING_AMULET_PROJECTILE.get(),
                 HomingAmuletRenderer::new
+        );
+        event.registerEntityRenderer(
+                PortRegistries.SAKUYA_TIME_CONTROLLER.get(),
+                NoopRenderer::new
         );
     }
 }
