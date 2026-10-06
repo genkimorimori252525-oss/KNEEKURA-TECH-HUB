@@ -131,6 +131,13 @@ This upgrades those specific findings from Java-text-only observations to **sele
 - Mami's `Tiro Finale!` marks its Garnet bullet critical, making the finisher an explosive round;
 - this changes ANCHOR design priority: a modern barrage system needs an explicit multi-hit/i-frame policy, not just matching trajectories.
 
+### Damage semantics strengthened
+- shipped Garnet Arrow/Throwable classes confirm ordinary Minecraft hit invulnerability is cleared before direct projectile damage, so legacy barrage density is mechanically meaningful rather than mostly cosmetic;
+- shipped Throwable bytecode confirms a source-attribution fallback ladder: thrown source → mob source → owner-player source after rejection, except Garnet-derived targets suppress the later fallback paths;
+- Mami `Tiro Finale!` marks its Garnet Bullet critical; shared Throwable semantics make that impact **explosion first, then cleared ordinary hurt-resistance, then direct projectile damage**;
+- Kriemhild distributed bytecode confirms a rolling custom window that admits at most ~10 cumulative damage before its ~20-tick budget reset, distinct from Walpurgis/Nutcracker's one-damage + local super-armor pattern;
+- ANCHOR should preserve these semantics through a local `DanmakuHitPolicy` / composable damage-gate pipeline rather than globally disabling LivingEntity invulnerability.
+
 ### Additional archaeology / cleanup
 - Oktavia's common servant path is TODO-disabled (`return -1; //20`) despite an Anthony servant factory;
 - Mami Ribbon contains a commented future pull/tether design using FishHook→EntityItem linkage;
