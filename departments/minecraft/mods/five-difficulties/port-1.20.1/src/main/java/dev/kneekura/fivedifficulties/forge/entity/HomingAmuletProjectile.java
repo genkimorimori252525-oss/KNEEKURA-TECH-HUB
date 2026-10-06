@@ -14,6 +14,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragonPart;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.ClipContext;
@@ -215,7 +216,7 @@ public final class HomingAmuletProjectile extends Projectile {
             return false;
         }
         return entity instanceof LivingEntity
-                || entity.getType() == EntityType.ENDER_DRAGON;
+                || entity instanceof EnderDragonPart;
     }
 
     private BlockHitResult findX1CrossSectionBlockHit() {
