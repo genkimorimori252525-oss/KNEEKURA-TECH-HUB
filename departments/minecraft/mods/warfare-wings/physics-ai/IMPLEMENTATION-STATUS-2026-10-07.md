@@ -107,3 +107,30 @@ For the supplied Warfare Wings ANCHOR plus the exact target Immersive Aircraft r
 3. compare engine power, speed and position;
 4. then repeat yaw-step, pitch-step, sustained turn, glide and braking traces;
 5. only after those transfer functions are bounded, use the microkernel for large-batch air-combat AI tuning.
+
+
+## Trace-calibration layer
+
+Added after the initial microkernel milestone:
+
+- [TRACE-SCHEMA-v1.md](TRACE-SCHEMA-v1.md) — shared runtime/microkernel tick schema;
+- [scenarios/a6m-throttle-step-v1.json](scenarios/a6m-throttle-step-v1.json) — exact 400-tick control scenario;
+- `TraceCsv.java` / `TraceScenarioMain.java` — deterministic microkernel trace generation;
+- `runtime-probe/` — isolated Forge GameTest source for the exact real-aircraft trace;
+- `tools/compare_traces.py` — per-tick drift and phase comparator;
+- [CALIBRATION-OUTPUT-v1.md](CALIBRATION-OUTPUT-v1.md) — machine/human output contract;
+- [CALIBRATION-STATUS-2026-10-07.md](CALIBRATION-STATUS-2026-10-07.md) — exact current execution boundary.
+
+Hosted verification now establishes:
+
+- pure-Java microkernel/trace checks: GREEN;
+- comparator self-test: GREEN;
+- Forge runtime-probe source compile: GREEN;
+- same-artifact real Minecraft trace: **NOT_RUN**.
+
+The exact real trace is not blocked by missing implementation. The registered Windows runner
+`Jolly-TechHub` was queried through GitHub Actions and reported `offline`.
+
+The branch runtime workflow is designed to use only the user-owned Warfare Wings ANCHOR matching
+SHA-256 `dc3029597c88859744633b6f5e4a9f21d449294b1aaac90ea0c1749d7aa98a43`; no public artifact
+fallback is allowed.
