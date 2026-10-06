@@ -42,11 +42,23 @@ try {
     path.join(mainDir, 'Ia133Microkernel.java'),
     path.join(mainDir, 'WarfareWingsAircraft.java'),
     path.join(mainDir, 'PerformanceReportMain.java'),
+    path.join(mainDir, 'TraceCsv.java'),
+    path.join(mainDir, 'TraceScenarioMain.java'),
     path.join(testDir, 'Ia133MicrokernelSelfTest.java'),
   ];
   run(javac, ['--release', '17', '-d', classes, ...sources]);
   run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.Ia133MicrokernelSelfTest']);
   run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.PerformanceReportMain', generated]);
+  const traceA = path.join(generated, 'a6m-throttle-step-v1-a.csv');
+  const traceB = path.join(generated, 'a6m-throttle-step-v1-b.csv');
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.TraceScenarioMain', traceA]);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.TraceScenarioMain', traceB]);
+  await same(traceA, traceB);
+  const traceText = await readFile(traceA, 'utf8');
+  const traceLines = traceText.trimEnd().split(/\r?\n/);
+  if (traceLines.length !== 402) throw new Error(`Expected trace header + 401 rows, got ${traceLines.length}`);
+  if (!traceLines[0].startsWith('schema_version,source,scenario_id,aircraft_id,tick,game_time,'))
+    throw new Error('Unexpected trace schema header');
   await same(path.join(generated, 'a6m-p47n-source-microkernel.csv'), path.join(here, 'reports/a6m-p47n-source-microkernel.csv'));
   await same(path.join(generated, 'a6m-p47n-source-microkernel.md'), path.join(here, 'reports/a6m-p47n-source-microkernel.md'));
   process.stdout.write('Warfare Wings Physics AI microkernel checks passed; real Minecraft parity NOT_RUN\n');
