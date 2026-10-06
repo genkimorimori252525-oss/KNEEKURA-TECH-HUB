@@ -86,9 +86,10 @@ System config behavior mapped:
 - `orikoGem` / `orikoGemID`;
 - `yumaGem` / `yumaGemID`;
 - `entityOrikoID`;
-- `entityYumaID`.
+- `entityYumaID`;
+- `entityJewelID`.
 
-However the supplied Java tree contains no `EntityOriko` or `EntityYuma` classes, and the searched symbols are not instantiated/registered into usable content in this snapshot.
+However the supplied Java tree contains no `EntityOriko`, `EntityYuma` or `EntityJewel` implementation. `entityJewelID` appears only as a field/config value, while the Oriko/Yuma item/entity slots likewise never become usable registered content in this snapshot.
 
 State: **INVENTORIED as dead/reserved implementation trace, not a player-facing feature**.
 
