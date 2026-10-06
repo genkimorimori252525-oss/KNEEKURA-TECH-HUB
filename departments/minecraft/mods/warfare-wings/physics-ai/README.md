@@ -59,6 +59,9 @@ warfare-wings/
     README.md
     AIRCRAFT-PERFORMANCE-MODEL.md
     IMPLEMENTATION-STATUS-2026-10-07.md
+    CALIBRATION-STATUS-2026-10-07.md
+    TRACE-SCHEMA-v1.md
+    CALIBRATION-OUTPUT-v1.md
     check-microkernel.mjs
     data/
       a6m-p47n-anchor-models.csv
@@ -81,9 +84,12 @@ Current verified scope:
 - A6M and P-47N seed models from supplied Warfare Wings ANCHOR;
 - 18 pure-Java invariant checks;
 - deterministic golden-report regeneration;
-- real Minecraft parity: **NOT_RUN**.
+- deterministic 401-sample throttle trace generation;
+- threshold-free trace comparator + AI-readable full-series output;
+- Forge runtime-probe source compilation;
+- real same-artifact Minecraft trace: **NOT_RUN — registered runner offline**.
 
-See [IMPLEMENTATION-STATUS-2026-10-07.md](IMPLEMENTATION-STATUS-2026-10-07.md).
+See [IMPLEMENTATION-STATUS-2026-10-07.md](IMPLEMENTATION-STATUS-2026-10-07.md) and [CALIBRATION-STATUS-2026-10-07.md](CALIBRATION-STATUS-2026-10-07.md).
 
 ## Core design
 
