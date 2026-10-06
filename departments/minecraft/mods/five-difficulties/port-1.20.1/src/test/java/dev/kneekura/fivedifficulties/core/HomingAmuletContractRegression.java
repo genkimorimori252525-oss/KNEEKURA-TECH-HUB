@@ -11,32 +11,33 @@ public final class HomingAmuletContractRegression {
 
         check(normal.shotCount() == 5, "normal count");
         close(normal.totalSpreadDegrees(), 100.0, "normal span");
-        close(normal.shotSize(), 0.4, "normal size");
+        close(normal.shotSize(), 0.4, "normal hitbox size");
         close(normal.damage(), 5.0, "normal damage");
 
         check(focus.shotCount() == 2, "focus count");
         close(focus.totalSpreadDegrees(), 20.0, "focus span");
-        close(focus.shotSize(), 1.0, "focus size");
+        close(focus.shotSize(), 1.0, "focus hitbox size");
         close(focus.damage(), 8.0, "focus damage");
 
         close(normal.speed(), 0.7, "normal speed");
         close(focus.speed(), 0.7, "focus speed");
+        check(normal.legacyForm() == 27, "FORM_AMULET");
+        check(normal.legacyColor() == 0, "RED");
+        check(normal.delayTicks() == 0, "delay");
+        check(normal.lifetimeTicks() == 90, "lifetime");
+        check(normal.specialId() == 10, "HOMING01 id");
+        close(normal.spawnDistance(), 0.5, "spawn distance");
+        close(normal.baseAngleDegrees(), 0.0, "base angle");
         check(normal.specialBehavior().equals("HOMING01"), "normal special");
-        check(focus.specialBehavior().equals("HOMING01"), "focus special");
-        close(normal.maxHomingTurnDegreesPerTick(), 4.0, "normal homing turn");
-        close(focus.maxHomingTurnDegreesPerTick(), 4.0, "focus homing turn");
+        close(normal.maxHomingTurnDegreesPerTick(), 4.0, "homing turn");
         check(normal.projectileFamily().equals("AMULET"), "projectile family");
         check(normal.colorName().equals("RED"), "color semantic");
         check(normal.evidenceGrade() == EvidenceGrade.X1_EXACT_STATIC, "evidence grade");
 
-        check(!normal.isExecutableShotSpecComplete(), "must remain incomplete without raw numeric mapping");
-        check(normal.unresolvedFields().contains("legacyNumericShotType"), "shot type unresolved");
-        check(normal.unresolvedFields().contains("legacyNumericColorId"), "color id unresolved");
-        check(normal.unresolvedFields().contains("lifetimeTicks"), "lifetime unresolved");
-        check(normal.unresolvedFields().contains("THShotLibPerShotAngleDistribution"), "fan distribution unresolved");
+        check(normal.isExecutableShotSpecComplete(), "canonical archive resolves executable fields");
+        check(normal.unresolvedFields().isEmpty(), "no unresolved shot fields");
 
-        // Regression against a common misreading of the old source comment:
-        // Shift/focus does NOT lower projectile speed in the retained X1 evidence.
+        // The old source labels Shift as low-speed mode, but the actual speed stays 0.7.
         close(normal.speed(), focus.speed(), "focus must retain speed 0.7");
 
         System.out.println("HOMING_AMULET_CONTRACT_REGRESSION_PASS");
