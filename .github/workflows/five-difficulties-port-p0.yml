@@ -1,8 +1,8 @@
-name: Five Difficulties Port P3
+name: Five Difficulties Port P4
 
 on:
   push:
-    branches: ["jolly/five-difficulties-1201-port-p3-2026-10-07"]
+    branches: ["jolly/five-difficulties-1201-port-p4-2026-10-07"]
     paths:
       - 'departments/minecraft/mods/five-difficulties/port-1.20.1/**'
       - '.github/workflows/five-difficulties-port-p0.yml'
@@ -12,7 +12,7 @@ permissions:
   contents: read
 
 jobs:
-  p3:
+  p4:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
@@ -48,7 +48,7 @@ jobs:
           python departments/minecraft/mods/five-difficulties/port-1.20.1/tools/patch-mdk-mixins.py "$ROOT/build.gradle"
           sed -i 's/^mod_id=.*/mod_id=five_difficulties_port/' "$ROOT/gradle.properties"
           sed -i 's/^mod_name=.*/mod_name=Five Difficulties X1 Preservation Port/' "$ROOT/gradle.properties"
-          sed -i 's/^mod_version=.*/mod_version=0.0.4-p3/' "$ROOT/gradle.properties"
+          sed -i 's/^mod_version=.*/mod_version=0.0.5-p4/' "$ROOT/gradle.properties"
           sed -i 's/^mod_group_id=.*/mod_group_id=dev.kneekura.fivedifficulties/' "$ROOT/gradle.properties"
           sed -i 's/^mod_authors=.*/mod_authors=KNEEKURA private preservation project/' "$ROOT/gradle.properties"
           sed -i 's/^mod_license=.*/mod_license=All Rights Reserved/' "$ROOT/gradle.properties"
@@ -75,7 +75,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: five-difficulties-p3-${{ github.sha }}
+          name: five-difficulties-p4-${{ github.sha }}
           path: |
             pure-core.txt
             forge-evidence/
