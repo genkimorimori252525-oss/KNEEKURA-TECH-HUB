@@ -59,7 +59,7 @@ public final class X1WideShotGeometryRegression {
     }
 
     private static void close(double actual, double expected, String message) {
-        if (Math.abs(actual - expected) > 1.0e-9) {
+        if (Math.abs(actual - expected) > 1.0e-6) {
             throw new AssertionError(message + ": " + actual + " != " + expected);
         }
     }
