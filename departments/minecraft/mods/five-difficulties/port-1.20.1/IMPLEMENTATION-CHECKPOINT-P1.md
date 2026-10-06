@@ -115,7 +115,27 @@ and runs:
 - pure Java regressions;
 - `compileJava jar`.
 
-The final P1 CI run/result is appended after GitHub Actions completes.
+GitHub Actions run **37517412134** completed **SUCCESS** on implementation commit
+`23fba25caf635d5b6de2beb2a99db9782008d0d6`.
+
+Verified:
+- all four pure Java regressions: PASS;
+- exact official Forge 1.20.1-47.4.6 MDK download + SHA-1 verification: PASS;
+- `compileJava jar`: PASS;
+- bounded evidence artifact upload: PASS.
+
+### P1 CI failure/repair note
+
+The first P1 CI attempts failed before Forge compilation because the shell runner contained a literal
+`\\n` between two Java commands, producing an invalid main-class token ending in
+`SakuyaTimeStopCoreRegressionnjava`.
+
+This was a test-harness defect, not a preservation-core failure.
+
+Repair:
+- commit `23fba25caf635d5b6de2beb2a99db9782008d0d6`;
+- rewrote `run-pure-core-tests.sh` with one explicit Java command per line;
+- rerun 37517412134 passed the complete pipeline.
 
 ## Not implemented yet
 
