@@ -1,0 +1,68 @@
+{
+  "format": "kneekura.madomagi.static-inventory-summary.v1",
+  "generated_at": "2026-10-07",
+  "full_local_manifest": {
+    "representation": "JSON containing every ZIP member path, sizes, CRC32, member SHA-256, ZIP flag bits, directory flag and raw CP437 filename bytes",
+    "size_bytes": 264497,
+    "sha256": "4b77975dcf27490fb8365262702c9e66772b2f7a087e044b1182a62bba4e2f89",
+    "publication_policy": "not committed; derived inventory fingerprint only"
+  },
+  "archives": [
+    {
+      "name": "QB-MOD.v.1.6.4.082.zip",
+      "role": "primary_mod",
+      "archive_size_bytes": 652672,
+      "archive_sha256": "52b1ba0774e098795dcf1ed9a489c66414ea725235978171f48a10db7287ba4e",
+      "entry_count": 437,
+      "total_uncompressed_bytes": 1559956,
+      "total_compressed_bytes": 561010,
+      "extension_counts": {
+        "dir": 29,
+        "cfg": 1,
+        "java": 156,
+        "png": 94,
+        "class": 156,
+        "txt": 1
+      },
+      "path_size_member_sha256_manifest_sha256": "afc34f29565b3951cf6c1596593beaf6f05a1e49d2a66123d9b04dc06993a1b0"
+    },
+    {
+      "name": "Garnet-MOD.v.1.6.4.082.zip",
+      "role": "required_framework",
+      "archive_size_bytes": 103674,
+      "archive_sha256": "5f778c8949dcce95dcd56dacd9242f117bc17f03879bab48cb667ba2a3c82778",
+      "entry_count": 98,
+      "total_uncompressed_bytes": 241445,
+      "total_compressed_bytes": 84690,
+      "extension_counts": {
+        "dir": 21,
+        "cfg": 1,
+        "java": 37,
+        "png": 1,
+        "class": 37,
+        "txt": 1
+      },
+      "path_size_member_sha256_manifest_sha256": "b9a7f3e928b31b9052b60f7f367da00b9f3d4846e5705fc976b6d6734061d082"
+    },
+    {
+      "name": "TexturePack-01.zip",
+      "role": "alternate_texture_pack",
+      "archive_size_bytes": 42298,
+      "archive_sha256": "2f868b66ec3d4ea9baae91c8dc601d46b3215be067a17b7ad3ed02fddb636aec",
+      "entry_count": 25,
+      "total_uncompressed_bytes": 37171,
+      "total_compressed_bytes": 36834,
+      "extension_counts": {
+        "dir": 5,
+        "png": 20
+      },
+      "path_size_member_sha256_manifest_sha256": "17becc8fee0e92d17066afbb9dcccce3e287b2b6b95f20ae26342c394f9ba91e",
+      "filename_anomaly": {
+        "python_cp437_decoded_path": "TexturePack-01/assets/puellamagi/textures/mobs/éìadokaUF.png",
+        "raw_filename_hex": "546578747572655061636b2d30312f6173736574732f7075656c6c616d6167692f74657874757265732f6d6f62732f828d61646f6b6155462e706e67",
+        "raw_bytes_decoded_as_cp932": "TexturePack-01/assets/puellamagi/textures/mobs/ｍadokaUF.png",
+        "note": "first character is full-width U+FF4D, not ASCII m"
+      }
+    }
+  ]
+}
