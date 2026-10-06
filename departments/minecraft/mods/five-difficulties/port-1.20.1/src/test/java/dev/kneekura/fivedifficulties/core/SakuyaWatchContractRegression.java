@@ -1,5 +1,6 @@
 package dev.kneekura.fivedifficulties.core;
 
+import dev.kneekura.fivedifficulties.core.timestop.TimeStopShape;
 import dev.kneekura.fivedifficulties.core.x1.*;
 
 public final class SakuyaWatchContractRegression {
@@ -12,22 +13,27 @@ public final class SakuyaWatchContractRegression {
         check(half.creativeEffect().kind() == SakuyaTimeEffectKind.HALF_SPEED, "creative half");
         close(half.creativeEffect().timeScale(), 0.5, "half time scale");
         check(!half.creativeEffect().bounded(), "creative half unbounded");
-        check(half.survivalFullChargeEffect().nominalDurationTicks() == 160, "limited half nominal duration");
-        check(half.survivalFullChargeEffect().durationEvidenceGrade() == EvidenceGrade.X1_STATIC_INFERENCE,
-                "limited half duration must remain inference-grade");
+        check(half.survivalFullChargeEffect().nominalDurationTicks() == 161, "limited half processing ticks");
+        check(half.survivalFullChargeEffect().durationEvidenceGrade() == EvidenceGrade.X1_EXACT_STATIC,
+                "limited half duration exact");
 
         check(stop.itemDamageMode() == 1, "stop item mode");
         check(stop.maxUseDurationTicks() == 48, "stop charge time");
         check(stop.creativeEffect().kind() == SakuyaTimeEffectKind.FULL_STOP, "creative stop");
         close(stop.creativeEffect().timeScale(), 0.0, "full-stop time scale");
-        check(stop.survivalFullChargeEffect().nominalDurationTicks() == 100, "limited stop nominal duration");
+        check(stop.survivalFullChargeEffect().nominalDurationTicks() == 101, "limited stop processing ticks");
 
-        check(SakuyaWatchContract.SPELL_CARD_STOP.nominalDurationTicks() == 60, "spell stop nominal duration");
-        check(SakuyaWatchContract.STOPWATCH_STOP.nominalDurationTicks() == 40, "stopwatch nominal duration");
+        check(SakuyaWatchContract.SPELL_CARD_STOP.nominalDurationTicks() == 61, "spell stop processing ticks");
+        check(SakuyaWatchContract.STOPWATCH_STOP.nominalDurationTicks() == 40, "stopwatch processing ticks");
 
         close(SakuyaWatchContract.FIELD_RANGE_BLOCKS, 40.0, "field range");
-        close(SakuyaWatchContract.SPELL_CARD_STOP.rangeBlocks(), 40.0, "spell range");
-        close(SakuyaWatchContract.STOPWATCH_STOP.rangeBlocks(), 40.0, "stopwatch range");
+        close(SakuyaWatchContract.DUPLICATE_PRECHECK_RANGE_BLOCKS, 20.0, "duplicate precheck range");
+        close(SakuyaWatchContract.CONTROLLER_FOLLOW_DISTANCE, 1.2, "controller follow distance");
+        close(SakuyaWatchContract.CONTROLLER_YAW_OFFSET_DEGREES, -30.0, "controller yaw offset");
+        close(SakuyaWatchContract.CONTROLLER_EYE_Y_OFFSET, -0.5, "controller eye y offset");
+        check(SakuyaWatchContract.MIN_ENTITY_AGE_TICKS == 2, "new entity grace");
+        check(SakuyaWatchContract.MANUAL_RELEASE_MIN_AGE_TICKS == 11, "sneak release threshold");
+        check(SakuyaWatchContract.FIELD_SHAPE == TimeStopShape.AABB, "X1 field is AABB");
 
         check(SakuyaWatchContract.toggleModeDamage(0) == 1, "toggle 0->1");
         check(SakuyaWatchContract.toggleModeDamage(1) == 0, "toggle 1->0");
@@ -40,10 +46,9 @@ public final class SakuyaWatchContractRegression {
                 SakuyaWatchContract.SPELL_CARD_STOP,
                 SakuyaWatchContract.STOPWATCH_STOP
         }) {
-            check(!effect.freezeCategoryPolicyResolved(), "freeze-category policy must stay unresolved");
-            check(effect.unresolvedFreezeCategories().contains("particles"), "particles unresolved");
-            check(effect.unresolvedFreezeCategories().contains("blockTicks"), "block ticks unresolved");
-            check(effect.unresolvedFreezeCategories().contains("otherPlayerMultiplayerPolicy"), "multiplayer unresolved");
+            check(effect.freezeCategoryPolicyResolved(), "freeze-category policy resolved");
+            check(effect.unresolvedFreezeCategories().isEmpty(), "no unresolved freeze categories");
+            check(effect.hasExactDuration(), "duration exact or unbounded");
         }
 
         boolean invalidRejected = false;
