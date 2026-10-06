@@ -15,6 +15,6 @@ public final class FiveDifficultiesPort {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         PortRegistries.register(modBus);
         PortNetwork.register();
-        LOGGER.info("Five Difficulties X1 Preservation Port P0 bootstrap loaded");
+        LOGGER.info("Five Difficulties X1 Preservation Port P2 bootstrap loaded");
     }
 }
