@@ -114,6 +114,48 @@ jobs:
           if (-not $lines[0].StartsWith('schema_version,source,scenario_id,aircraft_id,tick,game_time,')) { throw 'Trace schema mismatch' }
           Write-Host "Runtime trace rows verified: 401"
 
+      - name: Generate matching microkernel trace and calibration report
+        working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
+        run: |
+          $classes = 'build/trace-classes'
+          New-Item -ItemType Directory -Force $classes | Out-Null
+          $src = '../src/main/java/org/kneekura/techhub/warfarewings/physics'
+          $sources = @(
+            "$src/Ia133Microkernel.java",
+            "$src/WarfareWingsAircraft.java",
+            "$src/TraceCsv.java",
+            "$src/TraceScenarioMain.java"
+          )
+          javac --release 17 -d $classes $sources
+          if ($LASTEXITCODE -ne 0) { throw "Microkernel trace compilation failed: $LASTEXITCODE" }
+
+          $traceDir = 'run-gametest/ww-physics-traces'
+          $micro = "$traceDir/a6m-throttle-step-v1-microkernel.csv"
+          $runtime = "$traceDir/a6m-throttle-step-v1-runtime.csv"
+          java -cp $classes org.kneekura.techhub.warfarewings.physics.TraceScenarioMain $micro
+          if ($LASTEXITCODE -ne 0) { throw "Microkernel trace generation failed: $LASTEXITCODE" }
+
+          $metadataPath = "$traceDir/runtime-metadata.json"
+          [ordered]@{
+            schema_version = 'ww.physics.runtime-metadata.v1'
+            scenario_id = 'a6m-throttle-step-v1'
+            aircraft_id = 'warfare_wings:a6m'
+            github_run_id = [long]$env:GITHUB_RUN_ID
+            github_sha = $env:GITHUB_SHA
+            runner_name = $env:RUNNER_NAME
+            runner_os = $env:RUNNER_OS
+            runner_arch = $env:RUNNER_ARCH
+            minecraft_version = '1.20.1'
+            forge_version = '47.4.20'
+            immersive_aircraft_modrinth_version = 'GsVmbbkj'
+            immersive_aircraft_sha512 = '7b74442e161bb74538e0d8da34a81616daeea56a0da62db86113a78b3bf3c2b3a6b0e12f12454fd7c96092762f6b212ba57cb87eb1af2b242a4d5df4eca03055'
+            warfare_wings_sha256 = 'dc3029597c88859744633b6f5e4a9f21d449294b1aaac90ea0c1749d7aa98a43'
+            warfare_wings_source = 'local-user-owned-hash-verified'
+          } | ConvertTo-Json -Depth 4 | Set-Content -Encoding UTF8 $metadataPath
+
+          python ../tools/compare_traces.py --microkernel $micro --runtime $runtime --runtime-metadata $metadataPath --output-dir "$traceDir/calibration"
+          if ($LASTEXITCODE -ne 0) { throw "Trace comparison failed: $LASTEXITCODE" }
+
       - name: Upload runtime trace
         if: always()
         uses: actions/upload-artifact@v4
