@@ -47,6 +47,7 @@ Raw uploaded source, compiled classes and original assets are deliberately not c
 - ATTACK-TELEGRAPH-AND-VFX-CATALOG.md — visible attack stock, telegraphs, form cues, projectiles and encounter presentation
 - AI-GOAL-AND-COMBAT-INTENT-CATALOG.md — owner guard/support intent, hazard avoidance, follow/rest/movement and special target priorities
 - DAMAGE-DEFENSE-AND-MULTIHIT-SEMANTICS.md — protection math, evasion/guard, i-frame reset and boss damage-budget/retaliation rules
+- WHOLE-TREE-STATIC-AUDIT.md — reproducible 193-file special/risk-surface retrieval audit receipt
 - MECHANIC-TIMING-AND-PROBABILITY.md — exact burst cadence, form timers, boss macro-cycles and probability geometry
 - MODEL-ANIMATION-AND-STATE-READABILITY.md — gameplay state → model pose/animation relationships
 - UNFINISHED-DEBUG-AND-DEAD-CODE-CATALOG.md — TODO-disabled, commented, unreachable, reserved and debug archaeology
