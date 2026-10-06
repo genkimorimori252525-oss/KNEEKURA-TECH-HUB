@@ -1,50 +1,50 @@
 package dev.kneekura.fivedifficulties.core.x1;
 
+import dev.kneekura.fivedifficulties.core.timestop.TimeStopShape;
 import java.util.Set;
 
-/**
- * ORIGINAL_SOURCE / ORIGINAL_BINARY derived Sakuya Watch/StopWatch contract retained by PR #93.
- *
- * Range/mode/charge selection is static evidence. Durations that the retained atlas records as
- * "about" are intentionally marked X1_STATIC_INFERENCE until the raw source is reopened.
- */
+/** Exact static contract from canonical X1 Sakuya Watch/StopWatch source. */
 public final class SakuyaWatchContract {
     public static final double FIELD_RANGE_BLOCKS = 40.0;
+    public static final double DUPLICATE_PRECHECK_RANGE_BLOCKS = 20.0;
+    public static final double CONTROLLER_FOLLOW_DISTANCE = 1.2;
+    public static final double CONTROLLER_YAW_OFFSET_DEGREES = -30.0;
+    public static final double CONTROLLER_EYE_Y_OFFSET = -0.5;
+    public static final int MIN_ENTITY_AGE_TICKS = 2;
+    public static final int MANUAL_RELEASE_MIN_AGE_TICKS = 11;
+    public static final TimeStopShape FIELD_SHAPE = TimeStopShape.AABB;
 
-    private static final Set<String> UNRESOLVED_FREEZE_CATEGORIES = Set.of(
-            "blockTicks",
-            "fluidTicks",
-            "blockEntities",
-            "randomChunkTicks",
-            "particles",
-            "animatedTextures",
-            "worldDayTime",
-            "damageReleaseSemantics",
-            "otherPlayerMultiplayerPolicy"
-    );
+    /**
+     * Processing-update counts, not merely source thresholds.
+     * Watch's >N checks do not immediately return, so modes 1/5/6 can process on N+1.
+     */
+    public static final int SPELL_STOP_PROCESSING_TICKS = 61;
+    public static final int LIMITED_STOP_PROCESSING_TICKS = 101;
+    public static final int LIMITED_HALF_PROCESSING_TICKS = 161;
+    public static final int STOPWATCH_PROCESSING_TICKS = 40;
 
     public static final SakuyaTimeEffectContract CREATIVE_HALF = effect(
-            SakuyaTimeEffectKind.HALF_SPEED, 0.5, false, -1, EvidenceGrade.X1_EXACT_STATIC
+            SakuyaTimeEffectKind.HALF_SPEED, 0.5, false, -1
     );
 
     public static final SakuyaTimeEffectContract LIMITED_HALF = effect(
-            SakuyaTimeEffectKind.HALF_SPEED, 0.5, true, 160, EvidenceGrade.X1_STATIC_INFERENCE
+            SakuyaTimeEffectKind.HALF_SPEED, 0.5, true, LIMITED_HALF_PROCESSING_TICKS
     );
 
     public static final SakuyaTimeEffectContract CREATIVE_STOP = effect(
-            SakuyaTimeEffectKind.FULL_STOP, 0.0, false, -1, EvidenceGrade.X1_EXACT_STATIC
+            SakuyaTimeEffectKind.FULL_STOP, 0.0, false, -1
     );
 
     public static final SakuyaTimeEffectContract LIMITED_STOP = effect(
-            SakuyaTimeEffectKind.FULL_STOP, 0.0, true, 100, EvidenceGrade.X1_STATIC_INFERENCE
+            SakuyaTimeEffectKind.FULL_STOP, 0.0, true, LIMITED_STOP_PROCESSING_TICKS
     );
 
     public static final SakuyaTimeEffectContract SPELL_CARD_STOP = effect(
-            SakuyaTimeEffectKind.SPELL_CARD_STOP, 0.0, true, 60, EvidenceGrade.X1_STATIC_INFERENCE
+            SakuyaTimeEffectKind.SPELL_CARD_STOP, 0.0, true, SPELL_STOP_PROCESSING_TICKS
     );
 
     public static final SakuyaTimeEffectContract STOPWATCH_STOP = effect(
-            SakuyaTimeEffectKind.FULL_STOP, 0.0, true, 40, EvidenceGrade.X1_STATIC_INFERENCE
+            SakuyaTimeEffectKind.FULL_STOP, 0.0, true, STOPWATCH_PROCESSING_TICKS
     );
 
     public static final SakuyaWatchModeContract HALF_MODE = new SakuyaWatchModeContract(
@@ -83,8 +83,7 @@ public final class SakuyaWatchContract {
             SakuyaTimeEffectKind kind,
             double timeScale,
             boolean bounded,
-            int durationTicks,
-            EvidenceGrade durationEvidence
+            int durationTicks
     ) {
         return new SakuyaTimeEffectContract(
                 kind,
@@ -92,9 +91,9 @@ public final class SakuyaWatchContract {
                 timeScale,
                 bounded,
                 durationTicks,
-                durationEvidence,
-                false,
-                UNRESOLVED_FREEZE_CATEGORIES
+                EvidenceGrade.X1_EXACT_STATIC,
+                true,
+                Set.of()
         );
     }
 }
