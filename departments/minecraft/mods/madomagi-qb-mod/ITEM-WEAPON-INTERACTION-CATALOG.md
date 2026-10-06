@@ -256,9 +256,9 @@ JB also consumes a Grief Seed but computes:
 
 `nextInt(64 - itemDamage)`.
 
-Its reward bands climb toward diamond only at `>=63`. Given Java `nextInt(n)` returns 0..n-1 and valid item damage is non-negative, that diamond branch appears unreachable for valid Grief Seed damage values.
+Its reward bands climb toward diamond only at `>=63`. Because Java `nextInt(n)` returns 0..n-1, that top branch is reachable **only when itemDamage = 0**: `nextInt(64)` can produce 63, giving a 1/64 diamond chance. Once itemDamage is 1 or greater, the upper bound is at most 62 and the diamond branch is no longer reachable.
 
-This is a source-level dead-branch/anomaly candidate, not a historical repair claim.
+The result is an intentionally or accidentally inverted economy relative to QB: a pristine Grief Seed exposes JB's highest reward band, while increasing damage progressively removes the upper bands.
 
 ---
 
