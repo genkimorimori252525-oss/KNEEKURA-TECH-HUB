@@ -89,7 +89,16 @@ The GitHub workflow:
 
 uses the exact official Forge 1.20.1-47.4.6 MDK (SHA-1 `1a1c045f235262ff617e285ea2156571ea93bfbe`) and overlays only this port's `src` tree before running `compileJava jar`.
 
-A successful compile is still **not** Minecraft runtime verification.
+GitHub Actions run **37515589105** completed **SUCCESS** on commit
+`b2212641513de7f68a9697fafdc6534148ec821f`.
+
+Verified in that run:
+- pure Java preservation-core regressions: PASS;
+- exact official Forge 1.20.1-47.4.6 MDK download + SHA-1 verification: PASS;
+- `compileJava jar`: PASS;
+- bounded evidence artifact upload: PASS.
+
+A successful compile/package is still **not** Minecraft runtime verification.
 
 ## Deliberately not implemented yet
 
