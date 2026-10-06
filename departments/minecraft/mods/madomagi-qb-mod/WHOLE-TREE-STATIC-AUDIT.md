@@ -17,6 +17,11 @@ Regenerator:
 
 The script scans only Java text and emits JSON. It does not fetch source, decompile classes or make semantic claims.
 
+A reproduced local run over the pinned extracted trees emitted 36,423 UTF-8 bytes with SHA-256:
+`b0bf7bcae461eec89fc4ee357ec88090c8ee2eceacd4445c64ff1cbc785b2bc6`.
+
+That digest identifies the deterministic JSON audit output for this pattern set and source snapshot; the raw original MOD source remains outside Git.
+
 ## Scan universe
 
 - QB Java files: 156
@@ -33,19 +38,19 @@ The script scans only Java text and emits JSON. It does not fetch source, decomp
 | createExplosion | 10 | 6 |
 | EntityTNTPrimed | 25 | 11 |
 | setHealth | 6 | 4 |
-| setDead | 38 | 20 |
-| setBlock-family writes | 16 | 13 |
+| setDead | 35 | 20 |
+| setBlock-family writes | 17 | 13 |
 | addPotionEffect | 19 | 10 |
 | setPosition | 20 | 12 |
-| getEntitiesWithinAABB | 18 | 12 |
+| get/select EntitiesWithinAABB-family queries | 22 | 16 |
 | writeEntityToNBT | 14 | 8 |
 | readEntityFromNBT | 14 | 8 |
 | Packet250CustomPayload | 4 | 2 |
 | DataWatcher references | 83 | 11 |
-| lightning/weather-effect literal | 1 | 1 |
+| lightning/weather-effect literal | 4 | 1 |
 | EntityFireworkRocket | 6 | 2 |
 
-Counts are literal source occurrences and are not normalized by overload, branch reachability or generated/dead code.
+Counts are literal source occurrences and are not normalized by overload, branch reachability or generated/dead code. The AABB row intentionally combines `getEntitiesWithinAABB`, `getEntitiesWithinAABBExcludingEntity` and `selectEntitiesWithinAABB` so the retrieval surface matches the actual 1.6.4 query vocabulary.
 
 ## TODO coverage
 
@@ -158,7 +163,7 @@ The nontrivial combat movement cases are now separated from ordinary spawn place
 
 ## Entity-query surface
 
-The 18 AABB-query hits across 12 files cover:
+The 22 AABB-query-family hits across 16 files cover:
 
 - Garnet target acquisition;
 - staged Musket/Cutlass lookup;
