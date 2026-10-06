@@ -26,6 +26,7 @@ public final class PortRegistries {
                             .sized(0.4F, 0.4F)
                             .clientTrackingRange(8)
                             .updateInterval(1)
+                            .setShouldReceiveVelocityUpdates(true)
                             .build(FiveDifficultiesPort.MOD_ID + ":homing_amulet_projectile")
             );
 
