@@ -1,0 +1,29 @@
+{
+  "schema_version": "ww.physics.scenario.v1",
+  "scenario_id": "a6m-throttle-step-v1",
+  "aircraft_id": "warfare_wings:a6m",
+  "ticks": 400,
+  "initial": {
+    "position": [0.0, 200.0, 0.0],
+    "velocity": [0.0, 0.0, 0.7],
+    "yaw_deg": 0.0,
+    "pitch_deg": 0.0,
+    "roll_deg": 0.0,
+    "engine_target": 1.0,
+    "engine_power": 0.0,
+    "fuel_utilization": 1.0
+  },
+  "control": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "engine_target": 1.0
+  },
+  "runtime_overrides": {
+    "windClearWeather": 0.0,
+    "windRainWeather": 0.0,
+    "windThunderWeather": 0.0,
+    "fuelConsumption": 0.0,
+    "collisionDamage": false
+  }
+}
