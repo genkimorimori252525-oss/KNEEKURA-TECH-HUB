@@ -1,8 +1,8 @@
-name: Five Difficulties Port P4
+name: Five Difficulties Port P5
 
 on:
   push:
-    branches: ["jolly/five-difficulties-1201-port-p4-2026-10-07"]
+    branches: ["jolly/five-difficulties-1201-port-p5-2026-10-07"]
     paths:
       - 'departments/minecraft/mods/five-difficulties/port-1.20.1/**'
       - '.github/workflows/five-difficulties-port-p0.yml'
@@ -12,7 +12,7 @@ permissions:
   contents: read
 
 jobs:
-  p4:
+  p5:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
@@ -48,7 +48,7 @@ jobs:
           python departments/minecraft/mods/five-difficulties/port-1.20.1/tools/patch-mdk-mixins.py "$ROOT/build.gradle"
           sed -i 's/^mod_id=.*/mod_id=five_difficulties_port/' "$ROOT/gradle.properties"
           sed -i 's/^mod_name=.*/mod_name=Five Difficulties X1 Preservation Port/' "$ROOT/gradle.properties"
-          sed -i 's/^mod_version=.*/mod_version=0.0.5-p4/' "$ROOT/gradle.properties"
+          sed -i 's/^mod_version=.*/mod_version=0.0.6-p5/' "$ROOT/gradle.properties"
           sed -i 's/^mod_group_id=.*/mod_group_id=dev.kneekura.fivedifficulties/' "$ROOT/gradle.properties"
           sed -i 's/^mod_authors=.*/mod_authors=KNEEKURA private preservation project/' "$ROOT/gradle.properties"
           sed -i 's/^mod_license=.*/mod_license=All Rights Reserved/' "$ROOT/gradle.properties"
@@ -71,11 +71,53 @@ jobs:
           grep -F "five_difficulties_port.mixins.json" "$GITHUB_WORKSPACE/forge-evidence/jar-contents.txt"
           grep -F "five_difficulties_port.refmap.json" "$GITHUB_WORKSPACE/forge-evidence/jar-contents.txt"
 
+      - name: Bounded dedicated-server runtime smoke
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$RUNNER_TEMP/five-difficulties-mdk"
+          mkdir -p run "$GITHUB_WORKSPACE/forge-evidence"
+          printf 'eula=true\n' > run/eula.txt
+          cat > run/server.properties <<'EOF'
+          online-mode=false
+          server-port=25575
+          level-name=p5_smoke
+          level-type=minecraft:flat
+          generate-structures=false
+          spawn-protection=0
+          max-players=1
+          view-distance=2
+          simulation-distance=2
+          motd=Five Difficulties P5 Runtime Smoke
+          EOF
+
+          set +e
+          timeout --signal=INT --kill-after=10s 120s             ./gradlew --no-daemon --max-workers=2 -Dorg.gradle.jvmargs=-Xmx3G runServer --args='nogui'             2>&1 | tee "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
+          RUN_RC=${PIPESTATUS[0]}
+          set -e
+
+          cp -f run/logs/latest.log "$GITHUB_WORKSPACE/forge-evidence/runtime-latest.log" 2>/dev/null || true
+
+          grep -F "FIVE_DIFFICULTIES_P5_RUNTIME_SMOKE_PASS" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
+          grep -F "Done (" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
+          ! grep -F "Failed to start the minecraft server" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
+          ! grep -F "Crash report saved to" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
+
+          case "$RUN_RC" in
+            0|124|130|143) ;;
+            *)
+              echo "Unexpected runServer exit code: $RUN_RC" >&2
+              exit "$RUN_RC"
+              ;;
+          esac
+
+          echo "P5_DEDICATED_SERVER_RUNTIME_PASS" | tee "$GITHUB_WORKSPACE/forge-evidence/runtime-verdict.txt"
+
       - name: Retain bounded compile evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: five-difficulties-p4-${{ github.sha }}
+          name: five-difficulties-p5-${{ github.sha }}
           path: |
             pure-core.txt
             forge-evidence/
