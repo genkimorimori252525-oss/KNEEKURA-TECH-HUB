@@ -12,3 +12,5 @@ mapfile -t TEST < <(find "$ROOT/src/test/java" -name '*.java' -print | sort)
 javac --release 17 -d "$OUT" "${MAIN[@]}" "${TEST[@]}"
 java -cp "$OUT" dev.kneekura.fivedifficulties.core.LegacyPatternCoreRegression
 java -cp "$OUT" dev.kneekura.fivedifficulties.core.SakuyaTimeStopCoreRegression\njava -cp "$OUT" dev.kneekura.fivedifficulties.core.HomingAmuletContractRegression
+
+java -cp "$OUT" dev.kneekura.fivedifficulties.core.SakuyaWatchContractRegression
