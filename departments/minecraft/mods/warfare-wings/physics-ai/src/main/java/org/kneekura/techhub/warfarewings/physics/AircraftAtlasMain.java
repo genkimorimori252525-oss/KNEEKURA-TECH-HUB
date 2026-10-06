@@ -21,7 +21,7 @@ import static org.kneekura.techhub.warfarewings.physics.Ia133Microkernel.*;
  * Output is a feature table, not a real-runtime measurement.
  */
 public final class AircraftAtlasMain {
-    public static final String SCHEMA = "ww.physics.aircraft-atlas.v1";
+    public static final String SCHEMA = "ww.physics.aircraft-atlas.v2";
     private static final World FLAT = new FlatWorld(0.0);
 
     private AircraftAtlasMain() {}
