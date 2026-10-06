@@ -36,6 +36,15 @@ public final class SakuyaTimeStopCoreRegression {
         TimeStopSubject outside = new TimeStopSubject(mob, null, SubjectKind.LIVING, false, new Vec3d(20, 0, 0));
         check(service.decision(outside, 101) == TimeStopDecision.ALLOW, "outside range");
 
+        UUID futureSource = UUID.fromString("00000000-0000-0000-0000-000000000005");
+        SakuyaTimeStopInstance future = new SakuyaTimeStopInstance(
+                UUID.fromString("00000000-0000-0000-0000-000000000006"),
+                futureSource, Vec3d.ZERO, 4.0, 200, 20, flags
+        );
+        service.start(future);
+        service.purgeExpired(120);
+        check(service.activeStops(200).contains(future), "future stop must survive pre-start purge");
+
         service.purgeExpired(140);
         check(service.activeStops(140).isEmpty(), "expiration boundary");
         check(service.decision(target, 140) == TimeStopDecision.ALLOW, "expired stop no longer freezes");
