@@ -38,6 +38,13 @@ Raw uploaded source, compiled classes and original assets are deliberately not c
 - SURFACE-COVERAGE-STATUS.md — current whole-target facet coverage and explicit non-completion reasons
 - ANCHOR-PORTABILITY-MATRIX.md — legacy concept → Minecraft 1.20.1 Forge reconstruction mapping
 - STATIC-INVENTORY-SUMMARY.json — compact archive/member provenance fingerprints
+- LEGACY-VERSION-LINEAGE.md — .080→.082 archive/community chronology and bounded FRONTIER search
+- REBELLION-ERA-STATE-AND-DELTA.md — Rebellion lifecycle plus .080→.082 behavior-delta hypotheses
+- WITCH-ECOLOGY-AND-GRIEF-SEED.md — Grief Seed item/entity incubation and witch-evolution loop
+- ITEM-WEAPON-INTERACTION-CATALOG.md — player weapon/state mechanics and Garnet gun behavior
+- GARNET-FRAMEWORK-ANALYSIS.md — lower-level companion/summoner/gun contracts used by QB-MOD
+- GUI-PRESENTATION-STATE-CATALOG.md — five-slot tactical inventory, menu lifetime and form presentation
+- ATTACK-TELEGRAPH-AND-VFX-CATALOG.md — visible attack stock, telegraphs, form cues, projectiles and encounter presentation
 
 ## Machine-readable navigation
 
