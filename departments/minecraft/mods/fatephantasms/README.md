@@ -81,6 +81,21 @@ server-authoritative skill state
 
 The most useful KNEEKURA lesson is to build a shared cinematic-skill framework with these layers kept separable, rather than implementing every skill as one bespoke particle routine.
 
+## Future application note — 巴マミ
+
+Candidate future use: **巴マミの多銃器展開・一斉射撃演出**。
+
+The reference is specifically the reusable **Gate of Babylon presentation pattern**, not Fate assets or naming:
+
+- actor-relative multi-origin weapon placement;
+- staggered opening / emergence / fire phases;
+- deterministic seed-based reconstruction for large weapon counts;
+- custom geometry for the readable weapon/projectile silhouette;
+- optional Photon flash, drift, spark and atmosphere layers;
+- compact server phase/seed synchronization instead of per-effect network spam.
+
+For a future Madoka Magica / 巴マミ implementation, reinterpret the pattern around Mami's own musket/ribbon visual language rather than reproducing Fate's portals or assets. This is a **planned design candidate only**, not an active implementation task.
+
 ## Rights / evidence boundary
 
 Do not commit upstream JARs, audio, textures, models, mesh payloads or decompiled source.
