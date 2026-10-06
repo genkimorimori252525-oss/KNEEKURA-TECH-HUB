@@ -584,6 +584,15 @@ Modern techniques may implement the old result, but they must not silently repla
 - straightforward crafting data;
 - simple sounds/hooks.
 
+## Private-project scope update — 2026-10-07
+
+The project owner explicitly states that this preservation port is **not intended for public distribution**.
+
+Accordingly:
+- public redistribution clearance is not an implementation gate for this project;
+- provenance/license notes should still be retained in TECH-HUB and source comments for third-party donor code;
+- the engineering plan may freely prioritize private fidelity/research rather than packaging for public release.
+
 ## 17. Public-distribution rights boundary
 
 Technical feasibility is separate from redistribution permission.
