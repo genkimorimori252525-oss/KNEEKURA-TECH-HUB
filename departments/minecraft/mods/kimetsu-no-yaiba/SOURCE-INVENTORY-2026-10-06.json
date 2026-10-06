@@ -1,0 +1,108 @@
+{
+  "format": "kneekura.binary-target-inventory.v1",
+  "target": "Kimetsu no Yaiba (Demon Slayer)",
+  "focus": "whole target",
+  "recorded_at": "2026-10-06",
+  "anchor": {
+    "supplied_file": "KimetsunoYaiba-ver3-forge-1.20.1.jar",
+    "sha256": "b4af6e8a9d5926c5fea212a5e237e61f1e8095a5be23eca9b8294258a3b466b6",
+    "mod_id": "kimetsunoyaiba",
+    "internal_version": "3",
+    "minecraft": "1.20.1",
+    "loader": "Forge / javafml [47,)",
+    "java_class_major": 61,
+    "java": 17,
+    "generator": "MCreator",
+    "curseforge": {
+      "project_id": 471263,
+      "file_id": 7151280,
+      "file_name": "KimetsunoYaiba-ver3-forge-1.20.1.jar",
+      "uploaded": "2025-10-26",
+      "license": "All Rights Reserved",
+      "identity_relation": "FILENAME_METADATA_MATCH_BINARY_SHA_NOT_COMPARED"
+    },
+    "source_repository": null,
+    "source_revision": null,
+    "official_source_status": "NOT_FOUND"
+  },
+  "jar_inventory": {
+    "zip_entries": 5863,
+    "class_files": 3713,
+    "non_class_resources": 2068,
+    "top_level_classes": 1524,
+    "package_class_files": {
+      "entity": 1867,
+      "procedures": 860,
+      "item": 480,
+      "client": 322,
+      "block": 111,
+      "init": 24,
+      "potion": 24,
+      "network": 14,
+      "world": 6
+    },
+    "top_level_gameplay_entities": 164,
+    "entity_supertype_counts": {
+      "Monster": 94,
+      "PathfinderMob": 45,
+      "AbstractArrow": 17,
+      "TamableAnimal": 8
+    },
+    "registries": {
+      "entity_types": 165,
+      "items": 388,
+      "blocks": 59,
+      "mob_effects": 19,
+      "particles": 26,
+      "sounds": 26,
+      "block_entities": 13
+    },
+    "resources": {
+      "textures": 787,
+      "models": 588,
+      "player_animation_json": 112,
+      "worldgen_resources": 75,
+      "advancements": 90,
+      "loot_tables": 87,
+      "recipes": 51,
+      "nbt_structures": 37,
+      "dimensions": 2
+    }
+  },
+  "integration": {
+    "mixin_config_present": true,
+    "mixin_classes_declared": 0,
+    "access_transformer": true,
+    "hard_geckolib_references": true,
+    "hard_playeranimator_references": true,
+    "metadata_dependency_mismatch": true
+  },
+  "procedure_inventory": {
+    "top_level_estimate": 720,
+    "breathing_forms": 136,
+    "blood_demon_art_forms": 83,
+    "ai": 117,
+    "player_breath_selectors": 18,
+    "player_demon_art_selectors": 14,
+    "swing_item": 56,
+    "effects": 49,
+    "spawn_rules": 33,
+    "animation": 8
+  },
+  "architecture_findings": {
+    "hybrid_vanilla_goal_plus_procedure_fsm": "EVIDENCE_BACKED_BYTECODE",
+    "numeric_technique_opcode_namespaces": "EVIDENCE_BACKED_BYTECODE",
+    "player_npc_shared_technique_executor": "EVIDENCE_BACKED_BYTECODE",
+    "central_DoDamage2_attack_kernel": "EVIDENCE_BACKED_BYTECODE",
+    "detached_helper_actor_provenance": "EVIDENCE_BACKED_BYTECODE",
+    "mobile_AOE_projectiles": "EVIDENCE_BACKED_BYTECODE",
+    "playeranimator_damage_event_bridge": "EVIDENCE_BACKED_BYTECODE",
+    "dynamic_chunk_generator_mutation": "EVIDENCE_BACKED_BYTECODE"
+  },
+  "evidence_status": {
+    "runtime_performance": "NOT_ANALYZED",
+    "public_source_equivalence": "UNAVAILABLE",
+    "distributed_public_file_sha_equivalence": "NOT_ESTABLISHED",
+    "old_binary_diff": "NOT_RUN"
+  }
+}
