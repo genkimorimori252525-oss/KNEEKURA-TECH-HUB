@@ -278,3 +278,80 @@ These are straightforward buff bundles rather than complex systems.
 10. forced world-space creation when spawn clearance fails.
 
 These should remain independent primitives in TECH-HUB.
+
+## Sayaka Bat — Garnet ItemBreaker utility tool
+
+Source:
+- QB `ItemSayakaBat.java`
+- Garnet `ItemBreaker.java`
+
+Sayaka Bat is not just a melee prop.
+
+It configures four block categories:
+- leaves;
+- cut blocks: planks, logs, fences;
+- mine blocks: selected ores/glowstone/quartz;
+- dig blocks: stone/cobblestone/sand/dirt-like terrain.
+
+Garnet `ItemBreaker` then:
+- detects a break mode from the initially struck block;
+- builds a connected-block queue;
+- repeatedly removes matching connected blocks;
+- harvests drops through the player;
+- grows the queue as adjacent matching blocks are found;
+- for cut mode, additionally scans a 9×9×9 cube around processed positions for configured leaves and removes/harvests them;
+- for dig mode, constrains the connection expansion around the original dig plane/region;
+- charges durability by `1 + breakCount`.
+
+Sayaka Bat itself:
+- max durability 512;
+- efficiency 5;
+- +4 attack damage;
+- knocks hit entities backward;
+- enchantability 0.
+
+Technique: **one configurable connected-block breaker framework supports felling/mining/digging semantics through block-category arrays**.
+
+Performance note: the legacy implementation completes the queue synchronously inside one block-destroy callback. ANCHOR should cap/batch large connected operations rather than repeat `while(breakBlock(...))` without a per-tick budget.
+
+## Madoka Ribbon — control token with extreme entity damage
+
+`ItemMadokaRibbon.getDamageVsEntity` returns:
+- 100 damage against any `EntityMadomagi`;
+- 0 against other entities.
+
+The same Ribbon is also the contract/control token used by Madomagi entities.
+
+Therefore one item has two very different interaction roles:
+- right-click/control path: contract or cycle mode;
+- attack path: extremely high damage to the same entity family.
+
+This behavior is direct source evidence. Whether it is intentional cleanup/admin design, lore behavior, or an accidental overlap is UNKNOWN without author history.
+
+ANCHOR should separate command/control intent from destructive attack behavior unless reproducing this quirk deliberately.
+
+## Tea Time / visible self-heal Goal
+
+Source: `EntityMadomagiAITeaTime.java`.
+
+The Goal runs only when:
+- no attack target exists;
+- entity is enabled;
+- optional form predicate is satisfied;
+- health is below max.
+
+On start:
+- temporarily equips the configured food item;
+- Mami announces `Te Pomeriggio!`.
+
+During update:
+- repeatedly calls `autoHealing()` according to configured healPower.
+
+On reset:
+- clears the temporary held item.
+
+Instantiations:
+- Mami: Mami Tea, only while transformed, healPower 3;
+- Kyouko: red apple, form-independent, healPower 1.
+
+Technique: **idle healing is visually staged by temporarily equipping a thematic item, so simulation recovery and character acting are one Goal**.
