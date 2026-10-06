@@ -1,0 +1,30 @@
+{
+  "format": "kneekura.failure-history.v1",
+  "repository": "http://forum.minecraftuser.jp/viewtopic.php?f=13&t=8468",
+  "scope": {
+    "track": "COMPARATIVE_LEGACY",
+    "head_revision": "QB-MOD.v.1.6.4.082 sha256:52b1ba0774e098795dcf1ed9a489c66414ea725235978171f48a10db7287ba4e; Garnet-MOD.v.1.6.4.082 sha256:5f778c8949dcce95dcd56dacd9242f117bc17f03879bab48cb667ba2a3c82778",
+    "history_window": "Supplied QB-MOD/Garnet-MOD 1.6.4.082 snapshot plus bounded reconnaissance of the historical distribution topic, creator introduction, contemporary 1.6.4 community update material, and general GitHub discovery for matching source/version-control provenance. No repository-wide or all-release history claim.",
+    "queries": [
+      "historical distribution topic t=8468",
+      "QB-MOD 1.6.4.082 source repository issue pull request",
+      "Garnet-MOD 1.6.4.082 source repository",
+      "QB-MOD 11/4 update bug fix Ultimate Form inventory"
+    ]
+  },
+  "coverage": {
+    "status": "NOT_ANALYZED",
+    "inspected_evidence_ids": [],
+    "deferred": [
+      "Match source-level anomaly candidates against older/newer QB-MOD release archives if exact historical artifacts become available",
+      "Controlled runtime reproduction of candidate anomalies",
+      "Capture mutable historical/community sources into a TECH-HUB profile/index before promoting any report into a structured case"
+    ],
+    "unavailable": [
+      "No supported upstream version-control repository, Issue tracker, PR history, or repair commits have been pinned for QB-MOD/Garnet-MOD",
+      "The historical Minecraft Japan Forum distribution topic was inaccessible to the current web fetcher on 2026-10-07",
+      "Current reconnaissance pages have not been imported as immutable history-adapter evidence, so they are not used as case evidence IDs"
+    ]
+  },
+  "cases": []
+}
