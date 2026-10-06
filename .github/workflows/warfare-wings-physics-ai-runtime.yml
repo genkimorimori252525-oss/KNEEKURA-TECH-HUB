@@ -1,6 +1,11 @@
 name: Warfare Wings Physics AI Runtime Trace
 
 on:
+  push:
+    branches:
+      - jolly/research-warfare-wings-2026-10-07
+    paths:
+      - '.github/warfare-wings-physics-ai-runtime-request.txt'
   workflow_dispatch:
     inputs:
       warfare_wings_path:
