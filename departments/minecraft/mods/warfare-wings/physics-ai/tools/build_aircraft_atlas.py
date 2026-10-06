@@ -193,6 +193,16 @@ def markdown(view: dict) -> str:
       "The Atlas is deliberately source-faithful and explainable, but it is **not yet measured same-artifact performance**. The first real-runtime calibration remains A6M `a6m-throttle-step-v1`. Once that trace arrives, the same calibration method will determine which Atlas axes can be promoted from `SOURCE_MICROKERNEL` toward `MEASURED` for the supplied Warfare Wings artifact.",""]
     return "\n".join(lines)
 
+def canonical_json_numbers(value):
+    """Match JSON's natural integer representation for mathematically integral floats."""
+    if isinstance(value, float) and value.is_integer():
+        return int(value)
+    if isinstance(value, list):
+        return [canonical_json_numbers(item) for item in value]
+    if isinstance(value, dict):
+        return {key: canonical_json_numbers(item) for key, item in value.items()}
+    return value
+
 def main() -> None:
     parser=argparse.ArgumentParser()
     parser.add_argument("atlas_csv",type=Path)
@@ -202,7 +212,7 @@ def main() -> None:
     view=build(load(args.atlas_csv))
     args.json.parent.mkdir(parents=True,exist_ok=True)
     args.markdown.parent.mkdir(parents=True,exist_ok=True)
-    args.json.write_text(json.dumps(view,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
+    args.json.write_text(json.dumps(canonical_json_numbers(view),indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
     args.markdown.write_text(markdown(view),encoding="utf-8")
     print(f"built AI Atlas for {view['aircraft_count']} aircraft")
 
