@@ -329,3 +329,29 @@ The legacy code contains many excellent spectacle mechanics, but the most reusab
 - encounter lifetime/cleanup budget.
 
 The ANCHOR implementation should preserve visual/combat intent while replacing synchronous “do everything now” loops with observable bounded systems.
+
+## Additional utility-tool risk — Garnet ItemBreaker
+
+The connected-block breaker used by Sayaka Bat executes synchronously from `onBlockDestroyed`.
+
+Potential work:
+- recursive/iterative connectivity growth through a LinkedList;
+- repeated world block lookups and removals;
+- harvest/drop generation;
+- for cut mode, 9×9×9 leaf scans around processed positions;
+- no explicit maximum connected-block count before the while-loop drains the queue.
+
+This is a player-triggered, not per-tick AI, workload, but a very large connected structure can create a one-action spike.
+
+ANCHOR:
+- max-block count;
+- chunk-loaded check;
+- permission/protection hook;
+- per-tick or per-job time budget;
+- one durability/accounting transaction after the bounded job.
+
+Add to LAB:
+- 64 / 512 / 4096 connected logs/planks/stone targets;
+- leaf-heavy trees;
+- chunk-border targets;
+- protected-block interruptions.
