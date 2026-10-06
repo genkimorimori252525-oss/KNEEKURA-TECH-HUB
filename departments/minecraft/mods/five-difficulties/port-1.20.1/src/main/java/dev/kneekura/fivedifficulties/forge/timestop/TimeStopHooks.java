@@ -4,7 +4,6 @@ import dev.kneekura.fivedifficulties.core.timestop.SubjectKind;
 import dev.kneekura.fivedifficulties.core.timestop.TimeStopDecision;
 import dev.kneekura.fivedifficulties.core.timestop.TimeStopPolicy;
 import dev.kneekura.fivedifficulties.core.timestop.TimeStopSubject;
-import dev.kneekura.fivedifficulties.core.x1.SakuyaWatchContract;
 import dev.kneekura.fivedifficulties.forge.entity.SakuyaTimeControllerEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -38,12 +37,8 @@ public final class TimeStopHooks {
         int logicalTick = SakuyaTimeStopRuntime.logicalTick(level);
         TimeStopDecision result = TimeStopDecision.ALLOW;
 
-        double searchRange = SakuyaWatchContract.FIELD_RANGE_BLOCKS + 2.0D;
-        for (SakuyaTimeControllerEntity controller : level.getEntitiesOfClass(
-                SakuyaTimeControllerEntity.class,
-                entity.getBoundingBox().inflate(searchRange),
-                candidate -> candidate.isAlive() && candidate.isActiveAt(logicalTick)
-        )) {
+        for (SakuyaTimeControllerEntity controller : SakuyaTimeStopRuntime.controllers(level)) {
+            if (!controller.isActiveAt(logicalTick)) continue;
             LivingEntity source = controller.getSourceEntity();
             if (source == null || !source.isAlive()) {
                 continue;
@@ -102,13 +97,9 @@ public final class TimeStopHooks {
         if (entity instanceof SakuyaTimeControllerEntity) return false;
 
         int logicalTick = SakuyaTimeStopRuntime.logicalTick(level);
-        double searchRange = SakuyaWatchContract.FIELD_RANGE_BLOCKS + 2.0D;
 
-        for (SakuyaTimeControllerEntity controller : level.getEntitiesOfClass(
-                SakuyaTimeControllerEntity.class,
-                entity.getBoundingBox().inflate(searchRange),
-                candidate -> candidate.isAlive() && candidate.isActiveAt(logicalTick)
-        )) {
+        for (SakuyaTimeControllerEntity controller : SakuyaTimeStopRuntime.controllers(level)) {
+            if (!controller.isActiveAt(logicalTick)) continue;
             LivingEntity source = controller.getSourceEntity();
             if (source == null || !source.isAlive()) continue;
 
