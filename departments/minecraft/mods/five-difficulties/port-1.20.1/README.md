@@ -1,6 +1,6 @@
 # Five Difficulties X1 Preservation Port — Minecraft 1.20.1 Forge
 
-Status: **P2 complete — first canonical X1 live projectile path implemented and Forge-compiled**.
+Status: **P3 complete — canonical X1 Sakuya entity-time policy and minimal 1.20.1 Mixins compile/package successfully**.
 
 Target:
 - Minecraft 1.20.1
@@ -42,14 +42,7 @@ Forge 1.20.1 boundary:
 - network channel boundary;
 - Minecraft Entity/ServerLevel adapters for the pure time-stop core.
 
-P1 deliberately does **not** yet contain:
-- original X1 textures/assets;
-- the 35 spell cards;
-- Master Spark;
-- real projectile entities/renderers;
-- Mixin tick cancellation;
-- X1 recipes/mobs/items;
-- any optimization/virtual-bullet backend.
+Current port still deliberately defers broad content expansion: the 35 spell cards, Master Spark, generalized THShot/laser runtime, most X1 recipes/mobs/items, and all bullet batching remain later gates.
 
 ## Validation order
 
@@ -92,3 +85,31 @@ See:
 Latest validated Forge compile: GitHub Actions run `37521984099` — SUCCESS.
 
 Next preservation gate is Sakuya time-stop parity, not mass content expansion.
+
+
+## P3 Sakuya time-domain machinery
+
+Canonical X1 Watch/StopWatch source was re-read directly.
+
+P3 now provides:
+- exact X1 40-block AABB field policy;
+- source/item-frame/painting/mount exclusions;
+- two-tick new-entity grace;
+- FULL_STOP and deterministic HALF_SPEED modes;
+- synced transient controller entity;
+- per-Level controller index;
+- ServerLevel entity/passenger tick interception;
+- ServerPlayer simulation/input/movement interception;
+- ClientLevel tick cancellation;
+- same-owner movable-spell callback boundary;
+- Mixin packaging checks in exact Forge 47.4.6 CI.
+
+X1 does **not** freeze blocks, fluids, BlockEntities, particles, animated textures, chunks or world day time, so those Roundabout capabilities stay disabled.
+
+Latest validated P3 run: `37527522708` — SUCCESS.
+
+See:
+- `P3-SAKUYA-TIMESTOP-EXACT.md`
+- `IMPLEMENTATION-CHECKPOINT-P3.md`
+
+Next gate: usable Sakuya Watch/StopWatch items plus bounded Minecraft runtime verification.
