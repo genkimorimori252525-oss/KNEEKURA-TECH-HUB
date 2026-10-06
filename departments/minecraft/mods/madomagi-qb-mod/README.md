@@ -26,3 +26,4 @@ Raw uploaded source, compiled classes and original assets are deliberately not c
 - CHARACTER-COMBAT-CATALOG.md — character-by-character normal / Rebellion / Ultimate combat patterns
 - PROJECTILE-TRAJECTORY-CATALOG.md — projectile physics, homing, staged world props, fan-out and summon-seed trajectories
 - BOSS-COMBAT-CATALOG.md — witch/boss phase systems, summons, terrain interaction and static anomaly leads
+- ITEM-AND-RITUAL-CATALOG.md — player weapons, Soul Gem detector behavior, gun framework and hidden Grief Seed/Homulilly ritual
