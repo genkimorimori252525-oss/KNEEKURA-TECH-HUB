@@ -5,25 +5,30 @@ public final class TimeStopPolicy {
     public TimeStopDecision decide(SakuyaTimeStopInstance stop, TimeStopSubject subject, int tick) {
         if (!stop.isActiveAt(tick) || !stop.contains(subject.position())) return TimeStopDecision.ALLOW;
         if (subject.entityId().equals(stop.sourceEntityId())) return TimeStopDecision.ALLOW;
+        if (subject.x1ExplicitExempt() || subject.x1MovableSameOwnerSpellCard()) return TimeStopDecision.ALLOW;
 
         TimeStopFlags flags = stop.flags();
-        return switch (subject.kind()) {
-            case LIVING -> flags.freezeLivingEntities() ? TimeStopDecision.FREEZE : TimeStopDecision.ALLOW;
-            case ITEM -> flags.freezeItemEntities() ? TimeStopDecision.FREEZE : TimeStopDecision.ALLOW;
-            case PROJECTILE -> projectileDecision(stop, subject, flags);
-            case OTHER -> TimeStopDecision.ALLOW;
-        };
-    }
+        if (subject.ageTicks() < flags.minimumEntityAgeTicks()) return TimeStopDecision.ALLOW;
 
-    private TimeStopDecision projectileDecision(
-            SakuyaTimeStopInstance stop,
-            TimeStopSubject subject,
-            TimeStopFlags flags
-    ) {
-        boolean sourceOwned = stop.sourceEntityId().equals(subject.ownerId());
-        if (sourceOwned && subject.createdDuringTimeStop() && flags.specialMoveNewProjectiles()) {
-            return TimeStopDecision.SPECIAL_PROJECTILE;
+        boolean affected = switch (subject.kind()) {
+            case LIVING -> flags.freezeLivingEntities();
+            case ITEM -> flags.freezeItemEntities();
+            case PROJECTILE -> flags.freezeExistingProjectiles();
+            case OTHER -> flags.freezeOtherEntities();
+        };
+        if (!affected) return TimeStopDecision.ALLOW;
+
+        if (stop.mode() == TimeDomainMode.HALF_SPEED) {
+            return TimeStopDecision.HALF_SPEED;
         }
-        return flags.freezeExistingProjectiles() ? TimeStopDecision.FREEZE : TimeStopDecision.ALLOW;
+
+        if (subject.kind() == SubjectKind.PROJECTILE) {
+            boolean sourceOwned = stop.sourceEntityId().equals(subject.ownerId());
+            if (sourceOwned && subject.createdDuringTimeStop() && flags.specialMoveNewProjectiles()) {
+                return TimeStopDecision.SPECIAL_PROJECTILE;
+            }
+        }
+
+        return TimeStopDecision.FREEZE;
     }
 }
