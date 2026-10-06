@@ -11,6 +11,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: five-difficulties-p5-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   p5:
     runs-on: ubuntu-latest
