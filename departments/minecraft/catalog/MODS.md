@@ -8,6 +8,7 @@
 |---:|---|---|---|---|---|
 | 1 | [The Twilight Forest](../mods/twilight-forest/README.md) | content/gameplay Mod | source candidate `a7dd8f13` pinned; distributed-JAR identity pending | `793c4d4c` pinned — MC 26.1.2 / NeoForge 26.1.2.102 | IN_PROGRESS |
 | 2 | [Sinytra Connector](../mods/sinytra-connector/README.md) | loader compatibility / translation layer | `7f68ac0` beta.50 source; 141 files acquired; binary/runtime unresolved | `c84a96a` beta.6 / 26.1.2; 131 files acquired | IN_PROGRESS (source/recon/history) |
+| 3 | [Kimetsu no Yaiba ver3](../mods/kimetsu-no-yaiba/README.md) | content/combat/worldgen Mod | uploaded JAR SHA `b4af6e8a…` / v3 / MC 1.20.1 Forge; 3,713 classes; bytecode whole-target map | no official public source/frontier pinned; current public 1.20.1 release is same ver3 line | IN_PROGRESS (static whole-target architecture mapped) |
 
 ## Rules
 
