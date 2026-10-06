@@ -29,6 +29,15 @@ jobs:
         run: node departments/minecraft/mods/warfare-wings/physics-ai/check-microkernel.mjs --java-home "$JAVA_HOME"
       - name: Verify trace comparator
         run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_compare_traces.py
+      - name: Rebuild and verify 24-aircraft AI Atlas
+        run: |
+          ROOT=departments/minecraft/mods/warfare-wings/physics-ai
+          mkdir -p "$RUNNER_TEMP/ww-atlas"
+          python "$ROOT/tools/build_aircraft_atlas.py" "$ROOT/reports/base-aircraft-source-atlas.csv" \
+            --json "$RUNNER_TEMP/ww-atlas/aircraft-atlas-ai-view.json" \
+            --markdown "$RUNNER_TEMP/ww-atlas/AIRCRAFT-ATLAS.md"
+          cmp "$RUNNER_TEMP/ww-atlas/aircraft-atlas-ai-view.json" "$ROOT/reports/aircraft-atlas-ai-view.json"
+          cmp "$RUNNER_TEMP/ww-atlas/AIRCRAFT-ATLAS.md" "$ROOT/reports/AIRCRAFT-ATLAS.md"
 
   runtime-probe-source:
     runs-on: ubuntu-latest
