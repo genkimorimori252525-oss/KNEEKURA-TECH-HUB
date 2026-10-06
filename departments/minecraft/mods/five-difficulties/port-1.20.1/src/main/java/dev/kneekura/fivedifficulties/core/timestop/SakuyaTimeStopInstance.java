@@ -28,7 +28,12 @@ public record SakuyaTimeStopInstance(
         return tick >= startedAtTick && tick < startedAtTick + durationTicks;
     }
 
+    public boolean isExpiredAt(int tick) {
+        return ((long) tick) >= ((long) startedAtTick + durationTicks);
+    }
+
     public int remainingTicks(int tick) {
-        return Math.max(0, startedAtTick + durationTicks - tick);
+        long remaining = ((long) startedAtTick + durationTicks) - tick;
+        return (int) Math.max(0L, Math.min(Integer.MAX_VALUE, remaining));
     }
 }
