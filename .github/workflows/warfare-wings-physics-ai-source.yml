@@ -27,6 +27,8 @@ jobs:
           java-version: '17'
       - name: Verify microkernel and deterministic traces
         run: node departments/minecraft/mods/warfare-wings/physics-ai/check-microkernel.mjs --java-home "$JAVA_HOME"
+      - name: Verify trace comparator
+        run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_compare_traces.py
 
   runtime-probe-source:
     runs-on: ubuntu-latest
