@@ -27,7 +27,7 @@ PATTERNS = {
     "set_block": r"\.setBlock(?:ToAir|AndMetadataWithUpdate)?\s*\(",
     "potion_effect": r"addPotionEffect\s*\(",
     "set_position": r"\.setPosition\s*\(",
-    "aabb_query": r"getEntitiesWithinAABB",
+    "entity_aabb_query": r"(?:get|select)EntitiesWithinAABB(?:ExcludingEntity)?",
     "nbt_write": r"writeEntityToNBT\s*\(",
     "nbt_read": r"readEntityFromNBT\s*\(",
     "legacy_custom_payload": r"Packet250CustomPayload",
