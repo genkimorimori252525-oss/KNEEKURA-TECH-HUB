@@ -6,6 +6,7 @@ import dev.kneekura.fivedifficulties.forge.entity.HomingAmuletProjectile;
 import dev.kneekura.fivedifficulties.forge.timestop.SakuyaTimeStopRuntime;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -71,9 +72,14 @@ public final class RuntimeScenarioChecks {
         level = server.overworld();
 
         BlockPos spawn = level.getSharedSpawnPos();
+        level.setDayTime(18000L);
         double x = spawn.getX() + 0.5D;
-        double y = spawn.getY() + 2.0D;
         double z = spawn.getZ() + 0.5D;
+        double y = level.getHeight(
+                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                spawn.getX(),
+                spawn.getZ()
+        ) + 2.0D;
 
         source = FakePlayerFactory.getMinecraft(level);
         source.moveTo(x, y, z, 0.0F, 0.0F);
@@ -241,7 +247,9 @@ public final class RuntimeScenarioChecks {
             homingMoved = true;
         }
 
-        if (target.getHealth() < homingStartHealth) {
+        if (target.getHealth() < homingStartHealth
+                && projectile != null
+                && projectile.isRemoved()) {
             require(homingMoved, "Homing projectile moved before hit");
 
             FiveDifficultiesPort.LOGGER.info(
