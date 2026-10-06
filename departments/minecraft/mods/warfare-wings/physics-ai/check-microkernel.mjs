@@ -44,6 +44,7 @@ try {
     path.join(mainDir, 'PerformanceReportMain.java'),
     path.join(mainDir, 'TraceCsv.java'),
     path.join(mainDir, 'TraceScenarioMain.java'),
+    path.join(mainDir, 'AircraftAtlasMain.java'),
     path.join(testDir, 'Ia133MicrokernelSelfTest.java'),
   ];
   run(javac, ['--release', '17', '-d', classes, ...sources]);
@@ -61,7 +62,16 @@ try {
     throw new Error('Unexpected trace schema header');
   await same(path.join(generated, 'a6m-p47n-source-microkernel.csv'), path.join(here, 'reports/a6m-p47n-source-microkernel.csv'));
   await same(path.join(generated, 'a6m-p47n-source-microkernel.md'), path.join(here, 'reports/a6m-p47n-source-microkernel.md'));
-  process.stdout.write('Warfare Wings Physics AI microkernel checks passed; real Minecraft parity NOT_RUN\n');
+  const atlasA = path.join(generated, 'base-aircraft-source-atlas-a.csv');
+  const atlasB = path.join(generated, 'base-aircraft-source-atlas-b.csv');
+  const dataset = path.join(here, 'data/base-aircraft-anchor-v1.csv');
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.AircraftAtlasMain', dataset, atlasA]);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.AircraftAtlasMain', dataset, atlasB]);
+  await same(atlasA, atlasB);
+  await same(atlasA, path.join(here, 'reports/base-aircraft-source-atlas.csv'));
+  const atlasLines = (await readFile(atlasA, 'utf8')).trimEnd().split(/\r?\n/);
+  if (atlasLines.length !== 25) throw new Error(`Expected Atlas header + 24 rows, got ${atlasLines.length}`);
+  process.stdout.write('Warfare Wings Physics AI microkernel + 24-aircraft Atlas checks passed; real Minecraft parity NOT_RUN\n');
 } finally {
   await rm(work, { recursive: true, force: true });
 }
