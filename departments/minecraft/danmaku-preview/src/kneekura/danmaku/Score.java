@@ -9,8 +9,18 @@ public final class Score {
     public static final int MAX_LIVE_BULLETS = 3000;
     public static final int MAX_DURATION_TICKS = 1200;
 
+    public enum Frame {
+        /** Preserve Pattern's original world-oriented X/Y/Z coordinates. */
+        WORLD,
+        /**
+         * Reinterpret Pattern's yaw plane as the player's screen plane:
+         * Pattern X -> screen-right, Pattern Z -> screen-up, while forwardSpeed advances toward the player.
+         */
+        PLAYER_VIEW
+    }
+
     public record Track(String name, int startTick, int endTick, Pattern.Config pattern,
-                        double hue, double radius) {
+                        Frame frame, double forwardSpeed, double hue, double radius) {
         public Track {
             if (name == null || !name.matches("[A-Za-z0-9_-]{1,32}"))
                 throw new IllegalArgumentException("track name must be 1..32 safe ASCII chars");
@@ -20,6 +30,8 @@ public final class Score {
             if (pattern == null) throw new IllegalArgumentException("pattern is required");
             if (pattern.durationTicks() != endTick - startTick)
                 throw new IllegalArgumentException("pattern duration must equal endTick-startTick");
+            if (frame == null) throw new IllegalArgumentException("frame is required");
+            range(forwardSpeed, 0, 4, "forwardSpeed");
             range(hue, 0, 360, "hue");
             range(radius, 0.04, 1.0, "radius");
         }
@@ -48,18 +60,21 @@ public final class Score {
                          double x, double y, double z, double hue, double radius) {}
 
     public static Config defaults() {
-        var halo = track("halo", 20, 120, Pattern.Kind.RING, 24, 0.16, 12, 360, 0, 0, 70, 36, 0.14);
-        var spiralA = track("spiral_a", 80, 220, Pattern.Kind.SPIRAL, 8, 0.18, 6, 360, 115, 0, 90, 205, 0.12);
-        var spiralB = track("spiral_b", 80, 220, Pattern.Kind.SPIRAL, 8, 0.18, 6, 360, -115, 0, 90, 325, 0.12);
+        var halo = track("halo", 20, 120, Pattern.Kind.RING, 24, 0.16, 12, 360, 0, 0, 70,
+            Frame.PLAYER_VIEW, 0.11, 36, 0.14);
+        var spiralA = track("spiral_a", 80, 220, Pattern.Kind.SPIRAL, 8, 0.18, 6, 360, 115, 0, 90,
+            Frame.PLAYER_VIEW, 0.12, 205, 0.12);
+        var spiralB = track("spiral_b", 80, 220, Pattern.Kind.SPIRAL, 8, 0.18, 6, 360, -115, 0, 90,
+            Frame.PLAYER_VIEW, 0.12, 325, 0.12);
         return new Config(240, List.of(halo, spiralA, spiralB));
     }
 
     public static Track track(String name, int start, int end, Pattern.Kind kind, int bullets, double speed,
                               int interval, double fan, double rotation, double elevation, int lifetime,
-                              double hue, double radius) {
+                              Frame frame, double forwardSpeed, double hue, double radius) {
         return new Track(name, start, end,
             new Pattern.Config(kind, bullets, speed, interval, fan, rotation, elevation, lifetime, end - start),
-            hue, radius);
+            frame, forwardSpeed, hue, radius);
     }
 
     public static List<Bullet> at(Config score, double tick) {
@@ -70,9 +85,19 @@ public final class Score {
             if (tick < track.startTick() || tick > track.endTick()) continue;
             double localTick = tick - track.startTick();
             for (Pattern.Bullet bullet : Pattern.at(track.pattern(), localTick)) {
+                int bornTick = track.startTick() + bullet.bornTick();
+                double age = tick - bornTick;
+                double x = bullet.x(), y = bullet.y(), z = bullet.z();
+                if (track.frame() == Frame.PLAYER_VIEW) {
+                    double screenX = bullet.x();
+                    double screenY = bullet.z();
+                    double elevationForward = bullet.y() - 2.0;
+                    x = screenX;
+                    y = 2.0 + screenY;
+                    z = track.forwardSpeed() * age + elevationForward;
+                }
                 long id = ((long) ti << 32) | (bullet.id() & 0xffffffffL);
-                out.add(new Bullet(id, track.name(), ti, track.startTick() + bullet.bornTick(),
-                    bullet.x(), bullet.y(), bullet.z(), track.hue(), track.radius()));
+                out.add(new Bullet(id, track.name(), ti, bornTick, x, y, z, track.hue(), track.radius()));
             }
         }
         if (out.size() > MAX_LIVE_BULLETS)
