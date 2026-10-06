@@ -222,6 +222,54 @@ Low frequency compared with Oktavia, but still legacy logging behavior.
 
 Use structured debug logger gated by level.
 
+### Dense-volley damage amplification
+
+Both Garnet projectile bases explicitly clear the target's hurt-resistance timer before damage.
+
+Consequences:
+- many projectiles from one logical burst can deal independent hits instead of collapsing into one vanilla i-frame window;
+- server-side damage/event cost scales closer to actual hit count;
+- knockback/fire/enchantment hooks may also repeat at burst cadence.
+
+High-density examples:
+- Madoka Ultimate: 12–16 homing arrows/s;
+- Homura Type89 NPC burst: 31 bullets in ~3 s;
+- Homura Rebellion: ~10.67 homing arrows/s;
+- Kyouko long: 24 Spears in ~1.25 s.
+
+ANCHOR:
+- define a deliberate multi-hit contract;
+- measure damage events/tick, not only projectile entities/tick;
+- consider per-target/per-attack hit budgets;
+- preserve expected barrage lethality without globally zeroing modern invulnerability time.
+
+### Critical Garnet Throwable explosion amplification
+
+Critical `EntityGarnetThrowable`:
+- entity impact → strength-6 terrain-damaging explosion;
+- block impact → strength-4 terrain-damaging explosion.
+
+Mami `Tiro Finale!` uses a critical Garnet bullet, so this finisher can create world/explosion workload in addition to projectile damage.
+
+ANCHOR:
+- separate “finisher bonus” from vanilla terrain grief;
+- use encounter/config-controlled explosion policy;
+- benchmark the explosion branch independently from ordinary bullet throughput.
+
+### Nutcracker death cleanup scan
+
+Nutcracker duplicates Walpurgis-style broad cleanup:
+- selects `EntityMob` in ±200 AABB;
+- removes every other selected entity.
+
+Risk:
+- large query;
+- unrelated hostile mobs removed;
+- cleanup cost depends on whole surrounding mob population.
+
+ANCHOR:
+- maintain encounter membership IDs/sets and clean only known children.
+
 ## Safety / griefing risks
 
 ### Player capability mutation
