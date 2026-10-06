@@ -36,6 +36,47 @@ A lighter EntityThrowable-derived base:
 
 This is the base for LightArrow, Claw, FireLance, Spear2 and Garnet bullets.
 
+### Shared multi-hit contract — reset vanilla hurt-resistant time
+
+Both Garnet projectile foundations deliberately clear the struck entity's vanilla post-hit immunity timer immediately before applying damage:
+
+- `EntityGarnetArrow`: `entityHit.hurtResistantTime = 0` before `attackEntityFrom`;
+- `EntityGarnetThrowable`: same reset before its thrown-damage attempt.
+
+The distributed class bytecode contains the corresponding write to obfuscated `Entity.field_70172_ad` in both implementations.
+
+This is a major combat-system invariant. Dense patterns such as:
+- Madoka 8/20-arrow bursts;
+- Homura 31-shot rifle burst;
+- Kyouko 24-Spear burst;
+- Mami rapid staged-Musket shots;
+
+are not merely visually dense: the projectile substrate is designed so successive impacts are not mostly swallowed by Minecraft's ordinary hurt-resistance window.
+
+Technique:
+**projectile-layer multi-hit authorization by explicitly resetting target i-frames**.
+
+ANCHOR caution:
+do not blindly assign modern `invulnerableTime = 0` everywhere. That can bypass compatibility expectations, armor/damage-event pacing and other mods' combat rules. Prefer an explicit multi-hit policy with:
+- per-attack / per-source hit cadence;
+- target hit budget;
+- DamageType/event compatibility;
+- boss immunity rules;
+- telemetry for simultaneous projectile bursts.
+
+### Throwable critical mode — impact becomes an explosion
+
+`EntityGarnetThrowable` treats its synchronized critical bit as an explosive modifier:
+
+- critical entity impact → creates explosion strength **6.0**, block damage enabled, then clears target hurt-resistant time and applies projectile damage;
+- critical block impact → creates explosion strength **4.0**, block damage enabled;
+- burning block impact can ignite an adjacent air block;
+- impacting TNT currently removes the TNT block; a commented TODO shows an abandoned explicit TNT-explosion interaction.
+
+`EntityGarnetBullet` extends `EntityGarnetThrowable`, so any bullet marked critical inherits this explosion behavior.
+
+This makes `critical` semantically much stronger than vanilla arrow critical particles/damage: it is a **projectile-mode switch into explosive impact**.
+
 ---
 
 ## Light Arrow family
