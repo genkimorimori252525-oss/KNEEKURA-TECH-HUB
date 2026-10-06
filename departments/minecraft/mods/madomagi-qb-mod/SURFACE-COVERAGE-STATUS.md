@@ -27,6 +27,7 @@ It is **not** a claim that the target is COMPLETE under ANALYSIS-SPEC-v1:
 | full Java tree inventory | EVIDENCE_BACKED | QB 156 + Garnet 37 Java |
 | full top-level class-tree inventory | EVIDENCE_BACKED | QB 156 + Garnet 37 class |
 | source↔class structural correspondence | MAPPED | all 193 path pairs + SourceFile basename, sampled javap |
+| selected method-body bytecode correspondence | EVIDENCE_BACKED for recorded findings | hurt-resistance reset, DamageSource fallback, critical ordering, Kriemhild budget, boss super-armor and earlier anomaly checks |
 | full semantic bytecode equivalence | NOT_ANALYZED | no per-method instruction/decompile comparison |
 | rights/usage locator | EVIDENCE_BACKED for supplied readmes | modification/reference permitted, commercial use prohibited; not generalized as OSS license |
 
@@ -61,6 +62,9 @@ System config behavior mapped:
 | seven implemented character attack sets | EVIDENCE_BACKED |
 | Rebellion/Ultimate special AIs present in snapshot | EVIDENCE_BACKED where implemented |
 | projectile/trajectory family | EVIDENCE_BACKED |
+| projectile hit / vanilla i-frame bypass semantics | EVIDENCE_BACKED | both Garnet projectile bases; selected distributed bytecode confirms `hurtResistantTime=0` before direct damage |
+| DamageSource fallback / owner attribution | EVIDENCE_BACKED | Throwable thrown→mob→owner-player fallback ladder confirmed in source and selected bytecode |
+| character/boss defense gates | EVIDENCE_BACKED static | absolute form immunity, reactive guard/dodge/teleport, percentage mitigation, local super-armor and Kriemhild rolling budget |
 | boss/witch attack systems | EVIDENCE_BACKED for cataloged source paths |
 | familiar evolution/ecology | EVIDENCE_BACKED |
 | servant/clone/phantom relations | EVIDENCE_BACKED static structure |
