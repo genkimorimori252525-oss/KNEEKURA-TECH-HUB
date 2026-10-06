@@ -38,3 +38,8 @@ Raw uploaded source, compiled classes and original assets are deliberately not c
 - SURFACE-COVERAGE-STATUS.md — current whole-target facet coverage and explicit non-completion reasons
 - ANCHOR-PORTABILITY-MATRIX.md — legacy concept → Minecraft 1.20.1 Forge reconstruction mapping
 - STATIC-INVENTORY-SUMMARY.json — compact archive/member provenance fingerprints
+
+## Machine-readable navigation
+
+- CLASS-INDEX-RECEIPT.md — 193/193 parsed Java declaration index receipt and regeneration instructions
+- tools/build-class-index.py — regenerates full JSON/TSV source↔class navigation indexes from the pinned local archive trees
