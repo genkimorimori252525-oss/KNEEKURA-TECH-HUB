@@ -124,6 +124,20 @@ Selected `javap -c -p` method-body spot checks verify that several unusual sourc
 
 This upgrades those specific findings from Java-text-only observations to **selected source+distributed-bytecode correspondence**, while full 193-class semantic equivalence remains NOT_ANALYZED.
 
+### Projectile substrate and real multi-hit behavior
+- both Garnet Arrow and Throwable clear the hit target's vanilla hurt-resistance timer before damage; distributed bytecode verifies the write in both bases;
+- dense volleys are therefore mechanically multi-hit, not just visual barrage;
+- Garnet Throwable critical mode creates strength-6 entity-impact or strength-4 block-impact terrain-damaging explosions;
+- Mami's `Tiro Finale!` marks its Garnet bullet critical, making the finisher an explosive round;
+- this changes ANCHOR design priority: a modern barrage system needs an explicit multi-hit/i-frame policy, not just matching trajectories.
+
+### Additional archaeology / cleanup
+- Oktavia's common servant path is TODO-disabled (`return -1; //20`) despite an Anthony servant factory;
+- Mami Ribbon contains a commented future pull/tether design using FishHook→EntityItem linkage;
+- active Charlotte wander and Oktavia spawn paths retain stdout debugging;
+- Nutcracker death performs a second broad ±200 `EntityMob` cleanup pattern analogous to Walpurgis;
+- exact-hash OpenEye telemetry corroborates the supplied Garnet .082 artifact and predominantly records it under Minecraft 1.6.4; rare 1.7.10 sightings do not establish compatibility because metadata constrains mcVersion to [1.6.4,1.6.4].
+
 ### Presentation/readability
 A dedicated telegraph/VFX pass recovered:
 - Mami Muskets and Sayaka Cutlasses as visible, mechanically consumed attack stock;
