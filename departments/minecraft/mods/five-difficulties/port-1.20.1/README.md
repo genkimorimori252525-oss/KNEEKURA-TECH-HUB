@@ -1,6 +1,6 @@
 # Five Difficulties X1 Preservation Port — Minecraft 1.20.1 Forge
 
-Status: **P1 evidence-backed behavior-contract implementation in progress**.
+Status: **P2 complete — first canonical X1 live projectile path implemented and Forge-compiled**.
 
 Target:
 - Minecraft 1.20.1
@@ -24,7 +24,7 @@ onto the exact official Forge 1.20.1-47.4.6 MDK used elsewhere by KNEEKURA-TECH-
 
 This follows the existing Hub validation convention and keeps third-party/build artifacts out of Git history.
 
-## P1 source split
+## Source split
 
 `src/main/java/dev/kneekura/fivedifficulties/core/**`
 
@@ -70,3 +70,25 @@ P1 adds a strict evidence bridge to the earlier exact X1 analysis (PR #93):
 - explicit unresolved fields/categories so missing raw/runtime evidence is never guessed.
 
 These contracts are pure Java and do not yet make the original textures/items/renderers available in-game.
+
+
+## P2 live preservation path
+
+Canonical X1 was reacquired byte-for-byte and the first live 1.20.1 preservation path is now implemented:
+
+- red Homing Amulet item;
+- exact normal/focus fan geometry;
+- exact static homing contract;
+- X1-style logical collision sweep;
+- live EntityType/projectile;
+- two-pass legacy-style renderer;
+- private SHA-verified original texture overlay.
+
+See:
+- `P2-CANONICAL-X1-REACQUISITION.md`
+- `P2-HOMING-AMULET-EXACT.md`
+- `IMPLEMENTATION-CHECKPOINT-P2.md`
+
+Latest validated Forge compile: GitHub Actions run `37521984099` — SUCCESS.
+
+Next preservation gate is Sakuya time-stop parity, not mass content expansion.
