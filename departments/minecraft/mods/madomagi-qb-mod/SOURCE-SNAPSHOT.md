@@ -32,7 +32,7 @@ Evidence from other versions is not merged into 1.6.4.082 implementation claims.
 - 1 cfg and 1 readme
 - broad Java split: 18 root AI/bootstrap, 9 entity, 7 client, 3 item
 
-Equal Java/class counts are only an inventory fact. Source↔binary equivalence is NOT_ANALYZED until bytecode/source correspondence is checked.
+Java/class counts are now backed by an exhaustive structural correspondence pass: all 193 Java paths have a matching class path and all 193 classes carry the corresponding Java SourceFile basename. Representative `javap -p` surfaces also match source-derived subsystems. See `BINARY-SOURCE-CORRESPONDENCE.md`. This is strong structural correspondence, not a claim of full method-body/reproducible-build equivalence.
 
 ## Primary metadata
 
