@@ -12,7 +12,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: five-difficulties-p5-${{ github.ref }}
+  group: five-difficulties-p5-${{ github.sha }}
   cancel-in-progress: true
 
 jobs:
