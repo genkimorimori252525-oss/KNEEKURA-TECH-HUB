@@ -24,6 +24,26 @@ ASSETS = {
         "assets/five_difficulties_port/textures/item/homing_amulet.png",
         "650f71239534ef521bea3e1e29893ed1cb8302721854c44d0536b76be02f5773",
     ),
+    "assets/thkaguyamod/textures/items/sakuyaWatch.png": (
+        "assets/five_difficulties_port/textures/item/sakuya_watch.png",
+        "589e080353f2f1d56ec6af6547bc3cfbb3802de89e7797c03a2251083e8d0c8e",
+    ),
+    "assets/thkaguyamod/textures/SakuyaWatchTexture.png": (
+        "assets/five_difficulties_port/textures/entity/sakuya_watch.png",
+        "b55d8af1138f2b7f5e3841afe7d5aecff78d57122f57ecb7a29af1036f76ff30",
+    ),
+    "assets/thkaguyamod/textures/items/SakuyaStopWatch.png": (
+        "assets/five_difficulties_port/textures/item/sakuya_stopwatch.png",
+        "ac6144bc483951782cbcf94cdc3339f07fbc1f49507a323264ee27a5f922e285",
+    ),
+    "assets/thkaguyamod/textures/SakuyaStopWatchTexture.png": (
+        "assets/five_difficulties_port/textures/entity/sakuya_stopwatch.png",
+        "9c6b567304210c30b67d14dc925d058dc3eb5c961aae8918aee84bb7239955bd",
+    ),
+    "assets/thkaguyamod/textures/DarkTexture.png": (
+        "assets/five_difficulties_port/textures/entity/sakuya_time_dark.png",
+        "c0b1a2f92f0b3f366cdfcecf212de161eb853fd987d2790bd7d943b4dcde0d05",
+    ),
 }
 
 def sha(data: bytes) -> str:
