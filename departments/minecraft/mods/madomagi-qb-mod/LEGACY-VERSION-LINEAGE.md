@@ -68,6 +68,32 @@ Interpretation:
 
 Combined with the confirmed 2013-11-04 .080 reference, this establishes continued development from .080 into the supplied .082 snapshot across roughly the following two months without inventing an exact .082 release date.
 
+## External telemetry for the exact Garnet .082 artifact
+
+OpenEye has a record for the exact supplied Garnet SHA-256:
+`5f778c8949dcce95dcd56dacd9242f117bc17f03879bab48cb667ba2a3c82778`.
+
+Recorded metadata:
+- filename: `Garnet-MOD.v.1.6.4.082.zip` (plus one `[1]` filename variant);
+- size: 103674 bytes, matching the supplied archive;
+- mod id/name: `garnetmod` / `mod_Garnet`;
+- version: `1.6.4.082`;
+- OpenEye reports 351 sightings, first 2016-09-24 and last 2021-10-21;
+- 323 sightings were under Minecraft 1.6.4;
+- 4 sightings were recorded under Minecraft 1.7.10.
+
+The raw OpenEye metadata simultaneously declares:
+- `minecraft: "Minecraft 1.6.4"`;
+- `mcVersion: "[1.6.4,1.6.4]"`.
+
+Interpretation:
+- this strongly corroborates the identity and later circulation of the exact Garnet dependency artifact;
+- the four 1.7.10 telemetry sightings do **not** prove native 1.7.10 compatibility, because the artifact's own recorded Minecraft version range is exactly 1.6.4;
+- FRONTIER therefore remains unpinned.
+
+External locator:
+- OpenEye exact-hash record for the SHA above, retrieved 2026-10-07.
+
 ## Behavioral delta lead: .080 guide vs .082 source
 
 The .080-era guide describes Homura UF as losing time magic while gaining flight plus continuous spread homing arrows.
