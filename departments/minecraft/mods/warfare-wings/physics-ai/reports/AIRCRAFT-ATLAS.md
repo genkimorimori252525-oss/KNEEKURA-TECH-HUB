@@ -72,7 +72,7 @@ The 3-aircraft `turn_fighter` group is not IQR-tested because the sample is too 
 
 Query flags use global top/bottom quartile membership (6 of 24 aircraft per quartile). They are routing hints, not overall combat rankings.
 
-- `HIGH_YAW_LOW_SAME_INPUT_RETENTION` / `HIGH_SAME_INPUT_RETENTION_LOW_YAW`: old fixed-duration contrast.
+- `HIGH_YAW_LOW_SAME_INPUT_RETENTION` / `HIGH_SAME_INPUT_RETENTION_LOW_YAW`: fixed-duration contrast.
 - `FAST_90_LOW_EQUAL_ANGLE_RETENTION`: fast 90° completion paired with bottom-quartile equal-angle retention.
 - `SLOW_90_HIGH_EQUAL_ANGLE_RETENTION`: slow 90° completion paired with top-quartile equal-angle retention.
 
