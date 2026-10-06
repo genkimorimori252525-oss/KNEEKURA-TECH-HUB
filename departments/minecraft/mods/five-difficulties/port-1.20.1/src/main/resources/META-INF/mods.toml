@@ -1,0 +1,27 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="All Rights Reserved"
+
+[[mods]]
+modId="five_difficulties_port"
+version="0.0.1-p0"
+displayName="Five Difficulties X1 Preservation Port"
+authors="KNEEKURA private preservation project"
+description='''
+Private Minecraft 1.20.1 preservation reconstruction of Five Difficulties X1.
+P0 contains compatibility foundations only; original X1 player-facing content is not yet ported.
+'''
+
+[[dependencies.five_difficulties_port]]
+modId="forge"
+mandatory=true
+versionRange="[47.4.6,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.five_difficulties_port]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1]"
+ordering="NONE"
+side="BOTH"
