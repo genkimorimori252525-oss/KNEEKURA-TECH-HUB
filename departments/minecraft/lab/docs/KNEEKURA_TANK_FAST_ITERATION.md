@@ -26,6 +26,10 @@ gradle.beforeProject { p ->
 
 [Gradle 8.14.3 performance](https://docs.gradle.org/8.14.3/userguide/performance.html)と[daemon](https://docs.gradle.org/8.14.3/userguide/gradle_daemon.html)はincremental compilation、入力に基づくup-to-date判定、daemon再利用を説明する。これらはMinecraftの全起動費用を消すものではない。configuration cacheはplugin/build側の適合を必要とするため、今回未検証のForgeGradle設定には追加しない。検証のための別build scan送信、依存更新、wrapper/JDK更新は行っていない。
 
+通常水槽のMOD構成を絞る追加の指定`KNEEKURA_DEBUG_MOD_PROFILE=TANK_CORE`は
+[軽量MOD構成の手順と記録](KNEEKURA_TANK_CORE_PROFILE.md)を参照する。
+以下の保存先比較は従来の全構成による歴史的記録として保持する。
+
 ## 原因調査と有限の実機結果
 
 従来のK:試行は約1秒ごとに重いserver tickがあり、OwnerConnectionの毎秒のowner-status公開がserver thread上で`force(true)`とatomic moveを実行する。実際の既存OwnerFiles writerを独立の無権限privateディレクトリで各60回測ると、K: p50/p95は100.0189/100.6662ms、C:は1.9584/2.3686ms。単独IO測定は実機での唯一の因果の証明ではないが、このwriter自体の保存先による費用差を確認した。
