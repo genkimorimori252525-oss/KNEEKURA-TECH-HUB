@@ -104,6 +104,40 @@ Source/class declaration index:
 - target capability categories;
 - one concrete Garnet→QB reverse dependency that should be removed in ANCHOR.
 
+## Continuation findings added after the initial checkpoint
+
+### Historical/version boundary
+- contemporary 2013-11 material pins a public 1.6.4.080-era update and actual .080 installations;
+- supplied .082 archive members cluster around 2014-01-04, with late-December/early-January Rebellion/Homulilly source work;
+- public GitHub repository/code searches did not establish a supported later source lineage; FRONTIER remains **unfound/unpinned**, not disproven;
+- .080 community description of Homura UF resembles .082 Homura Rebellion much more than .082 Ultimate, producing a strong but unproven version-delta lead.
+
+### Stronger binary correspondence
+Selected `javap -c -p` method-body spot checks verify that several unusual source findings are present in the shipped classes:
+- Grief Seed `nextInt(5)` + unreachable-through-selector Walpurgis default;
+- Homulilly `nextInt(1)`;
+- Walpurgis self-poison anti-air fallback;
+- additive `setSoulGemDamage`;
+- shared GUI container field;
+- Garnet packet byte-zero read;
+- JB inverse economy threshold behavior.
+
+This upgrades those specific findings from Java-text-only observations to **selected source+distributed-bytecode correspondence**, while full 193-class semantic equivalence remains NOT_ANALYZED.
+
+### Presentation/readability
+A dedicated telegraph/VFX pass recovered:
+- Mami Muskets and Sayaka Cutlasses as visible, mechanically consumed attack stock;
+- Homura 128-particle teleport trail + dual endpoint sounds;
+- Homura-vs-Walpurgis firework as a presentation/tracer entity distinct from TNT damage;
+- corruption and Grief Seed countdown expressed through escalating particle density;
+- Prickle's embedded one-second-ish delayed-minion telegraph;
+- Light Arrow pulsing crossed-plane renderer;
+- Charlotte 0.5×→5× model/scale phase discontinuity;
+- Walpurgis world ambience, rotating gear silhouette, health-linked shaft angle and sustained death fireworks;
+- Garnet command modes using redundant text + click sound + semantic particle feedback.
+
+The modernizable lesson is **state readability**, not the literal GL11/particle implementation.
+
 ## Strong static defect / anomaly candidates
 
 Not historically proven bugs unless stated otherwise:
