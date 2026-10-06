@@ -79,4 +79,7 @@ These remain static anomaly candidates. Without a historical report, repair diff
 
 36. **Kriemhild has a redundant `armorValue > 10` super-armor condition** — the same method clamps cumulative armorValue to a maximum of10, so this explicit >10 branch is not reachable through the observed damage-update path. The effective mechanism is a 10-damage budget reset every20 ticks, not that condition.
 
+37. **ItemBreaker active traversal state lives on the Item singleton** — queue, mode flags and dig origin are mutable fields on the registered Item object shared by every stack/player. Normal synchronous use clears them, but the structure is not reentrancy-safe and should become per-job state on ANCHOR.
+38. **Short-range magical-girl Goal uniquely clears the host attack target on reset** — middle/long range resets retain target identity. Crossing out of short-range/path validity can therefore force target reacquisition; visible impact remains a runtime-observation lead.
+
 These are deliberately kept as **static leads**. Promotion to a failure/repair case still requires bounded runtime evidence or historical report+repair provenance.
