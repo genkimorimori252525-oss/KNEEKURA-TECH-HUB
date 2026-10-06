@@ -27,3 +27,22 @@ jobs:
           java-version: '17'
       - name: Verify microkernel and deterministic traces
         run: node departments/minecraft/mods/warfare-wings/physics-ai/check-microkernel.mjs --java-home "$JAVA_HOME"
+
+  runtime-probe-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: jolly/research-warfare-wings-2026-10-07
+          fetch-depth: 1
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.8'
+      - name: Compile runtime probe without external runtime jars
+        working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
+        run: gradle --no-daemon --console=plain compileJava processResources
