@@ -22,11 +22,11 @@ import net.minecraft.resources.ResourceLocation;
 import org.joml.Matrix4f;
 
 public final class SakuyaTimeControllerRenderer extends EntityRenderer<SakuyaTimeControllerEntity> {
-    private static final ResourceLocation WATCH_TEXTURE =
+    public static final ResourceLocation WATCH_TEXTURE =
             new ResourceLocation(FiveDifficultiesPort.MOD_ID, "textures/entity/sakuya_watch.png");
-    private static final ResourceLocation STOPWATCH_TEXTURE =
+    public static final ResourceLocation STOPWATCH_TEXTURE =
             new ResourceLocation(FiveDifficultiesPort.MOD_ID, "textures/entity/sakuya_stopwatch.png");
-    private static final ResourceLocation DARK_TEXTURE =
+    public static final ResourceLocation DARK_TEXTURE =
             new ResourceLocation(FiveDifficultiesPort.MOD_ID, "textures/entity/sakuya_time_dark.png");
 
     private final SakuyaTimeControllerModel model;
@@ -70,7 +70,7 @@ public final class SakuyaTimeControllerRenderer extends EntityRenderer<SakuyaTim
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }
 
-    private static void renderDarkField(PoseStack poseStack, float age) {
+    public static void renderDarkField(PoseStack poseStack, float age) {
         double size = Math.min(age * 12.0D, 240.0D);
         if (size <= 0.0D) return;
 
