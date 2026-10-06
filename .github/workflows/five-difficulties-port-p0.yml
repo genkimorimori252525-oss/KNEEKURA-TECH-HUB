@@ -45,6 +45,7 @@ jobs:
           unzip -q "$RUNNER_TEMP/five-difficulties-mdk.zip" -d "$ROOT"
           rm -rf "$ROOT/src"
           cp -R departments/minecraft/mods/five-difficulties/port-1.20.1/src "$ROOT/src"
+          python departments/minecraft/mods/five-difficulties/port-1.20.1/tools/patch-mdk-mixins.py "$ROOT/build.gradle"
           sed -i 's/^mod_id=.*/mod_id=five_difficulties_port/' "$ROOT/gradle.properties"
           sed -i 's/^mod_name=.*/mod_name=Five Difficulties X1 Preservation Port/' "$ROOT/gradle.properties"
           sed -i 's/^mod_version=.*/mod_version=0.0.4-p3/' "$ROOT/gradle.properties"
@@ -61,7 +62,14 @@ jobs:
           cd "$RUNNER_TEMP/five-difficulties-mdk"
           chmod +x gradlew
           ./gradlew --no-daemon --max-workers=2 -Dorg.gradle.jvmargs=-Xmx3G compileJava jar 2>&1 | tee "$GITHUB_WORKSPACE/forge-evidence/compile.txt"
-          sha256sum build/libs/*.jar > "$GITHUB_WORKSPACE/forge-evidence/jar.sha256"
+          JAR="$(find build/libs -maxdepth 1 -type f -name '*.jar' | sort | head -n 1)"
+          test -n "$JAR"
+          sha256sum "$JAR" > "$GITHUB_WORKSPACE/forge-evidence/jar.sha256"
+          unzip -p "$JAR" META-INF/MANIFEST.MF | tee "$GITHUB_WORKSPACE/forge-evidence/manifest.txt"
+          grep -F "MixinConfigs: five_difficulties_port.mixins.json" "$GITHUB_WORKSPACE/forge-evidence/manifest.txt"
+          unzip -l "$JAR" | tee "$GITHUB_WORKSPACE/forge-evidence/jar-contents.txt"
+          grep -F "five_difficulties_port.mixins.json" "$GITHUB_WORKSPACE/forge-evidence/jar-contents.txt"
+          grep -F "five_difficulties_port.refmap.json" "$GITHUB_WORKSPACE/forge-evidence/jar-contents.txt"
 
       - name: Retain bounded compile evidence
         if: always()
