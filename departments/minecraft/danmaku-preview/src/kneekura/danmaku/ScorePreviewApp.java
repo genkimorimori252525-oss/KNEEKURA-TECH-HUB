@@ -90,7 +90,7 @@ public final class ScorePreviewApp extends Application {
         stage.setTitle("KNEEKURA / 弾幕スコア"); stage.setScene(scene);
         stage.setMinWidth(1050); stage.setMinHeight(720);
         stage.iconifiedProperty().addListener((o, old, minimized) -> { if (minimized) setPlaying(false); });
-        syncScore(); redraw(); stage.show();
+        syncScore(); playerView(); redraw(); stage.show();
 
         new AnimationTimer() {
             @Override public void handle(long now) {
@@ -143,7 +143,7 @@ public final class ScorePreviewApp extends Application {
         grid.add(new Label("frame"),0,row); grid.add(frame,1,row++);
         grid.add(new Label("pattern"),0,row); grid.add(kind,1,row++);
         String[][] rows = {
-            {"startTick","開始 tick"},{"endTick","終了 tick"},{"forwardSpeed","前進速度"},
+            {"startTick","開始 tick"},{"endTick","終了 tick"},{"forwardSpeed","前進速度"},{"phaseDeg","位相 °"},
             {"hue","色相 0..360"},{"radius","弾表示半径"},{"bullets","弾数 / burst"},
             {"speed","画面面内速度"},{"intervalTicks","発射間隔 tick"},{"fanAngleDeg","扇角度"},
             {"rotationDegPerSecond","回転 °/秒"},{"elevationDeg","v1仰角"},{"lifetimeTicks","寿命 tick"}
@@ -227,7 +227,7 @@ public final class ScorePreviewApp extends Application {
         if (score.tracks().isEmpty()) return;
         var t=score.tracks().get(selectedTrack); var p=t.pattern();
         nameField.setText(t.name()); frame.setValue(t.frame()); kind.setValue(p.pattern());
-        set("startTick",t.startTick()); set("endTick",t.endTick()); set("forwardSpeed",t.forwardSpeed());
+        set("startTick",t.startTick()); set("endTick",t.endTick()); set("forwardSpeed",t.forwardSpeed()); set("phaseDeg",t.phaseDeg());
         set("hue",t.hue()); set("radius",t.radius()); set("bullets",p.bullets()); set("speed",p.speed());
         set("intervalTicks",p.intervalTicks()); set("fanAngleDeg",p.fanAngleDeg());
         set("rotationDegPerSecond",p.rotationDegPerSecond()); set("elevationDeg",p.elevationDeg());
@@ -237,14 +237,14 @@ public final class ScorePreviewApp extends Application {
     private void set(String key, Object value) { fields.get(key).setText(String.valueOf(value)); }
 
     private void applyFields() {
-        if (updating || fields.size()!=12 || score.tracks().isEmpty()) return;
+        if (updating || fields.size()!=13 || score.tracks().isEmpty()) return;
         try {
             int duration = Integer.parseInt(durationField.getText().strip());
             int start = integer("startTick"), end = integer("endTick");
             var pattern = new Pattern.Config(kind.getValue(), integer("bullets"), number("speed"), integer("intervalTicks"),
                 number("fanAngleDeg"), number("rotationDegPerSecond"), number("elevationDeg"), integer("lifetimeTicks"), end-start);
             var replacement = new Score.Track(nameField.getText().strip(), start, end, pattern, frame.getValue(),
-                number("forwardSpeed"), number("hue"), number("radius"));
+                number("forwardSpeed"), number("phaseDeg"), number("hue"), number("radius"));
             var tracks = new ArrayList<>(score.tracks()); tracks.set(selectedTrack, replacement);
             score = new Score.Config(duration, tracks); tick = Math.min(tick, score.durationTicks());
             inputsValid = true;
@@ -280,7 +280,7 @@ public final class ScorePreviewApp extends Application {
 
     private void playerView() {
         yaw.setAngle(180); pitch.setAngle(0); camera.setFieldOfView(70);
-        camera.setTranslateX(0); camera.setTranslateY(-2); camera.setTranslateZ(-24);
+        camera.setTranslateX(0); camera.setTranslateY(-2); camera.setTranslateZ(24);
         resetRigPan(); playerMarker.setVisible(false);
     }
     private void orbitView(double y,double p,double z) {
