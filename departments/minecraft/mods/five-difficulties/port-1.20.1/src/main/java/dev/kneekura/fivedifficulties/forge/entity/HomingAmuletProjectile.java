@@ -125,7 +125,7 @@ public final class HomingAmuletProjectile extends Projectile {
 
             HitResult hit = this.findX1Hit();
             if (hit != null && hit.getType() != HitResult.Type.MISS && !ForgeEventFactory.onProjectileImpact(this, hit)) {
-                this.onHit(hit);
+                this.applyX1Hit(hit);
             }
             if (this.isRemoved()) {
                 return;
@@ -138,6 +138,14 @@ public final class HomingAmuletProjectile extends Projectile {
 
         if (!this.level().isClientSide) {
             this.setLegacyAnimationCount(this.getLegacyAnimationCount() + 1);
+        }
+    }
+
+    private void applyX1Hit(HitResult hit) {
+        if (hit instanceof EntityHitResult entityHit) {
+            this.onHitEntity(entityHit);
+        } else if (hit instanceof BlockHitResult blockHit) {
+            this.onHitBlock(blockHit);
         }
     }
 
@@ -340,7 +348,8 @@ public final class HomingAmuletProjectile extends Projectile {
 
     @Override
     protected void onHitBlock(BlockHitResult result) {
-        super.onHitBlock(result);
+        // X1's default blockHitSpecialProcess returns false and deletes the shot.
+        // Do not call modern BlockState#onProjectileHit or emit a vanilla land event.
         if (!this.level().isClientSide) {
             this.discard();
         }
