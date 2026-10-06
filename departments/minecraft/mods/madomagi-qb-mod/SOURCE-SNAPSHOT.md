@@ -63,3 +63,21 @@ Code locator: QB archive SHA + MCP/puellamagi/mods/mod_QB.java:258-268.
 ## Acquisition / rights note
 
 Raw ZIPs, source trees, compiled classes and original art are not committed to KNEEKURA-TECH-HUB. Only hashes, inventories, behavioral maps and derived engineering findings are retained.
+
+## Per-member inventory fingerprint
+
+A local derived inventory enumerated every ZIP member with path, uncompressed/compressed size, CRC32, member SHA-256, ZIP flag bits and raw filename bytes.
+
+Full derived manifest:
+- size: 264497 bytes
+- SHA-256: `4b77975dcf27490fb8365262702c9e66772b2f7a087e044b1182a62bba4e2f89`
+- not committed; it contains fingerprints/metadata only, but the concise summary is sufficient for repository provenance.
+
+Per-archive `path + size + member SHA-256` manifest digests:
+- QB-MOD: `afc34f29565b3951cf6c1596593beaf6f05a1e49d2a66123d9b04dc06993a1b0`
+- Garnet-MOD: `b9a7f3e928b31b9052b60f7f367da00b9f3d4846e5705fc976b6d6734061d082`
+- TexturePack: `17becc8fee0e92d17066afbb9dcccce3e287b2b6b95f20ae26342c394f9ba91e`
+
+Repository record: `STATIC-INVENTORY-SUMMARY.json`.
+
+This pins the exact supplied archive contents more strongly than archive filename/version alone while still avoiding publication of original source/assets.
