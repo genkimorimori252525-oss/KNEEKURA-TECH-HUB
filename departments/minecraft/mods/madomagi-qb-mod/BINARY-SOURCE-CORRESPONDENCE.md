@@ -100,6 +100,103 @@ Binary reports `Compiled from "ItemGarnetGun.java"` and exposes the private/publ
 - bolt cycling
 - NBT tag checking
 
+## Critical method-body bytecode spot checks
+
+A later bounded pass used `javap -c -p` against selected distributed class files. This does not make the comparison exhaustive, but it verifies that several important source findings are present in the shipped executable bytecode rather than existing only in stale Java text.
+
+Selected class SHA-256 values:
+
+| Class | SHA-256 |
+| --- | --- |
+| `EntityMahoShojo.class` | `cfbf9ade7e616645d0f56377bff5881673562cadf357ec610b1b2a02c259754d` |
+| `EntityWalpurgisnacht.class` | `6a0ac3dd2f86b5788de73045f80bdeb4c430fc00c6c9587dffcc692357c25bb6` |
+| `EntityGriefSeed.class` | `c7a7f4bb045d2314825128f5da7a35dbb1214add5331ebbed57260acef85b866` |
+| `EntityMajo.class` | `48e46ca125b0eb066dfa3df7ebfba31e03d40f3638ba40d95e3c9c794ef9e4bb` |
+| `EntityHomulillyAIAttack.class` | `3319c205d91e30059442232bf5891f06469ee2011a55b88fda3c6f5fe1a9a85c` |
+| `EntityJB.class` | `58c03c20eb92106baa845b7e90d1f831802214064c8e093abdd93a7f034b878a` |
+| `PacketHandler.class` | `dbad89c3d0c9cc328a6082b3e98437a4e461f9d494c10d5c287a7cb41272c293` |
+
+The inspected legacy classes report class-file major version 50 (Java 6-era bytecode) and the expected `SourceFile` names.
+
+### Grief Seed species selector
+
+Distributed `EntityGriefSeed.chooseMajo` bytecode:
+- tests `isHomulilly` first and returns Nutcracker when true;
+- otherwise loads constant 5 and calls `Random.nextInt(5)`;
+- executes a `tableswitch 0..4`;
+- switch default constructs `EntityWalpurgisnacht`.
+
+Therefore the source-level observation is executable-binary-backed: the default Walpurgis constructor exists, but that specific random selector only yields 0..4.
+
+### Grief Seed incubation formula
+
+Distributed `setNewCountDown` bytecode computes:
+
+`500 + Random.nextInt(1000) - getSoulGemDamage() * 5`
+
+and writes it to DataWatcher 21.
+
+This confirms the source-derived relationship between Grief Seed state and incubation latency.
+
+### Homulilly attack selector and teleport loops
+
+Distributed `EntityHomulillyAIAttack.attackTNT` loads constant 1 and calls `Random.nextInt(1)`, then branches on whether the result is non-zero. Since Java `nextInt(1)` always returns 0, only the zero branch is reachable.
+
+The same class bytecode also contains two loops bounded at 64 attempts:
+- random teleport search;
+- line-of-sight recovery teleport-to-target search.
+
+### Walpurgis anti-air potion target
+
+Both distributed classes:
+- `EntityMajoAIWalpurgisnachtAttack`;
+- `EntityMajoAIWalpurgisnachtPlay`;
+
+load `theHost`, construct the potion effect and invoke `EntityWalpurgisnacht.addPotionEffect` on the host after the anti-air explosion path.
+
+Thus the suspicious self-poison behavior is present in shipped bytecode in both AI variants, not merely in the Java source.
+
+### Soul Gem setter semantics
+
+Distributed `EntityMahoShojo.setSoulGemDamage(int)`:
+1. calls `getSoulGemDamage()`;
+2. adds the incoming argument;
+3. writes the sum to DataWatcher 22.
+
+So the source method named like a setter is executable as an additive mutation.
+
+### GUI handler shared container
+
+Distributed `MadomagiGuiHandler` contains one private instance field `container`.
+- `injectContainerAndID` assigns it;
+- server `getServerGuiElement` returns the same stored field;
+- client GUI resolution independently looks up the entity by id.
+
+This verifies the shared mutable server-container design in bytecode.
+
+### Garnet gun packet boundary
+
+Distributed `garnet.mods.PacketHandler.onPacketData`:
+- validates Player is `EntityPlayerMP`;
+- validates held item is `ItemGarnetGun`;
+- loads `Packet250CustomPayload.data`;
+- immediately executes byte-array index 0 (`baload`);
+- passes that byte into `setDoFullAuto`.
+
+No payload-length branch appears before the index operation in this method.
+
+### JB inverse economy
+
+Distributed `EntityJB.chooseItem` computes `Random.nextInt(64 - itemDamage)` and tests the final reward threshold at 63.
+
+Therefore:
+- damage 0 → `nextInt(64)`, 63 is reachable and Diamond has 1/64 probability;
+- damage >=1 → the random upper bound is <=62, so the Diamond branch cannot be reached.
+
+This corrects any broader statement that the branch is wholly unreachable.
+
+These checks remain **selected semantic correspondence**, not full method-body equivalence across all 193 classes.
+
 ## Interpretation
 
 The supplied distributions show **strong source↔binary structural correspondence**:
