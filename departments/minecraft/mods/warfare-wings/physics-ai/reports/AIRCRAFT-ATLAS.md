@@ -1,65 +1,81 @@
-# Warfare Wings Aircraft Atlas — 24 Base Aircraft
+# Warfare Wings Aircraft Atlas — 24 Base Aircraft (v2)
 
 > Status: **SOURCE MICROKERNEL ONLY / SAME-ARTIFACT MINECRAFT CALIBRATION PENDING.**
-> No composite “best aircraft” score is calculated.
+> Same-input and equal-angle turn metrics are intentionally separate. No composite “best aircraft” score is calculated.
 
 ## Global extrema
 
-| Axis | Highest | Value | Lowest | Value | Evidence |
-|---|---|---:|---|---:|---|
-| Source-predicted speed | `warfare_wings:p47n` | 45.791246 | `warfare_wings:b17` | 20.202020 | `SOURCE_MICROKERNEL` |
-| Yaw response / 20t | `warfare_wings:il2` | 36.039128 | `warfare_wings:b17` | 10.811738 | `SOURCE_MICROKERNEL` |
-| Pitch response / 20t | `warfare_wings:a6m` | 31.534237 | `warfare_wings:b17` | 9.910760 | `SOURCE_MICROKERNEL` |
-| 20t identical-input speed retention | `warfare_wings:b17` | 0.998560 | `warfare_wings:a6m` | 0.976949 | `SOURCE_MICROKERNEL_IDENTICAL_INPUT` |
-| Durability | `warfare_wings:b29` | 6.50 | `warfare_wings:a6m` | 2.50 | `SOURCE_DIRECT` |
+| Axis | Best / highest-priority end | Value | Opposite end | Value | Rank direction | Evidence |
+|---|---|---:|---|---:|---|---|
+| Source-predicted speed | `warfare_wings:p47n` | 45.791246 | `warfare_wings:b17` | 20.202020 | `higher_value_first` | `SOURCE_MICROKERNEL` |
+| Yaw response / 20t | `warfare_wings:il2` | 36.039128 | `warfare_wings:b17` | 10.811738 | `higher_value_first` | `SOURCE_MICROKERNEL` |
+| Pitch response / 20t | `warfare_wings:a6m` | 31.534237 | `warfare_wings:b17` | 9.910760 | `higher_value_first` | `SOURCE_MICROKERNEL` |
+| 20t same-input speed retention | `warfare_wings:b17` | 0.998560 | `warfare_wings:a6m` | 0.976949 | `higher_value_first` | `SOURCE_MICROKERNEL_IDENTICAL_INPUT` |
+| Ticks to 90° yaw | `warfare_wings:il2` | 41 | `warfare_wings:b17` | 118 | `lower_value_first` | `SOURCE_MICROKERNEL_EQUAL_ANGLE` |
+| 90° equal-angle speed retention | `warfare_wings:b17` | 0.994638 | `warfare_wings:a6m` | 0.925567 | `higher_value_first` | `SOURCE_MICROKERNEL_EQUAL_ANGLE` |
+| Distance travelled to 90° yaw | `warfare_wings:il2` | 63.074088 | `warfare_wings:p47n` | 134.908910 | `lower_value_first` | `SOURCE_MICROKERNEL_EQUAL_ANGLE` |
+| Durability | `warfare_wings:b29` | 6.50 | `warfare_wings:a6m` | 2.50 | `higher_value_first` | `SOURCE_DIRECT` |
 
-## Top-five lookup
+## Why the two retention axes differ
 
-- **Source-predicted speed:** 1. `warfare_wings:p47n` (45.791246), 2. `warfare_wings:f4u` (44.893378), 3. `warfare_wings:fw190` (44.893378), 4. `warfare_wings:ki84` (44.893378), 5. `warfare_wings:p51d` (44.893378)
-- **Yaw response / 20t:** 1. `warfare_wings:il2` (36.039128), 2. `warfare_wings:a6m` (34.237171), 3. `warfare_wings:spitfire` (32.435215), 4. `warfare_wings:yak3` (30.633258), 5. `warfare_wings:ki84` (29.732280)
-- **Pitch response / 20t:** 1. `warfare_wings:a6m` (31.534237), 2. `warfare_wings:il2` (31.534237), 3. `warfare_wings:spitfire` (30.633258), 4. `warfare_wings:yak3` (29.732280), 5. `warfare_wings:ki84` (27.930324)
-- **20t identical-input speed retention:** 1. `warfare_wings:b17` (0.998560), 2. `warfare_wings:b29` (0.998420), 3. `warfare_wings:g10n1` (0.996385), 4. `warfare_wings:g10n2` (0.996385), 5. `warfare_wings:ju87` (0.995772)
-- **Durability:** 1. `warfare_wings:b29` (6.500000), 2. `warfare_wings:b17` (6.000000), 3. `warfare_wings:g10n1` (5.500000), 4. `warfare_wings:g10n2` (5.500000), 5. `warfare_wings:il2` (5.000000)
+- `same_input_retention`: speed retained after every aircraft receives the same full-yaw input for 20 ticks.
+- `equal_angle_retention`: speed retained when each aircraft has actually changed yaw by 90°.
+- A slow-turning aircraft can score high on both retention metrics, but `turn_90_ticks` and `distance_90` expose the time/space cost of achieving that turn.
+
+### Representative equal-angle results
+
+| Aircraft | 90° ticks | 90° retention | Distance to 90° | 20t yaw |
+|---|---:|---:|---:|---:|
+| `warfare_wings:il2` | 41 | 0.951955 | 63.074 | 36.039° |
+| `warfare_wings:a6m` | 42 | 0.925567 | 68.547 | 34.237° |
+| `warfare_wings:spitfire` | 44 | 0.935021 | 91.231 | 32.435° |
+| `warfare_wings:yak3` | 46 | 0.939018 | 96.495 | 30.633° |
+| `warfare_wings:ki84` | 48 | 0.941936 | 104.950 | 29.732° |
+| `warfare_wings:p47n` | 60 | 0.964626 | 134.909 | 22.524° |
+| `warfare_wings:b17` | 118 | 0.994638 | 118.738 | 10.812° |
 
 ## Doctrine contrasts
 
 These are within-label ranges, not claims that the doctrine label itself caused the difference.
 
-| Doctrine | N | Speed range | Yaw range | Retention range | Durability range |
+| Doctrine | N | 90° turn time | Equal-angle retention | Speed | Durability |
 |---|---:|---|---|---|---|
-| `turn_fighter` | 3 | `warfare_wings:a6m` 33.670 → `warfare_wings:yak3` 43.098 | `warfare_wings:yak3` 30.633 → `warfare_wings:a6m` 34.237 | `warfare_wings:a6m` 0.976949 → `warfare_wings:yak3` 0.982125 | `warfare_wings:a6m` 2.50 → `warfare_wings:spitfire` 3.00 |
-| `energy_fighter` | 11 | `warfare_wings:p40e` 38.159 → `warfare_wings:p47n` 45.791 | `warfare_wings:p47n` 22.524 → `warfare_wings:ki84` 29.732 | `warfare_wings:ki84` 0.983363 → `warfare_wings:p47n` 0.990869 | `warfare_wings:mig3` 3.00 → `warfare_wings:p47n` 5.00 |
-| `attacker` | 4 | `warfare_wings:ju87` 22.447 → `warfare_wings:d4y` 38.159 | `warfare_wings:ju87` 16.218 → `warfare_wings:il2` 36.039 | `warfare_wings:il2` 0.981860 → `warfare_wings:ju87` 0.995772 | `warfare_wings:d4y` 3.30 → `warfare_wings:il2` 5.00 |
-| `escort` | 6 | `warfare_wings:b17` 20.202 → `warfare_wings:g4m` 29.181 | `warfare_wings:b17` 10.812 → `warfare_wings:g4m` 26.128 | `warfare_wings:g4m` 0.990100 → `warfare_wings:b17` 0.998560 | `warfare_wings:he111` 4.00 → `warfare_wings:b29` 6.50 |
+| `turn_fighter` | 3 | `warfare_wings:a6m` 42 ↔ `warfare_wings:yak3` 46 | `warfare_wings:yak3` 0.939018 ↔ `warfare_wings:a6m` 0.925567 | `warfare_wings:yak3` 43.097643 ↔ `warfare_wings:a6m` 33.670034 | `warfare_wings:spitfire` 3.00 ↔ `warfare_wings:a6m` 2.50 |
+| `energy_fighter` | 11 | `warfare_wings:ki84` 48 ↔ `warfare_wings:p47n` 60 | `warfare_wings:p47n` 0.964626 ↔ `warfare_wings:bf109` 0.941875 | `warfare_wings:p47n` 45.791246 ↔ `warfare_wings:p40e` 38.159371 | `warfare_wings:p47n` 5.00 ↔ `warfare_wings:mig3` 3.00 |
+| `attacker` | 4 | `warfare_wings:il2` 41 ↔ `warfare_wings:ju87` 81 | `warfare_wings:ju87` 0.983141 ↔ `warfare_wings:il2` 0.951955 | `warfare_wings:d4y` 38.159371 ↔ `warfare_wings:ju87` 22.446689 | `warfare_wings:il2` 5.00 ↔ `warfare_wings:d4y` 3.30 |
+| `escort` | 6 | `warfare_wings:g4m` 53 ↔ `warfare_wings:b17` 118 | `warfare_wings:b17` 0.994638 ↔ `warfare_wings:g4m` 0.968120 | `warfare_wings:g4m` 29.180696 ↔ `warfare_wings:b17` 20.202020 | `warfare_wings:b29` 6.50 ↔ `warfare_wings:he111` 4.00 |
 
 ## High-value contrasts for AI design
 
-- **P-47N:** globally fastest source tendency (45.791 b/s), but lowest yaw and pitch response inside `energy_fighter`; it also has that doctrine's highest identical-input retention. This supports a larger extension/re-entry envelope rather than copying a tighter energy-fighter policy.
-- **Ki-84:** tied near the top of source speed (44.893 b/s) while leading `energy_fighter` yaw/pitch response; its 20-tick identical-input retention is the lowest in that doctrine. A single P-47-style policy would erase this difference.
-- **A6M / Spitfire / Yak-3:** all are `turn_fighter`, but A6M has the highest yaw/pitch response and much lower source speed, while Yak-3 has the highest source speed of the three. The label is not a full flight profile.
-- **IL-2:** has the highest yaw response of all 24 aircraft despite being an attacker. Historical role stereotypes must not override runtime control values.
-- **Ju 87 vs IL-2:** both are `attacker`, yet Ju 87 is the slowest/lowest-yaw attacker while IL-2 is the highest-yaw/highest-durability attacker. Mission-specific attack logic needs aircraft parameters, not only the shared doctrine string.
-- **G4M:** is the fastest and highest-yaw member of the `escort` group. Its retention is the only within-doctrine 1.5×IQR statistical flag in the five Atlas axes; this is an inspection hint, not a physics anomaly.
-- **G10N1 vs G10N2:** they have identical source-microkernel Atlas features even though raw mass differs (22 vs 17). In this wind-off baseline that is expected: mass is not ordinary yaw/pitch inertia in the inspected IA 1.3.3 path.
-- **B-17/B-29:** very high 20-tick retention accompanies very low achieved yaw/pitch. That metric is therefore not “turning efficiency”; it is speed retained under the same control input and must later be complemented by an equal-angle turn test.
+- **A6M:** 90° in 42 ticks, fastest of the three `turn_fighter` aircraft, but it also has the lowest equal-angle retention of all 24 (0.925567). Its advantage is rapid nose change, not low-cost turning.
+- **Spitfire / Yak-3:** 44 / 46 ticks to 90° with 0.935021 / 0.939018 retention. They trade a little nose speed for less speed loss than A6M.
+- **P-47N:** 60 ticks to 90° and 0.964626 retention while remaining the fastest source-speed aircraft. Inside `energy_fighter` it is slowest to rotate to 90° but best at equal-angle speed retention.
+- **Ki-84:** 48 ticks to 90° versus P-47N's 60, but 0.941936 retention. This quantitatively separates a tighter energy fighter from a more extension-oriented one.
+- **IL-2:** fastest 90° yaw result across all 24 at 41 ticks, reinforcing that attacker role does not imply low nose authority.
+- **Ju 87:** 81 ticks to 90° with 0.983141 retention. Compared with IL-2, the same attacker label spans a very different control/time envelope.
+- **B-17:** takes 118 ticks to reach 90° but still retains 0.994638 speed. Equal-angle normalization confirms low speed loss, while turn time shows the major tactical cost.
+- **G4M:** reaches 90° in 53 ticks, far faster than B-17/B-29/G10N/He111 members of the `escort` group, so that label is not a single maneuver profile.
+- **G10N1 vs G10N2:** remain identical in this wind-off Atlas despite mass 22 vs 17, consistent with mass not acting as ordinary yaw/pitch inertia in the inspected IA 1.3.3 path.
 
 ## Statistical inspection flags
 
-Global 1.5×IQR flag count across the five Atlas axes: **0**.
+Global 1.5×IQR flag count across the eight Atlas axes: **2**.
 
 Within-doctrine flags (groups with at least 4 aircraft):
-- `escort` / `retention`: `warfare_wings:g4m` = 0.990100052 (`STATISTICAL_IQR_FLAG`).
+- `energy_fighter` / `distance_90`: `warfare_wings:p47n` = 134.908910197 (`STATISTICAL_IQR_FLAG`).
+- `escort` / `same_input_retention`: `warfare_wings:g4m` = 0.990100052 (`STATISTICAL_IQR_FLAG`).
+- `escort` / `equal_angle_retention`: `warfare_wings:g4m` = 0.968119706 (`STATISTICAL_IQR_FLAG`).
 
 The 3-aircraft `turn_fighter` group is not IQR-tested because the sample is too small.
 
 ## Query flags
 
-Query flags use global top/bottom quartile membership (6 of 24 aircraft per quartile). They are routing hints, not rankings of overall combat strength.
+Query flags use global top/bottom quartile membership (6 of 24 aircraft per quartile). They are routing hints, not overall combat rankings.
 
-- `HIGH_YAW_LOW_RETENTION`: top-quartile yaw response + bottom-quartile identical-input retention.
-- `HIGH_RETENTION_LOW_YAW`: top-quartile identical-input retention + bottom-quartile yaw response.
-- `HIGH_SPEED_LOW_YAW` / `LOW_SPEED_HIGH_YAW`: reserved for the corresponding speed/yaw quartile contrasts; none are present in this Atlas revision.
+- `HIGH_YAW_LOW_SAME_INPUT_RETENTION` / `HIGH_SAME_INPUT_RETENTION_LOW_YAW`: old fixed-duration contrast.
+- `FAST_90_LOW_EQUAL_ANGLE_RETENTION`: fast 90° completion paired with bottom-quartile equal-angle retention.
+- `SLOW_90_HIGH_EQUAL_ANGLE_RETENTION`: slow 90° completion paired with top-quartile equal-angle retention.
 
 ## Interpretation boundary
 
-The Atlas is deliberately source-faithful and explainable, but it is **not yet measured same-artifact performance**. The first real-runtime calibration remains A6M `a6m-throttle-step-v1`. Once that trace arrives, the same calibration method will determine which Atlas axes can be promoted from `SOURCE_MICROKERNEL` toward `MEASURED` for the supplied Warfare Wings artifact.
+The equal-angle metrics repair an important comparison problem, but they are still source-microkernel results. Same-artifact Minecraft trace calibration remains the promotion gate before any axis is labeled `MEASURED`.
