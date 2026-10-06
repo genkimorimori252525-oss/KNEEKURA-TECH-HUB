@@ -9,9 +9,9 @@ import java.util.Set;
 /** Strict Score JSON v2 codec. Keeps Pattern JSON v1 untouched. */
 public final class ScoreJson {
     private static final Set<String> ROOT_KEYS = Set.of("schemaVersion", "tickRate", "durationTicks", "tracks");
-    private static final Set<String> TRACK_KEYS = Set.of("name", "startTick", "endTick", "hue", "radius",
-        "pattern", "bullets", "speed", "intervalTicks", "fanAngleDeg", "rotationDegPerSecond",
-        "elevationDeg", "lifetimeTicks");
+    private static final Set<String> TRACK_KEYS = Set.of("name", "startTick", "endTick", "frame", "forwardSpeed",
+        "hue", "radius", "pattern", "bullets", "speed", "intervalTicks", "fanAngleDeg",
+        "rotationDegPerSecond", "elevationDeg", "lifetimeTicks");
 
     public static String write(Score.Config score) {
         StringBuilder b = new StringBuilder();
@@ -24,6 +24,8 @@ public final class ScoreJson {
              .append("      \"name\": \"").append(t.name()).append("\",\n")
              .append("      \"startTick\": ").append(t.startTick()).append(",\n")
              .append("      \"endTick\": ").append(t.endTick()).append(",\n")
+             .append("      \"frame\": \"").append(t.frame()).append("\",\n")
+             .append("      \"forwardSpeed\": ").append(Double.toString(t.forwardSpeed())).append(",\n")
              .append("      \"hue\": ").append(Double.toString(t.hue())).append(",\n")
              .append("      \"radius\": ").append(Double.toString(t.radius())).append(",\n")
              .append("      \"pattern\": \"").append(p.pattern()).append("\",\n")
@@ -57,7 +59,10 @@ public final class ScoreJson {
             exactKeys(t, TRACK_KEYS, "track");
             String name = string(t, "name");
             int start = integer(t, "startTick"), end = integer(t, "endTick");
-            double hue = number(t, "hue"), radius = number(t, "radius");
+            Score.Frame frame;
+            try { frame = Score.Frame.valueOf(string(t, "frame")); }
+            catch (IllegalArgumentException ex) { throw new IllegalArgumentException("unknown frame", ex); }
+            double forwardSpeed = number(t, "forwardSpeed"), hue = number(t, "hue"), radius = number(t, "radius");
             Pattern.Kind kind;
             try { kind = Pattern.Kind.valueOf(string(t, "pattern")); }
             catch (IllegalArgumentException ex) { throw new IllegalArgumentException("unknown pattern", ex); }
@@ -66,7 +71,7 @@ public final class ScoreJson {
                 rotation = number(t, "rotationDegPerSecond"), elevation = number(t, "elevationDeg");
             tracks.add(new Score.Track(name, start, end,
                 new Pattern.Config(kind, bullets, speed, interval, fan, rotation, elevation, lifetime, end - start),
-                hue, radius));
+                frame, forwardSpeed, hue, radius));
         }
         return new Score.Config(duration, tracks);
     }
