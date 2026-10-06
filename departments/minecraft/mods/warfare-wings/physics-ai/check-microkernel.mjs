@@ -78,7 +78,14 @@ try {
   run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.AircraftAtlasMain', dataset, atlasA]);
   run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.AircraftAtlasMain', dataset, atlasB]);
   await same(atlasA, atlasB);
-  await same(atlasA, path.join(here, 'reports/base-aircraft-source-atlas.csv'));
+  try {
+    await same(atlasA, path.join(here, 'reports/base-aircraft-source-atlas.csv'));
+  } catch (error) {
+    process.stderr.write('GENERATED_ATLAS_BEGIN\n');
+    process.stderr.write(await readFile(atlasA, 'utf8'));
+    process.stderr.write('GENERATED_ATLAS_END\n');
+    throw error;
+  }
   const atlasLines = (await readFile(atlasA, 'utf8')).trimEnd().split(/\r?\n/);
   if (atlasLines.length !== 25) throw new Error(`Expected Atlas header + 24 rows, got ${atlasLines.length}`);
   process.stdout.write('Warfare Wings Physics AI microkernel + 24-aircraft Atlas checks passed; real Minecraft parity NOT_RUN\n');
