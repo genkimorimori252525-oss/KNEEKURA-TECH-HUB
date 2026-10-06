@@ -33,6 +33,14 @@ Community material is reconnaissance only. Implementation claims are tied back t
 | Shared GUI container | MadomagiGuiHandler.java; EntityMahoShojo.java:701-748 | Legacy handler stores mutable shared container; redesign per-player/per-entity on ANCHOR. | EVIDENCE_BACKED |
 | Gun full-auto sync | Garnet mod_Garnet.java, PacketHandler.java, ItemGarnetGun.java | Legacy custom payload controls gun state; modern Forge networking rewrite required. | MAPPED |
 | Alternate texture pack | TexturePack archive SHA + assets/puellamagi/textures/mobs/ | 20 character/form PNGs; presentation evidence only. | INVENTORIED |
+| Homura Bow tracking-arrow behavior | 1.6.4.080 community guide + ItemHomuraBow.java + EntityLightArrow2.java | 8-arrow volley delegates delayed expanding-search homing and age-based damage to projectile. | EVIDENCE_BACKED |
+| Madoka UF tracking-arrow rain | 1.6.4.080 guide + EntityMadokaAIUltimate.java + EntityLightArrow3.java | 1.6.4.082 launches arrows upward, then projectile acquires/homes; source confirms behavior class but exact implementation differs by version. | EVIDENCE_BACKED |
+| Homura UF behavior changed across legacy revisions | 1.6.4.080 community guide vs supplied 1.6.4.082 EntityHomuraAIUltimate.java | 080 reports flying + spread homing arrows; 082 source instead uses direct melee/percentage-health/execution escalation. Preserve as version conflict, never merge. | EVIDENCE_BACKED |
+| Kyouko thrown spear multiplies on impact | 1.6.4.080 guide + ItemKyoukoSpear.java + EntitySpear2.java | One carrier spear fans into six child Spears on entity or terrain impact. | EVIDENCE_BACKED |
+| Mami/Sayaka staged weapon props | EntityMami.java + EntitySayaka.java + EntityMusket/EntityCutlass | Visible world weapon entities are later consumed into attacks; presentation object doubles as attack stock. | EVIDENCE_BACKED |
+| Soul Gem proximity sensor | ItemSoulGem.java | Held gem scans nearby witches/Grief Seeds and changes NBT-driven glint/rarity. | EVIDENCE_BACKED |
+| Homulilly Nutcracker incubation ritual | ItemGrifSeed.java + EntityGriefSeed.java | Dropped Grief Seed in still water enclosed by glass becomes a special incubating seed that hatches Nutcracker. | EVIDENCE_BACKED |
+| Grief Seed witch selection default | EntityGriefSeed.chooseMajo | nextInt(5) makes switch default/Walpurgis branch unreachable in this method. | EVIDENCE_BACKED |
 
 ## Community reconnaissance checked
 
@@ -40,5 +48,7 @@ Community material is reconnaissance only. Implementation claims are tied back t
 - Creator introduction: https://www.nicovideo.jp/watch/sm19563098 — mirrored metadata identifies the uploader as the MOD creator and points to the distribution topic.
 - Bahamut 1.6.4 guide/update: https://forum.gamer.com.tw/Co.php?bsn=18673&sn=404365 — documents prerequisites, controls and the 11/4 UF inventory changes; source was used to verify implementation.
 - Contemporary gameplay indexes provide hypotheses about Grief Seed rarity, Walpurgis and Homulilly spacing. They do not override source.
+- The 1.6.4 Bahamut guide is especially useful because it names attack styles and player-item behavior that can be mapped to literal source symbols, but it documents the 1.6.4.080-era release and therefore must not be silently promoted to 1.6.4.082 behavior.
+- Mirrored metadata for the creator introduction and subsequent gameplay series also warns that some videos used trial builds different from the public distribution. Video-observed mechanics therefore remain track/version-uncertain until source-matched.
 
 Retrieved: 2026-10-07.
