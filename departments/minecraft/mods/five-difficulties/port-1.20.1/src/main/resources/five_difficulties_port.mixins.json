@@ -5,7 +5,8 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "five_difficulties_port.refmap.json",
   "mixins": [
-    "ServerLevelTimeMixin"
+    "ServerLevelTimeMixin",
+    "ServerGamePacketListenerTimeMixin"
   ],
   "client": [
     "ClientLevelTimeMixin"
