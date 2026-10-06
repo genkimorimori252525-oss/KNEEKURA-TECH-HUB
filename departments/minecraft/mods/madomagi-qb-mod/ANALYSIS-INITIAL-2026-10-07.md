@@ -195,22 +195,30 @@ No performance PASS is claimed from static source.
 | Facet | Status |
 | --- | --- |
 | legacy snapshot/hashes | EVIDENCE_BACKED |
+| per-member archive inventory | EVIDENCE_BACKED — compact summary + full derived manifest SHA-256 |
 | full source-tree acquisition | EVIDENCE_BACKED |
 | source↔compiled-class correspondence | MAPPED — exhaustive path/SourceFile-name match + sampled javap; full semantic equivalence not claimed |
 | bootstrap/registries/config | EVIDENCE_BACKED |
-| ownership/modes/persistence | EVIDENCE_BACKED |
+| Garnet ownership/modes/shared AI | EVIDENCE_BACKED |
 | magical-girl form/corruption machine | EVIDENCE_BACKED |
-| character attack catalog | MAPPED |
-| boss/witch catalog | MAPPED |
-| Walpurgis encounter | EVIDENCE_BACKED |
-| rendering/models/textures | MAPPED |
-| GUI/networking | MAPPED |
-| recipes/items/blocks | INVENTORIED |
-| custom dimensions/structures | NOT_APPLICABLE in initial tree pass |
-| mixins/coremods/transformers | NOT_APPLICABLE in initial tree pass |
-| performance | NOT_ANALYZED |
+| character attack catalog | EVIDENCE_BACKED static source |
+| projectile/trajectory catalog | EVIDENCE_BACKED static source |
+| boss/witch catalog | EVIDENCE_BACKED static source |
+| witch/familiar ecology | EVIDENCE_BACKED static source |
+| Walpurgis encounter | EVIDENCE_BACKED static source |
+| progression/economy/loot | EVIDENCE_BACKED static source |
+| items/rituals/recipes/blocks | EVIDENCE_BACKED static source |
+| rendering/assets/presentation | MAPPED / major behavior EVIDENCE_BACKED; no runtime visual verification |
+| GUI/networking/persistence | EVIDENCE_BACKED static boundaries; runtime concurrency not tested |
+| dependency/integration boundaries | EVIDENCE_BACKED static source/binary, including Garnet→QB reverse reference |
+| custom dimensions/biomes/structures | NOT_APPLICABLE in supplied full Java tree |
+| mixins/coremods/transformers | NOT_APPLICABLE in supplied tree/archive scan |
+| static performance/safety risk map | MAPPED — no benchmark PASS |
+| measured performance | NOT_ANALYZED |
 | failure/repair history | NOT_ANALYZED / historical VCS unavailable |
-| 1.20.1 ANCHOR reconstruction | NOT_ANALYZED |
+| community behavioral reconnaissance | MAPPED; version conflicts preserved |
+| 1.20.1 ANCHOR portability design | MAPPED |
+| 1.20.1 ANCHOR implementation/runtime | NOT_ANALYZED |
 
 ## 11. Highest-value TECH-HUB techniques
 
@@ -235,3 +243,26 @@ Keep these independent instead of collapsing them into one template:
 - budgeted world-topology preparation for giant-form transformation.
 
 This decomposition avoids making future KNEEKURA entities into reskins of one imported MOD architecture.
+
+## 12. Deep-dive continuation
+
+The initial pass was extended into dedicated catalogs for:
+- all implemented magical-girl combat sets;
+- projectile and trajectory primitives;
+- witches/bosses and familiars;
+- Garnet shared AI/framework boundaries;
+- progression/economy/loot;
+- player weapons and hidden rituals;
+- networking/persistence/save-load boundaries;
+- rendering/assets;
+- static performance and griefing risks;
+- Minecraft 1.20.1 Forge portability.
+
+Current scope statement: **STATIC WHOLE-TREE MAPPED, NOT COMPLETE**.
+
+The remaining evidence gaps are no longer primarily class-reading gaps. They are:
+1. original 1.6.4 runtime/save-load verification;
+2. measured performance;
+3. historical Issue/repair provenance;
+4. FRONTIER/later-version discovery;
+5. ANCHOR implementation and LAB verification.
