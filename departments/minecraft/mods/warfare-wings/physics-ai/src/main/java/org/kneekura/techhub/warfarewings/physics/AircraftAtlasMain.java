@@ -34,6 +34,7 @@ public final class AircraftAtlasMain {
             double predictedTopSpeedBps, int timeTo90SpeedTicks,
             double yawChange20TicksDeg, double pitchChange20TicksDeg,
             double turnExitSpeedRetention,
+            int ticksTo90Yaw, double equalAngle90SpeedRetention, double distanceTo90YawBlocks,
             double engineSpeed, double yawSpeed, double pitchSpeed,
             double lift, double glideFactor, double durability, double mass,
             double rawDriftDrag, double runtimeFriction,
@@ -144,16 +145,45 @@ public final class AircraftAtlasMain {
         State pitchStart = warmStraight(model, 600);
         State pitchEnd = run(pitchStart, model, new Control(0,0,1,1), 20);
 
+        EqualAngleTurn equalAngle = equalAngle90(model);
+
         return new Metrics(
                 entry.aircraftId(), entry.baseId(), entry.role(), entry.faction(), entry.doctrine(),
                 predictedTop, time90,
                 Math.abs(yawEnd.yawDeg() - yawStart.yawDeg()),
                 Math.abs(pitchEnd.pitchDeg() - pitchStart.pitchDeg()),
                 yawExit / yawInitial,
+                equalAngle.ticks(), equalAngle.speedRetention(), equalAngle.distanceBlocks(),
                 model.engineSpeed(), model.yawSpeed(), model.pitchSpeed(),
                 model.lift(), model.glideFactor(), model.durability(), model.mass(),
                 model.rawDriftDrag(), model.friction(),
                 "SOURCE_MICROKERNEL+" + entry.evidence());
+    }
+
+    private record EqualAngleTurn(int ticks, double speedRetention, double distanceBlocks) {}
+
+    private static EqualAngleTurn equalAngle90(Model model) {
+        State start = warmStraight(model, 600);
+        State current = start;
+        double initialSpeed = start.velocity().length() * TICKS_PER_SECOND;
+        double distance = 0.0;
+        Vec3 previous = start.position();
+
+        for (int ticks = 1; ticks <= 400; ticks++) {
+            current = tick(model, current, new Control(1,0,0,1), FLAT);
+            Vec3 now = current.position();
+            double dx = now.x() - previous.x();
+            double dy = now.y() - previous.y();
+            double dz = now.z() - previous.z();
+            distance += Math.sqrt(dx*dx + dy*dy + dz*dz);
+            previous = now;
+
+            if (Math.abs(current.yawDeg() - start.yawDeg()) >= 90.0) {
+                double exitSpeed = current.velocity().length() * TICKS_PER_SECOND;
+                return new EqualAngleTurn(ticks, exitSpeed / initialSpeed, distance);
+            }
+        }
+        throw new IllegalStateException("Aircraft did not reach 90-degree yaw within 400 ticks: " + model.id());
     }
 
     private static State initialStraight() {
@@ -182,6 +212,7 @@ public final class AircraftAtlasMain {
         return "schema_version,aircraft_id,base_id,role,faction,doctrine," +
                 "source_predicted_top_speed_bps,time_to_90_speed_ticks," +
                 "yaw_change_20t_deg,pitch_change_20t_deg,turn_exit_speed_retention," +
+                "ticks_to_90_yaw,equal_angle_90_speed_retention,distance_to_90_yaw_blocks," +
                 "engine_speed,yaw_speed,pitch_speed,lift,glide_factor,durability,mass," +
                 "raw_drift_drag,runtime_friction,evidence";
     }
@@ -191,6 +222,7 @@ public final class AircraftAtlasMain {
                 SCHEMA, r.aircraftId(), r.baseId(), r.role(), r.faction(), r.doctrine(),
                 d(r.predictedTopSpeedBps()), Integer.toString(r.timeTo90SpeedTicks()),
                 d(r.yawChange20TicksDeg()), d(r.pitchChange20TicksDeg()), d(r.turnExitSpeedRetention()),
+                Integer.toString(r.ticksTo90Yaw()), d(r.equalAngle90SpeedRetention()), d(r.distanceTo90YawBlocks()),
                 d(r.engineSpeed()), d(r.yawSpeed()), d(r.pitchSpeed()), d(r.lift()), d(r.glideFactor()),
                 d(r.durability()), d(r.mass()), d(r.rawDriftDrag()), d(r.runtimeFriction()), r.evidence());
     }
