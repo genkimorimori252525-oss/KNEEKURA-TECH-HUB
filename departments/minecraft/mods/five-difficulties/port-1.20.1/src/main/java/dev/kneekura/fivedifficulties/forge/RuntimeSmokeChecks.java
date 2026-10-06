@@ -79,7 +79,7 @@ public final class RuntimeSmokeChecks {
                 event.getServer().isDedicatedServer()
         );
 
-        if (Boolean.getBoolean("five_difficulties_port.runtimeSmokeExit")) {
+        if ("1".equals(System.getenv("FIVE_DIFFICULTIES_RUNTIME_SMOKE_EXIT"))) {
             event.getServer().halt(false);
         }
     }
