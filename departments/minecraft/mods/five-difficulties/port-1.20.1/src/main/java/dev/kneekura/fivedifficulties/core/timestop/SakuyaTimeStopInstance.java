@@ -58,4 +58,16 @@ public record SakuyaTimeStopInstance(
         long remaining = ((long) startedAtTick + durationTicks) - tick;
         return (int) Math.max(0L, Math.min(Integer.MAX_VALUE, remaining));
     }
+
+    public int elapsedTicks(int tick) {
+        return Math.max(0, tick - startedAtTick);
+    }
+
+    /** Modern half-speed scheduler phase chosen to match X1 count=0 first processing phase. */
+    public boolean shouldCancelEntityTickForMode(int tick) {
+        return switch (mode) {
+            case FULL_STOP -> true;
+            case HALF_SPEED -> (elapsedTicks(tick) & 1) == 0;
+        };
+    }
 }
