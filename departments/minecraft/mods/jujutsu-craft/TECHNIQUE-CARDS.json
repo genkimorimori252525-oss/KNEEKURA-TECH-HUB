@@ -1,0 +1,72 @@
+{
+  "format": "kneekura.minecraft.technique-cards.v1",
+  "target": "jujutsu-craft",
+  "cards": [
+    {
+      "id": "JJC-T01",
+      "name": "Persistent field actor",
+      "mechanism": "Represent long-lived spatial techniques such as Blue/Red/Purple as world actors owning lifecycle, area effects and animation.",
+      "copyability": "concept-only; ARR license boundary"
+    },
+    {
+      "id": "JJC-T02",
+      "name": "Central defense/counter predicate",
+      "mechanism": "Infinity bypasses converge through AntiInfinityProcedure instead of being duplicated across attacks.",
+      "copyability": "high conceptual"
+    },
+    {
+      "id": "JJC-T03",
+      "name": "Shared domain state machine",
+      "mechanism": "Common barrier/lifecycle/battle state with character-specific domain payload.",
+      "copyability": "high conceptual"
+    },
+    {
+      "id": "JJC-T04",
+      "name": "Per-source adaptation ledger",
+      "mechanism": "Persist adaptation progress keyed by incoming damage identity and use progress to change damage semantics.",
+      "copyability": "high conceptual"
+    },
+    {
+      "id": "JJC-T05",
+      "name": "Generic attack resolver escalation",
+      "mechanism": "Common RangeAttack pipeline can probabilistically escalate a valid hit into Black Flash according to combat state.",
+      "copyability": "high conceptual"
+    },
+    {
+      "id": "JJC-T06",
+      "name": "Capability-backed combat state",
+      "mechanism": "Synchronized player capability stores curse energy, technique selection, progression and combat flags.",
+      "copyability": "medium"
+    },
+    {
+      "id": "JJC-T07",
+      "name": "Tag-driven combat eligibility",
+      "mechanism": "Entity tags define access to RCT/domain counters/technique capabilities.",
+      "copyability": "high conceptual"
+    },
+    {
+      "id": "JJC-T08",
+      "name": "Explicit anti-domain verbs",
+      "mechanism": "Simple Domain, Domain Amplification and Hollow Wicker Basket remain semantically distinct counters.",
+      "copyability": "high conceptual"
+    },
+    {
+      "id": "JJC-T09",
+      "name": "Dual animation transport",
+      "mechanism": "PlayerAnimator networked player animations and GeckoLib entity animations are separate execution paths.",
+      "copyability": "medium"
+    },
+    {
+      "id": "JJC-T10",
+      "name": "Procedure-graph-first analysis",
+      "mechanism": "Generated projects require shared-helper/call-graph mapping before class-name interpretation.",
+      "copyability": "analysis method"
+    },
+    {
+      "id": "JJC-T11",
+      "name": "Parameterized world destruction",
+      "mechanism": "Area techniques carry Range/Knockback/BlockRange/BlockDamage/ExtinctionBlock as explicit effect state.",
+      "copyability": "high conceptual"
+    }
+  ]
+}
