@@ -44,10 +44,17 @@ jobs:
           print('AI Atlas JSON semantic equality passed')
           PY
           python - "$RUNNER_TEMP/ww-atlas/AIRCRAFT-ATLAS.md" "$ROOT/reports/AIRCRAFT-ATLAS.md" <<'PY'
-          import sys
+          import difflib, sys
           def norm(path):
               return open(path, encoding='utf-8').read().replace('\r\n','\n').rstrip() + '\n'
-          if norm(sys.argv[1]) != norm(sys.argv[2]):
+          generated, golden = norm(sys.argv[1]), norm(sys.argv[2])
+          if generated != golden:
+              diff = ''.join(difflib.unified_diff(
+                  golden.splitlines(True), generated.splitlines(True),
+                  fromfile='committed/AIRCRAFT-ATLAS.md',
+                  tofile='generated/AIRCRAFT-ATLAS.md',
+                  n=3))
+              print(diff[:24000])
               raise SystemExit('Aircraft Atlas Markdown drift')
           print('Aircraft Atlas Markdown normalized equality passed')
           PY
