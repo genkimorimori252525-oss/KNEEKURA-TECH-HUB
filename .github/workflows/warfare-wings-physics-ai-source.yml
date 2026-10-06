@@ -1,0 +1,29 @@
+name: Warfare Wings Physics AI Source
+
+on:
+  push:
+    branches:
+      - jolly/research-warfare-wings-2026-10-07
+    paths:
+      - 'departments/minecraft/mods/warfare-wings/physics-ai/**'
+      - '.github/workflows/warfare-wings-physics-ai-source.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pure-java:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: jolly/research-warfare-wings-2026-10-07
+          fetch-depth: 1
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Verify microkernel and deterministic traces
+        run: node departments/minecraft/mods/warfare-wings/physics-ai/check-microkernel.mjs --java-home "$JAVA_HOME"
