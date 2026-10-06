@@ -197,6 +197,57 @@ This corrects any broader statement that the branch is wholly unreachable.
 
 These checks remain **selected semantic correspondence**, not full method-body equivalence across all 193 classes.
 
+## Additional projectile method-body correspondence
+
+A second selected bytecode pass checked the projectile substrate that makes QB-MOD's dense volleys mechanically meaningful.
+
+Selected distributed class hashes:
+
+| Class | SHA-256 |
+| --- | --- |
+| `EntityGarnetArrow.class` | `9fca45578309ca3fc00b138fec13083c34dee1c221cad3feb8bc4edc2b3ae5c1` |
+| `EntityGarnetThrowable.class` | `6fe031d9b2c5a019b9ad2ebdb40462aea5deb49914c4ae39c22cec469c51ab63` |
+| `EntityMami.class` | `0f1920adf86b1bb43dad4cb8680772eddefa0b69e0c582bef644b48eea1d8435` |
+| `EntityHomulillyNutcracker.class` | `88aadde2533d42a0aa727b6e429bf505aa54b98e41e9f81d2f6a1bbe5eb02c19` |
+| `EntityMajoAICharlotteWander.class` | `5bcceb22cbf6a3a2967bc20b517fcd4bbadb225c913dacba0b09317a9b458404` |
+
+### Garnet Arrow hurt-resistance reset
+
+Distributed `EntityGarnetArrow` bytecode, immediately before its `Entity.attackEntityFrom` call:
+- loads the hit entity;
+- pushes integer 0;
+- writes `Entity.field_70172_ad`.
+
+In the MCP source that field is `hurtResistantTime`.
+
+### Garnet Throwable hurt-resistance reset
+
+Distributed `EntityGarnetThrowable` performs the same write:
+- entity hit;
+- integer 0;
+- `putfield Entity.field_70172_ad`;
+- then computes the damage source and calls `attackEntityFrom`.
+
+This verifies that the source-level multi-hit policy is present in both shipped projectile bases.
+
+### Throwable critical explosion
+
+In the same distributed `EntityGarnetThrowable` method:
+- critical entity impact loads float **6.0** and invokes world explosion creation with terrain damage enabled;
+- source shows critical block impact uses strength **4.0**.
+
+`EntityGarnetBullet` is compiled as a direct subclass of `EntityGarnetThrowable`.
+
+`EntityMami` source marks only the `Tiro Finale!` shot's bullet critical in the inspected Mami firing path, connecting that character finisher to the shared explosive-critical implementation.
+
+### Nutcracker death cleanup and Charlotte debug path
+
+The corresponding distributed classes exist with matching SourceFile identity; source inspection additionally records:
+- Nutcracker death selecting all `EntityMob` in a ±200 expanded AABB and calling `setDead()` on every other result;
+- Charlotte wander printing the candidate counter from the active position-search loop.
+
+These two are retained as static/runtime-risk leads; this subsection does not claim runtime reproduction.
+
 ## Interpretation
 
 The supplied distributions show **strong source↔binary structural correspondence**:
