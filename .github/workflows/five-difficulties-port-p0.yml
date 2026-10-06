@@ -1,0 +1,74 @@
+name: Five Difficulties Port P0
+
+on:
+  push:
+    branches: ["jolly/five-difficulties-1201-port-p0-2026-10-07"]
+    paths:
+      - 'departments/minecraft/mods/five-difficulties/port-1.20.1/**'
+      - '.github/workflows/five-difficulties-port-p0.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  p0:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Run pure Java preservation-core regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          chmod +x departments/minecraft/mods/five-difficulties/port-1.20.1/tools/run-pure-core-tests.sh
+          departments/minecraft/mods/five-difficulties/port-1.20.1/tools/run-pure-core-tests.sh | tee pure-core.txt
+
+      - name: Prepare exact Forge 1.20.1 reference MDK
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT="$RUNNER_TEMP/five-difficulties-mdk"
+          mkdir -p "$ROOT" forge-evidence
+          curl --fail --location --retry 2 --max-time 120 \
+            https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-47.4.6/forge-1.20.1-47.4.6-mdk.zip \
+            -o "$RUNNER_TEMP/five-difficulties-mdk.zip"
+          echo "1a1c045f235262ff617e285ea2156571ea93bfbe  $RUNNER_TEMP/five-difficulties-mdk.zip" | sha1sum --check
+          unzip -q "$RUNNER_TEMP/five-difficulties-mdk.zip" -d "$ROOT"
+          rm -rf "$ROOT/src"
+          cp -R departments/minecraft/mods/five-difficulties/port-1.20.1/src "$ROOT/src"
+          sed -i 's/^mod_id=.*/mod_id=five_difficulties_port/' "$ROOT/gradle.properties"
+          sed -i 's/^mod_name=.*/mod_name=Five Difficulties X1 Preservation Port/' "$ROOT/gradle.properties"
+          sed -i 's/^mod_version=.*/mod_version=0.0.1-p0/' "$ROOT/gradle.properties"
+          sed -i 's/^mod_group_id=.*/mod_group_id=dev.kneekura.fivedifficulties/' "$ROOT/gradle.properties"
+          sed -i 's/^mod_authors=.*/mod_authors=KNEEKURA private preservation project/' "$ROOT/gradle.properties"
+          sed -i 's/^mod_license=.*/mod_license=All Rights Reserved/' "$ROOT/gradle.properties"
+          sha1sum "$RUNNER_TEMP/five-difficulties-mdk.zip" > forge-evidence/mdk-sha1.txt
+          find departments/minecraft/mods/five-difficulties/port-1.20.1/src -type f -print0 | sort -z | xargs -0 sha256sum > forge-evidence/source-inputs.sha256
+
+      - name: Compile and package against Forge 47.4.6
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$RUNNER_TEMP/five-difficulties-mdk"
+          chmod +x gradlew
+          ./gradlew --no-daemon --max-workers=2 -Dorg.gradle.jvmargs=-Xmx3G compileJava jar 2>&1 | tee "$GITHUB_WORKSPACE/forge-evidence/compile.txt"
+          sha256sum build/libs/*.jar > "$GITHUB_WORKSPACE/forge-evidence/jar.sha256"
+
+      - name: Retain bounded compile evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: five-difficulties-p0-${{ github.sha }}
+          path: |
+            pure-core.txt
+            forge-evidence/
+          retention-days: 7
