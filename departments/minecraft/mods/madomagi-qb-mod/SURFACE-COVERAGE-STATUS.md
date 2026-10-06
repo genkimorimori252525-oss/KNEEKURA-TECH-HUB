@@ -200,6 +200,33 @@ Important version discipline:
 - some recorded gameplay used trial builds;
 - community material therefore seeds searches but does not override 1.6.4.082 source.
 
+## Cross-cutting whole-tree audit
+
+State: **EVIDENCE_BACKED retrieval receipt / semantic interpretation distributed across subsystem documents**.
+
+A second pass scans every one of the 193 Java files for selected high-risk/special surfaces rather than following class names or gameplay features.
+
+Covered retrieval families:
+- TODO / active stdout;
+- explosions / primed TNT;
+- direct health and death calls;
+- block writes / incendiary impact;
+- potion application;
+- direct positioning;
+- get/select-AABB entity queries;
+- NBT read/write;
+- DataWatcher;
+- Packet250CustomPayload;
+- lightning / fireworks.
+
+Regenerator:
+`tools/audit-static-surfaces.py`
+
+Receipt:
+`WHOLE-TREE-STATIC-AUDIT.md`
+
+No new independent high-risk subsystem family remained unclassified after this retrieval pass. This is supporting evidence for static breadth; it is **not** a semantic whole-program proof.
+
 ## Current conclusion
 
 The **supplied 1.6.4.082 static implementation is now broadly whole-tree mapped** across the required content-MOD surfaces.
