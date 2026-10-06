@@ -82,6 +82,7 @@ public final class HomingAmuletRenderer extends EntityRenderer<HomingAmuletProje
 
         RenderSystem.enableCull();
         RenderSystem.defaultBlendFunc();
+        RenderSystem.disableBlend();
         poseStack.popPose();
     }
 
@@ -89,17 +90,18 @@ public final class HomingAmuletRenderer extends EntityRenderer<HomingAmuletProje
         BufferBuilder builder = Tesselator.getInstance().getBuilder();
         builder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
 
-        builder.vertex(matrix, -0.5F, 0.0F, -0.5F)
+        // Exact X1 vertex/UV order from RenderHomingAmulet.
+        builder.vertex(matrix, -0.5F, 0.0F, 0.5F)
                 .uv(HomingAmuletVisualContract.U_MIN, HomingAmuletVisualContract.V_MIN)
                 .color(red, green, blue, alpha).endVertex();
-        builder.vertex(matrix, -0.5F, 0.0F, 0.5F)
-                .uv(HomingAmuletVisualContract.U_MIN, HomingAmuletVisualContract.V_MAX)
-                .color(red, green, blue, alpha).endVertex();
         builder.vertex(matrix, 0.5F, 0.0F, 0.5F)
-                .uv(HomingAmuletVisualContract.U_MAX, HomingAmuletVisualContract.V_MAX)
+                .uv(HomingAmuletVisualContract.U_MAX, HomingAmuletVisualContract.V_MIN)
                 .color(red, green, blue, alpha).endVertex();
         builder.vertex(matrix, 0.5F, 0.0F, -0.5F)
-                .uv(HomingAmuletVisualContract.U_MAX, HomingAmuletVisualContract.V_MIN)
+                .uv(HomingAmuletVisualContract.U_MAX, HomingAmuletVisualContract.V_MAX)
+                .color(red, green, blue, alpha).endVertex();
+        builder.vertex(matrix, -0.5F, 0.0F, -0.5F)
+                .uv(HomingAmuletVisualContract.U_MIN, HomingAmuletVisualContract.V_MAX)
                 .color(red, green, blue, alpha).endVertex();
 
         BufferUploader.drawWithShader(builder.end());
