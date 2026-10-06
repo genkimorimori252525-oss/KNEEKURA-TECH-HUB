@@ -4,8 +4,8 @@
 
 - Upstream: `Terry0333/FatePhantasms`
 - Kind: content/combat/VFX Mod
-- Research emphasis: **skill presentation, summon/chant/charge/release choreography, beam/trail/post-processing composition**
-- Status: **IN_PROGRESS — VFX reconnaissance and dependency-source analysis complete; target JAR internals not yet acquired through the current connector path**
+- Research emphasis: **skill presentation, summon/chant/charge/release choreography, beam/trail/custom geometry/screen-space/camera composition**
+- Status: **STATIC VFX DEEP-DIVE COMPLETE — r205/r224/r284 binaries pinned and compared; r284 major skill presentation architecture is evidence-backed. Runtime performance and failure/repair history remain separate work.**
 
 ## Tracks
 
@@ -15,40 +15,74 @@
 - GitHub release tag: `8`
 - Published: `2026-10-06T11:45:11Z`
 - Size: `4,445,896` bytes
-- SHA-256 published by GitHub: `68158d03ae033577def23d51c4e238c8f9aa082243c8da16fbe0e4f9a3fcc88c`
+- SHA-256: `68158d03ae033577def23d51c4e238c8f9aa082243c8da16fbe0e4f9a3fcc88c`
 - Declared platform: Minecraft `1.20.1` + Forge
-- Declared VFX prerequisites since the enhanced-effects release: **Photon + LDLib**
-- Source availability: the upstream default branch currently exposes the README, not the Mod source tree
-- Distribution bytecode/resource inventory: **NOT_ANALYZED** in this pass because the binary release could not be materialized through the current GitHub connector
-- License locator: CurseForge project metadata reports **All Rights Reserved**; do not treat this research as permission to copy code/assets
+- Direct r284 VFX dependency metadata: Photon `[1.1.17,)`, `mandatory=false`, `ordering=AFTER`
+- The author's r224 release note described Photon + LDLib as prerequisites; the JAR itself directly declares Photon, which provides the LDLib-facing VFX stack.
+- Source availability: upstream default branch exposes README/release binaries, not the full Mod source tree.
+- Distribution bytecode/resource inventory: **EVIDENCE_BACKED** through version-pinned JAR inspection.
+- License: `All Rights Reserved` in `META-INF/mods.toml`; do not treat this research as permission to copy code/assets.
+
+### Historical comparison binaries
+
+- r205 SHA-256: `1372be839df53214b53481dfce989486025c5d8b9273b0e3aa51450660ede9d1`
+- r224 SHA-256: `6842008cea5107c13fa806bf433224841f3147c9c832be9d894837f0bf677d36`
+
+The r205 → r224 transition is the key VFX architecture boundary:
+- classes: **46 → 55**
+- resources: **29 → 29**
+- Photon/LDLib caller candidates: **0 → 9**
+- new resource entries: **0**
+- result: the enhancement is predominantly **procedural Java-side Photon composition**, not a new VFX resource pack.
 
 ### FRONTIER
 
-No separate newer Minecraft/loader implementation was found in this pass. The current r284 1.20.1 Forge distribution is therefore also the newest observed upstream release, but ANCHOR claims are kept separate from any future branch/version.
+No separate newer Minecraft/loader implementation was found in this pass. The current r284 1.20.1 Forge distribution is therefore also the newest observed upstream release.
 
 ## Current analysis coverage
 
-- target identity and release chronology: **EVIDENCE_BACKED**
-- Photon/LDLib dependency transition: **EVIDENCE_BACKED** as an upstream release claim
-- summon / chant / charge presentation evolution: **EVIDENCE_BACKED** as upstream release-history claims
-- Photon 1.20.1 entity-bound FX runtime: **EVIDENCE_BACKED for dependency capability**
-- Photon 1.20.1 beam / trail / bloom facilities: **EVIDENCE_BACKED for dependency capability**
-- exact FatePhantasms use of each Photon facility: **MAPPED as inference only; target JAR proof pending**
-- Gate of Babylon / Enkidu spatial choreography: **SECONDARY_BEHAVIOR_HINT only** where derived from an independent recreation that explicitly cites FatePhantasms as inspiration
-- exact target FX resource inventory, shader/material definitions, sound hooks, camera shake, post-processing graph, skill-to-effect binding and server/client packets: **NOT_ANALYZED**
-- showcase videos: **DISCOVERED_NOT_REVIEWED** in this pass; no fabricated timestamps or visual claims
+- target identity / exact JAR hashes: **EVIDENCE_BACKED**
+- release chronology: **EVIDENCE_BACKED**
+- r205 → r224 Photon migration: **EVIDENCE_BACKED**
+- Photon integration style (reflection/procedural emitter construction): **EVIDENCE_BACKED**
+- Ea default cast timeline / server state / client timing packet: **EVIDENCE_BACKED**
+- Ea Photon named layer graph: **EVIDENCE_BACKED**
+- Ea custom beam geometry: **EVIDENCE_BACKED**
+- Ea summon world renderer + Photon layer + full-screen finale + camera shake: **EVIDENCE_BACKED**
+- Gate of Babylon deterministic layout, four volley presets, custom renderer, projectile trail, Photon enhancement: **EVIDENCE_BACKED**
+- Enkidu 12-chain phased bind/release state machine and custom renderer: **EVIDENCE_BACKED**
+- r284 custom sound-event inventory and phase-aware sound helpers: **EVIDENCE_BACKED**
+- raw runtime performance / shader-pack behavior: **NOT_ANALYZED**
+- live multiplayer latency/desync behavior: **NOT_ANALYZED**
+- showcase-video visual timing confirmation: **DISCOVERED_NOT_REVIEWED**
 - failure/repair history: **NOT_ANALYZED**
 
-See [VFX-RESEARCH-2026-10-06.md](VFX-RESEARCH-2026-10-06.md).
+## Research documents
 
-## High-value next acquisition
+- [VFX-RESEARCH-2026-10-06.md](VFX-RESEARCH-2026-10-06.md) — initial upstream/dependency reconnaissance and design hypotheses
+- [BINARY-VFX-DEEP-DIVE-2026-10-06.md](BINARY-VFX-DEEP-DIVE-2026-10-06.md) — authoritative binary-backed r205/r224/r284 deep dive
+- [BINARY-VFX-EVIDENCE-2026-10-06.json](BINARY-VFX-EVIDENCE-2026-10-06.json) — machine-readable derived evidence summary
 
-The most informative next static pass is not another broad web search. It is a versioned binary differential:
+## Most reusable architecture finding
 
-1. acquire r284 and verify the published SHA-256 above;
-2. inventory `META-INF/mods.toml`, classes, `assets/`, sounds, models/textures and Photon project/FX resources;
-3. search bytecode/decompiled source for Photon entrypoints such as entity/block effects, FX runtime creation, beam/trail emitters and effect-resource locators;
-4. acquire r205 and r224 if available and compare them, because r224 is the declared enhanced-effects transition where Photon + LDLib became prerequisites and chant/charge effects were heavily reworked;
-5. only after the static map exists, use the showcase videos or bounded live observation to confirm timing, camera-facing behavior, multiplayer synchronization and impact/afterglow phases.
+FatePhantasms r284 is not “a Photon effect Mod” in the simple sense. Its high-end presentation is a layered pipeline:
 
-Do not commit upstream JARs, extracted assets or other licensed raw material to normal TECH HUB Git history. Commit only derived inventories, hashes, locators and minimized engineering findings.
+```text
+server-authoritative skill state
+→ compact timing / seed / phase packets
+→ client animation state
+→ deterministic layout reconstruction
+→ custom vertex geometry for critical silhouettes
+→ optional procedural Photon atmosphere/energy
+→ GUI-space cinematic overlays
+→ synchronized camera shake
+→ phase-aware sound
+```
+
+The most useful KNEEKURA lesson is to build a shared cinematic-skill framework with these layers kept separable, rather than implementing every skill as one bespoke particle routine.
+
+## Rights / evidence boundary
+
+Do not commit upstream JARs, audio, textures, models, mesh payloads or decompiled source.
+Retain only version identities, hashes, derived inventories, symbol/call relationships,
+minimized numerical facts and independently written engineering conclusions.
