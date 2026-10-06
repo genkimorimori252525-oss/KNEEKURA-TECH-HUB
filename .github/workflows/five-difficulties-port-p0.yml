@@ -1,8 +1,8 @@
-name: Five Difficulties Port P5
+name: Five Difficulties Port P6
 
 on:
   push:
-    branches: ["jolly/five-difficulties-1201-port-p5-2026-10-07"]
+    branches: ["jolly/five-difficulties-1201-port-p6-2026-10-07"]
     paths:
       - 'departments/minecraft/mods/five-difficulties/port-1.20.1/**'
       - '.github/workflows/five-difficulties-port-p0.yml'
@@ -12,11 +12,11 @@ permissions:
   contents: read
 
 concurrency:
-  group: five-difficulties-p5-${{ github.sha }}
+  group: five-difficulties-p6-${{ github.sha }}
   cancel-in-progress: true
 
 jobs:
-  p5:
+  p6:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
@@ -59,7 +59,7 @@ jobs:
           python departments/minecraft/mods/five-difficulties/port-1.20.1/tools/patch-mdk-mixins.py "$ROOT/build.gradle"
           sed -i 's/^mod_id=.*/mod_id=five_difficulties_port/' "$ROOT/gradle.properties"
           sed -i 's/^mod_name=.*/mod_name=Five Difficulties X1 Preservation Port/' "$ROOT/gradle.properties"
-          sed -i 's/^mod_version=.*/mod_version=0.0.6-p5/' "$ROOT/gradle.properties"
+          sed -i 's/^mod_version=.*/mod_version=0.0.7-p6/' "$ROOT/gradle.properties"
           sed -i 's/^mod_group_id=.*/mod_group_id=dev.kneekura.fivedifficulties/' "$ROOT/gradle.properties"
           sed -i 's/^mod_authors=.*/mod_authors=KNEEKURA private preservation project/' "$ROOT/gradle.properties"
           sed -i 's/^mod_license=.*/mod_license=All Rights Reserved/' "$ROOT/gradle.properties"
@@ -85,7 +85,7 @@ jobs:
       - name: Bounded dedicated-server runtime smoke
         shell: bash
         env:
-          FIVE_DIFFICULTIES_RUNTIME_SMOKE_EXIT: "1"
+          FIVE_DIFFICULTIES_P6_RUNTIME_SCENARIO: "1"
         run: |
           set -euo pipefail
           cd "$RUNNER_TEMP/five-difficulties-mdk"
@@ -114,6 +114,10 @@ jobs:
           cp -f run/logs/latest.log "$GITHUB_WORKSPACE/forge-evidence/runtime-latest.log" 2>/dev/null || true
 
           grep -F "FIVE_DIFFICULTIES_P5_RUNTIME_SMOKE_PASS" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
+          grep -F "FIVE_DIFFICULTIES_P6_FULL_PASS" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
+          grep -F "FIVE_DIFFICULTIES_P6_HALF_PASS" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
+          grep -F "FIVE_DIFFICULTIES_P6_HOMING_PASS" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
+          grep -F "FIVE_DIFFICULTIES_P6_RUNTIME_SCENARIO_PASS" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
           grep -F "Done (" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
           ! grep -F "Failed to start the minecraft server" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
           ! grep -F "Crash report saved to" "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
@@ -126,13 +130,13 @@ jobs:
               ;;
           esac
 
-          echo "P5_DEDICATED_SERVER_RUNTIME_PASS" | tee "$GITHUB_WORKSPACE/forge-evidence/runtime-verdict.txt"
+          echo "P6_WORLD_RUNTIME_PASS" | tee "$GITHUB_WORKSPACE/forge-evidence/runtime-verdict.txt"
 
       - name: Retain bounded compile evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: five-difficulties-p5-${{ github.sha }}
+          name: five-difficulties-p6-${{ github.sha }}
           path: |
             pure-core.txt
             forge-evidence/
