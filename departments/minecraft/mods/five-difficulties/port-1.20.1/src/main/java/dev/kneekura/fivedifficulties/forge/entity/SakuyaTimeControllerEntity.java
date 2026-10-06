@@ -17,7 +17,9 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
@@ -32,6 +34,7 @@ import java.util.UUID;
  * entity data, so client tick-cancellation does not require a custom packet.
  */
 public final class SakuyaTimeControllerEntity extends Entity {
+    private boolean finishing;
     private static final EntityDataAccessor<Integer> DATA_SOURCE_ID =
             SynchedEntityData.defineId(SakuyaTimeControllerEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DATA_MODE =
@@ -145,7 +148,7 @@ public final class SakuyaTimeControllerEntity extends Entity {
 
         LivingEntity source = getSourceEntity();
         if (source == null || !source.isAlive()) {
-            if (!this.level().isClientSide) discard();
+            if (!this.level().isClientSide) finishX1();
             return;
         }
 
@@ -155,14 +158,14 @@ public final class SakuyaTimeControllerEntity extends Entity {
             int logicalTick = (int) (this.level().getGameTime() & 0x7fffffffL);
 
             if (!isActiveAt(logicalTick) || source.hurtTime > 0) {
-                discard();
+                finishX1();
                 return;
             }
 
             if (getControllerKind().endsOnSneakAfterGrace()
                     && elapsedTicks(logicalTick) >= SakuyaWatchContract.MANUAL_RELEASE_MIN_AGE_TICKS
                     && source.isShiftKeyDown()) {
-                discard();
+                finishX1();
                 return;
             }
 
@@ -170,7 +173,7 @@ public final class SakuyaTimeControllerEntity extends Entity {
                     Player.class,
                     this.getBoundingBox().inflate(SakuyaWatchContract.FIELD_RANGE_BLOCKS)
             ).isEmpty()) {
-                discard();
+                finishX1();
                 return;
             }
 
@@ -179,14 +182,50 @@ public final class SakuyaTimeControllerEntity extends Entity {
                     this.getBoundingBox().inflate(SakuyaWatchContract.FIELD_RANGE_BLOCKS),
                     candidate -> candidate != this && candidate.isAlive()
             )) {
-                // X1's two controller entity classes ultimately invalidate each
-                // other when their fields overlap. Item-return behavior is a later
-                // item-layer concern; P3 stops both controllers.
-                other.discard();
-                this.discard();
+                // X1 Watch only reacts to another Watch. StopWatch reacts to
+                // either controller class, so a Watch+StopWatch pair is still
+                // terminated when the StopWatch controller processes.
+                boolean conflict = getControllerKind() == SakuyaControllerKind.STOPWATCH
+                        || other.getControllerKind() != SakuyaControllerKind.STOPWATCH;
+                if (!conflict) continue;
+
+                other.finishX1();
+                this.finishX1();
                 return;
             }
         }
+    }
+
+    public void finishX1() {
+        if (this.finishing) return;
+        this.finishing = true;
+
+        if (!this.level().isClientSide && getControllerKind() == SakuyaControllerKind.WATCH_LIMITED) {
+            returnConsumedWatch();
+        }
+
+        this.discard();
+    }
+
+    private void returnConsumedWatch() {
+        ItemStack returned = new ItemStack(PortRegistries.SAKUYA_WATCH.get());
+        LivingEntity source = getSourceEntity();
+
+        if (source instanceof Player player && player.getAbilities().instabuild) {
+            return;
+        }
+
+        if (source instanceof Player player && player.isAlive() && player.getInventory().add(returned)) {
+            return;
+        }
+
+        this.level().addFreshEntity(new ItemEntity(
+                this.level(),
+                this.getX(),
+                this.getY(),
+                this.getZ(),
+                returned
+        ));
     }
 
     private void followSource(LivingEntity source) {
