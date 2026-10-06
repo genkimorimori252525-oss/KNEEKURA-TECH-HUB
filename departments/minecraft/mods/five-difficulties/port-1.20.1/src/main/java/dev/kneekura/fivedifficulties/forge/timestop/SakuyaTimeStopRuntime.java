@@ -1,66 +1,70 @@
 package dev.kneekura.fivedifficulties.forge.timestop;
 
 import dev.kneekura.fivedifficulties.core.math.Vec3d;
-import dev.kneekura.fivedifficulties.core.timestop.SakuyaTimeStopInstance;
-import dev.kneekura.fivedifficulties.core.timestop.SakuyaTimeStopService;
-import dev.kneekura.fivedifficulties.core.timestop.TimeStopFlags;
+import dev.kneekura.fivedifficulties.core.timestop.TimeDomainMode;
+import dev.kneekura.fivedifficulties.core.x1.SakuyaControllerKind;
+import dev.kneekura.fivedifficulties.core.x1.SakuyaWatchContract;
+import dev.kneekura.fivedifficulties.forge.entity.SakuyaTimeControllerEntity;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.phys.AABB;
 
-import java.util.Map;
-import java.util.UUID;
-import java.util.WeakHashMap;
+import javax.annotation.Nullable;
 
-/**
- * Per-ServerLevel holder for the pure time-stop policy core.
- * Actual tick cancellation Mixins are deliberately deferred to P1.
- */
+/** Server-side lifecycle entry points for X1 time controllers. */
 public final class SakuyaTimeStopRuntime {
-    private static final Map<ServerLevel, SakuyaTimeStopService> SERVICES = new WeakHashMap<>();
-
     private SakuyaTimeStopRuntime() {}
 
-    public static SakuyaTimeStopService service(ServerLevel level) {
-        synchronized (SERVICES) {
-            return SERVICES.computeIfAbsent(level, ignored -> new SakuyaTimeStopService());
-        }
-    }
-
-    public static SakuyaTimeStopInstance start(
+    @Nullable
+    public static SakuyaTimeControllerEntity startX1(
             ServerLevel level,
-            Entity source,
-            double range,
+            LivingEntity source,
+            TimeDomainMode mode,
             int durationTicks,
-            TimeStopFlags flags
+            SakuyaControllerKind kind
     ) {
+        if (level == null || source == null || mode == null || kind == null) throw new NullPointerException();
+
+        AABB duplicateBox = source.getBoundingBox().inflate(SakuyaWatchContract.DUPLICATE_PRECHECK_RANGE_BLOCKS);
+        if (!level.getEntitiesOfClass(
+                SakuyaTimeControllerEntity.class,
+                duplicateBox,
+                controller -> controller.isAlive()
+        ).isEmpty()) {
+            return null;
+        }
+
         int tick = logicalTick(level);
-        SakuyaTimeStopInstance instance = new SakuyaTimeStopInstance(
-                UUID.randomUUID(),
-                source.getUUID(),
-                vec(source),
-                range,
-                tick,
+        SakuyaTimeControllerEntity controller = new SakuyaTimeControllerEntity(
+                level,
+                source,
+                mode,
                 durationTicks,
-                flags
+                kind,
+                tick
         );
-        service(level).start(instance);
-        return instance;
+        return level.addFreshEntity(controller) ? controller : null;
     }
 
-    public static boolean stop(ServerLevel level, Entity source) {
-        return service(level).stopSource(source.getUUID());
+    public static boolean stopX1(ServerLevel level, LivingEntity source) {
+        boolean stopped = false;
+        AABB search = source.getBoundingBox().inflate(SakuyaWatchContract.FIELD_RANGE_BLOCKS + 2.0D);
+        for (SakuyaTimeControllerEntity controller : level.getEntitiesOfClass(
+                SakuyaTimeControllerEntity.class,
+                search,
+                candidate -> candidate.isAlive() && candidate.getSourceEntity() == source
+        )) {
+            controller.discard();
+            stopped = true;
+        }
+        return stopped;
     }
 
-    public static void purge(ServerLevel level) {
-        service(level).purgeExpired(logicalTick(level));
-    }
-
-    public static int logicalTick(ServerLevel level) {
-        // P0 core uses int ticks; the X1 oracle/long-running-world policy is a later compatibility decision.
+    public static int logicalTick(net.minecraft.world.level.Level level) {
         return (int) (level.getGameTime() & 0x7fffffffL);
     }
 
-    public static Vec3d vec(Entity entity) {
+    public static Vec3d vec(net.minecraft.world.entity.Entity entity) {
         return new Vec3d(entity.getX(), entity.getY(), entity.getZ());
     }
 }
