@@ -5,14 +5,19 @@
 **ANCHOR static first pass complete; supplied-binary runtime remains UNKNOWN.**
 
 This workspace records the 2026-10-07 analysis of the user-supplied
-`warfare_wings-1.1.4-1.20.1-forge.jar` and its relationship to the existing
-private `genkimorimori252525-oss/Kneekura-bird` autonomous-air-combat research.
+`warfare_wings-1.1.4-1.20.1-forge.jar` and is also the canonical home for future
+Warfare Wings autonomous-flight, physical-reproduction and air-combat AI research.
+
+Historical Kneekura-bird material may be used as evidence when its runtime identity is preserved,
+but future work does not depend on that repository.
 
 Start with:
 
 - [ANCHOR-JAR-EVIDENCE.json](ANCHOR-JAR-EVIDENCE.json) — immutable identity and finite JAR inventory
 - [TECHNICAL-ANALYSIS-2026-10-07.md](TECHNICAL-ANALYSIS-2026-10-07.md) — flight/weapon/data/client architecture
-- [KNEEKURA-BIRD-SIMULATION-BRIDGE-2026-10-07.md](KNEEKURA-BIRD-SIMULATION-BRIDGE-2026-10-07.md) — fast-simulation / headless-Forge architecture decision
+- [physics-ai/README.md](physics-ai/README.md) — **canonical physical-reproduction / autonomous-air-combat laboratory**
+- [physics-ai/AIRCRAFT-PERFORMANCE-MODEL.md](physics-ai/AIRCRAFT-PERFORMANCE-MODEL.md) — explainable aircraft-to-aircraft performance differences
+- [KNEEKURA-BIRD-SIMULATION-BRIDGE-2026-10-07.md](KNEEKURA-BIRD-SIMULATION-BRIDGE-2026-10-07.md) — historical design input retained for provenance
 - [FAILURE-REPAIR-HISTORY.md](FAILURE-REPAIR-HISTORY.md) — bounded release-history review
 
 The shared workflow remains [ANALYSIS-WORKFLOW.md](../../ANALYSIS-WORKFLOW.md) and
@@ -99,14 +104,14 @@ small engineering facts needed for research.
 | failure/repair history | PARTIAL | bounded public release-note review; source repair diffs unavailable |
 | ANCHOR↔FRONTIER portability | NOT_ANALYZED | current focus is 1.20.1 Forge |
 
-## Relationship to Kneekura-bird
+## Physics AI laboratory
 
-Kneekura-bird already has two valuable validation layers:
+Future physical-reproduction and autonomous-air-combat development lives under
+[`physics-ai/`](physics-ai/README.md), as part of the Warfare Wings analysis domain.
 
-1. a fast deterministic pure-Java mission simulator; and
-2. headless Forge GameTests that execute real Minecraft server + Warfare Wings entities +
-   Immersive Aircraft physics without opening a game client.
+The core rule is unchanged: do not build a general Minecraft clone. Reproduce only the relevant
+Immersive Aircraft fixed-wing state/update contract, preserve Warfare Wings aircraft-specific
+parameters and weapons, and use exact Minecraft runtime tests as the parity oracle.
 
-The recommended next architecture is **not** a second full Minecraft clone. Extend the fast layer
-into a calibrated air-combat surrogate/digital twin, keep the AI policy code shared, and use the
-headless real-physics layer as the parity oracle. See the bridge design for the concrete contract.
+Historical Kneekura-bird measurements can be imported as legacy evidence, but the Tech Hub
+Warfare Wings workspace is now the canonical project home.
