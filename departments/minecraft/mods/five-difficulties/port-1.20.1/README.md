@@ -1,6 +1,6 @@
 # Five Difficulties X1 Preservation Port — Minecraft 1.20.1 Forge
 
-Status: **P4 complete — canonical X1 Sakuya Watch / StopWatch are player-usable and their controller presentation compiles on Forge 1.20.1**.
+Status: **P5 complete — the current Homing + Sakuya vertical slice boots successfully in a real Forge 1.20.1 dedicated-server process**.
 
 Target:
 - Minecraft 1.20.1
@@ -138,3 +138,28 @@ See:
 - `IMPLEMENTATION-CHECKPOINT-P4.md`
 
 Next gate is bounded **runtime** verification of the current Homing + Sakuya vertical slice before broader content expansion.
+
+
+## P5 bounded dedicated-server runtime
+
+The preservation slice now has a real Minecraft runtime receipt, not only a compile receipt.
+
+Latest successful P5 run:
+- GitHub Actions `37533730730`;
+- head `dac041fab79744f18fddd54e6d37db8c286920c1`;
+- dedicated server reached `Done (1.927s)!`;
+- runtime marker:
+  `FIVE_DIFFICULTIES_P5_RUNTIME_SMOKE_PASS serverVersion=1.20.1 dedicated=true`;
+- final verdict:
+  `P5_DEDICATED_SERVER_RUNTIME_PASS`.
+
+The runtime self-check verifies actual Forge registry objects/entity factories plus representative X1 FULL/HALF/source/new-entity-grace policy after server startup.
+
+P5 also repaired two harness/resource defects:
+- invalid assumption that `EntityType#getBaseClass()` exposes the concrete entity class;
+- malformed language JSON caused by a literal trailing `\\n`.
+
+See:
+- `IMPLEMENTATION-CHECKPOINT-P5.md`
+
+The next gate is **world-mutating server-side runtime testing** of Homing movement/hits and Sakuya FULL/HALF behavior. Client rendering parity remains separate.
