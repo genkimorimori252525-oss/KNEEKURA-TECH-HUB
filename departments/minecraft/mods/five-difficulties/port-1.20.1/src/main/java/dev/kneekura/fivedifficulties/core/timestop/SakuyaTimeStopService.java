@@ -41,7 +41,7 @@ public final class SakuyaTimeStopService {
     }
 
     public void purgeExpired(int tick) {
-        active.values().removeIf(stop -> !stop.isActiveAt(tick));
+        active.values().removeIf(stop -> stop.isExpiredAt(tick));
     }
 
     public List<SakuyaTimeStopInstance> activeStops(int tick) {
