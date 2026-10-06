@@ -24,7 +24,7 @@ import org.joml.Matrix4f;
  * Recreates the two-pass X1 RenderHomingAmulet state without committing the original PNG.
  */
 public final class HomingAmuletRenderer extends EntityRenderer<HomingAmuletProjectile> {
-    private static final ResourceLocation TEXTURE =
+    public static final ResourceLocation TEXTURE =
             new ResourceLocation(FiveDifficultiesPort.MOD_ID, "textures/entity/homing_amulet.png");
 
     public HomingAmuletRenderer(EntityRendererProvider.Context context) {
@@ -42,9 +42,17 @@ public final class HomingAmuletRenderer extends EntityRenderer<HomingAmuletProje
             int packedLight
     ) {
         poseStack.pushPose();
-
         float pitch = Mth.lerp(partialTick, entity.xRotO, entity.getXRot());
         float animation = entity.getLegacyAnimationCount() + partialTick;
+        renderLegacyVisual(poseStack, pitch, animation);
+        poseStack.popPose();
+    }
+
+    /**
+     * Shared X1 visual primitive used by both the live entity renderer and P7's
+     * real-client visual smoke screen. Callers own the outer pose push/pop.
+     */
+    public static void renderLegacyVisual(PoseStack poseStack, float pitch, float animation) {
         poseStack.mulPose(Axis.XP.rotationDegrees(-pitch));
         poseStack.mulPose(Axis.YP.rotationDegrees(
                 HomingAmuletVisualContract.BASE_Y_ROTATION_DEGREES
@@ -83,7 +91,6 @@ public final class HomingAmuletRenderer extends EntityRenderer<HomingAmuletProje
         RenderSystem.enableCull();
         RenderSystem.defaultBlendFunc();
         RenderSystem.disableBlend();
-        poseStack.popPose();
     }
 
     private static void drawQuad(Matrix4f matrix, int red, int green, int blue, int alpha) {
