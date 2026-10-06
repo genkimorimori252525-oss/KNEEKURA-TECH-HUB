@@ -20,7 +20,7 @@ public record SakuyaTimeStopInstance(
         }
         if (!Double.isFinite(range) || range < 0.0) throw new IllegalArgumentException("invalid range");
         if (startedAtTick < 0) throw new IllegalArgumentException("startedAtTick < 0");
-        if (durationTicks <= 0) throw new IllegalArgumentException("durationTicks <= 0");
+        if (durationTicks == 0 || durationTicks < -1) throw new IllegalArgumentException("durationTicks must be -1 or positive");
     }
 
     /** Backward-compatible engineering constructor: spherical full stop. */
@@ -46,15 +46,21 @@ public record SakuyaTimeStopInstance(
         };
     }
 
+    public boolean isUnbounded() {
+        return durationTicks == -1;
+    }
+
     public boolean isActiveAt(int tick) {
-        return tick >= startedAtTick && tick < startedAtTick + durationTicks;
+        if (tick < startedAtTick) return false;
+        return isUnbounded() || ((long) tick) < ((long) startedAtTick + durationTicks);
     }
 
     public boolean isExpiredAt(int tick) {
-        return ((long) tick) >= ((long) startedAtTick + durationTicks);
+        return !isUnbounded() && ((long) tick) >= ((long) startedAtTick + durationTicks);
     }
 
     public int remainingTicks(int tick) {
+        if (isUnbounded()) return Integer.MAX_VALUE;
         long remaining = ((long) startedAtTick + durationTicks) - tick;
         return (int) Math.max(0L, Math.min(Integer.MAX_VALUE, remaining));
     }
