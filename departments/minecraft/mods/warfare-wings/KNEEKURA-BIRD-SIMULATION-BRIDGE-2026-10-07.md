@@ -1,3 +1,5 @@
+> Historical design note. The canonical physical-reproduction / autonomous-air-combat plan now lives in [physics-ai/README.md](physics-ai/README.md). Kneekura-bird is retained here only as provenance and legacy evidence.
+
 # Warfare Wings ↔ Kneekura-bird — Air-Combat Simulation Bridge (2026-10-07)
 
 ## Decision
