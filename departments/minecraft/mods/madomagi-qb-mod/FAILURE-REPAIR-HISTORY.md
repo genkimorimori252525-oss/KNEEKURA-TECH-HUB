@@ -69,4 +69,9 @@ These remain static anomaly candidates. Without a historical report, repair diff
 28. **Madoka Ribbon dual-role oddity** — the contract/control token returns 100 entity damage against every `EntityMadomagi`, while returning 0 against other entities. The behavior is direct source evidence, but author intent is unknown.
 29. **Connected-block ItemBreaker has no explicit work cap** — Sayaka Bat can synchronously drain a growing connected-block queue, including repeated 9×9×9 leaf scans in cut mode. This is a static one-action spike candidate.
 
+30. **Nutcracker broad death cleanup** — `EntityHomulillyNutcracker.onDeath` selects every `EntityMob` in a ±200 expanded AABB and kills every result except itself. Like Walpurgis cleanup, this can remove unrelated modded hostile mobs and should become encounter-membership cleanup on ANCHOR.
+31. **Charlotte wander stdout in active search loop** — `EntityMajoAICharlotteWander.initPosition` prints its candidate counter every loop iteration. The counter is only incremented after the coarse distance/Y branch, so random candidates rejected earlier do not contribute to the apparent >30 break threshold.
+32. **Projectile substrate deliberately clears target hurt-resistance** — both `EntityGarnetArrow` and `EntityGarnetThrowable` set the target hurt-resistance timer to zero immediately before damage. This appears intentional to support dense volleys, but a literal modern port could bypass other combat systems' expected i-frame pacing.
+33. **Garnet Throwable critical means terrain-damaging explosion** — critical entity impact creates strength-6 explosion and critical block impact strength-4. Mami's `Tiro Finale!` marks its Garnet bullet critical, so this high-impact path can combine projectile damage with explosion/world damage.
+
 These are deliberately kept as **static leads**. Promotion to a failure/repair case still requires bounded runtime evidence or historical report+repair provenance.
