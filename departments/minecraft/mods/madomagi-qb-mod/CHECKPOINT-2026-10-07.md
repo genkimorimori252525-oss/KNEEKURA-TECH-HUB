@@ -161,6 +161,36 @@ A dedicated telegraph/VFX pass recovered:
 
 The modernizable lesson is **state readability**, not the literal GL11/particle implementation.
 
+## Whole-tree retrieval audit
+
+After the subsystem-specific reads, a second literal-surface audit was run over all **193** shipped Java files.
+
+It inventories:
+- TODO/debug traces;
+- explosions/TNT;
+- direct health/death operations;
+- block writes;
+- potion effects;
+- forced positioning;
+- AABB entity retrieval;
+- NBT and DataWatcher state;
+- legacy custom payloads;
+- lightning/firework presentation.
+
+A reproducible scanner is committed at:
+`tools/audit-static-surfaces.py`.
+
+Receipt:
+`WHOLE-TREE-STATIC-AUDIT.md`.
+
+The reproduced JSON output is 36,423 bytes, SHA-256:
+`b0bf7bcae461eec89fc4ee357ec88090c8ee2eceacd4445c64ff1cbc785b2bc6`.
+
+The audit exposed one additional archaeology item — the shadowed default `ItemMadomagiWeapon.onItemRightClick` — but **no new unclassified high-risk mechanic family** among the scanned categories.
+
+This strengthens, but does not exceed, the current state:
+**STATIC WHOLE-TREE MAPPED, NOT COMPLETE**.
+
 ## Strong static defect / anomaly candidates
 
 Not historically proven bugs unless stated otherwise:
