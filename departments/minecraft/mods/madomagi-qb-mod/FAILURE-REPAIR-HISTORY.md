@@ -65,5 +65,8 @@ These remain static anomaly candidates. Without a historical report, repair diff
 24. **Kriemhild possible duplicate Grief Seed path** — health<=0 living-update code explicitly drops one Seed before `setDead()`, while `dropFewItems` separately drops one. Exact superclass death lifecycle must be traced/runtime-tested before claiming two drops.
 25. **EntityGriefSeed bypasses superclass custom NBT hooks** — its overrides do not call `super.writeEntityToNBT/readEntityFromNBT`. Base Entity serialization still handles common outer fields, but inherited EntityLiving/Creature-specific state impact is unresolved.
 26. **Reserved Oriko/Yuma configuration without implementation** — config/entity/item ID fields exist, but the supplied tree contains no corresponding entities and no usable registration/instantiation. Treat as dead/reserved code, not a feature.
+27. **Reserved Jewel entity ID without implementation** — `entityJewelID` is declared and loaded from config, but no EntityJewel/source registration or other use is present in the supplied tree.
+28. **Madoka Ribbon dual-role oddity** — the contract/control token returns 100 entity damage against every `EntityMadomagi`, while returning 0 against other entities. The behavior is direct source evidence, but author intent is unknown.
+29. **Connected-block ItemBreaker has no explicit work cap** — Sayaka Bat can synchronously drain a growing connected-block queue, including repeated 9×9×9 leaf scans in cut mode. This is a static one-action spike candidate.
 
 These are deliberately kept as **static leads**. Promotion to a failure/repair case still requires bounded runtime evidence or historical report+repair provenance.
