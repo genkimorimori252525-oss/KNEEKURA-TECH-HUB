@@ -17,3 +17,4 @@ java -cp "$OUT" dev.kneekura.fivedifficulties.core.SakuyaWatchContractRegression
 java -cp "$OUT" dev.kneekura.fivedifficulties.core.X1WideShotGeometryRegression
 java -cp "$OUT" dev.kneekura.fivedifficulties.core.X1HomingMathRegression
 java -cp "$OUT" dev.kneekura.fivedifficulties.core.X1SakuyaTimePolicyRegression
+java -cp "$OUT" dev.kneekura.fivedifficulties.core.X1SakuyaControllerGeometryRegression
