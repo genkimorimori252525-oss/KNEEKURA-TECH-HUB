@@ -68,4 +68,17 @@ public final class SakuyaTimeStopService {
         }
         return result;
     }
+
+    /**
+     * True when the modern machinery should suppress this entity's normal tick.
+     * FULL_STOP always suppresses; HALF_SPEED suppresses X1's count=0/even phase.
+     */
+    public boolean shouldCancelNormalTick(TimeStopSubject subject, int tick) {
+        for (SakuyaTimeStopInstance stop : active.values()) {
+            TimeStopDecision next = policy.decide(stop, subject, tick);
+            if (next == TimeStopDecision.FREEZE) return true;
+            if (next == TimeStopDecision.HALF_SPEED && stop.shouldCancelEntityTickForMode(tick)) return true;
+        }
+        return false;
+    }
 }
