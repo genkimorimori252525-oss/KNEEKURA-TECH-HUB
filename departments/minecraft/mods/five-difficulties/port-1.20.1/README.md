@@ -1,6 +1,6 @@
 # Five Difficulties X1 Preservation Port — Minecraft 1.20.1 Forge
 
-Status: **P3 complete — canonical X1 Sakuya entity-time policy and minimal 1.20.1 Mixins compile/package successfully**.
+Status: **P4 complete — canonical X1 Sakuya Watch / StopWatch are player-usable and their controller presentation compiles on Forge 1.20.1**.
 
 Target:
 - Minecraft 1.20.1
@@ -113,3 +113,28 @@ See:
 - `IMPLEMENTATION-CHECKPOINT-P3.md`
 
 Next gate: usable Sakuya Watch/StopWatch items plus bounded Minecraft runtime verification.
+
+
+## P4 usable Sakuya Watch / StopWatch
+
+P4 connects the P3 time-domain machinery to real player items.
+
+Implemented:
+- mode-0 HALF / mode-1 FULL Sakuya Watch state;
+- X1 20/48-tick charge behavior;
+- creative immediate persistent activation;
+- survival limited activation and item consumption;
+- fresh mode-0 Watch return after limited Watch finishes;
+- immediate disposable StopWatch;
+- exact four-part Watch controller model;
+- X1 +7°/tick controller spin;
+- expanding dark-field mesh and legacy blend contract;
+- SHA-verified private asset overlay for Watch / StopWatch item and controller textures.
+
+Latest validated P4 compile/package: GitHub Actions run `37531317629` — SUCCESS.
+
+See:
+- `P4-SAKUYA-WATCH-VISUAL-ITEM-EXACT.md`
+- `IMPLEMENTATION-CHECKPOINT-P4.md`
+
+Next gate is bounded **runtime** verification of the current Homing + Sakuya vertical slice before broader content expansion.
