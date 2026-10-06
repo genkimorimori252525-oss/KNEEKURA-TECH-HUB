@@ -1,0 +1,79 @@
+name: Warfare Wings Physics AI Source
+
+on:
+  push:
+    branches:
+      - jolly/research-warfare-wings-2026-10-07
+    paths:
+      - 'departments/minecraft/mods/warfare-wings/physics-ai/**'
+      - '.github/workflows/warfare-wings-physics-ai-source.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pure-java:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: jolly/research-warfare-wings-2026-10-07
+          fetch-depth: 1
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Verify microkernel and deterministic traces
+        run: node departments/minecraft/mods/warfare-wings/physics-ai/check-microkernel.mjs --java-home "$JAVA_HOME"
+      - name: Verify trace comparator
+        run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_compare_traces.py
+      - name: Rebuild and verify 24-aircraft AI Atlas
+        run: |
+          ROOT=departments/minecraft/mods/warfare-wings/physics-ai
+          mkdir -p "$RUNNER_TEMP/ww-atlas"
+          python "$ROOT/tools/build_aircraft_atlas.py" "$ROOT/reports/base-aircraft-source-atlas.csv" \
+            --json "$RUNNER_TEMP/ww-atlas/aircraft-atlas-ai-view.json" \
+            --markdown "$RUNNER_TEMP/ww-atlas/AIRCRAFT-ATLAS.md"
+          python - "$RUNNER_TEMP/ww-atlas/aircraft-atlas-ai-view.json" "$ROOT/reports/aircraft-atlas-ai-view.json" <<'PY'
+          import json, sys
+          with open(sys.argv[1], encoding='utf-8') as a, open(sys.argv[2], encoding='utf-8') as b:
+              if json.load(a) != json.load(b):
+                  raise SystemExit('AI Atlas JSON semantic drift')
+          print('AI Atlas JSON semantic equality passed')
+          PY
+          python - "$RUNNER_TEMP/ww-atlas/AIRCRAFT-ATLAS.md" "$ROOT/reports/AIRCRAFT-ATLAS.md" <<'PY'
+          import difflib, sys
+          def norm(path):
+              return open(path, encoding='utf-8').read().replace('\r\n','\n').rstrip() + '\n'
+          generated, golden = norm(sys.argv[1]), norm(sys.argv[2])
+          if generated != golden:
+              diff = ''.join(difflib.unified_diff(
+                  golden.splitlines(True), generated.splitlines(True),
+                  fromfile='committed/AIRCRAFT-ATLAS.md',
+                  tofile='generated/AIRCRAFT-ATLAS.md',
+                  n=3))
+              print(diff[:24000])
+              raise SystemExit('Aircraft Atlas Markdown drift')
+          print('Aircraft Atlas Markdown normalized equality passed')
+          PY
+
+  runtime-probe-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: jolly/research-warfare-wings-2026-10-07
+          fetch-depth: 1
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.8'
+      - name: Compile runtime probe without external runtime jars
+        working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
+        run: gradle --no-daemon --console=plain compileJava processResources
