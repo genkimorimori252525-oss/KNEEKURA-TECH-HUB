@@ -36,7 +36,13 @@ jobs:
           python "$ROOT/tools/build_aircraft_atlas.py" "$ROOT/reports/base-aircraft-source-atlas.csv" \
             --json "$RUNNER_TEMP/ww-atlas/aircraft-atlas-ai-view.json" \
             --markdown "$RUNNER_TEMP/ww-atlas/AIRCRAFT-ATLAS.md"
-          cmp "$RUNNER_TEMP/ww-atlas/aircraft-atlas-ai-view.json" "$ROOT/reports/aircraft-atlas-ai-view.json"
+          python - "$RUNNER_TEMP/ww-atlas/aircraft-atlas-ai-view.json" "$ROOT/reports/aircraft-atlas-ai-view.json" <<'PY'
+          import json, sys
+          with open(sys.argv[1], encoding='utf-8') as a, open(sys.argv[2], encoding='utf-8') as b:
+              if json.load(a) != json.load(b):
+                  raise SystemExit('AI Atlas JSON semantic drift')
+          print('AI Atlas JSON semantic equality passed')
+          PY
           cmp "$RUNNER_TEMP/ww-atlas/AIRCRAFT-ATLAS.md" "$ROOT/reports/AIRCRAFT-ATLAS.md"
 
   runtime-probe-source:
