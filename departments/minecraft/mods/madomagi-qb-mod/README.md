@@ -45,6 +45,7 @@ Raw uploaded source, compiled classes and original assets are deliberately not c
 - GARNET-FRAMEWORK-ANALYSIS.md — lower-level companion/summoner/gun contracts used by QB-MOD
 - GUI-PRESENTATION-STATE-CATALOG.md — five-slot tactical inventory, menu lifetime and form presentation
 - ATTACK-TELEGRAPH-AND-VFX-CATALOG.md — visible attack stock, telegraphs, form cues, projectiles and encounter presentation
+- AI-GOAL-AND-COMBAT-INTENT-CATALOG.md — owner guard/support intent, hazard avoidance, follow/rest/movement and special target priorities
 - MECHANIC-TIMING-AND-PROBABILITY.md — exact burst cadence, form timers, boss macro-cycles and probability geometry
 - MODEL-ANIMATION-AND-STATE-READABILITY.md — gameplay state → model pose/animation relationships
 - UNFINISHED-DEBUG-AND-DEAD-CODE-CATALOG.md — TODO-disabled, commented, unreachable, reserved and debug archaeology
