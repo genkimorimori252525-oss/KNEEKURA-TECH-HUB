@@ -57,6 +57,17 @@ Important semantics:
 
 This is a **source-conditioned mitigation gate**, not generic armor.
 
+Because the legacy path casts the reduced float to integer-like effective damage through the old damage flow, flooring materially affects small hits. Representative source-level percentage arithmetic:
+
+| incoming | protect10 | protect20 | protect30 | protect60 | protect90 |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 1 | 0 | 0 | 0 | 0 | 0 |
+| 2 | 1 | 1 | 1 | 0 | 0 |
+| 5 | 4 | 4 | 3 | 2 | 0 |
+| 10 | 9 | 8 | 7 | 4 | 1 |
+
+Thus even a nominal 10% protection can erase a non-player one-damage hit after flooring. A modern reconstruction must decide explicitly whether that quantization is part of the intended combat feel.
+
 ## 3. Gate C — absolute form invulnerability
 
 ### Madoka Ultimate
@@ -156,6 +167,22 @@ This is the same broad primitive without Walpurgis's projectile-specific counter
 Modern primitive:
 `PerHitCap(1) + BossSuperArmor(20 ticks)`.
 
+### Walpurgis blocked-hit retaliation under barrage
+
+Walpurgis adds one extra rule that materially interacts with Garnet multi-hit projectiles:
+
+If its local damage processing has reduced the current hit to zero and the attributed attacker is a living entity, it creates a Small Fireball aimed back at that attacker.
+
+Because Garnet Arrow/Throwable clear ordinary target hurt-resistance before each direct hit, a dense volley can continue invoking Walpurgis's damage method throughout the custom 20-tick super-armor window.
+
+Conceptually:
+
+`rapid volley → first point admitted → later impacts blocked by boss gate → blocked impacts can become counter-projectiles`.
+
+This is an **anti-spam / anti-DPS retaliation primitive**, not ordinary passive invulnerability.
+
+The exact number of returned fireballs for a volley remains a runtime/tick-order question. ANCHOR should model the intent directly and use a bounded retaliation budget rather than accidentally spawning one counter entity for every zeroed hit.
+
 ## 6. Gate F — rolling damage budget per time window
 
 ### Kriemhild Gretchen
@@ -190,6 +217,15 @@ This is an excellent boss anti-burst primitive for a multi-hit combat system.
 
 Modern abstraction:
 `RollingDamageBudget(windowTicks≈20, maxDamage=10)`.
+
+### Redundant legacy condition
+
+Kriemhild also tests a condition equivalent to:
+`superArmor != 0 && armorValue > 10`.
+
+But the same method clamps admitted cumulative damage so `armorValue` reaches at most 10 through the observed path. The explicit `>10` branch is therefore structurally redundant/unreachable under this damage-update logic.
+
+The effective mechanic is the rolling 10-damage budget, not that branch.
 
 ## 7. Gate G — faction/source inversion
 
