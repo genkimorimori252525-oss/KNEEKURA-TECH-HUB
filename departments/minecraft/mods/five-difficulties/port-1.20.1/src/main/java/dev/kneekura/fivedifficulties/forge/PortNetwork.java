@@ -5,7 +5,7 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 public final class PortNetwork {
-    private static final String PROTOCOL = "p2";
+    private static final String PROTOCOL = "p3";
 
     public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
             new ResourceLocation(FiveDifficultiesPort.MOD_ID, "main"),
