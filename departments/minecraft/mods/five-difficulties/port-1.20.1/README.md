@@ -1,6 +1,6 @@
 # Five Difficulties X1 Preservation Port — Minecraft 1.20.1 Forge
 
-Status: **P0 implementation started**.
+Status: **P1 evidence-backed behavior-contract implementation in progress**.
 
 Target:
 - Minecraft 1.20.1
@@ -24,7 +24,7 @@ onto the exact official Forge 1.20.1-47.4.6 MDK used elsewhere by KNEEKURA-TECH-
 
 This follows the existing Hub validation convention and keeps third-party/build artifacts out of Git history.
 
-## P0 source split
+## P1 source split
 
 `src/main/java/dev/kneekura/fivedifficulties/core/**`
 
@@ -42,7 +42,7 @@ Forge 1.20.1 boundary:
 - network channel boundary;
 - Minecraft Entity/ServerLevel adapters for the pure time-stop core.
 
-P0 deliberately does **not** yet contain:
+P1 deliberately does **not** yet contain:
 - original X1 textures/assets;
 - the 35 spell cards;
 - Master Spark;
@@ -58,3 +58,15 @@ P0 deliberately does **not** yet contain:
 3. only then add real X1 oracle-backed content.
 
 No Minecraft runtime claim is made by a compile-only pass.
+
+
+## P1 evidence contracts
+
+P1 adds a strict evidence bridge to the earlier exact X1 analysis (PR #93):
+
+- canonical core artifact SHA-256 `6307789d5f2f43b762bcc7d5aa03d67207eaa237fb124447e7ea951aa856e634`;
+- red Homing Amulet normal/focus behavior contract;
+- Sakuya Watch/StopWatch mode/range/duration contract;
+- explicit unresolved fields/categories so missing raw/runtime evidence is never guessed.
+
+These contracts are pure Java and do not yet make the original textures/items/renderers available in-game.
