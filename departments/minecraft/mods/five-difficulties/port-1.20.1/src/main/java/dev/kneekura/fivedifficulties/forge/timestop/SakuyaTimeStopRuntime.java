@@ -60,7 +60,11 @@ public final class SakuyaTimeStopRuntime {
 
         double maxAxis = SakuyaWatchContract.DUPLICATE_PRECHECK_RANGE_BLOCKS;
         for (SakuyaTimeControllerEntity controller : controllers(level)) {
-            if (controller.isAlive()
+            boolean conflictsAtItemPrecheck =
+                    kind == SakuyaControllerKind.STOPWATCH
+                    || controller.getControllerKind() != SakuyaControllerKind.STOPWATCH;
+            if (conflictsAtItemPrecheck
+                    && controller.isAlive()
                     && Math.abs(controller.getX() - source.getX()) <= maxAxis
                     && Math.abs(controller.getY() - source.getY()) <= maxAxis
                     && Math.abs(controller.getZ() - source.getZ()) <= maxAxis) {
@@ -85,7 +89,7 @@ public final class SakuyaTimeStopRuntime {
         boolean stopped = false;
         for (SakuyaTimeControllerEntity controller : controllers(level)) {
             if (controller.getSourceEntity() == source) {
-                controller.discard();
+                controller.finishX1();
                 stopped = true;
             }
         }
