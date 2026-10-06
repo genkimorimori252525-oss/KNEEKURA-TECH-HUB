@@ -232,8 +232,11 @@ Technique: **deploy gun props first, then consume them on future AI cycles to fi
 Conditional finisher logic:
 
 If target HP <10:
-- target max HP >30 → critical bullet, very low inaccuracy, `Tiro Finale!`, Soul Gem +1, 30-tick recovery;
+- target max HP >30 → critical Garnet bullet, very low inaccuracy, `Tiro Finale!`, Soul Gem +1, 30-tick recovery;
+- because Garnet bullets inherit `EntityGarnetThrowable`, that critical flag creates a **strength-6 explosion on entity impact** (or strength 4 on block impact) before/alongside the normal projectile damage path;
 - otherwise stronger direct shot, `Tiro!`.
+
+So `Tiro Finale!` is not merely a higher-critical-chance bullet. In the shipped Garnet substrate, it is an **explosive execution/finisher round**.
 
 If target HP >=10:
 - use one staged Musket if available;
