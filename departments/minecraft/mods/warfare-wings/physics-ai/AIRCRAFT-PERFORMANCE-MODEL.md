@@ -101,8 +101,10 @@ These distinctions make the performance explanations more useful than merely rep
 
 ## 3. Concrete examples
 
-The following raw values are from the currently preserved Warfare Wings aircraft data used by the
-research corpus. Runtime measurements should remain the final authority for absolute performance.
+The following A6M/P-47N raw values were re-read directly from the supplied Warfare Wings ANCHOR
+(SHA-256 `dc3029597c88859744633b6f5e4a9f21d449294b1aaac90ea0c1749d7aa98a43`).
+Other examples remain design/reference material until their own current-ANCHOR profile is imported.
+Runtime measurements remain the final authority for absolute performance.
 
 ### A6M Zero — turn-fighter bias
 
@@ -378,3 +380,27 @@ and receive a traceable answer such as:
 > re-entry action instead."
 
 That is the intended role of the Warfare Wings Physics AI Laboratory.
+
+
+## 7. First executable performance card
+
+The first executable/golden comparison is now:
+
+- [reports/a6m-p47n-source-microkernel.md](reports/a6m-p47n-source-microkernel.md)
+- [reports/a6m-p47n-source-microkernel.csv](reports/a6m-p47n-source-microkernel.csv)
+
+The report is generated from the pure Java 1.3.3 source microkernel and checked for deterministic
+byte-identical regeneration.
+
+Current source-microkernel output:
+
+| Aircraft | predicted top speed | yaw / 20t | pitch / 20t | turn-exit retention |
+|---|---:|---:|---:|---:|
+| A6M | 33.67 b/s | 34.24° | 31.53° | 0.977 |
+| P-47N | 45.79 b/s | 22.52° | 21.62° | 0.991 |
+
+These are **SOURCE-MICROKERNEL** results, not `MEASURED` runtime claims.
+
+The large A6M difference from the isolated legacy measured profile is intentionally retained. It
+must be resolved through same-artifact runtime trace replay, not by tuning constants until the
+numbers look familiar.
