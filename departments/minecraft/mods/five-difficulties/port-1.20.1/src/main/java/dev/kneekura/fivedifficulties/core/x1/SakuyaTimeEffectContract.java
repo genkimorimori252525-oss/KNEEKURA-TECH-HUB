@@ -2,11 +2,7 @@ package dev.kneekura.fivedifficulties.core.x1;
 
 import java.util.Set;
 
-/**
- * Player-visible X1 time-domain contract.
- *
- * Freeze-category details stay unresolved until the X1 runtime/raw source oracle is re-opened.
- */
+/** Exact static X1 time-effect contract. */
 public record SakuyaTimeEffectContract(
         SakuyaTimeEffectKind kind,
         double rangeBlocks,
