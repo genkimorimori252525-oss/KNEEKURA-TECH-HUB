@@ -5,102 +5,107 @@ Minecraft再起動前に弾幕の形・密度・時間変化を調整する、�
 
 ## 起動
 
-Windows x64、JDK17以上。PowerShellでこのディレクトリに移動して実行する。
-既定のJDK17がある場合は`run.cmd`をダブルクリックしても単一Pattern画面を起動できる。
+Windows x64、JDK17以上。
+
+単一Pattern:
 
 ```powershell
 ./run.ps1 -JavaHome 'C:/Program Files/Java/jdk-17'
 ```
 
-Grand Danmaku用のScore Mode:
+Grand Danmaku Score Mode:
 
 ```powershell
 ./run.ps1 -JavaHome 'C:/Program Files/Java/jdk-17' -Score
 ```
 
-別のScore JSONを開く:
+別Score:
 
 ```powershell
 ./run.ps1 -Score -ScoreFile 'C:/path/to/score.json'
 ```
 
-初回だけMaven CentralからOpenJFX21.0.9のbase/graphics/controlsを取得する。
-SHA256固定で照合し、`.cache`へ保持する。JARやnative DLLはGitに含めない。
-Minecraft、Forge、Gradle、サーバー接続は不要。
-
-## 単一Pattern v1
-
-- FAN=扇状、RING=全周、SPIRAL=回転全周。
-- 弾数、速度、発射間隔、扇角度、回転、仰角、寿命、期間を即時編集。
-- 再生/停止、最初から、1tick送り、時間スライダー。
-- 上面/側面/自由視点、左ドラッグorbit、右ドラッグpan、ホイールzoom。
-- 厳格な平坦JSON v1を保存/読込。
-- `Pattern.java`はJavaFX/Minecraft非依存。
-
 ## Score Mode v2
 
-Scoreは既存`Pattern.Config`を複数Trackとして重ねる。v1 Pattern JSONは変更しない。
+Scoreは既存`Pattern.Config`を複数Trackとして重ねる。Pattern JSON v1は変更しない。
 
-各Track:
-- name
+Track主要項目:
 - startTick / endTick
-- WORLD / PLAYER_VIEW frame
+- WORLD / PLAYER_VIEW
 - forwardSpeed
+- phaseDeg
 - hue / radius
-- FAN / RING / SPIRALと既存Pattern数値
+- FAN / RING / SPIRAL
+- 既存Pattern速度・間隔・回転等
 
-`PLAYER_VIEW`では、既存Patternのyaw平面をプレイヤー画面の右/上へ写し、
-`forwardSpeed`で総統ガストからプレイヤー方向へ進ませる。
-これにより、総統ガストを中心にリングや螺旋が「画面上で咲きながら前進する」下書きを作れる。
+`phaseDeg`はTrack全体を発射軸まわりに回転する。
+これにより同じFANを60°ずつ6本重ねて花弁を作ったり、螺旋を位相ずらししたり、安全地帯の方向を意図的に残せる。
 
-Score画面には:
-- 複数Track同時描画
-- Track選択とライブ数値編集
+旧Score JSON v2に`phaseDeg`が無い場合は0°として読む。
+
+## PLAYER_VIEW
+
+基準:
+- Soutou Ghast発射点 = (0,2,0)
+- player = (0,2,24)
+- +Z = Ghast -> player
+- +Y = up
+- 20 tick/s
+- 1 unit = 1 block
+
+PLAYER_VIEWではPattern平面をプレイヤー画面のright/upへ写し、forwardSpeedでプレイヤー方向へ進める。
+
+Score ModeはPlayer POVを既定視点として開く。
+目的は世界座標での美しさではなく、**戦闘中のプレイヤー画面で弾幕がどう咲くか**を調整すること。
+
+## 現在の Grand Danmaku score
+
+`presets/grand-danmaku-score.json`
+
+約14秒 / 280 tick。
+
+構成:
+
+1. **Halo Gold** — 最初の円環。総統ガストを弾幕の中心として認識させる。
+2. **Twin Spiral** — 青/桃の逆回転螺旋。
+3. **Six Petal Bloom** — 60°間隔の6つのFAN。各花弁28°なので、花弁間に約32°のnegative spaceを意図的に残す。
+4. **Weave** — cyan/violetの速度・位相違い逆回転螺旋で交差感を作る。
+5. **Double Finale** — 黄/桃の二重リングで収束。
+
+最大live countは3000契約より十分低い範囲に保つ。
+現在の譜面は「全弾が総統ガストから発射され、飛行の結果として模様になる」というsource-integrity原則を維持する。
+
+## UI
+
+- Track選択/ライブ数値編集
+- phaseDeg編集
 - Score JSON v2保存/読込
 - Player POV
 - 上面/側面/自由視点
-- live bullet count / active Track count
-- 再生/停止/1tick/seek
+- live bullet count
+- active Track count
+- play/pause/1tick/seek
+- 左drag orbit / 右drag pan / wheel zoom
 
-を持つ。
+## 制約
 
-同梱`presets/grand-danmaku-score.json`は、
-Halo + 逆回転Twin Spiral + Finaleの最小Grand Danmaku下書き。
+- Score/Pattern期間 最大60秒
+- Score Track 最大32
+- combined live bullets 最大3000
+- 上限では弾を黙って落とさず入力を拒否
 
-## Player POV契約
+## 境界
 
-プレビューでは:
-- 総統ガスト発射点 = (0,2,0)
-- player marker = (0,2,24)
-- +Zが総統ガストからプレイヤー方向
-- +Yが上
-- 1単位=1block
-- 20tick/秒
-
-Player POVではカメラをplayer markerへ置き、総統ガスト方向を見る。
-「世界座標では綺麗」ではなく「戦闘中のプレイヤー画面で綺麗」を評価するための視点。
-
-## 上限
-
-- Score期間 / Pattern期間: 最大60秒
-- 最大同時弾数: 3,000
-- Score Track: 最大32
-- 上限超過時は入力を拒否し、弾を黙って省略しない
-
-## 計算境界
-
-これはMinecraft実機そのものではない。
+これはauthoring toolでありMinecraft runtimeそのものではない。
 
 未実装:
 - Minecraft collision/damage
-- terrain interaction
+- terrain
 - Forge networking
-- VirtualBullet runtime
-- Minecraft renderer parity
-- automatic NaturalGhast MOD import
+- Minecraft batched renderer parity
+- runtime performance acceptance
 
-下書き確定後、同じ純Java計算契約をNaturalGhast側へ移し、
-水槽/LABで実機の見た目・当たり判定・性能を仕上げる。
+NaturalGhast側では同じScore v2を読むowner-managed VirtualBullet runtimeを別Draftで実装している。
 
 ## 検証
 
@@ -110,6 +115,6 @@ Player POVではカメラをplayer markerへ置き、総統ガスト方向を見
 ./run.ps1 -Smoke
 ```
 
-`-Test`はOpenJFX不要でPattern v1とScore v2の純Java計算/JSONを検証する。
-`-CompileOnly`は既存PreviewAppとScorePreviewAppの両方を実JavaFX依存でコンパイルする。
-既存`-Smoke`はv1画面の有限JavaFX smokeを維持する。
+GitHub Actions:
+- Windows JavaFX draft: Score phase/Player POVを含めSUCCESS
+- repository suite: Score純Java契約を含め検証
