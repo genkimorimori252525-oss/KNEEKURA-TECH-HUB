@@ -33,11 +33,19 @@
     "animation": "MAPPED",
     "networking_sync": "MAPPED",
     "world_data": "MAPPED",
-    "runtime": "NOT_RUN"
+    "runtime": "NOT_RUN",
+    "technique_vfx_atlas": "EVIDENCE_BACKED",
+    "player_animation_atlas": "EVIDENCE_BACKED",
+    "domain_visual_atlas": "EVIDENCE_BACKED"
   },
   "cautions": [
     "Three-participant cut-in does not prove a centralized symmetric three-way domain battle solver.",
     "ParticlePacketMixin forces the client particle override limiter and may increase load.",
     "Distribution version 8.1 differs from embedded mods.toml version 7.0."
-  ]
+  ],
+  "technique_vfx_coverage": {
+    "player_kits": 18,
+    "inventory_status": "UI move inventory mapped with DIRECT/DIRECT_FAMILY/DIRECT_SYSTEM/PARTIAL evidence labels",
+    "runtime": "NOT_RUN"
+  }
 }

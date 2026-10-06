@@ -1,0 +1,488 @@
+{
+  "format": "kneekura.minecraft.technique-vfx-inventory.v1",
+  "target": "Jujutsu Kaisen (Jujutsu Verse) V8.1",
+  "anchor_sha256": "d0f2f4e427ae3db92432cfac186a7db137ab8960807ed13ebfa64c7971cb8217",
+  "runtime_status": "NOT_RUN",
+  "evidence_labels": {
+    "DIRECT": "named UI technique mapped to exact binary behavior/resource",
+    "DIRECT_FAMILY": "shared visual/actor family is exact but variant-specific split is shared",
+    "DIRECT_SYSTEM": "primarily state/control rather than standalone attack VFX",
+    "PARTIAL": "UI move known; complete standalone visual branch not isolated"
+  },
+  "kits": [
+    {
+      "kit": "Yuji Itadori",
+      "techniques": [
+        {
+          "name": "Manji Kick",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Divergent Fist",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Sukuna",
+          "evidence": "PARTIAL"
+        },
+        {
+          "name": "Extreme Focus",
+          "evidence": "DIRECT"
+        }
+      ]
+    },
+    {
+      "kit": "Nobara Kugisaki",
+      "techniques": [
+        {
+          "name": "Diffuse Throwing Nails",
+          "evidence": "DIRECT_FAMILY"
+        },
+        {
+          "name": "Hairpin",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Resonance",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Sharp Strike",
+          "evidence": "DIRECT"
+        }
+      ]
+    },
+    {
+      "kit": "Toge Inumaki",
+      "techniques": [
+        {
+          "name": "Don't Move",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Blast Away",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Explode",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Get Twisted",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Get Crushed",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Crumble Away",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Die",
+          "evidence": "DIRECT"
+        }
+      ]
+    },
+    {
+      "kit": "Yuta Okkotsu",
+      "techniques": [
+        {
+          "name": "Come!! Rika!!",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Return Rika",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Match my movements, Rika",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Rika, let's do that",
+          "evidence": "PARTIAL"
+        },
+        {
+          "name": "Pure Love",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "come, rika",
+          "evidence": "PARTIAL"
+        },
+        {
+          "name": "Return Rika (alternate)",
+          "evidence": "PARTIAL"
+        },
+        {
+          "name": "Drop it!! Rika!!",
+          "evidence": "PARTIAL"
+        },
+        {
+          "name": "Which one do you want?",
+          "evidence": "DIRECT_SYSTEM"
+        },
+        {
+          "name": "Let's go Rika",
+          "evidence": "DIRECT"
+        }
+      ]
+    },
+    {
+      "kit": "Satoru Gojo",
+      "techniques": [
+        {
+          "name": "Infinity",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Lapse: Blue",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Maximum Output Blue",
+          "evidence": "DIRECT_FAMILY"
+        },
+        {
+          "name": "Reversal: Red",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Hollow Purple",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Unlimited Void",
+          "evidence": "DIRECT"
+        }
+      ]
+    },
+    {
+      "kit": "Toji Fushiguro",
+      "techniques": [
+        {
+          "name": "Thrust Attack",
+          "evidence": "DIRECT_FAMILY"
+        },
+        {
+          "name": "Double Attack",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Combo Attack",
+          "evidence": "DIRECT"
+        }
+      ]
+    },
+    {
+      "kit": "Jogo",
+      "techniques": [
+        {
+          "name": "Jump Attack",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Eerie Flame",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Piercing Flame",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Volcanic Eruption",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Ember Insects",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Molten Sea",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Sapphire of the Flame",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Coffin of the Iron Mountain",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Maximum: Meteor",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Maximum Meteor Small",
+          "evidence": "DIRECT"
+        }
+      ]
+    },
+    {
+      "kit": "Hanami",
+      "techniques": [
+        {
+          "name": "Flower Field",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Wooden Ball / Spear",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Roots",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Cursed Bud",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Offering Flowers",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Shining Sea domain",
+          "evidence": "DIRECT"
+        }
+      ]
+    },
+    {
+      "kit": "Mahito",
+      "techniques": [
+        {
+          "name": "Idle Transfiguration",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Modified Human",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Body Repel",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Self-Embodiment of Perfection",
+          "evidence": "DIRECT"
+        }
+      ]
+    },
+    {
+      "kit": "Kento Nanami",
+      "techniques": [
+        {
+          "name": "Ratio Technique",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Overtime",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Collapse",
+          "evidence": "DIRECT"
+        }
+      ]
+    },
+    {
+      "kit": "Ryomen Sukuna",
+      "techniques": [
+        {
+          "name": "Dismantle",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Cleave",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Malevolent Shrine",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Divine Flame — Open",
+          "evidence": "DIRECT"
+        }
+      ]
+    },
+    {
+      "kit": "Megumi Fushiguro",
+      "techniques": [
+        {
+          "name": "Divine Dog",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Nue",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Toad",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "The Well's Unknown Abyss",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Great Serpent",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Rabbit Escape",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Max Elephant",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Chimera Shadow Garden",
+          "evidence": "DIRECT"
+        }
+      ]
+    },
+    {
+      "kit": "Choso",
+      "techniques": [
+        {
+          "name": "Convergence",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Piercing Blood",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Slicing Exorcism",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Blood Meteorite",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Flowing Red Scale",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Flowing Red Scale: Stack",
+          "evidence": "DIRECT_FAMILY"
+        },
+        {
+          "name": "Sea of Blood",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Supernova",
+          "evidence": "DIRECT"
+        }
+      ]
+    },
+    {
+      "kit": "Masamichi Yaga",
+      "techniques": [
+        {
+          "name": "Discipline",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Return to Inventory",
+          "evidence": "PARTIAL"
+        },
+        {
+          "name": "Target him!",
+          "evidence": "DIRECT_SYSTEM"
+        },
+        {
+          "name": "Advance! My Cursed...",
+          "evidence": "DIRECT"
+        }
+      ]
+    },
+    {
+      "kit": "Naobito Zenin",
+      "techniques": [
+        {
+          "name": "Barrage",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Projection Sorcery",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "We'll Crush You With...",
+          "evidence": "DIRECT"
+        }
+      ]
+    },
+    {
+      "kit": "Aoi Todo",
+      "techniques": [
+        {
+          "name": "Boogie Woogie",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Stone Throwing",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Are you satisfied with that?",
+          "evidence": "DIRECT"
+        }
+      ]
+    },
+    {
+      "kit": "Dagon",
+      "techniques": [
+        {
+          "name": "Disaster Tides",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Defence from Water",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Death Swarm [1]",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Death Swarm [2]",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Horizon of the Captivating Skandha",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Death Swarm [3]",
+          "evidence": "DIRECT"
+        }
+      ]
+    },
+    {
+      "kit": "Ryu Ishigori",
+      "techniques": [
+        {
+          "name": "Granite Blast",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Granite Blast [2]",
+          "evidence": "DIRECT"
+        },
+        {
+          "name": "Have A Seat at Our Table",
+          "evidence": "DIRECT"
+        }
+      ]
+    }
+  ]
+}

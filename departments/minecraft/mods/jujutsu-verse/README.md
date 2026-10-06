@@ -39,6 +39,7 @@ The exact uploaded binary hash is the canonical ANCHOR. Distribution version and
 - Black Flash is procedural geometry; beam/VFX systems reconstruct dense visuals client-side from compact synchronized entity state.
 - RippleEffectManager projects a target entity into screen coordinates and uses that position as a post-process shader epicenter.
 - CustomPortalBlockEntityRenderer renders a separate TextureTarget and projects it through world geometry.
+- The technique-focused pass maps all 18 player kits and their named UI moves into per-technique VFX/trajectory evidence, preserving partial mappings instead of guessing.
 
 ## Whole-target scale
 
@@ -75,6 +76,10 @@ Resource-file counts:
 - DOMAIN-CLASH-AND-CUTIN.md
 - RENDERING-EFFECTS.md
 - TECHNIQUE-EFFECT-PATTERNS.md
+- TECHNIQUE-VFX-ATLAS.md
+- TECHNIQUE-VFX-INVENTORY.json
+- PLAYER-ANIMATION-ATLAS.md
+- DOMAIN-VISUAL-ATLAS.md
 - JUJUTSUCRAFT-COMPARISON.md
 - TECHNICAL-KNOWLEDGE.md
 - manifest.json
