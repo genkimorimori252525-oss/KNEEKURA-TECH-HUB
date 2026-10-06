@@ -9,7 +9,10 @@ import java.util.Set;
 /** Strict Score JSON v2 codec. Keeps Pattern JSON v1 untouched. */
 public final class ScoreJson {
     private static final Set<String> ROOT_KEYS = Set.of("schemaVersion", "tickRate", "durationTicks", "tracks");
-    private static final Set<String> TRACK_KEYS = Set.of("name", "startTick", "endTick", "frame", "forwardSpeed",
+    private static final Set<String> TRACK_ALLOWED = Set.of("name", "startTick", "endTick", "frame", "forwardSpeed",
+        "phaseDeg", "hue", "radius", "pattern", "bullets", "speed", "intervalTicks", "fanAngleDeg",
+        "rotationDegPerSecond", "elevationDeg", "lifetimeTicks");
+    private static final Set<String> TRACK_REQUIRED = Set.of("name", "startTick", "endTick", "frame", "forwardSpeed",
         "hue", "radius", "pattern", "bullets", "speed", "intervalTicks", "fanAngleDeg",
         "rotationDegPerSecond", "elevationDeg", "lifetimeTicks");
 
@@ -26,6 +29,7 @@ public final class ScoreJson {
              .append("      \"endTick\": ").append(t.endTick()).append(",\n")
              .append("      \"frame\": \"").append(t.frame()).append("\",\n")
              .append("      \"forwardSpeed\": ").append(Double.toString(t.forwardSpeed())).append(",\n")
+             .append("      \"phaseDeg\": ").append(Double.toString(t.phaseDeg())).append(",\n")
              .append("      \"hue\": ").append(Double.toString(t.hue())).append(",\n")
              .append("      \"radius\": ").append(Double.toString(t.radius())).append(",\n")
              .append("      \"pattern\": \"").append(p.pattern()).append("\",\n")
@@ -56,13 +60,15 @@ public final class ScoreJson {
         var tracks = new ArrayList<Score.Track>();
         for (Object value : rawTracks) {
             Map<String, Object> t = object(value, "track");
-            exactKeys(t, TRACK_KEYS, "track");
+            allowedAndRequired(t, TRACK_ALLOWED, TRACK_REQUIRED, "track");
             String name = string(t, "name");
             int start = integer(t, "startTick"), end = integer(t, "endTick");
             Score.Frame frame;
             try { frame = Score.Frame.valueOf(string(t, "frame")); }
             catch (IllegalArgumentException ex) { throw new IllegalArgumentException("unknown frame", ex); }
-            double forwardSpeed = number(t, "forwardSpeed"), hue = number(t, "hue"), radius = number(t, "radius");
+            double forwardSpeed = number(t, "forwardSpeed");
+            double phaseDeg = t.containsKey("phaseDeg") ? number(t, "phaseDeg") : 0.0;
+            double hue = number(t, "hue"), radius = number(t, "radius");
             Pattern.Kind kind;
             try { kind = Pattern.Kind.valueOf(string(t, "pattern")); }
             catch (IllegalArgumentException ex) { throw new IllegalArgumentException("unknown pattern", ex); }
@@ -71,7 +77,7 @@ public final class ScoreJson {
                 rotation = number(t, "rotationDegPerSecond"), elevation = number(t, "elevationDeg");
             tracks.add(new Score.Track(name, start, end,
                 new Pattern.Config(kind, bullets, speed, interval, fan, rotation, elevation, lifetime, end - start),
-                frame, forwardSpeed, hue, radius));
+                frame, forwardSpeed, phaseDeg, hue, radius));
         }
         return new Score.Config(duration, tracks);
     }
@@ -87,6 +93,10 @@ public final class ScoreJson {
     }
     private static void exactKeys(Map<String, Object> map, Set<String> keys, String label) {
         if (!map.keySet().equals(keys)) throw new IllegalArgumentException(label + " fields mismatch: " + map.keySet());
+    }
+    private static void allowedAndRequired(Map<String, Object> map, Set<String> allowed, Set<String> required, String label) {
+        if (!allowed.containsAll(map.keySet())) throw new IllegalArgumentException(label + " has unknown fields: " + map.keySet());
+        if (!map.keySet().containsAll(required)) throw new IllegalArgumentException(label + " is missing required fields");
     }
     private static String string(Map<String, Object> map, String key) {
         Object v = map.get(key); if (!(v instanceof String s)) throw new IllegalArgumentException(key + " must be string"); return s;
