@@ -260,6 +260,72 @@ In the distributed bytecode, after the strength-6 anti-air explosion:
 
 This matches the Java source and the two Walpurgis AI copies. The self-poison target choice is therefore present in the shipped executable path of the Nutcracker movement controller as well.
 
+## Damage-gate bytecode spot checks
+
+The same bounded `javap -c -p` pass was extended to the damage pipeline.
+
+Additional selected class hashes:
+
+| Class | SHA-256 |
+| --- | --- |
+| `EntityKriemhildGretchen.class` | `d79d04365e272bb1595fe1f2a50c3f803c7a5f711d30ded75857872d6b26a5b4` |
+| `EntityHomulillyNutcracker.class` | `88aadde2533d42a0aa727b6e429bf505aa54b98e41e9f81d2f6a1bbe5eb02c19` |
+| `EntityMami.class` | `0f1920adf86b1bb43dad4cb8680772eddefa0b69e0c582bef644b48eea1d8435` |
+
+### Throwable DamageSource fallback ladder
+
+Distributed `EntityGarnetThrowable` bytecode contains, in order after the hit entity's obfuscated `field_70172_ad` (MCP `hurtResistantTime`) is written to zero:
+
+1. `DamageSource.func_76356_a(projectile, thrower)` → thrown damage;
+2. if rejected and target is not `EntityGarnetBase`, `DamageSource.func_76358_a(thrower)` → mob damage;
+3. if rejected again and thrower is enabled `EntityGarnetTameable`, `DamageSource.func_76365_a(owner)` → player damage.
+
+Each path invokes the distributed `Entity.func_70097_a(DamageSource,float)` attack method.
+
+This confirms that the source's source-type fallback ladder is present in the shipped binary.
+
+### Critical Throwable ordering
+
+Distributed `EntityGarnetThrowable`:
+- tests its critical bit;
+- invokes world explosion creation with **6.0F** before the direct hit path;
+- then writes hit entity `field_70172_ad = 0`;
+- then calls the direct damage method.
+
+Therefore a critical entity impact has the same source-derived ordering:
+
+`explosion → clear ordinary hurt resistance → direct projectile damage`.
+
+### Mami critical flag
+
+Distributed `EntityMami.mamiShot(..., boolean)`:
+- checks the final boolean argument;
+- when true, calls `EntityGarnetBullet.setIsCritical(true)`.
+
+The long-range source path that announces `Tiro Finale!` supplies that boolean as true. Combined with the previous bytecode check, the explosive-critical implementation used by the finisher is present in the shipped classes.
+
+### Kriemhild rolling damage budget
+
+Distributed `EntityKriemhildGretchen.func_70097_a` contains:
+- per-hit cap constant **10.0F**;
+- reads `armorValue`;
+- if `armorValue + incoming >10`, replaces accepted amount with `10 - armorValue`;
+- adds accepted amount back into `armorValue`.
+
+Distributed living-update bytecode:
+- decrements `superArmor` while positive;
+- otherwise writes `superArmor=20` and `armorValue=0`.
+
+This confirms the source-derived **rolling ~10-damage budget per ~20-tick custom window** rather than ordinary vanilla i-frame behavior.
+
+### Walpurgis / Nutcracker local super-armor
+
+The distributed Walpurgis and Nutcracker classes both contain their own `superArmor` integer fields and write constant **20** after accepted damage.
+
+Because this target-local field is separate from Minecraft's ordinary `hurtResistantTime`, the Garnet projectile reset does not erase this boss-specific gate.
+
+These remain selected semantic checks, not a full 193-class normalized instruction comparison.
+
 ## Interpretation
 
 The supplied distributions show **strong source↔binary structural correspondence**:
