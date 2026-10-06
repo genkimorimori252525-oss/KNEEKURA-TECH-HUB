@@ -23,7 +23,6 @@ public final class SakuyaTimeStopService {
 
     public void start(SakuyaTimeStopInstance instance) {
         if (instance == null) throw new NullPointerException("instance");
-        // P0 keeps at most one active stop per source. Overlap between different sources remains supported.
         active.values().removeIf(existing -> existing.sourceEntityId().equals(instance.sourceEntityId()));
         active.put(instance.stopId(), instance);
     }
@@ -53,15 +52,19 @@ public final class SakuyaTimeStopService {
     }
 
     /**
-     * Overlap rule: a foreign FREEZE beats SPECIAL_PROJECTILE; SPECIAL beats ALLOW.
-     * This keeps multi-stopper behavior conservative until X1 multiplayer is observed.
+     * Conservative overlap priority until X1 duplicate-controller handling is moved
+     * to the Forge controller layer:
+     * FREEZE > HALF_SPEED > SPECIAL_PROJECTILE > ALLOW.
      */
     public TimeStopDecision decision(TimeStopSubject subject, int tick) {
         TimeStopDecision result = TimeStopDecision.ALLOW;
         for (SakuyaTimeStopInstance stop : active.values()) {
             TimeStopDecision next = policy.decide(stop, subject, tick);
             if (next == TimeStopDecision.FREEZE) return TimeStopDecision.FREEZE;
-            if (next == TimeStopDecision.SPECIAL_PROJECTILE) result = TimeStopDecision.SPECIAL_PROJECTILE;
+            if (next == TimeStopDecision.HALF_SPEED) result = TimeStopDecision.HALF_SPEED;
+            else if (next == TimeStopDecision.SPECIAL_PROJECTILE && result == TimeStopDecision.ALLOW) {
+                result = TimeStopDecision.SPECIAL_PROJECTILE;
+            }
         }
         return result;
     }
