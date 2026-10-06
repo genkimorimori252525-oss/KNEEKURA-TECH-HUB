@@ -3,10 +3,7 @@ package dev.kneekura.fivedifficulties.core.x1;
 import java.util.Set;
 
 /**
- * Evidence-backed intent for one Homing Amulet firing branch.
- *
- * This deliberately stops before converting into LegacyShotSpec because the
- * current retained X1 evidence does not pin every numeric ShotData field.
+ * Exact X1 contract for one red Homing Amulet firing branch.
  */
 public record HomingAmuletShotContract(
         int shotCount,
@@ -14,6 +11,13 @@ public record HomingAmuletShotContract(
         double shotSize,
         double damage,
         double speed,
+        int legacyForm,
+        int legacyColor,
+        int delayTicks,
+        int lifetimeTicks,
+        int specialId,
+        double spawnDistance,
+        double baseAngleDegrees,
         String projectileFamily,
         String colorName,
         String specialBehavior,
@@ -27,6 +31,11 @@ public record HomingAmuletShotContract(
         finitePositive(shotSize, "shotSize");
         finiteNonNegative(damage, "damage");
         finiteNonNegative(speed, "speed");
+        if (legacyForm < 0 || legacyColor < 0 || specialId < 0) throw new IllegalArgumentException("negative legacy id");
+        if (delayTicks < 0) throw new IllegalArgumentException("delayTicks < 0");
+        if (lifetimeTicks <= 0) throw new IllegalArgumentException("lifetimeTicks <= 0");
+        finiteNonNegative(spawnDistance, "spawnDistance");
+        if (!Double.isFinite(baseAngleDegrees)) throw new IllegalArgumentException("baseAngleDegrees");
         finiteNonNegative(maxHomingTurnDegreesPerTick, "maxHomingTurnDegreesPerTick");
         if (projectileFamily == null || colorName == null || specialBehavior == null || evidenceGrade == null) {
             throw new NullPointerException();
