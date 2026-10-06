@@ -1,0 +1,217 @@
+name: FatePhantasms release probe
+
+on:
+  push:
+    branches:
+      - jolly/research-fatephantasms-vfx-2026-10-06
+    paths:
+      - .github/workflows/fatephantasms-release-probe.yml
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download pinned releases
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/fatephantasms out
+          curl -L --fail --retry 3 -o /tmp/fatephantasms/r205.jar https://github.com/Terry0333/FatePhantasms/releases/download/1/FatePhantasms-1.0.0-r205.jar
+          curl -L --fail --retry 3 -o /tmp/fatephantasms/r224.jar https://github.com/Terry0333/FatePhantasms/releases/download/2/FatePhantasms-1.0.0-r224.jar
+          curl -L --fail --retry 3 -o /tmp/fatephantasms/r284.jar https://github.com/Terry0333/FatePhantasms/releases/download/8/FatePhantasms-1.0.0-r284.jar
+          printf '%s  %s\n' \
+            1372be839df53214b53481dfce989486025c5d8b9273b0e3aa51450660ede9d1 /tmp/fatephantasms/r205.jar \
+            6842008cea5107c13fa806bf433224841f3147c9c832be9d894837f0bf677d36 /tmp/fatephantasms/r224.jar \
+            68158d03ae033577def23d51c4e238c8f9aa082243c8da16fbe0e4f9a3fcc88c /tmp/fatephantasms/r284.jar \
+            | sha256sum -c -
+          sha256sum /tmp/fatephantasms/*.jar | tee out/SHA256SUMS.txt
+
+      - name: Inventory and reference scan
+        shell: python
+        run: |
+          import collections, hashlib, json, pathlib, re, zipfile
+
+          jars = {
+              "r205": pathlib.Path("/tmp/fatephantasms/r205.jar"),
+              "r224": pathlib.Path("/tmp/fatephantasms/r224.jar"),
+              "r284": pathlib.Path("/tmp/fatephantasms/r284.jar"),
+          }
+          out = pathlib.Path("out")
+          tokens = [
+              b"com/lowdragmc/photon", b"com.lowdragmc.photon",
+              b"com/lowdragmc/lowdraglib", b"com.lowdragmc.lowdraglib",
+              b"ldlib", b"photon", b"geckolib", b"azurelib",
+              b"camera", b"shake", b"bloom", b"beam", b"trail",
+          ]
+          text_exts = {".json",".toml",".mcmeta",".txt",".lang",".properties",".glsl",".vsh",".fsh",".md",".xml",".yml",".yaml",".fx"}
+          versions = {}
+
+          def digest(data):
+              return hashlib.sha256(data).hexdigest()
+
+          def ascii_strings(data, minimum=5):
+              return [m.group().decode("latin1","ignore") for m in re.finditer(rb"[\x20-\x7e]{5,}", data)]
+
+          for ver, jar in jars.items():
+              with zipfile.ZipFile(jar) as z:
+                  names = z.namelist()
+                  classes = [n for n in names if n.endswith(".class")]
+                  resources = [n for n in names if not n.endswith(".class") and not n.endswith("/")]
+                  token_hits = {}
+                  interesting_strings = {}
+                  text_hits = {}
+                  entry_sha = {}
+                  for n in names:
+                      if n.endswith("/"):
+                          continue
+                      data = z.read(n)
+                      entry_sha[n] = digest(data)
+                      lower = data.lower()
+                      if n.endswith(".class"):
+                          hits = [t.decode("latin1") for t in tokens if t.lower() in lower]
+                          if hits:
+                              token_hits[n] = sorted(set(hits))
+                          ss = [s for s in ascii_strings(data) if any(k in s.lower() for k in (
+                              "photon","lowdrag","effect","particle","beam","trail","bloom",
+                              "enuma","enkidu","babylon","chain","camera","shake","sound","animation"
+                          ))]
+                          if ss:
+                              interesting_strings[n] = sorted(set(ss))[:300]
+                      else:
+                          suffix = pathlib.PurePosixPath(n).suffix.lower()
+                          if suffix in text_exts and len(data) <= 1024*1024:
+                              text_data = data.decode("utf-8","ignore")
+                              hits = []
+                              for i,line in enumerate(text_data.splitlines(),1):
+                                  if any(k in line.lower() for k in (
+                                      "photon","lowdrag","ldlib","beam","trail","bloom",
+                                      "enuma","enkidu","babylon","camera","shake"
+                                  )):
+                                      hits.append({"line":i,"text":line[:500]})
+                              if hits:
+                                  text_hits[n] = hits[:300]
+                  metadata = {}
+                  for candidate in ("META-INF/mods.toml","META-INF/MANIFEST.MF","pack.mcmeta"):
+                      if candidate in names:
+                          metadata[candidate] = z.read(candidate).decode("utf-8","replace")
+                  versions[ver] = {
+                      "jar_sha256": digest(jar.read_bytes()),
+                      "entry_count": len(names),
+                      "class_count": len(classes),
+                      "resource_count": len(resources),
+                      "extension_counts": dict(collections.Counter(pathlib.PurePosixPath(n).suffix.lower() or "<none>" for n in names).most_common()),
+                      "classes": classes,
+                      "resources": resources,
+                      "entry_sha256": entry_sha,
+                      "token_hits": token_hits,
+                      "interesting_strings": interesting_strings,
+                      "text_hits": text_hits,
+                      "metadata": metadata,
+                  }
+                  callers = [
+                      n[:-6].replace("/", ".") for n,h in token_hits.items()
+                      if any("photon" in x.lower() or "lowdrag" in x.lower() or "ldlib" in x.lower() for x in h)
+                  ]
+                  (out/(ver+"-photon-classes.txt")).write_text("\n".join(sorted(callers))+"\n", encoding="utf-8")
+
+          def diff(a,b):
+              A=set(versions[a]["entry_sha256"])
+              B=set(versions[b]["entry_sha256"])
+              common=A&B
+              return {
+                  "added": sorted(B-A),
+                  "removed": sorted(A-B),
+                  "changed": sorted(n for n in common if versions[a]["entry_sha256"][n] != versions[b]["entry_sha256"][n]),
+                  "unchanged_count": sum(versions[a]["entry_sha256"][n] == versions[b]["entry_sha256"][n] for n in common),
+              }
+
+          result = {
+              "versions": versions,
+              "diffs": {
+                  "r205_to_r224": diff("r205","r224"),
+                  "r224_to_r284": diff("r224","r284"),
+              }
+          }
+          (out/"probe.json").write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding="utf-8")
+
+          lines=["# FatePhantasms release probe",""]
+          for ver in ("r205","r224","r284"):
+              v=versions[ver]
+              callers=[n for n,h in v["token_hits"].items() if any("photon" in x.lower() or "lowdrag" in x.lower() or "ldlib" in x.lower() for x in h)]
+              lines += [
+                  "## "+ver,
+                  "- sha256: "+v["jar_sha256"],
+                  "- entries: "+str(v["entry_count"])+" / classes: "+str(v["class_count"])+" / resources: "+str(v["resource_count"]),
+                  "- Photon/LDLib caller candidates: "+str(len(callers)),
+                  "",
+                  "### Metadata",
+                  "TEXT-BEGIN",
+                  "\n\n".join("["+k+"]\n"+val for k,val in v["metadata"].items())[:18000],
+                  "TEXT-END",
+                  "",
+                  "### Photon/LDLib caller candidates",
+              ]
+              lines += ["- "+n for n in sorted(callers)] or ["- none"]
+              lines += ["","### VFX-like resources"]
+              fxres=[n for n in v["resources"] if any(k in n.lower() for k in ("fx","effect","particle","beam","trail","shader","animation","sound","enuma","enkidu","babylon","ea"))]
+              lines += ["- "+n for n in sorted(fxres)[:800]] or ["- none"]
+              lines += [""]
+
+          for title,a,b in (("r205 to r224","r205","r224"),("r224 to r284","r224","r284")):
+              d=diff(a,b)
+              lines += [
+                  "## Diff "+title,
+                  "- added: "+str(len(d["added"])),
+                  "- removed: "+str(len(d["removed"])),
+                  "- changed: "+str(len(d["changed"])),
+                  "- unchanged common: "+str(d["unchanged_count"]),
+                  "",
+                  "### Added entries",
+              ]
+              lines += ["- "+n for n in d["added"][:1500]]
+              lines += ["","### Changed entries"]
+              lines += ["- "+n for n in d["changed"][:1500]]
+              lines += [""]
+
+          (out/"probe.md").write_text("\n".join(lines),encoding="utf-8")
+
+      - name: Disassemble Photon caller candidates
+        shell: bash
+        run: |
+          set -euo pipefail
+          for ver in r205 r224 r284; do
+            : > "out/$ver-javap-photon.txt"
+            while IFS= read -r cls; do
+              [ -z "$cls" ] && continue
+              {
+                echo
+                echo "===== $cls ====="
+                javap -classpath "/tmp/fatephantasms/$ver.jar" -p -c -s "$cls" 2>&1 || true
+              } >> "out/$ver-javap-photon.txt"
+            done < "out/$ver-photon-classes.txt"
+          done
+
+      - name: Print concise result
+        shell: bash
+        run: |
+          echo "===== SHA256 ====="
+          cat out/SHA256SUMS.txt
+          echo "===== SUMMARY ====="
+          grep -E '^(## |- sha256:|- entries:|- Photon/LDLib|- added:|- removed:|- changed:|- unchanged)' out/probe.md || true
+          echo "===== r224 Photon caller classes ====="
+          cat out/r224-photon-classes.txt
+          echo "===== r284 Photon caller classes ====="
+          cat out/r284-photon-classes.txt
+
+      - name: Upload derived evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: fatephantasms-release-probe
+          path: out/
+          retention-days: 1
