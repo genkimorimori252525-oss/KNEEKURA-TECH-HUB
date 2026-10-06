@@ -36,6 +36,13 @@ jobs:
           chmod +x departments/minecraft/mods/five-difficulties/port-1.20.1/tools/run-pure-core-tests.sh
           departments/minecraft/mods/five-difficulties/port-1.20.1/tools/run-pure-core-tests.sh | tee pure-core.txt
 
+      - name: Validate resource JSON
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m json.tool departments/minecraft/mods/five-difficulties/port-1.20.1/src/main/resources/assets/five_difficulties_port/lang/en_us.json >/dev/null
+          python -m json.tool departments/minecraft/mods/five-difficulties/port-1.20.1/src/main/resources/assets/five_difficulties_port/lang/ja_jp.json >/dev/null
+
       - name: Prepare exact Forge 1.20.1 reference MDK
         shell: bash
         run: |
@@ -96,7 +103,9 @@ jobs:
           EOF
 
           set +e
-          timeout --signal=INT --kill-after=10s 120s             ./gradlew --no-daemon --max-workers=2 -Dorg.gradle.jvmargs=-Xmx3G runServer --args='nogui'             2>&1 | tee "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
+          timeout --signal=INT --kill-after=10s 120s \
+            ./gradlew --no-daemon --max-workers=2 -Dorg.gradle.jvmargs=-Xmx3G -Dfive_difficulties_port.runtimeSmokeExit=true runServer --args='nogui' \
+            2>&1 | tee "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
           RUN_RC=${PIPESTATUS[0]}
           set -e
 
