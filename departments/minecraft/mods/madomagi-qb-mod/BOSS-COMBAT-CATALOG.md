@@ -271,3 +271,19 @@ These should be matched against historical reports if older forum/archive materi
 - encounter-scoped environment controller.
 
 Preserve them independently.
+
+## Nutcracker anti-air movement detail
+
+A later tactical-AI pass found that `EntityHomulillyNutcracker`'s `EntityHomulillyAIMoveForTarget` is more than a movement Goal.
+
+It:
+- pursues small randomized flight points around its current target;
+- after ~100 airborne target ticks, enables the same forced-down anti-air punishment used by Walpurgis;
+- subtracts10 from target vertical motion every punishment update;
+- creates strength-3 explosion on landing;
+- after another100 punishment ticks without grounding, creates strength-6 explosion.
+
+The final fallback then applies Poison V for300 ticks to **the Nutcracker host**, not the target. Distributed bytecode confirms the host object receives the potion effect.
+
+This makes anti-flight control a **shared boss-family technique**, and the self-poison target choice a repeated implementation anomaly rather than a one-off Walpurgis oddity.
+
