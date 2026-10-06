@@ -196,7 +196,7 @@ No performance PASS is claimed from static source.
 | --- | --- |
 | legacy snapshot/hashes | EVIDENCE_BACKED |
 | full source-tree acquisition | EVIDENCE_BACKED |
-| source↔compiled-class equivalence | NOT_ANALYZED |
+| source↔compiled-class correspondence | MAPPED — exhaustive path/SourceFile-name match + sampled javap; full semantic equivalence not claimed |
 | bootstrap/registries/config | EVIDENCE_BACKED |
 | ownership/modes/persistence | EVIDENCE_BACKED |
 | magical-girl form/corruption machine | EVIDENCE_BACKED |
