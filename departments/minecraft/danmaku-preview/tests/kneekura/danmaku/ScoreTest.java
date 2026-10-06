@@ -5,8 +5,10 @@ import java.util.List;
 public final class ScoreTest {
     private static int checks;
     public static void main(String[] args) {
-        var a = Score.track("halo", 10, 110, Pattern.Kind.RING, 4, 0.5, 10, 360, 0, 0, 30, 40, 0.12);
-        var b = Score.track("spiral", 40, 140, Pattern.Kind.SPIRAL, 2, 0.25, 10, 360, 90, 0, 40, 210, 0.16);
+        var a = Score.track("halo", 10, 110, Pattern.Kind.RING, 4, 0.5, 10, 360, 0, 0, 30,
+            Score.Frame.WORLD, 0, 40, 0.12);
+        var b = Score.track("spiral", 40, 140, Pattern.Kind.SPIRAL, 2, 0.25, 10, 360, 90, 0, 40,
+            Score.Frame.WORLD, 0, 210, 0.16);
         var score = new Score.Config(160, List.of(a, b));
         equal(Score.at(score, 0).size(), 0, "before tracks");
         equal(Score.at(score, 10).size(), 4, "track starts at absolute tick");
@@ -17,12 +19,24 @@ public final class ScoreTest {
         truth(Score.at(score, 40.5).size() >= Score.at(score, 40).size(), "fractional time");
         equal(Score.liveCount(a, 9), 0, "live count pre-start");
         equal(Score.liveCount(a, 10), 4, "live count start");
+
+        var view = Score.track("view", 0, 20, Pattern.Kind.RING, 4, 1, 20, 360, 0, 0, 20,
+            Score.Frame.PLAYER_VIEW, 0.25, 10, 0.1);
+        var viewBullets = Score.at(new Score.Config(20, List.of(view)), 1);
+        near(viewBullets.get(0).x(), 0, "player frame ring top x");
+        near(viewBullets.get(0).y(), 3, "player frame Pattern Z maps to screen up");
+        near(viewBullets.get(0).z(), 0.25, "player frame forward travel");
+        near(viewBullets.get(1).x(), 1, "player frame ring right");
+
         rejects(() -> new Score.Config(160, List.of(
-            Score.track("bad", 0, 100, Pattern.Kind.RING, 300, 1, 1, 360, 0, 0, 20, 10, 0.1),
-            Score.track("bad2", 0, 100, Pattern.Kind.RING, 300, 1, 1, 360, 0, 0, 20, 20, 0.1)
+            Score.track("bad", 0, 100, Pattern.Kind.RING, 100, 1, 1, 360, 0, 0, 20,
+                Score.Frame.WORLD, 0, 10, 0.1),
+            Score.track("bad2", 0, 100, Pattern.Kind.RING, 100, 1, 1, 360, 0, 0, 20,
+                Score.Frame.WORLD, 0, 20, 0.1)
         )), "combined budget");
         rejects(() -> new Score.Track("x", 20, 10,
-            new Pattern.Config(Pattern.Kind.FAN, 1, 1, 1, 0, 0, 0, 5, 1), 0, 0.1), "invalid range");
+            new Pattern.Config(Pattern.Kind.FAN, 1, 1, 1, 0, 0, 0, 5, 1),
+            Score.Frame.WORLD, 0, 0, 0.1), "invalid range");
         rejects(() -> Score.at(score, -1), "negative time");
         rejects(() -> Score.at(score, 161), "beyond duration");
         String json = ScoreJson.write(score);
@@ -36,6 +50,8 @@ public final class ScoreTest {
                 var preset = ScoreJson.read(java.nio.file.Files.readString(java.nio.file.Path.of(args[0])));
                 truth(preset.tracks().size() >= 3, "bundled score tracks");
                 truth(Score.at(preset, 100).size() > 0, "bundled score active");
+                truth(preset.tracks().stream().allMatch(t -> t.frame() == Score.Frame.PLAYER_VIEW),
+                    "grand danmaku preset uses player-view frame");
             } catch (java.io.IOException ex) { throw new AssertionError("preset read", ex); }
         }
         System.out.println("PASS: " + checks + " score/JSON assertions");
@@ -44,6 +60,7 @@ public final class ScoreTest {
         checks++; if (!value) throw new AssertionError(message);
     }
     static void equal(long got, long want, String message) { truth(got == want, message + ": " + got + " != " + want); }
+    static void near(double got, double want, String message) { truth(Math.abs(got - want) < 1e-9, message + ": " + got); }
     static void rejects(Runnable action, String message) {
         checks++;
         try { action.run(); } catch (IllegalArgumentException expected) { return; }
