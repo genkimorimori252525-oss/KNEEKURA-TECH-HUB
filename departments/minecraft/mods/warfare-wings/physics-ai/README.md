@@ -51,7 +51,7 @@ The canonical **AI / simulator plan**, however, belongs here.
 
 ## Current implementation
 
-The first pure-Java implementation now exists.
+The pure-Java microkernel, same-artifact calibration bridge, and 24-aircraft source Atlas now exist.
 
 ```text
 warfare-wings/
@@ -66,24 +66,36 @@ warfare-wings/
     data/
       a6m-p47n-anchor-models.csv
       a6m-p47n-legacy-measured-reference.csv
+      base-aircraft-anchor-v1.csv
+      base-aircraft-anchor-v1.json
     src/main/java/.../
       Ia133Microkernel.java
       WarfareWingsAircraft.java
       PerformanceReportMain.java
+      AircraftAtlasMain.java
     src/test/java/.../
       Ia133MicrokernelSelfTest.java
+    tools/
+      extract_anchor_aircraft.py
+      build_aircraft_atlas.py
+      compare_traces.py
     reports/
       a6m-p47n-source-microkernel.csv
       a6m-p47n-source-microkernel.md
+      base-aircraft-source-atlas.csv
+      aircraft-atlas-ai-view.json
+      AIRCRAFT-ATLAS.md
 ```
 
 Current verified scope:
 
 - dependency-free Java 17;
 - 20 Hz source-microkernel;
-- A6M and P-47N seed models from supplied Warfare Wings ANCHOR;
+- exact supplied-ANCHOR derived data for all **24 base aircraft**;
+- A6M and P-47N focused seed/reference models;
 - 18 pure-Java invariant checks;
-- deterministic golden-report regeneration;
+- deterministic 24-aircraft source-Atlas regeneration;
+- AI-readable independent-axis ranks, doctrine contrasts and statistical inspection flags;
 - deterministic 401-sample throttle trace generation;
 - threshold-free trace comparator + AI-readable full-series output;
 - Forge runtime-probe source compilation;
@@ -203,13 +215,14 @@ legacy evidence rather than requiring future work to depend on that repository.
 
 ## Next implementation milestone
 
-The first source microkernel and A6M/P-47N report now exist. The next gate is **same-artifact runtime calibration**:
+The 24-aircraft source Atlas is now implemented. The next gate is **same-artifact runtime calibration**, prioritized by what the Atlas can falsify fastest:
 
-1. run the supplied Warfare Wings ANCHOR with the exact target Immersive Aircraft binary;
-2. record per-tick throttle-step telemetry;
-3. replay the exact input trace in the microkernel;
-4. compare engine power, velocity and position;
-5. repeat for yaw-step, pitch-step, sustained turn, glide and braking;
-6. resolve source↔binary discrepancies before changing physics constants;
-7. once A6M/P-47N transfer is bounded, expand model/report generation to all 24 base aircraft;
-8. only then use the fast environment for large-batch autonomous combat tuning.
+1. run the existing A6M throttle-step trace on the exact supplied Warfare Wings ANCHOR;
+2. add the same P-47N throttle trace to test the high-`engineSpeed` end of the source model;
+3. add A6M/P-47N yaw and pitch steps to validate the two fighter-control extremes already used in tactical comparisons;
+4. add IL-2 and B-17 yaw traces because the Atlas places them at the global high/low yaw extremes;
+5. add an **equal-angle turn** scenario so energy retention is compared after the same achieved heading change rather than the same control duration;
+6. then calibrate representative attacker/escort envelopes and promote trustworthy Atlas axes toward `MEASURED`;
+7. only after those transfer functions are bounded, use the fast environment for large-batch autonomous combat tuning.
+
+See [reports/AIRCRAFT-ATLAS.md](reports/AIRCRAFT-ATLAS.md) for the current 24-aircraft overview.

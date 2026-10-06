@@ -134,3 +134,51 @@ The exact real trace is not blocked by missing implementation. The registered Wi
 The branch runtime workflow is designed to use only the user-owned Warfare Wings ANCHOR matching
 SHA-256 `dc3029597c88859744633b6f5e4a9f21d449294b1aaac90ea0c1749d7aa98a43`; no public artifact
 fallback is allowed.
+
+
+## 24-aircraft Aircraft Atlas
+
+The exact supplied Warfare Wings ANCHOR is now represented as a derived all-base-aircraft dataset:
+
+- `data/base-aircraft-anchor-v1.csv`
+- `data/base-aircraft-anchor-v1.json`
+
+The extractor requires the exact supplied JAR SHA-256 and verifies all 24 canonical base IDs. Raw
+Warfare Wings values and effective IA 1.3.3 values/defaults are kept separate. In particular,
+`raw_driftDrag` remains provenance while `effective_friction=0.015` follows the inspected 1.3.3
+source loader contract.
+
+`AircraftAtlasMain` then runs all 24 aircraft through one deterministic source-microkernel feature
+suite and produces:
+
+- `reports/base-aircraft-source-atlas.csv` — 24 source feature vectors;
+- `reports/aircraft-atlas-ai-view.json` — per-axis ranks, doctrine ranks, query flags and statistical inspection data;
+- `reports/AIRCRAFT-ATLAS.md` — human-readable extrema and doctrine contrasts.
+
+Current source-Atlas extrema:
+
+| Axis | Highest | Lowest |
+|---|---|---|
+| source-predicted speed | P-47N | B-17 |
+| 20-tick yaw response | IL-2 | B-17 |
+| 20-tick pitch response | A6M / IL-2 tie | B-17 |
+| identical-input 20-tick speed retention | B-17 | A6M |
+| durability | B-29 | A6M |
+
+The retention axis is intentionally labeled **identical-input retention**. It is not equal-angle turn
+efficiency: B-17/B-29 retain more speed partly because they achieve far less yaw during the same
+20-tick command. An equal-angle turn scenario is therefore a required calibration extension.
+
+The Atlas computes no composite "best aircraft" score. Ranking stays per-axis so tactical consumers
+can choose the relevant dimensions without hiding trade-offs.
+
+High-value contrasts already visible in source space include:
+
+- P-47N: fastest source tendency but lowest yaw/pitch response inside `energy_fighter`;
+- Ki-84: near-top speed while leading `energy_fighter` yaw/pitch response;
+- IL-2: highest yaw response across all 24 despite attacker role;
+- Ju 87 vs IL-2: same attacker doctrine, strongly different speed/control envelope;
+- G10N1/G10N2: identical wind-off Atlas features despite mass 22 vs 17, consistent with mass not
+  acting as ordinary yaw/pitch inertia in the inspected source path.
+
+These remain `SOURCE_MICROKERNEL` facts until same-artifact runtime calibration promotes them.

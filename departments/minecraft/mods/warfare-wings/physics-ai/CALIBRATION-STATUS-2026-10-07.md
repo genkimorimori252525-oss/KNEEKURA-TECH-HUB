@@ -116,3 +116,18 @@ The first runtime trace will be used to identify:
 - source-vs-binary/runtime discrepancies.
 
 Only after repeat runs establish same-artifact variance will numerical acceptance thresholds be set.
+
+
+## Atlas-driven runtime calibration priority
+
+The 24-aircraft source Atlas now gives a concrete order for future same-artifact runtime traces:
+
+1. **A6M throttle** — already implemented; first exact source-vs-runtime speed/engine phase comparison.
+2. **P-47N throttle** — calibrates the high-`engineSpeed` fighter end and tests whether thrust scaling transfers.
+3. **A6M + P-47N yaw/pitch** — validates the turn-fighter vs low-nose-authority energy-fighter contrast.
+4. **IL-2 + B-17 yaw** — validates the global source-Atlas yaw extrema (highest vs lowest).
+5. **Equal-angle turn** — removes the current identical-input retention confound and measures speed/altitude loss after the same achieved heading change.
+6. **Representative attacker/escort traces** — Ju 87/IL-2 and B-17/G4M are useful because their shared labels hide large source-envelope differences.
+
+This order is chosen for information gain, not because those six aircraft are the only supported
+targets. The full source dataset already contains all 24 base aircraft.

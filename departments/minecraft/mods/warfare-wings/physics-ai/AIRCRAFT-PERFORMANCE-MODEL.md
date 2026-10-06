@@ -101,10 +101,10 @@ These distinctions make the performance explanations more useful than merely rep
 
 ## 3. Concrete examples
 
-The following A6M/P-47N raw values were re-read directly from the supplied Warfare Wings ANCHOR
-(SHA-256 `dc3029597c88859744633b6f5e4a9f21d449294b1aaac90ea0c1749d7aa98a43`).
-Other examples remain design/reference material until their own current-ANCHOR profile is imported.
-Runtime measurements remain the final authority for absolute performance.
+All 24 base-aircraft raw values are now re-extracted directly from the supplied Warfare Wings ANCHOR
+(SHA-256 `dc3029597c88859744633b6f5e4a9f21d449294b1aaac90ea0c1749d7aa98a43`) into the derived
+`base-aircraft-anchor-v1` dataset. Runtime measurements still remain the final authority for
+absolute performance.
 
 ### A6M Zero — turn-fighter bias
 
@@ -359,15 +359,19 @@ Exactly X% of the speed difference is caused by engineSpeed.
 This prevents the explainability layer from pretending to have a causal decomposition that was
 never measured.
 
-## 6. Planned all-aircraft output
+## 6. All-aircraft Atlas implemented
 
-Once the microkernel/calibration runner exists, generate for all 24 base aircraft:
+The first all-aircraft layer now exists for all 24 base aircraft:
 
-- one machine-readable performance profile;
-- one human-readable performance card;
-- pairwise comparison support;
-- doctrine-fit recommendations;
-- mismatch warnings when raw data and measured runtime disagree.
+- [reports/base-aircraft-source-atlas.csv](reports/base-aircraft-source-atlas.csv) — compact source-microkernel feature table;
+- [reports/aircraft-atlas-ai-view.json](reports/aircraft-atlas-ai-view.json) — machine-readable ranks, doctrine contrasts and query flags;
+- [reports/AIRCRAFT-ATLAS.md](reports/AIRCRAFT-ATLAS.md) — human-readable extrema and interpretation warnings.
+
+The Atlas deliberately avoids a composite "strongest" score. Speed, yaw, pitch, identical-input
+retention and durability are ranked independently.
+
+Individual per-aircraft cards and pairwise combat recommendations can now be generated from this
+shared representation as needed. Runtime mismatch warnings remain pending same-artifact calibration.
 
 The useful end state is that a future AI can ask:
 
@@ -404,3 +408,16 @@ These are **SOURCE-MICROKERNEL** results, not `MEASURED` runtime claims.
 The large A6M difference from the isolated legacy measured profile is intentionally retained. It
 must be resolved through same-artifact runtime trace replay, not by tuning constants until the
 numbers look familiar.
+
+
+## 8. Retention metric correction
+
+The current Atlas field `turn_exit_speed_retention` is the speed ratio after the **same 20-tick
+full-yaw input**. Aircraft with low yaw authority can therefore appear to retain more speed simply
+because they turned less.
+
+Do not translate that field into "turning energy efficiency".
+
+The next physics feature should add an **equal-angle turn** experiment—for example comparing speed
+and altitude after each aircraft has actually achieved the same 90° heading change. Both metrics are
+useful, but they answer different questions.
