@@ -36,3 +36,5 @@ Raw uploaded source, compiled classes and original assets are deliberately not c
 - BINARY-SOURCE-CORRESPONDENCE.md — 193/193 Java/class structural correspondence evidence
 - STATIC-PERFORMANCE-AND-SAFETY-RISK-MAP.md — LAB targets and bounded-modernization risk map
 - SURFACE-COVERAGE-STATUS.md — current whole-target facet coverage and explicit non-completion reasons
+- ANCHOR-PORTABILITY-MATRIX.md — legacy concept → Minecraft 1.20.1 Forge reconstruction mapping
+- STATIC-INVENTORY-SUMMARY.json — compact archive/member provenance fingerprints
