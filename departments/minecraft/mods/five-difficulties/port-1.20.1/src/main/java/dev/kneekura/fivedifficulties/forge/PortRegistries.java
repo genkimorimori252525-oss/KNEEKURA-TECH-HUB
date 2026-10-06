@@ -1,6 +1,7 @@
 package dev.kneekura.fivedifficulties.forge;
 
 import dev.kneekura.fivedifficulties.forge.entity.HomingAmuletProjectile;
+import dev.kneekura.fivedifficulties.forge.entity.SakuyaTimeControllerEntity;
 import dev.kneekura.fivedifficulties.forge.item.HomingAmuletItem;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -28,6 +29,17 @@ public final class PortRegistries {
                             .updateInterval(1)
                             .setShouldReceiveVelocityUpdates(true)
                             .build(FiveDifficultiesPort.MOD_ID + ":homing_amulet_projectile")
+            );
+
+    public static final RegistryObject<EntityType<SakuyaTimeControllerEntity>> SAKUYA_TIME_CONTROLLER =
+            ENTITIES.register(
+                    "sakuya_time_controller",
+                    () -> EntityType.Builder.<SakuyaTimeControllerEntity>of(SakuyaTimeControllerEntity::new, MobCategory.MISC)
+                            .sized(1.0F, 1.0F)
+                            .clientTrackingRange(6)
+                            .updateInterval(1)
+                            .setShouldReceiveVelocityUpdates(true)
+                            .build(FiveDifficultiesPort.MOD_ID + ":sakuya_time_controller")
             );
 
     private PortRegistries() {}
