@@ -3,6 +3,8 @@ package dev.kneekura.fivedifficulties.forge;
 import dev.kneekura.fivedifficulties.forge.entity.HomingAmuletProjectile;
 import dev.kneekura.fivedifficulties.forge.entity.SakuyaTimeControllerEntity;
 import dev.kneekura.fivedifficulties.forge.item.HomingAmuletItem;
+import dev.kneekura.fivedifficulties.forge.item.SakuyaStopWatchItem;
+import dev.kneekura.fivedifficulties.forge.item.SakuyaWatchItem;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.Item;
@@ -19,6 +21,12 @@ public final class PortRegistries {
 
     public static final RegistryObject<Item> HOMING_AMULET =
             ITEMS.register("homing_amulet", () -> new HomingAmuletItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> SAKUYA_WATCH =
+            ITEMS.register("sakuya_watch", () -> new SakuyaWatchItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> SAKUYA_STOPWATCH =
+            ITEMS.register("sakuya_stopwatch", () -> new SakuyaStopWatchItem(new Item.Properties()));
 
     public static final RegistryObject<EntityType<HomingAmuletProjectile>> HOMING_AMULET_PROJECTILE =
             ENTITIES.register(
