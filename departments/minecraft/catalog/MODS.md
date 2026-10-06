@@ -9,6 +9,7 @@
 | 1 | [The Twilight Forest](../mods/twilight-forest/README.md) | content/gameplay Mod | source candidate `a7dd8f13` pinned; distributed-JAR identity pending | `793c4d4c` pinned — MC 26.1.2 / NeoForge 26.1.2.102 | IN_PROGRESS |
 | 2 | [Sinytra Connector](../mods/sinytra-connector/README.md) | loader compatibility / translation layer | `7f68ac0` beta.50 source; 141 files acquired; binary/runtime unresolved | `c84a96a` beta.6 / 26.1.2; 131 files acquired | IN_PROGRESS (source/recon/history) |
 | 3 | [Jujutsu Craft](../mods/jujutsu-craft/README.md) | content/gameplay / combat Mod | exact distributed JAR ver50.1 pinned — MC 1.20.1 / Forge 47+ / SHA-256 094247a3… | latest public distribution is same ver50.1; public source not found | IN_PROGRESS (static evidence-backed; runtime NOT_RUN) |
+| 4 | [Jujutsu Kaisen (Jujutsu Verse)](../mods/jujutsu-verse/README.md) | content/gameplay / combat + VFX reference Mod | exact distributed JAR V8.1 pinned — MC 1.20.1 / Forge 47+ / SHA-256 d0f2f4e4… | public V8.1 distribution pinned; targeted public-source search unresolved | STATIC_ANALYSIS_COMPLETE (runtime NOT_RUN) |
 
 ## Rules
 
