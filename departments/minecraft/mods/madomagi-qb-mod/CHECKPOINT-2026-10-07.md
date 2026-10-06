@@ -138,6 +138,15 @@ This upgrades those specific findings from Java-text-only observations to **sele
 - Nutcracker death performs a second broad ±200 `EntityMob` cleanup pattern analogous to Walpurgis;
 - exact-hash OpenEye telemetry corroborates the supplied Garnet .082 artifact and predominantly records it under Minecraft 1.6.4; rare 1.7.10 sightings do not establish compatibility because metadata constrains mcVersion to [1.6.4,1.6.4].
 
+### Damage/defense semantics
+- Garnet protection is percentage reduction with integer flooring, but player-origin and fire damage bypass that shared percentage layer;
+- low damage is therefore often fully nullified even by modest protection values;
+- Madoka/Homura Ultimate use explicit all-damage rejection rather than relying only on protect100;
+- Homura MS adds teleport-evade before protect15; Kirika has20% transformed dodge; Kyouko layers timed guard,10% dodge and active Rosso-Fantasma guard;
+- Walpurgis/Nutcracker use one-damage +20tick super-armor, but Walpurgis converts blocked living-attacker hits into Small Fireball retaliation;
+- Kriemhild instead implements a fixed20tick cumulative damage bucket capped at10;
+- the i-frame-reset projectile substrate means these boss gates must be tested under real barrage saturation, not single hits.
+
 ### Presentation/readability
 A dedicated telegraph/VFX pass recovered:
 - Mami Muskets and Sayaka Cutlasses as visible, mechanically consumed attack stock;
