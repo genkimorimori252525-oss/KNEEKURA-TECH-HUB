@@ -16,9 +16,9 @@ import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -27,6 +27,7 @@ import net.minecraftforge.event.ForgeEventFactory;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * First live X1 preservation projectile.
@@ -121,8 +122,8 @@ public final class HomingAmuletProjectile extends Projectile {
 
             this.applyX1Homing();
 
-            HitResult hit = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
-            if (hit.getType() != HitResult.Type.MISS && !ForgeEventFactory.onProjectileImpact(this, hit)) {
+            HitResult hit = this.findX1Hit();
+            if (hit != null && hit.getType() != HitResult.Type.MISS && !ForgeEventFactory.onProjectileImpact(this, hit)) {
                 this.onHit(hit);
             }
             if (this.isRemoved()) {
@@ -137,6 +138,117 @@ public final class HomingAmuletProjectile extends Projectile {
         if (!this.level().isClientSide) {
             this.setLegacyAnimationCount(this.getLegacyAnimationCount() + 1);
         }
+    }
+
+    /**
+     * Port of EntityTHShot.hitCheck/hitEntityCheck for the live P2 red amulet.
+     *
+     * X1 extends the center sweep by half the logical shot size along the shot
+     * direction and expands candidate target AABBs by the same half-size.
+     * If that primary sweep misses, X1 also probes three diameter lines through
+     * the current shot center to catch block overlap.
+     */
+    private HitResult findX1Hit() {
+        Vec3 movement = this.getDeltaMovement();
+        if (movement.lengthSqr() <= 1.0e-12) {
+            return this.findX1CrossSectionBlockHit();
+        }
+
+        double half = HomingAmuletContract.resolve(this.isFocused()).shotSize() * 0.5D;
+        Vec3 direction = movement.normalize();
+        Vec3 start = this.position().subtract(direction.scale(half));
+        Vec3 end = this.position().add(movement).add(direction.scale(half));
+
+        BlockHitResult blockHit = this.level().clip(new ClipContext(
+                start,
+                end,
+                ClipContext.Block.COLLIDER,
+                ClipContext.Fluid.NONE,
+                this
+        ));
+        Vec3 entityEnd = blockHit.getType() == HitResult.Type.MISS ? end : blockHit.getLocation();
+
+        EntityHitResult entityHit = this.findX1EntityHit(start, entityEnd, direction, half);
+        if (entityHit != null) {
+            return entityHit;
+        }
+        if (blockHit.getType() != HitResult.Type.MISS) {
+            return blockHit;
+        }
+        return this.findX1CrossSectionBlockHit();
+    }
+
+    private EntityHitResult findX1EntityHit(Vec3 start, Vec3 end, Vec3 direction, double half) {
+        AABB search = this.getBoundingBox().expandTowards(direction).inflate(half);
+        Entity best = null;
+        Vec3 bestPoint = null;
+        double bestDistance = 0.0D;
+
+        for (Entity candidate : this.level().getEntities(this, search, this::isX1EntityCollisionCandidate)) {
+            AABB expanded = candidate.getBoundingBox().inflate(half);
+            Optional<Vec3> intercept = expanded.clip(start, end);
+            if (intercept.isEmpty()) {
+                continue;
+            }
+
+            double distance = start.distanceTo(intercept.get());
+            if (best == null || distance < bestDistance) {
+                best = candidate;
+                bestPoint = intercept.get();
+                bestDistance = distance;
+            }
+        }
+
+        return best == null ? null : new EntityHitResult(best, bestPoint);
+    }
+
+    private boolean isX1EntityCollisionCandidate(Entity entity) {
+        if (!entity.isPickable() || entity == this.getOwner()) {
+            return false;
+        }
+        if (entity instanceof Animal || entity instanceof Villager) {
+            return false;
+        }
+        if (entity instanceof HomingAmuletProjectile) {
+            // X1 supports cross-owner THShot cancellation; the generalized
+            // danmaku-vs-danmaku damage subtraction system is not in P2 yet.
+            return false;
+        }
+        return entity instanceof LivingEntity
+                || entity.getType() == EntityType.ENDER_DRAGON;
+    }
+
+    private BlockHitResult findX1CrossSectionBlockHit() {
+        double half = HomingAmuletContract.resolve(this.isFocused()).shotSize() * 0.5D;
+        Vec3 center = this.position();
+
+        BlockHitResult vertical = clipBlock(
+                center.add(0.0D, -half, 0.0D),
+                center.add(0.0D, half, 0.0D)
+        );
+        if (vertical.getType() != HitResult.Type.MISS) return vertical;
+
+        BlockHitResult x = clipBlock(
+                center.add(-half, 0.0D, 0.0D),
+                center.add(half, 0.0D, 0.0D)
+        );
+        if (x.getType() != HitResult.Type.MISS) return x;
+
+        BlockHitResult z = clipBlock(
+                center.add(0.0D, 0.0D, -half),
+                center.add(0.0D, 0.0D, half)
+        );
+        return z.getType() == HitResult.Type.MISS ? null : z;
+    }
+
+    private BlockHitResult clipBlock(Vec3 start, Vec3 end) {
+        return this.level().clip(new ClipContext(
+                start,
+                end,
+                ClipContext.Block.COLLIDER,
+                ClipContext.Fluid.NONE,
+                this
+        ));
     }
 
     @Override
