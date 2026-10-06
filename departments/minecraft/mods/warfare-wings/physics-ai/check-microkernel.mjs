@@ -32,11 +32,12 @@ function run(command, args) {
 }
 
 async function same(generatedPath, goldenPath) {
-  const a = await readFile(generatedPath, 'utf8');
-  const b = await readFile(goldenPath, 'utf8');
+  const normalize = value => value.replace(/\r\n/g, '\n').replace(/\n*$/, '') + '\n';
+  const a = normalize(await readFile(generatedPath, 'utf8'));
+  const b = normalize(await readFile(goldenPath, 'utf8'));
   if (a === b) return;
-  const al = a.split(/\r?\n/);
-  const bl = b.split(/\r?\n/);
+  const al = a.split('\n');
+  const bl = b.split('\n');
   const limit = Math.max(al.length, bl.length);
   for (let i = 0; i < limit; i++) {
     if (al[i] !== bl[i]) {
