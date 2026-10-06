@@ -248,6 +248,18 @@ The corresponding distributed classes exist with matching SourceFile identity; s
 
 These two are retained as static/runtime-risk leads; this subsection does not claim runtime reproduction.
 
+### Nutcracker anti-air host-poison bytecode
+
+`EntityHomulillyAIMoveForTarget.class` SHA-256:
+`5537224d0d68874698e08e95892208b58b075dcdfde51aae8b61d1b4fdab1608`.
+
+In the distributed bytecode, after the strength-6 anti-air explosion:
+- the method loads field `theHost`;
+- constructs Poison effect duration300, amplifier4;
+- invokes the potion-effect method on the host object.
+
+This matches the Java source and the two Walpurgis AI copies. The self-poison target choice is therefore present in the shipped executable path of the Nutcracker movement controller as well.
+
 ## Interpretation
 
 The supplied distributions show **strong source↔binary structural correspondence**:
