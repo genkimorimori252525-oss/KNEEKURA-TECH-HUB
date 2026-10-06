@@ -49,23 +49,41 @@ Immersive Aircraft supplies the important flight/runtime machinery:
 The Immersive Aircraft 1.3.3 source analysis is preserved separately as dependency evidence.
 The canonical **AI / simulator plan**, however, belongs here.
 
-## Planned structure
+## Current implementation
+
+The first pure-Java implementation now exists.
 
 ```text
 warfare-wings/
   physics-ai/
     README.md
     AIRCRAFT-PERFORMANCE-MODEL.md
-    physics-core/              # future pure deterministic implementation
-    aircraft-profiles/         # future explainable per-aircraft derived profiles
-    scenarios/                 # future dogfight / flight scenario definitions
-    calibration/               # future real-runtime trace -> surrogate comparison
-    reports/                   # future batch / parity / regression results
-    viewer/                    # optional simple 3-D observer
+    IMPLEMENTATION-STATUS-2026-10-07.md
+    check-microkernel.mjs
+    data/
+      a6m-p47n-anchor-models.csv
+      a6m-p47n-legacy-measured-reference.csv
+    src/main/java/.../
+      Ia133Microkernel.java
+      WarfareWingsAircraft.java
+      PerformanceReportMain.java
+    src/test/java/.../
+      Ia133MicrokernelSelfTest.java
+    reports/
+      a6m-p47n-source-microkernel.csv
+      a6m-p47n-source-microkernel.md
 ```
 
-Only the two documents exist in this research batch. The directories shown as future components are
-a design, not an implementation claim.
+Current verified scope:
+
+- dependency-free Java 17;
+- 20 Hz source-microkernel;
+- A6M and P-47N seed models from supplied Warfare Wings ANCHOR;
+- 18 pure-Java invariant checks;
+- deterministic golden-report regeneration;
+- real Minecraft parity: **NOT_RUN**.
+
+See [IMPLEMENTATION-STATUS-2026-10-07.md](IMPLEMENTATION-STATUS-2026-10-07.md).
 
 ## Core design
 
@@ -177,15 +195,15 @@ It is not the canonical architecture or project home.
 When useful material is imported, record its original revision/runtime identity and preserve it as
 legacy evidence rather than requiring future work to depend on that repository.
 
-## Immediate next implementation milestone
+## Next implementation milestone
 
-Before tuning combat doctrine:
+The first source microkernel and A6M/P-47N report now exist. The next gate is **same-artifact runtime calibration**:
 
-1. import or recreate a small authoritative measured-aircraft profile dataset in Tech Hub;
-2. implement the source-faithful 1.3.3 physics microkernel;
-3. create deterministic trace replay;
-4. validate A6M and P-47N first because they strongly separate turn-fighter and energy-fighter
-   behavior;
-5. generate explainable per-aircraft performance reports;
-6. expand to all 24 base aircraft;
-7. only then use the environment for large-batch autonomous combat tuning.
+1. run the supplied Warfare Wings ANCHOR with the exact target Immersive Aircraft binary;
+2. record per-tick throttle-step telemetry;
+3. replay the exact input trace in the microkernel;
+4. compare engine power, velocity and position;
+5. repeat for yaw-step, pitch-step, sustained turn, glide and braking;
+6. resolve source↔binary discrepancies before changing physics constants;
+7. once A6M/P-47N transfer is bounded, expand model/report generation to all 24 base aircraft;
+8. only then use the fast environment for large-batch autonomous combat tuning.
