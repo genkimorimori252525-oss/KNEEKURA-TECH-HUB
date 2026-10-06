@@ -270,6 +270,27 @@ Risk:
 ANCHOR:
 - maintain encounter membership IDs/sets and clean only known children.
 
+### Walpurgis blocked-hit retaliation amplification
+
+During its20-tick super-armor window, Walpurgis converts zeroed hits from living attackers into Small Fireball countershots.
+
+Combined with Garnet's projectile i-frame reset, a burst can continue invoking the boss damage path while armor is active and therefore generate multiple return projectiles.
+
+Risk:
+- attacker projectile count can amplify into boss projectile count;
+- heavy barrages may increase both damage-event and entity-spawn load;
+- retaliation direction points at the shooter entity, not the incoming projectile.
+
+LAB:
+- 1 / 8 / 32 projectiles arriving inside one20-tick armor window;
+- same-tick volley vs staggered2-tick volley;
+- measure accepted damage, blocked calls, fireballs spawned and active entity peak.
+
+ANCHOR:
+- explicit bounded retaliation budget per armor window;
+- visible charge/reflect cue;
+- avoid unbounded one-counter-projectile-per-hit behavior unless measured safe.
+
 ## Safety / griefing risks
 
 ### Player capability mutation
