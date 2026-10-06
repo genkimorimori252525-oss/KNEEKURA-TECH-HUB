@@ -68,7 +68,8 @@ public final class SakuyaTimeStopRuntime {
             }
         }
 
-        int tick = logicalTick(level);
+        // X1 controller first processes on the world tick after it is spawned.
+        int tick = logicalTick(level) + 1;
         SakuyaTimeControllerEntity controller = new SakuyaTimeControllerEntity(
                 level,
                 source,
