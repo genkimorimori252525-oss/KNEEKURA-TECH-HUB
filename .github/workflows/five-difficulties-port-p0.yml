@@ -84,6 +84,8 @@ jobs:
 
       - name: Bounded dedicated-server runtime smoke
         shell: bash
+        env:
+          FIVE_DIFFICULTIES_RUNTIME_SMOKE_EXIT: "1"
         run: |
           set -euo pipefail
           cd "$RUNNER_TEMP/five-difficulties-mdk"
@@ -104,7 +106,7 @@ jobs:
 
           set +e
           timeout --signal=INT --kill-after=10s 120s \
-            ./gradlew --no-daemon --max-workers=2 -Dorg.gradle.jvmargs=-Xmx3G -Dfive_difficulties_port.runtimeSmokeExit=true runServer --args='nogui' \
+            ./gradlew --no-daemon --max-workers=2 -Dorg.gradle.jvmargs=-Xmx3G runServer --args='nogui' \
             2>&1 | tee "$GITHUB_WORKSPACE/forge-evidence/runtime-server.txt"
           RUN_RC=${PIPESTATUS[0]}
           set -e
