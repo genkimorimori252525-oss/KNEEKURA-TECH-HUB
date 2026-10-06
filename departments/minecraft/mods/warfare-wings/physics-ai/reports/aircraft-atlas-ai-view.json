@@ -1,0 +1,1542 @@
+{
+  "schema_version": "ww.physics.aircraft-atlas-ai.v1",
+  "status": "SOURCE_MICROKERNEL_ONLY_REAL_RUNTIME_CALIBRATION_PENDING",
+  "aircraft_count": 24,
+  "quartile_bucket_size": 6,
+  "method_notes": [
+    "Ranks are per-axis only; no composite strongest-aircraft score is calculated.",
+    "Retention is speed ratio after the same 20-tick full-yaw input, not energy loss normalized by achieved turn angle.",
+    "IQR flags are statistical inspection hints, not physics anomalies or causal findings.",
+    "Real-runtime performance remains pending same-artifact calibration."
+  ],
+  "axes": {
+    "speed": {
+      "field": "source_predicted_top_speed_bps",
+      "unit": "blocks/s",
+      "evidence": "SOURCE_MICROKERNEL",
+      "ranking_direction": "higher_value_first",
+      "max": {
+        "aircraft_id": "warfare_wings:p47n",
+        "value": 45.791245791246
+      },
+      "min": {
+        "aircraft_id": "warfare_wings:b17",
+        "value": 20.20202020202
+      },
+      "top5": [
+        {
+          "rank": 1,
+          "aircraft_id": "warfare_wings:p47n",
+          "value": 45.791245791246
+        },
+        {
+          "rank": 2,
+          "aircraft_id": "warfare_wings:f4u",
+          "value": 44.893378226711
+        },
+        {
+          "rank": 3,
+          "aircraft_id": "warfare_wings:fw190",
+          "value": 44.893378226711
+        },
+        {
+          "rank": 4,
+          "aircraft_id": "warfare_wings:ki84",
+          "value": 44.893378226711
+        },
+        {
+          "rank": 5,
+          "aircraft_id": "warfare_wings:p51d",
+          "value": 44.893378226711
+        }
+      ],
+      "bottom5": [
+        {
+          "rank": 20,
+          "aircraft_id": "warfare_wings:sbd",
+          "value": 26.936026936027
+        },
+        {
+          "rank": 21,
+          "aircraft_id": "warfare_wings:he111",
+          "value": 24.691358024691
+        },
+        {
+          "rank": 22,
+          "aircraft_id": "warfare_wings:b29",
+          "value": 22.446689113356
+        },
+        {
+          "rank": 23,
+          "aircraft_id": "warfare_wings:ju87",
+          "value": 22.446689113356
+        },
+        {
+          "rank": 24,
+          "aircraft_id": "warfare_wings:b17",
+          "value": 20.20202020202
+        }
+      ],
+      "iqr_flagging": {
+        "method": "inclusive_quartiles_1.5_iqr",
+        "q1": 26.936026936027,
+        "q3": 43.3221099887765,
+        "low_fence": 2.356902356902747,
+        "high_fence": 67.90123456790076,
+        "flags": []
+      }
+    },
+    "yaw": {
+      "field": "yaw_change_20t_deg",
+      "unit": "deg/20t",
+      "evidence": "SOURCE_MICROKERNEL",
+      "ranking_direction": "higher_value_first",
+      "max": {
+        "aircraft_id": "warfare_wings:il2",
+        "value": 36.039127533536
+      },
+      "min": {
+        "aircraft_id": "warfare_wings:b17",
+        "value": 10.811738260061
+      },
+      "top5": [
+        {
+          "rank": 1,
+          "aircraft_id": "warfare_wings:il2",
+          "value": 36.039127533536
+        },
+        {
+          "rank": 2,
+          "aircraft_id": "warfare_wings:a6m",
+          "value": 34.237171156859
+        },
+        {
+          "rank": 3,
+          "aircraft_id": "warfare_wings:spitfire",
+          "value": 32.435214780182
+        },
+        {
+          "rank": 4,
+          "aircraft_id": "warfare_wings:yak3",
+          "value": 30.633258403505
+        },
+        {
+          "rank": 5,
+          "aircraft_id": "warfare_wings:ki84",
+          "value": 29.732280215167
+        }
+      ],
+      "bottom5": [
+        {
+          "rank": 20,
+          "aircraft_id": "warfare_wings:g10n1",
+          "value": 18.019563766768
+        },
+        {
+          "rank": 21,
+          "aircraft_id": "warfare_wings:g10n2",
+          "value": 18.019563766768
+        },
+        {
+          "rank": 22,
+          "aircraft_id": "warfare_wings:ju87",
+          "value": 16.217607390091
+        },
+        {
+          "rank": 23,
+          "aircraft_id": "warfare_wings:b29",
+          "value": 11.712716448399
+        },
+        {
+          "rank": 24,
+          "aircraft_id": "warfare_wings:b17",
+          "value": 10.811738260061
+        }
+      ],
+      "iqr_flagging": {
+        "method": "inclusive_quartiles_1.5_iqr",
+        "q1": 21.172987425951998,
+        "q3": 28.831302026829,
+        "low_fence": 9.685515524636495,
+        "high_fence": 40.3187739281445,
+        "flags": []
+      }
+    },
+    "pitch": {
+      "field": "pitch_change_20t_deg",
+      "unit": "deg/20t",
+      "evidence": "SOURCE_MICROKERNEL",
+      "ranking_direction": "higher_value_first",
+      "max": {
+        "aircraft_id": "warfare_wings:a6m",
+        "value": 31.534236591844
+      },
+      "min": {
+        "aircraft_id": "warfare_wings:b17",
+        "value": 9.910760071722
+      },
+      "top5": [
+        {
+          "rank": 1,
+          "aircraft_id": "warfare_wings:a6m",
+          "value": 31.534236591844
+        },
+        {
+          "rank": 2,
+          "aircraft_id": "warfare_wings:il2",
+          "value": 31.534236591844
+        },
+        {
+          "rank": 3,
+          "aircraft_id": "warfare_wings:spitfire",
+          "value": 30.633258403505
+        },
+        {
+          "rank": 4,
+          "aircraft_id": "warfare_wings:yak3",
+          "value": 29.732280215167
+        },
+        {
+          "rank": 5,
+          "aircraft_id": "warfare_wings:ki84",
+          "value": 27.93032383849
+        }
+      ],
+      "bottom5": [
+        {
+          "rank": 20,
+          "aircraft_id": "warfare_wings:g10n1",
+          "value": 18.019563766768
+        },
+        {
+          "rank": 21,
+          "aircraft_id": "warfare_wings:g10n2",
+          "value": 18.019563766768
+        },
+        {
+          "rank": 22,
+          "aircraft_id": "warfare_wings:ju87",
+          "value": 16.217607390091
+        },
+        {
+          "rank": 23,
+          "aircraft_id": "warfare_wings:b29",
+          "value": 10.811738260061
+        },
+        {
+          "rank": 24,
+          "aircraft_id": "warfare_wings:b17",
+          "value": 9.910760071722
+        }
+      ],
+      "iqr_flagging": {
+        "method": "inclusive_quartiles_1.5_iqr",
+        "q1": 19.59627559636025,
+        "q3": 27.029345650152,
+        "low_fence": 8.446670515672627,
+        "high_fence": 38.178950730839624,
+        "flags": []
+      }
+    },
+    "retention": {
+      "field": "turn_exit_speed_retention",
+      "unit": "ratio",
+      "evidence": "SOURCE_MICROKERNEL_IDENTICAL_INPUT",
+      "ranking_direction": "higher_value_first",
+      "max": {
+        "aircraft_id": "warfare_wings:b17",
+        "value": 0.99856044825
+      },
+      "min": {
+        "aircraft_id": "warfare_wings:a6m",
+        "value": 0.976949448465
+      },
+      "top5": [
+        {
+          "rank": 1,
+          "aircraft_id": "warfare_wings:b17",
+          "value": 0.99856044825
+        },
+        {
+          "rank": 2,
+          "aircraft_id": "warfare_wings:b29",
+          "value": 0.998419614357
+        },
+        {
+          "rank": 3,
+          "aircraft_id": "warfare_wings:g10n1",
+          "value": 0.996385471346
+        },
+        {
+          "rank": 4,
+          "aircraft_id": "warfare_wings:g10n2",
+          "value": 0.996385471346
+        },
+        {
+          "rank": 5,
+          "aircraft_id": "warfare_wings:ju87",
+          "value": 0.995771902123
+        }
+      ],
+      "bottom5": [
+        {
+          "rank": 20,
+          "aircraft_id": "warfare_wings:ki84",
+          "value": 0.9833630947
+        },
+        {
+          "rank": 21,
+          "aircraft_id": "warfare_wings:yak3",
+          "value": 0.982125201147
+        },
+        {
+          "rank": 22,
+          "aircraft_id": "warfare_wings:il2",
+          "value": 0.981860450367
+        },
+        {
+          "rank": 23,
+          "aircraft_id": "warfare_wings:spitfire",
+          "value": 0.980104199479
+        },
+        {
+          "rank": 24,
+          "aircraft_id": "warfare_wings:a6m",
+          "value": 0.976949448465
+        }
+      ],
+      "iqr_flagging": {
+        "method": "inclusive_quartiles_1.5_iqr",
+        "q1": 0.98479408103875,
+        "q3": 0.99344297285925,
+        "low_fence": 0.971820743308,
+        "high_fence": 1.00641631059,
+        "flags": []
+      }
+    },
+    "durability": {
+      "field": "durability",
+      "unit": "normalized",
+      "evidence": "SOURCE_DIRECT",
+      "ranking_direction": "higher_value_first",
+      "max": {
+        "aircraft_id": "warfare_wings:b29",
+        "value": 6.5
+      },
+      "min": {
+        "aircraft_id": "warfare_wings:a6m",
+        "value": 2.5
+      },
+      "top5": [
+        {
+          "rank": 1,
+          "aircraft_id": "warfare_wings:b29",
+          "value": 6.5
+        },
+        {
+          "rank": 2,
+          "aircraft_id": "warfare_wings:b17",
+          "value": 6
+        },
+        {
+          "rank": 3,
+          "aircraft_id": "warfare_wings:g10n1",
+          "value": 5.5
+        },
+        {
+          "rank": 4,
+          "aircraft_id": "warfare_wings:g10n2",
+          "value": 5.5
+        },
+        {
+          "rank": 5,
+          "aircraft_id": "warfare_wings:il2",
+          "value": 5
+        }
+      ],
+      "bottom5": [
+        {
+          "rank": 20,
+          "aircraft_id": "warfare_wings:mc202",
+          "value": 3
+        },
+        {
+          "rank": 21,
+          "aircraft_id": "warfare_wings:mig3",
+          "value": 3
+        },
+        {
+          "rank": 22,
+          "aircraft_id": "warfare_wings:spitfire",
+          "value": 3
+        },
+        {
+          "rank": 23,
+          "aircraft_id": "warfare_wings:yak3",
+          "value": 3
+        },
+        {
+          "rank": 24,
+          "aircraft_id": "warfare_wings:a6m",
+          "value": 2.5
+        }
+      ],
+      "iqr_flagging": {
+        "method": "inclusive_quartiles_1.5_iqr",
+        "q1": 3.2249999999999996,
+        "q3": 4.625,
+        "low_fence": 1.1249999999999991,
+        "high_fence": 6.7250000000000005,
+        "flags": []
+      }
+    }
+  },
+  "doctrines": {
+    "attacker": {
+      "count": 4,
+      "metrics": {
+        "speed": {
+          "max": {
+            "aircraft_id": "warfare_wings:d4y",
+            "value": 38.159371492705
+          },
+          "min": {
+            "aircraft_id": "warfare_wings:ju87",
+            "value": 22.446689113356
+          },
+          "median": 29.1806958473625,
+          "spread": 15.712682379348998,
+          "iqr_flagging": {
+            "method": "inclusive_quartiles_1.5_iqr",
+            "q1": 25.81369248035925,
+            "q3": 33.10886644219975,
+            "low_fence": 14.870931537598505,
+            "high_fence": 44.0516273849605,
+            "flags": []
+          }
+        },
+        "yaw": {
+          "max": {
+            "aircraft_id": "warfare_wings:il2",
+            "value": 36.039127533536
+          },
+          "min": {
+            "aircraft_id": "warfare_wings:ju87",
+            "value": 16.217607390091
+          },
+          "median": 25.227389273474998,
+          "spread": 19.821520143445003,
+          "iqr_flagging": {
+            "method": "inclusive_quartiles_1.5_iqr",
+            "q1": 20.2720092376135,
+            "q3": 30.63325840350575,
+            "low_fence": 4.730135488775124,
+            "high_fence": 46.175132152344126,
+            "flags": []
+          }
+        },
+        "pitch": {
+          "max": {
+            "aircraft_id": "warfare_wings:il2",
+            "value": 31.534236591844
+          },
+          "min": {
+            "aircraft_id": "warfare_wings:ju87",
+            "value": 16.217607390091
+          },
+          "median": 23.425432896798497,
+          "spread": 15.316629201752999,
+          "iqr_flagging": {
+            "method": "inclusive_quartiles_1.5_iqr",
+            "q1": 18.9205419551065,
+            "q3": 28.155568385575,
+            "low_fence": 5.068002309403754,
+            "high_fence": 42.00810803127774,
+            "flags": []
+          }
+        },
+        "retention": {
+          "max": {
+            "aircraft_id": "warfare_wings:ju87",
+            "value": 0.995771902123
+          },
+          "min": {
+            "aircraft_id": "warfare_wings:il2",
+            "value": 0.981860450367
+          },
+          "median": 0.9898362866225,
+          "spread": 0.01391145175600006,
+          "iqr_flagging": {
+            "method": "inclusive_quartiles_1.5_iqr",
+            "q1": 0.98548561353375,
+            "q3": 0.9936769045225,
+            "low_fence": 0.9731986770506249,
+            "high_fence": 1.005963841005625,
+            "flags": []
+          }
+        },
+        "durability": {
+          "max": {
+            "aircraft_id": "warfare_wings:il2",
+            "value": 5
+          },
+          "min": {
+            "aircraft_id": "warfare_wings:d4y",
+            "value": 3.3
+          },
+          "median": 4.15,
+          "spread": 1.7000000000000002,
+          "iqr_flagging": {
+            "method": "inclusive_quartiles_1.5_iqr",
+            "q1": 3.675,
+            "q3": 4.625,
+            "low_fence": 2.2499999999999996,
+            "high_fence": 6.050000000000001,
+            "flags": []
+          }
+        }
+      }
+    },
+    "energy_fighter": {
+      "count": 11,
+      "metrics": {
+        "speed": {
+          "max": {
+            "aircraft_id": "warfare_wings:p47n",
+            "value": 45.791245791246
+          },
+          "min": {
+            "aircraft_id": "warfare_wings:p40e",
+            "value": 38.159371492705
+          },
+          "median": 43.995510662177,
+          "spread": 7.631874298541,
+          "iqr_flagging": {
+            "method": "inclusive_quartiles_1.5_iqr",
+            "q1": 40.852974186307,
+            "q3": 44.893378226711,
+            "low_fence": 34.792368125701,
+            "high_fence": 50.953984287317,
+            "flags": []
+          }
+        },
+        "yaw": {
+          "max": {
+            "aircraft_id": "warfare_wings:ki84",
+            "value": 29.732280215167
+          },
+          "min": {
+            "aircraft_id": "warfare_wings:p47n",
+            "value": 22.52445470846
+          },
+          "median": 27.029345650152,
+          "spread": 7.207825506707,
+          "iqr_flagging": {
+            "method": "inclusive_quartiles_1.5_iqr",
+            "q1": 24.776900179306,
+            "q3": 27.93032383849,
+            "low_fence": 20.04676469053,
+            "high_fence": 32.660459327266,
+            "flags": []
+          }
+        },
+        "pitch": {
+          "max": {
+            "aircraft_id": "warfare_wings:ki84",
+            "value": 27.93032383849
+          },
+          "min": {
+            "aircraft_id": "warfare_wings:p47n",
+            "value": 21.623476520121
+          },
+          "median": 26.128367461813,
+          "spread": 6.306847318369002,
+          "iqr_flagging": {
+            "method": "inclusive_quartiles_1.5_iqr",
+            "q1": 24.5516556322215,
+            "q3": 27.029345650152,
+            "low_fence": 20.835120605325752,
+            "high_fence": 30.745880677047747,
+            "flags": []
+          }
+        },
+        "retention": {
+          "max": {
+            "aircraft_id": "warfare_wings:p47n",
+            "value": 0.990868926777
+          },
+          "min": {
+            "aircraft_id": "warfare_wings:ki84",
+            "value": 0.9833630947
+          },
+          "median": 0.986232838247,
+          "spread": 0.007505832076999952,
+          "iqr_flagging": {
+            "method": "inclusive_quartiles_1.5_iqr",
+            "q1": 0.985189979348,
+            "q3": 0.9883341994195,
+            "low_fence": 0.9804736492407501,
+            "high_fence": 0.9930505295267499,
+            "flags": []
+          }
+        },
+        "durability": {
+          "max": {
+            "aircraft_id": "warfare_wings:p47n",
+            "value": 5
+          },
+          "min": {
+            "aircraft_id": "warfare_wings:mig3",
+            "value": 3
+          },
+          "median": 3.5,
+          "spread": 2,
+          "iqr_flagging": {
+            "method": "inclusive_quartiles_1.5_iqr",
+            "q1": 3.25,
+            "q3": 4.25,
+            "low_fence": 1.75,
+            "high_fence": 5.75,
+            "flags": []
+          }
+        }
+      }
+    },
+    "escort": {
+      "count": 6,
+      "metrics": {
+        "speed": {
+          "max": {
+            "aircraft_id": "warfare_wings:g4m",
+            "value": 29.180695847362
+          },
+          "min": {
+            "aircraft_id": "warfare_wings:b17",
+            "value": 20.20202020202
+          },
+          "median": 25.813692480359002,
+          "spread": 8.978675645341998,
+          "iqr_flagging": {
+            "method": "inclusive_quartiles_1.5_iqr",
+            "q1": 23.00785634118975,
+            "q3": 26.936026936027,
+            "low_fence": 17.115600448933876,
+            "high_fence": 32.82828282828288,
+            "flags": []
+          }
+        },
+        "yaw": {
+          "max": {
+            "aircraft_id": "warfare_wings:g4m",
+            "value": 26.128367461813
+          },
+          "min": {
+            "aircraft_id": "warfare_wings:b17",
+            "value": 10.811738260061
+          },
+          "median": 18.019563766768,
+          "spread": 15.316629201751999,
+          "iqr_flagging": {
+            "method": "inclusive_quartiles_1.5_iqr",
+            "q1": 13.28942827799125,
+            "q3": 19.37103104927575,
+            "low_fence": 4.167024121064502,
+            "high_fence": 28.4934352062025,
+            "flags": []
+          }
+        },
+        "pitch": {
+          "max": {
+            "aircraft_id": "warfare_wings:g4m",
+            "value": 24.326411085137
+          },
+          "min": {
+            "aircraft_id": "warfare_wings:b17",
+            "value": 9.910760071722
+          },
+          "median": 18.019563766768,
+          "spread": 14.415651013415,
+          "iqr_flagging": {
+            "method": "inclusive_quartiles_1.5_iqr",
+            "q1": 12.613694636737751,
+            "q3": 18.6952974080215,
+            "low_fence": 3.491290479812129,
+            "high_fence": 27.81770156494712,
+            "flags": []
+          }
+        },
+        "retention": {
+          "max": {
+            "aircraft_id": "warfare_wings:b17",
+            "value": 0.99856044825
+          },
+          "min": {
+            "aircraft_id": "warfare_wings:g4m",
+            "value": 0.990100052284
+          },
+          "median": 0.996385471346,
+          "spread": 0.008460395966000012,
+          "iqr_flagging": {
+            "method": "inclusive_quartiles_1.5_iqr",
+            "q1": 0.995223499439,
+            "q3": 0.99791107860425,
+            "low_fence": 0.9911921306911251,
+            "high_fence": 1.001942447352125,
+            "flags": [
+              {
+                "aircraft_id": "warfare_wings:g4m",
+                "value": 0.990100052284
+              }
+            ]
+          }
+        },
+        "durability": {
+          "max": {
+            "aircraft_id": "warfare_wings:b29",
+            "value": 6.5
+          },
+          "min": {
+            "aircraft_id": "warfare_wings:he111",
+            "value": 4
+          },
+          "median": 5.5,
+          "spread": 2.5,
+          "iqr_flagging": {
+            "method": "inclusive_quartiles_1.5_iqr",
+            "q1": 4.375,
+            "q3": 5.875,
+            "low_fence": 2.125,
+            "high_fence": 8.125,
+            "flags": []
+          }
+        }
+      }
+    },
+    "turn_fighter": {
+      "count": 3,
+      "metrics": {
+        "speed": {
+          "max": {
+            "aircraft_id": "warfare_wings:yak3",
+            "value": 43.097643097643
+          },
+          "min": {
+            "aircraft_id": "warfare_wings:a6m",
+            "value": 33.670033670033
+          },
+          "median": 42.648709315376,
+          "spread": 9.427609427610001,
+          "iqr_flagging": {
+            "status": "NOT_EVALUATED_GROUP_LT_4"
+          }
+        },
+        "yaw": {
+          "max": {
+            "aircraft_id": "warfare_wings:a6m",
+            "value": 34.237171156859
+          },
+          "min": {
+            "aircraft_id": "warfare_wings:yak3",
+            "value": 30.633258403505
+          },
+          "median": 32.435214780182,
+          "spread": 3.603912753353999,
+          "iqr_flagging": {
+            "status": "NOT_EVALUATED_GROUP_LT_4"
+          }
+        },
+        "pitch": {
+          "max": {
+            "aircraft_id": "warfare_wings:a6m",
+            "value": 31.534236591844
+          },
+          "min": {
+            "aircraft_id": "warfare_wings:yak3",
+            "value": 29.732280215167
+          },
+          "median": 30.633258403505,
+          "spread": 1.8019563766770013,
+          "iqr_flagging": {
+            "status": "NOT_EVALUATED_GROUP_LT_4"
+          }
+        },
+        "retention": {
+          "max": {
+            "aircraft_id": "warfare_wings:yak3",
+            "value": 0.982125201147
+          },
+          "min": {
+            "aircraft_id": "warfare_wings:a6m",
+            "value": 0.976949448465
+          },
+          "median": 0.980104199479,
+          "spread": 0.00517575268199999,
+          "iqr_flagging": {
+            "status": "NOT_EVALUATED_GROUP_LT_4"
+          }
+        },
+        "durability": {
+          "max": {
+            "aircraft_id": "warfare_wings:spitfire",
+            "value": 3
+          },
+          "min": {
+            "aircraft_id": "warfare_wings:a6m",
+            "value": 2.5
+          },
+          "median": 3,
+          "spread": 0.5,
+          "iqr_flagging": {
+            "status": "NOT_EVALUATED_GROUP_LT_4"
+          }
+        }
+      }
+    }
+  },
+  "aircraft": [
+    {
+      "aircraft_id": "warfare_wings:a6m",
+      "base_id": "a6m",
+      "role": "fighter",
+      "faction": "ijn",
+      "doctrine": "turn_fighter",
+      "features": {
+        "speed": 33.670033670033,
+        "yaw": 34.237171156859,
+        "pitch": 31.534236591844,
+        "retention": 0.976949448465,
+        "durability": 2.5
+      },
+      "global_ranks": {
+        "speed": 15,
+        "yaw": 2,
+        "pitch": 1,
+        "retention": 24,
+        "durability": 24
+      },
+      "doctrine_ranks": {
+        "speed": 3,
+        "yaw": 1,
+        "pitch": 1,
+        "retention": 3,
+        "durability": 3
+      },
+      "query_flags": [
+        "HIGH_YAW_LOW_RETENTION"
+      ],
+      "evidence": "SOURCE_MICROKERNEL+ANCHOR_JAR+IA_1.3.3_SOURCE"
+    },
+    {
+      "aircraft_id": "warfare_wings:b17",
+      "base_id": "b17",
+      "role": "bomber",
+      "faction": "usaaf",
+      "doctrine": "escort",
+      "features": {
+        "speed": 20.20202020202,
+        "yaw": 10.811738260061,
+        "pitch": 9.910760071722,
+        "retention": 0.99856044825,
+        "durability": 6
+      },
+      "global_ranks": {
+        "speed": 24,
+        "yaw": 24,
+        "pitch": 24,
+        "retention": 1,
+        "durability": 2
+      },
+      "doctrine_ranks": {
+        "speed": 6,
+        "yaw": 6,
+        "pitch": 6,
+        "retention": 1,
+        "durability": 2
+      },
+      "query_flags": [
+        "HIGH_RETENTION_LOW_YAW"
+      ],
+      "evidence": "SOURCE_MICROKERNEL+ANCHOR_JAR+IA_1.3.3_SOURCE"
+    },
+    {
+      "aircraft_id": "warfare_wings:b29",
+      "base_id": "b29",
+      "role": "bomber",
+      "faction": "usaaf",
+      "doctrine": "escort",
+      "features": {
+        "speed": 22.446689113356,
+        "yaw": 11.712716448399,
+        "pitch": 10.811738260061,
+        "retention": 0.998419614357,
+        "durability": 6.5
+      },
+      "global_ranks": {
+        "speed": 22,
+        "yaw": 23,
+        "pitch": 23,
+        "retention": 2,
+        "durability": 1
+      },
+      "doctrine_ranks": {
+        "speed": 5,
+        "yaw": 5,
+        "pitch": 5,
+        "retention": 2,
+        "durability": 1
+      },
+      "query_flags": [
+        "HIGH_RETENTION_LOW_YAW"
+      ],
+      "evidence": "SOURCE_MICROKERNEL+ANCHOR_JAR+IA_1.3.3_SOURCE"
+    },
+    {
+      "aircraft_id": "warfare_wings:bf109",
+      "base_id": "bf109",
+      "role": "fighter",
+      "faction": "luftwaffe",
+      "doctrine": "energy_fighter",
+      "features": {
+        "speed": 43.995510662177,
+        "yaw": 28.831302026829,
+        "pitch": 27.029345650152,
+        "retention": 0.98395390117,
+        "durability": 3.5
+      },
+      "global_ranks": {
+        "speed": 6,
+        "yaw": 6,
+        "pitch": 6,
+        "retention": 19,
+        "durability": 15
+      },
+      "doctrine_ranks": {
+        "speed": 6,
+        "yaw": 2,
+        "pitch": 2,
+        "retention": 10,
+        "durability": 6
+      },
+      "query_flags": [
+        "HIGH_YAW_LOW_RETENTION"
+      ],
+      "evidence": "SOURCE_MICROKERNEL+ANCHOR_JAR+IA_1.3.3_SOURCE"
+    },
+    {
+      "aircraft_id": "warfare_wings:d4y",
+      "base_id": "d4y",
+      "role": "attacker",
+      "faction": "ijn",
+      "doctrine": "attacker",
+      "features": {
+        "speed": 38.159371492705,
+        "yaw": 28.831302026829,
+        "pitch": 27.029345650152,
+        "retention": 0.986694001256,
+        "durability": 3.3
+      },
+      "global_ranks": {
+        "speed": 12,
+        "yaw": 7,
+        "pitch": 7,
+        "retention": 14,
+        "durability": 18
+      },
+      "doctrine_ranks": {
+        "speed": 1,
+        "yaw": 2,
+        "pitch": 2,
+        "retention": 3,
+        "durability": 4
+      },
+      "query_flags": [],
+      "evidence": "SOURCE_MICROKERNEL+ANCHOR_JAR+IA_1.3.3_SOURCE"
+    },
+    {
+      "aircraft_id": "warfare_wings:f4u",
+      "base_id": "f4u",
+      "role": "fighter",
+      "faction": "usn",
+      "doctrine": "energy_fighter",
+      "features": {
+        "speed": 44.893378226711,
+        "yaw": 26.128367461813,
+        "pitch": 24.776900179306,
+        "retention": 0.987532182225,
+        "durability": 4.5
+      },
+      "global_ranks": {
+        "speed": 2,
+        "yaw": 12,
+        "pitch": 13,
+        "retention": 13,
+        "durability": 7
+      },
+      "doctrine_ranks": {
+        "speed": 2,
+        "yaw": 7,
+        "pitch": 8,
+        "retention": 5,
+        "durability": 2
+      },
+      "query_flags": [],
+      "evidence": "SOURCE_MICROKERNEL+ANCHOR_JAR+IA_1.3.3_SOURCE"
+    },
+    {
+      "aircraft_id": "warfare_wings:f6f",
+      "base_id": "f6f",
+      "role": "fighter",
+      "faction": "usn",
+      "doctrine": "energy_fighter",
+      "features": {
+        "speed": 42.648709315376,
+        "yaw": 25.227389273475,
+        "pitch": 24.326411085137,
+        "retention": 0.988186013999,
+        "durability": 4.5
+      },
+      "global_ranks": {
+        "speed": 8,
+        "yaw": 14,
+        "pitch": 14,
+        "retention": 12,
+        "durability": 8
+      },
+      "doctrine_ranks": {
+        "speed": 7,
+        "yaw": 8,
+        "pitch": 9,
+        "retention": 4,
+        "durability": 3
+      },
+      "query_flags": [],
+      "evidence": "SOURCE_MICROKERNEL+ANCHOR_JAR+IA_1.3.3_SOURCE"
+    },
+    {
+      "aircraft_id": "warfare_wings:fw190",
+      "base_id": "fw190",
+      "role": "fighter",
+      "faction": "luftwaffe",
+      "doctrine": "energy_fighter",
+      "features": {
+        "speed": 44.893378226711,
+        "yaw": 27.93032383849,
+        "pitch": 27.029345650152,
+        "retention": 0.985305817701,
+        "durability": 4
+      },
+      "global_ranks": {
+        "speed": 3,
+        "yaw": 8,
+        "pitch": 8,
+        "retention": 17,
+        "durability": 10
+      },
+      "doctrine_ranks": {
+        "speed": 3,
+        "yaw": 3,
+        "pitch": 3,
+        "retention": 8,
+        "durability": 4
+      },
+      "query_flags": [],
+      "evidence": "SOURCE_MICROKERNEL+ANCHOR_JAR+IA_1.3.3_SOURCE"
+    },
+    {
+      "aircraft_id": "warfare_wings:g10n1",
+      "base_id": "g10n1",
+      "role": "bomber",
+      "faction": "ijn",
+      "doctrine": "escort",
+      "features": {
+        "speed": 26.936026936027,
+        "yaw": 18.019563766768,
+        "pitch": 18.019563766768,
+        "retention": 0.996385471346,
+        "durability": 5.5
+      },
+      "global_ranks": {
+        "speed": 18,
+        "yaw": 20,
+        "pitch": 20,
+        "retention": 3,
+        "durability": 3
+      },
+      "doctrine_ranks": {
+        "speed": 2,
+        "yaw": 3,
+        "pitch": 3,
+        "retention": 3,
+        "durability": 3
+      },
+      "query_flags": [
+        "HIGH_RETENTION_LOW_YAW"
+      ],
+      "evidence": "SOURCE_MICROKERNEL+ANCHOR_JAR+IA_1.3.3_SOURCE"
+    },
+    {
+      "aircraft_id": "warfare_wings:g10n2",
+      "base_id": "g10n2",
+      "role": "bomber",
+      "faction": "ijn",
+      "doctrine": "escort",
+      "features": {
+        "speed": 26.936026936027,
+        "yaw": 18.019563766768,
+        "pitch": 18.019563766768,
+        "retention": 0.996385471346,
+        "durability": 5.5
+      },
+      "global_ranks": {
+        "speed": 19,
+        "yaw": 21,
+        "pitch": 21,
+        "retention": 4,
+        "durability": 4
+      },
+      "doctrine_ranks": {
+        "speed": 3,
+        "yaw": 4,
+        "pitch": 4,
+        "retention": 4,
+        "durability": 4
+      },
+      "query_flags": [
+        "HIGH_RETENTION_LOW_YAW"
+      ],
+      "evidence": "SOURCE_MICROKERNEL+ANCHOR_JAR+IA_1.3.3_SOURCE"
+    },
+    {
+      "aircraft_id": "warfare_wings:g4m",
+      "base_id": "g4m",
+      "role": "torpedo_bomber",
+      "faction": "ijn",
+      "doctrine": "escort",
+      "features": {
+        "speed": 29.180695847362,
+        "yaw": 26.128367461813,
+        "pitch": 24.326411085137,
+        "retention": 0.990100052284,
+        "durability": 4
+      },
+      "global_ranks": {
+        "speed": 17,
+        "yaw": 13,
+        "pitch": 15,
+        "retention": 9,
+        "durability": 11
+      },
+      "doctrine_ranks": {
+        "speed": 1,
+        "yaw": 1,
+        "pitch": 1,
+        "retention": 6,
+        "durability": 5
+      },
+      "query_flags": [],
+      "evidence": "SOURCE_MICROKERNEL+ANCHOR_JAR+IA_1.3.3_SOURCE"
+    },
+    {
+      "aircraft_id": "warfare_wings:he111",
+      "base_id": "he111",
+      "role": "bomber",
+      "faction": "luftwaffe",
+      "doctrine": "escort",
+      "features": {
+        "speed": 24.691358024691,
+        "yaw": 19.821520143445,
+        "pitch": 18.920541955106,
+        "retention": 0.99483617547,
+        "durability": 4
+      },
+      "global_ranks": {
+        "speed": 21,
+        "yaw": 19,
+        "pitch": 19,
+        "retention": 6,
+        "durability": 12
+      },
+      "doctrine_ranks": {
+        "speed": 4,
+        "yaw": 2,
+        "pitch": 2,
+        "retention": 5,
+        "durability": 6
+      },
+      "query_flags": [
+        "HIGH_RETENTION_LOW_YAW"
+      ],
+      "evidence": "SOURCE_MICROKERNEL+ANCHOR_JAR+IA_1.3.3_SOURCE"
+    },
+    {
+      "aircraft_id": "warfare_wings:il2",
+      "base_id": "il2",
+      "role": "attacker",
+      "faction": "vvs",
+      "doctrine": "attacker",
+      "features": {
+        "speed": 31.425364758698,
+        "yaw": 36.039127533536,
+        "pitch": 31.534236591844,
+        "retention": 0.981860450367,
+        "durability": 5
+      },
+      "global_ranks": {
+        "speed": 16,
+        "yaw": 1,
+        "pitch": 2,
+        "retention": 22,
+        "durability": 5
+      },
+      "doctrine_ranks": {
+        "speed": 2,
+        "yaw": 1,
+        "pitch": 1,
+        "retention": 4,
+        "durability": 1
+      },
+      "query_flags": [
+        "HIGH_YAW_LOW_RETENTION"
+      ],
+      "evidence": "SOURCE_MICROKERNEL+ANCHOR_JAR+IA_1.3.3_SOURCE"
+    },
+    {
+      "aircraft_id": "warfare_wings:ju87",
+      "base_id": "ju87",
+      "role": "attacker",
+      "faction": "luftwaffe",
+      "doctrine": "attacker",
+      "features": {
+        "speed": 22.446689113356,
+        "yaw": 16.217607390091,
+        "pitch": 16.217607390091,
+        "retention": 0.995771902123,
+        "durability": 4.5
+      },
+      "global_ranks": {
+        "speed": 23,
+        "yaw": 22,
+        "pitch": 22,
+        "retention": 5,
+        "durability": 9
+      },
+      "doctrine_ranks": {
+        "speed": 4,
+        "yaw": 4,
+        "pitch": 4,
+        "retention": 1,
+        "durability": 2
+      },
+      "query_flags": [
+        "HIGH_RETENTION_LOW_YAW"
+      ],
+      "evidence": "SOURCE_MICROKERNEL+ANCHOR_JAR+IA_1.3.3_SOURCE"
+    },
+    {
+      "aircraft_id": "warfare_wings:ki61",
+      "base_id": "ki61",
+      "role": "fighter",
+      "faction": "ija",
+      "doctrine": "energy_fighter",
+      "features": {
+        "speed": 40.40404040404,
+        "yaw": 27.93032383849,
+        "pitch": 26.128367461813,
+        "retention": 0.985074140995,
+        "durability": 3
+      },
+      "global_ranks": {
+        "speed": 11,
+        "yaw": 9,
+        "pitch": 10,
+        "retention": 18,
+        "durability": 19
+      },
+      "doctrine_ranks": {
+        "speed": 9,
+        "yaw": 4,
+        "pitch": 5,
+        "retention": 9,
+        "durability": 9
+      },
+      "query_flags": [],
+      "evidence": "SOURCE_MICROKERNEL+ANCHOR_JAR+IA_1.3.3_SOURCE"
+    },
+    {
+      "aircraft_id": "warfare_wings:ki84",
+      "base_id": "ki84",
+      "role": "fighter",
+      "faction": "ija",
+      "doctrine": "energy_fighter",
+      "features": {
+        "speed": 44.893378226711,
+        "yaw": 29.732280215167,
+        "pitch": 27.93032383849,
+        "retention": 0.9833630947,
+        "durability": 3.5
+      },
+      "global_ranks": {
+        "speed": 4,
+        "yaw": 5,
+        "pitch": 5,
+        "retention": 20,
+        "durability": 16
+      },
+      "doctrine_ranks": {
+        "speed": 4,
+        "yaw": 1,
+        "pitch": 1,
+        "retention": 11,
+        "durability": 7
+      },
+      "query_flags": [
+        "HIGH_YAW_LOW_RETENTION"
+      ],
+      "evidence": "SOURCE_MICROKERNEL+ANCHOR_JAR+IA_1.3.3_SOURCE"
+    },
+    {
+      "aircraft_id": "warfare_wings:mc202",
+      "base_id": "mc202",
+      "role": "fighter",
+      "faction": "regia_aeronautica",
+      "doctrine": "energy_fighter",
+      "features": {
+        "speed": 38.159371492705,
+        "yaw": 27.029345650152,
+        "pitch": 26.128367461813,
+        "retention": 0.985797543642,
+        "durability": 3
+      },
+      "global_ranks": {
+        "speed": 13,
+        "yaw": 10,
+        "pitch": 11,
+        "retention": 16,
+        "durability": 20
+      },
+      "doctrine_ranks": {
+        "speed": 10,
+        "yaw": 5,
+        "pitch": 6,
+        "retention": 7,
+        "durability": 10
+      },
+      "query_flags": [],
+      "evidence": "SOURCE_MICROKERNEL+ANCHOR_JAR+IA_1.3.3_SOURCE"
+    },
+    {
+      "aircraft_id": "warfare_wings:mig3",
+      "base_id": "mig3",
+      "role": "fighter",
+      "faction": "vvs",
+      "doctrine": "energy_fighter",
+      "features": {
+        "speed": 41.301907968574,
+        "yaw": 24.326411085137,
+        "pitch": 25.227389273475,
+        "retention": 0.98848238484,
+        "durability": 3
+      },
+      "global_ranks": {
+        "speed": 10,
+        "yaw": 15,
+        "pitch": 12,
+        "retention": 10,
+        "durability": 21
+      },
+      "doctrine_ranks": {
+        "speed": 8,
+        "yaw": 9,
+        "pitch": 7,
+        "retention": 2,
+        "durability": 11
+      },
+      "query_flags": [],
+      "evidence": "SOURCE_MICROKERNEL+ANCHOR_JAR+IA_1.3.3_SOURCE"
+    },
+    {
+      "aircraft_id": "warfare_wings:p40e",
+      "base_id": "p40e",
+      "role": "fighter",
+      "faction": "usaaf",
+      "doctrine": "energy_fighter",
+      "features": {
+        "speed": 38.159371492705,
+        "yaw": 24.326411085137,
+        "pitch": 24.326411085137,
+        "retention": 0.98848238484,
+        "durability": 3.5
+      },
+      "global_ranks": {
+        "speed": 14,
+        "yaw": 16,
+        "pitch": 16,
+        "retention": 11,
+        "durability": 17
+      },
+      "doctrine_ranks": {
+        "speed": 11,
+        "yaw": 10,
+        "pitch": 10,
+        "retention": 3,
+        "durability": 8
+      },
+      "query_flags": [],
+      "evidence": "SOURCE_MICROKERNEL+ANCHOR_JAR+IA_1.3.3_SOURCE"
+    },
+    {
+      "aircraft_id": "warfare_wings:p47n",
+      "base_id": "p47n",
+      "role": "fighter",
+      "faction": "usaaf",
+      "doctrine": "energy_fighter",
+      "features": {
+        "speed": 45.791245791246,
+        "yaw": 22.52445470846,
+        "pitch": 21.623476520121,
+        "retention": 0.990868926777,
+        "durability": 5
+      },
+      "global_ranks": {
+        "speed": 1,
+        "yaw": 17,
+        "pitch": 17,
+        "retention": 8,
+        "durability": 6
+      },
+      "doctrine_ranks": {
+        "speed": 1,
+        "yaw": 11,
+        "pitch": 11,
+        "retention": 1,
+        "durability": 1
+      },
+      "query_flags": [],
+      "evidence": "SOURCE_MICROKERNEL+ANCHOR_JAR+IA_1.3.3_SOURCE"
+    },
+    {
+      "aircraft_id": "warfare_wings:p51d",
+      "base_id": "p51d",
+      "role": "fighter",
+      "faction": "usaaf",
+      "doctrine": "energy_fighter",
+      "features": {
+        "speed": 44.893378226711,
+        "yaw": 27.029345650152,
+        "pitch": 27.029345650152,
+        "retention": 0.986232838247,
+        "durability": 4
+      },
+      "global_ranks": {
+        "speed": 5,
+        "yaw": 11,
+        "pitch": 9,
+        "retention": 15,
+        "durability": 13
+      },
+      "doctrine_ranks": {
+        "speed": 5,
+        "yaw": 6,
+        "pitch": 4,
+        "retention": 6,
+        "durability": 5
+      },
+      "query_flags": [],
+      "evidence": "SOURCE_MICROKERNEL+ANCHOR_JAR+IA_1.3.3_SOURCE"
+    },
+    {
+      "aircraft_id": "warfare_wings:sbd",
+      "base_id": "sbd",
+      "role": "attacker",
+      "faction": "usn",
+      "doctrine": "attacker",
+      "features": {
+        "speed": 26.936026936027,
+        "yaw": 21.623476520121,
+        "pitch": 19.821520143445,
+        "retention": 0.992978571989,
+        "durability": 3.8
+      },
+      "global_ranks": {
+        "speed": 20,
+        "yaw": 18,
+        "pitch": 18,
+        "retention": 7,
+        "durability": 14
+      },
+      "doctrine_ranks": {
+        "speed": 3,
+        "yaw": 3,
+        "pitch": 3,
+        "retention": 2,
+        "durability": 3
+      },
+      "query_flags": [],
+      "evidence": "SOURCE_MICROKERNEL+ANCHOR_JAR+IA_1.3.3_SOURCE"
+    },
+    {
+      "aircraft_id": "warfare_wings:spitfire",
+      "base_id": "spitfire",
+      "role": "fighter",
+      "faction": "raf",
+      "doctrine": "turn_fighter",
+      "features": {
+        "speed": 42.648709315376,
+        "yaw": 32.435214780182,
+        "pitch": 30.633258403505,
+        "retention": 0.980104199479,
+        "durability": 3
+      },
+      "global_ranks": {
+        "speed": 9,
+        "yaw": 3,
+        "pitch": 3,
+        "retention": 23,
+        "durability": 22
+      },
+      "doctrine_ranks": {
+        "speed": 2,
+        "yaw": 2,
+        "pitch": 2,
+        "retention": 2,
+        "durability": 1
+      },
+      "query_flags": [
+        "HIGH_YAW_LOW_RETENTION"
+      ],
+      "evidence": "SOURCE_MICROKERNEL+ANCHOR_JAR+IA_1.3.3_SOURCE"
+    },
+    {
+      "aircraft_id": "warfare_wings:yak3",
+      "base_id": "yak3",
+      "role": "fighter",
+      "faction": "vvs",
+      "doctrine": "turn_fighter",
+      "features": {
+        "speed": 43.097643097643,
+        "yaw": 30.633258403505,
+        "pitch": 29.732280215167,
+        "retention": 0.982125201147,
+        "durability": 3
+      },
+      "global_ranks": {
+        "speed": 7,
+        "yaw": 4,
+        "pitch": 4,
+        "retention": 21,
+        "durability": 23
+      },
+      "doctrine_ranks": {
+        "speed": 1,
+        "yaw": 3,
+        "pitch": 3,
+        "retention": 1,
+        "durability": 2
+      },
+      "query_flags": [
+        "HIGH_YAW_LOW_RETENTION"
+      ],
+      "evidence": "SOURCE_MICROKERNEL+ANCHOR_JAR+IA_1.3.3_SOURCE"
+    }
+  ]
+}
