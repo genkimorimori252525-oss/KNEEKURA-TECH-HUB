@@ -52,13 +52,16 @@ public final class RuntimeSmokeChecks {
                 PortRegistries.SAKUYA_STOPWATCH.get() instanceof SakuyaStopWatchItem,
                 "sakuya_stopwatch registry object"
         );
+        var smokeLevel = event.getServer().overworld();
+        var homingEntity = PortRegistries.HOMING_AMULET_PROJECTILE.get().create(smokeLevel);
         require(
-                PortRegistries.HOMING_AMULET_PROJECTILE.get().getBaseClass() == HomingAmuletProjectile.class,
-                "homing projectile EntityType base class"
+                homingEntity instanceof HomingAmuletProjectile,
+                "homing projectile EntityType factory"
         );
+        var controllerEntity = PortRegistries.SAKUYA_TIME_CONTROLLER.get().create(smokeLevel);
         require(
-                PortRegistries.SAKUYA_TIME_CONTROLLER.get().getBaseClass() == SakuyaTimeControllerEntity.class,
-                "Sakuya controller EntityType base class"
+                controllerEntity instanceof SakuyaTimeControllerEntity,
+                "Sakuya controller EntityType factory"
         );
 
         requireRegistryPath(PortRegistries.HOMING_AMULET.get(), "homing_amulet");
@@ -75,6 +78,10 @@ public final class RuntimeSmokeChecks {
                 event.getServer().getServerVersion(),
                 event.getServer().isDedicatedServer()
         );
+
+        if (Boolean.getBoolean("five_difficulties_port.runtimeSmokeExit")) {
+            event.getServer().halt(false);
+        }
     }
 
     private static void verifyX1PolicyCore() {
