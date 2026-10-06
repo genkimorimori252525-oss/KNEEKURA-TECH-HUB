@@ -109,6 +109,7 @@ def main():
 
     result = {
         "format": "kneekura.madomagi.java-class-map.v1",
+        "generated_at": "2026-10-07",
         "entry_count": len(entries),
         "entries": entries,
         "parse_misses": misses,
