@@ -3,18 +3,16 @@ package dev.kneekura.fivedifficulties.core.x1;
 import java.util.Set;
 
 /**
- * ORIGINAL_SOURCE / ORIGINAL_BINARY derived contract retained by PR #93.
- *
- * Source evidence says both branches use speed 0.7 and HOMING01, while Shift
- * changes count/spread/size/damage from a wide fan to a focused pair.
+ * Exact red Homing Amulet contract recovered from the canonical X1 archive.
  */
 public final class HomingAmuletContract {
-    private static final Set<String> CURRENTLY_UNRESOLVED = Set.of(
-            "legacyNumericShotType",
-            "legacyNumericColorId",
-            "lifetimeTicks",
-            "THShotLibPerShotAngleDistribution"
-    );
+    public static final int FORM_AMULET = 27;
+    public static final int COLOR_RED = 0;
+    public static final int SPECIAL_HOMING01 = 10;
+    public static final int LIFETIME_TICKS = 90;
+    public static final int DELAY_TICKS = 0;
+    public static final double SPAWN_DISTANCE = 0.5;
+    public static final double BASE_ANGLE_DEGREES = 0.0;
 
     public static final HomingAmuletShotContract NORMAL = new HomingAmuletShotContract(
             5,
@@ -22,12 +20,19 @@ public final class HomingAmuletContract {
             0.4,
             5.0,
             0.7,
+            FORM_AMULET,
+            COLOR_RED,
+            DELAY_TICKS,
+            LIFETIME_TICKS,
+            SPECIAL_HOMING01,
+            SPAWN_DISTANCE,
+            BASE_ANGLE_DEGREES,
             "AMULET",
             "RED",
             "HOMING01",
             4.0,
             EvidenceGrade.X1_EXACT_STATIC,
-            CURRENTLY_UNRESOLVED
+            Set.of()
     );
 
     public static final HomingAmuletShotContract FOCUSED = new HomingAmuletShotContract(
@@ -36,12 +41,19 @@ public final class HomingAmuletContract {
             1.0,
             8.0,
             0.7,
+            FORM_AMULET,
+            COLOR_RED,
+            DELAY_TICKS,
+            LIFETIME_TICKS,
+            SPECIAL_HOMING01,
+            SPAWN_DISTANCE,
+            BASE_ANGLE_DEGREES,
             "AMULET",
             "RED",
             "HOMING01",
             4.0,
             EvidenceGrade.X1_EXACT_STATIC,
-            CURRENTLY_UNRESOLVED
+            Set.of()
     );
 
     private HomingAmuletContract() {}
