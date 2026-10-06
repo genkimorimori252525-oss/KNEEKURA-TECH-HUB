@@ -34,7 +34,16 @@ function run(command, args) {
 async function same(generatedPath, goldenPath) {
   const a = await readFile(generatedPath, 'utf8');
   const b = await readFile(goldenPath, 'utf8');
-  if (a !== b) throw new Error(`Generated report drift: ${path.basename(goldenPath)}`);
+  if (a === b) return;
+  const al = a.split(/\r?\n/);
+  const bl = b.split(/\r?\n/);
+  const limit = Math.max(al.length, bl.length);
+  for (let i = 0; i < limit; i++) {
+    if (al[i] !== bl[i]) {
+      throw new Error(`Generated report drift: ${path.basename(goldenPath)} line ${i + 1}\nGENERATED: ${al[i]}\nGOLDEN:    ${bl[i]}`);
+    }
+  }
+  throw new Error(`Generated report drift: ${path.basename(goldenPath)}`);
 }
 
 try {
