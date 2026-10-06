@@ -20,3 +20,9 @@ Never treat a 1.6.4 API call as directly portable to 1.20.1. Extract the invaria
 - FAILURE-REPAIR-HISTORY.md — bounded history status and candidate anomalies
 
 Raw uploaded source, compiled classes and original assets are deliberately not committed here.
+
+## Deep-dive catalogs
+
+- CHARACTER-COMBAT-CATALOG.md — character-by-character normal / Rebellion / Ultimate combat patterns
+- PROJECTILE-TRAJECTORY-CATALOG.md — projectile physics, homing, staged world props, fan-out and summon-seed trajectories
+- BOSS-COMBAT-CATALOG.md — witch/boss phase systems, summons, terrain interaction and static anomaly leads
