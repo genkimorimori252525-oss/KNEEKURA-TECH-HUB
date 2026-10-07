@@ -22,13 +22,13 @@ Ruling: follow the recommendations without implementing speculative camera featu
 - [x] Add RED regressions for retained spatial projections/partial coverage and explicit output safety; implement an opt-in derived HTML writer through the existing verified roster reader. Final review requires a finalized run and direct canonical reads without ingestion.
 - [x] Add RED checks for missing/corrupt/hash-mismatched compiled resources; implement reusable bounded readiness verification and use it before offline fixture compilation and native launch. Keep11 readiness resources distinct from the native eight-member linkage limit.
 - [x] Run affected Node/Python compatibility checks and verify a map against the existing sealed native receipt. Final Node19/Python13 PASS; corrected sample67 map leaves38 retained files byte-identical. No Minecraft launch is needed for this derived-only change; readiness is also checked against genuine existing Forge output.
-- [ ] Update operating guide/feedback, commit selected files, publish decision history on the scoped camera branch. Preserve original dirty runtime checkout.
+- [x] Update operating guide/feedback, commit selected files, publish decision history on the scoped camera branch (`cfecc64`). Preserve original dirty runtime checkout.
 
 ## NaturalGhast continuation
 
-- [ ] Read all current design/handoff and existing implementation/verification. Compare GitHub main's v0.5 with local v0.6; user-approved retained region supersedes old camera-relative planning. Publish this correction with scoped product history.
-- [ ] Make a focused plan for the next observable-only tactical/composition unit, preserving the Flight Controller as the only physical velocity owner and ordinary swimming as the default.
-- [ ] Implement relevant pure/mapped regressions, build genuine Forge sources, then use fresh finite TANK_CORE fixtures for changed behavior. Record source/JAR identities, shutdown/finalization and raw original hashes.
+- [x] Read current design/handoff and compare GitHub main v0.5 with corrected local v0.6; scoped product history preserves the user-approved retained region and excludes all current Grand Danmaku implementation.
+- [x] Plan and implement observed tactical composition while retaining the Flight Controller as sole physical velocity owner. Astra's Important repetition-memory finding was reproduced and corrected.
+- [x] Pure/mapped tests and genuine Forge build pass. Fresh `flight-i9Ez38` proves two lateral recipes, ordinary swimming, complete shutdown/evidence and all85 historical original hashes. Product verification/decisions published through `b393bf8`; other recipes have pure coverage only. See AF-0023.
 - [ ] Continue the remaining non-danmaku design in coherent dependency order. Never describe a partial flight/tactics slice as a completed boss; world-overlay Domain work requires reversible conflict-aware restoration, not legacy phase reuse.
 
 One fresh whole-change review per completed implementation plan; no per-edit launches/reviews. Keep failures and blocked checks. No merge, force push, original-world writes or continuous recording.
