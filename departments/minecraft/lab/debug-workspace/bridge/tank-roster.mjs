@@ -120,3 +120,53 @@ export async function sealTankRosterArtifacts(runDir,observations,artifacts){
    if(['COMPLETE','PARTIAL'].includes((await read(runDir,relative(i)+'/receipt.json')).status)&&result.status==='UNKNOWN')throw new Error('TANK_ROSTER_CANONICAL_SOURCE_MISSING');}
  }
 }
+
+/** Pure projection of a verified retained sample, never a new world read. */
+export function spatialMapFromRoster(result){
+ const r=result?.roster;
+ if(!r||!['COMPLETE','PARTIAL'].includes(result.status)||r.status!==result.status||
+  result.execution!=='CANONICAL_STRUCTURED_EVIDENCE'||!result.evidenceHash)
+  throw new Error('SPATIAL_MAP_VERIFIED_ROSTER_REQUIRED');
+ hashId(result.evidenceHash);
+ const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const coord=value=>value.join(', ');
+ function view(vertical,label){
+  const left=44,top=32,width=440,height=280;
+  const x=n=>left+(n-r.min[0])/(r.max[0]-r.min[0])*width;
+  const y=n=>vertical===1?top+height-(n-r.min[1])/(r.max[1]-r.min[1])*height:top+(n-r.min[2])/(r.max[2]-r.min[2])*height;
+  const rect=(lo,hi,attributes)=>`<rect x="${x(lo[0])}" y="${Math.min(y(lo[vertical]),y(hi[vertical]))}" width="${x(hi[0])-x(lo[0])}" height="${Math.abs(y(hi[vertical])-y(lo[vertical]))}" ${attributes}/>`;
+  const gaps=r.coverage.missingChunks.map(([cx,cz])=>{
+   const lo=[Math.max(r.min[0],cx*16),r.min[1],Math.max(r.min[2],cz*16)],hi=[Math.min(r.max[0],cx*16+16),r.max[1],Math.min(r.max[2],cz*16+16)];
+   return rect(lo,hi,`class="gap" data-gap="${cx},${cz}"`);
+  }).join('');
+  const bodies=r.entities.map((e,i)=>rect(e.aabbMin,e.aabbMax,`class="body ${e.knownSubjectId===null?'resident':'selected'}" data-aabb="${escape(coord(e.aabbMin)+' / '+coord(e.aabbMax))}"`)+
+   `<circle cx="${x(e.world[0])}" cy="${y(e.world[vertical])}" r="3"/><text x="${x(e.world[0])+5}" y="${y(e.world[vertical])-5}">${i+1}</text>`).join('');
+  return `<figure><figcaption>${label} world projection</figcaption><svg viewBox="0 0 540 355" role="img" aria-label="${label} retained positions"><defs><clipPath id="scope-${vertical}"><rect x="${left}" y="${top}" width="${width}" height="${height}"/></clipPath></defs><rect class="scope" x="${left}" y="${top}" width="${width}" height="${height}"/><g clip-path="url(#scope-${vertical})">${gaps}${bodies}</g><text x="${left}" y="340">X ${r.min[0]} to ${r.max[0]}; ${vertical===1?'Y':'Z'} ${r.min[vertical]} to ${r.max[vertical]}</text></svg></figure>`;
+ }
+ const rows=r.entities.map((e,i)=>`<tr><td>${i+1}</td><td>${escape(e.uuid)}<br>${escape(e.entityType)}<br>${escape(e.knownSubjectId??'Unregistered resident')}</td><td>${coord(e.world)}</td><td>${coord(e.local)}</td><td>${coord(e.aabbMin)}<br>${coord(e.aabbMax)}</td><td>${e.fullyContained}</td></tr>`).join('');
+ const html=`<!doctype html><meta charset="utf-8"><title>Retained Tank spatial map</title><style>body{font:15px system-ui;background:#18212a;color:#eee;margin:24px}main{display:flex;flex-wrap:wrap}figure{margin:8px;width:540px}svg{width:100%}text{fill:#eee;font-size:13px}.scope{fill:#202f3c;stroke:#a9bdcf}.gap{fill:#ce5148;opacity:.3}.body{fill:#efc469;fill-opacity:.35;stroke:#efc469}.selected{stroke:#60dfb2;fill:#60dfb2}circle{fill:white}table{border-collapse:collapse}td,th{border:1px solid #617588;padding:8px;text-align:left;vertical-align:top}</style><h1>Retained Tank spatial map</h1><p>DERIVED_ARTIFACT — ${result.status}; sample ${result.sampleIndex}; server tick ${r.serverTick}; game time ${r.gameTime}. Current positions and sample age: UNKNOWN. No new sampling, registration or history.</p><p>Source raw observation SHA256: ${result.evidenceHash}. Interior [${coord(r.min)}] to [${coord(r.max)}) is half-open. Bodies are clipped to this projection; exact full AABBs remain below.</p><p>${r.missingEntityNotAbsent?'Missing residents are not absent.':'COMPLETE applies only to the retained scope/tick.'} Red bands: missing chunks (X/Y is a conservative projection across Z). Truncation: ${escape(r.coverage.truncationReasons.join(', ')||'none')}. Elevation projection can overlap different Z positions; it is not visibility or LOS.</p><main>${view(2,'X/Z')}${view(1,'X/Y')}</main><table><thead><tr><th>#</th><th>Identity</th><th>World xyz</th><th>Local xyz (world−min)</th><th>AABB min / max</th><th>Fully contained</th></tr></thead><tbody>${rows}</tbody></table>`;
+ return {artifactRole:'DERIVED_ARTIFACT',currentPositions:'UNKNOWN',sourceTick:r.serverTick,sourceEvidenceHash:result.evidenceHash,html};
+}
+
+/** Explicit new derived HTML outside the retained run, analogous to contact sheets. */
+export async function writeTankRosterSpatialMap({runDir,envelopeHash,sampleIndex,outputFile}){
+ if(typeof outputFile!=='string'||!path.isAbsolute(outputFile)||path.resolve(outputFile)!==outputFile)
+  throw new Error('SPATIAL_MAP_OUTSIDE_RUN_REQUIRED');
+ const relative=path.relative(runDir,outputFile);
+ if(!(relative.startsWith('..'+path.sep)||path.isAbsolute(relative))||await realpath(path.dirname(outputFile))!==path.dirname(outputFile))
+  throw new Error('SPATIAL_MAP_OUTSIDE_RUN_REQUIRED');
+ let finalization;
+ try{finalization=await read(runDir,'evidence/finalization.json',4*1024*1024);}
+ catch(error){if(error.code==='ENOENT')throw new Error('SPATIAL_MAP_FINALIZED_RUN_REQUIRED');throw error;}
+ if(finalization.kind!=='evidence_finalization'||!['EVIDENCE_COMPLETE','EVIDENCE_PARTIAL'].includes(finalization.status))
+  throw new Error('SPATIAL_MAP_FINALIZED_RUN_REQUIRED');
+ // Supply retained canonical rows explicitly: no EvidenceRuntime.init/ingest, even on a partial seal.
+ const canonical=(await readRegisteredFile({root:runDir,relativePath:'evidence/observations.jsonl',maxBytes:16*1024*1024})).bytes.toString('utf8');
+ const observations=canonical.split('\n').filter(line=>line.trim()).map(line=>JSON.parse(line));
+ const result=await inspectTankRoster({runDir,envelopeHash,sampleIndex,observations});
+ if(result.roster)for(const k of ['debugSessionId','runId','runSnapshotId','processEpoch'])
+  if(finalization[k]!==result.roster.identity[k])throw new Error('SPATIAL_MAP_FINALIZATION_IDENTITY');
+ const derived=spatialMapFromRoster(result);
+ const h=await open(outputFile,'wx',0o600);try{await h.writeFile(derived.html);await h.sync();}finally{await h.close();}
+ const {html,...metadata}=derived;return {...metadata,outputFile,sampleIndex};
+}

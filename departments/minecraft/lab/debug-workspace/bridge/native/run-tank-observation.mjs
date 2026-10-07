@@ -15,6 +15,7 @@ import {cameraPlan} from '../camera-plan.mjs';
 import {captureBundle} from '../capture-bundle.mjs';
 import {prepareTankResourceFile} from '../../tank-cli.mjs';
 import {finalizeNativeTrial} from './trial-finalization.mjs';
+import {verifyCompiledClasses} from './class-readiness.mjs';
 
 const option=name=>{const i=process.argv.indexOf('--'+name);if(i<0||!process.argv[i+1])throw Error('Missing --'+name);return path.resolve(process.argv[i+1]);};
 const templateFile=option('template'),original=option('original'),classpathFile=option('classpath-file'),javaHome=option('java-home'),parent=option('private-parent'),fixtureRoot=option('fixture-source-root'),acceptedJar=option('accepted-jar');
@@ -42,6 +43,8 @@ async function inventory(root,relative=''){
 const exec=(tool,args)=>execFileSync(path.join(javaHome,'bin',tool+'.exe'),args,{cwd:trial,windowsHide:true,maxBuffer:16*1024*1024});
 async function javaArgs(name,args){const file=path.join(trial,name);await fs.writeFile(file,args.map(s=>'"'+s.replaceAll('\\','/')+'"').join('\n'),{flag:'wx'});return '@'+file;}
 try{
+ const outputRoot=path.join(host,'build/classes/java/kneekuraDebug');
+ report.classReadiness=await verifyCompiledClasses({outputRoot,classes:['ClientBootstrap','ScopedOwnerGate','TankObservation','TankRosterOwner','CaptureOwner','CaptureSession','CardinalCapture','EvidenceWriter','CameraOwnership','ActionJournal','ArenaRuntime'].map(name=>({className:'com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebug'+name}))});
  originalRows=await inventory(original);await write(path.join(trial,'original-hashes.json'),originalRows);
  const world=path.join(trial,'game/saves/KNEEKURA_DEBUG_WORLD');await fs.mkdir(path.dirname(world),{recursive:true});await fs.cp(original,world,{recursive:true,errorOnExist:true,force:false});
  await fs.writeFile(path.join(trial,'game/options.txt'),'fullscreen:false\noverrideWidth:640\noverrideHeight:480\npauseOnLostFocus:false\n',{flag:'wx'});
@@ -66,10 +69,9 @@ try{
  await write(path.join(inputs,'request.json'),request);await write(path.join(inputs,'assertions.json'),request.assertions);const requestHash=sha256(await fs.readFile(path.join(inputs,'request.json')));
  await write(path.join(inputs,'binding.json'),{schema_version:1,experiment_id:experiment,generation:1,request_hash:requestHash,target,arena_id:experiment,arena_baseline_hash:fixture.baselineHash,assertions_hash:sha256(await fs.readFile(path.join(inputs,'assertions.json')))});
  const classResources=[{className:'com.genki.soutoughast.SoutouGhastMod',sha256:sha256(await fs.readFile(path.join(template.workspaceDir,'build/classes/java/main/com/genki/soutoughast/SoutouGhastMod.class')))}];
- for(const name of ['TankObservation','TankRosterOwner','CaptureOwner','CaptureSession','CardinalCapture','EvidenceWriter','CameraOwnership']){
-  const className='com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebug'+name;
-  classResources.push({className,sha256:sha256(await fs.readFile(path.join(host,'build/classes/java/kneekuraDebug',className.replaceAll('.','/')+'.class')))});
- }
+ // Readiness covers11 resources; owner linkage retains its existing eight-member manifest/anchor contract.
+ const linkedNames=new Set(['TankObservation','TankRosterOwner','CaptureOwner','CaptureSession','CardinalCapture','EvidenceWriter','CameraOwnership'].map(name=>'com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebug'+name));
+ classResources.push(...report.classReadiness.classResources.filter(c=>linkedNames.has(c.className)));
  const operator={schemaVersion:1,requestHash,materialDescriptor:{schemaVersion:1,targetModId:'soutou_ghast',linkageMode:'OBSERVED_CLASS_RESOURCE_AND_CONTAINER_LINKAGE',buildArtifactHash:acceptedHash,configArtifactHash:target.config_hash,resourceArtifactHash:target.resource_hash,classResources},
   selection:{grantId:experiment,leaseId:experiment+'-120s',arenaEpoch:8,expectedArenaRevision:0,allowedActions:[]},
   worldRegistration:{schemaVersion:1,registrationId:experiment,canonicalWorldRoot:world,worldName:'KNEEKURA_DEBUG_WORLD',dimensionId:'minecraft:overworld',permissions:['BOUNDED_DIAGNOSTIC_CONTROL','CARDINAL_CAPTURE_PAUSE_CAMERA','TANK_OBSERVATION_READ']},
@@ -92,6 +94,7 @@ try{
  config.launch.args=[...template.launch.args.slice(0,-2),'--init-script',init];config.launch.env={JAVA_HOME:javaHome,KNEEKURA_DEBUG_MOD_PROFILE:'TANK_CORE'};
  config.ownerControl={requestHash,operatorRegistration:{trustedRoot:privateDir,relativePath:'operator.json',sha256:sha256(await fs.readFile(path.join(privateDir,'operator.json')))}};await write(path.join(trial,'config.json'),config);
  await registerBridgeRequest({runtimeRoot:config.runtimeRoot,registration:{schemaVersion:1,trustedRoot:inputs,requestFile:'request.json',bindingFile:'binding.json',assertionsFile:'assertions.json',materials:{buildArtifact:{relativePath:'naturalghast-accepted.jar'},configArtifact:{relativePath:'config.bin'},resourceArtifact:{relativePath:'resources.zip'}}}});
+ await verifyCompiledClasses({outputRoot,classes:report.classReadiness.classResources});
  await launchDebugRun(config,lab);current=await readCurrent(config,lab);assert(current.live&&current.runtimeOwnership?.owned);report.runDir=current.runDir;
  const runtime=evidenceRuntimeFromCurrent(current);await runtime.init();
  const options={runDir:current.runDir,envelopeHash:sha256(await fs.readFile(path.join(current.runDir,'control/owner-envelope.json')))};
