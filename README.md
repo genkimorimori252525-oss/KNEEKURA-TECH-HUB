@@ -385,3 +385,10 @@ kneekura-hub merge-entities ke:survivor ke:duplicate --reason 'same concept' --a
 - Core v1 posture: **FEATURE FROZEN**
 - Next pressure: **none by default — reopen only for a reproduced defect, unmet original-purpose workflow, concrete operational failure, integrity/governance weakness, or breaking upstream/platform change**
 - Mass discovery: **intentionally not enabled by the frozen v1 core**
+
+
+## Deliverables boundary
+
+KNEEKURA TECH HUB remains a technology-research and evidence system. Products built from that knowledge live under [`deliverables/`](deliverables/README.md).
+
+A deliverable may contain its own source, tests, status, adoption ledger and development history. It does not replace the corresponding research department, analysis queue or canonical knowledge governance. This keeps one successful product from gradually redefining the purpose of the Hub.
