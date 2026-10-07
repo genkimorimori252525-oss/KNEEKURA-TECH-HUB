@@ -28,7 +28,7 @@ assert.equal(sha256(await fs.readFile(acceptedJar)),acceptedHash,'Preserve the u
 await fs.mkdir(parent,{recursive:true});const trial=await fs.mkdtemp(path.join(parent,'observation-'));
 const write=(file,value)=>fs.writeFile(file,JSON.stringify(value)+'\n',{flag:'wx'}),json=async file=>JSON.parse(await fs.readFile(file,'utf8'));
 const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms)),hashJson=v=>sha256(Buffer.from(stableJson(v)));
-const report={schema:'kneekura.tank-observation-native/v1',trial,profile:'TANK_CORE',labRevision:git(repository,'rev-parse','HEAD'),hostRevision:git(host,'rev-parse','HEAD'),acceptedJarHash:acceptedHash,failures:[],
+const report={schema:'kneekura.tank-observation-native/v1',trial,profile:'TANK_CORE',labRevision:git(repository,'rev-parse','HEAD'),hostRevision:git(host,'rev-parse','HEAD'),productWorkspaceRevision:git(template.workspaceDir,'rev-parse','HEAD'),acceptedProductSource:'182fcb7ee88084c5dc1aecaba6cfa870cefa13b0',acceptedJarHash:acceptedHash,failures:[],
  limitations:['One fresh survival Player/moving Ghast fixture; death/unload/multiplayer NOT_RUN.',
  'Roster and paused sequential frames have independent ticks; visibility/AI perception NOT_ESTABLISHED.',
  'Mob observe v2 is not enabled by this pilot. Class-resource linkage is not transformed-definition attestation.']};
@@ -56,7 +56,7 @@ try{
  await prepareTankResourceFile({savedFile:path.join(trial,'tank-owner.json'),profileFile,output:path.join(inputs,'resources.zip')});
  const configMaterial=Buffer.from(stableJson({profile:'TANK_CORE',scope:'BOUNDED_ROOM_AND_CARDINAL_V2',acceptedJarHash:acceptedHash}));await fs.writeFile(path.join(inputs,'config.bin'),configMaterial,{flag:'wx'});
  const target={profile_id:hashJson({profile:'TANK_CORE'}),index_snapshot_id:hashJson({hostRevision:report.hostRevision,labRevision:report.labRevision}),build_artifact_hash:acceptedHash,
-  source_revision:'182fcb7ee88084c5dc1aecaba6cfa870cefa13b0',dirty_hash:sha256(Buffer.alloc(0)),config_hash:sha256(configMaterial),resource_hash:sha256(await fs.readFile(path.join(inputs,'resources.zip')))};
+  source_revision:report.productWorkspaceRevision,dirty_hash:sha256(Buffer.alloc(0)),config_hash:sha256(configMaterial),resource_hash:sha256(await fs.readFile(path.join(inputs,'resources.zip')))};
  const experiment=path.basename(trial),request={schema_version:1,experiment_id:experiment,generation:1,target,
   arena:{arena_id:experiment,baseline_hash:fixture.baselineHash,bounds:{min:[7,224,6],max:[13,235,13]},preset:'private-observation-v2'},
   subjects:[{subject_id:'ghast',uuid:fixture.subjectUuid,entity_type:'soutou_ghast:soutou_ghast'}],initial_state:[],actions:[],
