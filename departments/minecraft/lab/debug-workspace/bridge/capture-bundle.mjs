@@ -55,7 +55,7 @@ export async function captureBundle({runDir,envelopeHash,captureIndex}){
   manifest.tankObservationHash!==(manifest.rig==='tank-cardinal-4-snapshot-v2'?p.envelope.tankObservationHash:undefined))throw new Error('CAPTURE_BUNDLE_MANIFEST_BINDING');
  for(const k of ['debugSessionId','runId','runSnapshotId','processEpoch','experimentId','generation','requestHash','arenaId','arenaEpoch','baselineHash'])if(manifest.identity[k]!==p.grant[k])throw new Error('CAPTURE_BUNDLE_RUN_IDENTITY');
  if(manifest.identity.arenaRevision!==marker.expectedArenaRevision||manifest.identity.arenaEpoch!==marker.expectedArenaEpoch||
-  stableJson(manifest.subjects)!==stableJson(p.grant.subjects.map(s=>s.uuid).sort())||manifest.frames.some(f=>Math.abs(f.camera.fov-p.request.visual_rig.fov)>.001||stableJson(f.camera.viewport)!==stableJson(p.request.visual_rig.viewport)))throw new Error('CAPTURE_BUNDLE_REQUEST_BINDING');
+  stableJson([...manifest.subjects].sort())!==stableJson(p.grant.subjects.map(s=>s.uuid).sort())||manifest.frames.some(f=>Math.abs(f.camera.fov-p.request.visual_rig.fov)>.001||stableJson(f.camera.viewport)!==stableJson(p.request.visual_rig.viewport)))throw new Error('CAPTURE_BUNDLE_REQUEST_BINDING');
  const reserved=decodeJson((await readRegisteredFile({root:runDir,relativePath:dir+'/native-reservation.json',maxBytes:16384})).bytes,16384);
  for(const k of ['debugSessionId','runId','runSnapshotId','processEpoch','ownerEnvelopeHash','requestHash','runSnapshotHash','leaseId','arenaId','arenaEpoch','arenaRevision'])if(reserved[k]!==receipt[k])throw new Error('CAPTURE_BUNDLE_RESERVATION_BINDING');
  if(manifest.structuredState&&stableJson(manifest.structuredState.arenaBounds)!==stableJson(p.grant.bounds))throw new Error('CAPTURE_BUNDLE_ACTION_BOUNDS');

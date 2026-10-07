@@ -14,6 +14,7 @@ import {requestDeclaredCapture} from '../owner-action-adapter.mjs';
 import {cameraPlan} from '../camera-plan.mjs';
 import {captureBundle} from '../capture-bundle.mjs';
 import {prepareTankResourceFile} from '../../tank-cli.mjs';
+import {finalizeNativeTrial} from './trial-finalization.mjs';
 
 const option=name=>{const i=process.argv.indexOf('--'+name);if(i<0||!process.argv[i+1])throw Error('Missing --'+name);return path.resolve(process.argv[i+1]);};
 const templateFile=option('template'),original=option('original'),classpathFile=option('classpath-file'),javaHome=option('java-home'),parent=option('private-parent'),fixtureRoot=option('fixture-source-root'),acceptedJar=option('accepted-jar');
@@ -74,7 +75,19 @@ try{
   worldRegistration:{schemaVersion:1,registrationId:experiment,canonicalWorldRoot:world,worldName:'KNEEKURA_DEBUG_WORLD',dimensionId:'minecraft:overworld',permissions:['BOUNDED_DIAGNOSTIC_CONTROL','CARDINAL_CAPTURE_PAUSE_CAMERA','TANK_OBSERVATION_READ']},
   tankObservation:{schemaVersion:1,scope:'TANK_OBSERVATION_READ',dimensionId:'minecraft:overworld',min:[0,224,0],max:[52,248,52],recipeHash:saved.recipeHash.replace(/^sha256:/,''),maxEntities:64,maxSamples:2}};
  await write(path.join(privateDir,'operator.json'),operator);
- const init=path.join(trial,'native.init.gradle');await fs.writeFile(init,`gradle.beforeProject { p -> p.plugins.withId('net.minecraftforge.gradle') { p.dependencies.add('runtimeOnly',p.files('${artifact.replaceAll('\\','/')}'));p.afterEvaluate { p.minecraft.runs.client.workingDirectory p.file('${path.join(trial,'game').replaceAll('\\','/')}') } } }\n`,{flag:'wx'});
+ const init=path.join(trial,'native.init.gradle');await fs.writeFile(init,`gradle.beforeProject { p -> p.plugins.withId('net.minecraftforge.gradle') {
+ p.dependencies.add('runtimeOnly',p.files('${artifact.replaceAll('\\','/')}'))
+ p.afterEvaluate {
+  p.minecraft.runs.client.workingDirectory p.file('${path.join(trial,'game').replaceAll('\\','/')}')
+  p.tasks.named('runClient').configure { task ->
+   task.environment System.getenv().findAll { k,v -> k.startsWith('KNEEKURA_DEBUG_') }
+   task.doFirst {
+    def context=[enabled:task.environment['KNEEKURA_DEBUG_ENABLED'],runId:task.environment['KNEEKURA_DEBUG_RUN_ID'],bridgeSource:task.environment['KNEEKURA_DEBUG_FORGE_BRIDGE_SRC'],modClasses:task.environment['MOD_CLASSES'],debugClasspath:task.classpath.files.findAll { it.path.contains('kneekuraDebug') }.collect { it.path }]
+    java.nio.file.Files.writeString(java.nio.file.Path.of('${path.join(trial,'launcher-debug-context.json').replaceAll('\\','/')}'),groovy.json.JsonOutput.toJson(context),java.nio.file.StandardOpenOption.CREATE_NEW)
+   }
+  }
+ }
+} } }\n`,{flag:'wx'});
  const config=structuredClone(template);config.workspaceId=experiment;config.runtimeRoot=path.join(trial,'runtime');config.gameDir=path.join(trial,'game');config.readyTimeoutMs=240000;config.motionOverlay=true;
  config.launch.args=[...template.launch.args.slice(0,-2),'--init-script',init];config.launch.env={JAVA_HOME:javaHome,KNEEKURA_DEBUG_MOD_PROFILE:'TANK_CORE'};
  config.ownerControl={requestHash,operatorRegistration:{trustedRoot:privateDir,relativePath:'operator.json',sha256:sha256(await fs.readFile(path.join(privateDir,'operator.json')))}};await write(path.join(trial,'config.json'),config);
@@ -94,10 +107,16 @@ try{
  const before=report.roster.roster.entities.find(e=>e.uuid===fixture.subjectUuid),after=report.secondRoster.roster.entities.find(e=>e.uuid===fixture.subjectUuid);
  report.movingSubject={before:before.world,after:after.world,distance:Math.hypot(...after.world.map((v,i)=>v-before.world[i]))};
  assert.equal((await requestDeclaredCapture({...options,captureIndex:0})).status,'ALREADY_RECORDED');
- report.status='PASS';
+ report.status='CHECKS_PASSED_FINALIZATION_PENDING';
 }catch(error){report.status='FAIL';report.failures.push(error.stack??error.message);process.exitCode=1;}
 finally{
- if(current)try{await stopCurrent(await json(path.join(trial,'config.json')),lab);const stopped=await readCurrent(await json(path.join(trial,'config.json')),lab);report.shutdown=stopped.evidenceShutdown?.ack;report.finalization=await finalizeEvidenceRun(stopped,{cleanShutdown:stopped.evidenceShutdown?.clean===true});}catch(error){report.failures.push('cleanup: '+error.message);report.status='FAIL';process.exitCode=1;}
+ if(current)try{
+  const config=await json(path.join(trial,'config.json'));
+  const finish=await finalizeNativeTrial({current,stop:()=>stopCurrent(config,lab),read:()=>readCurrent(config,lab),finalize:finalizeEvidenceRun});
+  report.shutdown=finish.shutdown;report.exit=finish.stopped.cleanup;report.finalization=finish.finalization;
+  if(finish.status==='FAIL'){report.failures.push(finish.reason);report.status='FAIL';process.exitCode=1;}
+  else if(report.status==='CHECKS_PASSED_FINALIZATION_PENDING')report.status='PASS';
+ }catch(error){report.failures.push('cleanup: '+error.message);report.status='FAIL';process.exitCode=1;}
  if(originalRows)try{assert.deepEqual(await inventory(original),originalRows);report.originalWorld={status:'UNCHANGED',files:originalRows.length};}catch(error){report.failures.push('original audit: '+error.message);report.status='FAIL';process.exitCode=1;}
  assert.equal(sha256(await fs.readFile(acceptedJar)),acceptedHash);assert.equal(git(repository,'rev-parse','HEAD'),report.labRevision);
  await write(path.join(trial,'report.json'),report);console.log(report.status+' '+path.join(trial,'report.json'));
