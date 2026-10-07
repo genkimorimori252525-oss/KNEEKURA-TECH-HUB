@@ -18,7 +18,7 @@ Statuses:
 | Vanilla `WitherSkull` | REFERENCE | Java API/impact-effect reuse only | Custom KNEEKURA skull entity now owns Bedrock launch speed, inertia, reflection gate and resistance cap. |
 | BEStyleWither charge Goal decomposition | REFERENCE | engineering hint only | It does not define Bedrock timing, state ordering or dash constants. No upstream source copied. |
 | BEStyleWither constants | REJECTED | none | Not evidence of exact Bedrock values. |
-| BEStyleWither vanilla-Wither Mixin architecture | REJECTED | none | Risks Java AI leakage and attribution ambiguity. |
+| BEStyleWither vanilla-Wither Mixin architecture | REJECTED | none | Risks Java AI leakage and attribution ambiguity. |\n| Wither: Reincarnated 1.0.5 (`00589726…ab80a`) | REFERENCE | Java boss-engineering patterns only: attack decomposition, server-authoritative beam/client presentation, projectile ownership transfer, tag-driven compatibility and bounded client FX | ARR binary; research record: `departments/minecraft/mods/wither-reincarnated/`. No code/assets copied. Its health thresholds, cooldowns, damage, phases and encounter design are not Bedrock evidence; its vanilla-Wither Mixin architecture is not adopted. |
 | KNEEKURA Tank observation pipeline | ADOPTED_CONCEPT | bounded comparative verification | Infrastructure remains owned outside this deliverable. |
 | KNEEKURA Failure/Repair History format | ADOPTED_CONCEPT | own regression/repair records | Product incidents use `origin=OWN_DEVELOPMENT`. |
 | Vanilla death lifecycle semantics | ADOPTED_CONCEPT | preserve killer/death-event identity while extending visuals | BEStyleWither Issue #4 demonstrates compatibility failure when a boss is artificially held alive for a delayed death effect. |
