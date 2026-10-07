@@ -23,6 +23,10 @@ public final class KneekuraDebugMobPovSessionSelfTest {
   session=new KneekuraDebugMobPovSession(subject,100,1100);
   check(session.poll(99,true,true,true,true,true).equals("CLOCK_CHANGED"),"backward monotonic time closes");
   try{new KneekuraDebugMobPovSession(subject,100,100);throw new AssertionError("zero duration");}catch(IllegalArgumentException expected){checks++;}
+  check(KneekuraDebugCameraOwnership.derivedOverlayAllowed(true,false),"ordinary/live view can show derived overlay");
+  check(!KneekuraDebugCameraOwnership.derivedOverlayAllowed(true,true),"POV raw snapshot excludes derived overlay");
+  check(!KneekuraDebugCameraOwnership.derivedOverlayAllowed(false,false),"cardinal raw capture excludes derived overlay");
+  check(!KneekuraDebugCameraOwnership.derivedOverlayAllowed(false,true),"either raw capture excludes derived overlay");
   System.out.println("mob POV lifecycle/ownership checks="+checks);
  }
 }

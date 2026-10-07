@@ -31,7 +31,7 @@ public final class KneekuraDebugMotionOverlay {
   PoseStack pose=event.getPoseStack();pose.pushPose();
   try {
    var related=KneekuraDebugMotionOverlayRuntime.relatedSnapshot();
-   boolean captureQuiescent=KneekuraDebugCardinalCapture.quiescent();
+   boolean captureQuiescent=KneekuraDebugCameraOwnership.derivedOverlayAllowed(KneekuraDebugCardinalCapture.quiescent(),KneekuraDebugMobPovCamera.rawSnapshotPending());
    var lines=KneekuraDebugMotionOverlayGeometry.combinedLines(trace,related,dimension,gameTime,camera.x,camera.y,camera.z,captureQuiescent);
    var labels=KneekuraDebugMotionOverlayGeometry.relatedLabels(trace,related,dimension,gameTime,camera.x,camera.y,camera.z,captureQuiescent);if(lines.isEmpty()&&labels.isEmpty())return;
    pose.translate(-camera.x,-camera.y,-camera.z);var buffers=mc.renderBuffers().bufferSource();var consumer=buffers.getBuffer(RenderType.lines());

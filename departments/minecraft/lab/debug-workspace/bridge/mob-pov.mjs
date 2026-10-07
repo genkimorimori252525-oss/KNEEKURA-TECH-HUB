@@ -98,11 +98,28 @@ export function validateMobPovFrame(frame,p){
  requireValue(Math.abs(c.fov-p.request.visual_rig.fov)<=.001&&stableJson(c.viewport)===stableJson(p.request.visual_rig.viewport)&&c.matrixConvention==='JOML_COLUMN_MAJOR_CAMERA_RELATIVE','MOB_POV_CAMERA_RIG');
  return f;
 }
-/** Retrieve only an explicitly completed capture bound to this registered owner and receipt. */
+function canonicalFrame(observations,p,commandIndex){
+ const candidates=observations.filter(row=>row.payload?.kind==='mob_pov_raw_frame'&&row.payload.captureId==='mob-pov-'+commandIndex);
+ let frame=null;
+ for(const row of candidates){
+  const f=validateMobPovFrame(row.payload,p);
+  requireValue(row.debugSessionId===f.identity.debugSessionId&&row.runId===f.identity.runId&&row.runSnapshotId===f.identity.runSnapshotId&&
+   row.processEpoch===f.identity.processEpoch&&row.arenaEpoch===f.identity.arenaEpoch&&row.scope?.kind==='EXPERIMENT'&&row.scope.experimentId===f.identity.experimentId&&
+   row.epistemicStatus==='OBSERVED'&&row.completeness?.complete===true,'MOB_POV_CANONICAL_SOURCE_MISMATCH');
+  requireValue(frame===null||stableJson(frame)===stableJson(f),'MOB_POV_CANONICAL_SOURCE_AMBIGUOUS');frame=f;
+ }
+ return frame;
+}
+/** Retrieve durable explicit evidence; UNKNOWN dispatch remains UNKNOWN even when its late image exists. */
 export async function readMobPovImage({runDir,envelopeHash,commandIndex}){
  integer(commandIndex,0,31);hashId(envelopeHash);
  const p=await readPreparedOwnerControl({runDir,envelopeHash,requireSnapshot:true}),receipt=await readReceipt(runDir,envelopeHash,p,commandIndex);
- requireValue(receipt.status==='CAPTURED'&&receipt.operation==='snapshot','MOB_POV_CAPTURE_NOT_COMPLETED');
+ requireValue(receipt.operation==='snapshot'&&['CAPTURED','OUTCOME_UNKNOWN'].includes(receipt.status),'MOB_POV_CAPTURE_NOT_COMPLETED');
+ if(receipt.status==='OUTCOME_UNKNOWN'){
+  const file=await readRegisteredFile({root:runDir,relativePath:'evidence/observations.jsonl',maxBytes:16*1024*1024});
+  const rows=file.bytes.toString('utf8').split('\n').filter(s=>s.trim()).map(s=>decodeJson(Buffer.from(s),128*1024));
+  const frame=canonicalFrame(rows,p,commandIndex);requireValue(frame,'MOB_POV_CANONICAL_SOURCE_MISSING');return readBoundedRawImage(runDir,frame);
+ }
  const {status,observationPayloadHash,...raw}=receipt.result;hashId(observationPayloadHash);
  const f=validateMobPovFrame(raw,p);
  requireValue(f.captureId==='mob-pov-'+commandIndex&&receipt.imageHash===f.imageHash&&receipt.imageBytes===f.imageBytes&&receipt.imagePath===f.imagePath&&receipt.observationPayloadHash===observationPayloadHash,'MOB_POV_RECEIPT_IMAGE');
@@ -126,12 +143,14 @@ export async function sealMobPovArtifacts(runDir,observations,artifacts){
   for(const name of ['request.json','native-reservation.json','receipt.json']){
    try{retain(dir+'/'+name,(await readRegisteredFile({root:runDir,relativePath:dir+'/'+name,maxBytes:16384})).bytes);}catch(error){if(error.code!=='ENOENT')throw error;}
   }
-  if(receipt.status!=='CAPTURED')continue;
-  const {status,observationPayloadHash,...raw}=receipt.result,f=validateMobPovFrame(raw,p);
-  const source=observations.find(row=>stableJson(row.payload)===stableJson(f)&&row.debugSessionId===f.identity.debugSessionId&&row.runId===f.identity.runId&&
-   row.runSnapshotId===f.identity.runSnapshotId&&row.processEpoch===f.identity.processEpoch&&row.arenaEpoch===f.identity.arenaEpoch&&
-   row.scope?.kind==='EXPERIMENT'&&row.scope.experimentId===f.identity.experimentId&&row.epistemicStatus==='OBSERVED'&&row.completeness?.complete===true);
-  requireValue(source,'MOB_POV_CANONICAL_SOURCE_MISSING');
-  retain(f.imagePath,await readMobPovImage({runDir,envelopeHash,commandIndex:i}));
+  if(receipt.operation!=='snapshot'||!['CAPTURED','OUTCOME_UNKNOWN'].includes(receipt.status))continue;
+  const f=canonicalFrame(observations,p,i);
+  if(receipt.status==='OUTCOME_UNKNOWN'){
+   if(f)retain(f.imagePath,await readBoundedRawImage(runDir,f));
+  }else{
+   requireValue(f,'MOB_POV_CANONICAL_SOURCE_MISSING');
+   const {status,observationPayloadHash,...raw}=receipt.result;requireValue(stableJson(f)===stableJson(validateMobPovFrame(raw,p)),'MOB_POV_CANONICAL_SOURCE_MISMATCH');
+   retain(f.imagePath,await readMobPovImage({runDir,envelopeHash,commandIndex:i}));
+  }
  }
 }

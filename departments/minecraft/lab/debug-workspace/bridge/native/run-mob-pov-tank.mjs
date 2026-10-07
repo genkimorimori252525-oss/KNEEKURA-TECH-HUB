@@ -41,7 +41,7 @@ try{
  originalRows=await inventory(original);await write(path.join(trial,'original-hashes.json'),originalRows);
  const world=path.join(trial,'game/saves/KNEEKURA_DEBUG_WORLD');await fs.mkdir(path.dirname(world),{recursive:true});await fs.cp(original,world,{recursive:true,errorOnExist:true,force:false});
  // New presentation configuration, no copied accounts/credentials and no existing config overwritten.
- await fs.writeFile(path.join(trial,'game/options.txt'),'fullscreen:false\noverrideWidth:640\noverrideHeight:360\npauseOnLostFocus:false\n',{flag:'wx'});
+ await fs.writeFile(path.join(trial,'game/options.txt'),'fullscreen:false\noverrideWidth:640\noverrideHeight:480\npauseOnLostFocus:false\n',{flag:'wx'});
  const classpath=(await json(classpathFile)).compile.map(r=>r.path).join(';')+';'+path.join(host,'build/classes/java/main')+';'+path.join(host,'build/classes/java/kneekuraDebug');
  const classes=path.join(trial,'classes');await fs.mkdir(classes);
  exec('javac',[await javaArgs('javac.args',['--release','17','-proc:none','-cp',classpath,'-d',classes,path.join(fileURLToPath(new URL('.',import.meta.url)),'PrepareMobPovTank.java')])]);
@@ -55,18 +55,18 @@ try{
  const experiment=path.basename(trial),request={schema_version:1,experiment_id:experiment,generation:1,target,
   arena:{arena_id:experiment,baseline_hash:fixture.baselineHash,bounds:{min:[7,224,7],max:[12,227,12]},preset:'original-tank-static-mob-pov'},
   subjects:[{subject_id:'reimu',uuid:fixture.subjectUuid,entity_type:'touhou_little_maid:reimu'}],initial_state:[],actions:[],
-  observation_scopes:[{kind:'ENTITY_UUID',subject_id:'reimu',lanes:['SERVER_ENTITY_STATE'],level:'L1'}],visual_rig:{mode:'mob-eye-live-v1',fov:60,viewport:[640,360]},
+  observation_scopes:[{kind:'ENTITY_UUID',subject_id:'reimu',lanes:['SERVER_ENTITY_STATE'],level:'L1'}],visual_rig:{mode:'mob-eye-live-v1',fov:60,viewport:[640,480]},
   assertions:[{assertion_id:'health',kind:'structured',subject_id:'reimu',field:'health',operator:'equals',expected:20}],budgets:{time_budget_ms:120000,max_actions:0,max_captures:1}};
  await write(path.join(inputs,'request.json'),request);await write(path.join(inputs,'assertions.json'),request.assertions);const requestHash=sha256(await fs.readFile(path.join(inputs,'request.json')));
  await write(path.join(inputs,'binding.json'),{schema_version:1,experiment_id:experiment,generation:1,request_hash:requestHash,target,arena_id:experiment,arena_baseline_hash:fixture.baselineHash,assertions_hash:sha256(await fs.readFile(path.join(inputs,'assertions.json')))});
- const names=['com.github.tartaricacid.touhoulittlemaid.TouhouLittleMaid','com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugMobPovCamera','com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugMobPovOwner','com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugMobPovCommands','com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebugCameraOwnership'];
+ const names=['com.github.tartaricacid.touhoulittlemaid.TouhouLittleMaid',...['MobPovCamera','MobPovOwner','MobPovCommands','CameraOwnership','MobPovSession','MotionOverlay','EvidenceWriter'].map(n=>'com.github.tartaricacid.touhoulittlemaid.sim.debug.KneekuraDebug'+n)];
  const classResources=[];for(const className of names){const output=className.endsWith('.TouhouLittleMaid')?'main':'kneekuraDebug';classResources.push({className,sha256:sha256(await fs.readFile(path.join(host,'build/classes/java',output,className.replaceAll('.','/')+'.class')))});}
  const operator={schemaVersion:1,requestHash,materialDescriptor:{schemaVersion:1,targetModId:'touhou_little_maid',linkageMode:'OBSERVED_CLASS_RESOURCE_AND_CONTAINER_LINKAGE',buildArtifactHash:target.build_artifact_hash,configArtifactHash:target.config_hash,resourceArtifactHash:target.resource_hash,classResources},
   selection:{grantId:experiment,leaseId:experiment+'-120s',arenaEpoch:8,expectedArenaRevision:0,allowedActions:[]},
   worldRegistration:{schemaVersion:1,registrationId:experiment,canonicalWorldRoot:world,worldName:'KNEEKURA_DEBUG_WORLD',dimensionId:'minecraft:overworld',permissions:['BOUNDED_DIAGNOSTIC_CONTROL','MOB_POV_CAMERA']}};
  await write(path.join(privateDir,'operator.json'),operator);
  const init=path.join(trial,'native.init.gradle');await fs.writeFile(init,`gradle.beforeProject { p -> p.plugins.withId('net.minecraftforge.gradle') { p.afterEvaluate { p.minecraft.runs.client.workingDirectory p.file('${path.join(trial,'game').replaceAll('\\','/')}') } } }\n`,{flag:'wx'});
- const config=structuredClone(template);config.workspaceId=experiment;config.runtimeRoot=path.join(trial,'runtime');config.gameDir=path.join(trial,'game');config.readyTimeoutMs=240000;
+ const config=structuredClone(template);config.workspaceId=experiment;config.runtimeRoot=path.join(trial,'runtime');config.gameDir=path.join(trial,'game');config.readyTimeoutMs=240000;config.motionOverlay=true;report.motionOverlayEnabled=true;
  config.launch.args=[...template.launch.args.slice(0,-2),'--init-script',init];config.launch.env={JAVA_HOME:javaHome,KNEEKURA_DEBUG_MOD_PROFILE:'TANK_CORE'};
  config.ownerControl={requestHash,operatorRegistration:{trustedRoot:privateDir,relativePath:'operator.json',sha256:sha256(await fs.readFile(path.join(privateDir,'operator.json')))}};await write(path.join(trial,'config.json'),config);
  await registerBridgeRequest({runtimeRoot:config.runtimeRoot,registration:{schemaVersion:1,trustedRoot:inputs,requestFile:'request.json',bindingFile:'binding.json',assertionsFile:'assertions.json',materials:{buildArtifact:{relativePath:'host-dev.jar'},configArtifact:{relativePath:'config.bin'},resourceArtifact:{relativePath:'resources.zip'}}}});

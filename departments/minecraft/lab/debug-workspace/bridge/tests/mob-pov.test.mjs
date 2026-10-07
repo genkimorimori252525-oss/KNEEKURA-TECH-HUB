@@ -18,6 +18,23 @@ test('mob POV accepts zero image budget and explicit single-image budget without
  const bad=req();bad.assertions=[{assertion_id:'visual',kind:'visual',subject_id:'subject',check:'subject_visible',expected:'YES'}];
  assert.throws(()=>validateVisualExperimentRequest(bad));
 });
+test('late canonical PNG is retrievable and sealed while operation remains OUTCOME_UNKNOWN',async t=>{
+ const f=await live(t,true),png=encodePngRgba({width:64,height:64,rgba:Buffer.alloc(64*64*4)}),frame=rawFrame(f,png);
+ await api.publishMobPovCommand({...f.controlOptions,commandIndex:0,operation:'snapshot'});
+ const receipt={schemaVersion:1,kind:'mob_pov_operation_receipt',ownerEnvelopeHash:f.prepared.envelopeHash,runSnapshotHash:f.prepared.snapshot.snapshotHash,requestHash:f.prepared.envelope.requestHash,
+  commandIndex:0,operation:'snapshot',observedAt:new Date().toISOString(),status:'OUTCOME_UNKNOWN',error:'MOB_POV_OPERATION_DEADLINE'};
+ const file=path.join(f.runDir,'control/mob-pov/00/receipt.json');await writeFile(file,JSON.stringify(receipt));const original=await readFile(file);
+ await mkdir(path.join(f.runDir,'evidence/raw/visual'),{recursive:true});await writeFile(path.join(f.runDir,frame.imagePath),png);
+ const source={payload:frame,debugSessionId:frame.identity.debugSessionId,runId:frame.identity.runId,runSnapshotId:frame.identity.runSnapshotId,processEpoch:frame.identity.processEpoch,
+  arenaEpoch:frame.identity.arenaEpoch,scope:{kind:'EXPERIMENT',experimentId:frame.identity.experimentId},epistemicStatus:'OBSERVED',completeness:{complete:true}};
+ await writeFile(path.join(f.runDir,'evidence/observations.jsonl'),JSON.stringify(source)+'\n');
+ const artifacts=[];await api.sealMobPovArtifacts(f.runDir,[source],artifacts);assert.equal(artifacts.filter(a=>a.path.endsWith('.png')).length,1);
+ assert.deepEqual(await api.readMobPovImage({...f.controlOptions,commandIndex:0}),png);
+ assert.equal((await api.inspectMobPovCommand({...f.controlOptions,commandIndex:0})).status,'OUTCOME_UNKNOWN');assert.deepEqual(await readFile(file),original);
+ const bad=structuredClone(source);bad.scope.experimentId='foreign';
+ await writeFile(path.join(f.runDir,'evidence/observations.jsonl'),JSON.stringify(bad)+'\n');
+ await assert.rejects(api.sealMobPovArtifacts(f.runDir,[bad],[]),/SOURCE/);await assert.rejects(api.readMobPovImage({...f.controlOptions,commandIndex:0}),/SOURCE/);
+});
 test('mob POV does not relax viewport, capture bounds or cardinal minimum',()=>{
  for(const mutate of [r=>r.visual_rig.viewport=[63,64],r=>r.visual_rig.fov=Infinity,r=>r.budgets.max_captures=17]){
   const r=req();mutate(r);assert.throws(()=>validateVisualExperimentRequest(r));

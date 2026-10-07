@@ -35,6 +35,7 @@ public final class KneekuraDebugMobPovCamera {
  static boolean quiescent(){thread();return active==null&&writes==0;}
  static UUID subject(){Active a=active;return a==null?null:a.target.getUUID();}
  static String restoration(){return lastRestoration;}
+ static boolean rawSnapshotPending(){thread();Active a=active;return a!=null&&a.pending!=null;}
  static CompletableFuture<JsonObject> attach(UUID uuid,String type,String dimension,long deadline,JsonObject identity){
   thread();Installation owner=installation;Minecraft mc=Minecraft.getInstance();
   if(owner==null||!owner.live().getAsBoolean()||active!=null||mc.level==null||mc.player==null||!mc.player.isSpectator()||mc.isPaused()||mc.screen!=null||mc.getOverlay()!=null||mc.getCameraEntity()==null||!mc.level.dimension().location().toString().equals(dimension))throw new IllegalStateException("MOB_POV_CLIENT_NOT_AVAILABLE");
