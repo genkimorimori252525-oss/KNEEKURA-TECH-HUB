@@ -34,7 +34,7 @@ try {
  assert.ok(mixins.mixins.includes('KneekuraDebugNavigationResultMixin'),'base Navigation normal-return mixin registration');
  assert.ok(mixins.mixins.includes('KneekuraDebugBrainNavigationMixin'),'original Brain/Navigation call-site mixin registration');
  const names=['Env','ActionJournal','ArenaController','ArenaOwnerGrant','ForgeArenaBackend','ArenaRuntime','Durability','EvidenceWriter','ClientBootstrap','ReadyWriter','ServerObserver','TargetTracker','ShutdownCoordinator',
-  'OwnerFiles','OwnerInputs','OwnerDispatch','OwnerTriggers','OwnerLifetime','MaterialLinkage','ScopedOwnerGate','OwnerConnection',
+  'OwnerFiles','OwnerInputs','OwnerDispatch','OwnerTriggers','OwnerLifetime','MaterialLinkage','ScopedOwnerGate','OwnerFailure','OwnerConnection',
   'CaptureSession','CaptureBarrier','CaptureRestoration','ImageArtifact','CardinalCapture','CapturePolicy','CaptureOwner','CaptureEvidenceSink','CaptureClock',
   'TankPresentationRecipe','TankPresentation','TankStatus','TankView','TankRotationController','TankRotationPlan','ForgeTankRotationBackend','DecisionSnapshot','DecisionBurstBudget','DecisionHooks','TerrainField','SynchedCached',
   'DecisionAdapter','DecisionBurstRequest','AdapterSourceProof','TwilightForestDescriptor','TwilightForestReturnDescriptor','TwilightForestAdapter',
