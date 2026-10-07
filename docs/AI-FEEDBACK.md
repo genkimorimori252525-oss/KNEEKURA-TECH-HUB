@@ -70,6 +70,8 @@ Measure the original failure and protected behavior, not speed/test count alone.
 | AF-0009 | Private observer omitted resource-pack metadata | VERIFIED (observer loading) | FRICTION |
 | AF-0010 | Arena receipt hashing mistaken for Node action serialization | VERIFIED (scoped owner) | QUALITY |
 | AF-0011 | Opt-in mob POV with explicit image retrieval | VERIFIED (scoped camera) | FRICTION |
+| AF-0012 | Bounded flight fixture and acceptance repairs | VERIFIED (static flight) | QUALITY |
+| AF-0013 | Native filesystem error loses operation location | RECORDED | FRICTION |
 
 ## Light audit — 2026-10-07
 
@@ -80,6 +82,28 @@ Keep AF0006 open for cross-checkout availability: this camera work selects an is
 AF0008 corrections remain applicable: physical size, MOD profile, action bounds, player acquisition and mob motion testing are separate. AF0011 is now authorized for the first implementation slice; it remains unimplemented/unverified until checks are recorded below. Feedback suggestions do not authorize unrelated core, dependency or policy changes.
 
 ## Records
+
+### AF-0012 — Bounded flight fixture and acceptance repairs
+
+2026-10-07; actor coding agent, exact model version unestablished; FAILURE/GAP, QUALITY, VERIFIED for static-flight scope only. User authorized continuing NaturalGhast and prioritizing evidenced tooling problems. Follow AF0008: TANK_CORE is a MOD profile; physical geometry, observation target and bounded mutation authority are separate. No authority/config/dependency expansion.
+
+Expected: actual Player acquisition, visible frontal arrival, inertial braking and compact drift. Initial private preparation exposed several correct rejections: `flight-RzdfJx` LAB-only fixture test under product test sources; `flight-ynfKNZ` UNSUPPORTED_CLASS_ANCHOR; `flight-d2a0jq` UNCONTROLLED_BLOCK_STATE; `flight-VPYIdi` OWNER_ACTION_ORDER_MISMATCH after its first VERIFIED journal; `flight-pxuVE6` two verified operations then OUTCOME_UNKNOWN / AccessDeniedException:null. The I/O operation is unreported; its cause remains unconfirmed (AF0013). `flight-pN18hN` acquired a real Player and accelerated, but its narrow wall aperture occluded the distant eye ray; AI correctly decelerated and held. Keep all failures, not retroactive PASS.
+
+Repairs: developer-only mapped tests under `tools/tank`; supported MOD-class/container plus whole artifact binding (other compiled hashes are declarations); STONE inside the registered Arena; bounded owner idle+next-ID wait rather than replay; offline prepared aperture with one sealed-cell activation and lower eye-ray clearance. Whole-unit review additionally caught inward annulus chords, unsampled diagonals and acceptance false positives. Regressions now require full drift chord feasibility, actual candidate body sweeps and measured LOS/frontal arrival/continuous braking/moving drift. Do not relax palette/identity/order/lease checks or infer observed behavior from a primitive label.
+
+History, 2026-10-07: Native trial `C:/Users/genki/Documents/Codex/NaturalGhastmod/build/tank/flight-92WZ2m`, target `b9938e6d017b9764bd460d2b4ce62c9889c9283c`, LAB `57bd4e011b1072bf143c9643a1b50ef0a5531954`, clean host `7f14960999bc2955d85ae9d3619090ad37817c38` with private Forge47.4.10 override. PASS_STATIC_PLAYER_ACQUISITION_FLIGHT_MOBILITY: room56x16x56, one action VERIFIED,600 contiguous samples/556 Player-target samples/531 visible frontal comfortable samples; maximum speed0.65/displacement22.9201956, gradual braking and actual drift. Static survival Player pose was measured; all600 ghast bodies4x4/collision-free/NoAI=false/health10. Preflight READY CURRENT;217 canonical observations, clean stop/dropped0/EVIDENCE_COMPLETE, original85files unchanged. One explicitly requested640x480 raw PNG visually inspected; no production observer/recording dependency. Report SHA256 `0216e4746d742f849e53dc7894aa6474e21aa72d83625a9c8d50a4b8708b91ee`. Exact run paths/frame/finalization hashes and commands are in target `docs/FLIGHT-MOBILITY-VERIFICATION.md` and `docs/FLIGHT-FOUNDATION.md`.
+
+Grouped verification: pure Java22+25, mapped body-sweep5, mapped fixture8, Node acceptance/owner-wait6 PASS; exact target compileJava/build PASS. One independent review Critical0/Important3/Minor0; Important repairs retained RED->GREEN. Failed native launches all stopped cleanly/finalized EVIDENCE_COMPLETE/original85unchanged. This is not full-host compatibility, full AI or full-Hub acceptance.
+
+Remaining limits/costs: static fixture only; moving/facing-changing Player, subject replacement, deliberate LOS recovery, ground scuttling/landing, tactics/attacks/danmaku, multiplayer/performance/external impulses and full-room lighting/boundary readback remain unverified. Conservative clearance may reject ambiguous narrow paths. Artifact/class-resource linkage is not resident transformed-class proof. Reconsider fixtures or stop automatic use when actual scope/source/owner/cleanup cannot be established; preserve evidence and repair only the affected seam. Next target unit is tactics/repetition/Commit Points. AF0008 remains open for broader coverage, with this dated static-flight mitigation.
+
+### AF-0013 — Native filesystem error loses operation location
+
+2026-10-07; GAP/FRICTION; RECORDED. `flight-pxuVE6` owner status became OUTCOME_UNKNOWN/unsafe with `error=AccessDeniedException:null`; it retained two VERIFIED operations and an uncompleted next action. Clean shutdown/finalization/original preservation succeeded. No repeatability or exact failing I/O path was established; do not claim a generic filesystem defect is fixed by the next successful run.
+
+Source fact: `KneekuraDebugOwnerConnection.reason(Throwable)` renders a FileSystemException as class plus `getReason()`, losing its operation/file location when reason is null. This hinders choosing between publication, journal reading, permission failure and another stage. A transient Windows read/replace conflict is only a hypothesis.
+
+Proposal: on an evidenced recurrence, add a bounded stage/operation label and safe run-relative basename to diagnostic receipts/logs, preserving terminal UNKNOWN and the original cause. Avoid secrets/full external paths, automatic retries of mutations, broad access/permission changes or weakening guards. Before adoption, reproduce a denial at a known operation, verify useful bounded diagnostics plus existing authority/privacy tests, and measure its native cost. No implementation approved solely by this entry; diagnosis first. Reconsider if a reproducible native I/O failure blocks the next required unit.
 
 ### AF-0008 — NaturalGhast requirements exceed current Tank fixture coverage
 
