@@ -34,7 +34,7 @@ async function inventory(root,relative=''){
   if(e.isDirectory())rows.push(...await inventory(root,file));else if(e.isFile())rows.push({file,sha256:sha256(await fs.readFile(path.join(root,file)))});
  }return rows.sort((a,b)=>a.file.localeCompare(b.file));
 }
-const exec=(tool,args)=>execFileSync(path.join(javaHome,'bin',tool+'.exe'),args,{windowsHide:true,maxBuffer:8*1024*1024});
+const exec=(tool,args)=>execFileSync(path.join(javaHome,'bin',tool+'.exe'),args,{cwd:trial,windowsHide:true,maxBuffer:8*1024*1024});
 async function javaArgs(name,args){const file=path.join(trial,name);await fs.writeFile(file,args.map(s=>'"'+s.replaceAll('\\','/')+'"').join('\n'),{flag:'wx'});return '@'+file;}
 async function pngCount(){return (await fs.readdir(path.join(current.runDir,'evidence/raw/visual')).catch(e=>{if(e.code==='ENOENT')return [];throw e;})).filter(n=>n.endsWith('.png')).length;}
 try{
@@ -78,9 +78,11 @@ try{
  async function command(commandIndex,operation,extra={}){await publishMobPovCommand({...options,commandIndex,operation,...extra});const receipt=await until(async()=>inspectMobPovCommand({...options,commandIndex}).catch(e=>{if(e.code==='ENOENT')return null;throw e;}));
   assert.equal(receipt.status,{attach:'ATTACHED',snapshot:'CAPTURED',return:'RETURNED'}[operation]);return receipt;}
  report.attach=await command(0,'attach',{subjectUuid:fixture.subjectUuid,durationMs:20000});
- const before=(await runtime.store.readObservations()).filter(r=>r.lane==='SERVER_ENTITY_STATE').at(-1);await sleep(1200);await runtime.ingestAvailable();
- assert.equal(await pngCount(),0);const after=(await runtime.store.readObservations()).filter(r=>r.lane==='SERVER_ENTITY_STATE').at(-1);assert(before&&after&&after.localTick>before.localTick,'Server ticks must continue');
- report.viewOnly={imageCount:0,serverTickBefore:before.localTick,serverTickAfter:after.localTick};
+ const before=await until(async()=>(await runtime.store.readObservations()).filter(r=>r.lane==='SERVER_TICK'&&Number.isInteger(r.payload?.localServerTick)).at(-1));
+ const after=await until(async()=>{const row=(await runtime.store.readObservations()).filter(r=>r.lane==='SERVER_TICK').at(-1);return row?.payload?.localServerTick>before.payload.localServerTick+10&&row;});
+ assert.equal(await pngCount(),0);assert(after.gameTime>before.gameTime,'Server game time must continue');
+ assert.equal((await json(path.join(current.runDir,'control/owner-status.json'))).mobPov.active,true);
+ report.viewOnly={imageCount:0,serverTickBefore:before.payload.localServerTick,serverTickAfter:after.payload.localServerTick,gameTimeBefore:before.gameTime,gameTimeAfter:after.gameTime};
  report.snapshot=await command(1,'snapshot');await readMobPovImage({...options,commandIndex:1});assert.equal(await pngCount(),1);
  report.return=await command(2,'return');assert.equal(report.return.restoration,'RESTORED');
  await command(3,'attach',{subjectUuid:fixture.subjectUuid,durationMs:1500});
