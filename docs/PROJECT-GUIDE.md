@@ -4,6 +4,8 @@ Reviewed: 2026-10-07. Scope: local knowledge core plus GitHub main, all 126 bran
 
 The Hub includes knowledge curation, Minecraft source intelligence, asset tooling, real-game experiments/observation, historical MOD studies, optimization research and offline authoring/simulation tools. **14 local core CLIs are not the full tool inventory.**
 
+For Minecraft Tank work, also read [Tank Operating Guide](TANK-OPERATING-GUIDE.md): source-matched setup, grid/brightness, rotation, exact observation, Cardinal/mob POV, retained browser views and cleanup/export. NaturalGhast also tests Tank usability; after each coherent unit, record defects, friction and useful ideas in [AI Feedback](AI-FEEDBACK.md), preserving quality and explicit recording budgets.
+
 ## Availability and feature map
 
 Local HEAD: `379c6b372522f744acc4698f5396787c9f056dbb`, with unrelated dirty Twilight R2 work. GitHub main: `c9145ec5376aeeff59995b8c20f7b839f810ab6e` (2026-10-02). Main adds `kneekura-minecraft` as a **15th console entry**, plus separate Python modules, Node tools and Forge adapters absent from this checkout. Later features live in separate unmerged branches. Documentation links do not install them; select an isolated, reviewed revision before running a missing tool. Never pull/reset over existing work.
