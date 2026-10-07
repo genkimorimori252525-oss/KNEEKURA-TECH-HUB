@@ -23,8 +23,8 @@ function run(command,args){const r=spawnSync(command,args,{cwd:root,encoding:'ut
  if(r.error||r.status!==0)throw new Error('Owner source verification failed',{cause:r.error});}
 try{
  const classes=path.join(temp,'classes');await mkdir(classes);
- const sources=['Env','ActionJournal','ArenaController','ArenaOwnerGrant','Durability','OwnerFiles','OwnerInputs','OwnerDispatch','OwnerTriggers','OwnerLifetime','MaterialLinkage','TankRotationController','TankRotationPlan','MobPovCommands','MobPovSession','CameraOwnership','TankObservation','TankPresentationRecipe'];
- const testNames=['OwnerEnvSelfTest','OwnerFilesSelfTest','OwnerInputsSelfTest','OwnerDispatchSelfTest','OwnerTriggersSelfTest','OwnerLifetimeSelfTest','MaterialLinkageSelfTest','OwnerInputsInterop','TankRotationSelfTest','TankRotationPlanSelfTest','TankRotationFilesSelfTest','MobPovSessionSelfTest','MobPovCommandsSelfTest','TankObservationSelfTest'];
+ const sources=['Env','ActionJournal','ArenaController','ArenaOwnerGrant','Durability','OwnerFiles','OwnerInputs','OwnerDispatch','OwnerTriggers','OwnerLifetime','OwnerFailure','MaterialLinkage','TankRotationController','TankRotationPlan','MobPovCommands','MobPovSession','CameraOwnership','TankObservation','TankPresentationRecipe'];
+ const testNames=['OwnerEnvSelfTest','OwnerFilesSelfTest','OwnerInputsSelfTest','OwnerDispatchSelfTest','OwnerTriggersSelfTest','OwnerLifetimeSelfTest','OwnerFailureSelfTest','MaterialLinkageSelfTest','OwnerInputsInterop','TankRotationSelfTest','TankRotationPlanSelfTest','TankRotationFilesSelfTest','MobPovSessionSelfTest','MobPovCommandsSelfTest','TankObservationSelfTest'];
  run(executable('javac'),['--release','17','-proc:none','-cp',gson,'-d',classes,
   ...sources.map(n=>path.join(main,'KneekuraDebug'+n+'.java')),...testNames.map(n=>path.join(tests,'KneekuraDebug'+n+'.java'))]);
  const cp=classes+path.delimiter+gson;
