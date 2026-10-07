@@ -75,9 +75,9 @@ Measure the original failure and protected behavior, not speed/test count alone.
 | AF-0014 | Unintended saved Reimu retained in NaturalGhast Tank | VERIFIED (offline preparation) | QUALITY |
 | AF-0015 | Camera-relative anchor mistaken for boss-owned region | VERIFIED (scoped motion); visual pending | QUALITY |
 | AF-0016 | Original-save inspection performs sector-padding writes | VERIFIED (recovery/mitigation) | QUALITY |
-| AF-0017 | Selected-subject observation mistaken for whole-Tank coverage | RECORDED; docs mitigation verified | QUALITY |
+| AF-0017 | Selected-subject observation mistaken for whole-Tank coverage | APPROVED scope; written design review pending | QUALITY |
 | AF-0018 | Tank operating guide omits existing end-to-end procedures | VERIFIED (documentation) | FRICTION |
-| AF-0019 | Camera usability and moving-Boss POV acceptance | PROPOSED; runtime changes not implemented | FRICTION |
+| AF-0019 | Camera usability and moving-Boss POV acceptance | APPROVED scope; written design review pending | FRICTION |
 
 ## Light audit — 2026-10-07
 
@@ -286,6 +286,8 @@ Final native receipts remain immutable FAIL: `flight-kPfHZB` stopped before move
 
 History,2026-10-08 (human observation): user reports the current Ghast looks very good. Record positive qualitative movement feedback for the current manual build, rather than treating all visual judgment as absent. No explicit controlled camera-turn/moving-Player/LOS protocol, combat balance or complete Boss acceptance was supplied; those scopes remain unverified. NaturalGhast also serves as a Tank trial; successful movement does not close camera/roster usability gaps (AF-0017/0019).
 
+History,2026-10-08 (explicit movement acceptance): user is very satisfied with current retained-region movement and requests Tank improvements before continuing the MOD. Protect that movement as accepted qualitative behavior; do not shrink the region, stop swimming or alter combat targets to accommodate camera tooling. Controlled scenario/complete Boss acceptance remains separate.
+
 ### AF-0016 — Original-save inspection API performs sector-padding writes
 
 2026-10-08; FAILURE/PRESERVATION; VERIFIED (recovery and workflow mitigation). Actor: this coding agent. Expected original-save read-only audit; actual Java `RegionFile` inspection appended zero padding to two original entity region files. Hash checks detected the mistake immediately. `entities/r.-1.0.mca` grew46003→49152 bytes; `entities/r.0.0.mca` grew25347→28672. All pre-existing bytes matched exact-hash backups; appended tails were entirely zero. Semantic NBT equality does not excuse violating preservation.
@@ -305,6 +307,8 @@ Minimal mitigation implemented: guide separates physical room/action Arena/grid/
 Adoption requires a written scoped design and tests distinguishing known subjects from unexpected residents (including Reimu), boundary overlap, unloaded scope and result limits. Useful follow-up: spatial map linked to one roster sample, with explicit timestamps and no invented walls. Reconsider if an existing pinned department route already exports the required roster; prefer that route and documentation over duplicate functionality. Rollback unsupported coverage claims while preserving failure history. Full Tech Hub runtime/tool coverage is not claimed.
 
 History,2026-10-08: documentation mitigation verified against LAB source024973e and NaturalGhast source182fcb7. Existing Node Tank-map/status/cardinal-frame/decision-view checks32/32 PASS; `git diff --check` and local Markdown-link/fence checks pass. These are contract/presentation checks, not another native camera trial or implemented live roster. Original85 raw hashes/count remain equal; the user's open manual game was not paused or modified.
+
+History,2026-10-08: user authorizes implementing feedback before further NaturalGhast work. Scope APPROVED; [written observation/camera design](superpowers/specs/2026-10-08-tank-observation-usability-design.md) is REVIEW_PENDING, not runtime implementation. Separate sealed room-read scope from unchanged action authority; roster samples are finite explicit requests. Current source has no such scope; Python/Node/JVM exact interfaces need coordinated changes. No original world or camera has been operated during this design preparation.
 
 ### AF-0018 — Tank operating guide omits existing end-to-end procedures
 
@@ -329,3 +333,7 @@ Candidates, not implemented features:
 - Improve practical diagnostics around stale status, window/framebuffer mismatch, lost subject and camera ownership; inspect immutable operation index/late canonical frame before any retry. Preserve unknown outcomes and external-camera replacements. Reuse AF-0017 roster/spatial context rather than another entity store.
 
 Adoption: prioritize one reproducible high-value friction point, use existing routes first, declare measurable completion/visibility/restoration/zero-history criteria, preserve failed evidence, and compare observer effect separately. Camera/input theft, entity teleport/AI freezing for live POV, hidden-target acquisition, lease renewal or bypassed validation are unacceptable shortcuts. New rig/schema or runtime behavior needs its own reviewed scoped implementation; this request records ideas, not deployment. Roll back a camera option if ownership/restoration/coverage cannot be established. Optional artifacts consume a declared finite budget; successful usability claims require native evidence on the intended moving species.
+
+History,2026-10-08: user now authorizes implementation scope, superseding the preceding request's idea-only status. Read source7006c51 and NaturalGhast06686d9 before changing code. Two concrete limitations: `KneekuraDebugMobPovOwner.mob` restricts base position to the small action Arena; `KneekuraDebugMobPovCamera` requires spectator, while `KneekuraDebugScopedOwnerGate` rejects published integrated servers. The only real Player cannot simultaneously remain the combat target and become that observer. Do not solve this by modifying accepted Ghast behavior, adding a fake Player or removing owner checks.
+
+Source-formula probe (not native capture): current action Arena min[7,224,6]/max[13,235,13] produces north[10,232.25,-3] and west[-2.5,232.25,9.5], both outside physical room[0,224,0]..[52,248,52). Proposed versioned fixed-eye poses stay inside an explicitly sealed read scope; proposed mob-eye observer mode preserves real Player game mode. Existing v1 modes/authority remain distinct. [Written design](superpowers/specs/2026-10-08-tank-observation-usability-design.md) covers roster/plan/bundle/v2 modes and grouped acceptance; written review and implementation plan are pending. No new rig, native result or camera practicality PASS is claimed yet.
