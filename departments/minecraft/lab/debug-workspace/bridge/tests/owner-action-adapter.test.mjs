@@ -50,6 +50,14 @@ import {writeFile,readFile,readdir} from 'node:fs/promises';
 import path from 'node:path';
 import {preparedOwner} from './owner-action-fixture.mjs';
 import {prepareOwnerControl,readPreparedOwnerControl} from '../owner-prelaunch.mjs';
+test('default control clock is sampled after asynchronous owner inputs and heartbeat reads',async t=>{
+ const f=await preparedOwner(t),{readInstalledControl}=await api(),sample=Date.parse(f.status.observedAt);
+ f.status.leaseRemainingMs=4000;await writeFile(path.join(f.runDir,'control/owner-status.json'),JSON.stringify(f.status));
+ let clock=sample-2,moved=false;t.mock.method(Date,'now',()=>clock);
+ setImmediate(()=>{clock=sample+2;moved=true;});
+ const result=await readInstalledControl({...f.controlOptions,minRemainingMs:100});
+ assert.equal(moved,true);assert.equal(result.status.leaseRemainingMs,4000);
+});
 import {buildRunSnapshot,writeImmutableRunSnapshot} from '../../core.mjs';
 
 test('selected publication creates one exact existing-journal intent and does not claim applied',async t=>{

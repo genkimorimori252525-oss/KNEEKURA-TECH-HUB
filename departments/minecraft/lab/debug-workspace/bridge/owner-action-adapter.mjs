@@ -44,14 +44,14 @@ export function validateControlState(prepared,receipt,status,{now=Date.now(),all
     scope:'BOUNDED_DIAGNOSTIC_CONTROL',fullTargetAttestation:'NOT_ESTABLISHED'};
 }
 
-export async function readInstalledControl({runDir,envelopeHash,now=Date.now(),allowUnsafeCleanup=false,allowBusyObservation=false,minRemainingMs=0}) {
+export async function readInstalledControl({runDir,envelopeHash,now=null,allowUnsafeCleanup=false,allowBusyObservation=false,minRemainingMs=0}) {
   const {readPreparedOwnerControl}=await import('./owner-prelaunch.mjs');
   const {readRegisteredFile}=await import('./materials.mjs');
   const {decodeJson}=await import('./json.mjs');
   const prepared={...await readPreparedOwnerControl({runDir,envelopeHash,requireSnapshot:true}),envelopeHash};
   const read=async name=>decodeJson((await readRegisteredFile({root:runDir,relativePath:'control/'+name,maxBytes:1024*1024})).bytes);
   const receipt=await read('owner-installed.json'),status=await read('owner-status.json');
-  const control=validateControlState(prepared,receipt,status,{now,allowUnsafeCleanup,allowBusyObservation,minRemainingMs});
+  const control=validateControlState(prepared,receipt,status,{now:now??Date.now(),allowUnsafeCleanup,allowBusyObservation,minRemainingMs});
   return {prepared,control,receipt,status};
 }
 export async function inspectOwnerControl(options) {

@@ -94,7 +94,7 @@ try{
 }catch(error){report.status='FAIL';report.failures.push(error.message);process.exitCode=1;}
 finally{
  if(current){try{const config=await json(path.join(trial,'config.json'));await stopCurrent(config,lab);const stopped=await readCurrent(config,lab);report.shutdown=stopped.evidenceShutdown?.ack;
-  report.finalization=await finalizeEvidenceRun(stopped,{cleanShutdown:stopped.evidenceShutdown?.status==='ACKNOWLEDGED'});
+  report.finalization=await finalizeEvidenceRun(stopped,{cleanShutdown:stopped.evidenceShutdown?.clean===true});
  }catch(e){report.failures.push('cleanup: '+e.message);report.status='FAIL';process.exitCode=1;}}
  if(originalRows){try{assert.deepEqual(await inventory(original),originalRows);report.originalWorld={status:'UNCHANGED',files:originalRows.length};}catch(e){report.failures.push('original verification: '+e.message);report.status='FAIL';process.exitCode=1;}}
  assert.equal(git(repository,'rev-parse','HEAD'),report.labRevision);assert.equal(git(host,'rev-parse','HEAD'),report.hostRevision);
