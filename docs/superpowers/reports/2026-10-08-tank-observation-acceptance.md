@@ -28,3 +28,6 @@ Fresh failed fixtures: UgMAlF (workspace revision mismatch, no launch); iZ68We (
 Use canonical `forge-bridge/src/main/java` as source root and verify real bootstrap classes after compilation. Switching a recursive source root to the canonical root left empty outputs while Gradle later reported UP-TO-DATE; one justified forced build restored actual classes. Private Gradle script was checked with `help` before the successful fresh launch; lazy run-task configuration handles Forge task creation order. Preserve those diagnostic rebuild reasons rather than adopting routine clean, skip-compilation or retry loops.
 
 Review repairs: compare normalized UUID sets while preserving native raw order; gate native PASS on verified exit, clean ACK and complete seal. The original-slot reader and lifecycle guards retain their strict failure semantics.
+
+
+To complete the privilege-dependent checks, use a symlink-capable environment and the camera worktree's Python dependencies: `python -m pytest tests/test_minecraft_experiment_control.py -q`. For the full pure JVM suite, set `JAVA_HOME` to JDK17 and `KNEEKURA_GSON_JAR` to an absolute genuine installed Gson JAR, then run `node departments/minecraft/lab/debug-workspace/bridge/owner-runtime-selftest.mjs` from the camera worktree root. No test assertion or security check should be removed to accommodate missing privileges.
