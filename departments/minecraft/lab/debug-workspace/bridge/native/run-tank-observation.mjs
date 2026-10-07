@@ -79,7 +79,7 @@ try{
  p.dependencies.add('runtimeOnly',p.files('${artifact.replaceAll('\\','/')}'))
  p.afterEvaluate {
   p.minecraft.runs.client.workingDirectory p.file('${path.join(trial,'game').replaceAll('\\','/')}')
-  p.tasks.named('runClient').configure { task ->
+  p.tasks.matching { it.name == 'runClient' }.configureEach { task ->
    task.environment System.getenv().findAll { k,v -> k.startsWith('KNEEKURA_DEBUG_') }
    task.doFirst {
     def context=[enabled:task.environment['KNEEKURA_DEBUG_ENABLED'],runId:task.environment['KNEEKURA_DEBUG_RUN_ID'],bridgeSource:task.environment['KNEEKURA_DEBUG_FORGE_BRIDGE_SRC'],modClasses:task.environment['MOD_CLASSES'],debugClasspath:task.classpath.files.findAll { it.path.contains('kneekuraDebug') }.collect { it.path }]
@@ -87,7 +87,7 @@ try{
    }
   }
  }
-} } }\n`,{flag:'wx'});
+} }\n`,{flag:'wx'});
  const config=structuredClone(template);config.workspaceId=experiment;config.runtimeRoot=path.join(trial,'runtime');config.gameDir=path.join(trial,'game');config.readyTimeoutMs=240000;config.motionOverlay=true;
  config.launch.args=[...template.launch.args.slice(0,-2),'--init-script',init];config.launch.env={JAVA_HOME:javaHome,KNEEKURA_DEBUG_MOD_PROFILE:'TANK_CORE'};
  config.ownerControl={requestHash,operatorRegistration:{trustedRoot:privateDir,relativePath:'operator.json',sha256:sha256(await fs.readFile(path.join(privateDir,'operator.json')))}};await write(path.join(trial,'config.json'),config);
