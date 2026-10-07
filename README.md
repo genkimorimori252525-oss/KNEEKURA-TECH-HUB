@@ -4,6 +4,8 @@ Internal-purpose technology research infrastructure for discovering large amount
 
 > **Discover broadly. Promote knowledge carefully.**
 
+Before using Tech Hub, read [Project Guide](docs/PROJECT-GUIDE.md) and [AI Feedback Ledger](docs/AI-FEEDBACK.md). Follow the selected tool's current source/contract and verify coherent work units without reducing quality.
+
 ## Three roles
 
 1. **OSS Technology Search Engine** — mass discovery and indexing.
