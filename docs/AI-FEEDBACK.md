@@ -69,7 +69,7 @@ Measure the original failure and protected behavior, not speed/test count alone.
 | AF-0008 | NaturalGhast requirements exceed current Tank fixture coverage | RECORDED | QUALITY |
 | AF-0009 | Private observer omitted resource-pack metadata | VERIFIED (observer loading) | FRICTION |
 | AF-0010 | Arena receipt hashing mistaken for Node action serialization | VERIFIED (scoped owner) | QUALITY |
-| AF-0011 | Opt-in mob POV with explicit image retrieval | APPROVED | FRICTION |
+| AF-0011 | Opt-in mob POV with explicit image retrieval | VERIFIED (scoped camera) | FRICTION |
 
 ## Light audit — 2026-10-07
 
@@ -191,7 +191,7 @@ History, 2026-10-07: IMPLEMENTED -> VERIFIED (scoped owner installation). `found
 
 ### AF-0011 — Opt-in mob POV with explicit image retrieval
 
-2026-10-07; IDEA/FRICTION; PROPOSED. User requests a Tech Hub mob-eye camera based on spectator viewing, with retrieval only when requested and no continuous recording/data growth. Purpose: inspect orientation and scene composition during bounded Tank behavior work. This records the proposal, not a completed capability or an observed runtime failure.
+2026-10-07; IDEA/FRICTION; VERIFIED (scoped camera). User requests a Tech Hub mob-eye camera based on spectator viewing, with retrieval only when requested and no continuous recording/data growth. Purpose: inspect orientation and scene composition during bounded Tank behavior work. The following proposal/source notes retain their original historical context; current implementation and measured scope are appended below.
 
 Inspected source: LAB `c3699539388af68495ff1529af3576ff4926e9bc`, `debug-workspace/forge-bridge/.../KneekuraDebugCardinalCapture.java`, `KneekuraDebugCaptureRestoration.java`, and `debug-workspace/evidence/visual-capture.mjs`. Existing cardinal capture already owns client camera takeover/restoration and durable PNG delivery, but freezes the server and requires the exact `cardinal-4-snapshot-v1` rig/four sequential views. It cannot be relabeled as a live mob-eye camera. No native mob-POV trial was performed in this proposal work.
 
@@ -215,3 +215,15 @@ Risks/costs: new client operation/artifact contract, species-dependent camera ef
 History, 2026-10-07: user intent recorded; source contracts inspected; design proposal only. Implementation and native acceptance NOT_RUN. Written design/implementation approval remains pending.
 
 History, 2026-10-07: APPROVED by user: implement this camera work after a light feedback audit, before NaturalGhast. Scope is opt-in live view plus explicitly requested single PNG, no constant recording; implementation design/plan saved under `docs/superpowers/`. Native acceptance is still NOT_RUN. No repeated intermediate approval is inferred necessary after the explicit instruction to enter implementation.
+
+History, 2026-10-07: IMPLEMENTED -> VERIFIED (scoped). Local `codex/mob-pov-camera-20261007` adds `mob-eye-live-v1`, `MOB_POV_CAMERA`, immutable attach/snapshot/return indices0..31, shared camera ownership, finite lease/capture limits, durable PNG retrieval/finalization and bounded restoration receipts. Python/LAB must come from that branch; the original dirty checkout is not upgraded. No extra MOD/dependency, automatic activation, frame history or server tick hold. Read the branch's `departments/minecraft/lab/debug-workspace/bridge/MOB-POV.md`.
+
+Verification: Python rig/contracts97 PASS; control147 PASS/3 Windows symlink cases deselected after the full run exposed missing1314 privilege. Related Node99/99 PASS; broad Node515 =511 PASS/3 FAIL/1 SKIP (two Windows symlink EPERM, one existing inherited-pipe expectation). Genuine-Gson Java lifecycle/ownership/overlay18 and commands8 PASS; ordinary/Tank/mob-POV Node-Java interoperability and actual Forge47.2 compile PASS. Full portable JVM runner remains blocked by its earlier Windows symlink fixture. Preserve those limitations; do not weaken guards or call every suite green.
+
+One independent whole-branch review found two Important issues, both repaired with RED->GREEN regressions: exclude derived motion overlays from a pending raw snapshot, and retrieve/seal a late canonical PNG under OUTCOME_UNKNOWN without rewriting its immutable receipt. A native clock race also required sampling default owner-validation time after asynchronous inputs/status reads; explicit supplied clocks and lease gates remain unchanged.
+
+Native acceptance: frozen saved Reimu, exact private TANK_CORE copy; LAB `546ebfe6d645904f7d2c178ac68d44a3a508d4d2`, host `7f14960999bc2955d85ae9d3619090ad37817c38`. `C:/temp/kneekura-mob-pov-20261007/mob-pov-4k50LD/sealed-audit.json` is PASS: default imageCount0; server ticks141->161/gameTime40448->40468; exactly one requested640x480 PNG (47598 bytes, SHA256 `3cdf3ce1bdd37046f0181ced9835757991937d30db01288892d90426d63473e8`); explicit return and EXPIRED both RESTORED; clean evidence shutdown/dropped0; EVIDENCE_COMPLETE; original85 files unchanged. PNG visually inspected at the raw scene stage, without derived labels/HUD. Server reference remains asynchronous, not same-tick or AI-perception evidence. Observed class-resource/container linkage is not resident transformed-class attestation.
+
+Keep the original pilot report FAIL: its final assertion read a cached prior-return status before the expiry observation arrived. The independent read-only auditor verifies the later immutable sealed observation and image; it does not rewrite reports/receipts/finalization. Pilot report SHA256 `b01642131cc307e0dda1c76ea1cffbaf3d1cdffcf5ac688b40cb0a8745a52d2e`; finalization SHA256 `41fdff2556b4cec6fdbe002445059bb9c6163c7a04682c776777375e0069e773`. Future pilot waits for the actual EXPIRED row and fresh command-index4 inactive status; that corrected end-to-end waiting sequence was not rerun. Earlier failed trials remain retained: absent heartbeat field, declared640x360 vs actual640x480, asynchronous clock race, cached pre-attach status. Correct the affected harness/reader; never alter sealed inputs or replay uncertain commands to manufacture PASS.
+
+Remaining scope: moving/dead/unloaded mobs, external camera/screen/world interruptions and species-specific presentation require separate bounded native checks. Pure lifecycle coverage is not client acceptance. Deferred minor: numeric `validatedAtNanos` rejects negative JVM clock origins or JavaScript-unsafe values (~104 days uptime); future string/relative-time artifact revision, not relaxed authority. Late UNKNOWN lookup is bounded to16MiB canonical observations. NaturalGhast/player acquisition, AI perception and flight remain outside this camera result. Roll back automatic use if ownership/restoration/source binding cannot be established, preserving failed receipts and finalized evidence.

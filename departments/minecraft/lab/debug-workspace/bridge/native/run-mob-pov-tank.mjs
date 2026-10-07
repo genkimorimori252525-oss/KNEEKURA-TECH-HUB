@@ -87,9 +87,9 @@ try{
  report.snapshot=await command(1,'snapshot');await readMobPovImage({...options,commandIndex:1});assert.equal(await pngCount(),1);
  report.return=await command(2,'return');assert.equal(report.return.restoration,'RESTORED');
  await command(3,'attach',{subjectUuid:fixture.subjectUuid,durationMs:1500});
- await until(async()=>{const s=await json(path.join(current.runDir,'control/owner-status.json'));return s.mobPov?.active===false&&s.mobPov?.restoration==='RESTORED';});
- assert.equal(await pngCount(),1);await runtime.ingestAvailable();const rows=await runtime.store.readObservations();
- assert(rows.some(r=>r.payload?.kind==='mob_pov_return'&&r.payload.reason==='EXPIRED'&&r.payload.restoration==='RESTORED'));
+ await until(async()=>(await runtime.store.readObservations()).find(r=>r.payload?.kind==='mob_pov_return'&&r.payload.reason==='EXPIRED'&&r.payload.restoration==='RESTORED'));
+ await until(async()=>{const s=await json(path.join(current.runDir,'control/owner-status.json'));return s.mobPov?.nextCommandIndex===4&&s.mobPov?.active===false&&s.mobPov?.restoration==='RESTORED';});
+ assert.equal(await pngCount(),1);
  report.expiry={restoration:'RESTORED',imageCount:1};report.frame=(await json(path.join(current.runDir,'control/mob-pov/01/receipt.json'))).result;
  report.status='PASS';
 }catch(error){report.status='FAIL';report.failures.push(error.message);process.exitCode=1;}
