@@ -30,7 +30,7 @@ await fs.mkdir(parent,{recursive:true});const trial=await fs.mkdtemp(path.join(p
 const write=(file,value)=>fs.writeFile(file,JSON.stringify(value)+'\n',{flag:'wx'}),json=async file=>JSON.parse(await fs.readFile(file,'utf8'));
 const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms)),hashJson=v=>sha256(Buffer.from(stableJson(v)));
 const report={schema:'kneekura.tank-observation-native/v1',trial,profile:'TANK_CORE',labRevision:git(repository,'rev-parse','HEAD'),hostRevision:git(host,'rev-parse','HEAD'),productWorkspaceRevision:git(template.workspaceDir,'rev-parse','HEAD'),acceptedProductSource:'182fcb7ee88084c5dc1aecaba6cfa870cefa13b0',acceptedJarHash:acceptedHash,failures:[],
- limitations:['One fresh survival Player/moving Ghast fixture; death/unload/multiplayer NOT_RUN.',
+ limitations:['One fresh survival Player/active Ghast fixture; displacement is reported, not a moving-camera acceptance claim; death/unload/multiplayer NOT_RUN.',
  'Roster and paused sequential frames have independent ticks; visibility/AI perception NOT_ESTABLISHED.',
  'Mob observe v2 is not enabled by this pilot. Class-resource linkage is not transformed-definition attestation.']};
 console.log('TRIAL '+trial);let current,originalRows;

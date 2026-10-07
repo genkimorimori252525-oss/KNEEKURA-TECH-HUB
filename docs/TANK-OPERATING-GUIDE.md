@@ -118,7 +118,7 @@ After each coherent unit, briefly audit feedback: reproducible defect, operation
 
 ## Bounded room discovery and camera diagnostics (camera worktree)
 
-These routes require the camera worktree's matching Python/LAB revision and complete36-file control source closure; they are not installed by copying this MD to the original checkout. Source implementation is complete; native acceptance/results are recorded separately in AF-0017/0019 and the [implementation plan](superpowers/plans/2026-10-08-tank-observation-usability.md).
+These routes require the camera worktree's matching Python/LAB revision and complete36-file control source closure; they are not installed by copying this MD to the original checkout. A–D implementation and bounded native acceptance are recorded in [acceptance](superpowers/reports/2026-10-08-tank-observation-acceptance.md); E remains blocked. The [implementation plan](superpowers/plans/2026-10-08-tank-observation-usability.md) records scope and limits.
 
 Add `TANK_OBSERVATION_READ` to a **new** private operator's world permissions and optional `tankObservation` object before owner preparation: schemaVersion1, scope`TANK_OBSERVATION_READ`, dimensionId`minecraft:overworld`, integer min/max, recipeHash without `sha256:`, maxEntities1..64 and maxSamples1..8. Bounds/hash must match the private `GEOMETRY_VERIFIED` saved recipe. Current native recipe supports Overworld only. This seals `control/owner-tank-observation.json` and `tankObservationHash`; changing it requires a fresh owner/run, not editing prepared files. Rotation maintenance cannot share this observation owner.
 
