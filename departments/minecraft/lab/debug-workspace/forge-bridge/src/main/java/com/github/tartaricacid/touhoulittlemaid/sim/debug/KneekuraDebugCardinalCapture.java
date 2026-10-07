@@ -106,6 +106,7 @@ public final class KneekuraDebugCardinalCapture {
         if (mc.getMainRenderTarget().width != request.width() || mc.getMainRenderTarget().height != request.height())
             throw new IllegalStateException("CAPTURE_VIEWPORT_UNAVAILABLE");
         Active next = new Active(owner, request, mc);
+        if (!KneekuraDebugCameraOwnership.claim(next)) throw new IllegalStateException("CAMERA_ALREADY_OWNED");
         usedCaptureIds.add(request.captureId()); // A failed or uncertain attempt is never replayed.
         active = next;
         mc.getSingleplayerServer().execute(() -> {
@@ -245,6 +246,7 @@ public final class KneekuraDebugCardinalCapture {
                         result.completeExceptionally(new IllegalStateException("CAPTURE_OWNER_DENIED", denied));
                         protocol.abort("CAPTURE_OWNER_DENIED"); barrier.release();
                         if (active == this) active = null;
+                        KneekuraDebugCameraOwnership.release(this);
                         return;
                     }
                     if (mc.screen != null || mc.getCameraEntity() != oldCamera || mc.options.getCameraType() != oldCameraType ||
@@ -474,6 +476,7 @@ public final class KneekuraDebugCardinalCapture {
                 protocol.abort(reason); barrier.release();
                 result.completeExceptionally(new IllegalStateException(reason));
                 if (active == this) active = null;
+                KneekuraDebugCameraOwnership.release(this);
                 return;
             }
             protocol.abort(reason);
@@ -511,10 +514,12 @@ public final class KneekuraDebugCardinalCapture {
                         catch (Throwable invalid) { result.completeExceptionally(invalid); }
                     }
                     if (active == this) active = null;
+                    KneekuraDebugCameraOwnership.release(this);
                 }));
             } catch (Throwable error) {
                 result.completeExceptionally(error);
                 if (active == this) active = null;
+                KneekuraDebugCameraOwnership.release(this);
             }
         }
     }

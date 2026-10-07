@@ -23,8 +23,8 @@ function run(command,args){const r=spawnSync(command,args,{cwd:root,encoding:'ut
  if(r.error||r.status!==0)throw new Error('Owner source verification failed',{cause:r.error});}
 try{
  const classes=path.join(temp,'classes');await mkdir(classes);
- const sources=['Env','ActionJournal','ArenaController','ArenaOwnerGrant','Durability','OwnerFiles','OwnerInputs','OwnerDispatch','OwnerTriggers','OwnerLifetime','MaterialLinkage','TankRotationController','TankRotationPlan'];
- const testNames=['OwnerEnvSelfTest','OwnerFilesSelfTest','OwnerInputsSelfTest','OwnerDispatchSelfTest','OwnerTriggersSelfTest','OwnerLifetimeSelfTest','MaterialLinkageSelfTest','OwnerInputsInterop','TankRotationSelfTest','TankRotationPlanSelfTest','TankRotationFilesSelfTest'];
+ const sources=['Env','ActionJournal','ArenaController','ArenaOwnerGrant','Durability','OwnerFiles','OwnerInputs','OwnerDispatch','OwnerTriggers','OwnerLifetime','MaterialLinkage','TankRotationController','TankRotationPlan','MobPovCommands','MobPovSession','CameraOwnership'];
+ const testNames=['OwnerEnvSelfTest','OwnerFilesSelfTest','OwnerInputsSelfTest','OwnerDispatchSelfTest','OwnerTriggersSelfTest','OwnerLifetimeSelfTest','MaterialLinkageSelfTest','OwnerInputsInterop','TankRotationSelfTest','TankRotationPlanSelfTest','TankRotationFilesSelfTest','MobPovSessionSelfTest','MobPovCommandsSelfTest'];
  run(executable('javac'),['--release','17','-proc:none','-cp',gson,'-d',classes,
   ...sources.map(n=>path.join(main,'KneekuraDebug'+n+'.java')),...testNames.map(n=>path.join(tests,'KneekuraDebug'+n+'.java'))]);
  const cp=classes+path.delimiter+gson;
@@ -33,7 +33,8 @@ try{
  run(executable('java'),['-cp',jar+path.delimiter+gson,packageName+'.KneekuraDebugMaterialLinkageSelfTest']);
  const ordinary=await ownerFixture({after(fn){cleanup.push(fn);}},{capture:true,triggerCapture:{enabled:true,triggerKinds:['ARENA_EXIT'],offsetsMs:[-1000,0],toleranceMs:200,cooldownMs:1000,maxWindows:1,captureBudget:1,timeoutMs:1000,captureIndices:[0]}});
  const tank=await maintenance({after(fn){cleanup.push(fn);}});
- for(const [index,fixture] of [ordinary,tank].entries()){
+ const mobPov=await ownerFixture({after(fn){cleanup.push(fn);}},{mobPov:true,capture:true});
+ for(const [index,fixture] of [ordinary,tank,mobPov].entries()){
  const prepared=await prepareOwnerControl(fixture.options);
  const contextDir=path.join(temp,'interop-'+index);await mkdir(contextDir);
  if(prepared.tankRotation){

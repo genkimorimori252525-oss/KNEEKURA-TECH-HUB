@@ -146,6 +146,14 @@ export function validateVisualManifest(input) {
 }
 export async function readRawVisualImage(runDir, frame) {
   const f = validateRawFrame(frame);
+  return readBoundedRawImage(runDir, f);
+}
+/** Shared PNG integrity checks; rig-specific metadata is validated by each caller. */
+export async function readBoundedRawImage(runDir, f) {
+  hashId(f.imageHash); integer(f.imageBytes, 1, 4 * 1024 * 1024);
+  require(f.imagePath === `evidence/raw/visual/${f.imageHash}.png`, 'RAW_ARTIFACT_BINDING_MISMATCH');
+  require(Array.isArray(f.camera.viewport) && f.camera.viewport.length === 2, 'INVALID_VIEWPORT');
+  f.camera.viewport.forEach(n => integer(n, 64, 2048));
   const file = await readRegisteredFile({ root: runDir, relativePath: f.imagePath,
     expectedSha256: f.imageHash, maxBytes: 4 * 1024 * 1024 });
   const bytes = file.bytes;

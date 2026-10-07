@@ -66,12 +66,16 @@ async function validateWorld(value) {
   identifier(value.registrationId);
   require(value.worldName === 'KNEEKURA_DEBUG_WORLD' && resource(value.dimensionId), 'OWNER_DISPOSABLE_WORLD_REQUIRED');
   require(Array.isArray(value.permissions) && value.permissions.includes('BOUNDED_DIAGNOSTIC_CONTROL') &&
-    value.permissions.length <= 3 && new Set(value.permissions).size === value.permissions.length &&
-    value.permissions.every(p => ['BOUNDED_DIAGNOSTIC_CONTROL', 'CARDINAL_CAPTURE_PAUSE_CAMERA', TANK_ROTATION_PERMISSION].includes(p)), 'OWNER_PERMISSION_SCOPE');
+    value.permissions.length <= 4 && new Set(value.permissions).size === value.permissions.length &&
+    value.permissions.every(p => ['BOUNDED_DIAGNOSTIC_CONTROL', 'CARDINAL_CAPTURE_PAUSE_CAMERA', 'MOB_POV_CAMERA', TANK_ROTATION_PERMISSION].includes(p)), 'OWNER_PERMISSION_SCOPE');
   await directory(value.canonicalWorldRoot);
   return structuredClone(value);
 }
 function capturePermission(request, world) {
+  if (request.visual_rig?.mode === 'mob-eye-live-v1') {
+    require(world.permissions.includes('MOB_POV_CAMERA'), 'OWNER_MOB_POV_PERMISSION_MISSING');
+    return;
+  }
   if (request.visual_rig?.mode === 'cardinal-4-snapshot-v1' || request.budgets?.max_captures > 0)
     require(world.permissions.includes('CARDINAL_CAPTURE_PAUSE_CAMERA'), 'OWNER_CAPTURE_PERMISSION_MISSING');
 }

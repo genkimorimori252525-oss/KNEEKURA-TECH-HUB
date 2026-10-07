@@ -8,7 +8,7 @@ import { registerBridgeRequest } from '../registration.mjs';
 import { prepareOwnerControl, readPreparedOwnerControl, ownerLaunchEnvironment } from '../owner-prelaunch.mjs';
 import { buildRunSnapshot, writeImmutableRunSnapshot } from '../../core.mjs';
 
-export async function ownerFixture(t, {capture=false,triggerCapture=null,requestBytesOverride=null,assertionsBytesOverride=null}={}) {
+export async function ownerFixture(t, {capture=false,mobPov=false,triggerCapture=null,requestBytesOverride=null,assertionsBytesOverride=null}={}) {
   const root = await mkdtemp(path.join(tmpdir(), 'owner-prelaunch-'));
   t.after(() => rm(root, { recursive: true, force: true }));
   const runtimeRoot = path.join(root, 'runtime'); const inputs = path.join(root, 'inputs');
@@ -25,6 +25,7 @@ export async function ownerFixture(t, {capture=false,triggerCapture=null,request
     observation_scopes: [{ kind: 'ENTITY_UUID', subject_id: 'pig', lanes: ['SERVER_ENTITY_STATE'], level: 'L1' }],
     visual_rig: { mode: 'none' }, assertions, budgets: { time_budget_ms: 5000, max_actions: 1, max_captures: 0 } };
   if(capture){request.visual_rig={mode:'cardinal-4-snapshot-v1',fov:60,viewport:[64,64]};request.budgets.max_captures=4;}
+  if(mobPov){request.visual_rig={mode:'mob-eye-live-v1',fov:60,viewport:[64,64]};request.budgets.max_captures=capture?1:0;}
   const requestBytes = requestBytesOverride ?? Buffer.from(JSON.stringify(request));
   assert(Buffer.isBuffer(requestBytes));request=JSON.parse(requestBytes);target=request.target;assertions=request.assertions;
   const assertionsBytes=assertionsBytesOverride??Buffer.from(JSON.stringify(assertions));
@@ -45,6 +46,7 @@ export async function ownerFixture(t, {capture=false,triggerCapture=null,request
       worldName: 'KNEEKURA_DEBUG_WORLD', dimensionId: 'minecraft:overworld', permissions: ['BOUNDED_DIAGNOSTIC_CONTROL'] },
     selection: { grantId: 'grant', leaseId: 'lease', arenaEpoch: 0, expectedArenaRevision: 0, allowedActions: ['wait_ticks'] } };
   if(request.visual_rig.mode==='cardinal-4-snapshot-v1')operator.worldRegistration.permissions.push('CARDINAL_CAPTURE_PAUSE_CAMERA');
+  if(request.visual_rig.mode==='mob-eye-live-v1')operator.worldRegistration.permissions.push('MOB_POV_CAMERA');
   if(triggerCapture!==null)operator.triggerCapture=structuredClone(triggerCapture);
   const identity = { debugSessionId: 's', runId: 'r', runSnapshotId: 'snap', processEpoch: 1, handshakeNonce: 'n'.repeat(32) };
   async function select(value = operator) {

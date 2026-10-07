@@ -6,8 +6,9 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {preparedOwner} from './owner-action-fixture.mjs';
 const cli=fileURLToPath(new URL('../owner-control-cli.mjs',import.meta.url));
-async function fixture(t){
- const f=await preparedOwner(t,{capture:true}),ownerFile=path.join(f.root,'owner.json'),commandFile=path.join(f.inputs,'control-command.json');
+async function fixture(t,mobPov=false){
+ const f=await preparedOwner(t,{capture:true,mobPov}),ownerFile=path.join(f.root,'owner.json'),commandFile=path.join(f.inputs,'control-command.json');
+ if(mobPov){f.status.leaseRemainingMs=4000;await writeFile(path.join(f.runDir,'control/owner-status.json'),JSON.stringify(f.status));}
  const identity={...Object.fromEntries(['debugSessionId','runId','runSnapshotId','processEpoch'].map(k=>[k,f.identity[k]])),experimentId:f.prepared.request.experiment_id,requestHash:f.prepared.envelope.requestHash};
  await writeFile(ownerFile,JSON.stringify({schemaVersion:1,runtimeRoot:f.runtimeRoot,inputRoot:f.inputs,run:{runDir:f.runDir,identity,ownerEnvelopeHash:f.prepared.envelopeHash}}));
  return {...f,async call(operation,fields={}){await writeFile(commandFile,JSON.stringify({schemaVersion:1,operation,requestHash:identity.requestHash,...fields}));const result=spawnSync(process.execPath,[cli,'--owner',ownerFile,'--request',commandFile],{encoding:'utf8',timeout:5000});assert.ifError(result.error);return {code:result.status,value:JSON.parse(result.stdout),stderr:result.stderr};}};
@@ -27,4 +28,13 @@ test('CLI rejects generic execution and caller action parameters before any inte
   const response=await f.call(op,args);assert.equal(response.code,2);assert.equal(response.value.status,'BLOCKED');assert.equal(response.stderr,'');
  }
  await assert.rejects(readdir(path.join(f.runDir,'control/actions')),{code:'ENOENT'});
+});
+test('fixed camera CLI preserves transport operation and never exposes private nonce/path',async t=>{
+ const f=await fixture(t,true),subjectUuid=f.prepared.grant.subjects[0].uuid;
+ const sent=await f.call('mob_pov',{commandIndex:0,cameraOperation:'attach',subjectUuid,durationMs:1000});
+ assert.equal(sent.code,0);assert.equal(sent.value.operation,'mob_pov');assert.equal(sent.value.status,'REQUESTED');assert.equal(sent.value.execution,'NOT_CONFIRMED');
+ await writeFile(path.join(f.runDir,'control/mob-pov/00/receipt.json'),JSON.stringify({schemaVersion:1,kind:'mob_pov_operation_receipt',ownerEnvelopeHash:f.prepared.envelopeHash,
+  runSnapshotHash:f.prepared.snapshot.snapshotHash,requestHash:f.prepared.envelope.requestHash,commandIndex:0,operation:'attach',observedAt:new Date().toISOString(),status:'ATTACHED',result:{status:'ATTACHED'}}));
+ const got=await f.call('inspect_mob_pov',{commandIndex:0});assert.equal(got.code,0);assert.equal(got.value.operation,'inspect_mob_pov');assert.equal(got.value.cameraOperation,'attach');assert.equal(got.value.status,'ATTACHED');
+ for(const reply of [sent,got]){assert.equal(JSON.stringify(reply).includes(f.root),false);assert.equal(JSON.stringify(reply).includes(f.identity.handshakeNonce),false);assert.equal(reply.value.runtimeAttestation,'NOT_ESTABLISHED');}
 });

@@ -15,6 +15,7 @@ import { readRawVisualImage, validateVisualIdentity, validateVisualManifest } fr
 import { TriggerCaptureController } from './trigger-capture.mjs';
 import { decodeJson, exactKeys, identifier } from '../bridge/json.mjs';
 import { readRegisteredFile } from '../bridge/materials.mjs';
+import { sealMobPovArtifacts } from '../bridge/mob-pov.mjs';
 
 function nowIso() {
   return new Date().toISOString();
@@ -630,6 +631,7 @@ export async function finalizeEvidenceRun(current, options = {}) {
     processEpoch: current.processEpoch,
   }, observations, artifacts);
   await sealDerivedVisualArtifacts(current.runDir, artifacts);
+  await sealMobPovArtifacts(current.runDir, observations, artifacts);
   artifacts.sort((a, b) => a.path.localeCompare(b.path));
 
   const laneDropped = health.reduce((sum, row) => sum + row.dropped, 0);

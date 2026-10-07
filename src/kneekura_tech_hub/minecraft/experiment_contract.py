@@ -221,7 +221,8 @@ def validate_experiment_request(value: dict) -> dict:
         _require(identity not in scope_ids, 'Duplicate observation scope'); scope_ids.add(identity)
     rig = r['visual_rig']; _require(isinstance(rig, dict), 'Visual rig must be an object')
     visual = rig.get('mode') == 'cardinal-4-snapshot-v1'
-    if visual:
+    mob_pov = rig.get('mode') == 'mob-eye-live-v1'
+    if visual or mob_pov:
         _keys(rig, {'mode', 'fov', 'viewport'}, 'visual rig')
         _require(type(rig['fov']) in (int, float) and math.isfinite(rig['fov']) and 30 <= rig['fov'] <= 100,
                  'Visual FOV must be 30..100 degrees')
@@ -239,7 +240,8 @@ def validate_experiment_request(value: dict) -> dict:
     _integer(budgets['max_actions'], 0, 32, 'action budget')
     _integer(budgets['max_captures'], 0, 16, 'capture budget')
     _require(len(actions) <= budgets['max_actions'], 'Actions exceed declared budget')
-    _require((visual and budgets['max_captures'] >= 4) or (not visual and budgets['max_captures'] == 0),
+    _require((visual and budgets['max_captures'] >= 4) or mob_pov or
+             (not visual and budgets['max_captures'] == 0),
              'Visual capture budget does not match rig')
     _require(sum(action.get('ticks', 0) for action in actions) * 50 <= budgets['time_budget_ms'],
              'Declared tick actions exceed the wall-time budget')

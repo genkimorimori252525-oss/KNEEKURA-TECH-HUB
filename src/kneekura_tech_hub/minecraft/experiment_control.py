@@ -26,6 +26,7 @@ MODULES = (
     'debug-workspace/bridge/owner-action-adapter.mjs', 'debug-workspace/bridge/owner-control-cli.mjs',
     'debug-workspace/bridge/owner-grant.mjs', 'debug-workspace/bridge/owner-prelaunch.mjs',
     'debug-workspace/bridge/owner-tank-rotation.mjs',
+    'debug-workspace/bridge/mob-pov.mjs',
     'debug-workspace/bridge/owner-trigger-config.mjs', 'debug-workspace/bridge/owner-trigger-source.mjs',
     'debug-workspace/bridge/registration.mjs', 'debug-workspace/bridge/result-export-source.mjs',
     'debug-workspace/bridge/result-export.mjs', 'debug-workspace/bridge/selected-action.mjs',
@@ -178,11 +179,30 @@ def _command(value, request=None):
     operation = value.get('operation')
     extra = {'inspect_owner':set(), 'submit_action':{'selectedActionId'}, 'inspect_action':{'selectedActionId'},
         'request_capture':{'captureIndex'}, 'request_cleanup':set(), 'inspect_cleanup':set(), 'watch_triggers':set(),
+        'mob_pov':{'commandIndex','cameraOperation'}, 'inspect_mob_pov':{'commandIndex'},
         'export_result':{'observationIds', 'timelineObservationIds', 'visualPacketHash'}}
+    if operation == 'mob_pov' and value.get('cameraOperation') == 'attach':
+        extra['mob_pov'] |= {'subjectUuid','durationMs'}
     if (not isinstance(operation, str) or operation not in extra or set(value) != {'schemaVersion', 'operation', 'requestHash'} | extra[operation]
             or type(value['schemaVersion']) is not int or value['schemaVersion'] != 1):
         raise ContractError('Unsupported scoped-control command')
     valid_hash(value['requestHash'])
+    if operation in ('mob_pov','inspect_mob_pov'):
+        if type(value['commandIndex']) is not int or not 0 <= value['commandIndex'] < 32:
+            raise ContractError('Bounded camera command index required')
+    if operation == 'mob_pov':
+        if value['cameraOperation'] not in ('attach','snapshot','return'):
+            raise ContractError('Fixed camera operation required')
+        if request is not None and request['visual_rig']['mode'] != 'mob-eye-live-v1':
+            raise ContractError('Retained mob POV request required')
+        if value['cameraOperation'] == 'attach':
+            if (type(value['durationMs']) is not int or not 1 <= value['durationMs'] <= 120000
+                    or not isinstance(value['subjectUuid'],str)
+                    or not re.fullmatch(r'[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}',value['subjectUuid'])
+                    or request is not None and value['subjectUuid'] not in {s['uuid'] for s in request['subjects']}):
+                raise ContractError('Exact registered subject and bounded camera duration required')
+        if value['cameraOperation'] == 'snapshot' and request is not None and request['budgets']['max_captures'] == 0:
+            raise ContractError('View-only request cannot capture an image')
     if operation in ('submit_action', 'inspect_action'):
         _id(value['selectedActionId'])
         if request is not None and value['selectedActionId'] not in {a['action_id'] for a in request['initial_state'] + request['actions']}:
@@ -213,6 +233,24 @@ def _response(value, command, envelope_hash=None):
         fields.add('ownerEnvelopeHash'); valid_hash(value.get('ownerEnvelopeHash'))
         if value['status'] != 'OWNER_RECORDED' or envelope_hash is not None and value['ownerEnvelopeHash'] != envelope_hash:
             raise IntegrityError('Reported owner mismatch')
+    elif op == 'mob_pov':
+        fields.update(('commandIndex','execution'))
+        if value.get('status') == 'REQUESTED':
+            fields.add('markerHash'); valid_hash(value.get('markerHash'))
+        if (value.get('status') not in ('REQUESTED','ALREADY_REQUESTED') or value.get('execution') != 'NOT_CONFIRMED'
+                or type(value.get('commandIndex')) is not int or value['commandIndex'] != command['commandIndex']):
+            raise IntegrityError('Invalid pending camera command receipt')
+    elif op == 'inspect_mob_pov':
+        fields.update(('commandIndex','cameraOperation','restoration','imageHash','error','execution'))
+        expected={'attach':'ATTACHED','snapshot':'CAPTURED','return':'RETURNED'}
+        if (type(value.get('commandIndex')) is not int or value['commandIndex'] != command['commandIndex']
+                or value.get('cameraOperation') not in expected or value.get('execution') != 'REPORTED_BY_OWNER'
+                or value.get('status') not in (expected.get(value.get('cameraOperation')),'REJECTED','OUTCOME_UNKNOWN')
+                or value.get('restoration') not in (None,'NOT_RUN','RESTORED','UNKNOWN','UNKNOWN_EVIDENCE_WRITE')
+                or value.get('error') is not None and (not isinstance(value['error'],str) or len(value['error']) > 256)
+                or value.get('status') == 'CAPTURED' and value.get('imageHash') is None):
+            raise IntegrityError('Invalid reported camera operation receipt')
+        if value.get('imageHash') is not None: valid_hash(value['imageHash'])
     elif op in _SUBMISSIONS:
         key = {'submit_action':'selectedActionId', 'request_capture':'captureIndex'}.get(op)
         if key is not None: fields.add(key)
@@ -257,6 +295,7 @@ def _next(command, status):
         'inspect_action':'experiment.inspect_action', 'request_capture':'experiment.inspect_owner',
         'request_cleanup':'experiment.inspect_cleanup', 'inspect_cleanup':'experiment.inspect_cleanup',
         'watch_triggers':'experiment.inspect_owner',
+        'mob_pov':'experiment.inspect_mob_pov', 'inspect_mob_pov':'experiment.inspect_mob_pov',
         'export_result':'experiment.import_export' if status == 'EXPORTED' else 'experiment.inspect_owner'}[command['operation']]
 
 
@@ -316,6 +355,18 @@ def inspect_owner(store: Store, registry: dict, request_hash: str):
     return _invoke(store, registry, {'schemaVersion':1, 'operation':'inspect_owner', 'requestHash':valid_hash(request_hash)})
 
 
+def mob_pov(store: Store, registry: dict, request_hash: str, command_index: int, operation: str,
+            *, subject_uuid: str | None = None, duration_ms: int | None = None):
+    command={'schemaVersion':1,'operation':'mob_pov','requestHash':valid_hash(request_hash),'commandIndex':command_index,'cameraOperation':operation}
+    if subject_uuid is not None: command['subjectUuid']=subject_uuid
+    if duration_ms is not None: command['durationMs']=duration_ms
+    return _invoke(store,registry,command)
+
+
+def inspect_mob_pov(store: Store, registry: dict, request_hash: str, command_index: int):
+    return _invoke(store,registry,{'schemaVersion':1,'operation':'inspect_mob_pov','requestHash':valid_hash(request_hash),'commandIndex':command_index})
+
+
 def submit_action(store: Store, registry: dict, request_hash: str, selected_action_id: str):
     return _invoke(store, registry, {'schemaVersion':1, 'operation':'submit_action', 'requestHash':valid_hash(request_hash), 'selectedActionId':_id(selected_action_id)})
 
@@ -373,7 +424,7 @@ def inspect_receipt(store: Store, receipt_hash: str, *, registry=None):
     # Even a VERIFIED cleanup only covers the owner's supported reset classes;
     # it cannot reconcile the wider experiment or clear earlier unsafe outcomes.
     # A stopped trigger watcher likewise proves no capture completion.
-    uncertain = (record['command']['operation'] in ('request_cleanup', 'inspect_cleanup', 'watch_triggers')
+    uncertain = (record['command']['operation'] in ('request_cleanup', 'inspect_cleanup', 'watch_triggers','mob_pov','inspect_mob_pov')
                  or record['status'] in ('OUTCOME_UNKNOWN', 'PARTIAL_APPLY', 'REQUESTED', 'ALREADY_RECORDED', 'FAILED')
                  or response is not None and response.get('recordedStatus') in ('ACCEPTED', 'APPLIED'))
     return {'schema_version':1, 'receipt_hash':receipt_hash, 'request_hash':record['request_hash'],

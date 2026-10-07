@@ -191,7 +191,8 @@ export function validateVisualExperimentRequest(input) {
     const rig = r.visual_rig;
     require(object(rig), 'INVALID_VISUAL_RIG');
     const visual = rig.mode === 'cardinal-4-snapshot-v1';
-    if (visual) {
+    const mobPov = rig.mode === 'mob-eye-live-v1';
+    if (visual || mobPov) {
       exactKeys(rig, ['mode', 'fov', 'viewport'], 'VISUAL_RIG');
       require(number(rig.fov, 30, 100), 'INVALID_VISUAL_FOV');
       vector(rig.viewport, 2, 64, 2048, 'VIEWPORT');
@@ -209,7 +210,7 @@ export function validateVisualExperimentRequest(input) {
     integer(budgets.max_actions, 0, 32, 'ACTION_BUDGET');
     integer(budgets.max_captures, 0, 16, 'CAPTURE_BUDGET');
     require(actions.length <= budgets.max_actions, 'ACTIONS_EXCEED_BUDGET');
-    require(visual ? budgets.max_captures >= 4 : budgets.max_captures === 0, 'CAPTURE_BUDGET_RIG_MISMATCH');
+    require(visual ? budgets.max_captures >= 4 : mobPov || budgets.max_captures === 0, 'CAPTURE_BUDGET_RIG_MISMATCH');
     require(actions.reduce((sum, row) => sum + (row.ticks ?? 0), 0) * 50 <= budgets.time_budget_ms, 'TICKS_EXCEED_TIME_BUDGET');
     return r;
   } catch (error) {

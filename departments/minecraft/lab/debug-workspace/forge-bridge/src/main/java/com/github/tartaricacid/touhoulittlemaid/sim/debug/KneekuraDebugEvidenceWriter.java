@@ -357,7 +357,7 @@ public final class KneekuraDebugEvidenceWriter {
                     proof.whenComplete((value, error) -> { synchronized (LOCK) { pendingImageBytes -= image.size(); } });
                 }
                 writeObservationLocked(config, localTick, gameTime, "L2", "VISUAL_CAPTURE", "EXPERIMENT", null,
-                        "CLIENT", png == null ? "KneekuraDebugCardinalCapture.finish" : "RenderLevelStageEvent.AFTER_LEVEL",
+                        "CLIENT", png == null ? (payload.has("rig") && "mob-eye-live-v1".equals(payload.get("rig").getAsString()) ? "KneekuraDebugMobPovCamera.return" : "KneekuraDebugCardinalCapture.finish") : "RenderLevelStageEvent.AFTER_LEVEL",
                         payload.deepCopy(), arenaEpoch, proof, image);
             } catch (Exception error) { proof.completeExceptionally(error); }
         }
