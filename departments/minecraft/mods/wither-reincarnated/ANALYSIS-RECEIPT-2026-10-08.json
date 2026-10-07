@@ -1,0 +1,105 @@
+{
+  "schema": "kneekura.minecraft.mod-analysis-receipt.v1",
+  "captured_at": "2026-10-08",
+  "track": "ANCHOR",
+  "target": {
+    "name": "Wither: Reincarnated",
+    "mod_id": "witherreincarnated",
+    "version": "1.0.5",
+    "minecraft_range": "[1.20.1,1.21)",
+    "loader": "Forge/JavaFML",
+    "loader_range": "[47,)",
+    "author_metadata": "Alexander's Fun and Games"
+  },
+  "artifact": {
+    "file_name": "witherreincarnated-1.20.1-1.0.5.jar",
+    "origin": "user-supplied binary",
+    "size_bytes": 12807443,
+    "sha256": "00589726de7d82628d92761394a8a3e6b153c28942f50c9ae6ba7860b0fab80a",
+    "class_count": 102,
+    "raw_bytes_committed": false
+  },
+  "license": {
+    "state": "KNOWN",
+    "declared_expression": "All Rights Reserved",
+    "source": "META-INF/mods.toml",
+    "handling_policy": "Static user-requested analysis only. No raw JAR, decompiled tree, code body, texture, model or sound redistribution. Only minimized derived findings, hashes and locators are committed."
+  },
+  "analysis": {
+    "source_tree_available": false,
+    "source_binary_equivalence": "UNESTABLISHED",
+    "bytecode_inventory": true,
+    "resource_inventory": true,
+    "selected_bytecode_inspection": true,
+    "decompiled_tree_retained": false,
+    "runtime_launched": false,
+    "runtime_state": "NOT_RUN",
+    "performance_measured": false
+  },
+  "mixins": {
+    "common": [
+      "WitherBossMixin",
+      "LivingEntityMixin",
+      "WitherSkullMixin",
+      "ExplosionMixin",
+      "MobMixin",
+      "ItemMixin",
+      "EntityMixin",
+      "RandomStrollGoalMixin",
+      "PlayerMixin",
+      "ProjectileMixin",
+      "DefaultAttributesMixin"
+    ],
+    "client": [
+      "MinecraftMixin",
+      "SimpleSoundInstanceMixin",
+      "LevelRendererMixin",
+      "LivingEntityRendererMixin",
+      "ClientPacketListenerMixin",
+      "AbstractSoundInstanceMixin",
+      "BossEventMixin"
+    ]
+  },
+  "key_classes": {
+    "flight": [
+      "com.alexander.witherreincarnated.ai.controllers.wither.WitherMoveControl",
+      "com.alexander.witherreincarnated.ai.controllers.wither.WitherNavigation"
+    ],
+    "attacks": [
+      "com.alexander.witherreincarnated.ai.goals.wither.WitherBarrageGoal",
+      "com.alexander.witherreincarnated.ai.goals.wither.WitherLaserGoal",
+      "com.alexander.witherreincarnated.ai.goals.wither.WitherChargeGoal",
+      "com.alexander.witherreincarnated.ai.goals.wither.WitherRangedAttackGoal",
+      "com.alexander.witherreincarnated.ai.goals.wither.WitherBackUpGoal",
+      "com.alexander.witherreincarnated.ai.goals.wither.WitherRandomTravelGoal"
+    ],
+    "possession": [
+      "com.alexander.witherreincarnated.capabilities.possessed.PossessedCapability",
+      "com.alexander.witherreincarnated.ai.goals.possessed.PossessedFollowWitherGoal",
+      "com.alexander.witherreincarnated.ai.goals.possessed.PossessedOwnerHurtByTargetGoal"
+    ],
+    "network": [
+      "ClientboundShakeCameraPacket",
+      "ClientboundStartLaserPacket",
+      "ClientboundUpdateLaserPacket",
+      "ClientboundUpdatePossessedMobPacket",
+      "ClientboundWitherSkullBlastPacket",
+      "ClientboundWitherStartAnimationPacket"
+    ]
+  },
+  "data_tags": [
+    "witherreincarnated:not_scared_of_wither",
+    "witherreincarnated:wither_cant_possess",
+    "witherreincarnated:wither_wont_attack",
+    "witherreincarnated:wither_avoids (biome)"
+  ],
+  "review_state": {
+    "artifact_identity": "EVIDENCE_BACKED",
+    "architecture": "EVIDENCE_BACKED_STATIC",
+    "ai_behavior": "EVIDENCE_BACKED_STATIC",
+    "network_contract": "EVIDENCE_BACKED_STATIC",
+    "render_asset_relationships": "MAPPED_STATIC",
+    "runtime_behavior": "NOT_ANALYZED",
+    "performance": "NOT_ANALYZED"
+  }
+}
