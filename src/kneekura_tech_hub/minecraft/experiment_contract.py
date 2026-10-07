@@ -220,7 +220,7 @@ def validate_experiment_request(value: dict) -> dict:
         identity = (scope['subject_id'], scope['level'])
         _require(identity not in scope_ids, 'Duplicate observation scope'); scope_ids.add(identity)
     rig = r['visual_rig']; _require(isinstance(rig, dict), 'Visual rig must be an object')
-    visual = rig.get('mode') == 'cardinal-4-snapshot-v1'
+    visual = rig.get('mode') in ('cardinal-4-snapshot-v1','tank-cardinal-4-snapshot-v2')
     mob_pov = rig.get('mode') == 'mob-eye-live-v1'
     if visual or mob_pov:
         _keys(rig, {'mode', 'fov', 'viewport'}, 'visual rig')

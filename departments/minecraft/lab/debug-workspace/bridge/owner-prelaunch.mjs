@@ -8,6 +8,7 @@ import { loadBridgeRegistration, validateTechHubBinding } from './registration.m
 import { buildOwnerGrantIntent, buildGrantFromSealedRequest } from './owner-grant.mjs';
 import { validateOwnerTriggerConfig } from './owner-trigger-config.mjs';
 import { TANK_ROTATION_PERMISSION, buildTankRotationIntent, validateTankRotation } from './owner-tank-rotation.mjs';
+import {TANK_OBSERVATION_PERMISSION,validateTankObservation} from './tank-observation.mjs';
 export {buildTankPresentationResource} from './tank-resource.mjs';
 
 export const OWNER_ENV_FILE = 'KNEEKURA_DEBUG_OWNER_ENVELOPE_FILE';
@@ -66,17 +67,18 @@ async function validateWorld(value) {
   identifier(value.registrationId);
   require(value.worldName === 'KNEEKURA_DEBUG_WORLD' && resource(value.dimensionId), 'OWNER_DISPOSABLE_WORLD_REQUIRED');
   require(Array.isArray(value.permissions) && value.permissions.includes('BOUNDED_DIAGNOSTIC_CONTROL') &&
-    value.permissions.length <= 4 && new Set(value.permissions).size === value.permissions.length &&
-    value.permissions.every(p => ['BOUNDED_DIAGNOSTIC_CONTROL', 'CARDINAL_CAPTURE_PAUSE_CAMERA', 'MOB_POV_CAMERA', TANK_ROTATION_PERMISSION].includes(p)), 'OWNER_PERMISSION_SCOPE');
+    value.permissions.length <= 5 && new Set(value.permissions).size === value.permissions.length &&
+    value.permissions.every(p => ['BOUNDED_DIAGNOSTIC_CONTROL', 'CARDINAL_CAPTURE_PAUSE_CAMERA', 'MOB_POV_CAMERA', TANK_ROTATION_PERMISSION,TANK_OBSERVATION_PERMISSION].includes(p)), 'OWNER_PERMISSION_SCOPE');
   await directory(value.canonicalWorldRoot);
   return structuredClone(value);
 }
-function capturePermission(request, world) {
+function capturePermission(request, world, observation=null) {
+  if(request.visual_rig?.mode==='tank-cardinal-4-snapshot-v2'&&!observation)throw new Error('OWNER_TANK_CAPTURE_SCOPE_REQUIRED');
   if (request.visual_rig?.mode === 'mob-eye-live-v1') {
     require(world.permissions.includes('MOB_POV_CAMERA'), 'OWNER_MOB_POV_PERMISSION_MISSING');
     return;
   }
-  if (request.visual_rig?.mode === 'cardinal-4-snapshot-v1' || request.budgets?.max_captures > 0)
+  if (['cardinal-4-snapshot-v1','tank-cardinal-4-snapshot-v2'].includes(request.visual_rig?.mode) || request.budgets?.max_captures > 0)
     require(world.permissions.includes('CARDINAL_CAPTURE_PAUSE_CAMERA'), 'OWNER_CAPTURE_PERMISSION_MISSING');
 }
 function ownerIntent(envelopeHash) {
@@ -109,12 +111,16 @@ export async function prepareOwnerControl({ runtimeRoot, runDir, identity, opera
     expectedSha256: hashId(operatorRegistration.sha256), maxBytes: 128 * 1024 });
   const operator = decodeJson(selected.bytes, 128 * 1024);
   exactKeys(operator, ['schemaVersion', 'requestHash', 'materialDescriptor', 'worldRegistration', 'selection', ...(Object.hasOwn(operator, 'triggerCapture') ? ['triggerCapture'] : []),
-    ...(Object.hasOwn(operator, 'tankRotation') ? ['tankRotation'] : [])], 'PRIVATE_OWNER_REGISTRATION');
+    ...(Object.hasOwn(operator, 'tankRotation') ? ['tankRotation'] : []),
+    ...(Object.hasOwn(operator,'tankObservation')?['tankObservation']:[])], 'PRIVATE_OWNER_REGISTRATION');
   integer(operator.schemaVersion, 1, 1);
   require(operator.requestHash === bridge.binding.request_hash, 'OWNER_REQUEST_MISMATCH');
   const materialDescriptor = validateDescriptor(operator.materialDescriptor, bridge.binding.target);
   const worldRegistration = await validateWorld(operator.worldRegistration);
-  capturePermission(bridge.request, worldRegistration);
+  const tankObservation=Object.hasOwn(operator,'tankObservation')?validateTankObservation(operator.tankObservation,worldRegistration,
+    decodeJson((await readRegisteredFile({root:worldRegistration.canonicalWorldRoot,relativePath:'kneekura-tank-owner.json',maxBytes:65536})).bytes,65536)):null;
+  if(tankObservation&&Object.hasOwn(operator,'tankRotation'))throw new Error('TANK_OBSERVATION_MAINTENANCE_CONFLICT');
+  capturePermission(bridge.request, worldRegistration,tankObservation);
   const grant = buildOwnerGrantIntent({ binding: bridge.binding, request: bridge.request,
     identity: grantIdentity(identity, worldRegistration), selection: operator.selection });
   const triggerCapture = Object.hasOwn(operator, 'triggerCapture') ? validateOwnerTriggerConfig(operator.triggerCapture, grant) : null;
@@ -138,13 +144,14 @@ export async function prepareOwnerControl({ runtimeRoot, runDir, identity, opera
   const envelope = { schemaVersion: 1, ...identity, requestHash: bridge.binding.request_hash,
     grantHash: sha256(grantBytes), materialDescriptorHash: sha256(descriptorBytes), worldRegistrationHash: sha256(worldBytes),
     controlMode: 'BOUNDED_DIAGNOSTIC_CONTROL', ...(triggerCapture ? { triggerConfigHash: sha256(bytes(triggerCapture)) } : {}),
-    ...(tankRotation ? { tankRotationHash: sha256(bytes(tankRotation)) } : {}) };
+    ...(tankRotation ? { tankRotationHash: sha256(bytes(tankRotation)) } : {}),
+    ...(tankObservation?{tankObservationHash:sha256(bytes(tankObservation))}:{}) };
   const envelopeBytes = bytes(envelope);
   const envelopeHash = sha256(envelopeBytes);
   const control = path.join(runDir, 'control');
   for (const name of ['run-snapshot.json', 'run-snapshot.canonical.json', 'control/owner-envelope.json', 'control/owner-grant.json',
     'control/owner-material-descriptor.json', 'control/owner-world-registration.json', 'control/owner-experiment-request.json', 'control/owner-trigger-config.json',
-    'control/owner-tank-rotation.json', 'control/owner-tank-predecessor.json']) await absent(path.join(runDir, name));
+    'control/owner-tank-rotation.json', 'control/owner-tank-predecessor.json','control/owner-tank-observation.json']) await absent(path.join(runDir, name));
   try { await mkdir(control, { mode: 0o700 }); } catch (error) { if (error.code !== 'EEXIST') throw error; }
   await directory(control);
   const materialDir = path.join(control, 'owner-materials');
@@ -153,6 +160,7 @@ export async function prepareOwnerControl({ runtimeRoot, runDir, identity, opera
   for (const [name, raw] of [['owner-grant.json', grantBytes], ['owner-material-descriptor.json', descriptorBytes],
     ['owner-world-registration.json', worldBytes], ['owner-experiment-request.json', bridge.bytes.request]]) await writeExclusive(path.join(control, name), raw);
   if (triggerCapture) await writeExclusive(path.join(control, 'owner-trigger-config.json'), bytes(triggerCapture));
+  if(tankObservation)await writeExclusive(path.join(control,'owner-tank-observation.json'),bytes(tankObservation));
   if (tankRotation) {
     await writeExclusive(path.join(control,'owner-tank-rotation.json'),bytes(tankRotation));
     await writeExclusive(path.join(control,'owner-tank-predecessor.json'),tankPredecessor);
@@ -169,7 +177,8 @@ export async function readPreparedOwnerControl({ runDir, envelopeHash, requireSn
   const read = (relativePath, expectedSha256, maxBytes = 128 * 1024) => readRegisteredFile({ root: runDir, relativePath, expectedSha256, maxBytes });
   const envelope = decodeJson((await read('control/owner-envelope.json', envelopeHash)).bytes);
   exactKeys(envelope, [...ENVELOPE_FIELDS, ...(Object.hasOwn(envelope, 'triggerConfigHash') ? ['triggerConfigHash'] : []),
-    ...(Object.hasOwn(envelope,'tankRotationHash') ? ['tankRotationHash'] : [])], 'OWNER_ENVELOPE');
+    ...(Object.hasOwn(envelope,'tankRotationHash') ? ['tankRotationHash'] : []),
+    ...(Object.hasOwn(envelope,'tankObservationHash')?['tankObservationHash']:[])], 'OWNER_ENVELOPE');
   integer(envelope.schemaVersion, 1, 1);
   require(envelope.controlMode === 'BOUNDED_DIAGNOSTIC_CONTROL', 'OWNER_CONTROL_SCOPE');
   const identity = validateIdentity(Object.fromEntries(ID_FIELDS.map(k => [k, envelope[k]])));
@@ -179,7 +188,10 @@ export async function readPreparedOwnerControl({ runDir, envelopeHash, requireSn
   validateVisualExperimentRequest(request);
   const materialDescriptor = validateDescriptor(decodeJson((await read('control/owner-material-descriptor.json', envelope.materialDescriptorHash)).bytes), request.target);
   const worldRegistration = await validateWorld(decodeJson((await read('control/owner-world-registration.json', envelope.worldRegistrationHash)).bytes));
-  capturePermission(request, worldRegistration);
+  const tankObservation=Object.hasOwn(envelope,'tankObservationHash')?validateTankObservation(
+    decodeJson((await read('control/owner-tank-observation.json',hashId(envelope.tankObservationHash),16384)).bytes),worldRegistration):null;
+  if(tankObservation&&Object.hasOwn(envelope,'tankRotationHash'))throw new Error('TANK_OBSERVATION_MAINTENANCE_CONFLICT');
+  capturePermission(request, worldRegistration,tankObservation);
   const selection = Object.fromEntries(['grantId', 'leaseId', 'arenaEpoch', 'expectedArenaRevision', 'allowedActions'].map(k => [k, grant[k]]));
   const expected = buildGrantFromSealedRequest({ request, requestHash: envelope.requestHash, identity: grantIdentity(identity, worldRegistration), selection });
   require(same(grant, expected), 'OWNER_GRANT_LINKAGE_MISMATCH');
@@ -195,7 +207,7 @@ export async function readPreparedOwnerControl({ runDir, envelopeHash, requireSn
     tankRotation = validateTankRotation(plan,{identity,grant,request,world:worldRegistration,triggerCapture,previousOwnerBytes:predecessor.bytes});
   }
   const ownerControlIntent = ownerIntent(envelopeHash);
-  const result = { envelope, grant, request, materialDescriptor, worldRegistration, identity, ownerControlIntent, triggerCapture, tankRotation };
+  const result = { envelope, grant, request, materialDescriptor, worldRegistration, identity, ownerControlIntent, triggerCapture, tankRotation,tankObservation };
   if (requireSnapshot) {
     const raw = await read('run-snapshot.json', null, 2 * 1024 * 1024);
     const body = await read('run-snapshot.canonical.json', null, 2 * 1024 * 1024);

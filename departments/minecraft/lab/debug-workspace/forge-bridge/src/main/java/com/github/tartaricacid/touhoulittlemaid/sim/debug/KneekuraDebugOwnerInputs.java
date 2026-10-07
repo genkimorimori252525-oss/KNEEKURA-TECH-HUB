@@ -12,7 +12,7 @@ record KneekuraDebugOwnerInputs(Path runDir,String envelopeHash,JsonObject envel
   if(cfg==null||!cfg.enabled()||cfg.ownerSetup()==null)throw new IOException("OWNER_NOT_CONFIGURED");Path root=cfg.runDir().toRealPath();
   if(!cfg.ownerSetup().file().equals(root.resolve("control/owner-envelope.json")))throw new IOException("OWNER_ENVELOPE_PATH_MISMATCH");
   String eh=KneekuraDebugActionJournal.hash(cfg.ownerSetup().sha256());JsonObject e=KneekuraDebugOwnerFiles.json(root,"control/owner-envelope.json",eh,16*1024);
-  JsonObject baseEnvelope=e.deepCopy();baseEnvelope.remove("triggerConfigHash");baseEnvelope.remove("tankRotationHash");
+  JsonObject baseEnvelope=e.deepCopy();baseEnvelope.remove("triggerConfigHash");baseEnvelope.remove("tankRotationHash");baseEnvelope.remove("tankObservationHash");
   KneekuraDebugActionJournal.keys(baseEnvelope,"schemaVersion","debugSessionId","runId","runSnapshotId","processEpoch","handshakeNonce","requestHash","grantHash","materialDescriptorHash","worldRegistrationHash","controlMode");
   if(n(e,"schemaVersion")!=1||!t(e,"debugSessionId").equals(cfg.debugSessionId())||!t(e,"runId").equals(cfg.runId())||!t(e,"runSnapshotId").equals(cfg.runSnapshotId())||n(e,"processEpoch")!=cfg.processEpoch()||!t(e,"handshakeNonce").equals(cfg.handshakeNonce())||!t(e,"controlMode").equals(CONTROL))throw new IOException("OWNER_ENVELOPE_IDENTITY_MISMATCH");
   JsonObject grantJson=KneekuraDebugOwnerFiles.json(root,"control/owner-grant.json",t(e,"grantHash"),32*1024);var grant=KneekuraDebugArenaOwnerGrant.parse(grantJson);var id=grant.identity();
@@ -29,7 +29,19 @@ record KneekuraDebugOwnerInputs(Path runDir,String envelopeHash,JsonObject envel
   JsonObject intent=o(o(snapshot,"bridge"),"ownerControlIntent");KneekuraDebugActionJournal.keys(intent,"envelopeHash","scope","fullTargetAttestation");if(!t(intent,"envelopeHash").equals(eh)||!t(intent,"scope").equals(CONTROL)||!t(intent,"fullTargetAttestation").equals("NOT_ESTABLISHED"))throw new IOException("OWNER_SNAPSHOT_INTENT_MISMATCH");
   JsonObject triggerConfig=e.has("triggerConfigHash")?KneekuraDebugOwnerTriggers.validateConfig(KneekuraDebugOwnerFiles.json(root,"control/owner-trigger-config.json",KneekuraDebugActionJournal.hash(t(e,"triggerConfigHash")),16*1024),grant):null;
   if(triggerConfig!=null&&!t(o(req,"visual_rig"),"mode").equals("cardinal-4-snapshot-v1"))throw new IOException("OWNER_TRIGGER_CARDINAL_RIG_REQUIRED");
-  var result=new KneekuraDebugOwnerInputs(root,eh,e,grant,m,w,req,snapshot,triggerConfig);result.verifyDiskMaterials();result.tankRotation();KneekuraDebugMobPovCommands.enabled(result);return result;
+  var result=new KneekuraDebugOwnerInputs(root,eh,e,grant,m,w,req,snapshot,triggerConfig);result.verifyDiskMaterials();result.tankRotation();result.tankObservation();result.validateObservationRig();KneekuraDebugMobPovCommands.enabled(result);return result;
+ }
+ void validateObservationRig()throws IOException{
+  JsonObject rig=o(request,"visual_rig");String mode=t(rig,"mode");
+  if(!mode.equals("tank-cardinal-4-snapshot-v2"))return;
+  if(tankObservation()==null||!world.getAsJsonArray("permissions").contains(new JsonPrimitive("CARDINAL_CAPTURE_PAUSE_CAMERA"))||grant.maxCaptures()<4)throw new IOException("TANK_CAPTURE_SCOPE_OR_PERMISSION");
+  KneekuraDebugActionJournal.keys(rig,"mode","fov","viewport");JsonElement f=rig.get("fov");if(f==null||!f.isJsonPrimitive()||!f.getAsJsonPrimitive().isNumber())throw new IOException("TANK_CAPTURE_FOV");double fov=f.getAsDouble();if(!Double.isFinite(fov)||fov<30||fov>100)throw new IOException("TANK_CAPTURE_FOV");
+  for(JsonElement e:a(rig,"viewport",2,2)){long n;try{if(!e.isJsonPrimitive()||!e.getAsJsonPrimitive().isNumber())throw new IllegalArgumentException();n=e.getAsBigDecimal().longValueExact();}catch(RuntimeException error){throw new IOException("TANK_CAPTURE_VIEWPORT",error);}if(n<64||n>2048)throw new IOException("TANK_CAPTURE_VIEWPORT");}
+ }
+ KneekuraDebugTankObservation tankObservation()throws IOException{
+  if(!envelope.has("tankObservationHash"))return null;
+  if(envelope.has("tankRotationHash"))throw new IOException("TANK_OBSERVATION_MAINTENANCE_CONFLICT");
+  return KneekuraDebugTankObservation.parse(KneekuraDebugOwnerFiles.json(runDir,"control/owner-tank-observation.json",KneekuraDebugActionJournal.hash(t(envelope,"tankObservationHash")),16384),world);
  }
  KneekuraDebugTankRotationPlan.Validated tankRotation()throws IOException{
   if(!envelope.has("tankRotationHash"))return null;
@@ -47,7 +59,7 @@ record KneekuraDebugOwnerInputs(Path runDir,String envelopeHash,JsonObject envel
   JsonArray rows=a(m,"classResources",1,8);Set<String> names=new HashSet<>();for(JsonElement entry:rows){JsonObject row=KneekuraDebugActionJournal.object(entry);KneekuraDebugActionJournal.keys(row,"className","sha256");String name=t(row,"className");if(name.length()>256||!name.matches("[A-Za-z_$][A-Za-z0-9_$]*(\\.[A-Za-z_$][A-Za-z0-9_$]*)+")||!names.add(name))throw new IOException("INVALID_CLASS_MEMBER_MANIFEST");KneekuraDebugActionJournal.hash(t(row,"sha256"));}
  }
  static void validateWorld(JsonObject w,KneekuraDebugArenaOwnerGrant g)throws IOException{
-  KneekuraDebugActionJournal.keys(w,"schemaVersion","registrationId","canonicalWorldRoot","worldName","dimensionId","permissions");KneekuraDebugArenaController.id(t(w,"registrationId"));Path p=Path.of(t(w,"canonicalWorldRoot"));if(n(w,"schemaVersion")!=1||!p.isAbsolute()||!p.normalize().equals(p)||!t(w,"worldName").equals("KNEEKURA_DEBUG_WORLD")||!t(w,"worldName").equals(g.disposableWorldName())||!t(w,"dimensionId").equals(g.dimensionId()))throw new IOException("INVALID_WORLD_REGISTRATION");Set<String> permissions=new HashSet<>();for(JsonElement item:a(w,"permissions",1,4)){if(!item.isJsonPrimitive()||!item.getAsJsonPrimitive().isString()||!Set.of(CONTROL,"CARDINAL_CAPTURE_PAUSE_CAMERA",KneekuraDebugMobPovCommands.PERMISSION,KneekuraDebugTankRotationPlan.PERMISSION).contains(item.getAsString())||!permissions.add(item.getAsString()))throw new IOException("INVALID_OWNER_PERMISSION");}if(!permissions.contains(CONTROL))throw new IOException("DIAGNOSTIC_CONTROL_NOT_REGISTERED");
+  KneekuraDebugActionJournal.keys(w,"schemaVersion","registrationId","canonicalWorldRoot","worldName","dimensionId","permissions");KneekuraDebugArenaController.id(t(w,"registrationId"));Path p=Path.of(t(w,"canonicalWorldRoot"));if(n(w,"schemaVersion")!=1||!p.isAbsolute()||!p.normalize().equals(p)||!t(w,"worldName").equals("KNEEKURA_DEBUG_WORLD")||!t(w,"worldName").equals(g.disposableWorldName())||!t(w,"dimensionId").equals(g.dimensionId()))throw new IOException("INVALID_WORLD_REGISTRATION");Set<String> permissions=new HashSet<>();for(JsonElement item:a(w,"permissions",1,5)){if(!item.isJsonPrimitive()||!item.getAsJsonPrimitive().isString()||!Set.of(CONTROL,"CARDINAL_CAPTURE_PAUSE_CAMERA",KneekuraDebugMobPovCommands.PERMISSION,KneekuraDebugTankRotationPlan.PERMISSION,KneekuraDebugTankObservation.PERMISSION).contains(item.getAsString())||!permissions.add(item.getAsString()))throw new IOException("INVALID_OWNER_PERMISSION");}if(!permissions.contains(CONTROL))throw new IOException("DIAGNOSTIC_CONTROL_NOT_REGISTERED");
  }
  static void validateRequest(JsonObject r,KneekuraDebugArenaOwnerGrant g,JsonObject m)throws IOException{
   KneekuraDebugActionJournal.keys(r,"schema_version","experiment_id","generation","target","arena","subjects","initial_state","actions","observation_scopes","visual_rig","assertions","budgets");if(n(r,"schema_version")!=1||!t(r,"experiment_id").equals(g.identity().experimentId())||n(r,"generation")!=g.generation())throw new IOException("OWNER_REQUEST_IDENTITY_MISMATCH");

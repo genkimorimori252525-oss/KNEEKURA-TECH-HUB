@@ -10,7 +10,7 @@ For Minecraft Tank work, also read [Tank Operating Guide](TANK-OPERATING-GUIDE.m
 
 Local HEAD: `379c6b372522f744acc4698f5396787c9f056dbb`, with unrelated dirty Twilight R2 work. GitHub main: `c9145ec5376aeeff59995b8c20f7b839f810ab6e` (2026-10-02). Main adds `kneekura-minecraft` as a **15th console entry**, plus separate Python modules, Node tools and Forge adapters absent from this checkout. Later features live in separate unmerged branches. Documentation links do not install them; select an isolated, reviewed revision before running a missing tool. Never pull/reset over existing work.
 
-Those local availability statements describe the original guide checkout. Mob POV is implemented in `C:/Users/genki/.codex/worktrees/mob-pov-camera/KNEEKURA-TECH-HUB`, branch `codex/mob-pov-camera-20261007`, based on PR96 `6b7456278b25e1f8ac3fbeb416ee7ee9a525c542`; it is not merged into main or installed in the original checkout. Use that worktree's Python (`PYTHONPATH=src`) and LAB together; repin its complete32-module control source closure. Check the working directory/source before applying either inventory.
+Those local availability statements describe the original guide checkout. Mob POV v1 and finite Tank observation/camera A–D are implemented in `C:/Users/genki/.codex/worktrees/mob-pov-camera/KNEEKURA-TECH-HUB`, branch `codex/mob-pov-camera-20261007`, based on PR96 `6b7456278b25e1f8ac3fbeb416ee7ee9a525c542`; it is not merged into main or installed in the original checkout. Use that worktree's Python (`PYTHONPATH=src`) and LAB together; repin its complete36-module control source closure. Check the working directory/source before applying either inventory.
 
 | Task / feature | Entry and capability | Reviewed availability / limit |
 | --- | --- | --- |

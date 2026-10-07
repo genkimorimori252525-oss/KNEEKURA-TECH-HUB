@@ -12,6 +12,9 @@ import {EvidenceRuntime} from '../evidence/runtime.mjs';
 import {watchOwnerTriggerCaptures} from './owner-trigger-source.mjs';
 import {requireTankTimeBudget} from './tank-preflight.mjs';
 import {publishMobPovCommand,inspectMobPovCommand} from './mob-pov.mjs';
+import {publishTankRoster,inspectTankRoster} from './tank-roster.mjs';
+import {cameraPlan} from './camera-plan.mjs';
+import {captureBundle} from './capture-bundle.mjs';
 
 async function directory(value){
  if(typeof value!=='string'||!path.isAbsolute(value)||path.resolve(value)!==value||await realpath(value)!==value||!(await lstat(value)).isDirectory())throw new Error('OWNER_DIRECTORY_UNSAFE');
@@ -63,16 +66,21 @@ async function exportPrivate(owner,p,command){
 async function run(owner,command){
  const fields=['schemaVersion','operation','requestHash'];
  if(['submit_action','inspect_action'].includes(command?.operation))fields.push('selectedActionId');
- else if(command?.operation==='request_capture')fields.push('captureIndex');
+ else if(['request_capture','inspect_capture','capture_bundle'].includes(command?.operation))fields.push('captureIndex');
+ else if(['tank_roster','inspect_tank_roster'].includes(command?.operation))fields.push('sampleIndex');
  else if(command?.operation==='export_result')fields.push('observationIds','timelineObservationIds','visualPacketHash');
  else if(command?.operation==='mob_pov'){
   fields.push('commandIndex','cameraOperation');if(command.cameraOperation==='attach')fields.push('subjectUuid','durationMs');
  }else if(command?.operation==='inspect_mob_pov')fields.push('commandIndex');
  if(command?.operation==='submit_action'&&Object.hasOwn(command,'timeBudget'))fields.push('timeBudget');
  exactKeys(command,fields,'CONTROL_COMMAND');integer(command.schemaVersion,1,1);hashId(command.requestHash);
- if(!['inspect_owner','submit_action','request_capture','inspect_action','export_result','request_cleanup','inspect_cleanup','watch_triggers','mob_pov','inspect_mob_pov'].includes(command.operation))throw new Error('UNSUPPORTED_CONTROL_OPERATION');
+ if(!['inspect_owner','submit_action','request_capture','inspect_action','export_result','request_cleanup','inspect_cleanup','watch_triggers','mob_pov','inspect_mob_pov','tank_roster','inspect_tank_roster','camera_plan','inspect_capture','capture_bundle'].includes(command.operation))throw new Error('UNSUPPORTED_CONTROL_OPERATION');
  const p=await ownerScope(owner,command),base={schemaVersion:1,operation:command.operation,requestHash:command.requestHash,runtimeAttestation:'NOT_ESTABLISHED'};
  const options={runDir:owner.run.runDir,envelopeHash:owner.run.ownerEnvelopeHash};
+ if(command.operation==='tank_roster')return {...base,...await publishTankRoster({...options,sampleIndex:command.sampleIndex})};
+ if(command.operation==='inspect_tank_roster')return {...base,...await inspectTankRoster({...options,sampleIndex:command.sampleIndex})};
+ if(command.operation==='camera_plan')return {...base,status:'PLANNED',plan:await cameraPlan(options)};
+ if(['inspect_capture','capture_bundle'].includes(command.operation))return {...base,...await captureBundle({...options,captureIndex:command.captureIndex})};
  if(command.operation==='mob_pov')return {...base,...await publishMobPovCommand({...options,commandIndex:command.commandIndex,operation:command.cameraOperation,
   ...(command.cameraOperation==='attach'?{subjectUuid:command.subjectUuid,durationMs:command.durationMs}:{})})};
  if(command.operation==='inspect_mob_pov')return {...base,...await inspectMobPovCommand({...options,commandIndex:command.commandIndex})};

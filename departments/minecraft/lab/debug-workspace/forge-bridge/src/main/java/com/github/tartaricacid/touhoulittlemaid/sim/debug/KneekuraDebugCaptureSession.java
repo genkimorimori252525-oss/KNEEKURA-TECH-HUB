@@ -9,6 +9,7 @@ import java.util.UUID;
 public final class KneekuraDebugCaptureSession {
     public static final List<String> VIEWS = List.of("north", "east", "south", "west");
     public static final String RIG = "cardinal-4-snapshot-v1";
+    public static final String TANK_RIG = "tank-cardinal-4-snapshot-v2";
     public static final int MAX_PNG_BYTES = 4 * 1024 * 1024;
     public record Identity(String debugSessionId, String runId, String runSnapshotId,
                            int processEpoch, String experimentId, int generation,
@@ -27,7 +28,13 @@ public final class KneekuraDebugCaptureSession {
                           List<String> behaviorAssertionIds, List<Integer> arenaMin,
                           List<Integer> arenaMax, double fov, int width, int height,
                           long barrierBudgetMs, long totalBudgetMs,
-                          boolean allowPause, boolean allowCameraTakeover) {
+                          boolean allowPause, boolean allowCameraTakeover,
+                          String rig, String tankObservationHash, List<Integer> observationMin, List<Integer> observationMax) {
+        public Request(String captureId, Identity identity, List<UUID> subjects, List<String> behaviorAssertionIds,
+                       List<Integer> arenaMin, List<Integer> arenaMax, double fov, int width, int height,
+                       long barrierBudgetMs, long totalBudgetMs, boolean allowPause, boolean allowCameraTakeover) {
+            this(captureId,identity,subjects,behaviorAssertionIds,arenaMin,arenaMax,fov,width,height,barrierBudgetMs,totalBudgetMs,allowPause,allowCameraTakeover,RIG,null,List.of(),List.of());
+        }
         public Request {
             id(captureId);
             require(captureId.matches("[A-Za-z0-9][A-Za-z0-9._-]{0,127}"), "SAFE_CAPTURE_ID_REQUIRED");
@@ -53,11 +60,23 @@ public final class KneekuraDebugCaptureSession {
             require(barrierBudgetMs >= 100 && barrierBudgetMs <= 2000 &&
                     totalBudgetMs >= barrierBudgetMs && totalBudgetMs <= 5000, "INVALID_BUDGET");
             require(allowPause && allowCameraTakeover, "CAPTURE_PERTURBATION_NOT_AUTHORIZED");
+            require(RIG.equals(rig)||TANK_RIG.equals(rig),"INVALID_RIG_VERSION");
+            observationMin=List.copyOf(observationMin);observationMax=List.copyOf(observationMax);
+            if(TANK_RIG.equals(rig)){
+                hash(tankObservationHash);require(observationMin.size()==3&&observationMax.size()==3,"INVALID_OBSERVATION_BOUNDS");
+                long volume=1;for(int i=0;i<3;i++){long edge=(long)observationMax.get(i)-observationMin.get(i);require(edge>0&&edge<=64&&Math.abs((long)observationMin.get(i))<=30000000&&Math.abs((long)observationMax.get(i))<=30000000,"INVALID_OBSERVATION_BOUNDS");volume*=edge;}
+                require(volume<=65536&&observationMin.get(1)>=-63&&observationMax.get(1)<=319,"INVALID_OBSERVATION_BOUNDS");
+                require(observationMax.get(0)-observationMin.get(0)>3&&observationMax.get(2)-observationMin.get(2)>3,"OBSERVATION_ROOM_TOO_SMALL");
+            }else require(tankObservationHash==null&&observationMin.isEmpty()&&observationMax.isEmpty(),"LEGACY_RIG_SCOPE_CONFLICT");
         }
         /** Deterministic [x,y,z,yaw,pitch] around the exact half-open Arena bounds. */
         public List<Double> pose(String view) {
             int index = VIEWS.indexOf(view);
             require(index >= 0, "INVALID_VIEW");
+            if(TANK_RIG.equals(rig)){
+                double x=((double)observationMin.get(0)+observationMax.get(0))/2,y=((double)observationMin.get(1)+observationMax.get(1))/2,z=((double)observationMin.get(2)+observationMax.get(2))/2;
+                return List.of(index==1?observationMax.get(0)-1.5:index==3?observationMin.get(0)+1.5:x,y,index==0?observationMin.get(2)+1.5:index==2?observationMax.get(2)-1.5:z,index==3?-90.0:index*90.0,0.0);
+            }
             double x = ((double) arenaMin.get(0) + arenaMax.get(0)) / 2;
             double y = ((double) arenaMin.get(1) + arenaMax.get(1)) / 2;
             double z = ((double) arenaMin.get(2) + arenaMax.get(2)) / 2;

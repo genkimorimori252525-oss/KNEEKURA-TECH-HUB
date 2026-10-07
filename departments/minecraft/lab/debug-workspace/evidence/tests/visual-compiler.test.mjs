@@ -4,9 +4,23 @@ import { readFile, writeFile, symlink, mkdir } from 'node:fs/promises';
 import path from 'node:path';
 import { decodePng } from '../../../simlab/golden/png.mjs';
 import { sha256 } from '../../bridge/json.mjs';
-import { fixture, UUID } from './visual-fixture.mjs';
+import { fixture, UUID, request } from './visual-fixture.mjs';
+import {validatePacket} from '../visual-packet.mjs';
 import * as compiler from '../visual-compiler.mjs';
 const artifact = (c, ref) => c.artifacts.find(a => a.ref.artifactId === ref.artifactId);
+test('v2 packet retains scope binding and keeps observation geometry separate from action authority',async t=>{
+ const req=request();req.visual_rig.mode='tank-cardinal-4-snapshot-v2';
+ const f=await fixture(t,{request:req,mutate:m=>{
+  m.rig='tank-cardinal-4-snapshot-v2';m.tankObservationHash='b'.repeat(64);
+  for(const frame of m.frames){frame.rig=m.rig;frame.tankObservationHash=m.tankObservationHash;}
+  m.structuredState.observationBounds={min:[-16,0,-16],max:[16,32,16]};
+ }});
+ const c=await compiler.compileVisualPacket(f),p=validatePacket(c.packet);
+ assert.equal(p.binding.rig,'tank-cardinal-4-snapshot-v2');assert.equal(p.binding.tankObservationHash,'b'.repeat(64));
+ assert.deepEqual(p.structuredSummary.arenaBounds,req.arena.bounds);
+ assert.deepEqual(p.structuredSummary.observationBounds,f.manifest.structuredState.observationBounds);
+ await compiler.persistVisualPacket({store:f.store,compiled:c});
+});
 test('compiler produces actual ordered 2x2 RGB pixels with immutable raw lineage and exact topdown facts', async t => {
   const f = await fixture(t); const before = await f.store.readObservations();
   const c = await compiler.compileVisualPacket(f);

@@ -7,6 +7,7 @@ import { readRegisteredFile } from '../bridge/materials.mjs';
 
 export const CARDINAL_VIEWS = Object.freeze(['north', 'east', 'south', 'west']);
 const COMMON = ['schemaVersion', 'kind', 'captureId', 'rig', 'identity', 'subjects', 'controlledStateHash', 'sameFrame'];
+const commonFields = value => [...COMMON,...(value.rig==='tank-cardinal-4-snapshot-v2'?['tankObservationHash']:[])];
 const IDENTITY = ['debugSessionId', 'runId', 'runSnapshotId', 'processEpoch', 'experimentId',
   'generation', 'requestHash', 'arenaId', 'arenaEpoch', 'arenaRevision', 'baselineHash'];
 const FRAME = ['view', 'frameIndex', 'renderFrame', 'clientTick', 'serverTick', 'serverGameTime',
@@ -31,7 +32,8 @@ export function validateVisualIdentity(value) {
 function common(value) {
   integer(value.schemaVersion, 1, 1); identifier(value.captureId);
   require(/^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/.test(value.captureId), 'SAFE_CAPTURE_ID_REQUIRED');
-  require(value.rig === 'cardinal-4-snapshot-v1' && value.sameFrame === false, 'SEQUENTIAL_CARDINAL_RIG_REQUIRED');
+  require(['cardinal-4-snapshot-v1','tank-cardinal-4-snapshot-v2'].includes(value.rig) && value.sameFrame === false, 'SEQUENTIAL_CARDINAL_RIG_REQUIRED');
+  if(value.rig==='tank-cardinal-4-snapshot-v2')hashId(value.tankObservationHash);
   validateVisualIdentity(value.identity);
   list(value.subjects, 16); require(value.subjects.length > 0, 'SUBJECTS_REQUIRED');
   value.subjects.forEach(uuid => require(typeof uuid === 'string' && /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/.test(uuid), 'EXACT_SUBJECT_UUID_REQUIRED'));
@@ -40,7 +42,7 @@ function common(value) {
 }
 export function validateRawFrame(input) {
   const f = structuredClone(input);
-  exactKeys(f, [...COMMON, ...FRAME], 'RAW_FRAME'); common(f);
+  exactKeys(f, [...commonFields(f), ...FRAME], 'RAW_FRAME'); common(f);
   require(f.kind === 'cardinal4_raw_frame' && CARDINAL_VIEWS.includes(f.view) &&
     f.frameIndex === CARDINAL_VIEWS.indexOf(f.view), 'INVALID_CARDINAL_FRAME');
   hashId(f.controlledStateHash); hashId(f.imageHash);
@@ -62,7 +64,7 @@ export function validateVisualManifest(input) {
   const m = structuredClone(input);
   // Missing nullable producer fields are normalized; status still explicitly names every missing view.
   m.controlledStateHash ??= null; m.structuredState ??= null;
-  exactKeys(m, [...COMMON, 'result', 'frames', 'structuredState', 'renderFrameStart', 'renderFrameEnd',
+  exactKeys(m, [...commonFields(m), 'result', 'frames', 'structuredState', 'renderFrameStart', 'renderFrameEnd',
     'clientTickStart', 'clientTickEnd', 'barrierDurationMs', 'restorationProof', 'runtimeAttestation', 'visualVerdict', 'behaviorVerdict'], 'VISUAL_MANIFEST');
   common(m); require(m.kind === 'cardinal4_capture_manifest', 'INVALID_VISUAL_MANIFEST');
   require(m.runtimeAttestation === 'OWNER_GATE_REQUIRED_NOT_INFERRED_FROM_CAPTURE' &&
@@ -81,6 +83,7 @@ export function validateVisualManifest(input) {
   let previous = -1;
   for (const f of m.frames) {
     require(same(f.identity, m.identity) && same(f.subjects, m.subjects) && f.captureId === m.captureId &&
+      f.rig===m.rig&&f.tankObservationHash===m.tankObservationHash&&
       f.controlledStateHash === m.controlledStateHash && f.frameIndex === m.frames.indexOf(f) &&
       f.renderFrame > previous, 'FRAME_IDENTITY_OR_ORDER_MISMATCH');
     require(f.renderFrame >= m.renderFrameStart && f.renderFrame <= m.renderFrameEnd &&
@@ -103,7 +106,7 @@ export function validateVisualManifest(input) {
   });
   if (m.structuredState !== null) {
     const state = m.structuredState;
-    exactKeys(state, ['dimension', 'gameTime', 'subjects', 'arenaBounds'], 'STRUCTURED_STATE');
+    exactKeys(state, ['dimension', 'gameTime', 'subjects', 'arenaBounds',...(m.rig==='tank-cardinal-4-snapshot-v2'?['observationBounds']:[])], 'STRUCTURED_STATE');
     require(typeof state.dimension === 'string' && /^[a-z0-9_]+:[a-z0-9_./-]+$/.test(state.dimension), 'INVALID_DIMENSION');
     integer(state.gameTime, 0, Number.MAX_SAFE_INTEGER);
     exactKeys(state.arenaBounds, ['min', 'max'], 'ARENA_BOUNDS');
@@ -113,6 +116,12 @@ export function validateVisualManifest(input) {
       require(state.arenaBounds.max[i] > n && state.arenaBounds.max[i] - n <= 64, 'INVALID_ARENA_BOUNDS');
     });
     require(state.arenaBounds.min[1] >= -64 && state.arenaBounds.max[1] <= 320, 'INVALID_ARENA_HEIGHT');
+    if(m.rig==='tank-cardinal-4-snapshot-v2'){
+      exactKeys(state.observationBounds,['min','max'],'OBSERVATION_BOUNDS');let volume=1;
+      vector(state.observationBounds.min,3);vector(state.observationBounds.max,3);
+      state.observationBounds.min.forEach((n,i)=>{integer(n,-30000000,30000000);integer(state.observationBounds.max[i],n+1,n+64);volume*=state.observationBounds.max[i]-n;});
+      require(volume<=65536&&state.observationBounds.min[1]>=-63&&state.observationBounds.max[1]<=319,'INVALID_OBSERVATION_BOUNDS');
+    }
     list(state.subjects, 16);
     require(same(state.subjects.map(subject => subject.uuid), m.subjects), 'STRUCTURED_SUBJECT_IDENTITY_MISMATCH');
     for (const subject of state.subjects) {

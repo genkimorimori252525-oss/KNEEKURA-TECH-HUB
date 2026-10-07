@@ -27,6 +27,8 @@ MODULES = (
     'debug-workspace/bridge/owner-grant.mjs', 'debug-workspace/bridge/owner-prelaunch.mjs',
     'debug-workspace/bridge/owner-tank-rotation.mjs',
     'debug-workspace/bridge/mob-pov.mjs',
+    'debug-workspace/bridge/tank-observation.mjs', 'debug-workspace/bridge/tank-roster.mjs',
+    'debug-workspace/bridge/camera-plan.mjs', 'debug-workspace/bridge/capture-bundle.mjs',
     'debug-workspace/bridge/owner-trigger-config.mjs', 'debug-workspace/bridge/owner-trigger-source.mjs',
     'debug-workspace/bridge/registration.mjs', 'debug-workspace/bridge/result-export-source.mjs',
     'debug-workspace/bridge/result-export.mjs', 'debug-workspace/bridge/selected-action.mjs',
@@ -121,7 +123,7 @@ def _registry(value, *, deadline=None, require_triggers=False):
         raise ContractError('Private export transport overlaps the sealed run')
     envelope = decode_json(_file(run_dir/'control/owner-envelope.json', 128*1024,
         expected=run['ownerEnvelopeHash'], deadline=deadline), max_bytes=128*1024)
-    if (not isinstance(envelope, dict) or set(envelope) not in (_ENVELOPE_FIELDS, _ENVELOPE_FIELDS | {'triggerConfigHash'}, _ENVELOPE_FIELDS | {'tankRotationHash'})
+    if (not isinstance(envelope, dict) or set(envelope) not in (_ENVELOPE_FIELDS, _ENVELOPE_FIELDS | {'triggerConfigHash'}, _ENVELOPE_FIELDS | {'tankRotationHash'}, _ENVELOPE_FIELDS | {'tankObservationHash'}, _ENVELOPE_FIELDS | {'tankObservationHash','triggerConfigHash'})
             or type(envelope['schemaVersion']) is not int or envelope['schemaVersion'] != 1
             or envelope['controlMode'] != 'BOUNDED_DIAGNOSTIC_CONTROL'
             or type(envelope['processEpoch']) is not int):
@@ -160,6 +162,22 @@ def _registry(value, *, deadline=None, require_triggers=False):
             maximum=9007199254740990 if name=='previousTankEpoch' else 9007199254740991
             if type(plan[name]) is not int or not 0<=plan[name]<=maximum:raise ContractError('Invalid Tank pin counter')
         _file(run_dir/'control/owner-tank-predecessor.json',65536,expected=plan['previousOwnerFileSha256'],deadline=deadline)
+    if 'tankObservationHash' in envelope:
+        valid_hash(envelope['tankObservationHash'])
+        scope=decode_json(_file(run_dir/'control/owner-tank-observation.json',16384,
+            expected=envelope['tankObservationHash'],deadline=deadline),max_bytes=16384)
+        if (not isinstance(scope,dict) or set(scope)!={'schemaVersion','scope','dimensionId','min','max','recipeHash','maxEntities','maxSamples'}
+                or type(scope['schemaVersion']) is not int or scope['schemaVersion']!=1 or scope['scope']!='TANK_OBSERVATION_READ'
+                or type(scope['maxEntities']) is not int or not 1<=scope['maxEntities']<=64
+                or type(scope['maxSamples']) is not int or not 1<=scope['maxSamples']<=8):
+            raise ContractError('Exact bounded Tank observation pin required')
+        valid_hash(scope['recipeHash'])
+        for name in ('min','max'):
+            if not isinstance(scope[name],list) or len(scope[name])!=3 or any(type(n) is not int for n in scope[name]):
+                raise ContractError('Integer Tank bounds required')
+        edges=[b-a for a,b in zip(scope['min'],scope['max'])]
+        if any(not 1<=n<=64 for n in edges) or math.prod(edges)>65536:
+            raise ContractError('Tank observation bounds exceeded')
     return root, owner
 
 
@@ -180,6 +198,8 @@ def _command(value, request=None):
     extra = {'inspect_owner':set(), 'submit_action':{'selectedActionId'}, 'inspect_action':{'selectedActionId'},
         'request_capture':{'captureIndex'}, 'request_cleanup':set(), 'inspect_cleanup':set(), 'watch_triggers':set(),
         'mob_pov':{'commandIndex','cameraOperation'}, 'inspect_mob_pov':{'commandIndex'},
+        'tank_roster':{'sampleIndex'}, 'inspect_tank_roster':{'sampleIndex'},
+        'camera_plan':set(), 'inspect_capture':{'captureIndex'}, 'capture_bundle':{'captureIndex'},
         'export_result':{'observationIds', 'timelineObservationIds', 'visualPacketHash'}}
     if operation == 'mob_pov' and value.get('cameraOperation') == 'attach':
         extra['mob_pov'] |= {'subjectUuid','durationMs'}
@@ -187,6 +207,9 @@ def _command(value, request=None):
             or type(value['schemaVersion']) is not int or value['schemaVersion'] != 1):
         raise ContractError('Unsupported scoped-control command')
     valid_hash(value['requestHash'])
+    if operation in ('tank_roster','inspect_tank_roster'):
+        if type(value['sampleIndex']) is not int or not 0<=value['sampleIndex']<8:
+            raise ContractError('Bounded owner-wide roster index required')
     if operation in ('mob_pov','inspect_mob_pov'):
         if type(value['commandIndex']) is not int or not 0 <= value['commandIndex'] < 32:
             raise ContractError('Bounded camera command index required')
@@ -207,11 +230,11 @@ def _command(value, request=None):
         _id(value['selectedActionId'])
         if request is not None and value['selectedActionId'] not in {a['action_id'] for a in request['initial_state'] + request['actions']}:
             raise ContractError('Action must select the retained request')
-    if operation == 'request_capture':
+    if operation in ('request_capture','inspect_capture','capture_bundle'):
         index = value['captureIndex']
         if type(index) is not int or not 0 <= index < 4:
             raise ContractError('Bounded capture index required')
-        if request is not None and (index >= request['budgets']['max_captures'] // 4 or request['visual_rig']['mode'] != 'cardinal-4-snapshot-v1'):
+        if request is not None and (index >= request['budgets']['max_captures'] // 4 or request['visual_rig']['mode'] not in ('cardinal-4-snapshot-v1','tank-cardinal-4-snapshot-v2')):
             raise ContractError('Capture exceeds retained visual request')
     if operation == 'export_result':
         for field in ('observationIds', 'timelineObservationIds'):
@@ -233,6 +256,50 @@ def _response(value, command, envelope_hash=None):
         fields.add('ownerEnvelopeHash'); valid_hash(value.get('ownerEnvelopeHash'))
         if value['status'] != 'OWNER_RECORDED' or envelope_hash is not None and value['ownerEnvelopeHash'] != envelope_hash:
             raise IntegrityError('Reported owner mismatch')
+    elif op == 'camera_plan':
+        fields.add('plan');p=value.get('plan')
+        if (value['status']!='PLANNED' or not isinstance(p,dict) or p.get('schemaVersion')!=1
+                or p.get('artifactRole')!='DERIVED_PLANNING' or p.get('requestHash')!=command['requestHash']
+                or p.get('execution')!='NOT_RUN' or p.get('authority')!='NO_ADDITIONAL_AUTHORITY'
+                or p.get('nativeReadSamplesConsumed')!=0 or p.get('imageSlotsConsumed')!=0):
+            raise IntegrityError('Camera plan cannot claim native execution')
+    elif op in ('inspect_capture','capture_bundle'):
+        fields.update(('captureIndex','captureId','bundle','execution'));b=value.get('bundle')
+        if (type(value.get('captureIndex')) is not int or value['captureIndex']!=command['captureIndex']
+                or value['status'] not in ('COMPLETE','PARTIAL','UNKNOWN') or not isinstance(value.get('captureId'),str)):
+            raise IntegrityError('Invalid original capture slot reconciliation')
+        _id(value['captureId'])
+        if b is None:
+            if value['status']!='UNKNOWN' or value.get('execution')!='NOT_CONFIRMED':raise IntegrityError('Missing bundle cannot establish capture completion')
+        elif (not isinstance(b,dict) or value.get('execution')!='VERIFIED_RETAINED_REFERENCES'
+                or b.get('status')!=value['status'] or b.get('captureId')!=value['captureId']
+                or b.get('artifactRole')!='REFERENCES_TO_RAW_AND_STRUCTURED_EVIDENCE' or b.get('sourceBinding')!='CANONICAL_OWNER_CAPTURE'
+                or b.get('identity',{}).get('requestHash')!=command['requestHash'] or b.get('sameFrame') is not False
+                or not isinstance(b.get('views'),list) or [v.get('view') for v in b['views']]!=['north','east','south','west']):
+            raise IntegrityError('Unbacked capture reference bundle')
+    elif op == 'tank_roster':
+        fields.update(('sampleIndex','execution'))
+        if value.get('status')=='REQUESTED':fields.add('markerHash');valid_hash(value.get('markerHash'))
+        if (value.get('status') not in ('REQUESTED','ALREADY_REQUESTED') or value.get('execution')!='NOT_CONFIRMED'
+                or type(value.get('sampleIndex')) is not int or value['sampleIndex']!=command['sampleIndex']):
+            raise IntegrityError('Invalid pending room-read receipt')
+    elif op == 'inspect_tank_roster':
+        fields.update(('sampleIndex','execution','roster','evidenceHash'))
+        if type(value.get('sampleIndex')) is not int or value['sampleIndex']!=command['sampleIndex'] or value.get('status') not in ('COMPLETE','PARTIAL','UNKNOWN','REJECTED','OUTCOME_UNKNOWN'):
+            raise IntegrityError('Invalid room-read reconciliation')
+        measured=value['status'] in ('COMPLETE','PARTIAL')
+        if measured:
+            r=value.get('roster')
+            if not isinstance(value.get('evidenceHash'),str) or not re.fullmatch('[a-f0-9]{64}',value['evidenceHash']):
+                raise IntegrityError('Missing room-read evidence identity')
+            if (value.get('execution')!='CANONICAL_STRUCTURED_EVIDENCE' or not isinstance(r,dict)
+                    or r.get('kind')!='tank_room_roster' or r.get('sampleIndex')!=command['sampleIndex']
+                    or r.get('status')!=value['status'] or r.get('identity',{}).get('requestHash')!=command['requestHash']
+                    or r.get('missingEntityNotAbsent')!=(value['status']=='PARTIAL')
+                    or not isinstance(r.get('entities'),list) or len(r['entities'])>64):
+                raise IntegrityError('Unbacked or contradictory room-read summary')
+        elif value.get('execution')!='NOT_CONFIRMED' or value.get('roster') is not None or value.get('evidenceHash') is not None:
+            raise IntegrityError('Unknown room read cannot establish entity facts')
     elif op == 'mob_pov':
         fields.update(('commandIndex','execution'))
         if value.get('status') == 'REQUESTED':
@@ -296,6 +363,8 @@ def _next(command, status):
         'request_cleanup':'experiment.inspect_cleanup', 'inspect_cleanup':'experiment.inspect_cleanup',
         'watch_triggers':'experiment.inspect_owner',
         'mob_pov':'experiment.inspect_mob_pov', 'inspect_mob_pov':'experiment.inspect_mob_pov',
+        'tank_roster':'experiment.inspect_tank_roster', 'inspect_tank_roster':'experiment.inspect_tank_roster',
+        'camera_plan':'experiment.camera_plan','inspect_capture':'experiment.inspect_capture','capture_bundle':'experiment.capture_bundle',
         'export_result':'experiment.import_export' if status == 'EXPORTED' else 'experiment.inspect_owner'}[command['operation']]
 
 
@@ -366,6 +435,21 @@ def mob_pov(store: Store, registry: dict, request_hash: str, command_index: int,
 def inspect_mob_pov(store: Store, registry: dict, request_hash: str, command_index: int):
     return _invoke(store,registry,{'schemaVersion':1,'operation':'inspect_mob_pov','requestHash':valid_hash(request_hash),'commandIndex':command_index})
 
+def tank_roster(store: Store, registry: dict, request_hash: str, sample_index: int):
+    return _invoke(store,registry,{'schemaVersion':1,'operation':'tank_roster','requestHash':valid_hash(request_hash),'sampleIndex':sample_index})
+
+def inspect_tank_roster(store: Store, registry: dict, request_hash: str, sample_index: int):
+    return _invoke(store,registry,{'schemaVersion':1,'operation':'inspect_tank_roster','requestHash':valid_hash(request_hash),'sampleIndex':sample_index})
+
+def camera_plan(store: Store, registry: dict, request_hash: str):
+    return _invoke(store,registry,{'schemaVersion':1,'operation':'camera_plan','requestHash':valid_hash(request_hash)})
+
+def inspect_capture(store: Store, registry: dict, request_hash: str, capture_index: int):
+    return _invoke(store,registry,{'schemaVersion':1,'operation':'inspect_capture','requestHash':valid_hash(request_hash),'captureIndex':capture_index})
+
+def capture_bundle(store: Store, registry: dict, request_hash: str, capture_index: int):
+    return _invoke(store,registry,{'schemaVersion':1,'operation':'capture_bundle','requestHash':valid_hash(request_hash),'captureIndex':capture_index})
+
 
 def submit_action(store: Store, registry: dict, request_hash: str, selected_action_id: str):
     return _invoke(store, registry, {'schemaVersion':1, 'operation':'submit_action', 'requestHash':valid_hash(request_hash), 'selectedActionId':_id(selected_action_id)})
@@ -424,7 +508,7 @@ def inspect_receipt(store: Store, receipt_hash: str, *, registry=None):
     # Even a VERIFIED cleanup only covers the owner's supported reset classes;
     # it cannot reconcile the wider experiment or clear earlier unsafe outcomes.
     # A stopped trigger watcher likewise proves no capture completion.
-    uncertain = (record['command']['operation'] in ('request_cleanup', 'inspect_cleanup', 'watch_triggers','mob_pov','inspect_mob_pov')
+    uncertain = (record['command']['operation'] in ('request_cleanup', 'inspect_cleanup', 'watch_triggers','mob_pov','inspect_mob_pov','tank_roster','inspect_tank_roster')
                  or record['status'] in ('OUTCOME_UNKNOWN', 'PARTIAL_APPLY', 'REQUESTED', 'ALREADY_RECORDED', 'FAILED')
                  or response is not None and response.get('recordedStatus') in ('ACCEPTED', 'APPLIED'))
     return {'schema_version':1, 'receipt_hash':receipt_hash, 'request_hash':record['request_hash'],

@@ -125,7 +125,7 @@ export async function requestDeclaredCapture({runDir,envelopeHash,captureIndex,n
   const {mkdir,realpath,lstat}=await import('node:fs/promises');
   const path=(await import('node:path')).default;
   const {prepared,control}=await readInstalledControl({runDir,envelopeHash,now});
-  if(prepared.request.visual_rig.mode!=='cardinal-4-snapshot-v1'||
+  if(!['cardinal-4-snapshot-v1','tank-cardinal-4-snapshot-v2'].includes(prepared.request.visual_rig.mode)||
       !prepared.worldRegistration.permissions.includes('CARDINAL_CAPTURE_PAUSE_CAMERA'))throw new Error('OWNER_CAPTURE_NOT_AUTHORIZED');
   integer(captureIndex,0,Math.floor(prepared.grant.maxCaptures/4)-1);
   if(trigger!==null){

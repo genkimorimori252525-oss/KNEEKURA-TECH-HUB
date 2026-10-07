@@ -8,7 +8,7 @@ import { registerBridgeRequest } from '../registration.mjs';
 import { prepareOwnerControl, readPreparedOwnerControl, ownerLaunchEnvironment } from '../owner-prelaunch.mjs';
 import { buildRunSnapshot, writeImmutableRunSnapshot } from '../../core.mjs';
 
-export async function ownerFixture(t, {capture=false,mobPov=false,triggerCapture=null,requestBytesOverride=null,assertionsBytesOverride=null}={}) {
+export async function ownerFixture(t, {capture=false,captureRig='cardinal-4-snapshot-v1',mobPov=false,observation=false,triggerCapture=null,requestBytesOverride=null,assertionsBytesOverride=null}={}) {
   const root = await mkdtemp(path.join(tmpdir(), 'owner-prelaunch-'));
   t.after(() => rm(root, { recursive: true, force: true }));
   const runtimeRoot = path.join(root, 'runtime'); const inputs = path.join(root, 'inputs');
@@ -24,7 +24,7 @@ export async function ownerFixture(t, {capture=false,mobPov=false,triggerCapture
     initial_state: [], actions: [{ action_id: 'wait', operation: 'wait_ticks', ticks: 1 }],
     observation_scopes: [{ kind: 'ENTITY_UUID', subject_id: 'pig', lanes: ['SERVER_ENTITY_STATE'], level: 'L1' }],
     visual_rig: { mode: 'none' }, assertions, budgets: { time_budget_ms: 5000, max_actions: 1, max_captures: 0 } };
-  if(capture){request.visual_rig={mode:'cardinal-4-snapshot-v1',fov:60,viewport:[64,64]};request.budgets.max_captures=4;}
+  if(capture){request.visual_rig={mode:captureRig,fov:60,viewport:[64,64]};request.budgets.max_captures=4;}
   if(mobPov){request.visual_rig={mode:'mob-eye-live-v1',fov:60,viewport:[64,64]};request.budgets.max_captures=capture?1:0;}
   const requestBytes = requestBytesOverride ?? Buffer.from(JSON.stringify(request));
   assert(Buffer.isBuffer(requestBytes));request=JSON.parse(requestBytes);target=request.target;assertions=request.assertions;
@@ -45,9 +45,15 @@ export async function ownerFixture(t, {capture=false,mobPov=false,triggerCapture
     worldRegistration: { schemaVersion: 1, registrationId: 'operator-world', canonicalWorldRoot: world,
       worldName: 'KNEEKURA_DEBUG_WORLD', dimensionId: 'minecraft:overworld', permissions: ['BOUNDED_DIAGNOSTIC_CONTROL'] },
     selection: { grantId: 'grant', leaseId: 'lease', arenaEpoch: 0, expectedArenaRevision: 0, allowedActions: ['wait_ticks'] } };
-  if(request.visual_rig.mode==='cardinal-4-snapshot-v1')operator.worldRegistration.permissions.push('CARDINAL_CAPTURE_PAUSE_CAMERA');
+  if(['cardinal-4-snapshot-v1','tank-cardinal-4-snapshot-v2'].includes(request.visual_rig.mode))operator.worldRegistration.permissions.push('CARDINAL_CAPTURE_PAUSE_CAMERA');
   if(request.visual_rig.mode==='mob-eye-live-v1')operator.worldRegistration.permissions.push('MOB_POV_CAMERA');
   if(triggerCapture!==null)operator.triggerCapture=structuredClone(triggerCapture);
+  if(observation){
+   const recipe={v:1,kind:'tank_recipe',dimension:'minecraft:overworld',origin:{x:0,y:0,z:0},dimensions:{width:16,height:8,depth:16},presentation:{mode:'NATIVE',gridSpacing:1}};
+   const recipeHash=sha256(stableJson(recipe));
+   await writeFile(path.join(world,'kneekura-tank-owner.json'),JSON.stringify({status:'GEOMETRY_VERIFIED',displayMode:'NATIVE',recipeHash,recipe}));
+   operator.worldRegistration.permissions.push('TANK_OBSERVATION_READ');operator.tankObservation={schemaVersion:1,scope:'TANK_OBSERVATION_READ',dimensionId:'minecraft:overworld',min:[0,0,0],max:[16,8,16],recipeHash,maxEntities:4,maxSamples:2};
+  }
   const identity = { debugSessionId: 's', runId: 'r', runSnapshotId: 'snap', processEpoch: 1, handshakeNonce: 'n'.repeat(32) };
   async function select(value = operator) {
     const bytes = Buffer.from(JSON.stringify(value)); await writeFile(path.join(privateRoot, 'operator.json'), bytes);

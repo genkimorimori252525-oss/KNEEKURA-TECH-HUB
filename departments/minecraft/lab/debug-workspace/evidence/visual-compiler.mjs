@@ -41,7 +41,7 @@ export async function canonicalVisualSource({store,sourceObservationId,timelineO
       payload:structuredClone(row.payload)};
   });
   if(Buffer.byteLength(stableJson(timeline))>128*1024)throw new TypeError('TIMELINE_BYTE_LIMIT');
-  const binding={...manifest.identity,captureId:manifest.captureId,subjects:[...manifest.subjects],evidenceCut,
+  const binding={...manifest.identity,...(manifest.rig==='tank-cardinal-4-snapshot-v2'?{rig:manifest.rig,tankObservationHash:manifest.tankObservationHash}:{}),captureId:manifest.captureId,subjects:[...manifest.subjects],evidenceCut,
     sourceObservationId,canonicalManifestHash:sha256(stableJson(manifest)),controlledStateHash:manifest.controlledStateHash,
     controlledStateHashSemantics:'PRODUCER_BYTES_NOT_REENCODED',
     stateWindow:{serverTickStart:manifest.frames[0].serverTick,serverTickEnd:manifest.frames.at(-1).serverTick,

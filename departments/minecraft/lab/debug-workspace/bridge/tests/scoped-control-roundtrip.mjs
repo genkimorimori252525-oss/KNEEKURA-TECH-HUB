@@ -19,7 +19,7 @@ const python=process.env.KNEEKURA_PYTHON??'python';
 const temporary=await mkdtemp(path.join(os.tmpdir(),'lab-scoped-roundtrip-')),cleanup=[];
 
 // Independently traverse actual static and literal dynamic imports. The paired
-// Python test requires this closure to equal its fixed 31-file allowlist.
+// Python test requires this closure to equal its fixed 36-file allowlist.
 async function moduleClosure(relative='debug-workspace/bridge/owner-control-cli.mjs',files={}){
  if(Object.hasOwn(files,relative))return files;
  assert(!relative.startsWith('../')&&!path.isAbsolute(relative));
@@ -90,7 +90,7 @@ if mode=='prepare':
 else:
     metadata=json.loads((root/'owner-context.json').read_text());req=json.loads((root/'request.json').read_text())
     h=storage.key_for(req);owner_file=Path(metadata['ownerFile'])
-    assert set(metadata['moduleHashes'])==set(experiment_control.MODULES) and len(experiment_control.MODULES)==31
+    assert set(metadata['moduleHashes'])==set(experiment_control.MODULES) and len(experiment_control.MODULES)==36
     registry={'schema_version':1,'enabled':True,'backend':'kneekura.lab.scoped-control.v1','workspace':str(lab),
       'source_revision':metadata['sourceRevision'],'executable':str(node),'executable_hash':storage.digest(node.read_bytes()),
       'module_hashes':metadata['moduleHashes'],'owner_file':str(owner_file),'owner_hash':storage.digest(owner_file.read_bytes()),'timeout_seconds':10}
@@ -183,7 +183,7 @@ else:
         print(json.dumps({'staleOwner':stale['status'],'owner':owner['status'],'action':submitted['status'],'inspection':pending['status'],
           'capture':captured['status'],'freshStoreReplay':repeated['status'],'repeatedCapture':repeated_capture['status'],
           'triggerWatch':watched['status'],'triggerWindow':window['outcome'],'repeatedWatch':repeated_watch['status'],
-          'cleanup':cleanup_requested['status'],'cleanupInspection':cleanup_inspected['status'],'repeatedCleanup':repeated_cleanup['status'],'moduleCount':31}))
+          'cleanup':cleanup_requested['status'],'cleanupInspection':cleanup_inspected['status'],'repeatedCleanup':repeated_cleanup['status'],'moduleCount':36}))
     else:
         exported=command('experiment','export-result',*options,'--observation-id','fixture:state:1','--observation-id','fixture:trigger:1','--timeline-observation-id','fixture:state:1','--timeline-observation-id','fixture:trigger:1')
         assert exported['status']=='EXPORTED',exported
@@ -237,7 +237,7 @@ try{
  await writeFile(ownerFile,stableJson({schemaVersion:1,runtimeRoot:f.runtimeRoot,inputRoot:f.inputs,
   run:{runDir:f.runDir,identity,ownerEnvelopeHash:f.prepared.envelopeHash}}),{mode:0o600});
  const source=spawnSync('git',['rev-parse','HEAD'],{cwd:lab,encoding:'utf8'});assert.equal(source.status,0);
- const moduleHashes=await moduleClosure();assert.equal(Object.keys(moduleHashes).length,31);
+ const moduleHashes=await moduleClosure();assert.equal(Object.keys(moduleHashes).length,36);
  await writeFile(path.join(temporary,'owner-context.json'),stableJson({ownerFile,sourceRevision:source.stdout.trim(),moduleHashes,triggerCaptureKey:captureSlotKey(f.prepared.grant,1)}));
  await writeFile(path.join(temporary,'trigger-row.json'),stableJson({v:1,kind:'observation',observationId:'fixture:trigger:1',
   ...Object.fromEntries(['debugSessionId','runId','runSnapshotId','processEpoch'].map(k=>[k,f.identity[k]])),arenaEpoch:0,resourceEpoch:0,

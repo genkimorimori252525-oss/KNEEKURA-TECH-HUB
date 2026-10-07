@@ -20,10 +20,11 @@ def add_commands(commands):
         if name == 'reconcile-unknown': p.add_argument('--action-id', required=True)
     sub.add_parser('inspect-control').add_argument('--registry', required=True)
     sub.add_parser('inspect-control-receipt').add_argument('--receipt-hash', required=True)
-    for name in ('inspect-owner', 'submit-action', 'request-capture', 'inspect-action', 'request-cleanup', 'inspect-cleanup', 'watch-triggers', 'export-result', 'import-export','mob-pov','inspect-mob-pov'):
+    for name in ('inspect-owner', 'submit-action', 'request-capture', 'inspect-action', 'request-cleanup', 'inspect-cleanup', 'watch-triggers', 'export-result', 'import-export','mob-pov','inspect-mob-pov','tank-roster','inspect-tank-roster','camera-plan','inspect-capture','capture-bundle'):
         p = sub.add_parser(name); p.add_argument('--registry', required=True); p.add_argument('--request-hash', required=True)
         if name in ('submit-action', 'inspect-action'): p.add_argument('--action-id', required=True)
-        if name == 'request-capture': p.add_argument('--capture-index', required=True, type=int)
+        if name in ('tank-roster','inspect-tank-roster'): p.add_argument('--sample-index',required=True,type=int)
+        if name in ('request-capture','inspect-capture','capture-bundle'): p.add_argument('--capture-index', required=True, type=int)
         if name in ('mob-pov','inspect-mob-pov'): p.add_argument('--command-index',required=True,type=int)
         if name == 'mob-pov':
             p.add_argument('--camera-operation',required=True,choices=('attach','snapshot','return'))
@@ -67,13 +68,18 @@ def dispatch(args, store, read_json):
         if args.action == 'inspect-control-receipt':
             from .experiment_control import inspect_receipt
             return inspect_receipt(store, args.receipt_hash)
-        if args.action in ('inspect-control', 'inspect-owner', 'submit-action', 'request-capture', 'inspect-action', 'request-cleanup', 'inspect-cleanup', 'watch-triggers', 'export-result', 'import-export','mob-pov','inspect-mob-pov'):
+        if args.action in ('inspect-control', 'inspect-owner', 'submit-action', 'request-capture', 'inspect-action', 'request-cleanup', 'inspect-cleanup', 'watch-triggers', 'export-result', 'import-export','mob-pov','inspect-mob-pov','tank-roster','inspect-tank-roster','camera-plan','inspect-capture','capture-bundle'):
             from . import experiment_control
             registry = experiment_adapter.read_registry_file(args.registry)
             if args.action == 'inspect-control': return experiment_control.inspect_registry(registry)
             if args.action == 'inspect-owner': return experiment_control.inspect_owner(store, registry, args.request_hash)
             if args.action == 'mob-pov': return experiment_control.mob_pov(store,registry,args.request_hash,args.command_index,args.camera_operation,subject_uuid=args.subject_uuid,duration_ms=args.duration_ms)
             if args.action == 'inspect-mob-pov': return experiment_control.inspect_mob_pov(store,registry,args.request_hash,args.command_index)
+            if args.action == 'camera-plan': return experiment_control.camera_plan(store,registry,args.request_hash)
+            if args.action == 'inspect-capture': return experiment_control.inspect_capture(store,registry,args.request_hash,args.capture_index)
+            if args.action == 'capture-bundle': return experiment_control.capture_bundle(store,registry,args.request_hash,args.capture_index)
+            if args.action == 'tank-roster': return experiment_control.tank_roster(store,registry,args.request_hash,args.sample_index)
+            if args.action == 'inspect-tank-roster': return experiment_control.inspect_tank_roster(store,registry,args.request_hash,args.sample_index)
             if args.action == 'submit-action': return experiment_control.submit_action(store, registry, args.request_hash, args.action_id)
             if args.action == 'request-capture': return experiment_control.request_capture(store, registry, args.request_hash, args.capture_index)
             if args.action == 'inspect-action': return experiment_control.inspect_action(store, registry, args.request_hash, args.action_id)

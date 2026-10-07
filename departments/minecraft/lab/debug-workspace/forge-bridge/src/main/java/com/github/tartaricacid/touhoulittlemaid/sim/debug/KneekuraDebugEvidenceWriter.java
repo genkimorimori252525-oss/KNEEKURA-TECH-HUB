@@ -3,6 +3,7 @@ package com.github.tartaricacid.touhoulittlemaid.sim.debug;
 import org.slf4j.Logger;
 import com.mojang.logging.LogUtils;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
 import javax.annotation.Nullable;
@@ -552,11 +553,17 @@ public final class KneekuraDebugEvidenceWriter {
         JsonObject completeness = new JsonObject();
         completeness.addProperty("status", "COMPLETE");
         completeness.addProperty("complete", true);
+        if ("TANK_ROOM_ROSTER".equals(lane)) {
+            boolean complete = "COMPLETE".equals(payload.get("status").getAsString());
+            completeness.addProperty("status", complete ? "COMPLETE" : "PARTIAL");
+            completeness.addProperty("complete", complete);
+        }
         row.add("completeness", completeness);
 
         row.add("payload", payload);
 
-        String line = GSON.toJson(row);
+        String line = "TANK_ROOM_ROSTER".equals(lane)
+                ? new GsonBuilder().serializeNulls().create().toJson(row) : GSON.toJson(row);
         int bytes = line.getBytes(StandardCharsets.UTF_8).length;
         if (tankStatus) {
             if (bytes > 8192 || QUEUE.remainingCapacity() == 0) { tankStatusSuppressedTotal++; return; }

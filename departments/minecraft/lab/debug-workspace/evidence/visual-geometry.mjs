@@ -33,9 +33,10 @@ export function blit(destination,source,x,y) {
   for(let row=0;row<source.height;row++) destination.rgba.set(source.rgba.subarray(row*source.width*4,(row+1)*source.width*4),((y+row)*destination.width+x)*4);
 }
 export function validateFacts(facts,subjects) {
-  exactKeys(facts,['dimension','gameTime','arenaBounds','subjects'],'STRUCTURED_STATE');
+  exactKeys(facts,['dimension','gameTime','arenaBounds','subjects',...(Object.hasOwn(facts,'observationBounds')?['observationBounds']:[])],'STRUCTURED_STATE');
   if(typeof facts.dimension!=='string'||!/^\w+:[a-z0-9_./-]+$/.test(facts.dimension)||!Number.isSafeInteger(facts.gameTime)||facts.gameTime<0) throw new TypeError('INVALID_STRUCTURED_STATE');
   const vector=(v,n)=>{if(!Array.isArray(v)||v.length!==n||v.some(x=>!Number.isFinite(x)||Math.abs(x)>30000000))throw new TypeError('INVALID_STRUCTURED_VECTOR');};
+  if(facts.observationBounds){exactKeys(facts.observationBounds,['min','max'],'OBSERVATION_BOUNDS');vector(facts.observationBounds.min,3);vector(facts.observationBounds.max,3);if(facts.observationBounds.min.some((n,i)=>facts.observationBounds.max[i]<=n||facts.observationBounds.max[i]-n>64))throw new TypeError('INVALID_OBSERVATION_BOUNDS');}
   exactKeys(facts.arenaBounds,['min','max'],'ARENA_BOUNDS');
   vector(facts.arenaBounds.min,3);vector(facts.arenaBounds.max,3);
   if(facts.arenaBounds.min.some((v,i)=>facts.arenaBounds.max[i]<=v))throw new TypeError('INVALID_ARENA_BOUNDS');
@@ -77,7 +78,7 @@ export function annotatedImage(image,frame,facts,labels) {
   return {image:out,annotations};
 }
 export function topDownSvg(facts,labels) {
-  const b=facts.arenaBounds; const scale=440/Math.max(b.max[0]-b.min[0],b.max[2]-b.min[2]);
+  const b=facts.observationBounds??facts.arenaBounds; const scale=440/Math.max(b.max[0]-b.min[0],b.max[2]-b.min[2]);
   const x=v=>40+(v-b.min[0])*scale, z=v=>40+(v-b.min[2])*scale;
   const geometry=facts.subjects.map(s=>{
     const l=labels.find(l=>l.uuid===s.uuid);const px=x(s.position[0]),pz=z(s.position[2]);

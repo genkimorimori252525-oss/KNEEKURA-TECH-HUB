@@ -18,16 +18,24 @@ public final class KneekuraDebugCaptureOwner implements KneekuraDebugCardinalCap
                                KneekuraDebugArenaRuntime.CaptureReservation token) {}
     private final KneekuraDebugArenaOwnerGrant grant;
     private final KneekuraDebugCapturePolicy visualPolicy;
+    private final KneekuraDebugTankObservation observation;
+    private final String observationHash;
     private final Map<String, Reservation> reservations = new HashMap<>();
     public KneekuraDebugCaptureOwner(KneekuraDebugArenaOwnerGrant grant, KneekuraDebugCapturePolicy visualPolicy) {
+        this(grant,visualPolicy,null,null);
+    }
+    KneekuraDebugCaptureOwner(KneekuraDebugArenaOwnerGrant grant,KneekuraDebugCapturePolicy visualPolicy,KneekuraDebugTankObservation observation,String observationHash){
         this.grant = java.util.Objects.requireNonNull(grant);
         this.visualPolicy = java.util.Objects.requireNonNull(visualPolicy);
+        this.observation=observation;this.observationHash=observationHash;
     }
     public void assertAuthorized(KneekuraDebugEnv.Config config, KneekuraDebugCaptureSession.Request request) {
         visualPolicy.validate(request); // Before reservation or any presentation mutation.
         try {
             var id = request.identity(); var expected = KneekuraDebugArenaRuntime.snapshotOwner();
             var owner = grant.identity(); var bounds = grant.arena().bounds();
+            if(KneekuraDebugCaptureSession.TANK_RIG.equals(request.rig())&&(observation==null||!request.tankObservationHash().equals(observationHash)||
+                !request.observationMin().equals(List.of(observation.minX(),observation.minY(),observation.minZ()))||!request.observationMax().equals(List.of(observation.maxX(),observation.maxY(),observation.maxZ()))))throw new IOException("CAPTURE_OBSERVATION_SCOPE_MISMATCH");
             if (!expected.identity().equals(owner) || !config.handshakeNonce().equals(owner.handshakeNonce()) ||
                     !id.debugSessionId().equals(owner.debugSessionId()) || !id.runId().equals(owner.runId()) ||
                     !id.runSnapshotId().equals(owner.runSnapshotId()) || id.processEpoch() != owner.processEpoch() ||
@@ -60,6 +68,12 @@ public final class KneekuraDebugCaptureOwner implements KneekuraDebugCardinalCap
     }
     public ServerLevel level(MinecraftServer server, KneekuraDebugCaptureSession.Request request) {
         assertIdleArena(request);
-        return server.getLevel(ResourceKey.create(Registries.DIMENSION, new ResourceLocation(grant.dimensionId())));
+        ServerLevel level=server.getLevel(ResourceKey.create(Registries.DIMENSION, new ResourceLocation(grant.dimensionId())));
+        if(KneekuraDebugCaptureSession.TANK_RIG.equals(request.rig()))try{
+            observation.verifySaved(KneekuraDebugOwnerFiles.json(server.getWorldPath(net.minecraft.world.level.storage.LevelResource.ROOT).toRealPath(),"kneekura-tank-owner.json",null,65536));
+            for(String view:KneekuraDebugCaptureSession.VIEWS){var pose=request.pose(view);var block=net.minecraft.core.BlockPos.containing(pose.get(0),pose.get(1),pose.get(2));
+                if(level==null||!level.getChunkSource().hasChunk(Math.floorDiv(block.getX(),16),Math.floorDiv(block.getZ(),16))||!level.getBlockState(block).getCollisionShape(level,block).isEmpty())throw new IOException("CAPTURE_OBSERVATION_CAMERA_BLOCKED_OR_UNLOADED");}
+        }catch(IOException e){throw new IllegalStateException("CAPTURE_OBSERVATION_UNAVAILABLE",e);}
+        return level;
     }
 }

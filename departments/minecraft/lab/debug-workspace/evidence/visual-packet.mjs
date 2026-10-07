@@ -18,7 +18,7 @@ export function validatePacket(input) {
  const {packetId,...body}=packet;hashId(packetId);
  require(sha256(stableJson(body))===packetId&&packet.schemaVersion===1&&packet.kind==='ai_visual_observation_packet','AI_PACKET_INTEGRITY');
  const b=packet.binding;
- exactKeys(b,[...IDENTITY_KEYS,'captureId','subjects','evidenceCut','sourceObservationId','canonicalManifestHash','controlledStateHash','controlledStateHashSemantics','stateWindow'],'PACKET_BINDING');
+ exactKeys(b,[...IDENTITY_KEYS,'captureId','subjects','evidenceCut','sourceObservationId','canonicalManifestHash','controlledStateHash','controlledStateHashSemantics','stateWindow',...(b.rig==='tank-cardinal-4-snapshot-v2'?['rig','tankObservationHash']:[])],'PACKET_BINDING');
  const identity=Object.fromEntries(IDENTITY_KEYS.map(key=>[key,b[key]]));validateVisualIdentity(identity);identifier(b.captureId);identifier(b.sourceObservationId);
  for(const key of ['canonicalManifestHash','controlledStateHash'])hashId(b[key]);
  require(b.controlledStateHashSemantics==='PRODUCER_BYTES_NOT_REENCODED','PACKET_HASH_SEMANTICS');
@@ -35,7 +35,7 @@ export function validatePacket(input) {
   hashId(producerFrameObservationHash);return validateRawFrame(raw);
  });
  exactKeys(packet.capture,['status','restoration','restorationProof','perturbations','invalidatedAssertions','barrierDurationMs','captureDurationNanos'],'PACKET_CAPTURE');
- const m=validateVisualManifest({schemaVersion:1,kind:'cardinal4_capture_manifest',captureId:b.captureId,rig:'cardinal-4-snapshot-v1',
+ const m=validateVisualManifest({schemaVersion:1,kind:'cardinal4_capture_manifest',captureId:b.captureId,rig:b.rig??'cardinal-4-snapshot-v1',...(b.rig==='tank-cardinal-4-snapshot-v2'?{tankObservationHash:b.tankObservationHash}:{}),
   identity,subjects:b.subjects,controlledStateHash:b.controlledStateHash,sameFrame:packet.sameFrame,
   result:{status:packet.capture.status,sameFrame:packet.sameFrame,restoration:packet.capture.restoration,perturbations:packet.capture.perturbations,
    invalidatedAssertions:packet.capture.invalidatedAssertions,frames:frames.map((f,i)=>({view:f.view,status:'PRESENT',renderFrame:f.renderFrame,imageHash:f.imageHash,observationHash:packet.rawViews[i].producerFrameObservationHash})),gaps:[]},

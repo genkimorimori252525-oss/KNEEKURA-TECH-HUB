@@ -305,6 +305,7 @@ public final class KneekuraDebugCardinalCapture {
                 JsonObject bounds = new JsonObject();
                 bounds.add("min", GSON.toJsonTree(request.arenaMin())); bounds.add("max", GSON.toJsonTree(request.arenaMax()));
                 facts.add("arenaBounds", bounds);
+                if(KneekuraDebugCaptureSession.TANK_RIG.equals(request.rig())){JsonObject observation=new JsonObject();observation.add("min",GSON.toJsonTree(request.observationMin()));observation.add("max",GSON.toJsonTree(request.observationMax()));facts.add("observationBounds",observation);}
                 return new ServerState(server.getTickCount(), serverLevel.getGameTime(),
                         hash(GSON.toJson(facts).getBytes(StandardCharsets.UTF_8)), facts);
             }, request.barrierBudgetMs());
@@ -312,6 +313,7 @@ public final class KneekuraDebugCardinalCapture {
         void placeNext() {
             if (protocol.nextViewIndex() >= 4) return;
             List<Double> pose = request.pose(KneekuraDebugCaptureSession.VIEWS.get(protocol.nextViewIndex()));
+            if(KneekuraDebugCaptureSession.TANK_RIG.equals(request.rig())){var block=net.minecraft.core.BlockPos.containing(pose.get(0),pose.get(1),pose.get(2));if(!level.hasChunkAt(block)||!level.getBlockState(block).getCollisionShape(level,block).isEmpty())throw new IllegalStateException("CAPTURE_CAMERA_BLOCKED_OR_UNLOADED");}
             camera.moveTo(pose.get(0), pose.get(1) - eyeOffset, pose.get(2),
                     pose.get(3).floatValue(), pose.get(4).floatValue());
             // Camera.setup reads LivingEntity.getViewYRot, which interpolates
@@ -418,7 +420,8 @@ public final class KneekuraDebugCardinalCapture {
         JsonObject common(String kind) {
             JsonObject out = new JsonObject();
             out.addProperty("schemaVersion", 1); out.addProperty("kind", kind);
-            out.addProperty("captureId", request.captureId()); out.addProperty("rig", KneekuraDebugCaptureSession.RIG);
+            if(KneekuraDebugCaptureSession.TANK_RIG.equals(request.rig()))out.addProperty("tankObservationHash",request.tankObservationHash());
+            out.addProperty("captureId", request.captureId()); out.addProperty("rig", request.rig());
             out.add("identity", GSON.toJsonTree(request.identity()));
             out.add("subjects", GSON.toJsonTree(request.subjects()));
             out.addProperty("controlledStateHash", state == null ? null : state.hash());

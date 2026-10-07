@@ -190,7 +190,7 @@ export function validateVisualExperimentRequest(input) {
     }
     const rig = r.visual_rig;
     require(object(rig), 'INVALID_VISUAL_RIG');
-    const visual = rig.mode === 'cardinal-4-snapshot-v1';
+    const visual = ['cardinal-4-snapshot-v1','tank-cardinal-4-snapshot-v2'].includes(rig.mode);
     const mobPov = rig.mode === 'mob-eye-live-v1';
     if (visual || mobPov) {
       exactKeys(rig, ['mode', 'fov', 'viewport'], 'VISUAL_RIG');
