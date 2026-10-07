@@ -83,6 +83,8 @@ For PR94/96 use `node debug-workspace/cli.mjs tank-status --arena-epoch N --conf
 
 **Fixture subjects and preservation:** NaturalGhast preparation now excludes exact saved seed Reimu roots in its bounded room; Reimu is not a mandatory `TANK_CORE` resident. Explicit Reimu-subject MOB_POV experiments remain intentional (AF-0014). The2026-10-08 user observation requires a broad persistent boss-owned region and physical swimming, superseding camera-following assumptions; old static-player PASS is not acceptance of that corrected behavior (AF-0015). Inspect NBT only in a disposable copy: Minecraft `RegionFile` can write padding even during inspection. Original preservation requires byte hashes/counts, not semantic readback (AF-0016).
 
+**Persistent-region follow-up:** AF-0015 now records implemented40×16×40 region ownership and sustained physical swimming, with separate static-player native acceptance in a52×24×52 private room. The user's manual camera/movement/visual inspection remains pending. Manual viewing uses no observer or automatic recording; do not label it canonical acceptance. Read the target's `docs/COMBAT-REGION-SWIMMING-VERIFICATION.md` and preserve historical v0.5 results.
+
 **Danmaku, working directory `departments/minecraft/danmaku-preview` at PR97:**
 
 ```powershell
