@@ -81,6 +81,8 @@ For PR94/96 use `node debug-workspace/cli.mjs tank-status --arena-epoch N --conf
 
 **Native flight fixture:** [AF-0012](AI-FEEDBACK.md#af-0012--bounded-flight-fixture-and-acceptance-repairs) records NaturalGhast's scoped static Player acquisition/flight acceptance in a fresh56×16×56 room. Offline preparation, actual world baseline, Player observation and the small action grant are separate. One registered seal-cell opening activates observation; 600 read-only server samples and one explicit raw PNG, no target setter, fake-player dependency or automatic recording. The target's `docs/FLIGHT-MOBILITY-VERIFICATION.md` and `tools/tank/run-flight-tank.mjs` hold exact source/host/runtime identities and limitations. Journal completion does not by itself prove owner idle/next-action readiness. Keep supported block palettes and class anchors; unknown filesystem errors remain unknown (AF-0013).
 
+**Fixture subjects and preservation:** NaturalGhast preparation now excludes exact saved seed Reimu roots in its bounded room; Reimu is not a mandatory `TANK_CORE` resident. Explicit Reimu-subject MOB_POV experiments remain intentional (AF-0014). The2026-10-08 user observation requires a broad persistent boss-owned region and physical swimming, superseding camera-following assumptions; old static-player PASS is not acceptance of that corrected behavior (AF-0015). Inspect NBT only in a disposable copy: Minecraft `RegionFile` can write padding even during inspection. Original preservation requires byte hashes/counts, not semantic readback (AF-0016).
+
 **Danmaku, working directory `departments/minecraft/danmaku-preview` at PR97:**
 
 ```powershell
