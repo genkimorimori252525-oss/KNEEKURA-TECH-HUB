@@ -36,7 +36,16 @@ final class KneekuraDebugOwnerFiles {
   Files.move(temp,target,StandardCopyOption.ATOMIC_MOVE,StandardCopyOption.REPLACE_EXISTING);
   String published=sha256(bytes);read(root,name,published,65536);return published;
  }
- static void writeStatus(Path root,JsonObject body)throws IOException{Path target=writablePath(root,"control/owner-status.json"),temp=writablePath(root,"control/owner-status.tmp-"+UUID.randomUUID());write(temp,body);try{Files.move(temp,target,StandardCopyOption.ATOMIC_MOVE,StandardCopyOption.REPLACE_EXISTING);}catch(AtomicMoveNotSupportedException e){Files.move(temp,target,StandardCopyOption.REPLACE_EXISTING);}finally{Files.deleteIfExists(temp);}}
+ static void writeStatus(Path root,JsonObject body)throws IOException{if(!prepareStatus(root,body).publish())throw new AccessDeniedException("owner-status.json");}
+ /** Force once; revalidate paths/content each attempt. Never truncate or use a non-atomic fallback. */
+ static KneekuraDebugOwnerStatus.Publication prepareStatus(Path root,JsonObject body)throws IOException{
+  String name="control/owner-status.tmp-"+UUID.randomUUID();Path temp=writablePath(root,name);writablePath(root,"control/owner-status.json");
+  byte[] bytes=(KneekuraDebugActionJournal.canonical(body)+"\n").getBytes(StandardCharsets.UTF_8);if(bytes.length>65536)throw new IOException("OWNER_PUBLICATION_SIZE_LIMIT");
+  write(temp,body);String hash=sha256(bytes);
+  return ()->{read(root,name,hash,65536);Path target=writablePath(root,"control/owner-status.json");
+   try{Files.move(temp,target,StandardCopyOption.ATOMIC_MOVE,StandardCopyOption.REPLACE_EXISTING);}catch(AccessDeniedException denied){return false;}
+   read(root,"control/owner-status.json",hash,65536);return true;};
+ }
  private static Path writablePath(Path root,String relative)throws IOException{
   if(!root.isAbsolute()||!root.normalize().equals(root.toRealPath()))throw new IOException("UNSAFE_OWNER_ROOT");Path rel=Path.of(relative);if(rel.isAbsolute()||rel.getNameCount()>8||relative.contains("\\")||Arrays.stream(relative.split("/",-1)).anyMatch(s->s.isEmpty()||s.equals(".")||s.equals("..")))throw new IOException("UNSAFE_OWNER_PATH");
   Path parent=root;for(int i=0;i<rel.getNameCount()-1;i++){parent=parent.resolve(rel.getName(i));if(!Files.exists(parent,LinkOption.NOFOLLOW_LINKS)){try{Files.createDirectory(parent);}catch(FileAlreadyExistsException raced){}}if(Files.isSymbolicLink(parent)||!Files.isDirectory(parent,LinkOption.NOFOLLOW_LINKS)||!parent.toRealPath().equals(parent))throw new IOException("OWNER_OUTPUT_PARENT_UNSAFE");}

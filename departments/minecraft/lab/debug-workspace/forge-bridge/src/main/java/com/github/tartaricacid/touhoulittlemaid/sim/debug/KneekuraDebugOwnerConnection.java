@@ -31,21 +31,27 @@ public final class KneekuraDebugOwnerConnection {
   if(exact.config!=config)return false;
   if(exact.shutdownDetach==null){
    KneekuraDebugCardinalCapture.uninstall();KneekuraDebugMobPovCamera.uninstall();CompletableFuture<Void> detached=new CompletableFuture<>();exact.shutdownDetach=detached;
-   exact.server.execute(()->{try{exact.close("OWNER_SHUTDOWN_REQUESTED",false);detached.complete(null);}catch(Throwable error){detached.completeExceptionally(error);}});
+   exact.server.execute(()->{try{exact.close("OWNER_SHUTDOWN_REQUESTED",false);exact.settleShutdown();}catch(Throwable error){detached.completeExceptionally(error);}});
   }
   return KneekuraDebugOwnerLifetime.shutdownReady(exact.shutdownDetach.isDone(),exact.shutdownDetach.isCompletedExceptionally(),KneekuraDebugCardinalCapture.quiescent()&&KneekuraDebugMobPovCamera.quiescent());
  }
  private static final class Session {
   final KneekuraDebugEnv.Config config;final MinecraftServer server;final Class<?> bootstrap;final KneekuraDebugOwnerLifetime life=new KneekuraDebugOwnerLifetime();
+  final KneekuraDebugOwnerStatus statusPublication;
   KneekuraDebugOwnerInputs input;KneekuraDebugScopedOwnerGate gate;ServerLevel level;String installedHash;String lastError;int nextAction;boolean cleanupUsed,failureDiagnosticAttempted;KneekuraDebugOwnerTriggers.ExitDetector triggerSource;
   final Set<Integer> usedCaptures=new HashSet<>();final Set<String> usedActions=new HashSet<>();String pendingAction;
   KneekuraDebugTankRotationController rotation;KneekuraDebugForgeTankRotationBackend rotationBackend;
   KneekuraDebugMobPovOwner mobPov;
   KneekuraDebugTankRosterOwner tankRoster;
   volatile CompletableFuture<Void> shutdownDetach;CompletableFuture<Void> captureInstall;CompletableFuture<KneekuraDebugCardinalCapture.OwnedCompletion> captureResult;Path captureDirectory;JsonObject captureMarker;long captureStartedNanos;long installationStartedNanos;long lastStatusNanos;
-  Session(KneekuraDebugEnv.Config config,MinecraftServer server,Class<?> bootstrap){this.config=config;this.server=server;this.bootstrap=bootstrap;}
+  Session(KneekuraDebugEnv.Config config,MinecraftServer server,Class<?> bootstrap){this.config=config;this.server=server;this.bootstrap=bootstrap;statusPublication=new KneekuraDebugOwnerStatus(config.runDir());}
   void tick(long tick)throws IOException{
-   if(Files.exists(config.shutdownRequestFile(),LinkOption.NOFOLLOW_LINKS)){close("OWNER_SHUTDOWN_REQUESTED",false);return;}
+   if(Files.exists(config.shutdownRequestFile(),LinkOption.NOFOLLOW_LINKS)){
+    if(life.phase()==KneekuraDebugOwnerLifetime.Phase.CLOSED||life.phase()==KneekuraDebugOwnerLifetime.Phase.BLOCKED||life.phase()==KneekuraDebugOwnerLifetime.Phase.UNKNOWN)advanceStatus();
+    else close("OWNER_SHUTDOWN_REQUESTED",false);
+    settleShutdown();return;
+   }
+   if(life.phase()==KneekuraDebugOwnerLifetime.Phase.CLOSED||life.phase()==KneekuraDebugOwnerLifetime.Phase.BLOCKED||life.phase()==KneekuraDebugOwnerLifetime.Phase.UNKNOWN){advanceStatus();settleShutdown();return;}
    if(life.phase()==KneekuraDebugOwnerLifetime.Phase.WAITING){
     if(!Files.isRegularFile(config.runDir().resolve("run-snapshot.json"),LinkOption.NOFOLLOW_LINKS))return;
     if(!life.reserve(config.ownerSetup().sha256()))return;
@@ -65,9 +71,17 @@ public final class KneekuraDebugOwnerConnection {
       rotationBackend.tick(tick);var outcome=rotation.onTick(tick);
       if(outcome.phase()==KneekuraDebugTankRotationController.Phase.VERIFIED){rotationBackend.complete(outcome);close("TANK_ROTATION_VERIFIED_FRESH_RUN_REQUIRED",false);}
       else if(outcome.phase()==KneekuraDebugTankRotationController.Phase.OUTCOME_UNKNOWN)close("TANK_ROTATION_OUTCOME_UNKNOWN",true);
+      else if(statusPublication.pending())statusPublication.tickActive(System::nanoTime,KneekuraDebugArenaRuntime.snapshotOwner().unsafe(),KneekuraDebugArenaRuntime::revalidateStatusOwner);
       else writeStatus(false);
       return; // Maintenance never dispatches ordinary actions, cleanup, triggers or captures.
     }
+    if(statusPublication.pending()){
+     // The authoritative tick still checks lease expiry and finishes pending arena work.
+     // Already-dispatched capture restoration continues; new roster/camera/action requests wait.
+     var boundary=KneekuraDebugArenaRuntime.snapshotOwner();failureStage="STATUS";
+     statusPublication.tickActive(System::nanoTime,boundary.unsafe(),()->{completeCapture();if(mobPov!=null)mobPov.maintain();KneekuraDebugArenaRuntime.revalidateStatusOwner();});return;
+    }
+    if(!statusPublication.dispatchAllowed())return;
     if(pendingAction!=null){JsonObject stored=storedAction(pendingAction);var recorded=new KneekuraDebugActionJournal(config.runDir()).lookup(stored);
       if(recorded.equals("VERIFIED")){nextAction++;pendingAction=null;}else if(!recorded.equals("OUTCOME_UNKNOWN")){pendingAction=null;lastError="ACTION_TERMINAL_"+recorded;}
       else if(KneekuraDebugArenaRuntime.snapshotOwner().unsafe()){pendingAction=null;lastError="ACTION_OUTCOME_UNKNOWN";}
@@ -89,6 +103,17 @@ public final class KneekuraDebugOwnerConnection {
   void recordFailure(String stage,Throwable error){
    if(failureDiagnosticAttempted)return;failureDiagnosticAttempted=true;
    KneekuraDebugOwnerFailure.capture(stage,error,diagnostic->{JsonObject row=new JsonObject();row.addProperty("schemaVersion",1);row.addProperty("status","OWNER_FAILURE_DIAGNOSTIC_ONLY");row.addProperty("diagnostic",diagnostic);KneekuraDebugOwnerFiles.writeNew(config.runDir(),"control/owner-failure.json",row);});
+  }
+  void advanceStatus(){
+   if(statusPublication.failed())return;
+   try{statusPublication.tick(System.nanoTime());}
+   catch(IOException error){recordFailure("STATUS",error);lastError=reason(error);try{close(lastError,true);}catch(IOException ignored){}life.unknown();}
+   settleShutdown();
+  }
+  void settleShutdown(){
+   if(shutdownDetach==null||shutdownDetach.isDone())return;
+   if(statusPublication.failed())shutdownDetach.completeExceptionally(new IOException("STATUS_PUBLICATION_OUTCOME_UNKNOWN"));
+   else if(statusPublication.terminalPublished())shutdownDetach.complete(null);
   }
   void install()throws IOException{
    input=KneekuraDebugOwnerInputs.load(config);level=server.getLevel(ResourceKey.create(Registries.DIMENSION,ResourceLocation.tryParse(input.grant().dimensionId())));if(level==null)throw new IOException("OWNER_DIMENSION_NOT_LOADED");
@@ -175,7 +200,7 @@ public final class KneekuraDebugOwnerConnection {
    if(rotation!=null){var r=rotation.snapshot();b.addProperty("tankRotationPhase",life.phase()==KneekuraDebugOwnerLifetime.Phase.UNKNOWN?"OUTCOME_UNKNOWN":r.phase().name());b.addProperty("nextTankEpoch",r.nextEpoch());
     if(life.phase()==KneekuraDebugOwnerLifetime.Phase.ACTIVE){status="TANK_ROTATION_IN_PROGRESS";idle=false;unsafe=true;}}
    if(mobPov!=null)b.add("mobPov",mobPov.status());
-   b.addProperty("status",status);b.addProperty("idle",idle);b.addProperty("unsafe",unsafe);JsonArray actions=input==null?new JsonArray():input.actions();b.addProperty("nextActionId",nextAction<actions.size()?KneekuraDebugOwnerInputs.t(actions.get(nextAction).getAsJsonObject(),"action_id"):null);b.addProperty("error",lastError);KneekuraDebugOwnerFiles.writeStatus(config.runDir(),b);lastStatusNanos=now;
+   b.addProperty("status",status);b.addProperty("idle",idle);b.addProperty("unsafe",unsafe);JsonArray actions=input==null?new JsonArray():input.actions();b.addProperty("nextActionId",nextAction<actions.size()?KneekuraDebugOwnerInputs.t(actions.get(nextAction).getAsJsonObject(),"action_id"):null);b.addProperty("error",lastError);statusPublication.submit(b,life.phase()!=KneekuraDebugOwnerLifetime.Phase.ACTIVE,now);lastStatusNanos=now;
   }
   void close(String reason,boolean failed)throws IOException{
    if(life.phase()==KneekuraDebugOwnerLifetime.Phase.CLOSED||life.phase()==KneekuraDebugOwnerLifetime.Phase.BLOCKED||life.phase()==KneekuraDebugOwnerLifetime.Phase.UNKNOWN)return;
@@ -189,7 +214,7 @@ public final class KneekuraDebugOwnerConnection {
    if(tankRoster!=null)try{tankRoster.close();}catch(Exception error){lastError=reason(error);failed=true;}
    if(captureInstall!=null&&!captureInstall.isDone())captureInstall.completeExceptionally(new IOException("OWNER_CLOSED"));try{KneekuraDebugArenaRuntime.uninstallOwner();}catch(Exception error){lastError=reason(error);failed=true;}
    Minecraft.getInstance().execute(KneekuraDebugCardinalCapture::uninstall);if(captureResult!=null&&!captureResult.isDone())captureResult.completeExceptionally(new IOException("OWNER_CLOSED"));try{completeCapture();}catch(Exception ignored){failed=true;}
-   if(failed)life.unknown();else life.close();writeStatus(true);
+   if(failed)life.unknown();else life.close();if(!statusPublication.failed())writeStatus(true);settleShutdown();
   }
   JsonObject baseAction(String id,String key,String type,KneekuraDebugArenaController.Snapshot state){var g=input.grant().identity();JsonObject a=new JsonObject();a.addProperty("schemaVersion",1);a.addProperty("debugSessionId",g.debugSessionId());a.addProperty("runId",g.runId());a.addProperty("runSnapshotId",g.runSnapshotId());a.addProperty("processEpoch",g.processEpoch());a.addProperty("experimentId",g.experimentId());a.addProperty("arenaId",state.arenaId());a.addProperty("arenaEpoch",state.arenaEpoch());a.addProperty("expectedArenaRevision",state.arenaRevision());a.addProperty("actionId",id);a.addProperty("idempotencyKey",key);a.addProperty("type",type);return a;}
  }

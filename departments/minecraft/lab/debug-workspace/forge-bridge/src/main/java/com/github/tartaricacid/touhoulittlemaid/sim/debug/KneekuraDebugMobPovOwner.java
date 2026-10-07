@@ -28,7 +28,8 @@ final class KneekuraDebugMobPovOwner {
   });return result;
  }
  boolean busy(){return pending!=null;}
- boolean tick(long tick,KneekuraDebugArenaController.Snapshot state)throws IOException{
+ /** Validate existing view and finish accepted work; never admit a new camera operation. */
+ boolean maintain()throws IOException{
   if(revoked)return false;
   UUID viewed=KneekuraDebugMobPovCamera.subject();if(viewed!=null)try{mob(viewed);subjectValid=true;}catch(IOException failure){subjectValid=false;}
   if(pending!=null){
@@ -36,6 +37,10 @@ final class KneekuraDebugMobPovOwner {
    if(!pending.isDone())return true;
    complete();return true;
   }
+  return false;
+ }
+ boolean tick(long tick,KneekuraDebugArenaController.Snapshot state)throws IOException{
+  if(revoked)return false;if(maintain())return true;
   if(next>=32||!state.idle()||state.unsafe())return false;
   String dir=directory(next);if(!Files.exists(input.runDir().resolve(dir+"/request.json"),LinkOption.NOFOLLOW_LINKS))return false;
   JsonObject marker=KneekuraDebugOwnerFiles.json(input.runDir(),dir+"/request.json",null,16384);

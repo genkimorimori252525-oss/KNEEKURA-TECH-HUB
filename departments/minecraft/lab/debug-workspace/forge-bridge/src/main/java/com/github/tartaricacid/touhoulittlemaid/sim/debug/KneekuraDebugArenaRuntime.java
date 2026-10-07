@@ -65,6 +65,12 @@ public final class KneekuraDebugArenaRuntime {
         capturesReserved+=count;CAPTURE_RESERVATIONS.put(reservation.token(),reservation);return reservation;
     }
     public static void requireCaptureLeaseRemainingOwner(KneekuraDebugArenaController.Snapshot expected,long minRemainingMs)throws IOException {owner().controller().requireLeaseRemaining(expected,minRemainingMs);}
+    /** Existing authority/lease boundary without idle admission: used before retrying an ACTIVE status. */
+    static void revalidateStatusOwner()throws IOException {
+        Active a=owner();a.gate().requireAuthorized(a.config(),a.server(),a.grant());long elapsed=System.nanoTime()-a.lease().issuedNanos();
+        if(elapsed<0||elapsed>=a.lease().deadlineNanos()-a.lease().issuedNanos())throw new IOException("LEASE_EXPIRED_OR_CLOCK_CHANGED");
+        if(a.controller().snapshot().unsafe())throw new IOException("OWNER_ARENA_OUTCOME_UNKNOWN");
+    }
     static KneekuraDebugArenaController.Lease presentationLeaseOwner(KneekuraDebugArenaController.Snapshot expected)throws IOException {
         Active a=owner();a.controller().validateLeaseAndRevision(expected);return a.lease();
     }
