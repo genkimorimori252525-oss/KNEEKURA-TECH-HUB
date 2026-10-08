@@ -78,6 +78,32 @@ Measure the original failure and protected behavior, not speed/test count alone.
 | AF-0017 | Selected-subject observation mistaken for whole-Tank coverage | APPROVED scope; written design review pending | QUALITY |
 | AF-0018 | Tank operating guide omits existing end-to-end procedures | VERIFIED (documentation) | FRICTION |
 | AF-0019 | Camera usability and moving-Boss POV acceptance | APPROVED scope; written design review pending | FRICTION |
+| AF-0020 | Reviewed observation contracts | A-D scoped; E pending (AF0021-22) | QUALITY |
+| AF-0021 | Build readiness and camera coverage | MITIGATED (native A-D) | FRICTION |
+| AF-0022 | Astra prerequisites | Scoped map/readiness verification; E deferred | QUALITY |
+| AF-0023 | Scenario-specific product coverage | MITIGATED (observed movement only) | FRICTION |
+| AF-0024 | Attack windows and real-input gates | MITIGATED (natural Standard only) | QUALITY |
+| AF-0025 | Selection diagnostics and real paths | MITIGATED (one natural Lob only) | QUALITY |
+| AF-0026 | Observation effects and failure diagnostics | Native partial; see AF0027 | QUALITY |
+| AF-0027 | Stop unexercised repeated trials | RECORDED / product pilot implemented | QUALITY |
+| AF-0028 | Publication contention | Source mitigated; native fault pending | QUALITY |
+| AF-0029 | Native transport precision | Ground analyzer mitigated | QUALITY |
+| AF-0030 | Published restoration authority | Reliability scoped; see AF0036/38 | QUALITY |
+| AF-0031 | Fixture/interruption conditions | Native scoped evidence | QUALITY |
+| AF-0032 | Separate chunk/journal durability | Cross-store scoped; see AF0033-36 | QUALITY |
+| AF-0033 | Restart/restoration dependencies | Historical schema1; current AF0036 | QUALITY |
+| AF-0034 | Intent ownership and retained geometry | Source mitigated / native scoped | QUALITY |
+| AF-0035 | Unload and late acknowledgment | Native scoped evidence | QUALITY |
+| AF-0036 | Readiness/admission/preparation | Reliability PASS; natural partial | QUALITY |
+| AF-0037 | Actual opportunities | Native timing verified; natural lifecycle pending | QUALITY |
+| AF-0038 | Production Domain binding | Native explicit-abort PASS; full acceptance pending | QUALITY |
+| AF-0039 | Real reload registration | Reload scoped PASS; see AF0040/42 | QUALITY |
+| AF-0040 | Events/execution/applied health | Native impact scoped PASS | QUALITY |
+| AF-0041 | Environment transitions/fixture ownership | Controlled Ground scoped PASS | QUALITY |
+| AF-0042 | Closure/process identity/disk load | Clean-stop native persistence PASS | QUALITY |
+| AF-0043 | Packet timing/redirected motion | Passive sync PASS; late join pending | QUALITY |
+| AF-0044 | Actual disappearance/re-add intent | Controlled re-track PASS; late join pending | QUALITY |
+| AF-0045 | Delayed owner/replacement/publication checks | Controlled native RED -> GREEN; late join pending | QUALITY |
 
 ## Light audit — 2026-10-07
 
@@ -556,3 +582,15 @@ Improvement idea: Tank synchronization recipes should expose before-additional-d
 One scoped Astra review found Important premature addInvoked before fallible publication: an append failure prevented legitimate owned cleanup although native add never began. One correction pass extracts the actual order, proves publication-fault RED, then marks intent begun immediately before native invocation. Four source fault cases cover success/pre-publication/during/after invocation: permit one owned cleanup before a call, never repeat uncertain/begun calls. Actual current pose/velocity/power equality negatives also RED->GREEN.23new/102related Node/mappedjavac/intent/syntax/genuine11second build pass. These are source fault injections, not native I/O-fault proof. Native success leaves no outstanding tracker/cleanup failures; canonical cleanACK/VERIFIED_EXIT1075ms/EVIDENCE_COMPLETE12observations/2lanes/zero errors/drops/partial files. Ten supplement hashes/raw arrays/material bytes/historical85+count/acceptedJAR independently match. No product source/API/dependency/swimming change, direct packet/actor/input/camera manipulation, captures, repeated native run or re-review.
 
 Improvement idea: a finite Tank re-track recipe should authenticate new test-object ownership, record actual stop/disappearance/ID absence and continued native-server identity, then current pairing/new-client identity as separate facts. Never infer disappearance from a sent removal request. Finish fallible publication before marking an irreversible invocation begun; preserve uncertainty rather than blind retries. Distinguish action intent from actual StartTracking acknowledgment, and report cleanup failures independently of gameplay results/owned process closure. Shared motion checks may analyze filtered generations without relabeling controlled trials as passive ones. Genuine late connection/delayed owner arrival, human input/cues/balance, unobserved selectors/arbitrary unload/crash/full release remain open; no ongoing recording or danmaku. [Receipt, hashes and decisions](https://github.com/genkimorimori252525-oss/NaturalGhastmod/blob/codex/natural-tactics-20261008/docs/RETRACKING-VERIFICATION.md).
+
+### AF-0045 — Retain authoritative delayed owners and verify replacement separately
+
+2026-10-08; FAILURE/QUALITY/IDEA; CONTROLLED_OWNER_AVAILABILITY_NATIVE_RED_TO_GREEN/GENUINE_LATE_CONNECTION_PENDING. Compact Astra approves only a newly-created active test Ghast's native tracker removal/re-add; canonical Player/boss remain untouched. NaturalGhaste114dee/TechHub76e587e privategESsAz reproduces two product defects: three born-absent projectiles never resolve owner after actual arrival; a Player-normalized Curve returned to that absent Ghast keeps reporting the old Player. Exactly five owner acceptance labels fail while native lifecycle/motion contracts pass;19samples/44client+47server rows, no probe/cleanup errors. Actual owner StopTracking/old-object removal AND ID absence precede four hidden rows and one re-admission; genuine late connection is not exercised.
+
+Mapped Projectile.setOwner(null) is a no-op; client getOwner has no UUID resolution. Product72dac3b retains authoritative client ID with at most one lookup/worldtick, immediate replacement/zero/removal clearing, and valid same-ID cache retention for duplicate spawn/metadata. Server owner/provenance/damage/save/packet formats and accepted broad20/8/20swimming are unchanged. Missing-helper and same-tick duplicate metadata RED precede19actual state-helper checks;32mapped projectile/99related Node/build pass. One scoped Astra review catches a wrong Ground analyzer inertia: realistic1.9/zero-power fixture RED -> actual inertia1 correction/unintended-decay rejection. One correction pass/no re-review. PrivatepxC7gS GREEN20samples/44client+47server rows: hidden owners null, all following owners actual test Ghast, six-tick gap, first correct END rows1-2ms after observed admission. Synthetic PLAYER_ATTACK/boss-return API calls are not natural rally or physical melee.
+
+Both immutable RED/GREEN raw12sets/15supplement hashes/material bytes independently match; owned cleanup[], canonical clean ACK/VERIFIED_EXIT843/1080ms/EVIDENCE_COMPLETE11/13observations/2lanes/zero errors/drops/partials/captures. Historical original85files/full count and acceptedJAR exact. No original/finalized NBT reopening, selector forcing, direct packets, fake Player, observer movement/health/input override or continuous capture. Native ID0/removal-fault scenarios, genuine late connection, arbitrary unload/crash, natural unobserved selectors, human cues/input/balance and full release stay open; danmaku/fans remain deferred.
+
+Improvement implemented: [Tank guide](TANK-OPERATING-GUIDE.md#finite-consumer-verification-supplements) separates unavailable ID, actual presence, authoritative replacement and motion, and distinguishes controlled owner availability from connection acceptance. Retain failed receipts before repair; never use vanilla null assignment as cache invalidation without reading mapped source. Keep normal product free of private probes. Feedback index now routes AF0020-45 instead of ending at AF0019; dated detailed entries retain scope/history.
+
+Operational failure retained: Windows default cp932 document output failed on an en dash, and47fe5a2 inadvertently committed an empty receipt. UTF-8 repair61ad657 validates populated content before publication without altering native evidence or rewriting Git history. Future writes must specify UTF-8, stop on external nonzero exit and check expected document content before staging. This was documentation publication failure, not native test failure. [Evidence, hashes and Astra decisions](https://github.com/genkimorimori252525-oss/NaturalGhastmod/blob/codex/natural-tactics-20261008/docs/DELAYED-OWNER-VERIFICATION.md).
