@@ -216,3 +216,12 @@ compatibility invisibly.
 These patterns are derived from class/resource/bytecode observation of the exact
 artifact named in the receipt. They may be independently implemented, but the
 upstream ARR code/assets are not stored or copied.
+
+## Promotion into the reusable toolkit
+
+The portable parts of P1–P12 have now been normalized into the product-neutral
+[Boss Combat Toolkit v1](boss-combat-toolkit/README.md).
+
+This file remains the **source-specific derivation note**: it explains what was
+learned from Wither: Reincarnated. The toolkit is the reusable contract and is
+intentionally free of Reincarnated gameplay constants.
