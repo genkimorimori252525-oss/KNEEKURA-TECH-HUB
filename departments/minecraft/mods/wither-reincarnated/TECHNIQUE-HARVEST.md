@@ -9,6 +9,9 @@ Source receipt:
 Cross-target version:
 [../../techniques/wither-reincarnated-boss-engineering.md](../../techniques/wither-reincarnated-boss-engineering.md)
 
+Normalized reusable contract:
+[Boss Combat Toolkit v1](../../techniques/boss-combat-toolkit/README.md)
+
 ## Harvest matrix
 
 | Technique | Evidence in target | Portable concept | KNEEKURA posture |
