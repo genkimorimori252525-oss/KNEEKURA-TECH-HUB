@@ -99,6 +99,15 @@ Sinytra Connector は 1.20.1 Forge 系と現行 NeoForge 系の両方を保持�
 
 対象横断の一覧は catalog/MODS.md。詳細手順は ANALYSIS-SPEC-v1.md。
 
+## 再利用技術ライブラリ
+
+対象MOD固有の解析から、複数製品へ安全に移植できる設計契約は `techniques/` に分離する。
+
+最初の正式Toolkit:
+- [Boss Combat Toolkit v1](techniques/boss-combat-toolkit/README.md) — Attack Lifecycle / Beam / Projectile Deflection / Temporary Faction / Client FX Budget / Boss Presentation を、製品固有の数値を持たない再利用契約と検証シナリオとして定義する。
+
+Toolkitは共通ランタイム実装を強制しない。各製品は必要なmoduleだけを採用し、実装・数値・受け入れ根拠を自身で所有する。
+
 ## Minecraft 1.20.1 Vanilla Foundation Map
 
 [Vanilla Foundation Map](vanilla-foundation/README.md)は、既存Source Intelligenceの exact ANCHOR `IndexSnapshot` から `net/minecraft/**` のクラス・package・subsystem・継承/implements・JVM class-reference候補・由来を content-addressed な小型地図へ変換する。巨大なMinecraft source/JARをGitへ複製せず、実装AIが外部検索より先に1.20.1内部を発見できる入口として使う。

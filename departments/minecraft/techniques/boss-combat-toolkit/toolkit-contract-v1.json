@@ -1,0 +1,113 @@
+{
+  "schema": "kneekura.minecraft.boss-combat-toolkit.v1",
+  "status": "REUSABLE_DESIGN_CONTRACT",
+  "anchor": {
+    "minecraft": "1.20.1",
+    "loader": "Forge"
+  },
+  "principles": [
+    "SERVER_GAMEPLAY_AUTHORITY",
+    "BOUNDED_WORK",
+    "READ_ONLY_OBSERVABILITY",
+    "NO_SILENT_VANILLA_LEAKAGE",
+    "NO_CROSS_TARGET_CONSTANT_INHERITANCE",
+    "DATA_FIRST_COMPATIBILITY",
+    "SEMANTIC_LIFECYCLE_BEFORE_PRESENTATION",
+    "SCOPE_MATCHED_PATCHING"
+  ],
+  "attack_lifecycle": {
+    "id": "BCT-A",
+    "states": ["IDLE", "TELEGRAPH", "COMMITTED", "ACTIVE", "RECOVERY", "COOLDOWN"],
+    "required_observability": [
+      "attack_id",
+      "state",
+      "state_age",
+      "eligibility_or_rejection_reason",
+      "target",
+      "cooldown_remaining",
+      "cancel_reason",
+      "held_resources"
+    ],
+    "recommended_resource_locks": [
+      "MOVE",
+      "LOOK",
+      "PRIMARY_ATTACK",
+      "SECONDARY_ATTACK",
+      "WORLD_EDIT"
+    ]
+  },
+  "modules": [
+    {
+      "id": "BCT-B",
+      "name": "Beam Contract",
+      "server_authority": ["origin", "aim", "obstruction", "hit_test", "damage", "visible_length", "start_stop"],
+      "client_authority": ["interpolation", "rendering", "particles", "loop_sound"],
+      "required_bounds": ["max_range", "max_per_tick_geometry_work"]
+    },
+    {
+      "id": "BCT-D",
+      "name": "Projectile Deflection",
+      "required_state": ["owner", "deflection_count", "last_deflector", "trajectory", "damage_policy", "collision_policy", "lifetime"],
+      "required_bounds": ["deflection_limit_or_explicit_unbounded_policy", "lifetime"]
+    },
+    {
+      "id": "BCT-F",
+      "name": "Temporary Faction",
+      "required_state": ["controller", "start", "expiry", "cooldown", "ally_policy", "ai_overlay"],
+      "required_bounds": ["acquisition_range_or_query_bound", "member_limit_or_explicit_policy", "separation_policy"]
+    },
+    {
+      "id": "BCT-X",
+      "name": "Client FX Budget",
+      "required_state": ["max_live", "lifetime", "eviction_policy", "distance_policy", "detail_policy", "disabled_policy"],
+      "required_bounds": ["max_live", "lifetime", "creation_rate_or_aggregation"]
+    },
+    {
+      "id": "BCT-P",
+      "name": "Boss Presentation",
+      "required_state": ["presentation_mode", "priority", "loop_sources", "cleanup_policy"],
+      "required_bounds": ["screen_effect_cap", "loop_cleanup_bound"]
+    }
+  ],
+  "mandatory_verification": [
+    "V-COMMON-01",
+    "V-COMMON-02",
+    "V-COMMON-03",
+    "V-COMMON-04"
+  ],
+  "module_verification": {
+    "BCT-A": ["V-A-01", "V-A-02", "V-A-03"],
+    "BCT-B": ["V-B-01", "V-B-02", "V-B-03"],
+    "BCT-D": ["V-D-01", "V-D-02", "V-D-03"],
+    "BCT-F": ["V-F-01", "V-F-02", "V-F-03"],
+    "BCT-X": ["V-X-01", "V-X-02", "V-X-03"],
+    "BCT-P": ["V-P-01", "V-P-02", "V-P-03"]
+  },
+  "lab_scenarios": [
+    "LAB-BCT-01",
+    "LAB-BCT-02",
+    "LAB-BCT-03",
+    "LAB-BCT-04",
+    "LAB-BCT-05",
+    "LAB-BCT-06",
+    "LAB-BCT-07",
+    "LAB-BCT-08"
+  ],
+  "numeric_constants_policy": "PRODUCT_OWNED_EVIDENCE_REQUIRED",
+  "shared_runtime_library_policy": {
+    "default": "DO_NOT_EXTRACT",
+    "promote_only_when": [
+      "two_or_more_real_products_share_stable_semantics",
+      "duplication_is_materially_costly_or_defect_prone",
+      "adopters_accept_same_api_lifecycle",
+      "no_gameplay_constants_or_forced_inheritance",
+      "tests_cover_all_adopters"
+    ]
+  },
+  "provenance": {
+    "initial_reference": "Wither: Reincarnated 1.0.5",
+    "initial_reference_sha256": "00589726de7d82628d92761394a8a3e6b153c28942f50c9ae6ba7860b0fab80a",
+    "initial_reference_license": "All Rights Reserved",
+    "reuse_boundary": "Concept-level independent reimplementation only; no upstream code or assets included."
+  }
+}
