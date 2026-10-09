@@ -1,0 +1,10 @@
+# Project-scoped trial configuration for cost-aware orchestration.
+model = "gpt-5.6-terra"
+model_reasoning_effort = "high"
+
+[agents]
+# Start with the parent and at most one direct child. Raise this only after the
+# pilot shows that a second independent child improves successful-task cost.
+max_threads = 2
+max_depth = 1
+interrupt_message = true
