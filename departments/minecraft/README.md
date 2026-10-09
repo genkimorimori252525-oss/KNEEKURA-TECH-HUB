@@ -119,3 +119,8 @@ Vanilla AIの意味解析は [vanilla-ai](vanilla-ai/README.md)、実機での�
 [2026-09-28 確定設計](design/2026-09-28-mod-ai-environment/DESIGN.md)は、Source Intelligence、全classpath、source/bytecode、Connector研究、実装例・失敗例、GameTestと実機観測を既存部門へ接続する設計。4巡の敵対的設計監査、採否記録、受け入れ仕様、参考原典を同じディレクトリに保持する。
 
 設計資料であり、新機能の実装・動作検証・既存解析キューの完了を意味しない。
+
+## KNEEKURA-made product MODs (2026-10-09)
+
+- [Product workspaces](projects/README.md) — `projects/kirby-mod/` contains the canonical Kirby source import from the former `Kirby_mod` repository. The old repo remains a read-only historical backup; Reimu and Natural Ghast have not been migrated in this Kirby change.
+- [Shared MOD debugging roadmap](design/2026-10-09-shared-mod-debug-roadmap.md) — plan to replace incomplete per-MOD diagnostics with optional adapters to the existing LAB / MOD-AI system; no shared debug runtime claimed yet.
