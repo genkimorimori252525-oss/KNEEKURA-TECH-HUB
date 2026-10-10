@@ -1,0 +1,34 @@
+name: Spore static research gates
+
+on:
+  push:
+    paths:
+      - 'departments/minecraft/mods/fungal-infection-spore/tools/**'
+      - 'departments/minecraft/mods/fungal-infection-spore/tests/**'
+      - '.github/workflows/spore-research-gates.yml'
+  pull_request:
+    paths:
+      - 'departments/minecraft/mods/fungal-infection-spore/tools/**'
+      - 'departments/minecraft/mods/fungal-infection-spore/tests/**'
+      - '.github/workflows/spore-research-gates.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-observation-gates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Compile authored Python analysis tools
+        run: python -m compileall -q departments/minecraft/mods/fungal-infection-spore/tools
+      - name: Unit test synthetic trace guards and TOML parsing
+        run: python -m unittest discover -s departments/minecraft/mods/fungal-infection-spore/tests -v
+
+# No third-party Spore JAR or Minecraft world is fetched into the runner.
+# This workflow never claims live Forge/GameTest or a runtime PASS.

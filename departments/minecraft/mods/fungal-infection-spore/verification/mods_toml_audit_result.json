@@ -1,0 +1,42 @@
+{
+  "artifact_sha256": "d20c4be6606f9752ecfd964eba625363eb76a28e327d67fe6dda4be748401489",
+  "declared_mod_ids": [
+    "spore"
+  ],
+  "dependencies_for_declared_mod_ids": {
+    "spore": []
+  },
+  "dependency_table_names": [
+    "examplemod"
+  ],
+  "findings": [
+    {
+      "basis": "DIRECT_ARTIFACT_AND_FORGE_SPEC",
+      "id": "SPORE-META-1",
+      "runtime": "NOT_RUN",
+      "summary": "mods.toml dependency table is dependencies.examplemod but actual modId is spore"
+    },
+    {
+      "basis": "DIRECT_ARTIFACT_AND_RANGE_ARITHMETIC",
+      "id": "SPORE-META-2",
+      "runtime": "NOT_RUN",
+      "summary": "declared examplemod minecraft range excludes 1.20.1; not a valid Spore dependency declaration"
+    }
+  ],
+  "minecraft_ranges_found": [
+    {
+      "contains_1_20_1": false,
+      "declaring_key": "examplemod",
+      "range": "[1.20,1.20.1)",
+      "target_modid": "minecraft"
+    }
+  ],
+  "mods_toml_sha256": "27672d03de388d129b19b49b01ec516454dac45e01c63c129c32499eb39b437e",
+  "runtime": "NOT_RUN",
+  "schema": "kneekura.spore.mods-toml-audit.v1",
+  "scope": "uploaded immutable JAR mods.toml only; no Forge runtime loader semantics verified",
+  "status": "STATIC_FINDINGS",
+  "unmatched_dependency_table_names": [
+    "examplemod"
+  ]
+}
