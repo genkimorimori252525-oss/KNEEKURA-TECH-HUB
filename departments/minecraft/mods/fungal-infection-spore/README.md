@@ -44,3 +44,12 @@ All further MOD research follows [Minecraft analysis workflow](../../ANALYSIS-WO
 
 **新しいエビデンス:** [複数ディメンションの条件とChunkTicket再生の9クラスSHA記録](BYTECODE-CROSS-DIMENSION-RECEIPT-2026-10-11.json)。従来の活動中Proto数はstaticな全体件数であり、Wikiの「ディメンション内3体」と一致しない可能性がある。原作Minecraft実機での再現はNOT_RUN。
 
+
+
+## 新しい再検証ゲートとGameTest計画（2026-10-11）
+
+- [固定JARのBytecode契約13件を機械検査する方法と結果](BYTECODE-CONTRACT-GATE-2026-10-11.md)（9 class hashes / 13 static contracts PASS、Minecraft実機NOT_RUN）。
+- [実際に動作する独立Python検査器](tools/verify_spore_bytecode.py) と [実際のJSON結果](verification/bytecode-gate-2026-10-11.json)。別のJARを投入するとBLOCKED_HASH_MISMATCH。
+- [隔離Forge1.20.1 GameTest / LABの8シナリオ受け入れ契約](LAB-GAMETEST-ACCEPTANCE-2026-10-11.md)。設計のみでGameTestのJava実装/ゲーム起動はNOT_RUN。
+
+新たな着目点：Forge LivingDamageEventでの**ダメージ発生回数**に基づく報酬は、個体の総与ダメージや指揮作戦の勝利と同義ではない。初期4候補の「番号不一致75%」はindexの組合せ確率であり、Mob種の違いとは限らない。

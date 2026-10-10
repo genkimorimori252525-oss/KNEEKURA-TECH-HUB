@@ -46,3 +46,11 @@
 
 - [原作の重み更新則に基づく数学モデルのテスト](../evaluation/experiments/spore-proto-policy-2026-10-11/README.md)：条件ごとに最適部隊が異なる架空課題では、行全体更新の最終正解率25.59%、特徴別更新100%。常に1部隊が最適な課題では双方100%。**自作の合成環境であり実ゲーム強さの測定ではない。**
 - [Proto登録・複数ディメンション/チャンク固定のコード監査](../../minecraft/mods/fungal-infection-spore/CROSS-DIMENSION-AI-BOUNDARY-AUDIT-2026-10-11.md)：元MODの活動中Protoカウントは全ディメンション共通static listで、ロード時のrequest適用にもdimension照合を欠く。ゲーム実行での影響はBUG_CANDIDATE。
+
+
+## 原JARの検証可能な研究への移行（2026-10-11）
+
+- [原本SHAを固定した自動Bytecode検査（13/13 static checks）](../../minecraft/mods/fungal-infection-spore/BYTECODE-CONTRACT-GATE-2026-10-11.md)
+- [原作Forge1.20.1の限定GameTest計画](../../minecraft/mods/fungal-infection-spore/LAB-GAMETEST-ACCEPTANCE-2026-10-11.md)
+
+**学習報酬の次の検証:** 1イベントで加点+0.05、減点-0.10、ダメージ量ではなくダメージイベントの回数で更新する原作の枝を固定した。これは高速小打撃の報酬偏重リスク候補で、性能・総与ダメージ・目的達成との関係は未実測。指揮のReward設計は撃破・生存・拠点占領・資源コストと分け、観測結果で採否を決める。
