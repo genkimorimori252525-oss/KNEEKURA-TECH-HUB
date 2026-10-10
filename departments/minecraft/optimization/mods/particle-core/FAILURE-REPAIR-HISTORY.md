@@ -1,9 +1,17 @@
-# particle-core — pending bounded upstream history
+# Particle Core — issue-led bounded investigation
 
-Track ANCHOR_SOURCE_WITH_FRONTIER_REPORTS; source `fzzyhmstrs/pc@8ae835f2abe100ff7a39f2e582e1cfa71ba6004a`.
+Track: selected Forge 1.20.1 branch and **comparative** Fabric 1.21.11 issues. The selected source fixes/general safeguards are observed, but not linked to exact issue repair in an immutable commit diff.
 
-Issue #47 Fabric Minecraft 1.21.11 unsafe LegacyRandomSource and issue #65 2026-09 async palette failure are FRONTIER reports, NOT evidence of a 1.20.1 Forge regression. No verified fix/parent reviewed.
+## PC-39 — Forge 1.20.1 visual corruption report
 
-Report reviewed / lead: https://github.com/fzzyhmstrs/pc/issues/65.
+[Issue #39](https://github.com/fzzyhmstrs/pc/issues/39) (2026-01-21) describes altered particle size / visual artifacts after upgrading to Particle Core 0.3.0, on Forge Minecraft 1.20.1. Issue closed, **no source diff trace or KNEEKURA reproduction** established. Avoid inferring closed == fixed or 0.3.3 free of it.
 
-This file is **NOT_ANALYZED or PARTIAL depending on the stated report scope**, with no cause attribution or verified fix. Follow the parent [FAILURE-REPAIR-HISTORY-v1.md](../../../FAILURE-REPAIR-HISTORY-v1.md) before any whole-target completion claim. No JAR/runtimes or reproducible benchmarks assessed.
+## PC-47 — Fabric newer random-source safety
+
+[Issue #47](https://github.com/fzzyhmstrs/pc/issues/47) (2026-01-30) contains a **Fabric 1.21.11** stack indicating asynchronous particle update collided with non-thread-safe `LegacyRandomSource`. The selected 1.20.1 source's `ParticleManagerAsyncMixin` recognizes exception patterns, marks classes unsafe and retries those on calling thread — mechanism static-confirmed, but **timeline/patch linked to #47 not audited**. Track must remain COMPARATIVE.
+
+## PC-65 — palette read races
+
+[Issue #65](https://github.com/fzzyhmstrs/pc/issues/65) (2026-09-16, open) asserts unsafe off-thread palette access may cause `MissingPaletteEntryException`. Exact mod version/environment and crash root not fully audited. Cannot generalize to this user's binary.
+
+Performance/reproduction/fix evidence NOT_RUN. No fabricated repair claim, no history adapter import without raw captured bytes/index IDs.

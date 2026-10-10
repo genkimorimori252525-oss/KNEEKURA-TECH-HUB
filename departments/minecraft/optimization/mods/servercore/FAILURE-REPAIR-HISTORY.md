@@ -1,21 +1,21 @@
-# servercore — selected failure/repair history (2026-10-11)
+# ServerCore — bounded source repair / behavior incident
 
-This is a **bounded, source-backed case**, not a whole-history review and **NOT_RUNTIME_VERIFIED**. User's named exact 1.20.1 JAR is not held, release/source parity unknown.
+Scope: historical `inactiveTick` chicken reproduction 2022 and 1.21.1 issue #118. *Tracks not silently merged with 1.20.1 Forge.*
 
-**Window:** 2024 May activation tick immunities historical repair and 2024 Oct Forge 1.21.1 reported farm regression.  
-**Source reference head:** `d1d0a02d39d0739441419e3a20f46fbc88d98ec5`, track ANCHOR.  
-**Issue:** [#118](https://github.com/Wesley1808/ServerCore/issues/118).  
-**Verified fix commit:** [`2238660d4be5e56336e7f9a890cb7f42138eaf82`](https://github.com/Wesley1808/ServerCore/commit/2238660d4be5e56336e7f9a890cb7f42138eaf82) (parent `845a152d694b51484a9ea39b82eee8826db790eb`).  
-**Compared file:** [pre-fix](https://github.com/Wesley1808/ServerCore/blob/845a152d694b51484a9ea39b82eee8826db790eb/common/src/main/java/me/wesley1808/servercore/common/activation_range/ActivationRange.java) and [post-fix](https://github.com/Wesley1808/ServerCore/blob/2238660d4be5e56336e7f9a890cb7f42138eaf82/common/src/main/java/me/wesley1808/servercore/common/activation_range/ActivationRange.java); actual source read in both revisions, change diff read.
+## SC-2022-CHICKEN-INACTIVE
 
-| Facet | Statement | Basis |
-|---|---|---|
-| Symptom | Author reports entities could remain inactive despite tick immunity; reporter in separate 1.21.1 issue observed altered iron farm efficiency | USER/MAINTAINER REPORT |
-| Trigger | Stale activatedTick across shouldTick early-return, and separately 1.21.1 exclusion config needing chunk reload | USER REPORT / HISTORY |
-| Root-cause interpretation | Author identified missing activatedTick update on an early return as a failure to re-check entity immunities immediately | AUTHOR_CLAIM (no independent reproduction) |
-| Actual repair | Update activated tick before returning when shouldTick allows immediate work | DIRECT_OBSERVATION of source diff |
-| Portable lesson | Scheduling optimization must track state transitions and exemptions; inactive ticks may break world mechanics and farm logic. | SCOPED INFERENCE |
-| Runtime reproduction | **NOT_RUN** | no authenticated LAB result |
-| Fixed-version smoke / A-B perf | **NOT_RUN** | no paired benchmark |
+Source diff: [commit 09ffb1b7d1c958b4bb2723d4ef1f3ce09af59a4b](https://github.com/Wesley1808/ServerCore/commit/09ffb1b7d1c958b4bb2723d4ef1f3ce09af59a4b) vs parent `c153266fb982a8f197b93437f9e7a365959141b0`, source file `ChickenMixin`.
+- Before: `inactiveTick()` only decremented `eggTime`.
+- After: it decrements egg timer **and spawns egg**, plays sound, emits game event and reseeds timer on expiry.
+- Root cause: INFERENCE from diff that reducing ticks without reproducing scheduled side effects can suppress chicken laying eggs; no isolated bug report or live reproduction read.
+- Lesson: a tick-skipping optimization requires explicit preservation of critical slow entity state machine transitions (inventory/eggs/breeding/timekeeping). Don't assume a pig/zombie or custom invader has matching safe inactive method.
+- Replay/verification: NOT_RUN.
 
-Do not confuse a **closed Issue, code patch or author's “fixed” message** with a modern Forge 1.20.1 runtime acceptance PASS. Later regressions and source-JAR parity not exhaustively checked.
+## SC-118 — 1.21.1 iron farm exclusion reload
+
+[Issue #118](https://github.com/Wesley1808/ServerCore/issues/118): report says `activation-range` reduced iron-farm golem spawn rate on Minecraft **1.21.1**. Maintainer advises exclusion changes can require `/sc reload` then unload/reload chunks or world; reporter reports chunk reload resolved effect.
+- This establishes **reported** runtime config sensitivity and the usefulness of manual exclusion/reload, not an actual 1.20.1 Forge performance regression or an upstream patch.
+- Actual code-level behavior at [1.20.1 ANCHOR source](https://github.com/Wesley1808/ServerCore/blob/d1d0a02d39d0739441419e3a20f46fbc88d98ec5/common/src/main/java/me/wesley1808/servercore/common/config/tables/ActivationRangeConfig.java): config `ENABLED=false` by default.
+- Exact cause beyond reporter/config hypothesis UNKNOWN; KNEEKURA tests NOT_RUN.
+
+Captured issues and source through GitHub read, raw immutable CAS/index IDs and precise issue-text SHA unavailable; history adapter NOT_IMPORTED.
