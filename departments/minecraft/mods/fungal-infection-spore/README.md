@@ -40,3 +40,7 @@ All further MOD research follows [Minecraft analysis workflow](../../ANALYSIS-WO
 
 - [Synthetic Proto policy experiment](../../../ai/evaluation/experiments/spore-proto-policy-2026-10-11/README.md) — 256 seeded synthetic trials, NOT Minecraft. Source and output committed separately from the original JAR.
 - [Cross-dimension Proto/chunk-ticket audit](CROSS-DIMENSION-AI-BOUNDARY-AUDIT-2026-10-11.md) — original bytecode shows a global Proto registration count and world-load chunk-ticket dimension-scoping risk, runtime NOT_RUN.
+
+
+**新しいエビデンス:** [複数ディメンションの条件とChunkTicket再生の9クラスSHA記録](BYTECODE-CROSS-DIMENSION-RECEIPT-2026-10-11.json)。従来の活動中Proto数はstaticな全体件数であり、Wikiの「ディメンション内3体」と一致しない可能性がある。原作Minecraft実機での再現はNOT_RUN。
+
