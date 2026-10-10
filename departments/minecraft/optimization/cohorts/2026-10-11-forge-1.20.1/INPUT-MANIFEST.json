@@ -188,7 +188,7 @@
       "admission": "RELATED_REVIEW",
       "source_repository": "Fuzss/leaves-be-gone",
       "source_branch_or_snapshot": "1.20.1",
-      "pinned_commit": "b333b8b898528",
+      "pinned_commit": "b333b8b89852825a1467a65f15bbe86f91d43226",
       "source_recon_state": "SOURCE_PATHS",
       "artifact_bytes_received": false,
       "artifact_sha256": null,
@@ -203,7 +203,7 @@
       "admission": "PROFILING_TOOL",
       "source_repository": "tasgon/observable",
       "source_branch_or_snapshot": "1.20",
-      "pinned_commit": "f07aba86fbb07",
+      "pinned_commit": "f07aba86fbb075077ac7b8d820b4ff8fc6e69aae",
       "source_recon_state": "SOURCE_PATHS",
       "artifact_bytes_received": false,
       "artifact_sha256": null,
@@ -218,7 +218,7 @@
       "admission": "PROFILING_TOOL",
       "source_repository": "lucko/spark",
       "source_branch_or_snapshot": "master",
-      "pinned_commit": "3e8745a76eaab",
+      "pinned_commit": "3e8745a76eaabe9a4f70aad6283876fb518d2ae8",
       "source_recon_state": "SOURCE_PATHS",
       "artifact_bytes_received": false,
       "artifact_sha256": null,
@@ -886,5 +886,7 @@
       "benchmark": "NOT_RUN",
       "analysis_state": "INVENTORY_OR_SOURCE_DISCOVERY_ONLY"
     }
-  ]
+  ],
+  "source_snapshot_note": "pinned_commit values are Git revision locator for observed source tree, NOT evidence matching the named JAR binary. Filename and branch can contain different Minecraft version identities.",
+  "evidence_cutoff": "2026-10-11"
 }
