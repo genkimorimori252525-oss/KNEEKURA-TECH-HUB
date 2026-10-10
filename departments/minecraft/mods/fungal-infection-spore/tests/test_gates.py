@@ -298,4 +298,74 @@ class SporeGoalSnapshotReviewTest(unittest.TestCase):
         self.assertEqual(report['status'],'INCONCLUSIVE_INCOMPLETE_RUN')
         self.assertFalse(report['runtime_pass'])
 
+
+class SporeGoalStateDeltaReviewTest(unittest.TestCase):
+    """End-of-tick state changes are not exact Goal.start/stop callbacks."""
+
+    @staticmethod
+    def goal_data():
+        return dict(entity_uuid='synthetic-witch',registered_goal_count=1,
+                    registered_running_count=0,truncated=False,
+                    goals=[dict(goal_instance_id=101,selector='goal',priority=4,
+                                goal_class='synthetic.WitchBuffGoal',running=False,
+                                flags=['MOVE','LOOK'])])
+
+    @staticmethod
+    def delta_data():
+        return dict(entity_uuid='synthetic-witch',
+                    observed_state_changes=1,changes_truncated=False,
+                    snapshot_goal_entries=1,snapshot_truncated=False,
+                    capture_scope='END_TICK_RUNNING_STATE_DIFF_NOT_GOAL_CALLBACK',
+                    changes=[dict(goal_instance_id=101,selector='goal',
+                                  priority=4,goal_class='synthetic.WitchBuffGoal',
+                                  previous_running=False,current_running=True)])
+
+    def evaluate(self, delta=None, origin='synthetic_fixture', end='completed'):
+        from analyze_spore_goal_snapshots import analyze
+        with TemporaryDirectory() as temp:
+            p=Path(temp)/'g12.jsonl'
+            rows=make_trace('G12',[
+                ('goal_registry_snapshot',self.goal_data()),
+                ('goal_running_state_delta_snapshot',delta if delta is not None else self.delta_data()),
+            ], origin=origin, end=end)
+            p.write_text('\n'.join(json.dumps(x) for x in rows)+'\n',encoding='utf-8')
+            return analyze(p)
+
+    def test_synthetic_one_tick_state_transition(self):
+        result=self.evaluate()
+        self.assertEqual(result['status'],'SYNTHETIC_FIXTURE_ONLY')
+        self.assertEqual(result['delta_snapshot_events'],1)
+        self.assertEqual(result['delta_snapshot_valid'],1)
+        self.assertEqual(result['delta_changes_false_to_true'],1)
+        self.assertEqual(result['delta_changes_true_to_false'],0)
+        self.assertFalse(result['runtime_pass'])
+        self.assertIn('not Goal.start/stop',result['interpretation'])
+
+    def test_fake_unchanged_transition_rejected(self):
+        data=self.delta_data()
+        data['changes'][0]['current_running']=False
+        result=self.evaluate(delta=data)
+        self.assertEqual(result['status'],'INCONCLUSIVE_INVALID_DELTA_SNAPSHOTS')
+        self.assertEqual(result['delta_snapshot_invalid'],1)
+
+    def test_forged_direct_callback_claim_rejected(self):
+        data=self.delta_data()
+        data['capture_scope']='GOAL_START_CALLBACK_DIRECT'
+        self.assertEqual(self.evaluate(delta=data)['status'],'INCONCLUSIVE_INVALID_DELTA_SNAPSHOTS')
+
+    def test_duplicate_goal_ids_cannot_be_counted_twice(self):
+        data=self.delta_data()
+        data['changes'].append(dict(data['changes'][0]))
+        data['observed_state_changes']=2
+        self.assertEqual(self.evaluate(delta=data)['delta_snapshot_invalid'],1)
+
+    def test_out_of_scope_runtime_claim_still_not_attested(self):
+        r=self.evaluate(origin='runtime_claim_unattested')
+        self.assertEqual(r['status'],'IMPORTED_UNATTESTED_GOAL_REGISTRY')
+        self.assertFalse(r['runtime_pass'])
+
+    def test_unfinished_delta_trace_not_promoted(self):
+        r=self.evaluate(end='aborted')
+        self.assertEqual(r['status'],'INCONCLUSIVE_INCOMPLETE_RUN')
+
 if __name__=='__main__':unittest.main()
