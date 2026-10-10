@@ -19,7 +19,7 @@
 | --- | --- | --- |
 | G09 | proto_signal_snapshot | Vigilが列挙した正確なProto候補順とSignal発行メソッド内の呼出は未観測 |
 | G10 | proto_signal_snapshot、calamity_search_snapshot、entity_join_snapshot | Calamity再配置の抽選とWomb生成**試行**の内部分岐は未観測 |
-| G11 | entity_join_snapshot / entity_leave_snapshot | VigilのawardHivemind/punishHivemindそのものは未観測 |
+| G11 | entity_join_snapshot / entity_leave_snapshot、proto_weights_snapshot、vigil_wave_snapshot、damage_event_snapshot | 公開getterの重み16個、残り召喚数、Forge LivingDamageEventを受動観測。**awardHivemind/punishHivemindや実Spawn成功のメソッド呼出は未観測** |
 | G12 | search_pos_snapshot / follow_partner_snapshot | Goalの実行・SearchPosクリア・ナビ停止は未観測 |
 | G13 | server_tick_sample | Proto、active Signal、Infected数、ロード済みチャンク数、バニラ強制ロードチャンク数とServerTick START〜END時間の**未校正値**を記録。Forge ticket総数・正式MSPTやTPSではない |
 
@@ -66,3 +66,5 @@ LABの [現行実行権限](../../../CURRENT-HANDOFF-2026-10-02.md) と [元の�
 CIでは自作Java17のソースをForgeGradle 6でビルドし、生成JARの中身を検査する。所定の観測器classと META-INF/mods.toml が存在し、**原作com/Harbinger/Sporeのclassが一切含まれない**ことが必要。成果物の公開配布や、原作ゲームでの動作まで自動保証するものではない。
 
 G13の記録には tick_ms に加え、loaded_chunks と vanilla_forced_chunks_only も含む。後者はVanillaの強制ロード範囲であり、Forge独自の全ticket数ではない。tick_msはServerTickEvent START〜ENDの未校正値なので、独立したprofiler計測を行うまではTPSや正式MSPTと同義にしない。
+
+**G11の補助観測について:** 元JARの Proto.getWeights() と Vigil.getWaveSize() は公開getterのため、リフレクション経由で読み、値のコピーをログへ出す。学習や召喚の処理は呼び出さず、ゲーム状態は変更しない。LivingDamageEventのamountはイベント発生時点の値で、ミッション報酬や後続の実ダメージ確定とは同一視しない。既存のPython G11ゲートが要求するwave_award/wave_spawn_result等を**このスナップショットで代用しない**。
