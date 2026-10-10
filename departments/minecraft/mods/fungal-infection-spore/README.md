@@ -66,3 +66,12 @@ All further MOD research follows [Minecraft analysis workflow](../../ANALYSIS-WO
 ### 解析精度の訂正（2026-10-11）
 
 [Signal/Group AI研究](GROUP-COMMAND-SIGNAL-BYTECODE-2026-10-11.md) の初版にあった「SearchAreaGoalが目標まで3ブロック以内でSearchPos解除」は誤読。実際は **BlockPos.closerToCenterThan(Position,9.0)**、つまり半径9ブロック未満で解除。**FollowOthersGoalの距離二乗9＝半径3ブロック**とは異なる。対応する19契約の検査器とJSON結果を更新し、再実行して静的PASS 19/19を再確認した。旧コミットは歴史的証拠として残す。
+
+## 2026-10-11 実行可能な検証への進捗（G09〜G13用ゲート）
+
+- [元JAR mods.tomlに残ったexamplemod依存と、1.20.1を含まないバージョン範囲の直接監査](METADATA-AUDIT-2026-10-11.md)。TOMLを元JARからparseして直接確認。実Forge起動の成否はUNKNOWN。
+- [G09〜G13の別run/別world/別原本のログを拒否する観測結果検証器](RUN-EVIDENCE-GATE-2026-10-11.md)。[実装](tools/evaluate_spore_trace.py)、[15の単体テスト](tests/test_gates.py)、[原本メタ検査コード](tools/audit_spore_metadata.py)。
+- [元JARのメタデータ監査JSON](verification/mods_toml_audit_result.json)と[G09合成ログの検査結果](verification/g09.synthetic.review.json)を保存。G09実ゲーム観測ではない。
+- [GitHub Actionsで15/15単体試験PASS](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38081259925)。このCIは合成fixture + Python構文のみを検証し、Spore本体を取得・起動しない。
+
+**進捗を厳密に区別:** G09〜G13の**ログ判定器はIMPLEMENTED/TESTED_SYNTHETIC**。G09〜G13のForge観測器・GameTest Java・実機測定は**NOT_IMPLEMENTED/NOT_RUN**。前回の静的Bytecode契約19/19 PASSとは別の試験。

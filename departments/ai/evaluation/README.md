@@ -21,3 +21,7 @@
 - [SporeのSignal→Calamity/Womb選択の確率分岐](experiments/spore-signal-routing-2026-10-11/README.md) — 30,000判断×6、シード固定。実際のゲームでの派遣成功・負荷値はNOT_RUN。
 
 両者をAIの学習済み実ゲーム性能の証拠として扱わない。原作のバイトコードはMinecraft部門が別トラックで保有する。
+
+### Minecraft実機向けの証拠収集契約（実機はNOT_RUN）
+
+[Spore G09〜G13 observation validation gate](../../minecraft/mods/fungal-infection-spore/RUN-EVIDENCE-GATE-2026-10-11.md) はrun/scenario/artifact/worldを照合し、記録が不足する場合はINCONCLUSIVEのままにする。研究用観測器の受け入れ検証であり、正規LAB session/owner/cleanupや実ゲーム結果を代替しない。Python 3.13の合成テスト15件と[CI](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38081259925)は成功したがForge runtimeは未実行。

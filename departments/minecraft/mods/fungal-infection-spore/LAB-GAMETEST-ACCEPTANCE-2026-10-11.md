@@ -54,3 +54,11 @@
 ### G12 判定条件の精密化（Bytecode/mapping訂正）
 
 SearchAreaGoalの目的地判定は**中心から9ブロック未満**（Minecraft 1.20.1 `Vec3i.closerToCenterThan(Position,9.0)`）であり、Follower側の距離二乗9（3ブロック）とは異なる。G12ではSearchPosに対し9.1/8.9ブロック付近の境界を観測し、測距対象がBlockPosの中心であることも記録する。ゲーム未実施。
+
+## G09〜G13 の検証器実装状況（2026-10-11更新）
+
+[ランタイム観測ログのfail-closed検証器](RUN-EVIDENCE-GATE-2026-10-11.md) と [実装](tools/evaluate_spore_trace.py) が利用可能。Python 3.13.5で[15の合成テスト](tests/test_gates.py) PASS、[GitHub Actions](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38081259925) もSUCCESS。
+
+**限定的な進捗:** 観測されたイベントのrun・world・original JAR・行順序・最低限のシナリオカバレッジを判定できる。G09〜G13のForge実機用observer/Goal内フックはまだ存在しない。実ゲームからのデータがないため、全てのruntime assertionはNOT_RUNのまま。観測ファイルのorigin欄は自己申告であり、本来のLABの認証済み実行・cleanupの代わりにはならない。
+
+原作JARの起動メタデータにも[依存テーブルの不整合候補](METADATA-AUDIT-2026-10-11.md)を発見。正式GameTest前にFMLの依存解釈・Forge実行条件を隔離環境で確認する必要がある。

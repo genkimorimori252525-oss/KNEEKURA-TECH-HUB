@@ -38,3 +38,7 @@
 ### Signal指揮と軽量Unitの新しい研究成果（2026-10-11）
 
 [Spore原作のSignal→Proto→Calamity/WombとGoal周期の原本Bytecode解析](../minecraft/mods/fungal-infection-spore/GROUP-COMMAND-SIGNAL-BYTECODE-2026-10-11.md)、[AI部門Signalルーティングの独立設計](multi-agent/SIGNAL-ROUTING-CASE-STUDY-2026-10-11.md)、[確率分岐の再現コードと結果](evaluation/experiments/spore-signal-routing-2026-10-11/README.md) を追加。19項目のBytecode構造チェックがPASS。実機G09〜G13はNOT_RUN。
+
+### G09〜G13のデータ証拠ゲート（2026-10-11）
+
+Spore 2.2.0jの[指揮・Signal・Goal受け入れテストのrunログ検証器](../minecraft/mods/fungal-infection-spore/RUN-EVIDENCE-GATE-2026-10-11.md) を実装し、合成データの15/15単体テストとGitHub Actionsを通した。別run・world・artifact・途中欠損を受け入れず、偽造可能なJSONLにruntime PASSを付けない。**Forge observer・GameTest稼働・TPS測定は未実施**。原作者の[mods.toml依存設定不整合](../minecraft/mods/fungal-infection-spore/METADATA-AUDIT-2026-10-11.md)も別facetへ記録した。
