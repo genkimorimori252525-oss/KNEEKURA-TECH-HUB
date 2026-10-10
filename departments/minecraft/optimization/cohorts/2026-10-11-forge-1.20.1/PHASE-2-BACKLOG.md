@@ -35,9 +35,18 @@ For **each full target**: obtain full upstream source tree locally + hashes, sel
 - [x] Added [RENDER-STACK-CONFLICT-MATRIX.md](RENDER-STACK-CONFLICT-MATRIX.md) for exact source Mixin target overlap and future A/B isolation. Existing MOD and TECHNIQUES catalogs now link to six dossiers; **29** technique entries.
 - [x] Distinguish source revision vs user JAR distribution release (BFRC 0.5.13 vs 0.5.12; CullLeaves 4.1.2 vs 4.1.1; EntityCulling source 1.6.2 vs JAR 1.10.5; ImmediatelyFast dev 1.5.6 vs release 1.5.5).
 - [ ] Full source-body acquisition, exact release JAR hash+parity, native 1.20.1 compiling/remap, CAS index capture, reloaded shader/world comparison: **NOT_RUN**.
-- [ ] Next rendering: GPU Tape + Distant Horizons official GitLab, and source follow-up for EntityCulling/BFRC/Embeddium interoperability.
+- [x] GPU Tape and Distant Horizons source reconnaissance opened in Phase 4 (GPU Tape exact 1.0.5.1 remains unresolved; Distant Horizons main+Core exact tag fixed), plus source follow-up for EntityCulling/BFRC/Embeddium interoperability remains.
 
-## Phase 4 — LAB and A/B: NOT_RUN
+## Phase 4/5 — GPU/LOD and memory source cohorts: 4 ADDITIONAL DOSSIERS / WHOLE_TARGET_OPEN
+
+- [x] [Phase 4/5 checkpoint](PHASE-4-5-CHECKPOINT.md): GPU Tape, Distant Horizons 3.2.0-b, AllTheLeaks 1.1.1, MemoryLeakFix 1.1.5 selective source/issue/repair + history drafts. [Machine receipt](PHASE-4-5-RECEIPT.json).
+- [x] DH official Git tag main SHA **and Core gitlink exact pair** independently mirrored; Core/renderer LOD algorithms and renderer-version conditional paths identified.
+- [x] ATL EventBus repair version guard and memory retention alternatives, MLF per-MC gated fixes recorded; GPU Tape source **1.0.5.1 UNSOLVED**, keep comparative only.
+- [x] Core performance catalog now **40 concepts**, total **16/27** have partial in-cohort dossiers; **11** deeper subject dossiers not started. NOT_COMPLETE as whole targets.
+- [ ] Binary hashes and source->JAR bytecode parity, full source body acquisition/CAS, Forge runtime/FPS/heap/MSPT benchmarks, exact loader conflicts NOT_RUN.
+- [ ] Next: server/worldgen/redstone/lighting group (Alternate Current, Starlight, Noisium, Clumps), GPU Tape release bytecode if supplied, SATURN source lineage, client profiler spark/Observable for future A/B.
+
+## Phase 6 — LAB and A/B: NOT_RUN
 
 Use only an explicitly authorized disposable Forge 1.20.1 environment with source/binary identity, set observations/assertions/cleanup, record paired measurements. No production world. Do not reuse unrelated successful Water Tank tests as evidence.
 
@@ -49,6 +58,6 @@ Use only an explicitly authorized disposable Forge 1.20.1 environment with sourc
 - `ImmediatelyFast-...1.20.4` filename alone doesn't prove unsupported 1.20.1. `BetterAdvancements-NeoForge-1.20.1` in Forge directory must be verified as to actual loader.
 - All source material collected so far is **selected evidence**, never proof that the *named release JAR* contains equivalent classes. No known +X% FPS/TPS measure.
 
-## Phase 5 — knowledge promotion: NOT_DONE
+## Phase 7 — knowledge promotion: NOT_DONE
 
 These are reviewed source candidates and comparative source locators, NOT VALIDATED canonical knowledge. No new composite optimization MOD or source copying authorized.
