@@ -32,3 +32,5 @@ Minecraftなど個別製品から独立して、人工知能の**意思決定・
 [TECH-HUB憲章](../../governance/CONSTITUTION.md) と [Knowledge Core](../../docs/architecture/BASELINE-v1.md) に従う。コミュニティ、Reddit、解説サイトは発見や反例の入口とし、技術的な結論は固定した論文/原典・ソース・Issue/PR・実験に基づける。
 
 研究メモは**候補**。根拠のない推測を事実へ昇格させず、AIによる自動VALIDATEDを行わない。新しいDB、無制限のクローラ、全分野共通ランタイムを作ったことにはしない。
+
+**候補調査:** [Minecraftの指揮・群体・学習・経路探索MOD比較（2026-10-11）](multi-agent/MINECRAFT-MOD-SCOUT-2026-10-11.md)。公開ソースとJAR調査候補を区別した発掘段階。
