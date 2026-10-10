@@ -73,9 +73,15 @@ G13の記録には tick_ms に加え、loaded_chunks と vanilla_forced_chunks_o
 
 [原作Bytecodeから復元した86クラス・372件のGoal登録位置](../GOAL-REGISTRATION-PRIORITY-AUDIT-2026-10-11.md) は**静的な呼出一覧**。有効Goalの実体を直接測るために [GoalRuntimeSampler.java](src/main/java/org/kneekura/sporeobserver/GoalRuntimeSampler.java) を追加した。
 
-- **G12のみ**、20tickごとの受動snapshot中で対象Infectedの先頭8体まで登録済みGoalを観測。各MobのAction/Target両Selectorを合わせ、priority、Goalの実Class名、実際のGoal.Flag、WrappedGoal.isRunningを読み取る。出力kindは`goal_registry_snapshot`。
+- **G12のみ**、InfectedWitch・Brute・Leaper・Busserを各最大2体優先する最大8体を受動観測。登録状態は20tick毎に goal_registry_snapshot、同じGoalのrunning値の前後差分は各サーバーtick終了時に goal_running_state_delta_snapshot を出す。Goal.start/stop/canUse自体は呼び出さない。
 - Minecraft1.20.1 `Mob.f_21345_`と`f_21346_`へはForge `ObfuscationReflectionHelper.findField` を通じた**読み取り専用のSRG field参照**を行う。実体Goalを止めたり、追加・削除したり、Goal.canUseを実行したりしない。
-- 1Mobにつき最大**12 Goal**だけを表示。総登録Goal数、実行中件数、`truncated`を併記。省略されたGoalがないと偽らない。イベント本文上限4KBを超えないことも安全契約。
+- 1Mobにつき最大**12 Goal**だけを表示。Witch支援等の研究対象と稼働中Goalをpriorityより先に選定し、総登録数、実行中件数、truncated、選定規則を記録する。観測器内でGoalインスタンスに付けたIDはrun限定で、永続IDではない。
 - これは**ある時刻の現在状態を記録するだけ**で、Flag衝突が実際に発生したとか、別Goalを中断したというGameTest結果ではない。元JAR・LABの承認済み隔離worldとcleanupは未検証。出力を`search_goal_step`等へ勝手に変換しないため既存G12の受け入れ状態はINCONCLUSIVEのまま。
 
 コンパイルは既存のForgeGradle CIで別途確認する。反射fieldの変換/アクセスが失敗した場合は観測を止め、runtime PASSへ昇格しない。
+
+## G12 running-state観測の現行仕様（2026-10-11）
+
+[G12 Goal状態差分とwatch-firstの正確な研究仕様](../G12-GOAL-STATE-TRANSITIONS-2026-10-11.md)。[GoalRuntimeSampler](src/main/java/org/kneekura/sporeobserver/GoalRuntimeSampler.java)で登録/実行状態を読み、[GoalRunningStateDiff](src/main/java/org/kneekura/sporeobserver/core/GoalRunningStateDiff.java)で同一Mob+Goalインスタンスの**連続する観測の真偽変化**を記録する。対象から外れたMobや省略Goalの停止は決して推測しない。
+
+**実ゲーム未実施・Goal.start/stopのメソッドフック未実装**。現在のG12合成テストは、Tick終了時の状態遷移を表現する自作fixtureであり、原作Sporeの実際のAI競合を測定したものではない。

@@ -136,3 +136,12 @@ All further MOD research follows [Minecraft analysis workflow](../../ANALYSIS-WO
 [GitHub Actions #38085740754](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38085740754) は **全3ジョブSUCCESS（Python単体31件、G12/G13 Java→Python合成結合、Forge 1.20.1観測MODのJARパッケージ検査）**。新しい自作観測MODの[JAR artifact](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38085740754/artifacts/11682451799) は短期保存（7日）のため失効可能。元SporeのJARはその成果物に含まない。
 
 **限界:** G12の優先度4 MOVE/LOOK競合は**静的に成立し得る候補と合成テスト6組**。原作Spore実ゲーム内の実衝突、実サーバーのGoal呼出順、介入がTPSに及ぼす影響は **NOT_RUN/UNKNOWN** のまま。
+
+## 2026-10-11 G12のGoal観測欠落・tick間変化を補強
+
+[GoalRuntimeSamplerのwatch-first表示と、1tickごとのrunning状態変化の追跡](G12-GOAL-STATE-TRANSITIONS-2026-10-11.md)を実装。以前は登録Goalをpriority昇順で12件しか表示せず、priority4のWitch支援Goalを記録から落とす可能性があったため修正した。
+
+- [GoalSnapshotSelection.java](observer/src/main/java/org/kneekura/sporeobserver/core/GoalSnapshotSelection.java) は輸送/支援/探索Goalと実行中Goalを優先し、12件を安全に選定。合成データでWitch3支援とSearchAreaがpriority0の大量Goalに埋もれないことを検証。
+- [GoalRunningStateDiff.java](observer/src/main/java/org/kneekura/sporeobserver/core/GoalRunningStateDiff.java) は同一run内のGoalインスタンスIDで、各tick終了のrunning真偽の差を記録。未観測Goalや一時的に観測から外れたMobを停止と誤認しない。
+- [PythonのG12差分検査](tools/analyze_spore_goal_snapshots.py) と [Java G12合成ログ出力](observer/tests/G12SyntheticProducer.java) を拡張。合成状態の変化を正しく受け入れるが、**Goal.start/stopメソッドを直接観測したことにはしない**。
+- 原作Spore実機/G12 GameTest/TPSは引き続き NOT_RUN。ビルドと合成CIは別証拠。

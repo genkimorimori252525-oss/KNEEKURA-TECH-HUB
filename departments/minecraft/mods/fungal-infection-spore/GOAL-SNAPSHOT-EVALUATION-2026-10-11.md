@@ -6,7 +6,7 @@
 ## 原作Bytecodeの調査と観測器の分担
 
 - [実JARから86登録元・372 GoalSelector.addGoal呼出を固定した調査](GOAL-REGISTRATION-PRIORITY-AUDIT-2026-10-11.md) は原作の**登録コード上の呼び出し箇所**を示す。全呼出が同時に実行されるという意味ではない。
-- [Forge 1.20.1向け GoalRuntimeSampler.java](observer/src/main/java/org/kneekura/sporeobserver/GoalRuntimeSampler.java) は**読み取り専用**。ForgeのSRG field mappingからMobのaction/target GoalSelectorを読み、WrappedGoalのpriority、実Goalクラス、Flags、isRunningをコピー。サーバー側G12観測中の最初の8 Infectedに対し20tick毎に**最大12項目**を採る。
+- [Forge 1.20.1向け GoalRuntimeSampler.java](observer/src/main/java/org/kneekura/sporeobserver/GoalRuntimeSampler.java) は**読み取り専用**。ForgeのSRG field mappingからMobのaction/target GoalSelectorを読み、WrappedGoalのpriority、実Goalクラス、Flags、isRunningをコピー。サーバー側G12観測中のWitch・Brute・Leaper・Busserを各最大2体優先するInfected計8体に対し、登録状態を20tick毎・稼働状態差分をtick終了毎に採る。各Mobは研究対象/稼働中Goalを優先して最大12項目を表示する。
 - [G12 evidence interpreter](tools/analyze_spore_goal_snapshots.py) は既存の[JSONL実験行のfail-closed検証](tools/evaluate_spore_trace.py)を通した後で、goal_registry_snapshotを確認する。実観測ログに擬似Goalや異なるrunが混入すれば分類し、**実ゲームのGoal衝突が起きたというPASSを返さない**。
 
 ## 収集できるもの、できないもの
@@ -48,4 +48,8 @@ py -3 -m unittest discover -s departments/minecraft/mods/fungal-infection-spore/
 
 **どれも STATICALLY_SUPPORTED_DESIGN_RISK であって、実機で競合やTPS低下を証明したものではない。** 将軍AIでの設計候補はResourceLock(MOVE/LOOK/TARGET/WORLD_MUTATION)とTaskPriorityの分離、現在実行中の注文の期限管理、失敗・中断のイベント記録を扱う。
 
-**残作業:** G12実Minecraftの観測、同じMobの複数tickの状態遷移、バニラGoalSelectorの実行制御時点とインターバル、他MODのMixinとGoal登録副作用、G09〜G13の実Forge LAB認証済みGameTest。厳密なFPS/TPS、FRONTIER NeoForge、whole-target解析もNOT_RUN。
+**残作業:** G12実Minecraftでのrunning差分取得とGoal.start/stopの真の呼出時刻の識別、バニラGoalSelectorの実行制御周期、他MODのMixinとGoal登録副作用、G09〜G13の認証済みLAB GameTest。厳密なFPS/TPS、FRONTIER NeoForge、whole-target解析もNOT_RUN。
+
+## 継続仕様：Goalの状態差分は直接callbackではない
+
+[後続の実装・偽陽性防止の詳細](G12-GOAL-STATE-TRANSITIONS-2026-10-11.md)を参照。observerが各tick終了時にisRunningを比較し、false→true・true→falseとなったGoalだけを記録する。**同じtick内の複数変化を保証できず、Goal.start/stop呼出は直接測定していない。** Java17の選定/差分単体テストと、合成G12ログのPython判定をCIで分離して実行する。

@@ -95,3 +95,7 @@ AI部門は抽象的な指揮契約・情報共有・評価方式を研究する
 Director/Commanderが任務優先度だけ与えても、Unit側のMOVE/LOOK/TARGET予約が合っていないと競合が起こり得る。InfectedWitchでは同優先度4の複数支援Goalと継承元SearchAreaGoalがMOVEを共有している。Bruteは輸送時に移動するのにTransportInfectedのFlagがTARGETのみ。これらは**Bytecodeで確認した設計上の競合候補**であり、GameTest未実施のため実際の干渉・性能悪化は断定しない。
 
 将来の将軍AIでは、`TaskPriority`とは別の`ResourceLock(MOVE/LOOK/ATTACK/WORLD_MUTATION)`、タイムアウト、タスクの割込理由、失敗→再割当の記録を検討。これは**原作コードの流用ではなく独立の設計候補**。
+
+## Goalの実行状態を観測する際の注意（Spore 2.2.0j）
+
+[原作のGoal登録・G12のtick間状態変化の観測実装](../../minecraft/mods/fungal-infection-spore/G12-GOAL-STATE-TRANSITIONS-2026-10-11.md)から、将軍AIの評価では「任務を登録」「Goalがrunningになった」「start/stopが呼ばれた」「タスクが実際に成功」を**異なるイベント**にすべきと整理した。登録済みGoalのprioritiesとMOVE/LOOK flagsだけでは実戦の中断・勝敗・負荷を証明できない。省略されたGoalや観測から外れたMobを失敗扱いにせず、時間・対象・命令IDで記録を照合する独立契約を候補とする。原作への移植・性能確認はNOT_RUN。
