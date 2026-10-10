@@ -1,0 +1,118 @@
+{
+  "format": "kneekura.failure-history.research-draft.v1",
+  "repository": "https://github.com/PaperMC/Starlight",
+  "import_ready": false,
+  "scope": {
+    "track": "ANCHOR_1.20.1_FORGE",
+    "head_revision": "1cda73ccfa016e35d7cf0ed848bc8786f5881740",
+    "history_window": "2023-07–2023-10 Forge #186/#191/#197, no direct repair",
+    "queries": [
+      "light engine deadlock",
+      "IForgeBlockGetter getExistingBlockEntity",
+      "Create elevator",
+      "Framed Blocks"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "inspected_evidence_ids": [
+      "star191",
+      "star197",
+      "star186"
+    ],
+    "deferred": [
+      "raw stack trace original hashes",
+      "Forge EventBus/blockgetter source exact binary",
+      "complete commit diff chain",
+      "runtime recreation",
+      "CAS raw capture"
+    ],
+    "unavailable": [
+      "No verified Starlight repair commit for target"
+    ]
+  },
+  "cases": [
+    {
+      "case_id": "STAR-191-197",
+      "origin": "UPSTREAM",
+      "track": "ANCHOR_EXACT_JAR_REPORTED",
+      "environment": {
+        "minecraft": "1.20.1",
+        "loader": "Forge 47.1.3",
+        "mod": "Starlight 1.1.2+forge.1cda73c",
+        "other_mod": "Framed Blocks 9.0.3"
+      },
+      "affected_symbols": [
+        "IForgeBlockGetter.getExistingBlockEntity",
+        "StarLightEngine.checkChunkEdge / block emission"
+      ],
+      "before_revision": null,
+      "after_revision": null,
+      "evidence": [
+        {
+          "id": "star191",
+          "role": "issue",
+          "url": "https://github.com/PaperMC/Starlight/issues/191",
+          "index_snapshot_id": null,
+          "document_id": null
+        },
+        {
+          "id": "star197",
+          "role": "issue",
+          "url": "https://github.com/PaperMC/Starlight/issues/197",
+          "index_snapshot_id": null,
+          "document_id": null
+        }
+      ],
+      "causal_chain": [
+        "Forge off-main getExistingBlockEntity lacks vanilla's thread guard",
+        "getChunk may synchronously wait for main thread at FULL status",
+        "Lighting/chunk worker dependencies can deadlock"
+      ],
+      "symptom": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Server crash with 1.20.1 Forge, Starlight exact JAR and Framed Blocks",
+        "evidence_ids": [
+          "star191",
+          "star197"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Custom block light emission queried while off-thread worldgen/light work",
+        "evidence_ids": [
+          "star197"
+        ]
+      },
+      "root_cause": {
+        "basis": "INFERENCE",
+        "text": "Blocking off-main Forge block-entity lookup on lighting workers",
+        "evidence_ids": [
+          "star197"
+        ]
+      },
+      "repair": {
+        "basis": "UNKNOWN",
+        "text": null,
+        "reason": "Issue #197 OPEN and maintainer says no patch from Starlight available; no diff validated"
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Never block chunk-load on light worker; versioned Forge hook safety matters",
+        "evidence_ids": [
+          "star197"
+        ]
+      },
+      "reproduction": {
+        "state": "REPORTED",
+        "evidence_ids": [
+          "star191"
+        ]
+      },
+      "fix_verification": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      }
+    }
+  ]
+}
