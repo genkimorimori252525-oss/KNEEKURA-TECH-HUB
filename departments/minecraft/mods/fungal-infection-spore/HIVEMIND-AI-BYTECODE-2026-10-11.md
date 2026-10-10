@@ -125,3 +125,20 @@ Reddit上の感染進行・ラグ・ゲームバランス談はBehaviorHintと�
 | 1.21.1 NeoForge FRONTIER | **未調査** | 別原本の取得と互換性/差分分析 |
 
 **証拠区分：** ここで列挙したメソッド経路は固定JARのDIRECT_BINARY。実際のゲーム行動/速度/性能はNOT_RUN。移植や一般化はDESIGN_PROPOSAL。AIは自分でCANONICAL VALIDATEDへ昇格しない。
+
+## 8. 追補：HowitzerとFleshBombの標的依存攻撃
+
+**直接確認した原作Bytecode：** Sentities/Calamities/Howitzer.class の m_6504_(LivingEntity,float)、compareEntity(LivingEntity,int) と Sentities/Projectile/FleshBomb.class の m_5790_ / m_8060_ / SummonInfected、FleshBomb$BombType enum。
+
+| 対象 | 解析結果 |
+| --- | --- |
+| Howitzer.compareEntity | BASIC、FLAME、BILE、ACID、NUCLEARの5種から弾種を判断。入力はisRadioactive / hasNuke、標的の最大HP、armor、周囲4ブロック拡張AABB内の対象数、SConfigのcorrosionリストなど。 |
+| Howitzer.m_6504_ | howit_ranged_damage × global_damageを計算し、選択したBombTypeと4..7の乱数を用いてFleshBombを生成。20%の確率でCarrierフラグを立て、発射速度の上下補正と投下音を設定。 |
+| FleshBombのEntityHit | explodeCircleで範囲効果を起動。FLAMEなら着火系処理とブロック置換、BILEならBILEブロック変換、NUCLEARならNukeEntity作成などの分岐。 |
+| FleshBombのBlockHit | 爆発処理、FLAME/BILEの地形置換、ACIDのsummonAcid、NUCLEARのNukeEntity分岐。Carrier=trueならSummonInfectedを呼ぶ。 |
+| SummonInfected | SConfig.SERVER.howit_summmonsリストからランダム選択したEntityTypeを生成しServerLevelへ配置。 |
+| FleshBomb.aimForTarget | 保持しているVec3位置への進行ベクトル補正。リアルタイムの生きた標的追尾と同義ではない。 |
+| AcidBall | ブロック命中からplace_acidを呼び、条件に応じてSblocks.ACIDを配置。 |
+| ThrownTumor | 着弾時、爆発・AreaEffectCloud・poison/bile/freeze/damageの分岐を持つ。 |
+
+**到達可能性の留保：** Howitzer.compareEntityにはint引数が8を超える場合の弾種切替があるが、m_6504_はfloat引数をintへcastして渡している。通常の正規化距離値ならこの条件を満たさない可能性があり、実際に全弾種が使われるかは別検証。bomb種ごとの攻撃力・破壊範囲・連射密度・描画演出・TPSはNOT_RUN。
