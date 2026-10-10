@@ -1,0 +1,50 @@
+{
+  "format": "kneekura.failure-history.research-draft.v1",
+  "import_ready": false,
+  "why_not_import_ready": "Source/Issue bytes lack immutable CAS index_snapshot_id and document_id; this record is a source-backed research memo, NOT a validated history-adapter artifact.",
+  "origin": "FiniteReality/embeddium",
+  "captured_at": "2026-10-11",
+  "scope": {
+    "track": "ANCHOR_1.20.1_SOURCE_AND_COMPARATIVE",
+    "head_revision": "dee0ebde6aea8b158613cd3b8ea5cdf0c1f6a9bf",
+    "history_window": "2023-07 queue refactor and 2024-02 1.20.1 TFC/Oculus report",
+    "queries": [
+      "EMB-QUEUE",
+      "EMB-192"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "raw_evidence_cas_identity": "UNAVAILABLE",
+    "runtime": "NOT_RUN",
+    "no_full_issue_history_claim": true
+  },
+  "cases": [
+    {
+      "id": "EMB-QUEUE",
+      "issue": null,
+      "fix": "https://github.com/FiniteReality/embeddium/commit/5866c29da7b66b0acc2f194f9c9ef1fe3f733713",
+      "before": "5b643cd136d1579cb0b7c8dcc6ddbd6acc4e61d6",
+      "after": "5866c29da7b66b0acc2f194f9c9ef1fe3f733713",
+      "env": "Historical chunk job source version, not source/binary parity for 0.3.31",
+      "symptom": "Obsolete and empty mesh build jobs may waste resources",
+      "diagnosis": "Maintainer-described cancellation problems; result lifetime, epoch and discard conditions in actual diff",
+      "repair": "CancellationToken, lastSubmittedFrame, result queue/refactor",
+      "verification": "NOT_RUN",
+      "basis": "DIRECT_OBSERVATION_DIFF_AND_AUTHOR_CLAIM"
+    },
+    {
+      "id": "EMB-192",
+      "issue": "https://github.com/FiniteReality/embeddium/issues/192",
+      "fix": null,
+      "before": null,
+      "after": null,
+      "env": "Forge Minecraft 1.20.1, Embeddium 0.3.0, TerraFirmaCraft + Oculus",
+      "symptom": "World-render crash reporter saw after updating from 0.2.18",
+      "diagnosis": "UNKNOWN_ROOT_CAUSE_NO_FIX_DIFF_TRACED",
+      "repair": null,
+      "verification": "NOT_RUN",
+      "basis": "USER_REPORT_ONLY"
+    }
+  ]
+}

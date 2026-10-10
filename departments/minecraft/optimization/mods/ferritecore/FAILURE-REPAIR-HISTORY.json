@@ -1,0 +1,36 @@
+{
+  "format": "kneekura.failure-history.research-draft.v1",
+  "import_ready": false,
+  "why_not_import_ready": "Source/Issue bytes lack immutable CAS index_snapshot_id and document_id; this record is a source-backed research memo, NOT a validated history-adapter artifact.",
+  "origin": "malte0811/FerriteCore",
+  "captured_at": "2026-10-11",
+  "scope": {
+    "track": "ANCHOR_ADJACENT_1.20",
+    "head_revision": "e47bcbbde5b83805f927bad82bcc2b323e7169b8",
+    "history_window": "2023-07–2023-08, quad hashing issue and repair",
+    "queries": [
+      "FC-129"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "raw_evidence_cas_identity": "UNAVAILABLE",
+    "runtime": "NOT_RUN",
+    "no_full_issue_history_claim": true
+  },
+  "cases": [
+    {
+      "id": "FC-129",
+      "issue": "https://github.com/malte0811/FerriteCore/issues/129",
+      "fix": "https://github.com/malte0811/FerriteCore/commit/2aa56a0def18a94574bc4c0f6e1aea00db1709a5",
+      "before": "5087367f63289248b778c183e53c7d6a303d675d",
+      "after": "2aa56a0def18a94574bc4c0f6e1aea00db1709a5",
+      "env": "Minecraft 1.20.1 (reported), ModelGapFix+Chipped, FerriteCore version not matched to user's 6.0.1 binary",
+      "symptom": "Reported startup slowdown ~23 s to ~70 s when several mods combine; unbenchmarked",
+      "diagnosis": "Arrays::hashCode collisions in packed quad arrays degrade hash-set dedup throughput per author",
+      "repair": "Change to per-int MurmurHash3 fold while retaining Arrays.equals",
+      "verification": "NOT_RUN",
+      "basis": "DIRECT_OBSERVATION_DIFF_AND_AUTHOR_CLAIM"
+    }
+  ]
+}

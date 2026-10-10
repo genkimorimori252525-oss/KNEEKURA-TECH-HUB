@@ -1,0 +1,118 @@
+{
+  "format": "kneekura.failure-history.research-draft.v1",
+  "repository": "https://github.com/SpaceWalkerRS/alternate-current",
+  "import_ready": false,
+  "scope": {
+    "track": "ANCHOR_1.20.1_FORGE",
+    "head_revision": "ab87061f1d04c44bfd42ba219ca567f8709c2acc",
+    "history_window": "2022–2026 issues #13/#27/#55; selected repair commit 815fac14",
+    "queries": [
+      "duplicate",
+      "dupe",
+      "update order",
+      "piston",
+      "wire"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "inspected_evidence_ids": [
+      "ac-issue27",
+      "ac-commit815",
+      "ac-issue13",
+      "ac-issue55"
+    ],
+    "deferred": [
+      "full Git history/PR traversal",
+      "original reporter video transcript",
+      "1.7.0 binary parity",
+      "runtime tests",
+      "raw CAS"
+    ],
+    "unavailable": []
+  },
+  "cases": [
+    {
+      "case_id": "AC-27",
+      "origin": "UPSTREAM",
+      "track": "ANCHOR_INCLUDES_HISTORICAL_REPAIR",
+      "environment": {
+        "mc_reported": "1.19.2 Forge 43.2.14 + Fabric 1.20.1 other report",
+        "mod_at_symptom": "1.6.0",
+        "mod_at_repair": "1.7.0 Forge 1.20.1 source"
+      },
+      "affected_symbols": [
+        "RedStoneWireBlockMixin.onNeighborChanged",
+        "WireHandler.onWireUpdated"
+      ],
+      "before_revision": "a9edb5c9b978bfc4b66835e6c80dfd62228af01c",
+      "after_revision": "815fac14e103ce5defcf98578acdd55da0b0cd63",
+      "evidence": [
+        {
+          "id": "ac-issue27",
+          "role": "issue",
+          "url": "https://github.com/SpaceWalkerRS/alternate-current/issues/27",
+          "index_snapshot_id": null,
+          "document_id": null
+        },
+        {
+          "id": "ac-commit815",
+          "role": "diff",
+          "url": "https://github.com/SpaceWalkerRS/alternate-current/commit/815fac14e103ce5defcf98578acdd55da0b0cd63",
+          "index_snapshot_id": null,
+          "document_id": null
+        }
+      ],
+      "causal_chain": [
+        "Dual world updates on support break",
+        "Source adds conditional neighbor handler cancel and changes injection phase",
+        "Developer says repaired in 1.7.0"
+      ],
+      "symptom": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Breaking support duplicates redstone dust drops",
+        "evidence_ids": [
+          "ac-issue27"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Support block broken under redstone wire",
+        "evidence_ids": [
+          "ac-issue27"
+        ]
+      },
+      "root_cause": {
+        "basis": "INFERENCE",
+        "text": "Vanilla handling alongside custom Mixin neighbor updates duplicate break notification",
+        "evidence_ids": [
+          "ac-commit815"
+        ]
+      },
+      "repair": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "Conditional cancel of vanilla neighborChanged + shifted onPlace/onRemove hook",
+        "evidence_ids": [
+          "ac-commit815"
+        ]
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Ensure world update interception does not double-dispatch side effects",
+        "evidence_ids": [
+          "ac-commit815"
+        ]
+      },
+      "reproduction": {
+        "state": "REPORTED",
+        "evidence_ids": [
+          "ac-issue27"
+        ]
+      },
+      "fix_verification": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "format": "kneekura.failure-history.research-draft.v1",
+  "repository": "https://github.com/juliand665/Dynamic-FPS",
+  "import_ready": false,
+  "scope": {
+    "track": "ANCHOR_1.20.1_FORGE_RELEASE_3.11.4;_COMPARATIVE_OLDER_AND_NEWER",
+    "head_revision": "499b5eed268ad0d55be7e3dc4e3384d53bacad7b",
+    "history_window": "2024-06 to 2026-01 selected #204 #283 #284",
+    "queries": [
+      "Gson config",
+      "minimal graphics restore",
+      "crash masked"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "inspected_evidence_ids": [
+      "dfps204",
+      "dfps3bfa",
+      "dfps283",
+      "dfpsb731",
+      "dfps284"
+    ],
+    "deferred": [
+      "JAR hash and 1.20.1 Forge runtime",
+      "importable CAS",
+      "full issue history",
+      "exact #284 repair commit"
+    ],
+    "unavailable": []
+  },
+  "cases": [
+    {
+      "case_id": "DFPS-204",
+      "track": "COMPARATIVE_1.20.1_FABRIC_3.5",
+      "issue": "https://github.com/juliand665/Dynamic-FPS/issues/204",
+      "fix": "https://github.com/juliand665/Dynamic-FPS/commit/3bfa1b35747b5e41c9f68bf4a8b7709a53f26fca",
+      "before": "3d2cce71dc8999205df8ff241247a2e445f4d03a",
+      "after": "3bfa1b35747b5e41c9f68bf4a8b7709a53f26fca",
+      "symptom": "Config save crash from unsupported Gson isEmpty()",
+      "repair": "Replace with size()==0",
+      "basis": "DIRECT_OBSERVATION_DIFF_PLUS_AUTHOR_CLAIM",
+      "verification": "NOT_RUN"
+    },
+    {
+      "case_id": "DFPS-283",
+      "track": "COMPARATIVE_NEWER_1.21.11",
+      "issue": "https://github.com/juliand665/Dynamic-FPS/issues/283",
+      "fix": "https://github.com/juliand665/Dynamic-FPS/commit/b7316de9b2d9a6ed65d23ebbbebeefe4f21a07a9",
+      "before": "f9974058c361bafb22552cc8b2831e7982220f28",
+      "after": "b7316de9b2d9a6ed65d23ebbbebeefe4f21a07a9",
+      "symptom": "Minimal graphics mode did not restore all options",
+      "repair": "Snapshot and restore additional graphics settings",
+      "basis": "DIRECT_OBSERVATION_DIFF_PLUS_REPORT",
+      "verification": "NOT_RUN"
+    },
+    {
+      "case_id": "DFPS-284",
+      "track": "COMPARATIVE_1.21.1_NEOFORGE",
+      "issue": "https://github.com/juliand665/Dynamic-FPS/issues/284",
+      "fix": null,
+      "after": null,
+      "symptom": "Dynamic FPS error masked other modpack crash",
+      "repair": "Maintainer claims 3.11.4 resolves; direct repair diff not reviewed",
+      "basis": "AUTHOR_CLAIM",
+      "verification": "NOT_RUN"
+    }
+  ]
+}

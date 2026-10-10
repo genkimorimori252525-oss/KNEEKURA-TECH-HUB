@@ -1,0 +1,46 @@
+{
+  "schema": "kneekura.optimization.sourcesnapshot.partial-v1",
+  "captured_at": "2026-10-11",
+  "target": "MemoryLeakFix 1.1.5",
+  "source": {
+    "repo": "FxMorin/MemoryLeakFix",
+    "commit": "988f54c14db0d86e13dd5dcce284178b2278e581",
+    "git_tree_sha": "6659f786fb6105dcf75fd154fdac3ae332c5ec97",
+    "tree_index": {
+      "blobs": 57,
+      "java": 28,
+      "truncated": false
+    },
+    "dev_minecraft": "1.20.4",
+    "dev_loader": "Forge 49.0.14",
+    "mod_version": "1.1.5",
+    "all_source_bodies_acquired": false,
+    "selected_source_bodies_read": true,
+    "archived": true,
+    "license": "LGPL-2.1"
+  },
+  "anchor": {
+    "target_mc": "1.20.1",
+    "loader": "Forge",
+    "file": "memoryleakfix-forge-1.17+-1.1.5.jar",
+    "uploaded": false,
+    "sha256": null,
+    "source_binary_parity": "NOT_ESTABLISHED"
+  },
+  "mixin_scope": {
+    "brain_memory": "EXCLUDED_AFTER_1.19.3",
+    "drowned_navigation": "EXCLUDED_AFTER_1.16.5",
+    "tag_key": "ONLY_1.18.2",
+    "biome_temperature": "SOURCE_GATED_1.14.4_PLUS",
+    "client_target_clear": "SOURCE_HAS_NO_EXPLICIT_MC_REQUIREMENT",
+    "huge_screenshot": "SOURCE_GATED_1.17_PLUS",
+    "read_resource_free_buffer": "NOT_CONFIRMED_IN_ACTIVE_MIXINS_JSON"
+  },
+  "history": {
+    "status": "PARTIAL_RESEARCH_DRAFT",
+    "cas": false
+  },
+  "performance": "PERFORMANCE_NOT_VERIFIED",
+  "runtime": "NOT_RUN",
+  "source_copied": false
+}

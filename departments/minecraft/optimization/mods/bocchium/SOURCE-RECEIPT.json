@@ -1,0 +1,43 @@
+{
+  "schema": "kneekura.optimization.sourcesnapshot.partial-v1",
+  "captured_at": "2026-10-11",
+  "subject": "bocchium",
+  "source": {
+    "repository": "https://github.com/MCTeamPotato/Bocchium",
+    "branch_discovery": "1201",
+    "immutable_commit": "57a2e920273422253dde64f2c3d907bca8679afe",
+    "git_tree_sha": "00b5af979cb53be206c414e4f73e8da260651de2",
+    "tree_index": {
+      "blob_count": 19,
+      "java_count": 3,
+      "kotlin_count": 0,
+      "truncated": false,
+      "all_paths_acquired_as_index": true,
+      "all_source_bytes_acquired": false
+    },
+    "source_declared_mod_version": "1.20.1-0.0.3",
+    "source_minecraft_scope": "1.20.1",
+    "source_loader_scope": "Forge 47.1.3 dev",
+    "license_reference": "https://github.com/MCTeamPotato/Bocchium/blob/57a2e920273422253dde64f2c3d907bca8679afe/LICENSE",
+    "license_identified": "LGPL-3.0"
+  },
+  "distribution": {
+    "user_requested_version": "1.20.1-0.0.3",
+    "requested_jar_uploaded": false,
+    "requested_jar_sha256": null,
+    "source_binary_equivalence": "NOT_ESTABLISHED"
+  },
+  "analysis": {
+    "state": "ALL_THREE_JAVA_BODIES_READ_NO_HISTORY_CASE",
+    "feature_map": "EVIDENCE_BACKED_STATIC_SELECTED_SUBSYSTEM_ONLY",
+    "failure_repair": "PARTIAL",
+    "failure_history_json_schema": "kneekura.failure-history.research-draft.v1",
+    "history_cas_index_snapshot_id": null,
+    "history_document_ids": [],
+    "runtime": "NOT_RUN",
+    "benchmark": "PERFORMANCE_NOT_VERIFIED",
+    "correctness_gametest": "NOT_RUN",
+    "canonical_validated": false
+  },
+  "boundary": "A fixed Git source revision (and complete source path inventory) is not a verified release binary, full source body acquisition, GameTest or proof of measured FPS."
+}

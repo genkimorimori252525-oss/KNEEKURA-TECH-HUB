@@ -1,0 +1,190 @@
+{
+  "format": "kneekura.failure-history.research-draft.v1",
+  "repository": "https://github.com/Steveplays28/noisium",
+  "import_ready": false,
+  "scope": {
+    "track": "ANCHOR_1.20.1_FORGE",
+    "head_revision": "8cf451809eca7cfae1dd839edad96fc9092c4ef8",
+    "history_window": "2023–2024 issues #3/#10/#16/#31, fix diff Apr 2024",
+    "queries": [
+      "lithium",
+      "canary",
+      "radium",
+      "missing chunk sections",
+      "fluid",
+      "biome"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "inspected_evidence_ids": [
+      "n10",
+      "fix-a5aa5",
+      "n3",
+      "n16",
+      "n31"
+    ],
+    "deferred": [
+      "binary parity",
+      "full history",
+      "CAB/CAS source indexing",
+      "dedicated server GameTest",
+      "runtime cause confirmation"
+    ],
+    "unavailable": []
+  },
+  "cases": [
+    {
+      "case_id": "NOISIUM-10",
+      "origin": "UPSTREAM",
+      "track": "ANCHOR_AFTER_REPAIR",
+      "environment": {
+        "minecraft": "1.20.1 source",
+        "loader": "Fabric Lithium original; source guards Forge forks Canary/Radium",
+        "mod_version": "Noisium2.0.2+ through pinned 2.3.0 source"
+      },
+      "affected_symbols": [
+        "NoiseChunkGeneratorMixin",
+        "NoisiumMixinPlugin",
+        "LithiumNoiseChunkGeneratorMixin"
+      ],
+      "before_revision": "36ab391a6e87a487ee474a33fe2e32de9669583d",
+      "after_revision": "a5aa5eac09647f93e0d3f32c66839bbdb0ff00f4",
+      "evidence": [
+        {
+          "id": "n10",
+          "role": "issue",
+          "url": "https://github.com/Steveplays28/noisium/issues/10",
+          "index_snapshot_id": null,
+          "document_id": null
+        },
+        {
+          "id": "fix-a5aa5",
+          "role": "diff",
+          "url": "https://github.com/Steveplays28/noisium/commit/a5aa5eac09647f93e0d3f32c66839bbdb0ff00f4",
+          "index_snapshot_id": null,
+          "document_id": null
+        }
+      ],
+      "causal_chain": [
+        "Direct palette write skips Lithium's chunk section tracking invariant",
+        "Plugin selects alternate Mixin if lithium/canary/radium loaded",
+        "Alternate path recalculates ChunkSection counters on unlock"
+      ],
+      "symptom": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Entities cannot detect water in generated sections when Lithium+Noisium",
+        "evidence_ids": [
+          "n10"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Noise worldgen combined with Lithium or compatible fork",
+        "evidence_ids": [
+          "n10"
+        ]
+      },
+      "root_cause": {
+        "basis": "INFERENCE",
+        "text": "Direct palette path bypassed Lithium's per-section block-type flags",
+        "evidence_ids": [
+          "n10",
+          "fix-a5aa5"
+        ]
+      },
+      "repair": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "Mod-ID Mixin routing and calculateCounts() when unlocking section",
+        "evidence_ids": [
+          "fix-a5aa5"
+        ]
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Fast paths must either reproduce downstream mod indices or defer to a compatibility-specific path",
+        "evidence_ids": [
+          "fix-a5aa5"
+        ]
+      },
+      "reproduction": {
+        "state": "REPORTED",
+        "evidence_ids": [
+          "n10"
+        ]
+      },
+      "fix_verification": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      }
+    },
+    {
+      "case_id": "NOISIUM-3",
+      "origin": "UPSTREAM",
+      "track": "COMPARATIVE_HISTORICAL_1_0_0",
+      "environment": {
+        "minecraft": "1.20-era",
+        "loader": "Fabric",
+        "mod_version": "1.0.0"
+      },
+      "affected_symbols": [],
+      "before_revision": null,
+      "after_revision": null,
+      "evidence": [
+        {
+          "id": "n3",
+          "role": "issue",
+          "url": "https://github.com/Steveplays28/noisium/issues/3",
+          "index_snapshot_id": null,
+          "document_id": null
+        }
+      ],
+      "causal_chain": [
+        "Rare missing sections reported",
+        "Developer says v1.0.1 fixes it",
+        "No matching source diff read"
+      ],
+      "symptom": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Rare missing chunks until world reload",
+        "evidence_ids": [
+          "n3"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "UNKNOWN",
+        "text": null,
+        "reason": "Rare nonreproduced path"
+      },
+      "root_cause": {
+        "basis": "UNKNOWN",
+        "text": null,
+        "reason": "Patch/stack not acquired"
+      },
+      "repair": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Fixed in v1.0.1 per developer",
+        "evidence_ids": [
+          "n3"
+        ]
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Direct palette changes need loaded/reload consistency assertions",
+        "evidence_ids": [
+          "n3"
+        ]
+      },
+      "reproduction": {
+        "state": "REPORTED",
+        "evidence_ids": [
+          "n3"
+        ]
+      },
+      "fix_verification": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      }
+    }
+  ]
+}

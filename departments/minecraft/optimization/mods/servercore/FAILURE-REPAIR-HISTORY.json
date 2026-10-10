@@ -1,0 +1,63 @@
+{
+  "format": "kneekura.failure-history.research-draft.v1",
+  "import_ready": false,
+  "why_not_import_ready": "Source/Issue bytes lack immutable CAS index_snapshot_id and document_id; this record is a source-backed research memo, NOT a validated history-adapter artifact.",
+  "origin": "Wesley1808/ServerCore",
+  "captured_at": "2026-10-11",
+  "scope": {
+    "track": "ANCHOR_1.20.1_AND_HISTORICAL",
+    "head_revision": "d1d0a02d39d0739441419e3a20f46fbc88d98ec5",
+    "history_window": "2022 inactive tick chicken repair; 2024 1.21.1 user report",
+    "queries": [
+      "SC-EGG",
+      "SC-118"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "raw_evidence_cas_identity": "UNAVAILABLE",
+    "runtime": "NOT_RUN",
+    "no_full_issue_history_claim": true
+  },
+  "cases": [
+    {
+      "id": "SC-EGG",
+      "issue": null,
+      "fix": "https://github.com/Wesley1808/ServerCore/commit/09ffb1b7d1c958b4bb2723d4ef1f3ce09af59a4b",
+      "before": "c153266fb982a8f197b93437f9e7a365959141b0",
+      "after": "09ffb1b7d1c958b4bb2723d4ef1f3ce09af59a4b",
+      "env": "Historical 2022 Minecraft source, not 1.20.1 runtime proof",
+      "symptom": "Possible loss of chicken egg event when inactive tick only decremented egg timer",
+      "diagnosis": "Source diff indicates missing essential periodic side effect in inactive tick",
+      "repair": "Spawn egg, play sound, emit GameEvent and reset egg timer within inactive tick",
+      "verification": "NOT_RUN",
+      "basis": "DIRECT_OBSERVATION_DIFF_WITH_INFERENCE"
+    },
+    {
+      "id": "SC-118",
+      "issue": "https://github.com/Wesley1808/ServerCore/issues/118",
+      "fix": null,
+      "before": null,
+      "after": null,
+      "env": "Minecraft 1.21.1 ServerCore 1.5.5 (NOT ANCHOR)",
+      "symptom": "Reporter observed iron farm golem spawn reduction after activation-range enabled",
+      "diagnosis": "Maintainer notes exclusion settings need /sc reload and chunk unload/reload; reporter confirms it helped",
+      "repair": "CONFIG_WORKAROUND_ONLY",
+      "verification": "NOT_RUN",
+      "basis": "USER_REPORT_AND_MAINTAINER_COMMENT"
+    },
+    {
+      "id": "SC-ACTIVATION-2024",
+      "issue": null,
+      "fix": "https://github.com/Wesley1808/ServerCore/commit/2238660d4be5e56336e7f9a890cb7f42138eaf82",
+      "before": "845a152d694b51484a9ea39b82eee8826db790eb",
+      "after": "2238660d4be5e56336e7f9a890cb7f42138eaf82",
+      "env": "2024 newer source; NOT the pinned source branch 1.20.1 which retains direct early return",
+      "symptom": "Maintainer said early return failed to update last active tick, causing missed immunity rechecks",
+      "diagnosis": "Maintainer source comment and observed diff",
+      "repair": "Set activated tick on shouldTick true branch",
+      "verification": "NOT_RUN",
+      "basis": "DIRECT_OBSERVATION_DIFF_DIFFERENT_TRACK"
+    }
+  ]
+}

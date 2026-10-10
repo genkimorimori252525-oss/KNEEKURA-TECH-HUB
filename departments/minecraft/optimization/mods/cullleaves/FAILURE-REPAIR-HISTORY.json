@@ -1,0 +1,186 @@
+{
+  "format": "kneekura.failure-history.research-draft.v1",
+  "repository": "https://github.com/TeamMidnightDust/CullLeaves",
+  "created_at": "2026-10-11",
+  "import_ready": false,
+  "history_adapter_status": "NOT_IMPORTED",
+  "scope": {
+    "track": "ANCHOR or explicitly marked comparative",
+    "head_revision": "a9ffb5061ae4ed49a55d5fe93679ee1d4bbe389e",
+    "history_window": "2024–2026 issues #53/#69 and source culling config/reload",
+    "queries": [
+      "leaves",
+      "Embeddium",
+      "smartleaves",
+      "performance"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "inspected_evidence_ids": [
+      "issue-69",
+      "issue-53"
+    ],
+    "deferred": [
+      "full upstream issue/PR query + pagination",
+      "release JAR SHA and bytecode parity",
+      "direct performance and correctness GameTests",
+      "CAS original byte/document IDs"
+    ],
+    "unavailable": [
+      "original raw issue/diff CAS profile not minted"
+    ]
+  },
+  "evidence_notes": {
+    "source_tree_sha": "63df9157417d376d46ea133a52fbb05f1c61e87a",
+    "source_tree_blobs": 81,
+    "java_sources_indexed": 9,
+    "source_version_boundary": "4.1.2 current source vs 4.1.1 requested; multiversion 1.20.1 Forge exists",
+    "source_license": "MIT",
+    "byte_artifacts_acquired": false,
+    "cas_index_snapshot_id": null,
+    "cas_document_id": null,
+    "source_mechanism_state": "EVIDENCE_BACKED_STATIC_SELECTED_ONLY",
+    "runtime": "NOT_RUN",
+    "benchmark": "PERFORMANCE_NOT_VERIFIED"
+  },
+  "cases": [
+    {
+      "case_id": "CL-69",
+      "origin": "UPSTREAM",
+      "track": "COMPARATIVE_NEAR_4.1.1",
+      "environment": {
+        "minecraft": "not precisely confirmed",
+        "loader": "unspecified",
+        "mod": "SmartLeaves resource pack"
+      },
+      "affected_symbols": [],
+      "before_revision": null,
+      "after_revision": null,
+      "evidence": [
+        {
+          "id": "issue-69",
+          "role": "issue",
+          "url": "https://github.com/TeamMidnightDust/CullLeaves/issues/69",
+          "index_snapshot_id": null,
+          "document_id": null
+        }
+      ],
+      "causal_chain": [
+        "Built-in smartleaves resource pack enabled",
+        "Root cause UNCONFIRMED",
+        "Repair not evidenced"
+      ],
+      "symptom": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Reporter sees lower FPS with SmartLeaves pack than no pack",
+        "evidence_ids": [
+          "issue-69"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Built-in smartleaves resource pack enabled",
+        "evidence_ids": [
+          "issue-69"
+        ]
+      },
+      "root_cause": {
+        "basis": "UNKNOWN",
+        "text": null,
+        "reason": "No code-supported causal repair chain or same-version reproduction"
+      },
+      "repair": {
+        "basis": "UNKNOWN",
+        "text": null,
+        "reason": "No verified repair source diff"
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Hold resource pack and mesh setting constant when comparing leaf face culling",
+        "evidence_ids": [
+          "issue-69"
+        ]
+      },
+      "reproduction": {
+        "state": "REPORTED",
+        "evidence_ids": [
+          "issue-69"
+        ]
+      },
+      "fix_verification": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      }
+    },
+    {
+      "case_id": "CL-53",
+      "origin": "UPSTREAM",
+      "track": "COMPARATIVE_FORGE_1.19.2",
+      "environment": {
+        "minecraft": "1.19.2",
+        "loader": "Forge",
+        "mod_version": "CullLeaves 3.0.0",
+        "other_mod": "Embeddium 0.3.18"
+      },
+      "affected_symbols": [],
+      "before_revision": null,
+      "after_revision": null,
+      "evidence": [
+        {
+          "id": "issue-53",
+          "role": "issue",
+          "url": "https://github.com/TeamMidnightDust/CullLeaves/issues/53",
+          "index_snapshot_id": null,
+          "document_id": null
+        }
+      ],
+      "causal_chain": [
+        "CullLeaves and Embeddium installed together",
+        "Root cause UNCONFIRMED",
+        "Repair not evidenced"
+      ],
+      "symptom": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Reported jungle biome startup/view crash",
+        "evidence_ids": [
+          "issue-53"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "CullLeaves and Embeddium installed together",
+        "evidence_ids": [
+          "issue-53"
+        ]
+      },
+      "root_cause": {
+        "basis": "UNKNOWN",
+        "text": null,
+        "reason": "No code-supported causal repair chain or same-version reproduction"
+      },
+      "repair": {
+        "basis": "UNKNOWN",
+        "text": null,
+        "reason": "No verified repair source diff"
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Loader and exact renderer plugin integration require isolated compatibility testing",
+        "evidence_ids": [
+          "issue-53"
+        ]
+      },
+      "reproduction": {
+        "state": "REPORTED",
+        "evidence_ids": [
+          "issue-53"
+        ]
+      },
+      "fix_verification": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      }
+    }
+  ]
+}

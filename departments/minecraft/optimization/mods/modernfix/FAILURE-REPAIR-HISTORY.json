@@ -1,0 +1,36 @@
+{
+  "format": "kneekura.failure-history.research-draft.v1",
+  "import_ready": false,
+  "why_not_import_ready": "Source/Issue bytes lack immutable CAS index_snapshot_id and document_id; this record is a source-backed research memo, NOT a validated history-adapter artifact.",
+  "origin": "embeddedt/ModernFix",
+  "captured_at": "2026-10-11",
+  "scope": {
+    "track": "ANCHOR_SOURCE_1.20",
+    "head_revision": "cf04b47d10ac5c6a748b177ce0348a3b1e4a9871",
+    "history_window": "2023-12–2024-01, lazy DFU compatibility with Litematica",
+    "queries": [
+      "MF-332"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "raw_evidence_cas_identity": "UNAVAILABLE",
+    "runtime": "NOT_RUN",
+    "no_full_issue_history_claim": true
+  },
+  "cases": [
+    {
+      "id": "MF-332",
+      "issue": "https://github.com/embeddedt/ModernFix/issues/332",
+      "fix": "https://github.com/embeddedt/ModernFix/commit/ae8cfbaa3d880a20b70a418f4ae276312fa30981",
+      "before": "675c58a437f68b42f9daa7bfc4b143d0003f7dba",
+      "after": "ae8cfbaa3d880a20b70a418f4ae276312fa30981",
+      "env": "Modded Minecraft 1.20.1 family; Litematica + ModernFix dynamic_dfu",
+      "symptom": "Schematic legacy conversion displayed empty after lazy DFU",
+      "diagnosis": "Litematica relies on vanilla flattening class early-load side effect; lazy DFU deferred it (maintainer)",
+      "repair": "Disable dynamic_dfu when litematica mod present",
+      "verification": "NOT_RUN",
+      "basis": "DIRECT_OBSERVATION_DIFF_AND_AUTHOR_CLAIM"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "kneekura.optimization.sourcesnapshot.partial-v1",
+  "captured_at": "2026-10-11",
+  "subject": "cullleaves",
+  "source": {
+    "repository": "https://github.com/TeamMidnightDust/CullLeaves",
+    "branch_discovery": "multiversion",
+    "immutable_commit": "a9ffb5061ae4ed49a55d5fe93679ee1d4bbe389e",
+    "git_tree_sha": "63df9157417d376d46ea133a52fbb05f1c61e87a",
+    "tree_index": {
+      "blob_count": 81,
+      "java_count": 9,
+      "kotlin_count": 1,
+      "truncated": false,
+      "all_paths_acquired_as_index": true,
+      "all_source_bytes_acquired": false
+    },
+    "source_declared_mod_version": "4.1.2",
+    "source_minecraft_scope": "multiversion includes 1.20.1",
+    "source_loader_scope": "Forge recipe included (source preprocessor required)",
+    "license_reference": "https://github.com/TeamMidnightDust/CullLeaves/blob/a9ffb5061ae4ed49a55d5fe93679ee1d4bbe389e/LICENSE",
+    "license_identified": "MIT"
+  },
+  "distribution": {
+    "user_requested_version": "4.1.1+1.20.1",
+    "requested_jar_uploaded": false,
+    "requested_jar_sha256": null,
+    "source_binary_equivalence": "NOT_ESTABLISHED"
+  },
+  "analysis": {
+    "state": "SELECTED_SOURCE_AND_ISSUE_ONLY",
+    "feature_map": "EVIDENCE_BACKED_STATIC_SELECTED_SUBSYSTEM_ONLY",
+    "failure_repair": "PARTIAL",
+    "failure_history_json_schema": "kneekura.failure-history.research-draft.v1",
+    "history_cas_index_snapshot_id": null,
+    "history_document_ids": [],
+    "runtime": "NOT_RUN",
+    "benchmark": "PERFORMANCE_NOT_VERIFIED",
+    "correctness_gametest": "NOT_RUN",
+    "canonical_validated": false
+  },
+  "boundary": "A fixed Git source revision (and complete source path inventory) is not a verified release binary, full source body acquisition, GameTest or proof of measured FPS."
+}
