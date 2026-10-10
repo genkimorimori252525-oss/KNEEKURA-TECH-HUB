@@ -7,6 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.storage.LevelResource;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
@@ -46,6 +47,7 @@ public final class SporeEvents {
     private static final int MAX_TRACKED = 4096;
     private final Map<UUID, WeakReference<Entity>> loaded = new LinkedHashMap<>();
     private TraceSink out;
+    private GoalRuntimeSampler goalSampler;
     private Class<?> protoClass, infectedClass, vigilClass, calamityClass, wombClass;
     private Method protoGetSignal, protoGetWeights, vigilGetWaveSize, signalActive, signalPos;
     private Method infectedSearchPos, infectedFollowPartner, calamitySearchArea;
@@ -113,6 +115,7 @@ public final class SporeEvents {
             startTick = overworld.getGameTime();
             String worldId=labelledId(property("worldId"));
             verifyLabClaims(session,world,run,worldId,expectedSeed);
+            if (scenario.equals("G12")) goalSampler = new GoalRuntimeSampler();
             Map<String,Object> meta=new LinkedHashMap<>();
             meta.put("ch","spore_meta"); meta.put("schema","kneekura.spore.observation.v1");
             meta.put("run_id",run); meta.put("scenario",scenario); meta.put("jar_sha256",SHA);
@@ -304,6 +307,10 @@ public final class SporeEvents {
             Entity e=ref.get();
             if(e==null || e.isRemoved() || !infectedClass.isInstance(e)) continue;
             if(++n>1000)break;
+            if (goalSampler != null && n<=8 && e instanceof Mob mob) {
+                // Passive runtime effective registry: never calls canUse or changes goals.
+                out.event(tick,dimension,"goal_registry_snapshot",goalSampler.snapshot(mob));
+            }
             BlockPos pos=(BlockPos)infectedSearchPos.invoke(e);
             if(pos!=null) {
                 double dist=Math.sqrt(e.distanceToSqr(pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5));
