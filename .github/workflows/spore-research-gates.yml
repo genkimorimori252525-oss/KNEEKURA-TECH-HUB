@@ -45,14 +45,33 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
       - name: Compile owned portable JSONL writer
         run: |
           ROOT=departments/minecraft/mods/fungal-infection-spore/observer
           mkdir -p "$RUNNER_TEMP/spore-core"
           javac --release 17 -d "$RUNNER_TEMP/spore-core" \
             "$ROOT/src/main/java/org/kneekura/sporeobserver/core/TraceSink.java" \
-            "$ROOT/tests/TraceSinkTest.java"
+            "$ROOT/tests/TraceSinkTest.java" \
+            "$ROOT/tests/G13SyntheticProducer.java"
           java -cp "$RUNNER_TEMP/spore-core" TraceSinkTest
+      - name: Java-to-Python G13 synthetic pipeline (never runtime PASS)
+        run: |
+          ROOT=departments/minecraft/mods/fungal-infection-spore
+          java -cp "$RUNNER_TEMP/spore-core" G13SyntheticProducer "$RUNNER_TEMP/g13.synthetic.jsonl"
+          python "$ROOT/tools/evaluate_spore_trace.py" "$RUNNER_TEMP/g13.synthetic.jsonl" --out "$RUNNER_TEMP/g13.review.json"
+          python - "$RUNNER_TEMP/g13.review.json" <<'PY'
+          import json,sys
+          d=json.load(open(sys.argv[1],encoding="utf-8"))
+          assert d["status"]=="SYNTHETIC_FIXTURE_ONLY"
+          assert d["observation_count"]==600
+          assert d["observation_coverage"]["state"]=="OBSERVED_BASELINE_COMPARISON"
+          assert d["observation_coverage"]["qualified_baseline_proto_counts"]==[1,4,16]
+          assert d["runtime_pass"] is False
+          print("PASS G13 SYNTHETIC JAVA->JSONL->PYTHON, runtime_pass=False")
+          PY
 
   forge-observer-compile:
     runs-on: ubuntu-latest
