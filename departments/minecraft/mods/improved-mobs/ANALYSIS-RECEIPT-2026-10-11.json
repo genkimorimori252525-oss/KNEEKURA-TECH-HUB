@@ -1,0 +1,145 @@
+{
+  "schema": "kneekura.minecraft.mod-analysis-receipt.v1",
+  "captured_at": "2026-10-11",
+  "mod": {
+    "name": "Improved Mobs",
+    "mod_id": "improvedmobs",
+    "author": "Flemmli97",
+    "license": "All Rights Reserved"
+  },
+  "tracks": {
+    "ANCHOR": {
+      "minecraft": "1.20.1",
+      "loader": "Forge",
+      "java_toolchain": "17",
+      "version_source": "1.13.7",
+      "version_release": "1.13.7",
+      "repository": "Flemmli97/ImprovedMobs",
+      "branch": "1.20.1",
+      "commit": "029b8c20302a76bac1af9f5140e2abb6f73fea5c",
+      "source_tree_sha": "dd570dd1971017f7cf4afbb5eddd8ab525f14fd9",
+      "source_tree_blob_count": 134,
+      "java_source_count": 106,
+      "recursive_tree_truncated": false,
+      "source_full_text_acquired": false,
+      "source_subset_read": true,
+      "release_file_name": "improvedmobs-1.20.1-1.13.7-forge.jar",
+      "curseforge_file_id": 8282565,
+      "curseforge_release_url": "https://www.curseforge.com/minecraft/mc-mods/improved-mobs/files/8282565",
+      "build_development_forge_version": "47.1.3",
+      "tenshilib_property": "1.20.1-1.7.2",
+      "binary_sha256": null,
+      "artifact_verification": "NOT_ANALYZED"
+    },
+    "FRONTIER": {
+      "minecraft": "1.21.1",
+      "loader": "NeoForge",
+      "java_toolchain": "21",
+      "version_source": "1.16.0.b",
+      "repository": "Flemmli97/ImprovedMobs",
+      "branch": "1.21",
+      "commit": "d495a4d617d38b841f275b174f7137e0644de13c",
+      "source_tree_sha": "cd22fd3e5707fbc26e1b5963835399bfe80d2025",
+      "source_tree_blob_count": 167,
+      "java_source_count": 136,
+      "recursive_tree_truncated": false,
+      "source_full_text_acquired": false,
+      "source_subset_read": true,
+      "build_development_neoforge_version": "21.1.233",
+      "tenshilib_property": "1.21.1-2.3.0",
+      "binary_sha256": null,
+      "artifact_verification": "NOT_ANALYZED"
+    }
+  },
+  "actual_tree_sha_note": "Git tree hashes confirmed from Git commit objects at pinned source revisions. They are distinct from commit SHAs and distribution binary hashes.",
+  "evidence": [
+    {
+      "type": "source",
+      "path": "common/src/main/java/io/github/flemmli97/improvedmobs/ai/BlockBreakGoal.java",
+      "sha1": "7841549b5a2af11b4262c993a4adcfaf9af2f623",
+      "finding": "mining timing and restore trigger"
+    },
+    {
+      "type": "source",
+      "path": "common/src/main/java/io/github/flemmli97/improvedmobs/utils/BlockRestorationData.java",
+      "sha1": "f41a552efd50b6e1951df0194e351c57fc7bee8d",
+      "finding": "BlockState/drop SavedData per chunk, restoration"
+    },
+    {
+      "type": "source",
+      "path": "common/src/main/java/io/github/flemmli97/improvedmobs/mixin/pathfinding/GroundNodeMixin.java",
+      "sha1": "7b58fd9cb12ea0777f35a7e0a70f201eae7fe498",
+      "finding": "breakable path nodes"
+    },
+    {
+      "type": "source",
+      "path": "common/src/main/java/io/github/flemmli97/improvedmobs/events/EventCalls.java",
+      "sha1": "79e178a4066bec7f96ae957432030939242b1115",
+      "finding": "Mob goal overlays; level tick"
+    },
+    {
+      "type": "issue",
+      "id": 283,
+      "url": "https://github.com/Flemmli97/ImprovedMobs/issues/283"
+    },
+    {
+      "type": "issue",
+      "id": 274,
+      "url": "https://github.com/Flemmli97/ImprovedMobs/issues/274"
+    },
+    {
+      "type": "issue",
+      "id": 304,
+      "url": "https://github.com/Flemmli97/ImprovedMobs/issues/304"
+    },
+    {
+      "type": "issue",
+      "id": 364,
+      "url": "https://github.com/Flemmli97/ImprovedMobs/issues/364"
+    },
+    {
+      "type": "diff",
+      "id": "9c4c79712c12231c0bc8365e12acb663d70dd1a3",
+      "url": "https://github.com/Flemmli97/ImprovedMobs/commit/9c4c79712c12231c0bc8365e12acb663d70dd1a3"
+    },
+    {
+      "type": "diff",
+      "id": "7366c81f37d9ffa74b78f36194c6f2c5a23e8505",
+      "url": "https://github.com/Flemmli97/ImprovedMobs/commit/7366c81f37d9ffa74b78f36194c6f2c5a23e8505"
+    }
+  ],
+  "facets": {
+    "architecture": "MAPPED",
+    "pathfinding": "EVIDENCE_BACKED",
+    "mob_ai": "EVIDENCE_BACKED",
+    "restoration": "EVIDENCE_BACKED",
+    "difficulty": "EVIDENCE_BACKED",
+    "network": "MAPPED",
+    "client_renderer": "INVENTORIED",
+    "data_resources": "INVENTORIED",
+    "worldgen": "INVENTORIED",
+    "portability": "MAPPED",
+    "failure_repair": "PARTIAL",
+    "performance": "NOT_ANALYZED",
+    "binary": "NOT_ANALYZED",
+    "runtime": "NOT_ANALYZED"
+  },
+  "not_done": [
+    "release JAR acquisition or SHA256",
+    "full 106/136 Java full-body checkout",
+    "TenshiLib source/binary closure",
+    "bytecode and mixin transformed classes",
+    "1.20.1 Forge gameplay tests",
+    "TPS, concurrent mobs and claim protection benchmarks",
+    "Java 21 NeoForge multiplayer smoke",
+    "CAS-evidence-backed history importer"
+  ],
+  "copyright": {
+    "raw_upstream_source_stored": false,
+    "raw_assets_stored": false,
+    "third_party_binary_stored": false,
+    "rights_expression": "All Rights Reserved",
+    "concept_only": true
+  },
+  "status": "STATIC_SOURCE_PARTIAL_NOT_WHOLE_TARGET_COMPLETE"
+}
