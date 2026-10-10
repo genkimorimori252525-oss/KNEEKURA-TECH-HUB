@@ -145,3 +145,12 @@ All further MOD research follows [Minecraft analysis workflow](../../ANALYSIS-WO
 - [GoalRunningStateDiff.java](observer/src/main/java/org/kneekura/sporeobserver/core/GoalRunningStateDiff.java) は同一run内のGoalインスタンスIDで、各tick終了のrunning真偽の差を記録。未観測Goalや一時的に観測から外れたMobを停止と誤認しない。
 - [PythonのG12差分検査](tools/analyze_spore_goal_snapshots.py) と [Java G12合成ログ出力](observer/tests/G12SyntheticProducer.java) を拡張。合成状態の変化を正しく受け入れるが、**Goal.start/stopメソッドを直接観測したことにはしない**。
 - 原作Spore実機/G12 GameTest/TPSは引き続き NOT_RUN。ビルドと合成CIは別証拠。
+
+
+### G12差分観測・再現テストの固定レシート（2026-10-11）
+
+[37件のPython単体テストとJava17差分/選別テスト、ForgeGradle JARビルドの成功証拠](verification/G12-STATE-DIFF-CI-2026-10-11.json)を追加した。
+
+[Actions #38086588083](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38086588083) で全3ジョブがSUCCESS。研究用の[自作Observer JAR](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38086588083/artifacts/11681808218)は短期保存（失効後は再ビルド）。原作Spore JARや権利付き素材は含まない。
+
+**このPASSの対象は自作コードのビルドと合成入力に限る。** 原作Minecraft 1.20.1 ForgeでのSpore実機観測、Witch/BruteのGoal割込み、TPS、world cleanupは未実施。
