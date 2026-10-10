@@ -1,0 +1,56 @@
+{
+  "schema": "kneekura.minecraft.source-build-receipt.v1",
+  "recorded_local_date": "2026-10-11",
+  "repository": "genkimorimori252525-oss/KNEEKURA-TECH-HUB",
+  "verified_workflow_run": 38082851629,
+  "workflow_url": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38082851629",
+  "workflow_commit": "8d3d0e14e00ff4544febbf031e6d32afe927a811",
+  "compiled_project": "departments/minecraft/mods/fungal-infection-spore/observer",
+  "build_target": {
+    "minecraft": "1.20.1",
+    "loader": "Forge",
+    "forge": "47.4.10",
+    "java": "17",
+    "tool": "ForgeGradle 6"
+  },
+  "checked_jobs": [
+    {
+      "name": "test-observation-gates",
+      "job_id": 114303166072,
+      "result": "SUCCESS",
+      "scope": "15 Python unit tests and owned Python source compilation, fixtures only"
+    },
+    {
+      "name": "portable-observer-core",
+      "job_id": 114303166262,
+      "result": "SUCCESS",
+      "scope": "Java17 TraceSinkTest and Java-to-JSONL-to-Python 600-row G13 synthetic pipeline; runtime_pass=false"
+    },
+    {
+      "name": "forge-observer-compile",
+      "job_id": 114303166340,
+      "result": "SUCCESS",
+      "scope": "ForgeGradle build, research-owned observer jar produced; jar contains own classes and mods.toml; original Spore com/Harbinger/Spore class paths excluded"
+    }
+  ],
+  "original_spore": {
+    "jar_name": "spore_1.20.1_2.2.0j.jar",
+    "sha256": "d20c4be6606f9752ecfd964eba625363eb76a28e327d67fe6dda4be748401489",
+    "input_in_ci": "NOT_PROVIDED",
+    "runtime_loaded": "NO",
+    "third_party_classes_copied": "NO",
+    "publication": "NOT_PUBLISHED"
+  },
+  "verdict": {
+    "status": "PASS_OWNED_BUILD_AND_SYNTHETIC_TESTS",
+    "runtime": "NOT_RUN",
+    "gametest": "NOT_RUN",
+    "tps": "NOT_MEASURED",
+    "loaded_mod_compatibility": "NOT_VERIFIED",
+    "observed_mob_behavior": "NOT_OBSERVED",
+    "cleanup": "NOT_APPLICABLE_NO_WORLD",
+    "jar_binary_hash_in_report": "NOT_CAPTURED",
+    "current_source_after_run_may_differ": true
+  },
+  "caution": "CI run checks source on its pinned head SHA, not every future change. The original user-supplied Spore JAR and Minecraft do not execute in this CI."
+}
