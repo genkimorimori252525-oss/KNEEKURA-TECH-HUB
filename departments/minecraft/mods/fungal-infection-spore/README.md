@@ -127,3 +127,12 @@ All further MOD research follows [Minecraft analysis workflow](../../ANALYSIS-WO
 - [analyze_spore_goal_snapshots.py](tools/analyze_spore_goal_snapshots.py) はrun/scenario/JAR/version/行の整合性を確認してから、**同じSelector内で同じMOVE等のFlagを要求する登録Goalの競合候補**だけを数える。実際のGoal同士の衝突・interrupt・勝率・TPSを自動PASSにしない。
 - [G12SyntheticProducer.java](observer/tests/G12SyntheticProducer.java) は自作合成データを生成。Witchのpriority4支援3個とSearchAreaGoalのMOVE競合候補6組を抽出する。BruteのTARGETとMOVE/LOOKは共通Flagがなく、同じ競合には数えない。
 - [CI #38085740754](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38085740754) のportable Java→JSONL→両Python reviewerの合成G12結合テスト、Pythonの追加6件を含む合計31件のテストがSUCCESS。Forgeの実ゲーム実行は未実施。別ジョブの最終ビルド結果はActionsで個別確認する。
+
+
+### G12登録Goal検査・CI最終レシート（2026-10-11）
+
+[静的Goal登録372件＋G12合成観測＋ForgeGradleビルドのスコープ付き最終レシート](verification/GOAL-G12-CI-2026-10-11.json)を追加。
+
+[GitHub Actions #38085740754](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38085740754) は **全3ジョブSUCCESS（Python単体31件、G12/G13 Java→Python合成結合、Forge 1.20.1観測MODのJARパッケージ検査）**。新しい自作観測MODの[JAR artifact](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38085740754/artifacts/11682451799) は短期保存（7日）のため失効可能。元SporeのJARはその成果物に含まない。
+
+**限界:** G12の優先度4 MOVE/LOOK競合は**静的に成立し得る候補と合成テスト6組**。原作Spore実ゲーム内の実衝突、実サーバーのGoal呼出順、介入がTPSに及ぼす影響は **NOT_RUN/UNKNOWN** のまま。
