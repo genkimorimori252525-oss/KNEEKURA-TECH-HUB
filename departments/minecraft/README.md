@@ -131,3 +131,9 @@ Vanilla AIの意味解析は [vanilla-ai](vanilla-ai/README.md)、実機での�
 
 - [Product workspaces](projects/README.md) — `projects/kirby-mod/` contains the canonical Kirby source import from the former `Kirby_mod` repository. The old repo remains a read-only historical backup; Reimu and Natural Ghast have not been migrated in this Kirby change.
 - [Shared MOD debugging roadmap](design/2026-10-09-shared-mod-debug-roadmap.md) — plan to replace incomplete per-MOD diagnostics with optional adapters to the existing LAB / MOD-AI system; no shared debug runtime claimed yet.
+
+
+### 新しい感染・指揮AI原作研究
+
+[Spore 2.2.0j](mods/fungal-infection-spore/README.md) はユーザー提供Minecraft 1.20.1 Forge JARを固定し、Protoの4×4部隊選択/報酬更新、Womb/Moundの資源回収・感染、上位個体の標的共有を選定Bytecodeから調査中。AI部門での一般化は [別研究](../ai/multi-agent/PROTO-HIVEMIND-CASE-STUDY-2026-10-11.md)。実機検証とwhole-target completeは未実施。
+
