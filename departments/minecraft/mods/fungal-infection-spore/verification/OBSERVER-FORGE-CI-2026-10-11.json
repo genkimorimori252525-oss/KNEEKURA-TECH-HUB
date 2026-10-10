@@ -52,5 +52,34 @@
     "jar_binary_hash_in_report": "NOT_CAPTURED",
     "current_source_after_run_may_differ": true
   },
-  "caution": "CI run checks source on its pinned head SHA, not every future change. The original user-supplied Spore JAR and Minecraft do not execute in this CI."
+  "caution": "CI run checks source on its pinned head SHA, not every future change. The original user-supplied Spore JAR and Minecraft do not execute in this CI.",
+  "latest_packaged_artifact_run": {
+    "workflow_run_id": 38083037553,
+    "workflow_commit": "52df9886c0124fcbeb94661ffcaeb26b3bc71796",
+    "workflow_url": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38083037553",
+    "result": "SUCCESS_ALL_THREE_JOBS",
+    "source_includes": "SporeEvents.java passive G11 weight/wave/damage snapshots and G13 loaded/vanilla-forced chunk counts",
+    "checks": [
+      "15 Python unittest synthetic fixture tests passed",
+      "Java 17 portable TraceSink test passed",
+      "Java-generated G13 600 synthetic JSONL events consumed by Python validator with runtime_pass=false",
+      "ForgeGradle 6 / MC 1.20.1 Forge 47.4.10 observer build passed",
+      "Packaged JAR contains own observer class, TraceSink class and own mods.toml",
+      "No com/Harbinger/Spore/ original class paths bundled",
+      "Upload owned observer JAR only step success"
+    ],
+    "actions_artifact": {
+      "artifact_id": 11681372105,
+      "name": "kneekura-spore-observer-52df9886c0124fcbeb94661ffcaeb26b3bc71796",
+      "artifact_url": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38083037553/artifacts/11681372105",
+      "archive_zip_size_bytes": 17027,
+      "retention_days_requested": 7,
+      "expired_at_check": false,
+      "original_spore_jar_included": false,
+      "artifact_contents": "Original KNEEKURA research observer JAR only. Distribution archives can expire."
+    },
+    "live_observed_spore": "NOT_RUN",
+    "actual_spore_runtime_attestation": "NOT_ESTABLISHED",
+    "real_tps": "NOT_MEASURED"
+  }
 }
