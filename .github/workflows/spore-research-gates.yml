@@ -55,7 +55,8 @@ jobs:
           javac --release 17 -d "$RUNNER_TEMP/spore-core" \
             "$ROOT/src/main/java/org/kneekura/sporeobserver/core/TraceSink.java" \
             "$ROOT/tests/TraceSinkTest.java" \
-            "$ROOT/tests/G13SyntheticProducer.java"
+            "$ROOT/tests/G13SyntheticProducer.java" \
+            "$ROOT/tests/G12SyntheticProducer.java"
           java -cp "$RUNNER_TEMP/spore-core" TraceSinkTest
       - name: Java-to-Python G13 synthetic pipeline (never runtime PASS)
         run: |
@@ -72,6 +73,29 @@ jobs:
           assert d["runtime_pass"] is False
           print("PASS G13 SYNTHETIC JAVA->JSONL->PYTHON, runtime_pass=False")
           PY
+
+      - name: Java-to-Python G12 synthetic Goal flag contention pipeline
+        run: |
+          ROOT=departments/minecraft/mods/fungal-infection-spore
+          java -cp "$RUNNER_TEMP/spore-core" G12SyntheticProducer "$RUNNER_TEMP/g12.synthetic.jsonl"
+          python "$ROOT/tools/analyze_spore_goal_snapshots.py" "$RUNNER_TEMP/g12.synthetic.jsonl" --out "$RUNNER_TEMP/g12.goals-review.json"
+          python "$ROOT/tools/evaluate_spore_trace.py" "$RUNNER_TEMP/g12.synthetic.jsonl" --out "$RUNNER_TEMP/g12.scenario-review.json"
+          python - "$RUNNER_TEMP/g12.goals-review.json" "$RUNNER_TEMP/g12.scenario-review.json" <<'PY'
+          import json,sys
+          g=json.load(open(sys.argv[1],encoding="utf-8"))
+          r=json.load(open(sys.argv[2],encoding="utf-8"))
+          assert g["status"]=="SYNTHETIC_FIXTURE_ONLY"
+          assert g["observed_snapshot_rows"]==2
+          assert g["potential_shared_flag_pairs_sum"]==6
+          assert g["same_priority_shared_flag_pairs_sum"]==6
+          assert g["co_running_shared_flag_pairs_sum"]==0
+          assert g["runtime_pass"] is False
+          assert r["status"]=="SYNTHETIC_FIXTURE_ONLY"
+          assert r["observation_coverage"]["state"]=="INCONCLUSIVE"
+          assert r["runtime_pass"] is False
+          print("PASS G12 SYNTHETIC JAVA->JSONL->PYTHON, no runtime/GameTest claims")
+          PY
+
 
   forge-observer-compile:
     runs-on: ubuntu-latest
