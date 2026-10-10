@@ -102,6 +102,13 @@ jobs:
             exit 1
           fi
           echo "PASS OWNED_FORGE_OBSERVER_JAR_PACKAGING (NO_RUNTIME)"
+      - name: Upload owned observer JAR only
+        uses: actions/upload-artifact@v4
+        with:
+          name: kneekura-spore-observer-${{ github.sha }}
+          path: departments/minecraft/mods/fungal-infection-spore/observer/build/libs/kneekura-spore-observer-*.jar
+          if-no-files-found: error
+          retention-days: 7
 
 # The Forge task compiles locally owned observer source with public ForgeDev
 # dependencies. It does NOT load Spore, start a game world or check in its JAR.
