@@ -1,6 +1,7 @@
 package org.kneekura.sporeobserver;
 
 import org.kneekura.sporeobserver.core.TraceSink;
+import org.kneekura.sporeobserver.core.GoalRunningStateDiff;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.minecraft.core.BlockPos;
@@ -28,6 +29,7 @@ import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -48,6 +50,7 @@ public final class SporeEvents {
     private final Map<UUID, WeakReference<Entity>> loaded = new LinkedHashMap<>();
     private TraceSink out;
     private GoalRuntimeSampler goalSampler;
+    private GoalRunningStateDiff goalRunningDiff;
     private Class<?> protoClass, infectedClass, vigilClass, calamityClass, wombClass;
     private Method protoGetSignal, protoGetWeights, vigilGetWaveSize, signalActive, signalPos;
     private Method infectedSearchPos, infectedFollowPartner, calamitySearchArea;
@@ -115,7 +118,10 @@ public final class SporeEvents {
             startTick = overworld.getGameTime();
             String worldId=labelledId(property("worldId"));
             verifyLabClaims(session,world,run,worldId,expectedSeed);
-            if (scenario.equals("G12")) goalSampler = new GoalRuntimeSampler();
+            if (scenario.equals("G12")) {
+                goalSampler = new GoalRuntimeSampler();
+                goalRunningDiff = new GoalRunningStateDiff();
+            }
             Map<String,Object> meta=new LinkedHashMap<>();
             meta.put("ch","spore_meta"); meta.put("schema","kneekura.spore.observation.v1");
             meta.put("run_id",run); meta.put("scenario",scenario); meta.put("jar_sha256",SHA);
@@ -149,6 +155,7 @@ public final class SporeEvents {
         if (!level.dimension().location().toString().equals(dimension)) return;
         Entity e=event.getEntity();
         loaded.remove(e.getUUID());
+        if (goalRunningDiff != null) goalRunningDiff.remove(e.getUUID().toString());
         if (protoClass.isInstance(e)||vigilClass.isInstance(e)) {
             try {out.event(level.getGameTime(),dimension,"entity_leave_snapshot",
                     Map.of("uuid",e.getUUID().toString(),"kind",e.getClass().getSimpleName()));}
@@ -177,7 +184,10 @@ public final class SporeEvents {
             else if (scenario.equals("G09")||scenario.equals("G10")) {
                 if ((tick-startTick)%20==0) sampleSignals(tick);
             }
-            else if (scenario.equals("G12") && (tick - startTick)%20==0) sampleMovement(tick);
+            else if (scenario.equals("G12")) {
+                if ((tick - startTick)%20==0) sampleMovement(tick);
+                sampleRunningStateChanges(tick);
+            }
             else if (scenario.equals("G11") && (tick - startTick)%20==0) sampleLearning(tick);
             // G11 sees only entity joins/leaves. Method-level award/penalty
             // calls are unobservable from passive Forge events; keep INCONCLUSIVE.
@@ -301,14 +311,64 @@ public final class SporeEvents {
         } catch (Exception failure) { disable(failure); }
     }
 
-    private void sampleMovement(long tick) throws Exception {
-        int n=0;
+    /**
+     * Deterministically reserve two slots each for Witch, Brute, Leaper and
+     * Busser when present, then fill unused slots by UUID. The original
+     * "first eight loaded" approach could systematically miss the very roles
+     * this G12 test was built to study.
+     */
+    private List<Mob> selectedG12Units() {
+        final int limit = 8;
+        List<Mob> candidates = new ArrayList<>();
         for (WeakReference<Entity> ref:loaded.values()) {
-            Entity e=ref.get();
-            if(e==null || e.isRemoved() || !infectedClass.isInstance(e)) continue;
-            if(++n>1000)break;
-            if (goalSampler != null && n<=8 && e instanceof Mob mob) {
-                // Passive runtime effective registry: never calls canUse or changes goals.
+            Entity e = ref.get();
+            if (e instanceof Mob mob && !mob.isRemoved() && infectedClass.isInstance(mob)) {
+                candidates.add(mob);
+            }
+        }
+        candidates.sort(Comparator.comparing(m -> m.getUUID().toString()));
+        LinkedHashMap<UUID, Mob> chosen = new LinkedHashMap<>();
+        for (String role : List.of("InfectedWitch", "Brute", "Leaper", "Busser")) {
+            int count = 0;
+            for (Mob mob:candidates) {
+                if (!role.equals(mob.getClass().getSimpleName())) continue;
+                if (count >= 2) break;
+                chosen.put(mob.getUUID(), mob);
+                count++;
+            }
+        }
+        for (Mob mob:candidates) {
+            if (chosen.size() >= limit) break;
+            chosen.putIfAbsent(mob.getUUID(), mob);
+        }
+        return new ArrayList<>(chosen.values());
+    }
+
+    /**
+     * End-of-tick polling detects a change between two observations only.
+     * This is NOT an invocation tracer for Goal.start/stop/canUse.
+     */
+    private void sampleRunningStateChanges(long tick) throws Exception {
+        if (goalSampler == null || goalRunningDiff == null) return;
+        var units = selectedG12Units();
+        java.util.Set<String> sampled = new java.util.HashSet<>();
+        for (Mob mob : units) {
+            sampled.add(mob.getUUID().toString());
+            Map<String,Object> snapshot = goalSampler.snapshot(mob);
+            Map<String,Object> delta = goalRunningDiff.observe(snapshot);
+            if (((Number)delta.get("observed_state_changes")).intValue() > 0) {
+                out.event(tick, dimension, "goal_running_state_delta_snapshot", delta);
+            }
+        }
+        // Never mistake reappearing after an observation gap for a continuous
+        // start/stop transition across the unobserved interval.
+        goalRunningDiff.retainOnly(sampled);
+    }
+
+    private void sampleMovement(long tick) throws Exception {
+        for (Mob mob : selectedG12Units()) {
+            Entity e = mob;
+            if (goalSampler != null) {
                 out.event(tick,dimension,"goal_registry_snapshot",goalSampler.snapshot(mob));
             }
             BlockPos pos=(BlockPos)infectedSearchPos.invoke(e);
@@ -333,7 +393,12 @@ public final class SporeEvents {
     private void stop(String reason) {
         if (out==null) return;
         try {out.finish(reason);} catch (Exception e) {System.err.println("[kneekura-spore-observer] failed end marker: "+e);}
-        finally {out=null;loaded.clear();stopped=true;}
+        finally {
+            out=null; loaded.clear();
+            if (goalRunningDiff!=null) goalRunningDiff.clear();
+            goalRunningDiff=null; goalSampler=null;
+            stopped=true;
+        }
     }
 
     private void disable(Exception failure) {
