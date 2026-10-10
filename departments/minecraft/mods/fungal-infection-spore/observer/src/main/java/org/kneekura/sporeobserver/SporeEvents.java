@@ -11,6 +11,8 @@ import net.minecraft.world.level.storage.LevelResource;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.event.server.ServerStoppingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -45,7 +47,7 @@ public final class SporeEvents {
     private final Map<UUID, WeakReference<Entity>> loaded = new LinkedHashMap<>();
     private TraceSink out;
     private Class<?> protoClass, infectedClass, vigilClass, calamityClass, wombClass;
-    private Method protoGetSignal, signalActive, signalPos;
+    private Method protoGetSignal, protoGetWeights, vigilGetWaveSize, signalActive, signalPos;
     private Method infectedSearchPos, infectedFollowPartner, calamitySearchArea;
     private String scenario, dimension;
     private long startTick, stopAfter, startedNanos;
@@ -100,6 +102,8 @@ public final class SporeEvents {
             wombClass = Class.forName("com.Harbinger.Spore.Sentities.Organoids.Womb", false, getClass().getClassLoader());
             Class<?> signalClass = Class.forName("com.Harbinger.Spore.Sentities.Signal", false, getClass().getClassLoader());
             protoGetSignal=protoClass.getMethod("getSignal");
+            protoGetWeights=protoClass.getMethod("getWeights");
+            vigilGetWaveSize=vigilClass.getMethod("getWaveSize");
             signalActive=signalClass.getMethod("active");
             signalPos=signalClass.getMethod("pos");
             infectedSearchPos=infectedClass.getMethod("getSearchPos");
@@ -171,6 +175,7 @@ public final class SporeEvents {
                 if ((tick-startTick)%20==0) sampleSignals(tick);
             }
             else if (scenario.equals("G12") && (tick - startTick)%20==0) sampleMovement(tick);
+            else if (scenario.equals("G11") && (tick - startTick)%20==0) sampleLearning(tick);
             // G11 sees only entity joins/leaves. Method-level award/penalty
             // calls are unobservable from passive Forge events; keep INCONCLUSIVE.
         } catch (Exception failure) { disable(failure); }
@@ -243,6 +248,54 @@ public final class SporeEvents {
                     Map.of("proto_uuid",e.getUUID().toString(),"signal_pos",List.of(pos.getX(),pos.getY(),pos.getZ()),
                            "capture_scope","PASSIVE_AFTER_TICK_NOT_DISPATCH_CALL"));
         }
+    }
+
+
+    /**
+     * G11 partial evidence. Each row is a passive snapshot of public getters,
+     * not a direct observation of awardHivemind, punishHivemind or summon.
+     */
+    private void sampleLearning(long tick) throws Exception {
+        for (WeakReference<Entity> ref:loaded.values()) {
+            Entity e=ref.get();
+            if(e==null || e.isRemoved()) continue;
+            if(protoClass.isInstance(e)) {
+                double[] weights=(double[])protoGetWeights.invoke(e);
+                if(weights!=null && weights.length==16) {
+                    List<Double> values=new ArrayList<>(16);
+                    for(double w:weights)values.add(w); // copies; never writes original array
+                    out.event(tick,dimension,"proto_weights_snapshot",
+                            Map.of("proto_uuid",e.getUUID().toString(),"weights",values,
+                                   "capture_scope","PUBLIC_GETTER_SNAPSHOT_NOT_REWARD_CALL"));
+                }
+            }
+            if(vigilClass.isInstance(e)) {
+                int size=((Number)vigilGetWaveSize.invoke(e)).intValue();
+                out.event(tick,dimension,"vigil_wave_snapshot",Map.of(
+                        "vigil_uuid",e.getUUID().toString(),"wave_size",size,
+                        "capture_scope","PUBLIC_GETTER_SNAPSHOT_NOT_SUMMON_CALL"));
+            }
+        }
+    }
+
+    /** Forge event observer; exact event delivery, not final mission reward. */
+    @SubscribeEvent(priority=EventPriority.LOWEST)
+    public void onLivingDamage(LivingDamageEvent event) {
+        if (out==null || stopped || !"G11".equals(scenario)) return;
+        if (!(event.getEntity().level() instanceof ServerLevel level)) return;
+        if (!level.dimension().location().toString().equals(dimension)) return;
+        Entity victim=event.getEntity();
+        Entity attacker=event.getSource().getEntity();
+        boolean relevant=victim.getClass().getName().startsWith("com.Harbinger.Spore.")
+                || (attacker!=null && attacker.getClass().getName().startsWith("com.Harbinger.Spore."));
+        if (!relevant) return;
+        try {
+            out.event(level.getGameTime(),dimension,"damage_event_snapshot",Map.of(
+                    "victim_uuid",victim.getUUID().toString(),
+                    "attacker_uuid",attacker==null?"none":attacker.getUUID().toString(),
+                    "damage_event_amount",event.getAmount(),"event_cancelled",event.isCanceled(),
+                    "capture_scope","LIVING_DAMAGE_EVENT_NOT_HIVEMIND_REWARD_CALL"));
+        } catch (Exception failure) { disable(failure); }
     }
 
     private void sampleMovement(long tick) throws Exception {
