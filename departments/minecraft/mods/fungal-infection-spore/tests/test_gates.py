@@ -173,4 +173,57 @@ class GargoylHardnessUnitTest(unittest.TestCase):
         self.assertEqual(CLS,'com/Harbinger/Spore/Sentities/EvolvedInfected/Gargoyl.class')
         self.assertEqual(len(CLS_SHA),64)
 
+class SporeGoalRegistrationUnitTest(unittest.TestCase):
+    """Portable synthetic parser regressions; original Spore JAR is not in CI."""
+
+    def test_owner_goal_and_target_call_sites(self):
+        from audit_spore_goal_registrations import parse_javap
+        body='''  protected void m_8099_();
+    Code:
+       0: aload_0
+       1: getfield #2 // Field f_21345_:Lnet/minecraft/world/entity/ai/goal/GoalSelector;
+       4: iconst_1
+       5: new #3 // class com/Harbinger/Spore/Sentities/AI/TransportInfected
+       9: invokevirtual #4 // Method net/minecraft/world/entity/ai/goal/GoalSelector.m_25352_:(ILnet/minecraft/world/entity/ai/goal/Goal;)V
+      12: aload_0
+      13: getfield #5 // Field f_21346_:Lnet/minecraft/world/entity/ai/goal/GoalSelector;
+      16: bipush 7
+      18: new #6 // class net/minecraft/world/entity/ai/goal/target/NearestAttackableTargetGoal
+      21: invokevirtual #4 // Method net/minecraft/world/entity/ai/goal/GoalSelector.m_25352_:(ILnet/minecraft/world/entity/ai/goal/Goal;)V
+  public void anotherMethod();
+    Code:
+       0: return'''
+        rows=parse_javap(body,'synthetic.class')
+        self.assertEqual(len(rows),2)
+        self.assertEqual((rows[0]['selector'],rows[0]['priority'],rows[0]['goal_class'].split('/')[-1]),('goal',1,'TransportInfected'))
+        self.assertEqual((rows[1]['selector'],rows[1]['priority']),('target',7))
+
+    def test_goal_new_distinguishes_nested_item(self):
+        from audit_spore_goal_registrations import is_goal_alloc
+        self.assertFalse(is_goal_alloc('net/minecraft/world/item/ItemStack'))
+        self.assertTrue(is_goal_alloc('com/Harbinger/Spore/Sentities/BasicInfected/InfectedWitch$3'))
+
+    def test_other_jar_rejected_before_javap(self):
+        from audit_spore_goal_registrations import analyze
+        with TemporaryDirectory() as directory:
+            wrong=Path(directory)/'wrong.jar'
+            wrong.write_bytes(b'incorrect')
+            self.assertEqual(analyze(wrong)['status'],'BLOCKED_HASH_MISMATCH')
+
+    def test_constant_priority_parsing(self):
+        from audit_spore_goal_registrations import priority_value
+        for op,arg,expected in [
+            ('iconst_5','',5),('iconst_m1','',-1),
+            ('bipush',' 40',40),('sipush',' 128',128),
+            ('ldc',' #4 // int 23',23)
+        ]:
+            self.assertEqual(priority_value((1,op,arg,'')),expected)
+
+    def test_partial_inventory_cannot_pass_372_contract(self):
+        from audit_spore_goal_registrations import summarize
+        example=[{'owner':'synthetic','selector':'goal','priority':1,'goal_class':'net/minecraft/world/entity/ai/goal/FloatGoal'}]
+        _,contracts=summarize(example)
+        self.assertFalse(contracts['original_direct_registration_invokes_372'])
+        self.assertFalse(contracts['original_unique_direct_registration_owners_86'])
+
 if __name__=='__main__':unittest.main()
