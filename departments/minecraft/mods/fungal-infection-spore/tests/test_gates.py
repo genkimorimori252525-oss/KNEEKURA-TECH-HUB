@@ -226,4 +226,76 @@ class SporeGoalRegistrationUnitTest(unittest.TestCase):
         self.assertFalse(contracts['original_direct_registration_invokes_372'])
         self.assertFalse(contracts['original_unique_direct_registration_owners_86'])
 
+class SporeGoalSnapshotReviewTest(unittest.TestCase):
+    """Candidate overlaps are inventory observations, never proof of runtime bugs."""
+
+    @staticmethod
+    def sample_goals():
+        return [
+            dict(selector='goal', priority=4,
+                 goal_class='com.Harbinger.Spore.Sentities.BasicInfected.InfectedWitch$3',
+                 flags=['MOVE', 'LOOK'], running=True),
+            dict(selector='goal', priority=4,
+                 goal_class='com.Harbinger.Spore.Sentities.BasicInfected.InfectedWitch$4',
+                 flags=['MOVE', 'LOOK'], running=False),
+            dict(selector='goal', priority=4,
+                 goal_class='com.Harbinger.Spore.Sentities.AI.LocHiv.SearchAreaGoal',
+                 flags=['MOVE'], running=False)
+        ]
+
+    def review(self, scenario='G12', data=None, origin='synthetic_fixture',
+               ending='completed'):
+        from analyze_spore_goal_snapshots import analyze
+        with TemporaryDirectory() as temp:
+            p=Path(temp)/'fixture.jsonl'
+            if data is None:
+                data={'entity_uuid':'fake-witch-uuid',
+                      'registered_goal_count':3,'registered_running_count':1,
+                      'truncated':False,'goals':self.sample_goals()}
+            fixture=make_trace(scenario, [('goal_registry_snapshot',data)],
+                               origin=origin, end=ending)
+            p.write_text('\n'.join(json.dumps(x) for x in fixture)+'\n',encoding='utf-8')
+            return analyze(p)
+
+    def test_witch_same_priority_move_lock_candidates(self):
+        report=self.review()
+        self.assertEqual(report['status'],'SYNTHETIC_FIXTURE_ONLY')
+        self.assertEqual(report['potential_shared_flag_pairs_sum'],3)
+        self.assertEqual(report['same_priority_shared_flag_pairs_sum'],3)
+        self.assertEqual(report['co_running_shared_flag_pairs_sum'],0)
+        self.assertFalse(report['runtime_pass'])
+
+    def test_target_goal_selectors_not_compared(self):
+        goals=self.sample_goals()[:1]
+        other=dict(goals[0])
+        other['selector']='target'
+        data={'entity_uuid':'fake-unit','registered_goal_count':2,
+              'registered_running_count':1,'truncated':False,
+              'goals':goals+[other]}
+        report=self.review(data=data)
+        self.assertEqual(report['potential_shared_flag_pairs_sum'],0)
+
+    def test_invalid_flag_rejected_without_goal_claim(self):
+        data={'entity_uuid':'fake-unit','registered_goal_count':1,
+              'registered_running_count':0,'truncated':False,
+              'goals':[dict(selector='goal',priority=4,flags=['FLY'],
+                            running=False,goal_class='TestGoal')]}
+        report=self.review(data=data)
+        self.assertEqual(report['status'],'INCONCLUSIVE_INVALID_OR_ABSENT_GOAL_SNAPSHOTS')
+        self.assertEqual(report['parsed_snapshot_rows'],0)
+        self.assertFalse(report['runtime_pass'])
+
+    def test_wrong_scenario_blocked(self):
+        self.assertEqual(self.review(scenario='G09')['status'],'BLOCKED_WRONG_SCENARIO')
+
+    def test_unattested_claim_is_not_runtime_pass(self):
+        report=self.review(origin='runtime_claim_unattested')
+        self.assertEqual(report['status'],'IMPORTED_UNATTESTED_GOAL_REGISTRY')
+        self.assertFalse(report['runtime_pass'])
+
+    def test_partial_or_aborted_run_not_accepted(self):
+        report=self.review(ending='aborted')
+        self.assertEqual(report['status'],'INCONCLUSIVE_INCOMPLETE_RUN')
+        self.assertFalse(report['runtime_pass'])
+
 if __name__=='__main__':unittest.main()
