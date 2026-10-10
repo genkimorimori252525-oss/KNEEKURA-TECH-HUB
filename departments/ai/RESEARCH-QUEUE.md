@@ -46,3 +46,8 @@ Spore 2.2.0jの[指揮・Signal・Goal受け入れテストのrunログ検証器
 ### Spore Forgeの読み取り専用観測器（2026-10-11）
 
 [observer README](../minecraft/mods/fungal-infection-spore/observer/README.md) と [ソース](../minecraft/mods/fungal-infection-spore/observer/src/main/java/org/kneekura/sporeobserver/SporeEvents.java)をTECH-HUB Minecraft研究領域に追加。原作を改変せずSpore 2.2.0j SHAを起動時検査、Proto/Signal/Infectedと未校正ServerTickの状態を記録する。ForgeGradleの[ソースビルドCI](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38082379417)はPASS。Forgeを用いたSpore原作実ゲーム観測は依然NOT_RUN。JSONLだけで成功を断定せずLABの認証とcleanupを待つ。
+
+
+### Observerの実装とスコープ付きCI根拠（2026-10-11）
+
+[Spore研究用の読み取り専用Forge Observer](../minecraft/mods/fungal-infection-spore/observer/README.md) に、G13の未校正server tick時間・Proto/Signal/Infected・loaded chunk数、G11の公開重み/波数/damage snapshotを実装。自作Jarは[Actions #38082851629](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38082851629) で **ForgeGradle 1.20.1 packaged source build成功**、[不変buildレシート](../minecraft/mods/fungal-infection-spore/verification/OBSERVER-FORGE-CI-2026-10-11.json)あり。原作Sporeと実LAB worldは起動していないのでruntime/GameTest/TPSはNOT_RUN。G09〜G12の実装内メソッドの正確な命令タイミングはまだ未観測。

@@ -85,3 +85,10 @@ All further MOD research follows [Minecraft analysis workflow](../../ANALYSIS-WO
 **G13に直接観測できる範囲:** ロード中のProto・active Signal・Infected件数、ServerTick START〜END未校正時間、読み込み済みチャンク、バニラの強制ロードチャンク。Forge ticketの全件・正式MSPT・TPS・ゲームの勝率は未測定。
 
 **G09〜G12に残る範囲:** Signal呼出の実際の候補列挙、Calamity再配置・Womb試行メソッド、Vigilの報酬呼出、Goal tickそのものは受動イベントでは直接取れない。現状はsnapshotイベントのみでGameTest成功とはしない。LAB登録済みworld・Spore実ロード・観測・cleanupの認証はまだNOT_RUN。
+
+
+## 最新の確定ビルド証拠（2026-10-11）
+
+[原作Sporeではない、TECH-HUB自作ObserverのForgeGradleビルド検証レシート](verification/OBSERVER-FORGE-CI-2026-10-11.json) を作成。[GitHub Actions #38082851629](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38082851629) で、**Forge 1.20.1専用Observer JARのビルド、packaged class・META-INF/mods.toml検査、原作Spore class混入防止、Java17とPython15件、Java→Python合成G13の3ジョブがSUCCESS**。このジョブには原作Spore JAR、実Minecraft world、GameTest実行は含まれない。
+
+その後、[Observerソース](observer/src/main/java/org/kneekura/sporeobserver/SporeEvents.java)へG11用の Proto公開weights[16] / Vigil wave_size / Forge LivingDamageEventの**スナップショット観測**を追加。メソッドaward/punishの実呼出と強く結び付いた証拠ではないため、G11は依然INCONCLUSIVE。観測器の[最新構成](observer/README.md)は原作JARとLAB sessionの一致を要求する。
