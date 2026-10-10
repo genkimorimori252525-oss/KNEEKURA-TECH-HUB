@@ -1,124 +1,50 @@
 {
-  "format": "kneekura.failure-history.v1",
-  "repository": "https://github.com/Wesley1808/ServerCore",
+  "format": "kneekura.failure-history.research-draft.v1",
+  "import_ready": false,
+  "why_not_import_ready": "Source/Issue bytes lack immutable CAS index_snapshot_id and document_id; this record is a source-backed research memo, NOT a validated history-adapter artifact.",
+  "origin": "Wesley1808/ServerCore",
+  "captured_at": "2026-10-11",
   "scope": {
-    "track": "ANCHOR",
+    "track": "ANCHOR_1.20.1_AND_HISTORICAL",
     "head_revision": "d1d0a02d39d0739441419e3a20f46fbc88d98ec5",
-    "history_window": "2024 May activation tick immunities historical repair and 2024 Oct Forge 1.21.1 reported farm regression",
+    "history_window": "2022 inactive tick chicken repair; 2024 1.21.1 user report",
     "queries": [
-      "#118",
-      "2238660d4be5e56336e7f9a890cb7f42138eaf82",
-      "optimization failure and repair"
+      "SC-EGG",
+      "SC-118"
     ]
   },
   "coverage": {
     "status": "PARTIAL",
-    "inspected_evidence_ids": [
-      "issue",
-      "diff",
-      "before_code",
-      "after_code"
-    ],
-    "deferred": [
-      "Exact release JAR bytecode/source parity",
-      "CI+runtime re-evaluation",
-      "full upstream history/regressions",
-      "Immutable source payload hashes and CAS document IDs"
-    ],
-    "unavailable": [
-      "No captured original JAR in this turn"
-    ]
+    "raw_evidence_cas_identity": "UNAVAILABLE",
+    "runtime": "NOT_RUN",
+    "no_full_issue_history_claim": true
   },
-  "research_status": "REVIEW_NOT_HISTORY_IMPORT_READY; evidence records lack CAS index_snapshot_id and document_id",
   "cases": [
     {
-      "case_id": "PHASE1-SERVERCORE-2238660",
-      "origin": "UPSTREAM",
-      "track": "ANCHOR",
-      "environment": {
-        "source_head": "d1d0a02d39d0739441419e3a20f46fbc88d98ec5",
-        "requested_target": "Minecraft 1.20.1 Forge",
-        "runtime": "NOT_RUN",
-        "version_warning": "historical issue may originate on non-ANCHOR Minecraft/loader; do not transport report without checks"
-      },
-      "affected_symbols": [
-        "common/src/main/java/me/wesley1808/servercore/common/activation_range/ActivationRange.java"
-      ],
-      "before_revision": "845a152d694b51484a9ea39b82eee8826db790eb",
-      "after_revision": "2238660d4be5e56336e7f9a890cb7f42138eaf82",
-      "evidence": [
-        {
-          "id": "issue",
-          "role": "issue",
-          "url": "https://github.com/Wesley1808/ServerCore/issues/118"
-        },
-        {
-          "id": "diff",
-          "role": "diff",
-          "url": "https://github.com/Wesley1808/ServerCore/commit/2238660d4be5e56336e7f9a890cb7f42138eaf82"
-        },
-        {
-          "id": "before_code",
-          "role": "before_code",
-          "url": "https://github.com/Wesley1808/ServerCore/blob/845a152d694b51484a9ea39b82eee8826db790eb/common/src/main/java/me/wesley1808/servercore/common/activation_range/ActivationRange.java"
-        },
-        {
-          "id": "after_code",
-          "role": "after_code",
-          "url": "https://github.com/Wesley1808/ServerCore/blob/2238660d4be5e56336e7f9a890cb7f42138eaf82/common/src/main/java/me/wesley1808/servercore/common/activation_range/ActivationRange.java"
-        }
-      ],
-      "causal_chain": [
-        "Author reports entities could remain inactive despite tick immunity; reporter in separate 1.21.1 issue observed altered iron farm efficiency",
-        "Author identified missing activatedTick update on an early return as a failure to re-check entity immunities immediately",
-        "Update activated tick before returning when shouldTick allows immediate work"
-      ],
-      "symptom": {
-        "basis": "AUTHOR_CLAIM",
-        "text": "Author reports entities could remain inactive despite tick immunity; reporter in separate 1.21.1 issue observed altered iron farm efficiency",
-        "evidence_ids": [
-          "issue"
-        ]
-      },
-      "trigger_conditions": {
-        "basis": "AUTHOR_CLAIM",
-        "text": "Stale activatedTick across shouldTick early-return, and separately 1.21.1 exclusion config needing chunk reload",
-        "evidence_ids": [
-          "issue"
-        ]
-      },
-      "root_cause": {
-        "basis": "AUTHOR_CLAIM",
-        "text": "Author identified missing activatedTick update on an early return as a failure to re-check entity immunities immediately",
-        "evidence_ids": [
-          "issue",
-          "diff"
-        ]
-      },
-      "repair": {
-        "basis": "DIRECT_OBSERVATION",
-        "text": "Update activated tick before returning when shouldTick allows immediate work",
-        "evidence_ids": [
-          "diff",
-          "before_code",
-          "after_code"
-        ]
-      },
-      "lesson": {
-        "basis": "INFERENCE",
-        "text": "Scheduling optimization must track state transitions and exemptions; inactive ticks may break world mechanics and farm logic.",
-        "evidence_ids": [
-          "diff"
-        ]
-      },
-      "reproduction": {
-        "state": "NOT_RUN",
-        "evidence_ids": []
-      },
-      "fix_verification": {
-        "state": "NOT_RUN",
-        "evidence_ids": []
-      }
+      "id": "SC-EGG",
+      "issue": null,
+      "fix": "https://github.com/Wesley1808/ServerCore/commit/09ffb1b7d1c958b4bb2723d4ef1f3ce09af59a4b",
+      "before": "c153266fb982a8f197b93437f9e7a365959141b0",
+      "after": "09ffb1b7d1c958b4bb2723d4ef1f3ce09af59a4b",
+      "env": "Historical 2022 Minecraft source, not 1.20.1 runtime proof",
+      "symptom": "Possible loss of chicken egg event when inactive tick only decremented egg timer",
+      "diagnosis": "Source diff indicates missing essential periodic side effect in inactive tick",
+      "repair": "Spawn egg, play sound, emit GameEvent and reset egg timer within inactive tick",
+      "verification": "NOT_RUN",
+      "basis": "DIRECT_OBSERVATION_DIFF_WITH_INFERENCE"
+    },
+    {
+      "id": "SC-118",
+      "issue": "https://github.com/Wesley1808/ServerCore/issues/118",
+      "fix": null,
+      "before": null,
+      "after": null,
+      "env": "Minecraft 1.21.1 ServerCore 1.5.5 (NOT ANCHOR)",
+      "symptom": "Reporter observed iron farm golem spawn reduction after activation-range enabled",
+      "diagnosis": "Maintainer notes exclusion settings need /sc reload and chunk unload/reload; reporter confirms it helped",
+      "repair": "CONFIG_WORKAROUND_ONLY",
+      "verification": "NOT_RUN",
+      "basis": "USER_REPORT_AND_MAINTAINER_COMMENT"
     }
   ]
 }

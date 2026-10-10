@@ -1,36 +1,50 @@
 {
-  "format": "kneekura.failure-history.v1",
-  "repository": "https://github.com/fzzyhmstrs/pc",
+  "format": "kneekura.failure-history.research-draft.v1",
+  "import_ready": false,
+  "why_not_import_ready": "Source/Issue bytes lack immutable CAS index_snapshot_id and document_id; this record is a source-backed research memo, NOT a validated history-adapter artifact.",
+  "origin": "fzzyhmstrs/pc",
+  "captured_at": "2026-10-11",
   "scope": {
-    "track": "ANCHOR_SOURCE_WITH_FRONTIER_REPORTS",
+    "track": "ANCHOR_1.20.1_AND_COMPARATIVE",
     "head_revision": "8ae835f2abe100ff7a39f2e582e1cfa71ba6004a",
-    "history_window": "2026-10-11 phase-one selected report lead; not all issues",
+    "history_window": "2026-01–2026-09 issues #39, #47, #65; precise source repair not traced",
     "queries": [
-      "async",
-      "deadlock",
-      "freeze"
+      "PC-39",
+      "PC-47"
     ]
   },
   "coverage": {
     "status": "PARTIAL",
-    "inspected_evidence_ids": [
-      "reported_issue"
-    ],
-    "deferred": [
-      "Release-scoped issues/PRs and source fixes",
-      "Full raw snapshot CAS capture",
-      "Any runtime acceptance"
-    ],
-    "unavailable": []
+    "raw_evidence_cas_identity": "UNAVAILABLE",
+    "runtime": "NOT_RUN",
+    "no_full_issue_history_claim": true
   },
-  "research_status": "NOT_IMPORT_READY",
-  "scope_evidence": [
+  "cases": [
     {
-      "id": "reported_issue",
-      "role": "issue",
-      "url": "https://github.com/fzzyhmstrs/pc/issues/65",
-      "note": "Issue #47 Fabric Minecraft 1.21.11 unsafe LegacyRandomSource and issue #65 2026-09 async palette failure are FRONTIER reports, NOT evidence of a 1.20.1 Forge regression. No verified fix/parent reviewed."
+      "id": "PC-39",
+      "issue": "https://github.com/fzzyhmstrs/pc/issues/39",
+      "fix": null,
+      "before": null,
+      "after": null,
+      "env": "Reported Forge Minecraft 1.20.1, Particle Core 0.3.0",
+      "symptom": "Visual size glitches on particles after upgrade",
+      "diagnosis": "UNKNOWN_NO_REPAIR_DIFF_TRACED",
+      "repair": null,
+      "verification": "NOT_RUN",
+      "basis": "USER_REPORT"
+    },
+    {
+      "id": "PC-47",
+      "issue": "https://github.com/fzzyhmstrs/pc/issues/47",
+      "fix": null,
+      "before": null,
+      "after": null,
+      "env": "Fabric Minecraft 1.21.11, Particle Core 0.3.2 (NOT 1.20.1)",
+      "symptom": "Crash from LegacyRandomSource access on worker thread",
+      "diagnosis": "Off-thread random ownership reported; selected 1.20.1 source catches some matching failure patterns, but chronology unknown",
+      "repair": null,
+      "verification": "NOT_RUN",
+      "basis": "CROSS_VERSION_REPORT"
     }
-  ],
-  "cases": []
+  ]
 }

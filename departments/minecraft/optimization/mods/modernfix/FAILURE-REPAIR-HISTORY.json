@@ -1,124 +1,36 @@
 {
-  "format": "kneekura.failure-history.v1",
-  "repository": "https://github.com/embeddedt/ModernFix",
+  "format": "kneekura.failure-history.research-draft.v1",
+  "import_ready": false,
+  "why_not_import_ready": "Source/Issue bytes lack immutable CAS index_snapshot_id and document_id; this record is a source-backed research memo, NOT a validated history-adapter artifact.",
+  "origin": "embeddedt/ModernFix",
+  "captured_at": "2026-10-11",
   "scope": {
-    "track": "ANCHOR_CANDIDATE",
+    "track": "ANCHOR_SOURCE_1.20",
     "head_revision": "cf04b47d10ac5c6a748b177ce0348a3b1e4a9871",
-    "history_window": "2023 Dec to 2024 Jan dynamic DFU vs Litematica issue #332 and fix ae8cfb",
+    "history_window": "2023-12–2024-01, lazy DFU compatibility with Litematica",
     "queries": [
-      "#332",
-      "ae8cfbaa3d880a20b70a418f4ae276312fa30981",
-      "optimization failure and repair"
+      "MF-332"
     ]
   },
   "coverage": {
     "status": "PARTIAL",
-    "inspected_evidence_ids": [
-      "issue",
-      "diff",
-      "before_code",
-      "after_code"
-    ],
-    "deferred": [
-      "Exact release JAR bytecode/source parity",
-      "CI+runtime re-evaluation",
-      "full upstream history/regressions",
-      "Immutable source payload hashes and CAS document IDs"
-    ],
-    "unavailable": [
-      "No captured original JAR in this turn"
-    ]
+    "raw_evidence_cas_identity": "UNAVAILABLE",
+    "runtime": "NOT_RUN",
+    "no_full_issue_history_claim": true
   },
-  "research_status": "REVIEW_NOT_HISTORY_IMPORT_READY; evidence records lack CAS index_snapshot_id and document_id",
   "cases": [
     {
-      "case_id": "PHASE1-MODERNFIX-ae8cfba",
-      "origin": "UPSTREAM",
-      "track": "ANCHOR_CANDIDATE",
-      "environment": {
-        "source_head": "cf04b47d10ac5c6a748b177ce0348a3b1e4a9871",
-        "requested_target": "Minecraft 1.20.1 Forge",
-        "runtime": "NOT_RUN",
-        "version_warning": "historical issue may originate on non-ANCHOR Minecraft/loader; do not transport report without checks"
-      },
-      "affected_symbols": [
-        "common/src/main/java/org/embeddedt/modernfix/core/config/ModernFixEarlyConfig.java"
-      ],
-      "before_revision": "675c58a437f68b42f9daa7bfc4b143d0003f7dba",
-      "after_revision": "ae8cfbaa3d880a20b70a418f4ae276312fa30981",
-      "evidence": [
-        {
-          "id": "issue",
-          "role": "issue",
-          "url": "https://github.com/embeddedt/ModernFix/issues/332"
-        },
-        {
-          "id": "diff",
-          "role": "diff",
-          "url": "https://github.com/embeddedt/ModernFix/commit/ae8cfbaa3d880a20b70a418f4ae276312fa30981"
-        },
-        {
-          "id": "before_code",
-          "role": "before_code",
-          "url": "https://github.com/embeddedt/ModernFix/blob/675c58a437f68b42f9daa7bfc4b143d0003f7dba/common/src/main/java/org/embeddedt/modernfix/core/config/ModernFixEarlyConfig.java"
-        },
-        {
-          "id": "after_code",
-          "role": "after_code",
-          "url": "https://github.com/embeddedt/ModernFix/blob/ae8cfbaa3d880a20b70a418f4ae276312fa30981/common/src/main/java/org/embeddedt/modernfix/core/config/ModernFixEarlyConfig.java"
-        }
-      ],
-      "causal_chain": [
-        "Reporter found an empty Litematica schematic while dynamic DFU optimization was enabled",
-        "Maintainer says lazy DFU startup skipped an initialization side effect expected by Litematica Mixin",
-        "Insert disableIfModPresent for mixin.perf.dynamic_dfu when mod ID litematica is installed"
-      ],
-      "symptom": {
-        "basis": "AUTHOR_CLAIM",
-        "text": "Reporter found an empty Litematica schematic while dynamic DFU optimization was enabled",
-        "evidence_ids": [
-          "issue"
-        ]
-      },
-      "trigger_conditions": {
-        "basis": "AUTHOR_CLAIM",
-        "text": "Litematica + ModernFix dynamic_dfu enabled",
-        "evidence_ids": [
-          "issue"
-        ]
-      },
-      "root_cause": {
-        "basis": "AUTHOR_CLAIM",
-        "text": "Maintainer says lazy DFU startup skipped an initialization side effect expected by Litematica Mixin",
-        "evidence_ids": [
-          "issue",
-          "diff"
-        ]
-      },
-      "repair": {
-        "basis": "DIRECT_OBSERVATION",
-        "text": "Insert disableIfModPresent for mixin.perf.dynamic_dfu when mod ID litematica is installed",
-        "evidence_ids": [
-          "diff",
-          "before_code",
-          "after_code"
-        ]
-      },
-      "lesson": {
-        "basis": "INFERENCE",
-        "text": "Lazy initialization can change third-party class transform side effects; conditionally gate optimization instead of making a risky loader-wide assumption.",
-        "evidence_ids": [
-          "diff"
-        ]
-      },
-      "reproduction": {
-        "state": "NOT_RUN",
-        "evidence_ids": []
-      },
-      "fix_verification": {
-        "state": "NOT_RUN",
-        "evidence_ids": []
-      }
+      "id": "MF-332",
+      "issue": "https://github.com/embeddedt/ModernFix/issues/332",
+      "fix": "https://github.com/embeddedt/ModernFix/commit/ae8cfbaa3d880a20b70a418f4ae276312fa30981",
+      "before": "675c58a437f68b42f9daa7bfc4b143d0003f7dba",
+      "after": "ae8cfbaa3d880a20b70a418f4ae276312fa30981",
+      "env": "Modded Minecraft 1.20.1 family; Litematica + ModernFix dynamic_dfu",
+      "symptom": "Schematic legacy conversion displayed empty after lazy DFU",
+      "diagnosis": "Litematica relies on vanilla flattening class early-load side effect; lazy DFU deferred it (maintainer)",
+      "repair": "Disable dynamic_dfu when litematica mod present",
+      "verification": "NOT_RUN",
+      "basis": "DIRECT_OBSERVATION_DIFF_AND_AUTHOR_CLAIM"
     }
   ]
 }
