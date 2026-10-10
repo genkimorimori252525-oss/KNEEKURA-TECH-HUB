@@ -1,0 +1,34 @@
+{
+  "format": "kneekura.failure-history.v1",
+  "repository": "https://github.com/BuiltBrokenModding/AI-Improvements",
+  "scope": {
+    "track": "ANCHOR_ADJACENT",
+    "head_revision": "89c89590d8160f332bd2740acd0a67c96f37f00d",
+    "history_window": "Source ancestry before 0.5.2: issues #31,#10 with linked commits",
+    "queries": [
+      "server overloaded",
+      "remove LivingSpawnEvent",
+      "filter lists",
+      "#31",
+      "#10"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "inspected_evidence_ids": [
+      "issue-31",
+      "fix-2e95e6",
+      "issue-10",
+      "fix-4f89b9"
+    ],
+    "deferred": [
+      "original spark profile measurement",
+      "release JAR parity",
+      "CAS profile capture/import",
+      "postfix runtime validation"
+    ],
+    "unavailable": []
+  },
+  "notice": "Research-note format only, lacks durable CAS document IDs and has NOT been imported to Techhub history adapter; cannot assert history COMPLETE.",
+  "cases": []
+}
