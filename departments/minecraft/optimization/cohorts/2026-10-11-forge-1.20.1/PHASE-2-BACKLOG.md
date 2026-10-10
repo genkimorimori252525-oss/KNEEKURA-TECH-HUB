@@ -16,7 +16,9 @@ This is a **todo ledger, NOT an ongoing background job**. Current research check
 - [x] FerriteCore hash regression repair, ModernFix DFU-Litematica opt-out, ServerCore activation repair read as actual before/after source.
 - [ ] Full source bodies, all required facets, complete history and source binary parity for each: NOT_COMPLETE.
 
-## Phase 2 — in-depth batches: NOT_STARTED
+## Phase 2 — in-depth batches: SELECTED_6_SOURCE_SLICES_DONE / WHOLE_TARGET_IN_PROGRESS
+
+**Phase 2 checkpoint (2026-10-11):** FerriteCore, ModernFix, FastSuite, ServerCore, Particle Core and Embeddium have bounded new source review + history drafts. Details: [PHASE-2-CHECKPOINT.md](PHASE-2-CHECKPOINT.md). **No JAR parity, CAS import, FULL_SOURCE, benchmarks or full-target COMPLETE.** All other candidates are still Phase 1 only.
 
 1. **Rendering**: Embeddium + ImmediatelyFast + EntityCulling first, then BFRC + CullLeaves + Bocchium, then GPU Tape + Distant Horizons; profile GL state, GPU occlusion, false missing visibility, resource reload and Mixin compatibility.
 2. **Memory/cache**: FerriteCore, ModernFix, AllTheLeaks, MemoryLeakFix, Saturn. Obtain original source for Saturn first; pin at release + source. Study lifetimes/heap leakage, duplicate shared state, DFU and model caches.

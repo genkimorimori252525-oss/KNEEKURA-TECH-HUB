@@ -35,3 +35,9 @@ Vanilla baseline: all loaded eligible entities may receive regular ticks, includ
 ## Follow-up
 
 Compile exact 1.5.2 Forge JAR identity and bytecode feature flags, whole source/Mixin inventory, command config effects, special modded Goal/Brain lifecycle, 1/10/50/100 mob horde with and without exclusions, MSPT median/p95/p99 and exactly-once attacks/event timing. No GameTest or profiling executed.
+
+## Track-specific fix delta found during Phase 2
+
+A [2024-05-06 historical commit](https://github.com/Wesley1808/ServerCore/commit/2238660d4be5e56336e7f9a890cb7f42138eaf82) changed the source `checkIfActive` fast path to set `entity.servercore$setActivatedTick(currentTick)` **before returning true**. Directly compared the parent `845a152d694b51484a9ea39b82eee8826db790eb` and the repaired source.
+
+**Important: the selected Forge 1.20.1 source `d1d0a02d39d0739441419e3a20f46fbc88d98ec5` still says `if (shouldTick(entity)) return true;` without that update** ([source near line 282](https://github.com/Wesley1808/ServerCore/blob/d1d0a02d39d0739441419e3a20f46fbc88d98ec5/common/src/main/java/me/wesley1808/servercore/common/activation_range/ActivationRange.java#L282-L285)). The 2024 repair must therefore be treated as a **different historical source revision**, not quietly attributed to the 1.20.1 branch or requested 1.5.2 binary. It suggests a potential semantic concern but is **not proof of an actual in-game 1.20.1 regression**.

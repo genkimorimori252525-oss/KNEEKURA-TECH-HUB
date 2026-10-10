@@ -72,3 +72,7 @@ Observed full recursive **source path inventories** include Embeddium 552 blobs,
 No unified "perfect optimization mod", no patch merging, no GPU/CUDA claims, no binary redistribution, no copying incompatible Mixins. These records collect independent techniques so products can choose modules based on real workload.
 
 **Canonical MOD analysis completion status:** NOT_COMPLETE. **Benchmark status:** PERFORMANCE_NOT_VERIFIED. **Core knowledge claim promotion:** NONE. **Work resumed from existing lightweight genre PR #91**, not a new genre repository.
+
+## Phase 2 source/repair continuation (2026-10-11)
+
+Six target analyses extended beyond Phase 1: **[FerriteCore](../../mods/ferritecore/README.md)**, **[ModernFix](../../mods/modernfix/README.md)**, **[FastSuite](../../mods/fastsuite/README.md)**, **[ServerCore](../../mods/servercore/README.md)**, **[Particle Core](../../mods/particle-core/README.md)** and **[Embeddium](../../mods/embeddium/README.md)**. Each has a separate scoped human-readable history and machine-readable **research draft** (not import-ready until immutable CAS evidence is captured). See [Phase-2 checkpoint](PHASE-2-CHECKPOINT.md) and [Phase-2 receipt](PHASE-2-RECEIPT.json). All 58 initial manifest entries remain unchanged; **0 binary verifications and 0 runtime benchmarks**.

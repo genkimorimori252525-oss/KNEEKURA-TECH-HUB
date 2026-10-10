@@ -1,0 +1,118 @@
+{
+  "schema": "kneekura.minecraft.optimization-cohort.phase2.v1",
+  "as_of": "2026-10-11",
+  "input_manifest": "INPUT-MANIFEST.json",
+  "total_input_filenames": 58,
+  "counts": {
+    "optimization_candidates": 27,
+    "related": 3,
+    "diagnostic": 3,
+    "utility_not_core": 25
+  },
+  "phase1": {
+    "files_indexed": 58,
+    "code_mechanisms_selected": 16,
+    "completion": "PARTIAL"
+  },
+  "phase2": {
+    "selected_targets": [
+      {
+        "slug": "embeddium",
+        "id": "02",
+        "target": "Embeddium",
+        "source": "FiniteReality/embeddium@dee0ebde6aea8b158613cd3b8ea5cdf0c1f6a9bf",
+        "blobs": 552,
+        "java": 499,
+        "mechanisms": "chunk meshing workers and heap/queue scheduling",
+        "repair": "5866c29da7b66b0acc2f194f9c9ef1fe3f733713",
+        "facet": "PARTIAL_EVIDENCE_BACKED_STATIC"
+      },
+      {
+        "slug": "particle-core",
+        "id": "03",
+        "target": "Particle Core",
+        "source": "fzzyhmstrs/pc@8ae835f2abe100ff7a39f2e582e1cfa71ba6004a",
+        "blobs": 55,
+        "java": null,
+        "mechanisms": "guarded async particles and render distance skip",
+        "repair": null,
+        "facet": "PARTIAL_EVIDENCE_BACKED_STATIC"
+      },
+      {
+        "slug": "ferritecore",
+        "id": "05",
+        "target": "FerriteCore",
+        "source": "malte0811/FerriteCore@e47bcbbde5b83805f927bad82bcc2b323e7169b8",
+        "blobs": 102,
+        "java": 67,
+        "mechanisms": "mixed-radix BlockState maps, model/voxel/quad dedup",
+        "repair": "2aa56a0def18a94574bc4c0f6e1aea00db1709a5",
+        "facet": "PARTIAL_EVIDENCE_BACKED_STATIC"
+      },
+      {
+        "slug": "modernfix",
+        "id": "06",
+        "target": "ModernFix",
+        "source": "embeddedt/ModernFix@cf04b47d10ac5c6a748b177ce0348a3b1e4a9871",
+        "blobs": 390,
+        "java": 339,
+        "mechanisms": "lazy DFU with mod gates, compact all-zero palettes",
+        "repair": "ae8cfbaa3d880a20b70a418f4ae276312fa30981",
+        "facet": "PARTIAL_EVIDENCE_BACKED_STATIC"
+      },
+      {
+        "slug": "fastsuite",
+        "id": "11",
+        "target": "FastSuite",
+        "source": "Shadows-of-Fire/FastSuite@883aed9f39f6b83225cbf20ca9d59f1c98239278",
+        "blobs": 28,
+        "java": 9,
+        "mechanisms": "class-gated parallel recipe lookup, timeout/non-match risk",
+        "repair": "49971164e235bfc819a4cca896baa95575df9cf2",
+        "facet": "PARTIAL_EVIDENCE_BACKED_STATIC; FIX_CROSS_VERSION"
+      },
+      {
+        "slug": "servercore",
+        "id": "49",
+        "target": "ServerCore",
+        "source": "Wesley1808/ServerCore@d1d0a02d39d0739441419e3a20f46fbc88d98ec5",
+        "blobs": 135,
+        "java": 105,
+        "mechanisms": "activation wakeups and MSPT-driven quality settings",
+        "repair": "2238660d4be5e56336e7f9a890cb7f42138eaf82",
+        "facet": "PARTIAL_EVIDENCE_BACKED_STATIC; FIX_DIFFERENT_BRANCH"
+      }
+    ],
+    "selected_target_count": 6,
+    "all_target_full_source_bytes_acquired": false,
+    "each_selected_target_has_readme": true,
+    "each_selected_target_has_scoped_failure_history_md": true,
+    "each_selected_target_has_machine_readable_research_draft": true,
+    "formal_history_adapter_imports": 0,
+    "release_jars_provided_for_cohort": 0,
+    "release_jar_sha256_verified": 0,
+    "source_binary_parity_verified": 0,
+    "game_runtime_trials": 0,
+    "paired_benchmarks": 0,
+    "performance_state": "PERFORMANCE_NOT_VERIFIED",
+    "canonical_knowledge_promoted": false
+  },
+  "triage": {
+    "reasons_to_keep_mods_separate": [
+      "Different Minecraft/Forge versions and source revisions",
+      "Rendering optimizations overlap without proven order/compatibility",
+      "Tick activation intentionally changes simulation",
+      "Some optimizations intentionally return incomplete results on timeout",
+      "License components differ, source code not redistributed"
+    ],
+    "community_evidence": "RECON_ONLY",
+    "history": "PARTIAL_BOUNDED"
+  },
+  "next": [
+    "source proof of exact release JARs when provided",
+    "renderer and server next static slices",
+    "bounded CAS captures + history adapter",
+    "paired Java/Forge GameTests in authorized disposable LAB",
+    "compatibility and correctness before performance"
+  ]
+}

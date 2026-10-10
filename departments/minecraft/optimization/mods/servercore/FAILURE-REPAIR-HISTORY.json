@@ -45,6 +45,19 @@
       "repair": "CONFIG_WORKAROUND_ONLY",
       "verification": "NOT_RUN",
       "basis": "USER_REPORT_AND_MAINTAINER_COMMENT"
+    },
+    {
+      "id": "SC-ACTIVATION-2024",
+      "issue": null,
+      "fix": "https://github.com/Wesley1808/ServerCore/commit/2238660d4be5e56336e7f9a890cb7f42138eaf82",
+      "before": "845a152d694b51484a9ea39b82eee8826db790eb",
+      "after": "2238660d4be5e56336e7f9a890cb7f42138eaf82",
+      "env": "2024 newer source; NOT the pinned source branch 1.20.1 which retains direct early return",
+      "symptom": "Maintainer said early return failed to update last active tick, causing missed immunity rechecks",
+      "diagnosis": "Maintainer source comment and observed diff",
+      "repair": "Set activated tick on shouldTick true branch",
+      "verification": "NOT_RUN",
+      "basis": "DIRECT_OBSERVATION_DIFF_DIFFERENT_TRACK"
     }
   ]
 }

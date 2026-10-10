@@ -19,3 +19,7 @@ Source diff: [commit 09ffb1b7d1c958b4bb2723d4ef1f3ce09af59a4b](https://github.co
 - Exact cause beyond reporter/config hypothesis UNKNOWN; KNEEKURA tests NOT_RUN.
 
 Captured issues and source through GitHub read, raw immutable CAS/index IDs and precise issue-text SHA unavailable; history adapter NOT_IMPORTED.
+
+## SC-2024-ACTIVATION — fixed a missing last-active update in a different source track
+
+[Commit 2238660d4be5...](https://github.com/Wesley1808/ServerCore/commit/2238660d4be5e56336e7f9a890cb7f42138eaf82), parent `845a152d694b51484a9ea39b82eee8826db790eb`, adds `entity.servercore$setActivatedTick(currentTick)` before returning early from `checkIfActive`. Maintainer says the old flow could delay immunity rechecks and break some redstone contraptions. The relevant **1.20.1** pinned branch code at `d1d0a02d39d...` still lacks this line; do not claim the repair is part of that source/JAR. Historical evidence is a directly inspected diff; runtime outcome NOT_RUN, exact bug report/reproduction UNKNOWN. Lesson: compare repair state **against your actual target track**, not against a current upstream head.
