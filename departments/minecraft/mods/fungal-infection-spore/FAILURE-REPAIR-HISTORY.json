@@ -1,0 +1,30 @@
+{
+  "format": "kneekura.failure-history.v1",
+  "repository": "https://www.curseforge.com/minecraft/mc-mods/fungal-infection-spore",
+  "scope": {
+    "track": "ANCHOR",
+    "head_revision": "d20c4be6606f9752ecfd964eba625363eb76a28e327d67fe6dda4be748401489",
+    "history_window": "Bounded candidate discovery: 2026-07-09 DynamicTrees issue #1201 as observed 2026-10-11, Spore 1.20.1 Forge 2.2.0j original user JAR, DynamicTrees release/1.20.1 at eb7f75e9f0f021503349893cf6ecb8ee864a3053 with modVersion 1.4.11. Only Gargoyl.SmashStomp ↔ TrunkShellBlock dynamic hardness. No author-repair-before/after evidence.",
+    "queries": [
+      "https://github.com/DynamicTreesTeam/DynamicTrees/issues/1201",
+      "https://github.com/DynamicTreesTeam/DynamicTrees/blob/eb7f75e9f0f021503349893cf6ecb8ee864a3053/src/main/java/com/ferreusveritas/dynamictrees/block/branch/TrunkShellBlock.java"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "inspected_evidence_ids": [],
+    "deferred": [
+      "Import exactly captured original issue/comments, fixed Spore JAR selected bytecode, DynamicTrees branch source and source bytes into the existing Minecraft CAS snapshot before adding a formal evidence-backed case",
+      "Locate and inspect actual author-affiliated Issue or PR and repair before/after diff if one exists; current issue #1201 is open and not repair evidence",
+      "Runtime reproduce the reported event in an approved disposable Forge 1.20.1 world with exact Dynamic Trees 1.4.11 and Spore 2.2.0j dependency closure",
+      "Confirm whether the correct crash trigger is the candidate BlockState / center BlockPos discrepancy; account for other installed mods"
+    ],
+    "unavailable": [
+      "Original Spore 2.2.0j author source tree and exact release-to-upload JAR byte equivalence unverified",
+      "No approved GameTest run or attested world/cleanup receipt",
+      "No confirmed upstream fix commit for Issue #1201"
+    ]
+  },
+  "scope_evidence": [],
+  "cases": []
+}
