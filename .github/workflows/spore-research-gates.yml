@@ -55,12 +55,15 @@ jobs:
           javac --release 17 -d "$RUNNER_TEMP/spore-core" \
             "$ROOT/src/main/java/org/kneekura/sporeobserver/core/TraceSink.java" \
             "$ROOT/src/main/java/org/kneekura/sporeobserver/core/GoalRunningStateDiff.java" \
+            "$ROOT/src/main/java/org/kneekura/sporeobserver/core/GoalSnapshotSelection.java" \
             "$ROOT/tests/TraceSinkTest.java" \
             "$ROOT/tests/GoalRunningStateDiffTest.java" \
+            "$ROOT/tests/GoalSnapshotSelectionTest.java" \
             "$ROOT/tests/G13SyntheticProducer.java" \
             "$ROOT/tests/G12SyntheticProducer.java"
           java -cp "$RUNNER_TEMP/spore-core" TraceSinkTest
           java -cp "$RUNNER_TEMP/spore-core" GoalRunningStateDiffTest
+          java -cp "$RUNNER_TEMP/spore-core" GoalSnapshotSelectionTest
       - name: Java-to-Python G13 synthetic pipeline (never runtime PASS)
         run: |
           ROOT=departments/minecraft/mods/fungal-infection-spore
