@@ -96,6 +96,56 @@ def _pairs(snapshot):
     return potential, co_running
 
 
+
+
+def _delta(value):
+    """Validate state-diff observations; never interpret these as Goal callbacks."""
+    if not isinstance(value, dict):
+        return None
+    if value.get('capture_scope') != 'END_TICK_RUNNING_STATE_DIFF_NOT_GOAL_CALLBACK':
+        return None
+    uuid = value.get('entity_uuid')
+    count = value.get('observed_state_changes')
+    rows = value.get('changes')
+    trimmed = value.get('changes_truncated')
+    snap_trimmed = value.get('snapshot_truncated')
+    snap_count = value.get('snapshot_goal_entries')
+    if not isinstance(uuid, str) or not 1 <= len(uuid) <= 128:
+        return None
+    if not _valid_int(count, 1, 12) or not isinstance(rows, list) or len(rows) > 12:
+        return None
+    if type(trimmed) is not bool or type(snap_trimmed) is not bool:
+        return None
+    if not _valid_int(snap_count, 0, 12):
+        return None
+    if len(rows) > count or (count > len(rows)) != trimmed:
+        return None
+    ids = set()
+    started, ended = 0, 0
+    for row in rows:
+        if not isinstance(row, dict):
+            return None
+        instance = row.get('goal_instance_id')
+        priority = row.get('priority')
+        clazz = row.get('goal_class')
+        if not _valid_int(instance, 1, 2048) or instance in ids:
+            return None
+        ids.add(instance)
+        if row.get('selector') not in ('goal', 'target') or not _valid_int(priority, 0, 1000):
+            return None
+        if not isinstance(clazz, str) or not 1 <= len(clazz) <= 300:
+            return None
+        before = row.get('previous_running')
+        after = row.get('current_running')
+        if type(before) is not bool or type(after) is not bool or before == after:
+            return None
+        started += int(not before and after)
+        ended += int(before and not after)
+    return {'entity_uuid': uuid, 'observed_changes': count,
+            'reported_changes': len(rows), 'truncated': trimmed,
+            'sample_truncated': snap_trimmed, 'observed_false_to_true': started,
+            'observed_true_to_false': ended}
+
 def analyze(path):
     try:
         meta, records, end = read_trace(path)
@@ -117,7 +167,27 @@ def analyze(path):
     co_running_count = 0
     n_goal_only = 0
     n_target_only = 0
+    deltas_total = 0
+    deltas_valid = 0
+    deltas_invalid = 0
+    deltas_start_like = 0
+    deltas_stop_like = 0
+    deltas_with_truncation = 0
+    delta_examples = []
     for event in records[:MAX_EVENTS_REVIEWED]:
+        if event['kind'] == 'goal_running_state_delta_snapshot':
+            deltas_total += 1
+            delta = _delta(event['data'])
+            if delta is None:
+                deltas_invalid += 1
+                continue
+            deltas_valid += 1
+            deltas_start_like += delta['observed_false_to_true']
+            deltas_stop_like += delta['observed_true_to_false']
+            deltas_with_truncation += int(delta['truncated'] or delta['sample_truncated'])
+            if len(delta_examples) < 8:
+                delta_examples.append({'tick': event['tick'], **delta})
+            continue
         if event['kind'] != 'goal_registry_snapshot':
             continue
         n_snapshots += 1
@@ -152,6 +222,8 @@ def analyze(path):
         status = 'INCONCLUSIVE_INCOMPLETE_RUN'
     if invalid or not sampled:
         status = 'INCONCLUSIVE_INVALID_OR_ABSENT_GOAL_SNAPSHOTS'
+    elif deltas_invalid:
+        status = 'INCONCLUSIVE_INVALID_DELTA_SNAPSHOTS'
     return {
         'schema': 'kneekura.spore.goal-snapshot-review.v1',
         'status': status, 'run_id': meta['run_id'], 'scenario': 'G12',
@@ -164,9 +236,16 @@ def analyze(path):
         'potential_shared_flag_pairs_sum': potential_count,
         'same_priority_shared_flag_pairs_sum': same_priority_count,
         'co_running_shared_flag_pairs_sum': co_running_count,
+        'delta_snapshot_events': deltas_total,
+        'delta_snapshot_valid': deltas_valid,
+        'delta_snapshot_invalid': deltas_invalid,
+        'delta_changes_false_to_true': deltas_start_like,
+        'delta_changes_true_to_false': deltas_stop_like,
+        'delta_events_with_truncation': deltas_with_truncation,
+        'delta_examples': delta_examples,
         'examples': summaries,
         'runtime_pass': False,
-        'interpretation': 'Same priority/shared flag indicates a registered resource-contention CANDIDATE; only one-time running snapshots. No claim that any goal lost, failed, interrupted or caused lag.',
+        'interpretation': 'Shared flag and same priority is a resource-contention CANDIDATE; delta events are end-of-tick state differences, not Goal.start/stop or interrupt callbacks. No runtime conflict, failure or TPS benefit is established.',
         'requirements_for_conclusion': 'Authenticated LAB run, loaded exact Spore jar and observer build, targeted goal method transitions and cleanup evidence, completed Forge GameTest assertions.',
     }
 
