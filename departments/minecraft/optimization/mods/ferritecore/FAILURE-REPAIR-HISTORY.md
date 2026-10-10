@@ -1,21 +1,16 @@
-# ferritecore — selected failure/repair history (2026-10-11)
+# FerriteCore — scoped failure / repair
 
-This is a **bounded, source-backed case**, not a whole-history review and **NOT_RUNTIME_VERIFIED**. User's named exact 1.20.1 JAR is not held, release/source parity unknown.
+Scope: upstream `malte0811/FerriteCore`, 2023-07–2023-08, baked quad dedup + #129 only. No broad history coverage.
 
-**Window:** 2023 Jul-Aug model deduplication issue #129 and fix 2aa56a0 (Minecraft 1.20.1 report; 1.20.0 source candidate).  
-**Source reference head:** `e47bcbbde5b83805f927bad82bcc2b323e7169b8`, track ANCHOR_ADJACENT.  
-**Issue:** [#129](https://github.com/malte0811/FerriteCore/issues/129).  
-**Verified fix commit:** [`2aa56a0def18a94574bc4c0f6e1aea00db1709a5`](https://github.com/malte0811/FerriteCore/commit/2aa56a0def18a94574bc4c0f6e1aea00db1709a5) (parent `5087367f63289248b778c183e53c7d6a303d675d`).  
-**Compared file:** [pre-fix](https://github.com/malte0811/FerriteCore/blob/5087367f63289248b778c183e53c7d6a303d675d/Common/src/main/java/malte0811/ferritecore/impl/Deduplicator.java) and [post-fix](https://github.com/malte0811/FerriteCore/blob/2aa56a0def18a94574bc4c0f6e1aea00db1709a5/Common/src/main/java/malte0811/ferritecore/impl/Deduplicator.java); actual source read in both revisions, change diff read.
+## FC-129
 
-| Facet | Statement | Basis |
-|---|---|---|
-| Symptom | Reporter observed ModelGapFix+Chipped load time roughly 23s without FerriteCore versus 70s with it. | USER/MAINTAINER REPORT |
-| Trigger | ModelGapFix+Chipped+FerriteCore in user Minecraft 1.20.1 environment | USER REPORT / HISTORY |
-| Root-cause interpretation | Maintainer identified weak hash collisions among similar baked quad vertex arrays leading to many array comparisons | AUTHOR_CLAIM (no independent reproduction) |
-| Actual repair | Replace Arrays.hashCode(int[]) with betterIntArrayHash combining per-int MurmurHash3, retain Arrays.equals exact key equality | DIRECT_OBSERVATION of source diff |
-| Portable lesson | Hash collision distributions matter for content-addressed resource reuse; profile cache construction and key similarity, not just heap savings. | SCOPED INFERENCE |
-| Runtime reproduction | **NOT_RUN** | no authenticated LAB result |
-| Fixed-version smoke / A-B perf | **NOT_RUN** | no paired benchmark |
+- Symptom (REPORTER): [Issue #129](https://github.com/malte0811/FerriteCore/issues/129): Minecraft 1.20.1 with FerriteCore, ModelGapFix, Chipped reportedly increased loading (roughly 23 s → 70 s in reporter's setup). This is **not** KNEEKURA's own benchmark.
+- Countermeasure report: reporter reported setting `bakedQuadDeduplication=false` mitigated issue; not independently reproduced.
+- Upstream actual repair [commit `2aa56a0def18...`](https://github.com/malte0811/FerriteCore/commit/2aa56a0def18a94574bc4c0f6e1aea00db1709a5) (2023-08-10): changes `BAKED_QUAD_CACHE` hash from `Arrays::hashCode` to `betterIntArrayHash` using MurmurHash3 per element. Equivalence remains `Arrays::equals`. Compared parent `5087367f63289248b778c183e53c7d6a303d675d` (pre-fix state, **not necessarily introducing commit**) and after source `Deduplicator.java`.
+- Root cause (AUTHOR_CLAIM + code-level INFERENCE): hash bucket collisions for similar packed quad arrays degrade dedup lookup throughput. Source comment explicitly references #129. Proof of which inputs collide in exact JAR or long-run performance still missing.
+- Lesson: canonicalization saves memory **only when** collision/equality/retention costs remain bounded; implement hash-quality and reload tests.
+- `reproduction`: **REPORTED only**. `fix_verification`: **NOT_RUN** in KNEEKURA. Upstream closed issue != runtime PASS.
 
-Do not confuse a **closed Issue, code patch or author's “fixed” message** with a modern Forge 1.20.1 runtime acceptance PASS. Later regressions and source-JAR parity not exhaustively checked.
+Evidence locator: [before](https://github.com/malte0811/FerriteCore/blob/5087367f63289248b778c183e53c7d6a303d675d/Common/src/main/java/malte0811/ferritecore/impl/Deduplicator.java); [after](https://github.com/malte0811/FerriteCore/blob/2aa56a0def18a94574bc4c0f6e1aea00db1709a5/Common/src/main/java/malte0811/ferritecore/impl/Deduplicator.java).
+
+Evidence raw API/captured bytes and CAS document IDs not minted. Machine-readable draft kept for review only, **NOT_IMPORTED** into history adapter.

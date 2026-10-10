@@ -1,21 +1,15 @@
-# modernfix — selected failure/repair history (2026-10-11)
+# ModernFix — scoped failure / repair
 
-This is a **bounded, source-backed case**, not a whole-history review and **NOT_RUNTIME_VERIFIED**. User's named exact 1.20.1 JAR is not held, release/source parity unknown.
+Scope: `embeddedt/ModernFix` issue #332 and specific `dynamic_dfu` gating change (2023-12–2024-01). Other 1.20 Mixins and histories NOT_ANALYZED.
 
-**Window:** 2023 Dec to 2024 Jan dynamic DFU vs Litematica issue #332 and fix ae8cfb.  
-**Source reference head:** `cf04b47d10ac5c6a748b177ce0348a3b1e4a9871`, track ANCHOR_CANDIDATE.  
-**Issue:** [#332](https://github.com/embeddedt/ModernFix/issues/332).  
-**Verified fix commit:** [`ae8cfbaa3d880a20b70a418f4ae276312fa30981`](https://github.com/embeddedt/ModernFix/commit/ae8cfbaa3d880a20b70a418f4ae276312fa30981) (parent `675c58a437f68b42f9daa7bfc4b143d0003f7dba`).  
-**Compared file:** [pre-fix](https://github.com/embeddedt/ModernFix/blob/675c58a437f68b42f9daa7bfc4b143d0003f7dba/common/src/main/java/org/embeddedt/modernfix/core/config/ModernFixEarlyConfig.java) and [post-fix](https://github.com/embeddedt/ModernFix/blob/ae8cfbaa3d880a20b70a418f4ae276312fa30981/common/src/main/java/org/embeddedt/modernfix/core/config/ModernFixEarlyConfig.java); actual source read in both revisions, change diff read.
+## MF-332 — lazy DFU broke mod-dependent class initialization
 
-| Facet | Statement | Basis |
-|---|---|---|
-| Symptom | Reporter found an empty Litematica schematic while dynamic DFU optimization was enabled | USER/MAINTAINER REPORT |
-| Trigger | Litematica + ModernFix dynamic_dfu enabled | USER REPORT / HISTORY |
-| Root-cause interpretation | Maintainer says lazy DFU startup skipped an initialization side effect expected by Litematica Mixin | AUTHOR_CLAIM (no independent reproduction) |
-| Actual repair | Insert disableIfModPresent for mixin.perf.dynamic_dfu when mod ID litematica is installed | DIRECT_OBSERVATION of source diff |
-| Portable lesson | Lazy initialization can change third-party class transform side effects; conditionally gate optimization instead of making a risky loader-wide assumption. | SCOPED INFERENCE |
-| Runtime reproduction | **NOT_RUN** | no authenticated LAB result |
-| Fixed-version smoke / A-B perf | **NOT_RUN** | no paired benchmark |
+- [Issue #332](https://github.com/embeddedt/ModernFix/issues/332): reported Litematica `.schematic` loads became empty with ModernFix dynamic DFU; turning off dynamic DFU avoided the problem.
+- Maintainer's diagnosis: Litematica injects into vanilla flattening class, which loads as side effect of eager DFU startup. Lazy initialization prevents class from being loaded before Litematica's conversion path. This is a maintainer-reasoned causal report; exact KNEEKURA reproduction NOT_RUN.
+- Actual [repair diff `ae8cfbaa3d880a20b70a418f4ae276312fa30981`](https://github.com/embeddedt/ModernFix/commit/ae8cfbaa3d880a20b70a418f4ae276312fa30981), parent `675c58a437f68b42f9daa7bfc4b143d0003f7dba`, adds the module conflict guard `disableIfModPresent("mixin.perf.dynamic_dfu", "litematica")`.
+- Selected `1.20` source HEAD `cf04b47d10ac5c6a748b177ce0348a3b1e4a9871` **still contains that gate** (line 312 of `ModernFixEarlyConfig.java` at inspected revision).
+- No source-observed alteration of Litematica itself. No runtime integration test or actual observed gains.
+- Lesson: laziness changes **load side effects/order**, not just CPU time. Detect affected mod IDs and preserve fallback eager path.
+- Reproduction: REPORTED. Fix verification: NOT_RUN. Scope distinct from unrelated ModernFix issues.
 
-Do not confuse a **closed Issue, code patch or author's “fixed” message** with a modern Forge 1.20.1 runtime acceptance PASS. Later regressions and source-JAR parity not exhaustively checked.
+Before/after captures not CAS-imported; Git locator/diff inspected and qualified; JSON remains research draft only.
