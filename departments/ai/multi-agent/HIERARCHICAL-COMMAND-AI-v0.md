@@ -87,3 +87,11 @@ AI部門は抽象的な指揮契約・情報共有・評価方式を研究する
 ## 2026-10-11 — 役割別Goalの実JAR技術回収
 
 [Spore 2.2.0jの輸送・後衛支援・残骸回収・広域制圧Goal](../../minecraft/mods/fungal-infection-spore/AI-GOAL-LAYER-2026-10-11.md) のBytecode解析から、Commanderが決める任務を Transport / Support / Resource Recovery / Combatへ分ける選択肢が増えた。Unitは独立の局所Goalを実行し、作戦完了・資源消費・地形変更を別イベントとして報告する案。これらを必須の一体化AIテンプレートとするものではない。原作のcanUse相当の内部でblockを破壊する処理は[BlockStateと照会位置の不整合](../../minecraft/mods/fungal-infection-spore/GARGOYL-DYNAMICTREES-HARDNESS-2026-10-11.md)と合わせて、可逆WorldMutationJournalと副作用分離の受け入れテスト候補へ入れる。**DESIGN_CANDIDATE / runtime未検証**。
+
+## 2026-10-11 — Goal登録・競合とG12実行中Goal観測
+
+[Sporeの86クラス・372直接Goal登録呼出、実Goal.FlagとMob継承関係の分析](../../minecraft/mods/fungal-infection-spore/GOAL-REGISTRATION-PRIORITY-AUDIT-2026-10-11.md)を技術候補として追加。
+
+Director/Commanderが任務優先度だけ与えても、Unit側のMOVE/LOOK/TARGET予約が合っていないと競合が起こり得る。InfectedWitchでは同優先度4の複数支援Goalと継承元SearchAreaGoalがMOVEを共有している。Bruteは輸送時に移動するのにTransportInfectedのFlagがTARGETのみ。これらは**Bytecodeで確認した設計上の競合候補**であり、GameTest未実施のため実際の干渉・性能悪化は断定しない。
+
+将来の将軍AIでは、`TaskPriority`とは別の`ResourceLock(MOVE/LOOK/ATTACK/WORLD_MUTATION)`、タイムアウト、タスクの割込理由、失敗→再割当の記録を検討。これは**原作コードの流用ではなく独立の設計候補**。

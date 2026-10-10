@@ -70,3 +70,11 @@ SearchAreaGoalの目的地判定は**中心から9ブロック未満**（Minecra
 新しい [G13 Java→JSONL→Pythonの合成600件テスト](observer/tests/G13SyntheticProducer.java) はローカルで出力判定がSYNTHETIC_FIXTURE_ONLY、runtime_pass=falseとなった。これはゲームの試験ではない。
 
 従来の「Forge observer未実装」は上記実装に関する**過去の記載**として残す。**今なお未達**なのはSpore実ロードのForge専用サーバー起動、LABの承認済みsession/experiment、GameTestシナリオの実行、G09〜G12のメソッド単位の正確な観測、チケット/TPS/cleanupの認証である。
+
+## 2026-10-11 — Goal登録・競合とG12実行中Goal観測
+
+G12の実装補強として、[GoalRuntimeSampler](observer/src/main/java/org/kneekura/sporeobserver/GoalRuntimeSampler.java)で読み取り専用の`goal_registry_snapshot`（goal/target selector、priority、flags、isRunning、総件数と省略有無）を取得するコードを追加。
+
+**新しい観測目的:** 同じMinecraftバージョン・条件・Mobごとに、静的372登録呼出から実際に有効化されたGoal集合を照合する。特にWitchの同priority4のMOVE/LOOK支援Goal、BruteのTARGET-only輸送Goalと交戦Goal、Infectedの優先度4のSearchArea/BufferAIを測る。
+
+**不変の限界:** G12の`goal_registry_snapshot`はGoalSelectorの瞬間的な公開状態であり、canUseの実際の呼出、割り込み、衝突、故障時の経路更新を観測するイベントではない。G12の`search_goal_step`/`follow_goal_step`の境界証拠が揃わなければ結果はINCONCLUSIVE。Spore原作の実機ロード、registry/session権限、cleanupと負荷測定はいずれもNOT_RUNのまま。

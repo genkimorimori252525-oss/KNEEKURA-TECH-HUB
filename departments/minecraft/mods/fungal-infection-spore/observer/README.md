@@ -68,3 +68,14 @@ CIでは自作Java17のソースをForgeGradle 6でビルドし、生成JARの�
 G13の記録には tick_ms に加え、loaded_chunks と vanilla_forced_chunks_only も含む。後者はVanillaの強制ロード範囲であり、Forge独自の全ticket数ではない。tick_msはServerTickEvent START〜ENDの未校正値なので、独立したprofiler計測を行うまではTPSや正式MSPTと同義にしない。
 
 **G11の補助観測について:** 元JARの Proto.getWeights() と Vigil.getWaveSize() は公開getterのため、リフレクション経由で読み、値のコピーをログへ出す。学習や召喚の処理は呼び出さず、ゲーム状態は変更しない。LivingDamageEventのamountはイベント発生時点の値で、ミッション報酬や後続の実ダメージ確定とは同一視しない。既存のPython G11ゲートが要求するwave_award/wave_spawn_result等を**このスナップショットで代用しない**。
+
+## 2026-10-11 — Goal登録・競合とG12実行中Goal観測
+
+[原作Bytecodeから復元した86クラス・372件のGoal登録位置](../GOAL-REGISTRATION-PRIORITY-AUDIT-2026-10-11.md) は**静的な呼出一覧**。有効Goalの実体を直接測るために [GoalRuntimeSampler.java](src/main/java/org/kneekura/sporeobserver/GoalRuntimeSampler.java) を追加した。
+
+- **G12のみ**、20tickごとの受動snapshot中で対象Infectedの先頭8体まで登録済みGoalを観測。各MobのAction/Target両Selectorを合わせ、priority、Goalの実Class名、実際のGoal.Flag、WrappedGoal.isRunningを読み取る。出力kindは`goal_registry_snapshot`。
+- Minecraft1.20.1 `Mob.f_21345_`と`f_21346_`へはForge `ObfuscationReflectionHelper.findField` を通じた**読み取り専用のSRG field参照**を行う。実体Goalを止めたり、追加・削除したり、Goal.canUseを実行したりしない。
+- 1Mobにつき最大**12 Goal**だけを表示。総登録Goal数、実行中件数、`truncated`を併記。省略されたGoalがないと偽らない。イベント本文上限4KBを超えないことも安全契約。
+- これは**ある時刻の現在状態を記録するだけ**で、Flag衝突が実際に発生したとか、別Goalを中断したというGameTest結果ではない。元JAR・LABの承認済み隔離worldとcleanupは未検証。出力を`search_goal_step`等へ勝手に変換しないため既存G12の受け入れ状態はINCONCLUSIVEのまま。
+
+コンパイルは既存のForgeGradle CIで別途確認する。反射fieldの変換/アクセスが失敗した場合は観測を止め、runtime PASSへ昇格しない。

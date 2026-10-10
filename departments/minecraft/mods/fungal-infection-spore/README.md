@@ -110,3 +110,11 @@ All further MOD research follows [Minecraft analysis workflow](../../ANALYSIS-WO
 - [Failure/Repair履歴の暫定入口](FAILURE-REPAIR-HISTORY.md) / [PARTIALな機械可読記録](FAILURE-REPAIR-HISTORY.json)。Issue/修復diffがCASに固定されていないため正式caseは0件であり、修正完了を示さない。
 
 **現状:** 今回の48クラスの存在とSHAはINVENTORIED、うち重点7クラスの選定構造はMAPPED/STATIC PASS。Spore原作を起動したG09〜G13 GameTest、TPS、最新NeoForge/FRONTIER比較、whole-target COMPLETEは未達。
+
+## 2026-10-11 — Goal登録・競合とG12実行中Goal観測
+
+- [原作のGoal登録呼出372件・86クラスを網羅的に抽出した研究レポート](GOAL-REGISTRATION-PRIORITY-AUDIT-2026-10-11.md)。goalSelector 356 / targetSelector 16、優先度1〜10などの呼出位置を固定した。**継承先のMobでの有効Goal数とは異なる**。
+- [27件の元JAR Bytecode契約と代表的なクラスSHA](verification/GOAL-REGISTRATION-MAP-2026-10-11.json)、[実JARを指定して372件を再生成する自作スクリプト](tools/audit_spore_goal_registrations.py)。実JARで27/27 PASS、二度実行した完全JSONのSHA-256一致。他のJARではBLOCKED_HASH_MISMATCH。
+- [研究専用Forge観測器](observer/README.md)に **G12用のGoalSelector読み取り専用snapshot**を追加。load済みMobのGoal名・priority・flags・runningを、限られた数だけ出力する。**実SporeのDedicated Serverでの実行・競合の実証は依然NOT_RUN**。
+
+特に、BruteのTransportInfectedはpriority1だが制御FlagがTARGETのみ。InfectedWitchの3つのBuffAlliesGoal派生は全てpriority4でMOVE/LOOKを占有し、基底SearchAreaGoalともMOVEで競合する。InfectedConsumeFromRemainsは明示的FlagなしでcanUse中のBlock破壊処理を持つ。将軍AIのタスク割当にはMove/Lookの占有、同一優先度の任務切替、WorldMutationの副作用分離が必要な設計課題として回収した。
