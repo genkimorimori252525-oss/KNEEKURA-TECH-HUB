@@ -123,4 +123,36 @@ class GateTest(unittest.TestCase):
         self.assertTrue(range_contains('[1.20.1,1.21)','1.20.1'))
         self.assertFalse(range_contains('[1.20.1,1.21)','1.21'))
 
+class AiGoalLayerUnitTest(unittest.TestCase):
+    """Portable tests only: no copyrighted Spore JAR on CI runners."""
+
+    def test_wrong_jar_is_blocked_before_bytecode_read(self):
+        from audit_ai_goal_layer import inspect
+        with TemporaryDirectory() as temp:
+            wrong=Path(temp)/'synthetic-wrong.jar'
+            wrong.write_bytes(b'not the owned Spore binary')
+            report=inspect(wrong)
+            self.assertEqual(report['status'], 'BLOCKED_HASH_MISMATCH')
+            self.assertNotIn('ai_classes', report)
+
+    def test_javap_method_extraction_does_not_absorb_following_method(self):
+        from audit_ai_goal_layer import extract_method
+        text=('  public boolean m_8036_();\n'
+              '    Code:\n'
+              '       0: iconst_1\n'
+              '  public void m_8037_();\n'
+              '    Code:\n'
+              '       0: athrow\n')
+        method=extract_method(text, 'm_8036_')
+        self.assertIn('iconst_1', method)
+        self.assertNotIn('athrow', method)
+
+    def test_exact_binary_pins_and_scope(self):
+        from audit_ai_goal_layer import PREFIX, PINS, ORIGINAL_SHA
+        self.assertEqual(PREFIX, 'com/Harbinger/Spore/Sentities/AI/')
+        self.assertEqual(len(PINS), 7)
+        self.assertEqual(len(ORIGINAL_SHA), 64)
+        self.assertEqual(len(set(PINS)), 7)
+        self.assertTrue(all(len(h)==64 for h in PINS.values()))
+
 if __name__=='__main__':unittest.main()
