@@ -17,7 +17,7 @@ import java.util.Map;
  * resolved from stable SRG identifiers by Forge's own remapping helper.
  */
 public final class GoalRuntimeSampler {
-    private static final int MAX_CAPTURED_GOALS = 24;
+    private static final int MAX_CAPTURED_GOALS = 12;
     private final Field actionField, targetField;
 
     public GoalRuntimeSampler() {
