@@ -1,0 +1,36 @@
+{
+  "format": "kneekura.failure-history.v1",
+  "repository": "https://github.com/Shadows-of-Fire/FastSuite",
+  "scope": {
+    "track": "ANCHOR_CANDIDATE",
+    "head_revision": "883aed9f39f6b83225cbf20ca9d59f1c98239278",
+    "history_window": "2026-10-11 phase-one selected report lead; not all issues",
+    "queries": [
+      "async",
+      "deadlock",
+      "freeze"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "inspected_evidence_ids": [
+      "reported_issue"
+    ],
+    "deferred": [
+      "Release-scoped issues/PRs and source fixes",
+      "Full raw snapshot CAS capture",
+      "Any runtime acceptance"
+    ],
+    "unavailable": []
+  },
+  "research_status": "NOT_IMPORT_READY",
+  "scope_evidence": [
+    {
+      "id": "reported_issue",
+      "role": "issue",
+      "url": "https://github.com/Shadows-of-Fire/FastSuite/issues/47",
+      "note": "Issue #47 user suspected FastSuite for ATM10 freeze; maintainer explicitly said no FastSuite errors, likely MiniHUD; this is NOT a confirmed FastSuite causal repair."
+    }
+  ],
+  "cases": []
+}

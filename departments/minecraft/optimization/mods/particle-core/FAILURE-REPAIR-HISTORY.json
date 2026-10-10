@@ -1,0 +1,36 @@
+{
+  "format": "kneekura.failure-history.v1",
+  "repository": "https://github.com/fzzyhmstrs/pc",
+  "scope": {
+    "track": "ANCHOR_SOURCE_WITH_FRONTIER_REPORTS",
+    "head_revision": "8ae835f2abe100ff7a39f2e582e1cfa71ba6004a",
+    "history_window": "2026-10-11 phase-one selected report lead; not all issues",
+    "queries": [
+      "async",
+      "deadlock",
+      "freeze"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "inspected_evidence_ids": [
+      "reported_issue"
+    ],
+    "deferred": [
+      "Release-scoped issues/PRs and source fixes",
+      "Full raw snapshot CAS capture",
+      "Any runtime acceptance"
+    ],
+    "unavailable": []
+  },
+  "research_status": "NOT_IMPORT_READY",
+  "scope_evidence": [
+    {
+      "id": "reported_issue",
+      "role": "issue",
+      "url": "https://github.com/fzzyhmstrs/pc/issues/65",
+      "note": "Issue #47 Fabric Minecraft 1.21.11 unsafe LegacyRandomSource and issue #65 2026-09 async palette failure are FRONTIER reports, NOT evidence of a 1.20.1 Forge regression. No verified fix/parent reviewed."
+    }
+  ],
+  "cases": []
+}

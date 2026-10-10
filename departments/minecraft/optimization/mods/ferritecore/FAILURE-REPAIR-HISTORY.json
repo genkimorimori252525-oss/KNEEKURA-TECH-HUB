@@ -1,0 +1,124 @@
+{
+  "format": "kneekura.failure-history.v1",
+  "repository": "https://github.com/malte0811/FerriteCore",
+  "scope": {
+    "track": "ANCHOR_ADJACENT",
+    "head_revision": "e47bcbbde5b83805f927bad82bcc2b323e7169b8",
+    "history_window": "2023 Jul-Aug model deduplication issue #129 and fix 2aa56a0 (Minecraft 1.20.1 report; 1.20.0 source candidate)",
+    "queries": [
+      "#129",
+      "2aa56a0def18a94574bc4c0f6e1aea00db1709a5",
+      "optimization failure and repair"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "inspected_evidence_ids": [
+      "issue",
+      "diff",
+      "before_code",
+      "after_code"
+    ],
+    "deferred": [
+      "Exact release JAR bytecode/source parity",
+      "CI+runtime re-evaluation",
+      "full upstream history/regressions",
+      "Immutable source payload hashes and CAS document IDs"
+    ],
+    "unavailable": [
+      "No captured original JAR in this turn"
+    ]
+  },
+  "research_status": "REVIEW_NOT_HISTORY_IMPORT_READY; evidence records lack CAS index_snapshot_id and document_id",
+  "cases": [
+    {
+      "case_id": "PHASE1-FERRITECORE-2aa56a0",
+      "origin": "UPSTREAM",
+      "track": "ANCHOR_ADJACENT",
+      "environment": {
+        "source_head": "e47bcbbde5b83805f927bad82bcc2b323e7169b8",
+        "requested_target": "Minecraft 1.20.1 Forge",
+        "runtime": "NOT_RUN",
+        "version_warning": "historical issue may originate on non-ANCHOR Minecraft/loader; do not transport report without checks"
+      },
+      "affected_symbols": [
+        "Common/src/main/java/malte0811/ferritecore/impl/Deduplicator.java"
+      ],
+      "before_revision": "5087367f63289248b778c183e53c7d6a303d675d",
+      "after_revision": "2aa56a0def18a94574bc4c0f6e1aea00db1709a5",
+      "evidence": [
+        {
+          "id": "issue",
+          "role": "issue",
+          "url": "https://github.com/malte0811/FerriteCore/issues/129"
+        },
+        {
+          "id": "diff",
+          "role": "diff",
+          "url": "https://github.com/malte0811/FerriteCore/commit/2aa56a0def18a94574bc4c0f6e1aea00db1709a5"
+        },
+        {
+          "id": "before_code",
+          "role": "before_code",
+          "url": "https://github.com/malte0811/FerriteCore/blob/5087367f63289248b778c183e53c7d6a303d675d/Common/src/main/java/malte0811/ferritecore/impl/Deduplicator.java"
+        },
+        {
+          "id": "after_code",
+          "role": "after_code",
+          "url": "https://github.com/malte0811/FerriteCore/blob/2aa56a0def18a94574bc4c0f6e1aea00db1709a5/Common/src/main/java/malte0811/ferritecore/impl/Deduplicator.java"
+        }
+      ],
+      "causal_chain": [
+        "Reporter observed ModelGapFix+Chipped load time roughly 23s without FerriteCore versus 70s with it.",
+        "Maintainer identified weak hash collisions among similar baked quad vertex arrays leading to many array comparisons",
+        "Replace Arrays.hashCode(int[]) with betterIntArrayHash combining per-int MurmurHash3, retain Arrays.equals exact key equality"
+      ],
+      "symptom": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Reporter observed ModelGapFix+Chipped load time roughly 23s without FerriteCore versus 70s with it.",
+        "evidence_ids": [
+          "issue"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "ModelGapFix+Chipped+FerriteCore in user Minecraft 1.20.1 environment",
+        "evidence_ids": [
+          "issue"
+        ]
+      },
+      "root_cause": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Maintainer identified weak hash collisions among similar baked quad vertex arrays leading to many array comparisons",
+        "evidence_ids": [
+          "issue",
+          "diff"
+        ]
+      },
+      "repair": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "Replace Arrays.hashCode(int[]) with betterIntArrayHash combining per-int MurmurHash3, retain Arrays.equals exact key equality",
+        "evidence_ids": [
+          "diff",
+          "before_code",
+          "after_code"
+        ]
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Hash collision distributions matter for content-addressed resource reuse; profile cache construction and key similarity, not just heap savings.",
+        "evidence_ids": [
+          "diff"
+        ]
+      },
+      "reproduction": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      },
+      "fix_verification": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      }
+    }
+  ]
+}
