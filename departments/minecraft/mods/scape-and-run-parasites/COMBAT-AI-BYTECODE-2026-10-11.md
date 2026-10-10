@@ -126,3 +126,34 @@ EntityPStationaryArchitect.freeDead checks an infested block under its dead/remo
 - Preserve private JAR bytes, decompilation output and third-party resources locally. Do not treat these bounded findings as whole-target COMPLETE, canonical VALIDATED or measured performance.
 
 **Facet status:** entity registry INVENTORIED; selected ranged/evasion/learning method behaviors MAPPED with DIRECT_BINARY evidence, some evidence-scoped claims; rendering and whole-target analysis NOT_ANALYZED / PARTIAL; gameplay, source equivalence, 1.20.1 and performance NOT_RUN.
+
+
+## 7. Further verified environmental / group AI (original 1.9.21 bytecode)
+
+**Block-light sabotage (DIRECT_BINARY).** Class \`com/dhanantry/scapeandrunparasites/entity/ai/EntityAIBlockLight.class\`:
+- \`findSource()\` starts with \`EnumSkyBlock.BLOCK\` light level around parent and checks \`lightTrigger\`. Its candidate selection and light-level constraints are distinct from ordinary player combat.
+- \`func_75246_d()\` runs path navigation toward a \`BlockPos target\`, tracks \`progressB/neededTime\`, emits block-breaking world event \`World.func_175715_c\` as progress changes, and eventually calls \`World.func_175655_b(target,true)\` to destroy the block. When position/pathfinding stops improving, it can call \`EntityParasiteBase.skillBreakBlocks()\` after a detected idle threshold **120**, abandoning the target after threshold **240** and placing that coordinate into an exclusion list. Exact player-visible frequency depends on tick-scheduler/goal registration and config.
+- **Design opportunity**: goal-based sabotage of player illumination + anti-stuck escalation, separately from generic griefing. When independently implementing, reversible break journal and owner-scoped protection should intercept the final world mutation.
+
+**Dynamic recruitment and followership (DIRECT_BINARY).** Class \`com/dhanantry/scapeandrunparasites/entity/ai/EntityAIGetFollowers.class\`:
+- Constructor accepts \`parent, version, searchRange\`. \`func_75250_a()\` only starts every **20 ticks** if the parent is not itself following another parasite and has no current attack target.
+- \`func_75246_d()\` queries \`EntityParasiteBase\` in an AABB grown by \`(searchRange,2,searchRange)\`, iterates nearby candidates and handles **four version-dependent branches** with conditions on visibility/aliveness/type and existing leader; when eligible calls \`candidate.setParasiteToFollow(parent)\`. Does not indiscriminately recruit all parasitic Mobs.
+- **Design opportunity**: hierarchical group leaders/formation recruitment where goal is suppressed while attacking; use a capped group size / bounded scan period to manage load.
+
+**Timed spread AI (DIRECT_BINARY).** Class \`com/dhanantry/scapeandrunparasites/entity/ai/EntityAIBlockInfest.class\`:
+- \`func_75250_a()\` always true (when scheduled by Mob); in \`func_75246_d()\` increments internal \`ticks\` and acts after **ticks > 200** (nominally 201 uninterrupted goal updates), resets counter, checks parent current block against \`IMetaName\`; if not already infected, invokes \`ParasiteEventWorld.canInfestBlock(world,parentBlockPos,new Random(),stage,true)\`.
+- This establishes **original** source of timed stage-aware infestation, *distinct from SRPMixins addon overwrite*. Actual infected block material/extent/probability sits downstream in \`canInfestBlock\` and must be independently read. \`new Random()\` per activation is worth profiling; no performance measurement was made.
+
+**Evidence boundary:** methods recovered from the uploaded JAR's distributed bytecode by JDK \`javap -p -c\`. \`func_175655_b\` is the 1.12.2 SRG world break method; this is not a demonstration of 1.20.1 Minecraft mappings/Forge compatibility, and not a runtime result. The complete original \`findSource\` / four follower branches and downstream block state conversion are further detailed mapping tasks, not falsely marked done.
+
+## 8. Technical harvest prioritization (incremental)
+
+| Family | Evidence | Candidate for KNEEKURA invasion MOD | Unresolved |
+| --- | --- | --- | --- |
+| Timed terrain infestation | DIRECT_BINARY \`EntityAIBlockInfest\` | staged territory growth with per-area tick budget | block state conversion, exact config chance |
+| Light-source sabotage | DIRECT_BINARY \`EntityAIBlockLight\` | enemy tactic that weakens player defenses rather than doing only HP damage | config trigger/filter, world restore after light-breaking |
+| Group leader recruitment | DIRECT_BINARY \`EntityAIGetFollowers\` | hierarchy/follower policy to coordinate swarms | all four type-code branches, formation/navigation |
+| Pod bombardment | DIRECT_BINARY \`EntityAIAncientSummon\` + \`EntityDropPod\` | multi-stage attack: warning → projectile/landing → reinforcements → status area | live spawn/location/timings/particles |
+| Global adaptation memory | DIRECT_BINARY \`EntityPMalleable\`, \`SRPWorldData\`, event handlers | adaptive ecology: individual experience → colony dominant threat → descendants | reset caller and probabilistic inheritance validation |
+
+**Critical distinction:** Original has a configurable rules-based adaptation and evolution/phase system; a true ecosystem additionally requires a resource model, carrying capacity, spatial territory, selection pressures, and reproducible behavior. This is a new independent design direction, **not** a recovered original SRP mechanic.
