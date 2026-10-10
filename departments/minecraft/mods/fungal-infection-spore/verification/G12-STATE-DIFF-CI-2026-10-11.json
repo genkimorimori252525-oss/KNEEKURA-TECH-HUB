@@ -1,0 +1,75 @@
+{
+  "schema": "kneekura.spore.goal-running-state-observer-receipt.v1",
+  "recorded_local_date": "2026-10-11 Asia/Tokyo",
+  "research_jar": {
+    "name": "spore_1.20.1_2.2.0j.jar",
+    "sha256": "d20c4be6606f9752ecfd964eba625363eb76a28e327d67fe6dda4be748401489",
+    "minecraft": "1.20.1",
+    "loader": "Forge",
+    "spore_version": "2.2.0j",
+    "origin": "USER_UPLOADED",
+    "provided_to_ci": false,
+    "raw_bytes_published": false
+  },
+  "artifact": {
+    "repository": "genkimorimori252525-oss/KNEEKURA-TECH-HUB",
+    "workflow_run_id": 38086588083,
+    "workflow_source_commit": "d7430a3f6be3d37b23f2ef15056e7511d135dbbb",
+    "workflow_url": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38086588083",
+    "outcome": "SUCCESS_3_OF_3_JOBS",
+    "jobs": {
+      "forge-observer-compile": "PASS_MC_1_20_1_FORGEGRADLE_BUILD_AND_ORIGINAL_FREE_JAR_PACKAGE",
+      "test-observation-gates": "PASS_PYTHON_37_PORTABLE_SYNTHETIC_TESTS",
+      "portable-observer-core": "PASS_JAVA17_TRACESINK_AND_GOAL_STATE_DIFF_AND_WATCHED_SELECTION_PLUS_JAVA_TO_PYTHON_G12_G13"
+    },
+    "own_observer_jar": {
+      "artifact_id": 11681808218,
+      "name": "kneekura-spore-observer-d7430a3f6be3d37b23f2ef15056e7511d135dbbb",
+      "source_url": "https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38086588083/artifacts/11681808218",
+      "zip_size_bytes": 25951,
+      "expires_by_github_policy": true,
+      "retention_days_requested": 7,
+      "contains_original_spore_class_files": false
+    }
+  },
+  "new_owned_research_tools": [
+    "observer/src/main/java/org/kneekura/sporeobserver/core/GoalRunningStateDiff.java",
+    "observer/src/main/java/org/kneekura/sporeobserver/core/GoalSnapshotSelection.java",
+    "observer/src/main/java/org/kneekura/sporeobserver/GoalRuntimeSampler.java",
+    "observer/src/main/java/org/kneekura/sporeobserver/SporeEvents.java",
+    "tools/analyze_spore_goal_snapshots.py",
+    "observer/tests/GoalRunningStateDiffTest.java",
+    "observer/tests/GoalSnapshotSelectionTest.java",
+    "observer/tests/G12SyntheticProducer.java",
+    "tests/test_gates.py"
+  ],
+  "what_is_directly_tested": [
+    "Goal samples capped at 12 favor Witch priority4 support, relevant Spore roles and running goals over irrelevant priority0 entries",
+    "Same-run opaque WrappedGoal instance ID is distinct from original Mob ID and persistent NBT IDs",
+    "Only observed bool value changes for same Mob/instance across adjacent end-of-server-tick polls are delta events",
+    "Vanished/cropped/unsampled Goal produces no inferred stop/start and duplicate Goal ID fails closed",
+    "Java synthetic G12 has two actor registration snapshots and one synthetic false-to-true running-state change",
+    "Both Python G12 reviewers preserve origin=SYNTHETIC_FIXTURE_ONLY and runtime_pass=false",
+    "ForgeGradle compiles and packages owned observer without original Spore classes"
+  ],
+  "limitations": [
+    "Source build and synthetic tests only, no approved live Spore server/LAB world session was supplied/confirmed",
+    "Not a direct Goal.start/stop/canUse callback trace; multiple changes within one tick may be missed",
+    "At most eight sampled Infected across 4 watched roles; this does not inventory all loaded Mobs",
+    "Each Mob snapshot limited to 12 goals and truncation explicitly recorded",
+    "End-of-tick polling may have observer overhead; tick/CPU/TPS not measured",
+    "LAB run/owner/world/cleanup has not been authenticated; no GameTest G01-G13 completed",
+    "FRONTIER 1.21.1 NeoForge binary not studied; whole JAR research remains IN_PROGRESS"
+  ],
+  "scope_verdict": {
+    "java17_portable": "PASS",
+    "python37": "PASS",
+    "forge_owned_build": "PASS",
+    "minecraft_spore_runtime": "NOT_RUN",
+    "g12_runtime_conflict": "NOT_OBSERVED",
+    "g09_to_g13_game_tests": "NOT_RUN",
+    "tps": "NOT_MEASURED",
+    "all_classes": "NOT_COMPLETE"
+  },
+  "no_canonical_promotion": true
+}
