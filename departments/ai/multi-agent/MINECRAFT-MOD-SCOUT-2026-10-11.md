@@ -65,3 +65,14 @@ GitHubの下記SHAは **2026-10-11 時点の実際のリモートブランチ先
 5. Minecraft起動、実機・TPS・ネットワーク・Mob振る舞い・JAR完全同一性検証は **NOT_RUN**。Source/JARの著作権・資産の再配布境界を保持。
 
 **ここにある優先順位は研究価値の暫定順位であり、賢さを測定・順位付けしたものではない。**
+
+
+## 追記：Spore原作JAR取得・解析着手（2026-10-11）
+
+上記の「J1はJAR待ち」は**当初の発掘時点の履歴**。同日にユーザーから Spore 2.2.0j / Minecraft 1.20.1 Forge の実JAR提供があり、SHA-256を固定してBytecode解析を開始した。旧記録は書き換えず、新しい正本を参照する。
+
+- [Minecraft部門 Spore研究入口](../../minecraft/mods/fungal-infection-spore/README.md)
+- [実JARのProto指揮AI・重み更新・戦術砲撃の調査](../../minecraft/mods/fungal-infection-spore/HIVEMIND-AI-BYTECODE-2026-10-11.md)
+- [AI部門への再利用課題](PROTO-HIVEMIND-CASE-STUDY-2026-10-11.md)
+
+本体2.2.0jの実バイナリには4入力×4出力の部隊選択・ダメージに基づく重み更新がある。静的調査の限定的な進捗であって本MOD/学習性能のCOMPLETEやPASSではない。
