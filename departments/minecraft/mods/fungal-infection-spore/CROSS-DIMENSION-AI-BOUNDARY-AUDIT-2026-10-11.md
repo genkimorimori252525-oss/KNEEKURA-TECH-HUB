@@ -52,3 +52,9 @@
 - これは**原作Sporeからコピーした実装ではない独立設計案**。Mono-runtime性能や効用は未実証。
 
 **証拠状態:** DIRECT_BINARYはJAR内の実クラス構造と呼び出し条件。矛盾するWikiはBehaviorHint。複数ディメンションでのゲーム挙動は NOT_RUN / BUG_CANDIDATE。公式配布とのバイト同一性、FPS/TPS、外部Issueでの修正履歴はNOT_VERIFIED。旧版と最新FRONTIERを混同しない。
+
+
+## 追加の監査証拠（classごとのSHA-256）
+
+[固定JAR内9クラスのSHA-256と3件の狭いFinding](BYTECODE-CROSS-DIMENSION-RECEIPT-2026-10-11.json) を追加した。クラスはSporeSavedData、HandlerEvents、ProtoModifierの閾値を読むInfected/Mound/Calamity/Hyper、SConfig$Server、ChunkLoadRequest、ChunkLoaderHelper。これは元Bytecodeの照合情報であり、ゲーム内の不具合実証ではない。
+
