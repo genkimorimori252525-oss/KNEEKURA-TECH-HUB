@@ -103,3 +103,12 @@
 - 世界規模のDirectorと各局地Proto相当のCommanderを分離。複数指揮官の学習を共有するかはアブレーションで決定し、原作に既にあると主張しない。
 
 **Facet状態:** 原作ANCHOR選定クラスのBytecodeは DIRECT_BINARY/MAPPED。モデルの勝率・マルチプレイ・FPS/TPS・チャンク復元・全クラスの意味解析は NOT_RUN/NOT_COMPLETE。TECH-HUB CoreへのCANONICAL/VALIDATED昇格はしていない。
+
+
+## 続行研究：初期候補4体のBytecode確認と合成比較
+
+- 原作Proto.fillDefaultTeams(List,List)は入力が4件未満なら4件の代替値を使い、shuffleされた最初の4件を各team_1〜team_4へ加える。**初期状態の各team候補数は4**。その後の賞罰やNBT読込で長さが変わる可能性は別扱い。
+- summonMobで「実候補kを0〜3から抽選、memberには部隊番号jを保存」という既存不整合候補について、**初期4件での75%不一致という条件**が元JARの初期化処理に合致することを再確認した。賞罰でどの程度実際に候補が入れ替わるかはNOT_RUN。
+- [原作の意思決定算術を独立に模擬した256シード×1,200回の合成比較](../../../ai/evaluation/experiments/spore-proto-policy-2026-10-11/README.md) を実行した。こちらの成功は合成シナリオだけであり、ゲーム学習・性能・Mod互換性を検証したわけではない。
+- [静的なディメンション境界・chunk ticket問題の追加監査](CROSS-DIMENSION-AI-BOUNDARY-AUDIT-2026-10-11.md) と [その固定クラスSHA](BYTECODE-CROSS-DIMENSION-RECEIPT-2026-10-11.json) も参照。
+
