@@ -1,0 +1,104 @@
+{
+  "schema": "kneekura.minecraft.mod-analysis-receipt.v1",
+  "captured_at": "2026-10-11",
+  "target": {
+    "name": "Raids: Enhanced",
+    "mod_id": "raidsenhanced",
+    "mod_version": "1.0.2",
+    "author": "FINDERFEED",
+    "license": "All Rights Reserved"
+  },
+  "track": "ANCHOR",
+  "source_snapshot": {
+    "origin": "https://github.com/FINDERFEED/raidsenhanced",
+    "branch": "1.20.1",
+    "commit": "6354ebf97faaeba79affaf7e71d01ed5ae651e85",
+    "minecraft": "1.20.1",
+    "loader": "Forge",
+    "forge_build_property": "47.1.104",
+    "forge_dependency_range": "[47.1.1,)",
+    "java_toolchain": 17,
+    "fdlib_dependency_range": "[1.0.8,2.0.0)",
+    "git_tree_entries": 256,
+    "java_sources": 66,
+    "resource_files": 113,
+    "resource_extensions": {
+      "json": 38,
+      "png": 58,
+      "ogg": 15,
+      "toml": 1,
+      "mcmeta": 1
+    }
+  },
+  "comparative_snapshot": {
+    "origin": "https://github.com/FINDERFEED/raidsenhanced",
+    "branch": "master",
+    "commit": "a1a6ded47abc1504a5319a68716cf17a5838e0e6",
+    "minecraft": "1.21.1",
+    "loader": "NeoForge",
+    "neo_version": "21.1.218",
+    "java_toolchain": 21,
+    "java_sources": 65,
+    "branch_relation": "DIVERGED; do not conflate with ANCHOR"
+  },
+  "binary_artifact": {
+    "downloaded": false,
+    "hash_sha256": null,
+    "binary_inventory": "NOT_RUN",
+    "source_binary_equivalence": "UNESTABLISHED",
+    "retained": false
+  },
+  "analysis": {
+    "source_tree_inventory": "SOURCE_CONFIRMED",
+    "selected_source_review": "SOURCE_CONFIRMED",
+    "live_runtime": "NOT_RUN",
+    "runtime_visuals": "NOT_RUN",
+    "performance_measurement": "NOT_RUN",
+    "multiplayer_testing": "NOT_RUN",
+    "flan_compatibility": "NOT_RUN",
+    "fdlib_dependency_instrumentation": "NOT_RUN"
+  },
+  "mixins": {
+    "common": [
+      "RaidMixin",
+      "PlayerMixin",
+      "EntityMixin"
+    ],
+    "client": [
+      "ClientPacketListenerMixin",
+      "LocalPlayerMixin"
+    ],
+    "config": "src/main/resources/raidsenhanced.mixins.json"
+  },
+  "bosses": [
+    "RaidDrill",
+    "GolemOfLastResort",
+    "ZapperIllager",
+    "RaidBlimp"
+  ],
+  "notable_source_locators": [
+    "src/main/java/com/finderfeed/raids_enhanced/REMixinHandler.java",
+    "src/main/java/com/finderfeed/raids_enhanced/content/entities/raid_blimp/cannons/RaidBlimpCannonsController.java",
+    "src/main/java/com/finderfeed/raids_enhanced/content/entities/raid_drill/RaidDrill.java",
+    "src/main/java/com/finderfeed/raids_enhanced/content/entities/engineer/ZapperIllager.java",
+    "src/main/java/com/finderfeed/raids_enhanced/content/entities/golem_of_last_resort/GolemOfLastResort.java"
+  ],
+  "external_issue_evidence": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "license": {
+    "expression": "All Rights Reserved",
+    "reference": "https://github.com/FINDERFEED/raidsenhanced/blob/1.20.1/LICENSE.txt",
+    "code_copy_authorized": false,
+    "derived_notes_only": true
+  },
+  "review": {
+    "confidence": "SOURCE-BOUND_ONLY",
+    "canonical_validation": "NOT_PROMOTED",
+    "jar_sha": "UNKNOWN",
+    "runtime": "NOT_RUN"
+  }
+}
