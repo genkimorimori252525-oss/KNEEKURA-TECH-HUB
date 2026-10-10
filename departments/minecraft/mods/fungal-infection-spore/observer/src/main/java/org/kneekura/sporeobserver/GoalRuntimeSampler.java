@@ -1,13 +1,13 @@
 package org.kneekura.sporeobserver;
 
 import net.minecraft.world.entity.Mob;
+import org.kneekura.sporeobserver.core.GoalSnapshotSelection;
 import net.minecraft.world.entity.ai.goal.GoalSelector;
 import net.minecraft.world.entity.ai.goal.WrappedGoal;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +18,6 @@ import java.util.Map;
  * Goal IDs are ephemeral observer-assigned integers; they are NOT persisted IDs.
  */
 public final class GoalRuntimeSampler {
-    private static final int MAX_CAPTURED_GOALS = 12;
     private static final int MAX_GOAL_IDENTITIES = 2048;
     private final Field actionField, targetField;
     private final IdentityHashMap<WrappedGoal, Integer> identities = new IdentityHashMap<>();
@@ -39,41 +38,17 @@ public final class GoalRuntimeSampler {
         collect(values, "goal", (GoalSelector)actionField.get(mob));
         collect(values, "target", (GoalSelector)targetField.get(mob));
 
-        values.sort(Comparator
-                .comparingInt(GoalRuntimeSampler::selectionRank)
-                .thenComparingInt(row -> ((Number)row.get("priority")).intValue())
-                .thenComparing(row -> (String)row.get("selector"))
-                .thenComparing(row -> (String)row.get("goal_class"))
-                .thenComparingInt(row -> ((Number)row.get("goal_instance_id")).intValue()));
-
         int total = values.size();
         int running = (int)values.stream().filter(row -> Boolean.TRUE.equals(row.get("running"))).count();
-        List<Map<String,Object>> captured = values.subList(0, Math.min(total, MAX_CAPTURED_GOALS));
+        List<Map<String,Object>> captured = GoalSnapshotSelection.select(values);
         return Map.of(
                 "entity_uuid", mob.getUUID().toString(),
                 "registered_goal_count", total,
                 "registered_running_count", running,
                 "goals", new ArrayList<>(captured),
-                "truncated", total > MAX_CAPTURED_GOALS,
+                "truncated", total > GoalSnapshotSelection.MAX_GOALS,
                 "selection_policy", "WATCHED_SPORE_ROLES_THEN_RUNNING_THEN_PRIORITY",
                 "capture_scope", "READ_ONLY_GOALSELECTOR_SNAPSHOT_NOT_SCHEDULER_CALL");
-    }
-
-    private static int selectionRank(Map<String,Object> row) {
-        String name = (String)row.get("goal_class");
-        // Three Witch support subclasses are not guaranteed to be among the
-        // first 12 goals by integer priority in an inherited goal registry.
-        boolean watched = name.contains("InfectedWitch$") ||
-                name.endsWith(".TransportInfected") ||
-                name.endsWith(".SearchAreaGoal") ||
-                name.endsWith(".FollowOthersGoal") ||
-                name.endsWith(".LocalTargettingGoal") ||
-                name.endsWith(".InfectedConsumeFromRemains") ||
-                name.endsWith(".BufferAI") ||
-                name.endsWith(".BuffAlliesGoal");
-        if (watched) return 0;
-        if (Boolean.TRUE.equals(row.get("running"))) return 1;
-        return 2;
     }
 
     private int stableId(WrappedGoal goal) {
