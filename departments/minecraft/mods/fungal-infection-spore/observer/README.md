@@ -21,7 +21,7 @@
 | G10 | proto_signal_snapshot、calamity_search_snapshot、entity_join_snapshot | Calamity再配置の抽選とWomb生成**試行**の内部分岐は未観測 |
 | G11 | entity_join_snapshot / entity_leave_snapshot | VigilのawardHivemind/punishHivemindそのものは未観測 |
 | G12 | search_pos_snapshot / follow_partner_snapshot | Goalの実行・SearchPosクリア・ナビ停止は未観測 |
-| G13 | server_tick_sample | Proto、active Signal、Infected数とServerTick START〜END時間の**未校正値**を記録。正式MSPTやTPSではない |
+| G13 | server_tick_sample | Proto、active Signal、Infected数、ロード済みチャンク数、バニラ強制ロードチャンク数とServerTick START〜END時間の**未校正値**を記録。Forge ticket総数・正式MSPTやTPSではない |
 
 G09〜G12はスナップショットだけで十分な証拠にはならないため、Python側のシナリオ判定はINCONCLUSIVEのままにする。G13も実行主体の認証、一定サンプル数、計測条件とcleanup証拠が必要。
 
@@ -47,6 +47,15 @@ Java 17、ForgeGradle 6、Forge 1.20.1-47.4.10 を宣言。元Spore JARはビル
 - kneekura.spore.observe.sessionDirectory=既存LAB sessionディレクトリの絶対パス
 - kneekura.spore.observe.expectedWorld=準備済み隔離worldの絶対パス
 
-LABの [現行実行権限](../../../../CURRENT-HANDOFF-2026-10-02.md) と [元の受入計画](../LAB-GAMETEST-ACCEPTANCE-2026-10-11.md)を必ず満たすこと。セッションの作成とworld制御はこの補助MODが行わない。
+LABの [現行実行権限](../../../CURRENT-HANDOFF-2026-10-02.md) と [元の受入計画](../LAB-GAMETEST-ACCEPTANCE-2026-10-11.md)を必ず満たすこと。セッションの作成とworld制御はこの補助MODが行わない。
 
 **次の不足:** 正式Forgeコンパイル（CIとは別結果）、実LAB registryでのWorld受入、Sporeの依存閉包、実起動、G13計測、G09〜G12のメソッド単位の観測フック、証拠とcleanupの審査。未達をPASSにしない。
+
+
+## 合成データを使ったJava→Python結合試験（2026-10-11）
+
+[G13SyntheticProducer.java](tests/G13SyntheticProducer.java) は、原作やMinecraftを実行せずに自作JavaのTraceSinkから200件×3条件（Proto 1/4/16体）、計600件の専用JSONLを生成する。
+
+生成結果を既存の[evaluate_spore_trace.py](../tools/evaluate_spore_trace.py)へ渡したローカル試験では、3条件のサンプルを認識しつつ、status=SYNTHETIC_FIXTURE_ONLY、runtime_pass=falseを維持した。CIにも同じ横断テストを追加した（実行結果は別途workflowログで確認）。この結果をG13実サーバー性能PASSと呼ばない。
+
+[G13計測コード](src/main/java/org/kneekura/sporeobserver/SporeEvents.java)の観測時間はForgeのTickEvent START〜ENDで、計測器の介入があり、サーバー本体の正式MSPTと同義ではない。別途計測器OFF/ONで同じ環境のオーバーヘッドを比較する必要がある。
