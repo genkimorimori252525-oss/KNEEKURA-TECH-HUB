@@ -166,7 +166,7 @@ public final class SporeEvents {
             if (tick - startTick >= stopAfter) { stop("completed");return; }
             long elapsed=System.nanoTime()-startedNanos;
             if (elapsed<0) throw new IllegalStateException("negative monotonic interval");
-            if (scenario.equals("G13")) sampleG13(tick,elapsed/1_000_000.0);
+            if (scenario.equals("G13")) sampleG13(world,tick,elapsed/1_000_000.0);
             else if (scenario.equals("G09")||scenario.equals("G10")) {
                 if ((tick-startTick)%20==0) sampleSignals(tick);
             }
@@ -202,7 +202,7 @@ public final class SporeEvents {
         // Authenticated run, actual prepared-world ancestry, and cleanup remain LAB's responsibility.
     }
 
-    private void sampleG13(long tick, double tickMs) throws Exception {
+    private void sampleG13(ServerLevel world, long tick, double tickMs) throws Exception {
         int protos=0,infected=0,signals=0;
         Iterator<Map.Entry<UUID,WeakReference<Entity>>> it=loaded.entrySet().iterator();
         while(it.hasNext()) {
@@ -217,7 +217,9 @@ public final class SporeEvents {
         }
         out.event(tick,dimension,"server_tick_sample",
                 Map.of("proto_count",protos,"infected_count",infected,"signal_count",signals,"tick_ms",tickMs,
-                       "measurement_scope","SERVER_TICK_EVENT_BRACKET_UNCALIBRATED"));
+                       "measurement_scope","SERVER_TICK_EVENT_BRACKET_UNCALIBRATED",
+                       "loaded_chunks",world.getChunkSource().getLoadedChunksCount(),
+                       "vanilla_forced_chunks_only",world.getForcedChunks().size()));
     }
 
     private void sampleSignals(long tick) throws Exception {
