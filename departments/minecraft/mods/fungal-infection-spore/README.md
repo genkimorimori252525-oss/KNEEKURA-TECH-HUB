@@ -11,6 +11,14 @@
 - [AI department — hierarchical command plan](../../../ai/multi-agent/HIERARCHICAL-COMMAND-AI-v0.md) — independent KNEEKURA design proposal, not proven to exist in original Spore.
 - [Original MOD shortlist](../../../ai/multi-agent/MINECRAFT-MOD-SCOUT-2026-10-11.md) — historical reconnaissance performed before JAR acquisition.
 
+
+## 最新の調査追加（2026-10-11）
+
+- [Hivemind学習・複数Proto・リソース・負荷の追加Bytecode監査](HIVEMIND-LEARNING-LIFECYCLE-AUDIT-2026-10-11.md) — 選定個体と報酬帰属の不整合候補、moraleBoostのclamp例外、全ゼロ入力時の決定、活動中Protoのregistry、負Biomass、チケット再要求。
+- [追加監査の原本内11クラスSHA-256と限定的なFinding](BYTECODE-CONTINUATION-RECEIPT-2026-10-11.json) — 不変エビデンスロケータ、実機NOT_RUN。
+
+個体の評価の不整合は**Bytecodeに基づくBUG_CANDIDATE**であり、実際の戦果への影響と修正前後の確認は未実施。過去の研究成果を「完全解析」へ昇格させるものではない。
+
 ## Key findings
 
 1. The original Proto Hivemind really uses a 4-input / 4-output linear scoring system. It updates the selected action row by +0.05 on attributed positive damage feedback and -0.10 on attributed negative damage feedback, with bounds [-1,1]. It persists its own weights to NBT. **Not proof of deep neural learning or a global learned model shared among all hiveminds.**
