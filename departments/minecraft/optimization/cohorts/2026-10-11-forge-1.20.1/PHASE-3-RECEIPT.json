@@ -1,0 +1,60 @@
+{
+  "schema": "kneekura.minecraft.optimization-cohort.phase3.rendering.v1",
+  "created_at": "2026-10-11",
+  "upstream_phase_2_receipt": "PHASE-2-RECEIPT.json",
+  "input": "INPUT-MANIFEST.json",
+  "cohort_total": 58,
+  "cohort_categories": {
+    "optimization_candidates": 27,
+    "related_review": 3,
+    "profiling_tools": 3,
+    "nonoptimization_utilities": 25
+  },
+  "phase3_rendering": {
+    "slugs": [
+      "brute-force-rendering-culling",
+      "entityculling",
+      "immediatelyfast",
+      "cullleaves",
+      "badoptimizations",
+      "bocchium"
+    ],
+    "new_subject_count": 6,
+    "source_dossiers": 6,
+    "source_receipts": 6,
+    "scoped_failure_histories_markdown": 6,
+    "scoped_failure_histories_json_drafts": 6,
+    "source_fix_diffs_read": 4,
+    "scope": "PARTIAL_STATIC_SOURCE_REVIEW",
+    "source_tree_paths_inventoried": true,
+    "full_source_bytes_acquired": false
+  },
+  "cumulative": {
+    "phase2_deep_subject_count": 6,
+    "phase3_new_deep_subject_count": 6,
+    "distinct_in_cohort_target_dossiers": 12,
+    "prior_independent_ai_improvements_study_not_double_counted": true,
+    "remaining_optimization_candidates_without_in_cohort_deep_dossier": 15,
+    "deep_dossier_is_not_target_complete": true,
+    "mod_catalog_rows": 27,
+    "technique_catalog_rows_after_update": 29
+  },
+  "verification": {
+    "jar_files_received": 0,
+    "jar_sha256_verified": 0,
+    "source_release_bytecode_matches": 0,
+    "dedicated_forge_games_launched": 0,
+    "runtime_tests": 0,
+    "paired_benchmarks": 0,
+    "imported_failure_histories": 0,
+    "canonical_knowledge_promotions": 0
+  },
+  "licensing": "Derived research only; source licenses differ, protected EntityCulling rights observed; no third-party source or JAR copied.",
+  "status": "RENDERING_MECHANISM_EVIDENCE_BACKED_PARTIAL_PERFORMANCE_NOT_VERIFIED",
+  "next": [
+    "obtain exact JAR SHA/release association",
+    "resource/render stack compatibility A/B with isolated Forge 1.20.1",
+    "record raw source GitHub response/hash for CAS",
+    "analyze remaining 15 candidate subjects in stages"
+  ]
+}
