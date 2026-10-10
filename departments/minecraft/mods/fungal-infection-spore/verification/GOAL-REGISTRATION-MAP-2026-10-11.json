@@ -1,0 +1,241 @@
+{
+  "schema": "kneekura.spore.goal-registry-summary.v1",
+  "recorded_local_date": "2026-10-11 Asia/Tokyo",
+  "target": {
+    "minecraft": "1.20.1",
+    "loader": "Forge",
+    "spore": "2.2.0j",
+    "jar_filename": "spore_1.20.1_2.2.0j.jar",
+    "sha256": "d20c4be6606f9752ecfd964eba625363eb76a28e327d67fe6dda4be748401489",
+    "license": "All Rights Reserved"
+  },
+  "source": "Original user-provided .class bytes; JDK javap -p -c; no original class bodies or decompile reproduced here",
+  "generator": {
+    "repo_path": "departments/minecraft/mods/fungal-infection-spore/tools/audit_spore_goal_registrations.py",
+    "git_blob": "d5886f3bf2a6208f8966f944df1388a4d6cad9c7",
+    "python_sha256": "89d844e971fc7fc63f2f1af07d979deb33464492ba13958ad6dd218355e27e24",
+    "invocation": "python audit_spore_goal_registrations.py /PATH/TO/spore_1.20.1_2.2.0j.jar --out registration-map.json"
+  },
+  "full_local_derived_manifest": {
+    "sha256": "e2d20388fb07e97d2a8b31bdb05cca4ddc52e885df06abaf936095fad4d65492",
+    "source_kind": "DERIVED_METADATA_NOT_ORIGINAL_BYTECODE",
+    "contains": "86 class hashes + 372 callsite records owner/method/bytecode-PC/selector/priority/allocated Goal class",
+    "repeated_run_byte_identical": true,
+    "public_git_bodies_committed": false
+  },
+  "counting_scope": {
+    "class_namespace": "com/Harbinger/Spore/",
+    "owners_containing_direct_GoalSelector_addGoal": 86,
+    "direct_addGoal_call_sites": 372,
+    "goalSelector": 356,
+    "targetSelector": 16,
+    "registerGoal_method": "net/minecraft/world/entity/ai/goal/GoalSelector.m_25352_(int, Goal)",
+    "field_goalSelector": "Mob.f_21345_",
+    "field_targetSelector": "Mob.f_21346_"
+  },
+  "priority_distribution": {
+    "0": 3,
+    "1": 39,
+    "2": 48,
+    "3": 82,
+    "4": 92,
+    "5": 41,
+    "6": 31,
+    "7": 20,
+    "8": 10,
+    "9": 4,
+    "10": 2
+  },
+  "method_distribution": {
+    "protected void addRegularGoals": 106,
+    "protected void addTargettingGoals": 12,
+    "protected void m_8099_": 175,
+    "public static void onLivingSpawned": 10,
+    "public void addVariantGoals": 3,
+    "public void m_8099_": 66
+  },
+  "selected_direct_registrations": [
+    {
+      "owner": "Sentities/BaseEntities/Infected",
+      "selector": "goal",
+      "priority": 3,
+      "goal": "LocHiv/LocalTargettingGoal"
+    },
+    {
+      "owner": "Sentities/BaseEntities/Infected",
+      "selector": "goal",
+      "priority": 4,
+      "goal": "LocHiv/BufferAI"
+    },
+    {
+      "owner": "Sentities/BaseEntities/Infected",
+      "selector": "goal",
+      "priority": 4,
+      "goal": "LocHiv/SearchAreaGoal"
+    },
+    {
+      "owner": "Sentities/BaseEntities/Infected",
+      "selector": "goal",
+      "priority": 7,
+      "goal": "InfectedConsumeFromRemains"
+    },
+    {
+      "owner": "Sentities/BaseEntities/Infected",
+      "selector": "goal",
+      "priority": 10,
+      "goal": "LocHiv/FollowOthersGoal",
+      "occurrences": 2
+    },
+    {
+      "owner": "Sentities/EvolvedInfected/Brute",
+      "selector": "goal",
+      "priority": 1,
+      "goal": "TransportInfected"
+    },
+    {
+      "owner": "Sentities/EvolvedInfected/Leaper",
+      "selector": "goal",
+      "priority": 3,
+      "goal": "TransportInfected"
+    },
+    {
+      "owner": "Sentities/EvolvedInfected/Busser",
+      "selector": "goal",
+      "priority": 6,
+      "goal": "Busser$4",
+      "inherits": "TransportInfected"
+    },
+    {
+      "owner": "Sentities/BasicInfected/InfectedWitch",
+      "selector": "goal",
+      "priority": 4,
+      "goal": "InfectedWitch$3",
+      "inherits": "BuffAlliesGoal"
+    },
+    {
+      "owner": "Sentities/BasicInfected/InfectedWitch",
+      "selector": "goal",
+      "priority": 4,
+      "goal": "InfectedWitch$4",
+      "inherits": "BuffAlliesGoal"
+    },
+    {
+      "owner": "Sentities/BasicInfected/InfectedWitch",
+      "selector": "goal",
+      "priority": 4,
+      "goal": "InfectedWitch$5",
+      "inherits": "BuffAlliesGoal"
+    },
+    {
+      "owner": "Sentities/Organoids/Proto",
+      "selector": "goal",
+      "priority": 3,
+      "goal": "NeuralProcessing/ProtoAIs/ProtoTargeting"
+    },
+    {
+      "owner": "Sentities/BaseEntities/Calamity",
+      "selector": "goal",
+      "priority": 7,
+      "goal": "CalamitiesAI/CalamityVigilCall"
+    },
+    {
+      "owner_group": "8 direct Calamities concrete classes",
+      "selector": "goal",
+      "priority": 7,
+      "goal": "CalamitiesAI/SummonScentInCombat",
+      "occurrences": 8
+    },
+    {
+      "owner_group": "8 direct Calamities concrete classes",
+      "selector": "goal",
+      "priority": 8,
+      "goal": "CalamitiesAI/SporeBurstSupport",
+      "occurrences": 8
+    }
+  ],
+  "selected_class_sha256": {
+    "com/Harbinger/Spore/Sentities/BaseEntities/Infected.class": "bd015ae9d0bd634fac9a6d4b2aa6c9ea9e70c293c373b88d215326c2ed98cd0b",
+    "com/Harbinger/Spore/Sentities/BasicInfected/InfectedWitch.class": "9394856be3b2120b061587ee737f1b38074a5f8902a857b3efce5c4b2a99a9a6",
+    "com/Harbinger/Spore/Sentities/EvolvedInfected/Brute.class": "0b680d86a88d0fb474ae67e1c58555a10af591332834265f71432df4cf55c2af",
+    "com/Harbinger/Spore/Sentities/EvolvedInfected/Leaper.class": "44e1cb46fb5998005403de5ec195dd08d45776ef2df79afc2c456e545d58f771",
+    "com/Harbinger/Spore/Sentities/EvolvedInfected/Busser.class": "6a8cd739126d7cb30a1afc5b3b49f0e89a661398d623bc4db738b17cd5d8d971",
+    "com/Harbinger/Spore/Sentities/BaseEntities/Calamity.class": "ca7b48770085457460fbcc422d395254c71c2cb5a8fe31b2f81993b70593fa76",
+    "com/Harbinger/Spore/Sentities/Organoids/Proto.class": "8ab88d4e784512d910643831d8ec2caaeb4b9acf15a319a28752a3b9c5fcade3",
+    "com/Harbinger/Spore/Sentities/Calamities/Howitzer.class": "602699e48c73c2b31a079e39c9aa919ca0b5bbcce5c8c6c777c7021f07d6bb13",
+    "com/Harbinger/Spore/sEvents/HandlerEvents.class": "632fcefca9b8cbad565fbda408bda3b2a1d73951efc01049844cb4dacdbf3805"
+  },
+  "constructor_flags_direct": {
+    "TransportInfected": [
+      "TARGET"
+    ],
+    "BuffAlliesGoal": [
+      "MOVE",
+      "LOOK"
+    ],
+    "SearchAreaGoal": [
+      "MOVE"
+    ],
+    "FollowOthersGoal": [
+      "MOVE",
+      "LOOK"
+    ],
+    "LocalTargettingGoal": [],
+    "InfectedConsumeFromRemains": [],
+    "SporeBurstSupport": [],
+    "SummonScentInCombat": [],
+    "ProtoTargeting": []
+  },
+  "selector_behavior_sources": [
+    "https://mappings.dev/1.20.1/net/minecraft/world/entity/ai/goal/GoalSelector.html",
+    "https://mappings.dev/1.20.1/net/minecraft/world/entity/ai/goal/Goal.html",
+    "https://maven.fabricmc.net/docs/yarn-1.20.1%2Bbuild.9/net/minecraft/entity/ai/goal/GoalSelector.html"
+  ],
+  "contracts_checked": {
+    "base_infected_follow_10_twice": true,
+    "base_infected_scavenge_at_priority_7": true,
+    "base_infected_search_area_priority_4": true,
+    "brute_transport_at_priority_1": true,
+    "calamity_burst_8_at_priority_8": true,
+    "calamity_scent_8_at_priority_7": true,
+    "calamity_vigil_call_priority_7": true,
+    "flag_BuffAlliesGoal": true,
+    "flag_FollowOthersGoal": true,
+    "flag_InfectedConsumeFromRemains": true,
+    "flag_LocalTargettingGoal": true,
+    "flag_ProtoTargeting": true,
+    "flag_SearchAreaGoal": true,
+    "flag_SporeBurstSupport": true,
+    "flag_SummonScentInCombat": true,
+    "flag_TransportInfected": true,
+    "handler_event_direct_injections_10": true,
+    "leaper_transport_at_priority_3": true,
+    "original_direct_registration_invokes_372": true,
+    "original_selector_split_356_16": true,
+    "original_unique_direct_registration_owners_86": true,
+    "proto_targeting_priority_3": true,
+    "subclass_Busser$4": true,
+    "subclass_InfectedWitch$3": true,
+    "subclass_InfectedWitch$4": true,
+    "subclass_InfectedWitch$5": true,
+    "witch_three_buff_subclasses_priority_4": true
+  },
+  "contracts_passed": 27,
+  "contracts_total": 27,
+  "verification": {
+    "static": "PASS_STATIC",
+    "second_run_byte_identical": true,
+    "negative_control_other_jar": "BLOCKED_HASH_MISMATCH",
+    "effective_goal_sets": "NOT_FULLY_EVALUATED",
+    "mob_game_runtime": "NOT_RUN",
+    "goal_conflict_during_gameplay": "NOT_RUN",
+    "performance": "NOT_MEASURED",
+    "copyrighted_bytecode_copied": false
+  },
+  "known_limitations": [
+    "372 is registration calls across class methods, not a count of distinct goals active simultaneously",
+    "Subclass overrides can call super/helper methods; inherited registrations not duplicated per concrete Mob in this tally",
+    "Some calls are only executed in variant-specific or conditional event branches",
+    "Instance constructor flags are not a guarantee of no dynamic flag changes elsewhere",
+    "Flag competition needs exact GoalSelector and per-Goal runtime flags, canUse, canContinueToUse and insertion order"
+  ]
+}
