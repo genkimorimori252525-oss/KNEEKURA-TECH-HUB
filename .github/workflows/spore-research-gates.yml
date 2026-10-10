@@ -5,11 +5,13 @@ on:
     paths:
       - 'departments/minecraft/mods/fungal-infection-spore/tools/**'
       - 'departments/minecraft/mods/fungal-infection-spore/tests/**'
+      - 'departments/minecraft/mods/fungal-infection-spore/observer/**'
       - '.github/workflows/spore-research-gates.yml'
   pull_request:
     paths:
       - 'departments/minecraft/mods/fungal-infection-spore/tools/**'
       - 'departments/minecraft/mods/fungal-infection-spore/tests/**'
+      - 'departments/minecraft/mods/fungal-infection-spore/observer/**'
       - '.github/workflows/spore-research-gates.yml'
   workflow_dispatch:
 
@@ -32,3 +34,41 @@ jobs:
 
 # No third-party Spore JAR or Minecraft world is fetched into the runner.
 # This workflow never claims live Forge/GameTest or a runtime PASS.
+
+
+  portable-observer-core:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Compile owned portable JSONL writer
+        run: |
+          ROOT=departments/minecraft/mods/fungal-infection-spore/observer
+          mkdir -p "$RUNNER_TEMP/spore-core"
+          javac --release 17 -d "$RUNNER_TEMP/spore-core" \
+            "$ROOT/src/main/java/org/kneekura/sporeobserver/core/TraceSink.java" \
+            "$ROOT/tests/TraceSinkTest.java"
+          java -cp "$RUNNER_TEMP/spore-core" TraceSinkTest
+
+  forge-observer-compile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Compile research-only Forge observer against MC 1.20.1
+        run: |
+          bash departments/minecraft/projects/kirby-mod/gradlew \
+            -p departments/minecraft/mods/fungal-infection-spore/observer \
+            compileJava processResources --no-daemon --stacktrace
+
+# The Forge task compiles locally owned observer source with public ForgeDev
+# dependencies. It does NOT load Spore, start a game world or check in its JAR.
+# Forge runtime observation remains NOT_RUN until LAB session and cleanup proof.
