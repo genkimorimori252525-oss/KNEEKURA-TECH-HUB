@@ -1,0 +1,103 @@
+{
+  "schema": "kneekura.minecraft.invasion-siege-research-receipt.v1",
+  "date": "2026-10-11",
+  "track": "ANCHOR_1.20.1_FORGE",
+  "target": {
+    "mod": "Epic Mob Siege: Nightmare",
+    "publisher": "greenchiss",
+    "minecraft": "1.20.1",
+    "loader": "Forge",
+    "version": "1.0.1",
+    "release_filename": "NESM-1.20.1-1.0.1.jar",
+    "curseforge_file_id": 7273546,
+    "release_metadata_source": "https://www.curseforge.com/minecraft/mc-mods/epic-mob-siege-nightmare/files/7273546",
+    "license_page": "All Rights Reserved",
+    "artifact": {
+      "hash_sha256": null,
+      "bytes_downloaded": false,
+      "status": "NOT_OBTAINED",
+      "source_binary_equivalence": "UNESTABLISHED"
+    },
+    "ai_impl": "PRODUCT_DESCRIPTION_ONLY"
+  },
+  "comparatives": [
+    {
+      "name": "Zombies Break & Build",
+      "role": "break-build-restoration",
+      "repo": "XTiK555/ZombieBreakAndBuild",
+      "branch": "1.20.1",
+      "commit": "73a8022609d2d1554d0c1a89406dc97f7ed8aa3",
+      "source_tree_inspected": true,
+      "license": "LGPL-3.0",
+      "runtime": "NOT_RUN",
+      "git_java_files": 158
+    },
+    {
+      "name": "Invasion Mod",
+      "role": "historical_action_augmented_pathfinding",
+      "repo": "Doenerstyle/Invasion-Mod",
+      "branch": "master",
+      "git_tree_sha": "0bccc286114ffae9f9224892ab1fe451fc97ef08",
+      "source_tree_inspected": true,
+      "minecraft": "1.7.10",
+      "runtime": "NOT_RUN"
+    },
+    {
+      "name": "MineZero",
+      "role": "world_checkpoint_restore",
+      "repo": "AMPerez04/MineZero",
+      "branch": "1.20.1-forge",
+      "commit": "84084b48e2dc5141e821177f53f8c29563a03093",
+      "source_tree_inspected": true,
+      "runtime": "NOT_RUN"
+    },
+    {
+      "name": "Jujutsu Craft",
+      "role": "domain teardown comparison",
+      "version": "50.1",
+      "source_tree_inspected": false,
+      "jar_inspected": false,
+      "runtime": "NOT_RUN"
+    },
+    {
+      "name": "JJCV",
+      "role": "domain block persistence caution",
+      "release": "2.3",
+      "evidence": "UPSTREAM_CHANGELOG",
+      "source_inspected": false
+    },
+    {
+      "name": "WorldEdit",
+      "role": "direct undo vs indirect changes",
+      "evidence": "OFFICIAL_DOCUMENTATION"
+    }
+  ],
+  "research_result": {
+    "break_build_stall_handling": "SOURCE_CONFIRMED_IN_ZBB",
+    "timed_disappearing_placed_blocks": "SOURCE_CONFIRMED_IN_ZBB",
+    "timed_broken_block_restore": "SOURCE_CONFIRMED_IN_ZBB",
+    "saveddata_per_dimension": "SOURCE_CONFIRMED_IN_ZBB",
+    "blockentity_nbt_restore": "SOURCE_CONFIRMED_IN_ZBB",
+    "exact_nesm_algorithm": "UNKNOWN",
+    "domain_snapshot_mechanism": "UNKNOWN",
+    "kthub_future_product_code": "DESIGN_ONLY",
+    "minecraft_runtime": "NOT_RUN"
+  },
+  "important_risks": [
+    "crash-consistency before-image journal",
+    "shared cell ownership among dozens of mobs",
+    "explosion loot dupe",
+    "player edit conflicts",
+    "chunks unloading",
+    "fluid/falling block/redstone indirect mutations",
+    "block entities double chests/containers",
+    "protections and unauthorized writes",
+    "release license separation"
+  ],
+  "policy": {
+    "code_copy": false,
+    "assets_copy": false,
+    "jar_redistribute": false,
+    "validated_claim_promotion": false
+  }
+}
