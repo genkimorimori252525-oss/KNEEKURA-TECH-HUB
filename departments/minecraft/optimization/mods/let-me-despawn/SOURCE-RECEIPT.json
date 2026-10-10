@@ -1,0 +1,49 @@
+{
+  "schema": "kneekura.optimization.sourcesnapshot.partial-v1",
+  "captured_at": "2026-10-11",
+  "target": "Let Me Despawn",
+  "requested": "letmedespawn-1.20.x-forge-1.5.0.jar",
+  "anchor": {
+    "minecraft": "1.20.1",
+    "loader": "Forge",
+    "release": "https://www.curseforge.com/minecraft/mc-mods/let-me-despawn/files/6311230",
+    "release_date": "2025-03-16",
+    "source_commit": null,
+    "release_version": "1.5.0",
+    "user_jar_uploaded": false,
+    "sha256": null,
+    "source_binary_parity": "UNAVAILABLE"
+  },
+  "comparative": {
+    "old_forge": {
+      "repository": "frikinjay/let-me-despawn",
+      "commit": "af665026e2fb60d8715c4b6910db2cbf16f7090d",
+      "git_tree_sha": "0442b75e5d6d3ecb8d0efc6163fdb86008603686",
+      "minecraft": "1.18",
+      "mod_version": "1.0.3",
+      "blobs": 17,
+      "java": 2
+    },
+    "newer_1_21": {
+      "repository": "frikinjay/let-me-despawn",
+      "commit": "b37f7ccee129d0500a9bd8d4d7ba513b7056f887",
+      "git_tree_sha": "2addbb28b2097d69e4716ea09bb3bab18c5c5e93",
+      "minecraft": "1.21",
+      "mod_version": "1.4.4",
+      "blobs": 42,
+      "java": 10,
+      "depends_on": "Almanac",
+      "scope": "COMPARATIVE_ONLY"
+    }
+  },
+  "license": "LGPL-3.0",
+  "features": {
+    "picked_item_persistence": "COMPARATIVE_SOURCE",
+    "drop_on_despawn": "COMPARATIVE_SOURCE",
+    "head_slot_exclusion": "RELEASE_NOTE_ONLY",
+    "exact_1_5": "NOT_ANALYZED"
+  },
+  "performance": "PERFORMANCE_NOT_VERIFIED",
+  "runtime": "NOT_RUN",
+  "cas_import": false
+}
