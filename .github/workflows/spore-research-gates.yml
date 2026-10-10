@@ -82,11 +82,26 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-      - name: Compile research-only Forge observer against MC 1.20.1
+      - name: Build research-only Forge observer against MC 1.20.1
         run: |
           bash departments/minecraft/projects/kirby-mod/gradlew \
             -p departments/minecraft/mods/fungal-infection-spore/observer \
-            compileJava processResources --no-daemon --stacktrace
+            build --no-daemon --stacktrace
+      - name: Inspect produced mod JAR and forbid original Spore classes
+        run: |
+          OBS=departments/minecraft/mods/fungal-infection-spore/observer
+          JAR=$(find "$OBS/build/libs" -maxdepth 1 -type f -name 'kneekura-spore-observer-*.jar' | head -n 1)
+          test -n "$JAR" && test -s "$JAR"
+          jar tf "$JAR" | grep -Fx 'org/kneekura/sporeobserver/SporeEvents.class'
+          jar tf "$JAR" | grep -Fx 'org/kneekura/sporeobserver/core/TraceSink.class'
+          jar tf "$JAR" | grep -Fx 'META-INF/mods.toml'
+          unzip -p "$JAR" META-INF/mods.toml | grep -F 'modId="kneekura_spore_observer"'
+          unzip -p "$JAR" META-INF/mods.toml | grep -F '[[dependencies.kneekura_spore_observer]]'
+          if jar tf "$JAR" | grep -q '^com/Harbinger/Spore/'; then
+            echo 'Unexpected third-party Spore classes inside research observer JAR'
+            exit 1
+          fi
+          echo "PASS OWNED_FORGE_OBSERVER_JAR_PACKAGING (NO_RUNTIME)"
 
 # The Forge task compiles locally owned observer source with public ForgeDev
 # dependencies. It does NOT load Spore, start a game world or check in its JAR.
