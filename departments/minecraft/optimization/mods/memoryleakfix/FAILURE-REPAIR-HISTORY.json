@@ -1,0 +1,175 @@
+{
+  "format": "kneekura.failure-history.research-draft.v1",
+  "repository": "https://github.com/FxMorin/MemoryLeakFix",
+  "import_ready": false,
+  "scope": {
+    "track": "COMPARATIVE_1.18.2_FORGE_WITH_ANCHOR_PENDING",
+    "head_revision": "988f54c14db0d86e13dd5dcce284178b2278e581",
+    "history_window": "2023 #115/#136 reports and 2025 selected 1.1.5 source guards",
+    "queries": [
+      "Saturn",
+      "1.20.1",
+      "Biome",
+      "Mixins"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "inspected_evidence_ids": [
+      "mlf115",
+      "mlf136"
+    ],
+    "deferred": [
+      "actual versioned 1.20.1 JAR and Mixin profile",
+      "repair SHA/parent diffs",
+      "CAS record import",
+      "actual runtime/heap tests"
+    ],
+    "unavailable": []
+  },
+  "cases": [
+    {
+      "case_id": "MLF-115",
+      "origin": "UPSTREAM",
+      "track": "COMPARATIVE_FORGE_1.18.2",
+      "environment": {
+        "minecraft": "1.18.2",
+        "loader": "Forge",
+        "other_mod": "Saturn",
+        "mod_version": "2023 contemporary"
+      },
+      "affected_symbols": [
+        "overlapping memory Mixin target UNKNOWN"
+      ],
+      "before_revision": null,
+      "after_revision": null,
+      "evidence": [
+        {
+          "id": "mlf115",
+          "role": "issue",
+          "url": "https://github.com/FxMorin/MemoryLeakFix/issues/115",
+          "index_snapshot_id": null,
+          "document_id": null
+        }
+      ],
+      "causal_chain": [
+        "User reported failed launch after Saturn update",
+        "Maintainer said both modify same domain and Saturn redundant for that environment",
+        "No verified fix diff or re-test"
+      ],
+      "symptom": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Forge 1.18.2 fails launch when Saturn and MemoryLeakFix coinstalled",
+        "evidence_ids": [
+          "mlf115"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Saturn update in Forge 1.18.2 modpack",
+        "evidence_ids": [
+          "mlf115"
+        ]
+      },
+      "root_cause": {
+        "basis": "UNKNOWN",
+        "text": null,
+        "reason": "No exact Mixin injection target+stack/source repair inspected"
+      },
+      "repair": {
+        "basis": "UNKNOWN",
+        "text": null,
+        "reason": "No repair patch identified"
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Memory fix overlap must be checked per target Minecraft version; newer version cannot assume old conflict",
+        "evidence_ids": [
+          "mlf115"
+        ]
+      },
+      "reproduction": {
+        "state": "REPORTED",
+        "evidence_ids": [
+          "mlf115"
+        ]
+      },
+      "fix_verification": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      }
+    },
+    {
+      "case_id": "MLF-136",
+      "origin": "UPSTREAM",
+      "track": "COMPARATIVE_RELEASE_METADATA",
+      "environment": {
+        "minecraft": "1.20 or 1.20.1",
+        "loader": "Forge",
+        "mod_version": "1.1.1-1.1.2 era"
+      },
+      "affected_symbols": [],
+      "before_revision": null,
+      "after_revision": null,
+      "evidence": [
+        {
+          "id": "mlf136",
+          "role": "issue",
+          "url": "https://github.com/FxMorin/MemoryLeakFix/issues/136",
+          "index_snapshot_id": null,
+          "document_id": null
+        }
+      ],
+      "causal_chain": [
+        "Distribution release metadata missing 1.20.1 target",
+        "Launcher flags mismatch despite users suspecting runtime compatible",
+        "Reporter noted new metadata in v1.1.2"
+      ],
+      "symptom": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Launchers cannot locate 1.20.1-compatible release metadata",
+        "evidence_ids": [
+          "mlf136"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Metadata reports only 1.20",
+        "evidence_ids": [
+          "mlf136"
+        ]
+      },
+      "root_cause": {
+        "basis": "INFERENCE",
+        "text": "Release metadata not aligned to loader version range",
+        "evidence_ids": [
+          "mlf136"
+        ]
+      },
+      "repair": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Reporter says release v1.1.2 addresses metadata",
+        "evidence_ids": [
+          "mlf136"
+        ]
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "JAR's loaded dependency/version metadata must be checked separately from project webpage classification",
+        "evidence_ids": [
+          "mlf136"
+        ]
+      },
+      "reproduction": {
+        "state": "REPORTED",
+        "evidence_ids": [
+          "mlf136"
+        ]
+      },
+      "fix_verification": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      }
+    }
+  ]
+}
