@@ -58,7 +58,7 @@ public final class SporeEvents {
     }
 
     private static String labelledId(String text) {
-        TraceSink.require(text.matches("[A-Za-z0-9._:-]{1,80}"), "unsafe label");
+        TraceSink.require(text.matches("[A-Za-z0-9._-]{1,80}"), "unsafe label");
         return text;
     }
 
@@ -216,7 +216,8 @@ public final class SporeEvents {
             if(infectedClass.isInstance(e)) infected++;
         }
         out.event(tick,dimension,"server_tick_sample",
-                Map.of("proto_count",protos,"infected_count",infected,"signal_count",signals,"tick_ms",tickMs));
+                Map.of("proto_count",protos,"infected_count",infected,"signal_count",signals,"tick_ms",tickMs,
+                       "measurement_scope","SERVER_TICK_EVENT_BRACKET_UNCALIBRATED"));
     }
 
     private void sampleSignals(long tick) throws Exception {
