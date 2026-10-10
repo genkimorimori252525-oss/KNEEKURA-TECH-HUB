@@ -1,0 +1,39 @@
+{
+  "artifact_sha256": "d20c4be6606f9752ecfd964eba625363eb76a28e327d67fe6dda4be748401489",
+  "checks": {
+    "calamity_command_activation_one_of_hundred": true,
+    "calamity_command_requires_existing_receiver_search": true,
+    "calamity_constructs_vigil_parent": true,
+    "calamity_low_health_vigil_one_of_two_hundred": true,
+    "follow_clears_partner_at_distance_sq_4096": true,
+    "follow_partner_scan_every_twenty_canUse_checks": true,
+    "follow_path_reconsidered_each_twenty_entity_ticks": true,
+    "follow_tick_has_position_warp_at_distance_sq_4096": true,
+    "linked_local_target_activation_one_of_ten": true,
+    "local_search_clears_at_squared_distance_nine": true,
+    "local_search_repath_40_goal_ticks": true,
+    "local_search_starts_for_no_target": true,
+    "proto_redirect_uses_half_chance": true,
+    "proto_redirects_or_attempts_new_womb": true,
+    "proto_target_activation_one_of_six": true,
+    "proto_womb_path_constructs_reconstructor": true,
+    "vigil_first_matching_proto_signal_only": true,
+    "vigil_summons_infected_on_waves": true,
+    "vigil_third_or_later_trigger_signals_proto": true
+  },
+  "class_hashes_verified": 11,
+  "contracts_passed": 19,
+  "contracts_total": 19,
+  "derived_probabilities_conditional_on_canUse_evaluation": {
+    "CalamityInfectedCommand": "1/100",
+    "CalamityVigilCall": "1/200 AND below half health AND target exists",
+    "LocalTargettingGoal": "1/10",
+    "ProtoTargeting": "1/6"
+  },
+  "licensing": "No original Java source, JAR or assets redistributed",
+  "runtime": "NOT_RUN",
+  "schema": "kneekura.spore.group-ai-static-gate.v1",
+  "scope": "Bytecode syntactic method patterns and class hashes, not gameplay execution or measured TPS",
+  "status": "PASS_STATIC_BYTECODE",
+  "target": "Spore 2.2.0j / Minecraft 1.20.1 Forge"
+}
