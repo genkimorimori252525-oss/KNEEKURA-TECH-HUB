@@ -18,6 +18,6 @@ The commit author says the former spawn event has several subevents, meaning the
 
 ## Case AI-25 — Forge update broke startup, historical 1.19
 
-[Issue #25](https://github.com/BuiltBrokenModding/AI-Improvements/issues/25): report for Forge 41.0.94 / MC 1.19. [Commit 96b58fed878ac09e6e29642d5ccb???](https://github.com/BuiltBrokenModding/AI-Improvements/commits/1.19) is referenced in history as compatibility work, **but this case is DEFERRED** for exact repair SHA/diff verification; no root cause asserted. Do not import an incomplete case as validated.
+[Issue #25](https://github.com/BuiltBrokenModding/AI-Improvements/issues/25): report for Forge 41.0.94 / MC 1.19. The branch history references a Forge-compatibility repair, but the exact before/after diff for this incident was **not** reviewed in this phase. Keep the case DEFERRED and do not infer a root cause or verified repair. Do not import an incomplete case as validated.
 
 No recorded case proves 1.20.1 Forge 47 performance or interoperability.
