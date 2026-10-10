@@ -92,3 +92,10 @@ All further MOD research follows [Minecraft analysis workflow](../../ANALYSIS-WO
 [原作Sporeではない、TECH-HUB自作ObserverのForgeGradleビルド検証レシート](verification/OBSERVER-FORGE-CI-2026-10-11.json) を作成。[GitHub Actions #38082851629](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38082851629) で、**Forge 1.20.1専用Observer JARのビルド、packaged class・META-INF/mods.toml検査、原作Spore class混入防止、Java17とPython15件、Java→Python合成G13の3ジョブがSUCCESS**。このジョブには原作Spore JAR、実Minecraft world、GameTest実行は含まれない。
 
 その後、[Observerソース](observer/src/main/java/org/kneekura/sporeobserver/SporeEvents.java)へG11用の Proto公開weights[16] / Vigil wave_size / Forge LivingDamageEventの**スナップショット観測**を追加。メソッドaward/punishの実呼出と強く結び付いた証拠ではないため、G11は依然INCONCLUSIVE。観測器の[最新構成](observer/README.md)は原作JARとLAB sessionの一致を要求する。
+
+
+### ビルド済みの自作Observer JAR（2026-10-11）
+
+[GitHub Actions #38083037553](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38083037553) は **全3ジョブSUCCESS**。自作Spore ObserverをForgeGradleでJAR化し、対象クラス・mods.tomlを確認、原作Sporeクラスの混入がないことを検証した。[研究用JARの短期保存artifact](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38083037553/artifacts/11681372105) から取得できる（設定保持7日、期限が過ぎた場合は同じソースからビルド）。本件の[実行・artifactレシート](verification/OBSERVER-FORGE-CI-2026-10-11.json)に固定。
+
+**配布されたのはTECH-HUBが新たに書いた補助MODだけ**で、Harbingerの原作JARは含まれていない。これをインストールすれば自動的にSporeの実挙動を確認できるという意味ではない。LABの登録済み一時world、Spore固定JAR、observerの実ロード、片付けの認証が未達のため、G09〜G13の**本番GameTest/TPSは依然NOT_RUN**。
