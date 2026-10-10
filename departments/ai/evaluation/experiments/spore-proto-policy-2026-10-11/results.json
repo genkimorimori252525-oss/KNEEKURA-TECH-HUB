@@ -1,0 +1,91 @@
+{
+  "schema": "kneekura.synthetic-policy-probe.v1",
+  "source_jar_sha256_for_arithmetic_contract_only": "d20c4be6606f9752ecfd964eba625363eb76a28e327d67fe6dda4be748401489",
+  "assertions": "PASS",
+  "runtime": "SYNTHETIC_NOT_MINECRAFT",
+  "seeds": {
+    "start": 0,
+    "stop_exclusive": 256
+  },
+  "episodes_per_seed": 1200,
+  "context": "4 uniformly sampled one-hot binary features",
+  "conditional": "synthetic optimal action equals active input feature index",
+  "global_best": "synthetic optimal action is always 2",
+  "proto_row_plus_morale": "MORALE PERIOD ARTIFICIALLY every 6 episodes (200 ticks per episode); not an original runtime trace",
+  "feature_gated": "PROPOSED COMPARATOR, not original Spore",
+  "results": {
+    "conditional": {
+      "frozen": {
+        "initial": 0.216797,
+        "final": 0.216797,
+        "last300": 0.216055,
+        "all": 0.217389,
+        "neg": 0,
+        "perfect_at_end": 0
+      },
+      "proto_row": {
+        "initial": 0.216797,
+        "final": 0.255859,
+        "last300": 0.259258,
+        "all": 0.276055,
+        "neg": 15.953125,
+        "perfect_at_end": 1
+      },
+      "feature_gated": {
+        "initial": 0.216797,
+        "final": 1,
+        "last300": 1,
+        "all": 0.979473,
+        "neg": 0.546875,
+        "perfect_at_end": 256
+      },
+      "proto_row_plus_morale": {
+        "initial": 0.216797,
+        "final": 0.347656,
+        "last300": 0.363333,
+        "all": 0.36347,
+        "neg": 5.542969,
+        "perfect_at_end": 3
+      }
+    },
+    "global_best": {
+      "frozen": {
+        "initial": 0.264648,
+        "final": 0.264648,
+        "last300": 0.263086,
+        "all": 0.263792,
+        "neg": 0,
+        "perfect_at_end": 1
+      },
+      "proto_row": {
+        "initial": 0.264648,
+        "final": 1,
+        "last300": 1,
+        "all": 0.994098,
+        "neg": 2.363281,
+        "perfect_at_end": 256
+      },
+      "feature_gated": {
+        "initial": 0.264648,
+        "final": 1,
+        "last300": 1,
+        "all": 0.981162,
+        "neg": 0.523438,
+        "perfect_at_end": 256
+      },
+      "proto_row_plus_morale": {
+        "initial": 0.264648,
+        "final": 1,
+        "last300": 1,
+        "all": 0.994098,
+        "neg": 2.363281,
+        "perfect_at_end": 256
+      }
+    }
+  },
+  "limits": [
+    "Invented task/rewards and seeded Python RNG, not Mojang RNG or combat events",
+    "No pathfinding, tick-time cost, physics, Mob spawning, attribution feedback or resource lifecycle simulated",
+    "The synthetic outcome is conditional on scenario/seed/horizon, NOT measured Spore combat intelligence"
+  ]
+}

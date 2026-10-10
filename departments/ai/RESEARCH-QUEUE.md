@@ -30,3 +30,7 @@
 
 [Spore Proto Hivemindの4×4指揮・軽量学習、部隊連携の比較](multi-agent/PROTO-HIVEMIND-CASE-STUDY-2026-10-11.md) を新規登録。原作[JAR解析と証拠](../minecraft/mods/fungal-infection-spore/README.md)はMinecraft部門が所有。A1/A3の設計材料が増えたが、シミュレーション・実測はNOT_RUN。
 
+
+### 2026-10-11 独立の実行済み数理シミュレーション
+
+[Spore Proto 4×4学習式の合成ベンチマーク](evaluation/experiments/spore-proto-policy-2026-10-11/README.md) を追加。256シード×1,200判断で学習なし / 原作算術 / 特徴ごとの独立更新案 / 士気補正を比較。成功は SYNTHETIC のみ、Minecraft 1.20.1 ForgeランタイムはNOT_RUN。[別の原作Bytecodeに基づくディメンション境界リスク](../minecraft/mods/fungal-infection-spore/CROSS-DIMENSION-AI-BOUNDARY-AUDIT-2026-10-11.md)も発見した。

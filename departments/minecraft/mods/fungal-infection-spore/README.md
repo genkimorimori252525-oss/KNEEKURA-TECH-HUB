@@ -35,3 +35,8 @@ Original JAR: spore_1.20.1_2.2.0j.jar, SHA-256 **d20c4be6606f9752ecfd964eba62536
 - EVIDENCE: targeted static reads; game execution, multiplayer, TPS, visual performance and server correctness are **NOT_RUN**.
 
 All further MOD research follows [Minecraft analysis workflow](../../ANALYSIS-WORKFLOW.md) and [specification](../../ANALYSIS-SPEC-v1.md) and keeps previous historical findings intact.
+
+## 2026-10-11: Policy simulation and cross-dimension audit
+
+- [Synthetic Proto policy experiment](../../../ai/evaluation/experiments/spore-proto-policy-2026-10-11/README.md) — 256 seeded synthetic trials, NOT Minecraft. Source and output committed separately from the original JAR.
+- [Cross-dimension Proto/chunk-ticket audit](CROSS-DIMENSION-AI-BOUNDARY-AUDIT-2026-10-11.md) — original bytecode shows a global Proto registration count and world-load chunk-ticket dimension-scoping risk, runtime NOT_RUN.

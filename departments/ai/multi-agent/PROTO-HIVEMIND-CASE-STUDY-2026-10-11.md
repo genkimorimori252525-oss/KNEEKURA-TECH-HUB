@@ -41,3 +41,8 @@
 対戦・マップ・敵の装備・兵力・乱数シードを統一し複数回試行。時間・TPS/CPU/メモリ・ユニットの進路停滞・命令の重複・誤帰属・失敗を含めて測る。AI部門の研究結果は、[Minecraftの階層型指揮候補](HIERARCHICAL-COMMAND-AI-v0.md)へエビデンスに基づいて反映し、MOD実装やGameTestはMinecraft部門へ委譲する。
 
 **注意：** 特定のJARの静的なメソッド存在から、1.20.1 ForgeでのSpore本体の動作・学習効果をPASSとはしない。原作はAll Rights Reserved。モデル・コード・音声/画像を流用せず、抽象的な技術原理を独立して検証する。
+
+### 再現可能なA/B比較と境界の新しい発見
+
+- [原作の重み更新則に基づく数学モデルのテスト](../evaluation/experiments/spore-proto-policy-2026-10-11/README.md)：条件ごとに最適部隊が異なる架空課題では、行全体更新の最終正解率25.59%、特徴別更新100%。常に1部隊が最適な課題では双方100%。**自作の合成環境であり実ゲーム強さの測定ではない。**
+- [Proto登録・複数ディメンション/チャンク固定のコード監査](../../minecraft/mods/fungal-infection-spore/CROSS-DIMENSION-AI-BOUNDARY-AUDIT-2026-10-11.md)：元MODの活動中Protoカウントは全ディメンション共通static listで、ロード時のrequest適用にもdimension照合を欠く。ゲーム実行での影響はBUG_CANDIDATE。
