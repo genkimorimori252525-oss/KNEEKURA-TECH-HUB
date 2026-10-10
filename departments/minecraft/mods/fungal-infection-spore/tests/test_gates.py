@@ -155,4 +155,22 @@ class AiGoalLayerUnitTest(unittest.TestCase):
         self.assertEqual(len(set(PINS)), 7)
         self.assertTrue(all(len(h)==64 for h in PINS.values()))
 
+class GargoylHardnessUnitTest(unittest.TestCase):
+    """Original binary is kept private; CI exercises narrow negative behavior."""
+
+    def test_wrong_jar_refused_without_javap(self):
+        from check_gargoyl_hardness import analyze
+        with TemporaryDirectory() as tmp:
+            wrong=Path(tmp)/'not-spore.jar'
+            wrong.write_bytes(b'test fixture that is not the original JAR')
+            outcome=analyze(wrong)
+            self.assertEqual(outcome['status'],'BLOCKED_HASH_MISMATCH')
+            self.assertNotIn('checks',outcome)
+
+    def test_exact_original_gargoyl_fingerprint(self):
+        from check_gargoyl_hardness import JAR_SHA,CLS,CLS_SHA
+        self.assertEqual(JAR_SHA,'d20c4be6606f9752ecfd964eba625363eb76a28e327d67fe6dda4be748401489')
+        self.assertEqual(CLS,'com/Harbinger/Spore/Sentities/EvolvedInfected/Gargoyl.class')
+        self.assertEqual(len(CLS_SHA),64)
+
 if __name__=='__main__':unittest.main()
