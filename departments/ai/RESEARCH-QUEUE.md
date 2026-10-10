@@ -16,6 +16,11 @@
 
 既存の根拠となるケースは [SRP原作の戦闘・共有適応Bytecode解析](../minecraft/mods/scape-and-run-parasites/COMBAT-AI-BYTECODE-2026-10-11.md)。こちらは1.12.2での静的証拠であって、群体指揮AIの完成品ではない。
 
+
+### 継続解析：Protoの学習帰属・群体運用の静的監査
+
+[Sporeの複数Proto・戦果帰属・資源/TPS面の原作Bytecode監査](../minecraft/mods/fungal-infection-spore/HIVEMIND-LEARNING-LIFECYCLE-AUDIT-2026-10-11.md) を追加。特に「実際に選択した兵士を正しく報酬評価できるか」と「指揮官が増えた際の計算・チャンク固定コスト」をA1の最初の受け入れテスト候補とする。ゲーム内測定はNOT_RUN。
+
 ## Minecraft群体AI MOD候補（2026-10-11）
 
 [調査対象MODの発掘一覧と固定Git SHA/JAR入手候補](multi-agent/MINECRAFT-MOD-SCOUT-2026-10-11.md) を参照。これは **発見・初期ソース確認** であり、A1〜A6の実装や性能検証を完了したものではない。既存のMinecraft解析キューを置き換えない。
