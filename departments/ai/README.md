@@ -34,3 +34,7 @@ Minecraftなど個別製品から独立して、人工知能の**意思決定・
 研究メモは**候補**。根拠のない推測を事実へ昇格させず、AIによる自動VALIDATEDを行わない。新しいDB、無制限のクローラ、全分野共通ランタイムを作ったことにはしない。
 
 **候補調査:** [Minecraftの指揮・群体・学習・経路探索MOD比較（2026-10-11）](multi-agent/MINECRAFT-MOD-SCOUT-2026-10-11.md)。公開ソースとJAR調査候補を区別した発掘段階。
+
+
+**原作JARからの新規研究:** [Spore Protoの軽量学習・指揮機構](multi-agent/PROTO-HIVEMIND-CASE-STUDY-2026-10-11.md) を研究候補に登録。実JARのBytecode根拠は [Minecraft部門 Spore解析](../minecraft/mods/fungal-infection-spore/README.md) に固定している。2026-10-11時点で実機性能の検証は未実施。
+
