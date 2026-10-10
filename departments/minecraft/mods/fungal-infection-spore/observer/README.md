@@ -1,0 +1,52 @@
+# KNEEKURA Spore Observer — Forge 1.20.1
+
+**状態（2026-10-11）：Forge側ソース実装済み。専用サーバーのSpore実JAR起動・GameTest・TPS実測はNOT_RUN。**
+
+これはTECH-HUBが新規作成した読み取り専用の研究用補助MOD。原作Sporeのコードや素材を再配布しない。対象は Minecraft 1.20.1 Forge / Spore 2.2.0j / 原本SHA-256 d20c4be6606f9752ecfd964eba625363eb76a28e327d67fe6dda4be748401489。1.21.1 NeoForge版の互換性は未確認。
+
+## 動作する条件
+
+- 初期状態ではイベントを登録しない。明示的なJVMプロパティ kneekura.spore.observe.enabled=true かつ dedicated server の場合のみ有効化する。
+- 既存LABのsession.json、.kneekura-run.json、run ID、world ID、seed、session roleとworldの実パスを照合する。自己申告はLABのregistry権限・session attestationの代わりにはならない。
+- Forge ModListから**実際にロードされたSpore JARのファイルパス**を得てSHA-256を確認。不一致や読取不能では停止する。
+- EntityJoin/Leave、ServerTick START/END、公開getterにより、Sporeのロード中Mob、ProtoのSignal、Calamityの未任務状態、Infectedの探索位置を**受動的に観測**する。
+- Mob生成、ブロック編集、AIへの命令、チャンク固定、私有worldへの書き込みを実装しない。LABセッションディレクトリに限り CREATE_NEW でrun IDごとのJSONLを書く。8 MB、最大49,998イベント、最大10,000tick、追跡4,096Entityの上限を設ける。
+- 出力は origin=runtime_claim_unattested であり、既存の[観測証拠検証器](../RUN-EVIDENCE-GATE-2026-10-11.md)がruntime PASSを自動認定することはない。
+
+## 実装した観測範囲
+
+| G番号 | 収集するイベント | 未到達の検証 |
+| --- | --- | --- |
+| G09 | proto_signal_snapshot | Vigilが列挙した正確なProto候補順とSignal発行メソッド内の呼出は未観測 |
+| G10 | proto_signal_snapshot、calamity_search_snapshot、entity_join_snapshot | Calamity再配置の抽選とWomb生成**試行**の内部分岐は未観測 |
+| G11 | entity_join_snapshot / entity_leave_snapshot | VigilのawardHivemind/punishHivemindそのものは未観測 |
+| G12 | search_pos_snapshot / follow_partner_snapshot | Goalの実行・SearchPosクリア・ナビ停止は未観測 |
+| G13 | server_tick_sample | Proto、active Signal、Infected数とServerTick START〜END時間の**未校正値**を記録。正式MSPTやTPSではない |
+
+G09〜G12はスナップショットだけで十分な証拠にはならないため、Python側のシナリオ判定はINCONCLUSIVEのままにする。G13も実行主体の認証、一定サンプル数、計測条件とcleanup証拠が必要。
+
+## ビルドとテスト
+
+Java 17、ForgeGradle 6、Forge 1.20.1-47.4.10 を宣言。元Spore JARはビルド・GitHub Actionsへ取得しない。TECH-HUBルートから既存Kirby用Gradle 8.8 wrapperを再利用する。
+
+- Windows: departments/minecraft/projects/kirby-mod/gradlew.bat -p departments/minecraft/mods/fungal-infection-spore/observer compileJava processResources --no-daemon
+- Linux: bash departments/minecraft/projects/kirby-mod/gradlew -p departments/minecraft/mods/fungal-infection-spore/observer compileJava processResources --no-daemon
+- Pythonログ受入: py -3 departments/minecraft/mods/fungal-infection-spore/tools/evaluate_spore_trace.py FILE.jsonl
+- Portable writer: [TraceSink.java](src/main/java/org/kneekura/sporeobserver/core/TraceSink.java) / [TraceSinkTest.java](tests/TraceSinkTest.java)。Java17で個別コンパイル・実行可能。
+
+[Spore research gates CI](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/workflows/spore-research-gates.yml) の portable-observer-core と forge-observer-compile は別々のジョブとして判定する。CIでForgeビルドが成功しても実ゲームPASSではない。
+
+## 登録済みLAB runでのみ使用するシステムプロパティ
+
+- kneekura.spore.observe.enabled=true
+- kneekura.spore.observe.scenario=G13
+- kneekura.spore.observe.runId=登録済みLAB run_id
+- kneekura.spore.observe.worldId=登録済みworld_id
+- kneekura.spore.observe.seed=登録済みworld_seed
+- kneekura.spore.observe.durationTicks=1200
+- kneekura.spore.observe.sessionDirectory=既存LAB sessionディレクトリの絶対パス
+- kneekura.spore.observe.expectedWorld=準備済み隔離worldの絶対パス
+
+LABの [現行実行権限](../../../../CURRENT-HANDOFF-2026-10-02.md) と [元の受入計画](../LAB-GAMETEST-ACCEPTANCE-2026-10-11.md)を必ず満たすこと。セッションの作成とworld制御はこの補助MODが行わない。
+
+**次の不足:** 正式Forgeコンパイル（CIとは別結果）、実LAB registryでのWorld受入、Sporeの依存閉包、実起動、G13計測、G09〜G12のメソッド単位の観測フック、証拠とcleanupの審査。未達をPASSにしない。
