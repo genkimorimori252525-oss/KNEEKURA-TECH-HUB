@@ -120,6 +120,61 @@ jobs:
           if (-not $lines[0].StartsWith('schema_version,source,scenario_id,aircraft_id,tick,game_time,')) { throw 'Trace schema mismatch' }
           Write-Host "Runtime trace rows verified: 401"
 
+      - name: Verify five real tactical-aircraft GameTest trace receipts
+        working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
+        run: |
+          $cases = [ordered]@{
+            'a6m-steered-interception' = 'warfare_wings:a6m'
+            'p47n-steered-interception' = 'warfare_wings:p47n'
+            'il2-ground-approach-no-fire' = 'warfare_wings:il2'
+            'b17-level-bomb-guidance-only' = 'warfare_wings:b17'
+            'g4m-torpedo-guidance-only' = 'warfare_wings:g4m'
+          }
+          $culture = [System.Globalization.CultureInfo]::InvariantCulture
+          foreach ($scenario in $cases.Keys) {
+            $path = "run-gametest/ww-physics-traces/${scenario}-forge-controls.csv"
+            if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
+              throw "Missing real-aircraft tactical trace for $scenario"
+            }
+            $rows = @(Import-Csv -LiteralPath $path)
+            # RuntimeTacticalPilot writes sample 0 immediately, then 180 aircraft ticks.
+            if ($rows.Count -ne 181) {
+              throw "Incorrect tactical row count $scenario; expected 181 data rows, got $($rows.Count)"
+            }
+            if ($rows[0].sim_tick -ne '0' -or $rows[180].sim_tick -ne '180') {
+              throw "Tactical tick contract failed: $scenario"
+            }
+            $changed = 0
+            $lateral = 0
+            $travel = 0.0
+            for ($i=0; $i -lt $rows.Count; $i++) {
+              $r = $rows[$i]
+              if ($r.schema_version -ne 'ww.physics.forge-tactical-pilot.v1' -or
+                  $r.aircraft_id -ne $cases[$scenario] -or
+                  $r.scenario_id -ne $scenario -or
+                  $r.source -ne 'minecraft_runtime_ia_next_tick_injection') {
+                throw "Wrong tactical schema/aircraft/source identity at $scenario row $i"
+              }
+              if ([Math]::Abs([double]::Parse($r.command_x, $culture)) -gt 0.001) { $lateral++ }
+              if ($i -gt 0) {
+                $yaw = [double]::Parse($r.yaw_deg, $culture)
+                $prev = [double]::Parse($rows[$i-1].yaw_deg, $culture)
+                $delta = ($yaw - $prev + 540.0) % 360.0 - 180.0
+                $travel += [Math]::Abs($delta)
+                if ([Math]::Abs($delta) -gt 0.005) { $changed++ }
+              }
+            }
+            $start = $rows[0]; $end = $rows[180]
+            $dx = [double]::Parse($end.pos_x,$culture) - [double]::Parse($start.pos_x,$culture)
+            $dy = [double]::Parse($end.pos_y,$culture) - [double]::Parse($start.pos_y,$culture)
+            $dz = [double]::Parse($end.pos_z,$culture) - [double]::Parse($start.pos_z,$culture)
+            $moved = [Math]::Sqrt($dx*$dx + $dy*$dy + $dz*$dz)
+            if ($lateral -lt 10 -or $changed -lt 1 -or $travel -lt 2.0 -or $moved -lt 8.0) {
+              throw "Tactical flight did not satisfy movement/steering receipt $scenario xTicks=$lateral yaw=$travel moved=$moved"
+            }
+            Write-Host "TACTICAL_REAL_TRACE_RECEIPT_OK $scenario ticks=180 lateral=$lateral yaw=$travel moved=$moved"
+          }
+
       - name: Generate matching microkernel trace and calibration report
         working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
         run: |

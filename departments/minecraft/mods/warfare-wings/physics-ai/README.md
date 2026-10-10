@@ -57,6 +57,9 @@ The first deterministic **tactical decision layer** now also exists:
 [`TACTICAL-AI-IMPLEMENTATION-v1.md`](TACTICAL-AI-IMPLEMENTATION-v1.md)
 describes the 24-aircraft role-aware controller, scenario replays, historically
 sourced optional unit/year formation orders, and next Forge integration gates.
+[`CONTROL-LOOP-INTEGRATION-v1.md`](CONTROL-LOOP-INTEGRATION-v1.md)
+records the source-to-input autopilot, lookahead terrain/aircraft safety guards,
+24-aircraft dynamic heading-acquisition tests and exact-game acceptance gates.
 [`TACTICS-EVIDENCE-v1.md`](TACTICS-EVIDENCE-v1.md) documents the historical
 source audit; these candidate tactics are not yet validated in Minecraft.
 

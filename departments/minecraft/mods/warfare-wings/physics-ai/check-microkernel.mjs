@@ -55,15 +55,32 @@ try {
     path.join(mainDir, 'TraceCsv.java'),
     path.join(mainDir, 'TraceScenarioMain.java'),
     path.join(mainDir, 'AircraftAtlasMain.java'),
+    path.join(mainDir, 'FlightGuidance.java'),
+    path.join(mainDir, 'FlightSafetyPlanner.java'),
+    path.join(mainDir, 'FlightControlLoop.java'),
+    path.join(mainDir, 'SquadronCommand.java'),
     path.join(mainDir, 'TacticalAirAI.java'),
     path.join(mainDir, 'HistoricalDoctrineOrders.java'),
     path.join(mainDir, 'TacticalScenarioMain.java'),
     path.join(testDir, 'Ia133MicrokernelSelfTest.java'),
+    path.join(testDir, 'FlightGuidanceSelfTest.java'),
+    path.join(testDir, 'FlightGuidanceAtlasSelfTest.java'),
+    path.join(testDir, 'FlightControlLoopSelfTest.java'),
+    path.join(testDir, 'FlightTerrainChallengeSelfTest.java'),
+    path.join(testDir, 'MissionScenarioSelfTest.java'),
     path.join(testDir, 'TacticalAirAISelfTest.java'),
     path.join(testDir, 'HistoricalDoctrineOrdersSelfTest.java'),
   ];
   run(javac, ['--release', '17', '-d', classes, ...sources]);
   run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.Ia133MicrokernelSelfTest']);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.FlightGuidanceSelfTest']);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.FlightGuidanceAtlasSelfTest',
+    path.join(here, 'data/base-aircraft-anchor-v1.csv')]);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.FlightControlLoopSelfTest']);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.FlightTerrainChallengeSelfTest',
+    path.join(here, 'data/base-aircraft-anchor-v1.csv')]);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.MissionScenarioSelfTest',
+    path.join(here, 'data/base-aircraft-anchor-v1.csv')]);
   run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.TacticalAirAISelfTest',
     path.join(here, 'data/base-aircraft-anchor-v1.csv')]);
   run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.HistoricalDoctrineOrdersSelfTest',
@@ -105,7 +122,7 @@ try {
   const tacticalLines = (await readFile(tacticalA, 'utf8')).trimEnd().split(/\r?\n/);
   if (tacticalLines.length !== 97) throw new Error(`Expected 4 cases for 24 aircraft, got ${tacticalLines.length} lines`);
   await same(tacticalA, path.join(here, 'reports/tactical-source-scenarios-v1.csv'));
-  process.stdout.write('Warfare Wings Physics AI microkernel + Atlas v2 + 24-aircraft tactical AI checks passed; real Minecraft parity NOT_RUN\n');
+  process.stdout.write('Warfare Wings Physics AI + 24-aircraft flight guidance + terrain + squadron mission checks passed; REAL_MINECRAFT_PARITY: NOT_RUN\n');
 } finally {
   await rm(work, { recursive: true, force: true });
 }

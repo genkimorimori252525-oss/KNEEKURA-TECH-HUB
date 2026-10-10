@@ -253,16 +253,7 @@ public final class TacticalAirAI {
 
     /** Navigation-only control law: no fake bank-to-turn or instantaneous yaw update. */
     public static Control steer(Frame frame, Vec3 point, double throttle) {
-        Vec3 delta = point.add(frame.self().position().scale(-1));
-        if (delta.lengthSquared() < EPS) return Control.neutral(throttle);
-        double desiredYaw = Math.toDegrees(Math.atan2(-delta.x(), delta.z()));
-        double desiredPitch = -Math.toDegrees(Math.atan2(delta.y(), Math.hypot(delta.x(), delta.z())));
-        double yawError = angleDiff(desiredYaw, frame.self().yawDeg());
-        double pitchError = desiredPitch - frame.self().pitchDeg();
-        // In IA 1.3.3 positive X reduces yaw, whereas positive Z increases pitch.
-        double x = clamp(-yawError / Math.max(9, frame.profile().yawChange20TicksDeg() * 0.35), -1, 1);
-        double z = clamp(pitchError / Math.max(8, frame.model().pitchSpeed() * 4), -1, 1);
-        return new Control(x, 0, z, throttle);
+        return FlightGuidance.plan(frame, point, throttle).control();
     }
 
     /** Advisory window only. Projectile type, mounts, spread and hit testing are Forge-owned. */

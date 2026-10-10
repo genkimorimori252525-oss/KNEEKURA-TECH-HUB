@@ -74,9 +74,9 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.8'
-      - name: Compile runtime probe without external runtime jars
+      - name: Compile tactical Forge adapter and verify IA non-player input phase contract
         working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
-        run: gradle --no-daemon --console=plain compileJava processResources
+        run: gradle --no-daemon --console=plain compileJava processResources verifyTacticalInputCorrection
 
   docker-headless:
     runs-on: ubuntu-latest

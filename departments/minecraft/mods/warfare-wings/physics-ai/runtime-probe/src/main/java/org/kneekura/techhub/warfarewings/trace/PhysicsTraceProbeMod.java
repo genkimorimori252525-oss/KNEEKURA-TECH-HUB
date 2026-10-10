@@ -9,5 +9,9 @@ public final class PhysicsTraceProbeMod {
 
     public PhysicsTraceProbeMod() {
         MinecraftForge.EVENT_BUS.addListener(RuntimeTraceManager::onServerTick);
+        MinecraftForge.EVENT_BUS.addListener(RuntimeTacticalPilot::onServerTick);
+        MinecraftForge.EVENT_BUS.addListener(RuntimeTacticalPilot::onServerStopping);
+        MinecraftForge.EVENT_BUS.addListener(TacticalPilotCommands::register);
+        MinecraftForge.EVENT_BUS.addListener(TacticalPilotCommands::onServerStopping);
     }
 }

@@ -28,6 +28,60 @@ final class IaRuntimeAccess {
     static double enginePower(Entity aircraft) { return number(invoke(aircraft, "getEnginePower")); }
     static double fuelUtilization(Entity aircraft) { return number(invoke(aircraft, "getFuelUtilization")); }
     static double roll(Entity aircraft) { return number(invoke(aircraft, "getRoll")); }
+    static double health(Entity aircraft) { return number(invoke(aircraft, "getHealth")); }
+
+    /**
+     * IA 1.3.3 source commit 550b38d: VehicleEntity.tickPilot() calls
+     * setInputs(0,0,0) on a server-side ArmorStand pilot *before* the
+     * controller, and at the end of tick() calls interpolated.update(0).
+     * We therefore inject at ServerTickEvent.END after the entity's tick.
+     *
+     * At that point smooth = previousSmooth*0.9. Adding input*0.1 restores
+     * the same one-update-per-tick response as InterpolatedFloat.update(input).
+     * Its public decay(value,1) method sets the corrected state; next tick's
+     * AirplaneEntity.updateController() consumes it. This is a lab-only
+     * non-player control adapter, not a Forge-supported flight API.
+     */
+    static void applyTacticalControls(Entity aircraft, float x, float z, float engine) {
+        if (!Float.isFinite(x) || !Float.isFinite(z) || !Float.isFinite(engine)
+                || Math.abs(x) > 1 || Math.abs(z) > 1 || engine < 0 || engine > 1)
+            throw new IllegalArgumentException("non-finite/out-of-range IA controls");
+        correctZeroedInterpolation(aircraft, "pressingInterpolatedX", x);
+        correctZeroedInterpolation(aircraft, "pressingInterpolatedZ", z);
+        setEngineTarget(aircraft, engine);
+    }
+
+    static void validateTacticalControlSurface(Entity aircraft) {
+        try {
+            findMethod(aircraft.getClass(), "setInputs", float.class, float.class, float.class);
+            for (String name : new String[]{"pressingInterpolatedX", "pressingInterpolatedZ"}) {
+                Object interpolation = findField(aircraft.getClass(), name).get(aircraft);
+                findMethod(interpolation.getClass(), "getSmooth");
+                findMethod(interpolation.getClass(), "decay", float.class, float.class);
+                // Exact pinned 1.3.3 source returns ten interpolation steps.
+                float stepFraction = ((Number) findField(interpolation.getClass(), "steps")
+                        .get(interpolation)).floatValue();
+                if (Math.abs(stepFraction - 0.1f) > 1e-6f)
+                    throw new IllegalStateException("Unknown IA input smoothing coefficient: " + stepFraction);
+            }
+            findMethod(aircraft.getClass(), "setEngineTarget", float.class);
+        } catch (ReflectiveOperationException e) {
+            throw new IllegalStateException("Pinned IA aircraft control surface unavailable", e);
+        }
+    }
+
+    private static void correctZeroedInterpolation(Entity aircraft, String field, float command) {
+        try {
+            Object interpolation = findField(aircraft.getClass(), field).get(aircraft);
+            float alreadyZeroed = ((Number) findMethod(interpolation.getClass(), "getSmooth")
+                    .invoke(interpolation)).floatValue();
+            float corrected = IaNonPlayerInputBridgeMath.correctZeroedSmooth(alreadyZeroed, command);
+            findMethod(interpolation.getClass(), "decay", float.class, float.class)
+                    .invoke(interpolation, corrected, 1.0f);
+        } catch (ReflectiveOperationException e) {
+            throw new IllegalStateException("Could not apply IA control " + field, e);
+        }
+    }
 
     static double smooth(Entity aircraft, String fieldName) {
         try {

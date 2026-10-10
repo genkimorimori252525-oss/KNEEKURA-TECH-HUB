@@ -17,6 +17,17 @@ def gameTestRunDirectory = project.file('run-gametest')
 def flightTestModsDirectory = project.file('flight-test-mods')
 def generatedGameTestResources = layout.buildDirectory.dir('generated/gametest-resources')
 sourceSets.main.resources.srcDir(generatedGameTestResources)
+// Compile the very same, dependency-free decision code exercised by the headless tests.
+// Do not duplicate or rewrite the pure-Java policies in this Forge adapter.
+sourceSets.main.java.srcDir(project.file('../src/main/java'))
+def generatedTacticalAtlas = layout.buildDirectory.dir('generated/tactical-atlas')
+sourceSets.main.resources.srcDir(generatedTacticalAtlas)
+
+tasks.register('stageRuntimeTacticalAtlas', Copy) {
+    from project.file('../data/base-aircraft-anchor-v1.csv')
+    into generatedTacticalAtlas
+    rename { 'ww-tactical-anchor-v1.csv' }
+}
 
 minecraft {
     mappings channel: 'official', version: minecraft_version
@@ -79,6 +90,7 @@ tasks.register('generateEmptyGameTestStructure') {
 tasks.register('prepareRuntimeTrace') {
     group = 'verification'
     dependsOn tasks.named('generateEmptyGameTestStructure')
+    dependsOn tasks.named('verifyPinnedRuntimeJars')
     doLast {
         gameTestRunDirectory.mkdirs()
         new File(gameTestRunDirectory, 'eula.txt').text = 'eula=true\n'
@@ -91,8 +103,49 @@ tasks.register('prepareRuntimeTrace') {
     }
 }
 
+// The workflow also checks these artifacts before staging, but a direct local
+// runGameTestServer must observe the identical immutable provenance gate.
+tasks.register('verifyPinnedRuntimeJars') {
+    group = 'verification'
+    description = 'Reject any local runtime artifact other than the exact researched binaries'
+    doLast {
+        def expected = [
+                ['warfare_wings-1.1.4-1.20.1-forge.jar', 'SHA-256',
+                 'dc3029597c88859744633b6f5e4a9f21d449294b1aaac90ea0c1749d7aa98a43'],
+                ['immersive_aircraft-1.3.3+1.20.1-forge.jar', 'SHA-512',
+                 '7b74442e161bb74538e0d8da34a81616daeea56a0da62db86113a78b3bf3c2b3a6b0e12f12454fd7c96092762f6b212ba57cb87eb1af2b242a4d5df4eca03055']
+        ]
+        expected.each { entry ->
+            File file = new File(flightTestModsDirectory, entry[0])
+            if (!file.isFile()) throw new GradleException("Pinned runtime dependency absent: ${entry[0]}")
+            def digester = java.security.MessageDigest.getInstance(entry[1])
+            file.withInputStream { stream ->
+                byte[] buffer = new byte[65536]
+                int count
+                while ((count = stream.read(buffer)) != -1) digester.update(buffer, 0, count)
+            }
+            String actual = digester.digest().encodeHex().toString()
+            if (!actual.equalsIgnoreCase(entry[2]))
+                throw new GradleException("Pinned runtime dependency hash mismatch: ${entry[0]} expected=${entry[2]} actual=${actual}")
+            logger.lifecycle("PINNED_RUNTIME_HASH_OK ${entry[0]} ${entry[1]} ${actual}")
+        }
+    }
+}
+
+tasks.register('verifyTacticalInputCorrection', JavaExec) {
+    group = 'verification'
+    description = 'Source-only IA 10-step input smoothing and one-tick pilot-lag contract'
+    dependsOn tasks.named('classes')
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'org.kneekura.techhub.warfarewings.trace.IaNonPlayerInputBridgeMath'
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
 tasks.named('processResources', ProcessResources).configure {
     dependsOn tasks.named('generateEmptyGameTestStructure')
+    dependsOn tasks.named('stageRuntimeTacticalAtlas')
     def replaceProperties = [
             minecraft_version: minecraft_version,
             forge_version: forge_version,
