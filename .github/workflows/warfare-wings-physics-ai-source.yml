@@ -77,3 +77,24 @@ jobs:
       - name: Compile runtime probe without external runtime jars
         working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
         run: gradle --no-daemon --console=plain compileJava processResources
+
+  docker-headless:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: jolly/research-warfare-wings-2026-10-07
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Build isolated Java 17 headless physics image
+        run: |
+          ROOT=departments/minecraft/mods/warfare-wings/physics-ai
+          docker build --pull --progress plain -f "$ROOT/Dockerfile" -t warfare-wings-physics-ai:source "$ROOT"
+          docker image inspect --format 'Image ID: {{.Id}}' warfare-wings-physics-ai:source
+      - name: Verify source physics and Atlas offline in container
+        run: |
+          docker run --rm --network none --read-only \
+            --tmpfs /tmp:rw,nosuid,nodev,size=256m,mode=1777 \
+            --security-opt no-new-privileges \
+            warfare-wings-physics-ai:source

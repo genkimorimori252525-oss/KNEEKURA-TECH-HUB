@@ -53,6 +53,13 @@ The canonical **AI / simulator plan**, however, belongs here.
 
 The pure-Java microkernel, same-artifact calibration bridge, and 24-aircraft source Atlas now exist.
 
+The first deterministic **tactical decision layer** now also exists:
+[`TACTICAL-AI-IMPLEMENTATION-v1.md`](TACTICAL-AI-IMPLEMENTATION-v1.md)
+describes the 24-aircraft role-aware controller, scenario replays, historically
+sourced optional unit/year formation orders, and next Forge integration gates.
+[`TACTICS-EVIDENCE-v1.md`](TACTICS-EVIDENCE-v1.md) documents the historical
+source audit; these candidate tactics are not yet validated in Minecraft.
+
 ```text
 warfare-wings/
   physics-ai/
@@ -103,6 +110,8 @@ Current verified scope:
 - real same-artifact Minecraft trace: **NOT_RUN — registered runner offline**.
 
 See [IMPLEMENTATION-STATUS-2026-10-07.md](IMPLEMENTATION-STATUS-2026-10-07.md) and [CALIBRATION-STATUS-2026-10-07.md](CALIBRATION-STATUS-2026-10-07.md).
+
+For the reproducible source-only Docker stage and the separately gated owner-controlled Windows GameTest, see [DOCKER-AND-RUNTIME-VERIFICATION.md](DOCKER-AND-RUNTIME-VERIFICATION.md). Docker performs headless Java 17 validation without target game binaries; it does not replace real Minecraft calibration.
 
 ## Core design
 

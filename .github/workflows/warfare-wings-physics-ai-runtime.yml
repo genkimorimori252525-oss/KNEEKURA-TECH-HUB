@@ -23,7 +23,8 @@ concurrency:
 
 jobs:
   a6m-throttle-trace:
-    runs-on: [self-hosted, Windows, X64]
+    # Limit the local-artifact stage to the registered owner-controlled runner.
+    runs-on: [self-hosted, Windows, X64, tech-hub, kneekura]
     timeout-minutes: 60
     defaults:
       run:
