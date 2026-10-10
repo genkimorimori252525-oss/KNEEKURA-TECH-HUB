@@ -46,7 +46,16 @@ For **each full target**: obtain full upstream source tree locally + hashes, sel
 - [ ] Binary hashes and source->JAR bytecode parity, full source body acquisition/CAS, Forge runtime/FPS/heap/MSPT benchmarks, exact loader conflicts NOT_RUN.
 - [ ] Next: server/worldgen/redstone/lighting group (Alternate Current, Starlight, Noisium, Clumps), GPU Tape release bytecode if supplied, SATURN source lineage, client profiler spark/Observable for future A/B.
 
-## Phase 6 — LAB and A/B: NOT_RUN
+## Phase 6 — server/world/light/XP source cohort: FOUR ADDITIONAL DOSSIERS / WHOLE_TARGET_OPEN
+
+- [x] [Phase 6 checkpoint](PHASE-6-CHECKPOINT.md): Alternate Current 1.7.0, Starlight 1.1.2, Noisium 2.3.0, Clumps 12.0.0.4. Source and failure-repair history files plus JSON drafts for all four.
+- [x] **Pin actual source revisions** instead of current branch latest: `Starlight@1cda73cc` matches exact JAR short Git SHA, `Noisium@8cf45180` source mod 2.3.0; earlier branch sources were newer versions. `Starlight #197 OPEN` and `Clumps #144 exact 12.0.0.4` remain unresolved compatibility evidence.
+- [x] [Server/world compatibility matrix](SERVER-WORLD-INTEROP-MATRIX.md) connects light vs direct palette counters, modern Canary/Radium feature gates, XP Forge event semantics and reversible block-mutation pitfalls.
+- [x] Catalog now **50 technical concept records**, **20/27** optimizer candidates have partial deep dossiers, **7 remaining**; not complete or bench-tested.
+- [ ] Forge user JAR hashes, source parity, full source-body trees/CAS, GameTests, performance A/B, final license validation: **NOT_RUN**.
+- [ ] Next source research: Canary/Saturn provenance, LetMeDespawn, GetItTogetherDrops, SmoothBoot Reloaded, Dynamic FPS; spark/Observable as measurement tools, not optimizer.
+
+## Phase 7 — LAB and A/B: NOT_RUN
 
 Use only an explicitly authorized disposable Forge 1.20.1 environment with source/binary identity, set observations/assertions/cleanup, record paired measurements. No production world. Do not reuse unrelated successful Water Tank tests as evidence.
 
@@ -58,6 +67,6 @@ Use only an explicitly authorized disposable Forge 1.20.1 environment with sourc
 - `ImmediatelyFast-...1.20.4` filename alone doesn't prove unsupported 1.20.1. `BetterAdvancements-NeoForge-1.20.1` in Forge directory must be verified as to actual loader.
 - All source material collected so far is **selected evidence**, never proof that the *named release JAR* contains equivalent classes. No known +X% FPS/TPS measure.
 
-## Phase 7 — knowledge promotion: NOT_DONE
+## Phase 8 — knowledge promotion: NOT_DONE
 
 These are reviewed source candidates and comparative source locators, NOT VALIDATED canonical knowledge. No new composite optimization MOD or source copying authorized.
