@@ -1,0 +1,193 @@
+{
+  "format": "kneekura.failure-history.research-draft.v1",
+  "repository": "https://github.com/jaredlll08/Clumps",
+  "import_ready": false,
+  "scope": {
+    "track": "ANCHOR_1.20.1_FORGE_AND_HISTORICAL_COMPARATIVE",
+    "head_revision": "d249b4d25478e6044b0951f01b729c17b5860456",
+    "history_window": "2023-2024 Issues #124, #128, #134, #141, #144; specific fix #124",
+    "queries": [
+      "mending",
+      "experience",
+      "xp orb",
+      "spawn egg",
+      "PickupXp"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "inspected_evidence_ids": [
+      "c124",
+      "c124fix",
+      "c144",
+      "c134",
+      "c128",
+      "c141"
+    ],
+    "deferred": [
+      "all PRs and issues",
+      "binary source parity",
+      "compatibility runtime",
+      "CAS raw capture"
+    ],
+    "unavailable": []
+  },
+  "cases": [
+    {
+      "case_id": "CLUMPS-124",
+      "origin": "UPSTREAM",
+      "track": "COMPARATIVE_MC1.20_FABRIC",
+      "environment": {
+        "minecraft": "1.20",
+        "loader": "Fabric",
+        "mod_version": "11.0.0.1"
+      },
+      "affected_symbols": [
+        "MixinExperienceOrb.addAdditionalSaveData"
+      ],
+      "before_revision": "3b2b4ad169439b87c91f648b4415f688c7672619",
+      "after_revision": "ebb464852a132188a023cf0f5698e8a4216b9476",
+      "evidence": [
+        {
+          "id": "c124",
+          "role": "issue",
+          "url": "https://github.com/jaredlll08/Clumps/issues/124",
+          "index_snapshot_id": null,
+          "document_id": null
+        },
+        {
+          "id": "c124fix",
+          "role": "diff",
+          "url": "https://github.com/jaredlll08/Clumps/commit/ebb464852a132188a023cf0f5698e8a4216b9476",
+          "index_snapshot_id": null,
+          "document_id": null
+        }
+      ],
+      "causal_chain": [
+        "SpawnEgg orb NBT value overwritten during lazy aggregate initialization",
+        "Fix only writes clumpedMap when nonnull",
+        "Later 1.20.1 source contains guard"
+      ],
+      "symptom": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "SpawnEgg-created XP orb gives zero XP while /summon still works",
+        "evidence_ids": [
+          "c124"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Creating experience orb from custom SpawnEgg with Count/Value",
+        "evidence_ids": [
+          "c124"
+        ]
+      },
+      "root_cause": {
+        "basis": "INFERENCE",
+        "text": "Serialization triggers state initialization with wrong initial value",
+        "evidence_ids": [
+          "c124fix"
+        ]
+      },
+      "repair": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "Do not store clumpedMap unless map is initialized",
+        "evidence_ids": [
+          "c124fix"
+        ]
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Lazy aggregate serialization must preserve user-supplied original NBT values",
+        "evidence_ids": [
+          "c124fix"
+        ]
+      },
+      "reproduction": {
+        "state": "REPORTED",
+        "evidence_ids": [
+          "c124"
+        ]
+      },
+      "fix_verification": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      }
+    },
+    {
+      "case_id": "CLUMPS-144",
+      "origin": "UPSTREAM",
+      "track": "ANCHOR_EXACT_VERSION_REPORTED",
+      "environment": {
+        "minecraft": "1.20.1",
+        "loader": "Forge 47.3.0",
+        "mod_version": "12.0.0.4",
+        "other_mod": "Blood Magic 3.3.3-45"
+      },
+      "affected_symbols": [
+        "MixinExperienceOrb.playerTouch",
+        "ClumpsCommon.pickupXPEvent",
+        "PlayerXpEvent.PickupXp"
+      ],
+      "before_revision": null,
+      "after_revision": null,
+      "evidence": [
+        {
+          "id": "c144",
+          "role": "issue",
+          "url": "https://github.com/jaredlll08/Clumps/issues/144",
+          "index_snapshot_id": null,
+          "document_id": null
+        }
+      ],
+      "causal_chain": [
+        "BloodMagic mutates event orb value",
+        "Clumps awards from independent clumpedMap per-value bucket",
+        "Maintainer admits incompatibility; no patch"
+      ],
+      "symptom": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "XP events and item storage give unintended XP via Clumps",
+        "evidence_ids": [
+          "c144"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Mod modifies ExperienceOrb.value in Forge PickupXp event",
+        "evidence_ids": [
+          "c144"
+        ]
+      },
+      "root_cause": {
+        "basis": "INFERENCE",
+        "text": "Mutable event value and clump aggregate map are not synchronized",
+        "evidence_ids": [
+          "c144"
+        ]
+      },
+      "repair": {
+        "basis": "UNKNOWN",
+        "text": null,
+        "reason": "Maintainer recommends consuming custom events; no verified code patch"
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Aggregation must define event mutation authority and preserve per-orb value distribution",
+        "evidence_ids": [
+          "c144"
+        ]
+      },
+      "reproduction": {
+        "state": "REPORTED",
+        "evidence_ids": [
+          "c144"
+        ]
+      },
+      "fix_verification": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      }
+    }
+  ]
+}
