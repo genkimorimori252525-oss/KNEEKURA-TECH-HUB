@@ -92,6 +92,11 @@ jobs:
           assert g["potential_shared_flag_pairs_sum"]==6
           assert g["same_priority_shared_flag_pairs_sum"]==6
           assert g["co_running_shared_flag_pairs_sum"]==0
+          assert g["delta_snapshot_events"]==1
+          assert g["delta_snapshot_valid"]==1
+          assert g["delta_changes_false_to_true"]==1
+          assert g["delta_changes_true_to_false"]==0
+          assert g["runtime_pass"] is False
           assert g["runtime_pass"] is False
           assert r["status"]=="SYNTHETIC_FIXTURE_ONLY"
           assert r["observation_coverage"]["state"]=="INCONCLUSIVE"
