@@ -42,3 +42,7 @@
 ### G09〜G13のデータ証拠ゲート（2026-10-11）
 
 Spore 2.2.0jの[指揮・Signal・Goal受け入れテストのrunログ検証器](../minecraft/mods/fungal-infection-spore/RUN-EVIDENCE-GATE-2026-10-11.md) を実装し、合成データの15/15単体テストとGitHub Actionsを通した。別run・world・artifact・途中欠損を受け入れず、偽造可能なJSONLにruntime PASSを付けない。**Forge observer・GameTest稼働・TPS測定は未実施**。原作者の[mods.toml依存設定不整合](../minecraft/mods/fungal-infection-spore/METADATA-AUDIT-2026-10-11.md)も別facetへ記録した。
+
+### Spore Forgeの読み取り専用観測器（2026-10-11）
+
+[observer README](../minecraft/mods/fungal-infection-spore/observer/README.md) と [ソース](../minecraft/mods/fungal-infection-spore/observer/src/main/java/org/kneekura/sporeobserver/SporeEvents.java)をTECH-HUB Minecraft研究領域に追加。原作を改変せずSpore 2.2.0j SHAを起動時検査、Proto/Signal/Infectedと未校正ServerTickの状態を記録する。ForgeGradleの[ソースビルドCI](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38082379417)はPASS。Forgeを用いたSpore原作実ゲーム観測は依然NOT_RUN。JSONLだけで成功を断定せずLABの認証とcleanupを待つ。

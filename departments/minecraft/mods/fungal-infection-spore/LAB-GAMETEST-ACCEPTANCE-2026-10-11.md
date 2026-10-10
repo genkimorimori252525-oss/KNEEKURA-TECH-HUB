@@ -62,3 +62,11 @@ SearchAreaGoalの目的地判定は**中心から9ブロック未満**（Minecra
 **限定的な進捗:** 観測されたイベントのrun・world・original JAR・行順序・最低限のシナリオカバレッジを判定できる。G09〜G13のForge実機用observer/Goal内フックはまだ存在しない。実ゲームからのデータがないため、全てのruntime assertionはNOT_RUNのまま。観測ファイルのorigin欄は自己申告であり、本来のLABの認証済み実行・cleanupの代わりにはならない。
 
 原作JARの起動メタデータにも[依存テーブルの不整合候補](METADATA-AUDIT-2026-10-11.md)を発見。正式GameTest前にFMLの依存解釈・Forge実行条件を隔離環境で確認する必要がある。
+
+## 2026-10-11 — 実装状態の更新
+
+[Spore専用の独立Forge Observer](observer/README.md) はソース実装され、[GitHub ActionsでForge 1.20.1 APIのcompileJavaに成功](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38082379417)。既存LABの実験契約に依存し、起動時にはロード済みSpore JARのhashとsession/world/seedを確認する。無許可のworldへ生成/攻撃/ブロック破壊を行わない。読み取り専用G13計測の観測コードとG09〜G12の状態snapshotコードがある。
+
+新しい [G13 Java→JSONL→Pythonの合成600件テスト](observer/tests/G13SyntheticProducer.java) はローカルで出力判定がSYNTHETIC_FIXTURE_ONLY、runtime_pass=falseとなった。これはゲームの試験ではない。
+
+従来の「Forge observer未実装」は上記実装に関する**過去の記載**として残す。**今なお未達**なのはSpore実ロードのForge専用サーバー起動、LABの承認済みsession/experiment、GameTestシナリオの実行、G09〜G12のメソッド単位の正確な観測、チケット/TPS/cleanupの認証である。

@@ -75,3 +75,13 @@ All further MOD research follows [Minecraft analysis workflow](../../ANALYSIS-WO
 - [GitHub Actionsで15/15単体試験PASS](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38081259925)。このCIは合成fixture + Python構文のみを検証し、Spore本体を取得・起動しない。
 
 **進捗を厳密に区別:** G09〜G13の**ログ判定器はIMPLEMENTED/TESTED_SYNTHETIC**。G09〜G13のForge観測器・GameTest Java・実機測定は**NOT_IMPLEMENTED/NOT_RUN**。前回の静的Bytecode契約19/19 PASSとは別の試験。
+
+## 2026-10-11 — Forge観測MODのソース実装とコンパイル
+
+[observer/README.md](observer/README.md) — 実行権限が固定されたLABセッション内でだけ有効になる、Forge 1.20.1研究用の読み取り専用補助MODを新設した。Spore原作を変更せず、既存session.json・world・run ID・world seedと、ロード済み原作JARのSHA-256を検査。ログは別のSpore JSONL companionとして出力する。
+
+[GitHub Actions 38082379417](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38082379417) でForgeGradle 6＋Minecraft 1.20.1ソースコンパイル、Java17のportable JSONLテスト、Pythonゲート15件が成功。後続には[G13の600件合成ログのJava→Python結合テスト](observer/tests/G13SyntheticProducer.java)も追加した。
+
+**G13に直接観測できる範囲:** ロード中のProto・active Signal・Infected件数、ServerTick START〜END未校正時間、読み込み済みチャンク、バニラの強制ロードチャンク。Forge ticketの全件・正式MSPT・TPS・ゲームの勝率は未測定。
+
+**G09〜G12に残る範囲:** Signal呼出の実際の候補列挙、Calamity再配置・Womb試行メソッド、Vigilの報酬呼出、Goal tickそのものは受動イベントでは直接取れない。現状はsnapshotイベントのみでGameTest成功とはしない。LAB登録済みworld・Spore実ロード・観測・cleanupの認証はまだNOT_RUN。
