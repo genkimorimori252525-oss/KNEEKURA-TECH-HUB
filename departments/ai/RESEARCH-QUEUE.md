@@ -51,3 +51,7 @@ Spore 2.2.0jの[指揮・Signal・Goal受け入れテストのrunログ検証器
 ### Observerの実装とスコープ付きCI根拠（2026-10-11）
 
 [Spore研究用の読み取り専用Forge Observer](../minecraft/mods/fungal-infection-spore/observer/README.md) に、G13の未校正server tick時間・Proto/Signal/Infected・loaded chunk数、G11の公開重み/波数/damage snapshotを実装。自作Jarは[Actions #38082851629](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38082851629) で **ForgeGradle 1.20.1 packaged source build成功**、[不変buildレシート](../minecraft/mods/fungal-infection-spore/verification/OBSERVER-FORGE-CI-2026-10-11.json)あり。原作Sporeと実LAB worldは起動していないのでruntime/GameTest/TPSはNOT_RUN。G09〜G12の実装内メソッドの正確な命令タイミングはまだ未観測。
+
+### Sporeの輸送・支援・環境資源AIを別ジャンルとして回収（2026-10-11）
+
+Minecraft部門の[Spore AI/配下48クラスの固定索引・20件の直接Bytecode検査](../minecraft/mods/fungal-infection-spore/AI-GOAL-LAYER-2026-10-11.md) から、兵員輸送（TransportInfected）、後衛支援（BuffAlliesGoal）、飢餓/残骸回収（InfectedConsumeFromRemains）、広域CDU制圧（SporeBurstSupport）、Scent生成の技術を**用途ごとの独立候補**として記録。とくにGoal.canUse相当内のBlock破壊や、ブロック硬さ計算の[座標とBlockStateの食い違い](../minecraft/mods/fungal-infection-spore/GARGOYL-DYNAMICTREES-HARDNESS-2026-10-11.md)は、将軍AIの大規模な部隊運用・軽量化・可逆な地形変更を設計する際の反例となる。実際の性能・不具合再現はNOT_RUN。

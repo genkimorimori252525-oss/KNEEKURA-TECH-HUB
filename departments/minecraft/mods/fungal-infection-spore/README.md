@@ -99,3 +99,14 @@ All further MOD research follows [Minecraft analysis workflow](../../ANALYSIS-WO
 [GitHub Actions #38083037553](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38083037553) は **全3ジョブSUCCESS**。自作Spore ObserverをForgeGradleでJAR化し、対象クラス・mods.tomlを確認、原作Sporeクラスの混入がないことを検証した。[研究用JARの短期保存artifact](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38083037553/artifacts/11681372105) から取得できる（設定保持7日、期限が過ぎた場合は同じソースからビルド）。本件の[実行・artifactレシート](verification/OBSERVER-FORGE-CI-2026-10-11.json)に固定。
 
 **配布されたのはTECH-HUBが新たに書いた補助MODだけ**で、Harbingerの原作JARは含まれていない。これをインストールすれば自動的にSporeの実挙動を確認できるという意味ではない。LABの登録済み一時world、Spore固定JAR、observerの実ロード、片付けの認証が未達のため、G09〜G13の**本番GameTest/TPSは依然NOT_RUN**。
+
+## 2026-10-11 — AI層48クラスの全件索引と、輸送・支援・残骸回収の技術回収
+
+[AI-GOAL-LAYER-2026-10-11.md](AI-GOAL-LAYER-2026-10-11.md) に原作JARの AI/ 配下48クラスを分類し、TransportInfected（輸送と騎乗）、BuffAlliesGoal（別系統の支援）、InfectedConsumeFromRemains（資源/飢餓・canUse内のworld変更）、CalamityのSporeBurst/Scent（広域制圧/効果とMob上限）等を根拠付きで整理した。
+
+- [48クラスのSHA-256と20件の実JAR限定Bytecode検査結果](verification/AI-GOAL-LAYER-2026-10-11.json)
+- [再現可能な自作検査器](tools/audit_ai_goal_layer.py)（原本JAR SHAをfail-closed照合、実JARで20/20 STATIC PASS、2回の結果バイト一致、異なるJARでは拒否）
+- [Gargoyl×Dynamic Trees 1.4.11の動的硬さ/BlockPos不整合](GARGOYL-DYNAMICTREES-HARDNESS-2026-10-11.md)：Sporeの候補BlockStateを**異なる中心BlockPos**で硬さ照会することを確認。[4件の元Bytecode契約](verification/GARGOYL-HARDNESS-STATIC-2026-10-11.json)と[専用検査器](tools/check_gargoyl_hardness.py)で再現可能。外部[Issue #1201](https://github.com/DynamicTreesTeam/DynamicTrees/issues/1201)のクラッシュ報告と整合するが、実機での不具合再現/作者の修正は未確認。
+- [Failure/Repair履歴の暫定入口](FAILURE-REPAIR-HISTORY.md) / [PARTIALな機械可読記録](FAILURE-REPAIR-HISTORY.json)。Issue/修復diffがCASに固定されていないため正式caseは0件であり、修正完了を示さない。
+
+**現状:** 今回の48クラスの存在とSHAはINVENTORIED、うち重点7クラスの選定構造はMAPPED/STATIC PASS。Spore原作を起動したG09〜G13 GameTest、TPS、最新NeoForge/FRONTIER比較、whole-target COMPLETEは未達。

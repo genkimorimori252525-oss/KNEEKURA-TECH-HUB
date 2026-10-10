@@ -83,3 +83,7 @@ AI部門は抽象的な指揮契約・情報共有・評価方式を研究する
 階層型指揮は「目標の決定」だけでは足りず、偵察Signalの**誰へ配送するか**、すでに任務中の部隊の**優先度/空き**、新兵站拠点を作るときの**資源予算**、兵士の**SearchPos失効**、作戦の**成功報酬と行動試行報酬の分離**も必要。原作は選定の確率や条件が違うため、この研究成果を単一テンプレートに強制統合しない。
 
 現状はDESIGN_CANDIDATEで、実Minecraft適用や性能改善を証明していない。
+
+## 2026-10-11 — 役割別Goalの実JAR技術回収
+
+[Spore 2.2.0jの輸送・後衛支援・残骸回収・広域制圧Goal](../../minecraft/mods/fungal-infection-spore/AI-GOAL-LAYER-2026-10-11.md) のBytecode解析から、Commanderが決める任務を Transport / Support / Resource Recovery / Combatへ分ける選択肢が増えた。Unitは独立の局所Goalを実行し、作戦完了・資源消費・地形変更を別イベントとして報告する案。これらを必須の一体化AIテンプレートとするものではない。原作のcanUse相当の内部でblockを破壊する処理は[BlockStateと照会位置の不整合](../../minecraft/mods/fungal-infection-spore/GARGOYL-DYNAMICTREES-HARDNESS-2026-10-11.md)と合わせて、可逆WorldMutationJournalと副作用分離の受け入れテスト候補へ入れる。**DESIGN_CANDIDATE / runtime未検証**。
