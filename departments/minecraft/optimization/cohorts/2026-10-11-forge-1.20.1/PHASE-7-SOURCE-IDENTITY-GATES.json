@@ -1,0 +1,90 @@
+{
+  "schema": "kneekura.optimization.cohort.source-identity-gate.v1",
+  "captured_at": "2026-10-11",
+  "rule": "Only source-backed specific revision findings; no substitution of related historical / upstream source for unverified release",
+  "gates": [
+    {
+      "id": "21",
+      "name": "Canary 0.3.3",
+      "jar": "canary-mc1.20.1-0.3.3.jar",
+      "anchor": {
+        "mc": "1.20.1",
+        "loader": "Forge",
+        "file_id": 5089991,
+        "source_revision": null,
+        "source_binary_parity": "NOT_VERIFIED"
+      },
+      "lookups": [
+        "AbdElAziz333/Canary : NOT_FOUND",
+        "CurseForge Canary original description"
+      ],
+      "comparative": {
+        "repo": "CaffeineMC/lithium",
+        "version": "1.20.1",
+        "commit": "1316ab1aafd888bf9881e924f29928f653ad2308",
+        "tree_paths_indexed": 524,
+        "java_paths": 470,
+        "equivalence": "NOT_ESTABLISHED"
+      },
+      "status": "SOURCE_ORIGINAL_UNAVAILABLE"
+    },
+    {
+      "id": "27",
+      "name": "Saturn 0.1.3",
+      "jar": "saturn-mc1.20.1-0.1.3.jar",
+      "anchor": {
+        "mc": "1.20.1",
+        "loader": "Forge",
+        "released": "2024-02-09",
+        "source_revision": null,
+        "source_binary_parity": "NOT_VERIFIED"
+      },
+      "lookups": [
+        "AbdElAziz333/Saturn : NOT_FOUND",
+        "official CurseForge file 1.20.1"
+      ],
+      "comparative": {
+        "issue": "https://github.com/FxMorin/MemoryLeakFix/issues/115",
+        "mc": "1.18.2",
+        "role": "RECON_ONLY"
+      },
+      "status": "SOURCE_ORIGINAL_UNAVAILABLE"
+    },
+    {
+      "id": "07",
+      "name": "Smooth Boot Reloaded 0.0.4",
+      "jar": "smoothboot(reloaded)-mc1.20.1-0.0.4.jar",
+      "anchor": {
+        "mc": "1.20.1",
+        "loader": "Forge",
+        "file_id": 5016280,
+        "source_revision": null,
+        "source_binary_parity": "NOT_VERIFIED"
+      },
+      "lookups": [
+        "AbdElAziz333/Smooth-Boot-Reloaded : NOT_FOUND"
+      ],
+      "comparative": [
+        {
+          "repo": "liangyaoyun209/SmoothBoot-Reloaded",
+          "mc": "1.18.2",
+          "version": "1.0.1",
+          "commit": "8b1ba501f69bcefb37fb7fa1afd3a33b15ef2f89"
+        },
+        {
+          "repo": "FITFC/SmoothBoot-Reloaded",
+          "mc": "1.19.2",
+          "version": "0.0.2",
+          "commit": "387c8a5cb14e6537bf604887a2c55261ed0cc9e5",
+          "git_tree_sha": "d00c29ae062e11b38fc52dd1eccd91aa7ef786f1",
+          "all_sources_acquired": false
+        }
+      ],
+      "official_author_changelog": "Fixed main worker thread count, no exact source proof",
+      "status": "SOURCE_ORIGINAL_UNAVAILABLE_WITH_HISTORICAL_COMPARATIVE"
+    }
+  ],
+  "runtime_trials": 0,
+  "measured_performance": 0,
+  "source_not_found_is_not_proof_absence_everywhere": true
+}
