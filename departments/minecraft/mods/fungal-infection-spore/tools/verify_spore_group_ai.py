@@ -78,7 +78,7 @@ def verify(jar:Path) -> dict:
         'calamity_command_requires_existing_receiver_search':regex(method(cc,'Targeting'),r'Infected\.getSearchPos:.*?ifnull\s+158.*?Calamity\.getSearchArea:.*?Infected\.setSearchPos:'),
         'local_search_starts_for_no_target':regex(method(search,'m_8036_'),r'Infected\.getSearchPos:.*?ifnull.*?Infected\.m_5448_:'),
         'local_search_repath_40_goal_ticks':regex(method(search,'shouldRecalculatePath'),r'bipush\s+40.*?irem'),
-        'local_search_clears_at_squared_distance_nine':regex(method(search,'m_8037_'),r'double 9\.0d.*?BlockPos\.m_203195_:.*?Infected\.setSearchPos:'),
+        'local_search_clears_with_radius_nine':regex(method(search,'m_8037_'),r'double 9\.0d.*?BlockPos\.m_203195_:.*?Infected\.setSearchPos:'),
         'follow_partner_scan_every_twenty_canUse_checks':regex(method(follow,'m_8036_'),r'bipush\s+20.*?searchCooldown:.*?findNearestPartner:'),
         'follow_path_reconsidered_each_twenty_entity_ticks':regex(method(follow,'shouldRepath'),r'bipush\s+20.*?irem'),
         'follow_clears_partner_at_distance_sq_4096':regex(method(follow,'m_8045_'),r'double 4096\.0d.*?Infected\.setFollowPartner:'),

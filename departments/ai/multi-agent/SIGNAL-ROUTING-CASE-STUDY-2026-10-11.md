@@ -44,3 +44,7 @@ Report: order_uuid, actual_unit_uuid, spawn_member_index, event_kind,
 - T5：1/4/16体のProto相当Commander、N=100/1000体の軽量Unitでサーバーtick負荷比較。
 
 現状の成果は**原作の静的Bytecode解読と独立合成試験**。この計画はMinecraft MODの実装完了、性能改善証明、実ゲームでの学習・生態系形成を示すものではない。
+
+### 2026-10-11 距離判定の知見
+
+原作SearchAreaGoalは探索目標まで**9ブロック未満**になるとSearchPosをクリアする。原本JARの `BlockPos.m_203195_(Position,9.0)` がMinecraft 1.20.1の `Vec3i.closerToCenterThan` に対応するため、以前の「距離二乗9なので半径3」という解釈を訂正した。Followerのナビ停止判定は距離二乗9（約3ブロック）で異なる。将軍AIでの指示は、到達の半径・目標消失条件・任務終了のイベントを混ぜずに設計する。

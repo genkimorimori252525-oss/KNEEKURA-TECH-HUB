@@ -50,3 +50,7 @@
 | G13 | Proto 1/4/16体、Signal 0/1/10、Infected 0/100/1000の条件差 | Goal評価回数、エンティティAABBクエリ、平均/p95/p99 tick ms、chunk ticket、loaded chunks | Forge依存とLAB権限を固定。TPS・性能PASSは未報告 |
 
 **現在:** この5シナリオのForge GameTest Javaコード/Observer未実装、Minecraft実行NOT_RUN。別の独立の数学テストPASSを本受け入れの合格へ転用しない。
+
+### G12 判定条件の精密化（Bytecode/mapping訂正）
+
+SearchAreaGoalの目的地判定は**中心から9ブロック未満**（Minecraft 1.20.1 `Vec3i.closerToCenterThan(Position,9.0)`）であり、Follower側の距離二乗9（3ブロック）とは異なる。G12ではSearchPosに対し9.1/8.9ブロック付近の境界を観測し、測距対象がBlockPosの中心であることも記録する。ゲーム未実施。

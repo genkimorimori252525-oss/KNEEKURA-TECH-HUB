@@ -50,7 +50,7 @@ Wikiの[Linking & Signals](https://www.fungalinfectionspore.wiki/systems/linking
 
 - **AI/LocHiv/FollowOthersGoal**：canUseの内部searchCooldown=20を使い、既存の相手が有効でないときにAABB拡張32の候補から3D距離二乗最短のPartnerを選ぶ。Mob.tickCount%20で再経路計算。距離二乗<=9でナビゲーションを停止、>4096ならcanContinueToUse側で追従先を解除。
 - **追従の相反するブランチ候補**：同Goalのtickには距離二乗>4096ならPartner座標へ即移動する経路もある。Goal継続判定はその距離ですでにPartnerを無効化するため、通常のGoal評価順でテレポート経路が到達可能か未確認。単に「64ブロック超でワープする」と主張しない。
-- **AI/LocHiv/SearchAreaGoal**：攻撃対象なし、SearchPosありでGoalを開始。tryTicks%40で位置の再経路計算、到着位置への距離二乗<=9でSearchPosをクリア。他Goalから目標変更されないまま到達不能なときの扱いは追加検証待ち。
+- **AI/LocHiv/SearchAreaGoal**：攻撃対象なし、SearchPosありでGoalを開始。tryTicks%40で位置の再経路計算、目標BlockPosの中心から **距離9.0未満（9ブロック半径）** でSearchPosをクリア（呼び出しはBlockPos.m_203195_(Position,double)=Vec3i.closerToCenterThan）。FollowOthersGoalの距離二乗<=9（半径3）とは異なる。他Goalから目標変更されないまま到達不能なときの扱いは追加検証待ち。
 - **LocalTargettingGoal**：知覚範囲はmin(MobのFOLLOW_RANGE,32)。標的共有とSearchPos共有が異なる分岐であり、全員が常時同じ目標を持つわけではない。
 
 ## 4. 原作の複数指揮官を動かす際の性能監査候補
@@ -73,3 +73,8 @@ G12：到達不能SearchPos、Partner死亡・unload・64ブロック距離、�
 G13：N=1/4/16 Proto＋複数SignalでAABB検索・chunk ticket・server tick CPUを計測。
 
 既存[隔離Forge LAB契約](LAB-GAMETEST-ACCEPTANCE-2026-10-11.md)を使う場合も事前の権限・依存・安全なworld・cleanupを維持する。**この文書はゲーム起動した証拠ではない。**
+## 2026-10-11 距離判定の訂正（原典の再照合）
+
+この文書の初版は `SearchAreaGoal` の定数9.0を**平方距離=9（半径3）**と誤読していた。実際の `SearchAreaGoal.m_8037_` は `BlockPos.m_203195_:(Position,double)Z` を呼び出しており、Minecraft **1.20.1** `Vec3i.closerToCenterThan(Position,double)` は入力を **distance/radius** として扱う。よって **SearchPosクリア条件は9ブロック未満**。別の `FollowOthersGoal` は距離二乗9（3ブロック）を使っており、両者を区別する。対応するBytecode検査のJSONキーも `local_search_clears_with_radius_nine` へ修正し、固定JARで19/19の照合を再実行した。
+
+API参照：[Forge 1.20.1 Vec3i](https://mcstreetguy.github.io/ForgeJavaDocs/1.20.1-latest/net/minecraft/core/Vec3i.html)と[Minecraft 1.20.1 mappings.dev](https://mappings.dev/1.20.1/net/minecraft/core/Vec3i.html)。Minecraftゲーム内での経路到達の有効性は引き続きNOT_RUN。

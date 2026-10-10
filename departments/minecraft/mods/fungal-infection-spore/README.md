@@ -62,3 +62,7 @@ All further MOD research follows [Minecraft analysis workflow](../../ANALYSIS-WO
 - [将軍AIの独立Signal Router設計](../../../ai/multi-agent/SIGNAL-ROUTING-CASE-STUDY-2026-10-11.md) — 原作Bytecodeからの知見と別製品への設計提案を分離。
 
 **新たな限定所見:** Vigilの退場時TRIGGER>=3のSignalは、当該メソッドでは列挙順の最初のProtoへ送られる。ProtoのCalamity派遣は待機個体ごとに50%抽選し、不成立ならWomb生成を試みる。Vigilの援軍試行前の加点と退場時の減点は、作戦の勝敗を直接評価していない。ゲーム内の再現・TPSはNOT_RUN。
+
+### 解析精度の訂正（2026-10-11）
+
+[Signal/Group AI研究](GROUP-COMMAND-SIGNAL-BYTECODE-2026-10-11.md) の初版にあった「SearchAreaGoalが目標まで3ブロック以内でSearchPos解除」は誤読。実際は **BlockPos.closerToCenterThan(Position,9.0)**、つまり半径9ブロック未満で解除。**FollowOthersGoalの距離二乗9＝半径3ブロック**とは異なる。対応する19契約の検査器とJSON結果を更新し、再実行して静的PASS 19/19を再確認した。旧コミットは歴史的証拠として残す。
