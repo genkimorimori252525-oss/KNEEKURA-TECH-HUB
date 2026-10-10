@@ -55,7 +55,15 @@ For **each full target**: obtain full upstream source tree locally + hashes, sel
 - [ ] Forge user JAR hashes, source parity, full source-body trees/CAS, GameTests, performance A/B, final license validation: **NOT_RUN**.
 - [ ] Next source research: Canary/Saturn provenance, LetMeDespawn, GetItTogetherDrops, SmoothBoot Reloaded, Dynamic FPS; spark/Observable as measurement tools, not optimizer.
 
-## Phase 7 — LAB and A/B: NOT_RUN
+## Phase 7 — source-rescued and client/entity optimizations: 3 PARTIAL DOSSIERS / 3 UNRESOLVED ORIGINALS
+
+- [x] [Checkpoint](PHASE-7-CHECKPOINT.md): source-verified Dynamic FPS 3.11.4 on Forge1.20.1 development branch, Get It Together Drops and Let Me Despawn **COMPARATIVE-ONLY** studies; bounded source/Issue history drafts and machine receipts.
+- [x] Original Canary0.3.3/Saturn0.1.3/SmoothBoot0.0.4 source pins remain unavailable. [Explicit source-identity gates](PHASE-7-SOURCE-IDENTITY-GATES.md); don't substitute Lithium or old forks as target bytes.
+- [x] Catalog 27 candidates, **55 technique concepts**, 23 in-cohort partial source dossiers + prior parent AI Improvements dossier; none complete.
+- [x] [Client/ItemEntity/despawn compatibility tests planned](CLIENT-IDLE-DESPAWN-DROPS-MATRIX.md); none run.
+- [ ] Next: **spark and Observable** profiling infrastructure (diagnostic, not an optimization), then exact JAR parity and controlled correctness/performance trials. Full source byte acquisition, CAS and runtime remain pending.
+
+## Phase 8 — LAB and A/B: NOT_RUN
 
 Use only an explicitly authorized disposable Forge 1.20.1 environment with source/binary identity, set observations/assertions/cleanup, record paired measurements. No production world. Do not reuse unrelated successful Water Tank tests as evidence.
 
@@ -67,6 +75,6 @@ Use only an explicitly authorized disposable Forge 1.20.1 environment with sourc
 - `ImmediatelyFast-...1.20.4` filename alone doesn't prove unsupported 1.20.1. `BetterAdvancements-NeoForge-1.20.1` in Forge directory must be verified as to actual loader.
 - All source material collected so far is **selected evidence**, never proof that the *named release JAR* contains equivalent classes. No known +X% FPS/TPS measure.
 
-## Phase 8 — knowledge promotion: NOT_DONE
+## Phase 9 — knowledge promotion: NOT_DONE
 
 These are reviewed source candidates and comparative source locators, NOT VALIDATED canonical knowledge. No new composite optimization MOD or source copying authorized.
