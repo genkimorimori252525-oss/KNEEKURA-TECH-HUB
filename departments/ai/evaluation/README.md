@@ -14,3 +14,10 @@
 
 最初の評価対象：[階層型指揮・群体知能](../multi-agent/HIERARCHICAL-COMMAND-AI-v0.md)  
 [共通調査手順](../RESEARCH-WORKFLOW.md)
+
+## 実行された小規模な研究実験
+
+- [Spore Protoの16重み算術モデル](experiments/spore-proto-policy-2026-10-11/README.md) — 部隊選択方式を独立した合成課題で比較、Minecraft実機ではない。
+- [SporeのSignal→Calamity/Womb選択の確率分岐](experiments/spore-signal-routing-2026-10-11/README.md) — 30,000判断×6、シード固定。実際のゲームでの派遣成功・負荷値はNOT_RUN。
+
+両者をAIの学習済み実ゲーム性能の証拠として扱わない。原作のバイトコードはMinecraft部門が別トラックで保有する。

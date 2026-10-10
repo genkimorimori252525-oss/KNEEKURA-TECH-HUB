@@ -34,3 +34,7 @@
 ### 2026-10-11 独立の実行済み数理シミュレーション
 
 [Spore Proto 4×4学習式の合成ベンチマーク](evaluation/experiments/spore-proto-policy-2026-10-11/README.md) を追加。256シード×1,200判断で学習なし / 原作算術 / 特徴ごとの独立更新案 / 士気補正を比較。成功は SYNTHETIC のみ、Minecraft 1.20.1 ForgeランタイムはNOT_RUN。[別の原作Bytecodeに基づくディメンション境界リスク](../minecraft/mods/fungal-infection-spore/CROSS-DIMENSION-AI-BOUNDARY-AUDIT-2026-10-11.md)も発見した。
+
+### Signal指揮と軽量Unitの新しい研究成果（2026-10-11）
+
+[Spore原作のSignal→Proto→Calamity/WombとGoal周期の原本Bytecode解析](../minecraft/mods/fungal-infection-spore/GROUP-COMMAND-SIGNAL-BYTECODE-2026-10-11.md)、[AI部門Signalルーティングの独立設計](multi-agent/SIGNAL-ROUTING-CASE-STUDY-2026-10-11.md)、[確率分岐の再現コードと結果](evaluation/experiments/spore-signal-routing-2026-10-11/README.md) を追加。19項目のBytecode構造チェックがPASS。実機G09〜G13はNOT_RUN。

@@ -54,3 +54,9 @@
 - [原作Forge1.20.1の限定GameTest計画](../../minecraft/mods/fungal-infection-spore/LAB-GAMETEST-ACCEPTANCE-2026-10-11.md)
 
 **学習報酬の次の検証:** 1イベントで加点+0.05、減点-0.10、ダメージ量ではなくダメージイベントの回数で更新する原作の枝を固定した。これは高速小打撃の報酬偏重リスク候補で、性能・総与ダメージ・目的達成との関係は未実測。指揮のReward設計は撃破・生存・拠点占領・資源コストと分け、観測結果で採否を決める。
+
+## 2026-10-11：Signal・Vigilの成功/失敗評価を追加
+
+[原作のSignal経路と、Vigilが実Spawn確認前にawardHivemindを呼ぶBytecode所見](../../minecraft/mods/fungal-infection-spore/GROUP-COMMAND-SIGNAL-BYTECODE-2026-10-11.md) を追補した。[30,000回×6の合成派遣比較](../evaluation/experiments/spore-signal-routing-2026-10-11/README.md) は待機部隊数ごとのWomb**試行率**だけを分析。原作Minecraft内の召喚成功率・攻撃勝率の検証ではない。
+
+将軍AIへの候補：観測を配布するSignal Router、仕事を割り当てるCommander、経路・攻撃するUnit、行動の試行/結果/目的達成を区別した報酬入力。条件がない場合の情報共有/指揮官喪失時fallbackには明示的な契約が要る。

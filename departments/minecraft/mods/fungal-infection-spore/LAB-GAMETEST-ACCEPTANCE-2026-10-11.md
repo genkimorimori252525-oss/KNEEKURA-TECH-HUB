@@ -36,3 +36,17 @@
 **未実装:** 隔離研究用Forge observer、G01〜G08のJava実装、forgeGradleビルド、依存関係取得、GameTest実行、負荷統計の分析とcleanup報告。実行主体は既存Minecraft/LABの登録済み権限ルートに従う。
 
 **先に使える静的検査器:** [Bytecode gate](BYTECODE-CONTRACT-GATE-2026-10-11.md) は原JARが手元にあればJava環境だけで再実行可能だが、これ自体にForge実行の権限はない。
+
+## G09〜G13 追加計測案（2026-10-11 / DESIGNED_NOT_RUN）
+
+原作の [Signal/群体GoalのBytecode根拠](GROUP-COMMAND-SIGNAL-BYTECODE-2026-10-11.md) と [19静的検査結果](verification/GROUP-COMMAND-STATIC-RESULT-2026-10-11.json) を参照。旧G01〜G08の試験は実施済みにしない。
+
+| ID | 隔離worldの入力条件 | 取得する証拠 | 注意事項 |
+| --- | --- | --- | --- |
+| G09 | Vigilが3回目の波を終え、複数Protoがproto_range内でそれぞれ異なる距離とEntity走査順にいる | Signalが届いたProto UUID、距離・列挙順、Signal位置、イベントtick | 近いProtoへ常に届くと前提化しない |
+| G10 | 待機Calamityが0、1、2、4体、条件・地形・敵を固定 | Redirectの成否、Womb生成**試行**と実成功、Signal残存tick、资源消費 | 原作の50%判定と生成成功率は別 |
+| G11 | Vigilのwave_sizeを制御し、召喚候補が有効/無効の2条件を準備 | SummonInfected実行、awardHivemind回数、実Spawn件数、退場時punishHivemind | 「加点=成功」は禁止 |
+| G12 | SearchPosが到達不能、リーダー64ブロック超、死亡・unload・再接続 | PathNavigation更新、SearchPosの失効、Partner交換とtick負荷 | 旧tickの仮説と実動作を区別 |
+| G13 | Proto 1/4/16体、Signal 0/1/10、Infected 0/100/1000の条件差 | Goal評価回数、エンティティAABBクエリ、平均/p95/p99 tick ms、chunk ticket、loaded chunks | Forge依存とLAB権限を固定。TPS・性能PASSは未報告 |
+
+**現在:** この5シナリオのForge GameTest Javaコード/Observer未実装、Minecraft実行NOT_RUN。別の独立の数学テストPASSを本受け入れの合格へ転用しない。

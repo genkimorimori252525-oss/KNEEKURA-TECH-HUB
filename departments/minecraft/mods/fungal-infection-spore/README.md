@@ -53,3 +53,12 @@ All further MOD research follows [Minecraft analysis workflow](../../ANALYSIS-WO
 - [隔離Forge1.20.1 GameTest / LABの8シナリオ受け入れ契約](LAB-GAMETEST-ACCEPTANCE-2026-10-11.md)。設計のみでGameTestのJava実装/ゲーム起動はNOT_RUN。
 
 新たな着目点：Forge LivingDamageEventでの**ダメージ発生回数**に基づく報酬は、個体の総与ダメージや指揮作戦の勝利と同義ではない。初期4候補の「番号不一致75%」はindexの組合せ確率であり、Mob種の違いとは限らない。
+
+## 2026-10-11 — Signal指揮・群体Goalの追加回収
+
+- [原作Spore Vigil→Proto→Calamity/WombのSignalとUnit追従・探索のBytecode解析](GROUP-COMMAND-SIGNAL-BYTECODE-2026-10-11.md) — 39クラス調査のうち選定11クラス・19構造契約固定。実機NOT_RUN。
+- [19契約の再現可能な自作Bytecode検査器](tools/verify_spore_group_ai.py) と [実JARの静的検査結果JSON](verification/GROUP-COMMAND-STATIC-RESULT-2026-10-11.json) — 11/11クラスハッシュ、19/19静的条件PASS。異なるJARは拒否。
+- [AI部門のSignal派遣分岐の合成確率比較](../../../ai/evaluation/experiments/spore-signal-routing-2026-10-11/README.md) — 条件を固定した30,000回×6シナリオの数理テスト。Minecraftの勝率ではない。
+- [将軍AIの独立Signal Router設計](../../../ai/multi-agent/SIGNAL-ROUTING-CASE-STUDY-2026-10-11.md) — 原作Bytecodeからの知見と別製品への設計提案を分離。
+
+**新たな限定所見:** Vigilの退場時TRIGGER>=3のSignalは、当該メソッドでは列挙順の最初のProtoへ送られる。ProtoのCalamity派遣は待機個体ごとに50%抽選し、不成立ならWomb生成を試みる。Vigilの援軍試行前の加点と退場時の減点は、作戦の勝敗を直接評価していない。ゲーム内の再現・TPSはNOT_RUN。

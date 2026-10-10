@@ -75,3 +75,11 @@ Directorへは全ユニットの生ログでなく、戦果・損失・進路停
 AI部門は抽象的な指揮契約・情報共有・評価方式を研究する。Minecraft部門は具体的なGoal/Brain/PathNavigation、攻撃演出、ワールド変更、Forge依存・LAB/GameTestを担当する。
 
 **次:** 先行実装・論文・専門コミュニティを探して比較し、軽量な最小シミュレータを設計する。動作・性能・原作との一致はすべて UNKNOWN / NOT_RUN。
+
+## 2026-10-11 — 実MODのSignal Router調査からの追加課題
+
+[Spore 2.2.0jのVigil→Proto→Calamity/Womb指揮のBytecode解析](../../minecraft/mods/fungal-infection-spore/GROUP-COMMAND-SIGNAL-BYTECODE-2026-10-11.md) と [AI部門の独立Signal派遣比較](SIGNAL-ROUTING-CASE-STUDY-2026-10-11.md) を参照。
+
+階層型指揮は「目標の決定」だけでは足りず、偵察Signalの**誰へ配送するか**、すでに任務中の部隊の**優先度/空き**、新兵站拠点を作るときの**資源予算**、兵士の**SearchPos失効**、作戦の**成功報酬と行動試行報酬の分離**も必要。原作は選定の確率や条件が違うため、この研究成果を単一テンプレートに強制統合しない。
+
+現状はDESIGN_CANDIDATEで、実Minecraft適用や性能改善を証明していない。
