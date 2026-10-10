@@ -8,7 +8,7 @@
 
 | Queue | Target | Main categories | ANCHOR | FRONTIER | Performance state | Overall |
 |---:|---|---|---|---|---|---|
-| — | — | — | — | — | — | EMPTY / READY |
+| 1 | [AI Improvements: Performance Tuning](../mods/ai-improvements/README.md) | `TICK_SIMULATION` / `ENTITY_BLOCKENTITY` / `CACHE_DATA_STRUCTURE` | 1.20.1 Forge **target**; original adjacent source **1.20 Forge 46**, `0.5.2` @ [`89c89590`](https://github.com/BuiltBrokenModding/AI-Improvements/tree/89c89590d8160f332bd2740acd0a67c96f37f00d); binary parity pending | [`26.3`](https://github.com/BuiltBrokenModding/AI-Improvements/tree/a51cab76acf89099ea3c41393d858f9e061dbe4b) NeoForge, source inventory only | **PERFORMANCE_NOT_VERIFIED** | Selected static mechanism evidence; full analysis and runtime NOT_RUN |
 
 ## Rules
 
