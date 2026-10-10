@@ -118,3 +118,12 @@ All further MOD research follows [Minecraft analysis workflow](../../ANALYSIS-WO
 - [研究専用Forge観測器](observer/README.md)に **G12用のGoalSelector読み取り専用snapshot**を追加。load済みMobのGoal名・priority・flags・runningを、限られた数だけ出力する。**実SporeのDedicated Serverでの実行・競合の実証は依然NOT_RUN**。
 
 特に、BruteのTransportInfectedはpriority1だが制御FlagがTARGETのみ。InfectedWitchの3つのBuffAlliesGoal派生は全てpriority4でMOVE/LOOKを占有し、基底SearchAreaGoalともMOVEで競合する。InfectedConsumeFromRemainsは明示的FlagなしでcanUse中のBlock破壊処理を持つ。将軍AIのタスク割当にはMove/Lookの占有、同一優先度の任務切替、WorldMutationの副作用分離が必要な設計課題として回収した。
+
+## 2026-10-11 G12 GoalSelectorスナップショットの証拠判定
+
+[静的372件の登録表と、実ゲーム用G12観測結果の比較手順](GOAL-SNAPSHOT-EVALUATION-2026-10-11.md)を追補した。
+
+- [GoalRuntimeSampler.java](observer/src/main/java/org/kneekura/sporeobserver/GoalRuntimeSampler.java) はForge 1.20.1でコンパイル済みの受動的な実行中Goal観測器。GoalSelectorの優先順位/制御Flag/実行中状態を読み取る。原作Sporeのゲーム起動は未実施。
+- [analyze_spore_goal_snapshots.py](tools/analyze_spore_goal_snapshots.py) はrun/scenario/JAR/version/行の整合性を確認してから、**同じSelector内で同じMOVE等のFlagを要求する登録Goalの競合候補**だけを数える。実際のGoal同士の衝突・interrupt・勝率・TPSを自動PASSにしない。
+- [G12SyntheticProducer.java](observer/tests/G12SyntheticProducer.java) は自作合成データを生成。Witchのpriority4支援3個とSearchAreaGoalのMOVE競合候補6組を抽出する。BruteのTARGETとMOVE/LOOKは共通Flagがなく、同じ競合には数えない。
+- [CI #38085740754](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38085740754) のportable Java→JSONL→両Python reviewerの合成G12結合テスト、Pythonの追加6件を含む合計31件のテストがSUCCESS。Forgeの実ゲーム実行は未実施。別ジョブの最終ビルド結果はActionsで個別確認する。

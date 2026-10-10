@@ -55,3 +55,7 @@ Spore 2.2.0jの[指揮・Signal・Goal受け入れテストのrunログ検証器
 ### Sporeの輸送・支援・環境資源AIを別ジャンルとして回収（2026-10-11）
 
 Minecraft部門の[Spore AI/配下48クラスの固定索引・20件の直接Bytecode検査](../minecraft/mods/fungal-infection-spore/AI-GOAL-LAYER-2026-10-11.md) から、兵員輸送（TransportInfected）、後衛支援（BuffAlliesGoal）、飢餓/残骸回収（InfectedConsumeFromRemains）、広域CDU制圧（SporeBurstSupport）、Scent生成の技術を**用途ごとの独立候補**として記録。とくにGoal.canUse相当内のBlock破壊や、ブロック硬さ計算の[座標とBlockStateの食い違い](../minecraft/mods/fungal-infection-spore/GARGOYL-DYNAMICTREES-HARDNESS-2026-10-11.md)は、将軍AIの大規模な部隊運用・軽量化・可逆な地形変更を設計する際の反例となる。実際の性能・不具合再現はNOT_RUN。
+
+### G12制御フラグ競合候補の検証器（2026-10-11）
+
+[SporeのGoalSelector登録372件と、G12実行中Goal snapshotの解析基盤](../minecraft/mods/fungal-infection-spore/GOAL-SNAPSHOT-EVALUATION-2026-10-11.md)を回収した。Witchのpriority4 MOVE/LOOK支援と探索Goal、BruteのTARGETのみの輸送Goalを分離して扱う。Javaから生成した**合成fixture**では同一Selector/共有Flagの候補6組を見つけるが、原作ゲームでの衝突は未観測。将軍AIには、タスク優先度とUnitの制御資源（MOVE/LOOK/Target/WorldMutation）を分ける必要があるという**設計候補**にとどめる。

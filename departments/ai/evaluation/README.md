@@ -25,3 +25,7 @@
 ### Minecraft実機向けの証拠収集契約（実機はNOT_RUN）
 
 [Spore G09〜G13 observation validation gate](../../minecraft/mods/fungal-infection-spore/RUN-EVIDENCE-GATE-2026-10-11.md) はrun/scenario/artifact/worldを照合し、記録が不足する場合はINCONCLUSIVEのままにする。研究用観測器の受け入れ検証であり、正規LAB session/owner/cleanupや実ゲーム結果を代替しない。Python 3.13の合成テスト15件と[CI](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38081259925)は成功したがForge runtimeは未実行。
+
+### Spore G12 GoalSelector登録競合候補の検証
+
+[原作JARの登録表とread-only GoalSelector snapshotの整合性を検証する方法](../../minecraft/mods/fungal-infection-spore/GOAL-SNAPSHOT-EVALUATION-2026-10-11.md)と[所有するPython判定器](../../minecraft/mods/fungal-infection-spore/tools/analyze_spore_goal_snapshots.py)を追加。G12 Java合成ログではpriority4のMOVE共有候補6組を数え、runtime_pass=falseを保証。**原作Spore実機、GameTest、Goal中断や性能の確認ではない**。
