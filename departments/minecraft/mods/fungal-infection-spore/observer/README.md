@@ -29,8 +29,8 @@ G09〜G12はスナップショットだけで十分な証拠にはならない�
 
 Java 17、ForgeGradle 6、Forge 1.20.1-47.4.10 を宣言。元Spore JARはビルド・GitHub Actionsへ取得しない。TECH-HUBルートから既存Kirby用Gradle 8.8 wrapperを再利用する。
 
-- Windows: departments/minecraft/projects/kirby-mod/gradlew.bat -p departments/minecraft/mods/fungal-infection-spore/observer compileJava processResources --no-daemon
-- Linux: bash departments/minecraft/projects/kirby-mod/gradlew -p departments/minecraft/mods/fungal-infection-spore/observer compileJava processResources --no-daemon
+- Windows: departments/minecraft/projects/kirby-mod/gradlew.bat -p departments/minecraft/mods/fungal-infection-spore/observer build --no-daemon
+- Linux: bash departments/minecraft/projects/kirby-mod/gradlew -p departments/minecraft/mods/fungal-infection-spore/observer build --no-daemon
 - Pythonログ受入: py -3 departments/minecraft/mods/fungal-infection-spore/tools/evaluate_spore_trace.py FILE.jsonl
 - Portable writer: [TraceSink.java](src/main/java/org/kneekura/sporeobserver/core/TraceSink.java) / [TraceSinkTest.java](tests/TraceSinkTest.java)。Java17で個別コンパイル・実行可能。
 
@@ -59,3 +59,10 @@ LABの [現行実行権限](../../../CURRENT-HANDOFF-2026-10-02.md) と [元の�
 生成結果を既存の[evaluate_spore_trace.py](../tools/evaluate_spore_trace.py)へ渡したローカル試験では、3条件のサンプルを認識しつつ、status=SYNTHETIC_FIXTURE_ONLY、runtime_pass=falseを維持した。CIにも同じ横断テストを追加した（実行結果は別途workflowログで確認）。この結果をG13実サーバー性能PASSと呼ばない。
 
 [G13計測コード](src/main/java/org/kneekura/sporeobserver/SporeEvents.java)の観測時間はForgeのTickEvent START〜ENDで、計測器の介入があり、サーバー本体の正式MSPTと同義ではない。別途計測器OFF/ONで同じ環境のオーバーヘッドを比較する必要がある。
+
+
+### JARパッケージ検証ゲート
+
+CIでは自作Java17のソースをForgeGradle 6でビルドし、生成JARの中身を検査する。所定の観測器classと META-INF/mods.toml が存在し、**原作com/Harbinger/Sporeのclassが一切含まれない**ことが必要。成果物の公開配布や、原作ゲームでの動作まで自動保証するものではない。
+
+G13の記録には tick_ms に加え、loaded_chunks と vanilla_forced_chunks_only も含む。後者はVanillaの強制ロード範囲であり、Forge独自の全ticket数ではない。tick_msはServerTickEvent START〜ENDの未校正値なので、独立したprofiler計測を行うまではTPSや正式MSPTと同義にしない。
