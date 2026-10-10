@@ -19,3 +19,9 @@
 ## Minecraft群体AI MOD候補（2026-10-11）
 
 [調査対象MODの発掘一覧と固定Git SHA/JAR入手候補](multi-agent/MINECRAFT-MOD-SCOUT-2026-10-11.md) を参照。これは **発見・初期ソース確認** であり、A1〜A6の実装や性能検証を完了したものではない。既存のMinecraft解析キューを置き換えない。
+
+
+### 実JARの一次解析から進んだ項目（2026-10-11）
+
+[Spore Proto Hivemindの4×4指揮・軽量学習、部隊連携の比較](multi-agent/PROTO-HIVEMIND-CASE-STUDY-2026-10-11.md) を新規登録。原作[JAR解析と証拠](../minecraft/mods/fungal-infection-spore/README.md)はMinecraft部門が所有。A1/A3の設計材料が増えたが、シミュレーション・実測はNOT_RUN。
+
