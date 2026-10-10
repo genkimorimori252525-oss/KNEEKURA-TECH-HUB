@@ -75,6 +75,11 @@ public final class GoalRunningStateDiff {
                 "capture_scope", "END_TICK_RUNNING_STATE_DIFF_NOT_GOAL_CALLBACK");
     }
 
+    /** An unseen entity is forgotten; returning later cannot create a fake gap-spanning change. */
+    public void retainOnly(Set<String> currentlySampled) {
+        previous.keySet().retainAll(currentlySampled);
+    }
+
     public void remove(String entityUuid) { previous.remove(entityUuid); }
     public void clear() { previous.clear(); }
 }
