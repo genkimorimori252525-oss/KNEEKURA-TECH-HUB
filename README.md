@@ -10,6 +10,12 @@ Internal-purpose technology research infrastructure for discovering large amount
 2. **Evidence-backed Technology Encyclopedia** — curated claims with traceable evidence.
 3. **Design Research Laboratory** — comparison, experiments, and KNEEKURA application hypotheses.
 
+## AI Technology Department
+
+[AI技術部門](departments/ai/README.md) を `departments/ai/` に新設。基礎AI・群体知能・学習/進化・LLMエージェント・評価を扱い、既存Knowledge Coreの証拠管理・レビュー規則をそのまま使う。Minecraft固有の実装・JAR研究は従来の部門に残す。
+
+最初の研究テーマは [階層型指揮・群体知能](departments/ai/multi-agent/HIERARCHICAL-COMMAND-AI-v0.md)（将軍 → 指揮官 → 軽量な兵士）。**現状は設計候補であり、実行環境・モデル学習・実機性能は未実装・未確認。**
+
 ## Minecraft Technology Department
 
 > **Current Minecraft entry point:** [`departments/minecraft/CURRENT-HANDOFF-2026-10-02.md`](departments/minecraft/CURRENT-HANDOFF-2026-10-02.md). **`main` is the authoritative Minecraft/MOD-AI/LAB baseline.** The former standalone KNEEKURA-LAB source is now vendored at `departments/minecraft/lab/` and is the canonical experiment/observation source for new Minecraft MOD-AI work. Knowledge/Core and LAB responsibilities remain separated in code, but they now share one repository and one revision. Historical LAB runs keep their original repository/SHA provenance.

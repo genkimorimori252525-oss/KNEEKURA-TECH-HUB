@@ -2,6 +2,13 @@
 
 KNEEKURA TECH HUB の Minecraft MOD 開発専用部門。
 
+## 独立AI部門との連携（2026-10-11）
+
+[AI専門研究部門](../ai/README.md) は指揮階層・群体知能・学習・AI評価の一般化を担当し、Minecraft部門はMob実装、Forge API、JAR/Bytecode、LAB/GameTestでの検証を担当する。`mod-ai/`（MOD制作AI基盤）を改名・移動しない。
+
+- [階層型指揮・群体知能 v0](../ai/multi-agent/HIERARCHICAL-COMMAND-AI-v0.md) — **独立した将来設計候補**
+- [Scape and Run: Parasites 1.9.21 Bytecode解析](mods/scape-and-run-parasites/COMBAT-AI-BYTECODE-2026-10-11.md) — **実物の旧版JARの限定的な静的証拠**
+
 ## 互換性方針 — Anchor + Frontier
 
 この部門は **Minecraft 1.20.1 + Forge に固定しない**。
