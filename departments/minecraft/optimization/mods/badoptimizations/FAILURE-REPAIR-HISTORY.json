@@ -1,0 +1,275 @@
+{
+  "format": "kneekura.failure-history.research-draft.v1",
+  "repository": "https://github.com/imthosea/BadOptimizations",
+  "created_at": "2026-10-11",
+  "import_ready": false,
+  "history_adapter_status": "NOT_IMPORTED",
+  "scope": {
+    "track": "ANCHOR or explicitly marked comparative",
+    "head_revision": "f1540411b21e8458d6d143d00f53743e7a9bc893",
+    "history_window": "2024–2026 issues #76/#84/#109/#126 and actual lightmap fixes",
+    "queries": [
+      "lightmap",
+      "polytone",
+      "darkness",
+      "gamma"
+    ]
+  },
+  "coverage": {
+    "status": "PARTIAL",
+    "inspected_evidence_ids": [
+      "issue-76",
+      "commit-dd8c2c1d",
+      "issue-84",
+      "commit-e6085b58",
+      "issue-109"
+    ],
+    "deferred": [
+      "full upstream issue/PR query + pagination",
+      "release JAR SHA and bytecode parity",
+      "direct performance and correctness GameTests",
+      "CAS original byte/document IDs"
+    ],
+    "unavailable": [
+      "original raw issue/diff CAS profile not minted"
+    ]
+  },
+  "evidence_notes": {
+    "source_tree_sha": "db90837b3164e0e6a211891528db8e66aa0ae5b9",
+    "source_tree_blobs": 65,
+    "java_sources_indexed": 43,
+    "source_version_boundary": "source gradle declares 2.4.1 and 1.20.1 Forge (binary parity unknown)",
+    "source_license": "MIT",
+    "byte_artifacts_acquired": false,
+    "cas_index_snapshot_id": null,
+    "cas_document_id": null,
+    "source_mechanism_state": "EVIDENCE_BACKED_STATIC_SELECTED_ONLY",
+    "runtime": "NOT_RUN",
+    "benchmark": "PERFORMANCE_NOT_VERIFIED"
+  },
+  "cases": [
+    {
+      "case_id": "BO-76",
+      "origin": "UPSTREAM",
+      "track": "COMPARATIVE_EARLY_LIGHTMAP",
+      "environment": {
+        "minecraft": "1.20.x family",
+        "mod": "Polytone resourcepack custom lightmap"
+      },
+      "affected_symbols": [],
+      "before_revision": "135ed97319dec9d669a85b870fcd9c4ce1cbdb54",
+      "after_revision": "dd8c2c1dc793a11c3c2e10e453a96001654b9023",
+      "evidence": [
+        {
+          "id": "issue-76",
+          "role": "issue",
+          "url": "https://github.com/imthosea/BadOptimizations/issues/76",
+          "index_snapshot_id": null,
+          "document_id": null
+        },
+        {
+          "id": "commit-dd8c2c1d",
+          "role": "diff",
+          "url": "https://github.com/imthosea/BadOptimizations/commit/dd8c2c1dc793a11c3c2e10e453a96001654b9023",
+          "index_snapshot_id": null,
+          "document_id": null
+        }
+      ],
+      "causal_chain": [
+        "Lightmap caching enabled with Polytone",
+        "Mod-specific invalidation events absent from cache predicate",
+        "Disable skycolor and lightmap caching if polytone is present"
+      ],
+      "symptom": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Polytone custom lightmap fails to refresh after resourcepack toggle",
+        "evidence_ids": [
+          "issue-76"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Lightmap caching enabled with Polytone",
+        "evidence_ids": [
+          "issue-76"
+        ]
+      },
+      "root_cause": {
+        "basis": "INFERENCE",
+        "text": "Mod-specific invalidation events absent from cache predicate",
+        "evidence_ids": [
+          "commit-dd8c2c1d"
+        ]
+      },
+      "repair": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "Disable skycolor and lightmap caching if polytone is present",
+        "evidence_ids": [
+          "commit-dd8c2c1d"
+        ]
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Third-party shader/color hooks must invalidate cache or disable optimization",
+        "evidence_ids": [
+          "commit-dd8c2c1d"
+        ]
+      },
+      "reproduction": {
+        "state": "REPORTED",
+        "evidence_ids": [
+          "issue-76"
+        ]
+      },
+      "fix_verification": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      }
+    },
+    {
+      "case_id": "BO-84",
+      "origin": "UPSTREAM",
+      "track": "ANCHOR_1.20.1_USER_REPORT",
+      "environment": {
+        "minecraft": "1.20.1",
+        "loader": "not supplied"
+      },
+      "affected_symbols": [],
+      "before_revision": "9f6f40402f58ecb8ae3f49979661620217cff6be",
+      "after_revision": "e6085b58154adb90ca99db99741997e74ef27cd6",
+      "evidence": [
+        {
+          "id": "issue-84",
+          "role": "issue",
+          "url": "https://github.com/imthosea/BadOptimizations/issues/84",
+          "index_snapshot_id": null,
+          "document_id": null
+        },
+        {
+          "id": "commit-e6085b58",
+          "role": "diff",
+          "url": "https://github.com/imthosea/BadOptimizations/commit/e6085b58154adb90ca99db99741997e74ef27cd6",
+          "index_snapshot_id": null,
+          "document_id": null
+        }
+      ],
+      "causal_chain": [
+        "Active DARKNESS effect while cache enabled",
+        "Dirty predicate missed continuous darkness flicker",
+        "Make active darkness effect a reason for lightmap refresh"
+      ],
+      "symptom": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Darkness effect stays dim instead of pulsing",
+        "evidence_ids": [
+          "issue-84"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Active DARKNESS effect while cache enabled",
+        "evidence_ids": [
+          "issue-84"
+        ]
+      },
+      "root_cause": {
+        "basis": "INFERENCE",
+        "text": "Dirty predicate missed continuous darkness flicker",
+        "evidence_ids": [
+          "commit-e6085b58"
+        ]
+      },
+      "repair": {
+        "basis": "DIRECT_OBSERVATION",
+        "text": "Make active darkness effect a reason for lightmap refresh",
+        "evidence_ids": [
+          "commit-e6085b58"
+        ]
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Continuous effects require time-dependent invalidation, not only effect identity changes",
+        "evidence_ids": [
+          "commit-e6085b58"
+        ]
+      },
+      "reproduction": {
+        "state": "REPORTED",
+        "evidence_ids": [
+          "issue-84"
+        ]
+      },
+      "fix_verification": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      }
+    },
+    {
+      "case_id": "BO-109",
+      "origin": "UPSTREAM",
+      "track": "COMPARATIVE_NEAR_ANCHOR",
+      "environment": {
+        "minecraft": "source author's 2025 discussion; version uncertain",
+        "mod": "Gamma Utils"
+      },
+      "affected_symbols": [],
+      "before_revision": null,
+      "after_revision": null,
+      "evidence": [
+        {
+          "id": "issue-109",
+          "role": "issue",
+          "url": "https://github.com/imthosea/BadOptimizations/issues/109",
+          "index_snapshot_id": null,
+          "document_id": null
+        }
+      ],
+      "causal_chain": [
+        "Gamma Utils dynamically adjusts strength",
+        "Root cause UNCONFIRMED",
+        "Repair not evidenced"
+      ],
+      "symptom": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Dynamic Night Vision strength may change with effect presence constant",
+        "evidence_ids": [
+          "issue-109"
+        ]
+      },
+      "trigger_conditions": {
+        "basis": "AUTHOR_CLAIM",
+        "text": "Gamma Utils dynamically adjusts strength",
+        "evidence_ids": [
+          "issue-109"
+        ]
+      },
+      "root_cause": {
+        "basis": "UNKNOWN",
+        "text": null,
+        "reason": "No code-supported causal repair chain or same-version reproduction"
+      },
+      "repair": {
+        "basis": "UNKNOWN",
+        "text": null,
+        "reason": "No verified repair source diff"
+      },
+      "lesson": {
+        "basis": "INFERENCE",
+        "text": "Key brightness cache on intensity or expose third-party dirty callback, not effect flag alone",
+        "evidence_ids": [
+          "issue-109"
+        ]
+      },
+      "reproduction": {
+        "state": "REPORTED",
+        "evidence_ids": [
+          "issue-109"
+        ]
+      },
+      "fix_verification": {
+        "state": "NOT_RUN",
+        "evidence_ids": []
+      }
+    }
+  ]
+}
