@@ -1,0 +1,39 @@
+{
+  "schema": "kneekura.optimization.sourcesnapshot.partial-v1",
+  "captured_at": "2026-10-11",
+  "subject": "Dynamic FPS",
+  "requested": "dynamic-fps-3.11.4+minecraft-1.20.0-forge.jar",
+  "anchor": {
+    "source_repo": "juliand665/Dynamic-FPS",
+    "branch": "1.20.0",
+    "commit": "499b5eed268ad0d55be7e3dc4e3384d53bacad7b",
+    "git_tree_sha": "4277f24080c022c4ab33cdf29e141e59718c0544",
+    "source_blobs": 188,
+    "java": 69,
+    "truncated": false,
+    "source_bodies_all_acquired": false,
+    "selected_source_bodies_read": true,
+    "mod_version": "3.11.4",
+    "mc_dev": "1.20.0",
+    "supported_mc": "1.20-1.20.1",
+    "forge_module": true,
+    "license": "MIT (code and translations)"
+  },
+  "release": {
+    "main_tag_commit": "673942b81a77267a24bfbb1c109ddae39f774bb7",
+    "main_tag_is_parent_of_anchor_commit": true,
+    "actual_jar_uploaded": false,
+    "sha256": null,
+    "source_binary_parity": "NOT_VERIFIED"
+  },
+  "mechanisms": [
+    "FOCUS_IDLE_BACKGROUND_THROTTLING",
+    "FRAME_RENDER_SKIP_WITH_MIN_15_FPS_ENGINE",
+    "GRAPHICS_OPTIONS_SNAPSHOT_RESTORE",
+    "GLFW_CALLBACK_CHAIN"
+  ],
+  "performance": "PERFORMANCE_NOT_VERIFIED",
+  "runtime": "NOT_RUN",
+  "history": "PARTIAL_JSON_DRAFT_NOT_IMPORTABLE",
+  "cas_ids": null
+}
