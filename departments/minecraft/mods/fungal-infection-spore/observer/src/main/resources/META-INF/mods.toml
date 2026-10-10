@@ -1,0 +1,27 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+[[mods]]
+modId="kneekura_spore_observer"
+version="${observer_version}"
+displayName="KNEEKURA Spore Research Observer"
+authors="KNEEKURA-TECH-HUB"
+description="Inert by default, opt-in passive original Spore 2.2.0j telemetry for disposable research runs."
+[[dependencies.kneekura_spore_observer]]
+modId="forge"
+mandatory=true
+versionRange="[47,)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.kneekura_spore_observer]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,1.21)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.kneekura_spore_observer]]
+modId="spore"
+mandatory=false
+versionRange="[0,)"
+ordering="AFTER"
+side="SERVER"
