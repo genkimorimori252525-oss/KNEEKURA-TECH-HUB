@@ -12,6 +12,13 @@
 - 原JAR・Java decompile全文・画像・音声をGitHub公開履歴へ保存しない。詳細は [ARTIFACT-RECEIPT-2026-10-11.json](ARTIFACT-RECEIPT-2026-10-11.json)。
 - 分析原則：[ANALYSIS-WORKFLOW](../../ANALYSIS-WORKFLOW.md)、[ANALYSIS-SPEC](../../ANALYSIS-SPEC-v1.md)、[AI研究手順](../../../ai/RESEARCH-WORKFLOW.md)。技術の確認とゲームでの実行を混同しない。
 
+
+### 2026-10-11 継続監査の入口と訂正
+
+[最新追補：複数Proto、学習の誤帰属、moraleBoost、Biomass、chunk tickets](HIVEMIND-LEARNING-LIFECYCLE-AUDIT-2026-10-11.md) および[選定11クラスの原本内SHA-256](BYTECODE-CONTINUATION-RECEIPT-2026-10-11.json) を参照。
+
+この文書のProtoTargetingのクラス所在を修正：実JARの正確なパスは Sentities/AI/NeuralProcessing/ProtoAIs/ProtoTargeting.class であり、LocHiv配下ではない。またProtoの学習時 [-1,1] clampには、別の moraleBoost メソッドからの**非clamp加算**という例外がある。更新則の限界と異なるMob候補への誤評価の可能性は上記追補が優先。
+
 ## 1. 真の「軽量に学習するHivemind」：Proto
 
 **ソースの同定**：com/Harbinger/Spore/Sentities/Organoids/Proto.class。
@@ -50,7 +57,7 @@
 
 | クラス・メソッド | 原作JARからの確認 |
 | --- | --- |
-| Sentities/AI/LocHiv/ProtoTargeting | Protoの標的を近くの Infected へ渡す。config proto_rangeに依存する |
+| Sentities/AI/NeuralProcessing/ProtoAIs/ProtoTargeting | Protoの標的を近くの Infected へ渡す。config proto_rangeに依存する |
 | Sentities/AI/LocHiv/LocalTargettingGoal | 近くの未ターゲットInfectedへ現在の標的やSearchPosを伝播。AABB拡張距離最大32。確率条件あり |
 | Sentities/AI/CalamitiesAI/CalamityInfectedCommand | Calamityを中心にAABB拡張32で感染Mobを列挙し、標的やSearchPosを渡す。起動には乱数0/100と標的/探索位置条件を使う |
 | Sentities/AI/LocHiv/FollowOthersGoal | SEARCH_INTERVAL 20、FOLLOW_DISTANCE 32、STOP_FOLLOWING_DISTANCE 3、TELEPORT_DISTANCE 64等を含む。全分岐・到達率の詳細は未検証 |
