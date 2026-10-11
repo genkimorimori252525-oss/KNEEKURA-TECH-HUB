@@ -156,9 +156,18 @@ public final class CombatSimulationSelfTest {
         yes(responseAsset.threatWithinCorridorTicks()<=54
                         && responseAsset.closestThreatBlocks()>81.90,
                 "new observed-only escort diversion improves original unchanged rear V3 55tick/81.231b failure without disguising the breach");
+        yes(responseAsset.threatWithinCorridorTicks()<=52
+                        && responseAsset.closestThreatBlocks()>82.60,
+                "observed altitude-advantage source energy trade improves the unchanged aft 54/190 and 81.923b baseline, but remains FAILED under 95b");
         for(var pair:reactionEscort.pairs().values())
             yes(pair.closestApproachBlocks()>=6.0 && pair.dangerouslyCloseTicks()==0,
                     "improved aft escort never trades 6b body separation for protection: "+pair);
+        for(int i=1;i<=2;i++) {
+            var spec=members.get(i);
+            Vec3 after=reactionEscort.finalSnapshot().units().get(spec.unitId()).aircraft().position();
+            yes(after.add(spec.startPosition().scale(-1)).length()>=30.0,
+                    "aft exact-source escort satisfies original 30b start-to-finish NET DISPLACEMENT, not a fictitious 30b hostile safety radius");
+        }
         System.out.println("Exact-reaction SOURCE B17 escort: "+responseAsset
                 +" operationalFailed="+!reactionEscort.passesSafetyGates());
         yes(result.units().get("cargo").pathBlocks()>30,"bomber travels on mission");
@@ -213,6 +222,8 @@ public final class CombatSimulationSelfTest {
                         && reactionPreparedAsset.firstThreatEntryTick()==-1
                         && reactionPreparedAsset.closestThreatBlocks()>95.0,
                 "forward V3 reaches original protection requirement by real climb and lateral flight");
+        yes(reactionPreparedAsset.closestThreatBlocks()>112.37,
+                "source high-side guidance retains at least the 112.379b prepared defense margin");
         yes(reactionPreparedAsset.closestThreatBlocks()>98.570,
                 "original prepared 0/190 protection retains the previous 98.570b closest-threat margin");
         yes(reactionPrepared.units().get("cargo").groundedTicks()==0
@@ -224,6 +235,13 @@ public final class CombatSimulationSelfTest {
         for (var pair : reactionPrepared.pairs().values())
             yes(pair.closestApproachBlocks() >= 6.0 && pair.dangerouslyCloseTicks() == 0,
                     "exact-reaction prepared screen cannot trade real body safety for protection");
+        for (int i=1;i<=2;i++) {
+            var original=reactionPrepared.finalSnapshot().units().get(members.get(i).unitId())
+                    .aircraft().position();
+            Vec3 start=new Vec3(i==1?-27:27,190,115);
+            yes(original.add(start.scale(-1)).length()>=30.0,
+                    "forward prepared escort net movement meets original 30b gross-geometry independent gate");
+        }
         System.out.println("EXACT_REACTION_PREPARED_ESCORT "
                 +reactionPreparedAsset+" failedGates="+reactionPrepared.failedOperationalGates());
         yes(preparedCover.units().get("cargo").groundedTicks()==0
@@ -490,6 +508,71 @@ public final class CombatSimulationSelfTest {
         yes(Math.abs(powered.steeringPoint().y()-spooling.steeringPoint().y()-50)<1e-9,
                 "observed source-engine spool controls the bounded early descending screen only");
     }
+    private static void observedHighSideEnergyTrade(Path csv) throws Exception {
+        var type=AircraftAtlasMain.load(csv).stream()
+                .filter(item->item.aircraftId().equals("warfare_wings:p47n"))
+                .findFirst().orElseThrow();
+        var profile=TacticalAirAI.Profile.fromAtlas(AircraftAtlasMain.evaluateReaction(type));
+        Vec3 selfPosition=new Vec3(-40,190,0);
+        var stillSpooling=State.airborne(selfPosition,new Vec3(0,0,.8));
+        var lowTrack=new TacticalAirAI.Contact("visible-low-raider",
+                new Vec3(0,170,150),new Vec3(0,0,-1.0),true);
+        var highSide=new TacticalAirAI.Frame(profile,type.model(),stillSpooling,
+                TacticalAirAI.Mission.ESCORT,GOAL,HOME,lowTrack,new Vec3(0,170,0),
+                null,1,1,0,false,0,new Vec3(0,0,.4));
+        var guidance=TacticalAirAI.decide(highSide,TacticalAirAI.Memory.INITIAL);
+        yes(guidance.maneuver()==TacticalAirAI.Maneuver.ESCORT_SCREEN
+                        && guidance.reasonCode().equals("ESCORT_OBSERVED_HIGH_SIDE_ENERGY_TRADE"),
+                "observed vertical superiority and low measured engine power alone select a bounded escort speed-building descent");
+        yes(!guidance.firingWindowCandidate()
+                        && Double.isFinite(guidance.controls().x())
+                        && Double.isFinite(guidance.controls().z()),
+                "high-side speed trade issues only finite raw IA steering, no fake weapon effect");
+        var engineRecovered=new State(0,selfPosition,new Vec3(0,0,.8),
+                0,0,0,0,0,0,0,0,0,1,.25,1,0,false,false);
+        var poweredFrame=new TacticalAirAI.Frame(profile,type.model(),engineRecovered,
+                TacticalAirAI.Mission.ESCORT,GOAL,HOME,lowTrack,new Vec3(0,170,0),
+                null,1,1,0,false,0,new Vec3(0,0,.4));
+        var recovered=TacticalAirAI.decide(poweredFrame,TacticalAirAI.Memory.INITIAL);
+        yes(recovered.reasonCode().equals("ESCORT_PREDICTIVE_SCREEN")
+                        && Math.abs(recovered.steeringPoint().y()-guidance.steeringPoint().y()-85)<1e-9,
+                "after actual observed engine power >=0.22 early deep-intercept altitude is not continually commanded");
+        var nearlyLevel=new TacticalAirAI.Contact("visible-nearly-level",
+                new Vec3(0,183,150),lowTrack.velocity(),true);
+        var lowerAdvantage=new TacticalAirAI.Frame(profile,type.model(),stillSpooling,
+                TacticalAirAI.Mission.ESCORT,GOAL,HOME,nearlyLevel,new Vec3(0,170,0),
+                null,1,1,0,false,0,new Vec3(0,0,.4));
+        yes(!TacticalAirAI.decide(lowerAdvantage,TacticalAirAI.Memory.INITIAL)
+                        .reasonCode().equals("ESCORT_OBSERVED_HIGH_SIDE_ENERGY_TRADE"),
+                "a smaller than 12b observed height advantage does not invent kinetic energy");
+        var realTerrain=new TacticalAirAI.Frame(profile,type.model(),stillSpooling,
+                TacticalAirAI.Mission.ESCORT,GOAL,HOME,lowTrack,new Vec3(0,170,0),
+                null,1,1,140,false,0,new Vec3(0,0,.4));
+        var safeFloor=TacticalAirAI.decide(realTerrain,TacticalAirAI.Memory.INITIAL);
+        yes(safeFloor.steeringPoint().y()>=185
+                        && safeFloor.reasonCode().equals("ESCORT_OBSERVED_HIGH_SIDE_ENERGY_TRADE"),
+                "energy-trade waypoint is clamped to measured ground plus 45b; ahead-terrain safety still owns override");
+        var noContact=new TacticalAirAI.Frame(profile,type.model(),stillSpooling,
+                TacticalAirAI.Mission.ESCORT,GOAL,HOME,null,new Vec3(0,170,0),
+                null,1,1,0,false,0,new Vec3(0,0,.4));
+        yes(!TacticalAirAI.decide(noContact,TacticalAirAI.Memory.INITIAL)
+                        .reasonCode().equals("ESCORT_OBSERVED_HIGH_SIDE_ENERGY_TRADE"),
+                "no observed contact means no descent prediction from a hidden enemy");
+        var friendly=new TacticalAirAI.Contact("visible-nonhostile",
+                lowTrack.position(),lowTrack.velocity(),false);
+        var noHostile=new TacticalAirAI.Frame(profile,type.model(),stillSpooling,
+                TacticalAirAI.Mission.ESCORT,GOAL,HOME,friendly,new Vec3(0,170,0),
+                null,1,1,0,false,0,new Vec3(0,0,.4));
+        yes(!TacticalAirAI.decide(noHostile,TacticalAirAI.Memory.INITIAL)
+                        .reasonCode().equals("ESCORT_OBSERVED_HIGH_SIDE_ENERGY_TRADE"),
+                "an observed nonhostile cannot masquerade as a raider for the new policy");
+        var shortFuel=new TacticalAirAI.Frame(profile,type.model(),stillSpooling,
+                TacticalAirAI.Mission.ESCORT,GOAL,HOME,lowTrack,new Vec3(0,170,0),
+                null,.05,1,0,false,0,new Vec3(0,0,.4));
+        yes(TacticalAirAI.decide(shortFuel,TacticalAirAI.Memory.INITIAL).maneuver()
+                        ==TacticalAirAI.Maneuver.RETURN_HOME,
+                "critical fuel homeward priority remains above nonessential energy-trade escort guidance");
+    }
     private static void everyAtlasAirframe(Path csv) throws Exception {
         var roster=AircraftAtlasMain.load(csv);
         yes(roster.size()==24,"exact source Atlas type count");
@@ -538,6 +621,7 @@ public final class CombatSimulationSelfTest {
         observedEnemySafety(csv);
         observedCrossingIntercept(csv);
         observedEscortDrag(csv);
+        observedHighSideEnergyTrade(csv);
         everyAtlasAirframe(csv);
         System.out.println("CombatSimulationSelfTest PASS: "+checks
                 +" assertions, source-only 1v1/2v2/mixed escort/retreat; NO_HITS_NO_KILLS");

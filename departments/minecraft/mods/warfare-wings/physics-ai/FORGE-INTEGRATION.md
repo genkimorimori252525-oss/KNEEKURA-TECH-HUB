@@ -2,6 +2,58 @@
 
 Status: **exact-JAR Forge 1.20.1 GameTest measured; current 19/20 tests PASS, B-17 operational protection FAILED**. The pinned owner Warfare Wings JAR and matching IA JAR were hash-verified and tested locally. This remains an experimental Forge integration with no weapon firing and no claim of full source/microkernel-to-Minecraft parity.
 
+## Current development integration — common observed CPA / guarded large-squadron 3D safety
+
+The original owner-local Java17/Gradle8.8 Forge 47.4.20 was **run again on the
+new integrated shared-CPA/high-side/4+-radio-wingman safety source**, with
+both exact original JAR checks in place, identical aircraft starting
+positions, and unrelaxed original acceptance gates. The authentic native
+GameTest runner **completed all 20 tests: 19 PASS / 1 B-17 FAILED** and
+returned nonzero exactly as the strict game test demands. The original
+five-aircraft B-17 remained **FAILED: 81/340 real physical ticks inside
+the 95b protectee radius, nearest 65.02005004882812b**. Independent
+read-only actual Minecraft control/position receipt verifier separately
+measured **81/340, 65.020052b**. This is a genuine unresolved protection
+failure, not an instrumentation/start geometry adjustment.
+
+The same original re-execution independently confirmed:
+
+| Original-JAR requirement | Current measured result | Verdict |
+|---|---|---|
+| Original 280tick 2v2 simultaneous four aircraft | Min pair **13.183515b**; zero pairs within 6b, source-observed engagement | PASS geometric only |
+| B-17 + two genuine P-47N escorts vs two A6M, original 340tick | Min B17-attacker **65.020052b**, **81/340** inside 95b; all 5 aircraft physically update | **FAILED** protection |
+| Original 3 B-17/escort independent current hostile FOV/LOS selection receipts | Actual target ranking with two concurrently visible opponents per actor; all 341 states checked | PASS provenance/contact, **NOT** protection |
+| Original 840tick IL-2 and B-17 attack ingress, egress and returning | 841 actual Entity states each; nearest IL2/B17 separation **145.883357b** | PASS approach/egress/RTB geometry, no weapon/landing claim |
+| 35 actual original-JAR recorded-control Physics Twin replays | 24 distinct airframes, 5,880 paired ticks; max final position error **0.001775711195b** under distinct 0.01b free-air gate | PASS only free-air open-loop recorded-control physics |
+| Actual weapon slots/ammo/muzzle-friendly corridor/owner/kill attribution | Original bytecode and **every** real no-fire Frame source constructor inspected; missing end-to-end safety proof | **FAIL-CLOSED**, no autonomous MG/bomb/torpedo |
+
+The **single pure Java** `ObservedProtectedAssetThreatSelection` now owns
+the original 48tick observed-CPA threat score and 8b re-sighting-based
+choice hysteresis. The exact Forge `LiveThreatPriority` delegates to it;
+the external SOURCE Twin explicitly supplies only each actor's own freshly
+visible hostile contacts and legitimate current same-team B-17 state.
+Previously the Twin's unrelated **75-point cross-wingman target-load
+penalty** gave the right P-47N `control_x=+0.109868` toward raider-2 on t1,
+while REAL observed controls gave **-1.0 toward raider-1**. The common
+selection independently reproduces **t1=-1.0** and subsequent t2 actual
+yaw **0.268753497° SOURCE vs 0.268753499° REAL**. This is evidence for
+the scoped causal control-decision/actuation consistency only; full 340tick
+closed-loop Twin and REAL B-17 outcomes still diverge.
+
+External 24-unique-source stress now explicitly runs 64 independently seeded
+simultaneous 24-aircraft ×240tick cases under the original 6b pair and
+95b asset gates. The guarded 4+-ally observation/radio-mode vertical
+deconfliction improved source under6b from **5/64 seeds / 30 pair ticks /
+min1.699b to 0/64 seeds / 0 pair ticks / min6.926b**; nonetheless
+**all 64 B-17 protection scenarios remain FAILED**. Both the real
+340tick original and the exact SOURCE 190tick aft/forward original gates
+are unchanged. A separate bounded high-side source escort waypoint (only
+if actual observed enemy >=12b below a spooling engine) reduced distinct
+original SOURCE V3 aft B-17 exposure from 54 to 52 of 190 ticks, **still
+FAILED**, with prepared forward zero ingress still PASS. No aircraft is
+teleported, no hit or kill is spoofed and historical airframe nationality
+remains non-authoritative for friend/foe orders.
+
 ## Latest owner-runner independent evidence — `7b5bc29` (2026-10-11)
 
 The owner-controlled exact-original-JAR GitHub Actions

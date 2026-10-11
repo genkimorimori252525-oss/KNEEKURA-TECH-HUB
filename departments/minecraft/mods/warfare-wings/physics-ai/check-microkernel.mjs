@@ -67,6 +67,7 @@ try {
     path.join(mainDir, 'CombatSimulation.java'),
     path.join(mainDir, 'StrikeSimulation.java'),
     path.join(mainDir, 'TacticalAirAI.java'),
+    path.join(mainDir, 'ObservedProtectedAssetThreatSelection.java'),
     path.join(mainDir, 'HistoricalDoctrineOrders.java'),
     path.join(mainDir, 'TacticalScenarioMain.java'),
     path.join(testDir, 'Ia133MicrokernelSelfTest.java'),
@@ -77,11 +78,13 @@ try {
     path.join(testDir, 'FlightGuidanceSelfTest.java'),
     path.join(testDir, 'FlightGuidanceAtlasSelfTest.java'),
     path.join(testDir, 'FlightControlLoopSelfTest.java'),
+    path.join(testDir, 'FlightSafetyPlannerSourceSelfTest.java'),
     path.join(testDir, 'FlightTerrainChallengeSelfTest.java'),
     path.join(testDir, 'MissionScenarioSelfTest.java'),
     path.join(testDir, 'CombatSimulationSelfTest.java'),
     path.join(testDir, 'StrikeSimulationSelfTest.java'),
     path.join(testDir, 'TacticalAirAISelfTest.java'),
+    path.join(testDir, 'ObservedProtectedAssetThreatSelectionSelfTest.java'),
     path.join(testDir, 'HistoricalDoctrineOrdersSelfTest.java'),
   ];
   // Windows javac otherwise inherits CP932 and rejects the UTF-8 en dashes
@@ -101,6 +104,7 @@ try {
   run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.FlightGuidanceAtlasSelfTest',
     path.join(here, 'data/base-aircraft-anchor-v1.csv')]);
   run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.FlightControlLoopSelfTest']);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.FlightSafetyPlannerSourceSelfTest']);
   run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.FlightTerrainChallengeSelfTest',
     path.join(here, 'data/base-aircraft-anchor-v1.csv')]);
   run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.MissionScenarioSelfTest',
@@ -111,6 +115,7 @@ try {
     path.join(here, 'data/base-aircraft-anchor-v1.csv')]);
   run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.TacticalAirAISelfTest',
     path.join(here, 'data/base-aircraft-anchor-v1.csv')]);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.ObservedProtectedAssetThreatSelectionSelfTest']);
   run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.HistoricalDoctrineOrdersSelfTest',
     path.join(here, 'data/base-aircraft-anchor-v1.csv')]);
   run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.PerformanceReportMain', generated]);

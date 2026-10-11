@@ -79,6 +79,7 @@ def compile_lab(javac: str, classes: Path) -> None:
         "WarfareWingsEngineReaction.java",
         "AircraftAtlasMain.java",
         "TacticalAirAI.java",
+        "ObservedProtectedAssetThreatSelection.java",
         "FlightGuidance.java",
         "FlightSafetyPlanner.java",
         "FlightControlLoop.java",

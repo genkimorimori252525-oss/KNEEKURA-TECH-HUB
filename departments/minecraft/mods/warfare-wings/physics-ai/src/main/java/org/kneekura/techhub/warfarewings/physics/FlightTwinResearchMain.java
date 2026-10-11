@@ -354,6 +354,10 @@ public final class FlightTwinResearchMain {
         Map<String, UnitStats> units = new TreeMap<>();
         Map<String, PairStats> pairs = new TreeMap<>();
         Map<String, AssetStats> assets = new TreeMap<>();
+        // This is the actor's OWN prior observed selection, not a shared
+        // omniscient allocation. Forge's LiveThreatPriority likewise retains
+        // a choice only when the actor actually sees it again this tick.
+        Map<String,String> previousSelectedHostiles = new TreeMap<>();
         Map<String, Map<String, FlightTwinSensor.Visibility>> lastVisibility = new TreeMap<>();
         List<String> ids = List.copyOf(specs.keySet());
         for (var spec : specs.values()) {
@@ -436,7 +440,7 @@ public final class FlightTwinResearchMain {
                 }
             }
             Map<String,String> assigned = targetAssignments(
-                    specs,physicallyAdvanced,sensed,completed,models);
+                    specs,physicallyAdvanced,sensed,completed,models,previousSelectedHostiles);
             Map<String,Local> next = new TreeMap<>();
             Map<String,Command> commands = new TreeMap<>();
             Map<String,Control> nextQueuedControls = new TreeMap<>();
@@ -450,6 +454,9 @@ public final class FlightTwinResearchMain {
                         command.decision().nextMemory(),sensed.get(spec.id()).tracks()));
                 commands.put(spec.id(),command);
                 nextQueuedControls.put(spec.id(),command.decision().controls());
+                String selected = assigned.get(spec.id());
+                if (selected == null) previousSelectedHostiles.remove(spec.id());
+                else previousSelectedHostiles.put(spec.id(),selected);
             }
             for (var spec : specs.values()) {
                 String id = spec.id();
@@ -552,50 +559,68 @@ public final class FlightTwinResearchMain {
     }
 
     /**
-     * Coordination uses only individually acquired tracks, never an omniscient
-     * enemy list. Assignment load is shared but cannot invent visibility.
-     * Sorted tie-breaking and previously assigned hysteresis ensure replay.
+     * Match the original Forge pilot's PRIVATE observed-target selection.
+     * Protected B-17 and its escorts use identical threat-to-asset CPA,
+     * urgency and reacquired-target hysteresis through the shared pure-Java
+     * policy; no synthetic cross-aircraft +75 load penalty is allowed here.
+     * Other missions use nearest personally VISIBLE opponent. Only the OWN
+     * previously selected contact may persist for six legitimately recorded
+     * stale-track ticks when nothing is currently visible.
+     *
+     * Team information here permits an assigned escort to read its friendly
+     * asset's actual position/velocity. Enemy positions may ONLY come from
+     * FlightTwinSensor's per-actor currentlyVisible set or stale own tracks.
      */
     private static Map<String,String> targetAssignments(
             Map<String,FlightTwinScenario.Plane> specs,
             Map<String,Local> snapshot,
             Map<String,FlightTwinSensor.Update> observations,
-            long tick, Map<String,AircraftAtlasMain.Entry> models) {
+            long tick, Map<String,AircraftAtlasMain.Entry> models,
+            Map<String,String> previousSelectedHostiles) {
         Map<String,String> result = new TreeMap<>();
-        Map<String,Integer> load = new HashMap<>();
-        List<FlightTwinScenario.Plane> ordered = new ArrayList<>(specs.values());
-        ordered.sort(Comparator.comparing(FlightTwinScenario.Plane::team)
-                .thenComparingInt(p->p.mission()==TacticalAirAI.Mission.ESCORT?0:1)
-                .thenComparing(FlightTwinScenario.Plane::id));
-        for (var spec : ordered) {
-            if (!models.get(spec.typeId()).role().equals("fighter")) {
-                result.put(spec.id(),null);
-                continue;
+        for (var spec : specs.values()) {
+            FlightTwinSensor.Update personal = observations.get(spec.id());
+            List<TacticalAirAI.Contact> visible = new ArrayList<>();
+            for (String seenId : personal.currentlyVisible()) {
+                FlightTwinSensor.Track measured = personal.tracks().get(seenId);
+                if (measured == null || measured.lastSeenTick() != tick)
+                    throw new IllegalStateException("Fresh visible hostile lacks own observed track");
+                visible.add(new TacticalAirAI.Contact(seenId,measured.lastPosition(),
+                        measured.lastVelocity(),true));
             }
+            State own = snapshot.get(spec.id()).state();
+            String previous = previousSelectedHostiles.get(spec.id());
             String best = null;
-            double bestScore = Double.POSITIVE_INFINITY;
-            Vec3 own = snapshot.get(spec.id()).state().position();
-            for (var entry : observations.get(spec.id()).tracks().entrySet()) {
-                String hostileId = entry.getKey();
-                FlightTwinSensor.Track track = entry.getValue();
-                Vec3 enemy = track.extrapolate(tick);
-                double fromOwn = distance(own,enemy);
-                double age = tick-track.lastSeenTick();
-                double score = fromOwn + 75 * load.getOrDefault(spec.team()+"|"+hostileId,0)
-                        + 12 * age;
+            boolean protecteeRisk = spec.escortAsset() != null
+                    || models.get(spec.typeId()).role().equals("bomber");
+            if (protecteeRisk) {
+                State protectedState = own;
                 if (spec.escortAsset() != null) {
-                    Vec3 asset = snapshot.get(spec.escortAsset()).state().position();
-                    score = 0.15 * fromOwn + 1.6 * distance(enemy,asset)
-                            + 75 * load.getOrDefault(spec.team()+"|"+hostileId,0) + 12 * age;
+                    FlightTwinScenario.Plane asset = specs.get(spec.escortAsset());
+                    if (asset == null || !asset.team().equals(spec.team()))
+                        throw new IllegalStateException("Invalid declared allied protectee");
+                    protectedState = snapshot.get(asset.id()).state();
                 }
-                if (score < bestScore-1e-9 || (Math.abs(score-bestScore) <= 1e-9
-                        && (best == null || hostileId.compareTo(best) < 0))) {
-                    bestScore = score;
-                    best = hostileId;
+                var selected = ObservedProtectedAssetThreatSelection.select(visible,
+                        protectedState.position(),protectedState.velocity(),previous);
+                if (selected != null) best = selected.contact().id();
+            } else {
+                double nearest = Double.POSITIVE_INFINITY;
+                for (TacticalAirAI.Contact observed : visible) {
+                    double d = distance(own.position(),observed.position());
+                    if (d < nearest-1e-9 || Math.abs(d-nearest) <= 1e-9
+                            && (best == null || observed.id().compareTo(best) < 0)) {
+                        best = observed.id();
+                        nearest = d;
+                    }
                 }
             }
+            // This observer can continue aiming at its OWN six-tick
+            // prediction only after fresh actual LOS sightings disappear;
+            // an unseen remembered track can never win the visible CPA rank.
+            if (best == null && previous != null && personal.tracks().containsKey(previous))
+                best = previous;
             result.put(spec.id(),best);
-            if (best != null) load.merge(spec.team()+"|"+best,1,Integer::sum);
         }
         return Collections.unmodifiableMap(result);
     }
@@ -610,17 +635,8 @@ public final class FlightTwinResearchMain {
             World world, long now) {
         Local own = snapshot.get(spec.id());
         String threatId = assigned;
-        if (threatId == null) {
-            double closest = Double.POSITIVE_INFINITY;
-            for (var entry : sensed.tracks().entrySet()) {
-                double range = distance(own.state().position(),entry.getValue().extrapolate(now));
-                if (range < closest-1e-9 || Math.abs(range-closest) <= 1e-9
-                        && (threatId == null || entry.getKey().compareTo(threatId) < 0)) {
-                    closest = range;
-                    threatId = entry.getKey();
-                }
-            }
-        }
+        // targetAssignments already applied per-actor sensor ranking. Do not
+        // silently change selected hostile here with globally sorted tracks.
         FlightTwinSensor.Track track = threatId == null ? null : sensed.tracks().get(threatId);
         TacticalAirAI.Contact opponent = track == null ? null :
                 new TacticalAirAI.Contact(threatId,track.extrapolate(now),

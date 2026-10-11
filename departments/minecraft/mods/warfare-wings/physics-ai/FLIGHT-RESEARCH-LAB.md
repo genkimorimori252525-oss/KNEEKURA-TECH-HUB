@@ -5,6 +5,117 @@ The laboratory provides reproducible flight/AI research without launching a
 Minecraft client. Exact-runtime movement, terrain, contact, wind and weapons
 acceptance tests must remain separate.
 
+## Research continuation: shared observed CPA, 24-airframe stress, and genuine failure evidence
+
+The original exact five-aircraft B-17 GameTest provides an important
+**causal-control fidelity** test at its first two physics steps. The previous
+offline Twin used a **synthetic cooperative target penalty of 75 blocks**
+to divert the second escort to a different raider. By contrast the actual
+original Forge convoy's B-17 and both P-47N escorts independently ranked
+each **currently visible** hostile's constant-velocity closest approach to
+the measured B-17 position/velocity. A single pure Java17
+`ObservedProtectedAssetThreatSelection.select()` now contains the original
+48tick-horizon CPA+0.2-per-tick score and 8-block previous-**reobserved**
+contact deadband. The Forge `LiveThreatPriority` delegates to it, and the
+external `FlightTwinResearchMain` passes only its own actor's sensor-acquired
+fresh tracks plus legitimate allied-protectee datalink, never an unseen enemy.
+Ordinary fighter patrol continues to choose its own nearest **currently
+visible** contact. Six-tick remembered tracks remain predictions, not sightings.
+
+| Original B-17 right P-47N | Authentic Forge | Previous independent Twin | Common-selector Twin |
+|---|---:|---:|---:|
+| t1 raw X control | -1.000000 | +0.109868 | **-1.000000** |
+| t2 original IA yaw | 0.268753499 degrees | 0.003647706 degrees | **0.268753497 degrees** |
+| Nearest selected contact | currently visible first raider | different second raider | currently visible first raider |
+
+This is a measured local **first-input decision and next-tick physical**
+agreement against authentic five-actor Forge controls. It is **not full
+closed-loop tactical parity**: under the same exact 340tick original starting
+geometry, the original real B-17 protection remains **FAILED, 81/340 actual
+inside-95b ticks**. The corrected closed-loop Twin's original five-aircraft
+mission also remains **FAILED**, approximately **197/340 SOURCE** positions
+inside 95b and **198 within-tick sweeps**, nearest threat about **31.756b**.
+The still-large long-horizon gap includes different environmental sensors,
+future self/other movements and source policy/missions; open-loop recorded
+control physics parity must not be confused with these results.
+
+The new `tools/flight_twin_seed_sweep.py` executes **24 actual distinct
+SOURCE models simultaneously at 20Hz for every seed**, with exact original
+6b separation and 95b B-17 protection unchanged. It writes a fail-closed
+independently rechecked 276-pair CSV, B-17 mission failures, complete per-seed
+JSON/CSV SOURCE trajectories and a standalone local-file `seed_sweep.html`
+inspection page. It never incorporates Minecraft JARs or private original
+actor measurements. Results can depend strongly on the synthetic starting
+seed: the initial 64-seed shared-CPA baseline found **5/64 unsafe seeds,
+30 swept pair violation ticks, nearest 1.699012b**, and **64/64 B-17
+95b protection failures** across 368,640 physical SOURCE updates. A single
+source case with all pair separations above 6b must therefore never certify
+all 24 aircraft as safely autonomous in arbitrary formations. Future
+collision-avoidance changes must be A/B tested across the same 64 seeds
+**and** the unchanged original 190tick SOURCE 2v2/B-17 aft/forward gates;
+improving arbitrary 24-aircraft synthetic safety at the cost of the original
+prepared B-17 failure is unacceptable.
+
+The separately controlled large-squadron A/B therefore adds vertical
+deconfliction **only with at least four team-radio-known squadmates**. For
+an individually sensor-observed hostile it retains reciprocal horizontal
+avoidance, while requesting a +60b climb by the measured higher aircraft or
+a bounded -60b descent by the lower one; an urgent imminent friendly pair
+uses +45b / terrain-bounded -45b. The lower pilot has a separate sampled
+local terrain reserve, and original sparse patrol/escort cases retain their
+former safety planner. No actual position, velocity, collision radius or
+weapon state is modified: these remain *physical waypoints* passed to the
+existing IA steering/smoothing chain. The result on the identical 64-seed,
+24-aircraft-per-seed, 240tick SOURCE physics experiment:
+
+| Strict SOURCE 64-seed safety measurement | Shared CPA baseline | Large-formation 3D deconfliction |
+|---|---:|---:|
+| SOURCE physics steps | 368,640 | 368,640 |
+| Seeds with at least one swept pair inside 6b | **5 / 64** | **0 / 64** |
+| Total swept pair-danger ticks | **30** | **0** |
+| Minimum swept centre-pair distance | **1.699012b** | **6.925816b** |
+| Seeds with B-17 intrusion inside 95b | **64 / 64 FAILED** | **64 / 64 FAILED** |
+| Sum of B-17 intrusion ticks | 3,794 | 3,622 |
+| Closest hostile/B-17 across seeds | 14.834139b | 26.020167b |
+
+Ten individual seeds increased their *duration* of B-17 intrusion by up to
+10 ticks even though the pooled result improved; this is explicitly **not**
+uniform mission safety. These are seeded **SOURCE** centre-point/swept-line
+metrics, not real 24-plane Forge collision or 95b protection successes.
+Under the original fixed SOURCE geometry, the unchanged 2v2 six-pair gate
+still passes (min 30.96838b), rear/aft B-17 protection is **FAILED** with
+62 swept intrusion ticks in Twin and zero under6b, and prepared forward
+B-17 source protection still passes with zero intrusion. The independently
+implemented original `CombatSimulationSelfTest` 190tick observed high-side
+fighter tactic reduces *its distinct SOURCE V3 scenario* 54 to 52 intrusion
+ticks while the same exact prepared geometry remains zero; all original
+scenario safety assertions and Atlas v2 goldens are retained.
+
+The 64-seed A/B outputs are locally ignored owner research artifacts.
+Hosted SOURCE CI runs a smaller **32-seed full 24-aircraft SOURCE** experiment
+and uploads all per-seed measured physics traces and the self-contained HTML.
+Its completion cannot relabel the 64-seed original B-17 protection gate.
+
+Three locally preserved genuine original-Forge policy roots are additionally
+reverified with `tools/forensic_b17_three_run.py`. Their **identical original
+five-aircraft 340 actual control ticks** show 49 nearest-visible intrusion
+ticks, 104 CPA-only intrusion ticks, and 81 visible-CPA+8b hysteresis
+intrusion ticks. The intermediate native **105** statistic counted a later
+post-controller geometry sample; do not mix that denominator with the real
+1..340 actor-control horizon. All three 95b acceptance outcomes are
+**FAILED**. Original raw CSV, preexisting Mixins, binary SHA and source Atlas
+v2 historical goldens remain untouched and excluded from commits. These
+associations alone do not prove that the target selector caused the changed
+95b exposure; other tactic, sensor, and initial control feedback may differ.
+
+**Historical classification** is unchanged from
+`TACTICS-EVIDENCE-v1.md`: original aerial-combat evidence can motivate an
+escort screen, crossing interception, formation spread, or high-side diving
+experiment, but those are **DESIGN_INFERENCE / GAME_ADAPTATION** until their
+observational trigger, physically achievable control, collision safety and
+actual original Forge result are independently measured. Nationality remains
+metadata only, never an automatic friend/enemy determination.
+
 The source entrypoint is **FlightResearchBatchMain.java** under
 **physics-ai/src/main/java/org/kneekura/techhub/warfarewings/physics/**.
 It loads all 24 current ANCHOR-derived aircraft via AircraftAtlasMain.load,

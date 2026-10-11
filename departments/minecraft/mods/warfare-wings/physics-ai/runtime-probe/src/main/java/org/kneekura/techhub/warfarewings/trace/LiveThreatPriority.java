@@ -1,6 +1,7 @@
 package org.kneekura.techhub.warfarewings.trace;
 
 import org.kneekura.techhub.warfarewings.physics.Ia133Microkernel.Vec3;
+import org.kneekura.techhub.warfarewings.physics.ObservedProtectedAssetThreatSelection;
 import org.kneekura.techhub.warfarewings.physics.TacticalAirAI;
 
 /**
@@ -12,16 +13,6 @@ import org.kneekura.techhub.warfarewings.physics.TacticalAirAI;
  * Scores are steering priorities, never damage, collision or firing evidence.
  */
 final class LiveThreatPriority {
-    private static final double HORIZON_TICKS = 48.0;
-    private static final double EPS = 1e-12;
-    private static final double URGENCY_BLOCKS_PER_TICK = .20;
-    // A threat-choice deadband suppresses flip-flop steering between two
-    // comparably dangerous, *simultaneously visible* opponents. It is a
-    // guidance hysteresis, not the original 95b/6b/30b GameTest threshold.
-    // The complete original Forge control trace showed switches at 47 and
-    // 109 with predicted approach scores differing by <0.03 blocks.
-    private static final double CONTACT_STICKINESS_BLOCKS = 8.0;
-
     record Threat(TacticalAirAI.Contact contact, double closestApproachBlocks,
                   double closestApproachTicks, double priorityBlocks,
                   double currentDistanceBlocks) {}
@@ -30,34 +21,12 @@ final class LiveThreatPriority {
 
     static Threat assess(TacticalAirAI.Contact visible, Vec3 protectedPosition,
                          Vec3 protectedVelocity) {
-        if (visible == null || !visible.hostile() || protectedPosition == null
-                || protectedVelocity == null) {
-            throw new IllegalArgumentException("Expected only an actually visible hostile and known ally");
-        }
-        Vec3 r = visible.position().add(protectedPosition.scale(-1));
-        Vec3 v = visible.velocity().add(protectedVelocity.scale(-1));
-        if (!finite(r) || !finite(v))
-            throw new IllegalArgumentException("Nonfinite observed relative aircraft geometry");
-        double velocitySquared = v.lengthSquared();
-        double t = velocitySquared <= EPS ? 0
-                : clamp(-r.dot(v) / velocitySquared, 0, HORIZON_TICKS);
-        double predictedDistance = r.add(v.scale(t)).length();
-        double current = r.length();
-        // Earlier risks deserve priority, but the selection never knows the
-        // actual future target position. This is constant-velocity extrapolation
-        // of the visible current measurement, not a guaranteed intercept.
-        return new Threat(visible, predictedDistance, t,
-                predictedDistance + t * URGENCY_BLOCKS_PER_TICK, current);
+        return fromCommon(ObservedProtectedAssetThreatSelection.assess(
+                visible, protectedPosition, protectedVelocity));
     }
 
     static boolean better(Threat candidate, Threat existing) {
-        if (candidate == null) return false;
-        if (existing == null) return true;
-        double diff = candidate.priorityBlocks() - existing.priorityBlocks();
-        if (Math.abs(diff) > 1e-8) return diff < 0;
-        double distanceDiff = candidate.currentDistanceBlocks() - existing.currentDistanceBlocks();
-        if (Math.abs(distanceDiff) > 1e-8) return distanceDiff < 0;
-        return candidate.contact().id().compareTo(existing.contact().id()) < 0;
+        return ObservedProtectedAssetThreatSelection.better(toCommon(candidate), toCommon(existing));
     }
 
     /**
@@ -66,19 +35,21 @@ final class LiveThreatPriority {
      * as previousVisible is prohibited by the caller's visual lookup.
      */
     static Threat chooseStable(Threat previousVisible, Threat bestVisible) {
-        if (bestVisible == null) return null;
-        if (previousVisible == null) return bestVisible;
-        return previousVisible.priorityBlocks()
-                <= bestVisible.priorityBlocks() + CONTACT_STICKINESS_BLOCKS
-                ? previousVisible : bestVisible;
+        var previous = toCommon(previousVisible);
+        var best = toCommon(bestVisible);
+        var chosen = ObservedProtectedAssetThreatSelection.chooseStable(previous, best);
+        return chosen == null ? null : chosen == previous ? previousVisible : bestVisible;
     }
 
-    private static double clamp(double x, double min, double max) {
-        return Math.max(min, Math.min(max, x));
+    private static ObservedProtectedAssetThreatSelection.Threat toCommon(Threat threat) {
+        return threat == null ? null : new ObservedProtectedAssetThreatSelection.Threat(
+                threat.contact(), threat.closestApproachBlocks(), threat.closestApproachTicks(),
+                threat.priorityBlocks(), threat.currentDistanceBlocks());
     }
 
-    private static boolean finite(Vec3 v) {
-        return Double.isFinite(v.x()) && Double.isFinite(v.y()) && Double.isFinite(v.z());
+    private static Threat fromCommon(ObservedProtectedAssetThreatSelection.Threat threat) {
+        return new Threat(threat.contact(), threat.closestApproachBlocks(),
+                threat.closestApproachTicks(), threat.priorityBlocks(), threat.currentDistanceBlocks());
     }
 
     /** These 19 assertions are SOURCE tests only, never real-game proof. */
@@ -96,7 +67,7 @@ final class LiveThreatPriority {
         check(fastFriend.closestApproachTicks() == 0, "same velocity doesn't invent approach");
         check(fastFriend.closestApproachBlocks() == 70, "stationary relative geometry remains far");
         var cap = assess(contact("slow-approach", 150, 0, 0, -1, 0, 0), z, z);
-        check(cap.closestApproachTicks() == HORIZON_TICKS, "track extrapolation bounded at 48 ticks");
+        check(cap.closestApproachTicks() == 48.0, "track extrapolation bounded at 48 ticks");
         check(cap.closestApproachBlocks() == 102, "bounded predicted miss distance");
         var miss = assess(contact("crossing", 100, 0, 0, 0, 0, 2), z, z);
         check(miss.closestApproachTicks() == 0, "perpendicular crossing receding from asset");

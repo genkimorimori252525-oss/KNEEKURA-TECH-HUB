@@ -51,10 +51,27 @@ jobs:
         run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_flight_lab.py
       - name: Verify simultaneous 24-unique-airframe closed-loop Physics Twin, observed contacts and unchanged 95/6 block gates
         run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_flight_twin_lab.py
+      - name: Verify deterministic multi-seed 24-unique-airframe stress experiment and reject unsafe fake mission success
+        run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_flight_twin_seed_sweep.py
       - name: Run real-B17 forensic provenance tests only where original receipts exist (otherwise explicit SKIP)
         run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_flight_twin_forensic.py
       - name: Verify independent two-real-Forge-run B17 policy comparison where original receipts exist (otherwise explicit SKIP)
         run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_flight_twin_policy_delta.py
+      - name: Verify three real original Forge B17 policy timelines and reject mixed/missing evidence (otherwise explicit SKIP)
+        run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_flight_twin_three_run.py
+      - name: Execute 32 distinct seeds of 24 physically concurrent SOURCE aircraft at 20Hz
+        run: |
+          ROOT=departments/minecraft/mods/warfare-wings/physics-ai
+          python "$ROOT/tools/flight_twin_seed_sweep.py" \
+            --output "$RUNNER_TEMP/ww-24-aircraft-source-safety" \
+            --java-home "$JAVA_HOME" --seed-start 20261011 --count 32 --ticks 240
+      - name: Publish 24-aircraft independent-seed collision and B17 failure evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: warfare-wings-24-aircraft-multiseed-source-safety
+          retention-days: 14
+          if-no-files-found: error
+          path: ${{ runner.temp }}/ww-24-aircraft-source-safety/
       - name: Produce downloadable self-contained SOURCE flight laboratory and simultaneous 24-plane Twin
         run: |
           ROOT=departments/minecraft/mods/warfare-wings/physics-ai

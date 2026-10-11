@@ -202,13 +202,24 @@ public final class TacticalAirAI {
             double side = frame.self().position().add(anchor.scale(-1)).dot(right) < 0 ? -1 : 1;
             // Two guards approaching from opposite sides should not be
             // assigned the same 3D point in the moving protection corridor.
-            // Use a slightly lower station while the *measured* engine is
-            // still spooling up. Gravity can supply temporary airspeed, but
-            // neither speed nor altitude is changed directly by this order.
-            // Terrain and aircraft separation remain world-safety priorities.
-            double descent = self.enginePowerSmooth() < 0.12 ? -70 : -20;
+            // A genuinely observed enemy below an underpowered escort offers
+            // a limited altitude-for-speed interception opportunity. Only
+            // trade extra altitude while the escort has >=12b of observed
+            // vertical advantage and its measured engine is still spooling.
+            // With no such advantage, retain the tested shallow screen.
+            // This moves a steering waypoint, never the aircraft itself.
+            double observedAltitudeAdvantage = position.y() - frame.enemy().position().y();
+            boolean highSideEnergyTrade = self.enginePowerSmooth() < 0.22
+                    && observedAltitudeAdvantage >= 12;
+            double descent = highSideEnergyTrade ? -105
+                    : self.enginePowerSmooth() < 0.12 ? -70 : -20;
             target = defendedFuture.add(outward.scale(screenDistance))
                     .add(right.scale(side * 12)).add(0, descent, 0);
+            // A deep source-level waypoint must not point below the local
+            // observed terrain. Ahead-of-aircraft terrain remains owned by
+            // FlightSafetyPlanner, which may override even this 45b margin.
+            if (highSideEnergyTrade && target.y() < frame.terrainHeight() + 45)
+                target = new Vec3(target.x(), frame.terrainHeight() + 45, target.z());
 
             // An observed hostile closing on the escort can be drawn toward
             // the bomber by an ordinary straight-back defensive break. Keep
@@ -234,7 +245,8 @@ public final class TacticalAirAI {
                     why = "ESCORT_CONTACT_ESCAPE_DEGENERATE";
                 }
             } else {
-                why = distance < 100 ? "ESCORT_INNER_SCREEN" : "ESCORT_PREDICTIVE_SCREEN";
+                why = highSideEnergyTrade ? "ESCORT_OBSERVED_HIGH_SIDE_ENERGY_TRADE"
+                        : distance < 100 ? "ESCORT_INNER_SCREEN" : "ESCORT_PREDICTIVE_SCREEN";
             }
         } else if (frame.profile().role().equals("bomber")
                 && (frame.mission() == Mission.LEVEL_BOMB || frame.mission() == Mission.PATROL)

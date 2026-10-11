@@ -56,11 +56,13 @@ def main() -> None:
     run(sys.executable, str(ROOT / "tools" / "test_real_tactical_clock.py"))
     run(sys.executable, str(ROOT / "tools" / "test_flight_lab.py"))
     run(sys.executable, str(ROOT / "tools" / "test_flight_twin_lab.py"))
+    run(sys.executable, str(ROOT / "tools" / "test_flight_twin_seed_sweep.py"))
     # CI/Docker have NO original Minecraft JAR or raw real-owner CSVs.
     # Owner-only forensic comparison deliberately SKIPS there instead of
     # fabricating real evidence from synthetic fixtures.
     run(sys.executable, str(ROOT / "tools" / "test_flight_twin_forensic.py"))
     run(sys.executable, str(ROOT / "tools" / "test_flight_twin_policy_delta.py"))
+    run(sys.executable, str(ROOT / "tools" / "test_flight_twin_three_run.py"))
 
     with tempfile.TemporaryDirectory(prefix="warfare-wings-atlas-") as directory:
         json_out = Path(directory) / "aircraft-atlas-ai-view.json"

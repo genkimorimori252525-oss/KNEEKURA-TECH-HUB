@@ -254,6 +254,20 @@ class FlightTwinLabIntegrationTests(unittest.TestCase):
         for row in payload["slices"]:
             by_unit.setdefault(row["unit_id"],[]).append(row)
         self.assertEqual(len(by_unit),5)
+        # The original Forge pilot independently ranks all physically VISIBLE
+        # raiders by CPA to the actually moving allied B-17. Previously the
+        # SOURCE-only team-load (+75) sent escort-right toward raider-2 at t1
+        # even though the REAL B-17 and both escorts chose the first raider.
+        # These three source choices must now share the same pure-Java CPA
+        # contract, not an omniscient or globally assigned enemy coordinate.
+        for actor in ("b17", "escort-left", "escort-right"):
+            first = by_unit[actor][1]
+            self.assertEqual(first["visible_hostiles_count"],2,
+                             f"{actor}: two independent fresh FOV/LOS sightings required")
+            self.assertEqual(first["observed_contact_id"],"raider-1",
+                             f"{actor}: first-tick protected-asset CPA selection diverged")
+            self.assertEqual(first["contact_age_ticks"],0,
+                             "An invisible remembered contact cannot masquerade as current LOS")
         for unit,track in by_unit.items():
             self.assertEqual([int(r["tick"]) for r in track],list(range(341)))
             first=track[1]
@@ -329,6 +343,9 @@ class FlightTwinLabIntegrationTests(unittest.TestCase):
             first_real_controls=[float(real_t1["command_x"]),
                                  float(real_t1["command_z"])]
             first_source_controls=[start["control_x"],start["control_z"]]
+            self.assertLess(max(abs(a-b) for a,b in zip(first_real_controls,
+                                                       first_source_controls)),0.002,
+                            f"{unit}: first source decision must now match real observed pilot controls")
             # When both observers make the SAME t1 decision, their END
             # interpolated values and the very next t2 physical yaw/pitch
             # should agree with the exact original Forge aircraft. Differing
