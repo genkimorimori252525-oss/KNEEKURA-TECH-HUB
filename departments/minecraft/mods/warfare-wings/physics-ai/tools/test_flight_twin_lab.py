@@ -58,7 +58,7 @@ class FlightTwinLabIntegrationTests(unittest.TestCase):
             [self.java, "-cp", str(self.classes),
              "org.kneekura.techhub.warfarewings.physics.FlightTwinSensorSelfTestMain"],
             capture_output=True, text=True, check=True)
-        self.assertIn("FLIGHT_TWIN_SENSOR_SELFTEST PASS assertions=13", result.stdout)
+        self.assertIn("FLIGHT_TWIN_SENSOR_SELFTEST PASS assertions=17", result.stdout)
         probe = self.case("synthetic_los_occluded")
         self.assertGreater(probe["los_rejected_observations"], 0)
         self.assertEqual(probe["observed_hostile_ticks"], 0)
@@ -233,6 +233,43 @@ class FlightTwinLabIntegrationTests(unittest.TestCase):
             source = self.root/"twin-inline.js"
             source.write_text(js,encoding="utf-8")
             subprocess.run([shutil.which("node"),"--check",str(source)],check=True)
+
+    def test_exact_next_tick_actuation_caused_by_end_tick_policy(self) -> None:
+        """A t1 policy decision can first actuate t2, never retroactively t1."""
+        output=self.root/"causal-next-physics"
+        summary=run_twin(self.java,self.classes,output,seed=20261011,
+                         unique_ticks=340,trace_stride=1,
+                         scenario="forge_original_b17_340")
+        self.assertEqual(summary["scenarios"][0]["simulated_ticks"],340)
+        self.assertEqual(
+            summary["actuation_phase"],
+            "ENTITY_PHYSICS_WITH_PREVIOUS_QUEUED_INPUT_THEN_SERVER_TICK_END_OBSERVE_AND_QUEUE_NEXT")
+        payload=load_twin_experiment(output)
+        by_unit={}
+        for row in payload["slices"]:
+            by_unit.setdefault(row["unit_id"],[]).append(row)
+        self.assertEqual(len(by_unit),5)
+        for unit,track in by_unit.items():
+            self.assertEqual([int(r["tick"]) for r in track],list(range(341)))
+            first=track[1]
+            self.assertEqual(first["applied_control_from_policy_tick"],-1,
+                             f"Initial physical tick must have no prior AI decision: {unit}")
+            self.assertEqual(first["command_generated_at_end_tick"],1)
+            self.assertEqual((first["applied_control_x"],first["applied_control_z"]),
+                             (0.0,0.0))
+            self.assertEqual(first["applied_control_throttle"],1.0)
+            self.assertIsNone(track[0]["applied_control_x"])
+            self.assertEqual(track[0]["command_generated_at_end_tick"],-1)
+            for index in range(2,341):
+                now,before=track[index],track[index-1]
+                self.assertEqual(now["applied_control_from_policy_tick"],index-1)
+                self.assertEqual(now["command_generated_at_end_tick"],index)
+                self.assertEqual(
+                    (now["applied_control_x"],now["applied_control_z"],
+                     now["applied_control_throttle"]),
+                    (before["control_x"],before["control_z"],
+                     before["control_throttle"]),
+                    f"{unit}@tick{index}: SOURCE input must be queued from prior END tick")
 
 
 if __name__ == "__main__":

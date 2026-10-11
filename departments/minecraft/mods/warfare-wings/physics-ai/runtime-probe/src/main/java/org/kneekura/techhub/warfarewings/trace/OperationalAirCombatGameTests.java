@@ -204,43 +204,49 @@ public final class OperationalAirCombatGameTests {
             results.put(item.name(), result);
         }
         try {
+            // Collect every unchanged operational gate, even after one actor
+            // genuinely failed. The prior first-failure exception hid a 49tick
+            // B17 95b protection breach behind an independent 29.594b escort
+            // net-motion violation. Both are factual FAILED, not a pass.
+            List<String> failedGates = new ArrayList<>();
             for (Participant item : recorder.participants) {
                 var result = results.get(item.name());
                 if (!result.complete() || result.samples() != requiredTicks)
-                    throw new IllegalStateException("INCOMPLETE_REAL_FLIGHT "
-                            + item.name() + " " + result.failure()
-                            + " ticks=" + result.samples());
+                    failedGates.add("INCOMPLETE_REAL_FLIGHT " + item.name()
+                            + " " + result.failure() + " ticks=" + result.samples());
                 if (result.displacementBlocks() < 30)
-                    throw new IllegalStateException("INSUFFICIENT_REAL_MOVEMENT " + item.name()
+                    failedGates.add("INSUFFICIENT_REAL_MOVEMENT " + item.name()
                             + " displaced=" + result.displacementBlocks());
             }
             if (recorder.samples < requiredTicks - 2)
-                throw new IllegalStateException("MISSING_GEOMETRY_TICKS "
+                failedGates.add("MISSING_GEOMETRY_TICKS "
                         + recorder.samples + " expected~" + requiredTicks);
             if (recorder.minimumSeparation < MIN_PHYSICAL_SEPARATION)
-                throw new IllegalStateException("AIRCRAFT_COLLISION_CORRIDOR minDistance="
+                failedGates.add("AIRCRAFT_COLLISION_CORRIDOR minDistance="
                         + recorder.minimumSeparation);
             if (recorder.minimumOpposingDistance > 120)
-                throw new IllegalStateException("NO_PHYSICAL_ENGAGEMENT minOpposingDistance="
+                failedGates.add("NO_PHYSICAL_ENGAGEMENT minOpposingDistance="
                         + recorder.minimumOpposingDistance);
             for (String side : List.of("red", "blue")) {
                 if (protectee) break;
                 if (recorder.visibleTicks.getOrDefault(side, 0) < 8)
-                    throw new IllegalStateException("NO_REAL_HOSTILE_OBSERVATION "
+                    failedGates.add("NO_REAL_HOSTILE_OBSERVATION "
                             + side + " visibleTicks=" + recorder.visibleTicks);
             }
             if (protectee) {
                 if (results.get("escort-left").escortTicks() < 150
                         || results.get("escort-right").escortTicks() < 150)
-                    throw new IllegalStateException("NO_SUSTAINED_REAL_ESCORT_PHASE");
+                    failedGates.add("NO_SUSTAINED_REAL_ESCORT_PHASE");
                 if (recorder.minimumProtecteeHostileDistance > 150)
-                    throw new IllegalStateException("UNTESTED_B17_THREAT minB17Threat="
+                    failedGates.add("UNTESTED_B17_THREAT minB17Threat="
                             + recorder.minimumProtecteeHostileDistance);
                 if (recorder.intrusionTicks > 0)
-                    throw new IllegalStateException("B17_95_BLOCK_PROTECTION_BREACH "
+                    failedGates.add("B17_95_BLOCK_PROTECTION_BREACH "
                             + "intrusionTicks=" + recorder.intrusionTicks
                             + " minDistance=" + recorder.minimumProtecteeHostileDistance);
             }
+            if (!failedGates.isEmpty())
+                throw new IllegalStateException(String.join("; ", failedGates));
             recorder.finished = true;
         } catch (RuntimeException operationalFailure) {
             recorder.fail(operationalFailure.getMessage());

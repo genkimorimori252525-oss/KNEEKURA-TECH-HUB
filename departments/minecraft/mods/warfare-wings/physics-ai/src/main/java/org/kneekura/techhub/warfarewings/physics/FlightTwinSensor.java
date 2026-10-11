@@ -37,8 +37,14 @@ public final class FlightTwinSensor {
                 throw new IllegalArgumentException("invalid synthetic sensor specification");
         }
 
-        /** Matches the existing SquadronCommand range/cone/TTL, with added LOS. */
-        public static final Parameters DEFAULT = new Parameters(190, 150, 6, 24, 1.5);
+        /**
+         * Range / FULL FOV taken from actual Forge runtime LiveAirSensor:
+         * DEFAULT_RANGE=240.0, DEFAULT_FULL_FOV_DEG=150.0.
+         * This record stores HALF-cone angle, therefore 75.0 degrees.
+         * Memory lifetime (6), synthetic 24-sample terrain ray, and 1.5b
+         * clearance margin remain separate source-laboratory assumptions.
+         */
+        public static final Parameters DEFAULT = new Parameters(240.0, 75.0, 6, 24, 1.5);
     }
 
     public record Assessment(Visibility visibility, double rangeBlocks,

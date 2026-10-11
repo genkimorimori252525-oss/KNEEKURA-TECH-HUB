@@ -304,6 +304,8 @@ def make_html(summary: Path, slices: Path, output: Path) -> dict:
 
 TWIN_NUMBERS = {
     "engine_reaction_ticks",
+    "applied_control_x", "applied_control_z", "applied_control_throttle",
+    "applied_control_from_policy_tick", "command_generated_at_end_tick",
     "tick", "seconds", "x", "y", "z", "vx", "vy", "vz", "speed_bps",
     "yaw_deg", "pitch_deg", "roll_deg", "engine_target", "engine_power",
     "ground_y", "clearance_blocks", "nearest_ally_blocks", "team_known_count",

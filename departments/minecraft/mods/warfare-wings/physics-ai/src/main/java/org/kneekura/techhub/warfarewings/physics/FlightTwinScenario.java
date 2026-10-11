@@ -107,6 +107,46 @@ public final class FlightTwinScenario {
         return b17("original_b17_forward", -27, 115, 27, 115);
     }
 
+    /**
+     * Five-entity ORIGINAL real Forge 340-tick GameTest initial conditions:
+     * OperationalAirCombatGameTests.twoEscortsDefendB17AgainstTwoApproachingHostiles.
+     * Coordinates are translated into the t0 B17 X/Z origin (real runtime
+     * world X=55.5, Z=0.5), retaining absolute relative Y=165. This is still
+     * a SOURCE physics replay, with a flat synthetic terrain ground Y=0.
+     *
+     * Strictly preserve the two P47N escort and two A6M raider setups, which
+     * differ materially from the earlier 190-tick 4-aircraft source exercise.
+     */
+    public static Case realForgeOriginalB17340() {
+        Vec3 home = new Vec3(0,165,0);
+        List<Plane> units = List.of(
+                new Plane("b17","warfare_wings:b17","convoy","b17",0,
+                        TacticalAirAI.Mission.PATROL,null,
+                        new Vec3(0,165,0),new Vec3(0,0,.65),0,
+                        new Vec3(0,165,500),home,1),
+                new Plane("escort-left","warfare_wings:p47n","convoy","escorts",0,
+                        TacticalAirAI.Mission.ESCORT,"b17",
+                        new Vec3(-48,172,18),new Vec3(0,0,.8),0,
+                        new Vec3(-48,172,418),new Vec3(-48,172,18),1),
+                new Plane("escort-right","warfare_wings:p47n","convoy","escorts",1,
+                        TacticalAirAI.Mission.ESCORT,"b17",
+                        new Vec3(48,172,18),new Vec3(0,0,.8),0,
+                        new Vec3(48,172,418),new Vec3(48,172,18),1),
+                new Plane("raider-1","warfare_wings:a6m","raiders","raid-1",0,
+                        TacticalAirAI.Mission.INTERCEPT,null,
+                        new Vec3(-40,168,148),new Vec3(0,0,-.78),180,
+                        new Vec3(-40,168,-232),new Vec3(-40,168,148),1),
+                new Plane("raider-2","warfare_wings:a6m","raiders","raid-2",0,
+                        TacticalAirAI.Mission.INTERCEPT,null,
+                        new Vec3(40,168,153),new Vec3(0,0,-.78),180,
+                        new Vec3(40,168,-227),new Vec3(40,168,153),1)
+        );
+        return new Case("forge_original_b17_340",units,
+                Map.of("escort-left","b17","escort-right","b17"),
+                340,PINNED_FLAT,false,
+                "SOURCE_EXPERIMENT_PINNED_CALM_SYNTHETIC_FLAT_REAL_FORGE_START_GEOMETRY");
+    }
+
     private static Case b17(String name, double escort1X, double escort1Z,
                              double escort2X, double escort2Z) {
         // Both cases preserve the CombatSimulationSelfTest original B17

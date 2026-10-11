@@ -46,6 +46,12 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.8'
+          # This is the registered owner-controlled Windows runner with an
+          # existing local Gradle 8.8 cache. The preceding execution spent
+          # nearly ten minutes inside remote cache restore before the actual
+          # binary and Forge checks. Keep exact version 8.8 and original-JAR
+          # gates; skip only upload/download of remote Gradle cache entries.
+          cache-disabled: true
 
       - name: Stage exact runtime jars
         env:
@@ -137,6 +143,10 @@ jobs:
             --pilot-source 'src/main/java/org/kneekura/techhub/warfarewings/trace/RuntimeTacticalPilot.java' `
             --output 'run-gametest/ww-physics-traces/exact-weapon-audit.json'
           if ($LASTEXITCODE -ne 0) { throw "Pinned autonomous weapon security audit FAILED: $LASTEXITCODE" }
+
+      - name: Verify observed-only protected asset threat ranking before real Forge tests
+        working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
+        run: gradle --no-daemon --console=plain verifyObservedThreatPriority
 
       - name: Run exact A6M throttle GameTest
         id: exact_gametest
@@ -285,6 +295,18 @@ jobs:
             throw "Real Minecraft multi-aircraft operational gates FAILED: $($failed -join ', '); no source substitute or relaxed gate"
           }
 
+      - name: Independently verify original Forge protectee multi-contact visible threat ranking
+        id: original_observed_threat_selection
+        continue-on-error: true
+        working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
+        run: |
+          python ../tools/verify_live_threat_receipts.py `
+            run-gametest/ww-physics-traces `
+            --summary run-gametest/ww-physics-traces/operational-b17-observed-threat-selection.json
+          if ($LASTEXITCODE -ne 0) {
+            throw "Real Forge original 340-tick protectee/escorts did not demonstrate separately visible hostile priority: $LASTEXITCODE"
+          }
+
       - name: Generate matching microkernel trace and calibration report
         working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
         run: |
@@ -423,6 +445,7 @@ jobs:
         env:
           GAME_TEST_OUTCOME: ${{ steps.exact_gametest.outcome }}
           OPERATIONAL_OUTCOME: ${{ steps.operational_verification.outcome }}
+          CONTACT_SELECTION_OUTCOME: ${{ steps.original_observed_threat_selection.outcome }}
           CALIBRATION_OUTCOME: ${{ steps.representative_calibration.outcome }}
           LONG_STRIKE_OUTCOME: ${{ steps.long_strike_verification.outcome }}
           PHYSICS_TWIN_OUTCOME: ${{ steps.pinned_physics_twin.outcome }}
@@ -437,6 +460,7 @@ jobs:
           $gates = [ordered]@{
             'original_forge_gametest_20hz' = $env:GAME_TEST_OUTCOME
             'real_2v2_b17_95block_6block' = $env:OPERATIONAL_OUTCOME
+            'real_b17_allied_multicontact_fov_los_priority' = $env:CONTACT_SELECTION_OUTCOME
             'real_four_401tick_comparison_completeness' = $env:CALIBRATION_OUTCOME
             'real_840tick_strike_egress_rtb_no_weapons' = $env:LONG_STRIKE_OUTCOME
             'real_35trace_pinned_free_air_twin_0.01block' = $env:PHYSICS_TWIN_OUTCOME

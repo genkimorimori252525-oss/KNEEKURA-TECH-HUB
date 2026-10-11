@@ -163,6 +163,17 @@ tasks.register('verifyLiveAirSensorCone', JavaExec) {
     }
 }
 
+tasks.register('verifyObservedThreatPriority', JavaExec) {
+    group = 'verification'
+    description = 'Observed-only protected-asset closing-approach prioritization, not unseen enemy prediction'
+    dependsOn tasks.named('classes')
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'org.kneekura.techhub.warfarewings.trace.LiveThreatPriority'
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
 tasks.register('verifyLiveMissionPhases', JavaExec) {
     group = 'verification'
     description = 'Deterministic source-only escort, no-ordnance strike egress and latched RTB'

@@ -153,6 +153,9 @@ public final class CombatSimulationSelfTest {
         yes(responseAsset.threatWithinCorridorTicks()<92
                         && responseAsset.closestThreatBlocks()>40.913,
                 "unchanged original exact-response physical setup improves both exposure and distance vs HEAD 0cd4aaa");
+        yes(responseAsset.threatWithinCorridorTicks()<=54
+                        && responseAsset.closestThreatBlocks()>81.90,
+                "new observed-only escort diversion improves original unchanged rear V3 55tick/81.231b failure without disguising the breach");
         for(var pair:reactionEscort.pairs().values())
             yes(pair.closestApproachBlocks()>=6.0 && pair.dangerouslyCloseTicks()==0,
                     "improved aft escort never trades 6b body separation for protection: "+pair);
@@ -210,6 +213,8 @@ public final class CombatSimulationSelfTest {
                         && reactionPreparedAsset.firstThreatEntryTick()==-1
                         && reactionPreparedAsset.closestThreatBlocks()>95.0,
                 "forward V3 reaches original protection requirement by real climb and lateral flight");
+        yes(reactionPreparedAsset.closestThreatBlocks()>98.570,
+                "original prepared 0/190 protection retains the previous 98.570b closest-threat margin");
         yes(reactionPrepared.units().get("cargo").groundedTicks()==0
                         && reactionPrepared.units().get("cargo").pathBlocks()>20
                         && reactionPrepared.units().get("cargo").finalDistanceToObjective()<280,
@@ -411,6 +416,80 @@ public final class CombatSimulationSelfTest {
                         == TacticalAirAI.Maneuver.PATROL_ROUTE,
                 "intercept prediction cannot steer toward an opponent missing from the local sensor track");
     }
+    private static void observedEscortDrag(Path csv) throws Exception {
+        var fighter=AircraftAtlasMain.load(csv).stream()
+                .filter(type->type.aircraftId().equals("warfare_wings:p47n"))
+                .findFirst().orElseThrow();
+        var profile=TacticalAirAI.Profile.fromAtlas(AircraftAtlasMain.evaluateReaction(fighter));
+        Vec3 escortPosition=new Vec3(-35,195,60), protecteePosition=new Vec3(0,170,0);
+        var state=State.airborne(escortPosition,new Vec3(0,0,.8));
+        var incoming=new TacticalAirAI.Contact("individually-observed-inbound",
+                new Vec3(-35,195,100),new Vec3(0,0,-1),true);
+        var frame=new TacticalAirAI.Frame(profile,fighter.model(),state,
+                TacticalAirAI.Mission.ESCORT,GOAL,HOME,incoming,protecteePosition,
+                null,1,1,0,false,0,new Vec3(0,0,.4));
+        var decision=TacticalAirAI.decide(frame,TacticalAirAI.Memory.INITIAL);
+        yes(decision.maneuver()==TacticalAirAI.Maneuver.ESCORT_SCREEN
+                        && decision.reasonCode().equals("ESCORT_OBSERVED_CONTACT_OUTBOUND_DRAG"),
+                "escort diverts only when its own observed enemy track is close and closing");
+        Vec3 vector=decision.steeringPoint().add(escortPosition.scale(-1));
+        Vec3 outbound=escortPosition.add(protecteePosition.scale(-1)).normalize();
+        yes(vector.dot(outbound)>0,
+                "contact-avoidance tangent must have outward component from actual allied protectee");
+        yes(Math.abs(vector.length()-155)<1e-9,
+                "escape waypoint remains a bounded 155-block navigation request, not physical displacement");
+        yes(!decision.firingWindowCandidate()
+                        && Double.isFinite(decision.controls().x())
+                        && Double.isFinite(decision.controls().z()),
+                "tangential escort only produces finite IA steering inputs, never fired weapons");
+
+        var departing=new TacticalAirAI.Contact("observed-departing",incoming.position(),
+                new Vec3(0,0,1.2),true);
+        var outgoingFrame=new TacticalAirAI.Frame(profile,fighter.model(),state,
+                TacticalAirAI.Mission.ESCORT,GOAL,HOME,departing,protecteePosition,
+                null,1,1,0,false,0,new Vec3(0,0,.4));
+        yes(!TacticalAirAI.decide(outgoingFrame,TacticalAirAI.Memory.INITIAL)
+                        .reasonCode().equals("ESCORT_OBSERVED_CONTACT_OUTBOUND_DRAG"),
+                "an individually observed enemy moving away cannot falsely trigger inbound defensive drag");
+        var edge=new TacticalAirAI.Contact("exact-contact-limit",
+                new Vec3(-35,195,108),incoming.velocity(),true);
+        var limit=new TacticalAirAI.Frame(profile,fighter.model(),state,
+                TacticalAirAI.Mission.ESCORT,GOAL,HOME,edge,protecteePosition,
+                null,1,1,0,false,0,new Vec3(0,0,.4));
+        yes(!TacticalAirAI.decide(limit,TacticalAirAI.Memory.INITIAL)
+                        .reasonCode().equals("ESCORT_OBSERVED_CONTACT_OUTBOUND_DRAG"),
+                "farther contacts retain the outward predictive screen without premature evasive break");
+        var unseen=new TacticalAirAI.Frame(profile,fighter.model(),state,
+                TacticalAirAI.Mission.ESCORT,GOAL,HOME,null,protecteePosition,
+                null,1,1,0,false,0,new Vec3(0,0,.4));
+        yes(!TacticalAirAI.decide(unseen,TacticalAirAI.Memory.INITIAL)
+                        .reasonCode().equals("ESCORT_OBSERVED_CONTACT_OUTBOUND_DRAG"),
+                "no detected enemy cannot trigger an omniscient escort-contact drag");
+        var fuelEmergency=new TacticalAirAI.Frame(profile,fighter.model(),state,
+                TacticalAirAI.Mission.ESCORT,GOAL,HOME,incoming,protecteePosition,
+                null,.02,1,0,false,0,new Vec3(0,0,.4));
+        yes(TacticalAirAI.decide(fuelEmergency,TacticalAirAI.Memory.INITIAL).maneuver()
+                        ==TacticalAirAI.Maneuver.RETURN_HOME,
+                "critical fuel withdrawal outranks even an imminent escort-contact diversion");
+
+        var distant=new TacticalAirAI.Contact("observed-not-imminent",
+                new Vec3(-35,195,150),new Vec3(0,0,-1),true);
+        var spoolingFrame=new TacticalAirAI.Frame(profile,fighter.model(),state,
+                TacticalAirAI.Mission.ESCORT,GOAL,HOME,distant,protecteePosition,
+                null,1,1,0,false,0,new Vec3(0,0,.4));
+        var upToPower=new State(0,state.position(),state.velocity(),0,0,0,
+                0,0,0,0,0,0,1,.4,1,0,false,false);
+        var powerReadyFrame=new TacticalAirAI.Frame(profile,fighter.model(),upToPower,
+                TacticalAirAI.Mission.ESCORT,GOAL,HOME,distant,protecteePosition,
+                null,1,1,0,false,0,new Vec3(0,0,.4));
+        var spooling=TacticalAirAI.decide(spoolingFrame,TacticalAirAI.Memory.INITIAL);
+        var powered=TacticalAirAI.decide(powerReadyFrame,TacticalAirAI.Memory.INITIAL);
+        yes(spooling.reasonCode().equals("ESCORT_PREDICTIVE_SCREEN")
+                        && powered.reasonCode().equals("ESCORT_PREDICTIVE_SCREEN"),
+                "known hostile outside the diversion window retains normal escort protection");
+        yes(Math.abs(powered.steeringPoint().y()-spooling.steeringPoint().y()-50)<1e-9,
+                "observed source-engine spool controls the bounded early descending screen only");
+    }
     private static void everyAtlasAirframe(Path csv) throws Exception {
         var roster=AircraftAtlasMain.load(csv);
         yes(roster.size()==24,"exact source Atlas type count");
@@ -458,6 +537,7 @@ public final class CombatSimulationSelfTest {
         oneVsOne(csv);twoVsTwo(csv);escortAndRetreat(csv);invalid(csv);
         observedEnemySafety(csv);
         observedCrossingIntercept(csv);
+        observedEscortDrag(csv);
         everyAtlasAirframe(csv);
         System.out.println("CombatSimulationSelfTest PASS: "+checks
                 +" assertions, source-only 1v1/2v2/mixed escort/retreat; NO_HITS_NO_KILLS");

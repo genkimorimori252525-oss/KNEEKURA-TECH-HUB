@@ -137,6 +137,8 @@ def run_twin(java: str, classes: Path, output: Path, *,
     cases = summary["scenarios"]
     if (summary["schema"] != "ww.flight-twin.closed-loop.v1"
             or "NO_FORGE_PARITY" not in summary["evidence"]
+            or summary.get("actuation_phase") !=
+            "ENTITY_PHYSICS_WITH_PREVIOUS_QUEUED_INPUT_THEN_SERVER_TICK_END_OBSERVE_AND_QUEUE_NEXT"
             or summary["body_separation_radius_blocks"] != 6
             or summary["b17_protection_radius_blocks"] != 95
             or summary["simulated_source_ticks"] != sum(
@@ -169,7 +171,8 @@ def main() -> int:
                         help="Ticks of all_24_unique simultaneous aircraft scenario")
     parser.add_argument("--twin-scenario", choices=(
         "all","all_24_unique","original_2v2","original_b17_aft",
-        "original_b17_forward","synthetic_los_occluded"), default="all")
+        "original_b17_forward","synthetic_los_occluded",
+        "forge_original_b17_340"), default="all")
     args = parser.parse_args()
 
     javac, java = get_java17(args.java_home)

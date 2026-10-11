@@ -21,6 +21,22 @@ public final class FlightTwinSensorSelfTestMain {
                 yaw,0,0,0,0,0,0,0,0,1,0,1,0,false,false);
     }
     public static void main(String[] args) {
+        var liveAligned = FlightTwinSensor.Parameters.DEFAULT;
+        require(liveAligned.rangeBlocks() == 240.0
+                        && liveAligned.halfConeDegrees() == 75.0,
+                "Twin default must match Forge LiveAirSensor range 240 and FULL FOV 150");
+        var forward = craft(0,170,0,0);
+        require(FlightTwinSensor.assess(forward,craft(0,170,239.5,0),
+                        PinnedIa133WindWorld.calmAirCalibration(),liveAligned).visible(),
+                "original real Forge 240b range includes an in-front 239.5b contact");
+        require(FlightTwinSensor.assess(forward,craft(0,170,241,0),
+                        PinnedIa133WindWorld.calmAirCalibration(),liveAligned).visibility()
+                        == FlightTwinSensor.Visibility.OUT_OF_RANGE,
+                "original real Forge 240b range cannot see 241b contact");
+        require(FlightTwinSensor.assess(forward,craft(180,170,0,0),
+                        PinnedIa133WindWorld.calmAirCalibration(),liveAligned).visibility()
+                        == FlightTwinSensor.Visibility.OUTSIDE_FOV,
+                "full 150-degree, not erroneous full 300-degree FOV");
         var params = new FlightTwinSensor.Parameters(190,60,2,24,1.5);
         var flat = PinnedIa133WindWorld.calmAirCalibration();
         var hill = new FlightTwinScenario.SyntheticRidgeWorld();

@@ -22,12 +22,13 @@ import static org.kneekura.techhub.warfarewings.physics.Ia133Microkernel.*;
  * Deterministic simultaneous (not scripted-opponent) multi-aircraft 20 Hz
  * source flight twin. Each tick has a strict frozen snapshot boundary:
  *
- *  (1) each aircraft privately observes all physically evolving opponents;
- *  (2) its prior sensor tracks expire/refresh (FOV/range/terrain LOS);
- *  (3) shared commander assigns ONLY locally remembered hostile IDs;
- *  (4) FlightControlLoop reads each aircraft's own tracks plus allied telemetry;
- *  (5) all aircraft execute original Ia133Microkernel.tickWithReaction controls;
- *  (6) unchanged 6b pair/95b bomber distances measured on resulting states.
+ *  (1) every aircraft physically advances under the PRIOR queued raw controls;
+ *  (2) each aircraft privately senses that newly completed tick's opponents;
+ *  (3) its tracks expire/refresh (FOV/range/terrain LOS);
+ *  (4) team commander assigns ONLY locally remembered hostile IDs;
+ *  (5) FlightControlLoop sees that completed snapshot and QUEUES controls
+ *      for the NEXT physics tick, matching real ServerTick.END timing;
+ *  (6) unchanged 6b pair/95b bomber distances measured on new positions.
  *
  * This uses original pinned IA speed-dependent calm-weather wind, no fake
  * kills or weapons. Height-only LOS and swept centre distances are DIAGNOSTIC
@@ -51,7 +52,7 @@ public final class FlightTwinResearchMain {
                     "Usage: FlightTwinResearchMain ANCHOR_CSV OUTPUT_DIRECTORY "
                     + "[--seed LONG] [--24-ticks 240] [--trace-stride 10] "
                     + "[--scenario all|all_24_unique|original_2v2|original_b17_aft"
-                    + "|original_b17_forward|synthetic_los_occluded] [--reverse-roster]");
+                    + "|original_b17_forward|synthetic_los_occluded|forge_original_b17_340] [--reverse-roster]");
             long seed = 20261011L;
             int ticks = 240, stride = 10;
             String scene = "all";
@@ -72,7 +73,8 @@ public final class FlightTwinResearchMain {
             if (ticks < 20 || ticks > 2400 || stride < 1 || stride > ticks)
                 throw new IllegalArgumentException("Invalid 24-ticks/stride");
             if (!Set.of("all","all_24_unique","original_2v2","original_b17_aft",
-                    "original_b17_forward","synthetic_los_occluded").contains(scene))
+                    "original_b17_forward","synthetic_los_occluded",
+                    "forge_original_b17_340").contains(scene))
                 throw new IllegalArgumentException("Unknown Twin scenario: " + scene);
             return new Options(Path.of(args[0]),Path.of(args[1]),seed,ticks,stride,scene,reverse);
         }
@@ -241,6 +243,8 @@ public final class FlightTwinResearchMain {
                 FlightTwinScenario.originalB17Forward(),
                 FlightTwinScenario.occludedContact(),
                 FlightTwinScenario.all24(entries,options.seed(),options.uniqueTicks())));
+        if (options.scenario().equals("forge_original_b17_340"))
+            scenarios.add(FlightTwinScenario.realForgeOriginalB17340());
         scenarios.removeIf(c -> !options.scenario().equals("all")
                 && !options.scenario().equals(c.id()));
         List<Report> reports = new ArrayList<>();
@@ -287,6 +291,11 @@ public final class FlightTwinResearchMain {
         if (reverse) Collections.reverse(roster);
         Map<String, FlightTwinScenario.Plane> specs = new TreeMap<>();
         Map<String, Local> previous = new TreeMap<>();
+        // Original first GameTest physics step is autonomous vehicle physics:
+        // its pilot is registered before the first aircraft tick, but the
+        // first server END callback has not yet sent IA control. No first
+        // policy decision may retroactively steer tick 0 -> tick 1.
+        Map<String,Control> queuedControls = new TreeMap<>();
         for (var spec : roster) {
             if (specs.putIfAbsent(spec.id(),spec) != null)
                 throw new IllegalArgumentException("duplicate unit ID");
@@ -297,6 +306,7 @@ public final class FlightTwinResearchMain {
             State initial = new State(0,spec.start(),spec.velocity(),spec.yaw(),0,0,
                     0,0,0,0,0,0,1,0,1,0,false,false);
             previous.put(spec.id(),new Local(initial,TacticalAirAI.Memory.INITIAL,Map.of()));
+            queuedControls.put(spec.id(),Control.neutral(1.0));
         }
         if (scenario.unique24() && (specs.size() != 24
                 || specs.values().stream().map(FlightTwinScenario.Plane::typeId).distinct().count() != 24))
@@ -328,19 +338,42 @@ public final class FlightTwinResearchMain {
         }
         for (var own : previous.entrySet()) writeSlice(slices,scenario,0,own.getKey(),
                 specs.get(own.getKey()),models.get(specs.get(own.getKey()).typeId()).role(),
-                own.getValue(),null);
+                own.getValue(),null,null,-1);
 
         for (int tick = 0; tick < scenario.ticks(); tick++) {
-            // Sensor snapshots must all read previous (same tick) positions.
+            int completed = tick+1;
+            // IA physical entity steps are completed BEFORE server END-stage
+            // perception/policy updates. All aircraft advance in a synchronized
+            // physical phase using only the controls queued on the prior tick.
+            Map<String,Local> physicallyAdvanced = new TreeMap<>();
+            Map<String,Control> appliedControls = new TreeMap<>();
+            for (var spec : specs.values()) {
+                Local own = previous.get(spec.id());
+                var model = models.get(spec.typeId()).model();
+                Control applied = queuedControls.get(spec.id());
+                if (applied == null) throw new IllegalStateException("Missing prior actuation " + spec.id());
+                State after = Ia133Microkernel.tickWithReaction(model,own.state(),
+                        applied,scenario.world(),WarfareWingsEngineReaction.ticks(model.id()));
+                if (after.tick() != completed || !finite(after.position())
+                        || !finite(after.velocity()) || !Double.isFinite(after.yawDeg())
+                        || !Double.isFinite(after.pitchDeg()))
+                    throw new IllegalStateException("Bad SOURCE twin advance " + spec.id());
+                physicallyAdvanced.put(spec.id(),new Local(after,own.policyMemory(),own.tracks()));
+                appliedControls.put(spec.id(),applied);
+            }
+
+            // Sensor and policy snapshots all read the same COMPLETED physics
+            // time. Each new decision is queued, never injected into physics
+            // that has already happened.
             Map<String, FlightTwinSensor.Update> sensed = new TreeMap<>();
             for (var own : specs.values()) {
                 Map<String, State> enemies = new TreeMap<>();
                 for (var other : specs.values())
                     if (!other.team().equals(own.team()))
-                        enemies.put(other.id(), previous.get(other.id()).state());
+                        enemies.put(other.id(), physicallyAdvanced.get(other.id()).state());
                 FlightTwinSensor.Update observation = FlightTwinSensor.update(
-                        tick,previous.get(own.id()).state(),enemies,
-                        previous.get(own.id()).tracks(),scenario.world(),SENSOR);
+                        completed,physicallyAdvanced.get(own.id()).state(),enemies,
+                        physicallyAdvanced.get(own.id()).tracks(),scenario.world(),SENSOR);
                 sensed.put(own.id(),observation);
                 Map<String, FlightTwinSensor.Visibility> previousReasons =
                         lastVisibility.get(own.id());
@@ -351,38 +384,33 @@ public final class FlightTwinResearchMain {
                     FlightTwinSensor.Track track = observation.tracks().get(hostileId);
                     boolean expired = observation.expired().contains(hostileId);
                     if (before != other.getValue().visibility() || expired)
-                        writeSensorEvent(observations,scenario.id(),tick,own.id(),hostileId,
+                        writeSensorEvent(observations,scenario.id(),completed,own.id(),hostileId,
                                 before,other.getValue(),track,expired);
                 }
             }
-            Map<String,String> assigned = targetAssignments(specs,previous,sensed,tick,models);
+            Map<String,String> assigned = targetAssignments(
+                    specs,physicallyAdvanced,sensed,completed,models);
             Map<String,Local> next = new TreeMap<>();
             Map<String,Command> commands = new TreeMap<>();
+            Map<String,Control> nextQueuedControls = new TreeMap<>();
             for (var spec : specs.values()) {
                 Command command = decide(spec,specs,models,profiles,
-                        previous,sensed.get(spec.id()),assigned.get(spec.id()),
-                        scenario.world(),tick);
-                Local own = previous.get(spec.id());
-                var model = models.get(spec.typeId()).model();
-                State after = Ia133Microkernel.tickWithReaction(model,own.state(),
-                        command.decision().controls(),scenario.world(),
-                        WarfareWingsEngineReaction.ticks(model.id()));
-                if (after.tick() != tick+1
-                        || !finite(after.position()) || !finite(after.velocity())
-                        || !Double.isFinite(after.yawDeg()) || !Double.isFinite(after.pitchDeg()))
-                    throw new IllegalStateException("Bad SOURCE twin advance " + spec.id());
-                next.put(spec.id(),new Local(after,
+                        physicallyAdvanced,sensed.get(spec.id()),assigned.get(spec.id()),
+                        scenario.world(),completed);
+                Local own = physicallyAdvanced.get(spec.id());
+                next.put(spec.id(),new Local(own.state(),
                         command.decision().nextMemory(),sensed.get(spec.id()).tracks()));
                 commands.put(spec.id(),command);
+                nextQueuedControls.put(spec.id(),command.decision().controls());
             }
-            int completed = tick+1;
             for (var spec : specs.values()) {
                 String id = spec.id();
                 units.get(id).add(previous.get(id),next.get(id),commands.get(id),
                         completed,scenario.world());
                 if (completed % stride == 0 || completed == scenario.ticks())
                     writeSlice(slices,scenario,completed,id,spec,
-                            models.get(spec.typeId()).role(),next.get(id),commands.get(id));
+                            models.get(spec.typeId()).role(),next.get(id),commands.get(id),
+                            appliedControls.get(id),completed == 1 ? -1 : completed-1);
             }
             for (var pair : pairs.values()) {
                 pair.sample(previous.get(pair.a).state().position(),
@@ -437,6 +465,7 @@ public final class FlightTwinResearchMain {
                 asset.bomberFinalObjective = bomber.finalObjectiveDistance;
             }
             previous = next;
+            queuedControls = nextQueuedControls;
         }
         List<String> gates = new ArrayList<>();
         int sampledBreaches = 0, within = 0, obsTicks = 0, memoryTicks = 0;
@@ -674,7 +703,9 @@ public final class FlightTwinResearchMain {
                 + "nearest_ally_blocks,team_known_count,visible_hostiles_count,"
                 + "stale_tracks_count,los_rejected_count,fov_rejected_count,"
                 + "out_of_range_count,target_id,observed_contact_id,contact_age_ticks,"
-                + "maneuver,reason_code,safety_reason,control_x,control_z,control_throttle\n");
+                + "maneuver,reason_code,safety_reason,control_x,control_z,control_throttle,"
+                + "applied_control_x,applied_control_z,applied_control_throttle,"
+                + "applied_control_from_policy_tick,command_generated_at_end_tick\n");
         sensors.write("schema,scenario,tick,observer_id,hostile_id,previous_visibility,"
                 + "visibility,track_available,current_observation,track_age_ticks,"
                 + "track_expired,range_blocks,nose_dot,ray_clearance_blocks\n");
@@ -719,12 +750,16 @@ public final class FlightTwinResearchMain {
 
     private static void writeSlice(BufferedWriter w,FlightTwinScenario.Case scene,int tick,
                                    String id,FlightTwinScenario.Plane spec,String role,
-                                   Local own,Command command) throws IOException {
+                                   Local own,Command command,Control applied,
+                                   int appliedPolicyTick) throws IOException {
         State s = own.state();
         double ground = scene.world().groundHeight(s.position().x(),s.position().z());
         FlightTwinSensor.Update sensor = command == null ? null : command.sensed();
         TacticalAirAI.Decision decision = command == null ? null : command.decision();
-        Control control = decision == null ? Control.neutral(1) : decision.controls();
+        // t0 is BEFORE the first policy call, hence no queued policy command.
+        // First physics tick uses INITIAL neutral raw stick and initial engine
+        // target; that is reported separately as physical actuation.
+        Control control = decision == null ? Control.neutral(0) : decision.controls();
         w.write(String.join(",",SCHEMA,scene.id(),Integer.toString(tick),n(tick/20.0),
                 id,spec.typeId(),role,spec.team(),
                 n(s.position().x()),n(s.position().y()),n(s.position().z()),
@@ -746,7 +781,12 @@ public final class FlightTwinResearchMain {
                 decision == null ? "INITIAL" : decision.maneuver().name(),
                 decision == null ? "INITIAL" : decision.reasonCode(),
                 command == null ? "INITIAL" : command.safety().reason().name(),
-                n(control.x()),n(control.z()),n(control.engineTarget())));
+                n(control.x()),n(control.z()),n(control.engineTarget()),
+                applied == null ? "" : n(applied.x()),
+                applied == null ? "" : n(applied.z()),
+                applied == null ? "" : n(applied.engineTarget()),
+                Integer.toString(appliedPolicyTick),
+                decision == null ? "-1" : Integer.toString(tick)));
         w.write('\n');
     }
 
@@ -773,6 +813,10 @@ public final class FlightTwinResearchMain {
                     +",\n  \"visibility\":"+q("FINITE_RANGE_3D_FOV_ANALYTIC_TERRAIN_RAYCAST_TRACK_TTL")
                     +",\n  \"seed\":"+q(Long.toString(options.seed()))
                     +",\n  \"tick_hz\":20"
+                    +",\n  \"actuation_phase\":"
+                    +q("ENTITY_PHYSICS_WITH_PREVIOUS_QUEUED_INPUT_THEN_SERVER_TICK_END_OBSERVE_AND_QUEUE_NEXT")
+                    +",\n  \"first_physics_input\":"
+                    +q("INITIAL_NEUTRAL_STICK_ENGINE_TARGET_1_NO_POLICY_YET")
                     +",\n  \"body_separation_radius_blocks\":"+n(BODY)
                     +",\n  \"b17_protection_radius_blocks\":"+n(B17)
                     +",\n  \"source_geometry\":"+q("CombatSimulationSelfTest.original_2v2/B17_aft/B17_prepositioned")

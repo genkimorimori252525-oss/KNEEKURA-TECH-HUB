@@ -426,9 +426,16 @@ final class RuntimeTacticalPilot {
         int stationSlot = -1;
         int observedTicks, sensorCandidates, blockedContacts;
         int predictedTicks;
+        // Every entry here has independently passed the current real
+        // Minecraft FOV/range/voxel LOS. Do not silently reduce collision
+        // avoidance to the ONE threat selected for strategic pursuit.
+        final List<TacticalAirAI.Contact> currentVisibleHostiles = new ArrayList<>();
         TacticalAirAI.Contact lastConfirmedContact;
         long lastConfirmedTick = -1;
         String lastContactStatus = "none";
+        String lastContactSelection = "NO_VISIBLE_HOSTILE";
+        int lastVisibleHostileCount;
+        boolean lastContactWasRetainedByHysteresis;
         TacticalAirAI.Memory memory = TacticalAirAI.Memory.INITIAL;
         int lastAircraftTick, steps, nonzeroLateral;
         int stalledServerTicks;
@@ -492,6 +499,7 @@ final class RuntimeTacticalPilot {
             // The original synthetic ArmorStand contact remains exclusively
             // for legacy GameTests. Live runs scan real entities every tick.
             LiveOrder orders = liveOrder;
+            currentVisibleHostiles.clear();
             TacticalAirAI.Contact freshlyObserved = orders == null
                     ? hostile != null && !hostile.isRemoved()
                       ? new TacticalAirAI.Contact(hostile.getUUID().toString(),
@@ -571,12 +579,19 @@ final class RuntimeTacticalPilot {
                     }
                 }
             }
-            if (orders != null && contact != null) {
-                // A live threat can inform collision avoidance ONLY through a
-                // confirmed sensor contact or a still-valid <=6-tick track.
-                // Never read a currently occluded entity's actual geometry.
-                // Radius is a conservative *gameplay assumption*, not a
-                // hidden reading from the unobserved target.
+            // Safety must consider ALL independently visible enemy aircraft,
+            // even when only one has the highest bomber-interception urgency.
+            // Their only input is the output of LiveAirSensor.observe, never
+            // raw globally-known aircraft positions. For a lost sighting,
+            // at most the selected explicit <=6tick memory track may enter.
+            boolean selectedCurrentlyVisible = false;
+            for (TacticalAirAI.Contact seen : currentVisibleHostiles) {
+                nearby.add(new FlightSafetyPlanner.MovingObstacle(seen.id(),
+                        seen.position(), seen.velocity(), 3.0));
+                if (contact != null && seen.id().equals(contact.id()))
+                    selectedCurrentlyVisible = true;
+            }
+            if (contact != null && !selectedCurrentlyVisible) {
                 nearby.add(new FlightSafetyPlanner.MovingObstacle(contact.id(),
                         contact.position(), contact.velocity(), 3.0));
             }
@@ -707,6 +722,9 @@ final class RuntimeTacticalPilot {
         }
 
         private TacticalAirAI.Contact observeLive(LiveOrder order) {
+            lastVisibleHostileCount = 0;
+            lastContactSelection = "NO_VISIBLE_HOSTILE";
+            lastContactWasRetainedByHysteresis = false;
             if (order.designatedTarget() != null) {
                 Entity target = level.getEntity(order.designatedTarget());
                 if (target == null || target.isRemoved() || target == aircraft) return null;
@@ -717,11 +735,39 @@ final class RuntimeTacticalPilot {
                 sensorCandidates++;
                 var observed = LiveAirSensor.observe(level, aircraft, target);
                 if (observed == null) blockedContacts++;
+                else {
+                    currentVisibleHostiles.add(observed);
+                    lastVisibleHostileCount = 1;
+                    lastContactSelection = "EXPLICIT_TARGET_VISUAL_FOV_LOS";
+                }
                 return observed;
             }
             if (order.hostileTeam() == null) return null;
             TacticalAirAI.Contact nearest = null;
             double bestDistSq = Double.POSITIVE_INFINITY;
+            // An escort may know its explicitly allied protectee's real
+            // position/velocity by radio, but may never see unseen raiders.
+            // Protect the moving asset against the most threatening VISIBLE
+            // approach, rather than simply following the opponent currently
+            // nearest to the escort itself. Bombers similarly rank threats
+            // against their own measured flight. This is a finite 48-tick
+            // constant-velocity estimate, not an omniscient future reading.
+            var protectedPosition = xyz(aircraft.position());
+            var protectedVelocity = xyz(aircraft.getDeltaMovement());
+            boolean assetRisk = airframe.profile().role().equals("bomber");
+            if (order.mission() == TacticalAirAI.Mission.ESCORT
+                    && order.leader() != null) {
+                Run ally = ACTIVE.get(order.leader());
+                if (ally != null && ally.liveOrder != null
+                        && order.team().equals(ally.liveOrder.team())
+                        && ally.aircraft.level() == level && !ally.aircraft.isRemoved()) {
+                    protectedPosition = xyz(ally.aircraft.position());
+                    protectedVelocity = xyz(ally.aircraft.getDeltaMovement());
+                    assetRisk = true;
+                }
+            }
+            LiveThreatPriority.Threat risk = null;
+            LiveThreatPriority.Threat previouslySelectedStillVisible = null;
             for (Run other : ACTIVE.values()) {
                 if (other == this || other.liveOrder == null
                         || !order.hostileTeam().equals(other.liveOrder.team())
@@ -732,14 +778,46 @@ final class RuntimeTacticalPilot {
                     blockedContacts++;
                     continue;
                 }
-                double dist = aircraft.distanceToSqr(other.aircraft);
-                if (dist < bestDistSq - 1e-9
-                        || Math.abs(dist - bestDistSq) <= 1e-9
-                        && (nearest == null || observed.id().compareTo(nearest.id()) < 0)) {
-                    bestDistSq = dist;
-                    nearest = observed;
+                currentVisibleHostiles.add(observed);
+                lastVisibleHostileCount++;
+                if (assetRisk) {
+                    var candidate = LiveThreatPriority.assess(
+                            observed, protectedPosition, protectedVelocity);
+                    // The previous selection is eligible for stabilization
+                    // ONLY if it passed FOV/range/voxel LOS AGAIN this tick.
+                    // A six-tick last-seen prediction MUST NOT be promoted
+                    // into a fresh contact by this tactical tie-breaker.
+                    if (lastConfirmedContact != null
+                            && observed.id().equals(lastConfirmedContact.id()))
+                        previouslySelectedStillVisible = candidate;
+                    if (LiveThreatPriority.better(candidate, risk)) {
+                        risk = candidate;
+                        nearest = observed;
+                    }
+                } else {
+                    // Preserve nearest-visible patrol/2v2 target selection;
+                    // only its already-visible Contact position may rank it.
+                    double dist = observed.position()
+                            .add(xyz(aircraft.position()).scale(-1)).lengthSquared();
+                    if (dist < bestDistSq - 1e-9
+                            || Math.abs(dist - bestDistSq) <= 1e-9
+                            && (nearest == null || observed.id().compareTo(nearest.id()) < 0)) {
+                        bestDistSq = dist;
+                        nearest = observed;
+                    }
                 }
             }
+            if (assetRisk && risk != null) {
+                var stable = LiveThreatPriority.chooseStable(
+                        previouslySelectedStillVisible, risk);
+                lastContactWasRetainedByHysteresis = previouslySelectedStillVisible != null
+                        && stable == previouslySelectedStillVisible
+                        && !stable.contact().id().equals(risk.contact().id());
+                nearest = stable.contact();
+            }
+            if (nearest != null)
+                lastContactSelection = assetRisk
+                        ? "VISIBLE_CPA_TO_PROTECTED_ASSET" : "NEAREST_VISIBLE_HOSTILE";
             return nearest;
         }
 
@@ -786,6 +864,10 @@ final class RuntimeTacticalPilot {
                             : decision.reasonCode() + (liveOrder == null ? ""
                                     : "|live_team=" + liveOrder.team()
                                     + "|sighting=" + lastContactStatus
+                                    + "|visible_hostile_count=" + lastVisibleHostileCount
+                                    + "|contact_selection=" + lastContactSelection
+                                    + "|contact_hysteresis_retained="
+                                    + lastContactWasRetainedByHysteresis
                                     + "|phase=" + livePhase
                                     + "|phase_reason=" + lastPhaseReason),
                     clearance == null ? "INITIAL" : clearance.reason().name(),

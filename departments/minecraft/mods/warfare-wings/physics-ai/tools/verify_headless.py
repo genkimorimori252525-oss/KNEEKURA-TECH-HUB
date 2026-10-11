@@ -48,6 +48,7 @@ def main() -> None:
     run(sys.executable, str(ROOT / "tools" / "test_tactical_runtime_receipts.py"))
     run(sys.executable, str(ROOT / "tools" / "test_all_aircraft_runtime_receipts.py"))
     run(sys.executable, str(ROOT / "tools" / "test_live_aircombat_receipts.py"))
+    run(sys.executable, str(ROOT / "tools" / "test_live_threat_receipts.py"))
     run(sys.executable, str(ROOT / "tools" / "test_representative_calibrations.py"))
     run(sys.executable, str(ROOT / "tools" / "test_exact_weapon_failclosed.py"))
     run(sys.executable, str(ROOT / "tools" / "test_long_strike_receipts.py"))
@@ -55,6 +56,11 @@ def main() -> None:
     run(sys.executable, str(ROOT / "tools" / "test_real_tactical_clock.py"))
     run(sys.executable, str(ROOT / "tools" / "test_flight_lab.py"))
     run(sys.executable, str(ROOT / "tools" / "test_flight_twin_lab.py"))
+    # CI/Docker have NO original Minecraft JAR or raw real-owner CSVs.
+    # Owner-only forensic comparison deliberately SKIPS there instead of
+    # fabricating real evidence from synthetic fixtures.
+    run(sys.executable, str(ROOT / "tools" / "test_flight_twin_forensic.py"))
+    run(sys.executable, str(ROOT / "tools" / "test_flight_twin_policy_delta.py"))
 
     with tempfile.TemporaryDirectory(prefix="warfare-wings-atlas-") as directory:
         json_out = Path(directory) / "aircraft-atlas-ai-view.json"

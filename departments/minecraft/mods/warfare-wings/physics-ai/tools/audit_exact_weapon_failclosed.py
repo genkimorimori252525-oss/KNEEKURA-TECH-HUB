@@ -42,6 +42,72 @@ def method_block(disassembled: str, signature: str) -> str:
     return tail[:next_method.start()] if next_method else tail
 
 
+def frame_call_arguments(pilot_source: str) -> list[list[str]]:
+    """Extract ALL new TacticalAirAI.Frame calls with balanced parentheses.
+
+    Whitespace and an extra *non-weapon* friendly-velocity argument cannot
+    defeat the check. A second unsafe constructor call must fail, even if a
+    separate safe call remains. This is a guarded lexical audit, not a Java
+    typechecker or permission to fire the pinned original weapon API.
+    """
+    # Remove comments so an example in a Javadoc paragraph cannot be counted
+    # as the only genuine no-fire call by this static-source evidence check.
+    source = re.sub(r"(?s)/\*.*?\*/|//[^\n]*", "", pilot_source)
+    matchers = tuple(re.finditer(r"\bnew\s+TacticalAirAI\s*\.\s*Frame\s*\(", source))
+    if not matchers:
+        raise ValueError("No live Forge TacticalAirAI.Frame constructor found")
+    calls: list[list[str]] = []
+    for match in matchers:
+        begin, depth, fields = match.end(), 1, []
+        quoted, escape = None, False
+        for offset in range(begin, len(source)):
+            char = source[offset]
+            if quoted:
+                if escape:
+                    escape = False
+                elif char == "\\":
+                    escape = True
+                elif char == quoted:
+                    quoted = None
+                continue
+            if char in ('"', "'"):
+                quoted = char
+            elif char == "(":
+                depth += 1
+            elif char == ")":
+                depth -= 1
+                if depth == 0:
+                    fields.append(source[begin:offset].strip())
+                    calls.append(fields)
+                    break
+            elif char == "," and depth == 1:
+                fields.append(source[begin:offset].strip())
+                begin = offset + 1
+        else:
+            raise ValueError("Unterminated live Forge Frame constructor")
+    return calls
+
+
+def audit_no_fire_frame(pilot_source: str) -> int:
+    """Fail closed unless EVERY actual Frame sets literal false/zero weapons."""
+    calls = frame_call_arguments(pilot_source)
+    for index, arguments in enumerate(calls, start=1):
+        # Source overload (14 args) and source+known friendly leader velocity
+        # overload (15 args) share the same *weapon* arguments at 12 and 13.
+        if len(arguments) not in (14, 15):
+            raise ValueError(f"Live Forge Frame #{index} has unexpected arguments")
+        if arguments[12] != "false" or re.fullmatch(
+                r"0(?:\.0+)?[fFdD]?", arguments[13]) is None:
+            raise ValueError(f"Live Forge Frame #{index} enables/obscures autonomous firing")
+    # The exact original aircraft must NOT be fired through direct/server
+    # entrypoints before real loadout, muzzle, friendly, cooldown and owner
+    # proof exists. Keep the preexisting direct-call denial as well.
+    if re.search(r"\.\s*fireWeapon\s*\(|\.\s*fire\s*\(\s*new\s+Vector3f",
+                 pilot_source):
+        raise ValueError("Direct original weapon API call found in live Forge pilot")
+    return len(calls)
+
+
 def audit(ww: Path, ia: Path, javap: str, pilot_source: Path | None = None) -> dict:
     digest(ww, "sha256", WW_SHA256)
     digest(ia, "sha512", IA_SHA512)
@@ -67,10 +133,7 @@ def audit(ww: Path, ia: Path, javap: str, pilot_source: Path | None = None) -> d
     no_fire_runtime_verified = False
     if pilot_source is not None:
         actual_pilot = pilot_source.read_text(encoding="utf-8")
-        if (re.search(r"new\s+TacticalAirAI\.Frame\s*\(.*?\bsurface\s*,\s*false\s*,\s*0\s*\)",
-                      actual_pilot, re.S) is None
-                or re.search(r"\.\s*fireWeapon\s*\(|\.\s*fire\s*\(\s*new\s+Vector3f", actual_pilot)):
-            raise ValueError("Exact live Forge pilot no-fire control contract changed")
+        audit_no_fire_frame(actual_pilot)
         no_fire_runtime_verified = True
     # Complete evidence of a safe AI launch requires observing the actual
     # inventory mounts and ammunition *in each entity*, a separate enforced

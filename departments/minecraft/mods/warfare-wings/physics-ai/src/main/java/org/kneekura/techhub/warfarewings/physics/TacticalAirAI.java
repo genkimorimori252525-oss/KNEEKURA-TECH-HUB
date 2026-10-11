@@ -202,13 +202,40 @@ public final class TacticalAirAI {
             double side = frame.self().position().add(anchor.scale(-1)).dot(right) < 0 ? -1 : 1;
             // Two guards approaching from opposite sides should not be
             // assigned the same 3D point in the moving protection corridor.
-            // A shallow descending intercept station allows the fighter to
-            // trade some altitude for speed while its engine spools up. This
-            // is a guidance waypoint only: IA still integrates real motion,
-            // and the safety planner may overrule it for terrain or traffic.
+            // Use a slightly lower station while the *measured* engine is
+            // still spooling up. Gravity can supply temporary airspeed, but
+            // neither speed nor altitude is changed directly by this order.
+            // Terrain and aircraft separation remain world-safety priorities.
+            double descent = self.enginePowerSmooth() < 0.12 ? -70 : -20;
             target = defendedFuture.add(outward.scale(screenDistance))
-                    .add(right.scale(side * 12)).add(0, -20, 0);
-            why = distance < 100 ? "ESCORT_INNER_SCREEN" : "ESCORT_PREDICTIVE_SCREEN";
+                    .add(right.scale(side * 12)).add(0, descent, 0);
+
+            // An observed hostile closing on the escort can be drawn toward
+            // the bomber by an ordinary straight-back defensive break. Keep
+            // a short-range escape *tangent* to the protectee's radial line,
+            // with an outward component, so it never deliberately steers the
+            // guard toward the protected asset. These are source-lab maneuver
+            // distances, unrelated to the 95b/30b/6b operational gates.
+            Vec3 ownFromContact = position.add(frame.enemy().position().scale(-1));
+            Vec3 relativeContactVelocity = frame.enemy().velocity().add(self.velocity().scale(-1));
+            double contactRange = ownFromContact.length();
+            double observedClosure = contactRange < EPS ? 0
+                    : relativeContactVelocity.dot(ownFromContact.scale(1.0 / contactRange));
+            if (contactRange < 48 && observedClosure > 0.10) {
+                Vec3 outbound = position.add(anchor.scale(-1)).normalize();
+                Vec3 away = ownFromContact.normalize();
+                Vec3 tangent = away.add(outbound.scale(-away.dot(outbound))).normalize();
+                if (tangent.lengthSquared() < EPS) tangent = right.scale(side);
+                Vec3 breakout = tangent.add(outbound.scale(0.35)).normalize();
+                if (breakout.lengthSquared() > EPS) {
+                    target = position.add(breakout.scale(155));
+                    why = "ESCORT_OBSERVED_CONTACT_OUTBOUND_DRAG";
+                } else {
+                    why = "ESCORT_CONTACT_ESCAPE_DEGENERATE";
+                }
+            } else {
+                why = distance < 100 ? "ESCORT_INNER_SCREEN" : "ESCORT_PREDICTIVE_SCREEN";
+            }
         } else if (frame.profile().role().equals("bomber")
                 && (frame.mission() == Mission.LEVEL_BOMB || frame.mission() == Mission.PATROL)
                 && frame.enemy() != null && frame.enemy().hostile()

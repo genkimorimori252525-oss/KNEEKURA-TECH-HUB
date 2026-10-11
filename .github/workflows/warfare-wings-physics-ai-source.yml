@@ -35,6 +35,8 @@ jobs:
         run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_all_aircraft_runtime_receipts.py
       - name: Verify synchronized multi-aircraft geometric gates reject invalid Forge receipts
         run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_live_aircombat_receipts.py
+      - name: Verify multi-contact protected-asset selection rejects invisible, fabricated and missing original Forge actor evidence
+        run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_live_threat_receipts.py
       - name: Verify representative 401-tick Forge calibration parser rejects missing/frozen source fixtures
         run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_representative_calibrations.py
       - name: Verify exact-original weapon audit rejects missing APIs and substituted binary fixtures
@@ -49,6 +51,10 @@ jobs:
         run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_flight_lab.py
       - name: Verify simultaneous 24-unique-airframe closed-loop Physics Twin, observed contacts and unchanged 95/6 block gates
         run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_flight_twin_lab.py
+      - name: Run real-B17 forensic provenance tests only where original receipts exist (otherwise explicit SKIP)
+        run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_flight_twin_forensic.py
+      - name: Verify independent two-real-Forge-run B17 policy comparison where original receipts exist (otherwise explicit SKIP)
+        run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_flight_twin_policy_delta.py
       - name: Produce downloadable self-contained SOURCE flight laboratory and simultaneous 24-plane Twin
         run: |
           ROOT=departments/minecraft/mods/warfare-wings/physics-ai
@@ -110,7 +116,7 @@ jobs:
           gradle-version: '8.8'
       - name: Compile tactical Forge adapter and verify IA non-player input phase contract
         working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
-        run: gradle --no-daemon --console=plain compileJava processResources verifyTacticalInputCorrection verifyLiveAirSensorCone verifyLiveMissionPhases
+        run: gradle --no-daemon --console=plain compileJava processResources verifyTacticalInputCorrection verifyLiveAirSensorCone verifyObservedThreatPriority verifyLiveMissionPhases
 
   docker-headless:
     runs-on: ubuntu-latest

@@ -2,6 +2,147 @@
 
 Status: **exact-JAR Forge 1.20.1 GameTest measured; current 19/20 tests PASS, B-17 operational protection FAILED**. The pinned owner Warfare Wings JAR and matching IA JAR were hash-verified and tested locally. This remains an experimental Forge integration with no weapon firing and no claim of full source/microkernel-to-Minecraft parity.
 
+## 2026-10-11 continuation — visible protected-asset threat selection and owner-runner gate
+
+The owner-controlled GitHub Actions run
+[#38121994663](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38121994663)
+is **FAILED before any original Forge GameTests ran**. Its pinning and
+24-engine-reaction bytecode checks passed, but the former static weapon-gate
+regular expression only understood the older 14-argument
+`new TacticalAirAI.Frame(..., surface, false, 0)` call. The new, legitimately
+observed same-team leader-velocity parameter produces a 15-argument Frame
+ending `..., surface, false, 0, observedLeaderVelocity`, so the old regex
+incorrectly rejected a still-unarmed pilot. Its GameTests, physics replay and
+long-strike acceptance were **SKIPPED**, not failed real flights. A revised
+`audit_no_fire_frame` now checks **every** real Frame constructor by balanced
+argument parsing: in either permitted overload, index 12 must be the literal
+`false` and index 13 the literal zero. It also rejects direct original
+`fireWeapon` calls. All ten source adversarial parser tests and the
+**actual pinned WW/IA original-binary bytecode audit** pass; autonomous fire
+remains **DISABLED**, regardless of aircraft mission.
+
+The live pilot formerly picked the nearest physically visible hostile to
+**itself**, even when the protected B-17 was at risk from a *different*
+opponent. `LiveThreatPriority` now uses only contacts which independently
+passed real `LiveAirSensor` 240-block range, 150-degree **full** FOV and block
+line-of-sight plus the explicitly allied leader's measured Entity position
+and velocity. For B-17 and an escort with its same-team leader, it extrapolates
+the measured relative geometry for a bounded **48 ticks** and selects the
+minimum predicted close approach (with a small earlier-threat weighting).
+Non-escort patrol/2v2 still uses nearest personally observed hostile; an
+explicit UUID target continues to require real FOV/LOS. A visible enemy is
+never inferred from an airframe's nation or global omniscient entity state.
+This is a **new tactical hypothesis**, not actual proven 95b protection.
+
+New original-control CSV fields `visible_hostile_count` and
+`contact_selection=VISIBLE_CPA_TO_PROTECTED_ASSET` make the observed actor
+selection inspectable. Source `verifyObservedThreatPriority` runs 15 Java17
+vector/same-velocity/urgency/tie/unobserved assertions. Independent
+`tools/verify_live_threat_receipts.py` demands three original
+**341-state B-17/escort real GameTest recordings**, contiguous original
+physics and server clocks, at least one genuinely recorded two-contact
+frame for each, and rejects missing/fabricated source-only or hidden-contact
+claims. Synthetic bad-receipt tests cannot certify real sensing. The new
+Owner-Forge workflow fails closed on this extra gate *in addition to*, never
+instead of, the unchanged 95b/6b/30b/840tick and original-JAR gates.
+
+The previous owner Windows Gradle setup step took almost ten minutes to
+restore remote caches. The next owner workflow preserves **Gradle 8.8** and
+the locally pinned artifact SHA checks, but requests `cache-disabled: true`
+for `gradle/actions/setup-gradle@v4` on this permanent self-hosted runner.
+This only bypasses remote Gradle cache transfer; it does not bypass Gradle,
+Forge tests, source compilation or any real-game acceptance requirement.
+
+### Fresh owner-local original-JAR GameTest after protected-asset CPA (2026-10-11)
+
+The latest **local** Java17 / Gradle8.8 Forge 47.4.20 run executed **all
+20 unchanged original GameTests: 19 PASS / one B-17 escort FAILED**. Its
+live pilot now passes every currently FOV/LOS-visible hostile to the
+collision safety model rather than including only the one strategy selected;
+unseen and unassigned enemy positions remain excluded. The native GameTest
+reported `B17_95_BLOCK_PROTECTION_BREACH intrusionTicks=105
+minDistance=52.68007278442383`; a fully separate synchronized CSV reader
+measured **104/340** inside 95 blocks with a **52.680071b** minimum, because
+the native and independent sample horizons differ at one endpoint.
+**Neither passed the original zero-intrusion gate.** The preceding local
+strategy had **49/340** and a minimum **82.570680b**; this source tactic
+and observed-CPA policy combination demonstrably **WORSENED** protection.
+The original 30b escort net-displacement condition was not reported failed
+in this run, and no safety/mission threshold or opening geometry was altered.
+
+The same new live GameTest demonstrates the actual observed selector:
+
+| Real 340tick actor | Confirmed enemy-sighting ticks | Both hostile aircraft visible simultaneously |
+|---|---:|---:|
+| B-17 | 168 | 141 |
+| P-47N left escort | 304 | 104 |
+| P-47N right escort | 112 | 91 |
+
+`tools/verify_live_threat_receipts.py` independently checks the complete
+**341 authentic actor samples per case**, original server/Entity tick clocks,
+explicit ally team, ID-shaped actual sensor sightings and
+`VISIBLE_CPA_TO_PROTECTED_ASSET` decisions, and **PASS**. This confirms the
+new selector operated under real Forge conditions, but **does not prove it
+chose the right target or succeeded at the B-17 mission**. Eight synthetic
+adversarial tests reject absent/short/forged contacts, invisible enemy
+reports and invalid team data; those fixtures are not Minecraft evidence.
+Real 2v2 remains **PASS** (all original 6b separations), both original IL-2
+and B-17 physically complete **840tick no-ordnance ingress/egress/RTB
+guidance PASS**, and independent source open-loop replay of the new exact
+real record again gets **35/35 / 24 aircraft / 5,880 ticks PASS**, maximum
+0.001775711195b final discrepancy under the distinct 0.01b free-flight
+threshold. **This does not certify closed-loop strategic/weapon/voxel
+collision parity**. Proprietary source JARs and raw owner-runtime CSV bodies
+remain gitignored and must not be pushed.
+
+### Original-Forge target-choice hysteresis — latest owner-local evidence
+
+Comparing the saved, unchanged original 340tick pilot CSVs exposed distinct
+**enemy-target changes at physics ticks 47 and 109**, during which the two
+currently FOV/LOS-visible opponents' constant-velocity CPA priority scores
+differed by only approximately **0.00b and 0.02b**. The protected bomber's
+steering direction and real yaw reversed rapidly, which was associated with
+a worsening of its minimum actual enemy clearance. This is a specific
+measured cause candidate, **not proof of causal benefit**.
+
+`LiveThreatPriority.chooseStable()` now retains the previously followed
+hostile **only when that hostile independently passes the real range/FOV/
+voxel LOS check again on this exact server tick**, and only if the currently
+visible best competitor improves CPA urgency by **no more than 8 blocks**.
+This is a bounded tactical-selection deadband, not an operational 95b, 6b or
+30b acceptance threshold. If a better visible threat becomes clearly more
+dangerous, the AI can switch. If the old contact becomes invisible, it cannot
+be relabeled a fresh sighting. The pilot separately includes every genuinely
+visible hostile in physical safety planning. The original no-fire input
+contract remains `false,0`.
+
+The **subsequent new local original-JAR 20-GameTest run** with this retention
+and unchanged original five-aircraft starting geometry resulted in
+**19 PASS / one still FAILED**. Original native Forge B-17 mission measured
+**81/340** hostile intrusion ticks, closest **65.020050b**. Independent
+strict synchronized CSV audit agrees **81/340**, **65.020052b**, with
+minimum 10-pair aircraft separation **11.006527b** (thus zero under-6b
+events). This is better than the immediately previous visible-CPA run
+**105/340 at 52.680073b**, but still worse than an earlier policy's
+**49/340 at 82.570680b**. The zero-intrusion strict criterion is not met.
+All five original aircraft complete the full 340tick real physics horizon;
+2v2 remains PASS, real IL-2/B-17 840tick strike/egress/RTB geometry PASS,
+and newly measured independent 35-flight open-loop physics replay remains
+PASS with maximum end error **0.001775711195b**. None of these imply
+real weapon operation, bomber protection or landing.
+
+The new `tools/forensic_b17_compare.py` produces a **read-only original
+Forge vs externally autonomous SOURCE Twin** 341-step forensic timeline,
+1,705 aircraft rows, numerical diagnostics, failure events, and self-contained
+`forensic_b17.html`. Against the newest unmodified actual original pilot
+records the tool explicitly marks an outdated summary sidecar as
+`STALE_SIDE_CAR_QUARANTINED_NOT_ACCEPTED`, recomputes REAL geometry from
+complete authenticated CSV, and separately reports real **81/340 / 65.020052b
+FAILED** vs closed-loop SOURCE **204/340 / 30.355539b FAILED**. These
+distinct policy trajectories are **not** a physics parity result. Only the
+earlier recorded-control 35 flights establish scoped original aerodynamic
+open-loop fidelity. Raw owner telemetry is ignored and never committed.
+
 ## Ownership and runtime contract
 
 The adapter is under `runtime-probe/` and includes the **exact shared pure-Java** classes from `physics-ai/src/main/java` at compile time, including `TacticalAirAI`, `HistoricalDoctrineOrders`, `FlightGuidance`, `FlightSafetyPlanner`, `FlightControlLoop`, and `AircraftAtlasMain`. `stageRuntimeTacticalAtlas` embeds `../data/base-aircraft-anchor-v1.csv`; `RuntimeTacticalAtlas.load()` evaluates all 24 entries with the same code used by source-only tests. The driver does not hard-code A6M tuning or claim the ANCHOR JSON is the shipped historical WARFARE WINGS release.

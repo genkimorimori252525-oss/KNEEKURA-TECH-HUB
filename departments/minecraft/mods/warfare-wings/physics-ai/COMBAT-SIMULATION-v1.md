@@ -25,10 +25,10 @@ limit, starting geometries and observation constraints are UNCHANGED.
 | Scenario | Legacy source engine20 | Original WW bytecode engine response | Result |
 |---|---:|---:|---|
 | 2v2 opposing A6M/Bf109 closest | 47.557 blocks | 36.923 blocks | Both satisfy strict all-six-pair ≥6-block clearance |
-| B-17 original aft guard, enemy within 95 blocks | Current legacy engine20: **47 / 190 ticks** | **55 / 190 ticks** (prior working tree: 59, original V3: 92) | **FAILED** protection; actual breach remains |
-| B-17 original aft guard, closest threat | Current legacy: **69.378 blocks** | **81.231 blocks** (prior working tree: 79.128, original V3: 40.913) | Still **FAILED** |
+| B-17 original aft guard, enemy within 95 blocks | Legacy engine20: **47 / 190 ticks** | **54 / 190 ticks** (7dcda5e baseline 55; previous 59, original V3: 92) | **FAILED** protection; actual breach remains |
+| B-17 original aft guard, closest threat | Legacy: **69.378 blocks** | **81.923 blocks** (7dcda5e baseline 81.231, original V3: 40.913) | Still **FAILED** |
 | B-17 original forward-prepared guard, intrusion | Current legacy: **0 / 190 ticks** | **0 / 190 ticks** (V3 original: 30) | **PASS only for this exact prepared-start 95-block source geometry** |
-| B-17 original forward-prepared guard, closest threat | Current legacy: **122.165 blocks** | **98.570 blocks** (prior working tree: 96.828, original V3: 77.643) | **PASS**; margin **3.570 blocks** above unchanged 95b |
+| B-17 original forward-prepared guard, closest threat | Legacy: **122.165 blocks** | **112.379 blocks** (7dcda5e baseline 98.570, original V3: 77.643) | **PASS**; margin **17.379 blocks** above unchanged 95b |
 
 The V3 source engine-response model is a nontrivial operational constraint:
 the exact per-airframe source reaction delays effective thrust during the first
@@ -47,15 +47,28 @@ and the actual allied asset's observed velocity; the source controller
 extrapolates both future trajectories without reading global unseen hostile
 state. The lead horizon derives from range, measured relative-closing rate,
 and estimated achievable fighter travel time, **not** the 95-block test gate.
-The fighter now aims **20 blocks below** this projected moving screen instead
-of directly level with it. This is a modest descending waypoint request intended
-to retain energy during the engine-reaction delay; the aircraft must physically
-turn and descend through normal controls, and terrain/airframe safety can overrule
-the request. Across the two original unmodified 190-tick source geometries, the
-exact V3 aft penetration duration falls **59 to 55 ticks**, minimum distance
-rises **79.128 to 81.231 blocks** (still FAILED), and the forward-prepared
-margin improves **96.828 to 98.570 blocks** with **zero penetrations**. These
-measurements do not establish benefits in the five-aircraft 340-tick Forge scenario.
+The fighter normally aims **20 blocks below** this projected moving screen,
+but while its *measured* engine power is below **0.12** the source policy
+temporarily commands **70 blocks below** it to obtain a descending early
+intercept during delayed engine response. These are guidance requests, not
+instantaneous altitude/speed modifications; terrain and aircraft separation
+safety can overrule them. When its individually sensor-known hostile is
+within **48 blocks and closing by more than 0.10 blocks/tick relative to
+the fighter**, the escort requests a bounded **155-block tangential escape**
+from the hostile's observed position, including a **0.35 outward component**
+relative to the actual protected aircraft. This is intended to avoid dragging
+the attacker straight back through its bomber. An unseen, distant, or
+receding hostile cannot trigger that escape. These action distances are
+uncalibrated navigation parameters; they do **not** replace or redefine
+the original 95-block protection, 30-block Forge escort-hostile, or 6-block
+physical separation acceptance gates.
+
+Across the two unmodified 190-tick source geometries, this policy changes
+exact V3 aft penetration duration from the earlier **55 to 54 ticks** and
+minimum separation from **81.231 to 81.923 blocks**: **STILL FAILED**.
+In forward-prepared cover, intrusion stays **zero** and the minimum hostile
+separation grows from **98.570 to 112.379 blocks**: **PASS in source V3**.
+No Forge behavior can be inferred from these source-only observations.
 In source V3, an escort assigned at tick 8 still initially flies behind
 its protectee, and no amount of assigning targets itself stops a live fighter:
 the same aft-deployed starting geometry remains a stringent known failure.
@@ -77,7 +90,7 @@ course or a weapon firing command. A crossing-contact test distinguishes the
 quadratic prediction from the previous range/summed-speeds heuristic.
 Under exact-WW source response the unchanged forward-prepared V3 flight
 reaches 0/190 intrusion ticks, but the unchanged aft flight STILL FAILS with
-55/190 ticks. There is no fake kill, fired weapon, or proven real-Forge
+54/190 ticks. There is no fake kill, fired weapon, or proven real-Forge
 combat parity; the real GameTest must establish that separately.
 The aft-deployed aircraft still records `ESCORT_PROTECTION_BREACHED`
 under those same 95-block operational gates.
@@ -170,8 +183,8 @@ These illustrative outputs are observed source simulation telemetry; assertions 
 |---|---|---|
 | A6M vs P-47N, 150 ticks | Closest approach ~**39.80 blocks**, from 90-block initial separation | Both pilots detect and avoid the closing aircraft; no touchdown |
 | 2v2, 160 ticks | Blue wing pair closest ~**69.76 blocks**; opposing A6M/Bf 109 closest ~**47.56 blocks**, **zero ticks under 6 blocks across all six aircraft pairs** | **PASS** for the selected 2v2 source-body-separation gate. Other starting geometries are not guaranteed |
-| B-17 + F4U/P47N **aft-deployed cover** vs A6M, 190 ticks | Legacy reaction: **47 intrusion ticks**, min hostile distance **69.378 blocks**; original-WW reaction: **55 intrusion ticks**, min **81.231 blocks**. Starts x±65/z−20, first V3 assignment tick8, V3 intrusion tick105–159, final bomber objective distance **267.700 blocks** | **FAILED: ESCORT_PROTECTION_BREACHED** despite 366 escort-assignment pilot-ticks. The prior V3 working tree was 59 ticks / 79.128b; source maneuver still cannot defend unchanged perimeter |
-| B-17 + F4U/P47N **forward-prepared cover** vs same A6M, 190 ticks | Same x±27/z+115 original forward starts, 95-block gate, aircraft and source V3 reaction: **0 intrusion ticks**, closest hostile **98.570 blocks** (prior working tree 96.828b), first assignment tick1; B-17 final objective distance **226.082 blocks** | **PASS for this exact physically flown V3 prepared-start scenario**, margin 3.570b above unchanged 95b. Aft start remains FAILED. No simulated projectile/hit/kill |
+| B-17 + F4U/P47N **aft-deployed cover** vs A6M, 190 ticks | Legacy reaction: **47 intrusion ticks**, min hostile distance **69.378 blocks**; original-WW reaction: **54 intrusion ticks**, min **81.923 blocks**. Starts x±65/z−20, first V3 assignment tick8, V3 intrusion tick105–158, final bomber objective distance **267.835 blocks** | **FAILED: ESCORT_PROTECTION_BREACHED** despite 366 escort-assignment pilot-ticks. 7dcda5e baseline was 55 ticks and 81.231b; source maneuver still cannot defend unchanged perimeter |
+| B-17 + F4U/P47N **forward-prepared cover** vs same A6M, 190 ticks | Same x±27/z+115 original forward starts, 95-block gate, aircraft and source V3 reaction: **0 intrusion ticks**, closest hostile **112.379 blocks** (7dcda5e baseline 98.570b), first assignment tick1; B-17 final objective distance **226.082 blocks** | **PASS for this exact physically flown V3 prepared-start scenario**, margin 17.379b above unchanged 95b. Aft start remains FAILED. No simulated projectile/hit/kill |
 | B-17 level-bomb geometric pass | Window around tick **176**, target plane around **248**; return phase entered; min terrain clearance ~**164.78 blocks** | Strike geometry achieved, **return incomplete at scenario timeout** |
 | G4M sea run | Window around tick **144**, minimum sea clearance ~**21.94 blocks**; egress and return phase entered | Safe source-only sea-surface corridor, **no torpedo release** |
 | Ju 87 dive recovery | Pull-out commanded around tick **92**, altitude recovery around tick **410**, min clearance ~**49.48 blocks** | Physical climb recovery observed, no ground contact; **early abort earns no weapon window** |
@@ -181,7 +194,7 @@ These illustrative outputs are observed source simulation telemetry; assertions 
 
 With V3 original engine-response the designated 2v2's minimum separation across all **six pairs** remains **36.923 blocks**, with zero under-six-block samples. The unchanged forward-prepared B-17 passes geometric defense only through **ordinary integrated source yaw/pitch/thrust**, including a lateral and upward escape waypoint for a genuinely observed inbound enemy. The B-17 still progresses toward the source mission objective (final 226.082b distance versus initial 280b). The source cannot claim a weapon hit or victory. The gate margin is modest and should be checked against Forge-calibrated drift, not assumed universally valid.
 
-A further all-Atlas regression stages all **24** individually identified types at widely separated locations, explicitly retains A6M, P-47N, Spitfire, IL-2 and B-17, integrates actual control ticks and asserts movement, ground clearance and finite distances for all **276** unique aircraft pairs. The Java 17 source suite reports **14/14 SelfTest classes PASS**, including **249 passing Combat assertions and 40 passing Strike assertions**. Fighter interception tests cover constant-velocity crossing roots, an unreachable faster departing track, the 30-tick cap, coincident positions, and no enemy knowledge without a valid observed contact.
+A further all-Atlas regression stages all **24** individually identified types at widely separated locations, explicitly retains A6M, P-47N, Spitfire, IL-2 and B-17, integrates actual control ticks and asserts movement, ground clearance and finite distances for all **276** unique aircraft pairs. Running the installed **JDK 17** with `javac --release 17` yielded **14/14 Java source SelfTest classes PASS**, including **261 passing Combat assertions** (249 before), **40 passing Strike assertions**, and checks for closing observed-only diversion, a receding contact, a missing contact, fuel override, bounded steering, and actual engine-power-dependent screen altitude. The unchanged `check-microkernel.mjs --java-home <JDK17_PATH>` also **PASSED its immutable generated report comparisons**, including the versioned v2 tactical golden, without overwriting any golden. Fighter interception tests cover constant-velocity crossing roots, an unreachable faster departing track, the 30-tick cap, coincident positions, and no enemy knowledge without a valid observed contact.
 
 The low-fuel regression physically advances 50 ticks with **42 RETURN_HOME** decisions and **8 immediate collision-avoidance** decisions, without touchdown. An independent sensor test checks that an out-of-range fighter is not provided as a hostile collision obstacle, while a detected head-on target is; tests also verify correct risk selection in the presence of both allies and an observed enemy. Separate tests distinguish a stationary hostile from a truly inbound observed bomber threat and ensure a fuel emergency retains priority. The prepared escort test enforces **no penetration of the same 95-block corridor and no pair distance below six blocks**; the aft-deployed case keeps the same operational gate and must remain flagged FAILED.
 
@@ -191,12 +204,50 @@ Source-only policies currently treat each aircraft as an approximate flight body
 
 The new `runWithStrikePlans` shared-snapshot pathway now exchanges source-level mission phases, but remains a **source-only laboratory implementation**; it has not been promoted to Forge aircraft control, exact weapon behavior, or live mission success. Fuel/integrity fractions in squadron scenarios are supplied configuration values, not simulated consumption, damage or ammunition. The next evidence gate is the user's exact Warfare Wings / Immersive Aircraft binary on Forge 1.20.1, verifying real server-side controllability, per-tick power/steering phase, collision, and attack equipment semantics. No weapon-release control is added without direct primary-source/API evidence and real runtime checks.
 
-The independent **original 340-tick five-aircraft real Forge B-17 GameTest**
-has **not passed**. The immutable earlier receipt measured **101/340**
-hostile-intrusion ticks with a **66.029-block** minimum; an October 11 local
-rerun after enabling the B-17's legitimate visual enemy contacts and measured
-escorted-leader velocity still reported **FAILED 135/340**, minimum
-**41.695 blocks**. Those Forge numbers precede the newly measured 20-block
-descending escort waypoint. The latter has source V3 evidence only; a new
-unchanged-geometry Forge 340-tick GameTest run is required before claiming any
-real-world improvement. No pass is inferred from 249/40 source assertions.
+The independent **original 340-tick, five-aircraft real Forge B-17 GameTest
+still FAILED after this tactical change and the runtime's CPA contact-retention
+update**. The final local original-entity run completed **19/20 Forge
+GameTests PASS**, with this strict B-17 defense as the one **FAILED** case:
+**81/340 hostile-intrusion ticks inside the unchanged 95-block perimeter**,
+minimum bomber–hostile separation **65.020052 blocks**. All ten aircraft
+pairs stayed outside the original **6-block** body-separation gate (minimum
+observed pair was raider-1/raider-2 at **11.006527 blocks**). However the
+closest escort–hostile pair, escort-left/raider-1, reached **11.719345
+blocks**; escort-right/raider-2 reached **18.568841 blocks**. Both are below
+30 blocks of separation, but **no original 30-block escort–hostile separation
+requirement exists**: the actual GameTest's 30-block condition is each
+aircraft's **initial-to-final net displacement**, not its proximity to an
+enemy. In this latest real run, escort-left travelled **85.869852 blocks**
+net and escort-right **39.183028 blocks** net, so both satisfy that separate
+minimum net-displacement requirement. The B-17 remains FAILED solely because
+the 95-block protection gate was breached. Source: the local
+actual synchronized Minecraft entity-position receipt
+`runtime-probe/run-gametest/ww-physics-traces/operational-b17-hysteresis-independent.json`.
+
+For chronology, an older immutable Forge receipt measured **101/340** and
+minimum **66.029 blocks**; a subsequent pre-edit Forge run on **HEAD
+7dcda5e** improved that to **49/340** and minimum **82.570680 blocks**,
+although escort-left's **net displacement** was only **29.594142 blocks**,
+below the original 30-block movement gate. The latest
+**81/340 / 65.020052** receipt is from the final tactical code plus the
+prime's new CPA retention, so it **regressed versus 49/340**, and cannot be
+credited as a real Forge improvement. The completed real 2v2 and 840-tick
+return-to-base GameTests PASS, as do 35 original open-loop physics-fidelity
+checks, but these independent achievements do not waive the B-17 failure.
+An operational B-17 PASS still requires **zero** 95-block intrusion ticks,
+at least **30 blocks** escort–hostile clearance and all **6-block** airframe
+pair limits in the unchanged original scenario.
+
+For a *diagnostic only*, a headless 340-tick five-plane setup with the same
+aircraft roles, starts, headings, speeds, experimental 150-degree sensor
+cone, exact bytecode engine reactions and pinned IA wind produced before:
+**197/340 intrusion ticks**, minimum bomber-to-hostile **34.229 blocks**,
+minimum escort-to-hostile **24.230 blocks**; after the tactical edit:
+**192/340 intrusion ticks**, minimum bomber-to-hostile **34.798 blocks**,
+minimum escort-to-hostile **26.044 blocks**, minimum any pair **22.323
+blocks**. Both synthetic runs **FAIL** the 95-block condition, and the
+new synthetic escort separation still falls below the real Forge's 30-block
+criterion. Microkernel behavior differs materially from the real Minecraft
+entity trajectory, so these numbers are *not* actual-Forge estimates or
+substitutes for GameTest evidence. No source-only pass implies a weapon hit,
+live aircraft victory, or physical 340-tick protection.
