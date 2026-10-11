@@ -171,12 +171,15 @@ failed real-world parity gates regardless of SOURCE test success.
 
 The 24-airframe lab now has an **additional execution mode**. It advances all
 aircraft in a mission against one frozen prior-tick state, including **actual
-opponent aircraft updated by the same physical source kernel**. Every pilot
-first detects enemies independently, then selects a target from its own
-observations or limited track memory, applies FlightControlLoop (existing
-TacticalAirAI / FlightSafetyPlanner / FlightGuidance), and finally advances one
-actual **Ia133Microkernel.tickWithReaction** with **PinnedIa133WindWorld**
-speed-dependent calm-air wind. A second aircraft's current position is
+opponent aircraft updated by the same physical source kernel**. Each 20Hz
+step first advances all airplanes with their stored **previous-END smoothed
+control state** through **Ia133Microkernel.tickWithReaction** with
+**PinnedIa133WindWorld** speed-dependent calm-air wind. Only after this physical
+step does every pilot independently observe its enemies, select a target from
+its own observations or limited track memory, run FlightControlLoop (existing
+TacticalAirAI / FlightSafetyPlanner / FlightGuidance), and inject its next
+command into stored smoothed controls at **ServerTick.END**. A second aircraft's
+current position is
 available only to the **observer's measurement predicate** or the
 **post-integration statistical evaluator**, never directly as hidden
 information in a pilot decision.
@@ -252,18 +255,23 @@ centre positions still does not approximate the entire physical aircraft
 hitboxes or an authoritative Minecraft collision event. The checks use
 the **original 6.0-block and 95.0-block thresholds, unchanged**.
 
-### Measured SOURCE results (seed 20261011, Windows JDK17, corrected 240b/FOV150° live-sensor contract)
+### Current measured SOURCE results (seed 20261011, Windows JDK17, corrected 240b/FOV150° sensor and END-stage smoothed controls)
 
 | Case | 6-block centre-pair gate | B-17 minimum attacker distance | 95-block protection gate | Source result |
 |---|---:|---:|---|---|
-| Original 2v2 (160t) | min swept **30.030977b**, 0 breaches | n/a | n/a | **PASS_SOURCE_SAFETY** |
-| Original aft B-17 (190t) | min swept **31.263143b**, 0 breaches | **79.552707b** | **68 swept intrusion ticks**, fails | **FAILED_SOURCE_SAFETY** |
-| Original forward B-17 (190t) | min swept **23.880247b**, 0 breaches | **130.936936b** | 0 intrusion ticks | **PASS_SOURCE_SAFETY** |
-| Synthetic LOS fixture (90t) | min swept **38.977284b**, 0 breaches | n/a | n/a | **FAILED_SOURCE_SAFETY** due to terrain contact |
-| All 24 (240t) | min swept **1.237758b**, **5 <6b swept ticks**, fails | **47.280238b** | **68 swept intrusion ticks**, fails | **FAILED_SOURCE_SAFETY** |
+| Original 2v2 (160t) | min swept **30.927491b**, 0 breaches | n/a | n/a | **PASS_SOURCE_SAFETY** |
+| Original aft B-17 (190t) | min swept **31.130658b**, 0 breaches | **80.358615b** | **67 swept intrusion ticks**, fails | **FAILED_SOURCE_SAFETY** |
+| Original forward B-17 (190t) | min swept **24.222943b**, 0 breaches | **131.328876b** | 0 intrusion ticks | **PASS_SOURCE_SAFETY** |
+| Synthetic LOS fixture (90t) | min swept **39.665280b**, 0 breaches | n/a | n/a | **FAILED_SOURCE_SAFETY** due to terrain contact |
+| All 24 (240t) | min swept **6.869907b**, **0 <6b swept ticks** | **36.924821b** | **66 swept intrusion ticks**, fails | **FAILED_SOURCE_SAFETY** |
 
-The LOS experiment recorded **118 terrain-occluded observations and zero
-acquired hostile-contact ticks**. The remaining cases include positive
+Prior to the END-stage input-bridge correction, the same original 24-plane
+SOURCE seed had **five swept pair ticks under 6b** (minimum **1.237758b**).
+The corrected, separately reexecuted model has **zero such pair breaches**
+for this seed only; it **still fails** the 95b bomber-defense gate and is
+not evidence that arbitrary seeds or original real Forge combat are safe.
+The synthetic LOS experiment records occluded observations without treating
+its terrain impact as safe. The remaining cases include positive
 visual acquisitions, finite-FOV denials and remembered tracks that expire
 without receiving hidden enemy truth. The failure counts are first-class
 results; the laboratory does not treat a completed computation as a
@@ -282,9 +290,10 @@ The Twin writes **twin_summary.json** (source provenance, 6b/95b gates,
 per-case PASS/FAILED and reason codes), **twin_units.csv** (24 individual
 aircraft types, role, engine reaction, AI, sensing and speed), **twin_pairs.csv**
 (all pairwise minimum sampled/swept centre distances and <6b ticks),
-**twin_assets.csv** (actual B-17/attacker 95b proximity with intrusion
+**twin_assets.csv** (simulated B-17/attacker 95b proximity with intrusion
 timing and escort assignments), **twin_time_slices.csv** (XYZ/attitude/speed,
-memory age, observed target and policy command), **twin_sensor_events.csv**
+memory age, observed target and policy command, prior-END command lineage,
+`smooth_x_end_tick` and `smooth_z_end_tick`), **twin_sensor_events.csv**
 (each observer's visibility transitions and memory expiration), and a
 self-contained interactive **flight-twin.html** (top/side/3D-style plots,
 all simultaneous trajectories, moving 95b perimeter, per-plane AI
@@ -361,20 +370,41 @@ unmodeled. Source sensor distance now matches LiveAirSensor
 angle). The synthetic 24-sample height ray, 1.5b margin and 6-tick
 remembered-track lifetime are separate experimental assumptions.
 
-**Critical causal timing correction:** The actual runtime computes
-TacticalAirAI commands at **ServerTick.END**, after the aircraft
-entity's physical movement. The Twin now first advances ALL aircraft
-with their previously queued raw inputs (initial physical tick 1:
-neutral X/Z stick, engine target 1), observes that completed snapshot
-and computes a new policy command at tick 1 END for physical tick 2.
-Both the queued command and previously applied input, with exact
-origin tick, are logged in twin_time_slices.csv. Java17 tests prove
-that no newly issued command can retroactively affect its own
-completed physics tick. All five initial physics positions at t1
-agreed with REAL Forge within 0.00000004 blocks, but that one-step
-agreement cannot certify later closed-loop parity.
+**Critical causal timing correction (verified against exact original Forge):**
+The actual runtime computes TacticalAirAI commands at **ServerTick.END**,
+after the aircraft's physical movement. The non-player IA pilot resets its
+**raw X/Z to zero** on each aircraft tick, while its next controller tick
+consumes the **previous tick's END-corrected smoothed X/Z**. The former
+SOURCE Twin queued the fresh raw command into the following kernel tick;
+because `Ia133Microkernel.tickWithReaction` reads the prior smooth state
+*before* incorporating raw commands, this accidentally added **one extra
+physical tick of steering delay**. The corrected Twin first advances ALL
+aircraft with raw X/Z **neutral** and previously stored smoothed commands,
+observes the post-physics synchronized positions, then at END corrects
+each stored smooth axis by the verified IA float32
+`clamp(previous_host_zeroed_smooth + 0.1f * issued_command)` and updates the
+next engine target. It never reruns physics or adjusts a finished position.
 
-### Recorded REAL versus predicted SOURCE outcomes (seed 20261011)
+`twin_time_slices.csv` keeps `applied_control_x/z` as **the previous
+END-issued policy command represented in the stored smooth axes**;
+these are **not** the physically supplied raw X/Z (which are zero).
+`applied_control_from_policy_tick` gives its command-origin tick, and
+the new `smooth_x_end_tick`/`smooth_z_end_tick` fields expose exactly what
+will be consumed on the next physics step. Tests verify command lineage,
+no retroactive motion, and synthetic-source determinism. With actual
+unmodified REAL Forge five-actor receipts, all five initial physics positions
+at t1 agree within 0.00000004 blocks. For matching observed first-tick policy
+commands, B-17 REAL t2 yaw error fell **0.114654° → ~0.000000009°**,
+and t20 position error **0.065897b → 0.000001614b**. This proves this
+**scoped control-phase correction**, not closed-loop Forge combat parity.
+
+### Archived pre-END-bridge REAL versus SOURCE outcomes (seed 20261011)
+
+The following table is deliberately preserved as a **historical diagnostic**:
+the REAL column uses the earliest original 101-intrusion Forge run and the
+SOURCE column uses the **former delayed-control** Twin. Do **not** treat it
+as the current corrected SOURCE experiment or the latest 81-intrusion REAL
+Forge outcome.
 
 | Measurement | REAL Forge, independently verified | Autonomous SOURCE Twin |
 |---|---:|---:|
@@ -397,6 +427,32 @@ for 124 ticks is a concrete controller input difference. Because the
 closed-loop pilots are **not teacher-forced to use the same commands**,
 their position deviations combine observation, policy, world and
 physics effects; this report cannot isolate physics parity by itself.
+
+### Corrected Twin versus current independently validated REAL receipts
+
+With the original 48-tick observed CPA policy and no experimental bomber
+side-latch, the corrected physical-control phase produces this **new
+standalone SOURCE experiment** against the latest locally preserved REAL
+five-aircraft 340tick receipts:
+
+| Metric | Actual locally recorded Forge | Corrected closed-loop SOURCE |
+|---|---:|---:|
+| 95b strictly-inside positions | **81/340** | **200/340** |
+| Minimum B-17-to-hostile distance | **65.020052b** | **30.928835b** |
+| Swept within-or-touching 95b | NOT MEASURED | **201 ticks** |
+| Minimum sampled pair separation | **at least 6b**, independently accepted | **22.843990b** |
+| Under-6b aircraft pair breach | **0** | **0** |
+| Bomber protection status | **FAILED** | **FAILED_SOURCE_SAFETY** |
+
+The measured t1/T2 agreement demonstrates correction of one causal control
+lag only. A distinct **policy** mismatch already exists at tick1: the REAL
+right P-47N escort's controller chooses `command_x=-1`, while the SOURCE
+Twin assigns a different visible raider under its synthetic team-load
+penalty and chooses `command_x≈+0.109868`. Its t2 yaw still disagrees by
+about **0.2651°** even after correcting input smoothing; fixing the physics
+clock cannot repair differing autonomous target choices. Synthetic terrain
+LOS/voxel interactions and long-horizon policy trajectories also differ.
+Both 95b results remain failed; no 30b/6b/95b acceptance gate is relaxed.
 
 ### Generated forensic files, with strict provenance
 
@@ -500,16 +556,20 @@ phase, signed control, maneuver, distance and human-readable
 explanation. The Markdown report describes the earliest changes
 without claiming which code change caused a particular outcome.
 
-Another now-exposed SOURCE failure involves **P-47N and Ki-84**
+Another previously exposed **pre-END-bridge SOURCE** failure involved **P-47N and Ki-84**
 in the independent 24-unique-aircraft, 240tick stress case:
 **five swept ticks below 6b**, with closest swept centre separation
 **1.237758b at tick 192**. Four tick-end snapshots also violated
 6b. Both pilots were already reporting
 **COLLISION_AVOID / WORLD_SAFETY_MOVING_COLLISION_RISK** around
 ticks 186–194, yet the queued inputs and actual motion still
-carried them into proximity. Source operational gates remain FAILED;
-no initial position, safety radius or speed was artificially
-adjusted to manufacture a pass.
+carried them into proximity. The corrected END-bridge SOURCE run with the
+same seed now reports a **6.869907b minimum swept pair distance** and
+**zero pair violations below 6b**, but its B-17 asset still has **66
+intrusion ticks inside 95b**. Therefore the 24-airframe scenario as a whole
+**remains FAILED_SOURCE_SAFETY**. No initial position, safety radius or speed
+was artificially adjusted to manufacture a pass; source results are
+seed- and policy-sensitive and cannot certify real Forge safety.
 
 Validation commands for optional owner-only original-real
 and two-REAL-comparison proof:

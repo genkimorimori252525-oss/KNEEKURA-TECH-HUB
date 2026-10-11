@@ -2,6 +2,42 @@
 
 Status: **exact-JAR Forge 1.20.1 GameTest measured; current 19/20 tests PASS, B-17 operational protection FAILED**. The pinned owner Warfare Wings JAR and matching IA JAR were hash-verified and tested locally. This remains an experimental Forge integration with no weapon firing and no claim of full source/microkernel-to-Minecraft parity.
 
+## Latest owner-runner independent evidence — `7b5bc29` (2026-10-11)
+
+The owner-controlled exact-original-JAR GitHub Actions
+[#38125436950](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38125436950)
+completed **FAILURE for the correct strict B-17 operational reason**. All
+**20 native GameTests actually completed (19 PASS, 1 B-17 FAILED)**; the
+native 340tick escort violation remained **81 intrusion ticks inside 95b**,
+with nearest hostile **64.882500b** on this owner-runner invocation. The
+preceding owner-local run of the same source measured 81 ticks and 65.020050b;
+do not silently substitute one run's closest-approach number for the other.
+These are original real aircraft physical measurements, not SOURCE Twin
+mission outcomes. The original minimum 6b pair separation and 30b actor
+net-displacement gates were not relaxed.
+
+The new independent workflow output gates were:
+
+| Required original-owner workflow stage | Outcome |
+|---|---|
+| Exact original Forge GameTests | **FAILURE**, real 95b B-17 breach |
+| Real 2v2/B-17 geometric acceptance | **FAILURE**, B-17 breach |
+| Original 3-actor multi-contact FOV/LOS threat selection | SUCCESS |
+| Four original 401-sample A6M-independent P-47N/Spitfire/IL-2/B-17 calibration comparisons | SUCCESS |
+| Real 840tick IL-2/B-17 ingress, egress and RTB | SUCCESS, no weapons |
+| Real 35-trace / 24-airframe independent recorded-control free-air Twin | SUCCESS, 5,880 samples; maximum final drift **0.002047870b** against a distinct 0.01b physical gate |
+| Original private evidence artifact upload | SUCCESS |
+
+In the previous owner CI
+[#38124509010](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38124509010),
+the four-401sample step also failed because the absolute generated Spitfire
+CSV pathname was 263 characters on Windows. Commit `7b5bc29` shortened its
+destination to `cal-401` and added an early fail-closed MAX_PATH-budget check.
+The new owner run independently verifies that this was a generated-file-path
+failure, not a Forge physics error. The four legacy source-vs-Forge calibration
+differences are still reported as measurement-only, without an invented parity
+PASS threshold. **Autonomous guns, bombs and torpedoes remain prohibited.**
+
 ## 2026-10-11 continuation — visible protected-asset threat selection and owner-runner gate
 
 The owner-controlled GitHub Actions run
@@ -311,3 +347,24 @@ The final local run of the exact binaries reported **15 total GameTests: 14 PASS
 The B-17 failure is an actual **operational threat-containment failure**; it does not establish that a hypothetical machine-gun attack or kills would have occurred, because weapons are still disabled. The B-17 scenario correctly rejects a superficially successful result based on moving distances or assignment counts alone. The test still requires complete active ticks and confirmed threat approach: it cannot pass by preventing the attackers from loading, hiding targets, reducing attack range or omitting the hostile team. This work is a physical acceptance instrument for the tactical controller rather than a declaration that the controller now wins these engagements.
 
 The initial runs failed from an un-ticking raider spawned in a distant chunk and from shared chunk leases being released too early. Source-level issues were corrected by synchronous preloading, shared ticket reference counting and one-time registration before physics-time measurement. The later reproducible B-17 run ran the required actual geometry and reached the explicit 95-block protection assertion. A future controller change must prove **zero real intrusion ticks** under the same or harder scenario before this GameTest can become PASS. The snapshot here may predate concurrent tactical Java improvements made by another worker; rerun against their final source before accepting integration.
+### Final integration after standalone Twin END-bridge repair
+
+After the external source Twin's smoothed-input actuation phase was repaired,
+the owner **locally reran** Java17/Gradle8.8 `prepareRuntimeTrace
+runGameTestServer` against the same **exact-hash original WW/IA Forge JARs**.
+All **20 native GameTests completed: 19 PASS, one B-17 FAILED**, with
+`B17_95_BLOCK_PROTECTION_BREACH intrusionTicks=81
+minDistance=65.02005004882812`. The Gradle command exits **1** because the
+GameTest's strict acceptance gate correctly fails, **not** because the
+project failed to compile or because a Forge test was skipped.
+
+Independent validators on the **newly re-recorded original real flight CSVs**
+reported real 2v2 geometric **PASS**, real B-17 **FAILED** (`81/340`
+intrusions), original 3-actor FOV/LOS contact-ranking **PASS**, original
+840tick IL-2/B-17 no-ordnance return **PASS**, and the **35/35**
+real-recorded-command free-air Twin replay **PASS** (24 airframes, 5,880 paired
+ticks, maximum final position discrepancy **0.001775711195b**, distinct
+0.01b physical replay gate). Raw original traces remain ignored; their
+source-only analyses never replace actual GameTest geometry. The aborted
+48tick B-17 bomber escape-side latch was **reverted after a worse SOURCE
+190tick test**; the production tactical AI source remained unchanged.

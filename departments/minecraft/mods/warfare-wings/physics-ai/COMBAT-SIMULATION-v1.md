@@ -198,6 +198,49 @@ A further all-Atlas regression stages all **24** individually identified types a
 
 The low-fuel regression physically advances 50 ticks with **42 RETURN_HOME** decisions and **8 immediate collision-avoidance** decisions, without touchdown. An independent sensor test checks that an out-of-range fighter is not provided as a hostile collision obstacle, while a detected head-on target is; tests also verify correct risk selection in the presence of both allies and an observed enemy. Separate tests distinguish a stationary hostile from a truly inbound observed bomber threat and ensure a fuel emergency retains priority. The prepared escort test enforces **no penetration of the same 95-block corridor and no pair distance below six blocks**; the aft-deployed case keeps the same operational gate and must remain flagged FAILED.
 
+### Rejected bomber escape-side latch A/B (2026-10-11)
+
+A later examination of three independently recorded **original Forge** B-17
+escorts found a possible raw-steering discontinuity: the CPA-only policy
+changed its currently visible B-17 threat at ticks **47** and **109**,
+reversing its lateral raw control. The subsequent visible-contact retention
+policy kept the same threat through tick 47, but B-17 raw X still reversed
+at **tick 94 while tracking the same visibly observed raider**. A read-only
+calculation from recorded aircraft position and observed hostile velocity
+found the bomber's existing escape-side trigger
+`lateral.dot(toThreat) > 3` crossed from **3.64 blocks at tick 93** to
+**2.24 blocks at tick 94**. This temporal alignment is a falsifiable cause
+candidate, not proof that latching the side would improve protection.
+
+A temporary, **uncommitted** source-only experiment therefore held the
+bomber's horizontal escape direction for at most **48 consecutive ticks**
+against the *same observed enemy contact ID*; a different currently supplied
+contact, absent sighting, terrain/safety override or fuel emergency would
+reset it. The exact initial aircraft, sensor-observation rules, physics and
+**95/6-block** source acceptance gates were preserved. The measured result was:
+
+| Fixed source comparison | Existing verified policy | Temporary 48-tick same-ID side latch | Verdict |
+|---|---:|---:|---|
+| Original aft escort 190tick, B-17 inside 95b | **54 / 190 ticks** | **56 / 190 ticks** | **FAILED; regressed** |
+| Original aft, closest B-17-to-hostile | **81.923209 b** | **81.480110 b** | **Regressed** |
+| Original aft, minimum any airframe pair | **33.339893 b** | **33.339945 b** | Both satisfy 6b |
+| Forward-prepared 190tick inside 95b | **0 / 190 ticks** | **0 / 190 ticks** | Both pass this source scenario |
+| Forward-prepared, closest hostile | **112.378898 b** | **112.378898 b** | Unchanged |
+| Exploratory five-aircraft 340tick *synthetic pinned-wind Twin*, inside 95b | **192 / 340 ticks** | **239 / 340 ticks** | **SOURCE FAILED; strongly regressed** |
+
+The existing Combat regression correctly rejected the candidate because
+the unchanged aft test no longer met its baseline improvement assertion.
+**The entire experimental Memory/API and latch implementation was reverted**
+from `TacticalAirAI.java` and `CombatSimulationSelfTest.java`. The
+unaltered source policy subsequently passed all **14/14 JDK 17 SelfTest
+classes**, including **261 Combat** and **40 Strike** assertions, and
+`check-microkernel.mjs` passed its unchanged versioned golden comparisons.
+No Forge runtime GameTest was run during this experiment. A future controlled
+Forge A/B could isolate a *much shorter same-contact side deadband* while
+logging the chosen visible contact, per-tick lateral dot, raw yaw control,
+and all original 95b-protection, 6b-pair and **30b net-displacement** gates;
+the 48-tick latch must not be treated as a verified solution.
+
 ## Limits and next integration gate
 
 Source-only policies currently treat each aircraft as an approximate flight body on a height-field. Prediction avoids dangerous contact in the chosen 2v2 scenario, but cannot guarantee hard-body collision avoidance in every world. **The aft-deployed B-17 defense is still a blocking operational failure**, regardless of positive escort target assignments. The regression intentionally expects `ESCORT_PROTECTION_BREACHED` rather than silently passing it; successful code tests must not be confused with practical escort containment. Starting the guards ahead of the bomber produces physically measured protection in the alternate prepared-start geometry and demonstrates how inadequate prepositioning undermines interception. This does not authorize changing the original test's initial positions to hide its failure. Faction metadata never grants a combat win; team and mission come from scenario facts.

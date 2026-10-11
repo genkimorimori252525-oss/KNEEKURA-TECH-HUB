@@ -10,6 +10,8 @@ from __future__ import annotations
 
 import csv
 import hashlib
+import json
+import math
 from pathlib import Path
 import shutil
 import subprocess
@@ -17,7 +19,7 @@ import tempfile
 import unittest
 
 from flight_lab_report import load_twin_experiment, make_twin_html
-from flight_lab_run import compile_lab, get_java17, run_twin
+from flight_lab_run import MODULE, compile_lab, get_java17, run_twin
 
 TWOFIELDS = ("twin_summary.json", "twin_units.csv", "twin_pairs.csv",
              "twin_assets.csv", "twin_time_slices.csv", "twin_sensor_events.csv",
@@ -235,7 +237,7 @@ class FlightTwinLabIntegrationTests(unittest.TestCase):
             subprocess.run([shutil.which("node"),"--check",str(source)],check=True)
 
     def test_exact_next_tick_actuation_caused_by_end_tick_policy(self) -> None:
-        """A t1 policy decision can first actuate t2, never retroactively t1."""
+        """The t1 END input correction changes smooth but never retroactively moves t1."""
         output=self.root/"causal-next-physics"
         summary=run_twin(self.java,self.classes,output,seed=20261011,
                          unique_ticks=340,trace_stride=1,
@@ -244,6 +246,9 @@ class FlightTwinLabIntegrationTests(unittest.TestCase):
         self.assertEqual(
             summary["actuation_phase"],
             "ENTITY_PHYSICS_WITH_PREVIOUS_QUEUED_INPUT_THEN_SERVER_TICK_END_OBSERVE_AND_QUEUE_NEXT")
+        self.assertEqual(
+            summary["source_end_tick_input_bridge"],
+            "POST_PHYSICS_ZEROED_SMOOTH_PLUS_FLOAT_0_1_TIMES_ISSUED_COMMAND_AND_ENGINE_TARGET")
         payload=load_twin_experiment(output)
         by_unit={}
         for row in payload["slices"]:
@@ -252,6 +257,8 @@ class FlightTwinLabIntegrationTests(unittest.TestCase):
         for unit,track in by_unit.items():
             self.assertEqual([int(r["tick"]) for r in track],list(range(341)))
             first=track[1]
+            self.assertEqual(float(track[0]["smooth_x_end_tick"]),0)
+            self.assertEqual(float(track[0]["smooth_z_end_tick"]),0)
             self.assertEqual(first["applied_control_from_policy_tick"],-1,
                              f"Initial physical tick must have no prior AI decision: {unit}")
             self.assertEqual(first["command_generated_at_end_tick"],1)
@@ -260,6 +267,15 @@ class FlightTwinLabIntegrationTests(unittest.TestCase):
             self.assertEqual(first["applied_control_throttle"],1.0)
             self.assertIsNone(track[0]["applied_control_x"])
             self.assertEqual(track[0]["command_generated_at_end_tick"],-1)
+            # END tick 1 corrects IA's zeroed interpolation immediately;
+            # physics tick1 was already completed with the initial neutral
+            # axes. The real runtime uses the same 0.1f weight and clamps.
+            self.assertAlmostEqual(float(first["smooth_x_end_tick"]),
+                                   0.1*first["control_x"],delta=2e-7)
+            self.assertAlmostEqual(float(first["smooth_z_end_tick"]),
+                                   0.1*first["control_z"],delta=2e-7)
+            self.assertAlmostEqual(first["engine_target"],
+                                   first["control_throttle"],delta=2e-7)
             for index in range(2,341):
                 now,before=track[index],track[index-1]
                 self.assertEqual(now["applied_control_from_policy_tick"],index-1)
@@ -270,6 +286,68 @@ class FlightTwinLabIntegrationTests(unittest.TestCase):
                     (before["control_x"],before["control_z"],
                      before["control_throttle"]),
                     f"{unit}@tick{index}: SOURCE input must be queued from prior END tick")
+                # For pure-SOURCE causality the stored interpolation at the
+                # END of this tick is already corrected by the freshly issued
+                # command. It must remain finite and within IA's bounds.
+                self.assertTrue(-1<=float(now["smooth_x_end_tick"])<=1)
+                self.assertTrue(-1<=float(now["smooth_z_end_tick"])<=1)
+
+        # Optional owner REAL fixture: independently validate actual Forge
+        # source identity/common clock and compare EARLY physics, not the
+        # eventual 95b combat outcome. Hosted SOURCE CI has no original
+        # ignored real receipts, so it completes the pure-SOURCE checks above.
+        from forensic_b17_compare import load_verified_real
+        owner_real = MODULE / "runtime-probe" / "run-gametest" / "ww-physics-traces"
+        if not owner_real.is_dir():
+            return
+        receipt=load_verified_real(owner_real,quarantine_stale_sidecar=True)
+        self.assertEqual(receipt.sidecar["observed_ticks"],340)
+        self.assertEqual(receipt.sidecar["observed_aircraft"],5)
+        self.assertEqual(receipt.sidecar["source"],
+                         "minecraft_runtime_ia_next_tick_injection")
+        self.assertEqual(receipt.sidecar["evidence"],
+                         "ACTUAL_SYNCHRONIZED_MINECRAFT_ENTITY_POSITIONS")
+        independent=owner_real/"operational-b17-hysteresis-independent.json"
+        if independent.is_file():
+            with independent.open(encoding="utf-8") as f:
+                self.assertEqual(receipt.sidecar,json.load(f),
+                                 "Never use stale original operational-b17-final.json as REAL truth")
+        for unit,track in by_unit.items():
+            original=receipt.traces[unit]
+            start=track[1]
+            real_t1=original[1]
+            # First aircraft physics step occurs BEFORE either pilot's first
+            # END command. Every aircraft must match the original measured
+            # neutral physical motion even when its AI command will later
+            # differ in direction due to threat selection.
+            self.assertLess(math.dist(
+                [start["x"],start["y"],start["z"]],
+                [real_t1["position"][0]-receipt.coordinate_anchor[0],
+                 real_t1["position"][1],
+                 real_t1["position"][2]-receipt.coordinate_anchor[2]]),
+                1e-5,f"{unit}: initial physical tick must precede first pilot command")
+            first_real_controls=[float(real_t1["command_x"]),
+                                 float(real_t1["command_z"])]
+            first_source_controls=[start["control_x"],start["control_z"]]
+            # When both observers make the SAME t1 decision, their END
+            # interpolated values and the very next t2 physical yaw/pitch
+            # should agree with the exact original Forge aircraft. Differing
+            # t1 selections (e.g., two visible escorts choosing another
+            # hostile) must NOT be misreported as source physics errors.
+            if max(abs(a-b) for a,b in zip(first_real_controls,
+                                           first_source_controls)) < 1e-4:
+                self.assertAlmostEqual(float(start["smooth_x_end_tick"]),
+                                       float(real_t1["smooth_x"]),delta=3e-5)
+                self.assertAlmostEqual(float(start["smooth_z_end_tick"]),
+                                       float(real_t1["smooth_z"]),delta=3e-5)
+                measured_t2=original[2]
+                source_t2=track[2]
+                self.assertLess(abs((source_t2["yaw_deg"]
+                                     -float(measured_t2["yaw_deg"])+180)%360-180),
+                                0.002,f"{unit}: double actuation lag remained in t2 yaw")
+                self.assertLess(abs((source_t2["pitch_deg"]
+                                     -float(measured_t2["pitch_deg"])+180)%360-180),
+                                0.002,f"{unit}: double actuation lag remained in t2 pitch")
 
 
 if __name__ == "__main__":

@@ -22,12 +22,14 @@ import static org.kneekura.techhub.warfarewings.physics.Ia133Microkernel.*;
  * Deterministic simultaneous (not scripted-opponent) multi-aircraft 20 Hz
  * source flight twin. Each tick has a strict frozen snapshot boundary:
  *
- *  (1) every aircraft physically advances under the PRIOR queued raw controls;
+ *  (1) every aircraft physically advances under smooth input corrected at the
+ *      PRIOR ServerTick.END; the core host update zeroes the raw stick;
  *  (2) each aircraft privately senses that newly completed tick's opponents;
  *  (3) its tracks expire/refresh (FOV/range/terrain LOS);
  *  (4) team commander assigns ONLY locally remembered hostile IDs;
- *  (5) FlightControlLoop sees that completed snapshot and QUEUES controls
- *      for the NEXT physics tick, matching real ServerTick.END timing;
+ *  (5) FlightControlLoop sees that completed snapshot and immediately updates
+ *      the stored interpolated input and engine target at END without changing
+ *      the finished position/yaw; NEXT physics tick consumes those smooth axes;
  *  (6) unchanged 6b pair/95b bomber distances measured on new positions.
  *
  * This uses original pinned IA speed-dependent calm-weather wind, no fake
@@ -42,6 +44,7 @@ public final class FlightTwinResearchMain {
     private static final double B17 = FlightTwinScenario.B17_PROTECTION_BLOCKS;
     private static final FlightTwinSensor.Parameters SENSOR = FlightTwinSensor.Parameters.DEFAULT;
     private static final String JAVA_MAIN = "FlightTwinResearchMain";
+    private static final float IA_INPUT_WEIGHT = 0.1f;
 
     private FlightTwinResearchMain() {}
 
@@ -91,6 +94,42 @@ public final class FlightTwinResearchMain {
                            String targetId, String observedContactId,
                            int contactAge, int friendCount, double nearestFriendly,
                            FlightTwinSensor.Update sensed) {}
+
+    /**
+     * Mirror IaRuntimeAccess.applyTacticalControls at ServerTick.END.
+     *
+     * Real IA non-player pilot resets the raw axes to zero inside the aircraft
+     * physics tick. tickWithReaction(state, neutral) consequently returns the
+     * host-zeroed interpolation after friction/decay, BEFORE the next pilot
+     * command is issued. The Forge adapter then corrects that stored smooth
+     * with max(-1,min(1, afterHostUpdate + 0.1f*command)), using float inputs,
+     * and updates engine target. Next tick's controller reads this value.
+     *
+     * Never call the microkernel a second time here: that would advance
+     * position/rotation twice or introduce a second control-frame delay.
+     */
+    private static State afterServerEndInputCorrection(State postPhysics,
+                                                        Control justIssued) {
+        if (Math.abs(justIssued.y()) > 1e-7)
+            throw new IllegalStateException(
+                    "SOURCE Twin cannot emulate non-player raw IA throttle/brake input");
+        float x = (float) justIssued.x();
+        float z = (float) justIssued.z();
+        float target = (float) justIssued.engineTarget();
+        float alreadyZeroedX = (float) postPhysics.smoothX();
+        float alreadyZeroedZ = (float) postPhysics.smoothZ();
+        float correctedX = Math.max(-1.0f,Math.min(1.0f,
+                alreadyZeroedX + IA_INPUT_WEIGHT * x));
+        float correctedZ = Math.max(-1.0f,Math.min(1.0f,
+                alreadyZeroedZ + IA_INPUT_WEIGHT * z));
+        return new State(postPhysics.tick(),postPhysics.position(),
+                postPhysics.velocity(),postPhysics.yawDeg(),postPhysics.pitchDeg(),
+                postPhysics.rollDeg(),
+                0,0,0, correctedX,postPhysics.smoothY(),correctedZ,
+                target,postPhysics.enginePowerSmooth(),postPhysics.fuelUtilization(),
+                postPhysics.previousY(),postPhysics.onGround(),
+                postPhysics.touchingWater());
+    }
 
     private static final class UnitStats {
         final FlightTwinScenario.Plane plane;
@@ -342,9 +381,13 @@ public final class FlightTwinResearchMain {
 
         for (int tick = 0; tick < scenario.ticks(); tick++) {
             int completed = tick+1;
-            // IA physical entity steps are completed BEFORE server END-stage
-            // perception/policy updates. All aircraft advance in a synchronized
-            // physical phase using only the controls queued on the prior tick.
+            // IA physical entity steps finish BEFORE server END-stage policy.
+            // Smooth steering was injected at the PREVIOUS server END; the
+            // non-player pilot clears raw X/Z to zero while the controller
+            // consumes the previously corrected smooth interpolation.
+            // Pass only queued ENGINE TARGET to the physical kernel. Forwarding
+            // queued X/Z again here would add 0.1*last command after the host
+            // zeroing, then cause an extra one-tick steering phase error.
             Map<String,Local> physicallyAdvanced = new TreeMap<>();
             Map<String,Control> appliedControls = new TreeMap<>();
             for (var spec : specs.values()) {
@@ -352,8 +395,12 @@ public final class FlightTwinResearchMain {
                 var model = models.get(spec.typeId()).model();
                 Control applied = queuedControls.get(spec.id());
                 if (applied == null) throw new IllegalStateException("Missing prior actuation " + spec.id());
+                // The entity's stored float-valued END engine target is the
+                // one read by IA physics, rather than the unrounded double
+                // metadata of the previously selected source policy command.
                 State after = Ia133Microkernel.tickWithReaction(model,own.state(),
-                        applied,scenario.world(),WarfareWingsEngineReaction.ticks(model.id()));
+                        Control.neutral(own.state().engineTarget()),scenario.world(),
+                        WarfareWingsEngineReaction.ticks(model.id()));
                 if (after.tick() != completed || !finite(after.position())
                         || !finite(after.velocity()) || !Double.isFinite(after.yawDeg())
                         || !Double.isFinite(after.pitchDeg()))
@@ -362,9 +409,9 @@ public final class FlightTwinResearchMain {
                 appliedControls.put(spec.id(),applied);
             }
 
-            // Sensor and policy snapshots all read the same COMPLETED physics
-            // time. Each new decision is queued, never injected into physics
-            // that has already happened.
+            // Sensors all read the same COMPLETED physical positions. At
+            // ServerTick.END, corrections may change stored smooth axes and
+            // next engine target, but MUST NOT retroactively move these planes.
             Map<String, FlightTwinSensor.Update> sensed = new TreeMap<>();
             for (var own : specs.values()) {
                 Map<String, State> enemies = new TreeMap<>();
@@ -398,7 +445,8 @@ public final class FlightTwinResearchMain {
                         physicallyAdvanced,sensed.get(spec.id()),assigned.get(spec.id()),
                         scenario.world(),completed);
                 Local own = physicallyAdvanced.get(spec.id());
-                next.put(spec.id(),new Local(own.state(),
+                next.put(spec.id(),new Local(afterServerEndInputCorrection(
+                        own.state(),command.decision().controls()),
                         command.decision().nextMemory(),sensed.get(spec.id()).tracks()));
                 commands.put(spec.id(),command);
                 nextQueuedControls.put(spec.id(),command.decision().controls());
@@ -705,7 +753,8 @@ public final class FlightTwinResearchMain {
                 + "out_of_range_count,target_id,observed_contact_id,contact_age_ticks,"
                 + "maneuver,reason_code,safety_reason,control_x,control_z,control_throttle,"
                 + "applied_control_x,applied_control_z,applied_control_throttle,"
-                + "applied_control_from_policy_tick,command_generated_at_end_tick\n");
+                + "applied_control_from_policy_tick,command_generated_at_end_tick,"
+                + "smooth_x_end_tick,smooth_z_end_tick\n");
         sensors.write("schema,scenario,tick,observer_id,hostile_id,previous_visibility,"
                 + "visibility,track_available,current_observation,track_age_ticks,"
                 + "track_expired,range_blocks,nose_dot,ray_clearance_blocks\n");
@@ -786,7 +835,8 @@ public final class FlightTwinResearchMain {
                 applied == null ? "" : n(applied.z()),
                 applied == null ? "" : n(applied.engineTarget()),
                 Integer.toString(appliedPolicyTick),
-                decision == null ? "-1" : Integer.toString(tick)));
+                decision == null ? "-1" : Integer.toString(tick),
+                n(s.smoothX()),n(s.smoothZ())));
         w.write('\n');
     }
 
@@ -815,6 +865,8 @@ public final class FlightTwinResearchMain {
                     +",\n  \"tick_hz\":20"
                     +",\n  \"actuation_phase\":"
                     +q("ENTITY_PHYSICS_WITH_PREVIOUS_QUEUED_INPUT_THEN_SERVER_TICK_END_OBSERVE_AND_QUEUE_NEXT")
+                    +",\n  \"source_end_tick_input_bridge\":"
+                    +q("POST_PHYSICS_ZEROED_SMOOTH_PLUS_FLOAT_0_1_TIMES_ISSUED_COMMAND_AND_ENGINE_TARGET")
                     +",\n  \"first_physics_input\":"
                     +q("INITIAL_NEUTRAL_STICK_ENGINE_TARGET_1_NO_POLICY_YET")
                     +",\n  \"body_separation_radius_blocks\":"+n(BODY)
