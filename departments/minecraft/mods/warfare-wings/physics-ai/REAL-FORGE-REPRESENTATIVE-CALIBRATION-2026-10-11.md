@@ -55,10 +55,18 @@ unestablished. Atlas v2 report/golden remains unchanged; Atlas v3 remains
 an explicitly labeled source prediction rather than accepted exact dynamics.
 
 The generated JSON summary is
-`run-gametest/ww-physics-traces/representative-calibrations/representative-calibrations.json`
+`run-gametest/ww-physics-traces/cal-401/representative-calibrations.json`
 in the ignored local test folder and the same path in the remote runtime
 artifact if upload succeeds. Missing/short/wrong-airframe/frozen fixture
 tests run in pure-Java/Docker CI; a fixture PASS is not evidence of flight.
+The 2026-10-11 owner-runner CI at `f8f6778` independently exposed a Windows
+MAX_PATH failure: the original absolute Spitfire source output path was
+263 characters (P-47N's was 259). Java17 exited zero after reporting its
+Spitfire trace, but the Python reader could not find the overlong path.
+The new shorter `cal-401` output directory keeps the corresponding Spitfire
+path at 243 characters, and the standalone verifier refuses all long source
+or comparator output paths before executing Java. This corrects artifact
+delivery only, not the separate strict 95-block B-17 protection failure.
 
 ## Exact binary weapon callpath audit and authorization boundary
 

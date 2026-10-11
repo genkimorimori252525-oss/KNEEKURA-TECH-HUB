@@ -13,7 +13,9 @@ import unittest
 from pathlib import Path
 
 from compare_traces import COLUMNS
-from verify_representative_calibrations import AIRFRAMES, _validate_atlas, verify
+from verify_representative_calibrations import (
+    AIRFRAMES, _validate_atlas, _validate_windows_output_path_budget, verify,
+)
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -54,6 +56,11 @@ class RepresentativeCalibrationReceiptTests(unittest.TestCase):
 
     def test_pinned_exact_24_airframe_anchor_is_valid(self):
         _validate_atlas(self.anchor)
+
+    def test_windows_max_path_rejects_long_nested_source_and_comparator_paths(self):
+        _validate_windows_output_path_budget(Path("C:/short/cal-401"))
+        with self.assertRaisesRegex(ValueError, "Windows MAX_PATH risk"):
+            _validate_windows_output_path_budget(Path("C:/" + "nested/" * 34))
 
     def test_missing_aircraft_does_not_fake_four_successes(self):
         (self.root / "b17-throttle-step-v1-runtime.csv").unlink()

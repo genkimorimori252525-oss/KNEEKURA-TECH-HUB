@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import os
 import subprocess
 from pathlib import Path
 
@@ -18,6 +19,28 @@ from compare_traces import compare, load_trace
 
 AIRFRAMES = ("p47n", "spitfire", "il2", "b17")
 EXPECTED_SHA256 = "dc3029597c88859744633b6f5e4a9f21d449294b1aaac90ea0c1749d7aa98a43"
+WINDOWS_SAFE_OUTPUT_PATH_LENGTH = 248
+
+
+def _validate_windows_output_path_budget(report_dir: Path) -> None:
+    """Avoid Windows MAX_PATH's silent Java-writes/Python-is_file mismatch.
+
+    Windows can have long paths enabled for some processes but not others.
+    Keep *every* generated source and comparator path under a conservative
+    shared 248-character file budget, rather than trusting one JVM's exit 0.
+    """
+    expected = [report_dir / "representative-calibrations.json"]
+    for aircraft in AIRFRAMES:
+        scenario = f"{aircraft}-throttle-step-v1"
+        expected.append(report_dir / f"{scenario}-reaction-source.csv")
+        for name in ("calibration-summary.json", "calibration-summary.md",
+                     "calibration-ai-view.json", "calibration-diff.csv"):
+            expected.append(report_dir / f"{aircraft}-calibration" / name)
+    longest = max(expected, key=lambda item: len(str(item)))
+    if len(str(longest)) >= WINDOWS_SAFE_OUTPUT_PATH_LENGTH:
+        raise ValueError(
+            f"Windows MAX_PATH risk ({len(str(longest))} characters): {longest}; "
+            "choose a shorter --output-dir for both Java17 and Python")
 
 
 def _validate_atlas(anchor_csv: Path) -> None:
@@ -41,6 +64,8 @@ def verify(trace_dir: Path, anchor_csv: Path, java: str, classes: Path,
     anchor_csv = anchor_csv.resolve()
     classes = classes.resolve()
     report_dir = report_dir.resolve()
+    if os.name == "nt":
+        _validate_windows_output_path_budget(report_dir)
     _validate_atlas(anchor_csv)
     # Check all four receipts before producing any generated output. This
     # prevents the source-only simulator from masquerading as runtime input.

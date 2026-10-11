@@ -372,12 +372,14 @@ jobs:
         continue-on-error: true
         working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
         run: |
+          # Keep generated nested filenames below classic Windows MAX_PATH.
+          # Owner runner: old Spitfire source path 263 chars, new path 243.
           python ../tools/verify_representative_calibrations.py `
             --trace-dir run-gametest/ww-physics-traces `
             --anchor ../data/base-aircraft-anchor-v1.csv `
             --java (Join-Path $env:JAVA_HOME 'bin/java.exe') `
             --classes build/trace-classes `
-            --output-dir run-gametest/ww-physics-traces/representative-calibrations
+            --output-dir run-gametest/ww-physics-traces/cal-401
           if ($LASTEXITCODE -ne 0) {
             throw "Representative same-envelope real Forge calibration FAILED: $LASTEXITCODE"
           }
