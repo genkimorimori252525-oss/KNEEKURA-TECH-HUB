@@ -87,7 +87,11 @@ public final class OperationalAirCombatGameTests {
                 base.add(40, 3, 153)));
         helper.runAfterDelay(10, () -> {
             try {
-                Participant bomber = spawn(level, "b17", "b17", "convoy", null,
+                // The protectee belongs to the explicitly assigned convoy
+                // team, and its declared opponents are the raiders.  Without
+                // this order it cannot ever see an enemy through observeLive,
+                // even if a raider is physically in its real FOV and LOS.
+                Participant bomber = spawn(level, "b17", "b17", "convoy", "raiders",
                         base, 0, .65, ESCORT_TICKS);
                 entries.add(bomber);
                 entries.add(spawnEscort(level, "left", base.add(-48, 7, 18),
@@ -146,7 +150,7 @@ public final class OperationalAirCombatGameTests {
             if (model.equals("b17"))
                 order = new RuntimeTacticalPilot.LiveOrder(team,
                         TacticalAirAI.Mission.PATROL, origin.add(0, 0, 500),
-                        origin, null, null, null);
+                        origin, null, opposingTeam, null);
             RuntimeTacticalPilot.startLive(scenario, level, plane,
                     (ArmorStand) plane.getFirstPassenger(), order, duration);
             return new Participant(plane, name, team, scenario);

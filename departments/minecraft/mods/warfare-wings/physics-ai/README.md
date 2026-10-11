@@ -12,18 +12,36 @@ initial state*, the 35 source replays reproduce their final positions to
 **not** a certificate for autonomous policy, collisions, weapons, crashes,
 landing, terrain or complete Minecraft parity.
 
-**[FLIGHT-RESEARCH-LAB.md](FLIGHT-RESEARCH-LAB.md)** describes the new fully
-offline SOURCE experiment engine: **12,288 seeded trials / 2,211,840 Java 17
-physics ticks**, 24 aircraft × 11 controlled experiments, source flight and
-role-aware AI guidance, self-contained HTML 3D-style trajectory replay, and
-independently reproducible JSON/CSV results. Run `tools/flight_lab_run.py`
-for an experimental batch, or `tools/run_physics_twin.py` against authentic
-original-Forge receipts for independent model-evidence reconciliation.
+**[FLIGHT-RESEARCH-LAB.md](FLIGHT-RESEARCH-LAB.md)** describes the Java 17
+offline experiment engine: **12,288 seeded trials / 2,211,840 SOURCE physics
+ticks**, 24 aircraft × 11 controlled experiments, and a new genuinely
+simultaneous **24-distinct-aircraft, closed-loop SOURCE Flight Twin** with
+per-observer enemy range/FOV/LOS/short-memory tracks, team radio, input control
+and original pinned IA aerodynamic integration. Both research engines emit
+offline self-contained HTML trajectory inspection and deterministic JSON/CSV;
+run `tools/flight_lab_run.py --mode both`. Source closed-loop policies and
+height-field sensor/collision assumptions are **not Forge validated**. Use
+`tools/run_physics_twin.py` against original real Forge receipts for the
+separate recorded-command physical-fidelity gate.
 
-The original **20 required exact-Forge GameTests = 19 PASS, one true FAILED**:
-the protected B-17 still suffers 101/340 hostile-intrusion ticks inside the
-unmodified 95-block radius. Weapons remain disarmed pending pinned ownership,
-cooldown, muzzle LOS and friendly-fire evidence. PR #102 must remain Draft.
+The **20 required exact-owner Forge GameTests still give 19 PASS, one true
+FAILED**. The older #38119475729 run had **101/340** B-17 intrusions and
+also froze the B-17 long strike at tick499. Following legitimate live B-17
+enemy-team visibility and test-only chunk-liveness repairs, a later local
+original-JAR run restores **841/841 IL-2 and B-17 strike/egress/RTB samples**
+and 35/35 physically faithful recorded-command replays, but B-17 protection
+still **FAILED (135/340, minimum 41.695 blocks)**. See the separate audited
+run chronology in [FLIGHT-PHYSICS-TWIN-2026-10-11.md](FLIGHT-PHYSICS-TWIN-2026-10-11.md).
+The **subsequent local original-JAR test with the 20-block-descending source
+escort waypoint and an expanded two-chunk test-only load margin** completed
+all original 340tick B-17 aircraft flight traces, and the 840tick strike still
+passed. The independently measured protected B-17 intrusions fell further
+to **49/340 ticks, nearest hostile 82.571b**, but still breach the unchanged
+95-block corridor; additionally, the left escort's net displacement was
+29.594b against the immutable 30b minimum. **Real Forge remains 19/20,
+one FAILED**. See chronological detail in the Flight Physics Twin note.
+No weapon is fired; original mounts, server launch/cooldown, ownership, muzzle
+LOS and friendly-fire behavior remain evidence-gated. PR #102 stays **Draft**.
 
 ## Status
 
@@ -98,8 +116,9 @@ The original exact owner JAR was subsequently recovered and SHA-verified.
 The original **13/13** GameTest success was an earlier *baseline-only*
 milestone including sequential 24-plane aircraft smokes and five
 representative traces. The later real simultaneous combat GameTests extend
-the suite to **19/20 PASS**; the B-17 95-block mission guard genuinely FAILS
-(101/340 ticks), even though source replay and other live missions succeed.
+the suite to **19/20 PASS**; the B-17 95-block mission guard genuinely FAILED
+(101/340 ticks in the previous owner CI, 135/340 in the subsequent local
+Forge run), even though source replay and other live missions succeed.
 The historical PowerShell UTF-8 BOM failure and later artifact endpoint
 failure were independently resolved. An evidence fail is not a CI transport
 failure and is never silently waived.

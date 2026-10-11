@@ -429,18 +429,41 @@ jobs:
           UPLOAD_OUTCOME: ${{ steps.upload_trace.outcome }}
           RETRY_UPLOAD_OUTCOME: ${{ steps.retry_upload_trace.outcome }}
         run: |
-          if ($env:GAME_TEST_OUTCOME -ne 'success' -or $env:OPERATIONAL_OUTCOME -ne 'success') {
-            throw "Real original-JAR operational acceptance FAILED. Forge=$env:GAME_TEST_OUTCOME geometric=$env:OPERATIONAL_OUTCOME. Never weaken B17 95-block/6-block gates."
+          # Every continue-on-error:true evidence step has an actual
+          # `outcome`, which is FAILURE even when its job step has a green
+          # `conclusion`. Print ALL five required gates before failing; do
+          # not let an earlier 95-block breach hide a separate frozen pilot,
+          # incomplete trace, missing receipt, or physical parity failure.
+          $gates = [ordered]@{
+            'original_forge_gametest_20hz' = $env:GAME_TEST_OUTCOME
+            'real_2v2_b17_95block_6block' = $env:OPERATIONAL_OUTCOME
+            'real_four_401tick_comparison_completeness' = $env:CALIBRATION_OUTCOME
+            'real_840tick_strike_egress_rtb_no_weapons' = $env:LONG_STRIKE_OUTCOME
+            'real_35trace_pinned_free_air_twin_0.01block' = $env:PHYSICS_TWIN_OUTCOME
           }
-          if ($env:CALIBRATION_OUTCOME -ne 'success') {
-            throw "Real representative calibration incomplete: $env:CALIBRATION_OUTCOME"
+          $failures = @()
+          $markdown = @('### Warfare Wings exact-owner-Forge acceptance', '',
+            '| Independent required gate | Actual outcome |', '| --- | --- |')
+          foreach ($name in $gates.Keys) {
+            $outcome = $gates[$name]
+            Write-Host "OWNER_FORGE_ACCEPTANCE_GATE $name=$outcome"
+            $markdown += "| $name | $outcome |"
+            if ($outcome -ne 'success') { $failures += "$name=$outcome" }
           }
-          if ($env:LONG_STRIKE_OUTCOME -ne 'success') {
-            throw "Real no-ordnance strike/return mission FAILED: $env:LONG_STRIKE_OUTCOME"
+          $uploadOk = $env:UPLOAD_OUTCOME -eq 'success' -or $env:RETRY_UPLOAD_OUTCOME -eq 'success'
+          $uploadStatus = if ($uploadOk) { 'success' } else { 'failure' }
+          Write-Host "OWNER_FORGE_ACCEPTANCE_GATE original_receipts_uploaded=$uploadStatus"
+          $markdown += "| original_receipts_uploaded | $uploadStatus |"
+          if (-not $uploadOk) {
+            $failures += "original_receipts_uploaded=first:$env:UPLOAD_OUTCOME,retry:$env:RETRY_UPLOAD_OUTCOME"
           }
-          if ($env:PHYSICS_TWIN_OUTCOME -ne 'success') {
-            throw "Pinned original-Forge 35-trace free-air Physics Twin parity gate FAILED: $env:PHYSICS_TWIN_OUTCOME"
+          $markdown += ''
+          $markdown += 'Each gate requires actual original-JAR evidence; replay is recorded-control open-loop flight, not proven closed-loop combat, collision or weapon parity.'
+          if (-not [string]::IsNullOrEmpty($env:GITHUB_STEP_SUMMARY)) {
+            [System.IO.File]::AppendAllText($env:GITHUB_STEP_SUMMARY,
+              ($markdown -join "`n") + "`n", (New-Object System.Text.UTF8Encoding($false)))
           }
-          if ($env:UPLOAD_OUTCOME -ne 'success' -and $env:RETRY_UPLOAD_OUTCOME -ne 'success') {
-            throw "Actual runtime receipts could not be uploaded (possibly ENOTFOUND): first=$env:UPLOAD_OUTCOME retry=$env:RETRY_UPLOAD_OUTCOME"
+          if ($failures.Count -gt 0) {
+            throw "ORIGINAL_FORGE_ACCEPTANCE_FAILED $($failures -join '; '). Preserve original 190tick/340tick B17 95-block, 6-block and 840tick gates."
           }
+          Write-Host 'ORIGINAL_FORGE_ACCEPTANCE_ALL_REQUIRED_GATES_PASS'

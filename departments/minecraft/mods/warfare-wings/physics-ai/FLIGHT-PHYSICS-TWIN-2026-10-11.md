@@ -8,6 +8,95 @@ All measurements and claims below distinguish **(1) actual original-Forge
 observations**, **(2) source replay of already observed commands**, and
 **(3) synthetic counterfactual SOURCE experiments**.
 
+### Resumed original-Forge validation (2026-10-11, post-`f024574`)
+
+This paragraph records a **later actual local original-JAR test** than the
+historical 101/340 breach below. The old evidence remains below for audit;
+do not confuse the two different pilot policies/configurations:
+
+- The preceding owner Windows workflow
+  [#38119475729](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38119475729)
+  ran the original GameTests but **FAILED** B-17 defense at 101/340 ticks
+  (minimum 66.029 blocks), **FAILED** IL-2/B-17 long strike because the
+  B-17 entity froze at tick 499, leaving only 500 of 841 required samples,
+  and therefore failed the 35-record replay/complete 401tick report steps.
+- The resumed owner-local Forge 1.20.1 / 47.4.20 test retains the **same
+  original 20 GameTests** and pinned WW/IA SHA gate, and compiles the
+  GameTest-only synchronous chunk prewarm/reassert, explicit convoy/raider
+  assignments and same-team real leader Entity velocity into the live pilot.
+  Result: **19/20 original GameTests PASS**, both IL-2 and B-17 fly all
+  **840 real Entity ticks / 841 ordered samples**, and the 840tick
+  **strike approach, egress, and return-to-base geometry gate PASS**.
+  There was no teleport, frozen aircraft, forged time step, removed enemy,
+  released bomb, recorded damage or landed aircraft.
+- Independent replay of this **new** uninterrupted original-Forge measurement
+  set again gives **35/35 passed open-loop physical replays / 24 distinct
+  airframes / 5,880 paired physics updates**, maximum 0.001775711195 blocks
+  final position difference against the unchanged 0.01-block physical-slice
+  gate. The separate 4×401tick representative comparison completes, explicitly
+  retaining **PARITY_NOT_ESTABLISHED** for the older zero-wind baseline.
+- New original-Forge 2v2 geometric receipt: **PASS**, no distance under
+  6 blocks. New original-Forge B-17 protected flight: **FAILED**;
+  GameTest samples count 135/340 intrusions, minimum 41.695446 blocks.
+  Independent synchronized geometric receipt finds 134/340 sampled
+  intrusions, minimum 42.145644 blocks (different initial/endpoint sampling);
+  neither gate passes. The earlier test's B-17 could not observe a designated
+  enemy; the newer test sees the enemy but initiates a defensive break that
+  worsens the intruder clearance. No claim of accepted B-17 tactics follows.
+- The later SOURCE `FlightTwinResearchMain` is **simultaneously closed-loop
+  but not Minecraft-calibrated as a closed-loop policy**: 24 distinct airframes
+  interact via per-aircraft range/FOV/LOS/memory observations, team-only radio,
+  tactical policy and pinned IA aerodynamics. Its own B-17 aft 95-block gate
+  still fails, while prepared-forward and original 2v2 SOURCE safety gates
+  pass. The `FLIGHT-RESEARCH-LAB.md` explains exact synthetic limitations.
+
+### Final integrated-policy local Forge retest — actual original entity evidence
+
+The newer source policy adds a bounded quadratic interception of observed
+contacts and a 20-block lower escort screen waypoint. Initial local Forge
+testing exposed **one missing Entity tick at a 16-block chunk boundary** in
+the escort-right fighter at original flight tick 234. This was genuinely
+**FAILED** and the incomplete B-17 protection trace was never treated as
+accepted. A subsequent GameTest-only change **expanded the synchronous
+forced-chunk loading margin from one to two chunks**, without moving any
+airframe artificially, changing aircraft flight physics or loosening an
+aircraft-physics-clock gate.
+
+In that subsequent actual pinned-owner-JAR Forge 1.20.1 run:
+
+- **All 20 original GameTests executed**, with **19 PASS and one FAILED**.
+  All five real escort aircraft completed **340 actual Entity ticks** (341
+  recorded aircraft states each, tick 0 through 340); the previously observed
+  missing Entity tick was not reproduced in this run.
+- The original five-aircraft B-17 defense still fails: the independent
+  synchronized sample audit records **49/340 hostile intrusions inside the
+  original 95-block radius**, minimum **82.570680 blocks**. This improves on
+  the earlier local 135tick / 41.695446b protection failure, while still
+  remaining well short of the zero-intrusion requirement.
+- The native Forge GameTest's **first encountered failure was independently
+  `INSUFFICIENT_REAL_MOVEMENT`**, left escort initial-to-final displacement
+  **29.594141706 blocks**, short of its original 30-block gate. The test
+  did not reach a passing protection verdict and must not be represented as
+  one. No geometry, team, opponent, time limit, aircraft motion or threshold
+  was modified to manufacture a pass.
+- Real 2v2 **280 synchronized ticks** PASS, **zero pair separations below
+  6 blocks**; real 840tick IL-2/B-17 simultaneous ingress, egress and return
+  guidance PASS with **841 measurements per aircraft**, no weapon-release or
+  landing claim.
+- All **35 independent original-Forge recorded-command free-air replay cases**
+  freshly rerun against this newest full real measurement set **PASS** the
+  separate strict 0.01-block final-position gate, maximum 0.001775711195b,
+  covering 24 distinct aircraft types and 5,880 actual 20Hz updates. This
+  shows open-loop physical-slice agreement, not autonomous closed-loop policy
+  equivalence, voxel/hitbox collision or successful aerial combat.
+
+The newly added original clock-gap Java test **refuses a replay** if even one
+real server or Entity step is missing, reporting the failed tick and gap.
+The original-Forge workflow now prints **all independently required failed
+gates** before returning failure, rather than obscuring subsequent failures
+after the first known B-17 violation. Hosted CI results of later commits must
+be checked separately; this owner-local test is not a Hosted CI result.
+
 ## 1. Root cause: `AircraftEntity.getWindStrength()` includes SPEED
 
 Exact-original pinned binary evidence:

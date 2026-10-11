@@ -43,8 +43,26 @@ jobs:
         run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_long_strike_receipts.py
       - name: Verify source-vs-Forge physics-twin mismatch auditor rejects substitute samples
         run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_physics_twin_review.py
+      - name: Verify original Forge teacher replay rejects missing server ticks and forged actor samples
+        run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_real_tactical_clock.py
       - name: Verify deterministic 24-airframe high-throughput AI research lab and offline visualization
         run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_flight_lab.py
+      - name: Verify simultaneous 24-unique-airframe closed-loop Physics Twin, observed contacts and unchanged 95/6 block gates
+        run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_flight_twin_lab.py
+      - name: Produce downloadable self-contained SOURCE flight laboratory and simultaneous 24-plane Twin
+        run: |
+          ROOT=departments/minecraft/mods/warfare-wings/physics-ai
+          python "$ROOT/tools/flight_lab_run.py" \
+            --mode both --output "$RUNNER_TEMP/ww-flight-source-offline-research" \
+            --seed 20261011 --trials-per-aircraft 512 --ticks 180 \
+            --twin-24-ticks 240 --trace-stride 10 --java-home "$JAVA_HOME"
+      - name: Publish portable offline research visualizations, traces and explicit failed SOURCE safety gates
+        uses: actions/upload-artifact@v4
+        with:
+          name: warfare-wings-flight-physics-twin-source-lab
+          retention-days: 14
+          if-no-files-found: error
+          path: ${{ runner.temp }}/ww-flight-source-offline-research/
       - name: Rebuild and verify 24-aircraft AI Atlas
         run: |
           ROOT=departments/minecraft/mods/warfare-wings/physics-ai

@@ -345,6 +345,8 @@ final class RuntimeTacticalPilot {
                 // Only compute one command after a completed aircraft entity tick.
                 int tick = run.aircraft.tickCount;
                 if (tick == run.lastAircraftTick) {
+                    if (run.testLease != null && run.stalledServerTicks % 4 == 0)
+                        run.testLease.reconfirmLoaded(run.aircraft);
                     if (++run.stalledServerTicks > 20)
                         throw new IllegalStateException("NON_TICKING_REAL_AIRCRAFT: "
                                 + run.scenario + " stuck at entityTick=" + tick
@@ -635,10 +637,22 @@ final class RuntimeTacticalPilot {
                     }
                 }
             }
+            Ia133Microkernel.Vec3 observedLeaderVelocity = new Ia133Microkernel.Vec3(0, 0, 0);
+            if (orders != null && orders.leader() != null
+                    && livePhase == LiveMissionPlanner.Phase.ESCORT_COVER) {
+                Run leader = ACTIVE.get(orders.leader());
+                if (leader != null && leader.liveOrder != null
+                        && orders.team().equals(leader.liveOrder.team())
+                        && leader.aircraft.level() == level && !leader.aircraft.isRemoved()) {
+                    // Shared *friendly* live Entity state is a legitimate
+                    // datalink measurement; never extrapolate a hidden foe.
+                    observedLeaderVelocity = xyz(leader.aircraft.getDeltaMovement());
+                }
+            }
             var frame = new TacticalAirAI.Frame(airframe.profile(), airframe.model(), state,
                     guidanceMission, currentObjective, currentHome,
                     guidanceContact, currentAnchor, nearestFriendly,
-                    fuel, integrity, surface, false, 0);
+                    fuel, integrity, surface, false, 0, observedLeaderVelocity);
             FlightSafetyPlanner.Terrain terrain = (x, z) ->
                     level.getHeight(Heightmap.Types.MOTION_BLOCKING, Mth.floor(x), Mth.floor(z));
             var environment = new FlightSafetyPlanner.Environment(terrain, nearby,

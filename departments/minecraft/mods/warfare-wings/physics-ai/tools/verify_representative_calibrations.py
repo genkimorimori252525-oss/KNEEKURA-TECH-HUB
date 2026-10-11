@@ -34,6 +34,13 @@ def _validate_atlas(anchor_csv: Path) -> None:
 
 def verify(trace_dir: Path, anchor_csv: Path, java: str, classes: Path,
            report_dir: Path) -> dict:
+    # Use the identical resolved file identity for JVM output and Python input.
+    # A relative report path can otherwise be sensitive to a caller's working
+    # directory on the owner's Windows Forge runner.
+    trace_dir = trace_dir.resolve()
+    anchor_csv = anchor_csv.resolve()
+    classes = classes.resolve()
+    report_dir = report_dir.resolve()
     _validate_atlas(anchor_csv)
     # Check all four receipts before producing any generated output. This
     # prevents the source-only simulator from masquerading as runtime input.
@@ -54,8 +61,10 @@ def verify(trace_dir: Path, anchor_csv: Path, java: str, classes: Path,
         source = report_dir / f"{scenario}-reaction-source.csv"
         subprocess.run([java, "-cp", str(classes),
                         "org.kneekura.techhub.warfarewings.physics.ReactionCalibrationTraceMain",
-                        str(anchor_csv.resolve()), f"warfare_wings:{airframe}",
-                        str(source.resolve())], check=True)
+                        str(anchor_csv), f"warfare_wings:{airframe}",
+                        str(source)], check=True)
+        if not source.is_file():
+            raise FileNotFoundError(f"Java17 returned zero but did not write {source}")
         runtime = trace_dir / f"{scenario}-runtime.csv"
         calibrated = compare(source, runtime, report_dir / f"{airframe}-calibration")
         metrics = calibrated["metrics"]

@@ -183,7 +183,11 @@ try {
   await same(tacticalA, tacticalB);
   const tacticalLines = (await readFile(tacticalA, 'utf8')).trimEnd().split(/\r?\n/);
   if (tacticalLines.length !== 97) throw new Error(`Expected 4 cases for 24 aircraft, got ${tacticalLines.length} lines`);
-  await same(tacticalA, path.join(here, 'reports/tactical-source-scenarios-v1.csv'));
+  // Keep v1 as immutable earlier-policy evidence. The improved measured-track
+  // intercept/descending escort policy intentionally changes source flights;
+  // require the explicitly versioned new 24x4 baseline instead of silently
+  // overwriting earlier source predictions or disabling the drift check.
+  await same(tacticalA, path.join(here, 'reports/tactical-source-scenarios-v2.csv'));
   process.stdout.write('Warfare Wings Physics AI + 24-aircraft flight guidance + terrain + squadron mission checks passed; REAL_MINECRAFT_PARITY: NOT_RUN\n');
 } finally {
   await rm(work, { recursive: true, force: true });

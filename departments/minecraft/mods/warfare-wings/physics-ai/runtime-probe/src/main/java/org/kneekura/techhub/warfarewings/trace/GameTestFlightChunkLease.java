@@ -21,7 +21,13 @@ import java.util.Set;
  * Operator-controlled aircraft never use these GameTest tickets.
  */
 final class GameTestFlightChunkLease {
-    private static final int SIDE = 1;
+    // Keep a two-chunk safety margin around both current and projected
+    // physical positions. A one-chunk margin still permitted a one-server-
+    // tick stall as an escort crossed z=64 in the strict 340-tick GameTest,
+    // despite FULL chunk prewarming. This wider *test-owned chunk ticket*
+    // margin does not change any airplane control, motion, attacker, starting
+    // geometry or pass threshold; a missing original Entity tick STILL fails.
+    private static final int SIDE = 2;
     // A pair of planes may share a chunk. Releasing the first plane's lease
     // must not unforce a chunk required by the second one.
     private static final Map<ServerLevel, Map<Long, SharedTicket>> SHARED =
@@ -44,6 +50,21 @@ final class GameTestFlightChunkLease {
         if (aircraft.level() != level || aircraft.isRemoved())
             throw new IllegalStateException("Chunk lease aircraft left its test dimension");
         update(aircraft.position(), aircraft.getDeltaMovement());
+    }
+
+    /**
+     * On an intermittent real entity-tick stall, synchronously confirm that
+     * the same already-owned chunk area is FULL-loaded before the next server
+     * tick. Minecraft must still actually update the aircraft; this method
+     * cannot change an Entity tickCount, position or physical velocity and
+     * the caller's existing >20-tick liveness failure remains authoritative.
+     */
+    void reconfirmLoaded(Entity aircraft) {
+        update(aircraft);
+        for (long key : active) {
+            ChunkPos chunk = new ChunkPos(key);
+            level.getChunk(chunk.x, chunk.z);
+        }
     }
 
     /** Call before addFreshEntity when an actor starts outside loaded GameTest chunks. */
@@ -87,6 +108,21 @@ final class GameTestFlightChunkLease {
         ChunkPos chunk = new ChunkPos(key);
         boolean owned = level.setChunkForced(chunk.x, chunk.z, true);
         levelTickets.put(key, new SharedTicket(owned));
+        // A forced chunk ticket does not guarantee its FULL chunk has been
+        // synchronously loaded before the *next* aircraft entity relocation.
+        // Long original-Forge flights have stopped at precisely a 16-block
+        // boundary while the server clock continued. This is test-only chunk
+        // liveness maintenance, never an adjustment to the aircraft physics.
+        // Acquire before releasing trailing chunks; synchronously stage the
+        // forward/current area the real entity is physically about to cross.
+        try {
+            level.getChunk(chunk.x, chunk.z);
+        } catch (RuntimeException unableToLoad) {
+            levelTickets.remove(key);
+            if (owned) level.setChunkForced(chunk.x, chunk.z, false);
+            if (levelTickets.isEmpty()) SHARED.remove(level);
+            throw unableToLoad;
+        }
     }
 
     private void release(long key) {

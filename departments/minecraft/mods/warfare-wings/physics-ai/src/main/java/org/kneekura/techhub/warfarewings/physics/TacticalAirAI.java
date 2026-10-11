@@ -202,7 +202,12 @@ public final class TacticalAirAI {
             double side = frame.self().position().add(anchor.scale(-1)).dot(right) < 0 ? -1 : 1;
             // Two guards approaching from opposite sides should not be
             // assigned the same 3D point in the moving protection corridor.
-            target = defendedFuture.add(outward.scale(screenDistance)).add(right.scale(side * 12));
+            // A shallow descending intercept station allows the fighter to
+            // trade some altitude for speed while its engine spools up. This
+            // is a guidance waypoint only: IA still integrates real motion,
+            // and the safety planner may overrule it for terrain or traffic.
+            target = defendedFuture.add(outward.scale(screenDistance))
+                    .add(right.scale(side * 12)).add(0, -20, 0);
             why = distance < 100 ? "ESCORT_INNER_SCREEN" : "ESCORT_PREDICTIVE_SCREEN";
         } else if (frame.profile().role().equals("bomber")
                 && (frame.mission() == Mission.LEVEL_BOMB || frame.mission() == Mission.PATROL)
@@ -286,17 +291,17 @@ public final class TacticalAirAI {
                 why = "REBUILD_SPEED_BEFORE_REENTRY";
             } else if (above && fastEnough && range > 18) {
                 maneuver = Maneuver.HIGH_SIDE_PASS;
-                target = leadPoint(enemy, range, speed / TICKS_PER_SECOND);
+                target = leadPoint(frame, enemy, speed / TICKS_PER_SECOND);
                 why = "ALTITUDE_SPEED_ADVANTAGE";
             } else if (frame.profile().ticksTo90Yaw() <= 48
                     && frame.profile().equalAngle90SpeedRetention() < 0.95
                     && range < 70) {
                 maneuver = Maneuver.TURN_PURSUIT;
-                target = leadPoint(enemy, range, Math.max(0.2, speed / TICKS_PER_SECOND));
+                target = leadPoint(frame, enemy, Math.max(0.2, speed / TICKS_PER_SECOND));
                 why = "ATLAS_FAST_YAW_RESPONSE";
             } else {
                 maneuver = Maneuver.INTERCEPT;
-                target = leadPoint(enemy, range, Math.max(0.2, speed / TICKS_PER_SECOND));
+                target = leadPoint(frame, enemy, Math.max(0.2, speed / TICKS_PER_SECOND));
                 why = "TARGET_INTERCEPT";
             }
         } else if (frame.mission() == Mission.ESCORT && frame.formationAnchor() != null) {
@@ -363,9 +368,41 @@ public final class TacticalAirAI {
                 .dot(delta.normalize()) > Math.cos(Math.toRadians(5.0));
     }
 
-    private static Vec3 leadPoint(Contact target, double range, double ownSpeedBpt) {
-        double horizonTicks = Math.min(30, range / Math.max(0.20, ownSpeedBpt + target.velocity().length()));
-        return target.position().add(target.velocity().scale(horizonTicks));
+    /**
+     * Solve the constant-velocity crossing intercept using only the pilot's
+     * own position and the supplied locally observed target track. The
+     * velocity is an estimate, not a source of hidden future target positions.
+     * A finite thirty-tick lookahead bounds stale-track and maneuver error;
+     * if the track cannot be overtaken at the estimated current airspeed,
+     * retain a bounded pursuit lead rather than inventing an interception.
+     */
+    static Vec3 leadPoint(Frame frame, Contact target, double ownSpeedBpt) {
+        Vec3 delta = target.position().add(frame.self().position().scale(-1));
+        Vec3 observedVelocity = target.velocity();
+        double speed = Math.max(0.20, ownSpeedBpt);
+        double a = observedVelocity.lengthSquared() - speed * speed;
+        double b = 2.0 * delta.dot(observedVelocity);
+        double c = delta.lengthSquared();
+        if (c < EPS) return target.position();
+
+        double fallbackTicks = Math.sqrt(c) / Math.max(0.20, speed + observedVelocity.length());
+        double interceptTicks = Double.NaN;
+        if (Math.abs(a) < EPS) {
+            if (b < -EPS) interceptTicks = -c / b;
+        } else {
+            double discriminant = b * b - 4.0 * a * c;
+            if (discriminant >= 0) {
+                double root = Math.sqrt(discriminant);
+                double t1 = (-b - root) / (2.0 * a);
+                double t2 = (-b + root) / (2.0 * a);
+                if (t1 > EPS && t2 > EPS) interceptTicks = Math.min(t1, t2);
+                else if (t1 > EPS) interceptTicks = t1;
+                else if (t2 > EPS) interceptTicks = t2;
+            }
+        }
+        double horizonTicks = Math.min(30.0,
+                Double.isFinite(interceptTicks) ? interceptTicks : fallbackTicks);
+        return target.position().add(observedVelocity.scale(horizonTicks));
     }
 
     private static double angleDiff(double desired, double current) {

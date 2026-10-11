@@ -3,8 +3,10 @@ package org.kneekura.techhub.warfarewings.physics;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import static org.kneekura.techhub.warfarewings.physics.Ia133Microkernel.*;
 
 public final class CombatSimulationSelfTest {
@@ -370,12 +372,53 @@ public final class CombatSimulationSelfTest {
         yes(lead.steeringPoint().z()>wait.steeringPoint().z(),
                 "advancing protected aircraft requires a correspondingly forward predictive screen");
     }
+    private static void observedCrossingIntercept(Path csv) throws Exception {
+        var fighter=AircraftAtlasMain.load(csv).stream()
+                .filter(type->type.aircraftId().equals("warfare_wings:spitfire"))
+                .findFirst().orElseThrow();
+        var profile=TacticalAirAI.Profile.fromAtlas(AircraftAtlasMain.evaluateReaction(fighter));
+        var current=State.airborne(new Vec3(0,170,0),new Vec3(0,0,2.0));
+        var crossing=new TacticalAirAI.Contact("crossing-observed-only",
+                new Vec3(30,170,0),new Vec3(0,0,.5),true);
+        var frame=new TacticalAirAI.Frame(profile,fighter.model(),current,
+                TacticalAirAI.Mission.INTERCEPT,GOAL,HOME,crossing,null,null,
+                1,1,0,false,0);
+        var predicted=TacticalAirAI.leadPoint(frame,crossing,2.0);
+        double crossingTime=30.0/Math.sqrt(2.0*2.0-.5*.5);
+        yes(Math.abs(predicted.x()-30.0)<1e-9
+                        && Math.abs(predicted.z()-.5*crossingTime)<1e-9,
+                "crossing pursuit uses the real relative quadratic intercept, not range/sum-of-speeds");
+        yes(Math.abs(predicted.z()-.5*(30.0/(2.0+.5)))>1.5,
+                "crossing intercept materially differs from the old straight-line closure heuristic");
+        var uncatchable=new TacticalAirAI.Contact("observed-faster-departing",
+                new Vec3(0,170,50),new Vec3(0,0,3),true);
+        var fallback=TacticalAirAI.leadPoint(frame,uncatchable,1.0);
+        yes(Math.abs(fallback.z()-87.5)<1e-9,
+                "unreachable faster target uses finite bounded pursuit lead rather than a false root");
+        var farCrossing=new TacticalAirAI.Contact("observed-distant-crossing",
+                new Vec3(120,170,0),new Vec3(0,0,1),true);
+        var bounded=TacticalAirAI.leadPoint(frame,farCrossing,2.0);
+        yes(bounded.z()==30.0,
+                "observed-track crossing extrapolation is capped at thirty physics ticks");
+        var coincident=new TacticalAirAI.Contact("observed-coincident",current.position(),
+                new Vec3(0,0,2),true);
+        yes(TacticalAirAI.leadPoint(frame,coincident,2.0).equals(current.position()),
+                "zero-range observed track avoids a degenerate quadratic and has a finite steering point");
+        var unseen=new TacticalAirAI.Frame(profile,fighter.model(),current,
+                TacticalAirAI.Mission.PATROL,GOAL,HOME,null,null,null,
+                1,1,0,false,0);
+        yes(TacticalAirAI.decide(unseen,TacticalAirAI.Memory.INITIAL).maneuver()
+                        == TacticalAirAI.Maneuver.PATROL_ROUTE,
+                "intercept prediction cannot steer toward an opponent missing from the local sensor track");
+    }
     private static void everyAtlasAirframe(Path csv) throws Exception {
         var roster=AircraftAtlasMain.load(csv);
         yes(roster.size()==24,"exact source Atlas type count");
+        Set<String> airframeTypes=new HashSet<>();
         List<SquadronCommand.AircraftSpec> all=new ArrayList<>();
         for (int i=0;i<roster.size();i++) {
             var item=roster.get(i);
+            yes(airframeTypes.add(item.aircraftId()),"all 24 aircraft keep distinct Atlas identities");
             TacticalAirAI.Mission mission=switch(item.role()) {
                 case "bomber" -> TacticalAirAI.Mission.LEVEL_BOMB;
                 case "torpedo_bomber" -> TacticalAirAI.Mission.TORPEDO;
@@ -385,6 +428,9 @@ public final class CombatSimulationSelfTest {
             all.add(plane("airframe"+i,item.baseId(),"source","flight"+i,0,
                     mission,null,i*220.0,225,0,0,0.8,1));
         }
+        for (String key : List.of("a6m","p47n","spitfire","il2","b17"))
+            yes(airframeTypes.contains("warfare_wings:"+key),
+                    "essential historical fighter, attack and bomber roles remain in the Atlas: "+key);
         var report=run(csv,"all-24-Atlas-types",55,Map.of(),all);
         yes(report.units().size()==24,"every source aircraft has one diagnostic record");
         yes(report.pairs().size()==276,"24 aircraft have 276 unique separation pairs");
@@ -411,6 +457,7 @@ public final class CombatSimulationSelfTest {
         Path csv=Path.of(args[0]);
         oneVsOne(csv);twoVsTwo(csv);escortAndRetreat(csv);invalid(csv);
         observedEnemySafety(csv);
+        observedCrossingIntercept(csv);
         everyAtlasAirframe(csv);
         System.out.println("CombatSimulationSelfTest PASS: "+checks
                 +" assertions, source-only 1v1/2v2/mixed escort/retreat; NO_HITS_NO_KILLS");

@@ -44,8 +44,17 @@ public final class RealTacticalPhysicsTwinReplayMain {
                 throw new IllegalArgumentException("Real tactical physics identity/source changed at " + i);
             long tick = Long.parseLong(c[4]);
             long clock = Long.parseLong(c[5]);
-            if (tick != i-1 || i>1 && clock != rows.get(i-2).gameTime() + 1)
-                throw new IllegalArgumentException("Real pilot missed a server/aircraft tick at " + i);
+            if (tick != i-1)
+                throw new IllegalArgumentException("Non-consecutive ORIGINAL aircraft physics tick in "
+                        + scenario + " at CSV sample=" + i + " expected=" + (i-1)
+                        + " recorded=" + tick);
+            if (i > 1 && clock != rows.get(i-2).gameTime() + 1)
+                throw new IllegalArgumentException("ORIGINAL_MINECRAFT_SERVER_CLOCK_GAP: " + scenario
+                        + " aircraft_tick=" + tick
+                        + " previous_game_time=" + rows.get(i-2).gameTime()
+                        + " current_game_time=" + clock
+                        + " missing_server_ticks=" + (clock - rows.get(i-2).gameTime() - 1)
+                        + "; external free-air parity NOT ESTABLISHED");
             double clearance = d(c,24);
             if (i>1 && clearance < 10)
                 throw new IllegalArgumentException("Ground/voxel contact may matter; no flat-world source replay at " + i);

@@ -302,6 +302,297 @@ def make_html(summary: Path, slices: Path, output: Path) -> dict:
     return payload["summary"]
 
 
+TWIN_NUMBERS = {
+    "engine_reaction_ticks",
+    "tick", "seconds", "x", "y", "z", "vx", "vy", "vz", "speed_bps",
+    "yaw_deg", "pitch_deg", "roll_deg", "engine_target", "engine_power",
+    "ground_y", "clearance_blocks", "nearest_ally_blocks", "team_known_count",
+    "visible_hostiles_count", "stale_tracks_count", "los_rejected_count",
+    "fov_rejected_count", "out_of_range_count", "contact_age_ticks",
+    "control_x", "control_z", "control_throttle", "range_blocks",
+    "nose_dot", "ray_clearance_blocks", "track_age_ticks",
+    "initial_separation_blocks", "min_sampled_separation_blocks",
+    "min_swept_center_separation_blocks", "sampled_lt6_ticks", "swept_lt6_ticks",
+    "closest_sampled_tick", "closest_swept_tick", "final_separation_blocks",
+    "protection_radius_blocks", "initial_closest_hostile_blocks",
+    "min_sampled_hostile_blocks", "min_swept_hostile_blocks",
+    "within95_sampled_ticks", "within95_swept_ticks", "first_intrusion_sampled_tick",
+    "first_intrusion_swept_tick", "escort_target_assignment_ticks",
+    "first_escort_assignment_tick", "interposition_ticks", "bomber_path_blocks",
+    "bomber_ground_ticks", "bomber_final_speed_bps", "bomber_final_objective_distance",
+    "path_blocks", "displacement_blocks", "initial_speed_bps", "final_speed_bps",
+    "final_objective_distance", "min_clearance_blocks", "ground_ticks",
+    "visible_contact_ticks", "first_visible_tick", "stale_track_ticks",
+    "first_stale_tick", "track_expiration_events", "los_blocked_observations",
+    "fov_blocked_observations", "range_blocked_observations",
+    "assigned_target_ticks", "first_assignment_tick", "collision_avoidance_ticks",
+    "terrain_safety_ticks", "safety_override_ticks", "decision_changes",
+    "advisory_fire_ticks",
+}
+TWIN_BOOL = {"on_ground", "track_available", "current_observation", "track_expired"}
+TWIN_SCHEMA = "ww.flight-twin.closed-loop.v1"
+
+
+def load_twin_experiment(output_dir: Path) -> dict:
+    with (output_dir / "twin_summary.json").open(encoding="utf-8") as stream:
+        summary = json.load(stream)
+    if (summary.get("schema") != TWIN_SCHEMA
+            or "NO_FORGE_PARITY" not in summary.get("evidence", "")
+            or summary.get("body_separation_radius_blocks") != 6.0
+            or summary.get("b17_protection_radius_blocks") != 95.0):
+        raise ValueError("Twin provenance or original undiluted safety radii are invalid")
+    wanted = {
+        "units": "twin_units.csv", "pairs": "twin_pairs.csv",
+        "assets": "twin_assets.csv", "slices": "twin_time_slices.csv",
+        "events": "twin_sensor_events.csv",
+    }
+    payload = {"summary": summary}
+    case_ids = {case["id"] for case in summary["scenarios"]}
+    for key, filename in wanted.items():
+        rows = []
+        with (output_dir / filename).open(newline="", encoding="utf-8") as stream:
+            reader = csv.DictReader(stream)
+            if "schema" not in (reader.fieldnames or []) or "scenario" not in (reader.fieldnames or []):
+                raise ValueError(f"Malformed {filename}")
+            for source in reader:
+                if source["schema"] != TWIN_SCHEMA or source["scenario"] not in case_ids:
+                    raise ValueError(f"Twin CSV record outside declared scope: {filename}")
+                result = {}
+                for field, value in source.items():
+                    if field in TWIN_BOOL:
+                        result[field] = value == "true"
+                    elif field in TWIN_NUMBERS:
+                        result[field] = float(value) if value else None
+                    else:
+                        result[field] = value
+                rows.append(result)
+        payload[key] = rows
+    for case in summary["scenarios"]:
+        name = case["id"]
+        n = case["active_aircraft"]
+        slices = [s for s in payload["slices"] if s["scenario"] == name]
+        units = [s for s in payload["units"] if s["scenario"] == name]
+        pairs = [s for s in payload["pairs"] if s["scenario"] == name]
+        if len(units) != n or len(pairs) != n * (n - 1) // 2:
+            raise ValueError(f"Missing complete per-aircraft/per-pair Twin outcome: {name}")
+        if len({u["aircraft_id"] for u in units}) != case["unique_aircraft_types"]:
+            raise ValueError(f"Duplicate/missing aircraft types in {name}")
+        if len({s["unit_id"] for s in slices if s["tick"] == 0}) != n:
+            raise ValueError(f"Missing t0 Twin snapshot for {name}")
+        if len({s["unit_id"] for s in slices if s["tick"] == case["simulated_ticks"]}) != n:
+            raise ValueError(f"Missing final Twin snapshot for {name}")
+        if sum(int(p["swept_lt6_ticks"]) for p in pairs) != case["swept_lt6_pair_ticks"]:
+            raise ValueError(f"Silent body-separation gate mismatch in {name}")
+        asset_rows = [s for s in payload["assets"] if s["scenario"] == name]
+        if sum(int(a["within95_swept_ticks"]) for a in asset_rows) != case["swept_within95_hostile_ticks"]:
+            raise ValueError(f"Silent B17 radius gate mismatch in {name}")
+        gates_fail = (any(p["body_gate"] == "FAILED" for p in pairs)
+                      or any(a["protection_gate"] == "FAILED" for a in asset_rows)
+                      or any(u["ground_ticks"] > 0 for u in units))
+        if gates_fail != (case["status"] == "FAILED_SOURCE_SAFETY"):
+            raise ValueError(f"Reported safety result does not reflect evidence: {name}")
+    return payload
+
+
+TWIN_HTML = r"""<!DOCTYPE html>
+<html lang="ja">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Warfare Wings · Closed-Loop Flight Twin</title>
+<style>
+:root{color-scheme:dark;--bg:#09121d;--panel:#101f30;--grid:#294052;--text:#e5f0ff;--mute:#a4b7ce;--a:#6de2e4;--b:#ffb772;--warn:#fa7373}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,"Segoe UI",sans-serif}
+main{max-width:1510px;margin:auto;padding:24px clamp(12px,3vw,34px) 70px}
+header{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;flex-wrap:wrap}h1{font-size:clamp(1.65rem,3.2vw,2.65rem);margin:0;letter-spacing:-.045em}
+h2{font-size:1.07rem;margin:0 0 9px}p{color:var(--mute);margin:6px 0}
+.tag{font-size:.72rem;letter-spacing:.14em;font-weight:750;color:var(--a)}
+.note{max-width:525px;border-left:3px solid var(--b);padding:7px 14px;background:#202739;color:#f0d1b4;font-size:.88rem}
+.controls{display:flex;align-items:end;gap:14px;flex-wrap:wrap;margin:22px 0 12px;background:var(--panel);border:1px solid var(--grid);border-radius:12px;padding:15px}
+label{font-size:.83rem;color:var(--mute)}select,input{display:block;margin-top:5px;padding:8px;background:#142c42;border:1px solid #486076;border-radius:8px;color:var(--text);font:inherit}
+input[type=range]{width:230px;padding:0;accent-color:var(--a)}select{min-width:240px}
+.fill{flex:1}.metrics{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin-bottom:12px}
+.metric,.panel{background:var(--panel);border:1px solid var(--grid);border-radius:12px;padding:14px}
+.metric strong{display:block;font-size:clamp(1.03rem,1.55vw,1.6rem);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.metric small{color:var(--mute)}.plots{display:grid;grid-template-columns:1.2fr 1fr;gap:12px}
+.stack{display:grid;gap:12px}canvas{width:100%;height:auto;display:block;border-radius:7px;background:#081624;border:1px solid #22374c}
+.label{display:flex;gap:10px;align-items:center;justify-content:space-between;color:var(--mute);font-size:.78rem;margin-bottom:8px}
+.legend{display:flex;gap:18px;color:var(--mute);font-size:.8rem;margin:10px 0 0}
+.legend span::before{content:"";display:inline-block;width:16px;height:3px;background:var(--a);vertical-align:middle;margin-right:6px}
+.legend .enemy::before{background:var(--b)}.legend .danger::before{background:var(--warn)}
+.tables{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.scroll{max-height:350px;overflow:auto}table{width:100%;border-collapse:collapse;font-size:.82rem;font-variant-numeric:tabular-nums}
+th,td{padding:9px 10px;border-bottom:1px solid #2a4054;text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left}th{position:sticky;top:0;background:#152a3d;color:var(--mute)}
+td.bad{color:var(--warn);font-weight:750}.status{font-family:ui-monospace,Consolas,monospace;font-size:.82rem;overflow-wrap:anywhere}
+details{margin-top:19px;color:var(--mute)}details summary{cursor:pointer;color:var(--text)}
+code{color:#b7ecf1;overflow-wrap:anywhere}
+@media(max-width:1020px){.metrics{grid-template-columns:repeat(3,1fr)}.plots,.tables{grid-template-columns:1fr}}
+@media(max-width:550px){.metrics{grid-template-columns:repeat(2,1fr)}}
+</style></head>
+<body><main>
+<header><div><span class="tag">KNEEKURA · WARFARE WINGS · 20 HZ</span>
+  <h1>Closed-Loop Flight Twin</h1>
+  <p>敵機を観測 → 視野・地形LOS → 記憶 → 指令 → 機体ごとのSOURCE物理。全機が同じtickで進行。</p></div>
+  <div class="note">SOURCE実験結果。地形LOS・機体間隔・敵発見は人工的な研究モデルです。Forgeの衝突・チャンク・視線・射撃の実機合格を意味しません。</div></header>
+<div class="controls">
+  <label>同時飛行シナリオ<select id="scene"></select></label>
+  <label>時刻 / tick<input id="time" type="range" min="0" max="240" step="1" value="0"></label>
+  <label>軌跡の選択<select id="selected"></select></label><div class="fill"></div>
+  <span class="status" id="timestamp"></span>
+</div>
+<section class="metrics" id="metrics"></section>
+<div class="plots">
+  <section class="panel"><div class="label"><h2>上面図 X / Z · 現在位置と実際の飛跡</h2><span>単位: blocks · 線は観測目標/記憶</span></div>
+    <canvas id="top" width="810" height="590" role="img" aria-label="24機までの同時航空機位置と実際の航跡"></canvas>
+    <div class="legend"><span>青チーム</span><span class="enemy">赤チーム</span><span class="danger">6b侵入、95b保護境界</span></div>
+  </section>
+  <div class="stack">
+   <section class="panel"><div class="label"><h2>立体風投影 / 3D trajectory</h2><span>高度と各隊形</span></div>
+     <canvas id="iso" width="720" height="350" role="img" aria-label="機体軌跡の高度つき俯瞰投影"></canvas></section>
+   <section class="panel"><div class="label"><h2>断面図 Z / Y</h2><span>地形、上下運動</span></div>
+     <canvas id="side" width="720" height="300" role="img" aria-label="Zと高度の時間経過"></canvas></section>
+  </div>
+</div>
+<div class="tables">
+ <section class="panel"><h2>全機体の判断・視認・間隔</h2><div class="scroll"><table><thead><tr>
+  <th>機体</th><th>速度 b/s</th><th>現在の判断</th><th>視認数</th><th>記憶数</th><th>LOS遮蔽</th></tr></thead><tbody id="unitTable"></tbody></table></div></section>
+ <section class="panel"><h2>原型の安全条件・測定結果</h2><div class="scroll"><table><thead><tr>
+  <th>対象</th><th>最小距離</th><th>しきい値</th><th>侵犯tick</th><th>判定</th></tr></thead><tbody id="gateTable"></tbody></table></div>
+  <p id="gates" class="status"></p></section>
+</div>
+<details><summary>データ出典と限界</summary>
+ <p>飛行物理: <code>Ia133Microkernel.tickWithReaction</code> + <code>PinnedIa133WindWorld.calmAirCalibration().windAfterFriction</code>、24の原本由来モデルとエンジン応答値。20Hzの全機同期更新。チーム位置は理想化された味方無線と見なす。敵情報は各機の独立した距離/3D FOV/高さ地形LOS/時間制限付き記憶だけで取得。</p>
+ <p>相互距離は機体中心間の距離。各tick端点と、両者が1 tick中に直線移動したとみなす保守的な最近接距離を別々に測定する。6bは機体衝突そのもの、95bは飛行中のB17への敵機侵入をMinecraftの実衝突判定に置き換えるものではない。後方配置/前方配置の位置としきい値は既存の原型テストから一切変更していない。</p>
+ <p>ログ: <code>twin_summary.json</code>, <code>twin_units.csv</code>, <code>twin_pairs.csv</code>, <code>twin_assets.csv</code>, <code>twin_time_slices.csv</code>, <code>twin_sensor_events.csv</code>。HTMLはこれらのデータを内蔵し、外部通信を使わない。</p>
+ <p id="provenance"></p>
+</details>
+</main>
+<script>
+"use strict";
+const DATA=__TWIN_DATA__,summary=DATA.summary;
+const get=id=>document.getElementById(id),f=(x,n=1)=>Number.isFinite(Number(x))?Number(x).toFixed(n):"—";
+const scenes=summary.scenarios;
+get("scene").innerHTML=scenes.map(x=>'<option value="'+x.id+'">'+x.id.replace(/_/g," ")+'</option>').join("");
+get("scene").value=scenes.some(x=>x.id==="original_b17_aft")?"original_b17_aft":scenes[0].id;
+get("provenance").textContent=summary.evidence+" / anchor SHA-256 "+summary.aircraft_anchor_sha256;
+function colour(team){return team==="blue"||team==="a"?"#6de2e4":"#ffb772"}
+function points(scene){return DATA.slices.filter(p=>p.scenario===scene)}
+function prepare(id){const c=get(id),ctx=c.getContext("2d");ctx.fillStyle="#081624";ctx.fillRect(0,0,c.width,c.height);
+  ctx.strokeStyle="#20354b";ctx.lineWidth=1;
+  for(let i=0;i<=6;i++){let x=32+(c.width-64)*i/6,y=32+(c.height-64)*i/6;
+    ctx.beginPath();ctx.moveTo(x,26);ctx.lineTo(x,c.height-26);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(26,y);ctx.lineTo(c.width-26,y);ctx.stroke();}
+  return {ctx,w:c.width,h:c.height,pad:38};}
+function viewport(pts,id,project,extra=0){
+  const chart=prepare(id),coords=pts.map(project);
+  if(!coords.length)return null;
+  const xs=coords.map(p=>p[0]),ys=coords.map(p=>p[1]),bounds=[
+    Math.min(...xs)-extra,Math.max(...xs)+extra,Math.min(...ys)-extra,Math.max(...ys)+extra];
+  const dx=Math.max(1,bounds[1]-bounds[0]),dy=Math.max(1,bounds[3]-bounds[2]);
+  const scale=Math.min((chart.w-chart.pad*2)/dx,(chart.h-chart.pad*2)/dy)*.91;
+  const mx=(bounds[0]+bounds[1])/2,my=(bounds[2]+bounds[3])/2;
+  const xy=p=>[chart.w/2+(p[0]-mx)*scale,chart.h/2-(p[1]-my)*scale];
+  return {...chart,scale,xy};}
+function drawChart(canvasId,rows,now,project,b17){
+  const own=rows.filter(p=>p.tick<=now);
+  const extra=(canvasId==="top" && b17)?95:0;
+  const view=viewport(own,canvasId,project,extra);
+  if(!view)return;
+  const {ctx,xy,scale}=view;
+  const grouped={};
+  for(const p of own)(grouped[p.unit_id]??=[]).push(p);
+  if(canvasId==="top" && b17){
+    const bomber=own.filter(p=>p.unit_id===b17).at(-1);
+    if(bomber){const c=xy(project(bomber));ctx.strokeStyle="#fa7373";ctx.setLineDash([7,5]);
+      ctx.lineWidth=2;ctx.beginPath();ctx.arc(c[0],c[1],95*scale,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);
+      ctx.fillStyle="#f3a4a4";ctx.font="13px Consolas,monospace";ctx.fillText("B-17: 95 blocks",c[0]+7,c[1]-95*scale+14);}
+  }
+  for(const [id,track] of Object.entries(grouped)){
+    ctx.strokeStyle=colour(track[0].team);ctx.lineWidth=1.7;ctx.globalAlpha=.48;
+    ctx.beginPath();track.forEach((p,i)=>{const c=xy(project(p));i?ctx.lineTo(...c):ctx.moveTo(...c)});ctx.stroke();ctx.globalAlpha=1;
+    const last=track.at(-1),pos=xy(project(last)),focused=get("selected").value===id;
+    ctx.fillStyle=colour(last.team);ctx.beginPath();ctx.arc(pos[0],pos[1],focused?7:4.3,0,Math.PI*2);ctx.fill();
+    if(focused){ctx.strokeStyle="#fff";ctx.lineWidth=2;ctx.beginPath();ctx.arc(pos[0],pos[1],10,0,Math.PI*2);ctx.stroke();}
+    if(Object.keys(grouped).length<10||focused){ctx.font="12px ui-monospace,monospace";ctx.fillStyle="#e8f4ff";ctx.fillText(id,pos[0]+9,pos[1]-6);}
+    if(focused && canvasId==="top" && last.observed_contact_id){
+      const t=grouped[last.observed_contact_id]?.at(-1);
+      if(t){ctx.strokeStyle=last.contact_age_ticks>0?"#ffaa8a":"#b9fbe9";
+        ctx.setLineDash(last.contact_age_ticks>0?[4,5]:[]);ctx.beginPath();ctx.moveTo(...pos);
+        ctx.lineTo(...xy(project(t)));ctx.stroke();ctx.setLineDash([]);}
+    }
+  }
+  if(canvasId==="top"){
+    for(const pair of DATA.pairs.filter(p=>p.scenario===get("scene").value && p.min_swept_center_separation_blocks<6)){
+      const a=grouped[pair.first_unit]?.at(-1),b=grouped[pair.second_unit]?.at(-1);
+      if(a&&b&&Math.hypot(a.x-b.x,a.y-b.y,a.z-b.z)<6){
+        ctx.strokeStyle="#fa7373";ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(...xy(project(a)));
+        ctx.lineTo(...xy(project(b)));ctx.stroke();}
+    }
+  }
+}
+function rowForTick(data,tick){
+  const available=[...new Set(data.map(x=>x.tick))].sort((a,b)=>a-b);
+  return available.reduce((best,current)=>Math.abs(current-tick)<Math.abs(best-tick)?current:best,available[0]??0);
+}
+function refresh(){
+ const name=get("scene").value,scene=scenes.find(x=>x.id===name),source=points(name);
+ get("time").max=scene.simulated_ticks;
+ const requested=Number(get("time").value),tick=rowForTick(source,requested);
+ const allAt=source.filter(x=>x.tick===tick);
+ if(!allAt.length)return;
+ const prior=source.filter(x=>x.tick<=tick);
+ const chosen=get("selected").value;
+ if(!allAt.some(x=>x.unit_id===chosen)){
+   const list=[...new Set(source.map(x=>x.unit_id))];
+   get("selected").innerHTML=list.map(x=>'<option value="'+x+'">'+x+'</option>').join("");
+   get("selected").value=list.find(x=>x==="cargo")||list[0];
+ }
+ const min=scene.min_swept_pair_separation_blocks;
+ const result=[
+  [scene.active_aircraft,"同時飛行中の機体"],
+  [scene.simulated_ticks,"SOURCE 20Hz tick"],
+  [scene.unique_aircraft_types,"異なる機種"],
+  [f(min,2)+" b","全対の最小中心間隔"],
+  [scene.swept_within95_hostile_ticks,"B17境界侵犯tick"],
+  [scene.status==="PASS_SOURCE_SAFETY"?"SOURCE PASS":"SOURCE FAILED","原型の安全判定"]
+ ];
+ get("metrics").innerHTML=result.map(x=>'<div class="metric"><strong>'+x[0]+'</strong><small>'+x[1]+'</small></div>').join("");
+ get("timestamp").textContent="sample tick "+tick+" / "+scene.simulated_ticks+"  ("+f(tick/20,1)+" s)";
+ const asset=DATA.assets.find(x=>x.scenario===name);
+ const b17=asset?.asset_unit;
+ drawChart("top",prior,tick,p=>[p.x,p.z],b17);
+ drawChart("iso",prior,tick,p=>[p.x*.76-p.z*.55,p.y*1.25-p.z*.38],null);
+ drawChart("side",prior,tick,p=>[p.z,p.y],null);
+ get("unitTable").innerHTML=allAt.map(u=>'<tr><td>'+u.unit_id+'</td><td>'+f(u.speed_bps,2)+
+   '</td><td>'+u.maneuver+'</td><td>'+u.visible_hostiles_count+'</td><td>'+u.stale_tracks_count+
+   '</td><td>'+u.los_rejected_count+'</td></tr>').join("");
+ const pairRows=DATA.pairs.filter(x=>x.scenario===name).sort((a,b)=>a.min_swept_center_separation_blocks-b.min_swept_center_separation_blocks);
+ const gateRows=pairRows.slice(0,Math.min(18,pairRows.length)).map(p=>[
+    p.first_unit+" ↔ "+p.second_unit,f(p.min_swept_center_separation_blocks,2),"6 b",p.swept_lt6_ticks,p.body_gate]);
+ for(const a of DATA.assets.filter(x=>x.scenario===name))
+   gateRows.unshift([a.asset_unit+" / hostile",f(a.min_swept_hostile_blocks,2),"95 b",a.within95_swept_ticks,a.protection_gate]);
+ get("gateTable").innerHTML=gateRows.map(r=>'<tr>'+r.map((v,i)=>'<td class="'+((i===4&&v==="FAILED")?"bad":"")+'">'+v+'</td>').join("")+'</tr>').join("");
+ get("gates").textContent=scene.failed_operational_gates.length?
+   "Source violations: "+scene.failed_operational_gates.join(" | "):
+   "6b/95b/ground source criteria: no breach detected in sampled scenario.";
+}
+get("scene").addEventListener("change",()=>{get("time").value=0;get("selected").value="";refresh()});
+get("time").addEventListener("input",refresh);
+get("selected").addEventListener("change",refresh);
+refresh();
+</script></body></html>
+"""
+
+
+def make_twin_html(output_dir: Path, html: Path) -> dict:
+    payload = load_twin_experiment(output_dir)
+    embedded = json.dumps(payload, ensure_ascii=False, separators=(",", ":"), allow_nan=False)
+    embedded = (embedded.replace("<", "\\u003c")
+                .replace(">", "\\u003e").replace("&", "\\u0026"))
+    html.parent.mkdir(parents=True, exist_ok=True)
+    html.write_text(TWIN_HTML.replace("__TWIN_DATA__", embedded), encoding="utf-8", newline="\n")
+    return payload["summary"]
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("summary", type=Path, help="Java batch summary.json")

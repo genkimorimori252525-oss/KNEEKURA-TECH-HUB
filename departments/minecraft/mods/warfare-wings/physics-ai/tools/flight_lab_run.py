@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compile with JDK 17, run all-aircraft SOURCE batches, render offline HTML.
+"""Compile JDK17 SOURCE physics, run seeded single-plane batches and/or live 20 Hz Twin.
 
 Use Python's standard library only. The compiled classes live in a temporary
 directory; the chosen --output holds only scientific run outputs.
@@ -18,10 +18,11 @@ import sys
 import tempfile
 import time
 
-from flight_lab_report import make_html, SCHEMA
+from flight_lab_report import make_html, make_twin_html, SCHEMA
 
 MODULE = Path(__file__).resolve().parent.parent
 MAIN = "org.kneekura.techhub.warfarewings.physics.FlightResearchBatchMain"
+TWIN_MAIN = "org.kneekura.techhub.warfarewings.physics.FlightTwinResearchMain"
 
 
 def java17_candidates(selected: Path | None = None) -> list[Path]:
@@ -83,6 +84,10 @@ def compile_lab(javac: str, classes: Path) -> None:
         "FlightControlLoop.java",
         "HistoricalDoctrineOrders.java",
         "FlightResearchBatchMain.java",
+        "FlightTwinSensor.java",
+        "FlightTwinScenario.java",
+        "FlightTwinResearchMain.java",
+        "FlightTwinSensorSelfTestMain.java",
     )
     sources = [source_dir / filename for filename in dependency_names]
     missing = [str(p) for p in sources if not p.is_file()]
@@ -116,6 +121,37 @@ def run_lab(java: str, classes: Path, output: Path, *,
     return result
 
 
+def run_twin(java: str, classes: Path, output: Path, *,
+             seed: int, unique_ticks: int = 240, trace_stride: int = 10,
+             scenario: str = "all", reverse_roster: bool = False) -> dict:
+    anchor = MODULE / "data" / "base-aircraft-anchor-v1.csv"
+    output.mkdir(parents=True, exist_ok=True)
+    command = [java, "-cp", str(classes), TWIN_MAIN, str(anchor), str(output),
+               "--seed", str(seed), "--24-ticks", str(unique_ticks),
+               "--trace-stride", str(trace_stride), "--scenario", scenario]
+    if reverse_roster:
+        command.append("--reverse-roster")
+    subprocess.run(command, cwd=MODULE, check=True)
+    with (output / "twin_summary.json").open(encoding="utf-8") as stream:
+        summary = json.load(stream)
+    cases = summary["scenarios"]
+    if (summary["schema"] != "ww.flight-twin.closed-loop.v1"
+            or "NO_FORGE_PARITY" not in summary["evidence"]
+            or summary["body_separation_radius_blocks"] != 6
+            or summary["b17_protection_radius_blocks"] != 95
+            or summary["simulated_source_ticks"] != sum(
+                s["simultaneous_source_updates"] for s in cases)
+            or any(s["active_aircraft"] * s["simulated_ticks"] !=
+                   s["simultaneous_source_updates"] for s in cases)
+            or not cases):
+        raise AssertionError("Closed-loop SOURCE Twin evidence/geometry/synchronization mismatch")
+    if scenario == "all" and (
+            len(cases) != 5 or
+            next(s for s in cases if s["id"] == "all_24_unique")["unique_aircraft_types"] != 24):
+        raise AssertionError("Complete Twin should include original scenarios and 24 unique models")
+    return summary
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", required=True, type=Path, help="Lab output folder")
@@ -127,6 +163,13 @@ def main() -> int:
                         help="SOURCE updates per trial (20 Hz)")
     parser.add_argument("--trace-stride", type=int, default=10,
                         help="Time slice interval for 1 representative/scenario/aircraft")
+    parser.add_argument("--mode", choices=("batch","twin","both"), default="both",
+                        help="Run original 12,288-trial batch, synchronous Twin, or both (default)")
+    parser.add_argument("--twin-24-ticks", type=int, default=240,
+                        help="Ticks of all_24_unique simultaneous aircraft scenario")
+    parser.add_argument("--twin-scenario", choices=(
+        "all","all_24_unique","original_2v2","original_b17_aft",
+        "original_b17_forward","synthetic_los_occluded"), default="all")
     args = parser.parse_args()
 
     javac, java = get_java17(args.java_home)
@@ -135,20 +178,45 @@ def main() -> int:
         classes = Path(temp) / "classes"
         compile_lab(javac, classes)
         compiled = time.perf_counter()
-        summary = run_lab(java, classes, args.output, seed=args.seed,
-                          trials_per_aircraft=args.trials_per_aircraft,
-                          ticks=args.ticks, trace_stride=args.trace_stride)
+        summary = None
+        twin_summary = None
+        if args.mode in ("batch","both"):
+            summary = run_lab(java, classes, args.output, seed=args.seed,
+                              trials_per_aircraft=args.trials_per_aircraft,
+                              ticks=args.ticks, trace_stride=args.trace_stride)
+        if args.mode in ("twin","both"):
+            twin_summary = run_twin(java, classes, args.output,
+                                    seed=args.seed, unique_ticks=args.twin_24_ticks,
+                                    trace_stride=args.trace_stride,
+                                    scenario=args.twin_scenario)
         simulated = time.perf_counter()
-    html = args.output / "flight-lab.html"
-    make_html(args.output / "summary.json", args.output / "time_slices.csv", html)
+    if summary is not None:
+        make_html(args.output / "summary.json", args.output / "time_slices.csv",
+                  args.output / "flight-lab.html")
+    if twin_summary is not None:
+        make_twin_html(args.output, args.output / "flight-twin.html")
     ended = time.perf_counter()
-    print(f"FLIGHT_LAB_JDK17_REPORT PASS {summary['trial_count']} trials / "
-          f"{summary['simulated_ticks']} SOURCE ticks")
+    if summary is not None:
+        print(f"FLIGHT_LAB_JDK17_REPORT PASS {summary['trial_count']} trials / "
+              f"{summary['simulated_ticks']} SOURCE ticks")
+    if twin_summary is not None:
+        failed = [case["id"] for case in twin_summary["scenarios"]
+                  if case["status"] != "PASS_SOURCE_SAFETY"]
+        print(f"FLIGHT_TWIN_JDK17_REPORT COMPLETE "
+              f"{twin_summary['simulated_source_ticks']} concurrent SOURCE updates "
+              f"/ {len(twin_summary['scenarios'])} scenarios, "
+              f"safety-failed={failed}")
     print(f"Timings: javac17={compiled-started:.3f}s "
           f"Java batch={simulated-compiled:.3f}s "
           f"HTML={ended-simulated:.3f}s total={ended-started:.3f}s")
-    print("Files:", *(str(args.output / filename) for filename in
-                       ("summary.json", "outcomes.csv", "time_slices.csv", "flight-lab.html")),
+    artifacts = (
+        ("summary.json", "outcomes.csv", "time_slices.csv", "flight-lab.html")
+        if summary is not None else ())
+    artifacts += (
+        ("twin_summary.json", "twin_units.csv", "twin_pairs.csv", "twin_assets.csv",
+         "twin_time_slices.csv", "twin_sensor_events.csv", "flight-twin.html")
+        if twin_summary is not None else ())
+    print("Files:", *(str(args.output / filename) for filename in artifacts),
           sep="\n  ")
     return 0
 
