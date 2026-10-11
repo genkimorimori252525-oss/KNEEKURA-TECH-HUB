@@ -130,14 +130,30 @@ public final class MissionScenarioSelfTest {
         Step first = command.advance(command.start());
         require(first.commands().get("cargo").assignedTargetId() == null,
                 "bomber keeps ground mission and receives no fighter target");
-        require(first.commands().get("cargo").decision().maneuver()
-                == TacticalAirAI.Maneuver.LEVEL_BOMB_RUN, "bomber continues level-bomb approach");
+        var bomberCommand = first.commands().get("cargo");
+        if (bomberCommand.decision().maneuver() != TacticalAirAI.Maneuver.LEVEL_BOMB_RUN) {
+            require(bomberCommand.decision().maneuver() == TacticalAirAI.Maneuver.COLLISION_AVOID
+                            && bomberCommand.safetyClearance().reason()
+                                == FlightSafetyPlanner.Reason.MOVING_COLLISION_RISK
+                            && bomberCommand.safetyClearance().obstacleId()
+                                .equals("interceptor")
+                            && bomberCommand.observedTargetThisTick(),
+                    "bomber may abort its bomb run only for a truly observed predicted collision");
+        } else {
+            require(bomberCommand.safetyClearance().reason()
+                            == FlightSafetyPlanner.Reason.CLEAR,
+                    "nominal bomber mission has no pending safety override");
+        }
         require("interceptor".equals(first.commands().get("escort-left").assignedTargetId()),
                 "escort prioritizes threat to escorted bomber");
         require("interceptor".equals(first.commands().get("escort-right").assignedTargetId()),
                 "both escort pilots can defend the same threatened asset");
-        require(!first.commands().get("escort-left").formationAnchor().equals(
-                first.commands().get("escort-right").formationAnchor()), "distinct cover stations");
+        require(first.commands().get("escort-left").formationAnchor().equals(
+                first.commands().get("escort-right").formationAnchor()),
+                "active escort guards reference the same actual protected airframe");
+        require(!first.commands().get("escort-left").decision().steeringPoint().equals(
+                first.commands().get("escort-right").decision().steeringPoint()),
+                "escort guards receive distinct lateral defensive stations");
         require(first.commands().get("cargo").threatContactId() != null,
                 "bomber independently observes danger for defensive behavior");
 
@@ -256,7 +272,15 @@ public final class MissionScenarioSelfTest {
         SquadronCommand separated = scenario(csv, Sensors.DEFAULT, shooter, target);
         Instruction permitted = separated.advance(separated.start()).commands().get("shooter");
         require(permitted.friendlyFireCorridorClear(), "same target without friendly has clear geometry");
-        require(permitted.decision().firingWindowCandidate(), "aligned clear fighter can report candidate");
+        require(permitted.observedTargetThisTick() && "bandit".equals(permitted.threatContactId()),
+                "hostile aircraft is a personally observed, assigned contact");
+        require(permitted.safetyClearance().reason()
+                        == FlightSafetyPlanner.Reason.MOVING_COLLISION_RISK
+                        && "bandit".equals(permitted.safetyClearance().obstacleId()),
+                "head-on contact with closing velocity triggers aircraft safety, even without friendlies");
+        require(permitted.decision().maneuver() == TacticalAirAI.Maneuver.COLLISION_AVOID
+                        && !permitted.decision().firingWindowCandidate(),
+                "physical collision threat suppresses an otherwise geometrically clear advisory shot");
 
         SquadronCommand close = scenario(csv, Sensors.DEFAULT, shooter,
                 craft("friend", "p47n", "blue", "two", 0,

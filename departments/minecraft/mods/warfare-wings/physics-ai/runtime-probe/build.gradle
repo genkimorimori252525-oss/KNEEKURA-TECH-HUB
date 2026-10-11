@@ -143,6 +143,17 @@ tasks.register('verifyTacticalInputCorrection', JavaExec) {
     }
 }
 
+tasks.register('verifyLiveAirSensorCone', JavaExec) {
+    group = 'verification'
+    description = 'Source-only FOV/pitch/yaw polarity assertions (block LOS requires real Minecraft)'
+    dependsOn tasks.named('classes')
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'org.kneekura.techhub.warfarewings.trace.LiveAirSensor'
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
 tasks.named('processResources', ProcessResources).configure {
     dependsOn tasks.named('generateEmptyGameTestStructure')
     dependsOn tasks.named('stageRuntimeTacticalAtlas')

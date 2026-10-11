@@ -17,7 +17,11 @@ public final class FlightSafetyPlanner {
     public interface Terrain {
         double topY(double x, double z);
     }
-    public record MovingObstacle(String id, Vec3 position, Vec3 velocity, double radius) {
+    public record MovingObstacle(String id, Vec3 position, Vec3 velocity,
+                                 double radius, boolean observedHostile) {
+        public MovingObstacle(String id, Vec3 position, Vec3 velocity, double radius) {
+            this(id, position, velocity, radius, false);
+        }
         public MovingObstacle {
             if (id == null || id.isBlank() || !finite(position) || !finite(velocity)
                     || !Double.isFinite(radius) || radius <= 0)
@@ -66,31 +70,57 @@ public final class FlightSafetyPlanner {
 
         MovingObstacle nearest = null;
         double closestGap = Double.POSITIVE_INFINITY;
+        double highestRisk = Double.POSITIVE_INFINITY;
         double atTick = 0;
         for (MovingObstacle obstacle : environment.obstacles()) {
             Vec3 delta = obstacle.position().add(pos.scale(-1));
             Vec3 relativeVelocity = obstacle.velocity().add(velocity.scale(-1));
             double relLen2 = relativeVelocity.lengthSquared();
+            // Aircraft closing head-on need lead time for IA's filtered X input
+            // to turn the aircraft. The 55-tick horizon is a laboratory guard,
+            // not a predicted exact Minecraft collision envelope.
+            double horizon = obstacle.observedHostile() ? 55 : 30;
             double t = relLen2 < 1e-12 ? 0
-                    : clamp(-delta.dot(relativeVelocity) / relLen2, 0, 30);
+                    : clamp(-delta.dot(relativeVelocity) / relLen2, 0, horizon);
             double gap = delta.add(relativeVelocity.scale(t)).length()
                     - obstacle.radius() - environment.ownRadius();
-            if (gap < closestGap) {
+            // Compare each encounter to its own action margin; otherwise a
+            // safe ally with a smaller raw gap can hide a hostile collision.
+            double risk = gap - (obstacle.observedHostile() ? 22.0 : 8.0);
+            if (risk < highestRisk - 1e-9
+                    || Math.abs(risk - highestRisk) <= 1e-9
+                    && (nearest == null || obstacle.id().compareTo(nearest.id()) < 0)) {
+                highestRisk = risk;
                 closestGap = gap;
                 nearest = obstacle;
                 atTick = t;
             }
         }
-        if (nearest != null && closestGap < 8.0) {
+        if (nearest != null && highestRisk < 0) {
+            // An aircraft already withdrawing for fuel or structural integrity
+            // must not be held indefinitely by a distant hypothetical CPA.
+            // Retain immediate collision safeguards inside the short horizon.
+            if (nearest.observedHostile()
+                    && (frame.fuelFraction() < 0.12 || frame.integrityFraction() < 0.22)
+                    && (atTick > 3.0
+                        || nearest.position().add(pos.scale(-1)).length() > 14.0))
+                return new Clearance(tacticalWaypoint, Reason.CLEAR, minimum, null, false);
             Vec3 projectedSelf = pos.add(velocity.scale(atTick));
             Vec3 projectedObstacle = nearest.position().add(nearest.velocity().scale(atTick));
             Vec3 away = projectedSelf.add(projectedObstacle.scale(-1));
-            Vec3 horizontal = new Vec3(away.x(), 0, away.z()).normalize();
+            Vec3 forwardHorizontal = forward(self.yawDeg(), 0);
+            Vec3 right = new Vec3(forwardHorizontal.z(), 0, -forwardHorizontal.x()).normalize();
+            // Reciprocal head-on aircraft use their respective right sides,
+            // placing them on opposite sides of the same projected track.
+            // For allies retain the measured projected CPA outward direction.
+            Vec3 horizontal = nearest.observedHostile()
+                    ? right : new Vec3(away.x(), 0, away.z()).normalize();
             if (horizontal.lengthSquared() < 1e-9) {
-                Vec3 f = forward(self.yawDeg(), 0);
-                horizontal = new Vec3(f.z(), 0, -f.x());
+                horizontal = right;
             }
-            Vec3 avoid = pos.add(horizontal.scale(65)).add(0, 24, 0);
+            Vec3 avoid = pos.add(horizontal.scale(nearest.observedHostile() ? 125 : 65))
+                    .add(forwardHorizontal.scale(nearest.observedHostile() ? 35 : 0))
+                    .add(0, nearest.observedHostile() ? 3 : 24, 0);
             return new Clearance(avoid, Reason.MOVING_COLLISION_RISK,
                     minimum, nearest.id(), true);
         }

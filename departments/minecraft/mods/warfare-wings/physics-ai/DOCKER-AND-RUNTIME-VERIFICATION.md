@@ -19,6 +19,8 @@ The image executes `tools/verify_headless.py`, which requires:
 - the existing 18 Java invariants, deterministic 401-row throttle traces and golden report comparison;
 - the source-side tactical AI self-test covering all 24 aircraft when present in the checked-out harness;
 - comparator self-tests on matching and deliberately perturbed traces;
+- strict Forge tactical runtime receipt-parser self-tests with intentionally
+  corrupted synthetic CSVs (15 checks), without confusing fixtures with game telemetry;
 - 24-aircraft Atlas JSON semantic equality and normalized Markdown equality with committed reports.
 
 Expected terminating markers:
@@ -47,6 +49,16 @@ Dispatch **Warfare Wings Physics AI Runtime Trace** on the branch `jolly/researc
 The run first hashes each local candidate, only copying a SHA-256 match into the isolated Gradle runtime directory. It then fetches Immersive Aircraft from the pinned Modrinth version and verifies SHA-512 `7b74442e161bb74538e0d8da34a81616daeea56a0da62db86113a78b3bf3c2b3a6b0e12f12454fd7c96092762f6b212ba57cb87eb1af2b242a4d5df4eca03055`. A missing/mismatched local Warfare Wings JAR is a hard failure; no public fallback occurs. The staged private JAR is not part of the uploaded trace artifact.
 
 On successful runtime startup, the Forge 1.20.1 / 47.4.20 GameTest spawns the real A6M, captures header plus 401 tick records, regenerates the microkernel trace, and writes the detailed comparison beneath `runtime-probe/run-gametest/ww-physics-traces/`. The action uploads those traces, calibration summary, AI-view and logs with a 14-day retention. A successful workflow proves this concrete run executed, **not** that source physics equals the actual Minecraft implementation: the comparator deliberately uses `CALIBRATION_ONLY_NO_ACCEPTANCE_THRESHOLD` pending repeated exact-artifact calibration.
+
+Five additional tactical GameTests must each produce a header and **181 CSV data samples**
+(initial tick 0 plus 180 actual server ticks). The owner-runner CI checks all five
+aircraft identities, movement, yaw, control bounds and tick continuity. A second,
+independent Python validator (`tools/verify_tactical_runtime_receipts.py`) verifies
+the recorded IA input-filter recurrence (`smooth[N]=0.9*smooth[N-1]+0.1*command[N]`)
+for X/Z and writes `tactical-runtime-receipts.json` only after all five traces pass.
+Its synthetic corruption tests run in hosted and offline Docker CI via
+`tools/test_tactical_runtime_receipts.py`. These tests confirm that invalid receipts
+are rejected; they **do not** supply the missing real Minecraft traces.
 
 If the runner is offline, the workflow can remain queued; do not mark runtime parity as PASS or call a queued job a measurement. The earlier registered-runner status was **offline** and the exact run remains `NOT_RUN` until verified execution evidence exists.
 

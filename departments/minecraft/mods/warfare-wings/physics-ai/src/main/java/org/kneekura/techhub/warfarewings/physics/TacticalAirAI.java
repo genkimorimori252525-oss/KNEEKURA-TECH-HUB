@@ -150,11 +150,30 @@ public final class TacticalAirAI {
             why = "FUEL_OR_DAMAGE_WITHDRAWAL";
         } else if (frame.mission() == Mission.ESCORT && frame.profile().role().equals("fighter")
                 && frame.formationAnchor() != null && frame.enemy() != null
-                && frame.enemy().hostile()
-                && frame.enemy().position().add(frame.formationAnchor().scale(-1)).length() > 100) {
+                && frame.enemy().hostile()) {
             maneuver = Maneuver.ESCORT_SCREEN;
-            target = frame.formationAnchor().add(0, 22, 26);
-            why = "ESCORT_ENGAGEMENT_LEASH";
+            // The anchor is the protected asset for an active threat. Pick a
+            // moving, protectee-relative station in the threat's approach
+            // direction, including bounded lead on the *observed* contact.
+            // Avoid tail-chasing the intruder beyond the cover radius.
+            Vec3 anchor = frame.formationAnchor();
+            Vec3 relative = frame.enemy().position().add(anchor.scale(-1));
+            double distance = relative.length();
+            double leadTicks = Math.min(18, distance / Math.max(0.45,
+                    speed / TICKS_PER_SECOND + frame.enemy().velocity().length()));
+            Vec3 projected = frame.enemy().position().add(frame.enemy().velocity().scale(leadTicks));
+            Vec3 outward = projected.add(anchor.scale(-1)).normalize();
+            if (outward.lengthSquared() < EPS) outward = forward;
+            // Establish cover outside the protected 95-block laboratory
+            // corridor, giving the fighter room to intercept *before* a
+            // hostile crosses the defense boundary.
+            double screenDistance = Math.min(145.0, Math.max(110.0, distance * 0.82));
+            Vec3 right = new Vec3(outward.z(), 0, -outward.x()).normalize();
+            double side = frame.self().position().add(anchor.scale(-1)).dot(right) < 0 ? -1 : 1;
+            // Two guards approaching from opposite sides should not be
+            // assigned the same 3D point in the moving protection corridor.
+            target = anchor.add(outward.scale(screenDistance)).add(right.scale(side * 20));
+            why = distance < 100 ? "ESCORT_INNER_SCREEN" : "ESCORT_PREDICTIVE_SCREEN";
         } else if (!frame.profile().role().equals("fighter")
                 && frame.enemy() != null && frame.enemy().hostile()
                 && frame.enemy().position().add(position.scale(-1)).length() < 65

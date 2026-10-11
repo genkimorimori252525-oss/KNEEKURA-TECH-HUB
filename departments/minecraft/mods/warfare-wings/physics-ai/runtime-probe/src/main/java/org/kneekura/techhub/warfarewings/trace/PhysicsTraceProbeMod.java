@@ -12,6 +12,7 @@ public final class PhysicsTraceProbeMod {
         MinecraftForge.EVENT_BUS.addListener(RuntimeTacticalPilot::onServerTick);
         MinecraftForge.EVENT_BUS.addListener(RuntimeTacticalPilot::onServerStopping);
         MinecraftForge.EVENT_BUS.addListener(TacticalPilotCommands::register);
+        MinecraftForge.EVENT_BUS.addListener(LiveSquadronCommands::register);
         MinecraftForge.EVENT_BUS.addListener(TacticalPilotCommands::onServerStopping);
     }
 }

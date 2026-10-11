@@ -222,6 +222,13 @@ public final class SquadronCommand {
                     : new TacticalAirAI.Contact(threatId, target.extrapolated(now), target.velocity(), true);
 
             Vec3 anchor = formationAnchor(spec, previous);
+            // When actively defending an observed contact, the escort's
+            // reference is the *actual protected allied airframe*, not its
+            // detached formation station. Unobserved encounters still use
+            // the planned formation station without any enemy information.
+            if (spec.mission() == TacticalAirAI.Mission.ESCORT
+                    && spec.escortedUnitId() != null && contact != null)
+                anchor = previous.units().get(spec.escortedUnitId()).aircraft().position();
             double closest = Double.POSITIVE_INFINITY;
             Vec3 closestPos = null;
             for (AircraftSpec ally : specifications.values()) {
@@ -249,6 +256,15 @@ public final class SquadronCommand {
                 State teammate = previous.units().get(ally.unitId()).aircraft();
                 obstacles.add(new FlightSafetyPlanner.MovingObstacle(ally.unitId(),
                         teammate.position(), teammate.velocity(), 6));
+            }
+            // A pilot can avoid only hostile contacts actually acquired by its
+            // own sensors in this tick. Tracks held through TTL may still guide
+            // intercept decisions, but cannot impersonate live collision fixes.
+            for (var observed : tracks.entrySet()) {
+                if (observed.getValue().lastSeenTick() != now) continue;
+                Track hostile = observed.getValue();
+                obstacles.add(new FlightSafetyPlanner.MovingObstacle(
+                        observed.getKey(), hostile.position(), hostile.velocity(), 6, true));
             }
             FlightSafetyPlanner.Environment environment = new FlightSafetyPlanner.Environment(
                     world::groundHeight, obstacles, 6);

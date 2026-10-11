@@ -29,6 +29,8 @@ jobs:
         run: node departments/minecraft/mods/warfare-wings/physics-ai/check-microkernel.mjs --java-home "$JAVA_HOME"
       - name: Verify trace comparator
         run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_compare_traces.py
+      - name: Verify exact-runtime receipt parser rejects tampered traces
+        run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_tactical_runtime_receipts.py
       - name: Rebuild and verify 24-aircraft AI Atlas
         run: |
           ROOT=departments/minecraft/mods/warfare-wings/physics-ai
@@ -76,7 +78,7 @@ jobs:
           gradle-version: '8.8'
       - name: Compile tactical Forge adapter and verify IA non-player input phase contract
         working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
-        run: gradle --no-daemon --console=plain compileJava processResources verifyTacticalInputCorrection
+        run: gradle --no-daemon --console=plain compileJava processResources verifyTacticalInputCorrection verifyLiveAirSensorCone
 
   docker-headless:
     runs-on: ubuntu-latest

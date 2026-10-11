@@ -175,6 +175,50 @@ jobs:
             Write-Host "TACTICAL_REAL_TRACE_RECEIPT_OK $scenario ticks=180 lateral=$lateral yaw=$travel moved=$moved"
           }
 
+      - name: Verify IA command smoothing and exact real-flight tick continuity
+        working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
+        run: |
+          python ../tools/verify_tactical_runtime_receipts.py run-gametest/ww-physics-traces --summary run-gametest/ww-physics-traces/tactical-runtime-receipts.json
+          if ($LASTEXITCODE -ne 0) { throw "Strict Forge tactical receipt validation failed: $LASTEXITCODE" }
+
+      - name: Verify real two-aircraft team and same-team GameTest receipts
+        working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
+        run: |
+          $cases = [ordered]@{
+            'live-pair-a6m-red' = @('warfare_wings:a6m', 140)
+            'live-pair-p47n-blue' = @('warfare_wings:p47n', 140)
+            'live-no-hostility-a6m' = @('warfare_wings:a6m', 70)
+            'live-no-hostility-p47n' = @('warfare_wings:p47n', 70)
+          }
+          $culture = [System.Globalization.CultureInfo]::InvariantCulture
+          foreach ($scenario in $cases.Keys) {
+            $id = $cases[$scenario][0]
+            $ticks = [int]$cases[$scenario][1]
+            $path = "run-gametest/ww-physics-traces/${scenario}-forge-controls.csv"
+            if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Missing live GameTest receipt: $scenario" }
+            $rows = @(Import-Csv -LiteralPath $path)
+            if ($rows.Count -ne ($ticks + 1)) {
+              throw "Live GameTest incomplete: $scenario expected $($ticks+1) samples got $($rows.Count)"
+            }
+            for ($i=0; $i -lt $rows.Count; $i++) {
+              $row = $rows[$i]
+              if ($row.schema_version -ne 'ww.physics.forge-tactical-pilot.v1' -or
+                  $row.source -ne 'minecraft_runtime_ia_next_tick_injection' -or
+                  $row.scenario_id -ne $scenario -or $row.aircraft_id -ne $id -or
+                  $row.sim_tick -ne [string]$i) {
+                throw "Invalid live aircraft/tick provenance: $scenario row $i"
+              }
+            }
+            $start = $rows[0]; $end = $rows[-1]
+            $dx = [double]::Parse($end.pos_x, $culture) - [double]::Parse($start.pos_x, $culture)
+            $dy = [double]::Parse($end.pos_y, $culture) - [double]::Parse($start.pos_y, $culture)
+            $dz = [double]::Parse($end.pos_z, $culture) - [double]::Parse($start.pos_z, $culture)
+            $distance = [Math]::Sqrt($dx*$dx+$dy*$dy+$dz*$dz)
+            if ($distance -lt 8) { throw "Live aircraft did not travel 8 blocks: $scenario $distance" }
+            Write-Host "LIVE_SQUADRON_TRACE_OK $scenario aircraft=$id ticks=$ticks displacement=$distance"
+          }
+          Write-Host 'Live team recognition and LOS acceptance still require the Forge GameTest assertions to pass.'
+
       - name: Generate matching microkernel trace and calibration report
         working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
         run: |

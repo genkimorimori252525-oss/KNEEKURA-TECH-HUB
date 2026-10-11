@@ -63,6 +63,16 @@ records the source-to-input autopilot, lookahead terrain/aircraft safety guards,
 [`TACTICS-EVIDENCE-v1.md`](TACTICS-EVIDENCE-v1.md) documents the historical
 source audit; these candidate tactics are not yet validated in Minecraft.
 
+The next source- and Forge-side implementation adds explicit-team live air
+groups, finite-visibility/occlusion/contact memory, heading-rotated formation
+stations, operator mission orders, 1v1/2v2 encounters and geometric strike
+phases. See [`FORGE-INTEGRATION.md`](FORGE-INTEGRATION.md),
+[`COMBAT-SIMULATION-v1.md`](COMBAT-SIMULATION-v1.md) and
+[`RUNNER-READINESS-2026-10-11.md`](RUNNER-READINESS-2026-10-11.md).
+The 2026-10-11 self-hosted GameTest run reached its actual Windows worker,
+then stopped at the **missing exact user-owned Warfare Wings JAR** provenance
+gate. No real Minecraft air-combat victory or physical parity is claimed.
+
 ```text
 warfare-wings/
   physics-ai/

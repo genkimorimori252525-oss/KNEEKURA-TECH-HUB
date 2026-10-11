@@ -59,6 +59,8 @@ try {
     path.join(mainDir, 'FlightSafetyPlanner.java'),
     path.join(mainDir, 'FlightControlLoop.java'),
     path.join(mainDir, 'SquadronCommand.java'),
+    path.join(mainDir, 'CombatSimulation.java'),
+    path.join(mainDir, 'StrikeSimulation.java'),
     path.join(mainDir, 'TacticalAirAI.java'),
     path.join(mainDir, 'HistoricalDoctrineOrders.java'),
     path.join(mainDir, 'TacticalScenarioMain.java'),
@@ -68,6 +70,8 @@ try {
     path.join(testDir, 'FlightControlLoopSelfTest.java'),
     path.join(testDir, 'FlightTerrainChallengeSelfTest.java'),
     path.join(testDir, 'MissionScenarioSelfTest.java'),
+    path.join(testDir, 'CombatSimulationSelfTest.java'),
+    path.join(testDir, 'StrikeSimulationSelfTest.java'),
     path.join(testDir, 'TacticalAirAISelfTest.java'),
     path.join(testDir, 'HistoricalDoctrineOrdersSelfTest.java'),
   ];
@@ -80,6 +84,10 @@ try {
   run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.FlightTerrainChallengeSelfTest',
     path.join(here, 'data/base-aircraft-anchor-v1.csv')]);
   run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.MissionScenarioSelfTest',
+    path.join(here, 'data/base-aircraft-anchor-v1.csv')]);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.CombatSimulationSelfTest',
+    path.join(here, 'data/base-aircraft-anchor-v1.csv')]);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.StrikeSimulationSelfTest',
     path.join(here, 'data/base-aircraft-anchor-v1.csv')]);
   run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.TacticalAirAISelfTest',
     path.join(here, 'data/base-aircraft-anchor-v1.csv')]);
