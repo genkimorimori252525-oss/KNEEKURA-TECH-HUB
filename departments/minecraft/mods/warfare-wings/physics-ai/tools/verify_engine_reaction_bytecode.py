@@ -24,7 +24,7 @@ BYTECODE_METHOD = re.compile(
 
 
 def verified_catalog(source: Path) -> dict[str, int]:
-    matches = re.findall(r'Map\.entry\("warfare_wings:([a-z0-9]+)",\s*(\d+)\)', 
+    matches = re.findall(r'Map\.entry\("warfare_wings:([a-z0-9]+)",\s*(\d+)\)',
                          source.read_text(encoding="utf-8"))
     if len(matches) != 24 or len(set(m[0] for m in matches)) != 24:
         raise ValueError("expected 24 unique source-catalog entries")
