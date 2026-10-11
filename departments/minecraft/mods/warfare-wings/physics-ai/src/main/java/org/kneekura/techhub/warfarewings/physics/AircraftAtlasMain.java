@@ -22,6 +22,7 @@ import static org.kneekura.techhub.warfarewings.physics.Ia133Microkernel.*;
  */
 public final class AircraftAtlasMain {
     public static final String SCHEMA = "ww.physics.aircraft-atlas.v2";
+    public static final String REACTION_SCHEMA = "ww.physics.aircraft-atlas.v3-source-reaction";
     private static final World FLAT = new FlatWorld(0.0);
 
     private AircraftAtlasMain() {}
@@ -41,8 +42,10 @@ public final class AircraftAtlasMain {
             String evidence) {}
 
     public static void main(String[] args) throws Exception {
-        if (args.length != 2) {
-            throw new IllegalArgumentException("Usage: AircraftAtlasMain INPUT_ANCHOR_CSV OUTPUT_ATLAS_CSV");
+        boolean reaction = args.length == 3 && "--exact-engine-reaction".equals(args[2]);
+        if (args.length != 2 && !reaction) {
+            throw new IllegalArgumentException(
+                    "Usage: AircraftAtlasMain INPUT_ANCHOR_CSV OUTPUT_ATLAS_CSV [--exact-engine-reaction]");
         }
         Path input = Path.of(args[0]);
         Path output = Path.of(args[1]);
@@ -50,14 +53,16 @@ public final class AircraftAtlasMain {
         if (entries.size() != 24) throw new IllegalStateException("Expected 24 aircraft, got " + entries.size());
 
         List<Metrics> metrics = new ArrayList<>(entries.size());
-        for (Entry entry : entries) metrics.add(evaluate(entry));
+        for (Entry entry : entries)
+            metrics.add(reaction ? evaluateReaction(entry) : evaluate(entry));
 
         Files.createDirectories(output.toAbsolutePath().getParent());
         try (BufferedWriter writer = Files.newBufferedWriter(output, StandardCharsets.UTF_8)) {
-            writer.write(header());
+            writer.write(header() + (reaction ? ",engine_reaction_ticks" : ""));
             writer.newLine();
             for (Metrics row : metrics) {
-                writer.write(csv(row));
+                writer.write(csv(row, reaction ? REACTION_SCHEMA : SCHEMA)
+                        + (reaction ? "," + WarfareWingsEngineReaction.ticks(row.aircraftId()) : ""));
                 writer.newLine();
             }
         }
@@ -125,27 +130,36 @@ public final class AircraftAtlasMain {
     }
 
     static Metrics evaluate(Entry entry) {
+        return evaluate(entry, Ia133Microkernel.ENGINE_REACTION_TICKS, false);
+    }
+
+    static Metrics evaluateReaction(Entry entry) {
+        return evaluate(entry, WarfareWingsEngineReaction.ticks(entry.aircraftId()), true);
+    }
+
+    private static Metrics evaluate(Entry entry, double engineReactionTicks,
+                                    boolean exactOriginalReaction) {
         Model model = entry.model();
 
         State top = initialStraight();
         double[] speedHistory = new double[801];
         speedHistory[0] = top.velocity().length() * TICKS_PER_SECOND;
         for (int i=1;i<=800;i++) {
-            top = tick(model, top, Control.neutral(1.0), FLAT);
+            top = tickWithReaction(model, top, Control.neutral(1.0), FLAT, engineReactionTicks);
             speedHistory[i] = top.velocity().length() * TICKS_PER_SECOND;
         }
         double predictedTop = speedHistory[800];
         int time90 = firstAtLeast(speedHistory, predictedTop * 0.90);
 
-        State yawStart = warmStraight(model, 600);
+        State yawStart = warmStraight(model, 600, engineReactionTicks);
         double yawInitial = yawStart.velocity().length() * TICKS_PER_SECOND;
-        State yawEnd = run(yawStart, model, new Control(1,0,0,1), 20);
+        State yawEnd = run(yawStart, model, new Control(1,0,0,1), 20, engineReactionTicks);
         double yawExit = yawEnd.velocity().length() * TICKS_PER_SECOND;
 
-        State pitchStart = warmStraight(model, 600);
-        State pitchEnd = run(pitchStart, model, new Control(0,0,1,1), 20);
+        State pitchStart = warmStraight(model, 600, engineReactionTicks);
+        State pitchEnd = run(pitchStart, model, new Control(0,0,1,1), 20, engineReactionTicks);
 
-        EqualAngleTurn equalAngle = equalAngle90(model);
+        EqualAngleTurn equalAngle = equalAngle90(model, engineReactionTicks);
 
         return new Metrics(
                 entry.aircraftId(), entry.baseId(), entry.role(), entry.faction(), entry.doctrine(),
@@ -157,20 +171,21 @@ public final class AircraftAtlasMain {
                 model.engineSpeed(), model.yawSpeed(), model.pitchSpeed(),
                 model.lift(), model.glideFactor(), model.durability(), model.mass(),
                 model.rawDriftDrag(), model.friction(),
-                "SOURCE_MICROKERNEL+" + entry.evidence());
+                (exactOriginalReaction ? "SOURCE_MICROKERNEL_BYTECODE_REACTION+" : "SOURCE_MICROKERNEL+")
+                        + entry.evidence());
     }
 
     private record EqualAngleTurn(int ticks, double speedRetention, double distanceBlocks) {}
 
-    private static EqualAngleTurn equalAngle90(Model model) {
-        State start = warmStraight(model, 600);
+    private static EqualAngleTurn equalAngle90(Model model, double reactionTicks) {
+        State start = warmStraight(model, 600, reactionTicks);
         State current = start;
         double initialSpeed = start.velocity().length() * TICKS_PER_SECOND;
         double distance = 0.0;
         Vec3 previous = start.position();
 
         for (int ticks = 1; ticks <= 400; ticks++) {
-            current = tick(model, current, new Control(1,0,0,1), FLAT);
+            current = tickWithReaction(model, current, new Control(1,0,0,1), FLAT, reactionTicks);
             Vec3 now = current.position();
             double dx = now.x() - previous.x();
             double dy = now.y() - previous.y();
@@ -193,13 +208,14 @@ public final class AircraftAtlasMain {
                 1,0,1, 0,false,false);
     }
 
-    private static State warmStraight(Model model, int ticks) {
-        return run(initialStraight(), model, Control.neutral(1.0), ticks);
+    private static State warmStraight(Model model, int ticks, double reactionTicks) {
+        return run(initialStraight(), model, Control.neutral(1.0), ticks, reactionTicks);
     }
 
-    private static State run(State state, Model model, Control control, int ticks) {
+    private static State run(State state, Model model, Control control, int ticks, double reactionTicks) {
         State current = state;
-        for (int i=0;i<ticks;i++) current = tick(model, current, control, FLAT);
+        for (int i=0;i<ticks;i++)
+            current = tickWithReaction(model, current, control, FLAT, reactionTicks);
         return current;
     }
 
@@ -217,9 +233,9 @@ public final class AircraftAtlasMain {
                 "raw_drift_drag,runtime_friction,evidence";
     }
 
-    private static String csv(Metrics r) {
+    private static String csv(Metrics r, String schema) {
         return String.join(",",
-                SCHEMA, r.aircraftId(), r.baseId(), r.role(), r.faction(), r.doctrine(),
+                schema, r.aircraftId(), r.baseId(), r.role(), r.faction(), r.doctrine(),
                 d(r.predictedTopSpeedBps()), Integer.toString(r.timeTo90SpeedTicks()),
                 d(r.yawChange20TicksDeg()), d(r.pitchChange20TicksDeg()), d(r.turnExitSpeedRetention()),
                 Integer.toString(r.ticksTo90Yaw()), d(r.equalAngle90SpeedRetention()), d(r.distanceTo90YawBlocks()),

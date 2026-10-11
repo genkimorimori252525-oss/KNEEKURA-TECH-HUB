@@ -77,6 +77,24 @@ public final class CombatSimulationSelfTest {
                 "2v2 fighter remains airborne");
         System.out.println("Combat 2v2: a1/b1 "+baseline.pairs().get(new CombatSimulation.PairKey("a1","b1"))
                 +", a1/a2 "+baseline.pairs().get(new CombatSimulation.PairKey("a1","a2")));
+        // Source V3 exact engine-response 2v2 is a distinct physical model,
+        // with the identical roster, start velocities and unmodified 6-block
+        // body safety gate. Do not claim a kill or actual Minecraft battle.
+        var reaction2v2 = CombatSimulation.runWithExactReaction(csv,
+                new CombatSimulation.Scenario("two-v-two-original-reaction",
+                        members,160,50,95,Map.of(),FLAT,SquadronCommand.Sensors.DEFAULT));
+        var repeatReaction2v2 = CombatSimulation.runWithExactReaction(csv,
+                new CombatSimulation.Scenario("two-v-two-original-reaction",
+                        permuted,160,50,95,Map.of(),FLAT,SquadronCommand.Sensors.DEFAULT));
+        yes(reaction2v2.equals(repeatReaction2v2),
+                "exact-response 2v2 still deterministic under inverted roster");
+        for(var pair: reaction2v2.pairs().values())
+            yes(pair.closestApproachBlocks()>=6.0 && pair.dangerouslyCloseTicks()==0,
+                    "EXACT ENGINE SOURCE MODE 2v2 <6-block danger FAILED: "+pair);
+        yes(reaction2v2.passesSafetyGates(),
+                "exact-response 2v2 strict operational airframe separation");
+        System.out.println("Exact-reaction SOURCE 2v2: "
+                +reaction2v2.pairs().get(new CombatSimulation.PairKey("a1","b1")));
     }
     private static void escortAndRetreat(Path csv) throws Exception {
         var members=List.of(
@@ -110,6 +128,20 @@ public final class CombatSimulationSelfTest {
                 && result.failedOperationalGates().stream().anyMatch(
                     code -> code.startsWith("ESCORT_PROTECTION_BREACHED:cargo:")),
                 "escorted bomber threat inside protection radius remains an explicit FAILED gate");
+        var reactionEscort = CombatSimulation.runWithExactReaction(csv,
+                new CombatSimulation.Scenario("escort-raid-reaction-v3",
+                        members,190,50,95,Map.of("cover1","cargo","cover2","cargo"),
+                        FLAT,SquadronCommand.Sensors.DEFAULT));
+        var responseAsset=reactionEscort.assets().get("cargo");
+        yes(responseAsset != null
+                        && (responseAsset.threatWithinCorridorTicks()>0)==responseAsset.corridorBreached(),
+                "original-reaction source escort objective is evaluated by unchanged 95-block radius");
+        yes(responseAsset.corridorBreached()==
+                        reactionEscort.failedOperationalGates().stream().anyMatch(
+                            s -> s.startsWith("ESCORT_PROTECTION_BREACHED:cargo:")),
+                "exact-response failed escort is NEVER disguised as a source PASS");
+        System.out.println("Exact-reaction SOURCE B17 escort: "+responseAsset
+                +" operationalFailed="+!reactionEscort.passesSafetyGates());
         yes(result.units().get("cargo").pathBlocks()>30,"bomber travels on mission");
         yes(result.units().get("cargo").finalDistanceToObjective()
                 <Math.hypot(280,0),"bomber closes target waypoint distance");
@@ -141,6 +173,25 @@ public final class CombatSimulationSelfTest {
         for (var pair : preparedCover.pairs().values())
             yes(pair.closestApproachBlocks()>=6.0 && pair.dangerouslyCloseTicks()==0,
                     "prepared screen does not buy protection through forbidden <6-block body proximity");
+        var reactionPrepared = CombatSimulation.runWithExactReaction(csv,
+                new CombatSimulation.Scenario("escort-prepositioned-exact-reaction",
+                        List.of(members.get(0),
+                            plane("cover1","f4u","blue","cover",0,TacticalAirAI.Mission.ESCORT,
+                                    "cargo",-27,190,115,0,1.0,1),
+                            plane("cover2","p47n","blue","cover",1,TacticalAirAI.Mission.ESCORT,
+                                    "cargo",27,190,115,0,1.0,1),
+                            members.get(3)),
+                        190,50,95,Map.of("cover1","cargo","cover2","cargo"),
+                        FLAT,SquadronCommand.Sensors.DEFAULT));
+        var reactionPreparedAsset = reactionPrepared.assets().get("cargo");
+        yes(reactionPreparedAsset!=null && reactionPreparedAsset.corridorBreached()
+                == (reactionPreparedAsset.threatWithinCorridorTicks()>0),
+                "exact-reaction prepared screen must report unchanged 95-block violation honestly");
+        for (var pair : reactionPrepared.pairs().values())
+            yes(pair.closestApproachBlocks() >= 6.0 && pair.dangerouslyCloseTicks() == 0,
+                    "exact-reaction prepared screen cannot trade real body safety for protection");
+        System.out.println("EXACT_REACTION_PREPARED_ESCORT "
+                +reactionPreparedAsset+" failedGates="+reactionPrepared.failedOperationalGates());
         yes(preparedCover.units().get("cargo").groundedTicks()==0
                 && preparedCover.units().get("cargo").finalDistanceToObjective()<280,
                 "prepared protection preserves actual flight and measurable bomber objective progress");

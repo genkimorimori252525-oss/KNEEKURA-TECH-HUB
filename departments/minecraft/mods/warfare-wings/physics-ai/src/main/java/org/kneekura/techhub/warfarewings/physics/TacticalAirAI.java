@@ -41,12 +41,20 @@ public final class TacticalAirAI {
                     || !Double.isFinite(yawChange20TicksDeg) || yawChange20TicksDeg <= 0
                     || ticksTo90Yaw <= 0
                     || !Double.isFinite(equalAngle90SpeedRetention)
-                    || equalAngle90SpeedRetention <= 0 || equalAngle90SpeedRetention > 1.01)
+                    // A slow-spooling bomber can accelerate *during* a long
+                    // 90-degree turn even while aerodynamic turn energy is
+                    // lost. V3 response-aware source observations max 1.02427.
+                    // A ratio >1 is not proof of free energy/physics parity.
+                    || equalAngle90SpeedRetention <= 0 || equalAngle90SpeedRetention > 1.05)
                 throw new IllegalArgumentException("invalid Atlas metrics");
         }
         public static Profile fromAtlas(AircraftAtlasMain.Metrics row) {
-            if (!row.evidence().startsWith("SOURCE_MICROKERNEL+"))
+            if (!row.evidence().startsWith("SOURCE_MICROKERNEL+")
+                    && !row.evidence().startsWith("SOURCE_MICROKERNEL_BYTECODE_REACTION+"))
                 throw new IllegalArgumentException("Atlas provenance must be explicit");
+            if (row.evidence().startsWith("SOURCE_MICROKERNEL+")
+                    && row.equalAngle90SpeedRetention() > 1.01)
+                throw new IllegalArgumentException("Legacy source Atlas cannot gain unusual turn speed");
             return new Profile(row.aircraftId(), row.role(), row.faction(), row.doctrine(),
                     row.predictedTopSpeedBps(), row.yawChange20TicksDeg(),
                     row.ticksTo90Yaw(), row.equalAngle90SpeedRetention());

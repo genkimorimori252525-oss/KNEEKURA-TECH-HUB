@@ -13,6 +13,30 @@ Two independent, deterministic heads are supplied:
 
 **Integrated source mission phase path is now implemented:** `CombatSimulation.runWithStrikePlans(...)` uses the immutable `StrikeSimulation.SquadronPhase` controller to supply validated `SquadronCommand.MissionOrder` directives to an aircraft on the **same physical 20 Hz snapshot** as its escorts (and any adversaries). The mission may move from its original aircraft-role attack type to navigation-only `PATROL` for pull-out, egress and return, with no instantaneous position, orientation, speed or health modification. Plan binding requires the exact same starting aircraft type/mission, position/velocity/heading, objective/home, world object and sufficient tick horizon. The legacy `StrikeSimulation.run` remains a separately benchmarked single-aircraft scenario.
 
+## Exact-WW engine-response SOURCE V3 operational contrast
+
+The existing `CombatSimulation.run` remains the legacy 20tick-reaction
+source benchmark. New `CombatSimulation.runWithExactReaction` runs the same
+20Hz 24-type simulator with `SquadronCommand.loadWithExactReaction` and
+the real original JAR's per-airframe `getEngineReactionSpeed()` values.
+The **95-block** bomber-defence corridor, **6-block** aircraft body-safety
+limit, starting geometries and observation constraints are UNCHANGED.
+
+| Scenario | Legacy source engine20 | Original WW bytecode engine response | Result |
+|---|---:|---:|---|
+| 2v2 opposing A6M/Bf109 closest | 51.167 blocks | 36.922 blocks | Both satisfy strict all-six-pair ≥6-block clearance |
+| B-17 original aft guard, enemy within 95 blocks | 50 / 190 ticks | **92 / 190 ticks** | Both **FAILED** escort protection |
+| B-17 original aft guard, closest threat | 64.623 blocks | 40.913 blocks | Both **FAILED** |
+| B-17 forward-prepared guard, intrusion | 0 / 190 ticks | **30 / 190 ticks** | V2-only prepared success **DOES NOT GENERALIZE** |
+| B-17 forward-prepared guard, closest threat | 120.518 blocks | 77.643 blocks | V3 **FAILED** |
+
+This is a nontrivial SOURCE operational-regression finding: slower correct
+engine spool-up reduces early acceleration and compromises interception.
+No kill, successful air defence, fired projectile or real Minecraft
+multiplayer battle is implied. Even the prepared forward fighter placement
+**fails** the unchanged gate with original response timing; the earlier V2
+success remains a separate reproducible source experiment, not a promise.
+
 ## Combat diagnostics
 
 `CombatSimulation.Report` records:

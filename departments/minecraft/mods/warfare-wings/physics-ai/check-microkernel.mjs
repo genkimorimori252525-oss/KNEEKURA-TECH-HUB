@@ -68,6 +68,7 @@ try {
     path.join(mainDir, 'TacticalScenarioMain.java'),
     path.join(testDir, 'Ia133MicrokernelSelfTest.java'),
     path.join(testDir, 'WarfareWingsEngineReactionSelfTest.java'),
+    path.join(testDir, 'ExactReactionSquadronSelfTest.java'),
     path.join(testDir, 'FlightGuidanceSelfTest.java'),
     path.join(testDir, 'FlightGuidanceAtlasSelfTest.java'),
     path.join(testDir, 'FlightControlLoopSelfTest.java'),
@@ -81,6 +82,8 @@ try {
   run(javac, ['--release', '17', '-d', classes, ...sources]);
   run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.Ia133MicrokernelSelfTest']);
   run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.WarfareWingsEngineReactionSelfTest',
+    path.join(here, 'data/base-aircraft-anchor-v1.csv')]);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.ExactReactionSquadronSelfTest',
     path.join(here, 'data/base-aircraft-anchor-v1.csv')]);
   run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.FlightGuidanceSelfTest']);
   run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.FlightGuidanceAtlasSelfTest',
@@ -124,6 +127,22 @@ try {
   run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.AircraftAtlasMain', dataset, atlasA]);
   run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.AircraftAtlasMain', dataset, atlasB]);
   await same(atlasA, atlasB);
+  // Experimental V3 uses each of the 24 exact-owner EngineVehicle overrides.
+  // Keep V2 byte-for-byte unchanged; both predictions are SOURCE, not
+  // measurements or validated equal-envelope turns in Minecraft.
+  const reactionAtlasA = path.join(generated, 'base-aircraft-reaction-a.csv');
+  const reactionAtlasB = path.join(generated, 'base-aircraft-reaction-b.csv');
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.AircraftAtlasMain',
+    dataset, reactionAtlasA, '--exact-engine-reaction']);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.AircraftAtlasMain',
+    dataset, reactionAtlasB, '--exact-engine-reaction']);
+  await same(reactionAtlasA, reactionAtlasB);
+  await same(reactionAtlasA, path.join(here, 'reports/base-aircraft-source-reaction-v3.csv'));
+  const reactionLines = (await readFile(reactionAtlasA, 'utf8')).trimEnd().split(/\r?\n/);
+  if (reactionLines.length !== 25
+      || !reactionLines[0].endsWith(',engine_reaction_ticks')
+      || !reactionLines[1].startsWith('ww.physics.aircraft-atlas.v3-source-reaction,'))
+    throw new Error('Unexpected original-binary reaction Atlas V3 schema/rows');
   try {
     await same(atlasA, path.join(here, 'reports/base-aircraft-source-atlas.csv'));
   } catch (error) {

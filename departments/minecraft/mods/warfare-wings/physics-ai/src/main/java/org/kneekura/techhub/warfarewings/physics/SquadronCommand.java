@@ -132,21 +132,35 @@ public final class SquadronCommand {
     private final Map<String, String> leaders;
     private final World world;
     private final Sensors sensors;
+    private final boolean exactEngineReaction;
 
     private SquadronCommand(Map<String, AircraftSpec> specifications,
                             Map<String, AircraftAtlasMain.Entry> models,
                             Map<String, TacticalAirAI.Profile> profiles,
-                            Map<String, String> leaders, World world, Sensors sensors) {
+                            Map<String, String> leaders, World world, Sensors sensors,
+                            boolean exactEngineReaction) {
         this.specifications = frozen(specifications);
         this.models = frozen(models);
         this.profiles = frozen(profiles);
         this.leaders = frozen(leaders);
         this.world = world;
         this.sensors = sensors;
+        this.exactEngineReaction = exactEngineReaction;
     }
 
     public static SquadronCommand load(Path anchorCsv, List<AircraftSpec> aircraft,
                                         World world, Sensors sensors) throws IOException {
+        return load(anchorCsv, aircraft, world, sensors, false);
+    }
+
+    /** Opt-in source-binary reaction-aware experiment; legacy v2 unchanged. */
+    public static SquadronCommand loadWithExactReaction(Path anchorCsv,
+                List<AircraftSpec> aircraft, World world, Sensors sensors) throws IOException {
+        return load(anchorCsv, aircraft, world, sensors, true);
+    }
+
+    private static SquadronCommand load(Path anchorCsv, List<AircraftSpec> aircraft,
+                  World world, Sensors sensors, boolean exactEngineReaction) throws IOException {
         if (anchorCsv == null || aircraft == null || aircraft.isEmpty()
                 || world == null || sensors == null) throw new IllegalArgumentException("scenario");
 
@@ -156,8 +170,9 @@ public final class SquadronCommand {
         Map<String, TacticalAirAI.Profile> profiles = new TreeMap<>();
         for (AircraftAtlasMain.Entry entry : source) {
             catalog.put(entry.aircraftId(), entry);
-            profiles.put(entry.aircraftId(),
-                    TacticalAirAI.Profile.fromAtlas(AircraftAtlasMain.evaluate(entry)));
+            profiles.put(entry.aircraftId(), TacticalAirAI.Profile.fromAtlas(
+                    exactEngineReaction ? AircraftAtlasMain.evaluateReaction(entry)
+                            : AircraftAtlasMain.evaluate(entry)));
         }
 
         Map<String, AircraftSpec> units = new TreeMap<>();
@@ -188,7 +203,7 @@ public final class SquadronCommand {
                     throw new IllegalArgumentException("escort must reference a separate allied unit");
             }
         }
-        return new SquadronCommand(units, catalog, profiles, leaders, world, sensors);
+        return new SquadronCommand(units, catalog, profiles, leaders, world, sensors, exactEngineReaction);
     }
 
     public int supportedAircraftTypes() { return profiles.size(); }
@@ -316,7 +331,10 @@ public final class SquadronCommand {
             FlightControlLoop.Output loop = FlightControlLoop.step(new FlightControlLoop.Input(
                     frame, own.decisionMemory(), order, environment));
             TacticalAirAI.Decision decision = loop.decision();
-            State after = Ia133Microkernel.tick(model, own.aircraft(), decision.controls(), world);
+            State after = exactEngineReaction
+                    ? Ia133Microkernel.tickWithReaction(model, own.aircraft(),
+                        decision.controls(), world, WarfareWingsEngineReaction.ticks(model.id()))
+                    : Ia133Microkernel.tick(model, own.aircraft(), decision.controls(), world);
             finite(after.position()); finite(after.velocity());
             if (!Double.isFinite(after.yawDeg()) || !Double.isFinite(after.pitchDeg()))
                 throw new IllegalStateException("non-finite heading: " + spec.unitId());

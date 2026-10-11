@@ -71,11 +71,33 @@ and is rejected by `test_compare_traces.py`.
 The old Atlas v2 golden files deliberately **retain the historical
 20-tick default source predictions**. They are not silently overwritten.
 `Ia133Microkernel.tickWithReaction`, `ReactionCalibrationTraceMain`
-and `WarfareWingsEngineReaction` are the new explicitly source-corrected
+and `WarfareWingsEngineReaction` are the explicit source-corrected
 calibration route. The engine reaction path has separate 24-aircraft
-deterministic tests. A new exact-parameter experimental Atlas or
-multi-aircraft mission model should be clearly versioned before
-adoption; do not mislabel old Atlas metrics as original-binary physics.
+deterministic tests.
+
+An **experimental response-aware Atlas v3** is now generated separately as
+`reports/base-aircraft-source-reaction-v3.csv`, schema
+`ww.physics.aircraft-atlas.v3-source-reaction`, with source provenance and
+`engine_reaction_ticks` per airframe. It runs all source-physics 800-tick
+straight and 90-degree turns under each original airframe's engine response
+and is tested twice against a committed golden by `check-microkernel.mjs`.
+It **does not** replace existing Atlas V2 or live squadron performance
+inputs automatically. All 24 V3 predicted 800-tick speeds are lower than V2,
+because the engine spool-up is slower in the finite test window. These
+numbers are still `SOURCE_MICROKERNEL` and **not** original-Minecraft
+flight performance measurements or measured combat doctrine success.
+
+The optional `SquadronCommand.loadWithExactReaction` actually integrates
+all 24 source airframes for 140 consecutive physical 20Hz pilot ticks,
+with **16,873 passing regression assertions** against bounded real
+pilot commands, terrain contact and per-tick issued engine target.
+`CombatSimulation.runWithExactReaction` uses the same engine response and
+independently observed hostile tracks to retest operational outcomes.
+The scripted 2v2 remains clear of any <6-block pair contact, but the
+original aft B-17 protection **FAILED** with **92/190 breach ticks**
+and the forward-prepared guard also **FAILED** with **30/190 breach ticks**
+under V3 (against 50 and 0 respectively under V2).
+These are model-based simulated outcomes, not measured Minecraft gunfights.
 
 ## Reproduction and next gates
 
@@ -85,8 +107,16 @@ After the exact user-owned binaries have been staged **outside Git**:
 python ../tools/verify_engine_reaction_bytecode.py --jar flight-test-mods/warfare_wings-1.1.4-1.20.1-forge.jar --javap "$env:JAVA_HOME/bin/javap.exe"
 ```
 
-The repository source/CI builds the new Java catalog and response variant
-without the JAR. The owner's runtime workflow regenerates both the
+Generate both comparable Atlas files using the same authoritative CSV:
+
+```powershell
+java -cp <COMPILED_CLASSES> org.kneekura.techhub.warfarewings.physics.AircraftAtlasMain data/base-aircraft-anchor-v1.csv <V2_REPORT.csv>
+java -cp <COMPILED_CLASSES> org.kneekura.techhub.warfarewings.physics.AircraftAtlasMain data/base-aircraft-anchor-v1.csv <V3_REPORT.csv> --exact-engine-reaction
+```
+
+The repository source/CI builds the new Java catalog, distinct V3 Atlas
+and response variant without a JAR. The owner's runtime workflow
+also regenerates both the
 unchanged legacy source throttle trace and the opt-in exact-response
 `a6m-throttle-step-v1-reaction-source.csv`, comparing both against a
 **live completed** 401-row owner-JAR GameTest.
@@ -98,8 +128,10 @@ observed numerical agreement. Still required:
   and B-17, repeated at least twice to estimate runtime variance
 - Equal-speed 90° turns, loaded armaments, collision/terrain, stall margins
   and multiplayer flight control under the original binary
-- Experimental revised 24-type Atlas that explicitly consumes each
-  aircraft's source reaction speed without rewriting V2 provenance
+- Broader V3 source safety/escort/RTB physics evaluation (selected 2v2
+  and aft/prepared B-17 regressions now included) and real-runtime
+  cross-validation before promoting these predictions to the deployed
+  mission engine
 - Actual friendly-fire/ammunition/mount API acceptance; no real shots,
   bombs or torpedoes have been issued by the live AI
 

@@ -118,7 +118,12 @@ public final class CombatSimulation {
     }
 
     public static Report run(Path atlasCsv, Scenario scenario) throws IOException {
-        return runInternal(atlasCsv,scenario,Map.of(),new TreeMap<>());
+        return runInternal(atlasCsv,scenario,Map.of(),new TreeMap<>(),false);
+    }
+
+    /** Exact-WW engine response source experiment; not a runtime dogfight. */
+    public static Report runWithExactReaction(Path atlasCsv, Scenario scenario) throws IOException {
+        return runInternal(atlasCsv,scenario,Map.of(),new TreeMap<>(),true);
     }
 
     /**
@@ -131,16 +136,20 @@ public final class CombatSimulation {
             throws IOException {
         if (plans == null) throw new IllegalArgumentException("null strike plans");
         Map<String,StrikeSimulation.SquadronPhase> phases = new TreeMap<>();
-        Report combat = runInternal(atlasCsv,scenario,plans,phases);
+        Report combat = runInternal(atlasCsv,scenario,plans,phases,false);
         return new MissionReport(combat,phases);
     }
 
     private static Report runInternal(Path atlasCsv, Scenario scenario,
                     Map<String, StrikeSimulation.Plan> strikePlans,
-                    Map<String, StrikeSimulation.SquadronPhase> phaseStates) throws IOException {
+                    Map<String, StrikeSimulation.SquadronPhase> phaseStates,
+                    boolean exactEngineReaction) throws IOException {
         if (atlasCsv == null || scenario == null) throw new IllegalArgumentException("inputs");
-        SquadronCommand commander = SquadronCommand.load(atlasCsv, scenario.aircraft(),
-                scenario.world(), scenario.sensors());
+        SquadronCommand commander = exactEngineReaction
+                ? SquadronCommand.loadWithExactReaction(
+                    atlasCsv, scenario.aircraft(), scenario.world(), scenario.sensors())
+                : SquadronCommand.load(atlasCsv, scenario.aircraft(),
+                    scenario.world(), scenario.sensors());
         Map<String,SquadronCommand.AircraftSpec> roster = new TreeMap<>();
         for (var craft : scenario.aircraft()) roster.put(craft.unitId(), craft);
         Map<String,StrikeSimulation.Plan> plans = new TreeMap<>(strikePlans);
