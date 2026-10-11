@@ -72,6 +72,126 @@ public final class StrikeSimulation {
                          double pathBlocks, Map<Phase,Integer> phaseTicks,
                          State finalState, String evidence) {}
 
+    /**
+     * Immutable stage memory for a strike aircraft flown *inside* SquadronCommand.
+     * No second microkernel is run: all observations are based on the squadron's
+     * one authoritative State per aircraft and its actual accumulated ticks.
+     */
+    public record SquadronPhase(
+            Phase phase, long phaseStartedTick, long firstWindowTick,
+            long crossedTargetTick, long firstPullOutTick, long recoveredTick,
+            long reachedHomeTick, double lastProgress, double lowestPullOutY,
+            Map<Phase,Integer> phaseTicks) {
+        public SquadronPhase {
+            if (phase == null || phaseTicks == null || phaseStartedTick < 0)
+                throw new IllegalArgumentException("squadron phase state");
+            phaseTicks = Map.copyOf(phaseTicks);
+        }
+        public static SquadronPhase initial() {
+            return new SquadronPhase(Phase.APPROACH,0,-1,-1,-1,-1,-1,
+                    0,Double.POSITIVE_INFINITY,Map.of());
+        }
+    }
+    public record SquadronDirective(SquadronCommand.MissionOrder order, SquadronPhase next) {}
+
+    /**
+     * One mission-stage decision from *observed* current state. Use the
+     * returned order with SquadronCommand.advance once, in the same tick.
+     * Source objectives and elapsed flight phases are geometry only.
+     */
+    public static SquadronDirective squadronDirective(Plan plan, SquadronPhase prior, State current) {
+        if (plan == null || prior == null || current == null)
+            throw new IllegalArgumentException("squadron directive");
+        check(current.position()); check(current.velocity());
+        Vec3 position = current.position(), strike = plan.strikePoint();
+        Vec3 axis = new Vec3(strike.x()-plan.initialPosition().x(),0,
+                strike.z()-plan.initialPosition().z()).normalize();
+        double progress = projected(position,plan.initialPosition(),axis);
+        double goalProgress = projected(strike,plan.initialPosition(),axis);
+        double horizontal = horizontalDistance(position,strike);
+        double terrainHeight = plan.terrain().groundHeight(position.x(),position.z());
+        double agl = position.y()-terrainHeight;
+        boolean valid = validAttackGeometry(plan,agl,position.y()-plan.seaSurfaceY());
+        boolean aligned = Ia133Microkernel.forward(current.yawDeg(),current.pitchDeg())
+                .dot(axis)>0.45;
+        Phase phase = prior.phase();
+        long since = prior.phaseStartedTick();
+        long crossed = prior.crossedTargetTick(), window=prior.firstWindowTick();
+        long pull=prior.firstPullOutTick(), recovered=prior.recoveredTick(), home=prior.reachedHomeTick();
+        double low = prior.lowestPullOutY();
+        long tick = current.tick();
+
+        if (crossed == -1 && tick > 0 && prior.lastProgress() <= goalProgress
+                && progress > goalProgress) crossed=tick;
+        if (phase == Phase.APPROACH) {
+            if (plan.mission() == TacticalAirAI.Mission.DIVE_BOMB
+                    && (agl <= plan.geometry().divePullOutAgl()
+                    || horizontal <= plan.geometry().beforeTargetRadius()*0.6)) {
+                phase=Phase.PULL_OUT; since=tick; pull=tick; low=position.y();
+            } else if (plan.mission() != TacticalAirAI.Mission.DIVE_BOMB
+                    && horizontal <= plan.geometry().beforeTargetRadius()
+                    && valid && aligned) {
+                phase=Phase.WINDOW; since=tick; window=tick;
+            } else if (progress >= goalProgress + plan.geometry().beforeTargetRadius()) {
+                phase=Phase.EGRESS; since=tick;
+            }
+        } else if (phase == Phase.WINDOW) {
+            if (crossed >= 0 && tick-crossed>=12
+                    || progress > goalProgress+plan.geometry().beforeTargetRadius()
+                    || horizontal > 2*plan.geometry().beforeTargetRadius()) {
+                phase=Phase.EGRESS; since=tick;
+            }
+        } else if (phase == Phase.PULL_OUT) {
+            low=Math.min(low,position.y());
+            if (position.y()>=low+18 && agl>=plan.geometry().divePullOutAgl()
+                    && current.velocity().y()>0.01) {
+                phase=Phase.EGRESS; since=tick; recovered=tick;
+            }
+        } else if (phase == Phase.EGRESS && tick-since>=plan.geometry().egressTicks()) {
+            phase=Phase.RETURN_HOME; since=tick;
+        } else if (phase == Phase.RETURN_HOME
+                && distance(position,plan.home())<=plan.geometry().homeRadius()) {
+            phase=Phase.COMPLETE; since=tick; home=tick;
+        }
+
+        TacticalAirAI.Mission mission;
+        Vec3 objective;
+        switch (phase) {
+            case APPROACH, WINDOW -> {
+                mission=plan.mission();
+                objective=switch(plan.mission()) {
+                    case LEVEL_BOMB -> new Vec3(strike.x(),position.y(),strike.z());
+                    case TORPEDO -> new Vec3(strike.x(),
+                            plan.seaSurfaceY()+0.5*(plan.geometry().torpedoMinAboveSea()
+                                    +plan.geometry().torpedoMaxAboveSea()),strike.z());
+                    default -> strike;
+                };
+            }
+            case PULL_OUT -> {
+                mission=TacticalAirAI.Mission.PATROL;
+                objective=position.add(Ia133Microkernel.forward(current.yawDeg(),0).scale(90))
+                        .add(0,100,0);
+            }
+            case EGRESS -> {
+                mission=TacticalAirAI.Mission.PATROL;
+                objective=strike.add(axis.scale(150))
+                        .add(0,Math.max(80,position.y()-strike.y()),0);
+            }
+            case RETURN_HOME, COMPLETE -> {
+                mission=TacticalAirAI.Mission.PATROL;
+                objective=plan.home();
+            }
+            default -> throw new IllegalStateException("unexpected squadron phase "+phase);
+        }
+        EnumMap<Phase,Integer> histogram = new EnumMap<>(Phase.class);
+        histogram.putAll(prior.phaseTicks());
+        histogram.merge(phase,1,Integer::sum);
+        return new SquadronDirective(
+                new SquadronCommand.MissionOrder(mission,objective),
+                new SquadronPhase(phase,since,window,crossed,pull,recovered,home,
+                        progress,low,Collections.unmodifiableMap(histogram)));
+    }
+
     public static Report run(Path atlasCsv, Plan plan) throws IOException {
         if (atlasCsv == null || plan == null) throw new IllegalArgumentException("plan");
         List<AircraftAtlasMain.Entry> roster = AircraftAtlasMain.load(atlasCsv);
@@ -139,10 +259,12 @@ public final class StrikeSimulation {
                 phase=Phase.RETURN_HOME;phaseBeganTick=tick;
             }
             if (phase == Phase.RETURN_HOME && distance(from,plan.home()) <= g.homeRadius()) {
-                phase=Phase.COMPLETE;homeAt=nextTick;
+                // The state sampled here already completed exactly "tick"
+                // physical steps. No extra integration occurs on completion.
+                phase=Phase.COMPLETE;homeAt=tick;
             }
-            hist.merge(phase,1,Integer::sum);
             if (phase == Phase.COMPLETE) { clock=tick;break; }
+            hist.merge(phase,1,Integer::sum);
 
             Vec3 objective;
             TacticalAirAI.Mission steeringMission;

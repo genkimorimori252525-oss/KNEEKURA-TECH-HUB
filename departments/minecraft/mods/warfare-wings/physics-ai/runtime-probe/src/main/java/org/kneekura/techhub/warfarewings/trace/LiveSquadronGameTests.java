@@ -54,15 +54,19 @@ public final class LiveSquadronGameTests {
             var b = RuntimeTacticalPilot.result(blueScenario);
             if (a == null || b == null)
                 throw new GameTestAssertException("Real two-plane live team flight still active");
-            if (!a.complete() || !b.complete())
-                throw new IllegalStateException("Live squadron test failed "
-                        + a.failure() + " / " + b.failure());
-            if (a.samples() != TICKS || b.samples() != TICKS
-                    || a.displacementBlocks() < 8 || b.displacementBlocks() < 8)
-                throw new IllegalStateException("Two real aircraft failed to move independently");
-            if (a.observedContactTicks() < 2 || b.observedContactTicks() < 2)
-                throw new IllegalStateException("No FOV/range/LOS-qualified actual enemy observation: "
-                        + a.observedContactTicks() + "/" + b.observedContactTicks());
+            try {
+                if (!a.complete() || !b.complete())
+                    throw new IllegalStateException("Live squadron test failed "
+                            + a.failure() + " / " + b.failure());
+                if (a.samples() != TICKS || b.samples() != TICKS
+                        || a.displacementBlocks() < 8 || b.displacementBlocks() < 8)
+                    throw new IllegalStateException("Two real aircraft failed to move independently");
+                if (a.observedContactTicks() < 2 || b.observedContactTicks() < 2)
+                    throw new IllegalStateException("No FOV/range/LOS-qualified actual enemy observation: "
+                            + a.observedContactTicks() + "/" + b.observedContactTicks());
+            } finally {
+                cleanupTestEntities(red, blue);
+            }
         });
     }
 
@@ -87,6 +91,7 @@ public final class LiveSquadronGameTests {
         level.setBlock(barrier, Blocks.AIR.defaultBlockState(), 3);
         if (LiveAirSensor.observe(level, viewer, target) == null)
             throw new IllegalStateException("Removing obstruction failed to restore target detection");
+        cleanupTestEntities(viewer, target);
         helper.succeed();
     }
 
@@ -112,12 +117,32 @@ public final class LiveSquadronGameTests {
             var b = RuntimeTacticalPilot.result(s2);
             if (a == null || b == null)
                 throw new GameTestAssertException("Two same-team pilot runs still active");
-            if (!a.complete() || !b.complete() || a.samples() != 70 || b.samples() != 70)
-                throw new IllegalStateException("Same-team flight failed");
-            if (a.observedContactTicks() != 0 || b.observedContactTicks() != 0
-                    || a.predictedContactTicks() != 0 || b.predictedContactTicks() != 0)
-                throw new IllegalStateException("Implicit hostile discovered from aircraft/faction/team without order");
+            try {
+                if (!a.complete() || !b.complete() || a.samples() != 70 || b.samples() != 70)
+                    throw new IllegalStateException("Same-team flight failed");
+                if (a.observedContactTicks() != 0 || b.observedContactTicks() != 0
+                        || a.predictedContactTicks() != 0 || b.predictedContactTicks() != 0)
+                    throw new IllegalStateException("Implicit hostile discovered from aircraft/faction/team without order");
+            } finally {
+                cleanupTestEntities(first, second);
+            }
         });
+    }
+
+    /**
+     * Forge GameTest's 1x1x1 template does not own actors spawned 200 blocks
+     * overhead. Keeping these alive polluted subsequent distinct test batches.
+     * This only disposes test-created entities; no live operator aircraft.
+     */
+    static void cleanupTestEntities(Entity... actors) {
+        for (Entity actor : actors) {
+            if (actor == null || actor.isRemoved()) continue;
+            for (Entity passenger : java.util.List.copyOf(actor.getPassengers())) {
+                passenger.stopRiding();
+                passenger.discard();
+            }
+            actor.discard();
+        }
     }
 
     private static Entity createUncrewed(ServerLevel level, String name, Vec3 position, float yaw) {
@@ -131,8 +156,8 @@ public final class LiveSquadronGameTests {
         return entity;
     }
 
-    private static Entity spawn(ServerLevel level, String name, Vec3 position,
-                                float yaw, double initialZVelocity) {
+    static Entity spawn(ServerLevel level, String name, Vec3 position,
+                        float yaw, double initialZVelocity) {
         ResourceLocation id = new ResourceLocation("warfare_wings", name);
         EntityType<?> type = BuiltInRegistries.ENTITY_TYPE.getOptional(id)
                 .orElseThrow(() -> new IllegalStateException("Missing live test plane " + id));

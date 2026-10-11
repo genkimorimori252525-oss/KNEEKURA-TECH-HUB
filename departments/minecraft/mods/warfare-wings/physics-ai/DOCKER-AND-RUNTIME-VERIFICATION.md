@@ -20,7 +20,9 @@ The image executes `tools/verify_headless.py`, which requires:
 - the source-side tactical AI self-test covering all 24 aircraft when present in the checked-out harness;
 - comparator self-tests on matching and deliberately perturbed traces;
 - strict Forge tactical runtime receipt-parser self-tests with intentionally
-  corrupted synthetic CSVs (15 checks), without confusing fixtures with game telemetry;
+  corrupted synthetic CSVs (17 checks), without confusing fixtures with game telemetry;
+- independent 24-airframe serial GameTest receipt-parser synthetic checks:
+  reject missing, overlong or physically inconsistent per-plane control traces;
 - 24-aircraft Atlas JSON semantic equality and normalized Markdown equality with committed reports.
 
 Expected terminating markers:
@@ -54,13 +56,35 @@ Five additional tactical GameTests must each produce a header and **181 CSV data
 (initial tick 0 plus 180 actual server ticks). The owner-runner CI checks all five
 aircraft identities, movement, yaw, control bounds and tick continuity. A second,
 independent Python validator (`tools/verify_tactical_runtime_receipts.py`) verifies
-the recorded IA input-filter recurrence (`smooth[N]=0.9*smooth[N-1]+0.1*command[N]`)
-for X/Z and writes `tactical-runtime-receipts.json` only after all five traces pass.
+ the recorded per-airframe IA input-filter recurrence
+ `smooth[N] = (1 - model.friction) * model.rotationDecay * 0.9 * smooth[N-1] + 0.1 * command[N]`
+for X/Z, using the exact 24-aircraft ANCHOR source CSV, and writes
+`tactical-runtime-receipts.json` only after all five traces pass. For the
+current pinned airborne models, `(1-0.015)*0.97*0.9 = 0.859905`;
+an unconditional factor of `0.9` would *falsely reject* the real aircraft
+controller and is not the source Microkernel's formula.
 Its synthetic corruption tests run in hosted and offline Docker CI via
-`tools/test_tactical_runtime_receipts.py`. These tests confirm that invalid receipts
-are rejected; they **do not** supply the missing real Minecraft traces.
+`tools/test_tactical_runtime_receipts.py`. These tests confirm that invalid
+receipts are rejected; they never manufacture game measurements. On
+2026-10-11, the exact-user-JAR local GameTest produced all five 180-tick
+traces and the corrected source-derived validator returned
+`FIVE_RUNTIME_CONTROL_TRACES_VERIFIED`. This is controlled-flight evidence,
+not a certification of all 24 aircraft physics or military doctrine.
+The 13-test subsequent local Forge suite also produced 24 independent
+`roster-<id>-forge-controls.csv` traces (40 real ticks each). The source-Atlas
+validated all-24 receipt checker requires 41 samples per file, exact WW identity,
+three or more steering ticks, >=0.25 degrees continued yaw and >=4 blocks
+actual displacement: `ALL_24_SEQUENTIAL_RUNTIME_SMOKES_VERIFIED`. Every
+roster aircraft is removed before the next is spawned, so these traces do
+**not** establish 24-plane simultaneous combat/formation performance.
 
-If the runner is offline, the workflow can remain queued; do not mark runtime parity as PASS or call a queued job a measurement. The earlier registered-runner status was **offline** and the exact run remains `NOT_RUN` until verified execution evidence exists.
+If the runner is offline, the workflow can remain queued; do not mark
+runtime parity as PASS or call a queued job a measurement. The owner runner
+was confirmed **online** on 2026-10-11. A previous self-hosted run lacked
+the original JAR; a subsequent exact-artifact run reached Forge startup,
+but failed in its development Mixin refmap. The local ForgeGradle
+SRG-to-official mapping fix allowed 12 actual GameTests to execute and pass;
+the hosted CI and local test results must still be reported separately.
 
 ## 3. Evidence boundary
 

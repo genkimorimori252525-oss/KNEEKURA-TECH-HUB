@@ -7,16 +7,18 @@ import tempfile
 
 from verify_tactical_runtime_receipts import (
     COLUMNS, EXPECTED, ReceiptError, SCHEMA, SOURCE, verify,
+    source_airframe_retention, INPUT_SMOOTH_FACTOR,
 )
 
 
 def fixture(scenario: str, aircraft: str) -> list[dict[str, str]]:
     rows = []
     smooth = 0.0
+    retention = source_airframe_retention()[aircraft]
     for tick in range(181):
         control = .5 if 1 <= tick <= 40 else 0.0
         if tick:
-            smooth = .9 * smooth + .1 * control
+            smooth = retention * smooth + INPUT_SMOOTH_FACTOR * control
         row = dict.fromkeys(COLUMNS, "")
         row.update({
             "schema_version": SCHEMA, "source": SOURCE, "scenario_id": scenario,
@@ -104,6 +106,25 @@ def main() -> None:
             row["yaw_deg"] = "0"
         write(directory, name, no_response)
         expect_failure(directory, "insufficient real flight motion")
+        checks += 1
+        write(directory, name, normal_rows)
+
+        # Real IA can yaw passively before the first server-END pilot command:
+        # this must not cause a false failure in the receipt checker.
+        passive_yaw = [dict(x) for x in normal_rows]
+        for index in range(1, len(passive_yaw)):
+            passive_yaw[index]["yaw_deg"] = str(float(passive_yaw[index]["yaw_deg"]) + 0.03)
+        write(directory, name, passive_yaw)
+        assert len(verify(directory)["cases"]) == 5
+        checks += 1
+        write(directory, name, normal_rows)
+
+        # A one-time passive heading jump is NOT sustained steering evidence.
+        transient = [dict(x) for x in normal_rows]
+        for index, row in enumerate(transient):
+            row["yaw_deg"] = "0" if index == 0 else "5"
+        write(directory, name, transient)
+        expect_failure(directory, "no sustained post-command yaw response")
         checks += 1
         write(directory, name, normal_rows)
 

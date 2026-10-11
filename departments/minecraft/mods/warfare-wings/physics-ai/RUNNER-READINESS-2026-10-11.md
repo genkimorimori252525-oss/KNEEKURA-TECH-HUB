@@ -1,17 +1,78 @@
 # Warfare Wings — owner runner readiness and exact-artifact gate (2026-10-11)
 
-Current observed runner: `Jolly-TechHub`, labels
+Observed runner: `Jolly-TechHub`, labels
 `self-hosted, Windows, X64, tech-hub, kneekura`. At the
 2026-10-11 validation it was **online and idle**, and successfully accepted
 owner Windows workflow [#38109783517](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38109783517).
 
-Actual GitHub Actions evidence:
+Early GitHub Actions evidence from run #38109783517:
 
 1. Checkout, Temurin Java 17, and Gradle setup: **PASS**.
 2. `Stage exact runtime jars`: **FAILED** with
    `Exact user-owned Warfare Wings ANCHOR not found`.
-3. All real Minecraft GameTests, including 5 single-plane tactical tests,
-   3 new live squadron tests and A6M calibration: **NOT_RUN**.
+3. All real Minecraft GameTests at this **early run**: **NOT_RUN**.
+
+### October 11 recovery (after that first blocked run)
+
+- Three owner-supplied exact original WW 1.1.4 JARs were located inside
+  top-level `Downloads` subdirectories, each with **identical exact SHA-256**
+  `dc3029597c88859744633b6f5e4a9f21d449294b1aaac90ea0c1749d7aa98a43`.
+  The original is available. Do not use the byte-different public build.
+- Explicit-path self-hosted run
+  [#38110700138](https://github.com/genkimorimori252525-oss/KNEEKURA-TECH-HUB/actions/runs/38110700138)
+  passed both pinned JAR hash checks and Java/Gradle setup, then **FAILED
+  during Forge UserDev boot**: the unmodified Immersive Aircraft Mixin
+  refmap referenced SRG `Player.m_36342_()`, but the ForgeGradle
+  official-mapped class had a readable method name.
+- In the shared workspace, the ForgeGradle-generated
+  `build/createSrgToMcp/output.srg` mapping confirmed the exact translation.
+  The userdev GameTest JVM now supplies `mixin.env.remapRefMap=true`
+  and the corresponding `mixin.env.refMapRemappingFile` pointing at that
+  mapping; **neither game binary was patched**.
+- The subsequent exact-artifact **local Forge 1.20.1 GameTest passed all
+  12 required tests** after removing cross-batch spawned-aircraft
+  interference. A **subsequent 13-test local exact-artifact run** also
+  passed the new `AllAircraftRosterGameTests`, which serially instantiates
+  all 24 derived aircraft for 40 actual entity ticks each with physical
+  displacement, yaw and raw input assertions. Exact
+  `run-gametest/logs/latest.log` terminator:
+  `All 13 required tests passed :)`. Five aircraft also recorded complete
+  180-tick steering/movement traces: A6M, P-47N, IL-2, B-17 and G4M.
+  This is local actual Minecraft measurement, not a replayed source simulation.
+- The strict receipt verifier derived the correct airborne IA input
+  recurrence `0.859905 * previousSmooth + 0.1 * rawCommand` from the
+  exact Atlas input friction and rotation decay, and independently passed
+  all five local control traces. This is **controller telemetry agreement**,
+  not full physics parity, weapon firing or practical escort victory.
+- The companion `verify_all_aircraft_runtime_receipts.py` independently
+  checked 24 actual 40-tick CSVs (`roster-<plane>-forge-controls.csv`)
+  against their exact Atlas-derived model retention and fixed minimum
+  physical motion: `ALL_24_SEQUENTIAL_RUNTIME_SMOKES_VERIFIED`. This is a
+  **single-aircraft serial smoke**, not a 24-on-24 simultaneous dogfight.
+
+### Source-model physics parity is **not** established
+
+A genuine owner-JAR A6M 401-sample throttle trace is now available locally
+(`runtime-probe/run-gametest/ww-physics-traces/a6m-throttle-step-v1-runtime.csv`)
+alongside the regenerated Microkernel trace and the unchanged threshold-free
+`tools/compare_traces.py` report. Observed diagnostics from that single run:
+
+| Same-artifact comparison | Microkernel source | Real Minecraft |
+|---|---:|---:|
+| Maximum A6M speed in 400-tick throttle trace | 33.6700 blocks/s | 25.0815 blocks/s |
+| First engine power 0.5 tick | 14 | 69 |
+| Engine power 0.9 achieved | tick 45 | not within 400 ticks |
+
+Additional telemetry: speed RMSE **11.9768 blocks/s**, engine-power RMSE
+**0.26584**, final speed error **8.5885 blocks/s**. There is a substantial
+source-to-runtime physics divergence and it must remain a blocking
+`CALIBRATION_ONLY_NO_ACCEPTANCE_THRESHOLD` finding, not a fabricated
+`SOURCE_RUNTIME_PARITY_PASS`. The absolute position error also includes
+real GameTest's world-space fixture origin and must not be compared as
+an origin-aligned physical drift without normalizing initial positions.
+Do not retune Atlas models to one run without investigating engine
+power/fuel timing and obtaining repeated same-artifact traces for the
+A6M, P-47N, IL-2 and B-17 under identical test envelopes.
 
 The original researched Warfare Wings SHA-256 is
 `dc3029597c88859744633b6f5e4a9f21d449294b1aaac90ea0c1749d7aa98a43`.
@@ -28,11 +89,12 @@ The owner workflow automatically downloads that particular pinned Modrinth
 version **only after** locating the exact user-supplied Warfare Wings JAR,
 and then independently hashes it.
 
-## Next executable runtime step
+## Reproducible runtime command and remaining gate
 
-Store the user's **original** Warfare Wings ANCHOR JAR on the Windows
-Jolly-TechHub runner at a path readable by its account. Do not commit or
-upload the JAR to this Git repository. Verify it with:
+The original Warfare Wings ANCHOR JAR now exists in the owner's Downloads
+collections. Select an existing exact-hash matching copy on the Windows
+Jolly-TechHub machine at a path readable by the runner account. Do not
+commit or upload the JAR to this Git repository. Verify it with:
 
 ```powershell
 $wwAnchor = 'C:\ABSOLUTE\PATH\TO\warfare_wings-1.1.4-1.20.1-forge.jar'
@@ -47,10 +109,12 @@ environment variable `KNEEKURA_WW_ANCHOR_JAR`. The workflow also checks
 the runner account's top-level `Downloads` and `Documents` folders for
 the exact canonical filename.
 
-Only after that gate is **PASS** may GameTest spawn the actual registered
-aircraft. Source-only ForgeGradle compilation, Docker tests and synthetic
-telemetry are not substitutes for this step. Failure is intentional and
-preserves provenance.
+The gate was demonstrated PASS in the above exact-artifact local and
+self-hosted attempts. For automated acceptance on the latest PR commit,
+dispatch the owner runner **again after the source-side refmap fix is
+committed**. It must then pass the entire GameTest suite and trace receipts
+as one exact-ref reproducible GitHub workflow. The earlier self-hosted job's
+FAILURE is retained as historical evidence and is not relabeled.
 
 ## Evidence to accept afterward
 

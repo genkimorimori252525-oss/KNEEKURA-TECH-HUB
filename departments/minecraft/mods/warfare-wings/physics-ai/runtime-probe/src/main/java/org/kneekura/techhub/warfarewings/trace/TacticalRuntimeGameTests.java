@@ -106,6 +106,7 @@ public final class TacticalRuntimeGameTests {
             hostile = observed;
         }
 
+        final Entity spawnedContact = hostile;
         RuntimeTacticalPilot.start(scenario, level, aircraft, pilot, mission,
                 start.add(140, 0, 245), start.add(-140, 0, -200),
                 hostile, null, null, DURATION);
@@ -113,21 +114,25 @@ public final class TacticalRuntimeGameTests {
             RuntimeTacticalPilot.Result result = RuntimeTacticalPilot.result(scenario);
             if (result == null)
                 throw new GameTestAssertException("Tactical aircraft bridge still sampling");
-            if (!result.complete())
-                throw new IllegalStateException("IA tactical bridge failed: " + result.failure());
-            if (result.samples() != DURATION || result.nonzeroLateralTicks() < 10
-                    || result.yawTravelDeg() < 2.0 || result.displacementBlocks() < 8.0)
-                throw new IllegalStateException("No meaningful closed-loop lateral control: "
-                        + result.samples() + " samples, " + result.nonzeroLateralTicks()
-                        + " steering ticks, " + result.yawTravelDeg() + " yaw degrees, "
-                        + result.displacementBlocks() + " blocks moved");
-            if (result.firstCommandSample() < 1
-                    || result.firstYawResponseSample() <= result.firstCommandSample())
-                throw new IllegalStateException("IA expected one-physics-tick input delay, command sample="
-                        + result.firstCommandSample() + " yaw response sample="
-                        + result.firstYawResponseSample());
-            if (!Files.isRegularFile(result.trace()))
-                throw new IllegalStateException("Missing on-disk IA tactical control trace");
+            try {
+                if (!result.complete())
+                    throw new IllegalStateException("IA tactical bridge failed: " + result.failure());
+                if (result.samples() != DURATION || result.nonzeroLateralTicks() < 10
+                        || result.yawTravelDeg() < 2.0 || result.displacementBlocks() < 8.0)
+                    throw new IllegalStateException("No meaningful closed-loop lateral control: "
+                            + result.samples() + " samples, " + result.nonzeroLateralTicks()
+                            + " steering ticks, " + result.yawTravelDeg() + " yaw degrees, "
+                            + result.displacementBlocks() + " blocks moved");
+                if (result.firstCommandSample() < 1
+                        || result.firstYawResponseSample() <= result.firstCommandSample())
+                    throw new IllegalStateException("IA expected one-physics-tick input delay, command sample="
+                            + result.firstCommandSample() + " yaw response sample="
+                            + result.firstYawResponseSample());
+                if (!Files.isRegularFile(result.trace()))
+                    throw new IllegalStateException("Missing on-disk IA tactical control trace");
+            } finally {
+                LiveSquadronGameTests.cleanupTestEntities(aircraft, spawnedContact, pilot);
+            }
         });
     }
 }

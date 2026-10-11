@@ -74,6 +74,15 @@ public final class SquadronCommand {
         }
     }
 
+    /** Per-tick mission stage from a verified source-side phase controller. */
+    public record MissionOrder(TacticalAirAI.Mission mission, Vec3 objective) {
+        public MissionOrder {
+            if (mission == null || objective == null)
+                throw new IllegalArgumentException("null mission directive");
+            finite(objective);
+        }
+    }
+
     /** Each observer owns its own timed observation; never globally shared. */
     public record Track(Vec3 position, Vec3 velocity, long lastSeenTick) {
         public Track {
@@ -197,8 +206,31 @@ public final class SquadronCommand {
 
     /** One decision and one physics integration for every unit, using one frozen prior tick. */
     public Step advance(Snapshot previous) {
+        return advance(previous, Map.of());
+    }
+
+    /**
+     * A strike aircraft may transition from its validated original attack role
+     * into PATROL navigation for egress/return. The source model remains the
+     * same single physical aircraft on this shared 20 Hz snapshot.
+     */
+    public Step advance(Snapshot previous, Map<String, MissionOrder> missionOrders) {
         if (previous == null || !previous.units().keySet().equals(specifications.keySet()))
             throw new IllegalArgumentException("snapshot must contain the exact scenario roster");
+        if (missionOrders == null) throw new IllegalArgumentException("missing mission directives");
+        for (var entry : missionOrders.entrySet()) {
+            AircraftSpec spec = specifications.get(entry.getKey());
+            MissionOrder order = entry.getValue();
+            if (spec == null || order == null
+                    || order.mission() != spec.mission()
+                        && !(order.mission() == TacticalAirAI.Mission.PATROL
+                             && (spec.mission() == TacticalAirAI.Mission.LEVEL_BOMB
+                              || spec.mission() == TacticalAirAI.Mission.TORPEDO
+                              || spec.mission() == TacticalAirAI.Mission.DIVE_BOMB
+                              || spec.mission() == TacticalAirAI.Mission.STRAFE)))
+                throw new IllegalArgumentException("unauthorized mission stage for " + entry.getKey());
+            checkMissionRole(models.get(spec.aircraftTypeId()).role(), order.mission());
+        }
         long now = previous.tick();
         if (now == Long.MAX_VALUE) throw new IllegalArgumentException("tick overflow");
         for (Local local : previous.units().values())
@@ -214,6 +246,7 @@ public final class SquadronCommand {
         Map<String, Instruction> instructions = new TreeMap<>();
         for (AircraftSpec spec : specifications.values()) {
             Local own = previous.units().get(spec.unitId());
+            MissionOrder missionOrder = missionOrders.get(spec.unitId());
             Map<String, Track> tracks = sensed.get(spec.unitId());
             String targetId = assignments.get(spec.unitId());
             String threatId = targetId != null ? targetId : nearestThreat(own.aircraft(), tracks, now);
@@ -243,8 +276,10 @@ public final class SquadronCommand {
                     target.position(), previous);
             Model model = models.get(spec.aircraftTypeId()).model();
             TacticalAirAI.Frame frame = new TacticalAirAI.Frame(
-                    profiles.get(spec.aircraftTypeId()), model, own.aircraft(), spec.mission(),
-                    spec.objective(), spec.home(), contact, anchor, closestPos,
+                    profiles.get(spec.aircraftTypeId()), model, own.aircraft(),
+                    missionOrder == null ? spec.mission() : missionOrder.mission(),
+                    missionOrder == null ? spec.objective() : missionOrder.objective(),
+                    spec.home(), contact, anchor, closestPos,
                     spec.fuelFraction(), spec.integrityFraction(),
                     world.groundHeight(own.aircraft().position().x(), own.aircraft().position().z()),
                     corridor, spec.projectileSpeedBpt());

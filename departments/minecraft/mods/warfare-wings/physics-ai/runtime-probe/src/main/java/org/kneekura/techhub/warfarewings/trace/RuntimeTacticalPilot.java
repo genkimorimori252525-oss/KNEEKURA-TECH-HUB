@@ -66,7 +66,9 @@ final class RuntimeTacticalPilot {
     record Result(boolean complete, String failure, int samples, int nonzeroLateralTicks,
                   double yawTravelDeg, double displacementBlocks,
                   int firstCommandSample, int firstYawResponseSample, Path trace,
-                  int observedContactTicks, int predictedContactTicks) {}
+                  int observedContactTicks, int predictedContactTicks,
+                  int escortTicks, int strikeIngressTicks, int strikeEgressTicks,
+                  int returnTicks, double returnStartDistance, double closestReturnDistance) {}
 
     /** Immutable and entirely operator-assigned. Aircraft faction has no team meaning. */
     record LiveOrder(String team, TacticalAirAI.Mission mission,
@@ -83,7 +85,7 @@ final class RuntimeTacticalPilot {
                       TacticalAirAI.Mission mission, UUID target,
                       String hostileTeam, UUID leader, int observedTicks,
                       int elapsedTicks, int sensorCandidates, int blockedContacts,
-                      int stationSlot) {}
+                      int stationSlot, LiveMissionPlanner.Phase phase) {}
 
     static boolean validTeam(String team) {
         return team != null && team.matches("[a-z][a-z0-9_-]{0,23}");
@@ -117,7 +119,8 @@ final class RuntimeTacticalPilot {
             status.add(new LiveStatus(run.aircraft.getUUID(), run.airframe.profile().aircraftId(),
                     order.team(), order.mission(), order.designatedTarget(),
                     order.hostileTeam(), order.leader(), run.observedTicks,
-                    run.steps, run.sensorCandidates, run.blockedContacts, run.stationSlot));
+                    run.steps, run.sensorCandidates, run.blockedContacts,
+                    run.stationSlot, run.livePhase));
         }
         status.sort(java.util.Comparator.comparing(s -> s.aircraft().toString()));
         return List.copyOf(status);
@@ -133,6 +136,13 @@ final class RuntimeTacticalPilot {
         if (run == null || run.liveOrder == null)
             throw new IllegalArgumentException("Aircraft is not enrolled in live autonomy");
         return run.liveOrder;
+    }
+
+    static synchronized void requestReturn(UUID aircraft) {
+        Run run = ACTIVE.get(aircraft);
+        if (run == null || run.liveOrder == null)
+            throw new IllegalArgumentException("RTB requires an enrolled live aircraft");
+        run.forcedReturn = true;
     }
 
     static synchronized void validateEnrollment(Entity aircraft, TacticalAirAI.Mission mission) {
@@ -239,7 +249,9 @@ final class RuntimeTacticalPilot {
         remember(new Result(false, "STOPPED_BY_OPERATOR", run.steps,
                 run.nonzeroLateral, run.yawTravel, run.displacement(),
                 run.firstCommandSample, run.firstYawResponseSample, run.trace,
-                run.observedTicks, run.predictedTicks), run.scenario);
+                run.observedTicks, run.predictedTicks, run.escortTicks,
+                run.strikeIngressTicks, run.strikeEgressTicks, run.returnTicks,
+                run.returnStartDistance, run.closestReturnDistance), run.scenario);
         return true;
     }
 
@@ -341,7 +353,9 @@ final class RuntimeTacticalPilot {
                     remember(new Result(true, null, run.steps,
                             run.nonzeroLateral, run.yawTravel, run.displacement(),
                             run.firstCommandSample, run.firstYawResponseSample, run.trace,
-                            run.observedTicks, run.predictedTicks), run.scenario);
+                            run.observedTicks, run.predictedTicks, run.escortTicks,
+                            run.strikeIngressTicks, run.strikeEgressTicks, run.returnTicks,
+                            run.returnStartDistance, run.closestReturnDistance), run.scenario);
                     ACTIVE.remove(run.aircraft.getUUID());
                 }
             } catch (Throwable ex) {
@@ -350,7 +364,9 @@ final class RuntimeTacticalPilot {
                         ex.getClass().getSimpleName() + ": " + ex.getMessage(),
                         run.steps, run.nonzeroLateral, run.yawTravel, run.displacement(),
                         run.firstCommandSample, run.firstYawResponseSample, run.trace,
-                        run.observedTicks, run.predictedTicks), run.scenario);
+                        run.observedTicks, run.predictedTicks, run.escortTicks,
+                        run.strikeIngressTicks, run.strikeEgressTicks, run.returnTicks,
+                        run.returnStartDistance, run.closestReturnDistance), run.scenario);
                 ACTIVE.remove(run.aircraft.getUUID());
             }
         }
@@ -381,6 +397,12 @@ final class RuntimeTacticalPilot {
         final boolean isolatedGameTest;
         final net.minecraft.world.phys.Vec3 startPosition;
         LiveOrder liveOrder;
+        LiveMissionPlanner.Phase livePhase = LiveMissionPlanner.Phase.TRANSIT;
+        boolean forcedReturn;
+        int escortTicks, strikeIngressTicks, strikeEgressTicks, returnTicks;
+        String lastPhaseReason = "NO_LIVE_ORDER";
+        double returnStartDistance = Double.NaN;
+        double closestReturnDistance = Double.POSITIVE_INFINITY;
         int stationSlot = -1;
         int observedTicks, sensorCandidates, blockedContacts;
         int predictedTicks;
@@ -390,6 +412,7 @@ final class RuntimeTacticalPilot {
         TacticalAirAI.Memory memory = TacticalAirAI.Memory.INITIAL;
         int lastAircraftTick, steps, nonzeroLateral;
         int firstCommandSample = -1, firstYawResponseSample = -1;
+        double firstCommandX;
         double lastYaw, yawTravel;
 
         Run(String scenario, ServerLevel level, Entity aircraft, ArmorStand pilot,
@@ -424,7 +447,7 @@ final class RuntimeTacticalPilot {
             var velocity = xyz(aircraft.getDeltaMovement());
             double surface = level.getHeight(Heightmap.Types.MOTION_BLOCKING,
                     Mth.floor(currentPosition.x()), Mth.floor(currentPosition.z()));
-            double fuel = Math.max(0, Math.min(1, IaRuntimeAccess.fuelUtilization(aircraft)));
+            double fuel = IaRuntimeAccess.remainingFuelReserve(aircraft);
             double integrity = Math.max(0, Math.min(1, IaRuntimeAccess.health(aircraft)));
             var state = new Ia133Microkernel.State(
                     aircraft.tickCount, currentPosition, velocity,
@@ -435,7 +458,10 @@ final class RuntimeTacticalPilot {
                     IaRuntimeAccess.smooth(aircraft, "pressingInterpolatedZ"),
                     IaRuntimeAccess.engineTarget(aircraft),
                     IaRuntimeAccess.enginePower(aircraft),
-                    fuel, currentPosition.y(), aircraft.onGround(), aircraft.isInWater());
+                    // Source microkernel State field means engine utilization,
+                    // distinct from the actual remaining-fuel reserve in Frame.
+                    IaRuntimeAccess.fuelUtilization(aircraft),
+                    currentPosition.y(), aircraft.onGround(), aircraft.isInWater());
             // The original synthetic ArmorStand contact remains exclusively
             // for legacy GameTests. Live runs scan real entities every tick.
             LiveOrder orders = liveOrder;
@@ -494,18 +520,38 @@ final class RuntimeTacticalPilot {
                         && !other.getTags().contains(LIVE_PAIR_TEST_TAG))
                     throw new IllegalStateException("Unexpected foreign aircraft near live pair test: "
                             + other.getUUID());
+                Run otherRun = ACTIVE.get(other.getUUID());
+                boolean sameTeamDatalink = orders != null && otherRun != null
+                        && otherRun.liveOrder != null
+                        && orders.team().equals(otherRun.liveOrder.team());
+                if (orders != null && !sameTeamDatalink) {
+                    // The broad entity query exists solely to detect physical
+                    // test isolation violations and find explicitly linked
+                    // wingmen. It MUST NOT expose invisible hostiles or
+                    // unassigned aircraft positions to the tactical planner.
+                    // Observed/last-known enemies are appended below using
+                    // the already gated Contact snapshot.
+                    continue;
+                }
                 var p = xyz(other.position());
                 nearby.add(new FlightSafetyPlanner.MovingObstacle(other.getUUID().toString(),
                         p, xyz(other.getDeltaMovement()), Math.max(1, other.getBbWidth() * 0.5)));
-                Run otherRun = ACTIVE.get(other.getUUID());
-                if (orders != null && otherRun != null && otherRun.liveOrder != null
-                        && orders.team().equals(otherRun.liveOrder.team())) {
+                if (sameTeamDatalink) {
                     double distance = p.add(currentPosition.scale(-1)).lengthSquared();
                     if (distance < nearestFriendlyDistance) {
                         nearestFriendlyDistance = distance;
                         nearestFriendly = p;
                     }
                 }
+            }
+            if (orders != null && contact != null) {
+                // A live threat can inform collision avoidance ONLY through a
+                // confirmed sensor contact or a still-valid <=6-tick track.
+                // Never read a currently occluded entity's actual geometry.
+                // Radius is a conservative *gameplay assumption*, not a
+                // hidden reading from the unobserved target.
+                nearby.add(new FlightSafetyPlanner.MovingObstacle(contact.id(),
+                        contact.position(), contact.velocity(), 3.0));
             }
             Ia133Microkernel.Vec3 currentObjective = orders == null ? objective : xyz(orders.waypoint());
             Ia133Microkernel.Vec3 currentHome = orders == null ? home : xyz(orders.home());
@@ -518,9 +564,55 @@ final class RuntimeTacticalPilot {
                     || orders.mission() == TacticalAirAI.Mission.DIVE_BOMB
                     || orders.mission() == TacticalAirAI.Mission.LEVEL_BOMB))
                 currentObjective = contact.position();
+            TacticalAirAI.Mission guidanceMission = orders == null ? mission : orders.mission();
+            TacticalAirAI.Contact guidanceContact = contact;
+            if (orders != null) {
+                Vec3 station = currentAnchor == null ? null
+                        : new Vec3(currentAnchor.x(), currentAnchor.y(), currentAnchor.z());
+                var intent = LiveMissionPlanner.select(orders.mission(), livePhase,
+                        aircraft.position(),
+                        new Vec3(currentObjective.x(), currentObjective.y(), currentObjective.z()),
+                        orders.home(), station, forcedReturn, fuel, integrity);
+                livePhase = intent.phase();
+                lastPhaseReason = intent.reason();
+                guidanceMission = intent.guidanceMission();
+                currentObjective = xyz(intent.waypoint());
+                guidanceContact = intent.mayUseObservedHostile() ? contact : null;
+                switch (livePhase) {
+                    case ESCORT_COVER -> escortTicks++;
+                    case STRIKE_INGRESS -> strikeIngressTicks++;
+                    case STRIKE_EGRESS -> strikeEgressTicks++;
+                    case RETURNING -> {
+                        returnTicks++;
+                        double distanceToHome = aircraft.position().distanceTo(orders.home());
+                        if (Double.isNaN(returnStartDistance))
+                            returnStartDistance = distanceToHome;
+                        closestReturnDistance = Math.min(closestReturnDistance, distanceToHome);
+                    }
+                    default -> { }
+                }
+                if (livePhase == LiveMissionPlanner.Phase.RETURNING
+                        || livePhase == LiveMissionPlanner.Phase.STRIKE_EGRESS)
+                    currentAnchor = null;
+                else if (livePhase == LiveMissionPlanner.Phase.ESCORT_COVER) {
+                    if (guidanceContact != null && orders.leader() != null) {
+                        // Enemy present: TacticalAirAI protects the actual
+                        // leader, never a follower's offset station.
+                        Run leader = ACTIVE.get(orders.leader());
+                        if (leader != null && !leader.aircraft.isRemoved()
+                                && leader.aircraft.level() == level)
+                            currentAnchor = xyz(leader.aircraft.position());
+                    } else {
+                        // In quiet air, steer to the unique follower station
+                        // rather than stacking constant offsets onto a slot.
+                        guidanceMission = TacticalAirAI.Mission.PATROL;
+                        currentAnchor = null;
+                    }
+                }
+            }
             var frame = new TacticalAirAI.Frame(airframe.profile(), airframe.model(), state,
-                    orders == null ? mission : orders.mission(),
-                    currentObjective, currentHome, contact, currentAnchor, nearestFriendly,
+                    guidanceMission, currentObjective, currentHome,
+                    guidanceContact, currentAnchor, nearestFriendly,
                     fuel, integrity, surface, false, 0);
             FlightSafetyPlanner.Terrain terrain = (x, z) ->
                     level.getHeight(Heightmap.Types.MOTION_BLOCKING, Mth.floor(x), Mth.floor(z));
@@ -531,11 +623,20 @@ final class RuntimeTacticalPilot {
             var decision = output.decision();
             var control = decision.controls();
             int sampling = steps + 1;
-            double observedYawChange = Math.abs(FlightGuidanceAngle.wrap(aircraft.getYRot() - lastYaw));
-            if (observedYawChange > 0.005 && firstYawResponseSample == -1)
+            double signedYawChange = FlightGuidanceAngle.wrap(aircraft.getYRot() - lastYaw);
+            double observedYawChange = Math.abs(signedYawChange);
+            // An aircraft can drift ~0.005 degrees naturally before the
+            // first END-tick command is injected. Only register a causal
+            // steering response AFTER that command's tick and in the IA
+            // controller's actual sign convention: yaw -= yawSpeed*smoothX.
+            if (firstCommandSample >= 1 && sampling > firstCommandSample
+                    && firstYawResponseSample == -1
+                    && -signedYawChange * Math.signum(firstCommandX) > 0.02)
                 firstYawResponseSample = sampling;
-            if (Math.abs(control.x()) > 1e-3 && firstCommandSample == -1)
+            if (Math.abs(control.x()) > 1e-3 && firstCommandSample == -1) {
                 firstCommandSample = sampling;
+                firstCommandX = control.x();
+            }
             if (Math.abs(control.y()) > 1e-7)
                 throw new IllegalStateException("Runtime pilot does not emulate raw IA throttle/brake key");
             IaRuntimeAccess.applyTacticalControls(aircraft, (float) control.x(),
@@ -645,7 +746,9 @@ final class RuntimeTacticalPilot {
                     decision == null ? "INITIAL"
                             : decision.reasonCode() + (liveOrder == null ? ""
                                     : "|live_team=" + liveOrder.team()
-                                    + "|sighting=" + lastContactStatus),
+                                    + "|sighting=" + lastContactStatus
+                                    + "|phase=" + livePhase
+                                    + "|phase_reason=" + lastPhaseReason),
                     clearance == null ? "INITIAL" : clearance.reason().name(),
                     n(clearance == null ? 0 : clearance.minPredictedClearance())));
             writer.newLine();

@@ -92,11 +92,20 @@ public final class CombatSimulationSelfTest {
                 Map.of("cover1","cargo","cover2","cargo"),members);
         var asset=result.assets().get("cargo");
         System.out.println("Combat mixed escort: "+asset);
+        System.out.println("Combat B17 defensive aborts: "
+                +result.units().get("cargo").defensiveAbortTicks());
         yes(asset!=null && Double.isFinite(asset.closestThreatBlocks()),
                 "mixed strike/escort tracks enemy proximity to protected bomber");
         yes(asset.escortThreatAssignedTicks()>0,"escort assigned to threat over time");
         yes(asset.corridorBreached() && asset.threatWithinCorridorTicks()>0,
                 "intrusion is a measured escort protection failure, even while pilots assign targets");
+        yes(asset.threatWithinCorridorTicks()<136 && asset.closestThreatBlocks()>14.46,
+                "observed-threat bomber break improves both hostile exposure and closest approach versus pinned earlier source");
+        yes(asset.firstEscortAssignmentTick()>0
+                && asset.firstEscortAssignmentTick()<asset.firstThreatEntryTick(),
+                "assignment starts before perimeter breach; assignment alone cannot guarantee interception");
+        yes(result.units().get("cargo").defensiveAbortTicks()>50,
+                "early defensive diversion is measured explicitly rather than silently credited as bombing completion");
         yes(!result.passesSafetyGates()
                 && result.failedOperationalGates().stream().anyMatch(
                     code -> code.startsWith("ESCORT_PROTECTION_BREACHED:cargo:")),
@@ -106,6 +115,38 @@ public final class CombatSimulationSelfTest {
                 <Math.hypot(280,0),"bomber closes target waypoint distance");
         yes(result.pairs().get(new CombatSimulation.PairKey("cover1","cover2")).closestApproachBlocks()>6,
                 "escorts do not occupy same physical location");
+        var preparedCover = run(csv,"escort-prepositioned",190,
+                Map.of("cover1","cargo","cover2","cargo"),List.of(
+                    members.get(0),
+                    plane("cover1","f4u","blue","cover",0,TacticalAirAI.Mission.ESCORT,
+                            "cargo",-27,190,115,0,1.0,1),
+                    plane("cover2","p47n","blue","cover",1,TacticalAirAI.Mission.ESCORT,
+                            "cargo",27,190,115,0,1.0,1),
+                    members.get(3)));
+        var prepared=preparedCover.assets().get("cargo");
+        System.out.println("Prepared escort: "+prepared);
+        System.out.printf(java.util.Locale.ROOT,
+                "ESCORT_ENERGY_SOURCE aft F4U=%.3f P47N=%.3f blocks/s; prepared F4U=%.3f P47N=%.3f blocks/s; guard-pair closest aft=%.3f prepared=%.3f blocks%n",
+                result.units().get("cover1").finalSpeedBps(),
+                result.units().get("cover2").finalSpeedBps(),
+                preparedCover.units().get("cover1").finalSpeedBps(),
+                preparedCover.units().get("cover2").finalSpeedBps(),
+                result.pairs().get(new CombatSimulation.PairKey("cover1","cover2")).closestApproachBlocks(),
+                preparedCover.pairs().get(new CombatSimulation.PairKey("cover1","cover2")).closestApproachBlocks());
+        yes(preparedCover.passesSafetyGates() && !prepared.corridorBreached(),
+                "advanced fighter screen actually protects the 95-block corridor for the entire scenario");
+        yes(prepared.threatWithinCorridorTicks()==0 && prepared.firstThreatEntryTick()==-1
+                && prepared.closestThreatBlocks()>95,
+                "prepared guards physically hold enemy outside unchanged 95-block perimeter");
+        for (var pair : preparedCover.pairs().values())
+            yes(pair.closestApproachBlocks()>=6.0 && pair.dangerouslyCloseTicks()==0,
+                    "prepared screen does not buy protection through forbidden <6-block body proximity");
+        yes(preparedCover.units().get("cargo").groundedTicks()==0
+                && preparedCover.units().get("cargo").finalDistanceToObjective()<280,
+                "prepared protection preserves actual flight and measurable bomber objective progress");
+        yes(preparedCover.units().get("cargo").finalDistanceToObjective()
+                    < result.units().get("cargo").finalDistanceToObjective(),
+                "prepared interception preserves more mission progress than aft deployment under the same threat");
         var retreat=run(csv,"fuel-withdrawal",50,Map.of(),List.of(
                 plane("tired","p47n","blue","solo",0,TacticalAirAI.Mission.INTERCEPT,
                         null,0,160,0,0,1,0.03),
@@ -172,6 +213,34 @@ public final class CombatSimulationSelfTest {
         yes(guard.reason()==FlightSafetyPlanner.Reason.MOVING_COLLISION_RISK
                         && "observed-threat".equals(guard.obstacleId()),
                 "mixed ally and observed-hostile risk ranking selects deeper predicted safety breach");
+
+        var bomber=AircraftAtlasMain.load(csv).stream()
+                .filter(type->type.aircraftId().equals("warfare_wings:b17"))
+                .findFirst().orElseThrow();
+        var bomberProfile=TacticalAirAI.Profile.fromAtlas(AircraftAtlasMain.evaluate(bomber));
+        var bomberState=State.airborne(new Vec3(0,170,0),new Vec3(0,0,0.8));
+        var inbound=new TacticalAirAI.Contact("visible-inbound",new Vec3(0,170,160),
+                new Vec3(0,0,-1.3),true);
+        var inert=new TacticalAirAI.Contact("visible-but-not-closing",
+                inbound.position(),Vec3.ZERO,true);
+        var staticThreat=new TacticalAirAI.Frame(bomberProfile,bomber.model(),bomberState,
+                TacticalAirAI.Mission.LEVEL_BOMB,GOAL,HOME,inert,null,null,
+                1,1,0,false,0);
+        var urgentThreat=new TacticalAirAI.Frame(bomberProfile,bomber.model(),bomberState,
+                TacticalAirAI.Mission.LEVEL_BOMB,GOAL,HOME,inbound,null,null,
+                1,1,0,false,0);
+        yes(TacticalAirAI.decide(staticThreat,TacticalAirAI.Memory.INITIAL).maneuver()
+                ==TacticalAirAI.Maneuver.LEVEL_BOMB_RUN,
+                "stationary contact alone cannot invent an imminent inbound emergency");
+        yes(TacticalAirAI.decide(urgentThreat,TacticalAirAI.Memory.INITIAL).maneuver()
+                ==TacticalAirAI.Maneuver.DEFENSIVE_BREAK,
+                "personally observed, rapidly closing enemy induces a real early bombing abort");
+        var depleted=new TacticalAirAI.Frame(bomberProfile,bomber.model(),bomberState,
+                TacticalAirAI.Mission.LEVEL_BOMB,GOAL,HOME,inbound,null,null,
+                0.04,1,0,false,0);
+        yes(TacticalAirAI.decide(depleted,TacticalAirAI.Memory.INITIAL).maneuver()
+                ==TacticalAirAI.Maneuver.RETURN_HOME,
+                "critical fuel reserve still outranks discretionary observed-threat maneuver");
     }
     private static void everyAtlasAirframe(Path csv) throws Exception {
         var roster=AircraftAtlasMain.load(csv);

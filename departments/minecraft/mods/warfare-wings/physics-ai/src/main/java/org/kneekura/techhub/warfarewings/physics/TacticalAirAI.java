@@ -174,6 +174,25 @@ public final class TacticalAirAI {
             // assigned the same 3D point in the moving protection corridor.
             target = anchor.add(outward.scale(screenDistance)).add(right.scale(side * 20));
             why = distance < 100 ? "ESCORT_INNER_SCREEN" : "ESCORT_PREDICTIVE_SCREEN";
+        } else if (frame.profile().role().equals("bomber")
+                && frame.mission() == Mission.LEVEL_BOMB
+                && frame.enemy() != null && frame.enemy().hostile()
+                && frame.enemy().position().add(position.scale(-1)).length() < 165
+                && (memory.last() == Maneuver.DEFENSIVE_BREAK
+                    && frame.enemy().position().add(position.scale(-1)).length() < 135
+                    || frame.enemy().velocity().dot(position.add(frame.enemy().position().scale(-1)).normalize())
+                            > 0.30
+                        && frame.enemy().velocity().add(self.velocity().scale(-1))
+                            .dot(frame.enemy().position().add(position.scale(-1)).normalize()) < -0.35)) {
+            // Threat seen approaching the bomber, not an omniscient opponent.
+            // Abort the geometrical bombing run early enough to steer via the
+            // actual IA controller. No kill, gun effect or instant teleport.
+            maneuver = Maneuver.DEFENSIVE_BREAK;
+            Vec3 lateral = new Vec3(forward.z(), 0, -forward.x()).normalize();
+            Vec3 toThreat = frame.enemy().position().add(position.scale(-1));
+            if (lateral.dot(toThreat) > 3.0) lateral = lateral.scale(-1);
+            target = position.add(lateral.scale(135)).add(forward.scale(-22)).add(0, 28, 0);
+            why = "BOMBER_OBSERVED_INBOUND_ABORT";
         } else if (!frame.profile().role().equals("fighter")
                 && frame.enemy() != null && frame.enemy().hostile()
                 && frame.enemy().position().add(position.scale(-1)).length() < 65

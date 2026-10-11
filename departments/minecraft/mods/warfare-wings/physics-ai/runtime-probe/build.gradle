@@ -44,6 +44,15 @@ minecraft {
         gameTestServer {
             workingDirectory gameTestRunDirectory
             property 'forge.enabledGameTestNamespaces', mod_id
+            // The immutable distributed IA JAR embeds a production SRG-named
+            // Mixin refmap. ForgeGradle userdev runs Minecraft with official
+            // mappings: translate its target selectors to Mojang names.
+            // Verified from createSrgToMcp/output.srg:
+            // Player/m_36342_()Z -> Player/wantsToStopRiding()Z.
+            // The production mod binary itself is NEVER rewritten.
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile',
+                    layout.buildDirectory.file('createSrgToMcp/output.srg').get().asFile.absolutePath
         }
     }
 }
@@ -154,6 +163,17 @@ tasks.register('verifyLiveAirSensorCone', JavaExec) {
     }
 }
 
+tasks.register('verifyLiveMissionPhases', JavaExec) {
+    group = 'verification'
+    description = 'Deterministic source-only escort, no-ordnance strike egress and latched RTB'
+    dependsOn tasks.named('classes')
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'org.kneekura.techhub.warfarewings.trace.LiveMissionPlanner'
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
 tasks.named('processResources', ProcessResources).configure {
     dependsOn tasks.named('generateEmptyGameTestStructure')
     dependsOn tasks.named('stageRuntimeTacticalAtlas')
@@ -172,6 +192,7 @@ tasks.named('processResources', ProcessResources).configure {
 
 tasks.matching { it.name == 'runGameTestServer' }.configureEach {
     dependsOn tasks.named('prepareRuntimeTrace')
+    dependsOn tasks.named('createSrgToMcp')
 }
 
 tasks.withType(JavaCompile).configureEach {

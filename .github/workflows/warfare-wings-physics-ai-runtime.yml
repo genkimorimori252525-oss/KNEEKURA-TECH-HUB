@@ -62,6 +62,19 @@ jobs:
           if ($env:KNEEKURA_WW_ANCHOR_JAR) { $candidates += $env:KNEEKURA_WW_ANCHOR_JAR }
           $candidates += (Join-Path $HOME 'Downloads/warfare_wings-1.1.4-1.20.1-forge.jar')
           $candidates += (Join-Path $HOME 'Documents/warfare_wings-1.1.4-1.20.1-forge.jar')
+          # The owner may retain the original mod inside a top-level Downloads
+          # collection (rather than in Downloads itself). Search only one
+          # folder level: no expensive recursive disk crawl, no personal path
+          # committed to Git and no silent public-JAR substitution.
+          foreach ($collection in @('Downloads', 'Documents')) {
+            $root = Join-Path $HOME $collection
+            if (-not (Test-Path -LiteralPath $root -PathType Container)) { continue }
+            $folders = @(Get-ChildItem -LiteralPath $root -Directory -ErrorAction SilentlyContinue |
+              Select-Object -First 200)
+            foreach ($folder in $folders) {
+              $candidates += (Join-Path $folder.FullName 'warfare_wings-1.1.4-1.20.1-forge.jar')
+            }
+          }
 
           $source = $null
           foreach ($candidate in $candidates | Select-Object -Unique) {
@@ -180,6 +193,12 @@ jobs:
         run: |
           python ../tools/verify_tactical_runtime_receipts.py run-gametest/ww-physics-traces --summary run-gametest/ww-physics-traces/tactical-runtime-receipts.json
           if ($LASTEXITCODE -ne 0) { throw "Strict Forge tactical receipt validation failed: $LASTEXITCODE" }
+
+      - name: Verify all 24 sequential real-aircraft Forge smoke receipts
+        working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
+        run: |
+          python ../tools/verify_all_aircraft_runtime_receipts.py run-gametest/ww-physics-traces --summary run-gametest/ww-physics-traces/24-aircraft-runtime-smoke.json
+          if ($LASTEXITCODE -ne 0) { throw "All-24 real aircraft smoke receipt verification failed: $LASTEXITCODE" }
 
       - name: Verify real two-aircraft team and same-team GameTest receipts
         working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe

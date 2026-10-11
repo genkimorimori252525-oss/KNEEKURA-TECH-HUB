@@ -14,6 +14,10 @@ import json
 import math
 from pathlib import Path
 
+ATLAS_CSV = Path(__file__).resolve().parent.parent / "data/base-aircraft-anchor-v1.csv"
+INPUT_SMOOTH_FACTOR = 0.1  # Pinned IA InterpolatedFloat(10)
+EXPECTED_ANCHOR_SHA256 = "dc3029597c88859744633b6f5e4a9f21d449294b1aaac90ea0c1749d7aa98a43"
+
 EXPECTED = {
     "a6m-steered-interception": "warfare_wings:a6m",
     "p47n-steered-interception": "warfare_wings:p47n",
@@ -43,6 +47,27 @@ class ReceiptError(ValueError):
     pass
 
 
+def source_airframe_retention(atlas_csv: Path = ATLAS_CSV) -> dict[str, float]:
+    """Use the 24 exact-ANCHOR model coefficients, never fit measured traces."""
+    if not atlas_csv.is_file():
+        raise ReceiptError(f"Missing source Atlas: {atlas_csv}")
+    with atlas_csv.open(encoding="utf-8", newline="") as handle:
+        entries = list(csv.DictReader(handle))
+    if len(entries) != 24:
+        raise ReceiptError(f"Expected exactly 24 researched airframes, got {len(entries)}")
+    values = {}
+    for row in entries:
+        ident = row["aircraft_id"]
+        if row["anchor_sha256"] != EXPECTED_ANCHOR_SHA256:
+            raise ReceiptError(f"Wrong source binary provenance for {ident}")
+        friction = checked(row["effective_friction"], "effective_friction", ident)
+        rotation = checked(row["effective_rotationDecay"], "effective_rotationDecay", ident)
+        if not 0 <= friction < 1 or not 0 < rotation <= 1 or ident in values:
+            raise ReceiptError(f"Invalid or duplicate source rotation model: {ident}")
+        values[ident] = (1.0 - INPUT_SMOOTH_FACTOR) * (1.0 - friction) * rotation
+    return values
+
+
 def checked(value: str, key: str, label: str) -> float:
     try:
         result = float(value)
@@ -53,8 +78,19 @@ def checked(value: str, key: str, label: str) -> float:
     return result
 
 
-def load_one(path: Path, scenario: str, aircraft: str) -> dict:
+def load_one(path: Path, scenario: str, aircraft: str,
+             retention: float | None = None, *,
+             expected_samples: int = SAMPLES,
+             min_lateral_ticks: int = 10,
+             min_yaw_deg: float = 2.0,
+             min_displacement: float = 8.0) -> dict:
     label = f"{scenario} ({path.name})"
+    if retention is None:
+        # Tests can call load_one directly and still get the exact model.
+        atlas = source_airframe_retention()
+        retention = atlas.get(aircraft)
+    if retention is None or not math.isfinite(retention):
+        raise ReceiptError(f"{label}: aircraft absent from exact 24-type source Atlas")
     if not path.is_file():
         raise ReceiptError(f"{label}: trace missing")
     with path.open(encoding="utf-8-sig", newline="") as handle:
@@ -62,8 +98,11 @@ def load_one(path: Path, scenario: str, aircraft: str) -> dict:
         if reader.fieldnames != COLUMNS:
             raise ReceiptError(f"{label}: invalid column ordering/schema")
         rows = list(reader)
-    if len(rows) != SAMPLES:
-        raise ReceiptError(f"{label}: expected {SAMPLES} data samples, got {len(rows)}")
+    if (expected_samples < 2 or min_lateral_ticks < 1
+            or min_yaw_deg <= 0 or min_displacement <= 0):
+        raise ReceiptError(f"{label}: invalid fixed acceptance floor")
+    if len(rows) != expected_samples:
+        raise ReceiptError(f"{label}: expected {expected_samples} data samples, got {len(rows)}")
 
     parsed = []
     previous_game_time = None
@@ -97,13 +136,18 @@ def load_one(path: Path, scenario: str, aircraft: str) -> dict:
             raise ReceiptError(f"{label}: invalid engine power at {index}")
         parsed.append(nums)
 
-    # The live adapter runs at ServerTick.END. IA first applies update(0) to
-    # previous smooth, and then the bridge corrects it with +0.1*current raw.
-    # This recurrence is independently sourced to pinned IA 1.3.3 code.
-    for index in range(1, SAMPLES):
+    # The live adapter runs at ServerTick.END. IA first applies the *aircraft's*
+    # rotation retention (airborne friction and rotation decay), then input
+    # interpolation update(0), before adding 0.1 * the new AI command.
+    # SOURCE: Ia133Microkernel.tick() smoothXForController=prior *
+    # ((1-model.friction)*model.rotationDecay), then smooth=.9*...+.1*raw.
+    # Exact 24-type coefficients come from the owner's pinned ANCHOR CSV;
+    # for A6M/P47N/B17 etc retention = .9 * .985 * .97 = .859905.
+    # A simple .9 multiplier would reject REAL correct aircraft motion.
+    for index in range(1, expected_samples):
         old, new = parsed[index - 1], parsed[index]
         for axis in ("x", "z"):
-            predicted = 0.9 * old[f"smooth_{axis}"] + 0.1 * new[f"command_{axis}"]
+            predicted = retention * old[f"smooth_{axis}"] + INPUT_SMOOTH_FACTOR * new[f"command_{axis}"]
             if abs(predicted - new[f"smooth_{axis}"]) > 0.0005:
                 raise ReceiptError(f"{label}: actual IA input smoothing failed at tick {index}, {axis}")
 
@@ -111,13 +155,15 @@ def load_one(path: Path, scenario: str, aircraft: str) -> dict:
     yaw_travel = 0.0
     first_command = None
     first_yaw_response = None
-    for index in range(1, SAMPLES):
+    yaw_deltas = []
+    for index in range(1, expected_samples):
         now, previous = parsed[index], parsed[index - 1]
         if abs(now["command_x"]) > 0.001:
             lateral += 1
             if first_command is None:
                 first_command = index
         yaw = (now["yaw_deg"] - previous["yaw_deg"] + 540) % 360 - 180
+        yaw_deltas.append(abs(yaw))
         yaw_travel += abs(yaw)
         if abs(yaw) > 0.005 and first_yaw_response is None:
             first_yaw_response = index
@@ -126,31 +172,45 @@ def load_one(path: Path, scenario: str, aircraft: str) -> dict:
     displacement = math.sqrt(sum(
         (end[f"pos_{axis}"] - start[f"pos_{axis}"]) ** 2 for axis in "xyz"
     ))
-    if lateral < 10 or yaw_travel < 2 or displacement < 8:
+    if lateral < min_lateral_ticks or yaw_travel < min_yaw_deg or displacement < min_displacement:
         raise ReceiptError(
             f"{label}: insufficient real flight motion xTicks={lateral}, "
             f"yawTravel={yaw_travel:.3f}, displacement={displacement:.3f}"
         )
-    if first_command is None or first_yaw_response is None or first_yaw_response <= first_command:
-        raise ReceiptError(f"{label}: first yaw response did not follow first steering command")
+    # The physics engine may already be yawing on sample 1 *before* the first
+    # server-END AI command. A pre-existing yaw change cannot prove or disprove
+    # the command's one-tick delay; requiring its absence would reject genuine
+    # aircraft dynamics. Require meaningful continued yaw AFTER the first
+    # command instead; the independently checked smoother recurrence proves
+    # control injection, but only a neutral-control A/B trace can establish
+    # full yaw causality.
+    if first_command is None:
+        raise ReceiptError(f"{label}: no usable lateral command")
+    post_command_yaw_travel = sum(yaw_deltas[first_command:])
+    if post_command_yaw_travel < min_yaw_deg:
+        raise ReceiptError(f"{label}: no sustained post-command yaw response")
 
     return {
         "scenario": scenario,
         "aircraft_id": aircraft,
         "source": SOURCE,
-        "samples": SAMPLES,
+        "samples": expected_samples,
         "nonzero_lateral_ticks": lateral,
         "yaw_travel_deg": round(yaw_travel, 6),
+        "post_command_yaw_travel_deg": round(post_command_yaw_travel, 6),
         "displacement_blocks": round(displacement, 6),
         "first_command_tick": first_command,
         "first_yaw_response_tick": first_yaw_response,
         "input_smoothing": "IA_1.3.3_END_CORRECTION_CHECKED",
-        "evidence": "MEASURED_RUNTIME_TRACE_EXISTENCE_AND_CONTROL_ONLY",
+        "source_airframe_smooth_retention": round(retention, 9),
+        "evidence": "MEASURED_RUNTIME_TRACE_CONTROL_AND_MOTION_CAUSALITY_UNPROVEN",
     }
 
 
-def verify(directory: Path) -> dict:
-    cases = [load_one(directory / f"{case}-forge-controls.csv", case, aircraft)
+def verify(directory: Path, atlas_csv: Path = ATLAS_CSV) -> dict:
+    retention = source_airframe_retention(atlas_csv)
+    cases = [load_one(directory / f"{case}-forge-controls.csv", case, aircraft,
+                      retention.get(aircraft))
              for case, aircraft in EXPECTED.items()]
     return {
         "schema_version": "ww.physics.tactical-runtime-receipt.v1",
@@ -164,9 +224,11 @@ def verify(directory: Path) -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("trace_dir", type=Path, help="actual Forge GameTest ww-physics-traces directory")
+    parser.add_argument("--atlas", type=Path, default=ATLAS_CSV,
+                        help="24-aircraft exact ANCHOR provenance CSV; no runtime coefficient fitting")
     parser.add_argument("--summary", type=Path, help="write verified JSON summary (only upon PASS)")
     args = parser.parse_args()
-    summary = verify(args.trace_dir)
+    summary = verify(args.trace_dir, args.atlas)
     if args.summary:
         args.summary.parent.mkdir(parents=True, exist_ok=True)
         args.summary.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")

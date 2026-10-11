@@ -1,11 +1,16 @@
 package org.kneekura.techhub.warfarewings.trace;
 
 /**
- * The exact 1.3.3 non-player input reset compensation. Isolated from Forge so
- * that timing/polarity assumptions remain executable without private mod jars.
+ * Exact IA 1.3.3 source non-player input correction, including the preceding
+ * airborne rotation friction. Isolated from Forge so all phase assumptions
+ * stay executable without private binary dependencies.
  */
 final class IaNonPlayerInputBridgeMath {
     static final float INPUT_WEIGHT = 0.1f; // IA VehicleEntity.getInputInterpolationSteps()==10
+    static final float FRICTION = 0.015f; // supplied source Atlas effective friction
+    static final float ROTATION_DECAY = 0.97f; // pinned IA VehicleStat.ROTATION_DECAY
+    static final float AIRBORNE_HOST_RETENTION =
+            (1f - FRICTION) * ROTATION_DECAY * (1f - INPUT_WEIGHT);
 
     private IaNonPlayerInputBridgeMath() {}
 
@@ -24,24 +29,32 @@ final class IaNonPlayerInputBridgeMath {
     public static void main(String[] args) {
         float smoothAtStart = 0;
         float[] controls = {1, 1, 0, -1, 0, 0};
-        float[] expectedAfter = {.1f, .19f, .171f, .0539f, .04851f, .043659f};
+        // Source: InventoryVehicleEntity.applyFriction()
+        //   rf = (1-FRICTION)*ROTATION_DECAY;
+        //   pressingInterpolatedX/Z.decay(0,1-rf);
+        // Then VehicleEntity.tick() update(0), and our END correction adds
+        // +0.1*command. Thus actual source/real runtime coefficient is
+        // 0.9*0.985*0.97=0.859905 rather than 0.9.
+        float[] expectedAfter = {.1f, .1859905f, .159934161f,
+                .037528185f, .032270674f, .027749714f};
         float[] consumedAtController = new float[controls.length];
         for (int tick = 0; tick < controls.length; tick++) {
             // VehicleEntity.updateController consumes previous END injection.
             consumedAtController[tick] = smoothAtStart;
             // VehicleEntity.tickPilot resets to zero, then tick ends with update(0).
-            float afterHostUpdate = smoothAtStart * .9f;
+            float afterHostUpdate = smoothAtStart * AIRBORNE_HOST_RETENTION;
             smoothAtStart = correctZeroedSmooth(afterHostUpdate, controls[tick]);
             if (Math.abs(smoothAtStart - expectedAfter[tick]) > 0.000002f)
                 throw new AssertionError("IA 10-step smoothing diverged at tick " + tick);
         }
         if (consumedAtController[0] != 0 || consumedAtController[1] < .099f
-                || consumedAtController[2] < .189f)
+                || Math.abs(consumedAtController[2] - .1859905f) > .000002f)
             throw new AssertionError("END injection violated one-physics-tick lag");
         if (correctZeroedSmooth(.45f, -1) >= .45f
                 || correctZeroedSmooth(-.45f, 1) <= -.45f)
             throw new AssertionError("IA steering command polarity");
         System.out.println("IaNonPlayerInputBridgeMath passed: 6 x 20Hz ticks, "
-                + "smoothing=10, one-tick control lag; Forge binary NOT_RUN");
+                + "airborne retention=" + AIRBORNE_HOST_RETENTION
+                + ", one-tick control lag; source-only arithmetic");
     }
 }

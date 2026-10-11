@@ -1,6 +1,8 @@
 package org.kneekura.techhub.warfarewings.physics;
 
 import java.nio.file.Path;
+import java.util.List;
+import java.util.Map;
 import static org.kneekura.techhub.warfarewings.physics.Ia133Microkernel.*;
 
 public final class StrikeSimulationSelfTest {
@@ -81,10 +83,90 @@ public final class StrikeSimulationSelfTest {
         yes(shortRun.firstWindowTick()==-1,"distant target does not earn attack window");
         yes(shortRun.crossedTargetPlaneTick()==-1,"cannot cross target plane after only 12 ticks");
     }
+    private static void longReturnDiagnostic(Path atlas) throws Exception {
+        var b17=fly(atlas,"b17-extended","b17",TacticalAirAI.Mission.LEVEL_BOMB,170,145,.9,2400);
+        var g4m=fly(atlas,"g4m-extended","g4m",TacticalAirAI.Mission.TORPEDO,30,160,.9,2400);
+        System.out.println("STRIKE_LONG_RTB B17: phase="+b17.terminalPhase()
+                +" tick="+b17.ticks()+" homeTick="+b17.firstHomeTick()
+                +" finalDistance="+b17.distanceToHome()+" terrainTouch="+b17.groundTouchTicks());
+        System.out.println("STRIKE_LONG_RTB G4M: phase="+g4m.terminalPhase()
+                +" tick="+g4m.ticks()+" homeTick="+g4m.firstHomeTick()
+                +" finalDistance="+g4m.distanceToHome()+" terrainTouch="+g4m.groundTouchTicks());
+        yes(b17.terminalPhase()==StrikeSimulation.Phase.COMPLETE
+                && g4m.terminalPhase()==StrikeSimulation.Phase.COMPLETE
+                && !b17.timedOut() && !g4m.timedOut(),
+                "extended duration produces actual observed home arrival for both strike types");
+        yes(b17.firstHomeTick()==b17.ticks() && g4m.firstHomeTick()==g4m.ticks(),
+                "home arrival event is recorded on the actual physical tick");
+        yes(b17.distanceToHome()<=StrikeSimulation.Geometry.LAB.homeRadius()
+                && g4m.distanceToHome()<=StrikeSimulation.Geometry.LAB.homeRadius(),
+                "both aircraft physically enter unmodified configured 45-block home radius");
+        yes(b17.groundTouchTicks()==0 && g4m.groundTouchTicks()==0,
+                "extended attack-to-return flight has no ground contact");
+        yes(b17.phaseTicks().containsKey(StrikeSimulation.Phase.EGRESS)
+                && g4m.phaseTicks().containsKey(StrikeSimulation.Phase.EGRESS)
+                && b17.phaseTicks().containsKey(StrikeSimulation.Phase.RETURN_HOME)
+                && g4m.phaseTicks().containsKey(StrikeSimulation.Phase.RETURN_HOME),
+                "real source ticks include the outbound egress and actual homeward flight phases");
+    }
+    private static void integratedSquadronReturn(Path atlas) throws Exception {
+        World sameWorld = new FlatWorld(0);
+        Vec3 takeoff=new Vec3(0,170,0), goal=new Vec3(0,0,145);
+        Vec3 home=new Vec3(0,170,-200);
+        Vec3 velocity=new Vec3(0,0,0.9);
+        var bomber=new SquadronCommand.AircraftSpec("bomber",
+                "warfare_wings:b17","blue","bombers",0,
+                TacticalAirAI.Mission.LEVEL_BOMB,null,null,
+                takeoff,velocity,0,goal,home,1,1,0);
+        var escortA=new SquadronCommand.AircraftSpec("escortA",
+                "warfare_wings:f4u","blue","guards",0,
+                TacticalAirAI.Mission.ESCORT,"bomber",null,
+                new Vec3(-65,190,45),new Vec3(0,0,1),0,goal,home,1,1,0);
+        var escortB=new SquadronCommand.AircraftSpec("escortB",
+                "warfare_wings:p47n","blue","guards",1,
+                TacticalAirAI.Mission.ESCORT,"bomber",null,
+                new Vec3(65,190,45),new Vec3(0,0,1),0,goal,home,1,1,0);
+        var scenario=new CombatSimulation.Scenario("actual-squadron-strike",
+                List.of(bomber,escortA,escortB),1600,50,95,
+                Map.of("escortA","bomber","escortB","bomber"),
+                sameWorld,SquadronCommand.Sensors.DEFAULT);
+        var plan=new StrikeSimulation.Plan("inside-squadron",
+                bomber.aircraftTypeId(),bomber.mission(),takeoff,velocity,0,
+                goal,home,0,sameWorld,1600,StrikeSimulation.Geometry.LAB);
+        var outcome=CombatSimulation.runWithStrikePlans(atlas,scenario,Map.of("bomber",plan));
+        var phase=outcome.strikeStates().get("bomber");
+        System.out.println("STRIKE_SQUADRON phase="+phase.phase()
+                +" window="+phase.firstWindowTick()
+                +" crossing="+phase.crossedTargetTick()
+                +" RTB="+phase.reachedHomeTick()
+                +" stages="+phase.phaseTicks()
+                +" safety="+outcome.combat().failedOperationalGates());
+        yes(outcome.combat().simulatedTicks()==1600
+                && outcome.combat().units().size()==3,
+                "strike bomber and both guards share one 1600-tick physical snapshot");
+        yes(phase.firstWindowTick()>0 && phase.crossedTargetTick()>phase.firstWindowTick(),
+                "shared-source bomber detects a physically crossed attack waypoint");
+        yes(phase.phaseTicks().getOrDefault(StrikeSimulation.Phase.EGRESS,0)>0
+                && phase.phaseTicks().getOrDefault(StrikeSimulation.Phase.RETURN_HOME,0)>0,
+                "shared mission controller issues real egress and homeward pilot commands");
+        yes(phase.phase()==StrikeSimulation.Phase.COMPLETE
+                    && phase.reachedHomeTick()>phase.crossedTargetTick()
+                    && phase.reachedHomeTick()<1600,
+                "same physically flown escorted bomber reaches home after attack crossing");
+        yes(outcome.combat().units().get("bomber").groundedTicks()==0,
+                "joined bomber remains airborne throughout measured integration");
+        yes(outcome.combat().passesSafetyGates()
+                    && outcome.combat().failedOperationalGates().isEmpty(),
+                "no hostile plus two actual physical escorts maintain unchanged body-safety gates");
+        for (var pair : outcome.combat().pairs().values())
+            yes(pair.closestApproachBlocks()>=6 && pair.dangerouslyCloseTicks()==0,
+                    "joined bomber and escorts never occupy the same six-block collision envelope");
+    }
     public static void main(String[] args) throws Exception {
         if(args.length!=1)throw new IllegalArgumentException("anchor CSV required");
         Path atlas=Path.of(args[0]);
-        bombing(atlas);torpedo(atlas);dive(atlas);boundedTimeout(atlas);
+        bombing(atlas);torpedo(atlas);dive(atlas);boundedTimeout(atlas);longReturnDiagnostic(atlas);
+        integratedSquadronReturn(atlas);
         System.out.println("StrikeSimulationSelfTest PASS: "+checks+" assertions, geometric phases only");
     }
 }

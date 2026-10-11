@@ -54,10 +54,14 @@ public final class ThrottleTraceGameTests {
 
         helper.succeedWhen(() -> {
             String failure = RuntimeTraceManager.failure();
-            if (failure != null) throw new IllegalStateException("Runtime trace failed: " + failure);
+            if (failure != null) {
+                LiveSquadronGameTests.cleanupTestEntities(aircraft, pilot);
+                throw new IllegalStateException("Runtime trace failed: " + failure);
+            }
             if (!RuntimeTraceManager.complete()) {
                 throw new GameTestAssertException("A6M throttle trace still running");
             }
+            LiveSquadronGameTests.cleanupTestEntities(aircraft, pilot);
         });
     }
 }

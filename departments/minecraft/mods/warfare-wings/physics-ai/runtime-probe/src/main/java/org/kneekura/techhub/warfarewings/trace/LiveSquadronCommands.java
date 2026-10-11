@@ -65,6 +65,12 @@ final class LiveSquadronCommands {
                         .then(Commands.argument("aircraft", EntityArgument.entity())
                                 .then(Commands.argument("leader", EntityArgument.entity())
                                         .executes(LiveSquadronCommands::leader))))
+                .then(Commands.literal("rtb")
+                        .then(Commands.argument("aircraft", EntityArgument.entity())
+                                .executes(LiveSquadronCommands::returnCraft)))
+                .then(Commands.literal("rtbteam")
+                        .then(Commands.argument("team", StringArgumentType.word())
+                                .executes(LiveSquadronCommands::returnTeam)))
                 .then(Commands.literal("stopcraft")
                         .then(Commands.argument("aircraft", EntityArgument.entity())
                                 .executes(LiveSquadronCommands::stopCraft)))
@@ -263,6 +269,38 @@ final class LiveSquadronCommands {
         return 1;
     }
 
+    private static int returnCraft(CommandContext<CommandSourceStack> ctx) throws com.mojang.brigadier.exceptions.CommandSyntaxException {
+        Entity plane = EntityArgument.getEntity(ctx, "aircraft");
+        try {
+            if (plane.level() != ctx.getSource().getLevel())
+                throw new IllegalArgumentException("RTB aircraft is in another dimension");
+            RuntimeTacticalPilot.requestReturn(plane.getUUID());
+            ctx.getSource().sendSuccess(() -> Component.literal("RTB route latched for " + plane.getUUID()
+                    + "; steering home without automated landing"), false);
+            return 1;
+        } catch (IllegalArgumentException ex) {
+            ctx.getSource().sendFailure(Component.literal(ex.getMessage()));
+            return 0;
+        }
+    }
+
+    private static int returnTeam(CommandContext<CommandSourceStack> ctx) {
+        String requested = team(ctx, "team");
+        int changed = 0;
+        for (var s : RuntimeTacticalPilot.liveStatus()) {
+            if (s.team().equals(requested)
+                    && ctx.getSource().getLevel().getEntity(s.aircraft()) != null) {
+                RuntimeTacticalPilot.requestReturn(s.aircraft());
+                changed++;
+            }
+        }
+        final int total = changed;
+        ctx.getSource().sendSuccess(() -> Component.literal("RTB home route assigned to "
+                + total + " aircraft on team " + requested
+                + "; no automatic landing"), false);
+        return total;
+    }
+
     private static int stopTeam(CommandContext<CommandSourceStack> ctx) {
         String requested = team(ctx, "team");
         int stopped = 0;
@@ -290,6 +328,7 @@ final class LiveSquadronCommands {
                     + s.aircraft() + " team=" + s.team() + " mission=" + s.mission()
                     + " target=" + (s.target() == null ? s.hostileTeam() : s.target())
                     + " station_slot=" + s.stationSlot()
+                    + " phase=" + s.phase()
                     + " visible_ticks=" + s.observedTicks() + "/" + s.elapsedTicks()
                     + " candidate_checks=" + s.sensorCandidates()
                     + " rejected=" + s.blockedContacts()), false);

@@ -31,6 +31,36 @@ final class IaRuntimeAccess {
     static double health(Entity aircraft) { return number(invoke(aircraft, "getHealth")); }
 
     /**
+     * getFuelUtilization() is NOT remaining fuel: pinned EngineVehicle.java
+     * 269-290 returns active-boiler fraction times 0.75 during LOW_ON_FUEL.
+     * The actual private EngineVehicle.fuel[] contains fuel ticks per boiler;
+     * TARGET_FUEL=1000 and LOW_FUEL=900 in the pinned 1.3.3 source.
+     *
+     * Use the minimum normalized boiler reserve as a conservative RTB signal;
+     * when fuel consumption is intentionally disabled in calibration tests,
+     * reserve is 1.0. This is an engineering reserve indicator, not precise
+     * minutes-to-empty, and is never guessed from engine thrust utilization.
+     */
+    static double remainingFuelReserve(Entity aircraft) {
+        try {
+            Class<?> configClass = Class.forName("immersive_aircraft.config.Config");
+            Object config = configClass.getMethod("getInstance").invoke(null);
+            double consumption = number(findField(configClass, "fuelConsumption").get(config));
+            if (consumption == 0) return 1.0;
+            Object counters = findField(aircraft.getClass(), "fuel").get(aircraft);
+            if (!(counters instanceof int[] values))
+                throw new IllegalStateException("Pinned IA EngineVehicle.fuel is not int[]");
+            if (values.length == 0) return 1.0;
+            double reserve = 1.0;
+            for (int fuelTicks : values)
+                reserve = Math.min(reserve, Math.max(0, Math.min(1.0, fuelTicks / 1000.0)));
+            return reserve;
+        } catch (ReflectiveOperationException e) {
+            throw new IllegalStateException("Pinned IA fuel reserve API is unavailable", e);
+        }
+    }
+
+    /**
      * IA 1.3.3 source commit 550b38d: VehicleEntity.tickPilot() calls
      * setInputs(0,0,0) on a server-side ArmorStand pilot *before* the
      * controller, and at the end of tick() calls interpolated.update(0).
