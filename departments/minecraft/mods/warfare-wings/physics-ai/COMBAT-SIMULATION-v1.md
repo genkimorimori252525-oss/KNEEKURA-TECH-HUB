@@ -25,10 +25,10 @@ limit, starting geometries and observation constraints are UNCHANGED.
 | Scenario | Legacy source engine20 | Original WW bytecode engine response | Result |
 |---|---:|---:|---|
 | 2v2 opposing A6M/Bf109 closest | 51.167 blocks | 36.922 blocks | Both satisfy strict all-six-pair ≥6-block clearance |
-| B-17 original aft guard, enemy within 95 blocks | Current legacy engine20: **49 / 190 ticks** | **63 / 190 ticks** (V3 original: 92) | **FAILED** escort protection, but V3 is measurably improved |
-| B-17 original aft guard, closest threat | Current legacy: **64.458 blocks** | **77.044 blocks** (V3 original: 40.913) | Still **FAILED** |
-| B-17 forward-prepared guard, intrusion | Earlier source: 0 / 190 ticks | **13 / 190 ticks** (V3 original: 30) | V3 remains **FAILED**; legacy prepared success **does not generalize** |
-| B-17 forward-prepared guard, closest threat | Current legacy: **120.810 blocks** | **94.017 blocks** (V3 original: 77.643) | Still **FAILED**, below the unchanged 95-block gate |
+| B-17 original aft guard, enemy within 95 blocks | Current legacy engine20: **51 / 190 ticks** | **59 / 190 ticks** (V3 original: 92) | **FAILED** protection; actual breach remains |
+| B-17 original aft guard, closest threat | Current legacy: **65.510 blocks** | **79.128 blocks** (V3 original: 40.913) | Still **FAILED** |
+| B-17 original forward-prepared guard, intrusion | Current legacy: **0 / 190 ticks** | **0 / 190 ticks** (V3 original: 30) | **PASS only for this exact prepared-start 95-block source geometry** |
+| B-17 original forward-prepared guard, closest threat | Current legacy: **122.165 blocks** | **96.828 blocks** (V3 original: 77.643) | **PASS**; margin **1.828 blocks** above unchanged 95b |
 
 The V3 source engine-response model is a nontrivial operational constraint:
 the exact per-airframe source reaction delays effective thrust during the first
@@ -50,16 +50,20 @@ and estimated achievable fighter travel time, **not** the 95-block test gate.
 In source V3, an escort assigned at tick 8 still initially flies behind
 its protectee, and no amount of assigning targets itself stops a live fighter:
 the same aft-deployed starting geometry remains a stringent known failure.
-The updated bomber evasive maneuver uses the observed hostile's actual
-course to choose a stable lateral escape lane instead of revolving the waypoint
-with its own low-authority yaw. These changes reduce the V3 violation but
-do not create an artificial weapon hit or enemy aircraft destruction.
-No kill, successful air defence, fired projectile or real Minecraft
-multiplayer battle is implied. Even the prepared forward fighter placement
-**fails** the unchanged gate with original response timing, even after these
-improvements; the earlier V2 success remains a separate reproducible source
-experiment, not a promise. Both improved V3 cases are strictly
-`ESCORT_PROTECTION_BREACHED` under the unmodified operational gates.
+The updated bomber evasive maneuver uses the personally observed hostile's
+own course to choose a stable lateral escape lane and a physically controlled
+**65-block upward steering waypoint request**. The actual aircraft climbs
+only through filtered pilot inputs, source physics, gravity and speed, never
+instantaneous position changes. The bomber's observed-inbound defense supports
+both LEVEL_BOMB and the real Forge planner's PATROL mission. No unseen target
+can trigger it; inert hostiles do not satisfy its approaching-contact rule,
+and low-fuel withdrawal remains higher priority.
+Under exact-WW source response the unchanged forward-prepared V3 flight
+reaches 0/190 intrusion ticks, but the unchanged aft flight STILL FAILS with
+59/190 ticks. There is no fake kill, fired weapon, or proven real-Forge
+combat parity; the real GameTest must establish that separately.
+The aft-deployed aircraft still records `ESCORT_PROTECTION_BREACHED`
+under those same 95-block operational gates.
 
 ## Combat diagnostics
 
@@ -97,7 +101,7 @@ A fixed horizon returns `timedOut=true` meaning **measurement budget exhausted**
 
 An arriving threat to a **bomber** now produces an early navigation abort only when that bomber personally has a sensor contact whose *own observed velocity* is approaching and whose relative trajectory is closing. A merely static hostile target in front of a moving bomber does not cause a false incoming-threat alarm. The current avoidance command uses actual IA-filtered steering and a lateral direction away from the observed threat; it cannot teleport the bomber or guarantee recovery of its bombing route. The `Memory` maneuver supplies bounded continuation against a temporarily turning threat while preserving fuel withdrawal, terrain priority and other original role checks. This emergency maneuver can protect the asset geometrically while significantly delaying the strike objective.
 
-The explicit `failedOperationalGates` codes report `BODY_SEPARATION_LT6:unitA:unitB`, `ESCORT_PROTECTION_BREACHED:asset:intrusion_ticks=N`, and `GROUND_CONTACT:unit`. A scenario's `passesSafetyGates()` tests these geometric conditions only: it is never a simulated combat victory. The selected 2v2 geometry now **PASSES** all six pair separation gates; the mixed B-17 escort case still **FAILS** its protection gate despite aircraft issuing defensive orders.
+The explicit `failedOperationalGates` codes report `BODY_SEPARATION_LT6:unitA:unitB`, `ESCORT_PROTECTION_BREACHED:asset:intrusion_ticks=N`, and `GROUND_CONTACT:unit`. A scenario's `passesSafetyGates()` tests these geometric conditions only; it is never a simulated combat victory. The V3 2v2 **PASSES** all six pair separation gates; the unchanged aft-deployed B-17 flight remains **FAILED**, while the forward-prepared V3 scenario geometrically **PASSES** the identical 95-block gate.
 
 ## Strike phases and geometry
 
@@ -141,7 +145,7 @@ java -cp $classes org.kneekura.techhub.warfarewings.physics.StrikeSimulationSelf
 if ($LASTEXITCODE -ne 0) { throw 'Strike test failed' }
 ```
 
-## Measured source-only regressions (HEAD ca711a2, independent of real Forge parity)
+## Measured source-only regressions (HEAD 7c7ed2d baseline, worker-2 working tree)
 
 These illustrative outputs are observed source simulation telemetry; assertions test physical relationships and safety limits instead of requiring one specific floating-point trace.
 
@@ -149,8 +153,8 @@ These illustrative outputs are observed source simulation telemetry; assertions 
 |---|---|---|
 | A6M vs P-47N, 150 ticks | Closest approach ~**39.80 blocks**, from 90-block initial separation | Both pilots detect and avoid the closing aircraft; no touchdown |
 | 2v2, 160 ticks | Blue wing pair closest ~**69.76 blocks**; opposing A6M/Bf 109 closest ~**51.17 blocks**, **zero ticks under 6 blocks across all six aircraft pairs** | **PASS** for the selected 2v2 source-body-separation gate. Other starting geometries are not guaranteed |
-| B-17 + F4U/P47N **aft-deployed cover** vs A6M, 190 ticks | Fighters start x±65/z−20 behind bomber. First assignment **tick 8**, enemy crosses unchanged 95-block corridor at **tick 54**, exits at **103**. **50 intrusion ticks**, minimum enemy-to-B-17 **64.62 blocks**. **141 bomber defensive-abort ticks** and final target distance **249.69 blocks** | **FAILED: ESCORT_PROTECTION_BREACHED** despite **355 pilot-assignment ticks**. Prior code: 136 intrusion ticks and closest14.46; emergency evasive diversion shortens exposure but severely delays objective progress. Escort separation and threat contact alone never count as a kill |
-| B-17 + F4U/P47N **forward-prepared cover** vs same A6M, 190 ticks | Identical aircraft, 95-block safety gate, opponent, pilot inputs and source physics; only starting fighter stations changed to x±27/z+115. **0 intrusion ticks**, hostile closest **120.52 blocks**, all pairs ≥6 blocks, first assignment tick1; final bomber objective distance **182.06 blocks** | **SOURCE GEOMETRIC PROTECTION PASS for this prepared-start scenario only.** Forward deployment is a planning precondition; the rear-deployed mission remains explicitly FAILED. Neither result is a simulated weapon hit or broad historical escort effectiveness claim |
+| B-17 + F4U/P47N **aft-deployed cover** vs A6M, 190 ticks | Legacy reaction: **51 intrusion ticks**, min hostile distance **65.510 blocks**; original-WW reaction: **59 intrusion ticks**, min **79.128 blocks**. Starts x±65/z−20, first V3 assignment tick8, V3 intrusion tick105–163, final bomber objective distance **267.254 blocks** | **FAILED: ESCORT_PROTECTION_BREACHED** despite 366 escort-assignment pilot-ticks. V3 predecessor was 92 ticks and 40.913b; source maneuver still cannot defend unchanged perimeter |
+| B-17 + F4U/P47N **forward-prepared cover** vs same A6M, 190 ticks | Same x±27/z+115 original forward starts, 95-block gate, aircraft and source V3 reaction: **0 intrusion ticks**, closest hostile **96.828 blocks** (previous V3 30 ticks / 77.643b), first assignment tick1; B-17 final objective distance **226.082 blocks** | **PASS for this exact physically flown V3 prepared-start scenario**, margin 1.828b above unchanged 95b. Aft start remains FAILED. No simulated projectile/hit/kill |
 | B-17 level-bomb geometric pass | Window around tick **176**, target plane around **248**; return phase entered; min terrain clearance ~**164.78 blocks** | Strike geometry achieved, **return incomplete at scenario timeout** |
 | G4M sea run | Window around tick **144**, minimum sea clearance ~**21.94 blocks**; egress and return phase entered | Safe source-only sea-surface corridor, **no torpedo release** |
 | Ju 87 dive recovery | Pull-out commanded around tick **92**, altitude recovery around tick **410**, min clearance ~**49.48 blocks** | Physical climb recovery observed, no ground contact; **early abort earns no weapon window** |
@@ -158,7 +162,7 @@ These illustrative outputs are observed source simulation telemetry; assertions 
 | Integrated B-17 + two escort airplanes, 1600 ticks (no hostile) | ONE shared `SquadronCommand` physical snapshot; B-17 attack window tick176, target-plane crossing tick248, actual home arrival tick1068, no 6-block pair collisions | **Source mission phase integration PASS**. Escort and strike aircraft are physically co-simulated. No evidence that a hostile will be defeated or protected target will survive |
 | Forced short horizon | No target crossing / window | Explicit `TIMEOUT`, not a fictional mission victory |
 
-For the two escort deployments, final `SOURCE_MICROKERNEL` speeds (only a speed/energy-retention **proxy**, not measured historical kinetic energy) were: aft F4U **31.973 b/s**, P-47N **35.999 b/s**, versus prepositioned F4U **26.879 b/s**, P-47N **37.599 b/s**. Closest F4U-to-P-47N distance remained **25.625** / **21.898 blocks** respectively. Both flights retain valid 6-block safety separation, so the contrast cannot be dismissed as one scenario exploiting unmodeled body overlap. The prepositioned screen's closest guard–hostile approach was about **13.676 blocks**; none of these source observations represents a weapon hit.
+With V3 original engine-response the designated 2v2's minimum separation across all **six pairs** remains **36.922 blocks**, with zero under-six-block samples. The unchanged forward-prepared B-17 passes geometric defense only through **ordinary integrated source yaw/pitch/thrust**, including a lateral and upward escape waypoint for a genuinely observed inbound enemy. The B-17 still progresses toward the source mission objective (final 226.082b distance versus initial 280b). The source cannot claim a weapon hit or victory. The gate margin is modest and should be checked against Forge-calibrated drift, not assumed universally valid.
 
 A further all-Atlas regression stages all **24** types at widely separated locations, integrates actual control ticks and asserts movement, ground clearance and finite distances for all **276** unique aircraft pairs.
 

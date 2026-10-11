@@ -1,0 +1,108 @@
+#!/usr/bin/env python3
+"""Compare four real 401-sample neutral-control aircraft traces with source V3.
+
+Requires actual Forge GameTest receipts and compiled Java 17 source classes.
+Every aircraft is measured with the *same* envelope, not a historical flight
+performance experiment. Reports drift, never invents a physical-parity PASS.
+"""
+
+from __future__ import annotations
+
+import argparse
+import csv
+import json
+import subprocess
+from pathlib import Path
+
+from compare_traces import compare, load_trace
+
+AIRFRAMES = ("p47n", "spitfire", "il2", "b17")
+EXPECTED_SHA256 = "dc3029597c88859744633b6f5e4a9f21d449294b1aaac90ea0c1749d7aa98a43"
+
+
+def _validate_atlas(anchor_csv: Path) -> None:
+    with anchor_csv.open(encoding="utf-8-sig", newline="") as stream:
+        records = list(csv.DictReader(stream))
+    if len(records) != 24 or len({row["aircraft_id"] for row in records}) != 24:
+        raise ValueError("Expected exactly 24 unique pinned source airframes")
+    if any(row["anchor_sha256"] != EXPECTED_SHA256 for row in records):
+        raise ValueError("Original owner WW anchor SHA drift")
+    for airframe in AIRFRAMES:
+        if sum(row["aircraft_id"] == f"warfare_wings:{airframe}" for row in records) != 1:
+            raise ValueError(f"Source airframe unavailable: {airframe}")
+
+
+def verify(trace_dir: Path, anchor_csv: Path, java: str, classes: Path,
+           report_dir: Path) -> dict:
+    _validate_atlas(anchor_csv)
+    # Check all four receipts before producing any generated output. This
+    # prevents the source-only simulator from masquerading as runtime input.
+    for airframe in AIRFRAMES:
+        scenario = airframe + "-throttle-step-v1"
+        path = trace_dir / f"{scenario}-runtime.csv"
+        rows = load_trace(path, "minecraft_runtime")
+        if len(rows) != 401 or rows[0]["scenario_id"] != scenario:
+            raise ValueError(f"{scenario}: missing/incomplete 401-tick runtime recording")
+        if any(row["aircraft_id"] != f"warfare_wings:{airframe}" for row in rows):
+            raise ValueError(f"{scenario}: mismatched actual airframe")
+        if rows[0]["tick"] != 0 or rows[-1]["tick"] != 400:
+            raise ValueError(f"{scenario}: runtime tick horizon incomplete")
+    report_dir.mkdir(parents=True, exist_ok=True)
+    cases = []
+    for airframe in AIRFRAMES:
+        scenario = airframe + "-throttle-step-v1"
+        source = report_dir / f"{scenario}-reaction-source.csv"
+        subprocess.run([java, "-cp", str(classes),
+                        "org.kneekura.techhub.warfarewings.physics.ReactionCalibrationTraceMain",
+                        str(anchor_csv.resolve()), f"warfare_wings:{airframe}",
+                        str(source.resolve())], check=True)
+        runtime = trace_dir / f"{scenario}-runtime.csv"
+        calibrated = compare(source, runtime, report_dir / f"{airframe}-calibration")
+        metrics = calibrated["metrics"]
+        cases.append({
+            "aircraft_id": f"warfare_wings:{airframe}",
+            "scenario_id": scenario,
+            "runtime_samples": calibrated["samples"],
+            "speed_rmse_bps": metrics["speed_error_bps"]["rmse"],
+            "speed_final_absolute_error_bps": metrics["speed_error_bps"]["final_abs"],
+            "engine_power_rmse": metrics["engine_power_error"]["rmse"],
+            "yaw_rmse_deg": metrics["yaw_error_deg"]["rmse"],
+            "pitch_rmse_deg": metrics["pitch_error_deg"]["rmse"],
+            "position_origin_aligned_final_drift_blocks":
+                metrics["position_origin_aligned_drift_blocks"]["final_abs"],
+            "status": "CALIBRATION_ONLY_NO_ACCEPTANCE_THRESHOLD",
+        })
+    report = {
+        "schema_version": "ww.physics.representative-exact-jar-calibration.v1",
+        "source_anchor_sha256": EXPECTED_SHA256,
+        "evidence": "MEASURED_REAL_MINECRAFT_CONTROL_TRACE_VS_SOURCE_V3",
+        "conclusion": "FOUR_401_SAMPLE_TRACES_COMPARED_PARITY_NOT_ESTABLISHED",
+        "cases": cases,
+    }
+    (report_dir / "representative-calibrations.json").write_text(
+        json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    return report
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--trace-dir", type=Path, required=True)
+    parser.add_argument("--anchor", type=Path, required=True)
+    parser.add_argument("--java", default="java")
+    parser.add_argument("--classes", type=Path, required=True)
+    parser.add_argument("--output-dir", type=Path, required=True)
+    args = parser.parse_args()
+    try:
+        report = verify(args.trace_dir, args.anchor, args.java, args.classes, args.output_dir)
+    except (OSError, ValueError, subprocess.CalledProcessError) as error:
+        raise SystemExit(f"REPRESENTATIVE_EXACT_JAR_CALIBRATION_FAILED: {error}") from None
+    for case in report["cases"]:
+        print("REAL_MINECRAFT_CALIBRATION", case["aircraft_id"],
+              "401 samples", "speed_rmse_bps=", round(case["speed_rmse_bps"], 6),
+              "position_origin_aligned_final_drift_blocks=",
+              round(case["position_origin_aligned_final_drift_blocks"], 6))
+    print(report["conclusion"])
+
+
+if __name__ == "__main__":
+    main()

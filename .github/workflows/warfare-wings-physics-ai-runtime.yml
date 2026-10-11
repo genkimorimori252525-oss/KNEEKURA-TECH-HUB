@@ -127,6 +127,17 @@ jobs:
           python ../tools/verify_engine_reaction_bytecode.py --jar $original --javap $javap
           if ($LASTEXITCODE -ne 0) { throw "Exact 24-airframe engine source verification failed: $LASTEXITCODE" }
 
+      - name: Audit pinned original weapons and explicitly preserve no-fire authorization
+        working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
+        run: |
+          python ../tools/audit_exact_weapon_failclosed.py `
+            --ww 'flight-test-mods/warfare_wings-1.1.4-1.20.1-forge.jar' `
+            --ia 'flight-test-mods/immersive_aircraft-1.3.3+1.20.1-forge.jar' `
+            --javap (Join-Path $env:JAVA_HOME 'bin/javap.exe') `
+            --pilot-source 'src/main/java/org/kneekura/techhub/warfarewings/trace/RuntimeTacticalPilot.java' `
+            --output 'run-gametest/ww-physics-traces/exact-weapon-audit.json'
+          if ($LASTEXITCODE -ne 0) { throw "Pinned autonomous weapon security audit FAILED: $LASTEXITCODE" }
+
       - name: Run exact A6M throttle GameTest
         id: exact_gametest
         # An operational failure (such as a real B-17 escort breakthrough)
@@ -252,6 +263,10 @@ jobs:
           Write-Host 'Live team recognition and LOS acceptance still require the Forge GameTest assertions to pass.'
 
       - name: Independently verify synchronized real multi-aircraft 2v2 and B17 escort geometry
+        id: operational_verification
+        # Preserve both real CSV verdicts even if the protected B17 genuinely
+        # loses. The final required gate below still fails this workflow.
+        continue-on-error: true
         working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
         run: |
           $traces = 'run-gametest/ww-physics-traces'
@@ -268,15 +283,6 @@ jobs:
           }
           if ($failed.Count -gt 0) {
             throw "Real Minecraft multi-aircraft operational gates FAILED: $($failed -join ', '); no source substitute or relaxed gate"
-          }
-
-      - name: Enforce exact original Forge GameTest acceptance
-        if: always()
-        env:
-          GAME_TEST_OUTCOME: ${{ steps.exact_gametest.outcome }}
-        run: |
-          if ($env:GAME_TEST_OUTCOME -ne 'success') {
-            throw "Original-JAR Forge GameTest FAILED ($env:GAME_TEST_OUTCOME). No operational failure may be skipped as a success."
           }
 
       - name: Generate matching microkernel trace and calibration report
@@ -338,8 +344,37 @@ jobs:
           python ../tools/compare_traces.py --microkernel $reactionTrace --runtime $runtime --runtime-metadata $metadataPath --output-dir "$traceDir/reaction-calibration"
           if ($LASTEXITCODE -ne 0) { throw "Reaction-aware calibration comparison failed: $LASTEXITCODE" }
 
+      - name: Compare four additional 401-tick exact-JAR representative aircraft
+        id: representative_calibration
+        continue-on-error: true
+        working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
+        run: |
+          python ../tools/verify_representative_calibrations.py `
+            --trace-dir run-gametest/ww-physics-traces `
+            --anchor ../data/base-aircraft-anchor-v1.csv `
+            --java (Join-Path $env:JAVA_HOME 'bin/java.exe') `
+            --classes build/trace-classes `
+            --output-dir run-gametest/ww-physics-traces/representative-calibrations
+          if ($LASTEXITCODE -ne 0) {
+            throw "Representative same-envelope real Forge calibration FAILED: $LASTEXITCODE"
+          }
+
+      - name: Independently verify real two-aircraft long strike ingress egress and return
+        id: long_strike_verification
+        continue-on-error: true
+        working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
+        run: |
+          python ../tools/verify_long_strike_receipts.py `
+            run-gametest/ww-physics-traces `
+            --summary run-gametest/ww-physics-traces/operational-long-strike-verified.json
+          if ($LASTEXITCODE -ne 0) {
+            throw "Actual no-ordnance strike/egress/RTB physical acceptance FAILED: $LASTEXITCODE"
+          }
+
       - name: Upload runtime trace
+        id: upload_trace
         if: always()
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: warfare-wings-a6m-throttle-runtime-trace
@@ -349,3 +384,40 @@ jobs:
             departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe/run-gametest/ww-physics-traces/**
             departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe/run-gametest/logs/**
             departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe/run-gametest/crash-reports/**
+
+      - name: Retry owner-runner receipt upload after transient GitHub artifact endpoint failure
+        id: retry_upload_trace
+        if: always() && steps.upload_trace.outcome != 'success'
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: warfare-wings-runtime-receipts-retry
+          retention-days: 14
+          if-no-files-found: warn
+          path: |
+            departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe/run-gametest/ww-physics-traces/**
+            departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe/run-gametest/logs/**
+            departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe/run-gametest/crash-reports/**
+
+      - name: Enforce exact original Forge, operational and evidence acceptance
+        if: always()
+        env:
+          GAME_TEST_OUTCOME: ${{ steps.exact_gametest.outcome }}
+          OPERATIONAL_OUTCOME: ${{ steps.operational_verification.outcome }}
+          CALIBRATION_OUTCOME: ${{ steps.representative_calibration.outcome }}
+          LONG_STRIKE_OUTCOME: ${{ steps.long_strike_verification.outcome }}
+          UPLOAD_OUTCOME: ${{ steps.upload_trace.outcome }}
+          RETRY_UPLOAD_OUTCOME: ${{ steps.retry_upload_trace.outcome }}
+        run: |
+          if ($env:GAME_TEST_OUTCOME -ne 'success' -or $env:OPERATIONAL_OUTCOME -ne 'success') {
+            throw "Real original-JAR operational acceptance FAILED. Forge=$env:GAME_TEST_OUTCOME geometric=$env:OPERATIONAL_OUTCOME. Never weaken B17 95-block/6-block gates."
+          }
+          if ($env:CALIBRATION_OUTCOME -ne 'success') {
+            throw "Real representative calibration incomplete: $env:CALIBRATION_OUTCOME"
+          }
+          if ($env:LONG_STRIKE_OUTCOME -ne 'success') {
+            throw "Real no-ordnance strike/return mission FAILED: $env:LONG_STRIKE_OUTCOME"
+          }
+          if ($env:UPLOAD_OUTCOME -ne 'success' -and $env:RETRY_UPLOAD_OUTCOME -ne 'success') {
+            throw "Actual runtime receipts could not be uploaded (possibly ENOTFOUND): first=$env:UPLOAD_OUTCOME retry=$env:RETRY_UPLOAD_OUTCOME"
+          }

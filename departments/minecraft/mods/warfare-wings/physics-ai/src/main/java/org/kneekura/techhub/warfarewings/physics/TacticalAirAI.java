@@ -205,7 +205,7 @@ public final class TacticalAirAI {
             target = defendedFuture.add(outward.scale(screenDistance)).add(right.scale(side * 12));
             why = distance < 100 ? "ESCORT_INNER_SCREEN" : "ESCORT_PREDICTIVE_SCREEN";
         } else if (frame.profile().role().equals("bomber")
-                && frame.mission() == Mission.LEVEL_BOMB
+                && (frame.mission() == Mission.LEVEL_BOMB || frame.mission() == Mission.PATROL)
                 && frame.enemy() != null && frame.enemy().hostile()
                 && frame.enemy().position().add(position.scale(-1)).length() < 190
                 && (memory.last() == Maneuver.DEFENSIVE_BREAK
@@ -229,7 +229,7 @@ public final class TacticalAirAI {
                     : new Vec3(forward.z(), 0, -forward.x()).normalize();
             Vec3 toThreat = frame.enemy().position().add(position.scale(-1));
             if (lateral.dot(toThreat) > 3.0) lateral = lateral.scale(-1);
-            target = position.add(lateral.scale(150)).add(0, 28, 0);
+            target = position.add(lateral.scale(150)).add(0, 65, 0);
             why = "BOMBER_OBSERVED_INBOUND_ABORT";
         } else if (!frame.profile().role().equals("fighter")
                 && frame.enemy() != null && frame.enemy().hostile()

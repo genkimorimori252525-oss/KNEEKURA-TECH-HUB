@@ -201,12 +201,19 @@ public final class CombatSimulationSelfTest {
         yes(reactionPreparedAsset!=null && reactionPreparedAsset.corridorBreached()
                 == (reactionPreparedAsset.threatWithinCorridorTicks()>0),
                 "exact-reaction prepared screen must report unchanged 95-block violation honestly");
-        yes(!reactionPrepared.passesSafetyGates()
-                        && reactionPreparedAsset.threatWithinCorridorTicks()>0,
-                "forward V3 source remains FAILED unless the real 95b boundary is actually protected");
-        yes(reactionPreparedAsset.threatWithinCorridorTicks()<30
-                        && reactionPreparedAsset.closestThreatBlocks()>77.643,
-                "unchanged forward source V3 physical setup improves previous actual breach and closest range");
+        yes(reactionPrepared.passesSafetyGates()
+                        && reactionPrepared.failedOperationalGates().isEmpty(),
+                "forward V3 source physically protects original 95b perimeter without reducing safety gate");
+        yes(reactionPreparedAsset.threatWithinCorridorTicks()==0
+                        && reactionPreparedAsset.firstThreatEntryTick()==-1
+                        && reactionPreparedAsset.closestThreatBlocks()>95.0,
+                "forward V3 reaches original protection requirement by real climb and lateral flight");
+        yes(reactionPrepared.units().get("cargo").groundedTicks()==0
+                        && reactionPrepared.units().get("cargo").pathBlocks()>20
+                        && reactionPrepared.units().get("cargo").finalDistanceToObjective()<280,
+                "successful V3 forward cover is achieved by physically flying a progressing B17, not freezing it");
+        yes(reactionPrepared.units().get("cargo").defensiveAbortTicks()>20,
+                "forward V3 physical protection involves actual observed-threat evasive decisions");
         for (var pair : reactionPrepared.pairs().values())
             yes(pair.closestApproachBlocks() >= 6.0 && pair.dangerouslyCloseTicks() == 0,
                     "exact-reaction prepared screen cannot trade real body safety for protection");
@@ -312,6 +319,30 @@ public final class CombatSimulationSelfTest {
         yes(TacticalAirAI.decide(depleted,TacticalAirAI.Memory.INITIAL).maneuver()
                 ==TacticalAirAI.Maneuver.RETURN_HOME,
                 "critical fuel reserve still outranks discretionary observed-threat maneuver");
+        var patrolUrgent=new TacticalAirAI.Frame(bomberProfile,bomber.model(),bomberState,
+                TacticalAirAI.Mission.PATROL,GOAL,HOME,inbound,null,null,
+                1,1,0,false,0);
+        var patrolIdle=new TacticalAirAI.Frame(bomberProfile,bomber.model(),bomberState,
+                TacticalAirAI.Mission.PATROL,GOAL,HOME,inert,null,null,
+                1,1,0,false,0);
+        yes(TacticalAirAI.decide(patrolUrgent,TacticalAirAI.Memory.INITIAL).maneuver()
+                ==TacticalAirAI.Maneuver.DEFENSIVE_BREAK,
+                "real Forge B17 PATROL mission defends itself against individually observed inbound aircraft");
+        yes(!TacticalAirAI.decide(patrolIdle,TacticalAirAI.Memory.INITIAL).reasonCode()
+                    .equals("BOMBER_OBSERVED_INBOUND_ABORT"),
+                "inert observed contact cannot trigger the new imminent-attack maneuver");
+        var patrolUnseen=new TacticalAirAI.Frame(bomberProfile,bomber.model(),bomberState,
+                TacticalAirAI.Mission.PATROL,GOAL,HOME,null,null,null,
+                1,1,0,false,0);
+        yes(TacticalAirAI.decide(patrolUnseen,TacticalAirAI.Memory.INITIAL).maneuver()
+                ==TacticalAirAI.Maneuver.PATROL_ROUTE,
+                "unobserved opponent cannot provoke the B17 into omniscient evasion");
+        var patrolFuelCritical=new TacticalAirAI.Frame(bomberProfile,bomber.model(),bomberState,
+                TacticalAirAI.Mission.PATROL,GOAL,HOME,inbound,null,null,
+                0.04,1,0,false,0);
+        yes(TacticalAirAI.decide(patrolFuelCritical,TacticalAirAI.Memory.INITIAL).maneuver()
+                ==TacticalAirAI.Maneuver.RETURN_HOME,
+                "patrol bomber observed defense never defeats critical-fuel withdrawal");
 
         // Future protectee position is extrapolated exclusively from an allied
         // aircraft's measured velocity, not from global unseen enemy state.

@@ -35,6 +35,12 @@ jobs:
         run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_all_aircraft_runtime_receipts.py
       - name: Verify synchronized multi-aircraft geometric gates reject invalid Forge receipts
         run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_live_aircombat_receipts.py
+      - name: Verify representative 401-tick Forge calibration parser rejects missing/frozen source fixtures
+        run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_representative_calibrations.py
+      - name: Verify exact-original weapon audit rejects missing APIs and substituted binary fixtures
+        run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_exact_weapon_failclosed.py
+      - name: Verify long real-strike receipt parser rejects early RTB and missing synchronized actors
+        run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_long_strike_receipts.py
       - name: Rebuild and verify 24-aircraft AI Atlas
         run: |
           ROOT=departments/minecraft/mods/warfare-wings/physics-ai

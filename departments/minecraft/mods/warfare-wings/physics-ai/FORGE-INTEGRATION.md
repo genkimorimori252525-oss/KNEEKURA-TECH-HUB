@@ -1,6 +1,6 @@
 # Warfare Wings Tactical AI → Real Forge 1.20.1 Aircraft Bridge
 
-Status: **exact-JAR Forge 1.20.1 GameTest measured; 14/15 tests PASS, B-17 operational protection FAILED**. The pinned owner Warfare Wings JAR and matching IA JAR were hash-verified and tested locally. This remains an experimental Forge integration with no weapon firing and no claim of full source/microkernel-to-Minecraft parity.
+Status: **exact-JAR Forge 1.20.1 GameTest measured; current 19/20 tests PASS, B-17 operational protection FAILED**. The pinned owner Warfare Wings JAR and matching IA JAR were hash-verified and tested locally. This remains an experimental Forge integration with no weapon firing and no claim of full source/microkernel-to-Minecraft parity.
 
 ## Ownership and runtime contract
 

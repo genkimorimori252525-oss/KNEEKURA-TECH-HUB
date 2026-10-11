@@ -36,18 +36,30 @@ final class RuntimeTraceManager {
     private RuntimeTraceManager() {}
 
     static synchronized void start(ServerLevel level, Entity aircraft, ArmorStand pilot) {
+        start(level, aircraft, pilot, SCENARIO, AIRCRAFT);
+    }
+
+    /** Same control envelope and CSV fields as the original A6M experiment.
+     * Changing only the explicitly verified registered airframe and identity
+     * makes comparable 401-sample traces without altering the legacy test. */
+    static synchronized void start(ServerLevel level, Entity aircraft, ArmorStand pilot,
+                                   String scenario, String aircraftId) {
         if (active != null) throw new IllegalStateException("Trace already active");
+        if (!scenario.matches("[a-z0-9]+-throttle-step-v1")
+                || !aircraftId.matches("warfare_wings:[a-z0-9]+")
+                || !scenario.equals(aircraftId.substring("warfare_wings:".length()) + "-throttle-step-v1"))
+            throw new IllegalArgumentException("Unrecognized calibrated aircraft/scenario identity");
         complete = false;
         failure = null;
         BufferedWriter writer = null;
         try {
             Path dir = FMLPaths.GAMEDIR.get().resolve("ww-physics-traces");
             Files.createDirectories(dir);
-            Path path = dir.resolve("a6m-throttle-step-v1-runtime.csv");
+            Path path = dir.resolve(scenario + "-runtime.csv");
             writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8);
             writer.write(HEADER);
             writer.newLine();
-            active = new Run(level, aircraft, pilot, writer, path);
+            active = new Run(level, aircraft, pilot, writer, path, scenario, aircraftId);
             // A 400-tick aircraft exceeds GameTest's automatically loaded
             // 160-block radius. Preload the forward corridor dynamically so
             // crossing a chunk boundary cannot silently freeze real physics.
@@ -121,18 +133,23 @@ final class RuntimeTraceManager {
         final ArmorStand pilot;
         final BufferedWriter writer;
         final Path path;
+        final String scenario;
+        final String aircraftId;
         final Set<Long> visitedChunks = new HashSet<>();
         final Set<Long> forcedChunks = new HashSet<>();
         int lastAircraftTick;
         int sampleTick;
         boolean skipFirstEnd = true;
 
-        Run(ServerLevel level, Entity aircraft, ArmorStand pilot, BufferedWriter writer, Path path) {
+        Run(ServerLevel level, Entity aircraft, ArmorStand pilot, BufferedWriter writer, Path path,
+            String scenario, String aircraftId) {
             this.level = level;
             this.aircraft = aircraft;
             this.pilot = pilot;
             this.writer = writer;
             this.path = path;
+            this.scenario = scenario;
+            this.aircraftId = aircraftId;
             this.lastAircraftTick = aircraft.tickCount;
         }
 
@@ -163,7 +180,7 @@ final class RuntimeTraceManager {
             double speed = v.length() * 20.0;
             double horizontal = v.horizontalDistance() * 20.0;
             String row = String.join(",",
-                    SCHEMA, "minecraft_runtime", SCENARIO, AIRCRAFT,
+                    SCHEMA, "minecraft_runtime", scenario, aircraftId,
                     Long.toString(tick), Long.toString(level.getGameTime()),
                     d(p.x), d(p.y), d(p.z), d(v.x), d(v.y), d(v.z),
                     d(speed), d(horizontal),
