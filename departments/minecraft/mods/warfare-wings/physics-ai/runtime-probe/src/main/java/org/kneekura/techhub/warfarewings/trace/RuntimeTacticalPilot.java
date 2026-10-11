@@ -85,7 +85,7 @@ final class RuntimeTacticalPilot {
                       TacticalAirAI.Mission mission, UUID target,
                       String hostileTeam, UUID leader, int observedTicks,
                       int elapsedTicks, int sensorCandidates, int blockedContacts,
-                      int stationSlot, LiveMissionPlanner.Phase phase) {}
+                      int stationSlot, LiveMissionPlanner.Phase phase, int escortTicks) {}
 
     static boolean validTeam(String team) {
         return team != null && team.matches("[a-z][a-z0-9_-]{0,23}");
@@ -120,7 +120,7 @@ final class RuntimeTacticalPilot {
                     order.team(), order.mission(), order.designatedTarget(),
                     order.hostileTeam(), order.leader(), run.observedTicks,
                     run.steps, run.sensorCandidates, run.blockedContacts,
-                    run.stationSlot, run.livePhase));
+                    run.stationSlot, run.livePhase, run.escortTicks));
         }
         status.sort(java.util.Comparator.comparing(s -> s.aircraft().toString()));
         return List.copyOf(status);
@@ -318,6 +318,7 @@ final class RuntimeTacticalPilot {
                     xyz(objective), xyz(home),
                     formationAnchor == null ? null : xyz(formationAnchor),
                     doctrine, airframe, durationTicks, writer, trace, ownsPilot);
+            run.keepTestChunksLoaded();
             // A failed initial sample must not leave an ACTIVE run containing
             // a failed writer (or mask an earlier successful result).
             run.write(0, null, null, null);
@@ -343,10 +344,19 @@ final class RuntimeTacticalPilot {
                 // The GameTest may register in the middle of a server tick.
                 // Only compute one command after a completed aircraft entity tick.
                 int tick = run.aircraft.tickCount;
-                if (tick == run.lastAircraftTick) continue;
+                if (tick == run.lastAircraftTick) {
+                    if (++run.stalledServerTicks > 20)
+                        throw new IllegalStateException("NON_TICKING_REAL_AIRCRAFT: "
+                                + run.scenario + " stuck at entityTick=" + tick
+                                + " gameTime=" + run.level.getGameTime()
+                                + " pos=" + run.aircraft.blockPosition());
+                    continue;
+                }
                 if (tick != run.lastAircraftTick + 1)
                     throw new IllegalStateException("Aircraft tick gap: " + run.lastAircraftTick + " -> " + tick);
+                run.stalledServerTicks = 0;
                 run.lastAircraftTick = tick;
+                run.keepTestChunksLoaded();
                 run.step();
                 if (run.steps >= run.duration) {
                     run.close();
@@ -360,6 +370,13 @@ final class RuntimeTacticalPilot {
                 }
             } catch (Throwable ex) {
                 try { run.close(); } catch (IOException ignored) {}
+                if (run.testLease != null) {
+                    // A failing GameTest must never leave an orphan aircraft
+                    // that contaminates the next distinct test batch.
+                    run.pilot.stopRiding();
+                    run.pilot.discard();
+                    run.aircraft.discard();
+                }
                 remember(new Result(false,
                         ex.getClass().getSimpleName() + ": " + ex.getMessage(),
                         run.steps, run.nonzeroLateral, run.yawTravel, run.displacement(),
@@ -395,6 +412,7 @@ final class RuntimeTacticalPilot {
         final Path trace;
         final boolean ownsPilot;
         final boolean isolatedGameTest;
+        final GameTestFlightChunkLease testLease;
         final net.minecraft.world.phys.Vec3 startPosition;
         LiveOrder liveOrder;
         LiveMissionPlanner.Phase livePhase = LiveMissionPlanner.Phase.TRANSIT;
@@ -411,6 +429,7 @@ final class RuntimeTacticalPilot {
         String lastContactStatus = "none";
         TacticalAirAI.Memory memory = TacticalAirAI.Memory.INITIAL;
         int lastAircraftTick, steps, nonzeroLateral;
+        int stalledServerTicks;
         int firstCommandSample = -1, firstYawResponseSample = -1;
         double firstCommandX;
         double lastYaw, yawTravel;
@@ -437,9 +456,15 @@ final class RuntimeTacticalPilot {
             this.trace = trace;
             this.ownsPilot = ownsPilot;
             this.isolatedGameTest = aircraft.getTags().contains(GAME_TEST_ISOLATION_TAG);
+            this.testLease = (isolatedGameTest || aircraft.getTags().contains(LIVE_PAIR_TEST_TAG))
+                    ? new GameTestFlightChunkLease(level) : null;
             this.startPosition = aircraft.position();
             this.lastAircraftTick = aircraft.tickCount;
             this.lastYaw = aircraft.getYRot();
+        }
+
+        void keepTestChunksLoaded() {
+            if (testLease != null) testLease.update(aircraft);
         }
 
         void step() throws IOException {
@@ -757,6 +782,7 @@ final class RuntimeTacticalPilot {
 
         void close() throws IOException {
             try { writer.close(); } finally {
+                if (testLease != null) testLease.close();
                 if (ownsPilot) {
                     // Only the admin command's synthetic rider belongs to us.
                     try { IaRuntimeAccess.setEngineTarget(aircraft, 0f); } catch (RuntimeException ignored) {}

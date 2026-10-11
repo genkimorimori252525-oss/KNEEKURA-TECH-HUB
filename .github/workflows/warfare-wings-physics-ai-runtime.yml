@@ -128,6 +128,11 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw "Exact 24-airframe engine source verification failed: $LASTEXITCODE" }
 
       - name: Run exact A6M throttle GameTest
+        id: exact_gametest
+        # An operational failure (such as a real B-17 escort breakthrough)
+        # must still allow the independent per-plane receipt analyzers to run.
+        # The terminal gate below fails the job if Forge itself failed.
+        continue-on-error: true
         working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
         run: gradle --no-daemon --console=plain runGameTestServer
 
@@ -246,6 +251,34 @@ jobs:
           }
           Write-Host 'Live team recognition and LOS acceptance still require the Forge GameTest assertions to pass.'
 
+      - name: Independently verify synchronized real multi-aircraft 2v2 and B17 escort geometry
+        working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
+        run: |
+          $traces = 'run-gametest/ww-physics-traces'
+          $plans = @(
+            @('../scenarios/forge-operational-2v2.json', 'operational-2v2-verified.json'),
+            @('../scenarios/forge-operational-b17-escort.json', 'operational-b17-escort-verified.json')
+          )
+          $failed = @()
+          foreach ($entry in $plans) {
+            python ../tools/verify_live_aircombat_receipts.py $entry[0] $traces --summary "$traces/$($entry[1])"
+            if ($LASTEXITCODE -ne 0) {
+              $failed += $entry[0]
+            }
+          }
+          if ($failed.Count -gt 0) {
+            throw "Real Minecraft multi-aircraft operational gates FAILED: $($failed -join ', '); no source substitute or relaxed gate"
+          }
+
+      - name: Enforce exact original Forge GameTest acceptance
+        if: always()
+        env:
+          GAME_TEST_OUTCOME: ${{ steps.exact_gametest.outcome }}
+        run: |
+          if ($env:GAME_TEST_OUTCOME -ne 'success') {
+            throw "Original-JAR Forge GameTest FAILED ($env:GAME_TEST_OUTCOME). No operational failure may be skipped as a success."
+          }
+
       - name: Generate matching microkernel trace and calibration report
         working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
         run: |
@@ -315,3 +348,4 @@ jobs:
           path: |
             departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe/run-gametest/ww-physics-traces/**
             departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe/run-gametest/logs/**
+            departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe/run-gametest/crash-reports/**

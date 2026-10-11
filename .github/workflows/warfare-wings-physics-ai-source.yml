@@ -33,6 +33,8 @@ jobs:
         run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_tactical_runtime_receipts.py
       - name: Verify all-24-runtime receipt parser rejects incomplete and corrupt traces
         run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_all_aircraft_runtime_receipts.py
+      - name: Verify synchronized multi-aircraft geometric gates reject invalid Forge receipts
+        run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_live_aircombat_receipts.py
       - name: Rebuild and verify 24-aircraft AI Atlas
         run: |
           ROOT=departments/minecraft/mods/warfare-wings/physics-ai

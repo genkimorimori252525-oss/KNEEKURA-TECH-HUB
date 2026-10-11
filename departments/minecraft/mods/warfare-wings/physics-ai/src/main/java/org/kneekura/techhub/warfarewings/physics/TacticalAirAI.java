@@ -83,7 +83,18 @@ public final class TacticalAirAI {
             Vec3 objective, Vec3 home, Contact enemy, Vec3 formationAnchor,
             Vec3 nearestFriendlyPosition,
             double fuelFraction, double integrityFraction,
-            double terrainHeight, boolean lineOfFireClear, double projectileSpeedBpt) {
+            double terrainHeight, boolean lineOfFireClear, double projectileSpeedBpt,
+            Vec3 observedFormationVelocity) {
+        /** Backward compatible for callers without measured leader velocity. */
+        public Frame(Profile profile, Model model, State self, Mission mission,
+                     Vec3 objective, Vec3 home, Contact enemy, Vec3 formationAnchor,
+                     Vec3 nearestFriendlyPosition, double fuelFraction,
+                     double integrityFraction, double terrainHeight,
+                     boolean lineOfFireClear, double projectileSpeedBpt) {
+            this(profile, model, self, mission, objective, home, enemy, formationAnchor,
+                    nearestFriendlyPosition, fuelFraction, integrityFraction,
+                    terrainHeight, lineOfFireClear, projectileSpeedBpt, Vec3.ZERO);
+        }
         public Frame {
             if (profile == null || model == null || self == null || mission == null
                     || objective == null || home == null) throw new IllegalArgumentException("frame");
@@ -100,6 +111,9 @@ public final class TacticalAirAI {
             requireFinite(objective);
             requireFinite(home);
             if (formationAnchor != null) requireFinite(formationAnchor);
+            if (observedFormationVelocity == null)
+                throw new IllegalArgumentException("missing formation velocity");
+            requireFinite(observedFormationVelocity);
             if (nearestFriendlyPosition != null) requireFinite(nearestFriendlyPosition);
             if (!Double.isFinite(fuelFraction) || fuelFraction < 0 || fuelFraction > 1
                     || !Double.isFinite(integrityFraction) || integrityFraction < 0 || integrityFraction > 1
@@ -167,25 +181,33 @@ public final class TacticalAirAI {
             Vec3 anchor = frame.formationAnchor();
             Vec3 relative = frame.enemy().position().add(anchor.scale(-1));
             double distance = relative.length();
-            double leadTicks = Math.min(18, distance / Math.max(0.45,
-                    speed / TICKS_PER_SECOND + frame.enemy().velocity().length()));
+            Vec3 radial = relative.normalize();
+            Vec3 relativeVelocity = frame.enemy().velocity()
+                    .add(frame.observedFormationVelocity().scale(-1));
+            double closure = Math.max(0, -radial.dot(relativeVelocity));
+            double timeToIntercept = closure < EPS ? 40 : distance / closure;
+            double feasibleInterceptTime = distance / Math.max(0.35,
+                    speed / TICKS_PER_SECOND + frame.enemy().velocity().length());
+            double leadTicks = Math.min(40, Math.max(12,
+                    Math.min(timeToIntercept, feasibleInterceptTime)));
             Vec3 projected = frame.enemy().position().add(frame.enemy().velocity().scale(leadTicks));
-            Vec3 outward = projected.add(anchor.scale(-1)).normalize();
+            Vec3 defendedFuture = anchor.add(frame.observedFormationVelocity().scale(leadTicks));
+            Vec3 outward = projected.add(defendedFuture.scale(-1)).normalize();
             if (outward.lengthSquared() < EPS) outward = forward;
             // Establish cover outside the protected 95-block laboratory
             // corridor, giving the fighter room to intercept *before* a
             // hostile crosses the defense boundary.
-            double screenDistance = Math.min(145.0, Math.max(110.0, distance * 0.82));
+            double screenDistance = Math.min(125.0, Math.max(102.0, distance * 0.70));
             Vec3 right = new Vec3(outward.z(), 0, -outward.x()).normalize();
             double side = frame.self().position().add(anchor.scale(-1)).dot(right) < 0 ? -1 : 1;
             // Two guards approaching from opposite sides should not be
             // assigned the same 3D point in the moving protection corridor.
-            target = anchor.add(outward.scale(screenDistance)).add(right.scale(side * 20));
+            target = defendedFuture.add(outward.scale(screenDistance)).add(right.scale(side * 12));
             why = distance < 100 ? "ESCORT_INNER_SCREEN" : "ESCORT_PREDICTIVE_SCREEN";
         } else if (frame.profile().role().equals("bomber")
                 && frame.mission() == Mission.LEVEL_BOMB
                 && frame.enemy() != null && frame.enemy().hostile()
-                && frame.enemy().position().add(position.scale(-1)).length() < 165
+                && frame.enemy().position().add(position.scale(-1)).length() < 190
                 && (memory.last() == Maneuver.DEFENSIVE_BREAK
                     && frame.enemy().position().add(position.scale(-1)).length() < 135
                     || frame.enemy().velocity().dot(position.add(frame.enemy().position().scale(-1)).normalize())
@@ -196,10 +218,18 @@ public final class TacticalAirAI {
             // Abort the geometrical bombing run early enough to steer via the
             // actual IA controller. No kill, gun effect or instant teleport.
             maneuver = Maneuver.DEFENSIVE_BREAK;
-            Vec3 lateral = new Vec3(forward.z(), 0, -forward.x()).normalize();
+            // Evade across the *observed threat's* flight path instead of
+            // continuously rotating the waypoint with the bomber's own yaw.
+            // Its low yaw authority otherwise makes a long spiral, failing
+            // to build lateral distance before the closing contact arrives.
+            Vec3 hostileCourse = new Vec3(
+                    frame.enemy().velocity().x(), 0, frame.enemy().velocity().z()).normalize();
+            Vec3 lateral = hostileCourse.lengthSquared() > EPS
+                    ? new Vec3(-hostileCourse.z(), 0, hostileCourse.x()).normalize()
+                    : new Vec3(forward.z(), 0, -forward.x()).normalize();
             Vec3 toThreat = frame.enemy().position().add(position.scale(-1));
             if (lateral.dot(toThreat) > 3.0) lateral = lateral.scale(-1);
-            target = position.add(lateral.scale(135)).add(forward.scale(-22)).add(0, 28, 0);
+            target = position.add(lateral.scale(150)).add(0, 28, 0);
             why = "BOMBER_OBSERVED_INBOUND_ABORT";
         } else if (!frame.profile().role().equals("fighter")
                 && frame.enemy() != null && frame.enemy().hostile()
@@ -284,7 +314,7 @@ public final class TacticalAirAI {
 
         double throttle = switch (maneuver) {
             case LEVEL_BOMB_RUN, FORMATION_HOLD, TORPEDO_APPROACH -> 0.78;
-            case PATROL_ROUTE, ESCORT_SCREEN -> 0.85;
+            case PATROL_ROUTE -> 0.85;
             default -> 1.0;
         };
         Control command = steer(frame, target, throttle);

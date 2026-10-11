@@ -25,17 +25,41 @@ limit, starting geometries and observation constraints are UNCHANGED.
 | Scenario | Legacy source engine20 | Original WW bytecode engine response | Result |
 |---|---:|---:|---|
 | 2v2 opposing A6M/Bf109 closest | 51.167 blocks | 36.922 blocks | Both satisfy strict all-six-pair ≥6-block clearance |
-| B-17 original aft guard, enemy within 95 blocks | 50 / 190 ticks | **92 / 190 ticks** | Both **FAILED** escort protection |
-| B-17 original aft guard, closest threat | 64.623 blocks | 40.913 blocks | Both **FAILED** |
-| B-17 forward-prepared guard, intrusion | 0 / 190 ticks | **30 / 190 ticks** | V2-only prepared success **DOES NOT GENERALIZE** |
-| B-17 forward-prepared guard, closest threat | 120.518 blocks | 77.643 blocks | V3 **FAILED** |
+| B-17 original aft guard, enemy within 95 blocks | Current legacy engine20: **49 / 190 ticks** | **63 / 190 ticks** (V3 original: 92) | **FAILED** escort protection, but V3 is measurably improved |
+| B-17 original aft guard, closest threat | Current legacy: **64.458 blocks** | **77.044 blocks** (V3 original: 40.913) | Still **FAILED** |
+| B-17 forward-prepared guard, intrusion | Earlier source: 0 / 190 ticks | **13 / 190 ticks** (V3 original: 30) | V3 remains **FAILED**; legacy prepared success **does not generalize** |
+| B-17 forward-prepared guard, closest threat | Current legacy: **120.810 blocks** | **94.017 blocks** (V3 original: 77.643) | Still **FAILED**, below the unchanged 95-block gate |
 
-This is a nontrivial SOURCE operational-regression finding: slower correct
-engine spool-up reduces early acceleration and compromises interception.
+The V3 source engine-response model is a nontrivial operational constraint:
+the exact per-airframe source reaction delays effective thrust during the first
+part of the encounter. In the frozen old-code timing diagnosis, fighters
+initially at 1.00 blocks/tick fell to roughly **0.42 blocks/tick by tick 20**,
+then slowly accelerated. With the original aft deployment, fighter assignment
+begins at tick **8** yet the attacker enters the 95-block protection corridor
+near tick **100**; assignments alone cannot produce physical interception.
+No model silently changes starting speed, entity health, aircraft size, roster,
+the 190-tick window, the 95-block corridor, or the 6-block body safety gate.
+
+Current improvements are a role-appropriate higher escort throttle and a
+protectee-relative predictive screen with independent lateral guard stations.
+New decisions use the fighter's personally observed hostile position/velocity
+and the actual allied asset's observed velocity; the source controller
+extrapolates both future trajectories without reading global unseen hostile
+state. The lead horizon derives from range, measured relative-closing rate,
+and estimated achievable fighter travel time, **not** the 95-block test gate.
+In source V3, an escort assigned at tick 8 still initially flies behind
+its protectee, and no amount of assigning targets itself stops a live fighter:
+the same aft-deployed starting geometry remains a stringent known failure.
+The updated bomber evasive maneuver uses the observed hostile's actual
+course to choose a stable lateral escape lane instead of revolving the waypoint
+with its own low-authority yaw. These changes reduce the V3 violation but
+do not create an artificial weapon hit or enemy aircraft destruction.
 No kill, successful air defence, fired projectile or real Minecraft
 multiplayer battle is implied. Even the prepared forward fighter placement
-**fails** the unchanged gate with original response timing; the earlier V2
-success remains a separate reproducible source experiment, not a promise.
+**fails** the unchanged gate with original response timing, even after these
+improvements; the earlier V2 success remains a separate reproducible source
+experiment, not a promise. Both improved V3 cases are strictly
+`ESCORT_PROTECTION_BREACHED` under the unmodified operational gates.
 
 ## Combat diagnostics
 
@@ -58,6 +82,14 @@ success remains a separate reproducible source experiment, not a promise.
 | `AssetMetric.nearestEscortHostileBlocks`, `escortInterpositionTicks` | Experimental geometry-only cover observation; interposition requires an escort between attacker and asset, within 18 blocks of their connecting segment |
 
 The `escortAssets` map must identify actual same-team `ESCORT` pilots pointing at the specified escorted asset. All aircraft are physically integrated in the same `SquadronCommand` step. All pair IDs use structured `PairKey` records, so arbitrary aircraft instance names cannot alias through a text delimiter.
+
+`TacticalAirAI.Frame` retains its original source/API constructor and adds
+an optional, explicitly observed `observedFormationVelocity` vector for
+updating an escort's future protectee reference. The default is
+`Vec3.ZERO` for integrations that have no allied velocity. It must be
+finite; the tactical policy does not fabricate an unobserved hostile track.
+V3 regression verifies that advancing allied protectee data really moves the
+screen waypoint, while unchanged FOV/TTL constraints are preserved.
 
 The collision guard now uses both allied aircraft and **currently observed** hostile aircraft from each individual pilot's own sensor tracks. Stale/expired enemy information cannot masquerade as a new sighting or control an imminent-aircraft safety decision. For observed enemies, the source-only predictive check looks ahead up to **55 ticks**, with opposing pilots attempting right-side separation; these engineering margins are not measured Minecraft collision dimensions or historical reaction constants. Low-fuel withdrawal retains only the closest imminent aircraft safety override and can otherwise continue its return-home order.
 

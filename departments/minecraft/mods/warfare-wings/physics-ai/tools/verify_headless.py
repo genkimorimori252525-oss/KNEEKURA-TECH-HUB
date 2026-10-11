@@ -47,6 +47,7 @@ def main() -> None:
     run(sys.executable, str(ROOT / "tools" / "test_compare_traces.py"))
     run(sys.executable, str(ROOT / "tools" / "test_tactical_runtime_receipts.py"))
     run(sys.executable, str(ROOT / "tools" / "test_all_aircraft_runtime_receipts.py"))
+    run(sys.executable, str(ROOT / "tools" / "test_live_aircombat_receipts.py"))
 
     with tempfile.TemporaryDirectory(prefix="warfare-wings-atlas-") as directory:
         json_out = Path(directory) / "aircraft-atlas-ai-view.json"

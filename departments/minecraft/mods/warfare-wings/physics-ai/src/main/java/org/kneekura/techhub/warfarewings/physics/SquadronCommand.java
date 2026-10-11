@@ -277,6 +277,8 @@ public final class SquadronCommand {
             if (spec.mission() == TacticalAirAI.Mission.ESCORT
                     && spec.escortedUnitId() != null && contact != null)
                 anchor = previous.units().get(spec.escortedUnitId()).aircraft().position();
+            Vec3 observedAnchorVelocity = spec.escortedUnitId() == null ? Vec3.ZERO
+                    : previous.units().get(spec.escortedUnitId()).aircraft().velocity();
             double closest = Double.POSITIVE_INFINITY;
             Vec3 closestPos = null;
             for (AircraftSpec ally : specifications.values()) {
@@ -297,7 +299,7 @@ public final class SquadronCommand {
                     spec.home(), contact, anchor, closestPos,
                     spec.fuelFraction(), spec.integrityFraction(),
                     world.groundHeight(own.aircraft().position().x(), own.aircraft().position().z()),
-                    corridor, spec.projectileSpeedBpt());
+                    corridor, spec.projectileSpeedBpt(), observedAnchorVelocity);
             // Only teammates enter the world-safety obstacle channel. Unseen
             // hostiles cannot leak their actual positions into a pilot's plan.
             List<FlightSafetyPlanner.MovingObstacle> obstacles = new ArrayList<>();

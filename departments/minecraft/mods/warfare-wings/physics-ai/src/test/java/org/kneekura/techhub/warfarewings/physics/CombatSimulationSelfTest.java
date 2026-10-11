@@ -93,6 +93,12 @@ public final class CombatSimulationSelfTest {
                     "EXACT ENGINE SOURCE MODE 2v2 <6-block danger FAILED: "+pair);
         yes(reaction2v2.passesSafetyGates(),
                 "exact-response 2v2 strict operational airframe separation");
+        double minExactPair = reaction2v2.pairs().values().stream()
+                .mapToDouble(CombatSimulation.PairMetric::closestApproachBlocks)
+                .min().orElseThrow();
+        System.out.printf(java.util.Locale.ROOT,
+                "EXACT_REACTION_2V2_ALL_PAIR_MIN=%.9f blocks / 6 pairs / <6: zero%n",
+                minExactPair);
         System.out.println("Exact-reaction SOURCE 2v2: "
                 +reaction2v2.pairs().get(new CombatSimulation.PairKey("a1","b1")));
     }
@@ -140,6 +146,14 @@ public final class CombatSimulationSelfTest {
                         reactionEscort.failedOperationalGates().stream().anyMatch(
                             s -> s.startsWith("ESCORT_PROTECTION_BREACHED:cargo:")),
                 "exact-response failed escort is NEVER disguised as a source PASS");
+        yes(!reactionEscort.passesSafetyGates() && responseAsset.threatWithinCorridorTicks()>0,
+                "original aft start MUST remain operationally FAILED while any attacker enters 95b");
+        yes(responseAsset.threatWithinCorridorTicks()<92
+                        && responseAsset.closestThreatBlocks()>40.913,
+                "unchanged original exact-response physical setup improves both exposure and distance vs HEAD 0cd4aaa");
+        for(var pair:reactionEscort.pairs().values())
+            yes(pair.closestApproachBlocks()>=6.0 && pair.dangerouslyCloseTicks()==0,
+                    "improved aft escort never trades 6b body separation for protection: "+pair);
         System.out.println("Exact-reaction SOURCE B17 escort: "+responseAsset
                 +" operationalFailed="+!reactionEscort.passesSafetyGates());
         yes(result.units().get("cargo").pathBlocks()>30,"bomber travels on mission");
@@ -187,6 +201,12 @@ public final class CombatSimulationSelfTest {
         yes(reactionPreparedAsset!=null && reactionPreparedAsset.corridorBreached()
                 == (reactionPreparedAsset.threatWithinCorridorTicks()>0),
                 "exact-reaction prepared screen must report unchanged 95-block violation honestly");
+        yes(!reactionPrepared.passesSafetyGates()
+                        && reactionPreparedAsset.threatWithinCorridorTicks()>0,
+                "forward V3 source remains FAILED unless the real 95b boundary is actually protected");
+        yes(reactionPreparedAsset.threatWithinCorridorTicks()<30
+                        && reactionPreparedAsset.closestThreatBlocks()>77.643,
+                "unchanged forward source V3 physical setup improves previous actual breach and closest range");
         for (var pair : reactionPrepared.pairs().values())
             yes(pair.closestApproachBlocks() >= 6.0 && pair.dangerouslyCloseTicks() == 0,
                     "exact-reaction prepared screen cannot trade real body safety for protection");
@@ -292,6 +312,32 @@ public final class CombatSimulationSelfTest {
         yes(TacticalAirAI.decide(depleted,TacticalAirAI.Memory.INITIAL).maneuver()
                 ==TacticalAirAI.Maneuver.RETURN_HOME,
                 "critical fuel reserve still outranks discretionary observed-threat maneuver");
+
+        // Future protectee position is extrapolated exclusively from an allied
+        // aircraft's measured velocity, not from global unseen enemy state.
+        var fighter=AircraftAtlasMain.load(csv).stream()
+                .filter(type->type.aircraftId().equals("warfare_wings:f4u"))
+                .findFirst().orElseThrow();
+        var fighterProfile=TacticalAirAI.Profile.fromAtlas(AircraftAtlasMain.evaluate(fighter));
+        var fighterState=State.airborne(new Vec3(-40,190,0),new Vec3(0,0,0.8));
+        var contact=new TacticalAirAI.Contact("personally-sensed-raid",
+                new Vec3(0,170,150),new Vec3(0,0,-1),true);
+        var assetPosition=new Vec3(0,170,0);
+        var stationaryAsset=new TacticalAirAI.Frame(fighterProfile,fighter.model(),
+                fighterState,TacticalAirAI.Mission.ESCORT,GOAL,HOME,contact,
+                assetPosition,null,1,1,0,false,0);
+        var advancingAsset=new TacticalAirAI.Frame(fighterProfile,fighter.model(),
+                fighterState,TacticalAirAI.Mission.ESCORT,GOAL,HOME,contact,
+                assetPosition,null,1,1,0,false,0,new Vec3(0,0,0.4));
+        var wait=TacticalAirAI.decide(stationaryAsset,TacticalAirAI.Memory.INITIAL);
+        var lead=TacticalAirAI.decide(advancingAsset,TacticalAirAI.Memory.INITIAL);
+        yes(wait.maneuver()==TacticalAirAI.Maneuver.ESCORT_SCREEN
+                    && lead.maneuver()==TacticalAirAI.Maneuver.ESCORT_SCREEN,
+                "future allied velocity only changes a valid escort waypoint, not the fighter role");
+        yes(lead.steeringPoint().add(wait.steeringPoint().scale(-1)).length()>8.0,
+                "observed protectee motion materially shifts the physically commanded defense point");
+        yes(lead.steeringPoint().z()>wait.steeringPoint().z(),
+                "advancing protected aircraft requires a correspondingly forward predictive screen");
     }
     private static void everyAtlasAirframe(Path csv) throws Exception {
         var roster=AircraftAtlasMain.load(csv);
@@ -315,6 +361,18 @@ public final class CombatSimulationSelfTest {
             yes(item.pathBlocks()>3,"real controlled movement for "+item.id());
             yes(item.groundedTicks()==0,"source aircraft airborne "+item.id());
             yes(item.minTerrainClearance()>100,"high-altitude safe clearance "+item.id());
+        }
+        var exact=CombatSimulation.runWithExactReaction(csv,
+                new CombatSimulation.Scenario("exact-engine-all-24-aircraft",
+                        all,55,50,95,Map.of(),FLAT,SquadronCommand.Sensors.DEFAULT));
+        yes(exact.units().size()==24 && exact.pairs().size()==276,
+                "every Atlas airframe runs the exact-WW source engine response with all 276 pairs");
+        yes(exact.passesSafetyGates(),
+                "spaced 24-plane exact-response mission has no source body or ground failures");
+        for(var item:exact.units().values()) {
+            yes(item.pathBlocks()>3,"V3 controls truly advance "+item.id());
+            yes(item.groundedTicks()==0 && item.minTerrainClearance()>100,
+                    "V3 all-airframe physical terrain clearance "+item.id());
         }
     }
     public static void main(String[] args) throws Exception {

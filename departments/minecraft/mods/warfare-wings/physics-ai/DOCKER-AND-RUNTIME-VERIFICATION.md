@@ -23,6 +23,10 @@ The image executes `tools/verify_headless.py`, which requires:
   corrupted synthetic CSVs (17 checks), without confusing fixtures with game telemetry;
 - independent 24-airframe serial GameTest receipt-parser synthetic checks:
   reject missing, overlong or physically inconsistent per-plane control traces;
+- synchronized multi-aircraft real-Forge receipt-parser synthetic checks:
+  reject non-synchronized ticks, missing aircraft, nonfinite coordinates,
+  unsafe sub-6-block body separation and intruders within an unchanged
+  95-block B-17 protection corridor;
 - 24-aircraft Atlas JSON semantic equality and normalized Markdown equality with committed reports.
 
 Expected terminating markers:
@@ -96,3 +100,53 @@ the hosted CI and local test results must still be reported separately.
 | Calibration comparison | Real trace paired with the source trace | Drift/phase metrics; no parity acceptance threshold yet |
 
 Never promote historical public-data predictions or source-only Atlas ranks into same-artifact runtime measurements.
+
+## 4. Synchronized multi-aircraft geometric acceptance (not combat victory)
+
+`tools/verify_live_aircombat_receipts.py` independently evaluates multiple
+aircraft **on the same observed Forge server ticks**. Each CSV must use the
+real `ww.physics.forge-tactical-pilot.v1` source/column schema with exactly
+`ticks+1` consecutive recorded samples, at least 8 blocks of real position
+change, explicit team membership and unique per-pilot trace filenames.
+An absent flight, nonconsecutive clock or mismatched identity is fatal.
+
+Supply a JSON manifest in the following structural form, using **only actual
+GameTest-emitted CSV filenames** (these placeholder names are not measured
+evidence):
+
+```json
+{
+  "scenario": "game-test-case-id",
+  "kind": "escort",
+  "source": "minecraft_runtime_ia_next_tick_injection",
+  "ticks": 190,
+  "flights": [
+    {"id": "bomber", "file": "measured-bomber.csv", "aircraft_id": "warfare_wings:b17", "scenario_id": "bomber-observed", "team": "blue"},
+    {"id": "guard", "file": "measured-guard.csv", "aircraft_id": "warfare_wings:p47n", "scenario_id": "guard-observed", "team": "blue"},
+    {"id": "intruder", "file": "measured-intruder.csv", "aircraft_id": "warfare_wings:a6m", "scenario_id": "intruder-observed", "team": "red"}
+  ],
+  "assets": ["bomber"],
+  "escort_assignments": {"bomber": ["guard"]}
+}
+```
+
+Run `python tools/verify_live_aircombat_receipts.py <manifest.json>
+<actual-trace-directory> --summary <report.json>` from any working directory.
+For `kind=aircombat`, omit `assets` and `escort_assignments`; the all-pair
+6-block guard remains enforced. `kind=escort` additionally fails if an enemy
+ever enters the 95-block defended distance to an explicitly named asset.
+The CLI emits factual per-pair/asset distances and exit code 1 on operational
+gating failure. A failure report is still written when `--summary` is used.
+Synthetic verifier tests in source/Docker CI do **not** demonstrate success
+of any live flight. Actual GameTest aircraft liveness and team/escort orders
+must additionally be asserted inside the Forge probe; manifest metadata alone
+does not prove those facts, nor do safe geometries prove any weapon hit/kill.
+
+The pinned operational GameTests supply non-placeholder manifests at
+`scenarios/forge-operational-2v2.json` (four simultaneous planes over
+280 ticks) and `scenarios/forge-operational-b17-escort.json` (five simultaneous
+planes over 340 ticks). They are checked only when real per-plane receipts
+are available. The real Forge tests additionally require actual opposing
+engagement and sustained ESCORT phases. The independent verifier cannot
+replace those game-side mission assertions. A failed GameTest or missing
+per-plane trace must never be reported as a passed combat mission.

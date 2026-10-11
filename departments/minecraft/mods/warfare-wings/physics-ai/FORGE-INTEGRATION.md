@@ -1,6 +1,6 @@
 # Warfare Wings Tactical AI → Real Forge 1.20.1 Aircraft Bridge
 
-Status: **source compiled; pinned real aircraft GameTest execution NOT_RUN until both exact runtime binaries are locally staged**. This is an experimental Forge integration with no weapon firing and no claim of source/microkernel to actual Minecraft parity.
+Status: **exact-JAR Forge 1.20.1 GameTest measured; 14/15 tests PASS, B-17 operational protection FAILED**. The pinned owner Warfare Wings JAR and matching IA JAR were hash-verified and tested locally. This remains an experimental Forge integration with no weapon firing and no claim of full source/microkernel-to-Minecraft parity.
 
 ## Ownership and runtime contract
 
@@ -64,7 +64,7 @@ The exact originally supplied WW SHA-256 JAR and pinned IA SHA-512 JAR are now b
 
 The driver has one-tick control lag, ArmorStand piloting, no ownership of real player controls, no weapon firing, no multiplayer player-input protocol, and no proof that the command will be acceptable in every game configuration. Only actual GameTest telemetry is promoted to `MEASURED`; model ranks remain `SOURCE_MICROKERNEL`.
 
-## Live multi-aircraft autonomy (new, not yet exact-JAR measured)
+## Live multi-aircraft autonomy (measured in bounded exact-JAR GameTests)
 
 The `LiveSquadronCommands` operator interface is distinct from the original `/wwai patrol` research shortcut. A new live run registers an independently controlled, already-airborne and empty Warfare Wings entity; it mounts an owned ArmorStand pilot, retains an independent `TacticalAirAI.Memory`, and drives the **same** `FlightControlLoop` and IA next-tick input path. Up to 16 aircraft can be enrolled per command, subject to 64 active live-aircraft slots. Each controller expires automatically after 900 completed aircraft ticks and can be stopped sooner. Atomic preflight rejects an invalid or occupied selection; bulk enrollment rolls back any pilots successfully started before a later failure. Only explicitly selected entities are enrolled.
 
@@ -144,3 +144,29 @@ Actual testing also exposed orphaned aircraft from prior GameTest batches: the 1
 Fuel semantics were also corrected from source: `EngineVehicle.getFuelUtilization()` denotes powered boiler utilization rather than fuel quantity. The runtime now reads the private pinned `EngineVehicle.fuel[]` counters via guarded reflection and returns a conservative fraction of `TARGET_FUEL=1000` for RTB decisions; when calibration disables fuel consumption, reserve is explicitly 1.0. `Ia133Microkernel.State.fuelUtilization` continues to receive actual engine utilization and the frame uses this separate fuel-reserve indicator. IA `VehicleEntity.getHealth()` is already normalized to 0..1 in pinned source.
 
 **Remaining implementation limits:** No weapon fire, bomb or torpedo release is enabled; actual WW bullet/bomb bytecode ownership/cooldown/friendly checks do not yet meet the contract above. No exact-class `*Torpedo*` implementation was identified in the inspected WW JAR inventory. The 24-plane smoke measures only short controlled movement; combat kill outcomes, dogfight damage/avoidance under multiple actively engaging hostiles, longer-term fuel endurance, realistic landing, and all 24 aircraft's full 401-tick precision calibration remain further research. Archive the exact traces and unchanged artifact hashes with any new acceptance decisions.
+
+## Extended real operational GameTests — 2026-10-11
+
+`OperationalAirCombatGameTests` adds two independent longer acceptance scenarios using the exact pinned JARs and server-controlled aircraft. The scenario controller never creates projectiles, infers hostile positions outside FOV/range/LOS, or counts simulated combat hits. `GameTestFlightChunkLease` is test-only: it loads current and anticipated flight chunks, uses shared per-level reference-counted tickets, releases only chunks whose forced state it actually changed, and cleans up on normal completion/server stop. It does not alter regular `/wwai` pilot behavior. After the original CI detected B-17 tests stalling outside the GameTest structure, new tests preload each spawn's initial chunk before creating aircraft, require consecutive 20 Hz entity ticks, and fail explicitly if any enrolled plane stops ticking for more than 20 server ticks.
+
+The operational scenarios are:
+
+| GameTest | Aircraft and duration | Physical acceptance conditions |
+|---|---|---|
+| `twoVsTwoMustReallyEngageAndManeuver`, batch `ww_operational_2v2` | 2 A6M vs 2 P-47N, 280 actual ticks each | All four flights finish and move at least 30 blocks; any pair separation at least 6 blocks; at least one opposing contact comes within 120 blocks; each side records at least 8 confirmed visible-hostile ticks |
+| `twoEscortsDefendB17AgainstTwoApproachingHostiles`, batch `ww_operational_b17_escort` | B-17 + 2 P-47N escorts vs 2 approaching A6M, 340 ticks each | All five finish and move at least 30 blocks; any pair separation at least 6 blocks; each escort has at least 150 assigned escort ticks; attackers approach the B-17 within 150 blocks; **zero** ticks with a raider inside the B-17's 95-block protection corridor |
+
+Every plane generates its own `op-<name>-forge-controls.csv` trace; a separate `operational-2v2-geometry.csv` or `operational-b17-escort-geometry.csv` is recorded with one clock/sample per plane and the real coordinates, sighting counts, escort phases, opponent distances and B-17 distances. An operational failure is reported as a GameTest **FAILED** while preserving all geometry and allowing subsequent unrelated tests to execute; no acceptance threshold is silently lowered. Both real scenario results are further independently inspectable from their five- or four-plane control traces.
+
+### Actual measured result
+
+The final local run of the exact binaries reported **15 total GameTests: 14 PASS / 1 FAILED**, with `runGameTestServer` **exit code 1** (expected whenever a required GameTest fails). The existing 13 tests continued passing after the operational failure.
+
+| Long-run measured result | Status | Actual observation |
+|---|---|---|
+| 2 vs 2, 280 ticks | **PASS** | Four source-guided aircraft flew with synchronized complete traces; minimum any-plane separation **11.198347 blocks**; minimum opposing-team separation **27.331806 blocks**; no pair came closer than 6 blocks |
+| B-17 escort, 340 ticks | **FAILED** | Actual attackers penetrated the 95-block corridor for **101 ticks**, with closest B-17–raider separation **66.029297 blocks**; both guards were assigned to the escort phase but did not physically contain the attackers |
+
+The B-17 failure is an actual **operational threat-containment failure**; it does not establish that a hypothetical machine-gun attack or kills would have occurred, because weapons are still disabled. The B-17 scenario correctly rejects a superficially successful result based on moving distances or assignment counts alone. The test still requires complete active ticks and confirmed threat approach: it cannot pass by preventing the attackers from loading, hiding targets, reducing attack range or omitting the hostile team. This work is a physical acceptance instrument for the tactical controller rather than a declaration that the controller now wins these engagements.
+
+The initial runs failed from an un-ticking raider spawned in a distant chunk and from shared chunk leases being released too early. Source-level issues were corrected by synchronous preloading, shared ticket reference counting and one-time registration before physics-time measurement. The later reproducible B-17 run ran the required actual geometry and reached the explicit 95-block protection assertion. A future controller change must prove **zero real intrusion ticks** under the same or harder scenario before this GameTest can become PASS. The snapshot here may predate concurrent tactical Java improvements made by another worker; rerun against their final source before accepting integration.
