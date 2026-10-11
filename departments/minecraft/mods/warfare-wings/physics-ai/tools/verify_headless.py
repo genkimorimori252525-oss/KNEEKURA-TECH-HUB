@@ -51,6 +51,8 @@ def main() -> None:
     run(sys.executable, str(ROOT / "tools" / "test_representative_calibrations.py"))
     run(sys.executable, str(ROOT / "tools" / "test_exact_weapon_failclosed.py"))
     run(sys.executable, str(ROOT / "tools" / "test_long_strike_receipts.py"))
+    run(sys.executable, str(ROOT / "tools" / "test_physics_twin_review.py"))
+    run(sys.executable, str(ROOT / "tools" / "test_flight_lab.py"))
 
     with tempfile.TemporaryDirectory(prefix="warfare-wings-atlas-") as directory:
         json_out = Path(directory) / "aircraft-atlas-ai-view.json"

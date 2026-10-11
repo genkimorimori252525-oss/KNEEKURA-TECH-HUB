@@ -17,8 +17,8 @@ public final class ReactionCalibrationTraceMain {
     private ReactionCalibrationTraceMain() {}
 
     public static void main(String[] args) throws Exception {
-        if (args.length != 3)
-            throw new IllegalArgumentException("Usage: ReactionCalibrationTraceMain ANCHOR_CSV AIRCRAFT_ID OUTPUT_CSV");
+        if (args.length != 3 && (args.length != 4 || !"--pinned-wind".equals(args[3])))
+            throw new IllegalArgumentException("Usage: ReactionCalibrationTraceMain ANCHOR_CSV AIRCRAFT_ID OUTPUT_CSV [--pinned-wind]");
         Path out = Path.of(args[2]);
         var entry = AircraftAtlasMain.load(Path.of(args[0])).stream()
                 .filter(e -> e.aircraftId().equals(args[1])).findFirst()
@@ -28,7 +28,7 @@ public final class ReactionCalibrationTraceMain {
         State state = new State(0, new Vec3(0, 200, 0), new Vec3(0,0,0.7),
                 0,0,0, 0,0,0, 0,0,0, 1,0,1, 0,false,false);
         Control control = Control.neutral(1);
-        World flat = new FlatWorld(0);
+        World flat = args.length == 4 ? PinnedIa133WindWorld.calmAirCalibration() : new FlatWorld(0);
         String id = entry.baseId() + "-throttle-step-v1";
         Files.createDirectories(out.toAbsolutePath().getParent());
         try (BufferedWriter writer = Files.newBufferedWriter(out, StandardCharsets.UTF_8)) {
@@ -48,6 +48,7 @@ public final class ReactionCalibrationTraceMain {
             }
         }
         System.out.println("Exact-WW reaction SOURCE trace: " + model.id()
-                + " reactionTicks=" + reactionTicks + " samples=401");
+                + " reactionTicks=" + reactionTicks + " samples=401"
+                + (args.length == 4 ? " original_Ia133_speed_wind=enabled" : " legacy_zero_wind"));
     }
 }

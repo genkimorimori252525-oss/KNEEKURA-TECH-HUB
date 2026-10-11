@@ -41,6 +41,10 @@ jobs:
         run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_exact_weapon_failclosed.py
       - name: Verify long real-strike receipt parser rejects early RTB and missing synchronized actors
         run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_long_strike_receipts.py
+      - name: Verify source-vs-Forge physics-twin mismatch auditor rejects substitute samples
+        run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_physics_twin_review.py
+      - name: Verify deterministic 24-airframe high-throughput AI research lab and offline visualization
+        run: python departments/minecraft/mods/warfare-wings/physics-ai/tools/test_flight_lab.py
       - name: Rebuild and verify 24-aircraft AI Atlas
         run: |
           ROOT=departments/minecraft/mods/warfare-wings/physics-ai

@@ -81,6 +81,11 @@ public final class Ia133Microkernel {
     public interface World {
         double groundHeight(double x, double z);
         default Wind wind(Model model, State state) { return Wind.ZERO; }
+        /** Real IA getWindStrength() samples speed AFTER applyFriction().
+         * Default retains the frozen Atlas v2/v3 legacy world semantics. */
+        default Wind windAfterFriction(Model model, State state, Vec3 physicalVelocity) {
+            return wind(model, state);
+        }
     }
 
     public record FlatWorld(double y) implements World {
@@ -144,7 +149,7 @@ public final class Ia133Microkernel {
         if (state.onGround) {
             pitch = (pitch + model.groundPitch) * 0.9 - model.groundPitch;
         } else if (!state.touchingWater) {
-            Wind wind = world.wind(model, state);
+            Wind wind = world.windAfterFriction(model, state, velocity);
             pitch += wind.pitchDeltaDeg;
             yaw += wind.yawDeltaDeg;
             velocity = velocity.add(wind.pitchDeltaDeg * 0.005, 0, wind.yawDeltaDeg * 0.005);

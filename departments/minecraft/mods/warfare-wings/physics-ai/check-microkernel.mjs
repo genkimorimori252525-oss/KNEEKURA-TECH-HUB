@@ -50,6 +50,9 @@ async function same(generatedPath, goldenPath) {
 try {
   const sources = [
     path.join(mainDir, 'Ia133Microkernel.java'),
+    path.join(mainDir, 'PinnedIa133WindWorld.java'),
+    path.join(mainDir, 'RealPhysicsTwinReplayMain.java'),
+    path.join(mainDir, 'RealTacticalPhysicsTwinReplayMain.java'),
     path.join(mainDir, 'WarfareWingsAircraft.java'),
     path.join(mainDir, 'PerformanceReportMain.java'),
     path.join(mainDir, 'TraceCsv.java'),
@@ -67,6 +70,8 @@ try {
     path.join(mainDir, 'HistoricalDoctrineOrders.java'),
     path.join(mainDir, 'TacticalScenarioMain.java'),
     path.join(testDir, 'Ia133MicrokernelSelfTest.java'),
+    path.join(testDir, 'PinnedIa133WindSelfTest.java'),
+    path.join(testDir, 'RealPhysicsTwinReplaySelfTest.java'),
     path.join(testDir, 'WarfareWingsEngineReactionSelfTest.java'),
     path.join(testDir, 'ExactReactionSquadronSelfTest.java'),
     path.join(testDir, 'FlightGuidanceSelfTest.java'),
@@ -79,8 +84,15 @@ try {
     path.join(testDir, 'TacticalAirAISelfTest.java'),
     path.join(testDir, 'HistoricalDoctrineOrdersSelfTest.java'),
   ];
-  run(javac, ['--release', '17', '-d', classes, ...sources]);
+  // Windows javac otherwise inherits CP932 and rejects the UTF-8 en dashes
+  // already present in the immutable legacy performance reports. Keep the
+  // identical source bytes/Java17 meaning across Docker, Ubuntu and Windows.
+  run(javac, ['-encoding', 'UTF-8', '--release', '17', '-d', classes, ...sources]);
   run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.Ia133MicrokernelSelfTest']);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.PinnedIa133WindSelfTest',
+    path.join(here, 'data/base-aircraft-anchor-v1.csv')]);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.RealPhysicsTwinReplaySelfTest',
+    path.join(here, 'data/base-aircraft-anchor-v1.csv')]);
   run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.WarfareWingsEngineReactionSelfTest',
     path.join(here, 'data/base-aircraft-anchor-v1.csv')]);
   run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.ExactReactionSquadronSelfTest',
@@ -114,6 +126,17 @@ try {
   run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.ReactionCalibrationTraceMain',
     path.join(here, 'data/base-aircraft-anchor-v1.csv'), 'warfare_wings:a6m', reactionB]);
   await same(reactionA, reactionB);
+  // New opt-in original IA speed-dependent aerodynamic wind. Keep old
+  // zero-wind V2/V3 reports byte-for-byte as historical provenance.
+  const originalWindA = path.join(generated, 'a6m-throttle-pinned-wind-a.csv');
+  const originalWindB = path.join(generated, 'a6m-throttle-pinned-wind-b.csv');
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.ReactionCalibrationTraceMain',
+    path.join(here, 'data/base-aircraft-anchor-v1.csv'), 'warfare_wings:a6m', originalWindA, '--pinned-wind']);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.ReactionCalibrationTraceMain',
+    path.join(here, 'data/base-aircraft-anchor-v1.csv'), 'warfare_wings:a6m', originalWindB, '--pinned-wind']);
+  await same(originalWindA, originalWindB);
+  if ((await readFile(originalWindA, 'utf8')) === (await readFile(reactionA, 'utf8')))
+    throw new Error('Original IA speed-dependent wind was silently omitted from the new source path');
   const traceText = await readFile(traceA, 'utf8');
   const traceLines = traceText.trimEnd().split(/\r?\n/);
   if (traceLines.length !== 402) throw new Error(`Expected trace header + 401 rows, got ${traceLines.length}`);

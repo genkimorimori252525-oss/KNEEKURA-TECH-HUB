@@ -1,5 +1,30 @@
 # Warfare Wings — Physics AI Laboratory
 
+## Latest research milestone (2026-10-11)
+
+**[FLIGHT-PHYSICS-TWIN-2026-10-11.md](FLIGHT-PHYSICS-TWIN-2026-10-11.md)**
+documents the opt-in bytecode-reconstructed original IA 1.3.3 aerodynamic
+speed-dependent wind, deterministic source physics, and strict **35 paired
+real-Forge flight receipts / 24 original aircraft / 5,880 actual 20Hz steps**.
+With the *pre-recorded actual aircraft command sequence and original airborne
+initial state*, the 35 source replays reproduce their final positions to
+**≤0.001776 blocks** under the tested free-air/no-voxel conditions. This is
+**not** a certificate for autonomous policy, collisions, weapons, crashes,
+landing, terrain or complete Minecraft parity.
+
+**[FLIGHT-RESEARCH-LAB.md](FLIGHT-RESEARCH-LAB.md)** describes the new fully
+offline SOURCE experiment engine: **12,288 seeded trials / 2,211,840 Java 17
+physics ticks**, 24 aircraft × 11 controlled experiments, source flight and
+role-aware AI guidance, self-contained HTML 3D-style trajectory replay, and
+independently reproducible JSON/CSV results. Run `tools/flight_lab_run.py`
+for an experimental batch, or `tools/run_physics_twin.py` against authentic
+original-Forge receipts for independent model-evidence reconciliation.
+
+The original **20 required exact-Forge GameTests = 19 PASS, one true FAILED**:
+the protected B-17 still suffers 101/340 hostile-intrusion ticks inside the
+unmodified 95-block radius. Weapons remain disarmed pending pinned ownership,
+cooldown, muzzle LOS and friendly-fire evidence. PR #102 must remain Draft.
+
 ## Status
 
 This is the canonical home for the **Warfare Wings physical-reproduction / autonomous-air-combat research**.
@@ -63,18 +88,21 @@ records the source-to-input autopilot, lookahead terrain/aircraft safety guards,
 [`TACTICS-EVIDENCE-v1.md`](TACTICS-EVIDENCE-v1.md) documents the historical
 source audit; these candidate tactics are not yet validated in Minecraft.
 
-The next source- and Forge-side implementation adds explicit-team live air
+The later source- and Forge-side implementation added explicit-team live air
 groups, finite-visibility/occlusion/contact memory, heading-rotated formation
 stations, operator mission orders, 1v1/2v2 encounters and geometric strike
 phases. See [`FORGE-INTEGRATION.md`](FORGE-INTEGRATION.md),
 [`COMBAT-SIMULATION-v1.md`](COMBAT-SIMULATION-v1.md) and
 [`RUNNER-READINESS-2026-10-11.md`](RUNNER-READINESS-2026-10-11.md).
 The original exact owner JAR was subsequently recovered and SHA-verified.
-Local original-jar Forge 1.20.1 GameTest succeeded **13/13**, including 24
-serialized live entity flight-control smokes and five long representative
-control traces. The user-controlled Windows runner likewise reached all
-GameTest and trace receipt stages; its most recent failure was a Windows
-PowerShell UTF-8 BOM in the final JSON calibration metadata step, now fixed.
+The original **13/13** GameTest success was an earlier *baseline-only*
+milestone including sequential 24-plane aircraft smokes and five
+representative traces. The later real simultaneous combat GameTests extend
+the suite to **19/20 PASS**; the B-17 95-block mission guard genuinely FAILS
+(101/340 ticks), even though source replay and other live missions succeed.
+The historical PowerShell UTF-8 BOM failure and later artifact endpoint
+failure were independently resolved. An evidence fail is not a CI transport
+failure and is never silently waived.
 See [`ENGINE-REACTION-CALIBRATION-v1.md`](ENGINE-REACTION-CALIBRATION-v1.md)
 for the new bytecode-verified 24-plane engine reaction catalog and the
 completed, non-frozen 401-tick A6M source/runtime comparison.

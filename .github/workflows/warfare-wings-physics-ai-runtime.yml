@@ -293,6 +293,7 @@ jobs:
           $src = '../src/main/java/org/kneekura/techhub/warfarewings/physics'
           $sources = @(
             "$src/Ia133Microkernel.java",
+            "$src/PinnedIa133WindWorld.java",
             "$src/WarfareWingsAircraft.java",
             "$src/WarfareWingsEngineReaction.java",
             "$src/AircraftAtlasMain.java",
@@ -371,6 +372,24 @@ jobs:
             throw "Actual no-ordnance strike/egress/RTB physical acceptance FAILED: $LASTEXITCODE"
           }
 
+      - name: Independently replay 24 original aircraft and 11 extended original-Forge physics traces outside Minecraft
+        id: pinned_physics_twin
+        continue-on-error: true
+        working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
+        run: |
+          # Existing full GameTests have already run with the exact owner JARs.
+          # No proprietary JAR is handed to the replay; it compiles only Java17
+          # source and pairs every physics step against the real CSV receipts.
+          python ../tools/run_physics_twin.py `
+            --anchor ../data/base-aircraft-anchor-v1.csv `
+            --real-traces run-gametest/ww-physics-traces `
+            --output run-gametest/ww-physics-traces/physics-twin `
+            --java-home $env:JAVA_HOME `
+            --max-final-drift 0.01
+          if ($LASTEXITCODE -ne 0) {
+            throw "Original-Forge recorded-control aerodynamic flight physics failed the independent 35-trace replay gate: $LASTEXITCODE"
+          }
+
       - name: Upload runtime trace
         id: upload_trace
         if: always()
@@ -406,6 +425,7 @@ jobs:
           OPERATIONAL_OUTCOME: ${{ steps.operational_verification.outcome }}
           CALIBRATION_OUTCOME: ${{ steps.representative_calibration.outcome }}
           LONG_STRIKE_OUTCOME: ${{ steps.long_strike_verification.outcome }}
+          PHYSICS_TWIN_OUTCOME: ${{ steps.pinned_physics_twin.outcome }}
           UPLOAD_OUTCOME: ${{ steps.upload_trace.outcome }}
           RETRY_UPLOAD_OUTCOME: ${{ steps.retry_upload_trace.outcome }}
         run: |
@@ -417,6 +437,9 @@ jobs:
           }
           if ($env:LONG_STRIKE_OUTCOME -ne 'success') {
             throw "Real no-ordnance strike/return mission FAILED: $env:LONG_STRIKE_OUTCOME"
+          }
+          if ($env:PHYSICS_TWIN_OUTCOME -ne 'success') {
+            throw "Pinned original-Forge 35-trace free-air Physics Twin parity gate FAILED: $env:PHYSICS_TWIN_OUTCOME"
           }
           if ($env:UPLOAD_OUTCOME -ne 'success' -and $env:RETRY_UPLOAD_OUTCOME -ne 'success') {
             throw "Actual runtime receipts could not be uploaded (possibly ENOTFOUND): first=$env:UPLOAD_OUTCOME retry=$env:RETRY_UPLOAD_OUTCOME"
