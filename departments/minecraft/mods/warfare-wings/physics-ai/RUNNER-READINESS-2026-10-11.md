@@ -54,25 +54,37 @@ Early GitHub Actions evidence from run #38109783517:
 
 A genuine owner-JAR A6M 401-sample throttle trace is now available locally
 (`runtime-probe/run-gametest/ww-physics-traces/a6m-throttle-step-v1-runtime.csv`)
-alongside the regenerated Microkernel trace and the unchanged threshold-free
-`tools/compare_traces.py` report. Observed diagnostics from that single run:
+alongside regenerated Microkernel traces and the threshold-free
+`tools/compare_traces.py` report. One **earlier invalid capture** repeated
+the same actual aircraft position and engine state between ticks 223 and
+400 because the airplane left the loaded chunk. Its apparent peak
+25.0815 blocks/s, speed RMSE 11.9768 and engine RMSE 0.26584
+**must not be treated as complete 400-tick physical observations**.
+`RuntimeTraceManager` now forces and releases its own test corridor,
+checks actual entity tickCount continuity, and fails rather than recording
+a non-ticking aircraft.
 
-| Same-artifact comparison | Microkernel source | Real Minecraft |
-|---|---:|---:|
-| Maximum A6M speed in 400-tick throttle trace | 33.6700 blocks/s | 25.0815 blocks/s |
-| First engine power 0.5 tick | 14 | 69 |
-| Engine power 0.9 achieved | tick 45 | not within 400 ticks |
+The subsequent completed **400 actually moving ticks** produced:
 
-Additional telemetry: speed RMSE **11.9768 blocks/s**, engine-power RMSE
-**0.26584**, final speed error **8.5885 blocks/s**. There is a substantial
-source-to-runtime physics divergence and it must remain a blocking
-`CALIBRATION_ONLY_NO_ACCEPTANCE_THRESHOLD` finding, not a fabricated
-`SOURCE_RUNTIME_PARITY_PASS`. The absolute position error also includes
-real GameTest's world-space fixture origin and must not be compared as
-an origin-aligned physical drift without normalizing initial positions.
-Do not retune Atlas models to one run without investigating engine
-power/fuel timing and obtaining repeated same-artifact traces for the
-A6M, P-47N, IL-2 and B-17 under identical test envelopes.
+| Same-artifact comparison | Legacy source (reaction20) | Exact bytecode source (reaction100) | Real Minecraft |
+|---|---:|---:|---:|
+| Maximum A6M speed in 400-tick throttle trace | 33.6700 b/s | 32.1310 b/s | 31.7603 b/s |
+| First engine power 0.5 tick | 14 | 69 | 69 |
+| Engine power RMSE | 0.2589 | 0.00000019 | reference |
+| Speed RMSE | 10.9859 b/s | 0.1554 b/s | reference |
+| Final speed absolute error | 1.9097 b/s | 0.3707 b/s | reference |
+
+The new `WarfareWingsEngineReaction` opt-in 24-model catalog was checked
+against each exact-JAR `getEngineReactionSpeed()` override. The A6M's
+observed engine discrepancy was primarily the old generic20 versus actual100
+reaction time. The corrected source has **2.621 blocks final origin-aligned**
+position drift and a small residual speed difference; no general physics
+parity verdict or tolerance is assigned yet.
+
+This is still `CALIBRATION_ONLY_NO_ACCEPTANCE_THRESHOLD`, **not**
+`SOURCE_RUNTIME_PARITY_PASS`. The source model is no longer blindly
+retuned based on an incomplete trace. Repeat equal-envelope calibration
+for A6M, P-47N, IL-2 and B-17 before promoting the derived Atlas.
 
 The original researched Warfare Wings SHA-256 is
 `dc3029597c88859744633b6f5e4a9f21d449294b1aaac90ea0c1749d7aa98a43`.

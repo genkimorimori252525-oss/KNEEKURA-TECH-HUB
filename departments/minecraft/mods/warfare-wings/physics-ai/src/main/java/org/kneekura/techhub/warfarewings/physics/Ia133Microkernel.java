@@ -88,8 +88,20 @@ public final class Ia133Microkernel {
     }
 
     public static State tick(Model model, State state, Control control, World world) {
+        // V1 legacy source profile remains byte-for-byte reproducible; callers
+        // performing same-artifact flight calibration must pass the concrete
+        // Warfare Wings EngineVehicle.getEngineReactionSpeed() override.
+        return tickWithReaction(model, state, control, world, ENGINE_REACTION_TICKS);
+    }
+
+    public static State tickWithReaction(Model model, State state, Control control,
+                                         World world, double engineReactionTicks) {
         if (model == null || state == null || control == null || world == null)
             throw new IllegalArgumentException("null tick input");
+        if (!Double.isFinite(engineReactionTicks) || engineReactionTicks <= 0
+                || !Double.isFinite(model.acceleration() / engineReactionTicks)
+                || model.acceleration() / engineReactionTicks > 1.0)
+            throw new IllegalArgumentException("invalid engine reaction from exact WW source");
 
         double roll = state.onGround ? state.rollDeg * 0.9
                 : -state.smoothX * model.rollFactor * (1.0 - (state.touchingWater ? 1.0 : 0.0));
@@ -168,7 +180,7 @@ public final class Ia133Microkernel {
         double smoothY = state.smoothY * 0.9 + rawY * INPUT_SMOOTH_FACTOR;
         double smoothZ = smoothZForController * 0.9 + rawZ * INPUT_SMOOTH_FACTOR;
 
-        double engineFactor = model.acceleration / ENGINE_REACTION_TICKS;
+        double engineFactor = model.acceleration / engineReactionTicks;
         double enginePowerSmooth = state.enginePowerSmooth * (1.0 - engineFactor) + engineTarget * engineFactor;
 
         return new State(state.tick + 1, moved, sanitize(velocity), yaw, pitch, roll,

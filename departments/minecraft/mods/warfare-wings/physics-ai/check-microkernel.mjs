@@ -54,6 +54,8 @@ try {
     path.join(mainDir, 'PerformanceReportMain.java'),
     path.join(mainDir, 'TraceCsv.java'),
     path.join(mainDir, 'TraceScenarioMain.java'),
+    path.join(mainDir, 'ReactionCalibrationTraceMain.java'),
+    path.join(mainDir, 'WarfareWingsEngineReaction.java'),
     path.join(mainDir, 'AircraftAtlasMain.java'),
     path.join(mainDir, 'FlightGuidance.java'),
     path.join(mainDir, 'FlightSafetyPlanner.java'),
@@ -65,6 +67,7 @@ try {
     path.join(mainDir, 'HistoricalDoctrineOrders.java'),
     path.join(mainDir, 'TacticalScenarioMain.java'),
     path.join(testDir, 'Ia133MicrokernelSelfTest.java'),
+    path.join(testDir, 'WarfareWingsEngineReactionSelfTest.java'),
     path.join(testDir, 'FlightGuidanceSelfTest.java'),
     path.join(testDir, 'FlightGuidanceAtlasSelfTest.java'),
     path.join(testDir, 'FlightControlLoopSelfTest.java'),
@@ -77,6 +80,8 @@ try {
   ];
   run(javac, ['--release', '17', '-d', classes, ...sources]);
   run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.Ia133MicrokernelSelfTest']);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.WarfareWingsEngineReactionSelfTest',
+    path.join(here, 'data/base-aircraft-anchor-v1.csv')]);
   run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.FlightGuidanceSelfTest']);
   run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.FlightGuidanceAtlasSelfTest',
     path.join(here, 'data/base-aircraft-anchor-v1.csv')]);
@@ -99,6 +104,13 @@ try {
   run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.TraceScenarioMain', traceA]);
   run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.TraceScenarioMain', traceB]);
   await same(traceA, traceB);
+  const reactionA = path.join(generated, 'a6m-throttle-bytecode-reaction-a.csv');
+  const reactionB = path.join(generated, 'a6m-throttle-bytecode-reaction-b.csv');
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.ReactionCalibrationTraceMain',
+    path.join(here, 'data/base-aircraft-anchor-v1.csv'), 'warfare_wings:a6m', reactionA]);
+  run(java, ['-cp', classes, 'org.kneekura.techhub.warfarewings.physics.ReactionCalibrationTraceMain',
+    path.join(here, 'data/base-aircraft-anchor-v1.csv'), 'warfare_wings:a6m', reactionB]);
+  await same(reactionA, reactionB);
   const traceText = await readFile(traceA, 'utf8');
   const traceLines = traceText.trimEnd().split(/\r?\n/);
   if (traceLines.length !== 402) throw new Error(`Expected trace header + 401 rows, got ${traceLines.length}`);

@@ -69,9 +69,17 @@ stations, operator mission orders, 1v1/2v2 encounters and geometric strike
 phases. See [`FORGE-INTEGRATION.md`](FORGE-INTEGRATION.md),
 [`COMBAT-SIMULATION-v1.md`](COMBAT-SIMULATION-v1.md) and
 [`RUNNER-READINESS-2026-10-11.md`](RUNNER-READINESS-2026-10-11.md).
-The 2026-10-11 self-hosted GameTest run reached its actual Windows worker,
-then stopped at the **missing exact user-owned Warfare Wings JAR** provenance
-gate. No real Minecraft air-combat victory or physical parity is claimed.
+The original exact owner JAR was subsequently recovered and SHA-verified.
+Local original-jar Forge 1.20.1 GameTest succeeded **13/13**, including 24
+serialized live entity flight-control smokes and five long representative
+control traces. The user-controlled Windows runner likewise reached all
+GameTest and trace receipt stages; its most recent failure was a Windows
+PowerShell UTF-8 BOM in the final JSON calibration metadata step, now fixed.
+See [`ENGINE-REACTION-CALIBRATION-v1.md`](ENGINE-REACTION-CALIBRATION-v1.md)
+for the new bytecode-verified 24-plane engine reaction catalog and the
+completed, non-frozen 401-tick A6M source/runtime comparison.
+No real Minecraft weapon effects, successful hostile escort defense or
+generally accepted source/runtime physics parity is claimed.
 
 ```text
 warfare-wings/

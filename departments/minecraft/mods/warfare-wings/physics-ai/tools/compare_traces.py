@@ -74,6 +74,25 @@ def load_trace(path: Path, expected_source: str) -> list[dict]:
         for field in NUMERIC:
             item[field] = _finite(row[field], field, tick)
         parsed.append(item)
+    if expected_source == "minecraft_runtime" and scenario.endswith("-throttle-step-v1"):
+        # A previous "successful" A6M trace repeated an identical airborne
+        # Entity state from tick 223 to 400: the world clock advanced but the
+        # aircraft left the loaded chunk. It must never count as a measured
+        # 401-physics-tick run. True constant-speed flight still moves position;
+        # even if stuck against terrain, the engine should keep responding.
+        repeated = 0
+        fields = ("pos_x", "pos_y", "pos_z", "vel_x", "vel_y", "vel_z",
+                  "engine_power", "yaw_deg", "pitch_deg")
+        for previous, current in zip(parsed, parsed[1:]):
+            if current["game_time"] != previous["game_time"] + 1:
+                raise ValueError(f"{path}: non-consecutive actual game time at tick {current['tick']}")
+            repeated = repeated + 1 if all(
+                current[f] == previous[f] for f in fields
+            ) else 0
+            if repeated >= 3:
+                raise ValueError(
+                    f"{path}: NON_TICKING_REAL_AIRCRAFT repeated physics state at tick {current['tick']}"
+                )
     return parsed
 
 
@@ -154,6 +173,7 @@ def compare(micro_path: Path, runtime_path: Path, output_dir: Path, runtime_meta
 
     metric_series: dict[str, list[float]] = {
         "position_error_blocks": [],
+        "position_origin_aligned_drift_blocks": [],
         "velocity_error_bpt": [],
         "speed_error_bps": [],
         "horizontal_speed_error_bps": [],
@@ -170,18 +190,24 @@ def compare(micro_path: Path, runtime_path: Path, output_dir: Path, runtime_meta
 
     diff_rows = []
     ai_series = []
+    micro_zero = micro[0]
+    runtime_zero = runtime[0]
     for a, b in zip(micro, runtime):
         if a["tick"] != b["tick"]:
             raise ValueError("tick mismatch")
         dx = b["pos_x"] - a["pos_x"]
         dy = b["pos_y"] - a["pos_y"]
         dz = b["pos_z"] - a["pos_z"]
+        odx = (b["pos_x"] - runtime_zero["pos_x"]) - (a["pos_x"] - micro_zero["pos_x"])
+        ody = (b["pos_y"] - runtime_zero["pos_y"]) - (a["pos_y"] - micro_zero["pos_y"])
+        odz = (b["pos_z"] - runtime_zero["pos_z"]) - (a["pos_z"] - micro_zero["pos_z"])
         dvx = b["vel_x"] - a["vel_x"]
         dvy = b["vel_y"] - a["vel_y"]
         dvz = b["vel_z"] - a["vel_z"]
 
         errors = {
             "position_error_blocks": _norm3(dx, dy, dz),
+            "position_origin_aligned_drift_blocks": _norm3(odx, ody, odz),
             "velocity_error_bpt": _norm3(dvx, dvy, dvz),
             "speed_error_bps": abs(b["speed_bps"] - a["speed_bps"]),
             "horizontal_speed_error_bps": abs(b["horizontal_speed_bps"] - a["horizontal_speed_bps"]),
@@ -222,6 +248,7 @@ def compare(micro_path: Path, runtime_path: Path, output_dir: Path, runtime_meta
             "micro_engine_power": a["engine_power"],
             "runtime_engine_power": b["engine_power"],
             "position_error_blocks": errors["position_error_blocks"],
+            "position_origin_aligned_drift_blocks": errors["position_origin_aligned_drift_blocks"],
             "velocity_error_bpt": errors["velocity_error_bpt"],
             "speed_error_bps": errors["speed_error_bps"],
             "yaw_error_deg": errors["yaw_error_deg"],
@@ -231,7 +258,10 @@ def compare(micro_path: Path, runtime_path: Path, output_dir: Path, runtime_meta
     metrics = {name: _stats(values, ticks) for name, values in metric_series.items()}
     metadata = None
     if runtime_metadata is not None:
-        metadata = json.loads(runtime_metadata.read_text(encoding="utf-8"))
+        # Windows PowerShell 5.1 Set-Content -Encoding UTF8 emits a BOM.
+        # Accept that exact legal UTF-8 form while retaining strict JSON
+        # parsing. No metadata provenance fields are guessed or stripped.
+        metadata = json.loads(runtime_metadata.read_text(encoding="utf-8-sig"))
 
     summary = {
         "schema_version": CALIBRATION_VERSION,
@@ -293,6 +323,7 @@ def _markdown(summary: dict) -> str:
         "| Metric | RMSE | Maximum | Final | Unit |",
         "|---|---:|---:|---:|---|",
         row("position_error_blocks", "Position", "blocks"),
+        row("position_origin_aligned_drift_blocks", "Origin-aligned position drift", "blocks"),
         row("velocity_error_bpt", "Velocity vector", "blocks/tick"),
         row("speed_error_bps", "Total speed", "blocks/s"),
         row("horizontal_speed_error_bps", "Horizontal speed", "blocks/s"),
@@ -318,14 +349,15 @@ def _markdown(summary: dict) -> str:
 
     speed = summary["metrics"]["speed_error_bps"]
     engine = summary["metrics"]["engine_power_error"]
-    position = summary["metrics"]["position_error_blocks"]
+    position = summary["metrics"]["position_origin_aligned_drift_blocks"]
     lines += [
         "",
         "## AI reading hints",
         "",
         f"- Largest speed divergence: {speed['max_abs']:.6f} blocks/s at tick {speed['max_abs_tick']}.",
         f"- Largest engine-power divergence: {engine['max_abs']:.6f} at tick {engine['max_abs_tick']}.",
-        f"- Final accumulated position drift: {position['final_abs']:.6f} blocks.",
+        f"- Final **origin-aligned** position drift: {position['final_abs']:.6f} blocks.",
+        "- Raw absolute position error also includes GameTest world-layout offset and is NOT physical drift.",
         "- Use `calibration-ai-view.json` for full ordered time-series inspection or chart generation.",
         "- Do not tune constants solely to reduce one metric until the same-artifact runtime identity and repeated-run variance are established.",
         "",

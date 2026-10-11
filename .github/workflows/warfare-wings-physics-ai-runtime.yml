@@ -119,6 +119,14 @@ jobs:
           if ((Get-FileHash $ia -Algorithm SHA512).Hash.ToLowerInvariant() -ne $env:EXPECTED_IA_SHA512) { throw 'Immersive Aircraft hash drift' }
           Write-Host "Exact runtime jars verified."
 
+      - name: Verify all 24 engine reaction overrides in the pinned original bytecode
+        working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
+        run: |
+          $original = 'flight-test-mods/warfare_wings-1.1.4-1.20.1-forge.jar'
+          $javap = Join-Path $env:JAVA_HOME 'bin/javap.exe'
+          python ../tools/verify_engine_reaction_bytecode.py --jar $original --javap $javap
+          if ($LASTEXITCODE -ne 0) { throw "Exact 24-airframe engine source verification failed: $LASTEXITCODE" }
+
       - name: Run exact A6M throttle GameTest
         working-directory: departments/minecraft/mods/warfare-wings/physics-ai/runtime-probe
         run: gradle --no-daemon --console=plain runGameTestServer
@@ -247,8 +255,11 @@ jobs:
           $sources = @(
             "$src/Ia133Microkernel.java",
             "$src/WarfareWingsAircraft.java",
+            "$src/WarfareWingsEngineReaction.java",
+            "$src/AircraftAtlasMain.java",
             "$src/TraceCsv.java",
-            "$src/TraceScenarioMain.java"
+            "$src/TraceScenarioMain.java",
+            "$src/ReactionCalibrationTraceMain.java"
           )
           javac --release 17 -d $classes $sources
           if ($LASTEXITCODE -ne 0) { throw "Microkernel trace compilation failed: $LASTEXITCODE" }
@@ -275,10 +286,24 @@ jobs:
             immersive_aircraft_sha512 = '7b74442e161bb74538e0d8da34a81616daeea56a0da62db86113a78b3bf3c2b3a6b0e12f12454fd7c96092762f6b212ba57cb87eb1af2b242a4d5df4eca03055'
             warfare_wings_sha256 = 'dc3029597c88859744633b6f5e4a9f21d449294b1aaac90ea0c1749d7aa98a43'
             warfare_wings_source = 'local-user-owned-hash-verified'
-          } | ConvertTo-Json -Depth 4 | Set-Content -Encoding UTF8 $metadataPath
+          } | ConvertTo-Json -Depth 4 | ForEach-Object {
+            # PowerShell 5.1 Set-Content -Encoding UTF8 writes an unwanted
+            # BOM; store metadata as explicit UTF-8 without BOM instead.
+            [System.IO.File]::WriteAllText(
+              $metadataPath, $_, (New-Object System.Text.UTF8Encoding($false)))
+          }
 
           python ../tools/compare_traces.py --microkernel $micro --runtime $runtime --runtime-metadata $metadataPath --output-dir "$traceDir/calibration"
           if ($LASTEXITCODE -ne 0) { throw "Trace comparison failed: $LASTEXITCODE" }
+
+          # Separate corrected per-airframe engine reaction profile from
+          # unchanged Atlas v2 legacy-golden source predictions. Both remain
+          # CALIBRATION_ONLY_NO_ACCEPTANCE_THRESHOLD until wider parity tests.
+          $reactionTrace = "$traceDir/a6m-throttle-step-v1-reaction-source.csv"
+          java -cp $classes org.kneekura.techhub.warfarewings.physics.ReactionCalibrationTraceMain ../data/base-aircraft-anchor-v1.csv warfare_wings:a6m $reactionTrace
+          if ($LASTEXITCODE -ne 0) { throw "Original-bytecode response source trace failed: $LASTEXITCODE" }
+          python ../tools/compare_traces.py --microkernel $reactionTrace --runtime $runtime --runtime-metadata $metadataPath --output-dir "$traceDir/reaction-calibration"
+          if ($LASTEXITCODE -ne 0) { throw "Reaction-aware calibration comparison failed: $LASTEXITCODE" }
 
       - name: Upload runtime trace
         if: always()

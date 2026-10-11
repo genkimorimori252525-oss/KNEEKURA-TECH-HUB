@@ -6,7 +6,7 @@ import json
 import tempfile
 from pathlib import Path
 
-from compare_traces import COLUMNS, TRACE_VERSION, compare
+from compare_traces import COLUMNS, TRACE_VERSION, compare, load_trace
 
 
 def write_trace(path: Path, source: str, perturb: bool = False) -> None:
@@ -77,6 +77,53 @@ def main() -> None:
         require(drift["metrics"]["speed_error_bps"]["max_abs"] > 0.0, "speed drift detected")
         require((out / "calibration-diff.csv").is_file(), "diff csv")
         require((out / "calibration-summary.md").is_file(), "summary markdown")
+
+        # Reproduce actual owner-runner Windows PowerShell 5.1 UTF-8 BOM.
+        metadata = root / "runtime-metadata.json"
+        metadata.write_text('{"schema_version":"ww.physics.runtime-metadata.v1",'
+                            '"scenario_id":"selftest","aircraft_id":"warfare_wings:a6m"}',
+                            encoding="utf-8-sig")
+        with_bom = compare(micro, runtime, out, metadata)
+        require(with_bom["runtime_metadata"]["schema_version"]
+                == "ww.physics.runtime-metadata.v1",
+                "owner-runner PowerShell BOM metadata accepted without schema drift")
+
+        # Different GameTest template origins are not dynamical drift.
+        with runtime.open(encoding="utf-8", newline="") as handle:
+            reader = csv.DictReader(handle)
+            shifted = list(reader)
+        for row in shifted:
+            row["pos_x"] = str(float(row["pos_x"]) + 140)
+            row["pos_y"] = str(float(row["pos_y"]) - 40)
+        with runtime.open("w", encoding="utf-8", newline="") as handle:
+            writer = csv.DictWriter(handle, fieldnames=COLUMNS)
+            writer.writeheader()
+            writer.writerows(shifted)
+        shifted_cmp = compare(micro, runtime, out)
+        require(shifted_cmp["metrics"]["position_error_blocks"]["rmse"] > 100,
+                "raw world layout offset is not ignored")
+        require(shifted_cmp["metrics"]["position_origin_aligned_drift_blocks"]["rmse"] < 0.2,
+                "origin-aligned metric isolates real relative movement")
+
+        # Simulate old observed 401-tick A6M case: world clock advanced but
+        # aircraft position, velocity, yaw and engine froze outside loaded chunks.
+        frozen = root / "frozen.csv"
+        for row in shifted:
+            row["scenario_id"] = "a6m-throttle-step-v1"
+        for i in range(2, len(shifted)):
+            for f in ("pos_x", "pos_y", "pos_z", "vel_x", "vel_y", "vel_z",
+                      "engine_power", "yaw_deg", "pitch_deg"):
+                shifted[i][f] = shifted[1][f]
+        with frozen.open("w", encoding="utf-8", newline="") as handle:
+            writer = csv.DictWriter(handle, fieldnames=COLUMNS)
+            writer.writeheader()
+            writer.writerows(shifted)
+        rejected = False
+        try:
+            load_trace(frozen, "minecraft_runtime")
+        except ValueError as error:
+            rejected = "NON_TICKING_REAL_AIRCRAFT" in str(error)
+        require(rejected, "stale aircraft physics must fail closed despite server time advancing")
 
     print("Trace comparator self-test passed")
 
