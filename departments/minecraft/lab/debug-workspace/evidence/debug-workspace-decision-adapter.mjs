@@ -1,0 +1,287 @@
+import { createDecisionObservation } from './decision-observation.mjs';
+import { buildSampledMotionTrace } from '../../simlab/motion-trace.mjs';
+
+const SUPPORTED_LANES = new Set([
+  'SERVER_ENTITY_STATE',
+  'AI_TARGET',
+  'BRAIN_MEMORY',
+  'RUNNING_BEHAVIORS',
+  'BEHAVIOR_TRANSITION',
+  'NAVIGATION',
+]);
+
+function contextOf(record) {
+  return {
+    debug_session_id: record.debugSessionId ?? null,
+    run_id: record.runId ?? null,
+    run_snapshot_id: record.runSnapshotId ?? null,
+    process_epoch: record.processEpoch ?? null,
+    arena_epoch: record.arenaEpoch ?? null,
+  };
+}
+function sameContext(a, b) {
+  return a.debug_session_id === b.debug_session_id &&
+    a.run_id === b.run_id &&
+    a.run_snapshot_id === b.run_snapshot_id &&
+    a.process_epoch === b.process_epoch &&
+    a.arena_epoch === b.arena_epoch;
+}
+function matchesRequestedContext(record, identity = {}) {
+  const expected = {
+    debugSessionId: identity.debug_session_id ?? identity.debugSessionId,
+    runId: identity.run_id ?? identity.runId,
+    runSnapshotId: identity.run_snapshot_id ?? identity.runSnapshotId,
+    processEpoch: identity.process_epoch ?? identity.processEpoch,
+    arenaEpoch: identity.arena_epoch ?? identity.arenaEpoch,
+  };
+  return Object.entries(expected).every(([key, value]) => value == null || record[key] === value);
+}
+function exactSubjectRecord(record, subjectUuid) {
+  return record &&
+    record.kind === 'observation' &&
+    SUPPORTED_LANES.has(record.lane) &&
+    record.scope?.kind === 'ENTITY_UUID' &&
+    record.scope?.entityUuid === subjectUuid &&
+    record.epistemicStatus === 'OBSERVED' &&
+    record.completeness?.complete === true &&
+    typeof record.observationId === 'string' &&
+    Number.isInteger(record.gameTime);
+}
+function selectedRecords(observations, subjectUuid, identity, endTick = Infinity) {
+  if (!Array.isArray(observations)) throw new TypeError('observations must be an array');
+  const selected = observations
+    .filter(r => exactSubjectRecord(r, subjectUuid))
+    .filter(r => matchesRequestedContext(r, identity))
+    .filter(r => r.gameTime <= endTick)
+    .sort((a,b) => a.gameTime - b.gameTime || (a.writerSeq ?? 0) - (b.writerSeq ?? 0));
+  if (selected.length > 1) {
+    const base = contextOf(selected[0]);
+    for (const record of selected) {
+      if (!sameContext(base, contextOf(record))) {
+        throw new Error('DECISION_EVIDENCE_CONTEXT_CHANGED: refusing to combine records across run/process/arena identity');
+      }
+    }
+  }
+  return selected;
+}
+function latestByLane(records) {
+  const out = new Map();
+  for (const record of records) out.set(record.lane, record);
+  return out;
+}
+function refs(record) {
+  return record ? [record.observationId] : [];
+}
+function sampledFact(record, key, value, note = null) {
+  return {
+    key,
+    value,
+    epistemic_status: 'SAMPLED_OBSERVED',
+    causal_relation: 'UNKNOWN_CAUSALITY',
+    source_observation_ids: refs(record),
+    note,
+  };
+}
+function capability(record, detail = null) {
+  return record
+    ? { status: 'AVAILABLE', source_observation_ids: refs(record), detail }
+    : { status: 'NOT_CAPTURED', source_observation_ids: [], detail };
+}
+function compactEntityState(payload = {}) {
+  const out = {};
+  for (const key of ['dimension','x','y','z','vx','vy','vz','yaw','pitch','onGround','alive','removed','noGravity','health','maxHealth']) {
+    if (payload[key] !== undefined) out[key] = payload[key];
+  }
+  return out;
+}
+function compactTarget(payload = {}) {
+  const out = { present: payload.present === true };
+  for (const key of ['targetUuid','targetEntityId','targetType','targetAlive','distanceSqr','lineOfSight']) {
+    if (payload[key] !== undefined) out[key] = payload[key];
+  }
+  return out;
+}
+function compactNavigation(payload = {}) {
+  const out = {};
+  for (const key of ['navigationDone','pathPresent','pathDone','canReach','nodeCount','nextNodeIndex','nextNodeX','nextNodeY','nextNodeZ']) {
+    if (payload[key] !== undefined) out[key] = payload[key];
+  }
+  return out;
+}
+function compactBrain(payload = {}) {
+  const out = {};
+  for (const key of [
+    'attackTargetPresent','attackTargetUuid','attackTargetEntityId','attackTargetType',
+    'walkTargetPresent','walkTargetX','walkTargetY','walkTargetZ','walkTargetSpeedModifier','walkTargetCloseEnoughDist',
+    'lookTargetPresent','lookTargetX','lookTargetY','lookTargetZ',
+    'pathMemoryPresent','pathMemoryDone','pathMemoryCanReach','pathMemoryNodeCount','pathMemoryNextNodeIndex',
+    'cantReachSincePresent','cantReachSinceGameTime','attackCoolingDown',
+    'tlmTargetPosPresent','tlmTargetPosX','tlmTargetPosY','tlmTargetPosZ',
+  ]) {
+    if (payload[key] !== undefined) out[key] = payload[key];
+  }
+  return out;
+}
+
+export function observeDebugWorkspaceDecision({
+  observations,
+  subjectUuid,
+  subjectType = null,
+  identity = {},
+  tick = Infinity,
+} = {}) {
+  if (typeof subjectUuid !== 'string' || !subjectUuid) throw new TypeError('subjectUuid is required');
+  if (tick !== Infinity && !Number.isInteger(tick)) throw new TypeError('tick must be an integer or Infinity');
+
+  const records = selectedRecords(observations, subjectUuid, identity, tick);
+  const latest = latestByLane(records);
+  const state = latest.get('SERVER_ENTITY_STATE') ?? null;
+  const target = latest.get('AI_TARGET') ?? null;
+  const brain = latest.get('BRAIN_MEMORY') ?? null;
+  const running = latest.get('RUNNING_BEHAVIORS') ?? null;
+  const navigation = latest.get('NAVIGATION') ?? null;
+
+  const capabilities = {
+    server_entity_state: capability(state),
+    ai_target: capability(target),
+    brain_memory: capability(brain, brain ? 'Existing public Brain memory lane; absence of a memory is not a guessed reason.' : null),
+    running_behaviors: capability(running, running ? 'Sampled running behavior set; not a complete Goal/Behavior eligibility trace.' : null),
+    navigation: capability(navigation, navigation ? 'Current PathNavigation state only; open/closed search frontier is not captured.' : null),
+    goal_scheduler: { status: 'NOT_EXPOSED', source_observation_ids: [], detail: 'GoalSelector lifecycle capture is not established by these lanes.' },
+    path_search_frontier: { status: 'NOT_EXPOSED', source_observation_ids: [], detail: 'Open/closed/cost search internals require bounded deep instrumentation.' },
+    movement_control: { status: 'NOT_EXPOSED', source_observation_ids: [], detail: 'MoveControl/custom controller internals are not present in the selected lanes.' },
+  };
+
+  const stages = {};
+  const stateFacts = [];
+  if (state) stateFacts.push(sampledFact(state, 'server_entity_state', compactEntityState(state.payload)));
+  if (brain) stateFacts.push(sampledFact(brain, 'brain_memory', compactBrain(brain.payload), 'Only explicitly exposed memories are represented.'));
+  if (target) stateFacts.push(sampledFact(target, 'mob_target', compactTarget(target.payload)));
+  if (stateFacts.length) stages.STATE = { facts: stateFacts };
+
+  if (running) {
+    stages.EXECUTION = { facts: [sampledFact(
+      running,
+      'running_behaviors',
+      {
+        count: running.payload?.count ?? null,
+        running: Array.isArray(running.payload?.running) ? running.payload.running : [],
+        instanceIdentityScope: running.payload?.instanceIdentityScope ?? null,
+      },
+      'Running set is sampled state; this does not prove why an entry was selected.'
+    )] };
+  }
+  if (navigation) {
+    if (!stages.EXECUTION) stages.EXECUTION = { facts: [] };
+    stages.EXECUTION.facts.push(sampledFact(
+      navigation,
+      'navigation',
+      compactNavigation(navigation.payload),
+      'PathNavigation current state; not a path-search candidate/frontier trace.'
+    ));
+  }
+
+  const timeline = records
+    .filter(r => r.lane === 'BEHAVIOR_TRANSITION')
+    .map(r => ({
+      event_id: r.observationId,
+      tick: r.gameTime,
+      stage: 'EXECUTION',
+      kind: 'BEHAVIOR_RUNNING_SET_CHANGED',
+      summary: {
+        started: r.payload?.started ?? [],
+        stopped: r.payload?.stopped ?? [],
+        transitionSemantics: r.payload?.transitionSemantics ?? null,
+        exactTransitionTickKnown: r.payload?.exactTransitionTickKnown ?? false,
+        reasonKnown: r.payload?.reasonKnown ?? false,
+      },
+      epistemic_status: 'DERIVED_FROM_OBSERVED',
+      causal_relation: 'TEMPORAL_ASSOCIATION',
+      source_observation_ids: [r.observationId],
+    }));
+
+  const context = records.length ? contextOf(records[0]) : {
+    debug_session_id: identity.debug_session_id ?? null,
+    run_id: identity.run_id ?? null,
+    run_snapshot_id: identity.run_snapshot_id ?? null,
+    process_epoch: identity.process_epoch ?? null,
+    arena_epoch: identity.arena_epoch ?? null,
+  };
+  const currentTick = tick === Infinity
+    ? (records.length ? records[records.length - 1].gameTime : null)
+    : tick;
+
+  return createDecisionObservation({
+    subject: { id: subjectUuid, type: subjectType },
+    identity: {
+      run_id: context.run_id,
+      run_snapshot_id: context.run_snapshot_id,
+      arena_epoch: context.arena_epoch,
+      tick: currentTick,
+    },
+    adapter: {
+      id: 'debug-workspace:exact-subject',
+      version: '1',
+      family: 'GENERIC_MOB_BASELINE',
+      provenance: 'SERVER_ENTITY_STATE/AI_TARGET/BRAIN_MEMORY/RUNNING_BEHAVIORS/BEHAVIOR_TRANSITION/NAVIGATION',
+      observer_effect_risk: 'BOUNDED_SAMPLED_OBSERVER',
+    },
+    capabilities,
+    stages,
+    timeline,
+    availableDrilldowns: [
+      ...(state ? ['motion_trace'] : []),
+      ...(brain ? ['brain_memory'] : []),
+      ...(running ? ['running_behaviors'] : []),
+      ...(navigation ? ['navigation'] : []),
+    ],
+  });
+}
+
+export function buildDebugWorkspaceMotionTrace({
+  observations,
+  subjectUuid,
+  subjectType = null,
+  identity = {},
+  window = {},
+  maxSamples = 4096,
+  maxGapTicks = null,
+  explicitDiscontinuities = [],
+} = {}) {
+  if (typeof subjectUuid !== 'string' || !subjectUuid) throw new TypeError('subjectUuid is required');
+  const start = window.start_tick ?? window.startTick ?? -Infinity;
+  const end = window.end_tick ?? window.endTick ?? Infinity;
+  const records = selectedRecords(observations, subjectUuid, identity, end)
+    .filter(r => r.lane === 'SERVER_ENTITY_STATE')
+    .filter(r => r.gameTime >= start);
+
+  const points = records.map(r => ({
+    tick: r.gameTime,
+    x: r.payload?.x,
+    y: r.payload?.y,
+    z: r.payload?.z,
+    vx: r.payload?.vx,
+    vy: r.payload?.vy,
+    vz: r.payload?.vz,
+    source_observation_id: r.observationId,
+    source_kind: 'DEBUG_WORKSPACE_SERVER_ENTITY_STATE',
+    run_id: r.runId ?? null,
+    run_snapshot_id: r.runSnapshotId ?? null,
+    arena_epoch: r.arenaEpoch ?? null,
+    dimension_id: r.payload?.dimension ?? null,
+  }));
+
+  return buildSampledMotionTrace({
+    traceClass: 'MOB_ACTUAL',
+    subject: { id: subjectUuid, type: subjectType },
+    observations: points,
+    identity,
+    window: {
+      start_tick: Number.isFinite(start) ? start : null,
+      end_tick: Number.isFinite(end) ? end : null,
+    },
+    maxSamples,
+    maxGapTicks,
+    explicitDiscontinuities,
+  });
+}
