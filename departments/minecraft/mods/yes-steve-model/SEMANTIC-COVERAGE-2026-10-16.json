@@ -1,0 +1,47 @@
+{
+  "format": "kneekura.ysm.practical-semantic-coverage.v1",
+  "recorded_at": "2026-10-16",
+  "baseline_commit": "a6abc37e39db9b25ad643abf074215064b206199",
+  "artifact": {
+    "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+    "size": 63269843,
+    "classes": 955,
+    "parse_errors": 0
+  },
+  "summary": {
+    "mappings": 625,
+    "confidence": {
+      "CONFIRMED": 361,
+      "HIGH": 264
+    },
+    "class_roles": 294,
+    "methods": 322,
+    "fields": 9,
+    "main_classes": 722,
+    "main_mapped": 290,
+    "main_unseeded": 432,
+    "bundled_classes": 217,
+    "bundled_mapped": 3,
+    "bundled_unseeded": 214,
+    "singleton_classes": 16,
+    "singleton_mapped": 1,
+    "singleton_unseeded": 15,
+    "unknown_singletons": 15,
+    "renderer_singleton_unseeded": 0,
+    "all_unseeded": 661,
+    "new_class_roles": 0,
+    "new_methods": 20,
+    "new_fields": 1
+  },
+  "coverage_limits": "Adds member-level evidence within already mapped evaluator owner; no additional class-role coverage. Counts do not represent a whole-analysis completion percentage.",
+  "previous_coverage": "SEMANTIC-COVERAGE-2026-10-05.json",
+  "remaining_inventory_reference": "SEMANTIC-COVERAGE-2026-10-05.json#/remaining_inventory",
+  "current_evidence": "BINARY-EVALUATOR-EVIDENCE-2026-10-16.json",
+  "completed_cohort": "All16 binary operator dispatch slots,3 wrapper factories,visitBinary dispatch and table field;9 lazy glue methods retained as support,not new mapping-count inflation.",
+  "next_questions": [
+    "Trace assignment/struct copy and variable storage consumers beyond this bounded operator cohort.",
+    "Explore ambiguous remaining Java candidates through deeper relational/CFG evidence; do not repeat exhausted literal shortlist."
+  ],
+  "whole_target_status": "IN_PROGRESS_NOT_COMPLETE",
+  "runtime_status": "NOT_RUN"
+}

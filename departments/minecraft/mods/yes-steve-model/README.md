@@ -8,7 +8,7 @@
 - Main focus: model runtime, Molang, animation controllers, per-entity state, rendering, model distribution and integration seams
 - Research status: **EXACT_JAR_ANCHORED / 955_CLASS_FOUNDATION_MAPPED / JAVA_OBFUSCATION_PARTIALLY_RECOVERED**
 - Whole-target status: **IN_PROGRESS / NOT COMPLETE**
-- Research date: 2026-10-05
+- Research date: 2026-10-05; latest continuation: **2026-10-16**
 
 This workspace follows KNEEKURA's evidence rules: distributed artifact, release-line source candidate,
 frontier source, community reconnaissance and comparative implementations are kept as separate tracks.
@@ -142,9 +142,9 @@ The machine-readable map deliberately keeps distributed-artifact observations se
 version-matched public source candidate. This exposed concrete source/artifact divergence around the
 preview/paperdoll renderer instead of silently forcing them to agree.
 
-The current machine-readable map contains **604** mappings (**340 CONFIRMED / 264 HIGH**).
+The current machine-readable map contains **625** mappings (**361 CONFIRMED / 264 HIGH**).
 Every recorded owner/member/descriptor contract passes against the exact official JAR: **294 class
-targets, 302 exact methods and 8 exact fields, with 0 failures**. The whole-JAR Foundation Map covers
+targets, 322 exact methods and 9 exact fields, with 0 failures**. The whole-JAR Foundation Map covers
 **955 / 955 classes**. Two large formerly-UNKNOWN islands are now separated as bundled **Concentus
 (131 classes)** and **Gagravarr/VorbisJava (86 classes)**; only **15 degree-0 singleton classes** remain
 UNKNOWN.
@@ -162,6 +162,21 @@ recovery; original names and whole-artifact/source equivalence remain unproven. 
 
 Protected native internals remain out of scope.
 
+## October 16 continuation
+
+The [binary evaluator pass](BINARY-EVALUATOR-RECOVERY-2026-10-16.md) connects all
+16 operator-table slots to exact lambda implementation handles and reviewed
+instruction/control-flow semantics. It adds **20 methods and one field**, preserving
+all 604 prior mapping rows. Three wrapper factories, dispatch, short-circuit and
+conversion order are covered; this is member-level depth within an existing mapped
+class, not 21 additional classes or completion of the entire MOD.
+
+Use [current coverage](SEMANTIC-COVERAGE-2026-10-16.json) and
+[current verification](SEMANTIC-VERIFICATION-2026-10-16.json) for this continuation.
+October 5 dated coverage and verification files remain historical receipts.
+The remaining class counts are unchanged: **432 main / 661 total unseeded**.
+No game or target-JAR execution is claimed.
+
 ## Important limits
 
 - Public release-line source candidate equivalence to the distributed JAR is not proven.
@@ -172,6 +187,13 @@ Protected native internals remain out of scope.
 - Current 3.0-dev architecture contains known unresolved concurrency, render-context and end-to-end validation gaps documented by its own maintainers.
 
 ## Files
+
+- [CONTINUATION-PLAN-2026-10-16.md](CONTINUATION-PLAN-2026-10-16.md)
+- [ARTIFACT-REACQUISITION-2026-10-16.json](ARTIFACT-REACQUISITION-2026-10-16.json)
+- [BINARY-EVALUATOR-RECOVERY-2026-10-16.md](BINARY-EVALUATOR-RECOVERY-2026-10-16.md)
+- [BINARY-EVALUATOR-EVIDENCE-2026-10-16.json](BINARY-EVALUATOR-EVIDENCE-2026-10-16.json)
+- [SEMANTIC-COVERAGE-2026-10-16.json](SEMANTIC-COVERAGE-2026-10-16.json)
+- [SEMANTIC-VERIFICATION-2026-10-16.json](SEMANTIC-VERIFICATION-2026-10-16.json)
 
 - [ARCHITECTURE-RESEARCH-2026-10-05.md](ARCHITECTURE-RESEARCH-2026-10-05.md)
 - [MOLANG-SURFACE-2026-10-05.md](MOLANG-SURFACE-2026-10-05.md)

@@ -14123,6 +14123,530 @@
           "fact": "Unique4-method/no-field class shape with exactly two static(F)F helpers: one fdiv20.0F, one fmul20.0F; typed Entity→EntityRenderer wrapper through exact Minecraft/dispatcher SRG references. Pinned source has identical tick/second conversions and renderer helper; external SRG correspondence not independently proven, so classHIGH. Degree0 is not evidence of no source counterpart."
         }
       ]
+    },
+    {
+      "id": "ysm265.method.expression-evaluator-impl-bool",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo00Oo00o0ooooOooo0Oo0OO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$o0OOooo0o0OO00OoOOOo0o0O;)Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$oOOOo0OOO0ooooo0O00OO0o0;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExpressionEvaluatorImpl",
+      "semantic_member": "bool",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_SEMANTIC_ROLE_NOT_ORIGINAL_SYNTHETIC_NAME",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO.class",
+          "locator": "BINARY-EVALUATOR-EVIDENCE-2026-10-16.json",
+          "fact": "Capture BooleanOperator through LambdaMetafactory; implementation builds two lazy conversion thunks and boxes boolean.",
+          "access": 10
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.expression-evaluator-impl-compare",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo00Oo00o0ooooOooo0Oo0OO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$O00OOOooOoooOoo0o0o0oO0O;)Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$oOOOo0OOO0ooooo0O00OO0o0;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExpressionEvaluatorImpl",
+      "semantic_member": "compare",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_SEMANTIC_ROLE_NOT_ORIGINAL_SYNTHETIC_NAME",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO.class",
+          "locator": "BINARY-EVALUATOR-EVIDENCE-2026-10-16.json",
+          "fact": "Capture Comparator through LambdaMetafactory; implementation builds two lazy float thunks and boxes boolean.",
+          "access": 10
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.expression-evaluator-impl-arithmetic",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo00Oo00o0ooooOooo0Oo0OO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$Oo0Oo0o00O00Oo0OOoOOoooo;)Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$oOOOo0OOO0ooooo0O00OO0o0;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExpressionEvaluatorImpl",
+      "semantic_member": "arithmetic",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_SEMANTIC_ROLE_NOT_ORIGINAL_SYNTHETIC_NAME",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO.class",
+          "locator": "BINARY-EVALUATOR-EVIDENCE-2026-10-16.json",
+          "fact": "Capture ArithmeticOperator through LambdaMetafactory; implementation builds two lazy float thunks and boxes float.",
+          "access": 10
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.expression-evaluator-impl-visit-binary",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo00Oo00o0ooooOooo0Oo0OO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oo00OOOoo00000Oo0Oooo0Oo;)Ljava/lang/Object;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExpressionEvaluatorImpl",
+      "semantic_member": "visitBinary",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_SEMANTIC_ROLE_NOT_ORIGINAL_SYNTHETIC_NAME",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO.class",
+          "locator": "BINARY-EVALUATOR-EVIDENCE-2026-10-16.json",
+          "fact": "Static table read0; BinaryExpression.op4 then explicit index7; aaload10; left13/right17 passed unevaluated to evaluator eval20. Index is not inferred from ordinal.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.expression-evaluator-impl-binary-and",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo00Oo00o0ooooOooo0Oo0OO",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$OOOOo0O0oO0OOo0O0O0Oo0O0;Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$OOOOo0O0oO0OOo0O0O0Oo0O0;)Z",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExpressionEvaluatorImpl",
+      "semantic_member": "binaryAnd",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_SEMANTIC_ROLE_NOT_ORIGINAL_SYNTHETIC_NAME",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO.class",
+          "locator": "BINARY-EVALUATOR-EVIDENCE-2026-10-16.json",
+          "fact": "Left eval1; ifeq6 ->22 bypasses right eval10; false22, true18.",
+          "access": 4106
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.expression-evaluator-impl-binary-or",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo00Oo00o0ooooOooo0Oo0OO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$OOOOo0O0oO0OOo0O0O0Oo0O0;Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$OOOOo0O0oO0OOo0O0O0Oo0O0;)Z",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExpressionEvaluatorImpl",
+      "semantic_member": "binaryOr",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_SEMANTIC_ROLE_NOT_ORIGINAL_SYNTHETIC_NAME",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO.class",
+          "locator": "BINARY-EVALUATOR-EVIDENCE-2026-10-16.json",
+          "fact": "Left eval1; ifne6 ->18 bypasses right eval10; false22, true18.",
+          "access": 4106
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.expression-evaluator-impl-binary-lt",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo00Oo00o0ooooOooo0Oo0OO",
+      "obfuscated_member": "oo0OoO00oOoo000O0000o0oo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$Ooooo0oooO0oooOOOoO0000O;Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$Ooooo0oooO0oooOOOoO0000O;)Z",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExpressionEvaluatorImpl",
+      "semantic_member": "binaryLt",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_SEMANTIC_ROLE_NOT_ORIGINAL_SYNTHETIC_NAME",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO.class",
+          "locator": "BINARY-EVALUATOR-EVIDENCE-2026-10-16.json",
+          "fact": "Left/right eval1/7; fcmpg12, ifge13 ->20 false; NaN false.",
+          "access": 4106
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.expression-evaluator-impl-binary-lte",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo00Oo00o0ooooOooo0Oo0OO",
+      "obfuscated_member": "Ooooo0oooO0oooOOOoO0000O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$Ooooo0oooO0oooOOOoO0000O;Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$Ooooo0oooO0oooOOOoO0000O;)Z",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExpressionEvaluatorImpl",
+      "semantic_member": "binaryLte",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_SEMANTIC_ROLE_NOT_ORIGINAL_SYNTHETIC_NAME",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO.class",
+          "locator": "BINARY-EVALUATOR-EVIDENCE-2026-10-16.json",
+          "fact": "Left/right eval1/7; fcmpg12, ifgt13 ->20 false; NaN false.",
+          "access": 4106
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.expression-evaluator-impl-binary-gt",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo00Oo00o0ooooOooo0Oo0OO",
+      "obfuscated_member": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$Ooooo0oooO0oooOOOoO0000O;Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$Ooooo0oooO0oooOOOoO0000O;)Z",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExpressionEvaluatorImpl",
+      "semantic_member": "binaryGt",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_SEMANTIC_ROLE_NOT_ORIGINAL_SYNTHETIC_NAME",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO.class",
+          "locator": "BINARY-EVALUATOR-EVIDENCE-2026-10-16.json",
+          "fact": "Left/right eval1/7; fcmpl12, ifle13 ->20 false; NaN false.",
+          "access": 4106
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.expression-evaluator-impl-binary-gte",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo00Oo00o0ooooOooo0Oo0OO",
+      "obfuscated_member": "oOOOo0OOO0ooooo0O00OO0o0",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$Ooooo0oooO0oooOOOoO0000O;Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$Ooooo0oooO0oooOOOoO0000O;)Z",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExpressionEvaluatorImpl",
+      "semantic_member": "binaryGte",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_SEMANTIC_ROLE_NOT_ORIGINAL_SYNTHETIC_NAME",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO.class",
+          "locator": "BINARY-EVALUATOR-EVIDENCE-2026-10-16.json",
+          "fact": "Left/right eval1/7; fcmpl12, iflt13 ->20 false; NaN false.",
+          "access": 4106
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.expression-evaluator-impl-binary-add",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo00Oo00o0ooooOooo0Oo0OO",
+      "obfuscated_member": "oo0OoO00oOoo000O0000o0oo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO;Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;)Ljava/lang/Object;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExpressionEvaluatorImpl",
+      "semantic_member": "binaryAdd",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_SEMANTIC_ROLE_NOT_ORIGINAL_SYNTHETIC_NAME",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO.class",
+          "locator": "BINARY-EVALUATOR-EVIDENCE-2026-10-16.json",
+          "fact": "Visits left2 then right10 before conversions18/23; fadd26; Float boxing27.",
+          "access": 4106
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.expression-evaluator-impl-binary-sub",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo00Oo00o0ooooOooo0Oo0OO",
+      "obfuscated_member": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$Ooooo0oooO0oooOOOoO0000O;Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$Ooooo0oooO0oooOOOoO0000O;)F",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExpressionEvaluatorImpl",
+      "semantic_member": "binarySub",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_SEMANTIC_ROLE_NOT_ORIGINAL_SYNTHETIC_NAME",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO.class",
+          "locator": "BINARY-EVALUATOR-EVIDENCE-2026-10-16.json",
+          "fact": "Lazy left1 then right7; fsub12.",
+          "access": 4106
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.expression-evaluator-impl-binary-mul",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo00Oo00o0ooooOooo0Oo0OO",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$Ooooo0oooO0oooOOOoO0000O;Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$Ooooo0oooO0oooOOOoO0000O;)F",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExpressionEvaluatorImpl",
+      "semantic_member": "binaryMul",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_SEMANTIC_ROLE_NOT_ORIGINAL_SYNTHETIC_NAME",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO.class",
+          "locator": "BINARY-EVALUATOR-EVIDENCE-2026-10-16.json",
+          "fact": "Lazy left1 then right7; fmul12.",
+          "access": 4106
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.expression-evaluator-impl-binary-div",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo00Oo00o0ooooOooo0Oo0OO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$Ooooo0oooO0oooOOOoO0000O;Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$Ooooo0oooO0oooOOOoO0000O;)F",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExpressionEvaluatorImpl",
+      "semantic_member": "binaryDiv",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_SEMANTIC_ROLE_NOT_ORIGINAL_SYNTHETIC_NAME",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO.class",
+          "locator": "BINARY-EVALUATOR-EVIDENCE-2026-10-16.json",
+          "fact": "Lazy left1 then right8; compare divisor with +0F16; nonzero17->22 fdiv24; zero returns +0F20. Both signed zeros select zero path.",
+          "access": 4106
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.expression-evaluator-impl-binary-arrow",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo00Oo00o0ooooOooo0Oo0OO",
+      "obfuscated_member": "Ooooo0oooO0oooOOOoO0000O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO;Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;)Ljava/lang/Object;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExpressionEvaluatorImpl",
+      "semantic_member": "binaryArrow",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_SEMANTIC_ROLE_NOT_ORIGINAL_SYNTHETIC_NAME",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO.class",
+          "locator": "BINARY-EVALUATOR-EVIDENCE-2026-10-16.json",
+          "fact": "Left visit2; null9 returns null12; createChild16; right visit24 uses child local4; on normal return reads child returnValue34 and writes parent37, then returns right result42. No handler guarantees propagation if right throws.",
+          "access": 4106
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.expression-evaluator-impl-binary-null-coalesce",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo00Oo00o0ooooOooo0Oo0OO",
+      "obfuscated_member": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO;Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;)Ljava/lang/Object;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExpressionEvaluatorImpl",
+      "semantic_member": "binaryNullCoalesce",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_SEMANTIC_ROLE_NOT_ORIGINAL_SYNTHETIC_NAME",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO.class",
+          "locator": "BINARY-EVALUATOR-EVIDENCE-2026-10-16.json",
+          "fact": "Left visit2; nonnull9->20 returns left; null evaluates right14.",
+          "access": 4106
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.expression-evaluator-impl-binary-assign",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo00Oo00o0ooooOooo0Oo0OO",
+      "obfuscated_member": "oOOOo0OOO0ooooo0O00OO0o0",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO;Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;)Ljava/lang/Object;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExpressionEvaluatorImpl",
+      "semantic_member": "binaryAssign",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_SEMANTIC_ROLE_NOT_ORIGINAL_SYNTHETIC_NAME",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO.class",
+          "locator": "BINARY-EVALUATOR-EVIDENCE-2026-10-16.json",
+          "fact": "Right visit2 before target type test9; assignable target19, Struct copy35, assign45. Struct-access plus Struct RHS returns67-68 without writing. Otherwise evaluate base81, existing Struct put107, or assignable base allocates HashMapStruct139, put156, assign166. Unsupported targets return RHS171-172.",
+          "access": 4106
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.expression-evaluator-impl-binary-conditional",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo00Oo00o0ooooOooo0Oo0OO",
+      "obfuscated_member": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO;Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;)Ljava/lang/Object;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExpressionEvaluatorImpl",
+      "semantic_member": "binaryConditional",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_SEMANTIC_ROLE_NOT_ORIGINAL_SYNTHETIC_NAME",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO.class",
+          "locator": "BINARY-EVALUATOR-EVIDENCE-2026-10-16.json",
+          "fact": "Left visit2 and boolean conversion9; false12->23 returns null; true evaluates right17.",
+          "access": 4106
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.expression-evaluator-impl-binary-eq",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo00Oo00o0ooooOooo0Oo0OO",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO;Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;)Ljava/lang/Object;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExpressionEvaluatorImpl",
+      "semantic_member": "binaryEq",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_SEMANTIC_ROLE_NOT_ORIGINAL_SYNTHETIC_NAME",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO.class",
+          "locator": "BINARY-EVALUATOR-EVIDENCE-2026-10-16.json",
+          "fact": "Visits left2 then right10; identity20 returns true23; either Number30/37 converts right45 then left49 and fcmpl52; null67/71 returns false74; right StringExpression equals97 first, then left121, then left Object.equals131.",
+          "access": 4106
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.expression-evaluator-impl-binary-neq",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo00Oo00o0ooooOooo0Oo0OO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO;Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;)Ljava/lang/Object;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExpressionEvaluatorImpl",
+      "semantic_member": "binaryNeq",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_SEMANTIC_ROLE_NOT_ORIGINAL_SYNTHETIC_NAME",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO.class",
+          "locator": "BINARY-EVALUATOR-EVIDENCE-2026-10-16.json",
+          "fact": "Same comparison ordering as EQ; identity returns false23; float inequality branch53; null returns true74; right/left StringExpression equals97/129 and Object.equals147 are negated.",
+          "access": 4106
+        }
+      ]
+    },
+    {
+      "id": "ysm265.field.expression-evaluator-impl-binary-evaluators",
+      "kind": "field",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo00Oo00o0ooooOooo0Oo0OO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "[Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$oOOOo0OOO0ooooo0O00OO0o0;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.molang.runtime.ExpressionEvaluatorImpl",
+      "semantic_member": "BINARY_EVALUATORS",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO.class",
+          "locator": "BINARY-EVALUATOR-EVIDENCE-2026-10-16.json",
+          "fact": "Private static final 16-entry evaluator array initialized by audited slot/bootstrap relations; same exact field read by visitBinary.",
+          "access": 26
+        }
+      ]
     }
   ],
   "unresolved_hints": [
@@ -14440,6 +14964,15 @@
       "controller_interface": "OoOoOO0O00oOoO0o0ooOO0oO"
     },
     "latest_contract": {
+      "mappings": 625,
+      "class_targets": 294,
+      "exact_methods": 322,
+      "exact_fields": 9,
+      "failures": 0,
+      "verified_at": "2026-10-16",
+      "verification": "SEMANTIC-VERIFICATION-2026-10-16.json"
+    },
+    "historical_contract_282": {
       "mappings": 282,
       "class_targets": 107,
       "exact_methods": 170,
@@ -14738,5 +15271,14 @@
       "original_symbol_policy": "Local semantic counterparts only; original names remain unproven.",
       "preserved_negative_finding": "SOURCE_ARTIFACT_DIVERGENCE"
     }
+  },
+  "updated_at": "2026-10-16",
+  "continuation": {
+    "baseline_commit": "a6abc37e39db9b25ad643abf074215064b206199",
+    "baseline_mapping_count": 604,
+    "new_mapping_count": 21,
+    "evidence": "BINARY-EVALUATOR-EVIDENCE-2026-10-16.json",
+    "verification": "SEMANTIC-VERIFICATION-2026-10-16.json",
+    "scope": "16 binary operator bodies, 3 wrapper factories, binary visitor and evaluator-table field; no new class roles"
   }
 }

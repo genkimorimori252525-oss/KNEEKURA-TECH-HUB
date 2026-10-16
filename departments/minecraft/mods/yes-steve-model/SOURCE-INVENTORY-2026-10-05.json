@@ -23,11 +23,13 @@
       "ysm_class_files": 955,
       "classfile_major": 61,
       "latest_contract": {
-        "mappings": 282,
-        "class_targets": 107,
-        "exact_methods": 170,
-        "exact_fields": 5,
-        "failures": 0
+        "mappings": 625,
+        "class_targets": 294,
+        "exact_methods": 322,
+        "exact_fields": 9,
+        "failures": 0,
+        "verified_at": "2026-10-16",
+        "verification": "SEMANTIC-VERIFICATION-2026-10-16.json"
       },
       "jar_committed": false,
       "jar_retained": false,
@@ -41,8 +43,17 @@
         "bundled_concentus_classes": 131,
         "bundled_vorbisjava_classes": 86,
         "unknown_singletons": 15,
-        "semantic_seed_classes": 107,
-        "index": "departments/minecraft/mods/yes-steve-model/FOUNDATION-MAP-INDEX-2026-10-05.json"
+        "semantic_seed_classes": 294,
+        "index": "departments/minecraft/mods/yes-steve-model/FOUNDATION-MAP-INDEX-2026-10-05.json",
+        "historical_semantic_seed_classes": 107,
+        "semantic_seed_verification": "SEMANTIC-COVERAGE-2026-10-16.json"
+      },
+      "historical_contract_282": {
+        "mappings": 282,
+        "class_targets": 107,
+        "exact_methods": 170,
+        "exact_fields": 5,
+        "failures": 0
       }
     }
   },
@@ -1902,5 +1913,6 @@
     "additional_graph_source_candidates": 18,
     "additional_graph_source_roles": 18,
     "isolated_source_role": 1
-  }
+  },
+  "updated_at": "2026-10-16"
 }

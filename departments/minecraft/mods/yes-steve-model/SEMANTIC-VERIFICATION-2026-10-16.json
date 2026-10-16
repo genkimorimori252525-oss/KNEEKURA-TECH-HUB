@@ -1,0 +1,228 @@
+{
+  "format": "kneekura.ysm.practical-semantic-verification.v1",
+  "recorded_at": "2026-10-16",
+  "baseline_commit": "a6abc37e39db9b25ad643abf074215064b206199",
+  "artifact": {
+    "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+    "size": 63269843,
+    "classes": 955
+  },
+  "mapping_count": 625,
+  "confidence": {
+    "CONFIRMED": 361,
+    "HIGH": 264
+  },
+  "baseline604_preserved": true,
+  "mapping_ids_unique": true,
+  "exact_identity_targets_unique": true,
+  "scanner": {
+    "classes": 955,
+    "class_contracts": 294,
+    "method_contracts": 322,
+    "field_contracts": 9,
+    "failures": 0
+  },
+  "baseline_dossier_audits": [
+    {
+      "evidence": "SOURCE-HINT-FOLLOWUP-EVIDENCE-2026-10-05.json",
+      "checks": 376,
+      "failures": 0
+    },
+    {
+      "evidence": "BROAD-POOL-EVIDENCE-2026-10-05.json",
+      "checks": 919,
+      "failures": 0
+    },
+    {
+      "evidence": "MOLANG-EVALUATION-EVIDENCE-2026-10-05.json",
+      "checks": 106,
+      "failures": 0
+    },
+    {
+      "evidence": "MOLANG-EVALUATOR-EVIDENCE-2026-10-05.json",
+      "checks": 92,
+      "failures": 0
+    },
+    {
+      "evidence": "SEED-RECOVERY-EVIDENCE-2026-10-05.json",
+      "checks": 66,
+      "failures": 0
+    },
+    {
+      "evidence": "MOLANG-TYPED-AST-EVIDENCE-2026-10-05.json",
+      "checks": 516,
+      "failures": 0
+    },
+    {
+      "evidence": "MOLANG-MATH-EVIDENCE-2026-10-05.json",
+      "checks": 678,
+      "failures": 0
+    },
+    {
+      "evidence": "MOLANG-POOLED-PARSER-EVIDENCE-2026-10-05.json",
+      "checks": 298,
+      "failures": 0
+    },
+    {
+      "evidence": "BROAD-ROLE-EVIDENCE-2026-10-05.json",
+      "checks": 495,
+      "failures": 0
+    },
+    {
+      "evidence": "MOLANG-LOOP-EVIDENCE-2026-10-05.json",
+      "checks": 109,
+      "failures": 0
+    },
+    {
+      "evidence": "BROAD-FOLLOWUP-EVIDENCE-2026-10-05.json",
+      "checks": 117,
+      "failures": 0
+    }
+  ],
+  "baseline_checks_total": 3772,
+  "baseline_negative_controls": {
+    "count": 10,
+    "all_rejected": true
+  },
+  "binary_evaluator": {
+    "base_checks": 291,
+    "scoped_checks": 368,
+    "failures": 0,
+    "negative_controls": [
+      {
+        "control": "enum-index-to-wrong-slot",
+        "rejected": true,
+        "failed_checks": [
+          "AND:explicit-index"
+        ]
+      },
+      {
+        "control": "slot-to-wrong-implementation",
+        "rejected": true,
+        "failed_checks": [
+          "AND:slot-implementation",
+          "AND:mapping-implementation"
+        ]
+      },
+      {
+        "control": "and-branch-polarity",
+        "rejected": true,
+        "failed_checks": [
+          "('com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO', 'o0OOooo0o0OO00OoOOOo0o0O', '(Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$OOOOo0O0oO0OOo0O0O0Oo0O0;Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$OOOOo0O0oO0OOo0O0O0Oo0O0;)Z'):instructions"
+        ]
+      },
+      {
+        "control": "or-short-circuit-target",
+        "rejected": true,
+        "failed_checks": [
+          "('com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$OOOOo0O0oO0OOo0O0O0Oo0O0;Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$OOOOo0O0oO0OOo0O0O0Oo0O0;)Z'):instructions"
+        ]
+      },
+      {
+        "control": "lt-nan-compare-polarity",
+        "rejected": true,
+        "failed_checks": [
+          "('com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO', 'oo0OoO00oOoo000O0000o0oo', '(Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$Ooooo0oooO0oooOOOoO0000O;Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$Ooooo0oooO0oooOOOoO0000O;)Z'):instructions"
+        ]
+      },
+      {
+        "control": "division-zero-guard",
+        "rejected": true,
+        "failed_checks": [
+          "('com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$Ooooo0oooO0oooOOOoO0000O;Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$Ooooo0oooO0oooOOOoO0000O;)F'):instructions"
+        ]
+      },
+      {
+        "control": "division-arithmetic-opcode",
+        "rejected": true,
+        "failed_checks": [
+          "('com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$Ooooo0oooO0oooOOOoO0000O;Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO$Ooooo0oooO0oooOOOoO0000O;)F'):instructions"
+        ]
+      },
+      {
+        "control": "assignment-rhs-first-local",
+        "rejected": true,
+        "failed_checks": [
+          "('com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO', 'oOOOo0OOO0ooooo0O00OO0o0', '(Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO;Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;)Ljava/lang/Object;'):instructions"
+        ]
+      },
+      {
+        "control": "arrow-return-copy-source-local",
+        "rejected": true,
+        "failed_checks": [
+          "('com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO', 'Ooooo0oooO0oooOOOoO0000O', '(Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO;Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;)Ljava/lang/Object;'):supplemental_full_operand_records"
+        ]
+      },
+      {
+        "control": "add-convert-before-second-visit",
+        "rejected": true,
+        "failed_checks": [
+          "('com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO', 'oo0OoO00oOoo000O0000o0oo', '(Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO;Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;)Ljava/lang/Object;'):instructions"
+        ]
+      },
+      {
+        "control": "missing-assign-instructions",
+        "rejected": true,
+        "failed_checks": [
+          "('com/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO', 'oOOOo0OOO0ooooo0O00OO0o0', '(Lcom/elfmcys/yesstevemodel/oo00Oo00o0ooooOooo0Oo0OO;Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;Lcom/elfmcys/yesstevemodel/oOOOOoo0O0Oo0O00oo0oooO0;)Ljava/lang/Object;'):instructions"
+        ]
+      },
+      {
+        "control": "missing-support-thunk-row",
+        "rejected": true,
+        "failed_checks": [
+          "bounded_dependency_support:exact-cohort-identity-set"
+        ]
+      },
+      {
+        "control": "missing-operator-row",
+        "rejected": true,
+        "failed_checks": [
+          "exact-16-table-rows",
+          "all-16-distinct-slots"
+        ]
+      },
+      {
+        "control": "missing-bootstrap-link",
+        "rejected": true,
+        "failed_checks": [
+          "exact-25-bootstrap-callsites"
+        ]
+      },
+      {
+        "control": "missing-table-field",
+        "rejected": true,
+        "failed_checks": [
+          "exact-table-field-candidate",
+          "table-field-matches-initializer-store"
+        ]
+      }
+    ],
+    "negative_failures": []
+  },
+  "source_tracks_verified": 185,
+  "source_java_inventory": 828,
+  "source_revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+  "historical_receipts_unchanged": [
+    "SEMANTIC-COVERAGE-2026-10-05.json",
+    "SEMANTIC-VERIFICATION-2026-10-05.json"
+  ],
+  "metadata_repair": "Stale latest-contract282 and semantic-seed107 counters retained as historical values and current counters updated.",
+  "runtime_executed": false,
+  "ci_executed": false,
+  "verification_scope": "Local exact-JAR static contracts, source hashes, instruction/bootstrap/CFG evidence and corrupt-evidence controls; not target-code execution, Forge runtime or whole-repository CI.",
+  "semantic_limits": [
+    "Original names unproven.",
+    "Whole artifact/source equivalence NOT_ESTABLISHED.",
+    "Semantic descriptions require review; matching code hashes alone do not establish semantics.",
+    "No new class roles, main unseeded432 and total661 unchanged."
+  ],
+  "independent_review": {
+    "status": "PASS_STATIC_SCOPE",
+    "source_hashes_rechecked": 2,
+    "missing_full_support_row_rejected": true,
+    "missing_table_entry_rejected": true,
+    "missing_assignment_instructions_rejected": true,
+    "wrong_artifact_identity_rejected": true
+  }
+}
