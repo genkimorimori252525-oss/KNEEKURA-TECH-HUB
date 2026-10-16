@@ -2,9 +2,11 @@
 
 ## Status and identity
 
-Initial static review, with a reproducible exact-bytecode regression dossier.
+Independently reviewed lifecycle/direct-caller static boundary, with a reproducible
+exact-bytecode regression dossier.
 **No new central mappings are promoted by this pass.** The current total remains
-625. Independent semantic review of these processor findings is NOT_RUN.
+625. Independent semantic review of the bounded findings is complete; it does not
+certify every retained method body or runtime behavior.
 
 - Exact artifact: Modrinth `Zqooxsd2`, 63,269,843 bytes, SHA-256
   `25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f`.
@@ -120,8 +122,9 @@ context cleanup can be skipped by an escaping commit exception.
 - No target execution, native extraction, game launch or runtime test performed.
 
 These tests detect evidence corruption; they do not independently certify the prose.
-The findings remain an initial reviewed static interpretation pending independent
-semantic review and caller/dependency closure. No code changes to YSM are proposed
+Independent review reproduced the 146 processor checks, 11 controls, 26 caller checks
+and exact direct-call scan, and verified all three source files against pinned Git
+blobs. Higher-caller/dependency closure and runtime interpretation remain open. No code changes to YSM are proposed
 or applied here.
 
 From this directory:

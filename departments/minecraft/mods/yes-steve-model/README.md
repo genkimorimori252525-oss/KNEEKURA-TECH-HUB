@@ -178,9 +178,10 @@ The remaining class counts are unchanged: **432 main / 661 total unseeded**.
 No game or target-JAR execution is claimed.
 
 The next [processor lifecycle review](ANIMATION-PROCESSOR-RECOVERY-2026-10-16.md)
-retains exact queue, shouldTick and exception paths. It is an initial static review,
-with 146 regression checks and 11 corruption controls, **not yet independently
-reviewed or promoted to the central map**. The 625 mapping count is unchanged.
+retains exact queue, shouldTick and exception paths. Its bounded findings passed
+independent review, 146 regression checks, 11 corruption controls and 26 caller
+checks. **No new central mappings are promoted**; the 625 count is unchanged.
+This is not full processor-body semantic closure or a reproduced runtime defect.
 
 ## Important limits
 
