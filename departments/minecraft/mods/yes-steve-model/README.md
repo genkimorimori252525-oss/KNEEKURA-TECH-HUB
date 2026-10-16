@@ -177,6 +177,11 @@ October 5 dated coverage and verification files remain historical receipts.
 The remaining class counts are unchanged: **432 main / 661 total unseeded**.
 No game or target-JAR execution is claimed.
 
+The next [processor lifecycle review](ANIMATION-PROCESSOR-RECOVERY-2026-10-16.md)
+retains exact queue, shouldTick and exception paths. It is an initial static review,
+with 146 regression checks and 11 corruption controls, **not yet independently
+reviewed or promoted to the central map**. The 625 mapping count is unchanged.
+
 ## Important limits
 
 - Public release-line source candidate equivalence to the distributed JAR is not proven.
