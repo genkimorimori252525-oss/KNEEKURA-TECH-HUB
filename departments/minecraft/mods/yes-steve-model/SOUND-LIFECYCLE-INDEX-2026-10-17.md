@@ -24,3 +24,5 @@ These bridge claims add no new captured-method count; they refine semantic readi
 Run tools/sound_lifecycle_checkpoint_ysm_265.py explicitly with --jar, --source-root and --out when this seam changes. The separate9-case JDK cache/buffer contract checks only language/library behavior, not target audio. Native codec methods remain declarations; no sound files, decoding or playback were invoked.
 
 Do not collapse stopped/closed/eof, future success, PCM cache publication or pooled decoder expiry into one completion boolean. Preserve buffer cursor and ownership constraints, signed/zero input assumptions and exception order when reusing these ideas. Next connected Java work should follow actual effect cleanup/reset callers rather than repeating the underlying decoder boundary.
+
+Later cleanup extension: [sound keyframes and exact callers](SOUND-KEYFRAME-CLEANUP-RECOVERY-2026-10-17.md), with10 direct stop/trim/reset calls and no claimed external closure. This postdates the fixed5 checkpoint above.

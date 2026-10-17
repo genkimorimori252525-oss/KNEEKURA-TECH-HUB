@@ -1,0 +1,41 @@
+{
+  "checks": [
+    {
+      "check": "exact-complete-call-scan",
+      "pass": true
+    },
+    {
+      "check": "955-classes",
+      "pass": true
+    }
+  ],
+  "negative_controls": [
+    {
+      "control": "invented-method-handle",
+      "rejected": true
+    },
+    {
+      "control": "invented-call",
+      "rejected": true
+    },
+    {
+      "control": "invented-caller-body",
+      "rejected": true
+    },
+    {
+      "control": "missing-target",
+      "rejected": true
+    },
+    {
+      "control": "invented-global-closure",
+      "rejected": true
+    },
+    {
+      "control": "wrong-artifact",
+      "rejected": true
+    }
+  ],
+  "failures": [],
+  "independent_review": "NOT_RUN",
+  "runtime_executed": false
+}
