@@ -78,9 +78,13 @@ cursor and error ownership, backed by a selected one-class Vineflower comparison
 A fixed3 lexer-parser checkpoint passes. Token labels are not numeric acceptance;
 source comments and diagnostic counters are not independent runtime evidence.
 
-Next finite connected question: Java lexer token consumers and parser error gates
-for these specific numeric/diagnostic paths, reusing existing parser snapshots.
-Avoid running target classes or turning static edge cases into observed game bugs.
+Parser numeric-token consumers and reader ownership are joined in a later fixed4
+entry checkpoint. JDK-only numeric probes are not target parser tests. Navigation
+now includes39 explicit comparison aliases and was refreshed through these docs.
+
+Next finite connected question: Java model data-carrier ownership at builder
+inputs and remaining immutable-versus-live reference assumptions. Reuse the
+existing model-composition/geometry snapshots; do not execute protected loaders.
 
 ## Anchors
 

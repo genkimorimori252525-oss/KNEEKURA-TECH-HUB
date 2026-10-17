@@ -311,6 +311,86 @@
       "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/compat/touhoulittlemaid/util/TlmConverterHelper.java",
       "source_sha256": "2daf3d3d717ddf5106fdc2f664ab16b8b86d2e0f96be913a5f8ffe0af2fe59f8",
       "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOOooOo0OO00ooO00OOO00o0",
+      "label": "MolangLexerImpl",
+      "evidence": "LEXER-TOKEN-DIAGNOSTICS-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "5804c2a9b830fef59dcf8c3f651faeaa3bf39686b1f8b7e1019748b11a4be231",
+      "document": "LEXER-TOKEN-DIAGNOSTICS-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/molang/lexer/MolangLexerImpl.java",
+      "source_sha256": "f754cc2b1ede58e929c9430aa3df85a290441889c0c6276756c452ebedfe0179",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/Oo0O00o0O0000OO0O0o0O0Oo",
+      "label": "Cursor",
+      "evidence": "LEXER-TOKEN-DIAGNOSTICS-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "5804c2a9b830fef59dcf8c3f651faeaa3bf39686b1f8b7e1019748b11a4be231",
+      "document": "LEXER-TOKEN-DIAGNOSTICS-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/molang/lexer/Cursor.java",
+      "source_sha256": "3db7038d64caa5de0284a1ef4c91a2a27612e207d7a3ea7adf5dbd0b89605334",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0Ooo00O0oO0oOOOo0o00OO0",
+      "label": "Characters",
+      "evidence": "LEXER-TOKEN-DIAGNOSTICS-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "5804c2a9b830fef59dcf8c3f651faeaa3bf39686b1f8b7e1019748b11a4be231",
+      "document": "LEXER-TOKEN-DIAGNOSTICS-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/molang/lexer/Characters.java",
+      "source_sha256": "5067075a041219d4b2af37cac42ad5c1da8ad31b3fd45f0aceeaaed9ae6bf904",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0O0oooO0O0OOO0OOo0OO00o",
+      "label": "ParseException",
+      "evidence": "LEXER-TOKEN-DIAGNOSTICS-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "5804c2a9b830fef59dcf8c3f651faeaa3bf39686b1f8b7e1019748b11a4be231",
+      "document": "LEXER-TOKEN-DIAGNOSTICS-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/molang/parser/ParseException.java",
+      "source_sha256": "1db978405ac5d4f8692a3dbc7cce9339fc69affaf786dedf3cfbc87dd80447bf",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/ooO0Ooo0OO0o000oo0o0o0OO",
+      "label": "MolangEngineImpl",
+      "evidence": "LEXER-TOKEN-DIAGNOSTICS-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "5804c2a9b830fef59dcf8c3f651faeaa3bf39686b1f8b7e1019748b11a4be231",
+      "document": "LEXER-TOKEN-DIAGNOSTICS-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/molang/MolangEngineImpl.java",
+      "source_sha256": "ced99998dd565645ff9d770564d08fe6a59a4813fcb06be6e750de68cc91b0b2",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOo0OOOooo0oO0oO00O00o0o",
+      "label": "TokenKind",
+      "evidence": "LEXER-TOKEN-DIAGNOSTICS-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "5804c2a9b830fef59dcf8c3f651faeaa3bf39686b1f8b7e1019748b11a4be231",
+      "document": "LEXER-TOKEN-DIAGNOSTICS-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/molang/lexer/TokenKind.java",
+      "source_sha256": "10f0f50bb2573c2f94804ebbe4449929ef3e5f8ed66b04cf490546c8aec959f8",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO00OOOOo0Ooo0oo0o0Oo0OO",
+      "label": "CustomDebugSource",
+      "evidence": "DEBUG-MESSAGE-DELIVERY-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "9cd0b08b21bfae052e52d24b122bdb9ce211c07ca16602e8392d12b941de571c",
+      "document": "DEBUG-MESSAGE-DELIVERY-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/debug/CustomDebugSource.java",
+      "source_sha256": "9372df8b5738d58eb06cc8bd2504662cad3e029e77ea80477b3a57eda4a630c0",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0oOo0o000oOo00OO000OOoO",
+      "label": "ContextFunction",
+      "evidence": "TYPED-FUNCTION-GUARDS-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "21aded33f3ad076813a8c2ea2952fd68eed0e9b926fc19591bb4dada4f0b79be",
+      "document": "TYPED-FUNCTION-GUARDS-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/molang/function/ContextFunction.java",
+      "source_sha256": "fe91c465df4cfe0631bb7a165dc9b970172d5de0953273a599b74d862a96afdd",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
     }
   ]
 }

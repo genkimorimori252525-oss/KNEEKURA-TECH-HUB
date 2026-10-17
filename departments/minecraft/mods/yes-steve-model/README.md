@@ -474,3 +474,5 @@ bounded runtime observation rather than protection bypass.
 - [Typed function guards](TYPED-FUNCTION-GUARDS-RECOVERY-2026-10-17.md) and [debug message delivery](DEBUG-MESSAGE-DELIVERY-RECOVERY-2026-10-17.md): context rejection, live receiver lookup and formatting boundaries.
 
 - [Lexer tokens and diagnostics](LEXER-TOKEN-DIAGNOSTICS-RECOVERY-2026-10-17.md): previous-token numeric branches, cursor clone offsets, locale and reader boundaries.
+
+- [Parser numeric rejection and reader ownership](PARSER-ENTRY-OWNERSHIP-RECOVERY-2026-10-17.md): token classification vs numeric conversion, error-state commitment and caller-owned vs convenience-owned readers.
