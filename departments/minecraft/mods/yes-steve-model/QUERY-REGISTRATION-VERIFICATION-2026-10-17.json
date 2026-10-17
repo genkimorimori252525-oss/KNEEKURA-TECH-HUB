@@ -1,0 +1,38 @@
+{
+  "checks": [
+    {
+      "check": "exact-literal-registration-catalog",
+      "pass": true
+    },
+    {
+      "check": "unique-namespace-names",
+      "pass": true
+    }
+  ],
+  "negative_controls": [
+    {
+      "control": "missing-entry",
+      "rejected": true
+    },
+    {
+      "control": "wrong-name",
+      "rejected": true
+    },
+    {
+      "control": "wrong-target",
+      "rejected": true
+    },
+    {
+      "control": "missing-extension-call",
+      "rejected": true
+    },
+    {
+      "control": "invented-global-coverage",
+      "rejected": true
+    }
+  ],
+  "failures": [],
+  "independent_semantic_review": "NOT_RUN",
+  "runtime_executed": false,
+  "central_mapping_promoted": false
+}

@@ -229,3 +229,8 @@ reachable typed query guard/entity inputs; use decompiler views only when useful
 Typed variable guard family is recorded and reconciled against the fixed JAR.
 Continue YSM entity-specific callback inputs; guard success does not imply
 animatable retargeting, successful execution or automatic numeric conversion.
+
+Literal query registration catalog now resolves 61 query + 110 ysm names to exact
+callbacks/objects and typed wrappers without implying semantic completion. The
+Curios extension call is preserved outside base counts. Continue that optional
+extension and remaining entity-specific callbacks via focused name lookup.

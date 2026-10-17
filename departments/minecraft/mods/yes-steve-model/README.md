@@ -349,3 +349,5 @@ bounded runtime observation rather than protection bypass.
 - [Actual selected Vineflower comparison](VINEFLOWER-COMPARISON-2026-10-17.md): eight unchanged class inputs, four derived Java outputs, four corroborated branches; no target runtime or source-equivalence claim.
 
 - [Typed query variable guards](TYPED-QUERY-GUARDS-RECOVERY-2026-10-17.md): 17 exact type predicates, raw callback results, invalid-variable/function distinction and child-entity guard limits.
+
+- [Query-name implementation lookup](QUERY-REGISTRATION-RECOVERY-2026-10-17.md): 171 base constructor registrations with compact JSONL lookup; conditional Curios extensions remain explicitly separate.
