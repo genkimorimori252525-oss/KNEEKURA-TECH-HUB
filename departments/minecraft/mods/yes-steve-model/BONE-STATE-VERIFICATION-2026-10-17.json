@@ -1,0 +1,902 @@
+{
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "base_checks": 218,
+  "base_failures": [],
+  "scoped_checks": [
+    {
+      "check": "fixed-artifact",
+      "pass": true
+    },
+    {
+      "check": "detailed-operands",
+      "pass": true
+    },
+    {
+      "check": "one-required-class",
+      "pass": true
+    },
+    {
+      "check": "fixed-source-record",
+      "pass": true
+    },
+    {
+      "check": "fixed-buffer-contract",
+      "pass": true
+    },
+    {
+      "check": "complete-35-method-set",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(F)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(F)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(F)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(F)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(F)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'o0OOooo0o0OO00OoOOOo0o0O', '(F)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'o0OOooo0o0OO00OoOOOo0o0O', '(F)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'o0OOooo0o0OO00OoOOOo0o0O', '(F)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'o0OOooo0o0OO00OoOOOo0o0O', '(F)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'o0OOooo0o0OO00OoOOOo0o0O', '(F)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'O00OOOooOoooOoo0o0o0oO0O', '(F)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'O00OOOooOoooOoo0o0o0oO0O', '(F)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'O00OOOooOoooOoo0o0o0oO0O', '(F)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'O00OOOooOoooOoo0o0o0oO0O', '(F)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'O00OOOooOoooOoo0o0o0oO0O', '(F)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oOOOo0OOO0ooooo0O00OO0o0', '(F)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oOOOo0OOO0ooooo0O00OO0o0', '(F)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oOOOo0OOO0ooooo0O00OO0o0', '(F)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oOOOo0OOO0ooooo0O00OO0o0', '(F)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oOOOo0OOO0ooooo0O00OO0o0', '(F)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'OOOOo0O0oO0OOo0O0O0Oo0O0', '(F)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'OOOOo0O0oO0OOo0O0O0Oo0O0', '(F)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'OOOOo0O0oO0OOo0O0O0Oo0O0', '(F)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'OOOOo0O0oO0OOo0O0O0Oo0O0', '(F)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'OOOOo0O0oO0OOo0O0O0Oo0O0', '(F)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Ooooo0oooO0oooOOOoO0000O', '(F)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Ooooo0oooO0oooOOOoO0000O', '(F)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Ooooo0oooO0oooOOOoO0000O', '(F)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Ooooo0oooO0oooOOOoO0000O', '(F)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Ooooo0oooO0oooOOOoO0000O', '(F)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oo0OoO00oOoo000O0000o0oo', '(F)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oo0OoO00oOoo000O0000o0oo', '(F)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oo0OoO00oOoo000O0000o0oo', '(F)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oo0OoO00oOoo000O0000o0oo', '(F)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oo0OoO00oOoo000O0000o0oo', '(F)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oooooooOOoOOoO00OooOo00O', '(F)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oooooooOOoOOoO00OooOo00O', '(F)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oooooooOOoOOoO00OooOo00O', '(F)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oooooooOOoOOoO00OooOo00O', '(F)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oooooooOOoOOoO00OooOo00O', '(F)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Oo00o0OooOOo0ooOoo0oO0o0', '(F)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Oo00o0OooOOo0ooOoo0oO0o0', '(F)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Oo00o0OooOOo0ooOoo0oO0o0', '(F)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Oo00o0OooOOo0ooOoo0oO0o0', '(F)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Oo00o0OooOOo0ooOoo0oO0o0', '(F)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Z)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Z)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Z)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Z)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Z)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(ZZ)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(ZZ)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(ZZ)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(ZZ)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(ZZ)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'o0OOooo0o0OO00OoOOOo0o0O', '(Z)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'o0OOooo0o0OO00OoOOOo0o0O', '(Z)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'o0OOooo0o0OO00OoOOOo0o0O', '(Z)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'o0OOooo0o0OO00OoOOOo0o0O', '(Z)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'o0OOooo0o0OO00OoOOOo0o0O', '(Z)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', '<init>', '(Lcom/elfmcys/yesstevemodel/oO0OO0OooO0Oo0OoO0oOooo0;[FI[FI)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', '<init>', '(Lcom/elfmcys/yesstevemodel/oO0OO0OooO0Oo0OoO0oOooo0;[FI[FI)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', '<init>', '(Lcom/elfmcys/yesstevemodel/oO0OO0OooO0Oo0OoO0oOooo0;[FI[FI)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', '<init>', '(Lcom/elfmcys/yesstevemodel/oO0OO0OooO0Oo0OoO0oOooo0;[FI[FI)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', '<init>', '(Lcom/elfmcys/yesstevemodel/oO0OO0OooO0Oo0OoO0oOooo0;[FI[FI)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'OO0ooO00OoO00o0OO0OOooO0', '()Lorg/joml/Vector3f;'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'OO0ooO00OoO00o0OO0OOooO0', '()Lorg/joml/Vector3f;'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'OO0ooO00OoO00o0OO0OOooO0', '()Lorg/joml/Vector3f;'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'OO0ooO00OoO00o0OO0OOooO0', '()Lorg/joml/Vector3f;'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'OO0ooO00OoO00o0OO0OOooO0', '()Lorg/joml/Vector3f;'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Ooo0O0000OO0OOO0o0Oo0oOO', '()F'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Ooo0O0000OO0OOO0o0Oo0oOO', '()F'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Ooo0O0000OO0OOO0o0Oo0oOO', '()F'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Ooo0O0000OO0OOO0o0Oo0oOO', '()F'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Ooo0O0000OO0OOO0o0Oo0oOO', '()F'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'o0o0Oooo00OoOoOOOooo0000', '()F'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'o0o0Oooo00OoOoOOOooo0000', '()F'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'o0o0Oooo00OoOoOOOooo0000', '()F'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'o0o0Oooo00OoOoOOOooo0000', '()F'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'o0o0Oooo00OoOoOOOooo0000', '()F'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'ooooO0o00oO0Oo0OOo0O0O0o', '()F'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'ooooO0o00oO0Oo0OOo0O0O0o', '()F'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'ooooO0o00oO0Oo0OOo0O0O0o', '()F'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'ooooO0o00oO0Oo0OOo0O0O0o', '()F'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'ooooO0o00oO0Oo0OOo0O0O0o', '()F'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oOOo0Ooo0oOoo0O0OOOOo0oo', '()Ljava/lang/String;'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oOOo0Ooo0oOoo0O0OOOOo0oo', '()Ljava/lang/String;'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oOOo0Ooo0oOoo0O0OOOOo0oo', '()Ljava/lang/String;'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oOOo0Ooo0oOoo0O0OOOOo0oo', '()Ljava/lang/String;'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oOOo0Ooo0oOoo0O0OOOOo0oo', '()Ljava/lang/String;'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'O0o00oO0O0ooOOOo0oo0Oo00', '()I'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'O0o00oO0O0ooOOOo0oo0Oo00', '()I'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'O0o00oO0O0ooOOOo0oo0Oo00', '()I'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'O0o00oO0O0ooOOOo0oo0Oo00', '()I'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'O0o00oO0O0ooOOOo0oo0Oo00', '()I'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()F'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()F'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()F'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()F'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()F'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'o0OOooo0o0OO00OoOOOo0o0O', '()F'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'o0OOooo0o0OO00OoOOOo0o0O', '()F'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'o0OOooo0o0OO00OoOOOo0o0O', '()F'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'o0OOooo0o0OO00OoOOOo0o0O', '()F'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'o0OOooo0o0OO00OoOOOo0o0O', '()F'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'O00OOOooOoooOoo0o0o0oO0O', '()F'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'O00OOOooOoooOoo0o0o0oO0O', '()F'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'O00OOOooOoooOoo0o0o0oO0O', '()F'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'O00OOOooOoooOoo0o0o0oO0O', '()F'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'O00OOOooOoooOoo0o0o0oO0O', '()F'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oOOOo0OOO0ooooo0O00OO0o0', '()F'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oOOOo0OOO0ooooo0O00OO0o0', '()F'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oOOOo0OOO0ooooo0O00OO0o0', '()F'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oOOOo0OOO0ooooo0O00OO0o0', '()F'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oOOOo0OOO0ooooo0O00OO0o0', '()F'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'OOOOo0O0oO0OOo0O0O0Oo0O0', '()F'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'OOOOo0O0oO0OOo0O0O0Oo0O0', '()F'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'OOOOo0O0oO0OOo0O0O0Oo0O0', '()F'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'OOOOo0O0oO0OOo0O0O0Oo0O0', '()F'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'OOOOo0O0oO0OOo0O0O0Oo0O0', '()F'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Ooooo0oooO0oooOOOoO0000O', '()F'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Ooooo0oooO0oooOOOoO0000O', '()F'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Ooooo0oooO0oooOOOoO0000O', '()F'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Ooooo0oooO0oooOOOoO0000O', '()F'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Ooooo0oooO0oooOOOoO0000O', '()F'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oo0OoO00oOoo000O0000o0oo', '()F'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oo0OoO00oOoo000O0000o0oo', '()F'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oo0OoO00oOoo000O0000o0oo', '()F'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oo0OoO00oOoo000O0000o0oo', '()F'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oo0OoO00oOoo000O0000o0oo', '()F'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oooooooOOoOOoO00OooOo00O', '()F'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oooooooOOoOOoO00OooOo00O', '()F'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oooooooOOoOOoO00OooOo00O', '()F'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oooooooOOoOOoO00OooOo00O', '()F'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oooooooOOoOOoO00OooOo00O', '()F'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Oo00o0OooOOo0ooOoo0oO0o0', '()F'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Oo00o0OooOOo0ooOoo0oO0o0', '()F'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Oo00o0OooOOo0ooOoo0oO0o0', '()F'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Oo00o0OooOOo0ooOoo0oO0o0', '()F'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'Oo00o0OooOOo0ooOoo0oO0o0', '()F'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'o0OOO0o0o0OOo000oO00o00O', '()F'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'o0OOO0o0o0OOo000oO00o00O', '()F'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'o0OOO0o0o0OOo000oO00o00O', '()F'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'o0OOO0o0o0OOo000oO00o00O', '()F'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'o0OOO0o0o0OOo000oO00o00O', '()F'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'O0OooOo0oOOoOoOoOooO000o', '()F'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'O0OooOo0oOOoOoOoOooO000o', '()F'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'O0OooOo0oOOoOoOoOooO000o', '()F'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'O0OooOo0oOOoOoOoOooO000o', '()F'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'O0OooOo0oOOoOoOoOooO000o', '()F'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'ooOO000o0O0OOOoO0Oo0o0Oo', '()F'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'ooOO000o0O0OOOoO0Oo0o0Oo', '()F'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'ooOO000o0O0OOOoO0Oo0o0Oo', '()F'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'ooOO000o0O0OOOoO0Oo0o0Oo', '()F'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'ooOO000o0O0OOOoO0Oo0o0Oo', '()F'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'OOOo0OOOoOO0O00Oo00ooOOO', '()Z'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'OOOo0OOOoOO0O00Oo00ooOOO', '()Z'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'OOOo0OOOoOO0O00Oo00ooOOO', '()Z'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'OOOo0OOOoOO0O00Oo00ooOOO', '()Z'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'OOOo0OOOoOO0O00Oo00ooOOO', '()Z'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oOo0o0000OOOO0OooooO00oo', '()Z'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oOo0o0000OOOO0OooooO00oo', '()Z'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oOo0o0000OOOO0OooooO00oo', '()Z'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oOo0o0000OOOO0OooooO00oo', '()Z'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oOo0o0000OOOO0OooooO00oo', '()Z'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'O0ooooOO0oOo000O0Oo00OOO', '()Z'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'O0ooooOO0oOo000O0Oo00OOO', '()Z'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'O0ooooOO0oOo000O0Oo00OOO', '()Z'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'O0ooooOO0oOo000O0Oo00OOO', '()Z'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'O0ooooOO0oOo000O0Oo00OOO', '()Z'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oOOOooO00oo0oOooooOO0Oo0', '()Ljava/lang/Object;'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oOOOooO00oo0oOooooOO0Oo0', '()Ljava/lang/Object;'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oOOOooO00oo0oOooooOO0Oo0', '()Ljava/lang/Object;'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oOOOooO00oo0oOooooOO0Oo0', '()Ljava/lang/Object;'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oo000o00O0O0oo00oO000', 'oOOOooO00oo0oOooooOO0Oo0', '()Ljava/lang/Object;'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "single-owner-detail",
+      "pass": true
+    },
+    {
+      "check": "bootstrap_methods",
+      "pass": true
+    },
+    {
+      "check": "constant_values",
+      "pass": true
+    },
+    {
+      "check": "three-allocation-methods",
+      "pass": true
+    },
+    {
+      "check": "allocation:('com/elfmcys/yesstevemodel/OOOO0O0O000O000000oOOO0o', '<init>', '(Lcom/elfmcys/yesstevemodel/OOoOoooOOooO0o0000o0O0o0;)V'):access",
+      "pass": true
+    },
+    {
+      "check": "allocation:('com/elfmcys/yesstevemodel/OOOO0O0O000O000000oOOO0o', '<init>', '(Lcom/elfmcys/yesstevemodel/OOoOoooOOooO0o0000o0O0o0;)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "allocation:('com/elfmcys/yesstevemodel/OOOO0O0O000O000000oOOO0o', '<init>', '(Lcom/elfmcys/yesstevemodel/OOoOoooOOooO0o0000o0O0o0;)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "allocation:('com/elfmcys/yesstevemodel/OOOO0O0O000O000000oOOO0o', '<init>', '(Lcom/elfmcys/yesstevemodel/OOoOoooOOooO0o0000o0O0o0;)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "allocation:('com/elfmcys/yesstevemodel/OOOO0O0O000O000000oOOO0o', '<init>', '(Lcom/elfmcys/yesstevemodel/OOoOoooOOooO0o0000o0O0o0;)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "allocation:('com/elfmcys/yesstevemodel/OOOO0O0O000O000000oOOO0o', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()[F'):access",
+      "pass": true
+    },
+    {
+      "check": "allocation:('com/elfmcys/yesstevemodel/OOOO0O0O000O000000oOOO0o', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()[F'):instructions",
+      "pass": true
+    },
+    {
+      "check": "allocation:('com/elfmcys/yesstevemodel/OOOO0O0O000O000000oOOO0o', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()[F'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "allocation:('com/elfmcys/yesstevemodel/OOOO0O0O000O000000oOOO0o', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()[F'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "allocation:('com/elfmcys/yesstevemodel/OOOO0O0O000O000000oOOO0o', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()[F'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "allocation:('com/elfmcys/yesstevemodel/OOOO0O0O000O000000oOOO0o', 'o0OOooo0o0OO00OoOOOo0o0O', '()[F'):access",
+      "pass": true
+    },
+    {
+      "check": "allocation:('com/elfmcys/yesstevemodel/OOOO0O0O000O000000oOOO0o', 'o0OOooo0o0OO00OoOOOo0o0O', '()[F'):instructions",
+      "pass": true
+    },
+    {
+      "check": "allocation:('com/elfmcys/yesstevemodel/OOOO0O0O000O000000oOOO0o', 'o0OOooo0o0OO00OoOOOo0o0O', '()[F'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "allocation:('com/elfmcys/yesstevemodel/OOOO0O0O000O000000oOOO0o', 'o0OOooo0o0OO00OoOOOo0o0O', '()[F'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "allocation:('com/elfmcys/yesstevemodel/OOOO0O0O000O000000oOOO0o', 'o0OOooo0o0OO00OoOOOo0o0O', '()[F'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "fixed-allocation-source",
+      "pass": true
+    },
+    {
+      "check": "allocation-source-sha",
+      "pass": true
+    },
+    {
+      "check": "source-checkout-revision",
+      "pass": true
+    },
+    {
+      "check": "source-file-sha",
+      "pass": true
+    }
+  ],
+  "failures": [],
+  "negative_controls": [
+    {
+      "control": "missing-allocation-record",
+      "rejected": true
+    },
+    {
+      "control": "wrong-output-stride",
+      "rejected": true
+    },
+    {
+      "control": "missing-allocation-source",
+      "rejected": true
+    },
+    {
+      "control": "missing-class-record",
+      "rejected": true
+    },
+    {
+      "control": "missing-source-record",
+      "rejected": true
+    },
+    {
+      "control": "wrong-source-sha",
+      "rejected": true
+    },
+    {
+      "control": "missing-setter",
+      "rejected": true
+    },
+    {
+      "control": "missing-support-getter",
+      "rejected": true
+    },
+    {
+      "control": "missing-operands",
+      "rejected": true
+    },
+    {
+      "control": "rotation-x-slot",
+      "rejected": true
+    },
+    {
+      "control": "rotation-x-store",
+      "rejected": true
+    },
+    {
+      "control": "input-output-array-confusion",
+      "rejected": true
+    },
+    {
+      "control": "hidden-branch-polarity",
+      "rejected": true
+    },
+    {
+      "control": "hidden-child-slot",
+      "rejected": true
+    },
+    {
+      "control": "hidden-together-argument",
+      "rejected": true
+    },
+    {
+      "control": "tracking-true-value",
+      "rejected": true
+    },
+    {
+      "control": "wrong-published-slot-contract",
+      "rejected": true
+    },
+    {
+      "control": "wrong-artifact-claim",
+      "rejected": true
+    }
+  ],
+  "negative_failures": [],
+  "runtime_executed": false,
+  "limit": "Static array-write evidence only; no native consumer or concurrent safety proof.",
+  "independent_review": "NOT_RUN"
+}

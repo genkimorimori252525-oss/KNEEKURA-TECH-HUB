@@ -15552,6 +15552,181 @@
           "access": 1
         }
       ]
+    },
+    {
+      "id": "ysm265.method.bone-key-frame-is-begin",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OOOo0OooOOoOooooooo000O0",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(F)Z",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.keyframe.bone.BoneKeyFrame",
+      "semantic_member": "isBegin",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_LOCAL_NUMERIC_AND_EVALUATION_ORDER_SEMANTICS",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/OOOo0OooOOoOooooooo000O0.class",
+          "locator": "KEYFRAME-PRODUCER-EVIDENCE-2026-10-17.json",
+          "fact": "float-to-double1, double1e-5 constant2, dcmpg5/ifge6: strict below test; NaN false, 1e-5f below actual doublethreshold.",
+          "access": 9
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.bone-key-frame-is-end",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OOOo0OooOOoOooooooo000O0",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(F)Z",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.keyframe.bone.BoneKeyFrame",
+      "semantic_member": "isEnd",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_LOCAL_NUMERIC_AND_EVALUATION_ORDER_SEMANTICS",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/OOOo0OooOOoOooooooo000O0.class",
+          "locator": "KEYFRAME-PRODUCER-EVIDENCE-2026-10-17.json",
+          "fact": "float0.9999899864196777 constant1,fcmpl3/ifle4: strict above test; equality/NaN false.",
+          "access": 9
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.transition-key-frame-get-lerp-point",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OooOo0o00OO00O000oOOo0O0",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;F)Lorg/joml/Vector3f;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.keyframe.bone.TransitionKeyFrame",
+      "semantic_member": "getLerpPoint",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_LOCAL_NUMERIC_AND_EVALUATION_ORDER_SEMANTICS",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/OooOo0o00OO00O000oOOo0O0.class",
+          "locator": "KEYFRAME-PRODUCER-EVIDENCE-2026-10-17.json",
+          "fact": "isEnd1/ifne4->16 chooses post21; otherwise begin12. No isBegin/interpolation path; NaN chooses begin.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.transition-key-frame-get-transition-dst",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OooOo0o00OO00O000oOOo0O0",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Lorg/joml/Vector3f;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.keyframe.bone.TransitionKeyFrame",
+      "semantic_member": "getTransitionDst",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_LOCAL_NUMERIC_AND_EVALUATION_ORDER_SEMANTICS",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/OooOo0o00OO00O000oOOo0O0.class",
+          "locator": "KEYFRAME-PRODUCER-EVIDENCE-2026-10-17.json",
+          "fact": "reads inherited beginPoint1 and evaluates5, returns8; supplied completion not involved.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.linear-key-frame-get-lerp-point",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO000ooOooO0Ooooooo000Oo",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;F)Lorg/joml/Vector3f;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.keyframe.bone.LinearKeyFrame",
+      "semantic_member": "getLerpPoint",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_LOCAL_NUMERIC_AND_EVALUATION_ORDER_SEMANTICS",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/OO000ooOooO0Ooooooo000Oo.class",
+          "locator": "KEYFRAME-PRODUCER-EVIDENCE-2026-10-17.json",
+          "fact": "isBegin1 short-circuits begin12; isEnd17 short-circuits post28; otherwise begin37 then end46 then MathUtil vectorlerp55. NaN enters interior; no local guards/handlers.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.catmull-rom-key-frame-get-lerp-point",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO0O0OoO000OoOo0OO00O0OO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;F)Lorg/joml/Vector3f;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.keyframe.bone.CatmullRomKeyFrame",
+      "semantic_member": "getLerpPoint",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_LOCAL_NUMERIC_AND_EVALUATION_ORDER_SEMANTICS",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/OO0O0OoO000OoOo0OO00O0OO.class",
+          "locator": "KEYFRAME-PRODUCER-EVIDENCE-2026-10-17.json",
+          "fact": "isBegin1->begin12 and isEnd17->post28; interior evaluates left37,begin46,end56,right66 then MathUtil catmull79. No memoization/clamp/handlers.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.vector3v-eval",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.o0oO0ooOo0o0OOO0oo0Ooooo",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Lorg/joml/Vector3f;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.keyframe.bone.Vector3v",
+      "semantic_member": "eval",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_LOCAL_NUMERIC_AND_EVALUATION_ORDER_SEMANTICS",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/o0oO0ooOo0o0OOO0oo0Ooooo.class",
+          "locator": "KEYFRAME-PRODUCER-EVIDENCE-2026-10-17.json",
+          "fact": "Reads x/y/z IValue fields and calls exact evalAsFloat at9/19/29 sequentially, then constructs new Vector3f at34. No local catch; interface dispatch can use overrides; inherited default conversion behavior is separate.",
+          "access": 1
+        }
+      ]
     }
   ],
   "unresolved_hints": [
@@ -15869,13 +16044,13 @@
       "controller_interface": "OoOoOO0O00oOoO0o0ooOO0oO"
     },
     "latest_contract": {
-      "mappings": 662,
+      "mappings": 669,
       "class_targets": 295,
-      "exact_methods": 358,
+      "exact_methods": 365,
       "exact_fields": 9,
       "failures": 0,
       "verified_at": "2026-10-17",
-      "verification": "ANIMATION-PIPELINE-VERIFICATION-2026-10-17.json"
+      "verification": "KEYFRAME-PRODUCER-VERIFICATION-2026-10-17.json"
     },
     "historical_contract_282": {
       "mappings": 282,
@@ -16194,6 +16369,14 @@
       "added": 37,
       "total": 662,
       "verification": "ANIMATION-PIPELINE-VERIFICATION-2026-10-17.json"
+    },
+    {
+      "date": "2026-10-17",
+      "cohort": "keyframe-producer",
+      "baseline_mappings": 662,
+      "added": 7,
+      "total": 669,
+      "verification": "KEYFRAME-PRODUCER-VERIFICATION-2026-10-17.json"
     }
   ]
 }

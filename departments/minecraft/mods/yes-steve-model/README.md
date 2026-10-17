@@ -142,9 +142,9 @@ The machine-readable map deliberately keeps distributed-artifact observations se
 version-matched public source candidate. This exposed concrete source/artifact divergence around the
 preview/paperdoll renderer instead of silently forcing them to agree.
 
-The current machine-readable map contains **662** mappings (**398 CONFIRMED / 264 HIGH**).
+The current machine-readable map contains **669** mappings (**405 CONFIRMED / 264 HIGH**).
 Every recorded owner/member/descriptor contract passes against the exact official JAR: **295 class
-targets, 358 exact methods and 9 exact fields, with 0 failures**. The whole-JAR Foundation Map covers
+targets, 365 exact methods and 9 exact fields, with 0 failures**. The whole-JAR Foundation Map covers
 **955 / 955 classes**. Two large formerly-UNKNOWN islands are now separated as bundled **Concentus
 (131 classes)** and **Gagravarr/VorbisJava (86 classes)**; only **15 degree-0 singleton classes** remain
 UNKNOWN.
@@ -191,10 +191,10 @@ The reviewed bone/queue, interpolation and animation-point batch adds 37 mapping
 13 bone/queue methods, 16 MathUtil methods plus one class role, and 7 point methods.
 See [checkpoint verification](ANIMATION-PIPELINE-VERIFICATION-2026-10-17.json).
 
-There are now **295 class-role rows**, but **304 distinct owners with any semantic
-mapping**: nine owners have reviewed member mappings without a separate class-role
-row. The graph's still-unseeded count is **651 total / 422 main**, not 955 minus the
-class-role-row count. None of these counts is a whole-target completion percentage.
+There are now **295 class-role rows**, but **309 distinct owners with any semantic
+mapping**: fourteen owners have reviewed member mappings without a separate class-role
+row. The graph's still-unseeded count is **646 total / 417 main**, not 955 minus the
+class-role-row count. The subsequent keyframe-producer pass is included in these latest counts. None of these counts is a whole-target completion percentage.
 
 - [Bone commit and queue consumers](BONE-COMMIT-QUEUE-RECOVERY-2026-10-17.md)
 - [Interpolation boundary](INTERPOLATION-BOUNDARY-RECOVERY-2026-10-17.md)
@@ -203,6 +203,13 @@ class-role-row count. None of these counts is a whole-target completion percenta
 Next connected producer and Java bone-state work continues. Native internals,
 model protection bypass, game execution and global source equivalence remain out
 of this static continuation's claims.
+
+The next [keyframe producer pass](KEYFRAME-PRODUCER-RECOVERY-2026-10-17.md) adds seven
+reviewed method mappings, bringing the map to 669. Its 125 checks and 20 corruption
+controls passed; [verification](KEYFRAME-PRODUCER-VERIFICATION-2026-10-17.json).
+[Java bone-state and allocation](BONE-STATE-RECOVERY-2026-10-17.md) is also recorded
+with strict evidence checks, but independent semantic review is still pending and
+it adds no central mappings yet.
 
 ## Important limits
 

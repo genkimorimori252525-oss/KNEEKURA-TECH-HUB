@@ -69,3 +69,7 @@ an unmatched local history wholesale.
 October 17: 662 mappings; 295 class-role rows and 304 owners with any semantic
 mapping. Bone/queue, MathUtil and point lifecycle passed independent static review.
 Keyframe producers and IBone Java buffer writes are in progress; do not stop here.
+
+October 17 follow-on: keyframe-producer methods reviewed, total 669 mappings.
+Java bone-state/allocation evidence is statically checked but awaits independent
+semantic review. Continue easing/raw-keyframe factory and Java scheduling ownership.
