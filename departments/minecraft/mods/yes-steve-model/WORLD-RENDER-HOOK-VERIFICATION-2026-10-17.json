@@ -1,0 +1,33 @@
+{
+  "checks": [
+    {
+      "check": "exact-decoded-annotations",
+      "pass": true
+    }
+  ],
+  "negative_controls": [
+    {
+      "control": "missing-method",
+      "rejected": true
+    },
+    {
+      "control": "wrong-artifact",
+      "rejected": true
+    },
+    {
+      "control": "missing-class-annotations",
+      "rejected": true
+    },
+    {
+      "control": "invented-runtime-proof",
+      "rejected": true
+    },
+    {
+      "control": "lost-injection-annotation",
+      "rejected": true
+    }
+  ],
+  "failures": [],
+  "runtime_executed": false,
+  "independent_review": "NOT_RUN"
+}

@@ -278,3 +278,5 @@ bounded runtime observation rather than protection bypass.
 - [Animatable frame gates and model lifecycle](ANIMATABLE-FRAME-RECOVERY-2026-10-17.md): 72-method static dossier; independent review pending.
 
 - [Async animation submission and wait boundary](ASYNC-ANIMATION-RECOVERY-2026-10-17.md): 46-method static dossier; independent review pending.
+
+- [Animatable override inventory](ANIMATABLE-OVERRIDE-RECOVERY-2026-10-17.md) and [exact world-render hook annotations](WORLD-RENDER-HOOK-RECOVERY-2026-10-17.md): bounded static closure; runtime injection unverified.

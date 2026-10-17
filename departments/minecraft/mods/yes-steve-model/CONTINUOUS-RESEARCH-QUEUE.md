@@ -97,3 +97,7 @@ thread ownership. Independent reviews remain pending; continue connected work.
 Async submission/future ownership, worker finally and renderer hook bodies are
 recorded. Continue concrete eligibility/immutability overrides and renderer
 consumers; mixin annotation identity and runtime thread safety remain unproven.
+
+Fixed-JAR hierarchy/caller closure and world-render annotation/refmap decoding
+are recorded. Next follow registration/model readiness and MixinTweaker/render
+scope gates; runtime injection and external overrides remain out of proof.
