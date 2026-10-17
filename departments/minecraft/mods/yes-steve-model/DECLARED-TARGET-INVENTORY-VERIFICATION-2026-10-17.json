@@ -1,0 +1,538 @@
+{
+  "scope": "DECLARED_TARGET_EXISTENCE_ONLY_NOT_CALL_CLOSURE_OR_SEMANTIC_REVIEW",
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "validator_sha256": "e2e5d7ccd0aff966c94e3f6151e2a94d05c241e9faa183d20041d3e0ee99e24b",
+  "class_count": 955,
+  "checked": [
+    {
+      "evidence": "CONDITION-REGISTRATION-CALLERS-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "03a0c1a01cae26f034b7cf3ac46236c9900bc62c2a401b8c38a26a46464669fc",
+      "targets": [
+        {
+          "owner": "com/elfmcys/yesstevemodel/oO0OoOoo00ooooO00OoOO00O",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Ljava/lang/String;)V",
+          "kind": "methods",
+          "declaration_present": true
+        }
+      ]
+    },
+    {
+      "evidence": "EXECUTE-MOLANG-PRODUCERS-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "633d92bdf538c9608feac33a68d152113c294c7d9a5299f0cd8467e58a9bc85b",
+      "targets": [
+        {
+          "owner": "com/elfmcys/yesstevemodel/o0oo0O0o0oO0O0o0OoOOOoOO",
+          "name": "<init>",
+          "descriptor": "(ILjava/lang/String;)V",
+          "kind": "methods",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/o0oo0O0o0oO0O0o0OoOOOoOO",
+          "name": "<init>",
+          "descriptor": "([ILjava/lang/String;)V",
+          "kind": "methods",
+          "declaration_present": true
+        }
+      ]
+    },
+    {
+      "evidence": "FOREIGN-BINDING-REFERENCES-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "be8e6fe72dacb6e76155459a21cc1cf613ea1658a570262fe30a4a8f8fecbb3f",
+      "targets": [
+        {
+          "owner": "com/elfmcys/yesstevemodel/oO0o00o0o0oOo000OoO000oO",
+          "kind": "classes",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/oO0o00o0o0oOo000OoO000oO$Oo0Oo0o00O00Oo0OOoOOoooo",
+          "kind": "classes",
+          "declaration_present": true
+        }
+      ]
+    },
+    {
+      "evidence": "FULL-SYNC-CALLERS-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "f54fb7044d88134dcb519913c9715d12a8118e7b19291c85e69003a5ab8668ec",
+      "targets": [
+        {
+          "owner": "com/elfmcys/yesstevemodel/Ooo0O0000OO0OOO0o0Oo0oOO",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Lnet/minecraft/server/level/ServerPlayer;Z)Lcom/elfmcys/yesstevemodel/O00OO0Oo0O0Oo0O0Ooo0o00O;",
+          "kind": "methods",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Lnet/minecraft/server/level/ServerPlayer;Z)Ljava/util/Optional;",
+          "kind": "methods",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O",
+          "name": "oo0OoO00oOoo000O0000o0oo",
+          "descriptor": "()V",
+          "kind": "methods",
+          "declaration_present": true
+        }
+      ]
+    },
+    {
+      "evidence": "GEOMETRY-DEFAULT-CALLERS-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "e2dea2c33a538c6fd3b99c415f3e1661bcddaf4f54d776e6fc645abbe3e0a2df",
+      "targets": [
+        {
+          "owner": "com/elfmcys/yesstevemodel/OOoOoO0000OooOOoO0ooOOOo",
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "()Ljava/lang/Double;",
+          "kind": "methods",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/OOoOoO0000OooOOoO0ooOOOo",
+          "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+          "descriptor": "()Ljava/lang/Double;",
+          "kind": "methods",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/OOoOoO0000OooOOoO0ooOOOo",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "()Ljava/lang/String;",
+          "kind": "methods",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/OOoOoO0000OooOOoO0ooOOOo",
+          "name": "Ooooo0oooO0oooOOOoO0000O",
+          "descriptor": "()[D",
+          "kind": "methods",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/OOoOoO0000OooOOoO0ooOOOo",
+          "name": "o0OOooo0o0OO00OoOOOo0o0O",
+          "descriptor": "()Ljava/lang/Double;",
+          "kind": "methods",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/OOoOoO0000OooOOoO0ooOOOo",
+          "name": "oOOOo0OOO0ooooo0O00OO0o0",
+          "descriptor": "()Ljava/lang/Double;",
+          "kind": "methods",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/oO0OO0OooO0Oo0OoO0oOooo0",
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "()Z",
+          "kind": "methods",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/oO0OO0OooO0Oo0OoO0oOooo0",
+          "name": "O0OooOo0oOOoOoOoOooO000o",
+          "descriptor": "()F",
+          "kind": "methods",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/oO0OO0OooO0Oo0OoO0oOooo0",
+          "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+          "descriptor": "()Z",
+          "kind": "methods",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/oO0OO0OooO0Oo0OoO0oOooo0",
+          "name": "Oo00o0OooOOo0ooOoo0oO0o0",
+          "descriptor": "()F",
+          "kind": "methods",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/oO0OO0OooO0Oo0OoO0oOooo0",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "()Ljava/lang/String;",
+          "kind": "methods",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/oO0OO0OooO0Oo0OoO0oOooo0",
+          "name": "Ooooo0oooO0oooOOOoO0000O",
+          "descriptor": "()F",
+          "kind": "methods",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/oO0OO0OooO0Oo0OoO0oOooo0",
+          "name": "o0OOO0o0o0OOo000oO00o00O",
+          "descriptor": "()F",
+          "kind": "methods",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/oO0OO0OooO0Oo0OoO0oOooo0",
+          "name": "o0OOooo0o0OO00OoOOOo0o0O",
+          "descriptor": "()I",
+          "kind": "methods",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/oO0OO0OooO0Oo0OoO0oOooo0",
+          "name": "oOOOo0OOO0ooooo0O00OO0o0",
+          "descriptor": "()Z",
+          "kind": "methods",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/oO0OO0OooO0Oo0OoO0oOooo0",
+          "name": "oo0OoO00oOoo000O0000o0oo",
+          "descriptor": "()F",
+          "kind": "methods",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/oO0OO0OooO0Oo0OoO0oOooo0",
+          "name": "oooooooOOoOOoO00OooOo00O",
+          "descriptor": "()F",
+          "kind": "methods",
+          "declaration_present": true
+        }
+      ]
+    },
+    {
+      "evidence": "GUI-PREVIEW-CALLERS-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "b6073749c529b9f2f93646bb7c2bf82b70b37b13d5fdcd0c6fce18c5747f22f8",
+      "targets": [
+        {
+          "owner": "com/elfmcys/yesstevemodel/OoO00Oo00Ooo0OoOoo00o000",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(FFFFLcom/elfmcys/yesstevemodel/o0O0oOooOo0OoOo0oOo00O00;Lcom/elfmcys/yesstevemodel/OOoo0o0oO000ooO0Oo00OoOo;ZZ)V",
+          "kind": "methods",
+          "declaration_present": true
+        }
+      ]
+    },
+    {
+      "evidence": "LOCATOR-MATRIX-CALLERS-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "345d86d8bb94ece9e2ba6cd9dcc442f32e8c9e9ec522b86305f319183d202e27",
+      "targets": [
+        {
+          "owner": "com/elfmcys/yesstevemodel/o000OO00oooOo00000ooo0Oo",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Lcom/mojang/blaze3d/vertex/PoseStack;Ljava/util/List;)Z",
+          "kind": "methods",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/o000OO00oooOo00000ooo0Oo",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;)Lorg/joml/Matrix4f;",
+          "kind": "methods",
+          "declaration_present": true
+        }
+      ]
+    },
+    {
+      "evidence": "MAID-VEHICLE-CALLERS-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "a4cc11a45d44f0a48ff9adfb73c320894110a622ebaeec82f1f45193190486ee",
+      "targets": [
+        {
+          "owner": "com/elfmcys/yesstevemodel/OooOO0oOoOo0o0OoOOOOo00O",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/entity/Entity;)V",
+          "kind": "methods",
+          "declaration_present": true
+        }
+      ]
+    },
+    {
+      "evidence": "MOLANG-EVENT-CALLERS-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "bdb49e9e9351019a4e5082fe548e5a34c960035377f39251eddc9d6b024bb91b",
+      "targets": [
+        {
+          "owner": "com/elfmcys/yesstevemodel/OOOoOO000000o0o0oOooo0o0",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Ljava/util/List;)Lcom/elfmcys/yesstevemodel/O0o0OOO00000oO00O00oOOo0;",
+          "kind": "methods",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/OOOoOO000000o0o0oOooo0o0",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Ljava/util/List;Lit/unimi/dsi/fastutil/floats/FloatArrayList;)Lcom/elfmcys/yesstevemodel/O0o0OOO00000oO00O00oOOo0;",
+          "kind": "methods",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/OOOoOO000000o0o0oOooo0o0",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Ljava/util/List;Ljava/util/List;)Lcom/elfmcys/yesstevemodel/O0o0OOO00000oO00O00oOOo0;",
+          "kind": "methods",
+          "declaration_present": true
+        }
+      ]
+    },
+    {
+      "evidence": "ORDERED-SEGMENT-CALLERS-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "b11feb3a5323ab4a66e283954d91318075cf96fa39cb8c44287de17ff96ca0c0",
+      "targets": [
+        {
+          "owner": "com/elfmcys/yesstevemodel/o0o00oo00Oo0oo00ooOO0ooo",
+          "name": "<init>",
+          "descriptor": "([F[F)V",
+          "kind": "methods",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/oOOOO0oo00o0oOoo0oOoooOO",
+          "name": "<init>",
+          "descriptor": "(Ljava/util/List;FLcom/elfmcys/yesstevemodel/oOOOO0oo00o0oOoo0oOoooOO$Oo0Oo0o00O00Oo0OOoOOoooo;)V",
+          "kind": "methods",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/oOOOO0oo00o0oOoo0oOoooOO",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(F)Ljava/lang/Object;",
+          "kind": "methods",
+          "declaration_present": true
+        }
+      ]
+    },
+    {
+      "evidence": "PARTICLE-KEYFRAME-READERS-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "ec80bb9f83171275dbb7632d10996917e1537e0e3136766564f3ce8b3d924baf",
+      "targets": [
+        {
+          "owner": "com/elfmcys/yesstevemodel/Oo0OOo00Oo00oO00Ooo0O00O",
+          "name": "o0OOO0o0o0OOo000oO00o00O",
+          "descriptor": "Ljava/util/List;",
+          "kind": "fields",
+          "declaration_present": true
+        }
+      ]
+    },
+    {
+      "evidence": "SOUND-CLEANUP-CALLERS-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "fcecfe96b8522d4b1c17eefdad47f7924568e919030eb881564a97f6132d63a2",
+      "targets": [
+        {
+          "owner": "com/elfmcys/yesstevemodel/O00OoO0oOoO0oOo0o000ooo0",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "()V",
+          "kind": "methods",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/O00OoO0oOoO0oOo0o000ooo0",
+          "name": "o0OOooo0o0OO00OoOOOo0o0O",
+          "descriptor": "()V",
+          "kind": "methods",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/OOOO0O0OO0oOOo00Ooo0oooO",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "()V",
+          "kind": "methods",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/OOOO0O0OO0oOOo00Ooo0oooO",
+          "name": "o0OOooo0o0OO00OoOOOo0o0O",
+          "descriptor": "()V",
+          "kind": "methods",
+          "declaration_present": true
+        }
+      ]
+    },
+    {
+      "evidence": "STORAGE-CALLERS-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "06c8afaee9af984916706eed133faf9b44da9bc0810a8c281d08f65a06486ce7",
+      "targets": [
+        {
+          "owner": "com/elfmcys/yesstevemodel/O00o0OooOOOooo000ooOo00o",
+          "name": "<init>",
+          "descriptor": "()V",
+          "kind": "methods",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/O00o0OooOOOooo000ooOo00o",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "()V",
+          "kind": "methods",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/O00o0OooOOOooo000ooOo00o",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo;)Z",
+          "kind": "methods",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/O00o0OooOOOooo000ooOo00o",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Ljava/util/List;)Z",
+          "kind": "methods",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/O0oooOO0Oooo0o0000ooOooO",
+          "name": "<init>",
+          "descriptor": "()V",
+          "kind": "methods",
+          "declaration_present": true
+        },
+        {
+          "owner": "com/elfmcys/yesstevemodel/O0oooOO0Oooo0o0000ooOooO",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0O0OO0oo0o0Oo0OO0o0O0O;)V",
+          "kind": "methods",
+          "declaration_present": true
+        }
+      ]
+    }
+  ],
+  "failures": [],
+  "status": "PASS",
+  "files_without_target_inventory_skipped": [
+    "ANIMATABLE-FRAME-EVIDENCE-2026-10-17.json",
+    "ANIMATABLE-OVERRIDE-EVIDENCE-2026-10-17.json",
+    "ANIMATION-DATA-OWNERSHIP-EVIDENCE-2026-10-17.json",
+    "ANIMATION-PACKET-ROUTING-EVIDENCE-2026-10-17.json",
+    "ANIMATION-PLAYER-CLOCK-EVIDENCE-2026-10-17.json",
+    "ANIMATION-POINT-EVIDENCE-2026-10-17.json",
+    "ANIMATION-PROCESSOR-CALLER-EVIDENCE-2026-10-16.json",
+    "ANIMATION-PROCESSOR-EVIDENCE-2026-10-16.json",
+    "ARM-REPLACEMENT-EVENTS-EVIDENCE-2026-10-17.json",
+    "ASYNC-ANIMATION-EVIDENCE-2026-10-17.json",
+    "ATTACHMENT-RENDER-LAYERS-EVIDENCE-2026-10-17.json",
+    "AUDIO-DECODER-JAVA-BOUNDARY-EVIDENCE-2026-10-17.json",
+    "BACKPACK-SPELL-BLADE-INPUTS-EVIDENCE-2026-10-17.json",
+    "BEDROCK-CONTROLLER-EVIDENCE-2026-10-17.json",
+    "BINARY-EVALUATOR-EVIDENCE-2026-10-16.json",
+    "BONE-COMMIT-QUEUE-EVIDENCE-2026-10-17.json",
+    "BONE-PARAMETER-QUERY-EVIDENCE-2026-10-17.json",
+    "BONE-STATE-EVIDENCE-2026-10-17.json",
+    "BROAD-FOLLOWUP-EVIDENCE-2026-10-05.json",
+    "BROAD-POOL-EVIDENCE-2026-10-05.json",
+    "BROAD-ROLE-EVIDENCE-2026-10-05.json",
+    "CARRY-HORSE-SKYHOOK-EVIDENCE-2026-10-17.json",
+    "CHILD-CONTEXT-ARROW-EVIDENCE-2026-10-17.json",
+    "CLIENT-COMPAT-INITIALIZATION-EVIDENCE-2026-10-17.json",
+    "CLIENT-MODEL-SYNC-STATE-EVIDENCE-2026-10-17.json",
+    "CLIENT-SESSION-SKIN-EVENTS-EVIDENCE-2026-10-17.json",
+    "CLIENT-VIEW-MOVEMENT-EVIDENCE-2026-10-17.json",
+    "CODED-CONTROLLER-STATE-EVIDENCE-2026-10-17.json",
+    "CONDITIONAL-ANIMATION-NAMES-EVIDENCE-2026-10-17.json",
+    "CONTROL-EQUIPMENT-PREDICATES-EVIDENCE-2026-10-17.json",
+    "CONTROL-PRIORITY-ACTIONS-EVIDENCE-2026-10-17.json",
+    "CURIOS-QUERY-EXTENSION-EVIDENCE-2026-10-17.json",
+    "DEBUG-MESSAGE-DELIVERY-EVIDENCE-2026-10-17.json",
+    "DISPATCHER-RENDER-REPLACEMENT-EVIDENCE-2026-10-17.json",
+    "EASING-RAW-FACTORY-EVIDENCE-2026-10-17.json",
+    "ENTITY-LOAD-APPLICATION-EVIDENCE-2026-10-17.json",
+    "EQUIPMENT-EFFECT-QUERY-EVIDENCE-2026-10-17.json",
+    "EVIDENCE-LOCATOR-2026-10-17.json",
+    "EVIDENCE-LOCATOR-VERIFICATION-2026-10-17.json",
+    "EXTRA-ANIMATION-KEY-ROUTING-EVIDENCE-2026-10-17.json",
+    "EXTRA-BINDING-CATALOG-EVIDENCE-2026-10-17.json",
+    "EXTRA-PREVIEW-CONTROLLERS-EVIDENCE-2026-10-17.json",
+    "FIRST-PERSON-ARM-ASSEMBLY-EVIDENCE-2026-10-17.json",
+    "FIRST-PERSON-RENDER-REGISTRY-EVIDENCE-2026-10-17.json",
+    "FOREIGN-BINDING-EVIDENCE-2026-10-17.json",
+    "FUNCTION-LOOP-ORDER-EVIDENCE-2026-10-17.json",
+    "GEOMETRY-AUTHORED-DEFAULTS-EVIDENCE-2026-10-17.json",
+    "GUI-PREVIEW-STATE-EVIDENCE-2026-10-17.json",
+    "GUN-ANIMATION-ADAPTERS-EVIDENCE-2026-10-17.json",
+    "GUN-INNER-ANIMATION-EVIDENCE-2026-10-17.json",
+    "HUMANOID-HAND-PREDICATES-EVIDENCE-2026-10-17.json",
+    "HYBRID-PARCOOL-CONTROLLER-EVIDENCE-2026-10-17.json",
+    "INPUT-SYNC-DEFER-EVIDENCE-2026-10-17.json",
+    "INSTRUCTION-DEBUG-EVALUATION-EVIDENCE-2026-10-17.json",
+    "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+    "JAVA-RENDER-BOUNDARY-EVIDENCE-2026-10-17.json",
+    "KEYFRAME-PRODUCER-EVIDENCE-2026-10-17.json",
+    "LEXER-TOKEN-DIAGNOSTICS-EVIDENCE-2026-10-17.json",
+    "LIVING-ENVIRONMENT-INPUTS-EVIDENCE-2026-10-17.json",
+    "LOCATOR-MATRIX-PREPARATION-EVIDENCE-2026-10-17.json",
+    "MAID-COMMON-MODEL-COPY-EVIDENCE-2026-10-17.json",
+    "MAID-CONTROLLER-REGISTRATION-EVIDENCE-2026-10-17.json",
+    "MAID-ENTITY-CONTROL-EVIDENCE-2026-10-17.json",
+    "MAID-QUERY-ADAPTER-EVIDENCE-2026-10-17.json",
+    "MAID-RENDER-CAPABILITY-EVIDENCE-2026-10-17.json",
+    "MEMBER-EVIDENCE-VIEWER-VERIFICATION-2026-10-17.json",
+    "MODEL-ASSET-HELPERS-EVIDENCE-2026-10-17.json",
+    "MODEL-INPUT-CARRIERS-EVIDENCE-2026-10-17.json",
+    "MODEL-LANGUAGE-FALLBACK-EVIDENCE-2026-10-17.json",
+    "MODEL-READINESS-SCOPE-EVIDENCE-2026-10-17.json",
+    "MOLANG-COMMAND-PRODUCER-EVIDENCE-2026-10-17.json",
+    "MOLANG-EVALUATION-EVIDENCE-2026-10-05.json",
+    "MOLANG-EVALUATOR-EVIDENCE-2026-10-05.json",
+    "MOLANG-EVENT-WRAPPER-EVIDENCE-2026-10-17.json",
+    "MOLANG-LOOP-EVIDENCE-2026-10-05.json",
+    "MOLANG-MATH-EVIDENCE-2026-10-05.json",
+    "MOLANG-POOLED-PARSER-EVIDENCE-2026-10-05.json",
+    "MOLANG-TYPED-AST-EVIDENCE-2026-10-05.json",
+    "MOVEMENT-QUERY-EVIDENCE-2026-10-17.json",
+    "MUSIC-COMBAT-QUERY-INPUTS-EVIDENCE-2026-10-17.json",
+    "NATIVE-TEXTURE-JAVA-BOUNDARY-EVIDENCE-2026-10-17.json",
+    "ORDERED-SEGMENT-TRANSITION-EVIDENCE-2026-10-17.json",
+    "PARSER-BINDING-STORAGE-EVIDENCE-2026-10-17.json",
+    "PARSER-ENTRY-OWNERSHIP-EVIDENCE-2026-10-17.json",
+    "PARSER-POOL-LIFETIME-EVIDENCE-2026-10-17.json",
+    "PARTICLE-SOUND-DISPATCH-EVIDENCE-2026-10-17.json",
+    "PASSENGER-HAT-ATTACHMENT-EVIDENCE-2026-10-17.json",
+    "PLAYER-CONTROLLER-ASSEMBLY-EVIDENCE-2026-10-17.json",
+    "PLAYER-MAIN-SELECTION-EVIDENCE-2026-10-17.json",
+    "PLAYER-PROPERTY-QUERY-EVIDENCE-2026-10-17.json",
+    "PLAYER-RENDER-ENTRY-EVIDENCE-2026-10-17.json",
+    "PLAYER-REPLACEMENT-VIEW-GATES-EVIDENCE-2026-10-17.json",
+    "POOLED-NAME-CHANGE-CODEC-EVIDENCE-2026-10-17.json",
+    "PROJECTILE-HIT-INPUT-EVIDENCE-2026-10-17.json",
+    "PROJECTILE-MIXIN-ANNOTATIONS-EVIDENCE-2026-10-17.json",
+    "PROPERTY-RESET-LIFECYCLE-EVIDENCE-2026-10-17.json",
+    "PROPERTY-STATE-WRITERS-EVIDENCE-2026-10-17.json",
+    "RENDER-SELECTION-EVIDENCE-2026-10-17.json",
+    "RESOURCE-ARGUMENT-ADAPTER-EVIDENCE-2026-10-17.json",
+    "RIDING-ARMOR-PREDICATES-EVIDENCE-2026-10-17.json",
+    "ROAMING-STATE-MERGE-EVIDENCE-2026-10-17.json",
+    "RUNTIME-STORAGE-FRAMES-EVIDENCE-2026-10-17.json",
+    "SEED-RECOVERY-EVIDENCE-2026-10-05.json",
+    "SERVER-FULL-SYNC-EVIDENCE-2026-10-17.json",
+    "SERVER-PROPERTY-PRODUCER-EVIDENCE-2026-10-17.json",
+    "SHADER-BUFFER-ADAPTERS-EVIDENCE-2026-10-17.json",
+    "SMOOTHING-STATE-EVIDENCE-2026-10-17.json",
+    "SOUND-DATA-PCM-CACHE-EVIDENCE-2026-10-17.json",
+    "SOUND-INSTANCE-LIFETIME-EVIDENCE-2026-10-17.json",
+    "SOUND-KEYFRAME-CLEANUP-EVIDENCE-2026-10-17.json",
+    "SOURCE-HINT-FOLLOWUP-EVIDENCE-2026-10-05.json",
+    "STATE-TRACKER-INPUT-EVIDENCE-2026-10-17.json",
+    "STRUCT-COPY-CHANGE-EVIDENCE-2026-10-17.json",
+    "SYNC-STATE-UI-CONSUMERS-EVIDENCE-2026-10-17.json",
+    "TEXTURE-HOLDER-LIFETIME-EVIDENCE-2026-10-17.json",
+    "TIME-CONTROLLER-QUERY-EVIDENCE-2026-10-17.json",
+    "TLM-LOCATION-ADAPTER-EVIDENCE-2026-10-17.json",
+    "TYPED-FUNCTION-GUARDS-EVIDENCE-2026-10-17.json",
+    "TYPED-QUERY-GUARDS-EVIDENCE-2026-10-17.json",
+    "USER-FUNCTION-CACHE-EVIDENCE-2026-10-17.json",
+    "UTILITY-NOISE-DEBUG-EVIDENCE-2026-10-17.json",
+    "VARIABLE-AST-RETURN-EVIDENCE-2026-10-17.json",
+    "VARIABLE-CONVERSION-EVIDENCE-2026-10-17.json",
+    "VEHICLE-PROJECTILE-CONTROLLERS-EVIDENCE-2026-10-17.json",
+    "VEHICLE-PROJECTILE-RENDER-EVIDENCE-2026-10-17.json",
+    "VIEW-TEXTURE-INPUT-EVIDENCE-2026-10-17.json",
+    "WORLD-QUERY-INPUT-EVIDENCE-2026-10-17.json",
+    "WORLD-RENDER-HOOK-EVIDENCE-2026-10-17.json"
+  ],
+  "target_executed": false,
+  "source_scanned": false
+}
