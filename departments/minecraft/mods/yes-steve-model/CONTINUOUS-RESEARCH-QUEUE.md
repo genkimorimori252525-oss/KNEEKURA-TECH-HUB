@@ -45,10 +45,15 @@ separate fixed5 client-session checkpoint passed. REUSE-CONTRACTS provides optio
 task-scoped navigation; do not turn it into a mandatory startup audit. The locator
 has been deliberately refreshed through these cohorts, without confidence promotion.
 
-Next finite connected question: custom/vanilla sound-instance lifetime and Java
-resource-holder boundaries after already-reviewed Molang sound dispatch. Preserve
-stop-request versus engine completion, actor/level references and async ownership.
-Do not execute target audio, native decoding or protected model-data paths.
+Sound instance, PCM cache and Java decoder-adapter ownership are joined in
+SOUND-LIFECYCLE-INDEX with a fixed5 scoped checkpoint. No audio/target/native
+execution occurred. Standard JDK contract checks narrow API assumptions without
+claiming external decoder input domains or measured resource leaks.
+
+Next finite connected question: actual effect cleanup/reset callers and references
+across controller/animatable replacement. Reuse existing manager/controller snapshots
+where possible; do not inflate counts or repeat the decoder boundary. Preserve
+stop request versus external engine completion and async callback ownership.
 
 ## Anchors
 

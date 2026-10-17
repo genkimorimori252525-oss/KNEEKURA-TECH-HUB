@@ -10,6 +10,8 @@ For implementation reuse, start with [the compact contract guide](REUSE-CONTRACT
 Attachment/render lifecycle: [ATTACHMENT-RENDER-INDEX-2026-10-17.md](ATTACHMENT-RENDER-INDEX-2026-10-17.md).
 Session and model state: [CLIENT-MODEL-SYNC-STATE-RECOVERY-2026-10-17.md](CLIENT-MODEL-SYNC-STATE-RECOVERY-2026-10-17.md).
 
+Sound emission/resource lifetime: [SOUND-LIFECYCLE-INDEX-2026-10-17.md](SOUND-LIFECYCLE-INDEX-2026-10-17.md).
+
 ## Scope
 
 - Target: **Yes Steve Model (YSM)**

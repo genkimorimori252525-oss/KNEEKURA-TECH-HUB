@@ -13,6 +13,8 @@ Use this only when implementing or analyzing a related subsystem. It is a small 
 | Attach equipment or replace rendering | [Attachment/render index](ATTACHMENT-RENDER-INDEX-2026-10-17.md) | Locator leaf convention, overload route, cancellation stage and pose cleanup are caller-dependent |
 | Handle session/model availability | [Client state/listeners](CLIENT-MODEL-SYNC-STATE-RECOVERY-2026-10-17.md) | Sync progress, Java map publication, texture readiness and visible output are not one completion flag |
 
+| Emit effects or manage audio lifetime | [Sound lifecycle](SOUND-LIFECYCLE-INDEX-2026-10-17.md) | Dispatch, stop request, EOF, stream close and decoder retirement differ |
+
 ## Avoid these semantic substitutions
 
 1. **Readiness is not visibility.** Model-present excludes some loaded fallback states; texture ID presence is not GPU success. Use [model readiness](MODEL-READINESS-SCOPE-RECOVERY-2026-10-17.md) and [texture lifetime](TEXTURE-HOLDER-LIFETIME-RECOVERY-2026-10-17.md).
@@ -28,7 +30,7 @@ Use this only when implementing or analyzing a related subsystem. It is a small 
 
 - Ordinary navigation reads the prebuilt compact locator. --check-selected checks returned-file hashes only; it does not prove global freshness or new-file coverage.
 - For evidence work, run the relevant cohort auditor with the exact JAR and pinned source. For a substantive connected batch, choose its fixed manifest; do not rerun unrelated whole-repository CI after every edit.
-- Frozen checkpoints: pipeline17, state/query10, controller9, optional integration14, attachment/render9, render-lifecycle8, client-session5. They are separate historical manifests, not a sum of recovered methods or an automatic all-tests command.
+- Frozen checkpoints: pipeline17, state/query10, controller9, optional integration14, attachment/render9, render-lifecycle8, client-session5, sound-lifecycle5. They are separate historical manifests, not a sum of recovered methods or an automatic all-tests command.
 - The [client-session5 receipt](CLIENT-SESSION-CHECKPOINT-2026-10-17.json) passed in0.751seconds. It joins three new cohorts with two adjacent earlier anchors;0 overlapping snapshots is not independent corroboration.
 - Vineflower is a second structural view; javap/exact operands remain the anchor. JDK-only regex/arithmetic models test only the modeled library/language contract. No target/native/GPU run has been claimed.
 - Original names, whole source/artifact equivalence, external provider behavior, actual injection and independently reviewed semantics remain separate claims. Preserve conditional findings; do not patch a presumed bug merely because an isolated branch looks unusual.

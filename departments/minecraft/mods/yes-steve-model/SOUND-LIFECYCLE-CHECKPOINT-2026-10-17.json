@@ -1,0 +1,89 @@
+{
+  "format": "kneekura.ysm-sound-lifecycle-checkpoint.v1",
+  "cohort_manifest": [
+    [
+      "SOUND-INSTANCE-LIFETIME",
+      "sound_instance_lifetime",
+      true
+    ],
+    [
+      "SOUND-DATA-PCM-CACHE",
+      "sound_data_pcm_cache",
+      true
+    ],
+    [
+      "AUDIO-DECODER-JAVA-BOUNDARY",
+      "audio_decoder_java_boundary",
+      true
+    ],
+    [
+      "PARTICLE-SOUND-DISPATCH",
+      "particle_sound_dispatch",
+      true
+    ],
+    [
+      "MODEL-READINESS-SCOPE",
+      "model_readiness_scope",
+      true
+    ]
+  ],
+  "cohorts": [
+    {
+      "cohort": "SOUND-INSTANCE-LIFETIME",
+      "tool_sha256": "99e23ff661e31bf644bb23ee759ad74d4e65fc2e51f83b674dcd6653f45f066f",
+      "evidence_sha256": "78a9629a5227a637e48b940b05bd0b85d3d29bae960eac6bcc162b37159c49ed",
+      "rerun_receipt_sha256": "6c9586daaa42505ef5277856c5c830a533965f4806c8c8687e0bc2e4a8611935",
+      "checks": 114,
+      "negative_controls": 10,
+      "status": "PASS"
+    },
+    {
+      "cohort": "SOUND-DATA-PCM-CACHE",
+      "tool_sha256": "83863217dcd049a1e61d74b8cd6ba574fe31ab33371105c00d94f923b3435778",
+      "evidence_sha256": "de63831ce36f8919199a4face7c1a8bfd18bf97360100ef7c9310721a93bb441",
+      "rerun_receipt_sha256": "d1cd11a39ad02e306b72b2d1b17d63becbc9c3dcc642affd431e50a8047333ce",
+      "checks": 214,
+      "negative_controls": 13,
+      "status": "PASS"
+    },
+    {
+      "cohort": "AUDIO-DECODER-JAVA-BOUNDARY",
+      "tool_sha256": "c4822a2f61359914ff969626f09d48e2f3a4be8e5dd0bb11f496d1ed26be6d41",
+      "evidence_sha256": "c0e3fe7d2b5e2ed77dc58fff115bde62ef0e77b92a8335a0f8d1f3a1c9022861",
+      "rerun_receipt_sha256": "84bec048103082ca05eabf2d85650c8202e2979bc35b415602288d6886425df6",
+      "checks": 192,
+      "negative_controls": 10,
+      "status": "PASS"
+    },
+    {
+      "cohort": "PARTICLE-SOUND-DISPATCH",
+      "tool_sha256": "aa3be0716dd2084c712764820b59ced3e4a2dea9f2968ae968acdde54caa0464",
+      "evidence_sha256": "f1a1c349f82238f7bac6f1b2e2b0fd9cdb679cc711ddb776008d471144791405",
+      "rerun_receipt_sha256": "2ff880e8b3dd10d4715661aeccd5723cc6a7904b8e8815a40673d6c95e2b41fe",
+      "checks": 203,
+      "negative_controls": 15,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MODEL-READINESS-SCOPE",
+      "tool_sha256": "2a30eb269f20bae8269eea5197a5da60a70301ecd0915cab3003e9faea83e996",
+      "evidence_sha256": "e7533627f17112687f8adb06d5b5a385fe869fa956026393f61bad7a19a4c713",
+      "rerun_receipt_sha256": "98d6dac10ef36a22895a1dad686effb8811775fb5b8c75ecde878d97bf0b4748",
+      "checks": 400,
+      "negative_controls": 15,
+      "status": "PASS"
+    }
+  ],
+  "cohort_count": 5,
+  "overlapping_method_snapshots_compared": 0,
+  "overlap_conflicts": 0,
+  "central_mapping_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
+  "central_mapping_promoted": false,
+  "independent_semantic_review": "NOT_RUN",
+  "target_runtime_executed": false,
+  "whole_project_ci_run": false,
+  "earlier_fixed17_checkpoint_modified": false,
+  "earlier_fixed10_checkpoint_modified": false,
+  "earlier_fixed9_checkpoint_modified": false,
+  "elapsed_seconds": 0.921
+}
