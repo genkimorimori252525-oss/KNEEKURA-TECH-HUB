@@ -365,3 +365,5 @@ bounded runtime observation rather than protection bypass.
 - [Stateful smoothing](SMOOTHING-STATE-RECOVERY-2026-10-17.md): shared key/type reuse, first-return versus simulated state, manager clock ordering and exact first/second-order arithmetic boundaries.
 
 - [Particle/sound dispatch](PARTICLE-SOUND-DISPATCH-RECOVERY-2026-10-17.md): emission/fake-player gates, count-zero/absolute-axis particle semantics, synchronous sound configuration before duplicate checks; actual javap corroboration recorded.
+
+- [Input/sync/defer boundaries](INPUT-SYNC-DEFER-RECOVERY-2026-10-17.md): cached in-game input, local/remote sync and task enqueue, deferred value capture with a nonselecting name parameter; no actual input or traffic tested.

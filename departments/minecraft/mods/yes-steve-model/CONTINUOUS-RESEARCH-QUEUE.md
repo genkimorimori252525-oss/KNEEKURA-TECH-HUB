@@ -269,3 +269,8 @@ Particle/sound dispatch and manager selection are recorded with four-class javap
 inspection (existing jdk.jdeps module; no target execution). Continue input-state
 and sync/defer boundaries. Dispatch acceptance is not audio/particle visibility
 proof; no packets, keys or target effects have been exercised.
+
+Input-state/sync/defer boundaries are recorded. Ordinary sync client lookup differs
+from EntityLoadEvent caching; defer's nonempty name is not used by its recorder.
+Continue remaining utility/noise/math/control functions; preserve task execution
+versus dispatch, arity and emission distinctions without speculative fixes.
