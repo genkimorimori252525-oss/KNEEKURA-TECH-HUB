@@ -276,3 +276,5 @@ bounded runtime observation rather than protection bypass.
 - [Bedrock state scheduling and queue-production join](BEDROCK-CONTROLLER-RECOVERY-2026-10-17.md): 36-method static dossier; independent review pending.
 
 - [Animatable frame gates and model lifecycle](ANIMATABLE-FRAME-RECOVERY-2026-10-17.md): 72-method static dossier; independent review pending.
+
+- [Async animation submission and wait boundary](ASYNC-ANIMATION-RECOVERY-2026-10-17.md): 46-method static dossier; independent review pending.

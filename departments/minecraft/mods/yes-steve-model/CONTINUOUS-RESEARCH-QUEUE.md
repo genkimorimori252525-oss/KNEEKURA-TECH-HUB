@@ -93,3 +93,7 @@ animatable lifecycle, model reload and scheduling; no stop at this checkpoint.
 Animatable base clock/rate/update gates and model lifecycle are recorded; actual
 callers and overrides are next. A base-body lack of async calls is not a proof of
 thread ownership. Independent reviews remain pending; continue connected work.
+
+Async submission/future ownership, worker finally and renderer hook bodies are
+recorded. Continue concrete eligibility/immutability overrides and renderer
+consumers; mixin annotation identity and runtime thread safety remain unproven.
