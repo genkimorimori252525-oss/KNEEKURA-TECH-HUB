@@ -1,0 +1,117 @@
+{
+  "format": "kneekura.ysm-model-admin-batch.v1",
+  "cohort_manifest": [
+    [
+      "MODEL-ADMIN-RELOAD",
+      "model_admin_reload",
+      true
+    ],
+    [
+      "SERVER-MODEL-SYNC-JAVA",
+      "server_model_sync_java",
+      true
+    ],
+    [
+      "SERVER-MODEL-RESULT-CARRIERS",
+      "server_model_result_carriers",
+      true
+    ],
+    [
+      "MOLANG-COMMAND-PRODUCER",
+      "molang_command_producer",
+      true
+    ],
+    [
+      "MODEL-SELECTION-REQUEST",
+      "model_selection_request",
+      true
+    ],
+    [
+      "SERVER-PROPERTY-PRODUCER",
+      "server_property_producer",
+      true
+    ],
+    [
+      "SERVER-FULL-SYNC",
+      "server_full_sync",
+      true
+    ]
+  ],
+  "cohorts": [
+    {
+      "cohort": "MODEL-ADMIN-RELOAD",
+      "tool_sha256": "624e75a540cc7a51d3723568772ecb66c401bdeb177ada1090a106ea4edbcbfd",
+      "evidence_sha256": "575f9826b32d843c0bd9f48f6b6c27dd0f384fe5ee3d4407ad27fb9bdb064760",
+      "rerun_receipt_sha256": "c0a9282db55bb47be597c4056e5d7a614841064ed75f3484661c0880e832da35",
+      "checks": 156,
+      "negative_controls": 10,
+      "status": "PASS"
+    },
+    {
+      "cohort": "SERVER-MODEL-SYNC-JAVA",
+      "tool_sha256": "eb583e69ff6187ade919507e4d6b10c7195481e38860595b2e9f552d2b0c6fe3",
+      "evidence_sha256": "5e29cfbe88202d48e0826927d8c66c92cc18e476de163166744dd406f3a6ce98",
+      "rerun_receipt_sha256": "4aabc38aba207b96e598e223e67f90dfb3962f6f56ec7a8413dc09fb47d2cbb1",
+      "checks": 219,
+      "negative_controls": 14,
+      "status": "PASS"
+    },
+    {
+      "cohort": "SERVER-MODEL-RESULT-CARRIERS",
+      "tool_sha256": "b072e674ad00ca62c00bed6d5c2e204c63e91fd72d30bd8bcfb8292c2dbd1100",
+      "evidence_sha256": "3f69f4da92d33f832b12239c662df83a2f5e792e4e0d9b0f7832bcae3f39a749",
+      "rerun_receipt_sha256": "b5b038c3dfc8b1d4d11ce39875e08bfee75393fef031523152655630945d4ef7",
+      "checks": 133,
+      "negative_controls": 13,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MOLANG-COMMAND-PRODUCER",
+      "tool_sha256": "d9f849297ac038baf4e1202862dd52a4326ad863d5b650a96041326e3b7a5dfe",
+      "evidence_sha256": "199dfcf5fc94c6382681c831c13a51f3abf7cd06dff1a30ce2f33479968198da",
+      "rerun_receipt_sha256": "5a17630b316504ae213ff1191b94eefd6658fc9b138162154615e75c5d287fda",
+      "checks": 148,
+      "negative_controls": 11,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MODEL-SELECTION-REQUEST",
+      "tool_sha256": "a041638497e18e2fc6e06646f53ee200154781f5d1a66703d6b7925a4a9a3bd9",
+      "evidence_sha256": "463a0e6fec58e964ce2f61517942940668e171ba705e97e9f8829a7bc9f53cad",
+      "rerun_receipt_sha256": "d7bb573d15653e991d72d416bc0af7f0e5486fd946e2c4854d0f41d4415aa110",
+      "checks": 144,
+      "negative_controls": 13,
+      "status": "PASS"
+    },
+    {
+      "cohort": "SERVER-PROPERTY-PRODUCER",
+      "tool_sha256": "89fed2299686b1fbea4474c37c55dc6fa4205ec38286fe6c870223dde063ef65",
+      "evidence_sha256": "e2f08aa1ffae350f76cc6aa0265c4efd58f85396e9fdb5124b7711e374f77511",
+      "rerun_receipt_sha256": "efdaf2b4632367e08186612cc2bc6bf25c065571c2bdcb9c3cce901c3b3044ac",
+      "checks": 214,
+      "negative_controls": 13,
+      "status": "PASS"
+    },
+    {
+      "cohort": "SERVER-FULL-SYNC",
+      "tool_sha256": "9a3afc69f76a07b17c99f1572c2764896daf74f49f209b6f5de4d4b2c4f4545c",
+      "evidence_sha256": "4d7de7d99ca629cd2268af2ab95498597728a449114e4dd9fe77921c3dfa79e0",
+      "rerun_receipt_sha256": "e43c8540a58bcc8ed69b89a39947ab36cfea51bedb0a9b5ca4b8d68ef0bef815",
+      "checks": 384,
+      "negative_controls": 13,
+      "status": "PASS"
+    }
+  ],
+  "cohort_count": 7,
+  "overlapping_method_snapshots_compared": 0,
+  "overlap_conflicts": 0,
+  "central_mapping_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
+  "central_mapping_promoted": false,
+  "independent_semantic_review": "NOT_RUN",
+  "target_runtime_executed": false,
+  "whole_project_ci_run": false,
+  "earlier_fixed17_checkpoint_modified": false,
+  "earlier_fixed10_checkpoint_modified": false,
+  "earlier_fixed9_checkpoint_modified": false,
+  "elapsed_seconds": 1.249
+}

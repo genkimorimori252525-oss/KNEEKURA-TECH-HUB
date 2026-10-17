@@ -95,3 +95,8 @@ The [connected model-transfer review](MODEL-TRANSFER-BATCH-REVIEW-2026-10-17.md)
 ## Handshake and server model synchronization
 
 The [server synchronization boundary review](SERVER-SYNC-BATCH-REVIEW-2026-10-17.md) connects first-write handshake state, version agreement, server model publication, immutable result containers, Java send completion and client readiness. A fixed10 artifact batch passes; the separately pinned Netty source comparison is not loaded-runtime verification. Native declarations remain opaque and all recent semantics remain primary-only.
+
+## Optional consumers and administrative reload producers
+
+- [Optional probe consumer](TOP-OPTIONAL-CONSUMER-RECOVERY-2026-10-17.md): IMC registration offer, inspected-player versus initialized-vehicle gates, and conditional lazy-set consumer reachability. The fixed6 [checkpoint](TOP-CONSUMER-CHECKPOINT-2026-10-17.json) passes; plugin activation and repeated getter execution remain unproven.
+- [Model administration and startup reload](MODEL-ADMIN-RELOAD-RECOVERY-2026-10-17.md): privileged set/disable staging, command versus selection-packet validation, reload admission versus callbacks, and conditional feedback/nullability boundaries. The fixed7 [checkpoint](MODEL-ADMIN-CHECKPOINT-2026-10-17.json) passes; no commands or native loaders were executed.
