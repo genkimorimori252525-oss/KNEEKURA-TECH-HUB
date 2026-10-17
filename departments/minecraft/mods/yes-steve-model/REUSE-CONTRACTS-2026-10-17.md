@@ -81,3 +81,7 @@ For an exact-symbol caller inventory, [validate the target declaration](DECLARED
 - [Shield/effect event producers](SHIELD-EFFECT-EVENT-PRODUCERS-RECOVERY-2026-10-17.md): NBT key-presence cooldown versus positive counter, effect-event guards, coalesced byte-level staging and presence-mask query provenance. The fixed6 [checkpoint](SHIELD-EFFECT-QUERY-CHECKPOINT-2026-10-17.json) compares eight repeated snapshots without conflict; no live event timing or transport was tested.
 
 - [Server animation commands and suggestions](ANIMATION-COMMAND-SUGGESTIONS-RECOVERY-2026-10-17.md): stop-name routing, dirty-dependent property staging, default-model suggestion provenance and bounded quote formatting. The separate fixed6 [checkpoint](ANIMATION-COMMAND-CHECKPOINT-2026-10-17.json) compares six repeated snapshots without conflict; command return1 is not playback success.
+
+## Renderer bridge and paper-doll inputs
+
+[Living-renderer bridge and overlay entry](RENDER-BRIDGE-PAPERDOLL-ENTRY-RECOVERY-2026-10-17.md) connects the previously observed interface cast to its packaged Mixin provider, and distinguishes config-driven local-player rendering from fake preview actors. [Paper-doll editing](PAPERDOLL-CONFIG-MUTATION-RECOVERY-2026-10-17.md) tracks draft fields, unclamped local drag calculations, immediate checkbox writes and ordered close-time setters. The separate fixed6 [checkpoint](PAPERDOLL-RENDER-CHECKPOINT-2026-10-17.json) verifies these boundaries without target/GUI/config execution or confidence promotion.

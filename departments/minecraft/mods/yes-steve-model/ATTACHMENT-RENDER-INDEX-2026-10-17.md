@@ -27,3 +27,7 @@ Next connected Java question: vehicle/projectile renderer entry and render-type/
 - [GUI preview state](GUI-PREVIEW-STATE-RECOVERY-2026-10-17.md): temporary mutation, actual fake-player caller boundary and selected Vineflower comparison.
 
 A separate fixed8-cohort [render-lifecycle checkpoint](RENDER-LIFECYCLE-CHECKPOINT-2026-10-17.json) passed in1.991seconds with24 overlapping snapshots and0 conflicts. Six later cohorts plus two earlier anchors were checked; the fixed9 above remains unchanged. The seven-case JDK packing model and one-class Vineflower run have their own receipts and are not Minecraft/native tests.
+
+## Renderer bridge and paper-doll inputs
+
+[Living-renderer bridge and overlay entry](RENDER-BRIDGE-PAPERDOLL-ENTRY-RECOVERY-2026-10-17.md) connects the previously observed interface cast to its packaged Mixin provider, and distinguishes config-driven local-player rendering from fake preview actors. [Paper-doll editing](PAPERDOLL-CONFIG-MUTATION-RECOVERY-2026-10-17.md) tracks draft fields, unclamped local drag calculations, immediate checkbox writes and ordered close-time setters. The separate fixed6 [checkpoint](PAPERDOLL-RENDER-CHECKPOINT-2026-10-17.json) verifies these boundaries without target/GUI/config execution or confidence promotion.
