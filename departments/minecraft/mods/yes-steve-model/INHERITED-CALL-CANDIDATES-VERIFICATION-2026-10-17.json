@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "unit_test_count": 11,
+  "unit_output": "test_abstract_instance_supported (__main__.CandidatesTest.test_abstract_instance_supported) ... ok\ntest_cycles_terminate (__main__.CandidatesTest.test_cycles_terminate) ... ok\ntest_diamond_interface (__main__.CandidatesTest.test_diamond_interface) ... ok\ntest_exact_owner_still_not_dispatch (__main__.CandidatesTest.test_exact_owner_still_not_dispatch) ... ok\ntest_external_unknown_not_absence_proof (__main__.CandidatesTest.test_external_unknown_not_absence_proof) ... ok\ntest_inherited_interface_path (__main__.CandidatesTest.test_inherited_interface_path) ... ok\ntest_missing_target_rejected (__main__.CandidatesTest.test_missing_target_rejected) ... ok\ntest_overload_and_name_mismatch_ignored (__main__.CandidatesTest.test_overload_and_name_mismatch_ignored) ... ok\ntest_override_does_not_become_proven_target_call (__main__.CandidatesTest.test_override_does_not_become_proven_target_call) ... ok\ntest_static_private_constructor_rejected (__main__.CandidatesTest.test_static_private_constructor_rejected) ... ok\ntest_unrelated_signature_matches_are_not_descendants (__main__.CandidatesTest.test_unrelated_signature_matches_are_not_descendants) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 0.001s\n\nOK\n",
+  "test_sha256": "7a918b766fdf3bead926da2b49135481af666f300efe1ed56d1b9db280a27ce1",
+  "tool_sha256": "9983787231fb8b65e391c8f641c389ec2be4c260c700ede0bfa89dcc22cef5a4",
+  "actual_artifact_cases": [
+    {
+      "label": "RENDER-COLOR",
+      "result": "RENDER-COLOR-INHERITED-CANDIDATES-2026-10-17.json",
+      "result_sha256": "a9c7989e6b6572899d5c83085f208d0ca7b4eee074d2a03b3f3a163a22f2d775",
+      "site_counts": {
+        "EXACT_SYMBOLIC_OWNER": 0,
+        "NOMINAL_DESCENDANT_CANDIDATE": 3,
+        "SAME_SIGNATURE_NO_PROVEN_ANCESTRY": 0
+      },
+      "status": "PASS"
+    },
+    {
+      "label": "COLOR-RED",
+      "result": "COLOR-RED-INHERITED-CANDIDATES-2026-10-17.json",
+      "result_sha256": "f9b3a5337411db2593051161f7d7acf18483ecd161d96f476b45a15d5fb36f91",
+      "site_counts": {
+        "EXACT_SYMBOLIC_OWNER": 6,
+        "NOMINAL_DESCENDANT_CANDIDATE": 0,
+        "SAME_SIGNATURE_NO_PROVEN_ANCESTRY": 19
+      },
+      "status": "PASS"
+    }
+  ],
+  "target_executed": false,
+  "semantic_dispatch_resolution_proven": false
+}

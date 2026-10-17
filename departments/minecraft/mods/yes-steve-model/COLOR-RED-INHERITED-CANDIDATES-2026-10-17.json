@@ -1,0 +1,710 @@
+{
+  "format": "kneekura.ysm-nominal-inherited-call-candidates.v1",
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "class_count": 955,
+  "target": [
+    "com/elfmcys/yesstevemodel/ooO00Oo0oooOoO0OOOOoo0Oo",
+    "O00OOOooOoooOoo0o0o0oO0O",
+    "()I"
+  ],
+  "target_declaration": {
+    "access": 1,
+    "name": "O00OOOooOoooOoo0o0o0oO0O",
+    "descriptor": "()I"
+  },
+  "tool_dependencies_sha256": {
+    "inherited_call_candidates_ysm_265.py": "9983787231fb8b65e391c8f641c389ec2be4c260c700ede0bfa89dcc22cef5a4",
+    "scan_ysm_265.py": "4630508a72da347dfb7515a686ff02fa5709a28e8c3f68c7586ae1cfcb7ae137",
+    "audit_seed_recovery_ysm_265.py": "1ae79035830bc23a01b5d8bf65d6e31c4fe4b25bb78c628274c6390e84494ae4",
+    "validate_member_targets_ysm_265.py": "e2e5d7ccd0aff966c94e3f6151e2a94d05c241e9faa183d20041d3e0ee99e24b"
+  },
+  "sites": [
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/O00OoOooOOoO000O0OO0OoOO",
+        "name": "close",
+        "descriptor": "()V"
+      },
+      "caller_code_sha256": "b1fdbbb30e12519c4aae7f629ae2c35cf583a961106f381ed16bde9cbbc59bf5",
+      "instruction": {
+        "offset": 165,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/Oo00Oo0o0oO0Oo0O0oOOOo0O",
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "()I",
+          "cp_tag": 10
+        }
+      },
+      "relation": {
+        "category": "SAME_SIGNATURE_NO_PROVEN_ANCESTRY",
+        "ancestry_path": null,
+        "missing_ancestor_declarations": [
+          "java/io/Closeable",
+          "java/lang/Object"
+        ],
+        "same_signature_declarations_on_path": [],
+        "dispatch_resolved": false
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/O0OoOO00O0o0oO000OoOO000",
+        "name": "o0OOooo0o0OO00OoOOOo0o0O",
+        "descriptor": "()Lcom/elfmcys/yesstevemodel/Oo0O0oo0000oO0oO00oOoooO;"
+      },
+      "caller_code_sha256": "4baecbf42904639c482b2fc5e30b49a656be0ea9bba8a5cedf3cd4b64ceabbbf",
+      "instruction": {
+        "offset": 9,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/O0OoOO00O0o0oO000OoOO000",
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "()I",
+          "cp_tag": 10
+        }
+      },
+      "relation": {
+        "category": "SAME_SIGNATURE_NO_PROVEN_ANCESTRY",
+        "ancestry_path": null,
+        "missing_ancestor_declarations": [
+          "java/lang/Object"
+        ],
+        "same_signature_declarations_on_path": [],
+        "dispatch_resolved": false
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/O0o0oOO0OOO0O0OooOooOo0o",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Lnet/minecraft/client/gui/GuiGraphics;)V"
+      },
+      "caller_code_sha256": "dcf4f4451e10afc5a4bab3d49bd04d3b612e187378eb5eed956dc97d75346efd",
+      "instruction": {
+        "offset": 111,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/o0OooO00ooo0OO000O0OoOoO$Oo0Oo0o00O00Oo0OOoOOoooo",
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "()I",
+          "cp_tag": 10
+        }
+      },
+      "relation": {
+        "category": "SAME_SIGNATURE_NO_PROVEN_ANCESTRY",
+        "ancestry_path": null,
+        "missing_ancestor_declarations": [
+          "java/lang/Object"
+        ],
+        "same_signature_declarations_on_path": [],
+        "dispatch_resolved": false
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/O0oooO0O00oo00ooo000o0OO",
+        "name": "close",
+        "descriptor": "()V"
+      },
+      "caller_code_sha256": "b3327d18d06c26fa8449b78555c5eceee3f62fb52cb060a597dcd792210271d9",
+      "instruction": {
+        "offset": 150,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/Oo00Oo0o0oO0Oo0O0oOOOo0O",
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "()I",
+          "cp_tag": 10
+        }
+      },
+      "relation": {
+        "category": "SAME_SIGNATURE_NO_PROVEN_ANCESTRY",
+        "ancestry_path": null,
+        "missing_ancestor_declarations": [
+          "java/io/Closeable",
+          "java/lang/Object"
+        ],
+        "same_signature_declarations_on_path": [],
+        "dispatch_resolved": false
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/OOOOooO0O0o0OOoOOo00oo00",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Lcom/elfmcys/yesstevemodel/oOo0oO0OOo0ooOoo0oOo0oOo;Ljava/lang/String;Ljava/lang/String;Z)Ljava/util/List;"
+      },
+      "caller_code_sha256": "cb62d2b850cc371652c62aced6f1ffbf62ec687cda3932acb326d77f2e57e183",
+      "instruction": {
+        "offset": 653,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/OoOOoOo0oo0oOOOooOooO0o0",
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "()I",
+          "cp_tag": 10
+        }
+      },
+      "relation": {
+        "category": "SAME_SIGNATURE_NO_PROVEN_ANCESTRY",
+        "ancestry_path": null,
+        "missing_ancestor_declarations": [
+          "java/lang/Object"
+        ],
+        "same_signature_declarations_on_path": [],
+        "dispatch_resolved": false
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/OOo0oo000OOoo00000O00o00",
+        "name": "O0ooooOO0oOo000O0Oo00OOO",
+        "descriptor": "()Ljava/lang/String;"
+      },
+      "caller_code_sha256": "bedba61611506499987a003b50e1ad3170f70345772b97bf60635a2261a52e85",
+      "instruction": {
+        "offset": 4,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/oOo00oo000O00OO00oO0oO00",
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "()I",
+          "cp_tag": 10
+        }
+      },
+      "relation": {
+        "category": "SAME_SIGNATURE_NO_PROVEN_ANCESTRY",
+        "ancestry_path": null,
+        "missing_ancestor_declarations": [
+          "java/lang/Object"
+        ],
+        "same_signature_declarations_on_path": [],
+        "dispatch_resolved": false
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/OOoO0oooOOOOOoOOoo00Oooo",
+        "name": "o0OOooo0o0OO00OoOOOo0o0O",
+        "descriptor": "()Lcom/elfmcys/yesstevemodel/Oo00Oo0o0oO0Oo0O0oOOOo0O;"
+      },
+      "caller_code_sha256": "2db60a9a716a428b3ce9a1151f8142d2a43d84fbe7bdd64ed697f85561c43abb",
+      "instruction": {
+        "offset": 2,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/OOoO0oooOOOOOoOOoo00Oooo",
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "()I",
+          "cp_tag": 10
+        }
+      },
+      "relation": {
+        "category": "SAME_SIGNATURE_NO_PROVEN_ANCESTRY",
+        "ancestry_path": null,
+        "missing_ancestor_declarations": [
+          "java/io/Closeable",
+          "java/lang/Object"
+        ],
+        "same_signature_declarations_on_path": [],
+        "dispatch_resolved": false
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/OOoOo00OOooooo0oOOO0ooo0",
+        "name": "close",
+        "descriptor": "()V"
+      },
+      "caller_code_sha256": "b3327d18d06c26fa8449b78555c5eceee3f62fb52cb060a597dcd792210271d9",
+      "instruction": {
+        "offset": 150,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/Oo00Oo0o0oO0Oo0O0oOOOo0O",
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "()I",
+          "cp_tag": 10
+        }
+      },
+      "relation": {
+        "category": "SAME_SIGNATURE_NO_PROVEN_ANCESTRY",
+        "ancestry_path": null,
+        "missing_ancestor_declarations": [
+          "java/io/Closeable",
+          "java/lang/Object"
+        ],
+        "same_signature_declarations_on_path": [],
+        "dispatch_resolved": false
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/OOoo0o0oO000ooO0Oo00OoOo",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Lcom/elfmcys/yesstevemodel/o0O0oOooOo0OoOo0oOo00O00;Lnet/minecraft/resources/ResourceLocation;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V"
+      },
+      "caller_code_sha256": "44924061164ea2306e155c1cbcbe85c0c908fb2da02e07769644f511f46296d2",
+      "instruction": {
+        "offset": 389,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/ooO00Oo0oooOoO0OOOOoo0Oo",
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "()I",
+          "cp_tag": 10
+        }
+      },
+      "relation": {
+        "category": "EXACT_SYMBOLIC_OWNER",
+        "ancestry_path": [
+          "com/elfmcys/yesstevemodel/ooO00Oo0oooOoO0OOOOoo0Oo"
+        ],
+        "dispatch_resolved": false
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/OOoo0o0oO000ooO0Oo00OoOo",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Lcom/elfmcys/yesstevemodel/o0O0oOooOo0OoOo0oOo00O00;Lnet/minecraft/resources/ResourceLocation;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V"
+      },
+      "caller_code_sha256": "44924061164ea2306e155c1cbcbe85c0c908fb2da02e07769644f511f46296d2",
+      "instruction": {
+        "offset": 497,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/ooO00Oo0oooOoO0OOOOoo0Oo",
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "()I",
+          "cp_tag": 10
+        }
+      },
+      "relation": {
+        "category": "EXACT_SYMBOLIC_OWNER",
+        "ancestry_path": [
+          "com/elfmcys/yesstevemodel/ooO00Oo0oooOoO0OOOOoo0Oo"
+        ],
+        "dispatch_resolved": false
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/Oo00o0oOoo00O00ooooOo0OO",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V"
+      },
+      "caller_code_sha256": "581a504157d68229d4a68d609636670ccfdab51afe2766c8a8eeb137a4644ac0",
+      "instruction": {
+        "offset": 233,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/ooO00Oo0oooOoO0OOOOoo0Oo",
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "()I",
+          "cp_tag": 10
+        }
+      },
+      "relation": {
+        "category": "EXACT_SYMBOLIC_OWNER",
+        "ancestry_path": [
+          "com/elfmcys/yesstevemodel/ooO00Oo0oooOoO0OOOOoo0Oo"
+        ],
+        "dispatch_resolved": false
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/OoO00000oo000Oooo0oOOoOo",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Lcom/elfmcys/yesstevemodel/Oo0O0oo0000oO0oO00oOoooO;)V"
+      },
+      "caller_code_sha256": "13140beb42ee307389dd42a95a4457b0ffd7c2ca1b83880d7c15d08dc7e34578",
+      "instruction": {
+        "offset": 51,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/OOo0oo0oooOoOOOoo0OoO00o",
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "()I",
+          "cp_tag": 10
+        }
+      },
+      "relation": {
+        "category": "SAME_SIGNATURE_NO_PROVEN_ANCESTRY",
+        "ancestry_path": null,
+        "missing_ancestor_declarations": [
+          "java/lang/Object"
+        ],
+        "same_signature_declarations_on_path": [],
+        "dispatch_resolved": false
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/Ooo0Oo00OO0o0oO0oo000OOo",
+        "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+        "descriptor": "()V"
+      },
+      "caller_code_sha256": "6d7874119762ff8f770d2ef44606adb31738098b3a72982a4c2d2b2026a4169e",
+      "instruction": {
+        "offset": 43,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/Ooo0Oo00OO0o0oO0oo000OOo",
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "()I",
+          "cp_tag": 10
+        }
+      },
+      "relation": {
+        "category": "SAME_SIGNATURE_NO_PROVEN_ANCESTRY",
+        "ancestry_path": null,
+        "missing_ancestor_declarations": [
+          "java/lang/Object"
+        ],
+        "same_signature_declarations_on_path": [],
+        "dispatch_resolved": false
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/Ooo0Oo00OO0o0oO0oo000OOo",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "([BII)V"
+      },
+      "caller_code_sha256": "0e6fdb4b8d32355065b803d836bf831c5c7ae953945d97fee6aefd0fbbcc3370",
+      "instruction": {
+        "offset": 50,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/Ooo0Oo00OO0o0oO0oo000OOo",
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "()I",
+          "cp_tag": 10
+        }
+      },
+      "relation": {
+        "category": "SAME_SIGNATURE_NO_PROVEN_ANCESTRY",
+        "ancestry_path": null,
+        "missing_ancestor_declarations": [
+          "java/lang/Object"
+        ],
+        "same_signature_declarations_on_path": [],
+        "dispatch_resolved": false
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/Ooo0oooO0o0O0oO0oOOOooO0",
+        "name": "render",
+        "descriptor": "(Lnet/minecraftforge/client/gui/overlay/ForgeGui;Lnet/minecraft/client/gui/GuiGraphics;FII)V"
+      },
+      "caller_code_sha256": "92b00a6770346f8443969b1d026b5fc94b19bcc07560e5a748cf17f30c124420",
+      "instruction": {
+        "offset": 595,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/o0OooO00ooo0OO000O0OoOoO$Oo0Oo0o00O00Oo0OOoOOoooo",
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "()I",
+          "cp_tag": 10
+        }
+      },
+      "relation": {
+        "category": "SAME_SIGNATURE_NO_PROVEN_ANCESTRY",
+        "ancestry_path": null,
+        "missing_ancestor_declarations": [
+          "java/lang/Object"
+        ],
+        "same_signature_declarations_on_path": [],
+        "dispatch_resolved": false
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/Ooo0oooO0o0O0oO0oOOOooO0",
+        "name": "render",
+        "descriptor": "(Lnet/minecraftforge/client/gui/overlay/ForgeGui;Lnet/minecraft/client/gui/GuiGraphics;FII)V"
+      },
+      "caller_code_sha256": "92b00a6770346f8443969b1d026b5fc94b19bcc07560e5a748cf17f30c124420",
+      "instruction": {
+        "offset": 626,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/o0OooO00ooo0OO000O0OoOoO$Oo0Oo0o00O00Oo0OOoOOoooo",
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "()I",
+          "cp_tag": 10
+        }
+      },
+      "relation": {
+        "category": "SAME_SIGNATURE_NO_PROVEN_ANCESTRY",
+        "ancestry_path": null,
+        "missing_ancestor_declarations": [
+          "java/lang/Object"
+        ],
+        "same_signature_declarations_on_path": [],
+        "dispatch_resolved": false
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/o0000OOo0000oo000OOOo0o0",
+        "name": "oOOOo0OOO0ooooo0O00OO0o0",
+        "descriptor": "(Lcom/elfmcys/yesstevemodel/oo0oOO0000o0Ooooo0OoOo0O;)I"
+      },
+      "caller_code_sha256": "e4a97362d324115b0834e8b4aeeaf57fc10c6f68f153d25434480d9db4cfbd8f",
+      "instruction": {
+        "offset": 30,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/ooOO000o0O0OOOoO0Oo0o0Oo",
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "()I",
+          "cp_tag": 10
+        }
+      },
+      "relation": {
+        "category": "SAME_SIGNATURE_NO_PROVEN_ANCESTRY",
+        "ancestry_path": null,
+        "missing_ancestor_declarations": [
+          "java/lang/Object"
+        ],
+        "same_signature_declarations_on_path": [],
+        "dispatch_resolved": false
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/o0OooO00ooo0OO000O0OoOoO",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(ILcom/elfmcys/yesstevemodel/O0000ooOo00o0OoO0OoOOOOo;)V"
+      },
+      "caller_code_sha256": "4a1bb514f9420e63bd169ed8708dee9cf2b748109dc43e5e64c96db95359713d",
+      "instruction": {
+        "offset": 4,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/o0OooO00ooo0OO000O0OoOoO$Oo0Oo0o00O00Oo0OOoOOoooo",
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "()I",
+          "cp_tag": 10
+        }
+      },
+      "relation": {
+        "category": "SAME_SIGNATURE_NO_PROVEN_ANCESTRY",
+        "ancestry_path": null,
+        "missing_ancestor_declarations": [
+          "java/lang/Object"
+        ],
+        "same_signature_declarations_on_path": [],
+        "dispatch_resolved": false
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/o0oO0oo0o0o00o0o0o0o0O00",
+        "name": "close",
+        "descriptor": "()V"
+      },
+      "caller_code_sha256": "075e64f02f664ca16607743c68c76e03bbce53ca76ca74860589acf36becac09",
+      "instruction": {
+        "offset": 116,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/Oo00Oo0o0oO0Oo0O0oOOOo0O",
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "()I",
+          "cp_tag": 10
+        }
+      },
+      "relation": {
+        "category": "SAME_SIGNATURE_NO_PROVEN_ANCESTRY",
+        "ancestry_path": null,
+        "missing_ancestor_declarations": [
+          "java/io/Closeable",
+          "java/lang/Object"
+        ],
+        "same_signature_declarations_on_path": [],
+        "dispatch_resolved": false
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/oOoO00O0O0ooOoOoOOo0oO0O",
+        "name": "close",
+        "descriptor": "()V"
+      },
+      "caller_code_sha256": "7aa445b1e7a18a91047cb1fc18099552abb20b17f45e45e1c6cb7df5af393abe",
+      "instruction": {
+        "offset": 495,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/Oo00Oo0o0oO0Oo0O0oOOOo0O",
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "()I",
+          "cp_tag": 10
+        }
+      },
+      "relation": {
+        "category": "SAME_SIGNATURE_NO_PROVEN_ANCESTRY",
+        "ancestry_path": null,
+        "missing_ancestor_declarations": [
+          "java/io/Closeable",
+          "java/lang/Object"
+        ],
+        "same_signature_declarations_on_path": [],
+        "dispatch_resolved": false
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/oOoOOO0OOOoo000O0o0oo0OO",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V"
+      },
+      "caller_code_sha256": "1341d27d85a8ad77bb51097dff10bb8d4647a054012874e429354e60213fdba3",
+      "instruction": {
+        "offset": 190,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/ooO00Oo0oooOoO0OOOOoo0Oo",
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "()I",
+          "cp_tag": 10
+        }
+      },
+      "relation": {
+        "category": "EXACT_SYMBOLIC_OWNER",
+        "ancestry_path": [
+          "com/elfmcys/yesstevemodel/ooO00Oo0oooOoO0OOOOoo0Oo"
+        ],
+        "dispatch_resolved": false
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/ooO00Oo0oooOoO0OOOOoo0Oo",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(D)Lcom/elfmcys/yesstevemodel/ooO00Oo0oooOoO0OOOOoo0Oo;"
+      },
+      "caller_code_sha256": "8d6e0cbfbd8410ca4ac0cb7b6c251723afa6a0e035dc42d9eeb56abecb76a40b",
+      "instruction": {
+        "offset": 1,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/ooO00Oo0oooOoO0OOOOoo0Oo",
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "()I",
+          "cp_tag": 10
+        }
+      },
+      "relation": {
+        "category": "EXACT_SYMBOLIC_OWNER",
+        "ancestry_path": [
+          "com/elfmcys/yesstevemodel/ooO00Oo0oooOoO0OOOOoo0Oo"
+        ],
+        "dispatch_resolved": false
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/ooO00Oo0oooOoO0OOOOoo0Oo",
+        "name": "o0OOooo0o0OO00OoOOOo0o0O",
+        "descriptor": "(D)Lcom/elfmcys/yesstevemodel/ooO00Oo0oooOoO0OOOOoo0Oo;"
+      },
+      "caller_code_sha256": "a6de468ae149098b0f10b5ffa3111ff2d5bda909b09d7689cac5fba174ae44f7",
+      "instruction": {
+        "offset": 1,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/ooO00Oo0oooOoO0OOOOoo0Oo",
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "()I",
+          "cp_tag": 10
+        }
+      },
+      "relation": {
+        "category": "EXACT_SYMBOLIC_OWNER",
+        "ancestry_path": [
+          "com/elfmcys/yesstevemodel/ooO00Oo0oooOoO0OOOOoo0Oo"
+        ],
+        "dispatch_resolved": false
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/ooOOOO0oo0O00oO0OO00o00o",
+        "name": "<init>",
+        "descriptor": "(IILcom/elfmcys/yesstevemodel/oooOO0000OOO0000o0OooOOo;)V"
+      },
+      "caller_code_sha256": "95f0dfd4054b251b34243c67514301579f507f8369d726fc7509c7f14148be8f",
+      "instruction": {
+        "offset": 16,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/oooOO0000OOO0000o0OooOOo",
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "()I",
+          "cp_tag": 10
+        }
+      },
+      "relation": {
+        "category": "SAME_SIGNATURE_NO_PROVEN_ANCESTRY",
+        "ancestry_path": null,
+        "missing_ancestor_declarations": [
+          "java/lang/Object"
+        ],
+        "same_signature_declarations_on_path": [],
+        "dispatch_resolved": false
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/oooOO0000OOO0000o0OooOOo",
+        "name": "<init>",
+        "descriptor": "(ILjava/io/InputStream;Lcom/elfmcys/yesstevemodel/oOooo00o0O0oo00OoOo00oo0;)V"
+      },
+      "caller_code_sha256": "32d05a58abf56dbee24e85c41345632f194813a6e8c2530ca8a45bf5fa16f018",
+      "instruction": {
+        "offset": 672,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/oOO0Oooooo0OoOOOo0000OOo",
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "()I",
+          "cp_tag": 10
+        }
+      },
+      "relation": {
+        "category": "SAME_SIGNATURE_NO_PROVEN_ANCESTRY",
+        "ancestry_path": null,
+        "missing_ancestor_declarations": [
+          "java/lang/Object"
+        ],
+        "same_signature_declarations_on_path": [],
+        "dispatch_resolved": false
+      }
+    }
+  ],
+  "bootstrap_argument_sites": [],
+  "site_counts": {
+    "EXACT_SYMBOLIC_OWNER": 6,
+    "NOMINAL_DESCENDANT_CANDIDATE": 0,
+    "SAME_SIGNATURE_NO_PROVEN_ANCESTRY": 19
+  },
+  "bootstrap_counts": {
+    "EXACT_SYMBOLIC_OWNER": 0,
+    "NOMINAL_DESCENDANT_CANDIDATE": 0,
+    "SAME_SIGNATURE_NO_PROVEN_ANCESTRY": 0
+  },
+  "scope": "NOMINAL_ANCESTRY_ONLY_NOT_METHOD_RESOLUTION_OR_DYNAMIC_DISPATCH",
+  "ancestry_paths_exhaustive": false,
+  "nominal_path_strategy": "FIRST_BREADTH_FIRST_PATH_WITHIN_ARTIFACT",
+  "independent_semantic_review": "NOT_RUN",
+  "target_executed": false,
+  "external_classpath_loaded": false,
+  "source_scanned": false
+}

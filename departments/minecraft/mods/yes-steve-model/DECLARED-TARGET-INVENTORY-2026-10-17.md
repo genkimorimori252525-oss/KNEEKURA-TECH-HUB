@@ -17,3 +17,5 @@ python tools/validate_member_targets_ysm_265.py --jar /absolute/path/ysm.jar \
 ```
 
 Only choose --audit-target-inventories when an explicit batch check is needed. It scans the selected research root's local inventory JSONs; it is not a startup command, download, installation probe, source crawl, target execution or proof that valid targets have complete global caller coverage.
+
+For a declared ordinary instance method, the optional [inherited-owner candidate check](INHERITED-CALL-CANDIDATES-2026-10-17.md) can expose nominal descendant symbolic references that an exact-owner scan misses. It does not resolve JVM dispatch or upgrade zero counts to global non-use.

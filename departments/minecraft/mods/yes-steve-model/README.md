@@ -511,3 +511,6 @@ bounded runtime observation rather than protection bypass.
 - [Client model containers](CLIENT-MODEL-CONTAINERS-RECOVERY-2026-10-17.md): shared data, constructor-time factory assembly, separate default texture inputs and nullable GUI image lookups.
 
 - [Packed color and renderer channels](COLOR-CHANNEL-CONTRACT-RECOVERY-2026-10-17.md): ARGB masks, float conversion, default WHITE and actual getter consumers; Java preparation is separate from GPU output.
+
+- [Inherited symbolic-owner candidates](INHERITED-CALL-CANDIDATES-2026-10-17.md): optional follow-up to exact caller scans; nominal ancestry candidates remain separate from proven JVM dispatch.
+- [Humanoid texture registration](HUMANOID-TEXTURE-REGISTRATION-2026-10-17.md): selected readiness versus pre-registration, retained holders and first-live identity-cache delay.

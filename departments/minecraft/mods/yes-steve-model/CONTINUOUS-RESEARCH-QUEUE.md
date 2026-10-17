@@ -162,10 +162,22 @@ checkpoint preserve17 external reference sites and10 matching repeated methods.
 Nine JDK arithmetic cases do not establish unusual inputs reaching a renderer.
 Axis/Memoizer source presence alone did not justify another semantic expansion.
 
-Next finite connected question: actual Java resource-location and texture-index
-selection in model holders where not already covered by readiness/lifetime and
-render selection dossiers. Reuse existing captures before adding a new cohort;
-keep native texture upload and pixel output outside static proof.
+Humanoid texture registration now joins existing snapshots: selected readiness
+checks one holder, all-texture registration uses the200-delay overload, and a live
+identity-cached holder retains its prior delay on later selection. Existing
+texture-name/index semantics were reused, not recaptured.
+
+A concrete render-color caller check exposed three descendant symbolic owners
+that an interface-only exact scan would miss. The opt-in inherited-call candidate
+helper keeps nominal ancestry distinct from JVM dispatch.11 unit tests/two actual
+artifact cases pass; a second Color getter case separates19 unrelated/unresolved
+same-signature sites from six exact references. No original exact inventory is
+relabeled as a full call graph.
+
+Next finite connected question: use nominal-candidate inspection only for a
+specific instance-method zero-call inference that matters to reuse, preserving
+static/private/constructor exclusions and external classpath limits. Do not bulk
+rerun every inventory or install a call-graph stack without a concrete need.
 
 ## Anchors
 

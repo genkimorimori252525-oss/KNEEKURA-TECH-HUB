@@ -1,0 +1,131 @@
+{
+  "format": "kneekura.ysm-nominal-inherited-call-candidates.v1",
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "class_count": 955,
+  "target": [
+    "com/elfmcys/yesstevemodel/oo0OOoOOOOO0Oo0O0oo0O0OO",
+    "Oo0Oo0o00O00Oo0OOoOOoooo",
+    "(Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lcom/mojang/blaze3d/vertex/VertexConsumer;I)Lcom/elfmcys/yesstevemodel/ooO00Oo0oooOoO0OOOOoo0Oo;"
+  ],
+  "target_declaration": {
+    "access": 1,
+    "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+    "descriptor": "(Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lcom/mojang/blaze3d/vertex/VertexConsumer;I)Lcom/elfmcys/yesstevemodel/ooO00Oo0oooOoO0OOOOoo0Oo;"
+  },
+  "tool_dependencies_sha256": {
+    "inherited_call_candidates_ysm_265.py": "9983787231fb8b65e391c8f641c389ec2be4c260c700ede0bfa89dcc22cef5a4",
+    "scan_ysm_265.py": "4630508a72da347dfb7515a686ff02fa5709a28e8c3f68c7586ae1cfcb7ae137",
+    "audit_seed_recovery_ysm_265.py": "1ae79035830bc23a01b5d8bf65d6e31c4fe4b25bb78c628274c6390e84494ae4",
+    "validate_member_targets_ysm_265.py": "e2e5d7ccd0aff966c94e3f6151e2a94d05c241e9faa183d20041d3e0ee99e24b"
+  },
+  "sites": [
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/OOoo0o0oO000ooO0Oo00OoOo",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Lcom/elfmcys/yesstevemodel/o0O0oOooOo0OoOo0oOo00O00;Lnet/minecraft/resources/ResourceLocation;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V"
+      },
+      "caller_code_sha256": "44924061164ea2306e155c1cbcbe85c0c908fb2da02e07769644f511f46296d2",
+      "instruction": {
+        "offset": 356,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/OOoo0o0oO000ooO0Oo00OoOo",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lcom/mojang/blaze3d/vertex/VertexConsumer;I)Lcom/elfmcys/yesstevemodel/ooO00Oo0oooOoO0OOOOoo0Oo;",
+          "cp_tag": 10
+        }
+      },
+      "relation": {
+        "category": "NOMINAL_DESCENDANT_CANDIDATE",
+        "ancestry_path": [
+          "com/elfmcys/yesstevemodel/OOoo0o0oO000ooO0Oo00OoOo",
+          "com/elfmcys/yesstevemodel/oo0OOoOOOOO0Oo0O0oo0O0OO"
+        ],
+        "missing_ancestor_declarations": [
+          "net/minecraft/client/renderer/entity/LivingEntityRenderer"
+        ],
+        "same_signature_declarations_on_path": [],
+        "dispatch_resolved": false
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/Oo00o0oOoo00O00ooooOo0OO",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V"
+      },
+      "caller_code_sha256": "581a504157d68229d4a68d609636670ccfdab51afe2766c8a8eeb137a4644ac0",
+      "instruction": {
+        "offset": 117,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/Oo00o0oOoo00O00ooooOo0OO",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lcom/mojang/blaze3d/vertex/VertexConsumer;I)Lcom/elfmcys/yesstevemodel/ooO00Oo0oooOoO0OOOOoo0Oo;",
+          "cp_tag": 10
+        }
+      },
+      "relation": {
+        "category": "NOMINAL_DESCENDANT_CANDIDATE",
+        "ancestry_path": [
+          "com/elfmcys/yesstevemodel/Oo00o0oOoo00O00ooooOo0OO",
+          "com/elfmcys/yesstevemodel/oo0OOoOOOOO0Oo0O0oo0O0OO"
+        ],
+        "missing_ancestor_declarations": [
+          "net/minecraft/client/renderer/entity/EntityRenderer"
+        ],
+        "same_signature_declarations_on_path": [],
+        "dispatch_resolved": false
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/oOoOOO0OOOoo000O0o0oo0OO",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V"
+      },
+      "caller_code_sha256": "1341d27d85a8ad77bb51097dff10bb8d4647a054012874e429354e60213fdba3",
+      "instruction": {
+        "offset": 114,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/oOoOOO0OOOoo000O0o0oo0OO",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lcom/mojang/blaze3d/vertex/VertexConsumer;I)Lcom/elfmcys/yesstevemodel/ooO00Oo0oooOoO0OOOOoo0Oo;",
+          "cp_tag": 10
+        }
+      },
+      "relation": {
+        "category": "NOMINAL_DESCENDANT_CANDIDATE",
+        "ancestry_path": [
+          "com/elfmcys/yesstevemodel/oOoOOO0OOOoo000O0o0oo0OO",
+          "com/elfmcys/yesstevemodel/oo0OOoOOOOO0Oo0O0oo0O0OO"
+        ],
+        "missing_ancestor_declarations": [
+          "net/minecraft/client/renderer/entity/EntityRenderer"
+        ],
+        "same_signature_declarations_on_path": [],
+        "dispatch_resolved": false
+      }
+    }
+  ],
+  "bootstrap_argument_sites": [],
+  "site_counts": {
+    "EXACT_SYMBOLIC_OWNER": 0,
+    "NOMINAL_DESCENDANT_CANDIDATE": 3,
+    "SAME_SIGNATURE_NO_PROVEN_ANCESTRY": 0
+  },
+  "bootstrap_counts": {
+    "EXACT_SYMBOLIC_OWNER": 0,
+    "NOMINAL_DESCENDANT_CANDIDATE": 0,
+    "SAME_SIGNATURE_NO_PROVEN_ANCESTRY": 0
+  },
+  "scope": "NOMINAL_ANCESTRY_ONLY_NOT_METHOD_RESOLUTION_OR_DYNAMIC_DISPATCH",
+  "ancestry_paths_exhaustive": false,
+  "nominal_path_strategy": "FIRST_BREADTH_FIRST_PATH_WITHIN_ARTIFACT",
+  "independent_semantic_review": "NOT_RUN",
+  "target_executed": false,
+  "external_classpath_loaded": false,
+  "source_scanned": false
+}
