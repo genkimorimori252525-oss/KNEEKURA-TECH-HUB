@@ -319,3 +319,5 @@ bounded runtime observation rather than protection bypass.
 - [Struct copy and change tracking](STRUCT-COPY-CHANGE-RECOVERY-2026-10-17.md): aliasing/read-only contracts and mutation-before-notification order; no network guarantees.
 
 - [Pooled names and change codec](POOLED-NAME-CHANGE-CODEC-RECOVERY-2026-10-17.md): process-local IDs, text-name conversion and directional data maps; no network execution.
+
+- [Roaming state merge](ROAMING-STATE-MERGE-RECOVERY-2026-10-17.md): per-model readiness, local/remote replacement, queued deltas and vehicle propagation.

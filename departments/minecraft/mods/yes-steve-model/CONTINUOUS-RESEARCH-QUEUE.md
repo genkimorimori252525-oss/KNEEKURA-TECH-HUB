@@ -165,3 +165,7 @@ is not automatically a storage cap or a network validation guarantee.
 Pooled names and change representation/codec are recorded. Continue ordinary
 remote-state application, model-hash selection and merge order; declared message
 fields do not establish authorization, delivery or successful synchronization.
+
+Player/vehicle roaming cache readiness and merge ordering are recorded. Continue
+client entity-load deferral and ordinary server-driven-property application;
+local state predicates do not prove message delivery or server authorization.
