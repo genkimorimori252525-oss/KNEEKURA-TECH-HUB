@@ -251,6 +251,54 @@
       ],
       "matches": 1,
       "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "ModelIdUtil"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "FifoHashMap"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "CommonAsset"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "GeoBone"
+      ],
+      "matches": 2,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "GeoModelProperties"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "TlmConverterHelper"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
     }
   ],
   "seconds": 1.206,
@@ -262,5 +310,8 @@
     "tools/test_evidence_locator_ysm_265.py": "bad531996889ec446894c16af0422f1618e4d9df32efea850a6029050002b162",
     "EVIDENCE-LOCATOR-2026-10-17.json": "c4489d57bf97cc25fc7c96d41e406a293a9b7e552ec66aaf4eed35bbb354a8a5",
     "NAVIGATION-COMPARISON-ALIASES-2026-10-17.json": "c6755cb2402e975de3fcac789476b78463a1d00492ee36cd521b08e6c5ae91f2"
-  }
+  },
+  "elapsed_seconds": 1.318,
+  "index_sha256": "03fe94177348b4dc4b1c292ca9930a390a17059c089ef8c4533378b633d9c27b",
+  "comparison_alias_count": 31
 }

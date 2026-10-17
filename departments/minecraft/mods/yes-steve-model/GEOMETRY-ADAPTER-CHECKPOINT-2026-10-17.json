@@ -1,0 +1,75 @@
+{
+  "format": "kneekura.ysm-geometry-adapter-checkpoint.v1",
+  "cohort_manifest": [
+    [
+      "GEOMETRY-AUTHORED-DEFAULTS",
+      "geometry_authored_defaults",
+      true
+    ],
+    [
+      "GEOMETRY-DEFAULT-CALLERS",
+      "geometry_default_callers",
+      false
+    ],
+    [
+      "TLM-LOCATION-ADAPTER",
+      "tlm_location_adapter",
+      true
+    ],
+    [
+      "LOCATOR-MATRIX-PREPARATION",
+      "locator_matrix_preparation",
+      true
+    ]
+  ],
+  "cohorts": [
+    {
+      "cohort": "GEOMETRY-AUTHORED-DEFAULTS",
+      "tool_sha256": "de0381054425f5950ddf8822d6880b10be0bf59029156834361ff55d0ef0ffd9",
+      "evidence_sha256": "a937898e55bd760b10318a111c3b10ecf69a9f5b130ad85704c22ddc75dc332a",
+      "rerun_receipt_sha256": "59bc32faca48f68a3aa4af5fe522d45fce32ecb6e309db62939ab80c809e94cf",
+      "checks": 110,
+      "negative_controls": 7,
+      "status": "PASS"
+    },
+    {
+      "cohort": "GEOMETRY-DEFAULT-CALLERS",
+      "tool_sha256": "16eaf915ef6ee06f74c66018253c3c73fad599ff2a70b6ab47e2d7ff9440a4a2",
+      "evidence_sha256": "e2dea2c33a538c6fd3b99c415f3e1661bcddaf4f54d776e6fc645abbe3e0a2df",
+      "rerun_receipt_sha256": "b116db0e228dd5e18c049e99e88115cdc763caf4b122e50fa5593e7dcd826d75",
+      "checks": 2,
+      "negative_controls": 6,
+      "status": "PASS"
+    },
+    {
+      "cohort": "TLM-LOCATION-ADAPTER",
+      "tool_sha256": "5ee781546d71f2c4bbb6be5f35301d8a91a3b7757fce7f3ead6d40bb7ef9b1a8",
+      "evidence_sha256": "caecf87ca06dcf5b5da9716fe2d2067723d7b4105000a2722fec0af3263072b6",
+      "rerun_receipt_sha256": "fe05b60f1d827094c60ffbfe3e8bec54c6a5bd88c385cb18b89f2d4d1f9c7c92",
+      "checks": 174,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "LOCATOR-MATRIX-PREPARATION",
+      "tool_sha256": "0a2483b7cfd2a1f31e051e1bf698cb52dee9d3400672fd408d006d1797cc5ed3",
+      "evidence_sha256": "63fa1a629fdebd6be3025ce45b53ac3baf77afc7707f9e58baab5ac7cb694348",
+      "rerun_receipt_sha256": "db5a57f4358141e81eeeb886282eeb241585cf9a07893c2fd869bda4f7629fe7",
+      "checks": 249,
+      "negative_controls": 8,
+      "status": "PASS"
+    }
+  ],
+  "cohort_count": 4,
+  "overlapping_method_snapshots_compared": 1,
+  "overlap_conflicts": 0,
+  "central_mapping_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
+  "central_mapping_promoted": false,
+  "independent_semantic_review": "NOT_RUN",
+  "target_runtime_executed": false,
+  "whole_project_ci_run": false,
+  "earlier_fixed17_checkpoint_modified": false,
+  "earlier_fixed10_checkpoint_modified": false,
+  "earlier_fixed9_checkpoint_modified": false,
+  "elapsed_seconds": 1.331
+}

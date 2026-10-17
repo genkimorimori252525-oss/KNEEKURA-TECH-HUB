@@ -466,3 +466,7 @@ bounded runtime observation rather than protection bypass.
 - [Animation data ownership](ANIMATION-DATA-OWNERSHIP-RECOVERY-2026-10-17.md): mixed copy/view policies, controller validation boundaries and particle-field reader inventory.
 
 - [Model asset helper ownership](MODEL-ASSET-HELPERS-RECOVERY-2026-10-17.md) and [client-model composition](CLIENT-MODEL-COMPOSITION-RECOVERY-2026-10-17.md): reuse existing builder evidence; keep fallback, shared references and event registration distinct.
+
+- [Authored geometry defaults](GEOMETRY-AUTHORED-DEFAULTS-RECOVERY-2026-10-17.md): distinguish input carriers, mutable state, relative snapshots and unobserved native readers.
+
+- [TLM live location adapter](TLM-LOCATION-ADAPTER-RECOVERY-2026-10-17.md): cached live wrappers, per-call lists, authored pivots and backpack-to-elytra fallback.

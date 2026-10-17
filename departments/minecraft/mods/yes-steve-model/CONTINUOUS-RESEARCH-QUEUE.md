@@ -62,10 +62,15 @@ reused; default animation reference sharing, event-name splitting and ordered/ha
 lookup boundaries are explicit. Particle-list exact field reads do not establish
 an emitter; the separate Molang particle path remains distinct.
 
-Next finite connected question: remaining geometry/bone construction invariants
-and exact Java use of parent indices, locator matrices and authored defaults.
-Inspect bounded Java consumers/producers only; do not infer native input validity,
-execute protected parsing, or repeat already documented state machines.
+Authored geometry and TLM live location adapters now have a separate fixed4
+checkpoint. The exact getter inventory finds no Java calls to model-property
+getters or the authored cubes-hidden getter; this does not close native readers.
+The navigation index was explicitly refreshed through these dossiers and31
+comparative aliases, without converting aliases to established original names.
+
+Next finite connected question: remaining Java animation blending/easing consumers
+not covered by point, queue, transition and bone commit dossiers. Reuse existing
+snapshots before capturing new owners; keep numeric input assumptions explicit.
 
 ## Anchors
 
