@@ -214,3 +214,8 @@ Time/controller query sources are joined. all/any are equal for the coded single
 player path but differ under Bedrock holder aggregation; no global alias claim.
 Continue child-context delegation/visibility and query lookup lifetime while
 preserving nullable context defaults, raw boxing and actual clock units.
+
+Child context/projectile-owner/arrow semantics are recorded. A child entity is
+not a full animation-context switch, and a null projectile owner can be wrapped
+in a nonnull context. Continue public/foreign binding reachability and typed
+query guards without inventing controller/emission inheritance or global closure.

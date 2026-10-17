@@ -340,3 +340,5 @@ bounded runtime observation rather than protection bypass.
 - [World/position/camera queries](WORLD-QUERY-INPUT-RECOVERY-2026-10-17.md): offset evaluation/range/rounding, tag short-circuiting, interpolated position and camera orientation convention.
 
 - [Time/controller queries](TIME-CONTROLLER-QUERY-RECOVERY-2026-10-17.md): clock units and boxing, nullable context defaults, and distinct coded/Bedrock all-versus-any completion producers.
+
+- [Child context and arrow evaluation](CHILD-CONTEXT-ARROW-RECOVERY-2026-10-17.md): selective field copying, null projectile-owner wrappers, shared storage and evaluator return-state transfer.
