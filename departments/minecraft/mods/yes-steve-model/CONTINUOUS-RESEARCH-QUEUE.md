@@ -34,10 +34,16 @@ The dispatcher route bypasses the concrete overload's early invisibility check;
 do not generalize one entry's gates to every caller. Fishing-line formulas and
 player-view replacement gates are later dossiers reusing adjacent evidence.
 
-Next finite connected question: unresolved Java render-state lifecycle and optional
-shader/buffer adapters. Avoid repeating controller, texture-manager or native-wrapper
-cohorts already captured. Native geometry, visible output, provider runtime and
-independent semantic review remain outside verified results. Continue after saving.
+Shader/PBR/buffer and GUI preview state are now joined in the later render-lifecycle
+extension of ATTACHMENT-RENDER-INDEX. Fixed8 scope passed; signed-ID JDK arithmetic
+and selected one-class Vineflower comparison remain separate from target execution.
+Preview equipment clearing is on observed fake-player callers; do not claim real
+inventory loss from the local helper's mutation order.
+
+Next finite connected question: actual SpecialPlayerRenderEvent texture writer
+and client login/respawn/entity-arrival lifecycle, checking previously captured
+network/reset evidence before duplicating work. Native output, external providers
+and independent semantic review remain outside verified results. Continue after saving.
 
 ## Anchors
 

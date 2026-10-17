@@ -17,3 +17,13 @@ The fixed9-cohort [checkpoint](ATTACHMENT-RENDER-CHECKPOINT-2026-10-17.json) run
 Run tools/attachment_render_checkpoint_ysm_265.py explicitly with --jar, --source-root and --out. Normal evidence searches do not run this batch. Do not treat captured declarations, overlap counts, audit checks or registry flags as completion percentages or successfully rendered frames.
 
 Next connected Java question: vehicle/projectile renderer entry and render-type/culling behavior, avoiding the already reviewed controller and native-wrapper paths.
+
+## Later render lifecycle extension
+
+- [Vehicle/projectile entries](VEHICLE-PROJECTILE-RENDER-RECOVERY-2026-10-17.md) and [dispatcher replacement](DISPATCHER-RENDER-REPLACEMENT-RECOVERY-2026-10-17.md): direct animatable overloads differ from concrete entity-entry gates.
+- [Fishing-line geometry](FISHING-LINE-GEOMETRY-RECOVERY-2026-10-17.md): reuses dispatcher snapshots, does not add a new method count.
+- [Player view gates](PLAYER-REPLACEMENT-VIEW-GATES-RECOVERY-2026-10-17.md): external first-person animation coexistence and earlier cancellation.
+- [Shader/buffer adapters](SHADER-BUFFER-ADAPTERS-RECOVERY-2026-10-17.md): state sampling, provider registration, signed ID arithmetic and flush scope.
+- [GUI preview state](GUI-PREVIEW-STATE-RECOVERY-2026-10-17.md): temporary mutation, actual fake-player caller boundary and selected Vineflower comparison.
+
+A separate fixed8-cohort [render-lifecycle checkpoint](RENDER-LIFECYCLE-CHECKPOINT-2026-10-17.json) passed in1.991seconds with24 overlapping snapshots and0 conflicts. Six later cohorts plus two earlier anchors were checked; the fixed9 above remains unchanged. The seven-case JDK packing model and one-class Vineflower run have their own receipts and are not Minecraft/native tests.

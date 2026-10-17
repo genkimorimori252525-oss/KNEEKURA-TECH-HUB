@@ -1,0 +1,31 @@
+{
+  "tool": "Vineflower",
+  "version": "1.11.1",
+  "tool_sha256": "a615d07ddbbcd489369674f40e42df639c32be95410890b38f173d5c1e2ea39c",
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "input": {
+    "class": "com/elfmcys/yesstevemodel/OoO00Oo00Ooo0OoOoo00o000.class",
+    "sha256": "f946796658bca0ed87134b3daf30415a37de89cd9cbb4f596763048c3a813e6f",
+    "bytes": 17659
+  },
+  "selected_archive_sha256": "95c7f769d0258318431abe5d1b07a58a18b092c02ee5c3df75b0824f73d6217a",
+  "output_java_files": [
+    {
+      "path": "com/elfmcys/yesstevemodel/OoO00Oo00Ooo0OoOoo00o000.java",
+      "sha256": "a6a3ab86ae20ed4187dfb713cf197b0b16fb0e0aa38b25d5d63d8e27c3cde028"
+    }
+  ],
+  "tool_log_sha256": "9223587044e559de4bdec09c3da7e16e508c221abd09d7772528160fb726a08b",
+  "warning_error_marker_lines": [],
+  "exit_code": 0,
+  "target_application_executed": false,
+  "native_provider_executed": false,
+  "full_decompiled_source_committed": false,
+  "minecraft_forge_dependency_classpath_supplied": false,
+  "original_jar_as_library": true,
+  "findings": [
+    "Equipment empty-slot writes precede saved getItemBySlot values in bytecode and decompiler.",
+    "GUI xRotO restore uses saved current pitch, unlike texture-screen preview."
+  ],
+  "independent_semantic_review": "NOT_RUN"
+}

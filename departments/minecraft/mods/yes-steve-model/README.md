@@ -434,3 +434,5 @@ bounded runtime observation rather than protection bypass.
 - [Player replacement view gates](PLAYER-REPLACEMENT-VIEW-GATES-RECOVERY-2026-10-17.md): self/other config, first-person interoperability and pre-render cancellation.
 
 - [Shader and buffer adapters](SHADER-BUFFER-ADAPTERS-RECOVERY-2026-10-17.md): Oculus/PBR initialization, signed ID packing and fixed-buffer flush scope.
+
+- [GUI preview state](GUI-PREVIEW-STATE-RECOVERY-2026-10-17.md): restoration order, fake-player caller boundary and a selected Vineflower comparison.

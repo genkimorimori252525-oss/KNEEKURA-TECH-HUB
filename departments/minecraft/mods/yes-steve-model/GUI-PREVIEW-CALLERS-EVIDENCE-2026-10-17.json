@@ -1,0 +1,5254 @@
+{
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "class_count": 955,
+  "targets": [
+    [
+      "com/elfmcys/yesstevemodel/OoO00Oo00Ooo0OoOoo00o000",
+      "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "(FFFFLcom/elfmcys/yesstevemodel/o0O0oOooOo0OoOo0oOo00O00;Lcom/elfmcys/yesstevemodel/OOoo0o0oO000ooO0Oo00OoOo;ZZ)V"
+    ]
+  ],
+  "method_handle_targets": [],
+  "calls": [
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Lnet/minecraft/client/gui/GuiGraphics;F)V"
+      },
+      "instruction": {
+        "offset": 126,
+        "opcode": "0xb8",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/OoO00Oo00Ooo0OoOoo00o000",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(FFFFLcom/elfmcys/yesstevemodel/o0O0oOooOo0OoOo0oOo00O00;Lcom/elfmcys/yesstevemodel/OOoo0o0oO000ooO0Oo00OoOo;ZZ)V",
+          "cp_tag": 10
+        }
+      },
+      "immediate_following_instruction": {
+        "offset": 129,
+        "opcode": "0xb8",
+        "reference": {
+          "owner": "com/mojang/blaze3d/systems/RenderSystem",
+          "name": "disableScissor",
+          "descriptor": "()V",
+          "cp_tag": 10
+        }
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+        "name": "m_87963_",
+        "descriptor": "(Lnet/minecraft/client/gui/GuiGraphics;IIF)V"
+      },
+      "instruction": {
+        "offset": 338,
+        "opcode": "0xb8",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/OoO00Oo00Ooo0OoOoo00o000",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(FFFFLcom/elfmcys/yesstevemodel/o0O0oOooOo0OoOo0oOo00O00;Lcom/elfmcys/yesstevemodel/OOoo0o0oO000ooO0Oo00OoOo;ZZ)V",
+          "cp_tag": 10
+        }
+      },
+      "immediate_following_instruction": {
+        "offset": 341,
+        "opcode": "0xb8",
+        "reference": {
+          "owner": "com/mojang/blaze3d/systems/RenderSystem",
+          "name": "disableScissor",
+          "descriptor": "()V",
+          "cp_tag": 10
+        }
+      }
+    }
+  ],
+  "caller_methods": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/client/gui/GuiGraphics;F)V",
+      "access": 4,
+      "code_sha256": "e13ceee7f937273b5d403788dc322dfc9c40478b46a6655a9fa079cd6645befe",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "net/minecraft/client/Minecraft",
+            "name": "m_91087_",
+            "descriptor": "()Lnet/minecraft/client/Minecraft;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/client/Minecraft",
+            "name": "m_91268_",
+            "descriptor": "()Lcom/mojang/blaze3d/platform/Window;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 6,
+          "opcode": "0x4e"
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/mojang/blaze3d/platform/Window",
+            "name": "m_85449_",
+            "descriptor": "()D",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0x39"
+        },
+        {
+          "offset": 13,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 14,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO",
+            "name": "m_252754_",
+            "descriptor": "()I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 17,
+          "opcode": "0x87"
+        },
+        {
+          "offset": 18,
+          "opcode": "0x18"
+        },
+        {
+          "offset": 20,
+          "opcode": "0x6b"
+        },
+        {
+          "offset": 21,
+          "opcode": "0x8e"
+        },
+        {
+          "offset": 22,
+          "opcode": "0x36"
+        },
+        {
+          "offset": 24,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 25,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/mojang/blaze3d/platform/Window",
+            "name": "m_85442_",
+            "descriptor": "()I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 28,
+          "opcode": "0x87"
+        },
+        {
+          "offset": 29,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 30,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO",
+            "name": "m_252907_",
+            "descriptor": "()I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 33,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 34,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO",
+            "name": "f_93619_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 37,
+          "opcode": "0x60"
+        },
+        {
+          "offset": 38,
+          "opcode": "0x10",
+          "immediate": 20
+        },
+        {
+          "offset": 40,
+          "opcode": "0x64"
+        },
+        {
+          "offset": 41,
+          "opcode": "0x87"
+        },
+        {
+          "offset": 42,
+          "opcode": "0x18"
+        },
+        {
+          "offset": 44,
+          "opcode": "0x6b"
+        },
+        {
+          "offset": 45,
+          "opcode": "0x67"
+        },
+        {
+          "offset": 46,
+          "opcode": "0x8e"
+        },
+        {
+          "offset": 47,
+          "opcode": "0x36"
+        },
+        {
+          "offset": 49,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 50,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO",
+            "name": "f_93618_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 53,
+          "opcode": "0x87"
+        },
+        {
+          "offset": 54,
+          "opcode": "0x18"
+        },
+        {
+          "offset": 56,
+          "opcode": "0x6b"
+        },
+        {
+          "offset": 57,
+          "opcode": "0x8e"
+        },
+        {
+          "offset": 58,
+          "opcode": "0x36"
+        },
+        {
+          "offset": 60,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 61,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO",
+            "name": "f_93619_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 64,
+          "opcode": "0x10",
+          "immediate": 20
+        },
+        {
+          "offset": 66,
+          "opcode": "0x64"
+        },
+        {
+          "offset": 67,
+          "opcode": "0x87"
+        },
+        {
+          "offset": 68,
+          "opcode": "0x18"
+        },
+        {
+          "offset": 70,
+          "opcode": "0x6b"
+        },
+        {
+          "offset": 71,
+          "opcode": "0x8e"
+        },
+        {
+          "offset": 72,
+          "opcode": "0x36"
+        },
+        {
+          "offset": 74,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 76,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 78,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 80,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 82,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/mojang/blaze3d/systems/RenderSystem",
+            "name": "enableScissor",
+            "descriptor": "(IIII)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 85,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 86,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO",
+            "name": "m_252754_",
+            "descriptor": "()I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 89,
+          "opcode": "0x86"
+        },
+        {
+          "offset": 90,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 91,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO",
+            "name": "f_93618_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 94,
+          "opcode": "0x86"
+        },
+        {
+          "offset": 95,
+          "opcode": "0xd"
+        },
+        {
+          "offset": 96,
+          "opcode": "0x6e"
+        },
+        {
+          "offset": 97,
+          "opcode": "0x62"
+        },
+        {
+          "offset": 98,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 99,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO",
+            "name": "m_252907_",
+            "descriptor": "()I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 102,
+          "opcode": "0x86"
+        },
+        {
+          "offset": 103,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 104,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO",
+            "name": "f_93619_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 107,
+          "opcode": "0x86"
+        },
+        {
+          "offset": 108,
+          "opcode": "0xd"
+        },
+        {
+          "offset": 109,
+          "opcode": "0x6e"
+        },
+        {
+          "offset": 110,
+          "opcode": "0x62"
+        },
+        {
+          "offset": 111,
+          "opcode": "0x12",
+          "reference": {
+            "cp_tag": 4,
+            "value": 24.0
+          }
+        },
+        {
+          "offset": 113,
+          "opcode": "0x62"
+        },
+        {
+          "offset": 114,
+          "opcode": "0x12",
+          "reference": {
+            "cp_tag": 4,
+            "value": 35.0
+          }
+        },
+        {
+          "offset": 116,
+          "opcode": "0x24"
+        },
+        {
+          "offset": 117,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 118,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O00000oOo0o0o00OOoo0O0oo;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 121,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoO00ooO00OOO00O0o0000O",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/o0ooO0o0ooo000OOO0o0oo0o;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 124,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 125,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 126,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OoO00Oo00Ooo0OoOoo00o000",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(FFFFLcom/elfmcys/yesstevemodel/o0O0oOooOo0OoOo0oOo00O00;Lcom/elfmcys/yesstevemodel/OOoo0o0oO000ooO0Oo00OoOo;ZZ)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 129,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/mojang/blaze3d/systems/RenderSystem",
+            "name": "disableScissor",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 132,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "003e"
+        },
+        {
+          "offset": 3,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00be"
+        },
+        {
+          "offset": 6,
+          "opcode": "0x4e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00c4"
+        },
+        {
+          "offset": 11,
+          "opcode": "0x39",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 13,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 14,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0068"
+        },
+        {
+          "offset": 17,
+          "opcode": "0x87",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 18,
+          "opcode": "0x18",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 20,
+          "opcode": "0x6b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 21,
+          "opcode": "0x8e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 22,
+          "opcode": "0x36",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 24,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 25,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00c7"
+        },
+        {
+          "offset": 28,
+          "opcode": "0x87",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 29,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 30,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "006b"
+        },
+        {
+          "offset": 33,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 34,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0072"
+        },
+        {
+          "offset": 37,
+          "opcode": "0x60",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 38,
+          "opcode": "0x10",
+          "encoded_operands_hex": "14"
+        },
+        {
+          "offset": 40,
+          "opcode": "0x64",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 41,
+          "opcode": "0x87",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 42,
+          "opcode": "0x18",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 44,
+          "opcode": "0x6b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 45,
+          "opcode": "0x67",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 46,
+          "opcode": "0x8e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 47,
+          "opcode": "0x36",
+          "encoded_operands_hex": "07",
+          "local_index": 7
+        },
+        {
+          "offset": 49,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 50,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "006f"
+        },
+        {
+          "offset": 53,
+          "opcode": "0x87",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 54,
+          "opcode": "0x18",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 56,
+          "opcode": "0x6b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 57,
+          "opcode": "0x8e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 58,
+          "opcode": "0x36",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 60,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 61,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0072"
+        },
+        {
+          "offset": 64,
+          "opcode": "0x10",
+          "encoded_operands_hex": "14"
+        },
+        {
+          "offset": 66,
+          "opcode": "0x64",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 67,
+          "opcode": "0x87",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 68,
+          "opcode": "0x18",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 70,
+          "opcode": "0x6b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 71,
+          "opcode": "0x8e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 72,
+          "opcode": "0x36",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 74,
+          "opcode": "0x15",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 76,
+          "opcode": "0x15",
+          "encoded_operands_hex": "07",
+          "local_index": 7
+        },
+        {
+          "offset": 78,
+          "opcode": "0x15",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 80,
+          "opcode": "0x15",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 82,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "00cd"
+        },
+        {
+          "offset": 85,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 86,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0068"
+        },
+        {
+          "offset": 89,
+          "opcode": "0x86",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 90,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 91,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "006f"
+        },
+        {
+          "offset": 94,
+          "opcode": "0x86",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 95,
+          "opcode": "0xd",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 96,
+          "opcode": "0x6e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 97,
+          "opcode": "0x62",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 98,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 99,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "006b"
+        },
+        {
+          "offset": 102,
+          "opcode": "0x86",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 103,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 104,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0072"
+        },
+        {
+          "offset": 107,
+          "opcode": "0x86",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 108,
+          "opcode": "0xd",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 109,
+          "opcode": "0x6e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 110,
+          "opcode": "0x62",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 111,
+          "opcode": "0x12",
+          "encoded_operands_hex": "ce"
+        },
+        {
+          "offset": 113,
+          "opcode": "0x62",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 114,
+          "opcode": "0x12",
+          "encoded_operands_hex": "cf"
+        },
+        {
+          "offset": 116,
+          "opcode": "0x24",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 117,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 118,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0034"
+        },
+        {
+          "offset": 121,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "00d4"
+        },
+        {
+          "offset": 124,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 125,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 126,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "00d9"
+        },
+        {
+          "offset": 129,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "00dc"
+        },
+        {
+          "offset": 132,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+      "name": "m_87963_",
+      "descriptor": "(Lnet/minecraft/client/gui/GuiGraphics;IIF)V",
+      "access": 1,
+      "code_sha256": "c19281fd9b66408487ee7e59e404f53381e9953ac2ea33a41aeab57f0adc3c05",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O00000oOo0o0o00OOoo0O0oo;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00000oOo0o0o00OOoo0O0oo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/oO0Ooo00oOOO00O0OO00o0o0;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 7,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 9,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "m_274382_",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 13,
+          "opcode": "0x99",
+          "branch_target": 35
+        },
+        {
+          "offset": 16,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 17,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "net/minecraft/Util",
+            "name": "m_137550_",
+            "descriptor": "()J",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 20,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "Ooo0O0000OO0OOO0o0Oo0oOO",
+            "descriptor": "J",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 23,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 25,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 26,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "Ooooo0oooO0oooOOOoO0000O",
+            "descriptor": "Ljava/lang/String;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 29,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oO0Ooo00oOOO00O0OO00o0o0",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "(Ljava/lang/String;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 32,
+          "opcode": "0xa7",
+          "branch_target": 71
+        },
+        {
+          "offset": 35,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "net/minecraft/Util",
+            "name": "m_137550_",
+            "descriptor": "()J",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 38,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 39,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "Ooo0O0000OO0OOO0o0Oo0oOO",
+            "descriptor": "J",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 42,
+          "opcode": "0x65"
+        },
+        {
+          "offset": 43,
+          "opcode": "0x8a"
+        },
+        {
+          "offset": 44,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 45,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "Oo00o0OooOOo0ooOoo0oO0o0",
+            "descriptor": "D",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 48,
+          "opcode": "0x98"
+        },
+        {
+          "offset": 49,
+          "opcode": "0x9c",
+          "branch_target": 64
+        },
+        {
+          "offset": 52,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 54,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 55,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "oo0OoO00oOoo000O0000o0oo",
+            "descriptor": "Ljava/lang/String;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 58,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oO0Ooo00oOOO00O0OO00o0o0",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "(Ljava/lang/String;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 61,
+          "opcode": "0xa7",
+          "branch_target": 71
+        },
+        {
+          "offset": 64,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 66,
+          "opcode": "0x12",
+          "reference": {
+            "string": "empty",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 68,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oO0Ooo00oOOO00O0OO00o0o0",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "(Ljava/lang/String;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 71,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 72,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "m_93696_",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 75,
+          "opcode": "0x99",
+          "branch_target": 90
+        },
+        {
+          "offset": 78,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 80,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 81,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "oooooooOOoOOoO00OooOo00O",
+            "descriptor": "Ljava/lang/String;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 84,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oO0Ooo00oOOO00O0OO00o0o0",
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "(Ljava/lang/String;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 87,
+          "opcode": "0xa7",
+          "branch_target": 97
+        },
+        {
+          "offset": 90,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 92,
+          "opcode": "0x12",
+          "reference": {
+            "string": "empty",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 94,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oO0Ooo00oOOO00O0OO00o0o0",
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "(Ljava/lang/String;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 97,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "net/minecraft/client/Minecraft",
+            "name": "m_91087_",
+            "descriptor": "()Lnet/minecraft/client/Minecraft;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 100,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 102,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 104,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "net/minecraft/client/Minecraft",
+            "name": "f_91062_",
+            "descriptor": "Lnet/minecraft/client/gui/Font;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 107,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 109,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 110,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "m_252754_",
+            "descriptor": "()I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 113,
+          "opcode": "0x36"
+        },
+        {
+          "offset": 115,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 116,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "m_252907_",
+            "descriptor": "()I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 119,
+          "opcode": "0x36"
+        },
+        {
+          "offset": 121,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 122,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 124,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 126,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 128,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 129,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "f_93618_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 132,
+          "opcode": "0x60"
+        },
+        {
+          "offset": 133,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 135,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 136,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "f_93619_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 139,
+          "opcode": "0x60"
+        },
+        {
+          "offset": 140,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 141,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 144,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 145,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 148,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/client/gui/GuiGraphics",
+            "name": "m_280024_",
+            "descriptor": "(IIIIII)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 151,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 152,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "ooOO000o0O0OOOoO0Oo0o0Oo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/Oo0o0oO0000oO00O00oo00OO;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 155,
+          "opcode": "0xc6",
+          "branch_target": 208
+        },
+        {
+          "offset": 158,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/mojang/blaze3d/systems/RenderSystem",
+            "name": "enableBlend",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 161,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/mojang/blaze3d/systems/RenderSystem",
+            "name": "defaultBlendFunc",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 164,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 165,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 166,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "ooOO000o0O0OOOoO0Oo0o0Oo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/Oo0o0oO0000oO00O00oo00OO;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 169,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/Oo0o0oO0000oO00O00oo00OO",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Ljava/util/Optional;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 174,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/util/Optional",
+            "name": "get",
+            "descriptor": "()Ljava/lang/Object;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 177,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "net/minecraft/resources/ResourceLocation",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 180,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 182,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 184,
+          "opcode": "0xb"
+        },
+        {
+          "offset": 185,
+          "opcode": "0xb"
+        },
+        {
+          "offset": 186,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 187,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "f_93618_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 190,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 191,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "f_93619_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 194,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 195,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "f_93618_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 198,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 199,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "f_93619_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 202,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/client/gui/GuiGraphics",
+            "name": "m_280163_",
+            "descriptor": "(Lnet/minecraft/resources/ResourceLocation;IIFFIIII)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 205,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/mojang/blaze3d/systems/RenderSystem",
+            "name": "disableBlend",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 208,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "net/minecraft/client/Minecraft",
+            "name": "m_91087_",
+            "descriptor": "()Lnet/minecraft/client/Minecraft;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 211,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/client/Minecraft",
+            "name": "m_91268_",
+            "descriptor": "()Lcom/mojang/blaze3d/platform/Window;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 214,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 216,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 218,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/mojang/blaze3d/platform/Window",
+            "name": "m_85449_",
+            "descriptor": "()D",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 221,
+          "opcode": "0x39"
+        },
+        {
+          "offset": 223,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 225,
+          "opcode": "0x87"
+        },
+        {
+          "offset": 226,
+          "opcode": "0x18"
+        },
+        {
+          "offset": 228,
+          "opcode": "0x6b"
+        },
+        {
+          "offset": 229,
+          "opcode": "0x8e"
+        },
+        {
+          "offset": 230,
+          "opcode": "0x36"
+        },
+        {
+          "offset": 232,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 234,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/mojang/blaze3d/platform/Window",
+            "name": "m_85442_",
+            "descriptor": "()I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 237,
+          "opcode": "0x87"
+        },
+        {
+          "offset": 238,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 240,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 241,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "f_93619_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 244,
+          "opcode": "0x60"
+        },
+        {
+          "offset": 245,
+          "opcode": "0x10",
+          "immediate": 20
+        },
+        {
+          "offset": 247,
+          "opcode": "0x64"
+        },
+        {
+          "offset": 248,
+          "opcode": "0x87"
+        },
+        {
+          "offset": 249,
+          "opcode": "0x18"
+        },
+        {
+          "offset": 251,
+          "opcode": "0x6b"
+        },
+        {
+          "offset": 252,
+          "opcode": "0x67"
+        },
+        {
+          "offset": 253,
+          "opcode": "0x8e"
+        },
+        {
+          "offset": 254,
+          "opcode": "0x36"
+        },
+        {
+          "offset": 256,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 257,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "f_93618_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 260,
+          "opcode": "0x87"
+        },
+        {
+          "offset": 261,
+          "opcode": "0x18"
+        },
+        {
+          "offset": 263,
+          "opcode": "0x6b"
+        },
+        {
+          "offset": 264,
+          "opcode": "0x8e"
+        },
+        {
+          "offset": 265,
+          "opcode": "0x36"
+        },
+        {
+          "offset": 267,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 268,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "f_93619_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 271,
+          "opcode": "0x10",
+          "immediate": 20
+        },
+        {
+          "offset": 273,
+          "opcode": "0x64"
+        },
+        {
+          "offset": 274,
+          "opcode": "0x87"
+        },
+        {
+          "offset": 275,
+          "opcode": "0x18"
+        },
+        {
+          "offset": 277,
+          "opcode": "0x6b"
+        },
+        {
+          "offset": 278,
+          "opcode": "0x8e"
+        },
+        {
+          "offset": 279,
+          "opcode": "0x36"
+        },
+        {
+          "offset": 281,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 283,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 285,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 287,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 289,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/mojang/blaze3d/systems/RenderSystem",
+            "name": "enableScissor",
+            "descriptor": "(IIII)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 292,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 294,
+          "opcode": "0x86"
+        },
+        {
+          "offset": 295,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 296,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "f_93618_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 299,
+          "opcode": "0x86"
+        },
+        {
+          "offset": 300,
+          "opcode": "0xd"
+        },
+        {
+          "offset": 301,
+          "opcode": "0x6e"
+        },
+        {
+          "offset": 302,
+          "opcode": "0x62"
+        },
+        {
+          "offset": 303,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 305,
+          "opcode": "0x86"
+        },
+        {
+          "offset": 306,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 307,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "f_93619_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 310,
+          "opcode": "0x86"
+        },
+        {
+          "offset": 311,
+          "opcode": "0xd"
+        },
+        {
+          "offset": 312,
+          "opcode": "0x6e"
+        },
+        {
+          "offset": 313,
+          "opcode": "0x62"
+        },
+        {
+          "offset": 314,
+          "opcode": "0x13",
+          "reference": {
+            "cp_tag": 4,
+            "value": 20.0
+          }
+        },
+        {
+          "offset": 317,
+          "opcode": "0x62"
+        },
+        {
+          "offset": 318,
+          "opcode": "0x13",
+          "reference": {
+            "cp_tag": 4,
+            "value": 30.0
+          }
+        },
+        {
+          "offset": 321,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 323,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/client/Minecraft",
+            "name": "m_91296_",
+            "descriptor": "()F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 326,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 327,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O00000oOo0o0o00OOoo0O0oo;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 330,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoO00ooO00OOO00O0o0000O",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/o0ooO0o0ooo000OOO0o0oo0o;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 333,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 334,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "o0OOO0o0o0OOo000oO00o00O",
+            "descriptor": "Z",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 337,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 338,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OoO00Oo00Ooo0OoOoo00o000",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(FFFFLcom/elfmcys/yesstevemodel/o0O0oOooOo0OoOo0oOo00O00;Lcom/elfmcys/yesstevemodel/OOoo0o0oO000ooO0Oo00OoOo;ZZ)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 341,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/mojang/blaze3d/systems/RenderSystem",
+            "name": "disableScissor",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 344,
+          "opcode": "0x11",
+          "immediate": 3500
+        },
+        {
+          "offset": 347,
+          "opcode": "0x36"
+        },
+        {
+          "offset": 349,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 350,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "OOOo0OOOoOO0O00Oo00ooOOO",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/Oo0o0oO0000oO00O00oo00OO;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 353,
+          "opcode": "0xc6",
+          "branch_target": 408
+        },
+        {
+          "offset": 356,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/mojang/blaze3d/systems/RenderSystem",
+            "name": "enableBlend",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 359,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/mojang/blaze3d/systems/RenderSystem",
+            "name": "defaultBlendFunc",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 362,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 363,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 364,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "OOOo0OOOoOO0O00Oo00ooOOO",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/Oo0o0oO0000oO00O00oo00OO;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 367,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/Oo0o0oO0000oO00O00oo00OO",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Ljava/util/Optional;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 372,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/util/Optional",
+            "name": "get",
+            "descriptor": "()Ljava/lang/Object;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 375,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "net/minecraft/resources/ResourceLocation",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 378,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 380,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 382,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 384,
+          "opcode": "0xb"
+        },
+        {
+          "offset": 385,
+          "opcode": "0xb"
+        },
+        {
+          "offset": 386,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 387,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "f_93618_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 390,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 391,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "f_93619_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 394,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 395,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "f_93618_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 398,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 399,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "f_93619_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 402,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/client/gui/GuiGraphics",
+            "name": "m_280398_",
+            "descriptor": "(Lnet/minecraft/resources/ResourceLocation;IIIFFIIII)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 405,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/mojang/blaze3d/systems/RenderSystem",
+            "name": "disableBlend",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 408,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 409,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "m_6035_",
+            "descriptor": "()Lnet/minecraft/network/chat/Component;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 412,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 414,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 416,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 418,
+          "opcode": "0x10",
+          "immediate": 45
+        },
+        {
+          "offset": 420,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/client/gui/Font",
+            "name": "m_92923_",
+            "descriptor": "(Lnet/minecraft/network/chat/FormattedText;I)Ljava/util/List;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 423,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 425,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 427,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/List",
+            "name": "size",
+            "descriptor": "()I",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 432,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 433,
+          "opcode": "0xa4",
+          "branch_target": 517
+        },
+        {
+          "offset": 436,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 437,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 439,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 441,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 442,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/List",
+            "name": "get",
+            "descriptor": "(I)Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 447,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "net/minecraft/util/FormattedCharSequence",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 450,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 452,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 453,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "f_93618_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 456,
+          "opcode": "0x5"
+        },
+        {
+          "offset": 457,
+          "opcode": "0x6c"
+        },
+        {
+          "offset": 458,
+          "opcode": "0x60"
+        },
+        {
+          "offset": 459,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 461,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 462,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "f_93619_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 465,
+          "opcode": "0x60"
+        },
+        {
+          "offset": 466,
+          "opcode": "0x10",
+          "immediate": 19
+        },
+        {
+          "offset": 468,
+          "opcode": "0x64"
+        },
+        {
+          "offset": 469,
+          "opcode": "0x13",
+          "reference": {
+            "cp_tag": 3,
+            "value": 15986656
+          }
+        },
+        {
+          "offset": 472,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/client/gui/GuiGraphics",
+            "name": "m_280364_",
+            "descriptor": "(Lnet/minecraft/client/gui/Font;Lnet/minecraft/util/FormattedCharSequence;III)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 475,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 476,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 478,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 480,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 481,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/List",
+            "name": "get",
+            "descriptor": "(I)Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 486,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "net/minecraft/util/FormattedCharSequence",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 489,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 491,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 492,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "f_93618_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 495,
+          "opcode": "0x5"
+        },
+        {
+          "offset": 496,
+          "opcode": "0x6c"
+        },
+        {
+          "offset": 497,
+          "opcode": "0x60"
+        },
+        {
+          "offset": 498,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 500,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 501,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "f_93619_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 504,
+          "opcode": "0x60"
+        },
+        {
+          "offset": 505,
+          "opcode": "0x10",
+          "immediate": 10
+        },
+        {
+          "offset": 507,
+          "opcode": "0x64"
+        },
+        {
+          "offset": 508,
+          "opcode": "0x13",
+          "reference": {
+            "cp_tag": 3,
+            "value": 15986656
+          }
+        },
+        {
+          "offset": 511,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/client/gui/GuiGraphics",
+            "name": "m_280364_",
+            "descriptor": "(Lnet/minecraft/client/gui/Font;Lnet/minecraft/util/FormattedCharSequence;III)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 514,
+          "opcode": "0xa7",
+          "branch_target": 549
+        },
+        {
+          "offset": 517,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 518,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 520,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 521,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "m_6035_",
+            "descriptor": "()Lnet/minecraft/network/chat/Component;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 524,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 526,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 527,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "f_93618_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 530,
+          "opcode": "0x5"
+        },
+        {
+          "offset": 531,
+          "opcode": "0x6c"
+        },
+        {
+          "offset": 532,
+          "opcode": "0x60"
+        },
+        {
+          "offset": 533,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 535,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 536,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "f_93619_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 539,
+          "opcode": "0x60"
+        },
+        {
+          "offset": 540,
+          "opcode": "0x10",
+          "immediate": 15
+        },
+        {
+          "offset": 542,
+          "opcode": "0x64"
+        },
+        {
+          "offset": 543,
+          "opcode": "0x13",
+          "reference": {
+            "cp_tag": 3,
+            "value": 15986656
+          }
+        },
+        {
+          "offset": 546,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/client/gui/GuiGraphics",
+            "name": "m_280653_",
+            "descriptor": "(Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;III)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 549,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 550,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Z",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 553,
+          "opcode": "0x9a",
+          "branch_target": 699
+        },
+        {
+          "offset": 556,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 557,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "m_198029_",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 560,
+          "opcode": "0x99",
+          "branch_target": 699
+        },
+        {
+          "offset": 563,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 564,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 566,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 568,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 569,
+          "opcode": "0x60"
+        },
+        {
+          "offset": 570,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 572,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 573,
+          "opcode": "0x60"
+        },
+        {
+          "offset": 574,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 576,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 577,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "f_93619_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 580,
+          "opcode": "0x60"
+        },
+        {
+          "offset": 581,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 582,
+          "opcode": "0x64"
+        },
+        {
+          "offset": 583,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 585,
+          "opcode": "0x13",
+          "reference": {
+            "cp_tag": 3,
+            "value": -790560
+          }
+        },
+        {
+          "offset": 588,
+          "opcode": "0x13",
+          "reference": {
+            "cp_tag": 3,
+            "value": -790560
+          }
+        },
+        {
+          "offset": 591,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/client/gui/GuiGraphics",
+            "name": "m_280120_",
+            "descriptor": "(IIIIIII)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 594,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 595,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 597,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 599,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 601,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 602,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "f_93618_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 605,
+          "opcode": "0x60"
+        },
+        {
+          "offset": 606,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 608,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 609,
+          "opcode": "0x60"
+        },
+        {
+          "offset": 610,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 612,
+          "opcode": "0x13",
+          "reference": {
+            "cp_tag": 3,
+            "value": -790560
+          }
+        },
+        {
+          "offset": 615,
+          "opcode": "0x13",
+          "reference": {
+            "cp_tag": 3,
+            "value": -790560
+          }
+        },
+        {
+          "offset": 618,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/client/gui/GuiGraphics",
+            "name": "m_280120_",
+            "descriptor": "(IIIIIII)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 621,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 622,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 624,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 625,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "f_93618_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 628,
+          "opcode": "0x60"
+        },
+        {
+          "offset": 629,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 630,
+          "opcode": "0x64"
+        },
+        {
+          "offset": 631,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 633,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 634,
+          "opcode": "0x60"
+        },
+        {
+          "offset": 635,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 637,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 638,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "f_93618_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 641,
+          "opcode": "0x60"
+        },
+        {
+          "offset": 642,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 644,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 645,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "f_93619_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 648,
+          "opcode": "0x60"
+        },
+        {
+          "offset": 649,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 650,
+          "opcode": "0x64"
+        },
+        {
+          "offset": 651,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 653,
+          "opcode": "0x13",
+          "reference": {
+            "cp_tag": 3,
+            "value": -790560
+          }
+        },
+        {
+          "offset": 656,
+          "opcode": "0x13",
+          "reference": {
+            "cp_tag": 3,
+            "value": -790560
+          }
+        },
+        {
+          "offset": 659,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/client/gui/GuiGraphics",
+            "name": "m_280120_",
+            "descriptor": "(IIIIIII)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 662,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 663,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 665,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 667,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 668,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "f_93619_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 671,
+          "opcode": "0x60"
+        },
+        {
+          "offset": 672,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 673,
+          "opcode": "0x64"
+        },
+        {
+          "offset": 674,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 676,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 677,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "f_93618_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 680,
+          "opcode": "0x60"
+        },
+        {
+          "offset": 681,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 683,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 684,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "f_93619_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 687,
+          "opcode": "0x60"
+        },
+        {
+          "offset": 688,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 690,
+          "opcode": "0x13",
+          "reference": {
+            "cp_tag": 3,
+            "value": -790560
+          }
+        },
+        {
+          "offset": 693,
+          "opcode": "0x13",
+          "reference": {
+            "cp_tag": 3,
+            "value": -790560
+          }
+        },
+        {
+          "offset": 696,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/client/gui/GuiGraphics",
+            "name": "m_280120_",
+            "descriptor": "(IIIIIII)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 699,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 700,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Z",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 703,
+          "opcode": "0x99",
+          "branch_target": 736
+        },
+        {
+          "offset": 706,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 707,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 709,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 711,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 713,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 714,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "f_93618_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 717,
+          "opcode": "0x60"
+        },
+        {
+          "offset": 718,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 720,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 721,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+            "name": "f_93619_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 724,
+          "opcode": "0x60"
+        },
+        {
+          "offset": 725,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 727,
+          "opcode": "0x13",
+          "reference": {
+            "cp_tag": 3,
+            "value": -1625152990
+          }
+        },
+        {
+          "offset": 730,
+          "opcode": "0x13",
+          "reference": {
+            "cp_tag": 3,
+            "value": -1625152990
+          }
+        },
+        {
+          "offset": 733,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/client/gui/GuiGraphics",
+            "name": "m_280120_",
+            "descriptor": "(IIIIIII)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 736,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 738,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "net/minecraft/client/Minecraft",
+            "name": "f_91074_",
+            "descriptor": "Lnet/minecraft/client/player/LocalPlayer;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 741,
+          "opcode": "0xc6",
+          "branch_target": 771
+        },
+        {
+          "offset": 744,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 746,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "net/minecraft/client/Minecraft",
+            "name": "f_91074_",
+            "descriptor": "Lnet/minecraft/client/player/LocalPlayer;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 749,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/ooooO0o00oO0Oo0OOo0O0O0o",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lnet/minecraftforge/common/capabilities/Capability;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 752,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/client/player/LocalPlayer",
+            "name": "getCapability",
+            "descriptor": "(Lnet/minecraftforge/common/capabilities/Capability;)Lnet/minecraftforge/common/util/LazyOptional;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 755,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 756,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 757,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 759,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 761,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 763,
+          "opcode": "0xba",
+          "reference": {
+            "name": "accept",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO;Lnet/minecraft/client/gui/GuiGraphics;III)Lnet/minecraftforge/common/util/NonNullConsumer;",
+            "bootstrap_index": 2,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 768,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraftforge/common/util/LazyOptional",
+            "name": "ifPresent",
+            "descriptor": "(Lnet/minecraftforge/common/util/NonNullConsumer;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 771,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0068"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0113"
+        },
+        {
+          "offset": 7,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "05",
+          "local_index": 5
+        },
+        {
+          "offset": 9,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0116"
+        },
+        {
+          "offset": 13,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0016"
+        },
+        {
+          "offset": 16,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 17,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "011c"
+        },
+        {
+          "offset": 20,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "005a"
+        },
+        {
+          "offset": 23,
+          "opcode": "0x19",
+          "encoded_operands_hex": "05",
+          "local_index": 5
+        },
+        {
+          "offset": 25,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 26,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "00ab"
+        },
+        {
+          "offset": 29,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0121"
+        },
+        {
+          "offset": 32,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0027"
+        },
+        {
+          "offset": 35,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "011c"
+        },
+        {
+          "offset": 38,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 39,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "005a"
+        },
+        {
+          "offset": 42,
+          "opcode": "0x65",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 43,
+          "opcode": "0x8a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 44,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 45,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "00bd"
+        },
+        {
+          "offset": 48,
+          "opcode": "0x98",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 49,
+          "opcode": "0x9c",
+          "encoded_operands_hex": "000f"
+        },
+        {
+          "offset": 52,
+          "opcode": "0x19",
+          "encoded_operands_hex": "05",
+          "local_index": 5
+        },
+        {
+          "offset": 54,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 55,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "00b1"
+        },
+        {
+          "offset": 58,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0121"
+        },
+        {
+          "offset": 61,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "000a"
+        },
+        {
+          "offset": 64,
+          "opcode": "0x19",
+          "encoded_operands_hex": "05",
+          "local_index": 5
+        },
+        {
+          "offset": 66,
+          "opcode": "0x12",
+          "encoded_operands_hex": "ad"
+        },
+        {
+          "offset": 68,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0121"
+        },
+        {
+          "offset": 71,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 72,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0126"
+        },
+        {
+          "offset": 75,
+          "opcode": "0x99",
+          "encoded_operands_hex": "000f"
+        },
+        {
+          "offset": 78,
+          "opcode": "0x19",
+          "encoded_operands_hex": "05",
+          "local_index": 5
+        },
+        {
+          "offset": 80,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 81,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "00c1"
+        },
+        {
+          "offset": 84,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0128"
+        },
+        {
+          "offset": 87,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "000a"
+        },
+        {
+          "offset": 90,
+          "opcode": "0x19",
+          "encoded_operands_hex": "05",
+          "local_index": 5
+        },
+        {
+          "offset": 92,
+          "opcode": "0x12",
+          "encoded_operands_hex": "ad"
+        },
+        {
+          "offset": 94,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0128"
+        },
+        {
+          "offset": 97,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "00ee"
+        },
+        {
+          "offset": 100,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 102,
+          "opcode": "0x19",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 104,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "012c"
+        },
+        {
+          "offset": 107,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "07",
+          "local_index": 7
+        },
+        {
+          "offset": 109,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 110,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0130"
+        },
+        {
+          "offset": 113,
+          "opcode": "0x36",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 115,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 116,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0133"
+        },
+        {
+          "offset": 119,
+          "opcode": "0x36",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 121,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 122,
+          "opcode": "0x15",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 124,
+          "opcode": "0x15",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 126,
+          "opcode": "0x15",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 128,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 129,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0136"
+        },
+        {
+          "offset": 132,
+          "opcode": "0x60",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 133,
+          "opcode": "0x15",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 135,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 136,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0139"
+        },
+        {
+          "offset": 139,
+          "opcode": "0x60",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 140,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 141,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0064"
+        },
+        {
+          "offset": 144,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 145,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0064"
+        },
+        {
+          "offset": 148,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "013d"
+        },
+        {
+          "offset": 151,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 152,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0050"
+        },
+        {
+          "offset": 155,
+          "opcode": "0xc6",
+          "encoded_operands_hex": "0035"
+        },
+        {
+          "offset": 158,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0142"
+        },
+        {
+          "offset": 161,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0145"
+        },
+        {
+          "offset": 164,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 165,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 166,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0050"
+        },
+        {
+          "offset": 169,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "01480100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 174,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "014b"
+        },
+        {
+          "offset": 177,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "014d"
+        },
+        {
+          "offset": 180,
+          "opcode": "0x15",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 182,
+          "opcode": "0x15",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 184,
+          "opcode": "0xb",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 185,
+          "opcode": "0xb",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 186,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 187,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0136"
+        },
+        {
+          "offset": 190,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 191,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0139"
+        },
+        {
+          "offset": 194,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 195,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0136"
+        },
+        {
+          "offset": 198,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 199,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0139"
+        },
+        {
+          "offset": 202,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0151"
+        },
+        {
+          "offset": 205,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0154"
+        },
+        {
+          "offset": 208,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "00ee"
+        },
+        {
+          "offset": 211,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "015a"
+        },
+        {
+          "offset": 214,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "0a",
+          "local_index": 10
+        },
+        {
+          "offset": 216,
+          "opcode": "0x19",
+          "encoded_operands_hex": "0a",
+          "local_index": 10
+        },
+        {
+          "offset": 218,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0160"
+        },
+        {
+          "offset": 221,
+          "opcode": "0x39",
+          "encoded_operands_hex": "0b",
+          "local_index": 11
+        },
+        {
+          "offset": 223,
+          "opcode": "0x15",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 225,
+          "opcode": "0x87",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 226,
+          "opcode": "0x18",
+          "encoded_operands_hex": "0b",
+          "local_index": 11
+        },
+        {
+          "offset": 228,
+          "opcode": "0x6b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 229,
+          "opcode": "0x8e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 230,
+          "opcode": "0x36",
+          "encoded_operands_hex": "0d",
+          "local_index": 13
+        },
+        {
+          "offset": 232,
+          "opcode": "0x19",
+          "encoded_operands_hex": "0a",
+          "local_index": 10
+        },
+        {
+          "offset": 234,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0163"
+        },
+        {
+          "offset": 237,
+          "opcode": "0x87",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 238,
+          "opcode": "0x15",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 240,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 241,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0139"
+        },
+        {
+          "offset": 244,
+          "opcode": "0x60",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 245,
+          "opcode": "0x10",
+          "encoded_operands_hex": "14"
+        },
+        {
+          "offset": 247,
+          "opcode": "0x64",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 248,
+          "opcode": "0x87",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 249,
+          "opcode": "0x18",
+          "encoded_operands_hex": "0b",
+          "local_index": 11
+        },
+        {
+          "offset": 251,
+          "opcode": "0x6b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 252,
+          "opcode": "0x67",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 253,
+          "opcode": "0x8e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 254,
+          "opcode": "0x36",
+          "encoded_operands_hex": "0e",
+          "local_index": 14
+        },
+        {
+          "offset": 256,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 257,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0136"
+        },
+        {
+          "offset": 260,
+          "opcode": "0x87",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 261,
+          "opcode": "0x18",
+          "encoded_operands_hex": "0b",
+          "local_index": 11
+        },
+        {
+          "offset": 263,
+          "opcode": "0x6b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 264,
+          "opcode": "0x8e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 265,
+          "opcode": "0x36",
+          "encoded_operands_hex": "0f",
+          "local_index": 15
+        },
+        {
+          "offset": 267,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 268,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0139"
+        },
+        {
+          "offset": 271,
+          "opcode": "0x10",
+          "encoded_operands_hex": "14"
+        },
+        {
+          "offset": 273,
+          "opcode": "0x64",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 274,
+          "opcode": "0x87",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 275,
+          "opcode": "0x18",
+          "encoded_operands_hex": "0b",
+          "local_index": 11
+        },
+        {
+          "offset": 277,
+          "opcode": "0x6b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 278,
+          "opcode": "0x8e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 279,
+          "opcode": "0x36",
+          "encoded_operands_hex": "10",
+          "local_index": 16
+        },
+        {
+          "offset": 281,
+          "opcode": "0x15",
+          "encoded_operands_hex": "0d",
+          "local_index": 13
+        },
+        {
+          "offset": 283,
+          "opcode": "0x15",
+          "encoded_operands_hex": "0e",
+          "local_index": 14
+        },
+        {
+          "offset": 285,
+          "opcode": "0x15",
+          "encoded_operands_hex": "0f",
+          "local_index": 15
+        },
+        {
+          "offset": 287,
+          "opcode": "0x15",
+          "encoded_operands_hex": "10",
+          "local_index": 16
+        },
+        {
+          "offset": 289,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0167"
+        },
+        {
+          "offset": 292,
+          "opcode": "0x15",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 294,
+          "opcode": "0x86",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 295,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 296,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0136"
+        },
+        {
+          "offset": 299,
+          "opcode": "0x86",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 300,
+          "opcode": "0xd",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 301,
+          "opcode": "0x6e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 302,
+          "opcode": "0x62",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 303,
+          "opcode": "0x15",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 305,
+          "opcode": "0x86",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 306,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 307,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0139"
+        },
+        {
+          "offset": 310,
+          "opcode": "0x86",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 311,
+          "opcode": "0xd",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 312,
+          "opcode": "0x6e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 313,
+          "opcode": "0x62",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 314,
+          "opcode": "0x13",
+          "encoded_operands_hex": "0168"
+        },
+        {
+          "offset": 317,
+          "opcode": "0x62",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 318,
+          "opcode": "0x13",
+          "encoded_operands_hex": "0169"
+        },
+        {
+          "offset": 321,
+          "opcode": "0x19",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 323,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "016d"
+        },
+        {
+          "offset": 326,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 327,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0068"
+        },
+        {
+          "offset": 330,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0172"
+        },
+        {
+          "offset": 333,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 334,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0077"
+        },
+        {
+          "offset": 337,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 338,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0177"
+        },
+        {
+          "offset": 341,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "017a"
+        },
+        {
+          "offset": 344,
+          "opcode": "0x11",
+          "encoded_operands_hex": "0dac"
+        },
+        {
+          "offset": 347,
+          "opcode": "0x36",
+          "encoded_operands_hex": "11",
+          "local_index": 17
+        },
+        {
+          "offset": 349,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 350,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0052"
+        },
+        {
+          "offset": 353,
+          "opcode": "0xc6",
+          "encoded_operands_hex": "0037"
+        },
+        {
+          "offset": 356,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0142"
+        },
+        {
+          "offset": 359,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0145"
+        },
+        {
+          "offset": 362,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 363,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 364,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0052"
+        },
+        {
+          "offset": 367,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "01480100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 372,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "014b"
+        },
+        {
+          "offset": 375,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "014d"
+        },
+        {
+          "offset": 378,
+          "opcode": "0x15",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 380,
+          "opcode": "0x15",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 382,
+          "opcode": "0x15",
+          "encoded_operands_hex": "11",
+          "local_index": 17
+        },
+        {
+          "offset": 384,
+          "opcode": "0xb",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 385,
+          "opcode": "0xb",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 386,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 387,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0136"
+        },
+        {
+          "offset": 390,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 391,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0139"
+        },
+        {
+          "offset": 394,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 395,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0136"
+        },
+        {
+          "offset": 398,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 399,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0139"
+        },
+        {
+          "offset": 402,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "017e"
+        },
+        {
+          "offset": 405,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0154"
+        },
+        {
+          "offset": 408,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 409,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "017f"
+        },
+        {
+          "offset": 412,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "12",
+          "local_index": 18
+        },
+        {
+          "offset": 414,
+          "opcode": "0x19",
+          "encoded_operands_hex": "07",
+          "local_index": 7
+        },
+        {
+          "offset": 416,
+          "opcode": "0x19",
+          "encoded_operands_hex": "12",
+          "local_index": 18
+        },
+        {
+          "offset": 418,
+          "opcode": "0x10",
+          "encoded_operands_hex": "2d"
+        },
+        {
+          "offset": 420,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0183"
+        },
+        {
+          "offset": 423,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "13",
+          "local_index": 19
+        },
+        {
+          "offset": 425,
+          "opcode": "0x19",
+          "encoded_operands_hex": "13",
+          "local_index": 19
+        },
+        {
+          "offset": 427,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "01880100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 432,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 433,
+          "opcode": "0xa4",
+          "encoded_operands_hex": "0054"
+        },
+        {
+          "offset": 436,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 437,
+          "opcode": "0x19",
+          "encoded_operands_hex": "07",
+          "local_index": 7
+        },
+        {
+          "offset": 439,
+          "opcode": "0x19",
+          "encoded_operands_hex": "13",
+          "local_index": 19
+        },
+        {
+          "offset": 441,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 442,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "018b0200",
+          "argument_slot_count": 2,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 447,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "018d"
+        },
+        {
+          "offset": 450,
+          "opcode": "0x15",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 452,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 453,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0136"
+        },
+        {
+          "offset": 456,
+          "opcode": "0x5",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 457,
+          "opcode": "0x6c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 458,
+          "opcode": "0x60",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 459,
+          "opcode": "0x15",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 461,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 462,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0139"
+        },
+        {
+          "offset": 465,
+          "opcode": "0x60",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 466,
+          "opcode": "0x10",
+          "encoded_operands_hex": "13"
+        },
+        {
+          "offset": 468,
+          "opcode": "0x64",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 469,
+          "opcode": "0x13",
+          "encoded_operands_hex": "018e"
+        },
+        {
+          "offset": 472,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0192"
+        },
+        {
+          "offset": 475,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 476,
+          "opcode": "0x19",
+          "encoded_operands_hex": "07",
+          "local_index": 7
+        },
+        {
+          "offset": 478,
+          "opcode": "0x19",
+          "encoded_operands_hex": "13",
+          "local_index": 19
+        },
+        {
+          "offset": 480,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 481,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "018b0200",
+          "argument_slot_count": 2,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 486,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "018d"
+        },
+        {
+          "offset": 489,
+          "opcode": "0x15",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 491,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 492,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0136"
+        },
+        {
+          "offset": 495,
+          "opcode": "0x5",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 496,
+          "opcode": "0x6c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 497,
+          "opcode": "0x60",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 498,
+          "opcode": "0x15",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 500,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 501,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0139"
+        },
+        {
+          "offset": 504,
+          "opcode": "0x60",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 505,
+          "opcode": "0x10",
+          "encoded_operands_hex": "0a"
+        },
+        {
+          "offset": 507,
+          "opcode": "0x64",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 508,
+          "opcode": "0x13",
+          "encoded_operands_hex": "018e"
+        },
+        {
+          "offset": 511,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0192"
+        },
+        {
+          "offset": 514,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0023"
+        },
+        {
+          "offset": 517,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 518,
+          "opcode": "0x19",
+          "encoded_operands_hex": "07",
+          "local_index": 7
+        },
+        {
+          "offset": 520,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 521,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "017f"
+        },
+        {
+          "offset": 524,
+          "opcode": "0x15",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 526,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 527,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0136"
+        },
+        {
+          "offset": 530,
+          "opcode": "0x5",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 531,
+          "opcode": "0x6c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 532,
+          "opcode": "0x60",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 533,
+          "opcode": "0x15",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 535,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 536,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0139"
+        },
+        {
+          "offset": 539,
+          "opcode": "0x60",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 540,
+          "opcode": "0x10",
+          "encoded_operands_hex": "0f"
+        },
+        {
+          "offset": 542,
+          "opcode": "0x64",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 543,
+          "opcode": "0x13",
+          "encoded_operands_hex": "018e"
+        },
+        {
+          "offset": 546,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0196"
+        },
+        {
+          "offset": 549,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 550,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "005c"
+        },
+        {
+          "offset": 553,
+          "opcode": "0x9a",
+          "encoded_operands_hex": "0092"
+        },
+        {
+          "offset": 556,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 557,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0199"
+        },
+        {
+          "offset": 560,
+          "opcode": "0x99",
+          "encoded_operands_hex": "008b"
+        },
+        {
+          "offset": 563,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 564,
+          "opcode": "0x15",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 566,
+          "opcode": "0x15",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 568,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 569,
+          "opcode": "0x60",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 570,
+          "opcode": "0x15",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 572,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 573,
+          "opcode": "0x60",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 574,
+          "opcode": "0x15",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 576,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 577,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0139"
+        },
+        {
+          "offset": 580,
+          "opcode": "0x60",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 581,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 582,
+          "opcode": "0x64",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 583,
+          "opcode": "0x15",
+          "encoded_operands_hex": "11",
+          "local_index": 17
+        },
+        {
+          "offset": 585,
+          "opcode": "0x13",
+          "encoded_operands_hex": "019a"
+        },
+        {
+          "offset": 588,
+          "opcode": "0x13",
+          "encoded_operands_hex": "019a"
+        },
+        {
+          "offset": 591,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "019e"
+        },
+        {
+          "offset": 594,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 595,
+          "opcode": "0x15",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 597,
+          "opcode": "0x15",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 599,
+          "opcode": "0x15",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 601,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 602,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0136"
+        },
+        {
+          "offset": 605,
+          "opcode": "0x60",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 606,
+          "opcode": "0x15",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 608,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 609,
+          "opcode": "0x60",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 610,
+          "opcode": "0x15",
+          "encoded_operands_hex": "11",
+          "local_index": 17
+        },
+        {
+          "offset": 612,
+          "opcode": "0x13",
+          "encoded_operands_hex": "019a"
+        },
+        {
+          "offset": 615,
+          "opcode": "0x13",
+          "encoded_operands_hex": "019a"
+        },
+        {
+          "offset": 618,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "019e"
+        },
+        {
+          "offset": 621,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 622,
+          "opcode": "0x15",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 624,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 625,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0136"
+        },
+        {
+          "offset": 628,
+          "opcode": "0x60",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 629,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 630,
+          "opcode": "0x64",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 631,
+          "opcode": "0x15",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 633,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 634,
+          "opcode": "0x60",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 635,
+          "opcode": "0x15",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 637,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 638,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0136"
+        },
+        {
+          "offset": 641,
+          "opcode": "0x60",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 642,
+          "opcode": "0x15",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 644,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 645,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0139"
+        },
+        {
+          "offset": 648,
+          "opcode": "0x60",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 649,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 650,
+          "opcode": "0x64",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 651,
+          "opcode": "0x15",
+          "encoded_operands_hex": "11",
+          "local_index": 17
+        },
+        {
+          "offset": 653,
+          "opcode": "0x13",
+          "encoded_operands_hex": "019a"
+        },
+        {
+          "offset": 656,
+          "opcode": "0x13",
+          "encoded_operands_hex": "019a"
+        },
+        {
+          "offset": 659,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "019e"
+        },
+        {
+          "offset": 662,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 663,
+          "opcode": "0x15",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 665,
+          "opcode": "0x15",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 667,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 668,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0139"
+        },
+        {
+          "offset": 671,
+          "opcode": "0x60",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 672,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 673,
+          "opcode": "0x64",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 674,
+          "opcode": "0x15",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 676,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 677,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0136"
+        },
+        {
+          "offset": 680,
+          "opcode": "0x60",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 681,
+          "opcode": "0x15",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 683,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 684,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0139"
+        },
+        {
+          "offset": 687,
+          "opcode": "0x60",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 688,
+          "opcode": "0x15",
+          "encoded_operands_hex": "11",
+          "local_index": 17
+        },
+        {
+          "offset": 690,
+          "opcode": "0x13",
+          "encoded_operands_hex": "019a"
+        },
+        {
+          "offset": 693,
+          "opcode": "0x13",
+          "encoded_operands_hex": "019a"
+        },
+        {
+          "offset": 696,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "019e"
+        },
+        {
+          "offset": 699,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 700,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "005c"
+        },
+        {
+          "offset": 703,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0021"
+        },
+        {
+          "offset": 706,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 707,
+          "opcode": "0x15",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 709,
+          "opcode": "0x15",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 711,
+          "opcode": "0x15",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 713,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 714,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0136"
+        },
+        {
+          "offset": 717,
+          "opcode": "0x60",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 718,
+          "opcode": "0x15",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 720,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 721,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0139"
+        },
+        {
+          "offset": 724,
+          "opcode": "0x60",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 725,
+          "opcode": "0x15",
+          "encoded_operands_hex": "11",
+          "local_index": 17
+        },
+        {
+          "offset": 727,
+          "opcode": "0x13",
+          "encoded_operands_hex": "019f"
+        },
+        {
+          "offset": 730,
+          "opcode": "0x13",
+          "encoded_operands_hex": "019f"
+        },
+        {
+          "offset": 733,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "019e"
+        },
+        {
+          "offset": 736,
+          "opcode": "0x19",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 738,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "00f2"
+        },
+        {
+          "offset": 741,
+          "opcode": "0xc6",
+          "encoded_operands_hex": "001e"
+        },
+        {
+          "offset": 744,
+          "opcode": "0x19",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 746,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "00f2"
+        },
+        {
+          "offset": 749,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "01a2"
+        },
+        {
+          "offset": 752,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00fd"
+        },
+        {
+          "offset": 755,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 756,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 757,
+          "opcode": "0x15",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 759,
+          "opcode": "0x15",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 761,
+          "opcode": "0x15",
+          "encoded_operands_hex": "11",
+          "local_index": 17
+        },
+        {
+          "offset": 763,
+          "opcode": "0xba",
+          "encoded_operands_hex": "01ab0000"
+        },
+        {
+          "offset": 768,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "010e"
+        },
+        {
+          "offset": 771,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    }
+  ],
+  "external_or_reflective_closure": false,
+  "runtime_executed": false
+}

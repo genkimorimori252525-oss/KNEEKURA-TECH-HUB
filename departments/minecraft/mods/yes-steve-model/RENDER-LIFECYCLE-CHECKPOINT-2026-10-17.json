@@ -1,0 +1,133 @@
+{
+  "format": "kneekura.ysm-render-lifecycle-checkpoint.v1",
+  "cohort_manifest": [
+    [
+      "VEHICLE-PROJECTILE-RENDER",
+      "vehicle_projectile_render",
+      true
+    ],
+    [
+      "DISPATCHER-RENDER-REPLACEMENT",
+      "dispatcher_render_replacement",
+      true
+    ],
+    [
+      "PLAYER-REPLACEMENT-VIEW-GATES",
+      "player_replacement_view_gates",
+      true
+    ],
+    [
+      "SHADER-BUFFER-ADAPTERS",
+      "shader_buffer_adapters",
+      true
+    ],
+    [
+      "GUI-PREVIEW-STATE",
+      "gui_preview_state",
+      true
+    ],
+    [
+      "GUI-PREVIEW-CALLERS",
+      "gui_preview_callers",
+      false
+    ],
+    [
+      "VIEW-TEXTURE-INPUT",
+      "view_texture_input",
+      true
+    ],
+    [
+      "EXTRA-PREVIEW-CONTROLLERS",
+      "extra_preview_controllers",
+      true
+    ]
+  ],
+  "cohorts": [
+    {
+      "cohort": "VEHICLE-PROJECTILE-RENDER",
+      "tool_sha256": "df076877ae2fc4c61bce5c85670173cd65836e4229f0fd75dc65837a5826dc21",
+      "evidence_sha256": "1dd1f8e35a192a7bfe27e193fe9bd66efa53e8230da32db0a1d77805ca24e1b6",
+      "rerun_receipt_sha256": "94c4b4ba75fe3d81c8ef2a1e349ab21704cb87fd1f09dda132ccd67f3b92aaba",
+      "checks": 153,
+      "negative_controls": 9,
+      "status": "PASS"
+    },
+    {
+      "cohort": "DISPATCHER-RENDER-REPLACEMENT",
+      "tool_sha256": "8a2f6bc1abf11505bf827cebea5a6e75d8d1e1c2ccebd8b61332a0f56feb661e",
+      "evidence_sha256": "13794d54a0b327082b93e7527004e1eb0fb563b558ae03fae8a5afb0c2270ef7",
+      "rerun_receipt_sha256": "f11f02742eb3aa757861a214dd473b8a7a53b11cfd02a7ea704575fe5b8b211a",
+      "checks": 114,
+      "negative_controls": 10,
+      "status": "PASS"
+    },
+    {
+      "cohort": "PLAYER-REPLACEMENT-VIEW-GATES",
+      "tool_sha256": "4948b93175126d23f34ba9689c372ce7945693d526ebf705cfea3bc744083a34",
+      "evidence_sha256": "604bd35c791db2e7c5db9d4c625d252eb4738646165027e9c64354d2229b2149",
+      "rerun_receipt_sha256": "f848e810566e1b22031689c16ae4235c5d37a274c558d6b033f4fe8f84f6607a",
+      "checks": 89,
+      "negative_controls": 10,
+      "status": "PASS"
+    },
+    {
+      "cohort": "SHADER-BUFFER-ADAPTERS",
+      "tool_sha256": "e09091e24bd784b135fb6f647ff4c28cc1d810fb34f0bfeac284aecfef42698a",
+      "evidence_sha256": "4c247cb61f0b5d038082a4a67ce805aa201c77c784fb9ef620d987dfd26a875e",
+      "rerun_receipt_sha256": "f58e2b40b9371ade591bebfcd760d3d2ebf4eea2ece4efa2f69a92ea9ce6d41a",
+      "checks": 182,
+      "negative_controls": 12,
+      "status": "PASS"
+    },
+    {
+      "cohort": "GUI-PREVIEW-STATE",
+      "tool_sha256": "2c3edc270dfa86367d5d994eb9c536d581cdaf9cc53ad530332eb2ada4339375",
+      "evidence_sha256": "b3be733d91693afeed3a7441680728ce7ba3167fec5fb0df576a78ef4d712f99",
+      "rerun_receipt_sha256": "6af3b4bdf1b47c2ee71b295f992038a1f29aa46a240e60fd3b67dcc1f55292f9",
+      "checks": 224,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "GUI-PREVIEW-CALLERS",
+      "tool_sha256": "9d22332cafaa3278bf5ee7522f6fb44582ffe31d27662772acb1edff4715f0aa",
+      "evidence_sha256": "b6073749c529b9f2f93646bb7c2bf82b70b37b13d5fdcd0c6fce18c5747f22f8",
+      "rerun_receipt_sha256": "b116db0e228dd5e18c049e99e88115cdc763caf4b122e50fa5593e7dcd826d75",
+      "checks": 2,
+      "negative_controls": 6,
+      "status": "PASS"
+    },
+    {
+      "cohort": "VIEW-TEXTURE-INPUT",
+      "tool_sha256": "675ac654515f8afb0968d9b8d003ec6f497c66bee6cc98fec25491fb7d8a57c6",
+      "evidence_sha256": "04bae20a371caf6dd371abcf35459cfbc2c7647fd32570f6be008945393a65b0",
+      "rerun_receipt_sha256": "4f117974d9c915c358dade64a2b60d2583184e30b7676dba50eceeacb097cecb",
+      "checks": 208,
+      "negative_controls": 14,
+      "status": "PASS"
+    },
+    {
+      "cohort": "EXTRA-PREVIEW-CONTROLLERS",
+      "tool_sha256": "ae7145108b7043633d8a7abeae08340b2fb9551c0799062da2e978f3a220cf5c",
+      "evidence_sha256": "fadaae8d0323e80496b7656c70362dc7f4c74888d8ce77e08b702cf0338dfd3b",
+      "rerun_receipt_sha256": "abf882f2e3dc714131e322852b3118c04adcee3c51e18f60966855359dca0ed1",
+      "checks": 342,
+      "negative_controls": 14,
+      "status": "PASS"
+    }
+  ],
+  "cohort_count": 8,
+  "overlapping_method_snapshots_compared": 24,
+  "overlap_conflicts": 0,
+  "central_mapping_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
+  "central_mapping_promoted": false,
+  "independent_semantic_review": "NOT_RUN",
+  "target_runtime_executed": false,
+  "whole_project_ci_run": false,
+  "earlier_fixed17_checkpoint_modified": false,
+  "earlier_fixed10_checkpoint_modified": false,
+  "earlier_fixed9_checkpoint_modified": false,
+  "earlier_fixed14_checkpoint_modified": false,
+  "attachment_fixed9_checkpoint_modified": false,
+  "elapsed_seconds": 1.991
+}
