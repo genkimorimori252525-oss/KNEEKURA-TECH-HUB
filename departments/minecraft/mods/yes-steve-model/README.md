@@ -323,3 +323,5 @@ bounded runtime observation rather than protection bypass.
 - [Roaming state merge](ROAMING-STATE-MERGE-RECOVERY-2026-10-17.md): per-model readiness, local/remote replacement, queued deltas and vehicle propagation.
 
 - [Entity-load application](ENTITY-LOAD-APPLICATION-RECOVERY-2026-10-17.md): client deferral, cache/exception boundaries and selected property-application sequence.
+
+- [Player property/query provenance](PLAYER-PROPERTY-QUERY-RECOVERY-2026-10-17.md): presence masks, local/remote sources, axis conversion and explicit JOML dependency comparison.

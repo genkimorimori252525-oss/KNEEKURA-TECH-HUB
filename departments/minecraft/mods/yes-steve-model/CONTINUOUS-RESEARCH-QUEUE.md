@@ -173,3 +173,7 @@ local state predicates do not prove message delivery or server authorization.
 Client entity availability and selected property application are joined. Continue
 PlayerStateTracker server-property masks and Molang consumers; packetHandled is
 not a successful state-application or visible-animation receipt.
+
+Player property masks and selected query routing are recorded. External JOML
+argument-order comparison is conditional, not runtime proof. Continue change
+producers/full-delta selection and query consumers within static Java scope.
