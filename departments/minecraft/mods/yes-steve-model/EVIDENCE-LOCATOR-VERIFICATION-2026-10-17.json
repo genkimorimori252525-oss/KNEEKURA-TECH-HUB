@@ -1123,6 +1123,22 @@
       ],
       "matches": 1,
       "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "SyncDataToClient"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "SyncDataToServer"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
     }
   ],
   "seconds": 3.698,
@@ -1135,9 +1151,9 @@
     "EVIDENCE-LOCATOR-2026-10-17.json": "f06b1798596512558f50568833890bba238e52b78117e65b7c26872af0521a51",
     "NAVIGATION-COMPARISON-ALIASES-2026-10-17.json": "a46b118029b78ea2573b35a07aa69625ea0d53fdfbdda1cb9614c9420ffa699c"
   },
-  "elapsed_seconds": 5.328,
-  "index_sha256": "546174aafc5e20a92ec1ec3110c47134238419f43c8a0ed44dcb37212793f934",
-  "comparison_alias_count": 128,
+  "elapsed_seconds": 5.213,
+  "index_sha256": "fb68d2dbb75ba446f341171fc6d7603d6ac088c9f7a0209a9b271413a8939fb7",
+  "comparison_alias_count": 130,
   "locator_tool_sha256": "19875379f40fe73e65cb034c596777897620dd05ff4a3e61ce2da051dabe16c2",
   "locator_tests_sha256": "7f8ef4c998465362d9e4c2f09bae5cd518a3605d2c9bc4abdf3bcfdff8149799",
   "source_path_association_groups": 490,

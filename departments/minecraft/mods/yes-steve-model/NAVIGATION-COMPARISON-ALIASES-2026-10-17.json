@@ -1281,6 +1281,26 @@
       "source_path": "src/main/java/com/elfmcys/yesstevemodel/event/CommonEvent.java",
       "source_sha256": "6304d304acb5343a8fbfcbf13100e5684e6c332e1a1c45f4190fe13abed4b7ef",
       "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0oo00oo00OoOooO000oO00O",
+      "label": "SyncDataToClient",
+      "evidence": "OPAQUE-MODEL-DATA-TRANSPORT-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "48256c360dbdca9a7c45dce5772b4f027eff7c2d495bb99b611caa91a5c3ee36",
+      "document": "OPAQUE-MODEL-DATA-TRANSPORT-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/network/message/SyncDataToClient.java",
+      "source_sha256": "0cd5a29b43bdb260fd7f5e6ed1964361e3ca971abef35cf10a67fe3e75e91751",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo00oOo0OOO0OoOOo0O0oO0O",
+      "label": "SyncDataToServer",
+      "evidence": "OPAQUE-MODEL-DATA-TRANSPORT-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "48256c360dbdca9a7c45dce5772b4f027eff7c2d495bb99b611caa91a5c3ee36",
+      "document": "OPAQUE-MODEL-DATA-TRANSPORT-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/network/message/SyncDataToServer.java",
+      "source_sha256": "3ab2618f800df88a10c81998930232449c6ccd43a107754623e0007a5963119d",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
     }
   ]
 }

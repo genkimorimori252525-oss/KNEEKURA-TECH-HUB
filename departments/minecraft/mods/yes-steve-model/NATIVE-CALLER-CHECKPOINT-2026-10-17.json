@@ -1,0 +1,145 @@
+{
+  "format": "kneekura.ysm-native-caller-batch.v1",
+  "cohort_manifest": [
+    [
+      "NATIVE-DECLARATION-CALLERS",
+      "native_declaration_callers",
+      false
+    ],
+    [
+      "COMMON-NATIVE-LIFECYCLE",
+      "common_native_lifecycle",
+      true
+    ],
+    [
+      "NATIVE-TEXTURE-JAVA-BOUNDARY",
+      "native_texture_java_boundary",
+      true
+    ],
+    [
+      "LOCATOR-MATRIX-PREPARATION",
+      "locator_matrix_preparation",
+      true
+    ],
+    [
+      "CLIENT-COMPAT-INITIALIZATION",
+      "client_compat_initialization",
+      true
+    ],
+    [
+      "SERVER-MODEL-SYNC-JAVA",
+      "server_model_sync_java",
+      true
+    ],
+    [
+      "CLIENT-MODEL-SYNC-STATE",
+      "client_model_sync_state",
+      true
+    ],
+    [
+      "JAVA-RENDER-BOUNDARY",
+      "java_render_boundary",
+      true
+    ],
+    [
+      "AUDIO-DECODER-JAVA-BOUNDARY",
+      "audio_decoder_java_boundary",
+      true
+    ]
+  ],
+  "cohorts": [
+    {
+      "cohort": "NATIVE-DECLARATION-CALLERS",
+      "tool_sha256": "3cf611452d52a54dbcc1c25fee788988f5f7c9566778c1ad4ebd60bc4c219338",
+      "evidence_sha256": "b5d44fc0f80a418535f8d61b72ec554374b43064996d2f466d8f397fd82e5281",
+      "rerun_receipt_sha256": "89a22626d367e66c4426aa2ea529eeaf591027313760c0aaba97a058ba633894",
+      "checks": 2,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "COMMON-NATIVE-LIFECYCLE",
+      "tool_sha256": "32ceb12635421daf4861eae2a0a96acf07b2434a24896d4900aebb50109d5784",
+      "evidence_sha256": "215d6e50a2aee1bce74a8ade20e17a2915a5b95a327e749dd811badc8fa6e1ad",
+      "rerun_receipt_sha256": "d75d1c832ebef1e085be3f1dc3016f623b2ba4e463908dbba383844eaf7992de",
+      "checks": 52,
+      "negative_controls": 9,
+      "status": "PASS"
+    },
+    {
+      "cohort": "NATIVE-TEXTURE-JAVA-BOUNDARY",
+      "tool_sha256": "c8e365b52bf26913e05c89b2969cc162fcf03e334cb5f6ea8c68f00cfea64404",
+      "evidence_sha256": "20ee34dc6eaea491facb82dd143c0e9a06e1e51d735d040814b640b2e7c9ce4a",
+      "rerun_receipt_sha256": "5980bc268e9d7e333a96a0051c7d4fe555ac1b1d26d005b103d85e762905b96f",
+      "checks": 46,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "LOCATOR-MATRIX-PREPARATION",
+      "tool_sha256": "0a2483b7cfd2a1f31e051e1bf698cb52dee9d3400672fd408d006d1797cc5ed3",
+      "evidence_sha256": "63fa1a629fdebd6be3025ce45b53ac3baf77afc7707f9e58baab5ac7cb694348",
+      "rerun_receipt_sha256": "db5a57f4358141e81eeeb886282eeb241585cf9a07893c2fd869bda4f7629fe7",
+      "checks": 249,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "CLIENT-COMPAT-INITIALIZATION",
+      "tool_sha256": "95e484b846a1436968c58bf959c5a1f1b472009bcc37206376bb4ad114cf27e4",
+      "evidence_sha256": "424a4858eab57e0a2d3671a5078421068c213f8a88dcedbeade2f40584c79e49",
+      "rerun_receipt_sha256": "862bf0aada2d0c9d94454a5a48709af41a725a832b2832bdcbb95d0b3f5a9922",
+      "checks": 120,
+      "negative_controls": 10,
+      "status": "PASS"
+    },
+    {
+      "cohort": "SERVER-MODEL-SYNC-JAVA",
+      "tool_sha256": "eb583e69ff6187ade919507e4d6b10c7195481e38860595b2e9f552d2b0c6fe3",
+      "evidence_sha256": "5e29cfbe88202d48e0826927d8c66c92cc18e476de163166744dd406f3a6ce98",
+      "rerun_receipt_sha256": "4aabc38aba207b96e598e223e67f90dfb3962f6f56ec7a8413dc09fb47d2cbb1",
+      "checks": 219,
+      "negative_controls": 14,
+      "status": "PASS"
+    },
+    {
+      "cohort": "CLIENT-MODEL-SYNC-STATE",
+      "tool_sha256": "74c94c0af12f67a16996c6a92b3cd99b8bbc948f02b2734fcead7f3285813c1a",
+      "evidence_sha256": "4df81306505d55916936e4e7e995bb040e14c5cf9e6f7120aab6a2d53545476c",
+      "rerun_receipt_sha256": "e4c18ad6c1b47ddcb780e50caf24e1f8a13caf763c7dcd9847e7b0a6fb1a5ec5",
+      "checks": 263,
+      "negative_controls": 12,
+      "status": "PASS"
+    },
+    {
+      "cohort": "JAVA-RENDER-BOUNDARY",
+      "tool_sha256": "71b9f045b5e041fca64cb762187adf72d688bd3a131f51a44556fc4af5ae957d",
+      "evidence_sha256": "357be783e1c6332f2dfd52c094d6947e875375dd329a3adfcd757e55bc6ec147",
+      "rerun_receipt_sha256": "aa7db5f98637a3a3ae12cb8a7e7b8679a718fb08a9976b9d70ee6f6455449b98",
+      "checks": 128,
+      "negative_controls": 16,
+      "status": "PASS"
+    },
+    {
+      "cohort": "AUDIO-DECODER-JAVA-BOUNDARY",
+      "tool_sha256": "c4822a2f61359914ff969626f09d48e2f3a4be8e5dd0bb11f496d1ed26be6d41",
+      "evidence_sha256": "c0e3fe7d2b5e2ed77dc58fff115bde62ef0e77b92a8335a0f8d1f3a1c9022861",
+      "rerun_receipt_sha256": "84bec048103082ca05eabf2d85650c8202e2979bc35b415602288d6886425df6",
+      "checks": 192,
+      "negative_controls": 10,
+      "status": "PASS"
+    }
+  ],
+  "cohort_count": 9,
+  "overlapping_method_snapshots_compared": 14,
+  "overlap_conflicts": 0,
+  "central_mapping_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
+  "central_mapping_promoted": false,
+  "independent_semantic_review": "NOT_RUN",
+  "target_runtime_executed": false,
+  "whole_project_ci_run": false,
+  "earlier_fixed17_checkpoint_modified": false,
+  "earlier_fixed10_checkpoint_modified": false,
+  "earlier_fixed9_checkpoint_modified": false,
+  "elapsed_seconds": 2.223
+}
