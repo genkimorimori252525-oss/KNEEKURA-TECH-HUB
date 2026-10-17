@@ -478,3 +478,7 @@ bounded runtime observation rather than protection bypass.
 - [Parser numeric rejection and reader ownership](PARSER-ENTRY-OWNERSHIP-RECOVERY-2026-10-17.md): token classification vs numeric conversion, error-state commitment and caller-owned vs convenience-owned readers.
 
 - [Model input carriers](MODEL-INPUT-CARRIERS-RECOVERY-2026-10-17.md) and [model-local translation fallback](MODEL-LANGUAGE-FALLBACK-RECOVERY-2026-10-17.md): retained references and per-language-map selection.
+
+- [NativeTexture Java boundary](NATIVE-TEXTURE-JAVA-BOUNDARY-RECOVERY-2026-10-17.md): render-call scheduling, shallow PBR ownership and distinct cleanup layers; native methods remain declarations only.
+
+- [Optional one-file method evidence viewer](MEMBER-EVIDENCE-VIEWER-2026-10-17.md): compact signatures first, exact full member on demand, no automatic audits or tool probes.

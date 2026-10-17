@@ -37,3 +37,7 @@ Use this only when implementing or analyzing a related subsystem. It is a small 
 ## Next implementation decision
 
 Define the caller, actor ownership, clock, units, success criterion and cleanup scope for the specific reuse. Then open the matching dossier/evidence and test that bounded contract. No permission is implied here to execute native/protection code, redistribute original artifacts or merge the research branch.
+
+## Optional exact-method evidence view
+
+After choosing an evidence file, use [the one-file member viewer](MEMBER-EVIDENCE-VIEWER-2026-10-17.md) to list the selected owner's signatures and request one exact full member only if needed. This avoids reading an entire large snapshot into an AI context. It does not execute auditors or imply artifact freshness; never add it to startup checks.

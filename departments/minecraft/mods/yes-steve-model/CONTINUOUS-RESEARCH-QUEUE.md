@@ -86,9 +86,14 @@ Model input carriers and model-local language fallback have a fixed5 checkpoint.
 Native-access carriers retain references; language fallback selects a locale map
 rather than falling through per missing key. Those limits remain primary-static.
 
-Next finite connected question: remaining client-side asset registration/cache
-consumers and exact Java cleanup ownership, using existing texture/sound receipts
-as anchors. Do not infer native allocation, native validation or rendered output.
+NativeTexture Java scheduling and PBR ownership are now joined to earlier holder/
+shader evidence in a fixed3 checkpoint. Native methods remain declarations without
+Code. An optional one-file member viewer avoids loading whole snapshots for a
+single method; it performs no artifact audit or startup scan.
+
+Next finite connected question: remaining reusable Java-only vector/data utility
+consumers and reachable adapter state, prioritizing concrete unresolved questions
+over repeating covered constructors or inflating declaration counts.
 
 ## Anchors
 

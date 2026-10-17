@@ -1,0 +1,61 @@
+{
+  "format": "kneekura.ysm-texture-java-checkpoint.v1",
+  "cohort_manifest": [
+    [
+      "NATIVE-TEXTURE-JAVA-BOUNDARY",
+      "native_texture_java_boundary",
+      true
+    ],
+    [
+      "TEXTURE-HOLDER-LIFETIME",
+      "texture_holder_lifetime",
+      true
+    ],
+    [
+      "SHADER-BUFFER-ADAPTERS",
+      "shader_buffer_adapters",
+      true
+    ]
+  ],
+  "cohorts": [
+    {
+      "cohort": "NATIVE-TEXTURE-JAVA-BOUNDARY",
+      "tool_sha256": "c8e365b52bf26913e05c89b2969cc162fcf03e334cb5f6ea8c68f00cfea64404",
+      "evidence_sha256": "20ee34dc6eaea491facb82dd143c0e9a06e1e51d735d040814b640b2e7c9ce4a",
+      "rerun_receipt_sha256": "5980bc268e9d7e333a96a0051c7d4fe555ac1b1d26d005b103d85e762905b96f",
+      "checks": 46,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "TEXTURE-HOLDER-LIFETIME",
+      "tool_sha256": "eb646bd3a031dc464c4a6a231ec1209bcdabe15f2075c5739c18b413172606e9",
+      "evidence_sha256": "1c67df6044c7859c199e3c61081c08e76a108b73b1ecf13605f7a76081bc35fb",
+      "rerun_receipt_sha256": "7f872c345c27c899eb5f3e288c0f34060766055aa2a7937404547f5aeb864fd6",
+      "checks": 118,
+      "negative_controls": 15,
+      "status": "PASS"
+    },
+    {
+      "cohort": "SHADER-BUFFER-ADAPTERS",
+      "tool_sha256": "e09091e24bd784b135fb6f647ff4c28cc1d810fb34f0bfeac284aecfef42698a",
+      "evidence_sha256": "4c247cb61f0b5d038082a4a67ce805aa201c77c784fb9ef620d987dfd26a875e",
+      "rerun_receipt_sha256": "f58e2b40b9371ade591bebfcd760d3d2ebf4eea2ece4efa2f69a92ea9ce6d41a",
+      "checks": 182,
+      "negative_controls": 12,
+      "status": "PASS"
+    }
+  ],
+  "cohort_count": 3,
+  "overlapping_method_snapshots_compared": 0,
+  "overlap_conflicts": 0,
+  "central_mapping_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
+  "central_mapping_promoted": false,
+  "independent_semantic_review": "NOT_RUN",
+  "target_runtime_executed": false,
+  "whole_project_ci_run": false,
+  "earlier_fixed17_checkpoint_modified": false,
+  "earlier_fixed10_checkpoint_modified": false,
+  "earlier_fixed9_checkpoint_modified": false,
+  "elapsed_seconds": 0.398
+}

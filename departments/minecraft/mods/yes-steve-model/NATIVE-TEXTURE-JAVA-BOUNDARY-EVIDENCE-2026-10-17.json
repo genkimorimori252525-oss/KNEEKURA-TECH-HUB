@@ -1,0 +1,706 @@
+{
+  "format": "kneekura.ysm-bounded-seed-evidence.v1",
+  "artifact": {
+    "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+    "sha1": "151ac7b24da8beeca1a20864565743cfd77af286",
+    "size": 63269843,
+    "version_id": "Zqooxsd2",
+    "classes": 955
+  },
+  "confidence_policy": "CONFIRMED denotes semantic correspondence reviewed against pinned source and exact instructions/relations, not recovered original symbols or whole-source equivalence. Prior community sources reused as fixture leads; no community-based promotions.",
+  "source_artifact_equivalence": "NOT_ESTABLISHED",
+  "preserved_global_negative_finding": "SOURCE_ARTIFACT_DIVERGENCE",
+  "recorded_at": "2026-10-17",
+  "detailed_operands": true,
+  "classes": [],
+  "members": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0",
+      "name": "<init>",
+      "descriptor": "(J)V",
+      "access": 1,
+      "code_sha256": "dbf0abe453add820d3480785e949becb56b71dd7a50d3f3f7403ab52901c324d",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "net/minecraft/client/renderer/texture/AbstractTexture",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/objects/Reference2ReferenceMaps",
+            "name": "emptyMap",
+            "descriptor": "()Lit/unimi/dsi/fastutil/objects/Reference2ReferenceMap;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Ljava/util/Map;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 12,
+          "opcode": "0x1f"
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "J",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 16,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 17,
+          "opcode": "0x1f"
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Long",
+            "name": "valueOf",
+            "descriptor": "(J)Ljava/lang/Long;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 21,
+          "opcode": "0xba",
+          "reference": {
+            "name": "accept",
+            "descriptor": "()Ljava/util/function/Consumer;",
+            "bootstrap_index": 0,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 26,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/ooooo00oOO000OO0o0oOOoOO",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/Object;Ljava/lang/Object;Ljava/util/function/Consumer;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 29,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "0015"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "001b"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "001d"
+        },
+        {
+          "offset": 11,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 12,
+          "opcode": "0x1f",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "001f"
+        },
+        {
+          "offset": 16,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 17,
+          "opcode": "0x1f",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0025"
+        },
+        {
+          "offset": 21,
+          "opcode": "0xba",
+          "encoded_operands_hex": "00370000"
+        },
+        {
+          "offset": 26,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "003c"
+        },
+        {
+          "offset": 29,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0",
+      "name": "m_6704_",
+      "descriptor": "(Lnet/minecraft/server/packs/resources/ResourceManager;)V",
+      "access": 1,
+      "code_sha256": "7023b1538e32c7263147e722311ce03dc1f204c620aac69750a379cb07ec72f2",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/mojang/blaze3d/systems/RenderSystem",
+            "name": "isOnRenderThreadOrInit",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0x9a",
+          "branch_target": 18
+        },
+        {
+          "offset": 6,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 7,
+          "opcode": "0xba",
+          "reference": {
+            "name": "m_83909_",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0;)Lcom/mojang/blaze3d/pipeline/RenderCall;",
+            "bootstrap_index": 1,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/mojang/blaze3d/systems/RenderSystem",
+            "name": "recordRenderCall",
+            "descriptor": "(Lcom/mojang/blaze3d/pipeline/RenderCall;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 15,
+          "opcode": "0xa7",
+          "branch_target": 22
+        },
+        {
+          "offset": 18,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 19,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 22,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0045"
+        },
+        {
+          "offset": 3,
+          "opcode": "0x9a",
+          "encoded_operands_hex": "000f"
+        },
+        {
+          "offset": 6,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 7,
+          "opcode": "0xba",
+          "encoded_operands_hex": "004d0000"
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0051"
+        },
+        {
+          "offset": 15,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0007"
+        },
+        {
+          "offset": 18,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 19,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0048"
+        },
+        {
+          "offset": 22,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "()V",
+      "access": 2,
+      "code_sha256": "9e59c01a694556f14626303119c0e0557bdb6dd03d40733eec57c9908b2f51a7",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0",
+            "name": "m_117963_",
+            "descriptor": "()I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/mojang/blaze3d/platform/GlStateManager",
+            "name": "_bindTexture",
+            "descriptor": "(I)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0055"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "005b"
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "005e"
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0",
+      "name": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "()V",
+      "access": 258
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(J)V",
+      "access": 266
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/util/Map;)V",
+      "access": 2,
+      "code_sha256": "e55f8015d4646fe325dc9b424fd56c78b9a5e15bfc05f0ef02312cf79a4a2211",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "it/unimi/dsi/fastutil/objects/Reference2ReferenceOpenHashMap",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/objects/Reference2ReferenceOpenHashMap",
+            "name": "<init>",
+            "descriptor": "(Ljava/util/Map;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/objects/Reference2ReferenceMaps",
+            "name": "unmodifiable",
+            "descriptor": "(Lit/unimi/dsi/fastutil/objects/Reference2ReferenceMap;)Lit/unimi/dsi/fastutil/objects/Reference2ReferenceMap;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Ljava/util/Map;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 15,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xbb",
+          "encoded_operands_hex": "0062"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "0064"
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0068"
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "001d"
+        },
+        {
+          "offset": 15,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()Ljava/util/Map;",
+      "access": 1,
+      "code_sha256": "b3cd15da2b7c2041a0b0821d667e487737d3004b06bd3a3d10954898a3eaa9ce",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Ljava/util/Map;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "001d"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    }
+  ],
+  "owner_declarations": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0",
+      "declaration": {
+        "access": 33,
+        "super": "net/minecraft/client/renderer/texture/AbstractTexture",
+        "interfaces": [
+          "com/elfmcys/yesstevemodel/OoOO0OoOOOOoo0oOo0oOooO0"
+        ],
+        "fields": [
+          {
+            "access": 18,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "J"
+          },
+          {
+            "access": 2,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Ljava/util/Map;"
+          }
+        ],
+        "methods": [
+          {
+            "access": 1,
+            "name": "<init>",
+            "descriptor": "(J)V"
+          },
+          {
+            "access": 1,
+            "name": "m_6704_",
+            "descriptor": "(Lnet/minecraft/server/packs/resources/ResourceManager;)V"
+          },
+          {
+            "access": 2,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "()V"
+          },
+          {
+            "access": 258,
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "()V"
+          },
+          {
+            "access": 266,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(J)V"
+          },
+          {
+            "access": 2,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/util/Map;)V"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Ljava/util/Map;"
+          }
+        ]
+      }
+    }
+  ],
+  "bootstrap_and_constant_evidence": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0",
+      "constant_values": {},
+      "bootstrap_methods": [
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "(Ljava/lang/Object;)V"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0",
+                "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+                "descriptor": "(J)V"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "(Ljava/lang/Long;)V"
+            }
+          ]
+        },
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "()V"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 5,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0",
+                "name": "o0OOooo0o0OO00OoOOOo0o0O",
+                "descriptor": "()V"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "()V"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "source_tracks": [
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/client/texture/NativeTexture.java",
+      "sha256": "ae8e0c2e39397741e6b5f1f3c43313ce1c05a5ba3b82d9ebf951bdafc3f71511",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6"
+    }
+  ],
+  "review_status": "PRIMARY_STATIC_REVIEW_ONLY",
+  "central_mapping_promoted": false
+}
