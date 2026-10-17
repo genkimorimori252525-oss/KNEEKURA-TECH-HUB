@@ -286,3 +286,5 @@ bounded runtime observation rather than protection bypass.
 - [Texture-holder readiness and lifetime](TEXTURE-HOLDER-LIFETIME-RECOVERY-2026-10-17.md): Java publication, queued registration and delayed release; GPU behavior unverified.
 
 - [Client tick and humanoid render selection](RENDER-SELECTION-RECOVERY-2026-10-17.md): event cancellation, texture overrides and model/layer ordering; runtime rendering unverified.
+
+- [Java render-cycle and array handoff](JAVA-RENDER-BOUNDARY-RECOVERY-2026-10-17.md): exact native declaration boundary and legacy Java writer; native implementation unresolved.

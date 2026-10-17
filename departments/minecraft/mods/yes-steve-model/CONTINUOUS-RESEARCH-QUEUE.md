@@ -113,3 +113,7 @@ selection; no native or GPU execution implied.
 Client tick service order and humanoid renderer event/model/texture selection
 are recorded. Continue Java render-cycle/buffer handoff with explicit native
 boundaries; static reachability is not runtime rendering proof.
+
+Java render-cycle/input-output array handoff is joined to the declared native
+boundary. Do not expand native/model-decryption scope. Continue upstream
+EntityStateTracker and Molang query inputs; whole-mod analysis remains active.
