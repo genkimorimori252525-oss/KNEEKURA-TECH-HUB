@@ -21,12 +21,27 @@ def build(root):
     files = {}
     owners = {}
     unsupported = []
+    source_files = {}
+    unindexed_tracks = []
     for path in sorted(root.glob('*EVIDENCE*.json')):
         if path.name.startswith('EVIDENCE-LOCATOR-'):
             continue
         raw = path.read_bytes()
         data = json.loads(raw)
         members = []
+        tracks = data.get('source_tracks', []) if isinstance(data, dict) else []
+        if not isinstance(tracks, list):
+            unindexed_tracks.append({'evidence': path.name, 'reason': 'source_tracks is not a list'})
+            tracks = []
+        for i, track in enumerate(tracks):
+            if (not isinstance(track, dict) or not all(isinstance(track.get(k), str) and track[k]
+                    for k in ('path', 'sha256', 'revision'))
+                    or len(track['sha256']) != 64 or any(c not in '0123456789abcdef' for c in track['sha256'])):
+                unindexed_tracks.append({'evidence': path.name, 'record_index': i, 'reason': 'unsupported source track'})
+                continue
+            identity = (track['path'], track['sha256'], track['revision'])
+            source_files.setdefault(identity, set()).add(path.name)
+            files[path.name] = hashlib.sha256(raw).hexdigest()
         if isinstance(data, dict):
             for key in ('members', 'bounded_dependency_support', 'constructor_members'):
                 rows = data.get(key, [])
@@ -97,7 +112,7 @@ def build(root):
         files[ALIASES] = hashlib.sha256(raw).hexdigest()
     return {
         'format': 'ysm-opt-in-evidence-locator-v1',
-        'scope': 'Top-level members, bounded_dependency_support and constructor_members only; not all references or all repository evidence.',
+        'scope': 'Owner index uses top-level members, bounded_dependency_support and constructor_members; source-path mode indexes declared cohort source_tracks only. Neither is all repository evidence or semantic coverage.',
         'semantic_review': 'NOT_PERFORMED_BY_LOCATOR',
         'source_hashes': files,
         'owners': {key: sorted(value) for key, value in sorted(owners.items())},
@@ -107,12 +122,23 @@ def build(root):
         'queries': queries,
         'documents': documents,
         'unindexed_evidence_schemas': unsupported,
+        'source_files': [{'source_path': path, 'declared_source_sha256': sha, 'revision': revision,
+                          'evidence': sorted(evidence),
+                          'association_scope': 'COHORT_SOURCE_TRACK_ONLY_NOT_OWNER_MAPPING_OR_FULL_SEMANTIC_COVERAGE',
+                          'source_bytes_rechecked': False}
+                         for (path, sha, revision), evidence in sorted(source_files.items())],
+        'unindexed_source_track_records': unindexed_tracks,
     }
 
 
-def search(index, *, owner=None, query=None, topic=None, limit=20):
+def search(index, *, owner=None, query=None, topic=None, source_path=None, limit=20):
     rows = []
-    if query is not None:
+    if source_path is not None:
+        if 'source_files' not in index:
+            raise ValueError('Source-path index missing; explicitly run --build once')
+        needle = source_path.replace('\\', '/').casefold()
+        rows = [dict(row) for row in index['source_files'] if needle in row['source_path'].replace('\\', '/').casefold()]
+    elif query is not None:
         rows = [{'query': r['query'], 'target': r['target'],
                  'evidence': index['owners'].get(normalized_owner(r['target'].get('owner', '')), []),
                  'catalog': r.get('source_catalog', LOOKUP),
@@ -140,11 +166,14 @@ def main():
     action.add_argument('--owner')
     action.add_argument('--query')
     action.add_argument('--topic')
+    action.add_argument('--source-path', help='Find existing cohort source tracks without inferring owner identity')
     parser.add_argument('--limit', type=int, default=20)
     parser.add_argument('--check-selected', action='store_true', help='Hash only files returned by this search; no auditors executed')
     args = parser.parse_args()
     if not 1 <= args.limit <= 100:
         parser.error('--limit must be between 1 and 100')
+    if args.source_path is not None and not args.source_path.strip():
+        parser.error('--source-path must not be empty')
     path = args.root / INDEX
     if args.build:
         if args.check_selected:
@@ -160,7 +189,10 @@ def main():
     if not path.exists():
         parser.error('Locator missing; explicitly run --build first')
     index = json.loads(path.read_text())
-    result = search(index, owner=args.owner, query=args.query, topic=args.topic, limit=args.limit)
+    try:
+        result = search(index, owner=args.owner, query=args.query, topic=args.topic, source_path=args.source_path, limit=args.limit)
+    except ValueError as exc:
+        parser.error(str(exc))
     result['freshness'] = 'UNCHECKED_SNAPSHOT'
     if args.check_selected:
         selected = {f for r in result['results'] for f in r.get('evidence', [])}

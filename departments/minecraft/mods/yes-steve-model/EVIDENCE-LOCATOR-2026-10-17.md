@@ -32,3 +32,13 @@ Tests: tools/test_evidence_locator_ysm_265.py, sixteen fixture cases covering de
 Some useful source-role names have no central class mapping yet. Explicit anchored entries in NAVIGATION-COMPARISON-ALIASES-2026-10-17.json now make names such as SoundInstanceManager, PcmAudioStream and RenderUtil searchable with --owner. They appear under comparison_aliases with PRIMARY_STATIC_REVIEW_ONLY, separately from mapping (which remains null when absent). A prior central role/confidence is preserved even when a comparative name differs. These labels are not proven original unobfuscated symbols.
 
 Explicit --build verifies each alias against a supported captured owner, exact evidence hash, source-track path/hash and recovery document. It rejects stale/missing/unsafe/duplicate entries. Normal search still reads only the compact index; --check-selected additionally checks the alias catalog and returned alias documents. No audit, download or installation is triggered. Tests cover unmapped aliases, preserved formal mapping, stale catalog, unsafe/missing anchors and no automatic source reads.
+
+## Find a source comparison without inventing an owner alias
+
+If an owner-name query misses a known comparison class, try `--source-path RotationValue.java` (or its full relative source path) before assuming the class has no existing analysis. This mode searches declared `source_tracks` captured in the explicitly built index. It does not need an approved semantic/original-name mapping or a manually added comparison alias.
+
+Results group the same path/hash/revision across evidence files and preserve different fingerprints as separate groups. They state COHORT_SOURCE_TRACK_ONLY_NOT_OWNER_MAPPING_OR_FULL_SEMANTIC_COVERAGE and source_bytes_rechecked=false. A source file associated with a cohort can cover several owners or only selected methods; it is not a proof of complete analysis or which obfuscated owner corresponds to that filename.
+
+Ordinary searches read only the saved index. `--check-selected` hashes the returned local evidence files, not source-checkout bytes, the JAR or all repository evidence. The source hash in a result is explicitly declared provenance, not a new verification. Older index files without the new source section request one explicit `--build`; searches do not rebuild silently. Missing/malformed source-track records are listed in unindexed_source_track_records. Unsupported member schemas remain listed separately and may still have valid source associations.
+
+Like other search modes, source-path matching is case-insensitive, accepts slash/backslash spelling and limits output by default. It does not open the source_path as a filesystem path. A miss still does not prove no analysis exists in an unsupported older schema.

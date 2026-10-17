@@ -162,5 +162,75 @@ class LocatorTest(unittest.TestCase):
         self.assertEqual(result['total_matches'], 1)
 
 
+class SourcePathLocatorTest(unittest.TestCase):
+    setUp=LocatorTest.setUp
+    write=LocatorTest.write
+    invoke=LocatorTest.invoke
+    # Reuse fixture setup, but the new checks exercise source association, not role inference.
+    def track(self, path='src/RotationValue.java', sha='a'*64, revision='pinned'):
+        return dict(path=path, sha256=sha, revision=revision)
+
+    def add_track(self, filename='A-EVIDENCE.json', tracks=None):
+        data=json.loads((self.root/filename).read_text())
+        data['source_tracks']=tracks if tracks is not None else [self.track()]
+        self.write(filename,data)
+
+    def test_source_filename_is_not_a_guessed_owner(self):
+        self.add_track();index=locator.build(self.root)
+        row=locator.search(index,source_path='rotationvalue.java')['results'][0]
+        self.assertEqual(row['source_path'],'src/RotationValue.java')
+        self.assertNotIn('owner',row);self.assertNotIn('mapping',row)
+        self.assertFalse(row['source_bytes_rechecked'])
+        self.assertEqual(locator.search(index,owner='RotationValue')['total_matches'],0)
+
+    def test_source_hash_and_revision_groups_are_preserved(self):
+        self.add_track(tracks=[self.track(),self.track()]);self.add_track('B-EVIDENCE.json')
+        index=locator.build(self.root);self.assertEqual(len(index['source_files']),1)
+        self.assertEqual(index['source_files'][0]['evidence'],['A-EVIDENCE.json','B-EVIDENCE.json'])
+        self.add_track('B-EVIDENCE.json',[self.track(sha='b'*64)])
+        self.assertEqual(len(locator.build(self.root)['source_files']),2)
+
+    def test_source_slashes_case_and_bounded_results(self):
+        self.add_track(tracks=[self.track('src/a/Item.java'),self.track('src/b/Item.java')]);index=locator.build(self.root)
+        self.assertEqual(locator.search(index,source_path='SRC\\A\\ITEM.JAVA')['total_matches'],1)
+        result=locator.search(index,source_path='Item.java',limit=1)
+        self.assertEqual(result['total_matches'],2);self.assertTrue(result['truncated'])
+
+    def test_source_default_reads_no_evidence_or_source_file(self):
+        self.add_track(tracks=[self.track('/not-present/source/RotationValue.java')]);self.invoke('--build')
+        (self.root/'A-EVIDENCE.json').unlink()
+        row=self.invoke('--source-path','RotationValue.java')
+        self.assertEqual(row['freshness'],'UNCHECKED_SNAPSHOT');self.assertEqual(row['total_matches'],1)
+
+    def test_source_selected_checks_evidence_only(self):
+        self.add_track();self.invoke('--build');(self.root/locator.MAP).unlink()
+        row=self.invoke('--source-path','RotationValue.java','--check-selected')
+        self.assertEqual(row['selected_hashes'],{'A-EVIDENCE.json':True})
+        self.assertFalse(row['results'][0]['source_bytes_rechecked'])
+        self.write('A-EVIDENCE.json',{'changed':True})
+        with self.assertRaises(SystemExit):self.invoke('--source-path','RotationValue.java','--check-selected')
+
+    def test_unsupported_member_schema_can_still_have_source_association(self):
+        self.add_track('UNSUPPORTED-EVIDENCE.json');index=locator.build(self.root)
+        self.assertIn('UNSUPPORTED-EVIDENCE.json',index['unindexed_evidence_schemas'])
+        self.assertEqual(locator.search(index,source_path='RotationValue.java')['results'][0]['evidence'],['UNSUPPORTED-EVIDENCE.json'])
+        self.assertNotIn('invented',index['owners'])
+
+    def test_malformed_source_tracks_are_reported(self):
+        self.add_track(tracks=[{'path':'x'},self.track(sha='bad')]);index=locator.build(self.root)
+        self.assertEqual(len(index['unindexed_source_track_records']),2);self.assertEqual(index['source_files'],[])
+        self.add_track(tracks={'unexpected':'dict'});self.assertEqual(len(locator.build(self.root)['unindexed_source_track_records']),1)
+
+    def test_old_index_requires_explicit_rebuild_for_new_mode(self):
+        index=locator.build(self.root);del index['source_files']
+        with self.assertRaises(ValueError):locator.search(index,source_path='X.java')
+        self.assertEqual(locator.search(index,owner='A')['total_matches'],1)
+
+    def test_source_selection_path_safety_still_applies(self):
+        self.add_track();self.invoke('--build')
+        p=self.root/locator.INDEX;index=json.loads(p.read_text());index['source_files'][0]['evidence']=['../outside.json'];p.write_text(json.dumps(index))
+        with self.assertRaises(SystemExit):self.invoke('--source-path','RotationValue.java','--check-selected')
+
+
 if __name__ == '__main__':
     unittest.main()

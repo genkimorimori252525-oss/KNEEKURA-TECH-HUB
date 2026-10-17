@@ -1,8 +1,8 @@
 {
   "scope": "opt-in evidence navigation only",
   "unit_test_exit_code": 0,
-  "unit_tests": 16,
-  "unit_output": "test_alias_build_rejects_unanchored_stale_and_unsafe_rows (test_evidence_locator_ysm_265.LocatorTest.test_alias_build_rejects_unanchored_stale_and_unsafe_rows) ... ok\ntest_alias_does_not_replace_formal_mapping (test_evidence_locator_ysm_265.LocatorTest.test_alias_does_not_replace_formal_mapping) ... ok\ntest_alias_selected_catalog_and_doc_freshness (test_evidence_locator_ysm_265.LocatorTest.test_alias_selected_catalog_and_doc_freshness) ... ok\ntest_alias_without_formal_mapping_remains_unmapped (test_evidence_locator_ysm_265.LocatorTest.test_alias_without_formal_mapping_remains_unmapped) ... ok\ntest_bounded_results (test_evidence_locator_ysm_265.LocatorTest.test_bounded_results) ... ok\ntest_build_deterministic_and_no_reference_promotion (test_evidence_locator_ysm_265.LocatorTest.test_build_deterministic_and_no_reference_promotion) ... ok\ntest_default_alias_search_does_not_read_catalog (test_evidence_locator_ysm_265.LocatorTest.test_default_alias_search_does_not_read_catalog) ... ok\ntest_default_search_does_not_rebuild_or_check (test_evidence_locator_ysm_265.LocatorTest.test_default_search_does_not_rebuild_or_check) ... ok\ntest_duplicate_alias_rejected (test_evidence_locator_ysm_265.LocatorTest.test_duplicate_alias_rejected) ... ok\ntest_extra_catalog_keeps_both_branch_sites (test_evidence_locator_ysm_265.LocatorTest.test_extra_catalog_keeps_both_branch_sites) ... ok\ntest_index_is_not_its_own_evidence (test_evidence_locator_ysm_265.LocatorTest.test_index_is_not_its_own_evidence) ... ok\ntest_query_and_topic (test_evidence_locator_ysm_265.LocatorTest.test_query_and_topic) ... ok\ntest_selected_hash_missing_or_stale (test_evidence_locator_ysm_265.LocatorTest.test_selected_hash_missing_or_stale) ... ok\ntest_short_owner_role_and_case_search (test_evidence_locator_ysm_265.LocatorTest.test_short_owner_role_and_case_search) ... ok\ntest_topic_hash_is_checked (test_evidence_locator_ysm_265.LocatorTest.test_topic_hash_is_checked) ... ok\ntest_unrelated_changes_do_not_run_global_check (test_evidence_locator_ysm_265.LocatorTest.test_unrelated_changes_do_not_run_global_check) ... ok\n\n----------------------------------------------------------------------\nRan 16 tests in 0.016s\n\nOK\n",
+  "unit_tests": 25,
+  "unit_output": "test_alias_build_rejects_unanchored_stale_and_unsafe_rows (__main__.LocatorTest.test_alias_build_rejects_unanchored_stale_and_unsafe_rows) ... ok\ntest_alias_does_not_replace_formal_mapping (__main__.LocatorTest.test_alias_does_not_replace_formal_mapping) ... ok\ntest_alias_selected_catalog_and_doc_freshness (__main__.LocatorTest.test_alias_selected_catalog_and_doc_freshness) ... ok\ntest_alias_without_formal_mapping_remains_unmapped (__main__.LocatorTest.test_alias_without_formal_mapping_remains_unmapped) ... ok\ntest_bounded_results (__main__.LocatorTest.test_bounded_results) ... ok\ntest_build_deterministic_and_no_reference_promotion (__main__.LocatorTest.test_build_deterministic_and_no_reference_promotion) ... ok\ntest_default_alias_search_does_not_read_catalog (__main__.LocatorTest.test_default_alias_search_does_not_read_catalog) ... ok\ntest_default_search_does_not_rebuild_or_check (__main__.LocatorTest.test_default_search_does_not_rebuild_or_check) ... ok\ntest_duplicate_alias_rejected (__main__.LocatorTest.test_duplicate_alias_rejected) ... ok\ntest_extra_catalog_keeps_both_branch_sites (__main__.LocatorTest.test_extra_catalog_keeps_both_branch_sites) ... ok\ntest_index_is_not_its_own_evidence (__main__.LocatorTest.test_index_is_not_its_own_evidence) ... ok\ntest_query_and_topic (__main__.LocatorTest.test_query_and_topic) ... ok\ntest_selected_hash_missing_or_stale (__main__.LocatorTest.test_selected_hash_missing_or_stale) ... ok\ntest_short_owner_role_and_case_search (__main__.LocatorTest.test_short_owner_role_and_case_search) ... ok\ntest_topic_hash_is_checked (__main__.LocatorTest.test_topic_hash_is_checked) ... ok\ntest_unrelated_changes_do_not_run_global_check (__main__.LocatorTest.test_unrelated_changes_do_not_run_global_check) ... ok\ntest_malformed_source_tracks_are_reported (__main__.SourcePathLocatorTest.test_malformed_source_tracks_are_reported) ... ok\ntest_old_index_requires_explicit_rebuild_for_new_mode (__main__.SourcePathLocatorTest.test_old_index_requires_explicit_rebuild_for_new_mode) ... ok\ntest_source_default_reads_no_evidence_or_source_file (__main__.SourcePathLocatorTest.test_source_default_reads_no_evidence_or_source_file) ... ok\ntest_source_filename_is_not_a_guessed_owner (__main__.SourcePathLocatorTest.test_source_filename_is_not_a_guessed_owner) ... ok\ntest_source_hash_and_revision_groups_are_preserved (__main__.SourcePathLocatorTest.test_source_hash_and_revision_groups_are_preserved) ... ok\ntest_source_selected_checks_evidence_only (__main__.SourcePathLocatorTest.test_source_selected_checks_evidence_only) ... ok\ntest_source_selection_path_safety_still_applies (__main__.SourcePathLocatorTest.test_source_selection_path_safety_still_applies) ... usage: locator [-h] [--root ROOT]\n               (--build | --owner OWNER | --query QUERY | --topic TOPIC | --source-path SOURCE_PATH)\n               [--limit LIMIT] [--check-selected]\nlocator: error: Unsafe locator path\nok\ntest_source_slashes_case_and_bounded_results (__main__.SourcePathLocatorTest.test_source_slashes_case_and_bounded_results) ... ok\ntest_unsupported_member_schema_can_still_have_source_association (__main__.SourcePathLocatorTest.test_unsupported_member_schema_can_still_have_source_association) ... ok\n\n----------------------------------------------------------------------\nRan 25 tests in 0.028s\n\nOK\n",
   "repository_lookups": [
     {
       "arguments": [
@@ -707,19 +707,71 @@
       ],
       "matches": 1,
       "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--source-path",
+        "RotationValue.java"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--source-path",
+        "UserFunctionArgument.java"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--source-path",
+        "IValue.java"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--source-path",
+        "ClientModel.java"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--source-path",
+        "AnimationRouletteScreen.java"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--source-path",
+        "CustomMolangParser.java"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
     }
   ],
-  "seconds": 1.206,
+  "seconds": 3.698,
   "central_map_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
   "target_runtime_executed": false,
   "global_audits_run": false,
   "hashes": {
-    "tools/evidence_locator_ysm_265.py": "dead01251c4087f5401c5788d1c264652cab29f6193ec38286059987956fd859",
-    "tools/test_evidence_locator_ysm_265.py": "bad531996889ec446894c16af0422f1618e4d9df32efea850a6029050002b162",
-    "EVIDENCE-LOCATOR-2026-10-17.json": "c4489d57bf97cc25fc7c96d41e406a293a9b7e552ec66aaf4eed35bbb354a8a5",
-    "NAVIGATION-COMPARISON-ALIASES-2026-10-17.json": "c6755cb2402e975de3fcac789476b78463a1d00492ee36cd521b08e6c5ae91f2"
+    "tools/evidence_locator_ysm_265.py": "19875379f40fe73e65cb034c596777897620dd05ff4a3e61ce2da051dabe16c2",
+    "tools/test_evidence_locator_ysm_265.py": "7f8ef4c998465362d9e4c2f09bae5cd518a3605d2c9bc4abdf3bcfdff8149799",
+    "EVIDENCE-LOCATOR-2026-10-17.json": "f06b1798596512558f50568833890bba238e52b78117e65b7c26872af0521a51",
+    "NAVIGATION-COMPARISON-ALIASES-2026-10-17.json": "a46b118029b78ea2573b35a07aa69625ea0d53fdfbdda1cb9614c9420ffa699c"
   },
-  "elapsed_seconds": 3.381,
-  "index_sha256": "32e9d36e6837a39803e10c9a176d36b19c630ccace555a54cec28937d7e1be3c",
-  "comparison_alias_count": 82
+  "elapsed_seconds": 3.698,
+  "index_sha256": "f06b1798596512558f50568833890bba238e52b78117e65b7c26872af0521a51",
+  "comparison_alias_count": 82,
+  "locator_tool_sha256": "19875379f40fe73e65cb034c596777897620dd05ff4a3e61ce2da051dabe16c2",
+  "locator_tests_sha256": "7f8ef4c998465362d9e4c2f09bae5cd518a3605d2c9bc4abdf3bcfdff8149799",
+  "source_path_association_groups": 490,
+  "unindexed_source_track_record_count": 3
 }

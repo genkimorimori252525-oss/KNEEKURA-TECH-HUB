@@ -181,11 +181,17 @@ comparison used six exact classes (four output Java files), after correcting an
 initial four-class input that omitted two anonymous classes. No target execution,
 independent semantic promotion or full source equivalence is claimed.
 
+An owner-alias miss led to already analyzed RotationValue/UserFunctionArgument
+being reconsidered. The locator now offers explicit source-path search over
+cohort source tracks, without guessing owner identity or claiming full coverage.
+Ordinary lookup still reads only the compact index; selected checking verifies
+returned evidence files, not source/JAR bytes. Use this before recapturing work.
+
 Next work must resolve a concrete consumer gap or improve confidence in an
-important existing contract. Do not expand decorative/unused utilities solely
-to increase counts, treat nominal candidates as resolved dispatch, or run broad
-checks after every small edit. Native construction, external classpath and actual
-runtime behavior remain explicit evidence boundaries.
+important existing contract. Do not expand unused utilities solely for counts,
+treat nominal candidates as resolved dispatch, or run broad checks after every
+small edit. Native construction, external classpath and actual runtime behavior
+remain explicit evidence boundaries.
 
 ## Anchors
 

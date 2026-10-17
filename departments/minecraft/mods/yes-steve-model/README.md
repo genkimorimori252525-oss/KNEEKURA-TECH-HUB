@@ -516,3 +516,5 @@ bounded runtime observation rather than protection bypass.
 - [Humanoid texture registration](HUMANOID-TEXTURE-REGISTRATION-2026-10-17.md): selected readiness versus pre-registration, retained holders and first-live identity-cache delay.
 
 - [Connected transport/render review](TRANSPORT-RENDER-BATCH-REVIEW-2026-10-17.md): later fixed27-cohort integrity batch, selected Vineflower comparison and explicit remaining evidence limits.
+
+- Before recapturing a class after an owner-name miss, use the [optional locator source-path search](EVIDENCE-LOCATOR-2026-10-17.md). It finds existing source-track cohorts without guessing a class mapping or treating file presence as full semantic coverage.
