@@ -49,3 +49,7 @@ After choosing an evidence file, use [the one-file member viewer](MEMBER-EVIDENC
 For an exact-symbol caller inventory, [validate the target declaration](DECLARED-TARGET-INVENTORY-2026-10-17.md) before interpreting zero matches. A valid declaration still does not close native, external, reflective or inherited-owner call paths. This targeted check is not an automatic full-repository audit.
 
 - [Roulette expression forms](ROULETTE-EXPRESSION-UI-RECOVERY-2026-10-17.md): three GUI emitters, local queue before optional relay, distinct parse-exception ownership, display versus sent slider values, and eight JDK-only lexical predicate examples.
+
+- [Expression versus state transport](EXPRESSION-STATE-TRANSPORT-INDEX-2026-10-17.md): optional end-to-end route guide; local queue, dirty state, drain-before-channel-check and remote application are distinct boundaries.
+
+- [Roulette form ownership and selection](ROULETTE-FORM-OWNERSHIP-RECOVERY-2026-10-17.md): shared arrays/maps, subclass-based form dispatch, model-wide navigation cache, and remote/local animation target distinctions.

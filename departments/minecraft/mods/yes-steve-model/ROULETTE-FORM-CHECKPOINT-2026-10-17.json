@@ -1,0 +1,75 @@
+{
+  "format": "kneekura.ysm-roulette-form-checkpoint.v1",
+  "cohort_manifest": [
+    [
+      "ROULETTE-FORM-OWNERSHIP",
+      "roulette_form_ownership",
+      true
+    ],
+    [
+      "ROULETTE-EXPRESSION-UI",
+      "roulette_expression_ui",
+      true
+    ],
+    [
+      "MODEL-ASSET-HELPERS",
+      "model_asset_helpers",
+      true
+    ],
+    [
+      "ANIMATION-PACKET-ROUTING",
+      "animation_packet_routing",
+      true
+    ]
+  ],
+  "cohorts": [
+    {
+      "cohort": "ROULETTE-FORM-OWNERSHIP",
+      "tool_sha256": "684640f6710d1bfcc348417270addc5136c330c6f55b4e6ff32c2ab11d03bd22",
+      "evidence_sha256": "da31e8408d858fd7fd9bcb4a0b4f9c7b1703136f4b0b47f0cf29314138fd1dc9",
+      "rerun_receipt_sha256": "12fe1c146d99b4e8274b2956f88891d2fe63debe3ffa4f44ca5bfe3c45b769a3",
+      "checks": 112,
+      "negative_controls": 10,
+      "status": "PASS"
+    },
+    {
+      "cohort": "ROULETTE-EXPRESSION-UI",
+      "tool_sha256": "1fad237f1a6e5576fbb5ddde2bac68c729447c7b2a3e48abb6b13f35f9a45429",
+      "evidence_sha256": "b83e4b08d3252cc94aa94e410b2d61af76c8a9d9b25dda7e4f9f55afa023c6b8",
+      "rerun_receipt_sha256": "c92aac6d176bcf963332234d65963d52d57e0a209c53c4c8cf534e93df832db3",
+      "checks": 280,
+      "negative_controls": 7,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MODEL-ASSET-HELPERS",
+      "tool_sha256": "a1be85ede0282ac680b580db17edb410bb7925d57f060373840447010bba1f95",
+      "evidence_sha256": "1ab3aef7c1863bb0b09d60c24c56cd03cc61cb5dea1c1cee9b542c7e8d0b99c2",
+      "rerun_receipt_sha256": "2a569c64a99ae7189e56deb3e7b4da092e8895a6d2522a827e793c0c500a2260",
+      "checks": 179,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "ANIMATION-PACKET-ROUTING",
+      "tool_sha256": "f01a7bc387e354d75a41fe8d3f9bcc8479fa2190bb61fc6a450fc8f66200eff0",
+      "evidence_sha256": "43fb20223540b1236c6a62e8bfd5421ee7507ec145d9c477e98980b0cc77b61d",
+      "rerun_receipt_sha256": "80f52a51f73d1c340d6a9d5ab980fb1936124b3a062953d180115ec770ebff93",
+      "checks": 254,
+      "negative_controls": 10,
+      "status": "PASS"
+    }
+  ],
+  "cohort_count": 4,
+  "overlapping_method_snapshots_compared": 0,
+  "overlap_conflicts": 0,
+  "central_mapping_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
+  "central_mapping_promoted": false,
+  "independent_semantic_review": "NOT_RUN",
+  "target_runtime_executed": false,
+  "whole_project_ci_run": false,
+  "earlier_fixed17_checkpoint_modified": false,
+  "earlier_fixed10_checkpoint_modified": false,
+  "earlier_fixed9_checkpoint_modified": false,
+  "elapsed_seconds": 0.648
+}

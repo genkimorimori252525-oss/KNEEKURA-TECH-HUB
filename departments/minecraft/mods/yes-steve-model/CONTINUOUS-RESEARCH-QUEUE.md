@@ -116,10 +116,30 @@ initialization and NBT replacement are explicit; the exact vehicle helper has no
 observed direct/bootstrap caller among955 classes. The earlier35-cohort receipt
 remains frozen and does not silently include this later extension.
 
-Next finite connected question: concrete packet-side callers of the maid roulette,
-variable-change and expression bridges, distinguishing local helper checks from
-actual direction/sender/entity-routing checks. Static review only; no packets sent,
-no game/server or expression execution, and no unverified global security claim.
+Packet-side callers and expression producers are now joined: direction/sender/entity
+routing, command versus roulette relay and GUI conditions have separate bounded
+receipts. Exact caller scans validate target declarations before counting matches;
+zero matches never establishes native/reflection/external closure. Three GUI
+emitters and a decoder construct the roulette submission; command and roulette
+relay are distinct ExecuteMolang application emitters.
+
+[Expression/state transport](EXPRESSION-STATE-TRANSPORT-INDEX-2026-10-17.md) now
+connects local evaluation, dirty bookkeeping, tick drain, channel guard and remote
+application without recapturing already recorded owners. Value deltas and expression
+text are separate paths. Local pop precedes the shared channel guard; no successful
+transmission transaction is proven. New UI findings have a fixed5 checkpoint,
+four matching overlaps, and eight separate JDK-only lexical examples.
+
+Configuration-form input ownership and navigation/playback selection are recorded
+in ROULETTE-FORM-OWNERSHIP, using earlier screen snapshots. Five carriers retain
+raw values and references; form dispatch uses actual subtype. A fixed4 checkpoint
+passes without whole-project checks. The model-ID cache and local-player fallback
+remain distinct from the expression form's associated-entity target.
+
+Next finite connected question: configured animation-button sound dispatch and
+its actual callers, reusing existing sound manager and roulette screen evidence.
+Do not infer active playback merely from a stored sound field. Keep external
+widgets/native model construction and visible/audio outcomes outside static proof.
 
 ## Anchors
 
