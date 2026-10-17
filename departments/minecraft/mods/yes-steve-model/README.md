@@ -355,3 +355,5 @@ bounded runtime observation rather than protection bypass.
 - [Curios query extension](CURIOS-QUERY-EXTENSION-RECOVERY-2026-10-17.md): four real/placeholder names, per-thread argument caches, render toggles and cosmetic-over-raw selection.
 
 - [Projectile/fishing/client hit inputs](PROJECTILE-HIT-INPUT-RECOVERY-2026-10-17.md): default versus cached item IDs, global client hit source, and exact mixin annotation/refmap boundaries.
+
+- [Living/environment inputs](LIVING-ENVIRONMENT-INPUTS-RECOVERY-2026-10-17.md): 57 named callback roots plus ladder evaluator; actual weather/pose/shoulder/blink/attribute/angle sources and the deprecated null biome-category helper.

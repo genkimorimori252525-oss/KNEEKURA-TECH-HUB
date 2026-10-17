@@ -244,3 +244,8 @@ Projectile/fishing/hit query bodies and four exact mixin contracts are joined.
 No runtime mixin application is claimed. Continue living-entity/environment
 callbacks; distinguish default item, owner-time mainhand cache and registry type
 ID from live payload/entity identity.
+
+Living/environment callback batch is recorded. Important distinctions include
+nonempty shoulder tag versus parrot-variant validation, null biome_category,
+current/cosmetic equipment, raw movement length and degree-converted elytra angles.
+Continue view/render-context/texture input provenance and specialized functions.
