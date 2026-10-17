@@ -97,9 +97,13 @@ factory edges; a fixed5 checkpoint passes. The maid remote-struct overrides are
 bytecode no-ops/null, not inherited player synchronization. Broad role inventories
 containing a source path must not be mistaken for full semantic coverage.
 
-Next finite connected question: actual maid render/capability/tick consumers behind
-these registration sites, including readiness gates and remote-update listeners.
-Keep external TLM behavior and native renderer execution outside the proof.
+Maid render/capability/tick consumers now have a fixed5 checkpoint with exact event
+annotations. The registered remote-update class has no subscriber method, and the
+owned-maid tick callback is empty. Retrieval fallback does not imply rendering.
+
+Next finite connected question: first-person background/client-view event paths
+not covered by arm replacement, using the established renderer/camera contracts.
+Keep external rendering and native execution outside this static continuation.
 
 ## Anchors
 
