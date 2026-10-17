@@ -249,3 +249,8 @@ Living/environment callback batch is recorded. Important distinctions include
 nonempty shoulder tag versus parrot-variant validation, null biome_category,
 current/cosmetic equipment, raw movement length and degree-converted elytra angles.
 Continue view/render-context/texture input provenance and specialized functions.
+
+View/render/texture callbacks are joined; query first-person and helper first-
+person differ in shadow handling, and texture fallback still depends on model
+container availability. Continue specialized bone-coordinate and side-effect
+functions with explicit units/emission/native boundaries.

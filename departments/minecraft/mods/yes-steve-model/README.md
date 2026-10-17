@@ -357,3 +357,5 @@ bounded runtime observation rather than protection bypass.
 - [Projectile/fishing/client hit inputs](PROJECTILE-HIT-INPUT-RECOVERY-2026-10-17.md): default versus cached item IDs, global client hit source, and exact mixin annotation/refmap boundaries.
 
 - [Living/environment inputs](LIVING-ENVIRONMENT-INPUTS-RECOVERY-2026-10-17.md): 57 named callback roots plus ladder evaluator; actual weather/pose/shoulder/blink/attribute/angle sources and the deprecated null biome-category helper.
+
+- [View/render/texture inputs](VIEW-TEXTURE-INPUT-RECOVERY-2026-10-17.md): broad versus exclusive/first-person predicates, preview inventory flags, head-offset adapter and model texture-name fallback.
