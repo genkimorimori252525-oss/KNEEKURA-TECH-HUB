@@ -105,3 +105,7 @@ scope gates; runtime injection and external overrides remain out of proof.
 Model-holder replacement/readiness, registration and rendering-scope predicates
 are now recorded. Continue TextureHolder Java lifetime/readiness and renderer
 model selection; native implementation and runtime outcomes remain outside proof.
+
+Texture-holder Java readiness/publication, weak ownership and delayed-release
+ordering are recorded. Continue client tick caller and renderer texture/model
+selection; no native or GPU execution implied.

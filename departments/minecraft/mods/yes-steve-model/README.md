@@ -282,3 +282,5 @@ bounded runtime observation rather than protection bypass.
 - [Animatable override inventory](ANIMATABLE-OVERRIDE-RECOVERY-2026-10-17.md) and [exact world-render hook annotations](WORLD-RENDER-HOOK-RECOVERY-2026-10-17.md): bounded static closure; runtime injection unverified.
 
 - [Model readiness and rendering-scope gates](MODEL-READINESS-SCOPE-RECOVERY-2026-10-17.md): holder replacement, fallback eligibility and hook predicate; runtime outcomes unverified.
+
+- [Texture-holder readiness and lifetime](TEXTURE-HOLDER-LIFETIME-RECOVERY-2026-10-17.md): Java publication, queued registration and delayed release; GPU behavior unverified.
