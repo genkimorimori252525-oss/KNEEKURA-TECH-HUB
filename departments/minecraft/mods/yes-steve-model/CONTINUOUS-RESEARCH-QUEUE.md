@@ -121,3 +121,7 @@ EntityStateTracker and Molang query inputs; whole-mod analysis remains active.
 State tracker cache lifetimes and position-delta axis query are recorded. Continue
 speed/delta-time and movement-direction query consumers, preserving units and
 zero-delta boundaries rather than treating displacement as physical velocity.
+
+Movement/time query registration and arithmetic are recorded with selected-method
+closure. Continue ContextBinding variable wrappers and numeric/null propagation;
+helper NaN is not yet a claim about the final Molang-visible value.

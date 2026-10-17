@@ -290,3 +290,5 @@ bounded runtime observation rather than protection bypass.
 - [Java render-cycle and array handoff](JAVA-RENDER-BOUNDARY-RECOVERY-2026-10-17.md): exact native declaration boundary and legacy Java writer; native implementation unresolved.
 
 - [State tracker and position-delta input](STATE-TRACKER-INPUT-RECOVERY-2026-10-17.md): entity/render tick cache lifetimes and interpolated displacement; runtime behavior unverified.
+
+- [Movement-query provenance and units](MOVEMENT-QUERY-RECOVERY-2026-10-17.md): velocity versus sampled displacement, time units and directional-input formulas; wrapper propagation pending.
