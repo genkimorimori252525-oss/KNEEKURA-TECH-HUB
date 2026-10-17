@@ -148,10 +148,18 @@ No exact Java caller of the Native Access-marked safe facade was found. Native/
 model construction flags remain an evidence boundary, not assumed true or false.
 The existing user-function cache dossier does not prove that missing producer.
 
-Next finite connected question: remaining pure-Java user-function argument and
-return-frame semantics not already closed by existing evaluator/storage dossiers.
-Inspect the recorded bodies first; do not extend into native loading or repeat
-whole-target checks simply because a Java inventory reaches this boundary.
+Argument, return-frame and user-function target-cache semantics were already
+covered; their existing dossiers were reused rather than recaptured. A source-path
+coverage hint exposed five model-container roles with no full member dossier;
+exact owner lookup confirmed broad catalogs alone were their old evidence.
+CLIENT-MODEL-CONTAINERS now records42 declarations and a fixed7 factory/builder/
+language checkpoint. Captured path presence and method counts remain distinct
+from semantic completeness or runtime acceptance.
+
+Next finite connected question: Java color/axis/memoization utilities only where
+actual pipeline consumers establish relevance. First inspect existing evidence
+and exact references; avoid installing additional tools or claiming native output
+semantics from declarations. No whole-project CI or target execution is needed.
 
 ## Anchors
 

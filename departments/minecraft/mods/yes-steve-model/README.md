@@ -507,3 +507,5 @@ bounded runtime observation rather than protection bypass.
 
 - [Configured button sound reachability](ROULETTE-SOUND-CONSUMERS-2026-10-17.md): stored sound field versus fixed UI click requests; exact getter/field inventory does not prove global runtime non-use.
 - [User-function comment filtering](USER-FUNCTION-COMMENT-FILTER-2026-10-17.md): optional preprocessing, quote rules, CRLF handling and removed-block token adjacency; reuses existing parser evidence.
+
+- [Client model containers](CLIENT-MODEL-CONTAINERS-RECOVERY-2026-10-17.md): shared data, constructor-time factory assembly, separate default texture inputs and nullable GUI image lookups.

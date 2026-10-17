@@ -1,0 +1,117 @@
+{
+  "format": "kneekura.ysm-client-model-container-checkpoint.v1",
+  "cohort_manifest": [
+    [
+      "CLIENT-MODEL-CONTAINERS",
+      "client_model_containers",
+      true
+    ],
+    [
+      "CONDITIONAL-ANIMATION-NAMES",
+      "conditional_animation_names",
+      true
+    ],
+    [
+      "PLAYER-CONTROLLER-ASSEMBLY",
+      "player_controller_assembly",
+      true
+    ],
+    [
+      "FIRST-PERSON-ARM-ASSEMBLY",
+      "first_person_arm_assembly",
+      true
+    ],
+    [
+      "VEHICLE-PROJECTILE-CONTROLLERS",
+      "vehicle_projectile_controllers",
+      true
+    ],
+    [
+      "MAID-CONTROLLER-REGISTRATION",
+      "maid_controller_registration",
+      true
+    ],
+    [
+      "MODEL-LANGUAGE-FALLBACK",
+      "model_language_fallback",
+      true
+    ]
+  ],
+  "cohorts": [
+    {
+      "cohort": "CLIENT-MODEL-CONTAINERS",
+      "tool_sha256": "e0c179a4bd77dd67fda7d84c4593d5362d8a77e2865b401de33d51992e96a53f",
+      "evidence_sha256": "84a5ba48c0c76b4fec9e46ec8268bdc8f2a4686c03c8b00a3f2374698cdc9670",
+      "rerun_receipt_sha256": "ef03be08f289a5aeed51b82541d7bd73cca73ba8c8e19d6e22cb7580fc19c81d",
+      "checks": 237,
+      "negative_controls": 10,
+      "status": "PASS"
+    },
+    {
+      "cohort": "CONDITIONAL-ANIMATION-NAMES",
+      "tool_sha256": "fe5a8c5ad75c3a2f2a1511a53a8c3c772cda2a78c12c1ccc8578373c5d7380e6",
+      "evidence_sha256": "1b03d6529d5e1bf7fb9eb064040b0185281278b7224427412e0118dd5b1472be",
+      "rerun_receipt_sha256": "923acab092d89e32541815002ca24d1ad5ee5605f6013c460c4c9a94f5ce01b4",
+      "checks": 321,
+      "negative_controls": 11,
+      "status": "PASS"
+    },
+    {
+      "cohort": "PLAYER-CONTROLLER-ASSEMBLY",
+      "tool_sha256": "9f129827b9e9a051cc95d2b798771cc387b4bf6dbf867d7d5665d9a2cd9a1703",
+      "evidence_sha256": "90c6d517b65bf16855029899ab2633abb19ad7e8aa22459d703ff8ea45c5cb8f",
+      "rerun_receipt_sha256": "4803445e477faa72dab4826e8b97e0c2f1c5110f9b5964b15fc7c3c1c8a22e51",
+      "checks": 437,
+      "negative_controls": 13,
+      "status": "PASS"
+    },
+    {
+      "cohort": "FIRST-PERSON-ARM-ASSEMBLY",
+      "tool_sha256": "1ab3974621b93c8bef3c534aa3420e0a09b4963a1406184a8f8d223068524002",
+      "evidence_sha256": "d8745594aaeb084672f068fec145c7546270475844c6797ed4ee1f6580137c2b",
+      "rerun_receipt_sha256": "65b81232d244fc111dae1beb6241db4cfa60ae6d7c65abefb8fe803f6a18b43e",
+      "checks": 242,
+      "negative_controls": 10,
+      "status": "PASS"
+    },
+    {
+      "cohort": "VEHICLE-PROJECTILE-CONTROLLERS",
+      "tool_sha256": "7101cac357674fbcba715358bd2aa8a007e19a2b1db0bdfc7d5360442a7c38a6",
+      "evidence_sha256": "1630fbdc84f70b69c88ecd4c42fb21983aaca41064bb7f5559629f37a03d54f9",
+      "rerun_receipt_sha256": "e1ff229e1bb1bac5a96a95aefc63a45d3b9d088e9e3530220ad67bc59a0cd816",
+      "checks": 460,
+      "negative_controls": 17,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MAID-CONTROLLER-REGISTRATION",
+      "tool_sha256": "2032f9f8cb0587bdf3f6d9006a4d4756028da95ffe89199e98fc8610964c67ab",
+      "evidence_sha256": "eafce1a097f175e14ad5326eba046e6d647b8093b82c34ff8135ef708636829c",
+      "rerun_receipt_sha256": "bd43bf5f4ec9c16555b53f6093874fd5e13e52e839c13599badd9bdcedba6750",
+      "checks": 294,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MODEL-LANGUAGE-FALLBACK",
+      "tool_sha256": "c3dc75d1482779c4f03929b763ccd66b842322f02c8898d1b15ad8eb9083a607",
+      "evidence_sha256": "b5959e472e83e8469b1ae2c4fd97f0d6440a56430353f76a7c23c6eb280a9b23",
+      "rerun_receipt_sha256": "d84fc8b90ddbc4632987e4509aebfa93709ffcfa8aa0577c295d6a615ba11a68",
+      "checks": 90,
+      "negative_controls": 7,
+      "status": "PASS"
+    }
+  ],
+  "cohort_count": 7,
+  "overlapping_method_snapshots_compared": 0,
+  "overlap_conflicts": 0,
+  "central_mapping_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
+  "central_mapping_promoted": false,
+  "independent_semantic_review": "NOT_RUN",
+  "target_runtime_executed": false,
+  "whole_project_ci_run": false,
+  "earlier_fixed17_checkpoint_modified": false,
+  "earlier_fixed10_checkpoint_modified": false,
+  "earlier_fixed9_checkpoint_modified": false,
+  "elapsed_seconds": 1.211
+}
