@@ -145,3 +145,7 @@ ordering; logical frame pop is not backing-array erasure or transactional push.
 Storage initialize/push/pop direct callers are inventoried; only null public-name
 initialization appears on the scanned Java path. Continue function arguments and
 loop/foreach ordering; do not imply every expression is enclosed by a temp frame.
+
+Function argument/loop/foreach evaluation order and control cleanup are recorded.
+Continue parser call-argument/assignment validation and user-function dispatch;
+1024 loop count is not a universal evaluator work budget.

@@ -302,3 +302,5 @@ bounded runtime observation rather than protection bypass.
 - [Runtime storage and call frames](RUNTIME-STORAGE-FRAMES-RECOVERY-2026-10-17.md): public/scoped aliasing, temp frames and deferred cleanup; lifetime callers remain bounded.
 
 - [Storage lifecycle direct callers](STORAGE-CALLERS-RECOVERY-2026-10-17.md): fixed-JAR initialize/push/pop closure; root-temp and public-map limits.
+
+- [Function and loop ordering](FUNCTION-LOOP-ORDER-RECOVERY-2026-10-17.md): lazy argument getters, loop limits, foreach assignment and control cleanup.
