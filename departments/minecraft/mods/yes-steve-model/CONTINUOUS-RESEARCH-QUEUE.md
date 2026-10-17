@@ -156,10 +156,16 @@ CLIENT-MODEL-CONTAINERS now records42 declarations and a fixed7 factory/builder/
 language checkpoint. Captured path presence and method counts remain distinct
 from semantic completeness or runtime acceptance.
 
-Next finite connected question: Java color/axis/memoization utilities only where
-actual pipeline consumers establish relevance. First inspect existing evidence
-and exact references; avoid installing additional tools or claiming native output
-semantics from declarations. No whole-project CI or target execution is needed.
+Color was selected because existing renderer bodies use its default WHITE and
+channel getters.20 declarations plus exact consumer inventory and a fixed5
+checkpoint preserve17 external reference sites and10 matching repeated methods.
+Nine JDK arithmetic cases do not establish unusual inputs reaching a renderer.
+Axis/Memoizer source presence alone did not justify another semantic expansion.
+
+Next finite connected question: actual Java resource-location and texture-index
+selection in model holders where not already covered by readiness/lifetime and
+render selection dossiers. Reuse existing captures before adding a new cohort;
+keep native texture upload and pixel output outside static proof.
 
 ## Anchors
 

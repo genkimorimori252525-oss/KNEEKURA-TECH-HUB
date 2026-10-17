@@ -509,3 +509,5 @@ bounded runtime observation rather than protection bypass.
 - [User-function comment filtering](USER-FUNCTION-COMMENT-FILTER-2026-10-17.md): optional preprocessing, quote rules, CRLF handling and removed-block token adjacency; reuses existing parser evidence.
 
 - [Client model containers](CLIENT-MODEL-CONTAINERS-RECOVERY-2026-10-17.md): shared data, constructor-time factory assembly, separate default texture inputs and nullable GUI image lookups.
+
+- [Packed color and renderer channels](COLOR-CHANNEL-CONTRACT-RECOVERY-2026-10-17.md): ARGB masks, float conversion, default WHITE and actual getter consumers; Java preparation is separate from GPU output.
