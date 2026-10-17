@@ -157,3 +157,7 @@ reset/reparse callers before inferring cache lifetime across model reload.
 Java parser-pool return/reset and fn cache lifetime are joined. Native model-loader
 rent/return remains unproven. Continue Struct copy/property/assignment semantics
 and Java storage consumers; do not infer all pool state is reset on parse failure.
+
+Struct copy/alias and local/remote change bookkeeping are recorded. Continue
+pooled-name/map wrappers and change consumers; MAX_SIZE at a notification gate
+is not automatically a storage cap or a network validation guarantee.

@@ -1,0 +1,6308 @@
+{
+  "format": "kneekura.ysm-bounded-seed-evidence.v1",
+  "artifact": {
+    "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+    "sha1": "151ac7b24da8beeca1a20864565743cfd77af286",
+    "size": 63269843,
+    "version_id": "Zqooxsd2",
+    "classes": 955
+  },
+  "confidence_policy": "CONFIRMED denotes semantic correspondence reviewed against pinned source and exact instructions/relations, not recovered original symbols or whole-source equivalence. Prior community sources reused as fixture leads; no community-based promotions.",
+  "source_artifact_equivalence": "NOT_ESTABLISHED",
+  "preserved_global_negative_finding": "SOURCE_ARTIFACT_DIVERGENCE",
+  "recorded_at": "2026-10-17",
+  "detailed_operands": true,
+  "classes": [],
+  "members": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOOoOOOoooOO000o00o0oooo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(I)Ljava/lang/Object;",
+      "access": 1025
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOOoOOOoooOO000o00o0oooo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(ILjava/lang/Object;)V",
+      "access": 1025
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOOoOOOoooOO000o00o0oooo",
+      "name": "d_",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/oOOoOOOoooOO000o00o0oooo;",
+      "access": 1025
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0OOO0OoOO0OO0o00oooo000",
+      "name": "<init>",
+      "descriptor": "()V",
+      "access": 1,
+      "code_sha256": "c50ba0842f97e28f37e0aa817262abc2b9d5293621255e5c83d16a7fd0d8a581",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 2,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0OOO0OoOO0OO0o00oooo000",
+            "name": "<init>",
+            "descriptor": "(Z)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 2,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "0018"
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0OOO0OoOO0OO0o00oooo000",
+      "name": "<init>",
+      "descriptor": "(Z)V",
+      "access": 1,
+      "code_sha256": "8bffe0acaf709cf333164b35f27baa256da2857a722a3259f84ace09f63d8bb6",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "java/lang/Object",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 5,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/OoOO0oOo00o0oOO00OooOO00",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 8,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 9,
+          "opcode": "0x7"
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OoOO0oOo00o0oOO00OooOO00",
+            "name": "<init>",
+            "descriptor": "(I)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0OOO0OoOO0OO0o00oooo000",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/OoOO0oOo00o0oOO00OooOO00;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 16,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 17,
+          "opcode": "0x1b"
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0OOO0OoOO0OO0o00oooo000",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Z",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 21,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "001a"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0xbb",
+          "encoded_operands_hex": "001c"
+        },
+        {
+          "offset": 8,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 9,
+          "opcode": "0x7",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "001f"
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "0021"
+        },
+        {
+          "offset": 16,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 17,
+          "opcode": "0x1b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "0023"
+        },
+        {
+          "offset": 21,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0OOO0OoOO0OO0o00oooo000",
+      "name": "<init>",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/OoOO0oOo00o0oOO00OooOO00;)V",
+      "access": 2,
+      "code_sha256": "ab409f46cbecfb641fafb24056bc4735f04642753f30588efa355ef5794dc47f",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "java/lang/Object",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0OOO0OoOO0OO0o00oooo000",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/OoOO0oOo00o0oOO00OooOO00;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 10,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0OOO0OoOO0OO0o00oooo000",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Z",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "001a"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "0021"
+        },
+        {
+          "offset": 9,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 10,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "0023"
+        },
+        {
+          "offset": 14,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0OOO0OoOO0OO0o00oooo000",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(I)Ljava/lang/Object;",
+      "access": 1,
+      "code_sha256": "2bfd75ac39a37e3fd32e8dc47528684e640fbbb1cb0704420c9df528e297df11",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0OOO0OoOO0OO0o00oooo000",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/OoOO0oOo00o0oOO00OooOO00;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x1b"
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OoOO0oOo00o0oOO00OooOO00",
+            "name": "get",
+            "descriptor": "(I)Ljava/lang/Object;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0021"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x1b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0029"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0OOO0OoOO0OO0o00oooo000",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(ILjava/lang/Object;)V",
+      "access": 1,
+      "code_sha256": "7a0f37aaa5647877410ff3d04b02eba695d8256029c8a23d4b6f451b18e81623",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0OOO0OoOO0OO0o00oooo000",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/OoOO0oOo00o0oOO00OooOO00;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x1b"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OoOO0oOo00o0oOO00OooOO00",
+            "name": "put",
+            "descriptor": "(ILjava/lang/Object;)Ljava/lang/Object;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0x57"
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0021"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x1b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "002e"
+        },
+        {
+          "offset": 9,
+          "opcode": "0x57",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0OOO0OoOO0OO0o00oooo000",
+      "name": "d_",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/oOOoOOOoooOO000o00o0oooo;",
+      "access": 1,
+      "code_sha256": "c86f06f13e17b46b01cfc8b3e3e0224ead4113e8d5ecc5abb621bd7039fb60be",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0OOO0OoOO0OO0o00oooo000",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Z",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x99",
+          "branch_target": 19
+        },
+        {
+          "offset": 7,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/O0OOO0OoOO0OO0o00oooo000",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 10,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 11,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0OOO0OoOO0OO0o00oooo000",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/OoOO0oOo00o0oOO00OooOO00;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 15,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0OOO0OoOO0OO0o00oooo000",
+            "name": "<init>",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/OoOO0oOo00o0oOO00OooOO00;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 19,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/O0OOO0OoOO0OO0o00oooo000",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 22,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 23,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/OoOO0oOo00o0oOO00OooOO00",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 26,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 27,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 28,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0OOO0OoOO0OO0o00oooo000",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/OoOO0oOo00o0oOO00OooOO00;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 31,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OoOO0oOo00o0oOO00OooOO00",
+            "name": "<init>",
+            "descriptor": "(Lit/unimi/dsi/fastutil/ints/Int2ReferenceOpenHashMap;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 34,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0OOO0OoOO0OO0o00oooo000",
+            "name": "<init>",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/OoOO0oOo00o0oOO00OooOO00;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 37,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0023"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x99",
+          "encoded_operands_hex": "000f"
+        },
+        {
+          "offset": 7,
+          "opcode": "0xbb",
+          "encoded_operands_hex": "0002"
+        },
+        {
+          "offset": 10,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 11,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0021"
+        },
+        {
+          "offset": 15,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "0032"
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 19,
+          "opcode": "0xbb",
+          "encoded_operands_hex": "0002"
+        },
+        {
+          "offset": 22,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 23,
+          "opcode": "0xbb",
+          "encoded_operands_hex": "001c"
+        },
+        {
+          "offset": 26,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 27,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 28,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0021"
+        },
+        {
+          "offset": 31,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "0035"
+        },
+        {
+          "offset": 34,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "0032"
+        },
+        {
+          "offset": 37,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0OOO0OoOO0OO0o00oooo000",
+      "name": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "code_sha256": "566d226b094050090ca634d0a74e2efa253afd6ebe2f55c221695133544d018a",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "java/lang/StringBuilder",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "java/lang/StringBuilder",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 7,
+          "opcode": "0x4c"
+        },
+        {
+          "offset": 8,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 9,
+          "opcode": "0x12",
+          "reference": {
+            "string": "struct{",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/StringBuilder",
+            "name": "append",
+            "descriptor": "(Ljava/lang/String;)Ljava/lang/StringBuilder;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0x57"
+        },
+        {
+          "offset": 15,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 16,
+          "opcode": "0x3d"
+        },
+        {
+          "offset": 17,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0OOO0OoOO0OO0o00oooo000",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/OoOO0oOo00o0oOO00OooOO00;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 21,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OoOO0oOo00o0oOO00OooOO00",
+            "name": "int2ReferenceEntrySet",
+            "descriptor": "()Lit/unimi/dsi/fastutil/ints/Int2ReferenceMap$FastEntrySet;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 24,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/Int2ReferenceMap$FastEntrySet",
+            "name": "iterator",
+            "descriptor": "()Lit/unimi/dsi/fastutil/objects/ObjectIterator;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 29,
+          "opcode": "0x4e"
+        },
+        {
+          "offset": 30,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 31,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/Iterator",
+            "name": "hasNext",
+            "descriptor": "()Z",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 36,
+          "opcode": "0x99",
+          "branch_target": 121
+        },
+        {
+          "offset": 39,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 40,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/Iterator",
+            "name": "next",
+            "descriptor": "()Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 45,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "it/unimi/dsi/fastutil/ints/Int2ReferenceMap$Entry",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 48,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 50,
+          "opcode": "0x1c"
+        },
+        {
+          "offset": 51,
+          "opcode": "0x9a",
+          "branch_target": 61
+        },
+        {
+          "offset": 54,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 55,
+          "opcode": "0x12",
+          "reference": {
+            "string": ", ",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 57,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/StringBuilder",
+            "name": "append",
+            "descriptor": "(Ljava/lang/String;)Ljava/lang/StringBuilder;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 60,
+          "opcode": "0x57"
+        },
+        {
+          "offset": 61,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 62,
+          "opcode": "0x3d"
+        },
+        {
+          "offset": 63,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 64,
+          "opcode": "0x12",
+          "reference": {
+            "string": "%s=%s",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 66,
+          "opcode": "0x5"
+        },
+        {
+          "offset": 67,
+          "opcode": "0xbd",
+          "reference": {
+            "class_name": "java/lang/Object",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 70,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 71,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 72,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 74,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/Int2ReferenceMap$Entry",
+            "name": "getIntKey",
+            "descriptor": "()I",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 79,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOO0OO0oO0oooo00OooooO0O",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(I)Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 82,
+          "opcode": "0x53"
+        },
+        {
+          "offset": 83,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 84,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 85,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 87,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/Int2ReferenceMap$Entry",
+            "name": "getValue",
+            "descriptor": "()Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 92,
+          "opcode": "0xc7",
+          "branch_target": 100
+        },
+        {
+          "offset": 95,
+          "opcode": "0x12",
+          "reference": {
+            "string": "null",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 97,
+          "opcode": "0xa7",
+          "branch_target": 110
+        },
+        {
+          "offset": 100,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 102,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/Int2ReferenceMap$Entry",
+            "name": "getValue",
+            "descriptor": "()Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 107,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/Object",
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 110,
+          "opcode": "0x53"
+        },
+        {
+          "offset": 111,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/String",
+            "name": "format",
+            "descriptor": "(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 114,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/StringBuilder",
+            "name": "append",
+            "descriptor": "(Ljava/lang/String;)Ljava/lang/StringBuilder;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 117,
+          "opcode": "0x57"
+        },
+        {
+          "offset": 118,
+          "opcode": "0xa7",
+          "branch_target": 30
+        },
+        {
+          "offset": 121,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 122,
+          "opcode": "0x12",
+          "reference": {
+            "string": "}",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 124,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/StringBuilder",
+            "name": "append",
+            "descriptor": "(Ljava/lang/String;)Ljava/lang/StringBuilder;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 127,
+          "opcode": "0x57"
+        },
+        {
+          "offset": 128,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 129,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/StringBuilder",
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 132,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0xbb",
+          "encoded_operands_hex": "0039"
+        },
+        {
+          "offset": 3,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "003a"
+        },
+        {
+          "offset": 7,
+          "opcode": "0x4c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 8,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 9,
+          "opcode": "0x12",
+          "encoded_operands_hex": "3c"
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0040"
+        },
+        {
+          "offset": 14,
+          "opcode": "0x57",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 15,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 16,
+          "opcode": "0x3d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 17,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0021"
+        },
+        {
+          "offset": 21,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0044"
+        },
+        {
+          "offset": 24,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00480100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 29,
+          "opcode": "0x4e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 30,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 31,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00500100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 36,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0055"
+        },
+        {
+          "offset": 39,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 40,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00540100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 45,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "000d"
+        },
+        {
+          "offset": 48,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 50,
+          "opcode": "0x1c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 51,
+          "opcode": "0x9a",
+          "encoded_operands_hex": "000a"
+        },
+        {
+          "offset": 54,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 55,
+          "opcode": "0x12",
+          "encoded_operands_hex": "56"
+        },
+        {
+          "offset": 57,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0040"
+        },
+        {
+          "offset": 60,
+          "opcode": "0x57",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 61,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 62,
+          "opcode": "0x3d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 63,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 64,
+          "opcode": "0x12",
+          "encoded_operands_hex": "58"
+        },
+        {
+          "offset": 66,
+          "opcode": "0x5",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 67,
+          "opcode": "0xbd",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 70,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 71,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 72,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 74,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "005c0100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 79,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0061"
+        },
+        {
+          "offset": 82,
+          "opcode": "0x53",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 83,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 84,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 85,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 87,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00640100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 92,
+          "opcode": "0xc7",
+          "encoded_operands_hex": "0008"
+        },
+        {
+          "offset": 95,
+          "opcode": "0x12",
+          "encoded_operands_hex": "66"
+        },
+        {
+          "offset": 97,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "000d"
+        },
+        {
+          "offset": 100,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 102,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00640100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 107,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "006c"
+        },
+        {
+          "offset": 110,
+          "opcode": "0x53",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 111,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0070"
+        },
+        {
+          "offset": 114,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0040"
+        },
+        {
+          "offset": 117,
+          "opcode": "0x57",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 118,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "ffa8"
+        },
+        {
+          "offset": 121,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 122,
+          "opcode": "0x12",
+          "encoded_operands_hex": "72"
+        },
+        {
+          "offset": 124,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0040"
+        },
+        {
+          "offset": 127,
+          "opcode": "0x57",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 128,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 129,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0073"
+        },
+        {
+          "offset": 132,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0O00OoOOooo0OoooOOoo00O",
+      "name": "<init>",
+      "descriptor": "()V",
+      "access": 1,
+      "code_sha256": "2235d032ec0f6171a15233996a754d78c478c8f6d4b9761c234da33d638baec5",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "java/lang/Object",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "000e"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0O00OoOOooo0OoooOOoo00O",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(I)Ljava/lang/Object;",
+      "access": 1,
+      "code_sha256": "a8bfe8b05f6801862281423d1b71951b7fb2d306047664282f08e9c6ee9bd50b",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x1b"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0O00OoOOooo0OoooOOoo00O",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xa0",
+          "branch_target": 15
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0O00OoOOooo0OoooOOoo00O",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Float",
+            "name": "valueOf",
+            "descriptor": "(F)Ljava/lang/Float;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 15,
+          "opcode": "0x1b"
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0O00OoOOooo0OoooOOoo00O",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 19,
+          "opcode": "0xa0",
+          "branch_target": 30
+        },
+        {
+          "offset": 22,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 23,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0O00OoOOooo0OoooOOoo00O",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "()F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 26,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Float",
+            "name": "valueOf",
+            "descriptor": "(F)Ljava/lang/Float;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 29,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 30,
+          "opcode": "0x1b"
+        },
+        {
+          "offset": 31,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0O00OoOOooo0OoooOOoo00O",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 34,
+          "opcode": "0xa0",
+          "branch_target": 45
+        },
+        {
+          "offset": 37,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 38,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0O00OoOOooo0OoooOOoo00O",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "()F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 41,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Float",
+            "name": "valueOf",
+            "descriptor": "(F)Ljava/lang/Float;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 44,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 45,
+          "opcode": "0x1"
+        },
+        {
+          "offset": 46,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x1b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0011"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xa0",
+          "encoded_operands_hex": "000b"
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0014"
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "001a"
+        },
+        {
+          "offset": 14,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 15,
+          "opcode": "0x1b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "001c"
+        },
+        {
+          "offset": 19,
+          "opcode": "0xa0",
+          "encoded_operands_hex": "000b"
+        },
+        {
+          "offset": 22,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 23,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "001e"
+        },
+        {
+          "offset": 26,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "001a"
+        },
+        {
+          "offset": 29,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 30,
+          "opcode": "0x1b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 31,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0020"
+        },
+        {
+          "offset": 34,
+          "opcode": "0xa0",
+          "encoded_operands_hex": "000b"
+        },
+        {
+          "offset": 37,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 38,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0022"
+        },
+        {
+          "offset": 41,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "001a"
+        },
+        {
+          "offset": 44,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 45,
+          "opcode": "0x1",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 46,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0O00OoOOooo0OoooOOoo00O",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()F",
+      "access": 1028
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0O00OoOOooo0OoooOOoo00O",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "()F",
+      "access": 1028
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0O00OoOOooo0OoooOOoo00O",
+      "name": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "()F",
+      "access": 1028
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0O00OoOOooo0OoooOOoo00O",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(ILjava/lang/Object;)V",
+      "access": 1,
+      "code_sha256": "149488d869cbef080602a371ab0d39d97af103fb726aaeb02ccd36c06f494e5d",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0O00OoOOooo0OoooOOoo00O",
+      "name": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "code_sha256": "ed9c434fd7ddf8f8cb38fd96d735c42253393cb0aec1bd0e5f076dcea980c175",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x12",
+          "reference": {
+            "string": "vec3{x=%.2f, y=%.2f, z=%.2f}",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 2,
+          "opcode": "0x6"
+        },
+        {
+          "offset": 3,
+          "opcode": "0xbd",
+          "reference": {
+            "class_name": "java/lang/Object",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 6,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 7,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 8,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0O00OoOOooo0OoooOOoo00O",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Float",
+            "name": "valueOf",
+            "descriptor": "(F)Ljava/lang/Float;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 15,
+          "opcode": "0x53"
+        },
+        {
+          "offset": 16,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 17,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 18,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 19,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0O00OoOOooo0OoooOOoo00O",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "()F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 22,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Float",
+            "name": "valueOf",
+            "descriptor": "(F)Ljava/lang/Float;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 25,
+          "opcode": "0x53"
+        },
+        {
+          "offset": 26,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 27,
+          "opcode": "0x5"
+        },
+        {
+          "offset": 28,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 29,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0O00OoOOooo0OoooOOoo00O",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "()F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 32,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Float",
+            "name": "valueOf",
+            "descriptor": "(F)Ljava/lang/Float;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 35,
+          "opcode": "0x53"
+        },
+        {
+          "offset": 36,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/String",
+            "name": "format",
+            "descriptor": "(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 39,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x12",
+          "encoded_operands_hex": "27"
+        },
+        {
+          "offset": 2,
+          "opcode": "0x6",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 3,
+          "opcode": "0xbd",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 6,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 7,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 8,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0014"
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "001a"
+        },
+        {
+          "offset": 15,
+          "opcode": "0x53",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 16,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 17,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 18,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 19,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "001e"
+        },
+        {
+          "offset": 22,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "001a"
+        },
+        {
+          "offset": 25,
+          "opcode": "0x53",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 26,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 27,
+          "opcode": "0x5",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 28,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 29,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0022"
+        },
+        {
+          "offset": 32,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "001a"
+        },
+        {
+          "offset": 35,
+          "opcode": "0x53",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 36,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "002d"
+        },
+        {
+          "offset": 39,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0O00OoOOooo0OoooOOoo00O",
+      "name": "d_",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/oOOoOOOoooOO000o00o0oooo;",
+      "access": 1,
+      "code_sha256": "f99858239d4e38fd12a7d76d1d7ffce3bd311a43bc78a96befa18329790f7b28",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0O00OoOOooo0OoooOOoo00O",
+      "name": "<clinit>",
+      "descriptor": "()V",
+      "access": 8,
+      "code_sha256": "7b1b60f9d10622d932ee0511efa8c65f6bd9ddcc56e295dc29f7ec56ae9c888c",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x12",
+          "reference": {
+            "string": "x",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 2,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOO0OO0oO0oooo00OooooO0O",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;)I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb3",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0O00OoOOooo0OoooOOoo00O",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 8,
+          "opcode": "0x12",
+          "reference": {
+            "string": "y",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOO0OO0oO0oooo00OooooO0O",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;)I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb3",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0O00OoOOooo0OoooOOoo00O",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 16,
+          "opcode": "0x12",
+          "reference": {
+            "string": "z",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOO0OO0oO0oooo00OooooO0O",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;)I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 21,
+          "opcode": "0xb3",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0O00OoOOooo0OoooOOoo00O",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 24,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x12",
+          "encoded_operands_hex": "32"
+        },
+        {
+          "offset": 2,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0037"
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb3",
+          "encoded_operands_hex": "0011"
+        },
+        {
+          "offset": 8,
+          "opcode": "0x12",
+          "encoded_operands_hex": "39"
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0037"
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb3",
+          "encoded_operands_hex": "001c"
+        },
+        {
+          "offset": 16,
+          "opcode": "0x12",
+          "encoded_operands_hex": "3b"
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0037"
+        },
+        {
+          "offset": 21,
+          "opcode": "0xb3",
+          "encoded_operands_hex": "0020"
+        },
+        {
+          "offset": 24,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoO0OO0oOo0OOOoOOo0O0Oo",
+      "name": "<init>",
+      "descriptor": "(ILit/unimi/dsi/fastutil/ints/Int2FloatOpenHashMap;)V",
+      "access": 1,
+      "code_sha256": "e086425812f7f1f9ec57e7087cbf2e7954b49c15de41cf5ac1319c2a27421616",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "java/lang/Object",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoO0OO0oOo0OOOoOOo0O0Oo",
+            "name": "oo0OoO00oOoo000O0000o0oo",
+            "descriptor": "Z",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 10,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/o0Oo0O0oo000ooo0o0Oooo0o",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 13,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 14,
+          "opcode": "0x1b"
+        },
+        {
+          "offset": 15,
+          "opcode": "0x7"
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0Oo0O0oo000ooo0o0Oooo0o",
+            "name": "<init>",
+            "descriptor": "(II)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 19,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoO0OO0oOo0OOOoOOo0O0Oo",
+            "name": "Ooooo0oooO0oooOOOoO0000O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/o0Oo0O0oo000ooo0o0Oooo0o;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 22,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 23,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 24,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoO0OO0oOo0OOOoOOo0O0Oo",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "Lit/unimi/dsi/fastutil/ints/Int2FloatOpenHashMap;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 27,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 28,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "it/unimi/dsi/fastutil/ints/IntOpenHashSet",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 31,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 32,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 33,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/Int2FloatOpenHashMap",
+            "name": "keySet",
+            "descriptor": "()Lit/unimi/dsi/fastutil/ints/IntSet;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 36,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/IntOpenHashSet",
+            "name": "<init>",
+            "descriptor": "(Lit/unimi/dsi/fastutil/ints/IntCollection;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 39,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoO0OO0oOo0OOOoOOo0O0Oo",
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "Lit/unimi/dsi/fastutil/ints/IntOpenHashSet;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 42,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 43,
+          "opcode": "0x1b"
+        },
+        {
+          "offset": 44,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoO0OO0oOo0OOOoOOo0O0Oo",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 47,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "0021"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "0023"
+        },
+        {
+          "offset": 9,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 10,
+          "opcode": "0xbb",
+          "encoded_operands_hex": "0025"
+        },
+        {
+          "offset": 13,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 14,
+          "opcode": "0x1b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 15,
+          "opcode": "0x7",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "0028"
+        },
+        {
+          "offset": 19,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "002a"
+        },
+        {
+          "offset": 22,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 23,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 24,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "002c"
+        },
+        {
+          "offset": 27,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 28,
+          "opcode": "0xbb",
+          "encoded_operands_hex": "002e"
+        },
+        {
+          "offset": 31,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 32,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 33,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0034"
+        },
+        {
+          "offset": 36,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "0037"
+        },
+        {
+          "offset": 39,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "0039"
+        },
+        {
+          "offset": 42,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 43,
+          "opcode": "0x1b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 44,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "003b"
+        },
+        {
+          "offset": 47,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoO0OO0oOo0OOOoOOo0O0Oo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(I)Ljava/lang/Object;",
+      "access": 1,
+      "code_sha256": "22b9bc67bfe73d0045c43d54e506b68d9e47b8238507e200fb03371ef0da5ba6",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoO0OO0oOo0OOOoOOo0O0Oo",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "Lit/unimi/dsi/fastutil/ints/Int2FloatOpenHashMap;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x1b"
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/Int2FloatOpenHashMap",
+            "name": "get",
+            "descriptor": "(I)F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Float",
+            "name": "valueOf",
+            "descriptor": "(F)Ljava/lang/Float;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "002c"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x1b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0040"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0046"
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoO0OO0oOo0OOOoOOo0O0Oo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(ILjava/lang/Object;)V",
+      "access": 1,
+      "code_sha256": "817d0ad235bbf3d4ca8bf0dd07822d210a32fb6fe479a952a0f4a27497dc547a",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OO0O00ooOo0OO0oooOoo0Oo0",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "(Ljava/lang/Object;)F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x46"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoO0OO0oOo0OOOoOOo0O0Oo",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "Lit/unimi/dsi/fastutil/ints/Int2FloatOpenHashMap;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0x1b"
+        },
+        {
+          "offset": 10,
+          "opcode": "0x25"
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/Int2FloatOpenHashMap",
+            "name": "put",
+            "descriptor": "(IF)F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0x38"
+        },
+        {
+          "offset": 16,
+          "opcode": "0x25"
+        },
+        {
+          "offset": 17,
+          "opcode": "0x17"
+        },
+        {
+          "offset": 19,
+          "opcode": "0x95"
+        },
+        {
+          "offset": 20,
+          "opcode": "0x9a",
+          "branch_target": 24
+        },
+        {
+          "offset": 23,
+          "opcode": "0xb1"
+        },
+        {
+          "offset": 24,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 25,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoO0OO0oOo0OOOoOOo0O0Oo",
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "Lit/unimi/dsi/fastutil/ints/IntOpenHashSet;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 28,
+          "opcode": "0x1b"
+        },
+        {
+          "offset": 29,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/IntOpenHashSet",
+            "name": "add",
+            "descriptor": "(I)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 32,
+          "opcode": "0x57"
+        },
+        {
+          "offset": 33,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 34,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoO0OO0oOo0OOOoOOo0O0Oo",
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "Lit/unimi/dsi/fastutil/ints/IntOpenHashSet;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 37,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/IntOpenHashSet",
+            "name": "size",
+            "descriptor": "()I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 40,
+          "opcode": "0x10",
+          "immediate": 64
+        },
+        {
+          "offset": 42,
+          "opcode": "0xa4",
+          "branch_target": 46
+        },
+        {
+          "offset": 45,
+          "opcode": "0xb1"
+        },
+        {
+          "offset": 46,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 47,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoO0OO0oOo0OOOoOOo0O0Oo",
+            "name": "Ooooo0oooO0oooOOOoO0000O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/o0Oo0O0oo000ooo0o0Oooo0o;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 50,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0Oo0O0oo000ooo0o0Oooo0o",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lit/unimi/dsi/fastutil/ints/Int2FloatOpenHashMap;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 53,
+          "opcode": "0x1b"
+        },
+        {
+          "offset": 54,
+          "opcode": "0x25"
+        },
+        {
+          "offset": 55,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/Int2FloatOpenHashMap",
+            "name": "put",
+            "descriptor": "(IF)F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 58,
+          "opcode": "0x57"
+        },
+        {
+          "offset": 59,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 60,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 61,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoO0OO0oOo0OOOoOOo0O0Oo",
+            "name": "oo0OoO00oOoo000O0000o0oo",
+            "descriptor": "Z",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 64,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "004c"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x46",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "002c"
+        },
+        {
+          "offset": 9,
+          "opcode": "0x1b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 10,
+          "opcode": "0x25",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0050"
+        },
+        {
+          "offset": 14,
+          "opcode": "0x38",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 16,
+          "opcode": "0x25",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 17,
+          "opcode": "0x17",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 19,
+          "opcode": "0x95",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 20,
+          "opcode": "0x9a",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 23,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 24,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 25,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0039"
+        },
+        {
+          "offset": 28,
+          "opcode": "0x1b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 29,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0054"
+        },
+        {
+          "offset": 32,
+          "opcode": "0x57",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 33,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 34,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0039"
+        },
+        {
+          "offset": 37,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0058"
+        },
+        {
+          "offset": 40,
+          "opcode": "0x10",
+          "encoded_operands_hex": "40"
+        },
+        {
+          "offset": 42,
+          "opcode": "0xa4",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 45,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 46,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 47,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "002a"
+        },
+        {
+          "offset": 50,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "005a"
+        },
+        {
+          "offset": 53,
+          "opcode": "0x1b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 54,
+          "opcode": "0x25",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 55,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0050"
+        },
+        {
+          "offset": 58,
+          "opcode": "0x57",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 59,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 60,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 61,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "0023"
+        },
+        {
+          "offset": 64,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoO0OO0oOo0OOOoOOo0O0Oo",
+      "name": "d_",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/oOOoOOOoooOO000o00o0oooo;",
+      "access": 1,
+      "code_sha256": "1811e88a1a78c6ec1313891542309928288eee76bb0b15b01eebfa43caae03fa",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/O0OOO0OoOO0OO0o00oooo000",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0OOO0OoOO0OO0o00oooo000",
+            "name": "<init>",
+            "descriptor": "(Z)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 8,
+          "opcode": "0x4c"
+        },
+        {
+          "offset": 9,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoO0OO0oOo0OOOoOOo0O0Oo",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "Lit/unimi/dsi/fastutil/ints/Int2FloatOpenHashMap;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/Int2FloatOpenHashMap",
+            "name": "int2FloatEntrySet",
+            "descriptor": "()Lit/unimi/dsi/fastutil/ints/Int2FloatMap$FastEntrySet;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/Int2FloatMap$FastEntrySet",
+            "name": "iterator",
+            "descriptor": "()Lit/unimi/dsi/fastutil/objects/ObjectIterator;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 21,
+          "opcode": "0x4d"
+        },
+        {
+          "offset": 22,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 23,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/Iterator",
+            "name": "hasNext",
+            "descriptor": "()Z",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 28,
+          "opcode": "0x99",
+          "branch_target": 63
+        },
+        {
+          "offset": 31,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 32,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/Iterator",
+            "name": "next",
+            "descriptor": "()Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 37,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "it/unimi/dsi/fastutil/ints/Int2FloatMap$Entry",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 40,
+          "opcode": "0x4e"
+        },
+        {
+          "offset": 41,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 42,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 43,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/Int2FloatMap$Entry",
+            "name": "getIntKey",
+            "descriptor": "()I",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 48,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 49,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/Int2FloatMap$Entry",
+            "name": "getFloatValue",
+            "descriptor": "()F",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 54,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Float",
+            "name": "valueOf",
+            "descriptor": "(F)Ljava/lang/Float;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 57,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0OOO0OoOO0OO0o00oooo000",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(ILjava/lang/Object;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 60,
+          "opcode": "0xa7",
+          "branch_target": 22
+        },
+        {
+          "offset": 63,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 64,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0xbb",
+          "encoded_operands_hex": "005e"
+        },
+        {
+          "offset": 3,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 4,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "0061"
+        },
+        {
+          "offset": 8,
+          "opcode": "0x4c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 9,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "002c"
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0065"
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00690100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 21,
+          "opcode": "0x4d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 22,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 23,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00710100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 28,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0023"
+        },
+        {
+          "offset": 31,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 32,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00750100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 37,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "000d"
+        },
+        {
+          "offset": 40,
+          "opcode": "0x4e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 41,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 42,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 43,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00780100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 48,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 49,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "007c0100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 54,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0046"
+        },
+        {
+          "offset": 57,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "007e"
+        },
+        {
+          "offset": 60,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "ffda"
+        },
+        {
+          "offset": 63,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 64,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoO0OO0oOo0OOOoOOo0O0Oo",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "()Z",
+      "access": 1,
+      "code_sha256": "b2babbba1adb79364a260fcb1b4880924533c23e93ddc7f9cb76f76ae9648c5a",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoO0OO0oOo0OOOoOOo0O0Oo",
+            "name": "oo0OoO00oOoo000O0000o0oo",
+            "descriptor": "Z",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xac"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0023"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoO0OO0oOo0OOOoOOo0O0Oo",
+      "name": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/o0Oo0O0oo000ooo0o0Oooo0o;",
+      "access": 1,
+      "code_sha256": "9c5ffd59d61290a6a8e0c56c50e13014b73ef75936332b408e2196e063425aff",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoO0OO0oOo0OOOoOOo0O0Oo",
+            "name": "Ooooo0oooO0oooOOOoO0000O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/o0Oo0O0oo000ooo0o0Oooo0o;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x4c"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/o0Oo0O0oo000ooo0o0Oooo0o",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 10,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoO0OO0oOo0OOOoOOo0O0Oo",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 15,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0Oo0O0oo000ooo0o0Oooo0o",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lit/unimi/dsi/fastutil/ints/Int2FloatOpenHashMap;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/Int2FloatOpenHashMap",
+            "name": "size",
+            "descriptor": "()I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 21,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0Oo0O0oo000ooo0o0Oooo0o",
+            "name": "<init>",
+            "descriptor": "(II)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 24,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoO0OO0oOo0OOOoOOo0O0Oo",
+            "name": "Ooooo0oooO0oooOOOoO0000O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/o0Oo0O0oo000ooo0o0Oooo0o;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 27,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 28,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 29,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoO0OO0oOo0OOOoOOo0O0Oo",
+            "name": "oo0OoO00oOoo000O0000o0oo",
+            "descriptor": "Z",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 32,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 33,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "002a"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x4c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 6,
+          "opcode": "0xbb",
+          "encoded_operands_hex": "0025"
+        },
+        {
+          "offset": 9,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 10,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "003b"
+        },
+        {
+          "offset": 14,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 15,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "005a"
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0080"
+        },
+        {
+          "offset": 21,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "0028"
+        },
+        {
+          "offset": 24,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "002a"
+        },
+        {
+          "offset": 27,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 28,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 29,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "0023"
+        },
+        {
+          "offset": 32,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 33,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoO0OO0oOo0OOOoOOo0O0Oo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/util/function/Consumer;)V",
+      "access": 1,
+      "code_sha256": "258dea5bba289ecfd2ccf10e635273b463cd2c794e8f3d474130f7c9cc06f1c1",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoO0OO0oOo0OOOoOOo0O0Oo",
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "Lit/unimi/dsi/fastutil/ints/IntOpenHashSet;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/IntOpenHashSet",
+            "name": "iterator",
+            "descriptor": "()Lit/unimi/dsi/fastutil/ints/IntIterator;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 7,
+          "opcode": "0x4d"
+        },
+        {
+          "offset": 8,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/Iterator",
+            "name": "hasNext",
+            "descriptor": "()Z",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0x99",
+          "branch_target": 52
+        },
+        {
+          "offset": 17,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/Iterator",
+            "name": "next",
+            "descriptor": "()Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 23,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "java/lang/Integer",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 26,
+          "opcode": "0x4e"
+        },
+        {
+          "offset": 27,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 28,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/Integer",
+            "name": "intValue",
+            "descriptor": "()I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 31,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOO0OO0oO0oooo00OooooO0O",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(I)Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 34,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 36,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 38,
+          "opcode": "0xc6",
+          "branch_target": 49
+        },
+        {
+          "offset": 41,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 42,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 44,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/function/Consumer",
+            "name": "accept",
+            "descriptor": "(Ljava/lang/Object;)V",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 49,
+          "opcode": "0xa7",
+          "branch_target": 8
+        },
+        {
+          "offset": 52,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0039"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0085"
+        },
+        {
+          "offset": 7,
+          "opcode": "0x4d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 8,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00710100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 14,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0026"
+        },
+        {
+          "offset": 17,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00750100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 23,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "008b"
+        },
+        {
+          "offset": 26,
+          "opcode": "0x4e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 27,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 28,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "008e"
+        },
+        {
+          "offset": 31,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0093"
+        },
+        {
+          "offset": 34,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 36,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 38,
+          "opcode": "0xc6",
+          "encoded_operands_hex": "000b"
+        },
+        {
+          "offset": 41,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 42,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 44,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00970200",
+          "argument_slot_count": 2,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 49,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "ffd7"
+        },
+        {
+          "offset": 52,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoO0OO0oOo0OOOoOOo0O0Oo",
+      "name": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "code_sha256": "adddb6b150afe3726f9853ea72f92aa764e3278cd4a576f781e704c448705438",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "java/lang/StringBuilder",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "java/lang/StringBuilder",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 7,
+          "opcode": "0x4c"
+        },
+        {
+          "offset": 8,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 9,
+          "opcode": "0x12",
+          "reference": {
+            "string": "roaming{",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/StringBuilder",
+            "name": "append",
+            "descriptor": "(Ljava/lang/String;)Ljava/lang/StringBuilder;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0x57"
+        },
+        {
+          "offset": 15,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 16,
+          "opcode": "0x3d"
+        },
+        {
+          "offset": 17,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoO0OO0oOo0OOOoOOo0O0Oo",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "Lit/unimi/dsi/fastutil/ints/Int2FloatOpenHashMap;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 21,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/Int2FloatOpenHashMap",
+            "name": "int2FloatEntrySet",
+            "descriptor": "()Lit/unimi/dsi/fastutil/ints/Int2FloatMap$FastEntrySet;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 24,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/Int2FloatMap$FastEntrySet",
+            "name": "iterator",
+            "descriptor": "()Lit/unimi/dsi/fastutil/objects/ObjectIterator;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 29,
+          "opcode": "0x4e"
+        },
+        {
+          "offset": 30,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 31,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/Iterator",
+            "name": "hasNext",
+            "descriptor": "()Z",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 36,
+          "opcode": "0x99",
+          "branch_target": 106
+        },
+        {
+          "offset": 39,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 40,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/Iterator",
+            "name": "next",
+            "descriptor": "()Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 45,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "it/unimi/dsi/fastutil/ints/Int2FloatMap$Entry",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 48,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 50,
+          "opcode": "0x1c"
+        },
+        {
+          "offset": 51,
+          "opcode": "0x9a",
+          "branch_target": 61
+        },
+        {
+          "offset": 54,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 55,
+          "opcode": "0x12",
+          "reference": {
+            "string": ", ",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 57,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/StringBuilder",
+            "name": "append",
+            "descriptor": "(Ljava/lang/String;)Ljava/lang/StringBuilder;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 60,
+          "opcode": "0x57"
+        },
+        {
+          "offset": 61,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 62,
+          "opcode": "0x3d"
+        },
+        {
+          "offset": 63,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 64,
+          "opcode": "0x12",
+          "reference": {
+            "string": "%s=%s",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 66,
+          "opcode": "0x5"
+        },
+        {
+          "offset": 67,
+          "opcode": "0xbd",
+          "reference": {
+            "class_name": "java/lang/Object",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 70,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 71,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 72,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 74,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/Int2FloatMap$Entry",
+            "name": "getIntKey",
+            "descriptor": "()I",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 79,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOO0OO0oO0oooo00OooooO0O",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(I)Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 82,
+          "opcode": "0x53"
+        },
+        {
+          "offset": 83,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 84,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 85,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 87,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/Int2FloatMap$Entry",
+            "name": "getFloatValue",
+            "descriptor": "()F",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 92,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Float",
+            "name": "valueOf",
+            "descriptor": "(F)Ljava/lang/Float;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 95,
+          "opcode": "0x53"
+        },
+        {
+          "offset": 96,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/String",
+            "name": "format",
+            "descriptor": "(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 99,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/StringBuilder",
+            "name": "append",
+            "descriptor": "(Ljava/lang/String;)Ljava/lang/StringBuilder;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 102,
+          "opcode": "0x57"
+        },
+        {
+          "offset": 103,
+          "opcode": "0xa7",
+          "branch_target": 30
+        },
+        {
+          "offset": 106,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 107,
+          "opcode": "0x12",
+          "reference": {
+            "string": "}",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 109,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/StringBuilder",
+            "name": "append",
+            "descriptor": "(Ljava/lang/String;)Ljava/lang/StringBuilder;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 112,
+          "opcode": "0x57"
+        },
+        {
+          "offset": 113,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 114,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/StringBuilder",
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 117,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0xbb",
+          "encoded_operands_hex": "009b"
+        },
+        {
+          "offset": 3,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "009c"
+        },
+        {
+          "offset": 7,
+          "opcode": "0x4c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 8,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 9,
+          "opcode": "0x12",
+          "encoded_operands_hex": "9e"
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00a2"
+        },
+        {
+          "offset": 14,
+          "opcode": "0x57",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 15,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 16,
+          "opcode": "0x3d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 17,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "002c"
+        },
+        {
+          "offset": 21,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0065"
+        },
+        {
+          "offset": 24,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00690100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 29,
+          "opcode": "0x4e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 30,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 31,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00710100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 36,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0046"
+        },
+        {
+          "offset": 39,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 40,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00750100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 45,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "000d"
+        },
+        {
+          "offset": 48,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 50,
+          "opcode": "0x1c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 51,
+          "opcode": "0x9a",
+          "encoded_operands_hex": "000a"
+        },
+        {
+          "offset": 54,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 55,
+          "opcode": "0x12",
+          "encoded_operands_hex": "a4"
+        },
+        {
+          "offset": 57,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00a2"
+        },
+        {
+          "offset": 60,
+          "opcode": "0x57",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 61,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 62,
+          "opcode": "0x3d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 63,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 64,
+          "opcode": "0x12",
+          "encoded_operands_hex": "a6"
+        },
+        {
+          "offset": 66,
+          "opcode": "0x5",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 67,
+          "opcode": "0xbd",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 70,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 71,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 72,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 74,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00780100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 79,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0093"
+        },
+        {
+          "offset": 82,
+          "opcode": "0x53",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 83,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 84,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 85,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 87,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "007c0100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 92,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0046"
+        },
+        {
+          "offset": 95,
+          "opcode": "0x53",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 96,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "00ac"
+        },
+        {
+          "offset": 99,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00a2"
+        },
+        {
+          "offset": 102,
+          "opcode": "0x57",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 103,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "ffb7"
+        },
+        {
+          "offset": 106,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 107,
+          "opcode": "0x12",
+          "encoded_operands_hex": "ae"
+        },
+        {
+          "offset": 109,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00a2"
+        },
+        {
+          "offset": 112,
+          "opcode": "0x57",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 113,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 114,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00b0"
+        },
+        {
+          "offset": 117,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0O00o0OOo00oOoooo0oOOOO",
+      "name": "<init>",
+      "descriptor": "(Lit/unimi/dsi/fastutil/ints/Int2FloatOpenHashMap;)V",
+      "access": 1,
+      "code_sha256": "1ad7b3a4d7291d101a175ef3c44c08be53e2d86ee631fa62c91399b789847b68",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "java/lang/Object",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0O00o0OOo00oOoooo0oOOOO",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lit/unimi/dsi/fastutil/ints/Int2FloatOpenHashMap;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "0015"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "0017"
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0O00o0OOo00oOoooo0oOOOO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(I)Ljava/lang/Object;",
+      "access": 1,
+      "code_sha256": "c19ac5aaefaf6ee56f44337fa1c063792d61d458af7d041386b546e5f5305656",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0O00o0OOo00oOoooo0oOOOO",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lit/unimi/dsi/fastutil/ints/Int2FloatOpenHashMap;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x1b"
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/Int2FloatOpenHashMap",
+            "name": "get",
+            "descriptor": "(I)F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Float",
+            "name": "valueOf",
+            "descriptor": "(F)Ljava/lang/Float;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0017"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x1b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "001e"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0024"
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0O00o0OOo00oOoooo0oOOOO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(ILjava/lang/Object;)V",
+      "access": 1,
+      "code_sha256": "ae7efa1e4bc4b42b733e50b47240c2e30d82036689180c31d1babbdb6585685c",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0O00o0OOo00oOoooo0oOOOO",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lit/unimi/dsi/fastutil/ints/Int2FloatOpenHashMap;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x1b"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OO0O00ooOo0OO0oooOoo0Oo0",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "(Ljava/lang/Object;)F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/Int2FloatOpenHashMap",
+            "name": "put",
+            "descriptor": "(IF)F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 12,
+          "opcode": "0x57"
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0017"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x1b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "002b"
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "002f"
+        },
+        {
+          "offset": 12,
+          "opcode": "0x57",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0O00o0OOo00oOoooo0oOOOO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lit/unimi/dsi/fastutil/ints/Int2FloatMap;)V",
+      "access": 1,
+      "code_sha256": "bdeca5e17030ec77d54b6d837d6c3c7f01f1cad3eaafe72a76e20b6ed881aec2",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0O00o0OOo00oOoooo0oOOOO",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lit/unimi/dsi/fastutil/ints/Int2FloatOpenHashMap;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/Int2FloatOpenHashMap",
+            "name": "putAll",
+            "descriptor": "(Ljava/util/Map;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0017"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0034"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0O00o0OOo00oOoooo0oOOOO",
+      "name": "d_",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/oOOoOOOoooOO000o00o0oooo;",
+      "access": 1,
+      "code_sha256": "2b86ac100ba859de535a63d74c88d544bde90f9c28c6c49b7b861f2136821572",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/O0OOO0OoOO0OO0o00oooo000",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0OOO0OoOO0OO0o00oooo000",
+            "name": "<init>",
+            "descriptor": "(Z)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 8,
+          "opcode": "0x4c"
+        },
+        {
+          "offset": 9,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0O00o0OOo00oOoooo0oOOOO",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lit/unimi/dsi/fastutil/ints/Int2FloatOpenHashMap;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/Int2FloatOpenHashMap",
+            "name": "int2FloatEntrySet",
+            "descriptor": "()Lit/unimi/dsi/fastutil/ints/Int2FloatMap$FastEntrySet;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/Int2FloatMap$FastEntrySet",
+            "name": "iterator",
+            "descriptor": "()Lit/unimi/dsi/fastutil/objects/ObjectIterator;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 21,
+          "opcode": "0x4d"
+        },
+        {
+          "offset": 22,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 23,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/Iterator",
+            "name": "hasNext",
+            "descriptor": "()Z",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 28,
+          "opcode": "0x99",
+          "branch_target": 63
+        },
+        {
+          "offset": 31,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 32,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/Iterator",
+            "name": "next",
+            "descriptor": "()Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 37,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "it/unimi/dsi/fastutil/ints/Int2FloatMap$Entry",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 40,
+          "opcode": "0x4e"
+        },
+        {
+          "offset": 41,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 42,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 43,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/Int2FloatMap$Entry",
+            "name": "getIntKey",
+            "descriptor": "()I",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 48,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 49,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/Int2FloatMap$Entry",
+            "name": "getFloatValue",
+            "descriptor": "()F",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 54,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Float",
+            "name": "valueOf",
+            "descriptor": "(F)Ljava/lang/Float;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 57,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0OOO0OoOO0OO0o00oooo000",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(ILjava/lang/Object;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 60,
+          "opcode": "0xa7",
+          "branch_target": 22
+        },
+        {
+          "offset": 63,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 64,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0xbb",
+          "encoded_operands_hex": "0038"
+        },
+        {
+          "offset": 3,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 4,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "003b"
+        },
+        {
+          "offset": 8,
+          "opcode": "0x4c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 9,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0017"
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "003f"
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00430100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 21,
+          "opcode": "0x4d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 22,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 23,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "004b0100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 28,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0023"
+        },
+        {
+          "offset": 31,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 32,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "004f0100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 37,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "000d"
+        },
+        {
+          "offset": 40,
+          "opcode": "0x4e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 41,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 42,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 43,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00530100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 48,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 49,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00570100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 54,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0024"
+        },
+        {
+          "offset": 57,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0059"
+        },
+        {
+          "offset": 60,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "ffda"
+        },
+        {
+          "offset": 63,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 64,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0O00o0OOo00oOoooo0oOOOO",
+      "name": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "code_sha256": "c757d8d1cf52873a1edded9642aafc6f3064b70c4684f68ec223e5962a48dc53",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "java/lang/StringBuilder",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "java/lang/StringBuilder",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 7,
+          "opcode": "0x4c"
+        },
+        {
+          "offset": 8,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 9,
+          "opcode": "0x12",
+          "reference": {
+            "string": "roaming{",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/StringBuilder",
+            "name": "append",
+            "descriptor": "(Ljava/lang/String;)Ljava/lang/StringBuilder;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0x57"
+        },
+        {
+          "offset": 15,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 16,
+          "opcode": "0x3d"
+        },
+        {
+          "offset": 17,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0O00o0OOo00oOoooo0oOOOO",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lit/unimi/dsi/fastutil/ints/Int2FloatOpenHashMap;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 21,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/Int2FloatOpenHashMap",
+            "name": "int2FloatEntrySet",
+            "descriptor": "()Lit/unimi/dsi/fastutil/ints/Int2FloatMap$FastEntrySet;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 24,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/Int2FloatMap$FastEntrySet",
+            "name": "iterator",
+            "descriptor": "()Lit/unimi/dsi/fastutil/objects/ObjectIterator;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 29,
+          "opcode": "0x4e"
+        },
+        {
+          "offset": 30,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 31,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/Iterator",
+            "name": "hasNext",
+            "descriptor": "()Z",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 36,
+          "opcode": "0x99",
+          "branch_target": 106
+        },
+        {
+          "offset": 39,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 40,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/Iterator",
+            "name": "next",
+            "descriptor": "()Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 45,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "it/unimi/dsi/fastutil/ints/Int2FloatMap$Entry",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 48,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 50,
+          "opcode": "0x1c"
+        },
+        {
+          "offset": 51,
+          "opcode": "0x9a",
+          "branch_target": 61
+        },
+        {
+          "offset": 54,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 55,
+          "opcode": "0x12",
+          "reference": {
+            "string": ", ",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 57,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/StringBuilder",
+            "name": "append",
+            "descriptor": "(Ljava/lang/String;)Ljava/lang/StringBuilder;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 60,
+          "opcode": "0x57"
+        },
+        {
+          "offset": 61,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 62,
+          "opcode": "0x3d"
+        },
+        {
+          "offset": 63,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 64,
+          "opcode": "0x12",
+          "reference": {
+            "string": "%s=%s",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 66,
+          "opcode": "0x5"
+        },
+        {
+          "offset": 67,
+          "opcode": "0xbd",
+          "reference": {
+            "class_name": "java/lang/Object",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 70,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 71,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 72,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 74,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/Int2FloatMap$Entry",
+            "name": "getIntKey",
+            "descriptor": "()I",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 79,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOO0OO0oO0oooo00OooooO0O",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(I)Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 82,
+          "opcode": "0x53"
+        },
+        {
+          "offset": 83,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 84,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 85,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 87,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/ints/Int2FloatMap$Entry",
+            "name": "getFloatValue",
+            "descriptor": "()F",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 92,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Float",
+            "name": "valueOf",
+            "descriptor": "(F)Ljava/lang/Float;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 95,
+          "opcode": "0x53"
+        },
+        {
+          "offset": 96,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/String",
+            "name": "format",
+            "descriptor": "(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 99,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/StringBuilder",
+            "name": "append",
+            "descriptor": "(Ljava/lang/String;)Ljava/lang/StringBuilder;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 102,
+          "opcode": "0x57"
+        },
+        {
+          "offset": 103,
+          "opcode": "0xa7",
+          "branch_target": 30
+        },
+        {
+          "offset": 106,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 107,
+          "opcode": "0x12",
+          "reference": {
+            "string": "}",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 109,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/StringBuilder",
+            "name": "append",
+            "descriptor": "(Ljava/lang/String;)Ljava/lang/StringBuilder;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 112,
+          "opcode": "0x57"
+        },
+        {
+          "offset": 113,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 114,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/StringBuilder",
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 117,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0xbb",
+          "encoded_operands_hex": "005d"
+        },
+        {
+          "offset": 3,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "005e"
+        },
+        {
+          "offset": 7,
+          "opcode": "0x4c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 8,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 9,
+          "opcode": "0x12",
+          "encoded_operands_hex": "60"
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0064"
+        },
+        {
+          "offset": 14,
+          "opcode": "0x57",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 15,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 16,
+          "opcode": "0x3d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 17,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0017"
+        },
+        {
+          "offset": 21,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "003f"
+        },
+        {
+          "offset": 24,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00430100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 29,
+          "opcode": "0x4e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 30,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 31,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "004b0100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 36,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0046"
+        },
+        {
+          "offset": 39,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 40,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "004f0100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 45,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "000d"
+        },
+        {
+          "offset": 48,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 50,
+          "opcode": "0x1c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 51,
+          "opcode": "0x9a",
+          "encoded_operands_hex": "000a"
+        },
+        {
+          "offset": 54,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 55,
+          "opcode": "0x12",
+          "encoded_operands_hex": "66"
+        },
+        {
+          "offset": 57,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0064"
+        },
+        {
+          "offset": 60,
+          "opcode": "0x57",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 61,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 62,
+          "opcode": "0x3d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 63,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 64,
+          "opcode": "0x12",
+          "encoded_operands_hex": "68"
+        },
+        {
+          "offset": 66,
+          "opcode": "0x5",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 67,
+          "opcode": "0xbd",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 70,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 71,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 72,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 74,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00530100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 79,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "006d"
+        },
+        {
+          "offset": 82,
+          "opcode": "0x53",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 83,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 84,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 85,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 87,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00570100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 92,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0024"
+        },
+        {
+          "offset": 95,
+          "opcode": "0x53",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 96,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0073"
+        },
+        {
+          "offset": 99,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0064"
+        },
+        {
+          "offset": 102,
+          "opcode": "0x57",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 103,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "ffb7"
+        },
+        {
+          "offset": 106,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 107,
+          "opcode": "0x12",
+          "encoded_operands_hex": "75"
+        },
+        {
+          "offset": 109,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0064"
+        },
+        {
+          "offset": 112,
+          "opcode": "0x57",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 113,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 114,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0077"
+        },
+        {
+          "offset": 117,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    }
+  ],
+  "bounded_dependency_support": [],
+  "owner_declarations": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOOoOOOoooOO000o00o0oooo",
+      "declaration": {
+        "access": 1537,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": [],
+        "methods": [
+          {
+            "access": 1025,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(I)Ljava/lang/Object;"
+          },
+          {
+            "access": 1025,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(ILjava/lang/Object;)V"
+          },
+          {
+            "access": 1025,
+            "name": "d_",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/oOOoOOOoooOO000o00o0oooo;"
+          }
+        ]
+      }
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0OOO0OoOO0OO0o00oooo000",
+      "declaration": {
+        "access": 33,
+        "super": "java/lang/Object",
+        "interfaces": [
+          "com/elfmcys/yesstevemodel/oOOoOOOoooOO000o00o0oooo"
+        ],
+        "fields": [
+          {
+            "access": 18,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/OoOO0oOo00o0oOO00OooOO00;"
+          },
+          {
+            "access": 18,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Z"
+          }
+        ],
+        "methods": [
+          {
+            "access": 1,
+            "name": "<init>",
+            "descriptor": "()V"
+          },
+          {
+            "access": 1,
+            "name": "<init>",
+            "descriptor": "(Z)V"
+          },
+          {
+            "access": 2,
+            "name": "<init>",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/OoOO0oOo00o0oOO00OooOO00;)V"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(I)Ljava/lang/Object;"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(ILjava/lang/Object;)V"
+          },
+          {
+            "access": 1,
+            "name": "d_",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/oOOoOOOoooOO000o00o0oooo;"
+          },
+          {
+            "access": 1,
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;"
+          }
+        ]
+      }
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0O00OoOOooo0OoooOOoo00O",
+      "declaration": {
+        "access": 1057,
+        "super": "java/lang/Object",
+        "interfaces": [
+          "com/elfmcys/yesstevemodel/oOOoOOOoooOO000o00o0oooo"
+        ],
+        "fields": [
+          {
+            "access": 26,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "I"
+          },
+          {
+            "access": 26,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "I"
+          },
+          {
+            "access": 26,
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "I"
+          }
+        ],
+        "methods": [
+          {
+            "access": 1,
+            "name": "<init>",
+            "descriptor": "()V"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(I)Ljava/lang/Object;"
+          },
+          {
+            "access": 1028,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()F"
+          },
+          {
+            "access": 1028,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "()F"
+          },
+          {
+            "access": 1028,
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "()F"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(ILjava/lang/Object;)V"
+          },
+          {
+            "access": 1,
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;"
+          },
+          {
+            "access": 1,
+            "name": "d_",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/oOOoOOOoooOO000o00o0oooo;"
+          },
+          {
+            "access": 8,
+            "name": "<clinit>",
+            "descriptor": "()V"
+          }
+        ]
+      }
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoO0OO0oOo0OOOoOOo0O0Oo",
+      "declaration": {
+        "access": 33,
+        "super": "java/lang/Object",
+        "interfaces": [
+          "com/elfmcys/yesstevemodel/oOOoOOOoooOO000o00o0oooo"
+        ],
+        "fields": [
+          {
+            "access": 25,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "I"
+          },
+          {
+            "access": 25,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "I"
+          },
+          {
+            "access": 18,
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "Lit/unimi/dsi/fastutil/ints/Int2FloatOpenHashMap;"
+          },
+          {
+            "access": 18,
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "Lit/unimi/dsi/fastutil/ints/IntOpenHashSet;"
+          },
+          {
+            "access": 18,
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "I"
+          },
+          {
+            "access": 2,
+            "name": "Ooooo0oooO0oooOOOoO0000O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/o0Oo0O0oo000ooo0o0Oooo0o;"
+          },
+          {
+            "access": 2,
+            "name": "oo0OoO00oOoo000O0000o0oo",
+            "descriptor": "Z"
+          }
+        ],
+        "methods": [
+          {
+            "access": 1,
+            "name": "<init>",
+            "descriptor": "(ILit/unimi/dsi/fastutil/ints/Int2FloatOpenHashMap;)V"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(I)Ljava/lang/Object;"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(ILjava/lang/Object;)V"
+          },
+          {
+            "access": 1,
+            "name": "d_",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/oOOoOOOoooOO000o00o0oooo;"
+          },
+          {
+            "access": 1,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "()Z"
+          },
+          {
+            "access": 1,
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/o0Oo0O0oo000ooo0o0Oooo0o;"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/util/function/Consumer;)V"
+          },
+          {
+            "access": 1,
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;"
+          }
+        ]
+      }
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0O00o0OOo00oOoooo0oOOOO",
+      "declaration": {
+        "access": 33,
+        "super": "java/lang/Object",
+        "interfaces": [
+          "com/elfmcys/yesstevemodel/oOOoOOOoooOO000o00o0oooo"
+        ],
+        "fields": [
+          {
+            "access": 18,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lit/unimi/dsi/fastutil/ints/Int2FloatOpenHashMap;"
+          }
+        ],
+        "methods": [
+          {
+            "access": 1,
+            "name": "<init>",
+            "descriptor": "(Lit/unimi/dsi/fastutil/ints/Int2FloatOpenHashMap;)V"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(I)Ljava/lang/Object;"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(ILjava/lang/Object;)V"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lit/unimi/dsi/fastutil/ints/Int2FloatMap;)V"
+          },
+          {
+            "access": 1,
+            "name": "d_",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/oOOoOOOoooOO000o00o0oooo;"
+          },
+          {
+            "access": 1,
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;"
+          }
+        ]
+      }
+    }
+  ],
+  "bootstrap_and_constant_evidence": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOOoOOOoooOO000o00o0oooo",
+      "constant_values": {},
+      "bootstrap_methods": []
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0OOO0OoOO0OO0o00oooo000",
+      "constant_values": {},
+      "bootstrap_methods": []
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0O00OoOOooo0OoooOOoo00O",
+      "constant_values": {},
+      "bootstrap_methods": []
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoO0OO0oOo0OOOoOOo0O0Oo",
+      "constant_values": {
+        "Oo0Oo0o00O00Oo0OOoOOoooo": {
+          "cp_tag": 3,
+          "value": 64
+        },
+        "o0OOooo0o0OO00OoOOOo0o0O": {
+          "cp_tag": 3,
+          "value": 32
+        }
+      },
+      "bootstrap_methods": []
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0O00o0OOo00oOoooo0oOOOO",
+      "constant_values": {},
+      "bootstrap_methods": []
+    }
+  ],
+  "source_tracks": [
+    {
+      "role": "OFFICIAL_RELEASE_LINE_SOURCE_CANDIDATE",
+      "repository": "YesSteveModel/YesSteveModel",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+      "path": "src/main/java/com/elfmcys/yesstevemodel/molang/runtime/Struct.java",
+      "sha256": "c93faa04f4631469048c6fbc72caed03445a6d4fe7e986a0043052a929968507",
+      "url": "https://github.com/YesSteveModel/YesSteveModel/blob/f184edabd1b5115ce5a24cb6d155ba5a669f5ba6/src/main/java/com/elfmcys/yesstevemodel/molang/runtime/Struct.java"
+    },
+    {
+      "role": "OFFICIAL_RELEASE_LINE_SOURCE_CANDIDATE",
+      "repository": "YesSteveModel/YesSteveModel",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+      "path": "src/main/java/com/elfmcys/yesstevemodel/molang/runtime/HashMapStruct.java",
+      "sha256": "a41967309d6ab934ee0a169e5c95fe7d555843eddc364388101dd1da8564cc01",
+      "url": "https://github.com/YesSteveModel/YesSteveModel/blob/f184edabd1b5115ce5a24cb6d155ba5a669f5ba6/src/main/java/com/elfmcys/yesstevemodel/molang/runtime/HashMapStruct.java"
+    },
+    {
+      "role": "OFFICIAL_RELEASE_LINE_SOURCE_CANDIDATE",
+      "repository": "YesSteveModel/YesSteveModel",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+      "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/struct/Vec3fStruct.java",
+      "sha256": "c749164961306c5b01d4e2598e46e5063b10e28fa38019cb3dac991c6ced7736",
+      "url": "https://github.com/YesSteveModel/YesSteveModel/blob/f184edabd1b5115ce5a24cb6d155ba5a669f5ba6/src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/struct/Vec3fStruct.java"
+    },
+    {
+      "role": "OFFICIAL_RELEASE_LINE_SOURCE_CANDIDATE",
+      "repository": "YesSteveModel/YesSteveModel",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+      "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/roaming/LocalRoamingStruct.java",
+      "sha256": "3bb374ca8c663c9b0fc7af1150951c311d00b2d4ce43e7c2b33003f79efbb788",
+      "url": "https://github.com/YesSteveModel/YesSteveModel/blob/f184edabd1b5115ce5a24cb6d155ba5a669f5ba6/src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/roaming/LocalRoamingStruct.java"
+    },
+    {
+      "role": "OFFICIAL_RELEASE_LINE_SOURCE_CANDIDATE",
+      "repository": "YesSteveModel/YesSteveModel",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+      "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/roaming/RemoteRoamingStruct.java",
+      "sha256": "43fa6d8e2c3279802d8bb926ccdc00ef0968d500bb22a2fdc547fb7f679ff279",
+      "url": "https://github.com/YesSteveModel/YesSteveModel/blob/f184edabd1b5115ce5a24cb6d155ba5a669f5ba6/src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/roaming/RemoteRoamingStruct.java"
+    }
+  ],
+  "review_status": "PRIMARY_STATIC_REVIEW_INDEPENDENT_REVIEW_PENDING",
+  "central_mapping_promoted": false,
+  "scope": "Struct copy/alias contracts and local/remote roaming mutation bookkeeping; no network operation or target execution."
+}

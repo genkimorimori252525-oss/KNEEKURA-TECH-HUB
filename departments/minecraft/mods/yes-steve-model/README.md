@@ -315,3 +315,5 @@ bounded runtime observation rather than protection bypass.
 - [User-function target cache](USER-FUNCTION-CACHE-RECOVERY-2026-10-17.md): successful/missing lookup retention and parser call-validation join; added after the fixed17-cohort receipt.
 
 - [Parser pool lifetime](PARSER-POOL-LIFETIME-RECOVERY-2026-10-17.md): rent/return reset, per-parser fn binding and dynamic args lookup; native loader lifetime unproven.
+
+- [Struct copy and change tracking](STRUCT-COPY-CHANGE-RECOVERY-2026-10-17.md): aliasing/read-only contracts and mutation-before-notification order; no network guarantees.
