@@ -298,3 +298,5 @@ bounded runtime observation rather than protection bypass.
 - [Variable AST and return cleanup](VARIABLE-AST-RETURN-RECOVERY-2026-10-17.md): target dispatch, raw return propagation and finally boundaries; parser lookup pending.
 
 - [Parser binding and storage indirection](PARSER-BINDING-STORAGE-RECOVERY-2026-10-17.md): namespace capture, aliases, variable addresses and parse-reset boundaries.
+
+- [Runtime storage and call frames](RUNTIME-STORAGE-FRAMES-RECOVERY-2026-10-17.md): public/scoped aliasing, temp frames and deferred cleanup; lifetime callers remain bounded.

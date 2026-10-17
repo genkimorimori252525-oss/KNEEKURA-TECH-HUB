@@ -137,3 +137,7 @@ infer dynamic rebinding from an AST node that captures a target reference.
 Parser namespace/struct split, binding aliases and variable storage indirection
 are recorded. Continue concrete runtime scoped/temp/context storage and reset
 boundaries; binding-cache reset is not automatically runtime-value clearing.
+
+Runtime scoped/public/temp/context storage and user-call frame boundaries are
+recorded. Continue initialization/reset callers and argument evaluation/assignment
+ordering; logical frame pop is not backing-array erasure or transactional push.
