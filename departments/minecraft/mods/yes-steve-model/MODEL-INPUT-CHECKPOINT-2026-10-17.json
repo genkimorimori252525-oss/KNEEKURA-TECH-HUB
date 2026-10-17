@@ -1,0 +1,89 @@
+{
+  "format": "kneekura.ysm-model-input-checkpoint.v1",
+  "cohort_manifest": [
+    [
+      "MODEL-INPUT-CARRIERS",
+      "model_input_carriers",
+      true
+    ],
+    [
+      "MODEL-LANGUAGE-FALLBACK",
+      "model_language_fallback",
+      true
+    ],
+    [
+      "MODEL-ASSET-HELPERS",
+      "model_asset_helpers",
+      true
+    ],
+    [
+      "CONDITIONAL-ANIMATION-NAMES",
+      "conditional_animation_names",
+      true
+    ],
+    [
+      "ORDERED-SEGMENT-TRANSITION",
+      "ordered_segment_transition",
+      true
+    ]
+  ],
+  "cohorts": [
+    {
+      "cohort": "MODEL-INPUT-CARRIERS",
+      "tool_sha256": "c5f96c9c54e49413f0b417f81015823456879f696bef648d17e76311c1661820",
+      "evidence_sha256": "2aa9d63e8e42bac71ba25603ce5625e2281e49a6ccd00b4ddb2eed22d15c497e",
+      "rerun_receipt_sha256": "ff3562ceb6ad12b8ed16e1f1a86056f4c14615f46ccc9de84af39ecebe9017d5",
+      "checks": 190,
+      "negative_controls": 12,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MODEL-LANGUAGE-FALLBACK",
+      "tool_sha256": "c3dc75d1482779c4f03929b763ccd66b842322f02c8898d1b15ad8eb9083a607",
+      "evidence_sha256": "b5959e472e83e8469b1ae2c4fd97f0d6440a56430353f76a7c23c6eb280a9b23",
+      "rerun_receipt_sha256": "d84fc8b90ddbc4632987e4509aebfa93709ffcfa8aa0577c295d6a615ba11a68",
+      "checks": 90,
+      "negative_controls": 7,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MODEL-ASSET-HELPERS",
+      "tool_sha256": "a1be85ede0282ac680b580db17edb410bb7925d57f060373840447010bba1f95",
+      "evidence_sha256": "1ab3aef7c1863bb0b09d60c24c56cd03cc61cb5dea1c1cee9b542c7e8d0b99c2",
+      "rerun_receipt_sha256": "2a569c64a99ae7189e56deb3e7b4da092e8895a6d2522a827e793c0c500a2260",
+      "checks": 179,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "CONDITIONAL-ANIMATION-NAMES",
+      "tool_sha256": "fe5a8c5ad75c3a2f2a1511a53a8c3c772cda2a78c12c1ccc8578373c5d7380e6",
+      "evidence_sha256": "1b03d6529d5e1bf7fb9eb064040b0185281278b7224427412e0118dd5b1472be",
+      "rerun_receipt_sha256": "923acab092d89e32541815002ca24d1ad5ee5605f6013c460c4c9a94f5ce01b4",
+      "checks": 321,
+      "negative_controls": 11,
+      "status": "PASS"
+    },
+    {
+      "cohort": "ORDERED-SEGMENT-TRANSITION",
+      "tool_sha256": "2512c0c0b34fd94a17e124301c4f61b7847e3557836de0aa48fce921f6967938",
+      "evidence_sha256": "5387eee390e57fb7ea52e7f9434f394aefe223ffd0f80fa45f53ee2b4b299947",
+      "rerun_receipt_sha256": "dc0e0c6802211ccb152c2ee376191754b99b1af4eff6fcfd43ad0b7e0f91b621",
+      "checks": 84,
+      "negative_controls": 11,
+      "status": "PASS"
+    }
+  ],
+  "cohort_count": 5,
+  "overlapping_method_snapshots_compared": 0,
+  "overlap_conflicts": 0,
+  "central_mapping_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
+  "central_mapping_promoted": false,
+  "independent_semantic_review": "NOT_RUN",
+  "target_runtime_executed": false,
+  "whole_project_ci_run": false,
+  "earlier_fixed17_checkpoint_modified": false,
+  "earlier_fixed10_checkpoint_modified": false,
+  "earlier_fixed9_checkpoint_modified": false,
+  "elapsed_seconds": 0.847
+}

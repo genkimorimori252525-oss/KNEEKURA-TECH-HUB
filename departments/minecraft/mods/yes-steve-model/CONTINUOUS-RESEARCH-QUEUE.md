@@ -82,9 +82,13 @@ Parser numeric-token consumers and reader ownership are joined in a later fixed4
 entry checkpoint. JDK-only numeric probes are not target parser tests. Navigation
 now includes39 explicit comparison aliases and was refreshed through these docs.
 
-Next finite connected question: Java model data-carrier ownership at builder
-inputs and remaining immutable-versus-live reference assumptions. Reuse the
-existing model-composition/geometry snapshots; do not execute protected loaders.
+Model input carriers and model-local language fallback have a fixed5 checkpoint.
+Native-access carriers retain references; language fallback selects a locale map
+rather than falling through per missing key. Those limits remain primary-static.
+
+Next finite connected question: remaining client-side asset registration/cache
+consumers and exact Java cleanup ownership, using existing texture/sound receipts
+as anchors. Do not infer native allocation, native validation or rendered output.
 
 ## Anchors
 

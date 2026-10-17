@@ -476,3 +476,5 @@ bounded runtime observation rather than protection bypass.
 - [Lexer tokens and diagnostics](LEXER-TOKEN-DIAGNOSTICS-RECOVERY-2026-10-17.md): previous-token numeric branches, cursor clone offsets, locale and reader boundaries.
 
 - [Parser numeric rejection and reader ownership](PARSER-ENTRY-OWNERSHIP-RECOVERY-2026-10-17.md): token classification vs numeric conversion, error-state commitment and caller-owned vs convenience-owned readers.
+
+- [Model input carriers](MODEL-INPUT-CARRIERS-RECOVERY-2026-10-17.md) and [model-local translation fallback](MODEL-LANGUAGE-FALLBACK-RECOVERY-2026-10-17.md): retained references and per-language-map selection.
