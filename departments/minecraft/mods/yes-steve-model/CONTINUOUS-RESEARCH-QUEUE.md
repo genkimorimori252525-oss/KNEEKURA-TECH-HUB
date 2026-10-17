@@ -264,3 +264,8 @@ Smoothing functions are joined to manager/lifecycle timing. Key space is shared
 across first/second order; first query return is not integrator initialization.
 No numerical stability/runtime proof. Continue particle/sound/input/sync/defer
 gates, argument ordering and external-effect boundaries.
+
+Particle/sound dispatch and manager selection are recorded with four-class javap
+inspection (existing jdk.jdeps module; no target execution). Continue input-state
+and sync/defer boundaries. Dispatch acceptance is not audio/particle visibility
+proof; no packets, keys or target effects have been exercised.

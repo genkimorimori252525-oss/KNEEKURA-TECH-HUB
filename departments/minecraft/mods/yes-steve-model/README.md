@@ -363,3 +363,5 @@ bounded runtime observation rather than protection bypass.
 - [Bone parameter queries](BONE-PARAMETER-QUERY-RECOVERY-2026-10-17.md): live read-only vector views, rotation signs/degrees, raw position/scale and explicit tracking request without native output-refresh proof.
 
 - [Stateful smoothing](SMOOTHING-STATE-RECOVERY-2026-10-17.md): shared key/type reuse, first-return versus simulated state, manager clock ordering and exact first/second-order arithmetic boundaries.
+
+- [Particle/sound dispatch](PARTICLE-SOUND-DISPATCH-RECOVERY-2026-10-17.md): emission/fake-player gates, count-zero/absolute-axis particle semantics, synchronous sound configuration before duplicate checks; actual javap corroboration recorded.

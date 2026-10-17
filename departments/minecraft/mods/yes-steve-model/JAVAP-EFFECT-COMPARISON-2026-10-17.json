@@ -1,0 +1,66 @@
+{
+  "tool": "javap",
+  "invocation": "java -m jdk.jdeps/com.sun.tools.javap.Main",
+  "version": "21.0.12.1",
+  "target_application_executed": false,
+  "outputs": [
+    {
+      "owner": "com.elfmcys.yesstevemodel.oooOoo00Ooo0000OoO0OOo0O",
+      "sha256": "14959a453894aa523c01f7a7badbe56b472f1705e0e2d251c887f4782af067a7",
+      "bytes": 3138,
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "owner": "com.elfmcys.yesstevemodel.OOoOOooOOOOOO0OO0O0o0OOo",
+      "sha256": "5c0a8fd69ef6208b81dc9dfa3f70572fcab47644afc69c623415d18c2a09ed58",
+      "bytes": 21024,
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "owner": "com.elfmcys.yesstevemodel.o0o00O0O0ooo00ooO0o00000$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "sha256": "b76b4d18c8e83913213925754ef8f45cb186b329749c96fb9fe99e25e9a129ee",
+      "bytes": 11128,
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "owner": "com.elfmcys.yesstevemodel.OOOO0O0OO0oOOo00Ooo0oooO",
+      "sha256": "967564752af8e75b1bcad5218c87b7e5feb74905bd631bfd0d06b192b16814aa",
+      "bytes": 13588,
+      "exit_code": 0,
+      "stderr": ""
+    }
+  ],
+  "format": "kneekura.ysm-javap-effect-comparison.v1",
+  "recorded_at": "2026-10-17",
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "launcher_on_path": false,
+  "existing_jdk_module_used": true,
+  "target_recompiled": false,
+  "independent_semantic_review": "NOT_RUN",
+  "central_mapping_promoted": false,
+  "checks": [
+    {
+      "check": "four-javap-output-hashes",
+      "pass": true
+    },
+    {
+      "check": "particle-multicatch-equals-parser-record",
+      "pass": true
+    },
+    {
+      "check": "configure-before-duplicate-check-before-main-thread-schedule",
+      "pass": true
+    }
+  ],
+  "normalized_options": [
+    "-classpath",
+    "<fixed-ysm.jar>",
+    "-c",
+    "-p",
+    "<owner>"
+  ],
+  "raw_disassembly_committed": false
+}
