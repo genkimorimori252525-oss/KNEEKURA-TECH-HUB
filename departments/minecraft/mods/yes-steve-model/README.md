@@ -367,3 +367,6 @@ bounded runtime observation rather than protection bypass.
 - [Particle/sound dispatch](PARTICLE-SOUND-DISPATCH-RECOVERY-2026-10-17.md): emission/fake-player gates, count-zero/absolute-axis particle semantics, synchronous sound configuration before duplicate checks; actual javap corroboration recorded.
 
 - [Input/sync/defer boundaries](INPUT-SYNC-DEFER-RECOVERY-2026-10-17.md): cached in-game input, local/remote sync and task enqueue, deferred value capture with a nonselecting name parameter; no actual input or traffic tested.
+
+- [Utility/noise/diagnostic queries](UTILITY-NOISE-DEBUG-RECOVERY-2026-10-17.md): native-noise call boundary, local mod metadata, block-name comparisons and debug-first lazy argument gates.
+- [Control priority and action queries](CONTROL-PRIORITY-ACTIONS-RECOVERY-2026-10-17.md): cached first-match main-animation selection, typed guards and coded-controller action entry points.
