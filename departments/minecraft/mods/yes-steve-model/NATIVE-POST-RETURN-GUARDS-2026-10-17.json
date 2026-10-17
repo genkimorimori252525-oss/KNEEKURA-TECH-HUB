@@ -1,0 +1,69 @@
+{
+  "format": "kneekura.ysm-native-post-return-guards.v1",
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "dependency_second_return_sha256": "9a172d4bdee63731d06918359471d4bbcbb937e93173fb8145ca53ba2a90a750",
+  "segments": [
+    {
+      "address": 15637053,
+      "size": 163,
+      "sha256": "994988bacb9f6a24f7c0a63b0cf14c2c7f9a6f23604984a8f7e22eb4e998c79f"
+    },
+    {
+      "address": 17635188,
+      "size": 44,
+      "sha256": "c0732fe8f0e0cd5780dc426912274b2c94241440c3dcf785728ab444417a26d7"
+    },
+    {
+      "address": 15773332,
+      "size": 56,
+      "sha256": "fdf0617561bffa85df604d9fcefbdbd404435f6e99264074b4ebc350b3ec4c4e"
+    }
+  ],
+  "neg_jbe": {
+    "address": 15637210,
+    "operand_bits": 16,
+    "all_65536_inputs_checked": true,
+    "taken": true,
+    "target": 17635188
+  },
+  "fixed_registers": {
+    "ax_at_cwd": 41142,
+    "rdx": 65535,
+    "r11_before_or": 255,
+    "or_stack_offset": 0,
+    "return_store_offset": 0
+  },
+  "or_jg": {
+    "address": 17635226,
+    "flags": {
+      "result": 65535,
+      "sf": 0,
+      "zf": 0,
+      "of": 0,
+      "taken": true
+    },
+    "taken": true,
+    "target": 15773332
+  },
+  "symbolic_return": {
+    "address": 15773387,
+    "stack_store_address": 15773379,
+    "store_offset": 0,
+    "destination": "RDI after ADD at 0xee9aaf",
+    "stack_advance": 8,
+    "concrete_destination_resolved": false
+  },
+  "next_unresolved": "Third decoded data word and carried key feeding R11D, then MOVSXD R11 and ADD RDI,R11 at 0xee9aaf",
+  "assumptions": [
+    "The preceding second file-state candidate is reached under its recorded assumptions",
+    "Fixed unmodified prefixes execute in x86-64 mode without external interference or memory faults",
+    "PUSH RDX writes its ordinary eight-byte stack value before the OR"
+  ],
+  "target_executed": false,
+  "native_machine_emulator_run": false,
+  "runtime_reachability_verified": false,
+  "native_implementations_resolved": false,
+  "java_native_bindings_resolved": false,
+  "independent_semantic_review": "NOT_RUN"
+}
