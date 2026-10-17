@@ -1,0 +1,48 @@
+{
+  "format": "kneekura.ysm-native-load-parity-proof.v1",
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "proof": {
+    "sequence_start": 19524217,
+    "sequence_length": 21,
+    "sequence_sha256": "3b36117655ea16aa3cb8226ff9fa29083e8c40dd825769e3297975dd47d3d533",
+    "push_immediate_u32": 2903821200,
+    "stack_word_byte_offset": 3,
+    "pushed_u64_hex": "ffffffffad14cb90",
+    "word_before": 65453,
+    "word_after": 65452,
+    "low_byte": 172,
+    "low_byte_set_bits": 4,
+    "parity_flag": true,
+    "mov_preserves_flags": true,
+    "conditional_instruction": "JP rel32",
+    "branch_address": 19524232,
+    "branch_taken_under_assumptions": true,
+    "target_address": 20660804,
+    "fallthrough_address": 19524238,
+    "target_file_backing": {
+      "region": {
+        "kind": "PT_LOAD",
+        "index": 4,
+        "address": 15490560,
+        "memory_size": 5308498,
+        "file_offset": 13823488,
+        "file_size": 5308498,
+        "flags": 5
+      },
+      "file_backed": true,
+      "file_offset": 18993732
+    }
+  },
+  "assumptions": [
+    "Unmodified fixed bytes are entered at the sequence start in 64-bit x86 mode",
+    "The PUSH/DEC/MOV memory operations complete normally on the current stack",
+    "No external interference changes stack bytes or flags during this sequence"
+  ],
+  "proof_scope": "One local constant parity predicate only; no runtime reachability or JNI method binding proof",
+  "target_executed": false,
+  "native_emulation_run": false,
+  "constant_arithmetic_only": true,
+  "native_implementations_resolved": false,
+  "independent_semantic_review": "NOT_RUN"
+}

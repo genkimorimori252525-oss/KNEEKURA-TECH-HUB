@@ -1,0 +1,175 @@
+{
+  "format": "kneekura.ysm-native-linux-prefix-frontier.v1",
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "objdump_version": "GNU objdump (GNU Binutils for Debian) 2.44",
+  "chains": [
+    {
+      "entry": "JNI_OnLoad",
+      "seed_address": 19004964,
+      "blocks": [
+        {
+          "start_address": 19004964,
+          "file_offset": 17337892,
+          "instruction_count": 3,
+          "prefix_byte_count": 17,
+          "prefix_sha256": "cfec10266b488173587aabb2c23acf1a8bdfe7b47b9053266cdc2253c1d5bc98",
+          "first_transfer": {
+            "address": 19004976,
+            "bytes": "e852a1f6ff",
+            "assembly": "call   0x1189f87"
+          },
+          "followed_direct_target": 18390919
+        },
+        {
+          "start_address": 18390919,
+          "file_offset": 16723847,
+          "instruction_count": 9,
+          "prefix_byte_count": 44,
+          "prefix_sha256": "c763edeac462e016c0aa80f35d5ec1f84e6b63e253cc6df143d03717d33d66b7",
+          "first_transfer": {
+            "address": 18390958,
+            "bytes": "e8ba4a1100",
+            "assembly": "call   0x129ea6d"
+          },
+          "followed_direct_target": 19524205
+        },
+        {
+          "start_address": 19524205,
+          "file_offset": 17857133,
+          "instruction_count": 8,
+          "prefix_byte_count": 33,
+          "prefix_sha256": "b8fadecb5b504d07b5c3609ed4240d13a6a0e33b2f55432479ec2a7f97017b31",
+          "first_transfer": {
+            "address": 19524232,
+            "bytes": "0f8ab6571100",
+            "assembly": "jp     0x13b4244"
+          },
+          "followed_direct_target": null
+        }
+      ],
+      "stop_reason": "FIRST_NON_DIRECT_CALL_JUMP_TRANSFER",
+      "conditional_choice_resolved": false,
+      "call_return_continuations_followed": false
+    },
+    {
+      "entry": "JNI_OnUnload",
+      "seed_address": 17697234,
+      "blocks": [
+        {
+          "start_address": 17697234,
+          "file_offset": 16030162,
+          "instruction_count": 8,
+          "prefix_byte_count": 29,
+          "prefix_sha256": "5f9a589792b84be992a7f106631a5d235794789ebc0eb0917ffc9562eb551af0",
+          "first_transfer": {
+            "address": 17697258,
+            "bytes": "e8b19b1c00",
+            "assembly": "call   0x12aa5a0"
+          },
+          "followed_direct_target": 19572128
+        },
+        {
+          "start_address": 19572128,
+          "file_offset": 17905056,
+          "instruction_count": 1,
+          "prefix_byte_count": 5,
+          "prefix_sha256": "708fc3cebb6c35aecc28bfcca665877efd5946f578a5031bbf92bc045e3c4718",
+          "first_transfer": {
+            "address": 19572128,
+            "bytes": "e8d837f4ff",
+            "assembly": "call   0x11edd7d"
+          },
+          "followed_direct_target": 18799997
+        },
+        {
+          "start_address": 18799997,
+          "file_offset": 17132925,
+          "instruction_count": 6,
+          "prefix_byte_count": 32,
+          "prefix_sha256": "f19be026d045e66bef0480d283e971bef94ed41314042f98af8b08eb6680132a",
+          "first_transfer": {
+            "address": 18800024,
+            "bytes": "e828f70700",
+            "assembly": "call   0x126d4c5"
+          },
+          "followed_direct_target": 19322053
+        },
+        {
+          "start_address": 19322053,
+          "file_offset": 17654981,
+          "instruction_count": 2,
+          "prefix_byte_count": 10,
+          "prefix_sha256": "f1e31f594fd755ce015bf34c83c4bd91fd5c87f8ed80b4846cd8bc7442907765",
+          "first_transfer": {
+            "address": 19322058,
+            "bytes": "e8414bf0ff",
+            "assembly": "call   0x1172010"
+          },
+          "followed_direct_target": 18292752
+        },
+        {
+          "start_address": 18292752,
+          "file_offset": 16625680,
+          "instruction_count": 6,
+          "prefix_byte_count": 27,
+          "prefix_sha256": "165c017af3c2c066955d2802607f30e2f8f4f6372f8454e37afe597be18fd17a",
+          "first_transfer": {
+            "address": 18292774,
+            "bytes": "e823dbf4ff",
+            "assembly": "call   0x10bfb4e"
+          },
+          "followed_direct_target": 17562446
+        },
+        {
+          "start_address": 17562446,
+          "file_offset": 15895374,
+          "instruction_count": 5,
+          "prefix_byte_count": 18,
+          "prefix_sha256": "486dd0f134b968963d667aea6c5b485f8fe00b8c1ab24f985c2a106514a85736",
+          "first_transfer": {
+            "address": 17562459,
+            "bytes": "e995930300",
+            "assembly": "jmp    0x10f8ef5"
+          },
+          "followed_direct_target": 17796853
+        },
+        {
+          "start_address": 17796853,
+          "file_offset": 16129781,
+          "instruction_count": 1,
+          "prefix_byte_count": 5,
+          "prefix_sha256": "60f62bdb3c0e74936eb0fd7962b4e25adcfba2d3065b9c5c33cbaeb39690e4c2",
+          "first_transfer": {
+            "address": 17796853,
+            "bytes": "e8d2d50f00",
+            "assembly": "call   0x11f64cc"
+          },
+          "followed_direct_target": 18834636
+        },
+        {
+          "start_address": 18834636,
+          "file_offset": 17167564,
+          "instruction_count": 21,
+          "prefix_byte_count": 96,
+          "prefix_sha256": "50cc1c0004b7b035126966ba48e31f7d79711c8731566bf9d43158052b066529",
+          "first_transfer": {
+            "address": 18834726,
+            "bytes": "0f8433a7faff",
+            "assembly": "je     0x11a0c5f"
+          },
+          "followed_direct_target": null
+        }
+      ],
+      "stop_reason": "FIRST_NON_DIRECT_CALL_JUMP_TRANSFER",
+      "conditional_choice_resolved": false,
+      "call_return_continuations_followed": false
+    }
+  ],
+  "scope": "First-transfer prefixes only; not a whole call graph, function boundary recovery or runtime reachability proof",
+  "target_executed": false,
+  "emulation_run": false,
+  "java_native_bindings_resolved": false,
+  "native_implementations_resolved": false,
+  "independent_semantic_review": "NOT_RUN"
+}
