@@ -184,3 +184,8 @@ re-extracted/reverified; no unpublished old receipt is treated as saved. Continu
 client model-readiness → geometry-load → tracker-reset ordering against full
 property application. Distinguish same-model updates from delayed replacement;
 no stale-state bug or runtime correction is established yet.
+
+Full-property versus geometry-reset ordering is joined through inherited Java
+bodies. Delayed-readiness and first-local-roaming cases are conditional runtime
+test candidates, not reproduced bugs. Continue full-resend/dirty-mark triggers
+and ordinary callers; scalar direct-write closure excludes native/reflection.

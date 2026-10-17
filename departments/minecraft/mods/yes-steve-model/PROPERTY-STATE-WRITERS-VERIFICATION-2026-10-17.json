@@ -1,0 +1,42 @@
+{
+  "checks": [
+    {
+      "check": "complete-exact-direct-writes",
+      "pass": true
+    },
+    {
+      "check": "955-classes",
+      "pass": true
+    }
+  ],
+  "negative_controls": [
+    {
+      "control": "missing-apply-call",
+      "rejected": true
+    },
+    {
+      "control": "missing-write",
+      "rejected": true
+    },
+    {
+      "control": "missing-writer-body",
+      "rejected": true
+    },
+    {
+      "control": "wrong-target",
+      "rejected": true
+    },
+    {
+      "control": "invented-native-closure",
+      "rejected": true
+    },
+    {
+      "control": "wrong-artifact",
+      "rejected": true
+    }
+  ],
+  "failures": [],
+  "independent_semantic_review": "NOT_RUN",
+  "runtime_executed": false,
+  "central_mapping_promoted": false
+}

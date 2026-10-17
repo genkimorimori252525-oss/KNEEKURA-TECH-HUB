@@ -328,3 +328,5 @@ bounded runtime observation rather than protection bypass.
 
 - [Server property producer](SERVER-PROPERTY-PRODUCER-RECOVERY-2026-10-17.md): delta caches, coalescing, rate gate and full-builder distinction.
 - [Server full synchronization](SERVER-FULL-SYNC-RECOVERY-2026-10-17.md): END-tick dirty branching, model-ready builder, queued consumers and client application order.
+
+- [Property/reset lifecycle join](PROPERTY-RESET-LIFECYCLE-RECOVERY-2026-10-17.md): inherited geometry resets, full-state ordering and a bounded scalar-write inventory; runtime concerns remain conditional.
