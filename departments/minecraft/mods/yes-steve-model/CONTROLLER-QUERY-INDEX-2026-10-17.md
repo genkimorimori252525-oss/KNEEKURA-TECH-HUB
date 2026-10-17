@@ -46,3 +46,11 @@ These dossiers have their own scoped receipts; they are not included in the nine
 - [First-person arm assembly](FIRST-PERSON-ARM-ASSEMBLY-RECOVERY-2026-10-17.md): separate animation/condition map with shared resources, and isolated JDK regex contract.
 - [Vehicle/projectile entity controllers](VEHICLE-PROJECTILE-CONTROLLERS-RECOVERY-2026-10-17.md): state selection, literal fly/air discrepancy, aircraft-origin rotation queue.
 - [Extra/GUI preview controllers](EXTRA-PREVIEW-CONTROLLERS-RECOVERY-2026-10-17.md): cap lifecycle, hover/focus emission timing and sound cleanup scope.
+
+Further optional inputs: [gun entry points](GUN-ANIMATION-ADAPTERS-RECOVERY-2026-10-17.md), [gun inner/event paths](GUN-INNER-ANIMATION-RECOVERY-2026-10-17.md), [carry/horse/skyhook](CARRY-HORSE-SKYHOOK-RECOVERY-2026-10-17.md), [music/BetterCombat](MUSIC-COMBAT-QUERY-INPUTS-RECOVERY-2026-10-17.md), [backpack/spell/blade](BACKPACK-SPELL-BLADE-INPUTS-RECOVERY-2026-10-17.md). These are also after the fixed checkpoint. Navigate their names through the [additional catalog](EXTRA-BINDING-CATALOG-RECOVERY-2026-10-17.md), retaining conditional registration branches.
+
+## Later optional-integration batch
+
+[OPTIONAL-INTEGRATION-CHECKPOINT-2026-10-17.json](OPTIONAL-INTEGRATION-CHECKPOINT-2026-10-17.json) records twelve post-nine-checkpoint cohorts plus two earlier hand/roaming overlap anchors. All14 static auditors passed in approximately3.209seconds; six duplicate method snapshots compared equal, with zero conflicts. The explicit manifest includes the additional namespace catalog and condition-registration handle inventory. Earlier17/10/9 manifests remain unchanged.
+
+This batch does not run the game, optional providers, native code or whole-repository CI, and does not independently validate prose semantics. The JDK-only eight-case regex receipt is separate, not silently included as target runtime. Central map hash remains unchanged. Navigation itself has ten fixture tests plus six real repository lookups; those validate lookup/provenance behavior, not animation correctness.

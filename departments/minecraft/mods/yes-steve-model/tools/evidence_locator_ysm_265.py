@@ -8,6 +8,7 @@ from pathlib import Path
 INDEX = 'EVIDENCE-LOCATOR-2026-10-17.json'
 MAP = 'OBFUSCATION-MAP-2026-10-05.json'
 LOOKUP = 'QUERY-NAME-LOOKUP-2026-10-17.jsonl'
+EXTRA_LOOKUP = 'EXTRA-QUERY-NAME-LOOKUP-2026-10-17.jsonl'
 P = 'com/elfmcys/yesstevemodel/'
 
 
@@ -52,11 +53,13 @@ def build(root):
                     'source': MAP,
                 }
     queries = []
-    lookup_path = root / LOOKUP
-    if lookup_path.exists():
-        raw = lookup_path.read_bytes()
-        files[LOOKUP] = hashlib.sha256(raw).hexdigest()
-        queries = [json.loads(line) for line in raw.decode().splitlines() if line.strip()]
+    for name in (LOOKUP, EXTRA_LOOKUP):
+        lookup_path = root / name
+        if lookup_path.exists():
+            raw = lookup_path.read_bytes()
+            files[name] = hashlib.sha256(raw).hexdigest()
+            queries.extend({**json.loads(line), 'source_catalog': name}
+                           for line in raw.decode().splitlines() if line.strip())
     documents = sorted(p.name for p in root.glob('*RECOVERY*.md'))
     for name in documents:
         files[name] = hashlib.sha256((root / name).read_bytes()).hexdigest()
@@ -78,7 +81,8 @@ def search(index, *, owner=None, query=None, topic=None, limit=20):
     if query is not None:
         rows = [{'query': r['query'], 'target': r['target'],
                  'evidence': index['owners'].get(normalized_owner(r['target'].get('owner', '')), []),
-                 'scope': 'Base query/YSM catalog only; no semantic promotion'}
+                 'catalog': r.get('source_catalog', LOOKUP),
+                 'scope': r.get('scope', 'Base query/YSM catalog only; no semantic promotion')}
                 for r in index['queries'] if query.casefold() in r['query'].casefold()]
     elif owner is not None:
         needle = normalized_owner(owner).casefold()
@@ -124,7 +128,7 @@ def main():
         if any(Path(f).name != f or f in ('.', '..') for f in selected):
             parser.error('Unsafe locator path')
         if args.query is not None:
-            selected.add(LOOKUP)
+            selected.update(name for name in (LOOKUP, EXTRA_LOOKUP) if name in index['source_hashes'])
         if args.owner is not None:
             selected.add(MAP)
         result['selected_hashes'] = {f: (args.root / f).is_file() and

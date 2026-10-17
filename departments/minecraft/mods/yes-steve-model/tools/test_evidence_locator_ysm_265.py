@@ -84,6 +84,17 @@ class LocatorTest(unittest.TestCase):
         self.write('UNSUPPORTED-EVIDENCE.json', {'changed': True})
         self.assertEqual(self.invoke('--query', 'ysm.test', '--check-selected')['freshness'], 'SELECTED_FILES_MATCH')
 
+    def test_extra_catalog_keeps_both_branch_sites(self):
+        rows = [{'query': 'ctrl.test', 'target': {'kind': 'registration-site', 'owner': 'com/example/A', 'name': name},
+                 'scope': 'branch not evaluated'} for name in ('real', 'fallback')]
+        (self.root / locator.EXTRA_LOOKUP).write_text(''.join(json.dumps(r)+'\n' for r in rows))
+        self.invoke('--build')
+        result = self.invoke('--query', 'ctrl.test', '--check-selected')
+        self.assertEqual(result['total_matches'], 2)
+        self.assertEqual({r['target']['name'] for r in result['results']}, {'real', 'fallback'})
+        self.assertEqual({r['scope'] for r in result['results']}, {'branch not evaluated'})
+        self.assertTrue(result['selected_hashes'][locator.EXTRA_LOOKUP])
+
     def test_index_is_not_its_own_evidence(self):
         self.invoke('--build')
         self.write('EVIDENCE-LOCATOR-VERIFICATION-2026-10-17.json', {'receipt': True})

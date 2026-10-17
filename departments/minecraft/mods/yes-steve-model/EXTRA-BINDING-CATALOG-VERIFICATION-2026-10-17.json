@@ -1,0 +1,44 @@
+{
+  "checks": [
+    {
+      "check": "exact-fixed-registration-graph",
+      "pass": true
+    },
+    {
+      "check": "exact-lookup-projection",
+      "pass": true
+    }
+  ],
+  "negative_controls": [
+    {
+      "control": "missing-entry",
+      "rejected": true
+    },
+    {
+      "control": "wrong-name",
+      "rejected": true
+    },
+    {
+      "control": "wrong-branch-claim",
+      "rejected": true
+    },
+    {
+      "control": "missing-adapter-edge",
+      "rejected": true
+    },
+    {
+      "control": "wrong-artifact",
+      "rejected": true
+    },
+    {
+      "control": "invented-runtime-closure",
+      "rejected": true
+    }
+  ],
+  "failures": [],
+  "sites": 149,
+  "unique_names": 109,
+  "independent_semantic_review": "NOT_RUN",
+  "target_runtime_executed": false,
+  "central_mapping_promoted": false
+}

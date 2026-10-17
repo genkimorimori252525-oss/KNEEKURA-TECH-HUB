@@ -1,0 +1,215 @@
+{
+  "format": "kneekura.ysm-optional-integration-checkpoint.v1",
+  "cohort_manifest": [
+    [
+      "CONDITIONAL-ANIMATION-NAMES",
+      "conditional_animation_names",
+      true
+    ],
+    [
+      "CONDITION-REGISTRATION-CALLERS",
+      "condition_registration_callers",
+      false
+    ],
+    [
+      "RIDING-ARMOR-PREDICATES",
+      "riding_armor_predicates",
+      true
+    ],
+    [
+      "FIRST-PERSON-ARM-ASSEMBLY",
+      "first_person_arm_assembly",
+      true
+    ],
+    [
+      "VEHICLE-PROJECTILE-CONTROLLERS",
+      "vehicle_projectile_controllers",
+      true
+    ],
+    [
+      "EXTRA-PREVIEW-CONTROLLERS",
+      "extra_preview_controllers",
+      true
+    ],
+    [
+      "GUN-ANIMATION-ADAPTERS",
+      "gun_animation_adapters",
+      true
+    ],
+    [
+      "GUN-INNER-ANIMATION",
+      "gun_inner_animation",
+      true
+    ],
+    [
+      "CARRY-HORSE-SKYHOOK",
+      "carry_horse_skyhook",
+      true
+    ],
+    [
+      "MUSIC-COMBAT-QUERY-INPUTS",
+      "music_combat_query_inputs",
+      true
+    ],
+    [
+      "BACKPACK-SPELL-BLADE-INPUTS",
+      "backpack_spell_blade_inputs",
+      true
+    ],
+    [
+      "EXTRA-BINDING-CATALOG",
+      "extra_binding_catalog",
+      false
+    ],
+    [
+      "HUMANOID-HAND-PREDICATES",
+      "humanoid_hand_predicates",
+      true
+    ],
+    [
+      "ROAMING-STATE-MERGE",
+      "roaming_state_merge",
+      true
+    ]
+  ],
+  "cohorts": [
+    {
+      "cohort": "CONDITIONAL-ANIMATION-NAMES",
+      "tool_sha256": "fe5a8c5ad75c3a2f2a1511a53a8c3c772cda2a78c12c1ccc8578373c5d7380e6",
+      "evidence_sha256": "1b03d6529d5e1bf7fb9eb064040b0185281278b7224427412e0118dd5b1472be",
+      "rerun_receipt_sha256": "923acab092d89e32541815002ca24d1ad5ee5605f6013c460c4c9a94f5ce01b4",
+      "checks": 321,
+      "negative_controls": 11,
+      "status": "PASS"
+    },
+    {
+      "cohort": "CONDITION-REGISTRATION-CALLERS",
+      "tool_sha256": "9974b4024ce357dc69a084fb90436e145109486b36a41367a3ca70772e4c7e85",
+      "evidence_sha256": "03a0c1a01cae26f034b7cf3ac46236c9900bc62c2a401b8c38a26a46464669fc",
+      "rerun_receipt_sha256": "b116db0e228dd5e18c049e99e88115cdc763caf4b122e50fa5593e7dcd826d75",
+      "checks": 2,
+      "negative_controls": 6,
+      "status": "PASS"
+    },
+    {
+      "cohort": "RIDING-ARMOR-PREDICATES",
+      "tool_sha256": "b8d70a7dd76827cd9c43299f49d0cf25f307cae1afb419dbfcaf864b57ec81d0",
+      "evidence_sha256": "2fdb60ca2adb0a72fe6fbcd5354e53559cebf3a76477897b2a06a4f213b3424f",
+      "rerun_receipt_sha256": "a954ed45ce4d65294939e4d691a75bfa3c535ad20577efe4205d062593a27eb5",
+      "checks": 156,
+      "negative_controls": 11,
+      "status": "PASS"
+    },
+    {
+      "cohort": "FIRST-PERSON-ARM-ASSEMBLY",
+      "tool_sha256": "1ab3974621b93c8bef3c534aa3420e0a09b4963a1406184a8f8d223068524002",
+      "evidence_sha256": "d8745594aaeb084672f068fec145c7546270475844c6797ed4ee1f6580137c2b",
+      "rerun_receipt_sha256": "65b81232d244fc111dae1beb6241db4cfa60ae6d7c65abefb8fe803f6a18b43e",
+      "checks": 242,
+      "negative_controls": 10,
+      "status": "PASS"
+    },
+    {
+      "cohort": "VEHICLE-PROJECTILE-CONTROLLERS",
+      "tool_sha256": "7101cac357674fbcba715358bd2aa8a007e19a2b1db0bdfc7d5360442a7c38a6",
+      "evidence_sha256": "1630fbdc84f70b69c88ecd4c42fb21983aaca41064bb7f5559629f37a03d54f9",
+      "rerun_receipt_sha256": "e1ff229e1bb1bac5a96a95aefc63a45d3b9d088e9e3530220ad67bc59a0cd816",
+      "checks": 460,
+      "negative_controls": 17,
+      "status": "PASS"
+    },
+    {
+      "cohort": "EXTRA-PREVIEW-CONTROLLERS",
+      "tool_sha256": "ae7145108b7043633d8a7abeae08340b2fb9551c0799062da2e978f3a220cf5c",
+      "evidence_sha256": "fadaae8d0323e80496b7656c70362dc7f4c74888d8ce77e08b702cf0338dfd3b",
+      "rerun_receipt_sha256": "abf882f2e3dc714131e322852b3118c04adcee3c51e18f60966855359dca0ed1",
+      "checks": 342,
+      "negative_controls": 14,
+      "status": "PASS"
+    },
+    {
+      "cohort": "GUN-ANIMATION-ADAPTERS",
+      "tool_sha256": "5d51e4f1fc9e66151bf5769aa96565a035009ac50dc73b0c8038a2683b1fdfcd",
+      "evidence_sha256": "75e9d7ef087d5abc5cd200e1a17ca156378e9289624ce6567817973a8add5aae",
+      "rerun_receipt_sha256": "ef7483a25ba808347d918c4027756497c962e7a35e013ca2463e47d9a80f4adc",
+      "checks": 277,
+      "negative_controls": 10,
+      "status": "PASS"
+    },
+    {
+      "cohort": "GUN-INNER-ANIMATION",
+      "tool_sha256": "332f0113e1a30a4b1afce66b4a5886cee583fe1c7c376e5fb244aa5cdcb18a48",
+      "evidence_sha256": "61853e84dc52c75f52c5ede8fe18033ccbadf5a6ffde94ae3dce75bc47d8197d",
+      "rerun_receipt_sha256": "289795532ace76e3cd6ac5364e8307914a1ab3589cefddb64c35ee01db967c33",
+      "checks": 369,
+      "negative_controls": 10,
+      "status": "PASS"
+    },
+    {
+      "cohort": "CARRY-HORSE-SKYHOOK",
+      "tool_sha256": "327fecc231d9a61701f45fb00ef6f79b5d4b14b34d7aa22358ab7e08f3548d67",
+      "evidence_sha256": "7df6a5017de10c5f222570bbb4f58da8592dd7480475878491cc0a9fe52d3828",
+      "rerun_receipt_sha256": "95b77208773cf2b521a11cef3dde06700d579e89ce25ed502e1d1bb65d1e1019",
+      "checks": 336,
+      "negative_controls": 18,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MUSIC-COMBAT-QUERY-INPUTS",
+      "tool_sha256": "838c43d093a12a93313ea0e6b1a90ca47a2772a47050546046d9dbb568ddb7f6",
+      "evidence_sha256": "5d398f4d884a9136b5bdd27b0feb79e1a2996d6d99abdf4f5ac50275871c2edc",
+      "rerun_receipt_sha256": "0c737d96cc041884e8cd578d3d0f5477925cb14405f213e3025fef8f38ed0566",
+      "checks": 288,
+      "negative_controls": 13,
+      "status": "PASS"
+    },
+    {
+      "cohort": "BACKPACK-SPELL-BLADE-INPUTS",
+      "tool_sha256": "ecc3a5bcd55045a168e6a38cd4528d507dc8bae63cde909b6e409d19bd25b7f4",
+      "evidence_sha256": "cc54283153a7079afdff014a312eda2ffdc3b018ea102e7f849e39cb717bc232",
+      "rerun_receipt_sha256": "66c0b9ee4d0e67b3aa3fccdcbdd685a5da3dc3035f315aee994b9e62b4d55c05",
+      "checks": 362,
+      "negative_controls": 15,
+      "status": "PASS"
+    },
+    {
+      "cohort": "EXTRA-BINDING-CATALOG",
+      "tool_sha256": "deb9908f9308ffac0597bcbd41e9a40037b01e12389bf3f1e17023a8ebbe652a",
+      "evidence_sha256": "07a9241a7a544cad2ea215bfde4be19d90c796dae3ecef7fa231ffdda47d0d2d",
+      "rerun_receipt_sha256": "399b4d02fbbb545526833fcdc058345ea06d8230bf95c828fdcfcd0ab490a0ba",
+      "checks": 2,
+      "negative_controls": 6,
+      "status": "PASS"
+    },
+    {
+      "cohort": "HUMANOID-HAND-PREDICATES",
+      "tool_sha256": "c83acbb372a81d68f72d6211968a0439b6f443371149ab42038b4acb32c891fd",
+      "evidence_sha256": "475bae7879847ad3c7a93b4a01e7bdf7b6cf8fa816b7a8d83706536153b37ee3",
+      "rerun_receipt_sha256": "1d2d2606c22427e1d59150e05847141eea981e1ffb885371f8f78af140f7a909",
+      "checks": 170,
+      "negative_controls": 12,
+      "status": "PASS"
+    },
+    {
+      "cohort": "ROAMING-STATE-MERGE",
+      "tool_sha256": "ed363eed8796b6c3ec3af03537a4dbdbf31e0e00954620e22a0eadb3ad390c54",
+      "evidence_sha256": "f8cff68e0309cf59888f9fbe8e8851cc441668ad5c7a65c60910b66c5f278043",
+      "rerun_receipt_sha256": "998f1b851c0fe3a3fa6bad3870a92c06cfad554d669d5f3569c289f9bf75c60f",
+      "checks": 179,
+      "negative_controls": 12,
+      "status": "PASS"
+    }
+  ],
+  "cohort_count": 14,
+  "overlapping_method_snapshots_compared": 6,
+  "overlap_conflicts": 0,
+  "central_mapping_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
+  "central_mapping_promoted": false,
+  "independent_semantic_review": "NOT_RUN",
+  "target_runtime_executed": false,
+  "whole_project_ci_run": false,
+  "earlier_fixed17_checkpoint_modified": false,
+  "earlier_fixed10_checkpoint_modified": false,
+  "earlier_fixed9_checkpoint_modified": false,
+  "elapsed_seconds": 3.209
+}

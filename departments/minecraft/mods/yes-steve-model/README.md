@@ -406,3 +406,7 @@ bounded runtime observation rather than protection bypass.
 - [CarryOn/SWEM/Create inputs](CARRY-HORSE-SKYHOOK-RECOVERY-2026-10-17.md): carry-state priority, horse gait/jump naming, skyhook membership and accessor transformation boundary.
 
 - [Music/BetterCombat inputs](MUSIC-COMBAT-QUERY-INPUTS-RECOVERY-2026-10-17.md): retained music cache, reflected-field readiness and attack-start to swing synchronization boundary.
+
+- [Backpack/spell/blade inputs](BACKPACK-SPELL-BLADE-INPUTS-RECOVERY-2026-10-17.md): rendered backpack precedence, query-versus-playback reset and version-specific combo naming; legacy memory access remains unexecuted.
+
+- [Additional ctrl/tlm/math lookup](EXTRA-BINDING-CATALOG-RECOVERY-2026-10-17.md): 149 static registration sites for109 names, preserving optional real/fallback branches; integrated with the opt-in locator.
