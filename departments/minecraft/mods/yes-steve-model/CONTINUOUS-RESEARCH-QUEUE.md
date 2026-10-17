@@ -460,3 +460,7 @@ Input-state/sync/defer boundaries are recorded. Ordinary sync client lookup diff
 from EntityLoadEvent caching; defer's nonempty name is not used by its recorder.
 Continue remaining utility/noise/math/control functions; preserve task execution
 versus dispatch, arity and emission distinctions without speculative fixes.
+
+## Later projectile/vehicle transfer continuation
+
+Twelve previously uncaptured capability/packet/provider owners now have two bounded dossiers (75 declarations including support/bridges). The important connected difference is projectile deferred consumers versus vehicle Optional-only transfer, plus retained variable maps and explicit client lazy initialization. The fixed8 entity-capability transport checkpoint passes; these counts are not semantic completion. Next follow client-local Molang command/watch producers and compare their scheduling/result ownership with the existing server-command and GUI routes, after locator/source-path checks. Native/runtime and independent-review boundaries remain unchanged.

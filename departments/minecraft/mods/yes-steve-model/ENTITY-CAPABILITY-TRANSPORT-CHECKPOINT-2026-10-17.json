@@ -1,0 +1,131 @@
+{
+  "format": "kneekura.ysm-entity-capability-transport-checkpoint.v1",
+  "cohort_manifest": [
+    [
+      "PROJECTILE-CAPABILITY-TRANSPORT",
+      "projectile_capability_transport",
+      true
+    ],
+    [
+      "VEHICLE-CAPABILITY-TRANSPORT",
+      "vehicle_capability_transport",
+      true
+    ],
+    [
+      "SERVER-FULL-SYNC",
+      "server_full_sync",
+      true
+    ],
+    [
+      "ENTITY-LOAD-APPLICATION",
+      "entity_load_application",
+      true
+    ],
+    [
+      "ROAMING-STATE-MERGE",
+      "roaming_state_merge",
+      true
+    ],
+    [
+      "VEHICLE-PROJECTILE-RENDER",
+      "vehicle_projectile_render",
+      true
+    ],
+    [
+      "MAID-COMMON-MODEL-COPY",
+      "maid_common_model_copy",
+      true
+    ],
+    [
+      "ANIMATION-PACKET-ROUTING",
+      "animation_packet_routing",
+      true
+    ]
+  ],
+  "cohorts": [
+    {
+      "cohort": "PROJECTILE-CAPABILITY-TRANSPORT",
+      "tool_sha256": "5fd9051ad05f34d1ab6333d0f0038e8a3f8ff2bf2e37408f56071b39d30a6053",
+      "evidence_sha256": "d3c39f50f80d96f5aab5af35f6140c6affed863d3ca6e762f20cdcf29c046a51",
+      "rerun_receipt_sha256": "5d558fa87a9809e3b3067b7af813c3fc8ff94b04ba94a8021b13be840378666e",
+      "checks": 261,
+      "negative_controls": 20,
+      "status": "PASS"
+    },
+    {
+      "cohort": "VEHICLE-CAPABILITY-TRANSPORT",
+      "tool_sha256": "fdb466d3fd648ead87b0a06890f61ef4a5de1921e7f6563cf1e7d6eba554d0b4",
+      "evidence_sha256": "0b8e0107661f507fefb5cc6c6aac29ddaafdd40e566e5e912020058a68bcc467",
+      "rerun_receipt_sha256": "7b67028f13dbb17a120725f9aeb9fb5455edc765f99089d152ec1cbfda68fbc9",
+      "checks": 179,
+      "negative_controls": 14,
+      "status": "PASS"
+    },
+    {
+      "cohort": "SERVER-FULL-SYNC",
+      "tool_sha256": "9a3afc69f76a07b17c99f1572c2764896daf74f49f209b6f5de4d4b2c4f4545c",
+      "evidence_sha256": "4d7de7d99ca629cd2268af2ab95498597728a449114e4dd9fe77921c3dfa79e0",
+      "rerun_receipt_sha256": "e43c8540a58bcc8ed69b89a39947ab36cfea51bedb0a9b5ca4b8d68ef0bef815",
+      "checks": 384,
+      "negative_controls": 13,
+      "status": "PASS"
+    },
+    {
+      "cohort": "ENTITY-LOAD-APPLICATION",
+      "tool_sha256": "d0bbd971c8554d9c31e2cb847de9f581f7205b5807fd283128a190a661620f21",
+      "evidence_sha256": "b8c6502bc9c9254d01ec1bf565b192e7141dbb7ccc8b30b4210ee5ef490cef44",
+      "rerun_receipt_sha256": "2db232de21e4f5d32b1720e9c3400031c9b5445bb42b3ba1739b713842978ccd",
+      "checks": 70,
+      "negative_controls": 12,
+      "status": "PASS"
+    },
+    {
+      "cohort": "ROAMING-STATE-MERGE",
+      "tool_sha256": "ed363eed8796b6c3ec3af03537a4dbdbf31e0e00954620e22a0eadb3ad390c54",
+      "evidence_sha256": "f8cff68e0309cf59888f9fbe8e8851cc441668ad5c7a65c60910b66c5f278043",
+      "rerun_receipt_sha256": "998f1b851c0fe3a3fa6bad3870a92c06cfad554d669d5f3569c289f9bf75c60f",
+      "checks": 179,
+      "negative_controls": 12,
+      "status": "PASS"
+    },
+    {
+      "cohort": "VEHICLE-PROJECTILE-RENDER",
+      "tool_sha256": "df076877ae2fc4c61bce5c85670173cd65836e4229f0fd75dc65837a5826dc21",
+      "evidence_sha256": "1dd1f8e35a192a7bfe27e193fe9bd66efa53e8230da32db0a1d77805ca24e1b6",
+      "rerun_receipt_sha256": "94c4b4ba75fe3d81c8ef2a1e349ab21704cb87fd1f09dda132ccd67f3b92aaba",
+      "checks": 153,
+      "negative_controls": 9,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MAID-COMMON-MODEL-COPY",
+      "tool_sha256": "e43af28c808a9e92f49a3bfc61e21299066d0184859207dae795699c0e3b44c3",
+      "evidence_sha256": "9c71b34b3f8946e01fa197fc6946ee94dbb6ae70c4a2f9f168199f331a704dc4",
+      "rerun_receipt_sha256": "3811fdbd471c9c7c548498df73ebcc00c9f6005bb7e7c94ffdd6d619a2794dbd",
+      "checks": 155,
+      "negative_controls": 9,
+      "status": "PASS"
+    },
+    {
+      "cohort": "ANIMATION-PACKET-ROUTING",
+      "tool_sha256": "f01a7bc387e354d75a41fe8d3f9bcc8479fa2190bb61fc6a450fc8f66200eff0",
+      "evidence_sha256": "43fb20223540b1236c6a62e8bfd5421ee7507ec145d9c477e98980b0cc77b61d",
+      "rerun_receipt_sha256": "80f52a51f73d1c340d6a9d5ab980fb1936124b3a062953d180115ec770ebff93",
+      "checks": 254,
+      "negative_controls": 10,
+      "status": "PASS"
+    }
+  ],
+  "cohort_count": 8,
+  "overlapping_method_snapshots_compared": 0,
+  "overlap_conflicts": 0,
+  "central_mapping_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
+  "central_mapping_promoted": false,
+  "independent_semantic_review": "NOT_RUN",
+  "target_runtime_executed": false,
+  "whole_project_ci_run": false,
+  "earlier_fixed17_checkpoint_modified": false,
+  "earlier_fixed10_checkpoint_modified": false,
+  "earlier_fixed9_checkpoint_modified": false,
+  "elapsed_seconds": 1.55
+}

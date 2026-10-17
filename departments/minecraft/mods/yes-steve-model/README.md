@@ -518,3 +518,7 @@ bounded runtime observation rather than protection bypass.
 - [Connected transport/render review](TRANSPORT-RENDER-BATCH-REVIEW-2026-10-17.md): later fixed27-cohort integrity batch, selected Vineflower comparison and explicit remaining evidence limits.
 
 - Before recapturing a class after an owner-name miss, use the [optional locator source-path search](EVIDENCE-LOCATOR-2026-10-17.md). It finds existing source-track cohorts without guessing a class mapping or treating file presence as full semantic coverage.
+
+## Projectile and vehicle capability transport extension
+
+[Projectile owner-state transport](PROJECTILE-CAPABILITY-TRANSPORT-RECOVERY-2026-10-17.md) and [vehicle transfer](VEHICLE-CAPABILITY-TRANSPORT-RECOVERY-2026-10-17.md) close the next Java-side branch: retained server maps, deferred versus optional-only producers, NBT/string-pool wire conversion, explicit lazy initialization and later processor installation. A queued callback is not a frozen launch snapshot; wrapper capability presence is not rendering readiness. The fixed8 [checkpoint](ENTITY-CAPABILITY-TRANSPORT-CHECKPOINT-2026-10-17.json) joins these two cohorts with six existing anchors, without changing older manifests or promoting the central map.
