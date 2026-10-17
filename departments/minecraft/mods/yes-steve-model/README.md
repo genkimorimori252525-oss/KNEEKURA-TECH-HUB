@@ -334,3 +334,5 @@ bounded runtime observation rather than protection bypass.
 - [Full-state and dirty-mark callers](FULL-SYNC-CALLERS-RECOVERY-2026-10-17.md): all fixed-JAR direct call sites and shared lambda fallback handles; no universal runtime closure.
 
 - [Equipment and effect queries](EQUIPMENT-EFFECT-QUERY-RECOVERY-2026-10-17.md): slot/provider precedence, short-circuit tags, durability, actual enchantment argument index and remote/live effect sources.
+
+- [Resource arguments and equipment adapters](RESOURCE-ARGUMENT-ADAPTER-RECOVERY-2026-10-17.md): literal-ID caching, typed strings and optional-mod present-empty/fallback boundaries.

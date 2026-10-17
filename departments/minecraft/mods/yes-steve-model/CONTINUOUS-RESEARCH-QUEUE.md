@@ -199,3 +199,8 @@ Equipment/effect query bodies and binding identities are recorded, including the
 actual constant enchantment argument index (not silently corrected). Continue
 ResourceLocation/typed argument conversion and optional equipment adapter
 boundaries, then world-relative/tag queries. Runtime behavior remains untested.
+
+Resource argument caching and optional armor/elytra adapter Java boundaries are
+recorded; external provider versions/runtime linkage remain untested. Continue
+world-relative block/biome/tag query semantics with exact rounding, range gates
+and lazy short-circuit order.
