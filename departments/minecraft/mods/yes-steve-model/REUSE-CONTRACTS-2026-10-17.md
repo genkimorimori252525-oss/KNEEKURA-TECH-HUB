@@ -100,3 +100,7 @@ The [server synchronization boundary review](SERVER-SYNC-BATCH-REVIEW-2026-10-17
 
 - [Optional probe consumer](TOP-OPTIONAL-CONSUMER-RECOVERY-2026-10-17.md): IMC registration offer, inspected-player versus initialized-vehicle gates, and conditional lazy-set consumer reachability. The fixed6 [checkpoint](TOP-CONSUMER-CHECKPOINT-2026-10-17.json) passes; plugin activation and repeated getter execution remain unproven.
 - [Model administration and startup reload](MODEL-ADMIN-RELOAD-RECOVERY-2026-10-17.md): privileged set/disable staging, command versus selection-packet validation, reload admission versus callbacks, and conditional feedback/nullability boundaries. The fixed7 [checkpoint](MODEL-ADMIN-CHECKPOINT-2026-10-17.json) passes; no commands or native loaders were executed.
+
+## Native declarations and common lifecycle
+
+[Common setup/native lifetime](COMMON-NATIVE-LIFECYCLE-RECOVERY-2026-10-17.md) connects registration order, native return handling and shutdown-hook registration. The [bounded inventory](NATIVE-DECLARATION-INVENTORY-2026-10-17.json) accounts for all 17 ACC_NATIVE declarations across the fixed JAR's 955 class files, with exact evidence anchors; implementations remain unresolved. Its fixed8 [checkpoint](NATIVE-DECLARATION-CHECKPOINT-2026-10-17.json) verifies the Java boundary cohorts, not native execution or full deobfuscation.
