@@ -189,3 +189,8 @@ Full-property versus geometry-reset ordering is joined through inherited Java
 bodies. Delayed-readiness and first-local-roaming cases are conditional runtime
 test candidates, not reproduced bugs. Continue full-resend/dirty-mark triggers
 and ordinary callers; scalar direct-write closure excludes native/reflection.
+
+Full builder/dirty-mark direct and bootstrap callers are inventoried. Delayed
+reset remains a conditional runtime candidate with ordinary resend entry points
+identified. Continue independent effect/item/entity query input coverage rather
+than guessing a fix or treating source-only reasoning as runtime reproduction.

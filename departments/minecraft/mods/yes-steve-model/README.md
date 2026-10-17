@@ -330,3 +330,5 @@ bounded runtime observation rather than protection bypass.
 - [Server full synchronization](SERVER-FULL-SYNC-RECOVERY-2026-10-17.md): END-tick dirty branching, model-ready builder, queued consumers and client application order.
 
 - [Property/reset lifecycle join](PROPERTY-RESET-LIFECYCLE-RECOVERY-2026-10-17.md): inherited geometry resets, full-state ordering and a bounded scalar-write inventory; runtime concerns remain conditional.
+
+- [Full-state and dirty-mark callers](FULL-SYNC-CALLERS-RECOVERY-2026-10-17.md): all fixed-JAR direct call sites and shared lambda fallback handles; no universal runtime closure.
