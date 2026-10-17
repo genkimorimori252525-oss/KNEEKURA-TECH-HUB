@@ -338,3 +338,5 @@ bounded runtime observation rather than protection bypass.
 - [Resource arguments and equipment adapters](RESOURCE-ARGUMENT-ADAPTER-RECOVERY-2026-10-17.md): literal-ID caching, typed strings and optional-mod present-empty/fallback boundaries.
 
 - [World/position/camera queries](WORLD-QUERY-INPUT-RECOVERY-2026-10-17.md): offset evaluation/range/rounding, tag short-circuiting, interpolated position and camera orientation convention.
+
+- [Time/controller queries](TIME-CONTROLLER-QUERY-RECOVERY-2026-10-17.md): clock units and boxing, nullable context defaults, and distinct coded/Bedrock all-versus-any completion producers.

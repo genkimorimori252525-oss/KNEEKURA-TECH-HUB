@@ -209,3 +209,8 @@ World-relative/tag and position/camera query inputs are recorded. Offset x/y/z
 all evaluate before the range gate; position uses effective partial tick while
 relative-block lookup uses current coordinates. Continue context guards and
 time/controller state query inputs, preserving actual units and boxing.
+
+Time/controller query sources are joined. all/any are equal for the coded single
+player path but differ under Bedrock holder aggregation; no global alias claim.
+Continue child-context delegation/visibility and query lookup lifetime while
+preserving nullable context defaults, raw boxing and actual clock units.
