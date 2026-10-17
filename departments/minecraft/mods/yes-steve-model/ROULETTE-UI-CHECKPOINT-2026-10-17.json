@@ -1,0 +1,89 @@
+{
+  "format": "kneekura.ysm-roulette-ui-checkpoint.v1",
+  "cohort_manifest": [
+    [
+      "ROULETTE-EXPRESSION-UI",
+      "roulette_expression_ui",
+      true
+    ],
+    [
+      "ROULETTE-SUBMISSION-PRODUCERS",
+      "roulette_submission_producers",
+      false
+    ],
+    [
+      "MOLANG-COMMAND-PRODUCER",
+      "molang_command_producer",
+      true
+    ],
+    [
+      "PARSER-POOL-LIFETIME",
+      "parser_pool_lifetime",
+      true
+    ],
+    [
+      "ANIMATION-PACKET-ROUTING",
+      "animation_packet_routing",
+      true
+    ]
+  ],
+  "cohorts": [
+    {
+      "cohort": "ROULETTE-EXPRESSION-UI",
+      "tool_sha256": "1fad237f1a6e5576fbb5ddde2bac68c729447c7b2a3e48abb6b13f35f9a45429",
+      "evidence_sha256": "b83e4b08d3252cc94aa94e410b2d61af76c8a9d9b25dda7e4f9f55afa023c6b8",
+      "rerun_receipt_sha256": "c92aac6d176bcf963332234d65963d52d57e0a209c53c4c8cf534e93df832db3",
+      "checks": 280,
+      "negative_controls": 7,
+      "status": "PASS"
+    },
+    {
+      "cohort": "ROULETTE-SUBMISSION-PRODUCERS",
+      "tool_sha256": "4c378251c2aa6b2ff0d0a8c3715dbfda811b7bb5342109ac8d7ab244821e2242",
+      "evidence_sha256": "2aec7a4eb75cdef00f28f7e0901320ae079a9202a3ebb5c1f063e0d3502d905a",
+      "rerun_receipt_sha256": "89a22626d367e66c4426aa2ea529eeaf591027313760c0aaba97a058ba633894",
+      "checks": 2,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MOLANG-COMMAND-PRODUCER",
+      "tool_sha256": "d9f849297ac038baf4e1202862dd52a4326ad863d5b650a96041326e3b7a5dfe",
+      "evidence_sha256": "199dfcf5fc94c6382681c831c13a51f3abf7cd06dff1a30ce2f33479968198da",
+      "rerun_receipt_sha256": "5a17630b316504ae213ff1191b94eefd6658fc9b138162154615e75c5d287fda",
+      "checks": 148,
+      "negative_controls": 11,
+      "status": "PASS"
+    },
+    {
+      "cohort": "PARSER-POOL-LIFETIME",
+      "tool_sha256": "889555ed47d5558ce4192d1298861bdfc8e88a0e653565a4ecd7352968bcbe54",
+      "evidence_sha256": "e9678c16de71d9e233df6bff23355e29b67942a2060b983a12aa9038f5a6dc8e",
+      "rerun_receipt_sha256": "1bf4cf93635b9a0821055692f25655a57ee02a43ca0b25a2dd440366e647be31",
+      "checks": 70,
+      "negative_controls": 10,
+      "status": "PASS"
+    },
+    {
+      "cohort": "ANIMATION-PACKET-ROUTING",
+      "tool_sha256": "f01a7bc387e354d75a41fe8d3f9bcc8479fa2190bb61fc6a450fc8f66200eff0",
+      "evidence_sha256": "43fb20223540b1236c6a62e8bfd5421ee7507ec145d9c477e98980b0cc77b61d",
+      "rerun_receipt_sha256": "80f52a51f73d1c340d6a9d5ab980fb1936124b3a062953d180115ec770ebff93",
+      "checks": 254,
+      "negative_controls": 10,
+      "status": "PASS"
+    }
+  ],
+  "cohort_count": 5,
+  "overlapping_method_snapshots_compared": 4,
+  "overlap_conflicts": 0,
+  "central_mapping_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
+  "central_mapping_promoted": false,
+  "independent_semantic_review": "NOT_RUN",
+  "target_runtime_executed": false,
+  "whole_project_ci_run": false,
+  "earlier_fixed17_checkpoint_modified": false,
+  "earlier_fixed10_checkpoint_modified": false,
+  "earlier_fixed9_checkpoint_modified": false,
+  "elapsed_seconds": 1.936
+}

@@ -498,3 +498,5 @@ bounded runtime observation rather than protection bypass.
 - [Animation packet routing](ANIMATION-PACKET-ROUTING-RECOVERY-2026-10-17.md): explicit direction/sender/target paths, guarded transport helper and separation of routing, authorization and completion.
 
 - [Molang command and separate relay producers](MOLANG-COMMAND-PRODUCER-RECOVERY-2026-10-17.md), with [declared-target validation](DECLARED-TARGET-INVENTORY-2026-10-17.md) before relying on exact-symbol zero-call results.
+
+- [Roulette expression forms](ROULETTE-EXPRESSION-UI-RECOVERY-2026-10-17.md): three GUI emitters, local queue before optional relay, distinct parse-exception ownership, display versus sent slider values, and eight JDK-only lexical predicate examples.
