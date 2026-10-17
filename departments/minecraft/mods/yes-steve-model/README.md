@@ -446,3 +446,5 @@ bounded runtime observation rather than protection bypass.
 - [Client model synchronization state](CLIENT-MODEL-SYNC-STATE-RECOVERY-2026-10-17.md): listener lifetime, terminal counter reset, queue publication and native abort boundary.
 
 - [Sync state UI consumers](SYNC-STATE-UI-CONSUMERS-RECOVERY-2026-10-17.md): polled counters, queue-based loading measure and limits of terminal callback interpretation.
+
+- [Sound instance lifetime](SOUND-INSTANCE-LIFETIME-RECOVERY-2026-10-17.md): actor tracking, deferred stream completion, looping EOF and close ownership.
