@@ -1,0 +1,106 @@
+{
+  "target_declaration_checks": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoOO0ooooOO00000oO0oOo0",
+      "name": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "()Ljava/lang/String;",
+      "kind": "methods",
+      "declaration_present": true
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoOO0ooooOO00000oO0oOo0",
+      "name": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "Ljava/lang/String;",
+      "kind": "fields",
+      "declaration_present": true
+    }
+  ],
+  "target_declarations_verified": true,
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "class_count": 955,
+  "targets": [
+    [
+      "com/elfmcys/yesstevemodel/OOoOO0ooooOO00000oO0oOo0",
+      "O00OOOooOoooOoo0o0o0oO0O",
+      "()Ljava/lang/String;"
+    ],
+    [
+      "com/elfmcys/yesstevemodel/OOoOO0ooooOO00000oO0oOo0",
+      "O00OOOooOoooOoo0o0o0oO0O",
+      "Ljava/lang/String;"
+    ]
+  ],
+  "method_handle_targets": [],
+  "calls": [
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/OOoOO0ooooOO00000oO0oOo0",
+        "name": "O00OOOooOoooOoo0o0o0oO0O",
+        "descriptor": "()Ljava/lang/String;"
+      },
+      "instruction": {
+        "offset": 1,
+        "opcode": "0xb4",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/OOoOO0ooooOO00000oO0oOo0",
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "Ljava/lang/String;",
+          "cp_tag": 9
+        }
+      },
+      "immediate_following_instruction": {
+        "offset": 4,
+        "opcode": "0xb0"
+      }
+    }
+  ],
+  "caller_methods": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoOO0ooooOO00000oO0oOo0",
+      "name": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "code_sha256": "f66e8250518af8e7eba2e824a653290c86670b3fe30fd9f290298cfd4523f135",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoOO0ooooOO00000oO0oOo0",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "Ljava/lang/String;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0015"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    }
+  ],
+  "external_or_reflective_closure": false,
+  "runtime_executed": false
+}

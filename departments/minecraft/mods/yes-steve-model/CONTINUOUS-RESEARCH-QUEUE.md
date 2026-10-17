@@ -136,10 +136,22 @@ raw values and references; form dispatch uses actual subtype. A fixed4 checkpoin
 passes without whole-project checks. The model-ID cache and local-player fallback
 remain distinct from the expression form's associated-entity target.
 
-Next finite connected question: configured animation-button sound dispatch and
-its actual callers, reusing existing sound manager and roulette screen evidence.
-Do not infer active playback merely from a stored sound field. Keep external
-widgets/native model construction and visible/audio outcomes outside static proof.
+Configured button sound reachability is bounded: no exact getter invocation and
+one backing-field read inside that getter among955 classes; screen clicks use the
+fixed UI sound. Native/reflection/external use remains open. The user-function
+comment-filter branch was reviewed from existing parser evidence, preserving its
+entry flag, no separator insertion, quote rules and CRLF transformation.
+
+Parser entry-flag inventory finds the pooled helper's explicit false call, the
+safe facade forwarding its boolean, and unsafe facade's conditional filter call.
+No exact Java caller of the Native Access-marked safe facade was found. Native/
+model construction flags remain an evidence boundary, not assumed true or false.
+The existing user-function cache dossier does not prove that missing producer.
+
+Next finite connected question: remaining pure-Java user-function argument and
+return-frame semantics not already closed by existing evaluator/storage dossiers.
+Inspect the recorded bodies first; do not extend into native loading or repeat
+whole-target checks simply because a Java inventory reaches this boundary.
 
 ## Anchors
 

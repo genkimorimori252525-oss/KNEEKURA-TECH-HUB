@@ -53,3 +53,6 @@ For an exact-symbol caller inventory, [validate the target declaration](DECLARED
 - [Expression versus state transport](EXPRESSION-STATE-TRANSPORT-INDEX-2026-10-17.md): optional end-to-end route guide; local queue, dirty state, drain-before-channel-check and remote application are distinct boundaries.
 
 - [Roulette form ownership and selection](ROULETTE-FORM-OWNERSHIP-RECOVERY-2026-10-17.md): shared arrays/maps, subclass-based form dispatch, model-wide navigation cache, and remote/local animation target distinctions.
+
+- [Configured button sound reachability](ROULETTE-SOUND-CONSUMERS-2026-10-17.md): stored sound field versus fixed UI click requests; exact getter/field inventory does not prove global runtime non-use.
+- [User-function comment filtering](USER-FUNCTION-COMMENT-FILTER-2026-10-17.md): optional preprocessing, quote rules, CRLF handling and removed-block token adjacency; reuses existing parser evidence.
