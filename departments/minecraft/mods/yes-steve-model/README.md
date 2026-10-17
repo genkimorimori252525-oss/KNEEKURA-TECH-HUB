@@ -456,3 +456,5 @@ bounded runtime observation rather than protection bypass.
 - [Audio decoder Java boundary](AUDIO-DECODER-JAVA-BOUNDARY-RECOVERY-2026-10-17.md): stream EOF/close, zero-position slices, decoder pooling and explicit native declarations.
 
 - [Sound keyframe cleanup](SOUND-KEYFRAME-CLEANUP-RECOVERY-2026-10-17.md): consumed-versus-emitted cursor and exact transition/reset/trim caller inventory.
+
+- [Ordered segments and blend transition](ORDERED-SEGMENT-TRANSITION-RECOVERY-2026-10-17.md): cursor-dependent endpoints, lazy ordering checks, shared segments and exact callers.
