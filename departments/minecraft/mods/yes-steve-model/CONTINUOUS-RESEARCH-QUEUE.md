@@ -77,3 +77,7 @@ semantic review. Continue easing/raw-keyframe factory and Java scheduling owners
 Easing/raw-keyframe preparation now has complete bounded snapshots and strict
 regression checks, pending independent review. Continue controller production,
 transition homogeneity and Java schedule/wait ownership; no task stop implied.
+
+Coded/predicate controller state/context review is recorded without recounting
+existing method shapes. Continue AnimationPlayer transitions/ticks and Bedrock
+queue aggregation; pending independent reviews are not whole-target completion.

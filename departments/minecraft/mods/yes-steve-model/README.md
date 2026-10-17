@@ -216,6 +216,11 @@ records Java factory selection and initialization/aliasing semantics with 162 st
 checks and 16 corruption controls. Independent review is pending; the central
 mapping count remains 669.
 
+[Coded/predicate controller state decisions](CODED-CONTROLLER-STATE-RECOVERY-2026-10-17.md)
+deepen existing method-shape mappings with 170 strict checks and 16 corruption
+controls. Pause, STOP captured-state and predicate/context cleanup are explicitly
+bounded; independent review is pending and no existing rows are recounted.
+
 ## Important limits
 
 - Public release-line source candidate equivalence to the distributed JAR is not proven.
