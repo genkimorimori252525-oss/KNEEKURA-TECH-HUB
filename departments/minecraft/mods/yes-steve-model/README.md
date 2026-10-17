@@ -414,3 +414,5 @@ bounded runtime observation rather than protection bypass.
 - [Locator hierarchy/matrix preparation](LOCATOR-MATRIX-PREPARATION-RECOVERY-2026-10-17.md): supplied hierarchy ownership, ancestor/leaf transform distinction, scale-flag consumption and18 direct caller sites.
 
 - [Attachment render layers](ATTACHMENT-RENDER-LAYERS-RECOVERY-2026-10-17.md): ordinary/special hand paths, extra locators, head/elytra/parrot/backpack transforms and cleanup boundaries.
+
+- [Passenger positioning and optional hat selection](PASSENGER-HAT-ATTACHMENT-RECOVERY-2026-10-17.md): capability/list-index gates, local pose transforms and provider selection.

@@ -1,0 +1,2732 @@
+{
+  "format": "kneekura.ysm-bounded-seed-evidence.v1",
+  "artifact": {
+    "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+    "sha1": "151ac7b24da8beeca1a20864565743cfd77af286",
+    "size": 63269843,
+    "version_id": "Zqooxsd2",
+    "classes": 955
+  },
+  "confidence_policy": "CONFIRMED denotes semantic correspondence reviewed against pinned source and exact instructions/relations, not recovered original symbols or whole-source equivalence. Prior community sources reused as fixture leads; no community-based promotions.",
+  "source_artifact_equivalence": "NOT_ESTABLISHED",
+  "preserved_global_negative_finding": "SOURCE_ARTIFACT_DIVERGENCE",
+  "recorded_at": "2026-10-17",
+  "detailed_operands": true,
+  "classes": [],
+  "members": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/OoO00Oo00Ooo0OoOoo00o000",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/world/entity/Entity;Lcom/mojang/blaze3d/vertex/PoseStack;F)V",
+      "access": 9,
+      "code_sha256": "e2e82619eea0f9bef8c9bb6df0b1a4da4ba810dd3fd09c15db4959ed28cc6e9b",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/Entity",
+            "name": "m_20202_",
+            "descriptor": "()Lnet/minecraft/world/entity/Entity;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x4e"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xc6",
+          "branch_target": 28
+        },
+        {
+          "offset": 9,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0o00oO0O0ooOOOo0oo0Oo00",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lnet/minecraftforge/common/capabilities/Capability;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/Entity",
+            "name": "getCapability",
+            "descriptor": "(Lnet/minecraftforge/common/capabilities/Capability;)Lnet/minecraftforge/common/util/LazyOptional;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 16,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 17,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 18,
+          "opcode": "0x24"
+        },
+        {
+          "offset": 19,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 20,
+          "opcode": "0xba",
+          "reference": {
+            "name": "accept",
+            "descriptor": "(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/entity/Entity;FLcom/mojang/blaze3d/vertex/PoseStack;)Lnet/minecraftforge/common/util/NonNullConsumer;",
+            "bootstrap_index": 0,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 25,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraftforge/common/util/LazyOptional",
+            "name": "ifPresent",
+            "descriptor": "(Lnet/minecraftforge/common/util/NonNullConsumer;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 28,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0032"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x4e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 6,
+          "opcode": "0xc6",
+          "encoded_operands_hex": "0016"
+        },
+        {
+          "offset": 9,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0037"
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "003b"
+        },
+        {
+          "offset": 16,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 17,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 18,
+          "opcode": "0x24",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 19,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 20,
+          "opcode": "0xba",
+          "encoded_operands_hex": "004e0000"
+        },
+        {
+          "offset": 25,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0054"
+        },
+        {
+          "offset": 28,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OoO00Oo00Ooo0OoOoo00o000",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/entity/Entity;FLcom/mojang/blaze3d/vertex/PoseStack;Lcom/elfmcys/yesstevemodel/oOOo0Ooo0oOoo0O0OOOOo0oo;)V",
+      "access": 4106,
+      "code_sha256": "0ec43deca92ab1c8c9af4f11c1b9f2001ba18f2eb1ff6eaef48ff65f3d617406",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 2,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOOo0Ooo0oOoo0O0OOOOo0oo",
+            "name": "ooo0o0OoOooOOOo0OOOo00oO",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 5,
+          "opcode": "0x99",
+          "branch_target": 16
+        },
+        {
+          "offset": 8,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOOo0Ooo0oOoo0O0OOOOo0oo",
+            "name": "oOOo0Ooo0oOoo0O0OOOOo0oo",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 13,
+          "opcode": "0x9a",
+          "branch_target": 17
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb1"
+        },
+        {
+          "offset": 17,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/Entity",
+            "name": "m_20197_",
+            "descriptor": "()Ljava/util/List;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 21,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 22,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/List",
+            "name": "indexOf",
+            "descriptor": "(Ljava/lang/Object;)I",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 27,
+          "opcode": "0x36"
+        },
+        {
+          "offset": 29,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 31,
+          "opcode": "0x9c",
+          "branch_target": 35
+        },
+        {
+          "offset": 34,
+          "opcode": "0xb1"
+        },
+        {
+          "offset": 35,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 37,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOOo0Ooo0oOoo0O0OOOOo0oo",
+            "name": "OOOoOO000000o0o0oOooo0o0",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/OOOO0O0O000O000000oOOO0o;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 40,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 42,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 44,
+          "opcode": "0xc6",
+          "branch_target": 75
+        },
+        {
+          "offset": 47,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 49,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOOO0O0O000O000000oOOO0o",
+            "name": "Oo00o0OooOOo0ooOoo0oO0o0",
+            "descriptor": "()Ljava/util/List;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 52,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/List",
+            "name": "isEmpty",
+            "descriptor": "()Z",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 57,
+          "opcode": "0x9a",
+          "branch_target": 75
+        },
+        {
+          "offset": 60,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 62,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 64,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOOO0O0O000O000000oOOO0o",
+            "name": "Oo00o0OooOOo0ooOoo0oO0o0",
+            "descriptor": "()Ljava/util/List;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 67,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/List",
+            "name": "size",
+            "descriptor": "()I",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 72,
+          "opcode": "0xa1",
+          "branch_target": 76
+        },
+        {
+          "offset": 75,
+          "opcode": "0xb1"
+        },
+        {
+          "offset": 76,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 78,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOOO0O0O000O000000oOOO0o",
+            "name": "Oo00o0OooOOo0ooOoo0oO0o0",
+            "descriptor": "()Ljava/util/List;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 81,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 83,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/List",
+            "name": "get",
+            "descriptor": "(I)Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 88,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "java/util/List",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 91,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 93,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 95,
+          "opcode": "0xc7",
+          "branch_target": 99
+        },
+        {
+          "offset": 98,
+          "opcode": "0xb1"
+        },
+        {
+          "offset": 99,
+          "opcode": "0x24"
+        },
+        {
+          "offset": 100,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 101,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "net/minecraft/world/entity/Entity",
+            "name": "f_19859_",
+            "descriptor": "F",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 104,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 105,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/Entity",
+            "name": "m_146908_",
+            "descriptor": "()F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 108,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "net/minecraft/util/Mth",
+            "name": "m_14179_",
+            "descriptor": "(FFF)F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 111,
+          "opcode": "0x38"
+        },
+        {
+          "offset": 113,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 114,
+          "opcode": "0x17"
+        },
+        {
+          "offset": 116,
+          "opcode": "0x24"
+        },
+        {
+          "offset": 117,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoO0O0OooOO0o00oOoOOoO0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/world/entity/Entity;FF)F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 120,
+          "opcode": "0x38"
+        },
+        {
+          "offset": 122,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 123,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/mojang/math/Axis",
+            "name": "f_252436_",
+            "descriptor": "Lcom/mojang/math/Axis;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 126,
+          "opcode": "0x12",
+          "reference": {
+            "cp_tag": 4,
+            "value": 180.0
+          }
+        },
+        {
+          "offset": 128,
+          "opcode": "0x17"
+        },
+        {
+          "offset": 130,
+          "opcode": "0x66"
+        },
+        {
+          "offset": 131,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/mojang/math/Axis",
+            "name": "m_252977_",
+            "descriptor": "(F)Lorg/joml/Quaternionf;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 136,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/mojang/blaze3d/vertex/PoseStack",
+            "name": "m_252781_",
+            "descriptor": "(Lorg/joml/Quaternionf;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 139,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 140,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 142,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o000OO00oooOo00000ooo0Oo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/mojang/blaze3d/vertex/PoseStack;Ljava/util/List;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 145,
+          "opcode": "0x57"
+        },
+        {
+          "offset": 146,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 147,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/mojang/math/Axis",
+            "name": "f_252392_",
+            "descriptor": "Lcom/mojang/math/Axis;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 150,
+          "opcode": "0x12",
+          "reference": {
+            "cp_tag": 4,
+            "value": 180.0
+          }
+        },
+        {
+          "offset": 152,
+          "opcode": "0x17"
+        },
+        {
+          "offset": 154,
+          "opcode": "0x66"
+        },
+        {
+          "offset": 155,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/mojang/math/Axis",
+            "name": "m_252977_",
+            "descriptor": "(F)Lorg/joml/Quaternionf;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 160,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/mojang/blaze3d/vertex/PoseStack",
+            "name": "m_252781_",
+            "descriptor": "(Lorg/joml/Quaternionf;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 163,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 164,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/Entity",
+            "name": "m_6048_",
+            "descriptor": "()D",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 167,
+          "opcode": "0x77"
+        },
+        {
+          "offset": 168,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 169,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/Entity",
+            "name": "m_6049_",
+            "descriptor": "()D",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 172,
+          "opcode": "0x67"
+        },
+        {
+          "offset": 173,
+          "opcode": "0x39"
+        },
+        {
+          "offset": 175,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 176,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "net/minecraft/world/entity/player/Player",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 179,
+          "opcode": "0x99",
+          "branch_target": 206
+        },
+        {
+          "offset": 182,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 183,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "net/minecraft/world/entity/player/Player",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 186,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 188,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 190,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0OooOo0oOOoOoOoOooO000o",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lnet/minecraftforge/common/capabilities/Capability;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 193,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/player/Player",
+            "name": "getCapability",
+            "descriptor": "(Lnet/minecraftforge/common/capabilities/Capability;)Lnet/minecraftforge/common/util/LazyOptional;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 196,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraftforge/common/util/LazyOptional",
+            "name": "isPresent",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 199,
+          "opcode": "0x99",
+          "branch_target": 206
+        },
+        {
+          "offset": 202,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 203,
+          "opcode": "0xa7",
+          "branch_target": 207
+        },
+        {
+          "offset": 206,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 207,
+          "opcode": "0x36"
+        },
+        {
+          "offset": 209,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 211,
+          "opcode": "0x9a",
+          "branch_target": 221
+        },
+        {
+          "offset": 214,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 215,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OoOo0Oo0O0oOooOoOoOooOO0",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "(Lnet/minecraft/world/entity/Entity;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 218,
+          "opcode": "0x99",
+          "branch_target": 229
+        },
+        {
+          "offset": 221,
+          "opcode": "0x18"
+        },
+        {
+          "offset": 223,
+          "opcode": "0x14",
+          "reference": {
+            "cp_tag": 6,
+            "value": 0.5
+          }
+        },
+        {
+          "offset": 226,
+          "opcode": "0x67"
+        },
+        {
+          "offset": 227,
+          "opcode": "0x39"
+        },
+        {
+          "offset": 229,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 230,
+          "opcode": "0xe"
+        },
+        {
+          "offset": 231,
+          "opcode": "0x18"
+        },
+        {
+          "offset": 233,
+          "opcode": "0xe"
+        },
+        {
+          "offset": 234,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/mojang/blaze3d/vertex/PoseStack",
+            "name": "m_85837_",
+            "descriptor": "(DDD)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 237,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 2,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "022f"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x99",
+          "encoded_operands_hex": "000b"
+        },
+        {
+          "offset": 8,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0232"
+        },
+        {
+          "offset": 13,
+          "opcode": "0x9a",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 17,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0236"
+        },
+        {
+          "offset": 21,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 22,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "023c0200",
+          "argument_slot_count": 2,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 27,
+          "opcode": "0x36",
+          "encoded_operands_hex": "05",
+          "local_index": 5
+        },
+        {
+          "offset": 29,
+          "opcode": "0x15",
+          "encoded_operands_hex": "05",
+          "local_index": 5
+        },
+        {
+          "offset": 31,
+          "opcode": "0x9c",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 34,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 35,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 37,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0240"
+        },
+        {
+          "offset": 40,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 42,
+          "opcode": "0x19",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 44,
+          "opcode": "0xc6",
+          "encoded_operands_hex": "001f"
+        },
+        {
+          "offset": 47,
+          "opcode": "0x19",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 49,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0245"
+        },
+        {
+          "offset": 52,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "02480100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 57,
+          "opcode": "0x9a",
+          "encoded_operands_hex": "0012"
+        },
+        {
+          "offset": 60,
+          "opcode": "0x15",
+          "encoded_operands_hex": "05",
+          "local_index": 5
+        },
+        {
+          "offset": 62,
+          "opcode": "0x19",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 64,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0245"
+        },
+        {
+          "offset": 67,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "02490100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 72,
+          "opcode": "0xa1",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 75,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 76,
+          "opcode": "0x19",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 78,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0245"
+        },
+        {
+          "offset": 81,
+          "opcode": "0x15",
+          "encoded_operands_hex": "05",
+          "local_index": 5
+        },
+        {
+          "offset": 83,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "024c0200",
+          "argument_slot_count": 2,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 88,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "0238"
+        },
+        {
+          "offset": 91,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "07",
+          "local_index": 7
+        },
+        {
+          "offset": 93,
+          "opcode": "0x19",
+          "encoded_operands_hex": "07",
+          "local_index": 7
+        },
+        {
+          "offset": 95,
+          "opcode": "0xc7",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 98,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 99,
+          "opcode": "0x24",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 100,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 101,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "024d"
+        },
+        {
+          "offset": 104,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 105,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "024e"
+        },
+        {
+          "offset": 108,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "01e4"
+        },
+        {
+          "offset": 111,
+          "opcode": "0x38",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 113,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 114,
+          "opcode": "0x17",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 116,
+          "opcode": "0x24",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 117,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0253"
+        },
+        {
+          "offset": 120,
+          "opcode": "0x38",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 122,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 123,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "00fc"
+        },
+        {
+          "offset": 126,
+          "opcode": "0x12",
+          "encoded_operands_hex": "82"
+        },
+        {
+          "offset": 128,
+          "opcode": "0x17",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 130,
+          "opcode": "0x66",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 131,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00860200",
+          "argument_slot_count": 2,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 136,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0094"
+        },
+        {
+          "offset": 139,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 140,
+          "opcode": "0x19",
+          "encoded_operands_hex": "07",
+          "local_index": 7
+        },
+        {
+          "offset": 142,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0258"
+        },
+        {
+          "offset": 145,
+          "opcode": "0x57",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 146,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 147,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "025b"
+        },
+        {
+          "offset": 150,
+          "opcode": "0x12",
+          "encoded_operands_hex": "82"
+        },
+        {
+          "offset": 152,
+          "opcode": "0x17",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 154,
+          "opcode": "0x66",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 155,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00860200",
+          "argument_slot_count": 2,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 160,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0094"
+        },
+        {
+          "offset": 163,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 164,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0179"
+        },
+        {
+          "offset": 167,
+          "opcode": "0x77",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 168,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 169,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "017c"
+        },
+        {
+          "offset": 172,
+          "opcode": "0x67",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 173,
+          "opcode": "0x39",
+          "encoded_operands_hex": "0a",
+          "local_index": 10
+        },
+        {
+          "offset": 175,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 176,
+          "opcode": "0xc1",
+          "encoded_operands_hex": "018d"
+        },
+        {
+          "offset": 179,
+          "opcode": "0x99",
+          "encoded_operands_hex": "001b"
+        },
+        {
+          "offset": 182,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 183,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "018d"
+        },
+        {
+          "offset": 186,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "0d",
+          "local_index": 13
+        },
+        {
+          "offset": 188,
+          "opcode": "0x19",
+          "encoded_operands_hex": "0d",
+          "local_index": 13
+        },
+        {
+          "offset": 190,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "025e"
+        },
+        {
+          "offset": 193,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "025f"
+        },
+        {
+          "offset": 196,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0262"
+        },
+        {
+          "offset": 199,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0007"
+        },
+        {
+          "offset": 202,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 203,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 206,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 207,
+          "opcode": "0x36",
+          "encoded_operands_hex": "0c",
+          "local_index": 12
+        },
+        {
+          "offset": 209,
+          "opcode": "0x15",
+          "encoded_operands_hex": "0c",
+          "local_index": 12
+        },
+        {
+          "offset": 211,
+          "opcode": "0x9a",
+          "encoded_operands_hex": "000a"
+        },
+        {
+          "offset": 214,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 215,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0267"
+        },
+        {
+          "offset": 218,
+          "opcode": "0x99",
+          "encoded_operands_hex": "000b"
+        },
+        {
+          "offset": 221,
+          "opcode": "0x18",
+          "encoded_operands_hex": "0a",
+          "local_index": 10
+        },
+        {
+          "offset": 223,
+          "opcode": "0x14",
+          "encoded_operands_hex": "00ff"
+        },
+        {
+          "offset": 226,
+          "opcode": "0x67",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 227,
+          "opcode": "0x39",
+          "encoded_operands_hex": "0a",
+          "local_index": 10
+        },
+        {
+          "offset": 229,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 230,
+          "opcode": "0xe",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 231,
+          "opcode": "0x18",
+          "encoded_operands_hex": "0a",
+          "local_index": 10
+        },
+        {
+          "offset": 233,
+          "opcode": "0xe",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 234,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "006e"
+        },
+        {
+          "offset": 237,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOooo0o00oOoo00OOoOOo0O0",
+      "name": "<init>",
+      "descriptor": "()V",
+      "access": 1,
+      "code_sha256": "2235d032ec0f6171a15233996a754d78c478c8f6d4b9761c234da33d638baec5",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "java/lang/Object",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "000e"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOooo0o00oOoo00OOoOOo0O0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()V",
+      "access": 9,
+      "code_sha256": "5bd4ae5501d4d042f1a5306f1df5f6b8ded2d9c54ea83620bb57c45ae9750705",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "net/minecraftforge/fml/ModList",
+            "name": "get",
+            "descriptor": "()Lnet/minecraftforge/fml/ModList;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0x12",
+          "reference": {
+            "string": "simplehats",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraftforge/fml/ModList",
+            "name": "isLoaded",
+            "descriptor": "(Ljava/lang/String;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb3",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOooo0o00oOoo00OOoOOo0O0",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Z",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0014"
+        },
+        {
+          "offset": 3,
+          "opcode": "0x12",
+          "encoded_operands_hex": "08"
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0018"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb3",
+          "encoded_operands_hex": "001a"
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOooo0o00oOoo00OOoOOo0O0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;)Lnet/minecraft/world/item/ItemStack;",
+      "access": 9,
+      "code_sha256": "4c316566bf939aa99819e404330ae1d6bb3abc44bea82f4cf1eb42b211067a3d",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOooo0o00oOoo00OOoOOo0O0",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Z",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0x99",
+          "branch_target": 11
+        },
+        {
+          "offset": 6,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0OOoo000o0o0OOO00oO00oo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;)Lnet/minecraft/world/item/ItemStack;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 11,
+          "opcode": "0x1"
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "001a"
+        },
+        {
+          "offset": 3,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0008"
+        },
+        {
+          "offset": 6,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0020"
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 11,
+          "opcode": "0x1",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOooo0o00oOoo00OOoOOo0O0",
+      "name": "<clinit>",
+      "descriptor": "()V",
+      "access": 8,
+      "code_sha256": "fcb2784b07d3980790c345c7032d21f8e3b784979681080cc3ad7eb1cac9bf56",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb3",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOooo0o00oOoo00OOoOOo0O0",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Z",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb3",
+          "encoded_operands_hex": "001a"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0OOoo000o0o0OOO00oO00oo",
+      "name": "<init>",
+      "descriptor": "()V",
+      "access": 1,
+      "code_sha256": "4b2d66c2e129bf585b84fa4abd8e46f07779ec93460c464280f9bf8c5d045471",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "java/lang/Object",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "0011"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0OOoo000o0o0OOO00oO00oo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;)Lnet/minecraft/world/item/ItemStack;",
+      "access": 9,
+      "code_sha256": "d296a5ae30aa17a3083fdafb52caa0babb31c7b1700d50c9008a9f77205e9dcd",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "top/theillusivec4/curios/api/CuriosApi",
+            "name": "getCuriosInventory",
+            "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;)Lnet/minecraftforge/common/util/LazyOptional;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xba",
+          "reference": {
+            "name": "apply",
+            "descriptor": "()Lnet/minecraftforge/common/util/NonNullFunction;",
+            "bootstrap_index": 0,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraftforge/common/util/LazyOptional",
+            "name": "map",
+            "descriptor": "(Lnet/minecraftforge/common/util/NonNullFunction;)Ljava/util/Optional;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 12,
+          "opcode": "0xba",
+          "reference": {
+            "name": "apply",
+            "descriptor": "()Ljava/util/function/Function;",
+            "bootstrap_index": 1,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 17,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/util/Optional",
+            "name": "flatMap",
+            "descriptor": "(Ljava/util/function/Function;)Ljava/util/Optional;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 20,
+          "opcode": "0xba",
+          "reference": {
+            "name": "apply",
+            "descriptor": "()Ljava/util/function/Function;",
+            "bootstrap_index": 2,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 25,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/util/Optional",
+            "name": "map",
+            "descriptor": "(Ljava/util/function/Function;)Ljava/util/Optional;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 28,
+          "opcode": "0x1"
+        },
+        {
+          "offset": 29,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/util/Optional",
+            "name": "orElse",
+            "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 32,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "net/minecraft/world/item/ItemStack",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 35,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0019"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xba",
+          "encoded_operands_hex": "002c0000"
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0032"
+        },
+        {
+          "offset": 12,
+          "opcode": "0xba",
+          "encoded_operands_hex": "003a0000"
+        },
+        {
+          "offset": 17,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0040"
+        },
+        {
+          "offset": 20,
+          "opcode": "0xba",
+          "encoded_operands_hex": "00460000"
+        },
+        {
+          "offset": 25,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0048"
+        },
+        {
+          "offset": 28,
+          "opcode": "0x1",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 29,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "004b"
+        },
+        {
+          "offset": 32,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "004d"
+        },
+        {
+          "offset": 35,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0OOoo000o0o0OOO00oO00oo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ltop/theillusivec4/curios/api/type/inventory/ICurioStacksHandler;)Lnet/minecraft/world/item/ItemStack;",
+      "access": 4106,
+      "code_sha256": "20281c9b0430fb3b9ab6a5c64b41c48bf89411c872c57dca1bca11acca594375",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xba",
+          "reference": {
+            "name": "test",
+            "descriptor": "()Ljava/util/function/Predicate;",
+            "bootstrap_index": 3,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O000ooOO00O0oooO0000o0o0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ltop/theillusivec4/curios/api/type/inventory/ICurioStacksHandler;Ljava/util/function/Predicate;)Lnet/minecraft/world/item/ItemStack;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xba",
+          "encoded_operands_hex": "00580000"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "005d"
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0OOoo000o0o0OOO00oO00oo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/world/item/ItemStack;)Z",
+      "access": 4106,
+      "code_sha256": "1ecf28ba448c12b7820f8d5c4eefab4d08ab2bc1dfba01f52939574918095abc",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/item/ItemStack",
+            "name": "m_41720_",
+            "descriptor": "()Lnet/minecraft/world/item/Item;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "fonnymunkey/simplehats/common/item/HatItem",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 7,
+          "opcode": "0xac"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0061"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xc1",
+          "encoded_operands_hex": "0063"
+        },
+        {
+          "offset": 7,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0OOoo000o0o0OOO00oO00oo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ltop/theillusivec4/curios/api/type/capability/ICuriosItemHandler;)Ljava/util/Optional;",
+      "access": 4106,
+      "code_sha256": "47f9cda4b83916f24a2b29801bf3bcb4d33eb5e727c11662898340278c7982a5",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0x12",
+          "reference": {
+            "string": "head",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "top/theillusivec4/curios/api/type/capability/ICuriosItemHandler",
+            "name": "getStacksHandler",
+            "descriptor": "(Ljava/lang/String;)Ljava/util/Optional;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0x12",
+          "encoded_operands_hex": "0d"
+        },
+        {
+          "offset": 3,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00690200",
+          "argument_slot_count": 2,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0OOoo000o0o0OOO00oO00oo",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Ltop/theillusivec4/curios/api/type/capability/ICuriosItemHandler;)Ltop/theillusivec4/curios/api/type/capability/ICuriosItemHandler;",
+      "access": 4106,
+      "code_sha256": "f99858239d4e38fd12a7d76d1d7ffce3bd311a43bc78a96befa18329790f7b28",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    }
+  ],
+  "owner_declarations": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/OoO00Oo00Ooo0OoOoo00o000",
+      "declaration": {
+        "access": 49,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": [
+          {
+            "access": 10,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Z"
+          },
+          {
+            "access": 10,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Z"
+          },
+          {
+            "access": 10,
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "Z"
+          }
+        ],
+        "methods": [
+          {
+            "access": 1,
+            "name": "<init>",
+            "descriptor": "()V"
+          },
+          {
+            "access": 9,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Z)V"
+          },
+          {
+            "access": 9,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Z"
+          },
+          {
+            "access": 9,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "(Z)V"
+          },
+          {
+            "access": 9,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "()Z"
+          },
+          {
+            "access": 9,
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "(Z)V"
+          },
+          {
+            "access": 9,
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "()Z"
+          },
+          {
+            "access": 9,
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "()Z"
+          },
+          {
+            "access": 9,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/world/entity/Entity;Lcom/mojang/blaze3d/vertex/PoseStack;F)V"
+          },
+          {
+            "access": 9,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(FFFFFFLcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;Lcom/elfmcys/yesstevemodel/OOoo0o0oO000ooO0Oo00OoOo;Z)V"
+          },
+          {
+            "access": 10,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(FFFLnet/minecraft/client/renderer/MultiBufferSource$BufferSource;)V"
+          },
+          {
+            "access": 10,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "(FFFLnet/minecraft/client/renderer/MultiBufferSource$BufferSource;)V"
+          },
+          {
+            "access": 10,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(FLcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/entity/EntityRenderDispatcher;Lnet/minecraft/client/renderer/MultiBufferSource$BufferSource;)V"
+          },
+          {
+            "access": 10,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(FLnet/minecraft/world/entity/Entity;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/entity/EntityRenderDispatcher;Lnet/minecraft/client/renderer/MultiBufferSource$BufferSource;Lnet/minecraft/world/entity/Entity;F)V"
+          },
+          {
+            "access": 9,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(FFFFLcom/elfmcys/yesstevemodel/o0O0oOooOo0OoOo0oOo00O00;Lcom/elfmcys/yesstevemodel/OOoo0o0oO000ooO0Oo00OoOo;ZZ)V"
+          },
+          {
+            "access": 9,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/player/LocalPlayer;DDFFIF)V"
+          },
+          {
+            "access": 4106,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/client/renderer/entity/EntityRenderDispatcher;Lnet/minecraft/client/player/LocalPlayer;FLnet/minecraft/client/gui/GuiGraphics;)V"
+          },
+          {
+            "access": 4106,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/OOoo0o0oO000ooO0Oo00OoOo;Lcom/elfmcys/yesstevemodel/o0O0oOooOo0OoOo0oOo00O00;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource$BufferSource;)V"
+          },
+          {
+            "access": 4106,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/world/entity/Entity;"
+          },
+          {
+            "access": 4106,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "(Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/world/entity/Entity;"
+          },
+          {
+            "access": 4106,
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "(Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/world/entity/Entity;"
+          },
+          {
+            "access": 4106,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;Lcom/mojang/blaze3d/vertex/PoseStack;FLnet/minecraft/world/entity/LivingEntity;FLnet/minecraft/client/renderer/entity/EntityRenderDispatcher;Lnet/minecraft/client/renderer/MultiBufferSource$BufferSource;FFZLcom/elfmcys/yesstevemodel/OOoo0o0oO000ooO0Oo00OoOo;)V"
+          },
+          {
+            "access": 4106,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/entity/Entity;FLcom/mojang/blaze3d/vertex/PoseStack;Lcom/elfmcys/yesstevemodel/oOOo0Ooo0oOoo0O0OOOOo0oo;)V"
+          },
+          {
+            "access": 8,
+            "name": "<clinit>",
+            "descriptor": "()V"
+          }
+        ]
+      }
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOooo0o00oOoo00OOoOOo0O0",
+      "declaration": {
+        "access": 33,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": [
+          {
+            "access": 26,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Ljava/lang/String;"
+          },
+          {
+            "access": 10,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Z"
+          }
+        ],
+        "methods": [
+          {
+            "access": 1,
+            "name": "<init>",
+            "descriptor": "()V"
+          },
+          {
+            "access": 9,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()V"
+          },
+          {
+            "access": 9,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;)Lnet/minecraft/world/item/ItemStack;"
+          },
+          {
+            "access": 8,
+            "name": "<clinit>",
+            "descriptor": "()V"
+          }
+        ]
+      }
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0OOoo000o0o0OOO00oO00oo",
+      "declaration": {
+        "access": 33,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": [
+          {
+            "access": 26,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Ljava/lang/String;"
+          }
+        ],
+        "methods": [
+          {
+            "access": 1,
+            "name": "<init>",
+            "descriptor": "()V"
+          },
+          {
+            "access": 9,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;)Lnet/minecraft/world/item/ItemStack;"
+          },
+          {
+            "access": 4106,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ltop/theillusivec4/curios/api/type/inventory/ICurioStacksHandler;)Lnet/minecraft/world/item/ItemStack;"
+          },
+          {
+            "access": 4106,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/world/item/ItemStack;)Z"
+          },
+          {
+            "access": 4106,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ltop/theillusivec4/curios/api/type/capability/ICuriosItemHandler;)Ljava/util/Optional;"
+          },
+          {
+            "access": 4106,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "(Ltop/theillusivec4/curios/api/type/capability/ICuriosItemHandler;)Ltop/theillusivec4/curios/api/type/capability/ICuriosItemHandler;"
+          }
+        ]
+      }
+    }
+  ],
+  "bootstrap_and_constant_evidence": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/OoO00Oo00Ooo0OoOoo00o000",
+      "constant_values": {},
+      "bootstrap_methods": [
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "(Ljava/lang/Object;)V"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/OoO00Oo00Ooo0OoOoo00o000",
+                "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+                "descriptor": "(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/entity/Entity;FLcom/mojang/blaze3d/vertex/PoseStack;Lcom/elfmcys/yesstevemodel/oOOo0Ooo0oOoo0O0OOOOo0oo;)V"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "(Lcom/elfmcys/yesstevemodel/oOOo0Ooo0oOoo0O0OOOOo0oo;)V"
+            }
+          ]
+        },
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "()V"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/OoO00Oo00Ooo0OoOoo00o000",
+                "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+                "descriptor": "(Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;Lcom/mojang/blaze3d/vertex/PoseStack;FLnet/minecraft/world/entity/LivingEntity;FLnet/minecraft/client/renderer/entity/EntityRenderDispatcher;Lnet/minecraft/client/renderer/MultiBufferSource$BufferSource;FFZLcom/elfmcys/yesstevemodel/OOoo0o0oO000ooO0Oo00OoOo;)V"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "()V"
+            }
+          ]
+        },
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "()Ljava/lang/Object;"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/OoO00Oo00Ooo0OoOoo00o000",
+                "name": "O00OOOooOoooOoo0o0o0oO0O",
+                "descriptor": "(Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/world/entity/Entity;"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "()Lnet/minecraft/world/entity/Entity;"
+            }
+          ]
+        },
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "()Ljava/lang/Object;"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/OoO00Oo00Ooo0OoOoo00o000",
+                "name": "o0OOooo0o0OO00OoOOOo0o0O",
+                "descriptor": "(Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/world/entity/Entity;"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "()Lnet/minecraft/world/entity/Entity;"
+            }
+          ]
+        },
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "()Ljava/lang/Object;"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/OoO00Oo00Ooo0OoOoo00o000",
+                "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+                "descriptor": "(Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/world/entity/Entity;"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "()Lnet/minecraft/world/entity/Entity;"
+            }
+          ]
+        },
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "()V"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/OoO00Oo00Ooo0OoOoo00o000",
+                "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+                "descriptor": "(Lcom/elfmcys/yesstevemodel/OOoo0o0oO000ooO0Oo00OoOo;Lcom/elfmcys/yesstevemodel/o0O0oOooOo0OoOo0oOo00O00;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource$BufferSource;)V"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "()V"
+            }
+          ]
+        },
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "()V"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/OoO00Oo00Ooo0OoOoo00o000",
+                "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+                "descriptor": "(Lnet/minecraft/client/renderer/entity/EntityRenderDispatcher;Lnet/minecraft/client/player/LocalPlayer;FLnet/minecraft/client/gui/GuiGraphics;)V"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "()V"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOooo0o00oOoo00OOoOOo0O0",
+      "constant_values": {
+        "Oo0Oo0o00O00Oo0OOoOOoooo": {
+          "cp_tag": 8,
+          "value": "simplehats"
+        }
+      },
+      "bootstrap_methods": []
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0OOoo000o0o0OOO00oO00oo",
+      "constant_values": {
+        "Oo0Oo0o00O00Oo0OOoOOoooo": {
+          "cp_tag": 8,
+          "value": "head"
+        }
+      },
+      "bootstrap_methods": [
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "(Ljava/lang/Object;)Ljava/lang/Object;"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/o0OOoo000o0o0OOO00oO00oo",
+                "name": "o0OOooo0o0OO00OoOOOo0o0O",
+                "descriptor": "(Ltop/theillusivec4/curios/api/type/capability/ICuriosItemHandler;)Ltop/theillusivec4/curios/api/type/capability/ICuriosItemHandler;"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "(Ltop/theillusivec4/curios/api/type/capability/ICuriosItemHandler;)Ltop/theillusivec4/curios/api/type/capability/ICuriosItemHandler;"
+            }
+          ]
+        },
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "(Ljava/lang/Object;)Ljava/lang/Object;"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/o0OOoo000o0o0OOO00oO00oo",
+                "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+                "descriptor": "(Ltop/theillusivec4/curios/api/type/capability/ICuriosItemHandler;)Ljava/util/Optional;"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "(Ltop/theillusivec4/curios/api/type/capability/ICuriosItemHandler;)Ljava/util/Optional;"
+            }
+          ]
+        },
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "(Ljava/lang/Object;)Ljava/lang/Object;"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/o0OOoo000o0o0OOO00oO00oo",
+                "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+                "descriptor": "(Ltop/theillusivec4/curios/api/type/inventory/ICurioStacksHandler;)Lnet/minecraft/world/item/ItemStack;"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "(Ltop/theillusivec4/curios/api/type/inventory/ICurioStacksHandler;)Lnet/minecraft/world/item/ItemStack;"
+            }
+          ]
+        },
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "(Ljava/lang/Object;)Z"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/o0OOoo000o0o0OOO00oO00oo",
+                "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+                "descriptor": "(Lnet/minecraft/world/item/ItemStack;)Z"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "(Lnet/minecraft/world/item/ItemStack;)Z"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "source_tracks": [
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/util/RenderUtil.java",
+      "sha256": "b181c57910eeb0db57a69b7b956b5b74dd03275ad285470709e80c9aaaa2fae1",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6"
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/client/compat/simplehat/SimpleHatsCompat.java",
+      "sha256": "a4f2684c618b72415537da2a88f60f1a467f1e4a8bff6702650b6963e6fce628",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6"
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/client/compat/simplehat/HatCuriosCompat.java",
+      "sha256": "c4d2f162bb23991d07578ed8ba0663e7dc8a93a0753b1b3b987da1c8a496e6c2",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6"
+    }
+  ],
+  "review_status": "PRIMARY_STATIC_REVIEW_ONLY",
+  "central_mapping_promoted": false
+}
