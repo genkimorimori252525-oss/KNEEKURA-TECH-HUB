@@ -416,3 +416,5 @@ bounded runtime observation rather than protection bypass.
 - [Attachment render layers](ATTACHMENT-RENDER-LAYERS-RECOVERY-2026-10-17.md): ordinary/special hand paths, extra locators, head/elytra/parrot/backpack transforms and cleanup boundaries.
 
 - [Passenger positioning and optional hat selection](PASSENGER-HAT-ATTACHMENT-RECOVERY-2026-10-17.md): capability/list-index gates, local pose transforms and provider selection.
+
+- [Player render entry and event ordering](PLAYER-RENDER-ENTRY-RECOVERY-2026-10-17.md): default layers, cancellation and separate texture reads.
