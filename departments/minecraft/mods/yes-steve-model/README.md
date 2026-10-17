@@ -526,3 +526,5 @@ bounded runtime observation rather than protection bypass.
 ## Client-local command and debug-target extension
 
 [Client Molang/watch commands](CLIENT-COMMAND-DEBUG-TARGET-RECOVERY-2026-10-17.md) join command returns, queue submission, static watch ownership, weak target attachment, explicit lazy-provider queries and result display. Integer1 is not evaluation success; watch editing guarded by a local capability can still observe an active nonlocal target. Switching target retains shared watch configuration. The separate fixed8 [checkpoint](CLIENT-COMMAND-DEBUG-CHECKPOINT-2026-10-17.json) checks these connected boundaries without executing the target or promoting mappings.
+
+- [Shield/effect event producers](SHIELD-EFFECT-EVENT-PRODUCERS-RECOVERY-2026-10-17.md): NBT key-presence cooldown versus positive counter, effect-event guards, coalesced byte-level staging and presence-mask query provenance. The fixed6 [checkpoint](SHIELD-EFFECT-QUERY-CHECKPOINT-2026-10-17.json) compares eight repeated snapshots without conflict; no live event timing or transport was tested.

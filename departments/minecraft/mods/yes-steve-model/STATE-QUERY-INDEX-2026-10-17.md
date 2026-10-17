@@ -67,3 +67,5 @@ or stronger evidence, not a guessed patch. Continue public/foreign binding
 reachability and remaining typed-query/entity-specific input paths. Native model
 loading/render producers and actual optional-mod implementations remain outside
 the proven Java boundary. This index is a checkpoint, not a stopping instruction.
+
+- [Shield/effect event producers](SHIELD-EFFECT-EVENT-PRODUCERS-RECOVERY-2026-10-17.md): NBT key-presence cooldown versus positive counter, effect-event guards, coalesced byte-level staging and presence-mask query provenance. The fixed6 [checkpoint](SHIELD-EFFECT-QUERY-CHECKPOINT-2026-10-17.json) compares eight repeated snapshots without conflict; no live event timing or transport was tested.

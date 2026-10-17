@@ -1,0 +1,103 @@
+{
+  "format": "kneekura.ysm-shield-effect-query-checkpoint.v1",
+  "cohort_manifest": [
+    [
+      "SHIELD-EFFECT-EVENT-PRODUCERS",
+      "shield_effect_event_producers",
+      true
+    ],
+    [
+      "SERVER-PROPERTY-PRODUCER",
+      "server_property_producer",
+      true
+    ],
+    [
+      "SERVER-FULL-SYNC",
+      "server_full_sync",
+      true
+    ],
+    [
+      "ENTITY-LOAD-APPLICATION",
+      "entity_load_application",
+      true
+    ],
+    [
+      "PLAYER-PROPERTY-QUERY",
+      "player_property_query",
+      true
+    ],
+    [
+      "EQUIPMENT-EFFECT-QUERY",
+      "equipment_effect_query",
+      true
+    ]
+  ],
+  "cohorts": [
+    {
+      "cohort": "SHIELD-EFFECT-EVENT-PRODUCERS",
+      "tool_sha256": "ace18b68e8d2fd5a957844510cce597075cdc9ca5caa52489741e4d926f136d9",
+      "evidence_sha256": "64f671de9dedd382a62e4cdd3bbdcd4f26fba5a7b1b6898796b3d9b4ce32e603",
+      "rerun_receipt_sha256": "b5b5eab47cdea605caaf6dfe3c08f64ca79c8ebfa2595cceee25545a417b2199",
+      "checks": 71,
+      "negative_controls": 12,
+      "status": "PASS"
+    },
+    {
+      "cohort": "SERVER-PROPERTY-PRODUCER",
+      "tool_sha256": "89fed2299686b1fbea4474c37c55dc6fa4205ec38286fe6c870223dde063ef65",
+      "evidence_sha256": "e2f08aa1ffae350f76cc6aa0265c4efd58f85396e9fdb5124b7711e374f77511",
+      "rerun_receipt_sha256": "efdaf2b4632367e08186612cc2bc6bf25c065571c2bdcb9c3cce901c3b3044ac",
+      "checks": 214,
+      "negative_controls": 13,
+      "status": "PASS"
+    },
+    {
+      "cohort": "SERVER-FULL-SYNC",
+      "tool_sha256": "9a3afc69f76a07b17c99f1572c2764896daf74f49f209b6f5de4d4b2c4f4545c",
+      "evidence_sha256": "4d7de7d99ca629cd2268af2ab95498597728a449114e4dd9fe77921c3dfa79e0",
+      "rerun_receipt_sha256": "e43c8540a58bcc8ed69b89a39947ab36cfea51bedb0a9b5ca4b8d68ef0bef815",
+      "checks": 384,
+      "negative_controls": 13,
+      "status": "PASS"
+    },
+    {
+      "cohort": "ENTITY-LOAD-APPLICATION",
+      "tool_sha256": "d0bbd971c8554d9c31e2cb847de9f581f7205b5807fd283128a190a661620f21",
+      "evidence_sha256": "b8c6502bc9c9254d01ec1bf565b192e7141dbb7ccc8b30b4210ee5ef490cef44",
+      "rerun_receipt_sha256": "2db232de21e4f5d32b1720e9c3400031c9b5445bb42b3ba1739b713842978ccd",
+      "checks": 70,
+      "negative_controls": 12,
+      "status": "PASS"
+    },
+    {
+      "cohort": "PLAYER-PROPERTY-QUERY",
+      "tool_sha256": "15a2d1d99b997ff79e6d1130af1556758db9d27dfb758b50859df0079323daf6",
+      "evidence_sha256": "c46ab6fd27b417396f7eddfd39dbddd8f82c43f0fc19de2b3ddc243a3fbbd9e7",
+      "rerun_receipt_sha256": "f240eea298bd59385d3dc61dfb12ce5a5c40629a19e2a30db49c73eb6e1aa977",
+      "checks": 163,
+      "negative_controls": 11,
+      "status": "PASS"
+    },
+    {
+      "cohort": "EQUIPMENT-EFFECT-QUERY",
+      "tool_sha256": "ed1df61838687b495948f189c74d15f06c7948d8bdafbe4e939107cb403197cd",
+      "evidence_sha256": "a4f5cfc5e017833aa50ec21552aa06f2ef70740ebe973af59bafb427b908aaaf",
+      "rerun_receipt_sha256": "72b70ce213d06688d74dba71759bb23ad182849715789a7510e91334eca1faf6",
+      "checks": 229,
+      "negative_controls": 19,
+      "status": "PASS"
+    }
+  ],
+  "cohort_count": 6,
+  "overlapping_method_snapshots_compared": 8,
+  "overlap_conflicts": 0,
+  "central_mapping_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
+  "central_mapping_promoted": false,
+  "independent_semantic_review": "NOT_RUN",
+  "target_runtime_executed": false,
+  "whole_project_ci_run": false,
+  "earlier_fixed17_checkpoint_modified": false,
+  "earlier_fixed10_checkpoint_modified": false,
+  "earlier_fixed9_checkpoint_modified": false,
+  "elapsed_seconds": 1.394
+}

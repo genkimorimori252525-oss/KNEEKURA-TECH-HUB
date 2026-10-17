@@ -1,0 +1,2439 @@
+{
+  "format": "kneekura.ysm-bounded-seed-evidence.v1",
+  "artifact": {
+    "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+    "sha1": "151ac7b24da8beeca1a20864565743cfd77af286",
+    "size": 63269843,
+    "version_id": "Zqooxsd2",
+    "classes": 955
+  },
+  "confidence_policy": "CONFIRMED denotes semantic correspondence reviewed against pinned source and exact instructions/relations, not recovered original symbols or whole-source equivalence. Prior community sources reused as fixture leads; no community-based promotions.",
+  "source_artifact_equivalence": "NOT_ESTABLISHED",
+  "preserved_global_negative_finding": "SOURCE_ARTIFACT_DIVERGENCE",
+  "recorded_at": "2026-10-17",
+  "detailed_operands": true,
+  "classes": [],
+  "members": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOOOo00OoOo0000oo000OOO0",
+      "name": "<init>",
+      "descriptor": "()V",
+      "access": 1,
+      "code_sha256": "9fbe1b81bb78fd501d727034054001e89f98b4ceb41748486307dbe8279ca728",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "java/lang/Object",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "0019"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOOOo00OoOo0000oo000OOO0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraftforge/event/entity/living/ShieldBlockEvent;)V",
+      "access": 9,
+      "code_sha256": "fb4641662a43ac635734074243eb07ef785df91e8f4c5c8ea75ba56efd56f7a3",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraftforge/event/entity/living/ShieldBlockEvent",
+            "name": "getEntity",
+            "descriptor": "()Lnet/minecraft/world/entity/LivingEntity;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x4c"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/LivingEntity",
+            "name": "getPersistentData",
+            "descriptor": "()Lnet/minecraft/nbt/CompoundTag;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0x12",
+          "reference": {
+            "string": "ysm$shield_block_cooldown",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0x8"
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/nbt/CompoundTag",
+            "name": "m_128405_",
+            "descriptor": "(Ljava/lang/String;I)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 15,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0021"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x4c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0027"
+        },
+        {
+          "offset": 9,
+          "opcode": "0x12",
+          "encoded_operands_hex": "15"
+        },
+        {
+          "offset": 11,
+          "opcode": "0x8",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "002d"
+        },
+        {
+          "offset": 15,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOOOo00OoOo0000oo000OOO0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent;)V",
+      "access": 9,
+      "code_sha256": "5ce23f55d1c3b9ed41c6b785441887dc1ab1b0effabfc5d977f259677e5e6941",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent",
+            "name": "getEntity",
+            "descriptor": "()Lnet/minecraft/world/entity/LivingEntity;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x4c"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/LivingEntity",
+            "name": "getPersistentData",
+            "descriptor": "()Lnet/minecraft/nbt/CompoundTag;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0x12",
+          "reference": {
+            "string": "ysm$shield_block_cooldown",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/nbt/CompoundTag",
+            "name": "m_128441_",
+            "descriptor": "(Ljava/lang/String;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0x99",
+          "branch_target": 55
+        },
+        {
+          "offset": 17,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/LivingEntity",
+            "name": "getPersistentData",
+            "descriptor": "()Lnet/minecraft/nbt/CompoundTag;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 21,
+          "opcode": "0x12",
+          "reference": {
+            "string": "ysm$shield_block_cooldown",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 23,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/nbt/CompoundTag",
+            "name": "m_128451_",
+            "descriptor": "(Ljava/lang/String;)I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 26,
+          "opcode": "0x3d"
+        },
+        {
+          "offset": 27,
+          "opcode": "0x1c"
+        },
+        {
+          "offset": 28,
+          "opcode": "0x9e",
+          "branch_target": 46
+        },
+        {
+          "offset": 31,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 32,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/LivingEntity",
+            "name": "getPersistentData",
+            "descriptor": "()Lnet/minecraft/nbt/CompoundTag;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 35,
+          "opcode": "0x12",
+          "reference": {
+            "string": "ysm$shield_block_cooldown",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 37,
+          "opcode": "0x1c"
+        },
+        {
+          "offset": 38,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 39,
+          "opcode": "0x64"
+        },
+        {
+          "offset": 40,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/nbt/CompoundTag",
+            "name": "m_128405_",
+            "descriptor": "(Ljava/lang/String;I)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 43,
+          "opcode": "0xa7",
+          "branch_target": 55
+        },
+        {
+          "offset": 46,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 47,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/LivingEntity",
+            "name": "getPersistentData",
+            "descriptor": "()Lnet/minecraft/nbt/CompoundTag;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 50,
+          "opcode": "0x12",
+          "reference": {
+            "string": "ysm$shield_block_cooldown",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 52,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/nbt/CompoundTag",
+            "name": "m_128473_",
+            "descriptor": "(Ljava/lang/String;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 55,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "002f"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x4c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0027"
+        },
+        {
+          "offset": 9,
+          "opcode": "0x12",
+          "encoded_operands_hex": "15"
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0033"
+        },
+        {
+          "offset": 14,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0029"
+        },
+        {
+          "offset": 17,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0027"
+        },
+        {
+          "offset": 21,
+          "opcode": "0x12",
+          "encoded_operands_hex": "15"
+        },
+        {
+          "offset": 23,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0037"
+        },
+        {
+          "offset": 26,
+          "opcode": "0x3d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 27,
+          "opcode": "0x1c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 28,
+          "opcode": "0x9e",
+          "encoded_operands_hex": "0012"
+        },
+        {
+          "offset": 31,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 32,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0027"
+        },
+        {
+          "offset": 35,
+          "opcode": "0x12",
+          "encoded_operands_hex": "15"
+        },
+        {
+          "offset": 37,
+          "opcode": "0x1c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 38,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 39,
+          "opcode": "0x64",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 40,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "002d"
+        },
+        {
+          "offset": 43,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "000c"
+        },
+        {
+          "offset": 46,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 47,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0027"
+        },
+        {
+          "offset": 50,
+          "opcode": "0x12",
+          "encoded_operands_hex": "15"
+        },
+        {
+          "offset": 52,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "003b"
+        },
+        {
+          "offset": 55,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOOOo00OoOo0000oo000OOO0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;)Z",
+      "access": 9,
+      "code_sha256": "31d5c5121d46c71aff1d234ff90c1b4956e141a3482a084019166fe6e926ff53",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/LivingEntity",
+            "name": "getPersistentData",
+            "descriptor": "()Lnet/minecraft/nbt/CompoundTag;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x12",
+          "reference": {
+            "string": "ysm$shield_block_cooldown",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/nbt/CompoundTag",
+            "name": "m_128441_",
+            "descriptor": "(Ljava/lang/String;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0xac"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0027"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x12",
+          "encoded_operands_hex": "15"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0033"
+        },
+        {
+          "offset": 9,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO00Oo0O00oOo0O00OoO0O00",
+      "name": "<init>",
+      "descriptor": "()V",
+      "access": 1,
+      "code_sha256": "2416ec83eb9d9e34f4d7563978a9b308d498aa42b6a0edda8162ce456d6a55eb",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "java/lang/Object",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "001e"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO00Oo0O00oOo0O00OoO0O00",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraftforge/event/entity/living/MobEffectEvent$Added;)V",
+      "access": 9,
+      "code_sha256": "c18f2b4a86099b6ed88c4ba1cfa06c21f63755e7479daa7eede8a969ada05957",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/YesSteveModel",
+            "name": "isAvailable",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0x99",
+          "branch_target": 19
+        },
+        {
+          "offset": 6,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraftforge/event/entity/living/MobEffectEvent$Added",
+            "name": "getEntity",
+            "descriptor": "()Lnet/minecraft/world/entity/LivingEntity;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/LivingEntity",
+            "name": "m_9236_",
+            "descriptor": "()Lnet/minecraft/world/level/Level;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/level/Level",
+            "name": "m_5776_",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 16,
+          "opcode": "0x99",
+          "branch_target": 20
+        },
+        {
+          "offset": 19,
+          "opcode": "0xb1"
+        },
+        {
+          "offset": 20,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 21,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraftforge/event/entity/living/MobEffectEvent$Added",
+            "name": "getEntity",
+            "descriptor": "()Lnet/minecraft/world/entity/LivingEntity;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 24,
+          "opcode": "0x4d"
+        },
+        {
+          "offset": 25,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 26,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "net/minecraft/server/level/ServerPlayer",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 29,
+          "opcode": "0x99",
+          "branch_target": 69
+        },
+        {
+          "offset": 32,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 33,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "net/minecraft/server/level/ServerPlayer",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 36,
+          "opcode": "0x4c"
+        },
+        {
+          "offset": 37,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 38,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraftforge/event/entity/living/MobEffectEvent$Added",
+            "name": "getEffectInstance",
+            "descriptor": "()Lnet/minecraft/world/effect/MobEffectInstance;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 41,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/effect/MobEffectInstance",
+            "name": "m_19544_",
+            "descriptor": "()Lnet/minecraft/world/effect/MobEffect;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 44,
+          "opcode": "0xc6",
+          "branch_target": 69
+        },
+        {
+          "offset": 47,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 48,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraftforge/event/entity/living/MobEffectEvent$Added",
+            "name": "getEffectInstance",
+            "descriptor": "()Lnet/minecraft/world/effect/MobEffectInstance;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 51,
+          "opcode": "0x4d"
+        },
+        {
+          "offset": 52,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 53,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/Oo00o0OooOOo0ooOoo0oO0o0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lnet/minecraftforge/common/capabilities/Capability;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 56,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/server/level/ServerPlayer",
+            "name": "getCapability",
+            "descriptor": "(Lnet/minecraftforge/common/capabilities/Capability;)Lnet/minecraftforge/common/util/LazyOptional;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 59,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 60,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 61,
+          "opcode": "0xba",
+          "reference": {
+            "name": "accept",
+            "descriptor": "(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/effect/MobEffectInstance;)Lnet/minecraftforge/common/util/NonNullConsumer;",
+            "bootstrap_index": 0,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 66,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraftforge/common/util/LazyOptional",
+            "name": "ifPresent",
+            "descriptor": "(Lnet/minecraftforge/common/util/NonNullConsumer;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 69,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0027"
+        },
+        {
+          "offset": 3,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0010"
+        },
+        {
+          "offset": 6,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "002b"
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0031"
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0036"
+        },
+        {
+          "offset": 16,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 19,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 20,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 21,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "002b"
+        },
+        {
+          "offset": 24,
+          "opcode": "0x4d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 25,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 26,
+          "opcode": "0xc1",
+          "encoded_operands_hex": "0038"
+        },
+        {
+          "offset": 29,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0028"
+        },
+        {
+          "offset": 32,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 33,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "0038"
+        },
+        {
+          "offset": 36,
+          "opcode": "0x4c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 37,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 38,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "003c"
+        },
+        {
+          "offset": 41,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0042"
+        },
+        {
+          "offset": 44,
+          "opcode": "0xc6",
+          "encoded_operands_hex": "0019"
+        },
+        {
+          "offset": 47,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 48,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "003c"
+        },
+        {
+          "offset": 51,
+          "opcode": "0x4d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 52,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 53,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0047"
+        },
+        {
+          "offset": 56,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "004b"
+        },
+        {
+          "offset": 59,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 60,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 61,
+          "opcode": "0xba",
+          "encoded_operands_hex": "005e0000"
+        },
+        {
+          "offset": 66,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0064"
+        },
+        {
+          "offset": 69,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO00Oo0O00oOo0O00OoO0O00",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraftforge/event/entity/living/MobEffectEvent$Remove;)V",
+      "access": 9,
+      "code_sha256": "aa5b5471b20ec845082442e6ee30330c0d37e7326dd0d3517fbb04c2468402e4",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/YesSteveModel",
+            "name": "isAvailable",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0x99",
+          "branch_target": 19
+        },
+        {
+          "offset": 6,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraftforge/event/entity/living/MobEffectEvent$Remove",
+            "name": "getEntity",
+            "descriptor": "()Lnet/minecraft/world/entity/LivingEntity;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/LivingEntity",
+            "name": "m_9236_",
+            "descriptor": "()Lnet/minecraft/world/level/Level;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/level/Level",
+            "name": "m_5776_",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 16,
+          "opcode": "0x99",
+          "branch_target": 20
+        },
+        {
+          "offset": 19,
+          "opcode": "0xb1"
+        },
+        {
+          "offset": 20,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 21,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraftforge/event/entity/living/MobEffectEvent$Remove",
+            "name": "getEntity",
+            "descriptor": "()Lnet/minecraft/world/entity/LivingEntity;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 24,
+          "opcode": "0x4d"
+        },
+        {
+          "offset": 25,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 26,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "net/minecraft/server/level/ServerPlayer",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 29,
+          "opcode": "0x99",
+          "branch_target": 61
+        },
+        {
+          "offset": 32,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 33,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "net/minecraft/server/level/ServerPlayer",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 36,
+          "opcode": "0x4c"
+        },
+        {
+          "offset": 37,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 38,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraftforge/event/entity/living/MobEffectEvent$Remove",
+            "name": "getEffect",
+            "descriptor": "()Lnet/minecraft/world/effect/MobEffect;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 41,
+          "opcode": "0xc6",
+          "branch_target": 61
+        },
+        {
+          "offset": 44,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 45,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/Oo00o0OooOOo0ooOoo0oO0o0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lnet/minecraftforge/common/capabilities/Capability;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 48,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/server/level/ServerPlayer",
+            "name": "getCapability",
+            "descriptor": "(Lnet/minecraftforge/common/capabilities/Capability;)Lnet/minecraftforge/common/util/LazyOptional;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 51,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 52,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 53,
+          "opcode": "0xba",
+          "reference": {
+            "name": "accept",
+            "descriptor": "(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraftforge/event/entity/living/MobEffectEvent$Remove;)Lnet/minecraftforge/common/util/NonNullConsumer;",
+            "bootstrap_index": 1,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 58,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraftforge/common/util/LazyOptional",
+            "name": "ifPresent",
+            "descriptor": "(Lnet/minecraftforge/common/util/NonNullConsumer;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 61,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0027"
+        },
+        {
+          "offset": 3,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0010"
+        },
+        {
+          "offset": 6,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0066"
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0031"
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0036"
+        },
+        {
+          "offset": 16,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 19,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 20,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 21,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0066"
+        },
+        {
+          "offset": 24,
+          "opcode": "0x4d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 25,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 26,
+          "opcode": "0xc1",
+          "encoded_operands_hex": "0038"
+        },
+        {
+          "offset": 29,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0020"
+        },
+        {
+          "offset": 32,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 33,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "0038"
+        },
+        {
+          "offset": 36,
+          "opcode": "0x4c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 37,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 38,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0069"
+        },
+        {
+          "offset": 41,
+          "opcode": "0xc6",
+          "encoded_operands_hex": "0014"
+        },
+        {
+          "offset": 44,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 45,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0047"
+        },
+        {
+          "offset": 48,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "004b"
+        },
+        {
+          "offset": 51,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 52,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 53,
+          "opcode": "0xba",
+          "encoded_operands_hex": "00700000"
+        },
+        {
+          "offset": 58,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0064"
+        },
+        {
+          "offset": 61,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO00Oo0O00oOo0O00OoO0O00",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraftforge/event/entity/living/MobEffectEvent$Expired;)V",
+      "access": 9,
+      "code_sha256": "91b3907130c6d450faaf915f1cd5526515e6922cf45bd44aad80a60d0a1f266b",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/YesSteveModel",
+            "name": "isAvailable",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0x99",
+          "branch_target": 19
+        },
+        {
+          "offset": 6,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraftforge/event/entity/living/MobEffectEvent$Expired",
+            "name": "getEntity",
+            "descriptor": "()Lnet/minecraft/world/entity/LivingEntity;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/LivingEntity",
+            "name": "m_9236_",
+            "descriptor": "()Lnet/minecraft/world/level/Level;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/level/Level",
+            "name": "m_5776_",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 16,
+          "opcode": "0x99",
+          "branch_target": 20
+        },
+        {
+          "offset": 19,
+          "opcode": "0xb1"
+        },
+        {
+          "offset": 20,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 21,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraftforge/event/entity/living/MobEffectEvent$Expired",
+            "name": "getEntity",
+            "descriptor": "()Lnet/minecraft/world/entity/LivingEntity;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 24,
+          "opcode": "0x4d"
+        },
+        {
+          "offset": 25,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 26,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "net/minecraft/server/level/ServerPlayer",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 29,
+          "opcode": "0x99",
+          "branch_target": 71
+        },
+        {
+          "offset": 32,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 33,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "net/minecraft/server/level/ServerPlayer",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 36,
+          "opcode": "0x4c"
+        },
+        {
+          "offset": 37,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 38,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraftforge/event/entity/living/MobEffectEvent$Expired",
+            "name": "getEffectInstance",
+            "descriptor": "()Lnet/minecraft/world/effect/MobEffectInstance;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 41,
+          "opcode": "0xc6",
+          "branch_target": 71
+        },
+        {
+          "offset": 44,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 45,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraftforge/event/entity/living/MobEffectEvent$Expired",
+            "name": "getEffectInstance",
+            "descriptor": "()Lnet/minecraft/world/effect/MobEffectInstance;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 48,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/effect/MobEffectInstance",
+            "name": "m_19544_",
+            "descriptor": "()Lnet/minecraft/world/effect/MobEffect;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 51,
+          "opcode": "0xc6",
+          "branch_target": 71
+        },
+        {
+          "offset": 54,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 55,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/Oo00o0OooOOo0ooOoo0oO0o0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lnet/minecraftforge/common/capabilities/Capability;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 58,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/server/level/ServerPlayer",
+            "name": "getCapability",
+            "descriptor": "(Lnet/minecraftforge/common/capabilities/Capability;)Lnet/minecraftforge/common/util/LazyOptional;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 61,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 62,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 63,
+          "opcode": "0xba",
+          "reference": {
+            "name": "accept",
+            "descriptor": "(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraftforge/event/entity/living/MobEffectEvent$Expired;)Lnet/minecraftforge/common/util/NonNullConsumer;",
+            "bootstrap_index": 2,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 68,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraftforge/common/util/LazyOptional",
+            "name": "ifPresent",
+            "descriptor": "(Lnet/minecraftforge/common/util/NonNullConsumer;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 71,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0027"
+        },
+        {
+          "offset": 3,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0010"
+        },
+        {
+          "offset": 6,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0072"
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0031"
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0036"
+        },
+        {
+          "offset": 16,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 19,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 20,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 21,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0072"
+        },
+        {
+          "offset": 24,
+          "opcode": "0x4d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 25,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 26,
+          "opcode": "0xc1",
+          "encoded_operands_hex": "0038"
+        },
+        {
+          "offset": 29,
+          "opcode": "0x99",
+          "encoded_operands_hex": "002a"
+        },
+        {
+          "offset": 32,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 33,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "0038"
+        },
+        {
+          "offset": 36,
+          "opcode": "0x4c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 37,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 38,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0073"
+        },
+        {
+          "offset": 41,
+          "opcode": "0xc6",
+          "encoded_operands_hex": "001e"
+        },
+        {
+          "offset": 44,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 45,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0073"
+        },
+        {
+          "offset": 48,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0042"
+        },
+        {
+          "offset": 51,
+          "opcode": "0xc6",
+          "encoded_operands_hex": "0014"
+        },
+        {
+          "offset": 54,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 55,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0047"
+        },
+        {
+          "offset": 58,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "004b"
+        },
+        {
+          "offset": 61,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 62,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 63,
+          "opcode": "0xba",
+          "encoded_operands_hex": "007a0000"
+        },
+        {
+          "offset": 68,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0064"
+        },
+        {
+          "offset": 71,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO00Oo0O00oOo0O00OoO0O00",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraftforge/event/entity/living/MobEffectEvent$Expired;Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;)V",
+      "access": 4106,
+      "code_sha256": "d29dd2c04b9f5ce16dd170dffd4116965114d29973b3b3648e54f942f107b973",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/Ooo0O0000OO0OOO0o0Oo0oOO;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraftforge/event/entity/living/MobEffectEvent$Expired",
+            "name": "getEffectInstance",
+            "descriptor": "()Lnet/minecraft/world/effect/MobEffectInstance;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/effect/MobEffectInstance",
+            "name": "m_19544_",
+            "descriptor": "()Lnet/minecraft/world/effect/MobEffect;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/Ooo0O0000OO0OOO0o0Oo0oOO",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/effect/MobEffect;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 15,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0080"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0073"
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0042"
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0085"
+        },
+        {
+          "offset": 15,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO00Oo0O00oOo0O00OoO0O00",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraftforge/event/entity/living/MobEffectEvent$Remove;Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;)V",
+      "access": 4106,
+      "code_sha256": "d714226719c87cecf8d4ed1403afa1634c54710315e2c4cd593072b951077d8a",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/Ooo0O0000OO0OOO0o0Oo0oOO;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraftforge/event/entity/living/MobEffectEvent$Remove",
+            "name": "getEffect",
+            "descriptor": "()Lnet/minecraft/world/effect/MobEffect;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/Ooo0O0000OO0OOO0o0Oo0oOO",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/effect/MobEffect;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0080"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0069"
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0085"
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO00Oo0O00oOo0O00OoO0O00",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/effect/MobEffectInstance;Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;)V",
+      "access": 4106,
+      "code_sha256": "1087470c20c7dadef5f9ceeffc92163f11a3de7bbc5673d722583a3d30625456",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/Ooo0O0000OO0OOO0o0Oo0oOO;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/effect/MobEffectInstance",
+            "name": "m_19544_",
+            "descriptor": "()Lnet/minecraft/world/effect/MobEffect;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/effect/MobEffectInstance",
+            "name": "m_19564_",
+            "descriptor": "()I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 13,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 14,
+          "opcode": "0x60"
+        },
+        {
+          "offset": 15,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/Ooo0O0000OO0OOO0o0Oo0oOO",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/effect/MobEffect;I)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0080"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0042"
+        },
+        {
+          "offset": 9,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0089"
+        },
+        {
+          "offset": 13,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 14,
+          "opcode": "0x60",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 15,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "008c"
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    }
+  ],
+  "owner_declarations": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOOOo00OoOo0000oo000OOO0",
+      "declaration": {
+        "access": 33,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": [
+          {
+            "access": 25,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Ljava/lang/String;"
+          }
+        ],
+        "methods": [
+          {
+            "access": 1,
+            "name": "<init>",
+            "descriptor": "()V"
+          },
+          {
+            "access": 9,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraftforge/event/entity/living/ShieldBlockEvent;)V"
+          },
+          {
+            "access": 9,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent;)V"
+          },
+          {
+            "access": 9,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;)Z"
+          }
+        ]
+      }
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO00Oo0O00oOo0O00OoO0O00",
+      "declaration": {
+        "access": 33,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": [],
+        "methods": [
+          {
+            "access": 1,
+            "name": "<init>",
+            "descriptor": "()V"
+          },
+          {
+            "access": 9,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraftforge/event/entity/living/MobEffectEvent$Added;)V"
+          },
+          {
+            "access": 9,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraftforge/event/entity/living/MobEffectEvent$Remove;)V"
+          },
+          {
+            "access": 9,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraftforge/event/entity/living/MobEffectEvent$Expired;)V"
+          },
+          {
+            "access": 4106,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraftforge/event/entity/living/MobEffectEvent$Expired;Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;)V"
+          },
+          {
+            "access": 4106,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraftforge/event/entity/living/MobEffectEvent$Remove;Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;)V"
+          },
+          {
+            "access": 4106,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/effect/MobEffectInstance;Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;)V"
+          }
+        ]
+      }
+    }
+  ],
+  "bootstrap_and_constant_evidence": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOOOo00OoOo0000oo000OOO0",
+      "constant_values": {
+        "Oo0Oo0o00O00Oo0OOoOOoooo": {
+          "cp_tag": 8,
+          "value": "ysm$shield_block_cooldown"
+        }
+      },
+      "bootstrap_methods": []
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO00Oo0O00oOo0O00OoO0O00",
+      "constant_values": {},
+      "bootstrap_methods": [
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "(Ljava/lang/Object;)V"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/OO00Oo0O00oOo0O00OoO0O00",
+                "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+                "descriptor": "(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/effect/MobEffectInstance;Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;)V"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "(Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;)V"
+            }
+          ]
+        },
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "(Ljava/lang/Object;)V"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/OO00Oo0O00oOo0O00OoO0O00",
+                "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+                "descriptor": "(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraftforge/event/entity/living/MobEffectEvent$Remove;Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;)V"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "(Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;)V"
+            }
+          ]
+        },
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "(Ljava/lang/Object;)V"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/OO00Oo0O00oOo0O00OoO0O00",
+                "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+                "descriptor": "(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraftforge/event/entity/living/MobEffectEvent$Expired;Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;)V"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "(Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;)V"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "source_tracks": [
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/event/LivingShieldBlockEvent.java",
+      "sha256": "ccb211fcf7d70a83d0cd80bd172a0fba5480c751158befa5708b6ba5452151bf",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6"
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/event/MobEffectSyncEvent.java",
+      "sha256": "3bc7d444bee36fab578c37b664206093bc03cb5c91d9e059fb4841b9b6f12551",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6"
+    }
+  ],
+  "review_status": "PRIMARY_STATIC_REVIEW_ONLY",
+  "central_mapping_promoted": false,
+  "event_annotations": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOOOo00OoOo0000oo000OOO0",
+      "super": "java/lang/Object",
+      "access": 33,
+      "class_sha256": "656451b96f79313d2939627c9f7acb5b9f37a0c05b94e6ddee3b00b622acf829",
+      "annotations": {
+        "RuntimeVisibleAnnotations": [
+          {
+            "type": "Lnet/minecraftforge/fml/common/Mod$EventBusSubscriber;",
+            "elements": [
+              {
+                "name": "modid",
+                "value": {
+                  "tag": "s",
+                  "value": "yes_steve_model"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "access": 25,
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "Ljava/lang/String;",
+          "annotations": {}
+        }
+      ],
+      "methods": [
+        {
+          "access": 1,
+          "name": "<init>",
+          "descriptor": "()V",
+          "annotations": {}
+        },
+        {
+          "access": 9,
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Lnet/minecraftforge/event/entity/living/ShieldBlockEvent;)V",
+          "annotations": {
+            "RuntimeVisibleAnnotations": [
+              {
+                "type": "Lnet/minecraftforge/eventbus/api/SubscribeEvent;",
+                "elements": []
+              }
+            ]
+          }
+        },
+        {
+          "access": 9,
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Lnet/minecraftforge/event/entity/living/LivingEvent$LivingTickEvent;)V",
+          "annotations": {
+            "RuntimeVisibleAnnotations": [
+              {
+                "type": "Lnet/minecraftforge/eventbus/api/SubscribeEvent;",
+                "elements": []
+              }
+            ]
+          }
+        },
+        {
+          "access": 9,
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;)Z",
+          "annotations": {}
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO00Oo0O00oOo0O00OoO0O00",
+      "super": "java/lang/Object",
+      "access": 33,
+      "class_sha256": "6f8df81e7856f59efa67f9205e69599582d35bf209a081c530c3655242fdeae9",
+      "annotations": {
+        "RuntimeVisibleAnnotations": [
+          {
+            "type": "Lnet/minecraftforge/fml/common/Mod$EventBusSubscriber;",
+            "elements": []
+          }
+        ]
+      },
+      "fields": [],
+      "methods": [
+        {
+          "access": 1,
+          "name": "<init>",
+          "descriptor": "()V",
+          "annotations": {}
+        },
+        {
+          "access": 9,
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Lnet/minecraftforge/event/entity/living/MobEffectEvent$Added;)V",
+          "annotations": {
+            "RuntimeVisibleAnnotations": [
+              {
+                "type": "Lnet/minecraftforge/eventbus/api/SubscribeEvent;",
+                "elements": []
+              }
+            ]
+          }
+        },
+        {
+          "access": 9,
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Lnet/minecraftforge/event/entity/living/MobEffectEvent$Remove;)V",
+          "annotations": {
+            "RuntimeVisibleAnnotations": [
+              {
+                "type": "Lnet/minecraftforge/eventbus/api/SubscribeEvent;",
+                "elements": []
+              }
+            ]
+          }
+        },
+        {
+          "access": 9,
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Lnet/minecraftforge/event/entity/living/MobEffectEvent$Expired;)V",
+          "annotations": {
+            "RuntimeVisibleAnnotations": [
+              {
+                "type": "Lnet/minecraftforge/eventbus/api/SubscribeEvent;",
+                "elements": []
+              }
+            ]
+          }
+        },
+        {
+          "access": 4106,
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraftforge/event/entity/living/MobEffectEvent$Expired;Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;)V",
+          "annotations": {}
+        },
+        {
+          "access": 4106,
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraftforge/event/entity/living/MobEffectEvent$Remove;Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;)V",
+          "annotations": {}
+        },
+        {
+          "access": 4106,
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/effect/MobEffectInstance;Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;)V",
+          "annotations": {}
+        }
+      ]
+    }
+  ]
+}
