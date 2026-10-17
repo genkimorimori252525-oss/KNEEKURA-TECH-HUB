@@ -311,3 +311,5 @@ bounded runtime observation rather than protection bypass.
 - [Storage lifecycle direct callers](STORAGE-CALLERS-RECOVERY-2026-10-17.md): fixed-JAR initialize/push/pop closure; root-temp and public-map limits.
 
 - [Function and loop ordering](FUNCTION-LOOP-ORDER-RECOVERY-2026-10-17.md): lazy argument getters, loop limits, foreach assignment and control cleanup.
+
+- [User-function target cache](USER-FUNCTION-CACHE-RECOVERY-2026-10-17.md): successful/missing lookup retention and parser call-validation join; added after the fixed17-cohort receipt.

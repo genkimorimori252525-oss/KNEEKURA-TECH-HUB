@@ -149,3 +149,7 @@ loop/foreach ordering; do not imply every expression is enclosed by a temp frame
 Function argument/loop/foreach evaluation order and control cleanup are recorded.
 Continue parser call-argument/assignment validation and user-function dispatch;
 1024 loop count is not a universal evaluator work budget.
+
+User-function cache/AST retention and parser call-validation join are recorded
+after the fixed17-cohort checkpoint. Continue model binding construction and
+reset/reparse callers before inferring cache lifetime across model reload.
