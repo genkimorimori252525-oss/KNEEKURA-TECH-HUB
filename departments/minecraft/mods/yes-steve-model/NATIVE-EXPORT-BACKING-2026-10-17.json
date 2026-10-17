@@ -1,0 +1,256 @@
+{
+  "format": "kneekura.ysm-native-export-backing.v1",
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "metadata_canonical_sha256": "029cd0d8f8430d4fafe2a87d51cd812004ade7499fe90b3fd6776b8c060a9ff2",
+  "images": [
+    {
+      "jar_member": "META-INF/native/libysm-core.so",
+      "sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+      "exports": [
+        {
+          "name": "JNI_OnUnload",
+          "address": 4294512,
+          "address_kind": "ELF virtual address",
+          "region": {
+            "kind": "PT_LOAD",
+            "index": 1,
+            "address": 0,
+            "memory_size": 13718256,
+            "file_offset": 0,
+            "file_size": 13718256,
+            "flags": 5
+          },
+          "file_backed": true,
+          "file_offset": 4294512,
+          "first_bytes": "e95d82cc00cccccc",
+          "recognized_first_branch": {
+            "instruction": "x86-64 JMP rel32",
+            "bytes": "e95d82cc00",
+            "signed_displacement": 13402717,
+            "target_address": 17697234,
+            "target_backing": {
+              "region": {
+                "kind": "PT_LOAD",
+                "index": 4,
+                "address": 15490560,
+                "memory_size": 5308498,
+                "file_offset": 13823488,
+                "file_size": 5308498,
+                "flags": 5
+              },
+              "file_backed": true,
+              "file_offset": 16030162
+            }
+          }
+        },
+        {
+          "name": "YSM_FORGE_1200_PRODUCTION",
+          "address": 13823168,
+          "address_kind": "ELF virtual address",
+          "region": {
+            "kind": "PT_LOAD",
+            "index": 3,
+            "address": 13822760,
+            "memory_size": 1663960,
+            "file_offset": 13814568,
+            "file_size": 8920,
+            "flags": 6
+          },
+          "file_backed": true,
+          "file_offset": 13814976,
+          "first_bytes": "01000000"
+        },
+        {
+          "name": "JNI_OnLoad",
+          "address": 4294496,
+          "address_kind": "ELF virtual address",
+          "region": {
+            "kind": "PT_LOAD",
+            "index": 1,
+            "address": 0,
+            "memory_size": 13718256,
+            "file_offset": 0,
+            "file_size": 13718256,
+            "flags": 5
+          },
+          "file_backed": true,
+          "file_offset": 4294496,
+          "first_bytes": "e9bf76e000cccccc",
+          "recognized_first_branch": {
+            "instruction": "x86-64 JMP rel32",
+            "bytes": "e9bf76e000",
+            "signed_displacement": 14710463,
+            "target_address": 19004964,
+            "target_backing": {
+              "region": {
+                "kind": "PT_LOAD",
+                "index": 4,
+                "address": 15490560,
+                "memory_size": 5308498,
+                "file_offset": 13823488,
+                "file_size": 5308498,
+                "flags": 5
+              },
+              "file_backed": true,
+              "file_offset": 17337892
+            }
+          }
+        }
+      ]
+    },
+    {
+      "jar_member": "META-INF/native/libysm-core-android.so",
+      "sha256": "41251b0367926efe11c5397845b06c412141e5772869dd32cdd4ea41b6c931c8",
+      "exports": [
+        {
+          "name": "JNI_OnUnload",
+          "address": 2141160,
+          "address_kind": "ELF virtual address",
+          "region": {
+            "kind": "PT_LOAD",
+            "index": 1,
+            "address": 0,
+            "memory_size": 4803104,
+            "file_offset": 0,
+            "file_size": 4803104,
+            "flags": 5
+          },
+          "file_backed": true,
+          "file_offset": 2141160,
+          "first_bytes": "b8a81614ffc302d1",
+          "recognized_first_branch": {
+            "instruction": "A64 B immediate",
+            "bytes": "b8a81614",
+            "signed_displacement": 5939936,
+            "target_address": 8081096,
+            "target_backing": {
+              "region": {
+                "kind": "PT_LOAD",
+                "index": 4,
+                "address": 5343168,
+                "memory_size": 5814064,
+                "file_offset": 4884416,
+                "file_size": 5814064,
+                "flags": 5
+              },
+              "file_backed": true,
+              "file_offset": 7622344
+            }
+          }
+        },
+        {
+          "name": "YSM_FORGE_1200_PRODUCTION",
+          "address": 4999960,
+          "address_kind": "ELF virtual address",
+          "region": {
+            "kind": "PT_LOAD",
+            "index": 3,
+            "address": 4999680,
+            "memory_size": 305080,
+            "file_offset": 4868608,
+            "file_size": 15800,
+            "flags": 6
+          },
+          "file_backed": true,
+          "file_offset": 4868888,
+          "first_bytes": "01000000"
+        },
+        {
+          "name": "JNI_OnLoad",
+          "address": 2141156,
+          "address_kind": "ELF virtual address",
+          "region": {
+            "kind": "PT_LOAD",
+            "index": 1,
+            "address": 0,
+            "memory_size": 4803104,
+            "file_offset": 0,
+            "file_size": 4803104,
+            "flags": 5
+          },
+          "file_backed": true,
+          "file_offset": 2141156,
+          "first_bytes": "f7091614b8a81614",
+          "recognized_first_branch": {
+            "instruction": "A64 B immediate",
+            "bytes": "f7091614",
+            "signed_displacement": 5777372,
+            "target_address": 7918528,
+            "target_backing": {
+              "region": {
+                "kind": "PT_LOAD",
+                "index": 4,
+                "address": 5343168,
+                "memory_size": 5814064,
+                "file_offset": 4884416,
+                "file_size": 5814064,
+                "flags": 5
+              },
+              "file_backed": true,
+              "file_offset": 7459776
+            }
+          }
+        }
+      ]
+    },
+    {
+      "jar_member": "META-INF/native/ysm-core.dll",
+      "sha256": "f895618d58efc89996374548d0b808a42199e967a03f16c2768e3112c3afce4d",
+      "exports": [
+        {
+          "name": "JNI_OnLoad",
+          "address": 2113344,
+          "address_kind": "PE RVA",
+          "region": {
+            "kind": "PE_SECTION",
+            "index": 0,
+            "name": ".text",
+            "address": 4096,
+            "memory_size": 12053366,
+            "file_offset": 0,
+            "file_size": 0,
+            "flags": 1610612768
+          },
+          "file_backed": false
+        },
+        {
+          "name": "JNI_OnUnload",
+          "address": 2113360,
+          "address_kind": "PE RVA",
+          "region": {
+            "kind": "PE_SECTION",
+            "index": 0,
+            "name": ".text",
+            "address": 4096,
+            "memory_size": 12053366,
+            "file_offset": 0,
+            "file_size": 0,
+            "flags": 1610612768
+          },
+          "file_backed": false
+        },
+        {
+          "name": "YSM_FORGE_1200_PRODUCTION",
+          "address": 13754124,
+          "address_kind": "PE RVA",
+          "region": {
+            "kind": "PE_SECTION",
+            "index": 2,
+            "name": ".data",
+            "address": 13750272,
+            "memory_size": 1741840,
+            "file_offset": 0,
+            "file_size": 0,
+            "flags": 3221225536
+          },
+          "file_backed": false
+        }
+      ]
+    }
+  ],
+  "scope": "Named export file backing and first direct branch only; no subsequent body decoding, execution, emulation, native payload unpacking or Java/native binding claim",
+  "target_executed": false,
+  "native_implementations_resolved": false,
+  "java_native_bindings_resolved": false,
+  "independent_semantic_review": "NOT_RUN"
+}

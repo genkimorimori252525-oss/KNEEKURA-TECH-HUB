@@ -1,0 +1,25 @@
+{
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "recomputed_match": true,
+  "synthetic_tests_run": 12,
+  "synthetic_tests_passed": 12,
+  "x86_binutils_comparisons": [
+    {
+      "name": "JNI_OnUnload",
+      "target": 17697234,
+      "binutils_match": true
+    },
+    {
+      "name": "JNI_OnLoad",
+      "target": 19004964,
+      "binutils_match": true
+    }
+  ],
+  "aarch64_second_disassembler_run": false,
+  "document_address_table_checked": true,
+  "independent_semantic_review": "NOT_RUN",
+  "target_executed": false,
+  "tool_sha256": "028daef4264851f56dc419ea1d42be6374f71c62ae71a7f329c06f9ee6ad1347",
+  "test_sha256": "63c150f676b6773da9ce4fcaaf42cd8bc371177fdfeb4c334ea4d9f0df8a77be",
+  "evidence_sha256": "359f3fae2a7c8f3e0a5cfc1bdcd314f9796273c9c15e792d20881cef20bbacaa"
+}
