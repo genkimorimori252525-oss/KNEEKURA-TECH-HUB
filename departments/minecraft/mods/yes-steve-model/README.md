@@ -458,3 +458,5 @@ bounded runtime observation rather than protection bypass.
 - [Sound keyframe cleanup](SOUND-KEYFRAME-CLEANUP-RECOVERY-2026-10-17.md): consumed-versus-emitted cursor and exact transition/reset/trim caller inventory.
 
 - [Ordered segments and blend transition](ORDERED-SEGMENT-TRANSITION-RECOVERY-2026-10-17.md): cursor-dependent endpoints, lazy ordering checks, shared segments and exact callers.
+
+- [Instruction and debug evaluation](INSTRUCTION-DEBUG-EVALUATION-RECOVERY-2026-10-17.md): cursor commit order, emission flags and non-read-only debug expression execution.
