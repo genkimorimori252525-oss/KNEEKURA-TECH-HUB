@@ -1,0 +1,78 @@
+{
+  "format": "kneekura.ysm-native-second-return.v1",
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "dependency_guard_sha256": "bff8481030b3c6ffbd6a22d3889cb059318c2e370ed73b1dbe67527bcdaa8fea",
+  "segments": [
+    {
+      "address": 19678782,
+      "size": 13,
+      "sha256": "e69607d590c4a0359c6cb454e620df83d265df2c6cb66181ae07610a294c3980"
+    },
+    {
+      "address": 16370748,
+      "size": 69,
+      "sha256": "c5ba46617ad712389f5f1c9637a1e3d3cbbb62aa5578e1b893dc212243cf0a26"
+    },
+    {
+      "address": 17173437,
+      "size": 137,
+      "sha256": "e8b66fda0032d563d67312ed6ee64b46cd278212d563438214c0355aff119fb0"
+    }
+  ],
+  "register_proof": {
+    "r10d_masked": 2332147968,
+    "r10b_for_exchange": 0,
+    "rsi_before_not_word": 578813952,
+    "rsi_final": 578879487,
+    "store_offset": 0
+  },
+  "return_instruction": {
+    "address": 17173571,
+    "immediate": 8,
+    "pop_bytes": 8,
+    "total_stack_advance": 16,
+    "stored_register": "RDI",
+    "store_offset": 0
+  },
+  "symbolic_destination": "RDI = load_bias + 0x12c3a51 + sign_extend_32(decoded_second_word) + carry",
+  "file_state": {
+    "word_address": 13815116,
+    "word_hex": "a314743b",
+    "key": 15895984,
+    "delta": {
+      "initial_cl": 225,
+      "r11_for_word_transform": 4294967056,
+      "delta_u32": 4290928620,
+      "delta_signed": -4038676,
+      "adc_carry": 0
+    },
+    "candidate_relative_address": 15637053,
+    "backing": {
+      "region": {
+        "kind": "PT_LOAD",
+        "index": 4,
+        "address": 15490560,
+        "memory_size": 5308498,
+        "file_offset": 13823488,
+        "file_size": 5308498,
+        "flags": 5
+      },
+      "file_backed": true,
+      "file_offset": 13969981
+    }
+  },
+  "assumptions": [
+    "Both earlier file-state data words at 0xd2cd48 and 0xd2cd4c retain the recorded file bytes",
+    "The preceding fixed candidate and untaken guard are reached under their recorded assumptions",
+    "Unmodified instructions, normal memory completion and no external interference",
+    "RDI remains unchanged between its ADC at 0x12c3ac6 and the final stack store"
+  ],
+  "second_word_relocation_overlap_checked": false,
+  "target_executed": false,
+  "native_machine_emulator_run": false,
+  "runtime_reachability_verified": false,
+  "native_implementations_resolved": false,
+  "java_native_bindings_resolved": false,
+  "independent_semantic_review": "NOT_RUN"
+}
