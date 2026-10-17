@@ -462,3 +462,7 @@ bounded runtime observation rather than protection bypass.
 - [Instruction and debug evaluation](INSTRUCTION-DEBUG-EVALUATION-RECOVERY-2026-10-17.md): cursor commit order, emission flags and non-read-only debug expression execution.
 
 - [Molang event wrappers](MOLANG-EVENT-WRAPPER-RECOVERY-2026-10-17.md): retained handler/argument lists, init flag timing and actual update/sync callers.
+
+- [Animation data ownership](ANIMATION-DATA-OWNERSHIP-RECOVERY-2026-10-17.md): mixed copy/view policies, controller validation boundaries and particle-field reader inventory.
+
+- [Model asset helper ownership](MODEL-ASSET-HELPERS-RECOVERY-2026-10-17.md) and [client-model composition](CLIENT-MODEL-COMPOSITION-RECOVERY-2026-10-17.md): reuse existing builder evidence; keep fallback, shared references and event registration distinct.

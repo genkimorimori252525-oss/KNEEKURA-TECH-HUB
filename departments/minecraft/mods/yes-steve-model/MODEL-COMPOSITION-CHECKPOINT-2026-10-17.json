@@ -1,0 +1,89 @@
+{
+  "format": "kneekura.ysm-model-composition-checkpoint.v1",
+  "cohort_manifest": [
+    [
+      "ANIMATION-DATA-OWNERSHIP",
+      "animation_data_ownership",
+      true
+    ],
+    [
+      "PARTICLE-KEYFRAME-READERS",
+      "particle_keyframe_readers",
+      false
+    ],
+    [
+      "MODEL-ASSET-HELPERS",
+      "model_asset_helpers",
+      true
+    ],
+    [
+      "CONDITIONAL-ANIMATION-NAMES",
+      "conditional_animation_names",
+      true
+    ],
+    [
+      "MOLANG-EVENT-WRAPPER",
+      "molang_event_wrapper",
+      true
+    ]
+  ],
+  "cohorts": [
+    {
+      "cohort": "ANIMATION-DATA-OWNERSHIP",
+      "tool_sha256": "3d6d8a81dcdbd184965b1da3c7c9dfe16ebf0f549e389cd99ef05aa4638abff9",
+      "evidence_sha256": "2fdcbd8c0c020ed23b61c602e8049efea69cd8323aa59f564950d4d46e424e1d",
+      "rerun_receipt_sha256": "9ad4c18c3b95ffcc29bc447a2c599a7ab7d09f08e7553a8fea09a5440fba0766",
+      "checks": 152,
+      "negative_controls": 10,
+      "status": "PASS"
+    },
+    {
+      "cohort": "PARTICLE-KEYFRAME-READERS",
+      "tool_sha256": "805d244ecab06714b7175408c0820b7deee5d361363efed46ff56111e91940d2",
+      "evidence_sha256": "ec80bb9f83171275dbb7632d10996917e1537e0e3136766564f3ce8b3d924baf",
+      "rerun_receipt_sha256": "b116db0e228dd5e18c049e99e88115cdc763caf4b122e50fa5593e7dcd826d75",
+      "checks": 2,
+      "negative_controls": 6,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MODEL-ASSET-HELPERS",
+      "tool_sha256": "a1be85ede0282ac680b580db17edb410bb7925d57f060373840447010bba1f95",
+      "evidence_sha256": "1ab3aef7c1863bb0b09d60c24c56cd03cc61cb5dea1c1cee9b542c7e8d0b99c2",
+      "rerun_receipt_sha256": "2a569c64a99ae7189e56deb3e7b4da092e8895a6d2522a827e793c0c500a2260",
+      "checks": 179,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "CONDITIONAL-ANIMATION-NAMES",
+      "tool_sha256": "fe5a8c5ad75c3a2f2a1511a53a8c3c772cda2a78c12c1ccc8578373c5d7380e6",
+      "evidence_sha256": "1b03d6529d5e1bf7fb9eb064040b0185281278b7224427412e0118dd5b1472be",
+      "rerun_receipt_sha256": "923acab092d89e32541815002ca24d1ad5ee5605f6013c460c4c9a94f5ce01b4",
+      "checks": 321,
+      "negative_controls": 11,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MOLANG-EVENT-WRAPPER",
+      "tool_sha256": "1b2c96072c567ead0e702d7d1f8b019eeff7431422f07bc181272a3b4961a749",
+      "evidence_sha256": "ffbc166b87d7b935813b34c37e54b0cce460ceef9d9c4e305fecb2c2e15f6d63",
+      "rerun_receipt_sha256": "1b6da0c1ca743cb330a5a0dc2dd79d590f9cc31ac4ea6a0150173251f7a422fb",
+      "checks": 36,
+      "negative_controls": 6,
+      "status": "PASS"
+    }
+  ],
+  "cohort_count": 5,
+  "overlapping_method_snapshots_compared": 1,
+  "overlap_conflicts": 0,
+  "central_mapping_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
+  "central_mapping_promoted": false,
+  "independent_semantic_review": "NOT_RUN",
+  "target_runtime_executed": false,
+  "whole_project_ci_run": false,
+  "earlier_fixed17_checkpoint_modified": false,
+  "earlier_fixed10_checkpoint_modified": false,
+  "earlier_fixed9_checkpoint_modified": false,
+  "elapsed_seconds": 1.546
+}

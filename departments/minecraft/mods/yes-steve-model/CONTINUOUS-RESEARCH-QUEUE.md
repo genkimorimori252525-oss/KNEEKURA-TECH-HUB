@@ -56,8 +56,14 @@ navigation aliases remain PRIMARY hints separate from central mappings. Debug
 observation can evaluate expressions; emission=false is not a global no-evaluation
 switch. Caller-owned mutable arguments and cursor commit points stay explicit.
 
-Next finite connected question: remaining Java model/bone data construction and
-validation boundaries not covered by existing point/queue/native-handoff cohorts.
+Animation/controller data ownership and client-model composition now have a fixed5
+checkpoint (one overlapping snapshot, no conflicts). Existing builder bodies are
+reused; default animation reference sharing, event-name splitting and ordered/hash
+lookup boundaries are explicit. Particle-list exact field reads do not establish
+an emitter; the separate Molang particle path remains distinct.
+
+Next finite connected question: remaining geometry/bone construction invariants
+and exact Java use of parent indices, locator matrices and authored defaults.
 Inspect bounded Java consumers/producers only; do not infer native input validity,
 execute protected parsing, or repeat already documented state machines.
 
