@@ -51,3 +51,5 @@ The existing [client initialization snapshot](CLIENT-COMPAT-INITIALIZATION-EVIDE
 ## Reuse boundary
 
 Separate command integer returns, parse acceptance, queue submission, observation target, result formatting, callback delivery and visible overlay. Preserve shared watch configuration across target changes if matching this behavior. No independent semantic review, whole-source equivalence or target runtime is claimed;669 central entries remain byte-identical.
+
+- [Debug target lifecycle and diagnostic scope](DEBUG-TARGET-LIFECYCLE-RECOVERY-2026-10-17.md): exact target-field/caller inventory, non-initializing key toggle, shared watches versus globally enabled diagnostic output, and bounded logout cleanup evidence. The separate fixed6 [checkpoint](DEBUG-TARGET-LIFECYCLE-CHECKPOINT-2026-10-17.json) compares20 repeated snapshots without conflict.
