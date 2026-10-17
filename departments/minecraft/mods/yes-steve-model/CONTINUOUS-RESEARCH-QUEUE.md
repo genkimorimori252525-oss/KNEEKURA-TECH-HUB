@@ -109,3 +109,7 @@ model selection; native implementation and runtime outcomes remain outside proof
 Texture-holder Java readiness/publication, weak ownership and delayed-release
 ordering are recorded. Continue client tick caller and renderer texture/model
 selection; no native or GPU execution implied.
+
+Client tick service order and humanoid renderer event/model/texture selection
+are recorded. Continue Java render-cycle/buffer handoff with explicit native
+boundaries; static reachability is not runtime rendering proof.
