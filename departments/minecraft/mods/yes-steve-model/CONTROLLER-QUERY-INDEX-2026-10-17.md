@@ -36,3 +36,13 @@ Related expression inputs:
 Central map remains669 rows and byte-identical. Captured declarations include constructors, lambdas, abstract methods and support, so their counts must not be presented as new semantic mappings or completion percentage. Independent semantic review for these nine cohorts is NOT_RUN. Minecraft/Forge, native providers, packets and whole-project CI were not executed.
 
 Continue through remaining conditional swing/use/vehicle/armor predicates and compatibility adapters as needed. Keep direct Java evidence, source hints and external-provider behavior separate. This checkpoint is not a whole-target completion claim.
+
+## Added after that fixed checkpoint
+
+These dossiers have their own scoped receipts; they are not included in the nine-cohort batch above:
+
+- [Conditional model-name ingestion](CONDITIONAL-ANIMATION-NAMES-RECOVERY-2026-10-17.md): actual lambda-handle producer, default-animation sharing and tag priority provenance.
+- [Humanoid riding/armor](RIDING-ARMOR-PREDICATES-RECOVERY-2026-10-17.md): ordered provider/legacy fallbacks and first-passenger/type-ID boundaries.
+- [First-person arm assembly](FIRST-PERSON-ARM-ASSEMBLY-RECOVERY-2026-10-17.md): separate animation/condition map with shared resources, and isolated JDK regex contract.
+- [Vehicle/projectile entity controllers](VEHICLE-PROJECTILE-CONTROLLERS-RECOVERY-2026-10-17.md): state selection, literal fly/air discrepancy, aircraft-origin rotation queue.
+- [Extra/GUI preview controllers](EXTRA-PREVIEW-CONTROLLERS-RECOVERY-2026-10-17.md): cap lifecycle, hover/focus emission timing and sound cleanup scope.

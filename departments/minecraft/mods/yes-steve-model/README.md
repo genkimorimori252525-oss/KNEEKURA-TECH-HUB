@@ -394,3 +394,7 @@ bounded runtime observation rather than protection bypass.
 - [Riding/passenger/armor predicates](RIDING-ARMOR-PREDICATES-RECOVERY-2026-10-17.md): adapter/legacy fallback order, first-passenger scope and chair-model-ID versus entity-type matching.
 
 - [First-person arm assembly](FIRST-PERSON-ARM-ASSEMBLY-RECOVERY-2026-10-17.md): separate animation/condition maps, shared holder/roaming inputs and eight isolated JDK regex contract cases.
+
+- [Vehicle/projectile controllers](VEHICLE-PROJECTILE-CONTROLLERS-RECOVERY-2026-10-17.md): factory discovery, fly/air literal mismatch, retained root-rotation queue and external aircraft rotation inputs.
+
+- [Extra/preview controllers](EXTRA-PREVIEW-CONTROLLERS-RECOVERY-2026-10-17.md): cap lifecycle, hover/focus preview gates, sampled emission flags and distinct sound cleanup scope.
