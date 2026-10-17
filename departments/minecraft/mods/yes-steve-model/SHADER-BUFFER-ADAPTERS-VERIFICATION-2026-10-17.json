@@ -1,0 +1,788 @@
+{
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "checks": [
+    {
+      "check": "fixed-artifact",
+      "pass": true
+    },
+    {
+      "check": "detailed-operands",
+      "pass": true
+    },
+    {
+      "check": "selected-30-methods",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', '<init>', '()V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', '<init>', '()V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', '<init>', '()V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', '<init>', '()V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', '<init>', '()V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'o0OOooo0o0OO00OoOOOo0o0O', '()Z'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'o0OOooo0o0OO00OoOOOo0o0O', '()Z'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'o0OOooo0o0OO00OoOOOo0o0O', '()Z'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'o0OOooo0o0OO00OoOOOo0o0O', '()Z'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'o0OOooo0o0OO00OoOOOo0o0O', '()Z'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'O00OOOooOoooOoo0o0o0oO0O', '()Z'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'O00OOOooOoooOoo0o0o0oO0O', '()Z'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'O00OOOooOoooOoo0o0o0oO0O', '()Z'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'O00OOOooOoooOoo0o0o0oO0O', '()Z'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'O00OOOooOoooOoo0o0o0oO0O', '()Z'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'OOOOo0O0oO0OOo0O0O0Oo0O0', '()J'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'OOOOo0O0oO0OOo0O0O0Oo0O0', '()J'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'OOOOo0O0oO0OOo0O0O0Oo0O0', '()J'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'OOOOo0O0oO0OOo0O0O0Oo0O0', '()J'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'OOOOo0O0oO0OOo0O0O0Oo0O0', '()J'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'Ooooo0oooO0oooOOOoO0000O', '()J'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'Ooooo0oooO0oooOOOoO0000O', '()J'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'Ooooo0oooO0oooOOOoO0000O', '()J'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'Ooooo0oooO0oooOOOoO0000O', '()J'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'Ooooo0oooO0oooOOOoO0000O', '()J'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'oOOOo0OOO0ooooo0O00OO0o0', '()V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'oOOOo0OOO0ooooo0O00OO0o0', '()V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'oOOOo0OOO0ooooo0O00OO0o0', '()V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'oOOOo0OOO0ooooo0O00OO0o0', '()V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'oOOOo0OOO0ooooo0O00OO0o0', '()V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraftforge/fml/ModContainer;)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraftforge/fml/ModContainer;)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraftforge/fml/ModContainer;)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraftforge/fml/ModContainer;)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraftforge/fml/ModContainer;)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', '<clinit>', '()V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', '<clinit>', '()V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', '<clinit>', '()V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', '<clinit>', '()V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo', '<clinit>', '()V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$Oo0Oo0o00O00Oo0OOoOOoooo', '<init>', '()V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$Oo0Oo0o00O00Oo0OOoOOoooo', '<init>', '()V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$Oo0Oo0o00O00Oo0OOoOOoooo', '<init>', '()V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$Oo0Oo0o00O00Oo0OOoOOoooo', '<init>', '()V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$Oo0Oo0o00O00Oo0OOoOOoooo', '<init>', '()V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$Oo0Oo0o00O00Oo0OOoOOoooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/coderbot/iris/texture/pbr/loader/PBRTextureLoader$PBRTextureConsumer;)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$Oo0Oo0o00O00Oo0OOoOOoooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/coderbot/iris/texture/pbr/loader/PBRTextureLoader$PBRTextureConsumer;)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$Oo0Oo0o00O00Oo0OOoOOoooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/coderbot/iris/texture/pbr/loader/PBRTextureLoader$PBRTextureConsumer;)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$Oo0Oo0o00O00Oo0OOoOOoooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/coderbot/iris/texture/pbr/loader/PBRTextureLoader$PBRTextureConsumer;)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$Oo0Oo0o00O00Oo0OOoOOoooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/coderbot/iris/texture/pbr/loader/PBRTextureLoader$PBRTextureConsumer;)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$Oo0Oo0o00O00Oo0OOoOOoooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$Oo0Oo0o00O00Oo0OOoOOoooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$Oo0Oo0o00O00Oo0OOoOOoooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$Oo0Oo0o00O00Oo0OOoOOoooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$Oo0Oo0o00O00Oo0OOoOOoooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$Oo0Oo0o00O00Oo0OOoOOoooo', 'load', '(Lnet/minecraft/client/renderer/texture/AbstractTexture;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/coderbot/iris/texture/pbr/loader/PBRTextureLoader$PBRTextureConsumer;)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$Oo0Oo0o00O00Oo0OOoOOoooo', 'load', '(Lnet/minecraft/client/renderer/texture/AbstractTexture;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/coderbot/iris/texture/pbr/loader/PBRTextureLoader$PBRTextureConsumer;)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$Oo0Oo0o00O00Oo0OOoOOoooo', 'load', '(Lnet/minecraft/client/renderer/texture/AbstractTexture;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/coderbot/iris/texture/pbr/loader/PBRTextureLoader$PBRTextureConsumer;)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$Oo0Oo0o00O00Oo0OOoOOoooo', 'load', '(Lnet/minecraft/client/renderer/texture/AbstractTexture;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/coderbot/iris/texture/pbr/loader/PBRTextureLoader$PBRTextureConsumer;)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$Oo0Oo0o00O00Oo0OOoOOoooo', 'load', '(Lnet/minecraft/client/renderer/texture/AbstractTexture;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/coderbot/iris/texture/pbr/loader/PBRTextureLoader$PBRTextureConsumer;)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$Oo0Oo0o00O00Oo0OOoOOoooo', '<clinit>', '()V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$Oo0Oo0o00O00Oo0OOoOOoooo', '<clinit>', '()V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$Oo0Oo0o00O00Oo0OOoOOoooo', '<clinit>', '()V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$Oo0Oo0o00O00Oo0OOoOOoooo', '<clinit>', '()V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$Oo0Oo0o00O00Oo0OOoOOoooo', '<clinit>', '()V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$o0OOooo0o0OO00OoOOOo0o0O', '<init>', '()V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$o0OOooo0o0OO00OoOOOo0o0O', '<init>', '()V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$o0OOooo0o0OO00OoOOOo0o0O', '<init>', '()V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$o0OOooo0o0OO00OoOOOo0o0O', '<init>', '()V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$o0OOooo0o0OO00OoOOOo0o0O', '<init>', '()V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$o0OOooo0o0OO00OoOOOo0o0O', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/irisshaders/iris/texture/pbr/loader/PBRTextureLoader$PBRTextureConsumer;)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$o0OOooo0o0OO00OoOOOo0o0O', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/irisshaders/iris/texture/pbr/loader/PBRTextureLoader$PBRTextureConsumer;)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$o0OOooo0o0OO00OoOOOo0o0O', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/irisshaders/iris/texture/pbr/loader/PBRTextureLoader$PBRTextureConsumer;)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$o0OOooo0o0OO00OoOOOo0o0O', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/irisshaders/iris/texture/pbr/loader/PBRTextureLoader$PBRTextureConsumer;)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$o0OOooo0o0OO00OoOOOo0o0O', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O0O00000Ooooo00oooo0ooo0;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/irisshaders/iris/texture/pbr/loader/PBRTextureLoader$PBRTextureConsumer;)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$o0OOooo0o0OO00OoOOOo0o0O', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$o0OOooo0o0OO00OoOOOo0o0O', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$o0OOooo0o0OO00OoOOOo0o0O', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$o0OOooo0o0OO00OoOOOo0o0O', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$o0OOooo0o0OO00OoOOOo0o0O', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$o0OOooo0o0OO00OoOOOo0o0O', 'load', '(Lnet/minecraft/client/renderer/texture/AbstractTexture;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/irisshaders/iris/texture/pbr/loader/PBRTextureLoader$PBRTextureConsumer;)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$o0OOooo0o0OO00OoOOOo0o0O', 'load', '(Lnet/minecraft/client/renderer/texture/AbstractTexture;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/irisshaders/iris/texture/pbr/loader/PBRTextureLoader$PBRTextureConsumer;)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$o0OOooo0o0OO00OoOOOo0o0O', 'load', '(Lnet/minecraft/client/renderer/texture/AbstractTexture;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/irisshaders/iris/texture/pbr/loader/PBRTextureLoader$PBRTextureConsumer;)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$o0OOooo0o0OO00OoOOOo0o0O', 'load', '(Lnet/minecraft/client/renderer/texture/AbstractTexture;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/irisshaders/iris/texture/pbr/loader/PBRTextureLoader$PBRTextureConsumer;)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$o0OOooo0o0OO00OoOOOo0o0O', 'load', '(Lnet/minecraft/client/renderer/texture/AbstractTexture;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/irisshaders/iris/texture/pbr/loader/PBRTextureLoader$PBRTextureConsumer;)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$o0OOooo0o0OO00OoOOOo0o0O', '<clinit>', '()V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$o0OOooo0o0OO00OoOOOo0o0O', '<clinit>', '()V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$o0OOooo0o0OO00OoOOOo0o0O', '<clinit>', '()V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$o0OOooo0o0OO00OoOOOo0o0O', '<clinit>', '()V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$o0OOooo0o0OO00OoOOOo0o0O', '<clinit>', '()V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/oo0OO00OOOOo0ooOOoOOo0O0', '<init>', '()V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/oo0OO00OOOOo0ooOOoOOo0O0', '<init>', '()V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/oo0OO00OOOOo0ooOOoOOo0O0', '<init>', '()V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/oo0OO00OOOOo0ooOOoOOo0O0', '<init>', '()V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/oo0OO00OOOOo0ooOOoOOo0O0', '<init>', '()V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/oo0OO00OOOOo0ooOOoOOo0O0', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/oo0OO00OOOOo0ooOOoOOo0O0', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/oo0OO00OOOOo0ooOOoOOo0O0', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/oo0OO00OOOOo0ooOOoOOo0O0', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/oo0OO00OOOOo0ooOOoOOo0O0', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/oo0OO00OOOOo0ooOOoOOo0O0', 'o0OOooo0o0OO00OoOOOo0o0O', '()Z'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/oo0OO00OOOOo0ooOOoOOo0O0', 'o0OOooo0o0OO00OoOOOo0o0O', '()Z'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/oo0OO00OOOOo0ooOOoOOo0O0', 'o0OOooo0o0OO00OoOOOo0o0O', '()Z'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/oo0OO00OOOOo0ooOOoOOo0O0', 'o0OOooo0o0OO00OoOOOo0o0O', '()Z'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/oo0OO00OOOOo0ooOOoOOo0O0', 'o0OOooo0o0OO00OoOOOo0o0O', '()Z'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0', '<init>', '(Lnet/minecraft/resources/ResourceLocation;)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0', '<init>', '(Lnet/minecraft/resources/ResourceLocation;)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0', '<init>', '(Lnet/minecraft/resources/ResourceLocation;)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0', '<init>', '(Lnet/minecraft/resources/ResourceLocation;)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0', '<init>', '(Lnet/minecraft/resources/ResourceLocation;)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0', '<init>', '(Lnet/minecraft/client/renderer/RenderType;)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0', '<init>', '(Lnet/minecraft/client/renderer/RenderType;)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0', '<init>', '(Lnet/minecraft/client/renderer/RenderType;)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0', '<init>', '(Lnet/minecraft/client/renderer/RenderType;)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0', '<init>', '(Lnet/minecraft/client/renderer/RenderType;)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0', 'm_5492_', '()Z'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0', 'm_5492_', '()Z'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0', 'm_5492_', '()Z'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0', 'm_5492_', '()Z'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0', 'm_5492_', '()Z'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0', 'm_7280_', '()Ljava/util/Optional;'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0', 'm_7280_', '()Ljava/util/Optional;'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0', 'm_7280_', '()Ljava/util/Optional;'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0', 'm_7280_', '()Ljava/util/Optional;'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0', 'm_7280_', '()Ljava/util/Optional;'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/resources/ResourceLocation;)Lcom/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0;'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/resources/ResourceLocation;)Lcom/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0;'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/resources/ResourceLocation;)Lcom/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0;'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/resources/ResourceLocation;)Lcom/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0;'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/resources/ResourceLocation;)Lcom/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0;'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0', '<clinit>', '()V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0', '<clinit>', '()V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0', '<clinit>', '()V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0', '<clinit>', '()V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0', '<clinit>', '()V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/mixin/client/BufferSourceMixin', '<init>', '()V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/mixin/client/BufferSourceMixin', '<init>', '()V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/mixin/client/BufferSourceMixin', '<init>', '()V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/mixin/client/BufferSourceMixin', '<init>', '()V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/mixin/client/BufferSourceMixin', '<init>', '()V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/mixin/client/BufferSourceMixin', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/mixin/client/BufferSourceMixin', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/mixin/client/BufferSourceMixin', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/mixin/client/BufferSourceMixin', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/mixin/client/BufferSourceMixin', 'Oo0Oo0o00O00Oo0OOoOOoooo', '()V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "six-declarations",
+      "pass": true
+    },
+    {
+      "check": "com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo:declaration",
+      "pass": true
+    },
+    {
+      "check": "com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$Oo0Oo0o00O00Oo0OOoOOoooo:declaration",
+      "pass": true
+    },
+    {
+      "check": "com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$o0OOooo0o0OO00OoOOOo0o0O:declaration",
+      "pass": true
+    },
+    {
+      "check": "com/elfmcys/yesstevemodel/oo0OO00OOOOo0ooOOoOOo0O0:declaration",
+      "pass": true
+    },
+    {
+      "check": "com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0:declaration",
+      "pass": true
+    },
+    {
+      "check": "com/elfmcys/yesstevemodel/mixin/client/BufferSourceMixin:declaration",
+      "pass": true
+    },
+    {
+      "check": "six-bootstrap-records",
+      "pass": true
+    },
+    {
+      "check": "com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo:constant_values",
+      "pass": true
+    },
+    {
+      "check": "com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo:bootstrap_methods",
+      "pass": true
+    },
+    {
+      "check": "com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$Oo0Oo0o00O00Oo0OOoOOoooo:constant_values",
+      "pass": true
+    },
+    {
+      "check": "com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$Oo0Oo0o00O00Oo0OOoOOoooo:bootstrap_methods",
+      "pass": true
+    },
+    {
+      "check": "com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$o0OOooo0o0OO00OoOOOo0o0O:constant_values",
+      "pass": true
+    },
+    {
+      "check": "com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo$o0OOooo0o0OO00OoOOOo0o0O:bootstrap_methods",
+      "pass": true
+    },
+    {
+      "check": "com/elfmcys/yesstevemodel/oo0OO00OOOOo0ooOOoOOo0O0:constant_values",
+      "pass": true
+    },
+    {
+      "check": "com/elfmcys/yesstevemodel/oo0OO00OOOOo0ooOOoOOo0O0:bootstrap_methods",
+      "pass": true
+    },
+    {
+      "check": "com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0:constant_values",
+      "pass": true
+    },
+    {
+      "check": "com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0:bootstrap_methods",
+      "pass": true
+    },
+    {
+      "check": "com/elfmcys/yesstevemodel/mixin/client/BufferSourceMixin:constant_values",
+      "pass": true
+    },
+    {
+      "check": "com/elfmcys/yesstevemodel/mixin/client/BufferSourceMixin:bootstrap_methods",
+      "pass": true
+    },
+    {
+      "check": "six-fixed-source-records",
+      "pass": true
+    },
+    {
+      "check": "exact-buffer-mixin-annotations",
+      "pass": true
+    },
+    {
+      "check": "source-revision",
+      "pass": true
+    },
+    {
+      "check": "source:src/main/java/com/elfmcys/yesstevemodel/client/compat/IrisCompat.java",
+      "pass": true
+    },
+    {
+      "check": "source:src/main/java/com/elfmcys/yesstevemodel/client/compat/IrisCompat.java",
+      "pass": true
+    },
+    {
+      "check": "source:src/main/java/com/elfmcys/yesstevemodel/client/compat/IrisCompat.java",
+      "pass": true
+    },
+    {
+      "check": "source:src/main/java/com/elfmcys/yesstevemodel/client/compat/OptifineCompat.java",
+      "pass": true
+    },
+    {
+      "check": "source:src/main/java/com/elfmcys/yesstevemodel/geckolib3/geo/CustomTranslucentRenderType.java",
+      "pass": true
+    },
+    {
+      "check": "source:src/main/java/com/elfmcys/yesstevemodel/mixin/client/BufferSourceMixin.java",
+      "pass": true
+    }
+  ],
+  "negative_controls": [
+    {
+      "control": "missing-method",
+      "rejected": true
+    },
+    {
+      "control": "missing-owner",
+      "rejected": true
+    },
+    {
+      "control": "missing-source",
+      "rejected": true
+    },
+    {
+      "control": "missing-bootstrap",
+      "rejected": true
+    },
+    {
+      "control": "wrong-artifact",
+      "rejected": true
+    },
+    {
+      "control": "missing-shader-buffer-link-0",
+      "rejected": true
+    },
+    {
+      "control": "missing-shader-buffer-link-1",
+      "rejected": true
+    },
+    {
+      "control": "missing-shader-buffer-link-2",
+      "rejected": true
+    },
+    {
+      "control": "missing-shader-buffer-link-3",
+      "rejected": true
+    },
+    {
+      "control": "missing-shader-buffer-link-4",
+      "rejected": true
+    },
+    {
+      "control": "missing-shader-buffer-link-5",
+      "rejected": true
+    },
+    {
+      "control": "missing-mixin-annotation-records",
+      "rejected": true
+    }
+  ],
+  "failures": [],
+  "negative_failures": [],
+  "independent_semantic_review": "NOT_RUN",
+  "runtime_executed": false,
+  "central_mapping_promoted": false
+}

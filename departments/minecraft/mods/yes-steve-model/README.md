@@ -432,3 +432,5 @@ bounded runtime observation rather than protection bypass.
 - [Fishing-line geometry](FISHING-LINE-GEOMETRY-RECOVERY-2026-10-17.md): endpoint camera conventions, 17-point curve, terminal tangent and Iris tail; reuses existing evidence.
 
 - [Player replacement view gates](PLAYER-REPLACEMENT-VIEW-GATES-RECOVERY-2026-10-17.md): self/other config, first-person interoperability and pre-render cancellation.
+
+- [Shader and buffer adapters](SHADER-BUFFER-ADAPTERS-RECOVERY-2026-10-17.md): Oculus/PBR initialization, signed ID packing and fixed-buffer flush scope.
