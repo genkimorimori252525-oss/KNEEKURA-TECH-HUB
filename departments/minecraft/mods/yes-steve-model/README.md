@@ -1,5 +1,7 @@
 # Yes Steve Model (YSM) — architecture / animation / renderer research
 
+
+State/query extension navigation: [STATE-QUERY-INDEX-2026-10-17.md](STATE-QUERY-INDEX-2026-10-17.md). Use the relevant seam; no ordinary-startup audit is required.
 ## Scope
 
 - Target: **Yes Steve Model (YSM)**

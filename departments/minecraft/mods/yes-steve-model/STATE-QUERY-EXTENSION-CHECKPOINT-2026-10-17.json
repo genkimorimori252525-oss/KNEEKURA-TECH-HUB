@@ -1,0 +1,157 @@
+{
+  "format": "kneekura.ysm-state-query-extension-checkpoint.v1",
+  "cohort_manifest": [
+    [
+      "SERVER-PROPERTY-PRODUCER",
+      "server_property_producer",
+      true
+    ],
+    [
+      "SERVER-FULL-SYNC",
+      "server_full_sync",
+      true
+    ],
+    [
+      "PROPERTY-RESET-LIFECYCLE",
+      "property_reset_lifecycle",
+      true
+    ],
+    [
+      "PROPERTY-STATE-WRITERS",
+      "property_state_writers",
+      false
+    ],
+    [
+      "FULL-SYNC-CALLERS",
+      "full_sync_callers",
+      false
+    ],
+    [
+      "EQUIPMENT-EFFECT-QUERY",
+      "equipment_effect_query",
+      true
+    ],
+    [
+      "RESOURCE-ARGUMENT-ADAPTER",
+      "resource_argument_adapter",
+      true
+    ],
+    [
+      "WORLD-QUERY-INPUT",
+      "world_query_input",
+      true
+    ],
+    [
+      "TIME-CONTROLLER-QUERY",
+      "time_controller_query",
+      true
+    ],
+    [
+      "CHILD-CONTEXT-ARROW",
+      "child_context_arrow",
+      true
+    ]
+  ],
+  "cohorts": [
+    {
+      "cohort": "SERVER-PROPERTY-PRODUCER",
+      "tool_sha256": "89fed2299686b1fbea4474c37c55dc6fa4205ec38286fe6c870223dde063ef65",
+      "evidence_sha256": "e2f08aa1ffae350f76cc6aa0265c4efd58f85396e9fdb5124b7711e374f77511",
+      "rerun_receipt_sha256": "efdaf2b4632367e08186612cc2bc6bf25c065571c2bdcb9c3cce901c3b3044ac",
+      "checks": 214,
+      "negative_controls": 13,
+      "status": "PASS"
+    },
+    {
+      "cohort": "SERVER-FULL-SYNC",
+      "tool_sha256": "9a3afc69f76a07b17c99f1572c2764896daf74f49f209b6f5de4d4b2c4f4545c",
+      "evidence_sha256": "4d7de7d99ca629cd2268af2ab95498597728a449114e4dd9fe77921c3dfa79e0",
+      "rerun_receipt_sha256": "e43c8540a58bcc8ed69b89a39947ab36cfea51bedb0a9b5ca4b8d68ef0bef815",
+      "checks": 384,
+      "negative_controls": 13,
+      "status": "PASS"
+    },
+    {
+      "cohort": "PROPERTY-RESET-LIFECYCLE",
+      "tool_sha256": "de4811b921c81099a485d564ebefa69d32e6fcc90764177ac277d5d1383be82c",
+      "evidence_sha256": "166be4f89808d4095c01396d52954de5dba29ff58c480179114cb35f8a93fe80",
+      "rerun_receipt_sha256": "1d73efb331294b8cbf6d6d86620420f8eac4148fc9efc76bdda9dcd114a02a6c",
+      "checks": 119,
+      "negative_controls": 14,
+      "status": "PASS"
+    },
+    {
+      "cohort": "PROPERTY-STATE-WRITERS",
+      "tool_sha256": "bb1e6c1aec4ee12e6c196943e61a6f7cfd89e35ad5c648add3d88f1f14823a30",
+      "evidence_sha256": "7345e4a37d64566fbb64f201408bb5da53e1cac7ececd8020ed3acd0ef4c37ef",
+      "rerun_receipt_sha256": "a09cac8b1a1fe636136309f0ad6ed9d8f8cce4c67b471eba0e19c8e6d91f7561",
+      "checks": 2,
+      "negative_controls": 6,
+      "status": "PASS"
+    },
+    {
+      "cohort": "FULL-SYNC-CALLERS",
+      "tool_sha256": "e38440a44d8a92a2c5b36d717ee53844570fb726f5cb971d1cb9acb6d319c7bc",
+      "evidence_sha256": "f54fb7044d88134dcb519913c9715d12a8118e7b19291c85e69003a5ab8668ec",
+      "rerun_receipt_sha256": "c2337be6a6f4b3660a7d2634719427a834c26c0dbfa90101277ed127dc607e02",
+      "checks": 2,
+      "negative_controls": 6,
+      "status": "PASS"
+    },
+    {
+      "cohort": "EQUIPMENT-EFFECT-QUERY",
+      "tool_sha256": "ed1df61838687b495948f189c74d15f06c7948d8bdafbe4e939107cb403197cd",
+      "evidence_sha256": "a4f5cfc5e017833aa50ec21552aa06f2ef70740ebe973af59bafb427b908aaaf",
+      "rerun_receipt_sha256": "72b70ce213d06688d74dba71759bb23ad182849715789a7510e91334eca1faf6",
+      "checks": 229,
+      "negative_controls": 19,
+      "status": "PASS"
+    },
+    {
+      "cohort": "RESOURCE-ARGUMENT-ADAPTER",
+      "tool_sha256": "9153c0e604831e7a8ea7199215d8daee8e1711baeca8ffc8975ebd2f7ba5e8fe",
+      "evidence_sha256": "bb65da9323ee0f2bc16cf8c3c4e984c9c74a2a7a218db35b567199383a48b2af",
+      "rerun_receipt_sha256": "05dc2600deaea306f22c0bfa51749b045c2bafbb2096278d9de01e7b7245868d",
+      "checks": 186,
+      "negative_controls": 12,
+      "status": "PASS"
+    },
+    {
+      "cohort": "WORLD-QUERY-INPUT",
+      "tool_sha256": "eda42350cad0795b3b06e8b509926675b85968568b552ace9f6e98ccb77688d6",
+      "evidence_sha256": "64a5ed79759817b0997f77ea839d104090509d329ab8b2cfb110c1cf19107ae2",
+      "rerun_receipt_sha256": "3f07d613c282a3c51646f988a90f23252443ab792a81d3ad5319c47757f06c56",
+      "checks": 158,
+      "negative_controls": 15,
+      "status": "PASS"
+    },
+    {
+      "cohort": "TIME-CONTROLLER-QUERY",
+      "tool_sha256": "6f7ddc4bcaa98dfe094fc816178da8234129ac539f176514d1afdde0afed8fa3",
+      "evidence_sha256": "79af31377220c948d9af8ba5c6c4409908f5886d83412e279b4d1c06b00f9f7c",
+      "rerun_receipt_sha256": "8ae0c074faf74a2797beb4ae9dbf2cd84d4c6df4be4326a8d37a9a3bfa998f2b",
+      "checks": 160,
+      "negative_controls": 13,
+      "status": "PASS"
+    },
+    {
+      "cohort": "CHILD-CONTEXT-ARROW",
+      "tool_sha256": "75924ec7f898936fe1847565582076cacf6fea94821fa407f4299129b134862b",
+      "evidence_sha256": "f961cfb59292ef8fefc056cf4f4a294b49ad63b96e8b66fc1e25e5cdc2d95572",
+      "rerun_receipt_sha256": "3a9b872d128d3263a8a4f5e869f760887db09c8d3e3053c76f4007c7279e86cb",
+      "checks": 219,
+      "negative_controls": 9,
+      "status": "PASS"
+    }
+  ],
+  "cohort_count": 10,
+  "overlapping_method_snapshots_compared": 16,
+  "overlap_conflicts": 0,
+  "central_mapping_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
+  "central_mapping_promoted": false,
+  "independent_semantic_review": "NOT_RUN",
+  "target_runtime_executed": false,
+  "whole_project_ci_run": false,
+  "earlier_fixed17_checkpoint_modified": false,
+  "elapsed_seconds": 3.205
+}
