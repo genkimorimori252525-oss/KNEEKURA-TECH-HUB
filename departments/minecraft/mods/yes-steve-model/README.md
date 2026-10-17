@@ -428,3 +428,7 @@ bounded runtime observation rather than protection bypass.
 - [Vehicle/projectile render entry](VEHICLE-PROJECTILE-RENDER-RECOVERY-2026-10-17.md): outer invisibility gate, OR/AND pass distinction, transforms and culling boundary.
 
 - [Dispatcher replacement routing](DISPATCHER-RENDER-REPLACEMENT-RECOVERY-2026-10-17.md): conditional original-call suppression, direct overloads, yaw adapters and fishing-hook mutation.
+
+- [Fishing-line geometry](FISHING-LINE-GEOMETRY-RECOVERY-2026-10-17.md): endpoint camera conventions, 17-point curve, terminal tangent and Iris tail; reuses existing evidence.
+
+- [Player replacement view gates](PLAYER-REPLACEMENT-VIEW-GATES-RECOVERY-2026-10-17.md): self/other config, first-person interoperability and pre-render cancellation.

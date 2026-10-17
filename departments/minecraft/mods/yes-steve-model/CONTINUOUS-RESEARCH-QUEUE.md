@@ -27,10 +27,17 @@ Its separate fixed9-cohort checkpoint compares29 shared snapshots without confli
 Scale-flag consumption, passenger indexing, render-event ordering, arm cancellation
 and optional-layer registration are captured; visible output is not established.
 
-Next finite connected question: vehicle/projectile renderer entry, render-type and
-culling behavior. Avoid repeating their controller work or the native wrapper.
-Native geometry production, actual rendered output, provider runtime and independent
-semantic review remain outside verified results. This is not a stopping checkpoint.
+Vehicle/projectile render entry and dispatcher overload routing are captured in
+[VEHICLE-PROJECTILE-RENDER-RECOVERY-2026-10-17.md](VEHICLE-PROJECTILE-RENDER-RECOVERY-2026-10-17.md)
+and [DISPATCHER-RENDER-REPLACEMENT-RECOVERY-2026-10-17.md](DISPATCHER-RENDER-REPLACEMENT-RECOVERY-2026-10-17.md).
+The dispatcher route bypasses the concrete overload's early invisibility check;
+do not generalize one entry's gates to every caller. Fishing-line formulas and
+player-view replacement gates are later dossiers reusing adjacent evidence.
+
+Next finite connected question: unresolved Java render-state lifecycle and optional
+shader/buffer adapters. Avoid repeating controller, texture-manager or native-wrapper
+cohorts already captured. Native geometry, visible output, provider runtime and
+independent semantic review remain outside verified results. Continue after saving.
 
 ## Anchors
 
