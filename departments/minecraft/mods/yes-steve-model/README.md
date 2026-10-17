@@ -332,3 +332,5 @@ bounded runtime observation rather than protection bypass.
 - [Property/reset lifecycle join](PROPERTY-RESET-LIFECYCLE-RECOVERY-2026-10-17.md): inherited geometry resets, full-state ordering and a bounded scalar-write inventory; runtime concerns remain conditional.
 
 - [Full-state and dirty-mark callers](FULL-SYNC-CALLERS-RECOVERY-2026-10-17.md): all fixed-JAR direct call sites and shared lambda fallback handles; no universal runtime closure.
+
+- [Equipment and effect queries](EQUIPMENT-EFFECT-QUERY-RECOVERY-2026-10-17.md): slot/provider precedence, short-circuit tags, durability, actual enchantment argument index and remote/live effect sources.
