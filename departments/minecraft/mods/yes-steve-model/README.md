@@ -486,3 +486,7 @@ bounded runtime observation rather than protection bypass.
 - [Maid entity control](MAID-ENTITY-CONTROL-RECOVERY-2026-10-17.md) and [controller/renderer registration](MAID-CONTROLLER-REGISTRATION-RECOVERY-2026-10-17.md): remote-struct no-op overrides,13 priority states,22 discovery sites and deferred renderer creation.
 
 - [Maid rendering/capability consumers](MAID-RENDER-CAPABILITY-RECOVERY-2026-10-17.md): fallback retrieval differs from rendering, layer/offset contracts, empty roaming callback and absent remote-event handler.
+
+- [First-person background and movement stop](CLIENT-VIEW-MOVEMENT-RECOVERY-2026-10-17.md): early render latch, shared initial-state mode3 submission and input-driven local-stop-before-send ordering.
+
+- [Extra-animation key routing](EXTRA-ANIMATION-KEY-ROUTING-RECOVERY-2026-10-17.md): explicit registration delegation, eight shortcuts, category routing and different UI/movement/network guards.

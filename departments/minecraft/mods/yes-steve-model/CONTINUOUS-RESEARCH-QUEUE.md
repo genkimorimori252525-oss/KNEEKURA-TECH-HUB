@@ -101,9 +101,15 @@ Maid render/capability/tick consumers now have a fixed5 checkpoint with exact ev
 annotations. The registered remote-update class has no subscriber method, and the
 owned-maid tick callback is empty. Retrieval fallback does not imply rendering.
 
-Next finite connected question: first-person background/client-view event paths
-not covered by arm replacement, using the established renderer/camera contracts.
-Keep external rendering and native execution outside this static continuation.
+First-person background/movement and extra-animation key routes now have separate
+fixed4 checkpoints. Early background latch and mode3 initial-state submission stay
+separate from animated arms. Indexed shortcut, roulette UI and movement-stop guards
+differ; explicit MOD-bus registration delegation is recorded.
+
+Next finite connected question: stitch the accumulated Java-only reusable contracts
+and verify bounded cross-dossier consistency after this substantial batch, then
+continue only concrete unresolved pipeline seams. Do not convert captured source
+paths/declarations or passed integrity checks into semantic completion claims.
 
 ## Anchors
 

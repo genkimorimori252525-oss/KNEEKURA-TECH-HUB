@@ -1,0 +1,75 @@
+{
+  "format": "kneekura.ysm-client-view-checkpoint.v1",
+  "cohort_manifest": [
+    [
+      "CLIENT-VIEW-MOVEMENT",
+      "client_view_movement",
+      true
+    ],
+    [
+      "FIRST-PERSON-RENDER-REGISTRY",
+      "first_person_render_registry",
+      true
+    ],
+    [
+      "ARM-REPLACEMENT-EVENTS",
+      "arm_replacement_events",
+      true
+    ],
+    [
+      "SHADER-BUFFER-ADAPTERS",
+      "shader_buffer_adapters",
+      true
+    ]
+  ],
+  "cohorts": [
+    {
+      "cohort": "CLIENT-VIEW-MOVEMENT",
+      "tool_sha256": "6fecee1ab1e65f5b0364debdd16f9517a492fdaa34e4538dc7fe35e5207ad4e4",
+      "evidence_sha256": "9e8d7d2a7a5ed1d164b10aaadcf09551672a7d8736162434135785afcce3d108",
+      "rerun_receipt_sha256": "15f0e35b7b584c81cb6a8244a27d51a9874eace064f9621b635915bb5bbbc839",
+      "checks": 91,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "FIRST-PERSON-RENDER-REGISTRY",
+      "tool_sha256": "fbfedb12de3249e9eaa6468590883582213db06de9ef53600dec37a6e0563573",
+      "evidence_sha256": "14fcc862f027fba0480d316b539f6cb8a48a24ddcec66d85800256c220040880",
+      "rerun_receipt_sha256": "931808e3a128f7ca92865321b5de074f71abd97b97bb7856e02ef13aa0285f37",
+      "checks": 120,
+      "negative_controls": 9,
+      "status": "PASS"
+    },
+    {
+      "cohort": "ARM-REPLACEMENT-EVENTS",
+      "tool_sha256": "ca5eaea0c3bc1b2e13cdcaee3d9f419d35500e1b494862fe41fdc6f85e22a298",
+      "evidence_sha256": "0d25c4a1452b0176eeae1b6887eaba9c37ad4685bc82cf69714d8fa6b3605829",
+      "rerun_receipt_sha256": "49c37ce86cef04ba75deeb26e77f74f047cca2f142a23873766238d3efd70b45",
+      "checks": 115,
+      "negative_controls": 9,
+      "status": "PASS"
+    },
+    {
+      "cohort": "SHADER-BUFFER-ADAPTERS",
+      "tool_sha256": "e09091e24bd784b135fb6f647ff4c28cc1d810fb34f0bfeac284aecfef42698a",
+      "evidence_sha256": "4c247cb61f0b5d038082a4a67ce805aa201c77c784fb9ef620d987dfd26a875e",
+      "rerun_receipt_sha256": "f58e2b40b9371ade591bebfcd760d3d2ebf4eea2ece4efa2f69a92ea9ce6d41a",
+      "checks": 182,
+      "negative_controls": 12,
+      "status": "PASS"
+    }
+  ],
+  "cohort_count": 4,
+  "overlapping_method_snapshots_compared": 0,
+  "overlap_conflicts": 0,
+  "central_mapping_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
+  "central_mapping_promoted": false,
+  "independent_semantic_review": "NOT_RUN",
+  "target_runtime_executed": false,
+  "whole_project_ci_run": false,
+  "earlier_fixed17_checkpoint_modified": false,
+  "earlier_fixed10_checkpoint_modified": false,
+  "earlier_fixed9_checkpoint_modified": false,
+  "elapsed_seconds": 0.573
+}
