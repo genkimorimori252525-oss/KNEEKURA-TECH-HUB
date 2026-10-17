@@ -1,0 +1,180 @@
+{
+  "format": "kneekura.ysm-native-image-metadata.v1",
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "images": [
+    {
+      "jar_member": "META-INF/native/libysm-core.so",
+      "size": 24602080,
+      "sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+      "header": {
+        "format": "ELF64 little-endian",
+        "type": 3,
+        "machine": 62,
+        "entry_address": 20888498,
+        "program_header_offset": 64,
+        "section_header_offset": 0,
+        "program_header_count": 12,
+        "section_header_count": 0,
+        "section_name_index": 0
+      },
+      "dynamic_symbol_rows": 298,
+      "defined_dynamic_symbols": [
+        {
+          "index": 295,
+          "address": 4294512,
+          "size": 5,
+          "type": "FUNC",
+          "binding": "GLOBAL",
+          "visibility": "DEFAULT",
+          "reported_section_index": "14",
+          "name": "JNI_OnUnload"
+        },
+        {
+          "index": 296,
+          "address": 13823168,
+          "size": 4,
+          "type": "OBJECT",
+          "binding": "GLOBAL",
+          "visibility": "DEFAULT",
+          "reported_section_index": "25",
+          "name": "YSM_FORGE_1200_PRODUCTION"
+        },
+        {
+          "index": 297,
+          "address": 4294496,
+          "size": 5,
+          "type": "FUNC",
+          "binding": "GLOBAL",
+          "visibility": "DEFAULT",
+          "reported_section_index": "14",
+          "name": "JNI_OnLoad"
+        }
+      ],
+      "needed_libraries": [
+        "libdl.so.2",
+        "libjvm.so",
+        "libm.so.6",
+        "libpthread.so.0",
+        "libc.so.6",
+        "ld-linux-x86-64.so.2",
+        "libstdc++.so.6",
+        "libgcc_s.so.1"
+      ],
+      "soname": [
+        "libysm-core.so"
+      ],
+      "tool_diagnostics": ""
+    },
+    {
+      "jar_member": "META-INF/native/libysm-core-android.so",
+      "size": 16593440,
+      "sha256": "41251b0367926efe11c5397845b06c412141e5772869dd32cdd4ea41b6c931c8",
+      "header": {
+        "format": "ELF64 little-endian",
+        "type": 3,
+        "machine": 183,
+        "entry_address": 13925736,
+        "program_header_offset": 64,
+        "section_header_offset": 16593184,
+        "program_header_count": 11,
+        "section_header_count": 4,
+        "section_name_index": 3
+      },
+      "dynamic_symbol_rows": 223,
+      "defined_dynamic_symbols": [
+        {
+          "index": 220,
+          "address": 2141160,
+          "size": 4,
+          "type": "FUNC",
+          "binding": "GLOBAL",
+          "visibility": "DEFAULT",
+          "reported_section_index": "BAD[0xd]",
+          "name": "JNI_OnUnload"
+        },
+        {
+          "index": 221,
+          "address": 4999960,
+          "size": 4,
+          "type": "OBJECT",
+          "binding": "GLOBAL",
+          "visibility": "DEFAULT",
+          "reported_section_index": "BAD[0x16]",
+          "name": "YSM_FORGE_1200_PRODUCTION"
+        },
+        {
+          "index": 222,
+          "address": 2141156,
+          "size": 4,
+          "type": "FUNC",
+          "binding": "GLOBAL",
+          "visibility": "DEFAULT",
+          "reported_section_index": "BAD[0xd]",
+          "name": "JNI_OnLoad"
+        }
+      ],
+      "needed_libraries": [
+        "libdl.so",
+        "liblog.so",
+        "libjvm.so",
+        "libm.so",
+        "libc.so"
+      ],
+      "soname": [
+        "libysm-core.so"
+      ],
+      "tool_diagnostics": ""
+    },
+    {
+      "jar_member": "META-INF/native/ysm-core.dll",
+      "size": 17400648,
+      "sha256": "f895618d58efc89996374548d0b808a42199e967a03f16c2768e3112c3afce4d",
+      "header": {
+        "format": "PE32+",
+        "machine": 34404,
+        "section_count": 13,
+        "coff_timestamp": 1776845188,
+        "characteristics": 8226,
+        "optional_header_size": 240,
+        "entry_rva": 40589953,
+        "image_base": 6442450944
+      },
+      "named_exports": [
+        {
+          "index": 0,
+          "ordinal": 1,
+          "hint": 0,
+          "name": "JNI_OnLoad"
+        },
+        {
+          "index": 1,
+          "ordinal": 2,
+          "hint": 1,
+          "name": "JNI_OnUnload"
+        },
+        {
+          "index": 2,
+          "ordinal": 3,
+          "hint": 2,
+          "name": "YSM_FORGE_1200_PRODUCTION"
+        }
+      ],
+      "imported_dlls": [
+        "jvm.dll",
+        "KERNEL32.dll",
+        "SHELL32.dll",
+        "bcrypt.dll"
+      ],
+      "tool_diagnostics": "objdump: ysm-core.dll: warning: ignoring section flag IMAGE_SCN_MEM_NOT_PAGED in section YSMS2\n"
+    }
+  ],
+  "tools": {
+    "readelf": "GNU readelf (GNU Binutils for Debian) 2.44",
+    "objdump": "GNU objdump (GNU Binutils for Debian) 2.44"
+  },
+  "scope": "File headers and dynamic/named exports only; no loader, disassembly, native payload unpacking, emulation, decryption or native execution",
+  "native_implementations_resolved": false,
+  "java_native_bindings_resolved": false,
+  "independent_semantic_review": "NOT_RUN",
+  "central_mapping_promoted": false
+}

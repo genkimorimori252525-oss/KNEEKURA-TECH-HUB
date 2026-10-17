@@ -110,3 +110,7 @@ The [bounded native caller scan](NATIVE-DECLARATION-CALLERS-RECOVERY-2026-10-17.
 ## Client model publication
 
 [Client publication producers](CLIENT-MODEL-PUBLICATION-RECOVERY-2026-10-17.md) connect pack/icon work, shallow rename/removal, deferred default initialization and queue insertion to existing state/tick callbacks. Progress counts, map publication and texture readiness remain distinct. The fixed8 [checkpoint](CLIENT-PUBLICATION-CHECKPOINT-2026-10-17.json) verifies the connected input/build/container/state/texture evidence without executing native callbacks.
+
+## Native image metadata
+
+[Cross-platform native image starting points](NATIVE-IMAGE-METADATA-RECOVERY-2026-10-17.md) pins the three ELF/PE member hashes, architectures and dynamic/named export lists. Section-based symbol absence was not treated as missing JNI exports; dynamic metadata exposes three names in each image. This does not resolve Java-to-native binding or native implementation semantics and never loads the target libraries.
