@@ -1,0 +1,131 @@
+{
+  "format": "kneekura.ysm-client-command-debug-checkpoint.v1",
+  "cohort_manifest": [
+    [
+      "CLIENT-COMMAND-DEBUG-TARGET",
+      "client_command_debug_target",
+      true
+    ],
+    [
+      "INSTRUCTION-DEBUG-EVALUATION",
+      "instruction_debug_evaluation",
+      true
+    ],
+    [
+      "MODEL-READINESS-SCOPE",
+      "model_readiness_scope",
+      true
+    ],
+    [
+      "PARSER-POOL-LIFETIME",
+      "parser_pool_lifetime",
+      true
+    ],
+    [
+      "MOLANG-COMMAND-PRODUCER",
+      "molang_command_producer",
+      true
+    ],
+    [
+      "PROJECTILE-CAPABILITY-TRANSPORT",
+      "projectile_capability_transport",
+      true
+    ],
+    [
+      "VEHICLE-CAPABILITY-TRANSPORT",
+      "vehicle_capability_transport",
+      true
+    ],
+    [
+      "CLIENT-COMPAT-INITIALIZATION",
+      "client_compat_initialization",
+      true
+    ]
+  ],
+  "cohorts": [
+    {
+      "cohort": "CLIENT-COMMAND-DEBUG-TARGET",
+      "tool_sha256": "76defd5ba90e8e657bf9b6e698fca303e387ed79ca9fe7709141573660742a7f",
+      "evidence_sha256": "9ebf576842456eec599b2c4e7a908475788fc53042e0141a744da75d6ad42495",
+      "rerun_receipt_sha256": "30c39f319b2e1060ad6da9cdf4844fb5ac76e3665cdc92f84050cec606ffa95f",
+      "checks": 357,
+      "negative_controls": 17,
+      "status": "PASS"
+    },
+    {
+      "cohort": "INSTRUCTION-DEBUG-EVALUATION",
+      "tool_sha256": "66e65e93012ee53ef626ff16c81aa6a83520b38ea21f0ae29be9f3f177db551e",
+      "evidence_sha256": "761fe1b8b14209e55db33e5a931c1d66348f72f9ae4b1b9f0cac9c289604f930",
+      "rerun_receipt_sha256": "6fa842621fe0b169534731214dc8c4347385f7d9feb6845fc699f7e12d805625",
+      "checks": 148,
+      "negative_controls": 9,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MODEL-READINESS-SCOPE",
+      "tool_sha256": "2a30eb269f20bae8269eea5197a5da60a70301ecd0915cab3003e9faea83e996",
+      "evidence_sha256": "e7533627f17112687f8adb06d5b5a385fe869fa956026393f61bad7a19a4c713",
+      "rerun_receipt_sha256": "98d6dac10ef36a22895a1dad686effb8811775fb5b8c75ecde878d97bf0b4748",
+      "checks": 400,
+      "negative_controls": 15,
+      "status": "PASS"
+    },
+    {
+      "cohort": "PARSER-POOL-LIFETIME",
+      "tool_sha256": "889555ed47d5558ce4192d1298861bdfc8e88a0e653565a4ecd7352968bcbe54",
+      "evidence_sha256": "e9678c16de71d9e233df6bff23355e29b67942a2060b983a12aa9038f5a6dc8e",
+      "rerun_receipt_sha256": "1bf4cf93635b9a0821055692f25655a57ee02a43ca0b25a2dd440366e647be31",
+      "checks": 70,
+      "negative_controls": 10,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MOLANG-COMMAND-PRODUCER",
+      "tool_sha256": "d9f849297ac038baf4e1202862dd52a4326ad863d5b650a96041326e3b7a5dfe",
+      "evidence_sha256": "199dfcf5fc94c6382681c831c13a51f3abf7cd06dff1a30ce2f33479968198da",
+      "rerun_receipt_sha256": "5a17630b316504ae213ff1191b94eefd6658fc9b138162154615e75c5d287fda",
+      "checks": 148,
+      "negative_controls": 11,
+      "status": "PASS"
+    },
+    {
+      "cohort": "PROJECTILE-CAPABILITY-TRANSPORT",
+      "tool_sha256": "5fd9051ad05f34d1ab6333d0f0038e8a3f8ff2bf2e37408f56071b39d30a6053",
+      "evidence_sha256": "d3c39f50f80d96f5aab5af35f6140c6affed863d3ca6e762f20cdcf29c046a51",
+      "rerun_receipt_sha256": "5d558fa87a9809e3b3067b7af813c3fc8ff94b04ba94a8021b13be840378666e",
+      "checks": 261,
+      "negative_controls": 20,
+      "status": "PASS"
+    },
+    {
+      "cohort": "VEHICLE-CAPABILITY-TRANSPORT",
+      "tool_sha256": "fdb466d3fd648ead87b0a06890f61ef4a5de1921e7f6563cf1e7d6eba554d0b4",
+      "evidence_sha256": "0b8e0107661f507fefb5cc6c6aac29ddaafdd40e566e5e912020058a68bcc467",
+      "rerun_receipt_sha256": "7b67028f13dbb17a120725f9aeb9fb5455edc765f99089d152ec1cbfda68fbc9",
+      "checks": 179,
+      "negative_controls": 14,
+      "status": "PASS"
+    },
+    {
+      "cohort": "CLIENT-COMPAT-INITIALIZATION",
+      "tool_sha256": "95e484b846a1436968c58bf959c5a1f1b472009bcc37206376bb4ad114cf27e4",
+      "evidence_sha256": "424a4858eab57e0a2d3671a5078421068c213f8a88dcedbeade2f40584c79e49",
+      "rerun_receipt_sha256": "862bf0aada2d0c9d94454a5a48709af41a725a832b2832bdcbb95d0b3f5a9922",
+      "checks": 120,
+      "negative_controls": 10,
+      "status": "PASS"
+    }
+  ],
+  "cohort_count": 8,
+  "overlapping_method_snapshots_compared": 8,
+  "overlap_conflicts": 0,
+  "central_mapping_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
+  "central_mapping_promoted": false,
+  "independent_semantic_review": "NOT_RUN",
+  "target_runtime_executed": false,
+  "whole_project_ci_run": false,
+  "earlier_fixed17_checkpoint_modified": false,
+  "earlier_fixed10_checkpoint_modified": false,
+  "earlier_fixed9_checkpoint_modified": false,
+  "elapsed_seconds": 1.59
+}

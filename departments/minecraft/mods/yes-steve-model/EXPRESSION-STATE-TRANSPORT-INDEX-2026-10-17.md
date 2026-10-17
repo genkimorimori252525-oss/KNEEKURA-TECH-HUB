@@ -41,3 +41,7 @@ Use the one-file member viewer for an exact method instead of loading every link
 ## Projectile and vehicle capability transport extension
 
 [Projectile owner-state transport](PROJECTILE-CAPABILITY-TRANSPORT-RECOVERY-2026-10-17.md) and [vehicle transfer](VEHICLE-CAPABILITY-TRANSPORT-RECOVERY-2026-10-17.md) close the next Java-side branch: retained server maps, deferred versus optional-only producers, NBT/string-pool wire conversion, explicit lazy initialization and later processor installation. A queued callback is not a frozen launch snapshot; wrapper capability presence is not rendering readiness. The fixed8 [checkpoint](ENTITY-CAPABILITY-TRANSPORT-CHECKPOINT-2026-10-17.json) joins these two cohorts with six existing anchors, without changing older manifests or promoting the central map.
+
+## Client-local command and debug-target extension
+
+[Client Molang/watch commands](CLIENT-COMMAND-DEBUG-TARGET-RECOVERY-2026-10-17.md) join command returns, queue submission, static watch ownership, weak target attachment, explicit lazy-provider queries and result display. Integer1 is not evaluation success; watch editing guarded by a local capability can still observe an active nonlocal target. Switching target retains shared watch configuration. The separate fixed8 [checkpoint](CLIENT-COMMAND-DEBUG-CHECKPOINT-2026-10-17.json) checks these connected boundaries without executing the target or promoting mappings.
