@@ -1,0 +1,387 @@
+{
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "classes": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/mixin/AbstractArrowEntityMixin",
+      "super": "java/lang/Object",
+      "access": 33,
+      "class_sha256": "5425c0034d513494a4a18d4d72b5443412dea50120e9531a82e7d05874991cdb",
+      "annotations": {
+        "RuntimeInvisibleAnnotations": [
+          {
+            "type": "Lorg/spongepowered/asm/mixin/Mixin;",
+            "elements": [
+              {
+                "name": "value",
+                "value": {
+                  "tag": "[",
+                  "values": [
+                    {
+                      "tag": "c",
+                      "descriptor": "Lnet/minecraft/world/entity/projectile/AbstractArrow;"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "access": 2,
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "Ljava/lang/String;",
+          "annotations": {
+            "RuntimeVisibleAnnotations": [
+              {
+                "type": "Lorg/spongepowered/asm/mixin/Unique;",
+                "elements": []
+              }
+            ]
+          }
+        },
+        {
+          "access": 4,
+          "name": "f_36703_",
+          "descriptor": "Z",
+          "annotations": {
+            "RuntimeVisibleAnnotations": [
+              {
+                "type": "Lorg/spongepowered/asm/mixin/Shadow;",
+                "elements": []
+              }
+            ]
+          }
+        },
+        {
+          "access": 4,
+          "name": "f_36704_",
+          "descriptor": "I",
+          "annotations": {
+            "RuntimeVisibleAnnotations": [
+              {
+                "type": "Lorg/spongepowered/asm/mixin/Shadow;",
+                "elements": []
+              }
+            ]
+          }
+        }
+      ],
+      "methods": [
+        {
+          "access": 1,
+          "name": "<init>",
+          "descriptor": "()V",
+          "annotations": {}
+        },
+        {
+          "access": 1,
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "()Z",
+          "annotations": {
+            "RuntimeVisibleAnnotations": [
+              {
+                "type": "Lorg/spongepowered/asm/mixin/Unique;",
+                "elements": []
+              }
+            ]
+          }
+        },
+        {
+          "access": 1,
+          "name": "o0OOooo0o0OO00OoOOOo0o0O",
+          "descriptor": "()I",
+          "annotations": {
+            "RuntimeVisibleAnnotations": [
+              {
+                "type": "Lorg/spongepowered/asm/mixin/Unique;",
+                "elements": []
+              }
+            ]
+          }
+        },
+        {
+          "access": 1,
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "()Ljava/lang/String;",
+          "annotations": {
+            "RuntimeVisibleAnnotations": [
+              {
+                "type": "Lorg/spongepowered/asm/mixin/Unique;",
+                "elements": []
+              }
+            ]
+          }
+        },
+        {
+          "access": 2,
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Lnet/minecraft/world/entity/Entity;Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V",
+          "annotations": {
+            "RuntimeVisibleAnnotations": [
+              {
+                "type": "Lorg/spongepowered/asm/mixin/injection/Inject;",
+                "elements": [
+                  {
+                    "name": "at",
+                    "value": {
+                      "tag": "[",
+                      "values": [
+                        {
+                          "tag": "@",
+                          "annotation": {
+                            "type": "Lorg/spongepowered/asm/mixin/injection/At;",
+                            "elements": [
+                              {
+                                "name": "value",
+                                "value": {
+                                  "tag": "s",
+                                  "value": "RETURN"
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "method",
+                    "value": {
+                      "tag": "[",
+                      "values": [
+                        {
+                          "tag": "s",
+                          "value": "setOwner(Lnet/minecraft/world/entity/Entity;)V"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/mixin/client/ArrowEntityAccessor",
+      "super": "java/lang/Object",
+      "access": 1537,
+      "class_sha256": "d70a7de67350692a62e6c274ad5d82a95bda05dde2081f3944ad1b2623b59974",
+      "annotations": {
+        "RuntimeInvisibleAnnotations": [
+          {
+            "type": "Lorg/spongepowered/asm/mixin/Mixin;",
+            "elements": [
+              {
+                "name": "value",
+                "value": {
+                  "tag": "[",
+                  "values": [
+                    {
+                      "tag": "c",
+                      "descriptor": "Lnet/minecraft/world/entity/projectile/Arrow;"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "fields": [],
+      "methods": [
+        {
+          "access": 1025,
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "()Ljava/util/Set;",
+          "annotations": {
+            "RuntimeVisibleAnnotations": [
+              {
+                "type": "Lorg/spongepowered/asm/mixin/gen/Accessor;",
+                "elements": [
+                  {
+                    "name": "value",
+                    "value": {
+                      "tag": "s",
+                      "value": "effects"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/mixin/client/FishingHookAccessor",
+      "super": "java/lang/Object",
+      "access": 1537,
+      "class_sha256": "67cda264d7914635039f4747403ad50b670c79a65c2e9801964ee71ef516c385",
+      "annotations": {
+        "RuntimeInvisibleAnnotations": [
+          {
+            "type": "Lorg/spongepowered/asm/mixin/Mixin;",
+            "elements": [
+              {
+                "name": "value",
+                "value": {
+                  "tag": "[",
+                  "values": [
+                    {
+                      "tag": "c",
+                      "descriptor": "Lnet/minecraft/world/entity/projectile/FishingHook;"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "fields": [],
+      "methods": [
+        {
+          "access": 1025,
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "()Z",
+          "annotations": {
+            "RuntimeVisibleAnnotations": [
+              {
+                "type": "Lorg/spongepowered/asm/mixin/gen/Accessor;",
+                "elements": [
+                  {
+                    "name": "value",
+                    "value": {
+                      "tag": "s",
+                      "value": "biting"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "access": 1025,
+          "name": "o0OOooo0o0OO00OoOOOo0o0O",
+          "descriptor": "()Lnet/minecraft/world/entity/Entity;",
+          "annotations": {
+            "RuntimeVisibleAnnotations": [
+              {
+                "type": "Lorg/spongepowered/asm/mixin/gen/Accessor;",
+                "elements": [
+                  {
+                    "name": "value",
+                    "value": {
+                      "tag": "s",
+                      "value": "hookedIn"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/mixin/client/ThrowableItemProjectileAccessor",
+      "super": "java/lang/Object",
+      "access": 1537,
+      "class_sha256": "93d13fa834bdaf3be639b48a3389a62b6f3390338706857607b1e5e5585a9156",
+      "annotations": {
+        "RuntimeInvisibleAnnotations": [
+          {
+            "type": "Lorg/spongepowered/asm/mixin/Mixin;",
+            "elements": [
+              {
+                "name": "value",
+                "value": {
+                  "tag": "[",
+                  "values": [
+                    {
+                      "tag": "c",
+                      "descriptor": "Lnet/minecraft/world/entity/projectile/ThrowableItemProjectile;"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "fields": [],
+      "methods": [
+        {
+          "access": 1025,
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "()Lnet/minecraft/world/item/Item;",
+          "annotations": {
+            "RuntimeVisibleAnnotations": [
+              {
+                "type": "Lorg/spongepowered/asm/mixin/gen/Invoker;",
+                "elements": [
+                  {
+                    "name": "value",
+                    "value": {
+                      "tag": "s",
+                      "value": "getDefaultItem"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "mixin_config": {
+    "required": true,
+    "minVersion": "0.8",
+    "package": "com.elfmcys.yesstevemodel.mixin",
+    "plugin": "com.elfmcys.yesstevemodel.mixin.plugin.MixinTweaker",
+    "compatibilityLevel": "JAVA_17",
+    "refmap": "yes_steve_model.refmap.json",
+    "injectors": {
+      "defaultRequire": 1
+    },
+    "client": [
+      "client.ArrowEntityAccessor",
+      "client.BufferSourceMixin",
+      "client.EntityRenderDispatcherMixin",
+      "client.FishingHookAccessor",
+      "client.InventoryScreenMixin",
+      "client.LivingEntityAccessor",
+      "client.LivingRendererMixin",
+      "client.PauseScreenMixin",
+      "client.ThrowableItemProjectileAccessor",
+      "client.WorldRendererMixin"
+    ],
+    "mixins": [
+      "AbstractArrowEntityMixin",
+      "ProjectileEntityMixin",
+      "ServerPlayerMixin"
+    ]
+  },
+  "refmap_owner_mappings": {
+    "com/elfmcys/yesstevemodel/mixin/AbstractArrowEntityMixin": {
+      "setOwner(Lnet/minecraft/world/entity/Entity;)V": "Lnet/minecraft/world/entity/projectile/AbstractArrow;m_5602_(Lnet/minecraft/world/entity/Entity;)V"
+    },
+    "com/elfmcys/yesstevemodel/mixin/client/ArrowEntityAccessor": {
+      "effects": "f_36852_:Ljava/util/Set;"
+    },
+    "com/elfmcys/yesstevemodel/mixin/client/FishingHookAccessor": {
+      "hookedIn": "f_37094_:Lnet/minecraft/world/entity/Entity;",
+      "biting": "f_37099_:Z"
+    },
+    "com/elfmcys/yesstevemodel/mixin/client/ThrowableItemProjectileAccessor": {
+      "getDefaultItem": "m_7881_()Lnet/minecraft/world/item/Item;"
+    }
+  },
+  "runtime_injection_verified": false
+}

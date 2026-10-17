@@ -239,3 +239,8 @@ Curios tail registers four names even when absent (placeholders). Real-query
 cache/preparation and visible cosmetic-slot search are recorded; no provider
 runtime claim. Continue remaining entity/projectile/hit-state callbacks via
 exact name anchors, preserving default/live/cached and mixin boundaries.
+
+Projectile/fishing/hit query bodies and four exact mixin contracts are joined.
+No runtime mixin application is claimed. Continue living-entity/environment
+callbacks; distinguish default item, owner-time mainhand cache and registry type
+ID from live payload/entity identity.

@@ -1,0 +1,33 @@
+{
+  "checks": [
+    {
+      "check": "exact-four-mixin-contracts",
+      "pass": true
+    }
+  ],
+  "negative_controls": [
+    {
+      "control": "missing-class",
+      "rejected": true
+    },
+    {
+      "control": "missing-target-annotation",
+      "rejected": true
+    },
+    {
+      "control": "missing-refmap",
+      "rejected": true
+    },
+    {
+      "control": "missing-config",
+      "rejected": true
+    },
+    {
+      "control": "invented-runtime-injection",
+      "rejected": true
+    }
+  ],
+  "failures": [],
+  "runtime_executed": false,
+  "independent_semantic_review": "NOT_RUN"
+}
