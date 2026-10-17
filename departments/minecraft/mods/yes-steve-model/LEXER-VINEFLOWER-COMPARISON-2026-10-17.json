@@ -1,0 +1,33 @@
+{
+  "tool": "Vineflower",
+  "version": "1.11.1",
+  "tool_sha256": "a615d07ddbbcd489369674f40e42df639c32be95410890b38f173d5c1e2ea39c",
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "input": {
+    "class_name": "com/elfmcys/yesstevemodel/oOOooOo0OO00ooO00OOO00o0.class",
+    "sha256": "d47ddfc1d2cbed1e5667246f8c3a693f4fa0e5af05c589404c92fee3e65da665",
+    "bytes": 7130
+  },
+  "selected_archive_sha256": "e44a1688d107418bd792b232f74e6f1f69aea66b41642aaa142c2035e1c1aa62",
+  "output_java_files": [
+    {
+      "path": "com/elfmcys/yesstevemodel/oOOooOo0OO00ooO00OOO00o0.java",
+      "sha256": "6962ff8ce71eecb0886aee123b1e245531ce8c0f9327337e10ae09d77596d007"
+    }
+  ],
+  "tool_log_sha256": "1d87e9699c1bf4a41b34f6108eb230e759101cb83d277a7a8825e871d0c92542",
+  "warning_error_marker_lines": [],
+  "exit_code": 0,
+  "target_application_executed": false,
+  "native_provider_executed": false,
+  "full_decompiled_source_committed": false,
+  "minecraft_forge_dependency_classpath_supplied": false,
+  "original_jar_as_library": true,
+  "findings": [
+    "Previous-identifier numeric branch appends zero without an initial read; matched against bytecode offsets249..256.",
+    "Initial dot plus a later optional dot remains present in the decompiled numeric branch.",
+    "Word lowercasing uses the no-argument String.toLowerCase call."
+  ],
+  "independent_semantic_review": "NOT_RUN",
+  "command_shape": "java -Xmx1024m -jar <verified-vineflower-1.11.1.jar> --folder --thread-count=2 --remove-synthetic=0 --remove-bridge=0 --add-external=<exact-ysm.jar> <one-class-input.jar> <output-directory>"
+}

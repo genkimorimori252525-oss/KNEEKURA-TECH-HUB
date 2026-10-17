@@ -73,9 +73,14 @@ recaptured. The remaining13 direct abstract ContextFunction guards and debug mes
 delivery now have a fixed4 function-debug checkpoint (six shared snapshots, no
 conflicts). Function rejection remains null, distinct from variable rejection0.
 
-Next finite connected question: targeted evidence/navigation consistency and
-remaining Java animation data-carrier consumers, avoiding already covered factories.
-Do not treat uncaptured trivial declarations as semantic completion percentages.
+The lexer/token/diagnostic extension now captures full numeric and string branches,
+cursor and error ownership, backed by a selected one-class Vineflower comparison.
+A fixed3 lexer-parser checkpoint passes. Token labels are not numeric acceptance;
+source comments and diagnostic counters are not independent runtime evidence.
+
+Next finite connected question: Java lexer token consumers and parser error gates
+for these specific numeric/diagnostic paths, reusing existing parser snapshots.
+Avoid running target classes or turning static edge cases into observed game bugs.
 
 ## Anchors
 

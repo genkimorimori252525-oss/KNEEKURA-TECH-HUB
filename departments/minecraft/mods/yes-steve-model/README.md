@@ -472,3 +472,5 @@ bounded runtime observation rather than protection bypass.
 - [TLM live location adapter](TLM-LOCATION-ADAPTER-RECOVERY-2026-10-17.md): cached live wrappers, per-call lists, authored pivots and backpack-to-elytra fallback.
 
 - [Typed function guards](TYPED-FUNCTION-GUARDS-RECOVERY-2026-10-17.md) and [debug message delivery](DEBUG-MESSAGE-DELIVERY-RECOVERY-2026-10-17.md): context rejection, live receiver lookup and formatting boundaries.
+
+- [Lexer tokens and diagnostics](LEXER-TOKEN-DIAGNOSTICS-RECOVERY-2026-10-17.md): previous-token numeric branches, cursor clone offsets, locale and reader boundaries.

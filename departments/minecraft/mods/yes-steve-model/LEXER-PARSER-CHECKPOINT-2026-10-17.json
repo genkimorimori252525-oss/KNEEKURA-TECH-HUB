@@ -1,0 +1,61 @@
+{
+  "format": "kneekura.ysm-lexer-parser-checkpoint.v1",
+  "cohort_manifest": [
+    [
+      "LEXER-TOKEN-DIAGNOSTICS",
+      "lexer_token_diagnostics",
+      true
+    ],
+    [
+      "PARSER-BINDING-STORAGE",
+      "parser_binding_storage",
+      true
+    ],
+    [
+      "PARSER-POOL-LIFETIME",
+      "parser_pool_lifetime",
+      true
+    ]
+  ],
+  "cohorts": [
+    {
+      "cohort": "LEXER-TOKEN-DIAGNOSTICS",
+      "tool_sha256": "d74de5bcc6f576d44757a12b692bf7879ebfbd31f9e458ba08f5ea69a71826ba",
+      "evidence_sha256": "5804c2a9b830fef59dcf8c3f651faeaa3bf39686b1f8b7e1019748b11a4be231",
+      "rerun_receipt_sha256": "42797e0385c6c475206868f8fca1ec54237954162b18265828c025868b027e9c",
+      "checks": 289,
+      "negative_controls": 13,
+      "status": "PASS"
+    },
+    {
+      "cohort": "PARSER-BINDING-STORAGE",
+      "tool_sha256": "417e9a60394063f3e673ac584f2fd1513c0306143302341aaba4190fa5524dd2",
+      "evidence_sha256": "c36a6fa05e44e4cf16fd24dd80f6ceb0f7ccb8d1efb057fee8f07a461b1bd8b6",
+      "rerun_receipt_sha256": "eecde831db4e08ed0825d591cf97498f3157e3cad04a885147bbcaaeca8e9329",
+      "checks": 258,
+      "negative_controls": 12,
+      "status": "PASS"
+    },
+    {
+      "cohort": "PARSER-POOL-LIFETIME",
+      "tool_sha256": "889555ed47d5558ce4192d1298861bdfc8e88a0e653565a4ecd7352968bcbe54",
+      "evidence_sha256": "e9678c16de71d9e233df6bff23355e29b67942a2060b983a12aa9038f5a6dc8e",
+      "rerun_receipt_sha256": "1bf4cf93635b9a0821055692f25655a57ee02a43ca0b25a2dd440366e647be31",
+      "checks": 70,
+      "negative_controls": 10,
+      "status": "PASS"
+    }
+  ],
+  "cohort_count": 3,
+  "overlapping_method_snapshots_compared": 0,
+  "overlap_conflicts": 0,
+  "central_mapping_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
+  "central_mapping_promoted": false,
+  "independent_semantic_review": "NOT_RUN",
+  "target_runtime_executed": false,
+  "whole_project_ci_run": false,
+  "earlier_fixed17_checkpoint_modified": false,
+  "earlier_fixed10_checkpoint_modified": false,
+  "earlier_fixed9_checkpoint_modified": false,
+  "elapsed_seconds": 0.665
+}
