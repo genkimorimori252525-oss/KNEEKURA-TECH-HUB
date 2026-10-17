@@ -81,3 +81,7 @@ transition homogeneity and Java schedule/wait ownership; no task stop implied.
 Coded/predicate controller state/context review is recorded without recounting
 existing method shapes. Continue AnimationPlayer transitions/ticks and Bedrock
 queue aggregation; pending independent reviews are not whole-target completion.
+
+Player clock/state/ending capture and transition-unit arithmetic are now recorded
+with strict static checks, pending independent review. Continue Bedrock activation,
+point-production homogeneity and Java scheduler ownership; task remains active.

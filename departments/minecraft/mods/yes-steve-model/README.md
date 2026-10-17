@@ -221,6 +221,11 @@ deepen existing method-shape mappings with 170 strict checks and 16 corruption
 controls. Pause, STOP captured-state and predicate/context cleanup are explicitly
 bounded; independent review is pending and no existing rows are recounted.
 
+[Player clock and transitions](ANIMATION-PLAYER-CLOCK-RECOVERY-2026-10-17.md) now
+retain exact threshold ordering, cache capture and duration-unit arithmetic with
+278 strict checks and 18 corruption controls. Independent review is pending;
+no new central mapping rows are claimed for this depth-only continuation.
+
 ## Important limits
 
 - Public release-line source candidate equivalence to the distributed JAR is not proven.
