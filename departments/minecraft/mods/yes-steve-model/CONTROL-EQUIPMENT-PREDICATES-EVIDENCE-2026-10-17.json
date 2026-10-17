@@ -1,0 +1,7607 @@
+{
+  "format": "kneekura.ysm-bounded-seed-evidence.v1",
+  "artifact": {
+    "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+    "sha1": "151ac7b24da8beeca1a20864565743cfd77af286",
+    "size": 63269843,
+    "version_id": "Zqooxsd2",
+    "classes": 955
+  },
+  "confidence_policy": "CONFIRMED denotes semantic correspondence reviewed against pinned source and exact instructions/relations, not recovered original symbols or whole-source equivalence. Prior community sources reused as fixture leads; no community-based promotions.",
+  "source_artifact_equivalence": "NOT_ESTABLISHED",
+  "preserved_global_negative_finding": "SOURCE_ARTIFACT_DIVERGENCE",
+  "recorded_at": "2026-10-17",
+  "detailed_operands": true,
+  "classes": [],
+  "members": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO",
+      "name": "<init>",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO$Oo0Oo0o00O00Oo0OOoOOoooo;)V",
+      "access": 2,
+      "code_sha256": "b8e768c8ae878eb6413a5e6cdd848253717f19e161a15bc651fcf1245a622a45",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00o0Oo0O0oooOooOo0O0o00",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO",
+            "name": "Oo00o0OooOOo0ooOoo0oO0o0",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO$Oo0Oo0o00O00Oo0OOoOOoooo;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "0029"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "002b"
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO;",
+      "access": 9,
+      "code_sha256": "66945001947601e70df0cb6f5ce55abe43961bad4d0580bb6b2b93153596835b",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xba",
+          "reference": {
+            "name": "test",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO$Oo0Oo0o00O00Oo0OOoOOoooo;",
+            "bootstrap_index": 0,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO",
+            "name": "<init>",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO$Oo0Oo0o00O00Oo0OOoOOoooo;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0xbb",
+          "encoded_operands_hex": "0002"
+        },
+        {
+          "offset": 3,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 4,
+          "opcode": "0xba",
+          "encoded_operands_hex": "003c0000"
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "003e"
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO;",
+      "access": 9,
+      "code_sha256": "bf51d7c5a09d279560ba988f1c7701ddf66edb253b65fdc15928617bcc527d45",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xba",
+          "reference": {
+            "name": "test",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO$Oo0Oo0o00O00Oo0OOoOOoooo;",
+            "bootstrap_index": 1,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO",
+            "name": "<init>",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO$Oo0Oo0o00O00Oo0OOoOOoooo;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0xbb",
+          "encoded_operands_hex": "0002"
+        },
+        {
+          "offset": 3,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 4,
+          "opcode": "0xba",
+          "encoded_operands_hex": "00430000"
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "003e"
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO",
+      "name": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO;",
+      "access": 9,
+      "code_sha256": "31786098ddcaefc11d255ce845d932add2351b272103688df1780dc60b34d381",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xba",
+          "reference": {
+            "name": "test",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO$Oo0Oo0o00O00Oo0OOoOOoooo;",
+            "bootstrap_index": 2,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO",
+            "name": "<init>",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO$Oo0Oo0o00O00Oo0OOoOOoooo;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0xbb",
+          "encoded_operands_hex": "0002"
+        },
+        {
+          "offset": 3,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 4,
+          "opcode": "0xba",
+          "encoded_operands_hex": "00470000"
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "003e"
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo;)Ljava/lang/Object;",
+      "access": 4,
+      "code_sha256": "66ae03950868ac95afd68e7410ec43f7a25217f4b07453b5e50964441cc620a9",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 6,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oo0oOO0000o0Ooooo0OoOo0O",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 10,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 11,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 15,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOO0OO0OOO0ooOo000o0O0OO",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oo0oOO0000o0Ooooo0OoOo0O;Ljava/lang/String;)Lnet/minecraft/world/entity/EquipmentSlot;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 18,
+          "opcode": "0x4e"
+        },
+        {
+          "offset": 19,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 20,
+          "opcode": "0xc6",
+          "branch_target": 30
+        },
+        {
+          "offset": 23,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 24,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/EquipmentSlot",
+            "name": "m_254934_",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 27,
+          "opcode": "0x99",
+          "branch_target": 35
+        },
+        {
+          "offset": 30,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 31,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Integer",
+            "name": "valueOf",
+            "descriptor": "(I)Ljava/lang/Integer;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 34,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 35,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 36,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 37,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 38,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 41,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 43,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 44,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 49,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oo0oOO0000o0Ooooo0OoOo0O",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 52,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo0oOO0000o0Ooooo0OoOo0O",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 57,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "net/minecraft/world/entity/LivingEntity",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 60,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 62,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 64,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "org/apache/commons/lang3/StringUtils",
+            "name": "isBlank",
+            "descriptor": "(Ljava/lang/CharSequence;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 67,
+          "opcode": "0x99",
+          "branch_target": 75
+        },
+        {
+          "offset": 70,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 71,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Integer",
+            "name": "valueOf",
+            "descriptor": "(I)Ljava/lang/Integer;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 74,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 75,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 77,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 78,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/LivingEntity",
+            "name": "m_6844_",
+            "descriptor": "(Lnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/world/item/ItemStack;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 81,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 83,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 84,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "net/minecraft/world/entity/EquipmentSlot",
+            "name": "OFFHAND",
+            "descriptor": "Lnet/minecraft/world/entity/EquipmentSlot;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 87,
+          "opcode": "0xa6",
+          "branch_target": 96
+        },
+        {
+          "offset": 90,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "net/minecraft/world/InteractionHand",
+            "name": "OFF_HAND",
+            "descriptor": "Lnet/minecraft/world/InteractionHand;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 93,
+          "opcode": "0xa7",
+          "branch_target": 99
+        },
+        {
+          "offset": 96,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "net/minecraft/world/InteractionHand",
+            "name": "MAIN_HAND",
+            "descriptor": "Lnet/minecraft/world/InteractionHand;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 99,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 101,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 102,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO",
+            "name": "Oo00o0OooOOo0ooOoo0oO0o0",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO$Oo0Oo0o00O00Oo0OOoOOoooo;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 105,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 107,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 109,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "test",
+            "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;)Z",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 114,
+          "opcode": "0x9a",
+          "branch_target": 122
+        },
+        {
+          "offset": 117,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 118,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Integer",
+            "name": "valueOf",
+            "descriptor": "(I)Ljava/lang/Integer;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 121,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 122,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 124,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/item/ItemStack",
+            "name": "m_41619_",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 127,
+          "opcode": "0x99",
+          "branch_target": 145
+        },
+        {
+          "offset": 130,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 132,
+          "opcode": "0x12",
+          "reference": {
+            "string": "empty",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 134,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/String",
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 137,
+          "opcode": "0x99",
+          "branch_target": 145
+        },
+        {
+          "offset": 140,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 141,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Integer",
+            "name": "valueOf",
+            "descriptor": "(I)Ljava/lang/Integer;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 144,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 145,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 147,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 148,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/String",
+            "name": "substring",
+            "descriptor": "(I)Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 151,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 153,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 155,
+          "opcode": "0x12",
+          "reference": {
+            "string": "$",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 157,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/String",
+            "name": "startsWith",
+            "descriptor": "(Ljava/lang/String;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 160,
+          "opcode": "0x99",
+          "branch_target": 214
+        },
+        {
+          "offset": 163,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "net/minecraftforge/registries/ForgeRegistries",
+            "name": "ITEMS",
+            "descriptor": "Lnet/minecraftforge/registries/IForgeRegistry;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 166,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 168,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/item/ItemStack",
+            "name": "m_41720_",
+            "descriptor": "()Lnet/minecraft/world/item/Item;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 171,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "net/minecraftforge/registries/IForgeRegistry",
+            "name": "getKey",
+            "descriptor": "(Ljava/lang/Object;)Lnet/minecraft/resources/ResourceLocation;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 176,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 178,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 180,
+          "opcode": "0xc7",
+          "branch_target": 188
+        },
+        {
+          "offset": 183,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 184,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Integer",
+            "name": "valueOf",
+            "descriptor": "(I)Ljava/lang/Integer;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 187,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 188,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 190,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 192,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/resources/ResourceLocation",
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 195,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/String",
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 198,
+          "opcode": "0x36"
+        },
+        {
+          "offset": 200,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 202,
+          "opcode": "0x99",
+          "branch_target": 209
+        },
+        {
+          "offset": 205,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 206,
+          "opcode": "0xa7",
+          "branch_target": 210
+        },
+        {
+          "offset": 209,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 210,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Integer",
+            "name": "valueOf",
+            "descriptor": "(I)Ljava/lang/Integer;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 213,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 214,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 216,
+          "opcode": "0x12",
+          "reference": {
+            "string": "#",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 218,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/String",
+            "name": "startsWith",
+            "descriptor": "(Ljava/lang/String;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 221,
+          "opcode": "0x99",
+          "branch_target": 285
+        },
+        {
+          "offset": 224,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "net/minecraftforge/registries/ForgeRegistries",
+            "name": "ITEMS",
+            "descriptor": "Lnet/minecraftforge/registries/IForgeRegistry;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 227,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "net/minecraftforge/registries/IForgeRegistry",
+            "name": "tags",
+            "descriptor": "()Lnet/minecraftforge/registries/tags/ITagManager;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 232,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 234,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 236,
+          "opcode": "0xc7",
+          "branch_target": 244
+        },
+        {
+          "offset": 239,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 240,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Integer",
+            "name": "valueOf",
+            "descriptor": "(I)Ljava/lang/Integer;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 243,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 244,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "net/minecraft/resources/ResourceLocation",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 247,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 248,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 250,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "net/minecraft/resources/ResourceLocation",
+            "name": "<init>",
+            "descriptor": "(Ljava/lang/String;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 253,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 255,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 257,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 259,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "net/minecraftforge/registries/tags/ITagManager",
+            "name": "createTagKey",
+            "descriptor": "(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/tags/TagKey;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 264,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 266,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 268,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 270,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/item/ItemStack",
+            "name": "m_204117_",
+            "descriptor": "(Lnet/minecraft/tags/TagKey;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 273,
+          "opcode": "0x99",
+          "branch_target": 280
+        },
+        {
+          "offset": 276,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 277,
+          "opcode": "0xa7",
+          "branch_target": 281
+        },
+        {
+          "offset": 280,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 281,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Integer",
+            "name": "valueOf",
+            "descriptor": "(I)Ljava/lang/Integer;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 284,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 285,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 287,
+          "opcode": "0x12",
+          "reference": {
+            "string": ":",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 289,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/String",
+            "name": "startsWith",
+            "descriptor": "(Ljava/lang/String;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 292,
+          "opcode": "0x99",
+          "branch_target": 361
+        },
+        {
+          "offset": 295,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 297,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OoOo0oO0O0OO00O00OOoOo0o",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/world/item/ItemStack;)Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 300,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 302,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 304,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "org/apache/commons/lang3/StringUtils",
+            "name": "isNotBlank",
+            "descriptor": "(Ljava/lang/CharSequence;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 307,
+          "opcode": "0x99",
+          "branch_target": 325
+        },
+        {
+          "offset": 310,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 312,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 314,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/String",
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 317,
+          "opcode": "0x99",
+          "branch_target": 325
+        },
+        {
+          "offset": 320,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 321,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Integer",
+            "name": "valueOf",
+            "descriptor": "(I)Ljava/lang/Integer;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 324,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 325,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 327,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/item/ItemStack",
+            "name": "m_41780_",
+            "descriptor": "()Lnet/minecraft/world/item/UseAnim;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 330,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/item/UseAnim",
+            "name": "name",
+            "descriptor": "()Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 333,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "java/util/Locale",
+            "name": "ENGLISH",
+            "descriptor": "Ljava/util/Locale;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 336,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/String",
+            "name": "toLowerCase",
+            "descriptor": "(Ljava/util/Locale;)Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 339,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 341,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 343,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 345,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/String",
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 348,
+          "opcode": "0x99",
+          "branch_target": 356
+        },
+        {
+          "offset": 351,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 352,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Integer",
+            "name": "valueOf",
+            "descriptor": "(I)Ljava/lang/Integer;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 355,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 356,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 357,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Integer",
+            "name": "valueOf",
+            "descriptor": "(I)Ljava/lang/Integer;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 360,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 361,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 362,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Integer",
+            "name": "valueOf",
+            "descriptor": "(I)Ljava/lang/Integer;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 365,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "004e0100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 6,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "0050"
+        },
+        {
+          "offset": 9,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 10,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 11,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0053"
+        },
+        {
+          "offset": 15,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0058"
+        },
+        {
+          "offset": 18,
+          "opcode": "0x4e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 19,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 20,
+          "opcode": "0xc6",
+          "encoded_operands_hex": "000a"
+        },
+        {
+          "offset": 23,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 24,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "005e"
+        },
+        {
+          "offset": 27,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0008"
+        },
+        {
+          "offset": 30,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 31,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0064"
+        },
+        {
+          "offset": 34,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 35,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 36,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 37,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 38,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0053"
+        },
+        {
+          "offset": 41,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 43,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 44,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "004e0100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 49,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "0050"
+        },
+        {
+          "offset": 52,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00650100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 57,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "0067"
+        },
+        {
+          "offset": 60,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "05",
+          "local_index": 5
+        },
+        {
+          "offset": 62,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 64,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "006d"
+        },
+        {
+          "offset": 67,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0008"
+        },
+        {
+          "offset": 70,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 71,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0064"
+        },
+        {
+          "offset": 74,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 75,
+          "opcode": "0x19",
+          "encoded_operands_hex": "05",
+          "local_index": 5
+        },
+        {
+          "offset": 77,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 78,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0073"
+        },
+        {
+          "offset": 81,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 83,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 84,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0077"
+        },
+        {
+          "offset": 87,
+          "opcode": "0xa6",
+          "encoded_operands_hex": "0009"
+        },
+        {
+          "offset": 90,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "007d"
+        },
+        {
+          "offset": 93,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0006"
+        },
+        {
+          "offset": 96,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0082"
+        },
+        {
+          "offset": 99,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "07",
+          "local_index": 7
+        },
+        {
+          "offset": 101,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 102,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "002b"
+        },
+        {
+          "offset": 105,
+          "opcode": "0x19",
+          "encoded_operands_hex": "05",
+          "local_index": 5
+        },
+        {
+          "offset": 107,
+          "opcode": "0x19",
+          "encoded_operands_hex": "07",
+          "local_index": 7
+        },
+        {
+          "offset": 109,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00840300",
+          "argument_slot_count": 3,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 114,
+          "opcode": "0x9a",
+          "encoded_operands_hex": "0008"
+        },
+        {
+          "offset": 117,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 118,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0064"
+        },
+        {
+          "offset": 121,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 122,
+          "opcode": "0x19",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 124,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0087"
+        },
+        {
+          "offset": 127,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0012"
+        },
+        {
+          "offset": 130,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 132,
+          "opcode": "0x12",
+          "encoded_operands_hex": "1d"
+        },
+        {
+          "offset": 134,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "008b"
+        },
+        {
+          "offset": 137,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0008"
+        },
+        {
+          "offset": 140,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 141,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0064"
+        },
+        {
+          "offset": 144,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 145,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 147,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 148,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "008f"
+        },
+        {
+          "offset": 151,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 153,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 155,
+          "opcode": "0x12",
+          "encoded_operands_hex": "14"
+        },
+        {
+          "offset": 157,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0093"
+        },
+        {
+          "offset": 160,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0036"
+        },
+        {
+          "offset": 163,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0099"
+        },
+        {
+          "offset": 166,
+          "opcode": "0x19",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 168,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "009d"
+        },
+        {
+          "offset": 171,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00a30200",
+          "argument_slot_count": 2,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 176,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 178,
+          "opcode": "0x19",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 180,
+          "opcode": "0xc7",
+          "encoded_operands_hex": "0008"
+        },
+        {
+          "offset": 183,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 184,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0064"
+        },
+        {
+          "offset": 187,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 188,
+          "opcode": "0x19",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 190,
+          "opcode": "0x19",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 192,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00a9"
+        },
+        {
+          "offset": 195,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "008b"
+        },
+        {
+          "offset": 198,
+          "opcode": "0x36",
+          "encoded_operands_hex": "0a",
+          "local_index": 10
+        },
+        {
+          "offset": 200,
+          "opcode": "0x15",
+          "encoded_operands_hex": "0a",
+          "local_index": 10
+        },
+        {
+          "offset": 202,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0007"
+        },
+        {
+          "offset": 205,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 206,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 209,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 210,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0064"
+        },
+        {
+          "offset": 213,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 214,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 216,
+          "opcode": "0x12",
+          "encoded_operands_hex": "17"
+        },
+        {
+          "offset": 218,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0093"
+        },
+        {
+          "offset": 221,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0040"
+        },
+        {
+          "offset": 224,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0099"
+        },
+        {
+          "offset": 227,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00ad0100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 232,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 234,
+          "opcode": "0x19",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 236,
+          "opcode": "0xc7",
+          "encoded_operands_hex": "0008"
+        },
+        {
+          "offset": 239,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 240,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0064"
+        },
+        {
+          "offset": 243,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 244,
+          "opcode": "0xbb",
+          "encoded_operands_hex": "00a5"
+        },
+        {
+          "offset": 247,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 248,
+          "opcode": "0x19",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 250,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "00b2"
+        },
+        {
+          "offset": 253,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "0a",
+          "local_index": 10
+        },
+        {
+          "offset": 255,
+          "opcode": "0x19",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 257,
+          "opcode": "0x19",
+          "encoded_operands_hex": "0a",
+          "local_index": 10
+        },
+        {
+          "offset": 259,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00b60200",
+          "argument_slot_count": 2,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 264,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "0b",
+          "local_index": 11
+        },
+        {
+          "offset": 266,
+          "opcode": "0x19",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 268,
+          "opcode": "0x19",
+          "encoded_operands_hex": "0b",
+          "local_index": 11
+        },
+        {
+          "offset": 270,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00ba"
+        },
+        {
+          "offset": 273,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0007"
+        },
+        {
+          "offset": 276,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 277,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 280,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 281,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0064"
+        },
+        {
+          "offset": 284,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 285,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 287,
+          "opcode": "0x12",
+          "encoded_operands_hex": "1a"
+        },
+        {
+          "offset": 289,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0093"
+        },
+        {
+          "offset": 292,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0045"
+        },
+        {
+          "offset": 295,
+          "opcode": "0x19",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 297,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "00bf"
+        },
+        {
+          "offset": 300,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 302,
+          "opcode": "0x19",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 304,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "00c2"
+        },
+        {
+          "offset": 307,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0012"
+        },
+        {
+          "offset": 310,
+          "opcode": "0x19",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 312,
+          "opcode": "0x19",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 314,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "008b"
+        },
+        {
+          "offset": 317,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0008"
+        },
+        {
+          "offset": 320,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 321,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0064"
+        },
+        {
+          "offset": 324,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 325,
+          "opcode": "0x19",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 327,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00c6"
+        },
+        {
+          "offset": 330,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00cb"
+        },
+        {
+          "offset": 333,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "00d1"
+        },
+        {
+          "offset": 336,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00d5"
+        },
+        {
+          "offset": 339,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "0a",
+          "local_index": 10
+        },
+        {
+          "offset": 341,
+          "opcode": "0x19",
+          "encoded_operands_hex": "0a",
+          "local_index": 10
+        },
+        {
+          "offset": 343,
+          "opcode": "0x19",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 345,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "008b"
+        },
+        {
+          "offset": 348,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0008"
+        },
+        {
+          "offset": 351,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 352,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0064"
+        },
+        {
+          "offset": 355,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 356,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 357,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0064"
+        },
+        {
+          "offset": 360,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 361,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 362,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0064"
+        },
+        {
+          "offset": 365,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(I)Z",
+      "access": 1,
+      "code_sha256": "1b573618d3089f729f36da01c9a1682cad47eec35fe118c270480c996e8efe34",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x1b"
+        },
+        {
+          "offset": 1,
+          "opcode": "0x5"
+        },
+        {
+          "offset": 2,
+          "opcode": "0x9f",
+          "branch_target": 10
+        },
+        {
+          "offset": 5,
+          "opcode": "0x1b"
+        },
+        {
+          "offset": 6,
+          "opcode": "0x6"
+        },
+        {
+          "offset": 7,
+          "opcode": "0xa0",
+          "branch_target": 14
+        },
+        {
+          "offset": 10,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 11,
+          "opcode": "0xa7",
+          "branch_target": 15
+        },
+        {
+          "offset": 14,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 15,
+          "opcode": "0xac"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x1b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0x5",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 2,
+          "opcode": "0x9f",
+          "encoded_operands_hex": "0008"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x1b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 6,
+          "opcode": "0x6",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 7,
+          "opcode": "0xa0",
+          "encoded_operands_hex": "0007"
+        },
+        {
+          "offset": 10,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 11,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 14,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 15,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;)Z",
+      "access": 4106,
+      "code_sha256": "0073d885c533ca45b65b02eab4445ddc1bb54556cb5489433da2c574a9c6ed42",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/LivingEntity",
+            "name": "m_6117_",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x99",
+          "branch_target": 18
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/LivingEntity",
+            "name": "m_5803_",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0x9a",
+          "branch_target": 18
+        },
+        {
+          "offset": 14,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 15,
+          "opcode": "0xa7",
+          "branch_target": 19
+        },
+        {
+          "offset": 18,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 19,
+          "opcode": "0xac"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00d9"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x99",
+          "encoded_operands_hex": "000e"
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00dc"
+        },
+        {
+          "offset": 11,
+          "opcode": "0x9a",
+          "encoded_operands_hex": "0007"
+        },
+        {
+          "offset": 14,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 15,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 18,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 19,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;)Z",
+      "access": 4106,
+      "code_sha256": "415867569588a8fe7ae093f78490e603a38170a99c183d33f3e3cac1cb7c068f",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "net/minecraft/world/entity/LivingEntity",
+            "name": "f_20911_",
+            "descriptor": "Z",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x99",
+          "branch_target": 18
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/LivingEntity",
+            "name": "m_5803_",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0x9a",
+          "branch_target": 18
+        },
+        {
+          "offset": 14,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 15,
+          "opcode": "0xa7",
+          "branch_target": 19
+        },
+        {
+          "offset": 18,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 19,
+          "opcode": "0xac"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "00e0"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x99",
+          "encoded_operands_hex": "000e"
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00dc"
+        },
+        {
+          "offset": 11,
+          "opcode": "0x9a",
+          "encoded_operands_hex": "0007"
+        },
+        {
+          "offset": 14,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 15,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 18,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 19,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO",
+      "name": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;)Z",
+      "access": 4106,
+      "code_sha256": "95ef737cd8a13db65e3eb3c18e8816a5179dcbdf341309522ab00e95d5aae6d2",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xac"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "name": "test",
+      "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;)Z",
+      "access": 1025
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0oOOoO0oooo0O0OoOoOoOo0",
+      "name": "<init>",
+      "descriptor": "()V",
+      "access": 1,
+      "code_sha256": "c69c0c5be1dd2c5cb6833e89900131634303199213dca1247bf56d1a10ac1519",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00o0Oo0O0oooOooOo0O0o00",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "001c"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0oOOoO0oooo0O0OoOoOoOo0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/o0oOOoO0oooo0O0OoOoOoOo0;",
+      "access": 9,
+      "code_sha256": "47bbb450d53b122b5dcbef83c78524ca30cb6f07e410806d146c58652eada832",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/o0oOOoO0oooo0O0OoOoOoOo0",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0oOOoO0oooo0O0OoOoOoOo0",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0xbb",
+          "encoded_operands_hex": "0002"
+        },
+        {
+          "offset": 3,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "001e"
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0oOOoO0oooo0O0OoOoOoOo0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo;)Ljava/lang/Object;",
+      "access": 4,
+      "code_sha256": "60fc90a7962724a48370e6aa65d1ba848b887fa742a85afdd5708ca570013299",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 6,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oo0oOO0000o0Ooooo0OoOo0O",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 10,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 11,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 15,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOO0OO0OOO0ooOo000o0O0OO",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oo0oOO0000o0Ooooo0OoOo0O;Ljava/lang/String;)Lnet/minecraft/world/entity/EquipmentSlot;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 18,
+          "opcode": "0x4e"
+        },
+        {
+          "offset": 19,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 20,
+          "opcode": "0xc6",
+          "branch_target": 30
+        },
+        {
+          "offset": 23,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 24,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/EquipmentSlot",
+            "name": "m_254934_",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 27,
+          "opcode": "0x9a",
+          "branch_target": 32
+        },
+        {
+          "offset": 30,
+          "opcode": "0x1"
+        },
+        {
+          "offset": 31,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 32,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 33,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 34,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 35,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 38,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 40,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 41,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 46,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oo0oOO0000o0Ooooo0OoOo0O",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 49,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo0oOO0000o0Ooooo0OoOo0O",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 54,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "net/minecraft/world/entity/LivingEntity",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 57,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 59,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 61,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "org/apache/commons/lang3/StringUtils",
+            "name": "isBlank",
+            "descriptor": "(Ljava/lang/CharSequence;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 64,
+          "opcode": "0x99",
+          "branch_target": 72
+        },
+        {
+          "offset": 67,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 68,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Integer",
+            "name": "valueOf",
+            "descriptor": "(I)Ljava/lang/Integer;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 71,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 72,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 74,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 75,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/LivingEntity",
+            "name": "m_6844_",
+            "descriptor": "(Lnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/world/item/ItemStack;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 78,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 80,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 82,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/item/ItemStack",
+            "name": "m_41619_",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 85,
+          "opcode": "0x99",
+          "branch_target": 103
+        },
+        {
+          "offset": 88,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 90,
+          "opcode": "0x12",
+          "reference": {
+            "string": "empty",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 92,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/String",
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 95,
+          "opcode": "0x99",
+          "branch_target": 103
+        },
+        {
+          "offset": 98,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 99,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Integer",
+            "name": "valueOf",
+            "descriptor": "(I)Ljava/lang/Integer;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 102,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 103,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 105,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 106,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/String",
+            "name": "substring",
+            "descriptor": "(I)Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 109,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 111,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 113,
+          "opcode": "0x12",
+          "reference": {
+            "string": "$",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 115,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/String",
+            "name": "startsWith",
+            "descriptor": "(Ljava/lang/String;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 118,
+          "opcode": "0x99",
+          "branch_target": 172
+        },
+        {
+          "offset": 121,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "net/minecraftforge/registries/ForgeRegistries",
+            "name": "ITEMS",
+            "descriptor": "Lnet/minecraftforge/registries/IForgeRegistry;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 124,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 126,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/item/ItemStack",
+            "name": "m_41720_",
+            "descriptor": "()Lnet/minecraft/world/item/Item;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 129,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "net/minecraftforge/registries/IForgeRegistry",
+            "name": "getKey",
+            "descriptor": "(Ljava/lang/Object;)Lnet/minecraft/resources/ResourceLocation;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 134,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 136,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 138,
+          "opcode": "0xc7",
+          "branch_target": 146
+        },
+        {
+          "offset": 141,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 142,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Integer",
+            "name": "valueOf",
+            "descriptor": "(I)Ljava/lang/Integer;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 145,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 146,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 148,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 150,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/resources/ResourceLocation",
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 153,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/String",
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 156,
+          "opcode": "0x36"
+        },
+        {
+          "offset": 158,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 160,
+          "opcode": "0x99",
+          "branch_target": 167
+        },
+        {
+          "offset": 163,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 164,
+          "opcode": "0xa7",
+          "branch_target": 168
+        },
+        {
+          "offset": 167,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 168,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Integer",
+            "name": "valueOf",
+            "descriptor": "(I)Ljava/lang/Integer;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 171,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 172,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 174,
+          "opcode": "0x12",
+          "reference": {
+            "string": "#",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 176,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/String",
+            "name": "startsWith",
+            "descriptor": "(Ljava/lang/String;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 179,
+          "opcode": "0x99",
+          "branch_target": 243
+        },
+        {
+          "offset": 182,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "net/minecraftforge/registries/ForgeRegistries",
+            "name": "ITEMS",
+            "descriptor": "Lnet/minecraftforge/registries/IForgeRegistry;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 185,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "net/minecraftforge/registries/IForgeRegistry",
+            "name": "tags",
+            "descriptor": "()Lnet/minecraftforge/registries/tags/ITagManager;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 190,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 192,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 194,
+          "opcode": "0xc7",
+          "branch_target": 202
+        },
+        {
+          "offset": 197,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 198,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Integer",
+            "name": "valueOf",
+            "descriptor": "(I)Ljava/lang/Integer;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 201,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 202,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "net/minecraft/resources/ResourceLocation",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 205,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 206,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 208,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "net/minecraft/resources/ResourceLocation",
+            "name": "<init>",
+            "descriptor": "(Ljava/lang/String;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 211,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 213,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 215,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 217,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "net/minecraftforge/registries/tags/ITagManager",
+            "name": "createTagKey",
+            "descriptor": "(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/tags/TagKey;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 222,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 224,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 226,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 228,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/item/ItemStack",
+            "name": "m_204117_",
+            "descriptor": "(Lnet/minecraft/tags/TagKey;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 231,
+          "opcode": "0x99",
+          "branch_target": 238
+        },
+        {
+          "offset": 234,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 235,
+          "opcode": "0xa7",
+          "branch_target": 239
+        },
+        {
+          "offset": 238,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 239,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Integer",
+            "name": "valueOf",
+            "descriptor": "(I)Ljava/lang/Integer;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 242,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 243,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 244,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Integer",
+            "name": "valueOf",
+            "descriptor": "(I)Ljava/lang/Integer;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 247,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00250100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 6,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "0027"
+        },
+        {
+          "offset": 9,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 10,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 11,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "002a"
+        },
+        {
+          "offset": 15,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "002f"
+        },
+        {
+          "offset": 18,
+          "opcode": "0x4e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 19,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 20,
+          "opcode": "0xc6",
+          "encoded_operands_hex": "000a"
+        },
+        {
+          "offset": 23,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 24,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0035"
+        },
+        {
+          "offset": 27,
+          "opcode": "0x9a",
+          "encoded_operands_hex": "0005"
+        },
+        {
+          "offset": 30,
+          "opcode": "0x1",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 31,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 32,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 33,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 34,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 35,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "002a"
+        },
+        {
+          "offset": 38,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 40,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 41,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00250100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 46,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "0027"
+        },
+        {
+          "offset": 49,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00360100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 54,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "0038"
+        },
+        {
+          "offset": 57,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "05",
+          "local_index": 5
+        },
+        {
+          "offset": 59,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 61,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "003e"
+        },
+        {
+          "offset": 64,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0008"
+        },
+        {
+          "offset": 67,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 68,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0044"
+        },
+        {
+          "offset": 71,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 72,
+          "opcode": "0x19",
+          "encoded_operands_hex": "05",
+          "local_index": 5
+        },
+        {
+          "offset": 74,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 75,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "004a"
+        },
+        {
+          "offset": 78,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 80,
+          "opcode": "0x19",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 82,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "004f"
+        },
+        {
+          "offset": 85,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0012"
+        },
+        {
+          "offset": 88,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 90,
+          "opcode": "0x12",
+          "encoded_operands_hex": "13"
+        },
+        {
+          "offset": 92,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0053"
+        },
+        {
+          "offset": 95,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0008"
+        },
+        {
+          "offset": 98,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 99,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0044"
+        },
+        {
+          "offset": 102,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 103,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 105,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 106,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0057"
+        },
+        {
+          "offset": 109,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "07",
+          "local_index": 7
+        },
+        {
+          "offset": 111,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 113,
+          "opcode": "0x12",
+          "encoded_operands_hex": "0d"
+        },
+        {
+          "offset": 115,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "005b"
+        },
+        {
+          "offset": 118,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0036"
+        },
+        {
+          "offset": 121,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0061"
+        },
+        {
+          "offset": 124,
+          "opcode": "0x19",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 126,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0065"
+        },
+        {
+          "offset": 129,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "006b0200",
+          "argument_slot_count": 2,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 134,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 136,
+          "opcode": "0x19",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 138,
+          "opcode": "0xc7",
+          "encoded_operands_hex": "0008"
+        },
+        {
+          "offset": 141,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 142,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0044"
+        },
+        {
+          "offset": 145,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 146,
+          "opcode": "0x19",
+          "encoded_operands_hex": "07",
+          "local_index": 7
+        },
+        {
+          "offset": 148,
+          "opcode": "0x19",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 150,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0071"
+        },
+        {
+          "offset": 153,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0053"
+        },
+        {
+          "offset": 156,
+          "opcode": "0x36",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 158,
+          "opcode": "0x15",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 160,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0007"
+        },
+        {
+          "offset": 163,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 164,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 167,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 168,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0044"
+        },
+        {
+          "offset": 171,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 172,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 174,
+          "opcode": "0x12",
+          "encoded_operands_hex": "10"
+        },
+        {
+          "offset": 176,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "005b"
+        },
+        {
+          "offset": 179,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0040"
+        },
+        {
+          "offset": 182,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0061"
+        },
+        {
+          "offset": 185,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00750100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 190,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 192,
+          "opcode": "0x19",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 194,
+          "opcode": "0xc7",
+          "encoded_operands_hex": "0008"
+        },
+        {
+          "offset": 197,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 198,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0044"
+        },
+        {
+          "offset": 201,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 202,
+          "opcode": "0xbb",
+          "encoded_operands_hex": "006d"
+        },
+        {
+          "offset": 205,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 206,
+          "opcode": "0x19",
+          "encoded_operands_hex": "07",
+          "local_index": 7
+        },
+        {
+          "offset": 208,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "007a"
+        },
+        {
+          "offset": 211,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 213,
+          "opcode": "0x19",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 215,
+          "opcode": "0x19",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 217,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "007e0200",
+          "argument_slot_count": 2,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 222,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "0a",
+          "local_index": 10
+        },
+        {
+          "offset": 224,
+          "opcode": "0x19",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 226,
+          "opcode": "0x19",
+          "encoded_operands_hex": "0a",
+          "local_index": 10
+        },
+        {
+          "offset": 228,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0082"
+        },
+        {
+          "offset": 231,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0007"
+        },
+        {
+          "offset": 234,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 235,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 238,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 239,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0044"
+        },
+        {
+          "offset": 242,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 243,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 244,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0044"
+        },
+        {
+          "offset": 247,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0oOOoO0oooo0O0OoOoOoOo0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(I)Z",
+      "access": 1,
+      "code_sha256": "1b573618d3089f729f36da01c9a1682cad47eec35fe118c270480c996e8efe34",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x1b"
+        },
+        {
+          "offset": 1,
+          "opcode": "0x5"
+        },
+        {
+          "offset": 2,
+          "opcode": "0x9f",
+          "branch_target": 10
+        },
+        {
+          "offset": 5,
+          "opcode": "0x1b"
+        },
+        {
+          "offset": 6,
+          "opcode": "0x6"
+        },
+        {
+          "offset": 7,
+          "opcode": "0xa0",
+          "branch_target": 14
+        },
+        {
+          "offset": 10,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 11,
+          "opcode": "0xa7",
+          "branch_target": 15
+        },
+        {
+          "offset": 14,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 15,
+          "opcode": "0xac"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x1b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0x5",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 2,
+          "opcode": "0x9f",
+          "encoded_operands_hex": "0008"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x1b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 6,
+          "opcode": "0x6",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 7,
+          "opcode": "0xa0",
+          "encoded_operands_hex": "0007"
+        },
+        {
+          "offset": 10,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 11,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 14,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 15,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O000000ooOoOOo000ooO000o",
+      "name": "<init>",
+      "descriptor": "()V",
+      "access": 1,
+      "code_sha256": "476ac5b38e99fce01a0baab5e5685bc43f92560d03ca8371074d95f2df6955e1",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00o0Oo0O0oooOooOo0O0o00",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "001f"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O000000ooOoOOo000ooO000o",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/O000000ooOoOOo000ooO000o;",
+      "access": 9,
+      "code_sha256": "307303c5b1aaa3563573a4c2fcda142ee0fad00e841fe28402f2f846debf10a7",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/O000000ooOoOOo000ooO000o",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O000000ooOoOOo000ooO000o",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0xbb",
+          "encoded_operands_hex": "0002"
+        },
+        {
+          "offset": 3,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "0021"
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O000000ooOoOOo000ooO000o",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo;)Ljava/lang/Object;",
+      "access": 4,
+      "code_sha256": "394e621cf78ee1f8b19c1ae8c4baea01aa6b5597e29de23fd633a95353c2b095",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 1,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 2,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 3,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 6,
+          "opcode": "0x4e"
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 8,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 9,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;I)Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 13,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 15,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 21,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oo0oOO0000o0Ooooo0OoOo0O",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 24,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo0oOO0000o0Ooooo0OoOo0O",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 29,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "net/minecraft/world/entity/LivingEntity",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 32,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 34,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 36,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "org/apache/commons/lang3/StringUtils",
+            "name": "isBlank",
+            "descriptor": "(Ljava/lang/CharSequence;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 39,
+          "opcode": "0x99",
+          "branch_target": 47
+        },
+        {
+          "offset": 42,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 43,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Integer",
+            "name": "valueOf",
+            "descriptor": "(I)Ljava/lang/Integer;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 46,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 47,
+          "opcode": "0x12",
+          "reference": {
+            "string": "vehicle",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 49,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 50,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/String",
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 53,
+          "opcode": "0x99",
+          "branch_target": 66
+        },
+        {
+          "offset": 56,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 58,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/LivingEntity",
+            "name": "m_20202_",
+            "descriptor": "()Lnet/minecraft/world/entity/Entity;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 61,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 63,
+          "opcode": "0xa7",
+          "branch_target": 90
+        },
+        {
+          "offset": 66,
+          "opcode": "0x12",
+          "reference": {
+            "string": "passenger",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 68,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 69,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/String",
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 72,
+          "opcode": "0x99",
+          "branch_target": 85
+        },
+        {
+          "offset": 75,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 77,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/LivingEntity",
+            "name": "m_146895_",
+            "descriptor": "()Lnet/minecraft/world/entity/Entity;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 80,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 82,
+          "opcode": "0xa7",
+          "branch_target": 90
+        },
+        {
+          "offset": 85,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 86,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Integer",
+            "name": "valueOf",
+            "descriptor": "(I)Ljava/lang/Integer;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 89,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 90,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 92,
+          "opcode": "0xc6",
+          "branch_target": 103
+        },
+        {
+          "offset": 95,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 97,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/Entity",
+            "name": "m_6084_",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 100,
+          "opcode": "0x9a",
+          "branch_target": 108
+        },
+        {
+          "offset": 103,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 104,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Integer",
+            "name": "valueOf",
+            "descriptor": "(I)Ljava/lang/Integer;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 107,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 108,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 110,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 111,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/String",
+            "name": "substring",
+            "descriptor": "(I)Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 114,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 116,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 118,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/Entity",
+            "name": "m_6095_",
+            "descriptor": "()Lnet/minecraft/world/entity/EntityType;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 121,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 123,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 125,
+          "opcode": "0x12",
+          "reference": {
+            "string": "$",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 127,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/String",
+            "name": "startsWith",
+            "descriptor": "(Ljava/lang/String;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 130,
+          "opcode": "0x99",
+          "branch_target": 181
+        },
+        {
+          "offset": 133,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "net/minecraftforge/registries/ForgeRegistries",
+            "name": "ENTITY_TYPES",
+            "descriptor": "Lnet/minecraftforge/registries/IForgeRegistry;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 136,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 138,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "net/minecraftforge/registries/IForgeRegistry",
+            "name": "getKey",
+            "descriptor": "(Ljava/lang/Object;)Lnet/minecraft/resources/ResourceLocation;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 143,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 145,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 147,
+          "opcode": "0xc7",
+          "branch_target": 155
+        },
+        {
+          "offset": 150,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 151,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Integer",
+            "name": "valueOf",
+            "descriptor": "(I)Ljava/lang/Integer;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 154,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 155,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 157,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 159,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/resources/ResourceLocation",
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 162,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/String",
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 165,
+          "opcode": "0x36"
+        },
+        {
+          "offset": 167,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 169,
+          "opcode": "0x99",
+          "branch_target": 176
+        },
+        {
+          "offset": 172,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 173,
+          "opcode": "0xa7",
+          "branch_target": 177
+        },
+        {
+          "offset": 176,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 177,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Integer",
+            "name": "valueOf",
+            "descriptor": "(I)Ljava/lang/Integer;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 180,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 181,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 183,
+          "opcode": "0x12",
+          "reference": {
+            "string": "#",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 185,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/String",
+            "name": "startsWith",
+            "descriptor": "(Ljava/lang/String;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 188,
+          "opcode": "0x99",
+          "branch_target": 252
+        },
+        {
+          "offset": 191,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "net/minecraftforge/registries/ForgeRegistries",
+            "name": "ENTITY_TYPES",
+            "descriptor": "Lnet/minecraftforge/registries/IForgeRegistry;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 194,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "net/minecraftforge/registries/IForgeRegistry",
+            "name": "tags",
+            "descriptor": "()Lnet/minecraftforge/registries/tags/ITagManager;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 199,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 201,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 203,
+          "opcode": "0xc7",
+          "branch_target": 211
+        },
+        {
+          "offset": 206,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 207,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Integer",
+            "name": "valueOf",
+            "descriptor": "(I)Ljava/lang/Integer;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 210,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 211,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "net/minecraft/resources/ResourceLocation",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 214,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 215,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 217,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "net/minecraft/resources/ResourceLocation",
+            "name": "<init>",
+            "descriptor": "(Ljava/lang/String;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 220,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 222,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 224,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 226,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "net/minecraftforge/registries/tags/ITagManager",
+            "name": "createTagKey",
+            "descriptor": "(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/tags/TagKey;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 231,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 233,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 235,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 237,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/EntityType",
+            "name": "m_204039_",
+            "descriptor": "(Lnet/minecraft/tags/TagKey;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 240,
+          "opcode": "0x99",
+          "branch_target": 247
+        },
+        {
+          "offset": 243,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 244,
+          "opcode": "0xa7",
+          "branch_target": 248
+        },
+        {
+          "offset": 247,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 248,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Integer",
+            "name": "valueOf",
+            "descriptor": "(I)Ljava/lang/Integer;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 251,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 252,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 253,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Integer",
+            "name": "valueOf",
+            "descriptor": "(I)Ljava/lang/Integer;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 256,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 2,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 3,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0026"
+        },
+        {
+          "offset": 6,
+          "opcode": "0x4e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 8,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 9,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0026"
+        },
+        {
+          "offset": 13,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 15,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "002b0100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 21,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "002d"
+        },
+        {
+          "offset": 24,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "002e0100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 29,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "0030"
+        },
+        {
+          "offset": 32,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "05",
+          "local_index": 5
+        },
+        {
+          "offset": 34,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 36,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0036"
+        },
+        {
+          "offset": 39,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0008"
+        },
+        {
+          "offset": 42,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 43,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "003c"
+        },
+        {
+          "offset": 46,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 47,
+          "opcode": "0x12",
+          "encoded_operands_hex": "13"
+        },
+        {
+          "offset": 49,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 50,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0042"
+        },
+        {
+          "offset": 53,
+          "opcode": "0x99",
+          "encoded_operands_hex": "000d"
+        },
+        {
+          "offset": 56,
+          "opcode": "0x19",
+          "encoded_operands_hex": "05",
+          "local_index": 5
+        },
+        {
+          "offset": 58,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0046"
+        },
+        {
+          "offset": 61,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 63,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "001b"
+        },
+        {
+          "offset": 66,
+          "opcode": "0x12",
+          "encoded_operands_hex": "16"
+        },
+        {
+          "offset": 68,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 69,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0042"
+        },
+        {
+          "offset": 72,
+          "opcode": "0x99",
+          "encoded_operands_hex": "000d"
+        },
+        {
+          "offset": 75,
+          "opcode": "0x19",
+          "encoded_operands_hex": "05",
+          "local_index": 5
+        },
+        {
+          "offset": 77,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0049"
+        },
+        {
+          "offset": 80,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 82,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0008"
+        },
+        {
+          "offset": 85,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 86,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "003c"
+        },
+        {
+          "offset": 89,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 90,
+          "opcode": "0x19",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 92,
+          "opcode": "0xc6",
+          "encoded_operands_hex": "000b"
+        },
+        {
+          "offset": 95,
+          "opcode": "0x19",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 97,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "004f"
+        },
+        {
+          "offset": 100,
+          "opcode": "0x9a",
+          "encoded_operands_hex": "0008"
+        },
+        {
+          "offset": 103,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 104,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "003c"
+        },
+        {
+          "offset": 107,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 108,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 110,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 111,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0053"
+        },
+        {
+          "offset": 114,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "07",
+          "local_index": 7
+        },
+        {
+          "offset": 116,
+          "opcode": "0x19",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 118,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0057"
+        },
+        {
+          "offset": 121,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 123,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 125,
+          "opcode": "0x12",
+          "encoded_operands_hex": "0d"
+        },
+        {
+          "offset": 127,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "005b"
+        },
+        {
+          "offset": 130,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0033"
+        },
+        {
+          "offset": 133,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0061"
+        },
+        {
+          "offset": 136,
+          "opcode": "0x19",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 138,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00670200",
+          "argument_slot_count": 2,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 143,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 145,
+          "opcode": "0x19",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 147,
+          "opcode": "0xc7",
+          "encoded_operands_hex": "0008"
+        },
+        {
+          "offset": 150,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 151,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "003c"
+        },
+        {
+          "offset": 154,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 155,
+          "opcode": "0x19",
+          "encoded_operands_hex": "07",
+          "local_index": 7
+        },
+        {
+          "offset": 157,
+          "opcode": "0x19",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 159,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "006d"
+        },
+        {
+          "offset": 162,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0042"
+        },
+        {
+          "offset": 165,
+          "opcode": "0x36",
+          "encoded_operands_hex": "0a",
+          "local_index": 10
+        },
+        {
+          "offset": 167,
+          "opcode": "0x15",
+          "encoded_operands_hex": "0a",
+          "local_index": 10
+        },
+        {
+          "offset": 169,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0007"
+        },
+        {
+          "offset": 172,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 173,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 176,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 177,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "003c"
+        },
+        {
+          "offset": 180,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 181,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 183,
+          "opcode": "0x12",
+          "encoded_operands_hex": "10"
+        },
+        {
+          "offset": 185,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "005b"
+        },
+        {
+          "offset": 188,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0040"
+        },
+        {
+          "offset": 191,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0061"
+        },
+        {
+          "offset": 194,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00730100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 199,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 201,
+          "opcode": "0x19",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 203,
+          "opcode": "0xc7",
+          "encoded_operands_hex": "0008"
+        },
+        {
+          "offset": 206,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 207,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "003c"
+        },
+        {
+          "offset": 210,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 211,
+          "opcode": "0xbb",
+          "encoded_operands_hex": "0069"
+        },
+        {
+          "offset": 214,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 215,
+          "opcode": "0x19",
+          "encoded_operands_hex": "07",
+          "local_index": 7
+        },
+        {
+          "offset": 217,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "0078"
+        },
+        {
+          "offset": 220,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "0a",
+          "local_index": 10
+        },
+        {
+          "offset": 222,
+          "opcode": "0x19",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 224,
+          "opcode": "0x19",
+          "encoded_operands_hex": "0a",
+          "local_index": 10
+        },
+        {
+          "offset": 226,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "007c0200",
+          "argument_slot_count": 2,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 231,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "0b",
+          "local_index": 11
+        },
+        {
+          "offset": 233,
+          "opcode": "0x19",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 235,
+          "opcode": "0x19",
+          "encoded_operands_hex": "0b",
+          "local_index": 11
+        },
+        {
+          "offset": 237,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0080"
+        },
+        {
+          "offset": 240,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0007"
+        },
+        {
+          "offset": 243,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 244,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 247,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 248,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "003c"
+        },
+        {
+          "offset": 251,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 252,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 253,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "003c"
+        },
+        {
+          "offset": 256,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O000000ooOoOOo000ooO000o",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(I)Z",
+      "access": 1,
+      "code_sha256": "1b573618d3089f729f36da01c9a1682cad47eec35fe118c270480c996e8efe34",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x1b"
+        },
+        {
+          "offset": 1,
+          "opcode": "0x5"
+        },
+        {
+          "offset": 2,
+          "opcode": "0x9f",
+          "branch_target": 10
+        },
+        {
+          "offset": 5,
+          "opcode": "0x1b"
+        },
+        {
+          "offset": 6,
+          "opcode": "0x6"
+        },
+        {
+          "offset": 7,
+          "opcode": "0xa0",
+          "branch_target": 14
+        },
+        {
+          "offset": 10,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 11,
+          "opcode": "0xa7",
+          "branch_target": 15
+        },
+        {
+          "offset": 14,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 15,
+          "opcode": "0xac"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x1b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0x5",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 2,
+          "opcode": "0x9f",
+          "encoded_operands_hex": "0008"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x1b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 6,
+          "opcode": "0x6",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 7,
+          "opcode": "0xa0",
+          "encoded_operands_hex": "0007"
+        },
+        {
+          "offset": 10,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 11,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 14,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 15,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OoOo0oO0O0OO00O00OOoOo0o",
+      "name": "<init>",
+      "descriptor": "()V",
+      "access": 1,
+      "code_sha256": "4b2d66c2e129bf585b84fa4abd8e46f07779ec93460c464280f9bf8c5d045471",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "java/lang/Object",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "0011"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OoOo0oO0O0OO00O00OOoOo0o",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/lang/String;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;)Ljava/lang/String;",
+      "access": 9,
+      "code_sha256": "5dfdfe5f6ac027d83d2afa3e4fe2b8d21a60b1c11e05ae17ce1eb147e7ae4165",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 1,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 2,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/LivingEntity",
+            "name": "m_21120_",
+            "descriptor": "(Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/item/ItemStack;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 5,
+          "opcode": "0x4e"
+        },
+        {
+          "offset": 6,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OoOo0oO0O0OO00O00OOoOo0o",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/world/item/ItemStack;)Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 10,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 12,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 14,
+          "opcode": "0x12",
+          "reference": {
+            "string": "",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "java/lang/String",
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 19,
+          "opcode": "0x9a",
+          "branch_target": 31
+        },
+        {
+          "offset": 22,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 23,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 25,
+          "opcode": "0xba",
+          "reference": {
+            "name": "makeConcatWithConstants",
+            "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+            "bootstrap_index": 0,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 30,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 31,
+          "opcode": "0x12",
+          "reference": {
+            "string": "",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 33,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 2,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0018"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x4e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 6,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "001b"
+        },
+        {
+          "offset": 10,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 12,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 14,
+          "opcode": "0x12",
+          "encoded_operands_hex": "0d"
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0021"
+        },
+        {
+          "offset": 19,
+          "opcode": "0x9a",
+          "encoded_operands_hex": "000c"
+        },
+        {
+          "offset": 22,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 23,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 25,
+          "opcode": "0xba",
+          "encoded_operands_hex": "002d0000"
+        },
+        {
+          "offset": 30,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 31,
+          "opcode": "0x12",
+          "encoded_operands_hex": "0d"
+        },
+        {
+          "offset": 33,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OoOo0oO0O0OO00O00OOoOo0o",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/world/item/ItemStack;)Ljava/lang/String;",
+      "access": 9,
+      "code_sha256": "614fe962452fc53d9cc2d8e0ed10bd5e7dbc463a283d704d0ecfcf8fd860ba43",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/item/ItemStack",
+            "name": "m_41720_",
+            "descriptor": "()Lnet/minecraft/world/item/Item;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x4c"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOOoOOOo00OOO00OoOOoo000",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/world/item/ItemStack;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0x99",
+          "branch_target": 15
+        },
+        {
+          "offset": 12,
+          "opcode": "0x12",
+          "reference": {
+            "string": "slashblade",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 15,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 16,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "net/minecraft/world/item/SwordItem",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 19,
+          "opcode": "0x9a",
+          "branch_target": 32
+        },
+        {
+          "offset": 22,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 23,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o00oO0oOoOo0OoooOo0O00oO",
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "Lnet/minecraft/tags/TagKey;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 26,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/item/ItemStack",
+            "name": "m_204117_",
+            "descriptor": "(Lnet/minecraft/tags/TagKey;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 29,
+          "opcode": "0x99",
+          "branch_target": 35
+        },
+        {
+          "offset": 32,
+          "opcode": "0x12",
+          "reference": {
+            "string": "sword",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 34,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 35,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 36,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OoOo0Oo0O0oOooOoOoOooOO0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/world/item/Item;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 39,
+          "opcode": "0x99",
+          "branch_target": 45
+        },
+        {
+          "offset": 42,
+          "opcode": "0x12",
+          "reference": {
+            "string": "gohei",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 44,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 45,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 46,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "net/minecraft/world/item/AxeItem",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 49,
+          "opcode": "0x9a",
+          "branch_target": 62
+        },
+        {
+          "offset": 52,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 53,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o00oO0oOoOo0OoooOo0O00oO",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lnet/minecraft/tags/TagKey;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 56,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/item/ItemStack",
+            "name": "m_204117_",
+            "descriptor": "(Lnet/minecraft/tags/TagKey;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 59,
+          "opcode": "0x99",
+          "branch_target": 65
+        },
+        {
+          "offset": 62,
+          "opcode": "0x12",
+          "reference": {
+            "string": "axe",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 64,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 65,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 66,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "net/minecraft/world/item/PickaxeItem",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 69,
+          "opcode": "0x9a",
+          "branch_target": 82
+        },
+        {
+          "offset": 72,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 73,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o00oO0oOoOo0OoooOo0O00oO",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "Lnet/minecraft/tags/TagKey;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 76,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/item/ItemStack",
+            "name": "m_204117_",
+            "descriptor": "(Lnet/minecraft/tags/TagKey;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 79,
+          "opcode": "0x99",
+          "branch_target": 85
+        },
+        {
+          "offset": 82,
+          "opcode": "0x12",
+          "reference": {
+            "string": "pickaxe",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 84,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 85,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 86,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "net/minecraft/world/item/ShovelItem",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 89,
+          "opcode": "0x9a",
+          "branch_target": 102
+        },
+        {
+          "offset": 92,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 93,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o00oO0oOoOo0OoooOo0O00oO",
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "Lnet/minecraft/tags/TagKey;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 96,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/item/ItemStack",
+            "name": "m_204117_",
+            "descriptor": "(Lnet/minecraft/tags/TagKey;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 99,
+          "opcode": "0x99",
+          "branch_target": 105
+        },
+        {
+          "offset": 102,
+          "opcode": "0x12",
+          "reference": {
+            "string": "shovel",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 104,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 105,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 106,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "net/minecraft/world/item/HoeItem",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 109,
+          "opcode": "0x9a",
+          "branch_target": 122
+        },
+        {
+          "offset": 112,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 113,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o00oO0oOoOo0OoooOo0O00oO",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lnet/minecraft/tags/TagKey;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 116,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/item/ItemStack",
+            "name": "m_204117_",
+            "descriptor": "(Lnet/minecraft/tags/TagKey;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 119,
+          "opcode": "0x99",
+          "branch_target": 125
+        },
+        {
+          "offset": 122,
+          "opcode": "0x12",
+          "reference": {
+            "string": "hoe",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 124,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 125,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 126,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "net/minecraft/world/item/ShieldItem",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 129,
+          "opcode": "0x9a",
+          "branch_target": 142
+        },
+        {
+          "offset": 132,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 133,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o00oO0oOoOo0OoooOo0O00oO",
+            "name": "o0OOO0o0o0OOo000oO00o00O",
+            "descriptor": "Lnet/minecraft/tags/TagKey;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 136,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/item/ItemStack",
+            "name": "m_204117_",
+            "descriptor": "(Lnet/minecraft/tags/TagKey;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 139,
+          "opcode": "0x99",
+          "branch_target": 145
+        },
+        {
+          "offset": 142,
+          "opcode": "0x12",
+          "reference": {
+            "string": "shield",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 144,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 145,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 146,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "net/minecraft/world/item/CrossbowItem",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 149,
+          "opcode": "0x9a",
+          "branch_target": 162
+        },
+        {
+          "offset": 152,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 153,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o00oO0oOoOo0OoooOo0O00oO",
+            "name": "oooooooOOoOOoO00OooOo00O",
+            "descriptor": "Lnet/minecraft/tags/TagKey;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 156,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/item/ItemStack",
+            "name": "m_204117_",
+            "descriptor": "(Lnet/minecraft/tags/TagKey;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 159,
+          "opcode": "0x99",
+          "branch_target": 165
+        },
+        {
+          "offset": 162,
+          "opcode": "0x12",
+          "reference": {
+            "string": "crossbow",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 164,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 165,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 166,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "net/minecraft/world/item/BowItem",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 169,
+          "opcode": "0x9a",
+          "branch_target": 182
+        },
+        {
+          "offset": 172,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 173,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o00oO0oOoOo0OoooOo0O00oO",
+            "name": "oo0OoO00oOoo000O0000o0oo",
+            "descriptor": "Lnet/minecraft/tags/TagKey;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 176,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/item/ItemStack",
+            "name": "m_204117_",
+            "descriptor": "(Lnet/minecraft/tags/TagKey;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 179,
+          "opcode": "0x99",
+          "branch_target": 185
+        },
+        {
+          "offset": 182,
+          "opcode": "0x12",
+          "reference": {
+            "string": "bow",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 184,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 185,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 186,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "net/minecraft/world/item/FishingRodItem",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 189,
+          "opcode": "0x9a",
+          "branch_target": 202
+        },
+        {
+          "offset": 192,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 193,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o00oO0oOoOo0OoooOo0O00oO",
+            "name": "Oo00o0OooOOo0ooOoo0oO0o0",
+            "descriptor": "Lnet/minecraft/tags/TagKey;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 196,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/item/ItemStack",
+            "name": "m_204117_",
+            "descriptor": "(Lnet/minecraft/tags/TagKey;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 199,
+          "opcode": "0x99",
+          "branch_target": 205
+        },
+        {
+          "offset": 202,
+          "opcode": "0x12",
+          "reference": {
+            "string": "fishing_rod",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 204,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 205,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 206,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "net/minecraft/world/item/TridentItem",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 209,
+          "opcode": "0x9a",
+          "branch_target": 222
+        },
+        {
+          "offset": 212,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 213,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o00oO0oOoOo0OoooOo0O00oO",
+            "name": "O0OooOo0oOOoOoOoOooO000o",
+            "descriptor": "Lnet/minecraft/tags/TagKey;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 216,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/item/ItemStack",
+            "name": "m_204117_",
+            "descriptor": "(Lnet/minecraft/tags/TagKey;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 219,
+          "opcode": "0x99",
+          "branch_target": 225
+        },
+        {
+          "offset": 222,
+          "opcode": "0x12",
+          "reference": {
+            "string": "spear",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 224,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 225,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 226,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "net/minecraft/world/item/ThrowablePotionItem",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 229,
+          "opcode": "0x9a",
+          "branch_target": 242
+        },
+        {
+          "offset": 232,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 233,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o00oO0oOoOo0OoooOo0O00oO",
+            "name": "Ooooo0oooO0oooOOOoO0000O",
+            "descriptor": "Lnet/minecraft/tags/TagKey;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 236,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/item/ItemStack",
+            "name": "m_204117_",
+            "descriptor": "(Lnet/minecraft/tags/TagKey;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 239,
+          "opcode": "0x99",
+          "branch_target": 245
+        },
+        {
+          "offset": 242,
+          "opcode": "0x12",
+          "reference": {
+            "string": "throwable_potion",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 244,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 245,
+          "opcode": "0x12",
+          "reference": {
+            "string": "",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 247,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0033"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x4c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0038"
+        },
+        {
+          "offset": 9,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0006"
+        },
+        {
+          "offset": 12,
+          "opcode": "0x12",
+          "encoded_operands_hex": "3a"
+        },
+        {
+          "offset": 14,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 15,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 16,
+          "opcode": "0xc1",
+          "encoded_operands_hex": "003e"
+        },
+        {
+          "offset": 19,
+          "opcode": "0x9a",
+          "encoded_operands_hex": "000d"
+        },
+        {
+          "offset": 22,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 23,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0044"
+        },
+        {
+          "offset": 26,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0048"
+        },
+        {
+          "offset": 29,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0006"
+        },
+        {
+          "offset": 32,
+          "opcode": "0x12",
+          "encoded_operands_hex": "4a"
+        },
+        {
+          "offset": 34,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 35,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 36,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "004f"
+        },
+        {
+          "offset": 39,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0006"
+        },
+        {
+          "offset": 42,
+          "opcode": "0x12",
+          "encoded_operands_hex": "51"
+        },
+        {
+          "offset": 44,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 45,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 46,
+          "opcode": "0xc1",
+          "encoded_operands_hex": "0053"
+        },
+        {
+          "offset": 49,
+          "opcode": "0x9a",
+          "encoded_operands_hex": "000d"
+        },
+        {
+          "offset": 52,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 53,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0055"
+        },
+        {
+          "offset": 56,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0048"
+        },
+        {
+          "offset": 59,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0006"
+        },
+        {
+          "offset": 62,
+          "opcode": "0x12",
+          "encoded_operands_hex": "57"
+        },
+        {
+          "offset": 64,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 65,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 66,
+          "opcode": "0xc1",
+          "encoded_operands_hex": "0059"
+        },
+        {
+          "offset": 69,
+          "opcode": "0x9a",
+          "encoded_operands_hex": "000d"
+        },
+        {
+          "offset": 72,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 73,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "005c"
+        },
+        {
+          "offset": 76,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0048"
+        },
+        {
+          "offset": 79,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0006"
+        },
+        {
+          "offset": 82,
+          "opcode": "0x12",
+          "encoded_operands_hex": "5e"
+        },
+        {
+          "offset": 84,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 85,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 86,
+          "opcode": "0xc1",
+          "encoded_operands_hex": "0060"
+        },
+        {
+          "offset": 89,
+          "opcode": "0x9a",
+          "encoded_operands_hex": "000d"
+        },
+        {
+          "offset": 92,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 93,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0063"
+        },
+        {
+          "offset": 96,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0048"
+        },
+        {
+          "offset": 99,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0006"
+        },
+        {
+          "offset": 102,
+          "opcode": "0x12",
+          "encoded_operands_hex": "65"
+        },
+        {
+          "offset": 104,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 105,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 106,
+          "opcode": "0xc1",
+          "encoded_operands_hex": "0067"
+        },
+        {
+          "offset": 109,
+          "opcode": "0x9a",
+          "encoded_operands_hex": "000d"
+        },
+        {
+          "offset": 112,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 113,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "006a"
+        },
+        {
+          "offset": 116,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0048"
+        },
+        {
+          "offset": 119,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0006"
+        },
+        {
+          "offset": 122,
+          "opcode": "0x12",
+          "encoded_operands_hex": "6c"
+        },
+        {
+          "offset": 124,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 125,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 126,
+          "opcode": "0xc1",
+          "encoded_operands_hex": "006e"
+        },
+        {
+          "offset": 129,
+          "opcode": "0x9a",
+          "encoded_operands_hex": "000d"
+        },
+        {
+          "offset": 132,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 133,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0071"
+        },
+        {
+          "offset": 136,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0048"
+        },
+        {
+          "offset": 139,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0006"
+        },
+        {
+          "offset": 142,
+          "opcode": "0x12",
+          "encoded_operands_hex": "73"
+        },
+        {
+          "offset": 144,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 145,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 146,
+          "opcode": "0xc1",
+          "encoded_operands_hex": "0075"
+        },
+        {
+          "offset": 149,
+          "opcode": "0x9a",
+          "encoded_operands_hex": "000d"
+        },
+        {
+          "offset": 152,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 153,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0078"
+        },
+        {
+          "offset": 156,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0048"
+        },
+        {
+          "offset": 159,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0006"
+        },
+        {
+          "offset": 162,
+          "opcode": "0x12",
+          "encoded_operands_hex": "7a"
+        },
+        {
+          "offset": 164,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 165,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 166,
+          "opcode": "0xc1",
+          "encoded_operands_hex": "007c"
+        },
+        {
+          "offset": 169,
+          "opcode": "0x9a",
+          "encoded_operands_hex": "000d"
+        },
+        {
+          "offset": 172,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 173,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "007f"
+        },
+        {
+          "offset": 176,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0048"
+        },
+        {
+          "offset": 179,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0006"
+        },
+        {
+          "offset": 182,
+          "opcode": "0x12",
+          "encoded_operands_hex": "81"
+        },
+        {
+          "offset": 184,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 185,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 186,
+          "opcode": "0xc1",
+          "encoded_operands_hex": "0083"
+        },
+        {
+          "offset": 189,
+          "opcode": "0x9a",
+          "encoded_operands_hex": "000d"
+        },
+        {
+          "offset": 192,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 193,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0086"
+        },
+        {
+          "offset": 196,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0048"
+        },
+        {
+          "offset": 199,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0006"
+        },
+        {
+          "offset": 202,
+          "opcode": "0x12",
+          "encoded_operands_hex": "88"
+        },
+        {
+          "offset": 204,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 205,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 206,
+          "opcode": "0xc1",
+          "encoded_operands_hex": "008a"
+        },
+        {
+          "offset": 209,
+          "opcode": "0x9a",
+          "encoded_operands_hex": "000d"
+        },
+        {
+          "offset": 212,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 213,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "008d"
+        },
+        {
+          "offset": 216,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0048"
+        },
+        {
+          "offset": 219,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0006"
+        },
+        {
+          "offset": 222,
+          "opcode": "0x12",
+          "encoded_operands_hex": "8f"
+        },
+        {
+          "offset": 224,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 225,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 226,
+          "opcode": "0xc1",
+          "encoded_operands_hex": "0091"
+        },
+        {
+          "offset": 229,
+          "opcode": "0x9a",
+          "encoded_operands_hex": "000d"
+        },
+        {
+          "offset": 232,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 233,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0094"
+        },
+        {
+          "offset": 236,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0048"
+        },
+        {
+          "offset": 239,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0006"
+        },
+        {
+          "offset": 242,
+          "opcode": "0x12",
+          "encoded_operands_hex": "96"
+        },
+        {
+          "offset": 244,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 245,
+          "opcode": "0x12",
+          "encoded_operands_hex": "0d"
+        },
+        {
+          "offset": 247,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    }
+  ],
+  "owner_declarations": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO",
+      "declaration": {
+        "access": 33,
+        "super": "com/elfmcys/yesstevemodel/O00o0Oo0O0oooOooOo0O0o00",
+        "interfaces": [],
+        "fields": [
+          {
+            "access": 26,
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "Ljava/lang/String;"
+          },
+          {
+            "access": 26,
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "Ljava/lang/String;"
+          },
+          {
+            "access": 26,
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "Ljava/lang/String;"
+          },
+          {
+            "access": 26,
+            "name": "Ooooo0oooO0oooOOOoO0000O",
+            "descriptor": "Ljava/lang/String;"
+          },
+          {
+            "access": 26,
+            "name": "oo0OoO00oOoo000O0000o0oo",
+            "descriptor": "I"
+          },
+          {
+            "access": 26,
+            "name": "oooooooOOoOOoO00OooOo00O",
+            "descriptor": "I"
+          },
+          {
+            "access": 18,
+            "name": "Oo00o0OooOOo0ooOoo0oO0o0",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO$Oo0Oo0o00O00Oo0OOoOOoooo;"
+          }
+        ],
+        "methods": [
+          {
+            "access": 2,
+            "name": "<init>",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO$Oo0Oo0o00O00Oo0OOoOOoooo;)V"
+          },
+          {
+            "access": 9,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO;"
+          },
+          {
+            "access": 9,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO;"
+          },
+          {
+            "access": 9,
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO;"
+          },
+          {
+            "access": 4,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo;)Ljava/lang/Object;"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(I)Z"
+          },
+          {
+            "access": 4106,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;)Z"
+          },
+          {
+            "access": 4106,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;)Z"
+          },
+          {
+            "access": 4106,
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;)Z"
+          }
+        ]
+      }
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "declaration": {
+        "access": 1536,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": [],
+        "methods": [
+          {
+            "access": 1025,
+            "name": "test",
+            "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;)Z"
+          }
+        ]
+      }
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0oOOoO0oooo0O0OoOoOoOo0",
+      "declaration": {
+        "access": 33,
+        "super": "com/elfmcys/yesstevemodel/O00o0Oo0O0oooOooOo0O0o00",
+        "interfaces": [],
+        "fields": [
+          {
+            "access": 26,
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "Ljava/lang/String;"
+          },
+          {
+            "access": 26,
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "Ljava/lang/String;"
+          },
+          {
+            "access": 26,
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "Ljava/lang/String;"
+          },
+          {
+            "access": 26,
+            "name": "Ooooo0oooO0oooOOOoO0000O",
+            "descriptor": "I"
+          },
+          {
+            "access": 26,
+            "name": "oo0OoO00oOoo000O0000o0oo",
+            "descriptor": "I"
+          }
+        ],
+        "methods": [
+          {
+            "access": 1,
+            "name": "<init>",
+            "descriptor": "()V"
+          },
+          {
+            "access": 9,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/o0oOOoO0oooo0O0OoOoOoOo0;"
+          },
+          {
+            "access": 4,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo;)Ljava/lang/Object;"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(I)Z"
+          }
+        ]
+      }
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O000000ooOoOOo000ooO000o",
+      "declaration": {
+        "access": 33,
+        "super": "com/elfmcys/yesstevemodel/O00o0Oo0O0oooOooOo0O0o00",
+        "interfaces": [],
+        "fields": [
+          {
+            "access": 26,
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "Ljava/lang/String;"
+          },
+          {
+            "access": 26,
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "Ljava/lang/String;"
+          },
+          {
+            "access": 26,
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "Ljava/lang/String;"
+          },
+          {
+            "access": 26,
+            "name": "Ooooo0oooO0oooOOOoO0000O",
+            "descriptor": "Ljava/lang/String;"
+          },
+          {
+            "access": 26,
+            "name": "oo0OoO00oOoo000O0000o0oo",
+            "descriptor": "I"
+          },
+          {
+            "access": 26,
+            "name": "oooooooOOoOOoO00OooOo00O",
+            "descriptor": "I"
+          }
+        ],
+        "methods": [
+          {
+            "access": 1,
+            "name": "<init>",
+            "descriptor": "()V"
+          },
+          {
+            "access": 9,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/O000000ooOoOOo000ooO000o;"
+          },
+          {
+            "access": 4,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo;)Ljava/lang/Object;"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(I)Z"
+          }
+        ]
+      }
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OoOo0oO0O0OO00O00OOoOo0o",
+      "declaration": {
+        "access": 33,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": [
+          {
+            "access": 26,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Ljava/lang/String;"
+          }
+        ],
+        "methods": [
+          {
+            "access": 1,
+            "name": "<init>",
+            "descriptor": "()V"
+          },
+          {
+            "access": 9,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;)Ljava/lang/String;"
+          },
+          {
+            "access": 9,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/world/item/ItemStack;)Ljava/lang/String;"
+          }
+        ]
+      }
+    }
+  ],
+  "bootstrap_and_constant_evidence": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO",
+      "constant_values": {
+        "O00OOOooOoooOoo0o0o0oO0O": {
+          "cp_tag": 8,
+          "value": "$"
+        },
+        "oOOOo0OOO0ooooo0O00OO0o0": {
+          "cp_tag": 8,
+          "value": "#"
+        },
+        "OOOOo0O0oO0OOo0O0O0Oo0O0": {
+          "cp_tag": 8,
+          "value": ":"
+        },
+        "Ooooo0oooO0oooOOOoO0000O": {
+          "cp_tag": 8,
+          "value": "empty"
+        },
+        "oo0OoO00oOoo000O0000o0oo": {
+          "cp_tag": 3,
+          "value": 0
+        },
+        "oooooooOOoOOoO00OooOo00O": {
+          "cp_tag": 3,
+          "value": 1
+        }
+      },
+      "bootstrap_methods": [
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;)Z"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO",
+                "name": "O00OOOooOoooOoo0o0o0oO0O",
+                "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;)Z"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;)Z"
+            }
+          ]
+        },
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;)Z"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO",
+                "name": "o0OOooo0o0OO00OoOOOo0o0O",
+                "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;)Z"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;)Z"
+            }
+          ]
+        },
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;)Z"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO",
+                "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+                "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;)Z"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;)Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0O0ooOOooOOO00OO0OOOooO$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "constant_values": {},
+      "bootstrap_methods": []
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0oOOoO0oooo0O0OoOoOoOo0",
+      "constant_values": {
+        "O00OOOooOoooOoo0o0o0oO0O": {
+          "cp_tag": 8,
+          "value": "$"
+        },
+        "oOOOo0OOO0ooooo0O00OO0o0": {
+          "cp_tag": 8,
+          "value": "#"
+        },
+        "OOOOo0O0oO0OOo0O0O0Oo0O0": {
+          "cp_tag": 8,
+          "value": "empty"
+        },
+        "Ooooo0oooO0oooOOOoO0000O": {
+          "cp_tag": 3,
+          "value": 0
+        },
+        "oo0OoO00oOoo000O0000o0oo": {
+          "cp_tag": 3,
+          "value": 1
+        }
+      },
+      "bootstrap_methods": []
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O000000ooOoOOo000ooO000o",
+      "constant_values": {
+        "O00OOOooOoooOoo0o0o0oO0O": {
+          "cp_tag": 8,
+          "value": "$"
+        },
+        "oOOOo0OOO0ooooo0O00OO0o0": {
+          "cp_tag": 8,
+          "value": "#"
+        },
+        "OOOOo0O0oO0OOo0O0O0Oo0O0": {
+          "cp_tag": 8,
+          "value": "vehicle"
+        },
+        "Ooooo0oooO0oooOOOoO0000O": {
+          "cp_tag": 8,
+          "value": "passenger"
+        },
+        "oo0OoO00oOoo000O0000o0oo": {
+          "cp_tag": 3,
+          "value": 0
+        },
+        "oooooooOOoOOoO00OooOo00O": {
+          "cp_tag": 3,
+          "value": 1
+        }
+      },
+      "bootstrap_methods": []
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OoOo0oO0O0OO00O00OOoOo0o",
+      "constant_values": {
+        "Oo0Oo0o00O00Oo0OOoOOoooo": {
+          "cp_tag": 8,
+          "value": ""
+        }
+      },
+      "bootstrap_methods": [
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/StringConcatFactory",
+              "name": "makeConcatWithConstants",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 8,
+              "value": "\u0001\u0001"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "source_tracks": [
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/functions/HandItemCheck.java",
+      "sha256": "152a07bc585e83527020ad6d7e58fdcfa7ced60c192b10609c38e4ffbd284bc9",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6"
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/functions/HandItemCheck.java",
+      "sha256": "152a07bc585e83527020ad6d7e58fdcfa7ced60c192b10609c38e4ffbd284bc9",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6"
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/functions/ArmorCheck.java",
+      "sha256": "c3825c8fedd5c7719ea96a1755d38a33bbe96523d7768df08a0cd08df66e94c4",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6"
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/functions/RideCheck.java",
+      "sha256": "f9e00fda293f99fafa4182c8210a1fd19b4e15cf6197fdf847ba3f1511e67b32",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6"
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/condition/InnerClassify.java",
+      "sha256": "2d4a09ac8c4f9b3ada4cbbe703162d503886533d86819ed8d37d89e2b2b9f1e2",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6"
+    }
+  ],
+  "review_status": "PRIMARY_STATIC_REVIEW_ONLY",
+  "central_mapping_promoted": false
+}

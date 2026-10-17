@@ -370,3 +370,7 @@ bounded runtime observation rather than protection bypass.
 
 - [Utility/noise/diagnostic queries](UTILITY-NOISE-DEBUG-RECOVERY-2026-10-17.md): native-noise call boundary, local mod metadata, block-name comparisons and debug-first lazy argument gates.
 - [Control priority and action queries](CONTROL-PRIORITY-ACTIONS-RECOVERY-2026-10-17.md): cached first-match main-animation selection, typed guards and coded-controller action entry points.
+
+- [Control equipment/riding predicates](CONTROL-EQUIPMENT-PREDICATES-RECOVERY-2026-10-17.md): raw-slot provenance, actual hand-independent action gates, prefix matching and classifier precedence.
+
+- [Optional maid query adapter](MAID-QUERY-ADAPTER-RECOVERY-2026-10-17.md): cached availability, sixteen real/fallback names and wrong-entity/default-type distinctions.
