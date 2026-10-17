@@ -89,3 +89,7 @@ point-production homogeneity and Java scheduler ownership; task remains active.
 Bedrock state/condition scheduling and producer aggregation now have bounded
 static evidence. No global transition-homogeneity proof is claimed. Continue
 animatable lifecycle, model reload and scheduling; no stop at this checkpoint.
+
+Animatable base clock/rate/update gates and model lifecycle are recorded; actual
+callers and overrides are next. A base-body lack of async calls is not a proof of
+thread ownership. Independent reviews remain pending; continue connected work.
