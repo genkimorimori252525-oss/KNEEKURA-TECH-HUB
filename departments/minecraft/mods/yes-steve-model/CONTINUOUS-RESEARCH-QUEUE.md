@@ -125,3 +125,7 @@ zero-delta boundaries rather than treating displacement as physical velocity.
 Movement/time query registration and arithmetic are recorded with selected-method
 closure. Continue ContextBinding variable wrappers and numeric/null propagation;
 helper NaN is not yet a claim about the final Molang-visible value.
+
+Context variable wrappers and typed numeric/null/NaN conversion are recorded.
+Continue AST variable resolution and actual consumer paths; inherited IValue
+catch/conversion behavior must not be generalized to overriding value classes.

@@ -292,3 +292,5 @@ bounded runtime observation rather than protection bypass.
 - [State tracker and position-delta input](STATE-TRACKER-INPUT-RECOVERY-2026-10-17.md): entity/render tick cache lifetimes and interpolated displacement; runtime behavior unverified.
 
 - [Movement-query provenance and units](MOVEMENT-QUERY-RECOVERY-2026-10-17.md): velocity versus sampled displacement, time units and directional-input formulas; wrapper propagation pending.
+
+- [Variable and numeric conversion boundaries](VARIABLE-CONVERSION-RECOVERY-2026-10-17.md): context guards, raw values, NaN/infinity and typed evaluation; not universal sanitation.
