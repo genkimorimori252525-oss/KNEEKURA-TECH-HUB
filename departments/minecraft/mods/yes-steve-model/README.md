@@ -398,3 +398,7 @@ bounded runtime observation rather than protection bypass.
 - [Vehicle/projectile controllers](VEHICLE-PROJECTILE-CONTROLLERS-RECOVERY-2026-10-17.md): factory discovery, fly/air literal mismatch, retained root-rotation queue and external aircraft rotation inputs.
 
 - [Extra/preview controllers](EXTRA-PREVIEW-CONTROLLERS-RECOVERY-2026-10-17.md): cap lifecycle, hover/focus preview gates, sampled emission flags and distinct sound cleanup scope.
+
+- [Optional gun-animation adapters](GUN-ANIMATION-ADAPTERS-RECOVERY-2026-10-17.md): provider/null fallback order, distinct ID domains, nine ctrl callbacks and wrapper guard differences.
+
+- [Inner gun-animation state](GUN-INNER-ANIMATION-RECOVERY-2026-10-17.md): event-reset coalescing, provider-specific local/synced thresholds and explicit loop/fallback policies.
