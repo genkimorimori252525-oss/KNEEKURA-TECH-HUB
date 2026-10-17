@@ -259,3 +259,8 @@ Bone query views/units and tracking mutation are joined to exact buffer getters.
 Absolute-pivot freshness/frame/native producer remain unproven; output stride4
 is preserved. Continue smoothing function state/key reuse and manager timing,
 then side-effect gates, without treating queries as uniformly pure operations.
+
+Smoothing functions are joined to manager/lifecycle timing. Key space is shared
+across first/second order; first query return is not integrator initialization.
+No numerical stability/runtime proof. Continue particle/sound/input/sync/defer
+gates, argument ordering and external-effect boundaries.

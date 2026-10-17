@@ -361,3 +361,5 @@ bounded runtime observation rather than protection bypass.
 - [View/render/texture inputs](VIEW-TEXTURE-INPUT-RECOVERY-2026-10-17.md): broad versus exclusive/first-person predicates, preview inventory flags, head-offset adapter and model texture-name fallback.
 
 - [Bone parameter queries](BONE-PARAMETER-QUERY-RECOVERY-2026-10-17.md): live read-only vector views, rotation signs/degrees, raw position/scale and explicit tracking request without native output-refresh proof.
+
+- [Stateful smoothing](SMOOTHING-STATE-RECOVERY-2026-10-17.md): shared key/type reuse, first-return versus simulated state, manager clock ordering and exact first/second-order arithmetic boundaries.
