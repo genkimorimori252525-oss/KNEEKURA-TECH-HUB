@@ -20,7 +20,7 @@ def build(root):
     owners = {}
     unsupported = []
     for path in sorted(root.glob('*EVIDENCE*.json')):
-        if path.name == INDEX:
+        if path.name.startswith('EVIDENCE-LOCATOR-'):
             continue
         raw = path.read_bytes()
         data = json.loads(raw)

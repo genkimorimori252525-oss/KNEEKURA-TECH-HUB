@@ -1,0 +1,144 @@
+{
+  "format": "kneekura.ysm-controller-query-checkpoint.v1",
+  "cohort_manifest": [
+    [
+      "UTILITY-NOISE-DEBUG",
+      "utility_noise_debug",
+      true
+    ],
+    [
+      "CONTROL-PRIORITY-ACTIONS",
+      "control_priority_actions",
+      true
+    ],
+    [
+      "CONTROL-EQUIPMENT-PREDICATES",
+      "control_equipment_predicates",
+      true
+    ],
+    [
+      "MAID-QUERY-ADAPTER",
+      "maid_query_adapter",
+      true
+    ],
+    [
+      "CLIENT-COMPAT-INITIALIZATION",
+      "client_compat_initialization",
+      true
+    ],
+    [
+      "HYBRID-PARCOOL-CONTROLLER",
+      "hybrid_parcool_controller",
+      true
+    ],
+    [
+      "PLAYER-CONTROLLER-ASSEMBLY",
+      "player_controller_assembly",
+      true
+    ],
+    [
+      "PLAYER-MAIN-SELECTION",
+      "player_main_selection",
+      true
+    ],
+    [
+      "HUMANOID-HAND-PREDICATES",
+      "humanoid_hand_predicates",
+      true
+    ]
+  ],
+  "cohorts": [
+    {
+      "cohort": "UTILITY-NOISE-DEBUG",
+      "tool_sha256": "2479ef169a1549a8a76cb794025ea1a6150cf1ff0d657ee6d4b0953fb8cba9d0",
+      "evidence_sha256": "d7868609c709d7ca5fb596cfd5ba1e1b0e02662f1560857c8539ca40cb06e824",
+      "rerun_receipt_sha256": "db3c9ead8c54242a57a417594947290dca7776a0c58161f2e89bd3aa6e06c388",
+      "checks": 155,
+      "negative_controls": 12,
+      "status": "PASS"
+    },
+    {
+      "cohort": "CONTROL-PRIORITY-ACTIONS",
+      "tool_sha256": "5b3641d0388f0f7fd41671068ff07a7cc7980129370f65939c9a298b90df7bec",
+      "evidence_sha256": "d0f50564d039245daab2570f50e3de9d877bfa37c4b4cdd5ec7ae11490e21105",
+      "rerun_receipt_sha256": "df3c13def37c9776d4533b91794108b7ad8efec87d653b4debb4701050ad7653",
+      "checks": 270,
+      "negative_controls": 12,
+      "status": "PASS"
+    },
+    {
+      "cohort": "CONTROL-EQUIPMENT-PREDICATES",
+      "tool_sha256": "0a6da1c7d74b32859543b3bec45c4dcada34b10cf39ac5109a616ec9f4c0bd52",
+      "evidence_sha256": "009998f524e6d23965b414cadec294d601987174a25e8a4233db7ae6bfebb0d7",
+      "rerun_receipt_sha256": "152381c190bf612cdb184fabd19e2259d323344c9f5e15946a98c0402f625b2a",
+      "checks": 132,
+      "negative_controls": 9,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MAID-QUERY-ADAPTER",
+      "tool_sha256": "88b2a16360e222d285212c379d999be6ed2e28f27dcba7caa038a9124d511cf5",
+      "evidence_sha256": "39244433e5531029a12d605e55499e449be475c96ccc1383a45229d6f8d72ba7",
+      "rerun_receipt_sha256": "0249c3dfb008a6b9807fc0fc666e26006eb946b42b1e1cd95412f690321c1133",
+      "checks": 284,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "CLIENT-COMPAT-INITIALIZATION",
+      "tool_sha256": "95e484b846a1436968c58bf959c5a1f1b472009bcc37206376bb4ad114cf27e4",
+      "evidence_sha256": "424a4858eab57e0a2d3671a5078421068c213f8a88dcedbeade2f40584c79e49",
+      "rerun_receipt_sha256": "862bf0aada2d0c9d94454a5a48709af41a725a832b2832bdcbb95d0b3f5a9922",
+      "checks": 120,
+      "negative_controls": 10,
+      "status": "PASS"
+    },
+    {
+      "cohort": "HYBRID-PARCOOL-CONTROLLER",
+      "tool_sha256": "ffbff1bfd4e9a520e350b93f89f63ae39263c2697939fed36f711f7b808e1dcf",
+      "evidence_sha256": "8fb2dafa1918fcdb8a602b306a315d4f29f13150274dad45b805fa352264be44",
+      "rerun_receipt_sha256": "23a0742046b08f852b5dfe26d7382931671571cbe40991a50e0418c178ca2745",
+      "checks": 201,
+      "negative_controls": 11,
+      "status": "PASS"
+    },
+    {
+      "cohort": "PLAYER-CONTROLLER-ASSEMBLY",
+      "tool_sha256": "9f129827b9e9a051cc95d2b798771cc387b4bf6dbf867d7d5665d9a2cd9a1703",
+      "evidence_sha256": "90c6d517b65bf16855029899ab2633abb19ad7e8aa22459d703ff8ea45c5cb8f",
+      "rerun_receipt_sha256": "4803445e477faa72dab4826e8b97e0c2f1c5110f9b5964b15fc7c3c1c8a22e51",
+      "checks": 437,
+      "negative_controls": 13,
+      "status": "PASS"
+    },
+    {
+      "cohort": "PLAYER-MAIN-SELECTION",
+      "tool_sha256": "b61ff40c826c024cf39ca7dc7f78e242966108d3ce64e3e80064189cf13f228f",
+      "evidence_sha256": "c7619849c678f55afcb7d88e6fbe3d4b2c7c20fb4d2156bbb3d53a366db91315",
+      "rerun_receipt_sha256": "6c9a2d6812fa57432dcf16fbeff0468a5a05e634ed5a0dea10c04c85e574000d",
+      "checks": 218,
+      "negative_controls": 9,
+      "status": "PASS"
+    },
+    {
+      "cohort": "HUMANOID-HAND-PREDICATES",
+      "tool_sha256": "c83acbb372a81d68f72d6211968a0439b6f443371149ab42038b4acb32c891fd",
+      "evidence_sha256": "475bae7879847ad3c7a93b4a01e7bdf7b6cf8fa816b7a8d83706536153b37ee3",
+      "rerun_receipt_sha256": "1d2d2606c22427e1d59150e05847141eea981e1ffb885371f8f78af140f7a909",
+      "checks": 170,
+      "negative_controls": 12,
+      "status": "PASS"
+    }
+  ],
+  "cohort_count": 9,
+  "overlapping_method_snapshots_compared": 0,
+  "overlap_conflicts": 0,
+  "central_mapping_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
+  "central_mapping_promoted": false,
+  "independent_semantic_review": "NOT_RUN",
+  "target_runtime_executed": false,
+  "whole_project_ci_run": false,
+  "earlier_fixed17_checkpoint_modified": false,
+  "earlier_fixed10_checkpoint_modified": false,
+  "elapsed_seconds": 1.792
+}

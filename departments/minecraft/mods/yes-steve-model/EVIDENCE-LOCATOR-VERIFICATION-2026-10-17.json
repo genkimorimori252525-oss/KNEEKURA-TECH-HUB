@@ -2,7 +2,7 @@
   "scope": "opt-in evidence navigation only",
   "unit_test_exit_code": 0,
   "unit_tests": 9,
-  "unit_output": "test_bounded_results (test_evidence_locator_ysm_265.LocatorTest.test_bounded_results) ... ok\ntest_build_deterministic_and_no_reference_promotion (test_evidence_locator_ysm_265.LocatorTest.test_build_deterministic_and_no_reference_promotion) ... ok\ntest_default_search_does_not_rebuild_or_check (test_evidence_locator_ysm_265.LocatorTest.test_default_search_does_not_rebuild_or_check) ... ok\ntest_index_is_not_its_own_evidence (test_evidence_locator_ysm_265.LocatorTest.test_index_is_not_its_own_evidence) ... ok\ntest_query_and_topic (test_evidence_locator_ysm_265.LocatorTest.test_query_and_topic) ... ok\ntest_selected_hash_missing_or_stale (test_evidence_locator_ysm_265.LocatorTest.test_selected_hash_missing_or_stale) ... ok\ntest_short_owner_role_and_case_search (test_evidence_locator_ysm_265.LocatorTest.test_short_owner_role_and_case_search) ... ok\ntest_topic_hash_is_checked (test_evidence_locator_ysm_265.LocatorTest.test_topic_hash_is_checked) ... ok\ntest_unrelated_changes_do_not_run_global_check (test_evidence_locator_ysm_265.LocatorTest.test_unrelated_changes_do_not_run_global_check) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 0.008s\n\nOK\n",
+  "unit_output": "test_bounded_results (test_evidence_locator_ysm_265.LocatorTest.test_bounded_results) ... ok\ntest_build_deterministic_and_no_reference_promotion (test_evidence_locator_ysm_265.LocatorTest.test_build_deterministic_and_no_reference_promotion) ... ok\ntest_default_search_does_not_rebuild_or_check (test_evidence_locator_ysm_265.LocatorTest.test_default_search_does_not_rebuild_or_check) ... ok\ntest_index_is_not_its_own_evidence (test_evidence_locator_ysm_265.LocatorTest.test_index_is_not_its_own_evidence) ... ok\ntest_query_and_topic (test_evidence_locator_ysm_265.LocatorTest.test_query_and_topic) ... ok\ntest_selected_hash_missing_or_stale (test_evidence_locator_ysm_265.LocatorTest.test_selected_hash_missing_or_stale) ... ok\ntest_short_owner_role_and_case_search (test_evidence_locator_ysm_265.LocatorTest.test_short_owner_role_and_case_search) ... ok\ntest_topic_hash_is_checked (test_evidence_locator_ysm_265.LocatorTest.test_topic_hash_is_checked) ... ok\ntest_unrelated_changes_do_not_run_global_check (test_evidence_locator_ysm_265.LocatorTest.test_unrelated_changes_do_not_run_global_check) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 0.009s\n\nOK\n",
   "repository_lookups": [
     {
       "arguments": [
@@ -25,17 +25,25 @@
         "--topic",
         "CONTROL"
       ],
-      "matches": 5,
+      "matches": 7,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--topic",
+        "PLAYER-MAIN"
+      ],
+      "matches": 1,
       "freshness": "SELECTED_FILES_MATCH"
     }
   ],
-  "seconds": 0.211,
+  "seconds": 0.256,
   "central_map_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
   "target_runtime_executed": false,
   "global_audits_run": false,
   "hashes": {
-    "tools/evidence_locator_ysm_265.py": "5c368352bc267048c6ac867977cc27e05c91957de13e9e35b6e5fdf84d347df4",
-    "tools/test_evidence_locator_ysm_265.py": "137434c3dc9c0f83f7d628c7ddc299b5379a3229223d375a052a4cc1d27e78eb",
-    "EVIDENCE-LOCATOR-2026-10-17.json": "3a6de51e0b29f93a68567844ef0f6d1fa3664b9cf1056be678d4d39682ee0690"
+    "tools/evidence_locator_ysm_265.py": "2210c9b9ce950414a2cd6dd8b0d6430dcbdc0edc93c2668e675876f5ba19612d",
+    "tools/test_evidence_locator_ysm_265.py": "49fb8441e334bab9ad3bbe63664a76c71d3219f8c17d4164a580a82b8cd700f0",
+    "EVIDENCE-LOCATOR-2026-10-17.json": "04d93fa51e9b0c917b31d48917674139c7b587f8a7358f39a73e4f27e13426a3"
   }
 }

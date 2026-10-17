@@ -86,7 +86,10 @@ class LocatorTest(unittest.TestCase):
 
     def test_index_is_not_its_own_evidence(self):
         self.invoke('--build')
-        self.assertNotIn(locator.INDEX, locator.build(self.root)['unindexed_evidence_schemas'])
+        self.write('EVIDENCE-LOCATOR-VERIFICATION-2026-10-17.json', {'receipt': True})
+        index = locator.build(self.root)
+        self.assertNotIn(locator.INDEX, index['unindexed_evidence_schemas'])
+        self.assertNotIn('EVIDENCE-LOCATOR-VERIFICATION-2026-10-17.json', index['unindexed_evidence_schemas'])
 
 
 if __name__ == '__main__':

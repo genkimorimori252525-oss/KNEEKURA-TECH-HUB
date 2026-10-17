@@ -4,6 +4,8 @@
 Need a known query/class quickly? Use the optional [evidence locator](EVIDENCE-LOCATOR-2026-10-17.md); no startup audit or tool installation.
 
 State/query extension navigation: [STATE-QUERY-INDEX-2026-10-17.md](STATE-QUERY-INDEX-2026-10-17.md). Use the relevant seam; no ordinary-startup audit is required.
+Controller assembly/predicate continuation: [CONTROLLER-QUERY-INDEX-2026-10-17.md](CONTROLLER-QUERY-INDEX-2026-10-17.md).
+
 ## Scope
 
 - Target: **Yes Steve Model (YSM)**
@@ -382,3 +384,7 @@ bounded runtime observation rather than protection bypass.
 - [Hybrid controller / ParCool join](HYBRID-PARCOOL-CONTROLLER-RECOVERY-2026-10-17.md): Bedrock/builtin coded handoff, active-queue selection and external animator-name versus model-clip distinction.
 
 - [Player controller discovery/assembly](PLAYER-CONTROLLER-ASSEMBLY-RECOVERY-2026-10-17.md): two-stage factories, ordered expansion, resource/event/clip precedence and preview/armor-slot boundaries.
+
+- [Coded player-main selection](PLAYER-MAIN-SELECTION-RECOVERY-2026-10-17.md): state registration, mod-adapter precedence, loop overrides and differences from cached ctrl movement queries.
+
+- [Humanoid hand predicates](HUMANOID-HAND-PREDICATES-RECOVERY-2026-10-17.md): hold pause gates, item-reference tracking, swing/use state distinctions and version-aware loop selection.

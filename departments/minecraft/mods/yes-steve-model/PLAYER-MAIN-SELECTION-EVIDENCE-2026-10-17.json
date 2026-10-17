@@ -1,0 +1,7115 @@
+{
+  "format": "kneekura.ysm-bounded-seed-evidence.v1",
+  "artifact": {
+    "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+    "sha1": "151ac7b24da8beeca1a20864565743cfd77af286",
+    "size": 63269843,
+    "version_id": "Zqooxsd2",
+    "classes": 955
+  },
+  "confidence_policy": "CONFIRMED denotes semantic correspondence reviewed against pinned source and exact instructions/relations, not recovered original symbols or whole-source equivalence. Prior community sources reused as fixture leads; no community-based promotions.",
+  "source_artifact_equivalence": "NOT_ESTABLISHED",
+  "preserved_global_negative_finding": "SOURCE_ARTIFACT_DIVERGENCE",
+  "recorded_at": "2026-10-17",
+  "detailed_operands": true,
+  "classes": [],
+  "members": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+      "name": "<init>",
+      "descriptor": "()V",
+      "access": 1,
+      "code_sha256": "10b0c23fbb77c2f4315d0b3917472bfeddce309743c7ea637693b8d4a67333c3",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "java/lang/Object",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "0020"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()V",
+      "access": 9,
+      "code_sha256": "27dd750de0c1db148d53e47244725990eee37914c0141e2288bffe70609760a5",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x12",
+          "reference": {
+            "string": "death",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 2,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 5,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xba",
+          "reference": {
+            "name": "test",
+            "descriptor": "()Ljava/util/function/BiPredicate;",
+            "bootstrap_index": 0,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;ILjava/util/function/BiPredicate;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0x12",
+          "reference": {
+            "string": "riptide",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 16,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 17,
+          "opcode": "0xba",
+          "reference": {
+            "name": "test",
+            "descriptor": "()Ljava/util/function/BiPredicate;",
+            "bootstrap_index": 1,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 22,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;ILjava/util/function/BiPredicate;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 25,
+          "opcode": "0x12",
+          "reference": {
+            "string": "sleep",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 27,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 28,
+          "opcode": "0xba",
+          "reference": {
+            "name": "test",
+            "descriptor": "()Ljava/util/function/BiPredicate;",
+            "bootstrap_index": 2,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 33,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;ILjava/util/function/BiPredicate;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 36,
+          "opcode": "0x12",
+          "reference": {
+            "string": "swim",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 38,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 39,
+          "opcode": "0xba",
+          "reference": {
+            "name": "test",
+            "descriptor": "()Ljava/util/function/BiPredicate;",
+            "bootstrap_index": 3,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 44,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;ILjava/util/function/BiPredicate;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 47,
+          "opcode": "0x12",
+          "reference": {
+            "string": "climb",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 49,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 50,
+          "opcode": "0xba",
+          "reference": {
+            "name": "test",
+            "descriptor": "()Ljava/util/function/BiPredicate;",
+            "bootstrap_index": 4,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 55,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;ILjava/util/function/BiPredicate;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 58,
+          "opcode": "0x12",
+          "reference": {
+            "string": "climbing",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 60,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 61,
+          "opcode": "0xba",
+          "reference": {
+            "name": "test",
+            "descriptor": "()Ljava/util/function/BiPredicate;",
+            "bootstrap_index": 5,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 66,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;ILjava/util/function/BiPredicate;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 69,
+          "opcode": "0x12",
+          "reference": {
+            "string": "ladder_up",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 71,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 72,
+          "opcode": "0xba",
+          "reference": {
+            "name": "test",
+            "descriptor": "()Ljava/util/function/BiPredicate;",
+            "bootstrap_index": 6,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 77,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;ILjava/util/function/BiPredicate;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 80,
+          "opcode": "0x12",
+          "reference": {
+            "string": "ladder_stillness",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 82,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 83,
+          "opcode": "0xba",
+          "reference": {
+            "name": "test",
+            "descriptor": "()Ljava/util/function/BiPredicate;",
+            "bootstrap_index": 7,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 88,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;ILjava/util/function/BiPredicate;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 91,
+          "opcode": "0x12",
+          "reference": {
+            "string": "ladder_down",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 93,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 94,
+          "opcode": "0xba",
+          "reference": {
+            "name": "test",
+            "descriptor": "()Ljava/util/function/BiPredicate;",
+            "bootstrap_index": 8,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 99,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;ILjava/util/function/BiPredicate;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 102,
+          "opcode": "0x12",
+          "reference": {
+            "string": "fly",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 104,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 105,
+          "opcode": "0xba",
+          "reference": {
+            "name": "test",
+            "descriptor": "()Ljava/util/function/BiPredicate;",
+            "bootstrap_index": 9,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 110,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;ILjava/util/function/BiPredicate;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 113,
+          "opcode": "0x12",
+          "reference": {
+            "string": "elytra_fly",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 115,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 116,
+          "opcode": "0xba",
+          "reference": {
+            "name": "test",
+            "descriptor": "()Ljava/util/function/BiPredicate;",
+            "bootstrap_index": 10,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 121,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;ILjava/util/function/BiPredicate;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 124,
+          "opcode": "0x12",
+          "reference": {
+            "string": "swim_stand",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 126,
+          "opcode": "0x5"
+        },
+        {
+          "offset": 127,
+          "opcode": "0xba",
+          "reference": {
+            "name": "test",
+            "descriptor": "()Ljava/util/function/BiPredicate;",
+            "bootstrap_index": 11,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 132,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;ILjava/util/function/BiPredicate;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 135,
+          "opcode": "0x12",
+          "reference": {
+            "string": "attacked",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 137,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 140,
+          "opcode": "0x5"
+        },
+        {
+          "offset": 141,
+          "opcode": "0xba",
+          "reference": {
+            "name": "test",
+            "descriptor": "()Ljava/util/function/BiPredicate;",
+            "bootstrap_index": 12,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 146,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;ILjava/util/function/BiPredicate;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 149,
+          "opcode": "0x12",
+          "reference": {
+            "string": "jump",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 151,
+          "opcode": "0x5"
+        },
+        {
+          "offset": 152,
+          "opcode": "0xba",
+          "reference": {
+            "name": "test",
+            "descriptor": "()Ljava/util/function/BiPredicate;",
+            "bootstrap_index": 13,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 157,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;ILjava/util/function/BiPredicate;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 160,
+          "opcode": "0x12",
+          "reference": {
+            "string": "sneak",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 162,
+          "opcode": "0x5"
+        },
+        {
+          "offset": 163,
+          "opcode": "0xba",
+          "reference": {
+            "name": "test",
+            "descriptor": "()Ljava/util/function/BiPredicate;",
+            "bootstrap_index": 14,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 168,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;ILjava/util/function/BiPredicate;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 171,
+          "opcode": "0x12",
+          "reference": {
+            "string": "sneaking",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 173,
+          "opcode": "0x5"
+        },
+        {
+          "offset": 174,
+          "opcode": "0xba",
+          "reference": {
+            "name": "test",
+            "descriptor": "()Ljava/util/function/BiPredicate;",
+            "bootstrap_index": 15,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 179,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;ILjava/util/function/BiPredicate;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 182,
+          "opcode": "0x12",
+          "reference": {
+            "string": "run",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 184,
+          "opcode": "0x6"
+        },
+        {
+          "offset": 185,
+          "opcode": "0xba",
+          "reference": {
+            "name": "test",
+            "descriptor": "()Ljava/util/function/BiPredicate;",
+            "bootstrap_index": 16,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 190,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;ILjava/util/function/BiPredicate;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 193,
+          "opcode": "0x12",
+          "reference": {
+            "string": "walk",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 195,
+          "opcode": "0x6"
+        },
+        {
+          "offset": 196,
+          "opcode": "0xba",
+          "reference": {
+            "name": "test",
+            "descriptor": "()Ljava/util/function/BiPredicate;",
+            "bootstrap_index": 17,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 201,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;ILjava/util/function/BiPredicate;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 204,
+          "opcode": "0x12",
+          "reference": {
+            "string": "idle",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 206,
+          "opcode": "0x7"
+        },
+        {
+          "offset": 207,
+          "opcode": "0xba",
+          "reference": {
+            "name": "test",
+            "descriptor": "()Ljava/util/function/BiPredicate;",
+            "bootstrap_index": 18,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 212,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;ILjava/util/function/BiPredicate;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 215,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x12",
+          "encoded_operands_hex": "22"
+        },
+        {
+          "offset": 2,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0027"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 6,
+          "opcode": "0xba",
+          "encoded_operands_hex": "003a0000"
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "003d"
+        },
+        {
+          "offset": 14,
+          "opcode": "0x12",
+          "encoded_operands_hex": "3f"
+        },
+        {
+          "offset": 16,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 17,
+          "opcode": "0xba",
+          "encoded_operands_hex": "00440000"
+        },
+        {
+          "offset": 22,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0047"
+        },
+        {
+          "offset": 25,
+          "opcode": "0x12",
+          "encoded_operands_hex": "49"
+        },
+        {
+          "offset": 27,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 28,
+          "opcode": "0xba",
+          "encoded_operands_hex": "004e0000"
+        },
+        {
+          "offset": 33,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0047"
+        },
+        {
+          "offset": 36,
+          "opcode": "0x12",
+          "encoded_operands_hex": "50"
+        },
+        {
+          "offset": 38,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 39,
+          "opcode": "0xba",
+          "encoded_operands_hex": "00550000"
+        },
+        {
+          "offset": 44,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0047"
+        },
+        {
+          "offset": 47,
+          "opcode": "0x12",
+          "encoded_operands_hex": "57"
+        },
+        {
+          "offset": 49,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 50,
+          "opcode": "0xba",
+          "encoded_operands_hex": "005c0000"
+        },
+        {
+          "offset": 55,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0047"
+        },
+        {
+          "offset": 58,
+          "opcode": "0x12",
+          "encoded_operands_hex": "5e"
+        },
+        {
+          "offset": 60,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 61,
+          "opcode": "0xba",
+          "encoded_operands_hex": "00630000"
+        },
+        {
+          "offset": 66,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0047"
+        },
+        {
+          "offset": 69,
+          "opcode": "0x12",
+          "encoded_operands_hex": "65"
+        },
+        {
+          "offset": 71,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 72,
+          "opcode": "0xba",
+          "encoded_operands_hex": "006a0000"
+        },
+        {
+          "offset": 77,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0047"
+        },
+        {
+          "offset": 80,
+          "opcode": "0x12",
+          "encoded_operands_hex": "6c"
+        },
+        {
+          "offset": 82,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 83,
+          "opcode": "0xba",
+          "encoded_operands_hex": "00710000"
+        },
+        {
+          "offset": 88,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0047"
+        },
+        {
+          "offset": 91,
+          "opcode": "0x12",
+          "encoded_operands_hex": "73"
+        },
+        {
+          "offset": 93,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 94,
+          "opcode": "0xba",
+          "encoded_operands_hex": "00780000"
+        },
+        {
+          "offset": 99,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0047"
+        },
+        {
+          "offset": 102,
+          "opcode": "0x12",
+          "encoded_operands_hex": "7a"
+        },
+        {
+          "offset": 104,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 105,
+          "opcode": "0xba",
+          "encoded_operands_hex": "007f0000"
+        },
+        {
+          "offset": 110,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0047"
+        },
+        {
+          "offset": 113,
+          "opcode": "0x12",
+          "encoded_operands_hex": "81"
+        },
+        {
+          "offset": 115,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 116,
+          "opcode": "0xba",
+          "encoded_operands_hex": "00860000"
+        },
+        {
+          "offset": 121,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0047"
+        },
+        {
+          "offset": 124,
+          "opcode": "0x12",
+          "encoded_operands_hex": "88"
+        },
+        {
+          "offset": 126,
+          "opcode": "0x5",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 127,
+          "opcode": "0xba",
+          "encoded_operands_hex": "008d0000"
+        },
+        {
+          "offset": 132,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0047"
+        },
+        {
+          "offset": 135,
+          "opcode": "0x12",
+          "encoded_operands_hex": "8f"
+        },
+        {
+          "offset": 137,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0027"
+        },
+        {
+          "offset": 140,
+          "opcode": "0x5",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 141,
+          "opcode": "0xba",
+          "encoded_operands_hex": "00940000"
+        },
+        {
+          "offset": 146,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "003d"
+        },
+        {
+          "offset": 149,
+          "opcode": "0x12",
+          "encoded_operands_hex": "96"
+        },
+        {
+          "offset": 151,
+          "opcode": "0x5",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 152,
+          "opcode": "0xba",
+          "encoded_operands_hex": "009a0000"
+        },
+        {
+          "offset": 157,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0047"
+        },
+        {
+          "offset": 160,
+          "opcode": "0x12",
+          "encoded_operands_hex": "9c"
+        },
+        {
+          "offset": 162,
+          "opcode": "0x5",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 163,
+          "opcode": "0xba",
+          "encoded_operands_hex": "00a00000"
+        },
+        {
+          "offset": 168,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0047"
+        },
+        {
+          "offset": 171,
+          "opcode": "0x12",
+          "encoded_operands_hex": "a2"
+        },
+        {
+          "offset": 173,
+          "opcode": "0x5",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 174,
+          "opcode": "0xba",
+          "encoded_operands_hex": "00a60000"
+        },
+        {
+          "offset": 179,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0047"
+        },
+        {
+          "offset": 182,
+          "opcode": "0x12",
+          "encoded_operands_hex": "a8"
+        },
+        {
+          "offset": 184,
+          "opcode": "0x6",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 185,
+          "opcode": "0xba",
+          "encoded_operands_hex": "00ac0000"
+        },
+        {
+          "offset": 190,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0047"
+        },
+        {
+          "offset": 193,
+          "opcode": "0x12",
+          "encoded_operands_hex": "ae"
+        },
+        {
+          "offset": 195,
+          "opcode": "0x6",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 196,
+          "opcode": "0xba",
+          "encoded_operands_hex": "00b20000"
+        },
+        {
+          "offset": 201,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0047"
+        },
+        {
+          "offset": 204,
+          "opcode": "0x12",
+          "encoded_operands_hex": "0d"
+        },
+        {
+          "offset": 206,
+          "opcode": "0x7",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 207,
+          "opcode": "0xba",
+          "encoded_operands_hex": "00b60000"
+        },
+        {
+          "offset": 212,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0047"
+        },
+        {
+          "offset": 215,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/lang/String;Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;ILjava/util/function/BiPredicate;)V",
+      "access": 10,
+      "code_sha256": "cad02afc162febd447cbf001a9d3afe53a5988f115d64c8fa496755d4eb93835",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oOoO0Oo0oO0o00O0oO0ooooo",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 6,
+          "opcode": "0x1c"
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOoO0Oo0oO0o00O0oO0ooooo",
+            "name": "<init>",
+            "descriptor": "(Ljava/lang/String;Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;ILjava/util/function/BiPredicate;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/ooOoOOO00OO0OO0ooOOOo0Oo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oOoO0Oo0oO0o00O0oO0ooooo;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0xbb",
+          "encoded_operands_hex": "00b9"
+        },
+        {
+          "offset": 3,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 6,
+          "opcode": "0x1c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "00bb"
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "00c0"
+        },
+        {
+          "offset": 14,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/lang/String;ILjava/util/function/BiPredicate;)V",
+      "access": 10,
+      "code_sha256": "9561b5ac83c3f6e5a54573829c73ad13ac6db71309f1e4e1b90e3f8a5c75d572",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x1b"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;ILjava/util/function/BiPredicate;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "00c3"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x1b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "003d"
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/world/entity/player/Player;)F",
+      "access": 10,
+      "code_sha256": "9b033e74a0b62b7bcf9832496702b962454eb4ca8329fc811cec13c8b6d0ef13",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x12",
+          "reference": {
+            "cp_tag": 4,
+            "value": 20.0
+          }
+        },
+        {
+          "offset": 2,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 3,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/player/Player",
+            "name": "m_20182_",
+            "descriptor": "()Lnet/minecraft/world/phys/Vec3;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "net/minecraft/world/phys/Vec3",
+            "name": "f_82480_",
+            "descriptor": "D",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "net/minecraft/world/entity/player/Player",
+            "name": "f_19855_",
+            "descriptor": "D",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 13,
+          "opcode": "0x67"
+        },
+        {
+          "offset": 14,
+          "opcode": "0x90"
+        },
+        {
+          "offset": 15,
+          "opcode": "0x6a"
+        },
+        {
+          "offset": 16,
+          "opcode": "0xae"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x12",
+          "encoded_operands_hex": "c5"
+        },
+        {
+          "offset": 2,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 3,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00cb"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "00d1"
+        },
+        {
+          "offset": 9,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "00d4"
+        },
+        {
+          "offset": 13,
+          "opcode": "0x67",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 14,
+          "opcode": "0x90",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 15,
+          "opcode": "0x6a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 16,
+          "opcode": "0xae",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z",
+      "access": 4106,
+      "code_sha256": "95ef737cd8a13db65e3eb3c18e8816a5179dcbdf341309522ab00e95d5aae6d2",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xac"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z",
+      "access": 4106,
+      "code_sha256": "c282afa4a3b64ee034568004c7854443bb4c654f1c48a125231b010c6adc32ee",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/player/Player",
+            "name": "m_20096_",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x99",
+          "branch_target": 21
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "()F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0x12",
+          "reference": {
+            "cp_tag": 4,
+            "value": 0.05000000074505806
+          }
+        },
+        {
+          "offset": 13,
+          "opcode": "0x95"
+        },
+        {
+          "offset": 14,
+          "opcode": "0x9e",
+          "branch_target": 21
+        },
+        {
+          "offset": 17,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 18,
+          "opcode": "0xa7",
+          "branch_target": 22
+        },
+        {
+          "offset": 21,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 22,
+          "opcode": "0xac"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00d8"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0011"
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00dd"
+        },
+        {
+          "offset": 11,
+          "opcode": "0x12",
+          "encoded_operands_hex": "1c"
+        },
+        {
+          "offset": 13,
+          "opcode": "0x95",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 14,
+          "opcode": "0x9e",
+          "encoded_operands_hex": "0007"
+        },
+        {
+          "offset": 17,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 18,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 21,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 22,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+      "name": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z",
+      "access": 4106,
+      "code_sha256": "72ef200005dc31998e9058f95304e461ae68d42268c2fe75cb2f8e7f3588983e",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/player/Player",
+            "name": "m_20096_",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x99",
+          "branch_target": 18
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/player/Player",
+            "name": "m_20142_",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0x99",
+          "branch_target": 18
+        },
+        {
+          "offset": 14,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 15,
+          "opcode": "0xa7",
+          "branch_target": 19
+        },
+        {
+          "offset": 18,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 19,
+          "opcode": "0xac"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00d8"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x99",
+          "encoded_operands_hex": "000e"
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00e0"
+        },
+        {
+          "offset": 11,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0007"
+        },
+        {
+          "offset": 14,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 15,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 18,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 19,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+      "name": "oOOOo0OOO0ooooo0O00OO0o0",
+      "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z",
+      "access": 4106,
+      "code_sha256": "b1487947653776787445aa8daccc819e6800bc6d66fd15025dfd93e165b2db09",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/player/Player",
+            "name": "m_20096_",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x99",
+          "branch_target": 21
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/player/Player",
+            "name": "m_20089_",
+            "descriptor": "()Lnet/minecraft/world/entity/Pose;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "net/minecraft/world/entity/Pose",
+            "name": "CROUCHING",
+            "descriptor": "Lnet/minecraft/world/entity/Pose;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0xa6",
+          "branch_target": 21
+        },
+        {
+          "offset": 17,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 18,
+          "opcode": "0xa7",
+          "branch_target": 22
+        },
+        {
+          "offset": 21,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 22,
+          "opcode": "0xac"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00d8"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0011"
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00e4"
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "00ea"
+        },
+        {
+          "offset": 14,
+          "opcode": "0xa6",
+          "encoded_operands_hex": "0007"
+        },
+        {
+          "offset": 17,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 18,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 21,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 22,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+      "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+      "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z",
+      "access": 4106,
+      "code_sha256": "e200f598079f27259a294b8cd1ac94a844eb2c7423bc7ecb9248099467454ae4",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/player/Player",
+            "name": "m_20096_",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x99",
+          "branch_target": 34
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/player/Player",
+            "name": "m_20089_",
+            "descriptor": "()Lnet/minecraft/world/entity/Pose;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "net/minecraft/world/entity/Pose",
+            "name": "CROUCHING",
+            "descriptor": "Lnet/minecraft/world/entity/Pose;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0xa6",
+          "branch_target": 34
+        },
+        {
+          "offset": 17,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "()F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 21,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Math",
+            "name": "abs",
+            "descriptor": "(F)F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 24,
+          "opcode": "0x12",
+          "reference": {
+            "cp_tag": 4,
+            "value": 0.05000000074505806
+          }
+        },
+        {
+          "offset": 26,
+          "opcode": "0x95"
+        },
+        {
+          "offset": 27,
+          "opcode": "0x9e",
+          "branch_target": 34
+        },
+        {
+          "offset": 30,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 31,
+          "opcode": "0xa7",
+          "branch_target": 35
+        },
+        {
+          "offset": 34,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 35,
+          "opcode": "0xac"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00d8"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x99",
+          "encoded_operands_hex": "001e"
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00e4"
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "00ea"
+        },
+        {
+          "offset": 14,
+          "opcode": "0xa6",
+          "encoded_operands_hex": "0014"
+        },
+        {
+          "offset": 17,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00dd"
+        },
+        {
+          "offset": 21,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "00f0"
+        },
+        {
+          "offset": 24,
+          "opcode": "0x12",
+          "encoded_operands_hex": "1c"
+        },
+        {
+          "offset": 26,
+          "opcode": "0x95",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 27,
+          "opcode": "0x9e",
+          "encoded_operands_hex": "0007"
+        },
+        {
+          "offset": 30,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 31,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 34,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 35,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+      "name": "Ooooo0oooO0oooOOOoO0000O",
+      "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z",
+      "access": 4106,
+      "code_sha256": "d99907e1cd50d49e2552b07c020c4d18ca86f413fc70470421ea6f73ac0709c6",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/player/Player",
+            "name": "m_20096_",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x9a",
+          "branch_target": 18
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/player/Player",
+            "name": "m_20069_",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0x9a",
+          "branch_target": 18
+        },
+        {
+          "offset": 14,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 15,
+          "opcode": "0xa7",
+          "branch_target": 19
+        },
+        {
+          "offset": 18,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 19,
+          "opcode": "0xac"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00d8"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x9a",
+          "encoded_operands_hex": "000e"
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00f3"
+        },
+        {
+          "offset": 11,
+          "opcode": "0x9a",
+          "encoded_operands_hex": "0007"
+        },
+        {
+          "offset": 14,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 15,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 18,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 19,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+      "name": "oo0OoO00oOoo000O0000o0oo",
+      "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z",
+      "access": 4106,
+      "code_sha256": "7cf351b7e34617786bb753f5e4b572bce84682457b1a41a42307c738ad4f057f",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "net/minecraft/world/entity/player/Player",
+            "name": "f_20916_",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x9e",
+          "branch_target": 11
+        },
+        {
+          "offset": 7,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xa7",
+          "branch_target": 12
+        },
+        {
+          "offset": 11,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 12,
+          "opcode": "0xac"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "00f7"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x9e",
+          "encoded_operands_hex": "0007"
+        },
+        {
+          "offset": 7,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 8,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 11,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 12,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+      "name": "oooooooOOoOOoO00OooOo00O",
+      "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z",
+      "access": 4106,
+      "code_sha256": "4efe059abed9bd8a8d4e7557ebebd3f8ad71eee213bdb0cbb242722829a04be9",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/player/Player",
+            "name": "m_20069_",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x99",
+          "branch_target": 18
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/player/Player",
+            "name": "m_20096_",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0x9a",
+          "branch_target": 18
+        },
+        {
+          "offset": 14,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 15,
+          "opcode": "0xa7",
+          "branch_target": 19
+        },
+        {
+          "offset": 18,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 19,
+          "opcode": "0xac"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00f3"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x99",
+          "encoded_operands_hex": "000e"
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00d8"
+        },
+        {
+          "offset": 11,
+          "opcode": "0x9a",
+          "encoded_operands_hex": "0007"
+        },
+        {
+          "offset": 14,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 15,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 18,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 19,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+      "name": "Oo00o0OooOOo0ooOoo0oO0o0",
+      "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z",
+      "access": 4106,
+      "code_sha256": "f2f004941d9d46359c71ba1e31c3d97c04fa22cfa8e4251f30bd7a60984de41b",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/player/Player",
+            "name": "m_20089_",
+            "descriptor": "()Lnet/minecraft/world/entity/Pose;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "net/minecraft/world/entity/Pose",
+            "name": "FALL_FLYING",
+            "descriptor": "Lnet/minecraft/world/entity/Pose;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 7,
+          "opcode": "0xa6",
+          "branch_target": 21
+        },
+        {
+          "offset": 10,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/player/Player",
+            "name": "m_21255_",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0x99",
+          "branch_target": 21
+        },
+        {
+          "offset": 17,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 18,
+          "opcode": "0xa7",
+          "branch_target": 22
+        },
+        {
+          "offset": 21,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 22,
+          "opcode": "0xac"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00e4"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "00fa"
+        },
+        {
+          "offset": 7,
+          "opcode": "0xa6",
+          "encoded_operands_hex": "000e"
+        },
+        {
+          "offset": 10,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00fd"
+        },
+        {
+          "offset": 14,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0007"
+        },
+        {
+          "offset": 17,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 18,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 21,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 22,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+      "name": "o0OOO0o0o0OOo000oO00o00O",
+      "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z",
+      "access": 4106,
+      "code_sha256": "220da2593e91a4866e7abfec03131df975365e8a449920abab357a0dd5b1ffe4",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x4e"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0x99",
+          "branch_target": 32
+        },
+        {
+          "offset": 12,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 13,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 16,
+          "opcode": "0x4d"
+        },
+        {
+          "offset": 17,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O",
+            "name": "Oo00o0OooOOo0ooOoo0oO0o0",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 21,
+          "opcode": "0x9a",
+          "branch_target": 32
+        },
+        {
+          "offset": 24,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 25,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/ooOO000o0O0OOOoO0Oo0o0Oo;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 28,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/ooOO000o0O0OOOoO0Oo0o0Oo",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 31,
+          "opcode": "0xac"
+        },
+        {
+          "offset": 32,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 33,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/player/Player",
+            "name": "m_150110_",
+            "descriptor": "()Lnet/minecraft/world/entity/player/Abilities;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 36,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "net/minecraft/world/entity/player/Abilities",
+            "name": "f_35935_",
+            "descriptor": "Z",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 39,
+          "opcode": "0xac"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0100"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x4e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 6,
+          "opcode": "0xc1",
+          "encoded_operands_hex": "0102"
+        },
+        {
+          "offset": 9,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0017"
+        },
+        {
+          "offset": 12,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 13,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "0102"
+        },
+        {
+          "offset": 16,
+          "opcode": "0x4d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 17,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0104"
+        },
+        {
+          "offset": 21,
+          "opcode": "0x9a",
+          "encoded_operands_hex": "000b"
+        },
+        {
+          "offset": 24,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 25,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0107"
+        },
+        {
+          "offset": 28,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "010b"
+        },
+        {
+          "offset": 31,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 32,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 33,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "010f"
+        },
+        {
+          "offset": 36,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0115"
+        },
+        {
+          "offset": 39,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+      "name": "O0OooOo0oOOoOoOoOooO000o",
+      "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z",
+      "access": 4106,
+      "code_sha256": "c5f1aa3fcef7b14d8c653d5d09f29a3ee30eddd83b1e8c2bef91cd561fa816fa",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/player/Player",
+            "name": "m_6147_",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x99",
+          "branch_target": 20
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/world/entity/player/Player;)F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb"
+        },
+        {
+          "offset": 12,
+          "opcode": "0x96"
+        },
+        {
+          "offset": 13,
+          "opcode": "0x9c",
+          "branch_target": 20
+        },
+        {
+          "offset": 16,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 17,
+          "opcode": "0xa7",
+          "branch_target": 21
+        },
+        {
+          "offset": 20,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 21,
+          "opcode": "0xac"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0118"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0010"
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "011a"
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 12,
+          "opcode": "0x96",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 13,
+          "opcode": "0x9c",
+          "encoded_operands_hex": "0007"
+        },
+        {
+          "offset": 16,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 17,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 20,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 21,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+      "name": "ooOO000o0O0OOOoO0Oo0o0Oo",
+      "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z",
+      "access": 4106,
+      "code_sha256": "87d9db9dc2443a9f3ebdf09d2088e6824542642b809933df1d1ec00878cbc7d6",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/player/Player",
+            "name": "m_6147_",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x99",
+          "branch_target": 20
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/world/entity/player/Player;)F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb"
+        },
+        {
+          "offset": 12,
+          "opcode": "0x95"
+        },
+        {
+          "offset": 13,
+          "opcode": "0x9a",
+          "branch_target": 20
+        },
+        {
+          "offset": 16,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 17,
+          "opcode": "0xa7",
+          "branch_target": 21
+        },
+        {
+          "offset": 20,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 21,
+          "opcode": "0xac"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0118"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0010"
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "011a"
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 12,
+          "opcode": "0x95",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 13,
+          "opcode": "0x9a",
+          "encoded_operands_hex": "0007"
+        },
+        {
+          "offset": 16,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 17,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 20,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 21,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+      "name": "OOOo0OOOoOO0O00Oo00ooOOO",
+      "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z",
+      "access": 4106,
+      "code_sha256": "ab27e0983891961093884f27580d35ff97c5374a15c7539505a1368fd83428ca",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/player/Player",
+            "name": "m_6147_",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x99",
+          "branch_target": 20
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/world/entity/player/Player;)F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb"
+        },
+        {
+          "offset": 12,
+          "opcode": "0x95"
+        },
+        {
+          "offset": 13,
+          "opcode": "0x9e",
+          "branch_target": 20
+        },
+        {
+          "offset": 16,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 17,
+          "opcode": "0xa7",
+          "branch_target": 21
+        },
+        {
+          "offset": 20,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 21,
+          "opcode": "0xac"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0118"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0010"
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "011a"
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 12,
+          "opcode": "0x95",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 13,
+          "opcode": "0x9e",
+          "encoded_operands_hex": "0007"
+        },
+        {
+          "offset": 16,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 17,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 20,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 21,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+      "name": "oOo0o0000OOOO0OooooO00oo",
+      "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z",
+      "access": 4106,
+      "code_sha256": "1ee331dc0de0f1de64504fc6c73bc19aa7f582f0d558816fafc5073432a76248",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/player/Player",
+            "name": "m_20089_",
+            "descriptor": "()Lnet/minecraft/world/entity/Pose;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "net/minecraft/world/entity/Pose",
+            "name": "SWIMMING",
+            "descriptor": "Lnet/minecraft/world/entity/Pose;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 7,
+          "opcode": "0xa6",
+          "branch_target": 14
+        },
+        {
+          "offset": 10,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 11,
+          "opcode": "0xa7",
+          "branch_target": 15
+        },
+        {
+          "offset": 14,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 15,
+          "opcode": "0xac"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00e4"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "011d"
+        },
+        {
+          "offset": 7,
+          "opcode": "0xa6",
+          "encoded_operands_hex": "0007"
+        },
+        {
+          "offset": 10,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 11,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 14,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 15,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+      "name": "O0ooooOO0oOo000O0Oo00OOO",
+      "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z",
+      "access": 4106,
+      "code_sha256": "a6b723ac81370c361616dfff2a62e474e632786a34fb011e70b3b4179b06c986",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/player/Player",
+            "name": "m_20089_",
+            "descriptor": "()Lnet/minecraft/world/entity/Pose;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "net/minecraft/world/entity/Pose",
+            "name": "SWIMMING",
+            "descriptor": "Lnet/minecraft/world/entity/Pose;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 7,
+          "opcode": "0xa6",
+          "branch_target": 27
+        },
+        {
+          "offset": 10,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "()F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/Math",
+            "name": "abs",
+            "descriptor": "(F)F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 17,
+          "opcode": "0x12",
+          "reference": {
+            "cp_tag": 4,
+            "value": 0.05000000074505806
+          }
+        },
+        {
+          "offset": 19,
+          "opcode": "0x95"
+        },
+        {
+          "offset": 20,
+          "opcode": "0x9e",
+          "branch_target": 27
+        },
+        {
+          "offset": 23,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 24,
+          "opcode": "0xa7",
+          "branch_target": 28
+        },
+        {
+          "offset": 27,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 28,
+          "opcode": "0xac"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00e4"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "011d"
+        },
+        {
+          "offset": 7,
+          "opcode": "0xa6",
+          "encoded_operands_hex": "0014"
+        },
+        {
+          "offset": 10,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00dd"
+        },
+        {
+          "offset": 14,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "00f0"
+        },
+        {
+          "offset": 17,
+          "opcode": "0x12",
+          "encoded_operands_hex": "1c"
+        },
+        {
+          "offset": 19,
+          "opcode": "0x95",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 20,
+          "opcode": "0x9e",
+          "encoded_operands_hex": "0007"
+        },
+        {
+          "offset": 23,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 24,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 27,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 28,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+      "name": "OO0ooO00OoO00o0OO0OOooO0",
+      "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z",
+      "access": 4106,
+      "code_sha256": "147197894e34b60a08e672c891a39417cf465173b5732eb1c7cd37fc5b7d5c19",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/player/Player",
+            "name": "m_6069_",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xac"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0120"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+      "name": "Ooo0O0000OO0OOO0o0Oo0oOO",
+      "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z",
+      "access": 4106,
+      "code_sha256": "6c37552ba1c3d9bf40a92c2899a252d9ea529b80219d5cb8ed4d953d9ad91542",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/player/Player",
+            "name": "m_20089_",
+            "descriptor": "()Lnet/minecraft/world/entity/Pose;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "net/minecraft/world/entity/Pose",
+            "name": "SLEEPING",
+            "descriptor": "Lnet/minecraft/world/entity/Pose;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 7,
+          "opcode": "0xa6",
+          "branch_target": 14
+        },
+        {
+          "offset": 10,
+          "opcode": "0x4"
+        },
+        {
+          "offset": 11,
+          "opcode": "0xa7",
+          "branch_target": 15
+        },
+        {
+          "offset": 14,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 15,
+          "opcode": "0xac"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "00e4"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0123"
+        },
+        {
+          "offset": 7,
+          "opcode": "0xa6",
+          "encoded_operands_hex": "0007"
+        },
+        {
+          "offset": 10,
+          "opcode": "0x4",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 11,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 14,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 15,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+      "name": "o0o0Oooo00OoOoOOOooo0000",
+      "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z",
+      "access": 4106,
+      "code_sha256": "c019f3bbbe35d9943d41fcea5ff44c415347e121c4ddcf71e1f9a573d5b763d6",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/player/Player",
+            "name": "m_21209_",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xac"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0126"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+      "name": "ooooO0o00oO0Oo0OOo0O0O0o",
+      "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z",
+      "access": 4106,
+      "code_sha256": "d263b86a747ff1f5ca6a0e973dcbe0903de3be5934042760f627c111ca4cdbd9",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/player/Player",
+            "name": "m_21224_",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xac"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0129"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/ooOoOOO00OO0OO0ooOOOo0Oo",
+      "name": "<init>",
+      "descriptor": "()V",
+      "access": 1,
+      "code_sha256": "3cbf10796c8b68343919f56bd75d1061d3aefdbd02f8763313f594d895cc67df",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "java/lang/Object",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "0013"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/ooOoOOO00OO0OO0ooOOOo0Oo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oOoO0Oo0oO0o00O0oO0ooooo;)V",
+      "access": 9,
+      "code_sha256": "1e8dfd50f43286895b0b074ba082e0649ac1717c1f7e526121bf9aba61ffc636",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/ooOoOOO00OO0OO0ooOOOo0Oo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "[Lit/unimi/dsi/fastutil/objects/ReferenceArrayList;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOoO0Oo0oO0o00O0oO0ooooo",
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "()I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 7,
+          "opcode": "0x32"
+        },
+        {
+          "offset": 8,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/objects/ReferenceArrayList",
+            "name": "add",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 12,
+          "opcode": "0x57"
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0017"
+        },
+        {
+          "offset": 3,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "001d"
+        },
+        {
+          "offset": 7,
+          "opcode": "0x32",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 8,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0023"
+        },
+        {
+          "offset": 12,
+          "opcode": "0x57",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/ooOoOOO00OO0OO0ooOOOo0Oo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;",
+      "access": 1,
+      "code_sha256": "e0e305d3eb7b1b79e385259c6a1189fa1aba1642f2e57525ae80d083f885ad18",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oo0OooOO0oOoOoOoo00oO000",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo0OooOO0oOoOoOoo00oO000",
+            "name": "OO00OOOOo0Ooo0oo0o0Oo0OO",
+            "descriptor": "()Lnet/minecraft/world/entity/Entity;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 10,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "net/minecraft/world/entity/player/Player",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 13,
+          "opcode": "0x4e"
+        },
+        {
+          "offset": 14,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 15,
+          "opcode": "0xc7",
+          "branch_target": 22
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 21,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 22,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 23,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 26,
+          "opcode": "0xc1",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oo000oOOOo0OooOo0OO0o0oO",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 29,
+          "opcode": "0x99",
+          "branch_target": 36
+        },
+        {
+          "offset": 32,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 35,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 36,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 37,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo0oO00OO0oo000oOOOOoO0o",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/world/entity/player/Player;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 40,
+          "opcode": "0x36"
+        },
+        {
+          "offset": 42,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 44,
+          "opcode": "0x99",
+          "branch_target": 51
+        },
+        {
+          "offset": 47,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 50,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 51,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 52,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/player/Player",
+            "name": "m_20202_",
+            "descriptor": "()Lnet/minecraft/world/entity/Entity;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 55,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 57,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 59,
+          "opcode": "0xc6",
+          "branch_target": 74
+        },
+        {
+          "offset": 62,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 64,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/Entity",
+            "name": "m_6084_",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 67,
+          "opcode": "0x99",
+          "branch_target": 74
+        },
+        {
+          "offset": 70,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 73,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 74,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 75,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OoOoO00OooOoOOO0OO00o0Oo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/world/entity/player/Player;)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 78,
+          "opcode": "0x99",
+          "branch_target": 88
+        },
+        {
+          "offset": 81,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 82,
+          "opcode": "0x12",
+          "reference": {
+            "string": "parcool:ride_zipline",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 84,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOOO0Oo0O00oo0O0oO0OooO0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Ljava/lang/String;)Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 87,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 88,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 89,
+          "opcode": "0x36"
+        },
+        {
+          "offset": 91,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 93,
+          "opcode": "0x7"
+        },
+        {
+          "offset": 94,
+          "opcode": "0xa3",
+          "branch_target": 233
+        },
+        {
+          "offset": 97,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/ooOoOOO00OO0OO0ooOOOo0Oo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "[Lit/unimi/dsi/fastutil/objects/ReferenceArrayList;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 100,
+          "opcode": "0x15"
+        },
+        {
+          "offset": 102,
+          "opcode": "0x32"
+        },
+        {
+          "offset": 103,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/objects/ReferenceArrayList",
+            "name": "iterator",
+            "descriptor": "()Lit/unimi/dsi/fastutil/objects/ObjectListIterator;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 106,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 108,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 110,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/Iterator",
+            "name": "hasNext",
+            "descriptor": "()Z",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 115,
+          "opcode": "0x99",
+          "branch_target": 227
+        },
+        {
+          "offset": 118,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 120,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/Iterator",
+            "name": "next",
+            "descriptor": "()Ljava/lang/Object;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 125,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oOoO0Oo0oO0o00O0oO0ooooo",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 128,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 130,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 132,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOoO0Oo0oO0o00O0oO0ooooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Ljava/util/function/BiPredicate;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 135,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 136,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 137,
+          "opcode": "0xb9",
+          "reference": {
+            "owner": "java/util/function/BiPredicate",
+            "name": "test",
+            "descriptor": "(Ljava/lang/Object;Ljava/lang/Object;)Z",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 142,
+          "opcode": "0x99",
+          "branch_target": 224
+        },
+        {
+          "offset": 145,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 147,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOoO0Oo0oO0o00O0oO0ooooo",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "()Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 150,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 152,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 154,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOoO0Oo0oO0o00O0oO0ooooo",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 157,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 159,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 160,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 161,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 163,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 165,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOOoOOOo00OOO00OoOOoo000",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Ljava/lang/String;Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;)Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 168,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 170,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 172,
+          "opcode": "0xc6",
+          "branch_target": 178
+        },
+        {
+          "offset": 175,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 177,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 178,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 179,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 180,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 182,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 184,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OOO0O0O0oo0ooooo00oOOOO0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Ljava/lang/String;Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;)Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 187,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 189,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 191,
+          "opcode": "0xc7",
+          "branch_target": 205
+        },
+        {
+          "offset": 194,
+          "opcode": "0x2d"
+        },
+        {
+          "offset": 195,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 196,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 198,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 200,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0O0O000oOo00ooooO0O0o0o",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/world/entity/LivingEntity;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Ljava/lang/String;Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;)Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 203,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 205,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 207,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 208,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 210,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 212,
+          "opcode": "0xba",
+          "reference": {
+            "name": "get",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Ljava/lang/String;Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;)Ljava/util/function/Supplier;",
+            "bootstrap_index": 0,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 217,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/util/Objects",
+            "name": "requireNonNullElseGet",
+            "descriptor": "(Ljava/lang/Object;Ljava/util/function/Supplier;)Ljava/lang/Object;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 220,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 223,
+          "opcode": "0xb0"
+        },
+        {
+          "offset": 224,
+          "opcode": "0xa7",
+          "branch_target": 108
+        },
+        {
+          "offset": 227,
+          "opcode": "0x84"
+        },
+        {
+          "offset": 230,
+          "opcode": "0xa7",
+          "branch_target": 91
+        },
+        {
+          "offset": 233,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 236,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "002b"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "002d"
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0031"
+        },
+        {
+          "offset": 10,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "0033"
+        },
+        {
+          "offset": 13,
+          "opcode": "0x4e",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 14,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 15,
+          "opcode": "0xc7",
+          "encoded_operands_hex": "0007"
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0038"
+        },
+        {
+          "offset": 21,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 22,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 23,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "002b"
+        },
+        {
+          "offset": 26,
+          "opcode": "0xc1",
+          "encoded_operands_hex": "003a"
+        },
+        {
+          "offset": 29,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0007"
+        },
+        {
+          "offset": 32,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0038"
+        },
+        {
+          "offset": 35,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 36,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 37,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "003f"
+        },
+        {
+          "offset": 40,
+          "opcode": "0x36",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 42,
+          "opcode": "0x15",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 44,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0007"
+        },
+        {
+          "offset": 47,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0038"
+        },
+        {
+          "offset": 50,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 51,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 52,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0042"
+        },
+        {
+          "offset": 55,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "05",
+          "local_index": 5
+        },
+        {
+          "offset": 57,
+          "opcode": "0x19",
+          "encoded_operands_hex": "05",
+          "local_index": 5
+        },
+        {
+          "offset": 59,
+          "opcode": "0xc6",
+          "encoded_operands_hex": "000f"
+        },
+        {
+          "offset": 62,
+          "opcode": "0x19",
+          "encoded_operands_hex": "05",
+          "local_index": 5
+        },
+        {
+          "offset": 64,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0048"
+        },
+        {
+          "offset": 67,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0007"
+        },
+        {
+          "offset": 70,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0038"
+        },
+        {
+          "offset": 73,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 74,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 75,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "004b"
+        },
+        {
+          "offset": 78,
+          "opcode": "0x99",
+          "encoded_operands_hex": "000a"
+        },
+        {
+          "offset": 81,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 82,
+          "opcode": "0x12",
+          "encoded_operands_hex": "4d"
+        },
+        {
+          "offset": 84,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0050"
+        },
+        {
+          "offset": 87,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 88,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 89,
+          "opcode": "0x36",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 91,
+          "opcode": "0x15",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 93,
+          "opcode": "0x7",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 94,
+          "opcode": "0xa3",
+          "encoded_operands_hex": "008b"
+        },
+        {
+          "offset": 97,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0017"
+        },
+        {
+          "offset": 100,
+          "opcode": "0x15",
+          "encoded_operands_hex": "06",
+          "local_index": 6
+        },
+        {
+          "offset": 102,
+          "opcode": "0x32",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 103,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0054"
+        },
+        {
+          "offset": 106,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "07",
+          "local_index": 7
+        },
+        {
+          "offset": 108,
+          "opcode": "0x19",
+          "encoded_operands_hex": "07",
+          "local_index": 7
+        },
+        {
+          "offset": 110,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "005b0100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 115,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0070"
+        },
+        {
+          "offset": 118,
+          "opcode": "0x19",
+          "encoded_operands_hex": "07",
+          "local_index": 7
+        },
+        {
+          "offset": 120,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "005f0100",
+          "argument_slot_count": 1,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 125,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "0019"
+        },
+        {
+          "offset": 128,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 130,
+          "opcode": "0x19",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 132,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0062"
+        },
+        {
+          "offset": 135,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 136,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 137,
+          "opcode": "0xb9",
+          "encoded_operands_hex": "00680300",
+          "argument_slot_count": 3,
+          "reserved_zero": 0
+        },
+        {
+          "offset": 142,
+          "opcode": "0x99",
+          "encoded_operands_hex": "0052"
+        },
+        {
+          "offset": 145,
+          "opcode": "0x19",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 147,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "006b"
+        },
+        {
+          "offset": 150,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 152,
+          "opcode": "0x19",
+          "encoded_operands_hex": "08",
+          "local_index": 8
+        },
+        {
+          "offset": 154,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "006f"
+        },
+        {
+          "offset": 157,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "0a",
+          "local_index": 10
+        },
+        {
+          "offset": 159,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 160,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 161,
+          "opcode": "0x19",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 163,
+          "opcode": "0x19",
+          "encoded_operands_hex": "0a",
+          "local_index": 10
+        },
+        {
+          "offset": 165,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0074"
+        },
+        {
+          "offset": 168,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "0b",
+          "local_index": 11
+        },
+        {
+          "offset": 170,
+          "opcode": "0x19",
+          "encoded_operands_hex": "0b",
+          "local_index": 11
+        },
+        {
+          "offset": 172,
+          "opcode": "0xc6",
+          "encoded_operands_hex": "0006"
+        },
+        {
+          "offset": 175,
+          "opcode": "0x19",
+          "encoded_operands_hex": "0b",
+          "local_index": 11
+        },
+        {
+          "offset": 177,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 178,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 179,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 180,
+          "opcode": "0x19",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 182,
+          "opcode": "0x19",
+          "encoded_operands_hex": "0a",
+          "local_index": 10
+        },
+        {
+          "offset": 184,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "007b"
+        },
+        {
+          "offset": 187,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "0c",
+          "local_index": 12
+        },
+        {
+          "offset": 189,
+          "opcode": "0x19",
+          "encoded_operands_hex": "0c",
+          "local_index": 12
+        },
+        {
+          "offset": 191,
+          "opcode": "0xc7",
+          "encoded_operands_hex": "000e"
+        },
+        {
+          "offset": 194,
+          "opcode": "0x2d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 195,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 196,
+          "opcode": "0x19",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 198,
+          "opcode": "0x19",
+          "encoded_operands_hex": "0a",
+          "local_index": 10
+        },
+        {
+          "offset": 200,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "007e"
+        },
+        {
+          "offset": 203,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "0c",
+          "local_index": 12
+        },
+        {
+          "offset": 205,
+          "opcode": "0x19",
+          "encoded_operands_hex": "0c",
+          "local_index": 12
+        },
+        {
+          "offset": 207,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 208,
+          "opcode": "0x19",
+          "encoded_operands_hex": "09",
+          "local_index": 9
+        },
+        {
+          "offset": 210,
+          "opcode": "0x19",
+          "encoded_operands_hex": "0a",
+          "local_index": 10
+        },
+        {
+          "offset": 212,
+          "opcode": "0xba",
+          "encoded_operands_hex": "00900000"
+        },
+        {
+          "offset": 217,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0096"
+        },
+        {
+          "offset": 220,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "0035"
+        },
+        {
+          "offset": 223,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 224,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "ff8c"
+        },
+        {
+          "offset": 227,
+          "opcode": "0x84",
+          "encoded_operands_hex": "0601",
+          "local_index": 6,
+          "increment": 1
+        },
+        {
+          "offset": 230,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "ff75"
+        },
+        {
+          "offset": 233,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0038"
+        },
+        {
+          "offset": 236,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/ooOoOOO00OO0OO0ooOOOo0Oo",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Ljava/lang/String;Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;)Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;",
+      "access": 4106,
+      "code_sha256": "999079737461633f76939d5d129bdd16001a1b278920761bf1c2944ab5fcd509",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 2,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 3,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOOO0Oo0O00oo0O0oO0OooO0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Ljava/lang/String;Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;)Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 2,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 3,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0098"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/ooOoOOO00OO0OO0ooOOOo0Oo",
+      "name": "<clinit>",
+      "descriptor": "()V",
+      "access": 8,
+      "code_sha256": "bf86b6cf8ee1355f27b9b7907f7ffc4d70887678f358bccc8d174f43d293a6ff",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x8"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xbd",
+          "reference": {
+            "class_name": "it/unimi/dsi/fastutil/objects/ReferenceArrayList",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb3",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/ooOoOOO00OO0OO0ooOOOo0Oo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "[Lit/unimi/dsi/fastutil/objects/ReferenceArrayList;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 7,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 8,
+          "opcode": "0x3b"
+        },
+        {
+          "offset": 9,
+          "opcode": "0x1a"
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/ooOoOOO00OO0OO0ooOOOo0Oo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "[Lit/unimi/dsi/fastutil/objects/ReferenceArrayList;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 13,
+          "opcode": "0xbe"
+        },
+        {
+          "offset": 14,
+          "opcode": "0xa2",
+          "branch_target": 37
+        },
+        {
+          "offset": 17,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/ooOoOOO00OO0OO0ooOOOo0Oo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "[Lit/unimi/dsi/fastutil/objects/ReferenceArrayList;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 20,
+          "opcode": "0x1a"
+        },
+        {
+          "offset": 21,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "it/unimi/dsi/fastutil/objects/ReferenceArrayList",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 24,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 25,
+          "opcode": "0x10",
+          "immediate": 6
+        },
+        {
+          "offset": 27,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "it/unimi/dsi/fastutil/objects/ReferenceArrayList",
+            "name": "<init>",
+            "descriptor": "(I)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 30,
+          "opcode": "0x53"
+        },
+        {
+          "offset": 31,
+          "opcode": "0x84"
+        },
+        {
+          "offset": 34,
+          "opcode": "0xa7",
+          "branch_target": 9
+        },
+        {
+          "offset": 37,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x8",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xbd",
+          "encoded_operands_hex": "001f"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb3",
+          "encoded_operands_hex": "0017"
+        },
+        {
+          "offset": 7,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 8,
+          "opcode": "0x3b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 9,
+          "opcode": "0x1a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0017"
+        },
+        {
+          "offset": 13,
+          "opcode": "0xbe",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 14,
+          "opcode": "0xa2",
+          "encoded_operands_hex": "0017"
+        },
+        {
+          "offset": 17,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0017"
+        },
+        {
+          "offset": 20,
+          "opcode": "0x1a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 21,
+          "opcode": "0xbb",
+          "encoded_operands_hex": "001f"
+        },
+        {
+          "offset": 24,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 25,
+          "opcode": "0x10",
+          "encoded_operands_hex": "06"
+        },
+        {
+          "offset": 27,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "009c"
+        },
+        {
+          "offset": 30,
+          "opcode": "0x53",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 31,
+          "opcode": "0x84",
+          "encoded_operands_hex": "0001",
+          "local_index": 0,
+          "increment": 1
+        },
+        {
+          "offset": 34,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "ffe7"
+        },
+        {
+          "offset": 37,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOoO0Oo0oO0o00O0oO0ooooo",
+      "name": "<init>",
+      "descriptor": "(Ljava/lang/String;Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;ILjava/util/function/BiPredicate;)V",
+      "access": 1,
+      "code_sha256": "61653f8f9bad0a161f2e2893ad01daa353a635b71658e4b82b426884c597a1e2",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "java/lang/Object",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOoO0Oo0oO0o00O0oO0ooooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Ljava/lang/String;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 10,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOoO0Oo0oO0o00O0oO0ooooo",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 14,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 15,
+          "opcode": "0x1d"
+        },
+        {
+          "offset": 16,
+          "opcode": "0x3"
+        },
+        {
+          "offset": 17,
+          "opcode": "0x7"
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "net/minecraft/util/Mth",
+            "name": "m_14045_",
+            "descriptor": "(III)I",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 21,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOoO0Oo0oO0o00O0oO0ooooo",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 24,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 25,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 27,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOoO0Oo0oO0o00O0oO0ooooo",
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "Ljava/util/function/BiPredicate;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 30,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "0014"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "0016"
+        },
+        {
+          "offset": 9,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 10,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "0018"
+        },
+        {
+          "offset": 14,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 15,
+          "opcode": "0x1d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 16,
+          "opcode": "0x3",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 17,
+          "opcode": "0x7",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "001e"
+        },
+        {
+          "offset": 21,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "0020"
+        },
+        {
+          "offset": 24,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 25,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 27,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "0022"
+        },
+        {
+          "offset": 30,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOoO0Oo0oO0o00O0oO0ooooo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()Ljava/util/function/BiPredicate;",
+      "access": 1,
+      "code_sha256": "e8601800eb43540de362cdc4aa29dbee7b5cd554372a13598386fdb5d27d73f3",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOoO0Oo0oO0o00O0oO0ooooo",
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "Ljava/util/function/BiPredicate;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0022"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOoO0Oo0oO0o00O0oO0ooooo",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "code_sha256": "5d159aedaf5714f84326c9966981962b7474d34226b625adc14123ec9271eb51",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOoO0Oo0oO0o00O0oO0ooooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Ljava/lang/String;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0016"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOoO0Oo0oO0o00O0oO0ooooo",
+      "name": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;",
+      "access": 1,
+      "code_sha256": "0fbdf12e3c14b4247d4a032174948df3d0189afc28989b2075c42b7c33cae81d",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOoO0Oo0oO0o00O0oO0ooooo",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0018"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOoO0Oo0oO0o00O0oO0ooooo",
+      "name": "oOOOo0OOO0ooooo0O00OO0o0",
+      "descriptor": "()I",
+      "access": 1,
+      "code_sha256": "9bcb244defc50bbabfd2dd1d7b5d2d56007edc817c09fae83f8cc4ce6c06a85d",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOoO0Oo0oO0o00O0oO0ooooo",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "I",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xac"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0020"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xac",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOOO0Oo0O00oo0O0oO0OooO0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Ljava/lang/String;Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;)Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;",
+      "access": 9,
+      "code_sha256": "014466dd4cf3a34292fd275f1533364bbd4e52f0b9c20042b9b933eef80eba70",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+            "name": "o0OOO0o0o0OOo000oO00o00O",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0010"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0015"
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "001a"
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOOO0Oo0O00oo0O0oO0OooO0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Ljava/lang/String;)Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;",
+      "access": 9,
+      "code_sha256": "2707afdf0694d12de2dfd0da391b54bb491ef2e8782c09339b42c4a9e56b4a21",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+            "name": "o0OOO0o0o0OOo000oO00o00O",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0010"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "001f"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "001a"
+        },
+        {
+          "offset": 11,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOOO0Oo0O00oo0O0oO0OooO0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Ljava/lang/String;Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;I)Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;",
+      "access": 9,
+      "code_sha256": "fc7f738dabc2081411f23788fc67a5f351d6e38f377b98a39ef851626e59cdd6",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 2,
+          "opcode": "0x1d"
+        },
+        {
+          "offset": 3,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOO0o0o00o00Oo00oO00OooO",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Ljava/lang/String;I)Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 6,
+          "opcode": "0x99",
+          "branch_target": 20
+        },
+        {
+          "offset": 9,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+            "name": "o0OOO0o0o0OOo000oO00o00O",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 13,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 14,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 17,
+          "opcode": "0xa7",
+          "branch_target": 29
+        },
+        {
+          "offset": 20,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 21,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+            "name": "o0OOO0o0o0OOo000oO00o00O",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 24,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 25,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 26,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 29,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 32,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 2,
+          "opcode": "0x1d",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 3,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0026"
+        },
+        {
+          "offset": 6,
+          "opcode": "0x99",
+          "encoded_operands_hex": "000e"
+        },
+        {
+          "offset": 9,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0010"
+        },
+        {
+          "offset": 13,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 14,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "001f"
+        },
+        {
+          "offset": 17,
+          "opcode": "0xa7",
+          "encoded_operands_hex": "000c"
+        },
+        {
+          "offset": 20,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 21,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0010"
+        },
+        {
+          "offset": 24,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 25,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 26,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0015"
+        },
+        {
+          "offset": 29,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "001a"
+        },
+        {
+          "offset": 32,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOOO0Oo0O00oo0O0oO0OooO0",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Ljava/lang/String;)Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;",
+      "access": 9,
+      "code_sha256": "c45ad55d696d29afde8bdc46a598653c5ed86643a1e2edd9d013029c7b651676",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 2,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oOOO0Oo0O00oo0O0oO0OooO0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Ljava/lang/String;Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;)Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 2,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "002d"
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "002f"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOOO0Oo0O00oo0O0oO0OooO0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;",
+      "access": 1025
+    }
+  ],
+  "owner_declarations": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+      "declaration": {
+        "access": 33,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": [
+          {
+            "access": 25,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Ljava/lang/String;"
+          },
+          {
+            "access": 25,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Ljava/lang/String;"
+          },
+          {
+            "access": 25,
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "Ljava/lang/String;"
+          },
+          {
+            "access": 25,
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "Ljava/lang/String;"
+          },
+          {
+            "access": 25,
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "Ljava/lang/String;"
+          },
+          {
+            "access": 26,
+            "name": "Ooooo0oooO0oooOOOoO0000O",
+            "descriptor": "F"
+          }
+        ],
+        "methods": [
+          {
+            "access": 1,
+            "name": "<init>",
+            "descriptor": "()V"
+          },
+          {
+            "access": 9,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()V"
+          },
+          {
+            "access": 10,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;ILjava/util/function/BiPredicate;)V"
+          },
+          {
+            "access": 10,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;ILjava/util/function/BiPredicate;)V"
+          },
+          {
+            "access": 10,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/world/entity/player/Player;)F"
+          },
+          {
+            "access": 4106,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+          },
+          {
+            "access": 4106,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+          },
+          {
+            "access": 4106,
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+          },
+          {
+            "access": 4106,
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+          },
+          {
+            "access": 4106,
+            "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+            "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+          },
+          {
+            "access": 4106,
+            "name": "Ooooo0oooO0oooOOOoO0000O",
+            "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+          },
+          {
+            "access": 4106,
+            "name": "oo0OoO00oOoo000O0000o0oo",
+            "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+          },
+          {
+            "access": 4106,
+            "name": "oooooooOOoOOoO00OooOo00O",
+            "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+          },
+          {
+            "access": 4106,
+            "name": "Oo00o0OooOOo0ooOoo0oO0o0",
+            "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+          },
+          {
+            "access": 4106,
+            "name": "o0OOO0o0o0OOo000oO00o00O",
+            "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+          },
+          {
+            "access": 4106,
+            "name": "O0OooOo0oOOoOoOoOooO000o",
+            "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+          },
+          {
+            "access": 4106,
+            "name": "ooOO000o0O0OOOoO0Oo0o0Oo",
+            "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+          },
+          {
+            "access": 4106,
+            "name": "OOOo0OOOoOO0O00Oo00ooOOO",
+            "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+          },
+          {
+            "access": 4106,
+            "name": "oOo0o0000OOOO0OooooO00oo",
+            "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+          },
+          {
+            "access": 4106,
+            "name": "O0ooooOO0oOo000O0Oo00OOO",
+            "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+          },
+          {
+            "access": 4106,
+            "name": "OO0ooO00OoO00o0OO0OOooO0",
+            "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+          },
+          {
+            "access": 4106,
+            "name": "Ooo0O0000OO0OOO0o0Oo0oOO",
+            "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+          },
+          {
+            "access": 4106,
+            "name": "o0o0Oooo00OoOoOOOooo0000",
+            "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+          },
+          {
+            "access": 4106,
+            "name": "ooooO0o00oO0Oo0OOo0O0O0o",
+            "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+          }
+        ]
+      }
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/ooOoOOO00OO0OO0ooOOOo0Oo",
+      "declaration": {
+        "access": 33,
+        "super": "java/lang/Object",
+        "interfaces": [
+          "com/elfmcys/yesstevemodel/oOOO0Oo0O00oo0O0oO0OooO0"
+        ],
+        "fields": [
+          {
+            "access": 26,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "[Lit/unimi/dsi/fastutil/objects/ReferenceArrayList;"
+          }
+        ],
+        "methods": [
+          {
+            "access": 1,
+            "name": "<init>",
+            "descriptor": "()V"
+          },
+          {
+            "access": 9,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/oOoO0Oo0oO0o00O0oO0ooooo;)V"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;"
+          },
+          {
+            "access": 4106,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Ljava/lang/String;Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;)Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;"
+          },
+          {
+            "access": 8,
+            "name": "<clinit>",
+            "descriptor": "()V"
+          }
+        ]
+      }
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOoO0Oo0oO0o00O0oO0ooooo",
+      "declaration": {
+        "access": 33,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": [
+          {
+            "access": 18,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Ljava/lang/String;"
+          },
+          {
+            "access": 18,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;"
+          },
+          {
+            "access": 18,
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "I"
+          },
+          {
+            "access": 18,
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "Ljava/util/function/BiPredicate;"
+          }
+        ],
+        "methods": [
+          {
+            "access": 1,
+            "name": "<init>",
+            "descriptor": "(Ljava/lang/String;Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;ILjava/util/function/BiPredicate;)V"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Ljava/util/function/BiPredicate;"
+          },
+          {
+            "access": 1,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "()Ljava/lang/String;"
+          },
+          {
+            "access": 1,
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;"
+          },
+          {
+            "access": 1,
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "()I"
+          }
+        ]
+      }
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOOO0Oo0O00oo0O0oO0OooO0",
+      "declaration": {
+        "access": 1537,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": [],
+        "methods": [
+          {
+            "access": 9,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Ljava/lang/String;Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;)Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;"
+          },
+          {
+            "access": 9,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Ljava/lang/String;)Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;"
+          },
+          {
+            "access": 9,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Ljava/lang/String;Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;I)Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;"
+          },
+          {
+            "access": 9,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Ljava/lang/String;)Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;"
+          },
+          {
+            "access": 1025,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;"
+          }
+        ]
+      }
+    }
+  ],
+  "bootstrap_and_constant_evidence": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+      "constant_values": {
+        "Oo0Oo0o00O00Oo0OOoOOoooo": {
+          "cp_tag": 8,
+          "value": "idle"
+        },
+        "o0OOooo0o0OO00OoOOOo0o0O": {
+          "cp_tag": 8,
+          "value": "hover"
+        },
+        "O00OOOooOoooOoo0o0o0oO0O": {
+          "cp_tag": 8,
+          "value": "hover_fadeout"
+        },
+        "oOOOo0OOO0ooooo0O00OO0o0": {
+          "cp_tag": 8,
+          "value": "focus"
+        },
+        "OOOOo0O0oO0OOo0O0O0Oo0O0": {
+          "cp_tag": 8,
+          "value": "empty"
+        },
+        "Ooooo0oooO0oooOOOoO0000O": {
+          "cp_tag": 4,
+          "value": 0.05000000074505806
+        }
+      },
+      "bootstrap_methods": [
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "(Ljava/lang/Object;Ljava/lang/Object;)Z"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+                "name": "ooooO0o00oO0Oo0OOo0O0O0o",
+                "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+            }
+          ]
+        },
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "(Ljava/lang/Object;Ljava/lang/Object;)Z"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+                "name": "o0o0Oooo00OoOoOOOooo0000",
+                "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+            }
+          ]
+        },
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "(Ljava/lang/Object;Ljava/lang/Object;)Z"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+                "name": "Ooo0O0000OO0OOO0o0Oo0oOO",
+                "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+            }
+          ]
+        },
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "(Ljava/lang/Object;Ljava/lang/Object;)Z"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+                "name": "OO0ooO00OoO00o0OO0OOooO0",
+                "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+            }
+          ]
+        },
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "(Ljava/lang/Object;Ljava/lang/Object;)Z"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+                "name": "O0ooooOO0oOo000O0Oo00OOO",
+                "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+            }
+          ]
+        },
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "(Ljava/lang/Object;Ljava/lang/Object;)Z"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+                "name": "oOo0o0000OOOO0OooooO00oo",
+                "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+            }
+          ]
+        },
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "(Ljava/lang/Object;Ljava/lang/Object;)Z"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+                "name": "OOOo0OOOoOO0O00Oo00ooOOO",
+                "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+            }
+          ]
+        },
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "(Ljava/lang/Object;Ljava/lang/Object;)Z"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+                "name": "ooOO000o0O0OOOoO0Oo0o0Oo",
+                "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+            }
+          ]
+        },
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "(Ljava/lang/Object;Ljava/lang/Object;)Z"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+                "name": "O0OooOo0oOOoOoOoOooO000o",
+                "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+            }
+          ]
+        },
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "(Ljava/lang/Object;Ljava/lang/Object;)Z"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+                "name": "o0OOO0o0o0OOo000oO00o00O",
+                "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+            }
+          ]
+        },
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "(Ljava/lang/Object;Ljava/lang/Object;)Z"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+                "name": "Oo00o0OooOOo0ooOoo0oO0o0",
+                "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+            }
+          ]
+        },
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "(Ljava/lang/Object;Ljava/lang/Object;)Z"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+                "name": "oooooooOOoOOoO00OooOo00O",
+                "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+            }
+          ]
+        },
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "(Ljava/lang/Object;Ljava/lang/Object;)Z"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+                "name": "oo0OoO00oOoo000O0000o0oo",
+                "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+            }
+          ]
+        },
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "(Ljava/lang/Object;Ljava/lang/Object;)Z"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+                "name": "Ooooo0oooO0oooOOOoO0000O",
+                "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+            }
+          ]
+        },
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "(Ljava/lang/Object;Ljava/lang/Object;)Z"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+                "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+                "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+            }
+          ]
+        },
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "(Ljava/lang/Object;Ljava/lang/Object;)Z"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+                "name": "oOOOo0OOO0ooooo0O00OO0o0",
+                "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+            }
+          ]
+        },
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "(Ljava/lang/Object;Ljava/lang/Object;)Z"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+                "name": "O00OOOooOoooOoo0o0o0oO0O",
+                "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+            }
+          ]
+        },
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "(Ljava/lang/Object;Ljava/lang/Object;)Z"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+                "name": "o0OOooo0o0OO00OoOOOo0o0O",
+                "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+            }
+          ]
+        },
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "(Ljava/lang/Object;Ljava/lang/Object;)Z"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/OOoOOoOO00ooo0Ooo0o000O0",
+                "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+                "descriptor": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "(Lnet/minecraft/world/entity/player/Player;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/ooOoOOO00OO0OO0ooOOOo0Oo",
+      "constant_values": {},
+      "bootstrap_methods": [
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "()Ljava/lang/Object;"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/ooOoOOO00OO0OO0ooOOOo0Oo",
+                "name": "o0OOooo0o0OO00OoOOOo0o0O",
+                "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Ljava/lang/String;Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;)Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "()Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOoO0Oo0oO0o00O0oO0ooooo",
+      "constant_values": {},
+      "bootstrap_methods": []
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOOO0Oo0O00oo0O0oO0OooO0",
+      "constant_values": {},
+      "bootstrap_methods": []
+    }
+  ],
+  "source_tracks": [
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/AnimationRegister.java",
+      "sha256": "71ef5252faa478906f762c7eb17f777f886ef8a4713db8e0540a2e7ee18f31ad",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6"
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/predicate/PlayerMainPredicate.java",
+      "sha256": "b965cca3908e003d59301a982f22ae17aed30b5b8dc26bfd4551179d50fae940",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6"
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/AnimationState.java",
+      "sha256": "173e9a5dd43e4ef0e86747e9e544883691e096007823abda82940dd229f531ef",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6"
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/predicate/IAnimationPredicate.java",
+      "sha256": "5eecf8fceffcdca32b72bd89fe680a34dceb5b93be449e14f0fa77831f266500",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6"
+    }
+  ],
+  "review_status": "PRIMARY_STATIC_REVIEW_ONLY",
+  "central_mapping_promoted": false
+}
