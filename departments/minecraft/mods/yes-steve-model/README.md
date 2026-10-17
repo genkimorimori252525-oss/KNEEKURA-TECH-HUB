@@ -211,6 +211,11 @@ controls passed; [verification](KEYFRAME-PRODUCER-VERIFICATION-2026-10-17.json).
 with strict evidence checks, but independent semantic review is still pending and
 it adds no central mappings yet.
 
+[Easing/raw-keyframe preparation](EASING-RAW-FACTORY-RECOVERY-2026-10-17.md) now
+records Java factory selection and initialization/aliasing semantics with 162 strict
+checks and 16 corruption controls. Independent review is pending; the central
+mapping count remains 669.
+
 ## Important limits
 
 - Public release-line source candidate equivalence to the distributed JAR is not proven.

@@ -73,3 +73,7 @@ Keyframe producers and IBone Java buffer writes are in progress; do not stop her
 October 17 follow-on: keyframe-producer methods reviewed, total 669 mappings.
 Java bone-state/allocation evidence is statically checked but awaits independent
 semantic review. Continue easing/raw-keyframe factory and Java scheduling ownership.
+
+Easing/raw-keyframe preparation now has complete bounded snapshots and strict
+regression checks, pending independent review. Continue controller production,
+transition homogeneity and Java schedule/wait ownership; no task stop implied.
