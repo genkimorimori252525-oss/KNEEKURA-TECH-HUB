@@ -254,3 +254,8 @@ View/render/texture callbacks are joined; query first-person and helper first-
 person differ in shadow handling, and texture fallback still depends on model
 container availability. Continue specialized bone-coordinate and side-effect
 functions with explicit units/emission/native boundaries.
+
+Bone query views/units and tracking mutation are joined to exact buffer getters.
+Absolute-pivot freshness/frame/native producer remain unproven; output stride4
+is preserved. Continue smoothing function state/key reuse and manager timing,
+then side-effect gates, without treating queries as uniformly pure operations.
