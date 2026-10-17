@@ -265,7 +265,9 @@ class ToolkitTests(unittest.TestCase):
              mock.patch('subprocess.run', side_effect=run) as spawn:
             result = self.tool.install_rea({'version': '6.5.0'}, self.cache)
         argv = spawn.call_args.args[0]
-        self.assertEqual(argv[:3], ['node', str(npm), 'install'])
+        self.assertEqual(argv[0], 'node')
+        self.assertEqual(argv[2], 'install')
+        self.assertTrue(Path(argv[1]).samefile(npm))
         for flag in ('--prefix', '--ignore-scripts', '--no-audit', '--no-fund'):
             self.assertIn(flag, argv)
         self.assertNotIn('--global', argv)
@@ -289,7 +291,8 @@ class ToolkitTests(unittest.TestCase):
         with mock.patch('shutil.which', return_value=str(npm_cmd)), \
              mock.patch('subprocess.run', side_effect=run) as spawn:
             self.tool.install_rea({'version': '6.5.0'}, self.cache)
-        self.assertEqual(spawn.call_args.args[0][:2], ['node', str(npm_js)])
+        self.assertEqual(spawn.call_args.args[0][0], 'node')
+        self.assertTrue(Path(spawn.call_args.args[0][1]).samefile(npm_js))
         self.assertIs(spawn.call_args.kwargs['shell'], False)
 
     def test_other_local_npm_project_is_not_overwritten(self):
