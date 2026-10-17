@@ -426,3 +426,5 @@ bounded runtime observation rather than protection bypass.
 - [Attachment/render navigation and bounded batch](ATTACHMENT-RENDER-INDEX-2026-10-17.md): seven connected dossiers plus shared-adapter overlap checks.
 
 - [Vehicle/projectile render entry](VEHICLE-PROJECTILE-RENDER-RECOVERY-2026-10-17.md): outer invisibility gate, OR/AND pass distinction, transforms and culling boundary.
+
+- [Dispatcher replacement routing](DISPATCHER-RENDER-REPLACEMENT-RECOVERY-2026-10-17.md): conditional original-call suppression, direct overloads, yaw adapters and fishing-hook mutation.
