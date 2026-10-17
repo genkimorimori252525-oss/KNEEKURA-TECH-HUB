@@ -1,0 +1,187 @@
+{
+  "checkpoint": "2026-10-17-JAVA-CONTINUATION",
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "cohorts": [
+    {
+      "cohort": "BEDROCK-CONTROLLER",
+      "tool": "bedrock_controller_ysm_265.py",
+      "tool_sha256": "e2dc815577a755e208bb2f8eaf450351385c56e2ec64041fa97fcc2544197cce",
+      "evidence_sha256": "b8b7d314bfa060afa0b55ba826a336c04447ed6d39294618d937b0a0f4ac32d1",
+      "checks": 200,
+      "negative_controls": 20,
+      "pass": true,
+      "independent_semantic_review": "NOT_RUN"
+    },
+    {
+      "cohort": "ANIMATABLE-FRAME",
+      "tool": "animatable_frame_ysm_265.py",
+      "tool_sha256": "565da18532d22158a72f991aa0fcbebb1b0e3a01d84dd4a7f0a60edbcf9d208d",
+      "evidence_sha256": "e8006720d06653de361388b91786e81516939249f675cf4406a70a8d24f2fe5b",
+      "checks": 383,
+      "negative_controls": 19,
+      "pass": true,
+      "independent_semantic_review": "NOT_RUN"
+    },
+    {
+      "cohort": "ASYNC-ANIMATION",
+      "tool": "async_animation_ysm_265.py",
+      "tool_sha256": "9d7def233ba4d3a505d8f6b51ea9254044f403ed79681bffe778b849f7b8abf5",
+      "evidence_sha256": "0813794f33cf5963f8c811327608cab772de0dc6d6710a9cb95acd590568061f",
+      "checks": 253,
+      "negative_controls": 17,
+      "pass": true,
+      "independent_semantic_review": "NOT_RUN"
+    },
+    {
+      "cohort": "ANIMATABLE-OVERRIDE",
+      "tool": "animatable_override_ysm_265.py",
+      "tool_sha256": "df61eed7c0a8d7221e1f4b06fd3eb1948c31dbf119222364014e6e782125fc2f",
+      "evidence_sha256": "4b16e626490c746e0ba2e0e985579548ab6e259773293651a2f25cbc7b8189d1",
+      "checks": 3,
+      "negative_controls": 5,
+      "pass": true,
+      "independent_semantic_review": "NOT_RUN"
+    },
+    {
+      "cohort": "WORLD-RENDER-HOOK",
+      "tool": "mixin_annotations_ysm_265.py",
+      "tool_sha256": "349f92087349f4ef5817aee3ca6e5c98617dac47f844a3a76107d0272e01f0e8",
+      "evidence_sha256": "31e48b5cecebb58ceb1ea79d8e8aa6422324e168ce9e8fff1c0aa065c597ce27",
+      "checks": 1,
+      "negative_controls": 5,
+      "pass": true,
+      "independent_semantic_review": "NOT_RUN"
+    },
+    {
+      "cohort": "MODEL-READINESS-SCOPE",
+      "tool": "model_readiness_scope_ysm_265.py",
+      "tool_sha256": "2a30eb269f20bae8269eea5197a5da60a70301ecd0915cab3003e9faea83e996",
+      "evidence_sha256": "e7533627f17112687f8adb06d5b5a385fe869fa956026393f61bad7a19a4c713",
+      "checks": 400,
+      "negative_controls": 15,
+      "pass": true,
+      "independent_semantic_review": "NOT_RUN"
+    },
+    {
+      "cohort": "TEXTURE-HOLDER-LIFETIME",
+      "tool": "texture_holder_lifetime_ysm_265.py",
+      "tool_sha256": "eb646bd3a031dc464c4a6a231ec1209bcdabe15f2075c5739c18b413172606e9",
+      "evidence_sha256": "1c67df6044c7859c199e3c61081c08e76a108b73b1ecf13605f7a76081bc35fb",
+      "checks": 118,
+      "negative_controls": 15,
+      "pass": true,
+      "independent_semantic_review": "NOT_RUN"
+    },
+    {
+      "cohort": "RENDER-SELECTION",
+      "tool": "render_selection_ysm_265.py",
+      "tool_sha256": "e899f35a3bddadae1cd787a5411ed9512e3856a759e9f234dd80ec7c1651765e",
+      "evidence_sha256": "a42e6768b64746dbb3b7a541b63c188c6d3986f45a490a8babc2cf6b94df9f8c",
+      "checks": 289,
+      "negative_controls": 16,
+      "pass": true,
+      "independent_semantic_review": "NOT_RUN"
+    },
+    {
+      "cohort": "JAVA-RENDER-BOUNDARY",
+      "tool": "java_render_boundary_ysm_265.py",
+      "tool_sha256": "71b9f045b5e041fca64cb762187adf72d688bd3a131f51a44556fc4af5ae957d",
+      "evidence_sha256": "357be783e1c6332f2dfd52c094d6947e875375dd329a3adfcd757e55bc6ec147",
+      "checks": 128,
+      "negative_controls": 16,
+      "pass": true,
+      "independent_semantic_review": "NOT_RUN"
+    },
+    {
+      "cohort": "STATE-TRACKER-INPUT",
+      "tool": "state_tracker_input_ysm_265.py",
+      "tool_sha256": "199f6f685e8fc0d49a20f72648d25e5dea6209a27dd69906574abddec6677fb2",
+      "evidence_sha256": "05363aa7570bc61b6ba4178ae0d94a0cc5310f977a7016116bc58864302570bd",
+      "checks": 129,
+      "negative_controls": 15,
+      "pass": true,
+      "independent_semantic_review": "NOT_RUN"
+    },
+    {
+      "cohort": "MOVEMENT-QUERY",
+      "tool": "movement_query_ysm_265.py",
+      "tool_sha256": "b791e185dae5fd4a039d9a5f29ae0e1c60950279b99dfde71c52eefd0ebf9e47",
+      "evidence_sha256": "c71224b5666f3f73159857c1608169b327b3e1480148039a42b0300aa85074b7",
+      "checks": 74,
+      "negative_controls": 11,
+      "pass": true,
+      "independent_semantic_review": "NOT_RUN"
+    },
+    {
+      "cohort": "VARIABLE-CONVERSION",
+      "tool": "variable_conversion_ysm_265.py",
+      "tool_sha256": "845ed3c1923ee8469f01632b846cb8738cbf7d6d804d1da613d3ddf2b7619afd",
+      "evidence_sha256": "0899f365ec1b888ce7223116d01f4753baa7728724150dd43f6e79c8db94c3fd",
+      "checks": 246,
+      "negative_controls": 12,
+      "pass": true,
+      "independent_semantic_review": "NOT_RUN"
+    },
+    {
+      "cohort": "VARIABLE-AST-RETURN",
+      "tool": "variable_ast_return_ysm_265.py",
+      "tool_sha256": "54ef4b9fb2dfb866f1b02469665758a7a21a5f8338b0b3c9eb04ab5b61fa11a2",
+      "evidence_sha256": "46e6c19a77db371c9aea0ec1d216e83c537090fe4d11b61b34265e75a4dd073d",
+      "checks": 167,
+      "negative_controls": 11,
+      "pass": true,
+      "independent_semantic_review": "NOT_RUN"
+    },
+    {
+      "cohort": "PARSER-BINDING-STORAGE",
+      "tool": "parser_binding_storage_ysm_265.py",
+      "tool_sha256": "417e9a60394063f3e673ac584f2fd1513c0306143302341aaba4190fa5524dd2",
+      "evidence_sha256": "c36a6fa05e44e4cf16fd24dd80f6ceb0f7ccb8d1efb057fee8f07a461b1bd8b6",
+      "checks": 258,
+      "negative_controls": 12,
+      "pass": true,
+      "independent_semantic_review": "NOT_RUN"
+    },
+    {
+      "cohort": "RUNTIME-STORAGE-FRAMES",
+      "tool": "runtime_storage_frames_ysm_265.py",
+      "tool_sha256": "39816f254474df32eed5c2a48a345e2b312eda5f9c284e8525738fab75e69c78",
+      "evidence_sha256": "7fa55272e1a13ea56704a50da6d190233ec0c536e29c969164dcabd322639bdc",
+      "checks": 475,
+      "negative_controls": 13,
+      "pass": true,
+      "independent_semantic_review": "NOT_RUN"
+    },
+    {
+      "cohort": "STORAGE-CALLERS",
+      "tool": "storage_callers_ysm_265.py",
+      "tool_sha256": "1c17b1df41c68ac1f22fc4bca16113ccfe978064896724e47211b3e223bb52db",
+      "evidence_sha256": "06c8afaee9af984916706eed133faf9b44da9bc0810a8c281d08f65a06486ce7",
+      "checks": 2,
+      "negative_controls": 5,
+      "pass": true,
+      "independent_semantic_review": "NOT_RUN"
+    },
+    {
+      "cohort": "FUNCTION-LOOP-ORDER",
+      "tool": "function_loop_order_ysm_265.py",
+      "tool_sha256": "a4d81f3ac65ecacd660b4d87c70f187cadbec08b0c61d8fdea0849c9ddcdd264",
+      "evidence_sha256": "62060f948c5ecb17b245ec8861ef2206e97707793f1cd19a9acc6a8df2a89f8d",
+      "checks": 172,
+      "negative_controls": 12,
+      "pass": true,
+      "independent_semantic_review": "NOT_RUN"
+    }
+  ],
+  "captured_method_records_including_overlap": 596,
+  "unique_captured_method_declarations": 558,
+  "owners_with_captured_methods": 70,
+  "overlap_conflicts": [],
+  "central_map_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
+  "central_map_669_unchanged": true,
+  "runtime_executed": false,
+  "whole_repo_ci_run": false,
+  "semantic_completion_percentage": null,
+  "counts_are_evidence_inventory_not_semantic_completion": true,
+  "pass": true
+}

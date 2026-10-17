@@ -15,6 +15,13 @@ frontier source, community reconnaissance and comparative implementations are ke
 
 No Minecraft implementation code is changed here.
 
+## Latest connected Java research
+
+Start with [the October17 pipeline index](JAVA-PIPELINE-INDEX-2026-10-17.md) for
+the state/query, controller, scheduler, storage and render-boundary chain.
+The central map remains669; recent cohorts are primary static analysis pending
+independent semantic review. [Scoped batch receipt](JAVA-PIPELINE-CHECKPOINT-2026-10-17.json).
+
 ## DISTRIBUTED ANCHOR
 
 Official Modrinth release:
