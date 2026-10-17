@@ -418,3 +418,5 @@ bounded runtime observation rather than protection bypass.
 - [Passenger positioning and optional hat selection](PASSENGER-HAT-ATTACHMENT-RECOVERY-2026-10-17.md): capability/list-index gates, local pose transforms and provider selection.
 
 - [Player render entry and event ordering](PLAYER-RENDER-ENTRY-RECOVERY-2026-10-17.md): default layers, cancellation and separate texture reads.
+
+- [First-person render and registry](FIRST-PERSON-RENDER-REGISTRY-RECOVERY-2026-10-17.md): cached entity, arm-mode arguments, reload and optional layer timing.
