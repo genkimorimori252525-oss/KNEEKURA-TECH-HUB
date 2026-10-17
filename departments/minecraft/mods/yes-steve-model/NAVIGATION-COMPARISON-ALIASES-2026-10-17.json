@@ -1151,6 +1151,86 @@
       "source_path": "src/main/java/com/elfmcys/yesstevemodel/mixin/ServerPlayerMixin.java",
       "source_sha256": "5bef4c0a002bc021010966497ef12cc718c8ad64938c978f9ab701e730820da4",
       "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oO000OOo0o000oOoo0O000Oo",
+      "label": "ServerInfo",
+      "evidence": "CHANNEL-HANDSHAKE-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "ca8c7dfa0e83afabe9255b5e346216e6a80a0696af7905c90d4d3901cbd76fcd",
+      "document": "CHANNEL-HANDSHAKE-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/network/message/ServerInfo.java",
+      "source_sha256": "cb56be43d819858c57dfd1ba7516755f95893a198a228450eb4c93da72f300d5",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0O0oo00OO00oO0O0o0o0o00",
+      "label": "ClientInfo",
+      "evidence": "CHANNEL-HANDSHAKE-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "ca8c7dfa0e83afabe9255b5e346216e6a80a0696af7905c90d4d3901cbd76fcd",
+      "document": "CHANNEL-HANDSHAKE-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/network/message/ClientInfo.java",
+      "source_sha256": "368f792b0270ba6db7436c3858f83dcd31df298b85198a3e1bc67c882b1f236e",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/ooOOO00Oo0000oOOO0OoO0o0",
+      "label": "LoginEvent",
+      "evidence": "CHANNEL-HANDSHAKE-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "ca8c7dfa0e83afabe9255b5e346216e6a80a0696af7905c90d4d3901cbd76fcd",
+      "document": "CHANNEL-HANDSHAKE-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/event/LoginEvent.java",
+      "source_sha256": "c320cf1f062454ac8c43a413391b36f6b94444658d517454a653f5009b72b15f",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OoOoOoooO0O00oOoO00OOo00",
+      "label": "ServerModelManager",
+      "evidence": "SERVER-MODEL-SYNC-JAVA-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "5e29cfbe88202d48e0826927d8c66c92cc18e476de163166744dd406f3a6ce98",
+      "document": "SERVER-MODEL-SYNC-JAVA-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/model/ServerModelManager.java",
+      "source_sha256": "8c226a2cd9dd4351392736932226493b839b64ec3c33d1aa813f4f489f2b78e6",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oO0OOO0O0O0O00O0OOooOooO",
+      "label": "ReloadModelResult",
+      "evidence": "SERVER-MODEL-RESULT-CARRIERS-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "3f69f4da92d33f832b12239c662df83a2f5e792e4e0d9b0f7832bcae3f39a749",
+      "document": "SERVER-MODEL-RESULT-CARRIERS-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/model/ReloadModelResult.java",
+      "source_sha256": "eade9af7ed54efba53f5d4e05f8e503c1f0d40ab1078b1aac962b20132482760",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOoOO0OO0o0Oooo00OOOOoO0",
+      "label": "SyncModelResult",
+      "evidence": "SERVER-MODEL-RESULT-CARRIERS-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "3f69f4da92d33f832b12239c662df83a2f5e792e4e0d9b0f7832bcae3f39a749",
+      "document": "SERVER-MODEL-RESULT-CARRIERS-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/model/SyncModelResult.java",
+      "source_sha256": "6c0d1adf36d6be602ecc584e6aed413433c4de9595a312cb2acddc3595cff0f3",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOoOOo00o00O0ooooOOO0oO0",
+      "label": "ServerModel",
+      "evidence": "SERVER-MODEL-RESULT-CARRIERS-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "3f69f4da92d33f832b12239c662df83a2f5e792e4e0d9b0f7832bcae3f39a749",
+      "document": "SERVER-MODEL-RESULT-CARRIERS-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/model/ServerModel.java",
+      "source_sha256": "e82094d623f511379a0aac8cd0814b88c8dec5a2c9a5bfa87655c8a4e2f50457",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOoo00OOoO00O0oOOOO0000o",
+      "label": "ServerPlayerModel",
+      "evidence": "SERVER-MODEL-RESULT-CARRIERS-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "3f69f4da92d33f832b12239c662df83a2f5e792e4e0d9b0f7832bcae3f39a749",
+      "document": "SERVER-MODEL-RESULT-CARRIERS-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/model/ServerPlayerModel.java",
+      "source_sha256": "e63c180677dae83ce34cf739843cacd1100edbf91ff6f07ad9da91491769b55b",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
     }
   ]
 }

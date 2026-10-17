@@ -1,0 +1,20 @@
+{
+  "format": "ysm-netty-source-unit-comparison-v1",
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "reference_url": "https://github.com/netty/netty/blob/netty-4.1.82.Final/transport/src/main/java/io/netty/channel/ChannelOutboundBuffer.java",
+  "reference_tag": "netty-4.1.82.Final",
+  "reference_source_sha256": "55db576b4e07318b5dbdc8b81e23a5c07b37ebfded86df00cc7eba34de105bfd",
+  "reference_source_utf8_bytes": 31559,
+  "comparison": {
+    "size": "flushed message count",
+    "totalPendingWriteBytes": "pending byte accounting total"
+  },
+  "source_bodies_checked": true,
+  "artifact_embeds_channel_outbound_buffer": false,
+  "runtime_netty_version_verified": false,
+  "target_or_dependency_executed": false,
+  "raw_source_committed": false,
+  "cohort_auditor_rechecks_external_source": false,
+  "independent_semantic_review": "NOT_RUN",
+  "central_mapping_promoted": false
+}

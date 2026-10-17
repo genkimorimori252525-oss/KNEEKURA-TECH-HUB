@@ -540,3 +540,7 @@ bounded runtime observation rather than protection bypass.
 ## Model selection and vehicle propagation
 
 The [connected model-transfer review](MODEL-TRANSFER-BATCH-REVIEW-2026-10-17.md) joins button-local updates, server validation/default fallback, dirty/full synchronization and the separate after-positionRider entry to vehicle transfer. Its fixed11 checkpoint compares seven repeated snapshots without conflict. Handled messages, selected IDs, resource readiness and actual rendering remain different success criteria.
+
+## Handshake and server model synchronization
+
+The [server synchronization boundary review](SERVER-SYNC-BATCH-REVIEW-2026-10-17.md) connects first-write handshake state, version agreement, server model publication, immutable result containers, Java send completion and client readiness. A fixed10 artifact batch passes; the separately pinned Netty source comparison is not loaded-runtime verification. Native declarations remain opaque and all recent semantics remain primary-only.

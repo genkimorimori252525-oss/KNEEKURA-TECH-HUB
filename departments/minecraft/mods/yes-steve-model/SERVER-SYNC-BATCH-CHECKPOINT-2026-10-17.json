@@ -1,0 +1,159 @@
+{
+  "format": "kneekura.ysm-server-sync-batch.v1",
+  "cohort_manifest": [
+    [
+      "CHANNEL-HANDSHAKE",
+      "channel_handshake",
+      true
+    ],
+    [
+      "SERVER-MODEL-SYNC-JAVA",
+      "server_model_sync_java",
+      true
+    ],
+    [
+      "SERVER-MODEL-RESULT-CARRIERS",
+      "server_model_result_carriers",
+      true
+    ],
+    [
+      "SERVER-ENTITY-SET-CALLERS",
+      "server_entity_set_callers",
+      false
+    ],
+    [
+      "ANIMATION-PACKET-ROUTING",
+      "animation_packet_routing",
+      true
+    ],
+    [
+      "SERVER-FULL-SYNC",
+      "server_full_sync",
+      true
+    ],
+    [
+      "SERVER-PROPERTY-PRODUCER",
+      "server_property_producer",
+      true
+    ],
+    [
+      "CLIENT-MODEL-SYNC-STATE",
+      "client_model_sync_state",
+      true
+    ],
+    [
+      "CLIENT-SESSION-SKIN-EVENTS",
+      "client_session_skin_events",
+      true
+    ],
+    [
+      "ASYNC-ANIMATION",
+      "async_animation",
+      true
+    ]
+  ],
+  "cohorts": [
+    {
+      "cohort": "CHANNEL-HANDSHAKE",
+      "tool_sha256": "11c80d98a4d3b0ed21223345d416a9bb071832430d4d0642deba15869c8d59b8",
+      "evidence_sha256": "ca8c7dfa0e83afabe9255b5e346216e6a80a0696af7905c90d4d3901cbd76fcd",
+      "rerun_receipt_sha256": "1c20a99c21bd4664aae483c20bb66f800111ef78789ac13fd622bd05f2cf1952",
+      "checks": 100,
+      "negative_controls": 13,
+      "status": "PASS"
+    },
+    {
+      "cohort": "SERVER-MODEL-SYNC-JAVA",
+      "tool_sha256": "eb583e69ff6187ade919507e4d6b10c7195481e38860595b2e9f552d2b0c6fe3",
+      "evidence_sha256": "5e29cfbe88202d48e0826927d8c66c92cc18e476de163166744dd406f3a6ce98",
+      "rerun_receipt_sha256": "4aabc38aba207b96e598e223e67f90dfb3962f6f56ec7a8413dc09fb47d2cbb1",
+      "checks": 219,
+      "negative_controls": 14,
+      "status": "PASS"
+    },
+    {
+      "cohort": "SERVER-MODEL-RESULT-CARRIERS",
+      "tool_sha256": "b072e674ad00ca62c00bed6d5c2e204c63e91fd72d30bd8bcfb8292c2dbd1100",
+      "evidence_sha256": "3f69f4da92d33f832b12239c662df83a2f5e792e4e0d9b0f7832bcae3f39a749",
+      "rerun_receipt_sha256": "b5b038c3dfc8b1d4d11ce39875e08bfee75393fef031523152655630945d4ef7",
+      "checks": 133,
+      "negative_controls": 13,
+      "status": "PASS"
+    },
+    {
+      "cohort": "SERVER-ENTITY-SET-CALLERS",
+      "tool_sha256": "65b35568d7fe5f2be364b7e958a08526d1b2ba9cf31b3b90e5982cce55c1aa4e",
+      "evidence_sha256": "c6dc65d4a5df6746e8316cfaa039d440f2bce62aac458667a32fc9b1306cf556",
+      "rerun_receipt_sha256": "89a22626d367e66c4426aa2ea529eeaf591027313760c0aaba97a058ba633894",
+      "checks": 2,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "ANIMATION-PACKET-ROUTING",
+      "tool_sha256": "f01a7bc387e354d75a41fe8d3f9bcc8479fa2190bb61fc6a450fc8f66200eff0",
+      "evidence_sha256": "43fb20223540b1236c6a62e8bfd5421ee7507ec145d9c477e98980b0cc77b61d",
+      "rerun_receipt_sha256": "80f52a51f73d1c340d6a9d5ab980fb1936124b3a062953d180115ec770ebff93",
+      "checks": 254,
+      "negative_controls": 10,
+      "status": "PASS"
+    },
+    {
+      "cohort": "SERVER-FULL-SYNC",
+      "tool_sha256": "9a3afc69f76a07b17c99f1572c2764896daf74f49f209b6f5de4d4b2c4f4545c",
+      "evidence_sha256": "4d7de7d99ca629cd2268af2ab95498597728a449114e4dd9fe77921c3dfa79e0",
+      "rerun_receipt_sha256": "e43c8540a58bcc8ed69b89a39947ab36cfea51bedb0a9b5ca4b8d68ef0bef815",
+      "checks": 384,
+      "negative_controls": 13,
+      "status": "PASS"
+    },
+    {
+      "cohort": "SERVER-PROPERTY-PRODUCER",
+      "tool_sha256": "89fed2299686b1fbea4474c37c55dc6fa4205ec38286fe6c870223dde063ef65",
+      "evidence_sha256": "e2f08aa1ffae350f76cc6aa0265c4efd58f85396e9fdb5124b7711e374f77511",
+      "rerun_receipt_sha256": "efdaf2b4632367e08186612cc2bc6bf25c065571c2bdcb9c3cce901c3b3044ac",
+      "checks": 214,
+      "negative_controls": 13,
+      "status": "PASS"
+    },
+    {
+      "cohort": "CLIENT-MODEL-SYNC-STATE",
+      "tool_sha256": "74c94c0af12f67a16996c6a92b3cd99b8bbc948f02b2734fcead7f3285813c1a",
+      "evidence_sha256": "4df81306505d55916936e4e7e995bb040e14c5cf9e6f7120aab6a2d53545476c",
+      "rerun_receipt_sha256": "e4c18ad6c1b47ddcb780e50caf24e1f8a13caf763c7dcd9847e7b0a6fb1a5ec5",
+      "checks": 263,
+      "negative_controls": 12,
+      "status": "PASS"
+    },
+    {
+      "cohort": "CLIENT-SESSION-SKIN-EVENTS",
+      "tool_sha256": "088a381ac0ae274a4019eb2d3ae6791aee7d63cd2ac60b07b379d4b9798605eb",
+      "evidence_sha256": "e81983a6a32186eca2de3fdf3adfa9958256f2c39e19dcb998a49495bdaf6474",
+      "rerun_receipt_sha256": "9b3161194b63e2fabc1b45ae3f655a0d751fffc0fa1e44436899b2b994295015",
+      "checks": 95,
+      "negative_controls": 9,
+      "status": "PASS"
+    },
+    {
+      "cohort": "ASYNC-ANIMATION",
+      "tool_sha256": "9d7def233ba4d3a505d8f6b51ea9254044f403ed79681bffe778b849f7b8abf5",
+      "evidence_sha256": "0813794f33cf5963f8c811327608cab772de0dc6d6710a9cb95acd590568061f",
+      "rerun_receipt_sha256": "a417d4087bb19f942755118d8b046f0b678bd3c3235f203b7e7f8237d2ab5181",
+      "checks": 253,
+      "negative_controls": 17,
+      "status": "PASS"
+    }
+  ],
+  "cohort_count": 10,
+  "overlapping_method_snapshots_compared": 3,
+  "overlap_conflicts": 0,
+  "central_mapping_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
+  "central_mapping_promoted": false,
+  "independent_semantic_review": "NOT_RUN",
+  "target_runtime_executed": false,
+  "whole_project_ci_run": false,
+  "earlier_fixed17_checkpoint_modified": false,
+  "earlier_fixed10_checkpoint_modified": false,
+  "earlier_fixed9_checkpoint_modified": false,
+  "elapsed_seconds": 2.564
+}
