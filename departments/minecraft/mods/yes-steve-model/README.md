@@ -313,3 +313,5 @@ bounded runtime observation rather than protection bypass.
 - [Function and loop ordering](FUNCTION-LOOP-ORDER-RECOVERY-2026-10-17.md): lazy argument getters, loop limits, foreach assignment and control cleanup.
 
 - [User-function target cache](USER-FUNCTION-CACHE-RECOVERY-2026-10-17.md): successful/missing lookup retention and parser call-validation join; added after the fixed17-cohort receipt.
+
+- [Parser pool lifetime](PARSER-POOL-LIFETIME-RECOVERY-2026-10-17.md): rent/return reset, per-parser fn binding and dynamic args lookup; native loader lifetime unproven.

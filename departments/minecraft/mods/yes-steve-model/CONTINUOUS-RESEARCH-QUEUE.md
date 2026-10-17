@@ -153,3 +153,7 @@ Continue parser call-argument/assignment validation and user-function dispatch;
 User-function cache/AST retention and parser call-validation join are recorded
 after the fixed17-cohort checkpoint. Continue model binding construction and
 reset/reparse callers before inferring cache lifetime across model reload.
+
+Java parser-pool return/reset and fn cache lifetime are joined. Native model-loader
+rent/return remains unproven. Continue Struct copy/property/assignment semantics
+and Java storage consumers; do not infer all pool state is reset on parse failure.
