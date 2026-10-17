@@ -177,3 +177,10 @@ not a successful state-application or visible-animation receipt.
 Player property masks and selected query routing are recorded. External JOML
 argument-order comparison is conditional, not runtime proof. Continue change
 producers/full-delta selection and query consumers within static Java scope.
+
+Server delta production and dirty/full orchestration are recorded after restoring
+saved remote evidence from an older environment snapshot. Both new cohorts were
+re-extracted/reverified; no unpublished old receipt is treated as saved. Continue
+client model-readiness → geometry-load → tracker-reset ordering against full
+property application. Distinguish same-model updates from delayed replacement;
+no stale-state bug or runtime correction is established yet.

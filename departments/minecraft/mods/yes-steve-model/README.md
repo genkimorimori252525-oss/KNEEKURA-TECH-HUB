@@ -325,3 +325,6 @@ bounded runtime observation rather than protection bypass.
 - [Entity-load application](ENTITY-LOAD-APPLICATION-RECOVERY-2026-10-17.md): client deferral, cache/exception boundaries and selected property-application sequence.
 
 - [Player property/query provenance](PLAYER-PROPERTY-QUERY-RECOVERY-2026-10-17.md): presence masks, local/remote sources, axis conversion and explicit JOML dependency comparison.
+
+- [Server property producer](SERVER-PROPERTY-PRODUCER-RECOVERY-2026-10-17.md): delta caches, coalescing, rate gate and full-builder distinction.
+- [Server full synchronization](SERVER-FULL-SYNC-RECOVERY-2026-10-17.md): END-tick dirty branching, model-ready builder, queued consumers and client application order.
