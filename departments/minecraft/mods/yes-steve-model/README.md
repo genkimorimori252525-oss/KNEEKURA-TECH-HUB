@@ -321,3 +321,5 @@ bounded runtime observation rather than protection bypass.
 - [Pooled names and change codec](POOLED-NAME-CHANGE-CODEC-RECOVERY-2026-10-17.md): process-local IDs, text-name conversion and directional data maps; no network execution.
 
 - [Roaming state merge](ROAMING-STATE-MERGE-RECOVERY-2026-10-17.md): per-model readiness, local/remote replacement, queued deltas and vehicle propagation.
+
+- [Entity-load application](ENTITY-LOAD-APPLICATION-RECOVERY-2026-10-17.md): client deferral, cache/exception boundaries and selected property-application sequence.

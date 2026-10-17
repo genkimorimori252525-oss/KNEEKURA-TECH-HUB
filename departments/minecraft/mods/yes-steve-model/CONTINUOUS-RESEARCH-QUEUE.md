@@ -169,3 +169,7 @@ fields do not establish authorization, delivery or successful synchronization.
 Player/vehicle roaming cache readiness and merge ordering are recorded. Continue
 client entity-load deferral and ordinary server-driven-property application;
 local state predicates do not prove message delivery or server authorization.
+
+Client entity availability and selected property application are joined. Continue
+PlayerStateTracker server-property masks and Molang consumers; packetHandled is
+not a successful state-application or visible-animation receipt.
