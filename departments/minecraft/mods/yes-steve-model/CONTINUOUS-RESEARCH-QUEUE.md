@@ -141,3 +141,7 @@ boundaries; binding-cache reset is not automatically runtime-value clearing.
 Runtime scoped/public/temp/context storage and user-call frame boundaries are
 recorded. Continue initialization/reset callers and argument evaluation/assignment
 ordering; logical frame pop is not backing-array erasure or transactional push.
+
+Storage initialize/push/pop direct callers are inventoried; only null public-name
+initialization appears on the scanned Java path. Continue function arguments and
+loop/foreach ordering; do not imply every expression is enclosed by a temp frame.

@@ -300,3 +300,5 @@ bounded runtime observation rather than protection bypass.
 - [Parser binding and storage indirection](PARSER-BINDING-STORAGE-RECOVERY-2026-10-17.md): namespace capture, aliases, variable addresses and parse-reset boundaries.
 
 - [Runtime storage and call frames](RUNTIME-STORAGE-FRAMES-RECOVERY-2026-10-17.md): public/scoped aliasing, temp frames and deferred cleanup; lifetime callers remain bounded.
+
+- [Storage lifecycle direct callers](STORAGE-CALLERS-RECOVERY-2026-10-17.md): fixed-JAR initialize/push/pop closure; root-temp and public-map limits.
