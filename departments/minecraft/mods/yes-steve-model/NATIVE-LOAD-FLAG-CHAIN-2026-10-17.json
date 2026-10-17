@@ -1,0 +1,222 @@
+{
+  "format": "kneekura.ysm-native-load-flag-chain.v1",
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "dependency_parity_proof_sha256": "b09aa30eee3fe23729933d6263ca06a4a72c30937e6644cc3741b2bf72af490d",
+  "segments": [
+    {
+      "address": 20660804,
+      "size": 22,
+      "sha256": "c009e98d9b011392cc56b1b9db922e1cb111fc4118a465eb7b9dcf8fbffd3b19"
+    },
+    {
+      "address": 19995584,
+      "size": 46,
+      "sha256": "1dee7707122df9e28f78e02d7c13110b29648f41135cabe7c382d878c5e72a3c"
+    },
+    {
+      "address": 15893305,
+      "size": 6,
+      "sha256": "5ef1da17f4a43642c53068b8eda4e600b0dccd3558f979d1680a29b437528f19"
+    },
+    {
+      "address": 17561951,
+      "size": 24,
+      "sha256": "7b0ff29ade6591580ac76feb2b77e5163aededd399a534c82e85ed8b2efe8cb2"
+    }
+  ],
+  "proofs": {
+    "sign": {
+      "inherited_dec_word": 65452,
+      "sign_flag": true,
+      "ror_preserves_sf": true,
+      "branch_address": 20660820,
+      "taken": true,
+      "target_address": 19995584,
+      "target_file_backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 4,
+          "address": 15490560,
+          "memory_size": 5308498,
+          "file_offset": 13823488,
+          "file_size": 5308498,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 18328512
+      }
+    },
+    "btr": {
+      "mov_esi_constant": 825178752,
+      "si_after_not": 50559,
+      "encoded_bit_index": 47,
+      "effective_bit_index": 15,
+      "carry_flag": 1,
+      "near_call_target": 15893305,
+      "branch_address": 15893305,
+      "taken": true,
+      "target_address": 19511568,
+      "target_file_backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 4,
+          "address": 15490560,
+          "memory_size": 5308498,
+          "file_offset": 13823488,
+          "file_size": 5308498,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 17844496
+      }
+    },
+    "btc": {
+      "mov_r10d_constant": 3602720257,
+      "encoded_bit_index": 34,
+      "effective_bit_index": 2,
+      "carry_flag": 0,
+      "branch_address": 17561969,
+      "taken": true,
+      "target_address": 19785132,
+      "target_file_backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 4,
+          "address": 15490560,
+          "memory_size": 5308498,
+          "file_offset": 13823488,
+          "file_size": 5308498,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 18118060
+      }
+    }
+  },
+  "followed_prefix_chains": [
+    {
+      "entry": "after_btr",
+      "seed_address": 19511568,
+      "blocks": [
+        {
+          "start_address": 19511568,
+          "file_offset": 17844496,
+          "instruction_count": 3,
+          "prefix_byte_count": 13,
+          "prefix_sha256": "4e337a59b4ee069bbe959e80a6dbd91d3016dc5b23873506fe58878a59d43122",
+          "first_transfer": {
+            "address": 19511576,
+            "bytes": "e85ddef5ff",
+            "assembly": "call   0x11f977a"
+          },
+          "followed_direct_target": 18847610
+        },
+        {
+          "start_address": 18847610,
+          "file_offset": 17180538,
+          "instruction_count": 17,
+          "prefix_byte_count": 60,
+          "prefix_sha256": "2f6bcf1c4321841a353daf43151ce94d7d302bf5f6f6c0531ca912f2eb358b9e",
+          "first_transfer": {
+            "address": 18847665,
+            "bytes": "e8e460ecff",
+            "assembly": "call   0x10bf89a"
+          },
+          "followed_direct_target": 17561754
+        },
+        {
+          "start_address": 17561754,
+          "file_offset": 15894682,
+          "instruction_count": 49,
+          "prefix_byte_count": 221,
+          "prefix_sha256": "f6231df9d173c9f3378af2f108b2c2db49a3af0ad9de901abf874781ebac49ac",
+          "first_transfer": {
+            "address": 17561969,
+            "bytes": "0f8335ec2100",
+            "assembly": "jae    0x12de5ac"
+          },
+          "followed_direct_target": null
+        }
+      ],
+      "stop_reason": "FIRST_NON_DIRECT_CALL_JUMP_TRANSFER",
+      "conditional_choice_resolved": false,
+      "call_return_continuations_followed": false
+    },
+    {
+      "entry": "after_btc",
+      "seed_address": 19785132,
+      "blocks": [
+        {
+          "start_address": 19785132,
+          "file_offset": 18118060,
+          "instruction_count": 14,
+          "prefix_byte_count": 64,
+          "prefix_sha256": "e8c486f6312581a33b1cb94e0a5da9a5fd5979047f6b0d1e4fe269df4e0be998",
+          "first_transfer": {
+            "address": 19785191,
+            "bytes": "e90ba3cdff",
+            "assembly": "jmp    0xfb88f7"
+          },
+          "followed_direct_target": 16484599
+        },
+        {
+          "start_address": 16484599,
+          "file_offset": 14817527,
+          "instruction_count": 1,
+          "prefix_byte_count": 5,
+          "prefix_sha256": "25f1eb85a703ef07ff81fe2459664afbaabf1c84cff209e880da3582b0a27559",
+          "first_transfer": {
+            "address": 16484599,
+            "bytes": "e899b11e00",
+            "assembly": "call   0x11a3a95"
+          },
+          "followed_direct_target": 18496149
+        },
+        {
+          "start_address": 18496149,
+          "file_offset": 16829077,
+          "instruction_count": 16,
+          "prefix_byte_count": 74,
+          "prefix_sha256": "967855e68d2114ccb3ba1c50a61a42d839d2f9a7dab7f27bf128e6720c09125b",
+          "first_transfer": {
+            "address": 18496218,
+            "bytes": "e8f1d9dfff",
+            "assembly": "call   0xfa14d0"
+          },
+          "followed_direct_target": 16389328
+        },
+        {
+          "start_address": 16389328,
+          "file_offset": 14722256,
+          "instruction_count": 5,
+          "prefix_byte_count": 22,
+          "prefix_sha256": "26a8ae1ac185e6277ee5c3bbec6ee30165581bf2adf787efceb330a331f7b617",
+          "first_transfer": {
+            "address": 16389349,
+            "bytes": "c3",
+            "assembly": "ret"
+          },
+          "followed_direct_target": null
+        }
+      ],
+      "stop_reason": "FIRST_NON_DIRECT_CALL_JUMP_TRANSFER",
+      "conditional_choice_resolved": false,
+      "call_return_continuations_followed": false
+    }
+  ],
+  "return_target_resolved": false,
+  "assumptions": [
+    "Unmodified fixed bytes are entered at the sequence start in 64-bit x86 mode",
+    "The PUSH/DEC/MOV memory operations complete normally on the current stack",
+    "No external interference changes stack bytes or flags during this sequence",
+    "Normal unmodified instruction flow follows the proven conditional edges and direct-prefix transfers",
+    "Only the explicitly named flag is carried across each proof; undefined flags are not reused"
+  ],
+  "target_executed": false,
+  "native_emulation_run": false,
+  "constant_and_flag_analysis_only": true,
+  "native_implementations_resolved": false,
+  "java_native_bindings_resolved": false,
+  "independent_semantic_review": "NOT_RUN"
+}

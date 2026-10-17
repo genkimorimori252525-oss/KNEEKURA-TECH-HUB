@@ -1,0 +1,76 @@
+{
+  "format": "kneekura.ysm-native-flag-chain-checkpoint.v1",
+  "cohort_manifest": [
+    [
+      "NATIVE-LOAD-FLAG-CHAIN",
+      "native_load_flag_chain"
+    ],
+    [
+      "NATIVE-IMAGE-METADATA",
+      "native_image_metadata"
+    ],
+    [
+      "NATIVE-EXPORT-BACKING",
+      "native_export_backing"
+    ],
+    [
+      "NATIVE-LINUX-PREFIX-FRONTIER",
+      "native_linux_prefix_frontier"
+    ],
+    [
+      "NATIVE-LOAD-PARITY-PROOF",
+      "native_load_parity_proof"
+    ]
+  ],
+  "cohorts": [
+    {
+      "cohort": "NATIVE-LOAD-FLAG-CHAIN",
+      "tool_sha256": "acae209390b079d3dc0fc81a2f312002185c55463b2b6cec36c5dad15da032b7",
+      "test_sha256": "ee92d356731b882b93c6e5339c53328d457fc0e84c9c9390311c38d5ff03ed7c",
+      "evidence_sha256": "5e12f9e035ff8bf35da50147b4ce9af74313fa87028542b3e49ee2c5c35083f9",
+      "synthetic_tests_passed": 10,
+      "recomputed_match": true
+    },
+    {
+      "cohort": "NATIVE-IMAGE-METADATA",
+      "tool_sha256": "e638bc3469f4dc421276f32f4becec594b4166119f7c3f3018013dd5e2ed0242",
+      "test_sha256": "c88fec656f5b1ee0005ecc04d2d3241bb5b2400791402655d6c690b622baf0a6",
+      "evidence_sha256": "08c452177efeba4ed398706259a5d15f18dc3b59e3f0dbd861dff37c146866d9",
+      "synthetic_tests_passed": 6,
+      "recomputed_match": true
+    },
+    {
+      "cohort": "NATIVE-EXPORT-BACKING",
+      "tool_sha256": "028daef4264851f56dc419ea1d42be6374f71c62ae71a7f329c06f9ee6ad1347",
+      "test_sha256": "63c150f676b6773da9ce4fcaaf42cd8bc371177fdfeb4c334ea4d9f0df8a77be",
+      "evidence_sha256": "359f3fae2a7c8f3e0a5cfc1bdcd314f9796273c9c15e792d20881cef20bbacaa",
+      "synthetic_tests_passed": 12,
+      "recomputed_match": true
+    },
+    {
+      "cohort": "NATIVE-LINUX-PREFIX-FRONTIER",
+      "tool_sha256": "9dc394c01b623db99d95231999a4c59fdab3a772e0952007c9b69dea5c5adca7",
+      "test_sha256": "aafe44137c943ef5817a4638fc3fdce59702362bed83591d5e61a0e3292aebac",
+      "evidence_sha256": "34388b042709e3bc9847e72bbee1308343711773b87200ec91356816f156a4f1",
+      "synthetic_tests_passed": 10,
+      "recomputed_match": true
+    },
+    {
+      "cohort": "NATIVE-LOAD-PARITY-PROOF",
+      "tool_sha256": "3065a98f61f6cfcb2ee40ee214c61252e4095f839ac9570b15dd48c1034cab6d",
+      "test_sha256": "f49efb0906753a577f319f90a5f7449ded3e3a6581ce0c245b00bf63fa17c03a",
+      "evidence_sha256": "ad37c6a32f70e4851da84acff6a09781a5a21a9b484ad4ef7256f67c9ddc998c",
+      "synthetic_tests_passed": 6,
+      "recomputed_match": true
+    }
+  ],
+  "synthetic_tests_passed": 44,
+  "elapsed_seconds": 2.403,
+  "target_executed": false,
+  "native_emulation_run": false,
+  "native_implementations_resolved": false,
+  "java_native_bindings_resolved": false,
+  "central_mapping_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
+  "independent_semantic_review": "NOT_RUN",
+  "whole_project_ci_run": false
+}
