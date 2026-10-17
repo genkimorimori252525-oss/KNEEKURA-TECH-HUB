@@ -1,0 +1,332 @@
+{
+  "status": "PROPOSED_INDEPENDENT_REVIEW_PENDING",
+  "baseline_mappings": 625,
+  "new_method_mappings": 13,
+  "mappings": [
+    {
+      "id": "ysm265.method.bone-top-level-snapshot-commit",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oOO0o0oOOOoOoo00oOO0Oo00",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.snapshot.BoneTopLevelSnapshot",
+      "semantic_member": "commit",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_CONTROL_DATA_FLOW_AND_DELEGATION_NOT_FULL_CALLEE_EQUIVALENCE",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oOO0o0oOOOoOoo00oOO0Oo00.class",
+          "locator": "BONE-COMMIT-QUEUE-EVIDENCE-2026-10-17.json",
+          "fact": "Hidden flags at12, initial rotation read21, rotation offset+initial fadd42/63/84 then setters43/64/85; direct position101/117/133, scale149/165/181; cachedPointData zero193. No handlers; partial writes/cache retention possible on escaping setter exception.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.animation-vec3-set-ending-transition-percent-progress-if-less",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00000oOOOoO0o00o00OOo0",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(F)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.keyframe.AnimationVec3",
+      "semantic_member": "setEndingTransitionPercentProgressIfLess",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_CONTROL_DATA_FLOW_AND_DELEGATION_NOT_FULL_CALLEE_EQUIVALENCE",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/OO00000oOOOoO0o00o00OOo0.class",
+          "locator": "BONE-COMMIT-QUEUE-EVIDENCE-2026-10-17.json",
+          "fact": "fcmpg5 and ifge6->14 updates field11 only if argument strictly less. NaN never wins; no lower clamp.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.animation-vec3-apply",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00000oOOOoO0o00o00OOo0",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lorg/joml/Vector3f;)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.keyframe.AnimationVec3",
+      "semantic_member": "apply",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_CONTROL_DATA_FLOW_AND_DELEGATION_NOT_FULL_CALLEE_EQUIVALENCE",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/OO00000oOOOoO0o00o00OOo0.class",
+          "locator": "BONE-COMMIT-QUEUE-EVIDENCE-2026-10-17.json",
+          "fact": "fcmpl7 compares progress with zero; ifne8->20 delegates exact vector interpolation24; signed zero copies this to dst13. dst is both previous value and output.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.animation-vec3-apply-rotation",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00000oOOOoO0o00o00OOo0",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lorg/joml/Vector3f;Lorg/joml/Vector3f;)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.keyframe.AnimationVec3",
+      "semantic_member": "applyRotation",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_CONTROL_DATA_FLOW_AND_DELEGATION_NOT_FULL_CALLEE_EQUIVALENCE",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/OO00000oOOOoO0o00o00OOo0.class",
+          "locator": "BONE-COMMIT-QUEUE-EVIDENCE-2026-10-17.json",
+          "fact": "fcmpl7/ifne8->20; signed zero copies this to dst13; otherwise exact rotation interpolation25 receives progress,this,dst,initRot,dst. Rotation helper is not assumed linear.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.bedrock-animation-controller--blend-bone-animation-queue-poll-rotation-point",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O00Oo0oo0Ooo0oOOOo0OO0oO$o0OOooo0o0OO00OoOOOo0o0O",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Ljava/util/Optional;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.BedrockAnimationController$BlendBoneAnimationQueue",
+      "semantic_member": "pollRotationPoint",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_CONTROL_DATA_FLOW_AND_DELEGATION_NOT_FULL_CALLEE_EQUIVALENCE",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO$o0OOooo0o0OO00OoOOOo0o0O.class",
+          "locator": "BONE-COMMIT-QUEUE-EVIDENCE-2026-10-17.json",
+          "fact": "Filters each pair condition then queue active then matching nonnull point; first accepted point fixes beginning-transition mode. Rotation/position accumulate weighted fma from zero; scale multiplies weighted values from one. Beginning progress inside strict +/-1e-5 band (also unordered comparisons) returns offset immediately; otherwise checked cast to beginning-point for each subsequent accepted point. No destructive dequeue or local handlers; producer homogeneity is not proven.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.bedrock-animation-controller--blend-bone-animation-queue-poll-position-point",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O00Oo0oo0Ooo0oOOOo0OO0oO$o0OOooo0o0OO00OoOOOo0o0O",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Ljava/util/Optional;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.BedrockAnimationController$BlendBoneAnimationQueue",
+      "semantic_member": "pollPositionPoint",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_CONTROL_DATA_FLOW_AND_DELEGATION_NOT_FULL_CALLEE_EQUIVALENCE",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO$o0OOooo0o0OO00OoOOOo0o0O.class",
+          "locator": "BONE-COMMIT-QUEUE-EVIDENCE-2026-10-17.json",
+          "fact": "Filters each pair condition then queue active then matching nonnull point; first accepted point fixes beginning-transition mode. Rotation/position accumulate weighted fma from zero; scale multiplies weighted values from one. Beginning progress inside strict +/-1e-5 band (also unordered comparisons) returns offset immediately; otherwise checked cast to beginning-point for each subsequent accepted point. No destructive dequeue or local handlers; producer homogeneity is not proven.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.bedrock-animation-controller--blend-bone-animation-queue-poll-scale-point",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O00Oo0oo0Ooo0oOOOo0OO0oO$o0OOooo0o0OO00OoOOOo0o0O",
+      "obfuscated_member": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Ljava/util/Optional;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.BedrockAnimationController$BlendBoneAnimationQueue",
+      "semantic_member": "pollScalePoint",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_CONTROL_DATA_FLOW_AND_DELEGATION_NOT_FULL_CALLEE_EQUIVALENCE",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO$o0OOooo0o0OO00OoOOOo0o0O.class",
+          "locator": "BONE-COMMIT-QUEUE-EVIDENCE-2026-10-17.json",
+          "fact": "Filters each pair condition then queue active then matching nonnull point; first accepted point fixes beginning-transition mode. Rotation/position accumulate weighted fma from zero; scale multiplies weighted values from one. Beginning progress inside strict +/-1e-5 band (also unordered comparisons) returns offset immediately; otherwise checked cast to beginning-point for each subsequent accepted point. No destructive dequeue or local handlers; producer homogeneity is not proven.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.coded-animation-controller--single-bone-animation-queue-poll-rotation-point",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo000oooo0OOoo00O0o0OOOO$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Ljava/util/Optional;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.CodedAnimationController$SingleBoneAnimationQueue",
+      "semantic_member": "pollRotationPoint",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_CONTROL_DATA_FLOW_AND_DELEGATION_NOT_FULL_CALLEE_EQUIVALENCE",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO$Oo0Oo0o00O00Oo0OOoOOoooo.class",
+          "locator": "BONE-COMMIT-QUEUE-EVIDENCE-2026-10-17.json",
+          "fact": "Reads matching queue point without removing it; null -> Optional.empty. Ending/beginning/ordinary paths retain exact branch order. Rotation scales destination before rotation interpolation; position uses scalar multiplication, scale uses weighted-scale helper. Referenced point generation/interpolation remain delegated.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.coded-animation-controller--single-bone-animation-queue-poll-position-point",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo000oooo0OOoo00O0o0OOOO$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Ljava/util/Optional;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.CodedAnimationController$SingleBoneAnimationQueue",
+      "semantic_member": "pollPositionPoint",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_CONTROL_DATA_FLOW_AND_DELEGATION_NOT_FULL_CALLEE_EQUIVALENCE",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO$Oo0Oo0o00O00Oo0OOoOOoooo.class",
+          "locator": "BONE-COMMIT-QUEUE-EVIDENCE-2026-10-17.json",
+          "fact": "Reads matching queue point without removing it; null -> Optional.empty. Ending/beginning/ordinary paths retain exact branch order. Rotation scales destination before rotation interpolation; position uses scalar multiplication, scale uses weighted-scale helper. Referenced point generation/interpolation remain delegated.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.coded-animation-controller--single-bone-animation-queue-poll-scale-point",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo000oooo0OOoo00O0o0OOOO$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "obfuscated_member": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Ljava/util/Optional;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.CodedAnimationController$SingleBoneAnimationQueue",
+      "semantic_member": "pollScalePoint",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_CONTROL_DATA_FLOW_AND_DELEGATION_NOT_FULL_CALLEE_EQUIVALENCE",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO$Oo0Oo0o00O00Oo0OOoOOoooo.class",
+          "locator": "BONE-COMMIT-QUEUE-EVIDENCE-2026-10-17.json",
+          "fact": "Reads matching queue point without removing it; null -> Optional.empty. Ending/beginning/ordinary paths retain exact branch order. Rotation scales destination before rotation interpolation; position uses scalar multiplication, scale uses weighted-scale helper. Referenced point generation/interpolation remain delegated.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.vehicle-origin-controller--animation-queue-poll-rotation-point",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo0Oo0O00oooOoOo0O0oOOOo$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Ljava/util/Optional;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.controller.VehicleOriginController$AnimationQueue",
+      "semantic_member": "pollRotationPoint",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_CONTROL_DATA_FLOW_AND_DELEGATION_NOT_FULL_CALLEE_EQUIVALENCE",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo0Oo0O00oooOoOo0O0oOOOo$Oo0Oo0o00O00Oo0OOoOOoooo.class",
+          "locator": "BONE-COMMIT-QUEUE-EVIDENCE-2026-10-17.json",
+          "fact": "Rotation returns Optional.ofNullable of existing outer rotation object; position/scale return Optional.empty. No destructive dequeue or defensive copy.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.vehicle-origin-controller--animation-queue-poll-position-point",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo0Oo0O00oooOoOo0O0oOOOo$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Ljava/util/Optional;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.controller.VehicleOriginController$AnimationQueue",
+      "semantic_member": "pollPositionPoint",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_CONTROL_DATA_FLOW_AND_DELEGATION_NOT_FULL_CALLEE_EQUIVALENCE",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo0Oo0O00oooOoOo0O0oOOOo$Oo0Oo0o00O00Oo0OOoOOoooo.class",
+          "locator": "BONE-COMMIT-QUEUE-EVIDENCE-2026-10-17.json",
+          "fact": "Rotation returns Optional.ofNullable of existing outer rotation object; position/scale return Optional.empty. No destructive dequeue or defensive copy.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.vehicle-origin-controller--animation-queue-poll-scale-point",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo0Oo0O00oooOoOo0O0oOOOo$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "obfuscated_member": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Ljava/util/Optional;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.controller.VehicleOriginController$AnimationQueue",
+      "semantic_member": "pollScalePoint",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_CONTROL_DATA_FLOW_AND_DELEGATION_NOT_FULL_CALLEE_EQUIVALENCE",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo0Oo0O00oooOoOo0O0oOOOo$Oo0Oo0o00O00Oo0OOoOOoooo.class",
+          "locator": "BONE-COMMIT-QUEUE-EVIDENCE-2026-10-17.json",
+          "fact": "Rotation returns Optional.ofNullable of existing outer rotation object; position/scale return Optional.empty. No destructive dequeue or defensive copy.",
+          "access": 1
+        }
+      ]
+    }
+  ]
+}

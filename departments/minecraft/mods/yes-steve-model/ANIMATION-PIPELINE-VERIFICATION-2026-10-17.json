@@ -1,0 +1,105 @@
+{
+  "format": "kneekura.ysm.continuation-checkpoint.v1",
+  "recorded_at": "2026-10-17",
+  "baseline_remote_commit": "74fe6e7d894bffdb0daec2e30f10595b245a104d",
+  "mapping_count": 662,
+  "confidence": {
+    "HIGH": 264,
+    "CONFIRMED": 398
+  },
+  "kind": {
+    "class": 295,
+    "method": 358,
+    "field": 9
+  },
+  "prior625_rows_identical": true,
+  "new_mapping_count": 37,
+  "artifact": {
+    "filename": "ysm.jar",
+    "size": 63269843,
+    "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+    "sha1": "151ac7b24da8beeca1a20864565743cfd77af286",
+    "zip_entries": 1853,
+    "class_files": 955,
+    "ysm_class_files": 955,
+    "classfile_major_versions": {
+      "61": 955
+    }
+  },
+  "scanner_failures": 0,
+  "cohorts": [
+    {
+      "name": "bone-commit-queue",
+      "checks": 371,
+      "negative_controls": 19,
+      "failures": 0,
+      "independent_review": "PASS_BOUNDED_STATIC"
+    },
+    {
+      "name": "interpolation-boundary",
+      "base_checks": 116,
+      "checks": 100,
+      "negative_controls": 15,
+      "failures": 0,
+      "independent_review": "PASS_BOUNDED_STATIC"
+    },
+    {
+      "name": "animation-point",
+      "checks": 109,
+      "negative_controls": 16,
+      "failures": 0,
+      "independent_review": "PASS_BOUNDED_STATIC"
+    }
+  ],
+  "graph": {
+    "nodes": 955,
+    "undirected_edges": 3618,
+    "directed_class_refs_observed": 3823,
+    "components": 19,
+    "largest_components": [
+      722,
+      131,
+      86,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "seed_classes": 304
+  },
+  "coverage_accounting": {
+    "class_role_rows": 295,
+    "owners_with_any_semantic_mapping": 304,
+    "member_only_mapped_owners": 9,
+    "total_owners_without_any_mapping": 651,
+    "main_component_owners_without_any_mapping": 422,
+    "bundled_owners_without_any_mapping": 214,
+    "isolated_owners_without_any_mapping": 15,
+    "note": "New member mappings can seed owners without adding class-role rows. Do not equate295classrows with304seedowners or convert these into whole-target completion percentages."
+  },
+  "tool_sha256": {
+    "bone_commit_queue_ysm_265.py": "1aee11093da336f3c43afd4f89d60b36e062d33e7ac82c3ca29a8416b12a0043",
+    "interpolation_boundary_ysm_265.py": "f623e419e33ddeff401381ec68de0b4195957abc39c9915da745b749593cf8df",
+    "animation_point_ysm_265.py": "995fe356dcf8a3d5a37ac0706dadb423932c3091e3adca1d8b98ce39f2e26771"
+  },
+  "runtime_executed": false,
+  "ci_executed": false,
+  "whole_target_status": "IN_PROGRESS_CONTINUE_UNTIL_OWNER_STOPS",
+  "next_work": [
+    "Keyframe point producers and easing boundary",
+    "IBone Java float-array state writes",
+    "Controller production and transition consistency"
+  ]
+}

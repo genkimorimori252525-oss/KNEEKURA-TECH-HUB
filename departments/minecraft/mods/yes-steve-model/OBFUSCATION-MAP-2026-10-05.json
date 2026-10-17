@@ -14647,6 +14647,911 @@
           "access": 26
         }
       ]
+    },
+    {
+      "id": "ysm265.method.bone-top-level-snapshot-commit",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oOO0o0oOOOoOoo00oOO0Oo00",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.snapshot.BoneTopLevelSnapshot",
+      "semantic_member": "commit",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_CONTROL_DATA_FLOW_AND_DELEGATION_NOT_FULL_CALLEE_EQUIVALENCE",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oOO0o0oOOOoOoo00oOO0Oo00.class",
+          "locator": "BONE-COMMIT-QUEUE-EVIDENCE-2026-10-17.json",
+          "fact": "Hidden flags at12, initial rotation read21, rotation offset+initial fadd42/63/84 then setters43/64/85; direct position101/117/133, scale149/165/181; cachedPointData zero193. No handlers; partial writes/cache retention possible on escaping setter exception.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.animation-vec3-set-ending-transition-percent-progress-if-less",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00000oOOOoO0o00o00OOo0",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(F)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.keyframe.AnimationVec3",
+      "semantic_member": "setEndingTransitionPercentProgressIfLess",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_CONTROL_DATA_FLOW_AND_DELEGATION_NOT_FULL_CALLEE_EQUIVALENCE",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/OO00000oOOOoO0o00o00OOo0.class",
+          "locator": "BONE-COMMIT-QUEUE-EVIDENCE-2026-10-17.json",
+          "fact": "fcmpg5 and ifge6->14 updates field11 only if argument strictly less. NaN never wins; no lower clamp.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.animation-vec3-apply",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00000oOOOoO0o00o00OOo0",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lorg/joml/Vector3f;)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.keyframe.AnimationVec3",
+      "semantic_member": "apply",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_CONTROL_DATA_FLOW_AND_DELEGATION_NOT_FULL_CALLEE_EQUIVALENCE",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/OO00000oOOOoO0o00o00OOo0.class",
+          "locator": "BONE-COMMIT-QUEUE-EVIDENCE-2026-10-17.json",
+          "fact": "fcmpl7 compares progress with zero; ifne8->20 delegates exact vector interpolation24; signed zero copies this to dst13. dst is both previous value and output.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.animation-vec3-apply-rotation",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.OO00000oOOOoO0o00o00OOo0",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lorg/joml/Vector3f;Lorg/joml/Vector3f;)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.keyframe.AnimationVec3",
+      "semantic_member": "applyRotation",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_CONTROL_DATA_FLOW_AND_DELEGATION_NOT_FULL_CALLEE_EQUIVALENCE",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/OO00000oOOOoO0o00o00OOo0.class",
+          "locator": "BONE-COMMIT-QUEUE-EVIDENCE-2026-10-17.json",
+          "fact": "fcmpl7/ifne8->20; signed zero copies this to dst13; otherwise exact rotation interpolation25 receives progress,this,dst,initRot,dst. Rotation helper is not assumed linear.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.bedrock-animation-controller--blend-bone-animation-queue-poll-rotation-point",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O00Oo0oo0Ooo0oOOOo0OO0oO$o0OOooo0o0OO00OoOOOo0o0O",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Ljava/util/Optional;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.BedrockAnimationController$BlendBoneAnimationQueue",
+      "semantic_member": "pollRotationPoint",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_CONTROL_DATA_FLOW_AND_DELEGATION_NOT_FULL_CALLEE_EQUIVALENCE",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO$o0OOooo0o0OO00OoOOOo0o0O.class",
+          "locator": "BONE-COMMIT-QUEUE-EVIDENCE-2026-10-17.json",
+          "fact": "Filters each pair condition then queue active then matching nonnull point; first accepted point fixes beginning-transition mode. Rotation/position accumulate weighted fma from zero; scale multiplies weighted values from one. Beginning progress inside strict +/-1e-5 band (also unordered comparisons) returns offset immediately; otherwise checked cast to beginning-point for each subsequent accepted point. No destructive dequeue or local handlers; producer homogeneity is not proven.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.bedrock-animation-controller--blend-bone-animation-queue-poll-position-point",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O00Oo0oo0Ooo0oOOOo0OO0oO$o0OOooo0o0OO00OoOOOo0o0O",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Ljava/util/Optional;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.BedrockAnimationController$BlendBoneAnimationQueue",
+      "semantic_member": "pollPositionPoint",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_CONTROL_DATA_FLOW_AND_DELEGATION_NOT_FULL_CALLEE_EQUIVALENCE",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO$o0OOooo0o0OO00OoOOOo0o0O.class",
+          "locator": "BONE-COMMIT-QUEUE-EVIDENCE-2026-10-17.json",
+          "fact": "Filters each pair condition then queue active then matching nonnull point; first accepted point fixes beginning-transition mode. Rotation/position accumulate weighted fma from zero; scale multiplies weighted values from one. Beginning progress inside strict +/-1e-5 band (also unordered comparisons) returns offset immediately; otherwise checked cast to beginning-point for each subsequent accepted point. No destructive dequeue or local handlers; producer homogeneity is not proven.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.bedrock-animation-controller--blend-bone-animation-queue-poll-scale-point",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O00Oo0oo0Ooo0oOOOo0OO0oO$o0OOooo0o0OO00OoOOOo0o0O",
+      "obfuscated_member": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Ljava/util/Optional;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.BedrockAnimationController$BlendBoneAnimationQueue",
+      "semantic_member": "pollScalePoint",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_CONTROL_DATA_FLOW_AND_DELEGATION_NOT_FULL_CALLEE_EQUIVALENCE",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO$o0OOooo0o0OO00OoOOOo0o0O.class",
+          "locator": "BONE-COMMIT-QUEUE-EVIDENCE-2026-10-17.json",
+          "fact": "Filters each pair condition then queue active then matching nonnull point; first accepted point fixes beginning-transition mode. Rotation/position accumulate weighted fma from zero; scale multiplies weighted values from one. Beginning progress inside strict +/-1e-5 band (also unordered comparisons) returns offset immediately; otherwise checked cast to beginning-point for each subsequent accepted point. No destructive dequeue or local handlers; producer homogeneity is not proven.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.coded-animation-controller--single-bone-animation-queue-poll-rotation-point",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo000oooo0OOoo00O0o0OOOO$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Ljava/util/Optional;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.CodedAnimationController$SingleBoneAnimationQueue",
+      "semantic_member": "pollRotationPoint",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_CONTROL_DATA_FLOW_AND_DELEGATION_NOT_FULL_CALLEE_EQUIVALENCE",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO$Oo0Oo0o00O00Oo0OOoOOoooo.class",
+          "locator": "BONE-COMMIT-QUEUE-EVIDENCE-2026-10-17.json",
+          "fact": "Reads matching queue point without removing it; null -> Optional.empty. Ending/beginning/ordinary paths retain exact branch order. Rotation scales destination before rotation interpolation; position uses scalar multiplication, scale uses weighted-scale helper. Referenced point generation/interpolation remain delegated.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.coded-animation-controller--single-bone-animation-queue-poll-position-point",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo000oooo0OOoo00O0o0OOOO$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Ljava/util/Optional;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.CodedAnimationController$SingleBoneAnimationQueue",
+      "semantic_member": "pollPositionPoint",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_CONTROL_DATA_FLOW_AND_DELEGATION_NOT_FULL_CALLEE_EQUIVALENCE",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO$Oo0Oo0o00O00Oo0OOoOOoooo.class",
+          "locator": "BONE-COMMIT-QUEUE-EVIDENCE-2026-10-17.json",
+          "fact": "Reads matching queue point without removing it; null -> Optional.empty. Ending/beginning/ordinary paths retain exact branch order. Rotation scales destination before rotation interpolation; position uses scalar multiplication, scale uses weighted-scale helper. Referenced point generation/interpolation remain delegated.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.coded-animation-controller--single-bone-animation-queue-poll-scale-point",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo000oooo0OOoo00O0o0OOOO$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "obfuscated_member": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Ljava/util/Optional;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.controller.CodedAnimationController$SingleBoneAnimationQueue",
+      "semantic_member": "pollScalePoint",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_CONTROL_DATA_FLOW_AND_DELEGATION_NOT_FULL_CALLEE_EQUIVALENCE",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO$Oo0Oo0o00O00Oo0OOoOOoooo.class",
+          "locator": "BONE-COMMIT-QUEUE-EVIDENCE-2026-10-17.json",
+          "fact": "Reads matching queue point without removing it; null -> Optional.empty. Ending/beginning/ordinary paths retain exact branch order. Rotation scales destination before rotation interpolation; position uses scalar multiplication, scale uses weighted-scale helper. Referenced point generation/interpolation remain delegated.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.vehicle-origin-controller--animation-queue-poll-rotation-point",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo0Oo0O00oooOoOo0O0oOOOo$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Ljava/util/Optional;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.controller.VehicleOriginController$AnimationQueue",
+      "semantic_member": "pollRotationPoint",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_CONTROL_DATA_FLOW_AND_DELEGATION_NOT_FULL_CALLEE_EQUIVALENCE",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo0Oo0O00oooOoOo0O0oOOOo$Oo0Oo0o00O00Oo0OOoOOoooo.class",
+          "locator": "BONE-COMMIT-QUEUE-EVIDENCE-2026-10-17.json",
+          "fact": "Rotation returns Optional.ofNullable of existing outer rotation object; position/scale return Optional.empty. No destructive dequeue or defensive copy.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.vehicle-origin-controller--animation-queue-poll-position-point",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo0Oo0O00oooOoOo0O0oOOOo$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Ljava/util/Optional;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.controller.VehicleOriginController$AnimationQueue",
+      "semantic_member": "pollPositionPoint",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_CONTROL_DATA_FLOW_AND_DELEGATION_NOT_FULL_CALLEE_EQUIVALENCE",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo0Oo0O00oooOoOo0O0oOOOo$Oo0Oo0o00O00Oo0OOoOOoooo.class",
+          "locator": "BONE-COMMIT-QUEUE-EVIDENCE-2026-10-17.json",
+          "fact": "Rotation returns Optional.ofNullable of existing outer rotation object; position/scale return Optional.empty. No destructive dequeue or defensive copy.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.vehicle-origin-controller--animation-queue-poll-scale-point",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oo0Oo0O00oooOoOo0O0oOOOo$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "obfuscated_member": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Ljava/util/Optional;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.client.controller.VehicleOriginController$AnimationQueue",
+      "semantic_member": "pollScalePoint",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_CONTROL_DATA_FLOW_AND_DELEGATION_NOT_FULL_CALLEE_EQUIVALENCE",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oo0Oo0O00oooOoOo0O0oOOOo$Oo0Oo0o00O00Oo0OOoOOoooo.class",
+          "locator": "BONE-COMMIT-QUEUE-EVIDENCE-2026-10-17.json",
+          "fact": "Rotation returns Optional.ofNullable of existing outer rotation object; position/scale return Optional.empty. No destructive dequeue or defensive copy.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.class.math-util",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.math-util-get-quat-from-euler-z-y-x",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lorg/joml/Vector3f;)Lorg/joml/Quaternionf;",
+      "semantic_member": "getQuatFromEulerZYX",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.math-util-lerp-rotation-values",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(FLorg/joml/Vector3f;Lorg/joml/Vector3f;Lorg/joml/Vector3f;Lorg/joml/Vector3f;)V",
+      "semantic_member": "lerpRotationValues",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.math-util-get-euler-angles-z-y-x",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lorg/joml/Quaternionf;Lorg/joml/Vector3f;)Lorg/joml/Vector3f;",
+      "semantic_member": "getEulerAnglesZYX",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.math-util-lerp-vector",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(FLorg/joml/Vector3f;Lorg/joml/Vector3f;)Lorg/joml/Vector3f;",
+      "semantic_member": "lerpVector",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.math-util-lerp-vector-into",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(FLorg/joml/Vector3f;Lorg/joml/Vector3f;Lorg/joml/Vector3f;)V",
+      "semantic_member": "lerpVectorInto",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.math-util-lerp-scalar",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(FFF)F",
+      "semantic_member": "lerpScalar",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.math-util-catmull-rom-vector",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(FLorg/joml/Vector3f;Lorg/joml/Vector3f;Lorg/joml/Vector3f;Lorg/joml/Vector3f;)Lorg/joml/Vector3f;",
+      "semantic_member": "catmullRomVector",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.math-util-catmull-rom-scalar",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(FFFFF)F",
+      "semantic_member": "catmullRomScalar",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.math-util-degrees-to-radians",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(F)F",
+      "semantic_member": "degreesToRadians",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.math-util-radians-to-degrees",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(F)F",
+      "semantic_member": "radiansToDegrees",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.math-util-wrap-rotation-into",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lorg/joml/Vector3f;Lorg/joml/Vector3f;)V",
+      "semantic_member": "wrapRotationInto",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.math-util-wrap-rotation-vector",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lorg/joml/Vector3f;)Lorg/joml/Vector3f;",
+      "semantic_member": "wrapRotationVector",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.math-util-wrap-rotation-scalar",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "obfuscated_member": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "(F)F",
+      "semantic_member": "wrapRotationScalar",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.math-util-compute-weighted-scale-vector",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lorg/joml/Vector3f;F)Lorg/joml/Vector3f;",
+      "semantic_member": "computeWeightedScaleVector",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.math-util-compute-weighted-scale-into",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lorg/joml/Vector3f;FLorg/joml/Vector3f;)V",
+      "semantic_member": "computeWeightedScaleInto",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.math-util-compute-weighted-scale-scalar",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(FF)F",
+      "semantic_member": "computeWeightedScaleScalar",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.animation-point-get-percent-completed",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oO0O00Oo00o00OO0o0OOOOOO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()F",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.keyframe.point.AnimationPoint",
+      "semantic_member": "getPercentCompleted",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_LOCAL_SEMANTICS_WITH_KEYFRAME_EASING_DELEGATED",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oO0O00Oo00o00OO0o0OOOOOO.class",
+          "locator": "ANIMATION-POINT-EVIDENCE-2026-10-17.json",
+          "fact": "totalTick fcmpl5/ifne6: either signed zero returns1 at9; otherwise current/total fdiv21. No clamp or finite guard.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.animation-point-setup-animation-context",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oO0O00Oo00o00OO0o0OOOOOO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.keyframe.point.AnimationPoint",
+      "semantic_member": "setupAnimationContext",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_LOCAL_SEMANTICS_WITH_KEYFRAME_EASING_DELEGATED",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oO0O00Oo00o00OO0o0OOOOOO.class",
+          "locator": "ANIMATION-POINT-EVIDENCE-2026-10-17.json",
+          "fact": "entity interface call1, cast6, stored context read10, setter13; no previous-context save/restore, null guard or handler.",
+          "access": 4
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.beginning-transition-point-get-lerp-point",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O0O0O00OOO0o00o00ooooOo0",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Lorg/joml/Vector3f;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.keyframe.point.BeginningTransitionPoint",
+      "semantic_member": "getLerpPoint",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_LOCAL_SEMANTICS_WITH_KEYFRAME_EASING_DELEGATED",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/O0O0O00OOO0o00o00ooooOo0.class",
+          "locator": "ANIMATION-POINT-EVIDENCE-2026-10-17.json",
+          "fact": "setup context2, destination call10, in-place MathUtil interpolation24 with supplied transitionPercentProgress, then allocate cache40/write43 if null31 or update54; return original dst59, not cached copy. No evaluation memoization/handler.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.beginning-transition-point-get-transition-dst",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O0O0O00OOO0o00o00ooooOo0",
+      "obfuscated_member": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Lorg/joml/Vector3f;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.keyframe.point.BeginningTransitionPoint",
+      "semantic_member": "getTransitionDst",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_LOCAL_SEMANTICS_WITH_KEYFRAME_EASING_DELEGATED",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/O0O0O00OOO0o00o00ooooOo0.class",
+          "locator": "ANIMATION-POINT-EVIDENCE-2026-10-17.json",
+          "fact": "setup context2 then delegated transition destination10 and direct return13. No interpolation/cache write in this accessor.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ending-transition-point-get-percent-completed",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0oooOOoo00ooOO00OO0OO0",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()F",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.keyframe.point.EndingTransitionPoint",
+      "semantic_member": "getPercentCompleted",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_LOCAL_SEMANTICS_WITH_KEYFRAME_EASING_DELEGATED",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/Oo0oooOOoo00ooOO00OO0OO0.class",
+          "locator": "ANIMATION-POINT-EVIDENCE-2026-10-17.json",
+          "fact": "total zero test5/6; current zero test14/15 yields0 at18 versus1 at22; nonzero total fdiv32. Signed zeros equal; currentNaN with zero total chooses1, totalNaN divides. No clamp.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ending-transition-point-get-lerp-point",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0oooOOoo00ooOO00OO0OO0",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Lorg/joml/Vector3f;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.keyframe.point.EndingTransitionPoint",
+      "semantic_member": "getLerpPoint",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_LOCAL_SEMANTICS_WITH_KEYFRAME_EASING_DELEGATED",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/Oo0oooOOoo00ooOO00OO0OO0.class",
+          "locator": "ANIMATION-POINT-EVIDENCE-2026-10-17.json",
+          "fact": "cache null branch4; allocate src copy16/write19 else set33; returns original srcPoint41. Evaluator unused; no context setup, interpolation or handler.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.key-frame-point-get-lerp-point",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O00ooo0O0Ooo0OOO0oo00o0o",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Lorg/joml/Vector3f;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.keyframe.point.KeyFramePoint",
+      "semantic_member": "getLerpPoint",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_LOCAL_SEMANTICS_WITH_KEYFRAME_EASING_DELEGATED",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/O00ooo0O0Ooo0OOO0oo00o0o.class",
+          "locator": "ANIMATION-POINT-EVIDENCE-2026-10-17.json",
+          "fact": "setup context2; inherited progress11 passed to keyframe eval14; cache null22 allocate31/write34 else set45; return original result50. Every call reevaluates before cache update.",
+          "access": 1
+        }
+      ]
     }
   ],
   "unresolved_hints": [
@@ -14964,13 +15869,13 @@
       "controller_interface": "OoOoOO0O00oOoO0o0ooOO0oO"
     },
     "latest_contract": {
-      "mappings": 625,
-      "class_targets": 294,
-      "exact_methods": 322,
+      "mappings": 662,
+      "class_targets": 295,
+      "exact_methods": 358,
       "exact_fields": 9,
       "failures": 0,
-      "verified_at": "2026-10-16",
-      "verification": "SEMANTIC-VERIFICATION-2026-10-16.json"
+      "verified_at": "2026-10-17",
+      "verification": "ANIMATION-PIPELINE-VERIFICATION-2026-10-17.json"
     },
     "historical_contract_282": {
       "mappings": 282,
@@ -15272,7 +16177,7 @@
       "preserved_negative_finding": "SOURCE_ARTIFACT_DIVERGENCE"
     }
   },
-  "updated_at": "2026-10-16",
+  "updated_at": "2026-10-17",
   "continuation": {
     "baseline_commit": "a6abc37e39db9b25ad643abf074215064b206199",
     "baseline_mapping_count": 604,
@@ -15280,5 +16185,15 @@
     "evidence": "BINARY-EVALUATOR-EVIDENCE-2026-10-16.json",
     "verification": "SEMANTIC-VERIFICATION-2026-10-16.json",
     "scope": "16 binary operator bodies, 3 wrapper factories, binary visitor and evaluator-table field; no new class roles"
-  }
+  },
+  "continuation_checkpoints": [
+    {
+      "date": "2026-10-17",
+      "cohort": "bone-queue-interpolation-and-animation-point",
+      "baseline_mappings": 625,
+      "added": 37,
+      "total": 662,
+      "verification": "ANIMATION-PIPELINE-VERIFICATION-2026-10-17.json"
+    }
+  ]
 }

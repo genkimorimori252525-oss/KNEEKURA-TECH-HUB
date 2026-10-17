@@ -1,0 +1,180 @@
+{
+  "status": "PROPOSED_INDEPENDENT_REVIEW_PENDING",
+  "mappings": [
+    {
+      "id": "ysm265.method.animation-point-get-percent-completed",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oO0O00Oo00o00OO0o0OOOOOO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()F",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.keyframe.point.AnimationPoint",
+      "semantic_member": "getPercentCompleted",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_LOCAL_SEMANTICS_WITH_KEYFRAME_EASING_DELEGATED",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oO0O00Oo00o00OO0o0OOOOOO.class",
+          "locator": "ANIMATION-POINT-EVIDENCE-2026-10-17.json",
+          "fact": "totalTick fcmpl5/ifne6: either signed zero returns1 at9; otherwise current/total fdiv21. No clamp or finite guard.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.animation-point-setup-animation-context",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oO0O00Oo00o00OO0o0OOOOOO",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)V",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.keyframe.point.AnimationPoint",
+      "semantic_member": "setupAnimationContext",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_LOCAL_SEMANTICS_WITH_KEYFRAME_EASING_DELEGATED",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oO0O00Oo00o00OO0o0OOOOOO.class",
+          "locator": "ANIMATION-POINT-EVIDENCE-2026-10-17.json",
+          "fact": "entity interface call1, cast6, stored context read10, setter13; no previous-context save/restore, null guard or handler.",
+          "access": 4
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.beginning-transition-point-get-lerp-point",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O0O0O00OOO0o00o00ooooOo0",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Lorg/joml/Vector3f;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.keyframe.point.BeginningTransitionPoint",
+      "semantic_member": "getLerpPoint",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_LOCAL_SEMANTICS_WITH_KEYFRAME_EASING_DELEGATED",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/O0O0O00OOO0o00o00ooooOo0.class",
+          "locator": "ANIMATION-POINT-EVIDENCE-2026-10-17.json",
+          "fact": "setup context2, destination call10, in-place MathUtil interpolation24 with supplied transitionPercentProgress, then allocate cache40/write43 if null31 or update54; return original dst59, not cached copy. No evaluation memoization/handler.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.beginning-transition-point-get-transition-dst",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O0O0O00OOO0o00o00ooooOo0",
+      "obfuscated_member": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Lorg/joml/Vector3f;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.keyframe.point.BeginningTransitionPoint",
+      "semantic_member": "getTransitionDst",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_LOCAL_SEMANTICS_WITH_KEYFRAME_EASING_DELEGATED",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/O0O0O00OOO0o00o00ooooOo0.class",
+          "locator": "ANIMATION-POINT-EVIDENCE-2026-10-17.json",
+          "fact": "setup context2 then delegated transition destination10 and direct return13. No interpolation/cache write in this accessor.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ending-transition-point-get-percent-completed",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0oooOOoo00ooOO00OO0OO0",
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()F",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.keyframe.point.EndingTransitionPoint",
+      "semantic_member": "getPercentCompleted",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_LOCAL_SEMANTICS_WITH_KEYFRAME_EASING_DELEGATED",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/Oo0oooOOoo00ooOO00OO0OO0.class",
+          "locator": "ANIMATION-POINT-EVIDENCE-2026-10-17.json",
+          "fact": "total zero test5/6; current zero test14/15 yields0 at18 versus1 at22; nonzero total fdiv32. Signed zeros equal; currentNaN with zero total chooses1, totalNaN divides. No clamp.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.ending-transition-point-get-lerp-point",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.Oo0oooOOoo00ooOO00OO0OO0",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Lorg/joml/Vector3f;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.keyframe.point.EndingTransitionPoint",
+      "semantic_member": "getLerpPoint",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_LOCAL_SEMANTICS_WITH_KEYFRAME_EASING_DELEGATED",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/Oo0oooOOoo00ooOO00OO0OO0.class",
+          "locator": "ANIMATION-POINT-EVIDENCE-2026-10-17.json",
+          "fact": "cache null branch4; allocate src copy16/write19 else set33; returns original srcPoint41. Evaluator unused; no context setup, interpolation or handler.",
+          "access": 1
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.key-frame-point-get-lerp-point",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.O00ooo0O0Ooo0OOO0oo00o0o",
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Lorg/joml/Vector3f;",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.keyframe.point.KeyFramePoint",
+      "semantic_member": "getLerpPoint",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "BOUNDED_LOCAL_SEMANTICS_WITH_KEYFRAME_EASING_DELEGATED",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/O00ooo0O0Ooo0OOO0oo00o0o.class",
+          "locator": "ANIMATION-POINT-EVIDENCE-2026-10-17.json",
+          "fact": "setup context2; inherited progress11 passed to keyframe eval14; cache null22 allocate31/write34 else set45; return original result50. Every call reevaluates before cache update.",
+          "access": 1
+        }
+      ]
+    }
+  ]
+}

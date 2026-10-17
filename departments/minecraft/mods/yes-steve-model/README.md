@@ -8,7 +8,7 @@
 - Main focus: model runtime, Molang, animation controllers, per-entity state, rendering, model distribution and integration seams
 - Research status: **EXACT_JAR_ANCHORED / 955_CLASS_FOUNDATION_MAPPED / JAVA_OBFUSCATION_PARTIALLY_RECOVERED**
 - Whole-target status: **IN_PROGRESS / NOT COMPLETE**
-- Research date: 2026-10-05; latest continuation: **2026-10-16**
+- Research date: 2026-10-05; latest continuation: **2026-10-17**
 
 This workspace follows KNEEKURA's evidence rules: distributed artifact, release-line source candidate,
 frontier source, community reconnaissance and comparative implementations are kept as separate tracks.
@@ -142,20 +142,20 @@ The machine-readable map deliberately keeps distributed-artifact observations se
 version-matched public source candidate. This exposed concrete source/artifact divergence around the
 preview/paperdoll renderer instead of silently forcing them to agree.
 
-The current machine-readable map contains **625** mappings (**361 CONFIRMED / 264 HIGH**).
-Every recorded owner/member/descriptor contract passes against the exact official JAR: **294 class
-targets, 322 exact methods and 9 exact fields, with 0 failures**. The whole-JAR Foundation Map covers
+The current machine-readable map contains **662** mappings (**398 CONFIRMED / 264 HIGH**).
+Every recorded owner/member/descriptor contract passes against the exact official JAR: **295 class
+targets, 358 exact methods and 9 exact fields, with 0 failures**. The whole-JAR Foundation Map covers
 **955 / 955 classes**. Two large formerly-UNKNOWN islands are now separated as bundled **Concentus
 (131 classes)** and **Gagravarr/VorbisJava (86 classes)**; only **15 degree-0 singleton classes** remain
 UNKNOWN.
 
 A whole-JAR Foundation Map now classifies the exact Java artifact by structural domain. The strongest mapped hubs are `IContext` (degree 103), `Function$ArgumentCollection` (86), `Function` (85), `ExecutionContext` (58), `PlayerAnimatableCapability` (57), `YesSteveModel` (50), `YSMBinding` (48) and `NetworkHandler` (47). The strongest cross-domain seam is **CAPABILITY ↔ NETWORK (88 internal edges)**.
 
-The latest practical continuation closes loop/control execution, the finite math registration cohort,
+The October 5 practical continuation closed loop/control execution, the finite math registration cohort,
 property stores, parser lifecycle and typed AST roles, then exhausts a finite directly grounded
 source/literal/relational shortlist across controller, GUI, renderer and compatibility roles. All 18
-additional concrete source leads also received actual dispositions. **432 main-component classes
-remain unseeded; 661 overall**, including 214 bundled media and 15 isolated classes. This is semantic
+additional concrete source leads also received actual dispositions. At that historical checkpoint, **432 main-component classes
+remained unseeded; 661 overall**, including 214 bundled media and 15 isolated classes. This is semantic
 recovery; original names and whole-artifact/source equivalence remain unproven. See
 [SEMANTIC-RECOVERY-2026-10-05.md](SEMANTIC-RECOVERY-2026-10-05.md) for the stopping boundary and
 [SEMANTIC-COVERAGE-2026-10-05.json](SEMANTIC-COVERAGE-2026-10-05.json) for every remaining owner.
@@ -174,14 +174,35 @@ class, not 21 additional classes or completion of the entire MOD.
 Use [current coverage](SEMANTIC-COVERAGE-2026-10-16.json) and
 [current verification](SEMANTIC-VERIFICATION-2026-10-16.json) for this continuation.
 October 5 dated coverage and verification files remain historical receipts.
-The remaining class counts are unchanged: **432 main / 661 total unseeded**.
+At the October 16 checkpoint, the remaining counts were **432 main / 661 total unseeded**.
 No game or target-JAR execution is claimed.
 
 The next [processor lifecycle review](ANIMATION-PROCESSOR-RECOVERY-2026-10-16.md)
 retains exact queue, shouldTick and exception paths. Its bounded findings passed
 independent review, 146 regression checks, 11 corruption controls and 26 caller
-checks. **No new central mappings are promoted**; the 625 count is unchanged.
+checks. **That processor study itself added no central mappings**; its October 16
+checkpoint remained at 625 before the subsequent October 17 additions.
 This is not full processor-body semantic closure or a reproduced runtime defect.
+
+## October 17 continuous research
+
+[Active research queue](CONTINUOUS-RESEARCH-QUEUE.md): saving a cohort is not a stop.
+The reviewed bone/queue, interpolation and animation-point batch adds 37 mappings:
+13 bone/queue methods, 16 MathUtil methods plus one class role, and 7 point methods.
+See [checkpoint verification](ANIMATION-PIPELINE-VERIFICATION-2026-10-17.json).
+
+There are now **295 class-role rows**, but **304 distinct owners with any semantic
+mapping**: nine owners have reviewed member mappings without a separate class-role
+row. The graph's still-unseeded count is **651 total / 422 main**, not 955 minus the
+class-role-row count. None of these counts is a whole-target completion percentage.
+
+- [Bone commit and queue consumers](BONE-COMMIT-QUEUE-RECOVERY-2026-10-17.md)
+- [Interpolation boundary](INTERPOLATION-BOUNDARY-RECOVERY-2026-10-17.md)
+- [Animation point lifecycle](ANIMATION-POINT-RECOVERY-2026-10-17.md)
+
+Next connected producer and Java bone-state work continues. Native internals,
+model protection bypass, game execution and global source equivalence remain out
+of this static continuation's claims.
 
 ## Important limits
 

@@ -1,0 +1,410 @@
+{
+  "format": "kneekura.ysm-proposed-mapping-additions.v1",
+  "mappings": [
+    {
+      "id": "ysm265.class.math-util",
+      "kind": "class",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.math-util-get-quat-from-euler-z-y-x",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lorg/joml/Vector3f;)Lorg/joml/Quaternionf;",
+      "semantic_member": "getQuatFromEulerZYX",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.math-util-lerp-rotation-values",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(FLorg/joml/Vector3f;Lorg/joml/Vector3f;Lorg/joml/Vector3f;Lorg/joml/Vector3f;)V",
+      "semantic_member": "lerpRotationValues",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.math-util-get-euler-angles-z-y-x",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lorg/joml/Quaternionf;Lorg/joml/Vector3f;)Lorg/joml/Vector3f;",
+      "semantic_member": "getEulerAnglesZYX",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.math-util-lerp-vector",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(FLorg/joml/Vector3f;Lorg/joml/Vector3f;)Lorg/joml/Vector3f;",
+      "semantic_member": "lerpVector",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.math-util-lerp-vector-into",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(FLorg/joml/Vector3f;Lorg/joml/Vector3f;Lorg/joml/Vector3f;)V",
+      "semantic_member": "lerpVectorInto",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.math-util-lerp-scalar",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(FFF)F",
+      "semantic_member": "lerpScalar",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.math-util-catmull-rom-vector",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(FLorg/joml/Vector3f;Lorg/joml/Vector3f;Lorg/joml/Vector3f;Lorg/joml/Vector3f;)Lorg/joml/Vector3f;",
+      "semantic_member": "catmullRomVector",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.math-util-catmull-rom-scalar",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(FFFFF)F",
+      "semantic_member": "catmullRomScalar",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.math-util-degrees-to-radians",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(F)F",
+      "semantic_member": "degreesToRadians",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.math-util-radians-to-degrees",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(F)F",
+      "semantic_member": "radiansToDegrees",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.math-util-wrap-rotation-into",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lorg/joml/Vector3f;Lorg/joml/Vector3f;)V",
+      "semantic_member": "wrapRotationInto",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.math-util-wrap-rotation-vector",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "obfuscated_member": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lorg/joml/Vector3f;)Lorg/joml/Vector3f;",
+      "semantic_member": "wrapRotationVector",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.math-util-wrap-rotation-scalar",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "obfuscated_member": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "(F)F",
+      "semantic_member": "wrapRotationScalar",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.math-util-compute-weighted-scale-vector",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lorg/joml/Vector3f;F)Lorg/joml/Vector3f;",
+      "semantic_member": "computeWeightedScaleVector",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.math-util-compute-weighted-scale-into",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lorg/joml/Vector3f;FLorg/joml/Vector3f;)V",
+      "semantic_member": "computeWeightedScaleInto",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    },
+    {
+      "id": "ysm265.method.math-util-compute-weighted-scale-scalar",
+      "kind": "method",
+      "obfuscated_owner": "com.elfmcys.yesstevemodel.oooOO00ooooooOO0ooO00O0O",
+      "semantic_owner": "com.elfmcys.yesstevemodel.geckolib3.core.util.MathUtil",
+      "confidence": "CONFIRMED",
+      "artifact_scope": "EXACT_DISTRIBUTED_2_6_5_FORGE_1_20_1",
+      "exact_jar_verified": true,
+      "original_unobfuscated_symbol_proven": false,
+      "confidence_scope": "LOCAL_JAVA_SEMANTICS_WITH_EXTERNAL_JOML_BOUNDARY",
+      "source_artifact_divergence": false,
+      "obfuscated_member": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(FF)F",
+      "semantic_member": "computeWeightedScaleScalar",
+      "evidence": [
+        {
+          "type": "EXACT_OFFICIAL_JAR_BOUNDED_DECLARATION_AND_SEMANTIC_RELATIONS",
+          "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+          "internal_path": "com/elfmcys/yesstevemodel/oooOO00ooooooOO0ooO00O0O.class",
+          "locator": "INTERPOLATION-BOUNDARY-EVIDENCE-2026-10-17.json",
+          "fact": "Pinned source counterpart, exact declarations and all18method instruction/operand records; Java calculation and call sequencing only, not JOML implementation or runtime numerical validation."
+        }
+      ]
+    }
+  ]
+}
