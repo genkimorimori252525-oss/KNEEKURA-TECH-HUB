@@ -294,3 +294,5 @@ bounded runtime observation rather than protection bypass.
 - [Movement-query provenance and units](MOVEMENT-QUERY-RECOVERY-2026-10-17.md): velocity versus sampled displacement, time units and directional-input formulas; wrapper propagation pending.
 
 - [Variable and numeric conversion boundaries](VARIABLE-CONVERSION-RECOVERY-2026-10-17.md): context guards, raw values, NaN/infinity and typed evaluation; not universal sanitation.
+
+- [Variable AST and return cleanup](VARIABLE-AST-RETURN-RECOVERY-2026-10-17.md): target dispatch, raw return propagation and finally boundaries; parser lookup pending.

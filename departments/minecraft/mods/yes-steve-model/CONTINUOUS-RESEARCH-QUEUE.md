@@ -129,3 +129,7 @@ helper NaN is not yet a claim about the final Molang-visible value.
 Context variable wrappers and typed numeric/null/NaN conversion are recorded.
 Continue AST variable resolution and actual consumer paths; inherited IValue
 catch/conversion behavior must not be generalized to overriding value classes.
+
+Variable AST dispatch and single/multi-expression return cleanup are recorded.
+Continue parser property resolution and assignable storage semantics; do not
+infer dynamic rebinding from an AST node that captures a target reference.
