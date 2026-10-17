@@ -482,3 +482,5 @@ bounded runtime observation rather than protection bypass.
 - [NativeTexture Java boundary](NATIVE-TEXTURE-JAVA-BOUNDARY-RECOVERY-2026-10-17.md): render-call scheduling, shallow PBR ownership and distinct cleanup layers; native methods remain declarations only.
 
 - [Optional one-file method evidence viewer](MEMBER-EVIDENCE-VIEWER-2026-10-17.md): compact signatures first, exact full member on demand, no automatic audits or tool probes.
+
+- [Maid entity control](MAID-ENTITY-CONTROL-RECOVERY-2026-10-17.md) and [controller/renderer registration](MAID-CONTROLLER-REGISTRATION-RECOVERY-2026-10-17.md): remote-struct no-op overrides,13 priority states,22 discovery sites and deferred renderer creation.

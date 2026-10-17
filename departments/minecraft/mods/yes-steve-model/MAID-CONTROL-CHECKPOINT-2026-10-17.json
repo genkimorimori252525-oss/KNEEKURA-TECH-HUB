@@ -1,0 +1,89 @@
+{
+  "format": "kneekura.ysm-maid-control-checkpoint.v1",
+  "cohort_manifest": [
+    [
+      "MAID-ENTITY-CONTROL",
+      "maid_entity_control",
+      true
+    ],
+    [
+      "MAID-CONTROLLER-REGISTRATION",
+      "maid_controller_registration",
+      true
+    ],
+    [
+      "MAID-QUERY-ADAPTER",
+      "maid_query_adapter",
+      true
+    ],
+    [
+      "TLM-LOCATION-ADAPTER",
+      "tlm_location_adapter",
+      true
+    ],
+    [
+      "PLAYER-CONTROLLER-ASSEMBLY",
+      "player_controller_assembly",
+      true
+    ]
+  ],
+  "cohorts": [
+    {
+      "cohort": "MAID-ENTITY-CONTROL",
+      "tool_sha256": "1b3dac38353e4d8baa29b221853fd1bbfff0de26811b4b12bfd881256587ae9a",
+      "evidence_sha256": "4df0e383e2d30c89b8604df03e2bd5eec2a5c7b8a883c8292ab4c2057905ee2b",
+      "rerun_receipt_sha256": "9a3e35f31bfa4200b01d1b0f67f4e95fefa724207f6e0f33fcb263071b9cd1df",
+      "checks": 272,
+      "negative_controls": 10,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MAID-CONTROLLER-REGISTRATION",
+      "tool_sha256": "2032f9f8cb0587bdf3f6d9006a4d4756028da95ffe89199e98fc8610964c67ab",
+      "evidence_sha256": "eafce1a097f175e14ad5326eba046e6d647b8093b82c34ff8135ef708636829c",
+      "rerun_receipt_sha256": "bd43bf5f4ec9c16555b53f6093874fd5e13e52e839c13599badd9bdcedba6750",
+      "checks": 294,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MAID-QUERY-ADAPTER",
+      "tool_sha256": "88b2a16360e222d285212c379d999be6ed2e28f27dcba7caa038a9124d511cf5",
+      "evidence_sha256": "39244433e5531029a12d605e55499e449be475c96ccc1383a45229d6f8d72ba7",
+      "rerun_receipt_sha256": "0249c3dfb008a6b9807fc0fc666e26006eb946b42b1e1cd95412f690321c1133",
+      "checks": 284,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "TLM-LOCATION-ADAPTER",
+      "tool_sha256": "5ee781546d71f2c4bbb6be5f35301d8a91a3b7757fce7f3ead6d40bb7ef9b1a8",
+      "evidence_sha256": "caecf87ca06dcf5b5da9716fe2d2067723d7b4105000a2722fec0af3263072b6",
+      "rerun_receipt_sha256": "fe05b60f1d827094c60ffbfe3e8bec54c6a5bd88c385cb18b89f2d4d1f9c7c92",
+      "checks": 174,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "PLAYER-CONTROLLER-ASSEMBLY",
+      "tool_sha256": "9f129827b9e9a051cc95d2b798771cc387b4bf6dbf867d7d5665d9a2cd9a1703",
+      "evidence_sha256": "90c6d517b65bf16855029899ab2633abb19ad7e8aa22459d703ff8ea45c5cb8f",
+      "rerun_receipt_sha256": "4803445e477faa72dab4826e8b97e0c2f1c5110f9b5964b15fc7c3c1c8a22e51",
+      "checks": 437,
+      "negative_controls": 13,
+      "status": "PASS"
+    }
+  ],
+  "cohort_count": 5,
+  "overlapping_method_snapshots_compared": 0,
+  "overlap_conflicts": 0,
+  "central_mapping_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
+  "central_mapping_promoted": false,
+  "independent_semantic_review": "NOT_RUN",
+  "target_runtime_executed": false,
+  "whole_project_ci_run": false,
+  "earlier_fixed17_checkpoint_modified": false,
+  "earlier_fixed10_checkpoint_modified": false,
+  "earlier_fixed9_checkpoint_modified": false,
+  "elapsed_seconds": 0.784
+}

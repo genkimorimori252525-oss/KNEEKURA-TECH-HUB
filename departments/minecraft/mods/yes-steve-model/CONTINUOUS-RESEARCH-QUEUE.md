@@ -91,9 +91,15 @@ shader evidence in a fixed3 checkpoint. Native methods remain declarations witho
 Code. An optional one-file member viewer avoids loading whole snapshots for a
 single method; it performs no artifact audit or startup scan.
 
-Next finite connected question: remaining reusable Java-only vector/data utility
-consumers and reachable adapter state, prioritizing concrete unresolved questions
-over repeating covered constructors or inflating declaration counts.
+Source-only utility references were not treated as proof of active use. Maid
+entity/control and controller registration were instead followed through concrete
+factory edges; a fixed5 checkpoint passes. The maid remote-struct overrides are
+bytecode no-ops/null, not inherited player synchronization. Broad role inventories
+containing a source path must not be mistaken for full semantic coverage.
+
+Next finite connected question: actual maid render/capability/tick consumers behind
+these registration sites, including readiness gates and remote-update listeners.
+Keep external TLM behavior and native renderer execution outside the proof.
 
 ## Anchors
 
