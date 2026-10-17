@@ -317,3 +317,5 @@ bounded runtime observation rather than protection bypass.
 - [Parser pool lifetime](PARSER-POOL-LIFETIME-RECOVERY-2026-10-17.md): rent/return reset, per-parser fn binding and dynamic args lookup; native loader lifetime unproven.
 
 - [Struct copy and change tracking](STRUCT-COPY-CHANGE-RECOVERY-2026-10-17.md): aliasing/read-only contracts and mutation-before-notification order; no network guarantees.
+
+- [Pooled names and change codec](POOLED-NAME-CHANGE-CODEC-RECOVERY-2026-10-17.md): process-local IDs, text-name conversion and directional data maps; no network execution.

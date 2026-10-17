@@ -161,3 +161,7 @@ and Java storage consumers; do not infer all pool state is reset on parse failur
 Struct copy/alias and local/remote change bookkeeping are recorded. Continue
 pooled-name/map wrappers and change consumers; MAX_SIZE at a notification gate
 is not automatically a storage cap or a network validation guarantee.
+
+Pooled names and change representation/codec are recorded. Continue ordinary
+remote-state application, model-hash selection and merge order; declared message
+fields do not establish authorization, delivery or successful synchronization.
