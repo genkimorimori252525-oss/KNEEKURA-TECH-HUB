@@ -1,0 +1,72 @@
+{
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "class_count": 955,
+  "targets": [
+    [
+      "com/elfmcys/yesstevemodel/oO0OoOoo00ooooO00OoOO00O",
+      "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "(Ljava/lang/String;)V"
+    ]
+  ],
+  "method_handle_targets": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOOOOO00o0Oo000O0OO0OOO0",
+      "bootstrap_index": 3,
+      "bootstrap": {
+        "method_handle": {
+          "cp_tag": 15,
+          "reference_kind": 6,
+          "reference": {
+            "cp_tag": 10,
+            "owner": "java/lang/invoke/LambdaMetafactory",
+            "name": "metafactory",
+            "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+          }
+        },
+        "arguments": [
+          {
+            "cp_tag": 16,
+            "value": "(Ljava/lang/Object;)V"
+          },
+          {
+            "cp_tag": 15,
+            "reference_kind": 5,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "com/elfmcys/yesstevemodel/oO0OoOoo00ooooO00OoOO00O",
+              "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+              "descriptor": "(Ljava/lang/String;)V"
+            }
+          },
+          {
+            "cp_tag": 16,
+            "value": "(Ljava/lang/String;)V"
+          }
+        ]
+      },
+      "users": [
+        {
+          "caller": {
+            "owner": "com/elfmcys/yesstevemodel/OOOOOO00o0Oo000O0OO0OOO0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/ooOOOo00o0000o0oO000oooO;Lcom/elfmcys/yesstevemodel/OoO00O0oOo0000oo0OOO0oO0;ZLjava/util/List;)Lcom/elfmcys/yesstevemodel/Oo0o0o0o0OOo0000ooo00o00;"
+          },
+          "instruction": {
+            "offset": 311,
+            "opcode": "0xba",
+            "reference": {
+              "name": "accept",
+              "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoOoo00ooooO00OoOO00O;)Ljava/util/function/Consumer;",
+              "bootstrap_index": 3,
+              "cp_tag": 18
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "calls": [],
+  "caller_methods": [],
+  "external_or_reflective_closure": false,
+  "runtime_executed": false
+}

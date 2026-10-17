@@ -388,3 +388,5 @@ bounded runtime observation rather than protection bypass.
 - [Coded player-main selection](PLAYER-MAIN-SELECTION-RECOVERY-2026-10-17.md): state registration, mod-adapter precedence, loop overrides and differences from cached ctrl movement queries.
 
 - [Humanoid hand predicates](HUMANOID-HAND-PREDICATES-RECOVERY-2026-10-17.md): hold pause gates, item-reference tracking, swing/use state distinctions and version-aware loop selection.
+
+- [Conditional names and model ingestion](CONDITIONAL-ANIMATION-NAMES-RECOVERY-2026-10-17.md): merged/default animation-key registration through a lambda handle, tag precedence and cosmetic-aware armor conditions.
