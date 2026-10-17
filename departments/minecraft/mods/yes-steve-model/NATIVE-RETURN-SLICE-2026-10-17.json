@@ -1,0 +1,69 @@
+{
+  "format": "kneekura.ysm-native-return-slice.v1",
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "dependency_flag_chain_sha256": "1ef44e8ee93d2bf7c139806de00eee443dc8bb70b709af30207ad5f35c62a238",
+  "segments": [
+    {
+      "address": 17561945,
+      "size": 30,
+      "sha256": "9f43224331dae68099adb5845f11860c2c8728f856412d7df204252837125f36"
+    },
+    {
+      "address": 19785132,
+      "size": 64,
+      "sha256": "e8c486f6312581a33b1cb94e0a5da9a5fd5979047f6b0d1e4fe269df4e0be998"
+    },
+    {
+      "address": 18496149,
+      "size": 74,
+      "sha256": "967855e68d2114ccb3ba1c50a61a42d839d2f9a7dab7f27bf128e6720c09125b"
+    },
+    {
+      "address": 16389328,
+      "size": 22,
+      "sha256": "26a8ae1ac185e6277ee5c3bbec6ee30165581bf2adf787efceb330a331f7b617"
+    }
+  ],
+  "register_constants": {
+    "r10_after_btc": 3602720261,
+    "r10_after_swap": 1367823,
+    "r11_after_swap": 3602720261,
+    "cx": 15,
+    "shr14_carry": 0,
+    "r11_after_adc_word": 3602720276,
+    "r11_after_not_dword": 692247019
+  },
+  "return_store": {
+    "instruction_address": 16389341,
+    "index_register": "r11",
+    "signed_displacement": -692247019,
+    "effective_offset_from_current_rsp": 0
+  },
+  "stack_transition": {
+    "pop_r10_address": 16389336,
+    "nearest_call_return_removed": true,
+    "add_rdi_rsi_address": 16389338,
+    "ret_address": 16389349
+  },
+  "return_target_expression": "(load_bias + 0x10bf959 + sign_extend_32(decoded_ESI)) mod 2^64",
+  "relative_anchor": 17561945,
+  "return_expression_resolved_under_assumptions": true,
+  "decoded_esi_value_resolved": false,
+  "concrete_return_address_resolved": false,
+  "assumptions": [
+    "Unmodified fixed bytes are entered at the sequence start in 64-bit x86 mode",
+    "The PUSH/DEC/MOV memory operations complete normally on the current stack",
+    "No external interference changes stack bytes or flags during this sequence",
+    "Normal unmodified instruction flow follows the proven conditional edges and direct-prefix transfers",
+    "Only the explicitly named flag is carried across each proof; undefined flags are not reused",
+    "The explicit RSI/RDI/R11 slices remain within the captured unmodified prefixes through RET",
+    "No interference changes the stack after the final store and before RET"
+  ],
+  "target_executed": false,
+  "native_emulation_run": false,
+  "constant_and_address_analysis_only": true,
+  "native_implementations_resolved": false,
+  "java_native_bindings_resolved": false,
+  "independent_semantic_review": "NOT_RUN"
+}

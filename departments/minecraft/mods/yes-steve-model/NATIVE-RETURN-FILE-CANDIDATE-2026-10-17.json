@@ -1,0 +1,187 @@
+{
+  "format": "kneekura.ysm-native-return-file-candidate.v1",
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "dependency_return_slice_sha256": "811bb0909370a961f66c278db0e4abefee74df6f1a7fec093ec46314f013796a",
+  "stack_accounting": {
+    "entry_rsp_symbol": "Q",
+    "events": [
+      {
+        "event": "entry_push_r12",
+        "delta": -8
+      },
+      {
+        "event": "call_1189f87",
+        "delta": -8
+      },
+      {
+        "event": "push_flags",
+        "delta": -8
+      },
+      {
+        "event": "copy_flags_push",
+        "delta": -8
+      },
+      {
+        "event": "restore_flags_pop",
+        "delta": 8
+      },
+      {
+        "event": "lea_rsp_plus_16",
+        "delta": 16
+      },
+      {
+        "event": "call_129ea6d",
+        "delta": -8
+      },
+      {
+        "event": "push_constant",
+        "delta": -8
+      },
+      {
+        "event": "push_flags",
+        "delta": -8
+      },
+      {
+        "event": "pop_stack_operand",
+        "delta": 8
+      },
+      {
+        "event": "push_r15",
+        "delta": -8
+      },
+      {
+        "event": "push_ad_constant",
+        "delta": -8
+      },
+      {
+        "event": "push_be_constant",
+        "delta": -8
+      },
+      {
+        "event": "push_rsi",
+        "delta": -8
+      },
+      {
+        "event": "call_f28339",
+        "delta": -8
+      },
+      {
+        "event": "call_11f977a",
+        "delta": -8
+      },
+      {
+        "event": "push_r13",
+        "delta": -8
+      },
+      {
+        "event": "push_r8",
+        "delta": -8
+      },
+      {
+        "event": "push_rdx",
+        "delta": -8
+      },
+      {
+        "event": "push_rcx",
+        "delta": -8
+      },
+      {
+        "event": "push_rbp",
+        "delta": -8
+      },
+      {
+        "event": "call_10bf89a",
+        "delta": -8
+      },
+      {
+        "event": "push_r10",
+        "delta": -8
+      },
+      {
+        "event": "push_rdi",
+        "delta": -8
+      }
+    ],
+    "rsp_at_ebx_load_relative_to_Q": -136,
+    "rsi_before_exchange": 0,
+    "rsi_after_exchange": 49152,
+    "seed_load_slot_relative_to_Q": -8,
+    "seed_slot_value_low32": 2409341954
+  },
+  "word": {
+    "relative_address": 13815112,
+    "file_backing": {
+      "region": {
+        "kind": "PT_LOAD",
+        "index": 2,
+        "address": 13722352,
+        "memory_size": 97552,
+        "file_offset": 13718256,
+        "file_size": 96312,
+        "flags": 6
+      },
+      "file_backed": true,
+      "file_offset": 13811016
+    },
+    "file_bytes": "52ec51dc",
+    "u32": 3696356434
+  },
+  "decode_constants": {
+    "key": 13815112,
+    "rotation_count": 3,
+    "post_exchange_ecx": 3,
+    "setge_r10b": 1,
+    "decoded_esi": 2113784,
+    "signed_offset": 2113784
+  },
+  "candidate": {
+    "relative_address": 19675729,
+    "file_backing": {
+      "region": {
+        "kind": "PT_LOAD",
+        "index": 4,
+        "address": 15490560,
+        "memory_size": 5308498,
+        "file_offset": 13823488,
+        "file_size": 5308498,
+        "flags": 5
+      },
+      "file_backed": true,
+      "file_offset": 18008657
+    },
+    "runtime_expression": "load_bias + 0x12c3a51",
+    "runtime_destination_verified": false
+  },
+  "relocation_check": {
+    "command": "readelf -rDW",
+    "rows": 9114,
+    "types": {
+      "R_X86_64_RELATIVE": 8812,
+      "R_X86_64_DTPMOD64": 3,
+      "R_X86_64_GLOB_DAT": 38,
+      "R_X86_64_64": 4,
+      "R_X86_64_JUMP_SLOT": 257
+    },
+    "eight_byte_write_overlaps": [],
+    "scope": "Listed dynamic RELA/JMPREL metadata only; no runtime init-write proof"
+  },
+  "assumptions": [
+    "Unmodified fixed bytes are entered at the sequence start in 64-bit x86 mode",
+    "The PUSH/DEC/MOV memory operations complete normally on the current stack",
+    "No external interference changes stack bytes or flags during this sequence",
+    "Normal unmodified instruction flow follows the proven conditional edges and direct-prefix transfers",
+    "Only the explicitly named flag is carried across each proof; undefined flags are not reused",
+    "The explicit RSI/RDI/R11 slices remain within the captured unmodified prefixes through RET",
+    "No interference changes the stack after the final store and before RET",
+    "The earlier saved constant at Q-8 is not modified before the captured load",
+    "The addressed data word retains the exact file bytes when read; native initializers or runtime writes are not proven absent"
+  ],
+  "target_executed": false,
+  "native_emulation_run": false,
+  "static_constant_and_stack_accounting_only": true,
+  "concrete_runtime_return_verified": false,
+  "native_implementations_resolved": false,
+  "java_native_bindings_resolved": false,
+  "independent_semantic_review": "NOT_RUN"
+}
