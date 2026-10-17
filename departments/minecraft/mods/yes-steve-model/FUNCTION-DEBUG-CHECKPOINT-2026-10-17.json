@@ -1,0 +1,75 @@
+{
+  "format": "kneekura.ysm-function-debug-checkpoint.v1",
+  "cohort_manifest": [
+    [
+      "TYPED-FUNCTION-GUARDS",
+      "typed_function_guards",
+      true
+    ],
+    [
+      "DEBUG-MESSAGE-DELIVERY",
+      "debug_message_delivery",
+      true
+    ],
+    [
+      "EQUIPMENT-EFFECT-QUERY",
+      "equipment_effect_query",
+      true
+    ],
+    [
+      "INSTRUCTION-DEBUG-EVALUATION",
+      "instruction_debug_evaluation",
+      true
+    ]
+  ],
+  "cohorts": [
+    {
+      "cohort": "TYPED-FUNCTION-GUARDS",
+      "tool_sha256": "b9969b424aaa608eee83151c70abd1d2a2781cca5a574af6dab3ffe5fb188616",
+      "evidence_sha256": "21aded33f3ad076813a8c2ea2952fd68eed0e9b926fc19591bb4dada4f0b79be",
+      "rerun_receipt_sha256": "c83d71d64938b99a54e6f11473cfa2e390212d805a8cd9801317a6a284df33aa",
+      "checks": 214,
+      "negative_controls": 19,
+      "status": "PASS"
+    },
+    {
+      "cohort": "DEBUG-MESSAGE-DELIVERY",
+      "tool_sha256": "dd86ccc6d2e001cc3058be3d739f483b9ced1761845064233559ba80821c5d48",
+      "evidence_sha256": "9cd0b08b21bfae052e52d24b122bdb9ce211c07ca16602e8392d12b941de571c",
+      "rerun_receipt_sha256": "7456df2f3cc3b6a07c8d4f67d11e56d2948c493348b04561039f405b8a1eb8de",
+      "checks": 36,
+      "negative_controls": 6,
+      "status": "PASS"
+    },
+    {
+      "cohort": "EQUIPMENT-EFFECT-QUERY",
+      "tool_sha256": "ed1df61838687b495948f189c74d15f06c7948d8bdafbe4e939107cb403197cd",
+      "evidence_sha256": "a4f5cfc5e017833aa50ec21552aa06f2ef70740ebe973af59bafb427b908aaaf",
+      "rerun_receipt_sha256": "72b70ce213d06688d74dba71759bb23ad182849715789a7510e91334eca1faf6",
+      "checks": 229,
+      "negative_controls": 19,
+      "status": "PASS"
+    },
+    {
+      "cohort": "INSTRUCTION-DEBUG-EVALUATION",
+      "tool_sha256": "66e65e93012ee53ef626ff16c81aa6a83520b38ea21f0ae29be9f3f177db551e",
+      "evidence_sha256": "761fe1b8b14209e55db33e5a931c1d66348f72f9ae4b1b9f0cac9c289604f930",
+      "rerun_receipt_sha256": "6fa842621fe0b169534731214dc8c4347385f7d9feb6845fc699f7e12d805625",
+      "checks": 148,
+      "negative_controls": 9,
+      "status": "PASS"
+    }
+  ],
+  "cohort_count": 4,
+  "overlapping_method_snapshots_compared": 6,
+  "overlap_conflicts": 0,
+  "central_mapping_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
+  "central_mapping_promoted": false,
+  "independent_semantic_review": "NOT_RUN",
+  "target_runtime_executed": false,
+  "whole_project_ci_run": false,
+  "earlier_fixed17_checkpoint_modified": false,
+  "earlier_fixed10_checkpoint_modified": false,
+  "earlier_fixed9_checkpoint_modified": false,
+  "elapsed_seconds": 0.794
+}

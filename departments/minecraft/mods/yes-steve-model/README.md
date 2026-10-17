@@ -470,3 +470,5 @@ bounded runtime observation rather than protection bypass.
 - [Authored geometry defaults](GEOMETRY-AUTHORED-DEFAULTS-RECOVERY-2026-10-17.md): distinguish input carriers, mutable state, relative snapshots and unobserved native readers.
 
 - [TLM live location adapter](TLM-LOCATION-ADAPTER-RECOVERY-2026-10-17.md): cached live wrappers, per-call lists, authored pivots and backpack-to-elytra fallback.
+
+- [Typed function guards](TYPED-FUNCTION-GUARDS-RECOVERY-2026-10-17.md) and [debug message delivery](DEBUG-MESSAGE-DELIVERY-RECOVERY-2026-10-17.md): context rejection, live receiver lookup and formatting boundaries.

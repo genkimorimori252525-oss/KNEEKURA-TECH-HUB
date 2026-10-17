@@ -68,9 +68,14 @@ getters or the authored cubes-hidden getter; this does not close native readers.
 The navigation index was explicitly refreshed through these dossiers and31
 comparative aliases, without converting aliases to established original names.
 
-Next finite connected question: remaining Java animation blending/easing consumers
-not covered by point, queue, transition and bone commit dossiers. Reuse existing
-snapshots before capturing new owners; keep numeric input assumptions explicit.
+The existing easing/raw factory and linear blend dossiers were checked rather than
+recaptured. The remaining13 direct abstract ContextFunction guards and debug message
+delivery now have a fixed4 function-debug checkpoint (six shared snapshots, no
+conflicts). Function rejection remains null, distinct from variable rejection0.
+
+Next finite connected question: targeted evidence/navigation consistency and
+remaining Java animation data-carrier consumers, avoiding already covered factories.
+Do not treat uncaptured trivial declarations as semantic completion percentages.
 
 ## Anchors
 

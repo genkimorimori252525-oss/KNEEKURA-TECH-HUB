@@ -1,0 +1,566 @@
+{
+  "format": "kneekura.ysm-bounded-seed-evidence.v1",
+  "artifact": {
+    "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+    "sha1": "151ac7b24da8beeca1a20864565743cfd77af286",
+    "size": 63269843,
+    "version_id": "Zqooxsd2",
+    "classes": 955
+  },
+  "confidence_policy": "CONFIRMED denotes semantic correspondence reviewed against pinned source and exact instructions/relations, not recovered original symbols or whole-source equivalence. Prior community sources reused as fixture leads; no community-based promotions.",
+  "source_artifact_equivalence": "NOT_ESTABLISHED",
+  "preserved_global_negative_finding": "SOURCE_ARTIFACT_DIVERGENCE",
+  "recorded_at": "2026-10-17",
+  "detailed_operands": true,
+  "classes": [],
+  "members": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO00OOOOo0Ooo0oo0o0Oo0OO",
+      "name": "<init>",
+      "descriptor": "()V",
+      "access": 2,
+      "code_sha256": "4b2d66c2e129bf585b84fa4abd8e46f07779ec93460c464280f9bf8c5d045471",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "java/lang/Object",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "0011"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO00OOOOo0Ooo0oo0o0Oo0OO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/lang/String;[Ljava/lang/Object;)V",
+      "access": 129,
+      "code_sha256": "209f1b54a5e4a13a07e97dc71de4f21fe60500e0f7799657b04351099e2ec78e",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 2,
+          "opcode": "0x2c"
+        },
+        {
+          "offset": 3,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "java/lang/String",
+            "name": "format",
+            "descriptor": "(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "net/minecraft/network/chat/Component",
+            "name": "m_237113_",
+            "descriptor": "(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OO00OOOOo0Ooo0oo0o0Oo0OO",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/network/chat/Component;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 2,
+          "opcode": "0x2c",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 3,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0018"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "001e"
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0021"
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO00OOOOo0Ooo0oo0o0Oo0OO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/network/chat/Component;)V",
+      "access": 1,
+      "code_sha256": "2fcaf165aea30310aa2f7ecaa6507a8423d75fcb3043a90cf4e942a0bf223ef1",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "net/minecraft/client/Minecraft",
+            "name": "m_91087_",
+            "descriptor": "()Lnet/minecraft/client/Minecraft;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "net/minecraft/client/Minecraft",
+            "name": "f_91074_",
+            "descriptor": "Lnet/minecraft/client/player/LocalPlayer;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 6,
+          "opcode": "0xc7",
+          "branch_target": 10
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb1"
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "net/minecraft/client/Minecraft",
+            "name": "m_91087_",
+            "descriptor": "()Lnet/minecraft/client/Minecraft;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 13,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 14,
+          "opcode": "0xba",
+          "reference": {
+            "name": "run",
+            "descriptor": "(Lnet/minecraft/network/chat/Component;)Ljava/lang/Runnable;",
+            "bootstrap_index": 0,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 19,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/client/Minecraft",
+            "name": "execute",
+            "descriptor": "(Ljava/lang/Runnable;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 22,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0027"
+        },
+        {
+          "offset": 3,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "002b"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xc7",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0027"
+        },
+        {
+          "offset": 13,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 14,
+          "opcode": "0xba",
+          "encoded_operands_hex": "003b0000"
+        },
+        {
+          "offset": 19,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "003f"
+        },
+        {
+          "offset": 22,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO00OOOOo0Ooo0oo0o0Oo0OO",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lnet/minecraft/network/chat/Component;)V",
+      "access": 4106,
+      "code_sha256": "de971831a19bd003595e039aaaecf7cf672b164264ad2ed76a136e7d6688130a",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "net/minecraft/client/Minecraft",
+            "name": "m_91087_",
+            "descriptor": "()Lnet/minecraft/client/Minecraft;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "net/minecraft/client/Minecraft",
+            "name": "f_91074_",
+            "descriptor": "Lnet/minecraft/client/player/LocalPlayer;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 6,
+          "opcode": "0x12",
+          "reference": {
+            "string": "message.yes_steve_model.model.debug_animation.output",
+            "cp_tag": 8
+          }
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "net/minecraft/network/chat/Component",
+            "name": "m_237115_",
+            "descriptor": "(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;",
+            "cp_tag": 11
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/network/chat/MutableComponent",
+            "name": "m_7220_",
+            "descriptor": "(Lnet/minecraft/network/chat/Component;)Lnet/minecraft/network/chat/MutableComponent;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 15,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/client/player/LocalPlayer",
+            "name": "m_213846_",
+            "descriptor": "(Lnet/minecraft/network/chat/Component;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0027"
+        },
+        {
+          "offset": 3,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "002b"
+        },
+        {
+          "offset": 6,
+          "opcode": "0x12",
+          "encoded_operands_hex": "41"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0044"
+        },
+        {
+          "offset": 11,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "004a"
+        },
+        {
+          "offset": 15,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "004f"
+        },
+        {
+          "offset": 18,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO00OOOOo0Ooo0oo0o0Oo0OO",
+      "name": "<clinit>",
+      "descriptor": "()V",
+      "access": 8,
+      "code_sha256": "115e5f597436c0cf1205fb13370005ff314c7f2d79b91ebe5658f2511cdfc9e5",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/OO00OOOOo0Ooo0oo0o0Oo0OO",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OO00OOOOo0Ooo0oo0o0Oo0OO",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb3",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OO00OOOOo0Ooo0oo0o0Oo0OO",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/OO00OOOOo0Ooo0oo0o0Oo0OO;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0xbb",
+          "encoded_operands_hex": "0002"
+        },
+        {
+          "offset": 3,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "0051"
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb3",
+          "encoded_operands_hex": "0053"
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    }
+  ],
+  "owner_declarations": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO00OOOOo0Ooo0oo0o0Oo0OO",
+      "declaration": {
+        "access": 33,
+        "super": "java/lang/Object",
+        "interfaces": [
+          "com/elfmcys/yesstevemodel/oOO0oO0ooo000OoOO0OOooOo"
+        ],
+        "fields": [
+          {
+            "access": 25,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/OO00OOOOo0Ooo0oo0o0Oo0OO;"
+          }
+        ],
+        "methods": [
+          {
+            "access": 2,
+            "name": "<init>",
+            "descriptor": "()V"
+          },
+          {
+            "access": 129,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Ljava/lang/String;[Ljava/lang/Object;)V"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/network/chat/Component;)V"
+          },
+          {
+            "access": 4106,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "(Lnet/minecraft/network/chat/Component;)V"
+          },
+          {
+            "access": 8,
+            "name": "<clinit>",
+            "descriptor": "()V"
+          }
+        ]
+      }
+    }
+  ],
+  "bootstrap_and_constant_evidence": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO00OOOOo0Ooo0oo0o0Oo0OO",
+      "constant_values": {},
+      "bootstrap_methods": [
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "()V"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 6,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/OO00OOOOo0Ooo0oo0o0Oo0OO",
+                "name": "o0OOooo0o0OO00OoOOOo0o0O",
+                "descriptor": "(Lnet/minecraft/network/chat/Component;)V"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "()V"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "source_tracks": [
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/debug/CustomDebugSource.java",
+      "sha256": "9372df8b5738d58eb06cc8bd2504662cad3e029e77ea80477b3a57eda4a630c0",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6"
+    }
+  ],
+  "review_status": "PRIMARY_STATIC_REVIEW_ONLY",
+  "central_mapping_promoted": false
+}
