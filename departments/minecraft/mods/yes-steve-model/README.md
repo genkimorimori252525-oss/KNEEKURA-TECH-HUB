@@ -288,3 +288,5 @@ bounded runtime observation rather than protection bypass.
 - [Client tick and humanoid render selection](RENDER-SELECTION-RECOVERY-2026-10-17.md): event cancellation, texture overrides and model/layer ordering; runtime rendering unverified.
 
 - [Java render-cycle and array handoff](JAVA-RENDER-BOUNDARY-RECOVERY-2026-10-17.md): exact native declaration boundary and legacy Java writer; native implementation unresolved.
+
+- [State tracker and position-delta input](STATE-TRACKER-INPUT-RECOVERY-2026-10-17.md): entity/render tick cache lifetimes and interpolated displacement; runtime behavior unverified.

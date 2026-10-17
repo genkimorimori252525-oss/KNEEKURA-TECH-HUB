@@ -117,3 +117,7 @@ boundaries; static reachability is not runtime rendering proof.
 Java render-cycle/input-output array handoff is joined to the declared native
 boundary. Do not expand native/model-decryption scope. Continue upstream
 EntityStateTracker and Molang query inputs; whole-mod analysis remains active.
+
+State tracker cache lifetimes and position-delta axis query are recorded. Continue
+speed/delta-time and movement-direction query consumers, preserving units and
+zero-delta boundaries rather than treating displacement as physical velocity.
