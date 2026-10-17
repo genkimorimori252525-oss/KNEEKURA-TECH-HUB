@@ -450,3 +450,5 @@ bounded runtime observation rather than protection bypass.
 - [Sound instance lifetime](SOUND-INSTANCE-LIFETIME-RECOVERY-2026-10-17.md): actor tracking, deferred stream completion, looping EOF and close ownership.
 
 - [Sound data and PCM cache](SOUND-DATA-PCM-CACHE-RECOVERY-2026-10-17.md): buffer sharing, marker lookup semantics, segment read size and resource lifetime.
+
+- [Audio decoder Java boundary](AUDIO-DECODER-JAVA-BOUNDARY-RECOVERY-2026-10-17.md): stream EOF/close, zero-position slices, decoder pooling and explicit native declarations.
