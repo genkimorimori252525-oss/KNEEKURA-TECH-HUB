@@ -1,0 +1,131 @@
+{
+  "format": "kneekura.ysm-client-publication-batch.v1",
+  "cohort_manifest": [
+    [
+      "CLIENT-MODEL-PUBLICATION",
+      "client_model_publication",
+      true
+    ],
+    [
+      "CLIENT-MODEL-SYNC-STATE",
+      "client_model_sync_state",
+      true
+    ],
+    [
+      "MODEL-INPUT-CARRIERS",
+      "model_input_carriers",
+      true
+    ],
+    [
+      "CONDITIONAL-ANIMATION-NAMES",
+      "conditional_animation_names",
+      true
+    ],
+    [
+      "CLIENT-MODEL-CONTAINERS",
+      "client_model_containers",
+      true
+    ],
+    [
+      "MODEL-LANGUAGE-FALLBACK",
+      "model_language_fallback",
+      true
+    ],
+    [
+      "TEXTURE-HOLDER-LIFETIME",
+      "texture_holder_lifetime",
+      true
+    ],
+    [
+      "MODEL-READINESS-SCOPE",
+      "model_readiness_scope",
+      true
+    ]
+  ],
+  "cohorts": [
+    {
+      "cohort": "CLIENT-MODEL-PUBLICATION",
+      "tool_sha256": "5d2dd358e71e0919e7b0586f7ba1c9913982fe70272245c353e917ef812d730f",
+      "evidence_sha256": "2219bf16bd9d0f5680b0e9b9c4863e506ecdc8817c317090e61ee75830d3bcca",
+      "rerun_receipt_sha256": "393d74ebdedbc56bde474099d06db1c523895906a03dd2955b2fa89845e4ffef",
+      "checks": 71,
+      "negative_controls": 10,
+      "status": "PASS"
+    },
+    {
+      "cohort": "CLIENT-MODEL-SYNC-STATE",
+      "tool_sha256": "74c94c0af12f67a16996c6a92b3cd99b8bbc948f02b2734fcead7f3285813c1a",
+      "evidence_sha256": "4df81306505d55916936e4e7e995bb040e14c5cf9e6f7120aab6a2d53545476c",
+      "rerun_receipt_sha256": "e4c18ad6c1b47ddcb780e50caf24e1f8a13caf763c7dcd9847e7b0a6fb1a5ec5",
+      "checks": 263,
+      "negative_controls": 12,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MODEL-INPUT-CARRIERS",
+      "tool_sha256": "c5f96c9c54e49413f0b417f81015823456879f696bef648d17e76311c1661820",
+      "evidence_sha256": "2aa9d63e8e42bac71ba25603ce5625e2281e49a6ccd00b4ddb2eed22d15c497e",
+      "rerun_receipt_sha256": "ff3562ceb6ad12b8ed16e1f1a86056f4c14615f46ccc9de84af39ecebe9017d5",
+      "checks": 190,
+      "negative_controls": 12,
+      "status": "PASS"
+    },
+    {
+      "cohort": "CONDITIONAL-ANIMATION-NAMES",
+      "tool_sha256": "fe5a8c5ad75c3a2f2a1511a53a8c3c772cda2a78c12c1ccc8578373c5d7380e6",
+      "evidence_sha256": "1b03d6529d5e1bf7fb9eb064040b0185281278b7224427412e0118dd5b1472be",
+      "rerun_receipt_sha256": "923acab092d89e32541815002ca24d1ad5ee5605f6013c460c4c9a94f5ce01b4",
+      "checks": 321,
+      "negative_controls": 11,
+      "status": "PASS"
+    },
+    {
+      "cohort": "CLIENT-MODEL-CONTAINERS",
+      "tool_sha256": "e0c179a4bd77dd67fda7d84c4593d5362d8a77e2865b401de33d51992e96a53f",
+      "evidence_sha256": "84a5ba48c0c76b4fec9e46ec8268bdc8f2a4686c03c8b00a3f2374698cdc9670",
+      "rerun_receipt_sha256": "ef03be08f289a5aeed51b82541d7bd73cca73ba8c8e19d6e22cb7580fc19c81d",
+      "checks": 237,
+      "negative_controls": 10,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MODEL-LANGUAGE-FALLBACK",
+      "tool_sha256": "c3dc75d1482779c4f03929b763ccd66b842322f02c8898d1b15ad8eb9083a607",
+      "evidence_sha256": "b5959e472e83e8469b1ae2c4fd97f0d6440a56430353f76a7c23c6eb280a9b23",
+      "rerun_receipt_sha256": "d84fc8b90ddbc4632987e4509aebfa93709ffcfa8aa0577c295d6a615ba11a68",
+      "checks": 90,
+      "negative_controls": 7,
+      "status": "PASS"
+    },
+    {
+      "cohort": "TEXTURE-HOLDER-LIFETIME",
+      "tool_sha256": "eb646bd3a031dc464c4a6a231ec1209bcdabe15f2075c5739c18b413172606e9",
+      "evidence_sha256": "1c67df6044c7859c199e3c61081c08e76a108b73b1ecf13605f7a76081bc35fb",
+      "rerun_receipt_sha256": "7f872c345c27c899eb5f3e288c0f34060766055aa2a7937404547f5aeb864fd6",
+      "checks": 118,
+      "negative_controls": 15,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MODEL-READINESS-SCOPE",
+      "tool_sha256": "2a30eb269f20bae8269eea5197a5da60a70301ecd0915cab3003e9faea83e996",
+      "evidence_sha256": "e7533627f17112687f8adb06d5b5a385fe869fa956026393f61bad7a19a4c713",
+      "rerun_receipt_sha256": "98d6dac10ef36a22895a1dad686effb8811775fb5b8c75ecde878d97bf0b4748",
+      "checks": 400,
+      "negative_controls": 15,
+      "status": "PASS"
+    }
+  ],
+  "cohort_count": 8,
+  "overlapping_method_snapshots_compared": 1,
+  "overlap_conflicts": 0,
+  "central_mapping_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
+  "central_mapping_promoted": false,
+  "independent_semantic_review": "NOT_RUN",
+  "target_runtime_executed": false,
+  "whole_project_ci_run": false,
+  "earlier_fixed17_checkpoint_modified": false,
+  "earlier_fixed10_checkpoint_modified": false,
+  "earlier_fixed9_checkpoint_modified": false,
+  "elapsed_seconds": 1.442
+}
