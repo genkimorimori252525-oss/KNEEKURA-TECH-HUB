@@ -1,0 +1,145 @@
+{
+  "format": "kneekura.ysm-event-transition-checkpoint.v1",
+  "cohort_manifest": [
+    [
+      "ORDERED-SEGMENT-TRANSITION",
+      "ordered_segment_transition",
+      true
+    ],
+    [
+      "ORDERED-SEGMENT-CALLERS",
+      "ordered_segment_callers",
+      false
+    ],
+    [
+      "INSTRUCTION-DEBUG-EVALUATION",
+      "instruction_debug_evaluation",
+      true
+    ],
+    [
+      "SOUND-KEYFRAME-CLEANUP",
+      "sound_keyframe_cleanup",
+      true
+    ],
+    [
+      "SOUND-CLEANUP-CALLERS",
+      "sound_cleanup_callers",
+      false
+    ],
+    [
+      "ANIMATION-PLAYER-CLOCK",
+      "animation_player_clock",
+      true
+    ],
+    [
+      "MODEL-READINESS-SCOPE",
+      "model_readiness_scope",
+      true
+    ],
+    [
+      "MOLANG-EVENT-WRAPPER",
+      "molang_event_wrapper",
+      true
+    ],
+    [
+      "MOLANG-EVENT-CALLERS",
+      "molang_event_callers",
+      false
+    ]
+  ],
+  "cohorts": [
+    {
+      "cohort": "ORDERED-SEGMENT-TRANSITION",
+      "tool_sha256": "2512c0c0b34fd94a17e124301c4f61b7847e3557836de0aa48fce921f6967938",
+      "evidence_sha256": "5387eee390e57fb7ea52e7f9434f394aefe223ffd0f80fa45f53ee2b4b299947",
+      "rerun_receipt_sha256": "dc0e0c6802211ccb152c2ee376191754b99b1af4eff6fcfd43ad0b7e0f91b621",
+      "checks": 84,
+      "negative_controls": 11,
+      "status": "PASS"
+    },
+    {
+      "cohort": "ORDERED-SEGMENT-CALLERS",
+      "tool_sha256": "d95f6b6a27301bc9b4bd0564841999fe3b4214017ed45bafabbc79cad3866d43",
+      "evidence_sha256": "b11feb3a5323ab4a66e283954d91318075cf96fa39cb8c44287de17ff96ca0c0",
+      "rerun_receipt_sha256": "b116db0e228dd5e18c049e99e88115cdc763caf4b122e50fa5593e7dcd826d75",
+      "checks": 2,
+      "negative_controls": 6,
+      "status": "PASS"
+    },
+    {
+      "cohort": "INSTRUCTION-DEBUG-EVALUATION",
+      "tool_sha256": "66e65e93012ee53ef626ff16c81aa6a83520b38ea21f0ae29be9f3f177db551e",
+      "evidence_sha256": "761fe1b8b14209e55db33e5a931c1d66348f72f9ae4b1b9f0cac9c289604f930",
+      "rerun_receipt_sha256": "6fa842621fe0b169534731214dc8c4347385f7d9feb6845fc699f7e12d805625",
+      "checks": 148,
+      "negative_controls": 9,
+      "status": "PASS"
+    },
+    {
+      "cohort": "SOUND-KEYFRAME-CLEANUP",
+      "tool_sha256": "b07c5de377567f4cf31ea1a09789924f28c52391e5feb058ab205bba6bb0f35b",
+      "evidence_sha256": "107d8bb5c5ed523105c7dd98950819ad28bf17ade5e6c4b0ca97d4f001c27c5c",
+      "rerun_receipt_sha256": "312d8e8fcd01b0ddb9248f4c94e6698977ba60db680e11110986d740957baf19",
+      "checks": 55,
+      "negative_controls": 7,
+      "status": "PASS"
+    },
+    {
+      "cohort": "SOUND-CLEANUP-CALLERS",
+      "tool_sha256": "d42a93ca97734f07a0a2cbecc2725151bbf37c000090e7380db58e9385542e48",
+      "evidence_sha256": "fcecfe96b8522d4b1c17eefdad47f7924568e919030eb881564a97f6132d63a2",
+      "rerun_receipt_sha256": "b116db0e228dd5e18c049e99e88115cdc763caf4b122e50fa5593e7dcd826d75",
+      "checks": 2,
+      "negative_controls": 6,
+      "status": "PASS"
+    },
+    {
+      "cohort": "ANIMATION-PLAYER-CLOCK",
+      "tool_sha256": "ec9f20d750dc9fe007be4cbdfb8ef2f293c3479a629e6d4500f542f72e683cb1",
+      "evidence_sha256": "829344b16022773e1b8a3e89770bc225b5fefe514862f260ed6ffdd73988aa57",
+      "rerun_receipt_sha256": "3e41eecd8a74955afe72740a4dd5324038613632603b308eef19165722cfd1e2",
+      "checks": 278,
+      "negative_controls": 18,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MODEL-READINESS-SCOPE",
+      "tool_sha256": "2a30eb269f20bae8269eea5197a5da60a70301ecd0915cab3003e9faea83e996",
+      "evidence_sha256": "e7533627f17112687f8adb06d5b5a385fe869fa956026393f61bad7a19a4c713",
+      "rerun_receipt_sha256": "98d6dac10ef36a22895a1dad686effb8811775fb5b8c75ecde878d97bf0b4748",
+      "checks": 400,
+      "negative_controls": 15,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MOLANG-EVENT-WRAPPER",
+      "tool_sha256": "1b2c96072c567ead0e702d7d1f8b019eeff7431422f07bc181272a3b4961a749",
+      "evidence_sha256": "ffbc166b87d7b935813b34c37e54b0cce460ceef9d9c4e305fecb2c2e15f6d63",
+      "rerun_receipt_sha256": "1b6da0c1ca743cb330a5a0dc2dd79d590f9cc31ac4ea6a0150173251f7a422fb",
+      "checks": 36,
+      "negative_controls": 6,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MOLANG-EVENT-CALLERS",
+      "tool_sha256": "cf5560a693af9a0eabb4d380a02832c7e3afba655f6024c19021d1e3bb4748d8",
+      "evidence_sha256": "bdb49e9e9351019a4e5082fe548e5a34c960035377f39251eddc9d6b024bb91b",
+      "rerun_receipt_sha256": "b116db0e228dd5e18c049e99e88115cdc763caf4b122e50fa5593e7dcd826d75",
+      "checks": 2,
+      "negative_controls": 6,
+      "status": "PASS"
+    }
+  ],
+  "cohort_count": 9,
+  "overlapping_method_snapshots_compared": 13,
+  "overlap_conflicts": 0,
+  "central_mapping_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
+  "central_mapping_promoted": false,
+  "independent_semantic_review": "NOT_RUN",
+  "target_runtime_executed": false,
+  "whole_project_ci_run": false,
+  "earlier_fixed17_checkpoint_modified": false,
+  "earlier_fixed10_checkpoint_modified": false,
+  "earlier_fixed9_checkpoint_modified": false,
+  "elapsed_seconds": 3.745
+}

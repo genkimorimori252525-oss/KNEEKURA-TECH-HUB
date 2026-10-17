@@ -91,3 +91,15 @@ Independent review of the primary-only cohort is still outstanding. Check new
 source evidence before changing confidence or calling conditional limitations bugs.
 The continuation instruction remains to advance useful authorized analysis rather
 than stop at a saved checkpoint.
+
+## Later event and transition extension
+
+[Ordered segment search](ORDERED-SEGMENT-TRANSITION-RECOVERY-2026-10-17.md),
+[instruction/debug evaluation](INSTRUCTION-DEBUG-EVALUATION-RECOVERY-2026-10-17.md),
+[sound cleanup](SOUND-KEYFRAME-CLEANUP-RECOVERY-2026-10-17.md) and
+[Molang event wrappers](MOLANG-EVENT-WRAPPER-RECOVERY-2026-10-17.md) now close selected
+caller/ownership questions left above. The separate fixed9 event-transition
+[receipt](EVENT-TRANSITION-CHECKPOINT-2026-10-17.json) passed in3.745seconds, comparing13
+overlapping method snapshots with0 conflicts. It does not alter the fixed17 manifest
+or constitute independent semantic review. Source-comparison aliases can locate
+these unpromoted names without changing the central map.

@@ -50,10 +50,16 @@ SOUND-LIFECYCLE-INDEX with a fixed5 scoped checkpoint. No audio/target/native
 execution occurred. Standard JDK contract checks narrow API assumptions without
 claiming external decoder input domains or measured resource leaks.
 
-Next finite connected question: actual effect cleanup/reset callers and references
-across controller/animatable replacement. Reuse existing manager/controller snapshots
-where possible; do not inflate counts or repeat the decoder boundary. Preserve
-stop request versus external engine completion and async callback ownership.
+Sound cleanup, ordered-segment search, instruction/debug execution and Molang event
+wrappers now have a separate fixed9 event-transition checkpoint. Exact source-role
+navigation aliases remain PRIMARY hints separate from central mappings. Debug
+observation can evaluate expressions; emission=false is not a global no-evaluation
+switch. Caller-owned mutable arguments and cursor commit points stay explicit.
+
+Next finite connected question: remaining Java model/bone data construction and
+validation boundaries not covered by existing point/queue/native-handoff cohorts.
+Inspect bounded Java consumers/producers only; do not infer native input validity,
+execute protected parsing, or repeat already documented state machines.
 
 ## Anchors
 

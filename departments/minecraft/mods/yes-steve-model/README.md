@@ -460,3 +460,5 @@ bounded runtime observation rather than protection bypass.
 - [Ordered segments and blend transition](ORDERED-SEGMENT-TRANSITION-RECOVERY-2026-10-17.md): cursor-dependent endpoints, lazy ordering checks, shared segments and exact callers.
 
 - [Instruction and debug evaluation](INSTRUCTION-DEBUG-EVALUATION-RECOVERY-2026-10-17.md): cursor commit order, emission flags and non-read-only debug expression execution.
+
+- [Molang event wrappers](MOLANG-EVENT-WRAPPER-RECOVERY-2026-10-17.md): retained handler/argument lists, init flag timing and actual update/sync callers.

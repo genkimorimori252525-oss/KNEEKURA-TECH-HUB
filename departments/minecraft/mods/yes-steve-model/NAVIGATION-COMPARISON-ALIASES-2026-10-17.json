@@ -201,6 +201,56 @@
       "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/event/ReplacePlayerRenderEvent.java",
       "source_sha256": "8044a8898665722002236b5e2ed30ca073d4d0cbd25828a7f7aa84a9f9a7100f",
       "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOOOO0oo00o0oOoo0oOoooOO",
+      "label": "OrderedSegmentSearcher",
+      "evidence": "ORDERED-SEGMENT-TRANSITION-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "5387eee390e57fb7ea52e7f9434f394aefe223ffd0f80fa45f53ee2b4b299947",
+      "document": "ORDERED-SEGMENT-TRANSITION-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/util/OrderedSegmentSearcher.java",
+      "source_sha256": "e9520682e069e740b9e8d27f23e3c9861608805695a82f901aa2efc504a10e1c",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0o00oo00Oo0oo00ooOO0ooo",
+      "label": "SegmentedBlendTransition",
+      "evidence": "ORDERED-SEGMENT-TRANSITION-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "5387eee390e57fb7ea52e7f9434f394aefe223ffd0f80fa45f53ee2b4b299947",
+      "document": "ORDERED-SEGMENT-TRANSITION-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/controller/transition/SegmentedBlendTransition.java",
+      "source_sha256": "2347ee569abf29ac3900023b20498a30d4153f8371c8a7047c235b9103e59e39",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OoOOo0O0oo0OO0o0ooOO0OO0",
+      "label": "InstructionKeyFrameExecutor",
+      "evidence": "INSTRUCTION-DEBUG-EVALUATION-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "761fe1b8b14209e55db33e5a931c1d66348f72f9ae4b1b9f0cac9c289604f930",
+      "document": "INSTRUCTION-DEBUG-EVALUATION-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/event/InstructionKeyFrameExecutor.java",
+      "source_sha256": "7dfabaafea65fa5db53ea35aef7d2ac54875e016ca99f0ee67ece4a73b29f158",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0oo00Ooo0oOooOo0OOo00oo",
+      "label": "DebugInfo",
+      "evidence": "INSTRUCTION-DEBUG-EVALUATION-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "761fe1b8b14209e55db33e5a931c1d66348f72f9ae4b1b9f0cac9c289604f930",
+      "document": "INSTRUCTION-DEBUG-EVALUATION-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/processor/DebugInfo.java",
+      "source_sha256": "d16f1eb159568c9c9d04735f7d16d48a94a6289472c677871f885bc3cedae5b2",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOOoOO000000o0o0oOooo0o0",
+      "label": "MolangEventWrapper",
+      "evidence": "MOLANG-EVENT-WRAPPER-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "ffbc166b87d7b935813b34c37e54b0cce460ceef9d9c4e305fecb2c2e15f6d63",
+      "document": "MOLANG-EVENT-WRAPPER-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/MolangEventWrapper.java",
+      "source_sha256": "a1a280accff2290aeaf967b5a1ecc50739333b2b6cc8d2180d7866fbb05202fe",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
     }
   ]
 }
