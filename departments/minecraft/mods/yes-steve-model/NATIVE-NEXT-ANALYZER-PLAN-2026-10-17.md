@@ -39,3 +39,9 @@ Stopping condition for this pass: the selected condition/data dependency is supp
 ## Follow-up to the initial boundary
 
 The [candidate stack-guard proof](NATIVE-CANDIDATE-STACK-GUARD-RECOVERY-2026-10-17.md) subsequently resolved the local JB as untaken using existing tools. Its fallthrough is 0x12c463e. This supersedes only the plan’s original local-condition question, not the broader runtime/data-dependency uncertainty or NOT_RUN status of Ghidra. A future analyzer pass should use the new frontier rather than repeat the resolved guard.
+
+## Frontier update after bounded manual work
+
+The earlier candidate guard and the second rewritten return now have separate evidence cohorts. Two subsequent guards lead to the symbolic third return at 0xf0aecb; concrete destination depends on the third decoded word/carried key. Start from these latest proofs rather than repeating the earlier branch work.
+
+The initializer inventory now resolves 45 DT_INIT_ARRAY slots through RELATIVE addends and retains DT_INIT at 0x152eb19 as a separate dependency. Check writes to data words 0xd2cd48 and 0xd2cd4c before promoting file-state candidates to runtime claims. The absence of overlapping relocation records is insufficient. Ghidra installation remains subject to the outstanding user approval; no tool installation or target execution is implied by this plan.

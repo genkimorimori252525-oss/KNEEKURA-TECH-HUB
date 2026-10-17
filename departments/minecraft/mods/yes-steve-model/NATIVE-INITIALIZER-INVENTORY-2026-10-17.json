@@ -1,0 +1,1631 @@
+{
+  "format": "kneekura.ysm-native-initializer-inventory.v1",
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "dynamic_entries": [
+    [
+      1,
+      2852
+    ],
+    [
+      1,
+      2863
+    ],
+    [
+      1,
+      2873
+    ],
+    [
+      1,
+      2883
+    ],
+    [
+      1,
+      2899
+    ],
+    [
+      1,
+      2909
+    ],
+    [
+      1,
+      2930
+    ],
+    [
+      1,
+      2945
+    ],
+    [
+      14,
+      2959
+    ],
+    [
+      7,
+      26058076
+    ],
+    [
+      8,
+      212568
+    ],
+    [
+      9,
+      24
+    ],
+    [
+      1879048185,
+      8812
+    ],
+    [
+      23,
+      26270644
+    ],
+    [
+      2,
+      6168
+    ],
+    [
+      3,
+      25481216
+    ],
+    [
+      20,
+      7
+    ],
+    [
+      6,
+      25508208
+    ],
+    [
+      11,
+      24
+    ],
+    [
+      5,
+      25515360
+    ],
+    [
+      10,
+      3109
+    ],
+    [
+      1879047925,
+      25508160
+    ],
+    [
+      25,
+      13722584
+    ],
+    [
+      27,
+      360
+    ],
+    [
+      26,
+      13722568
+    ],
+    [
+      28,
+      16
+    ],
+    [
+      12,
+      22211353
+    ],
+    [
+      13,
+      21994469
+    ],
+    [
+      1879048176,
+      25518469
+    ],
+    [
+      1879048190,
+      25519065
+    ],
+    [
+      1879048191,
+      8
+    ],
+    [
+      22,
+      0
+    ]
+  ],
+  "dt_init": 22211353,
+  "dt_fini": 21994469,
+  "arrays": [
+    {
+      "name": "INIT_ARRAY",
+      "address": 13722584,
+      "byte_size": 360,
+      "raw_sha256": "d3df611a0ed2e328b050d285287637c60643ba96ec09e4aaefaad7f2cd114b77",
+      "entries": [
+        {
+          "slot": 13722584,
+          "raw_value": 0,
+          "relative_target": 2852384,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 2852384
+          }
+        },
+        {
+          "slot": 13722592,
+          "raw_value": 0,
+          "relative_target": 1939248,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 1939248
+          }
+        },
+        {
+          "slot": 13722600,
+          "raw_value": 0,
+          "relative_target": 2796256,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 2796256
+          }
+        },
+        {
+          "slot": 13722608,
+          "raw_value": 0,
+          "relative_target": 2954672,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 2954672
+          }
+        },
+        {
+          "slot": 13722616,
+          "raw_value": 0,
+          "relative_target": 3017088,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3017088
+          }
+        },
+        {
+          "slot": 13722624,
+          "raw_value": 0,
+          "relative_target": 3102000,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3102000
+          }
+        },
+        {
+          "slot": 13722632,
+          "raw_value": 0,
+          "relative_target": 3198128,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3198128
+          }
+        },
+        {
+          "slot": 13722640,
+          "raw_value": 0,
+          "relative_target": 3302848,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3302848
+          }
+        },
+        {
+          "slot": 13722648,
+          "raw_value": 0,
+          "relative_target": 3302960,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3302960
+          }
+        },
+        {
+          "slot": 13722656,
+          "raw_value": 0,
+          "relative_target": 3304144,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3304144
+          }
+        },
+        {
+          "slot": 13722664,
+          "raw_value": 0,
+          "relative_target": 3304592,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3304592
+          }
+        },
+        {
+          "slot": 13722672,
+          "raw_value": 0,
+          "relative_target": 3384592,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3384592
+          }
+        },
+        {
+          "slot": 13722680,
+          "raw_value": 0,
+          "relative_target": 3384704,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3384704
+          }
+        },
+        {
+          "slot": 13722688,
+          "raw_value": 0,
+          "relative_target": 3388016,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3388016
+          }
+        },
+        {
+          "slot": 13722696,
+          "raw_value": 0,
+          "relative_target": 3388160,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3388160
+          }
+        },
+        {
+          "slot": 13722704,
+          "raw_value": 0,
+          "relative_target": 3388192,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3388192
+          }
+        },
+        {
+          "slot": 13722712,
+          "raw_value": 0,
+          "relative_target": 3388336,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3388336
+          }
+        },
+        {
+          "slot": 13722720,
+          "raw_value": 0,
+          "relative_target": 3388384,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3388384
+          }
+        },
+        {
+          "slot": 13722728,
+          "raw_value": 0,
+          "relative_target": 3390640,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3390640
+          }
+        },
+        {
+          "slot": 13722736,
+          "raw_value": 0,
+          "relative_target": 3390800,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3390800
+          }
+        },
+        {
+          "slot": 13722744,
+          "raw_value": 0,
+          "relative_target": 3391344,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3391344
+          }
+        },
+        {
+          "slot": 13722752,
+          "raw_value": 0,
+          "relative_target": 3391392,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3391392
+          }
+        },
+        {
+          "slot": 13722760,
+          "raw_value": 0,
+          "relative_target": 3392880,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3392880
+          }
+        },
+        {
+          "slot": 13722768,
+          "raw_value": 0,
+          "relative_target": 3406480,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3406480
+          }
+        },
+        {
+          "slot": 13722776,
+          "raw_value": 0,
+          "relative_target": 3412176,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3412176
+          }
+        },
+        {
+          "slot": 13722784,
+          "raw_value": 0,
+          "relative_target": 3413168,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3413168
+          }
+        },
+        {
+          "slot": 13722792,
+          "raw_value": 0,
+          "relative_target": 3413200,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3413200
+          }
+        },
+        {
+          "slot": 13722800,
+          "raw_value": 0,
+          "relative_target": 3416976,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3416976
+          }
+        },
+        {
+          "slot": 13722808,
+          "raw_value": 0,
+          "relative_target": 3417008,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3417008
+          }
+        },
+        {
+          "slot": 13722816,
+          "raw_value": 0,
+          "relative_target": 3419840,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3419840
+          }
+        },
+        {
+          "slot": 13722824,
+          "raw_value": 0,
+          "relative_target": 3419920,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3419920
+          }
+        },
+        {
+          "slot": 13722832,
+          "raw_value": 0,
+          "relative_target": 3420224,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3420224
+          }
+        },
+        {
+          "slot": 13722840,
+          "raw_value": 0,
+          "relative_target": 3420288,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3420288
+          }
+        },
+        {
+          "slot": 13722848,
+          "raw_value": 0,
+          "relative_target": 3420544,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3420544
+          }
+        },
+        {
+          "slot": 13722856,
+          "raw_value": 0,
+          "relative_target": 3420624,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3420624
+          }
+        },
+        {
+          "slot": 13722864,
+          "raw_value": 0,
+          "relative_target": 3420720,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3420720
+          }
+        },
+        {
+          "slot": 13722872,
+          "raw_value": 0,
+          "relative_target": 3420800,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3420800
+          }
+        },
+        {
+          "slot": 13722880,
+          "raw_value": 0,
+          "relative_target": 3421968,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3421968
+          }
+        },
+        {
+          "slot": 13722888,
+          "raw_value": 0,
+          "relative_target": 3422064,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3422064
+          }
+        },
+        {
+          "slot": 13722896,
+          "raw_value": 0,
+          "relative_target": 3424048,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3424048
+          }
+        },
+        {
+          "slot": 13722904,
+          "raw_value": 0,
+          "relative_target": 3424160,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3424160
+          }
+        },
+        {
+          "slot": 13722912,
+          "raw_value": 0,
+          "relative_target": 3426352,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3426352
+          }
+        },
+        {
+          "slot": 13722920,
+          "raw_value": 0,
+          "relative_target": 4048496,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 4048496
+          }
+        },
+        {
+          "slot": 13722928,
+          "raw_value": 0,
+          "relative_target": 3652064,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3652064
+          }
+        },
+        {
+          "slot": 13722936,
+          "raw_value": 0,
+          "relative_target": 3652288,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3652288
+          }
+        }
+      ]
+    },
+    {
+      "name": "FINI_ARRAY",
+      "address": 13722568,
+      "byte_size": 16,
+      "raw_sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb",
+      "entries": [
+        {
+          "slot": 13722568,
+          "raw_value": 0,
+          "relative_target": 1939184,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 1939184
+          }
+        },
+        {
+          "slot": 13722576,
+          "raw_value": 0,
+          "relative_target": 3302768,
+          "target_backing": {
+            "region": {
+              "kind": "PT_LOAD",
+              "index": 1,
+              "address": 0,
+              "memory_size": 13718256,
+              "file_offset": 0,
+              "file_size": 13718256,
+              "flags": 5
+            },
+            "file_backed": true,
+            "file_offset": 3302768
+          }
+        }
+      ]
+    }
+  ],
+  "first_transfer_prefixes": [
+    {
+      "address": 22211353,
+      "instruction_count": 1,
+      "prefix_byte_count": 5,
+      "prefix_sha256": "55607f898fa5db83c6e66d8d59d33c6d8fecc49032530c4b3721c812f5316113",
+      "first_transfer": {
+        "address": 22211353,
+        "bytes": "e9b6610000",
+        "assembly": "jmp    0x1534cd4"
+      },
+      "direct_target": 22236372,
+      "full_function_recovered": false
+    },
+    {
+      "address": 2852384,
+      "instruction_count": 3,
+      "prefix_byte_count": 16,
+      "prefix_sha256": "5dc6cd058ec6ef4ebca9d90a59c7e0ebb41aed61ac5f30d6df42e0cc5431b43f",
+      "first_transfer": {
+        "address": 2852395,
+        "bytes": "e830010000",
+        "assembly": "call   0x2b8760"
+      },
+      "direct_target": 2852704,
+      "full_function_recovered": false
+    },
+    {
+      "address": 1939248,
+      "instruction_count": 1,
+      "prefix_byte_count": 5,
+      "prefix_sha256": "f2caa9e32b1dce79ce64efba5806a764e131b9d00f8f88603f6b8002f83abcf3",
+      "first_transfer": {
+        "address": 1939248,
+        "bytes": "e97bffffff",
+        "assembly": "jmp    0x1d96b0"
+      },
+      "direct_target": 1939120,
+      "full_function_recovered": false
+    },
+    {
+      "address": 2796256,
+      "instruction_count": 15,
+      "prefix_byte_count": 75,
+      "prefix_sha256": "4923c965b4d6ac40bd1b10423548acaa35ea0075a2875038754d0005e7fc6a9d",
+      "first_transfer": {
+        "address": 2796326,
+        "bytes": "e845a3a600",
+        "assembly": "call   0xd14e70"
+      },
+      "direct_target": 13717104,
+      "full_function_recovered": false
+    },
+    {
+      "address": 2954672,
+      "instruction_count": 3,
+      "prefix_byte_count": 12,
+      "prefix_sha256": "ebb39831e8591e9d8b2577f16cdc7cdf4672cc892d0ebb5f6d7e78d33e082d0a",
+      "first_transfer": {
+        "address": 2954682,
+        "bytes": "7503",
+        "assembly": "jne    0x2d15bf"
+      },
+      "direct_target": null,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3017088,
+      "instruction_count": 3,
+      "prefix_byte_count": 12,
+      "prefix_sha256": "62d0d15618c94c6d969efa033204075c3a71401a690fb1712b6b95b41681fe14",
+      "first_transfer": {
+        "address": 3017098,
+        "bytes": "7503",
+        "assembly": "jne    0x2e098f"
+      },
+      "direct_target": null,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3102000,
+      "instruction_count": 3,
+      "prefix_byte_count": 12,
+      "prefix_sha256": "1fb821597ba1c894087a2cb2bff0d234f56f8d34b36146c2bef14212ef8df92b",
+      "first_transfer": {
+        "address": 3102010,
+        "bytes": "7503",
+        "assembly": "jne    0x2f553f"
+      },
+      "direct_target": null,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3198128,
+      "instruction_count": 3,
+      "prefix_byte_count": 12,
+      "prefix_sha256": "b9d6effeed40e73b63d765b7812982334fe145ceac376430e76427a56738c6c0",
+      "first_transfer": {
+        "address": 3198138,
+        "bytes": "7503",
+        "assembly": "jne    0x30ccbf"
+      },
+      "direct_target": null,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3302848,
+      "instruction_count": 4,
+      "prefix_byte_count": 12,
+      "prefix_sha256": "ff2e9ff596c068f5863b82ccc6b10799a08ad7c0c76f0a5a550467c2fdc52cf2",
+      "first_transfer": {
+        "address": 3302858,
+        "bytes": "7402",
+        "assembly": "je     0x3265ce"
+      },
+      "direct_target": null,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3302960,
+      "instruction_count": 10,
+      "prefix_byte_count": 25,
+      "prefix_sha256": "87344c281780e8c53420a0702b93583c7c1fe467feab4f3c8a245d11c2d2c93d",
+      "first_transfer": {
+        "address": 3302983,
+        "bytes": "740f",
+        "assembly": "je     0x326658"
+      },
+      "direct_target": null,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3304144,
+      "instruction_count": 6,
+      "prefix_byte_count": 15,
+      "prefix_sha256": "3b30e0f1cf44a914f6aaf02ea09fcbff458f0135c8a1a102fbdce5e958bcb0b7",
+      "first_transfer": {
+        "address": 3304157,
+        "bytes": "7405",
+        "assembly": "je     0x326ae4"
+      },
+      "direct_target": null,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3304592,
+      "instruction_count": 10,
+      "prefix_byte_count": 22,
+      "prefix_sha256": "d44022b698171fb82544b8f0eb5f870f4bc51c990fcb96b62e11fb7eb1d08636",
+      "first_transfer": {
+        "address": 3304612,
+        "bytes": "740f",
+        "assembly": "je     0x326cb5"
+      },
+      "direct_target": null,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3384592,
+      "instruction_count": 13,
+      "prefix_byte_count": 82,
+      "prefix_sha256": "da97918143f754d86d75420eb9c2765b503930124fb00e240ccbf282fa44e848",
+      "first_transfer": {
+        "address": 3384669,
+        "bytes": "e8aea19d00",
+        "assembly": "call   0xd14710"
+      },
+      "direct_target": 13715216,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3384704,
+      "instruction_count": 11,
+      "prefix_byte_count": 39,
+      "prefix_sha256": "1506dd324fc09675a10315064eee912a7e2e629ed7c3ecf0d102afb729d747d0",
+      "first_transfer": {
+        "address": 3384738,
+        "bytes": "e8d9fa0200",
+        "assembly": "call   0x36a080"
+      },
+      "direct_target": 3580032,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3388016,
+      "instruction_count": 7,
+      "prefix_byte_count": 26,
+      "prefix_sha256": "e9a332daaadb859a66e2de8719667dd6fc13f842da2895b516b7ea8674c6ee78",
+      "first_transfer": {
+        "address": 3388037,
+        "bytes": "e8f6ed0200",
+        "assembly": "call   0x36a080"
+      },
+      "direct_target": 3580032,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3388160,
+      "instruction_count": 4,
+      "prefix_byte_count": 26,
+      "prefix_sha256": "f2f12f719d0962c5b2f94216de7bed2d25e157ffd02b2a27c02e50d7db0c3b3b",
+      "first_transfer": {
+        "address": 3388181,
+        "bytes": "e9f6939d00",
+        "assembly": "jmp    0xd14710"
+      },
+      "direct_target": 13715216,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3388192,
+      "instruction_count": 7,
+      "prefix_byte_count": 26,
+      "prefix_sha256": "8e3d8b200621c2b7825e0a760197360eb131bfecfabad6d2ce5e92b2ad2af367",
+      "first_transfer": {
+        "address": 3388213,
+        "bytes": "e846ed0200",
+        "assembly": "call   0x36a080"
+      },
+      "direct_target": 3580032,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3388336,
+      "instruction_count": 5,
+      "prefix_byte_count": 23,
+      "prefix_sha256": "a08269f788ca0f5243e6e19852d8c135398ba5c7a3656234746f6c7b4931faa2",
+      "first_transfer": {
+        "address": 3388354,
+        "bytes": "e8b9ec0200",
+        "assembly": "call   0x36a080"
+      },
+      "direct_target": 3580032,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3388384,
+      "instruction_count": 10,
+      "prefix_byte_count": 74,
+      "prefix_sha256": "ddfab17e8a8de0ec6e0e78d1b696bcf77f154ff769e8f6a4dc74767f92f0936e",
+      "first_transfer": {
+        "address": 3388453,
+        "bytes": "e8a6b22300",
+        "assembly": "call   0x5766d0"
+      },
+      "direct_target": 5727952,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3390640,
+      "instruction_count": 13,
+      "prefix_byte_count": 82,
+      "prefix_sha256": "bf8a394af1cc1956782fd57bf13cd15a99b6549b70c6d45271307ce9e7bce4cd",
+      "first_transfer": {
+        "address": 3390717,
+        "bytes": "e80e8a9d00",
+        "assembly": "call   0xd14710"
+      },
+      "direct_target": 13715216,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3390800,
+      "instruction_count": 13,
+      "prefix_byte_count": 64,
+      "prefix_sha256": "fc3e6d78b75789d74c96c23b9e7ebe30421ca5e904b67aedf53294ebb18f1b8c",
+      "first_transfer": {
+        "address": 3390859,
+        "bytes": "e880899d00",
+        "assembly": "call   0xd14710"
+      },
+      "direct_target": 13715216,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3391344,
+      "instruction_count": 5,
+      "prefix_byte_count": 23,
+      "prefix_sha256": "036bae74ea55cfb17b1bfd65fb429812467cbb320e65d791cfd9001a80ea8afb",
+      "first_transfer": {
+        "address": 3391362,
+        "bytes": "e8f9e00200",
+        "assembly": "call   0x36a080"
+      },
+      "direct_target": 3580032,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3391392,
+      "instruction_count": 12,
+      "prefix_byte_count": 77,
+      "prefix_sha256": "9f67bc5d0364a68944ec92a9c0b3839cd69600deabe3a4058e87b093c22e6424",
+      "first_transfer": {
+        "address": 3391464,
+        "bytes": "e8e3a62300",
+        "assembly": "call   0x5766d0"
+      },
+      "direct_target": 5727952,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3392880,
+      "instruction_count": 2,
+      "prefix_byte_count": 6,
+      "prefix_sha256": "9d74b0720a98c09f97854ba856428f10a4f8ff9387229d6ba4f81d7bad5ac883",
+      "first_transfer": {
+        "address": 3392881,
+        "bytes": "e87a000000",
+        "assembly": "call   0x33c5f0"
+      },
+      "direct_target": 3393008,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3406480,
+      "instruction_count": 9,
+      "prefix_byte_count": 27,
+      "prefix_sha256": "60431720272b98186c24b54e3fbd159752857f17e2be9d303efec446ec3da2c8",
+      "first_transfer": {
+        "address": 3406502,
+        "bytes": "e815ab9800",
+        "assembly": "call   0xcca5c0"
+      },
+      "direct_target": 13411776,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3412176,
+      "instruction_count": 12,
+      "prefix_byte_count": 74,
+      "prefix_sha256": "d82871149070cd36ad103f00fef302fcdbc3e6c6ba6495fc4fe7e7287445a056",
+      "first_transfer": {
+        "address": 3412245,
+        "bytes": "e8b67cfdff",
+        "assembly": "call   0x318dd0"
+      },
+      "direct_target": 3247568,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3413168,
+      "instruction_count": 4,
+      "prefix_byte_count": 26,
+      "prefix_sha256": "61e131035406735c2c4d5268d5a0de70c5ea91a79351bbd60118a9621d67e7e2",
+      "first_transfer": {
+        "address": 3413189,
+        "bytes": "e946329d00",
+        "assembly": "jmp    0xd14710"
+      },
+      "direct_target": 13715216,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3413200,
+      "instruction_count": 36,
+      "prefix_byte_count": 203,
+      "prefix_sha256": "8cf223eb742dee1c56c8dddf0fa268ac33736f740e5db045e7e4b26ac2b40eeb",
+      "first_transfer": {
+        "address": 3413398,
+        "bytes": "e8e531faff",
+        "assembly": "call   0x2e4780"
+      },
+      "direct_target": 3032960,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3416976,
+      "instruction_count": 4,
+      "prefix_byte_count": 26,
+      "prefix_sha256": "d6d9e9ec2e4820a3bc191f1155f9603ca2b4ab173409d1787ed29a0b23b2a7a3",
+      "first_transfer": {
+        "address": 3416997,
+        "bytes": "e966239d00",
+        "assembly": "jmp    0xd14710"
+      },
+      "direct_target": 13715216,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3417008,
+      "instruction_count": 9,
+      "prefix_byte_count": 27,
+      "prefix_sha256": "90655c23a3da8398dd7e1c5dfca5673498eb51c8a8759bd8b413e8510a0b9459",
+      "first_transfer": {
+        "address": 3417030,
+        "bytes": "e8f5819800",
+        "assembly": "call   0xcca5c0"
+      },
+      "direct_target": 13411776,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3419840,
+      "instruction_count": 11,
+      "prefix_byte_count": 78,
+      "prefix_sha256": "01db031cb1473167268b31f5edfad6683e8639b5547a485a97819ab009f59209",
+      "first_transfer": {
+        "address": 3419913,
+        "bytes": "e902189d00",
+        "assembly": "jmp    0xd14710"
+      },
+      "direct_target": 13715216,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3419920,
+      "instruction_count": 6,
+      "prefix_byte_count": 19,
+      "prefix_sha256": "61d2285b9341d09b893e698d7cc3de04366f93d1d50666b504e2d5be1fdbb663",
+      "first_transfer": {
+        "address": 3419934,
+        "bytes": "e89da7f7ff",
+        "assembly": "call   0x2bd6c0"
+      },
+      "direct_target": 2873024,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3420224,
+      "instruction_count": 8,
+      "prefix_byte_count": 50,
+      "prefix_sha256": "10e8dcc574a8e2fc2d5380606031164378a06a0f0ba65da3ce191f71c2b60004",
+      "first_transfer": {
+        "address": 3420269,
+        "bytes": "e99e169d00",
+        "assembly": "jmp    0xd14710"
+      },
+      "direct_target": 13715216,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3420288,
+      "instruction_count": 6,
+      "prefix_byte_count": 19,
+      "prefix_sha256": "fba8c5d635d02881bc5141bfc513567a21936e437cbf0f3ca6a0050779a94fe6",
+      "first_transfer": {
+        "address": 3420302,
+        "bytes": "e82da6f7ff",
+        "assembly": "call   0x2bd6c0"
+      },
+      "direct_target": 2873024,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3420544,
+      "instruction_count": 11,
+      "prefix_byte_count": 78,
+      "prefix_sha256": "38d77c1d5d947c6cad88ea62794ec1bce5738ddb45aee7e944d4025ddeb9b275",
+      "first_transfer": {
+        "address": 3420617,
+        "bytes": "e942159d00",
+        "assembly": "jmp    0xd14710"
+      },
+      "direct_target": 13715216,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3420624,
+      "instruction_count": 7,
+      "prefix_byte_count": 27,
+      "prefix_sha256": "bc7bb42120a0604d09118893c39221b8939a61fbeff0617e48ee10a82191d840",
+      "first_transfer": {
+        "address": 3420646,
+        "bytes": "e8755bfeff",
+        "assembly": "call   0x328d60"
+      },
+      "direct_target": 3312992,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3420720,
+      "instruction_count": 11,
+      "prefix_byte_count": 78,
+      "prefix_sha256": "0c24617a87a9883b1ca80105cfd9b299df8cb5779edc3417e3b21dca1cd1f6f4",
+      "first_transfer": {
+        "address": 3420793,
+        "bytes": "e992149d00",
+        "assembly": "jmp    0xd14710"
+      },
+      "direct_target": 13715216,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3420800,
+      "instruction_count": 10,
+      "prefix_byte_count": 74,
+      "prefix_sha256": "226ea3a7893864993185dbaab33f975f67e25e7b265fb86c719beec9a95c3a29",
+      "first_transfer": {
+        "address": 3420869,
+        "bytes": "e806342300",
+        "assembly": "call   0x5766d0"
+      },
+      "direct_target": 5727952,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3421968,
+      "instruction_count": 7,
+      "prefix_byte_count": 27,
+      "prefix_sha256": "9c0eb52ea592cb40a7bde882f67aeee5b876accceaf2b581934c5fe5497fe982",
+      "first_transfer": {
+        "address": 3421990,
+        "bytes": "e83556feff",
+        "assembly": "call   0x328d60"
+      },
+      "direct_target": 3312992,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3422064,
+      "instruction_count": 32,
+      "prefix_byte_count": 180,
+      "prefix_sha256": "8d8fcb09762523577848589fae000f4be693c7677320fc362dde83b87256c243",
+      "first_transfer": {
+        "address": 3422239,
+        "bytes": "e85c0ffaff",
+        "assembly": "call   0x2e4780"
+      },
+      "direct_target": 3032960,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3424048,
+      "instruction_count": 7,
+      "prefix_byte_count": 39,
+      "prefix_sha256": "94cdce54e6e2c89cade2e8a01e7c7ee30f34f939aced209090b158cdddbe27e1",
+      "first_transfer": {
+        "address": 3424082,
+        "bytes": "e869669800",
+        "assembly": "call   0xcca5c0"
+      },
+      "direct_target": 13411776,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3424160,
+      "instruction_count": 9,
+      "prefix_byte_count": 24,
+      "prefix_sha256": "8e5f3081d82d657fd1d4cac6bf4bfb24bd9db1f22bf65f5a6f4caadb531776e6",
+      "first_transfer": {
+        "address": 3424179,
+        "bytes": "e808669800",
+        "assembly": "call   0xcca5c0"
+      },
+      "direct_target": 13411776,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3426352,
+      "instruction_count": 4,
+      "prefix_byte_count": 26,
+      "prefix_sha256": "f3e93eecc42f3dcfce5c029ebf1e2e3140df78da73751fb91011fe29bc837c2c",
+      "first_transfer": {
+        "address": 3426373,
+        "bytes": "e9c6fe9c00",
+        "assembly": "jmp    0xd14710"
+      },
+      "direct_target": 13715216,
+      "full_function_recovered": false
+    },
+    {
+      "address": 4048496,
+      "instruction_count": 4,
+      "prefix_byte_count": 16,
+      "prefix_sha256": "1269de8916a7438268b24803158a9bd138e9edb3c57775e7075f2bc25a901461",
+      "first_transfer": {
+        "address": 4048511,
+        "bytes": "c3",
+        "assembly": "ret"
+      },
+      "direct_target": null,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3652064,
+      "instruction_count": 4,
+      "prefix_byte_count": 12,
+      "prefix_sha256": "f9a1bac050dfb231e710e272190862dc2fc1bbce753401030a9a0abaabcf7996",
+      "first_transfer": {
+        "address": 3652074,
+        "bytes": "7402",
+        "assembly": "je     0x37b9ee"
+      },
+      "direct_target": null,
+      "full_function_recovered": false
+    },
+    {
+      "address": 3652288,
+      "instruction_count": 4,
+      "prefix_byte_count": 12,
+      "prefix_sha256": "f059cf3bbf3e8ee6fc9537b7627985d3d1a008cb14551f9d241d429e4e700f8e",
+      "first_transfer": {
+        "address": 3652298,
+        "bytes": "7402",
+        "assembly": "je     0x37bace"
+      },
+      "direct_target": null,
+      "full_function_recovered": false
+    }
+  ],
+  "objdump_version": "GNU objdump (GNU Binutils for Debian) 2.44",
+  "rela_count": 8857,
+  "plt_rela_count": 257,
+  "relocation_type_counts": {
+    "1": 4,
+    "16": 3,
+    "6": 38,
+    "7": 257,
+    "8": 8812
+  },
+  "data_word_checks": [
+    {
+      "address": 13815112,
+      "size": 4,
+      "file_hex": "52ec51dc",
+      "overlapping_relocations": []
+    },
+    {
+      "address": 13815116,
+      "size": 4,
+      "file_hex": "a314743b",
+      "overlapping_relocations": []
+    }
+  ],
+  "scope": "ELF metadata, known-width relocation intervals and one first-transfer prefix per init entry; full initializer bodies and their memory effects remain unresolved",
+  "constructor_effects_resolved": false,
+  "file_state_immutability_proven": false,
+  "target_executed": false,
+  "native_machine_emulator_run": false,
+  "independent_semantic_review": "NOT_RUN"
+}
