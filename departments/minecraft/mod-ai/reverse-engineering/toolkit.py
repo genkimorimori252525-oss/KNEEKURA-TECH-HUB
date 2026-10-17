@@ -251,7 +251,21 @@ def decompile(name: str, pin: dict, cache: Path, target: Path, run_name: str,
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
+    if argv is None:
+        argv = sys.argv[1:]
+    # The selection catalogue is loaded only for an explicit choose request.
+    # Regular help/catalog/CLI/Hub imports never touch the router or its inputs.
+    if argv[:1] == ['choose']:
+        import importlib.util
+        spec = importlib.util.spec_from_file_location('kneekura_opt_in_selector', HERE / 'selector.py')
+        if spec is None or spec.loader is None:
+            raise ToolkitError('Optional selection router is missing')
+        selector = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(selector)
+        return selector.main(['choose', *argv[1:]])
+    parser = argparse.ArgumentParser(
+        description=__doc__,
+        epilog='Optional read-only plan: toolkit.py choose --input FILE --goal auto')
     parser.add_argument('--cache', type=Path, default=HERE / '.local')
     sub = parser.add_subparsers(dest='command')
     sub.add_parser('catalog', help='Static catalog only; never check installed tools')

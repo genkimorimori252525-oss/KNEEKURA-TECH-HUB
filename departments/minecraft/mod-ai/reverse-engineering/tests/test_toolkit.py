@@ -68,6 +68,16 @@ class ToolkitTests(unittest.TestCase):
         self.assertIn('vineflower', output.getvalue())
         self.assertFalse(self.cache.exists())
 
+    def test_choose_is_lazily_delegated_without_pins_install_or_tools(self):
+        output = io.StringIO()
+        with mock.patch.object(self.tool, 'load_pins', side_effect=AssertionError('load pins')), \
+             mock.patch('subprocess.run', side_effect=AssertionError('spawn')), \
+             mock.patch('urllib.request.urlopen', side_effect=AssertionError('network')), \
+             contextlib.redirect_stdout(output):
+            self.assertEqual(self.tool.main(['choose', '--kind', 'jar', '--goal', 'auto']), 0)
+        self.assertIn('"tool": "archive-index"', output.getvalue())
+        self.assertFalse(self.cache.exists())
+
     def test_install_only_selected_jar(self):
         with mock.patch.object(self.tool, 'fetch_bytes', return_value=self.jar_bytes) as get:
             result = self.tool.install_jar('cfr', self.pin, self.cache)

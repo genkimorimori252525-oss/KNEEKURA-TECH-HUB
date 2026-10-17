@@ -50,6 +50,18 @@ An existing run directory or input must never be overwritten.
 Provider failure, timeout and empty Java output must not produce a success claim.
 An unrelated task or catalog/help request must never probe Java/Node/REA.
 
+## Explicit selector extension (2026-10-17)
+
+`selector.py` is an isolated, standard-library-only read-only planning module.
+`toolkit.py choose` loads it lazily; nothing else in the Hub imports it.
+The chosen tool follows explicit task intent and verified file header/ZIP
+metadata; ambiguous or mismatched input fails closed. The planner never probes
+installed tools, runs binaries, fetches packages, or executes target classes.
+Outputs distinguish local executable entrypoints from recommendation-only
+advanced tools (ASM, ClassGraph, SootUp, Enigma, Matcher, Mapping-IO,
+Tiny Remapper, Recaf, JADX). Conditional alternatives are not auto-run.
+See [SELECTOR.md](SELECTOR.md) for decision contract and safety limits.
+
 ## Execution evidence
 Local shared-PC connection was unavailable; work uses a standalone change set
 against the observed main, not a claim of access to uncommitted owner work.

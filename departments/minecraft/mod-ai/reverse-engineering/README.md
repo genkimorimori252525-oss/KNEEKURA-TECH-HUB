@@ -4,6 +4,24 @@
 ツールの導入確認、バージョン確認、doctor、MCP起動を行う必要はない。
 既存のVineflowerがあるMOD-AI部門へ配置し、新しい重複部門は作らない。
 
+## AIが解析対象を選ぶ（明示的な逆解析タスクのときだけ）
+
+最初からツールを全部インストールせず、目的とファイル形式をもとに必要な最小の手段を
+機械判定する。**このルーターも通常作業では呼び出さない。**
+
+```text
+python toolkit.py choose --input C:/research/example.jar --goal auto
+python toolkit.py choose --input C:/research/example.jar --goal source
+python toolkit.py choose --input C:/research/example.jar --goal calls
+python toolkit.py choose --input C:/research/old.jar --compare-to C:/research/new.jar --goal versions
+```
+
+`choose` はmagic/ZIP名の静的調査とJSON計画のみ。インストール済み確認、Java/Node起動、
+ネットワーク通信、自動インストール、CFR/Vineflowerの両方同時実行はしない。
+ClassGraph・ASM・SootUp・Enigma・Matcher・Recafなどは候補カタログに分類しているが、
+**この追加だけでは実行アダプター未実装**。詳細は [SELECTOR.md](SELECTOR.md)。
+`NO_TOOL` が最良の場合もある。
+
 ## 使い分け
 
 | 道具 | この区画での用途 | 選択の目安 |

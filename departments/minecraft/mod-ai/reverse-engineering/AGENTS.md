@@ -7,6 +7,7 @@ step or a checklist on other TECH HUB tasks.
   an alternate decompilation, or an explicit request for CFR/Vineflower/REA.
 - Do not read this folder, run catalog/help/doctor, inspect versions, install
   packages, or check readiness during unrelated coding or research tasks.
+- For an explicit reverse-engineering task, optionally use `toolkit.py choose --input FILE --goal GOAL` to select a minimal evidence-backed next tool; never use it as a recurring readiness check. Its `ADVISORY_ONLY` result is not an installed adapter.
 - Prefer already available source and recorded evidence. Choose one suitable
   tool; do not automatically run both decompilers or every REA provider.
 - Keep the existing Vineflower CAS/profile transform as the authoritative
