@@ -380,3 +380,5 @@ bounded runtime observation rather than protection bypass.
 - [Client compatibility initialization](CLIENT-COMPAT-INITIALIZATION-RECOVERY-2026-10-17.md): declared event registration, 24-adapter-before-native ordering and separate parser/hint lazy lifetimes.
 
 - [Hybrid controller / ParCool join](HYBRID-PARCOOL-CONTROLLER-RECOVERY-2026-10-17.md): Bedrock/builtin coded handoff, active-queue selection and external animator-name versus model-clip distinction.
+
+- [Player controller discovery/assembly](PLAYER-CONTROLLER-ASSEMBLY-RECOVERY-2026-10-17.md): two-stage factories, ordered expansion, resource/event/clip precedence and preview/armor-slot boundaries.
