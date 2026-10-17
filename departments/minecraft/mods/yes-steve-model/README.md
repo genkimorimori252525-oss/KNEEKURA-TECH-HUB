@@ -390,3 +390,7 @@ bounded runtime observation rather than protection bypass.
 - [Humanoid hand predicates](HUMANOID-HAND-PREDICATES-RECOVERY-2026-10-17.md): hold pause gates, item-reference tracking, swing/use state distinctions and version-aware loop selection.
 
 - [Conditional names and model ingestion](CONDITIONAL-ANIMATION-NAMES-RECOVERY-2026-10-17.md): merged/default animation-key registration through a lambda handle, tag precedence and cosmetic-aware armor conditions.
+
+- [Riding/passenger/armor predicates](RIDING-ARMOR-PREDICATES-RECOVERY-2026-10-17.md): adapter/legacy fallback order, first-passenger scope and chair-model-ID versus entity-type matching.
+
+- [First-person arm assembly](FIRST-PERSON-ARM-ASSEMBLY-RECOVERY-2026-10-17.md): separate animation/condition maps, shared holder/roaming inputs and eight isolated JDK regex contract cases.

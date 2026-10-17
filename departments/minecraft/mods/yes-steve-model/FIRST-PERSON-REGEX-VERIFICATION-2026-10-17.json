@@ -1,0 +1,46 @@
+{
+  "test": "JDK Pattern only, captured parallel discovery formats and fp.arm category",
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "input_patterns_confirmed_in_bytecode": true,
+  "java_source_sha256": "057c0510bbb0ea53738f8fa7c8d8deaf67556e4a2fdf95ca39b6275908e6ba45",
+  "java_version": "openjdk version \"21.0.12.1\" 2026-08-18",
+  "cases": [
+    {
+      "input": "fp.arm.parallel_0",
+      "matches": true
+    },
+    {
+      "input": "fpXarm.parallel_0",
+      "matches": true
+    },
+    {
+      "input": "fp/arm.parallel_0",
+      "matches": true
+    },
+    {
+      "input": "fpXYarm.parallel_0",
+      "matches": false
+    },
+    {
+      "input": "fp.arm_ctrl_parallel_0",
+      "matches": true
+    },
+    {
+      "input": "fpXarm_ctrl_parallel_0",
+      "matches": true
+    },
+    {
+      "input": "fp/arm_ctrl_parallel_0",
+      "matches": true
+    },
+    {
+      "input": "fpXYarm_ctrl_parallel_0",
+      "matches": false
+    }
+  ],
+  "exit_code": 0,
+  "target_classes_loaded": false,
+  "model_rendered": false,
+  "independent_semantic_review": "NOT_RUN",
+  "runtime_scope": "JDK regex library; no YSM target runtime"
+}
