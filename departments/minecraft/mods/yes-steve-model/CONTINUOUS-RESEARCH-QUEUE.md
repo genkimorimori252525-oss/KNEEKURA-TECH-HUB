@@ -25,13 +25,13 @@ implied by this continuation.
    and concrete queue `oooO000oOoOooooOooo00oOO` through exact signatures,
    BootstrapMethods, mutations and IBone calls. Preserve existing queue/source
    divergence rather than imposing the candidate's layout on the artifact.
-2. **PENDING — Controller transition and queue production.**
+2. **CHECKPOINT RECORDED; FOLLOW-ON IN_PROGRESS — Controller transition and queue production.**
    Follow the newly grounded queue producers into existing runtime/instance seeds
    `O00Oo0oo0Ooo0oOOOo0OO0oO` and `OOOO0o0oo0o000oOOooOoOo0`, then composite /
    predicate controllers as needed. Resolve selected play/stop/transition ordering,
    ownership and exception boundaries; class-name labels are not implementation
    completion. Existing divergence flags remain evidence, not cleanup targets.
-3. **PENDING — Animatable lifecycle and scheduling.**
+3. **IN_PROGRESS — Animatable lifecycle and scheduling.**
    Inspect concrete callers around `o0000OoOooO0oo0o0oooo0Oo`: dirty/model updates,
    visibility/tick gates, asynchronous scheduling and wait/commit boundaries where
    present in the exact artifact. Separate static ordering from runtime safety.
@@ -85,3 +85,7 @@ queue aggregation; pending independent reviews are not whole-target completion.
 Player clock/state/ending capture and transition-unit arithmetic are now recorded
 with strict static checks, pending independent review. Continue Bedrock activation,
 point-production homogeneity and Java scheduler ownership; task remains active.
+
+Bedrock state/condition scheduling and producer aggregation now have bounded
+static evidence. No global transition-homogeneity proof is claimed. Continue
+animatable lifecycle, model reload and scheduling; no stop at this checkpoint.

@@ -272,3 +272,5 @@ KNEEKURA does not need to defeat YSM's historical protection mechanisms to recov
 engineering. The public source/history already exposes the model/animation/controller/integration
 architecture. Where 2.6.5 native internals remain opaque, use documented Java/JNI contracts and
 bounded runtime observation rather than protection bypass.
+
+- [Bedrock state scheduling and queue-production join](BEDROCK-CONTROLLER-RECOVERY-2026-10-17.md): 36-method static dossier; independent review pending.
