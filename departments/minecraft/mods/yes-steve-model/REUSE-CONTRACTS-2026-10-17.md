@@ -63,3 +63,5 @@ For an exact-symbol caller inventory, [validate the target declaration](DECLARED
 
 - [Inherited symbolic-owner candidates](INHERITED-CALL-CANDIDATES-2026-10-17.md): optional follow-up to exact caller scans; nominal ancestry candidates remain separate from proven JVM dispatch.
 - [Humanoid texture registration](HUMANOID-TEXTURE-REGISTRATION-2026-10-17.md): selected readiness versus pre-registration, retained holders and first-live identity-cache delay.
+
+- [Connected transport/render review](TRANSPORT-RENDER-BATCH-REVIEW-2026-10-17.md): later fixed27-cohort integrity batch, selected Vineflower comparison and explicit remaining evidence limits.

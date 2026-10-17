@@ -174,10 +174,18 @@ artifact cases pass; a second Color getter case separates19 unrelated/unresolved
 same-signature sites from six exact references. No original exact inventory is
 relabeled as a full call graph.
 
-Next finite connected question: use nominal-candidate inspection only for a
-specific instance-method zero-call inference that matters to reuse, preserving
-static/private/constructor exclusions and external classpath limits. Do not bulk
-rerun every inventory or install a call-graph stack without a concrete need.
+A later connected27-cohort batch (13 extensions +14 anchors) passed4243 integrity
+checks/274 controls in9.358s, with46 repeated member snapshots/two owner records
+matching. This does not supersede the older35-cohort scope. Selected Vineflower
+comparison used six exact classes (four output Java files), after correcting an
+initial four-class input that omitted two anonymous classes. No target execution,
+independent semantic promotion or full source equivalence is claimed.
+
+Next work must resolve a concrete consumer gap or improve confidence in an
+important existing contract. Do not expand decorative/unused utilities solely
+to increase counts, treat nominal candidates as resolved dispatch, or run broad
+checks after every small edit. Native construction, external classpath and actual
+runtime behavior remain explicit evidence boundaries.
 
 ## Anchors
 

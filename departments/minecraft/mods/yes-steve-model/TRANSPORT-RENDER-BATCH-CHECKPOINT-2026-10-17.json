@@ -1,0 +1,401 @@
+{
+  "format": "kneekura.ysm-transport-render-batch-checkpoint.v1",
+  "cohort_manifest": [
+    [
+      "MAID-COMMON-MODEL-COPY",
+      "maid_common_model_copy",
+      true
+    ],
+    [
+      "MAID-VEHICLE-CALLERS",
+      "maid_vehicle_callers",
+      false
+    ],
+    [
+      "ANIMATION-PACKET-ROUTING",
+      "animation_packet_routing",
+      true
+    ],
+    [
+      "MOLANG-COMMAND-PRODUCER",
+      "molang_command_producer",
+      true
+    ],
+    [
+      "EXECUTE-MOLANG-PRODUCERS",
+      "execute_molang_producers",
+      false
+    ],
+    [
+      "ROULETTE-EXPRESSION-UI",
+      "roulette_expression_ui",
+      true
+    ],
+    [
+      "ROULETTE-SUBMISSION-PRODUCERS",
+      "roulette_submission_producers",
+      false
+    ],
+    [
+      "ROULETTE-FORM-OWNERSHIP",
+      "roulette_form_ownership",
+      true
+    ],
+    [
+      "ROULETTE-SOUND-CONSUMERS",
+      "roulette_sound_consumers",
+      false
+    ],
+    [
+      "PARSER-ENTRY-FLAG-CALLERS",
+      "parser_entry_flag_callers",
+      false
+    ],
+    [
+      "CLIENT-MODEL-CONTAINERS",
+      "client_model_containers",
+      true
+    ],
+    [
+      "COLOR-CHANNEL-CONTRACT",
+      "color_channel_contract",
+      true
+    ],
+    [
+      "COLOR-CHANNEL-CONSUMERS",
+      "color_channel_consumers",
+      false
+    ],
+    [
+      "MODEL-ASSET-HELPERS",
+      "model_asset_helpers",
+      true
+    ],
+    [
+      "CONDITIONAL-ANIMATION-NAMES",
+      "conditional_animation_names",
+      true
+    ],
+    [
+      "JAVA-RENDER-BOUNDARY",
+      "java_render_boundary",
+      true
+    ],
+    [
+      "RENDER-SELECTION",
+      "render_selection",
+      true
+    ],
+    [
+      "VEHICLE-PROJECTILE-RENDER",
+      "vehicle_projectile_render",
+      true
+    ],
+    [
+      "PARSER-BINDING-STORAGE",
+      "parser_binding_storage",
+      true
+    ],
+    [
+      "PARSER-POOL-LIFETIME",
+      "parser_pool_lifetime",
+      true
+    ],
+    [
+      "STRUCT-COPY-CHANGE",
+      "struct_copy_change",
+      true
+    ],
+    [
+      "POOLED-NAME-CHANGE-CODEC",
+      "pooled_name_change_codec",
+      true
+    ],
+    [
+      "ROAMING-STATE-MERGE",
+      "roaming_state_merge",
+      true
+    ],
+    [
+      "TEXTURE-HOLDER-LIFETIME",
+      "texture_holder_lifetime",
+      true
+    ],
+    [
+      "MODEL-READINESS-SCOPE",
+      "model_readiness_scope",
+      true
+    ],
+    [
+      "GUI-PREVIEW-STATE",
+      "gui_preview_state",
+      true
+    ],
+    [
+      "MAID-ENTITY-CONTROL",
+      "maid_entity_control",
+      true
+    ]
+  ],
+  "cohorts": [
+    {
+      "cohort": "MAID-COMMON-MODEL-COPY",
+      "tool_sha256": "e43af28c808a9e92f49a3bfc61e21299066d0184859207dae795699c0e3b44c3",
+      "evidence_sha256": "9c71b34b3f8946e01fa197fc6946ee94dbb6ae70c4a2f9f168199f331a704dc4",
+      "rerun_receipt_sha256": "3811fdbd471c9c7c548498df73ebcc00c9f6005bb7e7c94ffdd6d619a2794dbd",
+      "checks": 155,
+      "negative_controls": 9,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MAID-VEHICLE-CALLERS",
+      "tool_sha256": "bddcc3b5a5d6d23ab698f425dd211fdd8b423be692b599f208f0a27b05dcf4b2",
+      "evidence_sha256": "a4cc11a45d44f0a48ff9adfb73c320894110a622ebaeec82f1f45193190486ee",
+      "rerun_receipt_sha256": "b116db0e228dd5e18c049e99e88115cdc763caf4b122e50fa5593e7dcd826d75",
+      "checks": 2,
+      "negative_controls": 6,
+      "status": "PASS"
+    },
+    {
+      "cohort": "ANIMATION-PACKET-ROUTING",
+      "tool_sha256": "f01a7bc387e354d75a41fe8d3f9bcc8479fa2190bb61fc6a450fc8f66200eff0",
+      "evidence_sha256": "43fb20223540b1236c6a62e8bfd5421ee7507ec145d9c477e98980b0cc77b61d",
+      "rerun_receipt_sha256": "80f52a51f73d1c340d6a9d5ab980fb1936124b3a062953d180115ec770ebff93",
+      "checks": 254,
+      "negative_controls": 10,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MOLANG-COMMAND-PRODUCER",
+      "tool_sha256": "d9f849297ac038baf4e1202862dd52a4326ad863d5b650a96041326e3b7a5dfe",
+      "evidence_sha256": "199dfcf5fc94c6382681c831c13a51f3abf7cd06dff1a30ce2f33479968198da",
+      "rerun_receipt_sha256": "5a17630b316504ae213ff1191b94eefd6658fc9b138162154615e75c5d287fda",
+      "checks": 148,
+      "negative_controls": 11,
+      "status": "PASS"
+    },
+    {
+      "cohort": "EXECUTE-MOLANG-PRODUCERS",
+      "tool_sha256": "043a13a8e5ca988d112b629b70a12bebd55c9551c4038d2b729fb9e1ccf74411",
+      "evidence_sha256": "633d92bdf538c9608feac33a68d152113c294c7d9a5299f0cd8467e58a9bc85b",
+      "rerun_receipt_sha256": "89a22626d367e66c4426aa2ea529eeaf591027313760c0aaba97a058ba633894",
+      "checks": 2,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "ROULETTE-EXPRESSION-UI",
+      "tool_sha256": "1fad237f1a6e5576fbb5ddde2bac68c729447c7b2a3e48abb6b13f35f9a45429",
+      "evidence_sha256": "b83e4b08d3252cc94aa94e410b2d61af76c8a9d9b25dda7e4f9f55afa023c6b8",
+      "rerun_receipt_sha256": "c92aac6d176bcf963332234d65963d52d57e0a209c53c4c8cf534e93df832db3",
+      "checks": 280,
+      "negative_controls": 7,
+      "status": "PASS"
+    },
+    {
+      "cohort": "ROULETTE-SUBMISSION-PRODUCERS",
+      "tool_sha256": "4c378251c2aa6b2ff0d0a8c3715dbfda811b7bb5342109ac8d7ab244821e2242",
+      "evidence_sha256": "2aec7a4eb75cdef00f28f7e0901320ae079a9202a3ebb5c1f063e0d3502d905a",
+      "rerun_receipt_sha256": "89a22626d367e66c4426aa2ea529eeaf591027313760c0aaba97a058ba633894",
+      "checks": 2,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "ROULETTE-FORM-OWNERSHIP",
+      "tool_sha256": "684640f6710d1bfcc348417270addc5136c330c6f55b4e6ff32c2ab11d03bd22",
+      "evidence_sha256": "da31e8408d858fd7fd9bcb4a0b4f9c7b1703136f4b0b47f0cf29314138fd1dc9",
+      "rerun_receipt_sha256": "12fe1c146d99b4e8274b2956f88891d2fe63debe3ffa4f44ca5bfe3c45b769a3",
+      "checks": 112,
+      "negative_controls": 10,
+      "status": "PASS"
+    },
+    {
+      "cohort": "ROULETTE-SOUND-CONSUMERS",
+      "tool_sha256": "f7f9fe2be04b751e923d0e0dcc56e7766939bb78bf1b75c66546d31c5001134b",
+      "evidence_sha256": "f961abd0e5a02b596809654e25996b0945512c8cf51509e1fa99d70f7a59db13",
+      "rerun_receipt_sha256": "89a22626d367e66c4426aa2ea529eeaf591027313760c0aaba97a058ba633894",
+      "checks": 2,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "PARSER-ENTRY-FLAG-CALLERS",
+      "tool_sha256": "1023515e2450be49e3d0aef10322a7092b4dbbf56cbb415347756de0be44fc73",
+      "evidence_sha256": "e3b064753ed18f812a9c2661e94999015e4890edcf80fe6f7fcbbe1fb9f1837a",
+      "rerun_receipt_sha256": "89a22626d367e66c4426aa2ea529eeaf591027313760c0aaba97a058ba633894",
+      "checks": 2,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "CLIENT-MODEL-CONTAINERS",
+      "tool_sha256": "e0c179a4bd77dd67fda7d84c4593d5362d8a77e2865b401de33d51992e96a53f",
+      "evidence_sha256": "84a5ba48c0c76b4fec9e46ec8268bdc8f2a4686c03c8b00a3f2374698cdc9670",
+      "rerun_receipt_sha256": "ef03be08f289a5aeed51b82541d7bd73cca73ba8c8e19d6e22cb7580fc19c81d",
+      "checks": 237,
+      "negative_controls": 10,
+      "status": "PASS"
+    },
+    {
+      "cohort": "COLOR-CHANNEL-CONTRACT",
+      "tool_sha256": "f8f807f3aa072757ae7c8b1a8adff78971d3b24acd8ca75e539d5ebf85c506b2",
+      "evidence_sha256": "cd0a22a82c8a12788d90f6993f692291d2b1fa60b235467d2ddc0412fecffc2a",
+      "rerun_receipt_sha256": "a617bae88b01064860f653ee68e526e0dce330ad9873572109f562e872620796",
+      "checks": 111,
+      "negative_controls": 6,
+      "status": "PASS"
+    },
+    {
+      "cohort": "COLOR-CHANNEL-CONSUMERS",
+      "tool_sha256": "93809ad21ce3f3501c9160a0185800b0d527e8bcb8fb08319149339051ea0b00",
+      "evidence_sha256": "c23fe62876854cb0954a52f3a198a4796f409bfc89100759318060ecbb2ec3e1",
+      "rerun_receipt_sha256": "89a22626d367e66c4426aa2ea529eeaf591027313760c0aaba97a058ba633894",
+      "checks": 2,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MODEL-ASSET-HELPERS",
+      "tool_sha256": "a1be85ede0282ac680b580db17edb410bb7925d57f060373840447010bba1f95",
+      "evidence_sha256": "1ab3aef7c1863bb0b09d60c24c56cd03cc61cb5dea1c1cee9b542c7e8d0b99c2",
+      "rerun_receipt_sha256": "2a569c64a99ae7189e56deb3e7b4da092e8895a6d2522a827e793c0c500a2260",
+      "checks": 179,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "CONDITIONAL-ANIMATION-NAMES",
+      "tool_sha256": "fe5a8c5ad75c3a2f2a1511a53a8c3c772cda2a78c12c1ccc8578373c5d7380e6",
+      "evidence_sha256": "1b03d6529d5e1bf7fb9eb064040b0185281278b7224427412e0118dd5b1472be",
+      "rerun_receipt_sha256": "923acab092d89e32541815002ca24d1ad5ee5605f6013c460c4c9a94f5ce01b4",
+      "checks": 321,
+      "negative_controls": 11,
+      "status": "PASS"
+    },
+    {
+      "cohort": "JAVA-RENDER-BOUNDARY",
+      "tool_sha256": "71b9f045b5e041fca64cb762187adf72d688bd3a131f51a44556fc4af5ae957d",
+      "evidence_sha256": "357be783e1c6332f2dfd52c094d6947e875375dd329a3adfcd757e55bc6ec147",
+      "rerun_receipt_sha256": "aa7db5f98637a3a3ae12cb8a7e7b8679a718fb08a9976b9d70ee6f6455449b98",
+      "checks": 128,
+      "negative_controls": 16,
+      "status": "PASS"
+    },
+    {
+      "cohort": "RENDER-SELECTION",
+      "tool_sha256": "e899f35a3bddadae1cd787a5411ed9512e3856a759e9f234dd80ec7c1651765e",
+      "evidence_sha256": "a42e6768b64746dbb3b7a541b63c188c6d3986f45a490a8babc2cf6b94df9f8c",
+      "rerun_receipt_sha256": "a7f5bbf539569e52de6bcf380c974099ba39b77ac77f34830ad1a22bedb49c47",
+      "checks": 289,
+      "negative_controls": 16,
+      "status": "PASS"
+    },
+    {
+      "cohort": "VEHICLE-PROJECTILE-RENDER",
+      "tool_sha256": "df076877ae2fc4c61bce5c85670173cd65836e4229f0fd75dc65837a5826dc21",
+      "evidence_sha256": "1dd1f8e35a192a7bfe27e193fe9bd66efa53e8230da32db0a1d77805ca24e1b6",
+      "rerun_receipt_sha256": "94c4b4ba75fe3d81c8ef2a1e349ab21704cb87fd1f09dda132ccd67f3b92aaba",
+      "checks": 153,
+      "negative_controls": 9,
+      "status": "PASS"
+    },
+    {
+      "cohort": "PARSER-BINDING-STORAGE",
+      "tool_sha256": "417e9a60394063f3e673ac584f2fd1513c0306143302341aaba4190fa5524dd2",
+      "evidence_sha256": "c36a6fa05e44e4cf16fd24dd80f6ceb0f7ccb8d1efb057fee8f07a461b1bd8b6",
+      "rerun_receipt_sha256": "eecde831db4e08ed0825d591cf97498f3157e3cad04a885147bbcaaeca8e9329",
+      "checks": 258,
+      "negative_controls": 12,
+      "status": "PASS"
+    },
+    {
+      "cohort": "PARSER-POOL-LIFETIME",
+      "tool_sha256": "889555ed47d5558ce4192d1298861bdfc8e88a0e653565a4ecd7352968bcbe54",
+      "evidence_sha256": "e9678c16de71d9e233df6bff23355e29b67942a2060b983a12aa9038f5a6dc8e",
+      "rerun_receipt_sha256": "1bf4cf93635b9a0821055692f25655a57ee02a43ca0b25a2dd440366e647be31",
+      "checks": 70,
+      "negative_controls": 10,
+      "status": "PASS"
+    },
+    {
+      "cohort": "STRUCT-COPY-CHANGE",
+      "tool_sha256": "705e3809491486a8fb01530de914a90a74bce7d3b1b575bb549ef640c7598835",
+      "evidence_sha256": "9db6f96d5f03774a5900ab2e0920b21175d7060604f6b91fe079e6c61b0a161c",
+      "rerun_receipt_sha256": "df3b5eacc3df5faa21097b71de4546487ac4004a0d92a53ea5098d160af31b7a",
+      "checks": 192,
+      "negative_controls": 12,
+      "status": "PASS"
+    },
+    {
+      "cohort": "POOLED-NAME-CHANGE-CODEC",
+      "tool_sha256": "2017b7010a10bcc8ec081c763175bc4778cf28ae90db70db8e969c231986433f",
+      "evidence_sha256": "d6e7947e1d56b6e92f57b1136f48ae736f21c5ad7fa33869658ef9864f3e9299",
+      "rerun_receipt_sha256": "f42c366b099da1d95bcfe86afffb79409610d99b23f66c9ad8dc19a0dc8579bb",
+      "checks": 151,
+      "negative_controls": 11,
+      "status": "PASS"
+    },
+    {
+      "cohort": "ROAMING-STATE-MERGE",
+      "tool_sha256": "ed363eed8796b6c3ec3af03537a4dbdbf31e0e00954620e22a0eadb3ad390c54",
+      "evidence_sha256": "f8cff68e0309cf59888f9fbe8e8851cc441668ad5c7a65c60910b66c5f278043",
+      "rerun_receipt_sha256": "998f1b851c0fe3a3fa6bad3870a92c06cfad554d669d5f3569c289f9bf75c60f",
+      "checks": 179,
+      "negative_controls": 12,
+      "status": "PASS"
+    },
+    {
+      "cohort": "TEXTURE-HOLDER-LIFETIME",
+      "tool_sha256": "eb646bd3a031dc464c4a6a231ec1209bcdabe15f2075c5739c18b413172606e9",
+      "evidence_sha256": "1c67df6044c7859c199e3c61081c08e76a108b73b1ecf13605f7a76081bc35fb",
+      "rerun_receipt_sha256": "7f872c345c27c899eb5f3e288c0f34060766055aa2a7937404547f5aeb864fd6",
+      "checks": 118,
+      "negative_controls": 15,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MODEL-READINESS-SCOPE",
+      "tool_sha256": "2a30eb269f20bae8269eea5197a5da60a70301ecd0915cab3003e9faea83e996",
+      "evidence_sha256": "e7533627f17112687f8adb06d5b5a385fe869fa956026393f61bad7a19a4c713",
+      "rerun_receipt_sha256": "98d6dac10ef36a22895a1dad686effb8811775fb5b8c75ecde878d97bf0b4748",
+      "checks": 400,
+      "negative_controls": 15,
+      "status": "PASS"
+    },
+    {
+      "cohort": "GUI-PREVIEW-STATE",
+      "tool_sha256": "2c3edc270dfa86367d5d994eb9c536d581cdaf9cc53ad530332eb2ada4339375",
+      "evidence_sha256": "b3be733d91693afeed3a7441680728ce7ba3167fec5fb0df576a78ef4d712f99",
+      "rerun_receipt_sha256": "6af3b4bdf1b47c2ee71b295f992038a1f29aa46a240e60fd3b67dcc1f55292f9",
+      "checks": 224,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MAID-ENTITY-CONTROL",
+      "tool_sha256": "1b3dac38353e4d8baa29b221853fd1bbfff0de26811b4b12bfd881256587ae9a",
+      "evidence_sha256": "4df0e383e2d30c89b8604df03e2bd5eec2a5c7b8a883c8292ab4c2057905ee2b",
+      "rerun_receipt_sha256": "9a3e35f31bfa4200b01d1b0f67f4e95fefa724207f6e0f33fcb263071b9cd1df",
+      "checks": 272,
+      "negative_controls": 10,
+      "status": "PASS"
+    }
+  ],
+  "cohort_count": 27,
+  "overlapping_method_snapshots_compared": 46,
+  "overlap_conflicts": 0,
+  "unique_method_snapshots": 720,
+  "unique_owner_declarations": 87,
+  "overlapping_owner_declarations_compared": 2,
+  "counts_are_semantic_completion": false,
+  "central_mapping_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
+  "central_mapping_promoted": false,
+  "independent_semantic_review": "NOT_RUN",
+  "target_runtime_executed": false,
+  "whole_project_ci_run": false,
+  "earlier_fixed17_checkpoint_modified": false,
+  "earlier_fixed10_checkpoint_modified": false,
+  "earlier_fixed9_checkpoint_modified": false,
+  "elapsed_seconds": 9.358
+}

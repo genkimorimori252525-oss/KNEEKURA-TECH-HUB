@@ -1,0 +1,84 @@
+{
+  "tool": "Vineflower",
+  "version": "1.11.1",
+  "tool_sha256": "a615d07ddbbcd489369674f40e42df639c32be95410890b38f173d5c1e2ea39c",
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "inputs": [
+    {
+      "class_name": "com/elfmcys/yesstevemodel/oooOO0o0ooo0O000Oo0ooOoo.class",
+      "sha256": "387481bad4827ce0bb804be8b0da321344577ade40185b9b4836b180171b0d3b",
+      "bytes": 31991
+    },
+    {
+      "class_name": "com/elfmcys/yesstevemodel/oo0ooOoOOOO0OOoO0OOoOOo0.class",
+      "sha256": "3255b54b58c8f27dd19af78744a20ebb1e01809b1a3d7a16244fcc6f5336b0be",
+      "bytes": 4412
+    },
+    {
+      "class_name": "com/elfmcys/yesstevemodel/OooOoOoOOOOo000oo0oo00oo.class",
+      "sha256": "231b71b9473d8aac2390c73dba64572d248321727b729d38ff02946732f8ea5b",
+      "bytes": 3563
+    },
+    {
+      "class_name": "com/elfmcys/yesstevemodel/ooO00Oo0oooOoO0OOOOoo0Oo.class",
+      "sha256": "f709cea593c69aecfe1a94cb370539b90231c08a0ae4ce098aade132e2e58d81",
+      "bytes": 3819
+    },
+    {
+      "class_name": "com/elfmcys/yesstevemodel/oooOO0o0ooo0O000Oo0ooOoo$1.class",
+      "sha256": "6962f68d138cffcc5a677debc7717bc8a5c68d1bb99ee04cb780e25b873a9f8e",
+      "bytes": 1457
+    },
+    {
+      "class_name": "com/elfmcys/yesstevemodel/oooOO0o0ooo0O000Oo0ooOoo$2.class",
+      "sha256": "62dd177c57debf3869d82d8b875e952372e9f7ea1458e253963c34fe78dc7b7d",
+      "bytes": 1135
+    }
+  ],
+  "selected_archive_sha256": "8dbb0342f7cf4bf8623930bfb64ccf29602b0b2c48ae1ab1012b939e42f40bdb",
+  "output_java_files": [
+    {
+      "path": "com/elfmcys/yesstevemodel/OooOoOoOOOOo000oo0oo00oo.java",
+      "sha256": "8ad3ac5a86f0c2cbe0fcb4760831829391fa754b7ef9240d636b409dace4dbd0"
+    },
+    {
+      "path": "com/elfmcys/yesstevemodel/oo0ooOoOOOO0OOoO0OOoOOo0.java",
+      "sha256": "d1afddd02850a280725d54de3e00c9d1e8bdeaf3e70373383c90191cd5b19ad0"
+    },
+    {
+      "path": "com/elfmcys/yesstevemodel/ooO00Oo0oooOoO0OOOOoo0Oo.java",
+      "sha256": "113bfb861c137d524098133d2d725439010c171908a890777e0271e107e2ef7f"
+    },
+    {
+      "path": "com/elfmcys/yesstevemodel/oooOO0o0ooo0O000Oo0ooOoo.java",
+      "sha256": "f5e3c0c2dba3bc42edc8cd4a21ccf36776832f63d73bf0691061bf3764b3f255"
+    }
+  ],
+  "tool_log_sha256": "0f17f5d337d7a3b633213c93bf38fe917cc37e793ebd46cd3e7e363e17cea971",
+  "warning_error_marker_lines": [],
+  "exit_code": 0,
+  "elapsed_seconds": 1.193,
+  "target_application_executed": false,
+  "native_provider_executed": false,
+  "full_decompiled_source_committed": false,
+  "minecraft_forge_dependency_classpath_supplied": false,
+  "original_jar_as_library": true,
+  "independent_semantic_review": "NOT_RUN",
+  "findings": [
+    "Screen radio/checkbox callbacks call the local helper before separate send predicates; the helper catches ParseException and returns void.",
+    "Slider applyValue encloses parse/enqueue/send in one ParseException handler.",
+    "User-function boolean gates comment preprocessing and is forwarded into MolangValue; comment filter preserves the inspected state ordering and emits no block separator.",
+    "Color float packing retains float multiply plus double0.5 and masked integer ARGB assembly."
+  ],
+  "command_shape": "java -Xmx1024m -jar <verified-vineflower-1.11.1.jar> --folder --thread-count=2 --remove-synthetic=0 --remove-bridge=0 --add-external=<exact-ysm.jar> <six-class-input.jar> <output-directory>",
+  "earlier_incomplete_selection": {
+    "input_class_count": 4,
+    "exit_code": 0,
+    "warning_error_marker_lines": [
+      "WARN:  Nested class com/elfmcys/yesstevemodel/oooOO0o0ooo0O000Oo0ooOoo$1 missing!",
+      "WARN:  Nested class com/elfmcys/yesstevemodel/oooOO0o0ooo0O000Oo0ooOoo$2 missing!"
+    ],
+    "tool_log_sha256": "0e31e62839cdef263cb96988863a0f1558f7f6cc3b35db9baf0405df49b9fe2b",
+    "resolution": "Added the two exact referenced anonymous nested classes to selected input; reran tool."
+  }
+}
