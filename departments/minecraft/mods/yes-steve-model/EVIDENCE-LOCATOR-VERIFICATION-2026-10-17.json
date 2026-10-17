@@ -987,6 +987,38 @@
       ],
       "matches": 3,
       "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "SetModelAndTexture"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "ModelButton"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "TextureButton"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "ServerPlayerMixin"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
     }
   ],
   "seconds": 3.698,
@@ -999,9 +1031,9 @@
     "EVIDENCE-LOCATOR-2026-10-17.json": "f06b1798596512558f50568833890bba238e52b78117e65b7c26872af0521a51",
     "NAVIGATION-COMPARISON-ALIASES-2026-10-17.json": "a46b118029b78ea2573b35a07aa69625ea0d53fdfbdda1cb9614c9420ffa699c"
   },
-  "elapsed_seconds": 4.587,
-  "index_sha256": "272bc48079a6a4e1c54854074816bbe8b36ece875131ccbd9267c9af11b46901",
-  "comparison_alias_count": 111,
+  "elapsed_seconds": 5.208,
+  "index_sha256": "e29f33acf153b0c34e9f462aa6bfd24a00fc4d5e5e3c192ccac72f9a12eef037",
+  "comparison_alias_count": 115,
   "locator_tool_sha256": "19875379f40fe73e65cb034c596777897620dd05ff4a3e61ce2da051dabe16c2",
   "locator_tests_sha256": "7f8ef4c998465362d9e4c2f09bae5cd518a3605d2c9bc4abdf3bcfdff8149799",
   "source_path_association_groups": 490,

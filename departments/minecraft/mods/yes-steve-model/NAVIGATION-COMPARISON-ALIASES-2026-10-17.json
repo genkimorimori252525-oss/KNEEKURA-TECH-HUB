@@ -1111,6 +1111,46 @@
       "source_path": "src/main/java/com/elfmcys/yesstevemodel/capability/ModelInfoCapabilityProvider.java",
       "source_sha256": "ecfb9053148826fdcfb8ca504e56a7c21a01f075fc40f678896aad8ef29f96aa",
       "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo",
+      "label": "SetModelAndTexture",
+      "evidence": "MODEL-SELECTION-REQUEST-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "463a0e6fec58e964ce2f61517942940668e171ba705e97e9f8829a7bc9f53cad",
+      "document": "MODEL-SELECTION-REQUEST-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/network/message/SetModelAndTexture.java",
+      "source_sha256": "7138987b3ad3cebb40f8b64a84ea77ed3c91caabdad10bd55e0679bb968b16a6",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO",
+      "label": "ModelButton",
+      "evidence": "MODEL-SELECTION-REQUEST-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "463a0e6fec58e964ce2f61517942940668e171ba705e97e9f8829a7bc9f53cad",
+      "document": "MODEL-SELECTION-REQUEST-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/gui/button/ModelButton.java",
+      "source_sha256": "ad313d958c7f15d69e4e914f3a79566d62ac6c2859bedcd5906c6970875597ce",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO",
+      "label": "TextureButton",
+      "evidence": "MODEL-SELECTION-REQUEST-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "463a0e6fec58e964ce2f61517942940668e171ba705e97e9f8829a7bc9f53cad",
+      "document": "MODEL-SELECTION-REQUEST-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/gui/button/TextureButton.java",
+      "source_sha256": "cc18b9587291e30d15abe0e52b99885b472c12fd6695bfa81f090a3cc600a1cc",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/mixin/ServerPlayerMixin",
+      "label": "ServerPlayerMixin",
+      "evidence": "VEHICLE-RIDING-HOOK-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "3d242d6e6ebc966ed145c069418fafa6740f75f61187ffdfa0a0b841675baea8",
+      "document": "VEHICLE-RIDING-HOOK-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/mixin/ServerPlayerMixin.java",
+      "source_sha256": "5bef4c0a002bc021010966497ef12cc718c8ad64938c978f9ab701e730820da4",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
     }
   ]
 }

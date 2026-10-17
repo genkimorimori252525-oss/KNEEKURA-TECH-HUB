@@ -1,0 +1,377 @@
+{
+  "format": "kneekura.ysm-bounded-seed-evidence.v1",
+  "artifact": {
+    "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+    "sha1": "151ac7b24da8beeca1a20864565743cfd77af286",
+    "size": 63269843,
+    "version_id": "Zqooxsd2",
+    "classes": 955
+  },
+  "confidence_policy": "CONFIRMED denotes semantic correspondence reviewed against pinned source and exact instructions/relations, not recovered original symbols or whole-source equivalence. Prior community sources reused as fixture leads; no community-based promotions.",
+  "source_artifact_equivalence": "NOT_ESTABLISHED",
+  "preserved_global_negative_finding": "SOURCE_ARTIFACT_DIVERGENCE",
+  "recorded_at": "2026-10-17",
+  "detailed_operands": true,
+  "classes": [],
+  "members": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/mixin/ServerPlayerMixin",
+      "name": "<init>",
+      "descriptor": "()V",
+      "access": 1,
+      "code_sha256": "ee8fe905afa58e1ab902e451edc2c06539b35ea08defcfbc67e03c71b1a7028a",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "java/lang/Object",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "0010"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/mixin/ServerPlayerMixin",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/world/entity/Entity;ZLorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;)V",
+      "access": 2,
+      "code_sha256": "e198c479f1e705697b8aa0ca84ea0058dc508847711c14eefc961e4f901525bc",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/YesSteveModel",
+            "name": "isAvailable",
+            "descriptor": "()Z",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0x9a",
+          "branch_target": 7
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb1"
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "net/minecraft/server/level/ServerPlayer",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0x3a"
+        },
+        {
+          "offset": 13,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 14,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraft/world/entity/Entity",
+            "name": "m_146895_",
+            "descriptor": "()Lnet/minecraft/world/entity/Entity;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 17,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 19,
+          "opcode": "0xa6",
+          "branch_target": 28
+        },
+        {
+          "offset": 22,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 23,
+          "opcode": "0x19"
+        },
+        {
+          "offset": 25,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OoOoOOOOO0ooooo0O0ooo000",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/server/level/ServerPlayer;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 28,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0024"
+        },
+        {
+          "offset": 3,
+          "opcode": "0x9a",
+          "encoded_operands_hex": "0004"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 8,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "0026"
+        },
+        {
+          "offset": 11,
+          "opcode": "0x3a",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 13,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 14,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "002c"
+        },
+        {
+          "offset": 17,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 19,
+          "opcode": "0xa6",
+          "encoded_operands_hex": "0009"
+        },
+        {
+          "offset": 22,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 23,
+          "opcode": "0x19",
+          "encoded_operands_hex": "04",
+          "local_index": 4
+        },
+        {
+          "offset": 25,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0031"
+        },
+        {
+          "offset": 28,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    }
+  ],
+  "owner_declarations": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/mixin/ServerPlayerMixin",
+      "declaration": {
+        "access": 1057,
+        "super": "java/lang/Object",
+        "interfaces": [],
+        "fields": [],
+        "methods": [
+          {
+            "access": 1,
+            "name": "<init>",
+            "descriptor": "()V"
+          },
+          {
+            "access": 2,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/world/entity/Entity;ZLorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;)V"
+          }
+        ]
+      }
+    }
+  ],
+  "bootstrap_and_constant_evidence": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/mixin/ServerPlayerMixin",
+      "constant_values": {},
+      "bootstrap_methods": []
+    }
+  ],
+  "source_tracks": [
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/mixin/ServerPlayerMixin.java",
+      "sha256": "5bef4c0a002bc021010966497ef12cc718c8ad64938c978f9ab701e730820da4",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6"
+    }
+  ],
+  "review_status": "PRIMARY_STATIC_REVIEW_ONLY",
+  "central_mapping_promoted": false,
+  "event_annotations": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/mixin/ServerPlayerMixin",
+      "super": "java/lang/Object",
+      "access": 1057,
+      "class_sha256": "57e65f2b0fe519d32616897288d88d7a99c9eb44708783224e4572deabe723bf",
+      "annotations": {
+        "RuntimeInvisibleAnnotations": [
+          {
+            "type": "Lorg/spongepowered/asm/mixin/Mixin;",
+            "elements": [
+              {
+                "name": "value",
+                "value": {
+                  "tag": "[",
+                  "values": [
+                    {
+                      "tag": "c",
+                      "descriptor": "Lnet/minecraft/server/level/ServerPlayer;"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "fields": [],
+      "methods": [
+        {
+          "access": 1,
+          "name": "<init>",
+          "descriptor": "()V",
+          "annotations": {}
+        },
+        {
+          "access": 2,
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Lnet/minecraft/world/entity/Entity;ZLorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;)V",
+          "annotations": {
+            "RuntimeVisibleAnnotations": [
+              {
+                "type": "Lorg/spongepowered/asm/mixin/injection/Inject;",
+                "elements": [
+                  {
+                    "name": "method",
+                    "value": {
+                      "tag": "[",
+                      "values": [
+                        {
+                          "tag": "s",
+                          "value": "startRiding(Lnet/minecraft/world/entity/Entity;Z)Z"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "name": "at",
+                    "value": {
+                      "tag": "[",
+                      "values": [
+                        {
+                          "tag": "@",
+                          "annotation": {
+                            "type": "Lorg/spongepowered/asm/mixin/injection/At;",
+                            "elements": [
+                              {
+                                "name": "value",
+                                "value": {
+                                  "tag": "s",
+                                  "value": "INVOKE"
+                                }
+                              },
+                              {
+                                "name": "target",
+                                "value": {
+                                  "tag": "s",
+                                  "value": "Lnet/minecraft/world/entity/Entity;positionRider(Lnet/minecraft/world/entity/Entity;)V"
+                                }
+                              },
+                              {
+                                "name": "shift",
+                                "value": {
+                                  "tag": "e",
+                                  "type": "Lorg/spongepowered/asm/mixin/injection/At$Shift;",
+                                  "constant": "AFTER"
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "riding_mixin_metadata": {
+    "configured": true,
+    "refmap": {
+      "startRiding(Lnet/minecraft/world/entity/Entity;Z)Z": "Lnet/minecraft/server/level/ServerPlayer;m_7998_(Lnet/minecraft/world/entity/Entity;Z)Z",
+      "Lnet/minecraft/world/entity/Entity;positionRider(Lnet/minecraft/world/entity/Entity;)V": "Lnet/minecraft/world/entity/Entity;m_7332_(Lnet/minecraft/world/entity/Entity;)V"
+    },
+    "runtime_injection_verified": false
+  }
+}

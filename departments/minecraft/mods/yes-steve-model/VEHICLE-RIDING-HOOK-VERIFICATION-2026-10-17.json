@@ -1,0 +1,144 @@
+{
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "checks": [
+    {
+      "check": "fixed-artifact",
+      "pass": true
+    },
+    {
+      "check": "detailed-operands",
+      "pass": true
+    },
+    {
+      "check": "selected-2-methods",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/mixin/ServerPlayerMixin', '<init>', '()V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/mixin/ServerPlayerMixin', '<init>', '()V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/mixin/ServerPlayerMixin', '<init>', '()V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/mixin/ServerPlayerMixin', '<init>', '()V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/mixin/ServerPlayerMixin', '<init>', '()V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/mixin/ServerPlayerMixin', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/world/entity/Entity;ZLorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/mixin/ServerPlayerMixin', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/world/entity/Entity;ZLorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/mixin/ServerPlayerMixin', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/world/entity/Entity;ZLorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/mixin/ServerPlayerMixin', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/world/entity/Entity;ZLorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/mixin/ServerPlayerMixin', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/world/entity/Entity;ZLorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "fixed-owner-declarations",
+      "pass": true
+    },
+    {
+      "check": "com/elfmcys/yesstevemodel/mixin/ServerPlayerMixin:declaration",
+      "pass": true
+    },
+    {
+      "check": "fixed-bootstrap-records",
+      "pass": true
+    },
+    {
+      "check": "com/elfmcys/yesstevemodel/mixin/ServerPlayerMixin:constant_values",
+      "pass": true
+    },
+    {
+      "check": "com/elfmcys/yesstevemodel/mixin/ServerPlayerMixin:bootstrap_methods",
+      "pass": true
+    },
+    {
+      "check": "fixed-source-records",
+      "pass": true
+    },
+    {
+      "check": "exact-riding-annotations",
+      "pass": true
+    },
+    {
+      "check": "exact-riding-metadata",
+      "pass": true
+    },
+    {
+      "check": "source-revision",
+      "pass": true
+    },
+    {
+      "check": "source:src/main/java/com/elfmcys/yesstevemodel/mixin/ServerPlayerMixin.java",
+      "pass": true
+    }
+  ],
+  "negative_controls": [
+    {
+      "control": "missing-method",
+      "rejected": true
+    },
+    {
+      "control": "missing-owner",
+      "rejected": true
+    },
+    {
+      "control": "missing-source",
+      "rejected": true
+    },
+    {
+      "control": "missing-bootstrap",
+      "rejected": true
+    },
+    {
+      "control": "wrong-artifact",
+      "rejected": true
+    },
+    {
+      "control": "missing-vehicle-hook-0",
+      "rejected": true
+    },
+    {
+      "control": "missing-riding-annotations",
+      "rejected": true
+    },
+    {
+      "control": "missing-riding-refmap",
+      "rejected": true
+    },
+    {
+      "control": "invented-live-injection",
+      "rejected": true
+    },
+    {
+      "control": "reversed-passenger-identity",
+      "rejected": true
+    }
+  ],
+  "failures": [],
+  "negative_failures": [],
+  "independent_semantic_review": "NOT_RUN",
+  "runtime_executed": false,
+  "central_mapping_promoted": false
+}

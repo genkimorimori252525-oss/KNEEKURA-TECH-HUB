@@ -45,3 +45,7 @@ Use the one-file member viewer for an exact method instead of loading every link
 ## Client-local command and debug-target extension
 
 [Client Molang/watch commands](CLIENT-COMMAND-DEBUG-TARGET-RECOVERY-2026-10-17.md) join command returns, queue submission, static watch ownership, weak target attachment, explicit lazy-provider queries and result display. Integer1 is not evaluation success; watch editing guarded by a local capability can still observe an active nonlocal target. Switching target retains shared watch configuration. The separate fixed8 [checkpoint](CLIENT-COMMAND-DEBUG-CHECKPOINT-2026-10-17.json) checks these connected boundaries without executing the target or promoting mappings.
+
+## Model selection and vehicle propagation
+
+The [connected model-transfer review](MODEL-TRANSFER-BATCH-REVIEW-2026-10-17.md) joins button-local updates, server validation/default fallback, dirty/full synchronization and the separate after-positionRider entry to vehicle transfer. Its fixed11 checkpoint compares seven repeated snapshots without conflict. Handled messages, selected IDs, resource readiness and actual rendering remain different success criteria.

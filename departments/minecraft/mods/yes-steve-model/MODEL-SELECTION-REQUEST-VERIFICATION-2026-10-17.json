@@ -1,0 +1,640 @@
+{
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "checks": [
+    {
+      "check": "fixed-artifact",
+      "pass": true
+    },
+    {
+      "check": "detailed-operands",
+      "pass": true
+    },
+    {
+      "check": "selected-25-methods",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', '<init>', '(Ljava/lang/String;Ljava/lang/String;)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', '<init>', '(Ljava/lang/String;Ljava/lang/String;)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', '<init>', '(Ljava/lang/String;Ljava/lang/String;)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', '<init>', '(Ljava/lang/String;Ljava/lang/String;)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', '<init>', '(Ljava/lang/String;Ljava/lang/String;)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;Lnet/minecraft/network/FriendlyByteBuf;)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;Lnet/minecraft/network/FriendlyByteBuf;)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;Lnet/minecraft/network/FriendlyByteBuf;)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;Lnet/minecraft/network/FriendlyByteBuf;)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;Lnet/minecraft/network/FriendlyByteBuf;)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/network/FriendlyByteBuf;)Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/network/FriendlyByteBuf;)Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/network/FriendlyByteBuf;)Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/network/FriendlyByteBuf;)Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/network/FriendlyByteBuf;)Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;Ljava/util/function/Supplier;)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;Ljava/util/function/Supplier;)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;Ljava/util/function/Supplier;)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;Ljava/util/function/Supplier;)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;Ljava/util/function/Supplier;)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;Lnet/minecraft/server/level/ServerPlayer;)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;Lnet/minecraft/server/level/ServerPlayer;)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;Lnet/minecraft/server/level/ServerPlayer;)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;Lnet/minecraft/server/level/ServerPlayer;)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;Lnet/minecraft/server/level/ServerPlayer;)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/server/level/ServerPlayer;Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/server/level/ServerPlayer;Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/server/level/ServerPlayer;Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/server/level/ServerPlayer;Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/server/level/ServerPlayer;Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;Lnet/minecraft/server/level/ServerPlayer;Lcom/elfmcys/yesstevemodel/oOOOo0OOO0ooooo0O00OO0o0;)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;Lnet/minecraft/server/level/ServerPlayer;Lcom/elfmcys/yesstevemodel/oOOOo0OOO0ooooo0O00OO0o0;)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;Lnet/minecraft/server/level/ServerPlayer;Lcom/elfmcys/yesstevemodel/oOOOo0OOO0ooooo0O00OO0o0;)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;Lnet/minecraft/server/level/ServerPlayer;Lcom/elfmcys/yesstevemodel/oOOOo0OOO0ooooo0O00OO0o0;)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;Lnet/minecraft/server/level/ServerPlayer;Lcom/elfmcys/yesstevemodel/oOOOo0OOO0ooooo0O00OO0o0;)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraftforge/network/NetworkEvent$Context;Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraftforge/network/NetworkEvent$Context;Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraftforge/network/NetworkEvent$Context;Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraftforge/network/NetworkEvent$Context;Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraftforge/network/NetworkEvent$Context;Lcom/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo;)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', '<init>', '(IIZLcom/elfmcys/yesstevemodel/O00000oOo0o0o00OOoo0O0oo;Lcom/elfmcys/yesstevemodel/oOo0oO0OOo0ooOoo0oOo0oOo;)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', '<init>', '(IIZLcom/elfmcys/yesstevemodel/O00000oOo0o0o00OOoo0O0oo;Lcom/elfmcys/yesstevemodel/oOo0oO0OOo0ooOoo0oOo0oOo;)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', '<init>', '(IIZLcom/elfmcys/yesstevemodel/O00000oOo0o0o00OOoo0O0oo;Lcom/elfmcys/yesstevemodel/oOo0oO0OOo0ooOoo0oOo0oOo;)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', '<init>', '(IIZLcom/elfmcys/yesstevemodel/O00000oOo0o0o00OOoo0O0oo;Lcom/elfmcys/yesstevemodel/oOo0oO0OOo0ooOoo0oOo0oOo;)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', '<init>', '(IIZLcom/elfmcys/yesstevemodel/O00000oOo0o0o00OOoo0O0oo;Lcom/elfmcys/yesstevemodel/oOo0oO0OOo0ooOoo0oOo0oOo;)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O00000oOo0o0o00OOoo0O0oo;Lcom/elfmcys/yesstevemodel/oOo0oO0OOo0ooOoo0oOo0oOo;)Lnet/minecraft/network/chat/MutableComponent;'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O00000oOo0o0o00OOoo0O0oo;Lcom/elfmcys/yesstevemodel/oOo0oO0OOo0ooOoo0oOo0oOo;)Lnet/minecraft/network/chat/MutableComponent;'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O00000oOo0o0o00OOoo0O0oo;Lcom/elfmcys/yesstevemodel/oOo0oO0OOo0ooOoo0oOo0oOo;)Lnet/minecraft/network/chat/MutableComponent;'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O00000oOo0o0o00OOoo0O0oo;Lcom/elfmcys/yesstevemodel/oOo0oO0OOo0ooOoo0oOo0oOo;)Lnet/minecraft/network/chat/MutableComponent;'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/O00000oOo0o0o00OOoo0O0oo;Lcom/elfmcys/yesstevemodel/oOo0oO0OOo0ooOoo0oOo0oOo;)Lnet/minecraft/network/chat/MutableComponent;'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'm_6035_', '()Lnet/minecraft/network/chat/Component;'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'm_6035_', '()Lnet/minecraft/network/chat/Component;'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'm_6035_', '()Lnet/minecraft/network/chat/Component;'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'm_6035_', '()Lnet/minecraft/network/chat/Component;'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'm_6035_', '()Lnet/minecraft/network/chat/Component;'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'm_5691_', '()V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'm_5691_', '()V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'm_5691_', '()V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'm_5691_', '()V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'm_5691_', '()V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'm_87963_', '(Lnet/minecraft/client/gui/GuiGraphics;IIF)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'm_87963_', '(Lnet/minecraft/client/gui/GuiGraphics;IIF)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'm_87963_', '(Lnet/minecraft/client/gui/GuiGraphics;IIF)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'm_87963_', '(Lnet/minecraft/client/gui/GuiGraphics;IIF)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'm_87963_', '(Lnet/minecraft/client/gui/GuiGraphics;IIF)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/gui/screens/Screen;II)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/gui/screens/Screen;II)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/gui/screens/Screen;II)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/gui/screens/Screen;II)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/gui/screens/Screen;II)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'm_93680_', '(DD)Z'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'm_93680_', '(DD)Z'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'm_93680_', '(DD)Z'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'm_93680_', '(DD)Z'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'm_93680_', '(DD)Z'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/client/gui/GuiGraphics;IIILcom/elfmcys/yesstevemodel/o0o0Oooo00OoOoOOOooo0000;)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/client/gui/GuiGraphics;IIILcom/elfmcys/yesstevemodel/o0o0Oooo00OoOoOOOooo0000;)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/client/gui/GuiGraphics;IIILcom/elfmcys/yesstevemodel/o0o0Oooo00OoOoOOOooo0000;)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/client/gui/GuiGraphics;IIILcom/elfmcys/yesstevemodel/o0o0Oooo00OoOoOOOooo0000;)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/client/gui/GuiGraphics;IIILcom/elfmcys/yesstevemodel/o0o0Oooo00OoOoOOOooo0000;)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O;)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O;)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O;)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O;)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O;)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/client/gui/components/Button;)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/client/gui/components/Button;)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/client/gui/components/Button;)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/client/gui/components/Button;)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/client/gui/components/Button;)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', '<clinit>', '()V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', '<clinit>', '()V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', '<clinit>', '()V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', '<clinit>', '()V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO', '<clinit>', '()V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO', '<init>', '(IILcom/elfmcys/yesstevemodel/O00000oOo0o0o00OOoo0O0oo;Lcom/elfmcys/yesstevemodel/oOo0oO0OOo0ooOoo0oOo0oOo;)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO', '<init>', '(IILcom/elfmcys/yesstevemodel/O00000oOo0o0o00OOoo0O0oo;Lcom/elfmcys/yesstevemodel/oOo0oO0OOo0ooOoo0oOo0oOo;)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO', '<init>', '(IILcom/elfmcys/yesstevemodel/O00000oOo0o0o00OOoo0O0oo;Lcom/elfmcys/yesstevemodel/oOo0oO0OOo0ooOoo0oOo0oOo;)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO', '<init>', '(IILcom/elfmcys/yesstevemodel/O00000oOo0o0o00OOoo0O0oo;Lcom/elfmcys/yesstevemodel/oOo0oO0OOo0ooOoo0oOo0oOo;)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO', '<init>', '(IILcom/elfmcys/yesstevemodel/O00000oOo0o0o00OOoo0O0oo;Lcom/elfmcys/yesstevemodel/oOo0oO0OOo0ooOoo0oOo0oOo;)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO', 'm_5691_', '()V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO', 'm_5691_', '()V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO', 'm_5691_', '()V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO', 'm_5691_', '()V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO', 'm_5691_', '()V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO', 'm_87963_', '(Lnet/minecraft/client/gui/GuiGraphics;IIF)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO', 'm_87963_', '(Lnet/minecraft/client/gui/GuiGraphics;IIF)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO', 'm_87963_', '(Lnet/minecraft/client/gui/GuiGraphics;IIF)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO', 'm_87963_', '(Lnet/minecraft/client/gui/GuiGraphics;IIF)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO', 'm_87963_', '(Lnet/minecraft/client/gui/GuiGraphics;IIF)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/client/gui/GuiGraphics;F)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/client/gui/GuiGraphics;F)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/client/gui/GuiGraphics;F)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/client/gui/GuiGraphics;F)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/client/gui/GuiGraphics;F)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O;)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O;)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O;)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O;)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lcom/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O;)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/client/gui/components/Button;)V'):access",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/client/gui/components/Button;)V'):instructions",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/client/gui/components/Button;)V'):supplemental_full_operand_records",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/client/gui/components/Button;)V'):exception_handlers",
+      "pass": true
+    },
+    {
+      "check": "('com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO', 'Oo0Oo0o00O00Oo0OOoOOoooo', '(Lnet/minecraft/client/gui/components/Button;)V'):code_sha256",
+      "pass": true
+    },
+    {
+      "check": "fixed-owner-declarations",
+      "pass": true
+    },
+    {
+      "check": "com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo:declaration",
+      "pass": true
+    },
+    {
+      "check": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO:declaration",
+      "pass": true
+    },
+    {
+      "check": "com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO:declaration",
+      "pass": true
+    },
+    {
+      "check": "fixed-bootstrap-records",
+      "pass": true
+    },
+    {
+      "check": "com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo:constant_values",
+      "pass": true
+    },
+    {
+      "check": "com/elfmcys/yesstevemodel/O0Oo0oooOoOOO0oOoOOoOooo:bootstrap_methods",
+      "pass": true
+    },
+    {
+      "check": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO:constant_values",
+      "pass": true
+    },
+    {
+      "check": "com/elfmcys/yesstevemodel/o0o0oO0O0oo00o000000OOOO:bootstrap_methods",
+      "pass": true
+    },
+    {
+      "check": "com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO:constant_values",
+      "pass": true
+    },
+    {
+      "check": "com/elfmcys/yesstevemodel/OoO000oOOOoO00OoOoOOo0OO:bootstrap_methods",
+      "pass": true
+    },
+    {
+      "check": "fixed-source-records",
+      "pass": true
+    },
+    {
+      "check": "source-revision",
+      "pass": true
+    },
+    {
+      "check": "source:src/main/java/com/elfmcys/yesstevemodel/network/message/SetModelAndTexture.java",
+      "pass": true
+    },
+    {
+      "check": "source:src/main/java/com/elfmcys/yesstevemodel/client/gui/button/ModelButton.java",
+      "pass": true
+    },
+    {
+      "check": "source:src/main/java/com/elfmcys/yesstevemodel/client/gui/button/TextureButton.java",
+      "pass": true
+    }
+  ],
+  "negative_controls": [
+    {
+      "control": "missing-method",
+      "rejected": true
+    },
+    {
+      "control": "missing-owner",
+      "rejected": true
+    },
+    {
+      "control": "missing-source",
+      "rejected": true
+    },
+    {
+      "control": "missing-bootstrap",
+      "rejected": true
+    },
+    {
+      "control": "wrong-artifact",
+      "rejected": true
+    },
+    {
+      "control": "missing-model-selection-owner-0",
+      "rejected": true
+    },
+    {
+      "control": "missing-model-selection-owner-1",
+      "rejected": true
+    },
+    {
+      "control": "missing-model-selection-owner-2",
+      "rejected": true
+    },
+    {
+      "control": "reversed-server-direction",
+      "rejected": true
+    },
+    {
+      "control": "reversed-model-switch-gate",
+      "rejected": true
+    },
+    {
+      "control": "missing-animation-stop",
+      "rejected": true
+    },
+    {
+      "control": "reversed-cached-roaming-gate",
+      "rejected": true
+    },
+    {
+      "control": "missing-local-texture-update",
+      "rejected": true
+    }
+  ],
+  "failures": [],
+  "negative_failures": [],
+  "independent_semantic_review": "NOT_RUN",
+  "runtime_executed": false,
+  "central_mapping_promoted": false
+}
