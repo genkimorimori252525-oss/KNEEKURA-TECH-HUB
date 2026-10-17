@@ -55,3 +55,10 @@ No target execution, optional-mod probing or central mapping promotion. The map
 remains 669; independent semantic review NOT_RUN. Existing fixed17/fixed10 batch
 manifests remain unchanged. Next, trace the optional Curios extension explicitly
 and remaining entity-specific callback bodies using these name-to-target anchors.
+
+### Later extension resolution
+
+[CURIOS-QUERY-EXTENSION-RECOVERY-2026-10-17.md](CURIOS-QUERY-EXTENSION-RECOVERY-2026-10-17.md)
+resolves the saved trailing call: four names are registered in both installed and
+absent branches, with real implementations versus placeholders. This supplements,
+but does not mutate, the fixed 171-entry base-constructor evidence.

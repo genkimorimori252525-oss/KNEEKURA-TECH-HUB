@@ -351,3 +351,5 @@ bounded runtime observation rather than protection bypass.
 - [Typed query variable guards](TYPED-QUERY-GUARDS-RECOVERY-2026-10-17.md): 17 exact type predicates, raw callback results, invalid-variable/function distinction and child-entity guard limits.
 
 - [Query-name implementation lookup](QUERY-REGISTRATION-RECOVERY-2026-10-17.md): 171 base constructor registrations with compact JSONL lookup; conditional Curios extensions remain explicitly separate.
+
+- [Curios query extension](CURIOS-QUERY-EXTENSION-RECOVERY-2026-10-17.md): four real/placeholder names, per-thread argument caches, render toggles and cosmetic-over-raw selection.

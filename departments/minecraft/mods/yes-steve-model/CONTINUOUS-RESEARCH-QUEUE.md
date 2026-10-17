@@ -234,3 +234,8 @@ Literal query registration catalog now resolves 61 query + 110 ysm names to exac
 callbacks/objects and typed wrappers without implying semantic completion. The
 Curios extension call is preserved outside base counts. Continue that optional
 extension and remaining entity-specific callbacks via focused name lookup.
+
+Curios tail registers four names even when absent (placeholders). Real-query
+cache/preparation and visible cosmetic-slot search are recorded; no provider
+runtime claim. Continue remaining entity/projectile/hit-state callbacks via
+exact name anchors, preserving default/live/cached and mixin boundaries.
