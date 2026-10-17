@@ -204,3 +204,8 @@ Resource argument caching and optional armor/elytra adapter Java boundaries are
 recorded; external provider versions/runtime linkage remain untested. Continue
 world-relative block/biome/tag query semantics with exact rounding, range gates
 and lazy short-circuit order.
+
+World-relative/tag and position/camera query inputs are recorded. Offset x/y/z
+all evaluate before the range gate; position uses effective partial tick while
+relative-block lookup uses current coordinates. Continue context guards and
+time/controller state query inputs, preserving actual units and boxing.

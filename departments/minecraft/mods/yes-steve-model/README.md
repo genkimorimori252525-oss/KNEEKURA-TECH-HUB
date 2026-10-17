@@ -336,3 +336,5 @@ bounded runtime observation rather than protection bypass.
 - [Equipment and effect queries](EQUIPMENT-EFFECT-QUERY-RECOVERY-2026-10-17.md): slot/provider precedence, short-circuit tags, durability, actual enchantment argument index and remote/live effect sources.
 
 - [Resource arguments and equipment adapters](RESOURCE-ARGUMENT-ADAPTER-RECOVERY-2026-10-17.md): literal-ID caching, typed strings and optional-mod present-empty/fallback boundaries.
+
+- [World/position/camera queries](WORLD-QUERY-INPUT-RECOVERY-2026-10-17.md): offset evaluation/range/rounding, tag short-circuiting, interpolated position and camera orientation convention.
