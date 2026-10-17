@@ -534,3 +534,5 @@ bounded runtime observation rather than protection bypass.
 ## Renderer bridge and paper-doll inputs
 
 [Living-renderer bridge and overlay entry](RENDER-BRIDGE-PAPERDOLL-ENTRY-RECOVERY-2026-10-17.md) connects the previously observed interface cast to its packaged Mixin provider, and distinguishes config-driven local-player rendering from fake preview actors. [Paper-doll editing](PAPERDOLL-CONFIG-MUTATION-RECOVERY-2026-10-17.md) tracks draft fields, unclamped local drag calculations, immediate checkbox writes and ordered close-time setters. The separate fixed6 [checkpoint](PAPERDOLL-RENDER-CHECKPOINT-2026-10-17.json) verifies these boundaries without target/GUI/config execution or confidence promotion.
+
+- [Player capability provider lifetime](PLAYER-CAPABILITY-PROVIDER-LIFETIME-RECOVERY-2026-10-17.md): player query suppliers can construct backing state, while projectile/vehicle providers are empty until explicit initialization. Attachment branches, NBT factories and clone transfer are distinct lifecycle steps. The fixed6 [checkpoint](PLAYER-PROVIDER-CHECKPOINT-2026-10-17.json) checks the connected scopes without claiming Forge/runtime lifecycle verification.

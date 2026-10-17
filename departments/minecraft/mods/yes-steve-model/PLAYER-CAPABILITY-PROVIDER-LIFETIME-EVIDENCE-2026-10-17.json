@@ -1,0 +1,1656 @@
+{
+  "format": "kneekura.ysm-bounded-seed-evidence.v1",
+  "artifact": {
+    "sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+    "sha1": "151ac7b24da8beeca1a20864565743cfd77af286",
+    "size": 63269843,
+    "version_id": "Zqooxsd2",
+    "classes": 955
+  },
+  "confidence_policy": "CONFIRMED denotes semantic correspondence reviewed against pinned source and exact instructions/relations, not recovered original symbols or whole-source equivalence. Prior community sources reused as fixture leads; no community-based promotions.",
+  "source_artifact_equivalence": "NOT_ESTABLISHED",
+  "preserved_global_negative_finding": "SOURCE_ARTIFACT_DIVERGENCE",
+  "recorded_at": "2026-10-17",
+  "detailed_operands": true,
+  "classes": [],
+  "members": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0OooOo0oOOoOoOoOooO000o",
+      "name": "<init>",
+      "descriptor": "(Lnet/minecraft/client/player/AbstractClientPlayer;)V",
+      "access": 1,
+      "code_sha256": "f123125a8359d16f0f9687f2b68d942b7eca397f4d7fcf8c2a4cb29ba4bdf95c",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "java/lang/Object",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0OooOo0oOOoOoOoOooO000o",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "Lnet/minecraft/client/player/AbstractClientPlayer;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "001d"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "001f"
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0OooOo0oOOoOoOoOooO000o",
+      "name": "getCapability",
+      "descriptor": "(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraft/core/Direction;)Lnet/minecraftforge/common/util/LazyOptional;",
+      "access": 1,
+      "code_sha256": "e8419ff200c41264a058745acac6a3e7cc10a2c8120dc8796d1024dc99f355f4",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 2,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0OooOo0oOOoOoOoOooO000o",
+            "name": "getCapability",
+            "descriptor": "(Lnet/minecraftforge/common/capabilities/Capability;)Lnet/minecraftforge/common/util/LazyOptional;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 2,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0027"
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0OooOo0oOOoOoOoOooO000o",
+      "name": "getCapability",
+      "descriptor": "(Lnet/minecraftforge/common/capabilities/Capability;)Lnet/minecraftforge/common/util/LazyOptional;",
+      "access": 1,
+      "code_sha256": "7ce3f4f053d4178f370a6a6a114ad1a406286fe888280ce7a2dfc87ae407cba4",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0OooOo0oOOoOoOoOooO000o",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lnet/minecraftforge/common/capabilities/Capability;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 5,
+          "opcode": "0xba",
+          "reference": {
+            "name": "get",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/O0OooOo0oOOoOoOoOooO000o;)Lnet/minecraftforge/common/util/NonNullSupplier;",
+            "bootstrap_index": 0,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "net/minecraftforge/common/util/LazyOptional",
+            "name": "of",
+            "descriptor": "(Lnet/minecraftforge/common/util/NonNullSupplier;)Lnet/minecraftforge/common/util/LazyOptional;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraftforge/common/capabilities/Capability",
+            "name": "orEmpty",
+            "descriptor": "(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraftforge/common/util/LazyOptional;)Lnet/minecraftforge/common/util/LazyOptional;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "002a"
+        },
+        {
+          "offset": 3,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0xba",
+          "encoded_operands_hex": "003c0000"
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0042"
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0048"
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0OooOo0oOOoOoOoOooO000o",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O;",
+      "access": 2,
+      "code_sha256": "2cad012887e37bf40340eeb64d3fdcda9cf0041bcf23e8825a851c4ce5debf75",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0OooOo0oOOoOoOoOooO000o",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xc7",
+          "branch_target": 27
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 12,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0OooOo0oOOoOoOoOooO000o",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "Lnet/minecraft/client/player/AbstractClientPlayer;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O",
+            "name": "<init>",
+            "descriptor": "(Lnet/minecraft/world/entity/player/Player;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 19,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0OooOo0oOOoOoOoOooO000o",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 22,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 23,
+          "opcode": "0x1"
+        },
+        {
+          "offset": 24,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0OooOo0oOOoOoOoOooO000o",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "Lnet/minecraft/client/player/AbstractClientPlayer;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 27,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 28,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0OooOo0oOOoOoOoOooO000o",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 31,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "004a"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xc7",
+          "encoded_operands_hex": "0017"
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 8,
+          "opcode": "0xbb",
+          "encoded_operands_hex": "004c"
+        },
+        {
+          "offset": 11,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 12,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "001f"
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "004f"
+        },
+        {
+          "offset": 19,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "004a"
+        },
+        {
+          "offset": 22,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 23,
+          "opcode": "0x1",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 24,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "001f"
+        },
+        {
+          "offset": 27,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 28,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "004a"
+        },
+        {
+          "offset": 31,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0OooOo0oOOoOoOoOooO000o",
+      "name": "<clinit>",
+      "descriptor": "()V",
+      "access": 8,
+      "code_sha256": "311f43ef0918010b6fd0d41b71a29ac8d4a4ba7255dd98f4ca8d7f80c03be7a5",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/O0OooOo0oOOoOoOoOooO000o$1",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0OooOo0oOOoOoOoOooO000o$1",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "net/minecraftforge/common/capabilities/CapabilityManager",
+            "name": "get",
+            "descriptor": "(Lnet/minecraftforge/common/capabilities/CapabilityToken;)Lnet/minecraftforge/common/capabilities/Capability;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb3",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O0OooOo0oOOoOoOoOooO000o",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lnet/minecraftforge/common/capabilities/Capability;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0xbb",
+          "encoded_operands_hex": "000c"
+        },
+        {
+          "offset": 3,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "0051"
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0056"
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb3",
+          "encoded_operands_hex": "002a"
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/Oo00o0OooOOo0ooOoo0oO0o0",
+      "name": "<init>",
+      "descriptor": "()V",
+      "access": 1,
+      "code_sha256": "32dc1017eb4ee5da6518e419aa70f5cb1bfc14f9a15f26c4b65f7e371d7541ef",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "java/lang/Object",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 5,
+          "opcode": "0x1"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/Oo00o0OooOOo0ooOoo0oO0o0",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "0017"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0x1",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "0019"
+        },
+        {
+          "offset": 9,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/Oo00o0OooOOo0ooOoo0oO0o0",
+      "name": "getCapability",
+      "descriptor": "(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraft/core/Direction;)Lnet/minecraftforge/common/util/LazyOptional;",
+      "access": 1,
+      "code_sha256": "2b0d96c61a2b2881d502bd95d4aed381d55830a9645b9e1834b83a7c6008a69f",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xb2",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/Oo00o0OooOOo0ooOoo0oO0o0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lnet/minecraftforge/common/capabilities/Capability;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 5,
+          "opcode": "0xba",
+          "reference": {
+            "name": "get",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/Oo00o0OooOOo0ooOoo0oO0o0;)Lnet/minecraftforge/common/util/NonNullSupplier;",
+            "bootstrap_index": 0,
+            "cp_tag": 18
+          }
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "net/minecraftforge/common/util/LazyOptional",
+            "name": "of",
+            "descriptor": "(Lnet/minecraftforge/common/util/NonNullSupplier;)Lnet/minecraftforge/common/util/LazyOptional;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "net/minecraftforge/common/capabilities/Capability",
+            "name": "orEmpty",
+            "descriptor": "(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraftforge/common/util/LazyOptional;)Lnet/minecraftforge/common/util/LazyOptional;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0xb2",
+          "encoded_operands_hex": "0020"
+        },
+        {
+          "offset": 3,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0xba",
+          "encoded_operands_hex": "00320000"
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "0038"
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "003e"
+        },
+        {
+          "offset": 16,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/Oo00o0OooOOo0ooOoo0oO0o0",
+      "name": "getCapability",
+      "descriptor": "(Lnet/minecraftforge/common/capabilities/Capability;)Lnet/minecraftforge/common/util/LazyOptional;",
+      "access": 1,
+      "code_sha256": "742e08da2ba5582d7fa0af9955677d65128717f2f217e9641cf46826e841b0ee",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 2,
+          "opcode": "0x1"
+        },
+        {
+          "offset": 3,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/Oo00o0OooOOo0ooOoo0oO0o0",
+            "name": "getCapability",
+            "descriptor": "(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraft/core/Direction;)Lnet/minecraftforge/common/util/LazyOptional;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 2,
+          "opcode": "0x1",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 3,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0042"
+        },
+        {
+          "offset": 6,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/Oo00o0OooOOo0ooOoo0oO0o0",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;",
+      "access": 2,
+      "code_sha256": "463a39024fd1f9eb61d27c8d66e1353d70aa6da1777ea1cad61ceecc1aaf3341",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/Oo00o0OooOOo0ooOoo0oO0o0",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xc7",
+          "branch_target": 18
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 11,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 15,
+          "opcode": "0xb5",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/Oo00o0OooOOo0ooOoo0oO0o0",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 18,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 19,
+          "opcode": "0xb4",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/Oo00o0OooOOo0ooOoo0oO0o0",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 22,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0019"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xc7",
+          "encoded_operands_hex": "000e"
+        },
+        {
+          "offset": 7,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 8,
+          "opcode": "0xbb",
+          "encoded_operands_hex": "0044"
+        },
+        {
+          "offset": 11,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 12,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "0045"
+        },
+        {
+          "offset": 15,
+          "opcode": "0xb5",
+          "encoded_operands_hex": "0019"
+        },
+        {
+          "offset": 18,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 19,
+          "opcode": "0xb4",
+          "encoded_operands_hex": "0019"
+        },
+        {
+          "offset": 22,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/Oo00o0OooOOo0ooOoo0oO0o0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lnet/minecraft/nbt/CompoundTag;)V",
+      "access": 1,
+      "code_sha256": "14fd7885aefc2d8c443f83e6eabd4c55c87a1d372f3ae19976b12fffff9ef348",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/Oo00o0OooOOo0ooOoo0oO0o0",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/nbt/CompoundTag;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0025"
+        },
+        {
+          "offset": 4,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0048"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/Oo00o0OooOOo0ooOoo0oO0o0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()Lnet/minecraft/nbt/CompoundTag;",
+      "access": 1,
+      "code_sha256": "a897bc87b8f7c73663f82272942225627089d9834be87e9da8baf8804d93092b",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/Oo00o0OooOOo0ooOoo0oO0o0",
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O",
+            "name": "O0OooOo0oOOoOoOoOooO000o",
+            "descriptor": "()Lnet/minecraft/nbt/CompoundTag;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0025"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "004c"
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/Oo00o0OooOOo0ooOoo0oO0o0",
+      "name": "deserializeNBT",
+      "descriptor": "(Lnet/minecraft/nbt/Tag;)V",
+      "access": 4097,
+      "code_sha256": "62a3d7bdb382721dbb748f47d65ca010ac82aefdad6e01e85d2c0e4d2b8f76ce",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0x2b"
+        },
+        {
+          "offset": 2,
+          "opcode": "0xc0",
+          "reference": {
+            "class_name": "net/minecraft/nbt/CompoundTag",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/Oo00o0OooOOo0ooOoo0oO0o0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/nbt/CompoundTag;)V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0x2b",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 2,
+          "opcode": "0xc0",
+          "encoded_operands_hex": "0050"
+        },
+        {
+          "offset": 5,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0051"
+        },
+        {
+          "offset": 8,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/Oo00o0OooOOo0ooOoo0oO0o0",
+      "name": "serializeNBT",
+      "descriptor": "()Lnet/minecraft/nbt/Tag;",
+      "access": 4097,
+      "code_sha256": "daf1e4e77d05f9994320fb1b5c5678d9fe98d8d4242413c5f62fbd98f5d9cf65",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0x2a"
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/Oo00o0OooOOo0ooOoo0oO0o0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Lnet/minecraft/nbt/CompoundTag;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb0"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0x2a",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 1,
+          "opcode": "0xb6",
+          "encoded_operands_hex": "0055"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb0",
+          "encoded_operands_hex": ""
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/Oo00o0OooOOo0ooOoo0oO0o0",
+      "name": "<clinit>",
+      "descriptor": "()V",
+      "access": 8,
+      "code_sha256": "4f14ffc69cd1c760e81389478d98ddba60a8659cf5b5df357b4ef6ed663458f8",
+      "exception_handlers": [],
+      "instructions": [
+        {
+          "offset": 0,
+          "opcode": "0xbb",
+          "reference": {
+            "class_name": "com/elfmcys/yesstevemodel/Oo00o0OooOOo0ooOoo0oO0o0$1",
+            "cp_tag": 7
+          }
+        },
+        {
+          "offset": 3,
+          "opcode": "0x59"
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb7",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/Oo00o0OooOOo0ooOoo0oO0o0$1",
+            "name": "<init>",
+            "descriptor": "()V",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb8",
+          "reference": {
+            "owner": "net/minecraftforge/common/capabilities/CapabilityManager",
+            "name": "get",
+            "descriptor": "(Lnet/minecraftforge/common/capabilities/CapabilityToken;)Lnet/minecraftforge/common/capabilities/Capability;",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb3",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/Oo00o0OooOOo0ooOoo0oO0o0",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lnet/minecraftforge/common/capabilities/Capability;",
+            "cp_tag": 9
+          }
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb1"
+        }
+      ],
+      "supplemental_full_operand_records": [
+        {
+          "offset": 0,
+          "opcode": "0xbb",
+          "encoded_operands_hex": "0009"
+        },
+        {
+          "offset": 3,
+          "opcode": "0x59",
+          "encoded_operands_hex": ""
+        },
+        {
+          "offset": 4,
+          "opcode": "0xb7",
+          "encoded_operands_hex": "0057"
+        },
+        {
+          "offset": 7,
+          "opcode": "0xb8",
+          "encoded_operands_hex": "005c"
+        },
+        {
+          "offset": 10,
+          "opcode": "0xb3",
+          "encoded_operands_hex": "0020"
+        },
+        {
+          "offset": 13,
+          "opcode": "0xb1",
+          "encoded_operands_hex": ""
+        }
+      ]
+    }
+  ],
+  "owner_declarations": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0OooOo0oOOoOoOoOooO000o",
+      "declaration": {
+        "access": 33,
+        "super": "java/lang/Object",
+        "interfaces": [
+          "net/minecraftforge/common/capabilities/ICapabilityProvider"
+        ],
+        "fields": [
+          {
+            "access": 9,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lnet/minecraftforge/common/capabilities/Capability;"
+          },
+          {
+            "access": 2,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O;"
+          },
+          {
+            "access": 2,
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "Lnet/minecraft/client/player/AbstractClientPlayer;"
+          }
+        ],
+        "methods": [
+          {
+            "access": 1,
+            "name": "<init>",
+            "descriptor": "(Lnet/minecraft/client/player/AbstractClientPlayer;)V"
+          },
+          {
+            "access": 1,
+            "name": "getCapability",
+            "descriptor": "(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraft/core/Direction;)Lnet/minecraftforge/common/util/LazyOptional;"
+          },
+          {
+            "access": 1,
+            "name": "getCapability",
+            "descriptor": "(Lnet/minecraftforge/common/capabilities/Capability;)Lnet/minecraftforge/common/util/LazyOptional;"
+          },
+          {
+            "access": 2,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O;"
+          },
+          {
+            "access": 8,
+            "name": "<clinit>",
+            "descriptor": "()V"
+          }
+        ]
+      }
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/Oo00o0OooOOo0ooOoo0oO0o0",
+      "declaration": {
+        "access": 33,
+        "super": "java/lang/Object",
+        "interfaces": [
+          "net/minecraftforge/common/capabilities/ICapabilitySerializable"
+        ],
+        "fields": [
+          {
+            "access": 9,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "Lnet/minecraftforge/common/capabilities/Capability;"
+          },
+          {
+            "access": 2,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;"
+          }
+        ],
+        "methods": [
+          {
+            "access": 1,
+            "name": "<init>",
+            "descriptor": "()V"
+          },
+          {
+            "access": 1,
+            "name": "getCapability",
+            "descriptor": "(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraft/core/Direction;)Lnet/minecraftforge/common/util/LazyOptional;"
+          },
+          {
+            "access": 1,
+            "name": "getCapability",
+            "descriptor": "(Lnet/minecraftforge/common/capabilities/Capability;)Lnet/minecraftforge/common/util/LazyOptional;"
+          },
+          {
+            "access": 2,
+            "name": "o0OOooo0o0OO00OoOOOo0o0O",
+            "descriptor": "()Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lnet/minecraft/nbt/CompoundTag;)V"
+          },
+          {
+            "access": 1,
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "()Lnet/minecraft/nbt/CompoundTag;"
+          },
+          {
+            "access": 4097,
+            "name": "deserializeNBT",
+            "descriptor": "(Lnet/minecraft/nbt/Tag;)V"
+          },
+          {
+            "access": 4097,
+            "name": "serializeNBT",
+            "descriptor": "()Lnet/minecraft/nbt/Tag;"
+          },
+          {
+            "access": 8,
+            "name": "<clinit>",
+            "descriptor": "()V"
+          }
+        ]
+      }
+    }
+  ],
+  "bootstrap_and_constant_evidence": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0OooOo0oOOoOoOoOooO000o",
+      "constant_values": {},
+      "bootstrap_methods": [
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "()Ljava/lang/Object;"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 5,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/O0OooOo0oOOoOoOoOooO000o",
+                "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+                "descriptor": "()Lcom/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O;"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "()Lcom/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O;"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/Oo00o0OooOOo0ooOoo0oO0o0",
+      "constant_values": {},
+      "bootstrap_methods": [
+        {
+          "method_handle": {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 10,
+              "owner": "java/lang/invoke/LambdaMetafactory",
+              "name": "metafactory",
+              "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+            }
+          },
+          "arguments": [
+            {
+              "cp_tag": 16,
+              "value": "()Ljava/lang/Object;"
+            },
+            {
+              "cp_tag": 15,
+              "reference_kind": 5,
+              "reference": {
+                "cp_tag": 10,
+                "owner": "com/elfmcys/yesstevemodel/Oo00o0OooOOo0ooOoo0oO0o0",
+                "name": "o0OOooo0o0OO00OoOOOo0o0O",
+                "descriptor": "()Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;"
+              }
+            },
+            {
+              "cp_tag": 16,
+              "value": "()Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "source_tracks": [
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/capability/PlayerAnimatableCapabilityProvider.java",
+      "sha256": "581fd4b41dbe69374aba7d18ea3dfe617f6410ef7aa5353bf12f69814d6649d2",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6"
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/capability/ModelInfoCapabilityProvider.java",
+      "sha256": "ecfb9053148826fdcfb8ca504e56a7c21a01f075fc40f678896aad8ef29f96aa",
+      "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6"
+    }
+  ],
+  "review_status": "PRIMARY_STATIC_REVIEW_ONLY",
+  "central_mapping_promoted": false,
+  "event_annotations": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0OooOo0oOOoOoOoOooO000o",
+      "super": "java/lang/Object",
+      "access": 33,
+      "class_sha256": "29ba421ba812cda654857b8bc7c1e723f3b8e90c042e31564724102b0da37020",
+      "annotations": {
+        "RuntimeVisibleAnnotations": [
+          {
+            "type": "Lnet/minecraftforge/api/distmarker/OnlyIn;",
+            "elements": [
+              {
+                "name": "value",
+                "value": {
+                  "tag": "e",
+                  "type": "Lnet/minecraftforge/api/distmarker/Dist;",
+                  "constant": "CLIENT"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "access": 9,
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "Lnet/minecraftforge/common/capabilities/Capability;",
+          "annotations": {}
+        },
+        {
+          "access": 2,
+          "name": "o0OOooo0o0OO00OoOOOo0o0O",
+          "descriptor": "Lcom/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O;",
+          "annotations": {}
+        },
+        {
+          "access": 2,
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "Lnet/minecraft/client/player/AbstractClientPlayer;",
+          "annotations": {}
+        }
+      ],
+      "methods": [
+        {
+          "access": 1,
+          "name": "<init>",
+          "descriptor": "(Lnet/minecraft/client/player/AbstractClientPlayer;)V",
+          "annotations": {}
+        },
+        {
+          "access": 1,
+          "name": "getCapability",
+          "descriptor": "(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraft/core/Direction;)Lnet/minecraftforge/common/util/LazyOptional;",
+          "annotations": {
+            "RuntimeInvisibleAnnotations": [
+              {
+                "type": "Lorg/jetbrains/annotations/NotNull;",
+                "elements": []
+              }
+            ]
+          }
+        },
+        {
+          "access": 1,
+          "name": "getCapability",
+          "descriptor": "(Lnet/minecraftforge/common/capabilities/Capability;)Lnet/minecraftforge/common/util/LazyOptional;",
+          "annotations": {
+            "RuntimeInvisibleAnnotations": [
+              {
+                "type": "Lorg/jetbrains/annotations/NotNull;",
+                "elements": []
+              }
+            ]
+          }
+        },
+        {
+          "access": 2,
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "()Lcom/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O;",
+          "annotations": {
+            "RuntimeInvisibleAnnotations": [
+              {
+                "type": "Lorg/jetbrains/annotations/NotNull;",
+                "elements": []
+              }
+            ]
+          }
+        },
+        {
+          "access": 8,
+          "name": "<clinit>",
+          "descriptor": "()V",
+          "annotations": {}
+        }
+      ]
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/Oo00o0OooOOo0ooOoo0oO0o0",
+      "super": "java/lang/Object",
+      "access": 33,
+      "class_sha256": "64458da2e8a94e2bbc037f98f8b346f4ece9508aba0503af1e4ab7370e128e1b",
+      "annotations": {},
+      "fields": [
+        {
+          "access": 9,
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "Lnet/minecraftforge/common/capabilities/Capability;",
+          "annotations": {}
+        },
+        {
+          "access": 2,
+          "name": "o0OOooo0o0OO00OoOOOo0o0O",
+          "descriptor": "Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;",
+          "annotations": {}
+        }
+      ],
+      "methods": [
+        {
+          "access": 1,
+          "name": "<init>",
+          "descriptor": "()V",
+          "annotations": {}
+        },
+        {
+          "access": 1,
+          "name": "getCapability",
+          "descriptor": "(Lnet/minecraftforge/common/capabilities/Capability;Lnet/minecraft/core/Direction;)Lnet/minecraftforge/common/util/LazyOptional;",
+          "annotations": {
+            "RuntimeInvisibleAnnotations": [
+              {
+                "type": "Lorg/jetbrains/annotations/NotNull;",
+                "elements": []
+              }
+            ]
+          }
+        },
+        {
+          "access": 1,
+          "name": "getCapability",
+          "descriptor": "(Lnet/minecraftforge/common/capabilities/Capability;)Lnet/minecraftforge/common/util/LazyOptional;",
+          "annotations": {
+            "RuntimeInvisibleAnnotations": [
+              {
+                "type": "Lorg/jetbrains/annotations/NotNull;",
+                "elements": []
+              }
+            ]
+          }
+        },
+        {
+          "access": 2,
+          "name": "o0OOooo0o0OO00OoOOOo0o0O",
+          "descriptor": "()Lcom/elfmcys/yesstevemodel/oooooooOOoOOoO00OooOo00O;",
+          "annotations": {
+            "RuntimeInvisibleAnnotations": [
+              {
+                "type": "Lorg/jetbrains/annotations/NotNull;",
+                "elements": []
+              }
+            ]
+          }
+        },
+        {
+          "access": 1,
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Lnet/minecraft/nbt/CompoundTag;)V",
+          "annotations": {}
+        },
+        {
+          "access": 1,
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "()Lnet/minecraft/nbt/CompoundTag;",
+          "annotations": {}
+        },
+        {
+          "access": 4097,
+          "name": "deserializeNBT",
+          "descriptor": "(Lnet/minecraft/nbt/Tag;)V",
+          "annotations": {}
+        },
+        {
+          "access": 4097,
+          "name": "serializeNBT",
+          "descriptor": "()Lnet/minecraft/nbt/Tag;",
+          "annotations": {}
+        },
+        {
+          "access": 8,
+          "name": "<clinit>",
+          "descriptor": "()V",
+          "annotations": {}
+        }
+      ]
+    }
+  ]
+}
