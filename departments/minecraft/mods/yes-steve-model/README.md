@@ -344,3 +344,6 @@ bounded runtime observation rather than protection bypass.
 - [Time/controller queries](TIME-CONTROLLER-QUERY-RECOVERY-2026-10-17.md): clock units and boxing, nullable context defaults, and distinct coded/Bedrock all-versus-any completion producers.
 
 - [Child context and arrow evaluation](CHILD-CONTEXT-ARROW-RECOVERY-2026-10-17.md): selective field copying, null projectile-owner wrappers, shared storage and evaluator return-state transfer.
+
+- [Foreign/public binding reachability](FOREIGN-BINDING-RECOVERY-2026-10-17.md): existing implementation versus bounded absence of outside-pair class references.
+- [Actual selected Vineflower comparison](VINEFLOWER-COMPARISON-2026-10-17.md): eight unchanged class inputs, four derived Java outputs, four corroborated branches; no target runtime or source-equivalence claim.

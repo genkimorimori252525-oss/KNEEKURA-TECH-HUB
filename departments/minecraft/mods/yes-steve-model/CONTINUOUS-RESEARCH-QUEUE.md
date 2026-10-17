@@ -219,3 +219,9 @@ Child context/projectile-owner/arrow semantics are recorded. A child entity is
 not a full animation-context switch, and a null projectile owner can be wrapped
 in a nonnull context. Continue public/foreign binding reachability and typed
 query guards without inventing controller/emission inheritance or global closure.
+
+Foreign binding is present but has no outside-pair CONSTANT_Class referencer in
+the fixed 955-class inventory; native/reflection activation remains outside scope.
+Vineflower 1.11.1 was actually run on eight selected unchanged classes via the
+existing opt-in shelf and corroborated four branch interpretations. Continue
+reachable typed query guard/entity inputs; use decompiler views only when useful.

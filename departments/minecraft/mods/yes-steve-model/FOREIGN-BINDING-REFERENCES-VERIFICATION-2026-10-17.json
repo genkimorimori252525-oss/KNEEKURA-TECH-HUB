@@ -1,0 +1,33 @@
+{
+  "checks": [
+    {
+      "check": "complete-fixed-constant-class-scan",
+      "pass": true
+    },
+    {
+      "check": "955-classes",
+      "pass": true
+    }
+  ],
+  "negative_controls": [
+    {
+      "control": "missing-pair-reference",
+      "rejected": true
+    },
+    {
+      "control": "invented-external-reference",
+      "rejected": true
+    },
+    {
+      "control": "wrong-target",
+      "rejected": true
+    },
+    {
+      "control": "invented-native-closure",
+      "rejected": true
+    }
+  ],
+  "failures": [],
+  "independent_semantic_review": "NOT_RUN",
+  "runtime_executed": false
+}
