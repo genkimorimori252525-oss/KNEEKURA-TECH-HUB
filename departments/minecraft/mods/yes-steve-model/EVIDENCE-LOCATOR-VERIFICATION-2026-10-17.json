@@ -1083,6 +1083,22 @@
       ],
       "matches": 1,
       "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "TopPlugin"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "InterModMsg"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
     }
   ],
   "seconds": 3.698,
@@ -1095,9 +1111,9 @@
     "EVIDENCE-LOCATOR-2026-10-17.json": "f06b1798596512558f50568833890bba238e52b78117e65b7c26872af0521a51",
     "NAVIGATION-COMPARISON-ALIASES-2026-10-17.json": "a46b118029b78ea2573b35a07aa69625ea0d53fdfbdda1cb9614c9420ffa699c"
   },
-  "elapsed_seconds": 5.065,
-  "index_sha256": "e80bdbd0e8b46fb702b34066f0462211a21ff2ec510fdb4bfe934b881238f9aa",
-  "comparison_alias_count": 123,
+  "elapsed_seconds": 5.337,
+  "index_sha256": "7c49a0dbbf9f79c4d23f3de732303f6382ee95ed220825870ba8916775c6230b",
+  "comparison_alias_count": 125,
   "locator_tool_sha256": "19875379f40fe73e65cb034c596777897620dd05ff4a3e61ce2da051dabe16c2",
   "locator_tests_sha256": "7f8ef4c998465362d9e4c2f09bae5cd518a3605d2c9bc4abdf3bcfdff8149799",
   "source_path_association_groups": 490,
