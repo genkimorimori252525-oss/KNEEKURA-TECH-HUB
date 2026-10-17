@@ -14,6 +14,10 @@ Use this only when implementing or analyzing a related subsystem. It is a small 
 | Handle session/model availability | [Client state/listeners](CLIENT-MODEL-SYNC-STATE-RECOVERY-2026-10-17.md) | Sync progress, Java map publication, texture readiness and visible output are not one completion flag |
 | Emit effects or manage audio lifetime | [Sound lifecycle](SOUND-LIFECYCLE-INDEX-2026-10-17.md) | Dispatch, stop request, EOF, stream close and decoder retirement differ |
 
+## Later Java contracts
+
+For model inputs/ownership, lexical errors and reader lifetime, model-local language fallback, maid control/render listeners, first-person background and input routing, use the small [connected batch review](JAVA-REUSE-BATCH-REVIEW-2026-10-17.md) to choose one dossier. Its35-cohort integrity receipt is an optional substantial-batch check, never an automatic startup gate or a semantic-completion percentage.
+
 ## Avoid these semantic substitutions
 
 1. **Readiness is not visibility.** Model-present excludes some loaded fallback states; texture ID presence is not GPU success. Use [model readiness](MODEL-READINESS-SCOPE-RECOVERY-2026-10-17.md) and [texture lifetime](TEXTURE-HOLDER-LIFETIME-RECOVERY-2026-10-17.md).

@@ -1,0 +1,513 @@
+{
+  "format": "kneekura.ysm-java-reuse-batch-checkpoint.v1",
+  "cohort_manifest": [
+    [
+      "ANIMATION-DATA-OWNERSHIP",
+      "animation_data_ownership",
+      true
+    ],
+    [
+      "PARTICLE-KEYFRAME-READERS",
+      "particle_keyframe_readers",
+      false
+    ],
+    [
+      "MODEL-ASSET-HELPERS",
+      "model_asset_helpers",
+      true
+    ],
+    [
+      "CONDITIONAL-ANIMATION-NAMES",
+      "conditional_animation_names",
+      true
+    ],
+    [
+      "MOLANG-EVENT-WRAPPER",
+      "molang_event_wrapper",
+      true
+    ],
+    [
+      "GEOMETRY-AUTHORED-DEFAULTS",
+      "geometry_authored_defaults",
+      true
+    ],
+    [
+      "GEOMETRY-DEFAULT-CALLERS",
+      "geometry_default_callers",
+      false
+    ],
+    [
+      "TLM-LOCATION-ADAPTER",
+      "tlm_location_adapter",
+      true
+    ],
+    [
+      "LOCATOR-MATRIX-PREPARATION",
+      "locator_matrix_preparation",
+      true
+    ],
+    [
+      "TYPED-FUNCTION-GUARDS",
+      "typed_function_guards",
+      true
+    ],
+    [
+      "DEBUG-MESSAGE-DELIVERY",
+      "debug_message_delivery",
+      true
+    ],
+    [
+      "EQUIPMENT-EFFECT-QUERY",
+      "equipment_effect_query",
+      true
+    ],
+    [
+      "INSTRUCTION-DEBUG-EVALUATION",
+      "instruction_debug_evaluation",
+      true
+    ],
+    [
+      "LEXER-TOKEN-DIAGNOSTICS",
+      "lexer_token_diagnostics",
+      true
+    ],
+    [
+      "PARSER-BINDING-STORAGE",
+      "parser_binding_storage",
+      true
+    ],
+    [
+      "PARSER-POOL-LIFETIME",
+      "parser_pool_lifetime",
+      true
+    ],
+    [
+      "PARSER-ENTRY-OWNERSHIP",
+      "parser_entry_ownership",
+      true
+    ],
+    [
+      "MODEL-INPUT-CARRIERS",
+      "model_input_carriers",
+      true
+    ],
+    [
+      "MODEL-LANGUAGE-FALLBACK",
+      "model_language_fallback",
+      true
+    ],
+    [
+      "ORDERED-SEGMENT-TRANSITION",
+      "ordered_segment_transition",
+      true
+    ],
+    [
+      "NATIVE-TEXTURE-JAVA-BOUNDARY",
+      "native_texture_java_boundary",
+      true
+    ],
+    [
+      "TEXTURE-HOLDER-LIFETIME",
+      "texture_holder_lifetime",
+      true
+    ],
+    [
+      "SHADER-BUFFER-ADAPTERS",
+      "shader_buffer_adapters",
+      true
+    ],
+    [
+      "MAID-ENTITY-CONTROL",
+      "maid_entity_control",
+      true
+    ],
+    [
+      "MAID-CONTROLLER-REGISTRATION",
+      "maid_controller_registration",
+      true
+    ],
+    [
+      "MAID-QUERY-ADAPTER",
+      "maid_query_adapter",
+      true
+    ],
+    [
+      "PLAYER-CONTROLLER-ASSEMBLY",
+      "player_controller_assembly",
+      true
+    ],
+    [
+      "MAID-RENDER-CAPABILITY",
+      "maid_render_capability",
+      true
+    ],
+    [
+      "RENDER-SELECTION",
+      "render_selection",
+      true
+    ],
+    [
+      "CLIENT-VIEW-MOVEMENT",
+      "client_view_movement",
+      true
+    ],
+    [
+      "FIRST-PERSON-RENDER-REGISTRY",
+      "first_person_render_registry",
+      true
+    ],
+    [
+      "ARM-REPLACEMENT-EVENTS",
+      "arm_replacement_events",
+      true
+    ],
+    [
+      "EXTRA-ANIMATION-KEY-ROUTING",
+      "extra_animation_key_routing",
+      true
+    ],
+    [
+      "INPUT-SYNC-DEFER",
+      "input_sync_defer",
+      true
+    ],
+    [
+      "CLIENT-COMPAT-INITIALIZATION",
+      "client_compat_initialization",
+      true
+    ]
+  ],
+  "cohorts": [
+    {
+      "cohort": "ANIMATION-DATA-OWNERSHIP",
+      "tool_sha256": "3d6d8a81dcdbd184965b1da3c7c9dfe16ebf0f549e389cd99ef05aa4638abff9",
+      "evidence_sha256": "2fdcbd8c0c020ed23b61c602e8049efea69cd8323aa59f564950d4d46e424e1d",
+      "rerun_receipt_sha256": "9ad4c18c3b95ffcc29bc447a2c599a7ab7d09f08e7553a8fea09a5440fba0766",
+      "checks": 152,
+      "negative_controls": 10,
+      "status": "PASS"
+    },
+    {
+      "cohort": "PARTICLE-KEYFRAME-READERS",
+      "tool_sha256": "805d244ecab06714b7175408c0820b7deee5d361363efed46ff56111e91940d2",
+      "evidence_sha256": "ec80bb9f83171275dbb7632d10996917e1537e0e3136766564f3ce8b3d924baf",
+      "rerun_receipt_sha256": "b116db0e228dd5e18c049e99e88115cdc763caf4b122e50fa5593e7dcd826d75",
+      "checks": 2,
+      "negative_controls": 6,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MODEL-ASSET-HELPERS",
+      "tool_sha256": "a1be85ede0282ac680b580db17edb410bb7925d57f060373840447010bba1f95",
+      "evidence_sha256": "1ab3aef7c1863bb0b09d60c24c56cd03cc61cb5dea1c1cee9b542c7e8d0b99c2",
+      "rerun_receipt_sha256": "2a569c64a99ae7189e56deb3e7b4da092e8895a6d2522a827e793c0c500a2260",
+      "checks": 179,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "CONDITIONAL-ANIMATION-NAMES",
+      "tool_sha256": "fe5a8c5ad75c3a2f2a1511a53a8c3c772cda2a78c12c1ccc8578373c5d7380e6",
+      "evidence_sha256": "1b03d6529d5e1bf7fb9eb064040b0185281278b7224427412e0118dd5b1472be",
+      "rerun_receipt_sha256": "923acab092d89e32541815002ca24d1ad5ee5605f6013c460c4c9a94f5ce01b4",
+      "checks": 321,
+      "negative_controls": 11,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MOLANG-EVENT-WRAPPER",
+      "tool_sha256": "1b2c96072c567ead0e702d7d1f8b019eeff7431422f07bc181272a3b4961a749",
+      "evidence_sha256": "ffbc166b87d7b935813b34c37e54b0cce460ceef9d9c4e305fecb2c2e15f6d63",
+      "rerun_receipt_sha256": "1b6da0c1ca743cb330a5a0dc2dd79d590f9cc31ac4ea6a0150173251f7a422fb",
+      "checks": 36,
+      "negative_controls": 6,
+      "status": "PASS"
+    },
+    {
+      "cohort": "GEOMETRY-AUTHORED-DEFAULTS",
+      "tool_sha256": "de0381054425f5950ddf8822d6880b10be0bf59029156834361ff55d0ef0ffd9",
+      "evidence_sha256": "a937898e55bd760b10318a111c3b10ecf69a9f5b130ad85704c22ddc75dc332a",
+      "rerun_receipt_sha256": "59bc32faca48f68a3aa4af5fe522d45fce32ecb6e309db62939ab80c809e94cf",
+      "checks": 110,
+      "negative_controls": 7,
+      "status": "PASS"
+    },
+    {
+      "cohort": "GEOMETRY-DEFAULT-CALLERS",
+      "tool_sha256": "16eaf915ef6ee06f74c66018253c3c73fad599ff2a70b6ab47e2d7ff9440a4a2",
+      "evidence_sha256": "e2dea2c33a538c6fd3b99c415f3e1661bcddaf4f54d776e6fc645abbe3e0a2df",
+      "rerun_receipt_sha256": "b116db0e228dd5e18c049e99e88115cdc763caf4b122e50fa5593e7dcd826d75",
+      "checks": 2,
+      "negative_controls": 6,
+      "status": "PASS"
+    },
+    {
+      "cohort": "TLM-LOCATION-ADAPTER",
+      "tool_sha256": "5ee781546d71f2c4bbb6be5f35301d8a91a3b7757fce7f3ead6d40bb7ef9b1a8",
+      "evidence_sha256": "caecf87ca06dcf5b5da9716fe2d2067723d7b4105000a2722fec0af3263072b6",
+      "rerun_receipt_sha256": "fe05b60f1d827094c60ffbfe3e8bec54c6a5bd88c385cb18b89f2d4d1f9c7c92",
+      "checks": 174,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "LOCATOR-MATRIX-PREPARATION",
+      "tool_sha256": "0a2483b7cfd2a1f31e051e1bf698cb52dee9d3400672fd408d006d1797cc5ed3",
+      "evidence_sha256": "63fa1a629fdebd6be3025ce45b53ac3baf77afc7707f9e58baab5ac7cb694348",
+      "rerun_receipt_sha256": "db5a57f4358141e81eeeb886282eeb241585cf9a07893c2fd869bda4f7629fe7",
+      "checks": 249,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "TYPED-FUNCTION-GUARDS",
+      "tool_sha256": "b9969b424aaa608eee83151c70abd1d2a2781cca5a574af6dab3ffe5fb188616",
+      "evidence_sha256": "21aded33f3ad076813a8c2ea2952fd68eed0e9b926fc19591bb4dada4f0b79be",
+      "rerun_receipt_sha256": "c83d71d64938b99a54e6f11473cfa2e390212d805a8cd9801317a6a284df33aa",
+      "checks": 214,
+      "negative_controls": 19,
+      "status": "PASS"
+    },
+    {
+      "cohort": "DEBUG-MESSAGE-DELIVERY",
+      "tool_sha256": "dd86ccc6d2e001cc3058be3d739f483b9ced1761845064233559ba80821c5d48",
+      "evidence_sha256": "9cd0b08b21bfae052e52d24b122bdb9ce211c07ca16602e8392d12b941de571c",
+      "rerun_receipt_sha256": "7456df2f3cc3b6a07c8d4f67d11e56d2948c493348b04561039f405b8a1eb8de",
+      "checks": 36,
+      "negative_controls": 6,
+      "status": "PASS"
+    },
+    {
+      "cohort": "EQUIPMENT-EFFECT-QUERY",
+      "tool_sha256": "ed1df61838687b495948f189c74d15f06c7948d8bdafbe4e939107cb403197cd",
+      "evidence_sha256": "a4f5cfc5e017833aa50ec21552aa06f2ef70740ebe973af59bafb427b908aaaf",
+      "rerun_receipt_sha256": "72b70ce213d06688d74dba71759bb23ad182849715789a7510e91334eca1faf6",
+      "checks": 229,
+      "negative_controls": 19,
+      "status": "PASS"
+    },
+    {
+      "cohort": "INSTRUCTION-DEBUG-EVALUATION",
+      "tool_sha256": "66e65e93012ee53ef626ff16c81aa6a83520b38ea21f0ae29be9f3f177db551e",
+      "evidence_sha256": "761fe1b8b14209e55db33e5a931c1d66348f72f9ae4b1b9f0cac9c289604f930",
+      "rerun_receipt_sha256": "6fa842621fe0b169534731214dc8c4347385f7d9feb6845fc699f7e12d805625",
+      "checks": 148,
+      "negative_controls": 9,
+      "status": "PASS"
+    },
+    {
+      "cohort": "LEXER-TOKEN-DIAGNOSTICS",
+      "tool_sha256": "d74de5bcc6f576d44757a12b692bf7879ebfbd31f9e458ba08f5ea69a71826ba",
+      "evidence_sha256": "5804c2a9b830fef59dcf8c3f651faeaa3bf39686b1f8b7e1019748b11a4be231",
+      "rerun_receipt_sha256": "42797e0385c6c475206868f8fca1ec54237954162b18265828c025868b027e9c",
+      "checks": 289,
+      "negative_controls": 13,
+      "status": "PASS"
+    },
+    {
+      "cohort": "PARSER-BINDING-STORAGE",
+      "tool_sha256": "417e9a60394063f3e673ac584f2fd1513c0306143302341aaba4190fa5524dd2",
+      "evidence_sha256": "c36a6fa05e44e4cf16fd24dd80f6ceb0f7ccb8d1efb057fee8f07a461b1bd8b6",
+      "rerun_receipt_sha256": "eecde831db4e08ed0825d591cf97498f3157e3cad04a885147bbcaaeca8e9329",
+      "checks": 258,
+      "negative_controls": 12,
+      "status": "PASS"
+    },
+    {
+      "cohort": "PARSER-POOL-LIFETIME",
+      "tool_sha256": "889555ed47d5558ce4192d1298861bdfc8e88a0e653565a4ecd7352968bcbe54",
+      "evidence_sha256": "e9678c16de71d9e233df6bff23355e29b67942a2060b983a12aa9038f5a6dc8e",
+      "rerun_receipt_sha256": "1bf4cf93635b9a0821055692f25655a57ee02a43ca0b25a2dd440366e647be31",
+      "checks": 70,
+      "negative_controls": 10,
+      "status": "PASS"
+    },
+    {
+      "cohort": "PARSER-ENTRY-OWNERSHIP",
+      "tool_sha256": "4015ad8be14f2312ed5a0ee4e944fd5cfb65e27f6b3387e0c7677beb9cbacb3c",
+      "evidence_sha256": "37da91aaf8a81543171da3fd8e1c9929fe05555e20f7a7ec49a913134fa19c54",
+      "rerun_receipt_sha256": "a0983068e5c29d853e7fe7d59f35375bcbf5c7baf1588523dfbfd3b5d230e120",
+      "checks": 90,
+      "negative_controls": 7,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MODEL-INPUT-CARRIERS",
+      "tool_sha256": "c5f96c9c54e49413f0b417f81015823456879f696bef648d17e76311c1661820",
+      "evidence_sha256": "2aa9d63e8e42bac71ba25603ce5625e2281e49a6ccd00b4ddb2eed22d15c497e",
+      "rerun_receipt_sha256": "ff3562ceb6ad12b8ed16e1f1a86056f4c14615f46ccc9de84af39ecebe9017d5",
+      "checks": 190,
+      "negative_controls": 12,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MODEL-LANGUAGE-FALLBACK",
+      "tool_sha256": "c3dc75d1482779c4f03929b763ccd66b842322f02c8898d1b15ad8eb9083a607",
+      "evidence_sha256": "b5959e472e83e8469b1ae2c4fd97f0d6440a56430353f76a7c23c6eb280a9b23",
+      "rerun_receipt_sha256": "d84fc8b90ddbc4632987e4509aebfa93709ffcfa8aa0577c295d6a615ba11a68",
+      "checks": 90,
+      "negative_controls": 7,
+      "status": "PASS"
+    },
+    {
+      "cohort": "ORDERED-SEGMENT-TRANSITION",
+      "tool_sha256": "2512c0c0b34fd94a17e124301c4f61b7847e3557836de0aa48fce921f6967938",
+      "evidence_sha256": "5387eee390e57fb7ea52e7f9434f394aefe223ffd0f80fa45f53ee2b4b299947",
+      "rerun_receipt_sha256": "dc0e0c6802211ccb152c2ee376191754b99b1af4eff6fcfd43ad0b7e0f91b621",
+      "checks": 84,
+      "negative_controls": 11,
+      "status": "PASS"
+    },
+    {
+      "cohort": "NATIVE-TEXTURE-JAVA-BOUNDARY",
+      "tool_sha256": "c8e365b52bf26913e05c89b2969cc162fcf03e334cb5f6ea8c68f00cfea64404",
+      "evidence_sha256": "20ee34dc6eaea491facb82dd143c0e9a06e1e51d735d040814b640b2e7c9ce4a",
+      "rerun_receipt_sha256": "5980bc268e9d7e333a96a0051c7d4fe555ac1b1d26d005b103d85e762905b96f",
+      "checks": 46,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "TEXTURE-HOLDER-LIFETIME",
+      "tool_sha256": "eb646bd3a031dc464c4a6a231ec1209bcdabe15f2075c5739c18b413172606e9",
+      "evidence_sha256": "1c67df6044c7859c199e3c61081c08e76a108b73b1ecf13605f7a76081bc35fb",
+      "rerun_receipt_sha256": "7f872c345c27c899eb5f3e288c0f34060766055aa2a7937404547f5aeb864fd6",
+      "checks": 118,
+      "negative_controls": 15,
+      "status": "PASS"
+    },
+    {
+      "cohort": "SHADER-BUFFER-ADAPTERS",
+      "tool_sha256": "e09091e24bd784b135fb6f647ff4c28cc1d810fb34f0bfeac284aecfef42698a",
+      "evidence_sha256": "4c247cb61f0b5d038082a4a67ce805aa201c77c784fb9ef620d987dfd26a875e",
+      "rerun_receipt_sha256": "f58e2b40b9371ade591bebfcd760d3d2ebf4eea2ece4efa2f69a92ea9ce6d41a",
+      "checks": 182,
+      "negative_controls": 12,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MAID-ENTITY-CONTROL",
+      "tool_sha256": "1b3dac38353e4d8baa29b221853fd1bbfff0de26811b4b12bfd881256587ae9a",
+      "evidence_sha256": "4df0e383e2d30c89b8604df03e2bd5eec2a5c7b8a883c8292ab4c2057905ee2b",
+      "rerun_receipt_sha256": "9a3e35f31bfa4200b01d1b0f67f4e95fefa724207f6e0f33fcb263071b9cd1df",
+      "checks": 272,
+      "negative_controls": 10,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MAID-CONTROLLER-REGISTRATION",
+      "tool_sha256": "2032f9f8cb0587bdf3f6d9006a4d4756028da95ffe89199e98fc8610964c67ab",
+      "evidence_sha256": "eafce1a097f175e14ad5326eba046e6d647b8093b82c34ff8135ef708636829c",
+      "rerun_receipt_sha256": "bd43bf5f4ec9c16555b53f6093874fd5e13e52e839c13599badd9bdcedba6750",
+      "checks": 294,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MAID-QUERY-ADAPTER",
+      "tool_sha256": "88b2a16360e222d285212c379d999be6ed2e28f27dcba7caa038a9124d511cf5",
+      "evidence_sha256": "39244433e5531029a12d605e55499e449be475c96ccc1383a45229d6f8d72ba7",
+      "rerun_receipt_sha256": "0249c3dfb008a6b9807fc0fc666e26006eb946b42b1e1cd95412f690321c1133",
+      "checks": 284,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "PLAYER-CONTROLLER-ASSEMBLY",
+      "tool_sha256": "9f129827b9e9a051cc95d2b798771cc387b4bf6dbf867d7d5665d9a2cd9a1703",
+      "evidence_sha256": "90c6d517b65bf16855029899ab2633abb19ad7e8aa22459d703ff8ea45c5cb8f",
+      "rerun_receipt_sha256": "4803445e477faa72dab4826e8b97e0c2f1c5110f9b5964b15fc7c3c1c8a22e51",
+      "checks": 437,
+      "negative_controls": 13,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MAID-RENDER-CAPABILITY",
+      "tool_sha256": "32640ad679094fb1dceee2fff7e7cd00bdb734bc26ab41f224f2c08d53731910",
+      "evidence_sha256": "d8bca1cb32f41571f581936e5a3532511d47e108cdcd44938d4cf844b6327afc",
+      "rerun_receipt_sha256": "13b9f08005d607c6e2235e75fb5112cadda86f174c85c9fb97078e2bd5ac185e",
+      "checks": 187,
+      "negative_controls": 12,
+      "status": "PASS"
+    },
+    {
+      "cohort": "RENDER-SELECTION",
+      "tool_sha256": "e899f35a3bddadae1cd787a5411ed9512e3856a759e9f234dd80ec7c1651765e",
+      "evidence_sha256": "a42e6768b64746dbb3b7a541b63c188c6d3986f45a490a8babc2cf6b94df9f8c",
+      "rerun_receipt_sha256": "a7f5bbf539569e52de6bcf380c974099ba39b77ac77f34830ad1a22bedb49c47",
+      "checks": 289,
+      "negative_controls": 16,
+      "status": "PASS"
+    },
+    {
+      "cohort": "CLIENT-VIEW-MOVEMENT",
+      "tool_sha256": "6fecee1ab1e65f5b0364debdd16f9517a492fdaa34e4538dc7fe35e5207ad4e4",
+      "evidence_sha256": "9e8d7d2a7a5ed1d164b10aaadcf09551672a7d8736162434135785afcce3d108",
+      "rerun_receipt_sha256": "15f0e35b7b584c81cb6a8244a27d51a9874eace064f9621b635915bb5bbbc839",
+      "checks": 91,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "FIRST-PERSON-RENDER-REGISTRY",
+      "tool_sha256": "fbfedb12de3249e9eaa6468590883582213db06de9ef53600dec37a6e0563573",
+      "evidence_sha256": "14fcc862f027fba0480d316b539f6cb8a48a24ddcec66d85800256c220040880",
+      "rerun_receipt_sha256": "931808e3a128f7ca92865321b5de074f71abd97b97bb7856e02ef13aa0285f37",
+      "checks": 120,
+      "negative_controls": 9,
+      "status": "PASS"
+    },
+    {
+      "cohort": "ARM-REPLACEMENT-EVENTS",
+      "tool_sha256": "ca5eaea0c3bc1b2e13cdcaee3d9f419d35500e1b494862fe41fdc6f85e22a298",
+      "evidence_sha256": "0d25c4a1452b0176eeae1b6887eaba9c37ad4685bc82cf69714d8fa6b3605829",
+      "rerun_receipt_sha256": "49c37ce86cef04ba75deeb26e77f74f047cca2f142a23873766238d3efd70b45",
+      "checks": 115,
+      "negative_controls": 9,
+      "status": "PASS"
+    },
+    {
+      "cohort": "EXTRA-ANIMATION-KEY-ROUTING",
+      "tool_sha256": "19a54b09b5d2ba6def8a0fb9cdbc9d46496949b1f88a5eda7c845d22fc2a6095",
+      "evidence_sha256": "ffef7a05c947327a67b5ce8afd812e198fbc9a3d37058f38144d0cd17a43a5b3",
+      "rerun_receipt_sha256": "74c41be9f364a1c4c5e95c9538150ea070abc33a7ed634b0e3dc9b403336d47c",
+      "checks": 61,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "INPUT-SYNC-DEFER",
+      "tool_sha256": "1565bf6784cad4e598df68e1c44e70e559fd65a78830461f1feeb186b3672427",
+      "evidence_sha256": "7dacd702692ebbe3586d6e1f81a57f41f7b46c69e83bdc9421378e81f8877f7d",
+      "rerun_receipt_sha256": "78d00d4e72bbdafd74a47fc630f8891f50b5561568edef08dd47fb88ad24b28f",
+      "checks": 226,
+      "negative_controls": 16,
+      "status": "PASS"
+    },
+    {
+      "cohort": "CLIENT-COMPAT-INITIALIZATION",
+      "tool_sha256": "95e484b846a1436968c58bf959c5a1f1b472009bcc37206376bb4ad114cf27e4",
+      "evidence_sha256": "424a4858eab57e0a2d3671a5078421068c213f8a88dcedbeade2f40584c79e49",
+      "rerun_receipt_sha256": "862bf0aada2d0c9d94454a5a48709af41a725a832b2832bdcbb95d0b3f5a9922",
+      "checks": 120,
+      "negative_controls": 10,
+      "status": "PASS"
+    }
+  ],
+  "cohort_count": 35,
+  "overlapping_method_snapshots_compared": 18,
+  "overlap_conflicts": 0,
+  "unique_method_snapshots": 968,
+  "unique_owner_declarations": 149,
+  "overlapping_owner_declarations_compared": 4,
+  "counts_are_semantic_completion": false,
+  "central_mapping_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
+  "central_mapping_promoted": false,
+  "independent_semantic_review": "NOT_RUN",
+  "target_runtime_executed": false,
+  "whole_project_ci_run": false,
+  "earlier_fixed17_checkpoint_modified": false,
+  "earlier_fixed10_checkpoint_modified": false,
+  "earlier_fixed9_checkpoint_modified": false,
+  "elapsed_seconds": 7.314
+}

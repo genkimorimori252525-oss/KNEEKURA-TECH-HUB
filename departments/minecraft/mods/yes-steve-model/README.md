@@ -490,3 +490,5 @@ bounded runtime observation rather than protection bypass.
 - [First-person background and movement stop](CLIENT-VIEW-MOVEMENT-RECOVERY-2026-10-17.md): early render latch, shared initial-state mode3 submission and input-driven local-stop-before-send ordering.
 
 - [Extra-animation key routing](EXTRA-ANIMATION-KEY-ROUTING-RECOVERY-2026-10-17.md): explicit registration delegation, eight shortcuts, category routing and different UI/movement/network guards.
+
+- [Connected Java reuse batch review](JAVA-REUSE-BATCH-REVIEW-2026-10-17.md):35 fixed cohorts, explicit cross-dossier consistency and task-scoped routing; no semantic-completion percentage.

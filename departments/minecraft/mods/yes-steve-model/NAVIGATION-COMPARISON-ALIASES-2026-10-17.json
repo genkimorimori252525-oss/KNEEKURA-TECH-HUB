@@ -481,6 +481,96 @@
       "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/compat/touhoulittlemaid/client/TlmClientCompatInner.java",
       "source_sha256": "37523749a5b5d47311f503497119b5335f8627057a0af62803ec024fd2a11405",
       "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O00OOo0oo0O000OOooOOooOo",
+      "label": "CustomYsmMaidRenderer",
+      "evidence": "MAID-RENDER-CAPABILITY-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "d8bca1cb32f41571f581936e5a3532511d47e108cdcd44938d4cf844b6327afc",
+      "document": "MAID-RENDER-CAPABILITY-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/compat/touhoulittlemaid/client/render/CustomYsmMaidRenderer.java",
+      "source_sha256": "d93f3e0583c223cd154add7a2cc689f322bc8d00f72869b5d80ac0850b84c37f",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO0oo0O00O0Oo0O00000o0oO",
+      "label": "YsmMaidCapabilityProvider",
+      "evidence": "MAID-RENDER-CAPABILITY-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "d8bca1cb32f41571f581936e5a3532511d47e108cdcd44938d4cf844b6327afc",
+      "document": "MAID-RENDER-CAPABILITY-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/compat/touhoulittlemaid/capability/YsmMaidCapabilityProvider.java",
+      "source_sha256": "1565f25f7b6c8037cdf21fc1c84963b53f14e929b08f2603c2685d218fc99e7c",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0oOO0oooooO0O0oooOO0OOO",
+      "label": "YsmMaidTickEvent",
+      "evidence": "MAID-RENDER-CAPABILITY-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "d8bca1cb32f41571f581936e5a3532511d47e108cdcd44938d4cf844b6327afc",
+      "document": "MAID-RENDER-CAPABILITY-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/compat/touhoulittlemaid/client/event/YsmMaidTickEvent.java",
+      "source_sha256": "970149450c8cd098c49136e897d470c913129406f9283685bbdaf5c905c0f1c7",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOOO00oO000oOo0O000OO0Oo",
+      "label": "UpdateRemoteStruct",
+      "evidence": "MAID-RENDER-CAPABILITY-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "d8bca1cb32f41571f581936e5a3532511d47e108cdcd44938d4cf844b6327afc",
+      "document": "MAID-RENDER-CAPABILITY-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/compat/touhoulittlemaid/client/event/UpdateRemoteStruct.java",
+      "source_sha256": "e4909b891001a9363c6ade164a9769ec7cbb3a793f1fd90e6b354ac2f787e584",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O00Ooo00ooOO0OOoo0oOO000",
+      "label": "SyncCapability",
+      "evidence": "MAID-RENDER-CAPABILITY-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "d8bca1cb32f41571f581936e5a3532511d47e108cdcd44938d4cf844b6327afc",
+      "document": "MAID-RENDER-CAPABILITY-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/compat/touhoulittlemaid/client/event/SyncCapability.java",
+      "source_sha256": "80bf97ae45efb9340df2ea3dc7613fef9123f0989591416db135ce40141bcaa8",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O000O0O00ooo000O0oOOoo00",
+      "label": "RenderFirstPlayerBackground",
+      "evidence": "CLIENT-VIEW-MOVEMENT-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "9e8d7d2a7a5ed1d164b10aaadcf09551672a7d8736162434135785afcce3d108",
+      "document": "CLIENT-VIEW-MOVEMENT-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/event/RenderFirstPlayerBackground.java",
+      "source_sha256": "d787c65545a69d4e917518c955fb61a6a0c8c7cbb15825a3397da5f05c82557b",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOoo0O0OO0OOOOo0O00OOooO",
+      "label": "PlayerMoveEvent",
+      "evidence": "CLIENT-VIEW-MOVEMENT-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "9e8d7d2a7a5ed1d164b10aaadcf09551672a7d8736162434135785afcce3d108",
+      "document": "CLIENT-VIEW-MOVEMENT-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/event/PlayerMoveEvent.java",
+      "source_sha256": "260b82e52b054b1eecb9dcce5e8b864c27d42dbdde4ecc155c3041b040ec8d60",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0o000O000oOOO0O0o0OOo0o",
+      "label": "ExtraAnimationKey",
+      "evidence": "EXTRA-ANIMATION-KEY-ROUTING-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "ffef7a05c947327a67b5ce8afd812e198fbc9a3d37058f38144d0cd17a43a5b3",
+      "document": "EXTRA-ANIMATION-KEY-ROUTING-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/input/ExtraAnimationKey.java",
+      "source_sha256": "6790b45ad00fda20e303ff18562fcdd8b0bba075562128fc756040e17cc16ade",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0OOOOOO0O0oO0o0Oo00Oooo",
+      "label": "AnimationRouletteKey",
+      "evidence": "EXTRA-ANIMATION-KEY-ROUTING-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "ffef7a05c947327a67b5ce8afd812e198fbc9a3d37058f38144d0cd17a43a5b3",
+      "document": "EXTRA-ANIMATION-KEY-ROUTING-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/input/AnimationRouletteKey.java",
+      "source_sha256": "7aa5c1b1cd75c6f8feee40b1818323c8b728a689f8743ffa89b3d3ec98e2f744",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
     }
   ]
 }

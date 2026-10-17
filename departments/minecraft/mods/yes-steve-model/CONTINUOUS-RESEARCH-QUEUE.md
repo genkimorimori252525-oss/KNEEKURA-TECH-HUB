@@ -106,10 +106,14 @@ fixed4 checkpoints. Early background latch and mode3 initial-state submission st
 separate from animated arms. Indexed shortcut, roulette UI and movement-stop guards
 differ; explicit MOD-bus registration delegation is recorded.
 
-Next finite connected question: stitch the accumulated Java-only reusable contracts
-and verify bounded cross-dossier consistency after this substantial batch, then
-continue only concrete unresolved pipeline seams. Do not convert captured source
-paths/declarations or passed integrity checks into semantic completion claims.
+A substantial35-cohort reuse batch (18 extensions +17 anchors) passed5765 integrity
+checks/357 negative controls in7.314s;18 repeated method snapshots/four owner
+records agree. This is not semantic completion. The compact review routes by task,
+and navigation now includes57 comparative aliases without confidence promotion.
+
+Next finite connected question: remaining common-side maid model-copy/event paths
+and their exact relation to the already documented client/capability control chain.
+Do not execute network/game/native code or infer server acceptance from a callsite.
 
 ## Anchors
 
