@@ -376,3 +376,7 @@ bounded runtime observation rather than protection bypass.
 - [Control equipment/riding predicates](CONTROL-EQUIPMENT-PREDICATES-RECOVERY-2026-10-17.md): raw-slot provenance, actual hand-independent action gates, prefix matching and classifier precedence.
 
 - [Optional maid query adapter](MAID-QUERY-ADAPTER-RECOVERY-2026-10-17.md): cached availability, sixteen real/fallback names and wrong-entity/default-type distinctions.
+
+- [Client compatibility initialization](CLIENT-COMPAT-INITIALIZATION-RECOVERY-2026-10-17.md): declared event registration, 24-adapter-before-native ordering and separate parser/hint lazy lifetimes.
+
+- [Hybrid controller / ParCool join](HYBRID-PARCOOL-CONTROLLER-RECOVERY-2026-10-17.md): Bedrock/builtin coded handoff, active-queue selection and external animator-name versus model-clip distinction.
