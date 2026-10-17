@@ -35,3 +35,7 @@ Pinned release: [Ghidra 12.1.4](https://github.com/NationalSecurityAgency/ghidra
 7. Publish derived evidence and reproducible narrow checks only. Installation success, a decompiler listing and a clean analysis run do not mean native semantics or Java-native bindings are recovered.
 
 Stopping condition for this pass: the selected condition/data dependency is supported by exact evidence, or the unresolved dependency is precisely identified. This is a scoped pass within ongoing analysis, not a declaration that YSM deobfuscation is complete.
+
+## Follow-up to the initial boundary
+
+The [candidate stack-guard proof](NATIVE-CANDIDATE-STACK-GUARD-RECOVERY-2026-10-17.md) subsequently resolved the local JB as untaken using existing tools. Its fallthrough is 0x12c463e. This supersedes only the plan’s original local-condition question, not the broader runtime/data-dependency uncertainty or NOT_RUN status of Ghidra. A future analyzer pass should use the new frontier rather than repeat the resolved guard.

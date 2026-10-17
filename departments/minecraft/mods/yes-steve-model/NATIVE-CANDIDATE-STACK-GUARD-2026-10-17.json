@@ -1,0 +1,83 @@
+{
+  "format": "kneekura.ysm-native-candidate-stack-guard.v1",
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "dependency_candidate_sha256": "b53b13f67e1b596f49608d65d6fd17bd58d36a0a6952cbe9604267be19140dae",
+  "segments": [
+    {
+      "address": 19675729,
+      "size": 207,
+      "sha256": "6ecb584c49329a0e33a0e4c53e947d1e7e49e4042fb8d0cb6f40d60a675d76b2"
+    },
+    {
+      "address": 19678721,
+      "size": 61,
+      "sha256": "9681f378beff3ac8b1ebbcbd55b959f5b30c2c17d75ad35c87cd3513f485b91f"
+    }
+  ],
+  "known_inputs": {
+    "eax_before_ax_shift": 4294967056,
+    "dec_r9b_result": 68,
+    "ror_r10b_result": 0,
+    "setg_result": 1,
+    "ax_before_cwd": 8193,
+    "dx_after_cwd": 0,
+    "rax_before_cbw": 8193,
+    "rax_after_cbw": 1,
+    "rdx_at_zero_store": 0
+  },
+  "stack_intervals": {
+    "zero_store": [
+      0,
+      7
+    ],
+    "unknown_store_start_range": [
+      8,
+      263
+    ],
+    "word_exchange": [
+      1,
+      2
+    ],
+    "shift_word": [
+      6,
+      7
+    ],
+    "shift_word_value": 0
+  },
+  "all_256_cl_values_checked": true,
+  "local_loaded_word_and_byte_values_required": false,
+  "branch": {
+    "address": 19678776,
+    "instruction": "JB",
+    "carry_flag": 0,
+    "taken_under_assumptions": false,
+    "fallthrough": 19678782,
+    "taken_target": 18377357,
+    "fallthrough_backing": {
+      "region": {
+        "kind": "PT_LOAD",
+        "index": 4,
+        "address": 15490560,
+        "memory_size": 5308498,
+        "file_offset": 13823488,
+        "file_size": 5308498,
+        "flags": 5
+      },
+      "file_backed": true,
+      "file_offset": 18011710
+    }
+  },
+  "assumptions": [
+    "Unmodified fixed candidate prefix is entered at its start in x86-64 mode",
+    "The captured memory operations complete normally and no external interference changes bytes/flags",
+    "Reachability of this candidate from the earlier JNI path still depends on the separately recorded file-state assumption"
+  ],
+  "target_executed": false,
+  "native_machine_emulator_run": false,
+  "scalar_and_byte_interval_model_only": true,
+  "runtime_reachability_verified": false,
+  "native_implementations_resolved": false,
+  "java_native_bindings_resolved": false,
+  "independent_semantic_review": "NOT_RUN"
+}
