@@ -410,3 +410,7 @@ bounded runtime observation rather than protection bypass.
 - [Backpack/spell/blade inputs](BACKPACK-SPELL-BLADE-INPUTS-RECOVERY-2026-10-17.md): rendered backpack precedence, query-versus-playback reset and version-specific combo naming; legacy memory access remains unexecuted.
 
 - [Additional ctrl/tlm/math lookup](EXTRA-BINDING-CATALOG-RECOVERY-2026-10-17.md): 149 static registration sites for109 names, preserving optional real/fallback branches; integrated with the opt-in locator.
+
+- [Locator hierarchy/matrix preparation](LOCATOR-MATRIX-PREPARATION-RECOVERY-2026-10-17.md): supplied hierarchy ownership, ancestor/leaf transform distinction, scale-flag consumption and18 direct caller sites.
+
+- [Attachment render layers](ATTACHMENT-RENDER-LAYERS-RECOVERY-2026-10-17.md): ordinary/special hand paths, extra locators, head/elytra/parrot/backpack transforms and cleanup boundaries.

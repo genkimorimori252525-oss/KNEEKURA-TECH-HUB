@@ -7,6 +7,27 @@ prevents further authorized work. Report a blocker rather than silently marking
 this queue complete. No runtime, protected native or model-decryption expansion is
 implied by this continuation.
 
+## Current continuation checkpoint
+
+The later controller/query work is navigable through
+[CONTROLLER-QUERY-INDEX-2026-10-17.md](CONTROLLER-QUERY-INDEX-2026-10-17.md), including
+player/first-person/vehicle/projectile factories, hybrid dispatch, main/hand/riding/
+preview predicates and all ten ctrl optional adapter branches. These are primary
+static dossiers, not newly promoted mappings. Central map remains669 byte-identical.
+The fixed9 and later14-cohort receipts are bounded checks, not whole-target acceptance.
+
+The opt-in evidence locator now combines171 base query/YSM names with109 additional
+ctrl/tlm/math names, preserving149 additional real/fallback registration sites.
+It does not run on ordinary startup or imply runtime branch availability. Do not
+repeat the already recorded MathBinding semantic cohort merely to add counts.
+
+Next finite connected question: trace Java locator hierarchy construction and
+RenderUtils matrix preparation into attachment/render-layer consumers. Preserve
+first/last bone distinctions, coordinate signs/units, returned scale flags and
+ownership of mutable lists/arrays. Native geometry production, actual rendered
+output, provider runtime and independent semantic review remain outside the verified
+results. Continue that Java seam after saving; this is not a stopping checkpoint.
+
 ## Anchors
 
 - Official artifact: Modrinth Zqooxsd2, SHA-256
