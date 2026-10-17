@@ -6,6 +6,10 @@ Need a known query/class quickly? Use the optional [evidence locator](EVIDENCE-L
 State/query extension navigation: [STATE-QUERY-INDEX-2026-10-17.md](STATE-QUERY-INDEX-2026-10-17.md). Use the relevant seam; no ordinary-startup audit is required.
 Controller assembly/predicate continuation: [CONTROLLER-QUERY-INDEX-2026-10-17.md](CONTROLLER-QUERY-INDEX-2026-10-17.md).
 
+For implementation reuse, start with [the compact contract guide](REUSE-CONTRACTS-2026-10-17.md).
+Attachment/render lifecycle: [ATTACHMENT-RENDER-INDEX-2026-10-17.md](ATTACHMENT-RENDER-INDEX-2026-10-17.md).
+Session and model state: [CLIENT-MODEL-SYNC-STATE-RECOVERY-2026-10-17.md](CLIENT-MODEL-SYNC-STATE-RECOVERY-2026-10-17.md).
+
 ## Scope
 
 - Target: **Yes Steve Model (YSM)**

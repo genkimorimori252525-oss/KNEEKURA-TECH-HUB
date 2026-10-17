@@ -1,0 +1,89 @@
+{
+  "format": "kneekura.ysm-client-session-checkpoint.v1",
+  "cohort_manifest": [
+    [
+      "CLIENT-SESSION-SKIN-EVENTS",
+      "client_session_skin_events",
+      true
+    ],
+    [
+      "CLIENT-MODEL-SYNC-STATE",
+      "client_model_sync_state",
+      true
+    ],
+    [
+      "SYNC-STATE-UI-CONSUMERS",
+      "sync_state_ui_consumers",
+      true
+    ],
+    [
+      "ROAMING-STATE-MERGE",
+      "roaming_state_merge",
+      true
+    ],
+    [
+      "ENTITY-LOAD-APPLICATION",
+      "entity_load_application",
+      true
+    ]
+  ],
+  "cohorts": [
+    {
+      "cohort": "CLIENT-SESSION-SKIN-EVENTS",
+      "tool_sha256": "088a381ac0ae274a4019eb2d3ae6791aee7d63cd2ac60b07b379d4b9798605eb",
+      "evidence_sha256": "e81983a6a32186eca2de3fdf3adfa9958256f2c39e19dcb998a49495bdaf6474",
+      "rerun_receipt_sha256": "9b3161194b63e2fabc1b45ae3f655a0d751fffc0fa1e44436899b2b994295015",
+      "checks": 95,
+      "negative_controls": 9,
+      "status": "PASS"
+    },
+    {
+      "cohort": "CLIENT-MODEL-SYNC-STATE",
+      "tool_sha256": "74c94c0af12f67a16996c6a92b3cd99b8bbc948f02b2734fcead7f3285813c1a",
+      "evidence_sha256": "4df81306505d55916936e4e7e995bb040e14c5cf9e6f7120aab6a2d53545476c",
+      "rerun_receipt_sha256": "e4c18ad6c1b47ddcb780e50caf24e1f8a13caf763c7dcd9847e7b0a6fb1a5ec5",
+      "checks": 263,
+      "negative_controls": 12,
+      "status": "PASS"
+    },
+    {
+      "cohort": "SYNC-STATE-UI-CONSUMERS",
+      "tool_sha256": "7aa9ce5156b85a084f432cf5de22a290108e114d51565dcd0b45bdd0d15f2567",
+      "evidence_sha256": "818b0688c025b5ea99d9b53d4a113684f76aaac77da2709196e5b5824525056f",
+      "rerun_receipt_sha256": "ba60026cf6b0fcf5f8c553a108e8b52b74ca0f078f7753e5c85131a5c03d117f",
+      "checks": 63,
+      "negative_controls": 9,
+      "status": "PASS"
+    },
+    {
+      "cohort": "ROAMING-STATE-MERGE",
+      "tool_sha256": "ed363eed8796b6c3ec3af03537a4dbdbf31e0e00954620e22a0eadb3ad390c54",
+      "evidence_sha256": "f8cff68e0309cf59888f9fbe8e8851cc441668ad5c7a65c60910b66c5f278043",
+      "rerun_receipt_sha256": "998f1b851c0fe3a3fa6bad3870a92c06cfad554d669d5f3569c289f9bf75c60f",
+      "checks": 179,
+      "negative_controls": 12,
+      "status": "PASS"
+    },
+    {
+      "cohort": "ENTITY-LOAD-APPLICATION",
+      "tool_sha256": "d0bbd971c8554d9c31e2cb847de9f581f7205b5807fd283128a190a661620f21",
+      "evidence_sha256": "b8c6502bc9c9254d01ec1bf565b192e7141dbb7ccc8b30b4210ee5ef490cef44",
+      "rerun_receipt_sha256": "2db232de21e4f5d32b1720e9c3400031c9b5445bb42b3ba1739b713842978ccd",
+      "checks": 70,
+      "negative_controls": 12,
+      "status": "PASS"
+    }
+  ],
+  "cohort_count": 5,
+  "overlapping_method_snapshots_compared": 0,
+  "overlap_conflicts": 0,
+  "central_mapping_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
+  "central_mapping_promoted": false,
+  "independent_semantic_review": "NOT_RUN",
+  "target_runtime_executed": false,
+  "whole_project_ci_run": false,
+  "earlier_fixed17_checkpoint_modified": false,
+  "earlier_fixed10_checkpoint_modified": false,
+  "earlier_fixed9_checkpoint_modified": false,
+  "elapsed_seconds": 0.751
+}

@@ -40,10 +40,15 @@ and selected one-class Vineflower comparison remain separate from target executi
 Preview equipment clearing is on observed fake-player callers; do not claim real
 inventory loss from the local helper's mutation order.
 
-Next finite connected question: actual SpecialPlayerRenderEvent texture writer
-and client login/respawn/entity-arrival lifecycle, checking previously captured
-network/reset evidence before duplicating work. Native output, external providers
-and independent semantic review remain outside verified results. Continue after saving.
+Client session, model-state listener and actual UI consumers are recorded; the
+separate fixed5 client-session checkpoint passed. REUSE-CONTRACTS provides optional
+task-scoped navigation; do not turn it into a mandatory startup audit. The locator
+has been deliberately refreshed through these cohorts, without confidence promotion.
+
+Next finite connected question: custom/vanilla sound-instance lifetime and Java
+resource-holder boundaries after already-reviewed Molang sound dispatch. Preserve
+stop-request versus engine completion, actor/level references and async ownership.
+Do not execute target audio, native decoding or protected model-data paths.
 
 ## Anchors
 
