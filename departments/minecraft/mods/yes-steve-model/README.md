@@ -296,3 +296,5 @@ bounded runtime observation rather than protection bypass.
 - [Variable and numeric conversion boundaries](VARIABLE-CONVERSION-RECOVERY-2026-10-17.md): context guards, raw values, NaN/infinity and typed evaluation; not universal sanitation.
 
 - [Variable AST and return cleanup](VARIABLE-AST-RETURN-RECOVERY-2026-10-17.md): target dispatch, raw return propagation and finally boundaries; parser lookup pending.
+
+- [Parser binding and storage indirection](PARSER-BINDING-STORAGE-RECOVERY-2026-10-17.md): namespace capture, aliases, variable addresses and parse-reset boundaries.

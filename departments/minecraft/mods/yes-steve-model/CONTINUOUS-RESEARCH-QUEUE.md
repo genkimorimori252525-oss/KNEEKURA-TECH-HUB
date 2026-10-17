@@ -133,3 +133,7 @@ catch/conversion behavior must not be generalized to overriding value classes.
 Variable AST dispatch and single/multi-expression return cleanup are recorded.
 Continue parser property resolution and assignable storage semantics; do not
 infer dynamic rebinding from an AST node that captures a target reference.
+
+Parser namespace/struct split, binding aliases and variable storage indirection
+are recorded. Continue concrete runtime scoped/temp/context storage and reset
+boundaries; binding-cache reset is not automatically runtime-value clearing.
