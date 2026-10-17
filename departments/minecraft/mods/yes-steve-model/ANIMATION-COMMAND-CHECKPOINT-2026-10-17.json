@@ -1,0 +1,103 @@
+{
+  "format": "kneekura.ysm-animation-command-checkpoint.v1",
+  "cohort_manifest": [
+    [
+      "ANIMATION-COMMAND-SUGGESTIONS",
+      "animation_command_suggestions",
+      true
+    ],
+    [
+      "MOLANG-COMMAND-PRODUCER",
+      "molang_command_producer",
+      true
+    ],
+    [
+      "SERVER-FULL-SYNC",
+      "server_full_sync",
+      true
+    ],
+    [
+      "SERVER-PROPERTY-PRODUCER",
+      "server_property_producer",
+      true
+    ],
+    [
+      "ENTITY-LOAD-APPLICATION",
+      "entity_load_application",
+      true
+    ],
+    [
+      "CLIENT-MODEL-CONTAINERS",
+      "client_model_containers",
+      true
+    ]
+  ],
+  "cohorts": [
+    {
+      "cohort": "ANIMATION-COMMAND-SUGGESTIONS",
+      "tool_sha256": "c0162d39d41842304642bb82bcb82bdfbe4f97a305da0c68deca5af41d235fe7",
+      "evidence_sha256": "f74cc0b42463c254cf94d922f25a27cccfe3b85c67716bb9b9048a1d6f6b62ce",
+      "rerun_receipt_sha256": "7f21ed85910cc3d90c480277fee4b4b21a40c926a3b1336d83acec4f7c588d3d",
+      "checks": 90,
+      "negative_controls": 13,
+      "status": "PASS"
+    },
+    {
+      "cohort": "MOLANG-COMMAND-PRODUCER",
+      "tool_sha256": "d9f849297ac038baf4e1202862dd52a4326ad863d5b650a96041326e3b7a5dfe",
+      "evidence_sha256": "199dfcf5fc94c6382681c831c13a51f3abf7cd06dff1a30ce2f33479968198da",
+      "rerun_receipt_sha256": "5a17630b316504ae213ff1191b94eefd6658fc9b138162154615e75c5d287fda",
+      "checks": 148,
+      "negative_controls": 11,
+      "status": "PASS"
+    },
+    {
+      "cohort": "SERVER-FULL-SYNC",
+      "tool_sha256": "9a3afc69f76a07b17c99f1572c2764896daf74f49f209b6f5de4d4b2c4f4545c",
+      "evidence_sha256": "4d7de7d99ca629cd2268af2ab95498597728a449114e4dd9fe77921c3dfa79e0",
+      "rerun_receipt_sha256": "e43c8540a58bcc8ed69b89a39947ab36cfea51bedb0a9b5ca4b8d68ef0bef815",
+      "checks": 384,
+      "negative_controls": 13,
+      "status": "PASS"
+    },
+    {
+      "cohort": "SERVER-PROPERTY-PRODUCER",
+      "tool_sha256": "89fed2299686b1fbea4474c37c55dc6fa4205ec38286fe6c870223dde063ef65",
+      "evidence_sha256": "e2f08aa1ffae350f76cc6aa0265c4efd58f85396e9fdb5124b7711e374f77511",
+      "rerun_receipt_sha256": "efdaf2b4632367e08186612cc2bc6bf25c065571c2bdcb9c3cce901c3b3044ac",
+      "checks": 214,
+      "negative_controls": 13,
+      "status": "PASS"
+    },
+    {
+      "cohort": "ENTITY-LOAD-APPLICATION",
+      "tool_sha256": "d0bbd971c8554d9c31e2cb847de9f581f7205b5807fd283128a190a661620f21",
+      "evidence_sha256": "b8c6502bc9c9254d01ec1bf565b192e7141dbb7ccc8b30b4210ee5ef490cef44",
+      "rerun_receipt_sha256": "2db232de21e4f5d32b1720e9c3400031c9b5445bb42b3ba1739b713842978ccd",
+      "checks": 70,
+      "negative_controls": 12,
+      "status": "PASS"
+    },
+    {
+      "cohort": "CLIENT-MODEL-CONTAINERS",
+      "tool_sha256": "e0c179a4bd77dd67fda7d84c4593d5362d8a77e2865b401de33d51992e96a53f",
+      "evidence_sha256": "84a5ba48c0c76b4fec9e46ec8268bdc8f2a4686c03c8b00a3f2374698cdc9670",
+      "rerun_receipt_sha256": "ef03be08f289a5aeed51b82541d7bd73cca73ba8c8e19d6e22cb7580fc19c81d",
+      "checks": 237,
+      "negative_controls": 10,
+      "status": "PASS"
+    }
+  ],
+  "cohort_count": 6,
+  "overlapping_method_snapshots_compared": 6,
+  "overlap_conflicts": 0,
+  "central_mapping_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
+  "central_mapping_promoted": false,
+  "independent_semantic_review": "NOT_RUN",
+  "target_runtime_executed": false,
+  "whole_project_ci_run": false,
+  "earlier_fixed17_checkpoint_modified": false,
+  "earlier_fixed10_checkpoint_modified": false,
+  "earlier_fixed9_checkpoint_modified": false,
+  "elapsed_seconds": 0.963
+}
