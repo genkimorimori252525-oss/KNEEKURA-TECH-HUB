@@ -111,9 +111,15 @@ checks/357 negative controls in7.314s;18 repeated method snapshots/four owner
 records agree. This is not semantic completion. The compact review routes by task,
 and navigation now includes57 comparative aliases without confidence promotion.
 
-Next finite connected question: remaining common-side maid model-copy/event paths
-and their exact relation to the already documented client/capability control chain.
-Do not execute network/game/native code or infer server acceptance from a callsite.
+Common-side maid/model-copy paths now have a fixed6 checkpoint. Empty roaming-map
+initialization and NBT replacement are explicit; the exact vehicle helper has no
+observed direct/bootstrap caller among955 classes. The earlier35-cohort receipt
+remains frozen and does not silently include this later extension.
+
+Next finite connected question: concrete packet-side callers of the maid roulette,
+variable-change and expression bridges, distinguishing local helper checks from
+actual direction/sender/entity-routing checks. Static review only; no packets sent,
+no game/server or expression execution, and no unverified global security claim.
 
 ## Anchors
 

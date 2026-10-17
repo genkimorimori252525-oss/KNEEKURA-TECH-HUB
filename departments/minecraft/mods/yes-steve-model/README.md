@@ -492,3 +492,5 @@ bounded runtime observation rather than protection bypass.
 - [Extra-animation key routing](EXTRA-ANIMATION-KEY-ROUTING-RECOVERY-2026-10-17.md): explicit registration delegation, eight shortcuts, category routing and different UI/movement/network guards.
 
 - [Connected Java reuse batch review](JAVA-REUSE-BATCH-REVIEW-2026-10-17.md):35 fixed cohorts, explicit cross-dossier consistency and task-scoped routing; no semantic-completion percentage.
+
+- [Common-side maid/model copy](MAID-COMMON-MODEL-COPY-RECOVERY-2026-10-17.md): separate install gate, empty roaming-map transfers, bounded vehicle reachability and exact creative-copy NBT mutation.
