@@ -280,3 +280,5 @@ bounded runtime observation rather than protection bypass.
 - [Async animation submission and wait boundary](ASYNC-ANIMATION-RECOVERY-2026-10-17.md): 46-method static dossier; independent review pending.
 
 - [Animatable override inventory](ANIMATABLE-OVERRIDE-RECOVERY-2026-10-17.md) and [exact world-render hook annotations](WORLD-RENDER-HOOK-RECOVERY-2026-10-17.md): bounded static closure; runtime injection unverified.
+
+- [Model readiness and rendering-scope gates](MODEL-READINESS-SCOPE-RECOVERY-2026-10-17.md): holder replacement, fallback eligibility and hook predicate; runtime outcomes unverified.
