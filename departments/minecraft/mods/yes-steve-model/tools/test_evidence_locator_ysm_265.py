@@ -1,4 +1,5 @@
 import contextlib
+import hashlib
 import io
 import json
 from pathlib import Path
@@ -101,6 +102,64 @@ class LocatorTest(unittest.TestCase):
         index = locator.build(self.root)
         self.assertNotIn(locator.INDEX, index['unindexed_evidence_schemas'])
         self.assertNotIn('EVIDENCE-LOCATOR-VERIFICATION-2026-10-17.json', index['unindexed_evidence_schemas'])
+
+    def alias_fixture(self):
+        evidence = self.root / 'A-EVIDENCE.json'
+        data = json.loads(evidence.read_text())
+        data['source_tracks'] = [{'path': 'src/Readable.java', 'sha256': 'source-hash'}]
+        self.write(evidence.name, data)
+        row = {'owner': 'com/example/A', 'label': 'ReadableAlias',
+               'evidence': evidence.name, 'evidence_sha256': hashlib.sha256(evidence.read_bytes()).hexdigest(),
+               'document': 'TEST-RECOVERY.md', 'source_path': 'src/Readable.java',
+               'source_sha256': 'source-hash', 'review_status': 'PRIMARY_STATIC_REVIEW_ONLY'}
+        self.write(locator.ALIASES, {'format': 'ysm-navigation-comparison-aliases-v1', 'aliases': [row]})
+        return row
+
+    def test_alias_does_not_replace_formal_mapping(self):
+        self.alias_fixture()
+        index = locator.build(self.root)
+        result = locator.search(index, owner='readablealias')['results'][0]
+        self.assertEqual(result['mapping']['confidence'], 'HIGH')
+        self.assertEqual(result['mapping']['role'], 'role.Animation')
+        self.assertEqual(result['comparison_aliases'][0]['review_status'], 'PRIMARY_STATIC_REVIEW_ONLY')
+        self.assertEqual(len(index['roles']), 1)
+
+    def test_alias_without_formal_mapping_remains_unmapped(self):
+        self.alias_fixture()
+        self.write(locator.MAP, {'mappings': []})
+        result = locator.search(locator.build(self.root), owner='ReadableAlias')['results'][0]
+        self.assertIsNone(result['mapping'])
+        self.assertEqual(result['owner'], 'com/example/A')
+
+    def test_alias_selected_catalog_and_doc_freshness(self):
+        self.alias_fixture(); self.invoke('--build')
+        result = self.invoke('--owner', 'ReadableAlias', '--check-selected')
+        self.assertTrue(result['selected_hashes'][locator.ALIASES])
+        self.assertTrue(result['selected_hashes']['TEST-RECOVERY.md'])
+        self.write(locator.ALIASES, {'changed': True})
+        with self.assertRaises(SystemExit):
+            self.invoke('--owner', 'ReadableAlias', '--check-selected')
+
+    def test_alias_build_rejects_unanchored_stale_and_unsafe_rows(self):
+        for field, value in [('owner', 'invented/Owner'), ('evidence_sha256', 'wrong'),
+                             ('source_path', 'absent.java'), ('source_sha256', 'wrong'),
+                             ('review_status', 'CONFIRMED'), ('document', '../outside.md')]:
+            with self.subTest(field=field):
+                row = self.alias_fixture(); row[field] = value
+                self.write(locator.ALIASES, {'format': 'ysm-navigation-comparison-aliases-v1', 'aliases': [row]})
+                with self.assertRaises(ValueError): locator.build(self.root)
+
+    def test_duplicate_alias_rejected(self):
+        row = self.alias_fixture()
+        self.write(locator.ALIASES, {'format': 'ysm-navigation-comparison-aliases-v1', 'aliases': [row, row]})
+        with self.assertRaises(ValueError): locator.build(self.root)
+
+    def test_default_alias_search_does_not_read_catalog(self):
+        self.alias_fixture(); self.invoke('--build')
+        (self.root / locator.ALIASES).unlink()
+        result = self.invoke('--owner', 'ReadableAlias')
+        self.assertEqual(result['freshness'], 'UNCHECKED_SNAPSHOT')
+        self.assertEqual(result['total_matches'], 1)
 
 
 if __name__ == '__main__':

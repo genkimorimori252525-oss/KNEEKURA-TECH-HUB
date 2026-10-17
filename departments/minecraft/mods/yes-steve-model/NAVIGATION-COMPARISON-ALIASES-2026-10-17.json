@@ -1,0 +1,206 @@
+{
+  "format": "ysm-navigation-comparison-aliases-v1",
+  "scope": "Explicit comparative source-role navigation only; not original symbols or promoted central mappings.",
+  "aliases": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOOO0O0OO0oOOo00Ooo0oooO",
+      "label": "SoundInstanceManager",
+      "evidence": "PARTICLE-SOUND-DISPATCH-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "f1a1c349f82238f7bac6f1b2e2b0fd9cdb679cc711ddb776008d471144791405",
+      "document": "PARTICLE-SOUND-DISPATCH-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/sound/instance/SoundInstanceManager.java",
+      "source_sha256": "be135ce35192d7a1b5dbfccbb19aa6dc47849be37fa91fc7a79817ecfad027b1",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O00OoO0oOoO0oOo0o000ooo0",
+      "label": "SoundKeyframeExecutor",
+      "evidence": "SOUND-KEYFRAME-CLEANUP-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "107d8bb5c5ed523105c7dd98950819ad28bf17ade5e6c4b0ca97d4f001c27c5c",
+      "document": "SOUND-KEYFRAME-CLEANUP-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/event/SoundKeyframeExecutor.java",
+      "source_sha256": "b0accc8981ba09ae248c0b9673eb4d0a6129c2a9494f09bf1b7192762404ec24",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/Oo0OoO0O00o00oOOooo00OOO",
+      "label": "MinecraftSoundInstance",
+      "evidence": "SOUND-INSTANCE-LIFETIME-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "78a9629a5227a637e48b940b05bd0b85d3d29bae960eac6bcc162b37159c49ed",
+      "document": "SOUND-INSTANCE-LIFETIME-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/sound/instance/MinecraftSoundInstance.java",
+      "source_sha256": "d6c4c6c4e6c0316fa2f9a07e5b0b10f776082ce8cc5f1673f458177ba79f5604",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0000oo0oOO00O00O0o0o0O0",
+      "label": "CustomSoundInstance",
+      "evidence": "SOUND-INSTANCE-LIFETIME-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "78a9629a5227a637e48b940b05bd0b85d3d29bae960eac6bcc162b37159c49ed",
+      "document": "SOUND-INSTANCE-LIFETIME-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/sound/instance/CustomSoundInstance.java",
+      "source_sha256": "fd62ab43277558ab4f1c9ced3257c2d33d6d786634c5720124821ea0295589f1",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOO000o0OO0O0Oo0oo00ooOO",
+      "label": "LoopingAudioStream",
+      "evidence": "SOUND-INSTANCE-LIFETIME-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "78a9629a5227a637e48b940b05bd0b85d3d29bae960eac6bcc162b37159c49ed",
+      "document": "SOUND-INSTANCE-LIFETIME-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/sound/stream/LoopingAudioStream.java",
+      "source_sha256": "e9223a120cd72c68866885fedceac9c527e2ce86caae103ade503972051a88bb",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/ooOooOoo00oo0ooOOoOOo0oo",
+      "label": "SoundData",
+      "evidence": "SOUND-DATA-PCM-CACHE-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "de63831ce36f8919199a4face7c1a8bfd18bf97360100ef7c9310721a93bb441",
+      "document": "SOUND-DATA-PCM-CACHE-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/sound/data/SoundData.java",
+      "source_sha256": "49ff3fc0a5324d09980daa58053db7fbc6a1021755d84079de0a572a18feb79d",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0OOOoOoO0oO000Oo0OOoO00",
+      "label": "SoundDataManager",
+      "evidence": "SOUND-DATA-PCM-CACHE-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "de63831ce36f8919199a4face7c1a8bfd18bf97360100ef7c9310721a93bb441",
+      "document": "SOUND-DATA-PCM-CACHE-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/sound/data/SoundDataManager.java",
+      "source_sha256": "970da1fc38057f840f9a2e86a15ce838bbff6330775eb9ddebad5603f037a1bd",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oOO0oOO0o0O0o0000oO0o0o0",
+      "label": "BuildingPcmCache",
+      "evidence": "SOUND-DATA-PCM-CACHE-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "de63831ce36f8919199a4face7c1a8bfd18bf97360100ef7c9310721a93bb441",
+      "document": "SOUND-DATA-PCM-CACHE-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/sound/data/BuildingPcmCache.java",
+      "source_sha256": "774bcb675f88f66806a44fb9148076839939e7362d4a846602fd6106ecb3d390",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0oo00O0OOOo000oOo0ooOOo",
+      "label": "PcmAudioStream",
+      "evidence": "SOUND-DATA-PCM-CACHE-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "de63831ce36f8919199a4face7c1a8bfd18bf97360100ef7c9310721a93bb441",
+      "document": "SOUND-DATA-PCM-CACHE-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/sound/stream/PcmAudioStream.java",
+      "source_sha256": "c40b9861274d6e1dcd139d502a5c5d19f2795ccfc1a63a12a323fe54a915a8fa",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0OO00ooo0OooO0O00o0oOoo",
+      "label": "VorbisAudioStream",
+      "evidence": "AUDIO-DECODER-JAVA-BOUNDARY-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "c0e3fe7d2b5e2ed77dc58fff115bde62ef0e77b92a8335a0f8d1f3a1c9022861",
+      "document": "AUDIO-DECODER-JAVA-BOUNDARY-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/sound/stream/VorbisAudioStream.java",
+      "source_sha256": "10654e2a022b2571b4a9c0ede8a88c58a45f6d8d8dec9ed8ef8e29a2b36bdfe6",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoo000Oo0ooooOoO0OOOoo0",
+      "label": "OpusAudioStream",
+      "evidence": "AUDIO-DECODER-JAVA-BOUNDARY-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "c0e3fe7d2b5e2ed77dc58fff115bde62ef0e77b92a8335a0f8d1f3a1c9022861",
+      "document": "AUDIO-DECODER-JAVA-BOUNDARY-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/sound/stream/OpusAudioStream.java",
+      "source_sha256": "93ec9f833f98ea475358f01b26cd0a859e907c48d5c556793bf69bad99b1a5a1",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/ooOo0oOo0o000O00oOOO0oo0",
+      "label": "OpusDecoder",
+      "evidence": "AUDIO-DECODER-JAVA-BOUNDARY-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "c0e3fe7d2b5e2ed77dc58fff115bde62ef0e77b92a8335a0f8d1f3a1c9022861",
+      "document": "AUDIO-DECODER-JAVA-BOUNDARY-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/sound/decoder/OpusDecoder.java",
+      "source_sha256": "09da05003ca07cc1883816468d9611f7c119e0c57a150744446b49adc4ce39fe",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0ooOoO0o0o0O0oooOOoOOOO",
+      "label": "DecoderManager",
+      "evidence": "AUDIO-DECODER-JAVA-BOUNDARY-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "c0e3fe7d2b5e2ed77dc58fff115bde62ef0e77b92a8335a0f8d1f3a1c9022861",
+      "document": "AUDIO-DECODER-JAVA-BOUNDARY-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/sound/decoder/DecoderManager.java",
+      "source_sha256": "db2bb8801a3d33879f9d04fffe868cb88bc34260df8a7aae8f2c460f9a14091d",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO0oooO0OO0o00oOOoOoOoOo",
+      "label": "IrisCompat",
+      "evidence": "SHADER-BUFFER-ADAPTERS-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "4c247cb61f0b5d038082a4a67ce805aa201c77c784fb9ef620d987dfd26a875e",
+      "document": "SHADER-BUFFER-ADAPTERS-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/compat/IrisCompat.java",
+      "source_sha256": "7e3dd22456e2e1ba9ee7661039170d981a9e4fa6118681ad96232b44afe141e6",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0oOo0ooO00oOoooOOOoOOo0",
+      "label": "CustomTranslucentRenderType",
+      "evidence": "SHADER-BUFFER-ADAPTERS-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "4c247cb61f0b5d038082a4a67ce805aa201c77c784fb9ef620d987dfd26a875e",
+      "document": "SHADER-BUFFER-ADAPTERS-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/geo/CustomTranslucentRenderType.java",
+      "source_sha256": "a2110b652d21809f1437d4a67d4955fe10096b740cb83d7c27667cf0fe2e03fc",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OoO00Oo00Ooo0OoOoo00o000",
+      "label": "RenderUtil",
+      "evidence": "GUI-PREVIEW-STATE-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "b3be733d91693afeed3a7441680728ce7ba3167fec5fb0df576a78ef4d712f99",
+      "document": "GUI-PREVIEW-STATE-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/util/RenderUtil.java",
+      "source_sha256": "b181c57910eeb0db57a69b7b956b5b74dd03275ad285470709e80c9aaaa2fae1",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0oo00OoO00OO0Oo0oo00ooo",
+      "label": "CustomFirstPersonArmRenderer",
+      "evidence": "FIRST-PERSON-RENDER-REGISTRY-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "14fcc862f027fba0480d316b539f6cb8a48a24ddcec66d85800256c220040880",
+      "document": "FIRST-PERSON-RENDER-REGISTRY-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/renderer/CustomFirstPersonArmRenderer.java",
+      "source_sha256": "5434f9d6f365ce4f268b4bae09ae9896ced4a9623bd3baa3b65eea619fb4650b",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0000ooOo00o0OoO0OoOOOOo",
+      "label": "ClientModelSyncListener",
+      "evidence": "CLIENT-MODEL-SYNC-STATE-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "4df81306505d55916936e4e7e995bb040e14c5cf9e6f7120aab6a2d53545476c",
+      "document": "CLIENT-MODEL-SYNC-STATE-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/model/ClientModelSyncListener.java",
+      "source_sha256": "243a3f359a1ce6b0f33bcabb9c9d78b570070f8c7845fd2b3cf13e27502002de",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/Ooo0oooO0o0O0oO0oOOOooO0",
+      "label": "LoadingStateScreen",
+      "evidence": "SYNC-STATE-UI-CONSUMERS-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "818b0688c025b5ea99d9b53d4a113684f76aaac77da2709196e5b5824525056f",
+      "document": "SYNC-STATE-UI-CONSUMERS-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/gui/overlay/LoadingStateScreen.java",
+      "source_sha256": "ba0e8cfdfad809b95fc4102263f1b895ef0c3f963dc3c777874a9ecc13136808",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0oOOo00o0oooOo0OoO0OOo0",
+      "label": "ReplacePlayerRenderEvent",
+      "evidence": "PLAYER-REPLACEMENT-VIEW-GATES-EVIDENCE-2026-10-17.json",
+      "evidence_sha256": "604bd35c791db2e7c5db9d4c625d252eb4738646165027e9c64354d2229b2149",
+      "document": "PLAYER-REPLACEMENT-VIEW-GATES-RECOVERY-2026-10-17.md",
+      "source_path": "src/main/java/com/elfmcys/yesstevemodel/client/event/ReplacePlayerRenderEvent.java",
+      "source_sha256": "8044a8898665722002236b5e2ed30ca073d4d0cbd25828a7f7aa84a9f9a7100f",
+      "review_status": "PRIMARY_STATIC_REVIEW_ONLY"
+    }
+  ]
+}

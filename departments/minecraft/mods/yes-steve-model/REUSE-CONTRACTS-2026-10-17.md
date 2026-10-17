@@ -12,7 +12,6 @@ Use this only when implementing or analyzing a related subsystem. It is a small 
 | Connect controller output to bone state | [Pipeline index](JAVA-PIPELINE-INDEX-2026-10-17.md) | Transition state, queues, input arrays and native output remain separate ownership boundaries |
 | Attach equipment or replace rendering | [Attachment/render index](ATTACHMENT-RENDER-INDEX-2026-10-17.md) | Locator leaf convention, overload route, cancellation stage and pose cleanup are caller-dependent |
 | Handle session/model availability | [Client state/listeners](CLIENT-MODEL-SYNC-STATE-RECOVERY-2026-10-17.md) | Sync progress, Java map publication, texture readiness and visible output are not one completion flag |
-
 | Emit effects or manage audio lifetime | [Sound lifecycle](SOUND-LIFECYCLE-INDEX-2026-10-17.md) | Dispatch, stop request, EOF, stream close and decoder retirement differ |
 
 ## Avoid these semantic substitutions

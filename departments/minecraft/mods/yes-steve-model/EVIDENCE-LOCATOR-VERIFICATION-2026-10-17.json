@@ -1,8 +1,8 @@
 {
   "scope": "opt-in evidence navigation only",
   "unit_test_exit_code": 0,
-  "unit_tests": 10,
-  "unit_output": "test_bounded_results (test_evidence_locator_ysm_265.LocatorTest.test_bounded_results) ... ok\ntest_build_deterministic_and_no_reference_promotion (test_evidence_locator_ysm_265.LocatorTest.test_build_deterministic_and_no_reference_promotion) ... ok\ntest_default_search_does_not_rebuild_or_check (test_evidence_locator_ysm_265.LocatorTest.test_default_search_does_not_rebuild_or_check) ... ok\ntest_extra_catalog_keeps_both_branch_sites (test_evidence_locator_ysm_265.LocatorTest.test_extra_catalog_keeps_both_branch_sites) ... ok\ntest_index_is_not_its_own_evidence (test_evidence_locator_ysm_265.LocatorTest.test_index_is_not_its_own_evidence) ... ok\ntest_query_and_topic (test_evidence_locator_ysm_265.LocatorTest.test_query_and_topic) ... ok\ntest_selected_hash_missing_or_stale (test_evidence_locator_ysm_265.LocatorTest.test_selected_hash_missing_or_stale) ... ok\ntest_short_owner_role_and_case_search (test_evidence_locator_ysm_265.LocatorTest.test_short_owner_role_and_case_search) ... ok\ntest_topic_hash_is_checked (test_evidence_locator_ysm_265.LocatorTest.test_topic_hash_is_checked) ... ok\ntest_unrelated_changes_do_not_run_global_check (test_evidence_locator_ysm_265.LocatorTest.test_unrelated_changes_do_not_run_global_check) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.010s\n\nOK\n",
+  "unit_tests": 16,
+  "unit_output": "test_alias_build_rejects_unanchored_stale_and_unsafe_rows (test_evidence_locator_ysm_265.LocatorTest.test_alias_build_rejects_unanchored_stale_and_unsafe_rows) ... ok\ntest_alias_does_not_replace_formal_mapping (test_evidence_locator_ysm_265.LocatorTest.test_alias_does_not_replace_formal_mapping) ... ok\ntest_alias_selected_catalog_and_doc_freshness (test_evidence_locator_ysm_265.LocatorTest.test_alias_selected_catalog_and_doc_freshness) ... ok\ntest_alias_without_formal_mapping_remains_unmapped (test_evidence_locator_ysm_265.LocatorTest.test_alias_without_formal_mapping_remains_unmapped) ... ok\ntest_bounded_results (test_evidence_locator_ysm_265.LocatorTest.test_bounded_results) ... ok\ntest_build_deterministic_and_no_reference_promotion (test_evidence_locator_ysm_265.LocatorTest.test_build_deterministic_and_no_reference_promotion) ... ok\ntest_default_alias_search_does_not_read_catalog (test_evidence_locator_ysm_265.LocatorTest.test_default_alias_search_does_not_read_catalog) ... ok\ntest_default_search_does_not_rebuild_or_check (test_evidence_locator_ysm_265.LocatorTest.test_default_search_does_not_rebuild_or_check) ... ok\ntest_duplicate_alias_rejected (test_evidence_locator_ysm_265.LocatorTest.test_duplicate_alias_rejected) ... ok\ntest_extra_catalog_keeps_both_branch_sites (test_evidence_locator_ysm_265.LocatorTest.test_extra_catalog_keeps_both_branch_sites) ... ok\ntest_index_is_not_its_own_evidence (test_evidence_locator_ysm_265.LocatorTest.test_index_is_not_its_own_evidence) ... ok\ntest_query_and_topic (test_evidence_locator_ysm_265.LocatorTest.test_query_and_topic) ... ok\ntest_selected_hash_missing_or_stale (test_evidence_locator_ysm_265.LocatorTest.test_selected_hash_missing_or_stale) ... ok\ntest_short_owner_role_and_case_search (test_evidence_locator_ysm_265.LocatorTest.test_short_owner_role_and_case_search) ... ok\ntest_topic_hash_is_checked (test_evidence_locator_ysm_265.LocatorTest.test_topic_hash_is_checked) ... ok\ntest_unrelated_changes_do_not_run_global_check (test_evidence_locator_ysm_265.LocatorTest.test_unrelated_changes_do_not_run_global_check) ... ok\n\n----------------------------------------------------------------------\nRan 16 tests in 0.018s\n\nOK\n",
   "repository_lookups": [
     {
       "arguments": [
@@ -38,44 +38,189 @@
     },
     {
       "arguments": [
+        "--topic",
+        "SOUND"
+      ],
+      "matches": 4,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
         "--owner",
-        "o0OooO00ooo0OO000O0OoOoO"
-      ],
-      "matches": 3,
-      "freshness": "SELECTED_FILES_MATCH"
-    },
-    {
-      "arguments": [
-        "--topic",
-        "GUI-PREVIEW"
-      ],
-      "matches": 1,
-      "freshness": "SELECTED_FILES_MATCH"
-    },
-    {
-      "arguments": [
-        "--topic",
-        "SHADER-BUFFER"
-      ],
-      "matches": 1,
-      "freshness": "SELECTED_FILES_MATCH"
-    },
-    {
-      "arguments": [
-        "--topic",
-        "SYNC-STATE"
+        "CtrlBinding"
       ],
       "matches": 2,
       "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "SoundInstanceManager"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "SoundKeyframeExecutor"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "MinecraftSoundInstance"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "CustomSoundInstance"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "LoopingAudioStream"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "SoundData"
+      ],
+      "matches": 2,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "SoundDataManager"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "BuildingPcmCache"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "PcmAudioStream"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "VorbisAudioStream"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "OpusAudioStream"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "OpusDecoder"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "DecoderManager"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "IrisCompat"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "CustomTranslucentRenderType"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "RenderUtil"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "CustomFirstPersonArmRenderer"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "ClientModelSyncListener"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "LoadingStateScreen"
+      ],
+      "matches": 2,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "ReplacePlayerRenderEvent"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
     }
   ],
-  "seconds": 0.372,
+  "seconds": 1.091,
   "central_map_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
   "target_runtime_executed": false,
   "global_audits_run": false,
   "hashes": {
-    "tools/evidence_locator_ysm_265.py": "d90cfd4a28b02fa2e4f797e91863cd6cf30e70245c78786ef8cf8f8c1c6d7fa0",
-    "tools/test_evidence_locator_ysm_265.py": "27aec07e16138274b66dab20b3956cb4f7cf8f606330dc3087c0bb195da230a8",
-    "EVIDENCE-LOCATOR-2026-10-17.json": "6e75e6b5d794efe735eb4d5a1f60a7362ba2c93b832c1fb5b0e1e2c3097f4aab"
+    "tools/evidence_locator_ysm_265.py": "dead01251c4087f5401c5788d1c264652cab29f6193ec38286059987956fd859",
+    "tools/test_evidence_locator_ysm_265.py": "bad531996889ec446894c16af0422f1618e4d9df32efea850a6029050002b162",
+    "EVIDENCE-LOCATOR-2026-10-17.json": "b06a4a291fc77864c7c6211de1153bfebe657a3e7a0cc5d5755e7a450423a26a",
+    "NAVIGATION-COMPARISON-ALIASES-2026-10-17.json": "00c60c7c4c087f8461319fcac6c6b3fe15bed695d595f834a1776289132b25f3"
   }
 }
