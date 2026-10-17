@@ -225,3 +225,7 @@ the fixed 955-class inventory; native/reflection activation remains outside scop
 Vineflower 1.11.1 was actually run on eight selected unchanged classes via the
 existing opt-in shelf and corroborated four branch interpretations. Continue
 reachable typed query guard/entity inputs; use decompiler views only when useful.
+
+Typed variable guard family is recorded and reconciled against the fixed JAR.
+Continue YSM entity-specific callback inputs; guard success does not imply
+animatable retargeting, successful execution or automatic numeric conversion.

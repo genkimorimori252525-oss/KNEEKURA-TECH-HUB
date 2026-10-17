@@ -347,3 +347,5 @@ bounded runtime observation rather than protection bypass.
 
 - [Foreign/public binding reachability](FOREIGN-BINDING-RECOVERY-2026-10-17.md): existing implementation versus bounded absence of outside-pair class references.
 - [Actual selected Vineflower comparison](VINEFLOWER-COMPARISON-2026-10-17.md): eight unchanged class inputs, four derived Java outputs, four corroborated branches; no target runtime or source-equivalence claim.
+
+- [Typed query variable guards](TYPED-QUERY-GUARDS-RECOVERY-2026-10-17.md): 17 exact type predicates, raw callback results, invalid-variable/function distinction and child-entity guard limits.
