@@ -402,3 +402,7 @@ bounded runtime observation rather than protection bypass.
 - [Optional gun-animation adapters](GUN-ANIMATION-ADAPTERS-RECOVERY-2026-10-17.md): provider/null fallback order, distinct ID domains, nine ctrl callbacks and wrapper guard differences.
 
 - [Inner gun-animation state](GUN-INNER-ANIMATION-RECOVERY-2026-10-17.md): event-reset coalescing, provider-specific local/synced thresholds and explicit loop/fallback policies.
+
+- [CarryOn/SWEM/Create inputs](CARRY-HORSE-SKYHOOK-RECOVERY-2026-10-17.md): carry-state priority, horse gait/jump naming, skyhook membership and accessor transformation boundary.
+
+- [Music/BetterCombat inputs](MUSIC-COMBAT-QUERY-INPUTS-RECOVERY-2026-10-17.md): retained music cache, reflected-field readiness and attack-start to swing synchronization boundary.
