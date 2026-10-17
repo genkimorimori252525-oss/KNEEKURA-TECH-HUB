@@ -21,12 +21,16 @@ ctrl/tlm/math names, preserving149 additional real/fallback registration sites.
 It does not run on ordinary startup or imply runtime branch availability. Do not
 repeat the already recorded MathBinding semantic cohort merely to add counts.
 
-Next finite connected question: trace Java locator hierarchy construction and
-RenderUtils matrix preparation into attachment/render-layer consumers. Preserve
-first/last bone distinctions, coordinate signs/units, returned scale flags and
-ownership of mutable lists/arrays. Native geometry production, actual rendered
-output, provider runtime and independent semantic review remain outside the verified
-results. Continue that Java seam after saving; this is not a stopping checkpoint.
+The locator/attachment/player/first-person seam is now joined in
+[ATTACHMENT-RENDER-INDEX-2026-10-17.md](ATTACHMENT-RENDER-INDEX-2026-10-17.md).
+Its separate fixed9-cohort checkpoint compares29 shared snapshots without conflict.
+Scale-flag consumption, passenger indexing, render-event ordering, arm cancellation
+and optional-layer registration are captured; visible output is not established.
+
+Next finite connected question: vehicle/projectile renderer entry, render-type and
+culling behavior. Avoid repeating their controller work or the native wrapper.
+Native geometry production, actual rendered output, provider runtime and independent
+semantic review remain outside verified results. This is not a stopping checkpoint.
 
 ## Anchors
 

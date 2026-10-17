@@ -420,3 +420,7 @@ bounded runtime observation rather than protection bypass.
 - [Player render entry and event ordering](PLAYER-RENDER-ENTRY-RECOVERY-2026-10-17.md): default layers, cancellation and separate texture reads.
 
 - [First-person render and registry](FIRST-PERSON-RENDER-REGISTRY-RECOVERY-2026-10-17.md): cached entity, arm-mode arguments, reload and optional layer timing.
+
+- [Arm replacement event gates](ARM-REPLACEMENT-EVENTS-RECOVERY-2026-10-17.md): ordinary versus SWarfare cancellation timing and pose scope.
+
+- [Attachment/render navigation and bounded batch](ATTACHMENT-RENDER-INDEX-2026-10-17.md): seven connected dossiers plus shared-adapter overlap checks.

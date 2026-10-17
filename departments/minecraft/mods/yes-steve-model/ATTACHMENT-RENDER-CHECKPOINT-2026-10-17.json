@@ -1,0 +1,146 @@
+{
+  "format": "kneekura.ysm-attachment-render-checkpoint.v1",
+  "cohort_manifest": [
+    [
+      "LOCATOR-MATRIX-PREPARATION",
+      "locator_matrix_preparation",
+      true
+    ],
+    [
+      "LOCATOR-MATRIX-CALLERS",
+      "locator_matrix_callers",
+      false
+    ],
+    [
+      "ATTACHMENT-RENDER-LAYERS",
+      "attachment_render_layers",
+      true
+    ],
+    [
+      "PASSENGER-HAT-ATTACHMENT",
+      "passenger_hat_attachment",
+      true
+    ],
+    [
+      "PLAYER-RENDER-ENTRY",
+      "player_render_entry",
+      true
+    ],
+    [
+      "FIRST-PERSON-RENDER-REGISTRY",
+      "first_person_render_registry",
+      true
+    ],
+    [
+      "ARM-REPLACEMENT-EVENTS",
+      "arm_replacement_events",
+      true
+    ],
+    [
+      "BACKPACK-SPELL-BLADE-INPUTS",
+      "backpack_spell_blade_inputs",
+      true
+    ],
+    [
+      "GUN-ANIMATION-ADAPTERS",
+      "gun_animation_adapters",
+      true
+    ]
+  ],
+  "cohorts": [
+    {
+      "cohort": "LOCATOR-MATRIX-PREPARATION",
+      "tool_sha256": "0a2483b7cfd2a1f31e051e1bf698cb52dee9d3400672fd408d006d1797cc5ed3",
+      "evidence_sha256": "63fa1a629fdebd6be3025ce45b53ac3baf77afc7707f9e58baab5ac7cb694348",
+      "rerun_receipt_sha256": "db5a57f4358141e81eeeb886282eeb241585cf9a07893c2fd869bda4f7629fe7",
+      "checks": 249,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "LOCATOR-MATRIX-CALLERS",
+      "tool_sha256": "b3f31025101492113ee948cf10f695bae618c5f3637c143dad75083fb240d291",
+      "evidence_sha256": "345d86d8bb94ece9e2ba6cd9dcc442f32e8c9e9ec522b86305f319183d202e27",
+      "rerun_receipt_sha256": "b116db0e228dd5e18c049e99e88115cdc763caf4b122e50fa5593e7dcd826d75",
+      "checks": 2,
+      "negative_controls": 6,
+      "status": "PASS"
+    },
+    {
+      "cohort": "ATTACHMENT-RENDER-LAYERS",
+      "tool_sha256": "3bd88899cd16c2d6ad340933374118762469d29cb7b8ad46dec855a942e59c3d",
+      "evidence_sha256": "47c50f260ef1f1bf0fb9f0f47b4216490cd25a55429af4c5c3340e029b5b47cf",
+      "rerun_receipt_sha256": "db971078493703f9bc8b23131a02c63be6ef70ec08e55d53434571bc745a27a8",
+      "checks": 191,
+      "negative_controls": 11,
+      "status": "PASS"
+    },
+    {
+      "cohort": "PASSENGER-HAT-ATTACHMENT",
+      "tool_sha256": "5cac18c074374c4cb99a0ddacd390f75eca7a09527a4e6eea5e7d4bcb0d0de63",
+      "evidence_sha256": "9bf941fa86ff279d1e055bc13ac1853dad164aa041b1c1d6a0842e0f63986a0d",
+      "rerun_receipt_sha256": "e7457a49568f31f5bf0bfc8da5f726f599d09f0334cd29402e369c1bf26baa09",
+      "checks": 79,
+      "negative_controls": 8,
+      "status": "PASS"
+    },
+    {
+      "cohort": "PLAYER-RENDER-ENTRY",
+      "tool_sha256": "0eab47c6d8507921191283e6cda8faea763456e0299502cb7d0f47ab822fcc71",
+      "evidence_sha256": "1647daba3c8d2f4ec83881ad59dc761fb748f0880ff2d928cb39cda0fadb9545",
+      "rerun_receipt_sha256": "c938658c890506432e979b9197eb42175e95d828d5bedf4c8ea8d9d0fdd857b0",
+      "checks": 125,
+      "negative_controls": 9,
+      "status": "PASS"
+    },
+    {
+      "cohort": "FIRST-PERSON-RENDER-REGISTRY",
+      "tool_sha256": "fbfedb12de3249e9eaa6468590883582213db06de9ef53600dec37a6e0563573",
+      "evidence_sha256": "14fcc862f027fba0480d316b539f6cb8a48a24ddcec66d85800256c220040880",
+      "rerun_receipt_sha256": "931808e3a128f7ca92865321b5de074f71abd97b97bb7856e02ef13aa0285f37",
+      "checks": 120,
+      "negative_controls": 9,
+      "status": "PASS"
+    },
+    {
+      "cohort": "ARM-REPLACEMENT-EVENTS",
+      "tool_sha256": "ca5eaea0c3bc1b2e13cdcaee3d9f419d35500e1b494862fe41fdc6f85e22a298",
+      "evidence_sha256": "0d25c4a1452b0176eeae1b6887eaba9c37ad4685bc82cf69714d8fa6b3605829",
+      "rerun_receipt_sha256": "49c37ce86cef04ba75deeb26e77f74f047cca2f142a23873766238d3efd70b45",
+      "checks": 115,
+      "negative_controls": 9,
+      "status": "PASS"
+    },
+    {
+      "cohort": "BACKPACK-SPELL-BLADE-INPUTS",
+      "tool_sha256": "ecc3a5bcd55045a168e6a38cd4528d507dc8bae63cde909b6e409d19bd25b7f4",
+      "evidence_sha256": "cc54283153a7079afdff014a312eda2ffdc3b018ea102e7f849e39cb717bc232",
+      "rerun_receipt_sha256": "66c0b9ee4d0e67b3aa3fccdcbdd685a5da3dc3035f315aee994b9e62b4d55c05",
+      "checks": 362,
+      "negative_controls": 15,
+      "status": "PASS"
+    },
+    {
+      "cohort": "GUN-ANIMATION-ADAPTERS",
+      "tool_sha256": "5d51e4f1fc9e66151bf5769aa96565a035009ac50dc73b0c8038a2683b1fdfcd",
+      "evidence_sha256": "75e9d7ef087d5abc5cd200e1a17ca156378e9289624ce6567817973a8add5aae",
+      "rerun_receipt_sha256": "ef7483a25ba808347d918c4027756497c962e7a35e013ca2463e47d9a80f4adc",
+      "checks": 277,
+      "negative_controls": 10,
+      "status": "PASS"
+    }
+  ],
+  "cohort_count": 9,
+  "overlapping_method_snapshots_compared": 29,
+  "overlap_conflicts": 0,
+  "central_mapping_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
+  "central_mapping_promoted": false,
+  "independent_semantic_review": "NOT_RUN",
+  "target_runtime_executed": false,
+  "whole_project_ci_run": false,
+  "earlier_fixed17_checkpoint_modified": false,
+  "earlier_fixed10_checkpoint_modified": false,
+  "earlier_fixed9_checkpoint_modified": false,
+  "earlier_fixed14_checkpoint_modified": false,
+  "elapsed_seconds": 2.246
+}

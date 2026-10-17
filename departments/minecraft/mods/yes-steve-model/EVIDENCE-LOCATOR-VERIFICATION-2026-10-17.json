@@ -2,7 +2,7 @@
   "scope": "opt-in evidence navigation only",
   "unit_test_exit_code": 0,
   "unit_tests": 10,
-  "unit_output": "test_bounded_results (test_evidence_locator_ysm_265.LocatorTest.test_bounded_results) ... ok\ntest_build_deterministic_and_no_reference_promotion (test_evidence_locator_ysm_265.LocatorTest.test_build_deterministic_and_no_reference_promotion) ... ok\ntest_default_search_does_not_rebuild_or_check (test_evidence_locator_ysm_265.LocatorTest.test_default_search_does_not_rebuild_or_check) ... ok\ntest_extra_catalog_keeps_both_branch_sites (test_evidence_locator_ysm_265.LocatorTest.test_extra_catalog_keeps_both_branch_sites) ... ok\ntest_index_is_not_its_own_evidence (test_evidence_locator_ysm_265.LocatorTest.test_index_is_not_its_own_evidence) ... ok\ntest_query_and_topic (test_evidence_locator_ysm_265.LocatorTest.test_query_and_topic) ... ok\ntest_selected_hash_missing_or_stale (test_evidence_locator_ysm_265.LocatorTest.test_selected_hash_missing_or_stale) ... ok\ntest_short_owner_role_and_case_search (test_evidence_locator_ysm_265.LocatorTest.test_short_owner_role_and_case_search) ... ok\ntest_topic_hash_is_checked (test_evidence_locator_ysm_265.LocatorTest.test_topic_hash_is_checked) ... ok\ntest_unrelated_changes_do_not_run_global_check (test_evidence_locator_ysm_265.LocatorTest.test_unrelated_changes_do_not_run_global_check) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.010s\n\nOK\n",
+  "unit_output": "test_bounded_results (test_evidence_locator_ysm_265.LocatorTest.test_bounded_results) ... ok\ntest_build_deterministic_and_no_reference_promotion (test_evidence_locator_ysm_265.LocatorTest.test_build_deterministic_and_no_reference_promotion) ... ok\ntest_default_search_does_not_rebuild_or_check (test_evidence_locator_ysm_265.LocatorTest.test_default_search_does_not_rebuild_or_check) ... ok\ntest_extra_catalog_keeps_both_branch_sites (test_evidence_locator_ysm_265.LocatorTest.test_extra_catalog_keeps_both_branch_sites) ... ok\ntest_index_is_not_its_own_evidence (test_evidence_locator_ysm_265.LocatorTest.test_index_is_not_its_own_evidence) ... ok\ntest_query_and_topic (test_evidence_locator_ysm_265.LocatorTest.test_query_and_topic) ... ok\ntest_selected_hash_missing_or_stale (test_evidence_locator_ysm_265.LocatorTest.test_selected_hash_missing_or_stale) ... ok\ntest_short_owner_role_and_case_search (test_evidence_locator_ysm_265.LocatorTest.test_short_owner_role_and_case_search) ... ok\ntest_topic_hash_is_checked (test_evidence_locator_ysm_265.LocatorTest.test_topic_hash_is_checked) ... ok\ntest_unrelated_changes_do_not_run_global_check (test_evidence_locator_ysm_265.LocatorTest.test_unrelated_changes_do_not_run_global_check) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.011s\n\nOK\n",
   "repository_lookups": [
     {
       "arguments": [
@@ -18,14 +18,6 @@
         "CtrlBinding"
       ],
       "matches": 2,
-      "freshness": "SELECTED_FILES_MATCH"
-    },
-    {
-      "arguments": [
-        "--topic",
-        "CONTROL"
-      ],
-      "matches": 9,
       "freshness": "SELECTED_FILES_MATCH"
     },
     {
@@ -51,15 +43,39 @@
       ],
       "matches": 1,
       "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--topic",
+        "ARM-REPLACEMENT"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--owner",
+        "o0oo00OoO00OO0Oo0oo00ooo"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
+    },
+    {
+      "arguments": [
+        "--topic",
+        "LOCATOR-MATRIX"
+      ],
+      "matches": 1,
+      "freshness": "SELECTED_FILES_MATCH"
     }
   ],
-  "seconds": 0.335,
+  "seconds": 0.395,
   "central_map_sha256": "dc7abc78b1db9401b89ded2e97e2d8341179ccb62d69aa67698c87d8a7174e30",
   "target_runtime_executed": false,
   "global_audits_run": false,
   "hashes": {
     "tools/evidence_locator_ysm_265.py": "d90cfd4a28b02fa2e4f797e91863cd6cf30e70245c78786ef8cf8f8c1c6d7fa0",
     "tools/test_evidence_locator_ysm_265.py": "27aec07e16138274b66dab20b3956cb4f7cf8f606330dc3087c0bb195da230a8",
-    "EVIDENCE-LOCATOR-2026-10-17.json": "c0642a71392b0ee53d2a379b020c349d16e1b4429c6f633a33d8843f57397f0e"
+    "EVIDENCE-LOCATOR-2026-10-17.json": "f74346ea8d8788b3662b0387a0315136a87f1a3be119881565faa81f19f17da5"
   }
 }
