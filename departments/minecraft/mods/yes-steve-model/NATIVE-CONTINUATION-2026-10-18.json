@@ -1,0 +1,152 @@
+{
+  "format": "kneekura.ysm-native-continuation.v1",
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "dependency_post_return_sha256": "3f679758672aac0583e5a4c67ba24bf748b86f829a7897362ec533d58fd33572",
+  "segments": [
+    {
+      "address": 16161888,
+      "size": 73,
+      "sha256": "24a816009b91e8e84dff992ae3460864cbbf3cb95efce2b05a16c5a3ce22fd37"
+    },
+    {
+      "address": 19988144,
+      "size": 10,
+      "sha256": "475ddcdd3c2a4d02d3b492b9fee85aa37b9110958bb6495d709de68c2f670ae7"
+    },
+    {
+      "address": 17460252,
+      "size": 9,
+      "sha256": "aa4784f5e89ae058e6c4aa2373338a42c7977dffa3845ad7f1b311448fa5cadf"
+    },
+    {
+      "address": 15847166,
+      "size": 9,
+      "sha256": "56193ea668147e17a016f0c93bfd0777efd482ed9c9eee0148f70b0af959a011"
+    },
+    {
+      "address": 19773042,
+      "size": 30,
+      "sha256": "5baa6f19ba375fe33a91deceaf7b8599a75c68e7a95d7a9d0b5924902b329424"
+    },
+    {
+      "address": 17351933,
+      "size": 8,
+      "sha256": "a105e21a7784844b9f4715e72660bba6015e960d91698106f25efaf8eb399f3e"
+    },
+    {
+      "address": 15761391,
+      "size": 75,
+      "sha256": "b81e89d65a542cdfbcf693f7fd6b527c3ecfa2236e0dd3969f276111c744bd6c"
+    },
+    {
+      "address": 15723967,
+      "size": 97,
+      "sha256": "c4e8fd750f06a5e1d6f11a617ffbdc9871db1c47775ae300ee39456f583453b1"
+    },
+    {
+      "address": 15842229,
+      "size": 36,
+      "sha256": "56a85d340606a13e5f582ee435c0cc94846625ad8d6eb141adadd48125ae47fb"
+    },
+    {
+      "address": 17828269,
+      "size": 20,
+      "sha256": "43503ae28355d4c07fd593d1ac94e491fc81b74ac2b420d5b462d16fcfe3aaca"
+    }
+  ],
+  "additional_file_data": {
+    "address": 13815120,
+    "bytes": "93a72914a70cb3b0b852f4",
+    "size": 11
+  },
+  "fixed_inputs": {
+    "rcx_before_byte_load": 8246838474,
+    "r10d_before_word_shift": 4294959616,
+    "shl_r10w_carry": 0,
+    "r9_after_shift": 0
+  },
+  "third_file_candidate": {
+    "cl_decoded": 208,
+    "dl_decoded": 176,
+    "key": 4281389628,
+    "delta_u32": 524835,
+    "delta_signed": 524835,
+    "target": 16161888
+  },
+  "fourth_file_candidate": {
+    "key": 4281913511,
+    "delta_u32": 3947654,
+    "delta_signed": 3947654,
+    "target": 20109542
+  },
+  "computed_jumps": [
+    {
+      "address": 19988152,
+      "target": 17460252,
+      "basis": "POP nearest CALL return, then ADD fixed displacement"
+    },
+    {
+      "address": 15761463,
+      "target": 15723967,
+      "basis": "XCHG saved outer return, then ADC with zero carry"
+    }
+  ],
+  "stack_alias_offsets_checked": 256,
+  "parity_guard": {
+    "address": 15842259,
+    "target": 17828269,
+    "cx_before_exchange": 13062,
+    "bit_test_si_zero_carry": 0,
+    "ax_after_adc": 14010,
+    "parity_flag": 0,
+    "taken": true
+  },
+  "fourth_return": {
+    "address": 17828286,
+    "stored_register": "RDI",
+    "store_offset": 0,
+    "stack_advance": 16
+  },
+  "candidate_backing": [
+    {
+      "region": {
+        "kind": "PT_LOAD",
+        "index": 4,
+        "address": 15490560,
+        "memory_size": 5308498,
+        "file_offset": 13823488,
+        "file_size": 5308498,
+        "flags": 5
+      },
+      "file_backed": true,
+      "file_offset": 14494816
+    },
+    {
+      "region": {
+        "kind": "PT_LOAD",
+        "index": 4,
+        "address": 15490560,
+        "memory_size": 5308498,
+        "file_offset": 13823488,
+        "file_size": 5308498,
+        "flags": 5
+      },
+      "file_backed": true,
+      "file_offset": 18442470
+    }
+  ],
+  "assumptions": [
+    "All preceding candidate assumptions remain in force",
+    "Additional file bytes at 0xd2cd50 through 0xd2cd5a retain recorded values",
+    "All fixed memory accesses complete normally; no external interference or modified instructions",
+    "Unknown byte at 0xd2cd5b affects other state but is not used to claim a concrete successor beyond this fourth return"
+  ],
+  "target_executed": false,
+  "native_emulator_run": false,
+  "scalar_and_byte_interval_models_only": true,
+  "runtime_reachability_verified": false,
+  "initializer_effects_resolved": false,
+  "independent_semantic_review": "NOT_RUN",
+  "native_bindings_resolved": false
+}
