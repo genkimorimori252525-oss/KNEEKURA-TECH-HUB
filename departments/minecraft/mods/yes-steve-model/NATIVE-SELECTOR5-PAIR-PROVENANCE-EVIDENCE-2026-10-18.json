@@ -1,0 +1,247 @@
+{
+  "format": "ysm-selector5-pair-subtrace-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "target_executed": false,
+  "emulation_performed": false,
+  "assets_processed": false,
+  "repository_modified": false,
+  "scope": "Nearest explicit first-pair writer and immediate helpers only; source decoder object producer and codec/header parsing deliberately unresolved",
+  "ranges": [
+    {
+      "name": "provider_initialization",
+      "start": "0x4cad00",
+      "end_exclusive": "0x4caf7a",
+      "size": 634,
+      "sha256": "00cc6ca13f20b9461ea3e6a9c2997d43c7e9f1e1a7f91c3016bcfed55519a985",
+      "asm_sha256": "ec991bae397362d57d3878c51613b56892f5ca1f9d9d6c41858670d11c926922",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5025024
+      }
+    },
+    {
+      "name": "decoder_context_restore",
+      "start": "0x4cb330",
+      "end_exclusive": "0x4cb363",
+      "size": 51,
+      "sha256": "8874d0bf99b4c73f29daed51856e9920ef09c94d1d37a16f3c63632c5bb34f5a",
+      "asm_sha256": "21241e1d8d03849101502e9fd97b22515d085683fb2c43da70534fc78a5e8445",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5026608
+      }
+    },
+    {
+      "name": "copy_context_call",
+      "start": "0x4cc094",
+      "end_exclusive": "0x4cc135",
+      "size": 161,
+      "sha256": "b6176e18618c229c06ba06335d5f2939250262b2f650629d5aaef8127d86eb71",
+      "asm_sha256": "42d9104e030498b3f42ed0ad5059649e71039729c00a7346988995561ca8b8a4",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5030036
+      }
+    },
+    {
+      "name": "provider_output",
+      "start": "0x4cc135",
+      "end_exclusive": "0x4cc22c",
+      "size": 247,
+      "sha256": "068834d4d59fd648d5b3adc5b1ed004541cce416a5075725c360e9aa3ee5b22a",
+      "asm_sha256": "9ff8fdc8cfe65308d86fc6177845c4c96d5ccfab67195eb4f19b1c60b72c3a95",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5030197
+      }
+    },
+    {
+      "name": "copy_payload_helper",
+      "start": "0x618e30",
+      "end_exclusive": "0x619290",
+      "size": 1120,
+      "sha256": "9ba3659168eddcac49b50e811f2491f3b12b1ac287bbccf45c621b0e431dd92b",
+      "asm_sha256": "d9b022bbc6f007ee739d540cb5e2a24373e5f1ccff37b7607720d71a547f5810",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 6393392
+      }
+    },
+    {
+      "name": "copy_context",
+      "start": "0x619290",
+      "end_exclusive": "0x619a90",
+      "size": 2048,
+      "sha256": "3d768199a404cb86476f2f5945ab236bdca6c0dba20756652f142d6c0053f4c9",
+      "asm_sha256": "002664e7489023fa0ce722a9dfef5baae47a5f2043d30b8f5d707ba58bd46049",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 6394512
+      }
+    },
+    {
+      "name": "allocate_payload_helper",
+      "start": "0x619a90",
+      "end_exclusive": "0x619c40",
+      "size": 432,
+      "sha256": "c4626f348862cace079aa1919576dcfbff30529222bd24445c259930ce43d785",
+      "asm_sha256": "926002847c7919763f080bf159ca2ff5049bb94cf61d2aac26e050d714150fee",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 6396560
+      }
+    }
+  ],
+  "assertions": [
+    {
+      "va": "0x4cad91",
+      "bytes": "f30f7f00",
+      "meaning": "C first 16 bytes initially zero"
+    },
+    {
+      "va": "0x4cad9d",
+      "bytes": "4889442410",
+      "meaning": "C saved at stack+0x10"
+    },
+    {
+      "va": "0x4cae4f",
+      "bytes": "4c897c2478",
+      "meaning": "Original S saved at stack+0x78"
+    },
+    {
+      "va": "0x4caf6f",
+      "bytes": "4c896c2418",
+      "meaning": "decoder context J saved at stack+0x18"
+    },
+    {
+      "va": "0x4cc0fe",
+      "bytes": "498b7530",
+      "meaning": "P=load64(J+0x30) is RSI"
+    },
+    {
+      "va": "0x4cc102",
+      "bytes": "488b7c2410",
+      "meaning": "C is RDI"
+    },
+    {
+      "va": "0x4cc10c",
+      "bytes": "e87fd11400",
+      "meaning": "call copy context at 0x619290"
+    },
+    {
+      "va": "0x6192a1",
+      "bytes": "4989f5",
+      "meaning": "P becomes R13"
+    },
+    {
+      "va": "0x6192a4",
+      "bytes": "4889fd",
+      "meaning": "C becomes RBP"
+    },
+    {
+      "va": "0x6192f7",
+      "bytes": "410f104500",
+      "meaning": "load16(P+0)"
+    },
+    {
+      "va": "0x6192fc",
+      "bytes": "0f114500",
+      "meaning": "store16(C+0)"
+    },
+    {
+      "va": "0x4cc1a5",
+      "bytes": "498b4500",
+      "meaning": "load64(C+0)"
+    },
+    {
+      "va": "0x4cc1a9",
+      "bytes": "49894720",
+      "meaning": "store64(D+0x20)"
+    },
+    {
+      "va": "0x4cc1ad",
+      "bytes": "418b5e20",
+      "meaning": "allocation derives from S+0x20"
+    },
+    {
+      "va": "0x4cc1b1",
+      "bytes": "410faf5e24",
+      "meaning": "32-bit multiply by S+0x24"
+    },
+    {
+      "va": "0x4cc1b6",
+      "bytes": "c1e302",
+      "meaning": "32-bit shift left by 2"
+    }
+  ],
+  "prior_provider_window": {
+    "path": "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/provider-output-format-contract/4cad00.bin",
+    "start": "0x4cad00",
+    "size": 13040,
+    "sha256": "2c0200601418488a3a79b211d97a5c1e5320e2ce1f3fab5ada504e0102944a32"
+  },
+  "conclusion": "load64(D+0x20) obtains load64(C+0), whose nearest explicit header write is store16(C+0,load16(P+0)) at 0x6192fc; P=load64(J+0x30). Allocation independently uses zero_extend(low32(4*S20*S24))."
+}

@@ -1,0 +1,335 @@
+{
+  "schema": "ysm265-provider-contract-index-v1",
+  "purpose": "Authored navigation and branch-scope index; not a new semantic audit or decoder.",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "notation": {
+    "S": "supplied provider input",
+    "D": "returned output",
+    "C_J_I_P_O_Q": "receipt-local contexts; identical letters across providers do not imply object identity",
+    "low32": "low32-bit arithmetic, then zero-extend only where stated"
+  },
+  "global_scope": {
+    "original_target_executed": false,
+    "assets_decoded": false,
+    "runtime_selector_observed": false,
+    "universal_rgba_claim": false,
+    "runtime_success_claim": false,
+    "repository_modified": false
+  },
+  "registry": {
+    "dispatcher_va": "0x4c8000",
+    "registry_va": "0xd35cb8",
+    "initializer_va": "0x343fa0",
+    "init_array_relative_slot": "0xd16518",
+    "static_registered_selectors": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "qualification": "Selector1 direct special case; initializer contents do not prove runtime execution or absence of other mutation mechanisms."
+  },
+  "receipts": {
+    "registration": {
+      "report": {
+        "path": "NATIVE-PROVIDER-OUTPUT-FORMAT-RECOVERY-2026-10-18.md",
+        "sha256": "80315602047017bfdbf2ffc65bdc4323bedaee566ff1e9076139665da43a4d7b",
+        "external_original_sha256": "c6ddc32f8bf8af0e68914d6fbdb8aa32f9ae9c4b7af9924dc8eac0087a6323c4"
+      },
+      "evidence": {
+        "path": "NATIVE-PROVIDER-OUTPUT-FORMAT-EVIDENCE-2026-10-18.json",
+        "sha256": "b35c1af0bd3d6e0afa115b111ccb7a27f62e9b21cd3961f388b12489112fe18b",
+        "external_original_sha256": "b35c1af0bd3d6e0afa115b111ccb7a27f62e9b21cd3961f388b12489112fe18b"
+      }
+    },
+    "png": {
+      "report": {
+        "path": "NATIVE-PNG-OUTPUT-CHANNEL-RECOVERY-2026-10-18.md",
+        "sha256": "6e4f290a0e52487a6d9c961ad81ed1cf4bce1e28585e2dadb76a47f942533dc4",
+        "external_original_sha256": "db23be34d9a1ef6e1d3f68c22f7f0bd4cdb688d908cdf187b6a502ef42ab787e"
+      },
+      "evidence": {
+        "path": "NATIVE-PNG-OUTPUT-CHANNEL-EVIDENCE-2026-10-18.json",
+        "sha256": "655ed5e8a8ac423de76a0ebd27af63032e81bdeefdd4d2c83492b2cfe5492538",
+        "external_original_sha256": "655ed5e8a8ac423de76a0ebd27af63032e81bdeefdd4d2c83492b2cfe5492538"
+      }
+    },
+    "selector3_entry": {
+      "report": {
+        "path": "NATIVE-SELECTOR3-CHANNEL-BOUNDARY-RECOVERY-2026-10-18.md",
+        "sha256": "80585bdf1de47f3aa51f6cfd9358491b5193274447f6c831899656ae1d9e9d27",
+        "external_original_sha256": "e441f738a4fa6464ad3430cccfe09e840610d2f1594e7749badc15506f2f28e4"
+      },
+      "evidence": {
+        "path": "NATIVE-SELECTOR3-CHANNEL-BOUNDARY-EVIDENCE-2026-10-18.json",
+        "sha256": "e94c2da6bcd3b58b9e3bbc66dbbc49652bc85814f7b31e1debf3a0fe17522a37",
+        "external_original_sha256": "e94c2da6bcd3b58b9e3bbc66dbbc49652bc85814f7b31e1debf3a0fe17522a37"
+      }
+    },
+    "selector3_callbacks": {
+      "report": {
+        "path": "NATIVE-SELECTOR3-CALLBACK-RECOVERY-2026-10-18.md",
+        "sha256": "442314181a9b5fae5dfa7785297148210e9789130b8f1d7db00183e38646d4c0",
+        "external_original_sha256": "2e84afa71f7d583749726f45c7690cd9333fc374a7b7e5145259b12170b1ba5a"
+      },
+      "evidence": {
+        "path": "NATIVE-SELECTOR3-CALLBACK-EVIDENCE-2026-10-18.json",
+        "sha256": "9806c955893b8f9f2ba7952c48e47443318dba4ebb554ad963c8d8123d226ab4",
+        "external_original_sha256": "9806c955893b8f9f2ba7952c48e47443318dba4ebb554ad963c8d8123d226ab4"
+      }
+    },
+    "selector4": {
+      "report": {
+        "path": "NATIVE-SELECTOR4-OUTPUT-RECOVERY-2026-10-18.md",
+        "sha256": "e06b800384ce2fd997de6f7fd678b434860926560bdf6e739a5797160ba22f6f",
+        "external_original_sha256": "f9925dc1476f4f317ab66c2adb3dbb744f38aa36025c21ae09b886b04138004e"
+      },
+      "evidence": {
+        "path": "NATIVE-SELECTOR4-OUTPUT-EVIDENCE-2026-10-18.json",
+        "sha256": "e205088989020ebf6b7bce70b2fb1ecb5ff4b1fcfd4a52631b279bdd8b2eb91c",
+        "external_original_sha256": "e205088989020ebf6b7bce70b2fb1ecb5ff4b1fcfd4a52631b279bdd8b2eb91c"
+      }
+    },
+    "selector4_plane": {
+      "report": {
+        "path": "NATIVE-SELECTOR4-FOURTH-BYTE-RECOVERY-2026-10-18.md",
+        "sha256": "d4a0ad27a3b65f960f42f4cbd4753600e8576b4dc25f2d46a59e79ff299fa47e",
+        "external_original_sha256": "67b383d5da3355897749b323f304e11bfa56beb76b727c18a3ae59abfa8e6a92"
+      },
+      "evidence": {
+        "path": "NATIVE-SELECTOR4-FOURTH-BYTE-EVIDENCE-2026-10-18.json",
+        "sha256": "6accfeb3e4acd8fabdc3e440d2bd4edaeec12c44277d84ff8db194ac34a684b1",
+        "external_original_sha256": "6accfeb3e4acd8fabdc3e440d2bd4edaeec12c44277d84ff8db194ac34a684b1"
+      }
+    },
+    "selector5": {
+      "report": {
+        "path": "NATIVE-SELECTOR5-OUTPUT-RECOVERY-2026-10-18.md",
+        "sha256": "f6bb0fbb82cbe6ed7e7fbea8b2bc77ee452a82846550cc2010ee93136c46959b",
+        "external_original_sha256": "281bab6b32bc09f107ff38dbbd04c0f2efb6103a63c3b0cf3cf747d28977c5ab"
+      },
+      "evidence": {
+        "path": "NATIVE-SELECTOR5-OUTPUT-EVIDENCE-2026-10-18.json",
+        "sha256": "4103feb309b6294fe10410de32c0d32cc9ec2061bb3d5f1c57598825eb831b35",
+        "external_original_sha256": "4103feb309b6294fe10410de32c0d32cc9ec2061bb3d5f1c57598825eb831b35"
+      }
+    },
+    "selector5_pair": {
+      "report": {
+        "path": "NATIVE-SELECTOR5-PAIR-PROVENANCE-RECOVERY-2026-10-18.md",
+        "sha256": "7e71ab7449e72e8db713876ac49b84437033eba5c233852f659859228443f87e",
+        "external_original_sha256": "41258ff67e193096353f160f506774e8b3050009931d9e61be99eba68174af5a"
+      },
+      "evidence": {
+        "path": "NATIVE-SELECTOR5-PAIR-PROVENANCE-EVIDENCE-2026-10-18.json",
+        "sha256": "32b74636131856f4811b421d489d2c137820fdd9b32d33ac5ba250d999e41521",
+        "external_original_sha256": "32b74636131856f4811b421d489d2c137820fdd9b32d33ac5ba250d999e41521"
+      }
+    }
+  },
+  "providers": [
+    {
+      "selector": 1,
+      "dispatch": {
+        "kind": "direct_special_case",
+        "entry_va": "0x4c8150",
+        "registered_entry_va": null,
+        "installed_vtable_va": null
+      },
+      "pair": {
+        "source": "S.u32[0x20], S.u32[0x24] unchanged",
+        "scope": "4c811f..4c8123"
+      },
+      "allocation": {
+        "formula": "N from S.virtual+0x20; pointer from S.virtual+0x18",
+        "recorded_size": "N",
+        "qualification": "No demonstrated N == 4*pair0*pair1; allocation helper rejects size >=0x4200001."
+      },
+      "pitch": {
+        "formula": null,
+        "qualification": "No output pitch is established by byte-copy provider."
+      },
+      "fourth_byte": {
+        "status": "byte_preservation_only",
+        "policy": "Every source byte is copied unchanged, including any byte a consumer addresses at offset4*i+3.",
+        "scope": "4c8150 and5767d0 byte-copy path",
+        "semantic_alpha_proven": false
+      },
+      "unresolved": [
+        "Source virtual accessor/creator format",
+        "Channel ordering and relationship between N and supplied pair"
+      ],
+      "receipts": [
+        "registration"
+      ]
+    },
+    {
+      "selector": 2,
+      "dispatch": {
+        "kind": "static_registry",
+        "entry_va": "0x4ceab0",
+        "registered_entry_va": "0x4ceab0",
+        "installed_vtable_va": "0xd1d6f0"
+      },
+      "pair": {
+        "source": "PNG IHDR big-endian32 at input+0x10/+0x14",
+        "scope": "Successful return4cf2d0/4cf2d5 replaces initial supplied pair"
+      },
+      "allocation": {
+        "formula": "Final replacement conversion allocation4*N, N=u64(width)*u64(height), valid-size domain",
+        "recorded_size": "zeroExtend(low32(4*width*height)) at D+0x10/+0x18",
+        "qualification": "Equal requested/source format may bypass replacement; recorded size is independently narrowed. No arbitrary-size safety claim."
+      },
+      "pitch": {
+        "formula": "Natural contiguous stride4*IHDR_width",
+        "qualification": "Final conversion preserves linear pixel order; reconstruction/orientation/interlace not retraced."
+      },
+      "fourth_byte": {
+        "status": "exact_rgba8_success_path",
+        "policy": "Byte0=red,1=green,2=blue,3=alpha; independent unassociated components. Depending source type/depth, alpha is preserved/high-byte converted, palette supplied, or synthesized255 with transparent-key zeroing.",
+        "scope": "Requested PNG type6/depth8, enabled conversion or equal-format bypass; pointer joined to returned D+8",
+        "semantic_alpha_proven": true,
+        "primary_spec": "https://www.w3.org/TR/2025/REC-png-3-20250624/",
+        "spec_sections": [
+          "4.5",
+          "6.1",
+          "6.2",
+          "11.2.1"
+        ]
+      },
+      "unresolved": [
+        "Full decoder runtime success/validation",
+        "Reconstruction/orientation/interlace path audit",
+        "All integer overflow/safety conditions"
+      ],
+      "receipts": [
+        "registration",
+        "png"
+      ]
+    },
+    {
+      "selector": 3,
+      "dispatch": {
+        "kind": "static_registry",
+        "entry_va": "0x4ce470",
+        "registered_entry_va": "0x4ce470",
+        "installed_vtable_va": "0xd1d6b8"
+      },
+      "pair": {
+        "source": "Supplied S+0x20/+0x24 unchanged",
+        "scope": "4ce529..4ce52d; internal J dimensions separately govern produced rows"
+      },
+      "allocation": {
+        "formula": "zeroExtend(low32(4*S.u32[0x20]*S.u32[0x24]))",
+        "recorded_size": "Same low32 formula at D+0x18",
+        "qualification": "Supplied pair equality to internal decoded dimensions unproved."
+      },
+      "pitch": {
+        "formula": "low32(4*S.u32[0x20]) passed to c16350",
+        "qualification": "Signed pitch validated nonnegative; zero pitch fallback uses4*J+0x88. Internal row count J+0x8c."
+      },
+      "fourth_byte": {
+        "status": "traced_constant_255",
+        "policy": "Traced mode12 byte-output candidates synthesize255 at byte3; no source fourth byte is read by these stores.",
+        "scope": "Conditional J+0x228 -> postprocessor/upsampler -> J+0x268 chain. Generic source-code1, source-code2 scalar stores, source-code3 generic and static vector packing candidates210ec0/212720.",
+        "semantic_alpha_proven": false,
+        "runtime_backend_selected": false
+      },
+      "unresolved": [
+        "Alternate sample-precision/setup paths",
+        "All source-code2 vector operations",
+        "Actual CPU feature selection",
+        "First-three-channel names",
+        "Successful decoding and supplied/internal pair equality"
+      ],
+      "receipts": [
+        "registration",
+        "selector3_entry",
+        "selector3_callbacks"
+      ]
+    },
+    {
+      "selector": 4,
+      "dispatch": {
+        "kind": "static_registry",
+        "entry_va": "0x4d3ff0",
+        "registered_entry_va": "0x4d3ff0",
+        "installed_vtable_va": "0xd1d728"
+      },
+      "pair": {
+        "source": "Supplied S+0x20/+0x24 unchanged in traced output setup",
+        "scope": "Internal dimensions passed separately to585b80"
+      },
+      "allocation": {
+        "formula": "zeroExtend(low32(4*S.u32[0x20]*S.u32[0x24]))",
+        "recorded_size": "Same low32 formula; external descriptor capacity O+0x20",
+        "qualification": "Validator checks capacity against internal dimensions using mixed64/32-bit arithmetic; equality with supplied pair unproved."
+      },
+      "pitch": {
+        "formula": "O+0x18=low32(4*S.u32[0x20])",
+        "qualification": "585e71..585ec7 checks needed=u64(abs32(pitch))*(signed64(h)-1)+signed64(w)*4 <= capacity and signed32(abs32(pitch)) >= signed32(low32(4*w)); ordinary nonoverflow reading is abs(pitch)>=4*w."
+      },
+      "fourth_byte": {
+        "status": "conditional_plane_overwrite",
+        "policy": "Traced mode1 scalar color stores initialize255. Subsequent callback writes separate-plane samples to byte3 when plane present; null plane leaves existing byte unchanged. Mode1 skips later color-transform callback on traced unscaled path.",
+        "scope": "I+0x88=0: K+0x60=596df0; scatter597610 or CPU candidate5b4c00. Scaled entry identified only, no resampling audit. Initial595fc0/5a7470 scalar converter additionally requires I+0x58=0.",
+        "semantic_alpha_proven": false,
+        "runtime_backend_selected": false
+      },
+      "unresolved": [
+        "596090/table d35fd0[1] when I+0x58 nonzero",
+        "5a771d vector branch/5ca010 replacement when I+0x58=0",
+        "Separate-plane upstream provenance",
+        "Scaled processing internals",
+        "Alternate provider branch4d4b10 onward",
+        "Universal final channel ordering/success"
+      ],
+      "receipts": [
+        "registration",
+        "selector4",
+        "selector4_plane"
+      ]
+    },
+    {
+      "selector": 5,
+      "dispatch": {
+        "kind": "static_registry",
+        "entry_va": "0x4cad00",
+        "registered_entry_va": "0x4cad00",
+        "installed_vtable_va": "0xd1d680"
+      },
+      "pair": {
+        "source": "P=[J+0x30] ->619290 copies first16 bytes into C ->C firstqword copied to D+0x20",
+        "scope": "4cc0fe/4cc10c,6192f7/6192fc,4cc1a5/4cc1a9; upstream P/header semantics unresolved"
+      },
+      "allocation": {
+        "formula": "zeroExtend(low32(4*S.u32[0x20]*S.u32[0x24]))",
+        "recorded_size": "Same low32 formula at D+0x18",
+        "qualification": "Independent of context-derived output pair. No capacity field passed in output descriptor O; no equality/safety invariant proved."
+      },
+      "pitch": {
+        "formula": "O+0x38=low32(4*S.u32[0x20])",
+        "qualification": "Iteration dimensions O+0/+4 copied from C. Output requested depth8/layout1; helper maps component offsets0/1/2/3, record step4."
+      },
+      "fourth_byte": {
+        "status": "conditional_initialization_copy_stage",
+        "policy": "Fallback stage fills byte3 with255 if no usable C+0x40 plane/C+0x48 stride. Otherwise copies8-bit samples or scales10/12/16-bit samples into0..255 using float32 arithmetic, +0.5, truncation and clamp.",
+        "scope": "b2aca8..b2ae43/b2af2a; helperb2f350. Conditional stage may be skipped by fast dispatch; subsequent processing not fully audited.",
+        "semantic_alpha_proven": false
+      },
+      "unresolved": [
+        "Subsequent color processing at b2ae47 onward",
+        "Source-specific fast dispatch around b2ccb1",
+        "Upstream P producer/header semantics",
+        "Returned-pair versus supplied-allocation equality",
+        "Universal final policy/success"
+      ],
+      "receipts": [
+        "registration",
+        "selector5",
+        "selector5_pair"
+      ]
+    }
+  ],
+  "integration_note": "Repository-relative navigation and adapted report hashes; external original receipt hashes retained. Not a new semantic audit."
+}
