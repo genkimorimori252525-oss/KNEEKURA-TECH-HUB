@@ -1,0 +1,33 @@
+{
+  "format": "kneekura.ysm-static-propagation-probe.v1",
+  "status": "INCOMPLETE",
+  "ghidra_release": "12.1.4",
+  "entry": 22211353,
+  "script_sha256": "5eba2e8ee78f176c4f7d41b453331392ba92a5b4e840d868127ce5f9bd438dc8",
+  "raw_output_sha256": "e8674a2217160d53007c0a3142402f2312dc446ca08a042b01a0d82a05601088",
+  "input_manifest_sha256": "8b5d05548089572031efe343a25523e2498a7342faa7f900973803e58c54dc4a",
+  "before_instruction_records": 87,
+  "visited_bytes": 400,
+  "matched_known_predicates": [
+    {
+      "address": 24432751,
+      "flag": "ZF",
+      "value": 0,
+      "engine_space": "SuspectConst"
+    }
+  ],
+  "stopped_at": {
+    "address": 23488767,
+    "reason": "CF remains symbolic/unknown in this configuration"
+  },
+  "static_ir_adaptation": "CALL p-code control operator treated as BRANCH; preceding stack p-code retained; no target bytes changed",
+  "unknown_values_defaulted_to_zero": false,
+  "host_target_execution": false,
+  "cpu_emulator_used": false,
+  "whole_project_analysis": false,
+  "model_confidence_promoted": false,
+  "independent_semantic_review": "NOT_RUN",
+  "retained_script_replay_matched": true,
+  "artifact_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22"
+}
