@@ -44,6 +44,7 @@ def capture(cpu):
 def restore(cpu,state,*,allow_stack_extension=False):
     if state.get('format')!='ysm-guarded-local-checkpoint-v1' or state.get('engine')!=unicorn.__version__:raise ValueError('Checkpoint version mismatch')
     if [tuple(x) for x in state['images']]!=signatures(cpu):raise ValueError('Checkpoint immutable image mismatch')
+    if (state.get('sparse') or {}).get('forge_paths') is not None and not hasattr(cpu,'configure_forge_paths'):raise ValueError('Checkpoint requires Forge path-state backend')
     if cpu.attempted or cpu.shadow_ranges or cpu.shadow_expected:raise ValueError('Restore requires fresh prepared CPU')
     layout=state.get('stack_layout',LEGACY_STACK_LAYOUT)
     legacy=layout==LEGACY_STACK_LAYOUT

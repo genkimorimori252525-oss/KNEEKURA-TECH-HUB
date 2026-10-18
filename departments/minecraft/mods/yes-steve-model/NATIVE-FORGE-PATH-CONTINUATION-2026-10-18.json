@@ -1,0 +1,320 @@
+{
+  "command": [
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/unicorn-venv/bin/python",
+    "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/tools/native_jni_onload_ysm_265.py",
+    "--image",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/native-static-20261017/libysm-core.so",
+    "--jvm-image",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/jdk21/jdk-21.0.12.1+1/lib/server/libjvm.so",
+    "--java-base",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/jdk21/jdk-21.0.12.1+1/jmods/java.base.jmod",
+    "--jar",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/ysm.jar",
+    "--dependency",
+    "commons-lang3-3.12.0",
+    "d919d904486c037f8d193412da0c92e22a9fa24230b9d67a57855c5c31c7e94e",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/minecraft-1.20.1/commons-lang3-3.12.0.jar",
+    "--dependency",
+    "fmlcore-1.20.1-47.4.0",
+    "483f2d764a3a426f09a51cb37eb552830ffac8132da6bb3afbd7d825e6a34fd2",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/forge-1.20.1-47.4.0/fmlcore-1.20.1-47.4.0.jar",
+    "--dependency",
+    "fmlloader-1.20.1-47.4.0",
+    "d17c218af5c62fa4928019614aa8a5075279f8545efe21325baf46b80f4a5ac9",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/forge-1.20.1-47.4.0/fmlloader-1.20.1-47.4.0.jar",
+    "--dependency",
+    "forge-1.20.1-47.4.0",
+    "2b0e97b22fd4d043dbbcc8e0a44ef0d58915689ed9224e4cd28d5c4976a16bcc",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/forge-1.20.1-47.4.0/forge-1.20.1-47.4.0-universal.jar",
+    "--dependency",
+    "mergetool-1.1.5-api",
+    "39d9a3d9277c1402b8e7b97f917ce278241cf1796312aec85b87f19a376dd99a",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/forge-1.20.1-47.4.0/mergetool-1.1.5-api.jar",
+    "--dependency",
+    "securejarhandler-2.1.10",
+    "7ec9207f47bc8847a16566b9a3b4ced8d073c49592897eb30ce2aaf643fdfcab",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/minecraft-1.20.1/securejarhandler-2.1.10.jar",
+    "--forge-runtime-profile",
+    "forgeclient",
+    "--forge-runtime-initialized",
+    "--forge-production-property",
+    "absent",
+    "--forge-path-state",
+    "absolute-field-populated",
+    "--forge-path-provider",
+    "virtual-unix-ascii-v1",
+    "--forge-virtual-game-path",
+    "/fixture/ysm-game",
+    "--allow-forge-path-extension",
+    "--resume-jni-checkpoint",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/unicorn-jni-forgeclient-next1.checkpoint.json",
+    "--batch-size",
+    "1",
+    "--out",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/unicorn-jni-forgepaths-reviewed-next1.tsv",
+    "--checkpoint-out",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/unicorn-jni-forgepaths-reviewed-next1.checkpoint.json",
+    "--steps",
+    "100000",
+    "--seconds",
+    "60"
+  ],
+  "input_hashes": {
+    "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/unicorn-jni-forgeclient-next1.checkpoint.json": "05122784aea6927c2a8f1d48a2fb16f98e73b0d3919ab48ea4b1725f76d106b1",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/native-static-20261017/libysm-core.so": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/jdk21/jdk-21.0.12.1+1/lib/server/libjvm.so": "462fa559157ee8a862e7e4b8a4a74f8abbf5e1a9deb64f22ee23c7e8c43f698b",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/ysm.jar": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/jdk21/jdk-21.0.12.1+1/jmods/java.base.jmod": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/minecraft-1.20.1/commons-lang3-3.12.0.jar": "d919d904486c037f8d193412da0c92e22a9fa24230b9d67a57855c5c31c7e94e",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/forge-1.20.1-47.4.0/fmlcore-1.20.1-47.4.0.jar": "483f2d764a3a426f09a51cb37eb552830ffac8132da6bb3afbd7d825e6a34fd2",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/forge-1.20.1-47.4.0/fmlloader-1.20.1-47.4.0.jar": "d17c218af5c62fa4928019614aa8a5075279f8545efe21325baf46b80f4a5ac9",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/forge-1.20.1-47.4.0/forge-1.20.1-47.4.0-universal.jar": "2b0e97b22fd4d043dbbcc8e0a44ef0d58915689ed9224e4cd28d5c4976a16bcc",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/forge-1.20.1-47.4.0/mergetool-1.1.5-api.jar": "39d9a3d9277c1402b8e7b97f917ce278241cf1796312aec85b87f19a376dd99a",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/minecraft-1.20.1/securejarhandler-2.1.10.jar": "7ec9207f47bc8847a16566b9a3b4ced8d073c49592897eb30ce2aaf643fdfcab"
+  },
+  "reviewed_source_hashes": {
+    "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/tools/native_forge_path_fixture_ysm_265.py": "d1e13fd0dcf40619c3e37be6b01d55359062e4646a8615fca9e63e179f1d4503",
+    "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/tools/test_native_forge_path_fixture_ysm_265.py": "0cce9b4bde8ab42625cdda0b0f80331e0c5e98ba548805aa500ce239aa9607e0",
+    "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/tools/native_guarded_checkpoint_ysm_265.py": "8af39b8722c5c871a241aa96ad24dcdf2e38af6a80e4c8f636f3da1a0113d8b1",
+    "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/tools/native_jni_onload_ysm_265.py": "4a48b88d7bd9b5731c3aa0c4e54f6efd3c2bd2f66e28691ddb14477dc54539b5"
+  },
+  "all_inputs_unchanged_after": true,
+  "returncode": 0,
+  "single_cohort_only": true,
+  "no_semantic_stop_bypass": true,
+  "stop": {
+    "reason": "UNMODELED_ENVIRONMENT_KEY",
+    "pc": 21994528,
+    "address": 0,
+    "size": 0
+  },
+  "new_jni_calls": [
+    [
+      "env",
+      228,
+      "ExceptionCheck"
+    ],
+    [
+      "env",
+      228,
+      "ExceptionCheck"
+    ],
+    [
+      "env",
+      228,
+      "ExceptionCheck"
+    ],
+    [
+      "env",
+      228,
+      "ExceptionCheck"
+    ]
+  ],
+  "path_state": {
+    "config": {
+      "state": "absolute-field-populated",
+      "game_path": "/fixture/ysm-game",
+      "provider": "virtual-unix-ascii-v1",
+      "config_path": "/fixture/ysm-game/config",
+      "synthetic_declared_state": true,
+      "filesystem_operations_executed": false,
+      "forge_setup_success_claimed": false,
+      "provenance": {
+        "net/minecraftforge/fml/loading/FMLPaths": {
+          "artifact_sha256": "d17c218af5c62fa4928019614aa8a5075279f8545efe21325baf46b80f4a5ac9",
+          "class_sha256": "c8fc0d33845a5aa3c285115f320cf23dc016fe0cdab183dd2cd3e8d8257675c5"
+        },
+        "java/nio/file/Path": {
+          "artifact_sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+          "class_sha256": "a742da0be8612380a06ebd1b770f2554567fd0cf34e90398b5fc5797604c5e66"
+        },
+        "sun/nio/fs/UnixPath": {
+          "artifact_sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+          "class_sha256": "4e57d0fa4fb8c02f66fba4fba40accf34a8f4fc3ea2139b8ccf9fddd8144a3bf"
+        },
+        "sun/nio/fs/UnixFileSystem": {
+          "artifact_sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+          "class_sha256": "eb767a22dd28cb33aa66ed503015b4cc686ed5d65463dde61885f2875507fb8a"
+        }
+      }
+    },
+    "declaration": "{\"config_path\":\"/fixture/ysm-game/config\",\"filesystem_operations_executed\":false,\"forge_setup_success_claimed\":false,\"game_path\":\"/fixture/ysm-game\",\"provenance\":{\"java/nio/file/Path\":{\"artifact_sha256\":\"f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1\",\"class_sha256\":\"a742da0be8612380a06ebd1b770f2554567fd0cf34e90398b5fc5797604c5e66\"},\"net/minecraftforge/fml/loading/FMLPaths\":{\"artifact_sha256\":\"d17c218af5c62fa4928019614aa8a5075279f8545efe21325baf46b80f4a5ac9\",\"class_sha256\":\"c8fc0d33845a5aa3c285115f320cf23dc016fe0cdab183dd2cd3e8d8257675c5\"},\"sun/nio/fs/UnixFileSystem\":{\"artifact_sha256\":\"f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1\",\"class_sha256\":\"eb767a22dd28cb33aa66ed503015b4cc686ed5d65463dde61885f2875507fb8a\"},\"sun/nio/fs/UnixPath\":{\"artifact_sha256\":\"f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1\",\"class_sha256\":\"4e57d0fa4fb8c02f66fba4fba40accf34a8f4fc3ea2139b8ccf9fddd8144a3bf\"}},\"provider\":\"virtual-unix-ascii-v1\",\"state\":\"absolute-field-populated\",\"synthetic_declared_state\":true}",
+    "legacy_extension": true,
+    "objects": {
+      "configdir-enum": {
+        "identity": "configdir-enum",
+        "java_type": "net/minecraftforge/fml/loading/FMLPaths",
+        "value": "CONFIGDIR",
+        "provider": ""
+      },
+      "config-path": {
+        "identity": "config-path",
+        "java_type": "java/nio/file/Path",
+        "value": "/fixture/ysm-game/config",
+        "provider": "virtual-unix-ascii-v1"
+      },
+      "config-string": {
+        "identity": "config-string",
+        "java_type": "java/lang/String",
+        "value": "/fixture/ysm-game/config",
+        "provider": ""
+      }
+    },
+    "refs": {
+      "139637976727552": {
+        "identity": "configdir-enum",
+        "scope": "local",
+        "active": true
+      },
+      "139637976727568": {
+        "identity": "config-path",
+        "scope": "local",
+        "active": false
+      },
+      "139637976727584": {
+        "identity": "config-path",
+        "scope": "local",
+        "active": true
+      },
+      "139637976727600": {
+        "identity": "config-string",
+        "scope": "local",
+        "active": true
+      }
+    },
+    "borrows": {
+      "124244814963344": {
+        "identity": "config-string",
+        "active": false,
+        "length": 24
+      }
+    },
+    "calls": [
+      [
+        145,
+        133040906971392,
+        137438953472080,
+        139637976727552
+      ],
+      [
+        95,
+        139637976727552,
+        137438953472096,
+        139637976727568
+      ],
+      [
+        35,
+        139637976727568,
+        136339441844288,
+        139637976727584
+      ],
+      [
+        23,
+        139637976727568,
+        3539568,
+        0
+      ],
+      [
+        35,
+        139637976727584,
+        136339441844256,
+        139637976727600
+      ],
+      [
+        169,
+        139637976727600,
+        0,
+        124244814963344
+      ],
+      [
+        168,
+        139637976727600,
+        0,
+        24
+      ],
+      [
+        170,
+        139637976727600,
+        124244814963344,
+        0
+      ]
+    ]
+  },
+  "workers_before": {
+    "enabled": true,
+    "entries": [
+      3132592
+    ],
+    "records": {
+      "2": {
+        "start": 3132592,
+        "arg": 70643639402880,
+        "state": "pending",
+        "detached": true,
+        "executed": false
+      },
+      "3": {
+        "start": 3132592,
+        "arg": 70643638879360,
+        "state": "pending",
+        "detached": true,
+        "executed": false
+      }
+    },
+    "keys": {},
+    "calls": 4,
+    "boundary": false,
+    "schedule": "defer-all-workers-through-main-jni-boundary"
+  },
+  "workers_after": {
+    "enabled": true,
+    "entries": [
+      3132592
+    ],
+    "records": {
+      "2": {
+        "start": 3132592,
+        "arg": 70643639402880,
+        "state": "pending",
+        "detached": true,
+        "executed": false
+      },
+      "3": {
+        "start": 3132592,
+        "arg": 70643638879360,
+        "state": "pending",
+        "detached": true,
+        "executed": false
+      }
+    },
+    "keys": {},
+    "calls": 4,
+    "boundary": false,
+    "schedule": "defer-all-workers-through-main-jni-boundary"
+  },
+  "pending_exception": null,
+  "output_checkpoint_sha256": "037e49c09fa15750aef36853a0b0bde9874e73ff3abb0e6944b29602c4c3e635",
+  "frontier_details": {
+    "operation": "getenv",
+    "requested_key": "TMPDIR",
+    "key_address": "0x421c6",
+    "key_original_file_offset": "0x421c6",
+    "key_bytes_hex": "544d5044495200",
+    "key_overlapped_by_checkpoint_patches": false,
+    "lazy_import_relocation_index": 121,
+    "caller_return": "0x311792",
+    "strict_stop_preserved": true,
+    "host_environment_read": false
+  },
+  "selected_counter_deltas": {
+    "fopen_calls": 0,
+    "fgets_calls": 0,
+    "fclose_calls": 0,
+    "environment_model_calls": 0,
+    "malloc_calls": 0
+  },
+  "workers_identical": true,
+  "synthetic_extracted_config_path": "/fixture/ysm-game/config",
+  "synthetic_path_modified_utf8_length": 24,
+  "result_scope": "Path/reference/string dataflow only; no actual Forge setup success, directory existence, asset processing, or JNI_OnLoad completion established."
+}

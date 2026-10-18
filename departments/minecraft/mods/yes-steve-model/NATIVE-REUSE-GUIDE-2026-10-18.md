@@ -77,3 +77,7 @@ A second [focused original-byte review](NATIVE-SHUTDOWN-GL-FOCUSED-REVIEW-2026-1
 A third [focused original-byte review](NATIVE-GENERIC-TRANSFORM-FOCUSED-REVIEW-2026-10-18.json) checked the generic derivation/block transforms, fixed round-count propagation, state layout and counter/tail writes. No contradiction was found within those claims; actual backend selection and whole-project correctness remain unproven.
 
 A fourth [focused review](NATIVE-KEYFRAME-JOIN-FOCUSED-REVIEW-2026-10-18.md) independently checked the six component pairs, low-byte rotation flag, timestamp narrowing, contiguous reference alias and AllocObject distinction.120 mechanical checks passed with one corrected interface/enum terminology issue. Metadata payload decoding was inherited, not repeated; this is not whole-project/runtime approval.
+
+## Explicit virtual Forge path frontier
+
+[Reviewed Path model and bounded continuation](NATIVE-FORGE-PATH-CONTINUATION-2026-10-18.md) documents the synthetic config path, 71 scoped tests, independent review and strict next secure_getenv("TMPDIR") stop. This does not prove real Forge setup or filesystem success.
