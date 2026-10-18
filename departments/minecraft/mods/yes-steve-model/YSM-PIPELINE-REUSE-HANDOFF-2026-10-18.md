@@ -77,3 +77,5 @@ Entity input の再利用なら最上段、Molang 実装なら evaluator と必�
 追加の独立確認： [Bedrock producer invariant の限定意味レビュー](BEDROCK-QUEUE-INDEPENDENT-REVIEW-2026-10-18.md)は条件付き証明を支持。閾値は binary32 の正確値、共通の遷移終了は境界到達時の条件付きであり、時計の進行自体は保証しない。全体の意味レビューや実動作確認が完了した意味ではない。
 
 呼出順序の追加確認：[Controller visitation order](CONTROLLER-VISITATION-ORDER-2026-10-18.md)。原本は controller A の process→visit、B の process→visit、最後に共通 bone commit。全controllerのprocessを一括先行する順序へ変更しない。shouldTick=false でも visit と dirty更新は行われ、前回の処理完了を保証する旗ではない。
+
+制御命令の有効期間：[coded control capability](CODED-CONTROL-CAPABILITY-LIFETIME-2026-10-18.md)。通常は predicate 中だけイベントに制御先を設定し、その後の点計算前に消去する。子contextは同じイベントを共有。例外・再入は別扱い。[非同期イベントの受渡し](ASYNC-EVENT-CAPABILITY-PUBLICATION-2026-10-18.md)では、正常結果を描画側が新たなMolang contextへ入れ直す経路は見つからず、描画補助は主にメタデータ・脚の数値を利用する。Futureの消去やnull結果を、共有配列の安全・処理完了の証拠にしない。両節は限定独立レビュー済み。

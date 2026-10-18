@@ -1,0 +1,278 @@
+{
+  "status": "INDEPENDENT_BOUNDED_SEMANTIC_REVIEW",
+  "jar_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "class_count": 955,
+  "snapshot_match": {
+    "visitation-evidence.json": true,
+    "control-capability-evidence.json": true
+  },
+  "visitor_calls": [
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Ljava/util/function/Consumer;)V"
+      },
+      "instruction": {
+        "offset": 29,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Ljava/util/function/Consumer;)V",
+          "cp_tag": 10
+        }
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/OOOooo0o0OOOO0O0OOoOo0OO",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Lcom/elfmcys/yesstevemodel/O0O00Oo0o0oO0oo0oO00OOoO;ZZ)V"
+      },
+      "instruction": {
+        "offset": 191,
+        "opcode": "0xb9",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/OoOoOO0O00oOoO0o0ooOO0oO",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Ljava/util/function/Consumer;)V",
+          "cp_tag": 11
+        }
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/oO00oooOoOo0O0oOo000o0Oo",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Ljava/util/function/Consumer;)V"
+      },
+      "instruction": {
+        "offset": 5,
+        "opcode": "0xb9",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/OoOoOO0O00oOoO0o0ooOO0oO",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Ljava/util/function/Consumer;)V",
+          "cp_tag": 11
+        }
+      }
+    }
+  ],
+  "event_field_writes": [
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Lcom/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO;)V"
+      },
+      "instruction": {
+        "offset": 2,
+        "opcode": "0xb5",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+          "name": "o0OOooo0o0OO00OoOOOo0o0O",
+          "descriptor": "Lcom/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO;",
+          "cp_tag": 9
+        }
+      }
+    }
+  ],
+  "event_setter_calls": [
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;Z)V"
+      },
+      "instruction": {
+        "offset": 2,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Lcom/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO;)V",
+          "cp_tag": 10
+        }
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;Z)V"
+      },
+      "instruction": {
+        "offset": 32,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Lcom/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO;)V",
+          "cp_tag": 10
+        }
+      }
+    }
+  ],
+  "event_family": [
+    "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00"
+  ],
+  "bedrock_depth_writes": [
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+        "name": "<init>",
+        "descriptor": "(Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;Ljava/lang/String;F)V"
+      },
+      "instruction": {
+        "offset": 87,
+        "opcode": "0xb5",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+          "name": "OO0ooO00OoO00o0OO0OOooO0",
+          "descriptor": "I",
+          "cp_tag": 9
+        }
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Ljava/lang/String;I)V"
+      },
+      "instruction": {
+        "offset": 7,
+        "opcode": "0xb5",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+          "name": "OO0ooO00OoO00o0OO0OOooO0",
+          "descriptor": "I",
+          "cp_tag": 9
+        }
+      }
+    }
+  ],
+  "bedrock_set_hierarchy_calls": [
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;Z)V"
+      },
+      "instruction": {
+        "offset": 252,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Ljava/lang/String;I)V",
+          "cp_tag": 10
+        }
+      }
+    }
+  ],
+  "bedrock_child_writes": [
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;Z)V"
+      },
+      "instruction": {
+        "offset": 212,
+        "opcode": "0xb5",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+          "name": "Ooo0O0000OO0OOO0o0Oo0oOO",
+          "descriptor": "Lcom/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO;",
+          "cp_tag": 9
+        }
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+        "name": "oOOOo0OOO0ooooo0O00OO0o0",
+        "descriptor": "()V"
+      },
+      "instruction": {
+        "offset": 46,
+        "opcode": "0xb5",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+          "name": "Ooo0O0000OO0OOO0o0Oo0oOO",
+          "descriptor": "Lcom/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO;",
+          "cp_tag": 9
+        }
+      }
+    }
+  ],
+  "limits": "Fresh parse, same audited parser implementation; not independent-parser validation; no target execution.",
+  "bootstrap_visitor_handles": [],
+  "bootstrap_event_writer_handles": [],
+  "source_checks": [
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/controller/IAnimationController.java",
+      "sha256": "23b8f5c7b112fd7522f342cd8c6703809f4525fe4d7521a7c85e95073a07de6d",
+      "matches_pinned_source_and_primary_hash": true
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/controller/BedrockAnimationController.java",
+      "sha256": "9e19c878f2df8fe2f9f8deae14506ad04a5d19f425984f2e912bf3b1c5e5214a",
+      "matches_pinned_source_and_primary_hash": true
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/controller/HybridAnimationController.java",
+      "sha256": "f0ac2decd9d0b14a754a9383a9e5f8baa16c66826ccd137313cd54721073a353",
+      "matches_pinned_source_and_primary_hash": true
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/processor/AnimationProcessor.java",
+      "sha256": "e9354fedf1a77a1729474f40965256c6b503b1f90741e97faee7638f352d92cf",
+      "matches_pinned_source_and_primary_hash": true
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/event/predicate/AnimationEvent.java",
+      "sha256": "e40c327392760b8d95b59032a7e1dfbacdf616d95ee2e06048c1e0eb5d21d38b",
+      "matches_pinned_source_and_primary_hash": true
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/molang/context/MolangContext.java",
+      "sha256": "e47a7884eda1f3c1c6af8986c9487f39748c40d5f39b2bbfe3456a20185eaacd",
+      "matches_pinned_source_and_primary_hash": true
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/controller/CodedAnimationController.java",
+      "sha256": "9b24616ff4f0ecdcb5aaeb7b810ce6eca3cdac46e2b103d93b2253fe223c58ba",
+      "matches_pinned_source_and_primary_hash": true
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/model/AnimatableEntity.java",
+      "sha256": "8057707eb54d8446567c3656e1e4edf5ef8bb41febb243325623ade07d783ad7",
+      "matches_pinned_source_and_primary_hash": true
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/functions/SetAnimation.java",
+      "sha256": "34bae22f6894971bd574a74d2fef4fe627f62dd78f164d734ba101eca16e7f02",
+      "matches_pinned_source_and_primary_hash": true
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/functions/SetBeginningTransitionLength.java",
+      "sha256": "781a26d0e35bc9b97a6377442adb0db2fe24b1f56c5cf22e06ba4d1e3cc9b44a",
+      "matches_pinned_source_and_primary_hash": true
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/functions/ResetController.java",
+      "sha256": "036647a4fea8201c5d077606c04cc55bc00f4809602f62540e76e5e520b4d862",
+      "matches_pinned_source_and_primary_hash": true
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/functions/IndicateReload.java",
+      "sha256": "0e42a77660e5bc4b4a6293598820841ee2edacda4b0afd5332196349407eca9a",
+      "matches_pinned_source_and_primary_hash": true
+    }
+  ],
+  "source_artifact_equivalence": "NOT_ESTABLISHED",
+  "source_revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6"
+}

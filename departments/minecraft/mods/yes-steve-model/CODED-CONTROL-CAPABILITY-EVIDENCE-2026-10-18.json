@@ -1,0 +1,311 @@
+{
+  "jar_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "class_count": 955,
+  "event_field": {
+    "access": 4,
+    "name": "o0OOooo0o0OO00OoOOOo0o0O",
+    "descriptor": "Lcom/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO;"
+  },
+  "setter": {
+    "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+    "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+    "descriptor": "(Lcom/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO;)V"
+  },
+  "getter": {
+    "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+    "name": "o0OOO0o0o0OOo000oO00o00O",
+    "descriptor": "()Lcom/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO;"
+  },
+  "field_writes": [
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Lcom/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO;)V"
+      },
+      "instruction": {
+        "offset": 2,
+        "opcode": "0xb5",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+          "name": "o0OOooo0o0OO00OoOOOo0o0O",
+          "descriptor": "Lcom/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO;",
+          "cp_tag": 9
+        }
+      }
+    }
+  ],
+  "setter_calls": [
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;Z)V"
+      },
+      "instruction": {
+        "offset": 2,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Lcom/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO;)V",
+          "cp_tag": 10
+        }
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;Z)V"
+      },
+      "instruction": {
+        "offset": 32,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Lcom/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO;)V",
+          "cp_tag": 10
+        }
+      }
+    }
+  ],
+  "status": "PRIMARY_STATIC_REVIEW_ONLY",
+  "event_family": [
+    "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00"
+  ],
+  "bootstrap_writer_handles": [],
+  "checks": {
+    "one_direct_field_writer": true,
+    "two_direct_setter_calls": true,
+    "no_event_subclasses": true,
+    "no_bootstrap_writer_handles": true,
+    "publish_this_1": true,
+    "clear_null_31": true,
+    "no_process_handlers": true,
+    "fresh_event_411": true,
+    "fresh_context_459": true,
+    "com/elfmcys/yesstevemodel/o0Oo0oO0OO00O0ooOo0o0Ooo:get_event_9": true,
+    "com/elfmcys/yesstevemodel/o0Oo0oO0OO00O0ooOo0o0Ooo:get_controller_14": true,
+    "com/elfmcys/yesstevemodel/o0Oo0oO0OO00O0ooOo0o0Ooo:null_guard_19": true,
+    "com/elfmcys/yesstevemodel/OOo00o0o0oo0oOOOoOOOoooO:get_event_9": true,
+    "com/elfmcys/yesstevemodel/OOo00o0o0oo0oOOOoOOOoooO:get_controller_14": true,
+    "com/elfmcys/yesstevemodel/OOo00o0o0oo0oOOOoOOOoooO:null_guard_19": true,
+    "com/elfmcys/yesstevemodel/ooOoo0OooooOOOO0oOoO0OOo:get_event_9": true,
+    "com/elfmcys/yesstevemodel/ooOoo0OooooOOOO0oOoO0OOo:get_controller_14": true,
+    "com/elfmcys/yesstevemodel/ooOoo0OooooOOOO0oOoO0OOo:null_guard_19": true,
+    "com/elfmcys/yesstevemodel/O0o00oo0Oo0O0oo0oOOOOOOO:get_event_9": true,
+    "com/elfmcys/yesstevemodel/O0o00oo0Oo0O0oo0oOOOOOOO:get_controller_14": true,
+    "com/elfmcys/yesstevemodel/O0o00oo0Oo0O0oo0oOOOOOOO:null_guard_19": true
+  },
+  "source_revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+  "source_artifact_equivalence": "NOT_ESTABLISHED",
+  "sources": [
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/event/predicate/AnimationEvent.java",
+      "sha256": "e40c327392760b8d95b59032a7e1dfbacdf616d95ee2e06048c1e0eb5d21d38b",
+      "matches_pinned_git_blob": true
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/molang/context/MolangContext.java",
+      "sha256": "e47a7884eda1f3c1c6af8986c9487f39748c40d5f39b2bbfe3456a20185eaacd",
+      "matches_pinned_git_blob": true
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/controller/CodedAnimationController.java",
+      "sha256": "9b24616ff4f0ecdcb5aaeb7b810ce6eca3cdac46e2b103d93b2253fe223c58ba",
+      "matches_pinned_git_blob": true
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/model/AnimatableEntity.java",
+      "sha256": "8057707eb54d8446567c3656e1e4edf5ef8bb41febb243325623ade07d783ad7",
+      "matches_pinned_git_blob": true
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/functions/SetAnimation.java",
+      "sha256": "34bae22f6894971bd574a74d2fef4fe627f62dd78f164d734ba101eca16e7f02",
+      "matches_pinned_git_blob": true
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/functions/SetBeginningTransitionLength.java",
+      "sha256": "781a26d0e35bc9b97a6377442adb0db2fe24b1f56c5cf22e06ba4d1e3cc9b44a",
+      "matches_pinned_git_blob": true
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/functions/ResetController.java",
+      "sha256": "036647a4fea8201c5d077606c04cc55bc00f4809602f62540e76e5e520b4d862",
+      "matches_pinned_git_blob": true
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/client/animation/molang/functions/IndicateReload.java",
+      "sha256": "0e42a77660e5bc4b4a6293598820841ee2edacda4b0afd5332196349407eca9a",
+      "matches_pinned_git_blob": true
+    }
+  ],
+  "method_digests": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0o00oo0Oo0O0oo0oOOOOOOO",
+      "name": "<init>",
+      "descriptor": "()V",
+      "code_sha256": "2235d032ec0f6171a15233996a754d78c478c8f6d4b9761c234da33d638baec5"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0o00oo0Oo0O0oo0oOOOOOOO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo;)Ljava/lang/Object;",
+      "code_sha256": "6c850ad5006a8c7c6d4f32003e742d941af8616b1c56e72471316842aa80c9f8"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O0o00oo0Oo0O0oo0oOOOOOOO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(I)Z",
+      "code_sha256": "8d2442642063de0bb712befaea5919e781d9effdd11a80e4999b363043cdba6f"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+      "name": "<init>",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;FFIFFZZLcom/elfmcys/yesstevemodel/O00OoOOOOoOOOO0OOOoO0ooO;)V",
+      "code_sha256": "cfa9e2e59f7b5b51ec0585cf3d4b184a994b7d277871c439c9edc66b3e35b082"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()F",
+      "code_sha256": "c915145895eeca964c8a053cefb005df4529cb5eb563945ac115c5c62f3fa6ac"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;",
+      "code_sha256": "7e0bb919657973bf0959e14569eb267b15bb4e98602248480db68213179c69da"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+      "name": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "()F",
+      "code_sha256": "bb23e3f13f386b7d33e8a569e675917e4cc0f6cd19965d33d68a74742313654f"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+      "name": "oOOOo0OOO0ooooo0O00OO0o0",
+      "descriptor": "()F",
+      "code_sha256": "2304b021a2f525e36bd044f3c29338eeaa061883b5920ff15e74eeb319795b1b"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+      "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+      "descriptor": "()I",
+      "code_sha256": "7bf6b5cc666f60bedfb13ccd693d36ee92ac8e956b5163748e135ddb3486b434"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+      "name": "Ooooo0oooO0oooOOOoO0000O",
+      "descriptor": "()F",
+      "code_sha256": "857843701b2f57eb686b67528017f93d4cebf828b924be0aa333bd5e88a327f3"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+      "name": "oo0OoO00oOoo000O0000o0oo",
+      "descriptor": "()F",
+      "code_sha256": "68d7163fac05c98c7126f378a9bc1c5037fd9b8b3051f9b2eacc426b3d05c969"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+      "name": "oooooooOOoOOoO00OooOo00O",
+      "descriptor": "()Z",
+      "code_sha256": "2e30ef1c3aae3b8c8eefea14efc5a78d998ec9158a497ca82d178565b0e86c66"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+      "name": "Oo00o0OooOOo0ooOoo0oO0o0",
+      "descriptor": "()Z",
+      "code_sha256": "af19463efa3d2fc2df00c427099b4c4fcd4128fce10dbf35968a60ca5ba2bc38"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+      "name": "o0OOO0o0o0OOo000oO00o00O",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO;",
+      "code_sha256": "bd7d4a99544878db0893d2e2fc82f01c2509fd39b08c19d47cfd9a4431b18ef9"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO;)V",
+      "code_sha256": "24c72b18ea4bf24a0664a7442f43216a0af66a95654c0bfcb7e2ffa73de3290d"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+      "name": "O0OooOo0oOOoOoOoOooO000o",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/O00OoOOOOoOOOO0OOOoO0ooO;",
+      "code_sha256": "467a97148fa9d245fc85693c97f83c6dab9a7e191883cab77106c605b83a67ca"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOo00o0o0oo0oOOOoOOOoooO",
+      "name": "<init>",
+      "descriptor": "()V",
+      "code_sha256": "2235d032ec0f6171a15233996a754d78c478c8f6d4b9761c234da33d638baec5"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOo00o0o0oo0oOOOoOOOoooO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo;)Ljava/lang/Object;",
+      "code_sha256": "5d0c4a90065550a53257020647dae08b7b5486047ba112d7502ddb5309a481db"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOo00o0o0oo0oOOOoOOOoooO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(I)Z",
+      "code_sha256": "822178f12d8cccf5040079edb8c4a8e1ba791e49c092a81ebe91c7bddf481cdd"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(FZ)Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;",
+      "code_sha256": "3cd63d85cb89ba889f28687644235bd771f2524bf6f232758fdb92f90331a67b"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0Oo0oO0OO00O0ooOo0o0Ooo",
+      "name": "<init>",
+      "descriptor": "()V",
+      "code_sha256": "2235d032ec0f6171a15233996a754d78c478c8f6d4b9761c234da33d638baec5"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0Oo0oO0OO00O0ooOo0o0Ooo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo;)Ljava/lang/Object;",
+      "code_sha256": "08e3fa96886128aa05b2b0cfc389f1aa3eed78ae1e8b63efaaed358dcc593f1e"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/o0Oo0oO0OO00O0ooOo0o0Ooo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(I)Z",
+      "code_sha256": "0b39364242cf84355c26a1b144cdc84b3d573aaa253c74f2aafa8607b48dee99"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;Z)V",
+      "code_sha256": "8695c5538f65381a2ae622655b7f310e0c9d9562a49209cff8cf528d3d91e7a8"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/ooOoo0OooooOOOO0oOoO0OOo",
+      "name": "<init>",
+      "descriptor": "()V",
+      "code_sha256": "2235d032ec0f6171a15233996a754d78c478c8f6d4b9761c234da33d638baec5"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/ooOoo0OooooOOOO0oOoO0OOo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo;)Ljava/lang/Object;",
+      "code_sha256": "43789f0be1d524c42739c79cf1ee62a193198a7c6da081c598cca9b3bf277558"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/ooOoo0OooooOOOO0oOoO0OOo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(I)Z",
+      "code_sha256": "8d2442642063de0bb712befaea5919e781d9effdd11a80e4999b363043cdba6f"
+    }
+  ],
+  "scope": "Direct classfile references only; excludes external/reflection/JNI/reentry. No target execution."
+}

@@ -1,0 +1,424 @@
+{
+  "status": "INDEPENDENT_BOUNDED_SEMANTIC_REVIEW_ACCEPT_WITH_CONSUMER_PRECISION_CORRECTION",
+  "jar_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "class_count": 955,
+  "all_async_snapshots_match_fresh_parse": true,
+  "submission_bootstrap": {
+    "method_handle": {
+      "cp_tag": 15,
+      "reference_kind": 6,
+      "reference": {
+        "cp_tag": 10,
+        "owner": "java/lang/invoke/LambdaMetafactory",
+        "name": "metafactory",
+        "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+      }
+    },
+    "arguments": [
+      {
+        "cp_tag": 16,
+        "value": "()Ljava/lang/Object;"
+      },
+      {
+        "cp_tag": 15,
+        "reference_kind": 5,
+        "reference": {
+          "cp_tag": 10,
+          "owner": "com/elfmcys/yesstevemodel/oOo00OoOO00O000ooO0Oo00o",
+          "name": "O00OOOooOoooOoo0o0o0oO0O",
+          "descriptor": "(F)Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;"
+        }
+      },
+      {
+        "cp_tag": 16,
+        "value": "()Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;"
+      }
+    ]
+  },
+  "renderer_event_local_uses": [
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/OOoo0o0oO000ooO0Oo00OoOo",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Lcom/elfmcys/yesstevemodel/o0O0oOooOo0OoOo0oOo00O00;Lnet/minecraft/resources/ResourceLocation;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V"
+      },
+      "event_local_slot": 8,
+      "loads": [
+        {
+          "load_offset": 57,
+          "following_instructions": [
+            {
+              "offset": 59,
+              "opcode": "0xc6",
+              "branch_target": 573
+            },
+            {
+              "offset": 62,
+              "opcode": "0x19"
+            }
+          ]
+        },
+        {
+          "load_offset": 70,
+          "following_instructions": [
+            {
+              "offset": 72,
+              "opcode": "0xb6",
+              "reference": {
+                "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+                "name": "O0OooOo0oOOoOoOoOooO000o",
+                "descriptor": "()Lcom/elfmcys/yesstevemodel/O00OoOOOOoOOOO0OOOoO0ooO;",
+                "cp_tag": 10
+              }
+            },
+            {
+              "offset": 75,
+              "opcode": "0x3a"
+            }
+          ]
+        },
+        {
+          "load_offset": 453,
+          "following_instructions": [
+            {
+              "offset": 455,
+              "opcode": "0x19"
+            },
+            {
+              "offset": 457,
+              "opcode": "0xb6",
+              "reference": {
+                "owner": "com/elfmcys/yesstevemodel/OOoo0o0oO000ooO0Oo00OoOo",
+                "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+                "descriptor": "(Lcom/elfmcys/yesstevemodel/o0O0oOooOo0OoOo0oOo00O00;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Lcom/elfmcys/yesstevemodel/O00OoOOOOoOOOO0OOOoO0ooO;)V",
+                "cp_tag": 10
+              }
+            }
+          ]
+        },
+        {
+          "load_offset": 561,
+          "following_instructions": [
+            {
+              "offset": 563,
+              "opcode": "0x19"
+            },
+            {
+              "offset": 565,
+              "opcode": "0xb6",
+              "reference": {
+                "owner": "com/elfmcys/yesstevemodel/OOoo0o0oO000ooO0Oo00OoOo",
+                "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+                "descriptor": "(Lcom/elfmcys/yesstevemodel/o0O0oOooOo0OoOo0oOo00O00;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Lcom/elfmcys/yesstevemodel/O00OoOOOOoOOOO0OOOoO0ooO;)V",
+                "cp_tag": 10
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/Oo00o0oOoo00O00ooooOo0OO",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V"
+      },
+      "event_local_slot": 7,
+      "loads": [
+        {
+          "load_offset": 12,
+          "following_instructions": [
+            {
+              "offset": 14,
+              "opcode": "0xc6",
+              "branch_target": 275
+            },
+            {
+              "offset": 17,
+              "opcode": "0x19"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/o0oo00OoO00OO0Oo0oo00ooo",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Lnet/minecraft/client/player/LocalPlayer;Lcom/elfmcys/yesstevemodel/oOo0oO0OOo0ooOoo0oOo0oOo;Lcom/elfmcys/yesstevemodel/o0OOO0o0o0OOo000oO00o00O;Lnet/minecraft/world/entity/HumanoidArm;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IF)V"
+      },
+      "event_local_slot": 9,
+      "loads": [
+        {
+          "load_offset": 49,
+          "following_instructions": [
+            {
+              "offset": 51,
+              "opcode": "0xc7",
+              "branch_target": 55
+            },
+            {
+              "offset": 54,
+              "opcode": "0xb1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/oOoOOO0OOOoo000O0o0oo0OO",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V"
+      },
+      "event_local_slot": 7,
+      "loads": [
+        {
+          "load_offset": 12,
+          "following_instructions": [
+            {
+              "offset": 14,
+              "opcode": "0xc6",
+              "branch_target": 232
+            },
+            {
+              "offset": 17,
+              "opcode": "0x19"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "humanoid_helper_declarations_in_renderer_family": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/O00OOo0oo0O000OOooOOooOo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/o0O0oOooOo0OoOo0oOo00O00;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Lcom/elfmcys/yesstevemodel/O00OoOOOOoOOOO0OOOoO0ooO;)V",
+      "code_sha256": "88f6c291ca19e324400e899e8ab98a3da958db34783f16291400674252f05f4a"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOoo0o0oO000ooO0Oo00OoOo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/o0O0oOooOo0OoOo0oOo00O00;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Lcom/elfmcys/yesstevemodel/O00OoOOOOoOOOO0OOOoO0ooO;)V",
+      "code_sha256": "9dce15d7294e2aab5a76b9b141857cc1fa3b140f48fbccabdf29ef6e06221e30"
+    }
+  ],
+  "helper_event_member_calls": [
+    {
+      "offset": 43,
+      "opcode": "0xb6",
+      "reference": {
+        "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+        "name": "O00OOOooOoooOoo0o0o0oO0O",
+        "descriptor": "()F",
+        "cp_tag": 10
+      }
+    },
+    {
+      "offset": 48,
+      "opcode": "0xb6",
+      "reference": {
+        "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+        "name": "oOOOo0OOO0ooooo0O00OO0o0",
+        "descriptor": "()F",
+        "cp_tag": 10
+      }
+    }
+  ],
+  "helper_layer_call": {
+    "offset": 67,
+    "opcode": "0xb6",
+    "reference": {
+      "owner": "com/elfmcys/yesstevemodel/Ooo0O0OOOoOo000OO000oooo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;FFFFFF)V",
+      "cp_tag": 10
+    }
+  },
+  "context_constructor_calls": [
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/O0O00Oo0o0oO0oo0oO00OOoO",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Ljava/lang/Object;)Lcom/elfmcys/yesstevemodel/oo0oOO0000o0Ooooo0OoOo0O;"
+      },
+      "instruction": {
+        "offset": 6,
+        "opcode": "0xb7",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/O0O00Oo0o0oO0oo0oO00OOoO",
+          "name": "<init>",
+          "descriptor": "(Ljava/lang/Object;Lcom/elfmcys/yesstevemodel/O0O00Oo0o0oO0oo0oO00OOoO;)V",
+          "cp_tag": 10
+        }
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo",
+        "name": "o0OOooo0o0OO00OoOOOo0o0O",
+        "descriptor": "(FZ)Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;"
+      },
+      "instruction": {
+        "offset": 469,
+        "opcode": "0xb7",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/O0O00Oo0o0oO0oo0oO00OOoO",
+          "name": "<init>",
+          "descriptor": "(Ljava/lang/Object;Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Lcom/elfmcys/yesstevemodel/O00OoOOOOoOOOO0OOOoO0ooO;)V",
+          "cp_tag": 10
+        }
+      }
+    }
+  ],
+  "source_artifact_equivalence": "NOT_ESTABLISHED",
+  "limits": [
+    "Same parser implementation reused; independent semantic review, not independent-parser validation",
+    "No worker execution or whole scheduler/coherence review",
+    "External renderer helper overrides and callback escape excluded"
+  ],
+  "source_checks": [
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/client/entity/CustomEntity.java",
+      "sha256": "f1d6924017b087a89ed03868be2d7e55be237edf0d8522adccb013a41f7e809c",
+      "matches_pinned_git_blob": true
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/model/AnimatableEntity.java",
+      "sha256": "8057707eb54d8446567c3656e1e4edf5ef8bb41febb243325623ade07d783ad7",
+      "matches_pinned_git_blob": true
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/molang/context/MolangContext.java",
+      "sha256": "e47a7884eda1f3c1c6af8986c9487f39748c40d5f39b2bbfe3456a20185eaacd",
+      "matches_pinned_git_blob": true
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/geo/GeoReplacedEntityRenderer.java",
+      "sha256": "e2304eea61dd72ce6cb32cbeb8ac4832e32ef20a831ed1e2057a36047b8baa5c",
+      "matches_pinned_git_blob": true
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/geo/GeoEntityRenderer.java",
+      "sha256": "b75697f58f987fd99cb108eae7fd5366e97ecf71fad50fc9e50ef038adde818b",
+      "matches_pinned_git_blob": true
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/geo/GeoProjectilesRenderer.java",
+      "sha256": "2a10be03ffc043417e4989c342552656709e1f99c1c4eb80a05d47c9483d0386",
+      "matches_pinned_git_blob": true
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/client/renderer/CustomFirstPersonArmRenderer.java",
+      "sha256": "5434f9d6f365ce4f268b4bae09ae9896ced4a9623bd3baa3b65eea619fb4650b",
+      "matches_pinned_git_blob": true
+    }
+  ],
+  "helper_chain": [
+    {
+      "method": {
+        "owner": "com/elfmcys/yesstevemodel/O00OOo0oo0O000OOooOOooOo",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Lcom/elfmcys/yesstevemodel/Ooo0OOOOOoooo0oo00OoO0oO;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Lcom/elfmcys/yesstevemodel/O00OoOOOOoOOOO0OOOoO0ooO;)V",
+        "access": 4,
+        "code_sha256": "6d39731b1b2db1b87738ad0e17dc58f0d0ee5f527daa4ed47fde7a106ed9a10c"
+      },
+      "calls": [
+        {
+          "offset": 49,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "()F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 54,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "()F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 73,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/github/tartaricacid/touhoulittlemaid/geckolib3/geo/GeoLayerRenderer",
+            "name": "render",
+            "descriptor": "(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/world/entity/Entity;FFFFFF)V",
+            "cp_tag": 10
+          }
+        }
+      ]
+    },
+    {
+      "method": {
+        "owner": "com/elfmcys/yesstevemodel/O00OOo0oo0O000OOooOOooOo",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Lcom/elfmcys/yesstevemodel/o0O0oOooOo0OoOo0oOo00O00;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Lcom/elfmcys/yesstevemodel/O00OoOOOOoOOOO0OOOoO0ooO;)V",
+        "access": 4164,
+        "code_sha256": "88f6c291ca19e324400e899e8ab98a3da958db34783f16291400674252f05f4a"
+      },
+      "calls": [
+        {
+          "offset": 15,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/O00OOo0oo0O000OOooOOooOo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/elfmcys/yesstevemodel/Ooo0OOOOOoooo0oo00OoO0oO;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Lcom/elfmcys/yesstevemodel/O00OoOOOOoOOOO0OOOoO0ooO;)V",
+            "cp_tag": 10
+          }
+        }
+      ]
+    },
+    {
+      "method": {
+        "owner": "com/elfmcys/yesstevemodel/OOoo0o0oO000ooO0Oo00OoOo",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Lcom/elfmcys/yesstevemodel/o0O0oOooOo0OoOo0oOo00O00;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Lcom/elfmcys/yesstevemodel/O00OoOOOOoOOOO0OOOoO0ooO;)V",
+        "access": 4,
+        "code_sha256": "9dce15d7294e2aab5a76b9b141857cc1fa3b140f48fbccabdf29ef6e06221e30"
+      },
+      "calls": [
+        {
+          "offset": 43,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+            "name": "O00OOOooOoooOoo0o0o0oO0O",
+            "descriptor": "()F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 48,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00",
+            "name": "oOOOo0OOO0ooooo0O00OO0o0",
+            "descriptor": "()F",
+            "cp_tag": 10
+          }
+        },
+        {
+          "offset": 67,
+          "opcode": "0xb6",
+          "reference": {
+            "owner": "com/elfmcys/yesstevemodel/Ooo0O0OOOoOo000OO000oooo",
+            "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+            "descriptor": "(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;FFFFFF)V",
+            "cp_tag": 10
+          }
+        }
+      ]
+    }
+  ],
+  "semantic_result": "Accepted after including base helper and shipped bridge/specialized helper; renderer event use is null gating, metadata, and limb getters, not only null gating and extra data."
+}

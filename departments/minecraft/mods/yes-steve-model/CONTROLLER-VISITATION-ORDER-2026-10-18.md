@@ -1,6 +1,6 @@
 # Controller visitation order: bounded shipped-caller closure
 
-2026-10-18. PRIMARY_STATIC_REVIEW_ONLY; independent review NOT_RUN. Resolves one missing reuse boundary: the ordinary shipped Java call paths that reach controller queue visitation and their ordering relative to player processing. It does not repeat or expand the prior beginning-point subtype proof.
+2026-10-18. BOUNDED_STATIC_JOIN; [independent review ACCEPT_WITH_PRECISION_NOTES](CONTROLLER-EVENT-BOUNDARIES-REVIEW-2026-10-18.md). Resolves one missing reuse boundary: the ordinary shipped Java call paths that reach controller queue visitation and their ordering relative to player processing. It does not repeat or expand the prior beginning-point subtype proof.
 
 ## Finding
 
@@ -69,3 +69,5 @@ Pinned source candidate revision `f184edabd1b5115ce5a24cb6d155ba5a669f5ba6`; fou
 [controller-visitation receipt](CONTROLLER-VISITATION-ORDER-EVIDENCE-2026-10-18.json) contains the three callsite identities, owner hashes, method digests, four source hashes and17 passing structural assertions, with no complete original method bodies. Counts are evidence scope, not completion or independent semantic review. `scan_visitation.py` reproduces the fresh original-class scan; `make_receipt.py` produces the compact receipt. Detailed original snapshots remain only in the Git-external `visitation-evidence.json` research file.
 
 Limits: external classes, reflection, JNI invocation, dynamically synthesized handles, arbitrary callbacks, reentry and actual worker scheduling remain open. No statement here promotes all controllers to subtype-safe, or proves runtime success. The completed gap is the bounded shipped-caller ordering join, with the skipped-tick premise explicitly conditional.
+
+Independent review also verified the ordinary hierarchy prerequisite: constructor depth=1; only the private hierarchy setter changes it; its sole direct call passes parent depth+1; child allocation is inside the depth!=5 branch. Depth-5 nodes therefore do not acquire children in ordinary non-reentrant construction, despite process and visitor having different depth guards. Arbitrary mutation remains excluded.
