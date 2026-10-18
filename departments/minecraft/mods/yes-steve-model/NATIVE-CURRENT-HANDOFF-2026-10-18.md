@@ -1,6 +1,6 @@
 # Current YSM native-analysis handoff — October 18
 
-Read this entry first. Current report: [DT_INIT return](NATIVE-DT-INIT-RETURN-RESULT-2026-10-18.md). Branch: jolly/ysm-analysis-20261016. The project remains unfinished. Older linked reports describe historical states, not today's frontier.
+Read this entry first. Current report: [relocated initializer sequence](NATIVE-RELOCATED-INITIALIZER-SEQUENCE-RESULT-2026-10-18.md). Branch: jolly/ysm-analysis-20261016. The project remains unfinished. Older linked reports describe historical states, not today's frontier.
 
 ## Goal and unchanged confidence
 
@@ -19,9 +19,9 @@ Entry0x152eb19 is simulated with a protected Unicorn2.1.4 backend and explicit s
 
 Two masked CRC32 loops have pinned code/table contracts and60 full-state differential cases. Fifteen summaries cover528,156,776 logical loop-instruction effects; these are not actually interpreted instruction counts. CRC acceleration turns off conservatively after any working-image mutation.
 
-Current working-image ledger contains two eight-byte context/object pointers at0xedf060 and0xedf068. A fresh full run now completes DT_INIT:3,290,734 native instruction/model invocations, final RET0x1d963d, declared return sentinel and exact post-return stack. This is conditional DT_INIT completion only;45 init-array callbacks and JNI lifecycle remain.
+DT_INIT produces two eight-byte context/object pointers at0xedf060 and0xedf068. In-progress callback0 adds126 further runtime write events; the latest ledger totals8812 loader fixups plus128 runtime events(999 runtime bytes). A fresh full run now completes DT_INIT:3,290,734 native instruction/model invocations, final RET0x1d963d, declared return sentinel and exact post-return stack. The deterministic8812 RELATIVE-fixup scenario also returns in the same count. Init-array callback0 now stops at __newlocale(0x40,"C",0), lazy index133/slot0x184d440. Zero of45 callbacks have completed; JNI lifecycle remains.
 
-The latest completed-DT_INIT checkpoint preserves full CPU/private/image/model state and CRC diagnostics. Prepare the next callback frame rather than resuming its sentinel RIP. Early snapshots omitted CRC diagnostic counts; their prior CRC history is now explicitly marked incomplete. Architectural/private-state restart equivalence was independently checked against a fresh full-prefix run; see the checkpoint report for exact scope.
+The latest sequence checkpoint preserves relocated working state and callback0's in-progress frame. Continue it using native_initializer_sequence_ysm_265.py rather than resetting the callback. Older completed-DT_INIT snapshots belong to the separate unrelocated scenario. Early snapshots omitted CRC diagnostic counts; their prior CRC history is now explicitly marked incomplete. Architectural/private-state restart equivalence was independently checked against a fresh full-prefix run; see the checkpoint report for exact scope.
 
 ## Reuse and runtime contracts
 
@@ -54,3 +54,5 @@ These reports retain exact previous scopes, source hashes and limitations. Do no
 - [bounded result](NATIVE-BOUNDED-SIMULATION-RESULT-2026-10-18.md)
 
 - [working-image/checkpoint evidence](NATIVE-SHADOW-CHECKPOINT-RESULT-2026-10-18.md)
+
+- [DT_INIT return evidence](NATIVE-DT-INIT-RETURN-RESULT-2026-10-18.md)

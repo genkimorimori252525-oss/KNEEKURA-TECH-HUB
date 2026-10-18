@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "scenario": "Deterministic symbol-zero RELATIVE working-image loader view atbase0; other relocation types remain unresolved; synthetic environment inputs retained",
+  "trace_sha256": "7d0fb17fbe7bb29d14ee32a7c9124e977befc08c7b343f26fbc183cbfd38bc5a",
+  "checkpoint_sha256": "56b47c7a8432da64fafd3d8b4ed0d7bf97a64b2087cd0862294d3d8c3b5a77fd",
+  "relative_fixups": 8812,
+  "relative_fixup_bytes": 70496,
+  "remaining_relocation_entries": 302,
+  "dt_init_completed_steps": 3290734,
+  "completed_init_array_callbacks": 0,
+  "active_init_array_index": 0,
+  "frontier_symbol": "__newlocale",
+  "frontier_jmprel_index": 133,
+  "frontier_slot": "0x184d440",
+  "frontier_arguments": {
+    "category_mask": 64,
+    "locale": "C",
+    "base": 0
+  },
+  "receipt": [
+    "LOADER_RELATIVE_VIEW\tevents=8812\tbytes=70496\tanalysis_base=0\texternal_symbols_unresolved=true\thost_loader_called=false\treference_file_unchanged=true",
+    "INITIALIZER_CALL\tphase=dt-init\tindex=0\tentry=152eb19\targc_argv_envp=synthetic-zero\tcaller_saved_registers=synthetic-zero\tflags=202",
+    "LAZY_IMPORT_FRONTIER\trelocation_index=250\tcaller_return=ee159c",
+    "LAZY_IMPORT_FRONTIER\trelocation_index=250\tcaller_return=ee16db",
+    "LAZY_IMPORT_FRONTIER\trelocation_index=205\tcaller_return=107f7f2",
+    "LAZY_IMPORT_FRONTIER\trelocation_index=197\tcaller_return=ee16e1",
+    "STOP\tENTRY_RETURN\tpc=1d963d\taddress=7fff00000000\tsize=0",
+    "COUNTS\tattempted=3290734\tcompleted=3290734\trollbacks=0\tmodeled_copy_steps=8225\topaque_byte_copies=776\tvirtual_clock_reads=23\tvirtual_malloc_calls=1\theap_write_events=25\tvirtual_fopen_calls=1\tvirtual_fgets_calls=2\tvirtual_fclose_calls=1\tvirtual_cpuid_calls=2\tvirtual_protection_result_calls=5\tvirtual_platform_calls=2\tvirtual_dladdr_calls=1\tcrc_blocks=15\tcrc_iterations=23591981\tcrc_logical_instructions=528156776",
+    "SHADOW_PRESERVATION\timmutable_reference_unchanged=True\tworking_image_matches_committed_ledger=True\tworking_image_equals_reference=False\tcommitted_events=8814\tcommitted_bytes=70512\tvirtual_operator_new_calls=3\tvirtual_memset_calls=1\tcrc_counter_history_complete=True\tloader_relocation_events=8812\truntime_image_events=2",
+    "INITIALIZER_RETURN\tphase=init-array\tcompleted_callbacks=0",
+    "INITIALIZER_CALL\tphase=init-array\tindex=0\tentry=2b8620\targc_argv_envp=synthetic-zero\tcaller_saved_registers=synthetic-zero\tflags=202",
+    "LAZY_IMPORT_FRONTIER\trelocation_index=133\tcaller_return=2b9dae",
+    "STOP\tUNMODELED_LAZY_IMPORT\tpc=14f9c20\taddress=85\tsize=0",
+    "COUNTS\tattempted=252\tcompleted=251\trollbacks=0\tmodeled_copy_steps=8225\topaque_byte_copies=776\tvirtual_clock_reads=23\tvirtual_malloc_calls=1\theap_write_events=25\tvirtual_fopen_calls=1\tvirtual_fgets_calls=2\tvirtual_fclose_calls=1\tvirtual_cpuid_calls=2\tvirtual_protection_result_calls=5\tvirtual_platform_calls=2\tvirtual_dladdr_calls=1\tcrc_blocks=15\tcrc_iterations=23591981\tcrc_logical_instructions=528156776",
+    "SHADOW_PRESERVATION\timmutable_reference_unchanged=True\tworking_image_matches_committed_ledger=True\tworking_image_equals_reference=False\tcommitted_events=8940\tcommitted_bytes=71495\tvirtual_operator_new_calls=3\tvirtual_memset_calls=1\tcrc_counter_history_complete=True\tloader_relocation_events=8812\truntime_image_events=128",
+    "INITIALIZER_SEQUENCE\tphase=init-array\tcompleted_callbacks=0\ttotal_callbacks=45\tactive_callback=0\tcall_in_progress=True\tcurrent_process_attempted=3290986",
+    "CHECKPOINT_SAVED_SHA256\t56b47c7a8432da64fafd3d8b4ed0d7bf97a64b2087cd0862294d3d8c3b5a77fd"
+  ],
+  "mapping_promotions": 0,
+  "independent_semantic_review": "NOT_RUN",
+  "source_sha256": {
+    "native_elf_loader_view_ysm_265.py": "479bda817a2bcc5ae718b3b7586459ddaf73d6990aa9b1165d7264f046ac44d2",
+    "native_initializer_sequence_ysm_265.py": "9b4dabf111f0ac1540209ea79a9614a6ef2dfb172056cf9f9e2f68f1917a0bcc",
+    "native_shadow_image_ysm_265.py": "f82ce85e9b7eac697e020135fe5f1531ebdd9d6463fb6e7c6ed7de14100b43cc",
+    "native_guarded_checkpoint_ysm_265.py": "8cd4a3aa7b5e1c68343ab4dd847053ceb968e42116d2016f92b656f723a355cf",
+    "native_crc32_loop_profile_ysm_265.py": "ff22a34e96f7484582f3f19cf7978c7275baadc23bba31aab3551130421ab8a2",
+    "test_native_initializer_sequence_ysm_265.py": "23695508e1f6b39ae8a7dda4dd78e3857320e12e08fbff1c15410a69f202fb40"
+  }
+}

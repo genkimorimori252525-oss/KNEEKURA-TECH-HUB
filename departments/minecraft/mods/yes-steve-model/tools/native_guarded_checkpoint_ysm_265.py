@@ -7,7 +7,7 @@ import base64,hashlib,json,zlib,ctypes
 import unicorn
 from unicorn.unicorn_py3.unicorn import UcContext
 from native_unicorn_guarded_ysm_265 import STACK,STACK_SIZE,HEAP,HEAP_SIZE
-FIELDS=('level seed stride clock_reads allocations heap_used malloc_calls fopen_calls fgets_calls fclose_calls file_open file_position accelerate_crc modeled_copies opaque_copies heap_writes rollback_count oracle_checks oracle_enabled virtual_loader dladdr_calls loader_ready virtual_platform platform_calls protection_result protection_calls cpuid_calls shadow_events shadow_bytes lazy_new_calls lazy_memset_calls crc_blocks crc_iterations crc_logical_steps crc_counters_complete').split()
+FIELDS=('level seed stride clock_reads allocations heap_used malloc_calls fopen_calls fgets_calls fclose_calls file_open file_position accelerate_crc modeled_copies opaque_copies heap_writes rollback_count oracle_checks oracle_enabled virtual_loader dladdr_calls loader_ready virtual_platform platform_calls protection_result protection_calls cpuid_calls shadow_events shadow_bytes lazy_new_calls lazy_memset_calls crc_blocks crc_iterations crc_logical_steps crc_counters_complete loader_view_applied loader_relocation_events init_phase init_array_index init_array_completed call_in_progress call_saved').split()
 class ContextHeader(ctypes.Structure):
     # Pinned Unicorn2.1.4 uc_priv.h. Memory snapshot pointers are not CPU state.
     _fields_=[('context_size',ctypes.c_size_t),('mode',ctypes.c_int),('arch',ctypes.c_int),('snapshot_level',ctypes.c_int),('ramblock_freed',ctypes.c_bool),('last_block',ctypes.c_void_p),('fv',ctypes.c_void_p)]
@@ -46,6 +46,8 @@ def restore(cpu,state):
         if any(v not in (0,1) for v in known):raise ValueError('Invalid initialized mask')
         private[a]=(data,known)
     fields=dict(state['fields']);fields.setdefault('lazy_new_calls',0);fields.setdefault('lazy_memset_calls',0)
+    defaults={'loader_view_applied':False,'loader_relocation_events':0,'init_phase':'dt-init','init_array_index':0,'init_array_completed':[],'call_in_progress':False,'call_saved':{}}
+    for key,value in defaults.items():fields.setdefault(key,value)
     old_crc=any(name not in fields for name in ('crc_blocks','crc_iterations','crc_logical_steps'))
     for name in ('crc_blocks','crc_iterations','crc_logical_steps'):fields.setdefault(name,0)
     fields.setdefault('crc_counters_complete',not old_crc)

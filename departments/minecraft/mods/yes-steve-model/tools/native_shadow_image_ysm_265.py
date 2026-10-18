@@ -13,7 +13,7 @@ class ShadowGuardedCPU(GuardedCPU):
     MAX_IMAGE_BYTES=8*1024*1024
     MAX_IMAGE_EVENTS=1000000
     def __init__(self,*args,**kwargs):
-        super().__init__(*args,**kwargs);self.shadow_ranges=[];self.shadow_expected={};self.shadow_events=0;self.shadow_bytes=0;self.reference_digests=None;self.lazy_new_calls=0;self.lazy_memset_calls=0;self.crc_counters_complete=True
+        super().__init__(*args,**kwargs);self.shadow_ranges=[];self.shadow_expected={};self.shadow_events=0;self.shadow_bytes=0;self.reference_digests=None;self.lazy_new_calls=0;self.lazy_memset_calls=0;self.crc_counters_complete=True;self.loader_view_applied=False;self.loader_relocation_events=0;self.init_phase='dt-init';self.init_array_index=0;self.init_array_completed=[];self.call_in_progress=False;self.call_saved={}
     def reference_hashes(self):return [hashlib.sha256(v).hexdigest() for a,b,v in self.image]
     def shadow_region(self,a,n):
         return next((i for i,(lo,hi,_) in enumerate(self.image) if lo<=a and a+n<=hi and lo!=self.loader_name),None)
@@ -82,7 +82,7 @@ class ShadowGuardedCPU(GuardedCPU):
     def report_preservation(self):
         reference_ok=self.reference_digests is None or self.reference_hashes()==self.reference_digests
         expected_ok=self.expected_image_matches();unchanged=self.image_unchanged()
-        self.emit('SHADOW_PRESERVATION',f'immutable_reference_unchanged={reference_ok}',f'working_image_matches_committed_ledger={expected_ok}',f'working_image_equals_reference={unchanged}',f'committed_events={self.shadow_events}',f'committed_bytes={self.shadow_bytes}',f'virtual_operator_new_calls={self.lazy_new_calls}',f'virtual_memset_calls={self.lazy_memset_calls}',f'crc_counter_history_complete={self.crc_counters_complete}')
+        self.emit('SHADOW_PRESERVATION',f'immutable_reference_unchanged={reference_ok}',f'working_image_matches_committed_ledger={expected_ok}',f'working_image_equals_reference={unchanged}',f'committed_events={self.shadow_events}',f'committed_bytes={self.shadow_bytes}',f'virtual_operator_new_calls={self.lazy_new_calls}',f'virtual_memset_calls={self.lazy_memset_calls}',f'crc_counter_history_complete={self.crc_counters_complete}',f'loader_relocation_events={self.loader_relocation_events}',f'runtime_image_events={self.shadow_events-self.loader_relocation_events}')
         if not reference_ok or not expected_ok:raise AssertionError('Unaccounted image mutation')
         self.emit('BOUNDED_RESULT',self.stop['reason'],'target_host_library_execution=false','host_file_access=false','host_permissions_changed=false',f'working_copy_image_writes={self.shadow_events}','transactional_fault_state=true')
 
