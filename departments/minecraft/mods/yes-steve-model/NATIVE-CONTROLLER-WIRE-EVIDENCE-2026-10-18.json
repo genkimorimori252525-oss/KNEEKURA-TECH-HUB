@@ -1,0 +1,112 @@
+{
+  "format": "ysm-controller-wire-static-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "jar_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "windows": [
+    {
+      "name": "file_tree",
+      "start": "0x34ecd0",
+      "end_exclusive": "0x34f310",
+      "sha256": "4213620f58ff77523c089ebc8c3c57db95d992e91209a5b71055c122b7fb3659",
+      "asm_sha256": "4ce215de4677fad903284b0c3c1e5756ecbf17b602c1e00e5e2fc76f979dc61a",
+      "file_offset": 3468496
+    },
+    {
+      "name": "controller_value",
+      "start": "0x34e310",
+      "end_exclusive": "0x34e8d0",
+      "sha256": "792fdcbf0f3d4468fef0d22c35f2288ecd5b294d1cb49914b55db9962e16d2e7",
+      "asm_sha256": "5c5e8759e4dd152c93f3f72b1bf8bb7f6651b8ad7386b5d4c7790e1dd6ee9f3a",
+      "file_offset": 3466000
+    },
+    {
+      "name": "state",
+      "start": "0x34d1e0",
+      "end_exclusive": "0x34e1c0",
+      "sha256": "422eac188886b3b159cc537de7afcdb7640aee977d5bca06abf4ad3968f947b5",
+      "asm_sha256": "9531b2f491788fa7c806277c0ea1493042dc5903f9fc18c2b070c9ca94395c88",
+      "file_offset": 3461600
+    },
+    {
+      "name": "blend",
+      "start": "0x34cd90",
+      "end_exclusive": "0x34d1c0",
+      "sha256": "003e1faa5807d2acc7b45a384d09bf78a6639b65ffd7d55b65155c4a69840d06",
+      "asm_sha256": "c68b2df52c8790f19cf8b4930de6c041955a0d1a1b4a19e133c021198651743f",
+      "file_offset": 3460496
+    },
+    {
+      "name": "string_vector",
+      "start": "0x346ba0",
+      "end_exclusive": "0x346d30",
+      "sha256": "848682434f1dbbd91fd139cea4ba1400f7f33b2e8f63e2c4dd428488a314dfc8",
+      "asm_sha256": "bff369d16f7aa9641ea2bb47fe4dea19a56520e53e819af428612b4157c3172e",
+      "file_offset": 3435424
+    },
+    {
+      "name": "state_lookup",
+      "start": "0x34e8d0",
+      "end_exclusive": "0x34eaf0",
+      "sha256": "34b6b29b80e5ef7f70d94aaff71147281c6fdb09f1970702df6229c7cbf348e3",
+      "asm_sha256": "66a45f4d367cae230926a2dce4612e0f7a895f6df5e1d09df382a3c405646936",
+      "file_offset": 3467472
+    }
+  ],
+  "relative_relocations": [
+    {
+      "slot": "0xd1cf60",
+      "type": 8,
+      "target": "0x34e310",
+      "record_address": "0x18e8a5c",
+      "record_sha256": "b2ccdc743726e9e744418f28c4fd852a967e6554fd4b50ff9d837562380487a0"
+    },
+    {
+      "slot": "0xd1cf88",
+      "type": 8,
+      "target": "0x34d1e0",
+      "record_address": "0x18e8aa4",
+      "record_sha256": "f7bf0f2fcdadd74a12a4113f32a32a214fb20508d38d17af6077c07ef1697b02"
+    },
+    {
+      "slot": "0xd1cfb0",
+      "type": 8,
+      "target": "0x34cd90",
+      "record_address": "0x18e8aec",
+      "record_sha256": "a83e01762983bd179337fae55a6b7de5e0fc9d37459a2dd62de16b247cb249ec"
+    },
+    {
+      "slot": "0xd1cfd8",
+      "type": 8,
+      "target": "0x34e180",
+      "record_address": "0x18e8b34",
+      "record_sha256": "52c3fe5e89cbfb3f0b602e0345eecaa8a015eccd20b970310ebbb48395e72987"
+    },
+    {
+      "slot": "0xd1d000",
+      "type": 8,
+      "target": "0x34e0c0",
+      "record_address": "0x18e8b7c",
+      "record_sha256": "d7f75d154194afc947a1d51de7b47b76eeed3d9f8b14102b4459ed9031d1b8b1"
+    }
+  ],
+  "prior_receipt_sha256": {
+    "native-controller-construction-contract/evidence.json": "dcfb179ee1bff7b80279876a12451931e0ac981f9307181fc42be59251c91d44",
+    "model-optional-carriers-contract/evidence.json": "a4e48d7d8e7bace1d3b523ae58cc6891822202cf4ad5ea87fd8811b1be8e2369",
+    "model-modern-schema-contract/evidence.json": "2ff0539314ec44ea0b673108268627bc122e9afe20b8188c50681414d70c83e0",
+    "resource-consumer-metadata.json": "3b89ade7c47ebce0644bd1e43517b947e32f0aeb7a00266e2081ea816e74e62a",
+    "resource-consumer-java-bridge.json": "716690f716eee6448dee870b831793585a57b236226d2102aa18a1d818863942",
+    "controller-state-classfile-verified.json": "00ea3532db7f0b6408b8e55fc21b3d773ada069699b85a64974b0c8d48769a61",
+    "java-collection-checkpoint-proof.json": "92881115933bfed72990b8d7cacf44e6d5231961fd64520c2f7735e06f20eccb"
+  },
+  "target_executed": false,
+  "emulation": false,
+  "assets_read": false,
+  "java_runtime_started": false,
+  "repo_edited": false,
+  "original_inputs_unchanged": true,
+  "limits": [
+    "Immediate controller/state wire schema only",
+    "No full root or expression grammar reconstruction",
+    "No malformed-input execution or comprehensive exceptional-ownership proof"
+  ]
+}

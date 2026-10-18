@@ -1,0 +1,179 @@
+{
+  "format": "ysm-vector-model-carriers-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "windows": [
+    {
+      "start": "0x424920",
+      "end_exclusive": "0x424d00",
+      "sha256": "6dc9da0b98894b7a9f30da73610df356714bd1ca7da4db8ea41e024ee59cf9c9",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4344096
+      }
+    },
+    {
+      "start": "0x36ef0e",
+      "end_exclusive": "0x36ff04",
+      "sha256": "248ea4ffacd2cffad04470eb991ae5340223da8d4b2f40be81b21c9c1667e7c7",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3600142
+      }
+    },
+    {
+      "start": "0x361740",
+      "end_exclusive": "0x3617ab",
+      "sha256": "4c0f5a6ef8ed90b09a33bd37f0dd5ee991f091b2e88a7f4bb54970bdbc15732d",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3544896
+      }
+    },
+    {
+      "start": "0x365a10",
+      "end_exclusive": "0x365b3e",
+      "sha256": "43f8b7be0ce96632289b73bb3cd39a1062a31aa9d5999cee6042afdf0e967d7b",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3562000
+      }
+    },
+    {
+      "start": "0x365c3b",
+      "end_exclusive": "0x365c9d",
+      "sha256": "403489184bfdbab5642f806ea927a852a7e19aac6ae3939236297210ec9af6e4",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3562555
+      }
+    },
+    {
+      "start": "0x374750",
+      "end_exclusive": "0x374a54",
+      "sha256": "09d1536f0e5f7e84826fe97d516133830663aabdaa29570310e3a68dcfccb0af",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3622736
+      }
+    },
+    {
+      "start": "0x375430",
+      "end_exclusive": "0x37554d",
+      "sha256": "7998775e948bc6766e9a7dda3d2cd1a3e7323673b65862059b9fa0a791c999c6",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3626032
+      }
+    }
+  ],
+  "relative_relocations": [
+    {
+      "slot": "0xd1cc28",
+      "type": 8,
+      "target": "0x3491d0",
+      "record_address": "0x18e8474",
+      "record_sha256": "3ed5bb869b0e8994ba00dc06f4d4a881fbf3fc779b90fd84420f2e5ec95e9447"
+    },
+    {
+      "slot": "0xd1cc78",
+      "type": 8,
+      "target": "0x34ecd0",
+      "record_address": "0x18e8504",
+      "record_sha256": "47acb153bbf8fa7d6d7a194e9cf5bb9373b9403cbe8f9fd2178b5b971b6d0ae7"
+    }
+  ],
+  "prior_receipts": [
+    {
+      "path": "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/model-modern-schema-contract/evidence.json",
+      "sha256": "2ff0539314ec44ea0b673108268627bc122e9afe20b8188c50681414d70c83e0"
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/model-geometry-selection-contract/evidence.json",
+      "sha256": "daa9c885ea4de174aead618c037d49fef9baed5c112aad1040036feaf829af6a"
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/model-optional-carriers-contract/evidence.json",
+      "sha256": "a4e48d7d8e7bace1d3b523ae58cc6891822202cf4ad5ea87fd8811b1be8e2369"
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/animation-element-contract/evidence.json",
+      "sha256": "f98e134410d0a4c921d6a3dc0db8146a6281f83856aa7957c11b29ff3a0832fd"
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/animation-controller-metadata.json",
+      "sha256": "96fa0fdf46499864b20060dd63853906b88cd95890ca693d9ca68e82109b2866"
+    }
+  ],
+  "target_executed": false,
+  "assets_read": false,
+  "repository_modified": false,
+  "limits": [
+    "Final route names pending exact d35598+98/+a0 metadata",
+    "One immediate optional payload/storage and carrier join only",
+    "Texture helper transitive registry implementation not retraced",
+    "No runtime construction, allocation success or exceptional-cleanup completeness claim"
+  ]
+}

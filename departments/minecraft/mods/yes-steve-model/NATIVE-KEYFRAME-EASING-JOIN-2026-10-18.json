@@ -1,0 +1,238 @@
+{
+  "format": "ysm-native-easing-factory-join-v1",
+  "field_receipt_sha256": "3f60afd5ef7802807036e67c315e2af93fa2e988fc162cd3dcaa60f99eab699d",
+  "native_selector_receipt_sha256": "410fcdc727aceeda4ef8c0fe621ec8b76fc45f8626026b080f5e9c4bf0451001",
+  "easing_evidence_sha256": "6fa4b9ca2e36ee37adb5e081142e8936607ba67deb9acb485990c834b8bbac2b",
+  "reverified_java_audit_sha256": "8f35835f97c8edb0eab58cbfd1c8fe699b679395a984acaa30c23f0f6982c400",
+  "source": {
+    "role": "OFFICIAL_RELEASE_LINE_SOURCE_CANDIDATE",
+    "repository": "YesSteveModel/YesSteveModel",
+    "revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+    "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/keyframe/bone/EasingType.java",
+    "sha256": "57c047216e0f9d3afb63c3e5d5ac60142a230981a918a8c5f19ecb2506de0192",
+    "url": "https://github.com/YesSteveModel/YesSteveModel/blob/f184edabd1b5115ce5a24cb6d155ba5a669f5ba6/src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/keyframe/bone/EasingType.java"
+  },
+  "clinit": {
+    "owner": "com/elfmcys/yesstevemodel/o00o00ooO000OoOoooO0000O",
+    "name": "<clinit>",
+    "descriptor": "()V",
+    "access": 8,
+    "code_sha256": "4e8b0004cc6ccaa72a29e7593c226789ef8d2435c272e053e6902ac729059a39",
+    "exception_handlers": [],
+    "instructions": [
+      {
+        "offset": 0,
+        "opcode": "0xba",
+        "reference": {
+          "name": "buildKeyFrame",
+          "descriptor": "()Lcom/elfmcys/yesstevemodel/o00o00ooO000OoOoooO0000O;",
+          "bootstrap_index": 0,
+          "cp_tag": 18
+        }
+      },
+      {
+        "offset": 5,
+        "opcode": "0xb3",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/o00o00ooO000OoOoooO0000O",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "Lcom/elfmcys/yesstevemodel/o00o00ooO000OoOoooO0000O;",
+          "cp_tag": 9
+        }
+      },
+      {
+        "offset": 8,
+        "opcode": "0xba",
+        "reference": {
+          "name": "buildKeyFrame",
+          "descriptor": "()Lcom/elfmcys/yesstevemodel/o00o00ooO000OoOoooO0000O;",
+          "bootstrap_index": 1,
+          "cp_tag": 18
+        }
+      },
+      {
+        "offset": 13,
+        "opcode": "0xb3",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/o00o00ooO000OoOoooO0000O",
+          "name": "o0OOooo0o0OO00OoOOOo0o0O",
+          "descriptor": "Lcom/elfmcys/yesstevemodel/o00o00ooO000OoOoooO0000O;",
+          "cp_tag": 9
+        }
+      },
+      {
+        "offset": 16,
+        "opcode": "0xb1"
+      }
+    ],
+    "supplemental_full_operand_records": [
+      {
+        "offset": 0,
+        "opcode": "0xba",
+        "encoded_operands_hex": "00520000"
+      },
+      {
+        "offset": 5,
+        "opcode": "0xb3",
+        "encoded_operands_hex": "0054"
+      },
+      {
+        "offset": 8,
+        "opcode": "0xba",
+        "encoded_operands_hex": "00580000"
+      },
+      {
+        "offset": 13,
+        "opcode": "0xb3",
+        "encoded_operands_hex": "005a"
+      },
+      {
+        "offset": 16,
+        "opcode": "0xb1",
+        "encoded_operands_hex": ""
+      }
+    ]
+  },
+  "joins": [
+    {
+      "native_selectors": [
+        0,
+        1
+      ],
+      "manager_offset": "0x88",
+      "owner": "com/elfmcys/yesstevemodel/o00o00ooO000OoOoooO0000O",
+      "field_name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "field_descriptor": "Lcom/elfmcys/yesstevemodel/o00o00ooO000OoOoooO0000O;",
+      "field_access": 25,
+      "clinit_indy_offset": 0,
+      "clinit_putstatic_offset": 5,
+      "bootstrap_index": 0,
+      "bootstrap": {
+        "method_handle": {
+          "cp_tag": 15,
+          "reference_kind": 6,
+          "reference": {
+            "cp_tag": 10,
+            "owner": "java/lang/invoke/LambdaMetafactory",
+            "name": "metafactory",
+            "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+          }
+        },
+        "arguments": [
+          {
+            "cp_tag": 16,
+            "value": "(Ljava/util/List;I)Lcom/elfmcys/yesstevemodel/OOOo0OooOOoOooooooo000O0;"
+          },
+          {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 11,
+              "owner": "com/elfmcys/yesstevemodel/o00o00ooO000OoOoooO0000O",
+              "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+              "descriptor": "(Ljava/util/List;I)Lcom/elfmcys/yesstevemodel/OOOo0OooOOoOooooooo000O0;"
+            }
+          },
+          {
+            "cp_tag": 16,
+            "value": "(Ljava/util/List;I)Lcom/elfmcys/yesstevemodel/OOOo0OooOOoOooooooo000O0;"
+          }
+        ]
+      },
+      "factory_target": {
+        "cp_tag": 11,
+        "owner": "com/elfmcys/yesstevemodel/o00o00ooO000OoOoooO0000O",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Ljava/util/List;I)Lcom/elfmcys/yesstevemodel/OOOo0OooOOoOooooooo000O0;"
+      },
+      "factory_code_sha256": "be99e57d60fc5c1f60fae00849a92936204c7ffd3ce920e114adf637146d8c99",
+      "factory_nonzero_index_allocation": "com/elfmcys/yesstevemodel/OO000ooOooO0Ooooooo000Oo",
+      "bounded_source_counterpart": "LINEAR / buildLinearKeyFrame",
+      "index_zero": "Both invoke the same transition factory; not ordinary linear/Catmull segment construction."
+    },
+    {
+      "native_selectors": [
+        2
+      ],
+      "manager_offset": "0x90",
+      "owner": "com/elfmcys/yesstevemodel/o00o00ooO000OoOoooO0000O",
+      "field_name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "field_descriptor": "Lcom/elfmcys/yesstevemodel/o00o00ooO000OoOoooO0000O;",
+      "field_access": 25,
+      "clinit_indy_offset": 8,
+      "clinit_putstatic_offset": 13,
+      "bootstrap_index": 1,
+      "bootstrap": {
+        "method_handle": {
+          "cp_tag": 15,
+          "reference_kind": 6,
+          "reference": {
+            "cp_tag": 10,
+            "owner": "java/lang/invoke/LambdaMetafactory",
+            "name": "metafactory",
+            "descriptor": "(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;"
+          }
+        },
+        "arguments": [
+          {
+            "cp_tag": 16,
+            "value": "(Ljava/util/List;I)Lcom/elfmcys/yesstevemodel/OOOo0OooOOoOooooooo000O0;"
+          },
+          {
+            "cp_tag": 15,
+            "reference_kind": 6,
+            "reference": {
+              "cp_tag": 11,
+              "owner": "com/elfmcys/yesstevemodel/o00o00ooO000OoOoooO0000O",
+              "name": "o0OOooo0o0OO00OoOOOo0o0O",
+              "descriptor": "(Ljava/util/List;I)Lcom/elfmcys/yesstevemodel/OOOo0OooOOoOooooooo000O0;"
+            }
+          },
+          {
+            "cp_tag": 16,
+            "value": "(Ljava/util/List;I)Lcom/elfmcys/yesstevemodel/OOOo0OooOOoOooooooo000O0;"
+          }
+        ]
+      },
+      "factory_target": {
+        "cp_tag": 11,
+        "owner": "com/elfmcys/yesstevemodel/o00o00ooO000OoOoooO0000O",
+        "name": "o0OOooo0o0OO00OoOOOo0o0O",
+        "descriptor": "(Ljava/util/List;I)Lcom/elfmcys/yesstevemodel/OOOo0OooOOoOooooooo000O0;"
+      },
+      "factory_code_sha256": "79d9007741ef0703af1b3b938e8b2ff4205302d94ce8bee0c3e2733c8ec99482",
+      "factory_nonzero_index_allocation": "com/elfmcys/yesstevemodel/OO0O0OoO000OoOo0OO00O0OO",
+      "bounded_source_counterpart": "CATMULLROM / buildCatmullRomKeyFrame",
+      "index_zero": "Both invoke the same transition factory; not ordinary linear/Catmull segment construction."
+    }
+  ],
+  "keyframe_table_relocations": [
+    {
+      "slot": "0xd1b6d8",
+      "type": 8,
+      "target": "0xd349c8",
+      "record_address": "0x18e581c",
+      "record_sha256": "cbcdfb4971f9ddfced293e660265c62fb6bd2ef34fc1f17d29e246e046c0dd9e"
+    },
+    {
+      "slot": "0xd1b6e0",
+      "type": 8,
+      "target": "0xd349c8",
+      "record_address": "0x18e5834",
+      "record_sha256": "2d510b66c4b43fdc1659d33a823ffb5ee7df38e13f6688057e237da7b972db35"
+    },
+    {
+      "slot": "0xd1b6e8",
+      "type": 8,
+      "target": "0xd349f0",
+      "record_address": "0x18e584c",
+      "record_sha256": "94a0043ab2bf9d29b9b566099d7e2446175d445eff2b687386e917a59ee71c1b"
+    }
+  ],
+  "limits": [
+    "No new callbacks or original target execution.",
+    "Native selector alias denotes identical wrapper and stored factory reference in the inspected normal path; no intervening mutation assumed.",
+    "Processor may select previous frame easing for nonzero non-Catmull endpoint; this is not a universal selector-to-result-class rule.",
+    "Factory labels are bounded pinned-source counterparts; no central mapping promotion."
+  ]
+}

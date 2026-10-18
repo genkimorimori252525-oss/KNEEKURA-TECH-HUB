@@ -1,0 +1,19 @@
+{
+  "status": "bounded_pass_with_terminology_correction",
+  "mechanical_checks": 120,
+  "failed_checks": 0,
+  "easing_access": "0x0601",
+  "correction": "Older report should use selected object identities, not Enum identities.",
+  "source_raw_hash": "bfe43d97ee48e6d55975b9576b289e1be7d837e35f3441f13c311cf82f496bb1",
+  "report": "NATIVE-KEYFRAME-JOIN-FOCUSED-REVIEW-2026-10-18.md",
+  "extraction": {
+    "location": "external keyframe-join-focused-review/independent-extraction.json",
+    "sha256": "a3409cd183dc3491a54f3d0ee5530da5c211038481b0192ac2ea295e2a821143"
+  },
+  "limits": [
+    "Prior metadata payload decoding trusted, not rerun",
+    "No target/JVM/native/emulation execution or assets",
+    "No repository modifications or runtime claims"
+  ],
+  "external_original_receipt_sha256": "0e27fc80543720a8fa2cb0a0da908a9410d103d467704e7c949da0ceb44ee6f7"
+}

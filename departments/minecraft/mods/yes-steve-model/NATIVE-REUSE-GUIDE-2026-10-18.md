@@ -4,6 +4,8 @@ Scope: exact YSM2.6.5 Forge1.20.1 release, original Linux x86-64 library. [Exact
 
 [Machine-readable entry routing](NATIVE-ENTRY-CONTRACT-INDEX-2026-10-18.json) links all17 original-YSM declarations to bounded entry contracts, plus the5 separately discovered LWJGL wrappers. These coverage counts do not mean all transitive implementations or runtime behavior are recovered.
 
+[Exact manager-slot lookup](NATIVE-JAVA-MEMBER-INDEX-2026-10-18.md) covers46 selected Java-member slots with source receipts; it is separate from the17 original native-entry declarations. Query the required manager+offset rather than rereading every metadata cohort.
+
 ## Choose the smallest entry point
 
 | Question | Evidence to open |
@@ -21,6 +23,10 @@ Scope: exact YSM2.6.5 Forge1.20.1 release, original Linux x86-64 library. [Exact
 | How are masked batch pointers consumed? | [Representative decode and mask source](NATIVE-GEOMETRY-BATCH-UNMASK-RECOVERY-2026-10-18.md), [28 non-GUI sites](NATIVE-GEOMETRY-UNMASK-COVERAGE-RECOVERY-2026-10-18.md), [GUI dispatch and8 more sites](NATIVE-GUI-BYPASS-RECOVERY-2026-10-18.md); header-contract coverage, not complete emission equivalence |
 | What does the sampled fourth byte mean? | Start with the [five-provider scope index](NATIVE-PROVIDER-CONTRACT-INDEX-2026-10-18.md). [Provider boundary](NATIVE-PROVIDER-OUTPUT-FORMAT-RECOVERY-2026-10-18.md); [selector2 PNG output](NATIVE-PNG-OUTPUT-CHANNEL-RECOVERY-2026-10-18.md) establishes RGBA8 alpha only for that provider; [selector3 traced callback](NATIVE-SELECTOR3-CALLBACK-RECOVERY-2026-10-18.md) synthesizes255 in the covered paths, while [selector4](NATIVE-SELECTOR4-OUTPUT-RECOVERY-2026-10-18.md) can overwrite from a separate plane |
 | How are native bone indices and depths produced? | [Hierarchy/order/capacity](NATIVE-BONE-HIERARCHY-RECOVERY-2026-10-18.md) |
+| How do wire keyframes reach Java values and easing? | [Animation element](NATIVE-ANIMATION-ELEMENT-RECOVERY-2026-10-18.md), [raw record](NATIVE-KEYFRAME-ELEMENT-RECOVERY-2026-10-18.md), [six-pair Java bridge](NATIVE-KEYFRAME-JAVA-BRIDGE-2026-10-18.md), [selector provenance](NATIVE-ANIMATION-SELECTOR-PROVENANCE-RECOVERY-2026-10-18.md); native does not apply the Java rotation conversion |
+| How do controller states and blends arrive? | [Wire schema](NATIVE-CONTROLLER-WIRE-RECOVERY-2026-10-18.md), [construction](NATIVE-CONTROLLER-CONSTRUCTION-RECOVERY-2026-10-18.md), [Java bridge](NATIVE-CONTROLLER-JAVA-BRIDGE-2026-10-18.md); preserve raw-key versus pooled-key duplicate handling and separate time multipliers |
+| Does the fresh animation wire reader populate particles? | [Fresh-path proof](NATIVE-PARTICLE-FRESH-WIRE-RECOVERY-2026-10-18.md); empty vector for that path, not global particle-support absence |
+| Which vectors build projectile/vehicle carriers? | [Vector-carrier joins](NATIVE-VECTOR-MODEL-CARRIERS-RECOVERY-2026-10-18.md) and [exact identities](NATIVE-VECTOR-CARRIER-METADATA-2026-10-18.json); optional animation/controller and primary texture stay distinct |
 | What transform should a bone apply? | [Affine/parent contract](NATIVE-BONE-AFFINE-RECOVERY-2026-10-18.md), then [normal arithmetic](NATIVE-NORMAL-MATRIX-RECOVERY-2026-10-18.md) only if needed |
 | When are output pivots current? | [Output/modes](NATIVE-RENDER-OUTPUT-MODES-RECOVERY-2026-10-18.md) |
 | How do native vertices reach Java? | [Backend/legacy writer](NATIVE-RENDER-BACKENDS-RECOVERY-2026-10-18.md) |
@@ -69,3 +75,5 @@ A separate [original-byte review](NATIVE-BONE-FOCUSED-REVIEW-2026-10-18.json) ch
 A second [focused original-byte review](NATIVE-SHUTDOWN-GL-FOCUSED-REVIEW-2026-10-18.json) checked the shutdown helper's gates/imports and all five LWJGL wrapper pairings/argument paths. It found no contradiction within the scoped claims. It did not run signals, GL operations or registration, and it is not whole-project approval.
 
 A third [focused original-byte review](NATIVE-GENERIC-TRANSFORM-FOCUSED-REVIEW-2026-10-18.json) checked the generic derivation/block transforms, fixed round-count propagation, state layout and counter/tail writes. No contradiction was found within those claims; actual backend selection and whole-project correctness remain unproven.
+
+A fourth [focused review](NATIVE-KEYFRAME-JOIN-FOCUSED-REVIEW-2026-10-18.md) independently checked the six component pairs, low-byte rotation flag, timestamp narrowing, contiguous reference alias and AllocObject distinction.120 mechanical checks passed with one corrected interface/enum terminology issue. Metadata payload decoding was inherited, not repeated; this is not whole-project/runtime approval.

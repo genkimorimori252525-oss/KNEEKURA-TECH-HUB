@@ -1,0 +1,144 @@
+{
+  "format": "ysm-animation-selector-provenance-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "windows": [
+    {
+      "start": "0x3c70b2",
+      "end_exclusive": "0x3c7c51",
+      "sha256": "6ae338ef46af68ae0d2bcce7e311f3ca3d884b69b7af5d39762bad3329ef2d46",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3961010
+      }
+    },
+    {
+      "start": "0x361d29",
+      "end_exclusive": "0x361d4e",
+      "sha256": "dd90e15cff19b1fac8833d76a5d5d1ca8c160fcdbb6c1e76ebd82cae5dcb3b9d",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3546409
+      }
+    },
+    {
+      "start": "0x362fe0",
+      "end_exclusive": "0x363075",
+      "sha256": "58b5d632d1ff8a94699d0ded084321c2264d1ca700da2da328756eb53f8c45fb",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3551200
+      }
+    },
+    {
+      "start": "0x364ccb",
+      "end_exclusive": "0x364d2b",
+      "sha256": "7d68e7fe4ea1b58331beea93f55575cb045aa51ccb93dd85249bad4c0cd6eea1",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3558603
+      }
+    }
+  ],
+  "relative_relocations": [
+    {
+      "slot": "0xd1b6c0",
+      "type": 8,
+      "target": "0xd34950",
+      "record_address": "0x18e57d4",
+      "record_sha256": "7b20efd1cb1326d7985488abb84c67f86312fc5af7d7f717b9c57d04c70776ef"
+    },
+    {
+      "slot": "0xd1b6c8",
+      "type": 8,
+      "target": "0xd34978",
+      "record_address": "0x18e57ec",
+      "record_sha256": "8adc57d5b6af23b761b8f9f02bb8d268f283ba071d7bf33f7538565917da57af"
+    },
+    {
+      "slot": "0xd1b6d0",
+      "type": 8,
+      "target": "0xd349a0",
+      "record_address": "0x18e5804",
+      "record_sha256": "e0df65a5d79065b5ac8db8350d76261fc5d4caf6f513d300fa938d484f5c8935"
+    },
+    {
+      "slot": "0xd1b6d8",
+      "type": 8,
+      "target": "0xd349c8",
+      "record_address": "0x18e581c",
+      "record_sha256": "cbcdfb4971f9ddfced293e660265c62fb6bd2ef34fc1f17d29e246e046c0dd9e"
+    },
+    {
+      "slot": "0xd1b6e0",
+      "type": 8,
+      "target": "0xd349c8",
+      "record_address": "0x18e5834",
+      "record_sha256": "2d510b66c4b43fdc1659d33a823ffb5ee7df38e13f6688057e237da7b972db35"
+    },
+    {
+      "slot": "0xd1b6e8",
+      "type": 8,
+      "target": "0xd349f0",
+      "record_address": "0x18e584c",
+      "record_sha256": "94a0043ab2bf9d29b9b566099d7e2446175d445eff2b687386e917a59ee71c1b"
+    }
+  ],
+  "prior_receipts": [
+    {
+      "path": "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/keyframe-element-contract/evidence.json",
+      "sha256": "6ec8596d4a65f5481b6472bcead4c641c8105abce4274c4434d7ee0655b26b9d"
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/animation-element-contract/evidence.json",
+      "sha256": "f98e134410d0a4c921d6a3dc0db8146a6281f83856aa7957c11b29ff3a0832fd"
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/common-lifecycle-contract/evidence.json",
+      "sha256": "3dae6f32b67bd3b7acbf3c5c40c44ee7db2e452c930bb94f55fcecb845a1bce5"
+    }
+  ],
+  "target_executed": false,
+  "assets_read": false,
+  "repository_modified": false,
+  "limits": [
+    "Metadata field names are unresolved in this receipt",
+    "Native easing selectors 0 and 1 alias one wrapper; no Java enum or ordinal inference",
+    "No runtime initialization, Java object identity equality, or successful JNI operation observed"
+  ]
+}

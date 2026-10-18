@@ -1,0 +1,116 @@
+{
+  "format": "ysm-controller-construction-static-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "jar_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "windows": [
+    {
+      "name": "controller",
+      "start": "0x365a10",
+      "end_exclusive": "0x366110",
+      "size": 1792,
+      "sha256": "b9a6424240b0147512dfbda77d308dd0511854ecd29a8af5d299fd2b17d104ca",
+      "file_offset": 3562000,
+      "asm_sha256": "1650e042e8c148b0c30538bab9678ddff5a6b209af578edd21dcd28e83e32e2b"
+    },
+    {
+      "name": "controller_data",
+      "start": "0x366110",
+      "end_exclusive": "0x368de0",
+      "size": 11472,
+      "sha256": "7df1a66de6a9186bd39a56bca82d6b3b171c6b1621fe7381111083c6d35ba6ff",
+      "file_offset": 3563792,
+      "asm_sha256": "904f7db2bfd7018cf9e81770edf595af26fcc85c9991431d468de1133e35153c"
+    },
+    {
+      "name": "state_copy",
+      "start": "0x368de0",
+      "end_exclusive": "0x368fe0",
+      "size": 512,
+      "sha256": "2eda9d94e38b8cad53b0f25a587b0aa5dd72f1a68d63efd05bc0e5a87dadb0ff",
+      "file_offset": 3575264,
+      "asm_sha256": "ffdb9992b8113e69ce2f451e5e4c181e3b1cbdede7d04e4743b7e1d9c8c6ef3d"
+    },
+    {
+      "name": "expression",
+      "start": "0x3742d0",
+      "end_exclusive": "0x3744f0",
+      "size": 544,
+      "sha256": "89f2984e0781a2f170bac24b88df19870e45b7c8de9f93bac97df34843507b5c",
+      "file_offset": 3621584,
+      "asm_sha256": "7827f1ef186ea16a56fb0b4dd612aa3b77b5147cc34a9fafcf9030bb7090c960"
+    },
+    {
+      "name": "jni_helpers",
+      "start": "0x364a60",
+      "end_exclusive": "0x364b80",
+      "size": 288,
+      "sha256": "ff3c33234ecc0b98a4e5ad3a3eef228e0d1608efe41c36a3e87168fdc238c8c1",
+      "file_offset": 3557984,
+      "asm_sha256": "062f87d4eb3f48e27e54d84161c5b034e97873aa3d96b554b90f1552171f521f"
+    },
+    {
+      "name": "local_release",
+      "start": "0x360270",
+      "end_exclusive": "0x360290",
+      "size": 32,
+      "sha256": "d497eccdcf58a19d70c67bbcd31df16645940497a74e9a5a9a9c772ab72ad9fc",
+      "file_offset": 3539568,
+      "asm_sha256": "8e5c4a022a02edbc42894153ceace0d6557eeff32c71b1ca63b49745d6b1e763"
+    },
+    {
+      "name": "pair_call",
+      "start": "0x3654b0",
+      "end_exclusive": "0x365540",
+      "size": 144,
+      "sha256": "c7aa201a0638ebeeed13c0dc76c6a32f628afe63fb6e70da5df5df15fdf4015f",
+      "file_offset": 3560624,
+      "asm_sha256": "b880747f5dee91a89ce34270a3c2c399a8635ae9530c10fee04ae74fd7386000"
+    },
+    {
+      "name": "expression_call",
+      "start": "0x36d530",
+      "end_exclusive": "0x36d5c0",
+      "size": 144,
+      "sha256": "79ef2c1822bd494f21944fc446ad5839d4e0571d3c4dcc357dfd44ce6ea0e536",
+      "file_offset": 3593520,
+      "asm_sha256": "2b407eb4ffdd8ef90fddfbffff2a7b54aada469ff7abba0e9dd3e5f145f361c4"
+    },
+    {
+      "name": "exception_check",
+      "start": "0x41a560",
+      "end_exclusive": "0x41a5f0",
+      "size": 144,
+      "sha256": "80f159a95277c7e1a80b998d23222f25e717daa12d2f48f6726a9df15864d078",
+      "file_offset": 4302176,
+      "asm_sha256": "eb5cccffc56f532d0bd9bbfe274854491b542f539cfb6ac11fb50a0f37f10bac"
+    }
+  ],
+  "prior_receipt_sha256": {
+    "animation-controller-metadata.json": "96fa0fdf46499864b20060dd63853906b88cd95890ca693d9ca68e82109b2866",
+    "animation-controller-java-bridge.json": "81bd437582934ec2e0b0633284ed78aa7533737a5f3c20b32a1518b701498b5e",
+    "resource-consumer-metadata.json": "3b89ade7c47ebce0644bd1e43517b947e32f0aeb7a00266e2081ea816e74e62a",
+    "resource-consumer-java-bridge.json": "716690f716eee6448dee870b831793585a57b236226d2102aa18a1d818863942",
+    "jni-slot-catalog.json": "3770079df0ba103b9f7296275d3f4fafa74091bc87c251e6a70bbe212f8d348f",
+    "model-optional-carriers-contract/evidence.json": "a4e48d7d8e7bace1d3b523ae58cc6891822202cf4ad5ea87fd8811b1be8e2369"
+  },
+  "jni_slots": {
+    "0xe8": "NewObjectV",
+    "0x1f0": "CallVoidMethodV",
+    "0x398": "CallStaticObjectMethodV",
+    "0x118": "CallObjectMethodV",
+    "0x538": "NewStringUTF",
+    "0x560": "NewObjectArray",
+    "0x570": "SetObjectArrayElement",
+    "0x5a8": "NewFloatArray",
+    "0x6a8": "SetFloatArrayRegion",
+    "0xb8": "DeleteLocalRef",
+    "0x720": "ExceptionCheck"
+  },
+  "scope": "Original byte windows and bounded native construction dataflow. Metadata identities not decoded by this script.",
+  "target_executed": false,
+  "emulation": false,
+  "assets_read": false,
+  "java_runtime_started": false,
+  "repo_edited": false,
+  "original_inputs_unchanged": true
+}

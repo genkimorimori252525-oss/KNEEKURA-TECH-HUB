@@ -1,0 +1,32 @@
+{
+  "scope": "Static planning only; no implementation or guest instructions",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "checkpoint_sha256": "05122784aea6927c2a8f1d48a2fb16f98e73b0d3919ab48ea4b1725f76d106b1",
+  "windows": [
+    {
+      "start": "0x3d54bd",
+      "end_exclusive": "0x3d58aa",
+      "sha256": "cc0b4ef068714b5d0180c1fe070af2aa6de822d317dd40c4af094b79ad22065b"
+    },
+    {
+      "start": "0x4192b0",
+      "end_exclusive": "0x419378",
+      "sha256": "a60c7a335e834378369e2db45dfbeaebe68d674b11a44d5db07919e728fa1634"
+    },
+    {
+      "start": "0x36d530",
+      "end_exclusive": "0x36d5ba",
+      "sha256": "57f59e18f8eb24713de80ae0897f16139a8823a95a3b6d9116a87de2ad3e9388"
+    }
+  ],
+  "files": {
+    "class-evidence.json": "47cc335e5653e8750ebf7ba64b926df3fe1c3ba7f5c37964b41d4f9765b46c7b",
+    "checkpoint-slots.json": "6744b24f9309c02acab19fe4fdd74f8640cf3776518c746e0c73a989c176625a",
+    "inspect_classes.py": "2d67dbe7b52f1da5bb3ebb4719ee579db20131a2ce3b6583db037932733f1a66",
+    "inspect_checkpoint.py": "16ea98bd8db79bb884b3ef0e8880de4a0235cfe708c3e2bd6ff488e7610ba043",
+    "PLAN.md": "355e8437f025477df0a521bb64d6fb2c7524020d2036babdba52e077863f51f3"
+  },
+  "target_executed": false,
+  "checkpoint_changed": false,
+  "repository_modified": false
+}

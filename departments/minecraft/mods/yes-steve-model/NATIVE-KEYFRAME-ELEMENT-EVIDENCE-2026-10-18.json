@@ -1,0 +1,210 @@
+{
+  "format": "ysm-keyframe-element-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "windows": [
+    {
+      "start": "0x34b5a0",
+      "end_exclusive": "0x34b7a6",
+      "sha256": "f51b8a61068a440e8343e3ea1484797810342736c25f6bf8ef8d0305cad9ff5a",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3454368
+      }
+    },
+    {
+      "start": "0x34c7c0",
+      "end_exclusive": "0x34ca3b",
+      "sha256": "12f25a887e524b5d7c7fc3374bfe75fc6b60f8be86b182b94e6711cbafe02f1f",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3459008
+      }
+    },
+    {
+      "start": "0x34c760",
+      "end_exclusive": "0x34c79e",
+      "sha256": "98e55e009156fd3f414b194c43c5dd7b83802a9fa2500a565202ab67d89b871b",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3458912
+      }
+    },
+    {
+      "start": "0x34a220",
+      "end_exclusive": "0x34a27c",
+      "sha256": "f7f3aceba93c8ee898ba60c3803d0849428e717836903a577cfaf9d7d4c8e564",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3449376
+      }
+    },
+    {
+      "start": "0x364b80",
+      "end_exclusive": "0x365063",
+      "sha256": "596cfc6c1d5ab9d9d0a86195aeff23c88a5a6863209fb13511590c877de587a6",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3558272
+      }
+    },
+    {
+      "start": "0x3654b0",
+      "end_exclusive": "0x36553a",
+      "sha256": "9883cd12a4c31a12f2b848753db114cac5a0b5c99f7f51fef983118625286378",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3560624
+      }
+    },
+    {
+      "start": "0x365540",
+      "end_exclusive": "0x365649",
+      "sha256": "bf926a786e740d4ab0034914ce16729dfc5c177117927b30d224e58249937825",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3560768
+      }
+    },
+    {
+      "start": "0x365780",
+      "end_exclusive": "0x3657ba",
+      "sha256": "b20c525118f4a50d8e0c426f3d59563abe7756a2469b99488d884c013de3ce7e",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3561344
+      }
+    },
+    {
+      "start": "0x362037",
+      "end_exclusive": "0x36207e",
+      "sha256": "c62d180d57dee787ff1b35b8751ec8664d7f092e8f546d6175c106229b72a07f",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3547191
+      }
+    }
+  ],
+  "relative_relocations": [
+    {
+      "slot": "0xd1ce30",
+      "type": 8,
+      "target": "0x34c7c0",
+      "record_address": "0x18e881c",
+      "record_sha256": "2cfd6f1e14c3cbc6a6c559950c253fbe80c7f00815433ba745847ef0ad6b6daf"
+    },
+    {
+      "slot": "0xd1ce08",
+      "type": 8,
+      "target": "0x34c760",
+      "record_address": "0x18e87d4",
+      "record_sha256": "529c1f98cfb96245b6cf546ad553335716c5a13be3c11b494fedbfefd3013f6a"
+    },
+    {
+      "slot": "0xd1cde0",
+      "type": 8,
+      "target": "0x34a220",
+      "record_address": "0x18e878c",
+      "record_sha256": "2501b3d25a36bc9437d85658fa18f55c5b9978ae5d7ab6c0f0ab57f73f51e5fe"
+    }
+  ],
+  "prior_receipts": [
+    {
+      "path": "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/model-modern-schema-contract/evidence.json",
+      "sha256": "2ff0539314ec44ea0b673108268627bc122e9afe20b8188c50681414d70c83e0"
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/animation-element-contract/evidence.json",
+      "sha256": "f98e134410d0a4c921d6a3dc0db8146a6281f83856aa7957c11b29ff3a0832fd"
+    }
+  ],
+  "target_executed": false,
+  "assets_read": false,
+  "repository_modified": false,
+  "limits": [
+    "One 0x180 record and immediate conversion only",
+    "Java class/field/static method metadata unresolved here",
+    "Static Java processing may perform further conversion; not traced",
+    "No interpolation/evaluation or complete exceptional cleanup proof"
+  ]
+}

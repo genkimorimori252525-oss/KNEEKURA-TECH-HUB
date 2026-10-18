@@ -1,0 +1,133 @@
+{
+  "format": "ysm-particle-fresh-wire-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "windows": [
+    {
+      "start": "0x3491d0",
+      "end_exclusive": "0x349f90",
+      "sha256": "c04812ef5b4de8871f42f89d3da687dddebda3b6fa9abbf6424a23c297aca6ba",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3445200
+      }
+    },
+    {
+      "start": "0x34a2a0",
+      "end_exclusive": "0x34b170",
+      "sha256": "37ed0c78ef984abb7888f34727ed001aa66972f266fc03e66ec43a9c6a362733",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3449504
+      }
+    },
+    {
+      "start": "0x362659",
+      "end_exclusive": "0x3626e3",
+      "sha256": "27614f5325572d5393a6c96fdf379183714956e70fb1dd5f677ec993b14f2a0d",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3548761
+      }
+    },
+    {
+      "start": "0x362b40",
+      "end_exclusive": "0x362ba1",
+      "sha256": "df2bef50cadc8334a270a64259ac7449084334436c2e120cd8d15c26abdc5a12",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3550016
+      }
+    },
+    {
+      "start": "0x36300c",
+      "end_exclusive": "0x363075",
+      "sha256": "255f1219073816fd2d4d56df941f428b614220572a821f1a88396acfc79372ce",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3551244
+      }
+    }
+  ],
+  "prior_receipts": [
+    {
+      "path": "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/animation-element-contract/evidence.json",
+      "sha256": "f98e134410d0a4c921d6a3dc0db8146a6281f83856aa7957c11b29ff3a0832fd"
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/model-optional-carriers-contract/evidence.json",
+      "sha256": "a4e48d7d8e7bace1d3b523ae58cc6891822202cf4ad5ea87fd8811b1be8e2369"
+    }
+  ],
+  "authored_algebra": {
+    "temporary_base": "0x28",
+    "r15": "0x40",
+    "zero_spans": [
+      [
+        376,
+        392
+      ],
+      [
+        360,
+        376
+      ]
+    ],
+    "particle_span": [
+      368,
+      392
+    ],
+    "zero_count": 0
+  },
+  "target_executed": false,
+  "assets_read": false,
+  "repository_modified": false,
+  "limits": [
+    "Normal completed fresh wire path with established field/reader boundaries",
+    "Not a memory-safety theorem for malformed input or arbitrary reader implementations",
+    "No global particle-support or other-producer absence claim"
+  ]
+}
