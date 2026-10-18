@@ -1,0 +1,48 @@
+{
+  "format": "ysm-texture-mt19937-64-parameter-comparison-v1",
+  "conclusion": "Exact 64-bit engine parameter and recurrence equivalence to std::mt19937_64; no compiler or library origin attribution.",
+  "official_release": "GCC 12.2.0",
+  "official_commit": "2ee5e4300186a92ad73f1a1a64cb918dc76c8d67",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/gcc-mirror/gcc/2ee5e4300186a92ad73f1a1a64cb918dc76c8d67/libstdc++-v3/include/bits/random.h",
+      "sha256": "5d2f723d7bdcb6f21afbca5f64c321d5f1e7c2ea8772113b039aaa33d995d84e"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/gcc-mirror/gcc/2ee5e4300186a92ad73f1a1a64cb918dc76c8d67/libstdc++-v3/include/bits/random.tcc",
+      "sha256": "183fcbfa16e8972eec3eef6427dac091c7a1d11ee28cd0f594214e26b57b143a"
+    }
+  ],
+  "parameters": {
+    "w": 64,
+    "n": 312,
+    "m": 156,
+    "r": 31,
+    "a": "0xb5026f5aa96619e9",
+    "u": 29,
+    "d": "0x5555555555555555",
+    "s": 17,
+    "b": "0x71d67fffeda60000",
+    "t": 37,
+    "c": "0xfff7eee000000000",
+    "l": 43,
+    "f": "0x5851f42d4c957f2d"
+  },
+  "original_image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "static_receipt_sha256": "e928483565658e8693256b61e97018d20efa2f568a3c56677762ae9671df44d9",
+  "algebra_checks": {
+    "unsigned_width": 64,
+    "mask_values": 68,
+    "twist_pairs": 4624,
+    "post_shift29_effective_mask": "0x555555555",
+    "pre_shift37_mask": "0x07ffbf77",
+    "seed_multiplier": "0x5851f42d4c957f2d"
+  },
+  "scope_exclusions": [
+    "compiler/library provenance",
+    "cryptographic security",
+    "encryption label for full transform",
+    "target or asset execution",
+    "default seed usage"
+  ]
+}

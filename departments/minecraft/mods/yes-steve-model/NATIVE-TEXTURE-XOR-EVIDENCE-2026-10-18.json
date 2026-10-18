@@ -1,0 +1,287 @@
+{
+  "format": "ysm-texture-source-transform-static-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "ranges": [
+    {
+      "name": "xor_transform",
+      "start": "0x4df880",
+      "end_exclusive": "0x4dfa93",
+      "sha256": "ba2c9330358bef98c73d1b10bf9511990188d85cbcef1277da02703dca84c053",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5109888
+      }
+    },
+    {
+      "name": "generator",
+      "start": "0x43bfe0",
+      "end_exclusive": "0x43c2b6",
+      "sha256": "343c3a45f9d224288b3de95929512968e93efa83a0b617a58f3b342848faee65",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4440032
+      }
+    },
+    {
+      "name": "seed_mix",
+      "start": "0x573dd0",
+      "end_exclusive": "0x574278",
+      "sha256": "6e55adb00ae457155b54eb23ad647a354e396e231df77d49a52d8fcc618167d8",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5717456
+      }
+    },
+    {
+      "name": "reapply",
+      "start": "0x3a58e0",
+      "end_exclusive": "0x3a59ed",
+      "sha256": "7cd3aae1bd45de15d5714170064decc341a485a108ed405f2554d09d1a98fd9f",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3823840
+      }
+    },
+    {
+      "name": "upload",
+      "start": "0x3bf234",
+      "end_exclusive": "0x3bf3bd",
+      "sha256": "1826b6b5fe0c9d75ff3a261b24bc2ab0c63b37284cfd3ca0b56c2b9524a32609",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3928628
+      }
+    },
+    {
+      "name": "producer",
+      "start": "0x375662",
+      "end_exclusive": "0x375a9c",
+      "sha256": "5d158577549495138db6d64467a2ca9e45bde81ad2332b5d36b164b033a1f6b1",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3626594
+      }
+    },
+    {
+      "name": "seed_address",
+      "start": "0x3608d0",
+      "end_exclusive": "0x3608d5",
+      "sha256": "337222f0640328de908dacc52ced92ff844fe6d4f480a84a6e4aa98bb839dc80",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3541200
+      }
+    },
+    {
+      "name": "seed_length",
+      "start": "0x3a52b0",
+      "end_exclusive": "0x3a52b6",
+      "sha256": "75f533bd3e59de2588c8f1901e45a3eea6688bc16b7ecaf3dcaf4d49cf4f3d49",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3822256
+      }
+    }
+  ],
+  "vtable_relative_relocations": [
+    {
+      "slot": "0xd1c510",
+      "type": 8,
+      "addend": "0x3608d0"
+    },
+    {
+      "slot": "0xd1c518",
+      "type": 8,
+      "addend": "0x3a52b0"
+    }
+  ],
+  "generator_constant_vectors": {
+    "0x375a0": [
+      "0xffffffff80000000",
+      "0xffffffff80000000"
+    ],
+    "0x3b5d0": [
+      "0x7ffffffe",
+      "0x7ffffffe"
+    ],
+    "0x37990": [
+      "0xb5026f5aa96619e9",
+      "0xb5026f5aa96619e9"
+    ],
+    "0x39110": [
+      "0x7ffffffe",
+      "0xffffffff80000000"
+    ],
+    "0x3c590": [
+      "0xffffffff80000000",
+      "0x7ffffffe"
+    ]
+  },
+  "source_receipts": [
+    {
+      "path": "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/texture-upload-release-contract/evidence.json",
+      "sha256": "76bbbb70c12f76e78cac71f18a6ed3e746873b10290475f20df7ce0d219747cf"
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/texture-upload-release-contract/identity-closure.json",
+      "sha256": "17182c93c0263a0227dd68eb2fc0cb1180b52dad04350fb6257fdfdfd8f79d70"
+    },
+    {
+      "path": "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/model-receive-contract/evidence.json",
+      "sha256": "1fd605070816b39274dda31008cfe4e30cede95c86d3a647a0157a04e8b755d1"
+    }
+  ],
+  "synthetic_algebra": {
+    "cases": [
+      {
+        "length": 0,
+        "round_trip": true
+      },
+      {
+        "length": 1,
+        "round_trip": true
+      },
+      {
+        "length": 2,
+        "round_trip": true
+      },
+      {
+        "length": 3,
+        "round_trip": true
+      },
+      {
+        "length": 4,
+        "round_trip": true
+      },
+      {
+        "length": 5,
+        "round_trip": true
+      },
+      {
+        "length": 6,
+        "round_trip": true
+      },
+      {
+        "length": 7,
+        "round_trip": true
+      },
+      {
+        "length": 8,
+        "round_trip": true
+      },
+      {
+        "length": 9,
+        "round_trip": true
+      },
+      {
+        "length": 15,
+        "round_trip": true
+      },
+      {
+        "length": 16,
+        "round_trip": true
+      },
+      {
+        "length": 17,
+        "round_trip": true
+      },
+      {
+        "length": 31,
+        "round_trip": true
+      },
+      {
+        "length": 32,
+        "round_trip": true
+      },
+      {
+        "length": 2495,
+        "round_trip": true
+      },
+      {
+        "length": 2496,
+        "round_trip": true
+      }
+    ],
+    "split_positions": 257,
+    "uses_original_asset_bytes": false,
+    "executes_original_code": false,
+    "models_generator": false
+  },
+  "limitations": [
+    "Static control flow and conditional algebra, not runtime restoration proof.",
+    "Virtual-table identity applies to the inspected receive-created node path.",
+    "No decoder behavior or security intent inferred."
+  ]
+}

@@ -1,0 +1,494 @@
+{
+  "format": "ysm-shared-decoder-static-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "ranges": [
+    {
+      "id": "decoder",
+      "start": "0x3d0b20",
+      "end_exclusive": "0x3d0e0d",
+      "sha256": "eca0676c53f6617f51bf94970efb5ab4a2a63ecbe1e9e23bcc036993f0215827",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4000544
+      }
+    },
+    {
+      "id": "decoder_stream_cleanup",
+      "start": "0x3d0e10",
+      "end_exclusive": "0x3d0e7a",
+      "sha256": "3fba14022a2091dc2b31a55caa5c376c65a4e512400061d1ae1557daec008777",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4001296
+      }
+    },
+    {
+      "id": "hash_helper",
+      "start": "0x573dd0",
+      "end_exclusive": "0x574278",
+      "sha256": "6e55adb00ae457155b54eb23ad647a354e396e231df77d49a52d8fcc618167d8",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5717456
+      }
+    },
+    {
+      "id": "stream_setup",
+      "start": "0x4dc3a0",
+      "end_exclusive": "0x4dc544",
+      "sha256": "419c5c76aedbbda34f284f35fe1fb04144aba3c440f84b89c3ad3dff221b4117",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5096352
+      }
+    },
+    {
+      "id": "borrowed_stream_read",
+      "start": "0x4dc180",
+      "end_exclusive": "0x4dc270",
+      "sha256": "6a5ea2e1081bdebff787cd354e5c909f2a04a5ee589511c077f1a5a30255d2b1",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5095808
+      }
+    },
+    {
+      "id": "borrowed_span_copy",
+      "start": "0x4dc270",
+      "end_exclusive": "0x4dc2b7",
+      "sha256": "eb3444b96ce5d9cdb1c9c7490fcf985c383095a2ccff99e6162159ddffc47fac",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5096048
+      }
+    },
+    {
+      "id": "xor_stream_read",
+      "start": "0x4dd600",
+      "end_exclusive": "0x4dd680",
+      "sha256": "d4ae85f8856614efe9d3edf7a1b4fc30970c4e5c96d15fb20b0fde172cfb8e12",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5101056
+      }
+    },
+    {
+      "id": "xor_bytes",
+      "start": "0x4df880",
+      "end_exclusive": "0x4dfa93",
+      "sha256": "ba2c9330358bef98c73d1b10bf9511990188d85cbcef1277da02703dca84c053",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5109888
+      }
+    },
+    {
+      "id": "buffered_stream_read",
+      "start": "0x4dd1d0",
+      "end_exclusive": "0x4dd342",
+      "sha256": "e834336c4dc083eab6d1b96e97d9d3ca18eb9a6b65161d34b4a0ace6440e169e",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5099984
+      }
+    },
+    {
+      "id": "selector_read",
+      "start": "0x4c39e0",
+      "end_exclusive": "0x4c3b41",
+      "sha256": "8467adcd3e3c7cee98929e07094bec15ee47e9d6e05ef2e8f16b8594bee923ba",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4995552
+      }
+    },
+    {
+      "id": "client_capacity_selector3",
+      "start": "0x39a724",
+      "end_exclusive": "0x39a867",
+      "sha256": "8c87462d27c45ed8a48bb9a7cdbbdab3838271862a9b40bce1a724a9eec08565",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3778340
+      }
+    },
+    {
+      "id": "client_selector5",
+      "start": "0x39ac1c",
+      "end_exclusive": "0x39acbb",
+      "sha256": "a14828c32039b5bf771755ccae61e81fd6c0a3c27236b56b6b458993a7e91daf",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3779612
+      }
+    },
+    {
+      "id": "client_selector1",
+      "start": "0x39c5d0",
+      "end_exclusive": "0x39c657",
+      "sha256": "741d7cd24cd2a081057c4190fa5e74e6436c678d35face4e67aa57e45aa67d4d",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 3786192
+      }
+    },
+    {
+      "id": "server_capacity_selector2",
+      "start": "0x403c44",
+      "end_exclusive": "0x403d36",
+      "sha256": "0bfd6c55dce977b2a4ca462d934ec70f2d8206f0af41d16cf176ce59b53ba35a",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4209732
+      }
+    }
+  ],
+  "relocations": [
+    {
+      "slot": "0xd1d808",
+      "raw_value": "0x0",
+      "relocation_type": 8,
+      "symbol_index": 0,
+      "symbol_name": "",
+      "addend": 5095808,
+      "actual_runtime_binding_verified": false
+    },
+    {
+      "slot": "0xd1d950",
+      "raw_value": "0x0",
+      "relocation_type": 8,
+      "symbol_index": 0,
+      "symbol_name": "",
+      "addend": 5101056,
+      "actual_runtime_binding_verified": false
+    },
+    {
+      "slot": "0xd1d860",
+      "raw_value": "0x0",
+      "relocation_type": 8,
+      "symbol_index": 0,
+      "symbol_name": "",
+      "addend": 5099984,
+      "actual_runtime_binding_verified": false
+    },
+    {
+      "slot": "0xd1d868",
+      "raw_value": "0x0",
+      "relocation_type": 8,
+      "symbol_index": 0,
+      "symbol_name": "",
+      "addend": 5096784,
+      "actual_runtime_binding_verified": false
+    },
+    {
+      "slot": "0xd1d418",
+      "raw_value": "0x0",
+      "relocation_type": 8,
+      "symbol_index": 0,
+      "symbol_name": "",
+      "addend": 4995552,
+      "actual_runtime_binding_verified": false
+    },
+    {
+      "slot": "0xd1be78",
+      "raw_value": "0x0",
+      "relocation_type": 8,
+      "symbol_index": 0,
+      "symbol_name": "",
+      "addend": 3811184,
+      "actual_runtime_binding_verified": false
+    },
+    {
+      "slot": "0xd1bff0",
+      "raw_value": "0x0",
+      "relocation_type": 8,
+      "symbol_index": 0,
+      "symbol_name": "",
+      "addend": 3810912,
+      "actual_runtime_binding_verified": false
+    },
+    {
+      "slot": "0xd1bfc0",
+      "raw_value": "0x0",
+      "relocation_type": 8,
+      "symbol_index": 0,
+      "symbol_name": "",
+      "addend": 3822000,
+      "actual_runtime_binding_verified": false
+    },
+    {
+      "slot": "0xd1be48",
+      "raw_value": "0x0",
+      "relocation_type": 8,
+      "symbol_index": 0,
+      "symbol_name": "",
+      "addend": 3821888,
+      "actual_runtime_binding_verified": false
+    }
+  ],
+  "prior_caller_receipts": [
+    {
+      "path": "../model-receive-contract/evidence.json",
+      "sha256": "1fd605070816b39274dda31008cfe4e30cede95c86d3a647a0157a04e8b755d1"
+    },
+    {
+      "path": "../server-transport-contract/evidence.json",
+      "sha256": "d62b11ee826812c959fb9dd49b7cd2dcc1b1c41aabd05c164519cbc33e68f3e5"
+    }
+  ],
+  "algebra_fixtures": {
+    "short_length_arithmetic": [
+      {
+        "length": 0,
+        "footer_relative_offset": -8,
+        "wrapped_hash_length": 18446744073709551608
+      },
+      {
+        "length": 1,
+        "footer_relative_offset": -7,
+        "wrapped_hash_length": 18446744073709551609
+      },
+      {
+        "length": 7,
+        "footer_relative_offset": -1,
+        "wrapped_hash_length": 18446744073709551615
+      },
+      {
+        "length": 8,
+        "footer_relative_offset": 0,
+        "wrapped_hash_length": 0
+      },
+      {
+        "length": 9,
+        "footer_relative_offset": 1,
+        "wrapped_hash_length": 1
+      },
+      {
+        "length": 64,
+        "footer_relative_offset": 56,
+        "wrapped_hash_length": 56
+      }
+    ],
+    "valid_varint_values": [
+      {
+        "value": 1,
+        "encoded": [
+          1
+        ],
+        "decoded": 1,
+        "consumed": 1
+      },
+      {
+        "value": 2,
+        "encoded": [
+          2
+        ],
+        "decoded": 2,
+        "consumed": 1
+      },
+      {
+        "value": 3,
+        "encoded": [
+          3
+        ],
+        "decoded": 3,
+        "consumed": 1
+      },
+      {
+        "value": 5,
+        "encoded": [
+          5
+        ],
+        "decoded": 5,
+        "consumed": 1
+      },
+      {
+        "value": 127,
+        "encoded": [
+          127
+        ],
+        "decoded": 127,
+        "consumed": 1
+      },
+      {
+        "value": 128,
+        "encoded": [
+          128,
+          1
+        ],
+        "decoded": 128,
+        "consumed": 2
+      },
+      {
+        "value": 16384,
+        "encoded": [
+          128,
+          128,
+          1
+        ],
+        "decoded": 16384,
+        "consumed": 3
+      },
+      {
+        "value": 4294967295,
+        "encoded": [
+          255,
+          255,
+          255,
+          255,
+          15
+        ],
+        "decoded": 4294967295,
+        "consumed": 5
+      }
+    ],
+    "state_recurrence": {
+      "seed": "0x123456789abcdef0",
+      "count": 312,
+      "first_three": [
+        "0x123456789abcdef0",
+        "0x8ddb1a43e77c4031",
+        "0x9f4d11dd65f95f9"
+      ],
+      "last": "0xc83ab87f9ff8a507"
+    }
+  },
+  "target_executed": false,
+  "emulation_performed": false,
+  "original_assets_extracted": false,
+  "malformed_payloads_executed": false,
+  "algorithm_identity": "Unassigned; operations/constants only, no exact primary-source algorithm match claimed",
+  "unresolved": [
+    "Caller-wide minimum-capacity invariant",
+    "Dynamic transform dispatch d2ff30",
+    "Full parser schema and parser side effects",
+    "Cryptographic authentication or confidentiality guarantees",
+    "Complete exception classification without LSDA analysis"
+  ]
+}

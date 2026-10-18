@@ -1,0 +1,94 @@
+{
+  "format": "ysm-decoder-lazy-dispatch-static-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "ranges": [
+    {
+      "name": "dispatch_caller",
+      "start": "0x4dc4aa",
+      "end_exclusive": "0x4dc4c4",
+      "sha256": "18890990d281307f4410239eaf80b364e378ff120538d64702b8726ac73c7562",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5096618
+      }
+    },
+    {
+      "name": "lazy_dispatch_trampoline",
+      "start": "0x574b10",
+      "end_exclusive": "0x574b5e",
+      "sha256": "caed423de1380a8103e48d5fc525a1036be66dd3cab6ad7509b3136daa029f01",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 5720848
+      }
+    }
+  ],
+  "relocations": [
+    {
+      "slot": "0xd2ff30",
+      "raw_value": "0x0",
+      "relocation_type": 8,
+      "symbol_index": 0,
+      "symbol_name": "",
+      "addend": 13754080,
+      "actual_runtime_binding_verified": false,
+      "addend_hex": "0xd1dee0"
+    },
+    {
+      "slot": "0xd1df08",
+      "raw_value": "0x0",
+      "relocation_type": 8,
+      "symbol_index": 0,
+      "symbol_name": "",
+      "addend": 5720848,
+      "actual_runtime_binding_verified": false,
+      "addend_hex": "0x574b10"
+    }
+  ],
+  "linked_receipts": [
+    {
+      "path": "shared-decoder-contract/evidence.json",
+      "sha256": "704de3897db3206c8e00edaeb97603d0bed2d736f668ba33b4b30fc1494981c8"
+    },
+    {
+      "path": "decoder-transform-dispatch-checkpoint.json",
+      "sha256": "b5aadf8bc0e6ee567b15813a70bfdd2861d5f18bb92ac6aecf21f98052aaecd0"
+    }
+  ],
+  "findings": {
+    "arguments": [
+      "K",
+      "K+0x20",
+      "output temporary",
+      "0x1e"
+    ],
+    "resolver": "0x576990",
+    "nonnull": "publish returned pointer to global 0xd2ff30, load its +0x28 function pointer, restore four arguments, tail-jump",
+    "null": "return directly without writing output in this trampoline",
+    "primitive_identity": "unresolved: immediate target is a lazy dispatch trampoline",
+    "bounds": "no pointer/length/round-count validation in immediate trampoline",
+    "ownership": "arguments forwarded without copy/free; global table pointer replaced on nonnull resolver result"
+  },
+  "target_executed": false,
+  "emulation_performed": false,
+  "assets_extracted": false,
+  "resolver_body_traced": false
+}

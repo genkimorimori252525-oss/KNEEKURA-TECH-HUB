@@ -1,0 +1,157 @@
+{
+  "format": "ysm-generic-hchacha-form-static-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "range": {
+    "start": "0x576430",
+    "end_exclusive": "0x5766ca",
+    "sha256": "1758f747216888bbe9859acebe2425cd047a549fd33cdf1aa4b3f4f4430fcf29",
+    "backing": {
+      "region": {
+        "kind": "PT_LOAD",
+        "index": 1,
+        "address": 0,
+        "memory_size": 13718256,
+        "file_offset": 0,
+        "file_size": 13718256,
+        "flags": 5
+      },
+      "file_backed": true,
+      "file_offset": 5727280
+    }
+  },
+  "primary_sources": [
+    {
+      "file": "rfc8439.txt",
+      "url": "https://www.rfc-editor.org/rfc/rfc8439.txt",
+      "sha256": "25bef70fbf7a07ff45c2fe4cb7c6ce954eac687413d8610603268b4e4415324c"
+    },
+    {
+      "file": "draft-irtf-cfrg-xchacha-03.txt",
+      "url": "https://www.ietf.org/archive/id/draft-irtf-cfrg-xchacha-03.txt",
+      "sha256": "fa796b50265eeee383d40e82fed880267c7835e1b3d64c50c4f06162adaa1cfd"
+    }
+  ],
+  "prior_receipts": [
+    {
+      "path": "decoder-resolver-contract/evidence.json",
+      "sha256": "d0cd6699936b4fdd26f5817ed973805aeb26460ff5b1ab6d2296a5685f308c0d"
+    },
+    {
+      "path": "shared-decoder-contract/evidence.json",
+      "sha256": "704de3897db3206c8e00edaeb97603d0bed2d736f668ba33b4b30fc1494981c8"
+    }
+  ],
+  "quarter_round_mapping": [
+    {
+      "start": "0x576495",
+      "end_exclusive": "0x5764bf",
+      "state_indices": [
+        0,
+        4,
+        8,
+        12
+      ]
+    },
+    {
+      "start": "0x5764bf",
+      "end_exclusive": "0x5764ea",
+      "state_indices": [
+        1,
+        5,
+        9,
+        13
+      ]
+    },
+    {
+      "start": "0x5764ea",
+      "end_exclusive": "0x576512",
+      "state_indices": [
+        2,
+        6,
+        10,
+        14
+      ]
+    },
+    {
+      "start": "0x576512",
+      "end_exclusive": "0x576543",
+      "state_indices": [
+        3,
+        7,
+        11,
+        15
+      ]
+    },
+    {
+      "start": "0x576543",
+      "end_exclusive": "0x576574",
+      "state_indices": [
+        0,
+        5,
+        10,
+        15
+      ]
+    },
+    {
+      "start": "0x576574",
+      "end_exclusive": "0x5765a2",
+      "state_indices": [
+        1,
+        6,
+        11,
+        12
+      ]
+    },
+    {
+      "start": "0x5765a2",
+      "end_exclusive": "0x5765d0",
+      "state_indices": [
+        2,
+        7,
+        8,
+        13
+      ]
+    },
+    {
+      "start": "0x5765d0",
+      "end_exclusive": "0x5765f8",
+      "state_indices": [
+        3,
+        4,
+        9,
+        14
+      ]
+    }
+  ],
+  "interface": {
+    "RDI": "32 readable bytes, state words4..11 little-endian",
+    "RSI": "16 readable bytes, state words12..15 little-endian",
+    "RDX": "32 writable output bytes",
+    "RCX": "64-bit number decremented by2 after each full double round"
+  },
+  "constants": [
+    "0x61707865",
+    "0x3320646e",
+    "0x79622d32",
+    "0x6b206574"
+  ],
+  "output_words": [
+    0,
+    1,
+    2,
+    3,
+    12,
+    13,
+    14,
+    15
+  ],
+  "feed_forward": false,
+  "caller_rounds": 30,
+  "caller_double_rounds": 15,
+  "primitive": "Parameterized HChaCha-form transform; this caller uses 30 rounds, distinct from specified HChaCha20",
+  "direct_calls": [],
+  "target_executed": false,
+  "fixtures_executed": false,
+  "actual_backend_selection_proven": false,
+  "assets_extracted": false
+}
