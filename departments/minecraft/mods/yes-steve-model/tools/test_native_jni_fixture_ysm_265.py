@@ -108,14 +108,14 @@ class JniFixtureTests(unittest.TestCase):
 
     def test_findclass_declared_runtime_exception_returns_opaque_handle(self):
         c = self.cpu()
-        for _ in range(2):
+        for i in range(2):
             c.write_private(SP + 128, b'java/lang/RuntimeException\0')
             self.arguments(c, 'env', 'FindClass', output=SP + 128)
             c.model('jni-import')
-            self.assertEqual(c.reg('RAX'), 0x790000000000)
+            self.assertEqual(c.reg('RAX'), 0x790000000000+256*i)
             self.assertEqual(c.reg('RSP'), SP + 8)
             self.assertEqual(c.reg('RIP'), CODE)
-        self.assertEqual(c.jni_state['classes'], {str(0x790000000000): 'java/lang/RuntimeException'})
+        self.assertEqual(c.jni_state['classes'], {str(0x790000000000+256*i): 'java/lang/RuntimeException' for i in range(2)})
         self.assertEqual(c.jni_state['calls'], [['env', 6, 'FindClass']] * 2)
         self.assertIsNotNone(c.unknown(0x790000000000, 1))
         prepare_call(c, CODE)
@@ -224,7 +224,7 @@ class JniFixtureTests(unittest.TestCase):
                     c.model('jni-import')
                 self.arguments(c, 'env', 'ThrowNew', output=0 if case == 'unknown' else handle, version=SP + 192)
                 before = copy.deepcopy(c.jni_state)
-                with self.assertRaisesRegex(ModelHalt, 'INVALID_JNI_THROW_CLASS_OR_STATE'):
+                with self.assertRaisesRegex(ModelHalt, 'JNI_CALL_WITH_PENDING_EXCEPTION' if case == 'pending' else 'INVALID_JNI_THROW_CLASS_OR_STATE'):
                     c.model('jni-import')
                 self.assertEqual(c.jni_state, before)
 
@@ -237,8 +237,8 @@ class JniFixtureTests(unittest.TestCase):
         self.arguments(c, 'env', 'DeleteLocalRef', output=handle)
         c.model('jni-import')
         self.assertEqual(c.jni_state['deleted_local_refs'], [handle])
-        self.assertEqual(self.declare_exception_class(c), handle)
-        self.assertEqual(c.jni_state['deleted_local_refs'], [])
+        self.assertNotEqual(self.declare_exception_class(c), handle)
+        self.assertEqual(c.jni_state['deleted_local_refs'], [handle])
         for duplicate in (False, True):
             d = self.cpu()
             ref = self.declare_exception_class(d)

@@ -39,6 +39,13 @@ class ArtifactTests(unittest.TestCase):
         self.assertTrue(v.unchanged(c))
         self.assertTrue(all(p == UC_PROT_READ for _, _, p in c.uc.mem_regions()))
 
+    def test_overlapping_load_segments_rejected_before_mapping(self):
+        for flags in (4,6):
+            b=bytearray(elf());struct.pack_into('<IIQQQQQQ',b,120,1,flags,0x1000,0x1000,0,0x800,0x800,0x1000)
+            cpu=SimpleNamespace(uc=Uc(UC_ARCH_X86,UC_MODE_64))
+            with self.assertRaisesRegex(ValueError,'Overlapping'):JvmArtifactView(cpu,bytes(b))
+            self.assertEqual(list(cpu.uc.mem_regions()),[])
+
     def test_local_function_is_not_exported(self):
         v, _ = view(elf(local=[('jni_GetEnv', 2, 0, 1, 0x200, 16)]))
         self.assertTrue(hasattr(v, 'local_function'), 'static symbol lookup is missing')

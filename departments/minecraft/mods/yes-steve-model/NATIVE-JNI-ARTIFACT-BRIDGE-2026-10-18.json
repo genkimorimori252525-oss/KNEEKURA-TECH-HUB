@@ -305,5 +305,120 @@
     "initial_sp": "0x700000008008",
     "legacy_migration_requires_explicit_opt_in": true,
     "added_bytes_known": false
+  },
+  "focused_independent_jni_guard_review": {
+    "scope": [
+      "JNI bridge",
+      "JVM artifact view",
+      "virtual loader",
+      "Java metadata parser"
+    ],
+    "findings": 3,
+    "fixes": [
+      "independent local references",
+      "pending-exception gate",
+      "reject overlapping PT_LOAD before mapping"
+    ],
+    "affected_test_methods": 90,
+    "affected_test_result": "PASS",
+    "overall_semantic_review_still_not_run": true
+  },
+  "later_continuation": {
+    "checkpoint_basename": "unicorn-jni-batch-next2.checkpoint.json",
+    "checkpoint_sha256": "3284d42f308e39c5b4d5eaa2ade13d86767bc3e3b67acf27bf917b84efd90a4f",
+    "stop": {
+      "reason": "INSTRUCTION_BUDGET",
+      "pc": 16495676,
+      "address": 16495676,
+      "size": 0
+    },
+    "method_proofs": [
+      {
+        "requested_class": "java/io/File",
+        "name": "<init>",
+        "descriptor": "(Ljava/lang/String;)V",
+        "static": false,
+        "declaring_class": "java/io/File",
+        "class_sha256": "6515f14f42b2602af6d987e92b0318a4e2a8ac90252c7ff057eb728ce7a2d88b",
+        "source": {
+          "id": "java.base",
+          "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+          "archive_kind": "jmod",
+          "entry_count": 7622
+        }
+      },
+      {
+        "requested_class": "java/io/File",
+        "name": "toPath",
+        "descriptor": "()Ljava/nio/file/Path;",
+        "static": false,
+        "declaring_class": "java/io/File",
+        "class_sha256": "6515f14f42b2602af6d987e92b0318a4e2a8ac90252c7ff057eb728ce7a2d88b",
+        "source": {
+          "id": "java.base",
+          "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+          "archive_kind": "jmod",
+          "entry_count": 7622
+        }
+      },
+      {
+        "requested_class": "java/nio/file/Path",
+        "name": "toString",
+        "descriptor": "()Ljava/lang/String;",
+        "static": false,
+        "declaring_class": "java/nio/file/Path",
+        "class_sha256": "a742da0be8612380a06ebd1b770f2554567fd0cf34e90398b5fc5797604c5e66",
+        "source": {
+          "id": "java.base",
+          "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+          "archive_kind": "jmod",
+          "entry_count": 7622
+        }
+      },
+      {
+        "requested_class": "java/nio/file/Path",
+        "name": "toAbsolutePath",
+        "descriptor": "()Ljava/nio/file/Path;",
+        "static": false,
+        "declaring_class": "java/nio/file/Path",
+        "class_sha256": "a742da0be8612380a06ebd1b770f2554567fd0cf34e90398b5fc5797604c5e66",
+        "source": {
+          "id": "java.base",
+          "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+          "archive_kind": "jmod",
+          "entry_count": 7622
+        }
+      },
+      {
+        "requested_class": "java/nio/file/Path",
+        "name": "normalize",
+        "descriptor": "()Ljava/nio/file/Path;",
+        "static": false,
+        "declaring_class": "java/nio/file/Path",
+        "class_sha256": "a742da0be8612380a06ebd1b770f2554567fd0cf34e90398b5fc5797604c5e66",
+        "source": {
+          "id": "java.base",
+          "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+          "archive_kind": "jmod",
+          "entry_count": 7622
+        }
+      },
+      {
+        "requested_class": "java/util/HashMap",
+        "name": "<init>",
+        "descriptor": "()V",
+        "static": false,
+        "declaring_class": "java/util/HashMap",
+        "class_sha256": "8435b00bf2cf42391cc63f44cfe2dc52e96e3dfe7219932249feb67660a320cd",
+        "source": {
+          "id": "java.base",
+          "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+          "archive_kind": "jmod",
+          "entry_count": 7622
+        }
+      }
+    ],
+    "pending_exception": null,
+    "native_registrations_recovered": 0
   }
 }

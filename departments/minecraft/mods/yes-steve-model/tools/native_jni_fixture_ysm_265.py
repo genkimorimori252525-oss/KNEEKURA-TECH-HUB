@@ -154,15 +154,16 @@ class JniGuardedCPU(SyncGuardedCPU):
         s=self.jni_state;self.demand(s is not None and len(s['calls'])<4096,'JNI_MODEL_BUDGET');sp,target=self.frame(False)
         self.emit('JNI_CALL_FRONTIER',f'kind={category}',f'index={index}',name,*(f'{r}={self.reg(r):x}' for r in ['RDI','RSI','RDX','RCX','R8','R9']))
         self.validate_interface(category,self.reg('RDI'))
+        if category=='env' and s['pending_exception'] is not None:
+            self.demand(name in ('ExceptionCheck','DeleteLocalRef','DeleteGlobalRef'),'JNI_CALL_WITH_PENDING_EXCEPTION',index)
         if category=='vm' and name=='GetEnv':
             self.demand(self.reg('RDX')&0xffffffff==VERSION,'UNMODELED_JNI_VERSION');self.write_model_memory(self.reg('RSI'),struct.pack('<Q',s['env']));result=0;s['getenv_calls']+=1
         elif category=='env' and name=='FindClass':
             name_input=self.ascii(self.reg('RSI'))
             try:info=self.java_metadata.class_info(name_input) if self.java_metadata is not None else None
             except ValueError:self.demand(False,'UNMODELED_JAVA_CLASS')
-            self.demand(info is not None or name_input=='java/lang/RuntimeException','UNMODELED_JAVA_CLASS');self.demand(len(s['classes'])<1024 or name_input in s['classes'].values(),'JAVA_CLASS_HANDLE_BUDGET')
-            result=next((int(k) for k,v in s['classes'].items() if v==name_input),0x790000000000+256*len(s['classes']));s['classes'][str(result)]=name_input
-            if result in s['deleted_local_refs']:s['deleted_local_refs'].remove(result)
+            self.demand(info is not None or name_input=='java/lang/RuntimeException','UNMODELED_JAVA_CLASS');self.demand(len(s['classes'])<1024,'JAVA_CLASS_HANDLE_BUDGET')
+            result=0x790000000000+256*len(s['classes']);s['classes'][str(result)]=name_input
             if info is not None:s['class_proofs'][name_input]={'sha256':info['class_sha256'],'source':info['source']}
             self.emit('VIRTUAL_FIND_CLASS',name_input,f'handle={result:x}',f'artifact_metadata_verified={info is not None}','host_class_loading=false')
         elif category=='env' and name=='NewGlobalRef':

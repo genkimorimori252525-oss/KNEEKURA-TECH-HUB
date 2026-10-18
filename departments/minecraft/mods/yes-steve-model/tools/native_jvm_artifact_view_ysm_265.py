@@ -11,6 +11,7 @@ class JvmArtifactView:
         for r in rs:
             a=BASE+r['address'];n=r['memory_size'];z=r['file_size'];offset=r['file_offset']
             if not 0<=z<=n or offset+z>len(data) or a+n>=BASE+128*1024*1024:raise ValueError('Invalid JVM load segment')
+            if n and any(lo<a+n and a<hi for lo,hi in self.ranges):raise ValueError('Overlapping JVM load segments are unsupported')
             self.ranges.append((a,a+n));pages.update(range(a&~4095,(a+n+4095)&~4095,4096))
             if not r['flags']&2:self.known.append((a,a+z))
         runs=[]

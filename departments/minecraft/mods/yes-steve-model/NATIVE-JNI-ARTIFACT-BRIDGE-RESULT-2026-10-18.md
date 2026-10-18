@@ -45,3 +45,15 @@ Use tools/native_jni_onload_ysm_265.py with explicit --image, --jvm-image, --jav
 The current resume snapshot is unicorn-jni-crc-fast-next.checkpoint.json (hash in receipt). Preserve it unchanged before testing any explicit stack-capacity extension. The fresh initializer snapshot with all three JVM imports guarded is unicorn-init-jvm-guard-fresh.checkpoint.json. Earlier fixture/table variants must not be mixed with the current scenario. Optional --batch-size 256 now selects a guarded batched CPU; the default remains the single-step backend. An actual 100,000-instruction continuation compared both backends after the same explicit stack migration: the complete serialized checkpoint hashes are identical (87132c24260938fac37a83357f6d23a4d8a423cab5a45c26599b671704de1514). Timings were 2.541 versus 1.528 seconds in this run, not a universal speed guarantee. Executable-page stores end a batch so Unicorn self-modifying-code replay behavior stays consistent with the single-step backend.
 
 The stack now spans [0x6ffffff10000,0x700000010000), with entry SP unchanged at 0x700000008008. Added 960 KiB bytes are unknown until written. Legacy checkpoints require --allow-stack-extension in the JNI driver; migration validates exact original regions/lengths/masks, records scenario provenance and does not assert equivalence to the small-stack scenario. Newly written checkpoints resume without that flag. Other older drivers deliberately reject old-layout snapshots unless callers explicitly opt into the migration API. Cross-layout checkpoint comparison reports mismatch rather than pretending equality.
+
+## Focused independent JNI guard review
+
+A read-only review of the JNI bridge, JVM artifact view, virtual loader and Java metadata parser found three concrete edge-case defects. They were reproduced on authored fixtures and corrected together:
+
+1. Repeated FindClass calls now allocate independent local references, so deleting one cannot invalidate another. Deleted handles are not revived or confused with globals.
+2. Pending exceptions block unsupported JNI environment calls before state mutation; modeled ExceptionCheck and local/global-reference deletion remain allowed.
+3. Overlapping JVM PT_LOAD memory ranges are rejected before mapping. Read-only overlap cannot accidentally mark writable runtime bytes as known merely because original backing bytes coincide.
+
+Four regression methods were added; older tests that incorrectly required reused local handles were corrected. The six-module affected JNI/artifact/callback/batched cohort passes 90 methods. This is a focused contract review, not an independent review of all recovered YSM semantics. The observed positive prefix had no pending exception and one FindClass per class, and the supplied JVM passes the new nonoverlap check; no observed result is being silently discarded.
+
+Sources: [JNI reference semantics](https://docs.oracle.com/en/java/javase/21/docs/specs/jni/design.html#implementing-local-references), [JNI pending-exception constraints](https://docs.oracle.com/en/java/javase/21/docs/specs/jni/design.html#exception-handling).

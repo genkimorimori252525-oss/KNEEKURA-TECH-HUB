@@ -41,4 +41,15 @@ class MetadataBridgeTests(unittest.TestCase):
   with self.assertRaises(ValueError):d.configure_java_metadata(changed)
  def test_exception_check_without_side_effects(self):
   c=self.cpu();self.assertEqual(self.call(c,228),0);c.jni_state['pending_exception']={'class':'java/lang/RuntimeException','message':'owned'};self.assertEqual(self.call(c,228),1);self.assertEqual(c.jni_state['pending_exception']['message'],'owned')
+ def test_repeated_find_class_returns_independent_local_refs(self):
+  c=self.cpu();a=self.cls(c);b=self.cls(c);self.assertNotEqual(a,b);self.call(c,23,a);m=self.call(c,33,b,self.string(c,'run'),self.string(c,'(I)Z'));self.assertIn(str(m),c.jni_state['methods'])
+  g=self.call(c,21,b);self.call(c,23,b);fresh=self.cls(c);self.assertNotIn(fresh,[a,b,g]);self.call(c,23,fresh);self.assertIn(g,c.jni_state['global_refs'])
+ def test_pending_exception_blocks_unsafe_calls_without_mutation(self):
+  import copy
+  for slot in (4,6,21,33,113):
+   c=self.cpu();h=self.cls(c);c.jni_state['pending_exception']={'class':'java/lang/RuntimeException','message':'owned'};before=copy.deepcopy(c.jni_state)
+   with self.assertRaises(ModelHalt):self.call(c,slot,h)
+   self.assertEqual(c.stop['reason'],'JNI_CALL_WITH_PENDING_EXCEPTION');self.assertEqual(c.jni_state,before)
+ def test_pending_exception_permits_reference_cleanup(self):
+  c=self.cpu();h=self.cls(c);g=self.call(c,21,h);c.jni_state['pending_exception']={'class':'java/lang/RuntimeException','message':'owned'};self.call(c,23,h);self.call(c,22,g);self.assertEqual(self.call(c,228),1)
 if __name__=='__main__':unittest.main()
