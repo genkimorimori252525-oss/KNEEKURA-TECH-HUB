@@ -1,5 +1,7 @@
 # Reuse contracts: choose the seam, preserve its limits
 
+Native work: start with the [current native-analysis handoff](NATIVE-CURRENT-HANDOFF-2026-10-18.md) for the latest frontiers, reproducible tool setup and permission boundary.
+
 Use this only when implementing or analyzing a related subsystem. It is a small routing guide, not a startup checklist, installation request or demand to read every dossier. Exact target: YSM2.6.5 Forge1.20.1, SHA-256 `25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f`. Recent dossiers are PRIMARY_STATIC_REVIEW_ONLY; the independently reviewed central map stays669. No whole-target percentage is implied.
 
 ## Pick one entry
