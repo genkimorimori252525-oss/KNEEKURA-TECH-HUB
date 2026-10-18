@@ -1,0 +1,680 @@
+{
+  "jar_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "class_count": 955,
+  "controller_family": [
+    "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+    "com/elfmcys/yesstevemodel/OoOoOO0O00oOoO0o0ooOO0oO",
+    "com/elfmcys/yesstevemodel/oO00oooOoOo0O0oOo000o0Oo",
+    "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO",
+    "com/elfmcys/yesstevemodel/oo0Oo0O00oooOoOo0O0oOOOo"
+  ],
+  "direct_visit_calls": [
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Ljava/util/function/Consumer;)V"
+      },
+      "instruction": {
+        "offset": 29,
+        "opcode": "0xb6",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Ljava/util/function/Consumer;)V",
+          "cp_tag": 10
+        }
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/OOOooo0o0OOOO0O0OOoOo0OO",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Lcom/elfmcys/yesstevemodel/O0O00Oo0o0oO0oo0oO00OOoO;ZZ)V"
+      },
+      "instruction": {
+        "offset": 191,
+        "opcode": "0xb9",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/OoOoOO0O00oOoO0o0ooOO0oO",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Ljava/util/function/Consumer;)V",
+          "cp_tag": 11
+        }
+      }
+    },
+    {
+      "caller": {
+        "owner": "com/elfmcys/yesstevemodel/oO00oooOoOo0O0oOo000o0Oo",
+        "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+        "descriptor": "(Ljava/util/function/Consumer;)V"
+      },
+      "instruction": {
+        "offset": 5,
+        "opcode": "0xb9",
+        "reference": {
+          "owner": "com/elfmcys/yesstevemodel/OoOoOO0O00oOoO0o0ooOO0oO",
+          "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+          "descriptor": "(Ljava/util/function/Consumer;)V",
+          "cp_tag": 11
+        }
+      }
+    }
+  ],
+  "bootstrap_visit_handles": [],
+  "selected_class_sha256": {
+    "com/elfmcys/yesstevemodel/OOOooo0o0OOOO0O0OOoOo0OO": "d772c69665dc916c90df94c9de28ad819afb69fc906d1ba73fd04bcda982dea5",
+    "com/elfmcys/yesstevemodel/OoOoOO0O00oOoO0o0ooOO0oO": "36321a061f7613d4ac5650689a851ca1a5999bd0705377fd5552cfd84c69d40c",
+    "com/elfmcys/yesstevemodel/oO00oooOoOo0O0oOo000o0Oo": "a888787406a182223a09e6629484d275fe5f6a323b90b0699c242bcd9984135c",
+    "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO": "0e8c535647ed63f1cb8371e31b86d8f0c3058b34979af66ea5cf9c5a7103173e",
+    "com/elfmcys/yesstevemodel/oo0Oo0O00oooOoOo0O0oOOOo": "fbf2df7caed27f5cf86e25936dea13142ac1692ad25c9dd59043f3fc733391df",
+    "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO": "dc35c59794ec2cf8fbc89670c30e11371c15fe249c25335b1955b568a6f6825d"
+  },
+  "status": "PRIMARY_STATIC_REVIEW_ONLY",
+  "source_artifact_equivalence": "NOT_ESTABLISHED",
+  "source_revision": "f184edabd1b5115ce5a24cb6d155ba5a669f5ba6",
+  "source_files": [
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/controller/IAnimationController.java",
+      "sha256": "23b8f5c7b112fd7522f342cd8c6703809f4525fe4d7521a7c85e95073a07de6d",
+      "matches_pinned_git_blob": true
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/controller/BedrockAnimationController.java",
+      "sha256": "9e19c878f2df8fe2f9f8deae14506ad04a5d19f425984f2e912bf3b1c5e5214a",
+      "matches_pinned_git_blob": true
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/controller/HybridAnimationController.java",
+      "sha256": "f0ac2decd9d0b14a754a9383a9e5f8baa16c66826ccd137313cd54721073a353",
+      "matches_pinned_git_blob": true
+    },
+    {
+      "path": "src/main/java/com/elfmcys/yesstevemodel/geckolib3/core/processor/AnimationProcessor.java",
+      "sha256": "e9354fedf1a77a1729474f40965256c6b503b1f90741e97faee7638f352d92cf",
+      "matches_pinned_git_blob": true
+    }
+  ],
+  "checks": {
+    "exactly_three_direct_calls": true,
+    "no_bootstrap_visit_handles": true,
+    "processor_model_update_147": true,
+    "false_gate_153_to_168": true,
+    "process_163": true,
+    "visit_191": true,
+    "next_controller_196_to_108": true,
+    "controller_loop_exit_115_to_199": true,
+    "commit_580": true,
+    "processor_no_handlers": true,
+    "bedrock_players_loop_exit_282_to_345": true,
+    "bedrock_player_process_336": true,
+    "bedrock_child_process_269": true,
+    "bedrock_child_return_272": true,
+    "hybrid_bedrock_process_14": true,
+    "hybrid_coded_process_75": true,
+    "hybrid_no_handlers": true
+  },
+  "method_digests": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+      "name": "<init>",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;Ljava/lang/String;F)V",
+      "access": 1,
+      "code_sha256": "8df62e55c52f7166cb06ace98163bf38416c80d16cd4b4504b4732d906e356cf"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;Z)V",
+      "access": 1,
+      "code_sha256": "b0fbf74374041daa7669ddd70ea87fdcc17a8063f2d299a822e667930166f999"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "code_sha256": "1df40cb171728960f43ee5a7c0a342ff63690354cfb58e9742b3b6293d3c3671"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "code_sha256": "0817fdc7f6f52a81c4f2abcb4cc8776e67d19a0963c639468f5c8436170a1adb"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/lang/String;)V",
+      "access": 2,
+      "code_sha256": "51c912313d5d999c521fccd56bf3895536f071d30395d0c8b7597bd476f12a1f"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+      "name": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/O00ooo0OooOo00o0o0Oo00oO;",
+      "access": 1,
+      "code_sha256": "02bb8669dbb2372576c88ce570de244b1913ce02ea5974e7bc5fa9f684659923"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+      "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+      "descriptor": "()Z",
+      "access": 1,
+      "code_sha256": "77ea40516e25be6989b9c940f968f2cb53f0022c27a352b135e45fcee435d60e"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/util/List;Lit/unimi/dsi/fastutil/objects/Object2ReferenceMap;)V",
+      "access": 1,
+      "code_sha256": "9351c7b423fc5fe2fc93cfc5e175730b98abbd654e422caaab7f4e5bdeb37595"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/util/List;Lcom/elfmcys/yesstevemodel/ooOo0OoOoo0ooOOoOO0o000O;)V",
+      "access": 1,
+      "code_sha256": "32691e9f4928a12df74d92f3cde80ae34d820ef34053b5df37a9908e9f8088b8"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/ooOo0OoOoo0ooOOoOO0o000O;)V",
+      "access": 2,
+      "code_sha256": "8d577fa04f921534f06e1b37f8cfecd88f3c7fb92e799316e55738d1696ad2bc"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/lang/String;I)V",
+      "access": 2,
+      "code_sha256": "99c79efcf9628f154e5ebb2eeb5e5f0209e6eeab51881a58a7fcb6c23b9e7f68"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Z",
+      "access": 2,
+      "code_sha256": "66ee7953d0df721aa45dd49d3e8be8badbc0466bfe52d6a73ca1eede638166b7"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O00ooo0OooOo00o0o0Oo00oO;Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)V",
+      "access": 2,
+      "code_sha256": "6776f22e6cf260a55c65d6c243756bef602bd51dcd9ec10271c803a2e7bc8016"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/util/function/Consumer;)V",
+      "access": 1,
+      "code_sha256": "8d4654d54b634a4a829fbcbaafbaa87c5e725cb1961d2e8bb30b5e01580370eb"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/O00Oo0oo0Ooo0oOOOo0OO0oO",
+      "name": "oOOOo0OOO0ooooo0O00OO0o0",
+      "descriptor": "()V",
+      "access": 1,
+      "code_sha256": "f85525c619c2a7de92e92ac02a804e5b45dca55acb9c733bf13af53f305f6354"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOOooo0o0OOOO0O0OOoOo0OO",
+      "name": "<init>",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;)V",
+      "access": 1,
+      "code_sha256": "13b1439c73119b672a9041c96171ead5653ce60e3e4166847cfb26515b056d2b"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOOooo0o0OOOO0O0OOoOo0OO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Lcom/elfmcys/yesstevemodel/O0O00Oo0o0oO0oo0oO00OOoO;ZZ)V",
+      "access": 1,
+      "code_sha256": "a74edd6361e2301734481a64bf88907e6bbd0964d152f2750173c0553fcfd125"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOOooo0o0OOOO0O0OOoOo0OO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(I)Lcom/elfmcys/yesstevemodel/Oo0o00oOOo0OO000000O0oO0;",
+      "access": 1,
+      "code_sha256": "1813e1da1cfbb39ae9b1a7805ece75da7154117a7e40e76ef87bacdb8ca1dc6a"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOOooo0o0OOOO0O0OOoOo0OO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()V",
+      "access": 1,
+      "code_sha256": "510f296441bec6603aedfe46e7413929bcc2ac77c0056b409bc1a94f6fe920cb"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOOooo0o0OOOO0O0OOoOo0OO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/OOOO0O0O000O000000oOOO0o;Lit/unimi/dsi/fastutil/objects/Object2ReferenceMap;)V",
+      "access": 1,
+      "code_sha256": "232679ea2c7f505d5360fd15520a77d48392ebab2d405b9882033bbd1fdb8a94"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOOooo0o0OOOO0O0OOoOo0OO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oOOoOOOoooOO000o00o0oooo;)V",
+      "access": 1,
+      "code_sha256": "9a198215b940de43fcffe164e323b3dfcecd2fb39b7b69f246b087680a7285c9"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOOooo0o0OOOO0O0OOoOo0OO",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "()Z",
+      "access": 1,
+      "code_sha256": "bdfac4d5469c7ff7fc9063bbc6bff8bd4e6c720876bbdaebe9ee2b5287a1148d"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOOooo0o0OOOO0O0OOoOo0OO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)V",
+      "access": 2,
+      "code_sha256": "797c946e4fa2bf093431bb062a0c3967520b7b44631112a006f273a81a1d1fcb"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOOooo0o0OOOO0O0OOoOo0OO",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)V",
+      "access": 2,
+      "code_sha256": "fecffeb8b9f243968d80274e0938154f04b4c390e2c5e476857ae1c71f688d45"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOOooo0o0OOOO0O0OOoOo0OO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/OOOooo0o0OOOO0O0OOoOo0OO$Oo0Oo0o00O00Oo0OOoOOoooo;Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)V",
+      "access": 2,
+      "code_sha256": "91cffe988701f29202765bc37067ff772abed40d29d786ba675bfed861454e0e"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOOooo0o0OOOO0O0OOoOo0OO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0o0OOO00000oO00O00oOOo0;ZZLjava/util/function/Consumer;)V",
+      "access": 1,
+      "code_sha256": "935d7ec184c53ade317e7b149a12a8c0bd0a4cb53f7d280e7619f0f8f3da5e46"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOOooo0o0OOOO0O0OOoOo0OO",
+      "name": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/oOOoOoOOooo000oooO0ooOO0;",
+      "access": 1,
+      "code_sha256": "6bc333382f87c2fcc01665713436854095cd25e24a43dfb7d0caba5ebbc25d71"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOOooo0o0OOOO0O0OOoOo0OO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/util/function/Consumer;)V",
+      "access": 1,
+      "code_sha256": "e4a3ce3d5b78bf7f724eb3f642ff51f5fd50385aa65f497ccba90c7dfafb36c4"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOOooo0o0OOOO0O0OOoOo0OO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(ILit/unimi/dsi/fastutil/ints/Int2ReferenceMap$Entry;)V",
+      "access": 4098,
+      "code_sha256": "50509e3f8177b66332ea892cca1fb40ce1eab25f6294f89c116f842ac37f1673"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOOooo0o0OOOO0O0OOoOo0OO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;FZLcom/elfmcys/yesstevemodel/O0OO0Oo0Oo0O0oOO0OOoO000;)V",
+      "access": 4098,
+      "code_sha256": "c0f5562c03d32da47edfb54a6c770e931f8d1ef5932cbd2d709bf7c6fca03e45"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOOooo0o0OOOO0O0OOoOo0OO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oOO0o0oOOOoOoo00oOO0Oo00;FLcom/elfmcys/yesstevemodel/OO00000oOOOoO0o00o00OOo0;)V",
+      "access": 4106,
+      "code_sha256": "2474abe8f2272f50bee460e0a7d74a18013686c4e6f64178e51fc5de0c423979"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOOooo0o0OOOO0O0OOoOo0OO",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oOO0o0oOOOoOoo00oOO0Oo00;FLcom/elfmcys/yesstevemodel/OO00000oOOOoO0o00o00OOo0;)V",
+      "access": 4106,
+      "code_sha256": "41fa28720ee10604f359759ac5a33a0155302db04a5a9b2b98f8ab9cb42f9217"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOOooo0o0OOOO0O0OOoOo0OO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oOO0o0oOOOoOoo00oOO0Oo00;FZLcom/elfmcys/yesstevemodel/O0OO0Oo0Oo0O0oOO0OOoO000;Lcom/elfmcys/yesstevemodel/OO00000oOOOoO0o00o00OOo0;)V",
+      "access": 4106,
+      "code_sha256": "18626dbfcff485d514cfe2669d6318265e3263f263fc1e86d1a7648936269e05"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OOOooo0o0OOOO0O0OOoOo0OO",
+      "name": "<clinit>",
+      "descriptor": "()V",
+      "access": 8,
+      "code_sha256": "48d8e494ac801ba1cbdec2410bf80fb457610db3609ebd1dd0c4771e2a9f5fbf"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OoOoOO0O00oOoO0o0ooOO0oO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1025
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OoOoOO0O00oOoO0o0ooOO0oO",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1025
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OoOoOO0O00oOoO0o0ooOO0oO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/util/List;Lit/unimi/dsi/fastutil/objects/Object2ReferenceMap;)V",
+      "access": 1025
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OoOoOO0O00oOoO0o0ooOO0oO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;Z)V",
+      "access": 1025
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OoOoOO0O00oOoO0o0ooOO0oO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/util/function/Consumer;)V",
+      "access": 1025
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OoOoOO0O00oOoO0o0ooOO0oO",
+      "name": "oooooooOOoOOoO00OooOo00O",
+      "descriptor": "()Z",
+      "access": 1,
+      "code_sha256": "42ca1f85243342bd41983ab86f2235408fa46ded7466d4525196f66b9dbb5f3e"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/OoOoOO0O00oOoO0o0ooOO0oO",
+      "name": "oOOOo0OOO0ooooo0O00OO0o0",
+      "descriptor": "()V",
+      "access": 1025
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oO00oooOoOo0O0oOo000o0Oo",
+      "name": "<init>",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;Ljava/lang/String;FLcom/elfmcys/yesstevemodel/oOOO0Oo0O00oo0O0oO0OooO0;)V",
+      "access": 1,
+      "code_sha256": "c8133ef13f5ca4b77ad714b7b13e944e4c93db0ac7f713122fb8e26ad46f85c4"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oO00oooOoOo0O0oOo000o0Oo",
+      "name": "<init>",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;Ljava/lang/String;FLcom/elfmcys/yesstevemodel/oOOO0Oo0O00oo0O0oO0OooO0;Z)V",
+      "access": 1,
+      "code_sha256": "5fdf5222a9bc138d7749567937527dcc6d519c4c3307fe931faedb087290bac1"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oO00oooOoOo0O0oOo000o0Oo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "code_sha256": "edfd289239e98d935385427321a331b4a0af3d4fefb6812c5c783fc3e82b8792"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oO00oooOoOo0O0oOo000o0Oo",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "code_sha256": "f41d1064a4835f556bf8eed774695bbaa1ddb5e5bd28d78b63ecaf0e3c4b6249"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oO00oooOoOo0O0oOo000o0Oo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/util/List;Lit/unimi/dsi/fastutil/objects/Object2ReferenceMap;)V",
+      "access": 1,
+      "code_sha256": "e2052a392196a429cbd206304a19b000908caa99410d63b8fe224fb703f86949"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oO00oooOoOo0O0oOo000o0Oo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;Z)V",
+      "access": 1,
+      "code_sha256": "88f0cfae681efe0afd983f8a5c619418c4c993cad008fdafbf1e88b90c6422a5"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oO00oooOoOo0O0oOo000o0Oo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/util/function/Consumer;)V",
+      "access": 1,
+      "code_sha256": "5db697783d2c3960c82e3e56e6d1d6a00a746c5450844c1a6b1a2f80cb467ba0"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oO00oooOoOo0O0oOo000o0Oo",
+      "name": "oooooooOOoOOoO00OooOo00O",
+      "descriptor": "()Z",
+      "access": 1,
+      "code_sha256": "005bcbd29fd349e4ab2fa97ae11f21965526c60c6a656fd1dfe134eca272b61f"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oO00oooOoOo0O0oOo000o0Oo",
+      "name": "oOOOo0OOO0ooooo0O00OO0o0",
+      "descriptor": "()V",
+      "access": 1,
+      "code_sha256": "f83688a1f4e16b1d4f85b2e82482246325a36a26815cc547807c43d0a0c42dde"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO",
+      "name": "<init>",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;Ljava/lang/String;FLcom/elfmcys/yesstevemodel/oOOO0Oo0O00oo0O0oO0OooO0;)V",
+      "access": 1,
+      "code_sha256": "cd3336e7c68549fc472630b30781e63897801d8f36a0147bc62f0d1fa6a9ce84"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO",
+      "name": "<init>",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/o0000OoOooO0oo0o0oooo0Oo;Ljava/lang/String;FLcom/elfmcys/yesstevemodel/oOOO0Oo0O00oo0O0oO0OooO0;Z)V",
+      "access": 1,
+      "code_sha256": "670eebc789f162344637a5d0e02eeef1bce75776f4cac1fe76642412a5102de8"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;Z)V",
+      "access": 1,
+      "code_sha256": "8695c5538f65381a2ae622655b7f310e0c9d9562a49209cff8cf528d3d91e7a8"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Lcom/elfmcys/yesstevemodel/O0oOo0OoO0O0o0000o0O00o0;",
+      "access": 2,
+      "code_sha256": "16b207311d578dda01e7fea0e37683b9cea919e09a270b0a5f6d24ead9a198c9"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/util/List;Lit/unimi/dsi/fastutil/objects/Object2ReferenceMap;)V",
+      "access": 1,
+      "code_sha256": "3bb953e82aaa3a4bafe9f3c67018bd015c1d311f78823238f2b001ee7295b12a"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "code_sha256": "15838c8c2da38de3025f9e7f6fa3ebb2e5822d1f333d1a7c1400b5a247d6bf55"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "code_sha256": "dfe4e53fe2edb233e7aecc05478a9ffcd30e73cca63f252addff12dade3295ec"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/lang/String;)V",
+      "access": 1,
+      "code_sha256": "6aed788234a213285008cd0647777d58064b63ea9e4c9869df4319f1039e2e76"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/lang/String;Lcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;)V",
+      "access": 1,
+      "code_sha256": "1c4da76a3dee9648189f8e14e4b198f2718833e04512a5659a77ad2bb80afe96"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(F)V",
+      "access": 1,
+      "code_sha256": "74f9ec07db676ab7951ab079bd8403226506f7d12f72803559a2995c7e296196"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/o0OoOoOO0oooO0O000oO0o0o;)V",
+      "access": 1,
+      "code_sha256": "1ed82d29d379997c42f94066796095e74de1b8971cb9c755368563cb663adb28"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)V",
+      "access": 1,
+      "code_sha256": "2f9c47b7734ca62b812408f5823d36af1066d2cb8ff518db40ae35e072fb1c84"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/util/function/Consumer;)V",
+      "access": 1,
+      "code_sha256": "f6d3ee87b0d4b8551513c4eceb2a519e634ed7c738900b8ccdf99ab96e28b5e8"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO",
+      "name": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "()V",
+      "access": 1,
+      "code_sha256": "06e4415daac19b94ba888ae10a341a81de6d5ed0debd8858cfe0620021b00430"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO",
+      "name": "oOOOo0OOO0ooooo0O00OO0o0",
+      "descriptor": "()V",
+      "access": 1,
+      "code_sha256": "8ab406cb1908f17fe69d45db73d87255ea7a577dfb1b1d379607ee6901f811c0"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO",
+      "name": "OOOOo0O0oO0OOo0O0O0Oo0O0",
+      "descriptor": "()V",
+      "access": 1,
+      "code_sha256": "72a07b7db2490d507830763e7947a894c90c25c91edce70547efdc5ff6dc8759"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(F)V",
+      "access": 1,
+      "code_sha256": "90e0ec28ce74e55db1b6e6b807dc74da8f52cd725e8014b546c912673e6970f4"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO",
+      "name": "Ooooo0oooO0oooOOOoO0000O",
+      "descriptor": "()Z",
+      "access": 1,
+      "code_sha256": "947a2486c67e6a248ce7afe88b60a0e940b284d26eb6bf55001ade2a35da5b26"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO",
+      "name": "oo0OoO00oOoo000O0000o0oo",
+      "descriptor": "()V",
+      "access": 1,
+      "code_sha256": "f4de100e6798cd8f8c63a8d69eac9d2f33784a355a0b0a618914773ad0b05ee6"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo000oooo0OOoo00O0o0OOOO",
+      "name": "oooooooOOoOOoO00OooOo00O",
+      "descriptor": "()Z",
+      "access": 1,
+      "code_sha256": "f241e28bd7807e1cfd2dbcc39c8fd1bf8e224cdb1eb03c7d4cb1688601ee9b4c"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo0Oo0O00oooOoOo0O0oOOOo",
+      "name": "<init>",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oOOOOOO0oo0O0O0o0OoOoOOO;Ljava/lang/String;)V",
+      "access": 1,
+      "code_sha256": "e5e335fe9a08b03e8e67343168696961917d85a8788a518a0c8996cc898ddc42"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo0Oo0O00oooOoOo0O0oOOOo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "code_sha256": "b805b19adbf9630ba86303593ac47fadafc3c658e98ceda51257cda42504f784"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo0Oo0O00oooOoOo0O0oOOOo",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "()Ljava/lang/String;",
+      "access": 1,
+      "code_sha256": "8d1f0f460f050dc2f3ab4e51bf0b057c7445cedce18c0b932572686ae654ddcf"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo0Oo0O00oooOoOo0O0oOOOo",
+      "name": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "()Lorg/joml/Vector3f;",
+      "access": 1,
+      "code_sha256": "74d3b3eaa2e3751f214b4ad6026daaaff754ddb4139283403f8d492b37ee8de9"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo0Oo0O00oooOoOo0O0oOOOo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/util/List;Lit/unimi/dsi/fastutil/objects/Object2ReferenceMap;)V",
+      "access": 1,
+      "code_sha256": "1455ee284ef6540cd1895873d8bf2e43c07aa8d0bf015b0603436aa6019042c6"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo0Oo0O00oooOoOo0O0oOOOo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;Z)V",
+      "access": 1,
+      "code_sha256": "1c61f352ed3d0210c663d656e44b6245711906a5f4c04cc0ac767aac3c7c92b6"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo0Oo0O00oooOoOo0O0oOOOo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/util/function/Consumer;)V",
+      "access": 1,
+      "code_sha256": "7b473a5fcde1d178dcee0480690101e03c5a265129bf3affe3e3401335ea97ec"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo0Oo0O00oooOoOo0O0oOOOo",
+      "name": "oOOOo0OOO0ooooo0O00OO0o0",
+      "descriptor": "()V",
+      "access": 1,
+      "code_sha256": "5e6911b8e96d944439869c7dfa9998db9899aed492989009989424fe31c9c522"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo0Oo0O00oooOoOo0O0oOOOo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lorg/joml/Vector3f;)V",
+      "access": 4098,
+      "code_sha256": "4d5336c786766d79d3d639b4ad796108b16d4db6e8e3b376775ab7dfdd88f4e9"
+    },
+    {
+      "owner": "com/elfmcys/yesstevemodel/oo0Oo0O00oooOoOo0O0oOOOo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/OO00O0o0OooOOOo00OO00o00;)Ljava/util/Optional;",
+      "access": 4106,
+      "code_sha256": "4d76098f2dc330904d57d6649bf4043d65f0b6324a6053184f20b4a0283841f2"
+    }
+  ],
+  "scope": "955 classfile metadata/instruction scan for exact controller-family visitation identities; no execution, assets, native extraction, network or Git mutation",
+  "limitations": [
+    "No reflective/JNI/external callers closure",
+    "No reentry/concurrency or callback purity proof",
+    "shouldTick=false does not certify preceding process completion",
+    "No global process-all then visit-all barrier"
+  ]
+}

@@ -75,3 +75,5 @@ Entity input の再利用なら最上段、Molang 実装なら evaluator と必�
 未実証事項を実装済み・動作済みと書かず、歴史的 receipt の古い停止位置を最新の `/tmp` frontier と取り違えない。元の未知状態を successful stub に置換して進めることは、この再利用ハンドオフには含まれない。
 
 追加の独立確認： [Bedrock producer invariant の限定意味レビュー](BEDROCK-QUEUE-INDEPENDENT-REVIEW-2026-10-18.md)は条件付き証明を支持。閾値は binary32 の正確値、共通の遷移終了は境界到達時の条件付きであり、時計の進行自体は保証しない。全体の意味レビューや実動作確認が完了した意味ではない。
+
+呼出順序の追加確認：[Controller visitation order](CONTROLLER-VISITATION-ORDER-2026-10-18.md)。原本は controller A の process→visit、B の process→visit、最後に共通 bone commit。全controllerのprocessを一括先行する順序へ変更しない。shouldTick=false でも visit と dirty更新は行われ、前回の処理完了を保証する旗ではない。

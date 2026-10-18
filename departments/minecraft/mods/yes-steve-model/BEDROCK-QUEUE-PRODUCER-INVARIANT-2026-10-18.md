@@ -60,3 +60,7 @@ Public player operations, mutable exposed queue collections and public axis fiel
 Reuse contract: preserve synchronized initialization and complete all player processing before visitation; require stable/equal beginning-boundary decisions for every accepted player; clear old axis points before regenerating; preserve inactive/null/condition filters; and constrain external mutation/reentry. If the reuse cannot enforce these conditions, it needs a separately chosen mixed-type consumer policy rather than treating the original unchecked cast as universally safe. No policy/code change is proposed by this read-only task.
 
 [Invariant table](BEDROCK-QUEUE-PRODUCER-INVARIANT-EVIDENCE-2026-10-18.json), [exact method identity/hash records](BEDROCK-QUEUE-PRODUCER-INVARIANT-METHODS-2026-10-18.json). Existing [controller](BEDROCK-CONTROLLER-RECOVERY-2026-10-17.md) and [queue consumer](BONE-COMMIT-QUEUE-RECOVERY-2026-10-17.md) evidence remains authoritative for previously recovered operations.
+
+## Shipped caller ordering follow-up
+
+[Controller visitation order](CONTROLLER-VISITATION-ORDER-2026-10-18.md) closes the direct shipped Java process/visit join for normal returns. This does not remove the prior-completion/no-mutation premise on skipped ticks, or certify reflection, JNI, reentry and concurrent callers.
