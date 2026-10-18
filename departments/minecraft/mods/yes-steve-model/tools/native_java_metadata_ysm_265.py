@@ -72,6 +72,23 @@ def _descriptor(value):
         raise MetadataError("invalid method descriptor")
 
 
+
+def _field_descriptor(value):
+    """Validate exactly one non-void JVM field type, with bounded array rank."""
+    if not isinstance(value, str) or not value or len(value) > 65535:
+        raise MetadataError("invalid field descriptor")
+    rank = len(value) - len(value.lstrip("["))
+    if rank > 255:
+        raise MetadataError("invalid field descriptor")
+    atom = value[rank:]
+    if len(atom) == 1 and atom in "BCDFIJSZ":
+        return
+    if atom.startswith("L") and atom.endswith(";"):
+        _name(atom[1:-1])
+        return
+    raise MetadataError("invalid field descriptor")
+
+
 def _validate_class_bounds(raw):
     """Check every attribute extent before the legacy scanner seeks past it."""
     pos = 0
@@ -305,6 +322,40 @@ class JavaMetadata:
                     return {**member, "declaring_class": current,
                             "class_sha256": info["class_sha256"], "source": info["source"]}
             if method == "<init>" or not info["super"]:
+                return None
+            current = info["super"]
+        raise MetadataError("superclass depth budget exceeded")
+
+    def lookup_field(self, class_name, field, descriptor, static=False):
+        """Return exact class-file evidence only; never initialize/read a Java field.
+
+        Declared private fields are eligible, including superclass declarations.
+        Interface resolution is unsupported: stop before crossing such a boundary.
+        """
+        _name(class_name)
+        _field_descriptor(descriptor)
+        if (not isinstance(field, str) or not field or len(field) > 65535
+                or any(c in field for c in ".;/[\\\x00<>")
+                or any(ord(c) < 32 for c in field)):
+            raise MetadataError("invalid field name")
+        if type(static) is not bool:
+            raise MetadataError("static must be a boolean")
+        seen = set()
+        current = class_name
+        for _ in range(MAX_SUPER_DEPTH):
+            if current in seen:
+                raise MetadataError("cyclic superclass hierarchy")
+            seen.add(current)
+            info = self.class_info(current)
+            if info is None:
+                return None
+            for member in info["fields"]:
+                if member["name"] == field and member["descriptor"] == descriptor:
+                    if bool(member["access"] & 0x0008) != static:
+                        return None
+                    return {**member, "declaring_class": current,
+                            "class_sha256": info["class_sha256"], "source": info["source"]}
+            if info["interfaces"] or not info["super"]:
                 return None
             current = info["super"]
         raise MetadataError("superclass depth budget exceeded")

@@ -9,7 +9,7 @@ from unittest.mock import patch
 import native_java_metadata_ysm_265 as metadata
 
 
-def class_bytes(name, superclass=None, methods=(), fields=()):
+def class_bytes(name, superclass=None, methods=(), fields=(), interfaces=()):
     pool = []
     def utf(text):
         raw = text.encode()
@@ -21,6 +21,7 @@ def class_bytes(name, superclass=None, methods=(), fields=()):
         return len(pool)
     owner = cls(name)
     parent = cls(superclass) if superclass else 0
+    interface_indices = [cls(name) for name in interfaces]
     def members(items):
         result = struct.pack('>H', len(items))
         for access, member, descriptor in items:
@@ -29,7 +30,8 @@ def class_bytes(name, superclass=None, methods=(), fields=()):
     field_data = members(fields)
     method_data = members(methods)
     return (struct.pack('>IHHH', 0xcafebabe, 0, 65, len(pool) + 1)
-            + b''.join(pool) + struct.pack('>HHHH', 1, owner, parent, 0)
+            + b''.join(pool) + struct.pack('>HHHH', 1, owner, parent, len(interface_indices))
+            + b''.join(struct.pack('>H', idx) for idx in interface_indices)
             + field_data + method_data + b'\x00\x00')
 
 
@@ -226,6 +228,58 @@ class DependencyTests(unittest.TestCase):
         with patch.object(metadata.Path, 'open', side_effect=AssertionError('unexpected read')):
             with self.assertRaises(metadata.MetadataError):
                 metadata.JavaMetadata(dependency_paths={'../bad': ('bad.jar', self.pin)})
+
+
+class FieldTests(unittest.TestCase):
+    def setUp(self):
+        self.root = class_bytes('example/Root', fields=[
+            (2, 'bits', 'J'), (9, 'count', 'I'), (1, 'value', 'Ljava/lang/Object;'),
+            (1, 'array', '[[I'), (1, 'objects', '[Ljava/lang/String;')])
+        self.data = fixture({'example/Root.class': self.root,
+                             'example/Child.class': class_bytes('example/Child', 'example/Root')})
+
+    def test_exact_fields_and_provenance(self):
+        for name, descriptor, static in [('bits', 'J', False), ('count', 'I', True),
+                ('value', 'Ljava/lang/Object;', False), ('array', '[[I', False),
+                ('objects', '[Ljava/lang/String;', False)]:
+            with self.subTest(name=name):
+                result = self.data.lookup_field('example/Root', name, descriptor, static)
+                self.assertEqual(result['declaring_class'], 'example/Root')
+                self.assertEqual(result['descriptor'], descriptor)
+                self.assertEqual(result['class_sha256'], hashlib.sha256(self.root).hexdigest())
+                self.assertEqual(result['source']['id'], 'ysm')
+        self.assertEqual(self.data.lookup_field('example/Root', 'bits', 'J')['access'], 2)
+
+    def test_inherited_private_and_missing_fields(self):
+        self.assertEqual(self.data.lookup_field('example/Child', 'bits', 'J')['declaring_class'], 'example/Root')
+        self.assertIsNone(self.data.lookup_field('example/Root', 'bits', 'I'))
+        self.assertIsNone(self.data.lookup_field('example/Root', 'bits', 'J', True))
+        self.assertIsNone(self.data.lookup_field('example/Root', 'count', 'I'))
+        self.assertIsNone(self.data.lookup_field('example/Root', 'missing', 'J'))
+        self.assertIsNone(self.data.lookup_field('missing/Class', 'bits', 'J'))
+
+    def test_invalid_field_inputs(self):
+        for descriptor in ('', 'V', '[V', '()I', 'II', 'Iextra', 'L;',
+                           'Ljava.lang.Object;', 'L../bad;', '[', '[' * 256 + 'I'):
+            with self.subTest(descriptor=descriptor), self.assertRaises(metadata.MetadataError):
+                self.data.lookup_field('example/Root', 'bits', descriptor)
+        for name in ('', '<init>', 'a/b', 'a.b', 'a;', '[a', 'a\\b', 'a\x00b'):
+            with self.subTest(name=name), self.assertRaises(metadata.MetadataError):
+                self.data.lookup_field('example/Root', name, 'I')
+        with self.assertRaises(metadata.MetadataError):
+            self.data.lookup_field('example/Root', 'bits', 'J', 1)
+        self.assertIsNone(self.data.lookup_field('example/Root', 'none', '[' * 255 + 'I'))
+
+    def test_cycle_depth_and_unresolved_interfaces_fail_closed(self):
+        data = fixture({'a.class': class_bytes('a', 'b'), 'b.class': class_bytes('b', 'a')})
+        with self.assertRaisesRegex(metadata.MetadataError, 'cyclic'):
+            data.lookup_field('a', 'missing', 'I')
+        with patch.object(metadata, 'MAX_SUPER_DEPTH', 1), self.assertRaisesRegex(metadata.MetadataError, 'depth'):
+            self.data.lookup_field('example/Child', 'bits', 'J')
+        data = fixture({'example/Root.class': self.root,
+            'example/Child.class': class_bytes('example/Child', 'example/Root',
+                                                interfaces=['unresolved/Interface'])})
+        self.assertIsNone(data.lookup_field('example/Child', 'bits', 'J'))
 
 
 if __name__ == '__main__':

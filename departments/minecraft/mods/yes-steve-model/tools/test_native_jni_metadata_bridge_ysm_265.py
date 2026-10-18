@@ -68,4 +68,24 @@ class MetadataBridgeTests(unittest.TestCase):
   c=self.cpu();new=self.extended_metadata();new.sources['ysm']['sha256']='0'*64
   with self.assertRaises(ValueError):c.configure_java_metadata(new,allow_source_extension=True)
   self.assertEqual(c.jni_state['java_source_extensions'],[])
+class FieldBridgeTests(unittest.TestCase):
+ cpu=MetadataBridgeTests.cpu
+ string=MetadataBridgeTests.string
+ call=MetadataBridgeTests.call
+ cls=MetadataBridgeTests.cls
+ def metadata(self):
+  return fixtures.fixture({'example/Root.class':fixtures.class_bytes('example/Root',fields=[(2,'bits','J'),(9,'shared','Ljava/lang/Object;')]),'example/Child.class':fixtures.class_bytes('example/Child','example/Root')})
+ def test_exact_private_field_and_static_field_ids(self):
+  c=self.cpu();h=self.cls(c);f=self.call(c,94,h,self.string(c,'bits'),self.string(c,'J'));self.assertEqual(f,0x7d0000000000);self.assertFalse(c.jni_state['fields'][str(f)]['static']);self.assertEqual(self.call(c,94,h,self.string(c,'bits'),self.string(c,'J')),f);g=self.call(c,144,h,self.string(c,'shared'),self.string(c,'Ljava/lang/Object;'));self.assertTrue(c.jni_state['fields'][str(g)]['static']);self.assertEqual(c.jni_state['methods'],{})
+ def test_invalid_field_descriptors_and_wrong_static_never_invented(self):
+  for name,descriptor,slot in [('bits','I',94),('missing','J',94),('bits','()J',94),('bits','J',144)]:
+   c=self.cpu();h=self.cls(c)
+   with self.assertRaises(ModelHalt):self.call(c,slot,h,self.string(c,name),self.string(c,descriptor))
+   self.assertEqual(c.jni_state['fields'],{})
+ def test_field_metadata_checkpoint_revalidates(self):
+  c=self.cpu();h=self.cls(c);self.call(c,94,h,self.string(c,'bits'),self.string(c,'J'));c.stop={'reason':'TEST'};state=capture(c);d=JniGuardedCPU(io.StringIO(),'heap',limit=1);d.add_image(RET,b'\x90'*16);d.protect_image();restore(d,state);d.configure_java_metadata(self.metadata());self.assertEqual(d.jni_state,c.jni_state)
+ def test_field_lookup_blocked_with_pending_exception(self):
+  c=self.cpu();h=self.cls(c);c.jni_state['pending_exception']={'class':'java/lang/RuntimeException','message':'owned'}
+  with self.assertRaises(ModelHalt):self.call(c,94,h,self.string(c,'bits'),self.string(c,'J'))
+  self.assertEqual(c.jni_state['fields'],{})
 if __name__=='__main__':unittest.main()

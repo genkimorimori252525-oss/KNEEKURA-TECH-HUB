@@ -10,7 +10,7 @@ from native_unicorn_guarded_ysm_265 import STACK,STACK_SIZE,HEAP,HEAP_SIZE,SP,LE
 STACK_LAYOUT={'base':STACK,'size':STACK_SIZE,'initial_sp':SP}
 LEGACY_STACK_LAYOUT={'base':LEGACY_STACK,'size':LEGACY_STACK_SIZE,'initial_sp':SP}
 STACK_EXTENSION={'kind':'bounded-stack-downward-v1','from':LEGACY_STACK_LAYOUT,'to':STACK_LAYOUT,'added_bytes_known':False}
-FIELDS=('pshufb_model_calls level seed stride clock_reads allocations heap_used malloc_calls fopen_calls fgets_calls fclose_calls file_open file_position accelerate_crc modeled_copies opaque_copies heap_writes rollback_count oracle_checks oracle_enabled virtual_loader dladdr_calls loader_ready virtual_platform platform_calls protection_result protection_calls cpuid_calls shadow_events shadow_bytes lazy_new_calls lazy_memset_calls crc_blocks crc_iterations crc_logical_steps crc_counters_complete loader_view_applied loader_relocation_events init_phase init_array_index init_array_completed call_in_progress call_saved fixture_reserved private_readonly c_locale_handle locale_model_calls thread_locale memory_model_calls atexit_registrations external_data_slots external_data_guard_applied environment_model_calls stdio_fixture_base external_data_bindings external_binding_events heap_free_calls fixture_regions tls_spec tls_block tls_calls thread_atexit_registrations').split()
+FIELDS=('pshufb_model_calls level seed stride clock_reads allocations heap_used malloc_calls fopen_calls fgets_calls fclose_calls file_open file_position accelerate_crc modeled_copies opaque_copies heap_writes rollback_count oracle_checks oracle_enabled virtual_loader dladdr_calls loader_ready virtual_platform platform_calls protection_result protection_calls cpuid_calls shadow_events shadow_bytes lazy_new_calls lazy_memset_calls crc_blocks crc_iterations crc_logical_steps crc_counters_complete loader_view_applied loader_relocation_events init_phase init_array_index init_array_completed call_in_progress call_saved fixture_reserved private_readonly c_locale_handle strerror_eperm locale_model_calls thread_locale memory_model_calls atexit_registrations external_data_slots external_data_guard_applied environment_model_calls stdio_fixture_base external_data_bindings external_binding_events heap_free_calls fixture_regions tls_spec tls_block tls_calls thread_atexit_registrations').split()
 class ContextHeader(ctypes.Structure):
     # Pinned Unicorn2.1.4 uc_priv.h. Memory snapshot pointers are not CPU state.
     _fields_=[('context_size',ctypes.c_size_t),('mode',ctypes.c_int),('arch',ctypes.c_int),('snapshot_level',ctypes.c_int),('ramblock_freed',ctypes.c_bool),('last_block',ctypes.c_void_p),('fv',ctypes.c_void_p)]
@@ -65,7 +65,7 @@ def restore(cpu,state,*,allow_stack_extension=False):
         private[STACK]=(bytes(padding)+data,bytes(padding)+known)
         extensions.append(copy.deepcopy(STACK_EXTENSION))
     fields=dict(state['fields']);fields.setdefault('lazy_new_calls',0);fields.setdefault('lazy_memset_calls',0)
-    defaults={'pshufb_model_calls':0,'loader_view_applied':False,'loader_relocation_events':0,'init_phase':'dt-init','init_array_index':0,'init_array_completed':[],'call_in_progress':False,'call_saved':{},'fixture_reserved':0,'private_readonly':[],'c_locale_handle':0,'locale_model_calls':0,'thread_locale':(1<<64)-1,'memory_model_calls':0,'atexit_registrations':[],'external_data_slots':[],'external_data_guard_applied':False,'environment_model_calls':0,'stdio_fixture_base':0,'external_data_bindings':{},'external_binding_events':0,'heap_free_calls':0,'fixture_regions':[],'tls_spec':None,'tls_block':0,'tls_calls':0,'thread_atexit_registrations':[]}
+    defaults={'pshufb_model_calls':0,'loader_view_applied':False,'loader_relocation_events':0,'init_phase':'dt-init','init_array_index':0,'init_array_completed':[],'call_in_progress':False,'call_saved':{},'fixture_reserved':0,'private_readonly':[],'c_locale_handle':0,'strerror_eperm':0,'locale_model_calls':0,'thread_locale':(1<<64)-1,'memory_model_calls':0,'atexit_registrations':[],'external_data_slots':[],'external_data_guard_applied':False,'environment_model_calls':0,'stdio_fixture_base':0,'external_data_bindings':{},'external_binding_events':0,'heap_free_calls':0,'fixture_regions':[],'tls_spec':None,'tls_block':0,'tls_calls':0,'thread_atexit_registrations':[]}
     for key,value in defaults.items():fields.setdefault(key,value)
     old_crc=any(name not in fields for name in ('crc_blocks','crc_iterations','crc_logical_steps'))
     for name in ('crc_blocks','crc_iterations','crc_logical_steps'):fields.setdefault(name,0)
@@ -75,6 +75,10 @@ def restore(cpu,state,*,allow_stack_extension=False):
     if not 0<=fields['fixture_reserved']<=HEAP_SIZE-fields['heap_used']:raise ValueError('Invalid fixture budget')
     for lo,hi in fields['private_readonly']:
         if not HEAP<=lo<hi<=HEAP+HEAP_SIZE or not any(a<=lo and hi<=a+n for a,n in fields['allocations']):raise ValueError('Invalid readonly fixture range')
+    if type(fields['strerror_eperm']) is not int or fields['strerror_eperm']<0:raise ValueError('Invalid strerror fixture pointer')
+    if fields['strerror_eperm']:
+        a=fields['strerror_eperm'];text=b'Operation not permitted\0';offset=a-HEAP
+        if not HEAP<=a or a+len(text)>HEAP+HEAP_SIZE or not any(lo<=a and a+len(text)<=hi for lo,hi in fields['private_readonly']) or private[HEAP][0][offset:offset+len(text)]!=text or private[HEAP][1][offset:offset+len(text)]!=bytes([1])*len(text):raise ValueError('Invalid strerror fixture bytes')
     for a,n in fields['allocations']:
         if not HEAP<=a or not 0<=n<=HEAP_SIZE or a+n>HEAP+HEAP_SIZE:raise ValueError('Invalid checkpoint allocation')
     for a,origin in state['opaque']:

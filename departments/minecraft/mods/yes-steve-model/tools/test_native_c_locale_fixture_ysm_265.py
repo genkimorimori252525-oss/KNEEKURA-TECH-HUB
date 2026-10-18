@@ -46,4 +46,16 @@ class CLocaleTests(unittest.TestCase):
  def test_tolower_undefined_negative_rejected(self):
   c=ShadowGuardedCPU(io.StringIO(),'heap');c.reg('RDI',0xfffffffe)
   with self.assertRaises(ModelHalt):model(c,'tolower')
+ def test_gnu_strerror_known_error_returns_stable_readonly_literal(self):
+  c=self.cpu();c.reg('RDI',1);c.reg('RSI',0);c.reg('RDX',0);a=model(c,'strerror_r');self.assertEqual(c.read_known(a,24),b'Operation not permitted\0');self.assertEqual(model(c,'strerror_r'),a)
+  with self.assertRaises(ModelHalt):c.write_private(a,b'X')
+ def test_gnu_strerror_does_not_touch_caller_buffer(self):
+  c=self.cpu();c.reg('RDI',1);c.reg('RSI',SP+32);c.reg('RDX',3);c.write_private(SP+32,b'ABC');model(c,'strerror_r');self.assertEqual(c.read_known(SP+32,3),b'ABC')
+ def test_gnu_strerror_unknown_code_stops(self):
+  c=self.cpu();c.reg('RDI',999)
+  with self.assertRaises(ModelHalt):model(c,'strerror_r')
+  self.assertEqual(c.strerror_eperm,0)
+ def test_gnu_strerror_checkpoint_stable(self):
+  from native_guarded_checkpoint_ysm_265 import capture,restore
+  c=self.cpu();c.reg('RDI',1);a=model(c,'strerror_r');c.stop={'reason':'TEST'};s=capture(c);d=self.cpu();restore(d,s);d.reg('RDI',1);self.assertEqual(model(d,'strerror_r'),a)
 if __name__=='__main__':unittest.main()

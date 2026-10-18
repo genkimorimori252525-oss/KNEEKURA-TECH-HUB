@@ -1,0 +1,505 @@
+{
+  "scope": "completed negative JNI scenario with weak thread-support import absent",
+  "checkpoint_basename": "unicorn-jni-strerror-next1.checkpoint.json",
+  "checkpoint_sha256": "ebf1abc7996c2100d059197d698ed92f9df716f6ea388c88807741c8e91d4098",
+  "stop": {
+    "reason": "ENTRY_RETURN",
+    "pc": 4275321,
+    "address": 140733193388032,
+    "size": 0
+  },
+  "jni_return_u32": 4294967295,
+  "jni_return_symbol": "JNI_ERR",
+  "pending_exception": {
+    "class": "java/lang/RuntimeException",
+    "message": "Enable multithreading to use std::thread: Operation not permitted\n"
+  },
+  "call_in_progress": false,
+  "methods": [
+    {
+      "requested_class": "java/io/File",
+      "name": "<init>",
+      "descriptor": "(Ljava/lang/String;)V",
+      "static": false,
+      "declaring_class": "java/io/File",
+      "class_sha256": "6515f14f42b2602af6d987e92b0318a4e2a8ac90252c7ff057eb728ce7a2d88b",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    },
+    {
+      "requested_class": "java/io/File",
+      "name": "toPath",
+      "descriptor": "()Ljava/nio/file/Path;",
+      "static": false,
+      "declaring_class": "java/io/File",
+      "class_sha256": "6515f14f42b2602af6d987e92b0318a4e2a8ac90252c7ff057eb728ce7a2d88b",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    },
+    {
+      "requested_class": "java/nio/file/Path",
+      "name": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "static": false,
+      "declaring_class": "java/nio/file/Path",
+      "class_sha256": "a742da0be8612380a06ebd1b770f2554567fd0cf34e90398b5fc5797604c5e66",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    },
+    {
+      "requested_class": "java/nio/file/Path",
+      "name": "toAbsolutePath",
+      "descriptor": "()Ljava/nio/file/Path;",
+      "static": false,
+      "declaring_class": "java/nio/file/Path",
+      "class_sha256": "a742da0be8612380a06ebd1b770f2554567fd0cf34e90398b5fc5797604c5e66",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    },
+    {
+      "requested_class": "java/nio/file/Path",
+      "name": "normalize",
+      "descriptor": "()Ljava/nio/file/Path;",
+      "static": false,
+      "declaring_class": "java/nio/file/Path",
+      "class_sha256": "a742da0be8612380a06ebd1b770f2554567fd0cf34e90398b5fc5797604c5e66",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    },
+    {
+      "requested_class": "java/util/HashMap",
+      "name": "<init>",
+      "descriptor": "()V",
+      "static": false,
+      "declaring_class": "java/util/HashMap",
+      "class_sha256": "8435b00bf2cf42391cc63f44cfe2dc52e96e3dfe7219932249feb67660a320cd",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    },
+    {
+      "requested_class": "java/util/HashMap",
+      "name": "put",
+      "descriptor": "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;",
+      "static": false,
+      "declaring_class": "java/util/HashMap",
+      "class_sha256": "8435b00bf2cf42391cc63f44cfe2dc52e96e3dfe7219932249feb67660a320cd",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    },
+    {
+      "requested_class": "java/util/HashMap",
+      "name": "get",
+      "descriptor": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "static": false,
+      "declaring_class": "java/util/HashMap",
+      "class_sha256": "8435b00bf2cf42391cc63f44cfe2dc52e96e3dfe7219932249feb67660a320cd",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    },
+    {
+      "requested_class": "java/lang/String",
+      "name": "<init>",
+      "descriptor": "()V",
+      "static": false,
+      "declaring_class": "java/lang/String",
+      "class_sha256": "831a11d5c76c84b8777a7813440b4570d49934dee05c285c9068a0ec43158412",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    },
+    {
+      "requested_class": "java/lang/Object",
+      "name": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "static": false,
+      "declaring_class": "java/lang/Object",
+      "class_sha256": "10cc90d16479279e1d6ee258fdaea4c5640ac6125acb5a7100a7b0a20237a9f2",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    },
+    {
+      "requested_class": "java/lang/Object",
+      "name": "hashCode",
+      "descriptor": "()I",
+      "static": false,
+      "declaring_class": "java/lang/Object",
+      "class_sha256": "10cc90d16479279e1d6ee258fdaea4c5640ac6125acb5a7100a7b0a20237a9f2",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    },
+    {
+      "requested_class": "java/util/UUID",
+      "name": "<init>",
+      "descriptor": "(JJ)V",
+      "static": false,
+      "declaring_class": "java/util/UUID",
+      "class_sha256": "fc75ab76e8f853fbbd48268bdc27b84a33d129ffc65c2d2dea3ff74b97184e08",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    },
+    {
+      "requested_class": "java/lang/Thread",
+      "name": "currentThread",
+      "descriptor": "()Ljava/lang/Thread;",
+      "static": true,
+      "declaring_class": "java/lang/Thread",
+      "class_sha256": "ce0f369df998c0db185f1c4efa9bcab324b17b4237dfec75c67fc9262ed4935a",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    },
+    {
+      "requested_class": "java/lang/Thread",
+      "name": "getContextClassLoader",
+      "descriptor": "()Ljava/lang/ClassLoader;",
+      "static": false,
+      "declaring_class": "java/lang/Thread",
+      "class_sha256": "ce0f369df998c0db185f1c4efa9bcab324b17b4237dfec75c67fc9262ed4935a",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    },
+    {
+      "requested_class": "java/lang/Thread",
+      "name": "isInterrupted",
+      "descriptor": "()Z",
+      "static": false,
+      "declaring_class": "java/lang/Thread",
+      "class_sha256": "ce0f369df998c0db185f1c4efa9bcab324b17b4237dfec75c67fc9262ed4935a",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    },
+    {
+      "requested_class": "java/lang/RuntimeException",
+      "name": "<init>",
+      "descriptor": "(Ljava/lang/String;)V",
+      "static": false,
+      "declaring_class": "java/lang/RuntimeException",
+      "class_sha256": "04170ba5f8b615d2550bfb22ddd4cf2a3090660333ffcc557c6a2e5015d939a2",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    },
+    {
+      "requested_class": "java/lang/RuntimeException",
+      "name": "<init>",
+      "descriptor": "(Ljava/lang/String;Ljava/lang/Throwable;)V",
+      "static": false,
+      "declaring_class": "java/lang/RuntimeException",
+      "class_sha256": "04170ba5f8b615d2550bfb22ddd4cf2a3090660333ffcc557c6a2e5015d939a2",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    },
+    {
+      "requested_class": "java/lang/Class",
+      "name": "getProtectionDomain",
+      "descriptor": "()Ljava/security/ProtectionDomain;",
+      "static": false,
+      "declaring_class": "java/lang/Class",
+      "class_sha256": "b7c8164c4a7cfefec12b2fa51bd44e582c1e93dd69083c121b4d8846d62f18af",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    },
+    {
+      "requested_class": "java/lang/Class",
+      "name": "arrayType",
+      "descriptor": "()Ljava/lang/Class;",
+      "static": false,
+      "declaring_class": "java/lang/Class",
+      "class_sha256": "b7c8164c4a7cfefec12b2fa51bd44e582c1e93dd69083c121b4d8846d62f18af",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    },
+    {
+      "requested_class": "java/security/ProtectionDomain",
+      "name": "getCodeSource",
+      "descriptor": "()Ljava/security/CodeSource;",
+      "static": false,
+      "declaring_class": "java/security/ProtectionDomain",
+      "class_sha256": "93cb56c8d8fadcdb5c9c987b29b889f076d46a9763f645a1df22fe03ea241e59",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    },
+    {
+      "requested_class": "java/security/CodeSource",
+      "name": "getLocation",
+      "descriptor": "()Ljava/net/URL;",
+      "static": false,
+      "declaring_class": "java/security/CodeSource",
+      "class_sha256": "0c4017093e36f4ed7c0c6b6b69b44606d5cdd7461be2f7ea7a674c9ba3c364a3",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    },
+    {
+      "requested_class": "java/net/URL",
+      "name": "toURI",
+      "descriptor": "()Ljava/net/URI;",
+      "static": false,
+      "declaring_class": "java/net/URL",
+      "class_sha256": "da59fb8deabb7edb2c33bfdf135175f44bf7b434d24ad3765e56d0811966fcd2",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    },
+    {
+      "requested_class": "java/nio/file/Paths",
+      "name": "get",
+      "descriptor": "(Ljava/net/URI;)Ljava/nio/file/Path;",
+      "static": true,
+      "declaring_class": "java/nio/file/Paths",
+      "class_sha256": "ae95e7be3bf5776f940808ab6e2846ea89709e3990a4c01cc2f9bc4311b7423d",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    },
+    {
+      "requested_class": "org/apache/commons/lang3/tuple/Pair",
+      "name": "of",
+      "descriptor": "(Ljava/lang/Object;Ljava/lang/Object;)Lorg/apache/commons/lang3/tuple/Pair;",
+      "static": true,
+      "declaring_class": "org/apache/commons/lang3/tuple/Pair",
+      "class_sha256": "3297e3be25e160d36990475c65551ab32cd6c6c308c4f15c2eb26a1072364b8f",
+      "source": {
+        "id": "commons-lang3-3.12.0",
+        "sha256": "d919d904486c037f8d193412da0c92e22a9fa24230b9d67a57855c5c31c7e94e",
+        "archive_kind": "jar",
+        "entry_count": 374
+      }
+    },
+    {
+      "requested_class": "java/util/function/Consumer",
+      "name": "accept",
+      "descriptor": "(Ljava/lang/Object;)V",
+      "static": false,
+      "declaring_class": "java/util/function/Consumer",
+      "class_sha256": "d837ed1e3331ee715d027c5a8444e40c7169b6b1979fd8b0b044cfdfb2dd08b9",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    },
+    {
+      "requested_class": "java/lang/System",
+      "name": "getProperty",
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/String;",
+      "static": true,
+      "declaring_class": "java/lang/System",
+      "class_sha256": "6e8032510fcd1d3e5df60093c2e45ca1a4b07c3bb9a58c6ab594fac29c09bc03",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    },
+    {
+      "requested_class": "java/lang/System",
+      "name": "identityHashCode",
+      "descriptor": "(Ljava/lang/Object;)I",
+      "static": true,
+      "declaring_class": "java/lang/System",
+      "class_sha256": "6e8032510fcd1d3e5df60093c2e45ca1a4b07c3bb9a58c6ab594fac29c09bc03",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    }
+  ],
+  "fields": [
+    {
+      "requested_class": "java/util/UUID",
+      "name": "mostSigBits",
+      "descriptor": "J",
+      "static": false,
+      "declaring_class": "java/util/UUID",
+      "class_sha256": "fc75ab76e8f853fbbd48268bdc27b84a33d129ffc65c2d2dea3ff74b97184e08",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    },
+    {
+      "requested_class": "java/util/UUID",
+      "name": "leastSigBits",
+      "descriptor": "J",
+      "static": false,
+      "declaring_class": "java/util/UUID",
+      "class_sha256": "fc75ab76e8f853fbbd48268bdc27b84a33d129ffc65c2d2dea3ff74b97184e08",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    },
+    {
+      "requested_class": "java/lang/Boolean",
+      "name": "TRUE",
+      "descriptor": "Ljava/lang/Boolean;",
+      "static": true,
+      "declaring_class": "java/lang/Boolean",
+      "class_sha256": "a7015d1099295323c574909f27c57a94e5994073568018907ab380d398dde362",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    },
+    {
+      "requested_class": "java/lang/Boolean",
+      "name": "FALSE",
+      "descriptor": "Ljava/lang/Boolean;",
+      "static": true,
+      "declaring_class": "java/lang/Boolean",
+      "class_sha256": "a7015d1099295323c574909f27c57a94e5994073568018907ab380d398dde362",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    },
+    {
+      "requested_class": "java/lang/Integer",
+      "name": "value",
+      "descriptor": "I",
+      "static": false,
+      "declaring_class": "java/lang/Integer",
+      "class_sha256": "44bc6d0e77a7f4965c2fa6bcecc9af63b841ef94eace398fcbc1f954c3835179",
+      "source": {
+        "id": "java.base",
+        "sha256": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+        "archive_kind": "jmod",
+        "entry_count": 7622
+      }
+    }
+  ],
+  "thread_guard": {
+    "slot": "0xd2cf70",
+    "symbol": "__pthread_key_create",
+    "weak_undefined_function": true,
+    "guest_value": 0,
+    "compare_pc": "0x2fcdb7",
+    "branch_pc": "0x2fcdbf",
+    "hardcoded_errno_pc": "0x2fcd67",
+    "hardcoded_errno": 1,
+    "message_address": "0x53708"
+  },
+  "collector": {
+    "observed_name": "YSM Global Reference Collector",
+    "state": "0x404001084180",
+    "vptr": "0xd1c128",
+    "run": "0x41b3c0",
+    "deleting_destructor": "0x41b2e0",
+    "start_trampoline": "0x2fccb0",
+    "pthread_create_not_called": true,
+    "callable": "0x41c220",
+    "invoker": "0x39d440",
+    "delete_global_ref_call": "0x41c873",
+    "jni_table_offset": "0xb0",
+    "wait": "sem_wait with EINTR retry and sem_trywait fallback",
+    "attach_policy": "GetEnv then AttachCurrentThreadAsDaemon for recorded state+8=1; detach only newly attached",
+    "evidence_kind": "immutable bytes and captured state; worker not executed"
+  },
+  "tests": {
+    "affected_methods": 165,
+    "result": "PASS"
+  },
+  "native_registrations_recovered": 0,
+  "target_host_execution": false,
+  "jvm_body_execution": false,
+  "actual_host_permission_error": false
+}
