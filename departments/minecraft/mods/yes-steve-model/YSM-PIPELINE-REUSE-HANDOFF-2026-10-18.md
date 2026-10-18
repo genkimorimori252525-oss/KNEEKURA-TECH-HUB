@@ -93,3 +93,5 @@ collector待機の追加確定：[wait / guard skip / capture lifetime](NATIVE-C
 保存された完了例外：[completion error release](NATIVE-COMPLETION-ERROR-RELEASE-2026-10-18.md)。調べたworker／collectorの呼出元はreadyを待って所有権を解放するだけで、保存例外を取り出して再送出・記録する処理ではない。最後の所有者になった場合は例外参照の解放へ進む。以前のbody内ログ・モデル単位catchは別であり、無条件の正常終了／成功／即時破棄は保証しない。
 
 Java例外参照の寿命：[TLS Throwable](NATIVE-TLS-THROWABLE-LIFETIME-2026-10-18.md)。nativeコード0x3cの診断は現在threadの保持参照にObject.toStringを呼ぶ。例外recordごとの同一Throwable保証ではない。置換／thread終了cleanupはDeleteGlobalRefのqueue投入を試みるだけで、実際の解放はconsumer処理に依存。guardや登録失敗があるため即時・確実な解放もleakも断定しない。
+
+継承animationの共有：[shared user-function cache](SHARED-ANIMATION-FUNCTION-CACHE-2026-10-18.md)。default Animationを共有するとblendWeight内の関数nodeも共有し得る。初回lookupは現在modelの関数表だが、成功cacheはnode所有なので後の別contextでも初回targetを呼ぶ条件がある。実行contextは現在のもの。通常missも後のlookupを抑制し得る。実アセットでの発生・並行動作・描画不具合は未確認で、同一nodeという前提を外して一般化しない。

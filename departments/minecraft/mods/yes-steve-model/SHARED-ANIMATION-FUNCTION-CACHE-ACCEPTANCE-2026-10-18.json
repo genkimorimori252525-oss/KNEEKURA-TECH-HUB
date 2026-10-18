@@ -1,0 +1,33 @@
+{
+  "status": "ACCEPTED_BOUNDED_CONDITIONAL_STATIC_JOIN",
+  "primary_files": {
+    "REPORT.md": "6ec7030a6a8b31a940580ea6c371b65ae8f93a55da4061dee64ead1d76e26ce1",
+    "receipt.json": "c37887664ba43ab90f1771ad1d9f27a19151e618f1f67a575cf0c61c41399834",
+    "evidence.json": "1aa0da1aaa06af84a9b543a57752a0291b5200f8ebf56ce2b5573d63f7320333",
+    "extract.py": "af5d6370ec14dd3c91fb746927b6f64f9b2076edc0378f0809b8eff57f43e58a",
+    "verify.py": "08722a3a900208e18dce6df27fe87d4e7397af0805098d416e7562b54ae245be"
+  },
+  "fresh_class_hash_comparisons": 14,
+  "fresh_exact_method_comparisons": 207,
+  "authored_verifier_checks": {
+    "cached_target_skips_lookup": true,
+    "lookup_stored_before_execution": true,
+    "normal_missing_lookup_disables_name": true,
+    "constructor_retains_blend_reference": true,
+    "player_Oo0Oo0o00O00Oo0OOoOOoooo": true,
+    "player_o0OOooo0o0OO00OoOOOo0o0O": true,
+    "player_O00OOOooOoooOoo0o0o0oO0O": true,
+    "shared_positive_target_current_context": true,
+    "fresh_node_uses_second_map": true,
+    "normal_miss_persists": true
+  },
+  "reviewed_limits": [
+    "same retained node and inherited IValue identity required",
+    "sequential compatible contexts only",
+    "lookup occurs only while unresolved; dispatch uses current context and cached target",
+    "normal miss requires diagnostic to return; throwing lookup or diagnostic need not disable name",
+    "actual asset presence and reachability unestablished",
+    "no security or observed game defect claim"
+  ],
+  "interpretation_note": "The witness is a deliberately restricted Python branch model: it assumes compatible contexts and normal diagnostic return, and is not an exception-path or target-runtime test."
+}

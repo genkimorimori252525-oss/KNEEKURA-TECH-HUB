@@ -1,0 +1,20 @@
+{
+  "status": "BOUNDED_STATIC_JOIN_WITH_CONDITIONAL_AUTHORED_WITNESSES",
+  "jar_sha256": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+  "class_count": 14,
+  "method_count": 207,
+  "checks": {
+    "cached_target_skips_lookup": true,
+    "lookup_stored_before_execution": true,
+    "normal_missing_lookup_disables_name": true,
+    "constructor_retains_blend_reference": true,
+    "player_Oo0Oo0o00O00Oo0OOoOOoooo": true,
+    "player_o0OOooo0o0OO00OoOOOo0o0O": true,
+    "player_O00OOOooOoooOoo0o0o0oO0O": true,
+    "shared_positive_target_current_context": true,
+    "fresh_node_uses_second_map": true,
+    "normal_miss_persists": true
+  },
+  "evidence_sha256": "1aa0da1aaa06af84a9b543a57752a0291b5200f8ebf56ce2b5573d63f7320333",
+  "restrictions": "No target execution, assets, network, CI or Git edits. Witness assumes same retained node and sequential normal lookup/diagnostic paths; no actual asset occurrence or concurrency result."
+}

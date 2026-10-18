@@ -1,0 +1,263 @@
+{
+  "status": "INDEPENDENT_BOUNDED_STATIC_REVIEW",
+  "checks": {
+    "955_classes": true,
+    "only_three_node_field_writes": true,
+    "cache_has_one_write": true,
+    "success_skips_lookup": true,
+    "missing_name_short_circuit": true,
+    "no_evaluate_handlers": true,
+    "miss_sets_name_null": true,
+    "model_lookup_final": true,
+    "prior_selected_exact": true
+  },
+  "prior_method_comparisons": [
+    {
+      "file": "USER-FUNCTION-CACHE-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/ooo0o0OoOooOOOo0OOOo00oO",
+      "name": "<init>",
+      "descriptor": "()V",
+      "exact_match": true
+    },
+    {
+      "file": "USER-FUNCTION-CACHE-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/ooo0o0OoOooOOOo0OOOo00oO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/lang/String;)Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O;",
+      "exact_match": true
+    },
+    {
+      "file": "USER-FUNCTION-CACHE-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/ooo0o0OoOooOOOo0OOOo00oO",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()V",
+      "exact_match": true
+    },
+    {
+      "file": "USER-FUNCTION-CACHE-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/ooo0o0OoOooOOOo0OOOo00oO",
+      "name": "getProperty",
+      "descriptor": "(Ljava/lang/String;)Ljava/lang/Object;",
+      "exact_match": true
+    },
+    {
+      "file": "USER-FUNCTION-CACHE-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/ooo0o0OoOooOOOo0OOOo00oO$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "name": "<init>",
+      "descriptor": "(Ljava/lang/String;)V",
+      "exact_match": true
+    },
+    {
+      "file": "USER-FUNCTION-CACHE-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/ooo0o0OoOooOOOo0OOOo00oO$Oo0Oo0o00O00Oo0OOoOOoooo",
+      "name": "evaluate",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/oO0OoO0O0OoO0oo0oo0OOooo;Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo;)Ljava/lang/Object;",
+      "exact_match": true
+    },
+    {
+      "file": "USER-FUNCTION-CACHE-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/OOoo00oo0OoOOO0o0OO0oOoo",
+      "name": "<init>",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O;)V",
+      "exact_match": true
+    },
+    {
+      "file": "USER-FUNCTION-CACHE-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/OOoo00oo0OoOOO0o0OO0oOoo",
+      "name": "<init>",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O;Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo;)V",
+      "exact_match": true
+    },
+    {
+      "file": "USER-FUNCTION-CACHE-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/OOoo00oo0OoOOO0o0OO0oOoo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O;",
+      "exact_match": true
+    },
+    {
+      "file": "USER-FUNCTION-CACHE-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/OOoo00oo0OoOOO0o0OO0oOoo",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "()Lcom/elfmcys/yesstevemodel/O00OOo00o0O00ooo000OOo0O$Oo0Oo0o00O00Oo0OOoOOoooo;",
+      "exact_match": true
+    },
+    {
+      "file": "USER-FUNCTION-CACHE-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/OOoo00oo0OoOOO0o0OO0oOoo",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/Oo0000oo0oo0OoO00000O0O0;)Ljava/lang/Object;",
+      "exact_match": true
+    },
+    {
+      "file": "USER-FUNCTION-CACHE-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/OOoo00oo0OoOOO0o0OO0oOoo",
+      "name": "toString",
+      "descriptor": "()Ljava/lang/String;",
+      "exact_match": true
+    },
+    {
+      "file": "USER-FUNCTION-CACHE-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/OOoo00oo0OoOOO0o0OO0oOoo",
+      "name": "equals",
+      "descriptor": "(Ljava/lang/Object;)Z",
+      "exact_match": true
+    },
+    {
+      "file": "USER-FUNCTION-CACHE-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/OOoo00oo0OoOOO0o0OO0oOoo",
+      "name": "hashCode",
+      "descriptor": "()I",
+      "exact_match": true
+    },
+    {
+      "file": "USER-FUNCTION-CACHE-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/OOoo00oo0OoOOO0o0OO0oOoo",
+      "name": "<clinit>",
+      "descriptor": "()V",
+      "exact_match": true
+    },
+    {
+      "file": "CONDITIONAL-ANIMATION-NAMES-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/OOOOOO00o0Oo000O0OO0OOO0",
+      "name": "<init>",
+      "descriptor": "()V",
+      "exact_match": true
+    },
+    {
+      "file": "CONDITIONAL-ANIMATION-NAMES-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/OOOOOO00o0Oo000O0OO0OOO0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/ooOOOo00o0000o0oO000oooO;ZZ)Lcom/elfmcys/yesstevemodel/oOo0oO0OOo0ooOoo0oOo0oOo;",
+      "exact_match": true
+    },
+    {
+      "file": "CONDITIONAL-ANIMATION-NAMES-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/OOOOOO00o0Oo000O0OO0OOO0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/ooOOOo00o0000o0oO000oooO;Lcom/elfmcys/yesstevemodel/OoO00O0oOo0000oo0OOO0oO0;ZLjava/util/List;)Lcom/elfmcys/yesstevemodel/Oo0o0o0o0OOo0000ooo00o00;",
+      "exact_match": true
+    },
+    {
+      "file": "CONDITIONAL-ANIMATION-NAMES-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/OOOOOO00o0Oo000O0OO0OOO0",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/ooOOOo00o0000o0oO000oooO;Lcom/elfmcys/yesstevemodel/OoO00O0oOo0000oo0OOO0oO0;ZLjava/util/List;)Ljava/util/Map;",
+      "exact_match": true
+    },
+    {
+      "file": "CONDITIONAL-ANIMATION-NAMES-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/OOOOOO00o0Oo000O0OO0OOO0",
+      "name": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/ooOOOo00o0000o0oO000oooO;Lcom/elfmcys/yesstevemodel/OoO00O0oOo0000oo0OOO0oO0;ZLjava/util/List;)Ljava/util/Map;",
+      "exact_match": true
+    },
+    {
+      "file": "CONDITIONAL-ANIMATION-NAMES-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/OOOOOO00o0Oo000O0OO0OOO0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/ooOOOo00o0000o0oO000oooO;)Lcom/elfmcys/yesstevemodel/OoO00O0oOo0000oo0OOO0oO0;",
+      "exact_match": true
+    },
+    {
+      "file": "CONDITIONAL-ANIMATION-NAMES-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/OOOOOO00o0Oo000O0OO0OOO0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/ooOOOo00o0000o0oO000oooO;ZLjava/util/List;)Lcom/elfmcys/yesstevemodel/OO0oO0000O0O00o0O0oo0O0O;",
+      "exact_match": true
+    },
+    {
+      "file": "CONDITIONAL-ANIMATION-NAMES-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/OOOOOO00o0Oo000O0OO0OOO0",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/ooOOOo00o0000o0oO000oooO;)Lit/unimi/dsi/fastutil/objects/Object2ReferenceOpenHashMap;",
+      "exact_match": true
+    },
+    {
+      "file": "CONDITIONAL-ANIMATION-NAMES-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/OOOOOO00o0Oo000O0OO0OOO0",
+      "name": "O00OOOooOoooOoo0o0o0oO0O",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/ooOOOo00o0000o0oO000oooO;)Lit/unimi/dsi/fastutil/objects/Object2ReferenceOpenHashMap;",
+      "exact_match": true
+    },
+    {
+      "file": "CONDITIONAL-ANIMATION-NAMES-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/OOOOOO00o0Oo000O0OO0OOO0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/ooOOOo00o0000o0oO000oooO;Ljava/util/List;)Ljava/util/Map;",
+      "exact_match": true
+    },
+    {
+      "file": "CONDITIONAL-ANIMATION-NAMES-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/OOOOOO00o0Oo000O0OO0OOO0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/lang/Object;)Ljava/util/List;",
+      "exact_match": true
+    },
+    {
+      "file": "CONDITIONAL-ANIMATION-NAMES-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/OOOOOO00o0Oo000O0OO0OOO0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Ljava/util/Map$Entry;Ljava/lang/Object;)Lcom/elfmcys/yesstevemodel/Oo0OOo00Oo00oO00Ooo0O00O;",
+      "exact_match": true
+    },
+    {
+      "file": "CONDITIONAL-ANIMATION-NAMES-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/OOOOOO00o0Oo000O0OO0OOO0",
+      "name": "o0OOooo0o0OO00OoOOOo0o0O",
+      "descriptor": "(Ljava/util/Map$Entry;Ljava/lang/Object;)Lcom/elfmcys/yesstevemodel/Oo0OOo00Oo00oO00Ooo0O00O;",
+      "exact_match": true
+    },
+    {
+      "file": "CONDITIONAL-ANIMATION-NAMES-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/OOOOOO00o0Oo000O0OO0OOO0",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/Oo0OOo00Oo00oO00Ooo0O00O;)V",
+      "exact_match": true
+    },
+    {
+      "file": "ANIMATION-DATA-OWNERSHIP-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/Oo0OOo00Oo00oO00Ooo0O00O",
+      "name": "<init>",
+      "descriptor": "(Ljava/lang/String;DLcom/elfmcys/yesstevemodel/OooOO0OOOoO0oOO0OOOO0Ooo;Lcom/elfmcys/yesstevemodel/O0o0OOO00000oO00O00oOOo0;Lcom/elfmcys/yesstevemodel/O0o0OOO00000oO00O00oOOo0;Lcom/elfmcys/yesstevemodel/O0o0OOO00000oO00O00oOOo0;Ljava/lang/Boolean;[Lcom/elfmcys/yesstevemodel/o0OOOOooooOO00oOoO0o00OO;[Lcom/elfmcys/yesstevemodel/oOO0OoOooOOOooOo0O00Oooo;[Lcom/elfmcys/yesstevemodel/oOo0o0OoO0OO0oO0ooOOoooO;[Lcom/elfmcys/yesstevemodel/oOO0OoOooOOOooOo0O00Oooo;)V",
+      "exact_match": true
+    },
+    {
+      "file": "ANIMATION-DATA-OWNERSHIP-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/Oo0OOo00Oo00oO00Ooo0O00O",
+      "name": "Oo0Oo0o00O00Oo0OOoOOoooo",
+      "descriptor": "()Z",
+      "exact_match": true
+    },
+    {
+      "file": "VARIABLE-AST-RETURN-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/o0o0OoOoO0Oo0oOoOOOooOOo",
+      "name": "<init>",
+      "descriptor": "(Ljava/util/List;Z)V",
+      "exact_match": true
+    },
+    {
+      "file": "VARIABLE-AST-RETURN-EVIDENCE-2026-10-17.json",
+      "owner": "com/elfmcys/yesstevemodel/o0o0OoOoO0Oo0oOoOOOooOOo",
+      "name": "evalUnsafe",
+      "descriptor": "(Lcom/elfmcys/yesstevemodel/O0Oooo00oOo00O00OoOOOooO;)Ljava/lang/Object;",
+      "exact_match": true
+    }
+  ],
+  "node_method_handles": [
+    {
+      "owner": "com/elfmcys/yesstevemodel/ooo0o0OoOooOOOo0OOOo00oO",
+      "handle": {
+        "cp_tag": 15,
+        "reference_kind": 8,
+        "reference": {
+          "cp_tag": 10,
+          "owner": "com/elfmcys/yesstevemodel/ooo0o0OoOooOOOo0OOOo00oO$Oo0Oo0o00O00Oo0OOoOOoooo",
+          "name": "<init>",
+          "descriptor": "(Ljava/lang/String;)V"
+        }
+      }
+    }
+  ],
+  "scope": "955 JAR class direct writes; excludes JNI/reflection/external mutation. No target execution."
+}
