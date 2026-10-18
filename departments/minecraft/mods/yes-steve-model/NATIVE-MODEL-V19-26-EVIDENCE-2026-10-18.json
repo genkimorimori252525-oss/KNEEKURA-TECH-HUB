@@ -1,0 +1,234 @@
+{
+  "format": "ysm-model-v19-26-root-v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "ranges": [
+    {
+      "name": "root_version_dispatch",
+      "start": "0x41f490",
+      "end_exclusive": "0x41f4c3",
+      "sha256": "8c19e0ba5e5120a8d7ef2f93a8e13ab88b9c04546ca4177f663e9ceab47ec10d",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4322448
+      }
+    },
+    {
+      "name": "compatibility_call_return",
+      "start": "0x41fc32",
+      "end_exclusive": "0x41fc42",
+      "sha256": "58bc20c7a11b71889f99a510607448dcdb632b0b7c7746fe6718ff4ef077204c",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4324402
+      }
+    },
+    {
+      "name": "map_conversion_normal",
+      "start": "0x41fc70",
+      "end_exclusive": "0x4200db",
+      "sha256": "512abe365465f740981f8cc54dbf652a217fd262baff02de05a925c86be6a9a6",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4324464
+      }
+    },
+    {
+      "name": "first_map_read_insert",
+      "start": "0x4200db",
+      "end_exclusive": "0x42077a",
+      "sha256": "56fa5e0c4cc1ea90f6b4926ab11c31515ed47a48ca54cc766063ef2edda6054b",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4325595
+      }
+    },
+    {
+      "name": "second_map_read_insert",
+      "start": "0x4207d6",
+      "end_exclusive": "0x420e65",
+      "sha256": "f0bb2218543fe334c01e2c1b690e246c034b572cdd41fbe6fab6fb2df69b1d61",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4327382
+      }
+    },
+    {
+      "name": "entry_move_geometry",
+      "start": "0x4240e0",
+      "end_exclusive": "0x4241f3",
+      "sha256": "19c74d9ce59d154ad58ab9e73a6913bbd8f6dc3a452f0c565af6e7d14798f916",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4341984
+      }
+    },
+    {
+      "name": "entry_parser",
+      "start": "0x424920",
+      "end_exclusive": "0x424a18",
+      "sha256": "ca334a284e78f51d2865ae6233d7e3c4e4d3d70ea51396611bc900499c02b04a",
+      "backing": {
+        "region": {
+          "kind": "PT_LOAD",
+          "index": 1,
+          "address": 0,
+          "memory_size": 13718256,
+          "file_offset": 0,
+          "file_size": 13718256,
+          "flags": 5
+        },
+        "file_backed": true,
+        "file_offset": 4344096
+      }
+    }
+  ],
+  "relocations": [
+    {
+      "slot": "0xd1cb88",
+      "raw_value": "0x0",
+      "relocation_type": 8,
+      "symbol_index": 0,
+      "symbol_name": "",
+      "addend": 3440080,
+      "actual_runtime_binding_verified": false
+    },
+    {
+      "slot": "0xd1d418",
+      "raw_value": "0x0",
+      "relocation_type": 8,
+      "symbol_index": 0,
+      "symbol_name": "",
+      "addend": 4995552,
+      "actual_runtime_binding_verified": false
+    },
+    {
+      "slot": "0xd1d450",
+      "raw_value": "0x0",
+      "relocation_type": 8,
+      "symbol_index": 0,
+      "symbol_name": "",
+      "addend": 4997328,
+      "actual_runtime_binding_verified": false
+    }
+  ],
+  "comparison_import": {
+    "entry": "0xd14780",
+    "first_slot": "0xd30848",
+    "stub": "0x13d6e9c",
+    "elf_slot": "0x184d068",
+    "proof": {
+      "slot": "0x184d068",
+      "raw_value": "0x156fdc0",
+      "relocation_type": 7,
+      "symbol_index": 14,
+      "symbol_name": "bcmp",
+      "addend": 0,
+      "actual_runtime_binding_verified": false
+    }
+  },
+  "prior_receipts": [
+    {
+      "path": "source-acquisition-contract/evidence.json",
+      "sha256": "07b8f3929b0665f01bed5e300099bfdcd77958d8961a6763520e0388c88b5820"
+    },
+    {
+      "path": "legacy-model-contract/evidence.json",
+      "sha256": "d3bf6e651d9b8993680251216934f54933942d5fd80e88f60e37598cc5f50c8a"
+    },
+    {
+      "path": "model-modern-schema-contract/evidence.json",
+      "sha256": "2ff0539314ec44ea0b673108268627bc122e9afe20b8188c50681414d70c83e0"
+    }
+  ],
+  "root_maps": [
+    {
+      "versions": "19..26",
+      "target_vector": "+0x148/+0x150/+0x158",
+      "count_read": "0x41fcdf",
+      "key_read": "0x42030c",
+      "entry_read": "0x42031a"
+    },
+    {
+      "versions": "21..26",
+      "target_vector": "+0x160/+0x168/+0x170",
+      "count_read": "0x41fe9b",
+      "key_read": "0x4209fc",
+      "entry_read": "0x420a0a"
+    }
+  ],
+  "map_node": {
+    "size": "0x370",
+    "next": "+0",
+    "key": "+8/+10, inline+18",
+    "entry": "+28 (size348)"
+  },
+  "ownership": [
+    "4240e0 moves entry identifier vector and geometry bone vector; zeros source pointers",
+    "Map entry moved to root vector, map key copied into root entry identifier vector",
+    "Temporary entries/keys/nodes then destroyed"
+  ],
+  "order": "Temporary hash linked-list enumeration, not proven serialized order",
+  "limits": [
+    "No full optional-entry schema",
+    "No full exception cleanup proof",
+    "No retained model/geometry field aliasing guarantees",
+    "No wire compatibility implied by shared in-memory types"
+  ],
+  "target_executed": false,
+  "assets_read": false,
+  "repository_modified": false
+}
