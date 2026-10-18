@@ -95,7 +95,7 @@ public class YsmGuardedInitSimulation extends GhidraScript {
    guard.active=true;guard.deadline=System.nanoTime()+guard.timeBudgetNanos;
    try{while(true){monitor.checkCancelled();thread.stepInstruction();}}
    catch(Throwable e){if(guard.stop==null){guard.stop="UNEXPECTED_ENGINE_ERROR";guard.via=e.getClass().getName();guard.out.println("ENGINE_ERROR\t"+e);}}
-   finally{guard.active=false;guard.out.println("COUNTS\tattempted="+guard.attempted+"\tcompleted="+guard.completed+"\tpcode="+guard.ops+"\tatomic_pairs="+guard.atomicPairs);}
+   finally{guard.active=false;for(String name:List.of("RSP","RBP","RSI","RDI","RCX","R10","DF")){Register r=currentProgram.getRegister(name);guard.out.println("STOP_REGISTER\t"+name+"\t"+thread.getState().inspectRegisterValue(r).getUnsignedValue().toString(16));}guard.out.println("COUNTS\tattempted="+guard.attempted+"\tcompleted="+guard.completed+"\tpcode="+guard.ops+"\tatomic_pairs="+guard.atomicPairs);}
   }
  }
  byte[] hex(String s){return HexFormat.of().parseHex(s);}

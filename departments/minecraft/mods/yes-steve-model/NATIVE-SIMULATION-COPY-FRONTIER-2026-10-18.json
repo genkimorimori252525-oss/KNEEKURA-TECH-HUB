@@ -1,0 +1,60 @@
+{
+  "format": "kneekura.ysm-native-copy-frontier.v1",
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "static_contract": {
+    "count": 328,
+    "source": "old RSP",
+    "destination": "align_down(incoming RDI - 0x1c8, 16)",
+    "direction": "forward",
+    "source_offset_after_96_completed": 96
+  },
+  "replay_trace_unchanged": true,
+  "stop_registers": {
+    "RSP": "0x700000007bf0",
+    "RBP": "0xb551f4d4b564a469",
+    "RSI": "0x700000007d91",
+    "RDI": "0x700000007c61",
+    "RCX": "0xe7",
+    "R10": "0x700000007d30",
+    "DF": "0x0"
+  },
+  "source_range": [
+    "0x700000007d30",
+    "0x700000007e78"
+  ],
+  "destination_range": [
+    "0x700000007c00",
+    "0x700000007d48"
+  ],
+  "completed_byte_copies": 96,
+  "next_unknown_source": "0x700000007d90",
+  "next_unwritten_destination": "0x700000007c60",
+  "overlap_bytes": 24,
+  "direction_compatible_with_overlap": true,
+  "initial_rsp_minus_unknown_address": "0x278",
+  "unknown_bytes_filled": false,
+  "target_run_by_this_tool": false,
+  "segments": [
+    {
+      "address": "0x15ebcb3",
+      "size": 93,
+      "sha256": "bb60da316441f7d028a830b3c042de0af17714d7673e5bf4c7ee75cb393cee93"
+    },
+    {
+      "address": "0x143beae",
+      "size": 26,
+      "sha256": "264db61cf0163afaef2bff3c827c8c03b519b324538f946924b44719ca8b66bd"
+    }
+  ],
+  "input_hashes": {
+    "bounded-init-atomic-trial.tsv": "9dc069d7466da2a19f4b2fecdf31d4e4981207600b28e86ec92b45053afd4e83",
+    "bounded-init-register-trial.tsv": "cafc73d28ca0202a40754f53e9cd7b7d4fe02e3dc16d5b2aed354dfef9ac6ba1"
+  },
+  "limitations": [
+    "Single synthetic caller-state path only",
+    "Actual caller stack content and why copied byte is uninitialized remain unresolved",
+    "No skip, zero-fill or continued execution after guard",
+    "SLEIGH partial micro-op registers are not committed architectural state",
+    "No proof of native initializer completeness or decoder-word immutability"
+  ]
+}
