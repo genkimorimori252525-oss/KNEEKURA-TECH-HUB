@@ -73,3 +73,5 @@ python tools/bone_commit_queue_ysm_265.py --jar "$JAR" --source-root "$SRC" --ev
 Entity input の再利用なら最上段、Molang 実装なら evaluator と必要な storage/AST の1資料、blend 実装なら上記 subtype 条件と consumer を読む。renderer 実装なら array契約→affine/output→必要な backend だけへ進む。各作業で「固定入力」「保持する契約」「残る仮定」「限定された確認方法」を先に宣言する。
 
 未実証事項を実装済み・動作済みと書かず、歴史的 receipt の古い停止位置を最新の `/tmp` frontier と取り違えない。元の未知状態を successful stub に置換して進めることは、この再利用ハンドオフには含まれない。
+
+追加の独立確認： [Bedrock producer invariant の限定意味レビュー](BEDROCK-QUEUE-INDEPENDENT-REVIEW-2026-10-18.md)は条件付き証明を支持。閾値は binary32 の正確値、共通の遷移終了は境界到達時の条件付きであり、時計の進行自体は保証しない。全体の意味レビューや実動作確認が完了した意味ではない。
