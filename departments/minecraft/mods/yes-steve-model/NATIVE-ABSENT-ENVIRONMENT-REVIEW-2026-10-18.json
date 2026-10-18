@@ -1,0 +1,35 @@
+{
+  "result": "PASS",
+  "review_scope": "Authored absent-only secure_getenv fixture, checkpoint state, comparator and CLI input validation; no original execution or continuation",
+  "implementation_sha256": {
+    "native_environment_fixture_ysm_265.py": "f194647f15b9f0ef29b375dd810f753a91f127e39c75e006e1b85c808cdf6a73",
+    "test_native_environment_fixture_ysm_265.py": "168ddaaf2a8b2b7b093c6e96f7f8cda63b79ed42a4c32517842b345d6cf1d26d",
+    "native_shadow_image_ysm_265.py": "212b813e14521dabb2fcbe549fec766c0207bd1595a5a0ffa644638ff76bfec5",
+    "native_guarded_checkpoint_ysm_265.py": "fe487d18f2b806ace498399b2e26c47b08d8dd6fd1baa1d2ffb5fd21bafd0533",
+    "native_jni_onload_ysm_265.py": "cf884a6ac21e695c8a88f0dc5e76b93acf34bba4464a64fa455f30b61e0c421c",
+    "compare_native_guarded_checkpoints_ysm_265.py": "68c126fc189adc92d9ba771928e5104b0340d2a3e544ebf0c07aa34c3abd68af"
+  },
+  "plan_sha256": "9914f8f78c79bb0249318e65f26f4b29dc1fed56caec3f916e551bd650de3f7b",
+  "tests": {
+    "authored_environment": 17,
+    "independent_reviewer": 9,
+    "total": 26,
+    "all_pass": true
+  },
+  "findings": [],
+  "source_checkpoint_sha256": "037e49c09fa15750aef36853a0b0bde9874e73ff3abb0e6944b29602c4c3e635",
+  "source_checkpoint_resumed": false,
+  "guest_instructions_executed": 0,
+  "native_target_executed": false,
+  "jvm_executed": false,
+  "assets_executed": false,
+  "host_environment_used_as_input": false,
+  "filesystem_success_added": false,
+  "allocator_os_unchanged_from_HEAD": true,
+  "allocator_os_sha256": "148f39a1f207103f7bd7502f92b9c36f8903a1f5c6e43283644f3478811d68eb",
+  "review_artifacts_sha256": {
+    "review_checks.py": "0a73560b5cb3507c77cb9ff071d7b37757e751d61f1042df7e8b393cdb365a1c",
+    "independent-tests.log": "9a911a1a306bf28b8bde02ec464b25f6a2d3d9bc10fdcefadfa6140e53f92bf2",
+    "authored-tests.log": "236b56f4e77f83803614da83cf9ba9c08b52ea90b9b79a62c9bbc7ada9e58ddb"
+  }
+}

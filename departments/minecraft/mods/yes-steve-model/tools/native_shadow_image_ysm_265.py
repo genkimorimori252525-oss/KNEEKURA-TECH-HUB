@@ -14,6 +14,11 @@ class ShadowGuardedCPU(GuardedCPU):
     MAX_IMAGE_EVENTS=1000000
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs);self.shadow_ranges=[];self.shadow_expected={};self.shadow_events=0;self.shadow_bytes=0;self.reference_digests=None;self.lazy_new_calls=0;self.lazy_memset_calls=0;self.crc_counters_complete=True;self.loader_view_applied=False;self.loader_relocation_events=0;self.init_phase='dt-init';self.init_array_index=0;self.init_array_completed=[];self.call_in_progress=False;self.call_saved={};self.c_locale_handle=0;self.strerror_eperm=0;self.locale_model_calls=0;self.thread_locale=(1<<64)-1;self.memory_model_calls=0;self.atexit_registrations=[];self.external_data_slots=[];self.external_data_guard_applied=False;self.environment_model_calls=0;self.stdio_fixture_base=0;self.external_data_bindings={};self.external_binding_events=0;self.heap_free_calls=0;self.tls_spec=None;self.tls_block=0;self.tls_calls=0;self.thread_atexit_registrations=[]
+        from native_environment_fixture_ysm_265 import initialize
+        initialize(self)
+    def configure_environment_absent(self,keys,*,allow_legacy_extension=False):
+        from native_environment_fixture_ysm_265 import configure
+        configure(self,keys,allow_legacy_extension=allow_legacy_extension)
     def external_data_hit(self,a,n):
         return next(((max(a,slot),name) for slot,name in getattr(self,'external_data_slots',[]) if slot<a+n and a<slot+8),None)
     def unknown(self,a,n):
@@ -82,7 +87,8 @@ class ShadowGuardedCPU(GuardedCPU):
                 self.demand(self.code_allowed(function) and len(self.atexit_registrations)<1024,'UNMODELED_ATEXIT_REGISTRATION',function)
                 self.atexit_registrations.append([function,arg,dso]);result=0;self.emit('VIRTUAL_ATEXIT_REGISTRATION',f'function={function:x}',f'argument={arg:x}',f'dso={dso:x}','callback_executed=false','host_registration=false')
             elif symbol=='secure_getenv':
-                key=self.ascii(self.reg('RDI'));self.demand(key=='GLIBCXX_TUNABLES','UNMODELED_ENVIRONMENT_KEY');result=0;self.environment_model_calls+=1;self.emit('VIRTUAL_ENVIRONMENT_ABSENT',key,'host_environment_read=false')
+                from native_environment_fixture_ysm_265 import model as environment_model
+                result=environment_model(self,symbol)
             elif symbol=='__tls_get_addr':result=tls_model(self)
             elif symbol in LOCALE_SYMBOLS:result=locale_model(self,symbol)
             elif symbol in JVM_SYMBOLS:result=jvm_model(self,symbol)

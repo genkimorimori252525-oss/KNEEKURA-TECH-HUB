@@ -81,3 +81,5 @@ A fourth [focused review](NATIVE-KEYFRAME-JOIN-FOCUSED-REVIEW-2026-10-18.md) ind
 ## Explicit virtual Forge path frontier
 
 [Reviewed Path model and bounded continuation](NATIVE-FORGE-PATH-CONTINUATION-2026-10-18.md) documents the synthetic config path, 71 scoped tests, independent review and strict next secure_getenv("TMPDIR") stop. This does not prove real Forge setup or filesystem success.
+
+The [next explicit absent-environment cohort](NATIVE-ABSENT-ENVIRONMENT-CONTINUATION-2026-10-18.md) reaches the mandatory `/tmp` status query. Environment selection and filesystem status remain separate contracts.

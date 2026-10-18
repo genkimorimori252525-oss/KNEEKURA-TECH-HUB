@@ -31,6 +31,8 @@ def unpack(value,size):
     return data
 def signatures(cpu):return [(a,b,hashlib.sha256(v).hexdigest()) for a,b,v in cpu.image]
 def capture(cpu):
+    from native_environment_fixture_ysm_265 import snapshot
+    environment=snapshot(cpu)
     if cpu.stop is None or not cpu.expected_image_matches():raise ValueError('Checkpoint requires verified stopped state')
     if cpu.reference_digests is not None and cpu.reference_hashes()!=cpu.reference_digests:raise ValueError('Immutable reference changed')
     cpu_only(cpu);ctx=cpu.uc.context_save();raw,size,arch,mode=ctx.__getstate__();raw=sanitize_context(raw,size,arch,mode);patches=[]
@@ -40,12 +42,14 @@ def capture(cpu):
             if a!=b and start is None:start=k
             if a==b and start is not None:patches.append([lo+start,bytes(expected[start:k]).hex()]);start=None
         if start is not None:patches.append([lo+start,bytes(expected[start:]).hex()])
-    return {'format':'ysm-guarded-local-checkpoint-v1','engine':unicorn.__version__,'stack_layout':dict(STACK_LAYOUT),'scenario_extensions':copy.deepcopy(cpu.scenario_extensions),'images':signatures(cpu),'context':{'bytes':pack(raw),'size':size,'arch':arch,'mode':mode},'private':{str(a):{'bytes':pack(cpu.uc.mem_read(a,n)),'known':pack(cpu.known[a])} for a,n in ((STACK,STACK_SIZE),(HEAP,HEAP_SIZE))},'opaque':list(cpu.opaque.items()),'fields':{name:getattr(cpu,name) for name in FIELDS},'fixture':cpu.fixture.hex(),'cpuid_leaf1':cpu.cpuid_leaf1,'oracle_seen':sorted(cpu.oracle_seen),'shadow_ranges':cpu.shadow_ranges,'patches':patches,'origin_stop':cpu.stop,'origin_attempted':cpu.attempted,'origin_completed':cpu.completed,'prior_origin_completed':getattr(cpu,'origin_completed',0),'sparse':cpu.capture_sparse() if hasattr(cpu,'capture_sparse') else None}
+    return {'environment':environment,'format':'ysm-guarded-local-checkpoint-v1','engine':unicorn.__version__,'stack_layout':dict(STACK_LAYOUT),'scenario_extensions':copy.deepcopy(cpu.scenario_extensions),'images':signatures(cpu),'context':{'bytes':pack(raw),'size':size,'arch':arch,'mode':mode},'private':{str(a):{'bytes':pack(cpu.uc.mem_read(a,n)),'known':pack(cpu.known[a])} for a,n in ((STACK,STACK_SIZE),(HEAP,HEAP_SIZE))},'opaque':list(cpu.opaque.items()),'fields':{name:getattr(cpu,name) for name in FIELDS},'fixture':cpu.fixture.hex(),'cpuid_leaf1':cpu.cpuid_leaf1,'oracle_seen':sorted(cpu.oracle_seen),'shadow_ranges':cpu.shadow_ranges,'patches':patches,'origin_stop':cpu.stop,'origin_attempted':cpu.attempted,'origin_completed':cpu.completed,'prior_origin_completed':getattr(cpu,'origin_completed',0),'sparse':cpu.capture_sparse() if hasattr(cpu,'capture_sparse') else None}
 def restore(cpu,state,*,allow_stack_extension=False):
     if state.get('format')!='ysm-guarded-local-checkpoint-v1' or state.get('engine')!=unicorn.__version__:raise ValueError('Checkpoint version mismatch')
     if [tuple(x) for x in state['images']]!=signatures(cpu):raise ValueError('Checkpoint immutable image mismatch')
     if (state.get('sparse') or {}).get('forge_paths') is not None and not hasattr(cpu,'configure_forge_paths'):raise ValueError('Checkpoint requires Forge path-state backend')
     if cpu.attempted or cpu.shadow_ranges or cpu.shadow_expected:raise ValueError('Restore requires fresh prepared CPU')
+    from native_environment_fixture_ysm_265 import prepare_restore
+    environment,environment_declaration=prepare_restore(cpu,state.get('environment'),state['fields'].get('environment_model_calls',0),missing='environment' not in state)
     layout=state.get('stack_layout',LEGACY_STACK_LAYOUT)
     legacy=layout==LEGACY_STACK_LAYOUT
     if layout!=STACK_LAYOUT and not legacy:raise ValueError('Checkpoint stack layout mismatch')
@@ -107,6 +111,7 @@ def restore(cpu,state,*,allow_stack_extension=False):
         if not hasattr(cpu,'restore_sparse'):raise ValueError('Checkpoint requires sparse-memory backend')
         cpu.restore_sparse(state['sparse'])
     restored=UcContext.__new__(UcContext);restored.__setstate__((raw,probe.size,probe.arch,probe.mode));cpu.uc.context_restore(restored)
+    cpu.environment=environment;cpu.environment_declaration=environment_declaration;cpu.environment_restored=True
     cpu.scenario_extensions=extensions
     cpu.stop=None;cpu.pending=None;cpu.journal=[];cpu.writes=[];cpu.attempted=cpu.completed=0;cpu.pc=cpu.reg('RIP');cpu.origin_completed=state['origin_completed']+state.get('prior_origin_completed',0)
     if not cpu.expected_image_matches():raise ValueError('Checkpoint image verification failed')

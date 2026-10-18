@@ -1,0 +1,242 @@
+{
+  "command": [
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/unicorn-venv/bin/python",
+    "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/tools/native_jni_onload_ysm_265.py",
+    "--image",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/native-static-20261017/libysm-core.so",
+    "--jvm-image",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/jdk21/jdk-21.0.12.1+1/lib/server/libjvm.so",
+    "--java-base",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/jdk21/jdk-21.0.12.1+1/jmods/java.base.jmod",
+    "--jar",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/ysm.jar",
+    "--dependency",
+    "commons-lang3-3.12.0",
+    "d919d904486c037f8d193412da0c92e22a9fa24230b9d67a57855c5c31c7e94e",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/minecraft-1.20.1/commons-lang3-3.12.0.jar",
+    "--dependency",
+    "fmlcore-1.20.1-47.4.0",
+    "483f2d764a3a426f09a51cb37eb552830ffac8132da6bb3afbd7d825e6a34fd2",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/forge-1.20.1-47.4.0/fmlcore-1.20.1-47.4.0.jar",
+    "--dependency",
+    "fmlloader-1.20.1-47.4.0",
+    "d17c218af5c62fa4928019614aa8a5075279f8545efe21325baf46b80f4a5ac9",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/forge-1.20.1-47.4.0/fmlloader-1.20.1-47.4.0.jar",
+    "--dependency",
+    "forge-1.20.1-47.4.0",
+    "2b0e97b22fd4d043dbbcc8e0a44ef0d58915689ed9224e4cd28d5c4976a16bcc",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/forge-1.20.1-47.4.0/forge-1.20.1-47.4.0-universal.jar",
+    "--dependency",
+    "mergetool-1.1.5-api",
+    "39d9a3d9277c1402b8e7b97f917ce278241cf1796312aec85b87f19a376dd99a",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/forge-1.20.1-47.4.0/mergetool-1.1.5-api.jar",
+    "--dependency",
+    "securejarhandler-2.1.10",
+    "7ec9207f47bc8847a16566b9a3b4ced8d073c49592897eb30ce2aaf643fdfcab",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/minecraft-1.20.1/securejarhandler-2.1.10.jar",
+    "--forge-runtime-profile",
+    "forgeclient",
+    "--forge-runtime-initialized",
+    "--forge-production-property",
+    "absent",
+    "--forge-path-state",
+    "absolute-field-populated",
+    "--forge-path-provider",
+    "virtual-unix-ascii-v1",
+    "--forge-virtual-game-path",
+    "/fixture/ysm-game",
+    "--resume-jni-checkpoint",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/unicorn-jni-forgepaths-reviewed-next1.checkpoint.json",
+    "--batch-size",
+    "1",
+    "--out",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/temp-environment-plan/unicorn-jni-absent-environment-next1.tsv",
+    "--checkpoint-out",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/temp-environment-plan/unicorn-jni-absent-environment-next1.checkpoint.json",
+    "--steps",
+    "100000",
+    "--seconds",
+    "60",
+    "--environment-absent-key",
+    "TMPDIR",
+    "--environment-absent-key",
+    "TMP",
+    "--environment-absent-key",
+    "TEMP",
+    "--environment-absent-key",
+    "TEMPDIR",
+    "--allow-environment-extension"
+  ],
+  "input_hashes": {
+    "/workspace/scratch/d91451022177/ysm-local-inputs/native-static-20261017/libysm-core.so": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/jdk21/jdk-21.0.12.1+1/lib/server/libjvm.so": "462fa559157ee8a862e7e4b8a4a74f8abbf5e1a9deb64f22ee23c7e8c43f698b",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/ysm.jar": "25b5e902b96f4c298690208f8b433cbc31737c23f87590354dbd86f00207bc8f",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/jdk21/jdk-21.0.12.1+1/jmods/java.base.jmod": "f8d258a856a691c81ad9dd16964635bbc8a8fdd7f40edec37dcf3d904feb7ae1",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/minecraft-1.20.1/commons-lang3-3.12.0.jar": "d919d904486c037f8d193412da0c92e22a9fa24230b9d67a57855c5c31c7e94e",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/forge-1.20.1-47.4.0/fmlcore-1.20.1-47.4.0.jar": "483f2d764a3a426f09a51cb37eb552830ffac8132da6bb3afbd7d825e6a34fd2",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/forge-1.20.1-47.4.0/fmlloader-1.20.1-47.4.0.jar": "d17c218af5c62fa4928019614aa8a5075279f8545efe21325baf46b80f4a5ac9",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/forge-1.20.1-47.4.0/forge-1.20.1-47.4.0-universal.jar": "2b0e97b22fd4d043dbbcc8e0a44ef0d58915689ed9224e4cd28d5c4976a16bcc",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/forge-1.20.1-47.4.0/mergetool-1.1.5-api.jar": "39d9a3d9277c1402b8e7b97f917ce278241cf1796312aec85b87f19a376dd99a",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/minecraft-1.20.1/securejarhandler-2.1.10.jar": "7ec9207f47bc8847a16566b9a3b4ced8d073c49592897eb30ce2aaf643fdfcab",
+    "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/unicorn-jni-forgepaths-reviewed-next1.checkpoint.json": "037e49c09fa15750aef36853a0b0bde9874e73ff3abb0e6944b29602c4c3e635"
+  },
+  "reviewed_source_hashes": {
+    "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/tools/native_environment_fixture_ysm_265.py": "f194647f15b9f0ef29b375dd810f753a91f127e39c75e006e1b85c808cdf6a73",
+    "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/tools/test_native_environment_fixture_ysm_265.py": "168ddaaf2a8b2b7b093c6e96f7f8cda63b79ed42a4c32517842b345d6cf1d26d",
+    "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/tools/native_shadow_image_ysm_265.py": "212b813e14521dabb2fcbe549fec766c0207bd1595a5a0ffa644638ff76bfec5",
+    "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/tools/native_guarded_checkpoint_ysm_265.py": "fe487d18f2b806ace498399b2e26c47b08d8dd6fd1baa1d2ffb5fd21bafd0533",
+    "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/tools/native_jni_onload_ysm_265.py": "cf884a6ac21e695c8a88f0dc5e76b93acf34bba4464a64fa455f30b61e0c421c",
+    "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/tools/compare_native_guarded_checkpoints_ysm_265.py": "68c126fc189adc92d9ba771928e5104b0340d2a3e544ebf0c07aa34c3abd68af",
+    "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/tools/native_forge_path_fixture_ysm_265.py": "d1e13fd0dcf40619c3e37be6b01d55359062e4646a8615fca9e63e179f1d4503",
+    "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/tools/test_native_forge_path_fixture_ysm_265.py": "0cce9b4bde8ab42625cdda0b0f80331e0c5e98ba548805aa500ce239aa9607e0"
+  },
+  "all_inputs_and_sources_unchanged_after": true,
+  "returncode": 0,
+  "single_cohort_only": true,
+  "host_native_or_jvm_execution": false,
+  "host_environment_read": false,
+  "host_filesystem_success_modeled": false,
+  "semantic_stop_bypassed": false,
+  "result": {
+    "stop": {
+      "reason": "UNMODELED_STAT_PATH_OR_ABI",
+      "pc": 21994528,
+      "address": 0,
+      "size": 0
+    },
+    "attempted": 655,
+    "completed": 654,
+    "checkpoint_sha256": "52bfa6d4103ec1ded965474d4151466cbb2b215118c73a3901b148d688a77b6a",
+    "host_jvm_called": false,
+    "pending_exception": null,
+    "return_value": null,
+    "batch_size": 1,
+    "forge_path_state": "absolute-field-populated",
+    "forge_path_calls": 8,
+    "forge_runtime_profile": "forgeclient",
+    "forge_runtime_calls": 6,
+    "prior_and_current_jni_call_count": 130,
+    "jni_ledger_omission": "Repeated full JNI ledger omitted; new_jni_calls retained and empty. Full receipt remains external."
+  },
+  "environment": {
+    "absent_keys": [
+      "GLIBCXX_TUNABLES",
+      "TEMP",
+      "TEMPDIR",
+      "TMP",
+      "TMPDIR"
+    ],
+    "declaration": [
+      "GLIBCXX_TUNABLES",
+      "TEMP",
+      "TEMPDIR",
+      "TMP",
+      "TMPDIR"
+    ],
+    "import": {
+      "symbol": "secure_getenv",
+      "index": 121,
+      "slot": 25482208,
+      "stub": 21748697
+    },
+    "legacy_calls": 1,
+    "legacy_extension": true,
+    "lookups": [
+      "TMPDIR",
+      "TMP",
+      "TEMP",
+      "TEMPDIR"
+    ]
+  },
+  "environment_calls_before": 1,
+  "environment_calls_after": 5,
+  "path_state_identical": true,
+  "workers_before": {
+    "enabled": true,
+    "entries": [
+      3132592
+    ],
+    "records": {
+      "2": {
+        "start": 3132592,
+        "arg": 70643639402880,
+        "state": "pending",
+        "detached": true,
+        "executed": false
+      },
+      "3": {
+        "start": 3132592,
+        "arg": 70643638879360,
+        "state": "pending",
+        "detached": true,
+        "executed": false
+      }
+    },
+    "keys": {},
+    "calls": 4,
+    "boundary": false,
+    "schedule": "defer-all-workers-through-main-jni-boundary"
+  },
+  "workers_after": {
+    "enabled": true,
+    "entries": [
+      3132592
+    ],
+    "records": {
+      "2": {
+        "start": 3132592,
+        "arg": 70643639402880,
+        "state": "pending",
+        "detached": true,
+        "executed": false
+      },
+      "3": {
+        "start": 3132592,
+        "arg": 70643638879360,
+        "state": "pending",
+        "detached": true,
+        "executed": false
+      }
+    },
+    "keys": {},
+    "calls": 4,
+    "boundary": false,
+    "schedule": "defer-all-workers-through-main-jni-boundary"
+  },
+  "workers_identical": true,
+  "pending_exception": null,
+  "output_checkpoint_sha256": "52bfa6d4103ec1ded965474d4151466cbb2b215118c73a3901b148d688a77b6a",
+  "trace_sha256": "2564af28124dd29c098381f5bbb93182f285049365fb4410cb40b4d7e5f1cd57",
+  "frontier_details": {
+    "operation": "__xstat",
+    "abi_version": 1,
+    "selected_path": "/tmp",
+    "selected_path_pointer": "0x7000000076d0",
+    "path_bytes_known": true,
+    "stat_output_pointer": "0x700000007540",
+    "lazy_import_relocation_index": 65,
+    "caller_return": "0x31122e",
+    "strict_stop_preserved": true,
+    "filesystem_result_not_assumed": true
+  },
+  "selected_counter_deltas": {
+    "environment_model_calls": 4,
+    "fopen_calls": 0,
+    "fgets_calls": 0,
+    "fclose_calls": 0,
+    "malloc_calls": 0
+  },
+  "new_jni_calls": [],
+  "resource_budget_exhausted": false,
+  "result_scope": "Four declared absent secure_getenv lookups selected /tmp in isolated guest dataflow. Its status is unmodeled; existence, directory type, writable state and JNI completion are not established.",
+  "stop": {
+    "reason": "UNMODELED_STAT_PATH_OR_ABI",
+    "pc": 21994528,
+    "address": 0,
+    "size": 0
+  },
+  "external_full_receipt": {
+    "path": "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/temp-environment-plan/unicorn-jni-absent-environment-next1.receipt.json",
+    "sha256": "7530480b4e1e1508dadfd253e26c35a5be7c7c293c5f01f12d77bc6f0ecd8085"
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "image_sha256": "15d0379718c5a293fc2f36fe17f2f95d5a031b8d5564f06355e08640f22b4c22",
+  "checkpoint_sha256": "037e49c09fa15750aef36853a0b0bde9874e73ff3abb0e6944b29602c4c3e635",
+  "windows": [
+    {
+      "start": "0x311760",
+      "end_exclusive": "0x31184a",
+      "sha256": "806c02e63833f788abf2db8602cfdd227a933cce1496d9f28ca9df3a6aec4170"
+    },
+    {
+      "start": "0x311210",
+      "end_exclusive": "0x31134a",
+      "sha256": "2cad9e3d0508ea8df0e50e493134b293c9ac0d154e07df3edf8a628eb7f2b658"
+    },
+    {
+      "start": "0x311704",
+      "end_exclusive": "0x31175f",
+      "sha256": "3af2927b2597cab2b43f881a2fa5254857269f89db6aa74857da08a3d2bb359d"
+    }
+  ],
+  "environment_table": [
+    {
+      "slot": "0xd1b2e0",
+      "relocation_address": "0x18e5114",
+      "relocation_sha256": "38be9623e473572766c406d91b02a0e0183376c10b6d955fab5010057f90d9a0",
+      "target": "0x421c6",
+      "literal": "TMPDIR",
+      "literal_sha256": "880800a24ffcf36bcc403f2a23ba23867068cb02e502daf15d3a4f1131b0ff73"
+    },
+    {
+      "slot": "0xd1b2e8",
+      "relocation_address": "0x18e512c",
+      "relocation_sha256": "026ddbb99b7c007aac76f964adb8da776066c2e6e4c8f268e5f0569c4438db6d",
+      "target": "0x3f000",
+      "literal": "TMP",
+      "literal_sha256": "426dbb029bd2c270aecc11aea7aa055dcbf8a082c77e257a44f282860e2074ce"
+    },
+    {
+      "slot": "0xd1b2f0",
+      "relocation_address": "0x18e5144",
+      "relocation_sha256": "4091072a6bd703eeb37afd8fc920193c2576f75d17ce336b8fc4710a32123476",
+      "target": "0x45e63",
+      "literal": "TEMP",
+      "literal_sha256": "505abd14f9ba6571a876ed4630264dfc15016c915663b3fd3d7d35fd05b4e9e7"
+    },
+    {
+      "slot": "0xd1b2f8",
+      "relocation_address": "0x18e515c",
+      "relocation_sha256": "df8db242ab0b1bedf65d2f10136dc19e82d355be69f6bee4644c4be8034bea9d",
+      "target": "0x45912",
+      "literal": "TEMPDIR",
+      "literal_sha256": "e96bb0fb0eecc61995454b22fa83c8c22b6ca650b6f09a1c0ed8bc3d3c6cc9fe"
+    }
+  ],
+  "imports": [
+    {
+      "plt": "0xd14e70",
+      "relative_slot": "0xd30bc0",
+      "trampoline": "0x13d7136",
+      "trampoline_sha256": "8783ac2fdb87c5a9a9303224b1923700c2226519e669de41fce017fc0274bbd4",
+      "import_record": {
+        "slot": "0x184d3e0",
+        "raw_value": "0x14bdbd9",
+        "relocation_type": 7,
+        "symbol_index": 130,
+        "symbol_name": "secure_getenv",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    },
+    {
+      "plt": "0xd14750",
+      "relative_slot": "0xd30830",
+      "trampoline": "0x13d6e8a",
+      "trampoline_sha256": "acce3314d6def6d49a30afa140a173cead688ad59160a6b530746145c21effd5",
+      "import_record": {
+        "slot": "0x184d050",
+        "raw_value": "0x145cdc4",
+        "relocation_type": 7,
+        "symbol_index": 11,
+        "symbol_name": "strlen",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    },
+    {
+      "plt": "0xd14af0",
+      "relative_slot": "0xd30a00",
+      "trampoline": "0x13d6fe6",
+      "trampoline_sha256": "8f5d0b1cd8201a43892719996852055ad9291f93902b3586fc85ce79b002d945",
+      "import_record": {
+        "slot": "0x184d220",
+        "raw_value": "0x1558b41",
+        "relocation_type": 7,
+        "symbol_index": 72,
+        "symbol_name": "__xstat",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    },
+    {
+      "plt": "0xd14850",
+      "relative_slot": "0xd308b0",
+      "trampoline": "0x13d6eea",
+      "trampoline_sha256": "20255820a3dd2418e4884df9a1df2e42b86ea65a1adc30577788a3b6b143ee74",
+      "import_record": {
+        "slot": "0x184d0d0",
+        "raw_value": "0x142bc04",
+        "relocation_type": 7,
+        "symbol_index": 27,
+        "symbol_name": "__errno_location",
+        "addend": 0,
+        "actual_runtime_binding_verified": false
+      }
+    }
+  ],
+  "fallback": {
+    "address": "0x3f55a",
+    "literal": "/tmp",
+    "sha256": "ee1fc85e44a0ec786bd467e4ce3f40dd442bfa858ad30efb87382feea42db68f"
+  },
+  "source_files": {
+    "/workspace/scratch/d91451022177/ysm-local-inputs/ghidra-static-20261018/output/unicorn-jni-forgepaths-reviewed-next1.receipt.json": "de914e9e1edb58f2b96a4c7887eb61f007954f1e71837492ad1869a046556b05",
+    "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/tools/native_shadow_image_ysm_265.py": "a912643efd890989be5b271ad32bc04e26d345a340d8e1631be9a0d615de9370",
+    "/workspace/scratch/d91451022177/KNEEKURA-TECH-HUB/departments/minecraft/mods/yes-steve-model/tools/native_allocator_os_fixture_ysm_265.py": "148f39a1f207103f7bd7502f92b9c36f8903a1f5c6e43283644f3478811d68eb"
+  },
+  "checkpoint_resumed": false,
+  "target_executed": false,
+  "host_environment_read": false,
+  "filesystem_modeled": false,
+  "repository_modified": false
+}

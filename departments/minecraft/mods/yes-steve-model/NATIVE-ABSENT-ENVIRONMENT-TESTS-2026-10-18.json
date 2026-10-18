@@ -1,0 +1,30 @@
+{
+  "kind": "authored-absence-model-validation",
+  "tests_passed": 78,
+  "new_tests": 17,
+  "python": "/workspace/scratch/d91451022177/ysm-local-inputs/tool-cache/unicorn-venv/bin/python",
+  "unittest_modules": [
+    "test_native_environment_fixture_ysm_265",
+    "test_native_forge_path_fixture_ysm_265",
+    "test_native_forge_runtime_fixture_ysm_265",
+    "test_native_allocator_os_fixture_ysm_265",
+    "test_native_c_locale_fixture_ysm_265"
+  ],
+  "sha256": {
+    "native_environment_fixture_ysm_265.py": "f194647f15b9f0ef29b375dd810f753a91f127e39c75e006e1b85c808cdf6a73",
+    "test_native_environment_fixture_ysm_265.py": "168ddaaf2a8b2b7b093c6e96f7f8cda63b79ed42a4c32517842b345d6cf1d26d",
+    "native_shadow_image_ysm_265.py": "212b813e14521dabb2fcbe549fec766c0207bd1595a5a0ffa644638ff76bfec5",
+    "native_guarded_checkpoint_ysm_265.py": "fe487d18f2b806ace498399b2e26c47b08d8dd6fd1baa1d2ffb5fd21bafd0533",
+    "native_jni_onload_ysm_265.py": "cf884a6ac21e695c8a88f0dc5e76b93acf34bba4464a64fa455f30b61e0c421c",
+    "compare_native_guarded_checkpoints_ysm_265.py": "68c126fc189adc92d9ba771928e5104b0340d2a3e544ebf0c07aa34c3abd68af"
+  },
+  "target_instructions_executed": false,
+  "authored_guest_instructions_executed": false,
+  "original_checkpoint_resumed": false,
+  "host_environment_read_by_model": false,
+  "filesystem_success_added": false,
+  "independent_review": "pass",
+  "diff_check": "clean",
+  "reviewer_additional_checks_passed": 9,
+  "review_artifacts": "absent-environment-focused-review"
+}

@@ -15,6 +15,7 @@ def compare(a,b,allow_acceleration=False):
         return actual+s['fields']['crc_logical_steps']-s['fields']['crc_blocks'] if allow_acceleration else actual
     checks={'format_and_engine_equal':(a['format'],a['engine'])==(b['format'],b['engine']),'cpu_context_equal_excluding_host_only_fields':context(a)==context(b),'model_state_equal_excluding_diagnostic_rollbacks':fields(a)==fields(b),'cumulative_completed_equal':count(a)==count(b)}
     if allow_acceleration:checks['logical_instruction_effects_equal']=checks.pop('cumulative_completed_equal')
+    checks['environment_state_equal']=a.get('environment')==b.get('environment')
     checks['sparse_state_equal']=a.get('sparse')==b.get('sparse')
     for key in ('images','opaque','fixture','cpuid_leaf1','oracle_seen','shadow_ranges','patches','origin_stop'):checks[key+'_equal']=a[key]==b[key]
     legacy={'base':0x700000000000,'size':0x10000,'initial_sp':0x700000008008}
