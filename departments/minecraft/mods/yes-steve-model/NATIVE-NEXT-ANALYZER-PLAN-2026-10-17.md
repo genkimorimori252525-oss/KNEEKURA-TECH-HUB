@@ -45,3 +45,7 @@ The [candidate stack-guard proof](NATIVE-CANDIDATE-STACK-GUARD-RECOVERY-2026-10-
 The earlier candidate guard and the second rewritten return now have separate evidence cohorts. Two subsequent guards lead to the symbolic third return at 0xf0aecb; concrete destination depends on the third decoded word/carried key. Start from these latest proofs rather than repeating the earlier branch work.
 
 The initializer inventory now resolves 45 DT_INIT_ARRAY slots through RELATIVE addends and retains DT_INIT at 0x152eb19 as a separate dependency. Check writes to data words 0xd2cd48 and 0xd2cd4c before promoting file-state candidates to runtime claims. The absence of overlapping relocation records is insufficient. Ghidra installation remains subject to the outstanding user approval; no tool installation or target execution is implied by this plan.
+
+## Approved and reproduced, October 18
+
+The user approved the official installation on October 17. The [Ghidra cross-check](NATIVE-GHIDRA-CROSSCHECK-RECOVERY-2026-10-18.md) supersedes this plan's earlier installation-pending status. It verifies seven file-backed load segments and 73 selected ranges with automatic analysis disabled. Temporary October 17 outputs were absent after environment resumption; the retained October 18 evidence was freshly reproduced. The next unresolved work remains the third-return dependencies and initializer effects, not installation permission.
